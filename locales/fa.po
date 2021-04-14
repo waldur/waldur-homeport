@@ -833,9 +833,6 @@ msgstr "تاریخ پیوستن"
 msgid "Date of reporting"
 msgstr "تاریخ گزارش"
 
-msgid "Day"
-msgstr "روز"
-
 msgid "Deactivate"
 msgstr "غیرفعال"
 
@@ -1762,9 +1759,6 @@ msgstr "هزینه ماهانه"
 
 msgid "Monthly invoices"
 msgstr "صورتحساب ماهانه"
-
-msgid "More"
-msgstr "بیشتر"
 
 msgid "More info"
 msgstr "اطلاعات بیشتر"

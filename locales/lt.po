@@ -1007,6 +1007,9 @@ msgstr "Potinklio kūrimas"
 msgid "Creating snapshot schedule"
 msgstr "Momentinių nuotraukų tvarkaraščio kūrimas"
 
+msgid "Credentials"
+msgstr "Kredencialus"
+
 msgid "Current API token"
 msgstr "Dabartinis API atpažinimo ženklas"
 
@@ -1081,9 +1084,6 @@ msgstr "Prisijungimo data"
 
 msgid "Date of reporting"
 msgstr "Ataskaitų teikimo data"
-
-msgid "Day"
-msgstr "Diena"
 
 msgid "Deactivate"
 msgstr "Išjungti"
@@ -2425,9 +2425,6 @@ msgstr "Mėnesio kaina"
 
 msgid "Monthly invoices"
 msgstr "Mėnesinės sąskaitos faktūros"
-
-msgid "More"
-msgstr "Daugiau"
 
 msgid "More info"
 msgstr "Daugiau informacijos"
@@ -4724,6 +4721,9 @@ msgstr "Tekstas nukopijuotas"
 msgid "Thank you for your response!"
 msgstr "Dėkojame už atsakymą!"
 
+msgid "The date is inclusive. Once reached, all project resource will be scheduled for termination."
+msgstr "Data yra imtinai. Pasiekus, bus suplanuota nutraukti visus projekto išteklius."
+
 msgid "The invoice has been marked as paid."
 msgstr "Sąskaita faktūra pažymėta kaip apmokėta."
 
@@ -6014,9 +6014,6 @@ msgstr "Webhook"
 msgid "Website URL"
 msgstr "Svetainės URL"
 
-msgid "Week"
-msgstr "Savaitė"
-
 msgid "Welcome, {user}!"
 msgstr "Sveiki atvykę, {user}!"
 
@@ -6162,7 +6159,7 @@ msgid "Your organization does not have any projects yet."
 msgstr "Jūsų organizacija dar neturi jokių projektų."
 
 msgid "Your session has expired, please enter credentials to continue."
-msgstr "Jūsų sesija baigėsi, norėdami tęsti, įveskite įgaliojimus."
+msgstr "Jūsų sesija baigėsi, norėdami tęsti, įveskite kredencialus."
 
 msgid "Your single pane of control for all cloud services. Login in to see it in action."
 msgstr "Jūsų viena visų debesų paslaugų valdymo sritis. Prisijunkite, kad pamatytumėte, kaip tai veikia."
@@ -6403,9 +6400,6 @@ msgstr "komandos nariai"
 
 msgid "till"
 msgstr "iki"
-
-msgid "today"
-msgstr "šiandien"
 
 msgid "token will not timeout"
 msgstr "atpažinimo ženklas nesibaigs"

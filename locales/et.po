@@ -1829,9 +1829,6 @@ msgstr "Igakuine kulu"
 msgid "Monthly invoices"
 msgstr "Kuu arved"
 
-msgid "More"
-msgstr "Rohkem"
-
 msgid "More info"
 msgstr "Lisainfo"
 

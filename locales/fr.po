@@ -1043,5 +1043,1079 @@ msgstr "OS invité"
 msgid "HPA"
 msgstr "HPA"
 
+msgid "Hide diff"
+msgstr "Masquer diff"
+
+msgid "Home organization domain name"
+msgstr "Nom de domaine de l'organisation d'origine"
+
+msgid "Hook has been removed."
+msgstr "Le crochet a été supprimé."
+
+msgid "Hook removal"
+msgstr "Retrait du crochet"
+
+msgid "Horizontal pod autoscaler has been created."
+msgstr "L'autoscaler horizontal de pod a été créé."
+
+msgid "Horizontal pod autoscaler has been updated."
+msgstr "L'autoscaler horizontal de pod a été mis à jour."
+
+msgid "Host routes"
+msgstr "Routes hôtes"
+
+msgid "Hostname or IP address of gateway node"
+msgstr "Nom d'hôte ou adresse IP du noeud de la passerelle"
+
+msgid "Hostname or IP address of master node"
+msgstr "Nom d'hôte ou adresse IP du noeud maître"
+
+msgid "How to generate SSH key"
+msgstr "Comment générer une clé SSH"
+
+msgid "How to obtain credentials for Azure provider"
+msgstr "Comment obtenir des informations d'identification pour le fournisseur Azure"
+
+msgid "How to obtain credentials for DigitalOcean provider"
+msgstr "Comment obtenir les informations d'identification du fournisseur DigitalOcean"
+
+msgid "ID code"
+msgstr "Code d'identification"
+
+msgid "IP address is already used by router."
+msgstr "L'adresse IP est déjà utilisée par le routeur."
+
+msgid "IP protocol"
+msgstr "Protocole IP"
+
+msgid "IP version"
+msgstr "Version IP"
+
+msgid "Identity provided has been selected via SAML2 discovery service. You will be redirected to the login page soon."
+msgstr "L'identité fournie a été sélectionnée via le service de découverte SAML2. Vous serez bientôt redirigé vers la page de connexion."
+
+msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
+msgstr "Si vous souhaitez que l'utilisateur fournisse des détails supplémentaires lors de la commande, veuillez configurer le formulaire de saisie pour l'utilisateur ci-dessous"
+
+msgid "Image has been added."
+msgstr "L'image a été ajoutée."
+
+msgid "Image has been removed."
+msgstr "L'image a été supprimée."
+
+msgid "Image here"
+msgstr "Image ici"
+
+msgid "Import YAML"
+msgstr "Importer YAML"
+
+msgid "Import offering"
+msgstr "Offre d'importation"
+
+msgid "Import resource"
+msgstr "Importer la ressource"
+
+msgid "Importing resources"
+msgstr "Importation de ressources"
+
+msgid "In the format of GUID"
+msgstr "Dans le format de GUID"
+
+msgid "Inactive user will not be able to login into the portal."
+msgstr "L'utilisateur inactif ne pourra pas se connecter au portail."
+
+msgid "Incident"
+msgstr "Incident"
+
+msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
+msgstr "Incident - problème du client avec l'utilisation ou la disponibilité du service (interruptions, dégradation de la qualité)."
+
+msgid "Include weekends"
+msgstr "Inclure les week-ends"
+
+msgid "Incorrect organization details"
+msgstr "Détails de l'organisation incorrects"
+
+msgid "Increase a droplet's RAM, CPU and SSD disk."
+msgstr "Augmenter la RAM, le CPU et le disque SSD d'une gouttelette."
+
+msgid "Increase a droplet's RAM and CPU only (not the storage)."
+msgstr "Augmenter uniquement la RAM et le CPU d'une gouttelette (pas le stockage)."
+
+msgid "Informational"
+msgstr "informationnel"
+
+msgid "Informational - client’s request to get or provide additional information related to a service."
+msgstr "Informationnel - demande du client d’obtenir ou de fournir des informations supplémentaires liées à un service."
+
+msgid "Ingress"
+msgstr "Entrée"
+
+msgid "Initial admin password"
+msgstr "Mot de passe initial de l'admin"
+
+msgid "Initial admin username"
+msgstr "Nom d'utilisateur initial de l'admin"
+
+msgid "Initial password"
+msgstr "Mot de passe initial"
+
+msgid "Initial username"
+msgstr "Nom d'utilisateur initial"
+
+msgid "Instance"
+msgstr "Instance"
+
+msgid "Instance deletion has been scheduled."
+msgstr "La suppression de l'instance a été planifiée."
+
+msgid "Instance does not have any floating IPs yet."
+msgstr "Instance n'a pas encore d'IP flottante."
+
+msgid "Instance does not have any security groups yet."
+msgstr "Instance n'a pas encore de groupe de sécurité."
+
+msgid "Instance has been linked."
+msgstr "L'instance a été liée."
+
+msgid "Instance is already active."
+msgstr "L'instance est déjà active."
+
+msgid "Instance is already stopped."
+msgstr "L'instance est déjà arrêtée."
+
+msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr "L'instance n'est pas encore connectée à aucun sous-réseau interne. Veuillez d'abord le connecter au sous-réseau interne."
+
+msgid "Instance should be OK, or erred. Please contact support."
+msgstr "L'instance devrait être OK, ou errée. S'il vous plaît contacter le support."
+
+msgid "Instance should be OK. Please contact support."
+msgstr "L'instance devrait être OK. S'il vous plaît contacter le support."
+
+msgid "Instance should be shutoff and OK or erred. Please contact support."
+msgstr "L'instance devrait être fermée et OK ou errée. S'il vous plaît contacter le support."
+
+msgid "Instances count"
+msgstr "Nombre d'instances"
+
+msgid "Internal IPs"
+msgstr "IPs internes"
+
+msgid "Internal name"
+msgstr "Nom interne"
+
+msgid "Internal network ID"
+msgstr "ID du réseau interne"
+
+msgid "Internal network allocation pool"
+msgstr "Pool d'allocation de réseau interne"
+
+msgid "Internal network mask (CIDR)"
+msgstr "Masque de réseau interne (CIDR)"
+
+msgid "Internal server error occurred. Please try again or contact support."
+msgstr "Une erreur de serveur interne s'est produite. Veuillez réessayer ou contacter le support."
+
+msgid "Invalid URL. Unable to parse payment details."
+msgstr "URL invalide. Impossible d'analyser les détails du paiement."
+
+msgid "Invitation approval"
+msgstr "Approbation de l'invitation"
+
+msgid "Invitation confirmation"
+msgstr "Confirmation de l'invitation"
+
+msgid "Invitation could not be accepted"
+msgstr "L'invitation n'a pas pu être acceptée"
+
+msgid "Invitation email is:"
+msgstr "L’e-mail d’invitation est :"
+
+msgid "Invitation has been approved."
+msgstr "L'invitation a été approuvée."
+
+msgid "Invitation has been canceled."
+msgstr "L'invitation a été annulée."
+
+msgid "Invitation has been rejected."
+msgstr "L'invitation a été rejetée."
+
+msgid "Invitation has been sent again."
+msgstr "L'invitation a été envoyée à nouveau."
+
+msgid "Invitation is not found."
+msgstr "L'invitation n'est pas trouvée."
+
+msgid "Invitation is not valid"
+msgstr "L'invitation n'est pas valide"
+
+msgid "Invitation is not valid anymore."
+msgstr "L'invitation n'est plus valide."
+
+msgid "Invitation rejection"
+msgstr "Rejet de l'invitation"
+
+msgid "Invitation token is not found."
+msgstr "Le jeton d’invitation n’est pas trouvé."
+
+msgid "Invitations"
+msgstr "Invitations"
+
+msgid "Invite team member"
+msgstr "Inviter un membre de l'équipe"
+
+msgid "Invoice No."
+msgstr "N° de facture"
+
+msgid "Invoice events"
+msgstr "Événements de facturation"
+
+msgid "Invoice events timeline"
+msgstr "Chronologie des événements de facturation"
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been created."
+msgstr "La facture pour l'organisation {customer_link} pour la période de {period} a été créée."
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
+msgstr "La facture de l'organisation {customer_link} pour la période {period} a été mise à jour."
+
+msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
+msgstr "La facture de l'organisation {customer_name} pour la période {period} a été supprimée."
+
+msgid "Invoice has been successfully linked to payment."
+msgstr "La facture a été liée avec succès au paiement."
+
+msgid "Invoice has been successfully unlinked from payment."
+msgstr "La facture a été dissociée du paiement avec succès."
+
+msgid "Invoice has not been sent to PayPal yet"
+msgstr "La facture n'a pas encore été envoyée à PayPal"
+
+msgid "Invoice statistics"
+msgstr "Statistiques de facturation"
+
+msgid "Invoiced to"
+msgstr "Facturé à"
+
+msgid "Invoices list"
+msgstr "Liste des factures"
+
+msgid "Is external"
+msgstr "Est externe"
+
+msgid "Is official"
+msgstr "Est officiel"
+
+msgid "Is service provider"
+msgstr "Est le fournisseur de services"
+
+msgid "Issue link"
+msgstr "Lien de problème"
+
+msgid "Issue {issue_link} has been created by {caller_link}."
+msgstr "Le problème {issue_link} a été créé par {caller_link}."
+
+msgid "Issues are trackable requests to the operator."
+msgstr "Les problèmes sont des demandes traçables auprès de l'opérateur."
+
+msgid "It is used to automatically assign floating IP to your virtual machine."
+msgstr "Il est utilisé pour attribuer automatiquement une adresse IP flottante à votre machine virtuelle."
+
+msgid "Item has been added to shopping cart."
+msgstr "L'article a été ajouté au panier."
+
+msgid "Item has been removed from shopping cart."
+msgstr "L'article a été retiré du panier."
+
+msgid "Keep forever"
+msgstr "Conserver pour toujours"
+
+msgid "Keep until"
+msgstr "Conserver jusqu'à"
+
+msgid "Kept until"
+msgstr "Conservé jusqu'à"
+
+msgid "Key removal"
+msgstr "Suppression de la clé"
+
+msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
+msgstr "URL d'authentification Keystone (par exemple http://keystone.example.com:5000/v3)"
+
+msgid "Kubernetes node #{index}"
+msgstr "Nœud Kubernetes #{index}"
+
+msgid "Kubernetes nodes"
+msgstr "Nœuds Kubernetes"
+
+msgid "Label that is visible to users in Marketplace."
+msgstr "Étiquette qui est visible pour les utilisateurs de Marketplace."
+
+msgid "Leave blank if you want admin password to be auto-generated."
+msgstr "Laissez vide si vous voulez que le mot de passe de l'administrateur soit généré automatiquement."
+
+msgid "Leave blank if you want admin username to be auto-generated."
+msgstr "Laissez vide si vous voulez que le nom d'utilisateur de l'administrateur soit généré automatiquement."
+
+msgid "Legal address"
+msgstr "Adresse légale"
+
+msgid "Lifetime will be updated and reset upon saving the form."
+msgstr "La durée de vie sera mise à jour et réinitialisée lors de l'enregistrement du formulaire."
+
+msgid "Limit amount"
+msgstr "Montant limite"
+
+msgid "Limit period"
+msgstr "Période limite"
+
+msgid "Limits"
+msgstr "Limites"
+
+msgid "Limits are invalid."
+msgstr "Les limites ne sont pas valides."
+
+msgid "Link OpenStack Instance"
+msgstr "Lier l'Instance OpenStack"
+
+msgid "Link invoice"
+msgstr "Lier la facture"
+
+msgid "Loading actions"
+msgstr "Chargement des actions"
+
+msgid "Loading assets, please wait."
+msgstr "Chargement des actifs, veuillez patienter."
+
+msgid "Loading invoices"
+msgstr "Chargement des factures"
+
+msgid "Location has been saved successfully."
+msgstr "L'emplacement a été enregistré avec succès."
+
+msgid "Location of {offeringName} offering"
+msgstr "Emplacement de l’offre {offeringName}"
+
+msgid "Logging user in"
+msgstr "Connexion de l'utilisateur"
+
+msgid "Logo has been removed."
+msgstr "Le logo a été supprimé."
+
+msgid "Logo has been uploaded."
+msgstr "Le logo a été téléchargé."
+
+msgid "Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes."
+msgstr "Longhorn est un système de stockage par blocs distribué léger, fiable et puissant pour Kubernetes."
+
+msgid "MAC address (optional)"
+msgstr "Adresse MAC (facultatif)"
+
+msgid "MTU"
+msgstr "MTU"
+
+msgid "Manage networks"
+msgstr "Gérer les réseaux"
+
+msgid "Manage security groups"
+msgstr "Gérer les groupes de sécurité"
+
+msgid "Managed projects"
+msgstr "Projets gérés"
+
+msgid "Mark as paid"
+msgstr "Marquer comme payé"
+
+msgid "Mark invoice as paid"
+msgstr "Marquer la facture comme payée"
+
+msgid "Marketplace UUID"
+msgstr "UUID Marketplace"
+
+msgid "Marketplace checkout"
+msgstr "Caisse du Marketplace"
+
+msgid "Marketplace offering does not have any usage-based components."
+msgstr "L'offre Marketplace ne comporte aucun composant basé sur l'utilisation."
+
+msgid "Marketplace offerings"
+msgstr "Offres Marketplace"
+
+msgid "Marketplace service provider"
+msgstr "Fournisseur de services Marketplace"
+
+msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
+msgstr "Les services Marketplace ne peuvent être provisionnés que pour une certaine affiliation. Vous n'avez actuellement aucune organisation ou projet connecté à votre compte."
+
+msgid "Max # of VM snapshots"
+msgstr "Max # des instantanés VM"
+
+msgid "Max # of snapshots"
+msgstr "Max # d’instantanés"
+
+msgid "Max number of VM snapshots"
+msgstr "Nombre maximum d’instantanés VM"
+
+msgid "Max replicas"
+msgstr "Répliques max"
+
+msgid "Maximal number of resources"
+msgstr "Nombre maximal de ressources"
+
+msgid "Maximal value"
+msgstr "Valeur maximale"
+
+msgid "Maximum RAM for each VM"
+msgstr "RAM maximale pour chaque VM"
+
+msgid "Maximum allowed value"
+msgstr "Valeur maximale autorisée"
+
+msgid "Maximum capacity for each disk"
+msgstr "Capacité maximale pour chaque disque"
+
+msgid "Maximum monthly"
+msgstr "Maximum mensuel"
+
+msgid "Maximum total"
+msgstr "Total maximum"
+
+msgid "Maximum total size of the disk space per VM"
+msgstr "Taille totale maximale de l’espace disque par VM"
+
+msgid "Maximum username length with mandatory username prefix is 32 characters."
+msgstr "La longueur maximale du nom d'utilisateur avec le préfixe de nom d'utilisateur obligatoire est de 32 caractères."
+
+msgid "Maximum vCPU for each VM"
+msgstr "vCPU maximum pour chaque VM"
+
+msgid "Measured unit"
+msgstr "Unité mesurée"
+
+msgid "Memory per vCore"
+msgstr "Mémoire par vCore"
+
+msgid "Memory size in GiB"
+msgstr "Taille de la mémoire en Gio"
+
+msgid "Metric name"
+msgstr "Nom de la métrique"
+
+msgid "MiB"
+msgstr "MiB"
+
+msgid "Min RAM"
+msgstr "Min RAM"
+
+msgid "Min amount"
+msgstr "Montant minimum"
+
+msgid "Min replicas"
+msgstr "Répliques min"
+
+msgid "Min storage"
+msgstr "Stockage minimum"
+
+msgid "Minimal value"
+msgstr "Valeur minimale"
+
+msgid "Minimum allowed value"
+msgstr "Valeur minimale autorisée"
+
+msgid "Minimum booking time slot duration."
+msgstr "Durée minimale du créneau horaire de réservation."
+
+msgid "Minimum username length is 3 characters."
+msgstr "La longueur minimale du nom d'utilisateur est de 3 caractères."
+
+msgid "Monthly invoices"
+msgstr "Factures mensuelles"
+
+msgid "Mount point"
+msgstr "Point de montage"
+
+msgid "Must be at least {min}"
+msgstr "Doit être au moins {min}"
+
+msgid "Must be at most {max}"
+msgstr "Doit être au maximum de {max}"
+
+msgid "Must start with a country prefix ie EE34501234215"
+msgstr "Doit commencer par un préfixe de pays, par exemple EE34501234215"
+
+msgid "My offerings"
+msgstr "Mes offres"
+
+msgid "My resources"
+msgstr "Mes ressources"
+
+msgid "My services"
+msgstr "Mes services"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Name \"{label}\" must be 1-63 characters long, each of which can only be alphanumeric or a hyphen"
+msgstr "Le nom \"{label}\" doit comporter de 1 à 63 caractères, dont chacun ne peut être qu'alphanumérique ou un trait d'union"
+
+msgid "Name \"{label}\" must not start or end with a hyphen"
+msgstr "Le nom \"{label}\" ne doit pas commencer ou se terminer par un trait d'union"
+
+msgid "Name is duplicated. Choose other name."
+msgstr "Le nom est dupliqué. Choisissez un autre nom."
+
+msgid "Name is not valid."
+msgstr "Le nom n'est pas valide."
+
+msgid "Name is required field."
+msgstr "Le nom est un champ obligatoire."
+
+msgid "Name is too short, names should be at least two alphanumeric characters."
+msgstr "Le nom est trop court, les noms devraient comporter au moins deux caractères alphanumériques."
+
+msgid "Name must consist of lower case alphanumeric characters."
+msgstr "Le nom doit être composé de caractères alphanumériques minuscules."
+
+msgid "Name must consist of lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name', or '123-abc')"
+msgstr "Le nom doit être composé de caractères alphanumériques minuscules ou de '-', et doit commencer et se terminer par un caractère alphanumérique (par exemple, 'mon-nom' ou '123-abc')."
+
+msgid "Name of your organization."
+msgstr "Nom de votre organisation."
+
+msgid "Name should consist of latin symbols, numbers and dashes."
+msgstr "Le nom doit être composé de symboles latins, de chiffres et de tirets."
+
+msgid "Name should consist of latin symbols and numbers."
+msgstr "Le nom doit être composé de symboles latins et de chiffres."
+
+msgid "Name should contain at least 3 symbols."
+msgstr "Le nom doit contenir au moins 3 symboles."
+
+msgid "Namespace"
+msgstr "Espace de noms"
+
+msgid "Namespace should be unique."
+msgstr "L'espace de noms doit être unique."
+
+msgid "Native name"
+msgstr "Nom natif"
+
+msgid "Network MTU has been updated."
+msgstr "Le MTU du réseau a été mis à jour."
+
+msgid "Network adapters"
+msgstr "Adaptateurs réseau"
+
+msgid "New flavor"
+msgstr "Nouvelle saveur"
+
+msgid "New limit"
+msgstr "Nouvelle limite"
+
+msgid "New plan"
+msgstr "Nouveau plan"
+
+msgid "New size"
+msgstr "Nouvelle taille"
+
+msgid "Next hop (IP)"
+msgstr "Prochain saut (IP)"
+
+msgid "Next trigger at"
+msgstr "Prochain déclencheur à"
+
+msgid "No, continue using current email"
+msgstr "Non, continuez à utiliser l'e-mail actuel"
+
+msgid "No access info"
+msgstr "Aucune information d'accès"
+
+msgid "No access info."
+msgstr "Aucune information d'accès."
+
+msgid "No countries"
+msgstr "Aucun pays"
+
+msgid "No division types"
+msgstr "Aucun type de division"
+
+msgid "No divisions"
+msgstr "Aucune division"
+
+msgid "No entries to show here"
+msgstr "Aucune entrée à afficher ici"
+
+msgid "No invoice data available."
+msgstr "Aucune donnée de facture disponible."
+
+msgid "No offerings"
+msgstr "Aucune offre"
+
+msgid "No organizations"
+msgstr "Aucune organisation"
+
+msgid "No projects"
+msgstr "Aucun projet"
+
+msgid "No projects are assigned to this user."
+msgstr "Aucun projet n'est attribué à cet utilisateur."
+
+msgid "No providers"
+msgstr "Aucun fournisseur"
+
+msgid "No service providers"
+msgstr "Aucun fournisseur de services"
+
+msgid "No users"
+msgstr "Aucun utilisateur"
+
+msgid "Node has been created."
+msgstr "Le nœud a été créé."
+
+msgid "Node plan"
+msgstr "Plan de noeud"
+
+msgid "Not a service provider."
+msgstr "Pas un fournisseur de services."
+
+msgid "Not running accounting"
+msgstr "Ne pas exécuter la comptabilité"
+
+msgid "Note that this virtual machine will not be charged separately for {organization}."
+msgstr "Notez que cette machine virtuelle ne sera pas facturée séparément pour {organization}."
+
+msgid "Note that this volume will not be charged separately for {organization}."
+msgstr "Notez que ce volume ne sera pas facturé séparément pour {organization}."
+
+msgid "Notification can be sent only for created invoice."
+msgstr "La notification ne peut être envoyée que pour la facture créée."
+
+msgid "Notification has been created."
+msgstr "La notification a été créée."
+
+msgid "Notification has been updated."
+msgstr "La notification a été mise à jour."
+
+msgid "Notification method"
+msgstr "Méthode de notification"
+
+msgid "Notifications allow to be informed when a certain event has occurred."
+msgstr "Les notifications permettent d'être informé lorsqu'un certain événement s'est produit."
+
+msgid "Notifications has been sent to {count} users."
+msgstr "Les notifications ont été envoyées à {count} utilisateurs."
+
+msgid "Number of CPU cores per socket"
+msgstr "Nombre de cœurs de CPU par socket"
+
+msgid "Number of CPU cores should be multiple of cores per socket."
+msgstr "Le nombre de cœurs de CPU doit être multiple de cœurs par socket."
+
+msgid "Number of control plane nodes"
+msgstr "Nombre de nœuds de plan de contrôle"
+
+msgid "Number of cores in a VM"
+msgstr "Nombre de cœurs dans une VM"
+
+msgid "Number of created instances"
+msgstr "Nombre d'instances créées"
+
+msgid "Number of etcd nodes"
+msgstr "Nombre de nœuds etcd"
+
+msgid "Number of running instances"
+msgstr "Nombre d'instances en cours d'exécution"
+
+msgid "Number of worker nodes"
+msgstr "Nombre de nœuds de travail"
+
+msgid "Object is not found."
+msgstr "L'objet n'est pas trouvé."
+
+msgid "Offering components"
+msgstr "Offre de composants"
+
+msgid "Offering configuration"
+msgstr "Configuration de l'offre"
+
+msgid "Offering details"
+msgstr "Détails de l'offre"
+
+msgid "Offering doesn't have images."
+msgstr "L'offre n'a pas d'images."
+
+msgid "Offering has been created."
+msgstr "L'offre a été créée."
+
+msgid "Offering has been imported."
+msgstr "L'offre a été importée."
+
+msgid "Offering has been updated."
+msgstr "L'offre a été mise à jour."
+
+msgid "Offering images"
+msgstr "Offrir des images"
+
+msgid "Offering images ({name})"
+msgstr "Offrir des images ({name})"
+
+msgid "Offering is not configured yet."
+msgstr "L'offre n'est pas encore configurée."
+
+msgid "Offering logo"
+msgstr "Logo de l'offre"
+
+msgid "Offering name"
+msgstr "Nom de l'offre"
+
+msgid "Offering permissions"
+msgstr "Offrir des autorisations"
+
+msgid "Offering state has been updated."
+msgstr "L'état de l'offre a été mis à jour."
+
+msgid "Offering type"
+msgstr "Type d'offre"
+
+msgid "Offerings images"
+msgstr "Images d'offres"
+
+msgid "One-time on plan switch"
+msgstr "Commutateur de plan unique"
+
+msgid "Only a created invoice can be marked as paid."
+msgstr "Seule une facture créée peut être marquée comme payée."
+
+msgid "Only customer owner or staff can invite users."
+msgstr "Seul le propriétaire du client ou le personnel peut inviter des utilisateurs."
+
+msgid "Only pending and expired invitations can be sent again."
+msgstr "Seules les invitations en attente et expirées peuvent être envoyées à nouveau."
+
+msgid "Only pending invitation can be canceled."
+msgstr "Seule l'invitation en attente peut être annulée."
+
+msgid "Only staff and organization users are allowed to open console."
+msgstr "Seuls les utilisateurs du personnel et de l'organisation sont autorisés à ouvrir la console."
+
+msgid "Only staff can manage OpenStack tenant."
+msgstr "Seul le personnel peut gérer le locataire OpenStack."
+
+msgid "Only staff can remove organization."
+msgstr "Seul le personnel peut supprimer une organisation."
+
+msgid "Only staff users are allowed to perform this action."
+msgstr "Seuls les utilisateurs du personnel sont autorisés à effectuer cette action."
+
+msgid "OpenStack Images"
+msgstr "Images OpenStack"
+
+msgid "OpenStack Instance"
+msgstr "Instance OpenStack"
+
+msgid "OpenStack instance"
+msgstr "Instance OpenStack"
+
+msgid "OpenStack instance has been unlinked from Rancher node."
+msgstr "L'instance OpenStack a été dissociée du nœud Rancher."
+
+msgid "OpenStack networks has been created."
+msgstr "Les réseaux OpenStack ont été créés."
+
+msgid "OpenStack package"
+msgstr "Paquet OpenStack"
+
+msgid "OpenStack subnet"
+msgstr "Sous-réseau OpenStack"
+
+msgid "OpenStack tenant"
+msgstr "Locataire OpenStack"
+
+msgid "OpenStack volume"
+msgstr "Volume OpenStack"
+
+msgid "Open console"
+msgstr "Ouvrir la console"
+
+msgid "Open in Service Desk"
+msgstr "Ouvrir dans le Service Desk"
+
+msgid "Open support portal"
+msgstr "Ouvrir le portail de support"
+
+msgid "Opened by {user} at {date}"
+msgstr "Ouvert par {user} à {date}"
+
+msgid "Opened by {user} from {organization} at {date}"
+msgstr "Ouvert par {user} de {organization} à {date}"
+
+msgid "Options are invalid."
+msgstr "Les options ne sont pas valides."
+
+msgid "Or use social login"
+msgstr "Ou utilisez la connexion sociale"
+
+msgid "Order has been approved."
+msgstr "La commande a été approuvée."
+
+msgid "Order has been rejected."
+msgstr "La commande a été rejetée."
+
+msgid "Order has been submitted."
+msgstr "La commande a été soumise."
+
+msgid "Order item details"
+msgstr "Détails de l'article de la commande"
+
+msgid "Order item has been approved."
+msgstr "L'article de la commande a été approuvé."
+
+msgid "Order item has been rejected."
+msgstr "L'article de la commande a été rejeté."
+
+msgid "Order item has cancel has been scheduled."
+msgstr "L'annulation de l'article de la commande a été planifiée."
+
+msgid "Organization actions"
+msgstr "Actions de l'organisation"
+
+msgid "Organization contains invoices. Please remove them first."
+msgstr "L'organisation contient des factures. Veuillez les supprimer d'abord."
+
+msgid "Organization contains projects. Please remove them first."
+msgstr "L'organisation contient des projets. Veuillez les supprimer d'abord."
+
+msgid "Organization events"
+msgstr "Événements de l'organisation"
+
+msgid "Organization has been created."
+msgstr "L'organisation a été créée."
+
+msgid "Organization has been updated successfully."
+msgstr "L'organisation a été mise à jour avec succès."
+
+msgid "Organization has signed a fixed price agreement"
+msgstr "L'organisation a signé un accord à prix fixe"
+
+msgid "Organization owner"
+msgstr "Propriétaire de l'organisation"
+
+msgid "Organization owner role expires on"
+msgstr "Le rôle du propriétaire de l'organisation expire le"
+
+msgid "Organization registration code"
+msgstr "Code d'enregistrement de l'organisation"
+
+msgid "Organization removal"
+msgstr "Suppression de l'organisation"
+
+msgid "Organization role"
+msgstr "Rôle de l'organisation"
+
+msgid "Organization roles"
+msgstr "Rôles de l'organisation"
+
+msgid "Organization update"
+msgstr "Mise à jour de l'organisation"
+
+msgid "Organization update ({name})"
+msgstr "Mise à jour de l'organisation ({name})"
+
+msgid "Organization users list"
+msgstr "Liste des utilisateurs de l'organisation"
+
+msgid "Organization workspace"
+msgstr "Espace de travail de l'organisation"
+
+msgid "Organization {customer_link} has been updated."
+msgstr "L'organisation {customer_link} a été mise à jour."
+
+msgid "Organization {customer_name} has been deleted."
+msgstr "L'organisation {customer_name} a été supprimée."
+
+msgid "Organizations by divisions"
+msgstr "Organisations par divisions"
+
+msgid "Organizations divisions"
+msgstr "Divisions des organisations"
+
+msgid "Overview of {organization} organization"
+msgstr "Aperçu de l'organisation {organization}"
+
+msgid "Overview of {project} project"
+msgstr "Aperçu du projet {project}"
+
+msgid "Owned organizations"
+msgstr "Organisations possédées"
+
+msgid "PID"
+msgstr "PID"
+
+msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
+msgstr "La page n’est pas trouvée. Vous avez soit entré une URL invalide, soit essayé d'accéder à une fonction désactivée."
+
+msgid "Password has been changed for user {affected_user_link}."
+msgstr "Le mot de passe a été modifié pour l'utilisateur {affected_user_link}."
+
+msgid "Past time slots are not allowed."
+msgstr "Les créneaux horaires passés ne sont pas autorisés."
+
+msgid "Pause offering"
+msgstr "Offre de pause"
+
+msgid "Pay invoice"
+msgstr "Payer la facture"
+
+msgid "Payment events"
+msgstr "Évènements de paiement"
+
+msgid "Payment for {customer_link} has been approved."
+msgstr "Le paiement pour {customer_link} a été approuvé."
+
+msgid "Payment for {customer_link} has been cancelled."
+msgstr "Le paiement pour {customer_link} a été annulé."
+
+msgid "Payment gateways (monthly)"
+msgstr "Passerelles de paiement (mensuel)"
+
+msgid "Payment has been created."
+msgstr "Le paiement a été créé."
+
+msgid "Payment has been deleted."
+msgstr "Le paiement a été supprimé."
+
+msgid "Payment has been processed successfully."
+msgstr "Le paiement a été traité avec succès."
+
+msgid "Payment has been updated."
+msgstr "Le paiement a été mis à jour."
+
+msgid "Payment is being processed, please wait."
+msgstr "Le paiement est en cours de traitement, veuillez patienter."
+
+msgid "Payment profile"
+msgstr "Profil de paiement"
+
+msgid "Payment profile defines how invoices are processed."
+msgstr "Le profil de paiement définit la façon dont les factures sont traitées."
+
+msgid "Payment profile has been created."
+msgstr "Le profil de paiement a été créé."
+
+msgid "Payment profile has been created and enabled."
+msgstr "Le profil de paiement a été créé et activé."
+
+msgid "Payment profile has been enabled."
+msgstr "Le profil de paiement a été activé."
+
+msgid "Payment profile has been removed."
+msgstr "Le profil de paiement a été supprimé."
+
+msgid "Payment profile has been updated."
+msgstr "Le profil de paiement a été mis à jour."
+
+msgid "Payment profiles"
+msgstr "Profils de paiement"
+
+msgid "Payments connected with an active payment profile."
+msgstr "Paiements liés à un profil de paiement actif."
+
+msgid "Payments list"
+msgstr "Liste des paiements"
+
+msgid "Pending approval for changing of"
+msgstr "En attente d'approbation pour le changement de"
+
+msgid "Pending approval for creation of"
+msgstr "En attente d'approbation pour la création de"
+
+msgid "Pending approval for removal of"
+msgstr "En attente d'approbation pour la suppression de"
+
+msgid "Per half month"
+msgstr "Par demi-mois"
+
+msgid "Perform local logout"
+msgstr "Effectuer une déconnexion locale"
+
+msgid "Perform review"
+msgstr "Effectuer un examen"
+
+msgid "Performed by"
+msgstr "Effectué par"
+
+msgid "Permissions log"
+msgstr "Journal des autorisations"
+
+msgid "Personal workspace"
+msgstr "Espace de travail personnel"
+
+msgid "Plan capacity"
+msgstr "Capacité du plan"
+
+msgid "Plan capacity is full."
+msgstr "La capacité du plan est pleine."
+
+msgid "Plan component name"
+msgstr "Nom du composant du plan"
+
+msgid "Plan components"
+msgstr "Composantes du plan"
+
+msgid "Plan description"
+msgstr "Description du plan"
+
+msgid "Plan does not have limit"
+msgstr "Le plan n'a pas de limite"
+
+msgid "Plan name"
+msgstr "Nom du plan"
+
+msgid "Plan price"
+msgstr "Prix du plan"
+
+msgid "Planned quota usage: {usage}"
+msgstr "Utilisation planifiée des quotas : {usage}"
+
+msgid "Plans are invalid."
+msgstr "Les plans ne sont pas valides."
+
+msgid "Please add resource name before editing a schedule."
+msgstr "Veuillez ajouter le nom de la ressource avant de modifier une planification."
+
+msgid "Please create a new one:"
+msgstr "Veuillez en créer un nouveau :"
+
+msgid "Please create a new one picking the profile that best matches your organization:"
+msgstr "Veuillez en créer un nouveau en choisissant le profil qui correspond le mieux à votre organisation :"
+
+msgid "Please enter desired values in the rows below:"
+msgstr "Veuillez saisir les valeurs souhaitées dans les lignes ci-dessous :"
+
+msgid "Please enter reason why offering has been paused."
+msgstr "Veuillez saisir la raison pour laquelle l'offre a été suspendue."
+
+msgid "Please enter username, password and email."
+msgstr "Veuillez saisir le nom d'utilisateur, le mot de passe et l'e-mail."
+
+msgid "Please enter volume size to see price estimate."
+msgstr "Veuillez saisir la taille du volume pour voir l'estimation du prix."
+
+msgid "Please give us a moment to validate your invitation."
+msgstr "S’il vous plaît nous donner un moment pour valider votre invitation."
+
+msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
+msgstr "Veuillez vous assurer que vous savez ce que vous faites et régler à 10 minutes si vous n’êtes pas sûr."
+
+msgid "Please note that request should specify offering and provide a reason."
+msgstr "Veuillez noter que la demande doit préciser l'offre et fournir une raison."
+
+msgid "Please note that request should specify tenant and provide a reason."
+msgstr "Veuillez noter que la demande doit spécifier le locataire et fournir une raison."
+
+msgid "Please note that request should specify user name and provide a reason."
+msgstr "Veuillez noter que la demande doit spécifier le nom d'utilisateur et fournir une raison."
+
 msgid "(VAT is not included)"
 msgstr "(La TVA n'est pas incluse)"

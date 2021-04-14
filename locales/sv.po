@@ -1007,6 +1007,9 @@ msgstr "Skapa ett undernät"
 msgid "Creating snapshot schedule"
 msgstr "Skapa snapshot-schema"
 
+msgid "Credentials"
+msgstr "Autentiseringsuppgifter"
+
 msgid "Current API token"
 msgstr "Aktuell API-token"
 
@@ -1081,9 +1084,6 @@ msgstr "Datum anslutet"
 
 msgid "Date of reporting"
 msgstr "Datum för rapportering"
-
-msgid "Day"
-msgstr "Dag"
 
 msgid "Deactivate"
 msgstr "Inaktivera"
@@ -1794,7 +1794,7 @@ msgid "How to obtain credentials for Azure provider"
 msgstr "Hur du skaffar autentiseringsuppgifter för Azure provider"
 
 msgid "How to obtain credentials for DigitalOcean provider"
-msgstr "Hur du skaffar inloggningsuppgifter för DigitalOcean leverantör"
+msgstr "Hur du skaffar autentiseringsuppgifter för DigitalOcean leverantör"
 
 msgid "ID"
 msgstr "ID"
@@ -2425,9 +2425,6 @@ msgstr "Månadskostnad"
 
 msgid "Monthly invoices"
 msgstr "Månadsfakturor"
-
-msgid "More"
-msgstr "Mer"
 
 msgid "More info"
 msgstr "Mer info"
@@ -4724,6 +4721,9 @@ msgstr "Text har kopierats"
 msgid "Thank you for your response!"
 msgstr "Tack för ditt svar!"
 
+msgid "The date is inclusive. Once reached, all project resource will be scheduled for termination."
+msgstr "Datumet är inkluderande. När den har nåtts kommer alla projektresurser att schemaläggas för avslutning."
+
 msgid "The invoice has been marked as paid."
 msgstr "Fakturan har markerats som betald."
 
@@ -6014,9 +6014,6 @@ msgstr "Webhook"
 msgid "Website URL"
 msgstr "Webbplats URL"
 
-msgid "Week"
-msgstr "Vecka"
-
 msgid "Welcome, {user}!"
 msgstr "Välkommen, {user}!"
 
@@ -6403,9 +6400,6 @@ msgstr "gruppmedlemmar"
 
 msgid "till"
 msgstr "tills"
-
-msgid "today"
-msgstr "Idag"
 
 msgid "token will not timeout"
 msgstr "token kommer inte att ta timeout"

@@ -326,5 +326,971 @@ msgstr "Azure Active Directory-programhemmelighet"
 msgid "Azure PostgreSQL database server"
 msgstr "Azure PostgreSQL-databaseserver"
 
+msgid "Azure Virtual Machine"
+msgstr "Azure Virtuell Maskin"
+
+msgid "Azure provider"
+msgstr "Azure-leverandør"
+
+msgid "Back to organization"
+msgstr "Tilbake til organisasjonen"
+
+msgid "Back to personal dashboard"
+msgstr "Tilbake til personlig dashbord"
+
+msgid "Back to project"
+msgstr "Tilbake til prosjektet"
+
+msgid "Back to shopping"
+msgstr "Tilbake til shopping"
+
+msgid "Backend ID"
+msgstr "Backend-ID"
+
+msgid "Backend ID has been successfully set."
+msgstr "Backend ID har blitt angitt."
+
+msgid "Base image name"
+msgstr "Navn på basisbilde"
+
+msgid "Batch RAM"
+msgstr "Batch RAM"
+
+msgid "Batch block storage size"
+msgstr "Lagringsstørrelse for batch blokk"
+
+msgid "Batch processing documentation"
+msgstr "Dokumentasjon for batchbehandling"
+
+msgid "Batch vCPU"
+msgstr "Batch vCPU"
+
+msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
+msgstr "Bli kunde av vår portal. Klargjør IT-tjenester fra Marketplace og administrer teamet ditt fra ett sted."
+
+msgid "Billing enabled"
+msgstr "Fakturering aktivert"
+
+msgid "Billing period"
+msgstr "Faktureringsperiode"
+
+msgid "Booking description"
+msgstr "Bestillingsbeskrivelse"
+
+msgid "Booking has been accepted."
+msgstr "Booking har blitt akseptert."
+
+msgid "Booking has been cancelled."
+msgstr "Bestillingen er kansellert."
+
+msgid "Booking is not allowed to overlap other bookings."
+msgstr "Booking er ikke tilladt at overlappe andre bookinger."
+
+msgid "Booking management"
+msgstr "Reservasjonsledelse"
+
+msgid "Bootable"
+msgstr "Oppstartbar"
+
+msgid "Browse image"
+msgstr "Bla gjennom bilde"
+
+msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
+msgstr "Ved å sette token levetid på ubestemt tid, tillater du alle som har token å utgi seg for å være dine handlinger til tokenet er endret."
+
+msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
+msgstr "Ved å sende inn skjemaet godtar du <Link>Vilkårene for bruk</Link>."
+
+msgid "CIDR"
+msgstr "CIDR"
+
+msgid "CPU limit (hours)"
+msgstr "CPU-grense (timer)"
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "Caller"
+msgstr "Oppringer"
+
+msgid "Cannot create floating IP if tenant external network is not defined."
+msgstr "Kan ikke opprette flytende IP hvis leietaker eksternt nettverk ikke er definert."
+
+msgid "Catalog URL"
+msgstr "Katalog-URL"
+
+msgid "Catalog has been created."
+msgstr "Katalogen er opprettet."
+
+msgid "Catalog has been deleted."
+msgstr "Katalogen er slettet."
+
+msgid "Catalogues"
+msgstr "Kataloger"
+
+msgid "Category is invalid."
+msgstr "Kategorien er ugyldig."
+
+msgid "Challenge code"
+msgstr "Utfordringskode"
+
+msgid "Change Request"
+msgstr "Endre forespørsel"
+
+msgid "Change flavor"
+msgstr "Endre smak"
+
+msgid "Change limits"
+msgstr "Endre grenser"
+
+msgid "Change request - client’s request to perform a generic modification of data or service."
+msgstr "Endre forespørsel - klientens forespørsel om å utføre en generisk endring av data eller tjeneste."
+
+msgid "Change resource limits"
+msgstr "Endre ressursgrenser"
+
+msgid "Change resource plan"
+msgstr "Endre ressursplan"
+
+msgid "Change user email"
+msgstr "Endre bruker-e-post"
+
+msgid "Changing flavor"
+msgstr "Endre smak"
+
+msgid "Charge for usage-based component is based on user-requested limit."
+msgstr "Gebyr for bruksbasert komponent er basert på den forespurte grensen for brukeren."
+
+msgid "Charset"
+msgstr "Charset"
+
+msgid "Checklist setup"
+msgstr "Oppsett av sjekkliste"
+
+msgid "Choices as comma-separated list"
+msgstr "Valg som kommaseparert liste"
+
+msgid "Civil number"
+msgstr "Sivilt nummer"
+
+msgid "Client organization"
+msgstr "Kundeorganisasjon"
+
+msgid "Client project"
+msgstr "Klientprosjekt"
+
+msgid "Cloud RAM"
+msgstr "Cloud RAM"
+
+msgid "Cloud block storage size"
+msgstr "Lagringsstørrelse for skyblokker"
+
+msgid "Cloud init template"
+msgstr "Cloud init-mal"
+
+msgid "Cloud vCPU"
+msgstr "Cloud vCPU"
+
+msgid "Cluster IP"
+msgstr "Klynge IP"
+
+msgid "Cluster description"
+msgstr "Klyngebeskrivelse"
+
+msgid "Cluster name"
+msgstr "Klynge navn"
+
+msgid "Cluster roles"
+msgstr "Klyngeroller"
+
+msgid "Code is too short."
+msgstr "Kode er for kort."
+
+msgid "Code should consist of latin symbols or numbers."
+msgstr "Koden skal bestå av latinske symboler eller tall."
+
+msgid "Collation"
+msgstr "Samling"
+
+msgid "Company data"
+msgstr "Firmadata"
+
+msgid "Compare items"
+msgstr "Sammenlign elementer"
+
+msgid "Competence"
+msgstr "Kompetanse"
+
+msgid "Component name"
+msgstr "Komponentnavn"
+
+msgid "Components are invalid."
+msgstr "Komponentene er ugyldige."
+
+msgid "Compute generation"
+msgstr "Generering av databehandling"
+
+msgid "Configuration options"
+msgstr "Konfigurasjonsalternativer"
+
+msgid "Confirmation mail has been sent. Please check your inbox!"
+msgstr "Bekreftelsesposten er sendt. Vennligst sjekk innboksen din!"
+
+msgid "Confirmation notification template"
+msgstr "Bekreftelsesvarselmal"
+
+msgid "Confirming that data is correct"
+msgstr "Bekrefte at dataene er korrekte"
+
+msgid "Connected subnets"
+msgstr "Tilkoblede delnett"
+
+msgid "Connection details"
+msgstr "Tilkoblingsdetaljer"
+
+msgid "Contact phone"
+msgstr "Kontakt telefon"
+
+msgid "Contract sum"
+msgstr "Kontrakt sum"
+
+msgid "Contract sum is"
+msgstr "Kontraktssum er"
+
+msgid "Control plane"
+msgstr "Kontrollplan"
+
+msgid "Could not create organization"
+msgstr "Kunne ikke opprette organisasjon"
+
+msgid "Create Network adapter"
+msgstr "Opprett nettverkskort"
+
+msgid "Create SQL database in PostgreSQL server"
+msgstr "Opprette SQL-database i PostgreSQL server"
+
+msgid "Create VM snapshot for OpenStack instance"
+msgstr "Opprett VM-øyeblikksbilde for OpenStack-forekomst"
+
+msgid "Create VM snapshot schedule for OpenStack instance"
+msgstr "Opprette tidsplan for øyeblikksbilde av VM for OpenStack-forekomst"
+
+msgid "Create an availability"
+msgstr "Opprette en tilgjengelighet"
+
+msgid "Create application"
+msgstr "Opprett program"
+
+msgid "Create catalog"
+msgstr "Opprett katalog"
+
+msgid "Create disk"
+msgstr "Opprett disk"
+
+msgid "Create horizontal pod autoscaler"
+msgstr "Opprett horisontal pod autoscaler"
+
+msgid "Create network for OpenStack tenant"
+msgstr "Opprett nettverk for OpenStack-leier"
+
+msgid "Create node"
+msgstr "Opprett node"
+
+msgid "Create organization"
+msgstr "Opprett organisasjon"
+
+msgid "Create port"
+msgstr "Opprett port"
+
+msgid "Create request"
+msgstr "Opprett forespørsel"
+
+msgid "Create security group for OpenStack tenant {name}"
+msgstr "Opprett sikkerhetsgruppe for OpenStack-leier {name}"
+
+msgid "Create snapshot for OpenStack volume"
+msgstr "Opprett øyeblikksbilde for OpenStack-volum"
+
+msgid "Create snapshot schedule for OpenStack volume"
+msgstr "Opprette øyeblikksbildeplan for OpenStack-volum"
+
+msgid "Create subnet"
+msgstr "Opprett delnett"
+
+msgid "Create your first project"
+msgstr "Opprett ditt første prosjekt"
+
+msgid "Created a new payment for {customer_link}."
+msgstr "Opprettet en ny betaling for {customer_link}."
+
+msgid "Created at"
+msgstr "Opprettet på"
+
+msgid "Creating a backup schedule"
+msgstr "Opprette en tidsplan for sikkerhetskopiering"
+
+msgid "Creating a floating IP"
+msgstr "Opprette en flytende IP"
+
+msgid "Creating a new network"
+msgstr "Opprette et nytt nettverk"
+
+msgid "Creating a security group"
+msgstr "Opprette en sikkerhetsgruppe"
+
+msgid "Creating a subnet"
+msgstr "Opprette et delnett"
+
+msgid "Creating snapshot schedule"
+msgstr "Opprette tidsplan for øyeblikksbilde"
+
+msgid "Current API token"
+msgstr "Nåværende API-token"
+
+msgid "Current cost"
+msgstr "Gjeldende kostnad"
+
+msgid "Current flavor"
+msgstr "Nåværende smak"
+
+msgid "Current limit"
+msgstr "Gjeldende grense"
+
+msgid "Current price per month"
+msgstr "Gjeldende pris per måned"
+
+msgid "Current replicas"
+msgstr "Gjeldende replikaer"
+
+msgid "Current size"
+msgstr "Gjeldende størrelse"
+
+msgid "Current type"
+msgstr "Gjeldende type"
+
+msgid "Customer support satisfaction overall rating"
+msgstr "Kundesupport tilfredshet samlet vurdering"
+
+msgid "DNS name servers"
+msgstr "DNS-navneservere"
+
+msgid "Daily available booking time range"
+msgstr "Daglig tilgjengelig booking tidsintervall"
+
+msgid "Data volume #{index}"
+msgstr "Datavolum #{index}"
+
+msgid "Data volume should have at least {size} GB."
+msgstr "Datavolum skal ha minst {size} GB."
+
+msgid "Data volume size:"
+msgstr "Datavolumstørrelse:"
+
+msgid "Data volume type"
+msgstr "Datavolumtype"
+
+msgid "Datacite DOI"
+msgstr "Datacite DOI"
+
+msgid "Datastore"
+msgstr "Datalager"
+
+msgid "Date and time of incident"
+msgstr "Dato og klokkeslett for hendelsen"
+
+msgid "Date of reporting"
+msgstr "Dato for rapportering"
+
+msgid "Default SLURM account for user"
+msgstr "Standard SLURM-konto for bruker"
+
+msgid "Default availability zone for provisioned instances."
+msgstr "Standard tilgjengelighetssone for klargjorte forekomster."
+
+msgid "Default cluster label"
+msgstr "Standard klyngeetikett"
+
+msgid "Default tax percent"
+msgstr "Standard mva-prosent"
+
+msgid "Delete catalog"
+msgstr "Slett katalog"
+
+msgid "Delete volumes"
+msgstr "Slette volumer"
+
+msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
+msgstr "Sletting av PostgreSQL-serveren vil føre til sletting av alle databaser som er opprettet på serveren."
+
+msgid "Deploy Longhorn block storage after cluster is deployed"
+msgstr "Distribuere Longhorn blokklagring etter at klyngen er distribuert"
+
+msgid "Desired replicas"
+msgstr "Ønskede replikaer"
+
+msgid "Destination URL"
+msgstr "Destinasjons-URL"
+
+msgid "Destination (CIDR)"
+msgstr "Destinasjon (CIDR)"
+
+msgid "Destroy"
+msgstr "Ødelegge"
+
+msgid "Destroy resource"
+msgstr "Ødelegg ressurs"
+
+msgid "Destroy {name} instance"
+msgstr "Ødelegg {name} forekomst"
+
+msgid "Destroying"
+msgstr "Ødelegge"
+
+msgid "Detach"
+msgstr "Løsne"
+
+msgid "Detaching"
+msgstr "Løsning"
+
+msgid "Devops-friendly offering"
+msgstr "Devops-vennlig tilbud"
+
+msgid "DigitalOcean provider"
+msgstr "DigitalOcean leverandør"
+
+msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
+msgstr "Deaktiver en profil i FreeIPA. Deaktiverte profiler er ikke tillatt for pålogging til Linux-systemene"
+
+msgid "Disable data volume"
+msgstr "Deaktivere datavolum"
+
+msgid "Disable gateway IP advertising via DHCP"
+msgstr "Deaktiver gateway IP-annonsering via DHCP"
+
+msgid "Disable profile"
+msgstr "Deaktiver profil"
+
+msgid "Disk extension has been scheduled."
+msgstr "Diskutvidelse er planlagt."
+
+msgid "Disk has been created."
+msgstr "Disk er opprettet."
+
+msgid "Disks"
+msgstr "Disker"
+
+msgid "Division type"
+msgstr "Divisjonstype"
+
+msgid "Do not allow user to specify quotas when offering is provisioned."
+msgstr "Ikke tillat brukeren å angi kvoter når tilbudet er klargjort."
+
+msgid "Do not configure a gateway for this subnet"
+msgstr "Ikke konfigurer en gateway for dette delnettet"
+
+msgid "Do not have an account?"
+msgstr "Har du ikke en konto?"
+
+msgid "Do you really want to delete comment?"
+msgstr "Vil du virkelig slette kommentar?"
+
+msgid "Do you want to unlink instance {name}?"
+msgstr "Vil du fjerne koblingen til forekomst {name}?"
+
+msgid "Docker version"
+msgstr "Docker-versjon"
+
+msgid "Domain name. If not defined default domain will be used."
+msgstr "Domenenavn. Hvis ikke definert standard domene vil bli brukt."
+
+msgid "Download invoice"
+msgstr "Last ned faktura"
+
+msgid "Download order PDF file"
+msgstr "Last ned ordre PDF-fil"
+
+msgid "Drop files to attach, or"
+msgstr "Slipp filer for å legge ved, eller"
+
+msgid "Drop files to attach them to the issue."
+msgstr "Slipp filer for å legge dem ved problemet."
+
+msgid "Droplet has been resized."
+msgstr "Droplet er endret."
+
+msgid "Dynamic — use separate volume types for tracking pricing"
+msgstr "Dynamisk — bruk separate volumtyper for sporing av priser"
+
+msgid "EU VAT ID"
+msgstr "EU MVA-ID"
+
+msgid "Each mount point should be used once at most."
+msgstr "Hvert monteringspunkt skal brukes en gang på det meste."
+
+msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
+msgstr "Hver bruksrapport må være koblet til en faktureringsplan for å sikre korrekt beregning av regnskapsdata."
+
+msgid "Edit YAML"
+msgstr "Rediger YAML"
+
+msgid "Edit an availability"
+msgstr "Rediger en tilgjengelighet"
+
+msgid "Edit attributes"
+msgstr "Rediger attributter"
+
+msgid "Edit booking event"
+msgstr "Rediger bestillingsarrangement"
+
+msgid "Edit offering"
+msgstr "Rediger tilbud"
+
+msgid "Edit project member"
+msgstr "Rediger prosjektmedlem"
+
+msgid "Edit team member"
+msgstr "Rediger teammedlem"
+
+msgid "Egress"
+msgstr "Utgang"
+
+msgid "Email change request has been cancelled."
+msgstr "Forespørselen om endring av e-post er kansellert."
+
+msgid "Email has been updated."
+msgstr "E-posten er oppdatert."
+
+msgid "Email verification has been sent. Please check your inbox."
+msgstr "E-postbekreftelse er sendt. Vennligst sjekk innboksen din."
+
+msgid "Enable DHCP"
+msgstr "Aktiver DHCP"
+
+msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
+msgstr "Aktiver en profil i FreeIPA. Bare aktiverte profiler er tillatt for innlogging i Linux-systemene"
+
+msgid "Enable by default"
+msgstr "Aktiver som standard"
+
+msgid "Enable limit"
+msgstr "Aktiver grense"
+
+msgid "Enable profile"
+msgstr "Aktiver profil"
+
+msgid "Enable profile after creation"
+msgstr "Aktiver profil etter oppretting"
+
+msgid "Enabled checklists have been updated."
+msgstr "Aktiverte sjekklister er oppdatert."
+
+msgid "Enabled default gateway"
+msgstr "Aktivert standard gateway"
+
+msgid "Encountered an empty component"
+msgstr "Støtte på en tom komponent"
+
+msgid "End date must be after start date."
+msgstr "Sluttdato må være etter startdato."
+
+msgid "End date of the agreement is"
+msgstr "Sluttdato for avtalen er"
+
+msgid "Ensure this field has no more than 30 characters."
+msgstr "Kontroller at dette feltet ikke har mer enn 30 tegn."
+
+msgid "Enter IPv4 address."
+msgstr "Skriv inn IPv4-adresse."
+
+msgid "Enter private IPv4 CIDR."
+msgstr "Skriv inn privat IPv4 CIDR."
+
+msgid "Environment variables"
+msgstr "Miljøvariabler"
+
+msgid "Erred"
+msgstr "Feilet"
+
+msgid "Error traceback"
+msgstr "Feil traceback"
+
+msgid "Esimated price per month"
+msgstr "Esimert pris per måned"
+
+msgid "Estimated cost"
+msgstr "Estimert kostnad"
+
+msgid "Estimated cost for the current month: {cost}"
+msgstr "Estimert kostnad for gjeldende måned: {cost}"
+
+msgid "Estimated monthly cost"
+msgstr "Estimert månedlig kostnad"
+
+msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
+msgstr "Estimert månedlig avgift vil endres fra {old_estimate} til {new_estimate}. MVA er ikke inkludert."
+
+msgid "Ethernet type"
+msgstr "Ethernet-type"
+
+msgid "Event types"
+msgstr "Arrangement typer"
+
+msgid "Every day at"
+msgstr "Hver dag på"
+
+msgid "Every hour at {minuteValues} past the hour"
+msgstr "Hver time på {minuteValues} forbi timen"
+
+msgid "Every month on the {days} at {time}"
+msgstr "Hver måned på {days} på {time}"
+
+msgid "Every month on the {days} of {months} at {time}"
+msgstr "Hver måned på {days} for {months} på {time}"
+
+msgid "Every month service provider can report up to the amount requested by user."
+msgstr "Hver måned kan tjenesteleverandøren rapportere opp til beløpet som brukeren ber om."
+
+msgid "Every week on {day} at {time}"
+msgstr "Hver uke på {day} på {time}"
+
+msgid "Excel"
+msgstr "Excel"
+
+msgid "Existing quota usage: {usage}"
+msgstr "Eksisterende kvotebruk: {usage}"
+
+msgid "Explore {deployment} Marketplace"
+msgstr "Utforsk {deployment} Markedsplass"
+
+msgid "Extend OpenStack volume"
+msgstr "Utvid OpenStack volum"
+
+msgid "Extend disk"
+msgstr "Utvid disk"
+
+msgid "Extending"
+msgstr "Utvide"
+
+msgid "External IP"
+msgstr "Ekstern IP"
+
+msgid "External network ID"
+msgstr "Ekstern nettverks-ID"
+
+msgid "Failed to operate with backend."
+msgstr "Kunne ikke operere med backend."
+
+msgid "Fee applied each time this plan is activated."
+msgstr "Gebyret påføres hver gang denne planen aktiveres."
+
+msgid "File download has been started."
+msgstr "Nedlasting av filer er startet."
+
+msgid "File has been copied"
+msgstr "Filen er kopiert"
+
+msgid "File has been downloaded."
+msgstr "Filen er lastet ned."
+
+msgid "Filter organizations"
+msgstr "Filtrer organisasjoner"
+
+msgid "Filter projects"
+msgstr "Filtrer prosjekter"
+
+msgid "Financial overview"
+msgstr "Økonomisk oversikt"
+
+msgid "Find solution"
+msgstr "Finn løsning"
+
+msgid "Fixed-price contract"
+msgstr "Fastpriskontrakt"
+
+msgid "Fixed — use common storage quota"
+msgstr "Fast — bruk vanlig lagringskvote"
+
+msgid "Flavor"
+msgstr "Smak"
+
+msgid "Flavor change has been scheduled."
+msgstr "Smakendring er planlagt."
+
+msgid "Flavor exclude regex"
+msgstr "Smaken utelukke regex"
+
+msgid "Flavor name"
+msgstr "Smak navn"
+
+msgid "Flavor name: {flavor_name}"
+msgstr "Smaknavn: {flavor_name}"
+
+msgid "Flavors"
+msgstr "Smaker"
+
+msgid "Flavors List"
+msgstr "Smaker Liste"
+
+msgid "Flavors matching this regex expression will not be pulled from the backend."
+msgstr "Smaker som samsvarer med dette regex-uttrykket vil ikke bli trukket fra backend."
+
+msgid "Flavors regex"
+msgstr "Smaker regex"
+
+msgid "Flexible"
+msgstr "Fleksibel"
+
+msgid "Floating IP"
+msgstr "Flytende IP"
+
+msgid "Floating IP count"
+msgstr "Flytende IP-antall"
+
+msgid "Floating IPs"
+msgstr "Flytende IPer"
+
+msgid "Floating IPs update has been scheduled."
+msgstr "Flytende IPer-oppdatering er planlagt."
+
+msgid "Flowmap"
+msgstr "Flytkart"
+
+msgid "Force destroy"
+msgstr "Kraft ødelegge"
+
+msgid "Force destroy {name} instance"
+msgstr "Force ødelegge {name} forekomst"
+
+msgid "FreeIPA account"
+msgstr "FreeIPA-konto"
+
+msgid "FreeIPA account needs to be set up."
+msgstr "FreeIPA-konto må settes opp."
+
+msgid "FreeIPA extension is disabled."
+msgstr "FreeIPA-utvidelse er deaktivert."
+
+msgid "From port"
+msgstr "Fra havn"
+
+msgid "GB"
+msgstr "GB"
+
+msgid "GPU"
+msgstr "GPU"
+
+msgid "GPU limit (hours)"
+msgstr "GPU-grense (timer)"
+
+msgid "GPU usage"
+msgstr "GPU-bruk"
+
+msgid "Gateway"
+msgstr "Gateway"
+
+msgid "Gateway IP of this subnet"
+msgstr "Gateway IP for dette delnettet"
+
+msgid "Generate Kubeconfig file"
+msgstr "Generer Kubeconfig-fil"
+
+msgid "Go to marketplace"
+msgstr "Gå til markedsplass"
+
+msgid "Go to my profile"
+msgstr "Gå til profilen min"
+
+msgid "Google Calendar has been published successfully."
+msgstr "Google Kalender har blitt publisert."
+
+msgid "Google Calendar has been synced successfully."
+msgstr "Google Kalender har blitt synkronisert."
+
+msgid "Google Calendar has been unpublished successfully."
+msgstr "Google Kalender har blitt upublisert."
+
+msgid "Google Calendar link"
+msgstr "Google Kalender-lenke"
+
+msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
+msgstr "Garantert tid for VM øyeblikksbilde oppbevaring. Hvis null - holde for alltid."
+
+msgid "Guaranteed time of snapshot retention. If null - keep forever."
+msgstr "Garantert tid for oppbevaring av øyeblikksbilde. Hvis null - holde for alltid."
+
+msgid "Guaranteed time of volume snapshot retention. If null - keep forever."
+msgstr "Garantert tid for volum øyeblikksbilde oppbevaring. Hvis null - holde for alltid."
+
+msgid "Guest OS"
+msgstr "Gjest OS"
+
+msgid "HPA"
+msgstr "HPA"
+
+msgid "Helpdesk"
+msgstr "Brukerstøtte"
+
+msgid "Helpdesk dashboard"
+msgstr "Instrumentbord for brukerstøtte"
+
+msgid "Hide diff"
+msgstr "Skjul diff"
+
+msgid "Home organization domain name"
+msgstr "Domenenavn for hjemmeorganisasjon"
+
+msgid "Hook has been removed."
+msgstr "Krok er fjernet."
+
+msgid "Hook removal"
+msgstr "Fjerning av krok"
+
+msgid "Horizontal pod autoscaler has been created."
+msgstr "Horisontal pod autoscaler er opprettet."
+
+msgid "Horizontal pod autoscaler has been updated."
+msgstr "Horisontal pod autoscaler er oppdatert."
+
+msgid "Host routes"
+msgstr "Vertsruter"
+
+msgid "Hostname"
+msgstr "Vertsnavn"
+
+msgid "Hostname or IP address of gateway node"
+msgstr "Vertsnavn eller IP-adresse for gateway-node"
+
+msgid "Hostname or IP address of master node"
+msgstr "Vertsnavn eller IP-adresse til hovednode"
+
+msgid "How to generate SSH key"
+msgstr "Hvordan generere SSH-nøkkel"
+
+msgid "How to obtain credentials for Azure provider"
+msgstr "Hvordan du får tak i legitimasjon for Azure-leverandør"
+
+msgid "How to obtain credentials for DigitalOcean provider"
+msgstr "Slik skaffer du legitimasjon for DigitalOcean-leverandør"
+
+msgid "ID code"
+msgstr "ID-kode"
+
+msgid "IP address is already used by router."
+msgstr "IP-adressen er allerede brukt av ruteren."
+
+msgid "IP protocol"
+msgstr "IP-protokoll"
+
+msgid "IP version"
+msgstr "IP-versjon"
+
+msgid "I accept the <Link>Terms of Service</Link>."
+msgstr "Jeg godtar <Link>Vilkårene for bruk</Link>."
+
+msgid "Identity provided has been selected via SAML2 discovery service. You will be redirected to the login page soon."
+msgstr "Identitet er valgt via SAML-2-søketjenesten. Du vil snart bli omdirigert til innloggingssiden."
+
+msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
+msgstr "Hvis du vil at brukeren skal oppgi ytterligere detaljer når du bestiller, må du konfigurere inntastingsskjema for brukeren nedenfor"
+
+msgid "Image has been added."
+msgstr "Bildet er lagt til."
+
+msgid "Image has been removed."
+msgstr "Bildet er fjernet."
+
+msgid "Image here"
+msgstr "Bilde her"
+
+msgid "Import YAML"
+msgstr "Importer YAML"
+
+msgid "Import offering"
+msgstr "Importtilbud"
+
+msgid "Import resource"
+msgstr "Importer ressurs"
+
+msgid "Importing resources"
+msgstr "Importere ressurser"
+
+msgid "In the format of GUID"
+msgstr "I formatet av GUID"
+
+msgid "Inactive user will not be able to login into the portal."
+msgstr "Inaktiv bruker vil ikke kunne logge inn på portalen."
+
+msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
+msgstr "Hendelse - klientproblem med tjenestebruk eller tilgjengelighet (avbrudd, nedbrytning av kvalitet)."
+
+msgid "Include weekends"
+msgstr "Inkluder helger"
+
+msgid "Incorrect organization details"
+msgstr "Feil organisasjonsdetaljer"
+
+msgid "Increase a droplet's RAM, CPU and SSD disk."
+msgstr "Øk en dråpes RAM, CPU og SSD-disk."
+
+msgid "Increase a droplet's RAM and CPU only (not the storage)."
+msgstr "Øk bare en dråpes RAM og CPU (ikke lagring)."
+
+msgid "Informational"
+msgstr "Informativ"
+
+msgid "Informational - client’s request to get or provide additional information related to a service."
+msgstr "Informativ - kundens forespørsel om å få eller gi tilleggsinformasjon relatert til en tjeneste."
+
+msgid "Ingress"
+msgstr "Inntrengning"
+
+msgid "Initial admin password"
+msgstr "Første administratorpassord"
+
+msgid "Initial admin username"
+msgstr "Første administrator brukernavn"
+
+msgid "Initial password"
+msgstr "Første passord"
+
+msgid "Initial username"
+msgstr "Første brukernavn"
+
+msgid "Instance"
+msgstr "Forekomst"
+
+msgid "Instance deletion has been scheduled."
+msgstr "Sletting av forekomst er planlagt."
+
+msgid "Instance does not have any floating IPs yet."
+msgstr "Forekomst har ikke noen flytende IP-er ennå."
+
+msgid "Instance does not have any security groups yet."
+msgstr "Forekomsten har ingen sikkerhetsgrupper ennå."
+
+msgid "Instance has been linked."
+msgstr "Forekomsten er koblet sammen."
+
+msgid "Instance is already active."
+msgstr "Forekomst er allerede aktiv."
+
+msgid "Instance is already stopped."
+msgstr "Forekomsten er allerede stoppet."
+
+msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr "Forekomsten er ikke koblet til noen interne delnett ennå. Koble den til internt delnett først."
+
+msgid "Instance should be OK, or erred. Please contact support."
+msgstr "Forekomsten bør være OK, eller feilet. Ta kontakt med kundestøtte."
+
+msgid "Instance should be OK. Please contact support."
+msgstr "Forekomsten bør være OK. Ta kontakt med kundestøtte."
+
+msgid "Instance should be shutoff and OK or erred. Please contact support."
+msgstr "Forekomsten skal være afslukning og OK eller fejlet. Ta kontakt med kundestøtte."
+
+msgid "Instances count"
+msgstr "Forekomster teller"
+
 msgid "(VAT is not included)"
 msgstr "(MVA er ikke inkludert)"

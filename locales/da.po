@@ -1007,6 +1007,9 @@ msgstr "Oprettelse af et undernet"
 msgid "Creating snapshot schedule"
 msgstr "Oprettelse af snapshotplan"
 
+msgid "Credentials"
+msgstr "Legitimationsoplysninger"
+
 msgid "Current API token"
 msgstr "Nuværende API-token"
 
@@ -1081,9 +1084,6 @@ msgstr "Dato tilsluttet"
 
 msgid "Date of reporting"
 msgstr "Dato for indberetning"
-
-msgid "Day"
-msgstr "Dag"
 
 msgid "Deactivate"
 msgstr "Deaktiver"
@@ -2425,9 +2425,6 @@ msgstr "Månedlige omkostninger"
 
 msgid "Monthly invoices"
 msgstr "Månedlige fakturaer"
-
-msgid "More"
-msgstr "Mere"
 
 msgid "More info"
 msgstr "Mere oplysninger"
@@ -4724,6 +4721,9 @@ msgstr "Teksten er blevet kopieret"
 msgid "Thank you for your response!"
 msgstr "Tak for dit svar!"
 
+msgid "The date is inclusive. Once reached, all project resource will be scheduled for termination."
+msgstr "Datoen er inklusive. Når den er nået, vil alle projektressourcer blive planlagt til afslutning."
+
 msgid "The invoice has been marked as paid."
 msgstr "Fakturaen er blevet markeret som betalt."
 
@@ -6014,9 +6014,6 @@ msgstr "Webhook"
 msgid "Website URL"
 msgstr "Hjemmeside URL"
 
-msgid "Week"
-msgstr "Uge"
-
 msgid "Welcome, {user}!"
 msgstr "Velkommen, {user}!"
 
@@ -6403,9 +6400,6 @@ msgstr "teammedlemmer"
 
 msgid "till"
 msgstr "til"
-
-msgid "today"
-msgstr "i dag"
 
 msgid "token will not timeout"
 msgstr "token vil ikke timeout"
