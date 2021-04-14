@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { Resource } from '@waldur/marketplace/resources/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
@@ -14,15 +15,16 @@ const ResourceShowUsageDialog = lazyComponent(
   'ResourceShowUsageDialog',
 );
 
-const openResourceUsageDialog = (offeringUuid: string, resourceUuid: string) =>
+const openResourceUsageDialog = (resource: Resource) =>
   openModalDialog(ResourceShowUsageDialog, {
-    resolve: { offeringUuid, resourceUuid },
+    resolve: {
+      resource,
+    },
     size: 'lg',
   });
 
 interface ResourceUsageButton {
-  offeringUuid: string;
-  resourceUuid: string;
+  resource: Resource;
   openDialog(): void;
 }
 
@@ -39,7 +41,14 @@ const PureResourceUsageButton: FunctionComponent<ResourceUsageButton> = (
 const mapDispatchToProps = (dispatch, ownProps) => ({
   openDialog: () =>
     dispatch(
-      openResourceUsageDialog(ownProps.offeringUuid, ownProps.resourceUuid),
+      openResourceUsageDialog({
+        ...ownProps.resource,
+        offering_uuid:
+          ownProps.resource.offering_uuid ||
+          ownProps.resource.marketplace_offering_uuid,
+        resource_uuid:
+          ownProps.resource.uuid || ownProps.resource.marketplace_resource_uuid,
+      }),
     ),
 });
 
