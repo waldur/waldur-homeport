@@ -43,6 +43,30 @@ describe('Project creation dialog', () => {
         .click()
         .selectTheFirstOptionOfDropdown()
 
+        .selectDate()
+
+        // Submit form
+        .get('button')
+        .contains('Add project')
+        .click({ force: true })
+        .wait('@createProject')
+        .its('request.body')
+        .should('deep.equal', {
+          name: 'Internal OpenStack project',
+          description: 'Test project',
+          type: '/api/project-types/b4736efa2cc44777b4143463ba8f9bf8/',
+          end_date: '2021-03-28',
+        });
+    });
+  });
+
+  it('Validates optional fields', () => {
+    cy.wait(['@getTypes']).then(() => {
+      cy
+        // Enter project name
+        .get('input[name="name"]')
+        .type('Internal OpenStack project')
+
         // Submit form
         .get('button')
         .contains('Add project')
@@ -51,8 +75,6 @@ describe('Project creation dialog', () => {
         .its('request.body')
         .should('deep.equal', {
           name: 'Internal OpenStack project',
-          description: 'Test project',
-          type: '/api/project-types/b4736efa2cc44777b4143463ba8f9bf8/',
         });
     });
   });

@@ -13,6 +13,7 @@ declare global {
       openDropdownByLabelForce(value: string): Chainable;
       openWorkspaceSelector(): Chainable;
       selectTheFirstOptionOfDropdown(): Chainable;
+      selectDate(): Chainable;
       openSelectDialog(selectId: string, option: string): Chainable;
       buttonShouldBeDisabled(btnClass: string): Chainable;
       waitForSpinner(): Chainable;
@@ -66,6 +67,17 @@ Cypress.Commands.add('openDropdownByLabelForce', (label) => {
 
 Cypress.Commands.add('selectTheFirstOptionOfDropdown', () => {
   cy.get('*div[id^="react-select"]').first().click({ force: true }); // get ids which start with "react-select"
+});
+
+// Selects the first day of the last week of March 2021 which is March 28, 2021
+Cypress.Commands.add('selectDate', () => {
+  cy.clock(new Date(2021, 2, 31).getTime()); // March 31, 2021 timestamp
+  cy.get("input[placeholder='YYYY-MM-DD']")
+    .click()
+    .get(
+      '.date-picker-popover .popover-content tbody tr:last-child td:first-child',
+    )
+    .click();
 });
 
 Cypress.Commands.add('openWorkspaceSelector', () => {

@@ -1,13 +1,14 @@
 import { FunctionComponent } from 'react';
 import { compose } from 'redux';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
+import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { withTranslation } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { formatLongText } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -50,6 +51,12 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title: translate('Created'),
       render: ({ row }) => formatDateTime(row.created),
       orderField: 'created',
+    },
+    {
+      title: translate('End date'),
+      render: ({ row }) =>
+        row.end_date ? formatDate(row.end_date) : DASH_ESCAPE_CODE,
+      orderField: 'end_date',
     },
     {
       title: translate('Estimated cost'),
@@ -95,6 +102,7 @@ const TableOptions = {
       'created',
       'billing_price_estimate',
       'type_name',
+      'end_date',
     ];
 
     return filter;

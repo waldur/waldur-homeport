@@ -2308,6 +2308,9 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectUpdateForm.tsx
+#: src/project/ProjectsList.tsx
 msgid "End date"
 msgstr ""
 
@@ -7644,6 +7647,11 @@ msgstr ""
 
 #: src/issues/feedback/SupportFeedback.tsx
 msgid "Thank you for your response!"
+msgstr ""
+
+#: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectUpdateForm.tsx
+msgid "The date is inclusive. Once reached, all project resource will be scheduled for termination."
 msgstr ""
 
 #: src/invoices/store/effects.ts
