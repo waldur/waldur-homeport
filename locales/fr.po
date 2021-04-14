@@ -1040,5 +1040,8 @@ msgstr "Durée garantie de conservation des instantanés de volume. Si null - co
 msgid "Guest OS"
 msgstr "OS invité"
 
+msgid "HPA"
+msgstr "HPA"
+
 msgid "(VAT is not included)"
 msgstr "(La TVA n'est pas incluse)"
