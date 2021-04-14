@@ -19,7 +19,7 @@ import { showSuccess, showError } from '@waldur/store/notify';
 
 import { BookingModal } from '../modal/BookingModal';
 
-import { defaultOptions } from './defaultOptions';
+import { getDefaultOptions } from './defaultConfig';
 import './Calendar.scss';
 import './styles';
 
@@ -154,7 +154,16 @@ export const LazyCalendarComponent: FC<CalendarComponentProps> = (props) => {
 
   const calendarMountEffect = () => {
     const cal = new Calendar(elRef.current, {
-      ...defaultOptions,
+      ...getDefaultOptions(),
+      handleWindowResize: true,
+      progressiveEventRendering: true,
+      lazyFetching: false,
+      eventLimit: 6,
+      views: {
+        agenda: {
+          eventLimit: 3,
+        },
+      },
       ...props.options,
       eventClick,
       editable: !isCalType('read'),
