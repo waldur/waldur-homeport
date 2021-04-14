@@ -479,7 +479,6 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: src/booking/components/calendar/defaultConfig.ts
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "All day"
@@ -1787,10 +1786,6 @@ msgstr ""
 
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Date of reporting"
-msgstr ""
-
-#: src/booking/components/calendar/defaultConfig.ts
-msgid "Day"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/actions/DeactivateAction.tsx
@@ -3861,7 +3856,6 @@ msgstr ""
 msgid "Mobile phone number"
 msgstr ""
 
-#: src/booking/components/calendar/defaultConfig.ts
 #: src/providers/support/FlowMapFilter.tsx
 msgid "Month"
 msgstr ""
@@ -3872,10 +3866,6 @@ msgstr ""
 
 #: src/customer/payment-profiles/utils.ts
 msgid "Monthly invoices"
-msgstr ""
-
-#: src/booking/components/calendar/defaultConfig.ts
-msgid "More"
 msgstr ""
 
 #: src/invoices/events/InvoiceEventItem.tsx
@@ -7916,7 +7906,6 @@ msgstr ""
 msgid "To report an issue, please send an email to {supportEmail}."
 msgstr ""
 
-#: src/booking/components/calendar/defaultConfig.ts
 #: src/booking/components/modal/DateAndTimeSelect.tsx
 msgid "Today"
 msgstr ""
@@ -9548,10 +9537,6 @@ msgstr ""
 msgid "Website URL"
 msgstr ""
 
-#: src/booking/components/calendar/defaultConfig.ts
-msgid "Week"
-msgstr ""
-
 #: src/auth/AuthHeader.tsx
 #: src/auth/AuthInit.tsx
 msgid "Welcome to {pageTitle}!"
@@ -9814,7 +9799,6 @@ msgstr ""
 msgid "databases"
 msgstr ""
 
-#: src/booking/components/calendar/defaultOptions.ts
 #: src/form/CronField.tsx
 msgid "day"
 msgstr ""
@@ -9905,7 +9889,6 @@ msgstr ""
 msgid "minute"
 msgstr ""
 
-#: src/booking/components/calendar/defaultOptions.ts
 #: src/form/CronField.tsx
 msgid "month"
 msgstr ""
@@ -10095,10 +10078,6 @@ msgstr ""
 msgid "till"
 msgstr ""
 
-#: src/booking/components/calendar/defaultOptions.ts
-msgid "today"
-msgstr ""
-
 #: src/user/support/utils.ts
 msgid "token will not timeout"
 msgstr ""
@@ -10151,7 +10130,6 @@ msgstr ""
 msgid "volumes"
 msgstr ""
 
-#: src/booking/components/calendar/defaultOptions.ts
 #: src/form/CronField.tsx
 msgid "week"
 msgstr ""

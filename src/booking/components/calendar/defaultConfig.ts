@@ -1,51 +1,43 @@
+import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { OptionsInput } from '@fullcalendar/core';
+import allLocales from '@fullcalendar/core/locales-all';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
+import momentPlugin from '@fullcalendar/moment';
+import momentTimezonePlugin from '@fullcalendar/moment-timezone';
+import timeGridPlugin from '@fullcalendar/timegrid';
 
-import { translate } from '@waldur/i18n';
+import { LanguageUtilsService } from '@waldur/i18n/LanguageUtilsService';
 
-export const defaultConfig: OptionsInput = {
-  defaultView: 'dayGridMonth',
-  themeSystem: 'bootstrap',
-  height: 'auto',
-  titleFormat: {
-    month: 'short',
-    year: 'numeric',
-    day: 'numeric',
-  },
-  views: {
-    week: {
-      columnHeaderFormat: 'ddd D/M',
+export const getDefaultOptions = () =>
+  ({
+    plugins: [
+      dayGridPlugin,
+      timeGridPlugin,
+      interactionPlugin,
+      bootstrapPlugin,
+      momentTimezonePlugin,
+      momentPlugin,
+      listPlugin,
+    ],
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay',
     },
-  },
-  timeZone: 'local', //'UTC',
-  firstDay: 1,
-  editable: false,
-  selectable: true,
-  eventOverlap: false,
-  eventResizableFromStart: true,
-  eventLimit: false,
-  slotEventOverlap: false,
-  showNonCurrentDates: true,
-  eventLimitText: translate('More'),
-  header: {
-    left: 'prev,next today',
-    center: 'title',
-    right: 'dayGridMonth,timeGridWeek,timeGridDay',
-  },
-
-  slotLabelFormat: 'H:mm',
-  allDayHtml: translate('All day'),
-  fixedWeekCount: false,
-  eventTimeFormat: {
-    hour: 'numeric',
-    minute: '2-digit',
-    meridiem: 'short',
-    hour12: false,
-    omitZeroMinute: true,
-  },
-  buttonText: {
-    today: translate('Today'),
-    dayGridMonth: translate('Month'),
-    timeGridWeek: translate('Week'),
-    timeGridDay: translate('Day'),
-  },
-};
+    eventTimeFormat: {
+      hour: 'numeric',
+      minute: '2-digit',
+      meridiem: 'short',
+      hour12: false,
+      omitZeroMinute: true,
+    },
+    themeSystem: 'bootstrap',
+    timeZone: 'local',
+    firstDay: 1,
+    fixedWeekCount: false,
+    slotEventOverlap: false,
+    locale: LanguageUtilsService.getCurrentLanguage().code,
+    locales: allLocales,
+  } as OptionsInput);
