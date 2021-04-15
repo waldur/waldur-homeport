@@ -52,11 +52,10 @@ describe('OpenStack Volume detail view', () => {
       .click({ force: true })
 
       .log('Select an option of Instance field')
-      .get('label')
-      .contains('Instance')
-      .next()
-      .children()
-      .select('visualizevirtualparadigms')
+      .get('div[class$="placeholder"]')
+      .first()
+      .click()
+      .selectTheFirstOptionOfDropdown()
 
       .log('Submit the form')
       .get('button[type=submit]')

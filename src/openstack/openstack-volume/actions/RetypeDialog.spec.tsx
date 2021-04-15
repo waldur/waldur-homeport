@@ -1,5 +1,6 @@
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
+import Select from 'react-select';
 
 import { updateWrapper } from '@waldur/core/testUtils';
 import * as api from '@waldur/openstack/api';
@@ -71,7 +72,10 @@ describe('RetypeDialog', () => {
     const wrapper = mountDialog();
     await updateWrapper(wrapper);
     expect(
-      wrapper.find('select option').map((option) => option.text()),
+      wrapper
+        .find(Select)
+        .prop('options')
+        .map((option) => option.label),
     ).toEqual(['prod (HPC production HDD)', 'scratch (IOPS intensive SSD)']);
   });
 
@@ -80,10 +84,7 @@ describe('RetypeDialog', () => {
     apiMock.retypeVolume.mockResolvedValue(null);
     const wrapper = mountDialog();
     await updateWrapper(wrapper);
-    wrapper
-      .find('select')
-      .at(0)
-      .simulate('change', { target: { value: 'prod' } });
+    wrapper.find(Select).instance()['select'].selectOption({ value: 'prod' });
 
     wrapper.find('form').simulate('submit');
     expect(apiMock.retypeVolume).toBeCalledWith(resource.uuid, {
