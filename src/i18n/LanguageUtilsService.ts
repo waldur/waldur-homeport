@@ -10,6 +10,12 @@ function getLocaleData(locale) {
   return import(`json-loader!po-loader?format=mf!../../locales/${locale}.po`);
 }
 
+function loadMomentLocale(locale: string) {
+  return import(`moment/locale/${locale}.js`).then(() => {
+    moment.locale(locale);
+  });
+}
+
 class LanguageUtilsServiceClass {
   currentLanguage: LanguageOption;
   dictionary: Record<string, string> = {};
@@ -24,7 +30,7 @@ class LanguageUtilsServiceClass {
     getLocaleData(language.code).then((mod) => {
       this.dictionary = mod.default;
     });
-    moment.locale(language.code);
+    loadMomentLocale(language.code);
     Axios.defaults.headers.common['Accept-Language'] = language.code;
   }
 
