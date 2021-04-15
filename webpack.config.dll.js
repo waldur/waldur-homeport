@@ -32,11 +32,6 @@ module.exports = {
   },
 
   plugins: [
-    // Moment locales extraction
-    new webpack.ContextReplacementPlugin(
-      /moment[/\\]locale$/,
-      /(az|en-gb|et|ru|lt|lv)/,
-    ),
     new webpack.DllPlugin({
       // The path to the manifest file which maps between
       // modules included in a bundle and the internal IDs
