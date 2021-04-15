@@ -32,11 +32,29 @@ msgstr "En engangsavgift påløper ved aktivering."
 msgid "A profile has been created."
 msgstr "En profil er opprettet."
 
+msgid "Abbreviation"
+msgstr "Forkortelse"
+
+msgid "Accept"
+msgstr "Godta"
+
 msgid "Accept booking"
 msgstr "Godta bestilling"
 
+msgid "Accept invitation"
+msgstr "Godta invitasjon"
+
+msgid "Accepted"
+msgstr "Godtatt"
+
+msgid "Access"
+msgstr "Tilgang"
+
 msgid "Access subnets"
 msgstr "Få tilgang til delnett"
+
+msgid "Access token"
+msgstr "Tilgangstoken"
 
 msgid "Accessible to all customers."
 msgstr "Tilgjengelig for alle kunder."
@@ -49,6 +67,9 @@ msgstr "Kontoen er aktivert."
 
 msgid "Account removal"
 msgstr "Fjerning av konto"
+
+msgid "Accounting"
+msgstr "Regnskap"
 
 msgid "Accounting period"
 msgstr "Regnskapsperiode"
@@ -74,20 +95,47 @@ msgstr "Regnskapstype"
 msgid "Action has been applied."
 msgstr "Handling har blitt brukt."
 
+msgid "Actions"
+msgstr "Handlinger"
+
+msgid "Activate"
+msgstr "Aktiver"
+
+msgid "Activating"
+msgstr "Aktivere"
+
 msgid "Activation price"
 msgstr "Aktiveringspris"
+
+msgid "Active"
+msgstr "Aktiv"
 
 msgid "Active count"
 msgstr "Aktivtall"
 
+msgid "Active plans"
+msgstr "Aktive planer"
+
 msgid "Active user will be able to login into the portal."
 msgstr "Aktiv bruker vil kunne logge inn på portalen."
+
+msgid "Activity stream"
+msgstr "Aktivitetsstrøm"
+
+msgid "Add"
+msgstr "Legg til"
 
 msgid "Add SSH key"
 msgstr "Legg til SSH-nøkkel"
 
 msgid "Add Waldur user SSH keys to the FreeIPA profile"
 msgstr "Legg til Waldur-bruker-SSH-nøkler i FreeIPA-profilen"
+
+msgid "Add address"
+msgstr "Legg til adresse"
+
+msgid "Add comment"
+msgstr "Legg til kommentar"
 
 msgid "Add component"
 msgstr "Legg til komponent"
@@ -98,8 +146,20 @@ msgstr "Legg til datavolum"
 msgid "Add environment variable"
 msgstr "Legg til miljøvariabel"
 
+msgid "Add image"
+msgstr "Legg til bilde"
+
+msgid "Add item"
+msgstr "Legg til element"
+
 msgid "Add key"
 msgstr "Legg til nøkkel"
+
+msgid "Add member"
+msgstr "Legg til medlem"
+
+msgid "Add new"
+msgstr "Legg til ny"
 
 msgid "Add new offering"
 msgstr "Legg til nytt tilbud"
@@ -110,11 +170,20 @@ msgstr "Legg til ny organisasjon"
 msgid "Add new project"
 msgstr "Legg til nytt prosjekt"
 
+msgid "Add notification"
+msgstr "Legg til varsling"
+
 msgid "Add offering"
 msgstr "Legg til tilbud"
 
+msgid "Add organization"
+msgstr "Legg til organisasjon"
+
 msgid "Add pair"
 msgstr "Legg til par"
+
+msgid "Add payment"
+msgstr "Legg til betaling"
 
 msgid "Add payment profile"
 msgstr "Legg til betalingsprofil"
@@ -122,11 +191,20 @@ msgstr "Legg til betalingsprofil"
 msgid "Add plan"
 msgstr "Legg til plan"
 
+msgid "Add project"
+msgstr "Legg til prosjekt"
+
 msgid "Add project member"
 msgstr "Legg til prosjektmedlem"
 
 msgid "Add resource"
 msgstr "Legg til ressurs"
+
+msgid "Add route"
+msgstr "Legg til rute"
+
+msgid "Add rule"
+msgstr "Legg til regel"
 
 msgid "Add security group"
 msgstr "Legg til sikkerhetsgruppe"
@@ -137,8 +215,14 @@ msgstr "Legg til teammedlem"
 msgid "Add to a new namespace"
 msgstr "Legg til i et nytt navneområde"
 
+msgid "Add to cart"
+msgstr "Legg til handlekurv"
+
 msgid "Add to comparison"
 msgstr "Legg til sammenligning"
+
+msgid "Add user"
+msgstr "Legg til bruker"
 
 msgid "Add user input field"
 msgstr "Legg til brukerinndatafelt"
@@ -155,11 +239,20 @@ msgstr "Ekstra plass som skal brukes på lagringskvote som skal brukes av øyebl
 msgid "Additionally service provider can charge for usage of the following components"
 msgstr "I tillegg kan tjenesteleverandøren ta betalt for bruk av følgende komponenter"
 
+msgid "Address"
+msgstr "Adresse"
+
+msgid "Admin password"
+msgstr "Administratorpassord"
+
 msgid "Admin username"
 msgstr "Administrator brukernavn"
 
 msgid "Affected resource"
 msgstr "Berørt ressurs"
+
+msgid "Affiliations"
+msgstr "Tilhørighet"
 
 msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
 msgstr "Etter at hemmelig API-kode er regenerert, vil det ikke være mulig å sende inn bruk med den gamle nøkkelen."
@@ -169,6 +262,15 @@ msgstr "Enig med ToS"
 
 msgid "Agreement number"
 msgstr "Avtalenummer"
+
+msgid "Alert"
+msgstr "Varsel"
+
+msgid "All"
+msgstr "Alle"
+
+msgid "All day"
+msgstr "Hele dagen"
 
 msgid "All resources have been imported."
 msgstr "Alle ressurser er importert."
@@ -191,11 +293,32 @@ msgstr "Tillat bare å aktivere/deaktivere komponent"
 msgid "Allowed address pairs update was scheduled."
 msgstr "Oppdatering av tillatte adressepar var planlagt."
 
+msgid "Already have an account?"
+msgstr "Har du allerede en konto?"
+
+msgid "Amount"
+msgstr "Beløp"
+
+msgid "An error has occurred."
+msgstr "Det har oppstått en feil."
+
 msgid "An error occurred on project removal."
 msgstr "Det oppstod en feil ved fjerning av prosjektet."
 
+msgid "Annotations"
+msgstr "Merknader"
+
+msgid "Answer"
+msgstr "Svar"
+
+msgid "Answers"
+msgstr "Svar"
+
 msgid "Answers have been submitted"
 msgstr "Svar er sendt"
+
+msgid "Any"
+msgstr "Enhver"
 
 msgid "Application catalogues"
 msgstr "Applikasjonskataloger"
@@ -211,6 +334,12 @@ msgstr "Søknaden er opprettet."
 
 msgid "Application templates"
 msgstr "Programmaler"
+
+msgid "Applications"
+msgstr "Programmer"
+
+msgid "Apply"
+msgstr "Bruke"
 
 msgid "Approve payment"
 msgstr "Godkjenn betaling"
@@ -542,6 +671,9 @@ msgstr "Bekreftelsesvarselmal"
 msgid "Confirming that data is correct"
 msgstr "Bekrefte at dataene er korrekte"
 
+msgid "Connect subnet"
+msgstr "Koble til delnett"
+
 msgid "Connected subnets"
 msgstr "Tilkoblede delnett"
 
@@ -769,6 +901,9 @@ msgstr "Deaktiver gateway IP-annonsering via DHCP"
 
 msgid "Disable profile"
 msgstr "Deaktiver profil"
+
+msgid "Disconnect subnet"
+msgstr "Koble fra delnett"
 
 msgid "Disk extension has been scheduled."
 msgstr "Diskutvidelse er planlagt."
@@ -1520,6 +1655,9 @@ msgstr "MAC-adresse (valgfritt)"
 msgid "MTU"
 msgstr "MTU"
 
+msgid "Manage avatar at {link}"
+msgstr "Administrere avatar på {link}"
+
 msgid "Manage networks"
 msgstr "Administrer nettverk"
 
@@ -2168,6 +2306,9 @@ msgstr "Fremført av"
 msgid "Periods"
 msgstr "Perioder"
 
+msgid "Permission has been revoked."
+msgstr "Tillatelse er tilbakekalt."
+
 msgid "Permissions log"
 msgstr "Tillatelseslogg"
 
@@ -2525,5 +2666,2207 @@ msgstr "Rekordnummer"
 msgid "Record period"
 msgstr "Rekordperiode"
 
+msgid "Redeploy"
+msgstr "Omplasser"
+
+msgid "Referral count"
+msgstr "Henvisningstall"
+
+msgid "Referrals for {name}"
+msgstr "Henvisninger for {name}"
+
+msgid "Regenerate"
+msgstr "Regenerere"
+
+msgid "Region name"
+msgstr "Navn på region"
+
+msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
+msgstr "Registrer deg som kunde av vår portal og leverandør dine skytjenester via Marketplace."
+
+msgid "Register as service provider"
+msgstr "Registrer deg som tjenesteleverandør"
+
+msgid "Register organization as service provider and remove organization."
+msgstr "Registrer organisasjonen som tjenesteleverandør og fjern organisasjonen."
+
+msgid "Register to"
+msgstr "Registrer deg for"
+
+msgid "Register with {label}"
+msgstr "Registrer deg hos {label}"
+
+msgid "Registered at:"
+msgstr "Registrert på:"
+
+msgid "Registration code"
+msgstr "Registreringskode"
+
+msgid "Registration method"
+msgstr "Registreringsmetode"
+
+msgid "Registry code"
+msgstr "Registerkode"
+
+msgid "Regular expression to limit flavors list"
+msgstr "Regelmessig uttrykk for å begrense smakslisten"
+
+msgid "Regular user"
+msgstr "Vanlig bruker"
+
+msgid "Release floating IPs"
+msgstr "Frigi flytende IPer"
+
+msgid "Reload issue data"
+msgstr "Last inn problemdata på nytt"
+
+msgid "Remote CIDR"
+msgstr "Ekstern CIDR"
+
+msgid "Remote Waldur API URL"
+msgstr "Ekstern Waldur API-URL"
+
+msgid "Remote accounts"
+msgstr "Eksterne kontoer"
+
+msgid "Remote accounts are used for accessing external services you have access to."
+msgstr "Eksterne kontoer brukes til å få tilgang til eksterne tjenester du har tilgang til."
+
+msgid "Remote category"
+msgstr "Ekstern kategori"
+
+msgid "Remote offering"
+msgstr "Eksternt tilbud"
+
+msgid "Remote security group"
+msgstr "Ekstern sikkerhetsgruppe"
+
+msgid "Remove from comparison"
+msgstr "Fjern fra sammenligning"
+
+msgid "Remove organization"
+msgstr "Fjern organisasjon"
+
+msgid "Remove profile"
+msgstr "Fjern profil"
+
+msgid "Removed organizations cannot be restored!"
+msgstr "Fjernede organisasjoner kan ikke gjenopprettes!"
+
+msgid "Removing organization {organizationName}"
+msgstr "Fjerner organisasjonen {organizationName}"
+
+msgid "Removing the organization will delete all related resources."
+msgstr "Hvis du fjerner organisasjonen, slettes alle relaterte ressurser."
+
+msgid "Report a security incident"
+msgstr "Rapporter en sikkerhetshendelse"
+
+msgid "Report details"
+msgstr "Rapporter detaljer"
+
+msgid "Report has been submitted"
+msgstr "Rapporten er sendt"
+
+msgid "Report incorrect data"
+msgstr "Rapporter uriktige data"
+
+msgid "Report is invalid."
+msgstr "Rapporten er ugyldig."
+
+msgid "Report usage"
+msgstr "Rapporter bruk"
+
+msgid "Reported by me"
+msgstr "Rapportert av meg"
+
+msgid "Reported value is reused every month until changed."
+msgstr "Rapportert verdi brukes på nytt hver måned til den endres."
+
+msgid "Reporter"
+msgstr "Reporter"
+
+msgid "Request-based item"
+msgstr "Forespørselsbasert element"
+
+msgid "Request-based item (without Service Desk)"
+msgstr "Forespørselsbasert element (uten Service Desk)"
+
+msgid "Request account removal for {userName}."
+msgstr "Be om fjerning av konto for {userName}."
+
+msgid "Request demo"
+msgstr "Be om demo"
+
+msgid "Request description"
+msgstr "Be om beskrivelse"
+
+msgid "Request detail"
+msgstr "Be om detaljer"
+
+msgid "Request direct access"
+msgstr "Be om direkte tilgang"
+
+msgid "Request direct access to OpenStack Tenant"
+msgstr "Be om direkte tilgang til OpenStack Tenant"
+
+msgid "Request direct access to {name}"
+msgstr "Be om direkte tilgang til {name}"
+
+msgid "Request editing"
+msgstr "Be om redigering"
+
+msgid "Request for a change"
+msgstr "Forespørsel om endring"
+
+msgid "Request for a termination"
+msgstr "Forespørsel om oppsigelse"
+
+msgid "Request publishing"
+msgstr "Be om publisering"
+
+msgid "Request removal"
+msgstr "Be om fjerning"
+
+msgid "Request title"
+msgstr "Be om tittel"
+
+msgid "Request type"
+msgstr "Forespørselstype"
+
+msgid "Request {mode} of Public Offering"
+msgstr "Be om {mode} av Offentlig Tilbud"
+
+msgid "Request {mode} of {name}"
+msgstr "Be om {mode} av {name}"
+
+msgid "Request {requestId} has been created."
+msgstr "Forespørsel {requestId} er opprettet."
+
+msgid "Requested e-mail"
+msgstr "Forespurt e-post"
+
+msgid "Requested email"
+msgstr "Forespurt e-post"
+
+msgid "Requesting of new resources has been temporarily paused"
+msgstr "Forespørselen om nye ressurser er midlertidig satt på pause"
+
+msgid "Reserved slot"
+msgstr "Reservert spor"
+
+msgid "Reserved slot by {name}"
+msgstr "Reservert slot av {name}"
+
+msgid "Resize droplet"
+msgstr "Endre størrelse på slippverktøy"
+
+msgid "Resource"
+msgstr "Ressurs"
+
+msgid "Resource UUID"
+msgstr "Ressurs UUID"
+
+msgid "Resource already has this plan."
+msgstr "Ressursen har allerede denne planen."
+
+msgid "Resource configuration"
+msgstr "Resource konfigurasjon"
+
+msgid "Resource configuration is invalid. Please fix errors in form."
+msgstr "Resurskonfigurasjonen er ugyldig. Vennligst reparer feil i skjemaet."
+
+msgid "Resource deletion has been scheduled."
+msgstr "Ressurssletting er planlagt."
+
+msgid "Resource description"
+msgstr "Ressurs beskrivelse"
+
+msgid "Resource details"
+msgstr "Ressurs detaljer"
+
+msgid "Resource does not have any plan."
+msgstr "Ressursen har ingen plan."
+
+msgid "Resource does not have backend ID."
+msgstr "Ressursen har ikke backend-ID."
+
+msgid "Resource does not have plan."
+msgstr "Ressurs har ikke plan."
+
+msgid "Resource events"
+msgstr "Ressurs hendelser"
+
+msgid "Resource group"
+msgstr "Ressurs gruppe"
+
+msgid "Resource is in sync"
+msgstr "Ressurs er synkronisert"
+
+msgid "Resource is not connected to the marketplace yet."
+msgstr "Ressursen er ikke koblet til markedsplassen ennå."
+
+msgid "Resource limits change request has been submitted."
+msgstr "Forespørsel om endring av ressursgrenser er sendt."
+
+msgid "Resource link"
+msgstr "Ressurs kobling"
+
+msgid "Resource name"
+msgstr "Ressursnavn"
+
+msgid "Resource plan change request has been submitted."
+msgstr "Forespørsel om endring av ressursplan er sendt."
+
+msgid "Resource schedule is already activated."
+msgstr "Ressursplan er allerede aktivert."
+
+msgid "Resource schedule is already deactivated."
+msgstr "Ressursplan er allerede deaktivert."
+
+msgid "Resource termination request has been submitted."
+msgstr "Forespørsel om ressursavslutning er sendt."
+
+msgid "Resource usage"
+msgstr "Ressurs bruk"
+
+msgid "Resource usage for {resource}"
+msgstr "Ressursbruk for {resource}"
+
+msgid "Resources import has failed."
+msgstr "Import av ressurser har mislyktes."
+
+msgid "Resources represent the services you are using."
+msgstr "Ressurser representerer tjenestene du bruker."
+
+msgid "Resources usage"
+msgstr "Ressursbruk"
+
+msgid "Restore virtual machine from backup {name}"
+msgstr "Gjenopprett virtuell maskin fra sikkerhetskopien {name}"
+
+msgid "Restore volume snapshot"
+msgstr "Gjenopprett volum øyeblikksbildet"
+
+msgid "Restored volumes"
+msgstr "Gjenopprettede volumer"
+
+msgid "Restricted, because of type."
+msgstr "Begrenset, på grunn av type."
+
+msgid "Restroing"
+msgstr "Restrierende"
+
+msgid "Retention time"
+msgstr "Oppbevaringstid"
+
+msgid "Retention time in days, if 0 - resource will be kept forever"
+msgstr "Oppbevaringstid i dager, hvis 0 - ressurs vil bli holdt for alltid"
+
+msgid "Retype OpenStack Volume"
+msgstr "Skriv inn OpenStack-volumet på nytt"
+
+msgid "Review has been closed."
+msgstr "Gjennomgangen er avsluttet."
+
+msgid "Review has been performed."
+msgstr "Gjennomgangen er utført."
+
+msgid "Role expires on"
+msgstr "Rollen utløper den"
+
+msgid "Role in project"
+msgstr "Roll i prosjekt"
+
+msgid "Role management events"
+msgstr "Rollestyringshendelser"
+
+msgid "Routers"
+msgstr "Rutere"
+
+msgid "Rule count"
+msgstr "Regel teller"
+
+msgid "Running accounting"
+msgstr "Kjører regnskap"
+
+msgid "Runtime state"
+msgstr "Kjøretidstilstand"
+
+msgid "SAML2 single logout has been started. Please wait until it completes."
+msgstr "SAML2-enkeltavlogging er startet. Vent til den er fullført."
+
+msgid "SLURM allocation"
+msgstr "SLURM-tildeling"
+
+msgid "SLURM allocation usage"
+msgstr "Bruk av SLURM-tildeling"
+
+msgid "SQL database has been created."
+msgstr "SQL-databasen er opprettet."
+
+msgid "SQL server description"
+msgstr "SQL server beskrivelse"
+
+msgid "SQL server name"
+msgstr "SQL-servernavn"
+
+msgid "SSH Keys"
+msgstr "SSH-nøkler"
+
+msgid "SSH key"
+msgstr "SSH-nøkkel"
+
+msgid "SSH key has been removed."
+msgstr "SSH-nøkkel er fjernet."
+
+msgid "SSH key management events"
+msgstr "SSH-nøkkelbehandlingshendelser"
+
+msgid "SSH key {ssh_key_name} has been created for user {user_link}"
+msgstr "SSH-nøkkel {ssh_key_name} er opprettet for brukeren {user_link}"
+
+msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
+msgstr "SSH-nøkkel {ssh_key_name} er slettet for brukeren {user_link}"
+
+msgid "SSH public key"
+msgstr "SSH offentlig nøkkel"
+
+msgid "Sankey diagram"
+msgstr "Sankey-diagram"
+
+msgid "Schedules are invalid."
+msgstr "Tidsplaner er ugyldige."
+
+msgid "Script for creation of a resource"
+msgstr "Skript for opprettelse av en ressurs"
+
+msgid "Script for regular update of resource and its accounting"
+msgstr "Skript for regelmessig oppdatering av ressursen og dens regnskap"
+
+msgid "Script for termination of a resource"
+msgstr "Skript for avslutning av en ressurs"
+
+msgid "Script for updating a resource on plan change"
+msgstr "Skript for oppdatering av en ressurs på planendring"
+
+msgid "Script language"
+msgstr "Skriptspråk"
+
+msgid "Search for offerings..."
+msgstr "Søk etter tilbud..."
+
+msgid "Security group creation has been scheduled."
+msgstr "Oppretting av sikkerhetsgruppe er planlagt."
+
+msgid "Security group does not contain any rule yet."
+msgstr "Sikkerhetsgruppen inneholder ingen regel ennå."
+
+msgid "Security group rules update has been scheduled."
+msgstr "Oppdatering av regler for sikkerhetsgruppe er planlagt."
+
+msgid "Security groups"
+msgstr "Sikkerhetsgrupper"
+
+msgid "Security groups details"
+msgstr "Detaljer for sikkerhetsgrupper"
+
+msgid "Security incident date: {date}"
+msgstr "Dato for sikkerhetshendelse: {date}"
+
+msgid "Security incident type: {type}"
+msgstr "Sikkerhetshendelsestype: {type}"
+
+msgid "Seems there's nothing here"
+msgstr "Ser ut til at det ikke er noe her"
+
+msgid "Seems you don't have any public resources yet"
+msgstr "Ser ut til at du ikke har noen offentlige ressurser ennå"
+
+msgid "Seems you don't have any resources yet"
+msgstr "Ser ut til at du ikke har noen ressurser ennå"
+
+msgid "Segmentation ID"
+msgstr "Segmenterings-ID"
+
+msgid "Select accounting period"
+msgstr "Velg regnskapsperiode"
+
+msgid "Select affected resource..."
+msgstr "Velg berørt ressurs..."
+
+msgid "Select affiliation"
+msgstr "Velg tilknytning"
+
+msgid "Select assignee..."
+msgstr "Velg tilordnet..."
+
+msgid "Select available weekdays"
+msgstr "Velg tilgjengelige hverdager"
+
+msgid "Select caller..."
+msgstr "Velg oppringer..."
+
+msgid "Select connected subnet"
+msgstr "Velg tilkoblet delnett"
+
+msgid "Select division..."
+msgstr "Velg divisjon..."
+
+msgid "Select division type..."
+msgstr "Velg divisjonstype..."
+
+msgid "Select evaluation..."
+msgstr "Velg evaluering..."
+
+msgid "Select incident type"
+msgstr "Velg hendelsestype"
+
+msgid "Select instance..."
+msgstr "Velg forekomst..."
+
+msgid "Select issue template..."
+msgstr "Velg problemmal..."
+
+msgid "Select offering..."
+msgstr "Velg tilbud..."
+
+msgid "Select offerings..."
+msgstr "Velg tilbud..."
+
+msgid "Select organization roles"
+msgstr "Velg organisasjonsroller"
+
+msgid "Select organizations..."
+msgstr "Velg organisasjoner..."
+
+msgid "Select project roles"
+msgstr "Velg prosjektroller"
+
+msgid "Select provider..."
+msgstr "Velg leverandør..."
+
+msgid "Select request type..."
+msgstr "Velg forespørselstype..."
+
+msgid "Select security groups..."
+msgstr "Velg sikkerhetsgrupper..."
+
+msgid "Select service provider"
+msgstr "Velg tjenesteleverandør"
+
+msgid "Select service provider..."
+msgstr "Velg tjenesteleverandør..."
+
+msgid "Select some files"
+msgstr "Velg noen filer"
+
+msgid "Select subnet"
+msgstr "Velg delnett"
+
+msgid "Select subnets to connect to..."
+msgstr "Velg delnett du vil koble til..."
+
+msgid "Select tenant..."
+msgstr "Velg leier..."
+
+msgid "Select tenants..."
+msgstr "Velg leiere..."
+
+msgid "Select workspace"
+msgstr "Velg arbeidsområde"
+
+msgid "Service Request"
+msgstr "Serviceforespørsel"
+
+msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
+msgstr "Tjenesteforespørsel - klientens forespørsel om å endre, legge til, endre eller fjerne helt eller delvis en bestemt tjeneste."
+
+msgid "Service provider API secret code has been generated."
+msgstr "Tjenesteleverandør API-hemmelig kode er generert."
+
+msgid "Service provider can charge for usage of the following components"
+msgstr "Tjenesteleverandøren kan ta betalt for bruk av følgende komponenter"
+
+msgid "Service provider can report up to the requested amount over the whole active state of resource."
+msgstr "Tjenesteleverandøren kan rapportere opptil det forespurte beløpet over hele den aktive ressursstatusen."
+
+msgid "Service provider details"
+msgstr "Tjenesteleverandørinformasjon"
+
+msgid "Service provider has been registered."
+msgstr "Tjenesteleverandøren er registrert."
+
+msgid "Service provider type"
+msgstr "Type tjenesteleverandør"
+
+msgid "Service settings are invalid."
+msgstr "Tjenesteinnstillingene er ugyldige."
+
+msgid "Service settings of this resource are in state erred."
+msgstr "Tjenesteinnstillingene for denne ressursen er i tilstands feil."
+
+msgid "Set MTU"
+msgstr "Sett MTU"
+
+msgid "Set allowed address pairs"
+msgstr "Angi tillatte adressepar"
+
+msgid "Set backend ID"
+msgstr "Angi backend-ID"
+
+msgid "Set rules"
+msgstr "Angi regler"
+
+msgid "Set rules in {name} security group"
+msgstr "Angi regler i {name} sikkerhetsgruppe"
+
+msgid "Set static routes"
+msgstr "Angi statiske ruter"
+
+msgid "Set to draft"
+msgstr "Sett til utkast"
+
+msgid "Set to true to activate privilege escalation"
+msgstr "Sett til sann for å aktivere rettighetseskalering"
+
+msgid "Shared providers"
+msgstr "Delte leverandører"
+
+msgid "Shopping cart is empty. You should add items to cart first."
+msgstr "Handlekurven er tom. Du bør legge til varer i handlekurven først."
+
+msgid "Shopping cart item has been updated."
+msgstr "Handlekurvvaren er oppdatert."
+
+msgid "Shopping cart item update"
+msgstr "Handlekurv element oppdatering"
+
+msgid "Show chart"
+msgstr "Vis diagram"
+
+msgid "Show choices"
+msgstr "Vis valg"
+
+msgid "Show console log"
+msgstr "Vis konsolllogg"
+
+msgid "Show diff"
+msgstr "Vis diff"
+
+msgid "Show events"
+msgstr "Vis hendelser"
+
+msgid "Show private"
+msgstr "Vis privat"
+
+msgid "Show request"
+msgstr "Vis forespørsel"
+
+msgid "Show shared"
+msgstr "Vis delt"
+
+msgid "Show usage"
+msgstr "Vis bruk"
+
+msgid "Show user details"
+msgstr "Vis brukerdetaljer"
+
+msgid "Show with running accounting"
+msgstr "Vis med løpende regnskap"
+
+msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
+msgstr "Viser {sliceStart} til {sliceEnd} av {resultCount} oppføringer."
+
+msgid "Size name"
+msgstr "Størrelsesnavn"
+
+msgid "Size should be between 1 and 10240 GB."
+msgstr "Størrelsen må være mellom 1 og 10240 GB."
+
+msgid "Skip connection to external network"
+msgstr "Hopp over tilkobling til eksternt nettverk"
+
+msgid "Skip floating IP assignment"
+msgstr "Hopp over flytende IP-tilordning"
+
+msgid "Snapshot schedule for volume has been created."
+msgstr "Tidsplan for øyeblikksbilde for volum er opprettet."
+
+msgid "Snapshot schedules"
+msgstr "Tidsplaner for øyeblikksbilde"
+
+msgid "Snapshot size limit"
+msgstr "Størrelsesgrense for øyeblikksbilde"
+
+msgid "Snapshots"
+msgstr "Øyeblikksbilder"
+
+msgid "Snapshots count"
+msgstr "Antall øyeblikksbilder"
+
+msgid "Sponsor number"
+msgstr "Sponsornummer"
+
+msgid "Staff and Support user"
+msgstr "Bruker av personale og støtte"
+
+msgid "Start day of accounting"
+msgstr "Startdag for regnskap"
+
+msgid "Static routes update was scheduled."
+msgstr "Oppdatering av statiske ruter ble planlagt."
+
+msgid "Step 1. Select offering"
+msgstr "Trinn 1. Velg tilbud"
+
+msgid "Step 2. Select resources"
+msgstr "Trinn 2. Velg ressurser"
+
+msgid "Storage size"
+msgstr "Lagringsstørrelse"
+
+msgid "Storage size in GiB"
+msgstr "Lagringsstørrelse i GiB"
+
+msgid "Submit usage report"
+msgstr "Send inn bruksrapport"
+
+msgid "Submit with"
+msgstr "Send inn med"
+
+msgid "Subnet"
+msgstr "Delnett"
+
+msgid "Subnet CIDR"
+msgstr "CIDR for delnett"
+
+msgid "Subnet has been created."
+msgstr "Delnett er opprettet."
+
+msgid "Subnet name"
+msgstr "Delnettnavn"
+
+msgid "Subnets"
+msgstr "Delnett"
+
+msgid "Subnets from where connection to self-service is allowed."
+msgstr "Delnett fra hvor tilkobling til selvbetjening er tillatt."
+
+msgid "Subscription ID"
+msgstr "Abonnements-ID"
+
+msgid "Sum"
+msgstr "Sum"
+
+msgid "Support dashboard"
+msgstr "Instrumentbord for støtte"
+
+msgid "Support request events"
+msgstr "Hendelser for støtteforespørsel"
+
+msgid "Support user"
+msgstr "Støtte bruker"
+
+msgid "Support workspace"
+msgstr "Støtte arbeidsområde"
+
+msgid "Sure? Form data would be lost"
+msgstr "Sikker? Skjemadata ville gå tapt"
+
+msgid "Sync profile"
+msgstr "Synkroniser profil"
+
+msgid "Sync with Google Calendar"
+msgstr "Synkroniser med Google Kalender"
+
+msgid "Synchronisation has been scheduled."
+msgstr "Synkronisering er planlagt."
+
+msgid "System administrator"
+msgstr "Systemadministrator"
+
+msgid "System volume couldn't be detached."
+msgstr "Systemvolumet kunne ikke kobles fra."
+
+msgid "System volume size"
+msgstr "Systemets volumstørrelse"
+
+msgid "System volume type"
+msgstr "Systemvolumtype"
+
+msgid "TLD \"{tld}\" must not be all numeric"
+msgstr "TLD \"{tld}\" kan ikke være alle numeriske"
+
+msgid "Taking a snapshot"
+msgstr "Ta et øyeblikksbilde"
+
+msgid "Tax number"
+msgstr "Skattenummer"
+
+msgid "Tax percent"
+msgstr "Mva-prosent"
+
+msgid "Team member has been removed."
+msgstr "Teammedlemmet er fjernet."
+
+msgid "Technical code used by accounting software."
+msgstr "Teknisk kode som brukes av regnskap programvare."
+
+msgid "Technical name intended for integration and automated reporting. Please use Latin letters without spaces only."
+msgstr "Teknisk navn beregnet til integration og automatiseret rapportering. Vennligst bruk latinske bokstaver uten mellomrom."
+
+msgid "Template files"
+msgstr "Mal filer"
+
+msgid "Tenant"
+msgstr "Leietaker"
+
+msgid "Tenant ID"
+msgstr "Leietaker ID"
+
+msgid "Tenant description"
+msgstr "Leietakerbeskrivelse"
+
+msgid "Tenant name"
+msgstr "Leietakernavn"
+
+msgid "Tenant user password"
+msgstr "Leietaker brukerpassord"
+
+msgid "Tenant user username"
+msgstr "Brukernavn for leietaker"
+
+msgid "Terminate an existing resource"
+msgstr "Avslutte en eksisterende ressurs"
+
+msgid "Terminate resource {resourceName}"
+msgstr "Avslutt ressurs {resourceName}"
+
+msgid "Terminated"
+msgstr "Avsluttet"
+
+msgid "Terminating"
+msgstr "Avslutte"
+
+msgid "Text has been copied"
+msgstr "Teksten har blitt kopiert"
+
+msgid "Thank you for your response!"
+msgstr "Takk for svaret ditt!"
+
+msgid "The date is inclusive. Once reached, all project resource will be scheduled for termination."
+msgstr "Datoen er inkluderende. Når den er nådd, planlegges all prosjektressurs for avslutning."
+
+msgid "The invoice has been marked as paid."
+msgstr "Fakturaen er merket som betalt."
+
+msgid "The key has been created."
+msgstr "Nøkkelen er opprettet."
+
+msgid "The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number"
+msgstr "Navnet kan bare inneholde bokstaver, tall og bindestreker. Det skal starte med et brev og skal ende med et bogstav eller et tal"
+
+msgid "The name can only be made up of lowercase letters, numbers and the hyphen. The hyphen may not lead or trail in the name."
+msgstr "Navnet kan bare bestå av små bokstaver, tall og bindestrek. Bindestreken kan ikke lede eller spore i navnet."
+
+msgid "The name must be shorter than 15 characters."
+msgstr "Navnet må være kortere enn 15 tegn."
+
+msgid "The project will be changed for all items in cart."
+msgstr "Prosjektet vil bli endret for alle varer i handlekurven."
+
+msgid "The value is not valid IP v4 CIDR"
+msgstr "Verdien er ikke gyldig IP v4 CIDR"
+
+msgid "The value is not valid IP v6 CIDR"
+msgstr "Verdien er ikke gyldig IP v6 CIDR"
+
+msgid "The worker node is expected to have at least 4 vCPU and 4 GB RAM to run Longhorn."
+msgstr "Arbeider-noden forventes å ha minst 4 vCPU og 4 GB RAM for å kjøre Longhorn."
+
+msgid "Then download (if needed) and run kubectl"
+msgstr "Deretter laster du ned (om nødvendig) og kjører kubectl"
+
+msgid "There are no SSH keys yet."
+msgstr "Det er ingen SSH-nøkler ennå."
+
+msgid "There are no actions."
+msgstr "Det er ingen handlinger."
+
+msgid "There are no available projects."
+msgstr "Det finnes ingen tilgjengelige prosjekter."
+
+msgid "There are no available users."
+msgstr "Det finnes ingen tilgjengelige brukere."
+
+msgid "There are no categories."
+msgstr "Det er ingen kategorier."
+
+msgid "There are no categories in marketplace yet."
+msgstr "Det er ingen kategorier på markedsplassen ennå."
+
+msgid "There are no categories yet."
+msgstr "Det er ingen kategorier ennå."
+
+msgid "There are no charts yet."
+msgstr "Det er ingen diagrammer ennå."
+
+msgid "There are no checklist yet."
+msgstr "Det er ingen sjekkliste ennå."
+
+msgid "There are no checklists."
+msgstr "Det er ingen sjekklister."
+
+msgid "There are no comments yet."
+msgstr "Det er ingen kommentarer ennå."
+
+msgid "There are no events for this resource."
+msgstr "Det er ingen hendelser for denne ressursen."
+
+msgid "There are no invoices."
+msgstr "Det er ingen fakturaer."
+
+msgid "There are no matching checklists."
+msgstr "Det finnes ingen samsvarende sjekklister."
+
+msgid "There are no offerings available."
+msgstr "Det er ingen tilbud tilgjengelig."
+
+msgid "There are no offerings in marketplace yet."
+msgstr "Det er ingen tilbud på markedsplassen ennå."
+
+msgid "There are no offerings yet."
+msgstr "Det er ingen tilbud ennå."
+
+msgid "There are no organizations matching filter."
+msgstr "Det finnes ingen organisasjoner som samsvarer med filter."
+
+msgid "There are no organizations yet."
+msgstr "Det er ingen organisasjoner ennå."
+
+msgid "There are no other plans available."
+msgstr "Det er ingen andre planer tilgjengelig."
+
+msgid "There are no other volume types available."
+msgstr "Det finnes ingen andre volumtyper tilgjengelig."
+
+msgid "There are no projects matching filter."
+msgstr "Det finnes ingen prosjekter som samsvarer med filter."
+
+msgid "There are no projects yet for this organization."
+msgstr "Det er ingen prosjekter ennå for denne organisasjonen."
+
+msgid "There are no remote accounts yet."
+msgstr "Det er ingen eksterne kontoer ennå."
+
+msgid "There are no requests yet."
+msgstr "Det er ingen forespørsler ennå."
+
+msgid "There are no resources available."
+msgstr "Det er ingen tilgjengelige ressurser."
+
+msgid "There are no resources yet."
+msgstr "Det er ingen ressurser ennå."
+
+msgid "There are no sections for comparison yet."
+msgstr "Det er ingen seksjoner for sammenligning ennå."
+
+msgid "There are no {verboseName} found matching the filter."
+msgstr "Det er ingen {verboseName} funnet som samsvarer med filteret."
+
+msgid "There are no {verboseName} yet."
+msgstr "Det er ingen {verboseName} ennå."
+
+msgid "There are not namespaces in this project yet."
+msgstr "Det er ikke navneområder i dette prosjektet ennå."
+
+msgid "There is no activity yet."
+msgstr "Det er ingen aktivitet ennå."
+
+msgid "This name will be visible in accounting data."
+msgstr "Dette navnet vil være synlig i regnskapsdata."
+
+msgid "This value is invalid JSON."
+msgstr "Denne verdien er ugyldig JSON."
+
+msgid "This website uses cookies to ensure you get the best experience on our website."
+msgstr "Dette nettstedet bruker informasjonskapsler for å sikre at du får den beste opplevelsen på nettstedet vårt."
+
+msgid "Time in progress"
+msgstr "Tid pågår"
+
+msgid "Time slot"
+msgstr "Tidsluke"
+
+msgid "Time slot has been added."
+msgstr "Tidsluke er lagt til."
+
+msgid "Time slots"
+msgstr "Tidsluker"
+
+msgid "To correct details of your organization, please send an email to {supportEmail} highlighting the errors in current details. Thank you!"
+msgstr "Hvis du vil korrigere detaljene i organisasjonen, kan du sende en e-post til {supportEmail} som uthever feilene i gjeldende detaljer. Takk!"
+
+msgid "To get access, please send a request to {supportEmail}."
+msgstr "Hvis du vil ha tilgang, kan du sende en forespørsel til {supportEmail}."
+
+msgid "To get your clouds under control, please fill in your data."
+msgstr "Fyll ut dataene dine for å få skyene under kontroll."
+
+msgid "To port"
+msgstr "Til port"
+
+msgid "To remove account, please send a request to {support}."
+msgstr "Hvis du vil fjerne kontoen, sender du en forespørsel til {support}."
+
+msgid "To remove your organization, please send an email to {supportEmail}. Thank you!"
+msgstr "Hvis du vil fjerne organisasjonen, sender du en e-post til {supportEmail}. Takk!"
+
+msgid "To report a security incident, please send an email to {supportEmail}."
+msgstr "Hvis du vil rapportere en sikkerhetshendelse, sender du en e-post til {supportEmail}."
+
+msgid "To report an issue, please send an email to {supportEmail}."
+msgstr "Hvis du vil rapportere et problem, kan du sende en e-post til {supportEmail}."
+
+msgid "Total CPU"
+msgstr "Total CPU"
+
+msgid "Total CPU hours consumed this month"
+msgstr "Totalt antall CPU-timer som forbrukes denne måneden"
+
+msgid "Total GPU hours consumed this month"
+msgstr "Totalt antall GPU-timer brukt denne måneden"
+
+msgid "Total RAM GB-hours consumed this month"
+msgstr "Total RAM GB-timer forbrukt denne måneden"
+
+msgid "Total number of nodes"
+msgstr "Totalt antall noder"
+
+msgid "Total storage limit is exceeded"
+msgstr "Total lagringsgrense er overskredet"
+
+msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
+msgstr "Spor ved hjelp av UTC-tidssone, som vises med nettleserens tidssone."
+
+msgid "Type is invalid."
+msgstr "Typen er ugyldig."
+
+msgid "Type of incident"
+msgstr "Type hendelse"
+
+msgid "UUID"
+msgstr "UUID"
+
+msgid "Unable to accept booking."
+msgstr "Kan ikke godta bestilling."
+
+msgid "Unable to activate account."
+msgstr "Kan ikke aktivere konto."
+
+msgid "Unable to activate user."
+msgstr "Kan ikke aktivere bruker."
+
+msgid "Unable to add image."
+msgstr "Kan ikke legge til bilde."
+
+msgid "Unable to add item to shopping cart."
+msgstr "Kan ikke legge til vare i handlekurven."
+
+msgid "Unable to apply action."
+msgstr "Kan ikke bruke handling."
+
+msgid "Unable to approve invitation."
+msgstr "Kan ikke godkjenne invitasjon."
+
+msgid "Unable to approve order."
+msgstr "Kan ikke godkjenne bestillingen."
+
+msgid "Unable to approve order item."
+msgstr "Kan ikke godkjenne ordreelement."
+
+msgid "Unable to attach volume."
+msgstr "Kan ikke koble til volum."
+
+msgid "Unable to attach volume to instance."
+msgstr "Kan ikke knytte volum til forekomst."
+
+msgid "Unable to authenticate using Mobile ID."
+msgstr "Kan ikke autentisere ved hjelp av mobil ID."
+
+msgid "Unable to bootstrap application."
+msgstr "Kan ikke starte opp programmet."
+
+msgid "Unable to cancel booking."
+msgstr "Kan ikke kansellere bestillingen."
+
+msgid "Unable to cancel invitation."
+msgstr "Kan ikke avbryte invitasjonen."
+
+msgid "Unable to cancel order item."
+msgstr "Kan ikke annullere ordreelement."
+
+msgid "Unable to cancel request."
+msgstr "Kan ikke avbryte forespørselen."
+
+msgid "Unable to change email."
+msgstr "Kan ikke endre e-post."
+
+msgid "Unable to change flavor."
+msgstr "Kan ikke endre smak."
+
+msgid "Unable to close review."
+msgstr "Kan ikke lukke gjennomgang."
+
+msgid "Unable to confirm email."
+msgstr "Kan ikke bekrefte e-post."
+
+msgid "Unable to create OpenStack networks."
+msgstr "Kan ikke opprette OpenStack-nettverk."
+
+msgid "Unable to create SQL database."
+msgstr "Kan ikke opprette SQL-database."
+
+msgid "Unable to create VM snapshot."
+msgstr "Kan ikke opprette øyeblikksbilde av VM."
+
+msgid "Unable to create VM snapshot schedule."
+msgstr "Kan ikke opprette tidsplan for øyeblikksbilde av VM."
+
+msgid "Unable to create a FreeIPA profile."
+msgstr "Kan ikke opprette en FreeIPA-profil."
+
+msgid "Unable to create application."
+msgstr "Kan ikke opprette program."
+
+msgid "Unable to create catalog."
+msgstr "Kan ikke opprette katalog."
+
+msgid "Unable to create disk."
+msgstr "Kan ikke opprette disk."
+
+msgid "Unable to create horizontal pod autoscaler."
+msgstr "Kan ikke opprette horisontal pod autoscaler."
+
+msgid "Unable to create key."
+msgstr "Kan ikke opprette nøkkel."
+
+msgid "Unable to create node."
+msgstr "Kan ikke opprette node."
+
+msgid "Unable to create notification."
+msgstr "Kan ikke opprette varsling."
+
+msgid "Unable to create notifications."
+msgstr "Kan ikke opprette varslinger."
+
+msgid "Unable to create offering."
+msgstr "Kan ikke opprette tilbud."
+
+msgid "Unable to create payment."
+msgstr "Kan ikke opprette betaling."
+
+msgid "Unable to create payment profile."
+msgstr "Kan ikke opprette betalingsprofil."
+
+msgid "Unable to create port."
+msgstr "Kan ikke opprette port."
+
+msgid "Unable to create request."
+msgstr "Kan ikke opprette forespørsel."
+
+msgid "Unable to create security group."
+msgstr "Kan ikke opprette sikkerhetsgruppe."
+
+msgid "Unable to create snapshot schedule."
+msgstr "Kan ikke opprette tidsplan for øyeblikksbilde."
+
+msgid "Unable to create subnet."
+msgstr "Kan ikke opprette delnett."
+
+msgid "Unable to create volume snapshot."
+msgstr "Kan ikke opprette volumøyeblikksbilde."
+
+msgid "Unable to deactivate user."
+msgstr "Kan ikke deaktivere bruker."
+
+msgid "Unable to delete attachment."
+msgstr "Kan ikke slette vedlegg."
+
+msgid "Unable to delete catalog."
+msgstr "Kan ikke slette katalogen."
+
+msgid "Unable to delete instance."
+msgstr "Kan ikke slette forekomst."
+
+msgid "Unable to delete payment."
+msgstr "Kan ikke slette betaling."
+
+msgid "Unable to delete resource."
+msgstr "Kan ikke slette ressurs."
+
+msgid "Unable to delete team member."
+msgstr "Kan ikke slette teammedlem."
+
+msgid "Unable to destroy instance."
+msgstr "Kan ikke ødelegge forekomst."
+
+msgid "Unable to disable FreeIPA profile."
+msgstr "Kan ikke deaktivere FreeIPA-profil."
+
+msgid "Unable to edit comment."
+msgstr "Kan ikke redigere kommentar."
+
+msgid "Unable to enable FreeIPA profile."
+msgstr "Kan ikke aktivere FreeIPA-profil."
+
+msgid "Unable to enable payment profile."
+msgstr "Kan ikke aktivere betalingsprofil."
+
+msgid "Unable to extend disk."
+msgstr "Kan ikke utvide disken."
+
+msgid "Unable to extend volume."
+msgstr "Kan ikke utvide volumet."
+
+msgid "Unable to fetch attachment."
+msgstr "Kan ikke hente vedlegg."
+
+msgid "Unable to fetch comments."
+msgstr "Kan ikke hente kommentarer."
+
+msgid "Unable to fetch current user."
+msgstr "Kan ikke hente gjeldende bruker."
+
+msgid "Unable to fetch data."
+msgstr "Kan ikke hente data."
+
+msgid "Unable to generate service provider API secret code."
+msgstr "Kan ikke generere API-hemmelig kode for tjenesteleverandør."
+
+msgid "Unable to get form's data."
+msgstr "Kan ikke hente skjemadata."
+
+msgid "Unable to get order item."
+msgstr "Kan ikke hente bestillingselement."
+
+msgid "Unable to get service provider API secret code."
+msgstr "Kan ikke hente hemmelig kode for tjenesteleverandøren API."
+
+msgid "Unable to grant permission."
+msgstr "Kan ikke gi tillatelse."
+
+msgid "Unable to import YAML."
+msgstr "Kan ikke importere YAML."
+
+msgid "Unable to import remote offering."
+msgstr "Kan ikke importere eksternt tilbud."
+
+msgid "Unable to initialize shopping cart."
+msgstr "Kan ikke initialisere handlekurven."
+
+msgid "Unable to link instance."
+msgstr "Kan ikke koble forekomst."
+
+msgid "Unable to link invoice to the payment."
+msgstr "Kan ikke koble faktura til betalingen."
+
+msgid "Unable to load actions"
+msgstr "Kan ikke laste inn handlinger"
+
+msgid "Unable to load application template details."
+msgstr "Kan ikke laste inn detaljer om programmal."
+
+msgid "Unable to load booked items."
+msgstr "Kan ikke laste inn bestilte varer."
+
+msgid "Unable to load booking offerings."
+msgstr "Kan ikke laste inn bestillingstilbud."
+
+msgid "Unable to load category sections."
+msgstr "Kan ikke laste inn kategoriseksjoner."
+
+msgid "Unable to load charts."
+msgstr "Kan ikke laste inn diagrammer."
+
+msgid "Unable to load checklists."
+msgstr "Kan ikke laste inn sjekklister."
+
+msgid "Unable to load compliance overview."
+msgstr "Kan ikke laste inn samsvarsoversikt."
+
+msgid "Unable to load customer."
+msgstr "Kan ikke laste inn kunden."
+
+msgid "Unable to load customer support satisfaction overall rating."
+msgstr "Kan ikke laste inn generell vurdering av kundestøttetilfredshet."
+
+msgid "Unable to load detail."
+msgstr "Kan ikke laste inn detaljer."
+
+msgid "Unable to load editor"
+msgstr "Kan ikke laste inn redigeringsprogram"
+
+msgid "Unable to load events for this resource."
+msgstr "Kan ikke laste inn hendelser for denne ressursen."
+
+msgid "Unable to load file."
+msgstr "Kan ikke laste inn filen."
+
+msgid "Unable to load financial overview."
+msgstr "Kan ikke laste inn økonomisk oversikt."
+
+msgid "Unable to load form options."
+msgstr "Kan ikke laste inn skjemaalternativer."
+
+msgid "Unable to load growth chart."
+msgstr "Kan ikke laste vekstdiagram."
+
+msgid "Unable to load invoices"
+msgstr "Kan ikke laste inn fakturaer"
+
+msgid "Unable to load locations."
+msgstr "Kan ikke laste inn plasseringer."
+
+msgid "Unable to load marketplace categories."
+msgstr "Kan ikke laste inn markedsplasskategorier."
+
+msgid "Unable to load marketplace category details"
+msgstr "Kan ikke laste inn detaljer om markedsplasskategorier"
+
+msgid "Unable to load marketplace offering details."
+msgstr "Kan ikke laste inn detaljer om markedsplasstilbud."
+
+msgid "Unable to load marketplace offerings."
+msgstr "Kan ikke laste inn markedsplasstilbud."
+
+msgid "Unable to load offering."
+msgstr "Kan ikke laste inn tilbud."
+
+msgid "Unable to load offering cost chart."
+msgstr "Kan ikke laste inn tilbudskostdiagram."
+
+msgid "Unable to load offering details."
+msgstr "Kan ikke laste inn tilbudsdetaljer."
+
+msgid "Unable to load offerings"
+msgstr "Kan ikke laste inn tilbud"
+
+msgid "Unable to load order details."
+msgstr "Kan ikke laste inn bestillingsdetaljer."
+
+msgid "Unable to load organization resources."
+msgstr "Kan ikke laste inn organisasjonsressurser."
+
+msgid "Unable to load organizations"
+msgstr "Kan ikke laste inn organisasjoner"
+
+msgid "Unable to load pending orders."
+msgstr "Kan ikke laste inn ventende ordrer."
+
+msgid "Unable to load plan details."
+msgstr "Kan ikke laste inn plandetaljer."
+
+msgid "Unable to load project resources."
+msgstr "Kan ikke laste inn prosjektressurser."
+
+msgid "Unable to load project types."
+msgstr "Kan ikke laste inn prosjekttyper."
+
+msgid "Unable to load provider details."
+msgstr "Kan ikke laste inn leverandørdetaljer."
+
+msgid "Unable to load questions and answers."
+msgstr "Kan ikke laste inn spørsmål og svar."
+
+msgid "Unable to load resource."
+msgstr "Kan ikke laste inn ressurs."
+
+msgid "Unable to load sections for comparison."
+msgstr "Kan ikke laste inn inndelinger for sammenligning."
+
+msgid "Unable to load service provider."
+msgstr "Kan ikke laste inn tjenesteleverandør."
+
+msgid "Unable to load service providers."
+msgstr "Kan ikke laste inn tjenesteleverandører."
+
+msgid "Unable to load tenant."
+msgstr "Kan ikke laste inn leier."
+
+msgid "Unable to load tenant data."
+msgstr "Kan ikke laste inn leierdata."
+
+msgid "Unable to load user."
+msgstr "Kan ikke laste inn bruker."
+
+msgid "Unable to load user monthly activity data."
+msgstr "Kan ikke laste inn månedlige aktivitetsdata for bruker."
+
+msgid "Unable to login via SAML2 protocol."
+msgstr "Kan ikke logge på via SAML2-protokollen."
+
+msgid "Unable to mark the invoice as paid."
+msgstr "Kan ikke merke fakturaen som betalt."
+
+msgid "Unable to open console."
+msgstr "Kan ikke åpne konsollen."
+
+msgid "Unable to open console. Error message: {message}"
+msgstr "Kan ikke åpne konsollen. Feilmelding: {message}"
+
+msgid "Unable to open console log"
+msgstr "Kan ikke åpne konsolllogg"
+
+msgid "Unable to perform review."
+msgstr "Kan ikke utføre gjennomgang."
+
+msgid "Unable to post comment."
+msgstr "Kan ikke legge inn kommentar."
+
+msgid "Unable to process payment."
+msgstr "Kan ikke behandle betaling."
+
+msgid "Unable to publish Google Calendar."
+msgstr "Kan ikke publisere Google Kalender."
+
+msgid "Unable to register service provider."
+msgstr "Kan ikke registrere tjenesteleverandør."
+
+msgid "Unable to reject invitation."
+msgstr "Kan ikke avvise invitasjon."
+
+msgid "Unable to reject order."
+msgstr "Kan ikke avvise ordre."
+
+msgid "Unable to reject order item."
+msgstr "Kan ikke avvise bestillingsvare."
+
+msgid "Unable to remove SSH key."
+msgstr "Kan ikke fjerne SSH-nøkkel."
+
+msgid "Unable to remove hook."
+msgstr "Kan ikke fjerne krok."
+
+msgid "Unable to remove image."
+msgstr "Kan ikke fjerne bilde."
+
+msgid "Unable to remove item from shopping cart."
+msgstr "Kan ikke fjerne vare fra handlekurven."
+
+msgid "Unable to remove logo."
+msgstr "Kan ikke fjerne logoen."
+
+msgid "Unable to remove payment profile."
+msgstr "Kan ikke fjerne betalingsprofilen."
+
+msgid "Unable to report security incident."
+msgstr "Kan ikke rapportere sikkerhetshendelse."
+
+msgid "Unable to resend invitation."
+msgstr "Kan ikke sende invitasjon på nytt."
+
+msgid "Unable to resize droplet."
+msgstr "Kan ikke endre størrelsen på slippverktøy."
+
+msgid "Unable to restore VM snapshot."
+msgstr "Kan ikke gjenopprette øyeblikksbilde av VM."
+
+msgid "Unable to restore volume snapshot."
+msgstr "Kan ikke gjenopprette volumøyeblikksbilde."
+
+msgid "Unable to retype volume."
+msgstr "Kan ikke skrive volum på nytt."
+
+msgid "Unable to revoke permission."
+msgstr "Kan ikke tilbakekalle tillatelsen."
+
+msgid "Unable to save location."
+msgstr "Kan ikke lagre plassering."
+
+msgid "Unable to save user."
+msgstr "Kan ikke lagre bruker."
+
+msgid "Unable to send feedback."
+msgstr "Kan ikke sende tilbakemelding."
+
+msgid "Unable to send record notification."
+msgstr "Kan ikke sende postvarsling."
+
+msgid "Unable to set backend ID."
+msgstr "Kan ikke angi backend-ID."
+
+msgid "Unable to show console log."
+msgstr "Kan ikke vise konsolllogg."
+
+msgid "Unable to submit answers."
+msgstr "Kan ikke sende inn svar."
+
+msgid "Unable to submit empty comment."
+msgstr "Kan ikke sende inn tom kommentar."
+
+msgid "Unable to submit limits change request."
+msgstr "Kan ikke sende inn forespørsel om endring av grenser."
+
+msgid "Unable to submit order."
+msgstr "Kan ikke sende inn bestillingen."
+
+msgid "Unable to submit plan change request."
+msgstr "Kan ikke sende inn forespørsel om planendring."
+
+msgid "Unable to submit report."
+msgstr "Kan ikke sende rapport."
+
+msgid "Unable to submit resource termination request."
+msgstr "Kan ikke sende forespørsel om avslutning av ressurs."
+
+msgid "Unable to submit usage report."
+msgstr "Kan ikke sende bruksrapport."
+
+msgid "Unable to sync FreeIPA profile."
+msgstr "Kan ikke synkronisere FreeIPA-profil."
+
+msgid "Unable to sync Google Calendar."
+msgstr "Kan ikke synkronisere Google Kalender."
+
+msgid "Unable to synchronise resource."
+msgstr "Kan ikke synkronisere ressursen."
+
+msgid "Unable to unlink instance from node."
+msgstr "Kan ikke koble forekomst fra noden."
+
+msgid "Unable to unlink invoice from the payment."
+msgstr "Kan ikke fjerne tilknytningen til fakturaen fra betalingen."
+
+msgid "Unable to unpublish Google Calendar."
+msgstr "Kan ikke oppheve publiseringen av Google Kalender."
+
+msgid "Unable to update YAML."
+msgstr "Kan ikke oppdatere YAML."
+
+msgid "Unable to update allowed address pairs."
+msgstr "Kan ikke oppdatere tillatte adressepar."
+
+msgid "Unable to update enabled checklists."
+msgstr "Kan ikke oppdatere aktiverte sjekklister."
+
+msgid "Unable to update floating IPs."
+msgstr "Kan ikke oppdatere flytende IPer."
+
+msgid "Unable to update horizontal pod autoscaler."
+msgstr "Kan ikke oppdatere horisontal pod autoscaler."
+
+msgid "Unable to update internal IPs of OpenStack instance."
+msgstr "Kan ikke oppdatere interne IPer for OpenStack-forekomst."
+
+msgid "Unable to update network MTU."
+msgstr "Kan ikke oppdatere nettverket MTU."
+
+msgid "Unable to update notification."
+msgstr "Kan ikke oppdatere varsling."
+
+msgid "Unable to update offering"
+msgstr "Kan ikke oppdatere tilbudet"
+
+msgid "Unable to update offering state."
+msgstr "Kan ikke oppdatere tilbudstilstanden."
+
+msgid "Unable to update organization."
+msgstr "Kan ikke oppdatere organisasjonen."
+
+msgid "Unable to update payment."
+msgstr "Kan ikke oppdatere betalingen."
+
+msgid "Unable to update payment profile."
+msgstr "Kan ikke oppdatere betalingsprofilen."
+
+msgid "Unable to update provider."
+msgstr "Kan ikke oppdatere leverandøren."
+
+msgid "Unable to update security group rules."
+msgstr "Kan ikke oppdatere regler for sikkerhetsgruppe."
+
+msgid "Unable to update security groups of OpenStack instance."
+msgstr "Kan ikke oppdatere sikkerhetsgrupper for OpenStack-forekomst."
+
+msgid "Unable to update shopping cart item."
+msgstr "Kan ikke oppdatere handlekurven element."
+
+msgid "Unable to update static routes."
+msgstr "Kan ikke oppdatere statiske ruter."
+
+msgid "Unable to update user."
+msgstr "Kan ikke oppdatere brukeren."
+
+msgid "Unable to upload attachment."
+msgstr "Kan ikke laste opp vedlegg."
+
+msgid "Unable to upload logo."
+msgstr "Kan ikke laste opp logo."
+
+msgid "Unable to validate invitation token."
+msgstr "Kan ikke validere invitasjonstoken."
+
+msgid "Unexpected exception happened during login process."
+msgstr "Uventet unntak skjedde under påloggingsprosessen."
+
+msgid "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues."
+msgstr "Dessverre mislyktes tilkoblingen til serveren. Kontroller om du kan koble til {apiEndpoint} fra nettleseren og kontakte kundestøtte hvis feilen fortsetter."
+
+msgid "Unique ID of a resource created via Marketplace"
+msgstr "Unik ID for en ressurs opprettet via Marketplace"
+
+msgid "Unique ID of a resource in a backend system"
+msgstr "Unik ID for en ressurs i et backend-system"
+
+msgid "Unique ID of a resource within management plugin"
+msgstr "Unik ID for en ressurs innen administrasjonsplugin"
+
+msgid "Unlink instance"
+msgstr "Fjern kobling for forekomst"
+
+msgid "Unlink invoice"
+msgstr "Fjern kobling til faktura"
+
+msgid "Unpause"
+msgstr "Avpause"
+
+msgid "Unpublish as Google Calendar"
+msgstr "Fjern publiseringen som Google Kalender"
+
+msgid "Update floating IPs"
+msgstr "Oppdatere flytende IPer"
+
+msgid "Update floating IPs in {name} virtual machine"
+msgstr "Oppdater flytende IP-adresser i {name} virtuell maskin"
+
+msgid "Update horizontal pod autoscaler"
+msgstr "Oppdater horisontal pod autoscaler"
+
+msgid "Update internal IPs for OpenStack instance {name}"
+msgstr "Oppdater interne IP-er for OpenStack-forekomst {name}"
+
+msgid "Update limits for an existing resource"
+msgstr "Oppdatere grenser for en eksisterende ressurs"
+
+msgid "Update of OpenStack instance internal IPs has been scheduled."
+msgstr "Oppdatering av OpenStack-forekomst interne IPer er planlagt."
+
+msgid "Update of OpenStack instance security groups has been scheduled."
+msgstr "Oppdatering av sikkerhetsgrupper for OpenStack-forekomst er planlagt."
+
+msgid "Update payment"
+msgstr "Oppdatere betaling"
+
+msgid "Update payment profile"
+msgstr "Oppdatere betalingsprofil"
+
+msgid "Update plan for an existing resource"
+msgstr "Oppdatere planen for en eksisterende ressurs"
+
+msgid "Update project details"
+msgstr "Oppdatere prosjektdetaljer"
+
+msgid "Update security groups"
+msgstr "Oppdatere sikkerhetsgrupper"
+
+msgid "Update security groups for OpenStack instance {name}"
+msgstr "Oppdatere sikkerhetsgrupper for OpenStack-forekomst {name}"
+
+msgid "Update service settings"
+msgstr "Oppdatere tjenesteinnstillinger"
+
+msgid "Update static routes"
+msgstr "Oppdatere statiske ruter"
+
+msgid "Update your organization name, logo, accounting and contact details."
+msgstr "Oppdater organisasjonens navn, logo, regnskap og kontaktdetaljer."
+
+msgid "Updating floating IPs"
+msgstr "Oppdatere flytende IPer"
+
+msgid "Updating internal IPs"
+msgstr "Oppdatere interne IPer"
+
+msgid "Updating offering {name}"
+msgstr "Oppdaterer tilbudet {name}"
+
+msgid "Updating quotas"
+msgstr "Oppdatere kvoter"
+
+msgid "Updating rules"
+msgstr "Oppdatere regler"
+
+msgid "Updating security groups"
+msgstr "Oppdatere sikkerhetsgrupper"
+
+msgid "Upload new"
+msgstr "Last opp nye"
+
+msgid "Uptime"
+msgstr "Oppetid"
+
+msgid "Usage-based"
+msgstr "Bruksbasert"
+
+msgid "Usage information is not available."
+msgstr "Bruksinformasjon er ikke tilgjengelig."
+
+msgid "Usage overview"
+msgstr "Bruksoversikt"
+
+msgid "Usage report has been submitted."
+msgstr "Bruksrapporten er sendt inn."
+
+msgid "Usage reports"
+msgstr "Bruksrapporter"
+
+msgid "Usages"
+msgstr "Bruksområder"
+
+msgid "Use an existing namespace"
+msgstr "Bruke et eksisterende navneområde"
+
+msgid "Use sudo"
+msgstr "Bruk sudo"
+
+msgid "Used in the period {period} by:"
+msgstr "Brukes i perioden {period} av:"
+
+msgid "User could not been updated"
+msgstr "Brukeren kunne ikke oppdateres"
+
+msgid "User dashboard"
+msgstr "Instrumentbord for brukere"
+
+msgid "User details"
+msgstr "Brukerdetaljer"
+
+msgid "User events this month"
+msgstr "Brukerhendelser denne måneden"
+
+msgid "User has been activated."
+msgstr "Brukeren er aktivert."
+
+msgid "User has been deactivated."
+msgstr "Brukeren er deaktivert."
+
+msgid "User has been logged out. You will be redirected to the login page soon."
+msgstr "Brukeren er logget ut. Du vil snart bli omdirigert til innloggingssiden."
+
+msgid "User has been updated"
+msgstr "Brukeren har blitt oppdatert"
+
+msgid "User has been updated."
+msgstr "Brukeren har blitt oppdatert."
+
+msgid "User input field #{index}"
+msgstr "Inndatafelt for bruker #{index}"
+
+msgid "User management events"
+msgstr "Hendelser for brukeradministrasjon"
+
+msgid "User status"
+msgstr "Brukerstatus"
+
+msgid "User {affected_user_link} has been activated."
+msgstr "Bruker {affected_user_link} er aktivert."
+
+msgid "User {affected_user_link} has been created."
+msgstr "Bruker {affected_user_link} er opprettet."
+
+msgid "User {affected_user_link} has been deactivated."
+msgstr "Bruker {affected_user_link} er deaktivert."
+
+msgid "User {affected_user_name} has been deleted."
+msgstr "Bruker {affected_user_name} har blitt slettet."
+
+msgid "User {user_link} authenticated successfully with Facebook."
+msgstr "Bruker {user_link} godkjent med Facebook."
+
+msgid "User {user_link} authenticated successfully with SAML2."
+msgstr "Bruker {user_link} godkjent med SAML2."
+
+msgid "User {user_link} authenticated successfully with Smart ID EE."
+msgstr "Bruker {user_link} godkjent med Smart ID EE."
+
+msgid "User {user_link} authenticated successfully with username and password."
+msgstr "Bruker {user_link} godkjent med brukernavn og passord."
+
+msgid "User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}."
+msgstr "Bruker {user_link} har gitt organisasjonseierens rolle i {customer_link} til {affected_user_link}."
+
+msgid "User {user_link} has granted organization support role in {customer_link} to {affected_user_link}."
+msgstr "Bruker {user_link} har gitt støtte for organisasjonen i {customer_link} til {affected_user_link}."
+
+msgid "User {user_link} has granted project administrator role in project {project_link} to {affected_user_link}."
+msgstr "Bruker {user_link} har gitt prosjektadministratoren rolle i prosjektet {project_link} til {affected_user_link}."
+
+msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
+msgstr "Bruker {user_link} har gitt prosjektlederrolle i prosjektet {project_link} til {affected_user_link}."
+
+msgid "User {user_link} has granted role to {affected_user_link}."
+msgstr "Bruker {user_link} har gitt rolle til {affected_user_link}."
+
+msgid "User {user_link} has revoked organization owner {affected_user_link} from {customer_link}."
+msgstr "Bruker {user_link} har tilbakekalt organisasjonseier {affected_user_link} fra {customer_link}."
+
+msgid "User {user_link} has revoked organization support {affected_user_link} from {customer_link}."
+msgstr "Bruker {user_link} har opphevet støtte for organisasjonen {affected_user_link} fra {customer_link}."
+
+msgid "User {user_link} has revoked project administrator {affected_user_link} from project {project_link}."
+msgstr "Bruker {user_link} har tilbakekalt prosjektadministrator {affected_user_link} fra prosjektet {project_link}."
+
+msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
+msgstr "Bruker {user_link} har tilbakekalt prosjektleder {affected_user_link} fra prosjektet {project_link}."
+
+msgid "User {user_link} has revoked {affected_user_link}."
+msgstr "Bruker {user_link} har tilbakekalt {affected_user_link}."
+
+msgid "User {user_link} logged out successfully with SAML2."
+msgstr "Bruker {user_link} logget av med SAML2."
+
+msgid "Username prefix"
+msgstr "Brukernavn prefiks"
+
+msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
+msgstr "Brukernavn kan inneholde bokstaver (a-z), tall (0-9), bindestreker (-), understrekingstegn (_) og punktum (.)."
+
+msgid "VAT code"
+msgstr "MVA-kode"
+
+msgid "VAT is included"
+msgstr "MVA er inkludert"
+
+msgid "VM name"
+msgstr "VM-navn"
+
+msgid "VM snapshot"
+msgstr "VM øyeblikksbilde"
+
+msgid "VM snapshot has been created."
+msgstr "VM-øyeblikksbilde er opprettet."
+
+msgid "VM snapshot restoration has been scheduled."
+msgstr "Gjenoppretting av øyeblikksbilde av VM er planlagt."
+
+msgid "VM snapshot schedule"
+msgstr "Tidsplan for VM-øyeblikksbilde"
+
+msgid "VM snapshot schedule caveats"
+msgstr "VM øyeblikksbilde tidsplan forbehold"
+
+msgid "VM snapshot schedule has been created."
+msgstr "Tidsplan for VM-øyeblikksbilde er opprettet."
+
+msgid "VM snapshot schedules"
+msgstr "VM-øyeblikksbildeplaner"
+
+msgid "VM snapshots"
+msgstr "VM øyeblikksbilder"
+
+msgid "VM type overview"
+msgstr "VM-type oversikt"
+
+msgid "VMs"
+msgstr "VM-er"
+
+msgid "VMware Tools"
+msgstr "VMware-verktøy"
+
+msgid "VPC RAM"
+msgstr "VPC RAM"
+
+msgid "VPC block storage size"
+msgstr "Lagringsstørrelse for VPC blokk"
+
+msgid "VPC floating IP count"
+msgstr "VPC-flytende IP-antall"
+
+msgid "VPC instance count"
+msgstr "Antall VPC-forekomster"
+
+msgid "VPC vCPU"
+msgstr "VPC vCPU"
+
+msgid "Valid runtime states for operation: {validStates}."
+msgstr "Gyldige kjøretidstilstander for drift: {validStates}."
+
+msgid "Valid states for operation: {validStates}."
+msgstr "Gyldige tilstander for drift: {validStates}."
+
+msgid "Value should be positive integer"
+msgstr "Verdien skal være positivt heltall"
+
+msgid "Value should not be greater than {limit}."
+msgstr "Verdien bør ikke være større enn {limit}."
+
+msgid "Value should not be lesser than {limit}."
+msgstr "Verdien bør ikke være mindre enn {limit}."
+
+msgid "Value should not be negative."
+msgstr "Verdien bør ikke være negativ."
+
+msgid "Verifying email change"
+msgstr "Bekrefter endring av e-post"
+
+msgid "Very negative"
+msgstr "Veldig negativ"
+
+msgid "Very positive"
+msgstr "Veldig positiv"
+
+msgid "View YAML"
+msgstr "Vis YAML"
+
+msgid "Viewing image"
+msgstr "Vise bilde"
+
+msgid "Virtual machines"
+msgstr "Virtuelle maskiner"
+
+msgid "Virtual machines count"
+msgstr "Antall virtuelle maskiner"
+
+msgid "Volume has been attached to instance."
+msgstr "Volumet er knyttet til forekomst."
+
+msgid "Volume has been extended."
+msgstr "Volumet er utvidet."
+
+msgid "Volume has been retyped."
+msgstr "Volumet er skrevet inn på nytt."
+
+msgid "Volume name"
+msgstr "Volumnavn"
+
+msgid "Volume should be in OK state."
+msgstr "Volumet skal være i OK-tilstand."
+
+msgid "Volume size"
+msgstr "Volumstørrelse"
+
+msgid "Volume snapshot has been created."
+msgstr "Volum øyeblikksbilde er opprettet."
+
+msgid "Volume snapshot has been restored."
+msgstr "Volum øyeblikksbilde er gjenopprettet."
+
+msgid "Volume snapshots"
+msgstr "Volum øyeblikksbilder"
+
+msgid "Volume type"
+msgstr "Volumtype"
+
+msgid "Volume type storage limit is exceeded"
+msgstr "Volumtype lagringsgrense er overskredet"
+
+msgid "Volumes count"
+msgstr "Volum teller"
+
+msgid "Webhook"
+msgstr "Webhook"
+
+msgid "Website URL"
+msgstr "Nettstedets URL"
+
+msgid "Why do you need to remove organization with existing projects?"
+msgstr "Hvorfor trenger du å fjerne organisasjon med eksisterende prosjekter?"
+
+msgid "Why would you want to go away? Help us become better please!"
+msgstr "Hvorfor vil du reise bort? Hjelp oss å bli bedre vær så snill!"
+
+msgid "Worker"
+msgstr "Arbeideren"
+
+msgid "Workload"
+msgstr "Arbeidsmengde"
+
+msgid "Workloads"
+msgstr "Arbeidsbelastninger"
+
+msgid "Would you like to update your current email with the one from the invitation?"
+msgstr "Vil du oppdatere din nåværende e-post med den fra invitasjonen?"
+
+msgid "YAML has been imported."
+msgstr "YAML har blitt importert."
+
+msgid "YAML has been updated."
+msgstr "YAML har blitt oppdatert."
+
+msgid "Yes, use invitation email"
+msgstr "Ja, bruk invitasjon-e-post"
+
+msgid "You've either entered invalid URL or don't have enough permissions to view this page."
+msgstr "Du har enten angitt ugyldig URL-adresse eller har ikke nok tillatelser til å vise denne siden."
+
+msgid "You can create issue by pressing the button below"
+msgstr "Du kan opprette et problem ved å trykke på knappen nedenfor"
+
+msgid "You can find offerings to order in the marketplace"
+msgstr "Du kan finne tilbud du kan bestille på markedsplassen"
+
+msgid "You can register organization as a marketplace service provider by pressing the button below"
+msgstr "Du kan registrere organisasjon som markedsplassleverandør ved å trykke på knappen nedenfor"
+
+msgid "You can remove this organization by pressing the button"
+msgstr "Du kan fjerne denne organisasjonen ved å trykke på knappen"
+
+msgid "You can start filling this table by creating your first offering."
+msgstr "Du kan begynne å fylle denne tabellen ved å opprette ditt første tilbud."
+
+msgid "You cannot change your own role."
+msgstr "Du kan ikke endre din egen rolle."
+
+msgid "You cannot manage other organization owner."
+msgstr "Du kan ikke administrere andre organisasjonseiere."
+
+msgid "You do not belong to any organization yet"
+msgstr "Du tilhører ikke noen organisasjon ennå"
+
+msgid "You do not currently have any organizations."
+msgstr "Du har for øyeblikket ingen organisasjoner."
+
+msgid "You do not have any resources yet."
+msgstr "Du har ingen ressurser ennå."
+
+msgid "You don't have enough privileges to perform this operation."
+msgstr "Du har ikke nok rettigheter til å utføre denne operasjonen."
+
+msgid "You don't have permission to cancel this invitation."
+msgstr "Du har ikke tillatelse til å avbryte denne invitasjonen."
+
+msgid "You don't have permission to send this invitation."
+msgstr "Du har ikke tillatelse til å sende denne invitasjonen."
+
+msgid "You have entered data in form. When dialog is closed form data would be lost."
+msgstr "Du har skrevet inn data i skjema. Når dialogboksen er lukket, vil skjemadata gå tapt."
+
+msgid "You have exceeded maximum number of quotas."
+msgstr "Du har overskredet maksimalt antall kvoter."
+
+msgid "You have no quotas yet."
+msgstr "Du har ingen kvoter ennå."
+
+msgid "You have not added any SSH keys to your <Link>profile</Link>."
+msgstr "Du har ikke lagt til noen SSH-nøkler i <Link>profil</Link>."
+
+msgid "You have the right to purchase service without additional approval."
+msgstr "Du har rett til å kjøpe service uten ytterligere godkjenning."
+
+msgid "You haven't created any issues yet."
+msgstr "Du har ikke opprettet noen problemer ennå."
+
+msgid "You must agree with terms of service."
+msgstr "Du må godta vilkårene for bruk."
+
+msgid "You must be staff to modify payment profiles"
+msgstr "Du må være personale for å endre betalingsprofiler"
+
+msgid "You must be staff to modify payments"
+msgstr "Du må være stab for å endre betalinger"
+
+msgid "You need approval to finish purchasing of services."
+msgstr "Du trenger godkjenning for å fullføre innkjøp av tjenester."
+
+msgid "You will be redirected in a moment."
+msgstr "Du vil bli omdirigert om et øyeblikk."
+
+msgid "Your FreeIPA has been removed in FreeIPA server."
+msgstr "Din FreeIPA er fjernet i FreeIPA-server."
+
+msgid "Your FreeIPA has been synced successfully."
+msgstr "Din FreeIPA har blitt synkronisert."
+
+msgid "Your FreeIPA profile has been disabled."
+msgstr "FreeIPA-profilen din er deaktivert."
+
+msgid "Your FreeIPA profile has been enabled."
+msgstr "Din FreeIPA-profil er aktivert."
+
+msgid "Your account is not authorized to use this allocation"
+msgstr "Kontoen din er ikke autorisert til å bruke denne tildelingen"
+
+msgid "Your invitation is being processed."
+msgstr "Invitasjonen din blir behandlet."
+
+msgid "Your invitation was accepted."
+msgstr "Invitasjonen din ble godtatt."
+
+msgid "Your organization does not have any projects yet."
+msgstr "Organisasjonen din har ingen prosjekter ennå."
+
+msgid "Your session has expired, please enter credentials to continue."
+msgstr "Økten din er utløpt, vennligst skriv inn legitimasjon for å fortsette."
+
+msgid "Your single pane of control for all cloud services. Login in to see it in action."
+msgstr "Din enkelt kontrolpanel for alle skytjenester. Logg inn for å se det i aksjon."
+
 msgid "(VAT is not included)"
 msgstr "(MVA er ikke inkludert)"
+
+msgid "allocation users"
+msgstr "tildeling brukere"
+
+msgid "current state on backend: {resourceState}."
+msgstr "nåværende tilstand på backend: {resourceState}."
+
+msgid "e.g. MyApp"
+msgstr "f.eks. MyApp"
+
+msgid "etcd"
+msgstr "etcd"
+
+msgid "generate automatically"
+msgstr "generere automatisk"
+
+msgid "horizontal pod autoscaler"
+msgstr "horisontal pod autoscaler"
+
+msgid "horizontal pod autoscalers"
+msgstr "horisontal pod autoskalere"
+
+msgid "ingresses"
+msgstr "innganger"
+
+msgid "milli CPUs"
+msgstr "milli CPUer"
+
+msgid "offering resources"
+msgstr "tilbyr ressurser"
+
+msgid "offering users"
+msgstr "tilby brukere"
+
+msgid "on the"
+msgstr "på"
+
+msgid "permission reviews"
+msgstr "tillatelse vurderinger"
+
+msgid "remote accounts"
+msgstr "eksterne kontoer"
+
+msgid "security group"
+msgstr "sikkerhetsgruppe"
+
+msgid "support feedback"
+msgstr "støtte tilbakemelding"
+
+msgid "team invitations"
+msgstr "teaminvitasjoner"
+
+msgid "till"
+msgstr "til"
+
+msgid "token will not timeout"
+msgstr "token vil ikke timeout"
+
+msgid "vCPU"
+msgstr "vCPU"
+
+msgid "vCPU count"
+msgstr "vCPU-antall"
+
+msgid "vCPU limit is exceeded"
+msgstr "vCPU-grensen er overskredet"
+
+msgid "vCores"
+msgstr "vCores"
+
+msgid "vSphere Virtual Machine"
+msgstr "vSphere virtuelle maskin"
+
+msgid "virtual machine"
+msgstr "virtuell maskin"
+
+msgid "volume snapshot"
+msgstr "volum øyeblikksbilde"
+
+msgid "volume snapshot schedule"
+msgstr "volum øyeblikksbilde tidsplan"
+
+msgid "{count} user events in {date}"
+msgstr "{count} brukerhendelser i {date}"
+
+msgid "{name} ({size})"
+msgstr "{name} ({size})"
+
+msgid "{resourceType} has state {resourceState}"
+msgstr "{resourceType} har tilstanden {resourceState}"
+
+msgid "{resource_link} creation has been scheduled by {user_link}."
+msgstr "{resource_link} opprettelse er planlagt av {user_link}."
+
+msgid "{resource_link} creation has failed."
+msgstr "{resource_link} oppretting har mislyktes."
+
+msgid "{resource_link} deletion has failed."
+msgstr "{resource_link} sletting har mislyktes."
+
+msgid "{resource_link} has been created."
+msgstr "{resource_link} er opprettet."
+
+msgid "{resource_link} has been imported by {user_link}."
+msgstr "{resource_link} har blitt importert av {user_link}."
+
+msgid "{resource_link} has been restarted."
+msgstr "{resource_link} har blitt startet på nytt."
+
+msgid "{resource_link} has been scheduled to deletion by {user_link}."
+msgstr "{resource_link} er planlagt å slette av {user_link}."
+
+msgid "{resource_link} has been scheduled to restart by {user_link}."
+msgstr "{resource_link} er planlagt å starte på nytt av {user_link}."
+
+msgid "{resource_link} has been scheduled to start by {user_link}."
+msgstr "{resource_link} er planlagt å starte med {user_link}."
+
+msgid "{resource_link} has been scheduled to stop by {user_link}."
+msgstr "{resource_link} er planlagt å stoppe ved {user_link}."
+
+msgid "{resource_link} has been started."
+msgstr "{resource_link} er startet."
+
+msgid "{resource_link} has been stopped."
+msgstr "{resource_link} har blitt stoppet."
+
+msgid "{resource_link} has been updated by {user_link}."
+msgstr "{resource_link} har blitt oppdatert av {user_link}."
+
+msgid "{resource_link} restart has failed."
+msgstr "{resource_link} omstart mislyktes."
+
+msgid "{resource_link} start has failed."
+msgstr "{resource_link} start har mislyktes."
+
+msgid "{resource_link} stop has failed."
+msgstr "{resource_link} stoppet har mislyktes."
+
+msgid "{sender} has invited you to join {name} {type} in {role} role."
+msgstr "{sender} har invitert deg til å bli med i {name} {type} i {role} rolle."
+
+msgid "{user} has approved it on {date} at {time}."
+msgstr "{user} har godkjent det på {date} på {time}."
+
+msgid "{user} has requested changing of limits from \"{old_limits}\" to \"{new_limits}\"."
+msgstr "{user} har bedt om endring av grenser fra \"{old_limits}\" til \"{new_limits}\"."
+
+msgid "{user} has requested changing of plan from \"{old_plan}\" to \"{new_plan}\"."
+msgstr "{user} har bedt om endring av planen fra \"{old_plan}\" til \"{new_plan}\"."
+
+msgid "{user} has requested provisioning of \"{resource_name}\" with plan \"{plan_name}\"."
+msgstr "{user} har bedt om klargjøring av \"{resource_name}\" med planen \"{plan_name}\"."
+
+msgid "{user} has requested termination of {resource_name} with active plan \"{plan_name}\"."
+msgstr "{user} har bedt om avslutning av {resource_name} med den aktive planen \"{plan_name}\"."
+
+msgid "{value} at {date}, estimated"
+msgstr "{value} ved {date}, anslått"
+
+msgid "{verboseName} has been updated."
+msgstr "{verboseName} har blitt oppdatert."
+
+msgid "Сhoose the role please"
+msgstr "Velg rollen vennligst"
