@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { StringField, TextField } from '@waldur/form';
+import { StringField, TextField, SelectField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { CronField } from '@waldur/form/CronField';
@@ -12,7 +12,6 @@ import { TimezoneField } from '@waldur/form/TimezoneField';
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
-import { SelectField } from '@waldur/openstack/openstack-instance/actions/update-floating-ips/SelectField';
 
 import { RESOURCE_ACTION_FORM } from './constants';
 
@@ -105,7 +104,14 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
             } else if (field.type === 'boolean') {
               return <AwesomeCheckboxField hideLabel={true} {...props} />;
             } else if (field.type === 'select') {
-              return <SelectField {...props} options={field.options} />;
+              return (
+                <SelectField
+                  {...props}
+                  options={field.options}
+                  simpleValue={true}
+                  {...reactSelectMenuPortaling()}
+                />
+              );
             } else if (field.type === 'async_select') {
               return (
                 <AsyncSelectField
