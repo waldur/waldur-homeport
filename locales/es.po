@@ -8,6 +8,15 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
 
+msgid "API URL"
+msgstr "API URL"
+
+msgid "Abbreviation"
+msgstr "Abreviatura"
+
+msgid "Accept"
+msgstr "Aceptar"
+
 msgid "Add project"
 msgstr "Add department"
 

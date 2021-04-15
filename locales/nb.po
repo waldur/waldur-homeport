@@ -1292,5 +1292,1238 @@ msgstr "Forekomsten skal være afslukning og OK eller fejlet. Ta kontakt med kun
 msgid "Instances count"
 msgstr "Forekomster teller"
 
+msgid "Internal IPs"
+msgstr "Interne IP-er"
+
+msgid "Internal name"
+msgstr "Internt navn"
+
+msgid "Internal network ID"
+msgstr "Intern nettverks-ID"
+
+msgid "Internal network allocation pool"
+msgstr "Internt nettverkstildelingsutvalg"
+
+msgid "Internal network mask (CIDR)"
+msgstr "Intern nettverksmaske (CIDR)"
+
+msgid "Internal server error occurred. Please try again or contact support."
+msgstr "Det oppstod en intern serverfeil. Prøv igjen eller kontakt kundestøtte."
+
+msgid "Invalid URL. Unable to parse payment details."
+msgstr "Ugyldig URL. Kan ikke analysere betalingsdetaljer."
+
+msgid "Invitation approval"
+msgstr "Godkjennelse av invitasjon"
+
+msgid "Invitation confirmation"
+msgstr "Invitasjonsbekreftelse"
+
+msgid "Invitation could not be accepted"
+msgstr "Invitasjon kunne ikke aksepteres"
+
+msgid "Invitation email is:"
+msgstr "Invitasjons-e-post er:"
+
+msgid "Invitation has been approved."
+msgstr "Invitasjonen er godkjent."
+
+msgid "Invitation has been canceled."
+msgstr "Invitasjonen er avbrutt."
+
+msgid "Invitation has been rejected."
+msgstr "Invitasjon har blitt avvist."
+
+msgid "Invitation has been sent again."
+msgstr "Invitasjonen er sendt på nytt."
+
+msgid "Invitation is not found."
+msgstr "Invitasjonen blir ikke funnet."
+
+msgid "Invitation is not valid"
+msgstr "Invitasjon er ikke gyldig"
+
+msgid "Invitation is not valid anymore."
+msgstr "Invitasjon er ikke gyldig lenger."
+
+msgid "Invitation rejection"
+msgstr "Avvisning av invitasjon"
+
+msgid "Invitation token is not found."
+msgstr "Finner ikke invitasjonstoken."
+
+msgid "Invite team member"
+msgstr "Inviter teammedlem"
+
+msgid "Invoice No."
+msgstr "Faktura nr."
+
+msgid "Invoice events"
+msgstr "Faktura hendelser"
+
+msgid "Invoice events timeline"
+msgstr "Tidslinje for faktura hendelser"
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been created."
+msgstr "Faktura for organisasjon {customer_link} for perioden {period} er opprettet."
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
+msgstr "Faktura for organisasjon {customer_link} for perioden {period} er oppdatert."
+
+msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
+msgstr "Faktura for organisation {customer_name} for perioden {period} er slettet."
+
+msgid "Invoice has been successfully linked to payment."
+msgstr "Fakturaen er koblet til betaling."
+
+msgid "Invoice has been successfully unlinked from payment."
+msgstr "Fakturaen har blitt fjernet fra betaling."
+
+msgid "Invoice has not been sent to PayPal yet"
+msgstr "Fakturaen har ikke blitt sendt til PayPal ennå"
+
+msgid "Invoice statistics"
+msgstr "Faktura statistikk"
+
+msgid "Invoiced to"
+msgstr "Fakturert til"
+
+msgid "Invoices list"
+msgstr "Fakturaer liste"
+
+msgid "Is active"
+msgstr "Er aktiv"
+
+msgid "Is external"
+msgstr "Er ekstern"
+
+msgid "Is official"
+msgstr "Er offisiell"
+
+msgid "Is service provider"
+msgstr "Er tjenesteleverandør"
+
+msgid "Issue link"
+msgstr "Problem lenke"
+
+msgid "Issue {issue_link} has been created by {caller_link}."
+msgstr "Problemet {issue_link} er opprettet av {caller_link}."
+
+msgid "Issues are trackable requests to the operator."
+msgstr "Problemer er sporbare forespørsler til operatøren."
+
+msgid "It is used to automatically assign floating IP to your virtual machine."
+msgstr "Den brukes til automatisk å tilordne flytende IP til din virtuelle maskin."
+
+msgid "Item has been added to shopping cart."
+msgstr "Varen er lagt til i handlekurven."
+
+msgid "Item has been removed from shopping cart."
+msgstr "Varen er fjernet fra handlekurven."
+
+msgid "Keep forever"
+msgstr "Hold for alltid"
+
+msgid "Keep until"
+msgstr "Hold til"
+
+msgid "Kept until"
+msgstr "Holdes til"
+
+msgid "Key name"
+msgstr "Nøkkelnavn"
+
+msgid "Key removal"
+msgstr "Fjerning av nøkler"
+
+msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
+msgstr "Keystone auth URL (f.eks. http://keystone.example.com:5000/v3)"
+
+msgid "Kubeconfig file"
+msgstr "Kubeconfig-fil"
+
+msgid "Kubernetes node #{index}"
+msgstr "Kubernetes node #{index}"
+
+msgid "Kubernetes nodes"
+msgstr "Kubernetes noder"
+
+msgid "Kubernetes version"
+msgstr "Kubernetes versjon"
+
+msgid "Label that is visible to users in Marketplace."
+msgstr "Etikett som er synlig for brukere på Marketplace."
+
+msgid "Leave blank if you want admin password to be auto-generated."
+msgstr "La det være tomt hvis du vil at administratorpassordet skal genereres automatisk."
+
+msgid "Leave blank if you want admin username to be auto-generated."
+msgstr "La stå tomt hvis du vil at administratorbrukernavnet skal genereres automatisk."
+
+msgid "Legal address"
+msgstr "Juridisk adresse"
+
+msgid "Lifetime will be updated and reset upon saving the form."
+msgstr "Levetiden vil bli oppdatert og tilbakestilt når du lagrer skjemaet."
+
+msgid "Limit amount"
+msgstr "Begrense beløp"
+
+msgid "Limit period"
+msgstr "Begrenseperiode"
+
+msgid "Limits"
+msgstr "Grenser"
+
+msgid "Limits are invalid."
+msgstr "Grensene er ugyldige."
+
+msgid "Link OpenStack Instance"
+msgstr "Koble OpenStack-forekomst"
+
+msgid "Link invoice"
+msgstr "Koble faktura"
+
+msgid "Loading actions"
+msgstr "Laste inn handlinger"
+
+msgid "Loading assets, please wait."
+msgstr "Laster eiendeler, vennligst vent."
+
+msgid "Loading invoices"
+msgstr "Laster inn fakturaer"
+
+msgid "Location has been saved successfully."
+msgstr "Plassering er lagret."
+
+msgid "Location of {offeringName} offering"
+msgstr "Plassering av {offeringName} tilbud"
+
+msgid "Logging user in"
+msgstr "Logge inn bruker"
+
+msgid "Login with"
+msgstr "Logg inn med"
+
+msgid "Logo has been removed."
+msgstr "Logoen er fjernet."
+
+msgid "Logo has been uploaded."
+msgstr "Logoen er lastet opp."
+
+msgid "Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes."
+msgstr "Longhorn er et lett, pålitelig og kraftig distribuert blokklagringssystem for Kubernetes."
+
+msgid "MAC address (optional)"
+msgstr "MAC-adresse (valgfritt)"
+
+msgid "MTU"
+msgstr "MTU"
+
+msgid "Manage networks"
+msgstr "Administrer nettverk"
+
+msgid "Manage organization"
+msgstr "Administrer organisasjon"
+
+msgid "Manage security groups"
+msgstr "Administrere sikkerhetsgrupper"
+
+msgid "Managed projects"
+msgstr "Administrerte prosjekter"
+
+msgid "Mark as paid"
+msgstr "Merk som betalt"
+
+msgid "Mark invoice as paid"
+msgstr "Marker faktura som betalt"
+
+msgid "Marketplace UUID"
+msgstr "Markedsplass UUID"
+
+msgid "Marketplace checkout"
+msgstr "Kassefunksjonen Marketplace"
+
+msgid "Marketplace offering does not have any usage-based components."
+msgstr "Marketplace-tilbudet har ingen bruksbaserte komponenter."
+
+msgid "Marketplace offerings"
+msgstr "Marketplace-tilbud"
+
+msgid "Marketplace service provider"
+msgstr "Marketplace tjenesteleverandør"
+
+msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
+msgstr "Marketplace-tjenester kan kun klargjøres for en bestemt tilknytning. Du har for øyeblikket ikke noen organisasjoner eller prosjekter knyttet til kontoen din."
+
+msgid "Max # of VM snapshots"
+msgstr "Maks # antall VM øyeblikksbilder"
+
+msgid "Max # of snapshots"
+msgstr "Maks # antall øyeblikksbilder"
+
+msgid "Max amount"
+msgstr "Maks beløp"
+
+msgid "Max number of VM snapshots"
+msgstr "Maks # antall VM-øyeblikksbilder"
+
+msgid "Max replicas"
+msgstr "Maks replikaer"
+
+msgid "Maximal number of resources"
+msgstr "Maksimalt antall ressurser"
+
+msgid "Maximal value"
+msgstr "Maksimal verdi"
+
+msgid "Maximum RAM for each VM"
+msgstr "Maks RAM for hver VM"
+
+msgid "Maximum allowed value"
+msgstr "Maksimal tillatt verdi"
+
+msgid "Maximum capacity for each disk"
+msgstr "Maksimal kapasitet for hver disk"
+
+msgid "Maximum monthly"
+msgstr "Maksimum månedlig"
+
+msgid "Maximum total"
+msgstr "Maksimum totalt"
+
+msgid "Maximum total size of the disk space per VM"
+msgstr "Maksimal total størrelse på diskplass per VM"
+
+msgid "Maximum username length with mandatory username prefix is 32 characters."
+msgstr "Maksimal brukernavn lengde med obligatorisk brukernavn prefiks er 32 tegn."
+
+msgid "Maximum vCPU for each VM"
+msgstr "Maksimal vCPU for hver VM"
+
+msgid "Measured unit"
+msgstr "Målt enhet"
+
+msgid "Memory per vCore"
+msgstr "Minne per vCore"
+
+msgid "Memory size in GiB"
+msgstr "Minnestørrelse i GiB"
+
+msgid "Metric name"
+msgstr "Metrisk navn"
+
+msgid "MiB"
+msgstr "MiB"
+
+msgid "Min RAM"
+msgstr "Min RAM"
+
+msgid "Min amount"
+msgstr "Min beløp"
+
+msgid "Min replicas"
+msgstr "Min replikaer"
+
+msgid "Min storage"
+msgstr "Min lagring"
+
+msgid "Minimal value"
+msgstr "Minimal verdi"
+
+msgid "Minimum allowed value"
+msgstr "Minimum tillatt verdi"
+
+msgid "Minimum booking time slot duration."
+msgstr "Minimum booking tid slot varighet."
+
+msgid "Minimum username length is 3 characters."
+msgstr "Minimum brukernavn lengde er 3 tegn."
+
+msgid "Monthly cost"
+msgstr "Månedlig kostnad"
+
+msgid "Monthly invoices"
+msgstr "Månedlige fakturaer"
+
+msgid "Mount point"
+msgstr "Monteringspunkt"
+
+msgid "Must be at least {min}"
+msgstr "Må være minst {min}"
+
+msgid "Must be at most {max}"
+msgstr "Må være på det meste {max}"
+
+msgid "Must start with a country prefix ie EE34501234215"
+msgstr "Må starte med et land prefiks dvs. EE34501234215"
+
+msgid "My offerings"
+msgstr "Mine tilbud"
+
+msgid "My resources"
+msgstr "Mine ressurser"
+
+msgid "My services"
+msgstr "Mine tjenester"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Name \"{label}\" must be 1-63 characters long, each of which can only be alphanumeric or a hyphen"
+msgstr "Navnet \"{label}\" må være 1-63 tegn langt, som hver bare kan være alfanumerisk eller bindestrek"
+
+msgid "Name \"{label}\" must not start or end with a hyphen"
+msgstr "Navnet \"{label}\" må ikke starte eller slutte med bindestrek"
+
+msgid "Name is duplicated. Choose other name."
+msgstr "Navnet er duplisert. Velg et annet navn."
+
+msgid "Name is not valid."
+msgstr "Navnet er ikke gyldig."
+
+msgid "Name is required field."
+msgstr "Navn er obligatorisk felt."
+
+msgid "Name is too short, names should be at least two alphanumeric characters."
+msgstr "Navnet er for kort, navnene skal være minst to alfanumeriske tegn."
+
+msgid "Name must consist of lower case alphanumeric characters."
+msgstr "Navnet må bestå av alfanumeriske tegn med små bokstaver."
+
+msgid "Name must consist of lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name', or '123-abc')"
+msgstr "Navnet må bestå av alfanumeriske tegn i små bokstaver eller '-', og må starte og slutte med et alfanumerisk tegn (f.eks. 'mitt navn', eller '123-abc')"
+
+msgid "Name of your organization."
+msgstr "Navnet på organisasjonen."
+
+msgid "Name should consist of latin symbols, numbers and dashes."
+msgstr "Navnet skal bestå av latinske symboler, tall og bindestreker."
+
+msgid "Name should consist of latin symbols and numbers."
+msgstr "Navnet skal bestå av latinske symboler og tall."
+
+msgid "Name should contain at least 3 symbols."
+msgstr "Navnet skal inneholde minst 3 symboler."
+
+msgid "Namespace"
+msgstr "Navneområde"
+
+msgid "Namespace should be unique."
+msgstr "Navneområdet skal være unikt."
+
+msgid "Native name"
+msgstr "Opprinnelig navn"
+
+msgid "Network MTU has been updated."
+msgstr "Network MTU har blitt oppdatert."
+
+msgid "Network adapters"
+msgstr "Nettverkskort"
+
+msgid "New flavor"
+msgstr "Ny smak"
+
+msgid "New limit"
+msgstr "Ny grense"
+
+msgid "New plan"
+msgstr "Ny plan"
+
+msgid "New size"
+msgstr "Ny størrelse"
+
+msgid "Next hop (IP)"
+msgstr "Neste hopp (IP)"
+
+msgid "Next trigger at"
+msgstr "Neste utløser på"
+
+msgid "No, continue using current email"
+msgstr "Nei, fortsett å bruke gjeldende e-post"
+
+msgid "No access info"
+msgstr "Ingen tilgangsinfo"
+
+msgid "No access info."
+msgstr "Ingen tilgangsinfo"
+
+msgid "No countries"
+msgstr "Ingen land"
+
+msgid "No division types"
+msgstr "Ingen divisjonstyper"
+
+msgid "No divisions"
+msgstr "Ingen divisjoner"
+
+msgid "No entries to show here"
+msgstr "Ingen oppføringer å vise her"
+
+msgid "No invoice data available."
+msgstr "Ingen fakturadata tilgjengelig."
+
+msgid "No offerings"
+msgstr "Ingen tilbud"
+
+msgid "No organizations"
+msgstr "Ingen organisasjoner"
+
+msgid "No projects"
+msgstr "Ingen prosjekter"
+
+msgid "No projects are assigned to this user."
+msgstr "Ingen prosjekter er tilordnet til denne brukeren."
+
+msgid "No providers"
+msgstr "Ingen leverandører"
+
+msgid "No service providers"
+msgstr "Ingen tjenesteleverandører"
+
+msgid "No users"
+msgstr "Ingen brukere"
+
+msgid "Node"
+msgstr "Node"
+
+msgid "Node has been created."
+msgstr "Node er opprettet."
+
+msgid "Node plan"
+msgstr "Node-plan"
+
+msgid "Nodes"
+msgstr "Noder"
+
+msgid "Not a service provider."
+msgstr "Ikke en tjenesteleverandør."
+
+msgid "Not running accounting"
+msgstr "Kjører ikke regnskap"
+
+msgid "Note that this virtual machine will not be charged separately for {organization}."
+msgstr "Vær oppmerksom på at denne virtuelle maskinen ikke vil bli belastet separat for {organization}."
+
+msgid "Note that this volume will not be charged separately for {organization}."
+msgstr "Vær oppmerksom på at dette volumet ikke belastes separat for {organization}."
+
+msgid "Notification can be sent only for created invoice."
+msgstr "Varslingen kan bare sendes for opprettet faktura."
+
+msgid "Notification has been created."
+msgstr "Varslingen er opprettet."
+
+msgid "Notification has been updated."
+msgstr "Varslingen er oppdatert."
+
+msgid "Notification method"
+msgstr "Varslingsmetode"
+
+msgid "Notifications allow to be informed when a certain event has occurred."
+msgstr "Varsler tillater å bli informert når en bestemt hendelse har oppstått."
+
+msgid "Notifications has been sent to {count} users."
+msgstr "Varslinger er sendt til {count} brukere."
+
+msgid "Number of CPU cores per socket"
+msgstr "Antall CPU-kjerner per sokkel"
+
+msgid "Number of CPU cores should be multiple of cores per socket."
+msgstr "Antall CPU-kjerner bør være flere kjerner per sokkel."
+
+msgid "Number of control plane nodes"
+msgstr "Antall kontrollplannoder"
+
+msgid "Number of cores in a VM"
+msgstr "Antall kjerner i en VM"
+
+msgid "Number of created instances"
+msgstr "Antall opprettede forekomster"
+
+msgid "Number of etcd nodes"
+msgstr "Antall etcd noder"
+
+msgid "Number of running instances"
+msgstr "Antall kjørende forekomster"
+
+msgid "Number of worker nodes"
+msgstr "Antall arbeidernoder"
+
+msgid "Object is not found."
+msgstr "Objektet er ikke funnet."
+
+msgid "Offering components"
+msgstr "Tilbyr komponenter"
+
+msgid "Offering configuration"
+msgstr "Tilbyr konfigurasjon"
+
+msgid "Offering details"
+msgstr "Tilbyr detaljer"
+
+msgid "Offering doesn't have images."
+msgstr "Tilbudet har ikke bilder."
+
+msgid "Offering has been created."
+msgstr "Tilbud er opprettet."
+
+msgid "Offering has been imported."
+msgstr "Tilbud er importert."
+
+msgid "Offering has been updated."
+msgstr "Tilbudet er oppdatert."
+
+msgid "Offering images"
+msgstr "Tilbyr bilder"
+
+msgid "Offering images ({name})"
+msgstr "Tilbyr bilder ({name})"
+
+msgid "Offering is not configured yet."
+msgstr "Tilbudet er ikke konfigurert ennå."
+
+msgid "Offering logo"
+msgstr "Logo for tilbud"
+
+msgid "Offering name"
+msgstr "Navn på tilbud"
+
+msgid "Offering permissions"
+msgstr "Tilbyr tillatelser"
+
+msgid "Offering state has been updated."
+msgstr "Tilbudstilstand er oppdatert."
+
+msgid "Offering type"
+msgstr "Tilbudstype"
+
+msgid "Offerings images"
+msgstr "Bilder av tilbud"
+
+msgid "One-time on plan switch"
+msgstr "Engang på plan bryter"
+
+msgid "Only a created invoice can be marked as paid."
+msgstr "Bare en opprettet faktura kan merkes som betalt."
+
+msgid "Only customer owner or staff can invite users."
+msgstr "Bare kundeeier eller ansatte kan invitere brukere."
+
+msgid "Only pending and expired invitations can be sent again."
+msgstr "Bare ventende og utløpte invitasjoner kan sendes på nytt."
+
+msgid "Only pending invitation can be canceled."
+msgstr "Bare ventende invitasjon kan avbrytes."
+
+msgid "Only staff and organization users are allowed to open console."
+msgstr "Bare ansatte og organisasjonsbrukere har lov til å åpne konsollen."
+
+msgid "Only staff can manage OpenStack tenant."
+msgstr "Bare ansatte kan administrere OpenStack-leier."
+
+msgid "Only staff can remove organization."
+msgstr "Bare ansatte kan fjerne organisasjonen."
+
+msgid "Only staff users are allowed to perform this action."
+msgstr "Bare ansatte har lov til å utføre denne handlingen."
+
+msgid "OpenStack Images"
+msgstr "OpenStack-bilder"
+
+msgid "OpenStack Instance"
+msgstr "OpenStack-forekomst"
+
+msgid "OpenStack instance"
+msgstr "OpenStack-forekomst"
+
+msgid "OpenStack instance has been unlinked from Rancher node."
+msgstr "OpenStack-forekomsten har blitt fjernet fra Rancher-noden."
+
+msgid "OpenStack networks has been created."
+msgstr "OpenStack-nettverk er opprettet."
+
+msgid "OpenStack package"
+msgstr "OpenStack-pakke"
+
+msgid "OpenStack subnet"
+msgstr "OpenStack-delnett"
+
+msgid "OpenStack tenant"
+msgstr "OpenStack-leier"
+
+msgid "OpenStack volume"
+msgstr "OpenStack-volum"
+
+msgid "Open console"
+msgstr "Åpne konsoll"
+
+msgid "Open in Service Desk"
+msgstr "Åpne i Service Desk"
+
+msgid "Open support portal"
+msgstr "Åpne supportportalen"
+
+msgid "Opened by {user} at {date}"
+msgstr "Åpnet av {user} på {date}"
+
+msgid "Opened by {user} from {organization} at {date}"
+msgstr "Åpnet av {user} fra {organization} på {date}"
+
+msgid "Options are invalid."
+msgstr "Alternativene er ugyldige."
+
+msgid "Or use social login"
+msgstr "Eller bruk sosial pålogging"
+
+msgid "Order has been approved."
+msgstr "Bestillingen er godkjent."
+
+msgid "Order has been rejected."
+msgstr "Ordren er avvist."
+
+msgid "Order has been submitted."
+msgstr "Bestillingen er sendt inn."
+
+msgid "Order item details"
+msgstr "Detaljer om bestillingselement"
+
+msgid "Order item has been approved."
+msgstr "Bestillingselementet er godkjent."
+
+msgid "Order item has been rejected."
+msgstr "Bestillingsvaren er avvist."
+
+msgid "Order item has cancel has been scheduled."
+msgstr "Bestillingsvaren er kansellert er planlagt."
+
+msgid "Organization actions"
+msgstr "Organisasjonshandlinger"
+
+msgid "Organization contains invoices. Please remove them first."
+msgstr "Organisasjonen inneholder fakturaer. Fjern dem først."
+
+msgid "Organization contains projects. Please remove them first."
+msgstr "Organisasjonen inneholder prosjekter. Vennligst fjern dem først."
+
+msgid "Organization events"
+msgstr "Organisasjonshendelser"
+
+msgid "Organization has been created."
+msgstr "Organisasjon er opprettet."
+
+msgid "Organization has been updated successfully."
+msgstr "Organisasjonen har blitt oppdatert."
+
+msgid "Organization has signed a fixed price agreement"
+msgstr "Organisasjonen har signert en fast prisavtale"
+
+msgid "Organization owner"
+msgstr "Organisasjonseier"
+
+msgid "Organization owner role expires on"
+msgstr "Organisasjonseierrollen utløper på"
+
+msgid "Organization registration code"
+msgstr "Organisasjonens registreringskode"
+
+msgid "Organization removal"
+msgstr "Fjerning av organisasjon"
+
+msgid "Organization role"
+msgstr "Organisasjonsrolle"
+
+msgid "Organization roles"
+msgstr "Organisasjonsroller"
+
+msgid "Organization update"
+msgstr "Organisasjonsoppdatering"
+
+msgid "Organization update ({name})"
+msgstr "Organisasjonsoppdatering ({name})"
+
+msgid "Organization users list"
+msgstr "Organisasjonsbrukerliste"
+
+msgid "Organization workspace"
+msgstr "Organisasjons arbeidsområde"
+
+msgid "Organization {customer_link} has been updated."
+msgstr "Organisasjonen {customer_link} har blitt oppdatert."
+
+msgid "Organization {customer_name} has been deleted."
+msgstr "Organisasjonen {customer_name} har blitt slettet."
+
+msgid "Organizations by divisions"
+msgstr "Organisasjoner etter divisjoner"
+
+msgid "Organizations divisions"
+msgstr "Organisasjoner divisjoner"
+
+msgid "Overview of {organization} organization"
+msgstr "Oversikt over {organization} organisasjon"
+
+msgid "Overview of {project} project"
+msgstr "Oversikt over {project} prosjekt"
+
+msgid "Owned organizations"
+msgstr "Eide organisasjoner"
+
+msgid "PID"
+msgstr "PID"
+
+msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
+msgstr "Siden er ikke funnet. Du har enten angitt ugyldig URL-adresse eller prøver å nå deaktivert funksjon."
+
+msgid "Password has been changed for user {affected_user_link}."
+msgstr "Passordet er endret for bruker {affected_user_link}."
+
+msgid "Past time slots are not allowed."
+msgstr "Tidligere tidsrom er ikke tillatt."
+
+msgid "Pause offering"
+msgstr "Sett tilbudet på pause"
+
+msgid "Pay invoice"
+msgstr "Betal faktura"
+
+msgid "Payment events"
+msgstr "Betaling hendelser"
+
+msgid "Payment for {customer_link} has been approved."
+msgstr "Betaling for {customer_link} er godkjent."
+
+msgid "Payment for {customer_link} has been cancelled."
+msgstr "Betaling for {customer_link} har blitt kansellert."
+
+msgid "Payment gateways (monthly)"
+msgstr "Betaling gateways (månedlig)"
+
+msgid "Payment has been created."
+msgstr "Betaling er opprettet."
+
+msgid "Payment has been deleted."
+msgstr "Betalingen er slettet."
+
+msgid "Payment has been processed successfully."
+msgstr "Betalingen har blitt behandlet."
+
+msgid "Payment has been updated."
+msgstr "Betalingen er oppdatert."
+
+msgid "Payment is being processed, please wait."
+msgstr "Betaling blir behandlet, vennligst vent."
+
+msgid "Payment profile"
+msgstr "Betalingsprofil"
+
+msgid "Payment profile defines how invoices are processed."
+msgstr "Betalingsprofil definerer, hvordan fakturaer behandles."
+
+msgid "Payment profile has been created."
+msgstr "Betalingsprofil er opprettet."
+
+msgid "Payment profile has been created and enabled."
+msgstr "Betalingsprofil er opprettet og aktivert."
+
+msgid "Payment profile has been enabled."
+msgstr "Betalingsprofil er aktivert."
+
+msgid "Payment profile has been removed."
+msgstr "Betalingsprofilen er fjernet."
+
+msgid "Payment profile has been updated."
+msgstr "Betalingsprofilen er oppdatert."
+
+msgid "Payment profiles"
+msgstr "Betalingsprofiler"
+
+msgid "Payments connected with an active payment profile."
+msgstr "Betalinger knyttet til en aktiv betalingsprofil."
+
+msgid "Payments list"
+msgstr "Betalingsliste"
+
+msgid "Pending approval for changing of"
+msgstr "Venter på godkjenning for endring av"
+
+msgid "Pending approval for creation of"
+msgstr "Venter på godkjenning for opprettelse av"
+
+msgid "Pending approval for removal of"
+msgstr "Venter på godkjenning for fjerning av"
+
+msgid "Per half month"
+msgstr "Per halv måned"
+
+msgid "Perform local logout"
+msgstr "Utføre lokal utlogging"
+
+msgid "Perform review"
+msgstr "Utfør gjennomgang"
+
+msgid "Performed by"
+msgstr "Fremført av"
+
+msgid "Periods"
+msgstr "Perioder"
+
+msgid "Permissions log"
+msgstr "Tillatelseslogg"
+
+msgid "Personal workspace"
+msgstr "Personlig arbeidsområde"
+
+msgid "Plan"
+msgstr "Plan"
+
+msgid "Plan #{index}"
+msgstr "Plan #{index}"
+
+msgid "Plan capacity"
+msgstr "Planlegge kapasitet"
+
+msgid "Plan capacity is full."
+msgstr "Plankapasiteten er full."
+
+msgid "Plan component name"
+msgstr "Planlegge komponentnavn"
+
+msgid "Plan components"
+msgstr "Planlegge komponenter"
+
+msgid "Plan description"
+msgstr "Planbeskrivelse"
+
+msgid "Plan does not have limit"
+msgstr "Plan har ikke grense"
+
+msgid "Plan name"
+msgstr "Plannavn"
+
+msgid "Plan price"
+msgstr "Plan pris"
+
+msgid "Planned quota usage: {usage}"
+msgstr "Planlagt kvotebruk: {usage}"
+
+msgid "Plans are invalid."
+msgstr "Planer er ugyldige"
+
+msgid "Please, create and enable a payment profile to be able to manage payments."
+msgstr "Opprett og aktiver en betalingsprofil for å kunne administrere betalinger."
+
+msgid "Please, select a date."
+msgstr "Vennligst velg en dato."
+
+msgid "Please add resource name before editing a schedule."
+msgstr "Legg til ressursnavn før du redigerer en tidsplan."
+
+msgid "Please create a new one:"
+msgstr "Vennligst opprett en ny:"
+
+msgid "Please create a new one picking the profile that best matches your organization:"
+msgstr "Opprett en ny som velger profilen som passer best til organisasjonen:"
+
+msgid "Please enter desired values in the rows below:"
+msgstr "Vennligst skriv inn ønskede verdier i radene nedenfor:"
+
+msgid "Please enter reason why offering has been paused."
+msgstr "Skriv inn grunnen til at tilbudet er satt på pause."
+
+msgid "Please enter username, password and email."
+msgstr "Vennligst skriv inn brukernavn, passord og e-post."
+
+msgid "Please enter username and password."
+msgstr "Vennligst skriv inn brukernavn og passord."
+
+msgid "Please enter volume size to see price estimate."
+msgstr "Angi volumstørrelse for å se prisestimatet."
+
+msgid "Please give us a moment to validate your invitation."
+msgstr "Vennligst gi oss et øyeblikk til å validere invitasjonen din."
+
+msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
+msgstr "Vennligst sørg for at du vet hva du gjør og satt til 10 minutter hvis usikker."
+
+msgid "Please note that request should specify offering and provide a reason."
+msgstr "Vær oppmerksom på at forespørselen må angi tilbud og oppgi en årsak."
+
+msgid "Please note that request should specify tenant and provide a reason."
+msgstr "Vær oppmerksom på at forespørselen bør spesifisere leietaker og oppgi en grunn."
+
+msgid "Please note that request should specify user name and provide a reason."
+msgstr "Vær oppmerksom på at forespørselen skal spesifisere brukernavn og oppgi en grunn."
+
+msgid "Please open offering {offeringName} ({offeringUuid}) for editing. \nRequestor: {userName} / {userUuid}. \nService provider: {customerName} / {customerUuid}"
+msgstr "Åpne tilbudet {offeringName} ({offeringUuid}) for redigering. \nAnmoder: {userName} / {userUuid}. \nTjenesteleverandør: {customerName} / {customerUuid}"
+
+msgid "Please provide a reason"
+msgstr "Vennligst oppgi en grunn"
+
+msgid "Please provide registration code of your company."
+msgstr "Vennligst oppgi registreringskode for din bedrift."
+
+msgid "Please provide visual material describing the Offering"
+msgstr "Vennligst oppgi visuelt materiale som beskriver"
+
+msgid "Please provide your EU VAT ID if you are registered in the European Union."
+msgstr "Vennligst oppgi din EU-MVA-ID hvis du er registrert i EU."
+
+msgid "Please review and activate offering {offeringName} ({offeringUuid}). \nRequestor: {userName} / {userUuid}. \nService provider: {customerName} / {customerUuid}"
+msgstr "Se gjennom og aktiver tilbudet {offeringName} ({offeringUuid}). \nAnmoder: {userName} / {userUuid}. \nTjenesteleverandør: {customerName} / {customerUuid}"
+
+msgid "Please review organization permissions"
+msgstr "Se gjennom organisasjonstillatelser"
+
+msgid "Please search for your organization"
+msgstr "Vennligst søk etter organisasjonen din"
+
+msgid "Please select a username that you will use for login into the Linux systems."
+msgstr "Vennligst velg et brukernavn som du vil bruke for å logge inn på Linux-systemene."
+
+msgid "Please select flavor to see price estimate."
+msgstr "Vennligst velg smak for å se prisestimat."
+
+msgid "Please select type in Management tab first."
+msgstr "Velg skriv inn i kategorien Administrasjon først."
+
+msgid "Please select your language"
+msgstr "Vennligst velg ditt språk"
+
+msgid "Please start instance first."
+msgstr "Vennligst start forekomsten først."
+
+msgid "Please stop the instance before changing its flavor."
+msgstr "Vennligst stopp forekomsten før du endrer smaken."
+
+msgid "Please stop the instance before its removal."
+msgstr "Stopp forekomsten før den fjernes."
+
+msgid "Please use Latin letters without spaces only."
+msgstr "Vennligst bruk latinske bokstaver uten mellomrom."
+
+msgid "Plugin options are invalid."
+msgstr "Plugin-alternativene er ugyldige."
+
+msgid "Pods"
+msgstr "Pods"
+
+msgid "Port has been created."
+msgstr "Port er opprettet."
+
+msgid "Port range"
+msgstr "Port rekkevidde"
+
+msgid "Postal"
+msgstr "Postnummer"
+
+msgid "Preview offering"
+msgstr "Forhåndsvisningstilbud"
+
+msgid "Price for consumption"
+msgstr "Pris for forbruk"
+
+msgid "Price is estimated."
+msgstr "Pris er estimert."
+
+msgid "Price per 30 days"
+msgstr "Pris per 30 dager"
+
+msgid "Price per 365 days"
+msgstr "Pris per 365 dager"
+
+msgid "Price per day"
+msgstr "Pris per dag"
+
+msgid "Price per half-month"
+msgstr "Pris per halv måned"
+
+msgid "Price per half month"
+msgstr "Pris per halv måned"
+
+msgid "Price per hour"
+msgstr "Pris per time"
+
+msgid "Price per month"
+msgstr "Pris per måned"
+
+msgid "Price per unit"
+msgstr "Pris per enhet"
+
+msgid "Price per year"
+msgstr "Pris per år"
+
+msgid "Pricing tier"
+msgstr "Prisnivå"
+
+msgid "Print record"
+msgstr "Skriv ut post"
+
+msgid "Private clouds"
+msgstr "Private skyer"
+
+msgid "Project aggregates and isolates teams and resources."
+msgstr "Prosjektet samler og isolerer team og ressurser."
+
+msgid "Project could not be created."
+msgstr "Projektet kunne ikke oprettes."
+
+msgid "Project could not be updated."
+msgstr "Prosjektet kan ikke oppdateres."
+
+msgid "Project description"
+msgstr "Prosjektbeskrivelse"
+
+msgid "Project details"
+msgstr "Prosjektdetaljer"
+
+msgid "Project events"
+msgstr "Prosjektbegivenheter"
+
+msgid "Project has been created."
+msgstr "Prosjektet er opprettet."
+
+msgid "Project has been removed successfully."
+msgstr "Prosjektet er fjernet."
+
+msgid "Project has been renamed from {project_previous_name} to {project_link}."
+msgstr "Prosjektet har fått nytt navn fra {project_previous_name} til {project_link}."
+
+msgid "Project has been updated."
+msgstr "Prosjektet er oppdatert."
+
+msgid "Project is not selected."
+msgstr "Prosjektet er ikke valgt."
+
+msgid "Project manager cannot edit users with same role."
+msgstr "Prosjektleder kan ikke redigere brukere med samme rolle."
+
+msgid "Project member"
+msgstr "Prosjektmedlem"
+
+msgid "Project removal"
+msgstr "Fjerning av prosjekt"
+
+msgid "Project resources"
+msgstr "Prosjekt ressurser"
+
+msgid "Project role"
+msgstr "Prosjekt rolle"
+
+msgid "Project roles"
+msgstr "Prosjektroller"
+
+msgid "Project type"
+msgstr "Prosjekttype"
+
+msgid "Project workspace"
+msgstr "Prosjektarbeidsområde"
+
+msgid "Project {project_name} has been deleted."
+msgstr "Prosjekt {project_name} er slettet."
+
+msgid "Projects list"
+msgstr "Prosjektliste"
+
+msgid "Proof"
+msgstr "Bevis"
+
+msgid "Proof document"
+msgstr "Bevis dokument"
+
+msgid "Provider details"
+msgstr "Leverandørdetaljer"
+
+msgid "Provider does not comply with project policies"
+msgstr "Leverandøren overholder ikke prosjektpolicyer"
+
+msgid "Provider has been updated."
+msgstr "Leverandøren har blitt oppdatert."
+
+msgid "Provider location"
+msgstr "Leverandør plassering"
+
+msgid "Provision new resource"
+msgstr "Klargjør ny ressurs"
+
+msgid "Public SSH keys will be injected into services that allow key-based access."
+msgstr "Offentlige SSH-nøkler vil bli injisert i tjenester som tillater nøkkelbasert tilgang."
+
+msgid "Public offerings"
+msgstr "Offentlige tilbud"
+
+msgid "Public orders"
+msgstr "Offentlige bestillinger"
+
+msgid "Public resources"
+msgstr "Offentlige ressurser"
+
+msgid "Public services"
+msgstr "Offentlige tjenester"
+
+msgid "Publish as Google Calendar"
+msgstr "Publiser som Google Kalender"
+
+msgid "Pulling"
+msgstr "Trekke"
+
+msgid "Pulling quotas"
+msgstr "Trekke kvoter"
+
+msgid "Purchase and usage is invoiced."
+msgstr "Kjøp og forbruk faktureres."
+
+msgid "Put this into ~/.kube/config:"
+msgstr "Sett dette inn i ~/.kube/config:"
+
+msgid "Quota has been reached."
+msgstr "Kvoten er nådd."
+
+msgid "Quota usage exceeds available limit."
+msgstr "Kvotebruk overskrider tilgjengelig grense."
+
+msgid "Quotas"
+msgstr "Kvoter"
+
+msgid "RAM limit (GB-hours)"
+msgstr "RAM-grense (GB-timer)"
+
+msgid "RAM limit is exceeded"
+msgstr "RAM-grensen er overskredet"
+
+msgid "RAM usage"
+msgstr "RAM-bruk"
+
+msgid "Rancher access key"
+msgstr "Rancher-tilgangsnøkkel"
+
+msgid "Rancher cluster"
+msgstr "Rancher klynge"
+
+msgid "Rancher secret key"
+msgstr "Rancher hemmelig nøkkel"
+
+msgid "Rancher server URL"
+msgstr "Rancher server URL"
+
+msgid "Reason unknown, please contact support."
+msgstr "Årsak ukjent, vennligst kontakt kundestøtte."
+
+msgid "Recent additions"
+msgstr "Nylige tillegg"
+
+msgid "Record no."
+msgstr "Ta opp nr."
+
+msgid "Record notification has been sent to organization owners."
+msgstr "Registreringsvarsling er sendt til organisasjonseiere."
+
+msgid "Record number"
+msgstr "Rekordnummer"
+
+msgid "Record period"
+msgstr "Rekordperiode"
+
 msgid "(VAT is not included)"
 msgstr "(MVA er ikke inkludert)"

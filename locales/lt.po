@@ -3914,6 +3914,9 @@ msgstr "Pateikta išteklių nutraukimo užklausa."
 msgid "Resource usage"
 msgstr "Išteklių naudojimas"
 
+msgid "Resource usage for {resourceName}"
+msgstr "Išteklių naudojimas {resourceName}"
+
 msgid "Resource usage for {resource}"
 msgstr "Išteklių naudojimas {resource}"
 

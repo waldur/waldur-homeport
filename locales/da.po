@@ -3914,6 +3914,9 @@ msgstr "Der er indsendt anmodning om afslutning af ressourcer."
 msgid "Resource usage"
 msgstr "Ressource brug"
 
+msgid "Resource usage for {resourceName}"
+msgstr "Ressourceforbrug for {resourceName}"
+
 msgid "Resource usage for {resource}"
 msgstr "Ressourceforbrug for {resource}"
 
