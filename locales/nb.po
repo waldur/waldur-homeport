@@ -341,11 +341,23 @@ msgstr "Programmer"
 msgid "Apply"
 msgstr "Bruke"
 
+msgid "Approve"
+msgstr "Godkjenn"
+
 msgid "Approve payment"
 msgstr "Godkjenn betaling"
 
 msgid "Approved at"
 msgstr "Godkjent på"
+
+msgid "Approved by"
+msgstr "Godkjent av"
+
+msgid "Archive"
+msgstr "Arkiv"
+
+msgid "Archived"
+msgstr "Arkivert"
 
 msgid "Archived plans"
 msgstr "Arkiverte planer"
@@ -353,11 +365,20 @@ msgstr "Arkiverte planer"
 msgid "Are you sure you want to accept a {name}?"
 msgstr "Er du sikker på at du vil godta en {name}?"
 
+msgid "Are you sure you want to cancel a {name}?"
+msgstr "Er du sikker på at du vil avbryte en {name}?"
+
 msgid "Are you sure you want to cluster template? Note this will reset the node plan."
 msgstr "Er du sikker på at du vil klyngemal? Merk at dette vil tilbakestille nodeplanen."
 
+msgid "Are you sure you want to delete a {name} {resourceType}?"
+msgstr "Er du sikker på at du vil slette en {name} {resourceType}?"
+
 msgid "Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
 msgstr "Er du sikker på at du vil slette en {name} {resourceType} i en feilstilstand? Et oppryddingsforsøk vil bli utført hvis du velger det."
+
+msgid "Are you sure you want to delete the image?"
+msgstr "Er du sikker på at du vil slette bildet?"
 
 msgid "Are you sure you want to delete the payment?"
 msgstr "Er du sikker på at du vil slette betalingen?"
@@ -389,8 +410,14 @@ msgstr "Er du sikker på at du vil avslutte ressursen {resourceName}?"
 msgid "Article code"
 msgstr "Artikkel kode"
 
+msgid "Assigned to"
+msgstr "Tilordnet til"
+
 msgid "At least one plan must be entered"
 msgstr "Minst én plan må legges inn"
+
+msgid "Attach"
+msgstr "Fest"
 
 msgid "Attach OpenStack Volume to Instance"
 msgstr "Koble OpenStack-volum til forekomst"
@@ -403,6 +430,15 @@ msgstr "Fest volum"
 
 msgid "Attached to"
 msgstr "Festet til"
+
+msgid "Attaching"
+msgstr "Festing"
+
+msgid "Attachments"
+msgstr "Vedlegg"
+
+msgid "Attributes"
+msgstr "Attributter"
 
 msgid "Attributes are invalid."
 msgstr "Attributter er ugyldige."
@@ -428,14 +464,23 @@ msgstr "Autentiseringstoken"
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr "Godkjenning med mobil-ID har blitt avbrutt av brukeren eller tidsavbrutt. Detaljer:"
 
+msgid "Author"
+msgstr "Forfatter"
+
 msgid "Authorized personnel"
 msgstr "Autorisert personell"
 
 msgid "Auto-assign floating IP"
 msgstr "Automatisk tilordne flytende IP"
 
+msgid "Auto-generated"
+msgstr "Auto-generert"
+
 msgid "Auto approve in service provider projects"
 msgstr "Automatisk godkjenne i tjenesteleverandørprosjekter"
+
+msgid "Availability"
+msgstr "Tilgjengelighet"
 
 msgid "Availability zone"
 msgstr "Tilgjengelighet sone"
@@ -449,6 +494,12 @@ msgstr "Gjennomsnitt av alle sjekklister"
 msgid "Average utilization"
 msgstr "Gjennomsnittlig utnyttelse"
 
+msgid "Average value"
+msgstr "Gjennomsnittlig verdi"
+
+msgid "Azerbaijani"
+msgstr "Aserbajdsjansk"
+
 msgid "Azure Active Directory Application Secret"
 msgstr "Azure Active Directory-programhemmelighet"
 
@@ -460,6 +511,12 @@ msgstr "Azure Virtuell Maskin"
 
 msgid "Azure provider"
 msgstr "Azure-leverandør"
+
+msgid "Back"
+msgstr "Tilbake"
+
+msgid "Back to login"
+msgstr "Tilbake til innlogging"
 
 msgid "Back to organization"
 msgstr "Tilbake til organisasjonen"
@@ -479,6 +536,15 @@ msgstr "Backend-ID"
 msgid "Backend ID has been successfully set."
 msgstr "Backend ID har blitt angitt."
 
+msgid "Backing up"
+msgstr "Sikkerhetskopiere"
+
+msgid "Bank account"
+msgstr "Bankkonto"
+
+msgid "Bank name"
+msgstr "Bank navn"
+
 msgid "Base image name"
 msgstr "Navn på basisbilde"
 
@@ -497,11 +563,20 @@ msgstr "Batch vCPU"
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr "Bli kunde av vår portal. Klargjør IT-tjenester fra Marketplace og administrer teamet ditt fra ett sted."
 
+msgid "Billing"
+msgstr "Fakturering"
+
+msgid "Billing details"
+msgstr "Faktureringsdetaljer"
+
 msgid "Billing enabled"
 msgstr "Fakturering aktivert"
 
 msgid "Billing period"
 msgstr "Faktureringsperiode"
+
+msgid "Booking"
+msgstr "Bestilling"
 
 msgid "Booking description"
 msgstr "Bestillingsbeskrivelse"
@@ -518,11 +593,23 @@ msgstr "Booking er ikke tilladt at overlappe andre bookinger."
 msgid "Booking management"
 msgstr "Reservasjonsledelse"
 
+msgid "Bookings"
+msgstr "Bestillinger"
+
 msgid "Bootable"
 msgstr "Oppstartbar"
 
+msgid "Branch"
+msgstr "Gren"
+
+msgid "Browse"
+msgstr "Bla gjennom"
+
 msgid "Browse image"
 msgstr "Bla gjennom bilde"
+
+msgid "Business hours"
+msgstr "Arbeidstid"
 
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr "Ved å sette token levetid på ubestemt tid, tillater du alle som har token å utgi seg for å være dine handlinger til tokenet er endret."
@@ -533,8 +620,14 @@ msgstr "Ved å sende inn skjemaet godtar du <Link>Vilkårene for bruk</Link>."
 msgid "CIDR"
 msgstr "CIDR"
 
+msgid "CPU"
+msgstr "CPU"
+
 msgid "CPU limit (hours)"
 msgstr "CPU-grense (timer)"
+
+msgid "CPU usage"
+msgstr "CPU bruk"
 
 msgid "CSV"
 msgstr "CSV"
@@ -542,8 +635,35 @@ msgstr "CSV"
 msgid "Caller"
 msgstr "Oppringer"
 
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Cancel booking"
+msgstr "Avbryt bestilling"
+
+msgid "Cancel invitation"
+msgstr "Avbryt invitasjon"
+
+msgid "Cancel payment"
+msgstr "Avbryt betaling"
+
+msgid "Cancel request"
+msgstr "Avbryt forespørsel"
+
+msgid "Canceled"
+msgstr "Avbrutt"
+
+msgid "Cancelled"
+msgstr "Avbrutt"
+
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr "Kan ikke opprette flytende IP hvis leietaker eksternt nettverk ikke er definert."
+
+msgid "Capacity"
+msgstr "Kapasitet"
+
+msgid "Catalog"
+msgstr "Katalog"
 
 msgid "Catalog URL"
 msgstr "Katalog-URL"
@@ -557,20 +677,38 @@ msgstr "Katalogen er slettet."
 msgid "Catalogues"
 msgstr "Kataloger"
 
+msgid "Categories"
+msgstr "Kategorier"
+
+msgid "Category"
+msgstr "Kategori"
+
 msgid "Category is invalid."
 msgstr "Kategorien er ugyldig."
+
+msgid "Category name"
+msgstr "Kategori navn"
 
 msgid "Challenge code"
 msgstr "Utfordringskode"
 
+msgid "Change"
+msgstr "Endre"
+
 msgid "Change Request"
 msgstr "Endre forespørsel"
+
+msgid "Change email"
+msgstr "Endre e-post"
 
 msgid "Change flavor"
 msgstr "Endre smak"
 
 msgid "Change limits"
 msgstr "Endre grenser"
+
+msgid "Change plan"
+msgstr "Endre plan"
 
 msgid "Change request - client’s request to perform a generic modification of data or service."
 msgstr "Endre forespørsel - klientens forespørsel om å utføre en generisk endring av data eller tjeneste."
@@ -587,6 +725,9 @@ msgstr "Endre bruker-e-post"
 msgid "Changing flavor"
 msgstr "Endre smak"
 
+msgid "Changing password"
+msgstr "Endre passord"
+
 msgid "Charge for usage-based component is based on user-requested limit."
 msgstr "Gebyr for bruksbasert komponent er basert på den forespurte grensen for brukeren."
 
@@ -596,17 +737,29 @@ msgstr "Charset"
 msgid "Checklist setup"
 msgstr "Oppsett av sjekkliste"
 
+msgid "Checklists"
+msgstr "Sjekklister"
+
 msgid "Choices as comma-separated list"
 msgstr "Valg som kommaseparert liste"
 
 msgid "Civil number"
 msgstr "Sivilt nummer"
 
+msgid "Client ID"
+msgstr "Klient-ID"
+
 msgid "Client organization"
 msgstr "Kundeorganisasjon"
 
 msgid "Client project"
 msgstr "Klientprosjekt"
+
+msgid "Client secret"
+msgstr "Klienthemmelighet"
+
+msgid "Close"
+msgstr "Lukk"
 
 msgid "Cloud RAM"
 msgstr "Cloud RAM"
@@ -619,6 +772,9 @@ msgstr "Cloud init-mal"
 
 msgid "Cloud vCPU"
 msgstr "Cloud vCPU"
+
+msgid "Cluster"
+msgstr "Klynge"
 
 msgid "Cluster IP"
 msgstr "Klynge IP"
@@ -638,8 +794,17 @@ msgstr "Kode er for kort."
 msgid "Code should consist of latin symbols or numbers."
 msgstr "Koden skal bestå av latinske symboler eller tall."
 
+msgid "Collapse"
+msgstr "Skjul"
+
 msgid "Collation"
 msgstr "Samling"
+
+msgid "Comment"
+msgstr "Kommentar"
+
+msgid "Comments"
+msgstr "Kommentarer"
 
 msgid "Company data"
 msgstr "Firmadata"
@@ -650,8 +815,17 @@ msgstr "Sammenlign elementer"
 msgid "Competence"
 msgstr "Kompetanse"
 
+msgid "Compliance"
+msgstr "Samsvar"
+
+msgid "Component #{index}"
+msgstr "Komponent #{index}"
+
 msgid "Component name"
 msgstr "Komponentnavn"
+
+msgid "Components"
+msgstr "Komponenter"
 
 msgid "Components are invalid."
 msgstr "Komponentene er ugyldige."
@@ -659,8 +833,20 @@ msgstr "Komponentene er ugyldige."
 msgid "Compute generation"
 msgstr "Generering av databehandling"
 
+msgid "Configuration"
+msgstr "Konfigurasjon"
+
 msgid "Configuration options"
 msgstr "Konfigurasjonsalternativer"
+
+msgid "Configure"
+msgstr "Konfigurer"
+
+msgid "Confirm deletion?"
+msgstr "Bekreft sletting?"
+
+msgid "Confirmation"
+msgstr "Bekreftelse"
 
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr "Bekreftelsesposten er sendt. Vennligst sjekk innboksen din!"
@@ -671,6 +857,9 @@ msgstr "Bekreftelsesvarselmal"
 msgid "Confirming that data is correct"
 msgstr "Bekrefte at dataene er korrekte"
 
+msgid "Connect"
+msgstr "Koble"
+
 msgid "Connect subnet"
 msgstr "Koble til delnett"
 
@@ -680,8 +869,20 @@ msgstr "Tilkoblede delnett"
 msgid "Connection details"
 msgstr "Tilkoblingsdetaljer"
 
+msgid "Contact details"
+msgstr "Kontaktinformasjon"
+
+msgid "Contact e-mail"
+msgstr "Kontakt e-post"
+
+msgid "Contact email"
+msgstr "Kontakt e-post"
+
 msgid "Contact phone"
 msgstr "Kontakt telefon"
+
+msgid "Continue"
+msgstr "Fortsette"
 
 msgid "Contract sum"
 msgstr "Kontrakt sum"
@@ -692,8 +893,20 @@ msgstr "Kontraktssum er"
 msgid "Control plane"
 msgstr "Kontrollplan"
 
+msgid "Copy to clipboard"
+msgstr "Kopiere til utklippstavle"
+
+msgid "Cost"
+msgstr "Kostnad"
+
 msgid "Could not create organization"
 msgstr "Kunne ikke opprette organisasjon"
+
+msgid "Country"
+msgstr "Land"
+
+msgid "Create"
+msgstr "Opprette"
 
 msgid "Create Network adapter"
 msgstr "Opprett nettverkskort"
@@ -706,6 +919,9 @@ msgstr "Opprett VM-øyeblikksbilde for OpenStack-forekomst"
 
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr "Opprette tidsplan for øyeblikksbilde av VM for OpenStack-forekomst"
+
+msgid "Create an account"
+msgstr "Opprett en konto"
 
 msgid "Create an availability"
 msgstr "Opprette en tilgjengelighet"
@@ -728,11 +944,17 @@ msgstr "Opprett nettverk for OpenStack-leier"
 msgid "Create node"
 msgstr "Opprett node"
 
+msgid "Create notification"
+msgstr "Opprett varsel"
+
 msgid "Create organization"
 msgstr "Opprett organisasjon"
 
 msgid "Create port"
 msgstr "Opprett port"
+
+msgid "Create project"
+msgstr "Opprett prosjekt"
 
 msgid "Create request"
 msgstr "Opprett forespørsel"
@@ -752,11 +974,20 @@ msgstr "Opprett delnett"
 msgid "Create your first project"
 msgstr "Opprett ditt første prosjekt"
 
+msgid "Created"
+msgstr "Opprettet"
+
 msgid "Created a new payment for {customer_link}."
 msgstr "Opprettet en ny betaling for {customer_link}."
 
 msgid "Created at"
 msgstr "Opprettet på"
+
+msgid "Created by"
+msgstr "Opprettet av"
+
+msgid "Creating"
+msgstr "Opprette"
 
 msgid "Creating a backup schedule"
 msgstr "Opprette en tidsplan for sikkerhetskopiering"
@@ -776,17 +1007,26 @@ msgstr "Opprette et delnett"
 msgid "Creating snapshot schedule"
 msgstr "Opprette tidsplan for øyeblikksbilde"
 
+msgid "Credentials"
+msgstr "Legitimasjonserklæring"
+
 msgid "Current API token"
 msgstr "Nåværende API-token"
 
 msgid "Current cost"
 msgstr "Gjeldende kostnad"
 
+msgid "Current email"
+msgstr "Gjeldende e-post"
+
 msgid "Current flavor"
 msgstr "Nåværende smak"
 
 msgid "Current limit"
 msgstr "Gjeldende grense"
+
+msgid "Current plan"
+msgstr "Gjeldende plan"
 
 msgid "Current price per month"
 msgstr "Gjeldende pris per måned"
@@ -809,6 +1049,9 @@ msgstr "DNS-navneservere"
 msgid "Daily available booking time range"
 msgstr "Daglig tilgjengelig booking tidsintervall"
 
+msgid "Dashboard"
+msgstr "Instrumentbord"
+
 msgid "Data volume #{index}"
 msgstr "Datavolum #{index}"
 
@@ -821,20 +1064,41 @@ msgstr "Datavolumstørrelse:"
 msgid "Data volume type"
 msgstr "Datavolumtype"
 
+msgid "Databases"
+msgstr "Databaser"
+
 msgid "Datacite DOI"
 msgstr "Datacite DOI"
 
 msgid "Datastore"
 msgstr "Datalager"
 
+msgid "Date"
+msgstr "Dato"
+
 msgid "Date and time of incident"
 msgstr "Dato og klokkeslett for hendelsen"
+
+msgid "Date joined"
+msgstr "Dato sluttet"
 
 msgid "Date of reporting"
 msgstr "Dato for rapportering"
 
+msgid "Deactivate"
+msgstr "Deaktiver"
+
+msgid "Deactivating"
+msgstr "Deaktivere"
+
+msgid "Default"
+msgstr "Standard"
+
 msgid "Default SLURM account for user"
 msgstr "Standard SLURM-konto for bruker"
+
+msgid "Default account"
+msgstr "Standard konto"
 
 msgid "Default availability zone for provisioned instances."
 msgstr "Standard tilgjengelighetssone for klargjorte forekomster."
@@ -844,6 +1108,12 @@ msgstr "Standard klyngeetikett"
 
 msgid "Default tax percent"
 msgstr "Standard mva-prosent"
+
+msgid "Default value"
+msgstr "Standardverdi"
+
+msgid "Delete"
+msgstr "Slett"
 
 msgid "Delete catalog"
 msgstr "Slett katalog"
@@ -857,8 +1127,14 @@ msgstr "Sletting av PostgreSQL-serveren vil føre til sletting av alle databaser
 msgid "Deploy Longhorn block storage after cluster is deployed"
 msgstr "Distribuere Longhorn blokklagring etter at klyngen er distribuert"
 
+msgid "Description"
+msgstr "Beskrivelse"
+
 msgid "Desired replicas"
 msgstr "Ønskede replikaer"
+
+msgid "Destination"
+msgstr "Destinasjon"
 
 msgid "Destination URL"
 msgstr "Destinasjons-URL"
@@ -884,11 +1160,20 @@ msgstr "Løsne"
 msgid "Detaching"
 msgstr "Løsning"
 
+msgid "Details"
+msgstr "Detaljer"
+
+msgid "Device"
+msgstr "Enhet"
+
 msgid "Devops-friendly offering"
 msgstr "Devops-vennlig tilbud"
 
 msgid "DigitalOcean provider"
 msgstr "DigitalOcean leverandør"
+
+msgid "Direction"
+msgstr "Retning"
 
 msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
 msgstr "Deaktiver en profil i FreeIPA. Deaktiverte profiler er ikke tillatt for pålogging til Linux-systemene"
@@ -902,6 +1187,9 @@ msgstr "Deaktiver gateway IP-annonsering via DHCP"
 msgid "Disable profile"
 msgstr "Deaktiver profil"
 
+msgid "Disabled"
+msgstr "Deaktivert"
+
 msgid "Disconnect subnet"
 msgstr "Koble fra delnett"
 
@@ -913,6 +1201,12 @@ msgstr "Disk er opprettet."
 
 msgid "Disks"
 msgstr "Disker"
+
+msgid "Display name"
+msgstr "Visningsnavn"
+
+msgid "Division"
+msgstr "Divisjon"
 
 msgid "Division type"
 msgstr "Divisjonstype"
@@ -935,14 +1229,32 @@ msgstr "Vil du fjerne koblingen til forekomst {name}?"
 msgid "Docker version"
 msgstr "Docker-versjon"
 
+msgid "Documentation"
+msgstr "Dokumentasjon"
+
+msgid "Documents"
+msgstr "Dokumenter"
+
+msgid "Domain"
+msgstr "Domene"
+
+msgid "Domain name"
+msgstr "Domenenavn"
+
 msgid "Domain name. If not defined default domain will be used."
 msgstr "Domenenavn. Hvis ikke definert standard domene vil bli brukt."
+
+msgid "Done"
+msgstr "Ferdig"
 
 msgid "Download invoice"
 msgstr "Last ned faktura"
 
 msgid "Download order PDF file"
 msgstr "Last ned ordre PDF-fil"
+
+msgid "Draft"
+msgstr "Utkast"
 
 msgid "Drop files to attach, or"
 msgstr "Slipp filer for å legge ved, eller"
@@ -953,8 +1265,17 @@ msgstr "Slipp filer for å legge dem ved problemet."
 msgid "Droplet has been resized."
 msgstr "Droplet er endret."
 
+msgid "Due date"
+msgstr "Forfallsdato"
+
 msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr "Dynamisk — bruk separate volumtyper for sporing av priser"
+
+msgid "E-mail"
+msgstr "E-post"
+
+msgid "E-mail address"
+msgstr "E-postadresse"
 
 msgid "EU VAT ID"
 msgstr "EU MVA-ID"
@@ -964,6 +1285,9 @@ msgstr "Hvert monteringspunkt skal brukes en gang på det meste."
 
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr "Hver bruksrapport må være koblet til en faktureringsplan for å sikre korrekt beregning av regnskapsdata."
+
+msgid "Edit"
+msgstr "Rediger"
 
 msgid "Edit YAML"
 msgstr "Rediger YAML"
@@ -980,6 +1304,9 @@ msgstr "Rediger bestillingsarrangement"
 msgid "Edit offering"
 msgstr "Rediger tilbud"
 
+msgid "Edit permissions"
+msgstr "Rediger tillatelser"
+
 msgid "Edit project member"
 msgstr "Rediger prosjektmedlem"
 
@@ -989,6 +1316,9 @@ msgstr "Rediger teammedlem"
 msgid "Egress"
 msgstr "Utgang"
 
+msgid "Email"
+msgstr "E-post"
+
 msgid "Email change request has been cancelled."
 msgstr "Forespørselen om endring av e-post er kansellert."
 
@@ -997,6 +1327,9 @@ msgstr "E-posten er oppdatert."
 
 msgid "Email verification has been sent. Please check your inbox."
 msgstr "E-postbekreftelse er sendt. Vennligst sjekk innboksen din."
+
+msgid "Enable"
+msgstr "Aktiver"
 
 msgid "Enable DHCP"
 msgstr "Aktiver DHCP"
@@ -1016,6 +1349,9 @@ msgstr "Aktiver profil"
 msgid "Enable profile after creation"
 msgstr "Aktiver profil etter oppretting"
 
+msgid "Enabled"
+msgstr "Aktivert"
+
 msgid "Enabled checklists have been updated."
 msgstr "Aktiverte sjekklister er oppdatert."
 
@@ -1025,17 +1361,32 @@ msgstr "Aktivert standard gateway"
 msgid "Encountered an empty component"
 msgstr "Støtte på en tom komponent"
 
+msgid "End"
+msgstr "Slutt"
+
+msgid "End date"
+msgstr "Sluttdato"
+
 msgid "End date must be after start date."
 msgstr "Sluttdato må være etter startdato."
 
 msgid "End date of the agreement is"
 msgstr "Sluttdato for avtalen er"
 
+msgid "End time"
+msgstr "Sluttid"
+
+msgid "English"
+msgstr "Engelsk"
+
 msgid "Ensure this field has no more than 30 characters."
 msgstr "Kontroller at dette feltet ikke har mer enn 30 tegn."
 
 msgid "Enter IPv4 address."
 msgstr "Skriv inn IPv4-adresse."
+
+msgid "Enter address..."
+msgstr "Skriv inn adresse..."
 
 msgid "Enter private IPv4 CIDR."
 msgstr "Skriv inn privat IPv4 CIDR."
@@ -1045,6 +1396,9 @@ msgstr "Miljøvariabler"
 
 msgid "Erred"
 msgstr "Feilet"
+
+msgid "Error message"
+msgstr "Feilmelding"
 
 msgid "Error traceback"
 msgstr "Feil traceback"
@@ -1064,17 +1418,47 @@ msgstr "Estimert månedlig kostnad"
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr "Estimert månedlig avgift vil endres fra {old_estimate} til {new_estimate}. MVA er ikke inkludert."
 
+msgid "Estonian"
+msgstr "Estisk"
+
 msgid "Ethernet type"
 msgstr "Ethernet-type"
+
+msgid "Evaluation"
+msgstr "Evaluering"
+
+msgid "Event details"
+msgstr "Arrangementsdetaljer"
+
+msgid "Event type"
+msgstr "Hendelsestype"
 
 msgid "Event types"
 msgstr "Arrangement typer"
 
+msgid "Events"
+msgstr "Hendelser"
+
+msgid "Every"
+msgstr "Hver"
+
+msgid "Every day"
+msgstr "Hver dag"
+
 msgid "Every day at"
 msgstr "Hver dag på"
 
+msgid "Every hour"
+msgstr "Hver time"
+
 msgid "Every hour at {minuteValues} past the hour"
 msgstr "Hver time på {minuteValues} forbi timen"
+
+msgid "Every minute"
+msgstr "Hvert minutt"
+
+msgid "Every month"
+msgstr "Hver måned"
 
 msgid "Every month on the {days} at {time}"
 msgstr "Hver måned på {days} på {time}"
@@ -1085,17 +1469,47 @@ msgstr "Hver måned på {days} for {months} på {time}"
 msgid "Every month service provider can report up to the amount requested by user."
 msgstr "Hver måned kan tjenesteleverandøren rapportere opp til beløpet som brukeren ber om."
 
+msgid "Every week"
+msgstr "Hver uke"
+
 msgid "Every week on {day} at {time}"
 msgstr "Hver uke på {day} på {time}"
+
+msgid "Every year"
+msgstr "Hvert år"
+
+msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
+msgstr "Eksempel: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
 
 msgid "Excel"
 msgstr "Excel"
 
+msgid "Executing"
+msgstr "Utfører"
+
 msgid "Existing quota usage: {usage}"
 msgstr "Eksisterende kvotebruk: {usage}"
 
+msgid "Expand"
+msgstr "Utvid"
+
+msgid "Expiration time"
+msgstr "Utløpstid"
+
+msgid "Expired"
+msgstr "Utløpt"
+
+msgid "Expires at"
+msgstr "Utløper den"
+
 msgid "Explore {deployment} Marketplace"
 msgstr "Utforsk {deployment} Markedsplass"
+
+msgid "Export as"
+msgstr "Eksporter som"
+
+msgid "Extend"
+msgstr "Utvid"
 
 msgid "Extend OpenStack volume"
 msgstr "Utvid OpenStack volum"
@@ -1109,14 +1523,26 @@ msgstr "Utvide"
 msgid "External IP"
 msgstr "Ekstern IP"
 
+msgid "External links"
+msgstr "Eksterne linker"
+
 msgid "External network ID"
 msgstr "Ekstern nettverks-ID"
 
 msgid "Failed to operate with backend."
 msgstr "Kunne ikke operere med backend."
 
+msgid "Features"
+msgstr "Funksjoner"
+
 msgid "Fee applied each time this plan is activated."
 msgstr "Gebyret påføres hver gang denne planen aktiveres."
+
+msgid "Feedback"
+msgstr "Tilbakemelding"
+
+msgid "File"
+msgstr "Fil"
 
 msgid "File download has been started."
 msgstr "Nedlasting av filer er startet."
@@ -1127,11 +1553,23 @@ msgstr "Filen er kopiert"
 msgid "File has been downloaded."
 msgstr "Filen er lastet ned."
 
+msgid "Filename"
+msgstr "Filnavn"
+
+msgid "Files"
+msgstr "Filer"
+
+msgid "Filter"
+msgstr "Filtrer"
+
 msgid "Filter organizations"
 msgstr "Filtrer organisasjoner"
 
 msgid "Filter projects"
 msgstr "Filtrer prosjekter"
+
+msgid "Financial"
+msgstr "Finansiell"
 
 msgid "Financial overview"
 msgstr "Økonomisk oversikt"
@@ -1139,8 +1577,14 @@ msgstr "Økonomisk oversikt"
 msgid "Find solution"
 msgstr "Finn løsning"
 
+msgid "Fingerprint"
+msgstr "Fingeravtrykk"
+
 msgid "Fixed-price contract"
 msgstr "Fastpriskontrakt"
+
+msgid "Fixed price"
+msgstr "Fast pris"
 
 msgid "Fixed — use common storage quota"
 msgstr "Fast — bruk vanlig lagringskvote"
@@ -1190,6 +1634,12 @@ msgstr "Flytende IPer-oppdatering er planlagt."
 msgid "Flowmap"
 msgstr "Flytkart"
 
+msgid "Folder"
+msgstr "Mappe"
+
+msgid "For"
+msgstr "For"
+
 msgid "Force destroy"
 msgstr "Kraft ødelegge"
 
@@ -1205,8 +1655,17 @@ msgstr "FreeIPA-konto må settes opp."
 msgid "FreeIPA extension is disabled."
 msgstr "FreeIPA-utvidelse er deaktivert."
 
+msgid "From"
+msgstr "Fra"
+
 msgid "From port"
 msgstr "Fra havn"
+
+msgid "Full description"
+msgstr "Fullstendig beskrivelse"
+
+msgid "Full name"
+msgstr "Fullt navn"
 
 msgid "GB"
 msgstr "GB"
@@ -1223,17 +1682,29 @@ msgstr "GPU-bruk"
 msgid "Gateway"
 msgstr "Gateway"
 
+msgid "Gateway IP"
+msgstr "Gateway IP"
+
 msgid "Gateway IP of this subnet"
 msgstr "Gateway IP for dette delnettet"
 
+msgid "General information"
+msgstr "Generell informasjon"
+
 msgid "Generate Kubeconfig file"
 msgstr "Generer Kubeconfig-fil"
+
+msgid "Generate password"
+msgstr "Generer passord"
 
 msgid "Go to marketplace"
 msgstr "Gå til markedsplass"
 
 msgid "Go to my profile"
 msgstr "Gå til profilen min"
+
+msgid "Go to profile"
+msgstr "Gå til profil"
 
 msgid "Google Calendar has been published successfully."
 msgstr "Google Kalender har blitt publisert."
@@ -1246,6 +1717,15 @@ msgstr "Google Kalender har blitt upublisert."
 
 msgid "Google Calendar link"
 msgstr "Google Kalender-lenke"
+
+msgid "Got it!"
+msgstr "Fikk den!"
+
+msgid "Grant permission"
+msgstr "Gi tillatelse"
+
+msgid "Growth"
+msgstr "Vekst"
 
 msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
 msgstr "Garantert tid for VM øyeblikksbilde oppbevaring. Hvis null - holde for alltid."
@@ -1262,17 +1742,26 @@ msgstr "Gjest OS"
 msgid "HPA"
 msgstr "HPA"
 
+msgid "Heatmap"
+msgstr "Varmekart"
+
 msgid "Helpdesk"
 msgstr "Brukerstøtte"
 
 msgid "Helpdesk dashboard"
 msgstr "Instrumentbord for brukerstøtte"
 
+msgid "Hide controls"
+msgstr "Skjul kontroller"
+
 msgid "Hide diff"
 msgstr "Skjul diff"
 
 msgid "Home organization domain name"
 msgstr "Domenenavn for hjemmeorganisasjon"
+
+msgid "Homepage"
+msgstr "Hjemmeside"
 
 msgid "Hook has been removed."
 msgstr "Krok er fjernet."
@@ -1307,8 +1796,14 @@ msgstr "Hvordan du får tak i legitimasjon for Azure-leverandør"
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr "Slik skaffer du legitimasjon for DigitalOcean-leverandør"
 
+msgid "ID"
+msgstr "ID"
+
 msgid "ID code"
 msgstr "ID-kode"
+
+msgid "IP address"
+msgstr "IP adresse"
 
 msgid "IP address is already used by router."
 msgstr "IP-adressen er allerede brukt av ruteren."
@@ -1322,11 +1817,20 @@ msgstr "IP-versjon"
 msgid "I accept the <Link>Terms of Service</Link>."
 msgstr "Jeg godtar <Link>Vilkårene for bruk</Link>."
 
+msgid "Icon"
+msgstr "Ikon"
+
 msgid "Identity provided has been selected via SAML2 discovery service. You will be redirected to the login page soon."
 msgstr "Identitet er valgt via SAML-2-søketjenesten. Du vil snart bli omdirigert til innloggingssiden."
 
 msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
 msgstr "Hvis du vil at brukeren skal oppgi ytterligere detaljer når du bestiller, må du konfigurere inntastingsskjema for brukeren nedenfor"
+
+msgid "Image"
+msgstr "Bilde"
+
+msgid "Image:"
+msgstr "Bilde:"
 
 msgid "Image has been added."
 msgstr "Bildet er lagt til."
@@ -1336,6 +1840,15 @@ msgstr "Bildet er fjernet."
 
 msgid "Image here"
 msgstr "Bilde her"
+
+msgid "Image name"
+msgstr "Bilde navn"
+
+msgid "Images"
+msgstr "Bilder"
+
+msgid "Import"
+msgstr "Importer"
 
 msgid "Import YAML"
 msgstr "Importer YAML"
@@ -1354,6 +1867,9 @@ msgstr "I formatet av GUID"
 
 msgid "Inactive user will not be able to login into the portal."
 msgstr "Inaktiv bruker vil ikke kunne logge inn på portalen."
+
+msgid "Incident"
+msgstr "Hendelse"
 
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr "Hendelse - klientproblem med tjenestebruk eller tilgjengelighet (avbrudd, nedbrytning av kvalitet)."
@@ -1427,6 +1943,12 @@ msgstr "Forekomsten skal være afslukning og OK eller fejlet. Ta kontakt med kun
 msgid "Instances count"
 msgstr "Forekomster teller"
 
+msgid "Internal"
+msgstr "Intern"
+
+msgid "Internal IP"
+msgstr "Intern IP"
+
 msgid "Internal IPs"
 msgstr "Interne IP-er"
 
@@ -1478,8 +2000,14 @@ msgstr "Invitasjonen blir ikke funnet."
 msgid "Invitation is not valid"
 msgstr "Invitasjon er ikke gyldig"
 
+msgid "Invitation is not valid."
+msgstr "Invitasjonen er ikke gyldig."
+
 msgid "Invitation is not valid anymore."
 msgstr "Invitasjon er ikke gyldig lenger."
+
+msgid "Invitation link"
+msgstr "Invitasjon-kobling"
 
 msgid "Invitation rejection"
 msgstr "Avvisning av invitasjon"
@@ -1487,11 +2015,23 @@ msgstr "Avvisning av invitasjon"
 msgid "Invitation token is not found."
 msgstr "Finner ikke invitasjonstoken."
 
+msgid "Invitations"
+msgstr "Invitasjoner"
+
 msgid "Invite team member"
 msgstr "Inviter teammedlem"
 
+msgid "Invite user"
+msgstr "Inviter bruker"
+
+msgid "Invoice"
+msgstr "Faktura"
+
 msgid "Invoice No."
 msgstr "Faktura nr."
+
+msgid "Invoice date"
+msgstr "Fakturadato"
 
 msgid "Invoice events"
 msgstr "Faktura hendelser"
@@ -1517,6 +2057,9 @@ msgstr "Fakturaen har blitt fjernet fra betaling."
 msgid "Invoice has not been sent to PayPal yet"
 msgstr "Fakturaen har ikke blitt sendt til PayPal ennå"
 
+msgid "Invoice number"
+msgstr "Fakturanummer"
+
 msgid "Invoice statistics"
 msgstr "Faktura statistikk"
 
@@ -1538,11 +2081,17 @@ msgstr "Er offisiell"
 msgid "Is service provider"
 msgstr "Er tjenesteleverandør"
 
+msgid "Issue"
+msgstr "Problem"
+
 msgid "Issue link"
 msgstr "Problem lenke"
 
 msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr "Problemet {issue_link} er opprettet av {caller_link}."
+
+msgid "Issues"
+msgstr "Problemer"
 
 msgid "Issues are trackable requests to the operator."
 msgstr "Problemer er sporbare forespørsler til operatøren."
@@ -1550,11 +2099,23 @@ msgstr "Problemer er sporbare forespørsler til operatøren."
 msgid "It is used to automatically assign floating IP to your virtual machine."
 msgstr "Den brukes til automatisk å tilordne flytende IP til din virtuelle maskin."
 
+msgid "Item"
+msgstr "Element"
+
 msgid "Item has been added to shopping cart."
 msgstr "Varen er lagt til i handlekurven."
 
 msgid "Item has been removed from shopping cart."
 msgstr "Varen er fjernet fra handlekurven."
+
+msgid "Item type"
+msgstr "Elementtype"
+
+msgid "Job position"
+msgstr "Jobb stilling"
+
+msgid "Job title"
+msgstr "Jobbtittel"
 
 msgid "Keep forever"
 msgstr "Hold for alltid"
@@ -1565,11 +2126,17 @@ msgstr "Hold til"
 msgid "Kept until"
 msgstr "Holdes til"
 
+msgid "Key"
+msgstr "Nøkkel"
+
 msgid "Key name"
 msgstr "Nøkkelnavn"
 
 msgid "Key removal"
 msgstr "Fjerning av nøkler"
+
+msgid "Keys"
+msgstr "Nøkler"
 
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr "Keystone auth URL (f.eks. http://keystone.example.com:5000/v3)"
@@ -1589,6 +2156,15 @@ msgstr "Kubernetes versjon"
 msgid "Label that is visible to users in Marketplace."
 msgstr "Etikett som er synlig for brukere på Marketplace."
 
+msgid "Labels"
+msgstr "Etiketter"
+
+msgid "Latvian"
+msgstr "Latvisk"
+
+msgid "Learn more"
+msgstr "Finn ut mer"
+
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr "La det være tomt hvis du vil at administratorpassordet skal genereres automatisk."
 
@@ -1598,8 +2174,14 @@ msgstr "La stå tomt hvis du vil at administratorbrukernavnet skal genereres aut
 msgid "Legal address"
 msgstr "Juridisk adresse"
 
+msgid "Let’s get started"
+msgstr "La oss komme i gang"
+
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Levetiden vil bli oppdatert og tilbakestilt når du lagrer skjemaet."
+
+msgid "Limit"
+msgstr "Grense"
 
 msgid "Limit amount"
 msgstr "Begrense beløp"
@@ -1613,11 +2195,20 @@ msgstr "Grenser"
 msgid "Limits are invalid."
 msgstr "Grensene er ugyldige."
 
+msgid "Link"
+msgstr "Lenke"
+
 msgid "Link OpenStack Instance"
 msgstr "Koble OpenStack-forekomst"
 
 msgid "Link invoice"
 msgstr "Koble faktura"
+
+msgid "Lithuanian"
+msgstr "Litauisk"
+
+msgid "Loading"
+msgstr "Laster"
 
 msgid "Loading actions"
 msgstr "Laste inn handlinger"
@@ -1628,17 +2219,32 @@ msgstr "Laster eiendeler, vennligst vent."
 msgid "Loading invoices"
 msgstr "Laster inn fakturaer"
 
+msgid "Location"
+msgstr "Plassering"
+
 msgid "Location has been saved successfully."
 msgstr "Plassering er lagret."
 
 msgid "Location of {offeringName} offering"
 msgstr "Plassering av {offeringName} tilbud"
 
+msgid "Log out"
+msgstr "Logg ut"
+
 msgid "Logging user in"
 msgstr "Logge inn bruker"
 
+msgid "Login"
+msgstr "Logg inn"
+
+msgid "Login failed"
+msgstr "Pålogging mislyktes"
+
 msgid "Login with"
 msgstr "Logg inn med"
+
+msgid "Logo"
+msgstr "Logo"
 
 msgid "Logo has been removed."
 msgstr "Logoen er fjernet."
@@ -1646,14 +2252,23 @@ msgstr "Logoen er fjernet."
 msgid "Logo has been uploaded."
 msgstr "Logoen er lastet opp."
 
+msgid "Logout failed"
+msgstr "Utloggingen mislyktes"
+
 msgid "Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes."
 msgstr "Longhorn er et lett, pålitelig og kraftig distribuert blokklagringssystem for Kubernetes."
+
+msgid "MAC address"
+msgstr "MAC-adresse"
 
 msgid "MAC address (optional)"
 msgstr "MAC-adresse (valgfritt)"
 
 msgid "MTU"
 msgstr "MTU"
+
+msgid "Manage"
+msgstr "Administrer"
 
 msgid "Manage avatar at {link}"
 msgstr "Administrere avatar på {link}"
@@ -1670,11 +2285,17 @@ msgstr "Administrere sikkerhetsgrupper"
 msgid "Managed projects"
 msgstr "Administrerte prosjekter"
 
+msgid "Management"
+msgstr "Management"
+
 msgid "Mark as paid"
 msgstr "Merk som betalt"
 
 msgid "Mark invoice as paid"
 msgstr "Marker faktura som betalt"
+
+msgid "Marketplace"
+msgstr "Markedsplass"
 
 msgid "Marketplace UUID"
 msgstr "Markedsplass UUID"
@@ -1742,11 +2363,26 @@ msgstr "Maksimal vCPU for hver VM"
 msgid "Measured unit"
 msgstr "Målt enhet"
 
+msgid "Member"
+msgstr "Medlem"
+
+msgid "Memory"
+msgstr "Minne"
+
 msgid "Memory per vCore"
 msgstr "Minne per vCore"
 
 msgid "Memory size in GiB"
 msgstr "Minnestørrelse i GiB"
+
+msgid "Message"
+msgstr "Melding"
+
+msgid "Method"
+msgstr "Metode"
+
+msgid "Metric"
+msgstr "Metrisk"
 
 msgid "Metric name"
 msgstr "Metrisk navn"
@@ -1778,11 +2414,20 @@ msgstr "Minimum booking tid slot varighet."
 msgid "Minimum username length is 3 characters."
 msgstr "Minimum brukernavn lengde er 3 tegn."
 
+msgid "Mobile phone number"
+msgstr "Mobiltelefonnummer"
+
+msgid "Month"
+msgstr "Måned"
+
 msgid "Monthly cost"
 msgstr "Månedlig kostnad"
 
 msgid "Monthly invoices"
 msgstr "Månedlige fakturaer"
+
+msgid "More info"
+msgstr "Mer info"
 
 msgid "Mount point"
 msgstr "Monteringspunkt"
@@ -1799,6 +2444,9 @@ msgstr "Må starte med et land prefiks dvs. EE34501234215"
 msgid "My offerings"
 msgstr "Mine tilbud"
 
+msgid "My orders"
+msgstr "Mine bestillinger"
+
 msgid "My resources"
 msgstr "Mine ressurser"
 
@@ -1807,6 +2455,9 @@ msgstr "Mine tjenester"
 
 msgid "N/A"
 msgstr "N/A"
+
+msgid "Name"
+msgstr "Navn"
 
 msgid "Name \"{label}\" must be 1-63 characters long, each of which can only be alphanumeric or a hyphen"
 msgstr "Navnet \"{label}\" må være 1-63 tegn langt, som hver bare kan være alfanumerisk eller bindestrek"
@@ -1853,11 +2504,32 @@ msgstr "Navneområdet skal være unikt."
 msgid "Native name"
 msgstr "Opprinnelig navn"
 
+msgid "Negative"
+msgstr "Negativ"
+
+msgid "Network"
+msgstr "Nettverk"
+
 msgid "Network MTU has been updated."
 msgstr "Network MTU har blitt oppdatert."
 
 msgid "Network adapters"
 msgstr "Nettverkskort"
+
+msgid "Network name"
+msgstr "Nettverksnavn"
+
+msgid "Networks"
+msgstr "Nettverk"
+
+msgid "Neutral"
+msgstr "Nøytral"
+
+msgid "New e-mail address"
+msgstr "Ny e-postadresse"
+
+msgid "New email"
+msgstr "Ny e-post"
 
 msgid "New flavor"
 msgstr "Ny smak"
@@ -1871,11 +2543,17 @@ msgstr "Ny plan"
 msgid "New size"
 msgstr "Ny størrelse"
 
+msgid "Next"
+msgstr "Neste"
+
 msgid "Next hop (IP)"
 msgstr "Neste hopp (IP)"
 
 msgid "Next trigger at"
 msgstr "Neste utløser på"
+
+msgid "No"
+msgstr "Nei"
 
 msgid "No, continue using current email"
 msgstr "Nei, fortsett å bruke gjeldende e-post"
@@ -1885,6 +2563,9 @@ msgstr "Ingen tilgangsinfo"
 
 msgid "No access info."
 msgstr "Ingen tilgangsinfo"
+
+msgid "No categories"
+msgstr "Ingen kategorier"
 
 msgid "No countries"
 msgstr "Ingen land"
@@ -1916,6 +2597,9 @@ msgstr "Ingen prosjekter er tilordnet til denne brukeren."
 msgid "No providers"
 msgstr "Ingen leverandører"
 
+msgid "No results found"
+msgstr "Finner ingen resultater"
+
 msgid "No service providers"
 msgstr "Ingen tjenesteleverandører"
 
@@ -1934,8 +2618,14 @@ msgstr "Node-plan"
 msgid "Nodes"
 msgstr "Noder"
 
+msgid "None"
+msgstr "Ingen"
+
 msgid "Not a service provider."
 msgstr "Ikke en tjenesteleverandør."
+
+msgid "Not assigned"
+msgstr "Ikke tilordnet"
 
 msgid "Not running accounting"
 msgstr "Kjører ikke regnskap"
@@ -1945,6 +2635,12 @@ msgstr "Vær oppmerksom på at denne virtuelle maskinen ikke vil bli belastet se
 
 msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "Vær oppmerksom på at dette volumet ikke belastes separat for {organization}."
+
+msgid "Nothing to see here"
+msgstr "Ingenting å se her"
+
+msgid "Nothing to show here"
+msgstr "Ingenting å vise her"
 
 msgid "Notification can be sent only for created invoice."
 msgstr "Varslingen kan bare sendes for opprettet faktura."
@@ -1957,6 +2653,9 @@ msgstr "Varslingen er oppdatert."
 
 msgid "Notification method"
 msgstr "Varslingsmetode"
+
+msgid "Notifications"
+msgstr "Varslinger"
 
 msgid "Notifications allow to be informed when a certain event has occurred."
 msgstr "Varsler tillater å bli informert når en bestemt hendelse har oppstått."
@@ -1988,8 +2687,14 @@ msgstr "Antall kjørende forekomster"
 msgid "Number of worker nodes"
 msgstr "Antall arbeidernoder"
 
+msgid "OK"
+msgstr "OK"
+
 msgid "Object is not found."
 msgstr "Objektet er ikke funnet."
+
+msgid "Offering"
+msgstr "Tilbud"
 
 msgid "Offering components"
 msgstr "Tilbyr komponenter"
@@ -2036,8 +2741,14 @@ msgstr "Tilbudstilstand er oppdatert."
 msgid "Offering type"
 msgstr "Tilbudstype"
 
+msgid "Offerings"
+msgstr "Tilbud"
+
 msgid "Offerings images"
 msgstr "Bilder av tilbud"
+
+msgid "One-time"
+msgstr "En gang"
 
 msgid "One-time on plan switch"
 msgstr "Engang på plan bryter"
@@ -2065,6 +2776,9 @@ msgstr "Bare ansatte kan fjerne organisasjonen."
 
 msgid "Only staff users are allowed to perform this action."
 msgstr "Bare ansatte har lov til å utføre denne handlingen."
+
+msgid "Open"
+msgstr "Åpen"
 
 msgid "OpenStack Images"
 msgstr "OpenStack-bilder"
@@ -2114,6 +2828,12 @@ msgstr "Alternativene er ugyldige."
 msgid "Or use social login"
 msgstr "Eller bruk sosial pålogging"
 
+msgid "Order Summary"
+msgstr "Bestillingssammendrag"
+
+msgid "Order details"
+msgstr "Bestillingsdetaljer"
+
 msgid "Order has been approved."
 msgstr "Bestillingen er godkjent."
 
@@ -2135,6 +2855,21 @@ msgstr "Bestillingsvaren er avvist."
 msgid "Order item has cancel has been scheduled."
 msgstr "Bestillingsvaren er kansellert er planlagt."
 
+msgid "Order items"
+msgstr "Bestill elementer"
+
+msgid "Order summary"
+msgstr "Bestillingssammendrag"
+
+msgid "Ordering"
+msgstr "Bestilling"
+
+msgid "Orders"
+msgstr "Bestillinger"
+
+msgid "Organization"
+msgstr "Organisasjon"
+
 msgid "Organization actions"
 msgstr "Organisasjonshandlinger"
 
@@ -2143,6 +2878,9 @@ msgstr "Organisasjonen inneholder fakturaer. Fjern dem først."
 
 msgid "Organization contains projects. Please remove them first."
 msgstr "Organisasjonen inneholder prosjekter. Vennligst fjern dem først."
+
+msgid "Organization details"
+msgstr "Organisasjonsdetaljer"
 
 msgid "Organization events"
 msgstr "Organisasjonshendelser"
@@ -2155,6 +2893,9 @@ msgstr "Organisasjonen har blitt oppdatert."
 
 msgid "Organization has signed a fixed price agreement"
 msgstr "Organisasjonen har signert en fast prisavtale"
+
+msgid "Organization name"
+msgstr "Organisasjonens navn"
 
 msgid "Organization owner"
 msgstr "Organisasjonseier"
@@ -2186,17 +2927,35 @@ msgstr "Organisasjonsbrukerliste"
 msgid "Organization workspace"
 msgstr "Organisasjons arbeidsområde"
 
+msgid "Organization {customer_link} has been created."
+msgstr "Organisasjonen {customer_link} er opprettet."
+
 msgid "Organization {customer_link} has been updated."
 msgstr "Organisasjonen {customer_link} har blitt oppdatert."
 
 msgid "Organization {customer_name} has been deleted."
 msgstr "Organisasjonen {customer_name} har blitt slettet."
 
+msgid "Organizations"
+msgstr "Organisasjoner"
+
+msgid "Organizations ({count})"
+msgstr "Organisasjoner ({count})"
+
 msgid "Organizations by divisions"
 msgstr "Organisasjoner etter divisjoner"
 
 msgid "Organizations divisions"
 msgstr "Organisasjoner divisjoner"
+
+msgid "Others"
+msgstr "Andre"
+
+msgid "Output"
+msgstr "Utgang"
+
+msgid "Overview"
+msgstr "Oversikt"
 
 msgid "Overview of {organization} organization"
 msgstr "Oversikt over {organization} organisasjon"
@@ -2207,11 +2966,26 @@ msgstr "Oversikt over {project} prosjekt"
 msgid "Owned organizations"
 msgstr "Eide organisasjoner"
 
+msgid "Owner"
+msgstr "Eier"
+
+msgid "PDF"
+msgstr "PDF"
+
 msgid "PID"
 msgstr "PID"
 
+msgid "Page is not found."
+msgstr "Siden er ikke funnet."
+
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr "Siden er ikke funnet. Du har enten angitt ugyldig URL-adresse eller prøver å nå deaktivert funksjon."
+
+msgid "Paid"
+msgstr "Betalt"
+
+msgid "Password"
+msgstr "Passord"
 
 msgid "Password has been changed for user {affected_user_link}."
 msgstr "Passordet er endret for bruker {affected_user_link}."
@@ -2219,8 +2993,14 @@ msgstr "Passordet er endret for bruker {affected_user_link}."
 msgid "Past time slots are not allowed."
 msgstr "Tidligere tidsrom er ikke tillatt."
 
+msgid "Pause"
+msgstr "Pause"
+
 msgid "Pause offering"
 msgstr "Sett tilbudet på pause"
+
+msgid "Paused"
+msgstr "Pauset"
 
 msgid "Pay invoice"
 msgstr "Betal faktura"
@@ -2252,6 +3032,9 @@ msgstr "Betalingen er oppdatert."
 msgid "Payment is being processed, please wait."
 msgstr "Betaling blir behandlet, vennligst vent."
 
+msgid "Payment pending"
+msgstr "Betaling venter"
+
 msgid "Payment profile"
 msgstr "Betalingsprofil"
 
@@ -2276,11 +3059,17 @@ msgstr "Betalingsprofilen er oppdatert."
 msgid "Payment profiles"
 msgstr "Betalingsprofiler"
 
+msgid "Payment type {type}"
+msgstr "Betalingstype {type}"
+
 msgid "Payments connected with an active payment profile."
 msgstr "Betalinger knyttet til en aktiv betalingsprofil."
 
 msgid "Payments list"
 msgstr "Betalingsliste"
+
+msgid "Pending"
+msgstr "Venter"
 
 msgid "Pending approval for changing of"
 msgstr "Venter på godkjenning for endring av"
@@ -2291,8 +3080,17 @@ msgstr "Venter på godkjenning for opprettelse av"
 msgid "Pending approval for removal of"
 msgstr "Venter på godkjenning for fjerning av"
 
+msgid "Per day"
+msgstr "Per dag"
+
 msgid "Per half month"
 msgstr "Per halv måned"
+
+msgid "Per hour"
+msgstr "Per time"
+
+msgid "Per month"
+msgstr "Per måned"
 
 msgid "Perform local logout"
 msgstr "Utføre lokal utlogging"
@@ -2300,11 +3098,20 @@ msgstr "Utføre lokal utlogging"
 msgid "Perform review"
 msgstr "Utfør gjennomgang"
 
+msgid "Performed"
+msgstr "Utført"
+
 msgid "Performed by"
 msgstr "Fremført av"
 
+msgid "Period"
+msgstr "Periode"
+
 msgid "Periods"
 msgstr "Perioder"
+
+msgid "Permanent"
+msgstr "Fast"
 
 msgid "Permission has been revoked."
 msgstr "Tillatelse er tilbakekalt."
@@ -2314,6 +3121,15 @@ msgstr "Tillatelseslogg"
 
 msgid "Personal workspace"
 msgstr "Personlig arbeidsområde"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+msgid "Phone numbers"
+msgstr "Telefonnummer"
 
 msgid "Plan"
 msgstr "Plan"
@@ -2335,6 +3151,9 @@ msgstr "Planlegge komponenter"
 
 msgid "Plan description"
 msgstr "Planbeskrivelse"
+
+msgid "Plan details"
+msgstr "Plan detaljer"
 
 msgid "Plan does not have limit"
 msgstr "Plan har ikke grense"
@@ -2450,17 +3269,44 @@ msgstr "Plugin-alternativene er ugyldige."
 msgid "Pods"
 msgstr "Pods"
 
+msgid "Port"
+msgstr "Havn"
+
 msgid "Port has been created."
 msgstr "Port er opprettet."
 
 msgid "Port range"
 msgstr "Port rekkevidde"
 
+msgid "Ports"
+msgstr "Porter"
+
+msgid "Positive"
+msgstr "Positiv"
+
 msgid "Postal"
 msgstr "Postnummer"
 
+msgid "Postal code"
+msgstr "Postnummer"
+
+msgid "Powered by"
+msgstr "Drevet av"
+
+msgid "Preferred language"
+msgstr "Foretrukket språk"
+
+msgid "Preview"
+msgstr "Forhåndsvisning"
+
 msgid "Preview offering"
 msgstr "Forhåndsvisningstilbud"
+
+msgid "Previous"
+msgstr "Forrige"
+
+msgid "Price"
+msgstr "Pris"
 
 msgid "Price for consumption"
 msgstr "Pris for forbruk"
@@ -2498,11 +3344,23 @@ msgstr "Pris per år"
 msgid "Pricing tier"
 msgstr "Prisnivå"
 
+msgid "Print invoice"
+msgstr "Skriv ut faktura"
+
 msgid "Print record"
 msgstr "Skriv ut post"
 
+msgid "Priority"
+msgstr "Prioritet"
+
+msgid "Privacy policy"
+msgstr "Personvernregler"
+
 msgid "Private clouds"
 msgstr "Private skyer"
+
+msgid "Project"
+msgstr "Prosjekt"
 
 msgid "Project aggregates and isolates teams and resources."
 msgstr "Prosjektet samler og isolerer team og ressurser."
@@ -2537,11 +3395,17 @@ msgstr "Prosjektet er oppdatert."
 msgid "Project is not selected."
 msgstr "Prosjektet er ikke valgt."
 
+msgid "Project manager"
+msgstr "Prosjektleder"
+
 msgid "Project manager cannot edit users with same role."
 msgstr "Prosjektleder kan ikke redigere brukere med samme rolle."
 
 msgid "Project member"
 msgstr "Prosjektmedlem"
+
+msgid "Project name"
+msgstr "Prosjektnavn"
 
 msgid "Project removal"
 msgstr "Fjerning av prosjekt"
@@ -2561,8 +3425,20 @@ msgstr "Prosjekttype"
 msgid "Project workspace"
 msgstr "Prosjektarbeidsområde"
 
+msgid "Project {project_link} has been created."
+msgstr "Prosjekt {project_link} er opprettet."
+
+msgid "Project {project_link} has been updated."
+msgstr "Prosjekt {project_link} har blitt oppdatert."
+
 msgid "Project {project_name} has been deleted."
 msgstr "Prosjekt {project_name} er slettet."
+
+msgid "Projects"
+msgstr "Prosjekter"
+
+msgid "Projects ({count})"
+msgstr "Prosjekter ({count})"
 
 msgid "Projects list"
 msgstr "Prosjektliste"
@@ -2572,6 +3448,12 @@ msgstr "Bevis"
 
 msgid "Proof document"
 msgstr "Bevis dokument"
+
+msgid "Provided by {provider}"
+msgstr "Levert av {provider}"
+
+msgid "Provider"
+msgstr "Leverandør"
 
 msgid "Provider details"
 msgstr "Leverandørdetaljer"
@@ -2585,11 +3467,17 @@ msgstr "Leverandøren har blitt oppdatert."
 msgid "Provider location"
 msgstr "Leverandør plassering"
 
+msgid "Provider name"
+msgstr "Leverandørnavn"
+
 msgid "Provision new resource"
 msgstr "Klargjør ny ressurs"
 
 msgid "Public SSH keys will be injected into services that allow key-based access."
 msgstr "Offentlige SSH-nøkler vil bli injisert i tjenester som tillater nøkkelbasert tilgang."
+
+msgid "Public key"
+msgstr "Offentlig nøkkel"
 
 msgid "Public offerings"
 msgstr "Offentlige tilbud"
@@ -2606,17 +3494,32 @@ msgstr "Offentlige tjenester"
 msgid "Publish as Google Calendar"
 msgstr "Publiser som Google Kalender"
 
+msgid "Published"
+msgstr "Publisert"
+
+msgid "Publisher"
+msgstr "Utgiver"
+
 msgid "Pulling"
 msgstr "Trekke"
 
 msgid "Pulling quotas"
 msgstr "Trekke kvoter"
 
+msgid "Purchase"
+msgstr "Kjøp"
+
 msgid "Purchase and usage is invoiced."
 msgstr "Kjøp og forbruk faktureres."
 
 msgid "Put this into ~/.kube/config:"
 msgstr "Sett dette inn i ~/.kube/config:"
+
+msgid "Quantity"
+msgstr "Mengde"
+
+msgid "Question"
+msgstr "Spørsmål"
 
 msgid "Quota has been reached."
 msgstr "Kvoten er nådd."
@@ -2626,6 +3529,9 @@ msgstr "Kvotebruk overskrider tilgjengelig grense."
 
 msgid "Quotas"
 msgstr "Kvoter"
+
+msgid "RAM"
+msgstr "RAM"
 
 msgid "RAM limit (GB-hours)"
 msgstr "RAM-grense (GB-timer)"
@@ -2648,11 +3554,23 @@ msgstr "Rancher hemmelig nøkkel"
 msgid "Rancher server URL"
 msgstr "Rancher server URL"
 
+msgid "Rating"
+msgstr "Vurdering"
+
+msgid "Reason"
+msgstr "Grunn"
+
 msgid "Reason unknown, please contact support."
 msgstr "Årsak ukjent, vennligst kontakt kundestøtte."
 
+msgid "Reboot"
+msgstr "Omstart"
+
 msgid "Recent additions"
 msgstr "Nylige tillegg"
+
+msgid "Recipients"
+msgstr "Mottakere"
 
 msgid "Record no."
 msgstr "Ta opp nr."
@@ -2675,11 +3593,20 @@ msgstr "Henvisningstall"
 msgid "Referrals for {name}"
 msgstr "Henvisninger for {name}"
 
+msgid "Refresh"
+msgstr "Oppdater"
+
 msgid "Regenerate"
 msgstr "Regenerere"
 
+msgid "Region"
+msgstr "Region"
+
 msgid "Region name"
 msgstr "Navn på region"
+
+msgid "Register"
+msgstr "Registrer deg"
 
 msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
 msgstr "Registrer deg som kunde av vår portal og leverandør dine skytjenester via Marketplace."
@@ -2714,11 +3641,26 @@ msgstr "Regelmessig uttrykk for å begrense smakslisten"
 msgid "Regular user"
 msgstr "Vanlig bruker"
 
+msgid "Reject"
+msgstr "Avvis"
+
+msgid "Rejected"
+msgstr "Avvist"
+
 msgid "Release floating IPs"
 msgstr "Frigi flytende IPer"
 
+msgid "Reload"
+msgstr "Last inn på nytt"
+
 msgid "Reload issue data"
 msgstr "Last inn problemdata på nytt"
+
+msgid "Remaining"
+msgstr "Gjenværende"
+
+msgid "Remaining amount"
+msgstr "Gjenstående beløp"
 
 msgid "Remote CIDR"
 msgstr "Ekstern CIDR"
@@ -2741,8 +3683,14 @@ msgstr "Eksternt tilbud"
 msgid "Remote security group"
 msgstr "Ekstern sikkerhetsgruppe"
 
+msgid "Remove"
+msgstr "Fjern"
+
 msgid "Remove from comparison"
 msgstr "Fjern fra sammenligning"
+
+msgid "Remove logo"
+msgstr "Fjern logo"
 
 msgid "Remove organization"
 msgstr "Fjern organisasjon"
@@ -2759,8 +3707,14 @@ msgstr "Fjerner organisasjonen {organizationName}"
 msgid "Removing the organization will delete all related resources."
 msgstr "Hvis du fjerner organisasjonen, slettes alle relaterte ressurser."
 
+msgid "Report"
+msgstr "Rapporter"
+
 msgid "Report a security incident"
 msgstr "Rapporter en sikkerhetshendelse"
+
+msgid "Report an issue"
+msgstr "Rapporter et problem"
 
 msgid "Report details"
 msgstr "Rapporter detaljer"
@@ -2774,6 +3728,9 @@ msgstr "Rapporter uriktige data"
 msgid "Report is invalid."
 msgstr "Rapporten er ugyldig."
 
+msgid "Report security incident"
+msgstr "Rapporter sikkerhetshendelse"
+
 msgid "Report usage"
 msgstr "Rapporter bruk"
 
@@ -2786,6 +3743,9 @@ msgstr "Rapportert verdi brukes på nytt hver måned til den endres."
 msgid "Reporter"
 msgstr "Reporter"
 
+msgid "Reporting"
+msgstr "Rapportere"
+
 msgid "Request-based item"
 msgstr "Forespørselsbasert element"
 
@@ -2795,6 +3755,9 @@ msgstr "Forespørselsbasert element (uten Service Desk)"
 msgid "Request account removal for {userName}."
 msgstr "Be om fjerning av konto for {userName}."
 
+msgid "Request an approval"
+msgstr "Be om godkjenning"
+
 msgid "Request demo"
 msgstr "Be om demo"
 
@@ -2802,6 +3765,9 @@ msgid "Request description"
 msgstr "Be om beskrivelse"
 
 msgid "Request detail"
+msgstr "Be om detaljer"
+
+msgid "Request details"
 msgstr "Be om detaljer"
 
 msgid "Request direct access"
@@ -2843,6 +3809,12 @@ msgstr "Be om {mode} av {name}"
 msgid "Request {requestId} has been created."
 msgstr "Forespørsel {requestId} er opprettet."
 
+msgid "Requested"
+msgstr "Forespurt"
+
+msgid "Requested by"
+msgstr "Forespurt av"
+
 msgid "Requested e-mail"
 msgstr "Forespurt e-post"
 
@@ -2852,14 +3824,26 @@ msgstr "Forespurt e-post"
 msgid "Requesting of new resources has been temporarily paused"
 msgstr "Forespørselen om nye ressurser er midlertidig satt på pause"
 
+msgid "Required"
+msgstr "Nødvendig"
+
+msgid "Resend"
+msgstr "Send på nytt"
+
 msgid "Reserved slot"
 msgstr "Reservert spor"
 
 msgid "Reserved slot by {name}"
 msgstr "Reservert slot av {name}"
 
+msgid "Reset"
+msgstr "Nullstille"
+
 msgid "Resize droplet"
 msgstr "Endre størrelse på slippverktøy"
+
+msgid "Resolution"
+msgstr "Oppløsning"
 
 msgid "Resource"
 msgstr "Ressurs"
@@ -2930,8 +3914,14 @@ msgstr "Forespørsel om ressursavslutning er sendt."
 msgid "Resource usage"
 msgstr "Ressurs bruk"
 
+msgid "Resource usage for {resourceName}"
+msgstr "Ressursbruk for {resourceName}"
+
 msgid "Resource usage for {resource}"
 msgstr "Ressursbruk for {resource}"
+
+msgid "Resources"
+msgstr "Ressurser"
 
 msgid "Resources import has failed."
 msgstr "Import av ressurser har mislyktes."
@@ -2941,6 +3931,15 @@ msgstr "Ressurser representerer tjenestene du bruker."
 
 msgid "Resources usage"
 msgstr "Ressursbruk"
+
+msgid "Restart"
+msgstr "Omstart"
+
+msgid "Restarting"
+msgstr "Starte på nytt"
+
+msgid "Restore"
+msgstr "Gjenopprett"
 
 msgid "Restore virtual machine from backup {name}"
 msgstr "Gjenopprett virtuell maskin fra sikkerhetskopien {name}"
@@ -2963,14 +3962,32 @@ msgstr "Oppbevaringstid"
 msgid "Retention time in days, if 0 - resource will be kept forever"
 msgstr "Oppbevaringstid i dager, hvis 0 - ressurs vil bli holdt for alltid"
 
+msgid "Retry"
+msgstr "Prøv på nytt"
+
+msgid "Retype"
+msgstr "Skriv inn på nytt"
+
 msgid "Retype OpenStack Volume"
 msgstr "Skriv inn OpenStack-volumet på nytt"
+
+msgid "Review"
+msgstr "Gjennomgang"
 
 msgid "Review has been closed."
 msgstr "Gjennomgangen er avsluttet."
 
 msgid "Review has been performed."
 msgstr "Gjennomgangen er utført."
+
+msgid "Reviews"
+msgstr "Vurderinger"
+
+msgid "Revoke"
+msgstr "Tilbakekalle"
+
+msgid "Role"
+msgstr "Rolle"
 
 msgid "Role expires on"
 msgstr "Rollen utløper den"
@@ -2981,17 +3998,26 @@ msgstr "Roll i prosjekt"
 msgid "Role management events"
 msgstr "Rollestyringshendelser"
 
+msgid "Roles"
+msgstr "Roller"
+
 msgid "Routers"
 msgstr "Rutere"
 
 msgid "Rule count"
 msgstr "Regel teller"
 
+msgid "Rules"
+msgstr "Regler"
+
 msgid "Running accounting"
 msgstr "Kjører regnskap"
 
 msgid "Runtime state"
 msgstr "Kjøretidstilstand"
+
+msgid "Russian"
+msgstr "Russisk"
 
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr "SAML2-enkeltavlogging er startet. Vent til den er fullført."
@@ -3029,14 +4055,32 @@ msgstr "SSH-nøkkel {ssh_key_name} er opprettet for brukeren {user_link}"
 msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr "SSH-nøkkel {ssh_key_name} er slettet for brukeren {user_link}"
 
+msgid "SSH keys"
+msgstr "SSH-taster"
+
 msgid "SSH public key"
 msgstr "SSH offentlig nøkkel"
 
 msgid "Sankey diagram"
 msgstr "Sankey-diagram"
 
+msgid "Save"
+msgstr "Lagre"
+
+msgid "Scale"
+msgstr "Skala"
+
+msgid "Schedule"
+msgstr "Tidsplan"
+
+msgid "Schedules"
+msgstr "Tidsplaner"
+
 msgid "Schedules are invalid."
 msgstr "Tidsplaner er ugyldige."
+
+msgid "Score"
+msgstr "Score"
 
 msgid "Script for creation of a resource"
 msgstr "Skript for opprettelse av en ressurs"
@@ -3052,6 +4096,9 @@ msgstr "Skript for oppdatering av en ressurs på planendring"
 
 msgid "Script language"
 msgstr "Skriptspråk"
+
+msgid "Search"
+msgstr "Søk"
 
 msgid "Search for offerings..."
 msgstr "Søk etter tilbud..."
@@ -3077,6 +4124,9 @@ msgstr "Dato for sikkerhetshendelse: {date}"
 msgid "Security incident type: {type}"
 msgstr "Sikkerhetshendelsestype: {type}"
 
+msgid "See all"
+msgstr "Se alle"
+
 msgid "Seems there's nothing here"
 msgstr "Ser ut til at det ikke er noe her"
 
@@ -3089,6 +4139,9 @@ msgstr "Ser ut til at du ikke har noen ressurser ennå"
 msgid "Segmentation ID"
 msgstr "Segmenterings-ID"
 
+msgid "Select"
+msgstr "Velg"
+
 msgid "Select accounting period"
 msgstr "Velg regnskapsperiode"
 
@@ -3097,6 +4150,9 @@ msgstr "Velg berørt ressurs..."
 
 msgid "Select affiliation"
 msgstr "Velg tilknytning"
+
+msgid "Select an option..."
+msgstr "Velg et alternativ..."
 
 msgid "Select assignee..."
 msgstr "Velg tilordnet..."
@@ -3107,8 +4163,17 @@ msgstr "Velg tilgjengelige hverdager"
 msgid "Select caller..."
 msgstr "Velg oppringer..."
 
+msgid "Select category..."
+msgstr "Velg kategori..."
+
 msgid "Select connected subnet"
 msgstr "Velg tilkoblet delnett"
+
+msgid "Select country..."
+msgstr "Velg land..."
+
+msgid "Select dates"
+msgstr "Velg datoer"
 
 msgid "Select division..."
 msgstr "Velg divisjon..."
@@ -3134,20 +4199,44 @@ msgstr "Velg tilbud..."
 msgid "Select offerings..."
 msgstr "Velg tilbud..."
 
+msgid "Select organization..."
+msgstr "Velg organisasjon..."
+
 msgid "Select organization roles"
 msgstr "Velg organisasjonsroller"
 
 msgid "Select organizations..."
 msgstr "Velg organisasjoner..."
 
+msgid "Select period..."
+msgstr "Velg periode..."
+
+msgid "Select plan"
+msgstr "Velg plan"
+
+msgid "Select priority..."
+msgstr "Velg prioritet..."
+
+msgid "Select project"
+msgstr "Velg prosjekt"
+
+msgid "Select project..."
+msgstr "Velg prosjekt..."
+
 msgid "Select project roles"
 msgstr "Velg prosjektroller"
+
+msgid "Select projects..."
+msgstr "Velg prosjekter..."
 
 msgid "Select provider..."
 msgstr "Velg leverandør..."
 
 msgid "Select request type..."
 msgstr "Velg forespørselstype..."
+
+msgid "Select role"
+msgstr "Velg rolle"
 
 msgid "Select security groups..."
 msgstr "Velg sikkerhetsgrupper..."
@@ -3158,8 +4247,17 @@ msgstr "Velg tjenesteleverandør"
 msgid "Select service provider..."
 msgstr "Velg tjenesteleverandør..."
 
+msgid "Select size..."
+msgstr "Velg størrelse..."
+
 msgid "Select some files"
 msgstr "Velg noen filer"
+
+msgid "Select state..."
+msgstr "Velg tilstand..."
+
+msgid "Select status"
+msgstr "Velg status"
 
 msgid "Select subnet"
 msgstr "Velg delnett"
@@ -3173,14 +4271,44 @@ msgstr "Velg leier..."
 msgid "Select tenants..."
 msgstr "Velg leiere..."
 
+msgid "Select type..."
+msgstr "Velg type..."
+
+msgid "Select user..."
+msgstr "Velg bruker..."
+
 msgid "Select workspace"
 msgstr "Velg arbeidsområde"
+
+msgid "Selected"
+msgstr "Valgt"
+
+msgid "Selector"
+msgstr "Velger"
+
+msgid "Send notification"
+msgstr "Send varsel"
+
+msgid "Sent"
+msgstr "Sendt"
+
+msgid "Server"
+msgstr "Tjener"
+
+msgid "Service Provider"
+msgstr "Tjenesteleverandør"
 
 msgid "Service Request"
 msgstr "Serviceforespørsel"
 
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr "Tjenesteforespørsel - klientens forespørsel om å endre, legge til, endre eller fjerne helt eller delvis en bestemt tjeneste."
+
+msgid "Service provider"
+msgstr "Tjenesteleverandør"
+
+msgid "Service provider:"
+msgstr "Tjenesteleverandør:"
 
 msgid "Service provider API secret code has been generated."
 msgstr "Tjenesteleverandør API-hemmelig kode er generert."
@@ -3206,6 +4334,12 @@ msgstr "Tjenesteinnstillingene er ugyldige."
 msgid "Service settings of this resource are in state erred."
 msgstr "Tjenesteinnstillingene for denne ressursen er i tilstands feil."
 
+msgid "Service type"
+msgstr "Tjenestetype"
+
+msgid "Services"
+msgstr "Tjenester"
+
 msgid "Set MTU"
 msgstr "Sett MTU"
 
@@ -3214,6 +4348,12 @@ msgstr "Angi tillatte adressepar"
 
 msgid "Set backend ID"
 msgstr "Angi backend-ID"
+
+msgid "Set limits"
+msgstr "Angi grenser"
+
+msgid "Set location"
+msgstr "Angi plassering"
 
 msgid "Set rules"
 msgstr "Angi regler"
@@ -3230,6 +4370,9 @@ msgstr "Sett til utkast"
 msgid "Set to true to activate privilege escalation"
 msgstr "Sett til sann for å aktivere rettighetseskalering"
 
+msgid "Shared"
+msgstr "Delt"
+
 msgid "Shared providers"
 msgstr "Delte leverandører"
 
@@ -3242,6 +4385,12 @@ msgstr "Handlekurvvaren er oppdatert."
 msgid "Shopping cart item update"
 msgstr "Handlekurv element oppdatering"
 
+msgid "Show"
+msgstr "Vis"
+
+msgid "Show all"
+msgstr "Vis alle"
+
 msgid "Show chart"
 msgstr "Vis diagram"
 
@@ -3251,14 +4400,26 @@ msgstr "Vis valg"
 msgid "Show console log"
 msgstr "Vis konsolllogg"
 
+msgid "Show controls"
+msgstr "Vis kontroller"
+
+msgid "Show details"
+msgstr "Vis detaljer"
+
 msgid "Show diff"
 msgstr "Vis diff"
 
 msgid "Show events"
 msgstr "Vis hendelser"
 
+msgid "Show password"
+msgstr "Vis passord"
+
 msgid "Show private"
 msgstr "Vis privat"
+
+msgid "Show report"
+msgstr "Vis rapport"
 
 msgid "Show request"
 msgstr "Vis forespørsel"
@@ -3277,6 +4438,18 @@ msgstr "Vis med løpende regnskap"
 
 msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
 msgstr "Viser {sliceStart} til {sliceEnd} av {resultCount} oppføringer."
+
+msgid "Shutdown"
+msgstr "Avstengning"
+
+msgid "Sign in"
+msgstr "Logg på"
+
+msgid "Sign in with {label}"
+msgstr "Logg inn med {label}"
+
+msgid "Size"
+msgstr "Størrelse"
 
 msgid "Size name"
 msgstr "Størrelsesnavn"
@@ -3308,14 +4481,32 @@ msgstr "Antall øyeblikksbilder"
 msgid "Sponsor number"
 msgstr "Sponsornummer"
 
+msgid "Staff"
+msgstr "Personale"
+
 msgid "Staff and Support user"
 msgstr "Bruker av personale og støtte"
+
+msgid "Start"
+msgstr "Start"
 
 msgid "Start day of accounting"
 msgstr "Startdag for regnskap"
 
+msgid "Start time"
+msgstr "Starttid"
+
+msgid "Starting"
+msgstr "Starter"
+
+msgid "State"
+msgstr "Stat"
+
 msgid "Static routes update was scheduled."
 msgstr "Oppdatering av statiske ruter ble planlagt."
+
+msgid "Status"
+msgstr "Status"
 
 msgid "Step 1. Select offering"
 msgstr "Trinn 1. Velg tilbud"
@@ -3323,11 +4514,35 @@ msgstr "Trinn 1. Velg tilbud"
 msgid "Step 2. Select resources"
 msgstr "Trinn 2. Velg ressurser"
 
+msgid "Stop"
+msgstr "Stopp"
+
+msgid "Stopping"
+msgstr "Stopper"
+
+msgid "Storage"
+msgstr "Lagring"
+
+msgid "Storage mode"
+msgstr "Lagringsmodus"
+
 msgid "Storage size"
 msgstr "Lagringsstørrelse"
 
 msgid "Storage size in GiB"
 msgstr "Lagringsstørrelse i GiB"
+
+msgid "Storage type"
+msgstr "Lagringstype"
+
+msgid "Subject"
+msgstr "Emne"
+
+msgid "Submit"
+msgstr "Send inn"
+
+msgid "Submit report"
+msgstr "Send inn rapport"
 
 msgid "Submit usage report"
 msgstr "Send inn bruksrapport"
@@ -3356,14 +4571,26 @@ msgstr "Delnett fra hvor tilkobling til selvbetjening er tillatt."
 msgid "Subscription ID"
 msgstr "Abonnements-ID"
 
+msgid "Subtotal"
+msgstr "Delsum"
+
 msgid "Sum"
 msgstr "Sum"
+
+msgid "Summary"
+msgstr "Sammendrag"
+
+msgid "Support"
+msgstr "Støtte"
 
 msgid "Support dashboard"
 msgstr "Instrumentbord for støtte"
 
 msgid "Support request events"
 msgstr "Hendelser for støtteforespørsel"
+
+msgid "Support requests"
+msgstr "Supportforespørsler"
 
 msgid "Support user"
 msgstr "Støtte bruker"
@@ -3374,6 +4601,9 @@ msgstr "Støtte arbeidsområde"
 msgid "Sure? Form data would be lost"
 msgstr "Sikker? Skjemadata ville gå tapt"
 
+msgid "Suspend"
+msgstr "Suspender"
+
 msgid "Sync profile"
 msgstr "Synkroniser profil"
 
@@ -3382,6 +4612,9 @@ msgstr "Synkroniser med Google Kalender"
 
 msgid "Synchronisation has been scheduled."
 msgstr "Synkronisering er planlagt."
+
+msgid "Synchronise"
+msgstr "Synkroniser"
 
 msgid "System administrator"
 msgstr "Systemadministrator"
@@ -3395,11 +4628,29 @@ msgstr "Systemets volumstørrelse"
 msgid "System volume type"
 msgstr "Systemvolumtype"
 
+msgid "TAX"
+msgstr "Skatt"
+
 msgid "TLD \"{tld}\" must not be all numeric"
 msgstr "TLD \"{tld}\" kan ikke være alle numeriske"
 
+msgid "TOTAL"
+msgstr "TOTALT"
+
 msgid "Taking a snapshot"
 msgstr "Ta et øyeblikksbilde"
+
+msgid "Target"
+msgstr "Mål"
+
+msgid "Target type"
+msgstr "Måltype"
+
+msgid "Targets"
+msgstr "Mål"
+
+msgid "Tax"
+msgstr "Skatt"
 
 msgid "Tax number"
 msgstr "Skattenummer"
@@ -3407,14 +4658,26 @@ msgstr "Skattenummer"
 msgid "Tax percent"
 msgstr "Mva-prosent"
 
+msgid "Team"
+msgstr "Team"
+
 msgid "Team member has been removed."
 msgstr "Teammedlemmet er fjernet."
+
+msgid "Team size"
+msgstr "Lagstørrelse"
 
 msgid "Technical code used by accounting software."
 msgstr "Teknisk kode som brukes av regnskap programvare."
 
 msgid "Technical name intended for integration and automated reporting. Please use Latin letters without spaces only."
 msgstr "Teknisk navn beregnet til integration og automatiseret rapportering. Vennligst bruk latinske bokstaver uten mellomrom."
+
+msgid "Template"
+msgstr "Mal"
+
+msgid "Template details"
+msgstr "Maldetaljer"
 
 msgid "Template files"
 msgstr "Mal filer"
@@ -3437,6 +4700,9 @@ msgstr "Leietaker brukerpassord"
 msgid "Tenant user username"
 msgstr "Brukernavn for leietaker"
 
+msgid "Terminate"
+msgstr "Avslutte"
+
 msgid "Terminate an existing resource"
 msgstr "Avslutte en eksisterende ressurs"
 
@@ -3448,6 +4714,9 @@ msgstr "Avsluttet"
 
 msgid "Terminating"
 msgstr "Avslutte"
+
+msgid "Terms of Service"
+msgstr "Vilkår for bruk"
 
 msgid "Text has been copied"
 msgstr "Teksten har blitt kopiert"
@@ -3584,6 +4853,9 @@ msgstr "Det er ikke navneområder i dette prosjektet ennå."
 msgid "There is no activity yet."
 msgstr "Det er ingen aktivitet ennå."
 
+msgid "This field is required."
+msgstr "Dette feltet er obligatorisk."
+
 msgid "This name will be visible in accounting data."
 msgstr "Dette navnet vil være synlig i regnskapsdata."
 
@@ -3592,6 +4864,9 @@ msgstr "Denne verdien er ugyldig JSON."
 
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr "Dette nettstedet bruker informasjonskapsler for å sikre at du får den beste opplevelsen på nettstedet vårt."
+
+msgid "Thumbnail"
+msgstr "Miniatyrbilde"
 
 msgid "Time in progress"
 msgstr "Tid pågår"
@@ -3604,6 +4879,18 @@ msgstr "Tidsluke er lagt til."
 
 msgid "Time slots"
 msgstr "Tidsluker"
+
+msgid "Time zone"
+msgstr "Tidssone"
+
+msgid "Timestamp"
+msgstr "Tidsstempel"
+
+msgid "Title"
+msgstr "Tittel"
+
+msgid "To"
+msgstr "Til"
 
 msgid "To correct details of your organization, please send an email to {supportEmail} highlighting the errors in current details. Thank you!"
 msgstr "Hvis du vil korrigere detaljene i organisasjonen, kan du sende en e-post til {supportEmail} som uthever feilene i gjeldende detaljer. Takk!"
@@ -3629,6 +4916,15 @@ msgstr "Hvis du vil rapportere en sikkerhetshendelse, sender du en e-post til {s
 msgid "To report an issue, please send an email to {supportEmail}."
 msgstr "Hvis du vil rapportere et problem, kan du sende en e-post til {supportEmail}."
 
+msgid "Today"
+msgstr "I dag"
+
+msgid "Total"
+msgstr "Totalt"
+
+msgid "Total: {total}"
+msgstr "Totalt: {total}"
+
 msgid "Total CPU"
 msgstr "Total CPU"
 
@@ -3641,8 +4937,23 @@ msgstr "Totalt antall GPU-timer brukt denne måneden"
 msgid "Total RAM GB-hours consumed this month"
 msgstr "Total RAM GB-timer forbrukt denne måneden"
 
+msgid "Total cost:"
+msgstr "Totalkostnad:"
+
+msgid "Total memory"
+msgstr "Totalt minne"
+
 msgid "Total number of nodes"
 msgstr "Totalt antall noder"
+
+msgid "Total paid"
+msgstr "Totalt betalt"
+
+msgid "Total price"
+msgstr "Total pris"
+
+msgid "Total storage"
+msgstr "Total lagringsplass"
 
 msgid "Total storage limit is exceeded"
 msgstr "Total lagringsgrense er overskredet"
@@ -3650,11 +4961,20 @@ msgstr "Total lagringsgrense er overskredet"
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr "Spor ved hjelp av UTC-tidssone, som vises med nettleserens tidssone."
 
+msgid "Try again"
+msgstr "Prøv igjen"
+
+msgid "Type"
+msgstr "Type"
+
 msgid "Type is invalid."
 msgstr "Typen er ugyldig."
 
 msgid "Type of incident"
 msgstr "Type hendelse"
+
+msgid "URL"
+msgstr "URL"
 
 msgid "UUID"
 msgstr "UUID"
@@ -3797,6 +5117,9 @@ msgstr "Kan ikke slette vedlegg."
 msgid "Unable to delete catalog."
 msgstr "Kan ikke slette katalogen."
 
+msgid "Unable to delete comment."
+msgstr "Kan ikke slette kommentar."
+
 msgid "Unable to delete instance."
 msgstr "Kan ikke slette forekomst."
 
@@ -3808,6 +5131,9 @@ msgstr "Kan ikke slette ressurs."
 
 msgid "Unable to delete team member."
 msgstr "Kan ikke slette teammedlem."
+
+msgid "Unable to delete {resourceType}."
+msgstr "Kan ikke slette {resourceType}."
 
 msgid "Unable to destroy instance."
 msgstr "Kan ikke ødelegge forekomst."
@@ -3841,6 +5167,9 @@ msgstr "Kan ikke hente gjeldende bruker."
 
 msgid "Unable to fetch data."
 msgstr "Kan ikke hente data."
+
+msgid "Unable to find:"
+msgstr "Finner ikke:"
 
 msgid "Unable to generate service provider API secret code."
 msgstr "Kan ikke generere API-hemmelig kode for tjenesteleverandør."
@@ -3884,6 +5213,12 @@ msgstr "Kan ikke laste inn bestilte varer."
 msgid "Unable to load booking offerings."
 msgstr "Kan ikke laste inn bestillingstilbud."
 
+msgid "Unable to load categories"
+msgstr "Kan ikke laste inn kategorier"
+
+msgid "Unable to load categories."
+msgstr "Kan ikke laste inn kategorier."
+
 msgid "Unable to load category sections."
 msgstr "Kan ikke laste inn kategoriseksjoner."
 
@@ -3893,6 +5228,9 @@ msgstr "Kan ikke laste inn diagrammer."
 msgid "Unable to load checklists."
 msgstr "Kan ikke laste inn sjekklister."
 
+msgid "Unable to load comments."
+msgstr "Kan ikke laste inn kommentarer."
+
 msgid "Unable to load compliance overview."
 msgstr "Kan ikke laste inn samsvarsoversikt."
 
@@ -3901,6 +5239,12 @@ msgstr "Kan ikke laste inn kunden."
 
 msgid "Unable to load customer support satisfaction overall rating."
 msgstr "Kan ikke laste inn generell vurdering av kundestøttetilfredshet."
+
+msgid "Unable to load data"
+msgstr "Kan ikke laste inn data"
+
+msgid "Unable to load data."
+msgstr "Kan ikke laste inn data."
 
 msgid "Unable to load detail."
 msgstr "Kan ikke laste inn detaljer."
@@ -3961,6 +5305,9 @@ msgstr "Kan ikke laste inn organisasjonsressurser."
 
 msgid "Unable to load organizations"
 msgstr "Kan ikke laste inn organisasjoner"
+
+msgid "Unable to load page"
+msgstr "Kan ikke laste inn side"
 
 msgid "Unable to load pending orders."
 msgstr "Kan ikke laste inn ventende ordrer."
@@ -4169,6 +5516,9 @@ msgstr "Kan ikke oppdatere varsling."
 msgid "Unable to update offering"
 msgstr "Kan ikke oppdatere tilbudet"
 
+msgid "Unable to update offering."
+msgstr "Kan ikke oppdatere tilbudet."
+
 msgid "Unable to update offering state."
 msgstr "Kan ikke oppdatere tilbudstilstanden."
 
@@ -4199,6 +5549,9 @@ msgstr "Kan ikke oppdatere statiske ruter."
 msgid "Unable to update user."
 msgstr "Kan ikke oppdatere brukeren."
 
+msgid "Unable to update {verboseName}."
+msgstr "Kan ikke oppdatere {verboseName}."
+
 msgid "Unable to upload attachment."
 msgstr "Kan ikke laste opp vedlegg."
 
@@ -4207,6 +5560,9 @@ msgstr "Kan ikke laste opp logo."
 
 msgid "Unable to validate invitation token."
 msgstr "Kan ikke validere invitasjonstoken."
+
+msgid "Unconfirmed"
+msgstr "Ubekreftet"
 
 msgid "Unexpected exception happened during login process."
 msgstr "Uventet unntak skjedde under påloggingsprosessen."
@@ -4223,17 +5579,35 @@ msgstr "Unik ID for en ressurs i et backend-system"
 msgid "Unique ID of a resource within management plugin"
 msgstr "Unik ID for en ressurs innen administrasjonsplugin"
 
+msgid "Unit"
+msgstr "Enhet"
+
+msgid "Unit price"
+msgstr "Enhetspris"
+
+msgid "Units"
+msgstr "Enheter"
+
+msgid "Unknown"
+msgstr "Ukjent"
+
 msgid "Unlink instance"
 msgstr "Fjern kobling for forekomst"
 
 msgid "Unlink invoice"
 msgstr "Fjern kobling til faktura"
 
+msgid "Unpaid"
+msgstr "Ubetalt"
+
 msgid "Unpause"
 msgstr "Avpause"
 
 msgid "Unpublish as Google Calendar"
 msgstr "Fjern publiseringen som Google Kalender"
+
+msgid "Update"
+msgstr "Oppdater"
 
 msgid "Update floating IPs"
 msgstr "Oppdatere flytende IPer"
@@ -4250,6 +5624,12 @@ msgstr "Oppdater interne IP-er for OpenStack-forekomst {name}"
 msgid "Update limits for an existing resource"
 msgstr "Oppdatere grenser for en eksisterende ressurs"
 
+msgid "Update location"
+msgstr "Oppdater plassering"
+
+msgid "Update notification"
+msgstr "Varsel om oppdatering"
+
 msgid "Update of OpenStack instance internal IPs has been scheduled."
 msgstr "Oppdatering av OpenStack-forekomst interne IPer er planlagt."
 
@@ -4264,6 +5644,9 @@ msgstr "Oppdatere betalingsprofil"
 
 msgid "Update plan for an existing resource"
 msgstr "Oppdatere planen for en eksisterende ressurs"
+
+msgid "Update profile"
+msgstr "Oppdater profil"
 
 msgid "Update project details"
 msgstr "Oppdatere prosjektdetaljer"
@@ -4282,6 +5665,15 @@ msgstr "Oppdatere statiske ruter"
 
 msgid "Update your organization name, logo, accounting and contact details."
 msgstr "Oppdater organisasjonens navn, logo, regnskap og kontaktdetaljer."
+
+msgid "Update {resourceType} {resourceName}"
+msgstr "Oppdater {resourceType} {resourceName}"
+
+msgid "Updated"
+msgstr "Oppdatert"
+
+msgid "Updating"
+msgstr "Oppdaterer"
 
 msgid "Updating floating IPs"
 msgstr "Oppdatere flytende IPer"
@@ -4306,6 +5698,9 @@ msgstr "Last opp nye"
 
 msgid "Uptime"
 msgstr "Oppetid"
+
+msgid "Usage"
+msgstr "Bruk"
 
 msgid "Usage-based"
 msgstr "Bruksbasert"
@@ -4334,11 +5729,17 @@ msgstr "Bruk sudo"
 msgid "Used in the period {period} by:"
 msgstr "Brukes i perioden {period} av:"
 
+msgid "User"
+msgstr "Bruker"
+
 msgid "User could not been updated"
 msgstr "Brukeren kunne ikke oppdateres"
 
 msgid "User dashboard"
 msgstr "Instrumentbord for brukere"
+
+msgid "User data"
+msgstr "Brukerdata"
 
 msgid "User details"
 msgstr "Brukerdetaljer"
@@ -4367,6 +5768,9 @@ msgstr "Inndatafelt for bruker #{index}"
 msgid "User management events"
 msgstr "Hendelser for brukeradministrasjon"
 
+msgid "User profile"
+msgstr "Brukerprofil"
+
 msgid "User status"
 msgstr "Brukerstatus"
 
@@ -4378,6 +5782,9 @@ msgstr "Bruker {affected_user_link} er opprettet."
 
 msgid "User {affected_user_link} has been deactivated."
 msgstr "Bruker {affected_user_link} er deaktivert."
+
+msgid "User {affected_user_link} has been updated."
+msgstr "Bruker {affected_user_link} har blitt oppdatert."
 
 msgid "User {affected_user_name} has been deleted."
 msgstr "Bruker {affected_user_name} har blitt slettet."
@@ -4427,17 +5834,38 @@ msgstr "Bruker {user_link} har tilbakekalt {affected_user_link}."
 msgid "User {user_link} logged out successfully with SAML2."
 msgstr "Bruker {user_link} logget av med SAML2."
 
+msgid "Username"
+msgstr "Brukernavn"
+
+msgid "Username is required."
+msgstr "Brukernavn kreves."
+
 msgid "Username prefix"
 msgstr "Brukernavn prefiks"
 
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr "Brukernavn kan inneholde bokstaver (a-z), tall (0-9), bindestreker (-), understrekingstegn (_) og punktum (.)."
 
+msgid "Users"
+msgstr "Brukere"
+
+msgid "VAT"
+msgstr "MVA"
+
 msgid "VAT code"
 msgstr "MVA-kode"
 
 msgid "VAT is included"
 msgstr "MVA er inkludert"
+
+msgid "VAT is not included"
+msgstr "MVA er ikke inkludert"
+
+msgid "VAT is not included."
+msgstr "MVA er ikke inkludert."
+
+msgid "VAT rate"
+msgstr "MVA sats"
 
 msgid "VM name"
 msgstr "VM-navn"
@@ -4496,6 +5924,9 @@ msgstr "Gyldige kjøretidstilstander for drift: {validStates}."
 msgid "Valid states for operation: {validStates}."
 msgstr "Gyldige tilstander for drift: {validStates}."
 
+msgid "Value"
+msgstr "Verdi"
+
 msgid "Value should be positive integer"
 msgstr "Verdien skal være positivt heltall"
 
@@ -4508,8 +5939,17 @@ msgstr "Verdien bør ikke være mindre enn {limit}."
 msgid "Value should not be negative."
 msgstr "Verdien bør ikke være negativ."
 
+msgid "Variable #{index}"
+msgstr "Variabel #{index}"
+
+msgid "Verify e-mail"
+msgstr "Bekreft e-post"
+
 msgid "Verifying email change"
 msgstr "Bekrefter endring av e-post"
+
+msgid "Version"
+msgstr "Versjon"
 
 msgid "Very negative"
 msgstr "Veldig negativ"
@@ -4528,6 +5968,9 @@ msgstr "Virtuelle maskiner"
 
 msgid "Virtual machines count"
 msgstr "Antall virtuelle maskiner"
+
+msgid "Volume"
+msgstr "Volum"
 
 msgid "Volume has been attached to instance."
 msgstr "Volumet er knyttet til forekomst."
@@ -4562,6 +6005,9 @@ msgstr "Volumtype"
 msgid "Volume type storage limit is exceeded"
 msgstr "Volumtype lagringsgrense er overskredet"
 
+msgid "Volumes"
+msgstr "Volumer"
+
 msgid "Volumes count"
 msgstr "Volum teller"
 
@@ -4570,6 +6016,12 @@ msgstr "Webhook"
 
 msgid "Website URL"
 msgstr "Nettstedets URL"
+
+msgid "Welcome, {user}!"
+msgstr "Velkommen, {user}!"
+
+msgid "Welcome to {pageTitle}!"
+msgstr "Velkommen til {pageTitle}!"
 
 msgid "Why do you need to remove organization with existing projects?"
 msgstr "Hvorfor trenger du å fjerne organisasjon med eksisterende prosjekter?"
@@ -4589,11 +6041,17 @@ msgstr "Arbeidsbelastninger"
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr "Vil du oppdatere din nåværende e-post med den fra invitasjonen?"
 
+msgid "Write review"
+msgstr "Skriv anmeldelse"
+
 msgid "YAML has been imported."
 msgstr "YAML har blitt importert."
 
 msgid "YAML has been updated."
 msgstr "YAML har blitt oppdatert."
+
+msgid "Yes"
+msgstr "Ja"
 
 msgid "Yes, use invitation email"
 msgstr "Ja, bruk invitasjon-e-post"
@@ -4646,6 +6104,9 @@ msgstr "Du har skrevet inn data i skjema. Når dialogboksen er lukket, vil skjem
 msgid "You have exceeded maximum number of quotas."
 msgstr "Du har overskredet maksimalt antall kvoter."
 
+msgid "You have no notifications yet."
+msgstr "Du har ingen varsler ennå."
+
 msgid "You have no quotas yet."
 msgstr "Du har ingen kvoter ennå."
 
@@ -4688,6 +6149,9 @@ msgstr "Din FreeIPA-profil er aktivert."
 msgid "Your account is not authorized to use this allocation"
 msgstr "Kontoen din er ikke autorisert til å bruke denne tildelingen"
 
+msgid "Your current email is:"
+msgstr "Din nåværende e-post er:"
+
 msgid "Your invitation is being processed."
 msgstr "Invitasjonen din blir behandlet."
 
@@ -4709,14 +6173,68 @@ msgstr "(MVA er ikke inkludert)"
 msgid "allocation users"
 msgstr "tildeling brukere"
 
+msgid "application"
+msgstr "applikasjon"
+
+msgid "application templates"
+msgstr "programmaler"
+
+msgid "applications"
+msgstr "programmer"
+
+msgid "at"
+msgstr "på"
+
+msgid "bootable"
+msgstr "oppstartbar"
+
+msgid "browse"
+msgstr "Bla gjennom"
+
+msgid "catalogues"
+msgstr "kataloger"
+
+msgid "control plane"
+msgstr "Kontrollplan"
+
 msgid "current state on backend: {resourceState}."
 msgstr "nåværende tilstand på backend: {resourceState}."
+
+msgid "databases"
+msgstr "Databaser"
+
+msgid "day"
+msgstr "dag"
+
+msgid "disks"
+msgstr "Disker"
 
 msgid "e.g. MyApp"
 msgstr "f.eks. MyApp"
 
+msgid "entries"
+msgstr "innganger"
+
+msgid "error message: {errorMessage}"
+msgstr "feilmelding: {errorMessage}"
+
+msgid "estimated"
+msgstr "estimert"
+
 msgid "etcd"
 msgstr "etcd"
+
+msgid "events"
+msgstr "Hendelser"
+
+msgid "failed"
+msgstr "mislyktes"
+
+msgid "fetching"
+msgstr "henter"
+
+msgid "floating IPs"
+msgstr "Flytende IP-er"
 
 msgid "generate automatically"
 msgstr "generere automatisk"
@@ -4727,11 +6245,50 @@ msgstr "horisontal pod autoscaler"
 msgid "horizontal pod autoscalers"
 msgstr "horisontal pod autoskalere"
 
+msgid "hour"
+msgstr "time"
+
+msgid "hours"
+msgstr "timer"
+
 msgid "ingresses"
 msgstr "innganger"
 
+msgid "internal IPs"
+msgstr "Interne IP-er"
+
+msgid "invoices"
+msgstr "fakturaer"
+
+msgid "items"
+msgstr "elementer"
+
 msgid "milli CPUs"
 msgstr "milli CPUer"
+
+msgid "minute"
+msgstr "minutt"
+
+msgid "month"
+msgstr "måned"
+
+msgid "network"
+msgstr "nettverk"
+
+msgid "networks"
+msgstr "nettverk"
+
+msgid "notifications"
+msgstr "Varslinger"
+
+msgid "of"
+msgstr "av"
+
+msgid "offering"
+msgstr "tilbud"
+
+msgid "offering permissions"
+msgstr "tilbyr tillatelser"
 
 msgid "offering resources"
 msgstr "tilbyr ressurser"
@@ -4739,29 +6296,119 @@ msgstr "tilbyr ressurser"
 msgid "offering users"
 msgstr "tilby brukere"
 
+msgid "offerings"
+msgstr "tilbud"
+
+msgid "on"
+msgstr "på"
+
 msgid "on the"
 msgstr "på"
+
+msgid "order items"
+msgstr "bestill elementer"
+
+msgid "organization"
+msgstr "organisasjon"
+
+msgid "organizations"
+msgstr "organisasjoner"
+
+msgid "owner"
+msgstr "eier"
+
+msgid "past the hour"
+msgstr "forbi timen"
+
+msgid "payment profiles"
+msgstr "betalingsprofiler"
+
+msgid "payments"
+msgstr "betalinger"
 
 msgid "permission reviews"
 msgstr "tillatelse vurderinger"
 
+msgid "plans"
+msgstr "planer"
+
+msgid "ports"
+msgstr "porter"
+
+msgid "project"
+msgstr "prosjekt"
+
+msgid "projects"
+msgstr "prosjekter"
+
+msgid "records"
+msgstr "rekorder"
+
+msgid "referrals"
+msgstr "henvisninger"
+
 msgid "remote accounts"
 msgstr "eksterne kontoer"
+
+msgid "resource"
+msgstr "ressurs"
+
+msgid "resources"
+msgstr "ressurser"
+
+msgid "restored volumes"
+msgstr "gjenopprettede volumer"
+
+msgid "reviews"
+msgstr "vurderinger"
+
+msgid "routers"
+msgstr "rutere"
 
 msgid "security group"
 msgstr "sikkerhetsgruppe"
 
+msgid "security groups"
+msgstr "sikkerhetsgrupper"
+
+msgid "services"
+msgstr "tjenester"
+
+msgid "snapshot schedules"
+msgstr "tidsplaner for øyeblikksbilde"
+
+msgid "snapshots"
+msgstr "øyeblikksbilder"
+
+msgid "storage"
+msgstr "lagring"
+
+msgid "subnets"
+msgstr "delnett"
+
+msgid "support"
+msgstr "brukerstøtte"
+
 msgid "support feedback"
 msgstr "støtte tilbakemelding"
 
+msgid "support requests"
+msgstr "supportforespørsler"
+
 msgid "team invitations"
 msgstr "teaminvitasjoner"
+
+msgid "team members"
+msgstr "gruppemedlemmer"
 
 msgid "till"
 msgstr "til"
 
 msgid "token will not timeout"
 msgstr "token vil ikke timeout"
+
+msgid "users"
+msgstr "brukere"
 
 msgid "vCPU"
 msgstr "vCPU"
@@ -4787,11 +6434,50 @@ msgstr "volum øyeblikksbilde"
 msgid "volume snapshot schedule"
 msgstr "volum øyeblikksbilde tidsplan"
 
+msgid "volume snapshots"
+msgstr "volum øyeblikksbilder"
+
+msgid "volumes"
+msgstr "Volumer"
+
+msgid "week"
+msgstr "uke"
+
+msgid "worker"
+msgstr "arbeideren"
+
+msgid "workloads"
+msgstr "arbeidsbelastninger"
+
+msgid "year"
+msgstr "år"
+
+msgid "{category} resources"
+msgstr "{category} ressurser"
+
 msgid "{count} user events in {date}"
 msgstr "{count} brukerhendelser i {date}"
 
+msgid "{label} in:"
+msgstr "{label} i:"
+
+msgid "{name} ({questions_count} questions)"
+msgstr "{name} ({questions_count} spørsmål)"
+
 msgid "{name} ({size})"
 msgstr "{name} ({size})"
+
+msgid "{number} days"
+msgstr "{number} dager"
+
+msgid "{relative} ago"
+msgstr "{relative} siden"
+
+msgid "{relative} ago, {date}"
+msgstr "{relative} siden, {date}"
+
+msgid "{resourceType} has been deleted."
+msgstr "{resourceType} er slettet."
 
 msgid "{resourceType} has state {resourceState}"
 msgstr "{resourceType} har tilstanden {resourceState}"
@@ -4844,8 +6530,26 @@ msgstr "{resource_link} start har mislyktes."
 msgid "{resource_link} stop has failed."
 msgstr "{resource_link} stoppet har mislyktes."
 
+msgid "{resource_name} has been deleted."
+msgstr "{resource_name} har blitt slettet."
+
+msgid "{role} in {project}"
+msgstr "{role} i {project}"
+
 msgid "{sender} has invited you to join {name} {type} in {role} role."
 msgstr "{sender} har invitert deg til å bli med i {name} {type} i {role} rolle."
+
+msgid "{usage} of {limit}"
+msgstr "{usage} av {limit}"
+
+msgid "{usage} of {limit} used"
+msgstr "{usage} av {limit} brukt"
+
+msgid "{user} commented:"
+msgstr "{user} kommenterte:"
+
+msgid "{user} commented on {issue}"
+msgstr "{user} kommenterte {issue}"
 
 msgid "{user} has approved it on {date} at {time}."
 msgstr "{user} har godkjent det på {date} på {time}."
@@ -4861,6 +6565,9 @@ msgstr "{user} har bedt om klargjøring av \"{resource_name}\" med planen \"{pla
 
 msgid "{user} has requested termination of {resource_name} with active plan \"{plan_name}\"."
 msgstr "{user} har bedt om avslutning av {resource_name} med den aktive planen \"{plan_name}\"."
+
+msgid "{value} at {date}"
+msgstr "{value} på {date}"
 
 msgid "{value} at {date}, estimated"
 msgstr "{value} ved {date}, anslått"
