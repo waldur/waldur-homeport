@@ -287,6 +287,9 @@ msgstr "Tildelingsutvalg"
 msgid "Allow bookings to be scheduled at weekends"
 msgstr "Tillat bestillinger å bli planlagt i helgene"
 
+msgid "Allow service provider to create offering users."
+msgstr "Tillat tjenesteleverandør å opprette tilbudsbrukere."
+
 msgid "Allow to enable/disable component only"
 msgstr "Tillat bare å aktivere/deaktivere komponent"
 

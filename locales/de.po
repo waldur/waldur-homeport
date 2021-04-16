@@ -8,11 +8,119 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
 
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr "\"{trimmed}\" überschreitet das {max_len} FQDN-Limit von Zeichen"
+
+msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
+msgstr "<Link>Nutzungsbedingungen</Link> wurden am <Date></Date> akzeptiert"
+
+msgid "API URL"
+msgstr "API-URL"
+
+msgid "API secret code:"
+msgstr "API-Geheimcode:"
+
+msgid "API token lifetime"
+msgstr "API-Tokenlebensdauer"
+
+msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
+msgstr "Eine minimale erwartete Konfiguration der Arbeitskraft beträgt 4 vCPU und 4 GB RAM."
+
+msgid "A one-time fee applied on activation."
+msgstr "Eine einmalige Gebühr wird bei der Aktivierung erhoben."
+
+msgid "A profile has been created."
+msgstr "Es wurde ein Profil erstellt."
+
 msgid "Accept"
 msgstr "Zustimmen"
 
+msgid "Accept booking"
+msgstr "Buchung akzeptieren"
+
+msgid "Access subnets"
+msgstr "Zugriff auf Subnetze"
+
+msgid "Accessible to all customers."
+msgstr "Für alle Kunden zugänglich."
+
+msgid "Account activation"
+msgstr "Kontoaktivierung"
+
+msgid "Account has been activated."
+msgstr "Das Konto wurde aktiviert."
+
+msgid "Account removal"
+msgstr "Kontoentfernung"
+
+msgid "Accounting period"
+msgstr "Abrechnungszeitraum"
+
+msgid "Accounting plans"
+msgstr "Buchhaltungspläne"
+
+msgid "Accounting record"
+msgstr "Buchhaltungsdatensatz"
+
+msgid "Accounting records"
+msgstr "Buchhaltungsunterlagen"
+
+msgid "Accounting running"
+msgstr "Buchhaltung läuft"
+
+msgid "Accounting start date"
+msgstr "Startdatum der Buchhaltung"
+
+msgid "Accounting type"
+msgstr "Buchhaltungstyp"
+
+msgid "Action has been applied."
+msgstr "Die Aktion wurde angewandet."
+
+msgid "Activation price"
+msgstr "Aktivierungspreis"
+
 msgid "Active"
 msgstr "Aktiv"
+
+msgid "Active count"
+msgstr "Aktive Zählung"
+
+msgid "Active user will be able to login into the portal."
+msgstr "Der aktive Benutzer kann sich beim Portal anmelden."
+
+msgid "Add SSH key"
+msgstr "SSH-Schlüssel hinzufügen"
+
+msgid "Add Waldur user SSH keys to the FreeIPA profile"
+msgstr "Fügen Sie dem FreeIPA-Profil Waldur-Benutzer-SSH-Schlüssel hinzu"
+
+msgid "Add component"
+msgstr "Komponente hinzufügen"
+
+msgid "Add data volume"
+msgstr "Datenvolumen hinzufügen"
+
+msgid "Add environment variable"
+msgstr "Umgebungsvariable hinzufügen"
+
+msgid "Add new offering"
+msgstr "Neues Angebot hinzufügen"
+
+msgid "Add new organization"
+msgstr "Neue Organisation hinzufügen"
+
+msgid "Add new project"
+msgstr "Neues Projekt hinzufügen"
+
+msgid "Add offering"
+msgstr "Angebot hinzufügen"
+
+msgid "Add pair"
+msgstr "Paar hinzufügen"
+
+msgid "Add payment profile"
+msgstr "Zahlungsprofil hinzufügen"
 
 msgid "Add project"
 msgstr "Add department"
@@ -20,8 +128,770 @@ msgstr "Add department"
 msgid "Add project member"
 msgstr "Add department member"
 
+msgid "Add resource"
+msgstr "Ressource hinzufügen"
+
+msgid "Add security group"
+msgstr "Sicherheitsgruppe hinzufügen"
+
+msgid "Add team member"
+msgstr "Teammitglied hinzufügen"
+
+msgid "Add to a new namespace"
+msgstr "Zu einem neuen Namespace hinzufügen"
+
+msgid "Add to comparison"
+msgstr "Zum Vergleich hinzufügen"
+
+msgid "Add user input field"
+msgstr "Benutzereingabefeld hinzufügen"
+
+msgid "Additional data that will be added to instance on provisioning."
+msgstr "Zusätzliche Daten, die der Instanz bei der Bereitstellung hinzugefügt werden."
+
+msgid "Additional data that will be added to virtual machine on provisioning."
+msgstr "Zusätzliche Daten, die bei der Bereitstellung zur virtuellen Maschine hinzugefügt werden."
+
+msgid "Additional space to apply to storage quota to be used by snapshots."
+msgstr "Zusätzlicher Speicherplatz für das Speicherkontingent, das von Snapshots verwendet werden soll."
+
+msgid "Additionally service provider can charge for usage of the following components"
+msgstr "Zusätzlich kann der Dienstanbieter die Nutzung der folgenden Komponenten in Rechnung stellen"
+
+msgid "Admin username"
+msgstr "Admin-Benutzername"
+
+msgid "Affected resource"
+msgstr "Betroffene Ressource"
+
+msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
+msgstr "Nachdem der geheime API-Code neu generiert wurde, ist es nicht möglich, die Verwendung mit dem alten Schlüssel zu übermitteln."
+
+msgid "Agree with ToS"
+msgstr "Stimmen Sie ToS zu"
+
+msgid "Agreement number"
+msgstr "Vertragsnummer"
+
+msgid "All resources have been imported."
+msgstr "Alle Ressourcen wurden importiert."
+
+msgid "Allocation description"
+msgstr "Zuordnungsbeschreibung"
+
+msgid "Allocation name"
+msgstr "Zuordnungsname"
+
+msgid "Allocation pools"
+msgstr "Allokationspools"
+
+msgid "Allow bookings to be scheduled at weekends"
+msgstr "Zulassen, dass Buchungen am Wochenende geplant werden"
+
+msgid "Allow to enable/disable component only"
+msgstr "Nur die Option zum Aktivieren/Deaktivieren von Komponenten zulassen"
+
+msgid "Allowed address pairs update was scheduled."
+msgstr "Die Aktualisierung der zulässigen Adresspaare wurde geplant."
+
+msgid "An error occurred on project removal."
+msgstr "Beim Entfernen des Projekts ist ein Fehler aufgetreten."
+
+msgid "Answers have been submitted"
+msgstr "Antworten wurden eingereicht"
+
+msgid "Application catalogues"
+msgstr "Anwendungskataloge"
+
+msgid "Application has been created."
+msgstr "Die Anwendung wurde erstellt."
+
+msgid "Application templates"
+msgstr "Anwendungsvorlagen"
+
+msgid "Approve payment"
+msgstr "Zahlung genehmigen"
+
+msgid "Approved at"
+msgstr "Genehmigt bei"
+
+msgid "Archived plans"
+msgstr "Archivierte Pläne"
+
+msgid "Are you sure you want to accept a {name}?"
+msgstr "Sind Sie sicher, dass Sie einen {name} akzeptieren möchten?"
+
+msgid "Are you sure you want to cluster template? Note this will reset the node plan."
+msgstr "Sind Sie sicher, dass Sie eine Cluster-Vorlage erstellen möchten? Beachten Sie, dass dadurch der Knotenplan zurückgesetzt wird."
+
+msgid "Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
+msgstr "Möchten Sie einen {name} {resourceType} in einem fehlerhaften Zustand wirklich löschen? Wenn Sie dies wünschen, wird ein Bereinigungsversuch durchgeführt."
+
+msgid "Are you sure you want to delete the payment?"
+msgstr "Möchten Sie die Zahlung wirklich löschen?"
+
+msgid "Are you sure you want to delete the payment profile?"
+msgstr "Möchten Sie das Zahlungsprofil wirklich löschen?"
+
+msgid "Are you sure you want to revoke this permission?"
+msgstr "Möchten Sie diese Berechtigung wirklich widerrufen?"
+
+msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
+msgstr "Sind Sie sicher, dass Sie den Rancher-Katalog {catalog} löschen möchten?"
+
+msgid "Are you sure you would like to delete project {projectName}?"
+msgstr "Sind Sie sicher, dass Sie project {projectName} löschen möchten?"
+
+msgid "Are you sure you would like to delete the hook?"
+msgstr "Sind Sie sicher, dass Sie den Hook löschen möchten?"
+
+msgid "Are you sure you would like to delete the key?"
+msgstr "Sind Sie sicher, dass Sie den Schlüssel löschen möchten?"
+
+msgid "Are you sure you would like to terminate resource {resourceName}?"
+msgstr "Sind Sie sicher, dass Sie die Ressource {resourceName} beenden möchten?"
+
+msgid "Article code"
+msgstr "Artikel-Code"
+
+msgid "At least one plan must be entered"
+msgstr "Es muss mindestens ein Plan eingegeben werden"
+
+msgid "Attach OpenStack Volume to Instance"
+msgstr "Anhängen von OpenStack-Volume an Instanz"
+
+msgid "Attach has been scheduled."
+msgstr "Anhängen wurde geplant."
+
+msgid "Attributes are invalid."
+msgstr "Attribute sind ungültig."
+
+msgid "Attributes filter"
+msgstr "Attributfilter"
+
+msgid "Audit log"
+msgstr "Audit-Log"
+
+msgid "Authenticate using Mobile ID"
+msgstr "Authentifizieren mit Mobile ID"
+
+msgid "Authentication events"
+msgstr "Authentifizierungsereignisse"
+
+msgid "Authentication token"
+msgstr "Authentifizierungs-Token"
+
+msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
+msgstr "Die Authentifizierung mit der mobilen ID wurde vom Benutzer abgebrochen oder es ist eine Zeitüberschreitung aufgetreten. Einzelheiten:"
+
+msgid "Authorized personnel"
+msgstr "Autorisiertes Personal"
+
+msgid "Auto-assign floating IP"
+msgstr "Automatisch schwebende IP zuweisen"
+
+msgid "Auto approve in service provider projects"
+msgstr "Automatische Genehmigung in Service-Provider-Projekten"
+
+msgid "Available quota usage: {usage}"
+msgstr "Verfügbare Kontingentnutzung: {usage}"
+
+msgid "Average of all checklists"
+msgstr "Durchschnitt aller Checklisten"
+
+msgid "Average utilization"
+msgstr "Durchschnittliche Auslastung"
+
+msgid "Azure Active Directory Application Secret"
+msgstr "Azure Active Directory-Anwendungsgeheimnis"
+
+msgid "Azure PostgreSQL database server"
+msgstr "Azure PostgreSQL-Datenbankserver"
+
+msgid "Azure Virtual Machine"
+msgstr "Azure Virtual Machine"
+
+msgid "Azure provider"
+msgstr "Azure-Anbieter"
+
+msgid "Back to organization"
+msgstr "Zurück zur Organisation"
+
+msgid "Back to personal dashboard"
+msgstr "Zurück zum persönlichen Dashboard"
+
+msgid "Back to shopping"
+msgstr "Zurück zum Einkaufen"
+
+msgid "Backend ID"
+msgstr "Backend-ID"
+
+msgid "Backend ID has been successfully set."
+msgstr "Die Backend-ID wurde erfolgreich festgelegt."
+
+msgid "Base image name"
+msgstr "Basisbildname"
+
+msgid "Batch RAM"
+msgstr "Batch-RAM"
+
+msgid "Batch block storage size"
+msgstr "Batch-Block-Speichergröße"
+
+msgid "Batch processing documentation"
+msgstr "Dokumentation zur Stapelverarbeitung"
+
+msgid "Batch vCPU"
+msgstr "Batch-vCPU"
+
+msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
+msgstr "Werden Sie Kunde unseres Portals. Stellen Sie IT-Services vom Marktplatz aus bereit und verwalten Sie Ihr Team von einem Ort aus."
+
+msgid "Billing enabled"
+msgstr "Fakturierung aktiviert"
+
+msgid "Booking description"
+msgstr "Buchungsbeschreibung"
+
+msgid "Booking has been accepted."
+msgstr "Die Buchung wurde akzeptiert."
+
+msgid "Booking has been cancelled."
+msgstr "Die Buchung wurde storniert."
+
+msgid "Booking is not allowed to overlap other bookings."
+msgstr "Die Buchung darf sich nicht mit anderen Buchungen überschneiden."
+
+msgid "Booking management"
+msgstr "Buchungsmanagement"
+
+msgid "Bootable"
+msgstr "Bootfähig"
+
+msgid "Browse image"
+msgstr "Bild durchsuchen"
+
+msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
+msgstr "Indem Sie die Token-Lebensdauer auf unbestimmt setzen, erlauben Sie jedem, der den Token hat, sich als Ihre Aktionen ausgeben, bis der Token geändert wurde."
+
+msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
+msgstr "Mit dem Absenden des Formulars stimmen Sie den <Link>Nutzungsbedingungen</Link> zu."
+
+msgid "CIDR"
+msgstr "CIDR"
+
+msgid "CPU limit (hours)"
+msgstr "CPU-Limit (Stunden)"
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "Caller"
+msgstr "Anrufer"
+
+msgid "Cannot create floating IP if tenant external network is not defined."
+msgstr "Kann keine Floating-IP erstellen, wenn ein externes Mandantennetzwerk nicht definiert ist."
+
+msgid "Catalog URL"
+msgstr "Katalog-URL"
+
+msgid "Catalog has been created."
+msgstr "Katalog wurde erstellt."
+
+msgid "Catalog has been deleted."
+msgstr "Der Katalog wurde gelöscht."
+
+msgid "Catalogues"
+msgstr "Kataloge"
+
+msgid "Category is invalid."
+msgstr "Kategorie ist ungültig."
+
+msgid "Challenge code"
+msgstr "Herausforderungscode"
+
+msgid "Change flavor"
+msgstr "Ändern Sie den Geschmack"
+
+msgid "Change limits"
+msgstr "Grenzen ändern"
+
+msgid "Change request - client’s request to perform a generic modification of data or service."
+msgstr "Änderungsanforderung - Anforderung des Kunden, eine generische Änderung von Daten oder Diensten durchzuführen."
+
+msgid "Change resource limits"
+msgstr "Ressourcenlimits ändern"
+
+msgid "Change resource plan"
+msgstr "Ressourcenplan ändern"
+
+msgid "Change user email"
+msgstr "Benutzer-E-Mail ändern"
+
+msgid "Changing flavor"
+msgstr "Geschmack ändern"
+
+msgid "Charge for usage-based component is based on user-requested limit."
+msgstr "Die Gebühr für nutzungsbasierte Komponente basiert auf dem vom Benutzer angeforderten Limit."
+
+msgid "Checklist setup"
+msgstr "Checklisteneinrichtung"
+
+msgid "Choices as comma-separated list"
+msgstr "Auswahlmöglichkeiten als durch Kommas getrennte Liste"
+
+msgid "Civil number"
+msgstr "Zivilnummer"
+
+msgid "Client organization"
+msgstr "Kundenorganisation"
+
+msgid "Client project"
+msgstr "Kundenprojekt"
+
+msgid "Cloud RAM"
+msgstr "Cloud-RAM"
+
+msgid "Cloud block storage size"
+msgstr "Größe des Cloud-Blockspeichers"
+
+msgid "Cloud init template"
+msgstr "Cloud-Init-Vorlage"
+
+msgid "Cloud vCPU"
+msgstr "Cloud-vCPU"
+
+msgid "Cluster"
+msgstr "Cluster"
+
+msgid "Cluster IP"
+msgstr "Cluster-IP"
+
+msgid "Cluster description"
+msgstr "Cluster-Beschreibung"
+
+msgid "Cluster name"
+msgstr "Clustername"
+
+msgid "Cluster roles"
+msgstr "Clusterrollen"
+
+msgid "Code is too short."
+msgstr "Der Code ist zu kurz."
+
+msgid "Code should consist of latin symbols or numbers."
+msgstr "Der Code sollte aus lateinischen Symbolen oder Zahlen bestehen."
+
+msgid "Collation"
+msgstr "Sortierung"
+
+msgid "Company data"
+msgstr "Unternehmensdaten"
+
+msgid "Compare items"
+msgstr "Artikel vergleichen"
+
+msgid "Competence"
+msgstr "Kompetenz"
+
+msgid "Components are invalid."
+msgstr "Komponenten sind ungültig."
+
+msgid "Compute generation"
+msgstr "Compute-Generierung"
+
+msgid "Configuration options"
+msgstr "Konfigurationsoptionen"
+
+msgid "Confirmation mail has been sent. Please check your inbox!"
+msgstr "Die Bestätigungsmail wurde gesendet. Bitte überprüfe deinen Posteingang!"
+
+msgid "Confirmation notification template"
+msgstr "Vorlage für Bestätigungsmeldungen"
+
+msgid "Confirming that data is correct"
+msgstr "Bestätigen, dass die Daten korrekt sind"
+
+msgid "Connected subnets"
+msgstr "Verbundene Subnetze"
+
+msgid "Connection details"
+msgstr "Verbindungsdetails"
+
+msgid "Contact phone"
+msgstr "Kontakt-Telefon"
+
+msgid "Contract sum"
+msgstr "Auftragssumme"
+
+msgid "Contract sum is"
+msgstr "Vertragssumme ist"
+
+msgid "Control plane"
+msgstr "Steuerebene"
+
+msgid "Could not create organization"
+msgstr "Organisation konnte nicht erstellt werden"
+
+msgid "Create Network adapter"
+msgstr "Netzwerkadapter erstellen"
+
+msgid "Create SQL database in PostgreSQL server"
+msgstr "Erstellen Sie SQL-Datenbank auf PostgreSQL-Server"
+
+msgid "Create VM snapshot for OpenStack instance"
+msgstr "Erstellen eines VM-Snapshots für die OpenStack-Instanz"
+
+msgid "Create VM snapshot schedule for OpenStack instance"
+msgstr "Erstellen Sie einen VM-Snapshot-Zeitplan für die OpenStack-Instanz"
+
+msgid "Create an availability"
+msgstr "Erstellen Sie eine Verfügbarkeit"
+
+msgid "Create application"
+msgstr "Erstellen einer Anwendung"
+
+msgid "Create catalog"
+msgstr "Katalog erstellen"
+
+msgid "Create disk"
+msgstr "Erstellen von Datenträgern"
+
+msgid "Create horizontal pod autoscaler"
+msgstr "Erstellen Sie einen horizontalen Pod-Autoscaler"
+
+msgid "Create network for OpenStack tenant"
+msgstr "Netzwerk für OpenStack-Mandant erstellen"
+
+msgid "Create node"
+msgstr "Knoten erstellen"
+
+msgid "Create organization"
+msgstr "Organisation erstellen"
+
+msgid "Create port"
+msgstr "Port erstellen"
+
 msgid "Create project"
 msgstr "Create department"
+
+msgid "Create security group for OpenStack tenant {name}"
+msgstr "Erstellen Sie eine Sicherheitsgruppe für OpenStack-Mandanten {name}"
+
+msgid "Create snapshot for OpenStack volume"
+msgstr "Snapshot für OpenStack-Volume erstellen"
+
+msgid "Create snapshot schedule for OpenStack volume"
+msgstr "Erstellen Sie einen Snapshot-Zeitplan für das OpenStack-Volume"
+
+msgid "Create subnet"
+msgstr "Subnetz erstellen"
+
+msgid "Created a new payment for {customer_link}."
+msgstr "Es wurde eine neue Zahlung für {customer_link} erstellt."
+
+msgid "Creating a backup schedule"
+msgstr "Erstellen eines Sicherungszeitplans"
+
+msgid "Creating a floating IP"
+msgstr "Erstellen einer schwebenden IP"
+
+msgid "Creating a new network"
+msgstr "Erstellen eines neuen Netzwerks"
+
+msgid "Creating a security group"
+msgstr "Erstellen einer Sicherheitsgruppe"
+
+msgid "Creating a subnet"
+msgstr "Erstellen eines Subnetzes"
+
+msgid "Creating snapshot schedule"
+msgstr "Erstellen eines Snapshot-Zeitplans"
+
+msgid "Current API token"
+msgstr "Aktuelles API-Token"
+
+msgid "Current cost"
+msgstr "Aktuelle Kosten"
+
+msgid "Current flavor"
+msgstr "Aktueller Geschmack"
+
+msgid "Current limit"
+msgstr "Aktuelle Begrenzung"
+
+msgid "Current price per month"
+msgstr "Aktueller Preis pro Monat"
+
+msgid "Current replicas"
+msgstr "Aktuelle Repliken"
+
+msgid "Current type"
+msgstr "Aktueller Typ"
+
+msgid "Customer support satisfaction overall rating"
+msgstr "Gesamtbewertung der Kundenzufriedenheit"
+
+msgid "DNS name servers"
+msgstr "DNS-Nameserver"
+
+msgid "Daily available booking time range"
+msgstr "Täglich verfügbarer Buchungszeitbereich"
+
+msgid "Data volume #{index}"
+msgstr "Datenvolumen #{index}"
+
+msgid "Data volume should have at least {size} GB."
+msgstr "Das Datenvolumen sollte mindestens {size} GB haben."
+
+msgid "Data volume size:"
+msgstr "Datenvolumengröße:"
+
+msgid "Data volume type"
+msgstr "Datenvolumentyp"
+
+msgid "Datacite DOI"
+msgstr "Datacite DOI"
+
+msgid "Date and time of incident"
+msgstr "Datum und Uhrzeit des Vorfalls"
+
+msgid "Date of reporting"
+msgstr "Datum der Berichterstattung"
+
+msgid "Default SLURM account for user"
+msgstr "Standard-SLURM-Konto für Benutzer"
+
+msgid "Default availability zone for provisioned instances."
+msgstr "Standardverfügbarkeitszone für bereitgestellte Instanzen."
+
+msgid "Default cluster label"
+msgstr "Standard-Cluster-Bezeichnung"
+
+msgid "Default tax percent"
+msgstr "Standardsteuerprozent"
+
+msgid "Delete catalog"
+msgstr "Katalog löschen"
+
+msgid "Delete volumes"
+msgstr "Volumes löschen"
+
+msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
+msgstr "Das Löschen des PostgreSQL-Servers führt zum Löschen aller Datenbanken, die innerhalb des Servers erstellt wurden."
+
+msgid "Deploy Longhorn block storage after cluster is deployed"
+msgstr "Bereitstellen von Longhorn Blockspeicher nach der Bereitstellung des Clusters"
+
+msgid "Desired replicas"
+msgstr "Gewünschte Replikate"
+
+msgid "Destination URL"
+msgstr "Ziel-URL"
+
+msgid "Destination (CIDR)"
+msgstr "Ziel (CIDR)"
+
+msgid "Destroy resource"
+msgstr "Ressource zerstören"
+
+msgid "Destroy {name} instance"
+msgstr "Zerstöre {name} Instanz"
+
+msgid "Destroying"
+msgstr "Zerstören"
+
+msgid "Detaching"
+msgstr "Löschend"
+
+msgid "Devops-friendly offering"
+msgstr "Devops-freundliches Angebot"
+
+msgid "DigitalOcean provider"
+msgstr "DigitalOcean-Anbieter"
+
+msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
+msgstr "Deaktivieren Sie ein Profil in FreeIPA. Deaktivierte Profile sind für die Anmeldung in den Linux-Systemen nicht zulässig"
+
+msgid "Disable data volume"
+msgstr "Datenvolumen deaktivieren"
+
+msgid "Disable gateway IP advertising via DHCP"
+msgstr "Deaktivieren Sie die Gateway-IP-Werbung über DHCP"
+
+msgid "Disable profile"
+msgstr "Profil deaktivieren"
+
+msgid "Disk extension has been scheduled."
+msgstr "Die Festplattenerweiterung wurde geplant."
+
+msgid "Disk has been created."
+msgstr "Datenträger wurde erstellt."
+
+msgid "Disks"
+msgstr "Festplatten"
+
+msgid "Division type"
+msgstr "Abteilungsart"
+
+msgid "Do not allow user to specify quotas when offering is provisioned."
+msgstr "Erlauben Sie dem Benutzer nicht, Kontingente anzugeben, wenn das Angebot bereitgestellt wird."
+
+msgid "Do not configure a gateway for this subnet"
+msgstr "Konfigurieren Sie kein Gateway für dieses Subnetz"
+
+msgid "Do not have an account?"
+msgstr "Haben Sie kein Konto?"
+
+msgid "Do you really want to delete comment?"
+msgstr "Möchten Sie den Kommentar wirklich löschen?"
+
+msgid "Do you want to unlink instance {name}?"
+msgstr "Möchten Sie die Verknüpfung der Instanz {name} aufheben?"
+
+msgid "Docker version"
+msgstr "Docker-Version"
+
+msgid "Domain name. If not defined default domain will be used."
+msgstr "Domänennamen. Wenn nicht definierte Standarddomäne verwendet wird."
+
+msgid "Download invoice"
+msgstr "Rechnung herunterladen"
+
+msgid "Download order PDF file"
+msgstr "PDF-Bestelldatei herunterladen"
+
+msgid "Drop files to attach, or"
+msgstr "Dateien zum Anhängen ablegen oder"
+
+msgid "Drop files to attach them to the issue."
+msgstr "Löschen Sie Dateien, um sie an das Problem anzuhängen."
+
+msgid "Droplet has been resized."
+msgstr "Die Größe des Tröpfchens wurde geändert."
+
+msgid "Dynamic — use separate volume types for tracking pricing"
+msgstr "Dynamisch — verwenden Sie separate Volume-Typen zur Preisverfolgung"
+
+msgid "EU VAT ID"
+msgstr "EU-MWSt.-ID"
+
+msgid "Each mount point should be used once at most."
+msgstr "Jeder Einhängepunkt sollte höchstens einmal verwendet werden."
+
+msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
+msgstr "Jeder Nutzungsbericht muss mit einem Abrechnungsplan verbunden sein, um eine korrekte Berechnung der Buchhaltungsdaten zu gewährleisten."
+
+msgid "Edit YAML"
+msgstr "Bearbeiten YAML"
+
+msgid "Edit an availability"
+msgstr "Bearbeiten einer Verfügbarkeit"
+
+msgid "Edit booking event"
+msgstr "Buchungsereignis bearbeiten"
+
+msgid "Edit offering"
+msgstr "Angebot bearbeiten"
+
+msgid "Edit project member"
+msgstr "Projekt-Mitglied bearbeiten"
+
+msgid "Edit team member"
+msgstr "Teammitglied bearbeiten"
+
+msgid "Egress"
+msgstr "Ausstieg"
+
+msgid "Email change request has been cancelled."
+msgstr "E-Mail-Änderungsanforderung wurde abgebrochen."
+
+msgid "Email has been updated."
+msgstr "E-Mail wurde aktualisiert."
+
+msgid "Email verification has been sent. Please check your inbox."
+msgstr "Die E-Mail-Überprüfung wurde gesendet. Bitte überprüfe deinen Posteingang."
+
+msgid "Enable DHCP"
+msgstr "Aktivieren von DHCP"
+
+msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
+msgstr "Aktivieren Sie ein Profil in FreeIPa. Für die Anmeldung bei den Linux-Systemen sind nur aktivierte Profile zulässig"
+
+msgid "Enable by default"
+msgstr "Standardmäßig aktivieren"
+
+msgid "Enable limit"
+msgstr "Limit aktivieren"
+
+msgid "Enable profile"
+msgstr "Profil aktivieren"
+
+msgid "Enable profile after creation"
+msgstr "Profil nach der Erstellung aktivieren"
+
+msgid "Enabled checklists have been updated."
+msgstr "Aktivierte Checklisten wurden aktualisiert."
+
+msgid "Enabled default gateway"
+msgstr "Aktiviertes Standard-Gateway"
+
+msgid "Encountered an empty component"
+msgstr "Auf eine leere Komponente gestoßen"
+
+msgid "End date must be after start date."
+msgstr "Das Enddatum muss nach dem Startdatum liegen."
+
+msgid "End date of the agreement is"
+msgstr "Enddatum der Vereinbarung ist"
+
+msgid "Ensure this field has no more than 30 characters."
+msgstr "Stellen Sie sicher, dass dieses Feld nicht mehr als 30 Zeichen enthält."
+
+msgid "Enter IPv4 address."
+msgstr "Geben Sie die IPv4-Adresse ein."
+
+msgid "Enter private IPv4 CIDR."
+msgstr "Geben Sie private IPv4 CIDR ein."
+
+msgid "Environment variables"
+msgstr "Umgebungsvariablen"
+
+msgid "Erred"
+msgstr "Verrottete"
+
+msgid "Error traceback"
+msgstr "Fehler beim Traceback"
+
+msgid "Esimated price per month"
+msgstr "Esimated Preis pro Monat"
+
+msgid "Estimated cost for the current month: {cost}"
+msgstr "Geschätzte Kosten für den aktuellen Monat: {cost}"
+
+msgid "Estimated monthly cost"
+msgstr "Geschätzte monatliche Kosten"
+
+msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
+msgstr "Die geschätzte monatliche Gebühr ändert sich von {old_estimate} zu {new_estimate}. Die Mehrwertsteuer ist nicht enthalten."
+
+msgid "Ethernet type"
+msgstr "Ethernet-Typ"
+
+msgid "Event types"
+msgstr "Ereignistypen"
+
+msgid "Every day at"
+msgstr "Jeden Tag um"
+
+msgid "Every hour at {minuteValues} past the hour"
+msgstr "Jede Stunde um {minuteValues} nach der vollen Stunde"
+
+msgid "Every month on the {days} at {time}"
+msgstr "Jeden Monat am {days} um {time}"
+
+msgid "Every month on the {days} of {months} at {time}"
+msgstr "Jeden Monat am {days} von {months} um {time}"
 
 msgid "Project"
 msgstr "Department"
@@ -70,6 +940,9 @@ msgstr "There are no department yet for this organization."
 
 msgid "Update project details"
 msgstr "Update department details"
+
+msgid "(VAT is not included)"
+msgstr "(MwSt. ist nicht inbegriffen)"
 
 msgid "projects"
 msgstr "departments"

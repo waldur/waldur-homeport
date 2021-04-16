@@ -8,14 +8,71 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
 
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr "\"{trimmed}\" supera el límite de FQDN de caracteres {max_len}"
+
+msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
+msgstr "<Link>Términos de servicio</Link> han sido aceptados en <Date></Date>"
+
 msgid "API URL"
 msgstr "API URL"
+
+msgid "API secret code:"
+msgstr "Código secreto de la API:"
+
+msgid "API token lifetime"
+msgstr "Duración del token de la API"
+
+msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
+msgstr "Una configuración mínima esperada del trabajador es de 4 vCPU y 4 GB de RAM."
+
+msgid "A one-time fee applied on activation."
+msgstr "Se aplica una tarifa única en la activación."
+
+msgid "A profile has been created."
+msgstr "Se ha creado un perfil."
 
 msgid "Abbreviation"
 msgstr "Abreviatura"
 
 msgid "Accept"
 msgstr "Aceptar"
+
+msgid "Accept booking"
+msgstr "Aceptar reserva"
+
+msgid "Access subnets"
+msgstr "Subredes de acceso"
+
+msgid "Accessible to all customers."
+msgstr "Accesible para todos los clientes."
+
+msgid "Account activation"
+msgstr "Activación de la cuenta"
+
+msgid "Account has been activated."
+msgstr "La cuenta ha sido activada."
+
+msgid "Account removal"
+msgstr "Eliminación de cuenta"
+
+msgid "Accounting period"
+msgstr "Período contable"
+
+msgid "Accounting plans"
+msgstr "Planes contables"
+
+msgid "Accounting record"
+msgstr "Registro contable"
+
+msgid "Accounting records"
+msgstr "Registros contables"
+
+msgid "Accounting running"
+msgstr "Contabilidad en ejecución"
+
+msgid "Accounting start date"
+msgstr "Fecha de inicio contable"
 
 msgid "Add project"
 msgstr "Add department"
@@ -73,6 +130,9 @@ msgstr "There are no department yet for this organization."
 
 msgid "Update project details"
 msgstr "Update department details"
+
+msgid "(VAT is not included)"
+msgstr "(El IVA no está incluido)"
 
 msgid "projects"
 msgstr "departments"

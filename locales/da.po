@@ -287,6 +287,9 @@ msgstr "Tildelingspuljer"
 msgid "Allow bookings to be scheduled at weekends"
 msgstr "Tillad, at bookinger kan planlægges i weekender"
 
+msgid "Allow service provider to create offering users."
+msgstr "Tillad tjenesteudbyderen at oprette tilbyder brugere."
+
 msgid "Allow to enable/disable component only"
 msgstr "Tillad kun at aktivere/deaktivere komponent"
 

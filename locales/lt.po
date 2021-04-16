@@ -287,6 +287,9 @@ msgstr "Paskirstymo telkiniai"
 msgid "Allow bookings to be scheduled at weekends"
 msgstr "Leisti planuoti užsakymus savaitgaliais"
 
+msgid "Allow service provider to create offering users."
+msgstr "Leisti paslaugų teikėjui kurti siūlomus vartotojus."
+
 msgid "Allow to enable/disable component only"
 msgstr "Leisti įjungti/išjungti tik komponentą"
 
