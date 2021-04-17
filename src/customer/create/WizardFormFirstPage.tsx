@@ -36,7 +36,7 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => (
         name="email"
         component={InputField}
         type="email"
-        label={translate('Contact e-mail')}
+        label={translate('Contact email')}
         required={true}
       />
       <InputGroup

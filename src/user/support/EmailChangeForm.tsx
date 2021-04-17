@@ -16,12 +16,12 @@ export const EmailChangeForm = ({ user }: { user: UserDetails }) => {
     >
       {user.requested_email && (
         <div className="form-group">
-          <label htmlFor="emailAddress">{translate('Requested e-mail')}</label>
+          <label htmlFor="emailAddress">{translate('Requested email')}</label>
           <p className="form-control-static">{user.requested_email}</p>
         </div>
       )}
       <div className="form-group">
-        <label htmlFor="emailAddress">{translate('New e-mail address')}</label>
+        <label htmlFor="emailAddress">{translate('New email address')}</label>
         <input
           type="email"
           id="emailAddress"
@@ -33,7 +33,7 @@ export const EmailChangeForm = ({ user }: { user: UserDetails }) => {
       <SubmitButton
         disabled={!email || submitting}
         submitting={submitting}
-        label={translate('Verify e-mail')}
+        label={translate('Verify email')}
       />
     </form>
   );

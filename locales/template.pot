@@ -1419,9 +1419,6 @@ msgstr ""
 
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
-msgid "Contact e-mail"
-msgstr ""
-
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/popover/CustomerSummary.tsx
 #: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
@@ -2151,21 +2148,6 @@ msgstr ""
 msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr ""
 
-#: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
-#: src/customer/popover/CustomerUsersList.tsx
-#: src/customer/team/CustomerUsersList.tsx
-#: src/invitations/actions/EmailGroup.tsx
-#: src/project/team/ProjectUsersList.tsx
-#: src/project/team/UserGroup.tsx
-#: src/user/support/UserDetailsTable.tsx
-msgid "E-mail"
-msgstr ""
-
-#: src/user/hooks/HookForm.tsx
-msgid "E-mail address"
-msgstr ""
-
 #: src/customer/create/WizardFormSecondPage.tsx
 msgid "EU VAT ID"
 msgstr ""
@@ -2241,12 +2223,24 @@ msgid "Egress"
 msgstr ""
 
 #: src/auth/SignupForm.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/popover/CustomerUsersList.tsx
+#: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
+#: src/invitations/actions/EmailGroup.tsx
+#: src/project/team/ProjectUsersList.tsx
+#: src/project/team/UserGroup.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
+#: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Email"
+msgstr ""
+
+#: src/user/hooks/HookForm.tsx
+msgid "Email address"
 msgstr ""
 
 #: src/user/support/EmailField.tsx
@@ -4125,12 +4119,12 @@ msgstr ""
 msgid "Neutral"
 msgstr ""
 
-#: src/user/support/EmailChangeForm.tsx
-msgid "New e-mail address"
-msgstr ""
-
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "New email"
+msgstr ""
+
+#: src/user/support/EmailChangeForm.tsx
+msgid "New email address"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ChangeFlavorDialog.tsx
@@ -6154,9 +6148,6 @@ msgid "Requested by"
 msgstr ""
 
 #: src/user/support/EmailChangeForm.tsx
-msgid "Requested e-mail"
-msgstr ""
-
 #: src/user/support/RequestedEmail.tsx
 msgid "Requested email"
 msgstr ""
@@ -9464,7 +9455,7 @@ msgid "Variable #{index}"
 msgstr ""
 
 #: src/user/support/EmailChangeForm.tsx
-msgid "Verify e-mail"
+msgid "Verify email"
 msgstr ""
 
 #: src/user/support/UserEmailChangeCallback.tsx

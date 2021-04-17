@@ -8,7 +8,7 @@ export const EmailGroup: FunctionComponent<{ disabled }> = ({ disabled }) => (
   <InputGroup
     name="email"
     type="email"
-    label={translate('E-mail')}
+    label={translate('Email')}
     required={true}
     disabled={disabled}
   />
