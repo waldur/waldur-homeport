@@ -72,7 +72,7 @@ const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
 
       <NumberField name="sponsor_number" label={translate('Sponsor number')} />
 
-      <EmailField name="email" label={translate('E-mail')} maxLength={75} />
+      <EmailField name="email" label={translate('Email')} maxLength={75} />
 
       <StringField
         name="phone_number"

@@ -20,7 +20,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
           ),
         },
         {
-          title: translate('E-mail'),
+          title: translate('Email'),
           render: ({ row }) => row.email || 'N/A',
         },
         {

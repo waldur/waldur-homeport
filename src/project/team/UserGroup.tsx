@@ -19,7 +19,7 @@ const Option: FunctionComponent<any> = (props) => (
         )}
         {props.data.email && (
           <div>
-            {translate('E-mail')}: {props.data.email}
+            {translate('Email')}: {props.data.email}
           </div>
         )}
         {props.data.civil_number && (

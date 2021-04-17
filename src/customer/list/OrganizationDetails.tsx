@@ -22,7 +22,7 @@ export const OrganizationDetails: FunctionComponent<OrganizationDetailsProps> = 
         label={translate('Abbreviation')}
         value={props.customer.abbreviation}
       />
-      <Field label={translate('E-mail')} value={props.customer.email} />
+      <Field label={translate('Email')} value={props.customer.email} />
       <Field
         label={translate('Agreement number')}
         value={props.customer.agreement_number}

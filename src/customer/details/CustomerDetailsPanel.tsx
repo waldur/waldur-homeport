@@ -78,7 +78,7 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
           value={customer.address || customer.contact_details}
         />
 
-        <Field label={translate('Contact e-mail')} value={customer.email} />
+        <Field label={translate('Contact email')} value={customer.email} />
 
         <Field
           label={translate('Contact phone')}

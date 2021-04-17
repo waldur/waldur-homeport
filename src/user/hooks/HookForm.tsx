@@ -55,7 +55,7 @@ export const HookForm: React.FC<OwnProps> = ({ isNew, eventGroups }) => {
             name="email"
             component={StringField}
             type="email"
-            placeholder={translate('E-mail address')}
+            placeholder={translate('Email address')}
             validate={required}
           />
         </FormGroup>
