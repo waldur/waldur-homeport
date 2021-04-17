@@ -630,10 +630,6 @@ msgstr ""
 msgid "Are you sure you want to cancel a {name}?"
 msgstr ""
 
-#: src/rancher/cluster/create/TenantGroup.tsx
-msgid "Are you sure you want to cluster template? Note this will reset the node plan."
-msgstr ""
-
 #: src/resource/actions/DestroyActionItem.tsx
 msgid "Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
 msgstr ""
@@ -660,6 +656,10 @@ msgstr ""
 
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
 msgid "Are you sure you want to revoke this permission?"
+msgstr ""
+
+#: src/rancher/cluster/create/TenantGroup.tsx
+msgid "Are you sure you want to select template? Note this will reset the node plan."
 msgstr ""
 
 #: src/rancher/catalog/CatalogDeleteDialog.tsx

@@ -75,7 +75,7 @@ export const TenantGroup: React.FC<TenantGroupProps> = (props) => {
       dispatch,
       translate('Confirmation'),
       translate(
-        'Are you sure you want to cluster template? Note this will reset the node plan.',
+        'Are you sure you want to select template? Note this will reset the node plan.',
       ),
     ).then(() => {
       dispatch(arrayRemoveAll(FORM_ID, NODES_FIELD_ARRAY));
