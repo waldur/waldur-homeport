@@ -11,6 +11,9 @@ msgstr ""
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Умови надання послуг</Link> були прийняті <Date></Date>"
 
+msgid "API URL"
+msgstr "API URL"
+
 msgid "API secret code:"
 msgstr "Секретний код API:"
 
@@ -113,6 +116,9 @@ msgstr "Додати коментар"
 msgid "Add component"
 msgstr "Додати компонент"
 
+msgid "Add data volume"
+msgstr "Додати том даних"
+
 msgid "Add image"
 msgstr "Додати зображення"
 
@@ -137,8 +143,17 @@ msgstr "Додати новий проект"
 msgid "Add notification"
 msgstr "Додати сповіщення"
 
+msgid "Add offering"
+msgstr "Додати пропозицію"
+
 msgid "Add organization"
 msgstr "Додати організацію"
+
+msgid "Add pair"
+msgstr "Додати пару"
+
+msgid "Add payment"
+msgstr "Додати платіж"
 
 msgid "Add payment profile"
 msgstr "Додати платіжний профіль"
@@ -149,14 +164,38 @@ msgstr "Додати план"
 msgid "Add project"
 msgstr "Додайте проект"
 
+msgid "Add project member"
+msgstr "Додати учасника проекту"
+
 msgid "Add resource"
 msgstr "Додати ресурс"
+
+msgid "Add route"
+msgstr "Додати маршрут"
+
+msgid "Add rule"
+msgstr "Додати правило"
 
 msgid "Add security group"
 msgstr "Додати групу безпеки"
 
+msgid "Add team member"
+msgstr "Додати учасника команди"
+
 msgid "Add to a new namespace"
 msgstr "Додати до нового простору імен"
+
+msgid "Add to cart"
+msgstr "Додати до кошика"
+
+msgid "Add to comparison"
+msgstr "Додати до порівняння"
+
+msgid "Add user"
+msgstr "Додати користувача"
+
+msgid "Add user input field"
+msgstr "Додати користувацьке поле"
 
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Додатковий простір для застосування до квоти сховища, яку буде використано знімками."
@@ -173,8 +212,56 @@ msgstr "Пароль адміністратора"
 msgid "Admin username"
 msgstr "Ім'я користувача адміністратора"
 
+msgid "Agree with ToS"
+msgstr "Погодитися з умовами обслуговування"
+
+msgid "Allocation description"
+msgstr "Опис алокації"
+
+msgid "Allocation name"
+msgstr "Назва алокації"
+
+msgid "Allocation pools"
+msgstr "Пули алокації"
+
+msgid "Allow bookings to be scheduled at weekends"
+msgstr "Дозволити планувати бронювання у вихідні дні"
+
+msgid "Allow service provider to create offering users."
+msgstr "Дозволити постачальнику послуг додавати користувачів."
+
+msgid "Already have an account?"
+msgstr "Вже маєте обліковий запис?"
+
+msgid "Amount"
+msgstr "Кількість"
+
 msgid "An error has occurred."
 msgstr "Сталася помилка"
+
+msgid "Annotations"
+msgstr "Анотації"
+
+msgid "Answer"
+msgstr "Відповідь"
+
+msgid "Answers"
+msgstr "Відповіді"
+
+msgid "Apply"
+msgstr "Застосувати"
+
+msgid "Approve"
+msgstr "Затвердити"
+
+msgid "Attach"
+msgstr "Приєднати"
+
+msgid "Attach volume"
+msgstr "Приєднати том"
+
+msgid "Attached to"
+msgstr "Приєднано до"
 
 msgid "Cancel"
 msgstr "Скасувати"
@@ -221,6 +308,9 @@ msgstr "Проекти"
 msgid "Resources"
 msgstr "Ресурси"
 
+msgid "SLURM allocation"
+msgstr "SLURM алокація"
+
 msgid "Save"
 msgstr "Зберегти"
 
@@ -229,3 +319,6 @@ msgstr "Служби"
 
 msgid "Users"
 msgstr "Користувач"
+
+msgid "allocation users"
+msgstr "користувачі алокації"

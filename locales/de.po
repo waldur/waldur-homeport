@@ -893,6 +893,669 @@ msgstr "Jeden Monat am {days} um {time}"
 msgid "Every month on the {days} of {months} at {time}"
 msgstr "Jeden Monat am {days} von {months} um {time}"
 
+msgid "Every month service provider can report up to the amount requested by user."
+msgstr "Jeden Monat kann der Dienstanbieter bis zu dem vom Benutzer angeforderten Betrag melden."
+
+msgid "Every week on {day} at {time}"
+msgstr "Jede Woche am {day} um {time}"
+
+msgid "Existing quota usage: {usage}"
+msgstr "Bestehende Kontingentnutzung: {usage}"
+
+msgid "Explore {deployment} Marketplace"
+msgstr "Erkunden Sie den {deployment} Marktplatz"
+
+msgid "Extend OpenStack volume"
+msgstr "Erweitern Sie das OpenStack-Volume"
+
+msgid "Extend disk"
+msgstr "Erweitern des Datenträgers"
+
+msgid "Extending"
+msgstr "Erweitern"
+
+msgid "External network ID"
+msgstr "Externe Netzwerk-ID"
+
+msgid "Failed to operate with backend."
+msgstr "Konnte nicht mit Backend arbeiten."
+
+msgid "Fee applied each time this plan is activated."
+msgstr "Die Gebühr wird bei jeder Aktivierung dieses Plans erhoben."
+
+msgid "File download has been started."
+msgstr "Der Dateidownload wurde gestartet."
+
+msgid "File has been copied"
+msgstr "Datei wurde kopiert"
+
+msgid "File has been downloaded."
+msgstr "Die Datei wurde heruntergeladen."
+
+msgid "Filter organizations"
+msgstr "Organisationen filtern"
+
+msgid "Filter projects"
+msgstr "Projekte filtern"
+
+msgid "Financial overview"
+msgstr "Finanzielle Übersicht"
+
+msgid "Find solution"
+msgstr "Lösung finden"
+
+msgid "Fixed-price contract"
+msgstr "Festpreisvertrag"
+
+msgid "Fixed — use common storage quota"
+msgstr "Behoben – gemeinsames Speicherkontingent verwenden"
+
+msgid "Flavor"
+msgstr "Geschmack"
+
+msgid "Flavor change has been scheduled."
+msgstr "Geschmacksänderung wurde geplant."
+
+msgid "Flavor exclude regex"
+msgstr "Geschmack schließen Regex aus"
+
+msgid "Flavor name"
+msgstr "Geschmacksname"
+
+msgid "Flavor name: {flavor_name}"
+msgstr "Geschmack name: {flavor_name}"
+
+msgid "Flavors"
+msgstr "Geschmacksrichtungen"
+
+msgid "Flavors List"
+msgstr "Geschmacksliste"
+
+msgid "Flavors matching this regex expression will not be pulled from the backend."
+msgstr "Geschmacksrichtungen, die diesem Regex-Ausdruck entsprechen, werden nicht aus dem Backend gezogen."
+
+msgid "Flavors regex"
+msgstr "Geschmacksrichtungen Regex"
+
+msgid "Flexible"
+msgstr "Flexibel"
+
+msgid "Floating IP"
+msgstr "Schwebende IP"
+
+msgid "Floating IP count"
+msgstr "Floating IP-Anzahl"
+
+msgid "Floating IPs"
+msgstr "Floating IPs"
+
+msgid "Floating IPs update has been scheduled."
+msgstr "Die Aktualisierung der schwebenden IPs wurde geplant."
+
+msgid "Flowmap"
+msgstr "Flowmap"
+
+msgid "Force destroy"
+msgstr "Kraft zerstören"
+
+msgid "Force destroy {name} instance"
+msgstr "Erzwinge die Zerstörung der {name} Instanz"
+
+msgid "FreeIPA account"
+msgstr "FreeIPA-Konto"
+
+msgid "FreeIPA account needs to be set up."
+msgstr "FreeIPA-Konto muss eingerichtet werden."
+
+msgid "FreeIPA extension is disabled."
+msgstr "Die FreeIPA-Erweiterung ist deaktiviert."
+
+msgid "From port"
+msgstr "Vom Hafen"
+
+msgid "GB"
+msgstr "GB"
+
+msgid "GPU"
+msgstr "GPU"
+
+msgid "GPU limit (hours)"
+msgstr "GPU-Limit (Stunden)"
+
+msgid "GPU usage"
+msgstr "GPU-Nutzung"
+
+msgid "Gateway"
+msgstr "Gateway"
+
+msgid "Gateway IP of this subnet"
+msgstr "Gateway-IP dieses Subnetzes"
+
+msgid "Generate Kubeconfig file"
+msgstr "Kubeconfig-Datei generieren"
+
+msgid "Go to marketplace"
+msgstr "Zum Marktplatz gehen"
+
+msgid "Go to my profile"
+msgstr "Gehe zu meinem Profil"
+
+msgid "Google Calendar has been published successfully."
+msgstr "Google Kalender wurde erfolgreich veröffentlicht."
+
+msgid "Google Calendar has been synced successfully."
+msgstr "Google Kalender wurde erfolgreich synchronisiert."
+
+msgid "Google Calendar has been unpublished successfully."
+msgstr "Google Kalender wurde erfolgreich veröffentlicht."
+
+msgid "Google Calendar link"
+msgstr "Google Kalender-Link"
+
+msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
+msgstr "Garantierte Zeit für die Aufbewahrung von VM-Snapshots. Wenn null - für immer behalten."
+
+msgid "Guaranteed time of snapshot retention. If null - keep forever."
+msgstr "Garantierte Zeit der Snapshot-Aufbewahrung. Wenn null - für immer halten."
+
+msgid "Guaranteed time of volume snapshot retention. If null - keep forever."
+msgstr "Garantierte Zeit der Volume-Snapshot-Aufbewahrung. Wenn null - für immer halten."
+
+msgid "Guest OS"
+msgstr "Gast-OS"
+
+msgid "HPA"
+msgstr "HPA"
+
+msgid "Helpdesk"
+msgstr "Helpdesk"
+
+msgid "Helpdesk dashboard"
+msgstr "Helpdesk-Dashboard"
+
+msgid "Hide diff"
+msgstr "Diff ausblenden"
+
+msgid "Home organization domain name"
+msgstr "Domainname der Heimatorganisation"
+
+msgid "Hook has been removed."
+msgstr "Haken wurde entfernt."
+
+msgid "Hook removal"
+msgstr "Haken entfernen"
+
+msgid "Horizontal pod autoscaler has been created."
+msgstr "Horizontaler Pod-Autoscaler wurde erstellt."
+
+msgid "Horizontal pod autoscaler has been updated."
+msgstr "Horizontaler Pod-Autoscaler wurde aktualisiert."
+
+msgid "Host routes"
+msgstr "Host-Routen"
+
+msgid "Hostname"
+msgstr "Hostname"
+
+msgid "Hostname or IP address of gateway node"
+msgstr "Hostname oder IP-Adresse des Gateway-Knotens"
+
+msgid "Hostname or IP address of master node"
+msgstr "Hostname oder IP-Adresse des Master-Knotens"
+
+msgid "How to generate SSH key"
+msgstr "Wie man einen SSH-Schlüssel generiert"
+
+msgid "How to obtain credentials for Azure provider"
+msgstr "So erhalten Sie Anmeldeinformationen für Azure-Anbieter"
+
+msgid "How to obtain credentials for DigitalOcean provider"
+msgstr "So erhalten Sie Anmeldeinformationen für den DigitalOcean-Anbieter"
+
+msgid "ID code"
+msgstr "ID-Code"
+
+msgid "IP address is already used by router."
+msgstr "Die IP-Adresse wird bereits vom Router verwendet."
+
+msgid "IP protocol"
+msgstr "IP-Protokoll"
+
+msgid "IP version"
+msgstr "IP-Version"
+
+msgid "Identity provided has been selected via SAML2 discovery service. You will be redirected to the login page soon."
+msgstr "Die angegebene Identität wurde über den SAML2-Erkennungsdienst ausgewählt. Sie werden bald zur Anmeldeseite weitergeleitet."
+
+msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
+msgstr "Wenn Sie möchten, dass der Benutzer bei der Bestellung zusätzliche Details angibt, konfigurieren Sie bitte das Eingabeformular für den Benutzer unten"
+
+msgid "Image has been added."
+msgstr "Das Bild wurde hinzugefügt."
+
+msgid "Image has been removed."
+msgstr "Das Bild wurde entfernt."
+
+msgid "Image here"
+msgstr "Bild hier"
+
+msgid "Import YAML"
+msgstr "YAML importieren"
+
+msgid "Import offering"
+msgstr "Importangebot"
+
+msgid "Import resource"
+msgstr "Ressource importieren"
+
+msgid "Importing resources"
+msgstr "Ressourcen importieren"
+
+msgid "In the format of GUID"
+msgstr "Im Format GUID"
+
+msgid "Inactive user will not be able to login into the portal."
+msgstr "Inaktiver Benutzer kann sich nicht im Portal anmelden."
+
+msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
+msgstr "Vorfall - Client-Problem mit der Dienstnutzung oder -verfügbarkeit (Unterbrechungen, Qualitätsminderung)."
+
+msgid "Include weekends"
+msgstr "Wochenenden einschließen"
+
+msgid "Incorrect organization details"
+msgstr "Falsche Organisationsdetails"
+
+msgid "Increase a droplet's RAM, CPU and SSD disk."
+msgstr "Erhöhen Sie die RAM-, CPU- und SSD-Festplatte eines Tröpfchens."
+
+msgid "Increase a droplet's RAM and CPU only (not the storage)."
+msgstr "Erhöhen Sie nur den RAM und die CPU eines Tröpfchens (nicht den Speicher)."
+
+msgid "Informational"
+msgstr "Informativ"
+
+msgid "Informational - client’s request to get or provide additional information related to a service."
+msgstr "Informational - Kundenanfrage, zusätzliche Informationen zu einem Dienst zu erhalten oder bereitzustellen."
+
+msgid "Ingress"
+msgstr "Eindringen"
+
+msgid "Initial admin password"
+msgstr "Erstes Admin-Passwort"
+
+msgid "Initial admin username"
+msgstr "Anfänglicher Admin-Benutzername"
+
+msgid "Initial password"
+msgstr "Ursprüngliches Kennwort"
+
+msgid "Initial username"
+msgstr "Ursprünglicher Benutzername"
+
+msgid "Instance"
+msgstr "Instanz"
+
+msgid "Instance deletion has been scheduled."
+msgstr "Das Löschen von Instanzen wurde geplant."
+
+msgid "Instance does not have any floating IPs yet."
+msgstr "Instance hat noch keine schwebenden IPs."
+
+msgid "Instance does not have any security groups yet."
+msgstr "Die Instanz hat noch keine Sicherheitsgruppen."
+
+msgid "Instance has been linked."
+msgstr "Die Instanz wurde verknüpft."
+
+msgid "Instance is already active."
+msgstr "Die Instanz ist bereits aktiv."
+
+msgid "Instance is already stopped."
+msgstr "Die Instanz ist bereits angehalten."
+
+msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr "Die Instanz ist noch nicht mit internen Subnetzen verbunden. Bitte verbinden Sie es zuerst mit dem internen Subnetz."
+
+msgid "Instance should be OK, or erred. Please contact support."
+msgstr "Instanz sollte OK sein oder einen Irrtum. Bitte wenden Sie sich an den Support."
+
+msgid "Instance should be OK. Please contact support."
+msgstr "Instanz sollte OK sein. Bitte wenden Sie sich an den Support."
+
+msgid "Instance should be shutoff and OK or erred. Please contact support."
+msgstr "Die Instanz sollte abgeschaltet und OK sein oder gelöscht werden. Bitte wenden Sie sich an den Support"
+
+msgid "Instances count"
+msgstr "Instanzen zählen"
+
+msgid "Internal IPs"
+msgstr "Interne IPs"
+
+msgid "Internal name"
+msgstr "Interner Name"
+
+msgid "Internal network ID"
+msgstr "Interne Netzwerk-ID"
+
+msgid "Internal network allocation pool"
+msgstr "Interner Netzwerk-Zuweisungspool"
+
+msgid "Internal network mask (CIDR)"
+msgstr "Interne Netzwerkmaske (CIDR)"
+
+msgid "Internal server error occurred. Please try again or contact support."
+msgstr "Interner Serverfehler ist aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie den Support."
+
+msgid "Invalid URL. Unable to parse payment details."
+msgstr "Ungültige URL. Zahlungsdetails können nicht analysiert werden."
+
+msgid "Invitation approval"
+msgstr "Einladungsgenehmigung"
+
+msgid "Invitation confirmation"
+msgstr "Einladungsbestätigung"
+
+msgid "Invitation could not be accepted"
+msgstr "Einladung konnte nicht angenommen werden"
+
+msgid "Invitation email is:"
+msgstr "Einladungs-E-Mail lautet:"
+
+msgid "Invitation has been approved."
+msgstr "Die Einladung wurde genehmigt."
+
+msgid "Invitation has been canceled."
+msgstr "Die Einladung wurde storniert."
+
+msgid "Invitation has been rejected."
+msgstr "Die Einladung wurde abgelehnt."
+
+msgid "Invitation has been sent again."
+msgstr "Die Einladung wurde erneut gesendet."
+
+msgid "Invitation is not found."
+msgstr "Einladung wurde nicht gefunden."
+
+msgid "Invitation is not valid"
+msgstr "Einladung ist ungültig"
+
+msgid "Invitation is not valid anymore."
+msgstr "Die Einladung ist nicht mehr gültig."
+
+msgid "Invitation rejection"
+msgstr "Ablehnung einer Einladung"
+
+msgid "Invitation token is not found."
+msgstr "Einladungs-Token wurde nicht gefunden."
+
+msgid "Invite team member"
+msgstr "Teammitglied einladen"
+
+msgid "Invoice No."
+msgstr "Rechnung-Nr."
+
+msgid "Invoice events"
+msgstr "Rechnungsereignisse"
+
+msgid "Invoice events timeline"
+msgstr "Zeitleiste für Rechnungsereignisse"
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been created."
+msgstr "Die Rechnung für die Organisation {customer_link} für den Zeitraum von {period} wurde erstellt."
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
+msgstr "Die Rechnung für die Organisation {customer_link} für den Zeitraum von {period} wurde aktualisiert."
+
+msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
+msgstr "Die Rechnung für die Organisation {customer_name} für den Zeitraum von {period} wurde gelöscht."
+
+msgid "Invoice has been successfully linked to payment."
+msgstr "Die Rechnung wurde erfolgreich mit der Zahlung verknüpft."
+
+msgid "Invoice has been successfully unlinked from payment."
+msgstr "Die Rechnung wurde erfolgreich von der Zahlung getrennt."
+
+msgid "Invoice has not been sent to PayPal yet"
+msgstr "Die Rechnung wurde noch nicht an PayPal gesendet"
+
+msgid "Invoice statistics"
+msgstr "Rechnungsstatistik"
+
+msgid "Invoiced to"
+msgstr "Fakturiert an"
+
+msgid "Invoices list"
+msgstr "Rechnungsliste"
+
+msgid "Is external"
+msgstr "Ist extern"
+
+msgid "Is official"
+msgstr "Ist offiziell"
+
+msgid "Is service provider"
+msgstr "Ist Dienstleister"
+
+msgid "Issue link"
+msgstr "Problemlink"
+
+msgid "Issue {issue_link} has been created by {caller_link}."
+msgstr "Das Problem {issue_link} wurde von {caller_link} erstellt."
+
+msgid "Issues are trackable requests to the operator."
+msgstr "Probleme sind nachverfolgbare Anfragen an den Betreiber."
+
+msgid "It is used to automatically assign floating IP to your virtual machine."
+msgstr "Es wird verwendet, um Ihrer virtuellen Maschine automatisch Floating IP zuzuweisen."
+
+msgid "Item has been added to shopping cart."
+msgstr "Artikel wurde in den Warenkorb gelegt."
+
+msgid "Item has been removed from shopping cart."
+msgstr "Artikel wurde aus dem Warenkorb entfernt."
+
+msgid "Keep forever"
+msgstr "Für immer bewahren"
+
+msgid "Keep until"
+msgstr "Bleib bis"
+
+msgid "Kept until"
+msgstr "Gehalten bis"
+
+msgid "Key removal"
+msgstr "Schlüsselentfernung"
+
+msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
+msgstr "Keystone-Auth-URL (z. B. http://keystone.example.com:5000/v3)"
+
+msgid "Kubeconfig file"
+msgstr "Kubeconfig-Datei"
+
+msgid "Kubernetes node #{index}"
+msgstr "Kubernetes-Knoten #{index}"
+
+msgid "Kubernetes nodes"
+msgstr "Kubernetes-Knoten"
+
+msgid "Kubernetes version"
+msgstr "Kubernetes Version"
+
+msgid "Label that is visible to users in Marketplace."
+msgstr "Bezeichnung, die für Benutzer in Marketplace sichtbar ist."
+
+msgid "Leave blank if you want admin password to be auto-generated."
+msgstr "Lassen Sie das Feld leer, wenn Sie das Admin-Passwort automatisch generieren möchten."
+
+msgid "Leave blank if you want admin username to be auto-generated."
+msgstr "Lassen Sie das Feld leer, wenn der Admin-Benutzername automatisch generiert werden soll."
+
+msgid "Legal address"
+msgstr "Gesetzliche Adresse"
+
+msgid "Lifetime will be updated and reset upon saving the form."
+msgstr "Die Lebensdauer wird nach dem Speichern des Formulars aktualisiert und zurückgesetzt."
+
+msgid "Limit amount"
+msgstr "Betrag einschränken"
+
+msgid "Limit period"
+msgstr "Zeitraum begrenzen"
+
+msgid "Limits are invalid."
+msgstr "Grenzwerte sind ungültig."
+
+msgid "Link OpenStack Instance"
+msgstr "Link OpenStack-Instanz"
+
+msgid "Link invoice"
+msgstr "Linkrechnung"
+
+msgid "Loading actions"
+msgstr "Aktionen werden geladen"
+
+msgid "Loading assets, please wait."
+msgstr "Laden Von Assets, bitte warten."
+
+msgid "Loading invoices"
+msgstr "Laden von Rechnungen"
+
+msgid "Location has been saved successfully."
+msgstr "Der Speicherort wurde erfolgreich gespeichert."
+
+msgid "Location of {offeringName} offering"
+msgstr "Ort des {offeringName} -Angebots"
+
+msgid "Logging user in"
+msgstr "Benutzer anmelden"
+
+msgid "Logo has been removed."
+msgstr "Das Logo wurde entfernt."
+
+msgid "Logo has been uploaded."
+msgstr "Logo wurde hochgeladen."
+
+msgid "Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes."
+msgstr "Longhorn ist ein leichtes, zuverlässiges und leistungsstarkes verteiltes Blockspeichersystem für Kubernetes."
+
+msgid "MAC address (optional)"
+msgstr "MAC-Adresse (optional)"
+
+msgid "MTU"
+msgstr "MTU"
+
+msgid "Manage networks"
+msgstr "Netzwerke verwalten"
+
+msgid "Manage organization"
+msgstr "Organisation verwalten"
+
+msgid "Manage security groups"
+msgstr "Sicherheitsgruppen verwalten"
+
+msgid "Managed projects"
+msgstr "Verwaltete Projekte"
+
+msgid "Mark as paid"
+msgstr "Marke als bezahlt"
+
+msgid "Mark invoice as paid"
+msgstr "Rechnung als bezahlt markieren"
+
+msgid "Marketplace UUID"
+msgstr "Marktplatz-UUID"
+
+msgid "Marketplace checkout"
+msgstr "Marktplatz-Kasse"
+
+msgid "Marketplace offering does not have any usage-based components."
+msgstr "Das Marktplatzangebot hat keine nutzungsbasierten Komponenten."
+
+msgid "Marketplace offerings"
+msgstr "Marktplatz-Angebote"
+
+msgid "Marketplace service provider"
+msgstr "Marktplatz-Dienstleister"
+
+msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
+msgstr "Marktplatzdienste können nur für eine bestimmte Zugehörigkeit bereitgestellt werden. Sie haben derzeit keine Organisationen oder Projekte, die mit Ihrem Konto verbunden sind."
+
+msgid "Max # of VM snapshots"
+msgstr "Max. # Anzahl VM-Snapshots"
+
+msgid "Max # of snapshots"
+msgstr "Max. # Anzahl der Snapshots"
+
+msgid "Max number of VM snapshots"
+msgstr "Max. Anzahl von VM-Snapshots"
+
+msgid "Max replicas"
+msgstr "Max Repliken"
+
+msgid "Maximal number of resources"
+msgstr "Maximale Anzahl von Ressourcen"
+
+msgid "Maximal value"
+msgstr "Maximalwert"
+
+msgid "Maximum RAM for each VM"
+msgstr "Maximaler RAM für jede VM"
+
+msgid "Maximum allowed value"
+msgstr "Maximal zulässiger Wert"
+
+msgid "Maximum capacity for each disk"
+msgstr "Maximale Kapazität für jeden Datenträger"
+
+msgid "Maximum monthly"
+msgstr "Maximal monatlich"
+
+msgid "Maximum total"
+msgstr "Maximale Summe"
+
+msgid "Maximum total size of the disk space per VM"
+msgstr "Maximale Gesamtgröße des Festplattenspeichers pro VM"
+
+msgid "Maximum username length with mandatory username prefix is 32 characters."
+msgstr "Die maximale Länge des Benutzernamens mit dem obligatorischen Präfix für Benutzernamen beträgt 32 Zeichen."
+
+msgid "Maximum vCPU for each VM"
+msgstr "Maximale vCPU für jede VM"
+
+msgid "Measured unit"
+msgstr "Gemessene Einheit"
+
+msgid "Memory per vCore"
+msgstr "Speicher pro vCore"
+
+msgid "Memory size in GiB"
+msgstr "Speichergröße in GiB"
+
+msgid "Metric name"
+msgstr "Metrikname"
+
+msgid "MiB"
+msgstr "MiB"
+
+msgid "Min RAM"
+msgstr "Min RAM"
+
+msgid "Min amount"
+msgstr "Min. Betrag"
+
+msgid "Min replicas"
+msgstr "Min. Repliken"
+
+msgid "Min storage"
+msgstr "Min. Lagerung"
+
+msgid "Minimal value"
+msgstr "Minimaler Wert"
+
+msgid "Minimum allowed value"
+msgstr "Minimaler zulässiger Wert"
+
 msgid "Project"
 msgstr "Department"
 
