@@ -521,9 +521,6 @@ msgstr "Подтверждение"
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr "Подтверждающее письмо было отправлено. Пожалуйста, проверьте свою почту!"
 
-msgid "Contact e-mail"
-msgstr "Контактный email адрес"
-
 msgid "Contact email"
 msgstr "Контактный email"
 

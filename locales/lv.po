@@ -122,9 +122,6 @@ msgstr "Vai apstiprināt dzēšanu?"
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr "Apstiprināšanas e-pasts tika nosūtīts. Lūdzu, pārbaudiet savu pastu!"
 
-msgid "Contact e-mail"
-msgstr "E-pasta adrese"
-
 msgid "Contact email"
 msgstr "E-pasts"
 
@@ -154,12 +151,6 @@ msgstr "Detaļas"
 
 msgid "Due date"
 msgstr "Termiņš"
-
-msgid "E-mail"
-msgstr "E-pasts"
-
-msgid "E-mail address"
-msgstr "E-pasta adrese"
 
 msgid "EU VAT ID"
 msgstr "ES PVN reģistrācijas numurs"

@@ -662,9 +662,6 @@ msgstr "subnet ها متصل شدند"
 msgid "Connection details"
 msgstr "جزئیات اتصال"
 
-msgid "Contact e-mail"
-msgstr "تماس با-ایمیل"
-
 msgid "Contact email"
 msgstr "تماس با ایمیل"
 
@@ -970,12 +967,6 @@ msgstr "Droplet تغییر سایز داده است."
 
 msgid "Due date"
 msgstr "موعد مقرر"
-
-msgid "E-mail"
-msgstr "ایمیل"
-
-msgid "E-mail address"
-msgstr "آدس ایمیل"
 
 msgid "EU VAT ID"
 msgstr "شناسه EU VAT"
@@ -1816,9 +1807,6 @@ msgstr "شبکه"
 
 msgid "Networks"
 msgstr "شبکه ها"
-
-msgid "New e-mail address"
-msgstr "آدرس ایمیل جدید"
 
 msgid "New email"
 msgstr "ایمیل جدید"

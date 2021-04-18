@@ -8,6 +8,9 @@ msgstr ""
 "Language: uk\n"
 "Plural-Forms: nplurals=3; plural=((n%10==1) && (n%100!=11)) ? 0 : ((n%10>=2 && n%10<=4) && ((n%100<12 || n%100>14))) ? 1 : 2;\n"
 
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr "«{trimmed}» перевищує ліміт FQDN символів {max_len}"
+
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Умови надання послуг</Link> були прийняті <Date></Date>"
 
@@ -19,6 +22,9 @@ msgstr "Секретний код API:"
 
 msgid "API token lifetime"
 msgstr "Час життя токенів API"
+
+msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
+msgstr "Робочий вузол повинен мати не менше 4 віртуальних ЦП і 4 ГБ оперативної пам'яті."
 
 msgid "A one-time fee applied on activation."
 msgstr "Одноразова плата за активацію."
@@ -44,6 +50,9 @@ msgstr "Прийнято"
 msgid "Access"
 msgstr "Доступ"
 
+msgid "Access subnets"
+msgstr "Підмережі доступу"
+
 msgid "Access token"
 msgstr "Токен доступу"
 
@@ -64,6 +73,15 @@ msgstr "Бухгалтерія"
 
 msgid "Accounting period"
 msgstr "Обліковий період"
+
+msgid "Accounting plans"
+msgstr "Тарифні плани"
+
+msgid "Accounting record"
+msgstr "Обліковий запис"
+
+msgid "Accounting records"
+msgstr "Облікові записи"
 
 msgid "Accounting running"
 msgstr "Облік запущений"
@@ -107,6 +125,9 @@ msgstr "Додати"
 msgid "Add SSH key"
 msgstr "Додати SSH ключ"
 
+msgid "Add Waldur user SSH keys to the FreeIPA profile"
+msgstr "Додати SSH ключі користувача Waldur до профілю FreeIPA"
+
 msgid "Add address"
 msgstr "Додати адресу"
 
@@ -118,6 +139,9 @@ msgstr "Додати компонент"
 
 msgid "Add data volume"
 msgstr "Додати том даних"
+
+msgid "Add environment variable"
+msgstr "Додати змінну середовища"
 
 msgid "Add image"
 msgstr "Додати зображення"
@@ -133,6 +157,9 @@ msgstr "Додати учасника"
 
 msgid "Add new"
 msgstr "Створити організацію"
+
+msgid "Add new offering"
+msgstr "Додати нову пропозицію"
 
 msgid "Add new organization"
 msgstr "Додати нову організацію"
@@ -197,6 +224,12 @@ msgstr "Додати користувача"
 msgid "Add user input field"
 msgstr "Додати користувацьке поле"
 
+msgid "Additional data that will be added to instance on provisioning."
+msgstr "Додаткові дані, які будуть додані до віртуальної машини під час створення."
+
+msgid "Additional data that will be added to virtual machine on provisioning."
+msgstr "Додаткові дані, які будуть додані до віртуальної машини під час створення."
+
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Додатковий простір для застосування до квоти сховища, яку буде використано знімками."
 
@@ -212,8 +245,32 @@ msgstr "Пароль адміністратора"
 msgid "Admin username"
 msgstr "Ім'я користувача адміністратора"
 
+msgid "Affected resource"
+msgstr "Задіяний ресурс"
+
+msgid "Affiliations"
+msgstr "Ролі користувача в організації"
+
+msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
+msgstr "Після зміни старий API токен не можна буде використовувати для відправки звітів про використання ресурсів."
+
 msgid "Agree with ToS"
 msgstr "Погодитися з умовами обслуговування"
+
+msgid "Agreement number"
+msgstr "Номер договору"
+
+msgid "Alert"
+msgstr "Сповіщення"
+
+msgid "All"
+msgstr "Всі"
+
+msgid "All day"
+msgstr "Увесь день"
+
+msgid "All resources have been imported."
+msgstr "Всі ресурси були імпортовані."
 
 msgid "Allocation description"
 msgstr "Опис алокації"
@@ -239,6 +296,9 @@ msgstr "Кількість"
 msgid "An error has occurred."
 msgstr "Сталася помилка"
 
+msgid "An error occurred on project removal."
+msgstr "Сталася помилка під час видалення проекту."
+
 msgid "Annotations"
 msgstr "Анотації"
 
@@ -248,11 +308,56 @@ msgstr "Відповідь"
 msgid "Answers"
 msgstr "Відповіді"
 
+msgid "Any"
+msgstr "Будь-який"
+
+msgid "Application catalogues"
+msgstr "Каталоги застосунків"
+
+msgid "Application configuration"
+msgstr "Конфігурація застосунку"
+
+msgid "Application details"
+msgstr "Деталі застосунку"
+
+msgid "Application has been created."
+msgstr "Застосунок створено."
+
+msgid "Application templates"
+msgstr "Шаблони застосунків"
+
+msgid "Applications"
+msgstr "Застосунки"
+
 msgid "Apply"
 msgstr "Застосувати"
 
 msgid "Approve"
 msgstr "Затвердити"
+
+msgid "Approve payment"
+msgstr "Затвердити платіж"
+
+msgid "Approved at"
+msgstr "Затверджено"
+
+msgid "Approved by"
+msgstr "Затверджено"
+
+msgid "Archive"
+msgstr "Архівувати"
+
+msgid "Archived"
+msgstr "Заархівовано"
+
+msgid "Archived plans"
+msgstr "Архівні плани"
+
+msgid "Are you sure you want to accept a {name}?"
+msgstr "Ви впевнені, що хочете прийняти {name}?"
+
+msgid "Are you sure you want to cancel a {name}?"
+msgstr "Ви дійсно хочете скасувати {name}?"
 
 msgid "Attach"
 msgstr "Приєднати"
@@ -263,8 +368,50 @@ msgstr "Приєднати том"
 msgid "Attached to"
 msgstr "Приєднано до"
 
+msgid "Azure Active Directory Application Secret"
+msgstr "Секретний ключ застосунку Azure Active Directory"
+
+msgid "Billing enabled"
+msgstr "Виставлення рахунків увімкнено"
+
+msgid "Billing period"
+msgstr "Рахунковий період"
+
+msgid "Booking"
+msgstr "Бронювання"
+
+msgid "Booking description"
+msgstr "Опис бронювання"
+
+msgid "Bookings"
+msgstr "Бронювання"
+
+msgid "Bootable"
+msgstr "Завантажувальний"
+
+msgid "Branch"
+msgstr "Гілка"
+
+msgid "Browse"
+msgstr "Вибрати"
+
+msgid "Browse image"
+msgstr "Вибрати зображення"
+
+msgid "Business hours"
+msgstr "Робочий час"
+
 msgid "Cancel"
 msgstr "Скасувати"
+
+msgid "Cancel booking"
+msgstr "Скасувати бронювання"
+
+msgid "Cancel invitation"
+msgstr "Скасувати запрошення"
+
+msgid "Create application"
+msgstr "Створити застосунок"
 
 msgid "Dashboard"
 msgstr "Огляд"
@@ -317,8 +464,44 @@ msgstr "Зберегти"
 msgid "Services"
 msgstr "Служби"
 
+msgid "Unable to bootstrap application."
+msgstr "Не вдалося завантажити застосунок."
+
+msgid "Unable to create application."
+msgstr "Не вдалося створити застосунок."
+
+msgid "Unable to load application template details."
+msgstr "Не вдалося завантажити відомості про шаблон застосунку."
+
+msgid "Unable to resend invitation."
+msgstr "Неможливо повторно надіслати запрошення."
+
 msgid "Users"
 msgstr "Користувач"
 
+msgid "You don't have permission to send this invitation."
+msgstr "У вас немає дозволу на надсилання цього запрошення."
+
+msgid "Your invitation is being processed."
+msgstr "Ваше запрошення обробляється."
+
+msgid "Your invitation was accepted."
+msgstr "Ваше запрошення було прийнято."
+
 msgid "allocation users"
 msgstr "користувачі алокації"
+
+msgid "application"
+msgstr "застосунок"
+
+msgid "application templates"
+msgstr "шаблони застосунків"
+
+msgid "applications"
+msgstr "застосунки"
+
+msgid "team invitations"
+msgstr "командні запрошення"
+
+msgid "{sender} has invited you to join {name} {type} in {role} role."
+msgstr "{sender} запросив вас приєднатися до {name} {type} в ролі {role}."

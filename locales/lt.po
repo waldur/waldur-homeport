@@ -371,9 +371,6 @@ msgstr "Ar tikrai norite priimti {name}?"
 msgid "Are you sure you want to cancel a {name}?"
 msgstr "Ar tikrai norite atšaukti {name}?"
 
-msgid "Are you sure you want to cluster template? Note this will reset the node plan."
-msgstr "Ar tikrai norite naudoti klasterio šabloną? Atkreipkite dėmesį, kad bus iš naujo nustatytas mazgų planas."
-
 msgid "Are you sure you want to delete a {name} {resourceType}?"
 msgstr "Ar tikrai norite ištrinti {name} {resourceType}?"
 
@@ -875,9 +872,6 @@ msgstr "Ryšio informacija"
 msgid "Contact details"
 msgstr "Kontaktiniai duomenys"
 
-msgid "Contact e-mail"
-msgstr "Kontaktinis el. paštas"
-
 msgid "Contact email"
 msgstr "Kontaktinis el. paštas"
 
@@ -1274,12 +1268,6 @@ msgstr "Terminas"
 msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr "Dinaminis - stebėdami kainas, naudokite atskirus tomų tipus"
 
-msgid "E-mail"
-msgstr "El. paštas"
-
-msgid "E-mail address"
-msgstr "El. pašto adresas"
-
 msgid "EU VAT ID"
 msgstr "ES PVM mokėtojo kodas"
 
@@ -1321,6 +1309,9 @@ msgstr "Išėjimas"
 
 msgid "Email"
 msgstr "El. paštas"
+
+msgid "Email address"
+msgstr "El. pašto adresas"
 
 msgid "Email change request has been cancelled."
 msgstr "El. pašto pakeitimo užklausa atšaukta."
@@ -2528,11 +2519,11 @@ msgstr "Tinklai"
 msgid "Neutral"
 msgstr "Neutralus"
 
-msgid "New e-mail address"
-msgstr "Naujas el. pašto adresas"
-
 msgid "New email"
 msgstr "Naujas el. paštas"
+
+msgid "New email address"
+msgstr "Naujas el. pašto adresas"
 
 msgid "New flavor"
 msgstr "Naujas skonis"
@@ -3817,9 +3808,6 @@ msgstr "Prašoma"
 
 msgid "Requested by"
 msgstr "Prašoma"
-
-msgid "Requested e-mail"
-msgstr "Prašoma el. pašto"
 
 msgid "Requested email"
 msgstr "Prašoma el. pašto"
@@ -5945,7 +5933,7 @@ msgstr "Vertė neturėtų būti neigiama."
 msgid "Variable #{index}"
 msgstr "Kintamasis #{index}"
 
-msgid "Verify e-mail"
+msgid "Verify email"
 msgstr "Patikrinti el. paštą"
 
 msgid "Verifying email change"

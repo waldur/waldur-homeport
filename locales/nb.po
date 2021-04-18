@@ -371,9 +371,6 @@ msgstr "Er du sikker på at du vil godta en {name}?"
 msgid "Are you sure you want to cancel a {name}?"
 msgstr "Er du sikker på at du vil avbryte en {name}?"
 
-msgid "Are you sure you want to cluster template? Note this will reset the node plan."
-msgstr "Er du sikker på at du vil klyngemal? Merk at dette vil tilbakestille nodeplanen."
-
 msgid "Are you sure you want to delete a {name} {resourceType}?"
 msgstr "Er du sikker på at du vil slette en {name} {resourceType}?"
 
@@ -875,9 +872,6 @@ msgstr "Tilkoblingsdetaljer"
 msgid "Contact details"
 msgstr "Kontaktinformasjon"
 
-msgid "Contact e-mail"
-msgstr "Kontakt e-post"
-
 msgid "Contact email"
 msgstr "Kontakt e-post"
 
@@ -1274,12 +1268,6 @@ msgstr "Forfallsdato"
 msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr "Dynamisk — bruk separate volumtyper for sporing av priser"
 
-msgid "E-mail"
-msgstr "E-post"
-
-msgid "E-mail address"
-msgstr "E-postadresse"
-
 msgid "EU VAT ID"
 msgstr "EU MVA-ID"
 
@@ -1321,6 +1309,9 @@ msgstr "Utgang"
 
 msgid "Email"
 msgstr "E-post"
+
+msgid "Email address"
+msgstr "E-postadresse"
 
 msgid "Email change request has been cancelled."
 msgstr "Forespørselen om endring av e-post er kansellert."
@@ -2528,11 +2519,11 @@ msgstr "Nettverk"
 msgid "Neutral"
 msgstr "Nøytral"
 
-msgid "New e-mail address"
-msgstr "Ny e-postadresse"
-
 msgid "New email"
 msgstr "Ny e-post"
+
+msgid "New email address"
+msgstr "Ny e-postadresse"
 
 msgid "New flavor"
 msgstr "Ny smak"
@@ -3817,9 +3808,6 @@ msgstr "Forespurt"
 
 msgid "Requested by"
 msgstr "Forespurt av"
-
-msgid "Requested e-mail"
-msgstr "Forespurt e-post"
 
 msgid "Requested email"
 msgstr "Forespurt e-post"
@@ -5945,7 +5933,7 @@ msgstr "Verdien bør ikke være negativ."
 msgid "Variable #{index}"
 msgstr "Variabel #{index}"
 
-msgid "Verify e-mail"
+msgid "Verify email"
 msgstr "Bekreft e-post"
 
 msgid "Verifying email change"

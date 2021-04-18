@@ -329,9 +329,6 @@ msgstr "Birləşdirmək"
 msgid "Connected subnets"
 msgstr "Birləşdirilmiş alt-şəbəkələr"
 
-msgid "Contact e-mail"
-msgstr "Əlaqə e-poçtu "
-
 msgid "Contact email"
 msgstr "Əlaqə e-poçtu"
 
@@ -520,12 +517,6 @@ msgstr "Faylları məsələyə əlavə etmək üçün atın"
 
 msgid "Due date"
 msgstr "Təyin edilmiş müddət "
-
-msgid "E-mail"
-msgstr "e-poçt"
-
-msgid "E-mail address"
-msgstr "e-poçt ünvanı "
 
 msgid "EU VAT ID"
 msgstr "Aİ ƏDV İdentifikasiyası "

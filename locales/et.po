@@ -674,9 +674,6 @@ msgstr "Ühenduse üksikasjad"
 msgid "Contact details"
 msgstr "Kontaktandmed"
 
-msgid "Contact e-mail"
-msgstr "Kontakt e-post"
-
 msgid "Contact email"
 msgstr "Kontaktid epost"
 
@@ -958,12 +955,6 @@ msgstr "Lohistage failid, et neid saaks probleemi juurde lisada."
 
 msgid "Due date"
 msgstr "Maksetähtpäev"
-
-msgid "E-mail"
-msgstr "E-post"
-
-msgid "E-mail address"
-msgstr "E-posti aadress"
 
 msgid "EU VAT ID"
 msgstr "EL KMKR NR"

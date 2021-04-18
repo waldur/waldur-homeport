@@ -221,9 +221,6 @@ msgstr "Archivierte Pläne"
 msgid "Are you sure you want to accept a {name}?"
 msgstr "Sind Sie sicher, dass Sie einen {name} akzeptieren möchten?"
 
-msgid "Are you sure you want to cluster template? Note this will reset the node plan."
-msgstr "Sind Sie sicher, dass Sie eine Cluster-Vorlage erstellen möchten? Beachten Sie, dass dadurch der Knotenplan zurückgesetzt wird."
-
 msgid "Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
 msgstr "Möchten Sie einen {name} {resourceType} in einem fehlerhaften Zustand wirklich löschen? Wenn Sie dies wünschen, wird ein Bereinigungsversuch durchgeführt."
 

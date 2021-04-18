@@ -368,9 +368,6 @@ msgstr "Är du säker på att du vill acceptera en {name}?"
 msgid "Are you sure you want to cancel a {name}?"
 msgstr "Är du säker på att du vill avbryta en {name}?"
 
-msgid "Are you sure you want to cluster template? Note this will reset the node plan."
-msgstr "Är du säker på att du vill klustermall? Observera att det här återställer nodplanen."
-
 msgid "Are you sure you want to delete a {name} {resourceType}?"
 msgstr "Är du säker på att du vill radera a {name} {resourceType}?"
 
@@ -872,9 +869,6 @@ msgstr "Anslutningsdetaljer"
 msgid "Contact details"
 msgstr "Kontaktuppgifter"
 
-msgid "Contact e-mail"
-msgstr "Kontakt e-post"
-
 msgid "Contact email"
 msgstr "Kontakt e-post"
 
@@ -1270,12 +1264,6 @@ msgstr "Förfallodag"
 
 msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr "Dynamisk — använd separata volymtyper för att spåra prissättning"
-
-msgid "E-mail"
-msgstr "E-post"
-
-msgid "E-mail address"
-msgstr "E-postadress"
 
 msgid "EU VAT ID"
 msgstr "EU VAT ID"
@@ -2524,9 +2512,6 @@ msgstr "Nätverk"
 
 msgid "Neutral"
 msgstr "Neutral"
-
-msgid "New e-mail address"
-msgstr "Ny e-postadress"
 
 msgid "New email"
 msgstr "Ny e-post"
@@ -3814,9 +3799,6 @@ msgstr "Begärt"
 
 msgid "Requested by"
 msgstr "Begärd av"
-
-msgid "Requested e-mail"
-msgstr "Begärd e-post"
 
 msgid "Requested email"
 msgstr "Begärd e-post"
@@ -5941,9 +5923,6 @@ msgstr "Värde bör inte vara negativt."
 
 msgid "Variable #{index}"
 msgstr "Variabel #{index}"
-
-msgid "Verify e-mail"
-msgstr "Verifiera e-post"
 
 msgid "Verifying email change"
 msgstr "Verifiera ändring av e-post"

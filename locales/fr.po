@@ -371,9 +371,6 @@ msgstr "Êtes-vous sûr de vouloir accepter un {name} ?"
 msgid "Are you sure you want to cancel a {name}?"
 msgstr "Êtes-vous sûr de vouloir annuler un {name} ?"
 
-msgid "Are you sure you want to cluster template? Note this will reset the node plan."
-msgstr "Etes-vous sûr que vous voulez un modèle de cluster ? Notez que cela réinitialisera le plan de nœud."
-
 msgid "Are you sure you want to delete a {name} {resourceType}?"
 msgstr "Êtes-vous sûr de vouloir supprimer un {name} {resourceType} ?"
 
@@ -875,9 +872,6 @@ msgstr "Détails de la connexion"
 msgid "Contact details"
 msgstr "Détails du contact"
 
-msgid "Contact e-mail"
-msgstr "E-mail du contact"
-
 msgid "Contact email"
 msgstr "E-mail du contact"
 
@@ -1274,12 +1268,6 @@ msgstr "Date d'échéance"
 msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr "Dynamique - utiliser des types de volumes distincts pour le suivi des prix"
 
-msgid "E-mail"
-msgstr "E-mail"
-
-msgid "E-mail address"
-msgstr "Adresse e-mail"
-
 msgid "EU VAT ID"
 msgstr "ID TVA DE L'UE"
 
@@ -1321,6 +1309,9 @@ msgstr "Sortie"
 
 msgid "Email"
 msgstr "E-mail"
+
+msgid "Email address"
+msgstr "Adresse e-mail"
 
 msgid "Email change request has been cancelled."
 msgstr "La demande de modification de l'e-mail a été annulée."
@@ -2528,11 +2519,11 @@ msgstr "Réseaux"
 msgid "Neutral"
 msgstr "Neutre"
 
-msgid "New e-mail address"
-msgstr "Nouvelle adresse e-mail"
-
 msgid "New email"
 msgstr "Nouvel e-mail"
+
+msgid "New email address"
+msgstr "Nouvelle adresse e-mail"
 
 msgid "New flavor"
 msgstr "Nouvelle saveur"
@@ -3817,9 +3808,6 @@ msgstr "Demandé"
 
 msgid "Requested by"
 msgstr "Demandé par"
-
-msgid "Requested e-mail"
-msgstr "E-mail demandé"
 
 msgid "Requested email"
 msgstr "E-mail demandé"
@@ -5945,8 +5933,8 @@ msgstr "La valeur ne doit pas être négative."
 msgid "Variable #{index}"
 msgstr "Variable #{index}"
 
-msgid "Verify e-mail"
-msgstr "Vérifier l’e-mail"
+msgid "Verify email"
+msgstr "Vérifier l'e-mail"
 
 msgid "Verifying email change"
 msgstr "Vérification de la modification de l'e-mail"
