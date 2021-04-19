@@ -8,7 +8,12 @@ import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { router } from '@waldur/router';
 import { RootState } from '@waldur/store/reducers';
-import { getUser, isOwner } from '@waldur/workspace/selectors';
+import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
+import {
+  getUser,
+  isOwner,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
 
 import {
   addOfferingLocation,
@@ -49,6 +54,13 @@ const UpdateOfferingAttributesDialog = lazyComponent(
     ),
   'UpdateOfferingAttributesDialog',
 );
+const EditConfirmationMessageDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "EditConfirmationMessageDialog" */ './EditConfirmationMessageDialog'
+    ),
+  'EditConfirmationMessageDialog',
+);
 
 interface OwnProps {
   offering: Offering;
@@ -57,6 +69,7 @@ interface OwnProps {
 const mapStateToProps = (state: RootState) => ({
   user: getUser(state),
   isOwner: isOwner(state),
+  isServiceManager: isServiceManagerSelector(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -107,6 +120,15 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(googleCalendarPublish(offering.uuid)),
   unpublishGoogleCalendar: (offering: Offering) =>
     dispatch(googleCalendarUnpublish(offering.uuid)),
+  editConfirmationMessage: (offering: Offering) =>
+    dispatch(
+      openModalDialog(EditConfirmationMessageDialog, {
+        resolve: {
+          offeringUuid: offering.uuid,
+        },
+        size: 'lg',
+      }),
+    ),
 });
 
 const mergeProps = (
@@ -196,6 +218,16 @@ const mergeProps = (
         stateProps.user.is_staff,
     },
     ...googleCalendarActions(dispatchProps, ownProps, stateProps),
+    {
+      label: translate('Edit confirmation message'),
+      handler: () => dispatchProps.editConfirmationMessage(ownProps.offering),
+      visible:
+        ownProps.offering.type === SUPPORT_OFFERING_TYPE &&
+        ownProps.offering.state !== ARCHIVED &&
+        (stateProps.user.is_staff ||
+          (ownProps.offering.state === DRAFT &&
+            (stateProps.isOwner || stateProps.isServiceManager))),
+    },
   ].filter((offering) => offering.visible),
 });
 

@@ -50,3 +50,7 @@ export const OFFERING_IMAGES_FORM_ID = 'marketplaceOfferingImages';
 export const GOOGLE_CALENDAR_SYNC = 'GoogleCalendarSync';
 export const GOOGLE_CALENDAR_PUBLISH = 'GoogleCalendarPublish';
 export const GOOGLE_CALENDAR_UNPUBLISH = 'GoogleCalendarUnpublish';
+
+export const updateConfirmationMessage = createFormAction(
+  'waldur/marketplace/offering/UPDATE_CONFIRMATION_MESSAGE',
+);

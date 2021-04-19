@@ -1388,6 +1388,11 @@ msgstr ""
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Confirmation message has been updated successfully."
+msgstr ""
+
+#: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
 #: src/support/OfferingPluginSecretOptionsForm.tsx
 msgid "Confirmation notification template"
 msgstr ""
@@ -2199,6 +2204,14 @@ msgstr ""
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Edit booking event"
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Edit confirmation message"
+msgstr ""
+
+#: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
+msgid "Edit confirmation message of {offeringName}"
 msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
@@ -6536,6 +6549,7 @@ msgstr ""
 #: src/invoices/growth/utils.ts
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
 #: src/marketplace/offerings/expandable/utils.ts
 #: src/marketplace/resources/usage/utils.ts
 #: src/project/team/AddProjectMemberDialog.tsx
@@ -8506,6 +8520,7 @@ msgid "Unable to load offering details."
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartItemUpdate.tsx
+#: src/marketplace/offerings/actions/EditConfirmationMessageDialog.tsx
 msgid "Unable to load offering."
 msgstr ""
 
@@ -8780,6 +8795,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 msgid "Unable to update allowed address pairs."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to update confirmation message."
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
