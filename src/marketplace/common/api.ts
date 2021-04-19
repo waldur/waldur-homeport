@@ -303,3 +303,15 @@ export const unpublishGoogleCalendar = (uuid: string) =>
   post(`/booking-offerings/${uuid}/unshare_google_calendar/`).then(
     (response) => response.data,
   );
+
+export const updateOfferingConfirmationMessage = (
+  offeringUuid,
+  template_confirmation_comment,
+  secretOptions,
+) =>
+  patch(`/marketplace-offerings/${offeringUuid}/`, {
+    secret_options: {
+      ...secretOptions,
+      template_confirmation_comment,
+    },
+  });

@@ -281,6 +281,35 @@ function* googleCalendarUnpublish(action: Action<any>) {
   }
 }
 
+function* updateConfirmationMessage(action: Action<any>) {
+  const {
+    offeringUuid,
+    templateConfirmationMessage,
+    secretOptions,
+  } = action.payload;
+  try {
+    yield call(
+      api.updateOfferingConfirmationMessage,
+      offeringUuid,
+      templateConfirmationMessage,
+      secretOptions,
+    );
+    yield put(
+      showSuccess(
+        translate('Confirmation message has been updated successfully.'),
+      ),
+    );
+    yield put(constants.updateOffering.success());
+    yield put(closeModalDialog());
+  } catch (error) {
+    const errorMessage = `${translate(
+      'Unable to update confirmation message.',
+    )} ${format(error)}`;
+    yield put(showError(errorMessage));
+    yield put(constants.updateConfirmationMessage.failure());
+  }
+}
+
 export default function* () {
   yield takeEvery(constants.REMOVE_OFFERING_COMPONENT, removeOfferingComponent);
   yield takeEvery(constants.REMOVE_OFFERING_QUOTAS, removeOfferingQuotas);
@@ -296,4 +325,8 @@ export default function* () {
   yield takeEvery(constants.GOOGLE_CALENDAR_SYNC, googleCalendarSync);
   yield takeEvery(constants.GOOGLE_CALENDAR_PUBLISH, googleCalendarPublish);
   yield takeEvery(constants.GOOGLE_CALENDAR_UNPUBLISH, googleCalendarUnpublish);
+  yield takeEvery(
+    constants.updateConfirmationMessage.REQUEST,
+    updateConfirmationMessage,
+  );
 }
