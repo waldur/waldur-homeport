@@ -44,6 +44,7 @@ const getCalendarEvents = (bookings) => {
 
 async function loadBookingOfferings({
   customerUuid,
+  projectUuid,
   offeringUuid,
   bookingsFilterState: state,
   bookingsListCurrentPage: page,
@@ -52,6 +53,7 @@ async function loadBookingOfferings({
 }: BookingsCalendarProps) {
   const bookings = await getBookingsList({
     connected_customer_uuid: customerUuid,
+    project_uuid: projectUuid,
     offering_uuid: offeringUuid,
     offering_type: OFFERING_TYPE_BOOKING,
     state: state?.map(({ value }) => value),
@@ -64,6 +66,7 @@ async function loadBookingOfferings({
 
 interface BookingsCalendarProps {
   customerUuid?: string;
+  projectUuid?: string;
   offeringUuid?: string;
   bookingsFilterState: BookingFilterStateOption[];
   bookingsListCurrentPage: number;

@@ -14,40 +14,47 @@ import {
   getOfferingsCount,
   getResourcesCount,
 } from '@waldur/marketplace/common/api';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
-const loadBookingOfferingsCount = (customerUuid: string) =>
+const loadBookingOfferingsCount = (customerUuid: string, projectUuid: string) =>
   getOfferingsCount({
     params: {
       customer_uuid: customerUuid,
+      project_uuid: projectUuid,
       type: OFFERING_TYPE_BOOKING,
       state: ['Active', 'Paused'],
     },
   });
 
-const loadBookingResourcesCount = (customerUuid: string) =>
+const loadBookingResourcesCount = (customerUuid: string, projectUuid: string) =>
   getResourcesCount({
     params: {
       customer_uuid: customerUuid,
+      project_uuid: projectUuid,
       offering_type: OFFERING_TYPE_BOOKING,
     },
   });
 
-const loadData = async (customer: Customer) => {
+const loadData = async (customer: Customer, projectUuid: string) => {
   const offeringsCount = customer.is_service_provider
-    ? await loadBookingOfferingsCount(customer.uuid)
+    ? await loadBookingOfferingsCount(customer.uuid, projectUuid)
     : null;
-  const resourcesCount = await loadBookingResourcesCount(customer.uuid);
+  const resourcesCount = await loadBookingResourcesCount(
+    customer.uuid,
+    projectUuid,
+  );
   return { offeringsCount, resourcesCount };
 };
 
 export const CustomerBookingManagement: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
+  const project = useSelector(getProject);
   const bookingsCalendarProps = useBookingsCalendarProps();
-  const { loading, value, error } = useAsync(() => loadData(customer), [
-    customer,
-  ]);
+  const { loading, value, error } = useAsync(
+    () => loadData(customer, project?.uuid),
+    [customer, project],
+  );
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -59,10 +66,11 @@ export const CustomerBookingManagement: FunctionComponent = () => {
     <Panel title={translate('Booking management')}>
       <BookingsCalendar
         customerUuid={customer.uuid}
+        projectUuid={project?.uuid}
         {...bookingsCalendarProps}
       />
       <BookingsFilter />
-      <BookingsList customerUuid={customer.uuid} />
+      <BookingsList customerUuid={customer.uuid} projectUuid={project?.uuid} />
     </Panel>
   ) : null;
 };
