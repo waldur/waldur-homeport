@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { Panel } from '@waldur/core/Panel';
+import { CustomerBookingManagement } from '@waldur/customer/dashboard/CustomerBookingManagement';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { translate } from '@waldur/i18n';
@@ -38,6 +39,9 @@ export const ProjectDashboard: FunctionComponent<ProjectDashboardProps> = (
         })}
       />
       <div style={{ paddingLeft: 10 }}>
+        <Row>
+          <CustomerBookingManagement />
+        </Row>
         <Row>
           <Col md={8}>
             <ProjectCounters project={props.project} />
