@@ -63,6 +63,7 @@ const TableOptions = {
   table: 'ResourceOrderItems',
   fetchData: createFetcher('marketplace-order-items'),
   mapPropsToFilter,
+  mapPropsToTableId: (props) => [props.resource_uuid],
 };
 
 const enhance = connectTable(TableOptions);

@@ -149,6 +149,7 @@ const TableOptions = {
   fetchData: createFetcher('support-issues'),
   queryField: 'summary',
   mapPropsToFilter: (props) => props.filter,
+  mapPropsToTableId: (props) => (props.scope ? [props.scope.uuid] : []),
   exportRow,
   exportFields,
 };
