@@ -392,6 +392,9 @@ msgstr "Er du sikker på at du vil slette dette {resourceType}?"
 msgid "Are you sure you want to revoke this permission?"
 msgstr "Er du sikker på at du vil tilbakekalle denne tillatelsen?"
 
+msgid "Are you sure you want to select template? Note this will reset the node plan."
+msgstr "Er du sikker på at du vil velge mal? Merk at dette vil tilbakestille nodeplanen."
+
 msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
 msgstr "Er du sikker på at du vil slette Rancher-katalogen {catalog}?"
 

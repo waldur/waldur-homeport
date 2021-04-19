@@ -392,6 +392,9 @@ msgstr "Ar tikrai norite ištrinti šį {resourceType}?"
 msgid "Are you sure you want to revoke this permission?"
 msgstr "Ar tikrai norite atšaukti šį leidimą?"
 
+msgid "Are you sure you want to select template? Note this will reset the node plan."
+msgstr "Ar tikrai norite pasirinkti šabloną? Atkreipkite dėmesį, kad tai atkurs mazgo planą."
+
 msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
 msgstr "Ar tikrai norite ištrinti \"Rancher\" katalogą {catalog}?"
 

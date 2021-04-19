@@ -392,6 +392,9 @@ msgstr "Êtes-vous sûr de vouloir supprimer ce {resourceType} ?"
 msgid "Are you sure you want to revoke this permission?"
 msgstr "Êtes-vous sûr de vouloir révoquer cette autorisation ?"
 
+msgid "Are you sure you want to select template? Note this will reset the node plan."
+msgstr "Etes-vous sûr de vouloir sélectionner le modèle ? Notez que cela réinitialisera le plan des nœuds."
+
 msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
 msgstr "Êtes-vous sûr de vouloir supprimer le catalogue Rancher {catalog} ?"
 
