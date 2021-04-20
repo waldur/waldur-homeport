@@ -7,7 +7,7 @@ import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { SelectField } from '@waldur/issues/create/SelectField';
 
-const Option: FunctionComponent<any> = (props) => (
+export const UserListOption: FunctionComponent<any> = (props) => (
   <components.Option {...props}>
     <>
       <div>{props.data.full_name}</div>
@@ -53,7 +53,7 @@ export const UserGroup: FunctionComponent<{ editUser; users; disabled }> = ({
         isDisabled={disabled}
         options={users}
         isClearable={true}
-        components={{ Option }}
+        components={{ Option: UserListOption }}
         placeholder={translate('Select user...')}
         getOptionValue={(option) => option.full_name || option.username}
         getOptionLabel={(option) => option.full_name || option.username}

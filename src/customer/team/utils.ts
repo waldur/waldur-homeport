@@ -1,6 +1,8 @@
 import { ENV } from '@waldur/configs/default';
 import {
   CUSTOMER_OWNER_ROLE,
+  CUSTOMER_SERVICE_MANAGER_ROLE,
+  CUSTOMER_SUPPORT_ROLE,
   PROJECT_ADMIN_ROLE,
   PROJECT_MANAGER_ROLE,
   PROJECT_MEMBER_ROLE,
@@ -32,5 +34,13 @@ export const getOrganizationRoles = () => [
   {
     value: CUSTOMER_OWNER_ROLE,
     label: translate(ENV.roles.owner),
+  },
+  {
+    value: CUSTOMER_SUPPORT_ROLE,
+    label: translate('Customer support'),
+  },
+  {
+    value: CUSTOMER_SERVICE_MANAGER_ROLE,
+    label: translate('Service manager'),
   },
 ];

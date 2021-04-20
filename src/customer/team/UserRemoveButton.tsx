@@ -3,14 +3,18 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 interface UserRemoveButtonProps {
   user: any;
+  refreshList;
 }
 
-export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({ user }) => {
+export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
+  user,
+  refreshList,
+}) => {
   const dispatch = useDispatch();
   const callback = async () => {
     try {
@@ -20,9 +24,12 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({ user }) => {
       if (user.permission) {
         await Axios.delete(user.permission);
       }
+      refreshList();
       dispatch(showSuccess(translate('Team member has been removed.')));
     } catch (e) {
-      dispatch(showError(translate('Unable to delete team member.')));
+      dispatch(
+        showErrorResponse(e, translate('Unable to delete team member.')),
+      );
     }
   };
   return (

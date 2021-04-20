@@ -13,7 +13,9 @@ export const SelectField: FunctionComponent<any> = (props) => {
           : input.value
       }
       onChange={(newValue: any) =>
-        simpleValue ? input.onChange(newValue.value) : input.onChange(newValue)
+        simpleValue
+          ? input.onChange(newValue ? newValue.value : null)
+          : input.onChange(newValue)
       }
       options={options}
       onBlur={() => {

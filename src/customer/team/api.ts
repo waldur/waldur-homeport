@@ -15,6 +15,9 @@ export const fetchCustomerUsers: Fetcher = (request: TableRequest) => {
   return parseResponse(url, params);
 };
 
+export const addCustomerUser = (customer, user, role, expiration_time) =>
+  post('/customer-permissions/', { customer, user, role, expiration_time });
+
 export const closeReview = (reviewId: string) =>
   post(`/customer-permissions-reviews/${reviewId}/close/`);
 
