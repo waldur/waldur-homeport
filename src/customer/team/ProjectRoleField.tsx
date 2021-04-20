@@ -1,8 +1,8 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
+import { SelectField } from '@waldur/form';
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
-import { SelectField } from '@waldur/issues/create/SelectField';
 
 import { getRoles } from './utils';
 

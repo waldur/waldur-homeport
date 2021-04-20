@@ -12,16 +12,14 @@ import { TableOptionsType } from '@waldur/table/types';
 import { CustomerRole } from '@waldur/user/dashboard/CustomerRole';
 import {
   getProject,
-  getUser,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
+  isStaff as isStaffSelector,
   getCustomer,
 } from '@waldur/workspace/selectors';
 
 import { fetchCustomerUsers } from './api';
+import { CustomerUserAddButton } from './CustomerUserAddButton';
+import { CustomerUserRowActions } from './CustomerUserRowActions';
 import { ProjectRolesList } from './ProjectRolesList';
-import { UserDetailsButton } from './UserDetailsButton';
-import { UserEditButton } from './UserEditButton';
-import { UserRemoveButton } from './UserRemoveButton';
 import { getRoles } from './utils';
 
 const UserProjectRolesList = ({ row }) => {
@@ -63,19 +61,18 @@ const TableComponent: FunctionComponent<any> = (props) => {
         {
           title: translate('Actions'),
           render: ({ row }) => (
-            <>
-              {props.isOwnerOrStaff || props.user.is_support ? (
-                <UserDetailsButton user={row} />
-              ) : null}
-              {props.isOwnerOrStaff ? <UserEditButton editUser={row} /> : null}
-              {props.isOwnerOrStaff ? <UserRemoveButton user={row} /> : null}
-            </>
+            <CustomerUserRowActions row={row} refreshList={props.fetch} />
           ),
         },
       ]}
       verboseName={translate('team members')}
       hasQuery={true}
       expandableRow={UserProjectRolesList}
+      actions={
+        props.isStaff ? (
+          <CustomerUserAddButton refreshList={props.fetch} />
+        ) : null
+      }
     />
   );
 };
@@ -107,8 +104,7 @@ const TableOptions: TableOptionsType = {
 
 const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
-  user: getUser(state),
-  isOwnerOrStaff: isOwnerOrStaffSelector(state),
+  isStaff: isStaffSelector(state),
   customer: getCustomer(state),
   filter: getFormValues(CUSTOMER_USERS_LIST_FILTER_FORM_ID)(state),
 });

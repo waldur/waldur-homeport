@@ -335,6 +335,11 @@ msgstr ""
 msgid "Add organization"
 msgstr ""
 
+#: src/customer/team/CustomerUserAddButton.tsx
+#: src/customer/team/CustomerUserAddDialog.tsx
+msgid "Add owner"
+msgstr ""
+
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 msgid "Add pair"
 msgstr ""
@@ -1731,6 +1736,10 @@ msgstr ""
 
 #: src/openstack/openstack-volume/actions/RetypeDialog.tsx
 msgid "Current type"
+msgstr ""
+
+#: src/customer/team/utils.ts
+msgid "Customer support"
 msgstr ""
 
 #: src/issues/CustomerSupportRating.tsx
@@ -6545,6 +6554,7 @@ msgstr ""
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/divisions/utils.ts
+#: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
 #: src/map/SetLocationDialog.tsx
@@ -6870,6 +6880,7 @@ msgstr ""
 msgid "Select type..."
 msgstr ""
 
+#: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/project/team/UserGroup.tsx
@@ -6912,6 +6923,10 @@ msgstr ""
 
 #: src/issues/types/constants.ts
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
+msgstr ""
+
+#: src/customer/team/utils.ts
+msgid "Service manager"
 msgstr ""
 
 #: src/customer/list/ServiceProviderFilter.tsx
@@ -9141,6 +9156,7 @@ msgstr ""
 msgid "Used in the period {period} by:"
 msgstr ""
 
+#: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/customer/team/OfferingPermissionsList.tsx
 #: src/customer/team/UserGroup.tsx
