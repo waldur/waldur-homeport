@@ -1,3 +1,14 @@
+const SELECT_SINGLE_VALUE_TYPES = [
+  'select_string',
+  'select_openstack_tenant',
+  'select_openstack_instance',
+];
+
+const SELECT_MULTI_VALUE_TYPES = [
+  'select_multiple_openstack_tenants',
+  'select_multiple_openstack_instances',
+];
+
 export const serializer = (attributes, offering) => {
   const payload: any = {};
   if (attributes) {
@@ -14,10 +25,12 @@ export const serializer = (attributes, offering) => {
         return;
       }
       let value = attributes[key];
-      if (options.type === 'select_string') {
+      if (SELECT_SINGLE_VALUE_TYPES.includes(options.type)) {
         if (value) {
           value = value.value;
         }
+      } else if (SELECT_MULTI_VALUE_TYPES.includes(options.type)) {
+        value = value.map((item) => item.value);
       }
       payload[key] = value;
     });
