@@ -854,6 +854,9 @@ msgstr "Confirmation"
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr "Un e-mail de confirmation a été envoyé. Veuillez vérifier votre boîte de réception!"
 
+msgid "Confirmation message has been updated successfully."
+msgstr "Le message de confirmation a été mis à jour avec succès."
+
 msgid "Confirmation notification template"
 msgstr "Modèle de notification de confirmation"
 
@@ -1294,6 +1297,12 @@ msgstr "Modifier les attributs"
 
 msgid "Edit booking event"
 msgstr "Modifier l'événement de réservation"
+
+msgid "Edit confirmation message"
+msgstr "Modifier le message de confirmation"
+
+msgid "Edit confirmation message of {offeringName}"
+msgstr "Modifier le message de confirmation de {offeringName}"
 
 msgid "Edit offering"
 msgstr "Modifier l'offre"
@@ -5488,6 +5497,9 @@ msgstr "Impossible de mettre à jour YAML."
 
 msgid "Unable to update allowed address pairs."
 msgstr "Impossible de mettre à jour les paires d'adresses autorisées."
+
+msgid "Unable to update confirmation message."
+msgstr "Impossible de mettre à jour le message de confirmation."
 
 msgid "Unable to update enabled checklists."
 msgstr "Impossible de mettre à jour les listes de contrôle activées."

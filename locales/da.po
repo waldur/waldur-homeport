@@ -854,6 +854,9 @@ msgstr "Bekræftelse"
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr "Bekræftelsesmail er blevet sendt. Tjek venligst din indbakke!"
 
+msgid "Confirmation message has been updated successfully."
+msgstr "Bekræftelsesmeddelelsen er blevet opdateret med succes."
+
 msgid "Confirmation notification template"
 msgstr "Skabelon til bekræftelsesmeddelelse"
 
@@ -1294,6 +1297,12 @@ msgstr "Rediger attributter"
 
 msgid "Edit booking event"
 msgstr "Rediger bookingbegivenhed"
+
+msgid "Edit confirmation message"
+msgstr "Rediger bekræftelsesmeddelelse"
+
+msgid "Edit confirmation message of {offeringName}"
+msgstr "Rediger bekræftelsesmeddelelse for {offeringName}"
 
 msgid "Edit offering"
 msgstr "Rediger tilbud"
@@ -5488,6 +5497,9 @@ msgstr "Kan ikke opdatere YAML."
 
 msgid "Unable to update allowed address pairs."
 msgstr "Kan ikke opdatere tilladte adressepar."
+
+msgid "Unable to update confirmation message."
+msgstr "Kan ikke opdatere bekræftelsesmeddelelsen."
 
 msgid "Unable to update enabled checklists."
 msgstr "Kunne ikke opdatere aktiverede tjeklister."
