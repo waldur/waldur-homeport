@@ -1,39 +1,22 @@
 import moment from 'moment-timezone';
 
-const isSaturday = (day): boolean => day.isoWeekday() === 6;
-
 const isWeekend = (day): boolean => [6, 7].includes(day.isoWeekday());
 
 const isMonday = (day): boolean => day.isoWeekday() === 1;
 
 const isFriday = (day): boolean => day.isoWeekday() === 5;
 
-const getNumberOfSaturdaysInTheEvent = (event): number => {
+export const getNumberOfWeekendsInTheEvent = (event): number => {
   const mStart = moment(event.start);
   const mEnd = moment(event.end);
-  let amount = 0;
-  while (mStart.diff(mEnd, 'd')) {
-    const curDate = mStart;
-    if (isSaturday(curDate)) {
-      amount++;
-    }
-    mStart.add(1, 'd');
-  }
-  return amount;
-};
-
-export const test = (events) => {
-  return events;
+  return mEnd.diff(mStart, 'weeks');
 };
 
 export const removeWeekends = (eventToSplit) => {
-  const numberOfSaturdays = getNumberOfSaturdaysInTheEvent(eventToSplit);
+  const numberOfSaturdays = getNumberOfWeekendsInTheEvent(eventToSplit);
   const events = [];
   let mStart = moment(eventToSplit.start);
   const mEnd = moment(eventToSplit.end);
-  const newEvent = {
-    ...eventToSplit,
-  };
 
   for (let i = 0; i <= numberOfSaturdays; i++) {
     let tempStart = null;
@@ -67,7 +50,7 @@ export const removeWeekends = (eventToSplit) => {
     }
 
     events.push({
-      ...newEvent,
+      ...eventToSplit,
       id: eventToSplit.id + '.' + i,
       start: tempStart,
       end: tempEnd,
