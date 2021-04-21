@@ -12,6 +12,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { stringToColor } from '@waldur/core/stringToColor';
 import { orderByFilter } from '@waldur/core/utils';
+import { BookingsCalendarLegend } from '@waldur/customer/dashboard/BookingsCalendarLegend';
 import { translate } from '@waldur/i18n';
 
 export const getCalendarEvent = (bookingItem, event) => ({
@@ -89,15 +90,20 @@ export const BookingsCalendar = (props: BookingsCalendarProps) => {
   }
 
   return calendarEvents.length ? (
-    <Row style={{ marginBottom: '30px' }}>
-      <Col md={8} mdOffset={2}>
-        <Calendar
-          height="auto"
-          eventLimit={false}
-          events={calendarEvents}
-          eventRender={(info) => eventRender({ ...info, withTooltip: true })}
-        />
-      </Col>
-    </Row>
+    <>
+      <Row>
+        <BookingsCalendarLegend events={calendarEvents} />
+      </Row>
+      <Row style={{ marginBottom: '30px' }}>
+        <Col md={8} mdOffset={2}>
+          <Calendar
+            height="auto"
+            eventLimit={false}
+            events={calendarEvents}
+            eventRender={(info) => eventRender({ ...info, withTooltip: true })}
+          />
+        </Col>
+      </Row>
+    </>
   ) : null;
 };
