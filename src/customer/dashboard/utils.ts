@@ -9,7 +9,7 @@ import {
   selectTableSorting,
 } from '@waldur/table/selectors';
 
-import { CustomerActionsProps } from './types';
+import { CustomerActionsProps, Legend } from './types';
 
 export const checkPermissions = (props: CustomerActionsProps) => {
   const isStaff = props.user.is_staff;
@@ -42,4 +42,19 @@ export const useBookingsCalendarProps = () => {
     bookingsListPageSize,
     bookingsListSorting,
   };
+};
+
+// Refer to https://stackoverflow.com/a/15125941
+export const getDistinctColorsFromEvents = (events): Legend[] => {
+  const flags = [],
+    output = [];
+  for (let i = 0; i < events.length; i++) {
+    if (flags[events[i].color]) continue;
+    flags[events[i].color] = true;
+    output.push({
+      color: events[i].color,
+      name: events[i].name,
+    });
+  }
+  return output;
 };

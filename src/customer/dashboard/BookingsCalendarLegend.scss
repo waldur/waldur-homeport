@@ -1,0 +1,16 @@
+.bookings-calendar-legend-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+
+  .legend {
+    display: flex;
+    align-items: center;
+
+    .rectangle {
+      width: 28px;
+      height: 18px;
+      border-radius: 3px;
+    }
+  }
+}
