@@ -41,5 +41,6 @@
   "WALDUR_FREEIPA": {
     "ENABLED": true,
     "USERNAME_PREFIX": "waldur_"
-  }
+  },
+  "LANGUAGES": [["en", "English"]]
 }
