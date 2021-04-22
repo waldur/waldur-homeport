@@ -52,7 +52,14 @@ export async function loadConfig() {
     }
   }
 
-  const config = { ...frontendSettings, plugins: backendSettings };
+  const config = {
+    ...frontendSettings,
+    plugins: backendSettings,
+    languageChoices: backendSettings.LANGUAGES.map(([code, label]) => ({
+      code,
+      label,
+    })),
+  };
   Object.assign(ENV, config);
   if (ENV.enableExperimental) {
     Object.assign(ENV, modes.experimentalMode);

@@ -27,7 +27,7 @@ export const LanguageList: FunctionComponent = () => {
             className="list-inline-item cursor-pointer"
           >
             <span className={language === currentLanguage ? 'font-bold' : ''}>
-              {translate(language.label)}
+              {language.label}
             </span>
           </li>
         ))}
