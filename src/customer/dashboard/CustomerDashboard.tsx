@@ -8,6 +8,7 @@ import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { CustomerChecklistOverview } from '@waldur/marketplace-checklist/CustomerChecklistOverview';
+import { CustomerResourcesFilter } from '@waldur/marketplace/resources/list/CustomerResourcesFilter';
 import { useTitle } from '@waldur/navigation/title';
 import {
   getUser,
@@ -45,6 +46,7 @@ export const CustomerDashboard: FunctionComponent = () => {
           <CustomerChecklistOverview customer={customer} />
           <CustomerBookingManagement />
           <Panel title={translate('Resources')}>
+            <CustomerResourcesFilter />
             <CustomerResourcesList />
           </Panel>
           {isFeatureVisible('customer.dashboard.category-resources-list') && (
