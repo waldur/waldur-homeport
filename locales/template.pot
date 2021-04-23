@@ -5435,6 +5435,7 @@ msgstr ""
 msgid "Private clouds"
 msgstr ""
 
+#: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx

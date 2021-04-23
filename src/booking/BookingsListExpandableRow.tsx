@@ -10,10 +10,12 @@ import { BookingResource } from './types';
 
 interface DetailedInfo {
   row: BookingResource;
+  isServiceProvider: boolean;
 }
 
 export const BookingsListExpandableRow: FunctionComponent<DetailedInfo> = ({
   row,
+  isServiceProvider,
 }) => (
   <div className="container-fluid m-t">
     <ResourceDetailsTable>
@@ -21,10 +23,12 @@ export const BookingsListExpandableRow: FunctionComponent<DetailedInfo> = ({
         label={translate('Created')}
         value={renderFieldOrDash(formatDateTime(row.created))}
       />
-      <Field
-        label={translate('Project')}
-        value={renderFieldOrDash(row.project_name)}
-      />
+      {isServiceProvider && (
+        <Field
+          label={translate('Project')}
+          value={renderFieldOrDash(row.project_name)}
+        />
+      )}
       <Field
         label={translate('Project description')}
         value={renderFieldOrDash(row.project_description)}
