@@ -19,6 +19,7 @@ import {
   isOwnerOrStaff,
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
+import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { bookingFormSelector } from './store/selectors';
 
@@ -44,10 +45,6 @@ const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => row.offering_name,
     },
     {
-      title: translate('Organization'),
-      render: ({ row }) => row.customer_name,
-    },
-    {
       title: translate('Created by'),
       render: ({ row }) => row.created_by_full_name,
     },
@@ -61,6 +58,18 @@ const TableComponent: FunctionComponent<any> = (props) => {
       orderField: 'schedules',
     },
   ];
+
+  if (props.customer.is_service_provider) {
+    columns.splice(2, 0, {
+      title: translate('Organization'),
+      render: ({ row }) => row.customer_name,
+    });
+  } else if (props.workspace === ORGANIZATION_WORKSPACE) {
+    columns.splice(2, 0, {
+      title: translate('Project'),
+      render: ({ row }) => row.project_name,
+    });
+  }
 
   if (!props.actionsDisabled) {
     columns.push({
@@ -77,7 +86,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       verboseName={translate('Bookings')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      expandableRow={BookingsListExpandableRow}
+      expandableRow={({ row }) => (
+        <BookingsListExpandableRow
+          row={row}
+          isServiceProvider={props.customer.is_service_provider}
+        />
+      )}
     />
   );
 };
