@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { RESOURCE_STATES } from '@waldur/marketplace/resources/list/constants';
 import { CategoryColumn } from '@waldur/marketplace/types';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
@@ -101,7 +102,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
 
 const mapPropsToFilter = (props: StateProps & OwnProps) => {
   const filter: Record<string, any> = {
-    state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
+    state: RESOURCE_STATES,
   };
   if (props.project) {
     filter.project_uuid = props.project.uuid;

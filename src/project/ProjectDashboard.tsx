@@ -8,6 +8,7 @@ import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { translate } from '@waldur/i18n';
 import { ComplianceChecklists } from '@waldur/marketplace-checklist/ComplianceChecklists';
 import { useTitle } from '@waldur/navigation/title';
+import { ProjectResourcesFilter } from '@waldur/project/ProjectResourcesFilter';
 import { Project, PROJECT_WORKSPACE, User } from '@waldur/workspace/types';
 
 import { ProjectActions } from './ProjectActions';
@@ -52,6 +53,7 @@ export const ProjectDashboard: FunctionComponent<ProjectDashboardProps> = (
         </Row>
         <ComplianceChecklists />
         <Panel title={translate('Resources')}>
+          <ProjectResourcesFilter />
           <ProjectResourcesList />
         </Panel>
         <CategoryResourcesList

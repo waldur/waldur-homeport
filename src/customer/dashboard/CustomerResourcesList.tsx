@@ -1,9 +1,14 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import {
+  CUSTOMER_RESOURCES_FILTER_FORM_ID,
+  RESOURCE_STATES,
+} from '@waldur/marketplace/resources/list/constants';
 import { ResourceCategoryField } from '@waldur/marketplace/resources/list/ResourceCategoryField';
 import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNameField';
 import { ResourceOpenDetail } from '@waldur/marketplace/resources/list/ResourceOpenDetail';
@@ -61,20 +66,36 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   );
 };
 
+const mapPropsToFilter = (props) => {
+  const filter: Record<string, string | string[]> = {
+    state: RESOURCE_STATES,
+  };
+  if (props.customer) {
+    filter.customer_uuid = props.customer.uuid;
+  }
+  if (props.filter) {
+    if (props.filter.state) {
+      filter.state = props.filter.state.value;
+    }
+    if (props.filter.project) {
+      filter.project_uuid = props.filter.project.uuid;
+    }
+    if (props.filter.category) {
+      filter.category_uuid = props.filter.category.uuid;
+    }
+  }
+  return filter;
+};
+
 const TableOptions = {
   table: 'CustomerResourcesList',
   fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter: (props) =>
-    props.customer
-      ? {
-          customer_uuid: props.customer.uuid,
-          state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
-        }
-      : {},
+  mapPropsToFilter,
 };
 
 const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
+  filter: getFormValues(CUSTOMER_RESOURCES_FILTER_FORM_ID)(state),
 });
 
 interface StateProps {

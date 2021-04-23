@@ -6,6 +6,10 @@ import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import {
+  CUSTOMER_RESOURCES_FILTER_FORM_ID,
+  RESOURCE_STATES,
+} from '@waldur/marketplace/resources/list/constants';
 import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { Category } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
@@ -93,7 +97,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
 
 const mapPropsToFilter = (props: StateProps) => {
   const filter: Record<string, string | string[]> = {
-    state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
+    state: RESOURCE_STATES,
   };
   if (props.customer) {
     filter.customer_uuid = props.customer.uuid;
@@ -133,7 +137,7 @@ const TableOptions = {
 
 const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
-  filter: getFormValues('CustomerResourcesFilter')(state),
+  filter: getFormValues(CUSTOMER_RESOURCES_FILTER_FORM_ID)(state),
 });
 
 const enhance = compose(
