@@ -51,7 +51,7 @@ const SupportFeedbackContainer = (props) => {
             label={translate('Evaluation')}
             component={(fieldProps) => (
               <ReactStars
-                count={5}
+                count={10}
                 size={24}
                 edit={true}
                 isHalf={false}

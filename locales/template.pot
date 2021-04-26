@@ -12,6 +12,14 @@ msgstr ""
 msgid "(VAT is not included)"
 msgstr ""
 
+#: src/issues/feedback/utils.ts
+msgid "0 - Very negative"
+msgstr ""
+
+#: src/issues/feedback/utils.ts
+msgid "10 - Very positive"
+msgstr ""
+
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/user/support/TermsOfService.tsx
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
@@ -4103,7 +4111,6 @@ msgstr ""
 msgid "Native name"
 msgstr ""
 
-#: src/issues/feedback/utils.ts
 #: src/marketplace-checklist/PieChart.tsx
 msgid "Negative"
 msgstr ""
@@ -4135,10 +4142,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
-msgstr ""
-
-#: src/issues/feedback/utils.ts
-msgid "Neutral"
 msgstr ""
 
 #: src/user/support/UserEmailChangeDialog.tsx
@@ -5313,7 +5316,6 @@ msgstr ""
 msgid "Ports"
 msgstr ""
 
-#: src/issues/feedback/utils.ts
 #: src/marketplace-checklist/PieChart.tsx
 msgid "Positive"
 msgstr ""
@@ -9502,14 +9504,6 @@ msgstr ""
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Version"
-msgstr ""
-
-#: src/issues/feedback/utils.ts
-msgid "Very negative"
-msgstr ""
-
-#: src/issues/feedback/utils.ts
-msgid "Very positive"
 msgstr ""
 
 #: src/rancher/cluster/ViewYAMLButton.tsx

@@ -13,7 +13,7 @@ export const StatusColumn: FunctionComponent<{ row }> = ({ row }) => (
         label={`${row.feedback.evaluation_number} - ${row.feedback.comment}`}
       >
         <ReactStars
-          count={5}
+          count={10}
           size={14}
           edit={false}
           isHalf={true}

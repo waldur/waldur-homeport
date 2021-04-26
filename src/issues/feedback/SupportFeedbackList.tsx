@@ -8,7 +8,6 @@ import {
   SUPPORT_FEEDBACK_LIST,
   SUPPORT_FEEDBACK_LIST_FILTER_FORM,
 } from '@waldur/issues/feedback/constants';
-import { EvaluationField } from '@waldur/issues/feedback/EvaluationField';
 import { IssueField } from '@waldur/issues/feedback/IssueField';
 import { SupportFeedbackListExpandableRow } from '@waldur/issues/feedback/SupportFeedbackListExpandableRow';
 import { getStartAndEndDatesOfMonth } from '@waldur/issues/utils';
@@ -28,7 +27,7 @@ const TableComponent = (props) => {
     },
     {
       title: translate('Evaluation'),
-      render: EvaluationField,
+      render: ({ row }) => row.evaluation,
       orderField: 'evaluation',
     },
     {

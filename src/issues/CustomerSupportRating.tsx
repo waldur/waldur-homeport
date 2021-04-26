@@ -46,7 +46,7 @@ export const CustomerSupportRating: FunctionComponent = () => {
     >
       <div className="feedback-info">
         <ReactStars
-          count={5}
+          count={10}
           size={24}
           edit={false}
           isHalf={true}
