@@ -29,6 +29,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => row.fingerprint,
         },
         {
+          title: translate('Type'),
+          render: ({ row }) => row.type,
+        },
+        {
           title: translate('Actions'),
           render: ({ row }) =>
             props.isStaffOrSelf && <KeyRemoveButton uuid={row.uuid} />,
