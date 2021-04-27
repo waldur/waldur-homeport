@@ -11,6 +11,12 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "\"{trimmed}\" supera el límite de FQDN de caracteres {max_len}"
 
+msgid "0 - Very negative"
+msgstr "0 - Muy negativo"
+
+msgid "10 - Very positive"
+msgstr "10 - Muy positivo"
+
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Términos de servicio</Link> han sido aceptados en <Date></Date>"
 
@@ -178,6 +184,9 @@ msgstr "Añadir oferta"
 
 msgid "Add organization"
 msgstr "Añadir organización"
+
+msgid "Add owner"
+msgstr "Añadir propietario"
 
 msgid "Add pair"
 msgstr "Añadir par"
@@ -1042,6 +1051,9 @@ msgstr "Tamaño actual"
 
 msgid "Current type"
 msgstr "Tipo actual"
+
+msgid "Customer support"
+msgstr "Soporte al cliente"
 
 msgid "Customer support satisfaction overall rating"
 msgstr "Satisfacción del servicio de atención al cliente calificación general"
@@ -2527,9 +2539,6 @@ msgstr "Nombre de red"
 
 msgid "Networks"
 msgstr "Redes"
-
-msgid "Neutral"
-msgstr "Neutral"
 
 msgid "New email"
 msgstr "Nuevo correo electrónico"
@@ -4307,6 +4316,9 @@ msgstr "Solicitud de servicio"
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr "Solicitud de servicio: solicitud del cliente para modificar, añadir, cambiar o eliminar parcial o totalmente un servicio en particular."
 
+msgid "Service manager"
+msgstr "Gerente de servicio"
+
 msgid "Service provider"
 msgstr "Proveedor de servicio"
 
@@ -5956,12 +5968,6 @@ msgstr "Verificando el cambio de correo electrónico"
 
 msgid "Version"
 msgstr "Versión"
-
-msgid "Very negative"
-msgstr "Muy negativo"
-
-msgid "Very positive"
-msgstr "Muy positivo"
 
 msgid "View YAML"
 msgstr "Ver YAML"

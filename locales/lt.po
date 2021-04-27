@@ -11,6 +11,12 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "\"{trimmed}\" viršija {max_len} simbolių FQDN ribą"
 
+msgid "0 - Very negative"
+msgstr "0 - Labai neigiamas"
+
+msgid "10 - Very positive"
+msgstr "10 - Labai teigiamas"
+
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Paslaugų teikimo sąlygos</Link> buvo priimti <Date></Date>"
 
@@ -178,6 +184,9 @@ msgstr "Pridėti pasiūlymą"
 
 msgid "Add organization"
 msgstr "Pridėti organizaciją"
+
+msgid "Add owner"
+msgstr "Pridėti savininką"
 
 msgid "Add pair"
 msgstr "Pridėti porą"
@@ -1042,6 +1051,9 @@ msgstr "Dabartinis dydis"
 
 msgid "Current type"
 msgstr "Dabartinis tipas"
+
+msgid "Customer support"
+msgstr "Klientų aptarnavimas"
 
 msgid "Customer support satisfaction overall rating"
 msgstr "Klientų aptarnavimo pasitenkinimo bendras įvertinimas"
@@ -2527,9 +2539,6 @@ msgstr "Tinklo pavadinimas"
 
 msgid "Networks"
 msgstr "Tinklai"
-
-msgid "Neutral"
-msgstr "Neutralus"
 
 msgid "New email"
 msgstr "Naujas el. paštas"
@@ -4307,6 +4316,9 @@ msgstr "Paslaugos užklausa"
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr "Service Request - kliento prašymas modifikuoti, pridėti, pakeisti ar pašalinti tam tikrą paslaugą iš dalies arba visiškai."
 
+msgid "Service manager"
+msgstr "Paslaugų vadybininkas"
+
 msgid "Service provider"
 msgstr "Paslaugų teikėjas"
 
@@ -5956,12 +5968,6 @@ msgstr "Tikrinamas el. pašto keitimas"
 
 msgid "Version"
 msgstr "Versija"
-
-msgid "Very negative"
-msgstr "Labai neigiamas"
-
-msgid "Very positive"
-msgstr "Labai teigiamas"
 
 msgid "View YAML"
 msgstr "Peržiūrėti YAML"

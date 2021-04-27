@@ -11,6 +11,12 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "\"{trimmed}\" overskrider grænsen for {max_len} tegn i FQDN"
 
+msgid "0 - Very negative"
+msgstr "0 - Meget negativ"
+
+msgid "10 - Very positive"
+msgstr "10 - Meget positiv"
+
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Servicevilkår</Link> er blevet accepteret den <Date></Date>"
 
@@ -178,6 +184,9 @@ msgstr "Tilføj tilbud"
 
 msgid "Add organization"
 msgstr "Tilføj organisation"
+
+msgid "Add owner"
+msgstr "Tilføj ejer"
 
 msgid "Add pair"
 msgstr "Tilføj par"
@@ -1042,6 +1051,9 @@ msgstr "Nuværende størrelse"
 
 msgid "Current type"
 msgstr "Nuværende type"
+
+msgid "Customer support"
+msgstr "Kundesupport"
 
 msgid "Customer support satisfaction overall rating"
 msgstr "Kundesupport tilfredshed samlet vurdering"
@@ -2527,9 +2539,6 @@ msgstr "Netværksnavn"
 
 msgid "Networks"
 msgstr "Netværk"
-
-msgid "Neutral"
-msgstr "Neutral"
 
 msgid "New email"
 msgstr "Ny e-mail"
@@ -4307,6 +4316,9 @@ msgstr "Serviceanmodning"
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr "Serviceanmodning - kundens anmodning om at modificere, tilføje, ændre eller fjerne en bestemt service helt eller delvist."
 
+msgid "Service manager"
+msgstr "Servicechef"
+
 msgid "Service provider"
 msgstr "Tjenesteudbyder"
 
@@ -5956,12 +5968,6 @@ msgstr "Bekræftelse af ændring af e-mail"
 
 msgid "Version"
 msgstr "Version"
-
-msgid "Very negative"
-msgstr "Meget negativ"
-
-msgid "Very positive"
-msgstr "Meget positivt"
 
 msgid "View YAML"
 msgstr "Se YAML"

@@ -2510,9 +2510,6 @@ msgstr "Nätverksnamn"
 msgid "Networks"
 msgstr "Nätverk"
 
-msgid "Neutral"
-msgstr "Neutral"
-
 msgid "New email"
 msgstr "Ny e-post"
 
@@ -5929,12 +5926,6 @@ msgstr "Verifiera ändring av e-post"
 
 msgid "Version"
 msgstr "Version"
-
-msgid "Very negative"
-msgstr "Mycket negativ"
-
-msgid "Very positive"
-msgstr "Mycket positivt"
 
 msgid "View YAML"
 msgstr "Visa YAML"

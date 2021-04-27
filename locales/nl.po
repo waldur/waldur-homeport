@@ -1,0 +1,294 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Localazy (https://localazy.com)\n"
+"Project-Id-Version: waldur-homeport\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
+
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr "\"{trimmed}\" overschrijdt de {max_len} teken FQDN-limiet"
+
+msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
+msgstr "<Link>Servicevoorwaarden</Link> zijn aanvaard op <Date></Date>"
+
+msgid "API URL"
+msgstr "API URL"
+
+msgid "API secret code:"
+msgstr "API geheime code:"
+
+msgid "API token lifetime"
+msgstr "API token levensduur"
+
+msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
+msgstr "Een minimaal verwachte configuratie van de werker is 4 vCPU en 4 GB RAM."
+
+msgid "A one-time fee applied on activation."
+msgstr "Een eenmalige vergoeding die wordt toegepast op activering."
+
+msgid "A profile has been created."
+msgstr "Er is een profiel aangemaakt."
+
+msgid "Accept booking"
+msgstr "Accepteer boeking"
+
+msgid "Access subnets"
+msgstr "Toegang subnetten"
+
+msgid "Accessible to all customers."
+msgstr "Toegankelijk voor alle klanten."
+
+msgid "Account activation"
+msgstr "Account activering"
+
+msgid "Account has been activated."
+msgstr "Account is geactiveerd."
+
+msgid "Account removal"
+msgstr "Account verwijderen"
+
+msgid "Accounting period"
+msgstr "Boekhoudkundige periode"
+
+msgid "Accounting plans"
+msgstr "Boekhoudkundige plannen"
+
+msgid "Accounting record"
+msgstr "Boekhoudkundige gegevens"
+
+msgid "Accounting records"
+msgstr "Boekhoudkundige gegevens"
+
+msgid "Accounting running"
+msgstr "Boekhouding loopt"
+
+msgid "Accounting start date"
+msgstr "Begindatum boekhouding"
+
+msgid "Accounting type"
+msgstr "Type boekhouding"
+
+msgid "Action has been applied."
+msgstr "Actie is toegepast."
+
+msgid "Activation price"
+msgstr "Activeringsprijs"
+
+msgid "Active count"
+msgstr "Actieve telling"
+
+msgid "Active user will be able to login into the portal."
+msgstr "Actieve gebruiker zal kunnen inloggen in het portaal."
+
+msgid "Add SSH key"
+msgstr "SSH-sleutel toevoegen"
+
+msgid "Add Waldur user SSH keys to the FreeIPA profile"
+msgstr "Waldur-gebruiker SSH-sleutels toevoegen aan het FreeIPA-profiel"
+
+msgid "Add component"
+msgstr "Component toevoegen"
+
+msgid "Add data volume"
+msgstr "Gegevensvolume toevoegen"
+
+msgid "Add environment variable"
+msgstr "Omgevingsvariabele toevoegen"
+
+msgid "Add key"
+msgstr "Sleutel toevoegen"
+
+msgid "Add new offering"
+msgstr "Nieuw aanbod toevoegen"
+
+msgid "Add new organization"
+msgstr "Nieuwe organisatie toevoegen"
+
+msgid "Add new project"
+msgstr "Nieuw project toevoegen"
+
+msgid "Add offering"
+msgstr "Aanbod toevoegen"
+
+msgid "Add pair"
+msgstr "Paar toevoegen"
+
+msgid "Add payment profile"
+msgstr "Betalingsprofiel toevoegen"
+
+msgid "Add project member"
+msgstr "Projectlid toevoegen"
+
+msgid "Add resource"
+msgstr "Bron toevoegen"
+
+msgid "Add security group"
+msgstr "Beveiligingsgroep toevoegen"
+
+msgid "Add team member"
+msgstr "Teamlid toevoegen"
+
+msgid "Add to a new namespace"
+msgstr "Toevoegen aan een nieuwe naamruimte"
+
+msgid "Add to comparison"
+msgstr "Toevoegen aan vergelijking"
+
+msgid "Add user input field"
+msgstr "Gebruiker invoerveld toevoegen"
+
+msgid "Additional data that will be added to instance on provisioning."
+msgstr "Aanvullende gegevens die bij het inrichten aan de instantie worden toegevoegd."
+
+msgid "Additional data that will be added to virtual machine on provisioning."
+msgstr "Aanvullende gegevens die bij het inrichten aan de virtuele machine worden toegevoegd."
+
+msgid "Additional space to apply to storage quota to be used by snapshots."
+msgstr "Extra ruimte om toe te passen op opslagquota om te worden gebruikt door momentopnamen."
+
+msgid "Additionally service provider can charge for usage of the following components"
+msgstr "Bovendien kan de dienstverlener kosten aanrekenen voor het gebruik van de volgende componenten"
+
+msgid "Admin username"
+msgstr "Admin gebruikersnaam"
+
+msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
+msgstr "Nadat de geheime API-code is geregenereerd, zal het niet mogelijk zijn om gebruik in te dienen met de oude sleutel."
+
+msgid "Agree with ToS"
+msgstr "Akkoord met ToS"
+
+msgid "Agreement number"
+msgstr "Nummer overeenkomst"
+
+msgid "All resources have been imported."
+msgstr "Alle bronnen zijn geïmporteerd."
+
+msgid "Allocation description"
+msgstr "Beschrijving van de toewijzing"
+
+msgid "Allocation name"
+msgstr "Toewijzingsnaam"
+
+msgid "Allocation pools"
+msgstr "Toewijzingspools"
+
+msgid "Allow bookings to be scheduled at weekends"
+msgstr "Sta toe dat boekingen in het weekend worden gepland"
+
+msgid "Allow to enable/disable component only"
+msgstr "Toestaan om component alleen in/uit te schakelen"
+
+msgid "Allowed address pairs update was scheduled."
+msgstr "Toegestane adres paren update was gepland."
+
+msgid "An error occurred on project removal."
+msgstr "Er is een fout opgetreden bij het verwijderen van het project."
+
+msgid "Answers have been submitted"
+msgstr "Antwoorden zijn ingediend"
+
+msgid "Application catalogues"
+msgstr "Toepassingscatalogi"
+
+msgid "Application details"
+msgstr "Toepassingsdetails"
+
+msgid "Application has been created."
+msgstr "Toepassing is gemaakt."
+
+msgid "Application templates"
+msgstr "Toepassingssjablonen"
+
+msgid "Approve payment"
+msgstr "Betaling goedkeuren"
+
+msgid "Approved at"
+msgstr "Goedgekeurd bij"
+
+msgid "Archived plans"
+msgstr "Gearchiveerde plannen"
+
+msgid "Are you sure you want to accept a {name}?"
+msgstr "Weet u zeker dat u een {name} wilt accepteren?"
+
+msgid "Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
+msgstr "Weet u zeker dat u een {name} {resourceType} wilt verwijderen in de status Foutief? Er wordt een opruimingspoging uitgevoerd als u daarvoor kiest."
+
+msgid "Are you sure you want to delete the payment?"
+msgstr "Weet u zeker dat u de betaling wilt verwijderen?"
+
+msgid "Are you sure you want to delete the payment profile?"
+msgstr "Weet u zeker dat u het betalingsprofiel wilt verwijderen?"
+
+msgid "Are you sure you want to revoke this permission?"
+msgstr "Weet u zeker dat u deze toestemming wilt intrekken?"
+
+msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
+msgstr "Weet u zeker dat u Rancher catalogus {catalog} wilt verwijderen?"
+
+msgid "Are you sure you would like to delete project {projectName}?"
+msgstr "Weet u zeker dat u project {projectName} wilt verwijderen?"
+
+msgid "Are you sure you would like to delete the hook?"
+msgstr "Weet u zeker dat u de haak wilt verwijderen?"
+
+msgid "Are you sure you would like to delete the key?"
+msgstr "Weet u zeker dat u de sleutel wilt verwijderen?"
+
+msgid "Are you sure you would like to terminate resource {resourceName}?"
+msgstr "Weet u zeker dat u resource {resourceName} wilt beëindigen?"
+
+msgid "Article code"
+msgstr "Artikel code"
+
+msgid "At least one plan must be entered"
+msgstr "Er moet ten minste één plan worden ingevoerd"
+
+msgid "Attach OpenStack Volume to Instance"
+msgstr "OpenStack Volume aan Instantie koppelen"
+
+msgid "Attach has been scheduled."
+msgstr "Bijvoegen is gepland."
+
+msgid "Attach volume"
+msgstr "Voeg volume toe"
+
+msgid "Attributes are invalid."
+msgstr "Attributen zijn ongeldig."
+
+msgid "Attributes filter"
+msgstr "Attributen filter"
+
+msgid "Audit logs"
+msgstr "Audit logboeken"
+
+msgid "Authenticate using Mobile ID"
+msgstr "Authenticeren met mobiele ID"
+
+msgid "Authentication events"
+msgstr "Authenticatie gebeurtenissen"
+
+msgid "Authentication token"
+msgstr "Authenticatie token"
+
+msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
+msgstr "Authenticatie met mobiele ID is geannuleerd door gebruiker of time-out. Details:"
+
+msgid "Authorized personnel"
+msgstr "Bevoegd personeel"
+
+msgid "Auto-assign floating IP"
+msgstr "Automatisch toewijzen van zwevend IP"
+
+msgid "Auto approve in service provider projects"
+msgstr "Automatisch goedkeuren in dienstverleningsprojecten"
+
+msgid "Availability zone"
+msgstr "Beschikbaarheidszone"
+
+msgid "(VAT is not included)"
+msgstr "(BTW is niet inbegrepen)"
