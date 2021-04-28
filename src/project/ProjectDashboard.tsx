@@ -41,9 +41,6 @@ export const ProjectDashboard: FunctionComponent<ProjectDashboardProps> = (
       />
       <div style={{ paddingLeft: 10 }}>
         <Row>
-          <CustomerBookingManagement />
-        </Row>
-        <Row>
           <Col md={8}>
             <ProjectCounters project={props.project} />
           </Col>
@@ -52,6 +49,7 @@ export const ProjectDashboard: FunctionComponent<ProjectDashboardProps> = (
           </Col>
         </Row>
         <ComplianceChecklists />
+        <CustomerBookingManagement />
         <Panel title={translate('Resources')}>
           <ProjectResourcesFilter />
           <ProjectResourcesList />
