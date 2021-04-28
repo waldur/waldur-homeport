@@ -8,6 +8,117 @@ msgstr ""
 "Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
 
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr "\"{trimmed}\" supera il limite FQDN del carattere {max_len}"
+
+msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
+msgstr "<Link>I termini di servizio</Link> sono stati accettati su <Date></Date>"
+
+msgid "API URL"
+msgstr "API URL"
+
+msgid "API secret code:"
+msgstr "Codice segreto API:"
+
+msgid "API token lifetime"
+msgstr "Durata token API"
+
+msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
+msgstr "Una configurazione minima prevista di worker è 4 vCPU e 4 GB di RAM."
+
+msgid "A one-time fee applied on activation."
+msgstr "Una tassa una tantum applicata all'attivazione."
+
+msgid "A profile has been created."
+msgstr "È stato creato un profilo."
+
+msgid "Accept booking"
+msgstr "Accetta prenotazione"
+
+msgid "Access subnets"
+msgstr "Accesso alle subnet"
+
+msgid "Accessible to all customers."
+msgstr "Accessibile a tutti i clienti."
+
+msgid "Account activation"
+msgstr "Attivazione dell'account"
+
+msgid "Account has been activated."
+msgstr "L'account è stato attivato."
+
+msgid "Account removal"
+msgstr "Rimozione dell'account"
+
+msgid "Accounting period"
+msgstr "Periodo contabile"
+
+msgid "Accounting plans"
+msgstr "Piani contabili"
+
+msgid "Accounting record"
+msgstr "Registrazione contabile"
+
+msgid "Accounting records"
+msgstr "Registrazioni contabili"
+
+msgid "Accounting running"
+msgstr "Contabilità in esecuzione"
+
+msgid "Accounting start date"
+msgstr "Data di inizio contabilità"
+
+msgid "Accounting type"
+msgstr "Tipo di contabilità"
+
+msgid "Action has been applied."
+msgstr "L'azione è stata applicata."
+
+msgid "Activation price"
+msgstr "Prezzo di attivazione"
+
+msgid "Active count"
+msgstr "Conteggio attivo"
+
+msgid "Active user will be able to login into the portal."
+msgstr "L'utente attivo sarà in grado di accedere al portale."
+
+msgid "Add SSH key"
+msgstr "Aggiungi chiave SSH"
+
+msgid "Add Waldur user SSH keys to the FreeIPA profile"
+msgstr "Aggiungere chiavi SSH utente Waldur al profilo FreeIPA"
+
+msgid "Add component"
+msgstr "Aggiungi componente"
+
+msgid "Add data volume"
+msgstr "Aggiungi volume di dati"
+
+msgid "Add environment variable"
+msgstr "Aggiungi variabile di ambiente"
+
+msgid "Add new offering"
+msgstr "Aggiungi nuova offerta"
+
+msgid "Add new organization"
+msgstr "Aggiungi nuova organizzazione"
+
+msgid "Add new project"
+msgstr "Aggiungi nuovo progetto"
+
+msgid "Add offering"
+msgstr "Aggiungi offerta"
+
+msgid "Add pair"
+msgstr "Aggiungi coppia"
+
+msgid "Add payment profile"
+msgstr "Aggiungi profilo di pagamento"
+
+msgid "Add plan"
+msgstr "Aggiungi piano"
+
 msgid "Add project"
 msgstr "Add department"
 
@@ -64,6 +175,9 @@ msgstr "There are no department yet for this organization."
 
 msgid "Update project details"
 msgstr "Update department details"
+
+msgid "(VAT is not included)"
+msgstr "(IVA non inclusa)"
 
 msgid "projects"
 msgstr "departments"

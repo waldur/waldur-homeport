@@ -12,7 +12,7 @@ msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "\"{trimmed}\" overschrijdt de {max_len} teken FQDN-limiet"
 
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
-msgstr "<Link>Servicevoorwaarden</Link> zijn aanvaard op <Date></Date>"
+msgstr "<Link>Servicevoorwaarden</Link> zijn geaccepteerd op <Date></Date>"
 
 msgid "API URL"
 msgstr "API URL"
@@ -198,7 +198,7 @@ msgid "Application details"
 msgstr "Toepassingsdetails"
 
 msgid "Application has been created."
-msgstr "Toepassing is gemaakt."
+msgstr "Toepassing is aangemaakt."
 
 msgid "Application templates"
 msgstr "Toepassingssjablonen"
@@ -289,6 +289,1827 @@ msgstr "Automatisch goedkeuren in dienstverleningsprojecten"
 
 msgid "Availability zone"
 msgstr "Beschikbaarheidszone"
+
+msgid "Available quota usage: {usage}"
+msgstr "Beschikbaar quotagebruik: {usage}"
+
+msgid "Average of all checklists"
+msgstr "Gemiddelde van alle checklists"
+
+msgid "Average utilization"
+msgstr "Gemiddeld gebruik"
+
+msgid "Azure Active Directory Application Secret"
+msgstr "Azure Active Directory Toepassing Geheim"
+
+msgid "Azure PostgreSQL database server"
+msgstr "Azure PostgreSQL databaseserver"
+
+msgid "Azure Virtual Machine"
+msgstr "Azure Virtuele Machine"
+
+msgid "Azure provider"
+msgstr "Azure aanbieder"
+
+msgid "Back to organization"
+msgstr "Terug naar organisatie"
+
+msgid "Back to personal dashboard"
+msgstr "Terug naar persoonlijk dashboard"
+
+msgid "Back to shopping"
+msgstr "Terug naar winkelen"
+
+msgid "Backend ID"
+msgstr "Backend ID"
+
+msgid "Backend ID has been successfully set."
+msgstr "Backend ID is succesvol ingesteld."
+
+msgid "Base image name"
+msgstr "Naam basisafbeelding"
+
+msgid "Batch RAM"
+msgstr "Batch RAM"
+
+msgid "Batch block storage size"
+msgstr "Batch blok opslag grootte"
+
+msgid "Batch processing documentation"
+msgstr "Batchverwerking documentatie"
+
+msgid "Batch vCPU"
+msgstr "Batch vCPU"
+
+msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
+msgstr "Word klant van ons portaal. Verzorg IT-services vanuit de Marketplace en beheer uw team vanaf één plek."
+
+msgid "Billing enabled"
+msgstr "Facturering ingeschakeld"
+
+msgid "Billing period"
+msgstr "Factureringsperiode"
+
+msgid "Booking description"
+msgstr "Boeking beschrijving"
+
+msgid "Booking has been accepted."
+msgstr "Boeking is geaccepteerd."
+
+msgid "Booking has been cancelled."
+msgstr "Boeking is geannuleerd."
+
+msgid "Booking is not allowed to overlap other bookings."
+msgstr "Het is niet toegestaan om andere boekingen te overlappen."
+
+msgid "Booking management"
+msgstr "Boekingsbeheer"
+
+msgid "Bootable"
+msgstr "Opstartbaar"
+
+msgid "Browse image"
+msgstr "Blader door afbeelding"
+
+msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
+msgstr "Door de levensduur van token in te stellen op onbepaalde tijd staat u iedereen die het token heeft toe om uw acties na te doen totdat het token is gewijzigd."
+
+msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
+msgstr "Door het formulier in te dienen, gaat u akkoord met het <Link>Servicevoorwaarden</Link> ."
+
+msgid "CPU limit (hours)"
+msgstr "CPU-limiet (uren)"
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "Caller"
+msgstr "Beller"
+
+msgid "Cannot create floating IP if tenant external network is not defined."
+msgstr "Kan geen zwevend IP maken als extern netwerk van huurder niet is gedefinieerd."
+
+msgid "Catalog URL"
+msgstr "Catalogus URL"
+
+msgid "Catalog has been created."
+msgstr "Catalogus is aangemaakt."
+
+msgid "Catalog has been deleted."
+msgstr "Catalogus is verwijderd."
+
+msgid "Catalogues"
+msgstr "Catalogi"
+
+msgid "Category is invalid."
+msgstr "Categorie is ongeldig."
+
+msgid "Challenge code"
+msgstr "Uitdagingscode"
+
+msgid "Change Request"
+msgstr "Verzoek wijzigen"
+
+msgid "Change flavor"
+msgstr "Verander smaak"
+
+msgid "Change limits"
+msgstr "Limieten wijzigen"
+
+msgid "Change request - client’s request to perform a generic modification of data or service."
+msgstr "Wijzigingsverzoek - verzoek van de klant om een generieke wijziging van gegevens of dienst uit te voeren."
+
+msgid "Change resource limits"
+msgstr "Limieten voor bronnen wijzigen"
+
+msgid "Change user email"
+msgstr "Wijzig gebruiker e-mail"
+
+msgid "Changing flavor"
+msgstr "Veranderende smaak"
+
+msgid "Charge for usage-based component is based on user-requested limit."
+msgstr "Kosten voor op gebruik gebaseerde component zijn gebaseerd op door de gebruiker aangevraagde limiet."
+
+msgid "Charset"
+msgstr "Tekenset"
+
+msgid "Checklist setup"
+msgstr "Controlelijst instellen"
+
+msgid "Checklists"
+msgstr "Controlelijsten"
+
+msgid "Choices as comma-separated list"
+msgstr "Keuzes als door komma's gescheiden lijst"
+
+msgid "Civil number"
+msgstr "Burgerlijk nummer"
+
+msgid "Client organization"
+msgstr "Klantorganisatie"
+
+msgid "Client project"
+msgstr "Klant project"
+
+msgid "Cloud RAM"
+msgstr "Wolk RAM"
+
+msgid "Cloud block storage size"
+msgstr "Wolk blokopslag grootte"
+
+msgid "Cloud init template"
+msgstr "Wolk init sjabloon"
+
+msgid "Cloud vCPU"
+msgstr "Wolk vCPU"
+
+msgid "Cluster"
+msgstr "Cluster"
+
+msgid "Cluster IP"
+msgstr "Cluster IP"
+
+msgid "Cluster description"
+msgstr "Clusterbeschrijving"
+
+msgid "Cluster name"
+msgstr "Clusternaam"
+
+msgid "Cluster roles"
+msgstr "Clusterrollen"
+
+msgid "Code is too short."
+msgstr "Code is te kort."
+
+msgid "Code should consist of latin symbols or numbers."
+msgstr "Code moet bestaan uit Latijnse symbolen of cijfers."
+
+msgid "Collation"
+msgstr "Collatie"
+
+msgid "Company data"
+msgstr "Bedrijfsgegevens"
+
+msgid "Compare items"
+msgstr "Artikelen vergelijken"
+
+msgid "Competence"
+msgstr "Competentie"
+
+msgid "Component #{index}"
+msgstr "Component #{index}"
+
+msgid "Components are invalid."
+msgstr "Componenten zijn ongeldig."
+
+msgid "Compute generation"
+msgstr "Berekeningsgeneratie"
+
+msgid "Configuration options"
+msgstr "Configuratie-opties"
+
+msgid "Confirmation mail has been sent. Please check your inbox!"
+msgstr "Bevestigingsmail is verzonden. Controleer uw inbox!"
+
+msgid "Confirmation notification template"
+msgstr "Sjabloon voor bevestiging van meldingen"
+
+msgid "Confirming that data is correct"
+msgstr "Bevestigen dat de gegevens juist zijn"
+
+msgid "Connected subnets"
+msgstr "Verbonden subnetten"
+
+msgid "Connection details"
+msgstr "Verbindingsdetails"
+
+msgid "Contact phone"
+msgstr "Contact telefoon"
+
+msgid "Contract sum"
+msgstr "Contract som"
+
+msgid "Contract sum is"
+msgstr "Contract som is"
+
+msgid "Control plane"
+msgstr "Besturingsvlak"
+
+msgid "Could not create organization"
+msgstr "Kon organisatie niet aanmaken"
+
+msgid "Create Network adapter"
+msgstr "Netwerkadapter aanmaken"
+
+msgid "Create SQL database in PostgreSQL server"
+msgstr "Maak SQL database in PostgreSQL server"
+
+msgid "Create VM snapshot for OpenStack instance"
+msgstr "Maak een VM-momentopname voor OpenStack-instantie"
+
+msgid "Create VM snapshot schedule for OpenStack instance"
+msgstr "Maak VM-momentopnameschema voor OpenStack-instantie"
+
+msgid "Create an availability"
+msgstr "Een beschikbaarheid aanmaken"
+
+msgid "Create application"
+msgstr "Toepassing aanmaken"
+
+msgid "Create catalog"
+msgstr "Catalogus aanmaken"
+
+msgid "Create disk"
+msgstr "Schijf aanmaken"
+
+msgid "Create horizontal pod autoscaler"
+msgstr "Horizontale pod autoscaler aanmaken"
+
+msgid "Create network for OpenStack tenant"
+msgstr "Netwerk maken voor OpenStack-huurder"
+
+msgid "Create node"
+msgstr "Knooppunt maken"
+
+msgid "Create organization"
+msgstr "Organisatie maken"
+
+msgid "Create port"
+msgstr "Poort maken"
+
+msgid "Create request"
+msgstr "Verzoek aanmaken"
+
+msgid "Create security group for OpenStack tenant {name}"
+msgstr "Beveiligingsgroep maken voor OpenStack-huurder {name}"
+
+msgid "Create snapshot for OpenStack volume"
+msgstr "Momentopname aanmaken voor OpenStack-volume"
+
+msgid "Create snapshot schedule for OpenStack volume"
+msgstr "Momentopnameschema maken voor OpenStack-volume"
+
+msgid "Create subnet"
+msgstr "Subnet maken"
+
+msgid "Create your first project"
+msgstr "Maak uw eerste project"
+
+msgid "Created a new payment for {customer_link}."
+msgstr "Een nieuwe betaling aangemaakt voor {customer_link}."
+
+msgid "Creating a backup schedule"
+msgstr "Een back-upschema maken"
+
+msgid "Creating a floating IP"
+msgstr "Een zwevend IP aanmaken"
+
+msgid "Creating a new network"
+msgstr "Een nieuw netwerk maken"
+
+msgid "Creating a security group"
+msgstr "Een beveiligingsgroep maken"
+
+msgid "Creating a subnet"
+msgstr "Een subnet maken"
+
+msgid "Creating snapshot schedule"
+msgstr "Momentopnameschema maken"
+
+msgid "Current API token"
+msgstr "Huidige API-token"
+
+msgid "Current cost"
+msgstr "Huidige kosten"
+
+msgid "Current flavor"
+msgstr "Huidige smaak"
+
+msgid "Current limit"
+msgstr "Huidige limiet"
+
+msgid "Current price per month"
+msgstr "Huidige prijs per maand"
+
+msgid "Current replicas"
+msgstr "Huidige replica's"
+
+msgid "Current size"
+msgstr "Huidige grootte"
+
+msgid "Current type"
+msgstr "Huidig type"
+
+msgid "Customer support satisfaction overall rating"
+msgstr "Algemene beoordeling tevredenheid klantenondersteuning"
+
+msgid "DNS name servers"
+msgstr "DNS-naamservers"
+
+msgid "Daily available booking time range"
+msgstr "Dagelijks beschikbaar boekingstijdbereik"
+
+msgid "Data volume #{index}"
+msgstr "Gegevensvolume #{index}"
+
+msgid "Data volume should have at least {size} GB."
+msgstr "Het gegevensvolume moet ten minste {size} GB hebben."
+
+msgid "Data volume size:"
+msgstr "Grootte gegevensvolume:"
+
+msgid "Data volume type"
+msgstr "Type gegevensvolume"
+
+msgid "Datacite DOI"
+msgstr "Datacite DOI"
+
+msgid "Date and time of incident"
+msgstr "Datum en tijd van het incident"
+
+msgid "Date of reporting"
+msgstr "Datum van rapportage"
+
+msgid "Default SLURM account for user"
+msgstr "Standaard SLURM-account voor gebruiker"
+
+msgid "Default availability zone for provisioned instances."
+msgstr "Standaard beschikbaarheidszone voor ingerichte instanties."
+
+msgid "Default cluster label"
+msgstr "Standaard cluster label"
+
+msgid "Default tax percent"
+msgstr "Standaard belastingpercentage"
+
+msgid "Delete catalog"
+msgstr "Catalogus verwijderen"
+
+msgid "Delete volumes"
+msgstr "Volumes verwijderen"
+
+msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
+msgstr "Het verwijderen van de PostgreSQL server zal leiden tot het verwijderen van alle databases die binnen de server zijn aangemaakt."
+
+msgid "Deploy Longhorn block storage after cluster is deployed"
+msgstr "Implementeer Longhorn blokopslag nadat cluster is geïmplementeerd"
+
+msgid "Desired replicas"
+msgstr "Gewenste replica's"
+
+msgid "Destination URL"
+msgstr "Bestemming URL"
+
+msgid "Destination (CIDR)"
+msgstr "Bestemming (CIDR)"
+
+msgid "Destroy resource"
+msgstr "Vernietig hulpbron"
+
+msgid "Destroy {name} instance"
+msgstr "Vernietig {name} instantie"
+
+msgid "Destroying"
+msgstr "Vernietigen"
+
+msgid "Detach"
+msgstr "Loskoppelen"
+
+msgid "Detaching"
+msgstr "Ontkoppeling"
+
+msgid "Devops-friendly offering"
+msgstr "Devops-vriendelijk aanbod"
+
+msgid "DigitalOcean provider"
+msgstr "DigitalOcean aanbieder"
+
+msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
+msgstr "Schakel een profiel uit in FreeIPA. Uitgeschakelde profielen zijn niet toegestaan voor inloggen op de Linux-systemen"
+
+msgid "Disable data volume"
+msgstr "Gegevensvolume uitschakelen"
+
+msgid "Disable gateway IP advertising via DHCP"
+msgstr "Uitschakelen van gateway IP-advertenties via DHCP"
+
+msgid "Disable profile"
+msgstr "Profiel uitschakelen"
+
+msgid "Disk extension has been scheduled."
+msgstr "Schijfverlenging is gepland."
+
+msgid "Disk has been created."
+msgstr "Schijf is aangemaakt."
+
+msgid "Disks"
+msgstr "Schijven"
+
+msgid "Division type"
+msgstr "Type divisie"
+
+msgid "Do not allow user to specify quotas when offering is provisioned."
+msgstr "Sta niet toe dat de gebruiker quota's opgeeft wanneer het aanbod wordt ingericht."
+
+msgid "Do not configure a gateway for this subnet"
+msgstr "Configureer geen gateway voor dit subnet"
+
+msgid "Do not have an account?"
+msgstr "Heb je geen account?"
+
+msgid "Do you really want to delete comment?"
+msgstr "Wil je echt je commentaar verwijderen?"
+
+msgid "Do you want to unlink instance {name}?"
+msgstr "Wilt u instantie {name} ontkoppelen?"
+
+msgid "Docker version"
+msgstr "Docker-versie"
+
+msgid "Domain name. If not defined default domain will be used."
+msgstr "Domeinnaam. Indien niet gedefinieerd standaarddomein zal worden gebruikt."
+
+msgid "Download invoice"
+msgstr "Factuur downloaden"
+
+msgid "Download order PDF file"
+msgstr "Bestelling PDF-bestand downloaden"
+
+msgid "Drop files to attach, or"
+msgstr "Bestanden neerzetten om bij te voegen, of"
+
+msgid "Drop files to attach them to the issue."
+msgstr "Zet bestanden neer om ze bij het probleem te voegen."
+
+msgid "Droplet has been resized."
+msgstr "Het formaat van de druppel is gewijzigd."
+
+msgid "Dynamic — use separate volume types for tracking pricing"
+msgstr "Dynamisch — gebruik afzonderlijke volumetypen voor het bijhouden van prijzen"
+
+msgid "EU VAT ID"
+msgstr "EU BTW-NUMMER"
+
+msgid "Each mount point should be used once at most."
+msgstr "Elk koppelpunt moet maximaal één keer worden gebruikt."
+
+msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
+msgstr "Elk gebruiksrapport moet gekoppeld zijn aan een factureringsplan om een correcte berekening van de boekhoudgegevens te garanderen."
+
+msgid "Edit YAML"
+msgstr "YAML bewerken"
+
+msgid "Edit an availability"
+msgstr "Een beschikbaarheid bewerken"
+
+msgid "Edit attributes"
+msgstr "Attributen bewerken"
+
+msgid "Edit booking event"
+msgstr "Boekingsgebeurtenis bewerken"
+
+msgid "Edit offering"
+msgstr "Aanbod bewerken"
+
+msgid "Edit project member"
+msgstr "Projectlid bewerken"
+
+msgid "Edit team member"
+msgstr "Teamlid bewerken"
+
+msgid "Egress"
+msgstr "Uitgaand"
+
+msgid "Email change request has been cancelled."
+msgstr "E-mail wijzigingsverzoek is geannuleerd."
+
+msgid "Email has been updated."
+msgstr "E-mail is bijgewerkt."
+
+msgid "Email verification has been sent. Please check your inbox."
+msgstr "E-mail verificatie is verzonden. Controleer uw inbox."
+
+msgid "Enable DHCP"
+msgstr "DHCP inschakelen"
+
+msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
+msgstr "Schakel een profiel in FreeIPA. Alleen ingeschakelde profielen zijn toegestaan om in te loggen op de Linux-systemen"
+
+msgid "Enable by default"
+msgstr "Standaard inschakelen"
+
+msgid "Enable limit"
+msgstr "Limiet inschakelen"
+
+msgid "Enable profile"
+msgstr "Profiel inschakelen"
+
+msgid "Enable profile after creation"
+msgstr "Profiel inschakelen na aanmaken"
+
+msgid "Enabled checklists have been updated."
+msgstr "Ingeschakelde controlelijsten zijn bijgewerkt."
+
+msgid "Enabled default gateway"
+msgstr "Ingeschakelde standaard gateway"
+
+msgid "Encountered an empty component"
+msgstr "Een leeg onderdeel aangetroffen"
+
+msgid "End date must be after start date."
+msgstr "De einddatum moet na de begindatum zijn."
+
+msgid "End date of the agreement is"
+msgstr "Einddatum van de overeenkomst is"
+
+msgid "Ensure this field has no more than 30 characters."
+msgstr "Zorg ervoor dat dit veld niet meer dan 30 tekens bevat."
+
+msgid "Enter IPv4 address."
+msgstr "Voer IPv4-adres in."
+
+msgid "Enter private IPv4 CIDR."
+msgstr "Voer privé IPv4 CIDR in."
+
+msgid "Environment variables"
+msgstr "Omgevingsvariabelen"
+
+msgid "Erred"
+msgstr "Verkeerd"
+
+msgid "Error traceback"
+msgstr "Fout bij traceren"
+
+msgid "Esimated price per month"
+msgstr "Geschatte prijs per maand"
+
+msgid "Estimated cost"
+msgstr "Geschatte kosten"
+
+msgid "Estimated cost for the current month: {cost}"
+msgstr "Geschatte kosten voor de huidige maand: {cost}"
+
+msgid "Estimated monthly cost"
+msgstr "Geschatte maandelijkse kosten"
+
+msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
+msgstr "De geschatte maandelijkse kosten veranderen van {old_estimate} in {new_estimate}. BTW is niet inbegrepen."
+
+msgid "Ethernet type"
+msgstr "Ethernet type"
+
+msgid "Event types"
+msgstr "Gebeurtenistypen"
+
+msgid "Every day at"
+msgstr "Elke dag bij"
+
+msgid "Every hour at {minuteValues} past the hour"
+msgstr "Elk uur op {minuteValues} na het uur"
+
+msgid "Every month on the {days} at {time}"
+msgstr "Elke maand op de {days} om {time}"
+
+msgid "Every month on the {days} of {months} at {time}"
+msgstr "Elke maand op de {days} van {months} om {time}"
+
+msgid "Every month service provider can report up to the amount requested by user."
+msgstr "Elke maand kan de dienstverlener tot het door de gebruiker gevraagde bedrag rapporteren."
+
+msgid "Every week on {day} at {time}"
+msgstr "Elke week op {day} om {time}"
+
+msgid "Excel"
+msgstr "Excel"
+
+msgid "Existing quota usage: {usage}"
+msgstr "Bestaand quotagebruik: {usage}"
+
+msgid "Explore {deployment} Marketplace"
+msgstr "Verken {deployment} Marketplace"
+
+msgid "Extend OpenStack volume"
+msgstr "OpenStack-volume uitbreiden"
+
+msgid "Extend disk"
+msgstr "Schijf uitbreiden"
+
+msgid "Extending"
+msgstr "Uitbreiding"
+
+msgid "External IP"
+msgstr "Extern IP"
+
+msgid "External network ID"
+msgstr "Externe netwerk-ID"
+
+msgid "Failed to operate with backend."
+msgstr "Mislukt om met backend te werken."
+
+msgid "Fee applied each time this plan is activated."
+msgstr "Vergoeding toegepast elke keer dat dit plan wordt geactiveerd."
+
+msgid "File download has been started."
+msgstr "Het downloaden van bestanden is gestart."
+
+msgid "File has been copied"
+msgstr "Bestand is gekopieerd"
+
+msgid "File has been downloaded."
+msgstr "Bestand is gedownload."
+
+msgid "Filter organizations"
+msgstr "Filter organisaties"
+
+msgid "Filter projects"
+msgstr "Filter projecten"
+
+msgid "Financial overview"
+msgstr "Financieel overzicht"
+
+msgid "Find solution"
+msgstr "Zoek oplossing"
+
+msgid "Fixed-price contract"
+msgstr "Contract tegen vaste prijs"
+
+msgid "Fixed — use common storage quota"
+msgstr "Opgelost - gebruik gemeenschappelijke opslagquota"
+
+msgid "Flavor"
+msgstr "Smaak"
+
+msgid "Flavor change has been scheduled."
+msgstr "Smaakverandering is gepland."
+
+msgid "Flavor exclude regex"
+msgstr "Smaak exclusief regex"
+
+msgid "Flavor name"
+msgstr "Smaaknaam"
+
+msgid "Flavor name: {flavor_name}"
+msgstr "Smaaknaam: {flavor_name}"
+
+msgid "Flavors"
+msgstr "Smaken"
+
+msgid "Flavors List"
+msgstr "Smakenlijst"
+
+msgid "Flavors matching this regex expression will not be pulled from the backend."
+msgstr "Smaken die overeenkomen met deze regex expressie zullen niet uit de backend worden getrokken."
+
+msgid "Flavors regex"
+msgstr "Smaken regex"
+
+msgid "Flexible"
+msgstr "Flexibel"
+
+msgid "Floating IP"
+msgstr "Zwevend IP"
+
+msgid "Floating IP count"
+msgstr "Zwevende IP-telling"
+
+msgid "Floating IPs"
+msgstr "Zwevende IP's"
+
+msgid "Floating IPs update has been scheduled."
+msgstr "De update van zwevende IP's is gepland."
+
+msgid "Flowmap"
+msgstr "Stroomkaart"
+
+msgid "Force destroy"
+msgstr "Forceer vernietigen"
+
+msgid "Force destroy {name} instance"
+msgstr "Forceer vernietiging van instantie {name}"
+
+msgid "FreeIPA account"
+msgstr "FreeIPA account"
+
+msgid "FreeIPA account needs to be set up."
+msgstr "FreeIPA-account moet worden ingesteld."
+
+msgid "FreeIPA extension is disabled."
+msgstr "FreeIPA-extensie is uitgeschakeld."
+
+msgid "From port"
+msgstr "Van haven"
+
+msgid "GB"
+msgstr "GB"
+
+msgid "GPU"
+msgstr "GPU"
+
+msgid "GPU limit (hours)"
+msgstr "GPU-limiet (uren)"
+
+msgid "GPU usage"
+msgstr "GPU gebruik"
+
+msgid "Gateway IP of this subnet"
+msgstr "Gateway IP van dit subnet"
+
+msgid "Generate Kubeconfig file"
+msgstr "Genereer Kubeconfig bestand"
+
+msgid "Go to marketplace"
+msgstr "Ga naar marktplaats"
+
+msgid "Go to my profile"
+msgstr "Ga naar mijn profiel"
+
+msgid "Google Calendar has been published successfully."
+msgstr "Google Agenda is succesvol gepubliceerd."
+
+msgid "Google Calendar has been synced successfully."
+msgstr "Google Agenda is succesvol gesynchroniseerd."
+
+msgid "Google Calendar has been unpublished successfully."
+msgstr "Google Agenda is succesvol gedepubliceerd."
+
+msgid "Google Calendar link"
+msgstr "Google Agenda link"
+
+msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
+msgstr "Gegarandeerde tijd van VM-momentopname retentie. Indien null - voor altijd bewaren."
+
+msgid "Guaranteed time of snapshot retention. If null - keep forever."
+msgstr "Gegarandeerde tijd van momentopnamen retentie. Indien null - voor altijd bewaren."
+
+msgid "Guaranteed time of volume snapshot retention. If null - keep forever."
+msgstr "Gegarandeerde tijd van volumemomentopnamen retentie. Indien null - voor altijd bewaren."
+
+msgid "Guest OS"
+msgstr "Gast OS"
+
+msgid "HPA"
+msgstr "HPA"
+
+msgid "Helpdesk"
+msgstr "Helpdesk"
+
+msgid "Helpdesk dashboard"
+msgstr "Helpdesk dashboard"
+
+msgid "Hide diff"
+msgstr "Verberg diff"
+
+msgid "Home organization domain name"
+msgstr "Domeinnaam van de thuisorganisatie"
+
+msgid "Hook has been removed."
+msgstr "Haak is verwijderd."
+
+msgid "Hook removal"
+msgstr "Haak verwijderen"
+
+msgid "Horizontal pod autoscaler has been created."
+msgstr "Horizontale pod autoscaler is aangemaakt."
+
+msgid "Horizontal pod autoscaler has been updated."
+msgstr "Horizontale pod autoscaler is bijgewerkt."
+
+msgid "Host routes"
+msgstr "Host routes"
+
+msgid "Hostname or IP address of gateway node"
+msgstr "Hostnaam of IP-adres van gatewayknooppunt"
+
+msgid "Hostname or IP address of master node"
+msgstr "Hostnaam of IP-adres van hoofdknooppunt"
+
+msgid "How to generate SSH key"
+msgstr "Hoe SSH-sleutel te genereren"
+
+msgid "How to obtain credentials for Azure provider"
+msgstr "Hoe referenties te verkrijgen voor Azure aanbieder"
+
+msgid "How to obtain credentials for DigitalOcean provider"
+msgstr "Hoe u inloggegevens voor de DigitalOcean aanbieder kunt verkrijgen"
+
+msgid "ID code"
+msgstr "ID-code"
+
+msgid "IP address is already used by router."
+msgstr "IP-adres wordt al gebruikt door router."
+
+msgid "IP protocol"
+msgstr "IP-protocol"
+
+msgid "IP version"
+msgstr "IP-versie"
+
+msgid "I accept the <Link>Terms of Service</Link>."
+msgstr "Ik accepteer het <Link>Servicevoorwaarden</Link>."
+
+msgid "Identity provided has been selected via SAML2 discovery service. You will be redirected to the login page soon."
+msgstr "De verstrekte identiteit is geselecteerd via de SAML2-detectieservice. U wordt binnenkort doorgestuurd naar de inlogpagina."
+
+msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
+msgstr "Als u wilt dat de gebruiker bij het bestellen aanvullende details opgeeft, configureer dan het invoerformulier voor de onderstaande gebruiker"
+
+msgid "Image has been added."
+msgstr "Afbeelding is toegevoegd."
+
+msgid "Image has been removed."
+msgstr "Afbeelding is verwijderd."
+
+msgid "Image here"
+msgstr "Afbeelding hier"
+
+msgid "Import YAML"
+msgstr "YAML importeren"
+
+msgid "Import offering"
+msgstr "Aanbod importeren"
+
+msgid "Import resource"
+msgstr "Hulpbron importeren"
+
+msgid "Importing resources"
+msgstr "Hulpbronnen importeren"
+
+msgid "In the format of GUID"
+msgstr "In het formaat van GUID"
+
+msgid "Inactive user will not be able to login into the portal."
+msgstr "Inactieve gebruiker kan niet inloggen op de portal."
+
+msgid "Incident"
+msgstr "Incident"
+
+msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
+msgstr "Incident - klantprobleem met servicegebruik of beschikbaarheid (onderbrekingen, verslechtering van de kwaliteit)."
+
+msgid "Include weekends"
+msgstr "Inclusief weekenden"
+
+msgid "Incorrect organization details"
+msgstr "Onjuiste organisatiegegevens"
+
+msgid "Increase a droplet's RAM, CPU and SSD disk."
+msgstr "Vergroot de RAM, CPU en SSD-schijf van een druppel."
+
+msgid "Increase a droplet's RAM and CPU only (not the storage)."
+msgstr "Verhoog alleen het RAM en de CPU van een droplet (niet de opslag)."
+
+msgid "Informational"
+msgstr "Informatieve"
+
+msgid "Informational - client’s request to get or provide additional information related to a service."
+msgstr "Informatief - verzoek van de klant om aanvullende informatie met betrekking tot een dienst te krijgen of te verstrekken."
+
+msgid "Ingress"
+msgstr "Indringing"
+
+msgid "Initial admin password"
+msgstr "Initieel admin wachtwoord"
+
+msgid "Initial admin username"
+msgstr "Initieel admin gebruikersnaam"
+
+msgid "Initial password"
+msgstr "Initieel wachtwoord"
+
+msgid "Initial username"
+msgstr "Initiële gebruikersnaam"
+
+msgid "Instance"
+msgstr "Instantie"
+
+msgid "Instance deletion has been scheduled."
+msgstr "Het verwijderen van instanties is gepland."
+
+msgid "Instance does not have any floating IPs yet."
+msgstr "Instantie heeft nog geen zwevende IP's."
+
+msgid "Instance does not have any security groups yet."
+msgstr "Instantie heeft nog geen beveiligingsgroepen."
+
+msgid "Instance has been linked."
+msgstr "Instantie is gekoppeld."
+
+msgid "Instance is already active."
+msgstr "Instantie is al actief."
+
+msgid "Instance is already stopped."
+msgstr "Instantie is al gestopt."
+
+msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr "Instantie is nog niet verbonden met interne subnetten. Verbind het eerst met een intern subnet."
+
+msgid "Instance should be OK, or erred. Please contact support."
+msgstr "Instantie zou in orde moeten zijn, of foutief. Neem dan contact op met ondersteuning."
+
+msgid "Instance should be OK. Please contact support."
+msgstr "Instantie zou in orde moeten zijn. Neem dan contact op met ondersteuning."
+
+msgid "Instance should be shutoff and OK or erred. Please contact support."
+msgstr "Instantie moet worden afgesloten en OK of foutief zijn. Neem dan contact op met ondersteuning."
+
+msgid "Instances count"
+msgstr "Aantal instanties"
+
+msgid "Internal IPs"
+msgstr "Interne IPs"
+
+msgid "Internal network ID"
+msgstr "Interne netwerk-ID"
+
+msgid "Internal network allocation pool"
+msgstr "Interne netwerktoewijzingspool"
+
+msgid "Internal network mask (CIDR)"
+msgstr "Intern netwerkmasker (CIDR)"
+
+msgid "Internal server error occurred. Please try again or contact support."
+msgstr "Interne serverfout opgetreden. Probeer het opnieuw of neem contact op met de ondersteuning."
+
+msgid "Invalid URL. Unable to parse payment details."
+msgstr "Ongeldige URL. Kan betalingsgegevens niet ontleden."
+
+msgid "Invitation approval"
+msgstr "Uitnodiging goedkeuring"
+
+msgid "Invitation confirmation"
+msgstr "Uitnodiging bevestiging"
+
+msgid "Invitation could not be accepted"
+msgstr "Uitnodiging kon niet worden geaccepteerd"
+
+msgid "Invitation email is:"
+msgstr "Uitnodiging e-mail is:"
+
+msgid "Invitation has been approved."
+msgstr "Uitnodiging is goedgekeurd."
+
+msgid "Invitation has been canceled."
+msgstr "Uitnodiging is geannuleerd."
+
+msgid "Invitation has been rejected."
+msgstr "Uitnodiging is afgewezen."
+
+msgid "Invitation has been sent again."
+msgstr "De uitnodiging is weer verstuurd."
+
+msgid "Invitation is not found."
+msgstr "Uitnodiging is niet gevonden."
+
+msgid "Invitation is not valid"
+msgstr "Uitnodiging is niet geldig"
+
+msgid "Invitation is not valid anymore."
+msgstr "Uitnodiging is niet meer geldig."
+
+msgid "Invitation rejection"
+msgstr "Afwijzing uitnodiging"
+
+msgid "Invitation token is not found."
+msgstr "Uitnodigingstoken is niet gevonden."
+
+msgid "Invite team member"
+msgstr "Teamlid uitnodigen"
+
+msgid "Invoice No."
+msgstr "Factuur nr."
+
+msgid "Invoice events"
+msgstr "Factuur gebeurtenissen"
+
+msgid "Invoice events timeline"
+msgstr "Factuurgebeurtenissen tijdlijn"
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been created."
+msgstr "Factuur voor organisatie {customer_link} voor de periode van {period} is aangemaakt."
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
+msgstr "Factuur voor organisatie {customer_link} voor de periode van {period} is bijgewerkt."
+
+msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
+msgstr "Factuur voor organisatie {customer_name} voor de periode van {period} is verwijderd."
+
+msgid "Invoice has been successfully linked to payment."
+msgstr "Factuur is succesvol gekoppeld aan betaling."
+
+msgid "Invoice has been successfully unlinked from payment."
+msgstr "Factuur is succesvol ontkoppeld van betaling."
+
+msgid "Invoice has not been sent to PayPal yet"
+msgstr "Factuur is nog niet naar PayPal verzonden"
+
+msgid "Invoice statistics"
+msgstr "Factuurstatistieken"
+
+msgid "Invoiced to"
+msgstr "Gefactureerd aan"
+
+msgid "Invoices list"
+msgstr "Facturenlijst"
+
+msgid "Is external"
+msgstr "Is extern"
+
+msgid "Is official"
+msgstr "Is officieel"
+
+msgid "Is service provider"
+msgstr "Is dienstverlener"
+
+msgid "Issue link"
+msgstr "Probleem link"
+
+msgid "Issue {issue_link} has been created by {caller_link}."
+msgstr "Probleem {issue_link} is aangemaakt door {caller_link}."
+
+msgid "Issues are trackable requests to the operator."
+msgstr "Problemen zijn traceerbare verzoeken aan de operator."
+
+msgid "It is used to automatically assign floating IP to your virtual machine."
+msgstr "Het wordt gebruikt om automatisch zwevende IP toe te wijzen aan uw virtuele machine."
+
+msgid "Item has been added to shopping cart."
+msgstr "Artikel is toegevoegd aan winkelmandje."
+
+msgid "Item has been removed from shopping cart."
+msgstr "Artikel is verwijderd uit winkelmandje."
+
+msgid "Keep forever"
+msgstr "Voor altijd bewaren"
+
+msgid "Keep until"
+msgstr "Bewaren tot"
+
+msgid "Kept until"
+msgstr "Bewaard tot"
+
+msgid "Key removal"
+msgstr "Sleutel verwijderen"
+
+msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
+msgstr "Keystone-auth-URL (bijv. http://keystone.example.com:5000/v3)"
+
+msgid "Kubeconfig file"
+msgstr "Kubeconfig bestand"
+
+msgid "Kubernetes node #{index}"
+msgstr "Kubernetes knooppunt #{index}"
+
+msgid "Kubernetes nodes"
+msgstr "Kubernetes knooppunten"
+
+msgid "Kubernetes version"
+msgstr "Kubernetes versie"
+
+msgid "Label that is visible to users in Marketplace."
+msgstr "Label dat zichtbaar is voor gebruikers in Marketplace."
+
+msgid "Leave blank if you want admin password to be auto-generated."
+msgstr "Laat leeg als u wilt dat het beheerderswachtwoord automatisch wordt gegenereerd."
+
+msgid "Leave blank if you want admin username to be auto-generated."
+msgstr "Laat leeg als u wilt dat de admin gebruikersnaam automatisch wordt gegenereerd."
+
+msgid "Legal address"
+msgstr "Juridisch adres"
+
+msgid "Lifetime will be updated and reset upon saving the form."
+msgstr "De levensduur wordt bijgewerkt en opnieuw ingesteld wanneer het formulier wordt opgeslagen."
+
+msgid "Limit amount"
+msgstr "Limietbedrag"
+
+msgid "Limit period"
+msgstr "Limiet periode"
+
+msgid "Limits"
+msgstr "Limieten"
+
+msgid "Limits are invalid."
+msgstr "Limieten zijn ongeldig."
+
+msgid "Link OpenStack Instance"
+msgstr "Link OpenStack-instantie"
+
+msgid "Link invoice"
+msgstr "Link factuur"
+
+msgid "Loading actions"
+msgstr "Acties laden"
+
+msgid "Loading assets, please wait."
+msgstr "Activa worden geladen, even geduld."
+
+msgid "Loading invoices"
+msgstr "Facturen laden"
+
+msgid "Location has been saved successfully."
+msgstr "Locatie is succesvol opgeslagen."
+
+msgid "Location of {offeringName} offering"
+msgstr "Locatie van het {offeringName} aanbod"
+
+msgid "Logging user in"
+msgstr "Gebruiker inloggen"
+
+msgid "Logo has been removed."
+msgstr "Logo is verwijderd."
+
+msgid "Logo has been uploaded."
+msgstr "Logo is geupload."
+
+msgid "Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes."
+msgstr "Longhorn is een lichtgewicht, betrouwbaar en krachtig gedistribueerd blok opslagsysteem voor Kubernetes."
+
+msgid "MAC address (optional)"
+msgstr "MAC-adres (optioneel)"
+
+msgid "MTU"
+msgstr "MTU"
+
+msgid "Manage networks"
+msgstr "Netwerken beheren"
+
+msgid "Manage organization"
+msgstr "Organisatie beheren"
+
+msgid "Manage security groups"
+msgstr "Beveiligingsgroepen beheren"
+
+msgid "Managed projects"
+msgstr "Beheerde projecten"
+
+msgid "Mark as paid"
+msgstr "Markeer als betaald"
+
+msgid "Mark invoice as paid"
+msgstr "Markeer factuur als betaald"
+
+msgid "Marketplace UUID"
+msgstr "Marketplace UUID"
+
+msgid "Marketplace checkout"
+msgstr "Marketplace kassa"
+
+msgid "Marketplace offering does not have any usage-based components."
+msgstr "Marketplace-aanbod heeft geen op gebruik gebaseerde componenten."
+
+msgid "Marketplace offerings"
+msgstr "Marketplace-aanboden"
+
+msgid "Marketplace service provider"
+msgstr "Marketplace dienstverlener"
+
+msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
+msgstr "Marketplace-diensten kunnen alleen worden ingericht voor een bepaalde affiliatie. U hebt momenteel geen organisaties of projecten verbonden met uw account."
+
+msgid "Max # of VM snapshots"
+msgstr "Max. aantal VM-momentopnamen"
+
+msgid "Max # of snapshots"
+msgstr "Max. aantal momentopnamen"
+
+msgid "Max number of VM snapshots"
+msgstr "Max aantal VM-momentopnamen"
+
+msgid "Max replicas"
+msgstr "Max. replica's"
+
+msgid "Maximal number of resources"
+msgstr "Maximaal aantal hulpbronnen"
+
+msgid "Maximal value"
+msgstr "Maximale waarde"
+
+msgid "Maximum RAM for each VM"
+msgstr "Maximaal RAM voor elke VM"
+
+msgid "Maximum allowed value"
+msgstr "Maximaal toegestane waarde"
+
+msgid "Maximum capacity for each disk"
+msgstr "Maximale capaciteit voor elke schijf"
+
+msgid "Maximum monthly"
+msgstr "Maximaal maandelijks"
+
+msgid "Maximum total"
+msgstr "Maximaal totaal"
+
+msgid "Maximum total size of the disk space per VM"
+msgstr "Maximale totale grootte van de schijfruimte per VM"
+
+msgid "Maximum username length with mandatory username prefix is 32 characters."
+msgstr "De maximale lengte van de gebruikersnaam met het verplichte gebruikersnaam voorvoegsel is 32 tekens."
+
+msgid "Maximum vCPU for each VM"
+msgstr "Maximale vCPU voor elke VM"
+
+msgid "Measured unit"
+msgstr "Gemeten eenheid"
+
+msgid "Memory per vCore"
+msgstr "Geheugen per vCore"
+
+msgid "Memory size in GiB"
+msgstr "Geheugengrootte in GiB"
+
+msgid "Metric name"
+msgstr "Metrische naam"
+
+msgid "MiB"
+msgstr "MiB"
+
+msgid "Min RAM"
+msgstr "Min RAM"
+
+msgid "Min amount"
+msgstr "Min bedrag"
+
+msgid "Min replicas"
+msgstr "Min. replica's"
+
+msgid "Min storage"
+msgstr "Min. opslag"
+
+msgid "Minimal value"
+msgstr "Minimale waarde"
+
+msgid "Minimum allowed value"
+msgstr "Minimaal toegestane waarde"
+
+msgid "Minimum booking time slot duration."
+msgstr "Minimale duur van het boekingstijdslot."
+
+msgid "Minimum username length is 3 characters."
+msgstr "Minimale gebruikersnaam lengte is 3 tekens."
+
+msgid "Monthly invoices"
+msgstr "Maandelijkse facturen"
+
+msgid "Mount point"
+msgstr "Koppelpunt"
+
+msgid "Must be at least {min}"
+msgstr "Moet ten minste {min} zijn"
+
+msgid "Must be at most {max}"
+msgstr "Moet hoogstens {max} zijn"
+
+msgid "Must start with a country prefix ie EE34501234215"
+msgstr "Moet beginnen met een landvoorvoegsel, dwz EE34501234215"
+
+msgid "My offerings"
+msgstr "Mijn aanbod"
+
+msgid "My resources"
+msgstr "Mijn hulpbronnen"
+
+msgid "My services"
+msgstr "Mijn diensten"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Name \"{label}\" must be 1-63 characters long, each of which can only be alphanumeric or a hyphen"
+msgstr "Naam \"{label}\" moet 1-63 tekens lang zijn, die elk alleen alfanumeriek of een koppelteken kunnen zijn"
+
+msgid "Name \"{label}\" must not start or end with a hyphen"
+msgstr "Naam \"{label}\" mag niet beginnen of eindigen met een koppelteken"
+
+msgid "Name is duplicated. Choose other name."
+msgstr "Naam is gedupliceerd. Kies een andere naam."
+
+msgid "Name is not valid."
+msgstr "Naam is niet geldig."
+
+msgid "Name is required field."
+msgstr "Naam is verplicht veld."
+
+msgid "Name is too short, names should be at least two alphanumeric characters."
+msgstr "Naam is te kort, namen moeten ten minste twee alfanumerieke tekens bevatten."
+
+msgid "Name must consist of lower case alphanumeric characters."
+msgstr "De naam moet uit kleine alfanumerieke tekens bestaan."
+
+msgid "Name of your organization."
+msgstr "Naam van uw organisatie."
+
+msgid "Name should consist of latin symbols, numbers and dashes."
+msgstr "Naam moet bestaan uit Latijnse symbolen, cijfers en streepjes."
+
+msgid "Name should consist of latin symbols and numbers."
+msgstr "Naam moet bestaan uit Latijnse symbolen en cijfers."
+
+msgid "Name should contain at least 3 symbols."
+msgstr "De naam moet ten minste 3 symbolen bevatten."
+
+msgid "Namespace"
+msgstr "Naamruimte"
+
+msgid "Namespace should be unique."
+msgstr "Naamruimte moet uniek zijn."
+
+msgid "Native name"
+msgstr "Inheemse naam"
+
+msgid "Network MTU has been updated."
+msgstr "Netwerk MTU is bijgewerkt."
+
+msgid "Network adapters"
+msgstr "Netwerkadapters"
+
+msgid "New flavor"
+msgstr "Nieuwe smaak"
+
+msgid "New limit"
+msgstr "Nieuwe limiet"
+
+msgid "New plan"
+msgstr "Nieuw plan"
+
+msgid "New size"
+msgstr "Nieuwe maat"
+
+msgid "Next hop (IP)"
+msgstr "Volgende hop (IP)"
+
+msgid "Next trigger at"
+msgstr "Volgende trigger op"
+
+msgid "No, continue using current email"
+msgstr "Nee, blijf huidige e-mail gebruiken"
+
+msgid "No access info"
+msgstr "Geen toegang info"
+
+msgid "No access info."
+msgstr "Geen toegang info."
+
+msgid "No countries"
+msgstr "Geen landen"
+
+msgid "No division types"
+msgstr "Geen divisietypen"
+
+msgid "No divisions"
+msgstr "Geen divisies"
+
+msgid "No entries to show here"
+msgstr "Geen vermeldingen om hier weer te geven"
+
+msgid "No invoice data available."
+msgstr "Geen factuurgegevens beschikbaar."
+
+msgid "No offerings"
+msgstr "Geen aanbod"
+
+msgid "No organizations"
+msgstr "Geen organisaties"
+
+msgid "No projects"
+msgstr "Geen projecten"
+
+msgid "No projects are assigned to this user."
+msgstr "Er zijn geen projecten toegewezen aan deze gebruiker."
+
+msgid "No providers"
+msgstr "Geen aanbieders"
+
+msgid "No service providers"
+msgstr "Geen dienstverleners"
+
+msgid "No users"
+msgstr "Geen gebruikers"
+
+msgid "Node"
+msgstr "Knooppunt"
+
+msgid "Node has been created."
+msgstr "Knooppunt is aangemaakt."
+
+msgid "Node plan"
+msgstr "Knooppuntplan"
+
+msgid "Nodes"
+msgstr "Knooppunten"
+
+msgid "Not a service provider."
+msgstr "Geen dienstverlener."
+
+msgid "Not running accounting"
+msgstr "Boekhouding loopt niet"
+
+msgid "Note that this virtual machine will not be charged separately for {organization}."
+msgstr "Merk op dat deze virtuele machine niet apart in rekening zal worden gebracht voor {organization}."
+
+msgid "Note that this volume will not be charged separately for {organization}."
+msgstr "Merk op dat dit volume niet afzonderlijk in rekening zal worden gebracht voor {organization}."
+
+msgid "Notification can be sent only for created invoice."
+msgstr "Er kan alleen een melding worden verzonden voor de gemaakte factuur."
+
+msgid "Notification has been created."
+msgstr "Melding is aangemaakt."
+
+msgid "Notification has been updated."
+msgstr "Melding is bijgewerkt."
+
+msgid "Notification method"
+msgstr "Meldingsmethode"
+
+msgid "Notifications allow to be informed when a certain event has occurred."
+msgstr "Meldingen maken het mogelijk te worden geïnformeerd wanneer een bepaalde gebeurtenis zich heeft voorgedaan."
+
+msgid "Notifications has been sent to {count} users."
+msgstr "Meldingen zijn verzonden naar {count} gebruikers."
+
+msgid "Number of CPU cores per socket"
+msgstr "Aantal CPU-kernen per socket"
+
+msgid "Number of CPU cores should be multiple of cores per socket."
+msgstr "Het aantal CPU-kernen moet een veelvoud zijn van kernen per socket."
+
+msgid "Number of control plane nodes"
+msgstr "Aantal besturingsvlakknooppunten"
+
+msgid "Number of cores in a VM"
+msgstr "Aantal kernen in een VM"
+
+msgid "Number of created instances"
+msgstr "Aantal aangemaakte instanties"
+
+msgid "Number of etcd nodes"
+msgstr "Aantal etcd nodes"
+
+msgid "Number of running instances"
+msgstr "Aantal actieve instanties"
+
+msgid "Number of worker nodes"
+msgstr "Aantal werkknooppunten"
+
+msgid "Object is not found."
+msgstr "Object is niet gevonden."
+
+msgid "Offering components"
+msgstr "Componenten aanbieden"
+
+msgid "Offering configuration"
+msgstr "Configuratie aanbieden"
+
+msgid "Offering details"
+msgstr "Details van het aanbod"
+
+msgid "Offering doesn't have images."
+msgstr "Aanbod heeft geen afbeeldingen."
+
+msgid "Offering has been created."
+msgstr "Aanbod is aangemaakt."
+
+msgid "Offering has been imported."
+msgstr "Aanbod is geïmporteerd."
+
+msgid "Offering has been updated."
+msgstr "Aanbod is bijgewerkt."
+
+msgid "Offering images"
+msgstr "Afbeeldingen aanbieden"
+
+msgid "Offering images ({name})"
+msgstr "Afbeeldingen aanbieden ({name})"
+
+msgid "Offering is not configured yet."
+msgstr "Aanbod is nog niet geconfigureerd."
+
+msgid "Offering logo"
+msgstr "Aanbieden logo"
+
+msgid "Offering name"
+msgstr "Aanbieden naam"
+
+msgid "Offering permissions"
+msgstr "Machtigingen aanbieden"
+
+msgid "Offering state has been updated."
+msgstr "De aanbiedingsstatus is bijgewerkt."
+
+msgid "Offering type"
+msgstr "Aanbieden type"
+
+msgid "Offerings images"
+msgstr "Aanbiedingen afbeeldingen"
+
+msgid "One-time on plan switch"
+msgstr "Eenmalige wissel op plan"
+
+msgid "Only a created invoice can be marked as paid."
+msgstr "Alleen een aangemaakte factuur kan als betaald worden gemarkeerd."
+
+msgid "Only customer owner or staff can invite users."
+msgstr "Alleen klanteneigenaren of personeel kunnen gebruikers uitnodigen."
+
+msgid "Only pending and expired invitations can be sent again."
+msgstr "Alleen in behandeling zijnde en verlopen uitnodigingen kunnen opnieuw worden verzonden."
+
+msgid "Only pending invitation can be canceled."
+msgstr "Alleen in behandeling zijnde uitnodiging kan worden geannuleerd."
+
+msgid "Only staff and organization users are allowed to open console."
+msgstr "Alleen personeels- en organisatiegebruikers mogen de console openen."
+
+msgid "Only staff can manage OpenStack tenant."
+msgstr "Alleen personeel kan OpenStack-huurder beheren."
+
+msgid "Only staff can remove organization."
+msgstr "Alleen personeel kan de organisatie verwijderen."
+
+msgid "Only staff users are allowed to perform this action."
+msgstr "Alleen personeelsgebruikers mogen deze actie uitvoeren."
+
+msgid "OpenStack Images"
+msgstr "OpenStack-Afbeeldingen"
+
+msgid "OpenStack Instance"
+msgstr "OpenStack-Instantie"
+
+msgid "OpenStack instance"
+msgstr "OpenStack-instantie"
+
+msgid "OpenStack instance has been unlinked from Rancher node."
+msgstr "OpenStack-instantie is ontkoppeld van Rancher-knooppunt."
+
+msgid "OpenStack networks has been created."
+msgstr "OpenStack-netwerken zijn aangemaakt."
+
+msgid "OpenStack package"
+msgstr "OpenStack-pakket"
+
+msgid "OpenStack subnet"
+msgstr "OpenStack-subnet"
+
+msgid "OpenStack tenant"
+msgstr "OpenStack-huurder"
+
+msgid "OpenStack volume"
+msgstr "OpenStack-volume"
+
+msgid "Open console"
+msgstr "Console openen"
+
+msgid "Open in Service Desk"
+msgstr "Openen in Service Desk"
+
+msgid "Open support portal"
+msgstr "Open ondersteuningsportaal"
+
+msgid "Opened by {user} at {date}"
+msgstr "Geopend door {user} op {date}"
+
+msgid "Opened by {user} from {organization} at {date}"
+msgstr "Geopend door {user} van {organization} op {date}"
+
+msgid "Options are invalid."
+msgstr "Opties zijn ongeldig."
+
+msgid "Or use social login"
+msgstr "Of gebruik sociale login"
+
+msgid "Order has been approved."
+msgstr "Bestelling is goedgekeurd."
+
+msgid "Order has been rejected."
+msgstr "Bestelling is afgewezen."
+
+msgid "Order has been submitted."
+msgstr "Bestelling is ingediend."
+
+msgid "Order item details"
+msgstr "Details van bestelartikel"
+
+msgid "Order item has been approved."
+msgstr "Bestelartikel is goedgekeurd."
+
+msgid "Order item has been rejected."
+msgstr "Bestelartikel is afgewezen."
+
+msgid "Order item has cancel has been scheduled."
+msgstr "Bestelartikel is gepland om te worden geannuleerd."
+
+msgid "Organization actions"
+msgstr "Organisatie acties"
+
+msgid "Organization contains invoices. Please remove them first."
+msgstr "Organisatie bevat facturen. Gelieve deze eerst te verwijderen."
+
+msgid "Organization contains projects. Please remove them first."
+msgstr "Organisatie bevat projecten. Gelieve deze eerst te verwijderen."
+
+msgid "Organization events"
+msgstr "Organisatie evenementen"
+
+msgid "Organization has been created."
+msgstr "Organisatie is aangemaakt."
+
+msgid "Organization has been updated successfully."
+msgstr "Organisatie is succesvol bijgewerkt."
+
+msgid "Organization has signed a fixed price agreement"
+msgstr "Organisatie heeft een vaste prijs overeenkomst ondertekend"
+
+msgid "Organization owner"
+msgstr "Organisatie eigenaar"
+
+msgid "Organization owner role expires on"
+msgstr "Organisatie eigenaar rol vervalt op"
+
+msgid "Organization registration code"
+msgstr "Organisatie registratiecode"
+
+msgid "Organization removal"
+msgstr "Organisatie verwijderen"
+
+msgid "Organization role"
+msgstr "Organisatie rol"
+
+msgid "Organization roles"
+msgstr "Organisatie rollen"
+
+msgid "Organization update"
+msgstr "Organisatie bijwerken"
+
+msgid "Organization update ({name})"
+msgstr "Organisatie bijwerken ({name})"
+
+msgid "Organization users list"
+msgstr "Lijst met organisatiegebruikers"
+
+msgid "Organization workspace"
+msgstr "Organisatie werkruimte"
+
+msgid "Organization {customer_link} has been updated."
+msgstr "Organisatie {customer_link} is bijgewerkt."
+
+msgid "Organization {customer_name} has been deleted."
+msgstr "Organisatie {customer_name} is verwijderd."
+
+msgid "Organizations by divisions"
+msgstr "Organisaties per divisies"
+
+msgid "Organizations divisions"
+msgstr "Organisaties divisies"
+
+msgid "Overview of {organization} organization"
+msgstr "Overzicht van {organization} organisatie"
+
+msgid "Overview of {project} project"
+msgstr "Overzicht van {project} project"
+
+msgid "Owned organizations"
+msgstr "Eigendom organisaties"
+
+msgid "PID"
+msgstr "PID"
+
+msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
+msgstr "Pagina is niet gevonden. U hebt een ongeldige URL ingevoerd of probeert de uitgeschakelde functie te bereiken."
+
+msgid "Password has been changed for user {affected_user_link}."
+msgstr "Wachtwoord is gewijzigd voor gebruiker {affected_user_link}."
+
+msgid "Past time slots are not allowed."
+msgstr "Verlopen tijdslots zijn niet toegestaan."
+
+msgid "Pause offering"
+msgstr "Aanbod pauzeren"
+
+msgid "Pay invoice"
+msgstr "Factuur betalen"
+
+msgid "Payment events"
+msgstr "Betalingsevenementen"
+
+msgid "Payment for {customer_link} has been approved."
+msgstr "Betaling voor {customer_link} is goedgekeurd."
+
+msgid "Payment for {customer_link} has been cancelled."
+msgstr "Betaling voor {customer_link} is geannuleerd."
+
+msgid "Payment gateways (monthly)"
+msgstr "Betalings gateways (maandelijks)"
+
+msgid "Payment has been created."
+msgstr "Betaling is aangemaakt."
+
+msgid "Payment has been deleted."
+msgstr "Betaling is verwijderd."
+
+msgid "Payment has been processed successfully."
+msgstr "Betaling is succesvol verwerkt."
+
+msgid "Payment has been updated."
+msgstr "Betaling is bijgewerkt."
+
+msgid "Payment is being processed, please wait."
+msgstr "Betaling wordt verwerkt, gelieve te wachten."
+
+msgid "Payment profile"
+msgstr "Betalingsprofiel"
+
+msgid "Payment profile defines how invoices are processed."
+msgstr "Betalingsprofiel definieert hoe facturen worden verwerkt."
+
+msgid "Payment profile has been created."
+msgstr "Betalingsprofiel is aangemaakt."
+
+msgid "Payment profile has been created and enabled."
+msgstr "Betalingsprofiel is aangemaakt en ingeschakeld."
+
+msgid "Payment profile has been enabled."
+msgstr "Betalingsprofiel is ingeschakeld."
+
+msgid "Payment profile has been removed."
+msgstr "Betalingsprofiel is verwijderd."
+
+msgid "Payment profile has been updated."
+msgstr "Betalingsprofiel is bijgewerkt."
+
+msgid "Payment profiles"
+msgstr "Betalingsprofielen"
+
+msgid "Payments connected with an active payment profile."
+msgstr "Betalingen gekoppeld aan een actief betalingsprofiel."
+
+msgid "Payments list"
+msgstr "Betalingslijst"
+
+msgid "Pending approval for changing of"
+msgstr "In afwachting van goedkeuring voor wijziging van"
+
+msgid "Pending approval for creation of"
+msgstr "In afwachting van goedkeuring voor de oprichting van"
+
+msgid "Pending approval for removal of"
+msgstr "In afwachting van goedkeuring voor verwijdering van"
+
+msgid "Per half month"
+msgstr "Per halve maand"
+
+msgid "Perform local logout"
+msgstr "Lokale afmelding uitvoeren"
+
+msgid "Perform review"
+msgstr "Beoordeling uitvoeren"
+
+msgid "Performed by"
+msgstr "Uitgevoerd door"
+
+msgid "Periods"
+msgstr "Perioden"
 
 msgid "(VAT is not included)"
 msgstr "(BTW is niet inbegrepen)"
