@@ -27,7 +27,7 @@ export const serializer = (attributes, offering) => {
       let value = attributes[key];
       if (SELECT_SINGLE_VALUE_TYPES.includes(options.type)) {
         if (value) {
-          value = value.value;
+          value = typeof value === 'object' ? value.value : value;
         }
       } else if (SELECT_MULTI_VALUE_TYPES.includes(options.type)) {
         value = value.map((item) => item.value);
