@@ -8,8 +8,14 @@ msgstr ""
 "Language: et\n"
 "Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
 
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr "„{trimmed}” ületab {max_len} märgi FQDN piiri"
+
 msgid "0 - Very negative"
 msgstr "0 - Väga negatiivne"
+
+msgid "10 - Very positive"
+msgstr "10 - Väga positiivne"
 
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Teenuse tingimused</Link> on aktsepteeritud <Date></Date>"
@@ -175,6 +181,9 @@ msgstr "Lisa pakkumine"
 
 msgid "Add organization"
 msgstr "Lisa organisatsioon"
+
+msgid "Add owner"
+msgstr "Lisa peakasutajat"
 
 msgid "Add pair"
 msgstr "Lisa aadressi paar"
