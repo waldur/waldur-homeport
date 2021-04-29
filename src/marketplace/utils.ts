@@ -1,6 +1,7 @@
 import { getFormValues } from 'redux-form';
 
 import { formatErrorObject } from '@waldur/core/ErrorMessageFormatter';
+import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { RootState } from '@waldur/store/reducers';
 
 export const getCategoryLink = (projectId, categoryId) => ({
@@ -12,7 +13,7 @@ export const getCategoryLink = (projectId, categoryId) => ({
 });
 
 export const formDataSelector = (state: RootState) =>
-  (getFormValues('marketplaceOffering')(state) || {}) as any;
+  (getFormValues(FORM_ID)(state) || {}) as any;
 
 export const formatResourceShort = (resource) => {
   return (

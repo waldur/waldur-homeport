@@ -11,6 +11,7 @@ import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
+import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Offering } from '@waldur/marketplace/types';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
@@ -116,8 +117,8 @@ const mapStateToProps = (state, ownProps) => ({
   customer: getCustomer(state),
   project: getProject(state),
   total: pricesSelector(state, ownProps).total,
-  formData: getFormValues('marketplaceOffering')(state),
-  formValid: isValid('marketplaceOffering')(state),
+  formData: getFormValues(FORM_ID)(state),
+  formValid: isValid(FORM_ID)(state),
 });
 
 export const OrderSummary = connect<
