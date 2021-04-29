@@ -12,6 +12,7 @@ import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCa
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
+import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { OfferingDetailsProps } from '@waldur/marketplace/details/OfferingDetails';
 import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
 import { formatOrderItemForCreate } from '@waldur/marketplace/details/utils';
@@ -116,13 +117,12 @@ const getQuotas = ({ formData, usages, limits }) => {
 };
 
 const formDataSelector = (state: RootState) =>
-  (getFormValues('marketplaceOffering')(state) || {}) as FormData;
+  (getFormValues(FORM_ID)(state) || {}) as FormData;
 
 const formHasFlavorSelector = (state: RootState) =>
   Boolean(formDataSelector(state).flavor);
 
-const formIsValidSelector = (state: RootState) =>
-  isValid('marketplaceOffering')(state);
+const formIsValidSelector = (state: RootState) => isValid(FORM_ID)(state);
 
 const formAttributesSelector = (state: RootState) => {
   const formData = formDataSelector(state);
