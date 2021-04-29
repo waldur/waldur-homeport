@@ -51,16 +51,16 @@ msgid "Account removal"
 msgstr "Account verwijdering"
 
 msgid "Accounting period"
-msgstr "Boekhoudkundige periode"
+msgstr "Boekhoudperiode"
 
 msgid "Accounting plans"
-msgstr "Boekhoudkundige plannen"
+msgstr "Boekhoudplannen"
 
 msgid "Accounting record"
-msgstr "Boekhoudkundige gegevens"
+msgstr "Boekhoudkundig record"
 
 msgid "Accounting records"
-msgstr "Boekhoudkundige gegevens"
+msgstr "Boekhoudkundig records"
 
 msgid "Accounting running"
 msgstr "Boekhouding loopt"
@@ -273,7 +273,7 @@ msgid "Audit logs"
 msgstr "Audit logboeken"
 
 msgid "Authenticate using Mobile ID"
-msgstr "Authenticeren met mobiele ID"
+msgstr "Authenticeren met Mobiele ID"
 
 msgid "Authentication events"
 msgstr "Authenticatie gebeurtenissen"
@@ -282,7 +282,7 @@ msgid "Authentication token"
 msgstr "Authenticatie token"
 
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
-msgstr "Authenticatie met mobiele ID is geannuleerd door gebruiker of time-out. Details:"
+msgstr "Authenticatie met Mobiele ID is geannuleerd door gebruiker of time-out. Details:"
 
 msgid "Authorized personnel"
 msgstr "Bevoegd personeel"
@@ -1044,7 +1044,7 @@ msgid "FreeIPA extension is disabled."
 msgstr "FreeIPA-extensie is uitgeschakeld."
 
 msgid "From port"
-msgstr "Van haven"
+msgstr "Van poort"
 
 msgid "GB"
 msgstr "GB"
@@ -1080,7 +1080,7 @@ msgid "Google Calendar has been unpublished successfully."
 msgstr "Google Agenda is succesvol gedepubliceerd."
 
 msgid "Google Calendar link"
-msgstr "Google Agenda link"
+msgstr "Google Agenda-koppeling"
 
 msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
 msgstr "Gegarandeerde tijd van VM-momentopname retentie. Indien null - voor altijd bewaren."
@@ -1368,7 +1368,7 @@ msgid "Is service provider"
 msgstr "Is dienstverlener"
 
 msgid "Issue link"
-msgstr "Probleem link"
+msgstr "Probleem koppeling"
 
 msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr "Probleem {issue_link} is aangemaakt door {caller_link}."
@@ -1440,10 +1440,10 @@ msgid "Limits are invalid."
 msgstr "Limieten zijn ongeldig."
 
 msgid "Link OpenStack Instance"
-msgstr "Link OpenStack-instantie"
+msgstr "Koppel OpenStack-instantie"
 
 msgid "Link invoice"
-msgstr "Link factuur"
+msgstr "Koppel factuur"
 
 msgid "Loading actions"
 msgstr "Acties laden"
@@ -2028,7 +2028,7 @@ msgid "Password has been changed for user {affected_user_link}."
 msgstr "Wachtwoord is gewijzigd voor gebruiker {affected_user_link}."
 
 msgid "Past time slots are not allowed."
-msgstr "Verlopen tijdslots zijn niet toegestaan."
+msgstr "Verlopen tijdsloten zijn niet toegestaan."
 
 msgid "Pause offering"
 msgstr "Aanbod pauzeren"
@@ -2673,7 +2673,7 @@ msgid "Resource limits change request has been submitted."
 msgstr "Wijzigingsaanvraag voor hulpbron limieten is ingediend."
 
 msgid "Resource link"
-msgstr "Hulpbronlink"
+msgstr "Hulpbron koppeling"
 
 msgid "Resource name"
 msgstr "Hulpbron naam"
@@ -3313,6 +3313,369 @@ msgstr "Er zijn nog geen hulpbronnen."
 
 msgid "There are no sections for comparison yet."
 msgstr "Er zijn nog geen secties voor vergelijking."
+
+msgid "There are no {verboseName} found matching the filter."
+msgstr "Er zijn geen {verboseName} gevonden die overeenkomen met het filter."
+
+msgid "There are no {verboseName} yet."
+msgstr "Er zijn nog geen {verboseName}."
+
+msgid "There are not namespaces in this project yet."
+msgstr "Er zijn nog geen naamruimten in dit project."
+
+msgid "There is no activity yet."
+msgstr "Er is nog geen activiteit."
+
+msgid "This name will be visible in accounting data."
+msgstr "Deze naam zal zichtbaar zijn in de boekhoudgegevens."
+
+msgid "This value is invalid JSON."
+msgstr "Deze waarde is ongeldige JSON."
+
+msgid "This website uses cookies to ensure you get the best experience on our website."
+msgstr "Deze website maakt gebruik van cookies om ervoor te zorgen dat u de beste ervaring op onze website krijgt."
+
+msgid "Time in progress"
+msgstr "Tijd in uitvoering"
+
+msgid "Time slot"
+msgstr "Tijdslot"
+
+msgid "Time slot has been added."
+msgstr "Tijdslot is toegevoegd."
+
+msgid "Time slots"
+msgstr "Tijdsloten"
+
+msgid "To correct details of your organization, please send an email to {supportEmail} highlighting the errors in current details. Thank you!"
+msgstr "Om de details van uw organisatie te corrigeren, stuurt u een e-mail naar {supportEmail} waarin u de fouten in de actuele gegevens vermeldt. Dank u!"
+
+msgid "To get access, please send a request to {supportEmail}."
+msgstr "Om toegang te krijgen, stuurt u een verzoek naar {supportEmail}."
+
+msgid "To get your clouds under control, please fill in your data."
+msgstr "Om uw wolken onder controle te krijgen, gelieve uw gegevens in te vullen."
+
+msgid "To port"
+msgstr "Naar poort"
+
+msgid "To remove account, please send a request to {support}."
+msgstr "Om een account te verwijderen, stuurt u een verzoek naar {support}."
+
+msgid "To remove your organization, please send an email to {supportEmail}. Thank you!"
+msgstr "Om uw organisatie te verwijderen, stuurt u een e-mail naar {supportEmail}. Dank u wel!"
+
+msgid "To report a security incident, please send an email to {supportEmail}."
+msgstr "Om een beveiligingsincident te melden, stuurt u een e-mail naar {supportEmail}."
+
+msgid "To report an issue, please send an email to {supportEmail}."
+msgstr "Om een probleem te melden, stuurt u een e-mail naar {supportEmail}."
+
+msgid "Total CPU"
+msgstr "Totaal CPU"
+
+msgid "Total CPU hours consumed this month"
+msgstr "Totaal aantal CPU-uren verbruikt deze maand"
+
+msgid "Total GPU hours consumed this month"
+msgstr "Totaal aantal GPU-uren verbruikt deze maand"
+
+msgid "Total RAM GB-hours consumed this month"
+msgstr "Totaal aantal RAM GB-uren verbruikt deze maand"
+
+msgid "Total number of nodes"
+msgstr "Totaal aantal knooppunten"
+
+msgid "Total storage limit is exceeded"
+msgstr "Totale opslaglimiet is overschreden"
+
+msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
+msgstr "Gebijgehouden met UTC-tijdzone, weergegeven met de tijdzone van uw browser."
+
+msgid "Type is invalid."
+msgstr "Type is ongeldig."
+
+msgid "Type of incident"
+msgstr "Soort incident"
+
+msgid "UUID"
+msgstr "UUID"
+
+msgid "Unable to accept booking."
+msgstr "Kan boeking niet accepteren."
+
+msgid "Unable to activate account."
+msgstr "Kan account niet activeren."
+
+msgid "Unable to activate user."
+msgstr "Kan gebruiker niet activeren."
+
+msgid "Unable to add image."
+msgstr "Kan afbeelding niet toevoegen."
+
+msgid "Unable to add item to shopping cart."
+msgstr "Kan artikel niet toevoegen aan winkelmandje."
+
+msgid "Unable to apply action."
+msgstr "Kan actie niet toepassen."
+
+msgid "Unable to approve invitation."
+msgstr "Kan uitnodiging niet goedkeuren."
+
+msgid "Unable to approve order."
+msgstr "Kan bestelling niet goedkeuren."
+
+msgid "Unable to approve order item."
+msgstr "Kan bestellingsartikel niet goedkeuren."
+
+msgid "Unable to attach volume."
+msgstr "Kan volume niet koppelen."
+
+msgid "Unable to attach volume to instance."
+msgstr "Kan volume niet koppelen aan instantie."
+
+msgid "Unable to authenticate using Mobile ID."
+msgstr "Kan niet verifiëren met Mobiele ID."
+
+msgid "Unable to bootstrap application."
+msgstr "Kan toepassing niet opstarten."
+
+msgid "Unable to cancel booking."
+msgstr "Kan boeking niet annuleren."
+
+msgid "Unable to cancel invitation."
+msgstr "Kan uitnodiging niet annuleren."
+
+msgid "Unable to cancel order item."
+msgstr "Kan bestellingsartikel niet annuleren."
+
+msgid "Unable to cancel request."
+msgstr "Kan verzoek niet annuleren."
+
+msgid "Unable to change email."
+msgstr "Kan e-mail niet wijzigen."
+
+msgid "Unable to change flavor."
+msgstr "Kan smaak niet veranderen."
+
+msgid "Unable to close review."
+msgstr "Kan de beoordeling niet sluiten."
+
+msgid "Unable to confirm email."
+msgstr "Kan e-mail niet bevestigen."
+
+msgid "Unable to create OpenStack networks."
+msgstr "Kan OpenStack-netwerken niet aanmaken."
+
+msgid "Unable to create SQL database."
+msgstr "Kan SQL-database niet maken."
+
+msgid "Unable to create VM snapshot."
+msgstr "Kan VM-momentopname niet maken."
+
+msgid "Unable to create VM snapshot schedule."
+msgstr "Kan VM-momentopnameschema niet maken."
+
+msgid "Unable to create a FreeIPA profile."
+msgstr "Kan geen FreeIPA-profiel maken."
+
+msgid "Unable to create application."
+msgstr "Kan toepassing niet maken."
+
+msgid "Unable to create catalog."
+msgstr "Kan catalogus niet maken."
+
+msgid "Unable to create disk."
+msgstr "Kan schijf niet maken."
+
+msgid "Unable to create horizontal pod autoscaler."
+msgstr "Kan horizontale pod autoscaler niet maken."
+
+msgid "Unable to create key."
+msgstr "Kan sleutel niet maken."
+
+msgid "Unable to create node."
+msgstr "Kan knooppunt niet maken."
+
+msgid "Unable to create notification."
+msgstr "Kan geen melding maken."
+
+msgid "Unable to create notifications."
+msgstr "Kan geen meldingen maken."
+
+msgid "Unable to create offering."
+msgstr "Kan aanbod niet maken."
+
+msgid "Unable to create payment."
+msgstr "Kan betaling niet aanmaken."
+
+msgid "Unable to create payment profile."
+msgstr "Kan betalingsprofiel niet aanmaken."
+
+msgid "Unable to create port."
+msgstr "Kan poort niet maken."
+
+msgid "Unable to create request."
+msgstr "Kan verzoek niet aanmaken."
+
+msgid "Unable to create security group."
+msgstr "Kan beveiligingsgroep niet maken."
+
+msgid "Unable to create snapshot schedule."
+msgstr "Kan momentopnameschema niet maken."
+
+msgid "Unable to create subnet."
+msgstr "Kan subnet niet maken."
+
+msgid "Unable to create volume snapshot."
+msgstr "Kan volume-momentopname niet aanmaken."
+
+msgid "Unable to deactivate user."
+msgstr "Kan gebruiker niet deactiveren."
+
+msgid "Unable to delete attachment."
+msgstr "Kan bijlage niet verwijderen."
+
+msgid "Unable to delete catalog."
+msgstr "Kan catalogus niet verwijderen."
+
+msgid "Unable to delete instance."
+msgstr "Kan instantie niet verwijderen."
+
+msgid "Unable to delete payment."
+msgstr "Kan betaling niet verwijderen."
+
+msgid "Unable to delete resource."
+msgstr "Kan hulpbron niet verwijderen."
+
+msgid "Unable to delete team member."
+msgstr "Kan teamlid niet verwijderen."
+
+msgid "Unable to destroy instance."
+msgstr "Kan instantie niet vernietigen."
+
+msgid "Unable to disable FreeIPA profile."
+msgstr "Kan FreeIPA-profiel niet uitschakelen."
+
+msgid "Unable to edit comment."
+msgstr "Kan commentaar niet bewerken."
+
+msgid "Unable to enable FreeIPA profile."
+msgstr "Kan FreeIPA-profiel niet inschakelen."
+
+msgid "Unable to enable payment profile."
+msgstr "Kan betalingsprofiel niet inschakelen."
+
+msgid "Unable to extend disk."
+msgstr "Kan schijf niet uitbreiden."
+
+msgid "Unable to extend volume."
+msgstr "Kan volume niet uitbreiden."
+
+msgid "Unable to fetch attachment."
+msgstr "Kan bijlage niet ophalen."
+
+msgid "Unable to fetch comments."
+msgstr "Kan commentaar niet ophalen."
+
+msgid "Unable to fetch current user."
+msgstr "Kan huidige gebruiker niet ophalen."
+
+msgid "Unable to fetch data."
+msgstr "Kan gegevens niet ophalen."
+
+msgid "Unable to generate service provider API secret code."
+msgstr "Kan dienstverlener API geheime code niet genereren."
+
+msgid "Unable to get form's data."
+msgstr "Kan gegevens van het formulier niet ophalen."
+
+msgid "Unable to get order item."
+msgstr "Kan bestelartikel niet kregen."
+
+msgid "Unable to get service provider API secret code."
+msgstr "Kan API-geheime code van dienstverlener niet ophalen."
+
+msgid "Unable to grant permission."
+msgstr "Kan geen toestemming verlenen."
+
+msgid "Unable to import YAML."
+msgstr "Kan YAML niet importeren."
+
+msgid "Unable to import remote offering."
+msgstr "Kan aanbod op afstand niet importeren."
+
+msgid "Unable to initialize shopping cart."
+msgstr "Kan winkelmandje niet initialiseren."
+
+msgid "Unable to link instance."
+msgstr "Kan instantie niet koppelen."
+
+msgid "Unable to link invoice to the payment."
+msgstr "Kan factuur niet aan de betaling koppelen."
+
+msgid "Unable to load actions"
+msgstr "Kan acties niet laden"
+
+msgid "Unable to load application template details."
+msgstr "Kan toepassing sjabloon details niet laden."
+
+msgid "Unable to load booked items."
+msgstr "Kan geboekte artikelen niet laden."
+
+msgid "Unable to load booking offerings."
+msgstr "Kan boekingsaanbiedingen niet laden."
+
+msgid "Unable to load category sections."
+msgstr "Kan categoriesecties niet laden."
+
+msgid "Unable to load charts."
+msgstr "Kan grafieken niet laden."
+
+msgid "Unable to load checklists."
+msgstr "Kan controlelijsten niet laden."
+
+msgid "Unable to load compliance overview."
+msgstr "Kan nalevingsoverzicht niet laden."
+
+msgid "Unable to load customer."
+msgstr "Kan klant niet laden."
+
+msgid "Unable to load detail."
+msgstr "Kan details niet laden."
+
+msgid "Unable to load editor"
+msgstr "Kan editor niet laden"
+
+msgid "Unable to load events for this resource."
+msgstr "Kan gebeurtenissen voor deze bron niet laden."
+
+msgid "Unable to load file."
+msgstr "Kan bestand niet laden."
+
+msgid "Unable to load financial overview."
+msgstr "Kan financieel overzicht niet laden."
+
+msgid "Unable to load form options."
+msgstr "Kan formulieropties niet laden."
+
+msgid "Unable to load growth chart."
+msgstr "Kan groeigrafiek niet laden."
+
+msgid "Unable to load invoices"
+msgstr "Kan facturen niet laden"
+
+msgid "Unable to load locations."
+msgstr "Kan locaties niet laden."
+
+msgid "Unable to load marketplace categories."
+msgstr "Kan marktplaatscategorieën niet laden."
+
+msgid "Unable to load marketplace category details"
+msgstr "Kan marktplaats categorie details niet laden"
+
+msgid "Unable to load marketplace offering details."
+msgstr "Kan details van marktplaatsaanbieding niet laden."
 
 msgid "User details"
 msgstr "Details gebruiker"

@@ -2396,14 +2396,1397 @@ msgstr "Risorse pubbliche"
 msgid "Publish as Google Calendar"
 msgstr "Pubblica come Google Calendar"
 
+msgid "Pulling"
+msgstr "Tirando"
+
+msgid "Pulling quotas"
+msgstr "Tirare le quote"
+
+msgid "Purchase and usage is invoiced."
+msgstr "Acquisto e utilizzo sono fatturati."
+
+msgid "Put this into ~/.kube/config:"
+msgstr "Metti questo in ~/.kube/config:"
+
+msgid "Quota has been reached."
+msgstr "La quota è stata raggiunta."
+
+msgid "Quota usage exceeds available limit."
+msgstr "L'utilizzo delle quote supera il limite disponibile."
+
+msgid "Quotas"
+msgstr "Quote"
+
+msgid "RAM limit (GB-hours)"
+msgstr "Limite RAM (GB-ore)"
+
+msgid "RAM limit is exceeded"
+msgstr "Il limite di RAM viene superato"
+
+msgid "RAM usage"
+msgstr "Utilizzo della RAM"
+
+msgid "Rancher access key"
+msgstr "Chiave di accesso rancher"
+
+msgid "Rancher cluster"
+msgstr "Rancher cluster"
+
+msgid "Rancher secret key"
+msgstr "Chiave segreta del Rancher"
+
+msgid "Rancher server URL"
+msgstr "URL del server Rancher"
+
+msgid "Reason unknown, please contact support."
+msgstr "Motivo sconosciuto, contattare il supporto tecnico."
+
+msgid "Recent additions"
+msgstr "Aggiunte recenti"
+
+msgid "Record no."
+msgstr "Registra no."
+
+msgid "Record notification has been sent to organization owners."
+msgstr "La notifica dei record è stata inviata ai proprietari dell'organizzazione."
+
+msgid "Record number"
+msgstr "Numero record"
+
+msgid "Record period"
+msgstr "Periodo record"
+
+msgid "Redeploy"
+msgstr "Ridistribuire"
+
+msgid "Referral count"
+msgstr "Conteggio dei riferimenti"
+
+msgid "Referrals for {name}"
+msgstr "Riferimenti per {name}"
+
+msgid "Regenerate"
+msgstr "Rigenerare"
+
+msgid "Region name"
+msgstr "Nome della regione"
+
+msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
+msgstr "Registrati come cliente del nostro portale e fornisci i tuoi servizi cloud attraverso il Marketplace."
+
+msgid "Register as service provider"
+msgstr "Registrati come fornitore di servizi"
+
+msgid "Register organization as service provider and remove organization."
+msgstr "Registrare l'organizzazione come provider di servizi e rimuovere l'organizzazione."
+
+msgid "Register to"
+msgstr "Registrati a"
+
+msgid "Registered at:"
+msgstr "Registrato a:"
+
+msgid "Registration code"
+msgstr "Codice di registrazione"
+
+msgid "Registration method"
+msgstr "Metodo di registrazione"
+
+msgid "Registry code"
+msgstr "Codice del Registro di sistema"
+
+msgid "Regular expression to limit flavors list"
+msgstr "Espressione regolare per limitare l'elenco delle versioni"
+
+msgid "Regular user"
+msgstr "Utente regolare"
+
+msgid "Release floating IPs"
+msgstr "Rilascia IP flottanti"
+
+msgid "Reload issue data"
+msgstr "Ricarica i dati relativi al problema"
+
+msgid "Remote CIDR"
+msgstr "CIDR remoto"
+
+msgid "Remote Waldur API URL"
+msgstr "URL API Waldur remoto"
+
+msgid "Remote category"
+msgstr "Categoria remota"
+
+msgid "Remote offering"
+msgstr "Offerta remota"
+
+msgid "Remote security group"
+msgstr "Gruppo di sicurezza remoto"
+
+msgid "Remove from comparison"
+msgstr "Rimuovi dal confronto"
+
+msgid "Remove organization"
+msgstr "Rimuovi organizzazione"
+
+msgid "Remove profile"
+msgstr "Rimuovi profilo"
+
+msgid "Removed organizations cannot be restored!"
+msgstr "Le organizzazioni rimosse non possono essere ripristinate!"
+
+msgid "Removing organization {organizationName}"
+msgstr "Rimozione dell'organizzazione {organizationName}"
+
+msgid "Removing the organization will delete all related resources."
+msgstr "La rimozione dell'organizzazione eliminerà tutte le risorse correlate."
+
+msgid "Report a security incident"
+msgstr "Segnalare un incidente di sicurezza"
+
+msgid "Report details"
+msgstr "Dettagli del report"
+
+msgid "Report has been submitted"
+msgstr "La relazione è stata inviata"
+
+msgid "Report incorrect data"
+msgstr "Segnala dati errati"
+
+msgid "Report is invalid."
+msgstr "Il report non è valido."
+
+msgid "Report usage"
+msgstr "Segnalare l'utilizzo"
+
+msgid "Reported by me"
+msgstr "Segnalato da me"
+
+msgid "Reported value is reused every month until changed."
+msgstr "Il valore segnalato viene riutilizzato ogni mese fino alla modifica."
+
+msgid "Reporter"
+msgstr "Reporter"
+
+msgid "Request-based item"
+msgstr "Articolo basato su richiesta"
+
+msgid "Request-based item (without Service Desk)"
+msgstr "Articolo basato su richiesta (senza Service Desk)"
+
+msgid "Request account removal for {userName}."
+msgstr "Richiedi la rimozione dell'account per {userName}."
+
+msgid "Request demo"
+msgstr "Richiedi demo"
+
+msgid "Request description"
+msgstr "Richiesta descrizione"
+
+msgid "Request detail"
+msgstr "Dettagli richiesta"
+
+msgid "Request direct access"
+msgstr "Richiedi accesso diretto"
+
+msgid "Request direct access to OpenStack Tenant"
+msgstr "Richiedi accesso diretto a OpenStack Tenant"
+
+msgid "Request direct access to {name}"
+msgstr "Richiedi accesso diretto a {name}"
+
+msgid "Request editing"
+msgstr "Richiedi modifica"
+
+msgid "Request for a change"
+msgstr "Richiesta di modifica"
+
+msgid "Request for a termination"
+msgstr "Richiesta di risoluzione"
+
+msgid "Request publishing"
+msgstr "Richiedi pubblicazione"
+
+msgid "Request removal"
+msgstr "Richiedi rimozione"
+
+msgid "Request title"
+msgstr "Titolo richiesta"
+
+msgid "Request {mode} of Public Offering"
+msgstr "Richiesta {mode} di Offerta Pubblica"
+
+msgid "Request {mode} of {name}"
+msgstr "Richiesta {mode} di {name}"
+
+msgid "Request {requestId} has been created."
+msgstr "La richiesta {requestId} è stata creata."
+
+msgid "Requested email"
+msgstr "Email richiesta"
+
+msgid "Requesting of new resources has been temporarily paused"
+msgstr "La richiesta di nuove risorse è stata temporaneamente sospesa"
+
+msgid "Reserved slot"
+msgstr "Slot riservato"
+
+msgid "Reserved slot by {name}"
+msgstr "Slot riservato da {name}"
+
+msgid "Resize droplet"
+msgstr "Ridimensiona goccioline"
+
+msgid "Resource UUID"
+msgstr "UUID risorsa"
+
+msgid "Resource already has this plan."
+msgstr "La risorsa dispone già di questo piano."
+
+msgid "Resource configuration"
+msgstr "Configurazione delle risorse"
+
+msgid "Resource configuration is invalid. Please fix errors in form."
+msgstr "La configurazione della risorsa non è valida. Correggi gli errori nel modulo."
+
+msgid "Resource deletion has been scheduled."
+msgstr "L'eliminazione delle risorse è stata programmata."
+
+msgid "Resource description"
+msgstr "Descrizione delle risorse"
+
+msgid "Resource details"
+msgstr "Dettagli risorsa"
+
+msgid "Resource does not have any plan."
+msgstr "La risorsa non ha alcun piano."
+
+msgid "Resource does not have backend ID."
+msgstr "La risorsa non dispone di ID backend."
+
+msgid "Resource does not have plan."
+msgstr "La risorsa non ha un piano."
+
+msgid "Resource events"
+msgstr "Eventi risorsa"
+
+msgid "Resource group"
+msgstr "Gruppo di risorse"
+
+msgid "Resource is in sync"
+msgstr "La risorsa è sincronizzata"
+
+msgid "Resource is not connected to the marketplace yet."
+msgstr "La risorsa non è ancora collegata al mercato."
+
+msgid "Resource limits change request has been submitted."
+msgstr "La richiesta di modifica dei limiti delle risorse è stata inviata."
+
+msgid "Resource link"
+msgstr "Collegamento risorse"
+
+msgid "Resource name"
+msgstr "Nome risorsa"
+
+msgid "Resource plan change request has been submitted."
+msgstr "La richiesta di modifica del piano delle risorse è stata inviata."
+
+msgid "Resource schedule is already activated."
+msgstr "La pianificazione delle risorse è già attivata."
+
+msgid "Resource schedule is already deactivated."
+msgstr "La pianificazione delle risorse è già disattivata."
+
+msgid "Resource termination request has been submitted."
+msgstr "La richiesta di terminazione delle risorse è stata inviata."
+
+msgid "Resource usage"
+msgstr "Utilizzo delle risorse"
+
+msgid "Resource usage for {resource}"
+msgstr "Utilizzo delle risorse per {resource}"
+
+msgid "Resources import has failed."
+msgstr "Importazione delle risorse non riuscita."
+
+msgid "Resources represent the services you are using."
+msgstr "Le risorse rappresentano i servizi che si sta utilizzando."
+
+msgid "Resources usage"
+msgstr "Utilizzo delle risorse"
+
+msgid "Restore virtual machine from backup {name}"
+msgstr "Ripristinare la macchina virtuale dal backup {name}"
+
+msgid "Restore volume snapshot"
+msgstr "Ripristinare l'istantanea del volume"
+
+msgid "Restored volumes"
+msgstr "Volumi ripristinati"
+
+msgid "Restricted, because of type."
+msgstr "Limitato, a causa del tipo."
+
+msgid "Restroing"
+msgstr "Ristrutturazione di"
+
+msgid "Retention time"
+msgstr "Tempo di conservazione"
+
+msgid "Retention time in days, if 0 - resource will be kept forever"
+msgstr "Tempo di conservazione in giorni, se 0 - la risorsa verrà mantenuta per sempre"
+
+msgid "Retype OpenStack Volume"
+msgstr "Ridigitare il volume OpenStack"
+
+msgid "Review has been closed."
+msgstr "La revisione è stata chiusa."
+
+msgid "Review has been performed."
+msgstr "La revisione è stata eseguita."
+
+msgid "Role expires on"
+msgstr "Il ruolo scade il"
+
+msgid "Role in project"
+msgstr "Ruolo nel progetto"
+
+msgid "Role management events"
+msgstr "Eventi di gestione dei ruoli"
+
+msgid "Routers"
+msgstr "Router"
+
+msgid "Rule count"
+msgstr "Conteggio delle regole"
+
+msgid "Running accounting"
+msgstr "Contabilità in esecuzione"
+
+msgid "Runtime state"
+msgstr "Stato runtime"
+
+msgid "SAML2 single logout has been started. Please wait until it completes."
+msgstr "SAML2 singola disconnessione è stata avviata. Attendere fino al completamento."
+
+msgid "SLURM allocation"
+msgstr "Allocazione SLURM"
+
+msgid "SLURM allocation usage"
+msgstr "Utilizzo allocazione SLURM"
+
+msgid "SQL database has been created."
+msgstr "Il database SQL è stato creato."
+
+msgid "SQL server description"
+msgstr "Descrizione del server SQL"
+
+msgid "SQL server name"
+msgstr "Nome server SQL"
+
+msgid "SSH Keys"
+msgstr "Chiavi SSH"
+
+msgid "SSH key"
+msgstr "Chiave SSH"
+
+msgid "SSH key has been removed."
+msgstr "La chiave SSH è stata rimossa."
+
+msgid "SSH key management events"
+msgstr "Eventi di gestione delle chiavi SSH"
+
+msgid "SSH key {ssh_key_name} has been created for user {user_link}"
+msgstr "La chiave SSH {ssh_key_name} è stata creata per l'utente {user_link}"
+
+msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
+msgstr "La chiave SSH {ssh_key_name} è stata eliminata per l'utente {user_link}"
+
+msgid "SSH public key"
+msgstr "Chiave pubblica SSH"
+
+msgid "Sankey diagram"
+msgstr "Diagramma Sankey"
+
+msgid "Schedules are invalid."
+msgstr "Programmazioni non valide."
+
+msgid "Script for creation of a resource"
+msgstr "Script per la creazione di una risorsa"
+
+msgid "Script for regular update of resource and its accounting"
+msgstr "Script per l'aggiornamento regolare della risorsa e la sua contabilità"
+
+msgid "Script for termination of a resource"
+msgstr "Script per la terminazione di una risorsa"
+
+msgid "Script for updating a resource on plan change"
+msgstr "Script per l'aggiornamento di una risorsa alla modifica del piano"
+
+msgid "Script language"
+msgstr "Linguaggio script"
+
+msgid "Search for offerings..."
+msgstr "Cerca offerte..."
+
+msgid "Security group creation has been scheduled."
+msgstr "La creazione del gruppo di sicurezza è stata pianificata."
+
+msgid "Security group does not contain any rule yet."
+msgstr "Il gruppo di protezione non contiene ancora alcuna regola."
+
+msgid "Security group rules update has been scheduled."
+msgstr "L'aggiornamento delle regole del gruppo di protezione è stato pianificato."
+
+msgid "Security groups"
+msgstr "Gruppi sicurezza"
+
+msgid "Security groups details"
+msgstr "Dettagli sui gruppi di sicurezza"
+
+msgid "Security incident date: {date}"
+msgstr "Data incidente di sicurezza: {date}"
+
+msgid "Security incident type: {type}"
+msgstr "Tipo di incidente di sicurezza: {type}"
+
+msgid "Seems there's nothing here"
+msgstr "Sembra che non ci sia niente qui"
+
+msgid "Seems you don't have any public resources yet"
+msgstr "Sembra che tu non abbia ancora risorse pubbliche"
+
+msgid "Seems you don't have any resources yet"
+msgstr "Sembra che tu non abbia ancora risorse"
+
+msgid "Segmentation ID"
+msgstr "ID segmentazione"
+
+msgid "Select accounting period"
+msgstr "Selezionare il periodo contabile"
+
+msgid "Select affected resource..."
+msgstr "Seleziona risorsa interessata..."
+
+msgid "Select affiliation"
+msgstr "Seleziona affiliazione"
+
+msgid "Select assignee..."
+msgstr "Seleziona assegnatario..."
+
+msgid "Select available weekdays"
+msgstr "Seleziona giorni feriali disponibili"
+
+msgid "Select caller..."
+msgstr "Seleziona chiamante..."
+
+msgid "Select connected subnet"
+msgstr "Seleziona subnet connessa"
+
+msgid "Select division..."
+msgstr "Seleziona divisione..."
+
+msgid "Select division type..."
+msgstr "Seleziona tipo di divisione..."
+
+msgid "Select evaluation..."
+msgstr "Seleziona valutazione..."
+
+msgid "Select incident type"
+msgstr "Seleziona tipo di incidente"
+
+msgid "Select instance..."
+msgstr "Seleziona istanza..."
+
+msgid "Select issue template..."
+msgstr "Seleziona modello di problema..."
+
+msgid "Select offering..."
+msgstr "Seleziona offerta..."
+
+msgid "Select offerings..."
+msgstr "Seleziona le offerte..."
+
+msgid "Select organization roles"
+msgstr "Selezionare i ruoli dell'organizzazione"
+
+msgid "Select organizations..."
+msgstr "Seleziona organizzazioni..."
+
 msgid "Select project..."
 msgstr "Select department"
+
+msgid "Select project roles"
+msgstr "Selezionare i ruoli del progetto"
+
+msgid "Select provider..."
+msgstr "Seleziona provider..."
+
+msgid "Select security groups..."
+msgstr "Seleziona gruppi di sicurezza..."
+
+msgid "Select service provider"
+msgstr "Seleziona fornitore di servizi"
+
+msgid "Select service provider..."
+msgstr "Seleziona fornitore di servizi..."
+
+msgid "Select some files"
+msgstr "Seleziona alcuni file"
+
+msgid "Select subnet"
+msgstr "Seleziona subnet"
+
+msgid "Select subnets to connect to..."
+msgstr "Selezionare le subnet a cui connettersi..."
+
+msgid "Select tenant..."
+msgstr "Selezionare tenant..."
+
+msgid "Select tenants..."
+msgstr "Seleziona inquilini..."
+
+msgid "Select user..."
+msgstr "Seleziona utente..."
+
+msgid "Select workspace"
+msgstr "Selezionare l'area di lavoro"
+
+msgid "Service Request"
+msgstr "Richiesta di assistenza"
+
+msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
+msgstr "Richiesta di servizio - richiesta del client di modificare, aggiungere, modificare o rimuovere parzialmente o completamente un particolare servizio."
+
+msgid "Service provider API secret code has been generated."
+msgstr "Il codice segreto dell'API del provider di servizi è stato generato."
+
+msgid "Service provider can charge for usage of the following components"
+msgstr "Il fornitore di servizi può addebitare l'utilizzo dei seguenti componenti"
+
+msgid "Service provider can report up to the requested amount over the whole active state of resource."
+msgstr "Il provider di servizi può segnalare fino all'importo richiesto sull'intero stato attivo della risorsa."
+
+msgid "Service provider details"
+msgstr "Dettagli del provider di servizi"
+
+msgid "Service provider has been registered."
+msgstr "Il fornitore di servizi è stato registrato."
+
+msgid "Service provider type"
+msgstr "Tipo di fornitore di servizi"
+
+msgid "Service settings are invalid."
+msgstr "Le impostazioni del servizio non sono valide."
+
+msgid "Service settings of this resource are in state erred."
+msgstr "Le impostazioni del servizio di questa risorsa sono in stato errate."
+
+msgid "Set MTU"
+msgstr "Imposta MTU"
+
+msgid "Set allowed address pairs"
+msgstr "Impostare le coppie di indirizzi consentite"
+
+msgid "Set backend ID"
+msgstr "Imposta ID backend"
+
+msgid "Set rules"
+msgstr "Impostare regole"
+
+msgid "Set rules in {name} security group"
+msgstr "Impostare le regole nel gruppo di sicurezza {name}"
+
+msgid "Set static routes"
+msgstr "Imposta percorsi statici"
+
+msgid "Set to draft"
+msgstr "Impostare su bozza"
+
+msgid "Set to true to activate privilege escalation"
+msgstr "Impostare su true per attivare l'escalation dei privilegi"
+
+msgid "Shared providers"
+msgstr "Fornitori condivisi"
+
+msgid "Shopping cart is empty. You should add items to cart first."
+msgstr "Il carrello è vuoto. Dovresti prima aggiungere articoli al carrello."
+
+msgid "Shopping cart item has been updated."
+msgstr "L'articolo del carrello è stato aggiornato."
+
+msgid "Shopping cart item update"
+msgstr "Aggiornamento articolo carrello"
+
+msgid "Show chart"
+msgstr "Mostra grafico"
+
+msgid "Show choices"
+msgstr "Mostra scelte"
+
+msgid "Show console log"
+msgstr "Mostra registro console"
+
+msgid "Show diff"
+msgstr "Mostra diff"
+
+msgid "Show events"
+msgstr "Mostra eventi"
+
+msgid "Show private"
+msgstr "Mostra privato"
+
+msgid "Show request"
+msgstr "Mostra richiesta"
+
+msgid "Show shared"
+msgstr "Mostra condiviso"
+
+msgid "Show usage"
+msgstr "Mostra utilizzo"
+
+msgid "Show user details"
+msgstr "Mostra dettagli utente"
+
+msgid "Show with running accounting"
+msgstr "Mostra con contabilità in esecuzione"
+
+msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
+msgstr "Visualizzazione di {sliceStart} a {sliceEnd} di {resultCount} voci."
+
+msgid "Size name"
+msgstr "Nome dimensione"
+
+msgid "Size should be between 1 and 10240 GB."
+msgstr "La dimensione dovrebbe essere compresa tra 1 e 10240 GB."
+
+msgid "Skip connection to external network"
+msgstr "Salta la connessione alla rete esterna"
+
+msgid "Skip floating IP assignment"
+msgstr "Salta assegnazione IP mobile"
+
+msgid "Snapshot schedule for volume has been created."
+msgstr "È stata creata una pianificazione snapshot per il volume."
+
+msgid "Snapshot schedules"
+msgstr "Pianificazioni istantanee"
+
+msgid "Snapshot size limit"
+msgstr "Limite dimensioni snapshot"
+
+msgid "Snapshots"
+msgstr "Istantanee"
+
+msgid "Snapshots count"
+msgstr "Conteggio istantanee"
+
+msgid "Sponsor number"
+msgstr "Numero sponsor"
+
+msgid "Staff and Support user"
+msgstr "Personale e utente del supporto"
+
+msgid "Start day of accounting"
+msgstr "Giorno di inizio della contabilità"
+
+msgid "Static routes update was scheduled."
+msgstr "Aggiornamento delle route statiche pianificato."
+
+msgid "Step 1. Select offering"
+msgstr "Passo 1. Seleziona offerta"
+
+msgid "Step 2. Select resources"
+msgstr "Passo 2. Selezionare le risorse"
+
+msgid "Storage size"
+msgstr "Dimensioni di archiviazione"
+
+msgid "Storage size in GiB"
+msgstr "Dimensioni di archiviazione in GiB"
+
+msgid "Submit usage report"
+msgstr "Invia report sull'utilizzo"
+
+msgid "Submit with"
+msgstr "Invia con"
+
+msgid "Subnet"
+msgstr "Sottorete"
+
+msgid "Subnet CIDR"
+msgstr "Subnet CIDR"
+
+msgid "Subnet has been created."
+msgstr "La subnet è stata creata."
+
+msgid "Subnet name"
+msgstr "Nome subnet"
+
+msgid "Subnets"
+msgstr "Sottoreti"
+
+msgid "Subnets from where connection to self-service is allowed."
+msgstr "Sottoreti da cui è consentita la connessione al self-service."
+
+msgid "Subscription ID"
+msgstr "ID abbonamento"
+
+msgid "Support dashboard"
+msgstr "Dashboard supporto"
+
+msgid "Support request events"
+msgstr "Eventi di richiesta di supporto"
+
+msgid "Support user"
+msgstr "Utente di supporto"
+
+msgid "Support workspace"
+msgstr "Area di lavoro supporto"
+
+msgid "Sure? Form data would be lost"
+msgstr "Sicuro? I dati del modulo andrebbero persi"
+
+msgid "Sync profile"
+msgstr "Sincronizza profilo"
+
+msgid "Sync with Google Calendar"
+msgstr "Sincronizzazione con Google Calendario"
+
+msgid "Synchronisation has been scheduled."
+msgstr "La sincronizzazione è stata pianificata."
+
+msgid "System administrator"
+msgstr "Amministratore di sistema"
+
+msgid "System volume couldn't be detached."
+msgstr "Impossibile staccare il volume del sistema."
+
+msgid "System volume size"
+msgstr "Dimensione del volume di sistema"
+
+msgid "System volume type"
+msgstr "Tipo di volume del sistema"
+
+msgid "TLD \"{tld}\" must not be all numeric"
+msgstr "TLD \"{tld}\" non deve essere tutto numerico"
+
+msgid "Taking a snapshot"
+msgstr "Creazione di un'istantanea"
+
+msgid "Tax number"
+msgstr "Codice fiscale"
+
+msgid "Tax percent"
+msgstr "Percentuale fiscale"
+
+msgid "Team member has been removed."
+msgstr "Il membro del team è stato rimosso."
+
+msgid "Technical code used by accounting software."
+msgstr "Codice tecnico utilizzato dal software di contabilità."
+
+msgid "Technical name intended for integration and automated reporting. Please use Latin letters without spaces only."
+msgstr "Nome tecnico destinato all'integrazione e alla creazione di report automatizzati. Si prega di utilizzare solo lettere latine senza spazi."
+
+msgid "Template files"
+msgstr "File modello"
+
+msgid "Tenant"
+msgstr "Inquilino"
+
+msgid "Tenant ID"
+msgstr "ID tenant"
+
+msgid "Tenant description"
+msgstr "Descrizione tenant"
+
+msgid "Tenant name"
+msgstr "Nome tenant"
+
+msgid "Tenant user password"
+msgstr "Password utente tenant"
+
+msgid "Tenant user username"
+msgstr "Nome utente tenant"
+
+msgid "Terminate an existing resource"
+msgstr "Terminare una risorsa esistente"
+
+msgid "Terminate resource {resourceName}"
+msgstr "Termina risorsa {resourceName}"
+
+msgid "Terminated"
+msgstr "Terminato"
+
+msgid "Terminating"
+msgstr "Terminazione"
+
+msgid "Text has been copied"
+msgstr "Il testo è stato copiato"
+
+msgid "Thank you for your response!"
+msgstr "Grazie per la risposta!"
+
+msgid "The invoice has been marked as paid."
+msgstr "La fattura è stata contrassegnata come pagata."
+
+msgid "The key has been created."
+msgstr "La chiave è stata creata."
+
+msgid "The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number"
+msgstr "Il nome può contenere solo lettere, numeri e trattini. Dovrebbe iniziare con una lettera e deve terminare con una lettera o un numero"
+
+msgid "The name can only be made up of lowercase letters, numbers and the hyphen. The hyphen may not lead or trail in the name."
+msgstr "Il nome può essere composto solo da lettere minuscole, numeri e trattino. Il trattino potrebbe non essere lead o trail nel nome."
+
+msgid "The name must be shorter than 15 characters."
+msgstr "Il nome deve essere più breve di 15 caratteri."
+
+msgid "The project will be changed for all items in cart."
+msgstr "Il progetto verrà modificato per tutti gli articoli nel carrello."
+
+msgid "The value is not valid IP v4 CIDR"
+msgstr "Il valore non è valido IP v4 CIDR"
+
+msgid "The value is not valid IP v6 CIDR"
+msgstr "Il valore non è valido IP v6 CIDR"
+
+msgid "The worker node is expected to have at least 4 vCPU and 4 GB RAM to run Longhorn."
+msgstr "Il nodo di lavoro dovrebbe avere almeno 4 vCPU e 4 GB di RAM per eseguire Longhorn."
+
+msgid "Then download (if needed) and run kubectl"
+msgstr "Quindi scaricare (se necessario) ed eseguire kubectl"
+
+msgid "There are no SSH keys yet."
+msgstr "Non ci sono ancora chiavi SSH."
+
+msgid "There are no actions."
+msgstr "Non ci sono azioni."
 
 msgid "There are no available projects."
 msgstr "There are no available departments."
 
+msgid "There are no available users."
+msgstr "Non ci sono utenti disponibili."
+
+msgid "There are no categories."
+msgstr "Non ci sono categorie."
+
+msgid "There are no categories in marketplace yet."
+msgstr "Non ci sono ancora categorie sul mercato."
+
+msgid "There are no categories yet."
+msgstr "Non ci sono ancora categorie."
+
+msgid "There are no charts yet."
+msgstr "Non ci sono ancora grafici."
+
+msgid "There are no checklist yet."
+msgstr "Non ci sono ancora liste di controllo."
+
+msgid "There are no checklists."
+msgstr "Non ci sono liste di controllo."
+
+msgid "There are no comments yet."
+msgstr "Non ci sono ancora commenti."
+
+msgid "There are no events for this resource."
+msgstr "Non ci sono eventi per questa risorsa."
+
+msgid "There are no invoices."
+msgstr "Non ci sono fatture."
+
+msgid "There are no matching checklists."
+msgstr "Non ci sono liste di controllo corrispondenti."
+
+msgid "There are no offerings available."
+msgstr "Non ci sono offerte disponibili."
+
+msgid "There are no offerings in marketplace yet."
+msgstr "Non ci sono ancora offerte sul mercato."
+
+msgid "There are no offerings yet."
+msgstr "Non ci sono ancora offerte."
+
+msgid "There are no organizations matching filter."
+msgstr "Non ci sono organizzazioni che corrispondono al filtro."
+
+msgid "There are no organizations yet."
+msgstr "Non ci sono ancora organizzazioni."
+
+msgid "There are no other plans available."
+msgstr "Non ci sono altri piani disponibili."
+
+msgid "There are no other volume types available."
+msgstr "Non ci sono altri tipi di volume disponibili."
+
+msgid "There are no projects matching filter."
+msgstr "Non ci sono progetti corrispondenti filtro."
+
 msgid "There are no projects yet for this organization."
 msgstr "There are no department yet for this organization."
+
+msgid "There are no requests yet."
+msgstr "Non ci sono ancora richieste."
+
+msgid "There are no resources available."
+msgstr "Non ci sono risorse disponibili."
+
+msgid "There are no resources yet."
+msgstr "Non ci sono ancora risorse."
+
+msgid "There are no sections for comparison yet."
+msgstr "Non ci sono ancora sezioni per il confronto."
+
+msgid "There are no {verboseName} found matching the filter."
+msgstr "Non sono stati trovati {verboseName} corrispondenti al filtro."
+
+msgid "There are no {verboseName} yet."
+msgstr "Non ci sono ancora {verboseName}."
+
+msgid "There are not namespaces in this project yet."
+msgstr "Non ci sono ancora spazi dei nomi in questo progetto."
+
+msgid "There is no activity yet."
+msgstr "Non c'è ancora nessuna attività."
+
+msgid "This name will be visible in accounting data."
+msgstr "Questo nome sarà visibile nei dati contabili."
+
+msgid "This value is invalid JSON."
+msgstr "Questo valore non è JSON non valido."
+
+msgid "This website uses cookies to ensure you get the best experience on our website."
+msgstr "Questo sito web utilizza i cookie per assicurarti di ottenere la migliore esperienza sul nostro sito web."
+
+msgid "Time in progress"
+msgstr "Tempo in corso"
+
+msgid "Time slot"
+msgstr "Fascia oraria"
+
+msgid "Time slot has been added."
+msgstr "È stata aggiunta una fascia oraria."
+
+msgid "Time slots"
+msgstr "Fasce orarie"
+
+msgid "To correct details of your organization, please send an email to {supportEmail} highlighting the errors in current details. Thank you!"
+msgstr "Per correggere i dettagli dell'organizzazione, inviare un messaggio di posta elettronica a {supportEmail} evidenziando gli errori nei dettagli correnti. Grazie!"
+
+msgid "To get access, please send a request to {supportEmail}."
+msgstr "Per ottenere l'accesso, invia una richiesta a {supportEmail}."
+
+msgid "To get your clouds under control, please fill in your data."
+msgstr "Per tenere sotto controllo le tue nuvole, inserisci i tuoi dati."
+
+msgid "To port"
+msgstr "A porta"
+
+msgid "To remove account, please send a request to {support}."
+msgstr "Per rimuovere l'account, inviare una richiesta a {support}."
+
+msgid "To remove your organization, please send an email to {supportEmail}. Thank you!"
+msgstr "Per rimuovere la tua organizzazione, invia un'e-mail a {supportEmail}. Grazie!"
+
+msgid "To report a security incident, please send an email to {supportEmail}."
+msgstr "Per segnalare un incidente di sicurezza, invia un'e-mail a {supportEmail}."
+
+msgid "To report an issue, please send an email to {supportEmail}."
+msgstr "Per segnalare un problema, invia un'e-mail a {supportEmail}."
+
+msgid "Total CPU"
+msgstr "CPU totale"
+
+msgid "Total CPU hours consumed this month"
+msgstr "Totale ore CPU consumate questo mese"
+
+msgid "Total GPU hours consumed this month"
+msgstr "Ore totali della GPU consumate questo mese"
+
+msgid "Total RAM GB-hours consumed this month"
+msgstr "Totale RAM GB-ore consumate questo mese"
+
+msgid "Total number of nodes"
+msgstr "Numero totale di nodi"
+
+msgid "Total storage limit is exceeded"
+msgstr "Il limite totale di archiviazione viene superato"
+
+msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
+msgstr "Monitorato utilizzando il fuso orario UTC, visualizzato con il fuso orario del browser."
+
+msgid "Type is invalid."
+msgstr "Il tipo non è valido."
+
+msgid "Type of incident"
+msgstr "Tipo di incidente"
+
+msgid "UUID"
+msgstr "UUID"
+
+msgid "Unable to accept booking."
+msgstr "Impossibile accettare la prenotazione."
+
+msgid "Unable to activate account."
+msgstr "Impossibile attivare l'account."
+
+msgid "Unable to activate user."
+msgstr "Impossibile attivare l'utente."
+
+msgid "Unable to add image."
+msgstr "Impossibile aggiungere l'immagine."
+
+msgid "Unable to add item to shopping cart."
+msgstr "Impossibile aggiungere un articolo al carrello."
+
+msgid "Unable to apply action."
+msgstr "Impossibile applicare l'azione."
+
+msgid "Unable to approve invitation."
+msgstr "Impossibile approvare l'invito."
+
+msgid "Unable to approve order."
+msgstr "Impossibile approvare l'ordine."
+
+msgid "Unable to approve order item."
+msgstr "Impossibile approvare l'articolo dell'ordine."
+
+msgid "Unable to attach volume."
+msgstr "Impossibile collegare il volume."
+
+msgid "Unable to attach volume to instance."
+msgstr "Impossibile collegare il volume all'istanza."
+
+msgid "Unable to authenticate using Mobile ID."
+msgstr "Impossibile eseguire l'autenticazione utilizzando Mobile ID."
+
+msgid "Unable to bootstrap application."
+msgstr "Impossibile avviare l'applicazione."
+
+msgid "Unable to cancel booking."
+msgstr "Impossibile annullare la prenotazione."
+
+msgid "Unable to cancel invitation."
+msgstr "Impossibile annullare l'invito."
+
+msgid "Unable to cancel order item."
+msgstr "Impossibile annullare l'articolo dell'ordine."
+
+msgid "Unable to cancel request."
+msgstr "Impossibile annullare la richiesta."
+
+msgid "Unable to change email."
+msgstr "Impossibile modificare l'e-mail."
+
+msgid "Unable to change flavor."
+msgstr "Impossibile cambiare sapore."
+
+msgid "Unable to close review."
+msgstr "Impossibile chiudere la revisione."
+
+msgid "Unable to confirm email."
+msgstr "Impossibile confermare l'e-mail."
+
+msgid "Unable to create OpenStack networks."
+msgstr "Impossibile creare reti OpenStack."
+
+msgid "Unable to create SQL database."
+msgstr "Impossibile creare il database SQL."
+
+msgid "Unable to create VM snapshot."
+msgstr "Impossibile creare una copia istantanea della macchina virtuale."
+
+msgid "Unable to create VM snapshot schedule."
+msgstr "Impossibile creare la pianificazione dello snapshot della macchina virtuale."
+
+msgid "Unable to create a FreeIPA profile."
+msgstr "Impossibile creare un profilo FreeIPA."
+
+msgid "Unable to create application."
+msgstr "Impossibile creare l'applicazione."
+
+msgid "Unable to create catalog."
+msgstr "Impossibile creare il catalogo."
+
+msgid "Unable to create disk."
+msgstr "Impossibile creare il disco."
+
+msgid "Unable to create horizontal pod autoscaler."
+msgstr "Impossibile creare l'autoscaler del pod orizzontale."
+
+msgid "Unable to create key."
+msgstr "Impossibile creare la chiave."
+
+msgid "Unable to create node."
+msgstr "Impossibile creare il nodo."
+
+msgid "Unable to create notification."
+msgstr "Impossibile creare una notifica."
+
+msgid "Unable to create notifications."
+msgstr "Impossibile creare notifiche."
+
+msgid "Unable to create offering."
+msgstr "Impossibile creare l'offerta."
+
+msgid "Unable to create payment."
+msgstr "Impossibile creare il pagamento."
+
+msgid "Unable to create payment profile."
+msgstr "Impossibile creare il profilo di pagamento."
+
+msgid "Unable to create port."
+msgstr "Impossibile creare la porta."
+
+msgid "Unable to create request."
+msgstr "Impossibile creare la richiesta."
+
+msgid "Unable to create security group."
+msgstr "Impossibile creare un gruppo di sicurezza."
+
+msgid "Unable to create snapshot schedule."
+msgstr "Impossibile creare la pianificazione dello snapshot."
+
+msgid "Unable to create subnet."
+msgstr "Impossibile creare subnet."
+
+msgid "Unable to create volume snapshot."
+msgstr "Impossibile creare una copia istantanea del volume."
+
+msgid "Unable to deactivate user."
+msgstr "Impossibile disattivare l'utente."
+
+msgid "Unable to delete attachment."
+msgstr "Impossibile eliminare l'allegato."
+
+msgid "Unable to delete catalog."
+msgstr "Impossibile eliminare il catalogo."
+
+msgid "Unable to delete instance."
+msgstr "Impossibile eliminare l'istanza."
+
+msgid "Unable to delete payment."
+msgstr "Impossibile eliminare il pagamento."
+
+msgid "Unable to delete resource."
+msgstr "Impossibile eliminare la risorsa."
+
+msgid "Unable to delete team member."
+msgstr "Impossibile eliminare il membro del team."
+
+msgid "Unable to destroy instance."
+msgstr "Impossibile distruggere l'istanza."
+
+msgid "Unable to disable FreeIPA profile."
+msgstr "Impossibile disabilitare il profilo FreeIPA."
+
+msgid "Unable to edit comment."
+msgstr "Impossibile modificare il commento."
+
+msgid "Unable to enable FreeIPA profile."
+msgstr "Impossibile abilitare il profilo FreeIPA."
+
+msgid "Unable to enable payment profile."
+msgstr "Impossibile abilitare il profilo di pagamento."
+
+msgid "Unable to extend disk."
+msgstr "Impossibile estendere il disco."
+
+msgid "Unable to extend volume."
+msgstr "Impossibile estendere il volume."
+
+msgid "Unable to fetch attachment."
+msgstr "Impossibile recuperare l'allegato."
+
+msgid "Unable to fetch comments."
+msgstr "Impossibile recuperare i commenti."
+
+msgid "Unable to fetch current user."
+msgstr "Impossibile recuperare l'utente corrente."
+
+msgid "Unable to fetch data."
+msgstr "Impossibile recuperare i dati."
+
+msgid "Unable to generate service provider API secret code."
+msgstr "Impossibile generare codice segreto dell'API del provider di servizi."
+
+msgid "Unable to get form's data."
+msgstr "Impossibile ottenere i dati del modulo."
+
+msgid "Unable to get order item."
+msgstr "Impossibile ottenere l'articolo dell'ordine."
+
+msgid "Unable to get service provider API secret code."
+msgstr "Impossibile ottenere il codice segreto dell'API del provider di servizi."
+
+msgid "Unable to grant permission."
+msgstr "Impossibile concedere l'autorizzazione."
+
+msgid "Unable to import YAML."
+msgstr "Impossibile importare YAML."
+
+msgid "Unable to import remote offering."
+msgstr "Impossibile importare l'offerta remota."
+
+msgid "Unable to initialize shopping cart."
+msgstr "Impossibile inizializzare il carrello."
+
+msgid "Unable to link instance."
+msgstr "Impossibile collegare l'istanza."
+
+msgid "Unable to link invoice to the payment."
+msgstr "Impossibile collegare la fattura al pagamento."
+
+msgid "Unable to load actions"
+msgstr "Impossibile caricare le azioni"
+
+msgid "Unable to load application template details."
+msgstr "Impossibile caricare i dettagli del modello di applicazione."
+
+msgid "Unable to load booked items."
+msgstr "Impossibile caricare gli articoli prenotati."
+
+msgid "Unable to load booking offerings."
+msgstr "Impossibile caricare le offerte di prenotazione."
+
+msgid "Unable to load category sections."
+msgstr "Impossibile caricare le sezioni delle categorie."
+
+msgid "Unable to load charts."
+msgstr "Impossibile caricare i grafici."
+
+msgid "Unable to load checklists."
+msgstr "Impossibile caricare le liste di controllo."
+
+msgid "Unable to load compliance overview."
+msgstr "Impossibile caricare la panoramica sulla conformità."
+
+msgid "Unable to load customer."
+msgstr "Impossibile caricare il cliente."
+
+msgid "Unable to load customer support satisfaction overall rating."
+msgstr "Impossibile caricare la valutazione complessiva della soddisfazione dell'assistenza clienti."
+
+msgid "Unable to load detail."
+msgstr "Impossibile caricare i dettagli."
+
+msgid "Unable to load editor"
+msgstr "Impossibile caricare l'editor"
+
+msgid "Unable to load events for this resource."
+msgstr "Impossibile caricare gli eventi per questa risorsa."
+
+msgid "Unable to load file."
+msgstr "Impossibile caricare il file."
+
+msgid "Unable to load financial overview."
+msgstr "Impossibile caricare la panoramica finanziaria."
+
+msgid "Unable to load form options."
+msgstr "Impossibile caricare le opzioni del modulo."
+
+msgid "Unable to load growth chart."
+msgstr "Impossibile caricare il grafico di crescita."
+
+msgid "Unable to load invoices"
+msgstr "Impossibile caricare le fatture"
+
+msgid "Unable to load locations."
+msgstr "Impossibile caricare le posizioni."
+
+msgid "Unable to load marketplace categories."
+msgstr "Impossibile caricare le categorie del marketplace."
+
+msgid "Unable to load marketplace category details"
+msgstr "Impossibile caricare i dettagli della categoria del marketplace"
+
+msgid "Unable to load marketplace offering details."
+msgstr "Impossibile caricare i dettagli dell'offerta del marketplace."
+
+msgid "Unable to load marketplace offerings."
+msgstr "Impossibile caricare le offerte del marketplace."
+
+msgid "Unable to load offering."
+msgstr "Impossibile caricare l'offerta."
+
+msgid "Unable to load offering cost chart."
+msgstr "Impossibile caricare il grafico dei costi dell'offerta."
+
+msgid "Unable to load offering details."
+msgstr "Impossibile caricare i dettagli dell'offerta."
+
+msgid "Unable to load offerings"
+msgstr "Impossibile caricare le offerte"
+
+msgid "Unable to load order details."
+msgstr "Impossibile caricare i dettagli dell'ordine."
+
+msgid "Unable to load organization resources."
+msgstr "Impossibile caricare le risorse dell'organizzazione."
+
+msgid "Unable to load organizations"
+msgstr "Impossibile caricare le organizzazioni"
+
+msgid "Unable to load pending orders."
+msgstr "Impossibile caricare gli ordini in sospeso."
+
+msgid "Unable to load plan details."
+msgstr "Impossibile caricare i dettagli del piano."
+
+msgid "Unable to load project resources."
+msgstr "Impossibile caricare le risorse del progetto."
+
+msgid "Unable to load project types."
+msgstr "Impossibile caricare i tipi di progetto."
+
+msgid "Unable to load provider details."
+msgstr "Impossibile caricare i dettagli del provider."
+
+msgid "Unable to load questions and answers."
+msgstr "Impossibile caricare domande e risposte."
+
+msgid "Unable to load resource."
+msgstr "Impossibile caricare la risorsa."
+
+msgid "Unable to load sections for comparison."
+msgstr "Impossibile caricare sezioni per il confronto."
+
+msgid "Unable to load service provider."
+msgstr "Impossibile caricare il provider di servizi."
+
+msgid "Unable to load service providers."
+msgstr "Impossibile caricare i provider di servizi."
+
+msgid "Unable to load tenant."
+msgstr "Impossibile caricare il tenant."
+
+msgid "Unable to load tenant data."
+msgstr "Impossibile caricare i dati del tenant."
+
+msgid "Unable to load user."
+msgstr "Impossibile caricare l'utente."
+
+msgid "Unable to load user monthly activity data."
+msgstr "Impossibile caricare i dati delle attività mensili dell'utente."
+
+msgid "Unable to login via SAML2 protocol."
+msgstr "Impossibile accedere tramite il protocollo SAML2."
+
+msgid "Unable to mark the invoice as paid."
+msgstr "Impossibile contrassegnare la fattura come pagata."
+
+msgid "Unable to open console."
+msgstr "Impossibile aprire la console."
+
+msgid "Unable to open console. Error message: {message}"
+msgstr "Impossibile aprire la console. Messaggio di errore: {message}"
+
+msgid "Unable to open console log"
+msgstr "Impossibile aprire il registro della console"
+
+msgid "Unable to perform review."
+msgstr "Impossibile eseguire la revisione."
 
 msgid "Update project details"
 msgstr "Update department details"
