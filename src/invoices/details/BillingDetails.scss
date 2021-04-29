@@ -1,0 +1,11 @@
+@media screen and (min-width: 992px) {
+  .invoice-details {
+    display: flex;
+    justify-content: center;
+  }
+
+  .invoice-details-content {
+    max-width: 900px;
+    width: 100%;
+  }
+}

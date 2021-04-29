@@ -16,6 +16,7 @@ export interface InvoiceItem {
   project_uuid?: string;
   project_name?: string;
   resource?: string;
+  resource_name?: string;
   resource_uuid?: string;
 }
 

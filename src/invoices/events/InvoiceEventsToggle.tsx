@@ -14,13 +14,15 @@ const InvoiceEventsDialog = lazyComponent(
   'InvoiceEventsDialog',
 );
 
-export const InvoiceEventsToggle: FunctionComponent<{ item }> = ({ item }) => {
+export const InvoiceEventsToggle: FunctionComponent<{ resource: string }> = ({
+  resource,
+}) => {
   const dispatch = useDispatch();
   const showEvents = () => {
     dispatch(
       openModalDialog(InvoiceEventsDialog, {
         resolve: {
-          item,
+          resource,
         },
         size: 'lg',
       }),

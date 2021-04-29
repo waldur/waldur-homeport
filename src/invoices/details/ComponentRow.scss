@@ -1,0 +1,32 @@
+.invoice-table {
+  tr {
+    td:first-child {
+      text-align: left;
+    }
+    td:not(first-child) {
+      text-align: right;
+    }
+    th:first-child {
+      text-align: left;
+    }
+    th:not(first-child) {
+      text-align: right;
+    }
+  }
+}
+
+.invoice-total > tbody > tr {
+  > td:first-child {
+    text-align: right;
+  }
+
+  > td {
+    border: 0 none;
+  }
+
+  > td:last-child {
+    border-bottom: 1px solid #dddddd;
+    text-align: right;
+    width: 15%;
+  }
+}
