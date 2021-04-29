@@ -1,8 +1,7 @@
+import { ENV } from '@waldur/configs/default';
 import { getEvents } from '@waldur/events/api';
 import eventsRegistry from '@waldur/events/registry';
 import { Event } from '@waldur/events/types';
-
-import { InvoiceItem } from '../types';
 
 import { InvoiceEvent } from './types';
 
@@ -40,10 +39,10 @@ const parseEvents = (events: Event[]): InvoiceEvent[] => {
   }));
 };
 
-export const loadEvents = async (item: InvoiceItem) => {
-  if (item.resource) {
+export const loadEvents = async (resource: string) => {
+  if (resource) {
     const events = await getEvents({
-      resource: item.resource,
+      scope: `${ENV.apiEndpoint}api/marketplace-resources/${resource}/`,
     });
     return parseEvents(events);
   } else {

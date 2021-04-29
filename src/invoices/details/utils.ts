@@ -5,54 +5,64 @@ import { PaymentProfile } from '@waldur/workspace/types';
 
 import { InvoiceItem } from '../types';
 
-export function getItemName(item: InvoiceItem) {
-  if (item.details) {
-    // eslint-disable-next-line no-unused-vars
-    const {
-      resource_name,
-      offering_name,
-      plan_name,
-      offering_component_name,
-    } = item.details;
-    if (
-      resource_name &&
-      offering_name &&
-      plan_name &&
-      offering_component_name
-    ) {
-      return `${resource_name} / ${offering_name} - ${offering_component_name} - ${plan_name}`;
-    }
-    return `${item.name}`;
-  }
-  return item.name;
-}
-
-const groupInvoiceSubItems = (items: InvoiceItem[], projects) => {
-  items.forEach((item) => {
-    if (!item.project_uuid) {
-      projects.default.items.push(item);
-    } else {
-      if (!projects[item.project_uuid]) {
-        projects[item.project_uuid] = {
-          items: [],
-          name: item.project_name,
-        };
-      }
-      projects[item.project_uuid].items.push(item);
-    }
-  });
-};
-
 export const groupInvoiceItems = (items: InvoiceItem[]) => {
-  const projects = {
-    default: {
-      items: [],
-      name: '',
-    },
-  };
-  groupInvoiceSubItems(items, projects);
-  return Object.keys(projects)
-    .map((key) => projects[key])
+  const projectsMap = items.reduce((map, item) => {
+    if (!item.project_uuid) {
+      return map;
+    }
+    return { ...map, [item.project_uuid]: item.project_name };
+  }, {});
+
+  const resourcesMap = items.reduce((map, item) => {
+    const resourceKey = item.resource_uuid || item.details.scope_uuid;
+    if (!resourceKey) {
+      return map;
+    }
+    return {
+      ...map,
+      [resourceKey]: {
+        name: item.resource_name || item.name,
+        uuid: resourceKey,
+        service_provider_name: item.details.service_provider_name,
+        offering_name: item.details.offering_name,
+        plan_name: item.details.plan_name,
+      },
+    };
+  }, {});
+
+  const itemsMap = items.reduce((map, item) => {
+    const projectKey = item.project_uuid || 'default';
+    const project = (map[projectKey] = map[projectKey] || {});
+    if (!project[item.resource_uuid]) {
+      project[item.resource_uuid] = [];
+    }
+    project[item.resource_uuid].push(item);
+    return map;
+  }, {});
+
+  return Object.keys(projectsMap)
+    .map((projectKey) => {
+      const resources = Object.keys(itemsMap[projectKey])
+        .map((resourceKey) => ({
+          ...resourcesMap[resourceKey],
+          items: itemsMap[projectKey][resourceKey],
+          total: itemsMap[projectKey][resourceKey].reduce(
+            (sum, item) => sum + parseFloat(item.total),
+            0,
+          ),
+          price: itemsMap[projectKey][resourceKey].reduce(
+            (sum, item) => sum + parseFloat(item.price),
+            0,
+          ),
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+      return {
+        name: projectsMap[projectKey],
+        resources,
+        total: resources.reduce((sum, item) => sum + item.total, 0),
+        price: resources.reduce((sum, item) => sum + item.price, 0),
+      };
+    })
     .sort((a, b) => a.name.localeCompare(b.name));
 };
 

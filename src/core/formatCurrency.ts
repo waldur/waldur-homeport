@@ -17,10 +17,11 @@ export const defaultCurrency = (value) => {
     return value;
   }
   let fractionSize = 2;
-  if (value !== 0 && Math.abs(value) < 0.01) {
+  if (typeof value === 'string') value = parseFloat(value);
+  if (value !== 0 && Math.abs(value) < 0.05) {
     fractionSize = 3;
   }
-  if (value !== 0 && Math.abs(value) < 0.001) {
+  if (value !== 0 && Math.abs(value) < 0.005) {
     fractionSize = 4;
   }
   return formatCurrency(value, ENV.currency, fractionSize);

@@ -695,7 +695,7 @@ msgstr ""
 msgid "Are you sure you would like to terminate resource {resourceName}?"
 msgstr ""
 
-#: src/invoices/details/InvoiceItemDetails.tsx
+#: src/invoices/details/ComponentRow.tsx
 #: src/marketplace/offerings/ArticleCodeField.tsx
 msgid "Article code"
 msgstr ""
@@ -960,6 +960,10 @@ msgstr ""
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 msgid "Billing period"
+msgstr ""
+
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "Billing periods"
 msgstr ""
 
 #: src/booking/marketplace.ts
@@ -1352,6 +1356,7 @@ msgstr ""
 msgid "Component #{index}"
 msgstr ""
 
+#: src/invoices/details/ResourceRow.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Component name"
@@ -1820,6 +1825,10 @@ msgstr ""
 
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Date of reporting"
+msgstr ""
+
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "Days"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/actions/DeactivateAction.tsx
@@ -2353,7 +2362,7 @@ msgstr ""
 msgid "End date of the agreement is"
 msgstr ""
 
-#: src/invoices/details/InvoiceItemDetails.tsx
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "End time"
 msgstr ""
 
@@ -2952,6 +2961,10 @@ msgstr ""
 
 #: src/slurm/SlurmForm.tsx
 msgid "Hostname or IP address of master node"
+msgstr ""
+
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "Hours"
 msgstr ""
 
 #: src/user/keys/help.js
@@ -3912,6 +3925,10 @@ msgstr ""
 msgid "Monthly invoices"
 msgstr ""
 
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "Months"
+msgstr ""
+
 #: src/invoices/events/InvoiceEventItem.tsx
 msgid "More info"
 msgstr ""
@@ -3976,6 +3993,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/digitalocean/digitalocean-droplet-config.ts
+#: src/invoices/details/ResourceRow.tsx
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
@@ -5143,6 +5161,7 @@ msgstr ""
 msgid "Plan does not have limit"
 msgstr ""
 
+#: src/invoices/details/ResourceRow.tsx
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/create/PlanSummary.tsx
 msgid "Plan name"
@@ -5351,6 +5370,8 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
+#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
@@ -5533,6 +5554,11 @@ msgstr ""
 msgid "Project name"
 msgstr ""
 
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceDetails.tsx
+msgid "Project price"
+msgstr ""
+
 #: src/project/ProjectRemoveDialog.tsx
 msgid "Project removal"
 msgstr ""
@@ -5712,7 +5738,8 @@ msgid "Put this into ~/.kube/config:"
 msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
-#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+#: src/invoices/details/ResourceRow.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
@@ -6933,7 +6960,7 @@ msgid "Service manager"
 msgstr ""
 
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/invoices/details/InvoiceItemDetails.tsx
+#: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/map/LeafletMap.tsx
 #: src/marketplace/details/OrderSummary.tsx
@@ -7232,7 +7259,7 @@ msgstr ""
 msgid "Start day of accounting"
 msgstr ""
 
-#: src/invoices/details/InvoiceItemDetails.tsx
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "Start time"
 msgstr ""
 
@@ -7552,7 +7579,7 @@ msgstr ""
 msgid "Targets"
 msgstr ""
 
-#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 msgid "Tax"
@@ -7966,6 +7993,7 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
 #: src/invoices/growth/utils.ts
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
@@ -8009,7 +8037,6 @@ msgid "Total paid"
 msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
-#: src/invoices/details/InvoiceDetails.tsx
 msgid "Total price"
 msgstr ""
 
@@ -8026,7 +8053,7 @@ msgstr ""
 msgid "Total: {total}"
 msgstr ""
 
-#: src/invoices/details/InvoiceItemDetails.tsx
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
 
@@ -8936,14 +8963,14 @@ msgid "Unique ID of a resource within management plugin"
 msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
-#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/details/ResourceRow.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Unit"
 msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
-#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/details/ResourceRow.tsx
 msgid "Unit price"
 msgstr ""
 

@@ -30,6 +30,8 @@ import { DownloadInvoiceButton } from './DownloadInvoiceButton';
 import { InvoiceDetails } from './InvoiceDetails';
 import { PrintInvoiceButton } from './PrintInvoiceButton';
 
+import './BillingDetails.scss';
+
 const getBreadcrumbs = (customer, invoice): BreadcrumbItem[] => {
   return [
     {
