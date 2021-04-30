@@ -1,3 +1,5 @@
+import { Quota } from '@waldur/workspace/types';
+
 export type ResourceState =
   | 'OK'
   | 'Erred'
@@ -25,6 +27,7 @@ export interface BaseResource {
   marketplace_resource_uuid?: string;
   marketplace_category_uuid?: string;
   project_uuid?: string;
+  quotas?: Quota[];
 }
 
 export interface Resource extends BaseResource {
