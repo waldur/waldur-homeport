@@ -13,7 +13,7 @@ msgid "(VAT is not included)"
 msgstr ""
 
 #: src/issues/feedback/utils.ts
-msgid "0 - Very negative"
+msgid "1 - Very negative"
 msgstr ""
 
 #: src/issues/feedback/utils.ts
