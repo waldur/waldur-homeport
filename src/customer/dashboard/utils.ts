@@ -53,7 +53,7 @@ export const getDistinctColorsFromEvents = (events): Legend[] => {
     flags[events[i].color] = true;
     output.push({
       color: events[i].color,
-      name: events[i].name,
+      name: events[i].offering_name,
     });
   }
   return output;
