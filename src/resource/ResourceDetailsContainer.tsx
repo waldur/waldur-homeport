@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import equal from 'fast-deep-equal';
 import { useState, useEffect, FunctionComponent } from 'react';
 import { useAsyncFn, useEffectOnce, useNetwork } from 'react-use';
 
@@ -39,7 +40,9 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
   useEffect(() => {
     if (
       asyncResult.value &&
-      (!resource || resource.modified !== asyncResult.value.modified)
+      (!resource ||
+        resource.modified !== asyncResult.value.modified ||
+        !equal(resource.quotas, asyncResult.value.quotas))
     ) {
       setResource(asyncResult.value);
     }
