@@ -10,6 +10,5 @@ export const feedbackOptions = () => [
   { value: 4, label: '4' },
   { value: 3, label: '3' },
   { value: 2, label: '2' },
-  { value: 1, label: '1' },
-  { value: 0, label: translate('0 - Very negative') },
+  { value: 1, label: translate('1 - Very negative') },
 ];
