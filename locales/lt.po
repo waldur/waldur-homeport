@@ -11,11 +11,11 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "\"{trimmed}\" viršija {max_len} simbolių FQDN ribą"
 
-msgid "0 - Very negative"
-msgstr "0 - Labai neigiamas"
-
 msgid "10 - Very positive"
 msgstr "10 - Labai teigiamas"
+
+msgid "1 - Very negative"
+msgstr "1 - Labai neigiamas"
 
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Paslaugų teikimo sąlygos</Link> buvo priimti <Date></Date>"
@@ -587,6 +587,9 @@ msgstr "Įgalintas atsiskaitymas"
 msgid "Billing period"
 msgstr "Atsiskaitymo laikotarpis"
 
+msgid "Billing periods"
+msgstr "Atsiskaitymo laikotarpiai"
+
 msgid "Booking"
 msgstr "Užsakymas"
 
@@ -1099,6 +1102,9 @@ msgstr "Prisijungimo data"
 
 msgid "Date of reporting"
 msgstr "Ataskaitų teikimo data"
+
+msgid "Days"
+msgstr "Dienos"
 
 msgid "Deactivate"
 msgstr "Išjungti"
@@ -1805,6 +1811,9 @@ msgstr "Šliuzo mazgo pagrindinio kompiuterio vardas arba IP adresas"
 msgid "Hostname or IP address of master node"
 msgstr "Pagrindinio mazgo kompiuterio vardas arba IP adresas"
 
+msgid "Hours"
+msgstr "Valandos"
+
 msgid "How to generate SSH key"
 msgstr "Kaip generuoti SSH raktą"
 
@@ -2443,6 +2452,9 @@ msgstr "Mėnesio kaina"
 
 msgid "Monthly invoices"
 msgstr "Mėnesinės sąskaitos faktūros"
+
+msgid "Months"
+msgstr "Mėnesiai"
 
 msgid "More info"
 msgstr "Daugiau informacijos"
@@ -3421,6 +3433,9 @@ msgstr "Projekto narys"
 
 msgid "Project name"
 msgstr "Projekto pavadinimas"
+
+msgid "Project price"
+msgstr "Projekto kaina"
 
 msgid "Project removal"
 msgstr "Projekto pašalinimas"

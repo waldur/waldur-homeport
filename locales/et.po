@@ -11,9 +11,6 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "„{trimmed}” ületab {max_len} märgi FQDN piiri"
 
-msgid "0 - Very negative"
-msgstr "0 - Väga negatiivne"
-
 msgid "10 - Very positive"
 msgstr "10 - Väga positiivne"
 

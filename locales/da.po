@@ -11,11 +11,11 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "\"{trimmed}\" overskrider grænsen for {max_len} tegn i FQDN"
 
-msgid "0 - Very negative"
-msgstr "0 - Meget negativ"
-
 msgid "10 - Very positive"
 msgstr "10 - Meget positiv"
+
+msgid "1 - Very negative"
+msgstr "1 - Meget negativ"
 
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Servicevilkår</Link> er blevet accepteret den <Date></Date>"
@@ -587,6 +587,9 @@ msgstr "Fakturering aktiveret"
 msgid "Billing period"
 msgstr "Faktureringsperiode"
 
+msgid "Billing periods"
+msgstr "Faktureringsperioder"
+
 msgid "Booking"
 msgstr "Booking"
 
@@ -1099,6 +1102,9 @@ msgstr "Dato tilsluttet"
 
 msgid "Date of reporting"
 msgstr "Dato for indberetning"
+
+msgid "Days"
+msgstr "Dage"
 
 msgid "Deactivate"
 msgstr "Deaktiver"
@@ -1805,6 +1811,9 @@ msgstr "Værtsnavn eller IP-adresse på gateway-node"
 msgid "Hostname or IP address of master node"
 msgstr "Værtsnavn eller IP-adresse på masternoden"
 
+msgid "Hours"
+msgstr "Timer"
+
 msgid "How to generate SSH key"
 msgstr "Sådan genereres SSH-nøgle"
 
@@ -2443,6 +2452,9 @@ msgstr "Månedlige omkostninger"
 
 msgid "Monthly invoices"
 msgstr "Månedlige fakturaer"
+
+msgid "Months"
+msgstr "Måneder"
 
 msgid "More info"
 msgstr "Mere oplysninger"
@@ -3421,6 +3433,9 @@ msgstr "Projektmedlem"
 
 msgid "Project name"
 msgstr "Projektnavn"
+
+msgid "Project price"
+msgstr "Projektpris"
 
 msgid "Project removal"
 msgstr "Fjernelse af projekt"

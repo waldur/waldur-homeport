@@ -11,11 +11,11 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "\"{trimmed}\" dépasse la limite de {max_len} caractères du FQDN"
 
-msgid "0 - Very negative"
-msgstr "0 - Très négatif"
-
 msgid "10 - Very positive"
 msgstr "10 - Très positif"
+
+msgid "1 - Very negative"
+msgstr "1 - Très négatif"
 
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Conditions de service</Link> ont été acceptés le <Date></Date>"
@@ -587,6 +587,9 @@ msgstr "Facturation activée"
 msgid "Billing period"
 msgstr "Période de facturation"
 
+msgid "Billing periods"
+msgstr "Périodes de facturation"
+
 msgid "Booking"
 msgstr "Réservation"
 
@@ -1099,6 +1102,9 @@ msgstr "Date d'adhésion"
 
 msgid "Date of reporting"
 msgstr "Date du rapport"
+
+msgid "Days"
+msgstr "Jours"
 
 msgid "Deactivate"
 msgstr "Désactiver"
@@ -1805,6 +1811,9 @@ msgstr "Nom d'hôte ou adresse IP du noeud de la passerelle"
 msgid "Hostname or IP address of master node"
 msgstr "Nom d'hôte ou adresse IP du noeud maître"
 
+msgid "Hours"
+msgstr "Heures"
+
 msgid "How to generate SSH key"
 msgstr "Comment générer une clé SSH"
 
@@ -2443,6 +2452,9 @@ msgstr "Coût mensuel"
 
 msgid "Monthly invoices"
 msgstr "Factures mensuelles"
+
+msgid "Months"
+msgstr "Mois"
 
 msgid "More info"
 msgstr "Plus d'informations"
@@ -3421,6 +3433,9 @@ msgstr "Membre du projet"
 
 msgid "Project name"
 msgstr "Nom du projet"
+
+msgid "Project price"
+msgstr "Prix du projet"
 
 msgid "Project removal"
 msgstr "Suppression de projet"

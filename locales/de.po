@@ -11,11 +11,11 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "\"{trimmed}\" überschreitet das {max_len} FQDN-Limit von Zeichen"
 
-msgid "0 - Very negative"
-msgstr "0 - Sehr negativ"
-
 msgid "10 - Very positive"
 msgstr "10 - Sehr positiv"
+
+msgid "1 - Very negative"
+msgstr "1 - Sehr negativ"
 
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Nutzungsbedingungen</Link> wurden am <Date></Date> akzeptiert"
@@ -587,6 +587,9 @@ msgstr "Fakturierung aktiviert"
 msgid "Billing period"
 msgstr "Abrechnungszeitraum"
 
+msgid "Billing periods"
+msgstr "Abrechnungszeiträume"
+
 msgid "Booking"
 msgstr "Buchung"
 
@@ -1099,6 +1102,9 @@ msgstr "Datum verbunden"
 
 msgid "Date of reporting"
 msgstr "Datum der Berichterstattung"
+
+msgid "Days"
+msgstr "Tage"
 
 msgid "Deactivate"
 msgstr "Deaktivieren"
@@ -1805,6 +1811,9 @@ msgstr "Hostname oder IP-Adresse des Gateway-Knotens"
 msgid "Hostname or IP address of master node"
 msgstr "Hostname oder IP-Adresse des Master-Knotens"
 
+msgid "Hours"
+msgstr "Stunden"
+
 msgid "How to generate SSH key"
 msgstr "Wie man einen SSH-Schlüssel generiert"
 
@@ -2443,6 +2452,9 @@ msgstr "Monatliche Kosten"
 
 msgid "Monthly invoices"
 msgstr "Monatliche Rechnungen"
+
+msgid "Months"
+msgstr "Monate"
 
 msgid "More info"
 msgstr "Mehr Info"
@@ -3421,6 +3433,9 @@ msgstr "Projekt-Mitglied"
 
 msgid "Project name"
 msgstr "Department name"
+
+msgid "Project price"
+msgstr "Projektpreis"
 
 msgid "Project removal"
 msgstr "Department removal"
