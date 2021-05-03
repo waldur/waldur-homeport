@@ -1,0 +1,1548 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Localazy (https://localazy.com)\n"
+"Project-Id-Version: waldur-homeport\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr "\"{trimmed}\" překračuje limit {max_len} znaků FQDN"
+
+msgid "10 - Very positive"
+msgstr "10 - Velmi pozitivní"
+
+msgid "1 - Very negative"
+msgstr "1 - Velmi negativní"
+
+msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
+msgstr "<Link>Smluvní podmínky</Link> byly přijaty dne <Date></Date>"
+
+msgid "API URL"
+msgstr "API URL"
+
+msgid "API secret code:"
+msgstr "Tajný kód pro API:"
+
+msgid "API token lifetime"
+msgstr "Životnost API tokenu"
+
+msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
+msgstr "Minimální očekávaná konfigurace pracovníka je 4 vCPU a 4 GB RAM."
+
+msgid "A one-time fee applied on activation."
+msgstr "Při aktivaci je účtován jednorázový poplatek."
+
+msgid "A profile has been created."
+msgstr "Profil byl vytvořen."
+
+msgid "Accept booking"
+msgstr "Přijmout rezervaci"
+
+msgid "Access subnets"
+msgstr "Přístup k podsítím"
+
+msgid "Accessible to all customers."
+msgstr "Přístupné všem zákazníkům."
+
+msgid "Account activation"
+msgstr "Aktivace účtu"
+
+msgid "Account has been activated."
+msgstr "Účet byl aktivován."
+
+msgid "Account removal"
+msgstr "Odstranění účtu"
+
+msgid "Accounting period"
+msgstr "Účetní období"
+
+msgid "Accounting plans"
+msgstr "Účetní plány"
+
+msgid "Accounting record"
+msgstr "Účetní záznam"
+
+msgid "Accounting records"
+msgstr "Účetní záznamy"
+
+msgid "Accounting running"
+msgstr "Vedení účetnictví"
+
+msgid "Accounting start date"
+msgstr "Datum zahájení účtování"
+
+msgid "Accounting type"
+msgstr "Typ účetnictví"
+
+msgid "Action has been applied."
+msgstr "Akce byla uplatněna."
+
+msgid "Activation price"
+msgstr "Aktivační cena"
+
+msgid "Active count"
+msgstr "Aktivní počet"
+
+msgid "Active user will be able to login into the portal."
+msgstr "Aktivní uživatel se bude moci přihlásit do portálu."
+
+msgid "Add SSH key"
+msgstr "Přidat SSH klíč"
+
+msgid "Add component"
+msgstr "Přidat komponentu"
+
+msgid "Add data volume"
+msgstr "Přidání datového svazku"
+
+msgid "Add environment variable"
+msgstr "Přidat proměnnou prostředí"
+
+msgid "Add key"
+msgstr "Přidat klíč"
+
+msgid "Add new offering"
+msgstr "Přidat novou nabídku"
+
+msgid "Add new organization"
+msgstr "Přidat novou organizaci"
+
+msgid "Add new project"
+msgstr "Přidat nový projekt"
+
+msgid "Add offering"
+msgstr "Přidat nabídku"
+
+msgid "Add pair"
+msgstr "Přidat pár"
+
+msgid "Add payment profile"
+msgstr "Přidat platební profil"
+
+msgid "Add plan"
+msgstr "Přidat plán"
+
+msgid "Add project member"
+msgstr "Přidat člena projektu"
+
+msgid "Add resource"
+msgstr "Přidat zdroj"
+
+msgid "Add security group"
+msgstr "Přidat skupinu zabezpečení"
+
+msgid "Add team member"
+msgstr "Přidat člena týmu"
+
+msgid "Add to a new namespace"
+msgstr "Přidat do nového jmenného prostoru"
+
+msgid "Add to comparison"
+msgstr "Přidat do srovnání"
+
+msgid "Add user input field"
+msgstr "Přidat vstupní pole uživatele"
+
+msgid "Additional data that will be added to instance on provisioning."
+msgstr "Další data, která budou přidána do instance při vytváření."
+
+msgid "Additional data that will be added to virtual machine on provisioning."
+msgstr "Další data, která budou přidána do virtuálního počítače při vytváření."
+
+msgid "Additional space to apply to storage quota to be used by snapshots."
+msgstr "Dodatečné místo aplikované na kvótu úložiště používaného pro snímky."
+
+msgid "Additionally service provider can charge for usage of the following components"
+msgstr "Poskytovatel služeb může navíc účtovat poplatky za použití následujících komponent"
+
+msgid "Admin username"
+msgstr "Uživatelské jméno správce"
+
+msgid "Affected resource"
+msgstr "Ovlivněný zdroj"
+
+msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
+msgstr "Po obnovení tajného kódu pro API nebude možné odeslat statistiky používání se starým klíčem."
+
+msgid "Agree with ToS"
+msgstr "Souhlasím s SP"
+
+msgid "Agreement number"
+msgstr "Číslo smlouvy"
+
+msgid "All resources have been imported."
+msgstr "Všechny zdroje byly importovány."
+
+msgid "Allocation description"
+msgstr "Popis alokace"
+
+msgid "Allocation name"
+msgstr "Název alokace"
+
+msgid "Allocation pools"
+msgstr "Alokační fondy"
+
+msgid "Allow bookings to be scheduled at weekends"
+msgstr "Povolit plánování rezervací o víkendech"
+
+msgid "Allow to enable/disable component only"
+msgstr "Umožnit povolení/zakázání pouze komponenty"
+
+msgid "Allowed address pairs update was scheduled."
+msgstr "Byla naplánována aktualizace povolených párů adres."
+
+msgid "An error occurred on project removal."
+msgstr "Při odstraňování projektu došlo k chybě."
+
+msgid "Answers have been submitted"
+msgstr "Odpovědi byly odeslány"
+
+msgid "Application catalogues"
+msgstr "Katalogy aplikací"
+
+msgid "Application details"
+msgstr "Podrobnosti o aplikaci"
+
+msgid "Application has been created."
+msgstr "Aplikace byla vytvořena."
+
+msgid "Application templates"
+msgstr "Šablony aplikací"
+
+msgid "Approve payment"
+msgstr "Schválit platbu"
+
+msgid "Approved at"
+msgstr "Schváleno v"
+
+msgid "Archived plans"
+msgstr "Archivované plány"
+
+msgid "Are you sure you want to accept a {name}?"
+msgstr "Opravdu chcete přijmout {name}?"
+
+msgid "Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
+msgstr "Opravdu chcete odstranit {name} {resourceType} v chybovém stavu? Pokud se tak rozhodnete, bude proveden pokus o vyčištění."
+
+msgid "Are you sure you want to delete the payment?"
+msgstr "Opravdu chcete odstranit platbu?"
+
+msgid "Are you sure you want to delete the payment profile?"
+msgstr "Opravdu chcete odstranit platební profil?"
+
+msgid "Are you sure you want to delete this {resourceType}?"
+msgstr "Opravdu chcete smazat tento {resourceType}?"
+
+msgid "Are you sure you want to revoke this permission?"
+msgstr "Opravdu chcete toto oprávnění zrušit?"
+
+msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
+msgstr "Opravdu chcete odstranit katalog Rancher {catalog}?"
+
+msgid "Are you sure you would like to delete project {projectName}?"
+msgstr "Opravdu chcete odstranit projekt {projectName}?"
+
+msgid "Are you sure you would like to delete the hook?"
+msgstr "Opravdu chcete odstranit hook?"
+
+msgid "Are you sure you would like to delete the key?"
+msgstr "Opravdu chcete klíč odstranit?"
+
+msgid "Are you sure you would like to terminate resource {resourceName}?"
+msgstr "Opravdu chcete ukončit zdroj {resourceName}?"
+
+msgid "Article code"
+msgstr "Kód zboží"
+
+msgid "At least one plan must be entered"
+msgstr "Musí být zadán alespoň jeden plán"
+
+msgid "Attach OpenStack Volume to Instance"
+msgstr "Připojit svazek OpenStack k instanci"
+
+msgid "Attach has been scheduled."
+msgstr "Připojení bylo naplánováno."
+
+msgid "Attach volume"
+msgstr "Připojit svazek"
+
+msgid "Attached to"
+msgstr "Připojeno k"
+
+msgid "Attributes are invalid."
+msgstr "Atributy jsou neplatné."
+
+msgid "Attributes filter"
+msgstr "Filtr atributů"
+
+msgid "Audit log"
+msgstr "Protokol auditu"
+
+msgid "Authenticate using Mobile ID"
+msgstr "Ověření pomocí Mobile ID"
+
+msgid "Authentication events"
+msgstr "Události ověřování"
+
+msgid "Authentication token"
+msgstr "Ověřovací token"
+
+msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
+msgstr "Ověřování pomocí Mobile ID bylo zrušeno uživatelem nebo vypršel časový limit. Podrobnosti:"
+
+msgid "Authorized personnel"
+msgstr "Oprávněný personál"
+
+msgid "Auto-assign floating IP"
+msgstr "Automatické přiřazení plovoucí IP"
+
+msgid "Auto approve in service provider projects"
+msgstr "Automatické schvalování v projektech poskytovatele služeb"
+
+msgid "Availability zone"
+msgstr "Zóna dostupnosti"
+
+msgid "Available quota usage: {usage}"
+msgstr "Využití dostupné kvóty: {usage}"
+
+msgid "Average of all checklists"
+msgstr "Průměr všech kontrolních seznamů"
+
+msgid "Average utilization"
+msgstr "Průměrné využití"
+
+msgid "Azure Active Directory Application Secret"
+msgstr "Tajný klíč aplikace Azure Active Directory"
+
+msgid "Azure PostgreSQL database server"
+msgstr "Databázový server Azure PostgreSQL"
+
+msgid "Azure Virtual Machine"
+msgstr "Virtuální počítač Azure"
+
+msgid "Azure provider"
+msgstr "Poskytovatel Azure"
+
+msgid "Back to organization"
+msgstr "Zpět na organizaci"
+
+msgid "Back to personal dashboard"
+msgstr "Zpět na osobní řídicí panel"
+
+msgid "Back to shopping"
+msgstr "Zpět k nakupování"
+
+msgid "Backend ID"
+msgstr "Backend ID"
+
+msgid "Backend ID has been successfully set."
+msgstr "Backend ID bylo úspěšně nastaveno."
+
+msgid "Base image name"
+msgstr "Název základního obrázku"
+
+msgid "Batch RAM"
+msgstr "Dávková paměť RAM"
+
+msgid "Batch block storage size"
+msgstr "Velikost úložiště dávkového bloku"
+
+msgid "Batch processing documentation"
+msgstr "Dokumentace pro dávkové zpracování"
+
+msgid "Batch vCPU"
+msgstr "Dávkové vCPU"
+
+msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
+msgstr "Staňte se zákazníkem našeho portálu. Poskytujte IT služby z Marketplace a spravujte svůj tým z jednoho místa."
+
+msgid "Billing enabled"
+msgstr "Fakturace povolena"
+
+msgid "Billing period"
+msgstr "Fakturační období"
+
+msgid "Booking description"
+msgstr "Popis rezervace"
+
+msgid "Booking has been accepted."
+msgstr "Rezervace byla přijata."
+
+msgid "Booking has been cancelled."
+msgstr "Rezervace byla zrušena."
+
+msgid "Booking is not allowed to overlap other bookings."
+msgstr "Rezervace se nesmí překrývat s jinými rezervacemi."
+
+msgid "Booking management"
+msgstr "Správa rezervací"
+
+msgid "Browse image"
+msgstr "Procházet obrázek"
+
+msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
+msgstr "Odesláním formuláře souhlasíte se <Link>Smluvními podmínkami</Link>."
+
+msgid "CIDR"
+msgstr "CIDR"
+
+msgid "CPU limit (hours)"
+msgstr "Limit CPU (hodiny)"
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "Caller"
+msgstr "Volající"
+
+msgid "Catalog URL"
+msgstr "URL katalogu"
+
+msgid "Catalog has been created."
+msgstr "Katalog byl vytvořen."
+
+msgid "Catalog has been deleted."
+msgstr "Katalog byl odstraněn."
+
+msgid "Catalogues"
+msgstr "Katalogy"
+
+msgid "Category is invalid."
+msgstr "Kategorie je neplatná."
+
+msgid "Challenge code"
+msgstr "Kód výzvy"
+
+msgid "Change Request"
+msgstr "Požadavek na změnu"
+
+msgid "Change flavor"
+msgstr "Změna příchuti"
+
+msgid "Change limits"
+msgstr "Změna limitů"
+
+msgid "Change request - client’s request to perform a generic modification of data or service."
+msgstr "Požadavek na změnu - požadavek klienta na provedení obecné změny dat nebo služby."
+
+msgid "Change resource limits"
+msgstr "Změna limitů zdrojů"
+
+msgid "Change resource plan"
+msgstr "Změna plánu zdrojů"
+
+msgid "Change user email"
+msgstr "Změna e-mailu uživatele"
+
+msgid "Changing flavor"
+msgstr "Změna příchuti"
+
+msgid "Charge for usage-based component is based on user-requested limit."
+msgstr "Poplatek za usage-based komponentu je založen na limitu požadovaném uživatelem."
+
+msgid "Charset"
+msgstr "Znaková sada"
+
+msgid "Checklist setup"
+msgstr "Nastavení kontrolního seznamu"
+
+msgid "Choices as comma-separated list"
+msgstr "Volby jako seznam oddělený čárkami"
+
+msgid "Civil number"
+msgstr "Občanské číslo"
+
+msgid "Client organization"
+msgstr "Organizace klienta"
+
+msgid "Client project"
+msgstr "Projekt klienta"
+
+msgid "Cloud RAM"
+msgstr "Cloud RAM"
+
+msgid "Cloud block storage size"
+msgstr "Velikost úložiště cloudových bloků"
+
+msgid "Cloud init template"
+msgstr "Cloud init šablona"
+
+msgid "Cloud vCPU"
+msgstr "Cloud vCPU"
+
+msgid "Cluster IP"
+msgstr "Cluster IP"
+
+msgid "Cluster description"
+msgstr "Popis clusteru"
+
+msgid "Cluster name"
+msgstr "Název clusteru"
+
+msgid "Cluster roles"
+msgstr "Role clusteru"
+
+msgid "Code is too short."
+msgstr "Kód je příliš krátký."
+
+msgid "Code should consist of latin symbols or numbers."
+msgstr "Kód by měl sestávat z latinských symbolů nebo čísel."
+
+msgid "Company data"
+msgstr "Údaje o společnosti"
+
+msgid "Compare items"
+msgstr "Porovnat položky"
+
+msgid "Competence"
+msgstr "Kompetence"
+
+msgid "Components are invalid."
+msgstr "Komponenty jsou neplatné."
+
+msgid "Compute generation"
+msgstr "Generování výpočtů"
+
+msgid "Configuration options"
+msgstr "Možnosti konfigurace"
+
+msgid "Confirmation mail has been sent. Please check your inbox!"
+msgstr "Potvrzující e-mail byl odeslán. Zkontrolujte prosím vaši doručenou poštu!"
+
+msgid "Confirmation message has been updated successfully."
+msgstr "Potvrzovací zpráva byla úspěšně aktualizována."
+
+msgid "Confirmation notification template"
+msgstr "Šablona potvrzovacího oznámení"
+
+msgid "Confirming that data is correct"
+msgstr "Potvrzení správnosti údajů"
+
+msgid "Connected subnets"
+msgstr "Připojené podsítě"
+
+msgid "Connection details"
+msgstr "Podrobnosti o připojení"
+
+msgid "Contact phone"
+msgstr "Kontaktní telefon"
+
+msgid "Contract sum"
+msgstr "Smluvní částka"
+
+msgid "Contract sum is"
+msgstr "Smluvní částka je"
+
+msgid "Control plane"
+msgstr "Řídicí rovina"
+
+msgid "Could not create organization"
+msgstr "Nelze vytvořit organizaci"
+
+msgid "Create Network adapter"
+msgstr "Vytvořit Network adapter"
+
+msgid "Create SQL database in PostgreSQL server"
+msgstr "Vytvořit databázi SQL na serveru PostgreSQL"
+
+msgid "Create VM snapshot for OpenStack instance"
+msgstr "Vytvořit snímek virtuálního počítače pro instanci OpenStack"
+
+msgid "Create VM snapshot schedule for OpenStack instance"
+msgstr "Vytvořit plán snímků virtuálního počítače pro instanci OpenStack"
+
+msgid "Create an availability"
+msgstr "Vytvořit dostupnost"
+
+msgid "Create application"
+msgstr "Vytvořit aplikaci"
+
+msgid "Create catalog"
+msgstr "Vytvořit katalog"
+
+msgid "Create disk"
+msgstr "Vytvořit disk"
+
+msgid "Create node"
+msgstr "Vytvořit uzel"
+
+msgid "Create organization"
+msgstr "Vytvořit organizaci"
+
+msgid "Create port"
+msgstr "Vytvořit port"
+
+msgid "Create request"
+msgstr "Vytvořit požadavek"
+
+msgid "Create snapshot for OpenStack volume"
+msgstr "Vytvořit snímek pro svazek OpenStack"
+
+msgid "Create snapshot schedule for OpenStack volume"
+msgstr "Vytvořit plán snímků pro svazek OpenStack"
+
+msgid "Create subnet"
+msgstr "Vytvořit podsíť"
+
+msgid "Create your first project"
+msgstr "Vytvořte svůj první projekt"
+
+msgid "Created a new payment for {customer_link}."
+msgstr "Byla vytvořena nová platba pro {customer_link}."
+
+msgid "Creating a backup schedule"
+msgstr "Vytváření plánu zálohování"
+
+msgid "Creating a floating IP"
+msgstr "Vytváření plovoucí IP adresy"
+
+msgid "Creating a new network"
+msgstr "Vytváření nové sítě"
+
+msgid "Creating a security group"
+msgstr "Vytváření skupiny zabezpečení"
+
+msgid "Creating a subnet"
+msgstr "Vytváření podsítě"
+
+msgid "Creating snapshot schedule"
+msgstr "Vytváření plánu snímků"
+
+msgid "Current API token"
+msgstr "Aktuální token API"
+
+msgid "Current cost"
+msgstr "Aktuální náklady"
+
+msgid "Current flavor"
+msgstr "Aktuální příchuť"
+
+msgid "Current limit"
+msgstr "Aktuální limit"
+
+msgid "Current price per month"
+msgstr "Aktuální cena za měsíc"
+
+msgid "Current replicas"
+msgstr "Aktuální repliky"
+
+msgid "Current type"
+msgstr "Aktuální typ"
+
+msgid "Customer support satisfaction overall rating"
+msgstr "Celkové hodnocení spokojenosti zákaznické podpory"
+
+msgid "DNS name servers"
+msgstr "Jmenné servery DNS"
+
+msgid "Daily available booking time range"
+msgstr "Denně dostupný časový rozsah rezervací"
+
+msgid "Data volume #{index}"
+msgstr "Datový svazek #{index}"
+
+msgid "Data volume should have at least {size} GB."
+msgstr "Datový svazek by měl mít alespoň {size} GB."
+
+msgid "Data volume size:"
+msgstr "Velikost datového svazku:"
+
+msgid "Data volume type"
+msgstr "Typ datového svazku"
+
+msgid "Datacite DOI"
+msgstr "Datacite DOI"
+
+msgid "Datastore"
+msgstr "Datové úložiště"
+
+msgid "Date and time of incident"
+msgstr "Datum a čas incidentu"
+
+msgid "Date of reporting"
+msgstr "Datum hlášení"
+
+msgid "Default SLURM account for user"
+msgstr "Výchozí účet SLURM pro uživatele"
+
+msgid "Default cluster label"
+msgstr "Výchozí označení clusteru"
+
+msgid "Default tax percent"
+msgstr "Výchozí procento daně"
+
+msgid "Delete catalog"
+msgstr "Odstranit katalog"
+
+msgid "Delete volumes"
+msgstr "Odstranit svazky"
+
+msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
+msgstr "Odstranění serveru PostgreSQL způsobí odstranění všech databází vytvořených v rámci serveru."
+
+msgid "Desired replicas"
+msgstr "Požadované repliky"
+
+msgid "Destination URL"
+msgstr "Cílová adresa URL"
+
+msgid "Destination (CIDR)"
+msgstr "Destinace (CIDR)"
+
+msgid "Destroy resource"
+msgstr "Zničit zdroj"
+
+msgid "Destroy {name} instance"
+msgstr "Zničit instanci {name}"
+
+msgid "Destroying"
+msgstr "Ničení"
+
+msgid "Detach"
+msgstr "Odpojit"
+
+msgid "Detaching"
+msgstr "Odpojení"
+
+msgid "Devops-friendly offering"
+msgstr "Devops-friendly nabídka"
+
+msgid "DigitalOcean provider"
+msgstr "Poskytovatel DigitalOcean"
+
+msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
+msgstr "Zakázat profil ve FreeIPA. Zakázané profily nejsou povoleny pro přihlášení do systémů Linux"
+
+msgid "Disable data volume"
+msgstr "Zakázat datový svazek"
+
+msgid "Disable profile"
+msgstr "Zakázat profil"
+
+msgid "Disk extension has been scheduled."
+msgstr "Rozšíření disku bylo naplánováno."
+
+msgid "Disk has been created."
+msgstr "Disk byl vytvořen."
+
+msgid "Disks"
+msgstr "Disky"
+
+msgid "Division type"
+msgstr "Typ rozdělení"
+
+msgid "Do not configure a gateway for this subnet"
+msgstr "Nekonfigurujte bránu pro tuto podsíť."
+
+msgid "Do not have an account?"
+msgstr "Nemáte účet?"
+
+msgid "Do you really want to delete comment?"
+msgstr "Opravdu chcete smazat komentář?"
+
+msgid "Do you want to unlink instance {name}?"
+msgstr "Chcete odpojit instanci {name}?"
+
+msgid "Domain name. If not defined default domain will be used."
+msgstr "Název domény. Pokud není definována, použije se výchozí doména."
+
+msgid "Download invoice"
+msgstr "Stáhnout fakturu"
+
+msgid "Download order PDF file"
+msgstr "Stáhnout PDF soubor objednávky"
+
+msgid "Drop files to attach, or"
+msgstr "Přetáhněte soubory, které chcete připojit, nebo"
+
+msgid "Droplet has been resized."
+msgstr "Velikost dropletu byla změněna."
+
+msgid "Dynamic — use separate volume types for tracking pricing"
+msgstr "Dynamické - použití samostatných typů svazků pro sledování cen"
+
+msgid "EU VAT ID"
+msgstr "EU DIČ"
+
+msgid "Each mount point should be used once at most."
+msgstr "Každý přípojný bod by měl být použit maximálně jednou."
+
+msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
+msgstr "Každá zpráva o použití musí být spojena s fakturačním plánem, aby byl zajištěn správný výpočet účetních údajů."
+
+msgid "Edit YAML"
+msgstr "Upravit YAML"
+
+msgid "Edit an availability"
+msgstr "Upravit dostupnost"
+
+msgid "Edit attributes"
+msgstr "Upravit atributy"
+
+msgid "Edit offering"
+msgstr "Upravit nabídku"
+
+msgid "Edit project member"
+msgstr "Upravit člena projektu"
+
+msgid "Edit team member"
+msgstr "Upravit člena týmu"
+
+msgid "Egress"
+msgstr "Egress"
+
+msgid "Email change request has been cancelled."
+msgstr "Žádost o změnu e-mailu byla zrušena."
+
+msgid "Email has been updated."
+msgstr "E-mail byl aktualizován."
+
+msgid "Email verification has been sent. Please check your inbox."
+msgstr "Ověřovací e-mail byl odeslán. Zkontrolujte si prosím vaši doručenou poštu."
+
+msgid "Enable DHCP"
+msgstr "Povolit DHCP"
+
+msgid "Enabled checklists have been updated."
+msgstr "Povolené kontrolní seznamy byly aktualizovány."
+
+msgid "Fee applied each time this plan is activated."
+msgstr "Poplatek se účtuje při každé aktivaci tohoto plánu."
+
+msgid "Hook has been removed."
+msgstr "Hook byl odstraněn."
+
+msgid "Hook removal"
+msgstr "Odstranění hooku"
+
+msgid "I accept the <Link>Terms of Service</Link>."
+msgstr "Souhlasím se <Link>Smluvními podmínkami</Link>."
+
+msgid "Image has been removed."
+msgstr "Obrázek byl odstraněn."
+
+msgid "Invalid URL. Unable to parse payment details."
+msgstr "Neplatná URL. Nelze analyzovat platební údaje."
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
+msgstr "Faktura pro organizaci {customer_link} za období {period} byla aktualizována."
+
+msgid "It is used to automatically assign floating IP to your virtual machine."
+msgstr "Slouží k automatickému přiřazení plovoucí IP k vašemu virtuálnímu počítači."
+
+msgid "Item has been removed from shopping cart."
+msgstr "Položka byla odstraněna z nákupního košíku."
+
+msgid "Lifetime will be updated and reset upon saving the form."
+msgstr "Životnost bude aktualizována a obnovena po uložení formuláře."
+
+msgid "Logo has been removed."
+msgstr "Logo bylo odstraněno."
+
+msgid "Max # of VM snapshots"
+msgstr "Maximální počet snímků virtuálního počítače"
+
+msgid "Max # of snapshots"
+msgstr "Maximální počet snímků"
+
+msgid "Max number of VM snapshots"
+msgstr "Maximální počet snímků virtuálního počítače"
+
+msgid "Note that this virtual machine will not be charged separately for {organization}."
+msgstr "Upozorňujeme, že tento virtuální počítač nebude účtován zvlášť pro {organization}."
+
+msgid "Notification has been updated."
+msgstr "Oznámení bylo aktualizováno."
+
+msgid "Offering has been updated."
+msgstr "Nabídka byla aktualizována."
+
+msgid "Offering state has been updated."
+msgstr "Stav nabídky byl aktualizován."
+
+msgid "Organization has been updated successfully."
+msgstr "Organizace byla úspěšně aktualizována."
+
+msgid "Organization {customer_link} has been updated."
+msgstr "Organizace {customer_link} byla aktualizována."
+
+msgid "Payment has been updated."
+msgstr "Platba byla aktualizována."
+
+msgid "Payment profile has been removed."
+msgstr "Platební profil byl odstraněn."
+
+msgid "Payment profile has been updated."
+msgstr "Platební profil byl aktualizován."
+
+msgid "Project could not be updated."
+msgstr "Projekt nelze aktualizovat."
+
+msgid "Project has been removed successfully."
+msgstr "Projekt byl úspěšně odstraněn."
+
+msgid "Project has been updated."
+msgstr "Projekt byl aktualizován."
+
+msgid "Project {project_link} has been updated."
+msgstr "Projekt {project_link} byl aktualizován."
+
+msgid "Provider has been updated."
+msgstr "Poskytovatel byl aktualizován."
+
+msgid "Removed organizations cannot be restored!"
+msgstr "Odstraněné organizace nelze obnovit!"
+
+msgid "Resource schedule is already activated."
+msgstr "Plán zdrojů je již aktivován."
+
+msgid "Resource schedule is already deactivated."
+msgstr "Plán zdrojů je již deaktivován."
+
+msgid "Restore virtual machine from backup {name}"
+msgstr "Obnovení virtuálního počítače ze zálohy {name}"
+
+msgid "Restore volume snapshot"
+msgstr "Obnovit snímek svazku"
+
+msgid "SSH key has been removed."
+msgstr "SSH klíč byl odstraněn."
+
+msgid "Shopping cart item has been updated."
+msgstr "Položka nákupního košíku byla aktualizována."
+
+msgid "Snapshot schedule for volume has been created."
+msgstr "Byl vytvořen plán snímků pro svazek."
+
+msgid "Snapshot schedules"
+msgstr "Plány snímků"
+
+msgid "Snapshot size limit"
+msgstr "Limit velikosti snímku"
+
+msgid "Snapshots"
+msgstr "Snímky"
+
+msgid "Snapshots count"
+msgstr "Počet snímků"
+
+msgid "Taking a snapshot"
+msgstr "Pořizování snímku"
+
+msgid "Team member has been removed."
+msgstr "Člen týmu byl odstraněn."
+
+msgid "Unable to accept booking."
+msgstr "Nelze přijmout rezervaci."
+
+msgid "Unable to activate account."
+msgstr "Nelze aktivovat účet."
+
+msgid "Unable to activate user."
+msgstr "Nelze aktivovat uživatele."
+
+msgid "Unable to add image."
+msgstr "Nelze přidat obrázek."
+
+msgid "Unable to add item to shopping cart."
+msgstr "Nelze přidat položku do nákupního košíku."
+
+msgid "Unable to apply action."
+msgstr "Nelze použít akci."
+
+msgid "Unable to approve invitation."
+msgstr "Nelze schválit pozvánku."
+
+msgid "Unable to approve order."
+msgstr "Nelze schválit objednávku."
+
+msgid "Unable to approve order item."
+msgstr "Nelze schválit položku objednávky."
+
+msgid "Unable to attach volume."
+msgstr "Nelze připojit svazek."
+
+msgid "Unable to attach volume to instance."
+msgstr "Nelze připojit svazek k instanci."
+
+msgid "Unable to authenticate using Mobile ID."
+msgstr "Nelze ověřit pomocí Mobile ID."
+
+msgid "Unable to bootstrap application."
+msgstr "Nelze spustit aplikaci."
+
+msgid "Unable to cancel booking."
+msgstr "Nelze zrušit rezervaci."
+
+msgid "Unable to cancel invitation."
+msgstr "Nelze zrušit pozvánku."
+
+msgid "Unable to cancel order item."
+msgstr "Nelze zrušit položku objednávky."
+
+msgid "Unable to cancel request."
+msgstr "Nelze zrušit požadavek."
+
+msgid "Unable to change email."
+msgstr "Nelze změnit e-mail."
+
+msgid "Unable to change flavor."
+msgstr "Nelze změnit příchuť."
+
+msgid "Unable to close review."
+msgstr "Nelze zavřít recenzi."
+
+msgid "Unable to confirm email."
+msgstr "Nelze potvrdit e-mail."
+
+msgid "Unable to create OpenStack networks."
+msgstr "Nelze vytvořit sítě OpenStack."
+
+msgid "Unable to create SQL database."
+msgstr "Nelze vytvořit databázi SQL."
+
+msgid "Unable to create VM snapshot."
+msgstr "Nelze vytvořit snímek virtuálního počítače."
+
+msgid "Unable to create VM snapshot schedule."
+msgstr "Nelze vytvořit plán snímků virtuálního počítače."
+
+msgid "Unable to create a FreeIPA profile."
+msgstr "Nelze vytvořit profil FreeIPA."
+
+msgid "Unable to create application."
+msgstr "Nelze vytvořit aplikaci."
+
+msgid "Unable to create catalog."
+msgstr "Nelze vytvořit katalog."
+
+msgid "Unable to create disk."
+msgstr "Nelze vytvořit disk."
+
+msgid "Unable to create key."
+msgstr "Nelze vytvořit klíč."
+
+msgid "Unable to create node."
+msgstr "Nelze vytvořit uzel."
+
+msgid "Unable to create notification."
+msgstr "Nelze vytvořit oznámení."
+
+msgid "Unable to create notifications."
+msgstr "Nelze vytvořit oznámení."
+
+msgid "Unable to create offering."
+msgstr "Nelze vytvořit nabídku."
+
+msgid "Unable to create payment."
+msgstr "Nelze vytvořit platbu."
+
+msgid "Unable to create payment profile."
+msgstr "Nelze vytvořit platební profil."
+
+msgid "Unable to create port."
+msgstr "Nelze vytvořit port."
+
+msgid "Unable to create request."
+msgstr "Nelze vytvořit požadavek."
+
+msgid "Unable to create security group."
+msgstr "Nelze vytvořit skupinu zabezpečení."
+
+msgid "Unable to create snapshot schedule."
+msgstr "Nelze vytvořit plán snímků."
+
+msgid "Unable to create subnet."
+msgstr "Nelze vytvořit podsíť."
+
+msgid "Unable to create volume snapshot."
+msgstr "Nelze vytvořit snímek svazku."
+
+msgid "Unable to deactivate user."
+msgstr "Nelze deaktivovat uživatele."
+
+msgid "Unable to delete attachment."
+msgstr "Nelze odstranit přílohu."
+
+msgid "Unable to delete catalog."
+msgstr "Nelze odstranit katalog."
+
+msgid "Unable to delete instance."
+msgstr "Nelze odstranit instanci."
+
+msgid "Unable to delete payment."
+msgstr "Nelze odstranit platbu."
+
+msgid "Unable to delete resource."
+msgstr "Nelze odstranit zdroj."
+
+msgid "Unable to delete team member."
+msgstr "Nelze odstranit člena týmu."
+
+msgid "Unable to disable FreeIPA profile."
+msgstr "Nelze zakázat profil FreeIPA."
+
+msgid "Unable to edit comment."
+msgstr "Nelze upravit komentář."
+
+msgid "Unable to enable FreeIPA profile."
+msgstr "Nelze povolit profil FreeIPA."
+
+msgid "Unable to enable payment profile."
+msgstr "Nelze povolit platební profil."
+
+msgid "Unable to extend disk."
+msgstr "Nelze rozšířit disk."
+
+msgid "Unable to extend volume."
+msgstr "Nelze rozšířit svazek."
+
+msgid "Unable to fetch attachment."
+msgstr "Nelze načíst přílohu."
+
+msgid "Unable to fetch comments."
+msgstr "Nelze načíst komentáře."
+
+msgid "Unable to fetch current user."
+msgstr "Nelze načíst aktuálního uživatele."
+
+msgid "Unable to fetch data."
+msgstr "Nelze načíst data."
+
+msgid "Unable to generate service provider API secret code."
+msgstr "Nelze vygenerovat tajný kód pro API poskytovatele služeb."
+
+msgid "Unable to get form's data."
+msgstr "Nelze získat data formuláře."
+
+msgid "Unable to get order item."
+msgstr "Nelze získat položku objednávky."
+
+msgid "Unable to get service provider API secret code."
+msgstr "Nelze získat tajný kód pro API poskytovatele služeb."
+
+msgid "Unable to grant permission."
+msgstr "Nelze udělit oprávnění."
+
+msgid "Unable to import YAML."
+msgstr "Nelze importovat YAML."
+
+msgid "Unable to import remote offering."
+msgstr "Nelze importovat vzdálenou nabídku."
+
+msgid "Unable to initialize shopping cart."
+msgstr "Nelze inicializovat nákupní košík."
+
+msgid "Unable to link instance."
+msgstr "Nelze propojit instanci."
+
+msgid "Unable to link invoice to the payment."
+msgstr "Nelze propojit fakturu s platbou."
+
+msgid "Unable to load actions"
+msgstr "Nelze načíst akce"
+
+msgid "Unable to load application template details."
+msgstr "Nelze načíst podrobnosti šablony aplikace."
+
+msgid "Unable to load booked items."
+msgstr "Nelze načíst rezervované položky."
+
+msgid "Unable to load booking offerings."
+msgstr "Nelze načíst nabídky rezervace."
+
+msgid "Unable to load category sections."
+msgstr "Nelze načíst sekce kategorií."
+
+msgid "Unable to load charts."
+msgstr "Nelze načíst grafy."
+
+msgid "Unable to load checklists."
+msgstr "Nelze načíst kontrolní seznamy."
+
+msgid "Unable to load compliance overview."
+msgstr "Nelze načíst přehled dodržování předpisů."
+
+msgid "Unable to load customer."
+msgstr "Nelze načíst zákazníka."
+
+msgid "Unable to load customer support satisfaction overall rating."
+msgstr "Nelze načíst celkové hodnocení spokojenosti zákaznické podpory."
+
+msgid "Unable to load detail."
+msgstr "Nelze načíst podrobnosti."
+
+msgid "Unable to load editor"
+msgstr "Nelze načíst editor"
+
+msgid "Unable to load file."
+msgstr "Nelze načíst soubor."
+
+msgid "Unable to load financial overview."
+msgstr "Nelze načíst finanční přehled."
+
+msgid "Unable to load form options."
+msgstr "Nelze načíst možnosti formuláře."
+
+msgid "Unable to load growth chart."
+msgstr "Nelze načíst graf růstu."
+
+msgid "Unable to load invoices"
+msgstr "Nelze načíst faktury"
+
+msgid "Unable to load locations."
+msgstr "Nelze načíst umístění."
+
+msgid "Unable to load marketplace categories."
+msgstr "Nelze načíst kategorie Marketplace."
+
+msgid "Unable to load marketplace category details"
+msgstr "Nelze načíst podrobnosti kategorie Marketplace"
+
+msgid "Unable to load marketplace offering details."
+msgstr "Nelze načíst podrobnosti o nabídce Marketplace."
+
+msgid "Unable to load marketplace offerings."
+msgstr "Nelze načíst nabídky Marketplace."
+
+msgid "Unable to load offering."
+msgstr "Nelze načíst nabídku."
+
+msgid "Unable to load offering details."
+msgstr "Nelze načíst podrobnosti nabídky."
+
+msgid "Unable to load offerings"
+msgstr "Nelze načíst nabídky"
+
+msgid "Unable to load order details."
+msgstr "Nelze načíst podrobnosti objednávky."
+
+msgid "Unable to load organization resources."
+msgstr "Nelze načíst prostředky organizace."
+
+msgid "Unable to load organizations"
+msgstr "Nelze načíst organizace"
+
+msgid "Unable to load pending orders."
+msgstr "Nelze načíst čekající objednávky."
+
+msgid "Unable to load plan details."
+msgstr "Nelze načíst podrobnosti plánu."
+
+msgid "Unable to load project types."
+msgstr "Nelze načíst typy projektu."
+
+msgid "Unable to load provider details."
+msgstr "Nelze načíst údaje o poskytovateli."
+
+msgid "Unable to load questions and answers."
+msgstr "Nelze načíst otázky a odpovědi."
+
+msgid "Unable to load sections for comparison."
+msgstr "Nelze načíst sekce pro srovnání."
+
+msgid "Unable to load service provider."
+msgstr "Nelze načíst poskytovatele služeb."
+
+msgid "Unable to load service providers."
+msgstr "Nelze načíst poskytovatele služeb."
+
+msgid "Unable to load user."
+msgstr "Nelze načíst uživatele."
+
+msgid "Unable to load user monthly activity data."
+msgstr "Nelze načíst měsíční údaje o činnosti uživatele."
+
+msgid "Unable to login via SAML2 protocol."
+msgstr "Nelze se přihlásit pomocí protokolu SAML2."
+
+msgid "Unable to mark the invoice as paid."
+msgstr "Nelze označit fakturu jako zaplacenou."
+
+msgid "Unable to open console."
+msgstr "Nelze otevřít konzoli."
+
+msgid "Unable to open console. Error message: {message}"
+msgstr "Nelze otevřít konzoli. Chybová zpráva: {message}"
+
+msgid "Unable to open console log"
+msgstr "Nelze otevřít protokol konzole"
+
+msgid "Unable to perform review."
+msgstr "Nelze provést recenzi."
+
+msgid "Unable to post comment."
+msgstr "Nelze zveřejnit komentář."
+
+msgid "Unable to process payment."
+msgstr "Nelze zpracovat platbu."
+
+msgid "Unable to publish Google Calendar."
+msgstr "Nelze publikovat Google Kalendář."
+
+msgid "Unable to register service provider."
+msgstr "Nelze zaregistrovat poskytovatele služeb."
+
+msgid "Unable to reject invitation."
+msgstr "Nelze odmítnout pozvánku."
+
+msgid "Unable to reject order."
+msgstr "Nelze odmítnout objednávku."
+
+msgid "Unable to reject order item."
+msgstr "Nelze odmítnout položku objednávky."
+
+msgid "Unable to remove SSH key."
+msgstr "Nelze odebrat klíč SSH."
+
+msgid "Unable to remove hook."
+msgstr "Nelze odstranit hook."
+
+msgid "Unable to remove image."
+msgstr "Nelze odstranit obrázek."
+
+msgid "Unable to remove item from shopping cart."
+msgstr "Nelze odstranit položku z nákupního košíku."
+
+msgid "Unable to remove logo."
+msgstr "Nelze odstranit logo."
+
+msgid "Unable to remove payment profile."
+msgstr "Nelze odebrat platební profil."
+
+msgid "Unable to report security incident."
+msgstr "Nelze nahlásit bezpečnostní incident."
+
+msgid "Unable to resend invitation."
+msgstr "Nelze znovu odeslat pozvánku."
+
+msgid "Unable to resize droplet."
+msgstr "Nelze změnit velikost dropletu."
+
+msgid "Unable to restore VM snapshot."
+msgstr "Nelze obnovit snímek virtuálního počítače."
+
+msgid "Unable to restore volume snapshot."
+msgstr "Nelze obnovit snímek svazku."
+
+msgid "Unable to retype volume."
+msgstr "Nelze znovu zadat svazek."
+
+msgid "Unable to revoke permission."
+msgstr "Nelze odvolat oprávnění."
+
+msgid "Unable to save location."
+msgstr "Nelze uložit umístění."
+
+msgid "Unable to save user."
+msgstr "Nelze uložit uživatele."
+
+msgid "Unable to send feedback."
+msgstr "Nelze odeslat zpětnou vazbu."
+
+msgid "Unable to send record notification."
+msgstr "Nelze odeslat oznámení o záznamu."
+
+msgid "Unable to set backend ID."
+msgstr "Nelze nastavit backend ID."
+
+msgid "Unable to show console log."
+msgstr "Nelze zobrazit protokol konzole."
+
+msgid "Unable to submit answers."
+msgstr "Nelze odeslat odpovědi."
+
+msgid "Unable to submit empty comment."
+msgstr "Nelze odeslat prázdný komentář."
+
+msgid "Unable to submit limits change request."
+msgstr "Nelze odeslat požadavek na změnu limitů."
+
+msgid "Unable to submit order."
+msgstr "Nelze odeslat objednávku."
+
+msgid "Unable to submit plan change request."
+msgstr "Nelze odeslat žádost o změnu plánu."
+
+msgid "Unable to submit report."
+msgstr "Nelze odeslat hlášení."
+
+msgid "Unable to submit usage report."
+msgstr "Nelze odeslat zprávu o používání."
+
+msgid "Unable to sync FreeIPA profile."
+msgstr "Nelze synchronizovat profil FreeIPA."
+
+msgid "Unable to sync Google Calendar."
+msgstr "Nelze synchronizovat Google Kalendář."
+
+msgid "Unable to unlink instance from node."
+msgstr "Nelze odpojit instanci od uzlu."
+
+msgid "Unable to unlink invoice from the payment."
+msgstr "Nelze zrušit propojení faktury s platbou."
+
+msgid "Unable to unpublish Google Calendar."
+msgstr "Nelze zrušit publikování Google Kalendáře."
+
+msgid "Unable to update YAML."
+msgstr "Nelze aktualizovat YAML."
+
+msgid "Unable to update allowed address pairs."
+msgstr "Nelze aktualizovat povolené páry adres."
+
+msgid "Unable to update confirmation message."
+msgstr "Nelze aktualizovat potvrzovací zprávu."
+
+msgid "Unable to update enabled checklists."
+msgstr "Nelze aktualizovat povolené kontrolní seznamy."
+
+msgid "Unable to update floating IPs."
+msgstr "Nelze aktualizovat plovoucí IP adresy."
+
+msgid "Unable to update internal IPs of OpenStack instance."
+msgstr "Nelze aktualizovat interní IP adresy instance OpenStack."
+
+msgid "Unable to update network MTU."
+msgstr "Nelze aktualizovat síťovou MTU."
+
+msgid "Unable to update notification."
+msgstr "Nelze aktualizovat oznámení."
+
+msgid "Unable to update offering"
+msgstr "Nelze aktualizovat nabídku"
+
+msgid "Unable to update offering."
+msgstr "Nelze aktualizovat nabídku."
+
+msgid "Unable to update offering state."
+msgstr "Nelze aktualizovat stav nabídky."
+
+msgid "Unable to update organization."
+msgstr "Nelze aktualizovat organizaci."
+
+msgid "Unable to update payment."
+msgstr "Nelze aktualizovat platbu."
+
+msgid "Unable to update payment profile."
+msgstr "Nelze aktualizovat platební profil."
+
+msgid "Unable to update provider."
+msgstr "Nelze aktualizovat poskytovatele."
+
+msgid "Unable to update security group rules."
+msgstr "Nelze aktualizovat pravidla skupiny zabezpečení."
+
+msgid "Unable to update security groups of OpenStack instance."
+msgstr "Nelze aktualizovat skupiny zabezpečení instance OpenStack."
+
+msgid "Unable to update shopping cart item."
+msgstr "Nelze aktualizovat položku nákupního košíku."
+
+msgid "Unable to update static routes."
+msgstr "Nelze aktualizovat statické trasy."
+
+msgid "Unable to update user."
+msgstr "Nelze aktualizovat uživatele."
+
+msgid "Unable to upload attachment."
+msgstr "Nelze nahrát přílohu."
+
+msgid "Unable to upload logo."
+msgstr "Nelze nahrát logo."
+
+msgid "Unable to validate invitation token."
+msgstr "Nelze ověřit token pozvánky."
+
+msgid "Update floating IPs in {name} virtual machine"
+msgstr "Aktualizace plovoucích IP adres ve virtuálním počítači {name}"
+
+msgid "User could not been updated"
+msgstr "Uživatele nelze aktualizovat"
+
+msgid "User has been activated."
+msgstr "Uživatel byl aktivován."
+
+msgid "User has been deactivated."
+msgstr "Uživatel byl deaktivován."
+
+msgid "User has been updated"
+msgstr "Uživatel byl aktualizován"
+
+msgid "User has been updated."
+msgstr "Uživatel byl aktualizován."
+
+msgid "VM snapshot"
+msgstr "Snímek virtuálního počítače"
+
+msgid "VM snapshot has been created."
+msgstr "Byl vytvořen snímek virtuálního počítače."
+
+msgid "VM snapshot restoration has been scheduled."
+msgstr "Obnova snímků virtuálního počítače byla naplánována."
+
+msgid "VM snapshot schedule"
+msgstr "Plán snímků virtuálního počítače"
+
+msgid "VM snapshot schedule caveats"
+msgstr "Upozornění na plán snímků virtuálního počítače"
+
+msgid "VM snapshot schedule has been created."
+msgstr "Byl vytvořen plán snímků virtuálního počítače."
+
+msgid "VM snapshot schedules"
+msgstr "Plány snímků virtuálního počítače"
+
+msgid "VM snapshots"
+msgstr "Snímky virtuálního počítače"
+
+msgid "Virtual machines"
+msgstr "Virtuální počítače"
+
+msgid "Virtual machines count"
+msgstr "Počet virtuálních počítačů"
+
+msgid "Volume snapshot has been created."
+msgstr "Snímek svazku byl vytvořen."
+
+msgid "Volume snapshot has been restored."
+msgstr "Snímek svazku byl obnoven."
+
+msgid "Volume snapshots"
+msgstr "Snímky svazků"
+
+msgid "Webhook"
+msgstr "Webhook"
+
+msgid "YAML has been updated."
+msgstr "YAML byl aktualizován."
+
+msgid "You must agree with terms of service."
+msgstr "Musíte souhlasit se smluvními podmínkami."
+
+msgid "Your FreeIPA has been removed in FreeIPA server."
+msgstr "Vaše FreeIPA byla na serveru FreeIPA odstraněna."
+
+msgid "(VAT is not included)"
+msgstr "(DPH není zahrnuta)"
+
+msgid "vSphere Virtual Machine"
+msgstr "Virtuální počítač vSphere"
+
+msgid "virtual machine"
+msgstr "virtuální počítač"
+
+msgid "volume snapshot"
+msgstr "snímek svazku"
+
+msgid "volume snapshot schedule"
+msgstr "plán snímků svazku"
+
+msgid "{resource_link} has been updated by {user_link}."
+msgstr "{resource_link} byl aktualizován {user_link}."
+
+msgid "{verboseName} has been updated."
+msgstr "{verboseName} byl aktualizován."
