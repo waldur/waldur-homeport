@@ -20,7 +20,8 @@ export const ResourceRow = ({ resource, customer, showPrice, showVat }) => {
             customer={customer}
           />
         </td>
-        {showPrice && <td>{defaultCurrency(resource.total)}</td>}
+        {showPrice && showVat && <td>{defaultCurrency(resource.total)}</td>}
+        {showPrice && !showVat && <td>{defaultCurrency(resource.price)}</td>}
       </tr>
       {toggled && (
         <>
