@@ -11,16 +11,17 @@ interface TablePaginationProps extends PaginationProps {
 
 export const TablePagination: FunctionComponent<TablePaginationProps> = (
   props,
-) => (
-  <div className="text-right">
-    <Pagination
-      prev={translate('Previous')}
-      next={translate('Next')}
-      items={Math.ceil(props.resultCount / props.pageSize)}
-      activePage={props.currentPage}
-      onSelect={props.gotoPage}
-      maxButtons={3}
-      boundaryLinks={true}
-    />
-  </div>
-);
+) =>
+  props.resultCount > props.pageSize ? (
+    <div className="text-right">
+      <Pagination
+        prev={translate('Previous')}
+        next={translate('Next')}
+        items={Math.ceil(props.resultCount / props.pageSize)}
+        activePage={props.currentPage}
+        onSelect={props.gotoPage}
+        maxButtons={3}
+        boundaryLinks={true}
+      />
+    </div>
+  ) : null;
