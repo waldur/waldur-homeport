@@ -52,10 +52,10 @@ describe('Expired token redirect', () => {
         '/api/projects/df4193e2bee24a4c8e339474d74c5f8c/',
         'fixture:projects/alice_azure.json',
       )
-      .route('/api/users/?current=', { status: 401 });
+      .route('/api/users/me/', { status: 401 });
 
     cy.visit('/projects/df4193e2bee24a4c8e339474d74c5f8c/')
-      .route('/api/users/?current=', 'fixture:users/alice.json')
+      .route('/api/users/me/', 'fixture:users/alice.json')
       .fillAndSubmitLoginForm()
       .location('pathname')
       .should('match', /projects\/df4193e2bee24a4c8e339474d74c5f8c\//);
@@ -64,7 +64,7 @@ describe('Expired token redirect', () => {
   it('should redirect to attempted url with params after login even if 401 error is not raised during transition', () => {
     cy.server()
       .route('GET', '/api/configuration/', 'fixture:configuration.json')
-      .route('GET', '/api/users/?current=', 'fixture:users/alice.json')
+      .route('GET', '/api/users/me/', 'fixture:users/alice.json')
       .route('POST', '/api-auth/password/', { token: 'valid' })
       .route({ method: 'GET', url: '/api/events/**', response: [] })
       .as('success')

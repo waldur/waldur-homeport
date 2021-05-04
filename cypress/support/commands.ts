@@ -102,7 +102,7 @@ Cypress.Commands.add('mockUser', () => {
     fixture: 'configuration.json',
   })
     .intercept('POST', '/api-auth/password/', { token: 'valid' })
-    .intercept('GET', '/api/users/?current=', {
+    .intercept('GET', '/api/users/me/', {
       fixture: 'users/alice.json',
     })
     .intercept('GET', '/api/customer-permissions/', [])
