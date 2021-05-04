@@ -3,7 +3,7 @@ import { useEffect, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { AuthService } from '@waldur/auth/AuthService';
-import { post, getFirst } from '@waldur/core/api';
+import { post } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { wait } from '@waldur/core/utils';
@@ -11,6 +11,8 @@ import { translate } from '@waldur/i18n';
 import { router } from '@waldur/router';
 import { showError, showSuccess } from '@waldur/store/notify';
 import { setCurrentUser } from '@waldur/workspace/actions';
+
+import { getCurrentUser } from '../UsersService';
 
 export const UserEmailChangeCallback: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -36,7 +38,7 @@ export const UserEmailChangeCallback: FunctionComponent = () => {
 
       let currentUser;
       try {
-        currentUser = await getFirst('/users/', { current: true });
+        currentUser = await getCurrentUser();
       } catch (error) {
         const errorMessage = `${translate(
           'Unable to fetch current user.',

@@ -1,12 +1,12 @@
 import { ENV } from '@waldur/configs/default';
-import { getFirst, getById, patch } from '@waldur/core/api';
+import { get, getById, patch } from '@waldur/core/api';
 import store from '@waldur/store/store';
 import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails } from '@waldur/workspace/types';
 
 export const getCurrentUser = () =>
-  getFirst<UserDetails>('/users/', { current: '' });
+  get<UserDetails>('/users/me/').then((response) => response.data);
 
 class UsersServiceClass {
   get(userId) {
