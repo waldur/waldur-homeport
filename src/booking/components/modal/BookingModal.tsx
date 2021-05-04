@@ -81,11 +81,18 @@ export const BookingModal: FC<BookingModalProps> = ({
     }
   };
 
-  const convertEventToAllDay = (event) => ({
-    ...event,
-    start: moment(newEvent.start).startOf('day').toDate(),
-    end: moment(newEvent.end).startOf('day').toDate(),
-  });
+  const convertEventToAllDay = (event) => {
+    const mStart = moment(newEvent.start);
+    const mEnd = moment(newEvent.end);
+    if (mEnd.diff(mStart, 'days') === 0) {
+      mEnd.add(1, 'days');
+    }
+    return {
+      ...event,
+      start: mStart.startOf('day').toDate(),
+      end: mEnd.startOf('day').toDate(),
+    };
+  };
 
   const handleChange = (name, value) => {
     let event = newEvent;
