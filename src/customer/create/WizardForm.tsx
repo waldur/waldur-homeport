@@ -13,6 +13,8 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 import { StepsList } from './StepsList';
 
+import './wizard.css';
+
 interface WizardFormProps {
   onSubmit(): void;
   submitting?: boolean;
