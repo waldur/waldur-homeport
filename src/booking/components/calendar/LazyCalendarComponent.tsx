@@ -97,7 +97,17 @@ export const LazyCalendarComponent: FC<CalendarComponentProps> = (props) => {
         props.addEventCb(splitEvent);
       });
     } else {
-      props.addEventCb(event);
+      const mStart = moment(event.start);
+      const mEnd = moment(event.end);
+      if (mEnd.diff(mStart, 'days') === 0) {
+        props.addEventCb({
+          ...event,
+          allDay: true,
+          end: mStart.add(1, 'days').startOf('day').toDate(),
+        });
+      } else {
+        props.addEventCb(event);
+      }
     }
   };
 
