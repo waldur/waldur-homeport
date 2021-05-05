@@ -1,10 +1,11 @@
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent } from 'react';
 import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/constants';
+import { CustomerUsersListExpandableRow } from '@waldur/customer/team/CustomerUsersListExpandableRow';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable } from '@waldur/table';
@@ -19,22 +20,6 @@ import {
 import { fetchCustomerUsers } from './api';
 import { CustomerUserAddButton } from './CustomerUserAddButton';
 import { CustomerUserRowActions } from './CustomerUserRowActions';
-import { ProjectRolesList } from './ProjectRolesList';
-import { getRoles } from './utils';
-
-const UserProjectRolesList = ({ row }) => {
-  const roles = useMemo(getRoles, []);
-  return (
-    <>
-      {roles.map((role) => (
-        <p key={role.value}>
-          <b>{translate('{label} in:', role)}</b>{' '}
-          <ProjectRolesList roleName={role.value} row={row} />
-        </p>
-      ))}
-    </>
-  );
-};
 
 const TableComponent: FunctionComponent<any> = (props) => {
   return (
@@ -67,7 +52,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       verboseName={translate('team members')}
       hasQuery={true}
-      expandableRow={UserProjectRolesList}
+      expandableRow={CustomerUsersListExpandableRow}
       actions={
         props.isStaff ? (
           <CustomerUserAddButton refreshList={props.fetch} />

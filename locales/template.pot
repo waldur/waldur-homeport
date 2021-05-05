@@ -6959,6 +6959,10 @@ msgstr ""
 msgid "Service manager"
 msgstr ""
 
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
+msgid "Service manager of:"
+msgstr ""
+
 #: src/customer/list/ServiceProviderFilter.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
@@ -8462,6 +8466,7 @@ msgid "Unable to load customer."
 msgstr ""
 
 #: src/customer/divisions/CustomersDivisionsChart.tsx
+#: src/customer/team/OfferingNamesManagedByUser.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
@@ -10236,7 +10241,7 @@ msgstr ""
 msgid "{count} user events in {date}"
 msgstr ""
 
-#: src/customer/team/CustomerUsersList.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 msgid "{label} in:"
 msgstr ""
 
