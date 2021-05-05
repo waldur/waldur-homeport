@@ -1,5 +1,5 @@
 import { ENV } from '@waldur/configs/default';
-import { getSelectData, post } from '@waldur/core/api';
+import { getAll, getSelectData, post } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';
@@ -43,3 +43,8 @@ export const usersAutocomplete = async (
     currentPage,
   );
 };
+
+export const getOfferingPermissions = (userUuid: string) =>
+  getAll<{ offering_name: string }>('/marketplace-offering-permissions/', {
+    params: { user: userUuid },
+  });
