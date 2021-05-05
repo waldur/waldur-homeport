@@ -57,7 +57,10 @@ export const BrandName: FunctionComponent = () => {
     <li className="brand-name hidden-xs">
       <a onClick={onLogoClick}>
         {ENV.sidebarLogo ? (
-          <img src={ENV.sidebarLogo} style={{ maxHeight: 60, maxWidth: 175 }} />
+          <img
+            src={ENV.sidebarLogo}
+            style={{ maxHeight: 100, maxWidth: 175 }}
+          />
         ) : (
           <>
             <i className="fa fa-th-large"></i>{' '}
