@@ -844,15 +844,6 @@ dd.project-people {
   margin-bottom: 0;
 }
 
-/* jsTree */
-.jstree-open > .jstree-anchor > .fa-folder:before {
-  content: '\f07c';
-}
-
-.jstree-default .jstree-icon.none {
-  width: 0;
-}
-
 /* CLIENTS */
 
 .clients-list {
@@ -1137,86 +1128,6 @@ del {
 
 .social-comment textarea {
   font-size: 12px;
-}
-
-/* Vote list */
-
-.vote-item {
-  padding: 20px 25px;
-  background: #ffffff;
-  border-top: 1px solid $border-color;
-}
-
-.vote-item:last-child {
-  border-bottom: 1px solid $border-color;
-}
-
-.vote-item:hover {
-  background: lighten($gray, 3%);
-}
-
-.vote-actions {
-  float: left;
-  width: 30px;
-  margin-right: 15px;
-  text-align: center;
-}
-
-.vote-actions a {
-  color: $navy;
-  font-weight: 600;
-}
-
-.vote-actions {
-  font-weight: 600;
-}
-
-.vote-title {
-  display: block;
-  color: inherit;
-  font-size: 18px;
-  font-weight: 600;
-  margin-top: 5px;
-  margin-bottom: 2px;
-}
-
-.vote-title:hover,
-.vote-title:focus {
-  color: inherit;
-}
-
-.vote-info,
-.vote-title {
-  margin-left: 45px;
-}
-
-.vote-info,
-.vote-info a {
-  color: lighten($text-color, 30%);
-  font-size: 12px;
-}
-
-.vote-info a {
-  margin-right: 10px;
-}
-
-.vote-info a:hover {
-  color: $navy;
-}
-
-.vote-icon {
-  text-align: right;
-  font-size: 38px;
-  display: block;
-  color: lighten($text-color, 50%);
-}
-
-.vote-icon.active {
-  color: $navy;
-}
-
-body.body-small .vote-icon {
-  display: none;
 }
 
 .lightBoxGallery {
