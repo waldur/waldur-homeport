@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { ButtonGroup } from 'react-bootstrap';
 import Gravatar from 'react-gravatar';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -12,10 +13,12 @@ import {
   getProject,
   getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
+  isStaff as isStaffSelector,
   getCustomer,
 } from '@waldur/workspace/selectors';
 
 import { AddMemberButton } from './AddMemberButton';
+import { AddUserButton } from './AddUserButton';
 import { fetchProjectUsers, fetchProjectManagers } from './api';
 import { UserDetailsButton } from './UserDetailsButton';
 import { UserRemoveButton } from './UserRemoveButton';
@@ -55,12 +58,14 @@ const TableComponent: FunctionComponent<any> = (props) => {
                   project={props.project}
                   customer={props.customer}
                   isProjectManager={props.isProjectManager}
+                  refreshList={props.fetch}
                 />
               ) : null}
               {props.isOwnerOrStaff || props.isProjectManager ? (
                 <UserRemoveButton
                   user={row}
                   isProjectManager={props.isProjectManager}
+                  refreshList={props.fetch}
                 />
               ) : null}
             </>
@@ -68,14 +73,18 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       actions={
-        props.isOwnerOrStaff || props.isProjectManager ? (
-          <AddMemberButton
-            users={props.rows}
-            project={props.project}
-            customer={props.customer}
-            isProjectManager={props.isProjectManager}
-          />
-        ) : null
+        <ButtonGroup>
+          {props.isStaff && <AddUserButton refreshList={props.fetch} />}
+          {props.isOwnerOrStaff || props.isProjectManager ? (
+            <AddMemberButton
+              users={props.rows}
+              project={props.project}
+              customer={props.customer}
+              isProjectManager={props.isProjectManager}
+              refreshList={props.fetch}
+            />
+          ) : null}
+        </ButtonGroup>
       }
       verboseName={translate('team members')}
     />
@@ -104,6 +113,7 @@ export const ProjectUsersList: FunctionComponent = () => {
     async () => await fetchProjectManagers(user, project),
     [user, project],
   );
+  const isStaff = useSelector(isStaffSelector);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const customer = useSelector(getCustomer);
   const isProjectManager = value && value.length > 0 && isOwnerOrStaff;
@@ -120,6 +130,7 @@ export const ProjectUsersList: FunctionComponent = () => {
       user={user}
       isProjectManager={isProjectManager}
       isOwnerOrStaff={isOwnerOrStaff}
+      isStaff={isStaff}
     />
   );
 };

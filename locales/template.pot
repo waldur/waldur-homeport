@@ -263,6 +263,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
+#: src/project/team/AddProjectUserDialog.tsx
 msgid "Add"
 msgstr ""
 
@@ -410,6 +411,8 @@ msgid "Add to comparison"
 msgstr ""
 
 #: src/customer/team/OfferingPermissionCreateButton.tsx
+#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/AddUserButton.tsx
 msgid "Add user"
 msgstr ""
 
@@ -6467,6 +6470,7 @@ msgstr ""
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
+#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
@@ -6474,6 +6478,7 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
+#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
 msgid "Role expires on"
 msgstr ""
@@ -6913,6 +6918,7 @@ msgstr ""
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
+#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Select user..."
 msgstr ""
@@ -8127,6 +8133,10 @@ msgstr ""
 msgid "Unable to add item to shopping cart."
 msgstr ""
 
+#: src/project/team/AddProjectUserDialog.tsx
+msgid "Unable to add user."
+msgstr ""
+
 #: src/resource/actions/AsyncActionButton.tsx
 #: src/resource/actions/AsyncActionItem.tsx
 msgid "Unable to apply action."
@@ -9198,6 +9208,7 @@ msgstr ""
 #: src/customer/team/UserGroup.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
+#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 msgid "User"
 msgstr ""
