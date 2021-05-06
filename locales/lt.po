@@ -4334,6 +4334,9 @@ msgstr "Service Request - kliento prašymas modifikuoti, pridėti, pakeisti ar p
 msgid "Service manager"
 msgstr "Paslaugų vadybininkas"
 
+msgid "Service manager of:"
+msgstr "Paslaugų vadybininkas:"
+
 msgid "Service provider"
 msgstr "Paslaugų teikėjas"
 

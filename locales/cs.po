@@ -951,7 +951,7 @@ msgid "Create disk"
 msgstr "Vytvořit disk"
 
 msgid "Create horizontal pod autoscaler"
-msgstr "Vytvořit horizontální autoškálovač podů"
+msgstr "Vytvořit horizontalní autoškálovač podů"
 
 msgid "Create network for OpenStack tenant"
 msgstr "Vytvoření sítě pro klienta OpenStack"
@@ -1202,6 +1202,9 @@ msgstr "Zakázat profil ve FreeIPA. Zakázané profily nejsou povoleny pro přih
 msgid "Disable data volume"
 msgstr "Zakázat datový svazek"
 
+msgid "Disable gateway IP advertising via DHCP"
+msgstr "Zakázat inzerování IP adresy brány prostřednictvím DHCP"
+
 msgid "Disable profile"
 msgstr "Zakázat profil"
 
@@ -1296,7 +1299,7 @@ msgid "Each mount point should be used once at most."
 msgstr "Každý přípojný bod by měl být použit maximálně jednou."
 
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
-msgstr "Každá sestava využití musí být spojena s platebnním plánem, aby byl zajištěn správný výpočet účetních dat."
+msgstr "Každé hlášení o využití musí být spojeno s platebním plánem, aby byl zajištěn správný výpočet účetních dat."
 
 msgid "Edit"
 msgstr "Upravit"
@@ -1309,6 +1312,9 @@ msgstr "Upravit dostupnost"
 
 msgid "Edit attributes"
 msgstr "Upravit atributy"
+
+msgid "Edit booking event"
+msgstr "Upravit událost rezervace"
 
 msgid "Edit confirmation message"
 msgstr "Upravit potvrzovací zprávu"
@@ -1730,6 +1736,9 @@ msgstr "Google Kalendář byl úspěšně publikován."
 msgid "Google Calendar has been synced successfully."
 msgstr "Google Kalendář byl úspěšně synchronizován."
 
+msgid "Google Calendar has been unpublished successfully."
+msgstr "Publikování Google Kalendáře bylo úspěšně zrušeno."
+
 msgid "Google Calendar link"
 msgstr "Odkaz na Google Kalendář"
 
@@ -1783,6 +1792,12 @@ msgstr "Hook byl odstraněn."
 
 msgid "Hook removal"
 msgstr "Odstranění hooku"
+
+msgid "Horizontal pod autoscaler has been created."
+msgstr "Horizontální autoškálovač podů byl vytvořen."
+
+msgid "Horizontal pod autoscaler has been updated."
+msgstr "Horizontální autoškálovač podů byl aktualizován."
 
 msgid "Host routes"
 msgstr "Hostitelské trasy"
@@ -1892,6 +1907,12 @@ msgstr "Včetně víkendů"
 msgid "Incorrect organization details"
 msgstr "Nesprávné údaje o organizaci"
 
+msgid "Increase a droplet's RAM, CPU and SSD disk."
+msgstr "Zvýšit paměť RAM, CPU a SSD disk dropletu."
+
+msgid "Increase a droplet's RAM and CPU only (not the storage)."
+msgstr "Zvýšit pouze RAM a CPU dropletu (nikoli úložiště)."
+
 msgid "Informational"
 msgstr "Informační"
 
@@ -1964,8 +1985,14 @@ msgstr "Interní název"
 msgid "Internal network ID"
 msgstr "ID interní sítě"
 
+msgid "Internal network allocation pool"
+msgstr "Alokační fond interní sítě"
+
 msgid "Internal network mask (CIDR)"
 msgstr "Maska interní sítě (CIDR)"
+
+msgid "Internal server error occurred. Please try again or contact support."
+msgstr "Došlo k interní chybě serveru. Zkuste to prosím znovu nebo kontaktujte podporu."
 
 msgid "Invalid URL. Unable to parse payment details."
 msgstr "Neplatná URL. Nelze analyzovat platební údaje."
@@ -2093,6 +2120,9 @@ msgstr "Problém {issue_link} byl vytvořen {caller_link}."
 msgid "Issues"
 msgstr "Problémy"
 
+msgid "Issues are trackable requests to the operator."
+msgstr "Problémy jsou sledovatelné požadavky na provozovatele."
+
 msgid "It is used to automatically assign floating IP to your virtual machine."
 msgstr "Slouží k automatickému přiřazení plovoucí IP k vašemu virtuálnímu počítači."
 
@@ -2134,6 +2164,9 @@ msgstr "Odstranění klíče"
 
 msgid "Keys"
 msgstr "Klíče"
+
+msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
+msgstr "Keystone auth URL (např. http://keystone.example.com:5000/v3)"
 
 msgid "Kubeconfig file"
 msgstr "Soubor Kubeconfig"
@@ -2351,6 +2384,9 @@ msgstr "Maximální celková velikost místa na disku na virtuální počítač"
 msgid "Maximum username length with mandatory username prefix is 32 characters."
 msgstr "Maximální délka uživatelského jména s povinnou předponou uživatelského jména je 32 znaků."
 
+msgid "Maximum vCPU for each VM"
+msgstr "Maximum vCPU pro každý virtuální počítač"
+
 msgid "Measured unit"
 msgstr "Měřená jednotka"
 
@@ -2359,6 +2395,9 @@ msgstr "Člen"
 
 msgid "Memory"
 msgstr "Paměť"
+
+msgid "Memory per vCore"
+msgstr "Paměť na vCore"
 
 msgid "Memory size in GiB"
 msgstr "Velikost paměti v GiB"
@@ -2396,6 +2435,9 @@ msgstr "Minimální hodnota"
 msgid "Minimum allowed value"
 msgstr "Minimální povolená hodnota"
 
+msgid "Minimum booking time slot duration."
+msgstr "Minimální doba trvání časového úseku rezervace."
+
 msgid "Minimum username length is 3 characters."
 msgstr "Minimální délka uživatelského jména jsou 3 znaky."
 
@@ -2416,6 +2458,9 @@ msgstr "Měsíce"
 
 msgid "More info"
 msgstr "Více informací"
+
+msgid "Mount point"
+msgstr "Přípojný bod"
 
 msgid "Must be at least {min}"
 msgstr "Musí být alespoň {min}"
@@ -2486,6 +2531,9 @@ msgstr "Jmenný prostor"
 msgid "Namespace should be unique."
 msgstr "Jemenný prostor by měl být jedinečný."
 
+msgid "Native name"
+msgstr "Rodné jméno"
+
 msgid "Negative"
 msgstr "Záporný"
 
@@ -2554,6 +2602,9 @@ msgstr "Žádné typy divize"
 
 msgid "No divisions"
 msgstr "Žádné divize"
+
+msgid "No entries to show here"
+msgstr "Žádné položky k zobrazení zde"
 
 msgid "No invoice data available."
 msgstr "Fakturační údaje nejsou k dispozici."
@@ -2638,6 +2689,12 @@ msgstr "Oznámení umožňují být informován o tom, že došlo k určité ud�
 
 msgid "Notifications has been sent to {count} users."
 msgstr "Oznámení byla odeslána {count} uživatelům."
+
+msgid "Number of CPU cores per socket"
+msgstr "Počet jader CPU na patici"
+
+msgid "Number of CPU cores should be multiple of cores per socket."
+msgstr "Počet jader CPU by měl být násobkem počtu jader na patici."
 
 msgid "Number of control plane nodes"
 msgstr "Počet uzlů řídicí roviny"
@@ -2780,6 +2837,9 @@ msgstr "OpenStack svazek"
 msgid "Open console"
 msgstr "Otevřít konzoli"
 
+msgid "Open in Service Desk"
+msgstr "Otevřít v Service Desk"
+
 msgid "Open support portal"
 msgstr "Otevřít portál podpory"
 
@@ -2791,6 +2851,9 @@ msgstr "Otevřeno {user} z {organization} v {date}"
 
 msgid "Options are invalid."
 msgstr "Možnosti jsou neplatné."
+
+msgid "Or use social login"
+msgstr "Nebo použijte přihlášení přes sociální sítě"
 
 msgid "Order Summary"
 msgstr "Souhrn objednávky"
@@ -3440,6 +3503,9 @@ msgstr "Název poskytovatele"
 msgid "Provision new resource"
 msgstr "Zřízení nového zdroje"
 
+msgid "Public SSH keys will be injected into services that allow key-based access."
+msgstr "Veřejné SSH klíče budou vloženy do služeb, které umožňují přístup založený na klíči."
+
 msgid "Public key"
 msgstr "Veřejný klíč"
 
@@ -3474,7 +3540,7 @@ msgid "Purchase"
 msgstr "Nákup"
 
 msgid "Purchase and usage is invoiced."
-msgstr "Nákup a použití jsou fakturovány."
+msgstr "Nákup a využití je fakturováno."
 
 msgid "Put this into ~/.kube/config:"
 msgstr "Vložte to do ~/.kube/config:"
@@ -3617,6 +3683,9 @@ msgstr "Uvolnění plovoucích IP adres"
 msgid "Reload"
 msgstr "Znovu načíst"
 
+msgid "Reload issue data"
+msgstr "Znovu načíst data problému"
+
 msgid "Remaining"
 msgstr "Zbývající"
 
@@ -3625,6 +3694,9 @@ msgstr "Zbývající částka"
 
 msgid "Remote CIDR"
 msgstr "Vzdálený CIDR"
+
+msgid "Remote Waldur API URL"
+msgstr "Vzdálená adresa URL Waldur API"
 
 msgid "Remote accounts"
 msgstr "Vzdálené účty"
@@ -3637,6 +3709,9 @@ msgstr "Vzdálená kategorie"
 
 msgid "Remote offering"
 msgstr "Vzdálená nabídka"
+
+msgid "Remote security group"
+msgstr "Skupina vzdáleného zabezpečení"
 
 msgid "Remove"
 msgstr "Odstranit"
@@ -3675,25 +3750,37 @@ msgid "Report details"
 msgstr "Podrobnosti hlášení"
 
 msgid "Report has been submitted"
-msgstr "Zpráva byla odeslána"
+msgstr "Hlášení bylo odesláno"
 
 msgid "Report incorrect data"
 msgstr "Nahlásit nesprávné údaje"
 
 msgid "Report is invalid."
-msgstr "Zpráva je neplatná."
+msgstr "Hlášení je neplatné."
 
 msgid "Report security incident"
 msgstr "Nahlásit bezpečnostní incident"
 
+msgid "Report usage"
+msgstr "Hlášení o využití"
+
 msgid "Reported by me"
 msgstr "Nahlášeno mnou"
+
+msgid "Reported value is reused every month until changed."
+msgstr "Nahlášená hodnota se používá opakovaně každý měsíc, dokud se nezmění."
 
 msgid "Reporter"
 msgstr "Reportér"
 
 msgid "Reporting"
 msgstr "Nahlášení"
+
+msgid "Request-based item"
+msgstr "Položka založená na požadavku"
+
+msgid "Request-based item (without Service Desk)"
+msgstr "Položka založená na požadavku (bez Service Desk)"
 
 msgid "Request account removal for {userName}."
 msgstr "Požadavek na odstranění účtu pro {userName}."
@@ -3743,6 +3830,12 @@ msgstr "Název požadavku"
 msgid "Request type"
 msgstr "Typ požadavku"
 
+msgid "Request {mode} of Public Offering"
+msgstr "Žádost {mode} o veřejnou nabídku"
+
+msgid "Request {mode} of {name}"
+msgstr "Požadavek {mode} na {name}"
+
 msgid "Request {requestId} has been created."
 msgstr "Byl vytvořen požadavek {requestId}."
 
@@ -3763,6 +3856,12 @@ msgstr "Vyžadováno"
 
 msgid "Resend"
 msgstr "Znovu odeslat"
+
+msgid "Reserved slot"
+msgstr "Rezervovaný úsek"
+
+msgid "Reserved slot by {name}"
+msgstr "Rezervovaný úsek uživatelem {name}"
 
 msgid "Reset"
 msgstr "Resetovat"
@@ -3908,6 +4007,12 @@ msgstr "Kontrola byla uzavřena."
 msgid "Review has been performed."
 msgstr "Kontrola byla provedena."
 
+msgid "Reviews"
+msgstr "Hodnocení"
+
+msgid "Revoke"
+msgstr "Odvolat"
+
 msgid "Role"
 msgstr "Role"
 
@@ -3943,6 +4048,12 @@ msgstr "Ruština"
 
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr "Bylo spuštěno jednotné odhlášení SAML2. Vyčkejte prosím na jeho dokončení."
+
+msgid "SLURM allocation"
+msgstr "SLURM alokace"
+
+msgid "SLURM allocation usage"
+msgstr "Využití alokace SLURM"
 
 msgid "SQL database has been created."
 msgstr "Databáze SQL byla vytvořena."
@@ -4063,6 +4174,9 @@ msgstr "Zvolte účetní období"
 
 msgid "Select affected resource..."
 msgstr "Vyberte ovlivněný zdroj..."
+
+msgid "Select affiliation"
+msgstr "Vybrat příslušnost"
 
 msgid "Select an option..."
 msgstr "Vyberte možnost..."
@@ -4196,6 +4310,9 @@ msgstr "Vybrat pracovní prostor"
 msgid "Selected"
 msgstr "Vybráno"
 
+msgid "Selector"
+msgstr "Selektor"
+
 msgid "Send notification"
 msgstr "Odeslat oznámení"
 
@@ -4217,6 +4334,9 @@ msgstr "Požadavek na službu - požadavek klienta na úpravu, přidání, změn
 msgid "Service manager"
 msgstr "Správce služeb"
 
+msgid "Service manager of:"
+msgstr "Správce služeb:"
+
 msgid "Service provider"
 msgstr "Poskytovatel služeb"
 
@@ -4228,6 +4348,9 @@ msgstr "Byl vygenerován tajný kód API poskytovatele služeb."
 
 msgid "Service provider can charge for usage of the following components"
 msgstr "Poskytovatel služeb může účtovat poplatky za využití následujících komponent"
+
+msgid "Service provider can report up to the requested amount over the whole active state of resource."
+msgstr "Poskytovatel služeb může vykazovat až do požadované výše za celý aktivní stav zdroje."
 
 msgid "Service provider details"
 msgstr "Podrobnosti o poskytovateli služeb"
@@ -4394,6 +4517,9 @@ msgstr "Číslo sponzora"
 msgid "Staff"
 msgstr "Zaměstnanci"
 
+msgid "Staff and Support user"
+msgstr "Zaměstnanci a uživatelé podpory"
+
 msgid "Start"
 msgstr "Začít"
 
@@ -4402,6 +4528,9 @@ msgstr "Počáteční den účtování"
 
 msgid "Start time"
 msgstr "Čas zahájení"
+
+msgid "Starting"
+msgstr "Začínající"
 
 msgid "State"
 msgstr "Stav"
@@ -4448,6 +4577,9 @@ msgstr "Odeslat"
 msgid "Submit report"
 msgstr "Odeslat hlášení"
 
+msgid "Submit usage report"
+msgstr "Odeslat hlášení o využití"
+
 msgid "Submit with"
 msgstr "Odeslat s"
 
@@ -4483,6 +4615,21 @@ msgstr "Souhrn"
 
 msgid "Support"
 msgstr "Podpora"
+
+msgid "Support dashboard"
+msgstr "Řídicí panel podpory"
+
+msgid "Support request events"
+msgstr "Události žádosti o podporu"
+
+msgid "Support requests"
+msgstr "Žádosti o podporu"
+
+msgid "Support user"
+msgstr "Uživatel podpory"
+
+msgid "Support workspace"
+msgstr "Pracovní prostor podpory"
 
 msgid "Sure? Form data would be lost"
 msgstr "Jste si jistý? Data formuláře by byla ztracena"
@@ -4622,6 +4769,9 @@ msgstr "Klíč byl vytvořen."
 msgid "The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number"
 msgstr "Název může obsahovat pouze písmena, číslice a pomlčky. Mělo by začínat písmenem a musí končit písmenem nebo číslicí."
 
+msgid "The name can only be made up of lowercase letters, numbers and the hyphen. The hyphen may not lead or trail in the name."
+msgstr "Název se může skládat pouze z malých písmen, číslic a pomlčky. Název nesmí začínat ani končit pomlčkou."
+
 msgid "The name must be shorter than 15 characters."
 msgstr "Název musí být kratší než 15 znaků."
 
@@ -4750,6 +4900,9 @@ msgstr "Tyto webové stránky používají soubory cookie, aby vám zajistily co
 
 msgid "Thumbnail"
 msgstr "Miniatura"
+
+msgid "Time in progress"
+msgstr "Čas průběhu"
 
 msgid "Time slot"
 msgstr "Časový úsek"
@@ -4946,6 +5099,9 @@ msgstr "Nelze vytvořit katalog."
 msgid "Unable to create disk."
 msgstr "Nelze vytvořit disk."
 
+msgid "Unable to create horizontal pod autoscaler."
+msgstr "Nelze vytvořit horizontální autoškálovač podů."
+
 msgid "Unable to create key."
 msgstr "Nelze vytvořit klíč."
 
@@ -5130,7 +5286,7 @@ msgid "Unable to load editor"
 msgstr "Nelze načíst editor"
 
 msgid "Unable to load events for this resource."
-msgstr "Nelze načíst události pro tento prostředek."
+msgstr "Nelze načíst události pro tento zdroj."
 
 msgid "Unable to load file."
 msgstr "Nelze načíst soubor."
@@ -5157,10 +5313,10 @@ msgid "Unable to load marketplace category details"
 msgstr "Nelze načíst podrobnosti o kategorii obchodu"
 
 msgid "Unable to load marketplace offering details."
-msgstr "Nelze načíst podrobnosti o nabídce Marketplace."
+msgstr "Nelze načíst podrobnosti o nabídce obchodu."
 
 msgid "Unable to load marketplace offerings."
-msgstr "Nelze načíst nabídky Marketplace."
+msgstr "Nelze načíst nabídky obchodu."
 
 msgid "Unable to load offering."
 msgstr "Nelze načíst nabídku."
@@ -5178,7 +5334,7 @@ msgid "Unable to load order details."
 msgstr "Nelze načíst podrobnosti objednávky."
 
 msgid "Unable to load organization resources."
-msgstr "Nelze načíst prostředky organizace."
+msgstr "Nelze načíst zdroje organizace."
 
 msgid "Unable to load organizations"
 msgstr "Nelze načíst organizace"
@@ -5268,7 +5424,7 @@ msgid "Unable to reject order item."
 msgstr "Nelze odmítnout položku objednávky."
 
 msgid "Unable to remove SSH key."
-msgstr "Nelze odebrat klíč SSH."
+msgstr "Nelze odstranit klíč SSH."
 
 msgid "Unable to remove hook."
 msgstr "Nelze odstranit hook."
@@ -5283,7 +5439,7 @@ msgid "Unable to remove logo."
 msgstr "Nelze odstranit logo."
 
 msgid "Unable to remove payment profile."
-msgstr "Nelze odebrat platební profil."
+msgstr "Nelze odstranit platební profil."
 
 msgid "Unable to report security incident."
 msgstr "Nelze nahlásit bezpečnostní incident."
@@ -5346,7 +5502,7 @@ msgid "Unable to submit resource termination request."
 msgstr "Nelze odeslat požadavek na ukončení zdroje."
 
 msgid "Unable to submit usage report."
-msgstr "Nelze odeslat zprávu o používání."
+msgstr "Nelze odeslat hlášení o využití."
 
 msgid "Unable to sync FreeIPA profile."
 msgstr "Nelze synchronizovat profil FreeIPA."
@@ -5380,6 +5536,9 @@ msgstr "Nelze aktualizovat povolené kontrolní seznamy."
 
 msgid "Unable to update floating IPs."
 msgstr "Nelze aktualizovat plovoucí IP adresy."
+
+msgid "Unable to update horizontal pod autoscaler."
+msgstr "Nelze aktualizovat horizontální autoškálovač podů."
 
 msgid "Unable to update internal IPs of OpenStack instance."
 msgstr "Nelze aktualizovat interní IP adresy instance OpenStack."
@@ -5480,6 +5639,9 @@ msgstr "Nezaplaceno"
 msgid "Unpause"
 msgstr "Zrušit pauzu"
 
+msgid "Unpublish as Google Calendar"
+msgstr "Zrušit publikování jako Google Kalendář"
+
 msgid "Update"
 msgstr "Aktualizovat"
 
@@ -5488,6 +5650,9 @@ msgstr "Aktualizace plovoucích IP adres"
 
 msgid "Update floating IPs in {name} virtual machine"
 msgstr "Aktualizace plovoucích IP adres ve virtuálním počítači {name}"
+
+msgid "Update horizontal pod autoscaler"
+msgstr "Aktualizovat horizontální autoškálovač podů"
 
 msgid "Update internal IPs for OpenStack instance {name}"
 msgstr "Aktualizace interních IP adres pro instanci OpenStack {name}"
@@ -5567,11 +5732,29 @@ msgstr "Aktualizace skupin zabezpečení"
 msgid "Upload new"
 msgstr "Nahrát nový"
 
+msgid "Uptime"
+msgstr "Doba provozu"
+
 msgid "Usage"
 msgstr "Využití"
 
 msgid "Usage-based"
 msgstr "Založené na využití"
+
+msgid "Usage information is not available."
+msgstr "Informace o využití nejsou k dispozici."
+
+msgid "Usage overview"
+msgstr "Přehled využití"
+
+msgid "Usage report has been submitted."
+msgstr "Hlášení o využití bylo odesláno."
+
+msgid "Usage reports"
+msgstr "Hlášení o využití"
+
+msgid "Usages"
+msgstr "Využití"
 
 msgid "Use an existing namespace"
 msgstr "Použít existující jmenný prostor"
@@ -5587,6 +5770,9 @@ msgstr "Uživatel"
 
 msgid "User could not been updated"
 msgstr "Uživatele nelze aktualizovat"
+
+msgid "User dashboard"
+msgstr "Uživatelský řídicí panel"
 
 msgid "User data"
 msgstr "Údaje o uživateli"
@@ -5767,6 +5953,12 @@ msgstr "Počet instancí VPC"
 
 msgid "VPC vCPU"
 msgstr "VPC vCPU"
+
+msgid "Valid runtime states for operation: {validStates}."
+msgstr "Platné provozní stavy pro operaci: {validStates}."
+
+msgid "Valid states for operation: {validStates}."
+msgstr "Platné stavy pro operaci: {validStates}."
 
 msgid "Value"
 msgstr "Hodnota"
@@ -5951,6 +6143,9 @@ msgstr "Zatím nemáte žádné kvóty."
 msgid "You have not added any SSH keys to your <Link>profile</Link>."
 msgstr "Nepřidali jste žádné SSH klíče do svého <Link>profilu</Link>."
 
+msgid "You have the right to purchase service without additional approval."
+msgstr "Máte právo zakoupit službu bez dalšího schválení."
+
 msgid "You haven't created any issues yet."
 msgstr "Zatím jste nevytvořili žádné problémy."
 
@@ -5962,6 +6157,9 @@ msgstr "Chcete-li upravit platební profily, musíte být zaměstnanci"
 
 msgid "You must be staff to modify payments"
 msgstr "Chcete-li upravit platby, musíte být zaměstnanci"
+
+msgid "You need approval to finish purchasing of services."
+msgstr "K dokončení nákupu služeb potřebujete schválení."
 
 msgid "You will be redirected in a moment."
 msgstr "Za chvíli budete přesměrováni."
@@ -5995,6 +6193,9 @@ msgstr "Vaše organizace zatím nemá žádné projekty."
 
 msgid "Your session has expired, please enter credentials to continue."
 msgstr "Vaše relace vypršela, pro pokračování prosím zadejte přihlašovací údaje."
+
+msgid "Your single pane of control for all cloud services. Login in to see it in action."
+msgstr "Jediný panel pro ovládání všech cloudových služeb. Přihlaste se a podívejte se na to v akci."
 
 msgid "(VAT is not included)"
 msgstr "(DPH není zahrnuta)"
@@ -6069,7 +6270,7 @@ msgid "generate automatically"
 msgstr "automaticky generovat"
 
 msgid "horizontal pod autoscaler"
-msgstr "horizontální autoškálování podů"
+msgstr "horizontální autoškálovač podů"
 
 msgid "horizontal pod autoscalers"
 msgstr "horizontální autoškálovače podů"
@@ -6128,6 +6329,9 @@ msgstr "uživatelé nabídky"
 msgid "offerings"
 msgstr "nabídky"
 
+msgid "on"
+msgstr "zap"
+
 msgid "on the"
 msgstr "na"
 
@@ -6185,6 +6389,9 @@ msgstr "zdroje"
 msgid "restored volumes"
 msgstr "obnovené svazky"
 
+msgid "reviews"
+msgstr "hodnocení"
+
 msgid "routers"
 msgstr "routery"
 
@@ -6214,6 +6421,9 @@ msgstr "podpora"
 
 msgid "support feedback"
 msgstr "zpětná vazba podpory"
+
+msgid "support requests"
+msgstr "žádosti o podporu"
 
 msgid "team invitations"
 msgstr "týmové pozvánky"
@@ -6289,6 +6499,9 @@ msgstr "{name} ({size})"
 
 msgid "{number} days"
 msgstr "{number} dny / dnů"
+
+msgid "{relative} ago"
+msgstr "před {relative}"
 
 msgid "{relative} ago, {date}"
 msgstr "před {relative}, {date}"

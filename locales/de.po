@@ -4334,6 +4334,9 @@ msgstr "Serviceanforderung - Anforderung des Kunden, einen bestimmten Service te
 msgid "Service manager"
 msgstr "Service-Manager"
 
+msgid "Service manager of:"
+msgstr "Service-Manager von:"
+
 msgid "Service provider"
 msgstr "Dienstleister"
 

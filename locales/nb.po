@@ -4334,6 +4334,9 @@ msgstr "Tjenesteforespørsel - klientens forespørsel om å endre, legge til, en
 msgid "Service manager"
 msgstr "Tjenesteleder"
 
+msgid "Service manager of:"
+msgstr "Tjenesteleder for:"
+
 msgid "Service provider"
 msgstr "Tjenesteleverandør"
 

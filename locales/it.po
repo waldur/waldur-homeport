@@ -4334,6 +4334,9 @@ msgstr "Richiesta di servizio - richiesta del client di modificare, aggiungere, 
 msgid "Service manager"
 msgstr "Responsabile del servizio"
 
+msgid "Service manager of:"
+msgstr "Responsabile del servizio di:"
+
 msgid "Service provider"
 msgstr "Fornitore di servizi"
 

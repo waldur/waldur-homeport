@@ -4334,6 +4334,9 @@ msgstr "Dienstverzoek - verzoek van de klant om een bepaalde dienst te wijzigen,
 msgid "Service manager"
 msgstr "Dienst manager"
 
+msgid "Service manager of:"
+msgstr "Dienst manager van:"
+
 msgid "Service provider"
 msgstr "Dienstverlener"
 

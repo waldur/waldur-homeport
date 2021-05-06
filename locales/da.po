@@ -4334,6 +4334,9 @@ msgstr "Serviceanmodning - kundens anmodning om at modificere, tilføje, ændre 
 msgid "Service manager"
 msgstr "Servicechef"
 
+msgid "Service manager of:"
+msgstr "Servicechef for:"
+
 msgid "Service provider"
 msgstr "Tjenesteudbyder"
 
