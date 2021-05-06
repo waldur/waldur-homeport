@@ -7,6 +7,7 @@ interface StringFieldProps extends FormField {
   style?: any;
   maxLength?: number;
   pattern?: string;
+  autoFocus?: boolean;
 }
 
 export const StringField: FunctionComponent<StringFieldProps> = (props) => {
