@@ -83,8 +83,8 @@ describe('SecurityGroupEditorDialog', () => {
     expect(dialog.ethertype).toBe('IPv4');
     expect(dialog.direction).toBe('egress');
     expect(dialog.protocol).toBe('tcp');
-    expect(dialog.fromPort).toBe(80);
-    expect(dialog.toPort).toBe(80);
+    expect(dialog.fromPort).toBe('80');
+    expect(dialog.toPort).toBe('80');
     expect(dialog.cidr).toBe('192.168.42.0/24');
     expect(dialog.description).toBe('');
   });
@@ -108,8 +108,8 @@ describe('SecurityGroupEditorDialog', () => {
     expect(dialog.ethertype).toBe('IPv4');
     expect(dialog.direction).toBe('ingress');
     expect(dialog.protocol).toBe('icmp');
-    expect(dialog.fromPort).toBe(-1);
-    expect(dialog.toPort).toBe(-1);
+    expect(dialog.fromPort).toBe('-1');
+    expect(dialog.toPort).toBe('-1');
     expect(dialog.cidr).toBe('');
     expect(dialog.description).toBe('');
   });
@@ -227,7 +227,7 @@ describe('SecurityGroupEditorDialog', () => {
 
     expect(dialog.toPortIsInvalid).toBe(false);
     dialog.toPort = '';
-    expect(dialog.toPortIsInvalid).toBe(true);
+    expect(dialog.toPortIsInvalid).toBe(false);
   });
 
   it('validates from port as required', async () => {
@@ -237,7 +237,7 @@ describe('SecurityGroupEditorDialog', () => {
 
     expect(dialog.fromPortIsInvalid).toBe(false);
     dialog.fromPort = '';
-    expect(dialog.fromPortIsInvalid).toBe(true);
+    expect(dialog.fromPortIsInvalid).toBe(false);
   });
 
   it('disables submit button when form is being submitted', async () => {
