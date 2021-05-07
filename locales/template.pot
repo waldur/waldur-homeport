@@ -746,6 +746,7 @@ msgid "Attachments"
 msgstr ""
 
 #: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 msgid "Attributes"
 msgstr ""
 
@@ -5120,6 +5121,7 @@ msgstr ""
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
@@ -8109,6 +8111,7 @@ msgstr ""
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "UUID"
 msgstr ""
@@ -8512,7 +8515,7 @@ msgstr ""
 msgid "Unable to load data."
 msgstr ""
 
-#: src/marketplace/resources/list/ResourceOpenDetail.tsx
+#: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 msgid "Unable to load detail."
 msgstr ""
 

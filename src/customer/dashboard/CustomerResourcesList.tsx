@@ -9,9 +9,9 @@ import {
   CUSTOMER_RESOURCES_FILTER_FORM_ID,
   RESOURCE_STATES,
 } from '@waldur/marketplace/resources/list/constants';
+import { ExpandableResourceSummary } from '@waldur/marketplace/resources/list/ExpandableResourceSummary';
 import { ResourceCategoryField } from '@waldur/marketplace/resources/list/ResourceCategoryField';
 import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNameField';
-import { ResourceOpenDetail } from '@waldur/marketplace/resources/list/ResourceOpenDetail';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { RootState } from '@waldur/store/reducers';
@@ -61,7 +61,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       columns={columns}
       verboseName={translate('Resources')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      expandableRow={ResourceOpenDetail}
+      expandableRow={ExpandableResourceSummary}
     />
   );
 };

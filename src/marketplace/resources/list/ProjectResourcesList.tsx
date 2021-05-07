@@ -19,9 +19,9 @@ import { Resource } from '../types';
 import { CategoryColumnField } from './CategoryColumnField';
 import { CreateResourceButton } from './CreateResourceButton';
 import { EmptyResourcesListPlaceholder } from './EmptyResourcesListPlaceholder';
+import { ExpandableResourceSummary } from './ExpandableResourceSummary';
 import { ResourceActionsButton } from './ResourceActionsButton';
 import { ResourceNameField } from './ResourceNameField';
-import { ResourceOpenDetail } from './ResourceOpenDetail';
 import { ResourceStateField } from './ResourceStateField';
 
 interface FieldProps {
@@ -95,7 +95,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
       showPageSizeSelector={true}
-      expandableRow={ResourceOpenDetail}
+      expandableRow={ExpandableResourceSummary}
     />
   );
 };
