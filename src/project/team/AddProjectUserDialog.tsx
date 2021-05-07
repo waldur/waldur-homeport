@@ -69,7 +69,7 @@ export const AddProjectUserDialog = reduxForm<
             name="user"
             label={translate('User')}
             placeholder={translate('Select user...')}
-            loadOptions={(query, prevOptions, { page }) =>
+            loadOptions={(query, prevOptions, page) =>
               usersAutocomplete({ full_name: query }, prevOptions, page)
             }
             {...reactSelectMenuPortaling()}

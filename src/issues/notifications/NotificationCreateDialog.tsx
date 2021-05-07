@@ -93,8 +93,8 @@ export const NotificationCreateDialog = reduxForm({
             name="customers"
             label={translate('Organizations')}
             placeholder={translate('Select organizations...')}
-            loadOptions={(query, prevOptions, additional) =>
-              organizationAutocomplete(query, prevOptions, additional)
+            loadOptions={(query, prevOptions, page) =>
+              organizationAutocomplete(query, prevOptions, page)
             }
             isMulti={true}
             {...reactSelectMenuPortaling()}
@@ -120,7 +120,7 @@ export const NotificationCreateDialog = reduxForm({
             name="projects"
             label={translate('Projects')}
             placeholder={translate('Select projects...')}
-            loadOptions={(query, prevOptions, { page }) =>
+            loadOptions={(query, prevOptions, page) =>
               projectAutocomplete(query, prevOptions, page)
             }
             isMulti={true}
@@ -147,7 +147,7 @@ export const NotificationCreateDialog = reduxForm({
             name="offerings"
             label={translate('Offerings')}
             placeholder={translate('Select offerings...')}
-            loadOptions={(query, prevOptions, { page }) =>
+            loadOptions={(query, prevOptions, page) =>
               offeringsAutocomplete(
                 { name: query, shared: true },
                 prevOptions,
