@@ -11,6 +11,9 @@ function getLocaleData(locale) {
 }
 
 function loadMomentLocale(locale: string) {
+  if (locale === 'en') {
+    locale = 'en-gb';
+  }
   return import(`moment/locale/${locale}.js`).then(() => {
     moment.locale(locale);
   });
