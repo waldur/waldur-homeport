@@ -2,7 +2,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 
-import { SUPPORT_OFFERING_TYPE } from './constants';
+import { BASIC_OFFERING_TYPE, SUPPORT_OFFERING_TYPE } from './constants';
 import { serializer } from './serializer';
 
 const OfferingConfigurationDetails = lazyComponent(
@@ -53,7 +53,7 @@ registerOfferingType({
 });
 
 registerOfferingType({
-  type: 'Marketplace.Basic',
+  type: BASIC_OFFERING_TYPE,
   get label() {
     return translate('Request-based item (without Service Desk)');
   },

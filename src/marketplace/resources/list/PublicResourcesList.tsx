@@ -5,7 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { ResourceOpenDetail } from '@waldur/marketplace/resources/list/ResourceOpenDetail';
+import { ExpandableResourceSummary } from '@waldur/marketplace/resources/list/ExpandableResourceSummary';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -89,7 +89,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
       showPageSizeSelector={true}
-      expandableRow={ResourceOpenDetail}
+      expandableRow={ExpandableResourceSummary}
     />
   );
 };
