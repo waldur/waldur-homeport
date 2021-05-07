@@ -2,6 +2,10 @@ import { FC, useMemo } from 'react';
 import { Field } from 'redux-form';
 
 import { maxValue, required } from '@waldur/core/validators';
+import {
+  formatIntField,
+  parseIntField,
+} from '@waldur/marketplace/common/utils';
 
 import { FormField } from './FormField';
 import { Rule } from './types';
@@ -20,6 +24,8 @@ export const FromPortField: FC<FromPortFieldProps> = ({ rule }) => {
       validate={validate}
       component={FormField}
       type="number"
+      parse={parseIntField}
+      format={formatIntField}
     />
   );
 };
