@@ -5027,8 +5027,11 @@ msgstr "No se puede añadir la imagen."
 msgid "Unable to add item to shopping cart."
 msgstr "No se puede añadir el artículo al carrito de la compra."
 
+msgid "Unable to add user."
+msgstr "No se puede añadir el usuario."
+
 msgid "Unable to apply action."
-msgstr "No se pudo aplicar la acción."
+msgstr "No se puede aplicar la acción."
 
 msgid "Unable to approve invitation."
 msgstr "No se puede aprobar la invitación."

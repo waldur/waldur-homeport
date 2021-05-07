@@ -5027,6 +5027,9 @@ msgstr "Kan afbeelding niet toevoegen."
 msgid "Unable to add item to shopping cart."
 msgstr "Kan artikel niet toevoegen aan winkelmandje."
 
+msgid "Unable to add user."
+msgstr "Kan gebruiker niet toevoegen."
+
 msgid "Unable to apply action."
 msgstr "Kan actie niet toepassen."
 

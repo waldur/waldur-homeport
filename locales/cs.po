@@ -5027,6 +5027,9 @@ msgstr "Nelze přidat obrázek."
 msgid "Unable to add item to shopping cart."
 msgstr "Nelze přidat položku do nákupního košíku."
 
+msgid "Unable to add user."
+msgstr "Nelze přidat uživatele."
+
 msgid "Unable to apply action."
 msgstr "Nelze použít akci."
 

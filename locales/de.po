@@ -5027,6 +5027,9 @@ msgstr "Bild kann nicht hinzugefügt werden."
 msgid "Unable to add item to shopping cart."
 msgstr "Artikel kann nicht zum Warenkorb hinzugefügt werden."
 
+msgid "Unable to add user."
+msgstr "Benutzer kann nicht hinzugefügt werden."
+
 msgid "Unable to apply action."
 msgstr "Aktion kann nicht angewendet werden."
 

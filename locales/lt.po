@@ -5027,6 +5027,9 @@ msgstr "Neįmanoma pridėti vaizdo."
 msgid "Unable to add item to shopping cart."
 msgstr "Neįmanoma pridėti prekės į pirkinių krepšelį."
 
+msgid "Unable to add user."
+msgstr "Neįmanoma įtraukti vartotojo."
+
 msgid "Unable to apply action."
 msgstr "Neįmanoma pritaikyti veiksmo."
 

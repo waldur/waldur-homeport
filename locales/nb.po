@@ -5027,6 +5027,9 @@ msgstr "Kan ikke legge til bilde."
 msgid "Unable to add item to shopping cart."
 msgstr "Kan ikke legge til vare i handlekurven."
 
+msgid "Unable to add user."
+msgstr "Kan ikke legge til bruker."
+
 msgid "Unable to apply action."
 msgstr "Kan ikke bruke handling."
 
