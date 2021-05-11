@@ -20,7 +20,7 @@ export const LinkDialog = ({ resolve: { resource } }) => {
     return {
       instances: instances.map((choice) => ({
         value: choice.url,
-        display_name: choice.name,
+        label: choice.name,
       })),
     };
   });

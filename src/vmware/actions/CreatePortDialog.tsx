@@ -22,7 +22,7 @@ export const CreatePortDialog = ({ resolve: { resource } }) => {
     return {
       networks: networks.map((network) => ({
         value: network.url,
-        display_name: network.name,
+        label: network.name,
       })),
     };
   });
