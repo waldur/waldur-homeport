@@ -7,17 +7,6 @@
     border-color: #337ab7;
     color: #fff;
   }
-}
-
-@media (min-width: 769px) and (max-width: 1000px) {
-  .customer-create-prompt {
-    .message-button {
-      min-height: 299px;
-    }
-  }
-}
-
-.customer-create-prompt {
   .modal-title {
     font-size: 18px;
   }
@@ -26,6 +15,11 @@
       display: block;
       margin: 0 auto;
       width: 300px;
+    }
+  }
+  @media (min-width: 769px) and (max-width: 1000px) {
+    .message-button {
+      min-height: 299px;
     }
   }
 }

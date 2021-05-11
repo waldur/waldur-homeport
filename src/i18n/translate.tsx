@@ -10,7 +10,7 @@ export const formatJsxTemplate = (template, context) => {
   if (!context) {
     return template;
   }
-  const result = (
+  return (
     <Fragment>
       {template.split(/\{|\}/g).map((part, index) => (
         <Fragment key={index}>
@@ -19,7 +19,6 @@ export const formatJsxTemplate = (template, context) => {
       ))}
     </Fragment>
   );
-  return result;
 };
 
 export const formatJsx = (

@@ -19,20 +19,10 @@
   padding: 0;
 }
 
-/* Accessibility */
-.wizard > .steps .current-info {
-  position: absolute;
-  left: -999em;
-}
-
 .wizard > .content > .title {
   position: absolute;
   left: -999em;
 }
-
-/*
-    Wizard
-*/
 
 .wizard > .steps {
   position: relative;
@@ -133,7 +123,7 @@ error has been renamed to header-error due to conflict with error class in compo
 
 .wizard > .content > .body {
   float: left;
-  position: absolute;
+  position: relative;
   width: 95%;
   height: 95%;
   padding: 2.5%;
@@ -225,8 +215,4 @@ error has been renamed to header-error due to conflict with error class in compo
 .wizard > .actions .disabled a:active {
   background: #eee;
   color: #aaa;
-}
-
-.wizard > .content > .body {
-  position: relative;
 }

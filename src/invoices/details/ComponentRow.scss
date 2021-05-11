@@ -3,13 +3,13 @@
     td:first-child {
       text-align: left;
     }
-    td:not(first-child) {
+    td:not(:first-child) {
       text-align: right;
     }
     th:first-child {
       text-align: left;
     }
-    th:not(first-child) {
+    th:not(:first-child) {
       text-align: right;
     }
   }

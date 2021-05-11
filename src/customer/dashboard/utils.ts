@@ -48,12 +48,12 @@ export const useBookingsCalendarProps = () => {
 export const getDistinctColorsFromEvents = (events): Legend[] => {
   const flags = [],
     output = [];
-  for (let i = 0; i < events.length; i++) {
-    if (flags[events[i].color]) continue;
-    flags[events[i].color] = true;
+  for (const event of events) {
+    if (flags[event.color]) continue;
+    flags[event.color] = true;
     output.push({
-      color: events[i].color,
-      name: events[i].offering_name,
+      color: event.color,
+      name: event.offering_name,
     });
   }
   return output;
