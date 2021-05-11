@@ -1,18 +1,15 @@
 import { ENV } from '@waldur/configs/default';
-import { sendForm } from '@waldur/core/api';
+import { patch } from '@waldur/core/api';
 
 import { ProviderCreateFormData } from './types';
 
 const serializeDetails = (provider: ProviderCreateFormData) => {
   const serializer = provider.type.serializer || ((x) => x);
-  return serializer(provider.details);
+  return serializer(provider.options);
 };
 
-const getSettingsUrl = (uuid) =>
-  `${ENV.apiEndpoint}api/service-settings/${uuid}/`;
-
 export const updateProvider = (provider) =>
-  sendForm('patch', getSettingsUrl(provider.details.uuid), {
+  patch(`${ENV.apiEndpoint}api/service-settings/${provider.uuid}/`, {
     name: provider.name,
-    ...serializeDetails(provider),
+    options: serializeDetails(provider),
   });

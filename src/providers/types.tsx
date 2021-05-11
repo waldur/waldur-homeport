@@ -23,7 +23,7 @@ export interface ProviderCreateFormData {
   customer: Customer;
   name: string;
   type: ProviderConfig;
-  details: any;
+  options: Record<string, any>;
 }
 
 export interface ProviderUpdateFormData {
