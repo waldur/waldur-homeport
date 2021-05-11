@@ -9,7 +9,6 @@ import { showError, showSuccess } from '@waldur/store/notify';
 import { fetchListStart } from '@waldur/table/actions';
 
 import * as constants from '../constants';
-import { SUPPORT_CUSTOMER_LIST } from '../constants';
 
 function* organizationUpdate(action) {
   try {
@@ -31,7 +30,7 @@ function* organizationLocation(action) {
     yield call(api.updateOrganization, action.payload);
     yield put(showSuccess(translate('Location has been saved successfully.')));
     yield put(closeModalDialog());
-    yield put(fetchListStart(SUPPORT_CUSTOMER_LIST));
+    yield put(fetchListStart(constants.SUPPORT_CUSTOMER_LIST));
   } catch (error) {
     const errorMessage = `${translate('Unable to save location.')} ${format(
       error,

@@ -30,7 +30,6 @@ export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> =
     <label className="control-label col-sm-2">{props.label}</label>
     <div className="col-sm-5">
       <DatePicker
-        name={name}
         weekStartsOn={1}
         showTodayButton={true}
         todayButtonLabel={translate('Today')}
@@ -52,7 +51,6 @@ export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> =
       <i className="fa fa-clock-o" />
     </label>
     <Select
-      name={name}
       className="col-sm-3"
       isClearable={false}
       isSearchable={false}

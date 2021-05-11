@@ -14,10 +14,7 @@ import { CustomerUsersList } from './CustomerUsersList';
 export const CustomerPopover: FunctionComponent<{
   resolve: { customer_uuid };
 }> = ({ resolve: { customer_uuid } }) => {
-  const { loading, error, value } = useAsync(
-    async () => await getCustomer(customer_uuid),
-    [],
-  );
+  const { loading, error, value } = useAsync(() => getCustomer(customer_uuid));
   return (
     <ModalDialog
       title={translate('Organization users list')}

@@ -11,7 +11,6 @@ import { fetchList } from '@waldur/table/effects';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as constants from '../constants';
-import { INVOICES_TABLE } from '../constants';
 
 function* markInvoiceAsPaid(action: Action<any>) {
   try {
@@ -22,7 +21,7 @@ function* markInvoiceAsPaid(action: Action<any>) {
     yield fetchList({
       type: FETCH_LIST_START,
       payload: {
-        table: INVOICES_TABLE,
+        table: constants.INVOICES_TABLE,
         extraFilter: {
           customer: customer.url,
         },

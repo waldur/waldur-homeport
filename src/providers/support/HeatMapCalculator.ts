@@ -44,7 +44,7 @@ export const getDataForCountry = (usage: UsageData, country: string) => {
       if (usage.organizations[uuid].country === country) {
         acc.providers.push(usage.organizations[uuid]);
       }
-      usage.service_providers[uuid].map((consumerUuid) => {
+      usage.service_providers[uuid].forEach((consumerUuid) => {
         if (
           usage.organizations[consumerUuid].country === country &&
           acc.consumers.indexOf(usage.organizations[consumerUuid]) === -1
