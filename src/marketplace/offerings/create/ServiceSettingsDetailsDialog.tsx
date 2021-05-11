@@ -16,6 +16,8 @@ import { getOffering } from '../store/selectors';
 interface ProviderData {
   type: string;
   name: string;
+  uuid: string;
+  options: Record<string, any>;
 }
 
 export const ServiceSettingsDetailsDialog: FunctionComponent = () => {
@@ -27,7 +29,8 @@ export const ServiceSettingsDetailsDialog: FunctionComponent = () => {
       initialValues: {
         name: provider.name,
         type: findProvider(provider.type),
-        details: provider,
+        uuid: provider.uuid,
+        options: provider.options,
       },
       type: findProvider(provider.type),
     };
