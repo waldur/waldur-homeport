@@ -17,21 +17,6 @@ interface BaseField<Resource> {
   formGroupClass?: string;
 }
 
-interface SelectOption {
-  value: string;
-  display_name: string;
-}
-
-interface SelectField<Resource> extends BaseField<Resource> {
-  serializer?: (items: any[]) => any[];
-  formatter?: (item) => string;
-  modelParser?: (field, items) => any[];
-  display_name_field?: string;
-  value_field?: string;
-  url?: string;
-  choices?: SelectOption[];
-}
-
 interface TextField<Resource> extends BaseField<Resource> {
   type: 'string' | 'text';
   pattern?: string | RegExp;
@@ -51,7 +36,6 @@ interface ComponentField<Resource> extends Omit<BaseField<Resource>, 'type'> {
 export type ActionField<Resource = BaseResource> =
   | BaseField<Resource>
   | TextField<Resource>
-  | SelectField<Resource>
   | IntegerField<Resource>
   | ComponentField<Resource>;
 
