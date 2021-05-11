@@ -5,12 +5,12 @@ import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getDetailsComponent } from '@waldur/marketplace/common/registry';
 import { PlanDetails } from '@waldur/marketplace/details/plan/PlanDetails';
-import { ResourceDetailsLink } from '@waldur/marketplace/resources/ResourceDetailsLink';
 import { ResourceReference } from '@waldur/marketplace/resources/types';
 import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 
 import { OrderItemDetailsField } from './OrderItemDetailsField';
 import { OrderItemDetailsHeader } from './OrderItemDetailsHeader';
+import { OrderItemDetailsResourceLink } from './OrderItemDetailsResourceLink';
 import { OrderItemDetailsSummary } from './OrderItemDetailsSummary';
 import { OrderItemSummary } from './OrderItemSummary';
 import { OrderItemTerminateButton } from './OrderItemTerminateButton';
@@ -57,11 +57,11 @@ let OrderItemDetails = (
               )}
               {props.orderItem.resource_uuid && (
                 <OrderItemDetailsField label={translate('Resource')}>
-                  <ResourceDetailsLink
+                  <OrderItemDetailsResourceLink
                     item={props.orderItem as ResourceReference}
                   >
                     {translate('Resource link')}
-                  </ResourceDetailsLink>
+                  </OrderItemDetailsResourceLink>
                 </OrderItemDetailsField>
               )}
               {props.orderItem.can_terminate && (
