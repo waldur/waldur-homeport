@@ -71,7 +71,7 @@ export const OfferingPermissionCreateDialog = reduxForm({
             name="offering"
             label={translate('Offering')}
             placeholder={translate('Select offerings...')}
-            loadOptions={(query, prevOptions, { page }) =>
+            loadOptions={(query, prevOptions, page) =>
               offeringsAutocomplete(
                 { name: query, shared: true, customer: customer.url },
                 prevOptions,
