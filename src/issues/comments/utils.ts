@@ -7,7 +7,7 @@ import { openUserPopover } from '@waldur/user/actions';
 import { Comment } from './types';
 
 const urlPattern =
-  '(?:(?:https?|ftp|file)://|www.|ftp.)(?:([-A-Z0-9+&@#/%=~_|$?!:,.]*)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:([-A-Z0-9+&@#/%=~_|$?!:,.]*)|[A-Z0-9+&@#/%=~_|$])';
+  '(?:(?:https?)://|www.)(?:([-A-Z0-9+&@#/%=~_|$?!:,.]*)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:([-A-Z0-9+&@#/%=~_|$?!:,.]*)|[A-Z0-9+&@#/%=~_|$])';
 
 const urlRegex = new RegExp(urlPattern, 'im');
 
