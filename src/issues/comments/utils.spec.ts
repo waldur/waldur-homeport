@@ -84,8 +84,6 @@ describe('url regex', () => {
   it('getting url', () => {
     test('https://www.google.com', 'https://www.google.com');
     test('http://www.google.com', 'http://www.google.com');
-    test('ftp://www.google.com', 'ftp://www.google.com');
-    test('file://www.google.com', 'file://www.google.com');
     test('www.google.com', 'www.google.com');
     test('htt://www.google.com', 'www.google.com');
     test('://www.google.com', 'www.google.com');
