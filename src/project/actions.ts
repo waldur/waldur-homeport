@@ -14,6 +14,7 @@ const ProjectRemoveDialog = lazyComponent(
 
 export const createProject = createFormAction('waldur/project/CREATE');
 export const updateProject = createFormAction('waldur/project/UPDATE');
+export const moveProject = createFormAction('waldur/project/MOVE');
 export const gotoProjectList = createFormAction('waldur/project/GOTO_LIST');
 
 export const GOTO_PROJECT_CREATE = 'waldur/project/GOTO_CREATE';

@@ -200,6 +200,7 @@ msgstr ""
 #: src/paypal/InvoiceActions.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/ProjectsListActions.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -1885,7 +1886,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
 #: src/openstack/openstack-security-groups/rule-editor/ActionsField.tsx
-#: src/project/ProjectDeleteButton.tsx
+#: src/project/DeleteAction.tsx
 #: src/rancher/catalog/CatalogDeleteButton.tsx
 #: src/rancher/cluster/IngressActions.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
@@ -3941,6 +3942,18 @@ msgstr ""
 msgid "Mount point"
 msgstr ""
 
+#: src/project/MoveProjectAction.tsx
+msgid "Move project"
+msgstr ""
+
+#: src/project/MoveProjectDialog.tsx
+msgid "Move project {projectName}"
+msgstr ""
+
+#: src/project/MoveToOrganizationAutocomplete.tsx
+msgid "Move to organization"
+msgstr ""
+
 #: src/core/validators.ts
 msgid "Must be at least {min}"
 msgstr ""
@@ -4257,6 +4270,7 @@ msgstr ""
 
 #: src/issues/create/CallerGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
+#: src/project/MoveToOrganizationAutocomplete.tsx
 msgid "No organizations"
 msgstr ""
 
@@ -5502,6 +5516,10 @@ msgid "Project could not be created."
 msgstr ""
 
 #: src/project/effects.ts
+msgid "Project could not be moved."
+msgstr ""
+
+#: src/project/effects.ts
 msgid "Project could not be updated."
 msgstr ""
 
@@ -6599,6 +6617,7 @@ msgstr ""
 #: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
 #: src/marketplace/offerings/expandable/utils.ts
 #: src/marketplace/resources/usage/utils.ts
+#: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
 #: src/providers/ProviderUpdateForm.tsx
 msgid "Save"
@@ -6810,6 +6829,7 @@ msgstr ""
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
+#: src/project/MoveToOrganizationAutocomplete.tsx
 #: src/user/SelectAffiliationDialog.tsx
 msgid "Select organization..."
 msgstr ""
@@ -9746,7 +9766,6 @@ msgid "You do not have any resources yet."
 msgstr ""
 
 #: src/project/ProjectCreateButton.tsx
-#: src/project/ProjectDeleteButton.tsx
 msgid "You don't have enough privileges to perform this operation."
 msgstr ""
 
@@ -10269,6 +10288,10 @@ msgstr ""
 
 #: src/resource/utils.tsx
 msgid "{number} days"
+msgstr ""
+
+#: src/project/effects.ts
+msgid "{projectName} project has been moved to {organizationName} organization."
 msgstr ""
 
 #: src/invoices/events/InvoiceEventItem.tsx

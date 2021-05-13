@@ -4,8 +4,10 @@ import { takeEvery, put, call, select } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
+import { closeModalDialog } from '@waldur/modal/actions';
+import { PROJECTS_LIST } from '@waldur/project/constants';
 import { showSuccess, showError } from '@waldur/store/notify';
-import { deleteEntity } from '@waldur/table/actions';
+import { deleteEntity, fetchListStart } from '@waldur/table/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import {
@@ -14,6 +16,7 @@ import {
   updateProject,
   GOTO_PROJECT_CREATE,
   DELETE_PROJECT,
+  moveProject,
 } from './actions';
 import * as api from './api';
 
@@ -29,9 +32,9 @@ export function* handleCreateProject(action) {
     });
     const project = response.data;
     yield put(triggerTransition('project.details', { uuid: project.uuid }));
-    // TODO: refreshProjectList
     yield put(createProject.success());
     yield put(showSuccess(successMessage));
+    yield put(fetchListStart(PROJECTS_LIST));
   } catch (error) {
     const formError = new SubmissionError({
       _error: errorMessage,
@@ -64,15 +67,44 @@ export function* handleUpdateProject(action) {
     const response = yield call(api.updateProject, action.payload);
     const project = response.data;
     yield call(api.dangerouslyUpdateProject, action.payload.cache, project);
-    // TODO: refreshProjectList
     yield put(updateProject.success());
     yield put(showSuccess(successMessage));
+    yield put(fetchListStart(PROJECTS_LIST));
   } catch (error) {
     const formError = new SubmissionError({
       _error: errorMessage,
     });
 
     yield put(updateProject.failure(formError));
+  }
+}
+
+export function* handleMoveProject(action) {
+  try {
+    yield call(api.moveProject, action.payload);
+    yield put(moveProject.success());
+    yield put(
+      showSuccess(
+        translate(
+          '{projectName} project has been moved to {organizationName} organization.',
+          {
+            projectName: action.payload.project.name,
+            organizationName: action.payload.organization.name,
+          },
+        ),
+      ),
+    );
+    yield put(closeModalDialog());
+    yield put(fetchListStart(PROJECTS_LIST));
+  } catch (error) {
+    const errorMessage = `${translate('Project could not be moved.')} ${format(
+      error,
+    )}`;
+    yield put(showError(errorMessage));
+    const formError = new SubmissionError({
+      _error: errorMessage,
+    });
+    yield put(moveProject.failure(formError));
   }
 }
 
@@ -84,8 +116,9 @@ function* handleProjectDelete(action) {
 
   try {
     yield call(api.deleteProject, projectId);
-    yield put(deleteEntity('ProjectsList', projectId));
+    yield put(deleteEntity(PROJECTS_LIST, projectId));
     yield put(showSuccess(successMessage));
+    yield put(fetchListStart(PROJECTS_LIST));
   } catch (error) {
     yield put(showError(`${errorMessage} ${format(error)}`));
   }
@@ -96,5 +129,6 @@ export default function* projectSaga() {
   yield takeEvery(gotoProjectList.REQUEST, handleGotoProjectList);
   yield takeEvery(GOTO_PROJECT_CREATE, handleGotoProjectCreate);
   yield takeEvery(updateProject.REQUEST, handleUpdateProject);
+  yield takeEvery(moveProject.REQUEST, handleMoveProject);
   yield takeEvery(DELETE_PROJECT, handleProjectDelete);
 }

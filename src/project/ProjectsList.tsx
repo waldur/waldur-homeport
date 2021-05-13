@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { ButtonGroup } from 'react-bootstrap';
 import { compose } from 'redux';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
@@ -6,6 +7,8 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { withTranslation } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { PROJECTS_LIST } from '@waldur/project/constants';
+import { ProjectsListActions } from '@waldur/project/ProjectsListActions';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
@@ -13,7 +16,6 @@ import { formatLongText } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ProjectCreateButton } from './ProjectCreateButton';
-import { ProjectDeleteButton } from './ProjectDeleteButton';
 import { ProjectDetailsButton } from './ProjectDetailsButton';
 import { ProjectExpandableRowContainer } from './ProjectExpandableRowContainer';
 import { ProjectTablePlaceholder } from './ProjectTablePlaceholder';
@@ -26,13 +28,6 @@ const ProjectCostField = ({ row }) =>
   defaultCurrency(
     (row.billing_price_estimate && row.billing_price_estimate.total) || 0,
   );
-
-const ProjectActionsField = ({ row }) => (
-  <div className="btn-group">
-    <ProjectDetailsButton project={row} />
-    <ProjectDeleteButton project={row} />
-  </div>
-);
 
 export const TableComponent: FunctionComponent<any> = (props) => {
   const { translate, filterColumns } = props;
@@ -65,7 +60,14 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Actions'),
-      render: ProjectActionsField,
+      render: ({ row }) => {
+        return (
+          <ButtonGroup>
+            <ProjectsListActions project={row} />
+            <ProjectDetailsButton project={row} />
+          </ButtonGroup>
+        );
+      },
     },
   ]);
 
@@ -85,7 +87,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
 };
 
 const TableOptions = {
-  table: 'ProjectsList',
+  table: PROJECTS_LIST,
   fetchData: createFetcher('projects'),
   queryField: 'query',
   getDefaultFilter: (state: RootState) => ({
