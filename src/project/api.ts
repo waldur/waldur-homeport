@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 import { ENV } from '@waldur/configs/default';
-import { deleteById, getById, getList } from '@waldur/core/api';
+import { deleteById, getById, getList, post } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -28,6 +28,13 @@ export const updateProject = (project) =>
     name: project.name,
     description: project.description,
     end_date: project.end_date ? formatDate(project.end_date) : undefined,
+  });
+
+export const moveProject = (data) =>
+  post(`/projects/${data.project.uuid}/move_project/`, {
+    customer: {
+      url: data.organization.url,
+    },
   });
 
 export const deleteCustomer = (customerId: string) =>

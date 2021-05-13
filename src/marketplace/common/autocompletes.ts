@@ -14,6 +14,7 @@ export const organizationAutocomplete = async (
   prevOptions,
   { page },
   isServiceProvider?: boolean,
+  field = ['name', 'uuid'],
 ) => {
   const params = {
     name: query,
@@ -21,7 +22,7 @@ export const organizationAutocomplete = async (
     page_size: ENV.pageSize,
     is_service_provider: isServiceProvider,
     has_resources: isServiceProvider ? undefined : true,
-    field: ['name', 'uuid'],
+    field,
     o: 'name',
   };
   const response = await getCustomerList(params);
