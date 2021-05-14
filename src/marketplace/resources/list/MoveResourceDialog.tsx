@@ -15,6 +15,7 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 interface MoveResourceDialogOwnProps {
   resource: Resource;
+  reInitResource?(): void;
   refreshList?(): void;
 }
 
@@ -42,7 +43,11 @@ const PureMoveResourceDialog: FunctionComponent<any> = (props) => {
           ),
         ),
       );
-      props.resolve.refreshList();
+      if (props.resolve.reInitResource) {
+        await props.resolve.reInitResource();
+      } else if (props.resolve.refreshList) {
+        props.resolve.refreshList();
+      }
       dispatch(closeModalDialog());
     } catch (error) {
       dispatch(showErrorResponse(error, translate('Unable to move resource.')));
