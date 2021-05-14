@@ -28,6 +28,7 @@ export const updateProject = (project) =>
     name: project.name,
     description: project.description,
     end_date: project.end_date ? formatDate(project.end_date) : undefined,
+    backend_id: project.backend_id,
   });
 
 export const moveProject = (data) =>

@@ -105,6 +105,7 @@ const TableOptions = {
       'billing_price_estimate',
       'type_name',
       'end_date',
+      'backend_id',
     ];
 
     return filter;

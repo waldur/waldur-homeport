@@ -83,6 +83,7 @@ export interface Project {
   customer_uuid?: string;
   customer_name?: string;
   customer_abbreviation?: string;
+  backend_id?: string;
 }
 
 export type PhoneNumber =

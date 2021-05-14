@@ -52,6 +52,8 @@ export const ProjectExpandableRowContainer: React.FC<{
   } else if (error) {
     return <>{translate('Unable to load project resources.')}</>;
   } else {
-    return <ResourceExpandableRow rows={value} />;
+    return (
+      <ResourceExpandableRow backendId={props.row.backend_id} rows={value} />
+    );
   }
 };
