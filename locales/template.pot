@@ -177,6 +177,7 @@ msgstr ""
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourceActions.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
@@ -3942,6 +3943,10 @@ msgstr ""
 msgid "Mount point"
 msgstr ""
 
+#: src/marketplace/resources/list/MoveResourceAction.tsx
+msgid "Move"
+msgstr ""
+
 #: src/project/MoveProjectAction.tsx
 msgid "Move project"
 msgstr ""
@@ -3950,8 +3955,16 @@ msgstr ""
 msgid "Move project {projectName}"
 msgstr ""
 
+#: src/marketplace/resources/list/MoveResourceDialog.tsx
+msgid "Move resource {resourceName}"
+msgstr ""
+
 #: src/project/MoveToOrganizationAutocomplete.tsx
 msgid "Move to organization"
+msgstr ""
+
+#: src/marketplace/resources/list/MoveToProjectAutocomplete.tsx
+msgid "Move to project"
 msgstr ""
 
 #: src/core/validators.ts
@@ -4275,6 +4288,7 @@ msgid "No organizations"
 msgstr ""
 
 #: src/issues/create/ProjectGroup.tsx
+#: src/marketplace/resources/list/MoveToProjectAutocomplete.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
 msgid "No projects"
 msgstr ""
@@ -6101,6 +6115,7 @@ msgstr ""
 msgid "Report security incident"
 msgstr ""
 
+#: src/marketplace/resources/list/ReportUsageAction.tsx
 #: src/marketplace/resources/usage/ResourceCreateUsageButton.tsx
 msgid "Report usage"
 msgstr ""
@@ -6616,6 +6631,7 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
 #: src/marketplace/offerings/expandable/utils.ts
+#: src/marketplace/resources/list/MoveResourceDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
@@ -6860,6 +6876,7 @@ msgstr ""
 
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
+#: src/marketplace/resources/list/MoveToProjectAutocomplete.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/user/SelectAffiliationDialog.tsx
 msgid "Select project..."
@@ -7176,6 +7193,7 @@ msgstr ""
 msgid "Show shared"
 msgstr ""
 
+#: src/marketplace/resources/list/ShowUsageAction.tsx
 #: src/marketplace/resources/usage/ResourceShowUsageButton.tsx
 msgid "Show usage"
 msgstr ""
@@ -8693,6 +8711,10 @@ msgstr ""
 
 #: src/invoices/store/effects.ts
 msgid "Unable to mark the invoice as paid."
+msgstr ""
+
+#: src/marketplace/resources/list/MoveResourceDialog.tsx
+msgid "Unable to move resource."
 msgstr ""
 
 #: src/resource/actions/OpenConsoleLogActionItem.tsx
@@ -10301,6 +10323,10 @@ msgstr ""
 
 #: src/issues/IssueDetails.tsx
 msgid "{relative} ago, {date}"
+msgstr ""
+
+#: src/marketplace/resources/list/MoveResourceDialog.tsx
+msgid "{resourceName} resource has been moved to {projectName} project."
 msgstr ""
 
 #: src/rancher/cluster/ResourceDeleteButton.tsx

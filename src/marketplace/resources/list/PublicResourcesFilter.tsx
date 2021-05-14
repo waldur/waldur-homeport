@@ -7,6 +7,7 @@ import { createSelector } from 'reselect';
 
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
+import { PUBLIC_RESOURCES_LIST_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { RootState } from '@waldur/store/reducers';
 import {
   getCustomer,
@@ -46,7 +47,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = compose(
   reduxForm({
-    form: 'PublicResourcesFilter',
+    form: PUBLIC_RESOURCES_LIST_FILTER_FORM_ID,
     initialValues: {
       state: getStates()[1],
     },

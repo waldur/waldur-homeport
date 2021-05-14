@@ -270,6 +270,13 @@ export const terminateResource = (resource_uuid: string) =>
     (response) => response.data,
   );
 
+export const moveResource = (resourceUuid: string, projectUrl: string) =>
+  post(`/marketplace-resources/${resourceUuid}/move_resource/`, {
+    project: {
+      url: projectUrl,
+    },
+  });
+
 export const changeLimits = (
   resource_uuid: string,
   limits: Record<string, number>,

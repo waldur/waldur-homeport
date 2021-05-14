@@ -51,6 +51,26 @@ export const projectAutocomplete = async (
   );
 };
 
+export const moveToProjectAutocomplete = async (
+  query: string,
+  prevOptions,
+  currentPage: number,
+) => {
+  const params = {
+    name: query,
+    field: ['name', 'url', 'customer_name'],
+    o: 'customer_name',
+    page: currentPage,
+    page_size: ENV.pageSize,
+  };
+  const response = await getProjectList(params);
+  return returnReactSelectAsyncPaginateObject(
+    response,
+    prevOptions,
+    currentPage,
+  );
+};
+
 export const providerAutocomplete = async (
   query: string,
   prevOptions,

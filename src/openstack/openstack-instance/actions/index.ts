@@ -1,3 +1,5 @@
+import { MoveResourceAction } from '@waldur/marketplace/resources/list/MoveResourceAction';
+
 import { ChangeFlavorAction } from './ChangeFlavorAction';
 import { ConsoleAction } from './ConsoleAction';
 import { ConsoleLogAction } from './ConsoleLogAction';
@@ -13,6 +15,7 @@ import { UpdateSecurityGroupsAction } from './update-security-groups/UpdateSecur
 
 export default [
   EditAction,
+  MoveResourceAction,
   PullInstanceAction,
   StartAction,
   StopAction,

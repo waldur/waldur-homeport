@@ -7,10 +7,12 @@ import { Resource } from '../types';
 
 interface ResourceActionsButtonProps {
   row: Resource;
+  refreshList?(): void;
 }
 
 export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps> = ({
   row,
+  refreshList,
 }) =>
   row.scope === null ? (
     <BaseResourceActionsButton
@@ -20,9 +22,10 @@ export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps
           marketplace_resource_uuid: row.uuid,
         } as any
       }
+      refreshList={refreshList}
     />
   ) : (
     <>
-      <ActionButtonResource url={row.scope} />
+      <ActionButtonResource url={row.scope} refreshList={refreshList} />
     </>
   );
