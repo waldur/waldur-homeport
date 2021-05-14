@@ -9,9 +9,10 @@ interface ResourceActionComponentProps {
   open?: boolean;
   loading?: boolean;
   error?: object;
-  actions: ComponentType<{ resource; reInitResource }>[];
+  actions: ComponentType<{ resource; reInitResource; refreshList? }>[];
   resource: any;
   reInitResource?(): void;
+  refreshList?(): void;
 }
 
 export const ResourceActionComponent: FunctionComponent<ResourceActionComponentProps> = (
@@ -38,6 +39,7 @@ export const ResourceActionComponent: FunctionComponent<ResourceActionComponentP
               key={index}
               resource={props.resource}
               reInitResource={props.reInitResource}
+              refreshList={props.refreshList}
             />
           ))}
         </>

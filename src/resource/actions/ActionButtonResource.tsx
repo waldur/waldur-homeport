@@ -9,6 +9,7 @@ import { ResourceActionComponent } from './ResourceActionComponent';
 interface ActionButtonResourceProps {
   url: string;
   disabled?: boolean;
+  refreshList?(): void;
 }
 
 async function loadData(url: string) {
@@ -45,6 +46,7 @@ export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
       actions={value?.actions}
       onToggle={onToggle}
       resource={value?.resource}
+      refreshList={props.refreshList}
     />
   );
 };
