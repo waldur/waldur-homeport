@@ -2462,6 +2462,15 @@ msgstr "Mer info"
 msgid "Mount point"
 msgstr "Monteringspunkt"
 
+msgid "Move project"
+msgstr "Flytt prosjekt"
+
+msgid "Move project {projectName}"
+msgstr "Flytt prosjekt {projectName}"
+
+msgid "Move to organization"
+msgstr "Flytte til organisasjon"
+
 msgid "Must be at least {min}"
 msgstr "Må være minst {min}"
 
@@ -3393,10 +3402,13 @@ msgid "Project aggregates and isolates teams and resources."
 msgstr "Prosjektet samler og isolerer team og ressurser."
 
 msgid "Project could not be created."
-msgstr "Projektet kunne ikke oprettes."
+msgstr "Prosjektet kunne ikke opprettes."
+
+msgid "Project could not be moved."
+msgstr "Prosjektet kunne ikke flyttes."
 
 msgid "Project could not be updated."
-msgstr "Prosjektet kan ikke oppdateres."
+msgstr "Prosjektet kunne ikke oppdateres."
 
 msgid "Project description"
 msgstr "Prosjektbeskrivelse"
@@ -6502,6 +6514,9 @@ msgstr "{name} ({size})"
 
 msgid "{number} days"
 msgstr "{number} dager"
+
+msgid "{projectName} project has been moved to {organizationName} organization."
+msgstr "{projectName} -prosjektet er flyttet til {organizationName} -organisasjonen."
 
 msgid "{relative} ago"
 msgstr "{relative} siden"

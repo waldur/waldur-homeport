@@ -2462,6 +2462,15 @@ msgstr "Plus d'informations"
 msgid "Mount point"
 msgstr "Point de montage"
 
+msgid "Move project"
+msgstr "Déplacer le projet"
+
+msgid "Move project {projectName}"
+msgstr "Déplacer le projet {projectName}"
+
+msgid "Move to organization"
+msgstr "Passer à l'organisation"
+
 msgid "Must be at least {min}"
 msgstr "Doit être au moins {min}"
 
@@ -3394,6 +3403,9 @@ msgstr "Le projet regroupe et isole les équipes et les ressources."
 
 msgid "Project could not be created."
 msgstr "Le projet n'a pas pu être créé."
+
+msgid "Project could not be moved."
+msgstr "Le projet n'a pas pu être déplacé."
 
 msgid "Project could not be updated."
 msgstr "Le projet n'a pas pu être mis à jour."
@@ -6502,6 +6514,9 @@ msgstr "{name} ({size})"
 
 msgid "{number} days"
 msgstr "{number} jours"
+
+msgid "{projectName} project has been moved to {organizationName} organization."
+msgstr "Le projet {projectName} a été déplacé vers l'organisation {organizationName}."
 
 msgid "{relative} ago"
 msgstr "{relative} il y a"

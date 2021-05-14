@@ -2462,6 +2462,15 @@ msgstr "Více informací"
 msgid "Mount point"
 msgstr "Přípojný bod"
 
+msgid "Move project"
+msgstr "Přesunout projekt"
+
+msgid "Move project {projectName}"
+msgstr "Přesunout projekt {projectName}"
+
+msgid "Move to organization"
+msgstr "Přesunout do organizace"
+
 msgid "Must be at least {min}"
 msgstr "Musí být alespoň {min}"
 
@@ -3393,10 +3402,13 @@ msgid "Project aggregates and isolates teams and resources."
 msgstr "Projekt sdružuje a odděluje týmy a zdroje."
 
 msgid "Project could not be created."
-msgstr "Projekt nelze vytvořit."
+msgstr "Projekt nebylo možné vytvořit."
+
+msgid "Project could not be moved."
+msgstr "Projekt nebylo možné přesunout."
 
 msgid "Project could not be updated."
-msgstr "Projekt nelze aktualizovat."
+msgstr "Projekt nebylo možné aktualizovat."
 
 msgid "Project description"
 msgstr "Popis projektu"
@@ -5772,7 +5784,7 @@ msgid "User"
 msgstr "Uživatel"
 
 msgid "User could not been updated"
-msgstr "Uživatele nelze aktualizovat"
+msgstr "Uživatele nebylo možné aktualizovat"
 
 msgid "User dashboard"
 msgstr "Uživatelský řídicí panel"
@@ -6502,6 +6514,9 @@ msgstr "{name} ({size})"
 
 msgid "{number} days"
 msgstr "{number} dny / dnů"
+
+msgid "{projectName} project has been moved to {organizationName} organization."
+msgstr "Projekt {projectName} byl přesunut do organizace {organizationName}."
 
 msgid "{relative} ago"
 msgstr "před {relative}"
