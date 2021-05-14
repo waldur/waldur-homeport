@@ -17,11 +17,13 @@ const MoveResourceDialog = lazyComponent(
 
 interface MoveResourceActionProps {
   resource: Resource;
+  reInitResource?(): void;
   refreshList?(): void;
 }
 
 export const MoveResourceAction = ({
   resource,
+  reInitResource,
   refreshList,
 }: MoveResourceActionProps) => {
   const dispatch = useDispatch();
@@ -32,6 +34,7 @@ export const MoveResourceAction = ({
       openModalDialog(MoveResourceDialog, {
         resolve: {
           resource,
+          reInitResource,
           refreshList,
         },
       }),

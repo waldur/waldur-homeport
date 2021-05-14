@@ -29,7 +29,10 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
         <div className="row m-b-md">
           <div className="col-lg-12">
             <div className="pull-right">
-              <ActionButtonResource url={resource.url} />
+              <ActionButtonResource
+                url={resource.url}
+                refreshResource={refreshResource}
+              />
               <ResourceRefreshButton refreshResource={refreshResource} />
               <OpenStackInstanceTenantButton resource={resource} />
               {resource.marketplace_offering_uuid && (
