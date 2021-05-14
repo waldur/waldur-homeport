@@ -4,6 +4,7 @@ import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import {
   FieldError,
   FormContainer,
+  StringField,
   SubmitButton,
   TextField,
 } from '@waldur/form';
@@ -18,6 +19,7 @@ interface ProjectUpdateFormData {
   name: string;
   description: string;
   end_date: string;
+  backend_id: string;
 }
 
 interface ProjectUpdateFormProps extends TranslateProps, InjectedFormProps {
@@ -60,6 +62,7 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> = 
         {...datePickerOverlayContainerInDialogs()}
         disabled={!props.isStaff && !props.isOwner}
       />
+      <StringField label={translate('Backend ID')} name="backend_id" />
     </FormContainer>
     <div className="form-group">
       <div className="col-sm-offset-3 col-sm-9">

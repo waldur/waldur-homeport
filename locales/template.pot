@@ -900,6 +900,8 @@ msgstr ""
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
+#: src/project/ProjectUpdateForm.tsx
+#: src/resource/ResourceExpandableRow.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/support/SupportDetailsTable.tsx
 msgid "Backend ID"
