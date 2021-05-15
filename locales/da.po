@@ -2462,14 +2462,23 @@ msgstr "Mere oplysninger"
 msgid "Mount point"
 msgstr "Monteringspunkt"
 
+msgid "Move"
+msgstr "Flyt"
+
 msgid "Move project"
 msgstr "Flyt projekt"
 
 msgid "Move project {projectName}"
 msgstr "Flyt projekt {projectName}"
 
+msgid "Move resource {resourceName}"
+msgstr "Flyt ressource {resourceName}"
+
 msgid "Move to organization"
 msgstr "Flyt til organisation"
+
+msgid "Move to project"
+msgstr "Flyt til projekt"
 
 msgid "Must be at least {min}"
 msgstr "Skal være mindst {min}"
@@ -5405,6 +5414,9 @@ msgstr "Kan ikke logge ind via SAML2-protokollen."
 msgid "Unable to mark the invoice as paid."
 msgstr "Kan ikke markere fakturaen som betalt."
 
+msgid "Unable to move resource."
+msgstr "Kan ikke flytte ressource."
+
 msgid "Unable to open console."
 msgstr "Kan ikke åbne konsollen."
 
@@ -6523,6 +6535,9 @@ msgstr "{relative} siden"
 
 msgid "{relative} ago, {date}"
 msgstr "{relative} siden, {date}"
+
+msgid "{resourceName} resource has been moved to {projectName} project."
+msgstr "{resourceName} ressource er blevet flyttet til {projectName} projekt."
 
 msgid "{resourceType} has been deleted."
 msgstr "{resourceType} er blevet slettet."

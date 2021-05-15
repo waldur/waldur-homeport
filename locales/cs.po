@@ -2462,14 +2462,23 @@ msgstr "Více informací"
 msgid "Mount point"
 msgstr "Přípojný bod"
 
+msgid "Move"
+msgstr "Přesunout"
+
 msgid "Move project"
 msgstr "Přesunout projekt"
 
 msgid "Move project {projectName}"
 msgstr "Přesunout projekt {projectName}"
 
+msgid "Move resource {resourceName}"
+msgstr "Přesunout zdroj {resourceName}"
+
 msgid "Move to organization"
 msgstr "Přesunout do organizace"
+
+msgid "Move to project"
+msgstr "Přesunout do projektu"
 
 msgid "Must be at least {min}"
 msgstr "Musí být alespoň {min}"
@@ -5405,6 +5414,9 @@ msgstr "Nelze se přihlásit pomocí protokolu SAML2."
 msgid "Unable to mark the invoice as paid."
 msgstr "Nelze označit fakturu jako zaplacenou."
 
+msgid "Unable to move resource."
+msgstr "Nelze přesunout zdroj."
+
 msgid "Unable to open console."
 msgstr "Nelze otevřít konzoli."
 
@@ -6523,6 +6535,9 @@ msgstr "před {relative}"
 
 msgid "{relative} ago, {date}"
 msgstr "před {relative}, {date}"
+
+msgid "{resourceName} resource has been moved to {projectName} project."
+msgstr "Zdroj {resourceName} byl přesunut do projektu {projectName}."
 
 msgid "{resourceType} has been deleted."
 msgstr "{resourceType} byl odstraněn."

@@ -2462,14 +2462,23 @@ msgstr "Más información"
 msgid "Mount point"
 msgstr "Punto de montaje"
 
+msgid "Move"
+msgstr "Mover"
+
 msgid "Move project"
 msgstr "Mover proyecto"
 
 msgid "Move project {projectName}"
 msgstr "Mover proyecto {projectName}"
 
+msgid "Move resource {resourceName}"
+msgstr "Mover el recurso {resourceName}"
+
 msgid "Move to organization"
 msgstr "Mover a la organización"
+
+msgid "Move to project"
+msgstr "Mover al proyecto"
 
 msgid "Must be at least {min}"
 msgstr "Debe ser al menos {min}"
@@ -5405,6 +5414,9 @@ msgstr "No se puede iniciar sesión a través del protocolo SAML2."
 msgid "Unable to mark the invoice as paid."
 msgstr "No se puede marcar la factura como pagada."
 
+msgid "Unable to move resource."
+msgstr "No se puede mover el recurso."
+
 msgid "Unable to open console."
 msgstr "No se puede abrir la consola."
 
@@ -6523,6 +6535,9 @@ msgstr "{relative} de hace"
 
 msgid "{relative} ago, {date}"
 msgstr "{relative} de hace , {date}"
+
+msgid "{resourceName} resource has been moved to {projectName} project."
+msgstr "El recurso {resourceName} se ha movido al proyecto {projectName}."
 
 msgid "{resourceType} has been deleted."
 msgstr "{resourceType} se ha eliminado."

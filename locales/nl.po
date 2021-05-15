@@ -2462,14 +2462,23 @@ msgstr "Meer informatie"
 msgid "Mount point"
 msgstr "Koppelpunt"
 
+msgid "Move"
+msgstr "Verplaatsen"
+
 msgid "Move project"
 msgstr "Verplaats project"
 
 msgid "Move project {projectName}"
 msgstr "Verplaats project {projectName}"
 
+msgid "Move resource {resourceName}"
+msgstr "Verplaats bron {resourceName}"
+
 msgid "Move to organization"
 msgstr "Verplaats naar organisatie"
+
+msgid "Move to project"
+msgstr "Verplaats naar project"
 
 msgid "Must be at least {min}"
 msgstr "Moet ten minste {min} zijn"
@@ -5405,6 +5414,9 @@ msgstr "Kan niet inloggen via SAML2 protocol."
 msgid "Unable to mark the invoice as paid."
 msgstr "Kan de factuur niet markeren als betaald."
 
+msgid "Unable to move resource."
+msgstr "Kan bron niet verplaatsen."
+
 msgid "Unable to open console."
 msgstr "Kan console niet openen."
 
@@ -6523,6 +6535,9 @@ msgstr "{relative} geleden"
 
 msgid "{relative} ago, {date}"
 msgstr "{relative} geleden, {date}"
+
+msgid "{resourceName} resource has been moved to {projectName} project."
+msgstr "Bron {resourceName} is verplaatst naar project {projectName}."
 
 msgid "{resourceType} has been deleted."
 msgstr "{resourceType} is verwijderd."

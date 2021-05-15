@@ -2462,14 +2462,23 @@ msgstr "Daugiau informacijos"
 msgid "Mount point"
 msgstr "Montavimo taškas"
 
+msgid "Move"
+msgstr "Perkelti"
+
 msgid "Move project"
 msgstr "Perkelti projektą"
 
 msgid "Move project {projectName}"
 msgstr "Perkelti projektą {projectName}"
 
+msgid "Move resource {resourceName}"
+msgstr "Perkelti išteklių {resourceName}"
+
 msgid "Move to organization"
 msgstr "Perkelti į organizaciją"
+
+msgid "Move to project"
+msgstr "Perkelti į projektą"
 
 msgid "Must be at least {min}"
 msgstr "Turi būti bent {min}"
@@ -5405,6 +5414,9 @@ msgstr "Neįmanoma prisijungti naudojant SAML2 protokolą."
 msgid "Unable to mark the invoice as paid."
 msgstr "Neįmanoma pažymėti sąskaitos faktūros kaip apmokėtos."
 
+msgid "Unable to move resource."
+msgstr "Neįmanoma perkelti ištekliaus."
+
 msgid "Unable to open console."
 msgstr "Neįmanoma atidaryti konsolės."
 
@@ -6523,6 +6535,9 @@ msgstr "{relative} prieš"
 
 msgid "{relative} ago, {date}"
 msgstr "{relative} prieš, {date}"
+
+msgid "{resourceName} resource has been moved to {projectName} project."
+msgstr "{resourceName} išteklius perkeltas į {projectName} projektą."
 
 msgid "{resourceType} has been deleted."
 msgstr "{resourceType} buvo ištrintas."
