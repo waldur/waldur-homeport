@@ -5,13 +5,14 @@ import { reduxForm } from 'redux-form';
 import { FormContainer, SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { moveResource } from '@waldur/marketplace/common/api';
-import { MOVE_RESOURCE_FORM_ID } from '@waldur/marketplace/resources/list/constants';
-import { MoveToProjectAutocomplete } from '@waldur/marketplace/resources/list/MoveToProjectAutocomplete';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+
+import { MOVE_RESOURCE_FORM_ID } from './constants';
+import { MoveToProjectAutocomplete } from './MoveToProjectAutocomplete';
 
 interface MoveResourceDialogOwnProps {
   resource: Resource;

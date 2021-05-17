@@ -1,4 +1,4 @@
-import { MoveResourceAction } from '@waldur/marketplace/resources/list/MoveResourceAction';
+import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
 
 import { ChangeFlavorAction } from './ChangeFlavorAction';
 import { ConsoleAction } from './ConsoleAction';

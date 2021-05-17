@@ -3945,7 +3945,7 @@ msgstr ""
 msgid "Mount point"
 msgstr ""
 
-#: src/marketplace/resources/list/MoveResourceAction.tsx
+#: src/marketplace/resources/actions/MoveResourceAction.tsx
 msgid "Move"
 msgstr ""
 
@@ -3957,7 +3957,7 @@ msgstr ""
 msgid "Move project {projectName}"
 msgstr ""
 
-#: src/marketplace/resources/list/MoveResourceDialog.tsx
+#: src/marketplace/resources/actions/MoveResourceDialog.tsx
 msgid "Move resource {resourceName}"
 msgstr ""
 
@@ -3965,7 +3965,7 @@ msgstr ""
 msgid "Move to organization"
 msgstr ""
 
-#: src/marketplace/resources/list/MoveToProjectAutocomplete.tsx
+#: src/marketplace/resources/actions/MoveToProjectAutocomplete.tsx
 msgid "Move to project"
 msgstr ""
 
@@ -4290,7 +4290,7 @@ msgid "No organizations"
 msgstr ""
 
 #: src/issues/create/ProjectGroup.tsx
-#: src/marketplace/resources/list/MoveToProjectAutocomplete.tsx
+#: src/marketplace/resources/actions/MoveToProjectAutocomplete.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
 msgid "No projects"
 msgstr ""
@@ -6633,7 +6633,7 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
 #: src/marketplace/offerings/expandable/utils.ts
-#: src/marketplace/resources/list/MoveResourceDialog.tsx
+#: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
@@ -6878,7 +6878,7 @@ msgstr ""
 
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
-#: src/marketplace/resources/list/MoveToProjectAutocomplete.tsx
+#: src/marketplace/resources/actions/MoveToProjectAutocomplete.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/user/SelectAffiliationDialog.tsx
 msgid "Select project..."
@@ -8715,7 +8715,7 @@ msgstr ""
 msgid "Unable to mark the invoice as paid."
 msgstr ""
 
-#: src/marketplace/resources/list/MoveResourceDialog.tsx
+#: src/marketplace/resources/actions/MoveResourceDialog.tsx
 msgid "Unable to move resource."
 msgstr ""
 
@@ -10327,7 +10327,7 @@ msgstr ""
 msgid "{relative} ago, {date}"
 msgstr ""
 
-#: src/marketplace/resources/list/MoveResourceDialog.tsx
+#: src/marketplace/resources/actions/MoveResourceDialog.tsx
 msgid "{resourceName} resource has been moved to {projectName} project."
 msgstr ""
 
