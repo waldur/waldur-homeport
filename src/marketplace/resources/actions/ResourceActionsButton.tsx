@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { useBoolean } from 'react-use';
 
+import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
 import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
-import { MoveResourceAction } from '@waldur/marketplace/resources/list/MoveResourceAction';
 import { SubmitReportAction } from '@waldur/marketplace/resources/report/SubmitReportAction';
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
 import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';

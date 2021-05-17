@@ -9,5 +9,3 @@ export const RESOURCE_STATES = [
   'Updating',
   'Terminating',
 ];
-
-export const MOVE_RESOURCE_FORM_ID = 'MoveResourceForm';

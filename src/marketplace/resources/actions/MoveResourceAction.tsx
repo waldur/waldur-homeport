@@ -9,9 +9,7 @@ import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
 const MoveResourceDialog = lazyComponent(
   () =>
-    import(
-      /* webpackChunkName: "MoveResourceDialog" */ '@waldur/marketplace/resources/list/MoveResourceDialog'
-    ),
+    import(/* webpackChunkName: "MoveResourceDialog" */ './MoveResourceDialog'),
   'MoveResourceDialog',
 );
 

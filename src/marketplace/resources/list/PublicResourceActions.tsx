@@ -5,7 +5,8 @@ import { translate } from '@waldur/i18n';
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
 import { Resource } from '@waldur/marketplace/resources/types';
 
-import { MoveResourceAction } from './MoveResourceAction';
+import { MoveResourceAction } from '../actions/MoveResourceAction';
+
 import { ReportUsageAction } from './ReportUsageAction';
 import { ShowUsageAction } from './ShowUsageAction';
 
