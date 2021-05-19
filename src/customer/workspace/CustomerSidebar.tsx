@@ -27,7 +27,7 @@ export const CustomerSidebar: FunctionComponent = () => {
     if (!customer) {
       throw 404;
     }
-    if (checkIsServiceManager(customer, user)) {
+    if (checkIsServiceManager(customer, user) && !user.is_staff) {
       return {
         items: [
           getDashboardItem(customer.uuid),
