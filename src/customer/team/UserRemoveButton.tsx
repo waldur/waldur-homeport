@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 
@@ -17,6 +18,17 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
 }) => {
   const dispatch = useDispatch();
   const callback = async () => {
+    try {
+      await waitForConfirmation(
+        dispatch,
+        translate('Confirmation'),
+        translate('Are you sure you want to remove {userName}?', {
+          userName: user.full_name || user.username,
+        }),
+      );
+    } catch {
+      return;
+    }
     try {
       await Promise.all(
         user.projects.map((project) => Axios.delete(project.permission)),
