@@ -672,6 +672,10 @@ msgstr ""
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr ""
 
+#: src/customer/team/UserRemoveButton.tsx
+msgid "Are you sure you want to remove {userName}?"
+msgstr ""
+
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
 msgid "Are you sure you want to revoke this permission?"
 msgstr ""
@@ -1403,6 +1407,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
+#: src/customer/team/UserRemoveButton.tsx
 #: src/marketplace/offerings/images/ImagesActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx

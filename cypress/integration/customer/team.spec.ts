@@ -52,7 +52,12 @@ describe('Team', () => {
   });
 
   it('Allows to remove team member', () => {
-    cy.get('tbody tr button').contains('Remove').click({ force: true });
+    cy.get('tbody tr button')
+      .contains('Remove')
+      .click({ force: true })
+      .get('button')
+      .contains('Yes')
+      .click();
 
     // Notification should be shown
     cy.get('p', { withinSubject: null })
