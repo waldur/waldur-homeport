@@ -450,7 +450,7 @@ msgid "Back to shopping"
 msgstr "Tagasi ostlema"
 
 msgid "Backend ID"
-msgstr "Tagatoa ID"
+msgstr "Backendi ID"
 
 msgid "Backing up"
 msgstr "Varundamine"
