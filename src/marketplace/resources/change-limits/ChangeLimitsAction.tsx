@@ -12,7 +12,7 @@ const ChangeLimitsDialog = lazyComponent(
 const validators = [validateState('OK')];
 
 export const ChangeLimitsAction = ({ resource }) =>
-  resource.marketplace_resource_uuid !== null ? (
+  resource.is_limit_based ? (
     <DialogActionItem
       validators={validators}
       title={translate('Change limits')}

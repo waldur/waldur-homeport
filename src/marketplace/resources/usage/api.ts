@@ -28,8 +28,9 @@ export const getPeriodLabel = (
 export const getUsageComponents = async (params: UsageReportContext) => {
   const offering = await getOffering(params.offering_uuid);
   const periods = await getResourcePlanPeriods(params.resource_uuid);
-  const components = offering.components.filter(
-    (component) => component.billing_type === 'usage',
+  const components = offering.components.filter((component) =>
+    // Allow to report usage for limit-based components
+    ['usage', 'limit'].includes(component.billing_type),
   );
   const options =
     periods.length > 0

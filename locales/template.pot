@@ -145,6 +145,7 @@ msgid "Accounting start date"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Accounting type"
 msgstr ""
 
@@ -1217,10 +1218,6 @@ msgstr ""
 msgid "Changing password"
 msgstr ""
 
-#: src/marketplace/offerings/create/ComponentUseLimitForBillingField.tsx
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr ""
-
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
 #: src/azure/sql/DatabasesList.tsx
 msgid "Charset"
@@ -2101,10 +2098,6 @@ msgstr ""
 
 #: src/customer/list/DivisionTypeFilter.tsx
 msgid "Division type"
-msgstr ""
-
-#: src/marketplace/offerings/create/ComponentDisableQuotaField.tsx
-msgid "Do not allow user to specify quotas when offering is provisioned."
 msgstr ""
 
 #: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
@@ -3585,6 +3578,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
 msgid "Limit period"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
+msgid "Limit-based"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx

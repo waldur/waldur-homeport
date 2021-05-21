@@ -26,7 +26,6 @@ export const combinePrices = (
         amount = limits[component.type];
       } else if (
         component.billing_type === 'usage' &&
-        !component.disable_quotas &&
         limits &&
         limits[component.type]
       ) {

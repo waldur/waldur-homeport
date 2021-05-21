@@ -10,7 +10,7 @@ export const ComponentLimitEnableField: React.FC = () => (
     <Field
       component={AwesomeCheckboxField}
       name="limit_amount"
-      format={(v) => v !== null}
+      format={(v) => v !== null && typeof v != 'undefined'}
       parse={(v) => (v ? 0 : null)}
     />
   </FormGroup>

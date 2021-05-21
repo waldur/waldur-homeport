@@ -22,6 +22,7 @@ export interface ComponentRowType {
   type: string;
   name: string;
   measured_unit: string;
+  is_boolean: boolean;
   limit: number;
   usage: number;
   prices: number[];
