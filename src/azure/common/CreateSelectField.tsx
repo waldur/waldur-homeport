@@ -11,6 +11,5 @@ export const CreateSelectField = (label, name, options) => (
     getOptionLabel={(option) => option.name}
     isClearable={false}
     validate={required}
-    simpleValue={true}
   />
 );

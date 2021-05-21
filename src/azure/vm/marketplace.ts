@@ -17,6 +17,13 @@ const AzureVirtualMachineForm = lazyComponent(
   'AzureVirtualMachineForm',
 );
 
+const serializer = ({ name, location, image, size }) => ({
+  name,
+  location: location ? location.url : undefined,
+  size: size ? size.url : undefined,
+  image: image ? image.url : undefined,
+});
+
 registerOfferingType({
   type: 'Azure.VirtualMachine',
   get label() {
@@ -25,4 +32,5 @@ registerOfferingType({
   component: AzureVirtualMachineForm,
   detailsComponent: AzureVirtualMachineDetails,
   providerType: 'Azure',
+  serializer,
 });
