@@ -9,6 +9,8 @@ import { TerminateAction } from '@waldur/marketplace/resources/terminate/Termina
 import { Resource } from '@waldur/marketplace/resources/types';
 import { ResourceActionComponent } from '@waldur/resource/actions/ResourceActionComponent';
 
+import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
+
 import { EditAction } from './EditAction';
 
 const ActionsList = [
@@ -16,6 +18,7 @@ const ActionsList = [
   MoveResourceAction,
   SubmitReportAction,
   ChangePlanAction,
+  ChangeLimitsAction,
   SetBackendIdAction,
   TerminateAction,
 ];

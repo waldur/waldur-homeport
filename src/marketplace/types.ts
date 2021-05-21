@@ -13,14 +13,12 @@ export interface BaseComponent {
   description: string;
 }
 
-export type BillingType = 'usage' | 'fixed' | 'one' | 'few';
+export type BillingType = 'usage' | 'limit' | 'fixed' | 'one' | 'few';
 
 export interface OfferingComponent extends BaseComponent {
   billing_type: BillingType;
   limit_period?: 'month' | 'total';
   limit_amount?: number;
-  disable_quotas?: boolean;
-  use_limit_for_billing?: boolean;
   max_value?: number;
   min_value?: number;
   factor?: number;

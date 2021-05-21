@@ -12,6 +12,7 @@ interface ComponentAccountingTypeFieldProps {
 
 export const getAccountingTypeOptions = () => [
   { label: translate('Usage-based'), value: 'usage' },
+  { label: translate('Limit-based'), value: 'limit' },
   { label: translate('Fixed price'), value: 'fixed' },
   { label: translate('One-time'), value: 'one' },
   { label: translate('One-time on plan switch'), value: 'few' },
