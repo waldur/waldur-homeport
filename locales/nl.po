@@ -398,6 +398,9 @@ msgstr "Weet u zeker dat u het betalingsprofiel wilt verwijderen?"
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr "Weet u zeker dat u deze {resourceType} wilt verwijderen?"
 
+msgid "Are you sure you want to remove {userName}?"
+msgstr "Weet u zeker dat u {userName} wilt verwijderen?"
+
 msgid "Are you sure you want to revoke this permission?"
 msgstr "Weet u zeker dat u deze toestemming wilt intrekken?"
 

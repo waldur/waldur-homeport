@@ -398,6 +398,9 @@ msgstr "Ar tikrai norite ištrinti mokėjimo profilį?"
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr "Ar tikrai norite ištrinti šį {resourceType}?"
 
+msgid "Are you sure you want to remove {userName}?"
+msgstr "Ar tikrai norite pašalinti {userName}?"
+
 msgid "Are you sure you want to revoke this permission?"
 msgstr "Ar tikrai norite atšaukti šį leidimą?"
 

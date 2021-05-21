@@ -398,6 +398,9 @@ msgstr "Sei sicuro di voler eliminare il profilo di pagamento?"
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr "Sei sicuro di voler eliminare questo {resourceType}?"
 
+msgid "Are you sure you want to remove {userName}?"
+msgstr "Sei sicuro di voler rimuovere {userName}?"
+
 msgid "Are you sure you want to revoke this permission?"
 msgstr "Sei sicuro di voler revocare questo permesso?"
 

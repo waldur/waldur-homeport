@@ -398,6 +398,9 @@ msgstr "Möchten Sie das Zahlungsprofil wirklich löschen?"
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr "Möchten Sie diese {resourceType} wirklich löschen?"
 
+msgid "Are you sure you want to remove {userName}?"
+msgstr "Möchten Sie wirklich {userName} entfernen?"
+
 msgid "Are you sure you want to revoke this permission?"
 msgstr "Möchten Sie diese Berechtigung wirklich widerrufen?"
 

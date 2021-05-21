@@ -398,6 +398,9 @@ msgstr "Opravdu chcete odstranit platební profil?"
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr "Opravdu chcete smazat tento {resourceType}?"
 
+msgid "Are you sure you want to remove {userName}?"
+msgstr "Opravdu chcete odstranit {userName}?"
+
 msgid "Are you sure you want to revoke this permission?"
 msgstr "Opravdu chcete toto oprávnění odvolat?"
 
