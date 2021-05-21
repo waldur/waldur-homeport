@@ -2207,6 +2207,7 @@ msgstr ""
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/UpdateOfferingPermissionExpirationTimeButton.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
@@ -2545,7 +2546,9 @@ msgstr ""
 msgid "Expand"
 msgstr ""
 
+#: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
 msgid "Expiration time"
 msgstr ""
 
@@ -5121,6 +5124,10 @@ msgstr ""
 
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
 msgid "Permission has been revoked."
+msgstr ""
+
+#: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
+msgid "Permission has been updated successfully."
 msgstr ""
 
 #: src/customer/team/CustomerTeam.tsx
@@ -8962,6 +8969,10 @@ msgstr ""
 msgid "Unable to update payment."
 msgstr ""
 
+#: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
+msgid "Unable to update permission."
+msgstr ""
+
 #: src/providers/effects.tsx
 msgid "Unable to update provider."
 msgstr ""
@@ -9074,6 +9085,7 @@ msgstr ""
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
@@ -9127,6 +9139,10 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 msgid "Update payment profile"
+msgstr ""
+
+#: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
+msgid "Update permission of {name}"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx

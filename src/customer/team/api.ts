@@ -1,5 +1,5 @@
 import { ENV } from '@waldur/configs/default';
-import { getAll, getSelectData, post } from '@waldur/core/api';
+import { getAll, getSelectData, patch, post } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';
@@ -23,6 +23,11 @@ export const closeReview = (reviewId: string) =>
 
 export const grantPermission = (data) =>
   post(`/marketplace-offering-permissions/`, data);
+
+export const updatePermission = (id: number, expiration_time: string) =>
+  patch(`/marketplace-offering-permissions/${id}/`, {
+    expiration_time,
+  });
 
 export const usersAutocomplete = async (
   query: object,
