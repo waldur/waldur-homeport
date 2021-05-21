@@ -22,14 +22,20 @@ const checkDuplicate = (value, props) =>
 const validateProjectName = (value, _, props) =>
   checkDuplicate(value, props) || checkPattern(value, props);
 
-export const ProjectNameField: FunctionComponent<TranslateProps> = ({
-  translate,
-}) => (
+interface ProjectNameFieldProps extends TranslateProps {
+  isDisabled?: boolean;
+}
+
+export const ProjectNameField: FunctionComponent<ProjectNameFieldProps> = (
+  { translate },
+  isDisabled = false,
+) => (
   <StringField
     label={translate('Project name')}
     name="name"
     description={translate('This name will be visible in accounting data.')}
     required={true}
     validate={validateProjectName}
+    disabled={isDisabled}
   />
 );

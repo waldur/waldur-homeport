@@ -38,6 +38,7 @@ const mapStateToProps = (state, ownProps) => ({
   isStaff: isStaff(state),
   isOwner: isOwner(state),
   enforceLatinName: getConfig(state).enforceLatinName,
+  isDisabled: !isStaff(state) && !isOwner(state),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

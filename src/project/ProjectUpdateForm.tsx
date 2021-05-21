@@ -27,6 +27,7 @@ interface ProjectUpdateFormProps extends TranslateProps, InjectedFormProps {
   project_type?: string;
   isStaff: boolean;
   isOwner: boolean;
+  isDisabled: boolean;
 }
 
 export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> = (
@@ -41,10 +42,11 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> = 
       labelClass="col-sm-3"
       controlClass="col-sm-9"
     >
-      {ProjectNameField(props)}
+      {ProjectNameField(props, props.isDisabled)}
       <TextField
         label={props.translate('Project description')}
         name="description"
+        disabled={props.isDisabled}
       />
       {props.project_type && (
         <StaticField
@@ -60,16 +62,20 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> = 
         )}
         component={DateField}
         {...datePickerOverlayContainerInDialogs()}
-        disabled={!props.isStaff && !props.isOwner}
+        disabled={props.isDisabled}
       />
-      <StringField label={translate('Backend ID')} name="backend_id" />
+      <StringField
+        label={translate('Backend ID')}
+        name="backend_id"
+        disabled={props.isDisabled}
+      />
     </FormContainer>
     <div className="form-group">
       <div className="col-sm-offset-3 col-sm-9">
         <FieldError error={props.error} />
         <SubmitButton
           submitting={props.submitting}
-          disabled={props.invalid}
+          disabled={props.invalid || props.isDisabled}
           label={props.translate('Update project details')}
         />
       </div>
