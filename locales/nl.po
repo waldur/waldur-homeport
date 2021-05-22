@@ -746,9 +746,6 @@ msgstr "Veranderende smaak"
 msgid "Changing password"
 msgstr "Wachtwoord wijzigen"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "Kosten voor op gebruik gebaseerde component zijn gebaseerd op door de gebruiker aangevraagde limiet."
-
 msgid "Charset"
 msgstr "Tekenset"
 
@@ -1234,9 +1231,6 @@ msgstr "Divisie"
 
 msgid "Division type"
 msgstr "Type divisie"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Sta niet toe dat de gebruiker quota's opgeeft wanneer het aanbod wordt ingericht."
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Configureer geen gateway voor dit subnet"

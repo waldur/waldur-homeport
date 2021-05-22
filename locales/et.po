@@ -593,9 +593,6 @@ msgstr "Muuda tüüpi"
 msgid "Changing password"
 msgstr "Muuda parooli"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "Kasutuspõhise komponendi tasu põhineb kasutaja taotletud limiidil."
-
 msgid "Charset"
 msgstr "Märgistik"
 
@@ -916,9 +913,6 @@ msgstr "Kuvatav nimi"
 
 msgid "Division"
 msgstr "Jaoskond"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Ära lase kasutajal määrata limiiti teenust tellides"
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Ära seadista sellele võrgule võrguväravat"

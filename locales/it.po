@@ -746,9 +746,6 @@ msgstr "Cambiare sapore"
 msgid "Changing password"
 msgstr "Modifica della password"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "L'addebito per il componente basato sull'utilizzo si basa sul limite richiesto dall'utente."
-
 msgid "Charset"
 msgstr "Charset"
 
@@ -1234,9 +1231,6 @@ msgstr "Divisione"
 
 msgid "Division type"
 msgstr "Tipo di divisione"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Non consentire all'utente di specificare le quote quando viene eseguito il provisioning dell'offerta."
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Non configurare un gateway per questa subnet"

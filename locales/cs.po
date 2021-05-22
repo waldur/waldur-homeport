@@ -746,9 +746,6 @@ msgstr "Změna příchuti"
 msgid "Changing password"
 msgstr "Změna hesla"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "Poplatek za komponentu založenou na využití je založen na limitu požadovaném uživatelem."
-
 msgid "Charset"
 msgstr "Znaková sada"
 
@@ -1234,9 +1231,6 @@ msgstr "Divize"
 
 msgid "Division type"
 msgstr "Typ divize"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Nepovolit uživateli zadat kvóty při zřizování nabídky."
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Nekonfigurujte bránu pro tuto podsíť."

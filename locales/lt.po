@@ -746,9 +746,6 @@ msgstr "Skonio keitimas"
 msgid "Changing password"
 msgstr "Slaptažodžio keitimas"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "Mokestis už naudojimu pagrįstą komponentą pagrįstas vartotojo pageidaujamu limitu."
-
 msgid "Charset"
 msgstr "Charset"
 
@@ -1234,9 +1231,6 @@ msgstr "Skyrius"
 
 msgid "Division type"
 msgstr "Padalinio tipas"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Neleiskite vartotojui nurodyti kvotų, kai pasiūlymas yra parengimas."
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Nekonfigūruokite šio potinklio šliuzo"

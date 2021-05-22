@@ -746,9 +746,6 @@ msgstr "Ændring af smag"
 msgid "Changing password"
 msgstr "Ændring adgangskode"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "Gebyr for brugsbaseret komponent er baseret på bruger-anmodet grænse."
-
 msgid "Charset"
 msgstr "Charset"
 
@@ -1234,9 +1231,6 @@ msgstr "Division"
 
 msgid "Division type"
 msgstr "Division type"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Tillad ikke brugeren at angive kvoter, når tilbuddet er klargjort."
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Konfigurer ikke en gateway for dette undernet"
