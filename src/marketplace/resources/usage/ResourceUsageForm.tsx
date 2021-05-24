@@ -10,10 +10,10 @@ import {
 } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
-import { getAccountingTypeOptions } from '@waldur/marketplace/offerings/create/ComponentAccountingTypeField';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { UsageReportContext } from './types';
+import { getBillingTypeLabel } from './utils';
 
 export interface ResourceUsageFormProps extends InjectedFormProps {
   components: OfferingComponent[];
@@ -39,10 +39,6 @@ const SummaryField = ({ label, value }) => (
     <strong>{label}</strong>: {value}
   </p>
 );
-
-const getBillingTypeLabel = (value) =>
-  getAccountingTypeOptions().find((option) => option.value === value)?.label ||
-  'N/A';
 
 export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
   props,
