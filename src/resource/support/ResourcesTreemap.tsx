@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { compose } from 'redux';
 
@@ -8,6 +8,7 @@ import { formatFilesize } from '@waldur/core/utils';
 import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
 import { useReportingBreadcrumbs } from '@waldur/issues/workspace/SupportWorkspace';
 import { useTitle } from '@waldur/navigation/title';
+import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 
 import { loadData, parseProjects } from './api';
@@ -16,7 +17,7 @@ import { TreemapChart } from './TreemapChart';
 import { TreemapChartFilter } from './TreemapChartFilter';
 import { QuotaList, QuotaChoice } from './types';
 
-const getQuotas = (): QuotaList => [
+const getQuotas = (hidden: boolean): QuotaList => [
   {
     key: 'nc_resource_count',
     title: translate('Resources'),
@@ -25,11 +26,13 @@ const getQuotas = (): QuotaList => [
     key: 'current_price',
     title: translate('Current price per month'),
     tooltipValueFormatter: (value) => defaultCurrency(value),
+    hidden,
   },
   {
     key: 'estimated_price',
     title: translate('Esimated price per month'),
     tooltipValueFormatter: (value) => defaultCurrency(value),
+    hidden,
   },
   {
     key: 'vpc_cpu_count',
@@ -97,8 +100,13 @@ interface StateProps {
 const TreemapContainer = (props: StateProps & TranslateProps) => {
   useTitle(translate('Resources usage'));
   useReportingBreadcrumbs();
+  const shouldConcealPrices = useSelector((state: RootState) =>
+    isVisible(state, 'marketplace.conceal_prices'),
+  );
 
-  const quotas = getQuotas();
+  const quotas = getQuotas(shouldConcealPrices).filter(
+    (quota) => !quota.hidden,
+  );
   const keys = quotas.map((q) => q.key);
   let tooltipValueFormatter;
 

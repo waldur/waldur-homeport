@@ -5,6 +5,7 @@ import { DownloadLink } from '@waldur/core/DownloadLink';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
+import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
@@ -17,6 +18,7 @@ interface ShoppingCartSidebarProps {
   file?: string;
   customer: Customer;
   project: Project;
+  shouldConcealPrices: boolean;
 }
 
 export const PureShoppingCartSidebar: FunctionComponent<ShoppingCartSidebarProps> = (
@@ -45,7 +47,7 @@ export const PureShoppingCartSidebar: FunctionComponent<ShoppingCartSidebarProps
           )}
           {!getActiveFixedPricePaymentProfile(
             props.customer.payment_profiles,
-          ) ? (
+          ) && !props.shouldConcealPrices ? (
             <tr>
               <td className="text-lg">{translate('Total')}</td>
               <td className="text-lg">{defaultCurrency(props.total)}</td>
@@ -69,6 +71,7 @@ const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   project: getProject(state),
   total: getTotal(state),
+  shouldConcealPrices: isVisible(state, 'marketplace.conceal_prices'),
 });
 
 export const ShoppingCartSidebar = connect(mapStateToProps)(
