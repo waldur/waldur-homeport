@@ -64,6 +64,7 @@ export const ComponentRow: React.FC<ComponentRowProps> = ({
       parse={parseIntField}
       format={formatIntField}
       validate={getResourceComponentValidator(limits)}
+      min={0}
       component={CellWrapper}
       offeringComponent={component}
       limits={limits}
