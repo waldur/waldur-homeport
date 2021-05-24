@@ -14,6 +14,7 @@ import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/Offe
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Offering } from '@waldur/marketplace/types';
+import { isVisible } from '@waldur/store/config';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -67,7 +68,8 @@ export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => (
       {props.extraComponent ? createElement(props.extraComponent, props) : null}
       {!getActiveFixedPricePaymentProfile(props.customer.payment_profiles) &&
         props.formData &&
-        props.formData.plan && (
+        props.formData.plan &&
+        !props.shouldConcealPrices && (
           <tr>
             <td className="text-lg">
               <BillingPeriod unit={props.formData.plan.unit} />
@@ -119,6 +121,7 @@ const mapStateToProps = (state, ownProps) => ({
   total: pricesSelector(state, ownProps).total,
   formData: getFormValues(FORM_ID)(state),
   formValid: isValid(FORM_ID)(state),
+  shouldConcealPrices: isVisible(state, 'marketplace.conceal_prices'),
 });
 
 export const OrderSummary = connect<

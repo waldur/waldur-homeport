@@ -6150,6 +6150,10 @@ msgstr ""
 msgid "Reporting"
 msgstr ""
 
+#: src/marketplace/cart/ForwardButton.tsx
+msgid "Request"
+msgstr ""
+
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "Request account removal for {userName}."
 msgstr ""

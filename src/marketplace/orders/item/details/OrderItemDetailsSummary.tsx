@@ -11,6 +11,7 @@ import {
   OfferingFormData,
 } from '@waldur/marketplace/details/types';
 import { Offering } from '@waldur/marketplace/types';
+import { isVisible } from '@waldur/store/config';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -37,6 +38,7 @@ const mapStateToProps = (state, ownProps) => ({
   total: pricesSelector(state, ownProps).total,
   formData: getFormValues(FORM_ID)(state),
   formValid: isValid(FORM_ID)(state),
+  shouldConcealPrices: isVisible(state, 'marketplace.conceal_prices'),
 });
 
 export const OrderItemDetailsSummary = connect<

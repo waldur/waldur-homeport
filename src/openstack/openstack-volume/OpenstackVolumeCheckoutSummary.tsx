@@ -22,6 +22,7 @@ import { Quota } from '@waldur/openstack/types';
 import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
+import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
@@ -83,6 +84,9 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OfferingDetailsProps> = ({
 }) => {
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
+  const shouldConcealPrices = useSelector((state: RootState) =>
+    isVisible(state, 'marketplace.conceal_prices'),
+  );
   const formData = useSelector(formAttributesSelector);
   const formIsValid = useSelector(formIsValidSelector);
   const total = useSelector((state: RootState) =>
@@ -174,19 +178,23 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OfferingDetailsProps> = ({
                 </td>
               </tr>
             )}
-            <tr>
-              <td>
-                <strong>{translate('Price per day')}</strong> <PriceTooltip />
-              </td>
-              <td>{defaultCurrency(dailyPrice)}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>{translate('Price per 30 days')}</strong>{' '}
-                <PriceTooltip />
-              </td>
-              <td>{defaultCurrency(dailyPrice * 30)}</td>
-            </tr>
+            {!shouldConcealPrices && (
+              <tr>
+                <td>
+                  <strong>{translate('Price per day')}</strong> <PriceTooltip />
+                </td>
+                <td>{defaultCurrency(dailyPrice)}</td>
+              </tr>
+            )}
+            {!shouldConcealPrices && (
+              <tr>
+                <td>
+                  <strong>{translate('Price per 30 days')}</strong>{' '}
+                  <PriceTooltip />
+                </td>
+                <td>{defaultCurrency(dailyPrice * 30)}</td>
+              </tr>
+            )}
             <tr>
               <td>
                 <strong>{translate('Invoiced to')}</strong>

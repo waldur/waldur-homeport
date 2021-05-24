@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 
+import { isVisible } from '@waldur/store/config';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { PaymentProfile } from '@waldur/workspace/types';
 
@@ -103,5 +104,8 @@ export const getActivePaymentProfile = (profiles: PaymentProfile[]) =>
 
 export const showPriceSelector = createSelector(
   getCustomer,
-  (customer) => !getActiveFixedPricePaymentProfile(customer.payment_profiles),
+  (state) => isVisible(state, 'marketplace.conceal_prices'),
+  (customer, concealPricesFeatureToggle: boolean) =>
+    !getActiveFixedPricePaymentProfile(customer.payment_profiles) &&
+    !concealPricesFeatureToggle,
 );
