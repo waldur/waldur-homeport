@@ -1,10 +1,12 @@
 import { FunctionComponent } from 'react';
 import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 
+import { Tooltip } from '@waldur/core/Tooltip';
 import { ResourceUsageChart } from '@waldur/marketplace/resources/usage/ResourceUsageChart';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { ComponentUsage } from './types';
+import { getBillingTypeLabel } from './utils';
 
 interface ResourceUsageTabsProps {
   components: OfferingComponent[];
@@ -25,7 +27,21 @@ export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
         animation
       >
         {props.components.map((component, index: number) => (
-          <Tab title={component.name} key={index} eventKey={`tab-${index}`}>
+          <Tab
+            title={
+              <>
+                <Tooltip
+                  id={`tab-${index}-tooltip`}
+                  label={getBillingTypeLabel(component.billing_type)}
+                >
+                  <i className="fa fa-question-circle" />
+                </Tooltip>{' '}
+                {component.name}
+              </>
+            }
+            key={index}
+            eventKey={`tab-${index}`}
+          >
             <PanelBody style={{ display: 'flex', justifyContent: 'center' }}>
               <ResourceUsageChart
                 offeringComponent={component}
