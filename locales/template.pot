@@ -957,6 +957,10 @@ msgstr ""
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "Become a customer of our portal. Provision IT services from the catalog and manage your team from one place."
+msgstr ""
+
 #: src/invoices/utils.ts
 msgid "Billing"
 msgstr ""
@@ -1232,6 +1236,10 @@ msgstr ""
 #: src/user/UserPopover.tsx
 #: src/user/dashboard/UserDashboard.tsx
 msgid "Checklists"
+msgstr ""
+
+#: src/marketplace/cart/CheckoutPage.tsx
+msgid "Checkout"
 msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
@@ -2558,6 +2566,10 @@ msgstr ""
 msgid "Explore {deployment} Marketplace"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "Explore {deployment} service catalog"
+msgstr ""
+
 #: src/table/TableExportButton.tsx
 msgid "Export as"
 msgstr ""
@@ -2855,6 +2867,10 @@ msgstr ""
 
 #: src/invitations/InvitationErrorMessage.tsx
 msgid "Go to profile"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Go to service catalog"
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -3537,6 +3553,10 @@ msgstr ""
 msgid "Label that is visible to users in Marketplace."
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "Label that is visible to users in service catalog."
+msgstr ""
+
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Labels"
 msgstr ""
@@ -3758,21 +3778,8 @@ msgstr ""
 msgid "Marketplace UUID"
 msgstr ""
 
-#: src/marketplace/cart/CheckoutPage.tsx
-msgid "Marketplace checkout"
-msgstr ""
-
-#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
-#: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
-msgid "Marketplace offering does not have any usage-based components."
-msgstr ""
-
 #: src/marketplace/category/CategoryPage.tsx
 msgid "Marketplace offerings"
-msgstr ""
-
-#: src/customer/details/CustomerMarketplacePanel.tsx
-msgid "Marketplace service provider"
 msgstr ""
 
 #: src/user/SelectAffiliationDialog.tsx
@@ -4487,6 +4494,11 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 msgid "Offering details"
+msgstr ""
+
+#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
+#: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
+msgid "Offering does not have any usage-based components."
 msgstr ""
 
 #: src/marketplace/offerings/images/ImagesListPlaceholder.tsx
@@ -5938,7 +5950,11 @@ msgid "Register"
 msgstr ""
 
 #: src/customer/create/CustomerCreatePrompt.tsx
-msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
+msgid "Register as a customer of our portal and provide your cloud services through the Marketplace."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Register as a customer of our portal and provide your cloud services through the service catalog."
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
@@ -6283,6 +6299,10 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
+#: src/marketplace/offerings/create/OptionalNumberField.tsx
+msgid "Reset value"
+msgstr ""
+
 #: src/digitalocean/DropletResizeDialog.tsx
 msgid "Resize droplet"
 msgstr ""
@@ -6358,6 +6378,10 @@ msgstr ""
 
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "Resource is not connected to the marketplace yet."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Resource is not connected to the service catalog yet."
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
@@ -7015,6 +7039,14 @@ msgstr ""
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "Service catalog"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Service catalog offerings"
+msgstr ""
+
 #: src/customer/team/utils.ts
 msgid "Service manager"
 msgstr ""
@@ -7023,6 +7055,7 @@ msgstr ""
 msgid "Service manager of:"
 msgstr ""
 
+#: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
@@ -7084,6 +7117,10 @@ msgstr ""
 msgid "Services"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "Services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
+msgstr ""
+
 #: src/openstack/openstack-network/actions/SetMtuAction.tsx
 #: src/openstack/openstack-network/actions/SetMtuDialog.tsx
 msgid "Set MTU"
@@ -7128,6 +7165,10 @@ msgstr ""
 
 #: src/slurm/SlurmForm.tsx
 msgid "Set to true to activate privilege escalation"
+msgstr ""
+
+#: src/marketplace/offerings/create/OptionalNumberField.tsx
+msgid "Set value"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -7835,6 +7876,10 @@ msgstr ""
 msgid "There are no available users."
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "There are no categories in catalog yet."
+msgstr ""
+
 #: src/marketplace/landing/CategoriesList.tsx
 #: src/user/dashboard/CategoriesList.tsx
 msgid "There are no categories in marketplace yet."
@@ -7880,6 +7925,10 @@ msgstr ""
 
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "There are no offerings available."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "There are no offerings in catalog yet."
 msgstr ""
 
 #: src/marketplace/common/OfferingGrid.tsx
@@ -8494,7 +8543,14 @@ msgid "Unable to load categories"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/landing/CategoriesList.tsx
+#: src/user/dashboard/CategoriesList.tsx
+#: src/user/dashboard/CategoryUserList.tsx
 msgid "Unable to load categories."
+msgstr ""
+
+#: src/marketplace/resources/list/ProjectResourcesContainer.tsx
+msgid "Unable to load category details"
 msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterList.tsx
@@ -8606,24 +8662,6 @@ msgstr ""
 msgid "Unable to load locations."
 msgstr ""
 
-#: src/marketplace/landing/CategoriesList.tsx
-#: src/user/dashboard/CategoriesList.tsx
-#: src/user/dashboard/CategoryUserList.tsx
-msgid "Unable to load marketplace categories."
-msgstr ""
-
-#: src/marketplace/resources/list/ProjectResourcesContainer.tsx
-msgid "Unable to load marketplace category details"
-msgstr ""
-
-#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
-msgid "Unable to load marketplace offering details."
-msgstr ""
-
-#: src/marketplace/common/OfferingGrid.tsx
-msgid "Unable to load marketplace offerings."
-msgstr ""
-
 #: src/marketplace/offerings/expandable/OfferingCostsChart.tsx
 msgid "Unable to load offering cost chart."
 msgstr ""
@@ -8632,6 +8670,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 msgid "Unable to load offering details."
 msgstr ""
@@ -8643,6 +8682,10 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 msgid "Unable to load offerings"
+msgstr ""
+
+#: src/marketplace/common/OfferingGrid.tsx
+msgid "Unable to load offerings."
 msgstr ""
 
 #: src/marketplace/orders/OrderDetails.tsx
@@ -9030,6 +9073,10 @@ msgstr ""
 
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Unique ID of a resource created via Marketplace"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Unique ID of a resource created via service catalog"
 msgstr ""
 
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -9779,8 +9826,12 @@ msgstr ""
 msgid "You can find offerings to order in the marketplace"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "You can find offerings to order in the service catalog"
+msgstr ""
+
 #: src/customer/details/CustomerMarketplacePanel.tsx
-msgid "You can register organization as a marketplace service provider by pressing the button below"
+msgid "You can register organization as a service provider by pressing the button below"
 msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx

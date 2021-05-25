@@ -31,12 +31,10 @@ export const ResourceCreateUsageDialog: FunctionComponent<ResourceCreateUsageDia
       {loading ? (
         <LoadingSpinner />
       ) : error ? (
-        <h3>{translate('Unable to load marketplace offering details.')}</h3>
+        <h3>{translate('Unable to load offering details.')}</h3>
       ) : value.components.length === 0 ? (
         <h3>
-          {translate(
-            'Marketplace offering does not have any usage-based components.',
-          )}
+          {translate('Offering does not have any usage-based components.')}
         </h3>
       ) : (
         <ResourceUsageFormContainer

@@ -82,7 +82,7 @@ export const CustomerCreatePrompt: FunctionComponent<CustomerCreatePromptProps> 
                 title={translate('Service Provider')}
               >
                 {translate(
-                  'Register as a customer of our portal and provider your cloud services through the Marketplace.',
+                  'Register as a customer of our portal and provide your cloud services through the Marketplace.',
                 )}
               </MessageButton>
             ),
