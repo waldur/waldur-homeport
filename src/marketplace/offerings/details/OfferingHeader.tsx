@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 
+import { AuthService } from '@waldur/auth/AuthService';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Tooltip } from '@waldur/core/Tooltip';
@@ -70,8 +71,9 @@ export const OfferingHeader: React.FC<OfferingHeaderProps> = (props) => (
 
       <ReferralDetailsField offering={props.offering} />
     </ResourceDetailsTable>
-    {props.offering.type === OFFERING_TYPE_BOOKING && (
-      <GoogleCalendarLinkField offering={props.offering} />
-    )}
+    {AuthService.isAuthenticated() &&
+      props.offering.type === OFFERING_TYPE_BOOKING && (
+        <GoogleCalendarLinkField offering={props.offering} />
+      )}
   </Col>
 );
