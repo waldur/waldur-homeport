@@ -27,11 +27,7 @@ export const ResourceUsageTabsContainer: FunctionComponent<ResourceUsageTabsCont
   ) : error ? (
     <>{translate('Unable to load data')}</>
   ) : !value.components.length ? (
-    <h3>
-      {translate(
-        'Marketplace offering does not have any usage-based components.',
-      )}
-    </h3>
+    <h3>{translate('Offering does not have any usage-based components.')}</h3>
   ) : (
     <>
       <ResourceMetaInfo resource={resource} />

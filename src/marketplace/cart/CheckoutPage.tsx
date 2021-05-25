@@ -11,7 +11,7 @@ import { ShoppingCartSidebar } from './ShoppingCartSidebar';
 import { ShoppingCartSteps } from './ShoppingCartSteps';
 
 export const CheckoutPage: FunctionComponent = () => {
-  useTitle(translate('Marketplace checkout'));
+  useTitle(translate('Checkout'));
   return (
     <Row>
       <Col lg={8}>

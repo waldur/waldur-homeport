@@ -16,7 +16,7 @@ export const CategoriesList = withTranslation((props: CategoriesListProps) => {
   if (!props.loaded) {
     return (
       <h3 className="text-center">
-        {props.translate('Unable to load marketplace categories.')}
+        {props.translate('Unable to load categories.')}
       </h3>
     );
   }

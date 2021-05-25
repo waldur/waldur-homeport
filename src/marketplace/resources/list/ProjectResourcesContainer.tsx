@@ -37,7 +37,7 @@ export const ProjectResourcesContainer: React.FC = () => {
   if (loading) {
     return <LoadingSpinner />;
   } else if (error) {
-    return <>{translate('Unable to load marketplace category details')}</>;
+    return <>{translate('Unable to load category details')}</>;
   } else {
     return (
       <>

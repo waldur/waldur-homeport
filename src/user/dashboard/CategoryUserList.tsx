@@ -16,9 +16,7 @@ export const CategoryUserList = withTranslation(() => {
 
   if (error) {
     return (
-      <h3 className="text-center">
-        {translate('Unable to load marketplace categories.')}
-      </h3>
+      <h3 className="text-center">{translate('Unable to load categories.')}</h3>
     );
   }
 
