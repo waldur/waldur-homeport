@@ -1148,6 +1148,7 @@ msgstr ""
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/ServiceProviderOfferingsList.tsx
 #: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
@@ -1643,6 +1644,7 @@ msgstr ""
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/ServiceProviderOfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
@@ -4042,6 +4044,7 @@ msgstr ""
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/ServiceProviderOfferingsList.tsx
 #: src/marketplace/offerings/actions/SelectCategoryTab.tsx
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
@@ -5743,6 +5746,7 @@ msgid "Public key"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingsListContainer.tsx
+#: src/marketplace/offerings/ServiceProvider.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/images/ImagesContainer.tsx
 #: src/marketplace/offerings/utils.ts
@@ -7061,6 +7065,7 @@ msgstr ""
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/map/LeafletMap.tsx
 #: src/marketplace/details/OrderSummary.tsx
+#: src/marketplace/offerings/ServiceProvider.tsx
 #: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/orders/ProviderAutocomplete.tsx
@@ -7089,6 +7094,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Service provider has been registered."
+msgstr ""
+
+#: src/marketplace/offerings/ServiceProviderOfferingsList.tsx
+msgid "Service provider offerings"
 msgstr ""
 
 #: src/providers/support/FlowMapFilter.tsx
@@ -7384,6 +7393,7 @@ msgstr ""
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/ServiceProviderOfferingsList.tsx
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
@@ -8667,6 +8677,7 @@ msgid "Unable to load offering cost chart."
 msgstr ""
 
 #: src/marketplace/details/DetailsPage.tsx
+#: src/marketplace/offerings/ServiceProviderOfferingsListExpandableRow.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
@@ -8752,6 +8763,10 @@ msgstr ""
 
 #: src/rancher/cluster/create/TenantSelector.tsx
 msgid "Unable to load tenant."
+msgstr ""
+
+#: src/marketplace/offerings/ServiceProvider.tsx
+msgid "Unable to load the service provider."
 msgstr ""
 
 #: src/user/dashboard/UserDashboardChart.tsx
