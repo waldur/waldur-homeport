@@ -1,7 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import { required } from '@waldur/core/validators';
+import { isGuid, required } from '@waldur/core/validators';
 import { FormContainer, StringField } from '@waldur/form';
+
+const defaultValidtors = [required, isGuid];
 
 export const AzureForm: FunctionComponent<{ translate; container }> = ({
   translate,
@@ -13,21 +15,21 @@ export const AzureForm: FunctionComponent<{ translate; container }> = ({
       label={translate('Subscription ID')}
       description={translate('In the format of GUID')}
       required={true}
-      validate={required}
+      validate={defaultValidtors}
     />
     <StringField
       name="tenant_id"
       label={translate('Tenant ID')}
       description={translate('In the format of GUID')}
       required={true}
-      validate={required}
+      validate={defaultValidtors}
     />
     <StringField
       name="client_id"
       label={translate('Client ID')}
       description={translate('In the format of GUID')}
       required={true}
-      validate={required}
+      validate={defaultValidtors}
     />
     <StringField
       name="client_secret"

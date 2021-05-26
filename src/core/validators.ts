@@ -2,6 +2,14 @@ import { ENV } from '@waldur/configs/default';
 import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
+const GUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+export const isGuid = (value) => {
+  if (value && !value.match(GUID_PATTERN)) {
+    return translate('GUID is expected.');
+  }
+};
+
 export const required = (value) =>
   value || value === 0 ? undefined : translate('This field is required.');
 
