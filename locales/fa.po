@@ -1643,17 +1643,8 @@ msgstr "پروژه های مدیریت شده"
 msgid "Management"
 msgstr "مدیریت"
 
-msgid "Marketplace checkout"
-msgstr "وارسی Marketplace"
-
-msgid "Marketplace offering does not have any usage-based components."
-msgstr "پیشنهاد Marketplace هیچ استفاده ای ندارد-براساس components."
-
 msgid "Marketplace offerings"
 msgstr "پیشنهادMarketplace"
-
-msgid "Marketplace service provider"
-msgstr "ارائه دهنده سرویس Marketplace"
 
 msgid "Max # of VM snapshots"
 msgstr "حداکثر # از VM snapshots"

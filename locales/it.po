@@ -2324,17 +2324,8 @@ msgstr "Mercato"
 msgid "Marketplace UUID"
 msgstr "UUID del Marketplace"
 
-msgid "Marketplace checkout"
-msgstr "Checkout del mercato"
-
-msgid "Marketplace offering does not have any usage-based components."
-msgstr "L'offerta Marketplace non dispone di componenti basati sull'utilizzo."
-
 msgid "Marketplace offerings"
 msgstr "Offerte Marketplace"
-
-msgid "Marketplace service provider"
-msgstr "Fornitore di servizi Marketplace"
 
 msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
 msgstr "I servizi del Marketplace possono essere forniti solo per una determinata affiliazione. Al momento non si dispone di organizzazioni o progetti collegati al proprio account."
@@ -3655,9 +3646,6 @@ msgstr "Nome della regione"
 
 msgid "Register"
 msgstr "Registrati"
-
-msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
-msgstr "Registrati come cliente del nostro portale e fornisci i tuoi servizi cloud attraverso il Marketplace."
 
 msgid "Register as service provider"
 msgstr "Registrati come fornitore di servizi"
@@ -5327,18 +5315,6 @@ msgstr "Impossibile caricare le fatture"
 msgid "Unable to load locations."
 msgstr "Impossibile caricare le posizioni."
 
-msgid "Unable to load marketplace categories."
-msgstr "Impossibile caricare le categorie del marketplace."
-
-msgid "Unable to load marketplace category details"
-msgstr "Impossibile caricare i dettagli della categoria del marketplace"
-
-msgid "Unable to load marketplace offering details."
-msgstr "Impossibile caricare i dettagli dell'offerta del marketplace."
-
-msgid "Unable to load marketplace offerings."
-msgstr "Impossibile caricare le offerte del marketplace."
-
 msgid "Unable to load offering."
 msgstr "Impossibile caricare l'offerta."
 
@@ -6118,9 +6094,6 @@ msgstr "Puoi creare un problema premendo il pulsante qui sotto"
 
 msgid "You can find offerings to order in the marketplace"
 msgstr "Puoi trovare offerte su ordinazione sul mercato"
-
-msgid "You can register organization as a marketplace service provider by pressing the button below"
-msgstr "È possibile registrare l'organizzazione come fornitore di servizi del marketplace premendo il pulsante qui sotto"
 
 msgid "You can remove this organization by pressing the button"
 msgstr "È possibile rimuovere questa organizzazione premendo il pulsante"

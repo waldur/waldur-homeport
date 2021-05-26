@@ -2324,17 +2324,8 @@ msgstr "Prekyvietė"
 msgid "Marketplace UUID"
 msgstr "Marketplace UUID"
 
-msgid "Marketplace checkout"
-msgstr "Marketplace kasa"
-
-msgid "Marketplace offering does not have any usage-based components."
-msgstr "Marketplace pasiūlyme nėra jokių naudojimu pagrįstų komponentų."
-
 msgid "Marketplace offerings"
 msgstr "Marketplace pasiūlymai"
-
-msgid "Marketplace service provider"
-msgstr "Marketplace paslaugų teikėjas"
 
 msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
 msgstr "Marketplace paslaugos gali būti teikiamos tik tam tikram priklausymui. Šiuo metu neturite su savo paskyra susietų organizacijų ar projektų."
@@ -3655,9 +3646,6 @@ msgstr "Regiono pavadinimas"
 
 msgid "Register"
 msgstr "Registruotis"
-
-msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
-msgstr "Užsiregistruokite kaip mūsų portalo klientas ir teiraukite savo debesies paslaugas per Marketplace."
 
 msgid "Register as service provider"
 msgstr "Registruokitės kaip paslaugų teikėjas"
@@ -5327,18 +5315,6 @@ msgstr "Neįmanoma įkelti sąskaitų faktūrų"
 msgid "Unable to load locations."
 msgstr "Neįmanoma įkelti vietų."
 
-msgid "Unable to load marketplace categories."
-msgstr "Neįmanoma įkelti prekyviečių kategorijų."
-
-msgid "Unable to load marketplace category details"
-msgstr "Neįmanoma įkelti prekyvietės kategorijos informacijos"
-
-msgid "Unable to load marketplace offering details."
-msgstr "Neįmanoma įkelti prekyvietės siūlymo išsami informacija."
-
-msgid "Unable to load marketplace offerings."
-msgstr "Neįmanoma įkelti prekyvietės pasiūlymų."
-
 msgid "Unable to load offering."
 msgstr "Neįmanoma įkelti pasiūlymo."
 
@@ -6118,9 +6094,6 @@ msgstr "Galite sukurti problemą paspausdami žemiau esantį mygtuką"
 
 msgid "You can find offerings to order in the marketplace"
 msgstr "Pasiūlymus užsakyti galite rasti prekyvietėje"
-
-msgid "You can register organization as a marketplace service provider by pressing the button below"
-msgstr "Galite užregistruoti organizaciją kaip prekyvietės paslaugų teikėją paspausdami žemiau esantį mygtuką"
 
 msgid "You can remove this organization by pressing the button"
 msgstr "Šią organizaciją galite pašalinti paspausdami mygtuką"

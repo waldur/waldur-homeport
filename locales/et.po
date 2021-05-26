@@ -1739,17 +1739,8 @@ msgstr "Märgi arve tasuks"
 msgid "Marketplace"
 msgstr "Turuplats"
 
-msgid "Marketplace checkout"
-msgstr "Turuplatsi kassa"
-
-msgid "Marketplace offering does not have any usage-based components."
-msgstr "Turuplatsi pakkumisel pole ühtegi kasutusel baseeruvat komponenti"
-
 msgid "Marketplace offerings"
 msgstr "Turuplatsi pakkumised"
-
-msgid "Marketplace service provider"
-msgstr "Tennusepakkujat ei õnnestunud salvestada."
 
 msgid "Max # of snapshots"
 msgstr "Maksimaalne tõmmiste arv"
@@ -3697,18 +3688,6 @@ msgstr "Arveid ei saa laadida"
 
 msgid "Unable to load locations."
 msgstr "Asukohti ei õnnestunud laadida"
-
-msgid "Unable to load marketplace categories."
-msgstr "Turuplatsi kategooriaid ei õnnestunud laadida"
-
-msgid "Unable to load marketplace category details"
-msgstr "Ei ole võimalik laadida turuplatsi kategooria detaile"
-
-msgid "Unable to load marketplace offering details."
-msgstr "Ei ole võimalik laadida turuplatsi pakkumise detaile"
-
-msgid "Unable to load marketplace offerings."
-msgstr "Ei ole võimalik laadida turuplatsi pakkumisi"
 
 msgid "Unable to load offering."
 msgstr "Ei ole võimalik laadida pakkumisi."
