@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { createSelector } from 'reselect';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { isStaff } from '@waldur/workspace/selectors';
@@ -24,6 +25,7 @@ interface ForwardButtonComponentProps extends TranslateProps {
   items: OrderItemResponse[];
   disabled: boolean;
   orderCanBeApproved: boolean;
+  shouldConcealPrices: boolean;
 }
 
 interface PureForwardButton {
@@ -50,7 +52,11 @@ const ForwardButtonComponent = (props: ForwardButtonComponentProps) =>
   props.items.length > 0 ? (
     props.orderCanBeApproved ? (
       <PureForwardButton
-        title={props.translate('Purchase')}
+        title={
+          props.shouldConcealPrices
+            ? props.translate('Request')
+            : props.translate('Purchase')
+        }
         action={props.createOrder}
         disabled={props.disabled}
         tooltip={props.translate(
@@ -77,6 +83,7 @@ const mapStateToProps = (state: RootState) => ({
   items: getItems(state),
   disabled: isCreatingOrder(state) || !allTermsOfServiceAgreed(state),
   orderCanBeApproved: orderCanBeAutoapproved(state),
+  shouldConcealPrices: isVisible(state, 'marketplace.conceal_prices'),
 });
 
 const enhance = compose(

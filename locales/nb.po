@@ -746,9 +746,6 @@ msgstr "Endre smak"
 msgid "Changing password"
 msgstr "Endre passord"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "Gebyr for bruksbasert komponent er basert på den forespurte grensen for brukeren."
-
 msgid "Charset"
 msgstr "Charset"
 
@@ -1234,9 +1231,6 @@ msgstr "Divisjon"
 
 msgid "Division type"
 msgstr "Divisjonstype"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Ikke tillat brukeren å angi kvoter når tilbudet er klargjort."
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Ikke konfigurer en gateway for dette delnettet"
@@ -2330,17 +2324,8 @@ msgstr "Markedsplass"
 msgid "Marketplace UUID"
 msgstr "Markedsplass UUID"
 
-msgid "Marketplace checkout"
-msgstr "Kassefunksjonen Marketplace"
-
-msgid "Marketplace offering does not have any usage-based components."
-msgstr "Marketplace-tilbudet har ingen bruksbaserte komponenter."
-
 msgid "Marketplace offerings"
 msgstr "Marketplace-tilbud"
-
-msgid "Marketplace service provider"
-msgstr "Marketplace tjenesteleverandør"
 
 msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
 msgstr "Marketplace-tjenester kan kun klargjøres for en bestemt tilknytning. Du har for øyeblikket ikke noen organisasjoner eller prosjekter knyttet til kontoen din."
@@ -3661,9 +3646,6 @@ msgstr "Navn på region"
 
 msgid "Register"
 msgstr "Registrer deg"
-
-msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
-msgstr "Registrer deg som kunde av vår portal og leverandør dine skytjenester via Marketplace."
 
 msgid "Register as service provider"
 msgstr "Registrer deg som tjenesteleverandør"
@@ -5333,18 +5315,6 @@ msgstr "Kan ikke laste inn fakturaer"
 msgid "Unable to load locations."
 msgstr "Kan ikke laste inn plasseringer."
 
-msgid "Unable to load marketplace categories."
-msgstr "Kan ikke laste inn markedsplasskategorier."
-
-msgid "Unable to load marketplace category details"
-msgstr "Kan ikke laste inn detaljer om markedsplasskategorier"
-
-msgid "Unable to load marketplace offering details."
-msgstr "Kan ikke laste inn detaljer om markedsplasstilbud."
-
-msgid "Unable to load marketplace offerings."
-msgstr "Kan ikke laste inn markedsplasstilbud."
-
 msgid "Unable to load offering."
 msgstr "Kan ikke laste inn tilbud."
 
@@ -6124,9 +6094,6 @@ msgstr "Du kan opprette et problem ved å trykke på knappen nedenfor"
 
 msgid "You can find offerings to order in the marketplace"
 msgstr "Du kan finne tilbud du kan bestille på markedsplassen"
-
-msgid "You can register organization as a marketplace service provider by pressing the button below"
-msgstr "Du kan registrere organisasjon som markedsplassleverandør ved å trykke på knappen nedenfor"
 
 msgid "You can remove this organization by pressing the button"
 msgstr "Du kan fjerne denne organisasjonen ved å trykke på knappen"

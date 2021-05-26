@@ -746,9 +746,6 @@ msgstr "Veranderende smaak"
 msgid "Changing password"
 msgstr "Wachtwoord wijzigen"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "Kosten voor op gebruik gebaseerde component zijn gebaseerd op door de gebruiker aangevraagde limiet."
-
 msgid "Charset"
 msgstr "Tekenset"
 
@@ -1234,9 +1231,6 @@ msgstr "Divisie"
 
 msgid "Division type"
 msgstr "Type divisie"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Sta niet toe dat de gebruiker quota's opgeeft wanneer het aanbod wordt ingericht."
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Configureer geen gateway voor dit subnet"
@@ -2330,17 +2324,8 @@ msgstr "Marketplace"
 msgid "Marketplace UUID"
 msgstr "Marketplace UUID"
 
-msgid "Marketplace checkout"
-msgstr "Marketplace kassa"
-
-msgid "Marketplace offering does not have any usage-based components."
-msgstr "Marketplace-aanbod heeft geen op gebruik gebaseerde componenten."
-
 msgid "Marketplace offerings"
 msgstr "Marketplace-aanboden"
-
-msgid "Marketplace service provider"
-msgstr "Marketplace dienstverlener"
 
 msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
 msgstr "Marketplace-diensten kunnen alleen worden ingericht voor een bepaalde affiliatie. U hebt momenteel geen organisaties of projecten verbonden met uw account."
@@ -3661,9 +3646,6 @@ msgstr "Regio naam"
 
 msgid "Register"
 msgstr "Registreren"
-
-msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
-msgstr "Registreer u als klant van onze portal en biedt uw wolkdiensten aan via de Marketplace."
 
 msgid "Register as service provider"
 msgstr "Registreren als dienstverlener"
@@ -5333,18 +5315,6 @@ msgstr "Kan facturen niet laden"
 msgid "Unable to load locations."
 msgstr "Kan locaties niet laden."
 
-msgid "Unable to load marketplace categories."
-msgstr "Kan marktplaatscategorieën niet laden."
-
-msgid "Unable to load marketplace category details"
-msgstr "Kan marktplaats categorie details niet laden"
-
-msgid "Unable to load marketplace offering details."
-msgstr "Kan details van marktplaatsaanbieding niet laden."
-
-msgid "Unable to load marketplace offerings."
-msgstr "Kan het marktplaats aanbod niet laden."
-
 msgid "Unable to load offering."
 msgstr "Kan aanbieding niet laden."
 
@@ -6124,9 +6094,6 @@ msgstr "U kunt een probleem maken door op de onderstaande knop te drukken"
 
 msgid "You can find offerings to order in the marketplace"
 msgstr "U kunt aanbiedingen vinden om te bestellen op de marktplaats"
-
-msgid "You can register organization as a marketplace service provider by pressing the button below"
-msgstr "U kunt organisatie als marktplaats dienstverlener registreren door op de onderstaande knop te drukken"
 
 msgid "You can remove this organization by pressing the button"
 msgstr "U kunt deze organisatie verwijderen door op de knop te drukken"

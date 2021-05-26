@@ -746,9 +746,6 @@ msgstr "Cambio de sabor"
 msgid "Changing password"
 msgstr "Cambiando contraseña"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "El cargo por componente basado en el uso se basa en el límite solicitado por el usuario."
-
 msgid "Charset"
 msgstr "Juego de caracteres"
 
@@ -1234,9 +1231,6 @@ msgstr "División"
 
 msgid "Division type"
 msgstr "Tipo de división"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "No permitir que el usuario especifique las cuotas cuando se aprovisiona la oferta."
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "No configure una puerta de enlace para esta subred"
@@ -2330,17 +2324,8 @@ msgstr "Marketplace"
 msgid "Marketplace UUID"
 msgstr "UUID de Marketplace"
 
-msgid "Marketplace checkout"
-msgstr "Pago de Marketplace"
-
-msgid "Marketplace offering does not have any usage-based components."
-msgstr "La oferta del mercado no tiene ningún componente basado en el uso."
-
 msgid "Marketplace offerings"
 msgstr "Ofertas de Marketplace"
-
-msgid "Marketplace service provider"
-msgstr "Proveedor de servicios de Marketplace"
 
 msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
 msgstr "Los servicios de Marketplace solo se pueden aprovisionar para una determinada afiliación. Actualmente no tiene ninguna organización o proyecto conectado con su cuenta."
@@ -3661,9 +3646,6 @@ msgstr "Nombre de la región"
 
 msgid "Register"
 msgstr "Registrarse"
-
-msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
-msgstr "Regístrese como cliente de nuestro portal y provea sus servicios en la nube a través del Marketplace."
 
 msgid "Register as service provider"
 msgstr "Registrarse como proveedor de servicios"
@@ -5333,18 +5315,6 @@ msgstr "No se pueden cargar las facturas"
 msgid "Unable to load locations."
 msgstr "No se pueden cargar las ubicaciones."
 
-msgid "Unable to load marketplace categories."
-msgstr "No se pueden cargar las categorías del mercado."
-
-msgid "Unable to load marketplace category details"
-msgstr "No se pueden cargar los detalles de la categoría del mercado"
-
-msgid "Unable to load marketplace offering details."
-msgstr "No se pueden cargar los detalles de la oferta del mercado."
-
-msgid "Unable to load marketplace offerings."
-msgstr "No se pueden cargar las ofertas del mercado."
-
 msgid "Unable to load offering."
 msgstr "No se puede cargar la oferta."
 
@@ -6124,9 +6094,6 @@ msgstr "Puede crear un problema pulsando el botón de abajo"
 
 msgid "You can find offerings to order in the marketplace"
 msgstr "Puede encontrar ofertas para pedir en el mercado"
-
-msgid "You can register organization as a marketplace service provider by pressing the button below"
-msgstr "Puede registrar la organización como proveedor de servicios de mercado pulsando el botón de abajo"
 
 msgid "You can remove this organization by pressing the button"
 msgstr "Puede eliminar esta organización pulsando el botón"

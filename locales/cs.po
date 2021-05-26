@@ -746,9 +746,6 @@ msgstr "Změna příchuti"
 msgid "Changing password"
 msgstr "Změna hesla"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "Poplatek za komponentu založenou na využití je založen na limitu požadovaném uživatelem."
-
 msgid "Charset"
 msgstr "Znaková sada"
 
@@ -1234,9 +1231,6 @@ msgstr "Divize"
 
 msgid "Division type"
 msgstr "Typ divize"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Nepovolit uživateli zadat kvóty při zřizování nabídky."
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Nekonfigurujte bránu pro tuto podsíť."
@@ -2330,17 +2324,8 @@ msgstr "Marketplace"
 msgid "Marketplace UUID"
 msgstr "Marketplace UUID"
 
-msgid "Marketplace checkout"
-msgstr "Pokladna Marketplace"
-
-msgid "Marketplace offering does not have any usage-based components."
-msgstr "Nabídka Marketplace neobsahuje žádné komponenty založené na využití."
-
 msgid "Marketplace offerings"
 msgstr "Nabídky Marketplace"
-
-msgid "Marketplace service provider"
-msgstr "Poskytovatel služeb Marketplace"
 
 msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
 msgstr "Služby Marketplace mohou být poskytovány pouze pro určitou příslušnost. Momentálně nemáte žádné organizace ani projekty spojené s vaším účtem."
@@ -3661,9 +3646,6 @@ msgstr "Název regionu"
 
 msgid "Register"
 msgstr "Registrovat"
-
-msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
-msgstr "Zaregistrujte se jako zákazník našeho portálu a poskytujte své cloudové služby prostřednictvím Marketplace."
 
 msgid "Register as service provider"
 msgstr "Zaregistrujte se jako poskytovatel služeb"
@@ -5333,18 +5315,6 @@ msgstr "Nelze načíst faktury"
 msgid "Unable to load locations."
 msgstr "Nelze načíst umístění."
 
-msgid "Unable to load marketplace categories."
-msgstr "Nelze načíst kategorie obchodu."
-
-msgid "Unable to load marketplace category details"
-msgstr "Nelze načíst podrobnosti o kategorii obchodu"
-
-msgid "Unable to load marketplace offering details."
-msgstr "Nelze načíst podrobnosti o nabídce obchodu."
-
-msgid "Unable to load marketplace offerings."
-msgstr "Nelze načíst nabídky obchodu."
-
 msgid "Unable to load offering."
 msgstr "Nelze načíst nabídku."
 
@@ -6124,9 +6094,6 @@ msgstr "Problém můžete vytvořit stisknutím tlačítka níže"
 
 msgid "You can find offerings to order in the marketplace"
 msgstr "Nabídky k objednání najdete v obchodě"
-
-msgid "You can register organization as a marketplace service provider by pressing the button below"
-msgstr "Organizaci můžete zaregistrovat jako poskytovatele služeb Marketplace stisknutím tlačítka níže"
 
 msgid "You can remove this organization by pressing the button"
 msgstr "Tuto organizaci můžete odstranit stisknutím tlačítka"

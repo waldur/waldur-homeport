@@ -35,7 +35,9 @@ export async function loadData(resource_uuid): Promise<FetchedData> {
   const plan = await getPlan(resource.plan_uuid);
   const limitParser = getFormLimitParser(offering.type);
   const limitSerializer = getFormLimitSerializer(offering.type);
-  const components = filterOfferingComponents(offering);
+  const components = filterOfferingComponents(offering).filter(
+    (component) => component.billing_type === 'limit',
+  );
   const usages = limitParser(resource.current_usages);
   const resourceLimits = limitParser(resource.limits);
   const limits: Record<string, number> = components.reduce(
@@ -67,19 +69,23 @@ export const getData = (
   orderCanBeApproved,
 ): StateProps => {
   const { periods, multipliers } = getBillingPeriods(plan.unit);
-  const offeringComponents = filterOfferingComponents(offering);
+  const offeringComponents = filterOfferingComponents(offering).filter(
+    (component) => component.billing_type === 'limit',
+  );
   const components = offeringComponents.map((component) => {
     const price = plan.prices[component.type] || 0;
     const subTotal = price * newLimits[component.type] || 0;
     const prices = multipliers.map((mult) => mult * subTotal);
-    const changedLimit =
-      newLimits[component.type] - currentLimits[component.type];
+    const currentLimit = currentLimits[component.type] || 0;
+    const newLimit = newLimits[component.type] || 0;
+    const changedLimit = newLimit - currentLimit;
     const changedSubTotal = price * changedLimit;
     const changedPrices = multipliers.map((mult) => mult * changedSubTotal);
     return {
       type: component.type,
       name: component.name,
       measured_unit: component.measured_unit,
+      is_boolean: component.is_boolean,
       usage: usages[component.type] || 0,
       limit: currentLimits[component.type],
       prices,

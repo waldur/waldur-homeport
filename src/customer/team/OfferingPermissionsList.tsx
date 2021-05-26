@@ -1,7 +1,9 @@
 import { FunctionComponent } from 'react';
+import { ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { UpdateOfferingPermissionExpirationTimeButton } from '@waldur/customer/team/UpdateOfferingPermissionExpirationTimeButton';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
@@ -37,7 +39,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('Actions'),
           render: ({ row }) =>
             props.isOwnerOrStaff ? (
-              <OfferingPermissionRemoveButton permission={row} />
+              <ButtonGroup>
+                <OfferingPermissionRemoveButton permission={row} />
+                <UpdateOfferingPermissionExpirationTimeButton
+                  permission={row}
+                />
+              </ButtonGroup>
             ) : null,
         },
       ]}

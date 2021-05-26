@@ -21,4 +21,5 @@ export interface OrderSummaryProps {
   formValid: boolean;
   updateMode?: boolean;
   extraComponent?: React.ComponentType<any>;
+  shouldConcealPrices?: boolean;
 }

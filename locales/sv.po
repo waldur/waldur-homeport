@@ -725,9 +725,6 @@ msgstr "Ändra smak"
 msgid "Changing password"
 msgstr "Ändra lösenord"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "Avgiften för användningsbaserad komponent baseras på användarbegärd gräns."
-
 msgid "Charset"
 msgstr "Charset"
 
@@ -1204,9 +1201,6 @@ msgstr "Divisionen"
 
 msgid "Division type"
 msgstr "Typ av division"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Tillåt inte användaren att ange kvoter när erbjudandet etableras."
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Konfigurera inte en gateway för det här undernätet"
@@ -2288,17 +2282,8 @@ msgstr "Marknadsplats"
 msgid "Marketplace UUID"
 msgstr "Marketplace UUID"
 
-msgid "Marketplace checkout"
-msgstr "Marketplace-utcheckning"
-
-msgid "Marketplace offering does not have any usage-based components."
-msgstr "Marketplace-erbjudandet har inga användningsbaserade komponenter."
-
 msgid "Marketplace offerings"
 msgstr "Marketplace-erbjudanden"
-
-msgid "Marketplace service provider"
-msgstr "Marketplace-tjänsteleverantör"
 
 msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
 msgstr "Marketplace-tjänster kan endast etableras för en viss anslutning. Du har för närvarande inga organisationer eller projekt kopplade till ditt konto."
@@ -3589,9 +3574,6 @@ msgstr "Regionens namn"
 
 msgid "Register"
 msgstr "Registrera"
-
-msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
-msgstr "Registrera dig som kund på vår portal och leverantör dina molntjänster via Marketplace."
 
 msgid "Register as service provider"
 msgstr "Registrera dig som tjänsteleverantör"
@@ -5252,18 +5234,6 @@ msgstr "Det gick inte att ladda fakturor"
 msgid "Unable to load locations."
 msgstr "Det gick inte att ladda platser."
 
-msgid "Unable to load marketplace categories."
-msgstr "Det gick inte att läsa in marknadskategorier."
-
-msgid "Unable to load marketplace category details"
-msgstr "Det gick inte att läsa in information om marknadsplatskategori"
-
-msgid "Unable to load marketplace offering details."
-msgstr "Det gick inte att ladda information om marknadsplats-erbjudandet."
-
-msgid "Unable to load marketplace offerings."
-msgstr "Det gick inte att ladda marknadsplatserbjudanden."
-
 msgid "Unable to load offering."
 msgstr "Det går inte att ladda erbjudandet."
 
@@ -6034,9 +6004,6 @@ msgstr "Du kan skapa problem genom att trycka på knappen nedan"
 
 msgid "You can find offerings to order in the marketplace"
 msgstr "Du kan hitta erbjudanden att beställa på marknaden"
-
-msgid "You can register organization as a marketplace service provider by pressing the button below"
-msgstr "Du kan registrera organisationen som marknadsplatsleverantör genom att trycka på knappen nedan"
 
 msgid "You can remove this organization by pressing the button"
 msgstr "Du kan ta bort denna organisation genom att trycka på knappen"

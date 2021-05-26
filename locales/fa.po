@@ -560,9 +560,6 @@ msgstr "تغییر دادن flavor"
 msgid "Changing password"
 msgstr "تغییر دادن رمز"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "هزینه برای استفاده component براساس محدودیت ایجاد شده توسط کاربر است."
-
 msgid "Choices as comma-separated list"
 msgstr "گزینه هایی به عنوان کاما -لیست جدا"
 
@@ -913,9 +910,6 @@ msgstr "غیرفعال شده"
 
 msgid "Display name"
 msgstr "نمایش نام"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "به کاربر اجازه ندهید هنگامی که quotas مشخص شده است پیشنهادی ارائه دهد."
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "gateway را برای این subnet پیکربندی نکنید"
@@ -1649,17 +1643,8 @@ msgstr "پروژه های مدیریت شده"
 msgid "Management"
 msgstr "مدیریت"
 
-msgid "Marketplace checkout"
-msgstr "وارسی Marketplace"
-
-msgid "Marketplace offering does not have any usage-based components."
-msgstr "پیشنهاد Marketplace هیچ استفاده ای ندارد-براساس components."
-
 msgid "Marketplace offerings"
 msgstr "پیشنهادMarketplace"
-
-msgid "Marketplace service provider"
-msgstr "ارائه دهنده سرویس Marketplace"
 
 msgid "Max # of VM snapshots"
 msgstr "حداکثر # از VM snapshots"

@@ -20,9 +20,7 @@ export const OfferingGrid: React.FC<OfferingGridProps> = (props) => {
 
   if (!props.loaded) {
     return (
-      <h3 className="text-center">
-        {translate('Unable to load marketplace offerings.')}
-      </h3>
+      <h3 className="text-center">{translate('Unable to load offerings.')}</h3>
     );
   }
 

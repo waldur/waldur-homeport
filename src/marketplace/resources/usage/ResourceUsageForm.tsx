@@ -13,6 +13,7 @@ import { translate } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { UsageReportContext } from './types';
+import { getBillingTypeLabel } from './utils';
 
 export interface ResourceUsageFormProps extends InjectedFormProps {
   components: OfferingComponent[];
@@ -63,6 +64,13 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
         key={`${index}.description`}
         placeholder={translate('Comment')}
         hideLabel={true}
+      />,
+    );
+    components.push(
+      <SummaryField
+        key={`${index}.billing_type`}
+        label={translate('Accounting type')}
+        value={getBillingTypeLabel(component.billing_type)}
       />,
     );
     components.push(

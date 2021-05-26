@@ -746,9 +746,6 @@ msgstr "Changement de saveur"
 msgid "Changing password"
 msgstr "Modification du mot de passe"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "Les frais pour le composant basé sur l'utilisation sont basés sur la limite demandée par l'utilisateur."
-
 msgid "Charset"
 msgstr "Charset"
 
@@ -1234,9 +1231,6 @@ msgstr "Division"
 
 msgid "Division type"
 msgstr "Type de division"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Ne pas autoriser l'utilisateur à spécifier des quotas lorsque l'offre est provisionnée."
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Ne pas configurer une passerelle pour ce sous-réseau"
@@ -2330,17 +2324,8 @@ msgstr "Marketplace"
 msgid "Marketplace UUID"
 msgstr "UUID Marketplace"
 
-msgid "Marketplace checkout"
-msgstr "Caisse du Marketplace"
-
-msgid "Marketplace offering does not have any usage-based components."
-msgstr "L'offre Marketplace ne comporte aucun composant basé sur l'utilisation."
-
 msgid "Marketplace offerings"
 msgstr "Offres Marketplace"
-
-msgid "Marketplace service provider"
-msgstr "Fournisseur de services Marketplace"
 
 msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
 msgstr "Les services Marketplace ne peuvent être provisionnés que pour une certaine affiliation. Vous n'avez actuellement aucune organisation ou projet connecté à votre compte."
@@ -3661,9 +3646,6 @@ msgstr "Nom de la région"
 
 msgid "Register"
 msgstr "S'inscrire"
-
-msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
-msgstr "Inscrivez-vous en tant que client de notre portail et fournissez vos services cloud via le Marketplace."
 
 msgid "Register as service provider"
 msgstr "S'inscrire comme fournisseur de services"
@@ -5333,18 +5315,6 @@ msgstr "Impossible de charger les factures"
 msgid "Unable to load locations."
 msgstr "Impossible de charger les emplacements."
 
-msgid "Unable to load marketplace categories."
-msgstr "Impossible de charger les catégories de la place de marché."
-
-msgid "Unable to load marketplace category details"
-msgstr "Impossible de charger les détails de la catégorie de la place de marché"
-
-msgid "Unable to load marketplace offering details."
-msgstr "Impossible de charger les détails de l'offre du marché."
-
-msgid "Unable to load marketplace offerings."
-msgstr "Impossible de charger les offres de la place de marché."
-
 msgid "Unable to load offering."
 msgstr "Impossible de charger l'offre."
 
@@ -6124,9 +6094,6 @@ msgstr "Vous pouvez créer un problème en appuyant sur le bouton ci-dessous"
 
 msgid "You can find offerings to order in the marketplace"
 msgstr "Vous pouvez trouver des offres à commander sur la place de marché"
-
-msgid "You can register organization as a marketplace service provider by pressing the button below"
-msgstr "Vous pouvez enregistrer l’organisation en tant que fournisseur de services de marché en appuyant sur le bouton ci-dessous"
 
 msgid "You can remove this organization by pressing the button"
 msgstr "Vous pouvez supprimer cette organisation en appuyant sur le bouton"

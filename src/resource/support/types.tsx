@@ -11,6 +11,7 @@ export interface QuotaChoice {
   key: string;
   title: string;
   tooltipValueFormatter?(value: number): string;
+  hidden?: boolean;
 }
 
 export type QuotaList = QuotaChoice[];

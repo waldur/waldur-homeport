@@ -1,8 +1,10 @@
 import { Fragment, ReactNode } from 'react';
 import { connect } from 'react-redux';
 
+import { ENV } from '@waldur/configs/default';
 import { RootState } from '@waldur/store/reducers';
 
+import { DOMAIN_MESSAGES } from './constants';
 import { LanguageUtilsService } from './LanguageUtilsService';
 import { Translate, TranslateProps } from './types';
 
@@ -52,11 +54,21 @@ export const formatTemplate: Translate = (template, context) =>
 export const translateTemplate = (template) =>
   LanguageUtilsService.dictionary[template] || template;
 
+const getDomainMessage = (message) => {
+  if (!ENV.domain) {
+    return message;
+  }
+  if (!DOMAIN_MESSAGES[ENV.domain]) {
+    return message;
+  }
+  return DOMAIN_MESSAGES[ENV.domain][message] || message;
+};
+
 export const translate: Translate = (
   template,
   context,
   interpolator = formatTemplate,
-) => interpolator(translateTemplate(template), context);
+) => interpolator(translateTemplate(getDomainMessage(template)), context);
 
 export const getLocale = (state: RootState) => ({
   locale: state.locale,

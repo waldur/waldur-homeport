@@ -40,6 +40,8 @@ export const PAUSED = 'Paused';
 export const ARCHIVED = 'Archived';
 
 export const OFFERING_TABLE_NAME = 'marketplace-offerings';
+export const SERVICE_PROVIDER_OFFERING_TABLE_NAME =
+  'marketplace-service-provider-offerings';
 
 export const IMAGES_TABLE_NAME = 'marketplace-offering-images';
 

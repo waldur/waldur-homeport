@@ -26,11 +26,10 @@ export const getPeriodLabel = (
 };
 
 export const getUsageComponents = async (params: UsageReportContext) => {
-  const offering = await getOffering(params.offering_uuid);
-  const periods = await getResourcePlanPeriods(params.resource_uuid);
-  const components = offering.components.filter(
-    (component) => component.billing_type === 'usage',
+  const components = await getUsageBasedOfferingComponents(
+    params.offering_uuid,
   );
+  const periods = await getResourcePlanPeriods(params.resource_uuid);
   const options =
     periods.length > 0
       ? periods.map((period) => ({
@@ -53,8 +52,9 @@ const getUsageBasedOfferingComponents = async (offering_uuid: string) => {
     return null;
   }
   const offering = await getOffering(offering_uuid);
-  const components = offering.components.filter(
-    (component) => component.billing_type === 'usage',
+  const components = offering.components.filter((component) =>
+    // Allow to report usage for limit-based components
+    ['usage', 'limit'].includes(component.billing_type),
   );
   return components.sort((a, b) => a.name.localeCompare(b.name));
 };

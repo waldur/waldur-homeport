@@ -6,12 +6,16 @@ import {
   ModalTitle,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { FormContainer } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
+import { DateField } from '@waldur/form/DateField';
+import {
+  datePickerOverlayContainerInDialogs,
+  reactSelectMenuPortaling,
+} from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -34,6 +38,7 @@ export const OfferingPermissionCreateDialog = reduxForm({
         await grantPermission({
           offering: formData.offering.url,
           user: formData.user.url,
+          expiration_time: formData.expiration_time,
         });
         dispatch(closeModalDialog());
         dispatch(
@@ -81,6 +86,12 @@ export const OfferingPermissionCreateDialog = reduxForm({
             {...reactSelectMenuPortaling()}
             getOptionLabel={({ name }) => name}
             required={true}
+          />
+          <Field
+            name="expiration_time"
+            label={translate('Expiration time')}
+            component={DateField}
+            {...datePickerOverlayContainerInDialogs()}
           />
         </FormContainer>
       </ModalBody>

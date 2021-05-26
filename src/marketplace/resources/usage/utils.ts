@@ -3,6 +3,7 @@ import moment from 'moment-timezone';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { getAccountingTypeOptions } from '@waldur/marketplace/offerings/create/ComponentAccountingTypeField';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { ComponentUsage } from './types';
@@ -142,3 +143,7 @@ export const getEChartOptions = (
   const formattedUsages = getUsages(periods, filterUsages(component, usages));
   return formatChart(component.measured_unit, color, labels, formattedUsages);
 };
+
+export const getBillingTypeLabel = (value) =>
+  getAccountingTypeOptions().find((option) => option.value === value)?.label ||
+  'N/A';

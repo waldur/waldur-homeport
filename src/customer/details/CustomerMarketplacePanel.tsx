@@ -9,11 +9,11 @@ export const CustomerMarketplacePanel: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   return (
     <div className="highlight">
-      <h3>{translate('Marketplace service provider')}</h3>
+      <h3>{translate('Service provider')}</h3>
       {!customer.is_service_provider && (
         <p>
           {translate(
-            'You can register organization as a marketplace service provider by pressing the button below',
+            'You can register organization as a service provider by pressing the button below',
           )}
         </p>
       )}

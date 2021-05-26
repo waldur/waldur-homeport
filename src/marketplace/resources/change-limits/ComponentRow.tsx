@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
+import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { Limits } from '@waldur/marketplace/common/registry';
 import {
   parseIntField,
@@ -19,18 +20,28 @@ interface ComponentRowProps {
 
 const CellWrapper: FunctionComponent<any> = (props) => (
   <td className={props.meta.error ? 'form-group has-error' : 'form-group'}>
-    <div className="input-group">
-      <input
-        className="form-control"
-        type="number"
-        min={props.limits.min}
-        max={props.limits.max}
-        {...props.input}
+    {props.offeringComponent.is_boolean ? (
+      <AwesomeCheckbox
+        label=""
+        value={parseInt(props.input.value) === 1}
+        onChange={(value) => props.input.onChange(value ? 1 : 0)}
       />
-      <span className="input-group-addon">
-        {props.offeringComponent.measured_unit}
-      </span>
-    </div>
+    ) : (
+      <div className="input-group">
+        <input
+          className="form-control"
+          type="number"
+          min={props.limits.min}
+          max={props.limits.max}
+          {...props.input}
+        />
+        {props.offeringComponent.measured_unit ? (
+          <span className="input-group-addon">
+            {props.offeringComponent.measured_unit}
+          </span>
+        ) : null}
+      </div>
+    )}
   </td>
 );
 
@@ -53,6 +64,7 @@ export const ComponentRow: React.FC<ComponentRowProps> = ({
       parse={parseIntField}
       format={formatIntField}
       validate={getResourceComponentValidator(limits)}
+      min={0}
       component={CellWrapper}
       offeringComponent={component}
       limits={limits}

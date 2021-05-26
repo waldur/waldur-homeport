@@ -746,9 +746,6 @@ msgstr "Geschmack ändern"
 msgid "Changing password"
 msgstr "Ändern des Kennworts"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "Die Gebühr für nutzungsbasierte Komponente basiert auf dem vom Benutzer angeforderten Limit."
-
 msgid "Charset"
 msgstr "Charset"
 
@@ -1234,9 +1231,6 @@ msgstr "Abteilung"
 
 msgid "Division type"
 msgstr "Abteilungsart"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Erlauben Sie dem Benutzer nicht, Kontingente anzugeben, wenn das Angebot bereitgestellt wird."
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Konfigurieren Sie kein Gateway für dieses Subnetz"
@@ -2330,17 +2324,8 @@ msgstr "Marktplatz"
 msgid "Marketplace UUID"
 msgstr "Marktplatz-UUID"
 
-msgid "Marketplace checkout"
-msgstr "Marktplatz-Kasse"
-
-msgid "Marketplace offering does not have any usage-based components."
-msgstr "Das Marktplatzangebot hat keine nutzungsbasierten Komponenten."
-
 msgid "Marketplace offerings"
 msgstr "Marktplatz-Angebote"
-
-msgid "Marketplace service provider"
-msgstr "Marktplatz-Dienstleister"
 
 msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
 msgstr "Marktplatzdienste können nur für eine bestimmte Zugehörigkeit bereitgestellt werden. Sie haben derzeit keine Organisationen oder Projekte, die mit Ihrem Konto verbunden sind."
@@ -3661,9 +3646,6 @@ msgstr "Regionsname"
 
 msgid "Register"
 msgstr "Registrieren"
-
-msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
-msgstr "Registrieren Sie sich als Kunde unseres Portals und bieten Sie Ihre Cloud-Services über den Marktplatz an."
 
 msgid "Register as service provider"
 msgstr "Registrieren Sie sich als Dienstanbieter"
@@ -5333,18 +5315,6 @@ msgstr "Rechnungen können nicht geladen werden"
 msgid "Unable to load locations."
 msgstr "Standorte können nicht geladen werden."
 
-msgid "Unable to load marketplace categories."
-msgstr "Marketplacekategorien können nicht geladen werden."
-
-msgid "Unable to load marketplace category details"
-msgstr "Marketplace-Kategoriedetails können nicht geladen werden"
-
-msgid "Unable to load marketplace offering details."
-msgstr "Marketplace mit Details können nicht geladen werden."
-
-msgid "Unable to load marketplace offerings."
-msgstr "Marktplatzangebote können nicht geladen werden."
-
 msgid "Unable to load offering."
 msgstr "Angebot kann nicht geladen werden."
 
@@ -6124,9 +6094,6 @@ msgstr "Sie können das Problem erstellen, indem Sie die Taste unten drücken"
 
 msgid "You can find offerings to order in the marketplace"
 msgstr "Auf dem Marktplatz finden Sie Angebote zur Bestellung"
-
-msgid "You can register organization as a marketplace service provider by pressing the button below"
-msgstr "Sie können die Organisation als Marktplatzdienstleister registrieren, indem Sie auf die Schaltfläche unten klicken"
 
 msgid "You can remove this organization by pressing the button"
 msgstr "Sie können diese Organisation entfernen, indem Sie den Button drücken"
