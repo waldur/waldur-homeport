@@ -8,7 +8,7 @@ export const showSuccess = (message) =>
     status: 'success',
     message,
     position: 'top-right',
-    dismissAfter: 2000,
+    dismissAfter: 7000,
   });
 
 export const showError = (message) =>
@@ -16,7 +16,7 @@ export const showError = (message) =>
     status: 'error',
     message,
     position: 'top-right',
-    dismissAfter: 2000,
+    dismissAfter: 7000,
   });
 
 export const showErrorResponse = (
