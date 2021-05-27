@@ -11,6 +11,12 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "«{trimmed}» перевищує ліміт FQDN символів {max_len}"
 
+msgid "10 - Very positive"
+msgstr "10 - Дуже позитивний"
+
+msgid "1 - Very negative"
+msgstr "1 - Дуже негативний"
+
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Умови надання послуг</Link> були прийняті <Date></Date>"
 
@@ -286,6 +292,9 @@ msgstr "Дозволити планувати бронювання у вихід
 
 msgid "Allow service provider to create offering users."
 msgstr "Дозволити постачальнику послуг додавати користувачів."
+
+msgid "Allow to enable/disable component only"
+msgstr "Дозволити включення/вимикання лише компонента"
 
 msgid "Already have an account?"
 msgstr "Вже маєте обліковий запис?"
