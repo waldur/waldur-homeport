@@ -428,10 +428,6 @@ msgstr ""
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
-#: src/azure/vm/azure-virtual-machine-config.ts
-msgid "Additional data that will be added to virtual machine on provisioning."
-msgstr ""
-
 #: src/openstack/OpenStackPluginOptionsForm.tsx
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr ""
@@ -1927,7 +1923,6 @@ msgid "Deploy Longhorn block storage after cluster is deployed"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/azure/vm/azure-virtual-machine-config.ts
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/DescriptionGroup.tsx
 #: src/issues/list/IssuesList.tsx
@@ -2834,6 +2829,10 @@ msgstr ""
 msgid "GPU usage"
 msgstr ""
 
+#: src/core/validators.ts
+msgid "GUID is expected."
+msgstr ""
+
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 msgid "Gateway"
@@ -3053,7 +3052,6 @@ msgid "If you want user to provide additional details when ordering, please conf
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/azure/vm/azure-virtual-machine-config.ts
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/ImageGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -3074,7 +3072,6 @@ msgstr ""
 msgid "Image here"
 msgstr ""
 
-#: src/azure/vm/azure-virtual-machine-config.ts
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/analytics/ImagesList.tsx
 #: src/openstack/openstack-instance/ImageGroup.tsx
@@ -3168,14 +3165,6 @@ msgstr ""
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 msgid "Initial admin username"
-msgstr ""
-
-#: src/azure/vm/azure-virtual-machine-config.ts
-msgid "Initial password"
-msgstr ""
-
-#: src/azure/vm/azure-virtual-machine-config.ts
-msgid "Initial username"
 msgstr ""
 
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
@@ -6468,6 +6457,7 @@ msgstr ""
 msgid "Resources usage"
 msgstr ""
 
+#: src/azure/vm/actions/RestartAction.tsx
 #: src/openstack/openstack-instance/actions/RestartAction.tsx
 msgid "Restart"
 msgstr ""
@@ -7290,7 +7280,6 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/azure/vm/azure-virtual-machine-config.ts
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
@@ -7307,7 +7296,6 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: src/azure/vm/azure-virtual-machine-config.ts
 #: src/digitalocean/digitalocean-droplet-config.ts
 msgid "Size name"
 msgstr ""
@@ -7362,6 +7350,7 @@ msgstr ""
 msgid "Staff and Support user"
 msgstr ""
 
+#: src/azure/vm/actions/StartAction.tsx
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/booking/components/utils.tsx
@@ -7464,6 +7453,7 @@ msgstr ""
 msgid "Step 2. Select resources"
 msgstr ""
 
+#: src/azure/vm/actions/StopAction.tsx
 #: src/openstack/openstack-instance/actions/StopAction.tsx
 #: src/vmware/actions/StopAction.tsx
 msgid "Stop"
@@ -9353,7 +9343,6 @@ msgstr ""
 msgid "User dashboard"
 msgstr ""
 
-#: src/azure/vm/azure-virtual-machine-config.ts
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "User data"
@@ -9553,7 +9542,6 @@ msgstr ""
 msgid "VAT rate"
 msgstr ""
 
-#: src/azure/vm/azure-virtual-machine-config.ts
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx

@@ -24,10 +24,16 @@ export const OrderItemDetailsResourceLink: FunctionComponent<OrderItemDetailsRes
   let state, params;
   if (workspace === ORGANIZATION_WORKSPACE) {
     state = 'marketplace-public-resource-details';
-    params = { uuid: customer.uuid, resource_uuid: props.item.resource_uuid };
+    params = {
+      uuid: customer.uuid,
+      resource_uuid: props.item.marketplace_resource_uuid,
+    };
   } else {
     state = 'marketplace-project-resource-details';
-    params = { uuid: project.uuid, resource_uuid: props.item.resource_uuid };
+    params = {
+      uuid: project.uuid,
+      resource_uuid: props.item.marketplace_resource_uuid,
+    };
   }
   return (
     <>

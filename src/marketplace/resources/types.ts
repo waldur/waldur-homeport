@@ -1,6 +1,7 @@
 import { AttributesType } from '../types';
 
 export interface ResourceReference {
+  marketplace_resource_uuid?: string;
   offering_type: string;
   resource_uuid: string;
   resource_type: string;

@@ -1,32 +1,18 @@
 import React from 'react';
-import { useAsync } from 'react-use';
 
-import { getLocations } from '@waldur/azure/common/api';
-import { CreateSelectField } from '@waldur/azure/common/CreateSelectField';
 import { sqlServerName } from '@waldur/azure/common/validators';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
 import { FormContainer, StringField, TextField } from '@waldur/form';
+import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { translate } from '@waldur/i18n';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
-const loadData = (settings_uuid: string) =>
-  getLocations(settings_uuid).then((locations) => ({ locations }));
+import { loadLocationOptions } from '../vm/utils';
 
 export const AzureSQLServerForm: React.FC<OfferingConfigurationFormProps> = (
   props,
 ) => {
-  const { loading, error, value } = useAsync(
-    () => loadData(props.offering.scope_uuid),
-    [props.offering.scope_uuid],
-  );
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-  if (error) {
-    return <>{translate('Unable to load locations.')}</>;
-  }
   return (
     <form className="form-horizontal">
       <FormContainer
@@ -44,11 +30,19 @@ export const AzureSQLServerForm: React.FC<OfferingConfigurationFormProps> = (
           validate={[required, sqlServerName]}
           required={true}
         />
-        {CreateSelectField(
-          translate('Location'),
-          'attributes.location',
-          value.locations,
-        )}
+        <AsyncSelectField
+          name="attributes.location"
+          label={translate('Location')}
+          required={true}
+          loadOptions={(query, prevOptions, currentPage) =>
+            loadLocationOptions(
+              props.offering.scope_uuid,
+              query,
+              prevOptions,
+              currentPage,
+            )
+          }
+        />
         <TextField
           label={translate('SQL server description')}
           name="attributes.description"
