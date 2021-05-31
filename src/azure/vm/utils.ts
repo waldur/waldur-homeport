@@ -63,12 +63,14 @@ export const loadSizeOptions = async (
 
 export const loadImageOptions = async (
   settings_uuid: string,
+  location_uuid: string,
   query: string,
   prevOptions,
   currentPage: number,
 ) => {
   const response = await getSelectData('/azure-images/', {
     settings_uuid,
+    location_uuid,
     name: query,
     page: currentPage,
     page_size: ENV.pageSize,

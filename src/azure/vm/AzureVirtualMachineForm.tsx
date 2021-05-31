@@ -38,6 +38,11 @@ export const AzureVirtualMachineForm: React.FC<OfferingConfigurationFormProps> =
     props.change('attributes.size', undefined);
   }, [location, zone]);
 
+  // Reset image selection when either location is changed
+  useEffect(() => {
+    props.change('attributes.image', undefined);
+  }, [location]);
+
   return (
     <form className="form-horizontal">
       <FormContainer
@@ -104,12 +109,14 @@ export const AzureVirtualMachineForm: React.FC<OfferingConfigurationFormProps> =
           loadOptions={(query, prevOptions, currentPage) =>
             loadImageOptions(
               props.offering.scope_uuid,
+              location.uuid,
               query,
               prevOptions,
               currentPage,
             )
           }
           getOptionLabel={getImageLabel}
+          isDisabled={!location}
         />
         <TextField
           label={translate('Description')}
