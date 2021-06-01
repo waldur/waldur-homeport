@@ -116,9 +116,6 @@ msgstr "İstifadəçi əlavə edin"
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Tələbə əsasən nümunəyə əlavə olunacaq əlavə data."
 
-msgid "Additional data that will be added to virtual machine on provisioning."
-msgstr "Təchizat üzrə virtual maşına əlavə ediləcək əlavə məlumat"
-
 msgid "Address"
 msgstr "Ünvan"
 
@@ -826,12 +823,6 @@ msgstr "İlkin administrator şifrəsi"
 
 msgid "Initial admin username"
 msgstr "İlk admin istifadəçi adı"
-
-msgid "Initial password"
-msgstr "İlkin şifrə"
-
-msgid "Initial username"
-msgstr "İlk istifadəçi adı"
 
 msgid "Instance"
 msgstr "Nümunə"

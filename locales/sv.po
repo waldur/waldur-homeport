@@ -230,9 +230,6 @@ msgstr "Lägg till användarinmatningsfält"
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Ytterligare data som kommer att läggas till instans vid etablering."
 
-msgid "Additional data that will be added to virtual machine on provisioning."
-msgstr "Ytterligare data som kommer att läggas till virtuell maskin vid provisionering."
-
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Ytterligare utrymme att använda för lagringskvoten som ska användas av ögonblicksbilder."
 
@@ -1882,12 +1879,6 @@ msgstr "Ursprungligt admin lösenord"
 
 msgid "Initial admin username"
 msgstr "Ursprungligt användarnamn för admin"
-
-msgid "Initial password"
-msgstr "Initialt lösenord"
-
-msgid "Initial username"
-msgstr "Ursprungligt användarnamn"
 
 msgid "Instance"
 msgstr "Instans"

@@ -239,9 +239,6 @@ msgstr "Tilføj bruger indtastningsfelt"
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Yderligere data, der vil blive tilføjet til instansen ved tilrådighedsstillelse."
 
-msgid "Additional data that will be added to virtual machine on provisioning."
-msgstr "Yderligere data, der vil blive tilføjet til den virtuelle maskine ved tilrådighedsstillelse."
-
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Yderligere plads, der skal anvendes på lagringskvote, der skal bruges af snapshots."
 
@@ -1924,12 +1921,6 @@ msgstr "Indledende administratoradgangskode"
 
 msgid "Initial admin username"
 msgstr "Indledende administratorbrugernavn"
-
-msgid "Initial password"
-msgstr "Indledende adgangskode"
-
-msgid "Initial username"
-msgstr "Indledende brugernavn"
 
 msgid "Instance"
 msgstr "Instans"

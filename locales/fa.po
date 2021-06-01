@@ -179,9 +179,6 @@ msgstr "قسمت ورودی کاربر را اضافه کنید"
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "داده های اضافی که در صورت تهیه به عنوان instance اضافه میشوند."
 
-msgid "Additional data that will be added to virtual machine on provisioning."
-msgstr "داده های اضافی که به ماشین مجازی در تامین اضافه میشوند."
-
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "فضای اضافی برای اعمال به سهمیه ذخیره سازی به توسط عکس های فوری مورد استفاده قرار گیرد."
 
@@ -1360,12 +1357,6 @@ msgstr "رمز اولیه ادمین"
 
 msgid "Initial admin username"
 msgstr "نام کاربری اولیه ادمین"
-
-msgid "Initial password"
-msgstr "رمز اولیه"
-
-msgid "Initial username"
-msgstr "نام کاربری اولیه"
 
 msgid "Instance does not have any floating IPs yet."
 msgstr "Instance هنوز هیچ IPs شناوری ندارد."

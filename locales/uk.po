@@ -233,9 +233,6 @@ msgstr "Додати користувацьке поле"
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Додаткові дані, які будуть додані до віртуальної машини під час створення."
 
-msgid "Additional data that will be added to virtual machine on provisioning."
-msgstr "Додаткові дані, які будуть додані до віртуальної машини під час створення."
-
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Додатковий простір для застосування до квоти сховища, яку буде використано знімками."
 

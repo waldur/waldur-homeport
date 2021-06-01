@@ -239,9 +239,6 @@ msgstr "Pridėti vartotojo įvesties lauką"
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Papildomi duomenys, kurie bus pridėti prie egzemplioriaus, kai jis bus sukurtas."
 
-msgid "Additional data that will be added to virtual machine on provisioning."
-msgstr "Papildomi duomenys, kurie bus įtraukti į virtualią mašiną ją aprūpinant."
-
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Papildoma vieta, kurią reikia taikyti saugyklos kvotai, kurią turi naudoti momentinės kopijos."
 
@@ -1924,12 +1921,6 @@ msgstr "Pradinis administratoriaus slaptažodis"
 
 msgid "Initial admin username"
 msgstr "Pradinis administratoriaus vartotojo vardas"
-
-msgid "Initial password"
-msgstr "Pradinis slaptažodis"
-
-msgid "Initial username"
-msgstr "Pradinis vartotojo vardas"
 
 msgid "Instance"
 msgstr "Egzempliorių"

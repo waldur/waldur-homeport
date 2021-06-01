@@ -239,9 +239,6 @@ msgstr "Gebruiker invoerveld toevoegen"
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Aanvullende gegevens die bij het inrichten aan de instantie worden toegevoegd."
 
-msgid "Additional data that will be added to virtual machine on provisioning."
-msgstr "Aanvullende gegevens die bij het inrichten aan de virtuele machine worden toegevoegd."
-
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Extra ruimte om toe te passen op opslagquota om te worden gebruikt door momentopnamen."
 
@@ -1924,12 +1921,6 @@ msgstr "Initieel admin wachtwoord"
 
 msgid "Initial admin username"
 msgstr "Initieel admin gebruikersnaam"
-
-msgid "Initial password"
-msgstr "Initieel wachtwoord"
-
-msgid "Initial username"
-msgstr "Initiële gebruikersnaam"
 
 msgid "Instance"
 msgstr "Instantie"

@@ -239,9 +239,6 @@ msgstr "Přidat vstupní pole uživatele"
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Další data, která budou přidána do instance při vytváření."
 
-msgid "Additional data that will be added to virtual machine on provisioning."
-msgstr "Další data, která budou přidána do virtuálního počítače při vytváření."
-
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Dodatečné místo aplikované na kvótu úložiště používaného pro snímky."
 
@@ -1924,12 +1921,6 @@ msgstr "Počáteční heslo správce"
 
 msgid "Initial admin username"
 msgstr "Počáteční uživatelské jméno správce"
-
-msgid "Initial password"
-msgstr "Počáteční heslo"
-
-msgid "Initial username"
-msgstr "Počáteční uživatelské jméno"
 
 msgid "Instance"
 msgstr "Instance"

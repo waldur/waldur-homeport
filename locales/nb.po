@@ -239,9 +239,6 @@ msgstr "Legg til brukerinndatafelt"
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Tilleggsdata som vil bli lagt til forekomst ved klargjøring."
 
-msgid "Additional data that will be added to virtual machine on provisioning."
-msgstr "Tilleggsdata som vil bli lagt til virtuell maskin ved klargjøring."
-
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Ekstra plass som skal brukes på lagringskvote som skal brukes av øyeblikksbilder."
 
@@ -1924,12 +1921,6 @@ msgstr "Første administratorpassord"
 
 msgid "Initial admin username"
 msgstr "Første administrator brukernavn"
-
-msgid "Initial password"
-msgstr "Første passord"
-
-msgid "Initial username"
-msgstr "Første brukernavn"
 
 msgid "Instance"
 msgstr "Forekomst"

@@ -239,9 +239,6 @@ msgstr "Benutzereingabefeld hinzufügen"
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Zusätzliche Daten, die der Instanz bei der Bereitstellung hinzugefügt werden."
 
-msgid "Additional data that will be added to virtual machine on provisioning."
-msgstr "Zusätzliche Daten, die bei der Bereitstellung zur virtuellen Maschine hinzugefügt werden."
-
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Zusätzlicher Speicherplatz für das Speicherkontingent, das von Snapshots verwendet werden soll."
 
@@ -1924,12 +1921,6 @@ msgstr "Erstes Admin-Passwort"
 
 msgid "Initial admin username"
 msgstr "Anfänglicher Admin-Benutzername"
-
-msgid "Initial password"
-msgstr "Ursprüngliches Kennwort"
-
-msgid "Initial username"
-msgstr "Ursprünglicher Benutzername"
 
 msgid "Instance"
 msgstr "Instanz"

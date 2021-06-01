@@ -233,9 +233,6 @@ msgstr "Lisa kasutaja sisestusväli"
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Täiendavad andmed mida lisatakse üksuse eraldamisel."
 
-msgid "Additional data that will be added to virtual machine on provisioning."
-msgstr "Täiendavad andmed mida lisatakse virtuaalmasina eraldamisel."
-
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Täiendav salvestusruum hetktõmmiste jaoks."
 
@@ -1402,12 +1399,6 @@ msgstr "Esialgne admin parool"
 
 msgid "Initial admin username"
 msgstr "Esialgne admin kasutajanimi"
-
-msgid "Initial password"
-msgstr "Esialgne parool"
-
-msgid "Initial username"
-msgstr "Esialgne kasutajanimi"
 
 msgid "Instance"
 msgstr "Eksemplar"
