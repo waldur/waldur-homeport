@@ -10,16 +10,17 @@ import {
   SUPPORT_WORKSPACE,
 } from '@waldur/workspace/types';
 
-const PureOrderDetailsLink: FunctionComponent<any> = (props) => (
-  <Link
-    state={props.state}
-    params={{ ...props.params, order_uuid: props.order_uuid }}
-    className={props.className}
-    onClick={props.onClick}
-  >
-    {props.children}
-  </Link>
-);
+const PureOrderDetailsLink: FunctionComponent<any> = (props) =>
+  props.state ? (
+    <Link
+      state={props.state}
+      params={{ ...props.params, order_uuid: props.order_uuid }}
+      className={props.className}
+      onClick={props.onClick}
+    >
+      {props.children}
+    </Link>
+  ) : null;
 
 interface StateProps {
   state: string;
