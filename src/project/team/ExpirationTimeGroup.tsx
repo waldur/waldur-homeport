@@ -4,6 +4,7 @@ import { ControlLabel, FormGroup } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { DateField } from '@waldur/form/DateField';
+import { datePickerOverlayContainerInDialogs } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 
 import './ExpirationTimeGroup.scss';
@@ -19,6 +20,7 @@ export const ExpirationTimeGroup: FunctionComponent<{ disabled }> = ({
       disabled={disabled}
       minDate={moment().add(1, 'days').toISOString()}
       weekStartsOn={1}
+      {...datePickerOverlayContainerInDialogs()}
     />
   </FormGroup>
 );
