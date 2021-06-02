@@ -818,6 +818,7 @@ msgstr ""
 msgid "Availability"
 msgstr ""
 
+#: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
@@ -2677,6 +2678,10 @@ msgstr ""
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Fingerprint"
+msgstr ""
+
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+msgid "First"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
@@ -6726,6 +6731,10 @@ msgstr ""
 msgid "Search for offerings..."
 msgstr ""
 
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+msgid "Second"
+msgstr ""
+
 #: src/openstack/openstack-tenant/actions/utils.ts
 msgid "Security group creation has been scheduled."
 msgstr ""
@@ -7999,6 +8008,10 @@ msgstr ""
 msgid "There is no activity yet."
 msgstr ""
 
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+msgid "Third"
+msgstr ""
+
 #: src/core/validators.ts
 #: src/marketplace/cart/ShoppingCartItemUpdateForm.tsx
 #: src/marketplace/details/OfferingConfigurator.tsx
@@ -8656,8 +8669,6 @@ msgstr ""
 msgid "Unable to load invoices"
 msgstr ""
 
-#: src/azure/sql/AzureSQLServerForm.tsx
-#: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/resource/support/ResourcesTreemap.tsx
 msgid "Unable to load locations."
 msgstr ""
