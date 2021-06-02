@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 import { components } from 'react-select';
-import { Field } from 'redux-form';
 
+import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
-import { SelectField } from '@waldur/issues/create/SelectField';
+import { usersAutocomplete } from '@waldur/project/team/api';
 
 export const UserListOption: FunctionComponent<any> = (props) => (
   <components.Option {...props}>
@@ -32,11 +32,12 @@ export const UserListOption: FunctionComponent<any> = (props) => (
   </components.Option>
 );
 
-export const UserGroup: FunctionComponent<{ editUser; users; disabled }> = ({
-  editUser,
-  users,
-  disabled,
-}) =>
+export const UserGroup: FunctionComponent<{
+  customerUuid;
+  editUser;
+  users;
+  disabled;
+}> = ({ customerUuid, editUser, users, disabled }) =>
   editUser ? (
     <FormGroup>
       <FormControl.Static>
@@ -47,14 +48,21 @@ export const UserGroup: FunctionComponent<{ editUser; users; disabled }> = ({
   ) : users?.length ? (
     <FormGroup>
       <ControlLabel>{translate('User')}</ControlLabel>
-      <Field
+      <AsyncSelectField
         name="user"
-        component={SelectField}
         isDisabled={disabled}
-        options={users}
+        required={true}
         isClearable={true}
         components={{ Option: UserListOption }}
         placeholder={translate('Select user...')}
+        loadOptions={(query, prevOptions, page) =>
+          usersAutocomplete(
+            customerUuid,
+            { full_name: query },
+            prevOptions,
+            page,
+          )
+        }
         getOptionValue={(option) => option.full_name || option.username}
         getOptionLabel={(option) => option.full_name || option.username}
         {...reactSelectMenuPortaling()}
