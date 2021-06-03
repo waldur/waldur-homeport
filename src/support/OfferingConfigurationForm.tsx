@@ -101,6 +101,7 @@ export class PureOfferingConfigurationForm extends Component<OfferingConfigurati
                       label: item,
                       value: item,
                     })),
+                    noUpdateOnBlur: true,
                   };
                   break;
 
