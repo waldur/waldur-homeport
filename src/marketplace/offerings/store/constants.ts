@@ -43,6 +43,9 @@ export const OFFERING_TABLE_NAME = 'marketplace-offerings';
 export const SERVICE_PROVIDER_OFFERING_TABLE_NAME =
   'marketplace-service-provider-offerings';
 
+export const SERVICE_PROVIDERS_TABLE_NAME =
+  'marketplace-service-providers-list';
+
 export const IMAGES_TABLE_NAME = 'marketplace-offering-images';
 
 export const FORM_ID = 'marketplaceOfferingCreate';

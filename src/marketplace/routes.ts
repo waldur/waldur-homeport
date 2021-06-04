@@ -120,6 +120,13 @@ const ServiceProvider = lazyComponent(
     ),
   'ServiceProvider',
 );
+const ServiceProvidersContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ServiceProvidersContainer" */ './offerings/ServiceProvidersContainer'
+    ),
+  'ServiceProvidersContainer',
+);
 const ImagesContainer = lazyComponent(
   () =>
     import(
@@ -352,7 +359,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-service-provider',
-    url: '/service-provider/',
+    url: '/service-providers/',
     abstract: true,
     component: AnonymousLayout,
     data: {
@@ -364,6 +371,22 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-service-provider.details',
     url: ':uuid/',
     component: ServiceProvider,
+  },
+
+  {
+    name: 'marketplace-service-providers',
+    url: '/service-providers/',
+    abstract: true,
+    component: AnonymousLayout,
+    data: {
+      hideHeader: true,
+    },
+  },
+
+  {
+    name: 'marketplace-service-providers.details',
+    url: '',
+    component: ServiceProvidersContainer,
   },
 
   {

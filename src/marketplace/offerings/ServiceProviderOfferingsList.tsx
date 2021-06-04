@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
+import { Link } from '@waldur/core/Link';
 import { ServiceProviderOfferingsListExpandableRow } from '@waldur/marketplace/offerings/ServiceProviderOfferingsListExpandableRow';
 import { SERVICE_PROVIDER_OFFERING_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { connectTable, createFetcher, Table } from '@waldur/table';
@@ -11,13 +12,19 @@ import { Offering } from '../types';
 import { OfferingsListTablePlaceholder } from './OfferingsListTablePlaceholder';
 import { OfferingStateCell } from './OfferingStateCell';
 
+const ServiceProviderOfferingNameColumn = ({ row }) => (
+  <Link state="marketplace-public-offering.details" params={{ uuid: row.uuid }}>
+    {row.name}
+  </Link>
+);
+
 const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
 
   const columns = [
     {
       title: translate('Name'),
-      render: ({ row }) => row.name,
+      render: ServiceProviderOfferingNameColumn,
       orderField: 'name',
     },
     {
