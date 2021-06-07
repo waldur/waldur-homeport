@@ -1,12 +1,14 @@
 import { omit, pick } from '@waldur/core/utils';
 import { showOfferingLimits } from '@waldur/marketplace/common/registry';
+import { OFFERING_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import {
   OptionField,
   Category,
   Attribute,
   OfferingComponent,
 } from '@waldur/marketplace/types';
-import { Customer } from '@waldur/workspace/types';
+import { fetchListStart } from '@waldur/table/actions';
+import { Customer, User } from '@waldur/workspace/types';
 
 import { serializeLimitValues } from './limits';
 import {
@@ -223,3 +225,17 @@ export const formatOfferingRequest = (
   }
   return result;
 };
+
+export const updatePublicOfferingsList = (
+  customer: Customer,
+  isServiceManager: boolean,
+  user: User,
+  state: { value: string }[],
+) =>
+  fetchListStart(OFFERING_TABLE_NAME, {
+    billable: true,
+    shared: true,
+    customer_uuid: customer.uuid,
+    state: state.map((option) => option.value),
+    service_manager_uuid: isServiceManager ? user.uuid : undefined,
+  });

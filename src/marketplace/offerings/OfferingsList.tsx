@@ -11,7 +11,10 @@ import { withTranslation } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
 import { PreviewOfferingButton } from '@waldur/marketplace/offerings/PreviewOfferingButton';
-import { OFFERING_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
+import {
+  OFFERING_TABLE_NAME,
+  PUBLIC_OFFERINGS_FILTER_FORM_ID,
+} from '@waldur/marketplace/offerings/store/constants';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import {
@@ -146,7 +149,7 @@ const mapStateToProps = (state: RootState) => ({
   hideOfferingItemActions: isSupportOnly(state),
   showOfferingListActions: showOfferingListActions(state),
   actionsDisabled: !isOwnerOrStaff(state),
-  filter: getFormValues('OfferingsFilter')(state) as FilterData,
+  filter: getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID)(state) as FilterData,
 });
 
 const enhance = compose(

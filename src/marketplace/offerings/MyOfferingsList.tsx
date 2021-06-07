@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
+import { PUBLIC_OFFERINGS_FILTER_FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 import { RootState } from '@waldur/store/reducers';
 import { connectTable } from '@waldur/table';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -29,7 +30,7 @@ const enhance = compose(
     customer: getCustomer(state),
     actionsDisabled: true,
     showOfferingCreateButton: false,
-    filter: getFormValues('OfferingsFilter')(state),
+    filter: getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID)(state),
   })),
   connectTable({
     ...TableOptions,
