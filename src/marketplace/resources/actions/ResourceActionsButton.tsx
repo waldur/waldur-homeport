@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { useBoolean } from 'react-use';
 
+import { EditResourceEndDateAction } from '@waldur/marketplace/resources/actions/EditResourceEndDateAction';
 import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
 import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
 import { SubmitReportAction } from '@waldur/marketplace/resources/report/SubmitReportAction';
@@ -21,6 +22,7 @@ const ActionsList = [
   ChangeLimitsAction,
   SetBackendIdAction,
   TerminateAction,
+  EditResourceEndDateAction,
 ];
 
 interface ResourceActionsButtonProps {

@@ -2,6 +2,7 @@ import { DropdownButton } from 'react-bootstrap';
 import { useBoolean } from 'react-use';
 
 import { translate } from '@waldur/i18n';
+import { EditResourceEndDateAction } from '@waldur/marketplace/resources/actions/EditResourceEndDateAction';
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
 import { Resource } from '@waldur/marketplace/resources/types';
 
@@ -15,6 +16,7 @@ const ActionsList = [
   ReportUsageAction,
   SetBackendIdAction,
   MoveResourceAction,
+  EditResourceEndDateAction,
 ];
 
 interface PublicResourceActionsProps {

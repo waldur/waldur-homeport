@@ -22,6 +22,7 @@ export interface BaseResource {
   service_settings_uuid?: string;
   error_message?: string;
   created?: string;
+  end_date?: string;
   modified?: string;
   marketplace_offering_uuid?: boolean;
   marketplace_resource_uuid?: string;

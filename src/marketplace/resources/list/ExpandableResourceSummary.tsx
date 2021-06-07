@@ -26,6 +26,7 @@ const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => (
         )
       }
     />
+    <Field label={translate('End date')} value={row.end_date} />
   </ResourceDetailsTable>
 );
 
@@ -43,7 +44,14 @@ const DynamicResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
     return <LoadingSpinner />;
   }
 
-  return <ResourceSummaryResources resource={value} />;
+  return (
+    <ResourceSummaryResources
+      resource={{
+        ...value,
+        end_date: row.end_date,
+      }}
+    />
+  );
 };
 
 export const ExpandableResourceSummary: FunctionComponent<{ row }> = ({

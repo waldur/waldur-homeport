@@ -98,6 +98,11 @@ export const updateOffering = (offeringId, data) =>
 export const updateResource = (resourceId: string, data) =>
   put<Resource>(`/marketplace-resources/${resourceId}/`, data);
 
+export const updateResourceEndDate = (resourceUuid: string, end_date: string) =>
+  patch<Resource>(`/marketplace-resources/${resourceUuid}/`, {
+    end_date,
+  });
+
 export const getResourceDetails = (resourceId: string) =>
   get<any>(`/marketplace-resources/${resourceId}/details/`).then(
     (response) => response.data,
