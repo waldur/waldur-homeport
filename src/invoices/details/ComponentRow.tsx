@@ -1,13 +1,26 @@
+import { FC } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 
+import { InvoiceItem } from '../types';
+
 import { ResourceLimitPeriodsTable } from './ResourceLimitPeriodsTable';
-
 import './ComponentRow.scss';
+import { getBillingPeriodTitle } from './utils';
 
-export const ComponentRow = ({ item, showPrice, showVat }) => (
+interface ComponentRowProps {
+  item: InvoiceItem;
+  showPrice: boolean;
+  showVat: boolean;
+}
+
+export const ComponentRow: FC<ComponentRowProps> = ({
+  item,
+  showPrice,
+  showVat,
+}) => (
   <tr>
     <td>
       <div>
@@ -21,7 +34,11 @@ export const ComponentRow = ({ item, showPrice, showVat }) => (
         </div>
       )}
     </td>
-    <td>{item.measured_unit}</td>
+    <td>
+      {item.unit === 'quantity'
+        ? item.measured_unit
+        : `${item.measured_unit}*${getBillingPeriodTitle(item.unit)}`}
+    </td>
     <OverlayTrigger
       trigger={['hover', 'focus']}
       placement="top"

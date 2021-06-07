@@ -1,12 +1,7 @@
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 
-const getBillingPeriodTitle = (unit: string) =>
-  ({
-    day: translate('Days'),
-    hour: translate('Hours'),
-    month: translate('Months'),
-  }[unit] || translate('Billing periods'));
+import { getBillingPeriodTitle } from './utils';
 
 export const ResourceLimitPeriodsTable = ({ periods, unit }) => (
   <small>

@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 
+import { translate } from '@waldur/i18n';
+import { BillingPeriod } from '@waldur/marketplace/types';
 import { isVisible } from '@waldur/store/config';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { PaymentProfile } from '@waldur/workspace/types';
@@ -109,3 +111,10 @@ export const showPriceSelector = createSelector(
     !getActiveFixedPricePaymentProfile(customer.payment_profiles) &&
     !concealPricesFeatureToggle,
 );
+
+export const getBillingPeriodTitle = (unit: BillingPeriod) =>
+  ({
+    day: translate('Days'),
+    hour: translate('Hours'),
+    month: translate('Months'),
+  }[unit] || translate('Billing periods'));

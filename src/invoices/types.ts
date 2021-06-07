@@ -1,3 +1,4 @@
+import { BillingPeriod } from '@waldur/marketplace/types';
 import { Customer } from '@waldur/workspace/types';
 
 export interface InvoiceItem {
@@ -9,6 +10,7 @@ export interface InvoiceItem {
   start: string;
   end: string;
   measured_unit: string;
+  unit?: BillingPeriod | 'quantity';
   unit_price: string;
   price: string;
   factor: number;

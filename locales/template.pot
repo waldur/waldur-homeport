@@ -977,7 +977,7 @@ msgstr ""
 msgid "Billing period"
 msgstr ""
 
-#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+#: src/invoices/details/utils.ts
 msgid "Billing periods"
 msgstr ""
 
@@ -1845,7 +1845,7 @@ msgstr ""
 msgid "Date of reporting"
 msgstr ""
 
-#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+#: src/invoices/details/utils.ts
 msgid "Days"
 msgstr ""
 
@@ -3008,7 +3008,7 @@ msgstr ""
 msgid "Hostname or IP address of master node"
 msgstr ""
 
-#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+#: src/invoices/details/utils.ts
 msgid "Hours"
 msgstr ""
 
@@ -3955,7 +3955,7 @@ msgstr ""
 msgid "Monthly invoices"
 msgstr ""
 
-#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+#: src/invoices/details/utils.ts
 msgid "Months"
 msgstr ""
 
