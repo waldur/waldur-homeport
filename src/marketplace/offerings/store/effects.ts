@@ -1,5 +1,5 @@
 import { triggerTransition } from '@uirouter/redux';
-import { reset, change } from 'redux-form';
+import { reset, change, getFormValues } from 'redux-form';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
@@ -12,7 +12,11 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { router } from '@waldur/router';
 import { showError, showSuccess } from '@waldur/store/notify';
 import { updateEntity } from '@waldur/table/actions';
-import { getCustomer } from '@waldur/workspace/selectors';
+import {
+  getCustomer,
+  getUser,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
 
 import {
   setStep,
@@ -21,12 +25,14 @@ import {
   isAddingOfferingImage,
 } from './actions';
 import * as constants from './constants';
+import { PUBLIC_OFFERINGS_FILTER_FORM_ID } from './constants';
 import { getPlans, getAttributes, getOfferingComponents } from './selectors';
 import { OfferingFormData, OfferingUpdateFormData } from './types';
 import {
   formatOfferingRequest,
   planWithoutComponent,
   planWithoutQuotas,
+  updatePublicOfferingsList,
 } from './utils';
 
 function* loadCategories() {
@@ -219,6 +225,20 @@ function* addOfferingLocation(action: Action<any>) {
   try {
     const { offering } = action.payload;
     yield call(api.updateOffering, offering.uuid, offering);
+    const customer = yield select(getCustomer);
+    const isServiceManager = yield select(isServiceManagerSelector);
+    const user = yield select(getUser);
+    const formData = yield select(
+      getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID),
+    );
+    yield put(
+      updatePublicOfferingsList(
+        customer,
+        isServiceManager,
+        user,
+        formData.state,
+      ),
+    );
     yield put(showSuccess(translate('Location has been saved successfully.')));
     yield put(closeModalDialog());
   } catch (error) {
