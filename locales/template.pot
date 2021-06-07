@@ -2256,6 +2256,14 @@ msgstr ""
 msgid "Edit confirmation message of {offeringName}"
 msgstr ""
 
+#: src/marketplace/resources/actions/EditResourceEndDateAction.tsx
+msgid "Edit end date"
+msgstr ""
+
+#: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
+msgid "Edit end date of {resourceName}"
+msgstr ""
+
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
 msgid "Edit offering"
 msgstr ""
@@ -2364,9 +2372,12 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
+#: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
 #: src/project/ProjectsList.tsx
+#: src/resource/summary/ResourceSummaryBase.tsx
 msgid "End date"
 msgstr ""
 
@@ -6673,6 +6684,7 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
 #: src/marketplace/offerings/expandable/utils.ts
+#: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/project/MoveProjectDialog.tsx
@@ -7841,6 +7853,10 @@ msgstr ""
 msgid "The date is inclusive. Once reached, all project resource will be scheduled for termination."
 msgstr ""
 
+#: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
+msgid "The date is inclusive. Once reached, resource will be scheduled for termination."
+msgstr ""
+
 #: src/invoices/store/effects.ts
 msgid "The invoice has been marked as paid."
 msgstr ""
@@ -8467,6 +8483,10 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to edit comment."
+msgstr ""
+
+#: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
+msgid "Unable to edit resource."
 msgstr ""
 
 #: src/freeipa/EnableProfile.tsx
@@ -10428,6 +10448,10 @@ msgstr ""
 
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 msgid "{resourceName} resource has been moved to {projectName} project."
+msgstr ""
+
+#: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
+msgid "{resourceName} resource has been updated successfully."
 msgstr ""
 
 #: src/rancher/cluster/ResourceDeleteButton.tsx
