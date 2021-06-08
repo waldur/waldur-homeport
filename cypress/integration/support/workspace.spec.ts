@@ -66,13 +66,13 @@ describe('Financial overview', () => {
     // Reporting => Offerings
     cy.contains('.nav-label', 'Offerings').click();
 
-    // Reporting => Ordering
-    cy.contains('.nav-label', 'Ordering').click();
-
     // Reporting => Usage reports
     cy.contains('.nav-label', 'Usage reports').click();
 
     // Resources
     cy.contains('.nav-label', 'Resources').click();
+
+    // Orders
+    cy.contains('.nav-label', 'Orders').click();
   });
 });

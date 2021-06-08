@@ -176,6 +176,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -610,6 +611,7 @@ msgstr ""
 #: src/marketplace/orders/ApproveButton.tsx
 #: src/marketplace/orders/OrderSteps.tsx
 #: src/marketplace/orders/item/list/OrderItemApproveButton.tsx
+#: src/marketplace/orders/item/list/SupportOrderItemApproveButton.tsx
 msgid "Approve"
 msgstr ""
 
@@ -618,10 +620,12 @@ msgid "Approve payment"
 msgstr ""
 
 #: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/item/list/SupportOrdersList.tsx
 msgid "Approved at"
 msgstr ""
 
 #: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/item/list/SupportOrdersList.tsx
 msgid "Approved by"
 msgstr ""
 
@@ -1259,6 +1263,7 @@ msgstr ""
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
@@ -1680,6 +1685,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
+#: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -1692,6 +1698,7 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
 #: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/item/list/SupportOrdersList.tsx
 msgid "Created by"
 msgstr ""
 
@@ -2153,6 +2160,7 @@ msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 msgid "Done"
 msgstr ""
 
@@ -2419,6 +2427,7 @@ msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Erred"
 msgstr ""
@@ -2548,6 +2557,7 @@ msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 msgid "Executing"
 msgstr ""
 
@@ -4479,6 +4489,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/resources/list/OfferingFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
@@ -4701,6 +4712,10 @@ msgstr ""
 msgid "Order details"
 msgstr ""
 
+#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+msgid "Order doesn't have items"
+msgstr ""
+
 #: src/marketplace/orders/store/effects.ts
 msgid "Order has been approved."
 msgstr ""
@@ -4718,10 +4733,12 @@ msgid "Order item details"
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemApproveButton.tsx
+#: src/marketplace/orders/item/list/SupportOrderItemApproveButton.tsx
 msgid "Order item has been approved."
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemRejectButton.tsx
+#: src/marketplace/orders/item/list/SupportOrderItemRejectButton.tsx
 msgid "Order item has been rejected."
 msgstr ""
 
@@ -4743,11 +4760,9 @@ msgid "Order summary"
 msgstr ""
 
 #: src/issues/workspace/IssueNavigationService.ts
-msgid "Ordering"
-msgstr ""
-
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/item/list/SupportOrderItemsContainer.tsx
+#: src/marketplace/orders/SupportOrdersContainer.tsx
+#: src/marketplace/orders/item/list/SupportOrdersList.tsx
 msgid "Orders"
 msgstr ""
 
@@ -5181,6 +5196,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
@@ -5542,6 +5558,7 @@ msgstr ""
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectField.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -5573,6 +5590,7 @@ msgid "Project could not be updated."
 msgstr ""
 
 #: src/booking/BookingsListExpandableRow.tsx
+#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
 msgid "Project description"
@@ -6017,12 +6035,14 @@ msgstr ""
 #: src/booking/CancelAction.tsx
 #: src/marketplace/orders/RejectButton.tsx
 #: src/marketplace/orders/item/list/OrderItemRejectButton.tsx
+#: src/marketplace/orders/item/list/SupportOrderItemRejectButton.tsx
 msgid "Reject"
 msgstr ""
 
 #: src/booking/BookingStateField.tsx
 #: src/booking/BookingStateFilter.tsx
 #: src/invitations/InvitationsFilter.tsx
+#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 msgid "Rejected"
 msgstr ""
 
@@ -6286,6 +6306,10 @@ msgstr ""
 msgid "Requested email"
 msgstr ""
 
+#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
+msgid "Requested for approval"
+msgstr ""
+
 #: src/marketplace/common/OfferingCard.tsx
 msgid "Requesting of new resources has been temporarily paused"
 msgstr ""
@@ -6329,6 +6353,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 msgid "Resource"
 msgstr ""
@@ -7426,6 +7451,8 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
+#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -7822,6 +7849,7 @@ msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
+#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Terminated"
 msgstr ""
@@ -8231,6 +8259,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
+#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/paypal/PaymentsList.tsx
@@ -8293,6 +8322,7 @@ msgid "Unable to approve invitation."
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemApproveButton.tsx
+#: src/marketplace/orders/item/list/SupportOrderItemApproveButton.tsx
 msgid "Unable to approve order item."
 msgstr ""
 
@@ -8861,6 +8891,7 @@ msgid "Unable to reject invitation."
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemRejectButton.tsx
+#: src/marketplace/orders/item/list/SupportOrderItemRejectButton.tsx
 msgid "Unable to reject order item."
 msgstr ""
 

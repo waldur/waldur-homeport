@@ -162,12 +162,12 @@ const OrderItemsContainer = lazyComponent(
     ),
   'OrderItemsContainer',
 );
-const SupportOrderItemsContainer = lazyComponent(
+const SupportOrdersContainer = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "SupportOrderItemsContainer" */ './orders/item/list/SupportOrderItemsContainer'
+      /* webpackChunkName: "SupportOrdersContainer" */ './orders/SupportOrdersContainer'
     ),
-  'SupportOrderItemsContainer',
+  'SupportOrdersContainer',
 );
 const OrderDetailsContainer = lazyComponent(
   () =>
@@ -548,9 +548,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-support-order-items',
-    url: 'order-items/',
-    component: SupportOrderItemsContainer,
+    name: 'marketplace-support-orders',
+    url: 'orders/',
+    component: SupportOrdersContainer,
     parent: 'support',
     resolve: {
       permission: checkPermission,
