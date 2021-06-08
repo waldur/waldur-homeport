@@ -25,7 +25,7 @@ import { OrderItemTypeCell } from './OrderItemTypeCell';
 import { ResourceNameField } from './ResourceNameField';
 import { RowNameField } from './RowNameField';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Offering'),

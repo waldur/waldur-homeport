@@ -61,6 +61,12 @@ const getReportItems = (): MenuItemType[] => [
     key: 'support.notifications',
   },
   {
+    label: translate('Orders'),
+    icon: 'fa-files-o',
+    state: 'marketplace-support-orders',
+    key: 'support-orders',
+  },
+  {
     label: translate('Reporting'),
     icon: 'fa-files-o',
     key: 'reporting',
@@ -96,12 +102,6 @@ const getReportItems = (): MenuItemType[] => [
         state: 'support.organizations-divisions',
         key: 'support.organizations-divisions',
         feature: 'support.organizations',
-      },
-      {
-        label: translate('Ordering'),
-        icon: 'fa-files-o',
-        state: 'marketplace-support-order-items',
-        key: 'support-order-items',
       },
       {
         label: translate('Resources usage'),

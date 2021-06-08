@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 import { projectAutocomplete } from '@waldur/marketplace/common/autocompletes';
 
 interface ProjectFilterProps {
-  customer_uuid: string;
+  customer_uuid?: string;
 }
 
 export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
