@@ -5772,6 +5772,10 @@ msgstr ""
 msgid "Public key"
 msgstr ""
 
+#: src/marketplace/offerings/actions/OfferingsPublicListButton.tsx
+msgid "Public list"
+msgstr ""
+
 #: src/marketplace/offerings/OfferingsListContainer.tsx
 #: src/marketplace/offerings/ServiceProvider.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
