@@ -31,7 +31,7 @@ export const OrderItemDetailsResourceLink: FunctionComponent<OrderItemDetailsRes
   } else {
     state = 'marketplace-project-resource-details';
     params = {
-      uuid: project.uuid,
+      uuid: project?.uuid,
       resource_uuid: props.item.marketplace_resource_uuid,
     };
   }
