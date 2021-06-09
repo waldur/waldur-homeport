@@ -2885,9 +2885,6 @@ msgstr "Bestill elementer"
 msgid "Order summary"
 msgstr "Bestillingssammendrag"
 
-msgid "Ordering"
-msgstr "Bestilling"
-
 msgid "Orders"
 msgstr "Bestillinger"
 

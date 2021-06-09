@@ -2885,9 +2885,6 @@ msgstr "Užsisakykite daiktus"
 msgid "Order summary"
 msgstr "Užsakymo santrauka"
 
-msgid "Ordering"
-msgstr "Užsakymo"
-
 msgid "Orders"
 msgstr "Užsakymai"
 

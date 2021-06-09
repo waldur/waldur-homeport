@@ -2819,9 +2819,6 @@ msgstr "Beställ artiklar"
 msgid "Order summary"
 msgstr "Beställningsöversikt"
 
-msgid "Ordering"
-msgstr "Beställning"
-
 msgid "Orders"
 msgstr "Beställningar"
 

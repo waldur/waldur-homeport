@@ -2885,9 +2885,6 @@ msgstr "Commander des articles"
 msgid "Order summary"
 msgstr "Résumé de la commande"
 
-msgid "Ordering"
-msgstr "Commande"
-
 msgid "Orders"
 msgstr "Commandes"
 
