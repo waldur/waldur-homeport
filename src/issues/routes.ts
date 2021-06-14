@@ -18,6 +18,13 @@ const CustomerListContainer = lazyComponent(
     ),
   'CustomerListContainer',
 );
+const CustomerRequestContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerRequestContainer" */ '@waldur/marketplace-flows/CustomerRequestContainer'
+    ),
+  'CustomerRequestContainer',
+);
 const OrganizationUpdateContainer = lazyComponent(
   () =>
     import(
@@ -191,6 +198,18 @@ export const states: StateDeclaration[] = [
     component: CustomerListContainer,
     data: {
       feature: 'support.organizations',
+    },
+    resolve: {
+      permission: checkPermission,
+    },
+  },
+
+  {
+    name: 'support.customers-requests',
+    url: 'customers-requests/',
+    component: CustomerRequestContainer,
+    data: {
+      feature: 'support.customers-requests',
     },
     resolve: {
       permission: checkPermission,

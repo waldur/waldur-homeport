@@ -16,9 +16,8 @@ interface ComponentRowProps {
 
 export const ComponentRow: React.FC<ComponentRowProps> = (props) => {
   const customer = useSelector(getCustomer);
-  const activeFixedPriceProfile = getActiveFixedPricePaymentProfile(
-    customer.payment_profiles,
-  );
+  const activeFixedPriceProfile =
+    customer && getActiveFixedPricePaymentProfile(customer.payment_profiles);
 
   return (
     <tr>

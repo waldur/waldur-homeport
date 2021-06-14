@@ -9,7 +9,7 @@ const makeGetVariable = () => {
   return createSelector(
     [getCustomer, getSettingsUUID],
     (customer, settingsUUID) => ({
-      customer_uuid: customer.uuid,
+      customer_uuid: customer?.uuid,
       settings_uuid: settingsUUID,
     }),
   );

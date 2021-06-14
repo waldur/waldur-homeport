@@ -37,6 +37,27 @@ const UserOfferingList = lazyComponent(
   () => import(/* webpackChunkName: "UserOfferingList" */ './UserOfferingList'),
   'UserOfferingList',
 );
+const FlowListContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "FlowListContainer" */ '@waldur/marketplace-flows/FlowListContainer'
+    ),
+  'FlowListContainer',
+);
+const FlowCreateForm = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "FlowCreateForm" */ '@waldur/marketplace-flows/FlowCreateForm'
+    ),
+  'FlowCreateForm',
+);
+const FlowEditForm = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "FlowEditForm" */ '@waldur/marketplace-flows/FlowEditForm'
+    ),
+  'FlowEditForm',
+);
 
 export const tabs = {
   dashboard: {
@@ -70,6 +91,18 @@ export const tabs = {
   offerings: {
     url: 'remote-accounts/',
     component: UserOfferingList,
+  },
+  flowsList: {
+    url: 'resources/',
+    component: FlowListContainer,
+  },
+  flowCreate: {
+    url: 'resources/new/',
+    component: FlowCreateForm,
+  },
+  flowEdit: {
+    url: 'resources/:uuid/',
+    component: FlowEditForm,
   },
 };
 

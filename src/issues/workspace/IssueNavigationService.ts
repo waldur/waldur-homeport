@@ -55,6 +55,13 @@ const getReportItems = (): MenuItemType[] => [
     feature: 'support.organizations',
   },
   {
+    label: translate('Organization requests'),
+    icon: 'fa-building',
+    state: 'support.customers-requests',
+    key: 'support.customers-requests',
+    feature: 'support.customers-requests',
+  },
+  {
     label: translate('Notifications'),
     icon: 'fa-bell',
     state: 'support.notifications',
