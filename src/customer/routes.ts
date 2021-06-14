@@ -9,6 +9,20 @@ const ProjectsList = lazyComponent(
     ),
   'ProjectsList',
 );
+const ProjectCreateRequestsList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ProjectCreateRequestsList" */ '@waldur/marketplace-flows/ProjectCreateRequestsList'
+    ),
+  'ProjectCreateRequestsList',
+);
+const ResourceCreateRequestsList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ResourceCreateRequestsList" */ '@waldur/marketplace-flows/ResourceCreateRequestsList'
+    ),
+  'ResourceCreateRequestsList',
+);
 const ProjectCreateContainer = lazyComponent(
   () =>
     import(
@@ -102,6 +116,18 @@ export const states: StateDeclaration[] = [
     name: 'organization.projects',
     url: 'projects/',
     component: ProjectsList,
+  },
+
+  {
+    name: 'organization.project-requests',
+    url: 'project-requests/',
+    component: ProjectCreateRequestsList,
+  },
+
+  {
+    name: 'organization.resource-requests',
+    url: 'project-requests/',
+    component: ResourceCreateRequestsList,
   },
 
   {

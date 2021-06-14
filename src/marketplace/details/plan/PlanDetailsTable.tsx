@@ -60,9 +60,8 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
   }
 
   const customer = useSelector(getCustomer);
-  const activeFixedPriceProfile = getActiveFixedPricePaymentProfile(
-    customer.payment_profiles,
-  );
+  const activeFixedPriceProfile =
+    customer && getActiveFixedPricePaymentProfile(customer.payment_profiles);
 
   const fixedRows = props.components.filter(
     (component) => component.billing_type === 'fixed',

@@ -31,6 +31,28 @@ export const getSidebarItems = (customer: Customer): MenuItemType[] => [
     index: 300,
   },
   {
+    key: 'project-requests',
+    label: translate('Project creation requests'),
+    icon: 'fa-bookmark',
+    state: 'organization.project-requests',
+    params: {
+      uuid: customer.uuid,
+    },
+    feature: 'project-requests',
+    index: 310,
+  },
+  {
+    key: 'resource-requests',
+    label: translate('Resource creation requests'),
+    icon: 'fa-bookmark',
+    state: 'organization.resource-requests',
+    params: {
+      uuid: customer.uuid,
+    },
+    feature: 'resource-requests',
+    index: 310,
+  },
+  {
     key: 'events',
     label: translate('Audit logs'),
     icon: 'fa-bell-o',

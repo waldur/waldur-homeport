@@ -48,6 +48,12 @@ export const getPrivateUserTabs = () => [
     state: 'profile.remote-accounts',
     key: 'remote-accounts',
   },
+  {
+    label: translate('Resources'),
+    icon: 'fa-plus',
+    state: 'profile.flows-list',
+    key: 'flows-list',
+  },
 ];
 
 export const getPublicUserTabs = (user) => [
