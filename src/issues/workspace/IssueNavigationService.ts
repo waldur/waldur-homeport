@@ -129,6 +129,12 @@ const getReportItems = (): MenuItemType[] => [
         state: 'support.feedback',
         key: 'support.feedback',
       },
+      {
+        label: translate('Audit logs'),
+        icon: 'fa-bell-o',
+        state: 'support.events',
+        key: 'support.events',
+      },
     ],
   },
   {
