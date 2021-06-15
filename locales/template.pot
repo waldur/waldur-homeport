@@ -789,7 +789,9 @@ msgstr ""
 
 #: src/customer/workspace/CustomerEventsList.tsx
 #: src/customer/workspace/utils.ts
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/project/utils.ts
+#: src/support/SupportEventsContainer.tsx
 #: src/user/constants.ts
 #: src/user/dashboard/UserDashboard.tsx
 #: src/user/dashboard/UserEventsWrapper.tsx
@@ -1879,6 +1881,7 @@ msgstr ""
 #: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/paypal/PaymentsList.tsx
+#: src/support/SupportEventsListFilter.tsx
 msgid "Date"
 msgstr ""
 
@@ -2530,6 +2533,10 @@ msgstr ""
 
 #: src/events/EventDetailsDialog.tsx
 msgid "Event details"
+msgstr ""
+
+#: src/support/EventGroupFilter.tsx
+msgid "Event group"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
@@ -7100,6 +7107,10 @@ msgstr ""
 msgid "Select country..."
 msgstr ""
 
+#: src/support/EventDateFilter.tsx
+msgid "Select date..."
+msgstr ""
+
 #: src/support/OfferingConfigurationForm.tsx
 msgid "Select dates"
 msgstr ""
@@ -7114,6 +7125,10 @@ msgstr ""
 
 #: src/issues/feedback/EvaluationSelectField.tsx
 msgid "Select evaluation..."
+msgstr ""
+
+#: src/support/EventGroupFilter.tsx
+msgid "Select event groups..."
 msgstr ""
 
 #: src/marketplace-flows/FlowCreateForm.tsx
@@ -8940,6 +8955,10 @@ msgstr ""
 msgid "Unable to load editor"
 msgstr ""
 
+#: src/support/EventGroupFilter.tsx
+msgid "Unable to load event groups."
+msgstr ""
+
 #: src/invoices/events/InvoiceEventsDialog.tsx
 msgid "Unable to load events for this resource."
 msgstr ""
@@ -9646,6 +9665,7 @@ msgstr ""
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
+#: src/support/SupportEventsListFilter.tsx
 msgid "User"
 msgstr ""
 
