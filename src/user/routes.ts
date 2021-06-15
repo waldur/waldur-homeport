@@ -40,7 +40,6 @@ export const states: StateDeclaration[] = [
   { name: 'profile.freeipa', ...tabs.freeipa },
   { name: 'profile.remote-accounts', ...tabs.offerings },
   { name: 'profile.flows-list', ...tabs.flowsList },
-  { name: 'profile.flow-create', ...tabs.flowCreate },
   { name: 'profile.flow-edit', ...tabs.flowEdit },
 
   {

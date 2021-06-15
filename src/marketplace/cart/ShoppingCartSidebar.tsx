@@ -31,12 +31,14 @@ export const PureShoppingCartSidebar: FunctionComponent<ShoppingCartSidebarProps
       </div>
       <table className="table">
         <tbody>
-          <tr>
-            <td>
-              <strong>{translate('Invoiced to')}</strong>
-            </td>
-            <td>{props.customer.name}</td>
-          </tr>
+          {props.customer && (
+            <tr>
+              <td>
+                <strong>{translate('Invoiced to')}</strong>
+              </td>
+              <td>{props.customer.name}</td>
+            </tr>
+          )}
           {props.project && (
             <tr>
               <td>
@@ -45,9 +47,9 @@ export const PureShoppingCartSidebar: FunctionComponent<ShoppingCartSidebarProps
               <td>{props.project.name}</td>
             </tr>
           )}
-          {!getActiveFixedPricePaymentProfile(
-            props.customer.payment_profiles,
-          ) && !props.shouldConcealPrices ? (
+          {props.customer &&
+          !getActiveFixedPricePaymentProfile(props.customer.payment_profiles) &&
+          !props.shouldConcealPrices ? (
             <tr>
               <td className="text-lg">{translate('Total')}</td>
               <td className="text-lg">{defaultCurrency(props.total)}</td>

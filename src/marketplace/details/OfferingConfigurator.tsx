@@ -9,8 +9,8 @@ import {
 } from '@waldur/marketplace/common/registry';
 import { Offering, Plan } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
-import { getProject } from '@waldur/workspace/selectors';
-import { Project } from '@waldur/workspace/types';
+import { getProject, getWorkspace } from '@waldur/workspace/selectors';
+import { Project, USER_WORKSPACE } from '@waldur/workspace/types';
 
 import { getDefaultLimits } from '../offerings/utils';
 
@@ -34,21 +34,28 @@ export const PureOfferingConfigurator = (
   return <FormComponent {...props} />;
 };
 
-const storeConnector = connect<
-  { project: Project },
-  {},
-  { offering: Offering; limits: string[] },
-  RootState
->((state, ownProps) => ({
+interface OwnProps {
+  offering: Offering;
+  limits: string[];
+}
+
+const mapStateToProps = (state: RootState, ownProps) => ({
   project: getProject(state),
+  workspace: getWorkspace(state),
   initialValues: {
     limits: { ...getDefaultLimits(ownProps.offering), ...ownProps.limits },
   },
-}));
+});
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+const storeConnector = connect<StateProps, {}, OwnProps, RootState>(
+  mapStateToProps,
+);
 
 export const validate = (_, props) => {
   const errors: any = {};
-  if (!props.project) {
+  if (props.workspace != USER_WORKSPACE && !props.project) {
     errors.project = translate('This field is required.');
   }
   if (props.values.plan && !props.values.plan.is_active) {

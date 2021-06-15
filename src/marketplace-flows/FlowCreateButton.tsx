@@ -7,7 +7,8 @@ import { ActionButton } from '@waldur/table/ActionButton';
 
 export const FlowCreateButton: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const callback = () => dispatch(triggerTransition('profile.flow-create', {}));
+  const callback = () =>
+    dispatch(triggerTransition('marketplace-landing-user', {}));
 
   return (
     <ActionButton

@@ -1288,7 +1288,6 @@ msgstr ""
 msgid "Client ID"
 msgstr ""
 
-#: src/marketplace-flows/FlowCreateForm.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -1618,10 +1617,6 @@ msgstr ""
 msgid "Create network for OpenStack tenant"
 msgstr ""
 
-#: src/marketplace-flows/FlowCreateForm.tsx
-msgid "Create new organization"
-msgstr ""
-
 #: src/rancher/cluster/actions/CreateNodeAction.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
 msgid "Create node"
@@ -1653,10 +1648,6 @@ msgstr ""
 
 #: src/marketplace-flows/getFlowCreateAction.tsx
 msgid "Create resource"
-msgstr ""
-
-#: src/marketplace-flows/FlowCreateForm.tsx
-msgid "Create resource flow"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
@@ -4851,6 +4842,7 @@ msgstr ""
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace/details/ProjectField.tsx
 #: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -4933,7 +4925,6 @@ msgstr ""
 msgid "Organization has signed a fixed price agreement"
 msgstr ""
 
-#: src/marketplace-flows/FlowCreateForm.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Organization name"
@@ -5791,7 +5782,6 @@ msgid "Project member"
 msgstr ""
 
 #: src/customer/team/ProjectsListGroup.tsx
-#: src/marketplace-flows/FlowCreateForm.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/project/ProjectNameField.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
@@ -6543,7 +6533,7 @@ msgstr ""
 msgid "Resource configuration is invalid. Please fix errors in form."
 msgstr ""
 
-#: src/marketplace-flows/FlowCreateForm.tsx
+#: src/marketplace/cart/store/effects.ts
 msgid "Resource creation flow has been created."
 msgstr ""
 
@@ -6638,7 +6628,6 @@ msgstr ""
 msgid "Resource link"
 msgstr ""
 
-#: src/marketplace-flows/FlowCreateForm.tsx
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
@@ -7131,10 +7120,6 @@ msgstr ""
 msgid "Select event groups..."
 msgstr ""
 
-#: src/marketplace-flows/FlowCreateForm.tsx
-msgid "Select existing organization"
-msgstr ""
-
 #: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
 msgid "Select incident type"
 msgstr ""
@@ -7335,10 +7320,6 @@ msgstr ""
 
 #: src/customer/team/CustomerUsersListExpandableRow.tsx
 msgid "Service manager of:"
-msgstr ""
-
-#: src/marketplace-flows/FlowCreateForm.tsx
-msgid "Service offering"
 msgstr ""
 
 #: src/customer/details/CustomerMarketplacePanel.tsx
@@ -7803,7 +7784,6 @@ msgstr ""
 #: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/issues/feedback/SupportFeedback.tsx
 #: src/marketplace-checklist/UserChecklist.tsx
-#: src/marketplace-flows/FlowCreateForm.tsx
 #: src/marketplace-flows/FlowSubmitAction.tsx
 #: src/marketplace-flows/ReviewDialog.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
@@ -9232,7 +9212,7 @@ msgstr ""
 msgid "Unable to submit answers."
 msgstr ""
 
-#: src/marketplace-flows/FlowCreateForm.tsx
+#: src/marketplace/cart/store/effects.ts
 msgid "Unable to submit data."
 msgstr ""
 
@@ -9727,6 +9707,10 @@ msgstr ""
 
 #: src/user/support/UserEditForm.tsx
 msgid "User status"
+msgstr ""
+
+#: src/marketplace/details/utils.ts
+msgid "User workspace"
 msgstr ""
 
 #: src/user/events.ts

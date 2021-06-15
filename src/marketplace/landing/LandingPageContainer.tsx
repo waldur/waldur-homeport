@@ -43,7 +43,7 @@ export const LandingPageContainer: React.FC<LandingPageContainerProps> = (
         offeringsAutocomplete(
           {
             name: query,
-            allowed_customer_uuid: props.customer.uuid,
+            allowed_customer_uuid: props.customer?.uuid,
           },
           prevOptions,
           page,

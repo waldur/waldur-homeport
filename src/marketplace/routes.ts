@@ -232,7 +232,7 @@ const ProviderDetails = lazyComponent(
 
 export const states: StateDeclaration[] = [
   {
-    name: 'marketplace-landing',
+    name: 'marketplace-landing-project',
     url: 'marketplace/',
     component: MarketplaceLanding,
     parent: 'project',
@@ -246,6 +246,16 @@ export const states: StateDeclaration[] = [
     url: 'marketplace/',
     component: MarketplaceLanding,
     parent: 'organization',
+    data: {
+      hideBreadcrumbs: true,
+    },
+  },
+
+  {
+    name: 'marketplace-landing-user',
+    url: 'marketplace/',
+    component: MarketplaceLanding,
+    parent: 'profile',
     data: {
       hideBreadcrumbs: true,
     },
@@ -273,7 +283,7 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-offering',
+    name: 'marketplace-offering-project',
     url: 'marketplace-offering/:offering_uuid/',
     component: OfferingDetailsPage,
     parent: 'project',
@@ -284,6 +294,13 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-offering/:offering_uuid/',
     component: OfferingDetailsPage,
     parent: 'organization',
+  },
+
+  {
+    name: 'marketplace-offering-user',
+    url: 'marketplace-offering/:offering_uuid/',
+    component: OfferingDetailsPage,
+    parent: 'profile',
   },
 
   {
@@ -313,7 +330,7 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-category',
+    name: 'marketplace-category-project',
     url: 'marketplace-category/:category_uuid/',
     component: CategoryPage,
     parent: 'project',
@@ -324,6 +341,13 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-category/:category_uuid/',
     component: CategoryPage,
     parent: 'organization',
+  },
+
+  {
+    name: 'marketplace-category-user',
+    url: 'marketplace-category/:category_uuid/',
+    component: CategoryPage,
+    parent: 'profile',
   },
 
   {

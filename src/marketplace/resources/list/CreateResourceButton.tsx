@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
     onClick: () =>
       dispatch(
-        triggerTransition('marketplace-category', {
+        triggerTransition('marketplace-category-project', {
           category_uuid: ownProps.category_uuid,
         }),
       ),
