@@ -10,6 +10,8 @@ export interface OfferingFormData {
   attributes?: { [key: string]: any };
   project?: Project;
   limits?: Limits;
+  project_create_request?: any;
+  customer_create_request?: any;
 }
 
 export interface OrderSummaryProps {

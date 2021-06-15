@@ -7,7 +7,11 @@ import {
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import store from '@waldur/store/store';
 import { getWorkspace } from '@waldur/workspace/selectors';
-import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
+import {
+  ORGANIZATION_WORKSPACE,
+  PROJECT_WORKSPACE,
+  USER_WORKSPACE,
+} from '@waldur/workspace/types';
 
 import { Offering } from '../types';
 
@@ -50,6 +54,12 @@ export const formatOrderItem = (props: OrderSummaryProps, request) => {
     if (project) {
       request.project = project.url;
     }
+    if (props.formData.project_create_request) {
+      request.project_create_request = props.formData.project_create_request;
+    }
+    if (props.formData.customer_create_request) {
+      request.customer_create_request = props.formData.customer_create_request;
+    }
   }
   return request;
 };
@@ -84,7 +94,7 @@ export function getBreadcrumbs(offering: Offering): BreadcrumbItem[] {
         },
       },
     ];
-  } else {
+  } else if (workspace === PROJECT_WORKSPACE) {
     return [
       {
         label: translate('Project workspace'),
@@ -92,11 +102,29 @@ export function getBreadcrumbs(offering: Offering): BreadcrumbItem[] {
       },
       {
         label: translate('Marketplace'),
-        state: 'marketplace-landing',
+        state: 'marketplace-landing-project',
       },
       {
         label: offering.category_title,
-        state: 'marketplace-category',
+        state: 'marketplace-category-project',
+        params: {
+          category_uuid: offering.category_uuid,
+        },
+      },
+    ];
+  } else if (workspace === USER_WORKSPACE) {
+    return [
+      {
+        label: translate('User workspace'),
+        state: 'profile.details',
+      },
+      {
+        label: translate('Marketplace'),
+        state: 'marketplace-landing-user',
+      },
+      {
+        label: offering.category_title,
+        state: 'marketplace-category-user',
         params: {
           category_uuid: offering.category_uuid,
         },

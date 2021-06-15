@@ -1,15 +1,15 @@
 import { triggerTransition } from '@uirouter/redux';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
+import * as api from '@waldur/marketplace/common/api';
+import { WORKSPACE_OFFERING_DETAILS } from '@waldur/marketplace/constants';
 import { Category } from '@waldur/marketplace/types';
 import {
   getWorkspace,
   getCustomer,
   getProject,
 } from '@waldur/workspace/selectors';
-import { WorkspaceType, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
-
-import * as api from '../../common/api';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import * as actions from './actions';
 import * as constants from './constants';
@@ -20,7 +20,7 @@ function* getCategories() {
   const options = {
     params: {
       allowed_customer_uuid: customer?.uuid,
-      project_uuid: project && project.uuid,
+      project_uuid: project?.uuid,
     },
   };
   try {
@@ -53,8 +53,8 @@ function* getOfferings() {
     o: '-created',
     state: ['Active', 'Paused'],
     field,
-    allowed_customer_uuid: customer.uuid,
-    project_uuid: project && project.uuid,
+    allowed_customer_uuid: customer?.uuid,
+    project_uuid: project?.uuid,
   };
   try {
     const offerings = yield call(api.getOfferingsList, params);
@@ -68,11 +68,8 @@ function* gotoOffering(action) {
   const offeringId = action.payload.offeringId;
   const params = { offering_uuid: offeringId };
   const workspace: WorkspaceType = yield select(getWorkspace);
-  if (workspace === ORGANIZATION_WORKSPACE) {
-    yield put(triggerTransition('marketplace-offering-customer', params));
-  } else {
-    yield put(triggerTransition('marketplace-offering', params));
-  }
+  const state = WORKSPACE_OFFERING_DETAILS[workspace];
+  yield put(triggerTransition(state, params));
 }
 
 export default function* () {

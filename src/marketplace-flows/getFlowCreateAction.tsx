@@ -11,7 +11,7 @@ export const getFlowCreateAction = () => {
   return {
     title: translate('Create resource'),
     onClick() {
-      store.dispatch(triggerTransition('profile.flow-create', {}));
+      store.dispatch(triggerTransition('marketplace-landing-user', {}));
     },
   };
 };

@@ -51,12 +51,14 @@ export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => (
           </td>
         </tr>
       )}
-      <tr>
-        <td>
-          <strong>{translate('Invoiced to')}</strong>
-        </td>
-        <td>{props.customer.name}</td>
-      </tr>
+      {props.customer && (
+        <tr>
+          <td>
+            <strong>{translate('Invoiced to')}</strong>
+          </td>
+          <td>{props.customer.name}</td>
+        </tr>
+      )}
       {props.project && (
         <tr>
           <td>
@@ -66,7 +68,8 @@ export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => (
         </tr>
       )}
       {props.extraComponent ? createElement(props.extraComponent, props) : null}
-      {!getActiveFixedPricePaymentProfile(props.customer.payment_profiles) &&
+      {props.customer &&
+        !getActiveFixedPricePaymentProfile(props.customer.payment_profiles) &&
         props.formData &&
         props.formData.plan &&
         !props.shouldConcealPrices && (

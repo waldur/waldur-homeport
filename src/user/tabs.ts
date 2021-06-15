@@ -44,13 +44,6 @@ const FlowListContainer = lazyComponent(
     ),
   'FlowListContainer',
 );
-const FlowCreateForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "FlowCreateForm" */ '@waldur/marketplace-flows/FlowCreateForm'
-    ),
-  'FlowCreateForm',
-);
 const FlowEditForm = lazyComponent(
   () =>
     import(
@@ -95,10 +88,6 @@ export const tabs = {
   flowsList: {
     url: 'resources/',
     component: FlowListContainer,
-  },
-  flowCreate: {
-    url: 'resources/new/',
-    component: FlowCreateForm,
   },
   flowEdit: {
     url: 'resources/:uuid/',

@@ -160,7 +160,7 @@ const formatData = (
               const state =
                 workspace === ORGANIZATION_WORKSPACE
                   ? 'marketplace-category-customer'
-                  : 'marketplace-category';
+                  : 'marketplace-category-project';
               router.stateService.go(state, { category_uuid: category.uuid });
             },
           },

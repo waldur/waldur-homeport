@@ -1,11 +1,16 @@
 import { FC } from 'react';
 import { connect } from 'react-redux';
+import { Field } from 'redux-form';
 
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { ProjectCreateButton } from '@waldur/project/ProjectCreateButton';
 import { RootState } from '@waldur/store/reducers';
 import { getWorkspace, getCustomer } from '@waldur/workspace/selectors';
-import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
+import {
+  ORGANIZATION_WORKSPACE,
+  USER_WORKSPACE,
+} from '@waldur/workspace/types';
 
 import { FormGroup } from '../offerings/FormGroup';
 
@@ -19,7 +24,7 @@ const mapStateToProps = (state: RootState) => {
       projects: customer.projects,
     };
   } else {
-    return {};
+    return { workspace };
   }
 };
 
@@ -49,6 +54,25 @@ const PureProjectField: FC<StateProps & OwnProps> = (props) =>
         {translate('The project will be changed for all items in cart.')}
       </div>
     </FormGroup>
+  ) : props.workspace === USER_WORKSPACE ? (
+    <>
+      <FormGroup
+        labelClassName="control-label col-sm-3"
+        valueClassName="col-sm-9"
+        label={translate('Organization')}
+        required={true}
+      >
+        <Field name="customer_create_request.name" component={InputField} />
+      </FormGroup>
+      <FormGroup
+        labelClassName="control-label col-sm-3"
+        valueClassName="col-sm-9"
+        label={translate('Project')}
+        required={true}
+      >
+        <Field name="project_create_request.name" component={InputField} />
+      </FormGroup>
+    </>
   ) : null;
 
 export const ProjectField = connector(PureProjectField);

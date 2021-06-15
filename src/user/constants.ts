@@ -80,4 +80,4 @@ export const getPublicUserTabs = (user) => [
 
 export const SELECT_AFFILIATION_FORM_ID = 'SelectAffiliation';
 export const ORGANIZATION_ROUTE = 'marketplace-category-customer';
-export const PROJECT_ROUTE = 'marketplace-category';
+export const PROJECT_ROUTE = 'marketplace-category-project';

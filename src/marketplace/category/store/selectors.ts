@@ -56,8 +56,8 @@ export const getFilterQuery = createSelector(
   (name, attributes, customer, project) => ({
     name,
     attributes: JSON.stringify(formatAttributesFilter(attributes)),
-    allowed_customer_uuid: customer.uuid,
-    project_uuid: project && project.uuid,
+    allowed_customer_uuid: customer?.uuid,
+    project_uuid: project?.uuid,
     state: ['Active', 'Paused'],
   }),
 );

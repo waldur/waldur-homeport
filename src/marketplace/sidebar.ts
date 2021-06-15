@@ -122,7 +122,7 @@ SidebarExtensionService.register(PROJECT_WORKSPACE, async () => {
       key: 'marketplace',
       icon: 'fa-shopping-cart',
       label: translate('Marketplace'),
-      state: 'marketplace-landing',
+      state: 'marketplace-landing-project',
       params: {
         uuid: project.uuid,
       },
