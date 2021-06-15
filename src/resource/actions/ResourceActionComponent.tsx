@@ -25,7 +25,7 @@ export const ResourceActionComponent: FunctionComponent<ResourceActionComponentP
     onToggle={props.onToggle}
     open={props.open}
     disabled={props.disabled}
-    pullRight
+    pullRight={window.innerWidth > 768}
   >
     {props.open ? (
       props.loading ? (
