@@ -8,7 +8,29 @@ import { WizardFormSecondPage } from './WizardFormSecondPage';
 
 const WizardForms = [WizardFormFirstPage, WizardFormSecondPage];
 
-export const CustomerCreateForm: FunctionComponent<any> = (props) => {
+interface CustomerCreateFormData {
+  name: string;
+  native_name: string;
+  domain: string;
+  email: string;
+  phone_number: string;
+  registration_code: string;
+  country: string;
+  address: string;
+  vat_code: string;
+  postal: string;
+  bank_name: string;
+  bank_account: string;
+}
+
+interface CustomerCreateFormProps {
+  onSubmit(formData: CustomerCreateFormData): void;
+  initialValues?: CustomerCreateFormData;
+}
+
+export const CustomerCreateForm: FunctionComponent<CustomerCreateFormProps> = (
+  props,
+) => {
   const [step, setStep] = useState(1);
   const steps = [translate('General information')];
   if (!ENV.hideOrganizationBillingStep) {
@@ -30,5 +52,6 @@ export const CustomerCreateForm: FunctionComponent<any> = (props) => {
     step: step - 1,
     steps,
     stepTitle,
+    initialValues: props.initialValues,
   });
 };

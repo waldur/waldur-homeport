@@ -1,8 +1,6 @@
 import { FC } from 'react';
 import { connect } from 'react-redux';
-import { Field } from 'redux-form';
 
-import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { ProjectCreateButton } from '@waldur/project/ProjectCreateButton';
 import { RootState } from '@waldur/store/reducers';
@@ -14,6 +12,8 @@ import {
 
 import { FormGroup } from '../offerings/FormGroup';
 
+import { CustomerCreateGroup } from './CustomerCreateGroup';
+import { ProjectCreateGroup } from './ProjectCreateGroup';
 import { ProjectSelectField } from './ProjectSelectField';
 
 const mapStateToProps = (state: RootState) => {
@@ -34,7 +34,9 @@ type StateProps = ReturnType<typeof mapStateToProps>;
 
 type OwnProps = { previewMode?: boolean };
 
-const PureProjectField: FC<StateProps & OwnProps> = (props) =>
+type ProjectFieldProps = StateProps & OwnProps;
+
+const PureProjectField: FC<ProjectFieldProps> = (props) =>
   props.projects ? (
     <FormGroup
       labelClassName="control-label col-sm-3"
@@ -56,22 +58,8 @@ const PureProjectField: FC<StateProps & OwnProps> = (props) =>
     </FormGroup>
   ) : props.workspace === USER_WORKSPACE ? (
     <>
-      <FormGroup
-        labelClassName="control-label col-sm-3"
-        valueClassName="col-sm-9"
-        label={translate('Organization')}
-        required={true}
-      >
-        <Field name="customer_create_request.name" component={InputField} />
-      </FormGroup>
-      <FormGroup
-        labelClassName="control-label col-sm-3"
-        valueClassName="col-sm-9"
-        label={translate('Project')}
-        required={true}
-      >
-        <Field name="project_create_request.name" component={InputField} />
-      </FormGroup>
+      <CustomerCreateGroup />
+      <ProjectCreateGroup />
     </>
   ) : null;
 

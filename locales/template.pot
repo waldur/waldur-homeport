@@ -1632,12 +1632,21 @@ msgstr ""
 msgid "Create organization"
 msgstr ""
 
+#: src/marketplace/details/CustomerCreateGroup.tsx
+msgid "Create organization request"
+msgstr ""
+
 #: src/vmware/actions/CreatePortDialog.tsx
 msgid "Create port"
 msgstr ""
 
 #: src/project/ProjectCreateContainer.tsx
+#: src/project/ProjectCreateDialog.tsx
 msgid "Create project"
+msgstr ""
+
+#: src/marketplace/details/ProjectCreateGroup.tsx
+msgid "Create project request"
 msgstr ""
 
 #: src/issues/create/IssueCreateDialog.tsx
@@ -2317,12 +2326,20 @@ msgstr ""
 msgid "Edit offering"
 msgstr ""
 
+#: src/marketplace/details/CustomerCreateGroup.tsx
+msgid "Edit organization request"
+msgstr ""
+
 #: src/customer/team/PendingReviewDialog.tsx
 msgid "Edit permissions"
 msgstr ""
 
 #: src/project/team/AddProjectMemberDialog.tsx
 msgid "Edit project member"
+msgstr ""
+
+#: src/marketplace/details/ProjectCreateGroup.tsx
+msgid "Edit project request"
 msgstr ""
 
 #: src/customer/team/EditTeamMemberDialog.tsx
@@ -4842,7 +4859,7 @@ msgstr ""
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace/details/ProjectField.tsx
+#: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -5670,6 +5687,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/OrderSummary.tsx
+#: src/marketplace/details/ProjectCreateGroup.tsx
 #: src/marketplace/details/ProjectField.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
@@ -9022,7 +9040,7 @@ msgstr ""
 msgid "Unable to load project resources."
 msgstr ""
 
-#: src/project/ProjectCreateContainer.tsx
+#: src/project/ProjectCreateForm.tsx
 msgid "Unable to load project types."
 msgstr ""
 

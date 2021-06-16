@@ -1,29 +1,50 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 
-import { translate } from '@waldur/i18n';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { actWait, updateWrapper } from '@waldur/core/testUtils';
 
+import * as api from './api';
 import { ProjectCreateForm } from './ProjectCreateForm';
 
-const renderForm = (props) =>
-  shallow(
-    <ProjectCreateForm
-      translate={translate}
-      handleSubmit={jest.fn()}
-      projectTypes={[]}
-      customer={{ projects: [] }}
-      {...props}
-    />,
+jest.mock('./api');
+
+const apiMock = api as jest.Mocked<typeof api>;
+
+jest.mock('@waldur/i18n', () => ({
+  translate: jest.fn().mockImplementation((arg) => arg),
+}));
+
+const renderForm = async () => {
+  const mockStore = configureStore();
+  const store = mockStore({
+    workspace: {},
+  });
+  const wrapper = mount(
+    <Provider store={store}>
+      <ProjectCreateForm onSubmit={jest.fn()} onCancel={jest.fn()} />
+    </Provider>,
   );
+  await actWait();
+
+  expect(wrapper.find(LoadingSpinner)).toBeTruthy();
+
+  await updateWrapper(wrapper);
+  return wrapper;
+};
 
 describe('ProjectCreateForm', () => {
-  it('conceals type selector if choices list is empty', () => {
-    const wrapper = renderForm({ projectTypes: [] });
-    expect(wrapper.find({ label: 'Project type' }).length).toBe(0);
+  it('conceals type selector if choices list is empty', async () => {
+    apiMock.loadProjectTypes.mockResolvedValue([]);
+    const wrapper = await renderForm();
+    expect(wrapper.find({ label: 'Project type' }).length).toBeFalsy();
   });
 
-  it('renders type selector if choices are available', () => {
+  it('renders type selector if choices are available', async () => {
     const projectTypes = [{ name: 'Basic', url: 'VALID_URL' }];
-    const wrapper = renderForm({ projectTypes });
-    expect(wrapper.find({ label: 'Project type' }).length).toBe(1);
+    apiMock.loadProjectTypes.mockResolvedValue(projectTypes);
+    const wrapper = await renderForm();
+    expect(wrapper.find({ label: 'Project type' }).length).toBeTruthy();
   });
 });

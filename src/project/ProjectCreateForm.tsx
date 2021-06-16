@@ -1,5 +1,8 @@
-import { FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
+import { useAsync } from 'react-use';
+import { reduxForm } from 'redux-form';
 
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import {
   TextField,
   SelectField,
@@ -8,59 +11,99 @@ import {
   SubmitButton,
 } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
+import { datePickerOverlayContainerInDialogs } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
+import { getCustomer } from '@waldur/workspace/selectors';
 
+import * as api from './api';
 import { ProjectNameField } from './ProjectNameField';
 
-export const ProjectCreateForm: FunctionComponent<any> = (props) => (
-  <form
-    onSubmit={props.handleSubmit(props.createProject)}
-    className="form-horizontal"
-  >
-    <FormContainer
-      submitting={props.submitting}
-      labelClass="col-sm-3"
-      controlClass="col-sm-5"
+export interface ProjectCreateFormData {
+  name: string;
+  description: string;
+  end_date: Date;
+  type?;
+}
+
+const loadData = async () => {
+  const projectTypes = await api.loadProjectTypes();
+  return {
+    projectTypes,
+  };
+};
+
+export const ProjectCreateForm = reduxForm<
+  ProjectCreateFormData,
+  { onSubmit; onCancel }
+>({
+  form: 'projectCreate',
+})((props) => {
+  const { loading, error, value } = useAsync(loadData);
+  const customer = useSelector(getCustomer);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return (
+      <h3 className="text-center">
+        {translate('Unable to load project types.')}
+      </h3>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={props.handleSubmit(props.onSubmit)}
+      className="form-horizontal"
     >
-      {ProjectNameField(props)}
-      <TextField
-        label={props.translate('Project description')}
-        name="description"
-      />
-      {props.projectTypes.length >= 1 && (
-        <SelectField
-          label={props.translate('Project type')}
-          name="type"
-          options={props.projectTypes}
-          getOptionValue={(option) => option.url}
-          getOptionLabel={(option) => option.name}
-          isClearable={true}
+      <FormContainer
+        submitting={props.submitting}
+        labelClass="col-sm-3"
+        controlClass="col-sm-5"
+      >
+        {ProjectNameField({ customer })}
+        <TextField
+          label={translate('Project description')}
+          name="description"
         />
-      )}
-      <DateField
-        name="end_date"
-        label={translate('End date')}
-        description={translate(
-          'The date is inclusive. Once reached, all project resource will be scheduled for termination.',
+        {value.projectTypes.length >= 1 && (
+          <SelectField
+            label={translate('Project type')}
+            name="type"
+            options={value.projectTypes}
+            getOptionValue={(option) => option.url}
+            getOptionLabel={(option) => option.name}
+            isClearable={true}
+          />
         )}
-      />
-    </FormContainer>
-    <div className="form-group">
-      <div className="col-sm-offset-3 col-sm-5">
-        <FieldError error={props.error} />
-        <SubmitButton
-          disabled={props.invalid}
-          submitting={props.submitting}
-          label={props.translate('Add project')}
+        <DateField
+          name="end_date"
+          label={translate('End date')}
+          description={translate(
+            'The date is inclusive. Once reached, all project resource will be scheduled for termination.',
+          )}
+          {...datePickerOverlayContainerInDialogs()}
         />
-        <button
-          type="button"
-          className="btn btn-default m-l-sm"
-          onClick={props.gotoProjectList}
-        >
-          {props.translate('Cancel')}
-        </button>
+      </FormContainer>
+      <div className="form-group">
+        <div className="col-sm-offset-3 col-sm-5">
+          <FieldError error={props.error} />
+          <SubmitButton
+            disabled={props.invalid}
+            submitting={props.submitting}
+            label={translate('Add project')}
+          />
+          <button
+            type="button"
+            className="btn btn-default m-l-sm"
+            onClick={props.onCancel}
+          >
+            {translate('Cancel')}
+          </button>
+        </div>
       </div>
-    </div>
-  </form>
-);
+    </form>
+  );
+});

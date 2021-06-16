@@ -1,67 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { useAsync } from 'react-use';
-import { compose } from 'redux';
-import { reduxForm, InjectedFormProps } from 'redux-form';
+import { useDispatch } from 'react-redux';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
-import { getConfig } from '@waldur/store/config';
-import { RootState } from '@waldur/store/reducers';
-import { getCustomer } from '@waldur/workspace/selectors';
 
-import * as actions from './actions';
-import * as api from './api';
+import { createProject, gotoProjectList } from './actions';
 import { ProjectCreateForm } from './ProjectCreateForm';
 
-interface ProjectCreateProps extends InjectedFormProps, TranslateProps {
-  customer: any;
-  createProject: (project: any) => void;
-  gotoProjectList: () => void;
-}
-
-const loadData = async () => {
-  const projectTypes = await api.loadProjectTypes();
-  return {
-    projectTypes,
-  };
-};
-
-const ProjectCreateComponent: React.FC<ProjectCreateProps> = (props) => {
+export const ProjectCreateContainer: React.FC<{}> = () => {
   useTitle(translate('Create project'));
-
-  const { loading, error, value } = useAsync(loadData);
-
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
-  if (error) {
-    return (
-      <h3 className="text-center">
-        {props.translate('Unable to load project types.')}
-      </h3>
-    );
-  }
-
-  return <ProjectCreateForm {...props} projectTypes={value.projectTypes} />;
+  const dispatch = useDispatch();
+  const onSubmit = (data) => createProject(data, dispatch);
+  const onCancel = () => gotoProjectList(null, dispatch);
+  return <ProjectCreateForm onSubmit={onSubmit} onCancel={onCancel} />;
 };
-
-const mapStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-  enforceLatinName: getConfig(state).enforceLatinName,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  createProject: (data) => actions.createProject(data, dispatch),
-  gotoProjectList: () => actions.gotoProjectList(null, dispatch),
-});
-
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation,
-  reduxForm({ form: 'projectCreate' }),
-);
-
-export const ProjectCreateContainer = enhance(ProjectCreateComponent);
