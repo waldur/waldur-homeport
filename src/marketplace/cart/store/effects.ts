@@ -2,10 +2,12 @@ import { triggerTransition } from '@uirouter/redux';
 import { delay } from 'redux-saga';
 import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 
+import { formatDate } from '@waldur/core/dateUtils';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { createFlow } from '@waldur/marketplace-flows/api';
 import * as api from '@waldur/marketplace/common/api';
+import { ProjectCreateFormData } from '@waldur/project/ProjectCreateForm';
 import { showError, showSuccess } from '@waldur/store/notify';
 import {
   SET_CURRENT_PROJECT,
@@ -74,6 +76,11 @@ function* initCart() {
   }
 }
 
+const formatProjectCreateRequest = (request: ProjectCreateFormData) => ({
+  ...request,
+  end_date: request.end_date ? formatDate(request.end_date) : undefined,
+});
+
 function* addItem(action) {
   const workspace = yield select(getWorkspace);
   if (workspace === USER_WORKSPACE) {
@@ -82,7 +89,9 @@ function* addItem(action) {
         ...formatItemToCreate(action.payload.item),
         name: action.payload.item.attributes.name,
       },
-      project_create_request: action.payload.item.project_create_request,
+      project_create_request: formatProjectCreateRequest(
+        action.payload.item.project_create_request,
+      ),
       customer_create_request: action.payload.item.customer_create_request,
     };
     try {

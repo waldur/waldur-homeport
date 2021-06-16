@@ -1,3 +1,5 @@
+import { formValueSelector } from 'redux-form';
+
 import { translate } from '@waldur/i18n';
 import { OrderItemRequest } from '@waldur/marketplace/cart/types';
 import {
@@ -15,6 +17,7 @@ import {
 
 import { Offering } from '../types';
 
+import { FORM_ID } from './constants';
 import { OrderSummaryProps } from './types';
 
 export const formatOrderItem = (props: OrderSummaryProps, request) => {
@@ -132,3 +135,5 @@ export function getBreadcrumbs(offering: Offering): BreadcrumbItem[] {
     ];
   }
 }
+
+export const formSelector = formValueSelector(FORM_ID);

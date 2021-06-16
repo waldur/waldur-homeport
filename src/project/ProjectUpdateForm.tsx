@@ -42,7 +42,7 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> = 
       labelClass="col-sm-3"
       controlClass="col-sm-9"
     >
-      {ProjectNameField(props, props.isDisabled)}
+      {ProjectNameField({ isDisabled: props.isDisabled })}
       <TextField
         label={props.translate('Project description')}
         name="description"
