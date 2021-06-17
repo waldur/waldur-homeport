@@ -1,3 +1,4 @@
+import moment from 'moment-timezone';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
@@ -85,6 +86,7 @@ export const ProjectCreateForm = reduxForm<
             'The date is inclusive. Once reached, all project resource will be scheduled for termination.',
           )}
           {...datePickerOverlayContainerInDialogs()}
+          minDate={moment().add(1, 'days').toISOString()}
         />
       </FormContainer>
       <div className="form-group">
