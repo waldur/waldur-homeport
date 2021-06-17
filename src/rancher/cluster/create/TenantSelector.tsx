@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
 import Select from 'react-select';
 import { useAsync } from 'react-use';
 import { Field } from 'redux-form';
@@ -8,29 +9,32 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 const SelectTenantField: FunctionComponent<any> = (props) => (
   <Select
-    value={props.options.filter(
-      ({ settings }) => settings === props.input.value,
-    )}
-    onChange={({ settings }) => props.input.onChange(settings)}
+    value={props.options.filter(({ url }) => url === props.input.value)}
+    onChange={({ url }) => props.input.onChange(url)}
     options={props.options}
-    getOptionValue={(option) => option.settings}
+    getOptionValue={(option) => option.url}
     getOptionLabel={(option) => option.name}
     isClearable={true}
   />
 );
 
-const loadData = (projectId) =>
-  getAll('/openstacktenant/', {
-    params: { project_uuid: projectId },
+const loadData = (customer_uuid) =>
+  getAll('/service-settings/', {
+    params: {
+      customer_uuid,
+      shared: false,
+      type: 'OpenStackTenant',
+      field: ['name', 'url'],
+    },
   });
 
-export const TenantSelector: FunctionComponent<any> = (props) => {
-  const resourceProps = useAsync(() => loadData(props.project.uuid), [
-    props.project,
-  ]);
+export const TenantSelector: FunctionComponent = () => {
+  const customer = useSelector(getCustomer);
+  const resourceProps = useAsync(() => loadData(customer.uuid), [customer]);
 
   if (resourceProps.loading) {
     return <LoadingSpinner />;

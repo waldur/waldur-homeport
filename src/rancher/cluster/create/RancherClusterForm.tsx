@@ -102,7 +102,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
             />
           }
         />
-        {props.project && <TenantSelector project={props.project} />}
+        <TenantSelector />
         {tenant && <TenantGroup tenant={tenant} offering={props.offering} />}
       </FormContainer>
     </form>
