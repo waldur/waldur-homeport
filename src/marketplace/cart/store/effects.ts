@@ -4,6 +4,7 @@ import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { format } from '@waldur/core/ErrorMessageFormatter';
+import { CustomerCreateFormData } from '@waldur/customer/create/types';
 import { translate } from '@waldur/i18n';
 import { createFlow } from '@waldur/marketplace-flows/api';
 import * as api from '@waldur/marketplace/common/api';
@@ -81,6 +82,11 @@ const formatProjectCreateRequest = (request: ProjectCreateFormData) => ({
   end_date: request.end_date ? formatDate(request.end_date) : undefined,
 });
 
+const formatCustomerCreateRequest = (request: CustomerCreateFormData) => ({
+  ...request,
+  country: request.country?.value,
+});
+
 function* addItem(action) {
   const workspace = yield select(getWorkspace);
   if (workspace === USER_WORKSPACE) {
@@ -92,7 +98,9 @@ function* addItem(action) {
       project_create_request: formatProjectCreateRequest(
         action.payload.item.project_create_request,
       ),
-      customer_create_request: action.payload.item.customer_create_request,
+      customer_create_request: formatCustomerCreateRequest(
+        action.payload.item.customer_create_request,
+      ),
     };
     try {
       yield call(createFlow, payload);

@@ -3,25 +3,11 @@ import { useState, createElement, FunctionComponent } from 'react';
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
+import { CustomerCreateFormData } from './types';
 import { WizardFormFirstPage } from './WizardFormFirstPage';
 import { WizardFormSecondPage } from './WizardFormSecondPage';
 
 const WizardForms = [WizardFormFirstPage, WizardFormSecondPage];
-
-interface CustomerCreateFormData {
-  name: string;
-  native_name: string;
-  domain: string;
-  email: string;
-  phone_number: string;
-  registration_code: string;
-  country: string;
-  address: string;
-  vat_code: string;
-  postal: string;
-  bank_name: string;
-  bank_account: string;
-}
 
 interface CustomerCreateFormProps {
   onSubmit(formData: CustomerCreateFormData): void;
