@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import uniqueId from 'lodash.uniqueid';
 import React, { FunctionComponent } from 'react';
 
+import { Tooltip } from '@waldur/core/Tooltip';
+
 type BootstrapStyle = 'primary' | 'success' | 'info' | 'warning' | 'danger';
 
 interface AwesomeCheckboxProps {
@@ -11,6 +13,7 @@ interface AwesomeCheckboxProps {
   value: boolean;
   onChange(value: boolean): void;
   disabled?: boolean;
+  tooltip?: React.ReactNode;
 }
 
 export const AwesomeCheckbox: FunctionComponent<AwesomeCheckboxProps> = (
@@ -33,7 +36,19 @@ export const AwesomeCheckbox: FunctionComponent<AwesomeCheckboxProps> = (
         onChange={(event) => props.onChange(event.target.checked)}
         disabled={props.disabled}
       />
-      <label htmlFor={id}>{props.label}</label>
+      <label htmlFor={id}>
+        {props.tooltip && (
+          <>
+            <Tooltip
+              label={props.tooltip}
+              id={`awesome-checkbox-tooltip-${id}`}
+            >
+              <i className="fa fa-question-circle" />
+            </Tooltip>{' '}
+          </>
+        )}
+        {props.label}
+      </label>
     </div>
   );
 };
