@@ -1,6 +1,7 @@
 describe('Project creation dialog', () => {
   beforeEach(() => {
     cy.mockUser()
+      .clock(Date.UTC(2021, 2, 31), ['Date'])
       .intercept(
         '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/counters/',
         {},
@@ -55,7 +56,7 @@ describe('Project creation dialog', () => {
           name: 'Internal OpenStack project',
           description: 'Test project',
           type: '/api/project-types/b4736efa2cc44777b4143463ba8f9bf8/',
-          end_date: '2021-03-28',
+          end_date: '2021-04-25',
         });
     });
   });
