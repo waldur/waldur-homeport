@@ -19,7 +19,7 @@ variables:
   GITHUB_OPENNODE_REPO_URL: "git@github.com:opennode/waldur-homeport.git"
   GITHUB_WALDUR_REPO_URL: "git@github.com:waldur/waldur-homeport.git"
 
-image: registry.hpc.ut.ee/mirror/library/node:lts-alpine
+image: registry.hpc.ut.ee/mirror/library/node:fermium-alpine
 
 cache:
   key: "$CI_COMMIT_REF_NAME"
