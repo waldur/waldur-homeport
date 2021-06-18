@@ -40,7 +40,7 @@ export const format = (response, parseResponse?) => {
 
   if (response.data) {
     if (parseResponse) {
-      return parseResponse(response, message);
+      message += ' ' + parseResponse(response, message);
     }
     if (response.data.non_field_errors) {
       message += ' ' + response.data.non_field_errors;
