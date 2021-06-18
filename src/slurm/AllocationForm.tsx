@@ -10,6 +10,9 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 export class AllocationForm extends Component<OfferingConfigurationFormProps> {
   componentDidMount() {
+    if (this.props.initialValues) {
+      return;
+    }
     const { project, plan } = this.props;
     const initialData = { ...this.props.initialAttributes, project, plan };
     if (!plan && this.props.offering.plans.length === 1) {

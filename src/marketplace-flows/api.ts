@@ -1,7 +1,20 @@
-import { post } from '@waldur/core/api';
+import { getById, post, patch } from '@waldur/core/api';
+
+interface Flow {
+  uuid: string;
+  customer_create_request;
+  project_create_request;
+  resource_create_request;
+}
 
 export const createFlow = (payload) =>
   post(`/marketplace-resource-creation-flows/`, payload);
+
+export const getFlow = (flowId) =>
+  getById<Flow>(`/marketplace-resource-creation-flows/`, flowId);
+
+export const updateFlow = (flowId, payload) =>
+  patch(`/marketplace-resource-creation-flows/${flowId}/`, payload);
 
 export const submitFlow = (id: string) =>
   post(`/marketplace-resource-creation-flows/${id}/submit/`);

@@ -24,7 +24,7 @@ import {
 import * as actions from './actions';
 import * as constants from './constants';
 
-const flattenAttributes = (attributes) => {
+export const flattenAttributes = (attributes) => {
   let newAttributes = {};
   for (const [key, value] of Object.entries(attributes)) {
     newAttributes = {
