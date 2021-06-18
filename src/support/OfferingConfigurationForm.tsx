@@ -33,6 +33,9 @@ import { fetchTenantOptions, fetchInstanceOptions } from './api';
 
 export class PureOfferingConfigurationForm extends Component<OfferingConfigurationFormProps> {
   componentDidMount() {
+    if (this.props.initialValues) {
+      return;
+    }
     const attributes = { ...this.props.initialAttributes };
     if (this.props.offering.options.order) {
       this.props.offering.options.order.forEach((key) => {

@@ -90,7 +90,7 @@ export const tabs = {
     component: FlowListContainer,
   },
   flowEdit: {
-    url: 'resources/:uuid/',
+    url: 'resources/:flow_uuid/',
     component: FlowEditForm,
   },
 };

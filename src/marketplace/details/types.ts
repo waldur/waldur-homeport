@@ -16,11 +16,11 @@ export interface OfferingFormData {
 
 export interface OrderSummaryProps {
   offering: Offering;
-  customer: Customer;
+  customer?: Customer;
   project?: Project;
-  total: number;
+  total?: number;
   formData: OfferingFormData;
-  formValid: boolean;
+  formValid?: boolean;
   updateMode?: boolean;
   extraComponent?: React.ComponentType<any>;
   shouldConcealPrices?: boolean;
