@@ -53,6 +53,7 @@ export const getPrivateUserTabs = () => [
     icon: 'fa-plus',
     state: 'profile.flows-list',
     key: 'flows-list',
+    feature: 'marketplace-flows',
   },
 ];
 
