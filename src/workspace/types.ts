@@ -54,6 +54,7 @@ export interface Payment {
   uuid: string;
   invoice_uuid?: string;
   invoice_period?: string;
+  customer_uuid?: string;
 }
 
 export interface Permission {

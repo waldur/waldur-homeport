@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { Link } from '@waldur/core/Link';
 import { EDIT_PAYMENT_FORM_ID } from '@waldur/customer/payments/constants';
@@ -18,8 +18,11 @@ import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { Payment } from '@waldur/workspace/types';
 
-const PaymentUpdateDialog: FunctionComponent<any> = (props) => (
+const PaymentUpdateDialog: FunctionComponent<
+  InjectedFormProps & { resolve: Payment; submitRequest }
+> = (props) => (
   <form
     onSubmit={props.handleSubmit(props.submitRequest)}
     className="form-horizontal"
@@ -67,7 +70,10 @@ const PaymentUpdateDialog: FunctionComponent<any> = (props) => (
             <div className="col-sm-8" style={{ marginTop: '8px' }}>
               <Link
                 state="billingDetails"
-                params={{ uuid: props.resolve.invoice_uuid }}
+                params={{
+                  uuid: props.resolve.customer_uuid,
+                  invoice_uuid: props.resolve.invoice_uuid,
+                }}
                 target="_blank"
               >
                 {props.resolve.invoice_period}
