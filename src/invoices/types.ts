@@ -21,6 +21,7 @@ export interface InvoiceItem {
 }
 
 export interface Invoice {
+  pdf?: string;
   number: string;
   customer_details: Customer;
   issuer_details: Customer;

@@ -1,6 +1,6 @@
 import { UIView } from '@uirouter/react';
 import classNames from 'classnames';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -8,6 +8,7 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { AppFooter } from './AppFooter';
 import { BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';
+import { LayoutContext } from './context';
 import { CookiesConsent } from './cookies/CookiesConsent';
 import { AppHeader } from './header/AppHeader';
 import { getTitle } from './title';
@@ -16,25 +17,27 @@ interface LayoutProps {
   sidebar: React.ReactNode;
   pageClass?: string;
   hideBreadcrumbs?: boolean;
-  actions?: React.ReactNode;
-  sidebarClass?: string;
 }
 
 export const Layout: React.FC<LayoutProps> = ({
   sidebar,
   pageClass,
   hideBreadcrumbs,
-  actions,
   children,
-  sidebarClass,
 }) => {
   const pageTitle = useSelector(getTitle);
   const currentUser = useSelector(getUser);
+  const [actions, setActions] = useState(null);
+  const [sidebarClass, setSidebarClass] = useState('');
+  const context = useMemo(() => ({ setActions, setSidebarClass }), [
+    setActions,
+    setSidebarClass,
+  ]);
   if (!currentUser) {
     return null;
   }
   return (
-    <>
+    <LayoutContext.Provider value={context}>
       {sidebar}
       <div id="page-wrapper" className={pageClass}>
         <CookiesConsent />
@@ -63,7 +66,7 @@ export const Layout: React.FC<LayoutProps> = ({
         </div>
         <AppFooter />
       </div>
-    </>
+    </LayoutContext.Provider>
   );
 };
 
