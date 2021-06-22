@@ -57,7 +57,14 @@ export const OrderItem: FunctionComponent<OrderItemProps> = (props) => {
             </p>
             {props.item.resource_uuid ? (
               <p>
-                <ResourceDetailsLink item={props.item as ResourceReference}>
+                <ResourceDetailsLink
+                  item={
+                    {
+                      ...props.item,
+                      project_uuid: props.project_uuid,
+                    } as ResourceReference
+                  }
+                >
                   {translate('Resource link')}
                 </ResourceDetailsLink>
               </p>

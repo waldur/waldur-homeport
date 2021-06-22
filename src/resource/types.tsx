@@ -27,7 +27,7 @@ export interface BaseResource {
   marketplace_offering_uuid?: boolean;
   marketplace_resource_uuid?: string;
   marketplace_category_uuid?: string;
-  project_uuid?: string;
+  project_uuid: string;
   quotas?: Quota[];
 }
 

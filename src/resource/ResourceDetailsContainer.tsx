@@ -8,9 +8,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { useRecursiveTimeout } from '@waldur/core/useRecursiveTimeout';
 import { translate } from '@waldur/i18n';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
-import { Layout } from '@waldur/navigation/Layout';
 import { useTitle } from '@waldur/navigation/title';
-import { ProjectSidebar } from '@waldur/project/ProjectSidebar';
 
 import { getResource } from './api';
 import { ResourceBreadcrumbsRegistry } from './breadcrumbs/ResourceBreadcrumbsRegistry';
@@ -22,7 +20,7 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
   const router = useRouter();
 
   const [asyncResult, refreshResource] = useAsyncFn(
-    () => getResource(params.resource_type, params.uuid),
+    () => getResource(params.resource_type, params.resource_uuid),
     [params],
   );
 
@@ -75,18 +73,11 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
     }
   }, [asyncResult.error, resource, router.stateService]);
 
-  return (
-    <Layout sidebar={<ProjectSidebar />} pageClass="white-bg">
-      {resource ? (
-        <ResourceDetails
-          resource={resource}
-          refreshResource={refreshResource}
-        />
-      ) : asyncResult.loading ? (
-        <LoadingSpinner />
-      ) : asyncResult.error ? (
-        <>{translate('Unable to load resource.')}</>
-      ) : null}
-    </Layout>
-  );
+  return resource ? (
+    <ResourceDetails resource={resource} refreshResource={refreshResource} />
+  ) : asyncResult.loading ? (
+    <LoadingSpinner />
+  ) : asyncResult.error ? (
+    <>{translate('Unable to load resource.')}</>
+  ) : null;
 };

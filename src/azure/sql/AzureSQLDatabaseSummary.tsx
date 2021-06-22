@@ -16,6 +16,7 @@ const PureAzureSQLDatabaseSummary = (
         <ResourceLink
           type="Azure.SQLServer"
           uuid={resource.server_uuid}
+          project={resource.project_uuid}
           label={resource.server_name}
         />
       </Field>

@@ -34,7 +34,7 @@ describe('OpenStack Volume detail view', () => {
 
       .log('Visit OpenStackTenant Volume detail view')
       .visit(
-        '/resources/OpenStackTenant.Volume/df15b1f2dc7c445cadb2996594b0a6c3/',
+        '/projects/5d3016240ccf4181b4cdc0baa0e41d5c/resources/OpenStackTenant.Volume/df15b1f2dc7c445cadb2996594b0a6c3/',
       )
       .get('.loading-title')
       .should('not.exist')

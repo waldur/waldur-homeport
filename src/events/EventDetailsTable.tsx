@@ -62,7 +62,8 @@ export const EventDetailsTable: FunctionComponent<EventDetailsTableProps> = ({
         value={event.context.resource_full_name}
         state="resource-details"
         params={{
-          uuid: event.context.resource_uuid,
+          uuid: event.context.project_uuid,
+          resource_uuid: event.context.resource_uuid,
           resource_type: event.context.resource_type,
         }}
       />

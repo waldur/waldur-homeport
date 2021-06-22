@@ -3,12 +3,17 @@ import { Resource } from '@waldur/resource/types';
 
 import { getResourceState } from './utils';
 
+const baseResource = {
+  name: 'Instance',
+  uuid: 'uuid',
+  resource_type: 'OpenStackTenant.Instance',
+  project_uuid: 'project_uuid',
+};
+
 describe('getResourceState', () => {
   it('renders OK state', () => {
     const resource: Resource = {
-      name: 'Instance',
-      uuid: 'uuid',
-      resource_type: 'OpenStackTenant.Instance',
+      ...baseResource,
       state: 'OK',
       runtime_state: 'ONLINE',
       service_settings_state: 'OK',
@@ -23,9 +28,7 @@ describe('getResourceState', () => {
 
   it('renders error state', () => {
     const resource: Resource = {
-      name: 'Instance',
-      uuid: 'uuid',
-      resource_type: 'OpenStackTenant.Instance',
+      ...baseResource,
       state: 'Erred',
       runtime_state: 'ONLINE',
       service_settings_state: 'OK',
@@ -40,9 +43,7 @@ describe('getResourceState', () => {
 
   it('renders error runtime state', () => {
     const resource: Resource = {
-      name: 'Instance',
-      uuid: 'uuid',
-      resource_type: 'OpenStackTenant.Instance',
+      ...baseResource,
       state: 'OK',
       runtime_state: 'ERROR',
       service_settings_state: 'OK',
@@ -57,9 +58,7 @@ describe('getResourceState', () => {
 
   it('renders error for service settings state', () => {
     const resource: Resource = {
-      name: 'Instance',
-      uuid: 'uuid',
-      resource_type: 'OpenStackTenant.Instance',
+      ...baseResource,
       state: 'OK',
       runtime_state: 'ONLINE',
       service_settings_state: 'ERRED',
@@ -76,9 +75,7 @@ describe('getResourceState', () => {
 
   it('renders progress state', () => {
     const resource: Resource = {
-      name: 'Instance',
-      uuid: 'uuid',
-      resource_type: 'OpenStackTenant.Instance',
+      ...baseResource,
       state: 'Updating',
       runtime_state: 'RESIZING',
       service_settings_state: 'OK',
@@ -94,9 +91,7 @@ describe('getResourceState', () => {
 
   it('renders action details', () => {
     const resource: Resource = {
-      name: 'Instance',
-      uuid: 'uuid',
-      resource_type: 'OpenStackTenant.Instance',
+      ...baseResource,
       state: 'Updating',
       runtime_state: 'RESIZING',
       service_settings_state: 'OK',

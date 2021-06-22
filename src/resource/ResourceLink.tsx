@@ -5,6 +5,7 @@ import { Link } from '@waldur/core/Link';
 interface ResourceLinkProps {
   type: string;
   uuid: string;
+  project: string;
   label: React.ReactNode;
 }
 
@@ -13,7 +14,8 @@ export const ResourceLink: FunctionComponent<ResourceLinkProps> = (props) => (
     state="resource-details"
     params={{
       resource_type: props.type,
-      uuid: props.uuid,
+      resource_uuid: props.uuid,
+      uuid: props.project,
     }}
     label={props.label}
   />

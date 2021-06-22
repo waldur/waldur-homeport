@@ -11,6 +11,7 @@ const formatVolume = (props) => (
   <ResourceLink
     type="OpenStackTenant.Volume"
     uuid={getUUID(props.source_volume)}
+    project={props.project_uuid}
     label={props.source_volume_name}
   />
 );

@@ -41,6 +41,7 @@ const PureOpenStackInstanceSummary = (
             <ResourceLink
               type="Rancher.Cluster"
               uuid={props.resource.rancher_cluster.uuid}
+              project={props.resource.project_uuid}
               label={props.resource.rancher_cluster.name}
             />
           }

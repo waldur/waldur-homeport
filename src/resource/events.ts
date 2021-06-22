@@ -5,7 +5,8 @@ import { gettext } from '@waldur/i18n';
 const getResourceContext = (event) => {
   const ctx = {
     resource_type: event.resource_type,
-    uuid: event.resource_uuid,
+    resource_uuid: event.resource_uuid,
+    uuid: event.project_uuid,
   };
   return {
     ...getUserContext(event),

@@ -34,7 +34,8 @@ const TableComponent: FunctionComponent<any> = (props) => {
               <Link
                 state="resource-details"
                 params={{
-                  uuid: row.instance_uuid,
+                  uuid: row.project_uuid,
+                  resource_uuid: row.instance_uuid,
                   resource_type: 'OpenStackTenant.Instance',
                 }}
                 label={row.instance_name}
