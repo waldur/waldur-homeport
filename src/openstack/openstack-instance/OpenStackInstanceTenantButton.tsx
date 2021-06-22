@@ -8,7 +8,8 @@ const ManageSecurityGroupsButton: FunctionComponent<any> = (props) => (
     state="resource-details"
     params={{
       resource_type: 'OpenStack.Tenant',
-      uuid: props.resource.tenant_uuid,
+      resource_uuid: props.resource.tenant_uuid,
+      uuid: props.resource.project_uuid,
       tab: 'security_groups',
     }}
     className="btn btn-sm btn-default"
@@ -22,7 +23,8 @@ const ManageNetworksButton: FunctionComponent<any> = (props) => (
     state="resource-details"
     params={{
       resource_type: 'OpenStack.Tenant',
-      uuid: props.resource.tenant_uuid,
+      resource_uuid: props.resource.tenant_uuid,
+      uuid: props.resource.project_uuid,
       tab: 'networks',
     }}
     className="btn btn-sm btn-default"

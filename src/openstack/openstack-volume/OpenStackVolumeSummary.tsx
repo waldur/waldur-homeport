@@ -19,6 +19,7 @@ const formatInstance = (props) =>
     <ResourceLink
       type="OpenStackTenant.Instance"
       uuid={getUUID(props.resource.instance)}
+      project={props.resource.project_uuid}
       label={props.resource.instance_name}
     />
   ) : (

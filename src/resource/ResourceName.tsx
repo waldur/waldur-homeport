@@ -6,16 +6,25 @@ import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { ResourceLink } from './ResourceLink';
 import { formatDefault, formatResourceType, getResourceIcon } from './utils';
 
+interface ResourceIconProps {
+  resource: {
+    name: string;
+    uuid: string;
+    resource_type: string;
+  };
+}
+
 interface ResourceNameProps {
   resource: {
     name: string;
     uuid: string;
     resource_type: string;
+    project_uuid: string;
     is_link_valid?: boolean;
   };
 }
 
-export const ResourceIcon: FunctionComponent<ResourceNameProps> = (props) => (
+export const ResourceIcon: FunctionComponent<ResourceIconProps> = (props) => (
   <Tooltip
     id={`resourceIcon-${props.resource.uuid}`}
     label={formatResourceType(props.resource)}
@@ -50,6 +59,7 @@ export const ResourceName = (props: ResourceNameProps) =>
       <ResourceLink
         uuid={props.resource.uuid}
         type={props.resource.resource_type}
+        project={props.resource.project_uuid}
         label={<ResourceIcon resource={props.resource} />}
       />
       <ResourceWarning resource={props.resource} />

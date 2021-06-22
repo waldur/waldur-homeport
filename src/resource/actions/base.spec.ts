@@ -5,9 +5,11 @@ import { validateState, validateRuntimeState } from './base';
 const resource: BaseResource = {
   name: 'VM',
   uuid: 'uuid',
+  project_uuid: 'project_uuid',
   state: 'Erred',
   runtime_state: 'ACTIVE',
 };
+
 const user = {
   is_support: true,
   is_staff: true,

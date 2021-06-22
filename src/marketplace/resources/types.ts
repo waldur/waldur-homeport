@@ -6,6 +6,7 @@ export interface ResourceReference {
   resource_uuid: string;
   resource_type: string;
   backend_id?: string;
+  project_uuid?: string;
 }
 
 export type ResourceState =

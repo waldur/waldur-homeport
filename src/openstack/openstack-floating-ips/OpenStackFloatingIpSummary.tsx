@@ -10,6 +10,7 @@ const formatTenant = (props) => (
   <ResourceLink
     type="OpenStack.Tenant"
     uuid={props.tenant_uuid}
+    project={props.project_uuid}
     label={props.tenant_name}
   />
 );
