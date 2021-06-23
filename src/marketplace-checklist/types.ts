@@ -13,6 +13,7 @@ export interface Question {
   description: string;
   solution: string;
   category_uuid: string;
+  image?: string;
 }
 
 export interface Checklist {
