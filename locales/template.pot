@@ -2850,6 +2850,10 @@ msgstr ""
 msgid "Floating IPs update has been scheduled."
 msgstr ""
 
+#: src/marketplace-flows/FlowEditForm.tsx
+msgid "Flow update"
+msgstr ""
+
 #: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/FlowMapViewContainer.tsx
 msgid "Flowmap"
@@ -4563,6 +4567,7 @@ msgstr ""
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/customer/team/OfferingPermissionsList.tsx
+#: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/actions/tabs.ts
@@ -7345,6 +7350,7 @@ msgstr ""
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/map/LeafletMap.tsx
+#: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/ServiceProvider.tsx
 #: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
@@ -7878,6 +7884,7 @@ msgid "Sum"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
@@ -8967,6 +8974,10 @@ msgstr ""
 
 #: src/customer/list/CustomerListContainer.tsx
 msgid "Unable to load financial overview."
+msgstr ""
+
+#: src/marketplace-flows/FlowEditForm.tsx
+msgid "Unable to load flow."
 msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
