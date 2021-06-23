@@ -22,18 +22,12 @@ export const states: StateDeclaration[] = [
     name: 'project.support-details',
     url: 'support/:resource_uuid/',
     component: SupportDetailsContainer,
-    data: {
-      sidebarKey: 'marketplace-project-resources',
-    },
   },
 
   {
     name: 'support.events',
     url: 'events/',
     component: SupportEventsContainer,
-    data: {
-      sidebarKey: 'reporting',
-    },
     resolve: {
       permission: checkPermission,
     },

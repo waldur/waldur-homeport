@@ -6,8 +6,6 @@ import { PluginConfiguration } from '@waldur/auth/types';
 interface DataDeclaration {
   /** State is disabled as long as its feature is disabled */
   feature: string;
-  /** Related sidebar item is expanded if its key matches current state sidebarKey */
-  sidebarKey: string;
   /** Authenticated view is protected from anonymous user.
    * When anonymous user tries to access protected state, he is redirected to login view.
    */

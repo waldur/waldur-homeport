@@ -8,7 +8,7 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { AppFooter } from './AppFooter';
 import { BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';
-import { LayoutContext } from './context';
+import { LayoutContext, LayoutContextInterface } from './context';
 import { CookiesConsent } from './cookies/CookiesConsent';
 import { AppHeader } from './header/AppHeader';
 import { getTitle } from './title';
@@ -29,10 +29,11 @@ export const Layout: React.FC<LayoutProps> = ({
   const currentUser = useSelector(getUser);
   const [actions, setActions] = useState(null);
   const [sidebarClass, setSidebarClass] = useState('');
-  const context = useMemo(() => ({ setActions, setSidebarClass }), [
-    setActions,
-    setSidebarClass,
-  ]);
+  const [sidebarKey, setSidebarKey] = useState('');
+  const context = useMemo<LayoutContextInterface>(
+    () => ({ setActions, setSidebarClass, sidebarKey, setSidebarKey }),
+    [setActions, setSidebarClass, sidebarKey, setSidebarKey],
+  );
   if (!currentUser) {
     return null;
   }

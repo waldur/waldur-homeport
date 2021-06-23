@@ -184,9 +184,6 @@ export const states: StateDeclaration[] = [
     name: 'support.feedback',
     url: 'feedback/',
     component: SupportFeedbackListContainer,
-    data: {
-      sidebarKey: 'reporting',
-    },
     resolve: {
       permission: checkPermission,
     },

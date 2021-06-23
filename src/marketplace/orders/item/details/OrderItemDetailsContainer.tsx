@@ -13,6 +13,7 @@ import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsC
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
+import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import store from '@waldur/store/store';
 import { getWorkspace } from '@waldur/workspace/selectors';
@@ -132,6 +133,8 @@ export const OrderItemDetailsContainer: React.FC = () => {
       ? asyncValue.orderItem.offering_name
       : translate('Order item details'),
   );
+
+  useSidebarKey('marketplace-services');
 
   // Don't render loading indicator if order item is refreshing
   // since if it is in pending state it is refreshed via periodic polling

@@ -24,7 +24,7 @@ export const getPublicServices = (customerId: string): MenuItemType => ({
       state: 'marketplace-vendor-offerings',
     },
     {
-      key: 'marketplace',
+      key: 'public-order-items',
       icon: 'fa-money',
       label: translate('Public orders'),
       state: 'marketplace-order-items',
@@ -146,6 +146,7 @@ SidebarExtensionService.register(PROJECT_WORKSPACE, async () => {
         label: category.title,
         icon: 'fa-cloud',
         ...getCategoryLink(project.uuid, category.uuid),
+        key: `marketplace_category_${category.uuid}`,
         countFieldKey: `marketplace_category_${category.uuid}`,
       })),
     },
