@@ -308,9 +308,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-offering-details/:offering_uuid/',
     component: OfferingContainer,
     parent: 'organization',
-    data: {
-      sidebarKey: 'marketplace-services',
-    },
   },
 
   {
@@ -376,9 +373,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-offerings/',
     component: OfferingsListContainer,
     parent: 'organization',
-    data: {
-      sidebarKey: 'marketplace-services',
-    },
   },
 
   {
@@ -418,9 +412,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-my-offerings/',
     component: MyOfferingsListContainer,
     parent: 'organization',
-    data: {
-      sidebarKey: 'marketplace-services',
-    },
   },
 
   {
@@ -428,9 +419,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-offering-create/',
     component: OfferingCreateContainer,
     parent: 'organization',
-    data: {
-      sidebarKey: 'marketplace-services',
-    },
   },
 
   {
@@ -445,9 +433,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-offering-images/:offering_uuid/',
     component: ImagesContainer,
     parent: 'organization',
-    data: {
-      sidebarKey: 'marketplace-services',
-    },
   },
 
   {
@@ -469,9 +454,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-order-item-details/:order_item_uuid/',
     component: OrderItemDetailsContainer,
     parent: 'organization',
-    data: {
-      sidebarKey: 'marketplace-services',
-    },
   },
 
   {
@@ -486,9 +468,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-order-items/',
     component: OrderItemsContainer,
     parent: 'organization',
-    data: {
-      sidebarKey: 'marketplace-services',
-    },
   },
 
   {
@@ -496,9 +475,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-my-order-items/?filterState',
     component: MyOrderItemsContainer,
     parent: 'organization',
-    data: {
-      sidebarKey: 'marketplace-services',
-    },
   },
 
   {
@@ -506,9 +482,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-customer-resources/',
     component: CustomerResourcesContainer,
     parent: 'organization',
-    data: {
-      sidebarKey: 'marketplace-services',
-    },
   },
 
   {
@@ -516,9 +489,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-public-resources/',
     component: PublicResourcesContainer,
     parent: 'organization',
-    data: {
-      sidebarKey: 'marketplace-services',
-    },
   },
 
   {
@@ -526,9 +496,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-public-resource-details/:resource_uuid/',
     component: ResourceDetailsPageForCustomer,
     parent: 'organization',
-    data: {
-      sidebarKey: 'marketplace-services',
-    },
   },
 
   {
@@ -536,9 +503,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-service-provider-public-resource-details/:resource_uuid/',
     component: ResourceDetailsPageForServiceProvider,
     parent: 'organization',
-    data: {
-      sidebarKey: 'marketplace-services',
-    },
   },
 
   {
@@ -546,9 +510,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-project-resource-details/:resource_uuid/',
     component: ResourceDetailsPageForProjectWorkspace,
     parent: 'project',
-    data: {
-      sidebarKey: 'marketplace-project-resources',
-    },
   },
 
   {

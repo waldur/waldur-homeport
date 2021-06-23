@@ -12,6 +12,7 @@ import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { Offering } from '@waldur/marketplace/types';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
+import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { OfferingBookingTab } from './OfferingBookingTab';
@@ -95,6 +96,8 @@ export const OfferingContainer: FunctionComponent = () => {
   ]);
 
   useTitle(value ? value.offering.name : translate('Offering details'));
+
+  useSidebarKey('marketplace-services');
 
   if (loading) {
     return <LoadingSpinner />;

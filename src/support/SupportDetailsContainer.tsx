@@ -13,6 +13,7 @@ import {
 import { Resource } from '@waldur/marketplace/resources/types';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
+import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { SupportDetails } from './SupportDetails';
@@ -93,6 +94,8 @@ export const SupportDetailsContainer: FunctionComponent = () => {
       router.stateService.go('errorPage.notFound');
     }
   }, [error, router.stateService]);
+
+  useSidebarKey('marketplace-project-resources');
 
   return loading ? (
     <LoadingSpinner />

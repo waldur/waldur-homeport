@@ -1,10 +1,8 @@
-import {
-  useRouter,
-  useOnStateChanged,
-  useCurrentStateAndParams,
-} from '@uirouter/react';
+import { useRouter, useOnStateChanged } from '@uirouter/react';
 import classNames from 'classnames';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+
+import { LayoutContext } from '../context';
 
 import { MenuItemType } from './types';
 
@@ -13,10 +11,10 @@ export const useMenuList = (items: MenuItemType[]) => {
   const [activeItem, setActiveItem] = useState<MenuItemType>();
   const router = useRouter();
 
-  const { state } = useCurrentStateAndParams();
+  const layoutContext = useContext(LayoutContext);
 
   const matchesSidebar = (item: MenuItemType) =>
-    item.key && state?.data?.sidebarKey === item.key;
+    item.key && layoutContext.sidebarKey === item.key;
 
   const matchesState = (item: MenuItemType) =>
     item.state && router.stateService.is(item.state, item.params);
@@ -31,7 +29,7 @@ export const useMenuList = (items: MenuItemType[]) => {
       }
       if (item.children) {
         for (const child of item.children) {
-          if (matchesState(child)) {
+          if (matchesSidebar(child) || matchesState(child)) {
             setActiveItem(child);
             setExpandedItem(item);
             return;
@@ -41,7 +39,7 @@ export const useMenuList = (items: MenuItemType[]) => {
     }
   };
 
-  useEffect(updateItems, [items]);
+  useEffect(updateItems, [items, layoutContext.sidebarKey]);
   useOnStateChanged(() => updateItems());
 
   const getItemCss = (item: MenuItemType) =>

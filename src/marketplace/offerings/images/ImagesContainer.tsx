@@ -11,6 +11,7 @@ import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { Offering } from '@waldur/marketplace/types';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
+import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 
@@ -66,6 +67,8 @@ export const ImagesContainer: FunctionComponent = () => {
         })
       : translate('Offering images'),
   );
+
+  useSidebarKey('marketplace-services');
 
   if (!offering) {
     return <LoadingSpinner />;

@@ -1,6 +1,5 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
 const ResourceDetailsContainer = lazyComponent(
   () =>
@@ -22,10 +21,5 @@ export const states: StateDeclaration[] = [
       },
     },
     parent: 'project',
-    data: {
-      auth: true,
-      workspace: PROJECT_WORKSPACE,
-      sidebarKey: 'marketplace-project-resources',
-    },
   },
 ];
