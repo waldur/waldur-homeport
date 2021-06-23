@@ -115,7 +115,7 @@ const mapPropsToFilter = (props: StateProps) => {
   if (props.filter?.state) {
     filter.state = props.filter.state.map((option) => option.value);
   }
-  if (props.isServiceManager) {
+  if (props.isServiceManager && !props.isOwnerOrStaff) {
     filter.service_manager_uuid = props.user.uuid;
   }
   return filter;
@@ -146,6 +146,7 @@ const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   user: getUser(state),
   isServiceManager: isServiceManagerSelector(state),
+  isOwnerOrStaff: isOwnerOrStaff(state),
   hideOfferingItemActions: isSupportOnly(state),
   showOfferingListActions: showOfferingListActions(state),
   actionsDisabled: !isOwnerOrStaff(state),
