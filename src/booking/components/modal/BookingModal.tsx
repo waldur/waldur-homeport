@@ -94,10 +94,24 @@ export const BookingModal: FC<BookingModalProps> = ({
     };
   };
 
+  const shiftEndDateAccordingToStartDate = (event, updateStartDate) => {
+    const mStart = moment(newEvent.start);
+    const mEnd = moment(newEvent.end);
+    const diff: number = moment(updateStartDate).diff(mStart);
+    mEnd.add(diff, 'milliseconds');
+    return {
+      ...event,
+      end: mEnd.startOf('day').toDate(),
+    };
+  };
+
   const handleChange = (name, value) => {
     let event = newEvent;
     if (name === 'allDay' && value === true) {
       event = convertEventToAllDay(newEvent);
+    }
+    if (name === 'start') {
+      event = shiftEndDateAccordingToStartDate(event, value);
     }
     return setNewEvent({ ...event, [name]: value });
   };
