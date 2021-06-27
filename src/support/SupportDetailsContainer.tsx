@@ -53,7 +53,7 @@ const loadData = async (resource_uuid: string) => {
     resource_uuid: resource.uuid,
   });
   const orderItem = orderItems.length === 1 ? orderItems[0] : null;
-  const issue = orderItem?.issue.uuid
+  const issue = orderItem?.issue?.uuid
     ? await getIssue(orderItem.issue.uuid)
     : undefined;
   return {
