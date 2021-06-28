@@ -7,7 +7,8 @@ ResourceBreadcrumbsRegistry.register('VMware.Disk', (resource) => {
       label: resource.vm_name,
       state: 'resource-details',
       params: {
-        uuid: resource.vm_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: resource.vm_uuid,
         resource_type: 'VMware.VirtualMachine',
       },
     },
@@ -15,7 +16,8 @@ ResourceBreadcrumbsRegistry.register('VMware.Disk', (resource) => {
       label: translate('Disks'),
       state: 'resource-details',
       params: {
-        uuid: resource.vm_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: resource.vm_uuid,
         resource_type: 'VMware.VirtualMachine',
         tab: 'disks',
       },
@@ -29,7 +31,8 @@ ResourceBreadcrumbsRegistry.register('VMware.Port', (resource) => {
       label: resource.vm_name,
       state: 'resource-details',
       params: {
-        uuid: resource.vm_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: resource.vm_uuid,
         resource_type: 'VMware.VirtualMachine',
       },
     },
@@ -37,7 +40,8 @@ ResourceBreadcrumbsRegistry.register('VMware.Port', (resource) => {
       label: translate('Network adapters'),
       state: 'resource-details',
       params: {
-        uuid: resource.vm_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: resource.vm_uuid,
         resource_type: 'VMware.VirtualMachine',
         tab: 'ports',
       },

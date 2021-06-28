@@ -14,7 +14,8 @@ ResourceBreadcrumbsRegistry.register(
         label: resource.instance_name,
         state: 'resource-details',
         params: {
-          uuid: instance_uuid,
+          uuid: resource.project_uuid,
+          resource_uuid: instance_uuid,
           resource_type: 'OpenStackTenant.Instance',
         },
       },
@@ -22,7 +23,8 @@ ResourceBreadcrumbsRegistry.register(
         label: translate('VM snapshot schedules'),
         state: 'resource-details',
         params: {
-          uuid: instance_uuid,
+          uuid: resource.project_uuid,
+          resource_uuid: instance_uuid,
           resource_type: 'OpenStackTenant.Instance',
           tab: 'backup_schedules',
         },

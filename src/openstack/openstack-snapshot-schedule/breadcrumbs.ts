@@ -14,7 +14,8 @@ ResourceBreadcrumbsRegistry.register(
         label: resource.source_volume_name,
         state: 'resource-details',
         params: {
-          uuid: volume_uuid,
+          uuid: resource.project_uuid,
+          resource_uuid: volume_uuid,
           resource_type: 'OpenStackTenant.Volume',
         },
       },
@@ -22,7 +23,8 @@ ResourceBreadcrumbsRegistry.register(
         label: translate('Snapshot schedules'),
         state: 'resource-details',
         params: {
-          uuid: volume_uuid,
+          uuid: resource.project_uuid,
+          resource_uuid: volume_uuid,
           resource_type: 'OpenStackTenant.Volume',
           tab: 'snapshot_schedules',
         },

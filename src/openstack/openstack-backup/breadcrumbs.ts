@@ -12,7 +12,8 @@ ResourceBreadcrumbsRegistry.register('OpenStackTenant.Backup', (resource) => {
       label: resource.instance_name,
       state: 'resource-details',
       params: {
-        uuid: instance_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: instance_uuid,
         resource_type: 'OpenStackTenant.Instance',
       },
     },
@@ -20,7 +21,8 @@ ResourceBreadcrumbsRegistry.register('OpenStackTenant.Backup', (resource) => {
       label: translate('VM snapshots'),
       state: 'resource-details',
       params: {
-        uuid: instance_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: instance_uuid,
         resource_type: 'OpenStackTenant.Instance',
         tab: 'backups',
       },

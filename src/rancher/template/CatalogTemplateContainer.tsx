@@ -33,8 +33,9 @@ const getBreadcrumbs = (
       label: cluster.name,
       state: 'resource-details',
       params: {
+        uuid: cluster.project_uuid,
         resource_type: 'Rancher.Cluster',
-        uuid: cluster.uuid,
+        resource_uuid: cluster.uuid,
         tab: 'catalogs',
       },
     },

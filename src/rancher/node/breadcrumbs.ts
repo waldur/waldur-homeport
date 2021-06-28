@@ -7,7 +7,8 @@ ResourceBreadcrumbsRegistry.register('Rancher.Node', (resource) => {
       label: resource.cluster_name,
       state: 'resource-details',
       params: {
-        uuid: resource.cluster_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: resource.cluster_uuid,
         resource_type: 'Rancher.Cluster',
       },
     },
@@ -15,7 +16,8 @@ ResourceBreadcrumbsRegistry.register('Rancher.Node', (resource) => {
       label: translate('Nodes'),
       state: 'resource-details',
       params: {
-        uuid: resource.cluster_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: resource.cluster_uuid,
         resource_type: 'Rancher.Cluster',
         tab: 'nodes',
       },

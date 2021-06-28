@@ -13,7 +13,8 @@ ResourceBreadcrumbsRegistry.register('OpenStack.SubNet', (resource) => {
       label: resource.tenant_name,
       state: 'resource-details',
       params: {
-        uuid: tenant_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: tenant_uuid,
         resource_type: 'OpenStack.Tenant',
       },
     },
@@ -21,7 +22,8 @@ ResourceBreadcrumbsRegistry.register('OpenStack.SubNet', (resource) => {
       label: translate('Networks'),
       state: 'resource-details',
       params: {
-        uuid: tenant_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: tenant_uuid,
         resource_type: 'OpenStack.Tenant',
         tab: 'networks',
       },
@@ -30,7 +32,8 @@ ResourceBreadcrumbsRegistry.register('OpenStack.SubNet', (resource) => {
       label: resource.network_name,
       state: 'resource-details',
       params: {
-        uuid: network_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: network_uuid,
         resource_type: 'OpenStack.Network',
       },
     },
@@ -38,7 +41,8 @@ ResourceBreadcrumbsRegistry.register('OpenStack.SubNet', (resource) => {
       label: translate('Subnets'),
       state: 'resource-details',
       params: {
-        uuid: network_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: network_uuid,
         resource_type: 'OpenStack.Network',
         tab: 'subnets',
       },
