@@ -10,7 +10,8 @@ ResourceBreadcrumbsRegistry.register('OpenStack.FloatingIP', (resource) => {
       label: resource.tenant_name,
       state: 'resource-details',
       params: {
-        uuid: resource.tenant_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: resource.tenant_uuid,
         resource_type: 'OpenStack.Tenant',
       },
     },
@@ -18,7 +19,8 @@ ResourceBreadcrumbsRegistry.register('OpenStack.FloatingIP', (resource) => {
       label: translate('Floating IPs'),
       state: 'resource-details',
       params: {
-        uuid: resource.tenant_uuid,
+        uuid: resource.project_uuid,
+        resource_uuid: resource.tenant_uuid,
         resource_type: 'OpenStack.Tenant',
         tab: 'floating_ips',
       },
