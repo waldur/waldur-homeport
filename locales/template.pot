@@ -2777,6 +2777,11 @@ msgstr ""
 msgid "First"
 msgstr ""
 
+#: src/openstack/openstack-tenant/OpenStackRouterSummary.tsx
+#: src/openstack/openstack-tenant/TenantRoutersList.tsx
+msgid "Fixed IPs"
+msgstr ""
+
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "Fixed price"
 msgstr ""

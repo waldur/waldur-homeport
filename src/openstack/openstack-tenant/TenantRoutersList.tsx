@@ -17,6 +17,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => <ResourceName resource={row} />,
         },
         {
+          title: translate('Fixed IPs'),
+          render: ({ row }) => row.fixed_ips.join(', ') || 'N/A',
+        },
+        {
           title: translate('State'),
           render: ({ row }) => <ResourceState resource={row} />,
         },
