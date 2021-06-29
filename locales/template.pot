@@ -89,6 +89,10 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Access policy has been updated successfully."
+msgstr ""
+
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 msgid "Access subnets"
@@ -6950,6 +6954,7 @@ msgstr ""
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
+#: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
 #: src/marketplace/offerings/expandable/utils.ts
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
@@ -7433,6 +7438,14 @@ msgstr ""
 #: src/openstack/openstack-network/actions/SetMtuAction.tsx
 #: src/openstack/openstack-network/actions/SetMtuDialog.tsx
 msgid "Set MTU"
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Set access policy"
+msgstr ""
+
+#: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
+msgid "Set access policy for {offeringName}"
 msgstr ""
 
 #: src/openstack/openstack-instance/SetAllowedAddressPairsButton.tsx
@@ -8961,6 +8974,10 @@ msgstr ""
 msgid "Unable to load detail."
 msgstr ""
 
+#: src/marketplace/offerings/actions/SetAccessPolicyDialog.tsx
+msgid "Unable to load divisions."
+msgstr ""
+
 #: src/marketplace/offerings/create/WysiwygEditor.tsx
 msgid "Unable to load editor"
 msgstr ""
@@ -9308,6 +9325,10 @@ msgstr ""
 
 #: src/rancher/cluster/ViewYAMLDialog.tsx
 msgid "Unable to update YAML."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to update access policy."
 msgstr ""
 
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx

@@ -60,3 +60,7 @@ export const GOOGLE_CALENDAR_UNPUBLISH = 'GoogleCalendarUnpublish';
 export const updateConfirmationMessage = createFormAction(
   'waldur/marketplace/offering/UPDATE_CONFIRMATION_MESSAGE',
 );
+
+export const setAccessPolicy = createFormAction(
+  'waldur/marketplace/offering/SET_ACCESS_POLICY',
+);

@@ -327,3 +327,11 @@ export const updateOfferingConfirmationMessage = (
       template_confirmation_comment,
     },
   });
+
+export const updateOfferingAccessPolicy = (
+  offeringUuid: string,
+  divisions: string[],
+) =>
+  post(`/marketplace-offerings/${offeringUuid}/update_divisions/`, {
+    divisions,
+  });
