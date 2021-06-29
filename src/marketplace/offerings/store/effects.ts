@@ -15,6 +15,7 @@ import { updateEntity } from '@waldur/table/actions';
 import {
   getCustomer,
   getUser,
+  isOwnerOrStaff as isOwnerOrStaffSelector,
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
 
@@ -330,6 +331,39 @@ function* updateConfirmationMessage(action: Action<any>) {
   }
 }
 
+function* updateAccessPolicy(action: Action<any>) {
+  const { offeringUuid, divisions } = action.payload;
+  try {
+    yield call(api.updateOfferingAccessPolicy, offeringUuid, divisions);
+    const customer = yield select(getCustomer);
+    const isServiceManager = yield select(isServiceManagerSelector);
+    const isOwnerOrStaff = yield select(isOwnerOrStaffSelector);
+    const user = yield select(getUser);
+    const formData = yield select(
+      getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID),
+    );
+    yield put(
+      updatePublicOfferingsList(
+        customer,
+        isServiceManager && !isOwnerOrStaff,
+        user,
+        formData.state,
+      ),
+    );
+    yield put(
+      showSuccess(translate('Access policy has been updated successfully.')),
+    );
+    yield put(constants.setAccessPolicy.success());
+    yield put(closeModalDialog());
+  } catch (error) {
+    const errorMessage = `${translate(
+      'Unable to update access policy.',
+    )} ${format(error)}`;
+    yield put(showError(errorMessage));
+    yield put(constants.setAccessPolicy.failure());
+  }
+}
+
 export default function* () {
   yield takeEvery(constants.REMOVE_OFFERING_COMPONENT, removeOfferingComponent);
   yield takeEvery(constants.REMOVE_OFFERING_QUOTAS, removeOfferingQuotas);
@@ -349,4 +383,5 @@ export default function* () {
     constants.updateConfirmationMessage.REQUEST,
     updateConfirmationMessage,
   );
+  yield takeEvery(constants.setAccessPolicy.REQUEST, updateAccessPolicy);
 }

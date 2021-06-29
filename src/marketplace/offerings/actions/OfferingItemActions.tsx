@@ -4,6 +4,7 @@ import { Dispatch } from 'redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { googleCalendarActions } from '@waldur/marketplace/offerings/actions/GoogleCalendarActions';
+import { isVisible } from '@waldur/marketplace/offerings/actions/utils';
 import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { router } from '@waldur/router';
@@ -60,6 +61,13 @@ const EditConfirmationMessageDialog = lazyComponent(
       /* webpackChunkName: "EditConfirmationMessageDialog" */ './EditConfirmationMessageDialog'
     ),
   'EditConfirmationMessageDialog',
+);
+const SetAccessPolicyDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SetAccessPolicyDialog" */ './SetAccessPolicyDialog'
+    ),
+  'SetAccessPolicyDialog',
 );
 
 interface OwnProps {
@@ -129,6 +137,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         size: 'lg',
       }),
     ),
+  setAccessPolicy: (offering: Offering) =>
+    dispatch(
+      openModalDialog(SetAccessPolicyDialog, {
+        resolve: { offering },
+      }),
+    ),
 });
 
 const mergeProps = (
@@ -178,9 +192,7 @@ const mergeProps = (
         router.stateService.go('marketplace-offering-update', {
           offering_uuid: ownProps.offering.uuid,
         }),
-      visible:
-        ownProps.offering.state !== ARCHIVED &&
-        (ownProps.offering.state === DRAFT || stateProps.user.is_staff),
+      visible: isVisible(ownProps.offering.state, stateProps.user.is_staff),
     },
     {
       label: translate('Edit attributes'),
@@ -193,9 +205,7 @@ const mergeProps = (
         router.stateService.go('marketplace-offering-images', {
           offering_uuid: ownProps.offering.uuid,
         }),
-      visible:
-        ownProps.offering.state !== ARCHIVED &&
-        (ownProps.offering.state === DRAFT || stateProps.user.is_staff),
+      visible: isVisible(ownProps.offering.state, stateProps.user.is_staff),
     },
     {
       label: translate('Request publishing'),
@@ -227,6 +237,11 @@ const mergeProps = (
         (stateProps.user.is_staff ||
           (ownProps.offering.state === DRAFT &&
             (stateProps.isOwner || stateProps.isServiceManager))),
+    },
+    {
+      label: translate('Set access policy'),
+      handler: () => dispatchProps.setAccessPolicy(ownProps.offering),
+      visible: isVisible(ownProps.offering.state, stateProps.user.is_staff),
     },
   ].filter((offering) => offering.visible),
 });

@@ -85,6 +85,13 @@ interface OfferingGoogleCalendar {
   public: boolean;
 }
 
+export interface Division {
+  uuid: string;
+  name: string;
+  type: string;
+  url: string;
+}
+
 export interface Offering extends GeolocationPoint {
   quotas?: Quota[];
   uuid?: string;
@@ -123,6 +130,7 @@ export interface Offering extends GeolocationPoint {
   referred_pids: ReferredPids[];
   google_calendar_is_public: boolean;
   googlecalendar?: OfferingGoogleCalendar;
+  divisions: Division[];
 }
 
 export interface Image {
