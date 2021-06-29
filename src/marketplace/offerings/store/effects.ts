@@ -319,7 +319,7 @@ function* updateConfirmationMessage(action: Action<any>) {
         translate('Confirmation message has been updated successfully.'),
       ),
     );
-    yield put(constants.updateOffering.success());
+    yield put(constants.updateConfirmationMessage.success());
     yield put(closeModalDialog());
   } catch (error) {
     const errorMessage = `${translate(
