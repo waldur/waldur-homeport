@@ -15,6 +15,7 @@ import { updateEntity } from '@waldur/table/actions';
 import {
   getCustomer,
   getUser,
+  isOwnerOrStaff as isOwnerOrStaffSelector,
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
 
@@ -227,6 +228,7 @@ function* addOfferingLocation(action: Action<any>) {
     yield call(api.updateOffering, offering.uuid, offering);
     const customer = yield select(getCustomer);
     const isServiceManager = yield select(isServiceManagerSelector);
+    const isOwnerOrStaff = yield select(isOwnerOrStaffSelector);
     const user = yield select(getUser);
     const formData = yield select(
       getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID),
@@ -234,7 +236,7 @@ function* addOfferingLocation(action: Action<any>) {
     yield put(
       updatePublicOfferingsList(
         customer,
-        isServiceManager,
+        isServiceManager && !isOwnerOrStaff,
         user,
         formData.state,
       ),
