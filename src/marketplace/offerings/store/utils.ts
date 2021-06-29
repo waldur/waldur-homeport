@@ -228,7 +228,7 @@ export const formatOfferingRequest = (
 
 export const updatePublicOfferingsList = (
   customer: Customer,
-  isServiceManager: boolean,
+  shouldFilterByServiceManagerUuid: boolean,
   user: User,
   state: { value: string }[],
 ) =>
@@ -237,5 +237,7 @@ export const updatePublicOfferingsList = (
     shared: true,
     customer_uuid: customer.uuid,
     state: state.map((option) => option.value),
-    service_manager_uuid: isServiceManager ? user.uuid : undefined,
+    service_manager_uuid: shouldFilterByServiceManagerUuid
+      ? user.uuid
+      : undefined,
   });
