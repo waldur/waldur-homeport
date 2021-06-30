@@ -365,6 +365,37 @@ function* updateAccessPolicy(action: Action<any>) {
   }
 }
 
+function* updateOfferingLogo(action: Action<any>) {
+  const { offeringUuid, formData } = action.payload;
+  try {
+    yield call(api.updateOfferingLogo, offeringUuid, formData);
+    const customer = yield select(getCustomer);
+    const isServiceManager = yield select(isServiceManagerSelector);
+    const isOwnerOrStaff = yield select(isOwnerOrStaffSelector);
+    const user = yield select(getUser);
+    const filterFormData = yield select(
+      getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID),
+    );
+    yield put(
+      updatePublicOfferingsList(
+        customer,
+        isServiceManager && !isOwnerOrStaff,
+        user,
+        filterFormData.state,
+      ),
+    );
+    yield put(showSuccess(translate('Logo has been updated successfully.')));
+    yield put(constants.updateOfferingLogo.success());
+    yield put(closeModalDialog());
+  } catch (error) {
+    const errorMessage = `${translate('Unable to update logo.')} ${format(
+      error,
+    )}`;
+    yield put(showError(errorMessage));
+    yield put(constants.updateOfferingLogo.failure());
+  }
+}
+
 export default function* () {
   yield takeEvery(constants.REMOVE_OFFERING_COMPONENT, removeOfferingComponent);
   yield takeEvery(constants.REMOVE_OFFERING_QUOTAS, removeOfferingQuotas);
@@ -385,4 +416,5 @@ export default function* () {
     updateConfirmationMessage,
   );
   yield takeEvery(constants.setAccessPolicy.REQUEST, updateAccessPolicy);
+  yield takeEvery(constants.updateOfferingLogo.REQUEST, updateOfferingLogo);
 }
