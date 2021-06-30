@@ -10,9 +10,10 @@ import { InvitationService } from '../InvitationService';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 
-export const InvitationCancelButton: FunctionComponent<{ invitation }> = ({
-  invitation,
-}) => {
+export const InvitationCancelButton: FunctionComponent<{
+  invitation;
+  refreshList;
+}> = ({ invitation, refreshList }) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
@@ -21,6 +22,7 @@ export const InvitationCancelButton: FunctionComponent<{ invitation }> = ({
     try {
       await InvitationService.cancel(invitation.uuid);
       dispatch(showSuccess(translate('Invitation has been canceled.')));
+      refreshList();
     } catch (e) {
       dispatch(showError(translate('Unable to cancel invitation.')));
     }
