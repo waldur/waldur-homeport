@@ -4,11 +4,11 @@ import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
-import { IssuesList } from '@waldur/issues/list/IssuesList';
 import { ResourceUsageTabsContainer } from '@waldur/marketplace/resources/usage/ResourceUsageTabsContainer';
 
 import { ResourceOrderItems } from '../orders/item/list/ResourceOrderItems';
 
+import { ResourceIssuesTab } from './ResourceIssuesTab';
 import { Resource } from './types';
 
 export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => (
@@ -25,9 +25,7 @@ export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => (
     </Tab>
     {isFeatureVisible('support') && resource.scope && (
       <Tab eventKey="issues" title={translate('Issues')}>
-        <PanelBody>
-          <IssuesList filter={{ resource: resource.scope }} />
-        </PanelBody>
+        <ResourceIssuesTab resource={resource} />
       </Tab>
     )}
     {resource.attributes.schedules && (
