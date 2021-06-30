@@ -1,5 +1,5 @@
+import { ComponentType } from 'react';
 import { Omit } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import { BaseResource } from '@waldur/resource/types';
 import { User } from '@waldur/workspace/types';
@@ -39,38 +39,17 @@ export type ActionField<Resource = BaseResource> =
   | IntegerField<Resource>
   | ComponentField<Resource>;
 
-type ActionType = 'button' | 'form' | 'callback';
-
-type ActionMethod = 'POST' | 'PUT' | 'DELETE';
-
 export type ActionValidator<Resource> = (
   ctx: ActionContext<Resource>,
 ) => string;
-
-export interface ResourceAction<Resource = BaseResource> {
-  name: string;
-  title: string;
-  dialogTitle?: string;
-  getDialogTitle?(resource: Resource): string;
-  dialogSubtitle?: string;
-  tab?: string;
-  iconClass?: string;
-  type?: ActionType;
-  successMessage?: string;
-  onSuccess?: () => void;
-  method?: ActionMethod;
-  destructive?: boolean;
-  validators?: Array<ActionValidator<Resource>>;
-  dialogSize?: 'lg' | 'xl';
-  component?: React.ComponentType<any>;
-  isVisible?: boolean;
-  serializer?(form): object;
-  execute?(resource): void;
-  submitForm?(dispatch: Dispatch<any>, formData: any);
-  formId?: string;
-}
 
 export interface ActionContext<Resource = BaseResource> {
   resource: Resource;
   user: User;
 }
+
+export type ActionItem = ComponentType<{
+  resource;
+  reInitResource;
+  refreshList?;
+}>;

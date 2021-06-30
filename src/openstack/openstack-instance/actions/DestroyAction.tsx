@@ -30,7 +30,7 @@ export const DestroyAction = ({ resource }) => (
   <DialogActionItem
     title={translate('Destroy')}
     validators={validators}
-    className="remove"
+    className="text-danger"
     resource={resource}
     modalComponent={DestroyDialog}
   />

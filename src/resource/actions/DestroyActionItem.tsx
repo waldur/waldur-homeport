@@ -63,7 +63,7 @@ export const DestroyActionItem: <T extends { uuid: string }>(
     <ActionItem
       title={translate('Destroy')}
       action={callback}
-      className="remove"
+      className="text-danger"
       {...validationState}
     />
   );
