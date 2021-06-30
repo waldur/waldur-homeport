@@ -713,6 +713,10 @@ msgstr ""
 msgid "Are you sure you want to select template? Note this will reset the node plan."
 msgstr ""
 
+#: src/resource/actions/UnlinkActionItem.tsx
+msgid "Are you sure you want to unlink {name} {resourceType}?"
+msgstr ""
+
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
 msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
 msgstr ""
@@ -6675,6 +6679,10 @@ msgstr ""
 msgid "Resource group"
 msgstr ""
 
+#: src/resource/actions/UnlinkActionItem.tsx
+msgid "Resource has been unlinked."
+msgstr ""
+
 #: src/resource/state/utils.ts
 msgid "Resource is in sync"
 msgstr ""
@@ -9356,6 +9364,10 @@ msgstr ""
 msgid "Unable to unlink invoice from the payment."
 msgstr ""
 
+#: src/resource/actions/UnlinkActionItem.tsx
+msgid "Unable to unlink resource."
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to unpublish Google Calendar."
 msgstr ""
@@ -9520,12 +9532,20 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
+#: src/resource/actions/UnlinkActionItem.tsx
+msgid "Unlink"
+msgstr ""
+
 #: src/rancher/node/actions/UnlinkAction.tsx
 msgid "Unlink instance"
 msgstr ""
 
 #: src/customer/payments/PaymentActions.tsx
 msgid "Unlink invoice"
+msgstr ""
+
+#: src/resource/actions/UnlinkActionItem.tsx
+msgid "Unlink resource"
 msgstr ""
 
 #: src/paypal/InvoicesFilter.tsx

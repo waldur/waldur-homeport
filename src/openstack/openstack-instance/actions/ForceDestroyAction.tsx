@@ -27,7 +27,7 @@ export const ForceDestroyAction = ({ resource }) => (
     title={translate('Force destroy')}
     validators={validators}
     modalComponent={ForceDestroyDialog}
-    className="remove"
+    className="text-danger"
     resource={resource}
   />
 );

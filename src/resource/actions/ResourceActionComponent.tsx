@@ -1,7 +1,9 @@
-import { ComponentType, FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+
+import { ActionItem } from './types';
 
 interface ResourceActionComponentProps {
   onToggle: (isOpen: boolean) => void;
@@ -9,7 +11,7 @@ interface ResourceActionComponentProps {
   open?: boolean;
   loading?: boolean;
   error?: object;
-  actions: ComponentType<{ resource; reInitResource; refreshList? }>[];
+  actions: ActionItem[];
   resource: any;
   reInitResource?(): void;
   refreshList?(): void;
