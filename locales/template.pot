@@ -276,6 +276,10 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "Add PI"
+msgstr ""
+
 #: src/user/keys/KeyCreateForm.tsx
 msgid "Add SSH key"
 msgstr ""
@@ -304,6 +308,10 @@ msgstr ""
 
 #: src/marketplace-script/EnvironmentVariableAddButton.tsx
 msgid "Add environment variable"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Add guest"
 msgstr ""
 
 #: src/marketplace/offerings/images/CreateImageButton.tsx
@@ -1354,6 +1362,14 @@ msgstr ""
 msgid "Cluster roles"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "Co-PI"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Co-PI cannot edit users with same role"
+msgstr ""
+
 #: src/marketplace/offerings/utils.ts
 msgid "Code is too short."
 msgstr ""
@@ -2322,6 +2338,10 @@ msgstr ""
 msgid "Edit end date of {resourceName}"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "Edit guest"
+msgstr ""
+
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
 msgid "Edit offering"
 msgstr ""
@@ -3021,6 +3041,10 @@ msgstr ""
 
 #: src/openstack/openstack-snapshot/EditDialog.tsx
 msgid "Guaranteed time of volume snapshot retention. If null - keep forever."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Guest"
 msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -3962,6 +3986,7 @@ msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/customer/team/CustomerUsersList.tsx
+#: src/i18n/constants.ts
 #: src/project/team/ProjectUsersList.tsx
 msgid "Member"
 msgstr ""
@@ -4687,6 +4712,10 @@ msgstr ""
 msgid "One-time on plan switch"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "Only PI or staff can invite users."
+msgstr ""
+
 #: src/invoices/list/MarkAsPaidButton.tsx
 msgid "Only a created invoice can be marked as paid."
 msgstr ""
@@ -5086,6 +5115,14 @@ msgstr ""
 
 #: src/table/TableExportButton.tsx
 msgid "PDF"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "PI"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "PI role expires on"
 msgstr ""
 
 #: src/marketplace/referral/ReferralsList.tsx
@@ -9783,6 +9820,18 @@ msgstr ""
 msgid "User {user_link} authenticated successfully with username and password."
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "User {user_link} has granted Co-PI role in project {project_link} to {affected_user_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {user_link} has granted PI role in {customer_link} to {affected_user_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {user_link} has granted member role in project {project_link} to {affected_user_link}."
+msgstr ""
+
 #: src/project/team/events.ts
 msgid "User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}."
 msgstr ""
@@ -9801,6 +9850,18 @@ msgstr ""
 
 #: src/project/team/events.ts
 msgid "User {user_link} has granted role to {affected_user_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {user_link} has revoked Co-PI  {affected_user_link} from project {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {user_link} has revoked PI {affected_user_link} from {customer_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {user_link} has revoked member {affected_user_link} from project {project_link}."
 msgstr ""
 
 #: src/project/team/events.ts
@@ -10200,6 +10261,10 @@ msgstr ""
 
 #: src/customer/team/OwnerGroup.tsx
 msgid "You cannot change your own role."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "You cannot manage other PI"
 msgstr ""
 
 #: src/customer/team/OwnerGroup.tsx
