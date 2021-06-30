@@ -335,3 +335,12 @@ export const updateOfferingAccessPolicy = (
   post(`/marketplace-offerings/${offeringUuid}/update_divisions/`, {
     divisions,
   });
+
+export const updateOfferingLogo = (offeringUuid: string, formData) =>
+  sendForm(
+    'POST',
+    `${ENV.apiEndpoint}api/marketplace-offerings/${offeringUuid}/update_thumbnail/`,
+    {
+      thumbnail: formData.images,
+    },
+  );

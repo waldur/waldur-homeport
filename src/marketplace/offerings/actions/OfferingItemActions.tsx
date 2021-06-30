@@ -69,6 +69,13 @@ const SetAccessPolicyDialog = lazyComponent(
     ),
   'SetAccessPolicyDialog',
 );
+const UpdateOfferingLogoDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "UpdateOfferingLogoDialog" */ './UpdateOfferingLogoDialog'
+    ),
+  'UpdateOfferingLogoDialog',
+);
 
 interface OwnProps {
   offering: Offering;
@@ -140,6 +147,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setAccessPolicy: (offering: Offering) =>
     dispatch(
       openModalDialog(SetAccessPolicyDialog, {
+        resolve: { offering },
+      }),
+    ),
+  updateLogo: (offering: Offering) =>
+    dispatch(
+      openModalDialog(UpdateOfferingLogoDialog, {
         resolve: { offering },
       }),
     ),
@@ -242,6 +255,14 @@ const mergeProps = (
       label: translate('Set access policy'),
       handler: () => dispatchProps.setAccessPolicy(ownProps.offering),
       visible: isVisible(ownProps.offering.state, stateProps.user.is_staff),
+    },
+    {
+      label: translate('Update logo'),
+      handler: () => dispatchProps.updateLogo(ownProps.offering),
+      visible:
+        stateProps.user.is_staff ||
+        ([DRAFT, ACTIVE, PAUSED].includes(ownProps.offering.state) &&
+          (stateProps.isOwner || stateProps.isServiceManager)),
     },
   ].filter((offering) => offering.visible),
 });

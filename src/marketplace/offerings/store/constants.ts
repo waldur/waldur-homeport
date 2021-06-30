@@ -64,3 +64,7 @@ export const updateConfirmationMessage = createFormAction(
 export const setAccessPolicy = createFormAction(
   'waldur/marketplace/offering/SET_ACCESS_POLICY',
 );
+
+export const updateOfferingLogo = createFormAction(
+  'waldur/marketplace/offering/UPDATE_OFFERING_LOGO',
+);

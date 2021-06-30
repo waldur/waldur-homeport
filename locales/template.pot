@@ -1066,6 +1066,7 @@ msgstr ""
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/invoices/list/MarkAsPaidDialog.tsx
+#: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 msgid "Browse"
@@ -3221,6 +3222,7 @@ msgstr ""
 msgid "Image name"
 msgstr ""
 
+#: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 msgid "Image:"
 msgstr ""
@@ -3838,8 +3840,16 @@ msgstr ""
 msgid "Logo has been removed."
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Logo has been updated successfully."
+msgstr ""
+
 #: src/customer/details/store/effects.ts
 msgid "Logo has been uploaded."
+msgstr ""
+
+#: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
+msgid "Logo here"
 msgstr ""
 
 #: src/auth/callbacks/AuthLogoutFailed.tsx
@@ -7000,6 +7010,7 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
+#: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/expandable/utils.ts
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
@@ -9404,6 +9415,10 @@ msgstr ""
 msgid "Unable to update internal IPs of OpenStack instance."
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to update logo."
+msgstr ""
+
 #: src/openstack/openstack-network/actions/SetMtuDialog.tsx
 msgid "Unable to update network MTU."
 msgstr ""
@@ -9588,6 +9603,10 @@ msgstr ""
 msgid "Update horizontal pod autoscaler"
 msgstr ""
 
+#: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
+msgid "Update image for {offeringName}"
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/update-internal-ips/UpdateInternalIpsForm.tsx
 msgid "Update internal IPs for OpenStack instance {name}"
 msgstr ""
@@ -9598,6 +9617,10 @@ msgstr ""
 
 #: src/map/SetLocationDialog.tsx
 msgid "Update location"
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Update logo"
 msgstr ""
 
 #: src/user/hooks/HookDetailsDialog.tsx
