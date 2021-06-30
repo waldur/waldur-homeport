@@ -7,9 +7,9 @@ import {
 import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { Customer } from '@waldur/workspace/types';
 
 import { CivilNumberGroup } from './CivilNumberGroup';
 import { EmailGroup } from './EmailGroup';
@@ -18,10 +18,11 @@ import { LoadUserDetailsButton } from './LoadUserDetailsButton';
 import { ProjectGroup } from './ProjectGroup';
 import { RoleGroup } from './RoleGroup';
 import { TaxNumberGroup } from './TaxNumberGroup';
+import { InvitationContext } from './types';
 import { UserDetailsGroup } from './UserDetailsGroup';
 
 interface OwnProps {
-  resolve: { context: { customer: Customer } };
+  resolve: { context: InvitationContext };
 }
 
 export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
@@ -44,7 +45,9 @@ export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
       </ModalHeader>
       <ModalBody>
         <EmailGroup disabled={disabled} />
-        <CivilNumberGroup disabled={disabled} />
+        {isFeatureVisible('invitations.concealCivilNumber') ? null : (
+          <CivilNumberGroup disabled={disabled} />
+        )}
         <TaxNumberGroup disabled={disabled} />
         <LoadUserDetailsButton
           loading={disabled}

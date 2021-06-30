@@ -57,13 +57,16 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => (
             <>
               <InvitationSendButton invitation={row} />
-              <InvitationCancelButton invitation={row} />
+              <InvitationCancelButton
+                invitation={row}
+                refreshList={props.fetch}
+              />
             </>
           ),
         },
       ]}
       verboseName={translate('team invitations')}
-      actions={<InvitationCreateButton />}
+      actions={<InvitationCreateButton refreshList={props.fetch} />}
       hasQuery={true}
       expandableRow={InvitationExpandableRow}
     />

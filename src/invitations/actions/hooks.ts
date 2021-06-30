@@ -25,6 +25,7 @@ import {
   taxNumberSelector,
   roleSelector,
 } from './selectors';
+import { InvitationContext } from './types';
 
 const getRoles = (context) => {
   const roles = [
@@ -56,7 +57,7 @@ const getRoles = (context) => {
   );
 };
 
-export const useInvitationCreateDialog = (context) => {
+export const useInvitationCreateDialog = (context: InvitationContext) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -100,6 +101,9 @@ export const useInvitationCreateDialog = (context) => {
         dispatch(closeModalDialog());
         router.stateService.go('organization.team');
         dispatch(showSuccess('Invitation has been created.'));
+        if (context.refreshList) {
+          context.refreshList();
+        }
       } catch (e) {
         dispatch(showError('Unable to create invitation.'));
       }
