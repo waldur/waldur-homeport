@@ -70,20 +70,6 @@ const getQuotas = (hidden: boolean): QuotaList => [
     title: translate('Cloud block storage size'),
     tooltipValueFormatter: formatFilesize,
   },
-  {
-    key: 'nc_cpu_count',
-    title: translate('Batch vCPU'),
-  },
-  {
-    key: 'nc_ram_size',
-    title: translate('Batch RAM'),
-    tooltipValueFormatter: formatFilesize,
-  },
-  {
-    key: 'nc_storage_size',
-    title: translate('Batch block storage size'),
-    tooltipValueFormatter: formatFilesize,
-  },
 ];
 
 const calculateTotal = (data) =>
@@ -107,7 +93,6 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
   const quotas = getQuotas(shouldConcealPrices).filter(
     (quota) => !quota.hidden,
   );
-  const keys = quotas.map((q) => q.key);
   let tooltipValueFormatter;
 
   if (props.quota) {
@@ -116,13 +101,13 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
   }
 
   const { loading, error, value: data } = useAsync(
-    () => loadData(props.accounting_is_running),
-    [props.accounting_is_running],
+    () => loadData(props.quota?.key),
+    [props.quota],
   );
-  const chartData = data ? parseProjects(data, keys) : {};
+  const chartData = data ? parseProjects(data) : [];
   let total = 0;
   if (props.quota && data) {
-    total = calculateTotal(chartData[props.quota.key]);
+    total = calculateTotal(chartData);
   }
   return (
     <>
@@ -136,7 +121,7 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
           title={props.translate('Resource usage')}
           width="100%"
           height={500}
-          data={chartData[props.quota.key]}
+          data={chartData}
           tooltipValueFormatter={tooltipValueFormatter}
         />
       )}
