@@ -14,7 +14,7 @@ export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps
   row,
   refreshList,
 }) =>
-  row.scope === null ? (
+  row.scope === null || row.offering_type === 'Support.OfferingTemplate' ? (
     <BaseResourceActionsButton
       resource={
         {
