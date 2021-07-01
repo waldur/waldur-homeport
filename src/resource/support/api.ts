@@ -1,78 +1,43 @@
 import { getAll } from '@waldur/core/api';
-import { TreemapData } from '@waldur/resource/support/types';
-import { Project } from '@waldur/workspace/types';
 
-export interface QuotasMap {
-  [key: string]: TreemapData;
-}
+import { ProjectQuota, TreemapData } from './types';
 
-export function parseProjects(projects: Project[], quotaNames) {
+export function parseProjects(projectQuotas: ProjectQuota[]): TreemapData {
   const customers = {};
 
-  for (const project of projects) {
-    const quotas = {};
-    if (project.quotas) {
-      for (const quota of project.quotas) {
-        quotas[quota.name] = quota.usage;
-      }
-    }
-    let currentPrice = 0;
-    let estimatedPrice = 0;
-
-    if (project.billing_price_estimate) {
-      currentPrice = parseFloat(project.billing_price_estimate.current);
-      estimatedPrice = parseFloat(project.billing_price_estimate.total);
-    }
-
-    quotas['current_price'] = currentPrice;
-
-    quotas['estimated_price'] = estimatedPrice;
-
+  for (const project of projectQuotas) {
     const name = project.customer_abbreviation || project.customer_name;
     if (!customers[name]) {
       customers[name] = {};
     }
-    customers[name][project.name] = quotas;
+    customers[name][project.project_name] = project.value;
   }
 
-  const quotaTrees = {};
-  for (const quotaName of quotaNames) {
-    const tree = (quotaTrees[quotaName] = []);
-
-    for (const customer of Object.keys(customers)) {
-      const customerProjects = customers[customer];
-      let total = 0;
-      const children = [];
-      for (const project of Object.keys(customerProjects)) {
-        const quotas = customerProjects[project];
-        const value = quotas[quotaName];
-        total += value;
-        children.push({
-          name: project,
-          path: `${customer}/${project}`,
-          value,
-        });
-      }
-      tree.push({
-        name: customer,
-        path: customer,
-        value: total,
-        children,
+  const tree = [];
+  for (const customer of Object.keys(customers)) {
+    const customerProjects = customers[customer];
+    let total = 0;
+    const children = [];
+    for (const project of Object.keys(customerProjects)) {
+      const value = customerProjects[project];
+      total += value;
+      children.push({
+        name: project,
+        path: `${customer}/${project}`,
+        value,
       });
     }
+    tree.push({
+      name: customer,
+      path: customer,
+      value: total,
+      children,
+    });
   }
-  return quotaTrees;
+  return tree;
 }
 
-export const loadData = (accounting_is_running: boolean) => {
-  const field = [
-    'name',
-    'customer_name',
-    'customer_abbreviation',
-    'quotas',
-    'billing_price_estimate',
-  ];
-  return getAll<Project>('/projects/', {
-    params: { field, accounting_is_running },
+export const loadData = (quota_name: string) =>
+  getAll<ProjectQuota>('/project-quotas/', {
+    params: { quota_name },
   });
-};

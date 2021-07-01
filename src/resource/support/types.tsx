@@ -15,3 +15,14 @@ export interface QuotaChoice {
 }
 
 export type QuotaList = QuotaChoice[];
+
+export interface ProjectQuota {
+  project_name: string;
+  customer_name: string;
+  customer_abbreviation: string;
+  value: number;
+}
+
+export interface QuotasMap {
+  [key: string]: TreemapData;
+}
