@@ -139,25 +139,6 @@ export const truncate = (fullStr: string, strLen = 30, separator = '...') => {
   );
 };
 
-function getPrettyQuotaName(name) {
-  return name.replace(/nc_|_count/g, '').replace(/_/g, ' ');
-}
-
-export function isCustomerQuotaReached(customer, quotaName) {
-  const quotas = customer.quotas || [];
-  for (const quota of quotas) {
-    const name = getPrettyQuotaName(quota.name);
-    if (
-      name === quotaName &&
-      quota.limit > -1 &&
-      (quota.limit === quota.usage || quota.limit === 0)
-    ) {
-      return { name, usage: [quota.limit, quota.usage] };
-    }
-  }
-  return false;
-}
-
 export function returnReactSelectAsyncPaginateObject<T = {}>(
   response: { options: T[]; totalItems: number },
   prevOptions,
