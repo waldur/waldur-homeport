@@ -1,11 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { isCustomerQuotaReached } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n/translate';
 import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
-import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
+import { isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 import { gotoProjectCreate } from './actions';
 
@@ -21,7 +20,6 @@ const PureProjectCreateButton: FunctionComponent<any> = (props) => (
 
 const mapStateToProps = (state: RootState) => {
   const ownerOrStaff = isOwnerOrStaff(state);
-  const customer = getCustomer(state);
 
   if (!ownerOrStaff) {
     return {
@@ -29,11 +27,6 @@ const mapStateToProps = (state: RootState) => {
       tooltip: translate(
         "You don't have enough privileges to perform this operation.",
       ),
-    };
-  } else if (isCustomerQuotaReached(customer, 'project')) {
-    return {
-      disabled: true,
-      tooltip: translate('Quota has been reached.'),
     };
   } else {
     return {
