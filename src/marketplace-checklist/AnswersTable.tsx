@@ -34,7 +34,7 @@ const QuestionGroup: FunctionComponent<{
       )}
     {question.image ? (
       <p>
-        <br/>
+        <br />
         <img style={{ maxWidth: '100%' }} src={question.image} />
       </p>
     ) : null}
