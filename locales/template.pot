@@ -314,10 +314,6 @@ msgstr ""
 msgid "Add environment variable"
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "Add guest"
-msgstr ""
-
 #: src/marketplace/offerings/images/CreateImageButton.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 msgid "Add image"
@@ -980,20 +976,8 @@ msgstr ""
 msgid "Base image name"
 msgstr ""
 
-#: src/resource/support/ResourcesTreemap.tsx
-msgid "Batch RAM"
-msgstr ""
-
-#: src/resource/support/ResourcesTreemap.tsx
-msgid "Batch block storage size"
-msgstr ""
-
 #: src/slurm/details/SubmitWithField.tsx
 msgid "Batch processing documentation"
-msgstr ""
-
-#: src/resource/support/ResourcesTreemap.tsx
-msgid "Batch vCPU"
 msgstr ""
 
 #: src/customer/create/CustomerCreatePrompt.tsx
@@ -2345,10 +2329,6 @@ msgstr ""
 
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 msgid "Edit end date of {resourceName}"
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "Edit guest"
 msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
@@ -6075,7 +6055,6 @@ msgid "Question"
 msgstr ""
 
 #: src/error/InvalidQuotaPage.tsx
-#: src/project/ProjectCreateButton.tsx
 msgid "Quota has been reached."
 msgstr ""
 

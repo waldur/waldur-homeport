@@ -70,7 +70,5 @@ export const DOMAIN_MESSAGES = {
     'User {user_link} has revoked project administrator {affected_user_link} from project {project_link}.': gettext(
       'User {user_link} has revoked member {affected_user_link} from project {project_link}.',
     ),
-    'Edit project member': gettext('Edit guest'),
-    'Add project member': gettext('Add guest'),
   },
 };
