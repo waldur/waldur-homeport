@@ -1,9 +1,13 @@
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { validateStaffAction } from '@waldur/marketplace/resources/actions/utils';
 import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
+import {
+  isOwnerOrStaff as isOwnerOrStaffSelector,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
 
 const SetBackendIdDialog = lazyComponent(
   () =>
@@ -11,14 +15,18 @@ const SetBackendIdDialog = lazyComponent(
   'SetBackendIdDialog',
 );
 
-const validators = [validateStaffAction];
-
-export const SetBackendIdButton: FC<any> = ({ resource, reInitResource }) => (
-  <DialogActionButton
-    validators={validators}
-    title={translate('Set backend ID')}
-    modalComponent={SetBackendIdDialog}
-    extraResolve={{ reInitResource }}
-    resource={resource}
-  />
-);
+export const SetBackendIdButton: FC<any> = ({ resource, reInitResource }) => {
+  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  const isServiceManager = useSelector(isServiceManagerSelector);
+  if (!isOwnerOrStaff && !isServiceManager) {
+    return null;
+  }
+  return (
+    <DialogActionButton
+      title={translate('Set backend ID')}
+      modalComponent={SetBackendIdDialog}
+      extraResolve={{ reInitResource }}
+      resource={resource}
+    />
+  );
+};
