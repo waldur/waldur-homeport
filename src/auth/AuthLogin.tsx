@@ -26,7 +26,7 @@ export const AuthLogin: FunctionComponent = () => {
   return (
     <>
       <CookiesConsent />
-      <div className="middle-box text-center loginscreen footer-indent">
+      <div className="middle-box text-center loginscreen">
         <AuthHeader />
         {features.SigninForm && <SigninForm />}
         {features.SignupForm && <SignupForm />}
