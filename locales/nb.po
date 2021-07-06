@@ -560,17 +560,8 @@ msgstr "Bank navn"
 msgid "Base image name"
 msgstr "Navn på basisbilde"
 
-msgid "Batch RAM"
-msgstr "Batch RAM"
-
-msgid "Batch block storage size"
-msgstr "Lagringsstørrelse for batch blokk"
-
 msgid "Batch processing documentation"
 msgstr "Dokumentasjon for batchbehandling"
-
-msgid "Batch vCPU"
-msgstr "Batch vCPU"
 
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr "Bli kunde av vår portal. Klargjør IT-tjenester fra Marketplace og administrer teamet ditt fra ett sted."

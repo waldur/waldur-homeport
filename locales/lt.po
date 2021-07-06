@@ -560,17 +560,8 @@ msgstr "Banko pavadinimas"
 msgid "Base image name"
 msgstr "Bazinio vaizdo pavadinimas"
 
-msgid "Batch RAM"
-msgstr "Paketinė RAM"
-
-msgid "Batch block storage size"
-msgstr "Paketo bloko saugyklos dydis"
-
 msgid "Batch processing documentation"
 msgstr "Paketinio apdorojimo dokumentacija"
-
-msgid "Batch vCPU"
-msgstr "Paketas vCPU"
 
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr "Tapkite mūsų portalo klientu. Teikite IT paslaugas iš Marketplace ir valdykite savo komandą iš vienos vietos."

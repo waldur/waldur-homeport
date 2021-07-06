@@ -560,17 +560,8 @@ msgstr "Název banky"
 msgid "Base image name"
 msgstr "Název základního obrázku"
 
-msgid "Batch RAM"
-msgstr "Dávková paměť RAM"
-
-msgid "Batch block storage size"
-msgstr "Velikost bloku dávkového uložiště"
-
 msgid "Batch processing documentation"
 msgstr "Dokumentace pro dávkové zpracování"
-
-msgid "Batch vCPU"
-msgstr "Dávkové vCPU"
 
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr "Staňte se zákazníkem našeho portálu. Poskytujte IT služby z Marketplace a spravujte svůj tým z jednoho místa."

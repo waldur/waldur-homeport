@@ -215,17 +215,8 @@ msgstr "Bank hesabı"
 msgid "Bank name"
 msgstr "Bankın adı"
 
-msgid "Batch RAM"
-msgstr "Qrup RAM (əməliyyat yaddaşı)"
-
-msgid "Batch block storage size"
-msgstr "Qrup blok saxlama ölçüsü"
-
 msgid "Batch processing documentation"
 msgstr "Qrup emalı sənədləşməsi "
-
-msgid "Batch vCPU"
-msgstr "Qrup virtual Mərkəzi prosessoru "
 
 msgid "Billing"
 msgstr "Billinq"

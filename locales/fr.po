@@ -560,17 +560,8 @@ msgstr "Nom de la banque"
 msgid "Base image name"
 msgstr "Nom de l'image de base"
 
-msgid "Batch RAM"
-msgstr "RAM par lots"
-
-msgid "Batch block storage size"
-msgstr "Taille de stockage par blocs de lots"
-
 msgid "Batch processing documentation"
 msgstr "Documentation sur le traitement par lots"
-
-msgid "Batch vCPU"
-msgstr "vCPU par lots"
 
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr "Become a client of our portal. Provide IT services from the Marketplace and manage your team from one place."

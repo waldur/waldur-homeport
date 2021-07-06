@@ -422,17 +422,8 @@ msgstr "نام بانک"
 msgid "Base image name"
 msgstr "نام تصویر پایه"
 
-msgid "Batch RAM"
-msgstr "RAM دسته ای"
-
-msgid "Batch block storage size"
-msgstr "حجم ذخیره سازی دسته ای بلوک"
-
 msgid "Batch processing documentation"
 msgstr "اسناد پردازش دسته ای"
-
-msgid "Batch vCPU"
-msgstr "دسته vCPU"
 
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr "مشتری پرتال ما شوید.خدمات IT را از Marketplace ارائه دهید و تیم خود را از یک جا مدیریت کنید."

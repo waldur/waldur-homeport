@@ -458,17 +458,8 @@ msgstr "Pangakonto"
 msgid "Bank name"
 msgstr "Panga nimi"
 
-msgid "Batch RAM"
-msgstr "Maks. RAM"
-
-msgid "Batch block storage size"
-msgstr "Blokkseadme suurus"
-
 msgid "Batch processing documentation"
 msgstr "Pakktöötluse dokumentatsioon"
-
-msgid "Batch vCPU"
-msgstr "Maks vCPU-de arv"
 
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr "Saage meie portaali kliendiks. Pakkuge turuplatsilt IT-teenuseid ja hallake oma meeskonda ühest kohast."
