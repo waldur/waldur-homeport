@@ -60,6 +60,15 @@ export const isAddingOfferingImage = (isAdding: boolean) => {
   };
 };
 
+export const isUpdatingOffering = (isUpdating: boolean) => {
+  return {
+    type: constants.IS_UPDATING_OFFERING,
+    payload: {
+      isUpdating,
+    },
+  };
+};
+
 export const loadDataStart = () => ({
   type: constants.LOAD_DATA_START,
 });

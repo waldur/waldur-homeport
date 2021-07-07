@@ -41,6 +41,8 @@ const mapDispatchToProps = (dispatch) => ({
   loadOffering: (offeringUuid) =>
     dispatch(actions.loadOfferingStart(offeringUuid)),
   setStep: (step: OfferingStep) => dispatch(actions.setStep(step)),
+  setIsUpdatingOffering: (state: boolean) =>
+    dispatch(actions.isUpdatingOffering(state)),
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps, mergeProps);

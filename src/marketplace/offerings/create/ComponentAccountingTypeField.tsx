@@ -8,6 +8,7 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 interface ComponentAccountingTypeFieldProps {
   removeOfferingQuotas(): void;
+  disabled?: boolean;
 }
 
 export const getAccountingTypeOptions = () => [
@@ -41,6 +42,7 @@ export const ComponentAccountingTypeField: React.FC<ComponentAccountingTypeField
           onChange={(value) => fieldProps.input.onChange(value)}
           options={getAccountingTypeOptions()}
           isClearable={false}
+          isDisabled={props.disabled}
         />
       )}
     />

@@ -20,6 +20,8 @@ export const REMOVE_OFFERING_IMAGE =
   'waldur/marketplace/offering/REMOVE_OFFERING_IMAGE';
 export const IS_ADDING_OFFERING_IMAGE =
   'waldur/marketplace/offering/IS_ADDING_OFFERING_IMAGE';
+export const IS_UPDATING_OFFERING =
+  'waldur/marketplace/offering/IS_UPDATING_OFFERING';
 export const ADD_OFFERING_LOCATION =
   'waldur/marketplace/offering/ADD_OFFERING_LOCATION';
 

@@ -24,6 +24,7 @@ export interface OfferingComponent extends BaseComponent {
   factor?: number;
   is_boolean?: boolean;
   default_limit?: number;
+  article_code?: string;
 }
 
 export interface Plan {

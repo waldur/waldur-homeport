@@ -189,7 +189,7 @@ export const formatOfferingRequest = (
     result.attributes = formatAttributes(request.category, request.attributes);
   }
   const customComponents = request.components;
-  if (customComponents && builtinComponents.length === 0) {
+  if (customComponents) {
     // Serialize custom components only if there're no built-in components.
     result.components = formatComponents(customComponents);
   }
