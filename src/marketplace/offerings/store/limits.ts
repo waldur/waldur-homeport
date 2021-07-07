@@ -80,13 +80,15 @@ export const parseOfferingLimits = (offering: Offering): OfferingLimits => {
 
 export const getDefaults = (offering: Offering) => {
   const limits = parseOfferingLimits(offering);
-  return Object.keys(limits).reduce(
-    (rv, key) => ({
-      ...rv,
-      [key]: limits[key].min,
-    }),
-    {},
-  );
+  return Object.keys(limits)
+    .filter((key) => limits[key].min !== null)
+    .reduce(
+      (rv, key) => ({
+        ...rv,
+        [key]: limits[key].min,
+      }),
+      {},
+    );
 };
 
 export const getOfferingComponentValidator = (component: OfferingComponent) =>
