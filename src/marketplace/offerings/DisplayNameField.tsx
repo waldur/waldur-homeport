@@ -8,6 +8,7 @@ import { FormGroup } from './FormGroup';
 
 interface DisplayNameFieldProps {
   name: string;
+  disabled?: boolean;
 }
 
 export const DisplayNameField: FunctionComponent<DisplayNameFieldProps> = (
@@ -24,6 +25,7 @@ export const DisplayNameField: FunctionComponent<DisplayNameFieldProps> = (
       name={props.name}
       type="text"
       validate={required}
+      disabled={props.disabled}
     />
   </FormGroup>
 );

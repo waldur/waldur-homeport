@@ -57,7 +57,7 @@ export const parseAttributes = (category: Category, attributes) => {
   }, {});
 };
 
-const parseComponents = (components) => {
+export const parseComponents = (components) => {
   const options = getAccountingTypeOptions();
   const limitPeriods = getLimitPeriods();
   return components.map((component) => ({

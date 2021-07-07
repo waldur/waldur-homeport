@@ -8,6 +8,7 @@ import { FormGroupWithError } from './FormGroupWithError';
 
 interface InternalNameFieldProps {
   name: string;
+  disabled?: boolean;
 }
 
 const INTERNAL_NAME_PATTERN = new RegExp('^[a-zA-Z0-9_-]+$');
@@ -32,5 +33,6 @@ export const InternalNameField: FunctionComponent<InternalNameFieldProps> = (
       'Technical name intended for integration and automated reporting. Please use Latin letters without spaces only.',
     )}
     component={FormGroupWithError}
+    disabled={props.disabled}
   />
 );

@@ -16,6 +16,7 @@ interface AccountingStepProps {
   removeOfferingComponent(component: string): void;
   removeOfferingQuotas(component: string): void;
   builtinComponents: OfferingComponent[];
+  isUpdatingOffering: boolean;
 }
 
 export const AccountingStep: FunctionComponent<AccountingStepProps> = (props) =>
@@ -30,6 +31,8 @@ export const AccountingStep: FunctionComponent<AccountingStepProps> = (props) =>
           component={ComponentsList}
           removeOfferingComponent={props.removeOfferingComponent}
           removeOfferingQuotas={props.removeOfferingQuotas}
+          builtinComponents={props.builtinComponents}
+          isUpdatingOffering={props.isUpdatingOffering}
         />
       )}
       {props.showComponents && <hr />}

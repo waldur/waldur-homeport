@@ -25,6 +25,7 @@ interface OfferingUpdateDialogProps
   goBack(): void;
   goNext(): void;
   loadOffering(offeringUuid: string): void;
+  setIsUpdatingOffering(state: boolean): void;
 }
 
 export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = (
@@ -47,6 +48,7 @@ export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = (
       return;
     }
     props.loadOffering(offering_uuid);
+    props.setIsUpdatingOffering(true);
     props.setStep(STEPS[0]);
     getBreadcrumbs();
   }, [offering_uuid, router]);

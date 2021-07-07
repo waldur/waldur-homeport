@@ -1,8 +1,12 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { FormGroupWithError } from '@waldur/marketplace/offerings/FormGroupWithError';
+
+interface ComponentMeasuredUnitFieldProps {
+  disabled?: boolean;
+}
 
 const componentMeasuredUnitValidator = (value: string) => {
   if (!value) {
@@ -13,12 +17,15 @@ const componentMeasuredUnitValidator = (value: string) => {
   }
 };
 
-export const ComponentMeasuredUnitField: React.FC = () => (
+export const ComponentMeasuredUnitField: FunctionComponent<ComponentMeasuredUnitFieldProps> = ({
+  disabled,
+}) => (
   <Field
     className="form-control"
     label={translate('Measured unit')}
     name="measured_unit"
     validate={componentMeasuredUnitValidator}
     component={FormGroupWithError}
+    disabled={disabled}
   />
 );
