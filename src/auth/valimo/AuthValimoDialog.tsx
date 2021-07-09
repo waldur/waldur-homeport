@@ -1,3 +1,4 @@
+import delay from '@redux-saga/delay-p';
 import { useRouter } from '@uirouter/react';
 import { useState } from 'react';
 import {
@@ -25,7 +26,6 @@ import { AuthService } from '../AuthService';
 import { SubmitButton } from '../SubmitButton';
 
 import { getAuthResult, login } from './api';
-import delay from './delay';
 
 export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(
   ({ submitting, invalid, handleSubmit }) => {

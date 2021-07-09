@@ -1,6 +1,12 @@
 import { triggerTransition } from '@uirouter/redux';
-import { delay } from 'redux-saga';
-import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
+import {
+  call,
+  delay,
+  put,
+  select,
+  takeEvery,
+  takeLatest,
+} from 'redux-saga/effects';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { format } from '@waldur/core/ErrorMessageFormatter';
@@ -57,7 +63,7 @@ const formatItemToUpdate = (item) => ({
 
 function* initCart() {
   // Wait a little bit to avoid race conditions
-  yield call(delay, 500);
+  yield delay(500);
   const project = yield select(getProject);
   if (!project) {
     yield put(actions.setItems([]));

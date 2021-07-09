@@ -12,7 +12,7 @@ export const setupFixture = ({ state, action }) => {
     getState: () => state,
   };
   const updateProvider = () =>
-    runSaga(store, effects.handleUpdateProvider, action).done;
+    runSaga(store, effects.handleUpdateProvider, action).toPromise();
   const hasActionWithType = (type) =>
     dispatched.find((a) => a.type === type) !== undefined;
 
