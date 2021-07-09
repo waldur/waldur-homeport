@@ -7,7 +7,7 @@ export const setupFixture = (state = {}) => {
   const mockUpdateProject = jest.spyOn(api, 'updateProject');
   jest.spyOn(api, 'dangerouslyUpdateProject').mockReturnValue(null);
   const updateProject = (action) =>
-    runSaga(store, effects.handleUpdateProject, action).done;
+    runSaga(store, effects.handleUpdateProject, action).toPromise();
   const hasActionWithType = (type) =>
     dispatched.find((a) => a.type === type) !== undefined;
 
