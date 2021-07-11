@@ -112,7 +112,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
   componentDidMount() {
     if (this.props.initialSorting) {
       this.props.sortList(this.props.initialSorting);
-    } else if (!this.props.loading) {
+    } else {
       this.props.fetch();
     }
   }

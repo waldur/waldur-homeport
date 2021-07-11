@@ -1,5 +1,6 @@
 import Axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import Qs from 'qs';
+import { CANCEL } from 'redux-saga';
 
 import { ENV } from '@waldur/configs/default';
 import { getNextPageUrl, parseResultCount } from '@waldur/core/api';
@@ -37,13 +38,20 @@ export function createFetcher(
   options?: AxiosRequestConfig,
 ): Fetcher {
   return (request: TableRequest) => {
+    const source = Axios.CancelToken.source();
     const url = `${ENV.apiEndpoint}api/${endpoint}/`;
     const params = {
       page: request.currentPage,
       page_size: request.pageSize,
       ...request.filter,
     };
-    return parseResponse(url, params, options);
+    const axiosRequest = parseResponse(url, params, {
+      ...options,
+      cancelToken: source.token,
+    });
+    // See also: https://github.com/redux-saga/redux-saga/issues/651
+    axiosRequest[CANCEL] = () => source.cancel();
+    return axiosRequest;
   };
 }
 

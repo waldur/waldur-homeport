@@ -6,8 +6,10 @@ import {
   takeEvery,
   take,
   race,
+  cancelled,
 } from 'redux-saga/effects';
 
+import { takeLatestPerKey } from '@waldur/core/effects';
 import { orderByFilter } from '@waldur/core/utils';
 import { transformRows } from '@waldur/table/utils';
 
@@ -40,6 +42,8 @@ export function* fetchList(action) {
       request.filter.o = orderByFilter(state.sorting);
     }
 
+    // Debounce
+    yield delay(100);
     const { rows, resultCount } = yield call(options.fetchData, request);
     const { entities, order } = transformRows(rows);
     yield put(actions.fetchListDone(table, entities, order, resultCount));
@@ -65,11 +69,18 @@ export function* fetchList(action) {
       }
     }
   } catch (error) {
+    if (cancelled()) {
+      return;
+    }
     yield put(actions.fetchListError(table, error));
   }
 }
 
 export default function* watchFetchList() {
-  yield takeEvery(actions.FETCH_LIST_START, fetchList);
+  yield takeLatestPerKey(
+    actions.FETCH_LIST_START,
+    fetchList,
+    ({ payload: { table } }) => table,
+  );
   yield takeEvery(actions.EXPORT_TABLE_AS, exportTable);
 }
