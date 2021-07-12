@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { BackendHealthStatusIndicator } from '@waldur/navigation/BackendHealthStatusIndicator';
 import { getConfig } from '@waldur/store/config';
 
 export const AppFooter: FunctionComponent = () => {
@@ -33,6 +34,7 @@ export const AppFooter: FunctionComponent = () => {
         </ul>
       </div>
       <div>
+        <BackendHealthStatusIndicator />
         <>{translate('Version')}</>: {buildId}
       </div>
     </footer>
