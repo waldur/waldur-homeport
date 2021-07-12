@@ -947,6 +947,10 @@ msgstr ""
 msgid "Backend ID has been successfully set."
 msgstr ""
 
+#: src/navigation/BackendHealthStatusDialog.tsx
+msgid "Backend health status"
+msgstr ""
+
 #: src/resource/state/constants.ts
 msgid "Backing up"
 msgstr ""
@@ -1257,6 +1261,10 @@ msgstr ""
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
 #: src/azure/sql/DatabasesList.tsx
 msgid "Charset"
+msgstr ""
+
+#: src/navigation/BackendHealthStatusDialog.tsx
+msgid "Check name"
 msgstr ""
 
 #: src/marketplace-checklist/utils.ts
@@ -6168,6 +6176,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/orders/OrderDetails.tsx
 #: src/marketplace/resources/actions/ResourceActions.tsx
+#: src/navigation/BackendHealthStatusDialog.tsx
 #: src/resource/ResourceRefreshButton.tsx
 #: src/table/TableRefreshButton.tsx
 msgid "Refresh"
@@ -7802,6 +7811,7 @@ msgstr ""
 #: src/invitations/InvitationsList.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/navigation/BackendHealthStatusDialog.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -8908,6 +8918,14 @@ msgstr ""
 
 #: src/rancher/template/TemplateDetail.tsx
 msgid "Unable to load application template details."
+msgstr ""
+
+#: src/navigation/BackendHealthStatusIndicator.tsx
+msgid "Unable to load backend health status"
+msgstr ""
+
+#: src/navigation/BackendHealthStatusDialog.tsx
+msgid "Unable to load backend health status."
 msgstr ""
 
 #: src/form/CalendarField.tsx
