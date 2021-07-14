@@ -25,7 +25,9 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
     >
       {loading ? (
         <LoadingSpinner />
-      ) : value && typeof value.data === 'object' ? (
+      ) : value &&
+        value.headers &&
+        value.headers['content-type'] === 'application/json' ? (
         <>
           <div className="pull-right">
             <button className="btn btn-default btn-sm" onClick={reFetch}>
