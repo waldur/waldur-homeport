@@ -92,6 +92,7 @@ export const getInitialValues = (state: RootState) => {
     : undefined;
   return {
     name: offering.name,
+    backend_id: offering.backend_id,
     description: offering.description,
     full_description: offering.full_description,
     terms_of_service: offering.terms_of_service,

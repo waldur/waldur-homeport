@@ -116,4 +116,5 @@ registerOfferingType({
   onlyOnePlan: true,
   showComponents: true,
   offeringComponentsFilter,
+  allowToUpdateService: true,
 });

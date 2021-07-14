@@ -94,4 +94,5 @@ registerOfferingType({
   providerType: 'Rancher',
   attributes: ServiceSettingsAttributes,
   serializer,
+  allowToUpdateService: true,
 });

@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { FieldArray, FormSection } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
-import { FormContainer, SelectField } from '@waldur/form';
+import { FormContainer, SelectField, StringField } from '@waldur/form';
 import { StaticField } from '@waldur/form/StaticField';
 import { translate, TranslateProps } from '@waldur/i18n';
 import { Option } from '@waldur/marketplace/common/registry';
@@ -21,6 +21,8 @@ export interface ManagementStepProps extends TranslateProps {
   offeringTypes: Option[];
   editable: boolean;
   typeLabel?: string;
+  showBackendId?: boolean;
+  allowToUpdateService?: boolean;
   openServiceSettingsDetails(): void;
 }
 
@@ -60,7 +62,7 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
           container: ContainerProps,
         })}
       </FormSection>
-    ) : !props.showOptions && props.typeLabel ? (
+    ) : !props.showOptions && props.typeLabel && props.allowToUpdateService ? (
       <div className="form-group">
         <div className="col-sm-8 col-sm-offset-2">
           <Button onClick={props.openServiceSettingsDetails}>
@@ -75,16 +77,21 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
     {props.showOptions && (
       <FieldArray name="options" component={OfferingOptions} />
     )}
-    {props.pluginOptionsForm && (
-      <FormSection name="plugin_options">
-        {React.createElement(props.pluginOptionsForm, {
+    {props.secretOptionsForm && (
+      <FormSection name="secret_options">
+        {React.createElement(props.secretOptionsForm, {
           container: ContainerProps,
         })}
       </FormSection>
     )}
-    {props.secretOptionsForm && (
-      <FormSection name="secret_options">
-        {React.createElement(props.secretOptionsForm, {
+    {props.showBackendId && (
+      <FormContainer {...ContainerProps}>
+        <StringField name="backend_id" label={translate('Backend ID')} />
+      </FormContainer>
+    )}
+    {props.pluginOptionsForm && (
+      <FormSection name="plugin_options">
+        {React.createElement(props.pluginOptionsForm, {
           container: ContainerProps,
         })}
       </FormSection>

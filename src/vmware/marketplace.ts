@@ -51,4 +51,5 @@ registerOfferingType({
   serializer,
   limitSerializer,
   limitParser,
+  allowToUpdateService: true,
 });

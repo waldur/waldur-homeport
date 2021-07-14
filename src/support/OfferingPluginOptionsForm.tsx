@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Col, FormGroup, Row } from 'react-bootstrap';
 
 import { FormContainer } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
@@ -9,10 +10,18 @@ export const OfferingPluginOptionsForm: FunctionComponent<{ container }> = ({
 }) => {
   return (
     <FormContainer {...container}>
-      <AwesomeCheckboxField
-        name="auto_approve_in_service_provider_projects"
-        label={translate('Auto approve in service provider projects')}
-      />
+      <FormGroup>
+        <Col sm={2}></Col>
+        <Row>
+          <Col sm={8}>
+            <AwesomeCheckboxField
+              name="auto_approve_in_service_provider_projects"
+              label={translate('Auto approve in service provider projects')}
+              hideLabel={true}
+            />
+          </Col>
+        </Row>
+      </FormGroup>
     </FormContainer>
   );
 };

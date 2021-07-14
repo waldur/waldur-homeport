@@ -52,4 +52,5 @@ registerOfferingType({
   component: AllocationForm,
   providerType: 'SLURM',
   attributes: ServiceSettingsAttributes,
+  allowToUpdateService: true,
 });
