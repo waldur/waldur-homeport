@@ -25,9 +25,7 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
     >
       {loading ? (
         <LoadingSpinner />
-      ) : error ? (
-        <p>{translate('Unable to load backend health status.')}</p>
-      ) : value ? (
+      ) : value && typeof value.data === 'object' ? (
         <>
           <div className="pull-right">
             <button className="btn btn-default btn-sm" onClick={reFetch}>
@@ -58,6 +56,8 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
             </tbody>
           </table>
         </>
+      ) : error ? (
+        <p>{translate('Unable to load backend health status.')}</p>
       ) : null}
     </ModalDialog>
   );

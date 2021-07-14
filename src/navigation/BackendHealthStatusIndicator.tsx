@@ -42,14 +42,7 @@ export const PureBackendHealthStatusIndicator: FunctionComponent<any> = (
   const { value, error } = useAsync(getBackendHealthStatus, []);
   return (
     <span className="m-r-sm">
-      {error ? (
-        <Tooltip
-          label={translate('Unable to load backend health status')}
-          id="backend-status-tooltip"
-        >
-          <i className="fa fa-info-circle text-danger" />
-        </Tooltip>
-      ) : value ? (
+      {value && typeof value.data === 'object' ? (
         <a onClick={() => props.openDialog()}>
           {isWorking(value.data) ? (
             <i className="fa fa-check-circle text-success" />
@@ -57,6 +50,13 @@ export const PureBackendHealthStatusIndicator: FunctionComponent<any> = (
             <i className="fa fa-times-circle text-danger" />
           )}
         </a>
+      ) : error ? (
+        <Tooltip
+          label={translate('Unable to load backend health status')}
+          id="backend-status-tooltip"
+        >
+          <i className="fa fa-info-circle text-danger" />
+        </Tooltip>
       ) : null}
     </span>
   );
