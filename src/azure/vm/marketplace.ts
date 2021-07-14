@@ -33,4 +33,5 @@ registerOfferingType({
   detailsComponent: AzureVirtualMachineDetails,
   providerType: 'Azure',
   serializer,
+  allowToUpdateService: true,
 });

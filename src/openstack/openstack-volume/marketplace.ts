@@ -32,4 +32,5 @@ registerOfferingType({
   checkoutSummaryComponent: OpenstackVolumeCheckoutSummary,
   serializer,
   disableOfferingCreation: true,
+  allowToUpdateService: true,
 });

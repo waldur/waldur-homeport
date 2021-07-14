@@ -54,6 +54,7 @@ export interface OfferingFormData {
   service_settings?: any;
   thumbnail?: File;
   scope?: string;
+  backend_id?: string;
   document?: OfferingDocument;
   limits?: OfferingLimits;
 }
@@ -89,6 +90,7 @@ export interface OfferingRequest {
   secret_options?: Record<string, any>;
   schedules?: ScheduleFormData[];
   scope?: string;
+  backend_id?: string;
   service_attributes?: any;
   shared: boolean;
   limits?: OfferingLimits;

@@ -23,4 +23,5 @@ registerOfferingType({
   component: AzureSQLServerForm,
   detailsComponent: AzureSQLServerDetails,
   providerType: 'Azure',
+  allowToUpdateService: true,
 });

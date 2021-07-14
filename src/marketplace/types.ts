@@ -99,6 +99,7 @@ export interface Offering extends GeolocationPoint {
   url?: string;
   thumbnail: string;
   name: string;
+  backend_id?: string;
   terms_of_service?: string;
   rating: number;
   order_item_count: number;

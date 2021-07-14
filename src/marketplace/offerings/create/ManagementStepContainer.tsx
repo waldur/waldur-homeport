@@ -10,6 +10,8 @@ import {
   isOfferingTypeSchedulable,
   getPluginOptionsForm,
   getSecretOptionsForm,
+  showBackendId,
+  allowToUpdateService,
 } from '@waldur/marketplace/common/registry';
 import { openModalDialog } from '@waldur/modal/actions';
 import { findProvider } from '@waldur/providers/registry';
@@ -37,6 +39,8 @@ const mapStateToProps = (state: RootState) => {
   const type = getType(state);
   if (type) {
     props.showOptions = showOfferingOptions(type);
+    props.showBackendId = showBackendId(type);
+    props.allowToUpdateService = allowToUpdateService(type);
     props.schedulable = isOfferingTypeSchedulable(type);
     props.pluginOptionsForm = getPluginOptionsForm(type);
     props.secretOptionsForm = getSecretOptionsForm(type);

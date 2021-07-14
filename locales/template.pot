@@ -37,6 +37,7 @@ msgstr ""
 msgid "A profile has been created."
 msgstr ""
 
+#: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
@@ -539,6 +540,7 @@ msgstr ""
 msgid "Allow bookings to be scheduled at weekends"
 msgstr ""
 
+#: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
 #: src/support/OfferingPluginSecretOptionsForm.tsx
 msgid "Allow service provider to create offering users."
 msgstr ""
@@ -931,6 +933,7 @@ msgstr ""
 msgid "Back to shopping"
 msgstr ""
 
+#: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/SetBackendIdDialog.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
@@ -1478,6 +1481,7 @@ msgstr ""
 msgid "Confirmation message has been updated successfully."
 msgstr ""
 
+#: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
 #: src/support/OfferingPluginSecretOptionsForm.tsx
 msgid "Confirmation notification template"
@@ -4915,6 +4919,10 @@ msgstr ""
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Organization"
+msgstr ""
+
+#: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
+msgid "Organization UUID"
 msgstr ""
 
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
@@ -8490,6 +8498,10 @@ msgstr ""
 
 #: src/booking/components/modal/DateAndTimeSelect.tsx
 msgid "Today"
+msgstr ""
+
+#: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
+msgid "Token"
 msgstr ""
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx

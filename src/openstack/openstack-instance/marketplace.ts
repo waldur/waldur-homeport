@@ -151,4 +151,5 @@ registerOfferingType({
   serializer,
   formValidator,
   disableOfferingCreation: true,
+  allowToUpdateService: true,
 });

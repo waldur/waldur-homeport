@@ -33,4 +33,5 @@ registerOfferingType({
   serializer,
   showOptions: true,
   showComponents: true,
+  allowToUpdateService: true,
 });

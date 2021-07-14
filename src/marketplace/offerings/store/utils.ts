@@ -183,6 +183,7 @@ export const formatOfferingRequest = (
     customer: customer ? customer.url : undefined,
     type: request.type ? request.type.value : undefined,
     service_attributes: request.service_settings,
+    backend_id: request.backend_id,
     shared: true,
   };
   if (request.attributes) {
