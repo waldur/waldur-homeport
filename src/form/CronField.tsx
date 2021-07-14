@@ -123,123 +123,91 @@ export const CronField: FunctionComponent<any> = (props) => {
   const {
     input: { value, onChange },
   } = props;
-  const [baseValue, setBaseValue] = useState(() =>
-    value ? parseCrontab(value).base : Frequency.MINUTE,
-  );
-  const [dayValues, setDayValues] = useState();
-  const [dayOfMonthValues, setDayOfMonthValues] = useState();
-  const [monthValues, setMonthValues] = useState();
-  const [hourValues, setHourValues] = useState();
-  const [minuteValues, setMinuteValues] = useState();
-
-  useEffect(() => {
-    if (!value) {
-      return;
-    }
-    const crontab = parseCrontab(value);
-    setBaseValue(crontab.base);
-
-    if (
-      [
-        Frequency.HOUR,
-        Frequency.DAY,
-        Frequency.WEEK,
-        Frequency.MONTH,
-        Frequency.YEAR,
-      ].includes(crontab.base)
-    ) {
-      setMinuteValues(crontab.minuteValues);
-    }
-
-    if (
-      [Frequency.DAY, Frequency.WEEK, Frequency.MONTH, Frequency.YEAR].includes(
-        crontab.base,
-      )
-    ) {
-      setHourValues(crontab.hourValues);
-    }
-
-    if (crontab.base === Frequency.WEEK) {
-      setDayValues(crontab.dayValues);
-    }
-
-    if ([Frequency.MONTH, Frequency.YEAR].includes(crontab.base)) {
-      setDayOfMonthValues(crontab.dayOfMonthValues);
-    }
-
-    if (crontab.base === Frequency.YEAR) {
-      setMonthValues(crontab.monthValues);
-    }
-  }, [value]);
+  const [parsedValue, setParsedValue] = useState(() => {
+    const val = parseCrontab(value);
+    val.base = val.base || Frequency.MINUTE;
+    return val;
+  });
 
   useEffect(() => {
     onChange(
       serializeCron({
-        base: baseValue,
-        dayValues,
-        dayOfMonthValues,
-        monthValues,
-        hourValues,
-        minuteValues,
+        ...parsedValue,
+        base: parsedValue.base,
       }),
     );
-  }, [
-    onChange,
-    baseValue,
-    dayValues,
-    dayOfMonthValues,
-    monthValues,
-    hourValues,
-    minuteValues,
-  ]);
+  }, [onChange, parsedValue]);
 
   return (
     <div className="cron-wrap">
       {translate('Every')}:&nbsp;
-      <BaseFrequencyField value={baseValue} onChange={setBaseValue} />
+      <BaseFrequencyField
+        value={parsedValue.base}
+        onChange={(v) => setParsedValue({ ...parsedValue, base: v })}
+      />
       <div className="select-options">
-        {baseValue == Frequency.WEEK && (
+        {parsedValue.base == Frequency.WEEK && (
           <>
             &nbsp;
             {translate('on')}&nbsp;
-            <DayField value={dayValues} onChange={setDayValues} />
+            <DayField
+              value={parsedValue.dayValues}
+              onChange={(v) => setParsedValue({ ...parsedValue, dayValues: v })}
+            />
           </>
         )}
-        {[Frequency.MONTH, Frequency.YEAR].includes(baseValue) && (
+        {[Frequency.MONTH, Frequency.YEAR].includes(parsedValue.base) && (
           <>
             &nbsp;
             {translate('on the')}&nbsp;
             <DayOfMonthField
-              value={dayOfMonthValues}
-              onChange={setDayOfMonthValues}
+              value={parsedValue.dayOfMonthValues}
+              onChange={(v) =>
+                setParsedValue({ ...parsedValue, dayOfMonthValues: v })
+              }
             />
           </>
         )}
-        {baseValue == Frequency.YEAR && (
+        {parsedValue.base == Frequency.YEAR && (
           <>
             &nbsp;
             {translate('of')}&nbsp;
-            <MonthField value={monthValues} onChange={setMonthValues} />
+            <MonthField
+              value={parsedValue.monthValues}
+              onChange={(v) =>
+                setParsedValue({ ...parsedValue, monthValues: v })
+              }
+            />
           </>
         )}
         &nbsp;
-        {baseValue != Frequency.MINUTE && translate('at')}&nbsp;
+        {parsedValue.base != Frequency.MINUTE && translate('at')}&nbsp;
         {[
           Frequency.DAY,
           Frequency.WEEK,
           Frequency.MONTH,
           Frequency.YEAR,
-        ].includes(baseValue) && (
+        ].includes(parsedValue.base) && (
           <>
-            <HourField value={hourValues} onChange={setHourValues} />
+            <HourField
+              value={parsedValue.hourValues}
+              onChange={(v) =>
+                setParsedValue({ ...parsedValue, hourValues: v })
+              }
+            />
             {' : '}
           </>
         )}
-        {baseValue != Frequency.MINUTE && (
-          <MinuteField value={minuteValues} onChange={setMinuteValues} />
+        {parsedValue.base != Frequency.MINUTE && (
+          <MinuteField
+            value={parsedValue.minuteValues}
+            onChange={(v) =>
+              setParsedValue({ ...parsedValue, minuteValues: v })
+            }
+          />
         )}
         &nbsp;
-        {baseValue == Frequency.HOUR && translate('past the hour')}
+        {parsedValue.base == Frequency.HOUR && translate('past the hour')}
       </div>
     </div>
   );
