@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { formatFilesize } from '@waldur/core/utils';
+import { translate } from '@waldur/i18n';
 
 import * as actions from './actions';
 import './IssueAttachment.scss';
@@ -42,27 +43,45 @@ export const PureIssueAttachment: FunctionComponent<PureIssueAttachmentProps> = 
           <LoadingSpinner />
         </div>
       )}
-      <div className="attachment-item__thumb">
-        {getThumbnail(attachment, openModal)}
-      </div>
-      <div className="attachment-item__description">
-        <div className="attachment-item__description-name">
-          <a href={attachment.file} download="true">
-            {utils.getFileName(attachment.file)}
-          </a>
-          <div className="attachment-item__delete" onClick={deleteAttachment}>
-            <i className="fa fa-trash" aria-hidden="true" />
+      {attachment.file ? (
+        <>
+          <div className="attachment-item__thumb">
+            {getThumbnail(attachment, openModal)}
           </div>
-        </div>
-        <div className="attachment-item__description-info">
-          <div className="attachment-item__description-date">
-            {formatDateTime(new Date(attachment.created))}
+          <div className="attachment-item__description">
+            <div className="attachment-item__description-name">
+              <a href={attachment.file} download="true">
+                {utils.getFileName(attachment.file)}
+              </a>
+              <div
+                className="attachment-item__delete"
+                onClick={deleteAttachment}
+              >
+                <i className="fa fa-trash" aria-hidden="true" />
+              </div>
+            </div>
+            <div className="attachment-item__description-info">
+              <div className="attachment-item__description-date">
+                {formatDateTime(new Date(attachment.created))}
+              </div>
+              <div className="attachment-item__description-size">
+                {formatFilesize(attachment.file_size, 'B')}
+              </div>
+            </div>
           </div>
-          <div className="attachment-item__description-size">
-            {formatFilesize(attachment.file_size, 'B')}
+        </>
+      ) : (
+        <>
+          <div className="attachment-item__thumb">
+            <i className="fa fa-exclamation-triangle"></i>
           </div>
-        </div>
-      </div>
+          <div className="attachment-item__description">
+            <div className="attachment-item__description-name">
+              {translate('Attachment is broken.')}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

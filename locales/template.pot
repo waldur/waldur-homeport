@@ -776,6 +776,10 @@ msgstr ""
 msgid "Attaching"
 msgstr ""
 
+#: src/issues/attachments/IssueAttachment.tsx
+msgid "Attachment is broken."
+msgstr ""
+
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 #: src/issues/create/IssueCreateForm.tsx
 #: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
