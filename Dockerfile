@@ -1,5 +1,5 @@
 # build environment
-FROM node:14-alpine as build
+FROM node:lts-alpine as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json yarn.lock /app/
@@ -9,7 +9,9 @@ COPY package.json yarn.lock /app/
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards
 # --virtual: bundle packages, remove whole bundle at once, when done
 RUN apk add --no-cache --virtual python make g++ \
-    && yarn install --frozen-lockfile
+RUN which python
+RUN which python2
+RUN yarn install --frozen-lockfile
 
 COPY . /app
 ARG VERSION=latest
