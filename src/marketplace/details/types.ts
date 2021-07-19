@@ -12,6 +12,7 @@ export interface OfferingFormData {
   limits?: Limits;
   project_create_request?: any;
   customer_create_request?: any;
+  customer?: any;
 }
 
 export interface OrderSummaryProps {

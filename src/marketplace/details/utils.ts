@@ -63,6 +63,9 @@ export const formatOrderItem = (props: OrderSummaryProps, request) => {
     if (props.formData.customer_create_request) {
       request.customer_create_request = props.formData.customer_create_request;
     }
+    if (props.formData.customer) {
+      request.customer = props.formData.customer;
+    }
   }
   return request;
 };

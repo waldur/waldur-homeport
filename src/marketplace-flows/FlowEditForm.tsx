@@ -61,11 +61,13 @@ export const FlowEditForm = () => {
       attributes,
       plan,
       limits,
+      customer,
       customer_create_request,
       project_create_request,
     } = formatOrderItemForUpdate({ offering, formData });
     try {
       await updateFlow(router.globals.params.flow_uuid, {
+        customer: customer?.url,
         customer_create_request,
         project_create_request,
         resource_create_request: {
@@ -104,6 +106,9 @@ export const FlowEditForm = () => {
               plan,
               project_create_request: flow.project_create_request,
               customer_create_request: flow.customer_create_request,
+              customer: flow.customer
+                ? { url: flow.customer, name: flow.customer_name }
+                : undefined,
             }}
             offering={offering}
             limits={limits}

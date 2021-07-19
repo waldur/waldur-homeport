@@ -104,9 +104,12 @@ function* addItem(action) {
       project_create_request: formatProjectCreateRequest(
         action.payload.item.project_create_request,
       ),
-      customer_create_request: formatCustomerCreateRequest(
-        action.payload.item.customer_create_request,
-      ),
+      customer: action.payload.item.customer?.url,
+      customer_create_request: action.payload.item.customer_create_request
+        ? formatCustomerCreateRequest(
+            action.payload.item.customer_create_request,
+          )
+        : undefined,
     };
     try {
       yield call(createFlow, payload);

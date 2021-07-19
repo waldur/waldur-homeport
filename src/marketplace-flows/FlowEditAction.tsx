@@ -10,7 +10,7 @@ export const FlowEditAction: FunctionComponent<{ flow }> = (props) => {
   const callback = () =>
     dispatch(
       triggerTransition('profile.flow-edit', {
-        uuid: props.flow.uuid,
+        flow_uuid: props.flow.uuid,
       }),
     );
 
