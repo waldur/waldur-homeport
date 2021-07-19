@@ -9,7 +9,7 @@ import {
   getCustomer,
   getProject,
 } from '@waldur/workspace/selectors';
-import { WorkspaceType } from '@waldur/workspace/types';
+import { WorkspaceType, USER_WORKSPACE } from '@waldur/workspace/types';
 
 import * as actions from './actions';
 import * as constants from './constants';
@@ -34,6 +34,7 @@ function* getCategories() {
 function* getOfferings() {
   const customer = yield select(getCustomer);
   const project = yield select(getProject);
+  const workspace: WorkspaceType = yield select(getWorkspace);
   const field = [
     'uuid',
     'name',
@@ -48,7 +49,7 @@ function* getOfferings() {
     'state',
     'paused_reason',
   ];
-  const params = {
+  const params: Record<string, any> = {
     page_size: 6,
     o: '-created',
     state: ['Active', 'Paused'],
@@ -56,6 +57,9 @@ function* getOfferings() {
     allowed_customer_uuid: customer?.uuid,
     project_uuid: project?.uuid,
   };
+  if (workspace === USER_WORKSPACE) {
+    params.shared = true;
+  }
   try {
     const offerings = yield call(api.getOfferingsList, params);
     yield put(actions.offeringsFetchSuccess(offerings));
