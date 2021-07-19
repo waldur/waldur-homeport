@@ -110,6 +110,11 @@ const ResourceCreateRequest = ({ request }) => (
 
 export const FlowExpandableRow = ({ row }) => (
   <>
+    {row.customer_name && (
+      <p>
+        {translate('Organization')}: {row.customer_name}
+      </p>
+    )}
     {row.customer_create_request && (
       <CustomerCreateRequestFeedback request={row.customer_create_request} />
     )}

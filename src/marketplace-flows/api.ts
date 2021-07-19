@@ -5,6 +5,8 @@ interface Flow {
   customer_create_request;
   project_create_request;
   resource_create_request;
+  customer?: string;
+  customer_name?: string;
 }
 
 export const createFlow = (payload) =>
