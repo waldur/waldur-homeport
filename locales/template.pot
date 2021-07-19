@@ -832,7 +832,7 @@ msgstr ""
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr ""
 
-#: src/issues/notifications/NotificationsList.tsx
+#: src/issues/notifications/BroadcastList.tsx
 msgid "Author"
 msgstr ""
 
@@ -1056,6 +1056,11 @@ msgstr ""
 
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 msgid "Branch"
+msgstr ""
+
+#: src/issues/notifications/BroadcastList.tsx
+#: src/issues/workspace/IssueNavigationService.ts
+msgid "Broadcast"
 msgstr ""
 
 #: src/customer/payments/PaymentCreateDialog.tsx
@@ -1745,7 +1750,7 @@ msgstr ""
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/team/OfferingPermissionsList.tsx
 #: src/invitations/InvitationsList.tsx
-#: src/issues/notifications/NotificationsList.tsx
+#: src/issues/notifications/BroadcastList.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/details/OfferingUsersTab.tsx
@@ -4549,8 +4554,6 @@ msgstr ""
 msgid "Notification method"
 msgstr ""
 
-#: src/issues/notifications/NotificationsList.tsx
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/user/constants.ts
 #: src/user/hooks/HooksList.tsx
 msgid "Notifications"
@@ -7871,8 +7874,8 @@ msgstr ""
 msgid "Storage type"
 msgstr ""
 
+#: src/issues/notifications/BroadcastList.tsx
 #: src/issues/notifications/NotificationCreateDialog.tsx
-#: src/issues/notifications/NotificationsList.tsx
 msgid "Subject"
 msgstr ""
 
@@ -10494,6 +10497,10 @@ msgstr ""
 msgid "bootable"
 msgstr ""
 
+#: src/issues/notifications/BroadcastList.tsx
+msgid "broadcast"
+msgstr ""
+
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 msgid "browse"
 msgstr ""
@@ -10614,10 +10621,6 @@ msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 msgid "networks"
-msgstr ""
-
-#: src/issues/notifications/NotificationsList.tsx
-msgid "notifications"
 msgstr ""
 
 #: src/form/CronField.tsx

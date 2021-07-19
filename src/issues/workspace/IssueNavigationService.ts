@@ -62,10 +62,10 @@ const getReportItems = (): MenuItemType[] => [
     feature: 'support.customers-requests',
   },
   {
-    label: translate('Notifications'),
+    label: translate('Broadcast'),
     icon: 'fa-bell',
-    state: 'support.notifications',
-    key: 'support.notifications',
+    state: 'support.broadcast',
+    key: 'support.broadcast',
   },
   {
     label: translate('Orders'),
