@@ -92,12 +92,12 @@ const IssueDetailsContainer = lazyComponent(
   () => import(/* webpackChunkName: "IssueDetails" */ './IssueDetails'),
   'IssueDetails',
 );
-const NotificationsList = lazyComponent(
+const BroadcastList = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "NotificationsList" */ './notifications/NotificationsList'
+      /* webpackChunkName: "BroadcastList" */ './notifications/BroadcastList'
     ),
-  'NotificationsList',
+  'BroadcastList',
 );
 const IssuesDashboard = lazyComponent(
   () =>
@@ -299,9 +299,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'support.notifications',
-    url: 'notifications/',
-    component: NotificationsList,
+    name: 'support.broadcast',
+    url: 'broadcast/',
+    component: BroadcastList,
     resolve: {
       permission: checkPermission,
     },

@@ -31,7 +31,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
           orderField: 'created',
         },
       ]}
-      verboseName={translate('notifications')}
+      verboseName={translate('broadcast')}
       actions={<NotificationCreateButton />}
       expandableRow={NotificationExpandableRow}
     />
@@ -39,17 +39,17 @@ const TableComponent: FunctionComponent<any> = (props) => {
 };
 
 const TableOptions: TableOptionsType = {
-  table: 'notifications',
+  table: 'broadcast',
   fetchData: createFetcher('notifications'),
 };
 
-const NotificationsListComponent = connectTable(TableOptions)(TableComponent);
+const BroadcastListComponent = connectTable(TableOptions)(TableComponent);
 
-export const NotificationsList: FunctionComponent = () => {
-  useTitle(translate('Notifications'));
+export const BroadcastList: FunctionComponent = () => {
+  useTitle(translate('Broadcast'));
   return (
     <Panel>
-      <NotificationsListComponent />
+      <BroadcastListComponent />
     </Panel>
   );
 };
