@@ -9,6 +9,9 @@ import * as actions from './actions';
 
 export function* handleSaml2LoginSaga(action) {
   const provider = action.payload['identity-provider'];
+  if (!provider) {
+    return;
+  }
   try {
     /* We support only 2 SAML2 bindings: HTTP redirect and HTTP POST.
      * If HTTP redirect binding is used, we're redirecting user
