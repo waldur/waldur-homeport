@@ -6284,9 +6284,6 @@ msgstr "red"
 msgid "networks"
 msgstr "redes"
 
-msgid "notifications"
-msgstr "notificaciones"
-
 msgid "of"
 msgstr "de"
 

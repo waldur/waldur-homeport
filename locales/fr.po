@@ -6284,9 +6284,6 @@ msgstr "réseau"
 msgid "networks"
 msgstr "réseaux"
 
-msgid "notifications"
-msgstr "notifications"
-
 msgid "of"
 msgstr "de"
 

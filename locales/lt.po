@@ -6284,9 +6284,6 @@ msgstr "tinklas"
 msgid "networks"
 msgstr "Tinklai"
 
-msgid "notifications"
-msgstr "pranešimai"
-
 msgid "of"
 msgstr "iš"
 

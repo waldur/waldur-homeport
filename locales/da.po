@@ -6284,9 +6284,6 @@ msgstr "netværk"
 msgid "networks"
 msgstr "netværk"
 
-msgid "notifications"
-msgstr "meddelelser"
-
 msgid "of"
 msgstr "af"
 

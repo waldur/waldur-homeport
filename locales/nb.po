@@ -6284,9 +6284,6 @@ msgstr "nettverk"
 msgid "networks"
 msgstr "nettverk"
 
-msgid "notifications"
-msgstr "Varslinger"
-
 msgid "of"
 msgstr "av"
 

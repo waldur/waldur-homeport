@@ -6284,9 +6284,6 @@ msgstr "síť"
 msgid "networks"
 msgstr "sítě"
 
-msgid "notifications"
-msgstr "oznámení"
-
 msgid "of"
 msgstr "z"
 

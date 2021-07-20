@@ -6284,9 +6284,6 @@ msgstr "rete"
 msgid "networks"
 msgstr "reti"
 
-msgid "notifications"
-msgstr "notifiche"
-
 msgid "of"
 msgstr "di"
 
