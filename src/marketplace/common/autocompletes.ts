@@ -133,6 +133,7 @@ export const userAutocomplete = async (
   const params = {
     full_name: query,
     field: ['full_name', 'url'],
+    o: ['full_name'],
     page: page,
     page_size: ENV.pageSize,
   };

@@ -71,7 +71,7 @@ async function loadData(offering_uuid: string) {
     {
       visible: true,
       title: translate('Users'),
-      component: () => <OfferingUsersTab offering_uuid={offering.uuid} />,
+      component: () => <OfferingUsersTab offering={offering} />,
     },
   ].filter((tab) => tab.visible);
   return { offering, tabs };
