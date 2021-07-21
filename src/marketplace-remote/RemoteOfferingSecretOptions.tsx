@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Col, FormGroup, Row } from 'react-bootstrap';
+import { Field } from 'redux-form';
 
 import {
   FormContainer,
@@ -22,12 +23,17 @@ export const RemoteOfferingSecretOptions: FunctionComponent<{
       <Col sm={2}></Col>
       <Row>
         <Col sm={8}>
-          <AwesomeCheckboxField
+          <Field
             name="service_provider_can_create_offering_user"
-            label={translate(
-              'Allow service provider to create offering users.',
+            component={(fieldProps) => (
+              <AwesomeCheckboxField
+                label={translate(
+                  'Allow service provider to create offering users.',
+                )}
+                hideLabel={true}
+                {...fieldProps}
+              />
             )}
-            hideLabel={true}
           />
         </Col>
       </Row>

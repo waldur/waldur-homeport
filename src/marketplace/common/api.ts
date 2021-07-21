@@ -344,3 +344,6 @@ export const updateOfferingLogo = (offeringUuid: string, formData) =>
       thumbnail: formData.images,
     },
   );
+
+export const createOfferingUser = (payload) =>
+  post(`/marketplace-offering-users/`, payload);

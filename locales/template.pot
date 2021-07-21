@@ -1586,6 +1586,7 @@ msgstr ""
 #: src/issues/list/IssueCreateButton.tsx
 #: src/issues/notifications/NotificationCreateButton.tsx
 #: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
@@ -1655,6 +1656,10 @@ msgstr ""
 #: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
 msgid "Create notification"
+msgstr ""
+
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+msgid "Create offering user"
 msgstr ""
 
 #: src/customer/create/CustomerCreateForm.tsx
@@ -4450,6 +4455,7 @@ msgid "No offerings"
 msgstr ""
 
 #: src/issues/create/CallerGroup.tsx
+#: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
 msgid "No organizations"
@@ -4707,6 +4713,10 @@ msgstr ""
 msgid "Offering type"
 msgstr ""
 
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+msgid "Offering user has been created."
+msgstr ""
+
 #: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/issues/workspace/IssueNavigationService.ts
@@ -4914,6 +4924,7 @@ msgstr ""
 #: src/issues/create/OrganizationGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/ChecklistOverview.tsx
+#: src/marketplace-flows/FlowExpandableRow.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/offerings/actions/tabs.ts
@@ -7241,6 +7252,7 @@ msgstr ""
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
+#: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
 #: src/user/SelectAffiliationDialog.tsx
@@ -8765,6 +8777,10 @@ msgstr ""
 msgid "Unable to create notifications."
 msgstr ""
 
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+msgid "Unable to create offering user."
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to create offering."
 msgstr ""
@@ -9794,6 +9810,7 @@ msgstr ""
 #: src/customer/team/UserGroup.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/support/SupportEventsListFilter.tsx
@@ -9972,6 +9989,7 @@ msgstr ""
 #: src/auth/SignupForm.tsx
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/UsernameGroup.tsx
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts

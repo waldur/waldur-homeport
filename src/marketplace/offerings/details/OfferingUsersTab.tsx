@@ -6,6 +6,8 @@ import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 
+import { CreateOfferingUserButton } from './CreateOfferingUserButton';
+
 export const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
@@ -28,6 +30,15 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       columns={columns}
       verboseName={translate('offering users')}
       showPageSizeSelector={true}
+      actions={
+        props.offering.secret_options
+          .service_provider_can_create_offering_user && (
+          <CreateOfferingUserButton
+            offering={props.offering}
+            onSuccess={props.fetch}
+          />
+        )
+      }
     />
   );
 };
@@ -36,7 +47,7 @@ export const TableOptions: TableOptionsType = {
   table: 'OfferingUsersList',
   fetchData: createFetcher('marketplace-offering-users'),
   mapPropsToFilter: (props) => ({
-    offering_uuid: props.offering_uuid,
+    offering_uuid: props.offering.uuid,
   }),
 };
 
