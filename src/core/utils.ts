@@ -116,7 +116,7 @@ const entityMap = {
   '>': '&gt;',
 };
 
-// Basrd on https://github.com/janl/mustache.js/blob/v3.1.0/mustache.js#L73-L88
+// Based on https://github.com/janl/mustache.js/blob/v3.1.0/mustache.js#L73-L88
 export function escapeHtml(str) {
   return String(str).replace(/[<>]/g, function fromEntityMap(s) {
     return entityMap[s];

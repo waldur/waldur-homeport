@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { PUBLIC_RESOURCES_LIST_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
@@ -43,16 +44,17 @@ const filterSelector = createSelector(
 
 const mapStateToProps = (state: RootState) => ({
   offeringFilter: filterSelector(state),
+  initialValues: getInitialValues({
+    state: getStates()[1],
+  }),
 });
 
 const enhance = compose(
+  connect(mapStateToProps),
   reduxForm({
     form: PUBLIC_RESOURCES_LIST_FILTER_FORM_ID,
-    initialValues: {
-      state: getStates()[1],
-    },
+    onChange: syncFiltersToURL,
   }),
-  connect(mapStateToProps),
 );
 
 export const PublicResourcesFilter = enhance(PurePublicResourcesFilter);
