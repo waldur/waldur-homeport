@@ -103,6 +103,14 @@ export const updateResourceEndDate = (resourceUuid: string, end_date: string) =>
     end_date,
   });
 
+export const updateResourceEndDateByProvider = (
+  resourceUuid: string,
+  end_date: string,
+) =>
+  post(`/marketplace-resources/${resourceUuid}/set_end_date_by_provider/`, {
+    end_date,
+  });
+
 export const getResourceDetails = (resourceId: string) =>
   get<any>(`/marketplace-resources/${resourceId}/details/`).then(
     (response) => response.data,
