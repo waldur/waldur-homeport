@@ -2350,6 +2350,7 @@ msgid "Edit confirmation message of {offeringName}"
 msgstr ""
 
 #: src/marketplace/resources/actions/EditResourceEndDateAction.tsx
+#: src/marketplace/resources/actions/EditResourceEndDateByProviderAction.tsx
 msgid "Edit end date"
 msgstr ""
 
