@@ -4,12 +4,10 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json yarn.lock /app/
 # Consider the following dependencies tree:
-# node-sass -> node-gyp -> python
+# sass-loader -> node-sass -> node-gyp -> python3
 # Python is not installed on alpine, therefore we need to install it manually.
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards
-# --virtual: bundle packages, remove whole bundle at once, when done
-RUN apk add --no-cache --virtual python make g++ \
-    && yarn install --frozen-lockfile
+RUN apk add --no-cache python3 make g++ && yarn install --frozen-lockfile
 
 COPY . /app
 ARG VERSION=latest
