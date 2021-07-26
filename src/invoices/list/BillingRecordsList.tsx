@@ -29,7 +29,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => (
             <Link
               state="billingDetails"
-              params={{ uuid: row.customer_uuid, invoice_uuid: row.uuid }}
+              params={{ uuid: props.customer.uuid, invoice_uuid: row.uuid }}
             >
               {row.number}
             </Link>
