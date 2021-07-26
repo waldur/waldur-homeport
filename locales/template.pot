@@ -1618,6 +1618,10 @@ msgstr ""
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr ""
 
+#: src/issues/notifications/NotificationCreateDialog.tsx
+msgid "Create a broadcast"
+msgstr ""
+
 #: src/auth/AuthHeader.tsx
 #: src/auth/SignupButton.tsx
 msgid "Create an account"
@@ -1653,7 +1657,6 @@ msgstr ""
 msgid "Create node"
 msgstr ""
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
 msgid "Create notification"
 msgstr ""
