@@ -73,7 +73,7 @@ export const NotificationCreateDialog = reduxForm({
   return (
     <form onSubmit={handleSubmit(createNotification)}>
       <ModalHeader>
-        <ModalTitle>{translate('Create notification')}</ModalTitle>
+        <ModalTitle>{translate('Create a broadcast')}</ModalTitle>
       </ModalHeader>
       <ModalBody>
         <FormContainer submitting={submitting}>
