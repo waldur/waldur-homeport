@@ -44,7 +44,9 @@ export const ProjectCreateGroup = () => {
           <i className="fa fa-plus" />
         )}{' '}
         {initialValues
-          ? translate('Edit project request')
+          ? translate('Edit project request ({name})', {
+              name: initialValues.name,
+            })
           : translate('Create project request')}
       </Button>
     </FormGroup>

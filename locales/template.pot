@@ -2366,7 +2366,7 @@ msgid "Edit offering"
 msgstr ""
 
 #: src/marketplace/details/CustomerCreateGroup.tsx
-msgid "Edit organization request"
+msgid "Edit organization request ({name})"
 msgstr ""
 
 #: src/customer/team/PendingReviewDialog.tsx
@@ -2378,7 +2378,11 @@ msgid "Edit project member"
 msgstr ""
 
 #: src/marketplace/details/ProjectCreateGroup.tsx
-msgid "Edit project request"
+msgid "Edit project request ({name})"
+msgstr ""
+
+#: src/project/ProjectCreateForm.tsx
+msgid "Edit request"
 msgstr ""
 
 #: src/customer/team/EditTeamMemberDialog.tsx

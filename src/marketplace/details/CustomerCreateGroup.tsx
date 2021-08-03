@@ -80,7 +80,9 @@ export const CustomerCreateGroup = () => {
             <i className="fa fa-plus" />
           )}{' '}
           {initialValues
-            ? translate('Edit organization request')
+            ? translate('Edit organization request ({name})', {
+                name: initialValues.name,
+              })
             : translate('Create organization request')}
         </Button>
       </div>
