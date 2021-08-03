@@ -112,7 +112,7 @@ Build artifact:
 Lint docker image:
   extends: .Lint docker image template
   variables:
-    IMAGE: registry.hpc.ut.ee/mirror/opennode/waldur-homeport:latest
+    IMAGE: opennode/waldur-homeport:latest
     DOCKERFILE: Dockerfile
   before_script: []
 
