@@ -14,7 +14,8 @@ import {
 import { DateField } from '@waldur/form/DateField';
 import { datePickerOverlayContainerInDialogs } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
+import { USER_WORKSPACE } from '@waldur/workspace/types';
 
 import * as api from './api';
 import { ProjectNameField } from './ProjectNameField';
@@ -41,6 +42,7 @@ export const ProjectCreateForm = reduxForm<
 })((props) => {
   const { loading, error, value } = useAsync(loadData);
   const customer = useSelector(getCustomer);
+  const workspace = useSelector(getWorkspace);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -95,7 +97,11 @@ export const ProjectCreateForm = reduxForm<
           <SubmitButton
             disabled={props.invalid}
             submitting={props.submitting}
-            label={translate('Add project')}
+            label={
+              workspace === USER_WORKSPACE
+                ? translate('Edit request')
+                : translate('Add project')
+            }
           />
           <button
             type="button"
