@@ -34,9 +34,6 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
       project,
       plan,
       attributes: { nodes: [], install_longhorn: true },
-      limits: {
-        node: 0,
-      },
     };
     if (!plan && props.offering.plans.length === 1) {
       initialData.plan = props.offering.plans[0];
