@@ -13,12 +13,6 @@ eventsRegistry.registerGroup({
       ),
     },
     {
-      key: 'auth_logged_in_with_facebook',
-      title: gettext(
-        'User {user_link} authenticated successfully with Facebook.',
-      ),
-    },
-    {
       key: 'auth_logged_in_with_smart_id_ee',
       title: gettext(
         'User {user_link} authenticated successfully with Smart ID EE.',

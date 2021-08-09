@@ -82,9 +82,6 @@ export const useAuthFeatures = () => {
 
   const showSocialSignup = methods.SOCIAL_SIGNUP && !civilNumberRequired;
 
-  const showFacebook =
-    showSocialSignup && !!ENV.plugins.WALDUR_AUTH_SOCIAL.FACEBOOK_CLIENT_ID;
-
   const showSmartId =
     showSocialSignup && !!ENV.plugins.WALDUR_AUTH_SOCIAL.SMARTIDEE_CLIENT_ID;
 
@@ -119,7 +116,6 @@ export const useAuthFeatures = () => {
     SignupButton: showSignupButton,
     SignupForm: showSignupForm,
     SocialSignup: showSocialSignup,
-    facebook: showFacebook,
     smartid: showSmartId,
     tara: showTARA,
     valimo: showValimo,

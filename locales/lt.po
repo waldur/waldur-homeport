@@ -5804,9 +5804,6 @@ msgstr "Vartotojas {affected_user_link} atnaujintas."
 msgid "User {affected_user_name} has been deleted."
 msgstr "Vartotojas {affected_user_name} buvo ištrintas."
 
-msgid "User {user_link} authenticated successfully with Facebook."
-msgstr "Vartotojas {user_link} sėkmingai autentifikuotas su Facebook."
-
 msgid "User {user_link} authenticated successfully with SAML2."
 msgstr "Vartotojas {user_link} sėkmingai autentifikuotas su SAML2."
 

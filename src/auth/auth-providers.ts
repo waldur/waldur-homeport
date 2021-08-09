@@ -24,18 +24,6 @@ const AuthValimoDialog = lazyComponent(
 
 export const getAuthProviders: () => Omit<AuthButtonProps, 'mode'>[] = () => [
   {
-    providerKey: 'facebook',
-    label: 'Facebook',
-    btnClass: 'btn-facebook',
-    iconClass: 'fa-facebook-square',
-    onClick: getOauthCallback({
-      name: 'facebook',
-      clientId: ENV.plugins.WALDUR_AUTH_SOCIAL.FACEBOOK_CLIENT_ID,
-      authUrl: 'https://www.facebook.com/v2.5/dialog/oauth',
-      scope: 'email',
-    }),
-  },
-  {
     providerKey: 'smartid',
     label: 'trusted identity',
     btnClass: 'btn-smartid',

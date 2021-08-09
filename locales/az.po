@@ -2183,9 +2183,6 @@ msgstr "{affected_user_link} istifadəçi yeniləndi."
 msgid "User {affected_user_name} has been deleted."
 msgstr "{affected_user_link} istifadəçi silindi."
 
-msgid "User {user_link} authenticated successfully with Facebook."
-msgstr "{user_link} istifadəçi Facebook ilə uğurla təsdiqləndi."
-
 msgid "User {user_link} authenticated successfully with SAML2."
 msgstr "{user_link} istifadəçi SAML2 (təhlükəsizlik təminatı sistemi üçün işarə dili) ilə uğurla təsdiqləndi."
 

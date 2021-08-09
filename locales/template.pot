@@ -9910,10 +9910,6 @@ msgid "User {affected_user_name} has been deleted."
 msgstr ""
 
 #: src/auth/events.ts
-msgid "User {user_link} authenticated successfully with Facebook."
-msgstr ""
-
-#: src/auth/events.ts
 msgid "User {user_link} authenticated successfully with SAML2."
 msgstr ""
 

@@ -4235,9 +4235,6 @@ msgstr "Kasutaja {affected_user_link} on muudetud."
 msgid "User {affected_user_name} has been deleted."
 msgstr "Kasutaja {affected_user_name} on kustutatud."
 
-msgid "User {user_link} authenticated successfully with Facebook."
-msgstr "Kasutaja {user_link} edukalt autentinud ennast Facebook kaudu."
-
 msgid "User {user_link} authenticated successfully with Smart ID EE."
 msgstr "Kasutaja {user_link} on edukalt autentinud ennast Smart ID EE kaudu."
 
