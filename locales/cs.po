@@ -5804,9 +5804,6 @@ msgstr "Uživatel {affected_user_link} byl aktualizován."
 msgid "User {affected_user_name} has been deleted."
 msgstr "Uživatel {affected_user_name} byl odstraněn."
 
-msgid "User {user_link} authenticated successfully with Facebook."
-msgstr "Uživatel {user_link} byl úspěšně ověřen pomocí Facebooku."
-
 msgid "User {user_link} authenticated successfully with SAML2."
 msgstr "Uživatel {user_link} byl úspěšně ověřen pomocí SAML2."
 

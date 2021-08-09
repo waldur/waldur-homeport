@@ -17,6 +17,6 @@ describe('TypeListDialog', () => {
   });
 
   it('renders each event type as list item', () => {
-    expect(wrapper.find('li').length).toBe(5);
+    expect(wrapper.find('li').length).toBe(4);
   });
 });

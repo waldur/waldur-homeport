@@ -5804,9 +5804,6 @@ msgstr "Bruger {affected_user_link} er blevet opdateret."
 msgid "User {affected_user_name} has been deleted."
 msgstr "Bruger {affected_user_name} er blevet slettet."
 
-msgid "User {user_link} authenticated successfully with Facebook."
-msgstr "Bruger {user_link} blev godkendt med Facebook."
-
 msgid "User {user_link} authenticated successfully with SAML2."
 msgstr "Bruger {user_link} blev godkendt med SAML2."
 

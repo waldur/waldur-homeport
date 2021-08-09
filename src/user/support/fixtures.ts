@@ -19,6 +19,6 @@ export const ordinaryUser = {
   civil_number: '14124h12kj4h',
 };
 
-export const userWithFacebookId = {
-  registration_method: 'facebook',
+export const userWithTARA = {
+  registration_method: 'tara',
 };

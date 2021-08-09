@@ -5804,9 +5804,6 @@ msgstr "El usuario {affected_user_link} ha sido actualizado."
 msgid "User {affected_user_name} has been deleted."
 msgstr "El usuario {affected_user_name} ha sido eliminado."
 
-msgid "User {user_link} authenticated successfully with Facebook."
-msgstr "El usuario {user_link} se autenticó correctamente con Facebook."
-
 msgid "User {user_link} authenticated successfully with SAML2."
 msgstr "El usuario {user_link} se autenticó correctamente con SAML2."
 

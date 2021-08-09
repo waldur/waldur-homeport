@@ -5717,9 +5717,6 @@ msgstr "Användare {affected_user_link} har uppdaterats."
 msgid "User {affected_user_name} has been deleted."
 msgstr "Användaren {affected_user_name} har tagits bort."
 
-msgid "User {user_link} authenticated successfully with Facebook."
-msgstr "Användaren {user_link} autentiserades framgångsrikt med Facebook."
-
 msgid "User {user_link} authenticated successfully with SAML2."
 msgstr "Användaren {user_link} autentiserades framgångsrikt med SAML2."
 

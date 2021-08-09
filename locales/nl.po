@@ -5804,9 +5804,6 @@ msgstr "Gebruiker {affected_user_link} is bijgewerkt."
 msgid "User {affected_user_name} has been deleted."
 msgstr "Gebruiker {affected_user_name} is verwijderd."
 
-msgid "User {user_link} authenticated successfully with Facebook."
-msgstr "Gebruiker {user_link} succesvol geauthenticeerd met Facebook."
-
 msgid "User {user_link} authenticated successfully with SAML2."
 msgstr "Gebruiker {user_link} succesvol geauthenticeerd met SAML2."
 

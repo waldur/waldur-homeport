@@ -23,10 +23,6 @@ export const eventGroups: EventGroup[] = [
         title:
           'User {user_link} authenticated successfully with username and password.',
       },
-      {
-        key: 'auth_logged_in_with_facebook',
-        title: 'User {user_link} authenticated successfully with Facebook.',
-      },
     ],
   },
   {

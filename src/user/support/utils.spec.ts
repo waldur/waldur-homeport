@@ -3,7 +3,7 @@ import {
   staffUser,
   supportAndStaffUser,
   supportUser,
-  userWithFacebookId,
+  userWithTARA,
 } from '@waldur/user/support/fixtures';
 import {
   formatLifetime,
@@ -23,7 +23,7 @@ describe('Utils functions', () => {
 
   it('should return appropriate registration method', () => {
     expect(formatRegistrationMethod(ordinaryUser)).toEqual('Default');
-    expect(formatRegistrationMethod(userWithFacebookId)).toEqual('Facebook');
+    expect(formatRegistrationMethod(userWithTARA)).toEqual('Tara');
   });
 
   it('should return appropriate time format', () => {
