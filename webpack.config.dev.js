@@ -52,7 +52,7 @@ module.exports = merge(baseConfig, {
     contentBase: utils.formatPath('.'),
     hot: true,
     inline: true,
-    port: 8001,
+    port: PORT,
     publicPath: '/',
     stats: 'errors-only',
     historyApiFallback: {
