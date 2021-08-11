@@ -8,7 +8,7 @@ import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
 import { getServiceProviderByCustomer } from '@waldur/marketplace/common/api';
-import { ServiceProviderOfferingsList } from '@waldur/marketplace/offerings/ServiceProviderOfferingsList';
+import { ServiceProviderOfferingsList } from '@waldur/marketplace/offerings/service-providers/ServiceProviderOfferingsList';
 import { useTitle } from '@waldur/navigation/title';
 
 export const ServiceProvider: FunctionComponent = () => {

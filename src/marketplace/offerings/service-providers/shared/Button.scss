@@ -1,0 +1,7 @@
+@import '~sass/inspinia/_variables.scss';
+
+.button {
+  display: flex;
+  align-items: center;
+  border-color: $gray-border-color;
+}

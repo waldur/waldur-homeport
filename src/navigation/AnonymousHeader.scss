@@ -1,0 +1,10 @@
+.anonymousHeader {
+  display: flex;
+  padding: 16px 150px;
+  justify-content: space-between;
+
+  .anonymousHeader__actions {
+    display: flex;
+    align-items: center;
+  }
+}

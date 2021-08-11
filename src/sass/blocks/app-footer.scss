@@ -48,3 +48,14 @@
   }
   // sm
 }
+
+.footer-nav-anonymous {
+  li {
+    margin-right: 14px;
+  }
+  li + li {
+    &:before {
+      display: none;
+    }
+  }
+}

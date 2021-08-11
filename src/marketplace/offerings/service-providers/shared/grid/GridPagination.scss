@@ -1,0 +1,40 @@
+.gridPaginationContainer {
+  display: flex;
+  justify-content: center;
+
+  ul.pagination {
+    & > li > a,
+    & > li > span {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: #1c84c6;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 24px;
+    }
+
+    & > .active > a,
+    & > .active > a:focus,
+    & > .active > a:hover,
+    & > .active > span,
+    & > .active > span:focus,
+    & > .active > span:hover {
+      background-color: #6b6c7e;
+      border-radius: 3px;
+      color: #ffffff;
+    }
+
+    & > .disabled > a,
+    & > .disabled > a:focus,
+    & > .disabled > a:hover,
+    & > .disabled > span,
+    & > .disabled > span:focus,
+    & > .disabled > span:hover {
+      cursor: not-allowed;
+      pointer-events: all !important;
+      background-color: transparent;
+    }
+  }
+}
