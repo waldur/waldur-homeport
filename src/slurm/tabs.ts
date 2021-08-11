@@ -1,4 +1,5 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
@@ -19,6 +20,14 @@ const AllocationUsersTable = lazyComponent(
   'AllocationUsersTable',
 );
 
+const AllocationJobsTable = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SlurmAllocationJobsTable" */ './details/AllocationJobsTable'
+    ),
+  'AllocationJobsTable',
+);
+
 ResourceTabsConfiguration.register('SLURM.Allocation', () => [
   {
     key: 'usage',
@@ -30,5 +39,10 @@ ResourceTabsConfiguration.register('SLURM.Allocation', () => [
     key: 'users',
     title: translate('Users'),
     component: AllocationUsersTable,
+  },
+  isFeatureVisible('slurm.jobs') && {
+    key: 'jobs',
+    title: translate('Jobs'),
+    component: AllocationJobsTable,
   },
 ]);
