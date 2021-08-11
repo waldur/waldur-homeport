@@ -99,7 +99,10 @@ export const resetPagination = (table: string) => ({
   },
 });
 
-export const updatePageSize = (table: string, size: string) => ({
+export const updatePageSize = (
+  table: string,
+  size: { label: string; value: number },
+) => ({
   type: PAGE_SIZE_UPDATE,
   payload: {
     table,

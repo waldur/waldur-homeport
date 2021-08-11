@@ -1,0 +1,18 @@
+@import '~sass/variables.scss';
+
+.grid {
+  .grid__header {
+    display: flex;
+    align-items: center;
+    background-color: $white;
+    padding: 16px;
+    margin-bottom: 24px;
+    border-radius: 4px;
+    justify-content: space-between;
+
+    .grid__header__actions {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+import { FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
+
+import { Link } from '@waldur/core/Link';
+import { translate } from '@waldur/i18n';
+import { BackendHealthStatusIndicator } from '@waldur/navigation/BackendHealthStatusIndicator';
+import { getConfig } from '@waldur/store/config';
+
+export const AnonymousFooter: FunctionComponent = () => {
+  const {
+    buildId,
+    companyName,
+    companyUrl,
+    supportEmail,
+    supportPhone,
+  } = useSelector(getConfig);
+  return (
+    <footer className="footer-anonymous hidden-print">
+      <div className="pull-right">
+        <ul className="footer-nav footer-nav-anonymous">
+          <li>
+            <Link state="policy.privacy">{translate('Privacy policy')}</Link>
+          </li>
+          <li>
+            <Link state="tos.index">{translate('Terms of Service')}</Link>
+          </li>
+          {supportEmail && <li>{supportEmail}</li>}
+          {supportPhone && <li>{supportPhone}</li>}
+          {companyName && (
+            <li>
+              <a href={companyUrl}>{companyName}</a>
+            </li>
+          )}
+        </ul>
+      </div>
+      <div>
+        <BackendHealthStatusIndicator />
+        <>{translate('Version')}</>: {buildId}
+      </div>
+    </footer>
+  );
+};

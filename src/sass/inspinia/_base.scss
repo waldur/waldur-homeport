@@ -258,6 +258,13 @@ ol.unstyled {
   right: 0;
 }
 
+.footer-anonymous {
+  padding: 32px 150px;
+  background-color: white;
+  border: 1px solid $border-color;
+  margin-top: 32px;
+}
+
 .footer.fixed_full {
   position: fixed;
   bottom: 0;

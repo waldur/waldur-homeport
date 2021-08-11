@@ -1065,6 +1065,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@cloudfour/simple-svg-placeholder@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@cloudfour/simple-svg-placeholder/-/simple-svg-placeholder-1.0.2.tgz#495243d794e6777b3c7bcb22ad16a792a1771072"
+  integrity sha512-vZZ4Yp+TwdDhbxigDJyMFqGJM1zujqAES11R+Rmv8thnAgjOPaRIsJzd5LiTabE2O0sZDaHq4kmbjrmy1gP6Xg==
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"
@@ -11880,6 +11885,13 @@ react-select@3.1.0, react-select@^3.1.0:
     prop-types "^15.6.0"
     react-input-autosize "^2.2.2"
     react-transition-group "^4.3.0"
+
+react-simple-svg-placeholder@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/react-simple-svg-placeholder/-/react-simple-svg-placeholder-1.2.2.tgz#1bbdf4735af1b27ab64d68ac55eb0e7185b0fd1a"
+  integrity sha512-yG9ISCN0p3+yP/B5msH8fxpj2sjPWxLpaHo1Lk6qTT2Cy4FPp2EEZL8gMw4/9LQJcNiMO9/MHi3jg9ynFBmIOw==
+  dependencies:
+    "@cloudfour/simple-svg-placeholder" "^1.0.2"
 
 react-test-renderer@^16.0.0-0:
   version "16.14.0"

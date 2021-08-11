@@ -98,6 +98,7 @@
     "react-responsive": "^8.0.3",
     "react-select": "^3.1.0",
     "react-select-async-paginate": "^0.4.0",
+    "react-simple-svg-placeholder": "^1.2.2",
     "react-use": "^14.1.1",
     "react-window": "^1.8.5",
     "react-window-paginated": "^1.0.0",

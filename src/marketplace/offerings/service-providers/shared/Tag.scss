@@ -1,0 +1,10 @@
+@import '~sass/inspinia/_variables.scss';
+
+.tag-container {
+  display: inline;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: $light-gray;
+  border-radius: 16px;
+  padding: 0 8px;
+}

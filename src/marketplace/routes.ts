@@ -116,14 +116,14 @@ const OfferingsListContainer = lazyComponent(
 const ServiceProvider = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "ServiceProvider" */ './offerings/ServiceProvider'
+      /* webpackChunkName: "ServiceProvider" */ './offerings/service-providers/ServiceProvider'
     ),
   'ServiceProvider',
 );
 const ServiceProvidersContainer = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "ServiceProvidersContainer" */ './offerings/ServiceProvidersContainer'
+      /* webpackChunkName: "ServiceProvidersContainer" */ './offerings/service-providers/ServiceProvidersContainer'
     ),
   'ServiceProvidersContainer',
 );

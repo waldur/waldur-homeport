@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/configs/default';
-import { Panel } from '@waldur/core/Panel';
-import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { translate } from '@waldur/i18n';
-import { ServiceProvidersList } from '@waldur/marketplace/offerings/ServiceProvidersList';
+import { ServiceProvidersGrid } from '@waldur/marketplace/offerings/service-providers/ServiceProvidersGrid';
+import { ServiceProvidersHeader } from '@waldur/marketplace/offerings/service-providers/ServiceProvidersHeader';
 import { useTitle } from '@waldur/navigation/title';
+import './ServiceProvidersContainer.scss';
 
 export const ServiceProvidersContainer: FunctionComponent = () => {
   const title = translate('Service providers in {title}', {
@@ -13,9 +13,9 @@ export const ServiceProvidersContainer: FunctionComponent = () => {
   });
   useTitle(title);
   return (
-    <Panel>
-      <DashboardHeader title={title} />
-      <ServiceProvidersList />
-    </Panel>
+    <div className="serviceProvidersContainer">
+      <ServiceProvidersHeader />
+      <ServiceProvidersGrid />
+    </div>
   );
 };
