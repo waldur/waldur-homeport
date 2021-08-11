@@ -945,6 +945,7 @@ msgstr ""
 #: src/project/ProjectUpdateForm.tsx
 #: src/resource/ResourceExpandableRow.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
+#: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportDetailsTable.tsx
 msgid "Backend ID"
 msgstr ""
@@ -3645,6 +3646,10 @@ msgstr ""
 msgid "Job title"
 msgstr ""
 
+#: src/slurm/tabs.ts
+msgid "Jobs"
+msgstr ""
+
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/resource/utils.tsx
 msgid "Keep forever"
@@ -4265,6 +4270,7 @@ msgstr ""
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/support/SharedProviderResources.tsx
+#: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/OfferingConfigurationForm.tsx
 #: src/support/SupportDetailsTable.tsx
 #: src/vmware/DisksList.tsx
@@ -6958,6 +6964,7 @@ msgid "Running accounting"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
+#: src/slurm/details/AllocationJobsTable.tsx
 msgid "Runtime state"
 msgstr ""
 
@@ -10645,6 +10652,10 @@ msgstr ""
 
 #: src/table/utils.tsx
 msgid "items"
+msgstr ""
+
+#: src/slurm/details/AllocationJobsTable.tsx
+msgid "jobs"
 msgstr ""
 
 #: src/rancher/cluster/hpas/utils.ts
