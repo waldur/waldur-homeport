@@ -15,12 +15,12 @@ export const Button: FunctionComponent<ButtonProps> = ({
   onClick,
 }) => (
   <button type="button" className="btn btn-default button" onClick={onClick}>
-    {(
+    {iconPrefix && (
       <>
         <img src={iconPrefix} />
         &nbsp;
       </>
-    ) || null}
+    )}
     {translate(label)}
   </button>
 );

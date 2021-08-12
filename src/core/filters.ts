@@ -46,7 +46,7 @@ export const syncFiltersToURL = (form: any) => {
 
 export const getInitialValues = (initialValues?) => {
   const queryParams = getQueryParams();
-  if (!queryParams || isEmpty(queryParams)) {
+  if (isEmpty(queryParams)) {
     return initialValues;
   }
   let queryParamValues = {};
