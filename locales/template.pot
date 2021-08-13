@@ -991,6 +991,10 @@ msgstr ""
 msgid "Batch processing documentation"
 msgstr ""
 
+#: src/slurm/details/SubmitJobDialog.tsx
+msgid "Batch script file"
+msgstr ""
+
 #: src/customer/create/CustomerCreatePrompt.tsx
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr ""
@@ -3634,6 +3638,10 @@ msgstr ""
 
 #: src/marketplace/orders/Order.tsx
 msgid "Item type"
+msgstr ""
+
+#: src/slurm/details/SubmitJobDialog.tsx
+msgid "Job has been submitted."
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
@@ -7953,6 +7961,11 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
+#: src/slurm/details/SubmitJobAction.tsx
+#: src/slurm/details/SubmitJobDialog.tsx
+msgid "Submit job"
+msgstr ""
+
 #: src/marketplace/resources/report/SubmitReportAction.tsx
 #: src/marketplace/resources/report/SubmitReportDialog.tsx
 msgid "Submit report"
@@ -9396,6 +9409,10 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to submit empty comment."
+msgstr ""
+
+#: src/slurm/details/SubmitJobDialog.tsx
+msgid "Unable to submit job."
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
