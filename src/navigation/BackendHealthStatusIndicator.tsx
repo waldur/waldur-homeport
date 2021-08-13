@@ -5,8 +5,6 @@ import { useAsync } from 'react-use';
 
 import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Tooltip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const BackendHealthStatusDialog = lazyComponent(
@@ -39,27 +37,19 @@ const openBackendHealthStatusDialog = () =>
 export const PureBackendHealthStatusIndicator: FunctionComponent<any> = (
   props,
 ) => {
-  const { value, error } = useAsync(getBackendHealthStatus, []);
+  const { value } = useAsync(getBackendHealthStatus, []);
   return (
     <span className="m-r-sm">
-      {value &&
-      value.headers &&
-      value.headers['content-type'] === 'application/json' ? (
-        <a onClick={() => props.openDialog()}>
-          {isWorking(value.data) ? (
-            <i className="fa fa-check-circle text-success" />
-          ) : (
-            <i className="fa fa-times-circle text-danger" />
-          )}
-        </a>
-      ) : error ? (
-        <Tooltip
-          label={translate('Unable to load backend health status')}
-          id="backend-status-tooltip"
-        >
-          <i className="fa fa-info-circle text-danger" />
-        </Tooltip>
-      ) : null}
+      <a onClick={() => props.openDialog()}>
+        {value &&
+        value.headers &&
+        value.headers['content-type'] === 'application/json' &&
+        isWorking(value.data) ? (
+          <i className="fa fa-check-circle text-success" />
+        ) : (
+          <i className="fa fa-times-circle text-danger" />
+        )}
+      </a>
     </span>
   );
 };

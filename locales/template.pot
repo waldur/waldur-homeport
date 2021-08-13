@@ -6972,7 +6972,6 @@ msgid "Running accounting"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
-#: src/slurm/details/AllocationJobsTable.tsx
 msgid "Runtime state"
 msgstr ""
 
@@ -7864,6 +7863,7 @@ msgstr ""
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderResources.tsx
+#: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportDetailsTable.tsx
 #: src/user/hooks/HooksList.tsx
 #: src/vmware/DisksList.tsx
@@ -9007,10 +9007,6 @@ msgstr ""
 msgid "Unable to load application template details."
 msgstr ""
 
-#: src/navigation/BackendHealthStatusIndicator.tsx
-msgid "Unable to load backend health status"
-msgstr ""
-
 #: src/navigation/BackendHealthStatusDialog.tsx
 msgid "Unable to load backend health status."
 msgstr ""
@@ -9869,6 +9865,7 @@ msgstr ""
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
+#: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportEventsListFilter.tsx
 msgid "User"
 msgstr ""
