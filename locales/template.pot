@@ -8282,6 +8282,10 @@ msgstr ""
 msgid "The name must be shorter than 15 characters."
 msgstr ""
 
+#: src/issues/notifications/NumberIndicator.tsx
+msgid "The number of recipients who will receive the notification:"
+msgstr ""
+
 #: src/marketplace/details/ProjectField.tsx
 msgid "The project will be changed for all items in cart."
 msgstr ""
