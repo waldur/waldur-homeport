@@ -1,4 +1,5 @@
-import { post, put } from '@waldur/core/api';
+import { ENV } from '@waldur/configs/default';
+import { post, put, sendForm } from '@waldur/core/api';
 
 import { AllocationLimits } from './types';
 
@@ -10,3 +11,6 @@ export const updateAllocation = (id, data) =>
 
 export const pullAllocation = (id: string) =>
   post(`/slurm-allocations/${id}/pull/`);
+
+export const submitJob = (payload) =>
+  sendForm('POST', `${ENV.apiEndpoint}api/slurm-jobs/`, payload);

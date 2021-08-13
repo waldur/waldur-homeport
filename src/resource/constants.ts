@@ -28,6 +28,7 @@ export const RESOURCE_ENDPOINTS = {
   'Rancher.Node': '/rancher-nodes/',
   'Rancher.Service': '/rancher-services/',
   'SLURM.Allocation': '/slurm-allocations/',
+  'SLURM.Job': '/slurm-jobs/',
   'VMware.VirtualMachine': '/vmware-virtual-machine/',
   'VMware.Port': '/vmware-ports/',
   'VMware.Disk': '/vmware-disks/',
