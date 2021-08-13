@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -26,6 +26,8 @@ import {
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
+import { NOTIFICATION_CREATE_FORM_ID } from '@waldur/issues/notifications/constants';
+import { NumberIndicator } from '@waldur/issues/notifications/NumberIndicator';
 import {
   offeringsAutocomplete,
   organizationAutocomplete,
@@ -37,8 +39,9 @@ import { showError, showSuccess } from '@waldur/store/notify';
 import { projectAutocomplete } from './utils';
 
 export const NotificationCreateDialog = reduxForm({
-  form: 'NotificationCreateDialog',
+  form: NOTIFICATION_CREATE_FORM_ID,
 })(({ submitting, invalid, handleSubmit }) => {
+  const [fetchNumber, setFetchNumber] = useState<any>();
   const dispatch = useDispatch();
 
   const createNotification = useCallback(
@@ -71,7 +74,10 @@ export const NotificationCreateDialog = reduxForm({
   );
 
   return (
-    <form onSubmit={handleSubmit(createNotification)}>
+    <form
+      onSubmit={handleSubmit(createNotification)}
+      onChange={(e) => setFetchNumber(e)}
+    >
       <ModalHeader>
         <ModalTitle>{translate('Create a broadcast')}</ModalTitle>
       </ModalHeader>
@@ -96,6 +102,7 @@ export const NotificationCreateDialog = reduxForm({
             loadOptions={organizationAutocomplete}
             isMulti={true}
             {...reactSelectMenuPortaling()}
+            onChange={(e) => setFetchNumber(e)}
           />
           <SelectField
             label={translate('Organization roles')}
@@ -113,6 +120,7 @@ export const NotificationCreateDialog = reduxForm({
             ]}
             isMulti={true}
             noUpdateOnBlur={true}
+            onChange={(e) => setFetchNumber(e)}
           />
           <AsyncSelectField
             name="projects"
@@ -123,6 +131,7 @@ export const NotificationCreateDialog = reduxForm({
             }
             isMulti={true}
             {...reactSelectMenuPortaling()}
+            onChange={(e) => setFetchNumber(e)}
           />
           <SelectField
             label={translate('Project roles')}
@@ -140,6 +149,7 @@ export const NotificationCreateDialog = reduxForm({
             ]}
             isMulti={true}
             noUpdateOnBlur={true}
+            onChange={(e) => setFetchNumber(e)}
           />
           <AsyncSelectField
             name="offerings"
@@ -154,8 +164,10 @@ export const NotificationCreateDialog = reduxForm({
             }
             isMulti={true}
             {...reactSelectMenuPortaling()}
+            onChange={(e) => setFetchNumber(e)}
           />
         </FormContainer>
+        <NumberIndicator shouldFetch={fetchNumber} />
       </ModalBody>
       <ModalFooter>
         <SubmitButton
