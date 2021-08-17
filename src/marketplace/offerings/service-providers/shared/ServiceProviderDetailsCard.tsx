@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import './ServiceProviderDetailsCard.scss';
 
+import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/offerings/service-providers/shared/CountryFlag';
 import { ServiceProviderLogo } from '@waldur/marketplace/offerings/service-providers/shared/ServiceProviderLogo';
@@ -12,6 +13,17 @@ interface ServiceProviderDetailsCardProps {
   row: ServiceProvider;
 }
 
+const descriptionText = (text: string) =>
+  text.length > 40 ? (
+    <Tooltip label={text} id="descriptionText">
+      <span className="detailsCardContainer__description--ellipsis">
+        {text}
+      </span>
+    </Tooltip>
+  ) : (
+    text
+  );
+
 export const ServiceProviderDetailsCard: FunctionComponent<ServiceProviderDetailsCardProps> = ({
   row,
 }) => (
@@ -20,19 +32,21 @@ export const ServiceProviderDetailsCard: FunctionComponent<ServiceProviderDetail
       <ServiceProviderLogo serviceProvider={row} />
       {row.country && <CountryFlag countryCode={row.country} />}
     </div>
+    <p className="detailsCardContainer__title">
+      {row.customer_abbreviation || row.customer_name}
+    </p>
     {row.customer_abbreviation && (
-      <p className="detailsCardContainer__abbreviation">
-        {row.customer_abbreviation}
+      <div className="detailsCardContainer__fullName">
+        <span>{translate('Full name:')}</span>
+        <br />
+        {row.customer_name}
+      </div>
+    )}
+    {row.description && (
+      <p className="detailsCardContainer__description">
+        {descriptionText(row.description)}
       </p>
     )}
-    <div className="detailsCardContainer__fullName">
-      <span>{translate('Full name:')}</span>
-      <br />
-      {row.customer_name}
-    </div>
-    <p className="detailsCardContainer__description">
-      {row.description || 'description text'}
-    </p>
     {/*fixme `divisions` property is missing from the api endpoint*/}
     <Tag text={'public sector'} />
     <ShowOfferingsButton serviceProvider={row} />

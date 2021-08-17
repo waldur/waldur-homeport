@@ -12,14 +12,14 @@ interface ShowOfferingsButtonProps {
 export const ShowOfferingsButton: FunctionComponent<ShowOfferingsButtonProps> = ({
   serviceProvider,
 }) => (
-  <div className="ShowOfferingsButtonContainer">
+  <div className="showOfferingsButtonContainer">
     <Link
       state="marketplace-service-provider.details"
       params={{ uuid: serviceProvider.customer_uuid }}
     >
       <button
         type="button"
-        className={'btn btn-default ShowOfferingsButtonContainer__button'}
+        className={'btn btn-default showOfferingsButtonContainer__button'}
       >
         {translate('Show offerings')}
       </button>

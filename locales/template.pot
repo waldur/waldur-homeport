@@ -2038,7 +2038,6 @@ msgstr ""
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
-#: src/marketplace/offerings/service-providers/Description.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderOfferingsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/usage/utils.ts
@@ -10318,7 +10317,7 @@ msgstr ""
 
 #: src/auth/AuthHeader.tsx
 #: src/auth/AuthInit.tsx
-#: src/marketplace/offerings/service-providers/Logo.tsx
+#: src/marketplace/offerings/service-providers/Description.tsx
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 

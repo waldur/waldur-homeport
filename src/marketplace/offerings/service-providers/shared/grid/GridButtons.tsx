@@ -5,7 +5,7 @@ import { TableLoadingSpinnerContainer } from '@waldur/table/TableLoadingSpinnerC
 import { GridRefreshButton } from './GridRefreshButton';
 
 export const GridButtons: FunctionComponent<any> = (props) => (
-  <div className="btn-group">
+  <div className="gridButtons btn-group">
     <GridRefreshButton {...props} />
     <TableLoadingSpinnerContainer {...props} />
   </div>
