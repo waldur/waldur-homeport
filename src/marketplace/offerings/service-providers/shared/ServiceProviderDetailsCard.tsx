@@ -4,9 +4,9 @@ import './ServiceProviderDetailsCard.scss';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/offerings/service-providers/shared/CountryFlag';
+import { Division } from '@waldur/marketplace/offerings/service-providers/shared/Division';
 import { ServiceProviderLogo } from '@waldur/marketplace/offerings/service-providers/shared/ServiceProviderLogo';
 import { ShowOfferingsButton } from '@waldur/marketplace/offerings/service-providers/shared/ShowOfferingsButton';
-import { Tag } from '@waldur/marketplace/offerings/service-providers/shared/Tag';
 import { ServiceProvider } from '@waldur/marketplace/offerings/service-providers/types';
 
 interface ServiceProviderDetailsCardProps {
@@ -47,8 +47,7 @@ export const ServiceProviderDetailsCard: FunctionComponent<ServiceProviderDetail
         {descriptionText(row.description)}
       </p>
     )}
-    {/*fixme `divisions` property is missing from the api endpoint*/}
-    <Tag text={'public sector'} />
+    <Division division={row.division} />
     <ShowOfferingsButton serviceProvider={row} />
   </div>
 );
