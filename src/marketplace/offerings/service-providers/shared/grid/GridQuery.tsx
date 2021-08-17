@@ -36,7 +36,9 @@ export class GridQuery extends Component<GridQueryProps, State> {
       <div className="text-right gridQuery">
         <InputField
           type="search"
-          placeholder={translate('Search for offerings and providers')}
+          placeholder={translate(
+            'Search service provider by name or abbreviation',
+          )}
           value={this.state.query}
           onChange={this.setQuery}
         />

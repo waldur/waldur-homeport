@@ -36,6 +36,7 @@ interface CoreConfiguration {
   NATIVE_NAME_ENABLED: boolean;
   ONLY_STAFF_MANAGES_SERVICES: boolean;
   PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS: string[];
+  SITE_DESCRIPTION: string;
 }
 
 interface MarketplaceConfiguration {

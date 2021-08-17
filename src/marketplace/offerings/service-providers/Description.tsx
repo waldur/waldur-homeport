@@ -11,7 +11,6 @@ export const Description: FunctionComponent = () => (
         pageTitle: ENV.shortPageTitle,
       })}
     </h1>
-    {/*fixme: SITE_DESCRIPTION is missing from ENV (configs api endpoint).*/}
-    <p>{ENV.SITE_DESCRIPTION}</p>
+    <p>{ENV.plugins.WALDUR_CORE.SITE_DESCRIPTION}</p>
   </div>
 );

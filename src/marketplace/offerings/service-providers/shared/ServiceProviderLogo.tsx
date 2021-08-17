@@ -10,9 +10,8 @@ interface ServiceProviderLogoProps {
 export const ServiceProviderLogo: FunctionComponent<ServiceProviderLogoProps> = ({
   serviceProvider,
 }) =>
-  serviceProvider.image ? (
-    /*fixme: `image` property is null for every row*/
-    <img src={serviceProvider.image} />
+  serviceProvider.customer_image ? (
+    <img src={serviceProvider.customer_image} height={70} width="auto" />
   ) : (
     <PlaceholderImage
       width={120}
