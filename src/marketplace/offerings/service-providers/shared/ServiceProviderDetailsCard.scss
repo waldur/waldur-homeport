@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  width: 364px;
+  width: 267px;
   padding: 24px;
 
   &:hover {
@@ -21,7 +21,7 @@
     margin-bottom: 24px;
   }
 
-  .detailsCardContainer__abbreviation {
+  .detailsCardContainer__title {
     font-weight: bold;
     font-size: 18px;
     line-height: 24px;
@@ -35,6 +35,20 @@
   }
 
   .detailsCardContainer__description {
-    margin-top: 14px;
+    margin: 14px 0 0;
+
+    /* Refer to:
+     * https://dropshado.ws/post/1015351370/webkit-line-clamp
+     * https://stackoverflow.com/a/19049457
+     * https://css-tricks.com/line-clampin/
+    */
+    .detailsCardContainer__description--ellipsis {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      max-width: 220px;
+    }
   }
 }

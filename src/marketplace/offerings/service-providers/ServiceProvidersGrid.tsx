@@ -12,7 +12,7 @@ const GridComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(updatePageSize(SERVICE_PROVIDERS_GRID, { label: '', value: 9 }));
+    dispatch(updatePageSize(SERVICE_PROVIDERS_GRID, { label: '', value: 8 }));
   }, [dispatch]);
   return (
     <Grid

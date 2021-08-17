@@ -6,5 +6,5 @@ interface TagProps {
 }
 
 export const Tag: FunctionComponent<TagProps> = ({ text }) => (
-  <div className="tag-container">{text}</div>
+  <div className="tag-container m-t">{text}</div>
 );
