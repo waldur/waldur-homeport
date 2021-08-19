@@ -382,6 +382,7 @@ export const states: StateDeclaration[] = [
     component: AnonymousLayout,
     data: {
       hideHeader: true,
+      hideFooter: true,
     },
   },
 
@@ -398,6 +399,7 @@ export const states: StateDeclaration[] = [
     component: AnonymousLayout,
     data: {
       hideHeader: true,
+      hideFooter: true,
     },
   },
 
