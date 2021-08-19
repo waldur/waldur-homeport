@@ -58,6 +58,7 @@ const mapPropsToFilter = (props) => {
   const filter: Record<string, boolean | string> = {
     billable: true,
     shared: true,
+    state: 'Active',
     customer_uuid: props.serviceProviderUuid,
   };
   return filter;
