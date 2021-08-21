@@ -37,6 +37,7 @@ interface CoreConfiguration {
   ONLY_STAFF_MANAGES_SERVICES: boolean;
   PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS: string[];
   SITE_DESCRIPTION: string;
+  TRANSLATION_DOMAIN: string;
 }
 
 interface MarketplaceConfiguration {
