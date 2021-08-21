@@ -55,13 +55,14 @@ export const translateTemplate = (template) =>
   LanguageUtilsService.dictionary[template] || template;
 
 const getDomainMessage = (message) => {
-  if (!ENV.domain) {
+  const domain = ENV.plugins?.WALDUR_CORE?.TRANSLATION_DOMAIN;
+  if (!domain) {
     return message;
   }
-  if (!DOMAIN_MESSAGES[ENV.domain]) {
+  if (!DOMAIN_MESSAGES[domain]) {
     return message;
   }
-  return DOMAIN_MESSAGES[ENV.domain][message] || message;
+  return DOMAIN_MESSAGES[domain][message] || message;
 };
 
 export const translate: Translate = (
