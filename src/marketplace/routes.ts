@@ -317,6 +317,7 @@ export const states: StateDeclaration[] = [
     component: AnonymousLayout,
     data: {
       hideHeader: true,
+      skipAuth: true,
     },
   },
 
@@ -400,6 +401,7 @@ export const states: StateDeclaration[] = [
     data: {
       hideHeader: true,
       hideFooter: true,
+      skipAuth: true,
     },
   },
 
