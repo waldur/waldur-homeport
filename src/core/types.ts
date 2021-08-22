@@ -25,6 +25,7 @@ interface DataDeclaration {
   workspace: string;
   /** Page class name is applied to page wrapper element automatically */
   pageClass: string;
+  skipAuth: boolean;
 }
 
 export interface StateDeclaration extends BaseStateDeclaration {
