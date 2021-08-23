@@ -92,6 +92,13 @@ const getReportItems = (): MenuItemType[] => [
         feature: 'support.organizations',
       },
       {
+        label: translate('Pricelist'),
+        icon: 'fa-table',
+        state: 'support.pricelist',
+        key: 'support.pricelist',
+        feature: 'support.pricelist',
+      },
+      {
         label: translate('Growth'),
         icon: 'fa-line-chart',
         state: 'invoicesGrowth',
