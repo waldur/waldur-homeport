@@ -18,6 +18,13 @@ const CustomerListContainer = lazyComponent(
     ),
   'CustomerListContainer',
 );
+const PriceListContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "PriceListContainer" */ '@waldur/marketplace/offerings/PriceListContainer'
+    ),
+  'PriceListContainer',
+);
 const CustomerRequestContainer = lazyComponent(
   () =>
     import(
@@ -195,6 +202,18 @@ export const states: StateDeclaration[] = [
     component: CustomerListContainer,
     data: {
       feature: 'support.organizations',
+    },
+    resolve: {
+      permission: checkPermission,
+    },
+  },
+
+  {
+    name: 'support.pricelist',
+    url: 'pricelist/',
+    component: PriceListContainer,
+    data: {
+      feature: 'support.pricelist',
     },
     resolve: {
       permission: checkPermission,

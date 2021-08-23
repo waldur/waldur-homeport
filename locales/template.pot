@@ -1016,6 +1016,7 @@ msgid "Billing enabled"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
+#: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 msgid "Billing period"
@@ -1023,6 +1024,10 @@ msgstr ""
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "Billing periods"
+msgstr ""
+
+#: src/marketplace/offerings/PriceList.tsx
+msgid "Billing type"
 msgstr ""
 
 #: src/booking/marketplace.ts
@@ -1433,6 +1438,10 @@ msgstr ""
 
 #: src/marketplace-checklist/ChecklistOverview.tsx
 msgid "Compliance"
+msgstr ""
+
+#: src/marketplace/offerings/PriceList.tsx
+msgid "Component"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentsList.tsx
@@ -4030,6 +4039,7 @@ msgstr ""
 msgid "Maximum vCPU for each VM"
 msgstr ""
 
+#: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/create/ComponentMeasuredUnitField.tsx
 msgid "Measured unit"
 msgstr ""
@@ -4650,6 +4660,7 @@ msgstr ""
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/details/OrderSummary.tsx
+#: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -5428,6 +5439,7 @@ msgstr ""
 
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanField.tsx
+#: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -5752,6 +5764,11 @@ msgstr ""
 
 #: src/marketplace/common/utils.ts
 msgid "Price per year"
+msgstr ""
+
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/marketplace/offerings/PriceListContainer.tsx
+msgid "Pricelist"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
@@ -10578,6 +10595,10 @@ msgstr ""
 
 #: src/rancher/catalog/ClusterCatalogList.tsx
 msgid "catalogues"
+msgstr ""
+
+#: src/marketplace/offerings/PriceList.tsx
+msgid "components"
 msgstr ""
 
 #: src/rancher/node/NodeRoleField.tsx
