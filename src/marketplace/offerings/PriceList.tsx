@@ -23,7 +23,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Measured unit'),
-      render: ({ row }) => row.measured_unit,
+      render: ({ row }) => row.measured_unit || 'N/A',
     },
     {
       title: translate('Billing type'),
@@ -32,6 +32,14 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Billing period'),
       render: ({ row }) => <BillingPeriod unit={row.plan_unit} />,
+    },
+    {
+      title: translate('Amount'),
+      render: ({ row }) => row.amount,
+    },
+    {
+      title: translate('Price'),
+      render: ({ row }) => row.price,
     },
   ];
 
@@ -52,9 +60,11 @@ export const TableOptions: TableOptionsType = {
     row.offering_name,
     row.plan_name,
     row.component_name,
-    row.measured_unit,
+    row.measured_unit || 'N/A',
     row.billing_type,
     row.plan_unit,
+    row.amount,
+    row.price,
   ],
 };
 

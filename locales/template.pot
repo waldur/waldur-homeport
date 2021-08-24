@@ -556,6 +556,7 @@ msgstr ""
 msgid "Already have an account?"
 msgstr ""
 
+#: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
@@ -5706,6 +5707,7 @@ msgstr ""
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesList.tsx
+#: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
