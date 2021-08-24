@@ -49,6 +49,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       columns={columns}
       verboseName={translate('components')}
       showPageSizeSelector={true}
+      enableExport={true}
     />
   );
 };
