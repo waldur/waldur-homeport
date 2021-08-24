@@ -19,6 +19,7 @@ const GridComponent: FunctionComponent<any> = (props) => {
       {...props}
       verboseName={translate('Service providers')}
       hasQuery={true}
+      queryPlaceholder={translate('Search by name or abbreviation')}
       gridItemComponent={ServiceProviderDetailsCard}
     />
   );

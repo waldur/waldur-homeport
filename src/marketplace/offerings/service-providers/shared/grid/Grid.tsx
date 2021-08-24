@@ -17,6 +17,7 @@ interface GridProps extends TranslateProps, TableState {
   fetch: () => void;
   gotoPage?: (page: number) => void;
   hasQuery?: boolean;
+  queryPlaceholder?: string;
   setQuery?: (query: string) => void;
   verboseName?: string;
   resetPagination?: () => void;
@@ -38,6 +39,7 @@ class Grid extends React.Component<GridProps> {
             {this.props.hasQuery && (
               <GridQuery
                 query={this.props.query}
+                placeholder={this.props.queryPlaceholder}
                 setQuery={this.props.setQuery}
               />
             )}

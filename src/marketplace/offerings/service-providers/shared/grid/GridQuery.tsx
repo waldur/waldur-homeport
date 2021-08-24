@@ -2,10 +2,10 @@ import debounce from 'lodash.debounce';
 import { Component } from 'react';
 
 import './GridQuery.scss';
-import { translate } from '@waldur/i18n';
 import { InputField } from '@waldur/marketplace/offerings/service-providers/shared/InputField';
 
 interface GridQueryProps {
+  placeholder?: string;
   query: string;
   setQuery: (query: string) => void;
 }
@@ -36,9 +36,7 @@ export class GridQuery extends Component<GridQueryProps, State> {
       <div className="text-right gridQuery">
         <InputField
           type="search"
-          placeholder={translate(
-            'Search service provider by name or abbreviation',
-          )}
+          placeholder={this.props.placeholder}
           value={this.state.query}
           onChange={this.setQuery}
         />
