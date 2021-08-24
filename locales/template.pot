@@ -7132,6 +7132,10 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+#: src/marketplace/offerings/service-providers/ServiceProvidersGrid.tsx
+msgid "Search by name or abbreviation"
+msgstr ""
+
 #: src/navigation/AnonymousHeader.tsx
 msgid "Search for offerings and providers"
 msgstr ""
@@ -7139,10 +7143,6 @@ msgstr ""
 #: src/marketplace/category/filters/FilterBar.tsx
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Search for offerings..."
-msgstr ""
-
-#: src/marketplace/offerings/service-providers/shared/grid/GridQuery.tsx
-msgid "Search service provider by name or abbreviation"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
