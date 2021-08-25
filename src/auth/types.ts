@@ -37,6 +37,8 @@ interface CoreConfiguration {
   ONLY_STAFF_MANAGES_SERVICES: boolean;
   PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS: string[];
   SITE_DESCRIPTION: string;
+  SITE_PHONE: string;
+  SITE_EMAIL: string;
   TRANSLATION_DOMAIN: string;
   ORGANIZATION_SUBNETS_VISIBLE: boolean;
 }

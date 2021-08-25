@@ -24,12 +24,14 @@ export const OrganizationRemovalErrorDialog: FunctionComponent = () => {
         </ModalTitle>
       </ModalHeader>
       <ModalBody>
-        {ENV.supportEmail
+        {ENV.plugins.WALDUR_CORE.SITE_EMAIL
           ? translate(
               'To remove your organization, please send an email to {supportEmail}. Thank you!',
               {
                 supportEmail: (
-                  <a href={`mailto:${ENV.supportEmail}`}>{ENV.supportEmail}</a>
+                  <a href={`mailto:${ENV.plugins.WALDUR_CORE.SITE_EMAIL}`}>
+                    {ENV.plugins.WALDUR_CORE.SITE_EMAIL}
+                  </a>
                 ),
               },
               formatJsxTemplate,
