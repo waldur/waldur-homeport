@@ -7576,8 +7576,11 @@ msgid "Set access policy for {offeringName}"
 msgstr ""
 
 #: src/openstack/openstack-instance/SetAllowedAddressPairsButton.tsx
-#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 msgid "Set allowed address pairs"
+msgstr ""
+
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+msgid "Set allowed address pairs ({instance} / {ipAddress})"
 msgstr ""
 
 #: src/marketplace/resources/SetBackendIdAction.tsx
