@@ -42,6 +42,7 @@ interface CoreConfiguration {
   SITE_EMAIL: string;
   TRANSLATION_DOMAIN: string;
   ORGANIZATION_SUBNETS_VISIBLE: boolean;
+  CURRENCY_NAME: string;
 }
 
 interface MarketplaceConfiguration {

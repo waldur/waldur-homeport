@@ -47,7 +47,7 @@ export const formatGrowthChart = (growthChartData) => {
         max: null,
         interval: null,
         axisLabel: {
-          formatter: `${ENV.currency}{value}`,
+          formatter: `${ENV.plugins.WALDUR_CORE.CURRENCY_NAME}{value}`,
         },
       },
       {
@@ -57,7 +57,7 @@ export const formatGrowthChart = (growthChartData) => {
         max: null,
         interval: null,
         axisLabel: {
-          formatter: `${ENV.currency}{value}`,
+          formatter: `${ENV.plugins.WALDUR_CORE.CURRENCY_NAME}{value}`,
         },
       },
     ],

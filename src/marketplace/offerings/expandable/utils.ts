@@ -42,7 +42,7 @@ export const formatOfferingCostsChart = (offeringCostsChartData) => {
         max: null,
         interval: null,
         axisLabel: {
-          formatter: `${ENV.currency}{value}`,
+          formatter: `${ENV.plugins.WALDUR_CORE.CURRENCY_NAME}{value}`,
         },
       },
     ],
