@@ -16,7 +16,6 @@ export const ENV: ApplicationConfigurationOptions = {
   // build version
   buildId: 'develop',
 
-  currency: '€',
   // Either 'accounting' or 'billing'
   accountingMode: 'accounting',
 

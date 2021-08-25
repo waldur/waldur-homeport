@@ -6,7 +6,7 @@ export const formatCurrency = (
   fractionSize: number,
 ) => {
   if (typeof value === 'string') value = parseFloat(value);
-  return `${currency}${new Intl.NumberFormat('en-US', {
+  return `${currency || ''}${new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: fractionSize,
   }).format(value)}`;
@@ -24,5 +24,9 @@ export const defaultCurrency = (value) => {
   if (value !== 0 && Math.abs(value) < 0.005) {
     fractionSize = 4;
   }
-  return formatCurrency(value, ENV.currency, fractionSize);
+  return formatCurrency(
+    value,
+    ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+    fractionSize,
+  );
 };

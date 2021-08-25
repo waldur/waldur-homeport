@@ -42,7 +42,13 @@ export const LimitlessComponentsTable = ({
             </td>
             {!shouldConcealPrices && (
               <td>
-                <p>{formatCurrency(component.price, ENV.currency, 4)}</p>
+                <p>
+                  {formatCurrency(
+                    component.price,
+                    ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+                    4,
+                  )}
+                </p>
               </td>
             )}
           </tr>

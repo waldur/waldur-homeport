@@ -43,7 +43,11 @@ export const ComponentRow: React.FC<ComponentRowProps> = (props) => {
         ? props.offeringComponent.prices.map((price, innerIndex) => (
             <td key={innerIndex}>
               <p className="form-control-static">
-                {formatCurrency(price, ENV.currency, 3)}
+                {formatCurrency(
+                  price,
+                  ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+                  3,
+                )}
               </p>
             </td>
           ))
