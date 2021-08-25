@@ -38,6 +38,7 @@ interface CoreConfiguration {
   PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS: string[];
   SITE_DESCRIPTION: string;
   TRANSLATION_DOMAIN: string;
+  ORGANIZATION_SUBNETS_VISIBLE: boolean;
 }
 
 interface MarketplaceConfiguration {
