@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
 
+import { ENV } from '@waldur/configs/default';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 interface UserRemovalMessageDialogProps extends TranslateProps {
   resolve: {
-    supportEmail: string;
     userName: string;
   };
 }
@@ -15,7 +15,7 @@ export const PureUserRemovalMessageDialog: FunctionComponent<UserRemovalMessageD
   props,
 ) => {
   const {
-    resolve: { supportEmail, userName },
+    resolve: { userName },
     translate,
   } = props;
   return (
@@ -29,7 +29,7 @@ export const PureUserRemovalMessageDialog: FunctionComponent<UserRemovalMessageD
     >
       <p>
         {translate('To remove account, please send a request to {support}.', {
-          support: supportEmail || translate('support'),
+          support: ENV.plugins.WALDUR_CORE.SITE_EMAIL || translate('support'),
         })}
       </p>
       <p>

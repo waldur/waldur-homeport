@@ -31,8 +31,8 @@ export const getIssueAction = (props: ReportIssueActionProps) => {
                 'To report an issue, please send an email to {supportEmail}.',
                 {
                   supportEmail: (
-                    <a href={`mailto:${ENV.supportEmail}`}>
-                      {ENV.supportEmail}
+                    <a href={`mailto:${ENV.plugins.WALDUR_CORE.SITE_EMAIL}`}>
+                      {ENV.plugins.WALDUR_CORE.SITE_EMAIL}
                     </a>
                   ),
                 },

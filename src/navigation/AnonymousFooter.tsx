@@ -1,19 +1,14 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
+import { ENV } from '@waldur/configs/default';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { BackendHealthStatusIndicator } from '@waldur/navigation/BackendHealthStatusIndicator';
 import { getConfig } from '@waldur/store/config';
 
 export const AnonymousFooter: FunctionComponent = () => {
-  const {
-    buildId,
-    companyName,
-    companyUrl,
-    supportEmail,
-    supportPhone,
-  } = useSelector(getConfig);
+  const { buildId, companyName, companyUrl } = useSelector(getConfig);
   return (
     <footer className="footer-anonymous hidden-print">
       <div className="pull-right">
@@ -24,8 +19,12 @@ export const AnonymousFooter: FunctionComponent = () => {
           <li>
             <Link state="tos.index">{translate('Terms of Service')}</Link>
           </li>
-          {supportEmail && <li>{supportEmail}</li>}
-          {supportPhone && <li>{supportPhone}</li>}
+          {ENV.plugins.WALDUR_CORE.SITE_EMAIL && (
+            <li>{ENV.plugins.WALDUR_CORE.SITE_EMAIL}</li>
+          )}
+          {ENV.plugins.WALDUR_CORE.SITE_PHONE && (
+            <li>{ENV.plugins.WALDUR_CORE.SITE_PHONE}</li>
+          )}
           {companyName && (
             <li>
               <a href={companyUrl}>{companyName}</a>

@@ -52,7 +52,7 @@ export const RequestDirectAccessDialog: FunctionComponent<{
         <p>
           {translate(
             'To get access, please send a request to {supportEmail}.',
-            { supportEmail: ENV.supportEmail },
+            { supportEmail: ENV.plugins.WALDUR_CORE.SITE_EMAIL },
           )}
         </p>
         <p>

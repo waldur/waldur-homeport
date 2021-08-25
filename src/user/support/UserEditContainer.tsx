@@ -126,7 +126,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   } else {
     showUserRemoval = () =>
       dispatchMessage({
-        supportEmail: ENV.supportEmail,
+        supportEmail: ENV.plugins.WALDUR_CORE.SITE_EMAIL,
         userName: user.full_name,
       });
   }

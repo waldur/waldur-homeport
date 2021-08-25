@@ -25,7 +25,9 @@ export const getReportSecurityIncidentAction = (
               'To report a security incident, please send an email to {supportEmail}.',
               {
                 supportEmail: (
-                  <a href={`mailto:${ENV.supportEmail}`}>{ENV.supportEmail}</a>
+                  <a href={`mailto:${ENV.plugins.WALDUR_CORE.SITE_EMAIL}`}>
+                    {ENV.plugins.WALDUR_CORE.SITE_EMAIL}
+                  </a>
                 ),
               },
               formatJsxTemplate,
