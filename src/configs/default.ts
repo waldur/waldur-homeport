@@ -70,33 +70,6 @@ export const ENV: ApplicationConfigurationOptions = {
     'organization',
   ],
 
-  languageChoices: [
-    {
-      code: 'az',
-      label: gettext('Azerbaijani'),
-    },
-    {
-      code: 'en',
-      display_code: 'en',
-      label: gettext('English'),
-    },
-    {
-      code: 'et',
-      label: gettext('Estonian'),
-    },
-    {
-      code: 'lv',
-      label: gettext('Latvian'),
-    },
-    {
-      code: 'lt',
-      label: gettext('Lithuanian'),
-    },
-    {
-      code: 'ru',
-      label: gettext('Russian'),
-    },
-  ],
   defaultLanguage: 'en',
   organizationSubnetsVisible: false,
 

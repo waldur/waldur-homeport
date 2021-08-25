@@ -885,10 +885,6 @@ msgstr ""
 msgid "Average value"
 msgstr ""
 
-#: src/configs/default.ts
-msgid "Azerbaijani"
-msgstr ""
-
 #: src/azure/provider/AzureForm.tsx
 msgid "Azure Active Directory Application Secret"
 msgstr ""
@@ -2517,10 +2513,6 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: src/configs/default.ts
-msgid "English"
-msgstr ""
-
 #: src/marketplace/offerings/create/ComponentMeasuredUnitField.tsx
 msgid "Ensure this field has no more than 30 characters."
 msgstr ""
@@ -2578,10 +2570,6 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
-msgstr ""
-
-#: src/configs/default.ts
-msgid "Estonian"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
@@ -3735,10 +3723,6 @@ msgstr ""
 msgid "Labels"
 msgstr ""
 
-#: src/configs/default.ts
-msgid "Latvian"
-msgstr ""
-
 #: src/navigation/cookies/CookiesConsent.tsx
 msgid "Learn more"
 msgstr ""
@@ -3807,10 +3791,6 @@ msgstr ""
 
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "List of IPv4 or IPv6 CIDR addresses from where connection to self-service is allowed"
-msgstr ""
-
-#: src/configs/default.ts
-msgid "Lithuanian"
 msgstr ""
 
 #: src/customer/list/TotalCostComponent.tsx
@@ -6991,10 +6971,6 @@ msgstr ""
 
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Runtime state"
-msgstr ""
-
-#: src/configs/default.ts
-msgid "Russian"
 msgstr ""
 
 #: src/auth/AuthService.ts
