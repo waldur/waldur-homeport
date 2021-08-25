@@ -11,8 +11,8 @@ import { attachTransitions } from './transitions';
 
 export function afterBootstrap() {
   document.title = ENV.modePageTitle;
-  if (ENV.GoogleAnalyticsID) {
-    ReactGA.initialize(ENV.GoogleAnalyticsID);
+  if (ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID) {
+    ReactGA.initialize(ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID);
   }
   if (ENV.SENTRY_DSN) {
     Sentry.init({

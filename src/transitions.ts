@@ -141,7 +141,7 @@ export function attachTransitions() {
   });
 
   router.transitionService.onSuccess({}, () => {
-    if (ENV.GoogleAnalyticsID) {
+    if (ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID) {
       ReactGA.pageview(location.pathname);
     }
   });
