@@ -6,7 +6,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
-import { getConfig, getNativeNameVisible } from '@waldur/store/config';
+import { getNativeNameVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
@@ -16,14 +16,12 @@ import { CustomerLogoUpdateContainer } from './CustomerLogoUpdateContainer';
 
 interface CustomerDetailsProps {
   customer: Partial<Customer>;
-  organizationDomainVisible: boolean;
   nativeNameVisible: boolean;
 }
 
 export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
   customer,
   nativeNameVisible,
-  organizationDomainVisible,
 }) => {
   return (
     <CustomerAccordion
@@ -47,7 +45,7 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
           value={customer.abbreviation}
         />
 
-        {organizationDomainVisible && (
+        {ENV.plugins.WALDUR_CORE.ORGANIZATION_DOMAIN_VISIBLE && (
           <Field
             label={translate('Home organization domain name')}
             value={customer.domain}
@@ -120,7 +118,6 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
 
 const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
-  organizationDomainVisible: getConfig(state).organizationDomainVisible,
   nativeNameVisible: getNativeNameVisible(state),
 });
 

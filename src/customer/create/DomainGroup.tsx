@@ -11,7 +11,7 @@ import { InputGroup } from './InputGroup';
 
 export const DomainGroup: FunctionComponent = () => {
   const user = useSelector(getUser);
-  if (ENV.organizationDomainVisible) {
+  if (ENV.plugins.WALDUR_CORE.ORGANIZATION_DOMAIN_VISIBLE) {
     return null;
   } else if (user.is_staff) {
     return (

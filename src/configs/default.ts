@@ -108,9 +108,6 @@ export const ENV: ApplicationConfigurationOptions = {
   // Allows to hide billing step in organization creation wizard
   hideOrganizationBillingStep: false,
 
-  // Allows to hide domain field in organization detail
-  organizationDomainVisible: false,
-
   // Default font for rendering exported table PDF
   defaultFont: 'OpenSans',
 
