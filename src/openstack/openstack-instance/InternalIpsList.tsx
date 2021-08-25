@@ -6,6 +6,7 @@ import { Table, connectTable } from '@waldur/table';
 
 import { UpdateInternalIpsAction } from './actions/update-internal-ips/UpdateInternalIpsSetAction';
 import { SetAllowedAddressPairsButton } from './SetAllowedAddressPairsButton';
+import { formatAddressList } from './utils';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
@@ -15,8 +16,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={[
         {
           title: translate('IP address'),
-          render: ({ row }) =>
-            row.fixed_ips.map((fip) => fip.ip_address).join(', ') || 'N/A',
+          render: ({ row }) => formatAddressList(row),
         },
         {
           title: translate('MAC address'),

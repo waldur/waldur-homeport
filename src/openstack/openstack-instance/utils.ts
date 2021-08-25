@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { InternalIP } from '@waldur/resource/types';
 import { formatFlavor } from '@waldur/resource/utils';
 
 import { VolumeType } from '../types';
@@ -135,3 +136,6 @@ export function flavorValidator(model, choice) {
   }
   return false;
 }
+
+export const formatAddressList = (row: InternalIP) =>
+  row.fixed_ips.map((fip) => fip.ip_address).join(', ') || 'N/A';

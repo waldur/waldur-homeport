@@ -21,6 +21,8 @@ import { showError, showSuccess } from '@waldur/store/notify';
 
 import { validatePrivateCIDR } from '../utils';
 
+import { formatAddressList } from './utils';
+
 interface AllowedAddressPair {
   ip_address: string;
   mac_address: string;
@@ -140,7 +142,13 @@ export const SetAllowedAddressPairsDialog = enhance(
         className="form-horizontal"
       >
         <ModalDialog
-          title={translate('Set allowed address pairs')}
+          title={translate(
+            'Set allowed address pairs ({instance} / {ipAddress})',
+            {
+              instance: resolve.instance.name,
+              ipAddress: formatAddressList(resolve.internalIp),
+            },
+          )}
           footer={
             <>
               <CloseDialogButton />
