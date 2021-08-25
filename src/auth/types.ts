@@ -27,6 +27,7 @@ interface ValimoAuthConfiguration {
 }
 
 interface CoreConfiguration {
+  GOOGLE_ANALYTICS_ID: string;
   AUTHENTICATION_METHODS: string[];
   INVITATIONS_ENABLED: boolean;
   ALLOW_SIGNUP_WITHOUT_INVITATION: boolean;
