@@ -42,8 +42,9 @@ export interface LanguageOption {
 export interface ApplicationConfigurationOptions extends Record<string, any> {
   apiEndpoint: string;
   plugins?: PluginConfiguration;
-  languageChoices: LanguageOption[];
-  defaultLanguage: string;
+  // Language choices and default language are fetched from MasterMind
+  languageChoices?: LanguageOption[];
+  defaultLanguage?: string;
 }
 
 // Polyfill taken from https://stackoverflow.com/a/63984409

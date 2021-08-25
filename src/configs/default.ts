@@ -70,7 +70,6 @@ export const ENV: ApplicationConfigurationOptions = {
     'organization',
   ],
 
-  defaultLanguage: 'en',
   organizationSubnetsVisible: false,
 
   // Support email and phone is rendered at the footer
