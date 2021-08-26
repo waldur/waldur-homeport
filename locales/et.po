@@ -476,9 +476,6 @@ msgstr "Keskmine kasutus"
 msgid "Average value"
 msgstr "Keskmine väärtus"
 
-msgid "Azerbaijani"
-msgstr "Aserbaidžaan"
-
 msgid "Azure Active Directory Application Secret"
 msgstr "Azure Active Directory rakenduse saladus"
 
@@ -1205,9 +1202,6 @@ msgstr "Lepingu lõppkuupäev on"
 msgid "End time"
 msgstr "Lõppaeg"
 
-msgid "English"
-msgstr "Inglise keeles"
-
 msgid "Ensure this field has no more than 30 characters."
 msgstr "Veenduge, et sellel väljal ei ole rohkem kui 30 märki."
 
@@ -1240,9 +1234,6 @@ msgstr "Hinnanguline kuu kulu"
 
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr "Eeldatav kuutasu muutub {old_estimate}-lt {new_estimate}-ni. Käibemaks ei sisaldu."
-
-msgid "Estonian"
-msgstr "Eesti"
 
 msgid "Ethernet type"
 msgstr "Etherneti tüüp"
@@ -1847,9 +1838,6 @@ msgstr "Kubernetese versioon"
 msgid "Label that is visible to users in Marketplace."
 msgstr "Silt, mis on turuplatsi kasutajatele nähtav"
 
-msgid "Latvian"
-msgstr "Läti"
-
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr "Jätke tühjaks, kui soovite et admin parool luuakse automaatselt."
 
@@ -1882,9 +1870,6 @@ msgstr "Limiidid on vigased"
 
 msgid "Link"
 msgstr "Viide"
-
-msgid "Lithuanian"
-msgstr "Leedu"
 
 msgid "Loading"
 msgstr "Laadimine..."
@@ -3160,9 +3145,6 @@ msgstr "Jooksev raamatupidamine"
 
 msgid "Runtime state"
 msgstr "Käitusaegne staatus"
-
-msgid "Russian"
-msgstr "Vene"
 
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr "SAML2 ühekordne väljalogimine on alanud. Oodake, kuni see saab valmis."

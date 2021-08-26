@@ -509,9 +509,6 @@ msgstr "Gemiddeld gebruik"
 msgid "Average value"
 msgstr "Gemiddelde waarde"
 
-msgid "Azerbaijani"
-msgstr "Azerbeidzjaans"
-
 msgid "Azure Active Directory Application Secret"
 msgstr "Azure Active Directory Toepassing Geheim"
 
@@ -1385,9 +1382,6 @@ msgstr "Einddatum van de overeenkomst is"
 msgid "End time"
 msgstr "Eindtijd"
 
-msgid "English"
-msgstr "Engels"
-
 msgid "Ensure this field has no more than 30 characters."
 msgstr "Zorg ervoor dat dit veld niet meer dan 30 tekens bevat."
 
@@ -1426,9 +1420,6 @@ msgstr "Geschatte maandelijkse kosten"
 
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr "De geschatte maandelijkse kosten veranderen van {old_estimate} in {new_estimate}. BTW is niet inbegrepen."
-
-msgid "Estonian"
-msgstr "Ests"
 
 msgid "Ethernet type"
 msgstr "Ethernet type"
@@ -2165,9 +2156,6 @@ msgstr "Label dat zichtbaar is voor gebruikers in Marketplace."
 msgid "Labels"
 msgstr "Labels"
 
-msgid "Latvian"
-msgstr "Lets"
-
 msgid "Learn more"
 msgstr "Meer informatie"
 
@@ -2209,9 +2197,6 @@ msgstr "Koppel OpenStack-instantie"
 
 msgid "Link invoice"
 msgstr "Koppel factuur"
-
-msgid "Lithuanian"
-msgstr "Litouws"
 
 msgid "Loading"
 msgstr "Laden"
@@ -4027,9 +4012,6 @@ msgstr "Lopende boekhouding"
 
 msgid "Runtime state"
 msgstr "Runtime-status"
-
-msgid "Russian"
-msgstr "Russisch"
 
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr "SAML2 enkele afmelding is gestart. Wacht alstublieft tot het voltooid is."

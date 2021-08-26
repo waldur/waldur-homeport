@@ -509,9 +509,6 @@ msgstr "Průměrné využití"
 msgid "Average value"
 msgstr "Průměrná hodnota"
 
-msgid "Azerbaijani"
-msgstr "Ázerbájdžánština"
-
 msgid "Azure Active Directory Application Secret"
 msgstr "Tajný klíč aplikace Azure Active Directory"
 
@@ -1385,9 +1382,6 @@ msgstr "Datum ukončení smlouvy je"
 msgid "End time"
 msgstr "Čas ukončení"
 
-msgid "English"
-msgstr "Angličtina"
-
 msgid "Ensure this field has no more than 30 characters."
 msgstr "Ujistěte se, že toto pole neobsahuje více než 30 znaků."
 
@@ -1426,9 +1420,6 @@ msgstr "Odhadované měsíční náklady"
 
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr "Odhadovaný měsíční poplatek se změní z {old_estimate} na {new_estimate}. DPH není zahrnuta."
-
-msgid "Estonian"
-msgstr "Estonština"
 
 msgid "Ethernet type"
 msgstr "Typ sítě Ethernet"
@@ -2165,9 +2156,6 @@ msgstr "Štítek, který je viditelný pro uživatele v Marketplace."
 msgid "Labels"
 msgstr "Štítky"
 
-msgid "Latvian"
-msgstr "Lotyština"
-
 msgid "Learn more"
 msgstr "Zjistit více"
 
@@ -2209,9 +2197,6 @@ msgstr "Propojit instanci OpenStack"
 
 msgid "Link invoice"
 msgstr "Propojit fakturu"
-
-msgid "Lithuanian"
-msgstr "Litevština"
 
 msgid "Loading"
 msgstr "Načítání"
@@ -4027,9 +4012,6 @@ msgstr "Spuštěné účetnictví"
 
 msgid "Runtime state"
 msgstr "Stav za běhu"
-
-msgid "Russian"
-msgstr "Ruština"
 
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr "Bylo spuštěno jednotné odhlášení SAML2. Vyčkejte prosím na jeho dokončení."

@@ -536,9 +536,6 @@ msgstr "İşə salındı"
 msgid "End time"
 msgstr "Bitmə vaxtı "
 
-msgid "English"
-msgstr "İngilis dili"
-
 msgid "Error message"
 msgstr "Xəta mesajı "
 
@@ -547,9 +544,6 @@ msgstr "Aylıq təqribi xərc  "
 
 msgid "Estimated cost"
 msgstr "Təqribi xərc"
-
-msgid "Estonian"
-msgstr "Eston dili"
 
 msgid "Event details"
 msgstr "Hadisənin təfsilatları"
@@ -968,9 +962,6 @@ msgstr "Açarlar"
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr "Əsas icazə URL (məsələn, http://keystone.example.com:5000/v3)"
 
-msgid "Latvian"
-msgstr "Latviyalı"
-
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr "Admin şifrəsinin avtomatik yaradılmasını istəyirsinizsə, boş buraxın."
 
@@ -985,9 +976,6 @@ msgstr "Gəlin başlayaq"
 
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Forma saxlandıqdan sonra həyat dövrü "
-
-msgid "Lithuanian"
-msgstr "Litvalı"
 
 msgid "Loading actions"
 msgstr "Yükləmə tədbirləri "
@@ -1618,9 +1606,6 @@ msgstr "Vəzifə idarəçiliyi hadisələri"
 
 msgid "Runtime state"
 msgstr "İşləmə vaxtı vəziyyəti"
-
-msgid "Russian"
-msgstr "Rus "
 
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr "SAML2 (təhlükəsizlik təminatı sistemi üçün işarə dili) tək çıxış başlandı. Xahiş edirik tamamlanana qədər gözləyin."

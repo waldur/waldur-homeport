@@ -509,9 +509,6 @@ msgstr "Gjennomsnittlig utnyttelse"
 msgid "Average value"
 msgstr "Gjennomsnittlig verdi"
 
-msgid "Azerbaijani"
-msgstr "Aserbajdsjansk"
-
 msgid "Azure Active Directory Application Secret"
 msgstr "Azure Active Directory-programhemmelighet"
 
@@ -1385,9 +1382,6 @@ msgstr "Sluttdato for avtalen er"
 msgid "End time"
 msgstr "Sluttid"
 
-msgid "English"
-msgstr "Engelsk"
-
 msgid "Ensure this field has no more than 30 characters."
 msgstr "Kontroller at dette feltet ikke har mer enn 30 tegn."
 
@@ -1426,9 +1420,6 @@ msgstr "Estimert månedlig kostnad"
 
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr "Estimert månedlig avgift vil endres fra {old_estimate} til {new_estimate}. MVA er ikke inkludert."
-
-msgid "Estonian"
-msgstr "Estisk"
 
 msgid "Ethernet type"
 msgstr "Ethernet-type"
@@ -2165,9 +2156,6 @@ msgstr "Etikett som er synlig for brukere på Marketplace."
 msgid "Labels"
 msgstr "Etiketter"
 
-msgid "Latvian"
-msgstr "Latvisk"
-
 msgid "Learn more"
 msgstr "Finn ut mer"
 
@@ -2209,9 +2197,6 @@ msgstr "Koble OpenStack-forekomst"
 
 msgid "Link invoice"
 msgstr "Koble faktura"
-
-msgid "Lithuanian"
-msgstr "Litauisk"
 
 msgid "Loading"
 msgstr "Laster"
@@ -4027,9 +4012,6 @@ msgstr "Kjører regnskap"
 
 msgid "Runtime state"
 msgstr "Kjøretidstilstand"
-
-msgid "Russian"
-msgstr "Russisk"
 
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr "SAML2-enkeltavlogging er startet. Vent til den er fullført."

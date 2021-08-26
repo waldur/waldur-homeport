@@ -170,14 +170,8 @@ msgstr "Aktivizēt profilu"
 msgid "Enabled"
 msgstr "Ieslēgts"
 
-msgid "English"
-msgstr "Angļu valoda"
-
 msgid "Error message"
 msgstr "Kļūdas ziņojums"
-
-msgid "Estonian"
-msgstr "Igauņu valoda"
 
 msgid "Events"
 msgstr "Notikumi"
@@ -280,9 +274,6 @@ msgstr "Aktīvs"
 
 msgid "Link"
 msgstr "Saite"
-
-msgid "Lithuanian"
-msgstr "Lietuviešu valoda"
 
 msgid "Member"
 msgstr "Dalībnieks"

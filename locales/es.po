@@ -509,9 +509,6 @@ msgstr "Utilización media"
 msgid "Average value"
 msgstr "Valor promedio"
 
-msgid "Azerbaijani"
-msgstr "Azerbaiyano"
-
 msgid "Azure Active Directory Application Secret"
 msgstr "Secreto de la aplicación de Azure Active Directory"
 
@@ -1385,9 +1382,6 @@ msgstr "La fecha de finalización del acuerdo es"
 msgid "End time"
 msgstr "Hora de finalización"
 
-msgid "English"
-msgstr "Inglés"
-
 msgid "Ensure this field has no more than 30 characters."
 msgstr "Asegúrese de que este campo no tenga más de 30 caracteres."
 
@@ -1426,9 +1420,6 @@ msgstr "Costo mensual estimado"
 
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr "La tarifa mensual estimada cambiará de {old_estimate} a {new_estimate}. El IVA no está incluido."
-
-msgid "Estonian"
-msgstr "Estonio"
 
 msgid "Ethernet type"
 msgstr "Tipo de Ethernet"
@@ -2165,9 +2156,6 @@ msgstr "Etiqueta visible para los usuarios en Marketplace."
 msgid "Labels"
 msgstr "Etiquetas"
 
-msgid "Latvian"
-msgstr "Letón"
-
 msgid "Learn more"
 msgstr "Más información"
 
@@ -2209,9 +2197,6 @@ msgstr "Vincular la instancia de OpenStack"
 
 msgid "Link invoice"
 msgstr "Vincular factura"
-
-msgid "Lithuanian"
-msgstr "Lituano"
 
 msgid "Loading"
 msgstr "Cargando"
@@ -4027,9 +4012,6 @@ msgstr "Ejecución de la contabilidad"
 
 msgid "Runtime state"
 msgstr "Estado de ejecución"
-
-msgid "Russian"
-msgstr "Ruso"
 
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr "Se ha iniciado el cierre de sesión único de SAML2. Por favor, espere hasta que se complete."

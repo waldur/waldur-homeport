@@ -377,9 +377,6 @@ msgstr "دسترسی zone"
 msgid "Available quota usage: {usage}"
 msgstr "استفاده از سهم موجود"
 
-msgid "Azerbaijani"
-msgstr "آذربایجانی"
-
 msgid "Azure Active Directory Application Secret"
 msgstr "راز برنامه Azure Active Directory"
 
@@ -1018,9 +1015,6 @@ msgstr "تاریخ پایان توافق نامه"
 
 msgid "End time"
 msgstr "زمان پایان"
-
-msgid "English"
-msgstr "انگلیسی"
 
 msgid "Enter private IPv4 CIDR."
 msgstr "IPv4 CID خصوصی وارد کنید."

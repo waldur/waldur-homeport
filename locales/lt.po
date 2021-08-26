@@ -509,9 +509,6 @@ msgstr "Vidutinis panaudojimas"
 msgid "Average value"
 msgstr "Vidutinė vertė"
 
-msgid "Azerbaijani"
-msgstr "Azerbaidžaniečių"
-
 msgid "Azure Active Directory Application Secret"
 msgstr "Azure Active Directory programos paslaptis"
 
@@ -1385,9 +1382,6 @@ msgstr "Sutarties pabaigos data yra"
 msgid "End time"
 msgstr "Pabaigos laikas"
 
-msgid "English"
-msgstr "Anglų"
-
 msgid "Ensure this field has no more than 30 characters."
 msgstr "Įsitikinkite, kad šiame lauke yra ne daugiau kaip 30 simbolių."
 
@@ -1426,9 +1420,6 @@ msgstr "Numatomos mėnesio išlaidos"
 
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr "Numatomas mėnesinis mokestis pasikeis iš {old_estimate} į {new_estimate}. PVM neįtrauktas."
-
-msgid "Estonian"
-msgstr "Estų"
 
 msgid "Ethernet type"
 msgstr "Ethernet tipas"
@@ -2165,9 +2156,6 @@ msgstr "Etiketė, matoma vartotojams Marketplace."
 msgid "Labels"
 msgstr "Etiketės"
 
-msgid "Latvian"
-msgstr "Latvių"
-
 msgid "Learn more"
 msgstr "Sužinokite daugiau"
 
@@ -2209,9 +2197,6 @@ msgstr "Nuoroda OpenStack egzempliorių"
 
 msgid "Link invoice"
 msgstr "Susieti sąskaitą faktūrą"
-
-msgid "Lithuanian"
-msgstr "Lietuvių"
 
 msgid "Loading"
 msgstr "Įkeliama"
@@ -4027,9 +4012,6 @@ msgstr "Vykdoma apskaita"
 
 msgid "Runtime state"
 msgstr "Veikimo būsena"
-
-msgid "Russian"
-msgstr "Rusų"
 
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr "SAML2 vienkartinis atsijungimas paleistas. Palaukite, kol jis bus baigtas."

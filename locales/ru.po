@@ -620,17 +620,11 @@ msgstr "Включен"
 msgid "End time"
 msgstr "Время окончания"
 
-msgid "English"
-msgstr "Английский"
-
 msgid "Environment variables"
 msgstr "Переменные среды"
 
 msgid "Error message"
 msgstr "Сообщение об ошибке"
-
-msgid "Estonian"
-msgstr "Эстонский"
 
 msgid "Events"
 msgstr "События"
@@ -755,9 +749,6 @@ msgstr "Сохранён до"
 msgid "Key"
 msgstr "Ключ"
 
-msgid "Latvian"
-msgstr "Латышский"
-
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr "Оставьте пустым, если желаете, чтобы пароль администратора был сгенерирован автоматически."
 
@@ -769,9 +760,6 @@ msgstr "Юридический адрес"
 
 msgid "Link"
 msgstr "Ссылка"
-
-msgid "Lithuanian"
-msgstr "Литовский"
 
 msgid "Log out"
 msgstr "Выход"
