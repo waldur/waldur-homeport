@@ -37,7 +37,6 @@ const getOrderItemsTab = (): ResourceTab => ({
   key: 'orderItems',
   title: translate('Order items'),
   component: ResourceOrderItemsTab,
-  feature: 'marketplace',
   isVisible: (resource) => Boolean(resource.marketplace_resource_uuid),
 });
 
