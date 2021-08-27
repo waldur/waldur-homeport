@@ -1,12 +1,10 @@
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
-import { getConfig } from '@waldur/store/config';
-import { RootState } from '@waldur/store/reducers';
 
 export const DocsLink: FunctionComponent = () => {
-  const link = useSelector((state: RootState) => getConfig(state).docsLink);
+  const link = ENV.plugins.WALDUR_CORE.DOCS_URL;
   if (!link) {
     return null;
   }

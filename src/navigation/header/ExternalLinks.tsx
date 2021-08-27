@@ -1,14 +1,9 @@
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
+import { ExternalLink } from '@waldur/auth/types';
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
-import { getConfig } from '@waldur/store/config';
-import { RootState } from '@waldur/store/reducers';
-
-interface ExternalLink {
-  label: string;
-  url: string;
-}
 
 interface ExternalLinksComponentProps {
   externalLinks: ExternalLink[];
@@ -16,7 +11,7 @@ interface ExternalLinksComponentProps {
 }
 
 const ExternalLinksComponent = (props: ExternalLinksComponentProps) =>
-  props.externalLinks.length > 0 && (
+  props.externalLinks?.length > 0 && (
     <DropdownButton
       title={translate('External links')}
       id="external-link-dropdown-btn"
@@ -31,8 +26,8 @@ const ExternalLinksComponent = (props: ExternalLinksComponentProps) =>
     </DropdownButton>
   );
 
-const mapStateToProps = (state: RootState) => {
-  const externalLinks = getConfig(state).externalLinks;
+const mapStateToProps = () => {
+  const externalLinks = ENV.plugins.WALDUR_CORE.EXTERNAL_LINKS;
   return {
     externalLinks,
     onSelect: (eventKey: number) => window.open(externalLinks[eventKey].url),

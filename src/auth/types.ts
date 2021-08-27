@@ -26,7 +26,15 @@ interface ValimoAuthConfiguration {
   MOBILE_PREFIX: string;
 }
 
+export interface ExternalLink {
+  label: string;
+  url: string;
+}
+
 interface CoreConfiguration {
+  EXTERNAL_LINKS: ExternalLink[];
+  DOCS_URL: string;
+  SUPPORT_PORTAL_URL: string;
   GOOGLE_ANALYTICS_ID: string;
   ORGANIZATION_DOMAIN_VISIBLE: boolean;
   AUTHENTICATION_METHODS: string[];
