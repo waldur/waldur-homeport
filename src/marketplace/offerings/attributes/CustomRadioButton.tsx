@@ -18,7 +18,7 @@ export const CustomRadioButton: FunctionComponent<CustomRadioButtonProps> = (
           {...props.input}
           type="radio"
           value={choice.value}
-          checked={props.input.value === choice.value}
+          checked={props.input?.value === choice.value}
           {...props}
         />
         <div className="custom-checkmark" />

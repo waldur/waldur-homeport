@@ -194,6 +194,11 @@ const getReportItems = (): MenuItemType[] => [
     key: 'vm-type-overview',
     feature: 'support.vm-type-overview',
   },
+  {
+    label: translate('Features'),
+    state: 'support.features',
+    icon: 'fa-desktop',
+  },
 ];
 
 // This service checks users status and returns different sidebar items and router state
