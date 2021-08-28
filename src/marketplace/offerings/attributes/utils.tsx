@@ -78,9 +78,9 @@ export const configAttrField = (attribute) => {
       attr = {
         component: (componentProp) => {
           const choices = [
-            { value: '', label: 'All' },
-            { value: 'true', label: 'Yes' },
-            { value: 'false', label: 'No' },
+            { value: '', label: translate('All') },
+            { value: 'true', label: translate('Yes') },
+            { value: 'false', label: translate('No') },
           ];
           return (
             <CustomRadioButton

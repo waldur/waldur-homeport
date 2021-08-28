@@ -510,6 +510,7 @@ msgstr ""
 
 #: src/customer/list/AccountingRunningField.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
+#: src/marketplace/offerings/attributes/utils.tsx
 #: src/rancher/node/NodeRoleField.tsx
 msgid "All"
 msgstr ""
@@ -2745,6 +2746,8 @@ msgstr ""
 msgid "Failed to operate with backend."
 msgstr ""
 
+#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Features"
 msgstr ""
@@ -4425,9 +4428,11 @@ msgstr ""
 
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
+#: src/issues/workspace/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/offerings/attributes/utils.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -9194,6 +9199,7 @@ msgid "Unable to load organizations"
 msgstr ""
 
 #: src/TemplateComponent.tsx
+#: src/issues/workspace/FeaturesList.tsx
 msgid "Unable to load page"
 msgstr ""
 
@@ -10367,9 +10373,11 @@ msgstr ""
 
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
+#: src/issues/workspace/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/offerings/attributes/utils.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx

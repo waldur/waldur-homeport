@@ -127,6 +127,11 @@ const SupportWorkspace = lazyComponent(
     ),
   'SupportWorkspace',
 );
+const FeaturesList = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "FeaturesList" */ './workspace/FeaturesList'),
+  'FeaturesList',
+);
 
 export const states: StateDeclaration[] = [
   {
@@ -321,6 +326,15 @@ export const states: StateDeclaration[] = [
     name: 'support.broadcast',
     url: 'broadcast/',
     component: BroadcastList,
+    resolve: {
+      permission: checkPermission,
+    },
+  },
+
+  {
+    name: 'support.features',
+    url: 'features/',
+    component: FeaturesList,
     resolve: {
       permission: checkPermission,
     },
