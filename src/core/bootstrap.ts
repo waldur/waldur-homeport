@@ -60,6 +60,7 @@ export async function loadConfig() {
       label,
     })),
     defaultLanguage: backendSettings.LANGUAGE_CODE,
+    FEATURES: backendSettings.FEATURES,
   };
   Object.assign(ENV, config);
   if (ENV.enableExperimental) {
