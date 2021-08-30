@@ -213,14 +213,18 @@ export interface OfferingsListType {
 }
 
 export interface ServiceProvider {
-  customer_uuid?: string;
-  customer_name?: string;
+  customer_uuid: string;
+  customer_name: string;
   name: string;
   uuid: string;
   image?: string;
+  customer_image?: string;
   description?: string;
   service_offerings?: Offering[];
   created: string;
+  customer_abbreviation?: string;
+  country?: string;
+  division?: string;
 }
 
 export interface OfferingConfigurationFormProps extends InjectedFormProps {

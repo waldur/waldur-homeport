@@ -113,12 +113,12 @@ const OfferingsListContainer = lazyComponent(
     ),
   'OfferingsListContainer',
 );
-const ServiceProvider = lazyComponent(
+const ServiceProviderContainer = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "ServiceProvider" */ './offerings/service-providers/ServiceProvider'
+      /* webpackChunkName: "ServiceProvider" */ './offerings/service-providers/ServiceProviderContainer'
     ),
-  'ServiceProvider',
+  'ServiceProviderContainer',
 );
 const ServiceProvidersContainer = lazyComponent(
   () =>
@@ -390,7 +390,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-service-provider.details',
     url: ':uuid/',
-    component: ServiceProvider,
+    component: ServiceProviderContainer,
   },
 
   {

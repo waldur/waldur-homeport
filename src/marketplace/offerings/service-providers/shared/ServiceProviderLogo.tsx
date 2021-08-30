@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import PlaceholderImage from 'react-simple-svg-placeholder';
 
-import { ServiceProvider } from '@waldur/marketplace/offerings/service-providers/types';
+import { ServiceProvider } from '@waldur/marketplace/types';
 
 interface ServiceProviderLogoProps {
   serviceProvider: ServiceProvider;

@@ -43,8 +43,6 @@ export const ARCHIVED = 'Archived';
 
 export const OFFERING_TABLE_NAME = 'marketplace-offerings';
 export const PUBLIC_OFFERINGS_FILTER_FORM_ID = 'OfferingsFilter';
-export const SERVICE_PROVIDER_OFFERING_TABLE_NAME =
-  'marketplace-service-provider-offerings';
 
 export const SERVICE_PROVIDERS_TABLE_NAME =
   'marketplace-service-providers-list';

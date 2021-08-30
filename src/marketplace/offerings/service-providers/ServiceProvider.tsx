@@ -1,41 +1,45 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
+import { FunctionComponent, useState } from 'react';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Panel } from '@waldur/core/Panel';
-import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
-import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
-import { translate } from '@waldur/i18n';
-import { getServiceProviderByCustomer } from '@waldur/marketplace/common/api';
-import { ServiceProviderOfferingsList } from '@waldur/marketplace/offerings/service-providers/ServiceProviderOfferingsList';
-import { useTitle } from '@waldur/navigation/title';
+import { ServiceProviderBreadcrumbs } from '@waldur/marketplace/offerings/service-providers/ServiceProviderBreadcrumbs';
+import { ServiceProviderHeader } from '@waldur/marketplace/offerings/service-providers/ServiceProviderHeader';
+import { ServiceProviderOfferingsCategoriesFilter } from '@waldur/marketplace/offerings/service-providers/ServiceProviderOfferingsCategoriesFilter';
+import { ServiceProviderOfferingsFilterBar } from '@waldur/marketplace/offerings/service-providers/ServiceProviderOfferingsFilterBar';
+import { ServiceProviderOfferingsGrid } from '@waldur/marketplace/offerings/service-providers/ServiceProviderOfferingsGrid';
+import { ServiceProvider as ServiceProviderType } from '@waldur/marketplace/types';
+import './ServiceProvider.scss';
 
-export const ServiceProvider: FunctionComponent = () => {
-  useTitle(translate('Service provider'));
-  const {
-    params: { uuid },
-  } = useCurrentStateAndParams();
-  const { loading, error, value: serviceProvider } = useAsync(() =>
-    getServiceProviderByCustomer({
-      customer_uuid: uuid,
-    }),
-  );
-  return loading ? (
-    <LoadingSpinner />
-  ) : error ? (
-    <p>{translate('Unable to load the service provider.')}</p>
-  ) : serviceProvider ? (
-    <Panel>
-      <DashboardHeader
-        title={serviceProvider.customer_name}
-        subtitle={translate('Public offerings')}
-      />
-      <ServiceProviderOfferingsList
-        serviceProviderUuid={serviceProvider.customer_uuid}
-      />
-    </Panel>
-  ) : (
-    <InvalidRoutePage />
+interface ServiceProviderProps {
+  serviceProvider: ServiceProviderType;
+}
+
+export const ServiceProvider: FunctionComponent<ServiceProviderProps> = ({
+  serviceProvider,
+}) => {
+  const [queryFilter, setQueryFilter] = useState<string>('');
+  const [categoryFilter, setCategoryFilter] = useState<string>('');
+  return (
+    <div className="serviceProvider">
+      <ServiceProviderHeader serviceProvider={serviceProvider} />
+      <ServiceProviderBreadcrumbs serviceProvider={serviceProvider} />
+      <div className="serviceProvider__content">
+        <ServiceProviderOfferingsCategoriesFilter
+          serviceProviderUuid={serviceProvider.customer_uuid}
+          onQueryFilterChange={(q: string) => setQueryFilter(q)}
+          onCategoryChange={(newCategory: string) =>
+            setCategoryFilter(newCategory)
+          }
+        />
+        <div className="serviceProvider__grid">
+          {categoryFilter && (
+            <ServiceProviderOfferingsFilterBar categoryUuid={categoryFilter} />
+          )}
+          <ServiceProviderOfferingsGrid
+            serviceProviderUuid={serviceProvider.customer_uuid}
+            query={queryFilter}
+            categoryUuid={categoryFilter}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
