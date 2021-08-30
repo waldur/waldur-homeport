@@ -2760,6 +2760,10 @@ msgstr ""
 msgid "Features"
 msgstr ""
 
+#: src/issues/workspace/FeaturesList.tsx
+msgid "Features have been updated."
+msgstr ""
+
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Fee applied each time this plan is activated."
 msgstr ""
@@ -7060,6 +7064,7 @@ msgstr ""
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
+#: src/issues/workspace/FeaturesList.tsx
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
@@ -9512,6 +9517,10 @@ msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 msgid "Unable to update enabled checklists."
+msgstr ""
+
+#: src/issues/workspace/FeaturesList.tsx
+msgid "Unable to update features."
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/update-floating-ips/utils.tsx
