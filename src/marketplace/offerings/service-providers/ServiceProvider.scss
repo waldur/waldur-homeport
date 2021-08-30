@@ -1,0 +1,11 @@
+.serviceProvider {
+  .serviceProvider__content {
+    display: flex;
+    padding: 0 24px;
+    column-gap: 16px;
+
+    .serviceProvider__grid {
+      width: 100%;
+    }
+  }
+}

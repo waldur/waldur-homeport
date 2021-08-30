@@ -519,3 +519,18 @@ button.dim:active:before {
 .btn:focus {
   outline: none !important;
 }
+
+.btn-card {
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: #6b6c7e;
+  border: 1px solid $light-gray;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $navy;
+    color: $white;
+  }
+}

@@ -9,7 +9,7 @@ import { AttributeFilterSection } from './AttributeFilterSection';
 
 const SUPPORTED_TYPES = ['choice', 'list', 'boolean'];
 
-const prepareSections = (sections) =>
+export const prepareSections = (sections) =>
   sections
     .map((section) => ({
       ...section,

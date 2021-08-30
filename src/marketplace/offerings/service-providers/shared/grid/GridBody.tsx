@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import { ServiceProvider } from '@waldur/marketplace/offerings/service-providers/types';
-
+import { ServiceProvider } from '@waldur/marketplace/types';
 import './GridBody.scss';
 
 interface GridBodyProps {

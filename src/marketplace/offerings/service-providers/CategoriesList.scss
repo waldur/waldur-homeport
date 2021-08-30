@@ -1,0 +1,27 @@
+@import '~sass/inspinia/_variables.scss';
+
+.categoriesListContainer {
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      font-size: 16px;
+      line-height: 24px;
+      color: $blue;
+      border-bottom: 1px solid #ebebee;
+      padding: 12px 16px;
+      cursor: pointer;
+
+      &:hover,
+      &.active {
+        background: rgba(28, 132, 198, 0.1);
+      }
+
+      &.active {
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@import '~sass/variables.scss';
+@import '~sass/inspinia/_variables.scss';
+
+.offeringPurchaseButton {
+  button {
+    background-color: $navy;
+    color: $white;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+}

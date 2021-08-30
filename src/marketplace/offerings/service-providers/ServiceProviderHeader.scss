@@ -1,0 +1,44 @@
+@import '~sass/inspinia/_variables.scss';
+@import '~sass/variables.scss';
+
+.serviceProviderHeaderContainer {
+  background-size: cover;
+  background-position: left center;
+  background-repeat: no-repeat;
+  height: 328px;
+
+  .serviceProviderHeaderContainer__card {
+    display: inline-flex;
+    background: $white;
+    border: 1px solid $border-color;
+    border-radius: 0 3px 3px 3px;
+    margin: 96px 0 0 150px;
+    padding: 24px;
+    column-gap: 24px;
+
+    .serviceProviderHeaderContainer__card__info {
+      display: flex;
+      flex-direction: column;
+
+      h2 {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 30px;
+        line-height: 50px;
+        margin: 0;
+      }
+
+      p {
+        font-size: 14px;
+        line-height: 24px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        max-width: 500px;
+        margin: 0;
+      }
+    }
+  }
+}

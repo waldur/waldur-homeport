@@ -7,7 +7,7 @@ import { CountryFlag } from '@waldur/marketplace/offerings/service-providers/sha
 import { Division } from '@waldur/marketplace/offerings/service-providers/shared/Division';
 import { ServiceProviderLogo } from '@waldur/marketplace/offerings/service-providers/shared/ServiceProviderLogo';
 import { ShowOfferingsButton } from '@waldur/marketplace/offerings/service-providers/shared/ShowOfferingsButton';
-import { ServiceProvider } from '@waldur/marketplace/offerings/service-providers/types';
+import { ServiceProvider } from '@waldur/marketplace/types';
 
 interface ServiceProviderDetailsCardProps {
   row: ServiceProvider;
@@ -32,12 +32,12 @@ export const ServiceProviderDetailsCard: FunctionComponent<ServiceProviderDetail
       <ServiceProviderLogo serviceProvider={row} />
       {row.country && <CountryFlag countryCode={row.country} />}
     </div>
-    <p className="detailsCardContainer__title">
+    <p className="card-title">
       {row.customer_abbreviation || row.customer_name}
     </p>
     {row.customer_abbreviation && (
-      <div className="detailsCardContainer__fullName">
-        <span>{translate('Full name:')}</span>
+      <div>
+        <span className="font-bold">{translate('Full name:')}</span>
         <br />
         {row.customer_name}
       </div>

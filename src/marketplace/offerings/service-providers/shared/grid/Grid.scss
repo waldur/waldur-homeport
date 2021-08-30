@@ -1,6 +1,8 @@
 @import '~sass/variables.scss';
 
 .grid {
+  width: 100%;
+
   .grid__header {
     display: flex;
     align-items: center;

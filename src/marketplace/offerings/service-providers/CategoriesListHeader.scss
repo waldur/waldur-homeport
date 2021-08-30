@@ -1,0 +1,25 @@
+@import '~sass/inspinia/_variables.scss';
+
+.categoriesListHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #ebebee;
+
+  h1 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+    color: #000000;
+    margin: 0;
+  }
+
+  span {
+    font-size: 14px;
+    line-height: 24px;
+    color: $blue;
+    cursor: pointer;
+  }
+}

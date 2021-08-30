@@ -23,6 +23,7 @@ interface GridProps extends TranslateProps, TableState {
   resetPagination?: () => void;
   gridItemComponent: React.ComponentType<{ row: any }>;
   placeholderComponent?: React.ReactNode;
+  hideGridHeader?: boolean;
 }
 
 class Grid extends React.Component<GridProps> {
@@ -34,21 +35,23 @@ class Grid extends React.Component<GridProps> {
   render() {
     return (
       <div className="grid">
-        <div className="grid__header">
-          <div>
-            {this.props.hasQuery && (
-              <GridQuery
-                query={this.props.query}
-                placeholder={this.props.queryPlaceholder}
-                setQuery={this.props.setQuery}
-              />
-            )}
+        {!this.props.hideGridHeader && (
+          <div className="grid__header">
+            <div>
+              {this.props.hasQuery && (
+                <GridQuery
+                  query={this.props.query}
+                  placeholder={this.props.queryPlaceholder}
+                  setQuery={this.props.setQuery}
+                />
+              )}
+            </div>
+            <div className="grid__header__actions">
+              {this.hasRows() && <GridInfo {...this.props.pagination} />}
+              <GridButtons {...this.props} />
+            </div>
           </div>
-          <div className="grid__header__actions">
-            {this.hasRows() && <GridInfo {...this.props.pagination} />}
-            <GridButtons {...this.props} />
-          </div>
-        </div>
+        )}
         {this.renderBody()}
         {this.hasRows() && (
           <GridPagination
