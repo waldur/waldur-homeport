@@ -5,7 +5,11 @@ import { reduxForm, change } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { translate } from '@waldur/i18n';
-import { showSuccess, showError } from '@waldur/store/notify';
+import {
+  showSuccess,
+  showError,
+  showErrorResponse,
+} from '@waldur/store/notify';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { createProfile } from './api';
@@ -50,7 +54,12 @@ export const FreeIPAAccountCreate = reduxForm<
           if (response.data && response.data.username) {
             dispatch(showError(response.data.username));
           }
-          dispatch(showError(translate('Unable to create a FreeIPA profile.')));
+          dispatch(
+            showErrorResponse(
+              response,
+              translate('Unable to create a FreeIPA profile.'),
+            ),
+          );
         }
       },
       [dispatch, onProfileAdded],

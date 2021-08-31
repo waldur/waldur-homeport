@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { PROJECT_MANAGER_ROLE } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 interface UserRemoveButtonProps {
@@ -25,7 +25,9 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
       refreshList();
       dispatch(showSuccess(translate('Team member has been removed.')));
     } catch (e) {
-      dispatch(showError(translate('Unable to delete team member.')));
+      dispatch(
+        showErrorResponse(e, translate('Unable to delete team member.')),
+      );
     }
   };
   return (

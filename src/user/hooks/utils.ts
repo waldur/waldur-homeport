@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showSuccess, showError } from '@waldur/store/notify';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { updateEntity, createEntity } from '@waldur/table/actions';
 
 import { getEventGroups, updateHook, createHook } from './api';
@@ -92,7 +92,9 @@ export const useHookForm = (hook?: HookResponse) => {
           dispatch(showSuccess(translate('Notification has been updated.')));
           dispatch(closeModalDialog());
         } catch (e) {
-          dispatch(showError(translate('Unable to update notification.')));
+          dispatch(
+            showErrorResponse(e, translate('Unable to update notification.')),
+          );
         }
       } else {
         try {
@@ -106,7 +108,9 @@ export const useHookForm = (hook?: HookResponse) => {
           dispatch(showSuccess(translate('Notification has been created.')));
           dispatch(closeModalDialog());
         } catch (e) {
-          dispatch(showError(translate('Unable to create notification.')));
+          dispatch(
+            showErrorResponse(e, translate('Unable to create notification.')),
+          );
         }
       }
     },

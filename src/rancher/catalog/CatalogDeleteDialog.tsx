@@ -1,12 +1,11 @@
 import { FunctionComponent, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { Resource } from '@waldur/resource/types';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { deleteEntity } from '@waldur/table/actions';
 
 import { deleteCatalog } from '../api';
@@ -25,10 +24,9 @@ const useCatalogDeleteDialog = (catalog) => {
       setSubmitting(true);
       await deleteCatalog(catalog.uuid);
     } catch (error) {
-      const errorMessage = `${translate('Unable to delete catalog.')} ${format(
-        error,
-      )}`;
-      dispatch(showError(errorMessage));
+      dispatch(
+        showErrorResponse(error, translate('Unable to delete catalog.')),
+      );
       setSubmitting(false);
       return;
     }

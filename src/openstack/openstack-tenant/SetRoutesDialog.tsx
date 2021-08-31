@@ -8,7 +8,7 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { StaticRoute, StaticRoutesTable } from './StaticRoutesTable';
 
@@ -45,7 +45,9 @@ export const SetRoutesDialog = enhance(
         dispatch(showSuccess(translate('Static routes update was scheduled.')));
         dispatch(closeModalDialog());
       } catch (e) {
-        dispatch(showError(translate('Unable to update static routes.')));
+        dispatch(
+          showErrorResponse(e, translate('Unable to update static routes.')),
+        );
       }
     };
 

@@ -2,13 +2,12 @@ import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { format } from '@waldur/core/ErrorMessageFormatter';
 import { StringField, TextField, SecretField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { Resource } from '@waldur/resource/types';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { createEntity } from '@waldur/table/actions';
 
 import { createCatalog } from '../api';
@@ -42,10 +41,9 @@ const useCatalogCreateDialog = (cluster) => {
         const catalog = response.data;
         dispatch(createEntity('rancher-catalogs', catalog.uuid, catalog));
       } catch (error) {
-        const errorMessage = `${translate(
-          'Unable to create catalog.',
-        )} ${format(error)}`;
-        dispatch(showError(errorMessage));
+        dispatch(
+          showErrorResponse(error, translate('Unable to create catalog.')),
+        );
         setSubmitting(false);
         return;
       }

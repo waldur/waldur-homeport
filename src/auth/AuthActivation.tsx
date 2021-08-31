@@ -5,7 +5,7 @@ import { useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { showSuccess, showError } from '@waldur/store/notify';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import { AuthService } from './AuthService';
 
@@ -25,7 +25,7 @@ export const AuthActivation: FunctionComponent = () => {
       dispatch(showSuccess(translate('Account has been activated.')));
       router.stateService.go('initialdata');
     } catch (e) {
-      dispatch(showError(translate('Unable to activate account.')));
+      dispatch(showErrorResponse(e, translate('Unable to activate account.')));
     }
   }, [user_uuid, token, router.stateService, dispatch]);
 

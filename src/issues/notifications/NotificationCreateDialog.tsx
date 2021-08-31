@@ -34,7 +34,7 @@ import {
 } from '@waldur/marketplace/common/autocompletes';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { projectAutocomplete } from './utils';
 
@@ -67,7 +67,9 @@ export const NotificationCreateDialog = reduxForm({
         );
         dispatch(closeModalDialog());
       } catch (e) {
-        dispatch(showError(translate('Unable to create notifications.')));
+        dispatch(
+          showErrorResponse(e, translate('Unable to create notifications.')),
+        );
       }
     },
     [dispatch],

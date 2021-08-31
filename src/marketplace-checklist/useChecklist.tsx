@@ -1,9 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
-import { showSuccess, showError } from '@waldur/store/notify';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import {
   getChecklists,
@@ -39,10 +38,9 @@ const useChecklistSelector = (categoryId?: string) => {
       } catch (error) {
         setChecklistLoading(false);
         setChecklistErred(true);
-        const errorMessage = `${translate(
-          'Unable to load checklists.',
-        )} ${format(error)}`;
-        dispatch(showError(errorMessage));
+        dispatch(
+          showErrorResponse(error, translate('Unable to load checklists.')),
+        );
         return;
       }
     }
@@ -104,10 +102,12 @@ export const useUserChecklist = (userId, categoryId?) => {
       } catch (error) {
         setQuestionsLoading(false);
         setQuestionsErred(true);
-        const errorMessage = `${translate(
-          'Unable to load questions and answers.',
-        )} ${format(error)}`;
-        dispatch(showError(errorMessage));
+        dispatch(
+          showErrorResponse(
+            error,
+            translate('Unable to load questions and answers.'),
+          ),
+        );
         return;
       }
     }
@@ -128,10 +128,9 @@ export const useUserChecklist = (userId, categoryId?) => {
       setAnswers(answersTable);
     } catch (error) {
       setSubmitting(false);
-      const errorMessage = `${translate('Unable to submit answers.')} ${format(
-        error,
-      )}`;
-      dispatch(showError(errorMessage));
+      dispatch(
+        showErrorResponse(error, translate('Unable to submit answers.')),
+      );
       return;
     }
     dispatch(showSuccess(translate('Answers have been submitted')));
@@ -174,10 +173,12 @@ export const useChecklistOverview = (categoryId: string) => {
       } catch (error) {
         setStatsLoading(false);
         setStatsErred(true);
-        const errorMessage = `${translate(
-          'Unable to load compliance overview.',
-        )} ${format(error)}`;
-        dispatch(showError(errorMessage));
+        dispatch(
+          showErrorResponse(
+            error,
+            translate('Unable to load compliance overview.'),
+          ),
+        );
         return;
       }
     }

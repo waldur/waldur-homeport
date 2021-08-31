@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm, formValueSelector, change } from 'redux-form';
 
-import { format } from '@waldur/core/ErrorMessageFormatter';
 import { StringField, SelectField, NumberField, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { createHPA, listWorkloads, listNamespaces } from '@waldur/rancher/api';
 import { Resource } from '@waldur/resource/types';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
 import { createEntity } from '@waldur/table/actions';
 
@@ -47,10 +46,12 @@ const useHPACreateDialog = (cluster) => {
         const hpa = response.data;
         dispatch(createEntity('rancher-hpas', hpa.uuid, hpa));
       } catch (error) {
-        const errorMessage = `${translate(
-          'Unable to create horizontal pod autoscaler.',
-        )} ${format(error)}`;
-        dispatch(showError(errorMessage));
+        dispatch(
+          showErrorResponse(
+            error,
+            translate('Unable to create horizontal pod autoscaler.'),
+          ),
+        );
         setSubmitting(false);
         return;
       }

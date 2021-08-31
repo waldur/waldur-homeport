@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 import { reduxForm } from 'redux-form';
 
-import { format } from '@waldur/core/ErrorMessageFormatter';
 import { StringField, SelectField, NumberField, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { updateHPA } from '@waldur/rancher/api';
 import { HPA } from '@waldur/rancher/types';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { updateEntity } from '@waldur/table/actions';
 
 import { MetricOption, HPAUpdateFormData } from './types';
@@ -45,10 +44,12 @@ const useHPAUpdateDialog = (originalHPA) => {
         const hpa = response.data;
         dispatch(updateEntity('rancher-hpas', hpa.uuid, hpa));
       } catch (error) {
-        const errorMessage = `${translate(
-          'Unable to update horizontal pod autoscaler.',
-        )} ${format(error)}`;
-        dispatch(showError(errorMessage));
+        dispatch(
+          showErrorResponse(
+            error,
+            translate('Unable to update horizontal pod autoscaler.'),
+          ),
+        );
         setSubmitting(false);
         return;
       }

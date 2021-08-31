@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 interface OwnProps {
   resolve: { refreshList(): void; apiMethod; resource };
@@ -26,7 +26,7 @@ export const ReviewDialog = enhance(
         dispatch(showSuccess(translate('Review has been submitted.')));
         dispatch(closeModalDialog());
       } catch (e) {
-        dispatch(showError(translate('Unable to submit review.')));
+        dispatch(showErrorResponse(e, translate('Unable to submit review.')));
       }
     };
 

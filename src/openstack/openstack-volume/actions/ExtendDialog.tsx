@@ -24,7 +24,7 @@ import {
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { BaseResource } from '@waldur/resource/types';
-import { showSuccess, showError } from '@waldur/store/notify';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 interface Volume extends BaseResource {
   size: number;
@@ -64,7 +64,7 @@ export const VolumeExtendDialog = reduxForm<
           dispatch(showSuccess(translate('Volume has been extended.')));
           dispatch(closeModalDialog());
         } catch (e) {
-          dispatch(showError(translate('Unable to extend volume.')));
+          dispatch(showErrorResponse(e, translate('Unable to extend volume.')));
         }
       },
       [resource, dispatch],

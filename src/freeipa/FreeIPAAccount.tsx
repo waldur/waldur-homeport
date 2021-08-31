@@ -18,7 +18,7 @@ export const FreeIpaAccount = () => {
   const user = useSelector(getUser);
   const dispatch = useDispatch();
 
-  if (!ENV.plugins.WALDUR_FREEIPA.ENABLED) {
+  if (!ENV.plugins.WALDUR_FREEIPA?.ENABLED) {
     dispatch(showError(translate('FreeIPA extension is disabled.')));
     router.stateService.go('errorPage.notFound');
   }

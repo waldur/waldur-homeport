@@ -4,7 +4,7 @@ import { post } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { putAttachment } from '@waldur/issues/attachments/api';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showSuccess, showError } from '@waldur/store/notify';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import { IssueRequestPayload, IssueResponse } from './types';
 
@@ -31,6 +31,6 @@ export const sendIssueCreateRequest = async (
     dispatch(triggerTransition('support.detail', { uuid: issue.uuid }));
     dispatch(closeModalDialog());
   } catch (e) {
-    dispatch(showError(translate('Unable to create request.')));
+    dispatch(showErrorResponse(e, translate('Unable to create request.')));
   }
 };

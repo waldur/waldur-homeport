@@ -20,7 +20,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { BaseResource } from '@waldur/resource/types';
 import { formatFlavor } from '@waldur/resource/utils';
-import { showSuccess, showError } from '@waldur/store/notify';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import { RadioField } from './RadioField';
 import { SelectField } from './SelectField';
@@ -153,7 +153,9 @@ export const DropletResizeDialog = reduxForm<
           dispatch(showSuccess(translate('Droplet has been resized.')));
           dispatch(closeModalDialog());
         } catch (e) {
-          dispatch(showError(translate('Unable to resize droplet.')));
+          dispatch(
+            showErrorResponse(e, translate('Unable to resize droplet.')),
+          );
         }
       },
       [resource, dispatch],

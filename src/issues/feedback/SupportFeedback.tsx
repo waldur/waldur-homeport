@@ -4,14 +4,13 @@ import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 
-import { format } from '@waldur/core/ErrorMessageFormatter';
 import { FormContainer, SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { addFeedback } from '@waldur/issues/feedback/api';
 import { SUPPORT_FEEDBACK_FORM_ID } from '@waldur/issues/feedback/constants';
 import { useTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import './SupportFeedback.scss';
 import { useSupport } from '../hooks';
@@ -30,10 +29,7 @@ const SupportFeedbackContainer = (props) => {
       dispatch(showSuccess(translate('Thank you for your response!')));
       dispatch(triggerTransition('login', {}));
     } catch (error) {
-      const errorMessage = `${translate('Unable to send feedback.')} ${format(
-        error,
-      )}`;
-      dispatch(showError(errorMessage));
+      dispatch(showErrorResponse(error, translate('Unable to send feedback.')));
     }
   };
 
