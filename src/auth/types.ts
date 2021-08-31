@@ -98,7 +98,12 @@ interface FreeIPAConfiguration {
   ENABLED: boolean;
 }
 
+interface SupportConfiguration {
+  ENABLED: boolean;
+}
+
 export interface PluginConfiguration {
+  WALDUR_SUPPORT: Partial<SupportConfiguration>;
   WALDUR_AUTH_SAML2: Partial<SAML2AuthConfiguration>;
   WALDUR_AUTH_SOCIAL: Partial<SocialAuthConfiguration>;
   WALDUR_AUTH_VALIMO: Partial<ValimoAuthConfiguration>;

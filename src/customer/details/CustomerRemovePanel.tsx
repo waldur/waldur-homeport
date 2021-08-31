@@ -7,7 +7,6 @@ import { ENV } from '@waldur/configs/default';
 import { getAll } from '@waldur/core/api';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
@@ -55,7 +54,7 @@ export const CustomerRemovePanel: FunctionComponent = () => {
     const needsSupport = hasProjects || hasActiveInvoices;
 
     if (needsSupport) {
-      if (!isFeatureVisible('support')) {
+      if (!ENV.plugins.WALDUR_SUPPORT.ENABLED) {
         const notification = hasProjects
           ? translate(
               'Organization contains projects. Please remove them first.',

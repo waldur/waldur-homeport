@@ -8,7 +8,6 @@ import {
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate, formatJsxTemplate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
@@ -20,7 +19,7 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
 }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    if (isFeatureVisible('support') || !ENV.plugins.WALDUR_CORE.SITE_EMAIL) {
+    if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
       dispatch(closeModalDialog());
       dispatch(
         openIssueCreateDialog({

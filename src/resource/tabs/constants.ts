@@ -1,3 +1,4 @@
+import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 
@@ -30,7 +31,6 @@ const getIssuesTab = (): ResourceTab => ({
   key: 'issues',
   title: translate('Issues'),
   component: ResourceIssuesList,
-  feature: 'support',
 });
 
 const getOrderItemsTab = (): ResourceTab => ({
@@ -42,6 +42,6 @@ const getOrderItemsTab = (): ResourceTab => ({
 
 export const getDefaultResourceTabs = (): ResourceTab[] => [
   getEventsTab(),
-  getIssuesTab(),
+  ENV.plugins.WALDUR_SUPPORT.ENABLED && getIssuesTab(),
   getOrderItemsTab(),
 ];

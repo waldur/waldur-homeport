@@ -152,7 +152,6 @@ export const states: StateDeclaration[] = [
     component: IssuesDashboard,
     data: {
       hideBreadcrumbs: true,
-      feature: 'support',
     },
   },
 
@@ -160,36 +159,24 @@ export const states: StateDeclaration[] = [
     name: 'support.helpdesk',
     url: 'helpdesk/',
     component: IssuesHelpdesk,
-    data: {
-      feature: 'support',
-    },
   },
 
   {
     name: 'support.detail',
     url: 'issue/:uuid/',
     component: IssueDetailsContainer,
-    data: {
-      feature: 'support',
-    },
   },
 
   {
     name: 'support.list',
     url: 'list/',
     component: SupportIssues,
-    data: {
-      feature: 'support',
-    },
   },
 
   {
     name: 'supportFeedback',
     url: '/support/feedback/?token&evaluation',
     component: SupportFeedback,
-    data: {
-      feature: 'support',
-    },
   },
 
   {

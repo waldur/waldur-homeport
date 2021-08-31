@@ -8,9 +8,12 @@ import { IssuesList } from '@waldur/issues/list/IssuesList';
 import { useTitle } from '@waldur/navigation/title';
 import { isStaffOrSupport as isStaffOrSupportSelector } from '@waldur/workspace/selectors';
 
+import { useSupport } from './hooks';
+
 export const SupportIssues: FunctionComponent = () => {
   useTitle(translate('Issues'));
   const isStaffOrSupport = useSelector(isStaffOrSupportSelector);
+  useSupport();
   return (
     <>
       {isStaffOrSupport && <CustomerSupportRating />}

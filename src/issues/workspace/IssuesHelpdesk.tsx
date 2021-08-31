@@ -4,6 +4,7 @@ import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 
 import { IssueRegistration } from '../create/IssueRegistration';
+import { useSupport } from '../hooks';
 import { IssuesList } from '../list/IssuesList';
 
 export const IssuesHelpdesk: FunctionComponent = () => {
@@ -29,6 +30,7 @@ export const IssuesHelpdesk: FunctionComponent = () => {
     }
     setFilter(newFilter);
   }, []);
+  useSupport();
   return (
     <div className="col-md-12">
       <IssueRegistration onSearch={onSearch} />

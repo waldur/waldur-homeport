@@ -5,10 +5,13 @@ import { useReportingBreadcrumbs } from '@waldur/issues/workspace/SupportWorkspa
 import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
+import { useSupport } from '../hooks';
+
 export const SupportFeedbackListContainer = () => {
   useTitle(translate('Feedback'));
   useReportingBreadcrumbs();
   useSidebarKey('reporting');
+  useSupport();
   return (
     <div className="ibox">
       <div className="ibox-content">

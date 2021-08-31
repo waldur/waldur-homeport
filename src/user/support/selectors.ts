@@ -44,6 +44,3 @@ export const userLanguageIsVisible = (state: RootState) =>
 
 export const userCompetenceIsVisible = (state: RootState) =>
   isVisible(state, 'user.competence');
-
-export const isVisibleSupport = (state: RootState) =>
-  isVisible(state, 'support');
