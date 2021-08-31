@@ -20,7 +20,7 @@ import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Plan } from '@waldur/marketplace/types';
 import { useTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { getFlow, updateFlow } from './api';
 
@@ -79,7 +79,7 @@ export const FlowEditForm = () => {
       });
       dispatch(showSuccess('Flow has been updated.'));
     } catch (e) {
-      dispatch(showError('Unable to update flow.'));
+      dispatch(showErrorResponse(e, 'Unable to update flow.'));
     }
   };
 

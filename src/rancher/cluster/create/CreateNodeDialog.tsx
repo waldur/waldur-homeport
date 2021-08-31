@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
 
-import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -14,7 +13,7 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { Flavor } from '@waldur/openstack/openstack-instance/types';
 import { createNode } from '@waldur/rancher/api';
 import { Cluster } from '@waldur/rancher/types';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { NodeFlavorGroup } from './NodeFlavorGroup';
 import { NodeRoleGroup } from './NodeRoleGroup';
@@ -76,10 +75,7 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
       try {
         await createNode(serializeNode(cluster, formData));
       } catch (error) {
-        const errorMessage = `${translate('Unable to create node.')} ${format(
-          error,
-        )}`;
-        dispatch(showError(errorMessage));
+        dispatch(showErrorResponse(error, translate('Unable to create node.')));
         return;
       }
       dispatch(showSuccess(translate('Node has been created.')));

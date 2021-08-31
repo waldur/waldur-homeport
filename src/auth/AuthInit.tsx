@@ -7,7 +7,7 @@ import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { pick } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { UserEditContainer } from '@waldur/user/support/UserEditContainer';
 import { UsersService } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
@@ -37,7 +37,7 @@ export const AuthInit: FunctionComponent = () => {
         router.stateService.go('profile.details');
         dispatch(showSuccess(translate('User has been updated.')));
       } catch (error) {
-        dispatch(showError(translate('Unable to save user.')));
+        dispatch(showErrorResponse(error, translate('Unable to save user.')));
       }
     },
     [dispatch, router.stateService],

@@ -5,14 +5,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
 
-import { format } from '@waldur/core/ErrorMessageFormatter';
 import { FormattedMarkdown } from '@waldur/core/FormattedMarkdown';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { useTitle } from '@waldur/navigation/title';
 import { TemplateQuestions } from '@waldur/rancher/template/TemplateQuestions';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
 
 import { createApp } from '../api';
@@ -84,10 +83,12 @@ export const TemplateDetail: FunctionComponent = () => {
           tab: 'applications',
         });
       } catch (response) {
-        const errorMessage = `${translate(
-          'Unable to create application.',
-        )} ${format(response)}`;
-        dispatch(showError(errorMessage));
+        dispatch(
+          showErrorResponse(
+            response,
+            translate('Unable to create application.'),
+          ),
+        );
         return;
       }
       dispatch(showSuccess(translate('Application has been created.')));

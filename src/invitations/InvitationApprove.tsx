@@ -5,7 +5,7 @@ import { useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { showSuccess, showError } from '@waldur/store/notify';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import { InvitationService } from './InvitationService';
 
@@ -24,7 +24,9 @@ export const InvitationApprove: FunctionComponent = () => {
         dispatch(showSuccess(translate('Invitation has been approved.')));
         router.stateService.go('login');
       } catch (e) {
-        dispatch(showError(translate('Unable to approve invitation.')));
+        dispatch(
+          showErrorResponse(e, translate('Unable to approve invitation.')),
+        );
       }
     }
     processToken();

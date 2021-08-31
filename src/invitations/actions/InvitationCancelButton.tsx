@@ -2,7 +2,7 @@ import { useMemo, FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { showSuccess, showError } from '@waldur/store/notify';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
@@ -24,7 +24,7 @@ export const InvitationCancelButton: FunctionComponent<{
       dispatch(showSuccess(translate('Invitation has been canceled.')));
       refreshList();
     } catch (e) {
-      dispatch(showError(translate('Unable to cancel invitation.')));
+      dispatch(showErrorResponse(e, translate('Unable to cancel invitation.')));
     }
   };
 

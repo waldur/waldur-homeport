@@ -14,7 +14,7 @@ import {
 } from '@waldur/core/constants';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { InvitationService } from '../InvitationService';
 
@@ -105,7 +105,7 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
           context.refreshList();
         }
       } catch (e) {
-        dispatch(showError('Unable to create invitation.'));
+        dispatch(showErrorResponse(e, 'Unable to create invitation.'));
       }
     },
     [dispatch, router.stateService, context.customer, userDetails, role],

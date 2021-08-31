@@ -4,12 +4,11 @@ import { useDispatch } from 'react-redux';
 
 import { AuthService } from '@waldur/auth/AuthService';
 import { post } from '@waldur/core/api';
-import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { wait } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { router } from '@waldur/router';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { setCurrentUser } from '@waldur/workspace/actions';
 
 import { getCurrentUser } from '../UsersService';
@@ -25,10 +24,9 @@ export const UserEmailChangeCallback: FunctionComponent = () => {
         });
         dispatch(showSuccess(translate('Email has been updated.')));
       } catch (error) {
-        const errorMessage = `${translate('Unable to confirm email.')} ${format(
-          error,
-        )}`;
-        dispatch(showError(errorMessage));
+        dispatch(
+          showErrorResponse(error, translate('Unable to confirm email.')),
+        );
       }
 
       if (!AuthService.isAuthenticated()) {
@@ -40,10 +38,9 @@ export const UserEmailChangeCallback: FunctionComponent = () => {
       try {
         currentUser = await getCurrentUser();
       } catch (error) {
-        const errorMessage = `${translate(
-          'Unable to fetch current user.',
-        )} ${format(error)}`;
-        dispatch(showError(errorMessage));
+        dispatch(
+          showErrorResponse(error, translate('Unable to fetch current user.')),
+        );
       }
 
       if (currentUser) {

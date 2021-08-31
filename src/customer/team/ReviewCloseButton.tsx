@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 import { closeReview } from './api';
@@ -20,7 +20,7 @@ export const ReviewCloseButton: React.FC<ReviewCloseButtonProps> = ({
       await closeReview(reviewId);
       dispatch(showSuccess(translate('Review has been performed.')));
     } catch (e) {
-      dispatch(showError(translate('Unable to perform review.')));
+      dispatch(showErrorResponse(e, translate('Unable to perform review.')));
     }
   };
   return (

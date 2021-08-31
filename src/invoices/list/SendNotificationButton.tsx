@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { post } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
-import { showSuccess, showError } from '@waldur/store/notify';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -25,7 +25,9 @@ export const SendNotificationButton: FunctionComponent<{ row }> = ({ row }) => {
         ),
       );
     } catch (e) {
-      dispatch(showError(translate('Unable to send record notification.')));
+      dispatch(
+        showErrorResponse(e, translate('Unable to send record notification.')),
+      );
     }
   };
 

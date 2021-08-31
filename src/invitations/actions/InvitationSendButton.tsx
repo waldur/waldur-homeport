@@ -2,7 +2,7 @@ import { useMemo, FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { showSuccess, showError } from '@waldur/store/notify';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
@@ -24,7 +24,7 @@ export const InvitationSendButton: FunctionComponent<{ invitation }> = ({
       await InvitationService.resend(invitation.uuid);
       dispatch(showSuccess(translate('Invitation has been sent again.')));
     } catch (e) {
-      dispatch(showError(translate('Unable to resend invitation.')));
+      dispatch(showErrorResponse(e, translate('Unable to resend invitation.')));
     }
   };
 

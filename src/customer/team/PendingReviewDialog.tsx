@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { closeReview } from './api';
 import { CustomerUsersList } from './CustomerUsersList';
@@ -31,7 +31,7 @@ export const PendingReviewDialog: FunctionComponent<{
       dispatch(showSuccess(translate('Review has been closed.')));
       dispatch(closeModalDialog());
     } catch (e) {
-      dispatch(showError(translate('Unable to close review.')));
+      dispatch(showErrorResponse(e, translate('Unable to close review.')));
     }
     setSubmitting(false);
   };

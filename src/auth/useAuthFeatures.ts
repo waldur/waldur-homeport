@@ -7,7 +7,7 @@ import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { InvitationService } from '@waldur/invitations/InvitationService';
 import { getInvitationToken } from '@waldur/invitations/InvitationStorage';
-import { showError } from '@waldur/store/notify';
+import { showError, showErrorResponse } from '@waldur/store/notify';
 
 const checkRegistrationMethods = async (mode, router, dispatch) => {
   /*
@@ -43,7 +43,9 @@ const checkRegistrationMethods = async (mode, router, dispatch) => {
       return true;
     }
   } catch (e) {
-    dispatch(showError(translate('Unable to validate invitation token.')));
+    dispatch(
+      showErrorResponse(e, translate('Unable to validate invitation token.')),
+    );
     router.stateService.go('errorPage.notFound');
   }
 };

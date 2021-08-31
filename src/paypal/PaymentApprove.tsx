@@ -8,7 +8,11 @@ import { post } from '@waldur/core/api';
 import { getQueryString } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
-import { showError, showSuccess } from '@waldur/store/notify';
+import {
+  showError,
+  showErrorResponse,
+  showSuccess,
+} from '@waldur/store/notify';
 
 const approvePayment = (payload) => post('/paypal-payments/approve/', payload);
 
@@ -36,7 +40,9 @@ export const PaymentApprove: FunctionComponent = () => {
         );
         router.stateService.go('profile.details');
       } catch (error) {
-        dispatch(showError(translate('Unable to process payment.')));
+        dispatch(
+          showErrorResponse(error, translate('Unable to process payment.')),
+        );
       }
     })();
   });
