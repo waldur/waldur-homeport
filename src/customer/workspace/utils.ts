@@ -1,3 +1,4 @@
+import { ENV } from '@waldur/configs/default';
 import { get } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { getTabTitle } from '@waldur/invoices/utils';
@@ -63,7 +64,7 @@ export const getSidebarItems = (customer: Customer): MenuItemType[] => [
     feature: 'eventlog',
     index: 600,
   },
-  {
+  ENV.plugins.WALDUR_SUPPORT.ENABLED && {
     key: 'issues',
     label: translate('Issues'),
     icon: 'fa-question-circle',
@@ -71,7 +72,6 @@ export const getSidebarItems = (customer: Customer): MenuItemType[] => [
     params: {
       uuid: customer.uuid,
     },
-    feature: 'support',
     index: 700,
   },
   {

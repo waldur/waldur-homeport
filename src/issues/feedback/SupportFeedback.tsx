@@ -14,10 +14,12 @@ import { router } from '@waldur/router';
 import { showError, showSuccess } from '@waldur/store/notify';
 
 import './SupportFeedback.scss';
+import { useSupport } from '../hooks';
 
 const SupportFeedbackContainer = (props) => {
   useTitle(translate('Feedback'));
   const dispatch = useDispatch();
+  useSupport();
 
   const submitRequest = async (formData) => {
     try {

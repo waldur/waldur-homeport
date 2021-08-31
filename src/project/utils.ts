@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 
+import { ENV } from '@waldur/configs/default';
 import { get } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
@@ -40,7 +41,7 @@ const getDefaultItems = (project) => [
     feature: 'eventlog',
     index: 500,
   },
-  {
+  ENV.plugins.WALDUR_SUPPORT.ENABLED && {
     key: 'support',
     state: 'project.issues',
     params: {
@@ -48,7 +49,6 @@ const getDefaultItems = (project) => [
     },
     icon: 'fa-question-circle',
     label: translate('Issues'),
-    feature: 'support',
     index: 600,
   },
   {

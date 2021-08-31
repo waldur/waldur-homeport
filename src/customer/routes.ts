@@ -107,9 +107,6 @@ export const states: StateDeclaration[] = [
     name: 'organization.issues',
     url: 'issues/',
     component: CustomerIssuesList,
-    data: {
-      feature: 'support',
-    },
   },
 
   {

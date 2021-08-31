@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
-import { isFeatureVisible } from '@waldur/features/connect';
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { ResourceUsageTabsContainer } from '@waldur/marketplace/resources/usage/ResourceUsageTabsContainer';
 
@@ -23,7 +23,7 @@ export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => (
         <ResourceOrderItems resource_uuid={resource.uuid} />
       </PanelBody>
     </Tab>
-    {isFeatureVisible('support') && resource.scope && (
+    {ENV.plugins.WALDUR_SUPPORT.ENABLED && resource.scope && (
       <Tab eventKey="issues" title={translate('Issues')}>
         <ResourceIssuesTab resource={resource} />
       </Tab>

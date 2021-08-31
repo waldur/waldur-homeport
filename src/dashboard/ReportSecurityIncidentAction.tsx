@@ -1,6 +1,5 @@
 import { ENV } from '@waldur/configs/default';
 import { MessageDialog } from '@waldur/core/MessageDialog';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate, formatJsxTemplate } from '@waldur/i18n';
 import { openReportSecurityIncidentDialog } from '@waldur/issues/security-incident/store/actions';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -12,7 +11,7 @@ export const getReportSecurityIncidentAction = (
 ) => ({
   title: translate('Report a security incident'),
   onClick() {
-    if (isFeatureVisible('support')) {
+    if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
       store.dispatch(
         openReportSecurityIncidentDialog(showProjectField, showResourceField),
       );

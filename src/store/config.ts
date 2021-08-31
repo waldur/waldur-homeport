@@ -47,14 +47,17 @@ export const reducer = (
 export const getConfig = (state: RootState) => state.config;
 
 export const isVisible = (state: RootState, feature: string): boolean => {
+  if (feature === undefined || feature === null) {
+    return true;
+  }
+  if (!state.config) {
+    return false;
+  }
   const {
     featuresVisible,
     disabledFeatures = {},
     enabledFeatures = {},
   } = state.config;
-  if (feature === undefined || feature === null) {
-    return true;
-  }
   if (disabledFeatures[feature]) {
     return false;
   }

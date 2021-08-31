@@ -10,7 +10,6 @@ import {
   fieldIsVisible,
   isRequired,
   isVisibleForSupportOrStaff,
-  isVisibleSupport,
   userTokenIsVisible,
 } from '@waldur/user/support/selectors';
 import { UserEditForm } from '@waldur/user/support/UserEditForm';
@@ -76,7 +75,6 @@ const getProtectedMethods = (state: any): string[] => {
 
 const mapStateToProps = (state, ownProps) => ({
   isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),
-  isVisibleSupportFeature: isVisibleSupport(state),
   initialValues: ownProps.user,
   userTokenIsVisible: userTokenIsVisible(state, ownProps),
   fieldIsVisible: fieldIsVisible(ownProps),
@@ -116,12 +114,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { isVisibleSupportFeature } = stateProps;
   const { user } = ownProps;
   const { dispatchRemoval, dispatchMessage } = dispatchProps;
   let showUserRemoval;
 
-  if (isVisibleSupportFeature) {
+  if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
     showUserRemoval = dispatchRemoval;
   } else {
     showUserRemoval = () =>

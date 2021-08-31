@@ -41,5 +41,8 @@
     "ENABLED": true,
     "USERNAME_PREFIX": "waldur_"
   },
+  "WALDUR_SUPPORT": {
+    "ENABLED": true
+  },
   "LANGUAGES": [["en", "English"]]
 }

@@ -1,4 +1,4 @@
-import { isFeatureVisible } from '@waldur/features/connect';
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
@@ -209,14 +209,14 @@ class IssueNavigationServiceClass {
   prevWorkspace;
 
   get isVisible() {
-    if (isFeatureVisible('support')) {
+    if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
       return true;
     }
     return isOwnerOrStaff(store.getState());
   }
 
   gotoDashboard() {
-    if (!isFeatureVisible('support')) {
+    if (!ENV.plugins.WALDUR_SUPPORT.ENABLED) {
       return router.stateService.go('marketplace-support-resources');
     }
     return UsersService.getCurrentUser().then((user) => {
@@ -232,7 +232,7 @@ class IssueNavigationServiceClass {
     return UsersService.getCurrentUser()
       .then((user) => {
         this.currentUser = user;
-        if (!isFeatureVisible('support')) {
+        if (!ENV.plugins.WALDUR_SUPPORT.ENABLED) {
           return [];
         }
         const dashboardItems = filterItems(getDashboardItems());

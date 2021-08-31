@@ -64,7 +64,6 @@ export const states: StateDeclaration[] = [
     url: 'issues/',
     component: ProjectIssuesList,
     data: {
-      feature: 'support',
       pageClass: 'gray-bg',
     },
   },

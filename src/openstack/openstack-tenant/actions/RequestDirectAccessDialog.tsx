@@ -8,7 +8,6 @@ import {
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
@@ -20,7 +19,7 @@ export const RequestDirectAccessDialog: FunctionComponent<{
 }> = ({ resolve: { resource }, close }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    if (isFeatureVisible('support')) {
+    if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
       close();
       dispatch(
         openIssueCreateDialog({

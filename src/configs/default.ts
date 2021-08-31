@@ -30,7 +30,6 @@ export const ENV: ApplicationConfigurationOptions = {
     'projects',
     'projectCostDetails',
     'resources',
-    'support',
     'support.users',
     'support.organizations',
     'support.resources-treemap',
