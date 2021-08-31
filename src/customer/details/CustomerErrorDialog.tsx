@@ -19,7 +19,7 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
 }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
+    if (ENV.plugins.WALDUR_SUPPORT) {
       dispatch(closeModalDialog());
       dispatch(
         openIssueCreateDialog({

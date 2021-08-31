@@ -64,7 +64,7 @@ export const getSidebarItems = (customer: Customer): MenuItemType[] => [
     feature: 'eventlog',
     index: 600,
   },
-  ENV.plugins.WALDUR_SUPPORT.ENABLED && {
+  ENV.plugins.WALDUR_SUPPORT && {
     key: 'issues',
     label: translate('Issues'),
     icon: 'fa-question-circle',

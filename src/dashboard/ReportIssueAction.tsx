@@ -14,7 +14,7 @@ export const getIssueAction = (props: ReportIssueActionProps) => {
   return {
     title: translate('Report an issue'),
     onClick() {
-      if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
+      if (ENV.plugins.WALDUR_SUPPORT) {
         store.dispatch(
           openIssueCreateDialog({
             issue: props.issue,

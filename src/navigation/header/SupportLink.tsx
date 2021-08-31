@@ -9,7 +9,7 @@ import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
 
 const showLink = (state: RootState) => {
-  if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
+  if (ENV.plugins.WALDUR_SUPPORT) {
     return true;
   }
   const user = getUser(state);

@@ -42,6 +42,6 @@ const getOrderItemsTab = (): ResourceTab => ({
 
 export const getDefaultResourceTabs = (): ResourceTab[] => [
   getEventsTab(),
-  ENV.plugins.WALDUR_SUPPORT.ENABLED && getIssuesTab(),
+  ENV.plugins.WALDUR_SUPPORT && getIssuesTab(),
   getOrderItemsTab(),
 ];

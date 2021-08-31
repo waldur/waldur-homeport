@@ -23,7 +23,7 @@ export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => (
         <ResourceOrderItems resource_uuid={resource.uuid} />
       </PanelBody>
     </Tab>
-    {ENV.plugins.WALDUR_SUPPORT.ENABLED && resource.scope && (
+    {ENV.plugins.WALDUR_SUPPORT && resource.scope && (
       <Tab eventKey="issues" title={translate('Issues')}>
         <ResourceIssuesTab resource={resource} />
       </Tab>

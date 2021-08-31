@@ -41,7 +41,7 @@ const getDefaultItems = (project) => [
     feature: 'eventlog',
     index: 500,
   },
-  ENV.plugins.WALDUR_SUPPORT.ENABLED && {
+  ENV.plugins.WALDUR_SUPPORT && {
     key: 'support',
     state: 'project.issues',
     params: {

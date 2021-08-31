@@ -32,7 +32,7 @@ export const BrandName: FunctionComponent = () => {
         break;
       case SUPPORT_WORKSPACE:
         // temporary solution till WAL-3909 (support dashboard) is done
-        if (!ENV.plugins.WALDUR_SUPPORT.ENABLED) {
+        if (!ENV.plugins.WALDUR_SUPPORT) {
           return router.stateService.go('marketplace-support-resources');
         }
         router.stateService.go('support.dashboard', { reload: true });

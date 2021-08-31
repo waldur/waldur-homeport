@@ -19,7 +19,7 @@ export const RequestDirectAccessDialog: FunctionComponent<{
 }> = ({ resolve: { resource }, close }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
+    if (ENV.plugins.WALDUR_SUPPORT) {
       close();
       dispatch(
         openIssueCreateDialog({

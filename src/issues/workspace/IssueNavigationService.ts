@@ -209,14 +209,14 @@ class IssueNavigationServiceClass {
   prevWorkspace;
 
   get isVisible() {
-    if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
+    if (ENV.plugins.WALDUR_SUPPORT) {
       return true;
     }
     return isOwnerOrStaff(store.getState());
   }
 
   gotoDashboard() {
-    if (!ENV.plugins.WALDUR_SUPPORT.ENABLED) {
+    if (!ENV.plugins.WALDUR_SUPPORT) {
       return router.stateService.go('marketplace-support-resources');
     }
     return UsersService.getCurrentUser().then((user) => {
@@ -232,7 +232,7 @@ class IssueNavigationServiceClass {
     return UsersService.getCurrentUser()
       .then((user) => {
         this.currentUser = user;
-        if (!ENV.plugins.WALDUR_SUPPORT.ENABLED) {
+        if (!ENV.plugins.WALDUR_SUPPORT) {
           return [];
         }
         const dashboardItems = filterItems(getDashboardItems());

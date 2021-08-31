@@ -11,7 +11,7 @@ export const getReportSecurityIncidentAction = (
 ) => ({
   title: translate('Report a security incident'),
   onClick() {
-    if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
+    if (ENV.plugins.WALDUR_SUPPORT) {
       store.dispatch(
         openReportSecurityIncidentDialog(showProjectField, showResourceField),
       );
