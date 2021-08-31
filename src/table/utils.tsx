@@ -28,7 +28,7 @@ export function connectTable(options: TableOptionsType) {
     const Wrapper: React.ComponentType<P> = (props) => {
       const { table: rawTableId } = options;
       const extraId = options.mapPropsToTableId
-        ? options.mapPropsToTableId(props)
+        ? options.mapPropsToTableId(props).filter((x) => x !== undefined)
         : [];
       const table = `${rawTableId}${
         extraId.length ? '-' + extraId.join('-') : ''

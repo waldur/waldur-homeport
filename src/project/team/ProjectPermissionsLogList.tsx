@@ -14,6 +14,7 @@ export const PureProjectPermissionsLogList = getEventsList({
           event_type: EVENT_TYPES,
         }
       : { event_type: EVENT_TYPES },
+  mapPropsToTableId: (props) => ['project-permissions', props.project?.uuid],
 });
 
 const enhance = connect((state: RootState) => ({

@@ -21,6 +21,7 @@ export const PureCustomerEvents = getEventsList({
     }
     return filter;
   },
+  mapPropsToTableId: (props) => ['customer-events', props.customer.uuid],
 });
 
 const mapStateToProps = (state: RootState) => ({
