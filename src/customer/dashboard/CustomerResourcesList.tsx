@@ -62,6 +62,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('Resources')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       expandableRow={ExpandableResourceSummary}
+      hasQuery={true}
     />
   );
 };
@@ -91,6 +92,7 @@ const TableOptions = {
   table: 'CustomerResourcesList',
   fetchData: createFetcher('marketplace-resources'),
   mapPropsToFilter,
+  queryField: 'query',
 };
 
 const mapStateToProps = (state: RootState) => ({

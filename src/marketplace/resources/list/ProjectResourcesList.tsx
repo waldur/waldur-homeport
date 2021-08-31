@@ -123,7 +123,7 @@ const TableOptions = {
   mapPropsToTableId: (props) => [props.project.uuid, props.category_uuid],
   fetchData: createFetcher('marketplace-resources'),
   mapPropsToFilter,
-  queryField: 'name',
+  queryField: 'query',
 };
 
 const mapStateToProps = (state: RootState) => ({

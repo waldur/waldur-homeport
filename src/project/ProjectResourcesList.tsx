@@ -12,6 +12,7 @@ import { Resource } from '@waldur/marketplace/resources/types';
 import { PROJECT_RESOURCES_FILTER_FORM_ID } from '@waldur/project/constants';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableOptionsType } from '@waldur/table/types';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
@@ -74,10 +75,11 @@ const mapPropsToFilter = (props) => {
   return filter;
 };
 
-const TableOptions = {
+const TableOptions: TableOptionsType = {
   table: 'ProjectResourcesList',
   fetchData: createFetcher('marketplace-resources'),
   mapPropsToFilter,
+  queryField: 'query',
 };
 
 const mapStateToProps = (state: RootState) => ({
