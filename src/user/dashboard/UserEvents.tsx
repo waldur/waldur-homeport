@@ -16,6 +16,7 @@ export const UserEvents: React.FC<UserEventsProps> = (outerProps) =>
           feature: 'users',
           exclude_extra: true,
         }),
+        mapPropsToTableId: (props) => ['user-events', props.user.uuid],
       })(outerProps)
     : null;
 

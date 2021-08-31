@@ -22,6 +22,7 @@ export const PureProjectEvents = getEventsList({
     }
     return filter;
   },
+  mapPropsToTableId: (props) => ['project-events', props.project?.uuid],
 });
 
 const mapStateToProps = (state: RootState) => ({
