@@ -5,7 +5,9 @@
     "ALLOW_SIGNUP_WITHOUT_INVITATION": true,
     "INVITATIONS_ENABLED": true,
     "NATIVE_NAME_ENABLED": false,
-    "AUTHENTICATION_METHODS": ["LOCAL_SIGNIN"],
+    "AUTHENTICATION_METHODS": [
+      "LOCAL_SIGNIN"
+    ],
     "COMPANY_TYPES": [
       "Ministry",
       "Private company",
@@ -44,10 +46,14 @@
   "WALDUR_SUPPORT": {
     "ENABLED": true
   },
-  "LANGUAGES": [["en", "English"]],
+  "LANGUAGES": [
+    [
+      "en",
+      "English"
+    ]
+  ],
   "FEATURES": {
-    "SUPPORT": {
-      
-    }
+    "SUPPORT": {},
+    "MARKETPLACE": {}
   }
 }

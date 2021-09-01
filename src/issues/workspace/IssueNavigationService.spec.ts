@@ -7,7 +7,10 @@ import { IssueNavigationService } from './IssueNavigationService';
 jest.mock('@waldur/user/UsersService');
 jest.mock('@waldur/router');
 jest.mock('@waldur/configs/default', () => ({
-  ENV: { plugins: { WALDUR_SUPPORT: { ENABLED: true } } },
+  ENV: {
+    FEATURES: { SUPPORT: {}, MARKETPLACE: {} },
+    plugins: { WALDUR_SUPPORT: { ENABLED: true } },
+  },
 }));
 
 const UsersServiceMock = UsersService as jest.Mocked<typeof UsersService>;

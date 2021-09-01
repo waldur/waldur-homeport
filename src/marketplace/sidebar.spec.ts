@@ -8,6 +8,11 @@ import store from '@waldur/store/store';
 import { customer } from './fixtures';
 
 jest.mock('@waldur/store/store');
+jest.mock('@waldur/configs/default', () => ({
+  ENV: {
+    FEATURES: { MARKETPLACE: {} },
+  },
+}));
 
 const storeMock = store as jest.Mocked<typeof store>;
 
