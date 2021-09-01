@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { RESOURCE_STATES } from '@waldur/marketplace/resources/list/constants';
 import { CategoryColumn } from '@waldur/marketplace/types';
-import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getProject } from '@waldur/workspace/selectors';
@@ -30,7 +30,6 @@ interface FieldProps {
 
 interface StateProps {
   project: Project;
-  importVisible: boolean;
   filter: any;
 }
 
@@ -77,7 +76,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
 
   const tableActions = (
     <>
-      {props.importVisible && (
+      {ENV.FEATURES.MARKETPLACE.IMPORT_RESOURCES && (
         <ResourceImportButton
           category_uuid={props.category_uuid}
           project_uuid={props.project && props.project.uuid}
@@ -128,7 +127,6 @@ const TableOptions = {
 
 const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
-  importVisible: isVisible(state, 'import'),
   filter: getFormValues('ProjectResourcesFilter')(state),
 });
 
