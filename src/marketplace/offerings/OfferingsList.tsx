@@ -17,6 +17,7 @@ import {
 } from '@waldur/marketplace/offerings/store/constants';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableOptionsType } from '@waldur/table/types';
 import {
   getCustomer,
   getUser,
@@ -94,6 +95,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
       expandableRow={OfferingsListExpandableRow}
+      hasQuery={true}
     />
   );
 };
@@ -121,7 +123,7 @@ const mapPropsToFilter = (props: StateProps) => {
   return filter;
 };
 
-export const TableOptions = {
+export const TableOptions: TableOptionsType = {
   table: OFFERING_TABLE_NAME,
   fetchData: createFetcher('marketplace-offerings'),
   mapPropsToFilter,
@@ -133,6 +135,7 @@ export const TableOptions = {
     row.type,
   ],
   exportFields: ['Name', 'Created', 'Category', 'State', 'Type'],
+  queryField: 'keyword',
 };
 
 const showOfferingListActions = createSelector(
