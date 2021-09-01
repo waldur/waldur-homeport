@@ -27,7 +27,6 @@ export const getSidebarItems = (customer: Customer): MenuItemType[] => [
     params: {
       uuid: customer.uuid,
     },
-    feature: 'projects',
     countFieldKey: 'projects',
     index: 300,
   },
