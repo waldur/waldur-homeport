@@ -18,7 +18,7 @@ export const FilteredBy: FunctionComponent = () => {
   console.log('form', form);
   return (
     <div className="filteredBy">
-      <h3>{translate('Filtered by')}</h3>
+      <h3>{form ? translate('Filtered by') : translate('Showing all')}</h3>
     </div>
   );
 };

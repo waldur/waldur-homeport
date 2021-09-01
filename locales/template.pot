@@ -7725,6 +7725,10 @@ msgstr ""
 msgid "Show with running accounting"
 msgstr ""
 
+#: src/marketplace/offerings/service-providers/FilteredBy.tsx
+msgid "Showing all"
+msgstr ""
+
 #: src/marketplace/offerings/service-providers/shared/grid/GridInfo.tsx
 #: src/table/TableInfo.tsx
 msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."

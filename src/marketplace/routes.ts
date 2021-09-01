@@ -1,6 +1,7 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { checkPermission } from '@waldur/issues/utils';
+import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
 
 const SupportOfferingsContainer = lazyComponent(
   () =>
@@ -381,10 +382,7 @@ export const states: StateDeclaration[] = [
     url: '/service-providers/',
     abstract: true,
     component: AnonymousLayout,
-    data: {
-      hideHeader: true,
-      hideFooter: true,
-    },
+    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
 
   {
@@ -398,11 +396,7 @@ export const states: StateDeclaration[] = [
     url: '/service-providers/',
     abstract: true,
     component: AnonymousLayout,
-    data: {
-      hideHeader: true,
-      hideFooter: true,
-      skipAuth: true,
-    },
+    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
 
   {
