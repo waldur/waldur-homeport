@@ -21,3 +21,9 @@ export const WORKSPACE_LANDING = {
   [PROJECT_WORKSPACE]: 'marketplace-landing-project',
   [USER_WORKSPACE]: 'marketplace-landing-user',
 };
+
+export const ANONYMOUS_LAYOUT_ROUTE_CONFIG = {
+  hideHeader: true,
+  hideFooter: true,
+  skipAuth: true,
+};

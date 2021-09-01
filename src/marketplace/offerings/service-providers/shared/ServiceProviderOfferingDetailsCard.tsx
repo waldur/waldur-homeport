@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { Divisions } from '@waldur/marketplace/offerings/service-providers/shared/Divisions';
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/service-providers/shared/OfferingDetailsButton';
 import { OfferingLogo } from '@waldur/marketplace/offerings/service-providers/shared/OfferingLogo';
@@ -18,7 +19,7 @@ export const ServiceProviderOfferingDetailsCard: FunctionComponent<ServiceProvid
     <OfferingLogo offering={row} />
     <div className="card-title m-t-sm">{row.name}</div>
     <div className="offeringCard__description m-t-xs">
-      {row.full_description}
+      <FormattedHtml html={row.description} />
     </div>
     <div className="offeringCard__contentAlwaysOnBottom m-t">
       <Divisions divisions={row.divisions} />
