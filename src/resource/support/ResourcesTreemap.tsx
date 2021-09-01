@@ -1,7 +1,9 @@
+import { useRouter } from '@uirouter/react';
 import { connect, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { compose } from 'redux';
 
+import { ENV } from '@waldur/configs/default';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { formatFilesize } from '@waldur/core/utils';
@@ -86,6 +88,10 @@ interface StateProps {
 const TreemapContainer = (props: StateProps & TranslateProps) => {
   useTitle(translate('Resources usage'));
   useReportingBreadcrumbs();
+  const router = useRouter();
+  if (!ENV.FEATURES.SUPPORT.RESOURCES_TREEMAP) {
+    router.stateService.go('errorPage.notFound');
+  }
   const shouldConcealPrices = useSelector((state: RootState) =>
     isVisible(state, 'marketplace.conceal_prices'),
   );

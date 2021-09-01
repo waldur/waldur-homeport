@@ -2,13 +2,12 @@ import React from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
+import { ENV } from '@waldur/configs/default';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { IssueCommentsContainer } from '@waldur/issues/comments/IssueCommentsContainer';
 import { Issue } from '@waldur/issues/list/types';
 import { ResourceOrderItems } from '@waldur/marketplace/orders/item/list/ResourceOrderItems';
 import { Resource } from '@waldur/marketplace/resources/types';
-import { isVisible } from '@waldur/store/config';
-import { RootState } from '@waldur/store/reducers';
 
 import { SupportEvents } from './SupportEvents';
 import { SupportSummaryTab } from './SupportSummaryTab';
@@ -62,12 +61,10 @@ export const PureSupportTabs: React.FC<SupportTabsProps> = (props) => {
   );
 };
 
-const connector = connect<StateProps, {}, OwnProps>(
-  (state: RootState, ownProps) => ({
-    showComments:
-      isVisible(state, 'offering.comments') && Boolean(ownProps?.issue?.key),
-  }),
-);
+const connector = connect<StateProps, {}, OwnProps>((_, ownProps) => ({
+  showComments:
+    ENV.FEATURES.SUPPORT.OFFERING_COMMENTS && Boolean(ownProps?.issue?.key),
+}));
 
 export const SupportTabs = withTranslation(
   connector(PureSupportTabs),

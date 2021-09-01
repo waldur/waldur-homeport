@@ -14,19 +14,17 @@ export const getPrivateUserTabs = () => [
     state: 'profile.events',
     key: 'events',
   },
-  {
+  ENV.FEATURES.USER.SSH_KEYS && {
     label: translate('SSH Keys'),
     icon: 'fa-key',
     state: 'profile.keys',
     key: 'keys',
-    feature: 'user.ssh-keys',
   },
-  {
+  ENV.FEATURES.USER.NOTIFICATIONS && {
     label: translate('Notifications'),
     icon: 'fa-envelope',
     state: 'profile.notifications',
     key: 'notifications',
-    feature: 'notifications',
   },
   {
     label: translate('Manage'),
@@ -67,7 +65,7 @@ export const getPublicUserTabs = (user) => [
       uuid: user.uuid,
     },
   },
-  {
+  ENV.FEATURES.USER.SSH_KEYS && {
     label: translate('SSH Keys'),
     icon: 'fa-key',
     state: 'users.keys',
@@ -75,7 +73,6 @@ export const getPublicUserTabs = (user) => [
     params: {
       uuid: user.uuid,
     },
-    feature: 'user.ssh-keys',
   },
 ];
 

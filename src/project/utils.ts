@@ -5,6 +5,7 @@ import { get } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
+import { filterItems } from '@waldur/navigation/sidebar/utils';
 import { RootState } from '@waldur/store/reducers';
 import {
   getUser,
@@ -30,7 +31,7 @@ const getDefaultItems = (project) => [
     },
     index: 100,
   },
-  {
+  ENV.FEATURES.PROJECT.EVENTS && {
     key: 'eventlog',
     state: 'project.events',
     params: {
@@ -38,7 +39,6 @@ const getDefaultItems = (project) => [
     },
     icon: 'fa-bell-o',
     label: translate('Audit logs'),
-    feature: 'eventlog',
     index: 500,
   },
   ENV.plugins.WALDUR_SUPPORT && {
@@ -51,14 +51,13 @@ const getDefaultItems = (project) => [
     label: translate('Issues'),
     index: 600,
   },
-  {
+  ENV.FEATURES.PROJECT.TEAM && {
     label: translate('Team'),
     icon: 'fa-group',
     state: 'project.team',
     params: {
       uuid: project.uuid,
     },
-    feature: 'team',
     key: 'team',
     countFieldKey: 'users',
     index: 800,
@@ -82,7 +81,7 @@ export const getSidebarItems = createSelector<
       return [];
     }
     if (ownerOrStaff || user.is_support) {
-      return [
+      return filterItems([
         {
           key: 'back',
           label: translate('Back to organization'),
@@ -91,9 +90,9 @@ export const getSidebarItems = createSelector<
           params: { uuid: customer.uuid },
         },
         ...getDefaultItems(project),
-      ];
+      ]);
     } else {
-      return getDefaultItems(project);
+      return filterItems(getDefaultItems(project));
     }
   },
 );

@@ -192,9 +192,6 @@ export const states: StateDeclaration[] = [
     name: 'support.organizations',
     url: 'organizations/',
     component: CustomerListContainer,
-    data: {
-      feature: 'support.organizations',
-    },
     resolve: {
       permission: checkPermission,
     },
@@ -228,9 +225,6 @@ export const states: StateDeclaration[] = [
     name: 'support.organizations-divisions',
     url: 'organizations-divisions/',
     component: CustomersDivisionsContainer,
-    data: {
-      feature: 'support.organizations',
-    },
     resolve: {
       permission: checkPermission,
     },
@@ -240,9 +234,6 @@ export const states: StateDeclaration[] = [
     name: 'support.users',
     url: 'users/',
     component: UserListView,
-    data: {
-      feature: 'support.users',
-    },
     resolve: {
       permission: checkPermission,
     },
@@ -252,9 +243,6 @@ export const states: StateDeclaration[] = [
     name: 'support.customers',
     url: 'customers/',
     component: SupportCustomersContainer,
-    data: {
-      feature: 'support.organizations',
-    },
     resolve: {
       permission: checkPermission,
     },
@@ -265,7 +253,6 @@ export const states: StateDeclaration[] = [
     url: 'customer-update/:customer_uuid/',
     component: OrganizationUpdateContainer,
     data: {
-      feature: 'support.organizations',
       pageClass: 'white-bg',
     },
     resolve: {

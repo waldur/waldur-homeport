@@ -1,3 +1,4 @@
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
@@ -61,14 +62,13 @@ export const getDefaultItems = (customerUuid: string): MenuItemType[] => [
     icon: 'fa-shopping-cart',
     index: 310,
     children: [
-      {
+      ENV.FEATURES.MARKETPLACE.PRIVATE_OFFERINGS && {
         label: translate('My offerings'),
         icon: 'fa-file',
         state: 'marketplace-my-offerings',
         params: {
           uuid: customerUuid,
         },
-        feature: 'marketplace.my-offerings',
       },
       {
         key: 'marketplace',

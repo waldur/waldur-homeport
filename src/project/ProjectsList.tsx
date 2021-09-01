@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import { compose } from 'redux';
 
+import { ENV } from '@waldur/configs/default';
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
@@ -55,8 +56,8 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Estimated cost'),
-      feature: 'projectCostDetails',
       render: ProjectCostField,
+      visible: ENV.FEATURES.PROJECT.ESTIMATED_COST,
     },
     {
       title: translate('Actions'),

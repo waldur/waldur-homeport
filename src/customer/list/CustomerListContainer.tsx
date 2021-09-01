@@ -1,7 +1,9 @@
+import { useRouter } from '@uirouter/react';
 import moment from 'moment-timezone';
 import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
+import { ENV } from '@waldur/configs/default';
 import { getList } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -66,6 +68,11 @@ export const CustomerListContainer: FunctionComponent = () => {
   useTitle(translate('Financial overview'));
   useReportingBreadcrumbs();
   const { loading, error, value: data } = useAsync(loadData);
+  const router = useRouter();
+  if (!ENV.FEATURES.SUPPORT.CUSTOMERS_LIST) {
+    router.stateService.go('errorPage.notFound');
+  }
+
   if (loading) {
     return <LoadingSpinner />;
   }

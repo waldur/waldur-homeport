@@ -40,19 +40,17 @@ const getDashboardItems = (): MenuItemType[] => [
 ];
 
 const getReportItems = (): MenuItemType[] => [
-  {
+  ENV.FEATURES.SUPPORT.USERS && {
     label: translate('Users'),
     icon: 'fa-users',
     state: 'support.users',
     key: 'support.users',
-    feature: 'support.users',
   },
-  {
+  ENV.FEATURES.SUPPORT.CUSTOMERS_LIST && {
     label: translate('Organizations'),
     icon: 'fa-building',
     state: 'support.customers',
     key: 'support.customers',
-    feature: 'support.organizations',
   },
   {
     label: translate('Organization requests'),
@@ -84,12 +82,11 @@ const getReportItems = (): MenuItemType[] => [
         state: 'marketplace-support-plan-usages',
         key: 'support-plan-usages',
       },
-      {
+      ENV.FEATURES.SUPPORT.CUSTOMERS_LIST && {
         label: translate('Financial'),
         icon: 'fa-university',
         state: 'support.organizations',
         key: 'support.organizations',
-        feature: 'support.organizations',
       },
       {
         label: translate('Pricelist'),
@@ -110,19 +107,17 @@ const getReportItems = (): MenuItemType[] => [
         state: 'marketplace-support-offerings',
         key: 'marketplace-support-offerings',
       },
-      {
+      ENV.FEATURES.SUPPORT.CUSTOMERS_LIST && {
         label: translate('Organizations'),
         icon: 'fa-building',
         state: 'support.organizations-divisions',
         key: 'support.organizations-divisions',
-        feature: 'support.organizations',
       },
-      {
+      ENV.FEATURES.SUPPORT.RESOURCES_TREEMAP && {
         label: translate('Resources usage'),
         icon: 'fa-map',
         state: 'support.resources-treemap',
         key: 'support.resources-treemap',
-        feature: 'support.resources-treemap',
       },
       {
         label: translate('Usage reports'),
@@ -150,12 +145,11 @@ const getReportItems = (): MenuItemType[] => [
     state: 'marketplace-support-resources',
     key: 'marketplace-support-resources',
   },
-  {
+  ENV.FEATURES.SUPPORT.SHARED_PROVIDERS && {
     label: translate('Shared providers'),
     icon: 'fa-random',
     state: 'support.shared-providers',
     key: 'support.shared-providers',
-    feature: 'support.shared-providers',
   },
   {
     label: translate('Usage overview'),

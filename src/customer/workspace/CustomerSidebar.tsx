@@ -5,7 +5,11 @@ import { useAsync } from 'react-use';
 import { getPublicServices } from '@waldur/marketplace/sidebar';
 import { Sidebar } from '@waldur/navigation/sidebar/Sidebar';
 import { SidebarMenuProps } from '@waldur/navigation/sidebar/types';
-import { mergeItems, getCounterFields } from '@waldur/navigation/sidebar/utils';
+import {
+  mergeItems,
+  getCounterFields,
+  filterItems,
+} from '@waldur/navigation/sidebar/utils';
 import {
   checkIsServiceManager,
   getCustomer,
@@ -35,7 +39,7 @@ export const CustomerSidebar: FunctionComponent = () => {
         ],
       };
     }
-    const sidebarItems = getSidebarItems(customer);
+    const sidebarItems = filterItems(getSidebarItems(customer));
     const extraItems = await getExtraSidebarItems();
     const items = mergeItems(sidebarItems, extraItems);
     const fields = getCounterFields(items);

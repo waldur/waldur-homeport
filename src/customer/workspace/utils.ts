@@ -52,7 +52,7 @@ export const getSidebarItems = (customer: Customer): MenuItemType[] => [
     feature: 'resource-requests',
     index: 310,
   },
-  {
+  ENV.FEATURES.CUSTOMER.EVENTS && {
     key: 'events',
     label: translate('Audit logs'),
     icon: 'fa-bell-o',
@@ -60,7 +60,6 @@ export const getSidebarItems = (customer: Customer): MenuItemType[] => [
     params: {
       uuid: customer.uuid,
     },
-    feature: 'eventlog',
     index: 600,
   },
   ENV.plugins.WALDUR_SUPPORT && {
@@ -73,7 +72,7 @@ export const getSidebarItems = (customer: Customer): MenuItemType[] => [
     },
     index: 700,
   },
-  {
+  ENV.FEATURES.CUSTOMER.TEAM && {
     key: 'team',
     label: translate('Team'),
     icon: 'fa-group',
@@ -81,11 +80,10 @@ export const getSidebarItems = (customer: Customer): MenuItemType[] => [
     params: {
       uuid: customer.uuid,
     },
-    feature: 'team',
     countFieldKey: 'users',
     index: 900,
   },
-  {
+  ENV.FEATURES.CUSTOMER.BILLING && {
     key: 'billing',
     label: getTabTitle(),
     icon: 'fa-file-text-o',
@@ -93,7 +91,6 @@ export const getSidebarItems = (customer: Customer): MenuItemType[] => [
     params: {
       uuid: customer.uuid,
     },
-    feature: 'billing',
     index: 1000,
   },
   {
