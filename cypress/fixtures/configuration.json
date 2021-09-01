@@ -44,5 +44,10 @@
   "WALDUR_SUPPORT": {
     "ENABLED": true
   },
-  "LANGUAGES": [["en", "English"]]
+  "LANGUAGES": [["en", "English"]],
+  "FEATURES": {
+    "SUPPORT": {
+      
+    }
+  }
 }
