@@ -108,6 +108,8 @@ const TableOptions = {
       'vat_code',
       'domain',
       'is_service_provider',
+      'division_name',
+      'division_parent_name',
     ];
 
     return filter;
