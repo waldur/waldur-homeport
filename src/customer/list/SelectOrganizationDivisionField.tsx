@@ -4,13 +4,12 @@ import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
 import { organizationDivisionAutocomplete } from '@waldur/customer/list/api';
+import { RIGHT_ARROW_HTML } from '@waldur/customer/list/constants';
 import { translate } from '@waldur/i18n';
 
 interface SelectOrganizationDivisionFieldProps {
   isFilterForm?: boolean;
 }
-
-const RIGHT_ARROW_HTML = <>&rarr;</>;
 
 const Option: FunctionComponent<any> = (props) => (
   <components.Option {...props}>
@@ -23,16 +22,15 @@ const Option: FunctionComponent<any> = (props) => (
   </components.Option>
 );
 
-const SingleValue: FunctionComponent<any> = (props) => (
-  <components.SingleValue {...props}>
-    {props.data.parent_name ? (
-      <>
-        {props.data.parent_name} {RIGHT_ARROW_HTML}{' '}
-      </>
-    ) : null}
-    {props.data.name}
-  </components.SingleValue>
-);
+const SingleValue: FunctionComponent<any> = (props) => {
+  const parent_name: string = props.data.name.split(' ')[0];
+  const name: string = props.data.name.split(' ')[2];
+  return (
+    <components.SingleValue {...props}>
+      {parent_name === 'undefined' ? name : props.data.name}
+    </components.SingleValue>
+  );
+};
 
 export const SelectOrganizationDivisionField: FunctionComponent<SelectOrganizationDivisionFieldProps> = (
   props,

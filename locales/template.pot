@@ -2210,6 +2210,7 @@ msgstr ""
 msgid "Display name"
 msgstr ""
 
+#: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectOrganizationDivisionField.tsx
 msgid "Division"
 msgstr ""

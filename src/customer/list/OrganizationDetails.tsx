@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { RIGHT_ARROW_HTML } from '@waldur/customer/list/constants';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
@@ -22,6 +23,19 @@ export const OrganizationDetails: FunctionComponent<OrganizationDetailsProps> = 
         <Field
           label={translate('Abbreviation')}
           value={props.customer.abbreviation}
+        />
+        <Field
+          label={translate('Division')}
+          value={
+            <>
+              {props.customer.division_parent_name && (
+                <>
+                  {props.customer.division_parent_name} {RIGHT_ARROW_HTML}{' '}
+                </>
+              )}
+              {props.customer.division_name}
+            </>
+          }
         />
         <Field label={translate('Email')} value={props.customer.email} />
         <Field
