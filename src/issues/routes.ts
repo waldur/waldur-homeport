@@ -193,7 +193,7 @@ export const states: StateDeclaration[] = [
     url: 'organizations/',
     component: CustomerListContainer,
     data: {
-      feature: 'support.organizations',
+      feature: 'support.customers_list',
     },
     resolve: {
       permission: checkPermission,
@@ -217,7 +217,7 @@ export const states: StateDeclaration[] = [
     url: 'customers-requests/',
     component: CustomerRequestContainer,
     data: {
-      feature: 'support.customers-requests',
+      feature: 'support.customers_requests',
     },
     resolve: {
       permission: checkPermission,
@@ -229,7 +229,7 @@ export const states: StateDeclaration[] = [
     url: 'organizations-divisions/',
     component: CustomersDivisionsContainer,
     data: {
-      feature: 'support.organizations',
+      feature: 'support.customers_list',
     },
     resolve: {
       permission: checkPermission,
@@ -253,7 +253,7 @@ export const states: StateDeclaration[] = [
     url: 'customers/',
     component: SupportCustomersContainer,
     data: {
-      feature: 'support.organizations',
+      feature: 'support.customers_list',
     },
     resolve: {
       permission: checkPermission,
@@ -265,7 +265,7 @@ export const states: StateDeclaration[] = [
     url: 'customer-update/:customer_uuid/',
     component: OrganizationUpdateContainer,
     data: {
-      feature: 'support.organizations',
+      feature: 'support.customers_list',
       pageClass: 'white-bg',
     },
     resolve: {
@@ -302,7 +302,7 @@ export const states: StateDeclaration[] = [
     url: 'sankey-diagram/',
     component: SankeyDiagramContainer,
     data: {
-      feature: 'support.sankey-diagram',
+      feature: 'support.sankey_diagram',
     },
     resolve: {
       permission: checkPermission,

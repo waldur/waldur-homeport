@@ -15,7 +15,7 @@ const RetypeDialog = lazyComponent(
 const validators = [validateRuntimeState('available'), validateState('OK')];
 
 export const RetypeAction = ({ resource }) =>
-  isFeatureVisible('openstack.volume-types') ? (
+  isFeatureVisible('openstack.volume_types') ? (
     <DialogActionItem
       title={translate('Retype')}
       validators={validators}

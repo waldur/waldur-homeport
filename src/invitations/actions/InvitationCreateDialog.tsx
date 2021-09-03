@@ -45,7 +45,7 @@ export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
       </ModalHeader>
       <ModalBody>
         <EmailGroup disabled={disabled} />
-        {isFeatureVisible('invitations.concealCivilNumber') ? null : (
+        {isFeatureVisible('invitations.conceal_civil_number') ? null : (
           <CivilNumberGroup disabled={disabled} />
         )}
         <TaxNumberGroup disabled={disabled} />

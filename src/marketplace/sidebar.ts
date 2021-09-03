@@ -68,7 +68,7 @@ export const getDefaultItems = (customerUuid: string): MenuItemType[] => [
         params: {
           uuid: customerUuid,
         },
-        feature: 'marketplace.my-offerings',
+        feature: 'marketplace.private_offerings',
       },
       {
         key: 'marketplace',

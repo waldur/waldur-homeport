@@ -47,7 +47,7 @@ const getRegisteredFields = (formName) =>
   );
 
 export const getTermsOfServiceIsVisible = (state: RootState) =>
-  isVisible(state, 'marketplace.termsOfService');
+  isVisible(state, 'marketplace.terms_of_service');
 
 export const allTermsOfServiceAgreed = createSelector(
   getFormValues(ToSForm),

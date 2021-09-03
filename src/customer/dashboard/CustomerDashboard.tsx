@@ -49,7 +49,7 @@ export const CustomerDashboard: FunctionComponent = () => {
             <CustomerResourcesFilter />
             <CustomerResourcesList />
           </Panel>
-          {isFeatureVisible('customer.dashboard.category-resources-list') && (
+          {isFeatureVisible('customer.category_resources_list') && (
             <CategoryResourcesList
               scopeType={ORGANIZATION_WORKSPACE}
               scope={customer}

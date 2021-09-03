@@ -52,7 +52,7 @@ const getQuotas = ({ formData, usages, limits }) => {
       required: formData.size || 0,
     },
   ];
-  if (isFeatureVisible('openstack.volume-types')) {
+  if (isFeatureVisible('openstack.volume_types')) {
     const required = {};
     if (formData.type) {
       const key = `gigabytes_${formData.type.name}`;

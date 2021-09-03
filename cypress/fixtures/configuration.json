@@ -44,5 +44,14 @@
   "WALDUR_SUPPORT": {
     "ENABLED": true
   },
-  "LANGUAGES": [["en", "English"]]
+  "LANGUAGES": [["en", "English"]],
+  "FEATURES": {
+    "support": {
+      "customers_list": true
+    },
+    "user": {
+      "ssh_keys": true,
+      "notifications": true
+    }
+  }
 }

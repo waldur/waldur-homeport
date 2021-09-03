@@ -55,7 +55,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Estimated cost'),
-      feature: 'projectCostDetails',
+      feature: 'project.estimated_cost',
       render: ProjectCostField,
     },
     {

@@ -29,7 +29,7 @@ export const RoleGroup: FunctionComponent<{ isProjectManager }> = ({
           {translate(ENV.roles.admin)}
         </label>
       </FormGroup>
-      {isFeatureVisible('project.support') && (
+      {isFeatureVisible('project.member_role') && (
         <FormGroup>
           <label>
             <Field name="role" component="input" type="radio" value="member" />{' '}

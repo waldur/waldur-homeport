@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 import store from '@waldur/store/store';
 
 export const getFlowCreateAction = () => {
-  if (!isFeatureVisible('marketplace-flows')) {
+  if (!isFeatureVisible('marketplace.flows')) {
     return;
   }
   return {

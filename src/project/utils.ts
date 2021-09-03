@@ -38,7 +38,7 @@ const getDefaultItems = (project) => [
     },
     icon: 'fa-bell-o',
     label: translate('Audit logs'),
-    feature: 'eventlog',
+    feature: 'project.events',
     index: 500,
   },
   ENV.plugins.WALDUR_SUPPORT && {
@@ -58,7 +58,7 @@ const getDefaultItems = (project) => [
     params: {
       uuid: project.uuid,
     },
-    feature: 'team',
+    feature: 'project.team',
     key: 'team',
     countFieldKey: 'users',
     index: 800,
