@@ -128,7 +128,7 @@ const formValidator = (props) => {
       'Total storage limit is exceeded',
     );
   }
-  if (isFeatureVisible('openstack.volume-types')) {
+  if (isFeatureVisible('openstack.volume_types')) {
     const required = getVolumeTypeRequirements(attributes);
     for (const name in required) {
       if (limits[name] !== -1 && required[name] + usages[name] > limits[name]) {

@@ -29,7 +29,7 @@ export const DataVolumePanel: FunctionComponent<OwnProps> = (props) => (
     </Panel.Heading>
     <Panel.Body>
       <FormSection name={props.volumePath}>
-        {isFeatureVisible('Rancher.VolumeMountPoint') && (
+        {isFeatureVisible('rancher.volume_mount_point') && (
           <FormName>
             {({ form }) => (
               <VolumeMountPointGroup

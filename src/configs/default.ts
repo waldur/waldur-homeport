@@ -19,24 +19,6 @@ export const ENV: ApplicationConfigurationOptions = {
   // Either 'accounting' or 'billing'
   accountingMode: 'accounting',
 
-  disabledFeatures: [],
-  enabledFeatures: [
-    'billing',
-    'eventlog',
-    'import',
-    'marketplace.my-offerings',
-    'notifications',
-    'offering.comments',
-    'projectCostDetails',
-    'support.users',
-    'support.organizations',
-    'support.resources-treemap',
-    'support.shared-providers',
-    'team',
-    'user.ssh-keys',
-  ],
-  featuresVisible: false,
-
   defaultPullInterval: 5, // seconds
   countersTimerInterval: 30, // seconds
 

@@ -31,7 +31,7 @@ const validateSize = (value: number) =>
 
 const loadData = async (settings) => {
   const zones = await loadVolumeAvailabilityZones(settings);
-  if (isFeatureVisible('openstack.volume-types')) {
+  if (isFeatureVisible('openstack.volume_types')) {
     const volumeTypes = await loadVolumeTypes(settings);
     return {
       zones,

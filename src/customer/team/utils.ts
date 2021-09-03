@@ -21,7 +21,7 @@ export const getRoles = () => {
       label: translate(ENV.roles.manager),
     },
   ];
-  if (isFeatureVisible('project.support')) {
+  if (isFeatureVisible('project.member_role')) {
     roles.push({
       value: PROJECT_MEMBER_ROLE,
       label: translate(ENV.roles.member),

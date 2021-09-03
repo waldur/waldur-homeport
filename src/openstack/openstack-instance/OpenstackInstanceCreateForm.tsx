@@ -111,7 +111,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
       let volumeTypeChoices = [];
       let defaultVolumeType;
 
-      if (isFeatureVisible('openstack.volume-types')) {
+      if (isFeatureVisible('openstack.volume_types')) {
         const volumeTypes = await api.loadVolumeTypes(scopeUuid);
         volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
         defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
@@ -162,7 +162,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
         });
         let system_volume_type = defaultVolumeType;
         let data_volume_type = defaultVolumeType;
-        if (isFeatureVisible('openstack.volume-types')) {
+        if (isFeatureVisible('openstack.volume_types')) {
           system_volume_type = volumeTypeChoices.find(
             (volumeType) => volumeType.value === initial.system_volume_type,
           );

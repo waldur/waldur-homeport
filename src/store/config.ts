@@ -13,29 +13,22 @@ export const initConfig = (config: any) => ({
   },
 });
 
-const getFeaturesMap = (features: string[]) => {
-  const map = {};
-  features.forEach((feature) => {
-    map[feature] = true;
-  });
-  return map;
-};
-
 export const reducer = (
   state = INITIAL_STATE,
   action,
 ): ApplicationConfigurationOptions => {
   switch (action.type) {
     case INIT_CONFIG: {
-      const {
-        toBeFeatures = [],
-        disabledFeatures = [],
-        enabledFeatures = [],
-      } = action.payload.config;
+      const { FEATURES = {} } = action.payload.config;
+      const result = {};
+      for (const skey of Object.keys(FEATURES)) {
+        for (const fkey of Object.keys(FEATURES[skey])) {
+          result[`${skey}.${fkey}`] = FEATURES[skey][fkey];
+        }
+      }
       return {
         ...action.payload.config,
-        disabledFeatures: getFeaturesMap(toBeFeatures.concat(disabledFeatures)),
-        enabledFeatures: getFeaturesMap(enabledFeatures),
+        FEATURES: result,
       };
     }
 
@@ -50,21 +43,10 @@ export const isVisible = (state: RootState, feature: string): boolean => {
   if (feature === undefined || feature === null) {
     return true;
   }
-  if (!state.config) {
+  if (!state.config.FEATURES) {
     return false;
   }
-  const {
-    featuresVisible,
-    disabledFeatures = {},
-    enabledFeatures = {},
-  } = state.config;
-  if (disabledFeatures[feature]) {
-    return false;
-  }
-  if (enabledFeatures[feature]) {
-    return true;
-  }
-  return featuresVisible;
+  return state.config.FEATURES[feature];
 };
 
 export const getNativeNameVisible = (state: RootState) =>

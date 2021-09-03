@@ -19,14 +19,14 @@ export const getPrivateUserTabs = () => [
     icon: 'fa-key',
     state: 'profile.keys',
     key: 'keys',
-    feature: 'user.ssh-keys',
+    feature: 'user.ssh_keys',
   },
   {
     label: translate('Notifications'),
     icon: 'fa-envelope',
     state: 'profile.notifications',
     key: 'notifications',
-    feature: 'notifications',
+    feature: 'user.notifications',
   },
   {
     label: translate('Manage'),
@@ -53,7 +53,7 @@ export const getPrivateUserTabs = () => [
     icon: 'fa-plus',
     state: 'profile.flows-list',
     key: 'flows-list',
-    feature: 'marketplace-flows',
+    feature: 'marketplace.flows',
   },
 ];
 
@@ -75,7 +75,7 @@ export const getPublicUserTabs = (user) => [
     params: {
       uuid: user.uuid,
     },
-    feature: 'user.ssh-keys',
+    feature: 'user.ssh_keys',
   },
 ];
 

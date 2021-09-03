@@ -65,7 +65,8 @@ export const PureSupportTabs: React.FC<SupportTabsProps> = (props) => {
 const connector = connect<StateProps, {}, OwnProps>(
   (state: RootState, ownProps) => ({
     showComments:
-      isVisible(state, 'offering.comments') && Boolean(ownProps?.issue?.key),
+      isVisible(state, 'support.offering_comments') &&
+      Boolean(ownProps?.issue?.key),
   }),
 );
 

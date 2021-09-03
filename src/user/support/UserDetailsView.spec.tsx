@@ -13,7 +13,9 @@ const createState = (user) =>
       user,
     },
     config: {
-      featuresVisible: true,
+      FEATURES: {
+        'support.user_manage': true,
+      },
     },
   } as unknown) as RootState);
 

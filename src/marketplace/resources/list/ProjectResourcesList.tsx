@@ -128,7 +128,7 @@ const TableOptions = {
 
 const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
-  importVisible: isVisible(state, 'import'),
+  importVisible: isVisible(state, 'marketplace.import_resources'),
   filter: getFormValues('ProjectResourcesFilter')(state),
 });
 

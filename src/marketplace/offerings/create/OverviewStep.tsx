@@ -35,7 +35,7 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
       accept={['image/png', 'image/jpeg', 'image/svg+xml'].join(',')}
       buttonLabel={props.translate('Browse')}
     />
-    {isFeatureVisible('marketplace.documents') ? (
+    {isFeatureVisible('marketplace.offering_document') ? (
       <FileUploadField
         name="document.file"
         showFileName={true}
@@ -43,7 +43,7 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
         buttonLabel={props.translate('Browse')}
       />
     ) : null}
-    {isFeatureVisible('marketplace.documents') ? (
+    {isFeatureVisible('marketplace.offering_document') ? (
       <StringField
         name="document.name"
         placeholder={props.translate('Filename')}

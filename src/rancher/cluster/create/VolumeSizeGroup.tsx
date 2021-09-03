@@ -22,7 +22,7 @@ const createVolumeSizeValidator = (nodeIndex, volumeIndex) => (
   if (volumeIndex >= volumes.length) {
     return;
   }
-  if (!isFeatureVisible('Rancher.VolumeMountPoint')) {
+  if (!isFeatureVisible('rancher.volume_mount_point')) {
     return;
   }
   const volume = volumes[volumeIndex];

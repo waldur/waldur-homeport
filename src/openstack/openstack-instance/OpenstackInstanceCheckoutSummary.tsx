@@ -76,7 +76,7 @@ const getDailyPrice = (formData, components) => {
 
 function extendVolumeTypeQuotas(formData, usages, limits) {
   const quotas = [];
-  if (isFeatureVisible('openstack.volume-types')) {
+  if (isFeatureVisible('openstack.volume_types')) {
     const required = getVolumeTypeRequirements(formData);
     Object.keys(limits)
       .filter((key) => key.startsWith('gigabytes_'))

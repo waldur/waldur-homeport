@@ -16,7 +16,7 @@ export const states: StateDeclaration[] = [
     url: 'vm-type-overview/',
     component: VmTypeOverviewContainer,
     data: {
-      feature: 'support.vm-type-overview',
+      feature: 'support.vm_type_overview',
     },
     resolve: {
       permission: checkPermission,

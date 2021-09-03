@@ -20,7 +20,7 @@ export const states: StateDeclaration[] = [
     url: 'resources-treemap/',
     component: ResourcesTreemap,
     data: {
-      feature: 'support.resources-treemap',
+      feature: 'support.resources_treemap',
     },
     resolve: {
       permission: checkPermission,
@@ -32,7 +32,7 @@ export const states: StateDeclaration[] = [
     url: 'shared-providers/',
     component: SharedProviderContainer,
     data: {
-      feature: 'support.shared-providers',
+      feature: 'support.shared_providers',
     },
     resolve: {
       permission: checkPermission,
