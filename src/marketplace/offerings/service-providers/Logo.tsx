@@ -5,8 +5,8 @@ import './Logo.scss';
 
 export const Logo: FunctionComponent = () => (
   <div className="logoContainer">
-    {ENV.loginLogo ? (
-      <img src={ENV.loginLogo} />
+    {ENV.plugins.WALDUR_CORE.LOGIN_LOGO ? (
+      <img src={ENV.plugins.WALDUR_CORE.LOGIN_LOGO} />
     ) : (
       <h1 className="logo-name">{ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}</h1>
     )}

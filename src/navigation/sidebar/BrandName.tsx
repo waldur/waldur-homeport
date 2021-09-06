@@ -55,9 +55,9 @@ export const BrandName: FunctionComponent = () => {
   return (
     <li className="brand-name hidden-xs">
       <a onClick={onLogoClick}>
-        {ENV.sidebarLogo ? (
+        {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
           <img
-            src={ENV.sidebarLogo}
+            src={ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO}
             style={{ maxHeight: 100, maxWidth: 175 }}
           />
         ) : (

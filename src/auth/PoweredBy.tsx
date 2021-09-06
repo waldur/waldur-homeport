@@ -6,11 +6,11 @@ import { translate } from '@waldur/i18n';
 import './PoweredBy.scss';
 
 export const PoweredBy: FunctionComponent = () =>
-  ENV.poweredByLogo ? (
+  ENV.plugins.WALDUR_CORE.POWERED_BY_LOGO ? (
     <div className="powered-by">
       <div>{translate('Powered by')}</div>
       <div>
-        <img src={ENV.poweredByLogo} />
+        <img src={ENV.plugins.WALDUR_CORE.POWERED_BY_LOGO} />
       </div>
     </div>
   ) : null;

@@ -10,8 +10,8 @@ export const AuthHeader: FunctionComponent = () => {
   const sessionExpired = Boolean(router.globals.params?.toState);
   return (
     <>
-      {ENV.loginLogo ? (
-        <img src={ENV.loginLogo} />
+      {ENV.plugins.WALDUR_CORE.LOGIN_LOGO ? (
+        <img src={ENV.plugins.WALDUR_CORE.LOGIN_LOGO} />
       ) : (
         <>
           <h1 className="logo-name">

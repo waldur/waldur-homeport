@@ -13,10 +13,10 @@ export const SiteHeader: FunctionComponent = () => {
   return (
     <div className="border-bottom">
       <nav className="navbar navbar-static-top white-bg m-b-none">
-        {ENV.loginLogo && (
+        {ENV.plugins.WALDUR_CORE.LOGIN_LOGO && (
           <div className="navbar-header m-l-sm-xl">
             <a className="header-logo" onClick={goBack}>
-              <img src={ENV.loginLogo} />
+              <img src={ENV.plugins.WALDUR_CORE.LOGIN_LOGO} />
             </a>
           </div>
         )}

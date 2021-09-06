@@ -28,9 +28,6 @@ export const ENV: ApplicationConfigurationOptions = {
   },
   invitationRedirectTime: 5000,
 
-  // Renders label and logo at the login page
-  // poweredByLogo: 'images/waldur/logo-120x120.png'
-
   // Provide exclude file types for issue attachments uploading
   // Based on https://github.com/okonet/attr-accept
   // Reffered to https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input#Attributes
