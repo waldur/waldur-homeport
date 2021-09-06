@@ -46,9 +46,6 @@ export const ENV: ApplicationConfigurationOptions = {
   // Renders label and logo at the login page
   // poweredByLogo: 'images/waldur/logo-120x120.png'
 
-  // Conceal "Change request" from a selection of issue types for non-staff/non-support users
-  // concealChangeRequest: false
-
   // Provide exclude file types for issue attachments uploading
   // Based on https://github.com/okonet/attr-accept
   // Reffered to https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input#Attributes
