@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/configs/default';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { getUser } from '@waldur/workspace/selectors';
@@ -11,9 +10,7 @@ import { InputGroup } from './InputGroup';
 
 export const DomainGroup: FunctionComponent = () => {
   const user = useSelector(getUser);
-  if (ENV.plugins.WALDUR_CORE.ORGANIZATION_DOMAIN_VISIBLE) {
-    return null;
-  } else if (user.is_staff) {
+  if (user.is_staff) {
     return (
       <InputGroup
         name="domain"

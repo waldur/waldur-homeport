@@ -3,6 +3,7 @@ import { PanelBody } from 'react-bootstrap';
 
 import { ENV } from '@waldur/configs/default';
 import { getNameFieldValidators } from '@waldur/core/validators';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 
@@ -31,7 +32,7 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => (
           maxLength={160}
         />
       )}
-      <DomainGroup />
+      {isFeatureVisible('customer.show_domain') && <DomainGroup />}
       <InputGroup
         name="email"
         component={InputField}
