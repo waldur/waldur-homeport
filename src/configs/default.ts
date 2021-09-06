@@ -32,14 +32,6 @@ export const ENV: ApplicationConfigurationOptions = {
     member: gettext('Project member'),
   },
   invitationRedirectTime: 5000,
-  userMandatoryFields: ['full_name', 'email'],
-
-  userRegistrationHiddenFields: [
-    'registration_method',
-    'job_title',
-    'phone_number',
-    'organization',
-  ],
 
   // Renders label and logo at the login page
   // poweredByLogo: 'images/waldur/logo-120x120.png'

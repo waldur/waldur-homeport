@@ -13,7 +13,14 @@
       "Government owned company"
     ],
     "ONLY_STAFF_MANAGES_SERVICES": false,
-    "OWNERS_CAN_MANAGE_OWNERS": false
+    "OWNERS_CAN_MANAGE_OWNERS": false,
+    "USER_REGISTRATION_HIDDEN_FIELDS": [
+      "registration_method",
+      "job_title",
+      "phone_number",
+      "organization"
+    ],
+    "USER_MANDATORY_FIELDS": ["full_name", "email"]
   },
   "WALDUR_AUTH_SOCIAL": {
     "SMARTIDEE_CLIENT_ID": "SMARTIDEE_CLIENT_ID"

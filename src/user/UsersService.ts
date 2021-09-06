@@ -37,7 +37,7 @@ class UsersServiceClass {
   }
 
   mandatoryFieldsMissing(user) {
-    return ENV.userMandatoryFields.reduce(
+    return ENV.plugins.WALDUR_CORE.USER_MANDATORY_FIELDS.reduce(
       (result, item) => result || !user[item],
       false,
     );

@@ -27,11 +27,13 @@ export const fieldIsVisible = (ownProps) => (field: string) => {
     return true;
   }
 
-  return ENV.userRegistrationHiddenFields.indexOf(field) === -1;
+  return !ENV.plugins.WALDUR_CORE.USER_REGISTRATION_HIDDEN_FIELDS.includes(
+    field,
+  );
 };
 
 export const isRequired = (field: string) => {
-  return ENV.userMandatoryFields.indexOf(field) !== -1;
+  return ENV.plugins.WALDUR_CORE.USER_MANDATORY_FIELDS.includes(field);
 };
 
 export const isVisibleForSupportOrStaff = (state: RootState) => {
