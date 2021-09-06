@@ -56,7 +56,7 @@ export const AuthInit: FunctionComponent = () => {
         <div className="col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3">
           <h2>
             {translate('Welcome to {pageTitle}!', {
-              pageTitle: ENV.shortPageTitle,
+              pageTitle: ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE,
             })}
           </h2>
           <p>

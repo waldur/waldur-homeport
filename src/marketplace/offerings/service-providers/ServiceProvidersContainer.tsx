@@ -11,7 +11,7 @@ import './ServiceProvidersContainer.scss';
 
 export const ServiceProvidersContainer: FunctionComponent = () => {
   const title = translate('Service providers in {title}', {
-    title: ENV.shortPageTitle,
+    title: ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE,
   });
   useTitle(title);
   return (

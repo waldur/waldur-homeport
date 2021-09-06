@@ -10,7 +10,7 @@ import store from './store/store';
 import { attachTransitions } from './transitions';
 
 export function afterBootstrap() {
-  document.title = ENV.modePageTitle;
+  document.title = ENV.plugins.WALDUR_CORE.FULL_PAGE_TITLE;
   if (ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID) {
     ReactGA.initialize(ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID);
   }

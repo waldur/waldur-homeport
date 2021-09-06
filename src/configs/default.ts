@@ -5,8 +5,6 @@ const gettext = (x: string): string => x;
 export const ENV: ApplicationConfigurationOptions = {
   // general config
   apiEndpoint: 'http://localhost:8080/',
-  modePageTitle: 'Waldur | Cloud Service Management',
-  shortPageTitle: 'Waldur',
   marketplaceLandingPageTitle: '',
 
   pageSizes: [5, 10, 20, 50],

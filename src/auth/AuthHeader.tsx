@@ -14,11 +14,13 @@ export const AuthHeader: FunctionComponent = () => {
         <img src={ENV.loginLogo} />
       ) : (
         <>
-          <h1 className="logo-name">{ENV.shortPageTitle}</h1>
+          <h1 className="logo-name">
+            {ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
+          </h1>
           {state.name === 'login' && (
             <h4>
               {translate('Welcome to {pageTitle}!', {
-                pageTitle: ENV.shortPageTitle,
+                pageTitle: ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE,
               })}
             </h4>
           )}
@@ -26,7 +28,7 @@ export const AuthHeader: FunctionComponent = () => {
       )}
       {state.name === 'register' && (
         <h4>
-          {translate('Register to')} {ENV.shortPageTitle}
+          {translate('Register to')} {ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
         </h4>
       )}
       <p>
