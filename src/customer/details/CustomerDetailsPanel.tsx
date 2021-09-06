@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
@@ -45,7 +46,7 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
           value={customer.abbreviation}
         />
 
-        {ENV.plugins.WALDUR_CORE.ORGANIZATION_DOMAIN_VISIBLE && (
+        {isFeatureVisible('customer.show_domain') && (
           <Field
             label={translate('Home organization domain name')}
             value={customer.domain}
