@@ -42,8 +42,9 @@ export const ReportUsageAction = ({ resource }: { resource: Resource }) => {
         })
       }
       disabled={
-        isSupportOnly &&
-        ['OK', 'Updating', 'Terminating'].includes(resource.state)
+        (!resource.is_usage_based && !resource.is_limit_based) ||
+        (isSupportOnly &&
+          ['OK', 'Updating', 'Terminating'].includes(resource.state))
       }
     />
   );

@@ -37,6 +37,7 @@ export const ShowUsageAction = ({ resource }: { resource: Resource }) => {
           resource_uuid: resource.uuid || resource.marketplace_resource_uuid,
         })
       }
+      disabled={!resource.is_usage_based && !resource.is_limit_based}
     />
   );
 };
