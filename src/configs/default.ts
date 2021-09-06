@@ -67,9 +67,6 @@ export const ENV: ApplicationConfigurationOptions = {
   // It can be either 'localStorage' or 'sessionStorage'.
   authStorage: 'localStorage',
 
-  // Allows to hide billing step in organization creation wizard
-  hideOrganizationBillingStep: false,
-
   // Default font for rendering exported table PDF
   defaultFont: 'OpenSans',
 
