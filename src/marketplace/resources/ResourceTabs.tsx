@@ -35,7 +35,7 @@ export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => (
         </PanelBody>
       </Tab>
     )}
-    {resource.is_usage_based && (
+    {(resource.is_usage_based || resource.is_limit_based) && (
       <Tab eventKey="usage" title={translate('Usage')}>
         <ResourceUsageTabsContainer
           resource={{
