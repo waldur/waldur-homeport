@@ -27,7 +27,7 @@ export const LandingPage = withTranslation((props: LandingPageProps) => (
       title={
         ENV.marketplaceLandingPageTitle ||
         props.translate('Explore {deployment} Marketplace', {
-          deployment: ENV.shortPageTitle,
+          deployment: ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE,
         })
       }
     >

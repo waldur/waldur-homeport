@@ -32,6 +32,8 @@ export interface ExternalLink {
 }
 
 interface CoreConfiguration {
+  SHORT_PAGE_TITLE: string;
+  FULL_PAGE_TITLE: string;
   EXTERNAL_LINKS: ExternalLink[];
   DOCS_URL: string;
   SUPPORT_PORTAL_URL: string;

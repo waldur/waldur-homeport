@@ -63,7 +63,9 @@ export const BrandName: FunctionComponent = () => {
         ) : (
           <>
             <i className="fa fa-th-large"></i>{' '}
-            <span className="ellipsis">{ENV.shortPageTitle}</span>
+            <span className="ellipsis">
+              {ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
+            </span>
           </>
         )}
       </a>
