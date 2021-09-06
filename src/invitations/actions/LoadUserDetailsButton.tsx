@@ -1,14 +1,14 @@
 import { FunctionComponent } from 'react';
 import { Button, FormGroup } from 'react-bootstrap';
 
-import { ENV } from '@waldur/configs/default';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 
 export const LoadUserDetailsButton: FunctionComponent<{ loading; onClick }> = ({
   loading,
   onClick,
 }) =>
-  ENV.invitationRequireUserDetails ? (
+  isFeatureVisible('invitation.require_user_details') ? (
     <FormGroup>
       <Button bsStyle="primary" disabled={loading} onClick={onClick}>
         {loading && (
