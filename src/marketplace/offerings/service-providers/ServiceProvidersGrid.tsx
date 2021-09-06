@@ -28,7 +28,7 @@ const GridComponent: FunctionComponent<any> = (props) => {
 const GridOptions = {
   table: SERVICE_PROVIDERS_GRID,
   fetchData: createFetcher('marketplace-service-providers', ANONYMOUS_CONFIG),
-  queryField: 'query',
+  queryField: 'customer_keyword',
 };
 
 export const ServiceProvidersGrid = connectTable(GridOptions)(GridComponent);
