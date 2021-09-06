@@ -77,7 +77,8 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
     dispatch(change('InvitationCreateDialog', 'role', roles[0].value));
   }, [dispatch, roles]);
 
-  const roleDisabled = ENV.invitationRequireUserDetails && !userDetails;
+  const roleDisabled =
+    isFeatureVisible('invitation.require_user_details') && !userDetails;
   const projectEnabled = PROJECT_ROLES.includes(role) && !roleDisabled;
 
   const createInvitation = useCallback(
