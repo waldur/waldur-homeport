@@ -32,6 +32,7 @@ export interface ExternalLink {
 }
 
 interface CoreConfiguration {
+  HOMEPORT_SENTRY_DSN: string;
   INVITATION_CIVIL_NUMBER_LABEL: string;
   INVITATION_CIVIL_NUMBER_HELP_TEXT: string;
   INVITATION_TAX_NUMBER_LABEL: string;

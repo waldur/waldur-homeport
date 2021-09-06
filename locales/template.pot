@@ -4182,10 +4182,6 @@ msgstr ""
 msgid "Must be at most {max}"
 msgstr ""
 
-#: src/configs/default.ts
-msgid "Must start with a country prefix ie EE34501234215"
-msgstr ""
-
 #: src/marketplace/offerings/MyOfferingsListContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/images/ImagesContainer.tsx

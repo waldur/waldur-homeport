@@ -14,9 +14,9 @@ export function afterBootstrap() {
   if (ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID) {
     ReactGA.initialize(ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID);
   }
-  if (ENV.SENTRY_DSN) {
+  if (ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_DSN) {
     Sentry.init({
-      dsn: ENV.SENTRY_DSN,
+      dsn: ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_DSN,
     });
   }
   loadInspinia();
