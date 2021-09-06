@@ -32,6 +32,9 @@ export interface ExternalLink {
 }
 
 interface CoreConfiguration {
+  INVITATION_CIVIL_NUMBER_LABEL: string;
+  INVITATION_CIVIL_NUMBER_HELP_TEXT: string;
+  INVITATION_TAX_NUMBER_LABEL: string;
   SHORT_PAGE_TITLE: string;
   FULL_PAGE_TITLE: string;
   USER_MANDATORY_FIELDS: string[];

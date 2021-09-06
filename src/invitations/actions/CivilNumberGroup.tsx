@@ -11,9 +11,12 @@ export const CivilNumberGroup: FunctionComponent<{ disabled }> = ({
 }) => (
   <InputGroup
     name="civil_number"
-    label={ENV.invitationCivilNumberLabel || translate('Civil number')}
+    label={
+      ENV.plugins.WALDUR_CORE.INVITATION_CIVIL_NUMBER_LABEL ||
+      translate('Civil number')
+    }
     required={isFeatureVisible('invitation.civil_number_required')}
     disabled={disabled}
-    helpText={ENV.invitationCivilCodeHelpText}
+    helpText={ENV.plugins.WALDUR_CORE.INVITATION_CIVIL_NUMBER_HELP_TEXT}
   />
 );

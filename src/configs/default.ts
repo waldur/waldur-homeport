@@ -20,11 +20,6 @@ export const ENV: ApplicationConfigurationOptions = {
   defaultPullInterval: 5, // seconds
   countersTimerInterval: 30, // seconds
 
-  // Allows to provide help text for the civil code field in invitation form
-  invitationCivilCodeHelpText: gettext(
-    'Must start with a country prefix ie EE34501234215',
-  ),
-
   roles: {
     owner: gettext('Organization owner'),
     manager: gettext('Project manager'),
