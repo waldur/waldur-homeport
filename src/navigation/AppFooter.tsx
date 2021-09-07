@@ -8,7 +8,7 @@ import { BackendHealthStatusIndicator } from '@waldur/navigation/BackendHealthSt
 import { getConfig } from '@waldur/store/config';
 
 export const AppFooter: FunctionComponent = () => {
-  const { buildId, companyName, companyUrl } = useSelector(getConfig);
+  const { buildId } = useSelector(getConfig);
   return (
     <footer className="footer hidden-print">
       <div className="pull-right">
@@ -24,11 +24,6 @@ export const AppFooter: FunctionComponent = () => {
           )}
           {ENV.plugins.WALDUR_CORE.SITE_PHONE && (
             <li>{ENV.plugins.WALDUR_CORE.SITE_PHONE}</li>
-          )}
-          {companyName && (
-            <li>
-              <a href={companyUrl}>{companyName}</a>
-            </li>
           )}
         </ul>
       </div>

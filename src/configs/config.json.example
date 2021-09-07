@@ -1,5 +1,4 @@
 {
   "name": "development",
-  "apiEndpoint": "http://localhost:8000/",
-  "enableExperimental": false
+  "apiEndpoint": "http://localhost:8000/"
 }
