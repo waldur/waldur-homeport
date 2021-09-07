@@ -2441,9 +2441,6 @@ msgstr "Turi būti bent {min}"
 msgid "Must be at most {max}"
 msgstr "Turi būti ne daugiau kaip {max}"
 
-msgid "Must start with a country prefix ie EE34501234215"
-msgstr "Turi prasidėti šalies priešdėlis, ty EE34501234215"
-
 msgid "My offerings"
 msgstr "Mano aukos"
 

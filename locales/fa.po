@@ -1715,9 +1715,6 @@ msgstr "صورتحساب ماهانه"
 msgid "More info"
 msgstr "اطلاعات بیشتر"
 
-msgid "Must start with a country prefix ie EE34501234215"
-msgstr "باید با کشور prefix شروع شود مثل EE34501234215"
-
 msgid "My offerings"
 msgstr "پیشنهادات من"
 

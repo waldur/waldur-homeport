@@ -2378,9 +2378,6 @@ msgstr "Måste vara minst {min}"
 msgid "Must be at most {max}"
 msgstr "Måste vara som mest {max}"
 
-msgid "Must start with a country prefix ie EE34501234215"
-msgstr "Måste börja med ett landsprefix, dvs. EE34501234215"
-
 msgid "My offerings"
 msgstr "Mina erbjudanden"
 
