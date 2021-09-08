@@ -319,6 +319,11 @@ msgstr ""
 msgid "Add image"
 msgstr ""
 
+#: src/invoices/details/AddInvoiceItemButton.tsx
+#: src/invoices/details/AddInvoiceItemDialog.tsx
+msgid "Add invoice item"
+msgstr ""
+
 #: src/marketplace/compare/ComparisonItemPlaceholder.tsx
 msgid "Add item"
 msgstr ""
@@ -3563,6 +3568,10 @@ msgstr ""
 
 #: src/paypal/InvoiceActions.tsx
 msgid "Invoice has not been sent to PayPal yet"
+msgstr ""
+
+#: src/invoices/details/AddInvoiceItemDialog.tsx
+msgid "Invoice item has been created."
 msgstr ""
 
 #: src/invoices/list/InvoicesList.tsx
@@ -8840,6 +8849,10 @@ msgstr ""
 
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Unable to create horizontal pod autoscaler."
+msgstr ""
+
+#: src/invoices/details/AddInvoiceItemDialog.tsx
+msgid "Unable to create invoice item."
 msgstr ""
 
 #: src/user/keys/KeyCreateForm.tsx

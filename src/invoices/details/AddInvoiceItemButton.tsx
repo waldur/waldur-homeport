@@ -25,6 +25,7 @@ export const AddInvoiceItemButton: FunctionComponent<{ invoice }> = ({
     <DialogActionButton
       title={translate('Add invoice item')}
       icon="fa fa-plus"
+      className="btn btn-primary"
       modalComponent={AddInvoiceItemDialog}
       resource={invoice}
     />

@@ -1,5 +1,6 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useEffect, FunctionComponent, useContext } from 'react';
+import { ButtonGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 
@@ -99,15 +100,15 @@ export const BillingDetails: FunctionComponent = () => {
   useEffect(() => {
     layoutContext.setActions(
       invoice?.pdf ? (
-        <>
+        <ButtonGroup>
           <DownloadInvoiceButton invoice={invoice} />
           <AddInvoiceItemButton invoice={invoice} />
-        </>
+        </ButtonGroup>
       ) : (
-        <>
+        <ButtonGroup>
           <PrintInvoiceButton />
           <AddInvoiceItemButton invoice={invoice} />
-        </>
+        </ButtonGroup>
       ),
     );
     layoutContext.setSidebarClass('hidden-print');

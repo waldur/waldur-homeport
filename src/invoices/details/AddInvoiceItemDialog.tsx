@@ -13,7 +13,24 @@ export const AddInvoiceItemDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Add invoice item')}
-      fields={[createNameField()]}
+      fields={[
+        createNameField(),
+        {
+          name: 'unit_price',
+          type: 'integer',
+          label: translate('Unit price'),
+        },
+        {
+          name: 'quantity',
+          type: 'integer',
+          label: translate('Quantity'),
+        },
+        {
+          name: 'article_code',
+          type: 'string',
+          label: translate('Article code'),
+        },
+      ]}
       submitForm={async (formData) => {
         try {
           await addInvoiceItem(resource.url, formData);
