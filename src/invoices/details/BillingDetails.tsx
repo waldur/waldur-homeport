@@ -17,6 +17,7 @@ import { getCustomer as getCustomerSelector } from '@waldur/workspace/selectors'
 import { Invoice } from '../types';
 import { formatPeriod } from '../utils';
 
+import { AddInvoiceItemButton } from './AddInvoiceItemButton';
 import { BillingRecordDetails } from './BillingRecordDetails';
 import { DownloadInvoiceButton } from './DownloadInvoiceButton';
 import { InvoiceDetails } from './InvoiceDetails';
@@ -98,9 +99,15 @@ export const BillingDetails: FunctionComponent = () => {
   useEffect(() => {
     layoutContext.setActions(
       invoice?.pdf ? (
-        <DownloadInvoiceButton invoice={invoice} />
+        <>
+          <DownloadInvoiceButton invoice={invoice} />
+          <AddInvoiceItemButton invoice={invoice} />
+        </>
       ) : (
-        <PrintInvoiceButton />
+        <>
+          <PrintInvoiceButton />
+          <AddInvoiceItemButton invoice={invoice} />
+        </>
       ),
     );
     layoutContext.setSidebarClass('hidden-print');

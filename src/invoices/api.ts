@@ -1,5 +1,5 @@
 import { ENV } from '@waldur/configs/default';
-import { get, sendForm } from '@waldur/core/api';
+import { get, post, sendForm } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';
@@ -34,3 +34,9 @@ export const fetchInvoicesStats: Fetcher = (request: TableRequest) => {
   };
   return parseResponse(url, params);
 };
+
+export const addInvoiceItem = (invoiceUrl, payload) =>
+  post('/invoice-items/', {
+    invoice: invoiceUrl,
+    ...payload,
+  });
