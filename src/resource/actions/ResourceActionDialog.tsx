@@ -119,6 +119,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
                   {...props}
                   loadOptions={field.loadOptions}
                   getOptionLabel={field.getOptionLabel}
+                  getOptionValue={field.getOptionValue}
                   {...reactSelectMenuPortaling()}
                 />
               );

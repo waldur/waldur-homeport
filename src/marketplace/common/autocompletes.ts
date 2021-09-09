@@ -7,6 +7,7 @@ import {
   getProjectList,
   getCategoryOptions,
   getUsers,
+  getResourceList,
 } from '@waldur/marketplace/common/api';
 
 export const organizationAutocomplete = async (
@@ -139,4 +140,25 @@ export const userAutocomplete = async (
   };
   const response = await getUsers(params);
   return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
+};
+
+export const resourceAutocomplete = async (
+  query: object,
+  prevOptions,
+  currentPage: number,
+  field = ['name', 'url'],
+) => {
+  const params = {
+    field,
+    o: 'name',
+    ...query,
+    page: currentPage,
+    page_size: ENV.pageSize,
+  };
+  const response = await getResourceList(params);
+  return returnReactSelectAsyncPaginateObject(
+    response,
+    prevOptions,
+    currentPage,
+  );
 };

@@ -273,6 +273,9 @@ export const submitUsageReport = (payload) =>
 export const getResource = (id: string) =>
   getById<Resource>('/marketplace-resources/', id);
 
+export const getResourceList = (params?: {}) =>
+  getSelectData<Resource>('/marketplace-resources/', params);
+
 export const switchPlan = (resource_uuid: string, plan_url: string) =>
   post(`/marketplace-resources/${resource_uuid}/switch_plan/`, {
     plan: plan_url,

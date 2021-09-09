@@ -741,6 +741,7 @@ msgstr ""
 msgid "Are you sure you would like to terminate resource {resourceName}?"
 msgstr ""
 
+#: src/invoices/details/AddInvoiceItemDialog.tsx
 #: src/invoices/details/ComponentRow.tsx
 #: src/marketplace/offerings/ArticleCodeField.tsx
 msgid "Article code"
@@ -6128,6 +6129,7 @@ msgstr ""
 msgid "Put this into ~/.kube/config:"
 msgstr ""
 
+#: src/invoices/details/AddInvoiceItemDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 #: src/invoices/details/ResourceRow.tsx
@@ -9667,6 +9669,7 @@ msgstr ""
 msgid "Unit"
 msgstr ""
 
+#: src/invoices/details/AddInvoiceItemDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
 #: src/invoices/details/ResourceRow.tsx
 msgid "Unit price"
