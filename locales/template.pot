@@ -700,6 +700,10 @@ msgstr ""
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr ""
 
+#: src/invoices/details/DeleteInvoiceItemButton.tsx
+msgid "Are you sure you want to remove invoice item {name}?"
+msgstr ""
+
 #: src/customer/team/UserRemoveButton.tsx
 msgid "Are you sure you want to remove {userName}?"
 msgstr ""
@@ -1494,6 +1498,7 @@ msgstr ""
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
+#: src/invoices/details/DeleteInvoiceItemButton.tsx
 #: src/marketplace/offerings/images/ImagesActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
@@ -3563,6 +3568,10 @@ msgstr ""
 
 #: src/paypal/InvoiceActions.tsx
 msgid "Invoice has not been sent to PayPal yet"
+msgstr ""
+
+#: src/invoices/details/DeleteInvoiceItemButton.tsx
+msgid "Invoice item has been removed."
 msgstr ""
 
 #: src/invoices/list/InvoicesList.tsx
@@ -6396,6 +6405,7 @@ msgid "Remote security group"
 msgstr ""
 
 #: src/customer/team/UserRemoveButton.tsx
+#: src/invoices/details/DeleteInvoiceItemButton.tsx
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
@@ -8916,6 +8926,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyDialog.tsx
 msgid "Unable to delete instance."
+msgstr ""
+
+#: src/invoices/details/DeleteInvoiceItemButton.tsx
+msgid "Unable to delete invoice item."
 msgstr ""
 
 #: src/customer/payments/store/effects.ts
