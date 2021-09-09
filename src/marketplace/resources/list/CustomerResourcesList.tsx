@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -14,7 +13,6 @@ import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/Res
 import { Category } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
-import { wrapTooltip } from '@waldur/table/ActionButton';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -63,21 +61,8 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Actions'),
-      render: ({ row }) => {
-        const body = (
-          <div className={classNames({ disabled: !row.is_usage_based })}>
-            <ResourceShowUsageButton resource={row} />
-          </div>
-        );
-        if (!row.is_usage_based) {
-          return wrapTooltip(
-            translate('Usage information is not available.'),
-            body,
-          );
-        } else {
-          return body;
-        }
-      },
+      render: ({ row }) =>
+        row.is_usage_based && <ResourceShowUsageButton resource={row} />,
     },
   ];
 

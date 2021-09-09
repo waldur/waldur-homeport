@@ -9922,10 +9922,6 @@ msgstr ""
 msgid "Usage based"
 msgstr ""
 
-#: src/marketplace/resources/list/CustomerResourcesList.tsx
-msgid "Usage information is not available."
-msgstr ""
-
 #: src/issues/workspace/IssueNavigationService.ts
 msgid "Usage overview"
 msgstr ""
