@@ -1,0 +1,11 @@
+@import '~sass/variables.scss';
+@import '~sass/inspinia/_variables.scss';
+
+.publicOfferingLocation {
+  margin: 0 150px;
+  height: 352px;
+  padding: 24px;
+  background-color: $white;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+}

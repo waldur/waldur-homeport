@@ -1032,7 +1032,9 @@ msgstr ""
 msgid "Billing type"
 msgstr ""
 
-#: src/marketplace/offerings/service-providers/shared/OfferingPurchaseButton.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
 msgid "Book"
 msgstr ""
 
@@ -1126,6 +1128,10 @@ msgstr ""
 msgid "CSV"
 msgstr ""
 
+#: src/marketplace/offerings/details/GoogleCalendarLink.tsx
+msgid "Calendar"
+msgstr ""
+
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/CallerGroup.tsx
 #: src/issues/list/IssuesList.tsx
@@ -1214,6 +1220,7 @@ msgstr ""
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
@@ -1322,6 +1329,10 @@ msgstr ""
 #: src/invitations/actions/CivilNumberGroup.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Civil number"
+msgstr ""
+
+#: src/marketplace/offerings/details/GoogleCalendarLink.tsx
+msgid "Click to see Google Calendar"
 msgstr ""
 
 #: src/azure/provider/AzureForm.tsx
@@ -1581,6 +1592,7 @@ msgstr ""
 
 #: src/core/CopyToClipboard.tsx
 #: src/core/CopyToClipboardButton.tsx
+#: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
 #: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr ""
@@ -1927,6 +1939,7 @@ msgid "Databases"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/details/PublicOfferingAttributes.tsx
 msgid "Datacite DOI"
 msgstr ""
 
@@ -2054,6 +2067,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
+#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
@@ -2270,6 +2284,10 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 msgid "Done"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Download full price list"
 msgstr ""
 
 #: src/invoices/details/DownloadInvoiceButton.tsx
@@ -2851,6 +2869,7 @@ msgid "Fixed IPs"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlans.tsx
 msgid "Fixed price"
 msgstr ""
 
@@ -3787,6 +3806,10 @@ msgstr ""
 msgid "Limit amount"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingPricingPlans.tsx
+msgid "Limit based"
+msgstr ""
+
 #: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
 msgid "Limit period"
 msgstr ""
@@ -4698,7 +4721,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsButton.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsContainer.tsx
 msgid "Offering details"
 msgstr ""
 
@@ -4774,6 +4797,14 @@ msgstr ""
 
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 msgid "Offerings images"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingPricingPlans.tsx
+msgid "One time"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingPricingPlans.tsx
+msgid "One time on plan switch"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
@@ -5381,6 +5412,10 @@ msgstr ""
 msgid "Per month"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingPricingPlans.tsx
+msgid "Per {unit}"
+msgstr ""
+
 #: src/auth/callbacks/AuthLogoutFailed.tsx
 msgid "Perform local logout"
 msgstr ""
@@ -5779,6 +5814,10 @@ msgstr ""
 msgid "Pricelist"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Pricing & setup"
+msgstr ""
+
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Pricing tier"
 msgstr ""
@@ -5794,6 +5833,10 @@ msgstr ""
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/PriorityGroup.tsx
 msgid "Priority"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
+msgid "Privacy Policy"
 msgstr ""
 
 #: src/navigation/AnonymousFooter.tsx
@@ -6021,10 +6064,6 @@ msgstr ""
 msgid "Proof document"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
-msgid "Provided by {provider}"
-msgstr ""
-
 #: src/events/EventDetailsTable.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
@@ -6116,7 +6155,9 @@ msgid "Pulling quotas"
 msgstr ""
 
 #: src/marketplace/cart/ForwardButton.tsx
-#: src/marketplace/offerings/service-providers/shared/OfferingPurchaseButton.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
 msgid "Purchase"
 msgstr ""
 
@@ -6243,6 +6284,7 @@ msgstr ""
 msgid "Redeploy"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingAttributes.tsx
 #: src/marketplace/referral/ReferralDetailsField.tsx
 msgid "Referral count"
 msgstr ""
@@ -7540,6 +7582,7 @@ msgstr ""
 msgid "Service provider:"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsBreadcrumbs.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderBreadcrumbs.tsx
 #: src/marketplace/offerings/service-providers/ServiceProvidersGrid.tsx
 msgid "Service providers"
@@ -8288,6 +8331,10 @@ msgstr ""
 msgid "Terminating"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
+msgid "Terms Of Service"
+msgstr ""
+
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -8299,6 +8346,7 @@ msgid "Terms of Service"
 msgstr ""
 
 #: src/core/CopyToClipboardButton.tsx
+#: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
 msgid "Text has been copied"
 msgstr ""
 
@@ -8691,6 +8739,7 @@ msgstr ""
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -9207,7 +9256,7 @@ msgstr ""
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsContainer.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderOfferingsListExpandableRow.tsx
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
@@ -9867,6 +9916,10 @@ msgstr ""
 #: src/slurm/details/utils.ts
 #: src/slurm/tabs.ts
 msgid "Usage"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingPricingPlans.tsx
+msgid "Usage based"
 msgstr ""
 
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
@@ -11026,6 +11079,10 @@ msgstr ""
 
 #: src/resource/utils.tsx
 msgid "{number} days"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
+msgid "{offering} by {customer}"
 msgstr ""
 
 #: src/project/effects.ts

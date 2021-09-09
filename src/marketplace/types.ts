@@ -40,6 +40,8 @@ export interface Plan {
   prices: { [key: string]: number };
   is_active: boolean;
   archived: boolean;
+  minimal_price: number;
+  plan_type: string;
 }
 
 export interface OptionField {
@@ -101,6 +103,8 @@ export interface Offering extends GeolocationPoint {
   name: string;
   backend_id?: string;
   terms_of_service?: string;
+  terms_of_service_link?: string;
+  privacy_policy_link?: string;
   rating: number;
   order_item_count: number;
   reviews: number;
@@ -113,6 +117,7 @@ export interface Offering extends GeolocationPoint {
   full_description: string;
   customer_uuid?: string;
   customer_name?: string;
+  customer_image?: string;
   attributes: AttributesType;
   components: OfferingComponent[];
   options?: OfferingOptions;

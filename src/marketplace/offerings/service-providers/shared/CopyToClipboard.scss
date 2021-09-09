@@ -1,0 +1,14 @@
+@import '~sass/inspinia/_variables.scss';
+@import '~sass/variables.scss';
+
+.copyToClipboard {
+  display: inline;
+  background-color: $white;
+  border: 1px solid $gray-border-color;
+  border-radius: 4px;
+  padding: 8px;
+
+  i {
+    color: #6b6c7e;
+  }
+}

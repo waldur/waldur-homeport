@@ -1,20 +1,3 @@
-@import '~sass/inspinia/_variables.scss';
-
 .serviceProviderBreadcrumbsContainer {
   padding: 16px 24px;
-  font-size: 14px;
-  line-height: 24px;
-  color: $blue;
-
-  .breadcrumb {
-    background-color: transparent;
-
-    & > li + li:before {
-      color: $blue;
-    }
-
-    li.active {
-      display: none;
-    }
-  }
 }

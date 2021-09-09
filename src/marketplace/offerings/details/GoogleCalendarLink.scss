@@ -1,0 +1,13 @@
+@import '~sass/inspinia/_variables.scss';
+
+.googleCalendarLink {
+  display: flex;
+  align-items: center;
+
+  a {
+    font-size: 12px;
+    line-height: 24px;
+    text-decoration: underline;
+    color: $blue;
+  }
+}

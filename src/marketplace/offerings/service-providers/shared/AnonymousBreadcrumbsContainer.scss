@@ -1,0 +1,15 @@
+@import '~sass/inspinia/_variables.scss';
+
+.anonymousBreadcrumbsContainer {
+  font-size: 14px;
+  line-height: 24px;
+  color: $blue;
+
+  .breadcrumb {
+    background-color: transparent;
+
+    & > li + li:before {
+      color: $blue;
+    }
+  }
+}
