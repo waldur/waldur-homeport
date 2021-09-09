@@ -5,7 +5,7 @@ import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/offerings/service-providers/shared/CountryFlag';
 import { Division } from '@waldur/marketplace/offerings/service-providers/shared/Division';
-import { ServiceProviderLogo } from '@waldur/marketplace/offerings/service-providers/shared/ServiceProviderLogo';
+import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
 import { ShowOfferingsButton } from '@waldur/marketplace/offerings/service-providers/shared/ShowOfferingsButton';
 import { ServiceProvider } from '@waldur/marketplace/types';
 
@@ -29,7 +29,12 @@ export const ServiceProviderDetailsCard: FunctionComponent<ServiceProviderDetail
 }) => (
   <div className="detailsCardContainer">
     <div className="detailsCardContainer__header">
-      <ServiceProviderLogo serviceProvider={row} />
+      <Logo
+        image={row.customer_image}
+        placeholder={row.customer_name[0]}
+        height={70}
+        width={120}
+      />
       {row.country && <CountryFlag countryCode={row.country} />}
     </div>
     <p className="card-title">

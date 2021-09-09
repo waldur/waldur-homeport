@@ -7,7 +7,7 @@ import { BreadcrumbItem } from './types';
 
 interface BreadcrumbsProps {
   items: BreadcrumbItem[];
-  activeItem: string;
+  activeItem?: string;
 }
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
@@ -28,8 +28,10 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         )}
       </li>
     ))}
-    <li className="active">
-      <strong>{translate(activeItem)}</strong>
-    </li>
+    {activeItem && (
+      <li className="active">
+        <strong>{translate(activeItem)}</strong>
+      </li>
+    )}
   </ol>
 );

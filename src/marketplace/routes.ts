@@ -93,12 +93,12 @@ const OfferingContainer = lazyComponent(
     ),
   'OfferingContainer',
 );
-const PublicOfferingDetails = lazyComponent(
+const PublicOfferingDetailsContainer = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "PublicOfferingDetails" */ './offerings/details/PublicOfferingDetails'
+      /* webpackChunkName: "PublicOfferingDetailsContainer" */ './offerings/details/PublicOfferingDetailsContainer'
     ),
-  'PublicOfferingDetails',
+  'PublicOfferingDetailsContainer',
 );
 const MyOfferingsListContainer = lazyComponent(
   () =>
@@ -316,16 +316,13 @@ export const states: StateDeclaration[] = [
     url: '/marketplace-public-offering/',
     abstract: true,
     component: AnonymousLayout,
-    data: {
-      hideHeader: true,
-      skipAuth: true,
-    },
+    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
 
   {
     name: 'marketplace-public-offering.details',
     url: ':uuid/',
-    component: PublicOfferingDetails,
+    component: PublicOfferingDetailsContainer,
   },
 
   {

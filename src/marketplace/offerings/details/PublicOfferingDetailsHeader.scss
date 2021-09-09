@@ -1,0 +1,50 @@
+@import '~sass/inspinia/_variables.scss';
+@import '~sass/variables.scss';
+
+.publicOfferingDetailsHeader {
+  background-size: cover;
+  background-position: left center;
+  background-repeat: no-repeat;
+  height: 550px;
+  color: #000000;
+
+  &__card {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: $white;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    margin: 260px 0 0 150px;
+    padding: 24px;
+    column-gap: 24px;
+    min-width: 480px;
+
+    &__info {
+      font-size: 14px;
+      line-height: 24px;
+
+      &__header {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 32px;
+        line-height: 50px;
+        margin: 0 0 -8px;
+      }
+
+      &__description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        max-width: 550px;
+        margin: 8px 0 0;
+      }
+
+      &__button {
+        max-width: 120px;
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
+import { AnonymousBreadcrumbsContainer } from '@waldur/marketplace/offerings/service-providers/shared/AnonymousBreadcrumbsContainer';
 import { ServiceProvider } from '@waldur/marketplace/types';
-import { BreadcrumbsContainer } from '@waldur/navigation/breadcrumbs/BreadcrumbsContainer';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import './ServiceProviderBreadcrumbs.scss';
@@ -31,7 +31,7 @@ export const ServiceProviderBreadcrumbs: FunctionComponent<ServiceProviderBreadc
   );
   return serviceProvider ? (
     <div className="serviceProviderBreadcrumbsContainer">
-      <BreadcrumbsContainer />
+      <AnonymousBreadcrumbsContainer />
     </div>
   ) : null;
 };

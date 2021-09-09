@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 
+import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
+import { translate } from '@waldur/i18n';
 import { Divisions } from '@waldur/marketplace/offerings/service-providers/shared/Divisions';
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/service-providers/shared/OfferingDetailsButton';
 import { OfferingLogo } from '@waldur/marketplace/offerings/service-providers/shared/OfferingLogo';
@@ -24,7 +26,14 @@ export const ServiceProviderOfferingDetailsCard: FunctionComponent<ServiceProvid
     <div className="offeringCard__contentAlwaysOnBottom m-t">
       <Divisions divisions={row.divisions} />
       <OfferingDetailsButton offering={row} />
-      <OfferingPurchaseButton offering={row} />
+      <OfferingPurchaseButton
+        offering={row}
+        label={
+          row.type === OFFERING_TYPE_BOOKING
+            ? translate('Book')
+            : translate('Purchase')
+        }
+      />
     </div>
   </div>
 );
