@@ -115,8 +115,8 @@ export const BillingDetails: FunctionComponent = () => {
   ) : error ? (
     <>{translate('Unable to load data.')}</>
   ) : !invoice ? null : ENV.accountingMode === 'accounting' ? (
-    <BillingRecordDetails invoice={invoice} />
+    <BillingRecordDetails invoice={invoice} refreshInvoiceItems={callback} />
   ) : (
-    <InvoiceDetails invoice={invoice} />
+    <InvoiceDetails invoice={invoice} refreshInvoiceItems={callback} />
   );
 };

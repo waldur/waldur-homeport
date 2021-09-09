@@ -1,5 +1,5 @@
 import { ENV } from '@waldur/configs/default';
-import { get, sendForm } from '@waldur/core/api';
+import { deleteById, get, sendForm } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';
@@ -34,3 +34,6 @@ export const fetchInvoicesStats: Fetcher = (request: TableRequest) => {
   };
   return parseResponse(url, params);
 };
+
+export const deleteInvoiceItem = (itemId) =>
+  deleteById('/invoice-items/', itemId);

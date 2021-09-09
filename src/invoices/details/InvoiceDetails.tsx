@@ -11,7 +11,13 @@ import { CustomerDetails } from './CustomerDetails';
 import { ResourceRow } from './ResourceRow';
 import { getActiveFixedPricePaymentProfile, groupInvoiceItems } from './utils';
 
-export const InvoiceDetails = ({ invoice }: { invoice: Invoice }) => {
+export const InvoiceDetails = ({
+  invoice,
+  refreshInvoiceItems,
+}: {
+  invoice: Invoice;
+  refreshInvoiceItems(): void;
+}) => {
   const projects = useMemo(() => groupInvoiceItems(invoice.items), [
     invoice.items,
   ]);
@@ -82,6 +88,7 @@ export const InvoiceDetails = ({ invoice }: { invoice: Invoice }) => {
                         customer={customer}
                         showPrice={showPrice}
                         showVat={invoice.issuer_details.vat_code}
+                        refreshInvoiceItems={refreshInvoiceItems}
                       />
                     ))}
                   </tbody>

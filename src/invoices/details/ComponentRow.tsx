@@ -3,11 +3,17 @@ import { OverlayTrigger, Popover } from 'react-bootstrap';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 
+import { DeleteInvoiceItemButton } from './DeleteInvoiceItemButton';
 import { ResourceLimitPeriodsTable } from './ResourceLimitPeriodsTable';
 
 import './ComponentRow.scss';
 
-export const ComponentRow = ({ item, showPrice, showVat }) => (
+export const ComponentRow = ({
+  item,
+  showPrice,
+  showVat,
+  refreshInvoiceItems,
+}) => (
   <tr>
     <td>
       <div>
@@ -43,5 +49,11 @@ export const ComponentRow = ({ item, showPrice, showVat }) => (
         <td>{defaultCurrency(showVat ? item.total : item.price)}</td>
       </>
     )}
+    <td>
+      <DeleteInvoiceItemButton
+        item={item}
+        refreshInvoiceItems={refreshInvoiceItems}
+      />
+    </td>
   </tr>
 );

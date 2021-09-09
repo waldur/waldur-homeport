@@ -15,10 +15,12 @@ import { groupInvoiceItems } from './utils';
 
 interface BillingRecordDetailsProps {
   invoice: Invoice;
+  refreshInvoiceItems(): void;
 }
 
 export const BillingRecordDetails: FunctionComponent<BillingRecordDetailsProps> = ({
   invoice,
+  refreshInvoiceItems,
 }) => {
   const customer = useSelector(getCustomer);
   const projects = useMemo(() => groupInvoiceItems(invoice.items), [
@@ -93,6 +95,7 @@ export const BillingRecordDetails: FunctionComponent<BillingRecordDetailsProps> 
                           customer={customer}
                           showPrice={true}
                           showVat={false}
+                          refreshInvoiceItems={refreshInvoiceItems}
                         />
                       ))}
                     </tbody>

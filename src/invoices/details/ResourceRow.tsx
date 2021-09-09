@@ -8,7 +8,13 @@ import { InvoiceItem } from '../types';
 import { ComponentRow } from './ComponentRow';
 import { ResourceHeader } from './ResourceHeader';
 
-export const ResourceRow = ({ resource, customer, showPrice, showVat }) => {
+export const ResourceRow = ({
+  resource,
+  customer,
+  showPrice,
+  showVat,
+  refreshInvoiceItems,
+}) => {
   const [toggled, onToggle] = useBoolean(false);
   return (
     <>
@@ -68,6 +74,7 @@ export const ResourceRow = ({ resource, customer, showPrice, showVat }) => {
               item={item}
               showPrice={showPrice}
               showVat={showVat}
+              refreshInvoiceItems={refreshInvoiceItems}
             />
           ))}
         </>
