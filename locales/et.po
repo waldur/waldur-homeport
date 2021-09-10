@@ -4139,9 +4139,6 @@ msgstr "Kasutus"
 msgid "Usage-based"
 msgstr "Kasutuse baasil"
 
-msgid "Usage information is not available."
-msgstr "Kasutuse andmed pole saadaval."
-
 msgid "Usage overview"
 msgstr "Kasutuse ülevaade"
 

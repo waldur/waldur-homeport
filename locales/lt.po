@@ -3449,9 +3449,6 @@ msgstr "Įrodymas"
 msgid "Proof document"
 msgstr "Įrodomasis dokumentas"
 
-msgid "Provided by {provider}"
-msgstr "Pateikė {provider}"
-
 msgid "Provider"
 msgstr "Teikėjas"
 
@@ -5698,9 +5695,6 @@ msgstr "Naudojimas"
 
 msgid "Usage-based"
 msgstr "Naudojimas pagrįstas"
-
-msgid "Usage information is not available."
-msgstr "Naudojimo informacija nepasiekiama."
 
 msgid "Usage overview"
 msgstr "Naudojimo apžvalga"

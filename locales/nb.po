@@ -3449,9 +3449,6 @@ msgstr "Bevis"
 msgid "Proof document"
 msgstr "Bevis dokument"
 
-msgid "Provided by {provider}"
-msgstr "Levert av {provider}"
-
 msgid "Provider"
 msgstr "Leverandør"
 
@@ -5698,9 +5695,6 @@ msgstr "Bruk"
 
 msgid "Usage-based"
 msgstr "Bruksbasert"
-
-msgid "Usage information is not available."
-msgstr "Bruksinformasjon er ikke tilgjengelig."
 
 msgid "Usage overview"
 msgstr "Bruksoversikt"

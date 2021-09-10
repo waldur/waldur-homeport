@@ -3449,9 +3449,6 @@ msgstr "Důkaz"
 msgid "Proof document"
 msgstr "Důkazní dokument"
 
-msgid "Provided by {provider}"
-msgstr "Poskytuje {provider}"
-
 msgid "Provider"
 msgstr "Poskytovatel"
 
@@ -5698,9 +5695,6 @@ msgstr "Využití"
 
 msgid "Usage-based"
 msgstr "Založené na využití"
-
-msgid "Usage information is not available."
-msgstr "Informace o využití nejsou k dispozici."
 
 msgid "Usage overview"
 msgstr "Přehled využití"

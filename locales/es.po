@@ -3449,9 +3449,6 @@ msgstr "Prueba"
 msgid "Proof document"
 msgstr "Documento de prueba"
 
-msgid "Provided by {provider}"
-msgstr "Proporcionado por {provider}"
-
 msgid "Provider"
 msgstr "Proveedor"
 
@@ -5698,9 +5695,6 @@ msgstr "Uso"
 
 msgid "Usage-based"
 msgstr "Basado en el uso"
-
-msgid "Usage information is not available."
-msgstr "La información de uso no está disponible."
 
 msgid "Usage overview"
 msgstr "Visión general del uso"
