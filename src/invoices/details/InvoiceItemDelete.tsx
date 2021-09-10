@@ -1,19 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { getUser } from '@waldur/workspace/selectors';
 
 import { deleteInvoiceItem } from '../api';
 
-export const DeleteInvoiceItemButton = ({ item, refreshInvoiceItems }) => {
+export const InvoiceItemDelete = ({ item, refreshInvoiceItems }) => {
   const dispatch = useDispatch();
-  const user = useSelector(getUser);
-  if (!user.is_staff) {
-    return null;
-  }
   const callback = async () => {
     try {
       await waitForConfirmation(
@@ -37,7 +32,7 @@ export const DeleteInvoiceItemButton = ({ item, refreshInvoiceItems }) => {
     }
   };
   return (
-    <ActionButton
+    <ActionItem
       action={callback}
       title={translate('Remove')}
       icon="fa fa-trash"

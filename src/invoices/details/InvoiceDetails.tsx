@@ -63,6 +63,7 @@ export const InvoiceDetails = ({
                   <tr>
                     <th colSpan={showPrice ? 5 : 6}>{translate('Item')}</th>
                     <th>{translate('Price')}</th>
+                    <th></th>
                   </tr>
                 </thead>
                 {projects.map((project, projectIndex) => (

@@ -169,6 +169,7 @@ msgstr ""
 #: src/customer/team/OfferingPermissionsList.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationsList.tsx
+#: src/invoices/details/InvoiceItemActions.tsx
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace-flows/CustomerCreateRequestsList.tsx
@@ -700,7 +701,7 @@ msgstr ""
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr ""
 
-#: src/invoices/details/DeleteInvoiceItemButton.tsx
+#: src/invoices/details/InvoiceItemDelete.tsx
 msgid "Are you sure you want to remove invoice item {name}?"
 msgstr ""
 
@@ -741,6 +742,7 @@ msgid "Are you sure you would like to terminate resource {resourceName}?"
 msgstr ""
 
 #: src/invoices/details/ComponentRow.tsx
+#: src/invoices/details/InvoiceItemUpdateDialog.tsx
 #: src/marketplace/offerings/ArticleCodeField.tsx
 msgid "Article code"
 msgstr ""
@@ -1452,6 +1454,14 @@ msgstr ""
 msgid "Compare items"
 msgstr ""
 
+#: src/invoices/details/InvoiceItemCompensationDialog.tsx
+msgid "Compensation for {name}"
+msgstr ""
+
+#: src/invoices/details/InvoiceItemCompensationDialog.tsx
+msgid "Compensation has been created."
+msgstr ""
+
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 msgid "Competence"
@@ -1509,7 +1519,7 @@ msgstr ""
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
-#: src/invoices/details/DeleteInvoiceItemButton.tsx
+#: src/invoices/details/InvoiceItemDelete.tsx
 #: src/marketplace/offerings/images/ImagesActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
@@ -1673,6 +1683,14 @@ msgstr ""
 
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 msgid "Create catalog"
+msgstr ""
+
+#: src/invoices/details/InvoiceItemCompensation.tsx
+msgid "Create compensation"
+msgstr ""
+
+#: src/invoices/details/InvoiceItemCompensationDialog.tsx
+msgid "Create compensation for invoice item {name}"
 msgstr ""
 
 #: src/vmware/actions/CreateDiskAction.tsx
@@ -2400,6 +2418,10 @@ msgstr ""
 
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 msgid "Edit end date of {resourceName}"
+msgstr ""
+
+#: src/invoices/details/InvoiceItemUpdate.tsx
+msgid "Edit item"
 msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
@@ -3589,8 +3611,12 @@ msgstr ""
 msgid "Invoice has not been sent to PayPal yet"
 msgstr ""
 
-#: src/invoices/details/DeleteInvoiceItemButton.tsx
+#: src/invoices/details/InvoiceItemDelete.tsx
 msgid "Invoice item has been removed."
+msgstr ""
+
+#: src/invoices/details/InvoiceItemUpdateDialog.tsx
+msgid "Invoice item has been updated."
 msgstr ""
 
 #: src/invoices/list/InvoicesList.tsx
@@ -4258,6 +4284,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/digitalocean/digitalocean-droplet-config.ts
+#: src/invoices/details/InvoiceItemCompensationDialog.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
@@ -6447,7 +6474,7 @@ msgid "Remote security group"
 msgstr ""
 
 #: src/customer/team/UserRemoveButton.tsx
-#: src/invoices/details/DeleteInvoiceItemButton.tsx
+#: src/invoices/details/InvoiceItemDelete.tsx
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
@@ -8893,6 +8920,10 @@ msgstr ""
 msgid "Unable to create catalog."
 msgstr ""
 
+#: src/invoices/details/InvoiceItemCompensationDialog.tsx
+msgid "Unable to create compensation."
+msgstr ""
+
 #: src/vmware/actions/CreateDiskDialog.tsx
 msgid "Unable to create disk."
 msgstr ""
@@ -8977,7 +9008,7 @@ msgstr ""
 msgid "Unable to delete instance."
 msgstr ""
 
-#: src/invoices/details/DeleteInvoiceItemButton.tsx
+#: src/invoices/details/InvoiceItemDelete.tsx
 msgid "Unable to delete invoice item."
 msgstr ""
 
@@ -9599,6 +9630,10 @@ msgstr ""
 msgid "Unable to update internal IPs of OpenStack instance."
 msgstr ""
 
+#: src/invoices/details/InvoiceItemUpdateDialog.tsx
+msgid "Unable to update invoice item."
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to update logo."
 msgstr ""
@@ -9793,6 +9828,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/update-internal-ips/UpdateInternalIpsForm.tsx
 msgid "Update internal IPs for OpenStack instance {name}"
+msgstr ""
+
+#: src/invoices/details/InvoiceItemUpdateDialog.tsx
+msgid "Update invoice item {name}"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
