@@ -3,7 +3,7 @@ import { OverlayTrigger, Popover } from 'react-bootstrap';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 
-import { DeleteInvoiceItemButton } from './DeleteInvoiceItemButton';
+import { InvoiceItemActions } from './InvoiceItemActions';
 import { ResourceLimitPeriodsTable } from './ResourceLimitPeriodsTable';
 
 import './ComponentRow.scss';
@@ -50,7 +50,7 @@ export const ComponentRow = ({
       </>
     )}
     <td>
-      <DeleteInvoiceItemButton
+      <InvoiceItemActions
         item={item}
         refreshInvoiceItems={refreshInvoiceItems}
       />

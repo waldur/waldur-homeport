@@ -67,6 +67,7 @@ export const ResourceRow = ({
                 <th>{translate('Price')}</th>
               </>
             )}
+            <th></th>
           </tr>
           {resource.items.map((item: InvoiceItem, itemIndex: number) => (
             <ComponentRow
