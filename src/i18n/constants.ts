@@ -42,6 +42,10 @@ export const DOMAIN_MESSAGES = {
     'Add owner': gettext('Add PI'),
     Owner: gettext('PI'),
     owner: gettext('PI'),
+    Purchase: gettext('Request'),
+    'You have the right to purchase service without additional approval.': gettext(
+      'You have the right to request service without additional approval.',
+    ),
     'Organization owner role expires on': gettext('PI role expires on'),
     'You cannot manage other organization owner.': gettext(
       'You cannot manage other PI',
