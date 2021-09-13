@@ -3669,7 +3669,7 @@ msgstr ""
 msgid "Issue link"
 msgstr ""
 
-#: src/issues/events.ts
+#: src/issues/events.tsx
 msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr ""
 
@@ -6819,7 +6819,7 @@ msgstr ""
 
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/project/ProjectEventsFilter.tsx
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "Resource events"
 msgstr ""
 
@@ -8154,7 +8154,7 @@ msgstr ""
 msgid "Support dashboard"
 msgstr ""
 
-#: src/issues/events.ts
+#: src/issues/events.tsx
 msgid "Support request events"
 msgstr ""
 
@@ -11149,71 +11149,71 @@ msgstr ""
 msgid "{resourceType} has state {resourceState}"
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} creation has been scheduled by {user_link}."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} creation has failed."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} deletion has failed."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} has been created."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} has been imported by {user_link}."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} has been restarted."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} has been scheduled to deletion by {user_link}."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} has been scheduled to restart by {user_link}."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} has been scheduled to start by {user_link}."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} has been scheduled to stop by {user_link}."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} has been started."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} has been stopped."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} has been updated by {user_link}."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} restart has failed."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} start has failed."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_link} stop has failed."
 msgstr ""
 
-#: src/resource/events.ts
+#: src/resource/events.tsx
 msgid "{resource_name} has been deleted."
 msgstr ""
 

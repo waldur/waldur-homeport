@@ -125,7 +125,7 @@ export function attachTransitions() {
   });
 
   router.transitionService.onSuccess({}, (transition) => {
-    if (AuthService.isAuthenticated() && !transition.to().data.skipAuth) {
+    if (AuthService.isAuthenticated() && !transition.to().data?.skipAuth) {
       tryAcceptInvitation();
     }
   });
