@@ -14,15 +14,15 @@ import { UserSidebar } from './UserSidebar';
 import { UsersService } from './UsersService';
 
 function loadUser() {
-  UsersService.getCurrentUser().then(function (user) {
+  UsersService.getCurrentUser().then(function (currentUser) {
     if (
       router.globals.params.uuid === undefined ||
-      router.globals.params.uuid === user.uuid
+      router.globals.params.uuid === currentUser.uuid
     ) {
       store.dispatch(setCurrentWorkspace(USER_WORKSPACE));
-      store.dispatch(setCurrentUser(user));
+      store.dispatch(setCurrentUser(currentUser));
       store.dispatch(setBreadcrumbs([{ label: translate('User dashboard') }]));
-    } else {
+    } else if (currentUser.is_staff || currentUser.is_support) {
       UsersService.get(router.globals.params.uuid)
         .then(function (user) {
           store.dispatch(setCurrentUser(user));
@@ -34,6 +34,8 @@ function loadUser() {
             router.stateService.go('errorPage.notFound');
           }
         });
+    } else {
+      router.stateService.go('errorPage.notFound');
     }
   });
 }
