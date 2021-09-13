@@ -17,14 +17,17 @@ RUN yarn build
 # production environment
 FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
-COPY --from=build /app/build-info /
+COPY --from=build /app/build/index.html /usr/share/nginx/html/index.orig.html
 
 ENV API_URL="http://localhost:8080"
+ENV TITLE="Waldur | Cloud Service Management"
 
 # put config template outside the public root
 COPY docker/config.template.json /usr/share/nginx/
+
 # replace default configuration
 COPY docker/nginx.conf /etc/nginx/nginx.conf
+COPY docker/entrypoint.sh /
 
 EXPOSE 80
-CMD ["/bin/sh",  "-c",  "mkdir -p /usr/share/nginx/html/scripts/configs/ && envsubst < /usr/share/nginx/config.template.json > /usr/share/nginx/html/scripts/configs/config.json && exec nginx -g 'daemon off;'"]
+CMD [ "/entrypoint.sh" ]
