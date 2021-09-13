@@ -30,7 +30,9 @@ export const PublicOfferingDescriptionContainer: FunctionComponent<PublicOfferin
           url={offering.privacy_policy_link}
         />
       ) : (
-        <span>N/A</span>
+        <span>
+          <b>{translate('Privacy Policy')}: </b>N/A
+        </span>
       )}
       {offering.terms_of_service_link ? (
         <ExternalLink
@@ -38,7 +40,9 @@ export const PublicOfferingDescriptionContainer: FunctionComponent<PublicOfferin
           url={offering.terms_of_service_link}
         />
       ) : (
-        <span>N/A</span>
+        <span>
+          <b>{translate('Terms Of Service')}: </b>N/A
+        </span>
       )}
     </div>
     <div className="publicOfferingDescriptionContainer__description">
