@@ -60,8 +60,8 @@ export const PublicOfferingDetailsHeader: FunctionComponent<PublicOfferingDetail
         <Logo
           image={offering.thumbnail}
           placeholder={offering.name[0]}
-          height={112}
-          width={112}
+          height={70}
+          width={120}
         />
       </div>
     </div>
