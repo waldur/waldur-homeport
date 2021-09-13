@@ -1,55 +1,46 @@
 import { UISref } from '@uirouter/react';
 
-export const getLink = (route, params, label) => (
-  <UISref to={route} params={params}>
-    <a>{label}</a>
-  </UISref>
-);
-
-const getUserLink = (event) => {
-  const name = event.user_full_name || event.user_username;
-  const ctx = { uuid: event.user_uuid };
-  return getLink('users.details', ctx, name);
-};
-
-const getAffectedUserLink = (event) => {
-  const name = event.affected_user_full_name || event.affected_user_username;
-  const ctx = { uuid: event.affected_user_uuid };
-  return getLink('users.details', ctx, name);
-};
-
-const getCallerLink = (event) => {
-  const name = event.caller_full_name || event.caller_username;
-  const ctx = { uuid: event.caller_uuid };
-  return getLink('users.details', ctx, name);
-};
-
-const getCustomerLink = (event) => {
-  const ctx = { uuid: event.customer_uuid };
-  return getLink('organization.details', ctx, event.customer_name);
-};
-
-const getProjectLink = (event) => {
-  const ctx = { uuid: event.project_uuid };
-  return getLink('project.details', ctx, event.project_name);
-};
+import { UserDetailsLink } from './UserDetailsLink';
 
 export const getUserContext = (event) => ({
-  user_link: getUserLink(event),
+  user_link: (
+    <UserDetailsLink
+      uuid={event.user_uuid}
+      name={event.user_full_name || event.user_username}
+    />
+  ),
 });
 
 export const getAffectedUserContext = (event) => ({
-  affected_user_link: getAffectedUserLink(event),
+  affected_user_link: (
+    <UserDetailsLink
+      uuid={event.affected_user_uuid}
+      name={event.affected_user_full_name || event.affected_user_username}
+    />
+  ),
 });
 
 export const getCustomerContext = (event) => ({
-  customer_link: getCustomerLink(event),
+  customer_link: (
+    <UISref to="organization.details" params={{ uuid: event.customer_uuid }}>
+      <a>{event.customer_name}</a>
+    </UISref>
+  ),
 });
 
 export const getProjectContext = (event) => ({
-  project_link: getProjectLink(event),
+  project_link: (
+    <UISref to="project.details" params={{ uuid: event.project_uuid }}>
+      <a>{event.project_name}</a>
+    </UISref>
+  ),
 });
 
 export const getCallerContext = (event) => ({
-  caller_link: getCallerLink(event),
+  caller_link: (
+    <UserDetailsLink
+      uuid={event.caller_uuid}
+      name={event.caller_full_name || event.caller_username}
+    />
+  ),
 });

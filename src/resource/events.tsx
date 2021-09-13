@@ -1,18 +1,24 @@
+import { UISref } from '@uirouter/react';
+
 import eventsRegistry from '@waldur/events/registry';
-import { getLink, getUserContext } from '@waldur/events/utils';
+import { getUserContext } from '@waldur/events/utils';
 import { gettext } from '@waldur/i18n';
 
-const getResourceContext = (event) => {
-  const ctx = {
-    resource_type: event.resource_type,
-    resource_uuid: event.resource_uuid,
-    uuid: event.project_uuid,
-  };
-  return {
-    ...getUserContext(event),
-    resource_link: getLink('resource-details', ctx, event.resource_name),
-  };
-};
+const getResourceContext = (event) => ({
+  ...getUserContext(event),
+  resource_link: (
+    <UISref
+      to="resource-details"
+      params={{
+        resource_type: event.resource_type,
+        resource_uuid: event.resource_uuid,
+        uuid: event.project_uuid,
+      }}
+    >
+      <a>{event.resource_name}</a>
+    </UISref>
+  ),
+});
 
 eventsRegistry.registerGroup({
   title: gettext('Resource events'),

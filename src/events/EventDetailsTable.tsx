@@ -26,12 +26,19 @@ export const EventDetailsTable: FunctionComponent<EventDetailsTableProps> = ({
         label={translate('Timestamp')}
         value={formatDateTime(event.created)}
       />
-      <EventField
-        label={translate('User')}
-        state="users.details"
-        params={{ uuid: event.context.user_uuid }}
-        value={event.context.user_full_name || event.context.user_username}
-      />
+      {isStaffOrSupport ? (
+        <EventField
+          label={translate('User')}
+          state="users.details"
+          params={{ uuid: event.context.user_uuid }}
+          value={event.context.user_full_name || event.context.user_username}
+        />
+      ) : (
+        <EventField
+          label={translate('User')}
+          value={event.context.user_full_name || event.context.user_username}
+        />
+      )}
       <EventField
         label={translate('IP address')}
         value={event.context.ip_address}
