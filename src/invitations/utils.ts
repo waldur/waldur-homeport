@@ -51,7 +51,7 @@ export function acceptInvitation(token, replaceEmail) {
       clearInvitationToken();
       // TODO: Invalidate customers list
     })
-    .catch((response) => {
+    .catch(({ response }) => {
       if (response.status === 404) {
         store.dispatch(showError(translate('Invitation is not found.')));
       } else if (response.status === 400) {
