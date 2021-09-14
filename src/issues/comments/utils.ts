@@ -1,7 +1,6 @@
 import { escapeHtml } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { Attachment } from '@waldur/issues/attachments/types';
-import { getFileName } from '@waldur/issues/attachments/utils';
 import { openUserPopover } from '@waldur/user/actions';
 
 import { Comment } from './types';
@@ -29,16 +28,17 @@ export const createJiraComment = (
   }
 
   for (const attachment of attachments) {
-    const fileName = getFileName(attachment.file);
-    const jiraMarkup = /^image/.test(attachment.mime_type)
-      ? `!${fileName}|thumbnail!`
-      : `[^${fileName}]`;
+    const jiraMarkup = isImage(attachment.mime_type)
+      ? `!${attachment.file_name}|thumbnail!`
+      : `[^${attachment.file_name}]`;
 
     comment += comment.length ? `\n${jiraMarkup}` : jiraMarkup;
   }
 
   return comment;
 };
+
+export const isImage = (mimeType: string) => /^image/.test(mimeType);
 
 export const commentExist = (
   comments: Comment[],
@@ -57,7 +57,7 @@ export const getAttachmentByFileName = (
   fileName = '',
 ): Attachment => {
   for (const attachment of attachments) {
-    if (getFileName(attachment.file) !== fileName) {
+    if (attachment.file_name !== fileName) {
       continue;
     }
     return attachment;

@@ -6,6 +6,8 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
+import { isImage } from '../comments/utils';
+
 import * as actions from './actions';
 import './IssueAttachment.scss';
 import { getIsDeleting } from './selectors';
@@ -20,7 +22,7 @@ interface PureIssueAttachmentProps {
 }
 
 const getThumbnail = (attachment: Attachment, openModalHandler) => {
-  if (attachment.file.match(/\.(png|jpg|jpeg|gif)/g)) {
+  if (isImage(attachment.mime_type)) {
     return <img src={attachment.file} onClick={openModalHandler} />;
   } else {
     return (
@@ -51,7 +53,7 @@ export const PureIssueAttachment: FunctionComponent<PureIssueAttachmentProps> = 
           <div className="attachment-item__description">
             <div className="attachment-item__description-name">
               <a href={attachment.file} download="true">
-                {utils.getFileName(attachment.file)}
+                {attachment.file_name}
               </a>
               <div
                 className="attachment-item__delete"
@@ -95,7 +97,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     deleteAttachment: (): void =>
       dispatch(actions.issueAttachmentsDelete(ownProps.attachment.uuid)),
     openModal: (): void =>
-      dispatch(utils.openAttachmentModal(ownProps.attachment.file)),
+      dispatch(
+        utils.openAttachmentModal(
+          ownProps.attachment.file,
+          ownProps.attachment.file_name,
+        ),
+      ),
   };
 };
 

@@ -46,9 +46,11 @@ interface PureIssueCommentItemProps extends TranslateProps {
   formToggleDisabled: boolean;
   openDeleteDialog(): void;
   openUserDialog(): void;
-  openAttachmentPreview(url: string): void;
+  openAttachmentPreview(url: string, name: string): void;
   toggleForm(): void;
 }
+
+const getFilename = (url) => url.slice(url.lastIndexOf('/') + 1);
 
 export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> = (
   props,
@@ -78,7 +80,8 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
     if (!target.matches('img')) {
       return;
     }
-    openAttachmentPreview(target.getAttribute('src'));
+    const url = target.getAttribute('src');
+    openAttachmentPreview(url, getFilename(url));
   };
 
   return (
@@ -167,8 +170,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(createDeleteDialog(ownProps.comment.uuid)),
   openUserDialog: (): void =>
     dispatch(utils.openUserModal(ownProps.comment.author_uuid)),
-  openAttachmentPreview: (url: string): void =>
-    dispatch(openAttachmentModal(url)),
+  openAttachmentPreview: (url: string, name: string): void =>
+    dispatch(openAttachmentModal(url, name)),
 });
 
 const enhance = compose(

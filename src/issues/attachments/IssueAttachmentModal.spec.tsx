@@ -7,6 +7,7 @@ import { PureIssueAttachmentModal } from './IssueAttachmentModal';
 describe('IssueAttachmentModal', () => {
   const resolve = {
     url: 'https://example.com/media/support_attachments/panda.jpg',
+    name: 'panda.jpg',
   };
   const renderWrapper = (props?) =>
     shallow(<PureIssueAttachmentModal resolve={resolve} {...props} />);

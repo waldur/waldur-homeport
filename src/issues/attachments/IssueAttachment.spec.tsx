@@ -27,6 +27,7 @@ describe('IssueAttachment', () => {
     const currAttachment = {
       ...attachment,
       file: 'file.txt',
+      mime_type: 'text/plain',
     };
     const wrapper = renderWrapper({ attachment: currAttachment });
     expect(wrapper.find('.attachment-item__thumb .fa.fa-file').length).toBe(1);

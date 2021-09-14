@@ -63,8 +63,5 @@ export const getErrorMessage = (files: File[]): string => {
   }: ${fileList} \n ${reasonMessage}`;
 };
 
-export const openAttachmentModal = (url: string) =>
-  openModalDialog(IssueAttachmentModal, { resolve: { url } });
-
-export const getFileName = (url: string): string =>
-  url.slice(url.lastIndexOf('/') + 1);
+export const openAttachmentModal = (url: string, name: string) =>
+  openModalDialog(IssueAttachmentModal, { resolve: { url, name } });
