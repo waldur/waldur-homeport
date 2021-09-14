@@ -5,12 +5,12 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { closeModalDialog } from '@waldur/modal/actions';
 
 import './IssueAttachmentModal.scss';
-import * as utils from './utils';
 
 interface PureIssueAttachmentModalProps {
   closeModal(): void;
   resolve: {
     url: string;
+    name: string;
   };
 }
 
@@ -22,7 +22,7 @@ export class PureIssueAttachmentModal extends Component<PureIssueAttachmentModal
   render() {
     const {
       closeModal,
-      resolve: { url },
+      resolve: { url, name },
     } = this.props;
 
     return (
@@ -34,7 +34,7 @@ export class PureIssueAttachmentModal extends Component<PureIssueAttachmentModal
           <div className="modal-title">
             <h3>
               <a href={url} download="true">
-                {utils.getFileName(url)}
+                {name}
               </a>
             </h3>
           </div>
