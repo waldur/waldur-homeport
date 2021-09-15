@@ -1957,7 +1957,7 @@ msgid "Databases"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingAttributes.tsx
+#: src/marketplace/offerings/details/PublicOfferingAttributesSection.tsx
 msgid "Datacite DOI"
 msgstr ""
 
@@ -6311,7 +6311,7 @@ msgstr ""
 msgid "Redeploy"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingAttributes.tsx
+#: src/marketplace/offerings/details/PublicOfferingAttributesSection.tsx
 #: src/marketplace/referral/ReferralDetailsField.tsx
 msgid "Referral count"
 msgstr ""

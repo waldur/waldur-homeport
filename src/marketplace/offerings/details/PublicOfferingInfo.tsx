@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
+import { useAsync } from 'react-use';
 
+import { getBookingOffering } from '@waldur/booking/api';
 import { PublicOfferingAttributes } from '@waldur/marketplace/offerings/details/PublicOfferingAttributes';
 import { PublicOfferingDescriptionContainer } from '@waldur/marketplace/offerings/details/PublicOfferingDescriptionContainer';
 import { Category, Offering } from '@waldur/marketplace/types';
@@ -13,9 +15,30 @@ interface PublicOfferingInfoProps {
 export const PublicOfferingInfo: FunctionComponent<PublicOfferingInfoProps> = ({
   offering,
   category,
-}) => (
-  <div className="publicOfferingInfo">
-    <PublicOfferingDescriptionContainer offering={offering} />
-    <PublicOfferingAttributes offering={offering} category={category} />
-  </div>
-);
+}) => {
+  const { value } = useAsync(() => getBookingOffering(offering.uuid), [
+    offering,
+  ]);
+  return (
+    <div className="publicOfferingInfo">
+      <PublicOfferingDescriptionContainer
+        offering={offering}
+        category={category}
+        googleCalendarLink={
+          value?.googlecalendar?.public && value?.googlecalendar?.http_link
+            ? value.googlecalendar.http_link
+            : null
+        }
+      />
+      <PublicOfferingAttributes
+        offering={offering}
+        category={category}
+        googleCalendarLink={
+          value?.googlecalendar?.public && value?.googlecalendar?.http_link
+            ? value.googlecalendar.http_link
+            : null
+        }
+      />
+    </div>
+  );
+};
