@@ -1,25 +1,6 @@
-@import '~sass/inspinia/_variables.scss';
-
 .publicOfferingAttributes {
   width: 34%;
   font-size: 14px;
   line-height: 24px;
   padding: 24px;
-
-  &__borderedContent {
-    padding: 16px;
-
-    &__referralCount {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      button {
-        border: 1px solid $gray-border-color;
-        border-radius: 4px;
-        padding: 8px 12px;
-        font-size: 14px;
-      }
-    }
-  }
 }

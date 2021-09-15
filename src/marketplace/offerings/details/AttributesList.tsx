@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
 import { AttributeItem } from '@waldur/marketplace/offerings/details/AttributeItem';
@@ -15,14 +14,12 @@ export const AttributesList: FunctionComponent<AttributesListProps> = ({
 }) => (
   <>
     {sections.map((section: Section, index: number) => (
-      <div
+      <AttributeItem
         key={index}
-        className={classNames({
-          'm-t-lg': index !== 0,
-        })}
-      >
-        <AttributeItem section={section} attributes={attributes} />
-      </div>
+        index={index}
+        section={section}
+        attributes={attributes}
+      />
     ))}
   </>
 );

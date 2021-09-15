@@ -1,20 +1,36 @@
+import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
-import { Offering } from '@waldur/marketplace/types';
+import {
+  shouldRenderAttributesList,
+  shouldRenderAttributesSection,
+} from '@waldur/marketplace/offerings/details/utils';
+import { Category, Offering } from '@waldur/marketplace/types';
 import './PublicOfferingDescriptionContainer.scss';
 
 interface PublicOfferingDescriptionContainerProps {
   offering: Offering;
+  category: Category;
+  googleCalendarLink: string;
 }
 
 export const PublicOfferingDescriptionContainer: FunctionComponent<PublicOfferingDescriptionContainerProps> = ({
   offering,
+  category,
+  googleCalendarLink,
 }) => (
-  <div className="publicOfferingDescriptionContainer bordered">
+  <div
+    className={classNames('bordered publicOfferingDescriptionContainer', {
+      'publicOfferingDescriptionContainer--fullWidth': !(
+        shouldRenderAttributesSection(offering, googleCalendarLink) ||
+        shouldRenderAttributesList(category.sections, offering.attributes)
+      ),
+    })}
+  >
     <div className="publicOfferingDescriptionContainer__header bordered">
       <div>
         <b>{translate('Type')}: </b>
