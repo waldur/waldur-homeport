@@ -15,7 +15,7 @@ export const PublicOfferingDescriptionContainer: FunctionComponent<PublicOfferin
   offering,
 }) => (
   <div className="publicOfferingDescriptionContainer bordered">
-    <div className="publicOfferingDescriptionContainer__header bordered m-b-sm">
+    <div className="publicOfferingDescriptionContainer__header bordered">
       <div>
         <b>{translate('Type')}: </b>
         {getLabel(offering.type)}
@@ -45,9 +45,11 @@ export const PublicOfferingDescriptionContainer: FunctionComponent<PublicOfferin
         </span>
       )}
     </div>
-    <div className="publicOfferingDescriptionContainer__description">
-      <b>{translate('Description')}</b>
-      <FormattedHtml html={offering.full_description} />
-    </div>
+    {offering.full_description && (
+      <div className="publicOfferingDescriptionContainer__description m-t-sm">
+        <b>{translate('Description')}</b>
+        <FormattedHtml html={offering.full_description} />
+      </div>
+    )}
   </div>
 );

@@ -6573,6 +6573,7 @@ msgstr ""
 msgid "Reporting"
 msgstr ""
 
+#: src/i18n/constants.ts
 #: src/marketplace/cart/ForwardButton.tsx
 msgid "Request"
 msgstr ""
@@ -10607,6 +10608,10 @@ msgstr ""
 
 #: src/marketplace/cart/ForwardButton.tsx
 msgid "You have the right to purchase service without additional approval."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "You have the right to request service without additional approval."
 msgstr ""
 
 #: src/issues/list/IssuesListPlaceholder.tsx
