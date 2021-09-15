@@ -1,5 +1,6 @@
 import { useMemo, FunctionComponent, useEffect } from 'react';
 
+import { UserAuthWarning } from '@waldur/auth/UserAuthWarning';
 import { translate } from '@waldur/i18n';
 import { LanguageList } from '@waldur/i18n/LanguageList';
 import { LanguageUtilsService } from '@waldur/i18n/LanguageUtilsService';
@@ -47,6 +48,7 @@ export const AuthLogin: FunctionComponent = () => {
         )}
         {features.SignupButton && <SignupButton />}
         {features.SigninButton && <SigninButton />}
+        <UserAuthWarning />
         <LanguageList />
         <PoweredBy />
       </div>
