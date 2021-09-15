@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { Link } from '@waldur/core/Link';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
@@ -13,6 +12,7 @@ import { BillingPeriod } from '@waldur/marketplace/types';
 
 import './OrderItem.scss';
 import { OrderItemDetailsLink } from './OrderItemDetailsLink';
+import { OrderItemDetailsResourceLink } from './OrderItemDetailsResourceLink';
 
 interface OrderItemProps {
   project_uuid: string;
@@ -55,7 +55,7 @@ export const OrderItem: FunctionComponent<OrderItemProps> = (props) => {
                 <FormattedHtml html={props.item.offering_description} />
               )}
             </p>
-            {props.item.resource_uuid ? (
+            {props.item.resource_uuid && props.item.resource_type ? (
               <p>
                 <ResourceDetailsLink
                   item={
@@ -70,14 +70,11 @@ export const OrderItem: FunctionComponent<OrderItemProps> = (props) => {
               </p>
             ) : props.item.marketplace_resource_uuid ? (
               <p>
-                <Link
-                  state="marketplace-public-resource-details"
-                  params={{
-                    uuid: props.customer_uuid,
-                    resource_uuid: props.item.marketplace_resource_uuid,
-                  }}
-                  label={translate('Resource link')}
-                />
+                <OrderItemDetailsResourceLink
+                  item={props.item as ResourceReference}
+                >
+                  {translate('Resource link')}
+                </OrderItemDetailsResourceLink>
               </p>
             ) : null}
           </div>
