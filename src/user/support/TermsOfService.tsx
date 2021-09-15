@@ -26,9 +26,10 @@ export const TermsOfService: FunctionComponent<TermsOfServiceProps> = (
               formatJsx,
             )
           : translate(
-              'By submitting the form you are agreeing to the <Link>Terms of Service</Link>.',
+              'By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>.',
               {
-                Link: (s: string) => <Link state="tos.index" label={s} />,
+                tos: (s: string) => <Link state="tos.index" label={s} />,
+                pp: (s: string) => <Link state="policy.privacy" label={s} />,
               },
               formatJsx,
             )}

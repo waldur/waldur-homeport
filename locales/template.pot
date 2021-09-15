@@ -1099,12 +1099,16 @@ msgstr ""
 msgid "Business hours"
 msgstr ""
 
+#: src/auth/UserAuthWarning.tsx
+msgid "By authenticating you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
+msgstr ""
+
 #: src/user/support/TokenLifetimeField.tsx
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr ""
 
 #: src/user/support/TermsOfService.tsx
-msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
+msgid "By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
 msgstr ""
 
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
