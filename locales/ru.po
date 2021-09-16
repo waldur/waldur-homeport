@@ -386,9 +386,6 @@ msgstr "Рабочие часы"
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr "Отменяя время жизни токена, вы разрешаете любому его обладателю выдавать себя за вас до тех пор, пока токен не будет отозван."
 
-msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
-msgstr "Отправляя форму, вы соглашаетесь с <Link>условиями предоставления услуг</Link>."
-
 msgid "CIDR"
 msgstr "CIDR"
 

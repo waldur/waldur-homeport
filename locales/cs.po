@@ -617,9 +617,6 @@ msgstr "Pracovní doba"
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr "Nastavením životnosti tokenu na dobu neurčitou dovolíte každému, kdo má token, aby vydával své akce za vaše, dokud nebude token změněn."
 
-msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
-msgstr "Odesláním formuláře souhlasíte se <Link>Smluvními podmínkami</Link>."
-
 msgid "CIDR"
 msgstr "CIDR"
 

@@ -617,9 +617,6 @@ msgstr "Kantooruren"
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr "Door de levensduur van token in te stellen op onbepaalde tijd staat u iedereen die het token heeft toe om uw acties na te doen totdat het token is gewijzigd."
 
-msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
-msgstr "Door het formulier in te dienen, gaat u akkoord met het <Link>Servicevoorwaarden</Link> ."
-
 msgid "CIDR"
 msgstr "CIDR"
 

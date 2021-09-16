@@ -617,9 +617,6 @@ msgstr "Orario di lavoro"
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr "Impostando la durata del token su indefinito, permetti a chiunque abbia il token di impersonare le tue azioni fino a quando il token non è stato modificato."
 
-msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
-msgstr "Inviando il modulo accetti i <Link>Termini di servizio</Link>."
-
 msgid "CIDR"
 msgstr "CIDR"
 
