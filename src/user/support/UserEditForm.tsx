@@ -194,7 +194,7 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
         ) : (
           <SubmitButton
             submitting={props.submitting}
-            label={props.translate('Let’s get started')}
+            label={props.translate('Agree and proceed')}
           />
         )}
         {!props.initial && props.showDeleteButton && (
