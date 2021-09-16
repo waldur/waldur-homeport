@@ -90,7 +90,7 @@ describe('UserEditForm', () => {
     expect(wrapper.find({ label: 'Current API token' }).length).toBe(0);
     expect(wrapper.find({ name: 'token_lifetime' }).length).toBe(0);
     expect(wrapper.find(TermsOfService).length).toBe(1);
-    expect(wrapper.find({ label: 'Let’s get started' }).length).toBe(1);
+    expect(wrapper.find({ label: 'Agree and proceed' }).length).toBe(1);
     expect(wrapper.find('#remove-btn').length).toBe(0);
   });
 

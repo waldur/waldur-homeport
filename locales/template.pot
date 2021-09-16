@@ -487,6 +487,10 @@ msgstr ""
 msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
 msgstr ""
 
+#: src/user/support/UserEditForm.tsx
+msgid "Agree and proceed"
+msgstr ""
+
 #: src/marketplace/cart/ShoppingCart.tsx
 msgid "Agree with ToS"
 msgstr ""
@@ -3816,10 +3820,6 @@ msgstr ""
 #: src/customer/popover/CustomerSummary.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Legal address"
-msgstr ""
-
-#: src/user/support/UserEditForm.tsx
-msgid "Let’s get started"
 msgstr ""
 
 #: src/user/support/TokenLifetimeField.tsx
