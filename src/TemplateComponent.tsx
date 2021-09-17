@@ -23,5 +23,9 @@ export const TemplateComponent: FunctionComponent<TemplateComponentProps> = (
   if (error) {
     return <>{translate('Unable to load page')}</>;
   }
-  return <FormattedHtml html={value} />;
+  return (
+    <div className="m-b-lg">
+      <FormattedHtml html={value} />
+    </div>
+  );
 };
