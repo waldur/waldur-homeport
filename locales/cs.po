@@ -2165,9 +2165,6 @@ msgstr "Pokud chcete, aby se uživatelské jméno správce generovalo automatick
 msgid "Legal address"
 msgstr "Právní adresa"
 
-msgid "Let’s get started"
-msgstr "Pojďme začít"
-
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Životnost bude aktualizována a obnovena po uložení formuláře."
 

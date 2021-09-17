@@ -2165,9 +2165,6 @@ msgstr "Laat leeg als u wilt dat de admin gebruikersnaam automatisch wordt gegen
 msgid "Legal address"
 msgstr "Juridisch adres"
 
-msgid "Let’s get started"
-msgstr "Laten we beginnen"
-
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "De levensduur wordt bijgewerkt en opnieuw ingesteld wanneer het formulier wordt opgeslagen."
 

@@ -2165,9 +2165,6 @@ msgstr "La stå tomt hvis du vil at administratorbrukernavnet skal genereres aut
 msgid "Legal address"
 msgstr "Juridisk adresse"
 
-msgid "Let’s get started"
-msgstr "La oss komme i gang"
-
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Levetiden vil bli oppdatert og tilbakestilt når du lagrer skjemaet."
 

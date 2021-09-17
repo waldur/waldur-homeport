@@ -971,9 +971,6 @@ msgstr "Admin istifadəçi adını avtomatik  yaratmaq istəyirsinizsə, boş bu
 msgid "Legal address"
 msgstr "Hüquqi ünvan"
 
-msgid "Let’s get started"
-msgstr "Gəlin başlayaq"
-
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Forma saxlandıqdan sonra həyat dövrü "
 

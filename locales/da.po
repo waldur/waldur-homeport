@@ -2165,9 +2165,6 @@ msgstr "Lad det være tomt, hvis du ønsker, at administratorbrugernavnet skal g
 msgid "Legal address"
 msgstr "Juridisk adresse"
 
-msgid "Let’s get started"
-msgstr "Lad os komme i gang"
-
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Levetiden opdateres og nulstilles, når formularen gemmes."
 

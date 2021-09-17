@@ -2165,9 +2165,6 @@ msgstr "Palikite tuščią, jei norite, kad administratoriaus vartotojo vardas b
 msgid "Legal address"
 msgstr "Juridinis adresas"
 
-msgid "Let’s get started"
-msgstr "Pradėkime"
-
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Visą laiką bus atnaujinta ir iš naujo nustatyta išsaugant formą."
 

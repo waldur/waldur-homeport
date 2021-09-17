@@ -1538,9 +1538,6 @@ msgstr "اگر میخواهید نام کاربری مدیر به صورت خو�
 msgid "Legal address"
 msgstr "آدرس قانونی"
 
-msgid "Let’s get started"
-msgstr "بیا شروع کنیم"
-
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "پس از ذخیره فرم، طول عمر بروزرسانی و تنظیم مجدد میشود."
 

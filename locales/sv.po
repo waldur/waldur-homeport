@@ -2123,9 +2123,6 @@ msgstr "Lämna tomt om du vill att administratörens användarnamn ska genereras
 msgid "Legal address"
 msgstr "Juridisk adress"
 
-msgid "Let’s get started"
-msgstr "Låt oss komma igång"
-
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Livstids uppdateras och återställs när formuläret sparas."
 

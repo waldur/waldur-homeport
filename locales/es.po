@@ -2165,9 +2165,6 @@ msgstr "Déjelo en blanco si quiere que el nombre de usuario del administrador s
 msgid "Legal address"
 msgstr "Dirección legal"
 
-msgid "Let’s get started"
-msgstr "Vamos a empezar"
-
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "La vida útil se actualizará y se restablecerá al guardar el formulario."
 

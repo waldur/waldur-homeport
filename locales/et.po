@@ -1844,9 +1844,6 @@ msgstr "Jätke tühjaks, kui soovite et admin kasutajanimi luuakse automaatselt.
 msgid "Legal address"
 msgstr "Juriidiline aadress"
 
-msgid "Let’s get started"
-msgstr "Hakkame pihta."
-
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Töötamise aeg resetitakse vormi salvestamisel."
 
