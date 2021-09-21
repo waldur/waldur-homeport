@@ -2312,7 +2312,7 @@ msgstr ""
 msgid "Done"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlansContainer.tsx
 msgid "Download full price list"
 msgstr ""
 
@@ -2899,7 +2899,7 @@ msgid "Fixed IPs"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
-#: src/marketplace/offerings/details/PublicOfferingPricingPlans.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 msgid "Fixed price"
 msgstr ""
 
@@ -3836,7 +3836,7 @@ msgstr ""
 msgid "Limit amount"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlans.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 msgid "Limit based"
 msgstr ""
 
@@ -4182,6 +4182,10 @@ msgstr ""
 
 #: src/freeipa/UsernameGroup.tsx
 msgid "Minimum username length is 3 characters."
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+msgid "Mixed"
 msgstr ""
 
 #: src/auth/valimo/AuthValimoDialog.tsx
@@ -4830,11 +4834,11 @@ msgstr ""
 msgid "Offerings images"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlans.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 msgid "One time"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlans.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 msgid "One time on plan switch"
 msgstr ""
 
@@ -5443,7 +5447,7 @@ msgstr ""
 msgid "Per month"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlans.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 msgid "Per {unit}"
 msgstr ""
 
@@ -5845,7 +5849,7 @@ msgstr ""
 msgid "Pricelist"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlansContainer.tsx
 msgid "Pricing & setup"
 msgstr ""
 
@@ -9962,7 +9966,7 @@ msgstr ""
 msgid "Usage"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlans.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 msgid "Usage based"
 msgstr ""
 

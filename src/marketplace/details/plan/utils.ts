@@ -104,7 +104,7 @@ const getLimits = (state, props) => {
 };
 
 export const pricesSelector = (state, props): PricesData => {
-  const plan: Plan = getPlan(state, props);
+  const plan: Plan = getPlan(state, props) || props.plan;
   const limits: Limits = getLimits(state, props);
   return combinePrices(plan, limits, {}, props.offering);
 };
