@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
-import { PublicOfferingPricingPlans } from '@waldur/marketplace/offerings/details/PublicOfferingPricingPlans';
+import { PublicOfferingPricingPlansContainer } from '@waldur/marketplace/offerings/details/PublicOfferingPricingPlansContainer';
 import { OfferingPurchaseButton } from '@waldur/marketplace/offerings/service-providers/shared/OfferingPurchaseButton';
 import { Offering } from '@waldur/marketplace/types';
 import './PublicOfferingPricing.scss';
@@ -15,18 +15,9 @@ export const PublicOfferingPricing: FunctionComponent<PublicOfferingPricingProps
   offering,
 }) => (
   <div className="publicOfferingPricing">
-    <div className="publicOfferingPricing__section1">
-      <div className="publicOfferingPricing__section1__header m-b">
-        <h1>{translate('Pricing & setup')}</h1>
-        <span className="publicOfferingPricing__section1__header__download">
-          <i className="fa fa-download" />
-          {translate('Download full price list')}
-        </span>
-      </div>
-      <PublicOfferingPricingPlans offering={offering} />
-    </div>
-    <div className="publicOfferingPricing__section2">
-      <span className="publicOfferingPricing__section2__description">
+    <PublicOfferingPricingPlansContainer offering={offering} />
+    <div className="publicOfferingPricing__info">
+      <span className="publicOfferingPricing__info__description">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam blandit
         semper tortor, at elementum sem mattis ac. Proin et eleifend erat, sed
         euismod nibh. Phasellus eu malesuada massa. Maecenas ut tempus tortor.
