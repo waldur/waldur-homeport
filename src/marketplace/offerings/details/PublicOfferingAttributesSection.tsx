@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
 
-import { AuthService } from '@waldur/auth/AuthService';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
 import { GoogleCalendarLink } from '@waldur/marketplace/offerings/details/GoogleCalendarLink';
@@ -38,7 +37,6 @@ export const PublicOfferingAttributesSection: FunctionComponent<PublicOfferingAt
         </div>
       )}
       {offering.google_calendar_link &&
-        AuthService.isAuthenticated() &&
         offering.type === OFFERING_TYPE_BOOKING && (
           <GoogleCalendarLink link={offering.google_calendar_link} />
         )}

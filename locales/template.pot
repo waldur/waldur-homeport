@@ -4956,10 +4956,6 @@ msgstr ""
 msgid "Options are invalid."
 msgstr ""
 
-#: src/auth/AuthLogin.tsx
-msgid "Or use social login"
-msgstr ""
-
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 msgid "Order Summary"
 msgstr ""
@@ -6377,8 +6373,8 @@ msgstr ""
 msgid "Register to"
 msgstr ""
 
-#: src/auth/AuthButton.tsx
-msgid "Register with {label}"
+#: src/auth/AuthLogin.tsx
+msgid "Register with"
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
@@ -7828,8 +7824,8 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: src/auth/AuthButton.tsx
-msgid "Sign in with {label}"
+#: src/auth/AuthLogin.tsx
+msgid "Sign in with"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
