@@ -6,7 +6,7 @@ export const formatCurrency = (
   fractionSize: number,
 ) => {
   if (typeof value === 'string') value = parseFloat(value);
-  return `${currency || ''}${new Intl.NumberFormat('en-US', {
+  return `${currency || ''} ${new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: fractionSize,
   }).format(value)}`;
