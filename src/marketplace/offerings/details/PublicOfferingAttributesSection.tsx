@@ -12,14 +12,12 @@ import './PublicOfferingAttributesSection.scss';
 
 interface PublicOfferingAttributesSectionProps {
   offering: Offering;
-  googleCalendarLink: string;
 }
 
 export const PublicOfferingAttributesSection: FunctionComponent<PublicOfferingAttributesSectionProps> = ({
   offering,
-  googleCalendarLink,
 }) =>
-  shouldRenderAttributesSection(offering, googleCalendarLink) ? (
+  shouldRenderAttributesSection(offering) ? (
     <div className="bordered publicOfferingAttributesSection m-b-sm">
       {offering.datacite_doi && (
         <div>
@@ -39,10 +37,10 @@ export const PublicOfferingAttributesSection: FunctionComponent<PublicOfferingAt
           )}
         </div>
       )}
-      {googleCalendarLink &&
+      {offering.google_calendar_link &&
         AuthService.isAuthenticated() &&
         offering.type === OFFERING_TYPE_BOOKING && (
-          <GoogleCalendarLink link={googleCalendarLink} />
+          <GoogleCalendarLink link={offering.google_calendar_link} />
         )}
     </div>
   ) : null;
