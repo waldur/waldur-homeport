@@ -16,6 +16,7 @@
         vertical-align: middle !important;
         border: none !important;
         padding: 14px 8px !important;
+        line-height: 24px;
 
         &:not(:first-child) {
           text-align: center;
@@ -23,16 +24,14 @@
       }
 
       td {
-        font-size: 16px;
-        line-height: 24px;
+        font-size: 15px;
       }
 
       thead {
         th {
           background-color: #cce3f5;
           font-weight: bold;
-          font-size: 18px;
-          line-height: 24px;
+          font-size: 16px;
         }
       }
 
