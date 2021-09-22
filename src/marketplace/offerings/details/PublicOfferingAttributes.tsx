@@ -12,21 +12,16 @@ import './PublicOfferingAttributes.scss';
 interface PublicOfferingAttributesProps {
   offering: Offering;
   category: Category;
-  googleCalendarLink: string;
 }
 
 export const PublicOfferingAttributes: FunctionComponent<PublicOfferingAttributesProps> = ({
   offering,
   category,
-  googleCalendarLink,
 }) =>
-  shouldRenderAttributesSection(offering, googleCalendarLink) ||
+  shouldRenderAttributesSection(offering) ||
   shouldRenderAttributesList(category.sections, offering.attributes) ? (
     <div className="publicOfferingAttributes bordered">
-      <PublicOfferingAttributesSection
-        offering={offering}
-        googleCalendarLink={googleCalendarLink}
-      />
+      <PublicOfferingAttributesSection offering={offering} />
       {shouldRenderAttributesList(category.sections, offering.attributes) && (
         <AttributesList
           attributes={offering.attributes}

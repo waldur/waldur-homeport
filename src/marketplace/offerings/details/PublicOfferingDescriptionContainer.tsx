@@ -15,18 +15,16 @@ import './PublicOfferingDescriptionContainer.scss';
 interface PublicOfferingDescriptionContainerProps {
   offering: Offering;
   category: Category;
-  googleCalendarLink: string;
 }
 
 export const PublicOfferingDescriptionContainer: FunctionComponent<PublicOfferingDescriptionContainerProps> = ({
   offering,
   category,
-  googleCalendarLink,
 }) => (
   <div
     className={classNames('bordered publicOfferingDescriptionContainer', {
       'publicOfferingDescriptionContainer--fullWidth': !(
-        shouldRenderAttributesSection(offering, googleCalendarLink) ||
+        shouldRenderAttributesSection(offering) ||
         shouldRenderAttributesList(category.sections, offering.attributes)
       ),
     })}
