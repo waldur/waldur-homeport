@@ -33,17 +33,17 @@ export const AuthLogin: FunctionComponent = () => {
         {features.SignupForm && <SignupForm />}
         {features.SigninForm && features.SocialSignup && (
           <p>
-            <small>{translate('Or use social login')}</small>
+            <small>
+              {features.mode === 'register'
+                ? translate('Register with')
+                : translate('Sign in with')}
+            </small>
           </p>
         )}
         {providers.map(
           (provider) =>
             features[provider.providerKey] && (
-              <AuthButton
-                key={provider.providerKey}
-                {...provider}
-                mode={features.mode}
-              />
+              <AuthButton key={provider.providerKey} {...provider} />
             ),
         )}
         {features.SignupButton && <SignupButton />}
