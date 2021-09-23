@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
+import { ExportFullPriceList } from '@waldur/marketplace/offerings/details/ExportFullPriceList';
 import { PublicOfferingPricingPlans } from '@waldur/marketplace/offerings/details/PublicOfferingPricingPlans';
 import { Offering } from '@waldur/marketplace/types';
 import './PublicOfferingPricingPlansContainer.scss';
@@ -15,10 +16,7 @@ export const PublicOfferingPricingPlansContainer: FunctionComponent<PublicOfferi
   <div className="pricingPlansContainer">
     <div className="pricingPlansContainer__header m-b">
       <h1>{translate('Pricing & setup')}</h1>
-      <span className="pricingPlansContainer__header__download">
-        <i className="fa fa-download" />
-        {translate('Download full price list')}
-      </span>
+      <ExportFullPriceList offering={offering} />
     </div>
     <PublicOfferingPricingPlans offering={offering} />
   </div>

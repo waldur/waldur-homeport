@@ -1,0 +1,16 @@
+@import '~sass/inspinia/_variables.scss';
+
+.exportFullPriceList {
+  font-size: 14px;
+  line-height: 24px;
+  color: $blue;
+
+  i {
+    font-weight: bold;
+    margin-right: 4px;
+  }
+
+  &__download {
+    cursor: pointer;
+  }
+}
