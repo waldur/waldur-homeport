@@ -2816,9 +2816,6 @@ msgstr "Otevřeno {user} z {organization} v {date}"
 msgid "Options are invalid."
 msgstr "Možnosti jsou neplatné."
 
-msgid "Or use social login"
-msgstr "Nebo použijte přihlášení přes sociální sítě"
-
 msgid "Order Summary"
 msgstr "Souhrn objednávky"
 
@@ -3607,9 +3604,6 @@ msgstr "Zaregistrujte organizaci jako poskytovatele služeb a odstraňte ji."
 
 msgid "Register to"
 msgstr "Zaregistrujte se do"
-
-msgid "Register with {label}"
-msgstr "Zaregistrovat se pomocí {label}"
 
 msgid "Registered at:"
 msgstr "Registrováno na:"
@@ -4432,9 +4426,6 @@ msgstr "Vypnutí"
 
 msgid "Sign in"
 msgstr "Přihlásit se"
-
-msgid "Sign in with {label}"
-msgstr "Přihlaste se pomocí {label}"
 
 msgid "Size"
 msgstr "Velikost"

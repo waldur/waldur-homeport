@@ -2816,9 +2816,6 @@ msgstr "Åbnet af {user} fra {organization} kl. {date}"
 msgid "Options are invalid."
 msgstr "Indstillingerne er ugyldige."
 
-msgid "Or use social login"
-msgstr "Eller brug socialt login"
-
 msgid "Order Summary"
 msgstr "Oversigt over ordre"
 
@@ -3607,9 +3604,6 @@ msgstr "Registrer organisation som tjenesteudbyder og fjern organisation."
 
 msgid "Register to"
 msgstr "Tilmeld dig"
-
-msgid "Register with {label}"
-msgstr "Registrer med {label}"
 
 msgid "Registered at:"
 msgstr "Registreret på:"
@@ -4432,9 +4426,6 @@ msgstr "Lukke ned"
 
 msgid "Sign in"
 msgstr "Log ind"
-
-msgid "Sign in with {label}"
-msgstr "Log ind med {label}"
 
 msgid "Size"
 msgstr "Størrelse"

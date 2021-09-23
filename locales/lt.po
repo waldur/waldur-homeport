@@ -2816,9 +2816,6 @@ msgstr "Atidarė {user} iš {organization} {date}"
 msgid "Options are invalid."
 msgstr "Parinktys neteisingos."
 
-msgid "Or use social login"
-msgstr "Arba naudokitės socialiniu prisijungimu"
-
 msgid "Order Summary"
 msgstr "Užsakymo santrauka"
 
@@ -3607,9 +3604,6 @@ msgstr "Užregistruokite organizaciją kaip paslaugų teikėją ir pašalinkite 
 
 msgid "Register to"
 msgstr "Registruotis į"
-
-msgid "Register with {label}"
-msgstr "Registruotis naudojant {label}"
 
 msgid "Registered at:"
 msgstr "Registruota:"
@@ -4432,9 +4426,6 @@ msgstr "Išjungimo"
 
 msgid "Sign in"
 msgstr "Prisijungti"
-
-msgid "Sign in with {label}"
-msgstr "Prisijunkite naudodami {label}"
 
 msgid "Size"
 msgstr "Dydis"

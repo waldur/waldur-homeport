@@ -2816,9 +2816,6 @@ msgstr "Åpnet av {user} fra {organization} på {date}"
 msgid "Options are invalid."
 msgstr "Alternativene er ugyldige."
 
-msgid "Or use social login"
-msgstr "Eller bruk sosial pålogging"
-
 msgid "Order Summary"
 msgstr "Bestillingssammendrag"
 
@@ -3607,9 +3604,6 @@ msgstr "Registrer organisasjonen som tjenesteleverandør og fjern organisasjonen
 
 msgid "Register to"
 msgstr "Registrer deg for"
-
-msgid "Register with {label}"
-msgstr "Registrer deg hos {label}"
 
 msgid "Registered at:"
 msgstr "Registrert på:"
@@ -4432,9 +4426,6 @@ msgstr "Avstengning"
 
 msgid "Sign in"
 msgstr "Logg på"
-
-msgid "Sign in with {label}"
-msgstr "Logg inn med {label}"
 
 msgid "Size"
 msgstr "Størrelse"

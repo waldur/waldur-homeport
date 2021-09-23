@@ -2276,9 +2276,6 @@ msgstr "Ava konsool"
 msgid "Open support portal"
 msgstr "Ava abiportaal"
 
-msgid "Or use social login"
-msgstr "Või sisene sotsiaalmeedia kontoga"
-
 msgid "Order Summary"
 msgstr "Tellimuse kokkuvõte"
 
@@ -2851,9 +2848,6 @@ msgstr "Registreeri ennast teenusepakkujaks"
 
 msgid "Register to"
 msgstr "Registreeru"
-
-msgid "Register with {label}"
-msgstr "{label}"
 
 msgid "Registered at:"
 msgstr "Registreeritud"
@@ -3439,9 +3433,6 @@ msgstr "Näitan {sliceStart} kuni {sliceEnd} kirjet {resultCount} kandest."
 
 msgid "Sign in"
 msgstr "Logi sisse"
-
-msgid "Sign in with {label}"
-msgstr "{label}"
 
 msgid "Size"
 msgstr "Suurus"

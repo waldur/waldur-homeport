@@ -1133,9 +1133,6 @@ msgstr "Açıq"
 msgid "Open in Service Desk"
 msgstr "Xidmət Masasında açın"
 
-msgid "Or use social login"
-msgstr "və ya sosial girişdən istifadə edin"
-
 msgid "Organization"
 msgstr "Təşkilat"
 
@@ -1457,9 +1454,6 @@ msgstr "Qeydiyyatdan keçin"
 msgid "Register to"
 msgstr "---- qeydiyyatdan keçin"
 
-msgid "Register with {label}"
-msgstr "ilə qeydiyyatdan keçin"
-
 msgid "Registration code"
 msgstr "Qeydiyyat kodu"
 
@@ -1756,9 +1750,6 @@ msgstr "{sliceStart} girişlərindən {sliceEnd}-dan {resultCount}-a kimi göst�
 
 msgid "Sign in"
 msgstr "Daxil ol"
-
-msgid "Sign in with {label}"
-msgstr "{label} ilə daxil ol"
 
 msgid "Size"
 msgstr "Ölçü"

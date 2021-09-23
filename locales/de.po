@@ -2816,9 +2816,6 @@ msgstr "Geöffnet von {user} von {organization} um {date}"
 msgid "Options are invalid."
 msgstr "Optionen sind ungültig."
 
-msgid "Or use social login"
-msgstr "Oder verwenden Sie Social Login"
-
 msgid "Order Summary"
 msgstr "Auftragszusammenfassung"
 
@@ -3607,9 +3604,6 @@ msgstr "Registrieren Sie die Organisation als Dienstanbieter und entfernen Sie d
 
 msgid "Register to"
 msgstr "Registrieren Sie sich bei"
-
-msgid "Register with {label}"
-msgstr "Registrieren Sie sich mit {label}"
 
 msgid "Registered at:"
 msgstr "Registriert bei:"
@@ -4432,9 +4426,6 @@ msgstr "Herunterfahren"
 
 msgid "Sign in"
 msgstr "Einloggen"
-
-msgid "Sign in with {label}"
-msgstr "Melden Sie sich mit dem Befehl {label} an."
 
 msgid "Size"
 msgstr "Größe"

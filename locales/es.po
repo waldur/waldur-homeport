@@ -2816,9 +2816,6 @@ msgstr "Abierto por {user} de {organization} en {date}"
 msgid "Options are invalid."
 msgstr "Las opciones no son válidas."
 
-msgid "Or use social login"
-msgstr "O usa el inicio de sesión social"
-
 msgid "Order Summary"
 msgstr "Resumen del pedido"
 
@@ -3607,9 +3604,6 @@ msgstr "Registrar la organización como proveedor de servicios y eliminar la org
 
 msgid "Register to"
 msgstr "Regístrese en"
-
-msgid "Register with {label}"
-msgstr "Registrarse con {label}"
 
 msgid "Registered at:"
 msgstr "Registrado en:"
@@ -4432,9 +4426,6 @@ msgstr "Apagado"
 
 msgid "Sign in"
 msgstr "Iniciar sesión"
-
-msgid "Sign in with {label}"
-msgstr "Iniciar sesión con {label}"
 
 msgid "Size"
 msgstr "Tamaño"

@@ -2816,9 +2816,6 @@ msgstr "Geopend door {user} van {organization} op {date}"
 msgid "Options are invalid."
 msgstr "Opties zijn ongeldig."
 
-msgid "Or use social login"
-msgstr "Of gebruik sociale login"
-
 msgid "Order Summary"
 msgstr "Besteloverzicht"
 
@@ -3607,9 +3604,6 @@ msgstr "Registreer organisatie als dienstverlener en verwijder organisatie."
 
 msgid "Register to"
 msgstr "Registreer naar"
-
-msgid "Register with {label}"
-msgstr "Registreer met {label}"
 
 msgid "Registered at:"
 msgstr "Geregistreerd bij:"
@@ -4432,9 +4426,6 @@ msgstr "Afsluiten"
 
 msgid "Sign in"
 msgstr "Aanmelden"
-
-msgid "Sign in with {label}"
-msgstr "Aanmelden met {label}"
 
 msgid "Size"
 msgstr "Grootte"
