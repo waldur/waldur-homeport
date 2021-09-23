@@ -2312,7 +2312,7 @@ msgstr ""
 msgid "Done"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlansContainer.tsx
+#: src/marketplace/offerings/details/ExportFullPriceList.tsx
 msgid "Download full price list"
 msgstr ""
 
@@ -3036,6 +3036,10 @@ msgstr ""
 
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderDetailsCard.tsx
 msgid "Full name:"
+msgstr ""
+
+#: src/marketplace/offerings/details/ExportFullPriceList.tsx
+msgid "Full price list of {offeringName} offering"
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
@@ -9271,6 +9275,10 @@ msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Unable to load form options."
+msgstr ""
+
+#: src/marketplace/offerings/details/ExportFullPriceList.tsx
+msgid "Unable to load full price list"
 msgstr ""
 
 #: src/invoices/growth/GrowthChart.tsx
