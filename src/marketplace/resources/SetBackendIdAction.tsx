@@ -5,6 +5,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import {
+  getCustomer,
   isOwnerOrStaff as isOwnerOrStaffSelector,
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
@@ -18,7 +19,9 @@ const SetBackendIdDialog = lazyComponent(
 export const SetBackendIdAction: FC<any> = ({ resource, reInitResource }) => {
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const isServiceManager = useSelector(isServiceManagerSelector);
-  if (!isOwnerOrStaff && !isServiceManager) {
+  const customer = useSelector(getCustomer);
+  const isServiceProviderContext = resource.provider_uuid === customer.uuid;
+  if (!isOwnerOrStaff && !isServiceManager && !isServiceProviderContext) {
     return null;
   }
   return (
