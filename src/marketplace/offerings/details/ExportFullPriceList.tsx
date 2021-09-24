@@ -15,7 +15,7 @@ interface ExportFullPriceListProps {
 
 const fetchPlanComponents = (offering_uuid: string) =>
   getAll('/marketplace-plan-components/', {
-    // ...ANONYMOUS_CONFIG,
+    // ...ANONYMOUS_CONFIG, // todo waiting for WAL-4348
     params: {
       offering_uuid,
     },
