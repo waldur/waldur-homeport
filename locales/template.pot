@@ -371,7 +371,6 @@ msgstr ""
 msgid "Add pair"
 msgstr ""
 
-#: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
 msgid "Add payment"
 msgstr ""
@@ -379,6 +378,11 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 msgid "Add payment profile"
+msgstr ""
+
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
+msgid "Add payment=="
 msgstr ""
 
 #: src/marketplace/offerings/plan/PlanAddButton.tsx
@@ -1092,6 +1096,7 @@ msgstr ""
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 msgid "Browse"
 msgstr ""
 
@@ -1979,6 +1984,7 @@ msgstr ""
 #: src/customer/payments/PaymentsList.tsx
 #: src/dashboard/chart.ts
 #: src/invoices/list/MarkAsPaidDialog.tsx
+#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/paypal/PaymentsList.tsx
 #: src/support/SupportEventsListFilter.tsx
@@ -6092,6 +6098,7 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
 #: src/invoices/list/MarkAsPaidDialog.tsx
+#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 msgid "Proof"
 msgstr ""
 
@@ -8068,6 +8075,7 @@ msgstr ""
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
@@ -8139,6 +8147,7 @@ msgstr ""
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
+#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 msgid "Sum"
 msgstr ""
 

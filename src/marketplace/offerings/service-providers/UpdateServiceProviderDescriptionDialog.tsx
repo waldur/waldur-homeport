@@ -3,60 +3,38 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import { ADD_PAYMENT_FORM_ID } from '@waldur/customer/payments/constants';
 import { createPayment } from '@waldur/customer/payments/store/actions';
-import {
-  FileUploadField,
-  FormContainer,
-  NumberField,
-  SubmitButton,
-} from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
+import { FormContainer, SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { SERVICE_PROVIDER_UPDATE_FORM_ID } from '@waldur/marketplace/offerings/service-providers/constants';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-//
 const PureUpdateServiceProviderDescriptionDialog: FunctionComponent<any> = (
   props,
 ) => (
-  <form
-    onSubmit={props.handleSubmit(props.submitRequest)}
-    className="form-horizontal"
-  >
+  <form onSubmit={props.handleSubmit(props.submitRequest)}>
     <ModalDialog
-      title={translate('Add payment==')}
+      title={translate('Update {name}', {
+        name: props.resolve.serviceProvider.customer_name,
+      })}
       footer={
         <>
           <CloseDialogButton />
           <SubmitButton
             disabled={props.invalid}
             submitting={props.submitting}
-            label={translate('Submit')}
+            label={translate('Save')}
           />
         </>
       }
     >
       <div style={{ paddingBottom: '50px' }}>
-        <FormContainer
-          submitting={false}
-          labelClass="col-sm-2"
-          controlClass="col-sm-8"
-          clearOnUnmount={false}
-        >
-          <DateField
-            name="date_of_payment"
-            label={translate('Date')}
-            required
-          />
-
-          <NumberField name="sum" label={translate('Sum')} required />
-
-          <FileUploadField
-            name="proof"
-            label={translate('Proof')}
-            showFileName={true}
-            buttonLabel={translate('Browse')}
+        <FormContainer submitting={props.submitting}>
+          <TextField
+            name="description"
+            label={translate('Description')}
+            rows={5}
           />
         </FormContainer>
       </div>
@@ -74,12 +52,20 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     ),
 });
 
-const connector = connect(null, mapDispatchToProps);
+const mapStateToProps = (_state, ownProps) => {
+  // eslint-disable-next-line no-console
+  console.log('ownProps', ownProps.resolve.serviceProvider.description);
+  return {
+    initialValues: { description: 'test' },
+  };
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const enhance = compose(
   connector,
   reduxForm({
-    form: ADD_PAYMENT_FORM_ID,
+    form: SERVICE_PROVIDER_UPDATE_FORM_ID,
   }),
 );
 

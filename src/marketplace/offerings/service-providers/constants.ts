@@ -4,3 +4,6 @@ export const SERVICE_PROVIDER_OFFERING_GRID =
 
 export const OFFERING_CATEGORY_SECTION_FORM_ID =
   'marketplace-service-provider-offerings-sections-form';
+
+export const SERVICE_PROVIDER_UPDATE_FORM_ID =
+  'marketplace-service-provider-update-form';
