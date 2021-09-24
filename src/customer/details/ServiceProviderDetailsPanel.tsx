@@ -8,7 +8,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 export const ServiceProviderDetailsPanel: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   // eslint-disable-next-line no-console
-  console.log('customer', customer);
+  console.log('customer', customer); // fixme customer.description is missing
   return customer.is_service_provider ? (
     <CustomerAccordion
       title={translate('Service provider details')}
