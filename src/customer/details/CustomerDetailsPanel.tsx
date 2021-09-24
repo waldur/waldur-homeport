@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { ExternalLink } from '@waldur/core/ExternalLink';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
@@ -109,6 +110,16 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
         <Field
           label={translate('Bank account')}
           value={customer.bank_account}
+        />
+
+        <Field
+          label={''}
+          value={
+            <ExternalLink
+              label={translate('Service provider profile')}
+              url={`${window.location.origin}/service-providers/${customer.uuid}/`}
+            />
+          }
         />
       </ResourceDetailsTable>
 
