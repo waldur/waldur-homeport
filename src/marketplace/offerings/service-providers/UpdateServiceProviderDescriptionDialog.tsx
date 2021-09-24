@@ -17,7 +17,9 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 //
-const PaymentCreateDialog: FunctionComponent<any> = (props) => (
+const PureUpdateServiceProviderDescriptionDialog: FunctionComponent<any> = (
+  props,
+) => (
   <form
     onSubmit={props.handleSubmit(props.submitRequest)}
     className="form-horizontal"
@@ -81,4 +83,6 @@ const enhance = compose(
   }),
 );
 
-export const PaymentCreateDialogContainer = enhance(PaymentCreateDialog);
+export const UpdateServiceProviderDescriptionDialog = enhance(
+  PureUpdateServiceProviderDescriptionDialog,
+);

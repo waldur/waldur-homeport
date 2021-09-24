@@ -9817,6 +9817,7 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
+#: src/marketplace/offerings/service-providers/ServiceProviderDescriptionUpdateButton.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
