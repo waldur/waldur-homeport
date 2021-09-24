@@ -381,7 +381,6 @@ msgid "Add payment profile"
 msgstr ""
 
 #: src/customer/payments/PaymentCreateDialog.tsx
-#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 msgid "Add payment=="
 msgstr ""
 
@@ -1096,7 +1095,6 @@ msgstr ""
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
-#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 msgid "Browse"
 msgstr ""
 
@@ -1984,7 +1982,6 @@ msgstr ""
 #: src/customer/payments/PaymentsList.tsx
 #: src/dashboard/chart.ts
 #: src/invoices/list/MarkAsPaidDialog.tsx
-#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/paypal/PaymentsList.tsx
 #: src/support/SupportEventsListFilter.tsx
@@ -2104,6 +2101,7 @@ msgstr ""
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
+#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
@@ -6098,7 +6096,6 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
 #: src/invoices/list/MarkAsPaidDialog.tsx
-#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 msgid "Proof"
 msgstr ""
 
@@ -7163,6 +7160,7 @@ msgstr ""
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/expandable/utils.ts
+#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
@@ -8075,7 +8073,6 @@ msgstr ""
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
-#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
@@ -8147,7 +8144,6 @@ msgstr ""
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
-#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 msgid "Sum"
 msgstr ""
 
@@ -9927,6 +9923,10 @@ msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Update your organization name, logo, accounting and contact details."
+msgstr ""
+
+#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
+msgid "Update {name}"
 msgstr ""
 
 #: src/resource/actions/UpdateResourceDialog.tsx
