@@ -7598,7 +7598,6 @@ msgstr ""
 msgid "Service provider can report up to the requested amount over the whole active state of resource."
 msgstr ""
 
-#: src/customer/details/ServiceProviderDetailsPanel.tsx
 #: src/marketplace/details/OverviewTab.tsx
 msgid "Service provider details"
 msgstr ""
@@ -7609,6 +7608,10 @@ msgstr ""
 
 #: src/marketplace/offerings/service-providers/ServiceProviderOfferingsGrid.tsx
 msgid "Service provider offerings"
+msgstr ""
+
+#: src/customer/details/CustomerDetailsPanel.tsx
+msgid "Service provider profile"
 msgstr ""
 
 #: src/providers/support/FlowMapFilter.tsx
@@ -9910,10 +9913,6 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 msgid "Update static routes"
-msgstr ""
-
-#: src/customer/details/ServiceProviderDetailsPanel.tsx
-msgid "Update you service provider profile"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
