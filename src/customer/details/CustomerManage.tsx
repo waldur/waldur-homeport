@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { ServiceProviderDetailsPanel } from '@waldur/customer/details/ServiceProviderDetailsPanel';
 import { PaymentsPanel } from '@waldur/customer/payments/PaymentsPanel';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
@@ -14,6 +15,7 @@ export const CustomerManage: FunctionComponent = () => {
   return (
     <div style={{ paddingLeft: 10 }}>
       <CustomerDetailsPanel />
+      <ServiceProviderDetailsPanel />
       <PaymentProfilesPanel />
       <PaymentsPanel />
       <CustomerActionsPanel />
