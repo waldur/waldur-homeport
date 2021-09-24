@@ -4,7 +4,7 @@ import { useAsync } from 'react-use';
 import { getAll } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
-import { ANONYMOUS_CONFIG } from '@waldur/table/api';
+// import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 import exportExcel from '@waldur/table/excel';
 import { LoadingSpinner } from '@waldur/table/TableLoadingSpinnerContainer';
 import './ExportFullPriceList.scss';
@@ -15,7 +15,7 @@ interface ExportFullPriceListProps {
 
 const fetchPlanComponents = (offering_uuid: string) =>
   getAll('/marketplace-plan-components/', {
-    ...ANONYMOUS_CONFIG,
+    // ...ANONYMOUS_CONFIG,
     params: {
       offering_uuid,
     },

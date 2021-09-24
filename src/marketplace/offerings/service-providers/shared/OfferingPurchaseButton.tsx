@@ -8,7 +8,7 @@ interface OfferingPurchaseButtonProps {
   offering: Offering;
   label: string;
 }
-
+//
 export const OfferingPurchaseButton: FunctionComponent<OfferingPurchaseButtonProps> = ({
   offering,
   label,
