@@ -7,3 +7,6 @@ export const OFFERING_CATEGORY_SECTION_FORM_ID =
 
 export const SERVICE_PROVIDER_UPDATE_FORM_ID =
   'marketplace-service-provider-update-form';
+
+export const UPDATE_SERVICE_PROVIDER_DESCRIPTION =
+  'marketplace-service-provider/UPDATE_DESCRIPTION';

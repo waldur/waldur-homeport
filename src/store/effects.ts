@@ -10,6 +10,7 @@ import invoicesSaga from '@waldur/invoices/store/effects';
 import issueAttachmentsSaga from '@waldur/issues/attachments/effects';
 import issueCommentsSaga from '@waldur/issues/comments/effects';
 import securityIncidentSaga from '@waldur/issues/security-incident/store/effects';
+import serviceProviderSaga from '@waldur/marketplace/offerings/service-providers/store/effects';
 import marketplaceSaga from '@waldur/marketplace/store/effects';
 import { effects as titleEffects } from '@waldur/navigation/title';
 import projectSaga from '@waldur/project/effects';
@@ -39,4 +40,5 @@ export default [
   invoicesSaga,
   paymentsSaga,
   titleEffects,
+  serviceProviderSaga,
 ];
