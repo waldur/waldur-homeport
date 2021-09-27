@@ -2134,6 +2134,10 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
+#: src/marketplace/offerings/service-providers/store/effects.ts
+msgid "Description has been updated."
+msgstr ""
+
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 msgid "Desired replicas"
 msgstr ""
@@ -9630,6 +9634,10 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to update confirmation message."
+msgstr ""
+
+#: src/marketplace/offerings/service-providers/store/effects.ts
+msgid "Unable to update description."
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
