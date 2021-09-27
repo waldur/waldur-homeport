@@ -203,6 +203,10 @@ video {
   padding: 20px 10px 40px;
 }
 
+#react-root {
+  overflow-x: scroll;
+}
+
 #page-wrapper {
   padding: 0 15px;
   min-height: 568px;
