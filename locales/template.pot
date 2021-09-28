@@ -371,6 +371,7 @@ msgstr ""
 msgid "Add pair"
 msgstr ""
 
+#: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
 msgid "Add payment"
 msgstr ""
@@ -378,10 +379,6 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 msgid "Add payment profile"
-msgstr ""
-
-#: src/customer/payments/PaymentCreateDialog.tsx
-msgid "Add payment=="
 msgstr ""
 
 #: src/marketplace/offerings/plan/PlanAddButton.tsx
