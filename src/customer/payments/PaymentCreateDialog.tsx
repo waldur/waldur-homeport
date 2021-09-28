@@ -16,14 +16,13 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-//
 const PaymentCreateDialog: FunctionComponent<any> = (props) => (
   <form
     onSubmit={props.handleSubmit(props.submitRequest)}
     className="form-horizontal"
   >
     <ModalDialog
-      title={translate('Add payment==')}
+      title={translate('Add payment')}
       footer={
         <>
           <CloseDialogButton />

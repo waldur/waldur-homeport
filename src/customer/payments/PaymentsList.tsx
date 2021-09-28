@@ -93,7 +93,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       actions={
         <ActionButton
           title={translate('Add payment')}
-          action={() => props.openCreateDialog(activePaymentProfile.url)} //
+          action={() => props.openCreateDialog(activePaymentProfile.url)}
           icon="fa fa-plus"
           {...tooltipAndDisabledAttributes}
         />
