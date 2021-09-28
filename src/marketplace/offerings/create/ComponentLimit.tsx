@@ -46,6 +46,7 @@ export const ComponentLimit = enhance((props: Values) => {
           <ComponentBooleanLimitField />
           <ComponentMinValueField />
           <ComponentMaxValueField />
+          <ComponentLimitPeriodField limitPeriod={props.limitPeriod} />
         </>
       );
     }
