@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { AuthService } from '@waldur/auth/AuthService';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { ServiceProviderDescriptionUpdateButton } from '@waldur/marketplace/offerings/service-providers/ServiceProviderDescriptionUpdateButton';
 import { ServiceProvider } from '@waldur/marketplace/types';
@@ -24,6 +25,10 @@ export const ServiceProviderDescription: FunctionComponent<ServiceProviderDescri
   <div className="serviceProviderDescription">
     {serviceProvider.description &&
       customerDescription(serviceProvider.description)}
-    <ServiceProviderDescriptionUpdateButton serviceProvider={serviceProvider} />
+    {AuthService.isAuthenticated() && (
+      <ServiceProviderDescriptionUpdateButton
+        serviceProvider={serviceProvider}
+      />
+    )}
   </div>
 );
