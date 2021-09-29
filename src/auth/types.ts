@@ -19,6 +19,7 @@ interface SocialAuthConfiguration {
   EDUTEAMS_CLIENT_ID: string;
   EDUTEAMS_LABEL: string;
   EDUTEAMS_AUTH_URL: string;
+  REMOTE_EDUTEAMS_ENABLED: boolean;
 }
 
 interface ValimoAuthConfiguration {
