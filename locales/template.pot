@@ -439,6 +439,11 @@ msgstr ""
 msgid "Add user input field"
 msgstr ""
 
+#: src/user/support/AddRemoteUserDialog.tsx
+#: src/user/support/UserTableActions.tsx
+msgid "Add {provider} user"
+msgstr ""
+
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "Additional data that will be added to instance on provisioning."
@@ -6486,6 +6491,10 @@ msgstr ""
 msgid "Remote security group"
 msgstr ""
 
+#: src/user/support/AddRemoteUserDialog.tsx
+msgid "Remote user ID"
+msgstr ""
+
 #: src/customer/team/UserRemoveButton.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
 #: src/marketplace/cart/ShoppingCartItem.tsx
@@ -8845,6 +8854,10 @@ msgstr ""
 msgid "Unable to add user."
 msgstr ""
 
+#: src/user/support/AddRemoteUserDialog.tsx
+msgid "Unable to add {provider} user."
+msgstr ""
+
 #: src/resource/actions/AsyncActionButton.tsx
 #: src/resource/actions/AsyncActionItem.tsx
 msgid "Unable to apply action."
@@ -11158,6 +11171,10 @@ msgstr ""
 
 #: src/project/effects.ts
 msgid "{projectName} project has been moved to {organizationName} organization."
+msgstr ""
+
+#: src/user/support/AddRemoteUserDialog.tsx
+msgid "{provider} user has been successfully added."
 msgstr ""
 
 #: src/invoices/events/InvoiceEventItem.tsx

@@ -1,4 +1,4 @@
-import { patch } from '@waldur/core/api';
+import { patch, post } from '@waldur/core/api';
 
 export const updateUser = (user) =>
   patch(`/users/${user.uuid}/`, {
@@ -18,3 +18,5 @@ export const activateUser = (userUuid) =>
 
 export const deactivateUser = (userUuid) =>
   patch(`/users/${userUuid}/`, { is_active: false });
+
+export const addRemoteUser = (cuid) => post('/remote-eduteams/', { cuid });

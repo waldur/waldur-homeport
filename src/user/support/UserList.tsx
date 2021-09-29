@@ -13,6 +13,7 @@ import { Table, connectTable, createFetcher } from '@waldur/table/index';
 
 import { UserActivateButton } from './UserActivateButton';
 import { UserDetailsButton } from './UserDetailsButton';
+import { UserTableActions } from './UserTableActions';
 
 const UserActionsButton: FunctionComponent<any> = (props) => (
   <ButtonGroup>
@@ -143,6 +144,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       verboseName={translate('users')}
       enableExport={true}
+      actions={<UserTableActions refreshList={props.fetch} />}
     />
   );
 };

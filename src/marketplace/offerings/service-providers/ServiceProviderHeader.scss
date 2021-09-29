@@ -7,8 +7,9 @@
   background-repeat: no-repeat;
   height: 328px;
 
-  .serviceProviderHeaderContainer__card {
+  &__card {
     display: inline-flex;
+    align-items: flex-start;
     background: $white;
     border: 1px solid $border-color;
     border-radius: 0 3px 3px 3px;
@@ -16,7 +17,7 @@
     padding: 24px;
     column-gap: 24px;
 
-    .serviceProviderHeaderContainer__card__info {
+    &__info {
       display: flex;
       flex-direction: column;
 
