@@ -4,11 +4,10 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 // import { updatePaymentsList } from '@waldur/customer/payments/utils';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/offerings/service-providers/api';
+import { updateServiceProviderDescription } from '@waldur/marketplace/offerings/service-providers/store/actions';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/notify';
 // import { getCustomer } from '@waldur/workspace/selectors';
-
-import * as constants from '../constants';
 
 function* updateDescription(action) {
   try {
@@ -28,8 +27,5 @@ function* updateDescription(action) {
 }
 
 export default function* () {
-  yield takeEvery(
-    constants.UPDATE_SERVICE_PROVIDER_DESCRIPTION,
-    updateDescription,
-  );
+  yield takeEvery(updateServiceProviderDescription.REQUEST, updateDescription);
 }

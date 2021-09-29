@@ -1,9 +1,7 @@
+import { createFormAction } from 'redux-form-saga';
+
 import * as constants from '../constants';
 
-export const updateServiceProviderDescription = (uuid: string, formData) => ({
-  type: constants.UPDATE_SERVICE_PROVIDER_DESCRIPTION,
-  payload: {
-    uuid: uuid,
-    formData: formData,
-  },
-});
+export const updateServiceProviderDescription = createFormAction(
+  constants.UPDATE_SERVICE_PROVIDER_DESCRIPTION,
+); //

@@ -44,11 +44,9 @@ const PureUpdateServiceProviderDescriptionDialog: FunctionComponent<any> = (
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   submitRequest: (formData) =>
-    dispatch(
-      updateServiceProviderDescription(
-        ownProps.resolve.serviceProvider.uuid,
-        formData,
-      ),
+    updateServiceProviderDescription(
+      { uuid: ownProps.resolve.serviceProvider.uuid, formData },
+      dispatch,
     ),
 });
 
