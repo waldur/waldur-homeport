@@ -40,7 +40,7 @@ export interface Plan {
   prices: { [key: string]: number };
   is_active: boolean;
   archived: boolean;
-  minimal_price: number;
+  price: number;
   plan_type: string;
 }
 
