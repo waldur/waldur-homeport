@@ -18,7 +18,7 @@ export const ServiceProvider: FunctionComponent<ServiceProviderProps> = ({
   const [queryFilter, setQueryFilter] = useState<string>('');
   const [categoryFilter, setCategoryFilter] = useState<string>('');
   return (
-    <div className="serviceProvider">
+    <div className="serviceProvider m-b-md">
       <ServiceProviderHeader serviceProvider={serviceProvider} />
       <ServiceProviderBreadcrumbs serviceProvider={serviceProvider} />
       <div className="serviceProvider__content">

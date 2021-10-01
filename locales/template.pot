@@ -5879,7 +5879,6 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
-#: src/navigation/AnonymousFooter.tsx
 #: src/navigation/AppFooter.tsx
 msgid "Privacy policy"
 msgstr ""
@@ -8385,7 +8384,6 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
-#: src/navigation/AnonymousFooter.tsx
 #: src/navigation/AppFooter.tsx
 msgid "Terms of Service"
 msgstr ""
@@ -10389,7 +10387,6 @@ msgstr ""
 msgid "Verifying email change"
 msgstr ""
 
-#: src/navigation/AnonymousFooter.tsx
 #: src/navigation/AppFooter.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
