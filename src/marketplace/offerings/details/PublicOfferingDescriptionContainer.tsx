@@ -4,7 +4,6 @@ import { FunctionComponent } from 'react';
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
-import { getLabel } from '@waldur/marketplace/common/registry';
 import {
   shouldRenderAttributesList,
   shouldRenderAttributesSection,
@@ -30,10 +29,6 @@ export const PublicOfferingDescriptionContainer: FunctionComponent<PublicOfferin
     })}
   >
     <div className="publicOfferingDescriptionContainer__header bordered">
-      <div>
-        <b>{translate('Type')}: </b>
-        {getLabel(offering.type)}
-      </div>
       <div>
         <b>{translate('Category')}: </b>
         {offering.category_title}

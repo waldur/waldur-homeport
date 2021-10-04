@@ -8782,7 +8782,6 @@ msgstr ""
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
