@@ -20,7 +20,7 @@ export const SetBackendIdAction: FC<any> = ({ resource, reInitResource }) => {
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const isServiceManager = useSelector(isServiceManagerSelector);
   const customer = useSelector(getCustomer);
-  const isServiceProviderContext = resource.provider_uuid === customer.uuid;
+  const isServiceProviderContext = resource.provider_uuid === customer?.uuid;
   if (!isOwnerOrStaff && !isServiceManager && !isServiceProviderContext) {
     return null;
   }
