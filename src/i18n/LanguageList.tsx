@@ -1,6 +1,9 @@
 import { FunctionComponent } from 'react';
 import Select from 'react-select';
 
+import { LanguageOption } from '@waldur/core/types';
+import { reactSelectMenuPortaling } from '@waldur/form/utils';
+
 import { translate } from './translate';
 import { useLanguageSelector } from './useLanguageSelector';
 
@@ -41,8 +44,9 @@ export const LanguageList: FunctionComponent = () => {
         value={currentLanguage}
         onChange={setLanguage}
         isClearable={false}
-        getOptionValue={(option) => option.code}
-        getOptionLabel={(option) => option.label}
+        getOptionValue={(option: LanguageOption) => option.code}
+        getOptionLabel={(option: LanguageOption) => option.label}
+        {...reactSelectMenuPortaling()}
       />
     );
   }
