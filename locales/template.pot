@@ -2429,6 +2429,10 @@ msgstr ""
 msgid "Edit end date"
 msgstr ""
 
+#: src/marketplace/resources/actions/EditResourceEndDateByStaffAction.tsx
+msgid "Edit end date (staff)"
+msgstr ""
+
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 msgid "Edit end date of {resourceName}"
 msgstr ""
