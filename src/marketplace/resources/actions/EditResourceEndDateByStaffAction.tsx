@@ -2,14 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { updateResourceEndDateByProvider } from '@waldur/marketplace/common/api';
+import { updateResourceEndDateByStaff } from '@waldur/marketplace/common/api';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import {
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-  isServiceManagerSelector,
-} from '@waldur/workspace/selectors';
+import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
 const EditResourceEndDateDialog = lazyComponent(
   () =>
@@ -25,14 +22,13 @@ interface EditResourceEndDateByProviderActionProps {
   refreshList?(): void;
 }
 
-export const EditResourceEndDateByProviderAction = ({
+export const EditResourceEndDateByStaffAction = ({
   resource,
   reInitResource,
   refreshList,
 }: EditResourceEndDateByProviderActionProps) => {
   const dispatch = useDispatch();
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-  const isServiceManager = useSelector(isServiceManagerSelector);
+  const isStaff = useSelector(isStaffSelector);
 
   const callback = () =>
     dispatch(
@@ -41,13 +37,13 @@ export const EditResourceEndDateByProviderAction = ({
           resource,
           reInitResource,
           refreshList,
-          updateEndDate: updateResourceEndDateByProvider,
+          updateEndDate: updateResourceEndDateByStaff,
         },
         size: 'md',
       }),
     );
 
-  return isOwnerOrStaff || isServiceManager ? (
-    <ActionItem title={translate('Edit end date')} action={callback} />
+  return isStaff ? (
+    <ActionItem title={translate('Edit end date (staff)')} action={callback} />
   ) : null;
 };

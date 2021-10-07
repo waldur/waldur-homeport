@@ -3,6 +3,7 @@ import { useBoolean } from 'react-use';
 
 import { translate } from '@waldur/i18n';
 import { EditResourceEndDateByProviderAction } from '@waldur/marketplace/resources/actions/EditResourceEndDateByProviderAction';
+import { EditResourceEndDateByStaffAction } from '@waldur/marketplace/resources/actions/EditResourceEndDateByStaffAction';
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
 import { Resource } from '@waldur/marketplace/resources/types';
 
@@ -17,6 +18,7 @@ const ActionsList = [
   SetBackendIdAction,
   MoveResourceAction,
   EditResourceEndDateByProviderAction,
+  EditResourceEndDateByStaffAction,
 ];
 
 interface PublicResourceActionsProps {
