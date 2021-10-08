@@ -77,6 +77,7 @@ export function confirmInvitation(token) {
         token,
         deferred,
       },
+      backdrop: 'static',
     }),
   );
   return deferred.promise;
