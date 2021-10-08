@@ -24,7 +24,7 @@ export const ServiceProviderOfferingsCategoriesFilter: FunctionComponent<Service
     () =>
       getCategories({
         params: {
-          customer_uuid: serviceProviderUuid, // fixme WAL-4280
+          customer_uuid: serviceProviderUuid,
         },
       }),
     [serviceProviderUuid],
