@@ -52,7 +52,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
         <ModalTitle>{translate('Invitation confirmation')}</ModalTitle>
       </ModalHeader>
       <ModalBody>
-        {asyncResult.loading ? (
+        {!user ? null : asyncResult.loading ? (
           <>
             <LoadingSpinner />
             <p className="text-center">
