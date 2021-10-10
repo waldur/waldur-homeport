@@ -1,6 +1,8 @@
+# Azure credentials
+
 You need to provide following Azure credentials: subscription ID, tenant ID, client ID and client secret.
 
-### Get Subscription ID
+## Get Subscription ID
 
 - Login into your Azure account.
 - Select **Subscriptions** in the left sidebar.
@@ -8,14 +10,14 @@ You need to provide following Azure credentials: subscription ID, tenant ID, cli
 - Click on **Overview**.
 - Copy the **Subscription ID**.
 
-### Get Tenant ID
+## Get Tenant ID
 
 - Login into your Azure account.
 - Select **Azure Active Directory** in the left sidebar.
 - Click **Properties**.
 - Copy the **Directory ID**.
 
-### Get Client ID
+## Get Client ID
 
 - Login into your Azure account.
 - Select **Azure Active Directory** in the left sidebar.
@@ -25,7 +27,7 @@ You need to provide following Azure credentials: subscription ID, tenant ID, cli
 - Click **Properties**.
 - Copy the **Application ID**.
 
-### Get Client secret
+## Get Client secret
 
 - Login into your Azure account.
 - Select **Azure Active Directory** in the left sidebar.

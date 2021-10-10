@@ -1,6 +1,6 @@
 # Customer module
 
-### Components
+## Components
 
 - **customerEvents** — renders customer's events list.
 - **customerIssues** — renders customer's issues list.

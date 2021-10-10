@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 
 Waldur HomePort is a web-based client for the [Waldur MasterMind][1].
 It uses yarn for dependency management and webpack as module bundler.
@@ -13,49 +13,54 @@ __Development/testing__:
 ## Installation
 
 1. Update system and install basic dependencies:
-Example for CentOS 7:
+    Example for CentOS 7:
 
-```
+```bash
 yum --assumeyes update
 yum install --assumeyes bzip2 git wget
 ```
 
 Example for Ubuntu 18.04 LTS:
-```
+
+```bash
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install git wget
 ```
 
-2. Install LTS Node.js and yarn:
-```
+1. Install LTS Node.js and yarn:
+
+```bash
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
 source ~/.bashrc
 nvm install --lts
 npm install -g yarn
 ```
 
-3. Clone project and go to its folder:
-```
+1. Clone project and go to its folder:
+
+```bash
 git clone <repository-url>
 cd waldur-homeport
 ```
 
-4. Install dependencies via yarn:
-```
+1. Install dependencies via yarn:
+
+```bash
 yarn
 ```
 
 PS. If you see errors related to fsevents on OS X, the workaround is: `yarn cache clean && yarn upgrade && yarn`.
 
-5. Create `/src/configs/custom-config.json`:
-```
+1. Create `/src/configs/custom-config.json`:
+
+```bash
 cp src/configs/config.json.example src/configs/config.json
 ```
 
-6. Configure `config.json`. Please read [Configuration guide](docs/config.md) to learn more.
+1. Configure `config.json`. Please read [Configuration guide](docs/config.md) to learn more.
 
-7. Run application: `yarn start`.
+1. Run application: `yarn start`.
 
 Server will listen on `//localhost:8001`
 
@@ -65,14 +70,14 @@ Use [Waldur MasterMind][1] for backend.
 
 Also you should install django-cors-headers from pip in order to add CORS headers:
 
-```
+```bash
 pip install django-cors-headers
 ```
 
 Then you should update `waldur_core/server/settings.py` and add the following
 lines at the end of the file:
 
-```
+```bash
 INSTALLED_APPS += ('corsheaders',)
 MIDDLEWARE = ('corsheaders.middleware.CorsMiddleware',) + MIDDLEWARE
 CORS_ORIGIN_ALLOW_ALL = True
