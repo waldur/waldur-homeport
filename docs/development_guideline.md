@@ -36,18 +36,6 @@ Tests are implemented using [Cypress framework](https://www.cypress.io/).
 In order to run all integration tests, execute command `yarn ci:test`.
 If you already have Webpack server running, it's better to execute command `yarn cypress open`.
 
-## Component approach
-
-Each component consists of script, SCSS stylesheet, HTML template and unit test.
-All these files reside in one directory, one directory for each component.
-
-Script imports template and stylesheet and exports component.
-Unit test imports component and specifes test case.
-In the module root there's script which declares components in the module.
-In the application root there's module which connects all other modules.
-
-Stylesheet file may import dependencies from core module.
-
 ## General tips on writing React components
 
 New tables should be implemented using 'Table' component under 'table-react' folder.

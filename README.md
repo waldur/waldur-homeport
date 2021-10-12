@@ -3,24 +3,16 @@
 Waldur HomePort is a web-based client for the [Waldur MasterMind][1].
 It uses yarn for dependency management and webpack as module bundler.
 
-## System Requirements
+## Minimal requirements
 
-__Development/testing__:
-
-- Linux (CentOS 7 and Ubuntu 18.04 tested) or OS X
-- 2 GB of RAM
+- Linux Ubuntu, OS X or Windows Subsystem for Linux 2 with Ubuntu
+- 2 GB of RAM and 2 GB of storage
 
 ## Installation
 
 1. Update system and install basic dependencies:
-    Example for CentOS 7:
 
-```bash
-yum --assumeyes update
-yum install --assumeyes bzip2 git wget
-```
-
-Example for Ubuntu 18.04 LTS:
+Example for Linux Ubuntu:
 
 ```bash
 sudo apt-get update
@@ -28,10 +20,10 @@ sudo apt-get upgrade
 sudo apt-get install git wget
 ```
 
-1. Install LTS Node.js and yarn:
+1. Install Node LTS and yarn:
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 source ~/.bashrc
 nvm install --lts
 npm install -g yarn
@@ -52,7 +44,7 @@ yarn
 
 PS. If you see errors related to fsevents on OS X, the workaround is: `yarn cache clean && yarn upgrade && yarn`.
 
-1. Create `/src/configs/custom-config.json`:
+1. Create `/src/configs/config.json`:
 
 ```bash
 cp src/configs/config.json.example src/configs/config.json
