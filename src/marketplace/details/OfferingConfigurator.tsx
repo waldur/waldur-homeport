@@ -44,6 +44,10 @@ const mapStateToProps = (state: RootState, ownProps) => ({
   workspace: getWorkspace(state),
   initialValues: {
     limits: { ...getDefaultLimits(ownProps.offering), ...ownProps.limits },
+    plan:
+      ownProps.offering.plans.length === 1
+        ? ownProps.offering.plans[0]
+        : undefined,
   },
 });
 
