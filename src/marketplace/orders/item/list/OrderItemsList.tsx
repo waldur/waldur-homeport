@@ -17,8 +17,7 @@ import {
 import { Customer } from '@waldur/workspace/types';
 
 import { TABLE_PUBLIC_ORDERS } from './constants';
-import { OrderItemApproveButton } from './OrderItemApproveButton';
-import { OrderItemRejectButton } from './OrderItemRejectButton';
+import { OrderItemActionsCell } from './OrderItemActionsCell';
 import { OrderItemslistTablePlaceholder } from './OrderItemsListPlaceholder';
 import { OrderItemStateCell } from './OrderItemStateCell';
 import { OrderItemTypeCell } from './OrderItemTypeCell';
@@ -58,16 +57,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Actions'),
-      render: ({ row }) =>
-        (row.state === 'pending' &&
-          row.offering_type === 'Waldur.RemoteOffering') ||
-        (row.state === 'executing' &&
-          row.offering_type === 'Marketplace.Basic' && (
-            <>
-              <OrderItemApproveButton uuid={row.uuid} />
-              <OrderItemRejectButton uuid={row.uuid} />
-            </>
-          )),
+      render: OrderItemActionsCell,
     },
   ];
 
