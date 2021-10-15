@@ -13,6 +13,7 @@ import {
   PROJECT_ROLES,
 } from '@waldur/core/constants';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -30,24 +31,24 @@ import { InvitationContext } from './types';
 const getRoles = (context) => {
   const roles = [
     {
-      title: ENV.roles.owner,
+      title: translate(ENV.roles.owner),
       value: CUSTOMER_OWNER_ROLE,
       icon: 'fa-sitemap',
     },
     {
-      title: ENV.roles.manager,
+      title: translate(ENV.roles.manager),
       value: PROJECT_MANAGER_ROLE,
       icon: 'fa-users',
     },
     {
-      title: ENV.roles.admin,
+      title: translate(ENV.roles.admin),
       value: PROJECT_ADMIN_ROLE,
       icon: 'fa-server',
     },
   ];
   if (isFeatureVisible('project.member_role')) {
     roles.push({
-      title: ENV.roles.member,
+      title: translate(ENV.roles.member),
       value: PROJECT_MEMBER_ROLE,
       icon: 'fa-user-o',
     });
