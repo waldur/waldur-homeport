@@ -10,6 +10,8 @@
   &__card {
     display: inline-flex;
     align-items: flex-start;
+    justify-content: space-between;
+    min-width: 500px;
     background: $white;
     border: 1px solid $border-color;
     border-radius: 0 3px 3px 3px;
@@ -32,11 +34,6 @@
       p {
         font-size: 14px;
         line-height: 24px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
         max-width: 500px;
         margin: 0;
       }
