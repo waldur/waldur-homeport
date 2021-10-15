@@ -59,16 +59,15 @@ const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Actions'),
       render: ({ row }) =>
-        row.state === 'done' ? null : (
-          <>
-            {row.state === 'executing' && (
+        (row.state === 'pending' &&
+          row.offering_type === 'Waldur.RemoteOffering') ||
+        (row.state === 'executing' &&
+          row.offering_type === 'Marketplace.Basic' && (
+            <>
               <OrderItemApproveButton uuid={row.uuid} />
-            )}
-            {row.state !== 'terminated' && row.state !== 'terminating' && (
               <OrderItemRejectButton uuid={row.uuid} />
-            )}
-          </>
-        ),
+            </>
+          )),
     },
   ];
 
