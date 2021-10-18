@@ -4717,6 +4717,10 @@ msgstr ""
 msgid "Number of worker nodes"
 msgstr ""
 
+#: src/project/ProjectCreateForm.tsx
+msgid "OECD FoS code"
+msgstr ""
+
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "OK"
 msgstr ""
@@ -5680,6 +5684,10 @@ msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 msgid "Please search for your organization"
+msgstr ""
+
+#: src/project/ProjectCreateForm.tsx
+msgid "Please select OECD code corresponding to field of science and technology"
 msgstr ""
 
 #: src/freeipa/UsernameGroup.tsx
