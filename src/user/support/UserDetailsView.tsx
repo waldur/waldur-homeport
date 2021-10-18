@@ -6,12 +6,14 @@ import { compose } from 'redux';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { UserEvents } from '@waldur/user/dashboard/UserEvents';
+import { KeysList } from '@waldur/user/keys/KeysList';
 import {
   isVisibleForSupportOrStaff,
   userManageIsVisible,
 } from '@waldur/user/support/selectors';
 import { UserDetailsTable } from '@waldur/user/support/UserDetailsTable';
 import { UserEditContainer } from '@waldur/user/support/UserEditContainer';
+import { UserOfferingList } from '@waldur/user/UserOfferingList';
 import { UserDetails } from '@waldur/workspace/types';
 
 interface StateProps {
@@ -48,6 +50,16 @@ export const PureUserDetailsView: FunctionComponent<UserDetailsViewProps> = (
         </div>
       </Tab>
     )}
+    <Tab eventKey={4} title={props.translate('Keys')}>
+      <div className="m-t-sm">
+        <KeysList user={props.user} />
+      </div>
+    </Tab>
+    <Tab eventKey={5} title={props.translate('Remote accounts')}>
+      <div className="m-t-sm">
+        <UserOfferingList user={props.user} />
+      </div>
+    </Tab>
   </Tabs>
 );
 
