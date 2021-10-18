@@ -20,7 +20,6 @@ msgstr ""
 msgid "10 - Very positive"
 msgstr ""
 
-#: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/user/support/TermsOfService.tsx
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr ""
@@ -3252,10 +3251,6 @@ msgstr ""
 
 #: src/digitalocean/help.ts
 msgid "How to obtain credentials for DigitalOcean provider"
-msgstr ""
-
-#: src/freeipa/TosGroup.tsx
-msgid "I accept the <Link>Terms of Service</Link>."
 msgstr ""
 
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
@@ -10641,10 +10636,6 @@ msgstr ""
 
 #: src/issues/list/IssuesListPlaceholder.tsx
 msgid "You haven't created any issues yet."
-msgstr ""
-
-#: src/freeipa/TosGroup.tsx
-msgid "You must agree with terms of service."
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx

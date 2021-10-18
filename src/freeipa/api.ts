@@ -3,10 +3,9 @@ import { post, getFirst } from '@waldur/core/api';
 export const getProfile = (userId) =>
   getFirst('/freeipa-profiles/', { user: userId });
 
-export const createProfile = (username, agreeWithPolicy) =>
+export const createProfile = (username: string) =>
   post('/freeipa-profiles/', {
     username,
-    agree_with_policy: agreeWithPolicy,
   });
 
 export const enableProfile = (uuid) =>
