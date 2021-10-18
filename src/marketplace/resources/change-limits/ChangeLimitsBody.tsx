@@ -49,6 +49,7 @@ export const DialogBody = connector((props: DialogBodyProps) => (
           totalPeriods={props.totalPeriods}
           changedTotalPeriods={props.changedTotalPeriods}
           offeringLimits={props.asyncState.value.offeringLimits}
+          shouldConcealPrices={props.shouldConcealPrices}
         />
       )}
     </ModalDialog>

@@ -5,6 +5,7 @@ import { formValueSelector, reduxForm } from 'redux-form';
 
 import { Limits } from '@waldur/marketplace/common/registry';
 import { orderCanBeApproved as getOrderCanBeApproved } from '@waldur/marketplace/orders/store/selectors';
+import { isVisible } from '@waldur/store/config';
 
 import { changeLimits } from '../store/constants';
 
@@ -38,6 +39,7 @@ export interface StateProps {
   totalPeriods: number[];
   changedTotalPeriods: number[];
   orderCanBeApproved: boolean;
+  shouldConcealPrices?: boolean;
 }
 
 const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
@@ -59,12 +61,14 @@ const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
       orderCanBeApproved,
     );
   }
+  const shouldConcealPrices = isVisible(state, 'marketplace.conceal_prices');
   return {
     periods: [],
     components: [],
     totalPeriods: [],
     changedTotalPeriods: [],
     orderCanBeApproved,
+    shouldConcealPrices,
   };
 };
 

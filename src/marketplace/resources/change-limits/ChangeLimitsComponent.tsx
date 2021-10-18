@@ -33,12 +33,15 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = (
           <th>{translate('Current limit')}</th>
           <th>{translate('New limit')}</th>
           <th>{translate('Change')}</th>
-          {props.periods.map((period, index) => (
-            <th className="col-sm-1" key={index}>
-              {period}
-              <PriceTooltip />
-            </th>
-          ))}
+          {props.shouldConcealPrices
+            ? null
+            : props.periods.map((period, index) => (
+                <th className="col-sm-1" key={index}>
+                  {period}
+                  <PriceTooltip />
+                </th>
+              ))}
+          {}
         </tr>
       </thead>
       <tbody>
@@ -47,19 +50,22 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = (
             key={index}
             component={component}
             limits={props.offeringLimits[component.type]}
+            shouldConcealPrices={props.shouldConcealPrices}
           />
         ))}
-        <tr>
-          <td colSpan={5}>{translate('Total')}</td>
-          {props.totalPeriods.map((price, index) => (
-            <td key={index}>
-              <PriceField
-                price={price}
-                changedPrice={props.changedTotalPeriods[index]}
-              />
-            </td>
-          ))}
-        </tr>
+        {props.shouldConcealPrices ? null : (
+          <tr>
+            <td colSpan={5}>{translate('Total')}</td>
+            {props.totalPeriods.map((price, index) => (
+              <td key={index}>
+                <PriceField
+                  price={price}
+                  changedPrice={props.changedTotalPeriods[index]}
+                />
+              </td>
+            ))}
+          </tr>
+        )}
       </tbody>
     </table>
   </div>
