@@ -1,7 +1,11 @@
-import Axios from 'axios';
-
-import { ENV } from '@waldur/configs/default';
-import { deleteById, getById, getList, post } from '@waldur/core/api';
+import {
+  deleteById,
+  get,
+  getById,
+  getList,
+  patch,
+  post,
+} from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -15,16 +19,17 @@ export const getCustomersList = (params) =>
   getList<Customer>('/customers/', params);
 
 export const createProject = (project) =>
-  Axios.post(`${ENV.apiEndpoint}api/projects/`, {
+  post(`/projects/`, {
     name: project.name,
     description: project.description,
     end_date: project.end_date ? formatDate(project.end_date) : undefined,
     customer: project.customer.url,
-    type: project.type && project.type.url,
+    type: project.type?.url,
+    oecd_fos_2007_code: project.oecd_fos_2007_code?.value,
   });
 
 export const updateProject = (project) =>
-  Axios.patch(`${ENV.apiEndpoint}api/projects/${project.uuid}/`, {
+  patch(`/projects/${project.uuid}/`, {
     name: project.name,
     description: project.description,
     end_date: project.end_date ? formatDate(project.end_date) : undefined,
@@ -45,7 +50,10 @@ export const deleteProject = (projectId: string) =>
   deleteById('/projects/', projectId);
 
 export const loadProjectTypes = () =>
-  Axios.get(`${ENV.apiEndpoint}api/project-types/`).then(
+  get<{ url; name }[]>(`/project-types/`).then((response) => response.data);
+
+export const loadOecdCodes = () =>
+  get<{ value; label }[]>(`/projects/oecd_codes/`).then(
     (response) => response.data,
   );
 
