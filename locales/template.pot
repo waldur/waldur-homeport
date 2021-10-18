@@ -3777,6 +3777,7 @@ msgid "Key removal"
 msgstr ""
 
 #: src/user/keys/help.js
+#: src/user/support/UserDetailsView.tsx
 msgid "Keys"
 msgstr ""
 
@@ -6142,6 +6143,7 @@ msgid "Public SSH keys will be injected into services that allow key-based acces
 msgstr ""
 
 #: src/user/keys/KeyCreateForm.tsx
+#: src/user/keys/KeysListExpandableRow.tsx
 msgid "Public key"
 msgstr ""
 
@@ -6464,6 +6466,7 @@ msgstr ""
 
 #: src/user/UserOfferingList.tsx
 #: src/user/constants.ts
+#: src/user/support/UserDetailsView.tsx
 msgid "Remote accounts"
 msgstr ""
 
