@@ -17,11 +17,6 @@ const TosPage = () => {
   return <TemplateComponent url="views/tos/index.html" />;
 };
 
-const FreeipaPage = () => {
-  useTitle('Terms of Service');
-  return <TemplateComponent url="views/tos/freeipa.html" />;
-};
-
 const AboutPage = () => {
   useTitle('About');
   return <TemplateComponent url="views/about/index.html" />;
@@ -44,12 +39,6 @@ export const states: StateDeclaration[] = [
     name: 'tos.index',
     url: '',
     component: TosPage,
-  },
-
-  {
-    name: 'tos.freeipa',
-    url: 'freeipa-terms/',
-    component: FreeipaPage,
   },
 
   {
