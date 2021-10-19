@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`makeAccountingPeriods iterates through months 1`] = `
+Array [
+  Object {
+    "label": "October, 2021",
+    "value": Object {
+      "current": true,
+      "month": 10,
+      "year": 2021,
+    },
+  },
+  Object {
+    "label": "September, 2021",
+    "value": Object {
+      "current": false,
+      "month": 9,
+      "year": 2021,
+    },
+  },
+  Object {
+    "label": "August, 2021",
+    "value": Object {
+      "current": false,
+      "month": 8,
+      "year": 2021,
+    },
+  },
+  Object {
+    "label": "July, 2021",
+    "value": Object {
+      "current": false,
+      "month": 7,
+      "year": 2021,
+    },
+  },
+  Object {
+    "label": "June, 2021",
+    "value": Object {
+      "current": false,
+      "month": 6,
+      "year": 2021,
+    },
+  },
+  Object {
+    "label": "May, 2021",
+    "value": Object {
+      "current": false,
+      "month": 5,
+      "year": 2021,
+    },
+  },
+  Object {
+    "label": "April, 2021",
+    "value": Object {
+      "current": false,
+      "month": 4,
+      "year": 2021,
+    },
+  },
+  Object {
+    "label": "March, 2021",
+    "value": Object {
+      "current": false,
+      "month": 3,
+      "year": 2021,
+    },
+  },
+  Object {
+    "label": "February, 2021",
+    "value": Object {
+      "current": false,
+      "month": 2,
+      "year": 2021,
+    },
+  },
+  Object {
+    "label": "January, 2021",
+    "value": Object {
+      "current": false,
+      "month": 1,
+      "year": 2021,
+    },
+  },
+]
+`;

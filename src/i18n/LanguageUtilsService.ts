@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import moment from 'moment-timezone';
+import { Settings } from 'luxon';
 
 import { ENV } from '@waldur/configs/default';
 import { LanguageOption } from '@waldur/core/types';
@@ -8,15 +8,6 @@ import { getLanguageKey, setLanguageKey } from './LanguageStorage';
 
 function getLocaleData(locale) {
   return import(`json-loader!po-loader?format=mf!../../locales/${locale}.po`);
-}
-
-function loadMomentLocale(locale: string) {
-  if (locale === 'en') {
-    locale = 'en-gb';
-  }
-  return import(`moment/locale/${locale}.js`).then(() => {
-    moment.locale(locale);
-  });
 }
 
 class LanguageUtilsServiceClass {
@@ -33,7 +24,7 @@ class LanguageUtilsServiceClass {
     getLocaleData(language.code).then((mod) => {
       this.dictionary = mod.default;
     });
-    loadMomentLocale(language.code);
+    Settings.defaultLocale = language.code;
     Axios.defaults.headers.common['Accept-Language'] = language.code;
   }
 

@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import { FunctionComponent, Component } from 'react';
 import {
   Col,
@@ -9,7 +10,6 @@ import {
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { formatFromNow } from '@waldur/core/dateUtils';
 import { toggleOpen, ToggleOpenProps } from '@waldur/core/HOC/toggleOpen';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -177,7 +177,9 @@ const PendingOrderDropdownItem: FunctionComponent<any> = (props) => (
               </small>
             </Col>
             <Col sm={5} className="text-right">
-              <small>{formatFromNow(props.order.created)}</small>
+              <small>
+                {DateTime.fromISO(props.order.created).toRelative()}
+              </small>
             </Col>
           </Row>
         </div>

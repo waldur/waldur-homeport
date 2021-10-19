@@ -1,9 +1,9 @@
-import moment from 'moment-timezone';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { Button, ButtonGroup, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BookingProps } from '@waldur/booking/types';
+import { parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { formDataSelector } from '@waldur/marketplace/utils';
 import { showError } from '@waldur/store/notify';
@@ -64,7 +64,7 @@ export const BookingModal: FC<BookingModalProps> = ({
     toggle();
   };
   const handleSubmit = () => {
-    if (moment(newEvent.start).isBefore(newEvent.end)) {
+    if (parseDate(newEvent.start) < parseDate(newEvent.end)) {
       const { id, extendedProps } = event;
       const payload = {
         oldID: id as BookingProps['id'],
@@ -82,26 +82,28 @@ export const BookingModal: FC<BookingModalProps> = ({
   };
 
   const convertEventToAllDay = (event) => {
-    const mStart = moment(newEvent.start);
-    const mEnd = moment(newEvent.end);
-    if (mEnd.diff(mStart, 'days') === 0) {
-      mEnd.add(1, 'days');
+    const start = parseDate(newEvent.start);
+    let end = parseDate(newEvent.end);
+    if (end.diff(start).as('days') === 0) {
+      end = end.plus({ days: 1 });
     }
     return {
       ...event,
-      start: mStart.startOf('day').toDate(),
-      end: mEnd.startOf('day').toDate(),
+      start: start.startOf('day').toJSDate(),
+      end: end.startOf('day').toJSDate(),
     };
   };
 
   const shiftEndDateAccordingToStartDate = (event, updateStartDate) => {
-    const mStart = moment(newEvent.start);
-    const mEnd = moment(newEvent.end);
-    const diff: number = moment(updateStartDate).diff(mStart);
-    mEnd.add(diff, 'milliseconds');
+    const start = parseDate(newEvent.start);
+    let end = parseDate(newEvent.end);
+    const diff: number = parseDate(updateStartDate)
+      .diff(start)
+      .as('milliseconds');
+    end = end.plus({ milliseconds: diff });
     return {
       ...event,
-      end: mEnd.startOf('day').toDate(),
+      end: end.startOf('day').toJSDate(),
     };
   };
 
@@ -161,7 +163,7 @@ export const BookingModal: FC<BookingModalProps> = ({
             minuteStep={30}
             label={translate('Start')}
             isDisabled={newEvent.allDay}
-            currentTime={moment(newEvent.start, 'DD/MM/YYYY HH:mm', true)}
+            currentTime={parseDate(newEvent.start).toFormat('dd/MM/yyyy T')}
             onChange={(newDateValue) => handleChange('start', newDateValue)}
           />
 
@@ -170,7 +172,7 @@ export const BookingModal: FC<BookingModalProps> = ({
             label={translate('End')}
             minuteStep={30}
             isDisabled={newEvent.allDay}
-            currentTime={moment(newEvent.end, 'DD/MM/YYYY HH:mm', true)}
+            currentTime={parseDate(newEvent.end).toFormat('dd/MM/yyyy T')}
             onChange={(newDateValue) => handleChange('end', newDateValue)}
           />
 

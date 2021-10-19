@@ -1,4 +1,4 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
@@ -12,23 +12,7 @@ import { getOptions } from './AccountingRunningField';
 import { CustomerList } from './CustomerList';
 import { CustomerListFilter } from './CustomerListFilter';
 import { TotalCostContainer } from './TotalCostComponent';
-
-const makeAccountingPeriods = (start: moment.Moment) => {
-  let date = moment().startOf('month');
-  const diff = date.diff(start, 'months');
-  const choices = [];
-  for (let i = 0; i <= diff; i++) {
-    const month = date.month() + 1;
-    const year = date.year();
-    const label = date.format('MMMM, YYYY');
-    choices.push({
-      label,
-      value: { year, month, current: i === 0 },
-    });
-    date = date.subtract(1, 'month');
-  }
-  return choices;
-};
+import { makeAccountingPeriods } from './utils';
 
 interface Invoice {
   year: number;
@@ -46,9 +30,12 @@ async function oldestInvoice() {
   const response = await getInvoices(params);
   if (response.length === 1) {
     const invoice = response[0];
-    return moment({ year: invoice.year, month: invoice.month - 1 });
+    return DateTime.fromObject({
+      year: invoice.year,
+      month: invoice.month,
+    });
   } else {
-    return moment().startOf('month');
+    return DateTime.now().startOf('month');
   }
 }
 

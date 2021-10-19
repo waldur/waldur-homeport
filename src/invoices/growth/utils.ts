@@ -1,4 +1,4 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
@@ -9,7 +9,7 @@ export const formatGrowthChart = (growthChartData) => {
       feature: {
         saveAsImage: {
           title: translate('Save'),
-          name: `growth-chart-${moment().format('DD-MM-YYYY')}`,
+          name: `growth-chart-${DateTime.now().toISODate()}`,
           show: true,
         },
       },
@@ -30,9 +30,9 @@ export const formatGrowthChart = (growthChartData) => {
           type: 'shadow',
         },
         data: growthChartData.periods.map((row, index) => {
-          const date = moment(row, 'YYYY-MM');
-          const monthName = date.format('MMMM');
-          const year = date.format('YYYY');
+          const date = DateTime.fromFormat(row, 'yyyy-MM');
+          const monthName = date.toFormat('MMMM');
+          const year = date.toFormat('yyyy');
           return index === growthChartData.periods.length - 1
             ? `${monthName}, ${year} (${translate('estimated')})`
             : `${monthName}, ${year}`;

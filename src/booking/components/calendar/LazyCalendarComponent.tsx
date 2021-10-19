@@ -1,12 +1,9 @@
 import { Calendar, OptionsInput } from '@fullcalendar/core';
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 import { useRef, useState, useEffect, FC } from 'react';
 import { useDispatch } from 'react-redux';
 
-import {
-  getNumberOfWeekendsInTheEvent,
-  removeWeekends,
-} from '@waldur/booking/components/calendar/utils';
+import { removeWeekends } from '@waldur/booking/components/calendar/utils';
 import { CURSOR_NOT_ALLOWED_CLASSNAME } from '@waldur/booking/constants';
 import { BookingProps } from '@waldur/booking/types';
 import {
@@ -16,7 +13,9 @@ import {
   eventRender,
   transformBookingEvent,
   handleSchedule,
+  AvailabilitySlot,
 } from '@waldur/booking/utils';
+import { parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showError } from '@waldur/store/notify';
 
@@ -25,11 +24,6 @@ import { BookingModal } from '../modal/BookingModal';
 import { getDefaultOptions } from './defaultConfig';
 import './Calendar.scss';
 import './styles';
-
-interface AvailabilitySlot {
-  start: Date | string;
-  end: Date | string;
-}
 
 export interface CalendarComponentProps {
   calendarType: 'create' | 'edit' | 'read';
@@ -63,12 +57,7 @@ export const LazyCalendarComponent: FC<CalendarComponentProps> = (props) => {
         ? props.options.defaultDate
         : calApi.getNow(),
     );
-    const momentDatetime = moment({
-      years: datetime.getFullYear(),
-      month: datetime.getMonth(),
-      date: datetime.getDate(),
-    });
-    return momentDatetime.toDate();
+    return DateTime.fromJSDate(datetime).startOf('day').toJSDate();
   };
 
   const toggleModal = () => setModal({ isOpen: false, el: null, event: null });
@@ -84,26 +73,27 @@ export const LazyCalendarComponent: FC<CalendarComponentProps> = (props) => {
     return setModal({ isOpen: true, el, event });
   };
   const addBooking = (event: BookingProps) => {
-    const isEventInPast = moment(moment(event.start)).isBefore();
+    const isEventInPast = parseDate(event.start) < DateTime.now();
     if (isEventInPast) {
       dispatch(showError(translate('Past time slots are not allowed.')));
       return;
     }
     dispatch(showSuccess(translate('Time slot has been added.')));
-    if (!props.options.weekends && getNumberOfWeekendsInTheEvent(event) > 0) {
+    const start = parseDate(event.start);
+    const end = parseDate(event.end);
+    const weekCount = end.diff(start).as('weeks');
+    if (!props.options.weekends && weekCount > 0) {
       // If weekends toggle is on and an event contains weekend, extract weekends from the event
       const splitEvents = removeWeekends(event);
       splitEvents.forEach((splitEvent) => {
         props.addEventCb(splitEvent);
       });
     } else {
-      const mStart = moment(event.start);
-      const mEnd = moment(event.end);
-      if (mEnd.diff(mStart, 'days') === 0) {
+      if (end.diff(start).as('days') === 0) {
         props.addEventCb({
           ...event,
           allDay: true,
-          end: mStart.add(1, 'days').startOf('day').toDate(),
+          end: start.plus({ days: 1 }).startOf('day').toJSDate(),
         });
       } else {
         props.addEventCb(event);

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import DatePicker from 'react-16-bootstrap-date-picker';
 import Select from 'react-select';
@@ -7,6 +7,7 @@ import Select from 'react-select';
 import { timelineLabels } from '@waldur/booking/utils';
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
+
 import './DateAndTimeSelect.scss';
 
 interface DateAndTimeSelectField {
@@ -37,7 +38,7 @@ export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> =
         value={props.currentTime.format()}
         onChange={(_, formattedValue) =>
           props.onChange(
-            moment.utc(formattedValue, 'DD-MM-YYYY', true).toDate(),
+            DateTime.fromFormat(formattedValue, 'dd-MM-yyyy').toJSDate(),
           )
         }
         calendarContainer={document.getElementsByClassName('modal')[0]}

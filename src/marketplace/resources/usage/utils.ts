@@ -1,7 +1,6 @@
-import { Moment } from 'moment';
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 
-import { formatDate } from '@waldur/core/dateUtils';
+import { parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { getAccountingTypeOptions } from '@waldur/marketplace/offerings/create/ComponentAccountingTypeField';
 import { OfferingComponent } from '@waldur/marketplace/types';
@@ -23,7 +22,7 @@ const formatChart = (
     feature: {
       saveAsImage: {
         title: translate('Save'),
-        name: `components-usage-chart-${formatDate(moment())}`,
+        name: `components-usage-chart-${DateTime.now().toISODate()}`,
         show: true,
       },
     },
@@ -84,31 +83,35 @@ const filterUsages = (
   component: OfferingComponent,
   usages: ComponentUsage[],
 ) => {
-  const threshold = moment().subtract(12, 'months');
+  const threshold = DateTime.now().minus({ months: 12 });
   return usages.filter((usage) => {
+    const usageDate = parseDate(usage.date);
     return (
-      threshold.isBefore(usage.date) &&
-      moment().diff(usage.date) >= 0 &&
+      threshold < usageDate &&
+      DateTime.now().diff(usageDate).as('days') >= 0 &&
       usage.type === component.type
     );
   });
 };
 
-const getLastTwelveMonths = (): Moment[] => {
+const getLastTwelveMonths = (): DateTime[] => {
   const periods = [];
   for (let i = 11; i >= 0; i--) {
-    periods.push(moment().subtract(i, 'months'));
+    periods.push(DateTime.now().minus({ months: i }));
   }
   return periods;
 };
 
-const getUsages = (periods: Moment[], usages: ComponentUsage[]): RowData[] => {
+const getUsages = (
+  periods: DateTime[],
+  usages: ComponentUsage[],
+): RowData[] => {
   const result = [];
   for (let i = 0; i < periods.length; i++) {
     for (let j = 0; j < usages.length; j++) {
       if (
-        periods[i].format('YYYY-MM') ===
-        moment(usages[j].date).format('YYYY-MM')
+        periods[i].toFormat('yyyy-MM') ===
+        parseDate(usages[j].date).toFormat('yyyy-MM')
       ) {
         result.push({
           value: usages[j].usage,
@@ -127,19 +130,13 @@ const getUsages = (periods: Moment[], usages: ComponentUsage[]): RowData[] => {
   return result;
 };
 
-const formatMonthPeriod = (date: Moment) => {
-  const month = date.month() + 1;
-  const year = date.year();
-  return `${month} - ${year}`;
-};
-
 export const getEChartOptions = (
   component: OfferingComponent,
   usages: ComponentUsage[],
   color: string,
 ) => {
   const periods = getLastTwelveMonths();
-  const labels = periods.map(formatMonthPeriod);
+  const labels = periods.map((date) => `${date.month} - ${date.year}`);
   const formattedUsages = getUsages(periods, filterUsages(component, usages));
   return formatChart(component.measured_unit, color, labels, formattedUsages);
 };

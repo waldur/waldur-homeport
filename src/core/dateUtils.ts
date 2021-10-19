@@ -1,28 +1,46 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 
-type DateFormatter = (date?: moment.MomentInput) => string;
+type DateInput = DateTime | Date | string | number | number[];
 
-export const formatDate: DateFormatter = (date) =>
-  moment(date).format('YYYY-MM-DD');
+type DateFormatter = (date: DateInput) => string;
 
-export const formatDateToYearMonth: DateFormatter = (date) =>
-  moment(date).format('YYYY-MM');
+export const parseDate = (value: DateInput) => {
+  if (value instanceof DateTime) {
+    return value;
+  } else if (typeof value === 'undefined') {
+    return DateTime.now();
+  } else if (typeof value === 'string') {
+    return DateTime.fromISO(value);
+  } else if (value instanceof Date) {
+    return DateTime.fromJSDate(value);
+  } else if (typeof value === 'number') {
+    return DateTime.fromMillis(value);
+  } else if (value instanceof Array) {
+    return DateTime.fromObject({
+      year: value[0],
+      month: value[1] + 1, // convert 0-based to 1-based
+      day: value[2],
+      hour: value[3],
+      minute: value[4],
+      second: value[5],
+      millisecond: value[6],
+    });
+  }
+};
+
+export const formatDate: DateFormatter = (date) => parseDate(date).toISODate();
 
 export const formatDateTime: DateFormatter = (date) =>
-  moment(date).format('YYYY-MM-DD HH:mm');
+  parseDate(date).toFormat('yyyy-MM-dd T');
 
-export const formatTime: DateFormatter = (date) => moment(date).format('HH:mm');
-
-export const formatFromNow: DateFormatter = (date) => moment(date).fromNow();
+export const formatTime: DateFormatter = (date) =>
+  parseDate(date).toFormat('T');
 
 export const formatRelative: DateFormatter = (date) =>
-  moment(date).fromNow(true);
+  parseDate(date).toRelative();
 
 export const formatMediumDateTime: DateFormatter = (date) =>
-  moment(date).format('MMM D, Y h:mm:ss A');
+  parseDate(date).toFormat('FFF');
 
 export const formatShortDateTime: DateFormatter = (date) =>
-  moment(date).format('MMM D, HH:mm');
-
-export const convertDateTimeToUTCString = (time: string): string =>
-  moment(time).utc().format();
+  parseDate(date).toFormat('MMM D, T');

@@ -1,4 +1,4 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 
@@ -64,7 +64,7 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> = 
         component={DateField}
         {...datePickerOverlayContainerInDialogs()}
         disabled={props.isDisabled}
-        minDate={moment().add(1, 'days').toISOString()}
+        minDate={DateTime.now().plus({ days: 1 }).toISO()}
       />
       <StringField
         label={translate('Backend ID')}

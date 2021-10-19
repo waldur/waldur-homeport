@@ -1,7 +1,7 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 
 import { get } from '@waldur/core/api';
-import { formatDate } from '@waldur/core/dateUtils';
+import { parseDate } from '@waldur/core/dateUtils';
 import { WorkspaceType } from '@waldur/workspace/types';
 
 import { Category } from './CategoryResources';
@@ -13,7 +13,7 @@ interface DailyQuota {
 }
 
 export interface DateValuePair {
-  date: string | Date;
+  date: DateTime | string;
   value: number;
 }
 
@@ -55,13 +55,12 @@ export const formatQuotaChart = (quota: Quota, values: number[]): Chart => {
   const current = formatter(values[values.length - 1]);
 
   const data: ChartData = values.map((value, index) => {
-    const date = moment()
-      .subtract(30, 'days')
+    const date = DateTime.now()
+      .minus({ days: 30 })
       .startOf('day')
-      .add(index, 'days');
-    const formattedDate = formatDate(date);
+      .plus({ days: index });
     const formattedValue = formatter(value);
-    return { label: formattedDate, value: formattedValue };
+    return { label: date.toISODate(), value: formattedValue };
   });
 
   return {
@@ -77,7 +76,7 @@ export async function getDailyQuotaCharts(
   scope: Scope,
 ): Promise<Chart[]> {
   const names = quotas.map((chart) => chart.quota);
-  const start = moment().subtract(30, 'days').format('YYYY-MM-DD');
+  const start = DateTime.now().minus({ days: 30 }).toISODate();
   const values = await getDailyQuotas({
     scope: scope.url,
     quota_names: names,
@@ -94,14 +93,14 @@ export async function loadCategories(
 }
 
 export const padMissingValues = (items: DateValuePair[], count) => {
-  let end = moment();
+  let end = DateTime.now();
   if (items.length > 0) {
-    end = moment(items[items.length - 1].date);
+    end = parseDate(items[items.length - 1].date);
   }
   while (items.length < count) {
     items.unshift({
       value: 0,
-      date: new Date(end.subtract(1, 'month').toDate()),
+      date: end.minus({ months: 1 }),
     });
   }
   return items;

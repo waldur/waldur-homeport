@@ -1,28 +1,23 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 import { useMemo, FunctionComponent } from 'react';
 import WindowedSelect from 'react-windowed-select';
 
+import { TIMEZONES } from '@waldur/core/timezones';
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
 
-function getTimezoneMetadata(timezone: string, timestamp: number) {
-  const zonedDate = moment.tz(timestamp, timezone);
-  const offset = zonedDate.utcOffset();
-  const offsetAsString = zonedDate.format('Z');
+function getTimezoneMetadata(zone: string) {
+  const zonedDate = DateTime.utc().setZone(zone);
+  const offsetAsString = zonedDate.toFormat('Z');
 
   return {
-    offset,
-    value: timezone,
-    label: `${timezone.replace(/_/g, ' ')} (UTC${offsetAsString})`,
+    offset: zonedDate.offset,
+    value: zone,
+    label: `${zone.replace(/_/g, ' ')} (UTC${offsetAsString})`,
   };
 }
 
 function getTimezoneItems() {
-  const date = new Date();
-  const timestamp = date.getTime();
-  return moment.tz
-    .names()
-    .map((timezone) => getTimezoneMetadata(timezone, timestamp))
-    .sort((a, b) => a.offset - b.offset);
+  return TIMEZONES.map(getTimezoneMetadata).sort((a, b) => a.offset - b.offset);
 }
 
 export function getDefaultTimezone() {

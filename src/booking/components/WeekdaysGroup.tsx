@@ -1,12 +1,11 @@
-import moment from 'moment-timezone';
+import { Info } from 'luxon';
 import { FunctionComponent } from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
+import { range } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-const daysArray = [1, 2, 3, 4, 5, 6, 0];
-const getDayLabel = (day: number): string => moment.weekdays(day);
 import { handleWeekDays } from '../utils';
 
 interface WeekdaysGroupProps {
@@ -24,8 +23,12 @@ export const WeekdaysGroup: FunctionComponent<WeekdaysGroupProps> = ({
     valueClassName={'col-sm-8'}
   >
     <div className="weekDays-selector">
-      {daysArray.map((day, index) => (
-        <Tooltip key={index} label={getDayLabel(day)} id={`weekday-${day}`}>
+      {range(7).map((day, index) => (
+        <Tooltip
+          key={index}
+          label={Info.weekdays('long')[day]}
+          id={`weekday-${day}`}
+        >
           <input
             type="checkbox"
             id={`weekday-${day}`}
@@ -36,7 +39,7 @@ export const WeekdaysGroup: FunctionComponent<WeekdaysGroupProps> = ({
             }
           />
           <label htmlFor={`weekday-${day}`}>
-            {getDayLabel(day)[0].toUpperCase()}
+            {Info.weekdays('narrow')[day]}
           </label>
         </Tooltip>
       ))}

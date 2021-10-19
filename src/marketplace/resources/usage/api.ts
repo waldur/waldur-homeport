@@ -1,6 +1,6 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
+import { formatDateTime, parseDate } from '@waldur/core/dateUtils';
 import {
   getComponentUsages,
   getOffering,
@@ -12,9 +12,9 @@ import { UsageReportContext, ResourcePlanPeriod } from './types';
 export const getPeriodLabel = (
   period: Pick<ResourcePlanPeriod, 'start' | 'end' | 'plan_name'>,
 ) => {
-  const startOfMonth = moment().startOf('month');
+  const startOfMonth = DateTime.now().startOf('month');
   const start =
-    startOfMonth.diff(period.start) > 0
+    startOfMonth.diff(parseDate(period.start)).as('milliseconds') > 0
       ? formatDateTime(startOfMonth)
       : formatDateTime(period.start);
   const end = period.end && formatDateTime(period.end);

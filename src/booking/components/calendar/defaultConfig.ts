@@ -4,8 +4,7 @@ import allLocales from '@fullcalendar/core/locales-all';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
-import momentPlugin from '@fullcalendar/moment';
-import momentTimezonePlugin from '@fullcalendar/moment-timezone';
+import luxonPlugin from '@fullcalendar/luxon';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
 import { LanguageUtilsService } from '@waldur/i18n/LanguageUtilsService';
@@ -17,8 +16,7 @@ export const getDefaultOptions = () =>
       timeGridPlugin,
       interactionPlugin,
       bootstrapPlugin,
-      momentTimezonePlugin,
-      momentPlugin,
+      luxonPlugin,
       listPlugin,
     ],
     header: {

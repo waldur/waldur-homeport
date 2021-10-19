@@ -1,6 +1,6 @@
-import { translate } from '@waldur/i18n';
+import { Info } from 'luxon';
 
-const moment = require('moment-timezone');
+import { translate } from '@waldur/i18n';
 
 export const Frequency = {
   MINUTE: 'minute',
@@ -71,14 +71,11 @@ export const parseCrontab = (value: string) => {
   return frequency;
 };
 
-export const cronDayName = (input) => moment().day(input).format('dddd');
+export const cronDayName = (day: number) => Info.weekdays('long')[day];
 
-export const cronMonthName = (input) =>
-  moment()
-    .month(input - 1)
-    .format('MMMM');
+export const cronMonthName = (input) => Info.months('long')[input - 1];
 
-export const cronNumeral = (input) => moment.localeData().ordinal(input);
+export const cronNumeral = (input) => input;
 
 export const formatCrontab = (crontab) => {
   const schedule = parseCrontab(crontab);

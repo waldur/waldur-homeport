@@ -8,8 +8,6 @@ module.exports = {
     vendor: [
       'core-js/stable',
       'regenerator-runtime/runtime',
-      'moment-timezone',
-
       'redux',
       'redux-form',
       'redux-form-saga',

@@ -3,7 +3,6 @@ import Select from 'react-select';
 
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
-import { LanguageUtilsService } from '@waldur/i18n/LanguageUtilsService';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { getDurationOptions } from '../utils';
@@ -17,9 +16,7 @@ export const SlotDurationGroup: FunctionComponent<SlotDurationGroupProps> = ({
   slotDuration,
   setSlotDuration,
 }) => {
-  const locale = LanguageUtilsService.getCurrentLanguage().code;
-
-  const durationOptions = useMemo(() => getDurationOptions(locale), [locale]);
+  const durationOptions = useMemo(getDurationOptions, []);
 
   return (
     <FormGroup
