@@ -525,7 +525,6 @@ msgid "All"
 msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 msgid "All day"
 msgstr ""
 
@@ -1153,7 +1152,6 @@ msgid "Caller"
 msgstr ""
 
 #: src/booking/CancelAction.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/form/ListDialog.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
@@ -1685,10 +1683,6 @@ msgstr ""
 msgid "Create an account"
 msgstr ""
 
-#: src/booking/components/modal/CalendarEventModal.tsx
-msgid "Create an availability"
-msgstr ""
-
 #: src/rancher/template/TemplateQuestions.tsx
 msgid "Create application"
 msgstr ""
@@ -2046,7 +2040,6 @@ msgid "Default value"
 msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
@@ -2411,7 +2404,6 @@ msgid "Edit attributes"
 msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Edit booking event"
 msgstr ""
 
@@ -2554,7 +2546,6 @@ msgid "Encountered an empty component"
 msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/booking/components/utils.tsx
 msgid "End"
 msgstr ""
@@ -7162,7 +7153,6 @@ msgid "Sankey diagram"
 msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/divisions/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
@@ -7924,7 +7914,6 @@ msgstr ""
 
 #: src/azure/vm/actions/StartAction.tsx
 #: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/booking/components/utils.tsx
 #: src/openstack/openstack-instance/actions/StartAction.tsx
 #: src/vmware/actions/StartAction.tsx
@@ -8661,7 +8650,6 @@ msgstr ""
 msgid "Timestamp"
 msgstr ""
 
-#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/create/SummaryGroup.tsx
 #: src/issues/list/IssuesList.tsx

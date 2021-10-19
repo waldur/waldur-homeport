@@ -1,18 +1,18 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 
 import { formatTime } from '@waldur/core/dateUtils';
 import { SelectField } from '@waldur/form';
 import { FormField } from '@waldur/form/types';
 
 function getMomentDayRange(interval = 5) {
-  const start = moment.utc().startOf('day');
-  const end = moment.utc().endOf('day');
+  let start = DateTime.utc().startOf('day');
+  const end = DateTime.utc().endOf('day');
 
   const timeArray = [];
 
   while (start <= end) {
-    timeArray.push(start.clone());
-    start.add(interval, 'minutes');
+    timeArray.push(start);
+    start = start.plus({ minutes: interval });
   }
   return timeArray;
 }

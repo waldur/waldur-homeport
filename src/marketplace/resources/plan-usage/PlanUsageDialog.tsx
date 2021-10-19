@@ -1,4 +1,5 @@
-import { formatDate } from '@waldur/core/dateUtils';
+import { DateTime } from 'luxon';
+
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -12,7 +13,7 @@ const getChartData = (props: PlanUsageRowProps) => ({
     showTitle: false,
     feature: {
       saveAsImage: {
-        name: `${props.row.plan_name}-${formatDate()}`,
+        name: `${props.row.plan_name}-${DateTime.now().toISODate()}`,
       },
     },
   },

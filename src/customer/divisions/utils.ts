@@ -1,5 +1,5 @@
 import { interpolateInferno } from 'd3-scale-chromatic';
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 
 import { translate } from '@waldur/i18n';
 
@@ -30,9 +30,7 @@ const getEChartOption = (chartData) => ({
     feature: {
       saveAsImage: {
         title: translate('Save'),
-        name: `Organizations-by-divisions-chart-${moment().format(
-          'DD-MM-YYYY',
-        )}`,
+        name: `Organizations-by-divisions-chart-${DateTime.now().toISODate()}`,
         show: true,
       },
     },

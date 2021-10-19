@@ -1,4 +1,4 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
@@ -82,7 +82,7 @@ const PureEditResourceEndDateDialog: FunctionComponent<any> = (props) => {
             description={translate(
               'The date is inclusive. Once reached, resource will be scheduled for termination.',
             )}
-            minDate={moment().add(1, 'week').format()}
+            minDate={DateTime.now().plus({ weeks: 1 }).toISO()}
           />
         </FormContainer>
       </ModalDialog>

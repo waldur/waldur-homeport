@@ -1,17 +1,23 @@
 import type { EventInput, EventApi } from '@fullcalendar/core';
 import uniqueId from 'lodash.uniqueid';
-import moment from 'moment';
+import { DateTime, Duration } from 'luxon';
 
 import {
   BOOKING_RESOURCES_TABLE,
   CURSOR_NOT_ALLOWED_CLASSNAME,
   OFFERING_TYPE_BOOKING,
 } from '@waldur/booking/constants';
+import { parseDate } from '@waldur/core/dateUtils';
 import { orderByFilter } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { fetchListStart } from '@waldur/table/actions';
 
 import { BookedItem, BookingProps } from './types';
+
+export interface AvailabilitySlot {
+  start: Date | string;
+  end: Date | string;
+}
 
 export const createCalendarBookingEvent = ({
   type,
@@ -56,16 +62,16 @@ export const eventsMapper = (events) =>
   });
 
 export const timelineLabels = (interval: number) => {
-  const periodsInADay = moment.duration(1, 'day').as('minutes');
-  const startClock = moment().startOf('day');
+  const periodsInADay = Duration.fromObject({ days: 1 }).as('minutes');
+  let startClock = DateTime.now().startOf('day');
   const timeLabels = [];
   for (let i = 0; i <= periodsInADay; i += interval) {
-    startClock.add(i === 0 ? 0 : interval, 'minutes');
+    startClock = startClock.plus({ minutes: i === 0 ? 0 : interval });
     timeLabels.push({
-      label: startClock.format('HH:mm'),
-      value: startClock.format('HH:mm'),
-      hour: startClock.hour(),
-      minute: startClock.minute(),
+      label: startClock.toFormat('T'),
+      value: startClock.toFormat('T'),
+      hour: startClock.hour,
+      minute: startClock.minute,
     });
   }
   return timeLabels;
@@ -175,26 +181,24 @@ export const eventRender = (arg, focused?) => {
   }
 };
 
-const getNextSlot = (slots, selectedValue) =>
+const getNextSlot = (slots: AvailabilitySlot[], selectedValue) =>
   slots
-    .map((slot) => moment(slot.start))
+    .map((slot) => parseDate(slot.start))
     .sort((a, b) => a.valueOf() - b.valueOf())
-    .find((next) => next.isAfter(moment(selectedValue)));
+    .find((next) => next > parseDate(selectedValue));
 
-const getSlotEnd = (slots, selectedValue) =>
+const getSlotEnd = (slots: AvailabilitySlot[], selectedValue) =>
   slots
-    .map((slot) => moment(slot.end))
+    .map((slot) => parseDate(slot.end))
     .sort((a, b) => a.valueOf() - b.valueOf())
-    .find((next) => moment(selectedValue).isSameOrBefore(next));
+    .find((next) => parseDate(selectedValue) <= next);
 
 export const handleSchedule = (
   { start, end, view, jsEvent },
-  availabilitySlotsList,
+  availabilitySlotsList: AvailabilitySlot[],
   slotDuration?,
 ) => {
-  const diff = moment(end).diff(moment(start));
-  const { hours, minutes } = moment(slotDuration, 'HH:mm:ss').toObject();
-  const setDuration = moment.duration({ hours, minutes });
+  const diff = parseDate(end).diff(parseDate(start)).as('milliseconds');
 
   const eventData = createBooking(
     {
@@ -210,15 +214,17 @@ export const handleSchedule = (
 
   if (view.type === 'dayGridMonth') {
     if (diff > 86400000 /* one day in milliseconds */) {
-      eventData.start = getNextSlot(availabilitySlotsList, start).format();
+      eventData.start = getNextSlot(availabilitySlotsList, start).toISO();
       eventData.end = getSlotEnd(
         availabilitySlotsList,
-        moment(end).subtract(1, 'd'),
-      ).format();
+        parseDate(end).minus({ days: 1 }),
+      ).toISO();
     } else {
       const nextStart = getNextSlot(availabilitySlotsList, start);
-      eventData.start = nextStart.format();
-      eventData.end = nextStart.clone().add(setDuration).format();
+      eventData.start = nextStart.toISO();
+      eventData.end = nextStart
+        .plus(Duration.fromISOTime(slotDuration, {}))
+        .toISO();
     }
 
     return eventData;
@@ -231,30 +237,22 @@ export const handleSchedule = (
   }
 };
 
-const getHoursMinutes = (date, unit = 'HH:mm') => {
-  const { hours, minutes } = moment(date, unit).toObject();
-  return { hours, minutes };
-};
-
 export const createAvailabilityDates = (event: BookingProps) => {
   const dates: EventInput[] = [];
 
-  const mStart = moment(event.start);
-  const mEnd = moment(event.end);
+  let start = parseDate(event.start);
+  const end = parseDate(event.end);
   const { config } = event.extendedProps;
 
-  while (mStart.diff(mEnd, 'd')) {
-    const curDay =
-      mStart.isoWeekday() === 7 ? mStart.isoWeekday() - 1 : mStart.isoWeekday();
+  while (start.diff(end).as('days')) {
+    const curDay = start.weekday === 7 ? start.weekday - 1 : start.weekday;
+    const startTime = Duration.fromISOTime(config.businessHours.startTime, {});
+    const endTime = Duration.fromISOTime(config.businessHours.endTime, {});
     const event: BookingProps = {
-      start: mStart
-        .clone()
-        .set(getHoursMinutes(config.businessHours.startTime))
-        .format(),
-      end: mEnd
-        .clone()
-        .set(getHoursMinutes(config.businessHours.endTime))
-        .format(),
+      start: start
+        .set({ hour: startTime.hours, minute: startTime.minutes })
+        .toISO(),
+      end: end.set({ hour: endTime.hours, minute: endTime.minutes }).toISO(),
       allDay: true,
       extendedProps: {
         type: 'Availability',
@@ -266,27 +264,32 @@ export const createAvailabilityDates = (event: BookingProps) => {
       dates.push(event);
     }
 
-    mStart.add(1, 'd');
+    start = start.plus({ days: 1 });
   }
   return dates;
 };
 
-export const createAvailabilitySlots = (availabilitiDates, slotDuration) => {
+export const createAvailabilitySlots = (
+  events: BookingProps[],
+  slotDuration: Duration,
+): EventInput[] => {
   const slots = [];
 
-  availabilitiDates.map((availabilitiDayEvent) => {
-    const currentDate = moment(availabilitiDayEvent.start);
+  events.map((event) => {
+    let cursor = parseDate(event.start);
 
-    while (currentDate < moment(availabilitiDayEvent.end)) {
+    while (cursor < parseDate(event.end)) {
+      const end = cursor.plus(slotDuration);
       const slot: EventInput = {
-        start: currentDate.format(),
-        end: currentDate.add(slotDuration).format(),
+        start: cursor.toISO(),
+        end: end.toISO(),
         id: 'availableForBooking',
         groupId: 'availableForBooking',
         editable: false,
         rendering: 'background',
       };
       slots.push(slot);
+      cursor = end;
     }
   });
 
@@ -327,21 +330,11 @@ export const handleWeekDays = (weekdayNumbers, dayNumber): number[] => {
   }
 };
 
-export const getDurationOptions = (
-  locale: string,
-  minuteArray: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 24],
-  units = 'hours',
-) => {
-  moment.locale(locale);
-  return minuteArray.map((timeUnit) => {
-    return {
-      value: moment
-        .utc(moment.duration({ [units]: timeUnit }).asMilliseconds())
-        .format('HH:mm:ss'),
-      label: moment.duration({ [units]: timeUnit }).humanize(),
-    };
-  });
-};
+export const getDurationOptions = () =>
+  [1, 2, 3, 4, 5, 6, 7, 8, 24].map((hours) => ({
+    value: Duration.fromObject({ hours }).toFormat('hh:mm:ss'),
+    label: `${hours} hours`,
+  }));
 
 export const updateBookingsList = (
   filterState,

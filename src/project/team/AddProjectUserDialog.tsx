@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { DateTime } from 'luxon';
 import {
   ModalBody,
   ModalFooter,
@@ -88,7 +88,7 @@ export const AddProjectUserDialog = reduxForm<
           <DateField
             name="expiration_time"
             label={translate('Role expires on')}
-            minDate={moment().add(1, 'days').toISOString()}
+            minDate={DateTime.now().plus({ days: 1 }).toISO()}
             weekStartsOn={1}
             {...datePickerOverlayContainerInDialogs()}
           />

@@ -1,8 +1,7 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 
 import { ENV } from '@waldur/configs/default';
 import { getAll } from '@waldur/core/api';
-import { formatDateToYearMonth } from '@waldur/core/dateUtils';
 import { ComponentUsage } from '@waldur/marketplace/resources/usage/types';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';
@@ -25,8 +24,8 @@ export const getOfferingCostChartData = (
   getAll(`/marketplace-offerings/${offeringUuid}/costs/`, {
     params: {
       accounting_is_running,
-      start: formatDateToYearMonth(moment().subtract(11, 'months')),
-      end: formatDateToYearMonth(moment()),
+      start: DateTime.now().minus({ months: 11 }).toFormat('yyyy-MM'),
+      end: DateTime.now().toFormat('yyyy-MM'),
     },
   }).then((response) => response);
 

@@ -1,7 +1,7 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 
 import { getList } from '@waldur/core/api';
-import { formatDate } from '@waldur/core/dateUtils';
+import { parseDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import {
   getDailyQuotaCharts,
@@ -21,7 +21,7 @@ interface InvoiceSummary {
 
 const formatCostChartLabel = (
   value: number,
-  date: string | Date,
+  date: DateTime,
   isEstimate: boolean,
 ): string => {
   let template = translate('{value} at {date}');
@@ -30,21 +30,23 @@ const formatCostChartLabel = (
   }
   return translate(template, {
     value: defaultCurrency(value),
-    date: formatDate(date),
+    date: date.toISODate(),
   });
 };
 
 export const formatCostChart = (invoices: InvoiceSummary[], count): Chart => {
   let items: DateValuePair[] = invoices.map((invoice) => ({
     value: invoice.price,
-    date: new Date(invoice.year, invoice.month - 1, 1),
+    date: DateTime.fromObject({ year: invoice.year, month: invoice.month }),
   }));
 
   items.reverse();
   items = padMissingValues(items, count);
   const data = items.map((item, index) => {
     const isEstimate = index === items.length - 1;
-    const date = isEstimate ? moment().endOf('month').toDate() : item.date;
+    const date = isEstimate
+      ? DateTime.now().endOf('month')
+      : parseDate(item.date);
     return {
       label: formatCostChartLabel(item.value, date, isEstimate),
       value: item.value,

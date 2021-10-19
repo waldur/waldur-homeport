@@ -1,4 +1,4 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 
 import { PeriodOption } from '@waldur/form/types';
 
@@ -15,17 +15,17 @@ export const datePickerOverlayContainerInDialogs = () => ({
 });
 
 export const makeLastTwelveMonthsFilterPeriods = (): PeriodOption[] => {
-  let date = moment().startOf('month');
+  let date = DateTime.now().startOf('month');
   const choices = [];
   for (let i = 0; i < 12; i++) {
-    const month = date.month() + 1;
-    const year = date.year();
-    const label = date.format('MMMM, YYYY');
+    const month = date.month;
+    const year = date.year;
+    const label = date.toFormat('MMMM, YYYY');
     choices.push({
       label,
       value: { year, month, current: i === 0 },
     });
-    date = date.subtract(1, 'month');
+    date = date.minus({ months: 1 });
   }
   return choices;
 };

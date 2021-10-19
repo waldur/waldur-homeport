@@ -1,4 +1,4 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { usePrevious } from 'react-use';
@@ -19,7 +19,7 @@ export const useCalendarSettings = () => {
   const [daysOfWeek, setDaysOfWeek] = useState<number[]>(
     config.businessHours.daysOfWeek,
   );
-  const [timeZone, setTimeZone] = useState<any>(moment.tz.guess());
+  const [timeZone, setTimeZone] = useState<any>(DateTime.local().zoneName);
 
   useEffect(() => {
     dispatch(
