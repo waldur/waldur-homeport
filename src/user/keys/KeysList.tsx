@@ -10,7 +10,7 @@ import { Column } from '@waldur/table/types';
 import { KeysListExpandableRow } from '@waldur/user/keys/KeysListExpandableRow';
 import { KeysListTablePlaceholder } from '@waldur/user/keys/KeysListTablePlaceholder';
 import { getUser, getWorkspace } from '@waldur/workspace/selectors';
-import { SUPPORT_WORKSPACE, UserDetails } from '@waldur/workspace/types';
+import { USER_WORKSPACE, UserDetails } from '@waldur/workspace/types';
 
 import { KeyCreateButton } from './KeyCreateButton';
 import { KeyRemoveButton } from './KeyRemoveButton';
@@ -39,7 +39,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => row.type,
     },
   ];
-  if (workspace !== SUPPORT_WORKSPACE) {
+  if (workspace === USER_WORKSPACE) {
     columns.push({
       title: translate('Actions'),
       render: ({ row }) =>
@@ -55,7 +55,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
       hasQuery={true}
       showPageSizeSelector={true}
       verboseName={translate('SSH keys')}
-      actions={props.isStaffOrSelf && <KeyCreateButton />}
+      actions={
+        props.isStaffOrSelf &&
+        workspace === USER_WORKSPACE && <KeyCreateButton />
+      }
       placeholderComponent={<KeysListTablePlaceholder />}
       enableExport={true}
       expandableRow={KeysListExpandableRow}
