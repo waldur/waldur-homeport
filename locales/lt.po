@@ -1814,9 +1814,6 @@ msgstr "IP protokolas"
 msgid "IP version"
 msgstr "IP versija"
 
-msgid "I accept the <Link>Terms of Service</Link>."
-msgstr "Aš sutinku su <Link>Paslaugų teikimo sąlygos</Link>."
-
 msgid "Icon"
 msgstr "Piktograma"
 
@@ -6079,9 +6076,6 @@ msgstr "Jūs turite teisę pirkti paslaugą be papildomo patvirtinimo."
 
 msgid "You haven't created any issues yet."
 msgstr "Dar nesukūrėte jokių problemų."
-
-msgid "You must agree with terms of service."
-msgstr "Turite sutikti su paslaugų teikimo sąlygomis."
 
 msgid "You must be staff to modify payment profiles"
 msgstr "Norėdami modifikuoti mokėjimų profilius, turite būti darbuotojai"

@@ -1814,9 +1814,6 @@ msgstr "IP-protocol"
 msgid "IP version"
 msgstr "IP-versie"
 
-msgid "I accept the <Link>Terms of Service</Link>."
-msgstr "Ik accepteer het <Link>Servicevoorwaarden</Link>."
-
 msgid "Icon"
 msgstr "Icoon"
 
@@ -6079,9 +6076,6 @@ msgstr "U heeft het recht om dienst aan te schaffen zonder aanvullende goedkeuri
 
 msgid "You haven't created any issues yet."
 msgstr "U heeft nog geen problemen aangemaakt."
-
-msgid "You must agree with terms of service."
-msgstr "U moet akkoord gaan met de servicevoorwaarden."
 
 msgid "You must be staff to modify payment profiles"
 msgstr "U moet personeel zijn om betalingsprofielen te wijzigen"

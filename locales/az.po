@@ -2306,9 +2306,6 @@ msgstr "Siz maksimal sayda kvotanı aşdınız."
 msgid "You have no quotas yet."
 msgstr "Sizin hələ heç bir kvotanız yoxdur."
 
-msgid "You must agree with terms of service."
-msgstr "Siz xidmət şərtləri ilə razılaşmalısınız."
-
 msgid "You will be redirected in a moment."
 msgstr "Siz bir ana yönləndiriləcəksiniz."
 

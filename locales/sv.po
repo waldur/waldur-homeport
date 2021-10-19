@@ -1772,9 +1772,6 @@ msgstr "IP-protokoll"
 msgid "IP version"
 msgstr "IP-version"
 
-msgid "I accept the <Link>Terms of Service</Link>."
-msgstr "Jag accepterar <Link>Användarvillkor</Link>."
-
 msgid "Icon"
 msgstr "Ikon"
 
@@ -5989,9 +5986,6 @@ msgstr "Du har rätt att köpa tjänst utan ytterligare godkännande."
 
 msgid "You haven't created any issues yet."
 msgstr "Du har inte skapat några problem än."
-
-msgid "You must agree with terms of service."
-msgstr "Du måste godkänna användarvillkoren."
 
 msgid "You must be staff to modify payment profiles"
 msgstr "Du måste vara personal för att ändra betalningsprofiler"

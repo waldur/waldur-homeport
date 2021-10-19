@@ -1814,9 +1814,6 @@ msgstr "Protokol IP"
 msgid "IP version"
 msgstr "Verze IP"
 
-msgid "I accept the <Link>Terms of Service</Link>."
-msgstr "Souhlasím se <Link>Smluvními podmínkami</Link>."
-
 msgid "Icon"
 msgstr "Ikona"
 
@@ -6079,9 +6076,6 @@ msgstr "Máte právo zakoupit službu bez dalšího schválení."
 
 msgid "You haven't created any issues yet."
 msgstr "Zatím jste nevytvořili žádné problémy."
-
-msgid "You must agree with terms of service."
-msgstr "Musíte souhlasit se smluvními podmínkami."
 
 msgid "You must be staff to modify payment profiles"
 msgstr "Chcete-li upravit platební profily, musíte být zaměstnanci"

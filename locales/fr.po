@@ -1814,9 +1814,6 @@ msgstr "Protocole IP"
 msgid "IP version"
 msgstr "Version IP"
 
-msgid "I accept the <Link>Terms of Service</Link>."
-msgstr "J'accepte les <Link>Conditions de service</Link>."
-
 msgid "Icon"
 msgstr "Icône"
 
@@ -6079,9 +6076,6 @@ msgstr "Vous avez le droit d'acheter un service sans autorisation supplémentair
 
 msgid "You haven't created any issues yet."
 msgstr "Vous n'avez pas encore créé de problèmes."
-
-msgid "You must agree with terms of service."
-msgstr "Vous devez accepter les conditions de service."
 
 msgid "You must be staff to modify payment profiles"
 msgstr "Vous devez être membre du personnel pour modifier les profils de paiement"
