@@ -275,7 +275,7 @@ export const createAvailabilitySlots = (
 ): EventInput[] => {
   const slots = [];
 
-  events.map((event) => {
+  events.forEach((event) => {
     let cursor = parseDate(event.start);
 
     while (cursor < parseDate(event.end)) {
