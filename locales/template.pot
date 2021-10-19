@@ -9148,10 +9148,6 @@ msgstr ""
 msgid "Unable to load application template details."
 msgstr ""
 
-#: src/navigation/BackendHealthStatusDialog.tsx
-msgid "Unable to load backend health status."
-msgstr ""
-
 #: src/form/CalendarField.tsx
 msgid "Unable to load booked items."
 msgstr ""
