@@ -7,7 +7,7 @@ type DateFormatter = (date: DateInput) => string;
 export const parseDate = (value: DateInput) => {
   if (value instanceof DateTime) {
     return value;
-  } else if (typeof value === 'undefined') {
+  } else if (typeof value === 'undefined' || value === null) {
     return DateTime.now();
   } else if (typeof value === 'string') {
     return DateTime.fromISO(value);
