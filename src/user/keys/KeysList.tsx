@@ -1,15 +1,16 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 
 import { useTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
 import { RootState } from '@waldur/store/reducers';
 import { Table, createFetcher, connectTable } from '@waldur/table';
+import { Column } from '@waldur/table/types';
 import { KeysListExpandableRow } from '@waldur/user/keys/KeysListExpandableRow';
 import { KeysListTablePlaceholder } from '@waldur/user/keys/KeysListTablePlaceholder';
-import { getUser } from '@waldur/workspace/selectors';
-import { UserDetails } from '@waldur/workspace/types';
+import { getUser, getWorkspace } from '@waldur/workspace/selectors';
+import { SUPPORT_WORKSPACE, UserDetails } from '@waldur/workspace/types';
 
 import { KeyCreateButton } from './KeyCreateButton';
 import { KeyRemoveButton } from './KeyRemoveButton';
@@ -22,29 +23,35 @@ interface OwnProps {
 const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   useTitle(translate('SSH keys'));
+
+  const workspace = useSelector(getWorkspace);
+  const columns: Column[] = [
+    {
+      title: translate('Title'),
+      render: ({ row }) => row.name,
+    },
+    {
+      title: translate('Fingerprint'),
+      render: ({ row }) => row.fingerprint,
+    },
+    {
+      title: translate('Type'),
+      render: ({ row }) => row.type,
+    },
+  ];
+  if (workspace !== SUPPORT_WORKSPACE) {
+    columns.push({
+      title: translate('Actions'),
+      render: ({ row }) =>
+        props.isStaffOrSelf && <KeyRemoveButton uuid={row.uuid} />,
+      className: 'text-center col-md-2',
+    });
+  }
+
   return (
     <Table
       {...props}
-      columns={[
-        {
-          title: translate('Title'),
-          render: ({ row }) => row.name,
-        },
-        {
-          title: translate('Fingerprint'),
-          render: ({ row }) => row.fingerprint,
-        },
-        {
-          title: translate('Type'),
-          render: ({ row }) => row.type,
-        },
-        {
-          title: translate('Actions'),
-          render: ({ row }) =>
-            props.isStaffOrSelf && <KeyRemoveButton uuid={row.uuid} />,
-          className: 'text-center col-md-2',
-        },
-      ]}
+      columns={columns}
       hasQuery={true}
       showPageSizeSelector={true}
       verboseName={translate('SSH keys')}
