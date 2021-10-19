@@ -3767,6 +3767,7 @@ msgstr ""
 msgid "Key removal"
 msgstr ""
 
+#: src/user/UserPopover.tsx
 #: src/user/keys/help.js
 #: src/user/support/UserDetailsView.tsx
 msgid "Keys"

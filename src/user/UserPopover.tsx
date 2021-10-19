@@ -17,6 +17,7 @@ import { translate } from '@waldur/i18n';
 import { countChecklists } from '@waldur/marketplace-checklist/api';
 import { UserChecklist } from '@waldur/marketplace-checklist/UserChecklist';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { KeysList } from '@waldur/user/keys/KeysList';
 import { isSupport, isStaff, isOwner } from '@waldur/workspace/selectors';
 
 import { UserDetailsTable } from './support/UserDetailsTable';
@@ -71,6 +72,12 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
                 </div>
               </Tab>
             ) : null}
+
+            <Tab eventKey={3} title={translate('Keys')}>
+              <div className="m-t-sm">
+                <KeysList user={value.user} />
+              </div>
+            </Tab>
           </Tabs>
         ) : (
           <>
