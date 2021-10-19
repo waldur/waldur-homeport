@@ -15,12 +15,19 @@ const BackendHealthStatusDialog = lazyComponent(
   'BackendHealthStatusDialog',
 );
 
-export const getBackendHealthStatus = () =>
-  Axios.get(`${ENV.apiEndpoint}health-check/`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+export const getBackendHealthStatus = async () => {
+  let response;
+  try {
+    response = await Axios.get(`${ENV.apiEndpoint}health-check/`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    return error.response.data;
+  }
+  return response.data;
+};
 
 const isWorking = (data): boolean => {
   for (const item of Object.values(data)) {
@@ -38,13 +45,14 @@ export const PureBackendHealthStatusIndicator: FunctionComponent<any> = (
   props,
 ) => {
   const { value } = useAsync(getBackendHealthStatus, []);
-  return value &&
-    value.headers &&
-    value.headers['content-type'] === 'application/json' &&
-    isWorking(value.data) ? (
+  return value ? (
     <span className="m-r-sm">
       <a onClick={() => props.openDialog()}>
-        <i className="fa fa-check-circle text-success" />
+        {isWorking(value) ? (
+          <i className="fa fa-check-circle text-success" />
+        ) : (
+          <i className="fa fa-times-circle text-danger" />
+        )}
       </a>
     </span>
   ) : null;
