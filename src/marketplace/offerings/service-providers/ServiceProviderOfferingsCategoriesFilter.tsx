@@ -26,6 +26,7 @@ export const ServiceProviderOfferingsCategoriesFilter: FunctionComponent<Service
         params: {
           customer_uuid: serviceProviderUuid,
           has_offerings: true,
+          has_shared: true,
         },
       }),
     [serviceProviderUuid],
