@@ -10063,8 +10063,11 @@ msgstr ""
 
 #: src/rancher/cluster/users/UserDetailsDialog.tsx
 #: src/user/UserPopover.tsx
-#: src/user/support/UserDetailsDialog.tsx
 msgid "User details"
+msgstr ""
+
+#: src/user/support/UserDetailsDialog.tsx
+msgid "User details of {fullName}"
 msgstr ""
 
 #: src/user/dashboard/utils.ts
