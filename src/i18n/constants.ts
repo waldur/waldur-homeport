@@ -42,6 +42,9 @@ export const DOMAIN_MESSAGES = {
     'Add owner': gettext('Add PI'),
     Owner: gettext('PI'),
     owner: gettext('PI'),
+    manager: gettext('co-PI'),
+    admin: gettext('member'),
+    member: gettext('guest'),
     Purchase: gettext('Request'),
     'You have the right to purchase service without additional approval.': gettext(
       'You have the right to request service without additional approval.',
@@ -116,6 +119,9 @@ export const DOMAIN_MESSAGES = {
     'Add owner': gettext('Add resource allocator'),
     Owner: gettext('Resource allocator'),
     owner: gettext('resource allocator'),
+    manager: gettext('PI'),
+    admin: gettext('co-PI'),
+    member: gettext('member'),
     Purchase: gettext('Request'),
     'You have the right to purchase service without additional approval.': gettext(
       'You have the right to request service without additional approval.',
