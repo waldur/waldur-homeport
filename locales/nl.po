@@ -920,9 +920,6 @@ msgstr "Maak VM-momentopnameschema voor OpenStack-instantie"
 msgid "Create an account"
 msgstr "Account aanmaken"
 
-msgid "Create an availability"
-msgstr "Een beschikbaarheid aanmaken"
-
 msgid "Create application"
 msgstr "Toepassing aanmaken"
 

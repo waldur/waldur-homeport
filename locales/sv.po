@@ -896,9 +896,6 @@ msgstr "Skapa schema för VM-snapshot för OpenStack-instans"
 msgid "Create an account"
 msgstr "Skapa ett konto"
 
-msgid "Create an availability"
-msgstr "Skapa en tillgänglighet"
-
 msgid "Create application"
 msgstr "Skapa program"
 

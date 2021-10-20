@@ -920,9 +920,6 @@ msgstr "Crear programación de instantáneas de VM para la instancia de OpenStac
 msgid "Create an account"
 msgstr "Crear una cuenta"
 
-msgid "Create an availability"
-msgstr "Crea una disponibilidad"
-
 msgid "Create application"
 msgstr "Crear aplicación"
 

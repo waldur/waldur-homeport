@@ -920,9 +920,6 @@ msgstr "Erstellen Sie einen VM-Snapshot-Zeitplan für die OpenStack-Instanz"
 msgid "Create an account"
 msgstr "Erstellen eines Kontos"
 
-msgid "Create an availability"
-msgstr "Erstellen Sie eine Verfügbarkeit"
-
 msgid "Create application"
 msgstr "Erstellen einer Anwendung"
 

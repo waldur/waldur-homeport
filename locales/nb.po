@@ -920,9 +920,6 @@ msgstr "Opprette tidsplan for øyeblikksbilde av VM for OpenStack-forekomst"
 msgid "Create an account"
 msgstr "Opprett en konto"
 
-msgid "Create an availability"
-msgstr "Opprette en tilgjengelighet"
-
 msgid "Create application"
 msgstr "Opprett program"
 

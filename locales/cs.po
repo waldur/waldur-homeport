@@ -920,9 +920,6 @@ msgstr "Vytvořit plán snímků virtuálního počítače pro instanci OpenStac
 msgid "Create an account"
 msgstr "Vytvořit účet"
 
-msgid "Create an availability"
-msgstr "Vytvořit dostupnost"
-
 msgid "Create application"
 msgstr "Vytvořit aplikaci"
 

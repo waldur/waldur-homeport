@@ -920,9 +920,6 @@ msgstr "Opret VM-snapshotplan for OpenStack-instans"
 msgid "Create an account"
 msgstr "Opret en konto"
 
-msgid "Create an availability"
-msgstr "Opret en tilgængelighed"
-
 msgid "Create application"
 msgstr "Opret ansøgning"
 

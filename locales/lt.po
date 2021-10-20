@@ -920,9 +920,6 @@ msgstr "Sukurkite „OpenStack“ egzemplioriaus VM momentinių nuotraukų tvark
 msgid "Create an account"
 msgstr "Sukurti paskyrą"
 
-msgid "Create an availability"
-msgstr "Sukurkite prieinamumą"
-
 msgid "Create application"
 msgstr "Sukurti programą"
 

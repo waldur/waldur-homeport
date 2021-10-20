@@ -920,9 +920,6 @@ msgstr "Creare una pianificazione snapshot della macchina virtuale per l'istanza
 msgid "Create an account"
 msgstr "Creare un account"
 
-msgid "Create an availability"
-msgstr "Creare una disponibilità"
-
 msgid "Create application"
 msgstr "Creare un'applicazione"
 
