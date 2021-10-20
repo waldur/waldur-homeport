@@ -400,6 +400,10 @@ msgstr ""
 msgid "Add resource"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "Add resource allocator"
+msgstr ""
+
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 msgid "Add route"
 msgstr ""
@@ -4875,6 +4879,10 @@ msgstr ""
 msgid "Only pending invitation can be canceled."
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "Only resource allocator or staff can invite users."
+msgstr ""
+
 #: src/openstack/utils.ts
 msgid "Only staff and organization users are allowed to open console."
 msgstr ""
@@ -5263,6 +5271,10 @@ msgstr ""
 
 #: src/i18n/constants.ts
 msgid "PI"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "PI cannot edit users with same role"
 msgstr ""
 
 #: src/i18n/constants.ts
@@ -6759,6 +6771,14 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Resource UUID"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Resource allocator"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Resource allocator role expires on"
 msgstr ""
 
 #: src/marketplace/resources/change-plan/utils.tsx
@@ -10128,6 +10148,10 @@ msgid "User {user_link} has granted Co-PI role in project {project_link} to {aff
 msgstr ""
 
 #: src/i18n/constants.ts
+msgid "User {user_link} has granted PI role in project {project_link} to {affected_user_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
 msgid "User {user_link} has granted PI role in {customer_link} to {affected_user_link}."
 msgstr ""
 
@@ -10151,12 +10175,24 @@ msgstr ""
 msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
+msgstr ""
+
 #: src/project/team/events.ts
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr ""
 
 #: src/i18n/constants.ts
 msgid "User {user_link} has revoked Co-PI  {affected_user_link} from project {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {user_link} has revoked Co-PI {affected_user_link} from project {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {user_link} has revoked PI {affected_user_link} from project {project_link}."
 msgstr ""
 
 #: src/i18n/constants.ts
@@ -10181,6 +10217,10 @@ msgstr ""
 
 #: src/project/team/events.ts
 msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {user_link} has revoked resource allocator {affected_user_link} from {customer_link}."
 msgstr ""
 
 #: src/project/team/events.ts
@@ -10578,6 +10618,10 @@ msgstr ""
 msgid "You cannot manage other organization owner."
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "You cannot manage other resource allocator"
+msgstr ""
+
 #: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
 msgid "You do not belong to any organization yet"
 msgstr ""
@@ -10965,6 +11009,10 @@ msgstr ""
 
 #: src/marketplace/resources/actions/EditDialog.tsx
 msgid "resource"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "resource allocator"
 msgstr ""
 
 #: src/marketplace-flows/FlowsList.tsx
