@@ -11289,6 +11289,10 @@ msgstr ""
 msgid "{resource_name} has been deleted."
 msgstr ""
 
+#: src/user/support/UserList.tsx
+msgid "{role} ({name})"
+msgstr ""
+
 #: src/invitations/RoleField.tsx
 msgid "{role} in {project}"
 msgstr ""

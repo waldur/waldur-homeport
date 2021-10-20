@@ -52,7 +52,11 @@ const OrganizationRolesField = ({ row }) => {
     return row.customer_permissions.map((permission, index) => {
       return (
         <span key={index}>
-          <Tooltip key={index} label={permission.role} id="customer-role">
+          <Tooltip
+            key={index}
+            label={translate(permission.role)}
+            id="customer-role"
+          >
             {permission.customer_name} <i className="fa fa-question-circle" />
           </Tooltip>
           <br />
@@ -71,9 +75,10 @@ const ProjectRolesField = ({ row }) => {
         <span key={index}>
           <Tooltip
             key={index}
-            label={`${translate(permission.role)} (${
-              permission.customer_name
-            })`}
+            label={translate('{role} ({name})', {
+              role: permission.role,
+              name: permission.customer_name,
+            })}
             id="project-role"
           >
             {permission.project_name} <i className="fa fa-question-circle" />
