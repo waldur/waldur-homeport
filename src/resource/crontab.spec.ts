@@ -18,16 +18,16 @@ describe('formatCrontab', () => {
   });
 
   it('formats schedule for every week', () => {
-    expect(formatCrontab('0 0 * * 0')).toBe('Every week on Sunday at 00:00');
+    expect(formatCrontab('0 0 * * 0')).toBe('Every week on Monday at 00:00');
   });
 
   it('formats schedule for every month', () => {
-    expect(formatCrontab('0 0 1 * *')).toBe('Every month on the 1st at 00:00');
+    expect(formatCrontab('0 0 1 * *')).toBe('Every month on the 1 at 00:00');
   });
 
   it('formats schedule for every year', () => {
     expect(formatCrontab('0 0 1 1 *')).toBe(
-      'Every month on the 1st of January at 00:00',
+      'Every month on the 1 of January at 00:00',
     );
   });
 });

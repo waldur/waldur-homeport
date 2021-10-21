@@ -90,10 +90,10 @@ export const getSidebarItems = createSelector<
           state: 'organization.dashboard',
           params: { uuid: customer.uuid },
         },
-        ...getDefaultItems(project),
+        ...getDefaultItems(project).filter(Boolean),
       ];
     } else {
-      return getDefaultItems(project);
+      return getDefaultItems(project).filter(Boolean);
     }
   },
 );

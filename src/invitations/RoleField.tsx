@@ -11,7 +11,7 @@ export const RoleField: FunctionComponent<{ invitation }> = ({
     return <>{translate('owner')}</>;
   } else if (invitation.project_role) {
     if (!invitation.project) {
-      return invitation.project_role;
+      return <>{translate(invitation.project_role)}</>;
     }
     return (
       <Link

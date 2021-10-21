@@ -1,4 +1,5 @@
 import { advanceTo, clear } from 'jest-date-mock';
+import { DateTime } from 'luxon';
 
 import * as api from './api';
 import { Quota } from './types';
@@ -23,7 +24,9 @@ describe('Dashboard chart API', () => {
     const result = api.padMissingValues(pairs, 30);
     expect(result.length).toBe(30);
     expect(result[0].value).toBe(0);
-    expect(result[result.length - 3].date).toEqual(new Date(2018, 8, 1));
+    expect(result[result.length - 3].date).toEqual(
+      DateTime.fromISO('2018-09-01'),
+    );
     clear();
   });
 

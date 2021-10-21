@@ -1,4 +1,4 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 import { FunctionComponent, useMemo } from 'react';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
@@ -139,8 +139,8 @@ const getContext = (
   if (orderItem.order_approved_at && orderItem.order_approved_by) {
     approved = translate('{user} has approved it on {date} at {time}.', {
       user: orderItem.order_approved_by,
-      date: moment(orderItem.order_approved_at).format('YYYY-MM-DD'),
-      time: moment(orderItem.order_approved_at).format('HH:mm'),
+      date: DateTime.fromISO(orderItem.order_approved_at).toISODate(),
+      time: DateTime.fromISO(orderItem.order_approved_at).toFormat('HH:mm'),
     });
   }
   return { user, approved, orderItem, components: offering.components };

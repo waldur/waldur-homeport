@@ -20,6 +20,9 @@ const renderForm = async () => {
   const mockStore = configureStore();
   const store = mockStore({
     workspace: {},
+    config: {
+      FEATURES: [],
+    },
   });
   const wrapper = mount(
     <Provider store={store}>

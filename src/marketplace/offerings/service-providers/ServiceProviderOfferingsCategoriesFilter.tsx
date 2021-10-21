@@ -20,11 +20,13 @@ export const ServiceProviderOfferingsCategoriesFilter: FunctionComponent<Service
   onQueryFilterChange,
   onCategoryChange,
 }) => {
-  const { loading, error, value } = useAsync<Category[]>(
+  const { loading, error, value: categories } = useAsync<Category[]>(
     () =>
       getCategories({
         params: {
-          customer_uuid: serviceProviderUuid, // fixme WAL-4280
+          customer_uuid: serviceProviderUuid,
+          has_offerings: true,
+          has_shared: true,
         },
       }),
     [serviceProviderUuid],
@@ -33,12 +35,15 @@ export const ServiceProviderOfferingsCategoriesFilter: FunctionComponent<Service
     <LoadingSpinner />
   ) : error ? (
     <h3>{translate('Unable to load categories.')}</h3>
-  ) : (
+  ) : categories?.length ? (
     <div className="offeringsCategoriesFilter">
       <ServiceProviderOfferingsQueryFilter
         onQueryChange={onQueryFilterChange}
       />
-      <CategoriesList categories={value} onCategoryChange={onCategoryChange} />
+      <CategoriesList
+        categories={categories}
+        onCategoryChange={onCategoryChange}
+      />
     </div>
-  );
+  ) : null;
 };

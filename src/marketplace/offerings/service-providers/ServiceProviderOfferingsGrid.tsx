@@ -7,6 +7,7 @@ import {
   OFFERING_CATEGORY_SECTION_FORM_ID,
   SERVICE_PROVIDER_OFFERING_GRID,
 } from '@waldur/marketplace/offerings/service-providers/constants';
+import { GRID_PAGE_SIZE_CONFIG } from '@waldur/marketplace/offerings/service-providers/shared/grid/constants';
 import Grid from '@waldur/marketplace/offerings/service-providers/shared/grid/Grid';
 import { ServiceProviderOfferingDetailsCard } from '@waldur/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard';
 import { RootState } from '@waldur/store/reducers';
@@ -24,7 +25,7 @@ const GridComponent: FunctionComponent<any> = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
-      updatePageSize(SERVICE_PROVIDER_OFFERING_GRID, { label: '', value: 8 }),
+      updatePageSize(SERVICE_PROVIDER_OFFERING_GRID, GRID_PAGE_SIZE_CONFIG),
     );
   }, [dispatch]);
   return (

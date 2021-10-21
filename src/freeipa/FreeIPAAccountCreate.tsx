@@ -13,14 +13,12 @@ import {
 import { getUser } from '@waldur/workspace/selectors';
 
 import { createProfile } from './api';
-import { TosGroup } from './TosGroup';
 import { UsernameGroup } from './UsernameGroup';
 
 const FORM_ID = 'FreeIPAAccountCreate';
 
 interface FreeIPAAccountCreateFormData {
   username: string;
-  agree_with_policy: boolean;
 }
 
 interface FreeIPAAccountCreateOwnProps {
@@ -47,7 +45,7 @@ export const FreeIPAAccountCreate = reduxForm<
     const callback = useCallback(
       async (formData) => {
         try {
-          await createProfile(formData.username, formData.agree_with_policy);
+          await createProfile(formData.username);
           dispatch(showSuccess(translate('A profile has been created.')));
           onProfileAdded();
         } catch (response) {
@@ -68,7 +66,6 @@ export const FreeIPAAccountCreate = reduxForm<
     return (
       <form className="form-horizontal" onSubmit={handleSubmit(callback)}>
         <UsernameGroup />
-        <TosGroup />
         <FormGroup>
           <Col smOffset={3} sm={5}>
             <SubmitButton

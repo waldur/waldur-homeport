@@ -7,7 +7,6 @@ import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
 import { getServiceProviderByCustomer } from '@waldur/marketplace/common/api';
 import { ServiceProvider } from '@waldur/marketplace/offerings/service-providers/ServiceProvider';
-import { AnonymousFooter } from '@waldur/navigation/AnonymousFooter';
 import { AnonymousHeader } from '@waldur/navigation/AnonymousHeader';
 import { useTitle } from '@waldur/navigation/title';
 
@@ -29,7 +28,6 @@ export const ServiceProviderContainer: FunctionComponent = () => {
     <>
       <AnonymousHeader />
       <ServiceProvider serviceProvider={serviceProvider} />
-      <AnonymousFooter />
     </>
   ) : (
     <InvalidRoutePage />

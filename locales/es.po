@@ -920,9 +920,6 @@ msgstr "Crear programación de instantáneas de VM para la instancia de OpenStac
 msgid "Create an account"
 msgstr "Crear una cuenta"
 
-msgid "Create an availability"
-msgstr "Crea una disponibilidad"
-
 msgid "Create application"
 msgstr "Crear aplicación"
 
@@ -1813,9 +1810,6 @@ msgstr "Protocolo IP"
 
 msgid "IP version"
 msgstr "Versión de IP"
-
-msgid "I accept the <Link>Terms of Service</Link>."
-msgstr "Acepto los <Link>Términos de Servicio</Link>."
 
 msgid "Icon"
 msgstr "Icono"
@@ -6079,9 +6073,6 @@ msgstr "Tiene derecho a adquirir el servicio sin aprobación adicional."
 
 msgid "You haven't created any issues yet."
 msgstr "Todavía no has creado ningún problema."
-
-msgid "You must agree with terms of service."
-msgstr "Debe aceptar los términos del servicio."
 
 msgid "You must be staff to modify payment profiles"
 msgstr "Debe ser personal para modificar los perfiles de pago"

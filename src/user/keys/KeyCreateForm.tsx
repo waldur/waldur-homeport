@@ -1,7 +1,7 @@
 import { useRouter } from '@uirouter/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { InjectedFormProps, reduxForm, SubmissionError } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { CancelButton } from '@waldur/form/CancelButton';
 import { FieldError } from '@waldur/form/FieldError';
@@ -11,7 +11,7 @@ import { SubmitButton } from '@waldur/form/SubmitButton';
 import { TextField } from '@waldur/form/TextField';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
-import { showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { createKey } from './api';
 
@@ -49,14 +49,8 @@ const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = (props) => {
         await createKey(data);
         dispatch(showSuccess(translate('The key has been created.')));
         router.stateService.go('profile.keys');
-      } catch (response) {
-        throw new SubmissionError(
-          response.data
-            ? response.data
-            : {
-                _error: translate('Unable to create key.'),
-              },
-        );
+      } catch (e) {
+        dispatch(showErrorResponse(e, translate('Unable to create key.')));
       }
     },
     [dispatch, change, router],

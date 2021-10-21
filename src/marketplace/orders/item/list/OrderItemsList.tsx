@@ -17,8 +17,7 @@ import {
 import { Customer } from '@waldur/workspace/types';
 
 import { TABLE_PUBLIC_ORDERS } from './constants';
-import { OrderItemApproveButton } from './OrderItemApproveButton';
-import { OrderItemRejectButton } from './OrderItemRejectButton';
+import { OrderItemActionsCell } from './OrderItemActionsCell';
 import { OrderItemslistTablePlaceholder } from './OrderItemsListPlaceholder';
 import { OrderItemStateCell } from './OrderItemStateCell';
 import { OrderItemTypeCell } from './OrderItemTypeCell';
@@ -58,17 +57,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Actions'),
-      render: ({ row }) =>
-        row.state === 'done' ? null : (
-          <>
-            {row.state === 'executing' && (
-              <OrderItemApproveButton uuid={row.uuid} />
-            )}
-            {row.state !== 'terminated' && row.state !== 'terminating' && (
-              <OrderItemRejectButton uuid={row.uuid} />
-            )}
-          </>
-        ),
+      render: OrderItemActionsCell,
     },
   ];
 

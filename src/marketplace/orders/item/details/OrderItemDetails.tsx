@@ -55,7 +55,7 @@ let OrderItemDetails = (
                   {props.orderItem.error_traceback}
                 </OrderItemDetailsField>
               )}
-              {props.orderItem.resource_uuid && (
+              {props.orderItem.marketplace_resource_uuid && (
                 <OrderItemDetailsField label={translate('Resource')}>
                   <OrderItemDetailsResourceLink
                     item={props.orderItem as ResourceReference}

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
 import {
   FieldError,
   FormContainer,
@@ -179,7 +178,7 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
       {props.userTokenIsVisible && <TokenLifetimeWarning />}
       <TermsOfService
         initial={props.initial}
-        agreementDate={formatDateTime(props.user.agreement_date)}
+        agreementDate={props.user.agreement_date}
       />
     </FormContainer>
     <div className="form-group">

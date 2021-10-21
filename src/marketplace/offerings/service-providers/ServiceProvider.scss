@@ -9,3 +9,10 @@
     }
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .serviceProvider__content {
+    flex-direction: column;
+    row-gap: 30px;
+  }
+}

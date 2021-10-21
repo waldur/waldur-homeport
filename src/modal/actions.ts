@@ -11,7 +11,10 @@ export type DialogSizeType = 'lg' | 'xl';
 
 export const openModalDialog = <P = any>(
   modalComponent: React.ComponentType<P>,
-  modalProps?: P & { size?: DialogSizeType },
+  modalProps?: P & {
+    size?: DialogSizeType;
+    backdrop?: 'static' | true | false;
+  },
 ) => ({
   type: 'SHOW_MODAL',
   modalComponent,

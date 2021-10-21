@@ -920,9 +920,6 @@ msgstr "Opprette tidsplan for øyeblikksbilde av VM for OpenStack-forekomst"
 msgid "Create an account"
 msgstr "Opprett en konto"
 
-msgid "Create an availability"
-msgstr "Opprette en tilgjengelighet"
-
 msgid "Create application"
 msgstr "Opprett program"
 
@@ -1813,9 +1810,6 @@ msgstr "IP-protokoll"
 
 msgid "IP version"
 msgstr "IP-versjon"
-
-msgid "I accept the <Link>Terms of Service</Link>."
-msgstr "Jeg godtar <Link>Vilkårene for bruk</Link>."
 
 msgid "Icon"
 msgstr "Ikon"
@@ -6079,9 +6073,6 @@ msgstr "Du har rett til å kjøpe service uten ytterligere godkjenning."
 
 msgid "You haven't created any issues yet."
 msgstr "Du har ikke opprettet noen problemer ennå."
-
-msgid "You must agree with terms of service."
-msgstr "Du må godta vilkårene for bruk."
 
 msgid "You must be staff to modify payment profiles"
 msgstr "Du må være personale for å endre betalingsprofiler"

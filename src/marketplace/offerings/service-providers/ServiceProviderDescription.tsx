@@ -1,19 +1,9 @@
 import { FunctionComponent } from 'react';
 
 import { AuthService } from '@waldur/auth/AuthService';
-import { Tooltip } from '@waldur/core/Tooltip';
 import { ServiceProviderDescriptionUpdateButton } from '@waldur/marketplace/offerings/service-providers/ServiceProviderDescriptionUpdateButton';
 import { ServiceProvider } from '@waldur/marketplace/types';
 import './ServiceProviderDescription.scss';
-
-const customerDescription = (text: string) =>
-  text.length > 200 ? (
-    <Tooltip label={text} id="customerDescription">
-      <p>{text}</p>
-    </Tooltip>
-  ) : (
-    text
-  );
 
 interface ServiceProviderDescriptionProps {
   serviceProvider: ServiceProvider;
@@ -23,8 +13,7 @@ export const ServiceProviderDescription: FunctionComponent<ServiceProviderDescri
   serviceProvider,
 }) => (
   <div className="serviceProviderDescription">
-    {serviceProvider.description &&
-      customerDescription(serviceProvider.description)}
+    {serviceProvider.description && <p>{serviceProvider.description}</p>}
     {AuthService.isAuthenticated() && (
       <ServiceProviderDescriptionUpdateButton
         serviceProvider={serviceProvider}

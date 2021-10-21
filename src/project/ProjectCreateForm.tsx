@@ -1,4 +1,4 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
@@ -12,8 +12,13 @@ import {
   SubmitButton,
 } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
-import { datePickerOverlayContainerInDialogs } from '@waldur/form/utils';
+import {
+  datePickerOverlayContainerInDialogs,
+  reactSelectMenuPortaling,
+} from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
+import { isVisible } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
 import { USER_WORKSPACE } from '@waldur/workspace/types';
 
@@ -29,8 +34,10 @@ export interface ProjectCreateFormData {
 
 const loadData = async () => {
   const projectTypes = await api.loadProjectTypes();
+  const oecdCodes = await api.loadOecdCodes();
   return {
     projectTypes,
+    oecdCodes,
   };
 };
 
@@ -43,6 +50,9 @@ export const ProjectCreateForm = reduxForm<
   const { loading, error, value } = useAsync(loadData);
   const customer = useSelector(getCustomer);
   const workspace = useSelector(getWorkspace);
+  const showCode = useSelector((state: RootState) =>
+    isVisible(state, 'project.oecd_fos_2007_code'),
+  );
 
   if (loading) {
     return <LoadingSpinner />;
@@ -71,6 +81,20 @@ export const ProjectCreateForm = reduxForm<
           label={translate('Project description')}
           name="description"
         />
+        {showCode ? (
+          <SelectField
+            label={translate('OECD FoS code')}
+            help_text={translate(
+              'Please select OECD code corresponding to field of science and technology',
+            )}
+            name="oecd_fos_2007_code"
+            options={value.oecdCodes}
+            getOptionValue={(option) => option.value}
+            getOptionLabel={(option) => `${option.value}. ${option.label}`}
+            isClearable={true}
+            {...reactSelectMenuPortaling()}
+          />
+        ) : null}
         {value.projectTypes.length >= 1 && (
           <SelectField
             label={translate('Project type')}
@@ -88,7 +112,7 @@ export const ProjectCreateForm = reduxForm<
             'The date is inclusive. Once reached, all project resource will be scheduled for termination.',
           )}
           {...datePickerOverlayContainerInDialogs()}
-          minDate={moment().add(1, 'days').toISOString()}
+          minDate={DateTime.now().plus({ days: 1 }).toISO()}
         />
       </FormContainer>
       <div className="form-group">

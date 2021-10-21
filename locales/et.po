@@ -1538,9 +1538,6 @@ msgstr "IP protokoll"
 msgid "IP version"
 msgstr "IP versioon"
 
-msgid "I accept the <Link>Terms of Service</Link>."
-msgstr "Nõustun <Link> Teenusetingimustega <Link>."
-
 msgid "Icon"
 msgstr "Ikoon"
 
@@ -4378,9 +4375,6 @@ msgstr "Teil on õigus osta teenust ilma täiendava nõusolekuta."
 
 msgid "You haven't created any issues yet."
 msgstr "Te pole veel juhtumitest teatanud."
-
-msgid "You must agree with terms of service."
-msgstr "Te peate nõustuma teenusetingimustega."
 
 msgid "You need approval to finish purchasing of services."
 msgstr "Teenuste ostmise lõpetamiseks on vaja luba."

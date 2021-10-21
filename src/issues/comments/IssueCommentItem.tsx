@@ -141,7 +141,7 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
         />
         <div className="small text-muted m-t-sm">
           <div>{userList}</div>
-          <div>{formatMediumDateTime(new Date(comment.created))}</div>
+          <div>{formatMediumDateTime(comment.created)}</div>
         </div>
         <IssueCommentsFormContainer
           formId={comment.uuid}

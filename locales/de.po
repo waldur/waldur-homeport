@@ -920,9 +920,6 @@ msgstr "Erstellen Sie einen VM-Snapshot-Zeitplan für die OpenStack-Instanz"
 msgid "Create an account"
 msgstr "Erstellen eines Kontos"
 
-msgid "Create an availability"
-msgstr "Erstellen Sie eine Verfügbarkeit"
-
 msgid "Create application"
 msgstr "Erstellen einer Anwendung"
 
@@ -1813,9 +1810,6 @@ msgstr "IP-Protokoll"
 
 msgid "IP version"
 msgstr "IP-Version"
-
-msgid "I accept the <Link>Terms of Service</Link>."
-msgstr "Ich akzeptiere das <Link>Nutzungsbedingungen</Link> ."
 
 msgid "Icon"
 msgstr "Symbol"
@@ -6079,9 +6073,6 @@ msgstr "Sie haben das Recht, den Service ohne zusätzliche Genehmigung zu erwerb
 
 msgid "You haven't created any issues yet."
 msgstr "Sie haben noch keine Probleme erstellt."
-
-msgid "You must agree with terms of service."
-msgstr "Sie müssen den Nutzungsbedingungen zustimmen."
 
 msgid "You must be staff to modify payment profiles"
 msgstr "Sie müssen Mitarbeiter sein, um Zahlungsprofile zu ändern"

@@ -935,9 +935,6 @@ msgstr "Поддержка"
 msgid "You have no quotas yet."
 msgstr "У вас пока нет квоты."
 
-msgid "You must agree with terms of service."
-msgstr "Вы должны принять правила использования услуг."
-
 msgid "Your invitation was accepted."
 msgstr "Ваше приглашение было принято."
 

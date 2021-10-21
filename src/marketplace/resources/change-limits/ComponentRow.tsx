@@ -14,6 +14,7 @@ import { PriceField } from '@waldur/marketplace/resources/change-limits/PriceFie
 import { ComponentRowType } from './connector';
 
 interface ComponentRowProps {
+  shouldConcealPrices: boolean;
   component: ComponentRowType;
   limits: Limits;
 }
@@ -48,6 +49,7 @@ const CellWrapper: FunctionComponent<any> = (props) => (
 export const ComponentRow: React.FC<ComponentRowProps> = ({
   component,
   limits,
+  shouldConcealPrices,
 }) => (
   <tr>
     <td>
@@ -72,13 +74,15 @@ export const ComponentRow: React.FC<ComponentRowProps> = ({
     <td>
       <ChangedLimitField changedLimit={component.changedLimit} />
     </td>
-    {component.prices.map((price, innerIndex) => (
-      <td key={innerIndex}>
-        <PriceField
-          price={price}
-          changedPrice={component.changedPrices[innerIndex]}
-        />
-      </td>
-    ))}
+    {shouldConcealPrices
+      ? null
+      : component.prices.map((price, innerIndex) => (
+          <td key={innerIndex}>
+            <PriceField
+              price={price}
+              changedPrice={component.changedPrices[innerIndex]}
+            />
+          </td>
+        ))}
   </tr>
 );

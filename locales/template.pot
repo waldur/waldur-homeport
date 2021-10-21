@@ -20,7 +20,6 @@ msgstr ""
 msgid "10 - Very positive"
 msgstr ""
 
-#: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/user/support/TermsOfService.tsx
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr ""
@@ -401,6 +400,10 @@ msgstr ""
 msgid "Add resource"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "Add resource allocator"
+msgstr ""
+
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 msgid "Add route"
 msgstr ""
@@ -526,7 +529,6 @@ msgid "All"
 msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 msgid "All day"
 msgstr ""
 
@@ -1154,7 +1156,6 @@ msgid "Caller"
 msgstr ""
 
 #: src/booking/CancelAction.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/form/ListDialog.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
@@ -1686,10 +1687,6 @@ msgstr ""
 msgid "Create an account"
 msgstr ""
 
-#: src/booking/components/modal/CalendarEventModal.tsx
-msgid "Create an availability"
-msgstr ""
-
 #: src/rancher/template/TemplateQuestions.tsx
 msgid "Create application"
 msgstr ""
@@ -2047,7 +2044,6 @@ msgid "Default value"
 msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
@@ -2417,7 +2413,6 @@ msgid "Edit attributes"
 msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Edit booking event"
 msgstr ""
 
@@ -2432,6 +2427,10 @@ msgstr ""
 #: src/marketplace/resources/actions/EditResourceEndDateAction.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateByProviderAction.tsx
 msgid "Edit end date"
+msgstr ""
+
+#: src/marketplace/resources/actions/EditResourceEndDateByStaffAction.tsx
+msgid "Edit end date (staff)"
 msgstr ""
 
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
@@ -2556,7 +2555,6 @@ msgid "Encountered an empty component"
 msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/booking/components/utils.tsx
 msgid "End"
 msgstr ""
@@ -3255,10 +3253,6 @@ msgstr ""
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr ""
 
-#: src/freeipa/TosGroup.tsx
-msgid "I accept the <Link>Terms of Service</Link>."
-msgstr ""
-
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "ID"
 msgstr ""
@@ -3782,7 +3776,9 @@ msgstr ""
 msgid "Key removal"
 msgstr ""
 
+#: src/user/UserPopover.tsx
 #: src/user/keys/help.js
+#: src/user/support/UserDetailsView.tsx
 msgid "Keys"
 msgstr ""
 
@@ -4723,6 +4719,10 @@ msgstr ""
 msgid "Number of worker nodes"
 msgstr ""
 
+#: src/project/ProjectCreateForm.tsx
+msgid "OECD FoS code"
+msgstr ""
+
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "OK"
 msgstr ""
@@ -4882,6 +4882,10 @@ msgstr ""
 
 #: src/invitations/actions/InvitationCancelButton.tsx
 msgid "Only pending invitation can be canceled."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Only resource allocator or staff can invite users."
 msgstr ""
 
 #: src/openstack/utils.ts
@@ -5272,6 +5276,10 @@ msgstr ""
 
 #: src/i18n/constants.ts
 msgid "PI"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "PI cannot edit users with same role"
 msgstr ""
 
 #: src/i18n/constants.ts
@@ -5688,6 +5696,10 @@ msgstr ""
 msgid "Please search for your organization"
 msgstr ""
 
+#: src/project/ProjectCreateForm.tsx
+msgid "Please select OECD code corresponding to field of science and technology"
+msgstr ""
+
 #: src/freeipa/UsernameGroup.tsx
 msgid "Please select a username that you will use for login into the Linux systems."
 msgstr ""
@@ -5884,7 +5896,6 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
-#: src/navigation/AnonymousFooter.tsx
 #: src/navigation/AppFooter.tsx
 msgid "Privacy policy"
 msgstr ""
@@ -6149,6 +6160,7 @@ msgid "Public SSH keys will be injected into services that allow key-based acces
 msgstr ""
 
 #: src/user/keys/KeyCreateForm.tsx
+#: src/user/keys/KeysListExpandableRow.tsx
 msgid "Public key"
 msgstr ""
 
@@ -6471,6 +6483,7 @@ msgstr ""
 
 #: src/user/UserOfferingList.tsx
 #: src/user/constants.ts
+#: src/user/support/UserDetailsView.tsx
 msgid "Remote accounts"
 msgstr ""
 
@@ -6763,6 +6776,14 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Resource UUID"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Resource allocator"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Resource allocator role expires on"
 msgstr ""
 
 #: src/marketplace/resources/change-plan/utils.tsx
@@ -7158,7 +7179,6 @@ msgid "Sankey diagram"
 msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/divisions/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
@@ -7925,7 +7945,6 @@ msgstr ""
 
 #: src/azure/vm/actions/StartAction.tsx
 #: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/booking/components/utils.tsx
 #: src/openstack/openstack-instance/actions/StartAction.tsx
 #: src/vmware/actions/StartAction.tsx
@@ -8395,7 +8414,6 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
-#: src/navigation/AnonymousFooter.tsx
 #: src/navigation/AppFooter.tsx
 msgid "Terms of Service"
 msgstr ""
@@ -8663,7 +8681,6 @@ msgstr ""
 msgid "Timestamp"
 msgstr ""
 
-#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/create/SummaryGroup.tsx
 #: src/issues/list/IssuesList.tsx
@@ -8794,7 +8811,6 @@ msgstr ""
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -9161,10 +9177,6 @@ msgstr ""
 
 #: src/rancher/template/TemplateDetail.tsx
 msgid "Unable to load application template details."
-msgstr ""
-
-#: src/navigation/BackendHealthStatusDialog.tsx
-msgid "Unable to load backend health status."
 msgstr ""
 
 #: src/form/CalendarField.tsx
@@ -10070,8 +10082,11 @@ msgstr ""
 
 #: src/rancher/cluster/users/UserDetailsDialog.tsx
 #: src/user/UserPopover.tsx
-#: src/user/support/UserDetailsDialog.tsx
 msgid "User details"
+msgstr ""
+
+#: src/user/support/UserDetailsDialog.tsx
+msgid "User details of {fullName}"
 msgstr ""
 
 #: src/user/dashboard/utils.ts
@@ -10155,6 +10170,10 @@ msgid "User {user_link} has granted Co-PI role in project {project_link} to {aff
 msgstr ""
 
 #: src/i18n/constants.ts
+msgid "User {user_link} has granted PI role in project {project_link} to {affected_user_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
 msgid "User {user_link} has granted PI role in {customer_link} to {affected_user_link}."
 msgstr ""
 
@@ -10178,12 +10197,24 @@ msgstr ""
 msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
+msgstr ""
+
 #: src/project/team/events.ts
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr ""
 
 #: src/i18n/constants.ts
 msgid "User {user_link} has revoked Co-PI  {affected_user_link} from project {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {user_link} has revoked Co-PI {affected_user_link} from project {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {user_link} has revoked PI {affected_user_link} from project {project_link}."
 msgstr ""
 
 #: src/i18n/constants.ts
@@ -10208,6 +10239,10 @@ msgstr ""
 
 #: src/project/team/events.ts
 msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {user_link} has revoked resource allocator {affected_user_link} from {customer_link}."
 msgstr ""
 
 #: src/project/team/events.ts
@@ -10408,7 +10443,6 @@ msgstr ""
 msgid "Verifying email change"
 msgstr ""
 
-#: src/navigation/AnonymousFooter.tsx
 #: src/navigation/AppFooter.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
@@ -10606,6 +10640,10 @@ msgstr ""
 msgid "You cannot manage other organization owner."
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "You cannot manage other resource allocator"
+msgstr ""
+
 #: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
 msgid "You do not belong to any organization yet"
 msgstr ""
@@ -10660,10 +10698,6 @@ msgstr ""
 
 #: src/issues/list/IssuesListPlaceholder.tsx
 msgid "You haven't created any issues yet."
-msgstr ""
-
-#: src/freeipa/TosGroup.tsx
-msgid "You must agree with terms of service."
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -10999,6 +11033,10 @@ msgstr ""
 msgid "resource"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "resource allocator"
+msgstr ""
+
 #: src/marketplace-flows/FlowsList.tsx
 msgid "resource creation flows"
 msgstr ""
@@ -11268,6 +11306,10 @@ msgstr ""
 
 #: src/resource/events.tsx
 msgid "{resource_name} has been deleted."
+msgstr ""
+
+#: src/user/support/UserList.tsx
+msgid "{role} ({name})"
 msgstr ""
 
 #: src/invitations/RoleField.tsx

@@ -1,12 +1,6 @@
 .gridBody {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 267px);
-  justify-content: space-between;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
-}
-
-@media only screen and (max-width: 1160px) {
-  .gridBody {
-    justify-content: space-around;
-  }
+  justify-items: center;
 }

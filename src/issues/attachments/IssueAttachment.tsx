@@ -64,7 +64,7 @@ export const PureIssueAttachment: FunctionComponent<PureIssueAttachmentProps> = 
             </div>
             <div className="attachment-item__description-info">
               <div className="attachment-item__description-date">
-                {formatDateTime(new Date(attachment.created))}
+                {formatDateTime(attachment.created)}
               </div>
               <div className="attachment-item__description-size">
                 {formatFilesize(attachment.file_size, 'B')}

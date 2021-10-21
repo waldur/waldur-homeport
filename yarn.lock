@@ -1240,15 +1240,10 @@
   resolved "https://registry.yarnpkg.com/@fullcalendar/list/-/list-4.2.0.tgz#8eac663750af2bd0d7e64c399ab550e049283890"
   integrity sha512-LJuwUoxLSnVti9NNT0ZG6eztoTkFl4h1/c+BwSUAcovPNAxTfVAbaV3rot+AlHz53d/QX03X1GXSNhRpUWJEBA==
 
-"@fullcalendar/moment-timezone@~4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/moment-timezone/-/moment-timezone-4.2.0.tgz#e133ae52e2a60872ffb50d70852d22da08eb9732"
-  integrity sha512-eqnBkt7uMMTvZUlFxCHsWCq0PJodIqVWJO1C2+g3I6+ovlpDHZjIHmphxZmeTDmldZxEyD3KHvnINddeyrtZlQ==
-
-"@fullcalendar/moment@~4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/moment/-/moment-4.2.0.tgz#5c3a90d05c36678b7aff812ba0de75639ea8217f"
-  integrity sha512-jJMwy5DGsfQcdS18DnA/pDoBUjaQvWWvn6/zq/Dnp9hhpxgb0BYtZeKfZhaypEOfW9c/iEd9CVyuYydBaDJE8Q==
+"@fullcalendar/luxon@~4":
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/luxon/-/luxon-4.4.2.tgz#27b4913abd6fb323da8fda63e1bd03df96b21815"
+  integrity sha512-NQFPsdDAyk152JzsyNMrfZWpnZUTxCrP3to/0es8Eoa97i/UxjxB5+N0SVwJqcNO0rQpaLHmeg5piHhraABShQ==
 
 "@fullcalendar/react@~4.2.0":
   version "4.2.0"
@@ -1887,17 +1882,15 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.117.tgz#695a7f514182771a1e0f4345d189052ee33c8778"
   integrity sha512-xyf2m6tRbz8qQKcxYZa7PA4SllYcay+eh25DN3jmNYY6gSTL7Htc/bttVdkqj2wfJGbeWlQiX8pIyJpKU+tubw==
 
+"@types/luxon@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-2.0.4.tgz#f7b5a86ccd843c0ccaddfaedd9ee1081bc1cde3b"
+  integrity sha512-l3xuhmyF2kBldy15SeY6d6HbK2BacEcSK1qTF1ISPtPHr29JH0C1fndz9ExXLKpGl0J6pZi+dGp1i5xesMt60Q==
+
 "@types/minimatch@*":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
-
-"@types/moment-timezone@^0.5.9":
-  version "0.5.9"
-  resolved "https://registry.yarnpkg.com/@types/moment-timezone/-/moment-timezone-0.5.9.tgz#1a34ef6ba2e4578b9ca399ed5eec57525ad1d4a7"
-  integrity sha512-tBf1QR8xAayQfI1xD+SMSNDMxi+aCYKEhjgVXTZt3sgxS2XusNX3jM6jJbFoY/ar1CK/PaYJoPkWs/mwcwgOqw==
-  dependencies:
-    moment ">=2.14.0"
 
 "@types/node@*":
   version "14.14.10"
@@ -9320,6 +9313,11 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+luxon@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-2.0.2.tgz#11f2cd4a11655fdf92e076b5782d7ede5bcdd133"
+  integrity sha512-ZRioYLCgRHrtTORaZX1mx+jtxKtKuI5ZDvHNAmqpUzGqSrR+tL4FVLn/CUGMA3h0+AKD1MAxGI5GnCqR5txNqg==
+
 magic-string@0.25.1:
   version "0.25.1"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.1.tgz#b1c248b399cd7485da0fe7385c2fc7011843266e"
@@ -9783,27 +9781,10 @@ mkdirp@~0.5.1:
   dependencies:
     minimist "0.0.8"
 
-moment-timezone@^0.5.25:
-  version "0.5.28"
-  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.28.tgz#f093d789d091ed7b055d82aa81a82467f72e4338"
-  integrity sha512-TDJkZvAyKIVWg5EtVqRzU97w0Rb0YVbfpqyjgu6GwXCAohVRqwZjf4fOzDE6p1Ch98Sro/8hQQi65WDXW5STPw==
-  dependencies:
-    moment ">= 2.9.0"
-
-"moment@>= 2.9.0", moment@>=2.14.0:
-  version "2.22.2"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
-  integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
-
 moment@^2.27.0:
   version "2.29.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
-
-moment@~2.24.0:
-  version "2.24.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
-  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 monaco-editor-webpack-plugin@^1.9.0:
   version "1.9.0"

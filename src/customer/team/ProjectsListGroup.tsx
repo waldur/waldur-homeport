@@ -1,4 +1,4 @@
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { ControlLabel, FormGroup } from 'react-bootstrap';
 import { Field } from 'redux-form';
@@ -47,7 +47,7 @@ export const ProjectsListGroup: FunctionComponent<{
                     name={`projects[${index}].expiration_time`}
                     component={DateField}
                     disabled={!canChangeRole}
-                    minDate={moment().add(1, 'days').toISOString()}
+                    minDate={DateTime.now().plus({ days: 1 }).toISO()}
                     weekStartsOn={1}
                     {...datePickerOverlayContainerInDialogs()}
                   />

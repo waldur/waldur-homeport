@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { formatJsx, translate } from '@waldur/i18n';
 
@@ -21,7 +22,7 @@ export const TermsOfService: FunctionComponent<TermsOfServiceProps> = (
               {
                 Link: (s) => <Link state="tos.index" label={s} />,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                Date: (_) => props.agreementDate,
+                Date: (_) => formatDateTime(props.agreementDate),
               },
               formatJsx,
             )

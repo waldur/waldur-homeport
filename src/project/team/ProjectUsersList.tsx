@@ -44,7 +44,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Role in project'),
-          render: ({ row }) => ENV.roles[row.role] || 'N/A',
+          render: ({ row }) => translate(ENV.roles[row.role]) || 'N/A',
         },
         {
           title: translate('Actions'),
@@ -116,7 +116,7 @@ export const ProjectUsersList: FunctionComponent = () => {
   const isStaff = useSelector(isStaffSelector);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const customer = useSelector(getCustomer);
-  const isProjectManager = value && value.length > 0 && isOwnerOrStaff;
+  const isProjectManager = value && value.length > 0;
   if (loading) {
     return <LoadingSpinner />;
   }

@@ -35,7 +35,7 @@ export const CustomerSidebar: FunctionComponent = () => {
         ],
       };
     }
-    const sidebarItems = getSidebarItems(customer);
+    const sidebarItems = getSidebarItems(customer).filter(Boolean);
     const extraItems = await getExtraSidebarItems();
     const items = mergeItems(sidebarItems, extraItems);
     const fields = getCounterFields(items);

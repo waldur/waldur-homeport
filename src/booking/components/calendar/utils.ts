@@ -1,59 +1,50 @@
-import moment from 'moment-timezone';
+import { EventInput } from '@fullcalendar/core';
+import { DateTime } from 'luxon';
 
-const isWeekend = (day): boolean => [6, 7].includes(day.isoWeekday());
+import { parseDate } from '@waldur/core/dateUtils';
 
-const isMonday = (day): boolean => day.isoWeekday() === 1;
+const isWeekend = (day: DateTime): boolean => [6, 7].includes(day.weekday);
 
-const isFriday = (day): boolean => day.isoWeekday() === 5;
+const isMonday = (day: DateTime): boolean => day.weekday === 1;
 
-export const getNumberOfWeekendsInTheEvent = (event): number => {
-  const mStart = moment(event.start);
-  const mEnd = moment(event.end);
-  return mEnd.diff(mStart, 'weeks');
-};
+const isFriday = (day: DateTime): boolean => day.weekday === 5;
 
-export const removeWeekends = (eventToSplit) => {
-  const numberOfSaturdays = getNumberOfWeekendsInTheEvent(eventToSplit);
+export const removeWeekends = (eventToSplit: EventInput) => {
   const events = [];
-  let mStart = moment(eventToSplit.start);
-  const mEnd = moment(eventToSplit.end);
+  const start = parseDate(eventToSplit.start);
+  const end = parseDate(eventToSplit.end);
+  const weekCount = end.diff(start).as('weeks');
+  let cursor = start;
 
-  for (let i = 0; i <= numberOfSaturdays; i++) {
+  for (let i = 0; i <= weekCount; i++) {
     let tempStart = null;
     let tempEnd = null;
 
-    while (mStart.diff(mEnd, 'd')) {
-      const currentDate = mStart;
+    while (cursor.diff(end).as('days')) {
+      const currentDate = cursor;
       if (!isWeekend(currentDate)) {
-        if (
-          moment(currentDate.toDate()).isSame(eventToSplit.start, 'day') ||
-          isMonday(currentDate)
-        ) {
-          tempStart = currentDate.toDate();
+        if (currentDate.ordinal === start.ordinal || isMonday(currentDate)) {
+          tempStart = currentDate;
         }
-        if (
-          moment(currentDate.toDate())
-            .add(1, 'd')
-            .isSame(eventToSplit.end, 'day') ||
-          isFriday(currentDate)
-        ) {
-          tempEnd = moment(currentDate.toDate()).add(1, 'd').toDate();
+        const nextDay = currentDate.plus({ days: 1 });
+        if (nextDay.ordinal === end.ordinal || isFriday(currentDate)) {
+          tempEnd = nextDay;
         }
       }
 
       if (tempStart && tempEnd) {
-        mStart = moment(tempEnd);
+        cursor = tempEnd;
         break;
       } else {
-        mStart.add(1, 'd');
+        cursor = cursor.plus({ days: 1 });
       }
     }
 
     events.push({
       ...eventToSplit,
       id: eventToSplit.id + '.' + i,
-      start: tempStart,
-      end: tempEnd,
+      start: tempStart?.toJSDate(),
+      end: tempEnd?.toJSDate(),
     });
   }
   return events;

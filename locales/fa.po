@@ -683,9 +683,6 @@ msgstr "ایجاد کردن تصویر برنامه VM برای OpenStack instan
 msgid "Create an account"
 msgstr "یک حساب ایجاد کنید."
 
-msgid "Create an availability"
-msgstr "یک دسترسی ایجاد کنید."
-
 msgid "Create application"
 msgstr "برنامه ایجاد کنید."
 

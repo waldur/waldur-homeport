@@ -9,10 +9,7 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { getBackendHealthStatus } from '@waldur/navigation/BackendHealthStatusIndicator';
 
 export const BackendHealthStatusDialog: FunctionComponent = () => {
-  const [{ loading, error, value }, reFetch] = useAsyncFn(
-    getBackendHealthStatus,
-    [],
-  );
+  const [{ loading, value }, reFetch] = useAsyncFn(getBackendHealthStatus, []);
 
   useEffectOnce(() => {
     reFetch();
@@ -25,9 +22,7 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
     >
       {loading ? (
         <LoadingSpinner />
-      ) : value &&
-        value.headers &&
-        value.headers['content-type'] === 'application/json' ? (
+      ) : value ? (
         <>
           <div className="pull-right">
             <button className="btn btn-default btn-sm" onClick={reFetch}>
@@ -42,24 +37,20 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
               </tr>
             </thead>
             <tbody>
-              {Object.entries(value.data).map(
-                ([key, value]: any, index: number) => (
-                  <tr key={index}>
-                    <td>{translate(key)}</td>
-                    <td>
-                      <StateIndicator
-                        label={translate(value)}
-                        variant={value === 'working' ? 'primary' : 'danger'}
-                      />
-                    </td>
-                  </tr>
-                ),
-              )}
+              {Object.entries(value).map(([key, value]: any, index: number) => (
+                <tr key={index}>
+                  <td>{key}</td>
+                  <td>
+                    <StateIndicator
+                      label={value}
+                      variant={value === 'working' ? 'primary' : 'danger'}
+                    />
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </>
-      ) : error ? (
-        <p>{translate('Unable to load backend health status.')}</p>
       ) : null}
     </ModalDialog>
   );

@@ -1,6 +1,7 @@
 # Resource actions
 
 Initially, workflow for resource action looked as following:
+
 * Generate configuration for resource actions on backend side from serializer.
 * In HomePort fetch configuration using OPTIONS request and render action dialog.
 
@@ -10,7 +11,7 @@ Later we needed to implement customization for resource actions on frontend side
 
 Consider the following example:
 
-```
+```dir
 openstack/
   instance/
     module.js
@@ -126,6 +127,7 @@ By default, actions list is rendered as dropdown menu only when user clicks at `
     };
   }
 ```
+
 * `iconClass` is an optional string, which should specify font icon, usually FontAwesome icon, it is rendered in the button for that action.
 
 ### Rendering resource action dialog
@@ -139,7 +141,7 @@ If action's `type` is 'form', modal dialog is rendered. By default, it's assumed
 
 ## Rendering action form
 
-By convention, form for resource action is rendered using `fields` parameter, which should specify array of action fields. It is assumed that each action field has at least name and type. 
+By convention, form for resource action is rendered using `fields` parameter, which should specify array of action fields. It is assumed that each action field has at least name and type.
 
 * `name` is internal field identifier, it is used as a key in JSON object for resource action request.
 * `label` is a localized action identifier, it is rendered in user interface. By default, if it is not provided, name is used instead.

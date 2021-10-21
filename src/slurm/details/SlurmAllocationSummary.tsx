@@ -25,7 +25,7 @@ const formatGPU = (props) => {
 
 const formatRAM = (props) => {
   const usage = formatFilesize(props.resource.ram_usage / 60, 'MB', 'B', '-h');
-  const limit = formatFilesize(props.resource.ram_limit, 'MB', 'B', '-h');
+  const limit = formatFilesize(props.resource.ram_limit / 60, 'MB', 'B', '-h');
   return formatQuota(props.translate, usage, limit);
 };
 

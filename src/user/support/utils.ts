@@ -1,5 +1,3 @@
-import { duration } from 'moment-timezone';
-
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
@@ -25,22 +23,18 @@ export const formatRegistrationMethod = (user) => {
   }
 };
 
-export const formatLifetime = (input) => {
-  const time = duration(input, 'seconds');
-  const hours = time.hours();
-  const minutes = time.minutes();
-  const seconds = time.seconds();
-
+export const formatLifetime = (input: number) => {
   if (input === null || input === 0) {
     return translate('token will not timeout');
   }
-  if (hours === 0 && minutes === 0) {
-    return `${seconds} sec`;
-  }
-  if (hours === 0 && minutes !== 0) {
+  const minutes = Math.floor(input / 60);
+  const hours = Math.floor(minutes / 60);
+  const extraMinutes = minutes % 60;
+  if (minutes === 0) {
+    return `${input} sec`;
+  } else if (hours === 0) {
     return `${minutes} min`;
-  }
-  if (hours !== 0) {
-    return minutes !== 0 ? `${hours} h ${minutes} min` : `${hours} h`;
+  } else {
+    return extraMinutes > 0 ? `${hours} h ${extraMinutes} min` : `${hours} h`;
   }
 };

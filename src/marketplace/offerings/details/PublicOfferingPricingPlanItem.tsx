@@ -44,8 +44,7 @@ export const PublicOfferingPricingPlanItem: FunctionComponent<PublicOfferingPric
         </div>
         <div className="pricingPlanItem__header__pricing">
           <span className="pricingPlanItem__header__pricing__price">
-            {getPlanTypeLabel(plan.plan_type)}{' '}
-            {defaultCurrency(plan.minimal_price)}
+            {getPlanTypeLabel(plan.plan_type)} {defaultCurrency(plan.price)}
           </span>
           <span
             className={classNames('pricingPlanItem__header__pricing__unit', {

@@ -10,6 +10,8 @@
   &__card {
     display: inline-flex;
     align-items: flex-start;
+    justify-content: space-between;
+    min-width: 500px;
     background: $white;
     border: 1px solid $border-color;
     border-radius: 0 3px 3px 3px;
@@ -26,6 +28,13 @@
         font-weight: normal;
         font-size: 30px;
         line-height: 50px;
+        margin: 0;
+      }
+
+      p {
+        font-size: 14px;
+        line-height: 24px;
+        max-width: 500px;
         margin: 0;
       }
     }

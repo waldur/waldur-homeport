@@ -1,6 +1,6 @@
 import type { EventInput, OptionsInput } from '@fullcalendar/core';
-import moment from 'moment';
-import React, { Component, FunctionComponent } from 'react';
+import { Duration } from 'luxon';
+import { Component, FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 import { FieldArray, WrappedFieldArrayProps } from 'redux-form';
 
@@ -13,6 +13,7 @@ import {
   createAvailabilityDates,
   getBookedSlots,
 } from '@waldur/booking/utils';
+import { parseDate } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
@@ -33,9 +34,9 @@ class EditableCalendar extends Component<
     };
   }
 
-  getValidRange = (events) => ({
-    start: Math.min(...events.map((event) => moment(event.start).valueOf())),
-    end: Math.max(...events.map((event) => moment(event.end).valueOf())),
+  getValidRange = (events: BookingProps[]) => ({
+    start: Math.min(...events.map((event) => parseDate(event.start).valueOf())),
+    end: Math.max(...events.map((event) => parseDate(event.end).valueOf())),
   });
 
   getCalendarConfig = () => {
@@ -64,14 +65,14 @@ class EditableCalendar extends Component<
         minTime: config.businessHours.startTime,
         maxTime: config.businessHours.endTime,
         validRange: {
-          start: moment(validRange.start).startOf('month').format(),
-          end: moment(validRange.end).endOf('month').format(),
+          start: parseDate(validRange.start).startOf('month').toISODate(),
+          end: parseDate(validRange.end).endOf('month').toISODate(),
         },
         dayRender: ({ date, el }) => {
-          const curDate = moment(date);
+          const curDate = parseDate(date);
           if (
-            curDate.isBefore(moment(validRange.start).format('YYYY-MM-DD')) ||
-            curDate.isAfter(moment(validRange.end).format('YYYY-MM-DD'))
+            curDate < parseDate(validRange.start).startOf('day') ||
+            curDate > parseDate(validRange.end).startOf('day')
           ) {
             el.classList.add('fc-nonbusiness');
           }
@@ -80,22 +81,26 @@ class EditableCalendar extends Component<
     );
   };
 
-  updateAvailabilitySlotsAfterEventWasAdded = (addedEvent) => {
+  updateAvailabilitySlotsAfterEventWasAdded = (addedEvent: BookingProps) => {
     this.setState({
       ...this.state,
       availabilitySlots: this.state.availabilitySlots.filter(
         (slot) =>
-          moment(slot.start).isBefore(moment(addedEvent.start)) ||
-          moment(slot.end).isAfter(moment(addedEvent.end)),
+          parseDate(slot.start) < parseDate(addedEvent.start) ||
+          parseDate(slot.end) > parseDate(addedEvent.end),
       ),
     });
   };
 
-  updateAvailabilitySlotsAfterEventWasRemoved = (removedEvent) => {
+  updateAvailabilitySlotsAfterEventWasRemoved = (
+    removedEvent: BookingProps,
+  ) => {
     const config = this.getCalendarConfig();
     const removedSlot = createAvailabilitySlots(
       [removedEvent],
-      moment.duration(config.slotDuration),
+      typeof config.slotDuration === 'string'
+        ? Duration.fromISOTime(config.slotDuration, {})
+        : null,
     );
     this.setState({
       ...this.state,
@@ -116,19 +121,22 @@ class EditableCalendar extends Component<
 
     const slots = createAvailabilitySlots(
       availability,
-      moment.duration(config.slotDuration),
+      typeof config.slotDuration === 'string'
+        ? Duration.fromISOTime(config.slotDuration, {})
+        : null,
     );
 
     return slots.filter(
       (slot) =>
         !events.find((item) => {
-          const slotStart = moment(slot.start);
-          const slotEnd = moment(slot.end);
+          const slotStart = parseDate(slot.start);
+          const slotEnd = parseDate(slot.end);
 
           return (
-            moment(item.start).isSame(slotStart) ||
-            slotStart.isBetween(item.start, item.end) ||
-            slotEnd.isSame(item.end)
+            parseDate(item.start) == slotStart ||
+            (parseDate(item.start) <= slotStart &&
+              slotStart <= parseDate(item.end)) ||
+            slotEnd == parseDate(item.end)
           );
         }),
     );

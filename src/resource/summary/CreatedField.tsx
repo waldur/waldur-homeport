@@ -1,10 +1,10 @@
-import { formatDateTime, formatFromNow } from '@waldur/core/dateUtils';
+import { DateTime } from 'luxon';
 
 export const CreatedField = (props: { resource: { created?: string } }) =>
   props.resource.created ? (
     <span>
-      {formatFromNow(props.resource.created)}
+      {DateTime.fromISO(props.resource.created).toRelative()}
       {', '}
-      {formatDateTime(props.resource.created)}
+      {DateTime.fromISO(props.resource.created).toFormat('yyyy-MM-dd HH:mm')}
     </span>
   ) : null;

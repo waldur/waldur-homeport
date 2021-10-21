@@ -7,7 +7,6 @@ import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
 import { getOffering, getCategory } from '@waldur/marketplace/common/api';
 import { PublicOfferingDetails } from '@waldur/marketplace/offerings/details/PublicOfferingDetails';
-import { AnonymousFooter } from '@waldur/navigation/AnonymousFooter';
 import { AnonymousHeader } from '@waldur/navigation/AnonymousHeader';
 import { useTitle } from '@waldur/navigation/title';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
@@ -40,7 +39,6 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
         offering={value.offering}
         category={value.category}
       />
-      <AnonymousFooter />
     </>
   ) : (
     <InvalidRoutePage />
