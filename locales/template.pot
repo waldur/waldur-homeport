@@ -10802,6 +10802,10 @@ msgstr ""
 msgid "catalogues"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "co-PI"
+msgstr ""
+
 #: src/marketplace/offerings/PriceList.tsx
 msgid "components"
 msgstr ""
@@ -10867,6 +10871,10 @@ msgstr ""
 msgid "generate automatically"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "guest"
+msgstr ""
+
 #: src/rancher/cluster/hpas/HPADeleteButton.tsx
 msgid "horizontal pod autoscaler"
 msgstr ""
@@ -10902,6 +10910,10 @@ msgstr ""
 
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "jobs"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "member"
 msgstr ""
 
 #: src/rancher/cluster/hpas/utils.ts
