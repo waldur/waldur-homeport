@@ -1284,6 +1284,10 @@ msgstr ""
 msgid "Change limits"
 msgstr ""
 
+#: src/slurm/RequestLimitsChangeDialog.tsx
+msgid "Change of limits of SLURM allocation {name}"
+msgstr ""
+
 #: src/marketplace/resources/change-plan/ChangePlanAction.tsx
 msgid "Change plan"
 msgstr ""
@@ -2124,6 +2128,7 @@ msgstr ""
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/summary/ResourceSummaryBase.tsx
+#: src/slurm/RequestLimitsChangeDialog.tsx
 #: src/support/OfferingConfigurationForm.tsx
 #: src/support/SupportSummaryTab.tsx
 #: src/user/support/UserEditForm.tsx
@@ -5640,6 +5645,10 @@ msgstr ""
 msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
 msgstr ""
 
+#: src/slurm/RequestLimitsChangeDialog.tsx
+msgid "Please note that request should specify allocation name and provide a reason for change."
+msgstr ""
+
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
 msgid "Please note that request should specify offering and provide a reason."
 msgstr ""
@@ -5666,6 +5675,10 @@ msgstr ""
 
 #: src/customer/create/WizardFormSecondPage.tsx
 msgid "Please provide registration code of your company."
+msgstr ""
+
+#: src/slurm/RequestLimitsChangeDialog.tsx
+msgid "Please provide requested limits and a reason."
 msgstr ""
 
 #: src/marketplace/offerings/images/ImagesListPlaceholder.tsx
@@ -6616,6 +6629,10 @@ msgstr ""
 msgid "Request an approval"
 msgstr ""
 
+#: src/slurm/RequestLimitsChangeDialog.tsx
+msgid "Request change of limits of SLURM allocation"
+msgstr ""
+
 #: src/marketplace/details/OverviewTab.tsx
 msgid "Request demo"
 msgstr ""
@@ -6656,6 +6673,10 @@ msgstr ""
 
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 msgid "Request for a termination"
+msgstr ""
+
+#: src/slurm/RequestLimitsChangeAction.tsx
+msgid "Request limits change"
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
@@ -8682,6 +8703,10 @@ msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
 msgid "To"
+msgstr ""
+
+#: src/slurm/RequestLimitsChangeDialog.tsx
+msgid "To change allocation limits, please send a request to {supportEmail}."
 msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
@@ -10783,6 +10808,10 @@ msgstr ""
 msgid "catalogues"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "co-PI"
+msgstr ""
+
 #: src/marketplace/offerings/PriceList.tsx
 msgid "components"
 msgstr ""
@@ -10848,6 +10877,10 @@ msgstr ""
 msgid "generate automatically"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "guest"
+msgstr ""
+
 #: src/rancher/cluster/hpas/HPADeleteButton.tsx
 msgid "horizontal pod autoscaler"
 msgstr ""
@@ -10883,6 +10916,10 @@ msgstr ""
 
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "jobs"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "member"
 msgstr ""
 
 #: src/rancher/cluster/hpas/utils.ts
