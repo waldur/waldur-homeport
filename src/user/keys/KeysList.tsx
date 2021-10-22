@@ -70,7 +70,7 @@ const TableOptions = {
   table: 'keysList',
   fetchData: createFetcher('keys'),
   mapPropsToFilter: (props) => ({
-    user_uuid: router.globals.params.uuid || props.user?.uuid,
+    user_uuid: props.user?.uuid || router.globals.params.uuid,
   }),
   exportRow: (row) => [row.name, row.fingerprint],
   exportAll: true,
