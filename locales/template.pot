@@ -10087,8 +10087,11 @@ msgid "User data"
 msgstr ""
 
 #: src/rancher/cluster/users/UserDetailsDialog.tsx
-#: src/user/UserPopover.tsx
 msgid "User details"
+msgstr ""
+
+#: src/user/UserPopover.tsx
+msgid "User details for {fullName}"
 msgstr ""
 
 #: src/user/support/UserDetailsDialog.tsx
