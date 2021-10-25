@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { Col, Panel, PanelGroup, Row } from 'react-bootstrap';
 
+import { formatDate } from '@waldur/core/dateUtils';
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getDetailsComponent } from '@waldur/marketplace/common/registry';
@@ -70,6 +71,16 @@ let OrderItemDetails = (
                     uuid={props.orderItem.uuid}
                     loadData={props.loadData}
                   />
+                </OrderItemDetailsField>
+              )}
+              {props.orderItem.reviewed_by && (
+                <OrderItemDetailsField label={translate('Reviewed by')}>
+                  {props.orderItem.reviewed_by}
+                </OrderItemDetailsField>
+              )}
+              {props.orderItem.reviewed_at && (
+                <OrderItemDetailsField label={translate('Reviewed at')}>
+                  {formatDate(props.orderItem.reviewed_at)}
                 </OrderItemDetailsField>
               )}
             </Panel.Body>

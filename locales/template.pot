@@ -7064,10 +7064,12 @@ msgid "Review request"
 msgstr ""
 
 #: src/marketplace-flows/utils.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 msgid "Reviewed at"
 msgstr ""
 
 #: src/marketplace-flows/utils.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 msgid "Reviewed by"
 msgstr ""
 
