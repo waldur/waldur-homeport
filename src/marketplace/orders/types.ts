@@ -82,6 +82,8 @@ export interface OrderItemDetailsType extends OrderItemResponse {
   old_cost_estimate: string;
   new_cost_estimate: string;
   can_terminate: boolean;
+  reviewed_at: string;
+  reviewed_by: string;
 }
 
 export interface Order {
