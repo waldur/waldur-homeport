@@ -53,6 +53,7 @@ export interface OrderItemResponse {
   plan_unit?: BillingPeriod;
   project: string;
   project_name: string;
+  project_description?: string;
   customer_name?: string;
   customer_uuid?: string;
   category_title?: string;

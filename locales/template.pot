@@ -5991,6 +5991,7 @@ msgid "Project creation requests"
 msgstr ""
 
 #: src/booking/BookingsListExpandableRow.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
@@ -6041,6 +6042,7 @@ msgstr ""
 
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/project/ProjectNameField.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 msgid "Project name"
