@@ -34,6 +34,14 @@ let OrderItemDetails = (
               <Panel.Title toggle={true}>{translate('Summary')}</Panel.Title>
             </Panel.Heading>
             <Panel.Body collapsible={true}>
+              <OrderItemDetailsField label={translate('Project name')}>
+                {props.orderItem.project_name}
+              </OrderItemDetailsField>
+              {props.orderItem.project_description && (
+                <OrderItemDetailsField label={translate('Project description')}>
+                  {props.orderItem.project_description}
+                </OrderItemDetailsField>
+              )}
               <OrderItemDetailsField label={translate('Description')}>
                 <OrderItemSummary
                   orderItem={props.orderItem}
