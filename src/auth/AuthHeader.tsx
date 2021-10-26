@@ -39,9 +39,7 @@ export const AuthHeader: FunctionComponent = () => {
           ? translate(
               'Your session has expired, please enter credentials to continue.',
             )
-          : translate(
-              'Your single pane of control for all cloud services. Login in to see it in action.',
-            )}
+          : ENV.plugins.WALDUR_CORE.SITE_DESCRIPTION}
       </p>
     </div>
   );
