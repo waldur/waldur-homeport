@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Col, FormGroup, Row } from 'react-bootstrap';
+import { Field } from 'redux-form';
 
 import { FormContainer } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
@@ -14,10 +15,10 @@ export const OfferingPluginOptionsForm: FunctionComponent<{ container }> = ({
         <Col sm={2}></Col>
         <Row>
           <Col sm={8}>
-            <AwesomeCheckboxField
+            <Field
               name="auto_approve_in_service_provider_projects"
+              component={AwesomeCheckboxField}
               label={translate('Auto approve in service provider projects')}
-              hideLabel={true}
             />
           </Col>
         </Row>
