@@ -3,13 +3,14 @@ import { FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
+import './AuthHeader.scss';
 
 export const AuthHeader: FunctionComponent = () => {
   const { state } = useCurrentStateAndParams();
   const router = useRouter();
   const sessionExpired = Boolean(router.globals.params?.toState);
   return (
-    <>
+    <div className="authHeader">
       {ENV.plugins.WALDUR_CORE.LOGIN_LOGO ? (
         <img src={ENV.plugins.WALDUR_CORE.LOGIN_LOGO} />
       ) : (
@@ -42,6 +43,6 @@ export const AuthHeader: FunctionComponent = () => {
               'Your single pane of control for all cloud services. Login in to see it in action.',
             )}
       </p>
-    </>
+    </div>
   );
 };

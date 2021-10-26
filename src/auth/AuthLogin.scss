@@ -1,6 +1,29 @@
-.loginscreen {
-  display: flex;
-  flex-direction: column;
+.gridContainer {
+  width: 100%;
+  height: calc(100vh - 30px);
+  display: grid;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 50px;
+
+  .flexContainer {
+    display: flex;
+    flex-direction: row;
+    column-gap: 35px;
+    margin: 0;
+    padding: 0;
+
+    .loginscreen {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 300px;
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .gridContainer .flexContainer {
+    flex-direction: column;
+    row-gap: 10px;
+  }
 }

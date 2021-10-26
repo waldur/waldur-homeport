@@ -27,30 +27,34 @@ export const AuthLogin: FunctionComponent = () => {
   return (
     <>
       <CookiesConsent />
-      <div className="middle-box text-center loginscreen">
-        <AuthHeader />
-        {features.SigninForm && <SigninForm />}
-        {features.SignupForm && <SignupForm />}
-        {features.SigninForm && features.SocialSignup && (
-          <p>
-            <small>
-              {features.mode === 'register'
-                ? translate('Register with')
-                : translate('Sign in with')}
-            </small>
-          </p>
-        )}
-        {providers.map(
-          (provider) =>
-            features[provider.providerKey] && (
-              <AuthButton key={provider.providerKey} {...provider} />
-            ),
-        )}
-        {features.SignupButton && <SignupButton />}
-        {features.SigninButton && <SigninButton />}
-        <UserAuthWarning />
-        <LanguageList />
-        <PoweredBy />
+      <div className="gridContainer">
+        <div className="flexContainer">
+          <AuthHeader />
+          <div className="text-center loginscreen">
+            {features.SigninForm && <SigninForm />}
+            {features.SignupForm && <SignupForm />}
+            {features.SigninForm && features.SocialSignup && (
+              <p>
+                <small>
+                  {features.mode === 'register'
+                    ? translate('Register with')
+                    : translate('Sign in with')}
+                </small>
+              </p>
+            )}
+            {providers.map(
+              (provider) =>
+                features[provider.providerKey] && (
+                  <AuthButton key={provider.providerKey} {...provider} />
+                ),
+            )}
+            {features.SignupButton && <SignupButton />}
+            {features.SigninButton && <SigninButton />}
+            <UserAuthWarning />
+            <LanguageList />
+            <PoweredBy />
+          </div>
+        </div>
       </div>
       <AppFooter />
     </>
