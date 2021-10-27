@@ -44,10 +44,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       openResourceUsageDialog({
         ...ownProps.resource,
         offering_uuid:
-          ownProps.resource.offering_uuid ||
-          ownProps.resource.marketplace_offering_uuid,
+          ownProps.resource.marketplace_offering_uuid ||
+          ownProps.resource.offering_uuid,
         resource_uuid:
-          ownProps.resource.uuid || ownProps.resource.marketplace_resource_uuid,
+          ownProps.resource.marketplace_resource_uuid || ownProps.resource.uuid,
       }),
     ),
 });
