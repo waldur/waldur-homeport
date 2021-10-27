@@ -13,9 +13,12 @@ const HooksList = lazyComponent(
   () => import(/* webpackChunkName: "HooksList" */ './hooks/HooksList'),
   'HooksList',
 );
-const KeysList = lazyComponent(
-  () => import(/* webpackChunkName: "KeysList" */ './keys/KeysList'),
-  'KeysList',
+const KeysListContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "KeysListContainer" */ './keys/KeysListContainer'
+    ),
+  'KeysListContainer',
 );
 const UserDashboard = lazyComponent(
   () =>
@@ -33,9 +36,12 @@ const UserManage = lazyComponent(
   () => import(/* webpackChunkName: "UserManage" */ './UserManage'),
   'UserManage',
 );
-const UserOfferingList = lazyComponent(
-  () => import(/* webpackChunkName: "UserOfferingList" */ './UserOfferingList'),
-  'UserOfferingList',
+const UserOfferingListContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "UserOfferingListContainer" */ './UserOfferingListContainer'
+    ),
+  'UserOfferingListContainer',
 );
 const FlowListContainer = lazyComponent(
   () =>
@@ -67,7 +73,7 @@ export const tabs = {
   },
   keys: {
     url: 'keys/',
-    component: KeysList,
+    component: KeysListContainer,
   },
   notifications: {
     url: 'notifications/',
@@ -83,7 +89,7 @@ export const tabs = {
   },
   offerings: {
     url: 'remote-accounts/',
-    component: UserOfferingList,
+    component: UserOfferingListContainer,
   },
   flowsList: {
     url: 'resources/',

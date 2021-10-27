@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 
-import { useTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
 import { RootState } from '@waldur/store/reducers';
 import { Table, createFetcher, connectTable } from '@waldur/table';
@@ -17,12 +16,11 @@ import { KeyRemoveButton } from './KeyRemoveButton';
 import { isStaffOrSelfSelectorCreator } from './selectors';
 
 interface OwnProps {
-  user: UserDetails;
+  user?: UserDetails;
 }
 
 const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
-  useTitle(translate('SSH keys'));
 
   const workspace = useSelector(getWorkspace);
   const columns: Column[] = [
