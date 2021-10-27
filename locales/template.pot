@@ -6492,7 +6492,7 @@ msgstr ""
 msgid "Remote Waldur API URL"
 msgstr ""
 
-#: src/user/UserOfferingList.tsx
+#: src/user/UserOfferingListContainer.tsx
 #: src/user/constants.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Remote accounts"
@@ -7185,6 +7185,7 @@ msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr ""
 
 #: src/user/keys/KeysList.tsx
+#: src/user/keys/KeysListContainer.tsx
 msgid "SSH keys"
 msgstr ""
 
