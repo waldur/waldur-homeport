@@ -29,7 +29,10 @@ export const AuthLogin: FunctionComponent = () => {
       <CookiesConsent />
       <div className="gridContainer">
         <div className="flexContainer">
-          <AuthHeader />
+          <div className="headerContainer">
+            <AuthHeader />
+            <PoweredBy />
+          </div>
           <div className="text-center loginscreen">
             {features.SigninForm && <SigninForm />}
             {features.SignupForm && <SignupForm />}
@@ -52,7 +55,6 @@ export const AuthLogin: FunctionComponent = () => {
             {features.SigninButton && <SigninButton />}
             <UserAuthWarning />
             <LanguageList />
-            <PoweredBy />
           </div>
         </div>
       </div>
