@@ -6237,6 +6237,7 @@ msgid "Put this into ~/.kube/config:"
 msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceItemUpdateDialog.tsx
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
@@ -10772,10 +10773,6 @@ msgstr ""
 
 #: src/auth/AuthHeader.tsx
 msgid "Your session has expired, please enter credentials to continue."
-msgstr ""
-
-#: src/auth/AuthHeader.tsx
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
 msgstr ""
 
 #: src/slurm/details/AllocationUsersTable.tsx

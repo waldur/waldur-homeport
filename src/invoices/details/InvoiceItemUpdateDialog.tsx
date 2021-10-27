@@ -15,8 +15,14 @@ export const InvoiceItemUpdateDialog = ({
     {
       name: 'article_code',
       label: translate('Article code'),
-      required: true,
+      required: false,
       type: 'string',
+    },
+    {
+      name: 'quantity',
+      label: translate('Quantity'),
+      required: false,
+      type: 'integer',
     },
   ];
   return (
