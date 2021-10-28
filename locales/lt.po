@@ -6116,9 +6116,6 @@ msgstr "Jūsų organizacija dar neturi jokių projektų."
 msgid "Your session has expired, please enter credentials to continue."
 msgstr "Jūsų sesija baigėsi, norėdami tęsti, įveskite kredencialus."
 
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Jūsų viena visų debesų paslaugų valdymo sritis. Prisijunkite, kad pamatytumėte, kaip tai veikia."
-
 msgid "(VAT is not included)"
 msgstr "(PVM neįskaičiuotas)"
 

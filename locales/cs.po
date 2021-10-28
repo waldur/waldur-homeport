@@ -6116,9 +6116,6 @@ msgstr "Vaše organizace zatím nemá žádné projekty."
 msgid "Your session has expired, please enter credentials to continue."
 msgstr "Vaše relace vypršela, pro pokračování prosím zadejte přihlašovací údaje."
 
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Jediný panel pro ovládání všech cloudových služeb. Přihlaste se a podívejte se na to v akci."
-
 msgid "(VAT is not included)"
 msgstr "(DPH není zahrnuta)"
 

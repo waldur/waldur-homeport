@@ -6116,9 +6116,6 @@ msgstr "Uw organisatie heeft nog geen projecten."
 msgid "Your session has expired, please enter credentials to continue."
 msgstr "Uw sessie is verlopen, voer referenties in om door te gaan."
 
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Uw enkele controlepaneel voor alle wolkdiensten. Log in om het in actie te zien."
-
 msgid "(VAT is not included)"
 msgstr "(BTW is niet inbegrepen)"
 

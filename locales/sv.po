@@ -6026,9 +6026,6 @@ msgstr "Din organisation har inga projekt ännu."
 msgid "Your session has expired, please enter credentials to continue."
 msgstr "Din session har upphört att gälla. Ange autentiseringsuppgifter för att fortsätta."
 
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Din enda kontrollruta för alla molntjänster. Logga in för att se det i aktion."
-
 msgid "(VAT is not included)"
 msgstr "(Moms ingår inte)"
 

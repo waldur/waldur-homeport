@@ -2327,9 +2327,6 @@ msgstr "Dəvətiniz işlənilir."
 msgid "Your invitation was accepted."
 msgstr "Dəvətiniz qəbul edildi."
 
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Bütün bulud xidmətləriniz üçün tək nəzarət paneli. Bunu hərəkətdə görmək üçün daxil olun."
-
 msgid "(VAT is not included)"
 msgstr "(ƏDV daxil deyil)"
 

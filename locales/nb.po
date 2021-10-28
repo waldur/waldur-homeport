@@ -6116,9 +6116,6 @@ msgstr "Organisasjonen din har ingen prosjekter ennå."
 msgid "Your session has expired, please enter credentials to continue."
 msgstr "Økten din er utløpt, vennligst skriv inn legitimasjon for å fortsette."
 
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Din enkelt kontrolpanel for alle skytjenester. Logg inn for å se det i aksjon."
-
 msgid "(VAT is not included)"
 msgstr "(MVA er ikke inkludert)"
 

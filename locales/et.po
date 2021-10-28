@@ -4403,9 +4403,6 @@ msgstr "Sinu kutse on töötlemisel."
 msgid "Your invitation was accepted."
 msgstr "Sinu kutse võeti vastu."
 
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Sinu ühtne kontrollkeskus pilveteenuste haldamiseks. Logi sisse et näha seda töös."
-
 msgid "(VAT is not included)"
 msgstr "(ei sisalda käibemaksu)"
 

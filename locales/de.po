@@ -6116,9 +6116,6 @@ msgstr "Ihre Organisation hat noch keine Projekte."
 msgid "Your session has expired, please enter credentials to continue."
 msgstr "Ihre Sitzung ist abgelaufen, geben Sie anmeldenachgeben, um fortzufahren."
 
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Ihr einziger Kontrollbereich für alle Cloud-Dienste. Melden Sie sich an, um es in Aktion zu sehen."
-
 msgid "(VAT is not included)"
 msgstr "(MwSt. ist nicht inbegriffen)"
 
