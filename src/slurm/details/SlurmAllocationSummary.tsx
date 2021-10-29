@@ -1,4 +1,4 @@
-import { formatFilesize, minutesToHours } from '@waldur/core/utils';
+import { minutesToHours } from '@waldur/core/utils';
 import { withTranslation } from '@waldur/i18n';
 import {
   Field,
@@ -23,9 +23,12 @@ const formatGPU = (props) => {
   return formatQuota(props.translate, usage, limit);
 };
 
+const convertRamToGbH = (value: number): string =>
+  `${Math.ceil(value / 1024 / 60)} GB-h`;
+
 const formatRAM = (props) => {
-  const usage = formatFilesize(props.resource.ram_usage / 60, 'MB', 'B', '-h');
-  const limit = formatFilesize(props.resource.ram_limit / 60, 'MB', 'B', '-h');
+  const usage = convertRamToGbH(props.resource.ram_usage);
+  const limit = convertRamToGbH(props.resource.ram_limit);
   return formatQuota(props.translate, usage, limit);
 };
 
