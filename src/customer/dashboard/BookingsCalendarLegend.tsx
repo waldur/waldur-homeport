@@ -8,21 +8,20 @@ interface BookingsCalendarLegendProps {
   events;
 }
 
-export const BookingsCalendarLegend: FunctionComponent<BookingsCalendarLegendProps> = ({
-  events,
-}) => {
-  const legends: Legend[] = getDistinctColorsFromEvents(events);
-  return (
-    <div className="bookings-calendar-legend-container m-b-md">
-      {legends.map((legend: Legend, index: number) => (
-        <div key={index} className="legend">
-          <div
-            className="rectangle m-r-xs"
-            style={{ backgroundColor: `${legend.color}` }}
-          ></div>
-          {legend.name}
-        </div>
-      ))}
-    </div>
-  );
-};
+export const BookingsCalendarLegend: FunctionComponent<BookingsCalendarLegendProps> =
+  ({ events }) => {
+    const legends: Legend[] = getDistinctColorsFromEvents(events);
+    return (
+      <div className="bookings-calendar-legend-container m-b-md">
+        {legends.map((legend: Legend, index: number) => (
+          <div key={index} className="legend">
+            <div
+              className="rectangle m-r-xs"
+              style={{ backgroundColor: `${legend.color}` }}
+            ></div>
+            {legend.name}
+          </div>
+        ))}
+      </div>
+    );
+  };

@@ -122,6 +122,5 @@ const mapStateToProps = (state: RootState) => ({
   nativeNameVisible: getNativeNameVisible(state),
 });
 
-export const CustomerDetailsPanel = connect(mapStateToProps)(
-  PureCustomerDetails,
-);
+export const CustomerDetailsPanel =
+  connect(mapStateToProps)(PureCustomerDetails);

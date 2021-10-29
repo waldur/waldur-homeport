@@ -14,14 +14,14 @@ jest.mock('@waldur/openstack/api');
 
 const apiMock = api as jest.Mocked<typeof api>;
 
-const resource = ({
+const resource = {
   uuid: 'volume_uuid',
   service_settings_uuid: 'service_settings_uuid',
   type_name: 'Fast SSD',
   type: 'ssd',
-} as unknown) as Volume;
+} as unknown as Volume;
 
-const fakeVolumeTypes = ([
+const fakeVolumeTypes = [
   {
     name: 'prod',
     description: 'HPC production HDD',
@@ -36,7 +36,7 @@ const fakeVolumeTypes = ([
     name: 'Fast SSD',
     url: 'ssd',
   },
-] as unknown) as VolumeType[];
+] as unknown as VolumeType[];
 
 const mountDialog = () => {
   const store = createActionStore();

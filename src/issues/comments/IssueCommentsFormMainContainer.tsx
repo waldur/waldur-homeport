@@ -15,31 +15,30 @@ interface PureIssueCommentsFomrMainContainerProps extends TranslateProps {
   toggle(): void;
 }
 
-export const PureIssueCommentsFormMainContainer: FunctionComponent<PureIssueCommentsFomrMainContainerProps> = (
-  props,
-) => {
-  const { opened, toggle, formId, uiDisabled, translate } = props;
+export const PureIssueCommentsFormMainContainer: FunctionComponent<PureIssueCommentsFomrMainContainerProps> =
+  (props) => {
+    const { opened, toggle, formId, uiDisabled, translate } = props;
 
-  return (
-    <div>
-      <div className="m-t-lg">
-        {opened ? (
-          <span className="text-muted">{translate('Comment')}</span>
-        ) : (
-          <button
-            className="btn btn-default"
-            disabled={uiDisabled}
-            onClick={toggle}
-          >
-            <i className="fa fa-comment-o" />
-            <span className="p-w-xs">{translate('Add comment')}</span>
-          </button>
-        )}
+    return (
+      <div>
+        <div className="m-t-lg">
+          {opened ? (
+            <span className="text-muted">{translate('Comment')}</span>
+          ) : (
+            <button
+              className="btn btn-default"
+              disabled={uiDisabled}
+              onClick={toggle}
+            >
+              <i className="fa fa-comment-o" />
+              <span className="p-w-xs">{translate('Add comment')}</span>
+            </button>
+          )}
+        </div>
+        <IssueCommentsFormContainer formId={formId} />
       </div>
-      <IssueCommentsFormContainer formId={formId} />
-    </div>
-  );
-};
+    );
+  };
 
 const mapStateToProps = (state, ownProps) => ({
   opened: getCommentFormIsOpen(state, ownProps),

@@ -109,6 +109,5 @@ const PureRancherExtraComponent = (props) =>
 
 const RancherExtraComponent = connector(PureRancherExtraComponent);
 
-export const RancherClusterCheckoutSummary: FunctionComponent<OfferingDetailsProps> = (
-  props,
-) => <OrderSummary {...props} extraComponent={RancherExtraComponent} />;
+export const RancherClusterCheckoutSummary: FunctionComponent<OfferingDetailsProps> =
+  (props) => <OrderSummary {...props} extraComponent={RancherExtraComponent} />;

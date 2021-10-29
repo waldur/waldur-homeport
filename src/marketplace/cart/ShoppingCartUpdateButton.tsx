@@ -11,15 +11,14 @@ interface ShoppingCartUpdateButtonProps {
   icon?: string;
 }
 
-export const ShoppingCartUpdateButton: FunctionComponent<ShoppingCartUpdateButtonProps> = (
-  props,
-) => (
-  <OfferingButton
-    icon="fa fa-refresh"
-    isActive={true}
-    title={translate('Update')}
-    onClick={() => props.updateItem()}
-    flavor={props.flavor}
-    disabled={props.disabled}
-  />
-);
+export const ShoppingCartUpdateButton: FunctionComponent<ShoppingCartUpdateButtonProps> =
+  (props) => (
+    <OfferingButton
+      icon="fa fa-refresh"
+      isActive={true}
+      title={translate('Update')}
+      onClick={() => props.updateItem()}
+      flavor={props.flavor}
+      disabled={props.disabled}
+    />
+  );

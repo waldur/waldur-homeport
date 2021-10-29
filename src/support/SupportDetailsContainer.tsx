@@ -75,9 +75,10 @@ export const SupportDetailsContainer: FunctionComponent = () => {
 
   useTitle(value ? value.resource.name : translate('Request details'));
 
-  useBreadcrumbsFn(() => (value ? getBreadcrumbs(value.resource) : []), [
-    value,
-  ]);
+  useBreadcrumbsFn(
+    () => (value ? getBreadcrumbs(value.resource) : []),
+    [value],
+  );
 
   const router = useRouter();
 

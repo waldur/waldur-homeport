@@ -29,6 +29,5 @@ const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
 });
 
-export const ShoppingCartIndicator = connect(mapStateToProps)(
-  PureCartIndicator,
-);
+export const ShoppingCartIndicator =
+  connect(mapStateToProps)(PureCartIndicator);

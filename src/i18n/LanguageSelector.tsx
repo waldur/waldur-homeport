@@ -9,11 +9,8 @@ import {
 import { useLanguageSelector } from './useLanguageSelector';
 
 export const LanguageSelector: FunctionComponent = () => {
-  const {
-    currentLanguage,
-    languageChoices,
-    setLanguage,
-  } = useLanguageSelector();
+  const { currentLanguage, languageChoices, setLanguage } =
+    useLanguageSelector();
 
   if (languageChoices.length < 2) {
     return null;

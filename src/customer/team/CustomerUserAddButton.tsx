@@ -18,20 +18,19 @@ interface CustomerUserAddButtonProps {
   refreshList;
 }
 
-export const CustomerUserAddButton: FunctionComponent<CustomerUserAddButtonProps> = ({
-  refreshList,
-}) => {
-  const dispatch = useDispatch();
-  const callback = () =>
-    dispatch(
-      openModalDialog(CustomerUserAddDialog, { resolve: { refreshList } }),
-    );
+export const CustomerUserAddButton: FunctionComponent<CustomerUserAddButtonProps> =
+  ({ refreshList }) => {
+    const dispatch = useDispatch();
+    const callback = () =>
+      dispatch(
+        openModalDialog(CustomerUserAddDialog, { resolve: { refreshList } }),
+      );
 
-  return (
-    <ActionButton
-      action={callback}
-      title={translate('Add owner')}
-      icon="fa fa-plus"
-    />
-  );
-};
+    return (
+      <ActionButton
+        action={callback}
+        title={translate('Add owner')}
+        icon="fa fa-plus"
+      />
+    );
+  };

@@ -25,37 +25,37 @@ const planTypes = () => [
 const getPlanTypeLabel = (key: string): string =>
   planTypes().find(({ value }) => value === key)?.label || 'N/A';
 
-export const PublicOfferingPricingPlanItem: FunctionComponent<PublicOfferingPricingPlanItemProps> = ({
-  offering,
-  plan,
-}) => {
-  const [toggle, setToggle] = useState<boolean>(false);
-  return (
-    <div className="pricingPlanItem">
-      <div
-        className={classNames('pricingPlanItem__header', {
-          'pricingPlanItem__header--expanded': toggle,
-        })}
-        onClick={() => setToggle(!toggle)}
-      >
-        <div>
-          <b className="m-b-xs">{plan.name}</b>
-          <FormattedHtml html={plan.description} />
+export const PublicOfferingPricingPlanItem: FunctionComponent<PublicOfferingPricingPlanItemProps> =
+  ({ offering, plan }) => {
+    const [toggle, setToggle] = useState<boolean>(false);
+    return (
+      <div className="pricingPlanItem">
+        <div
+          className={classNames('pricingPlanItem__header', {
+            'pricingPlanItem__header--expanded': toggle,
+          })}
+          onClick={() => setToggle(!toggle)}
+        >
+          <div>
+            <b className="m-b-xs">{plan.name}</b>
+            <FormattedHtml html={plan.description} />
+          </div>
+          <div className="pricingPlanItem__header__pricing">
+            <span className="pricingPlanItem__header__pricing__price">
+              {getPlanTypeLabel(plan.plan_type)} {defaultCurrency(plan.price)}
+            </span>
+            <span
+              className={classNames('pricingPlanItem__header__pricing__unit', {
+                'pricingPlanItem__header__pricing__unit--expanded': toggle,
+              })}
+            >
+              {translate('Per {unit}', { unit: plan.unit })}
+            </span>
+          </div>
         </div>
-        <div className="pricingPlanItem__header__pricing">
-          <span className="pricingPlanItem__header__pricing__price">
-            {getPlanTypeLabel(plan.plan_type)} {defaultCurrency(plan.price)}
-          </span>
-          <span
-            className={classNames('pricingPlanItem__header__pricing__unit', {
-              'pricingPlanItem__header__pricing__unit--expanded': toggle,
-            })}
-          >
-            {translate('Per {unit}', { unit: plan.unit })}
-          </span>
-        </div>
+        {toggle && (
+          <PlanItemExpandableContent offering={offering} plan={plan} />
+        )}
       </div>
-      {toggle && <PlanItemExpandableContent offering={offering} plan={plan} />}
-    </div>
-  );
-};
+    );
+  };

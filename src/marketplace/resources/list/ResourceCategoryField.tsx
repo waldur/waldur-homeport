@@ -7,15 +7,14 @@ interface ResourceCategoryFieldProps {
   row: Resource;
 }
 
-export const ResourceCategoryField: FunctionComponent<ResourceCategoryFieldProps> = ({
-  row,
-}) => (
-  <Link
-    state={'marketplace-project-resources'}
-    params={{
-      uuid: row.project_uuid,
-      category_uuid: row.category_uuid,
-    }}
-    label={row.category_title}
-  />
-);
+export const ResourceCategoryField: FunctionComponent<ResourceCategoryFieldProps> =
+  ({ row }) => (
+    <Link
+      state={'marketplace-project-resources'}
+      params={{
+        uuid: row.project_uuid,
+        category_uuid: row.category_uuid,
+      }}
+      label={row.category_title}
+    />
+  );

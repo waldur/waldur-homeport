@@ -22,10 +22,10 @@ export const ShowReportButton: React.FC<ShowReportButtonProps> = ({
   report,
 }) => {
   const dispatch = useDispatch();
-  const callback = React.useCallback(() => dispatch(openReport(report)), [
-    report,
-    dispatch,
-  ]);
+  const callback = React.useCallback(
+    () => dispatch(openReport(report)),
+    [report, dispatch],
+  );
   if (!report) {
     return null;
   }

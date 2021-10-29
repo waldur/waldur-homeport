@@ -25,30 +25,29 @@ interface AttributeFilterListContainerState {
   loaded: boolean;
 }
 
-export const AttributeFilterList: FunctionComponent<AttributeFilterListContainerState> = (
-  props,
-) => {
-  if (props.loading) {
-    return <LoadingSpinner />;
-  }
+export const AttributeFilterList: FunctionComponent<AttributeFilterListContainerState> =
+  (props) => {
+    if (props.loading) {
+      return <LoadingSpinner />;
+    }
 
-  if (!props.loaded) {
+    if (!props.loaded) {
+      return (
+        <h3 className="text-center">
+          {translate('Unable to load category sections.')}
+        </h3>
+      );
+    }
+
+    if (!props.sections.length) {
+      return null;
+    }
+
     return (
-      <h3 className="text-center">
-        {translate('Unable to load category sections.')}
-      </h3>
+      <form>
+        {prepareSections(props.sections).map((section, index) => (
+          <AttributeFilterSection key={index} section={section} />
+        ))}
+      </form>
     );
-  }
-
-  if (!props.sections.length) {
-    return null;
-  }
-
-  return (
-    <form>
-      {prepareSections(props.sections).map((section, index) => (
-        <AttributeFilterSection key={index} section={section} />
-      ))}
-    </form>
-  );
-};
+  };

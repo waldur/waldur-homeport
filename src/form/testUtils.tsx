@@ -10,11 +10,12 @@ import {
   getFormValues,
 } from 'redux-form';
 
-export const withTestStore = (store) => (WrappedComponent) => (
-  <Provider store={store}>
-    <WrappedComponent />
-  </Provider>
-);
+export const withTestStore = (store) => (WrappedComponent) =>
+  (
+    <Provider store={store}>
+      <WrappedComponent />
+    </Provider>
+  );
 
 export const withReduxForm = (WrappedComponent) => {
   const reducer = combineReducers({ form: formReducer });
@@ -25,9 +26,8 @@ export const withReduxForm = (WrappedComponent) => {
 export const withTestForm = (WrappedComponent) =>
   reduxForm({ form: 'testForm' })(WrappedComponent);
 
-export const mountTestForm: (
-  component: React.ComponentType,
-) => ReactWrapper = compose(mount, withReduxForm, withTestForm);
+export const mountTestForm: (component: React.ComponentType) => ReactWrapper =
+  compose(mount, withReduxForm, withTestForm);
 
 export const errorOnSubmit = (error) => {
   const formError = new SubmissionError(error);

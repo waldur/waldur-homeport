@@ -15,7 +15,11 @@ export const ServiceProviderContainer: FunctionComponent = () => {
   const {
     params: { uuid },
   } = useCurrentStateAndParams();
-  const { loading, error, value: serviceProvider } = useAsync(() =>
+  const {
+    loading,
+    error,
+    value: serviceProvider,
+  } = useAsync(() =>
     getServiceProviderByCustomer({
       customer_uuid: uuid,
     }),

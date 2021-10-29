@@ -14,7 +14,7 @@ describe('SelectTableRows', () => {
         email: 'alice@gmail.com',
       },
     ];
-    const state = ({
+    const state = {
       tables: {
         [table]: {
           entities: {
@@ -30,7 +30,7 @@ describe('SelectTableRows', () => {
           order: [1, 2],
         },
       },
-    } as unknown) as RootState;
+    } as unknown as RootState;
     expect(selectTableRows(state, table)).toEqual(rows);
   });
 });

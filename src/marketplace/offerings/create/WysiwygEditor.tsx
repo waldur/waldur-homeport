@@ -46,9 +46,11 @@ export const WysiwygEditor: FunctionComponent<any> = (props) => {
 
   const contentRef = useRef();
 
-  const { loading, error, value: moduleValue } = useAsync<DraftModule>(
-    loadModule,
-  );
+  const {
+    loading,
+    error,
+    value: moduleValue,
+  } = useAsync<DraftModule>(loadModule);
 
   useEffect(() => {
     if (!moduleValue) {
@@ -59,9 +61,8 @@ export const WysiwygEditor: FunctionComponent<any> = (props) => {
       const contentState = moduleValue.ContentState.createFromBlockArray(
         contentBlock.contentBlocks,
       );
-      const editorState = moduleValue.EditorState.createWithContent(
-        contentState,
-      );
+      const editorState =
+        moduleValue.EditorState.createWithContent(contentState);
       setEditorState(editorState);
     }
   }, [moduleValue]);

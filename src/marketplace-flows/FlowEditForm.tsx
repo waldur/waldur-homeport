@@ -50,9 +50,10 @@ const FlowUpdateForm = reduxForm<{}, PureOfferingConfiguratorProps>({
 export const FlowEditForm = () => {
   useTitle(translate('Flow update'));
 
-  const state = useAsync(() => loadData(router.globals.params.flow_uuid), [
-    router.globals.params.flow_uuid,
-  ]);
+  const state = useAsync(
+    () => loadData(router.globals.params.flow_uuid),
+    [router.globals.params.flow_uuid],
+  );
   const formData = useSelector(getFormValues(FORM_ID));
   const formValid = useSelector(isValid(FORM_ID));
   const dispatch = useDispatch();

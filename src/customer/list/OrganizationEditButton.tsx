@@ -9,19 +9,18 @@ interface OrganizationEditButtonProps {
   customer: Customer;
 }
 
-export const OrganizationEditButton: FunctionComponent<OrganizationEditButtonProps> = (
-  props,
-) => {
-  const router = useRouter();
-  return (
-    <ActionButton
-      title={translate('Edit')}
-      icon="fa fa-edit"
-      action={() =>
-        router.stateService.go('support.customer-update', {
-          customer_uuid: props.customer.uuid,
-        })
-      }
-    />
-  );
-};
+export const OrganizationEditButton: FunctionComponent<OrganizationEditButtonProps> =
+  (props) => {
+    const router = useRouter();
+    return (
+      <ActionButton
+        title={translate('Edit')}
+        icon="fa fa-edit"
+        action={() =>
+          router.stateService.go('support.customer-update', {
+            customer_uuid: props.customer.uuid,
+          })
+        }
+      />
+    );
+  };

@@ -11,12 +11,11 @@ interface OpenStackInstanceCurrentFlavorProps {
   };
 }
 
-export const OpenStackInstanceCurrentFlavor: FunctionComponent<OpenStackInstanceCurrentFlavorProps> = (
-  props,
-) => (
-  <p>
-    <strong>{translate('Current flavor')}: </strong>
-    {props.context.resource.flavor_name} ({formatFlavor(props.context.resource)}
-    )
-  </p>
-);
+export const OpenStackInstanceCurrentFlavor: FunctionComponent<OpenStackInstanceCurrentFlavorProps> =
+  (props) => (
+    <p>
+      <strong>{translate('Current flavor')}: </strong>
+      {props.context.resource.flavor_name} (
+      {formatFlavor(props.context.resource)})
+    </p>
+  );

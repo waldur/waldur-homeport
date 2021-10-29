@@ -18,9 +18,10 @@ export const InvoiceDetails = ({
   invoice: Invoice;
   refreshInvoiceItems(): void;
 }) => {
-  const projects = useMemo(() => groupInvoiceItems(invoice.items), [
-    invoice.items,
-  ]);
+  const projects = useMemo(
+    () => groupInvoiceItems(invoice.items),
+    [invoice.items],
+  );
   const customer = useSelector(getCustomer);
   const showPrice = !getActiveFixedPricePaymentProfile(
     customer.payment_profiles,

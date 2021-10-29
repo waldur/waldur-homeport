@@ -163,9 +163,9 @@ const getMessage = (
 export const OrderItemSummary: FunctionComponent<OrderItemSummaryProps> = (
   props,
 ) => {
-  const message = useMemo(() => getMessage(props.orderItem, props.offering), [
-    props.orderItem,
-    props.offering,
-  ]);
+  const message = useMemo(
+    () => getMessage(props.orderItem, props.offering),
+    [props.orderItem, props.offering],
+  );
   return <>{message}</>;
 };

@@ -31,7 +31,11 @@ const loadData = (accounting_is_running: boolean) =>
 
 export const CustomersDivisionsChart: FunctionComponent = () => {
   const accountRunningState = useSelector(getAccountingRunningFieldValue);
-  const { loading, error, value: option } = useAsync(
+  const {
+    loading,
+    error,
+    value: option,
+  } = useAsync(
     () => loadData(accountRunningState?.value).then(getEChartOptions),
     [accountRunningState],
   );

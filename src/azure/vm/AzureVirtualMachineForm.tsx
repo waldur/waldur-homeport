@@ -23,106 +23,105 @@ import {
   loadSizeOptions,
 } from './utils';
 
-export const AzureVirtualMachineForm: React.FC<OfferingConfigurationFormProps> = (
-  props,
-) => {
-  const location = useSelector((state) =>
-    formValueSelector(props.form)(state, 'attributes.location'),
-  );
-  const zone = useSelector((state) =>
-    formValueSelector(props.form)(state, 'attributes.availability_zone'),
-  );
+export const AzureVirtualMachineForm: React.FC<OfferingConfigurationFormProps> =
+  (props) => {
+    const location = useSelector((state) =>
+      formValueSelector(props.form)(state, 'attributes.location'),
+    );
+    const zone = useSelector((state) =>
+      formValueSelector(props.form)(state, 'attributes.availability_zone'),
+    );
 
-  // Reset size selection when either location or zone selection is changed
-  useEffect(() => {
-    props.change('attributes.size', undefined);
-  }, [location, zone]);
+    // Reset size selection when either location or zone selection is changed
+    useEffect(() => {
+      props.change('attributes.size', undefined);
+    }, [location, zone]);
 
-  // Reset image selection when either location is changed
-  useEffect(() => {
-    props.change('attributes.image', undefined);
-  }, [location]);
+    // Reset image selection when either location is changed
+    useEffect(() => {
+      props.change('attributes.image', undefined);
+    }, [location]);
 
-  return (
-    <form className="form-horizontal">
-      <FormContainer
-        submitting={false}
-        labelClass="col-sm-3"
-        controlClass="col-sm-9"
-      >
-        <ProjectField />
-        <StringField
-          label={translate('Name')}
-          name="attributes.name"
-          description={translate(
-            'This name will be visible in accounting data.',
-          )}
-          validate={[required, virtualMachineName]}
-          required={true}
-        />
-        <AsyncSelectField
-          name="attributes.location"
-          label={translate('Location')}
-          required={true}
-          loadOptions={(query, prevOptions, currentPage) =>
-            loadLocationOptions(
-              props.offering.scope_uuid,
-              query,
-              prevOptions,
-              currentPage,
-            )
-          }
-        />
-        <SelectField
-          name="attributes.availability_zone"
-          label={translate('Availability zone')}
-          required={true}
-          options={[
-            { label: translate('First'), value: 1 },
-            { label: translate('Second'), value: 2 },
-            { label: translate('Third'), value: 3 },
-          ]}
-        />
-        <AsyncSelectField
-          name="attributes.size"
-          label={translate('Size')}
-          required={true}
-          validate={required}
-          isDisabled={!location || !zone}
-          loadOptions={(query, prevOptions, currentPage) =>
-            loadSizeOptions(
-              props.offering.scope_uuid,
-              location.uuid,
-              zone.value,
-              query,
-              prevOptions,
-              currentPage,
-            )
-          }
-          getOptionLabel={getSizeLabel}
-        />
-        <AsyncSelectField
-          name="attributes.image"
-          label={translate('Image')}
-          required={true}
-          validate={required}
-          loadOptions={(query, prevOptions, currentPage) =>
-            loadImageOptions(
-              props.offering.scope_uuid,
-              location.uuid,
-              query,
-              prevOptions,
-              currentPage,
-            )
-          }
-          getOptionLabel={getImageLabel}
-          isDisabled={!location}
-        />
-        <TextField
-          label={translate('Description')}
-          name="attributes.description"
-        />
-      </FormContainer>
-    </form>
-  );
-};
+    return (
+      <form className="form-horizontal">
+        <FormContainer
+          submitting={false}
+          labelClass="col-sm-3"
+          controlClass="col-sm-9"
+        >
+          <ProjectField />
+          <StringField
+            label={translate('Name')}
+            name="attributes.name"
+            description={translate(
+              'This name will be visible in accounting data.',
+            )}
+            validate={[required, virtualMachineName]}
+            required={true}
+          />
+          <AsyncSelectField
+            name="attributes.location"
+            label={translate('Location')}
+            required={true}
+            loadOptions={(query, prevOptions, currentPage) =>
+              loadLocationOptions(
+                props.offering.scope_uuid,
+                query,
+                prevOptions,
+                currentPage,
+              )
+            }
+          />
+          <SelectField
+            name="attributes.availability_zone"
+            label={translate('Availability zone')}
+            required={true}
+            options={[
+              { label: translate('First'), value: 1 },
+              { label: translate('Second'), value: 2 },
+              { label: translate('Third'), value: 3 },
+            ]}
+          />
+          <AsyncSelectField
+            name="attributes.size"
+            label={translate('Size')}
+            required={true}
+            validate={required}
+            isDisabled={!location || !zone}
+            loadOptions={(query, prevOptions, currentPage) =>
+              loadSizeOptions(
+                props.offering.scope_uuid,
+                location.uuid,
+                zone.value,
+                query,
+                prevOptions,
+                currentPage,
+              )
+            }
+            getOptionLabel={getSizeLabel}
+          />
+          <AsyncSelectField
+            name="attributes.image"
+            label={translate('Image')}
+            required={true}
+            validate={required}
+            loadOptions={(query, prevOptions, currentPage) =>
+              loadImageOptions(
+                props.offering.scope_uuid,
+                location.uuid,
+                query,
+                prevOptions,
+                currentPage,
+              )
+            }
+            getOptionLabel={getImageLabel}
+            isDisabled={!location}
+          />
+          <TextField
+            label={translate('Description')}
+            name="attributes.description"
+          />
+        </FormContainer>
+      </form>
+    );
+  };

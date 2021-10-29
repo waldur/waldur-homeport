@@ -10,17 +10,15 @@ interface FilterDropdownHeaderProps {
   onDropdownToggle: () => void;
 }
 
-export const FilterDropdownHeader: FunctionComponent<FilterDropdownHeaderProps> = ({
-  onDropdownToggle,
-  toggle,
-}) => (
-  <div
-    className={classNames('dropdownHeader', {
-      'p-md': toggle,
-      'p-sm': !toggle,
-    })}
-  >
-    <FilterDropdownToggleButton onClick={onDropdownToggle} />
-    <FilteredBy />
-  </div>
-);
+export const FilterDropdownHeader: FunctionComponent<FilterDropdownHeaderProps> =
+  ({ onDropdownToggle, toggle }) => (
+    <div
+      className={classNames('dropdownHeader', {
+        'p-md': toggle,
+        'p-sm': !toggle,
+      })}
+    >
+      <FilterDropdownToggleButton onClick={onDropdownToggle} />
+      <FilteredBy />
+    </div>
+  );

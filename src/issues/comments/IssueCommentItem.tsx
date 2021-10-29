@@ -52,105 +52,104 @@ interface PureIssueCommentItemProps extends TranslateProps {
 
 const getFilename = (url) => url.slice(url.lastIndexOf('/') + 1);
 
-export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> = (
-  props,
-) => {
-  const {
-    comment,
-    attachments,
-    user,
-    users,
-    deleting,
-    uiDisabled,
-    formToggleDisabled,
-    openDeleteDialog,
-    openUserDialog,
-    openAttachmentPreview,
-    toggleForm,
-    translate,
-  } = props;
-  const userList =
-    users &&
-    users[comment.author_uuid] &&
-    users[comment.author_uuid].map((currentUser, index) => (
-      <Fragment key={index}>{currentUser.toUpperCase()}</Fragment>
-    ));
-  const onCommentClick = (evt) => {
-    const target = evt.target as HTMLElement;
-    if (!target.matches('img')) {
-      return;
-    }
-    const url = target.getAttribute('src');
-    openAttachmentPreview(url, getFilename(url));
-  };
+export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> =
+  (props) => {
+    const {
+      comment,
+      attachments,
+      user,
+      users,
+      deleting,
+      uiDisabled,
+      formToggleDisabled,
+      openDeleteDialog,
+      openUserDialog,
+      openAttachmentPreview,
+      toggleForm,
+      translate,
+    } = props;
+    const userList =
+      users &&
+      users[comment.author_uuid] &&
+      users[comment.author_uuid].map((currentUser, index) => (
+        <Fragment key={index}>{currentUser.toUpperCase()}</Fragment>
+      ));
+    const onCommentClick = (evt) => {
+      const target = evt.target as HTMLElement;
+      if (!target.matches('img')) {
+        return;
+      }
+      const url = target.getAttribute('src');
+      openAttachmentPreview(url, getFilename(url));
+    };
 
-  return (
-    <div className="comment-item vertical-timeline-block">
-      {deleting && <LoadingOverlay />}
-      <div className="vertical-timeline-icon">
-        <Gravatar
-          className="b-r-xl img-sm"
-          email={comment.author_email || ''}
-          size={32}
-          default="mm"
-        />
-      </div>
-      <div className="vertical-timeline-content">
-        <div className="comment-item__header m-b-sm">
-          <div className="comment-item__title">
-            {translate(
-              '{user} commented:',
-              { user: <a onClick={openUserDialog}>{comment.author_name}</a> },
-              formatJsxTemplate,
-            )}
-          </div>
-          <div className="comment-item__controls">
-            {(user.is_staff || user.uuid === comment.author_uuid) && (
-              <>
-                <button
-                  className="comment-item__edit btn btn-link"
-                  disabled={uiDisabled || formToggleDisabled}
-                  onClick={toggleForm}
-                >
-                  <i className="fa fa-edit" aria-hidden="true" />
-                </button>
-                <button
-                  className="comment-item__delete btn btn-link"
-                  disabled={uiDisabled}
-                  onClick={openDeleteDialog}
-                >
-                  <i className="fa fa-trash" aria-hidden="true" />
-                </button>
-              </>
-            )}
-            {!comment.is_public && (
-              <span className="label label-default text-uppercase">
-                {translate('Internal')}
-              </span>
-            )}
-          </div>
+    return (
+      <div className="comment-item vertical-timeline-block">
+        {deleting && <LoadingOverlay />}
+        <div className="vertical-timeline-icon">
+          <Gravatar
+            className="b-r-xl img-sm"
+            email={comment.author_email || ''}
+            size={32}
+            default="mm"
+          />
         </div>
-        <div
-          className="comment-item__content"
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(
-              utils.formatJiraMarkup(comment.description, attachments),
-            ),
-          }}
-          onClick={onCommentClick}
-        />
-        <div className="small text-muted m-t-sm">
-          <div>{userList}</div>
-          <div>{formatMediumDateTime(comment.created)}</div>
+        <div className="vertical-timeline-content">
+          <div className="comment-item__header m-b-sm">
+            <div className="comment-item__title">
+              {translate(
+                '{user} commented:',
+                { user: <a onClick={openUserDialog}>{comment.author_name}</a> },
+                formatJsxTemplate,
+              )}
+            </div>
+            <div className="comment-item__controls">
+              {(user.is_staff || user.uuid === comment.author_uuid) && (
+                <>
+                  <button
+                    className="comment-item__edit btn btn-link"
+                    disabled={uiDisabled || formToggleDisabled}
+                    onClick={toggleForm}
+                  >
+                    <i className="fa fa-edit" aria-hidden="true" />
+                  </button>
+                  <button
+                    className="comment-item__delete btn btn-link"
+                    disabled={uiDisabled}
+                    onClick={openDeleteDialog}
+                  >
+                    <i className="fa fa-trash" aria-hidden="true" />
+                  </button>
+                </>
+              )}
+              {!comment.is_public && (
+                <span className="label label-default text-uppercase">
+                  {translate('Internal')}
+                </span>
+              )}
+            </div>
+          </div>
+          <div
+            className="comment-item__content"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(
+                utils.formatJiraMarkup(comment.description, attachments),
+              ),
+            }}
+            onClick={onCommentClick}
+          />
+          <div className="small text-muted m-t-sm">
+            <div>{userList}</div>
+            <div>{formatMediumDateTime(comment.created)}</div>
+          </div>
+          <IssueCommentsFormContainer
+            formId={comment.uuid}
+            defaultMessage={comment.description}
+          />
         </div>
-        <IssueCommentsFormContainer
-          formId={comment.uuid}
-          defaultMessage={comment.description}
-        />
       </div>
-    </div>
-  );
-};
+    );
+  };
 
 const createDeleteDialog = (uuid) =>
   openModalDialog(IssueCommentDeleteDialog, { resolve: { uuid } });

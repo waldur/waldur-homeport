@@ -5,6 +5,5 @@ export const helpData = {
   key: 'DigitalOcean',
   name: translate('DigitalOcean provider'),
   title: translate('How to obtain credentials for DigitalOcean provider'),
-  link:
-    'https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2',
+  link: 'https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2',
 };

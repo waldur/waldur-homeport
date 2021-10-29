@@ -31,19 +31,18 @@ export const formatEventTitle = (choice) => {
   return choice + ' events';
 };
 
-export const loadEventGroupsOptions: () => Promise<
-  EventGroupOption[]
-> = async () => {
-  const groups = await getEventGroups();
-  const options = Object.keys(groups)
-    .map((key) => ({
-      key,
-      title: formatEventTitle(key),
-      help_text: groups[key].join(', '),
-    }))
-    .sort((a, b) => a.title.localeCompare(b.title));
-  return options;
-};
+export const loadEventGroupsOptions: () => Promise<EventGroupOption[]> =
+  async () => {
+    const groups = await getEventGroups();
+    const options = Object.keys(groups)
+      .map((key) => ({
+        key,
+        title: formatEventTitle(key),
+        help_text: groups[key].join(', '),
+      }))
+      .sort((a, b) => a.title.localeCompare(b.title));
+    return options;
+  };
 
 export const getInitialValue = (hook) =>
   hook

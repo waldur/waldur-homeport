@@ -13,7 +13,11 @@ import './AllocationUsageTable.scss';
 export const AllocationUsageTable: FunctionComponent<{ resource }> = ({
   resource,
 }) => {
-  const { loading, error, value: charts } = useAsync(() =>
+  const {
+    loading,
+    error,
+    value: charts,
+  } = useAsync(() =>
     loadCharts(resource.url, resource.marketplace_resource_uuid),
   );
 

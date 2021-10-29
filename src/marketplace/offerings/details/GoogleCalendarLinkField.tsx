@@ -24,20 +24,20 @@ const googleCalendarLink = (link: string) => {
   return <CopyToClipboardContainer value={value} label={content} />;
 };
 
-export const GoogleCalendarLinkField: FunctionComponent<GoogleCalendarLinkFieldProps> = ({
-  offering,
-}) => {
-  const { value } = useAsync(() => getBookingOffering(offering.uuid), [
-    offering,
-  ]);
-  return value && value.googlecalendar && value.googlecalendar.public ? (
-    <ResourceDetailsTable>
-      <div className="m-t-n google-calendar-link-field-container">
-        <Field
-          label={translate('Google Calendar link')}
-          value={googleCalendarLink(value.googlecalendar.http_link)}
-        />
-      </div>
-    </ResourceDetailsTable>
-  ) : null;
-};
+export const GoogleCalendarLinkField: FunctionComponent<GoogleCalendarLinkFieldProps> =
+  ({ offering }) => {
+    const { value } = useAsync(
+      () => getBookingOffering(offering.uuid),
+      [offering],
+    );
+    return value && value.googlecalendar && value.googlecalendar.public ? (
+      <ResourceDetailsTable>
+        <div className="m-t-n google-calendar-link-field-container">
+          <Field
+            label={translate('Google Calendar link')}
+            value={googleCalendarLink(value.googlecalendar.http_link)}
+          />
+        </div>
+      </ResourceDetailsTable>
+    ) : null;
+  };

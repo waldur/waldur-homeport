@@ -30,9 +30,10 @@ export const OrganizationsPanel: FunctionComponent<{
   organizationsCount;
 }> = ({ selectedOrganization, selectOrganization, organizationsCount }) => {
   const [filter, setFilter] = useState('');
-  const getPage = useCallback((page) => getCustomersPage(filter, page), [
-    filter,
-  ]);
+  const getPage = useCallback(
+    (page) => getCustomersPage(filter, page),
+    [filter],
+  );
 
   return (
     <Col className="workspace-listing m-b-md" md={6} xs={12}>

@@ -42,7 +42,11 @@ async function loadData(resourceId: string) {
 }
 
 export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
-  const { loading, error, value: data } = useAsync(
+  const {
+    loading,
+    error,
+    value: data,
+  } = useAsync(
     () => loadData(props.resolve.resourceId),
     [props.resolve.resourceId],
   );

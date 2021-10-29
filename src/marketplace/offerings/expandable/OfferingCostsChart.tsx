@@ -25,7 +25,11 @@ export const OfferingCostsChart: FunctionComponent<OfferingCostChartProps> = (
   const accountRunningState = useSelector((state: RootState) =>
     getAccountingRunningFieldValue(state, props.uniqueFormId),
   );
-  const { loading, error, value: option } = useAsync(
+  const {
+    loading,
+    error,
+    value: option,
+  } = useAsync(
     () =>
       getOfferingCostChartData(
         accountRunningState?.value,
