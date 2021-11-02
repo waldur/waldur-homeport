@@ -16,7 +16,7 @@ export const AddRemoteUserDialog = ({ resolve: { refreshList } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Add {provider} user', context)}
-      fields={[
+      formFields={[
         {
           name: 'cuid',
           label: translate('Remote user ID'),

@@ -28,7 +28,7 @@ export const CreateOfferingUserDialog = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create offering user')}
-      fields={fields}
+      formFields={fields}
       submitForm={async (formData) => {
         try {
           await createOfferingUser({

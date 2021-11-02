@@ -1,16 +1,14 @@
+import { FC } from 'react';
 import { Col, Panel } from 'react-bootstrap';
-import { WrappedFieldArrayProps } from 'redux-form';
 
-import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
 import { RemoveButton } from '../RemoveButton';
 
 import { AddOptionButton } from './AddOptionButton';
 import { OptionForm } from './OptionForm';
 
-type Props = TranslateProps & WrappedFieldArrayProps<any>;
-
-export const OfferingOptions = withTranslation((props: Props) => (
+export const OfferingOptions: FC<any> = (props) => (
   <div className="form-group">
     <h3 className="content-center m-t-md m-b-lg">
       {translate(
@@ -23,7 +21,7 @@ export const OfferingOptions = withTranslation((props: Props) => (
           <Panel.Heading>
             <RemoveButton onClick={() => props.fields.remove(index)} />
             <h4>
-              {props.translate('User input field #{index}', {
+              {translate('User input field #{index}', {
                 index: index + 1,
               })}
             </h4>
@@ -34,8 +32,8 @@ export const OfferingOptions = withTranslation((props: Props) => (
         </Panel>
       ))}
       <AddOptionButton onClick={() => props.fields.push({})}>
-        {props.translate('Add user input field')}
+        {translate('Add user input field')}
       </AddOptionButton>
     </Col>
   </div>
-));
+);

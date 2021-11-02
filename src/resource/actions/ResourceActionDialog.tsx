@@ -18,7 +18,7 @@ import { RESOURCE_ACTION_FORM } from './constants';
 interface ResourceActionDialogOwnProps {
   submitForm(formData): void;
   dialogTitle: string;
-  fields: any[];
+  formFields: any[];
   loading?: boolean;
   error?: Error;
 }
@@ -42,7 +42,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
     dialogTitle,
     loading,
     error,
-    fields,
+    formFields: fields,
   }) => {
     return (
       <ActionDialog

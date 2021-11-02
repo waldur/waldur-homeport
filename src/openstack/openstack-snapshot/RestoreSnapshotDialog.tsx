@@ -15,7 +15,7 @@ export const RestoreSnapshotDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Restore volume snapshot')}
-      fields={[createLatinNameField(), createDescriptionField()]}
+      formFields={[createLatinNameField(), createDescriptionField()]}
       initialValues={{
         mtu: resource.mtu,
       }}

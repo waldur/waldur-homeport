@@ -12,7 +12,7 @@ export const CreateDiskDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create disk')}
-      fields={[
+      formFields={[
         {
           label: translate('Size'),
           type: 'integer',

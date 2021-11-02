@@ -51,7 +51,7 @@ export const ChangeFlavorDialog = ({ resolve: { resource } }) => {
       dialogTitle={translate('Change flavor')}
       loading={asyncState.loading}
       error={asyncState.error}
-      fields={fields}
+      formFields={fields}
       submitForm={async (formData: ChangeFlavorRequestBody) => {
         try {
           await changeFlavor(resource.uuid, formData);

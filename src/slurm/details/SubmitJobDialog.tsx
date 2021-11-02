@@ -12,7 +12,7 @@ export const SubmitJobDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Submit job')}
-      fields={[
+      formFields={[
         {
           name: 'file',
           label: translate('Batch script file'),

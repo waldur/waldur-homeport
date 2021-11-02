@@ -15,7 +15,7 @@ export const CreateBackupScheduleDialog = ({ resolve: { resource } }) => {
       dialogTitle={translate(
         'Create VM snapshot schedule for OpenStack instance',
       )}
-      fields={getFields()}
+      formFields={getFields()}
       initialValues={{
         timezone: getDefaultTimezone(),
         schedule: '0 * * * *',

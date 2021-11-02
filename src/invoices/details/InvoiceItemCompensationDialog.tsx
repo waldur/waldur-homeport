@@ -24,7 +24,7 @@ export const InvoiceItemCompensationDialog = ({
       dialogTitle={translate('Create compensation for invoice item {name}', {
         name: resource.name,
       })}
-      fields={fields}
+      formFields={fields}
       submitForm={async (formData) => {
         try {
           await createInvoiceItemCompensation(resource.uuid, formData);

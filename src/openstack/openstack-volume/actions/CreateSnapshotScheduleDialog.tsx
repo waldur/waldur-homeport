@@ -13,7 +13,7 @@ export const CreateSnapshotScheduleDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create snapshot schedule for OpenStack volume')}
-      fields={getFields()}
+      formFields={getFields()}
       initialValues={{
         timezone: getDefaultTimezone(),
         schedule: '0 * * * *',

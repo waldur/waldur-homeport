@@ -11,7 +11,7 @@ export const SetMtuDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Set MTU')}
-      fields={[
+      formFields={[
         {
           name: 'mtu',
           type: 'integer',
