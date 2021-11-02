@@ -32,13 +32,15 @@ export const OfferingDetailsPage: React.FC = () => {
 
   const router = useRouter();
 
-  const { loading, value, error } = useAsync(() => loadData(offering_uuid), [
-    offering_uuid,
-  ]);
+  const { loading, value, error } = useAsync(
+    () => loadData(offering_uuid),
+    [offering_uuid],
+  );
 
-  useBreadcrumbsFn(() => (value ? getBreadcrumbs(value.offering) : []), [
-    value,
-  ]);
+  useBreadcrumbsFn(
+    () => (value ? getBreadcrumbs(value.offering) : []),
+    [value],
+  );
 
   useTitle(value ? value.offering.name : translate('Offering details'));
 

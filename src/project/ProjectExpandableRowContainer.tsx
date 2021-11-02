@@ -44,9 +44,10 @@ async function loadData(props): Promise<ExpandableRow[]> {
 export const ProjectExpandableRowContainer: React.FC<{
   row: Project;
 }> = (props) => {
-  const { loading, error, value } = useAsync(() => loadData(props.row), [
-    props.row,
-  ]);
+  const { loading, error, value } = useAsync(
+    () => loadData(props.row),
+    [props.row],
+  );
   if (loading) {
     return <LoadingSpinner />;
   } else if (error) {

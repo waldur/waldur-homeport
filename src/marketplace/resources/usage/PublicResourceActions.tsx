@@ -25,29 +25,28 @@ interface PublicResourceActionsProps {
   >;
 }
 
-export const PublicResourceActions: FunctionComponent<PublicResourceActionsProps> = ({
-  row,
-}) => {
-  const is_support_only = useSelector(isSupportOnly);
-  if (!row.is_usage_based || !row.plan || row.state === 'Creating') {
-    return <>{'N/A'}</>;
-  }
-  const disabled = !['OK', 'Updating', 'Terminating'].includes(row.state);
-  return (
-    <ButtonGroup>
-      <ResourceShowUsageButton resource={row} />
-      {!is_support_only && (
-        <ResourceCreateUsageButton
-          offering_uuid={row.offering_uuid}
-          resource_uuid={row.uuid}
-          resource_name={row.name}
-          customer_name={row.customer_name}
-          project_name={row.project_name}
-          backend_id={row.backend_id}
-          disabled={disabled}
-        />
-      )}
-      <SetBackendIdButton resource={row} />
-    </ButtonGroup>
-  );
-};
+export const PublicResourceActions: FunctionComponent<PublicResourceActionsProps> =
+  ({ row }) => {
+    const is_support_only = useSelector(isSupportOnly);
+    if (!row.is_usage_based || !row.plan || row.state === 'Creating') {
+      return <>{'N/A'}</>;
+    }
+    const disabled = !['OK', 'Updating', 'Terminating'].includes(row.state);
+    return (
+      <ButtonGroup>
+        <ResourceShowUsageButton resource={row} />
+        {!is_support_only && (
+          <ResourceCreateUsageButton
+            offering_uuid={row.offering_uuid}
+            resource_uuid={row.uuid}
+            resource_name={row.name}
+            customer_name={row.customer_name}
+            project_name={row.project_name}
+            backend_id={row.backend_id}
+            disabled={disabled}
+          />
+        )}
+        <SetBackendIdButton resource={row} />
+      </ButtonGroup>
+    );
+  };

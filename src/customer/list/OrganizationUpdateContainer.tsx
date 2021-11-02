@@ -26,9 +26,11 @@ export const OrganizationUpdateContainer: FunctionComponent = () => {
   const {
     params: { customer_uuid },
   } = useCurrentStateAndParams();
-  const { loading, error, value: customer } = useAsync(() =>
-    getCustomer(customer_uuid),
-  );
+  const {
+    loading,
+    error,
+    value: customer,
+  } = useAsync(() => getCustomer(customer_uuid));
 
   useBreadcrumbsFn(getBreadcrumbs, []);
 

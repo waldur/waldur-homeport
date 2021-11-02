@@ -14,17 +14,16 @@ interface TerminateDialogContainerProps {
   };
 }
 
-export const TerminateDialogContainer: React.FC<TerminateDialogContainerProps> = (
-  props,
-) => {
-  const asyncState = useAsync(
-    () => getResource(props.resolve.resource.marketplace_resource_uuid),
-    [props.resolve.resource.marketplace_resource_uuid],
-  );
-  return (
-    <TerminateContainer
-      asyncState={asyncState}
-      dialogSubtitle={props.resolve.dialogSubtitle}
-    />
-  );
-};
+export const TerminateDialogContainer: React.FC<TerminateDialogContainerProps> =
+  (props) => {
+    const asyncState = useAsync(
+      () => getResource(props.resolve.resource.marketplace_resource_uuid),
+      [props.resolve.resource.marketplace_resource_uuid],
+    );
+    return (
+      <TerminateContainer
+        asyncState={asyncState}
+        dialogSubtitle={props.resolve.dialogSubtitle}
+      />
+    );
+  };

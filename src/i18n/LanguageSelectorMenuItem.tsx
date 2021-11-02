@@ -4,11 +4,8 @@ import { useLanguageSelector } from './useLanguageSelector';
 import './LanguageSelectorMenuItem.scss';
 
 export const LanguageSelectorMenuItem: FunctionComponent = () => {
-  const {
-    currentLanguage,
-    languageChoices,
-    setLanguage,
-  } = useLanguageSelector();
+  const { currentLanguage, languageChoices, setLanguage } =
+    useLanguageSelector();
 
   const handleChange = (event) => {
     setLanguage(

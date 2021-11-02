@@ -70,14 +70,8 @@ export const OfferingCreateDialog: React.FC<OfferingCreateDialogProps> = (
     props.setStep(STEPS[0]);
   }, []);
 
-  const {
-    loading,
-    loaded,
-    erred,
-    handleSubmit,
-    createOffering,
-    ...rest
-  } = props;
+  const { loading, loaded, erred, handleSubmit, createOffering, ...rest } =
+    props;
 
   if (loading) {
     return <LoadingSpinner />;

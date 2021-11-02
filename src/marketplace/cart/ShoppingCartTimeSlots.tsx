@@ -15,26 +15,25 @@ interface ShoppingCartTimeSlotsProps {
   schedules: ScheduleType[];
 }
 
-export const ShoppingCartTimeSlots: FunctionComponent<ShoppingCartTimeSlotsProps> = ({
-  schedules,
-}) =>
-  schedules?.length ? (
-    <p>
-      <>{translate('Time slots')}: </>
-      {schedules.map((schedule, index: number) => (
-        <Fragment key={schedule.id}>
-          <>
-            {wrapScheduleTitleTooltip(
-              schedule.title,
-              <>
-                {formatDateTime(schedule.start)}
-                {' - '}
-                {formatDateTime(schedule.end)}
-              </>,
-            )}
-          </>
-          <>{schedules.length - 1 !== index && ', '}</>
-        </Fragment>
-      ))}
-    </p>
-  ) : null;
+export const ShoppingCartTimeSlots: FunctionComponent<ShoppingCartTimeSlotsProps> =
+  ({ schedules }) =>
+    schedules?.length ? (
+      <p>
+        <>{translate('Time slots')}: </>
+        {schedules.map((schedule, index: number) => (
+          <Fragment key={schedule.id}>
+            <>
+              {wrapScheduleTitleTooltip(
+                schedule.title,
+                <>
+                  {formatDateTime(schedule.start)}
+                  {' - '}
+                  {formatDateTime(schedule.end)}
+                </>,
+              )}
+            </>
+            <>{schedules.length - 1 !== index && ', '}</>
+          </Fragment>
+        ))}
+      </p>
+    ) : null;

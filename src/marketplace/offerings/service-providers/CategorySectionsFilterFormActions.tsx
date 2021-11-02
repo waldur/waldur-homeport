@@ -11,20 +11,19 @@ interface CategorySectionsFilterFormActionsProps {
   closeDropdown: () => void;
 }
 
-export const CategorySectionsFilterFormActions: FunctionComponent<CategorySectionsFilterFormActionsProps> = (
-  props,
-) => {
-  const dispatch = useDispatch();
-  const onClearFilter = () => {
-    dispatch(reset(OFFERING_CATEGORY_SECTION_FORM_ID));
+export const CategorySectionsFilterFormActions: FunctionComponent<CategorySectionsFilterFormActionsProps> =
+  (props) => {
+    const dispatch = useDispatch();
+    const onClearFilter = () => {
+      dispatch(reset(OFFERING_CATEGORY_SECTION_FORM_ID));
+    };
+    const onCollapseFilter = () => {
+      props.closeDropdown();
+    };
+    return (
+      <div className="categorySectionsFilterFormActions">
+        <Button label="Clear All" onClick={onClearFilter} />
+        <Button label="Collapse Filter" onClick={onCollapseFilter} />
+      </div>
+    );
   };
-  const onCollapseFilter = () => {
-    props.closeDropdown();
-  };
-  return (
-    <div className="categorySectionsFilterFormActions">
-      <Button label="Clear All" onClick={onClearFilter} />
-      <Button label="Collapse Filter" onClick={onCollapseFilter} />
-    </div>
-  );
-};

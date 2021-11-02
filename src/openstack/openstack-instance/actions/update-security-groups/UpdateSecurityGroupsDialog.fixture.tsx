@@ -8,25 +8,23 @@ import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types
 
 import { UpdateSecurityGroupsDialog } from './UpdateSecurityGroupsDialog';
 
-export const fakeSecurityGroups = ([
+export const fakeSecurityGroups = [
   {
-    url:
-      '/api/openstacktenant-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
+    url: '/api/openstacktenant-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
     name: 'SSH',
   },
   {
-    url:
-      '/api/openstacktenant-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
+    url: '/api/openstacktenant-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
     name: 'Default',
   },
-] as unknown) as SecurityGroup[];
+] as unknown as SecurityGroup[];
 
-export const fakeInstance = ({
+export const fakeInstance = {
   name: 'backup',
   uuid: 'bcbb973635754084a5b292ecb2274e33',
   service_settings_uuid: 'a500a20d8f7040eabb9e0103d5f119af',
   security_groups: fakeSecurityGroups,
-} as unknown) as OpenStackInstance;
+} as unknown as OpenStackInstance;
 
 type DialogWrapperType = ReactWrapper<typeof UpdateSecurityGroupsDialog>;
 

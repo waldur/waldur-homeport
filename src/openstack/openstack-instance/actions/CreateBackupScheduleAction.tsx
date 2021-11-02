@@ -22,15 +22,14 @@ interface CreateBackupScheduleActionProps {
 
 const validators = [validateState('OK')];
 
-export const CreateBackupScheduleAction: FC<CreateBackupScheduleActionProps> = ({
-  resource,
-}) => (
-  <DialogActionButton
-    title={translate('Create')}
-    icon="fa fa-plus"
-    modalComponent={CreateBackupScheduleDialog}
-    formId={RESOURCE_ACTION_FORM}
-    resource={resource}
-    validators={validators}
-  />
-);
+export const CreateBackupScheduleAction: FC<CreateBackupScheduleActionProps> =
+  ({ resource }) => (
+    <DialogActionButton
+      title={translate('Create')}
+      icon="fa fa-plus"
+      modalComponent={CreateBackupScheduleDialog}
+      formId={RESOURCE_ACTION_FORM}
+      resource={resource}
+      validators={validators}
+    />
+  );

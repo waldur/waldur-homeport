@@ -10,19 +10,18 @@ interface ResourceDetailsLinkProps {
   children?: React.ReactNode;
 }
 
-export const ResourceDetailsLink: FunctionComponent<ResourceDetailsLinkProps> = (
-  props,
-) => (
-  <>
-    <Link
-      state="resource-details"
-      params={{
-        resource_type: props.item.resource_type,
-        resource_uuid: props.item.resource_uuid,
-        uuid: props.item.project_uuid,
-      }}
-      label={props.children}
-    />
-    <BackendIdTooltip backendId={props.item.backend_id} />
-  </>
-);
+export const ResourceDetailsLink: FunctionComponent<ResourceDetailsLinkProps> =
+  (props) => (
+    <>
+      <Link
+        state="resource-details"
+        params={{
+          resource_type: props.item.resource_type,
+          resource_uuid: props.item.resource_uuid,
+          uuid: props.item.project_uuid,
+        }}
+        label={props.children}
+      />
+      <BackendIdTooltip backendId={props.item.backend_id} />
+    </>
+  );

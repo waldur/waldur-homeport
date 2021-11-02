@@ -304,11 +304,8 @@ function* googleCalendarUnpublish(action: Action<any>) {
 }
 
 function* updateConfirmationMessage(action: Action<any>) {
-  const {
-    offeringUuid,
-    templateConfirmationMessage,
-    secretOptions,
-  } = action.payload;
+  const { offeringUuid, templateConfirmationMessage, secretOptions } =
+    action.payload;
   try {
     yield call(
       api.updateOfferingConfirmationMessage,

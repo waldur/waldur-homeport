@@ -10,18 +10,21 @@ interface EditConfirmationMessageDialogProps {
   resolve: { offeringUuid: string };
 }
 
-export const EditConfirmationMessageDialog: FunctionComponent<EditConfirmationMessageDialogProps> = ({
-  resolve,
-}) => {
-  const { loading, error, value: offering } = useAsync(
-    async () => await getOffering(resolve.offeringUuid),
-    [resolve.offeringUuid],
-  );
-  return loading ? (
-    <LoadingSpinner />
-  ) : error ? (
-    <>{translate('Unable to load offering.')}</>
-  ) : (
-    <EditConfirmationMessageForm offering={offering} />
-  );
-};
+export const EditConfirmationMessageDialog: FunctionComponent<EditConfirmationMessageDialogProps> =
+  ({ resolve }) => {
+    const {
+      loading,
+      error,
+      value: offering,
+    } = useAsync(
+      async () => await getOffering(resolve.offeringUuid),
+      [resolve.offeringUuid],
+    );
+    return loading ? (
+      <LoadingSpinner />
+    ) : error ? (
+      <>{translate('Unable to load offering.')}</>
+    ) : (
+      <EditConfirmationMessageForm offering={offering} />
+    );
+  };

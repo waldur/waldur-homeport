@@ -100,9 +100,8 @@ export const OrderItemDetailsContainer: React.FC = () => {
     loadData();
   });
 
-  const [asyncValue, setAsyncValue] = useState<
-    Await<ReturnType<typeof loadData>>
-  >();
+  const [asyncValue, setAsyncValue] =
+    useState<Await<ReturnType<typeof loadData>>>();
 
   const { online } = useNetwork();
 

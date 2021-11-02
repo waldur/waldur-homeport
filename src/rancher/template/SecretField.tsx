@@ -18,7 +18,11 @@ export const SecretField: React.FC<FieldProps> = (props) => {
   const project = useSelector((state: RootState) =>
     formValueSelector(FORM_ID)(state, 'project'),
   );
-  const { loading, error, value: options } = useAsync(
+  const {
+    loading,
+    error,
+    value: options,
+  } = useAsync(
     () => (project ? getProjectSecrets(project.uuid) : Promise.resolve([])),
     [project],
   );

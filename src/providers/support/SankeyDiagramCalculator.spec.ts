@@ -11,10 +11,8 @@ describe('SankeyDiagramCalculator', () => {
   });
 
   it('should return total number of provided resources in specific country', () => {
-    const totalResourcesSumForCountry = new SankeyDiagramCalculator().getResourcesSumForCountry(
-      data,
-      'Estonia',
-    );
+    const totalResourcesSumForCountry =
+      new SankeyDiagramCalculator().getResourcesSumForCountry(data, 'Estonia');
     expect(totalResourcesSumForCountry).toEqual(200000);
   });
 
@@ -28,10 +26,11 @@ describe('SankeyDiagramCalculator', () => {
   });
 
   it('should calculate total resources for a country', () => {
-    const totalResourcesForCountry = new SankeyDiagramCalculator().calculateValueForCountry(
-      data,
-      'uni_of_tartu',
-    );
+    const totalResourcesForCountry =
+      new SankeyDiagramCalculator().calculateValueForCountry(
+        data,
+        'uni_of_tartu',
+      );
     expect(totalResourcesForCountry).toEqual(10);
   });
 });

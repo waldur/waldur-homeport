@@ -9,18 +9,16 @@ interface OfferingPurchaseButtonProps {
   label: string;
 }
 
-export const OfferingPurchaseButton: FunctionComponent<OfferingPurchaseButtonProps> = ({
-  offering,
-  label,
-}) => (
-  <div className="offeringPurchaseButton">
-    <Link
-      state="marketplace-offering-user"
-      params={{ offering_uuid: offering.uuid }}
-    >
-      <button type="button" className="btn btn-default btn-card">
-        {label}
-      </button>
-    </Link>
-  </div>
-);
+export const OfferingPurchaseButton: FunctionComponent<OfferingPurchaseButtonProps> =
+  ({ offering, label }) => (
+    <div className="offeringPurchaseButton">
+      <Link
+        state="marketplace-offering-user"
+        params={{ offering_uuid: offering.uuid }}
+      >
+        <button type="button" className="btn btn-default btn-card">
+          {label}
+        </button>
+      </Link>
+    </div>
+  );

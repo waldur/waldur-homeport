@@ -12,13 +12,12 @@ interface PureOrganizationDetailsDialogProps {
   };
 }
 
-export const OrganizationDetailsDialog: FunctionComponent<PureOrganizationDetailsDialogProps> = (
-  props,
-) => (
-  <ModalDialog
-    title={translate('Organization details')}
-    footer={<CloseDialogButton />}
-  >
-    <OrganizationDetails customer={props.resolve.customer} />
-  </ModalDialog>
-);
+export const OrganizationDetailsDialog: FunctionComponent<PureOrganizationDetailsDialogProps> =
+  (props) => (
+    <ModalDialog
+      title={translate('Organization details')}
+      footer={<CloseDialogButton />}
+    >
+      <OrganizationDetails customer={props.resolve.customer} />
+    </ModalDialog>
+  );

@@ -26,15 +26,14 @@ const openReferralsDialog = (offering: Offering) => {
   });
 };
 
-export const ReferralDetailsButton: FunctionComponent<ReferralDetailsButtonProps> = (
-  props,
-) => {
-  const dispatch = useDispatch();
-  return (
-    <ActionButton
-      title={translate('Details')}
-      icon="fa fa-eye"
-      action={() => dispatch(openReferralsDialog(props.offering))}
-    />
-  );
-};
+export const ReferralDetailsButton: FunctionComponent<ReferralDetailsButtonProps> =
+  (props) => {
+    const dispatch = useDispatch();
+    return (
+      <ActionButton
+        title={translate('Details')}
+        icon="fa fa-eye"
+        action={() => dispatch(openReferralsDialog(props.offering))}
+      />
+    );
+  };

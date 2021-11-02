@@ -56,17 +56,15 @@ const serializeDataVolume = ({ size, ...volumeRest }) => ({
   size: size * 1024,
 });
 
-const serializeNode = (subnet) => ({
-  system_volume_size,
-  flavor,
-  ...nodeRest
-}) => ({
-  ...nodeRest,
-  system_volume_size: system_volume_size * 1024,
-  flavor: flavor ? flavor.url : undefined,
-  subnet,
-  data_volumes: (nodeRest.data_volumes || []).map(serializeDataVolume),
-});
+const serializeNode =
+  (subnet) =>
+  ({ system_volume_size, flavor, ...nodeRest }) => ({
+    ...nodeRest,
+    system_volume_size: system_volume_size * 1024,
+    flavor: flavor ? flavor.url : undefined,
+    subnet,
+    data_volumes: (nodeRest.data_volumes || []).map(serializeDataVolume),
+  });
 
 const serializer = ({
   subnet,

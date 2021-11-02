@@ -15,38 +15,39 @@ interface OfferingPermissionRemoveButtonProps {
   permission: any;
 }
 
-export const OfferingPermissionRemoveButton: React.FC<OfferingPermissionRemoveButtonProps> = ({
-  permission,
-}) => {
-  const dispatch = useDispatch();
-  const customer = useSelector(getCustomer);
-  const callback = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate('Are you sure you want to revoke this permission?'),
-      );
-    } catch {
-      return;
-    }
-    try {
-      await Axios.delete(permission.url);
-      dispatch(showSuccess(translate('Permission has been revoked.')));
-      dispatch(
-        fetchListStart(OFFERING_PERMISSIONS_LIST_ID, {
-          customer_uuid: customer.uuid,
-        }),
-      );
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to revoke permission.')));
-    }
+export const OfferingPermissionRemoveButton: React.FC<OfferingPermissionRemoveButtonProps> =
+  ({ permission }) => {
+    const dispatch = useDispatch();
+    const customer = useSelector(getCustomer);
+    const callback = async () => {
+      try {
+        await waitForConfirmation(
+          dispatch,
+          translate('Confirmation'),
+          translate('Are you sure you want to revoke this permission?'),
+        );
+      } catch {
+        return;
+      }
+      try {
+        await Axios.delete(permission.url);
+        dispatch(showSuccess(translate('Permission has been revoked.')));
+        dispatch(
+          fetchListStart(OFFERING_PERMISSIONS_LIST_ID, {
+            customer_uuid: customer.uuid,
+          }),
+        );
+      } catch (e) {
+        dispatch(
+          showErrorResponse(e, translate('Unable to revoke permission.')),
+        );
+      }
+    };
+    return (
+      <ActionButton
+        action={callback}
+        title={translate('Revoke')}
+        icon="fa fa-trash"
+      />
+    );
   };
-  return (
-    <ActionButton
-      action={callback}
-      title={translate('Revoke')}
-      icon="fa fa-trash"
-    />
-  );
-};

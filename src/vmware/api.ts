@@ -17,21 +17,15 @@ export const loadFormOptions = async (props: {
   };
 
   if (advancedMode) {
-    const [
-      templates,
-      clusters,
-      datastores,
-      networks,
-      folders,
-      limits,
-    ] = await Promise.all([
-      getAll('/vmware-templates/', options),
-      getAll('/vmware-clusters/', options),
-      getAll('/vmware-datastores/', options),
-      getAll('/vmware-networks/', options),
-      getAll('/vmware-folders/', options),
-      getLimits(props.settings_uuid),
-    ]);
+    const [templates, clusters, datastores, networks, folders, limits] =
+      await Promise.all([
+        getAll('/vmware-templates/', options),
+        getAll('/vmware-clusters/', options),
+        getAll('/vmware-datastores/', options),
+        getAll('/vmware-networks/', options),
+        getAll('/vmware-folders/', options),
+        getLimits(props.settings_uuid),
+      ]);
 
     return {
       templates,

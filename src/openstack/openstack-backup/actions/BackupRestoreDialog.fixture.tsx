@@ -15,13 +15,13 @@ import { OpenStackBackup } from '../types';
 
 import { BackupRestoreDialog } from './BackupRestoreDialog';
 
-export const fakeSubnet = ({
+export const fakeSubnet = {
   url: '/api/openstacktenant-subnets/51e584157094493ca121f71642c0a409/',
   name: 'p60347-sub-net',
   cidr: '192.168.42.0/24',
-} as unknown) as Subnet;
+} as unknown as Subnet;
 
-export const fakeBackup = ({
+export const fakeBackup = {
   url: '/api/openstacktenant-backups/21693289bd78400db79fb2a0ef2ba177/',
   uuid: '21693289bd78400db79fb2a0ef2ba177',
   name: 'After 9th lab',
@@ -35,13 +35,11 @@ export const fakeBackup = ({
   instance_name: 'empowerseamlessinfrastructures',
   instance_security_groups: [
     {
-      url:
-        '/api/openstacktenant-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
+      url: '/api/openstacktenant-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
       name: 'traefik',
     },
     {
-      url:
-        '/api/openstacktenant-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
+      url: '/api/openstacktenant-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
       name: 'IMAPS',
     },
   ],
@@ -54,8 +52,7 @@ export const fakeBackup = ({
   ],
   instance_floating_ips: [
     {
-      url:
-        '/api/openstacktenant-floating-ips/fd9245c1468b4cf0b73d33d4dcdce219/',
+      url: '/api/openstacktenant-floating-ips/fd9245c1468b4cf0b73d33d4dcdce219/',
       uuid: 'fd9245c1468b4cf0b73d33d4dcdce219',
       address: '8.8.8.8',
       subnet: fakeSubnet.url,
@@ -64,9 +61,9 @@ export const fakeBackup = ({
       subnet_cidr: fakeSubnet.cidr,
     },
   ],
-} as unknown) as OpenStackBackup;
+} as unknown as OpenStackBackup;
 
-export const fakeFlavors = ([
+export const fakeFlavors = [
   {
     url: '/api/openstacktenant-flavors/7e9a8c7f17f34706bf755abdae41fe3a/',
     uuid: '7e9a8c7f17f34706bf755abdae41fe3a',
@@ -85,7 +82,7 @@ export const fakeFlavors = ([
     ram: 2048,
     disk: 20480,
   },
-] as unknown) as Flavor[];
+] as unknown as Flavor[];
 
 type DialogWrapperType = ReactWrapper<typeof BackupRestoreDialog>;
 

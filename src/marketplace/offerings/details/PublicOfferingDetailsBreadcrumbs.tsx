@@ -28,15 +28,15 @@ interface PublicOfferingDetailsBreadcrumbsProps {
   offering: Offering;
 }
 
-export const PublicOfferingDetailsBreadcrumbs: FunctionComponent<PublicOfferingDetailsBreadcrumbsProps> = ({
-  offering,
-}) => {
-  useBreadcrumbsFn(() => (offering ? getBreadcrumbs(offering) : []), [
-    offering,
-  ]);
-  return offering ? (
-    <div className="publicOfferingDetailsBreadcrumbs">
-      <AnonymousBreadcrumbsContainer />
-    </div>
-  ) : null;
-};
+export const PublicOfferingDetailsBreadcrumbs: FunctionComponent<PublicOfferingDetailsBreadcrumbsProps> =
+  ({ offering }) => {
+    useBreadcrumbsFn(
+      () => (offering ? getBreadcrumbs(offering) : []),
+      [offering],
+    );
+    return offering ? (
+      <div className="publicOfferingDetailsBreadcrumbs">
+        <AnonymousBreadcrumbsContainer />
+      </div>
+    ) : null;
+  };

@@ -15,35 +15,36 @@ interface ServiceProviderOfferingsCategoriesFilterProps {
   onCategoryChange: (newCategory: string) => void;
 }
 
-export const ServiceProviderOfferingsCategoriesFilter: FunctionComponent<ServiceProviderOfferingsCategoriesFilterProps> = ({
-  serviceProviderUuid,
-  onQueryFilterChange,
-  onCategoryChange,
-}) => {
-  const { loading, error, value: categories } = useAsync<Category[]>(
-    () =>
-      getCategories({
-        params: {
-          customer_uuid: serviceProviderUuid,
-          has_offerings: true,
-          has_shared: true,
-        },
-      }),
-    [serviceProviderUuid],
-  );
-  return loading ? (
-    <LoadingSpinner />
-  ) : error ? (
-    <h3>{translate('Unable to load categories.')}</h3>
-  ) : categories?.length ? (
-    <div className="offeringsCategoriesFilter">
-      <ServiceProviderOfferingsQueryFilter
-        onQueryChange={onQueryFilterChange}
-      />
-      <CategoriesList
-        categories={categories}
-        onCategoryChange={onCategoryChange}
-      />
-    </div>
-  ) : null;
-};
+export const ServiceProviderOfferingsCategoriesFilter: FunctionComponent<ServiceProviderOfferingsCategoriesFilterProps> =
+  ({ serviceProviderUuid, onQueryFilterChange, onCategoryChange }) => {
+    const {
+      loading,
+      error,
+      value: categories,
+    } = useAsync<Category[]>(
+      () =>
+        getCategories({
+          params: {
+            customer_uuid: serviceProviderUuid,
+            has_offerings: true,
+            has_shared: true,
+          },
+        }),
+      [serviceProviderUuid],
+    );
+    return loading ? (
+      <LoadingSpinner />
+    ) : error ? (
+      <h3>{translate('Unable to load categories.')}</h3>
+    ) : categories?.length ? (
+      <div className="offeringsCategoriesFilter">
+        <ServiceProviderOfferingsQueryFilter
+          onQueryChange={onQueryFilterChange}
+        />
+        <CategoriesList
+          categories={categories}
+          onCategoryChange={onCategoryChange}
+        />
+      </div>
+    ) : null;
+  };

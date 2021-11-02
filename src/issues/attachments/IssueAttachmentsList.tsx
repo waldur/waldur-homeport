@@ -25,19 +25,18 @@ const getAttachmentsLoading = (count: number) => {
   return attachmentsLoadingList;
 };
 
-export const IssueAttachmentsList: FunctionComponent<IssueAttachmentsListProps> = (
-  props,
-) => {
-  const { attachments, uploading } = props;
-  const attachmentsList = attachments.length
-    ? attachments.map((attachment: Attachment) => (
-        <li key={attachment.uuid}>
-          <IssueAttachment attachment={attachment} />
-        </li>
-      ))
-    : [];
-  const attachmentsLoadingList = getAttachmentsLoading(uploading);
-  const body = [...attachmentsList, ...attachmentsLoadingList];
+export const IssueAttachmentsList: FunctionComponent<IssueAttachmentsListProps> =
+  (props) => {
+    const { attachments, uploading } = props;
+    const attachmentsList = attachments.length
+      ? attachments.map((attachment: Attachment) => (
+          <li key={attachment.uuid}>
+            <IssueAttachment attachment={attachment} />
+          </li>
+        ))
+      : [];
+    const attachmentsLoadingList = getAttachmentsLoading(uploading);
+    const body = [...attachmentsList, ...attachmentsLoadingList];
 
-  return body.length ? <ul className="attachment-list">{body}</ul> : null;
-};
+    return body.length ? <ul className="attachment-list">{body}</ul> : null;
+  };

@@ -10,14 +10,13 @@ interface PublicOfferingPricingPlansContainerProps {
   offering: Offering;
 }
 
-export const PublicOfferingPricingPlansContainer: FunctionComponent<PublicOfferingPricingPlansContainerProps> = ({
-  offering,
-}) => (
-  <div className="pricingPlansContainer">
-    <div className="pricingPlansContainer__header m-b">
-      <h1>{translate('Pricing & setup')}</h1>
-      <ExportFullPriceList offering={offering} />
+export const PublicOfferingPricingPlansContainer: FunctionComponent<PublicOfferingPricingPlansContainerProps> =
+  ({ offering }) => (
+    <div className="pricingPlansContainer">
+      <div className="pricingPlansContainer__header m-b">
+        <h1>{translate('Pricing & setup')}</h1>
+        <ExportFullPriceList offering={offering} />
+      </div>
+      <PublicOfferingPricingPlans offering={offering} />
     </div>
-    <PublicOfferingPricingPlans offering={offering} />
-  </div>
-);
+  );

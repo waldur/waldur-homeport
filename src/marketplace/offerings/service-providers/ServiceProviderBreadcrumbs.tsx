@@ -22,16 +22,15 @@ interface ServiceProviderBreadcrumbsProps {
   serviceProvider: ServiceProvider;
 }
 
-export const ServiceProviderBreadcrumbs: FunctionComponent<ServiceProviderBreadcrumbsProps> = ({
-  serviceProvider,
-}) => {
-  useBreadcrumbsFn(
-    () => (serviceProvider ? getBreadcrumbs(serviceProvider) : []),
-    [serviceProvider],
-  );
-  return serviceProvider ? (
-    <div className="serviceProviderBreadcrumbsContainer">
-      <AnonymousBreadcrumbsContainer />
-    </div>
-  ) : null;
-};
+export const ServiceProviderBreadcrumbs: FunctionComponent<ServiceProviderBreadcrumbsProps> =
+  ({ serviceProvider }) => {
+    useBreadcrumbsFn(
+      () => (serviceProvider ? getBreadcrumbs(serviceProvider) : []),
+      [serviceProvider],
+    );
+    return serviceProvider ? (
+      <div className="serviceProviderBreadcrumbsContainer">
+        <AnonymousBreadcrumbsContainer />
+      </div>
+    ) : null;
+  };

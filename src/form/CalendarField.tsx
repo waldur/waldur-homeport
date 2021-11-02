@@ -168,10 +168,11 @@ class EditableCalendar extends Component<
 }
 
 export const CalendarField: FunctionComponent<any> = (props) => {
-  const { loading, value: bookedItems, error } = useAsync(
-    () => getOfferingBookedItems(props.offeringUuid),
-    [],
-  );
+  const {
+    loading,
+    value: bookedItems,
+    error,
+  } = useAsync(() => getOfferingBookedItems(props.offeringUuid), []);
   if (loading) {
     return <LoadingSpinner />;
   } else if (error) {

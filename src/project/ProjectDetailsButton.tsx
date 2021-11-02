@@ -20,10 +20,10 @@ const openProjectDialog = (project: Project) =>
 
 export const ProjectDetailsButton = ({ project }: { project: Project }) => {
   const dispatch = useDispatch();
-  const callback = useCallback(() => dispatch(openProjectDialog(project)), [
-    dispatch,
-    project,
-  ]);
+  const callback = useCallback(
+    () => dispatch(openProjectDialog(project)),
+    [dispatch, project],
+  );
   return (
     <ActionButton
       title={translate('Details')}

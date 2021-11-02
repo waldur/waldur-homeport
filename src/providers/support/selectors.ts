@@ -26,9 +26,9 @@ export const selectServiceProviderConsumers = createSelector(
       if (entry.provider_to_consumer.provider_uuid === serviceProviderUuid) {
         acc.push({
           ...entry.data,
-          name:
-            serviceUsage.organizations[entry.provider_to_consumer.consumer_uuid]
-              .name,
+          name: serviceUsage.organizations[
+            entry.provider_to_consumer.consumer_uuid
+          ].name,
         });
       }
       return acc;

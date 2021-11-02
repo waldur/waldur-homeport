@@ -10,13 +10,13 @@ import {
 
 import { UpdateInternalIpsDialog } from './UpdateInternalIpsDialog';
 
-export const fakeSubnet = ({
+export const fakeSubnet = {
   url: '/api/openstacktenant-subnets/51e584157094493ca121f71642c0a409/',
   name: 'p60347-sub-net',
   cidr: '192.168.42.0/24',
-} as unknown) as Subnet;
+} as unknown as Subnet;
 
-export const fakeInstance = ({
+export const fakeInstance = {
   name: 'backup',
   uuid: 'bcbb973635754084a5b292ecb2274e33',
   service_settings_uuid: 'a500a20d8f7040eabb9e0103d5f119af',
@@ -28,7 +28,7 @@ export const fakeInstance = ({
       subnet_cidr: fakeSubnet.cidr,
     },
   ],
-} as unknown) as OpenStackInstance;
+} as unknown as OpenStackInstance;
 
 type DialogWrapperType = ReactWrapper<typeof UpdateInternalIpsDialog>;
 
