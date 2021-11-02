@@ -1,4 +1,5 @@
 export interface Rule {
+  port_range?: { min: number; max: number };
   ethertype: string;
   direction: string;
   protocol: string;

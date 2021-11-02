@@ -49,6 +49,7 @@ interface CreateSecurityGroupRuleRequestBody {
   protocol: SecurityGroupProtocol;
   from_port: number;
   to_port: number;
+  port_range?: { min: number; max: number };
   cidr: string;
   remote_group?: string;
   description?: string;
