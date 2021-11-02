@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 

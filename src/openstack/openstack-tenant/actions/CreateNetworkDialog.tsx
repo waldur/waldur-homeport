@@ -16,7 +16,7 @@ export const CreateNetworkDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create network for OpenStack tenant')}
-      fields={[createLatinNameField(), createDescriptionField()]}
+      formFields={[createLatinNameField(), createDescriptionField()]}
       submitForm={async (formData) => {
         try {
           await createNetwork(resource.uuid, formData);

@@ -40,7 +40,7 @@ export const LinkDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Link OpenStack Instance')}
-      fields={fields}
+      formFields={fields}
       submitForm={async (formData) => {
         try {
           await linkInstance(resource.uuid, formData);

@@ -44,7 +44,7 @@ export const AttachDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Attach OpenStack Volume to Instance')}
-      fields={fields}
+      formFields={fields}
       submitForm={async (formData) => {
         try {
           await attachVolume(resource.uuid, formData.instance);

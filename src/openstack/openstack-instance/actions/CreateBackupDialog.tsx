@@ -15,7 +15,7 @@ export const CreateBackupDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create VM snapshot for OpenStack instance')}
-      fields={[
+      formFields={[
         createLatinNameField(),
         createDescriptionField(),
         {

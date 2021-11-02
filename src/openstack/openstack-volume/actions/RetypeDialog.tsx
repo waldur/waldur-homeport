@@ -54,7 +54,7 @@ export const RetypeDialog = ({ resolve: { resource } }) => {
       dialogTitle={translate('Retype OpenStack Volume')}
       loading={asyncState.loading}
       error={asyncState.error}
-      fields={fields}
+      formFields={fields}
       submitForm={async (formData) => {
         try {
           await retypeVolume(resource.uuid, formData);

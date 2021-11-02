@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
-import { Field, WrappedFieldArrayProps } from 'redux-form';
+import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
@@ -52,9 +52,7 @@ const StaticRouteAddButton = ({ onClick }) => (
   </Button>
 );
 
-export const StaticRoutesTable: React.FC<
-  WrappedFieldArrayProps & { fixedIps?: string[] }
-> = ({ fields, fixedIps }) => {
+export const StaticRoutesTable: React.FC<any> = ({ fields, fixedIps }) => {
   const nexthopValidator = React.useMemo(
     () => [required, validateIPv4, validateFixedIPs(fixedIps)],
     [fixedIps],

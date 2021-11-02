@@ -12,7 +12,7 @@ export const ExtendDiskDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Extend disk')}
-      fields={[
+      formFields={[
         {
           label: translate('Size'),
           type: 'integer',

@@ -13,7 +13,7 @@ export const SetBackendIdDialog = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Set backend ID')}
-      fields={[
+      formFields={[
         {
           name: 'backend_id',
           label: translate('Backend ID'),

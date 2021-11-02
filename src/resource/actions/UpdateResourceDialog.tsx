@@ -58,7 +58,7 @@ export const UpdateResourceDialog: FC<UpdateResourceDialogProps> = ({
         resourceType: verboseName,
         resourceName: resource.name,
       })}
-      fields={fields}
+      formFields={fields}
       initialValues={initialValues}
     />
   );

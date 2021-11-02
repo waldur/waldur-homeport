@@ -16,7 +16,7 @@ export const CreateDatabaseDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create SQL database in PostgreSQL server')}
-      fields={[createNameField(), createDescriptionField()]}
+      formFields={[createNameField(), createDescriptionField()]}
       submitForm={async (formData) => {
         try {
           await createDatabase(resource.uuid, formData);

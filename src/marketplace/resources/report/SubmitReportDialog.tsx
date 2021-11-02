@@ -27,7 +27,7 @@ export const SubmitReportDialog = ({
         }
       }}
       dialogTitle={translate('Submit report')}
-      fields={[
+      formFields={[
         {
           name: 'report',
           label: translate('Report'),

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
-import { Field, WrappedFieldArrayProps } from 'redux-form';
+import { Field } from 'redux-form';
 
 import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
 import { InputField } from '@waldur/form/InputField';
@@ -33,7 +33,7 @@ const IPAddressAddButton = ({ onClick }) => (
   </Button>
 );
 
-export const IpAddressList: React.FC<WrappedFieldArrayProps> = ({ fields }) => (
+export const IpAddressList: React.FC<any> = ({ fields }) => (
   <>
     {fields.length > 0 ? (
       <>

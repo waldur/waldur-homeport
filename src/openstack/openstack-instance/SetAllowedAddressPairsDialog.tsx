@@ -2,12 +2,7 @@ import React from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
-import {
-  Field,
-  FieldArray,
-  reduxForm,
-  WrappedFieldArrayProps,
-} from 'redux-form';
+import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import { post } from '@waldur/core/api';
 import { SubmitButton } from '@waldur/form';
@@ -71,7 +66,7 @@ const PairAddButton = ({ onClick }) => (
   </Button>
 );
 
-const PairsTable: React.FC<WrappedFieldArrayProps> = ({ fields }) =>
+const PairsTable: React.FC<any> = ({ fields }) =>
   fields.length > 0 ? (
     <>
       <Table
