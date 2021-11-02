@@ -61,6 +61,5 @@ const TableOptions: TableOptionsType = {
   }),
 };
 
-export const ClusterApplicationsList = connectTable(TableOptions)(
-  TableComponent,
-);
+export const ClusterApplicationsList =
+  connectTable(TableOptions)(TableComponent);

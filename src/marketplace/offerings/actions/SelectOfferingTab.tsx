@@ -12,7 +12,11 @@ import { importOfferingSelector } from './selectors';
 
 export const SelectOfferingTab = () => {
   const formData = useSelector(importOfferingSelector);
-  const { loading, error, value: offerings } = useAsync(
+  const {
+    loading,
+    error,
+    value: offerings,
+  } = useAsync(
     () =>
       loadRemoteOfferings(
         formData.api_url,

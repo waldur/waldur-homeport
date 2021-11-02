@@ -27,9 +27,9 @@ export const getPortMax = (rule: Rule) => {
 
 const FORM_NAME = 'securityGroupRuleEdit';
 
-export const getRuleSelector = (formName: string, name: string) => (
-  state: RootState,
-) => formValueSelector(formName)(state, name) as Rule;
+export const getRuleSelector =
+  (formName: string, name: string) => (state: RootState) =>
+    formValueSelector(formName)(state, name) as Rule;
 
 type OwnProps = ReturnType<typeof useRulesEditor>;
 

@@ -8,11 +8,13 @@ interface PublicOfferingLocationProps {
   offering: Offering;
 }
 
-export const PublicOfferingLocation: FunctionComponent<PublicOfferingLocationProps> = ({
-  offering,
-}) =>
-  offering.latitude && offering.longitude ? (
-    <div className="publicOfferingLocation">
-      <LeafletMap latitude={offering.latitude} longitude={offering.longitude} />
-    </div>
-  ) : null;
+export const PublicOfferingLocation: FunctionComponent<PublicOfferingLocationProps> =
+  ({ offering }) =>
+    offering.latitude && offering.longitude ? (
+      <div className="publicOfferingLocation">
+        <LeafletMap
+          latitude={offering.latitude}
+          longitude={offering.longitude}
+        />
+      </div>
+    ) : null;

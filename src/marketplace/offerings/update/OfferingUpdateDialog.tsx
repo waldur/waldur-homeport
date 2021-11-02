@@ -53,14 +53,8 @@ export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = (
     getBreadcrumbs();
   }, [offering_uuid, router]);
 
-  const {
-    loading,
-    loaded,
-    erred,
-    handleSubmit,
-    updateOffering,
-    ...rest
-  } = props;
+  const { loading, loaded, erred, handleSubmit, updateOffering, ...rest } =
+    props;
 
   if (loading) {
     return <LoadingSpinner />;

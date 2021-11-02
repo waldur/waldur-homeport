@@ -135,193 +135,194 @@ const flavorSelector = (state: RootState) => {
   return formAttrs.flavor ? formAttrs.flavor : {};
 };
 
-export const OpenstackInstanceCheckoutSummary: React.FC<OfferingDetailsProps> = ({
-  offering,
-}) => {
-  const customer = useSelector(getCustomer);
-  const project = useSelector(getProject);
-  const shouldConcealPrices = useSelector((state: RootState) =>
-    isVisible(state, 'marketplace.conceal_prices'),
-  );
-  const formIsValid = useSelector(formIsValidSelector);
-  const formHasFlavor = useSelector(formHasFlavorSelector);
-  const formData = useSelector(formAttributesSelector);
-  const flavor = useSelector(flavorSelector);
-  const total = useSelector((state: RootState) =>
-    pricesSelector(state, { offering }),
-  ).total;
-  const components = React.useMemo(
-    () => (offering.plans.length > 0 ? offering.plans[0].prices : {}),
-    [offering],
-  );
-  const usages = React.useMemo(() => parseQuotasUsage(offering.quotas || []), [
-    offering,
-  ]);
-  const limits = React.useMemo(() => parseQuotas(offering.quotas || []), [
-    offering,
-  ]);
-  const dailyPrice = React.useMemo(() => getDailyPrice(formData, components), [
-    formData,
-    components,
-  ]);
+export const OpenstackInstanceCheckoutSummary: React.FC<OfferingDetailsProps> =
+  ({ offering }) => {
+    const customer = useSelector(getCustomer);
+    const project = useSelector(getProject);
+    const shouldConcealPrices = useSelector((state: RootState) =>
+      isVisible(state, 'marketplace.conceal_prices'),
+    );
+    const formIsValid = useSelector(formIsValidSelector);
+    const formHasFlavor = useSelector(formHasFlavorSelector);
+    const formData = useSelector(formAttributesSelector);
+    const flavor = useSelector(flavorSelector);
+    const total = useSelector((state: RootState) =>
+      pricesSelector(state, { offering }),
+    ).total;
+    const components = React.useMemo(
+      () => (offering.plans.length > 0 ? offering.plans[0].prices : {}),
+      [offering],
+    );
+    const usages = React.useMemo(
+      () => parseQuotasUsage(offering.quotas || []),
+      [offering],
+    );
+    const limits = React.useMemo(
+      () => parseQuotas(offering.quotas || []),
+      [offering],
+    );
+    const dailyPrice = React.useMemo(
+      () => getDailyPrice(formData, components),
+      [formData, components],
+    );
 
-  const quotas = React.useMemo(() => getQuotas({ formData, usages, limits }), [
-    formData,
-    usages,
-    limits,
-  ]);
+    const quotas = React.useMemo(
+      () => getQuotas({ formData, usages, limits }),
+      [formData, usages, limits],
+    );
 
-  const orderItem = React.useMemo(
-    () =>
-      formatOrderItemForCreate({
-        formData: { attributes: formData },
-        offering,
-        customer,
-        project,
-        total,
-        formValid: formIsValid,
-      }),
-    [formData, offering, customer, project, total, formIsValid],
-  );
+    const orderItem = React.useMemo(
+      () =>
+        formatOrderItemForCreate({
+          formData: { attributes: formData },
+          offering,
+          customer,
+          project,
+          total,
+          formValid: formIsValid,
+        }),
+      [formData, offering, customer, project, total, formIsValid],
+    );
 
-  return (
-    <>
-      {!formIsValid && (
-        <p id="invalid-info">
-          {formHasFlavor &&
-            translate(
-              'Resource configuration is invalid. Please fix errors in form.',
+    return (
+      <>
+        {!formIsValid && (
+          <p id="invalid-info">
+            {formHasFlavor &&
+              translate(
+                'Resource configuration is invalid. Please fix errors in form.',
+              )}
+            {!formHasFlavor &&
+              translate('Please select flavor to see price estimate.')}
+          </p>
+        )}
+        {!offering.shared && !offering.billable && (
+          <p>
+            {translate(
+              'Note that this virtual machine will not be charged separately for {organization}.',
+              {
+                organization: customer.name,
+              },
             )}
-          {!formHasFlavor &&
-            translate('Please select flavor to see price estimate.')}
-        </p>
-      )}
-      {!offering.shared && !offering.billable && (
-        <p>
-          {translate(
-            'Note that this virtual machine will not be charged separately for {organization}.',
-            {
-              organization: customer.name,
-            },
-          )}
-        </p>
-      )}
-      <OfferingLogo src={offering.thumbnail} size="small" />
-      {formIsValid && (
-        <Table bordered={true}>
-          <tbody>
-            {formData.name && (
+          </p>
+        )}
+        <OfferingLogo src={offering.thumbnail} size="small" />
+        {formIsValid && (
+          <Table bordered={true}>
+            <tbody>
+              {formData.name && (
+                <tr>
+                  <td>
+                    <strong>{translate('VM name')}</strong>
+                  </td>
+                  <td>{formData.name}</td>
+                </tr>
+              )}
               <tr>
                 <td>
-                  <strong>{translate('VM name')}</strong>
+                  <strong>{translate('Image')}</strong>
                 </td>
-                <td>{formData.name}</td>
+                <td>{formData.image && formData.image.name}</td>
               </tr>
-            )}
-            <tr>
-              <td>
-                <strong>{translate('Image')}</strong>
-              </td>
-              <td>{formData.image && formData.image.name}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>{translate('Flavor')}</strong>
-              </td>
-              <td>{flavor.name}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>{translate('vCPU')}</strong>
-              </td>
-              <td>{`${flavor.cores} cores`}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>{translate('RAM')}</strong>
-              </td>
-              <td>{formatFilesize(flavor.ram)}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>{translate('Total storage')}</strong>
-              </td>
-              <td>{formatFilesize(getTotalStorage(formData))}</td>
-            </tr>
-            {!shouldConcealPrices && (
               <tr>
                 <td>
-                  <strong>{translate('Price per day')}</strong> <PriceTooltip />
+                  <strong>{translate('Flavor')}</strong>
                 </td>
-                <td>{defaultCurrency(dailyPrice)}</td>
+                <td>{flavor.name}</td>
               </tr>
-            )}
-            {!shouldConcealPrices && (
               <tr>
                 <td>
-                  <strong>{translate('Price per 30 days')}</strong>{' '}
-                  <PriceTooltip />
+                  <strong>{translate('vCPU')}</strong>
                 </td>
-                <td>{defaultCurrency(30 * dailyPrice)}</td>
+                <td>{`${flavor.cores} cores`}</td>
               </tr>
-            )}
-            <tr>
-              <td>
-                <strong>{translate('Invoiced to')}</strong>
-              </td>
-              <td>{customer.name}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>{translate('Project')}</strong>
-              </td>
-              <td>{project ? project.name : <>&mdash;</>}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>{translate('Offering')}</strong>
-              </td>
-              <td>{offering.name}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>{translate('Service provider')}</strong>
-              </td>
-              <td>
-                <ProviderLink customer_uuid={offering.customer_uuid}>
-                  {offering.customer_name}
-                </ProviderLink>
-              </td>
-            </tr>
-            {offering.rating && (
               <tr>
                 <td>
-                  <strong>{translate('Rating')}</strong>
+                  <strong>{translate('RAM')}</strong>
+                </td>
+                <td>{formatFilesize(flavor.ram)}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>{translate('Total storage')}</strong>
+                </td>
+                <td>{formatFilesize(getTotalStorage(formData))}</td>
+              </tr>
+              {!shouldConcealPrices && (
+                <tr>
+                  <td>
+                    <strong>{translate('Price per day')}</strong>{' '}
+                    <PriceTooltip />
+                  </td>
+                  <td>{defaultCurrency(dailyPrice)}</td>
+                </tr>
+              )}
+              {!shouldConcealPrices && (
+                <tr>
+                  <td>
+                    <strong>{translate('Price per 30 days')}</strong>{' '}
+                    <PriceTooltip />
+                  </td>
+                  <td>{defaultCurrency(30 * dailyPrice)}</td>
+                </tr>
+              )}
+              <tr>
+                <td>
+                  <strong>{translate('Invoiced to')}</strong>
+                </td>
+                <td>{customer.name}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>{translate('Project')}</strong>
+                </td>
+                <td>{project ? project.name : <>&mdash;</>}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>{translate('Offering')}</strong>
+                </td>
+                <td>{offering.name}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>{translate('Service provider')}</strong>
                 </td>
                 <td>
-                  <RatingStars rating={offering.rating} size="medium" />
+                  <ProviderLink customer_uuid={offering.customer_uuid}>
+                    {offering.customer_name}
+                  </ProviderLink>
                 </td>
               </tr>
-            )}
-          </tbody>
-        </Table>
-      )}
-      {components && (
-        <Panel title={translate('Limits')}>
-          <QuotaUsageBarChart quotas={quotas} />
-        </Panel>
-      )}
-      <div className="display-flex justify-content-between">
-        <ShoppingCartButtonContainer
-          item={orderItem}
-          flavor="primary"
-          disabled={!formIsValid}
-        />
-        <OfferingCompareButtonContainer
-          offering={offering}
-          flavor="secondary"
-        />
-      </div>
-    </>
-  );
-};
+              {offering.rating && (
+                <tr>
+                  <td>
+                    <strong>{translate('Rating')}</strong>
+                  </td>
+                  <td>
+                    <RatingStars rating={offering.rating} size="medium" />
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        )}
+        {components && (
+          <Panel title={translate('Limits')}>
+            <QuotaUsageBarChart quotas={quotas} />
+          </Panel>
+        )}
+        <div className="display-flex justify-content-between">
+          <ShoppingCartButtonContainer
+            item={orderItem}
+            flavor="primary"
+            disabled={!formIsValid}
+          />
+          <OfferingCompareButtonContainer
+            offering={offering}
+            flavor="secondary"
+          />
+        </div>
+      </>
+    );
+  };

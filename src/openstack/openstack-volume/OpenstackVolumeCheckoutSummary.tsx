@@ -96,22 +96,23 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OfferingDetailsProps> = ({
     () => (offering.plans.length > 0 ? offering.plans[0].prices : {}),
     [offering],
   );
-  const usages = React.useMemo(() => parseQuotasUsage(offering.quotas || []), [
-    offering,
-  ]);
-  const limits = React.useMemo(() => parseQuotas(offering.quotas || []), [
-    offering,
-  ]);
-  const dailyPrice = React.useMemo(() => getDailyPrice(formData, components), [
-    formData,
-    components,
-  ]);
+  const usages = React.useMemo(
+    () => parseQuotasUsage(offering.quotas || []),
+    [offering],
+  );
+  const limits = React.useMemo(
+    () => parseQuotas(offering.quotas || []),
+    [offering],
+  );
+  const dailyPrice = React.useMemo(
+    () => getDailyPrice(formData, components),
+    [formData, components],
+  );
 
-  const quotas = React.useMemo(() => getQuotas({ formData, usages, limits }), [
-    formData,
-    usages,
-    limits,
-  ]);
+  const quotas = React.useMemo(
+    () => getQuotas({ formData, usages, limits }),
+    [formData, usages, limits],
+  );
 
   const orderItem = React.useMemo(
     () =>

@@ -24,51 +24,50 @@ interface TimeSelect {
   minute: number;
 }
 
-export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> = (
-  props,
-) => (
-  <div className="form-group">
-    <label className="control-label col-sm-2">{props.label}</label>
-    <div className="col-sm-5">
-      <DatePicker
-        weekStartsOn={1}
-        showTodayButton={true}
-        todayButtonLabel={translate('Today')}
-        dateFormat="DD-MM-YYYY"
-        value={props.currentTime.format()}
-        onChange={(_, formattedValue) =>
+export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> =
+  (props) => (
+    <div className="form-group">
+      <label className="control-label col-sm-2">{props.label}</label>
+      <div className="col-sm-5">
+        <DatePicker
+          weekStartsOn={1}
+          showTodayButton={true}
+          todayButtonLabel={translate('Today')}
+          dateFormat="DD-MM-YYYY"
+          value={props.currentTime.format()}
+          onChange={(_, formattedValue) =>
+            props.onChange(
+              DateTime.fromFormat(formattedValue, 'dd-MM-yyyy').toJSDate(),
+            )
+          }
+          calendarContainer={document.getElementsByClassName('modal')[0]}
+        />
+      </div>
+      <label
+        className={classNames('control-label', 'col-sm-1', {
+          disabled: props.isDisabled,
+        })}
+      >
+        <i className="fa fa-clock-o" />
+      </label>
+      <Select
+        className="col-sm-3"
+        isClearable={false}
+        isSearchable={false}
+        value={{
+          value: props.currentTime.format('HH:mm'),
+          label: props.currentTime.format('HH:mm'),
+        }}
+        onChange={(selectOpt: TimeSelect) =>
           props.onChange(
-            DateTime.fromFormat(formattedValue, 'dd-MM-yyyy').toJSDate(),
+            props.currentTime
+              .set({ hour: selectOpt.hour, minute: selectOpt.minute })
+              .toDate(),
           )
         }
-        calendarContainer={document.getElementsByClassName('modal')[0]}
+        options={timelineLabels(props.minuteStep)}
+        isDisabled={props.isDisabled}
+        {...reactSelectMenuPortaling()}
       />
     </div>
-    <label
-      className={classNames('control-label', 'col-sm-1', {
-        disabled: props.isDisabled,
-      })}
-    >
-      <i className="fa fa-clock-o" />
-    </label>
-    <Select
-      className="col-sm-3"
-      isClearable={false}
-      isSearchable={false}
-      value={{
-        value: props.currentTime.format('HH:mm'),
-        label: props.currentTime.format('HH:mm'),
-      }}
-      onChange={(selectOpt: TimeSelect) =>
-        props.onChange(
-          props.currentTime
-            .set({ hour: selectOpt.hour, minute: selectOpt.minute })
-            .toDate(),
-        )
-      }
-      options={timelineLabels(props.minuteStep)}
-      isDisabled={props.isDisabled}
-      {...reactSelectMenuPortaling()}
-    />
-  </div>
-);
+  );

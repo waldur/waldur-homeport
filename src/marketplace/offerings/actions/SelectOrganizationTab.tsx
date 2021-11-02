@@ -11,10 +11,11 @@ import { importOfferingSelector } from './selectors';
 
 export const SelectOrganizationTab = () => {
   const formData = useSelector(importOfferingSelector);
-  const { loading, error, value: organizations } = useAsync(
-    () => loadRemoteOrganizations(formData),
-    [],
-  );
+  const {
+    loading,
+    error,
+    value: organizations,
+  } = useAsync(() => loadRemoteOrganizations(formData), []);
   if (loading) {
     return <LoadingSpinner />;
   }

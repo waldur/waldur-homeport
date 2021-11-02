@@ -31,19 +31,18 @@ interface ResourceActionsButtonProps {
   refreshList?(): void;
 }
 
-export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps> = (
-  props,
-) => {
-  const [open, onToggle] = useBoolean(false);
+export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps> =
+  (props) => {
+    const [open, onToggle] = useBoolean(false);
 
-  return (
-    <ResourceActionComponent
-      open={open}
-      onToggle={onToggle}
-      actions={ActionsList}
-      resource={props.resource}
-      reInitResource={props.reInitResource}
-      refreshList={props.refreshList}
-    />
-  );
-};
+    return (
+      <ResourceActionComponent
+        open={open}
+        onToggle={onToggle}
+        actions={ActionsList}
+        resource={props.resource}
+        reInitResource={props.reInitResource}
+        refreshList={props.refreshList}
+      />
+    );
+  };

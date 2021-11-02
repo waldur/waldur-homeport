@@ -31,7 +31,7 @@ export const fakeSecurityGroup = {
   tenant: '/api/openstack-tenants/2bfc029827bb41e884ff60f4b8eff3b2/',
 } as SecurityGroup;
 
-export const defaultSecurityGroup = ({
+export const defaultSecurityGroup = {
   url: '/api/openstack-security-groups/c4d9e3ece3be48ddb6dcf86c81b695de/',
   uuid: 'c4d9e3ece3be48ddb6dcf86c81b695de',
   name: 'default',
@@ -49,7 +49,7 @@ export const defaultSecurityGroup = ({
       protocol: '',
     },
   ],
-} as unknown) as SecurityGroup;
+} as unknown as SecurityGroup;
 
 type DialogWrapperType = ReactWrapper<typeof SecurityGroupEditorDialog>;
 

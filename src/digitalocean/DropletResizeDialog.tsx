@@ -134,10 +134,11 @@ export const DropletResizeDialog = reduxForm<
   DropletResizeDialogOwnProps
 >({ form: 'DropletResizeDialog', initialValues: { resizeType: 'flexible' } })(
   ({ resolve: { resource }, handleSubmit, submitting }) => {
-    const { loading, error, value: flavors } = useAsync(
-      () => getFlavors(resource),
-      [resource],
-    );
+    const {
+      loading,
+      error,
+      value: flavors,
+    } = useAsync(() => getFlavors(resource), [resource]);
     const dispatch = useDispatch();
     const resizeDroplet = useCallback(
       async (formData: DropletResizeDialogFormData) => {

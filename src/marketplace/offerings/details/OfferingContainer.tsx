@@ -91,9 +91,10 @@ export const OfferingContainer: FunctionComponent = () => {
     reInitResource();
   });
 
-  useBreadcrumbsFn(() => (value ? getBreadcrumbs(value.offering) : []), [
-    value,
-  ]);
+  useBreadcrumbsFn(
+    () => (value ? getBreadcrumbs(value.offering) : []),
+    [value],
+  );
 
   useTitle(value ? value.offering.name : translate('Offering details'));
 

@@ -46,24 +46,23 @@ const onCancel = (props: PureIssueCommentsFormContainerProps) => () => {
   cancelSubmit();
 };
 
-export const PureIssueCommentsFormContainer: FunctionComponent<PureIssueCommentsFormContainerProps> = (
-  props,
-) => {
-  const { attachments, uploadingAttachments, opened } = props;
+export const PureIssueCommentsFormContainer: FunctionComponent<PureIssueCommentsFormContainerProps> =
+  (props) => {
+    const { attachments, uploadingAttachments, opened } = props;
 
-  if (!opened) {
-    return null;
-  }
-  return (
-    <div>
-      <IssueCommentsForm {...props} onCancel={onCancel(props)} />
-      <IssueAttachmentsList
-        attachments={attachments}
-        uploading={uploadingAttachments}
-      />
-    </div>
-  );
-};
+    if (!opened) {
+      return null;
+    }
+    return (
+      <div>
+        <IssueCommentsForm {...props} onCancel={onCancel(props)} />
+        <IssueAttachmentsList
+          attachments={attachments}
+          uploading={uploadingAttachments}
+        />
+      </div>
+    );
+  };
 
 const mapStateToProps = (state, ownProps) => ({
   opened: getCommentFormIsOpen(state, ownProps),

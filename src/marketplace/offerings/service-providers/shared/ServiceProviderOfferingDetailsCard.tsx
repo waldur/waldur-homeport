@@ -14,26 +14,25 @@ interface ServiceProviderOfferingDetailsCardProps {
   row: Offering;
 }
 
-export const ServiceProviderOfferingDetailsCard: FunctionComponent<ServiceProviderOfferingDetailsCardProps> = ({
-  row,
-}) => (
-  <div className="offeringCard">
-    <OfferingLogo offering={row} />
-    <div className="card-title m-t-sm">{row.name}</div>
-    <div className="offeringCard__description m-t-xs">
-      <FormattedHtml html={row.description} />
+export const ServiceProviderOfferingDetailsCard: FunctionComponent<ServiceProviderOfferingDetailsCardProps> =
+  ({ row }) => (
+    <div className="offeringCard">
+      <OfferingLogo offering={row} />
+      <div className="card-title m-t-sm">{row.name}</div>
+      <div className="offeringCard__description m-t-xs">
+        <FormattedHtml html={row.description} />
+      </div>
+      <div className="offeringCard__contentAlwaysOnBottom m-t">
+        <Divisions divisions={row.divisions} />
+        <OfferingDetailsButton offering={row} />
+        <OfferingPurchaseButton
+          offering={row}
+          label={
+            row.type === OFFERING_TYPE_BOOKING
+              ? translate('Book')
+              : translate('Purchase')
+          }
+        />
+      </div>
     </div>
-    <div className="offeringCard__contentAlwaysOnBottom m-t">
-      <Divisions divisions={row.divisions} />
-      <OfferingDetailsButton offering={row} />
-      <OfferingPurchaseButton
-        offering={row}
-        label={
-          row.type === OFFERING_TYPE_BOOKING
-            ? translate('Book')
-            : translate('Purchase')
-        }
-      />
-    </div>
-  </div>
-);
+  );

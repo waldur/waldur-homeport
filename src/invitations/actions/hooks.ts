@@ -68,10 +68,10 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
   const [
     { loading: fetchingUserDetails, value: userDetails },
     fetchUserDetailsCallback,
-  ] = useAsyncFn(() => fetchUserDetails(civilNumber, taxNumber), [
-    civilNumber,
-    taxNumber,
-  ]);
+  ] = useAsyncFn(
+    () => fetchUserDetails(civilNumber, taxNumber),
+    [civilNumber, taxNumber],
+  );
 
   const roles = useMemo(() => getRoles(context), [context]);
   useEffect(() => {

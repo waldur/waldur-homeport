@@ -13,19 +13,19 @@ import { OpenStackTenant } from '../types';
 
 import { CreateSecurityGroupDialog } from './CreateSecurityGroupDialog';
 
-export const fakeTenant = ({
+export const fakeTenant = {
   name: 'VPC',
   url: '/api/openstack-tenants/2bfc029827bb41e884ff60f4b8eff3b2/',
   uuid: '2bfc029827bb41e884ff60f4b8eff3b2',
-} as unknown) as OpenStackTenant;
+} as unknown as OpenStackTenant;
 
-export const defaultSecurityGroup = ({
+export const defaultSecurityGroup = {
   url: '/api/openstack-security-groups/c4d9e3ece3be48ddb6dcf86c81b695de/',
   uuid: 'c4d9e3ece3be48ddb6dcf86c81b695de',
   name: 'default',
   settings: '/api/service-settings/671f2f1f45f146cfb94a5ab1d0506162/',
   description: 'Default security group',
-} as unknown) as SecurityGroup;
+} as unknown as SecurityGroup;
 
 type DialogWrapperType = ReactWrapper<typeof CreateSecurityGroupDialog>;
 

@@ -12,40 +12,41 @@ interface OrganizationAutocompleteProps {
   isServiceProvider?: boolean;
 }
 
-export const OrganizationAutocomplete: FunctionComponent<OrganizationAutocompleteProps> = (
-  props,
-) => (
-  <div className="form-group col-sm-3">
-    <label className="control-label">
-      {props.label || translate('Client organization')}
-    </label>
-    <Field
-      name="organization"
-      component={(fieldProps) => (
-        <AsyncPaginate
-          placeholder={props.placeholder || translate('Select organization...')}
-          loadOptions={(query, prevOptions, additional) =>
-            organizationAutocomplete(
-              query,
-              prevOptions,
-              additional,
-              props.isServiceProvider,
-            )
-          }
-          defaultOptions
-          getOptionValue={(option) => option.uuid}
-          getOptionLabel={(option) => option.name}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          noOptionsMessage={() =>
-            props.noOptionsMessage || translate('No organizations')
-          }
-          isClearable={true}
-          additional={{
-            page: 1,
-          }}
-        />
-      )}
-    />
-  </div>
-);
+export const OrganizationAutocomplete: FunctionComponent<OrganizationAutocompleteProps> =
+  (props) => (
+    <div className="form-group col-sm-3">
+      <label className="control-label">
+        {props.label || translate('Client organization')}
+      </label>
+      <Field
+        name="organization"
+        component={(fieldProps) => (
+          <AsyncPaginate
+            placeholder={
+              props.placeholder || translate('Select organization...')
+            }
+            loadOptions={(query, prevOptions, additional) =>
+              organizationAutocomplete(
+                query,
+                prevOptions,
+                additional,
+                props.isServiceProvider,
+              )
+            }
+            defaultOptions
+            getOptionValue={(option) => option.uuid}
+            getOptionLabel={(option) => option.name}
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+            noOptionsMessage={() =>
+              props.noOptionsMessage || translate('No organizations')
+            }
+            isClearable={true}
+            additional={{
+              page: 1,
+            }}
+          />
+        )}
+      />
+    </div>
+  );

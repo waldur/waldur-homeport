@@ -86,13 +86,8 @@ const exporters = {
 export function* exportTable(action) {
   const { table, format, props } = action.payload;
   let rows = yield select((state: RootState) => selectTableRows(state, table));
-  const {
-    exportFields,
-    exportRow,
-    fetchData,
-    exportAll,
-    mapPropsToFilter,
-  } = getTableOptions(table);
+  const { exportFields, exportRow, fetchData, exportAll, mapPropsToFilter } =
+    getTableOptions(table);
 
   if (exportAll) {
     yield put(blockStart(table));

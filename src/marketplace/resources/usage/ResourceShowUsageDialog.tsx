@@ -12,15 +12,14 @@ interface ResourceUsageDialogProps {
   };
 }
 
-export const ResourceShowUsageDialog: FunctionComponent<ResourceUsageDialogProps> = ({
-  resolve,
-}) => (
-  <ModalDialog
-    title={translate('Resource usage for {resourceName}', {
-      resourceName: resolve.resource.name,
-    })}
-    footer={<CloseDialogButton />}
-  >
-    <ResourceUsageTabsContainer resource={resolve.resource} />
-  </ModalDialog>
-);
+export const ResourceShowUsageDialog: FunctionComponent<ResourceUsageDialogProps> =
+  ({ resolve }) => (
+    <ModalDialog
+      title={translate('Resource usage for {resourceName}', {
+        resourceName: resolve.resource.name,
+      })}
+      footer={<CloseDialogButton />}
+    >
+      <ResourceUsageTabsContainer resource={resolve.resource} />
+    </ModalDialog>
+  );

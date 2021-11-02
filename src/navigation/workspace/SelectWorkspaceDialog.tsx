@@ -18,15 +18,16 @@ import { ProjectsPanel } from './ProjectsPanel';
 
 export const SelectWorkspaceDialog: FunctionComponent = () => {
   const currentCustomer = useSelector(getCustomer);
-  const [selectedOrganization, selectOrganization] = useState<Customer>(
-    currentCustomer,
-  );
+  const [selectedOrganization, selectOrganization] =
+    useState<Customer>(currentCustomer);
 
   const router = useRouter();
 
-  const { loading, error, value: organizationsCount } = useAsync(
-    getCustomersCount,
-  );
+  const {
+    loading,
+    error,
+    value: organizationsCount,
+  } = useAsync(getCustomersCount);
 
   return (
     <>

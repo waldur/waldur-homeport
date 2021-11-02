@@ -21,14 +21,15 @@ export const ProjectGroup: FunctionComponent<{ onSearch; disabled }> = ({
   const project = useSelector(projectSelector);
   const customer = useSelector(customerSelector);
 
-  const filterByProject = useCallback(() => onSearch({ project }), [
-    project,
-    onSearch,
-  ]);
+  const filterByProject = useCallback(
+    () => onSearch({ project }),
+    [project, onSearch],
+  );
 
-  const loadOptions = useCallback((name) => refreshProjects(name, customer), [
-    customer,
-  ]);
+  const loadOptions = useCallback(
+    (name) => refreshProjects(name, customer),
+    [customer],
+  );
 
   useEffect(() => {
     dispatch(change(ISSUE_REGISTRATION_FORM_ID, 'project', undefined));

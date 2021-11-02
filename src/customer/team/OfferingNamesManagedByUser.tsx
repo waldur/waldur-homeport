@@ -8,9 +8,11 @@ import { translate } from '@waldur/i18n';
 export const OfferingNamesManagedByUser: FunctionComponent<{
   userUuid: string;
 }> = ({ userUuid }) => {
-  const { loading, error, value: offerings } = useAsync(() =>
-    getOfferingPermissions(userUuid),
-  );
+  const {
+    loading,
+    error,
+    value: offerings,
+  } = useAsync(() => getOfferingPermissions(userUuid));
   return loading ? (
     <LoadingSpinner />
   ) : error ? (

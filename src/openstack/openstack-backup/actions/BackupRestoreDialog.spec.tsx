@@ -109,7 +109,7 @@ describe('BackupRestoreDialog', () => {
 
   it('initiates form with non-empty security groups if instance does have it', async () => {
     apiMock.loadSecurityGroups.mockResolvedValue(
-      (fakeBackup.instance_security_groups as unknown) as SecurityGroup[],
+      fakeBackup.instance_security_groups as unknown as SecurityGroup[],
     );
     const dialog = new DialogFixture(store);
     await dialog.render();
@@ -212,7 +212,7 @@ describe('BackupRestoreDialog', () => {
 
   it('populates floating IP selector with existing items if they are returned by REST API', async () => {
     apiMock.loadSubnets.mockResolvedValue([fakeSubnet]);
-    apiMock.loadFloatingIps.mockResolvedValue(([
+    apiMock.loadFloatingIps.mockResolvedValue([
       {
         address: '1.1.1.1',
         url: 'url1',
@@ -221,7 +221,7 @@ describe('BackupRestoreDialog', () => {
         address: '2.2.2.2',
         url: 'url2',
       },
-    ] as unknown) as FloatingIp[]);
+    ] as unknown as FloatingIp[]);
     const dialog = new DialogFixture(store);
     await dialog.render();
     await dialog.update();
@@ -324,12 +324,10 @@ describe('BackupRestoreDialog', () => {
       ],
       security_groups: [
         {
-          url:
-            '/api/openstacktenant-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
+          url: '/api/openstacktenant-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
         },
         {
-          url:
-            '/api/openstacktenant-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
+          url: '/api/openstacktenant-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
         },
       ],
     });
@@ -376,12 +374,12 @@ describe('BackupRestoreDialog', () => {
     apiMock.restoreBackup.mockResolvedValue(null);
     apiMock.loadFlavors.mockResolvedValue(fakeFlavors);
     apiMock.loadSubnets.mockResolvedValue([fakeSubnet]);
-    apiMock.loadFloatingIps.mockResolvedValue(([
+    apiMock.loadFloatingIps.mockResolvedValue([
       {
         address: '1.1.1.1',
         url: 'floating_ip_url',
       },
-    ] as unknown) as FloatingIp[]);
+    ] as unknown as FloatingIp[]);
     const dialog = new DialogFixture(store);
     await dialog.render();
     await dialog.update();
@@ -417,12 +415,10 @@ describe('BackupRestoreDialog', () => {
       ],
       security_groups: [
         {
-          url:
-            '/api/openstacktenant-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
+          url: '/api/openstacktenant-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
         },
         {
-          url:
-            '/api/openstacktenant-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
+          url: '/api/openstacktenant-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
         },
       ],
     });

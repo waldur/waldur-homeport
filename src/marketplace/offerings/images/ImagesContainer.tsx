@@ -56,9 +56,10 @@ export const ImagesContainer: FunctionComponent = () => {
     (state: RootState) => getOffering(state).offering,
   );
 
-  useBreadcrumbsFn(() => (offering ? getBreadcrumbs(offering) : []), [
-    offering,
-  ]);
+  useBreadcrumbsFn(
+    () => (offering ? getBreadcrumbs(offering) : []),
+    [offering],
+  );
 
   useTitle(
     offering

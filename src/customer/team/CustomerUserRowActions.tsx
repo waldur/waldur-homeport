@@ -16,21 +16,19 @@ interface CustomerUserRowActionsProps {
   row;
 }
 
-export const CustomerUserRowActions: FunctionComponent<CustomerUserRowActionsProps> = ({
-  row,
-  refreshList,
-}) => {
-  const user = useSelector(getUser);
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-  return isOwnerOrStaff || user.is_support ? (
-    <ButtonGroup>
-      {isOwnerOrStaff || user.is_support ? (
-        <UserDetailsButton user={row} />
-      ) : null}
-      {isOwnerOrStaff ? <UserEditButton editUser={row} /> : null}
-      {isOwnerOrStaff ? (
-        <UserRemoveButton user={row} refreshList={refreshList} />
-      ) : null}
-    </ButtonGroup>
-  ) : null;
-};
+export const CustomerUserRowActions: FunctionComponent<CustomerUserRowActionsProps> =
+  ({ row, refreshList }) => {
+    const user = useSelector(getUser);
+    const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+    return isOwnerOrStaff || user.is_support ? (
+      <ButtonGroup>
+        {isOwnerOrStaff || user.is_support ? (
+          <UserDetailsButton user={row} />
+        ) : null}
+        {isOwnerOrStaff ? <UserEditButton editUser={row} /> : null}
+        {isOwnerOrStaff ? (
+          <UserRemoveButton user={row} refreshList={refreshList} />
+        ) : null}
+      </ButtonGroup>
+    ) : null;
+  };

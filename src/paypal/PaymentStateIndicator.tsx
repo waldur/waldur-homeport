@@ -17,12 +17,11 @@ interface PaymentStateIndicatorProps {
   };
 }
 
-export const PaymentStateIndicator: FunctionComponent<PaymentStateIndicatorProps> = (
-  props,
-) => (
-  <StateIndicator
-    label={props.payment.state}
-    variant={LABEL_CLASSES[props.payment.state] || 'info'}
-    active={props.payment.state === 'Created'}
-  />
-);
+export const PaymentStateIndicator: FunctionComponent<PaymentStateIndicatorProps> =
+  (props) => (
+    <StateIndicator
+      label={props.payment.state}
+      variant={LABEL_CLASSES[props.payment.state] || 'info'}
+      active={props.payment.state === 'Created'}
+    />
+  );

@@ -26,34 +26,33 @@ const validateName = (value) =>
       )
     : undefined;
 
-export const ApplicationConfiguration: React.FC<ApplicationConfigurationProps> = (
-  props,
-) => (
-  <>
-    <GroupHeader title={translate('Application configuration')} />
-    <Row>
-      <StringField
-        required={true}
-        label={translate('Name')}
-        variable="name"
-        validate={[required, validateName]}
-      />
-      <StringField label={translate('Description')} variable="description" />
-      <EnumField
-        required={true}
-        label={translate('Version')}
-        variable="version"
-        options={props.versions}
-      />
-      <EnumField
-        required={true}
-        label={translate('Project')}
-        variable="project"
-        options={props.projects}
-        getLabel={({ name }) => name}
-        getValue={({ url }) => url}
-      />
-      <NamespaceField options={props.namespaces} />
-    </Row>
-  </>
-);
+export const ApplicationConfiguration: React.FC<ApplicationConfigurationProps> =
+  (props) => (
+    <>
+      <GroupHeader title={translate('Application configuration')} />
+      <Row>
+        <StringField
+          required={true}
+          label={translate('Name')}
+          variable="name"
+          validate={[required, validateName]}
+        />
+        <StringField label={translate('Description')} variable="description" />
+        <EnumField
+          required={true}
+          label={translate('Version')}
+          variable="version"
+          options={props.versions}
+        />
+        <EnumField
+          required={true}
+          label={translate('Project')}
+          variable="project"
+          options={props.projects}
+          getLabel={({ name }) => name}
+          getValue={({ url }) => url}
+        />
+        <NamespaceField options={props.namespaces} />
+      </Row>
+    </>
+  );

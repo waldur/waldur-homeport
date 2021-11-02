@@ -7,10 +7,11 @@ import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 
 export const SelectCategoryTab = () => {
-  const { loading, error, value: categories } = useAsync(
-    () => getCategories(),
-    [],
-  );
+  const {
+    loading,
+    error,
+    value: categories,
+  } = useAsync(() => getCategories(), []);
   if (loading) {
     return <LoadingSpinner />;
   }

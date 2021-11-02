@@ -14,19 +14,17 @@ interface PublicOfferingAttributesProps {
   category: Category;
 }
 
-export const PublicOfferingAttributes: FunctionComponent<PublicOfferingAttributesProps> = ({
-  offering,
-  category,
-}) =>
-  shouldRenderAttributesSection(offering) ||
-  shouldRenderAttributesList(category.sections, offering.attributes) ? (
-    <div className="publicOfferingAttributes bordered">
-      <PublicOfferingAttributesSection offering={offering} />
-      {shouldRenderAttributesList(category.sections, offering.attributes) && (
-        <AttributesList
-          attributes={offering.attributes}
-          sections={category.sections}
-        />
-      )}
-    </div>
-  ) : null;
+export const PublicOfferingAttributes: FunctionComponent<PublicOfferingAttributesProps> =
+  ({ offering, category }) =>
+    shouldRenderAttributesSection(offering) ||
+    shouldRenderAttributesList(category.sections, offering.attributes) ? (
+      <div className="publicOfferingAttributes bordered">
+        <PublicOfferingAttributesSection offering={offering} />
+        {shouldRenderAttributesList(category.sections, offering.attributes) && (
+          <AttributesList
+            attributes={offering.attributes}
+            sections={category.sections}
+          />
+        )}
+      </div>
+    ) : null;

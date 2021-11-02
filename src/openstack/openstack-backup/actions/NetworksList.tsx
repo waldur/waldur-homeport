@@ -74,10 +74,10 @@ export const NetworksList: FC<WrappedFieldArrayProps & NetworkChoices> = ({
   floatingIps,
 }) => {
   const networks = useSelector(getAllNetworksSelector);
-  const addDisabled = useMemo(() => !hasFreeSubnets(subnets, networks), [
-    subnets,
-    networks,
-  ]);
+  const addDisabled = useMemo(
+    () => !hasFreeSubnets(subnets, networks),
+    [subnets, networks],
+  );
   return (
     <>
       <table className="table table-borderless m-b-xs">

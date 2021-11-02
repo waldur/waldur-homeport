@@ -51,10 +51,10 @@ interface TenantGroupProps {
 }
 
 export const TenantGroup: React.FC<TenantGroupProps> = (props) => {
-  const resourceProps = useAsync(() => loadData(props.tenant, props.offering), [
-    props.tenant,
-    props.offering,
-  ]);
+  const resourceProps = useAsync(
+    () => loadData(props.tenant, props.offering),
+    [props.tenant, props.offering],
+  );
 
   const dispatch = useDispatch();
 

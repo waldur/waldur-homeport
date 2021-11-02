@@ -149,10 +149,10 @@ export const CanvasFlowmapLayer: any = L.GeoJSON.extend({
 
   setOriginAndDestinationGeoJsonPoints: function (geoJsonFeatureCollection) {
     if (geoJsonFeatureCollection.features) {
-      const configOriginGeometryObject = this.options
-        .originAndDestinationFieldIds.originGeometry;
-      const configDestinationGeometryObject = this.options
-        .originAndDestinationFieldIds.destinationGeometry;
+      const configOriginGeometryObject =
+        this.options.originAndDestinationFieldIds.originGeometry;
+      const configDestinationGeometryObject =
+        this.options.originAndDestinationFieldIds.destinationGeometry;
 
       geoJsonFeatureCollection.features.forEach(function (feature, index) {
         if (
@@ -391,14 +391,15 @@ export const CanvasFlowmapLayer: any = L.GeoJSON.extend({
       return;
     }
 
-    const existingOriginOrDestinationFeature = this.originAndDestinationGeoJsonPoints.features.filter(
-      function (feature) {
+    const existingOriginOrDestinationFeature =
+      this.originAndDestinationGeoJsonPoints.features.filter(function (
+        feature,
+      ) {
         return (
           feature.properties.isOrigin === originBoolean &&
           feature.properties[uniqueOriginOrDestinationIdField] === idValue
         );
-      },
-    )[0];
+      })[0];
 
     const odInfo = this._getSharedOriginOrDestinationFeatures(
       existingOriginOrDestinationFeature,
@@ -434,10 +435,10 @@ export const CanvasFlowmapLayer: any = L.GeoJSON.extend({
     const originUniqueIdValues = [];
     const destinationUniqueIdValues = [];
 
-    const originUniqueIdField = this.options.originAndDestinationFieldIds
-      .originUniqueIdField;
-    const destinationUniqueIdField = this.options.originAndDestinationFieldIds
-      .destinationUniqueIdField;
+    const originUniqueIdField =
+      this.options.originAndDestinationFieldIds.originUniqueIdField;
+    const destinationUniqueIdField =
+      this.options.originAndDestinationFieldIds.destinationUniqueIdField;
 
     geoJsonFeatureCollection.features.forEach(function (feature) {
       const isOrigin = feature.properties.isOrigin;
@@ -502,33 +503,35 @@ export const CanvasFlowmapLayer: any = L.GeoJSON.extend({
     if (isOriginFeature) {
       // for an ORIGIN point that was interacted with,
       // make an array of all other ORIGIN features with the same ORIGIN ID field
-      const originUniqueIdField = this.options.originAndDestinationFieldIds
-        .originUniqueIdField;
+      const originUniqueIdField =
+        this.options.originAndDestinationFieldIds.originUniqueIdField;
       const testFeatureOriginId = testFeature.properties[originUniqueIdField];
-      sharedOriginFeatures = this.originAndDestinationGeoJsonPoints.features.filter(
-        function (feature) {
+      sharedOriginFeatures =
+        this.originAndDestinationGeoJsonPoints.features.filter(function (
+          feature,
+        ) {
           return (
             feature.properties.isOrigin &&
             feature.properties[originUniqueIdField] === testFeatureOriginId
           );
-        },
-      );
+        });
     } else {
       // for a DESTINATION point that was interacted with,
       // make an array of all other ORIGIN features with the same DESTINATION ID field
-      const destinationUniqueIdField = this.options.originAndDestinationFieldIds
-        .destinationUniqueIdField;
+      const destinationUniqueIdField =
+        this.options.originAndDestinationFieldIds.destinationUniqueIdField;
       const testFeatureDestinationId =
         testFeature.properties[destinationUniqueIdField];
-      sharedDestinationFeatures = this.originAndDestinationGeoJsonPoints.features.filter(
-        function (feature) {
+      sharedDestinationFeatures =
+        this.originAndDestinationGeoJsonPoints.features.filter(function (
+          feature,
+        ) {
           return (
             feature.properties.isOrigin &&
             feature.properties[destinationUniqueIdField] ===
               testFeatureDestinationId
           );
-        },
-      );
+        });
     }
 
     return {
@@ -666,8 +669,8 @@ export const CanvasFlowmapLayer: any = L.GeoJSON.extend({
       ? this._animationCanvasElement.getContext('2d')
       : this._canvasElement.getContext('2d');
 
-    const originAndDestinationFieldIds = this.options
-      .originAndDestinationFieldIds;
+    const originAndDestinationFieldIds =
+      this.options.originAndDestinationFieldIds;
 
     this.originAndDestinationGeoJsonPoints.features.forEach(function (feature) {
       if (feature.properties._isSelectedForPathDisplay) {
@@ -694,12 +697,10 @@ export const CanvasFlowmapLayer: any = L.GeoJSON.extend({
         );
 
         // convert geometry to screen coordinates for canvas drawing
-        const screenOriginPoint = this._map.latLngToContainerPoint(
-          originLatLng,
-        );
-        const screenDestinationPoint = this._map.latLngToContainerPoint(
-          destinationLatLng,
-        );
+        const screenOriginPoint =
+          this._map.latLngToContainerPoint(originLatLng);
+        const screenDestinationPoint =
+          this._map.latLngToContainerPoint(destinationLatLng);
 
         // get the canvas symbol properties,
         // and draw a curved canvas line

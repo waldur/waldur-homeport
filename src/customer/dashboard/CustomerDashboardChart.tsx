@@ -15,33 +15,34 @@ interface CustomerDashboardProps {
   customer: Customer;
 }
 
-export const CustomerDashboardChart: FunctionComponent<CustomerDashboardProps> = ({
-  customer,
-  user,
-}) => {
-  const { loading, value } = useAsync(() => loadSummary(customer), [customer]);
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-  if (Array.isArray(value)) {
-    return (
-      <div style={{ paddingLeft: 10 }}>
-        <Row>
-          {value.map((item, index) => (
-            <Col key={index} md={4}>
-              <DashboardCounter
-                label={item.chart.title}
-                value={item.chart.current}
-              />
-              <EChart options={item.options} height="100px" />
-            </Col>
-          ))}
-          <Col md={4}>
-            <CustomerActions customer={customer} user={user} />
-          </Col>
-        </Row>
-      </div>
+export const CustomerDashboardChart: FunctionComponent<CustomerDashboardProps> =
+  ({ customer, user }) => {
+    const { loading, value } = useAsync(
+      () => loadSummary(customer),
+      [customer],
     );
-  }
-  return null;
-};
+    if (loading) {
+      return <LoadingSpinner />;
+    }
+    if (Array.isArray(value)) {
+      return (
+        <div style={{ paddingLeft: 10 }}>
+          <Row>
+            {value.map((item, index) => (
+              <Col key={index} md={4}>
+                <DashboardCounter
+                  label={item.chart.title}
+                  value={item.chart.current}
+                />
+                <EChart options={item.options} height="100px" />
+              </Col>
+            ))}
+            <Col md={4}>
+              <CustomerActions customer={customer} user={user} />
+            </Col>
+          </Row>
+        </div>
+      );
+    }
+    return null;
+  };

@@ -40,4 +40,5 @@ class ResourceBreadcrumbsRegistryClass {
   }
 }
 
-export const ResourceBreadcrumbsRegistry = new ResourceBreadcrumbsRegistryClass();
+export const ResourceBreadcrumbsRegistry =
+  new ResourceBreadcrumbsRegistryClass();

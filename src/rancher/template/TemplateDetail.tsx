@@ -29,10 +29,10 @@ export const TemplateDetail: FunctionComponent = () => {
 
   const router = useRouter();
 
-  const state = useAsync(() => loadData(templateUuid, clusterUuid), [
-    templateUuid,
-    clusterUuid,
-  ]);
+  const state = useAsync(
+    () => loadData(templateUuid, clusterUuid),
+    [templateUuid, clusterUuid],
+  );
 
   useBreadcrumbsFn(
     () =>

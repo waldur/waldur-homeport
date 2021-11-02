@@ -19,32 +19,31 @@ export const getAccountingTypeOptions = () => [
   { label: translate('One-time on plan switch'), value: 'few' },
 ];
 
-export const ComponentAccountingTypeField: React.FC<ComponentAccountingTypeFieldProps> = (
-  props,
-) => (
-  <FormGroup label={translate('Accounting type')} required={true}>
-    <Field
-      name="billing_type"
-      validate={required}
-      onChange={(_, newOption, prevOption) => {
-        if (
-          newOption &&
-          prevOption &&
-          newOption.value === 'usage' &&
-          prevOption.value === 'fixed'
-        ) {
-          props.removeOfferingQuotas();
-        }
-      }}
-      component={(fieldProps) => (
-        <Select
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          options={getAccountingTypeOptions()}
-          isClearable={false}
-          isDisabled={props.disabled}
-        />
-      )}
-    />
-  </FormGroup>
-);
+export const ComponentAccountingTypeField: React.FC<ComponentAccountingTypeFieldProps> =
+  (props) => (
+    <FormGroup label={translate('Accounting type')} required={true}>
+      <Field
+        name="billing_type"
+        validate={required}
+        onChange={(_, newOption, prevOption) => {
+          if (
+            newOption &&
+            prevOption &&
+            newOption.value === 'usage' &&
+            prevOption.value === 'fixed'
+          ) {
+            props.removeOfferingQuotas();
+          }
+        }}
+        component={(fieldProps) => (
+          <Select
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+            options={getAccountingTypeOptions()}
+            isClearable={false}
+            isDisabled={props.disabled}
+          />
+        )}
+      />
+    </FormGroup>
+  );

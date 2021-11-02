@@ -9,10 +9,9 @@ interface FilterDropdownToggleButtonProps {
   onClick: () => void;
 }
 
-export const FilterDropdownToggleButton: FunctionComponent<FilterDropdownToggleButtonProps> = ({
-  onClick,
-}) => (
-  <div className="filterDropdownToggleButton">
-    <Button label="Filter" onClick={onClick} iconPrefix={ChevronArrowDown} />
-  </div>
-);
+export const FilterDropdownToggleButton: FunctionComponent<FilterDropdownToggleButtonProps> =
+  ({ onClick }) => (
+    <div className="filterDropdownToggleButton">
+      <Button label="Filter" onClick={onClick} iconPrefix={ChevronArrowDown} />
+    </div>
+  );
