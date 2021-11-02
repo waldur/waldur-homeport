@@ -8,10 +8,9 @@ import { CIDRField } from './CIDRField';
 import { DescriptionField } from './DescriptionField';
 import { DirectionField } from './DirectionField';
 import { EtherTypeField } from './EtherTypeField';
-import { FromPortField } from './FromPortField';
+import { PortRangeField } from './PortRangeField';
 import { ProtocolField } from './ProtocolField';
 import { RemoteGroupField } from './RemoteGroupField';
-import { ToPortField } from './ToPortField';
 import { getRuleSelector } from './utils';
 
 interface RuleRowProps {
@@ -33,8 +32,7 @@ export const RuleRow: FC<RuleRowProps> = ({
       <EtherTypeField />
       <DirectionField />
       <ProtocolField />
-      <FromPortField rule={rule} />
-      <ToPortField rule={rule} />
+      <PortRangeField rule={rule} />
       <CIDRField rule={rule} />
       <RemoteGroupField choices={remoteSecurityGroups} />
       <DescriptionField />

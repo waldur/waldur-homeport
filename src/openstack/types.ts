@@ -31,8 +31,9 @@ export interface SecurityGroupRule {
   direction: SecurityGroupDirection;
   id: number;
   protocol: SecurityGroupProtocol;
-  from_port: number;
-  to_port: number;
+  from_port?: number;
+  to_port?: number;
+  port_range?: { min: number; max: number };
   cidr: string;
   remote_group?: string;
   remote_group_name?: string;

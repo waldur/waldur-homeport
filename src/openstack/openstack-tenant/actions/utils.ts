@@ -44,9 +44,11 @@ export const useCreateSecurityGroupForm = (resource: OpenStackTenant) => {
         rules:
           formData.rules === undefined
             ? []
-            : formData.rules.map((rule) => ({
+            : formData.rules.map(({ port_range, ...rule }) => ({
                 ...rule,
                 protocol: rule.protocol === null ? '' : rule.protocol,
+                from_port: port_range.min,
+                to_port: port_range.max,
               })),
       });
       dispatch(

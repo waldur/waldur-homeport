@@ -14,8 +14,7 @@ const DEFAULT_RULE = {
   ethertype: 'IPv4',
   protocol: 'icmp',
   direction: 'ingress',
-  from_port: -1,
-  to_port: -1,
+  port_range: { min: -1, max: -1 },
 };
 
 export const RuleAddButton: FC<RuleAddButtonProps> = ({ fields }) => (

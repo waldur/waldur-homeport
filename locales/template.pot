@@ -532,6 +532,10 @@ msgstr ""
 msgid "All day"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/rule-editor/PortRangeField.tsx
+msgid "All ports"
+msgstr ""
+
 #: src/marketplace/resources/import/useImportDialog.tsx
 msgid "All resources have been imported."
 msgstr ""
@@ -2152,6 +2156,10 @@ msgstr ""
 msgid "Destination URL"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
+msgid "Destination port"
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/DestroyAction.tsx
 #: src/resource/actions/DestroyActionItem.tsx
 msgid "Destroy"
@@ -2592,6 +2600,10 @@ msgstr ""
 msgid "Enter IPv4 address."
 msgstr ""
 
+#: src/openstack/openstack-security-groups/rule-editor/PortRangeField.tsx
+msgid "Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports."
+msgstr ""
+
 #: src/map/SetLocationDialog.tsx
 msgid "Enter address..."
 msgstr ""
@@ -3020,10 +3032,6 @@ msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
 msgid "From"
-msgstr ""
-
-#: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
-msgid "From port"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
@@ -5765,6 +5773,10 @@ msgstr ""
 msgid "Port has been created."
 msgstr ""
 
+#: src/openstack/openstack-security-groups/rule-editor/PortRangeField.tsx
+msgid "Port number in the range should be at most {portMax}."
+msgstr ""
+
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
 msgid "Port range"
 msgstr ""
@@ -8461,6 +8473,14 @@ msgstr ""
 msgid "The key has been created."
 msgstr ""
 
+#: src/openstack/openstack-security-groups/rule-editor/PortRangeField.tsx
+msgid "The maximum port number is not specified."
+msgstr ""
+
+#: src/openstack/openstack-security-groups/rule-editor/PortRangeField.tsx
+msgid "The minimum port number should not exceed the maximum port number."
+msgstr ""
+
 #: src/azure/common/validators.ts
 msgid "The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number"
 msgstr ""
@@ -8725,10 +8745,6 @@ msgstr ""
 
 #: src/auth/AuthInit.tsx
 msgid "To get your clouds under control, please fill in your data."
-msgstr ""
-
-#: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
-msgid "To port"
 msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
