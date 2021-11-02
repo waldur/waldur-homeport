@@ -2,7 +2,7 @@
   "name": "waldur-homeport",
   "version": "4.8.6",
   "description": "Web interface for Waldur MasterMind cloud orchestrator",
-  "repository": "https://github.com/opennode/waldur-homeport",
+  "repository": "https://github.com/waldur/waldur-homeport",
   "license": "MIT",
   "scripts": {
     "start": "npm run build-dll-dev && npm run start-lite",
