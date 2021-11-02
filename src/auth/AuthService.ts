@@ -21,6 +21,7 @@
 import Axios from 'axios';
 
 import { ENV } from '@waldur/configs/default';
+import { cleanObject } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { router } from '@waldur/router';
 import { showSuccess } from '@waldur/store/notify';
@@ -107,7 +108,19 @@ function redirectOnSuccess() {
   }
 }
 
+function storeCurrentState() {
+  if (router.globals.$current.name) {
+    setRedirect({
+      toState: router.globals.$current.name,
+      toParams: router.globals.params
+        ? cleanObject(router.globals.params)
+        : undefined,
+    });
+  }
+}
+
 function localLogout(params?) {
+  storeCurrentState();
   store.dispatch(setCurrentUser(undefined));
   delete Axios.defaults.headers.common['Authorization'];
   removeToken();
