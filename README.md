@@ -83,4 +83,4 @@ CORS_EXPOSE_HEADERS = (
 
 See [Development guidelines](docs/development_guideline.md) for development policies.
 
-[1]: https://github.com/opennode/waldur-mastermind
+[1]: https://github.com/waldur/waldur-mastermind
