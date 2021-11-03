@@ -1652,9 +1652,6 @@ msgstr "FreeIPA-extensie is uitgeschakeld."
 msgid "From"
 msgstr "Van"
 
-msgid "From port"
-msgstr "Van poort"
-
 msgid "Full description"
 msgstr "Volledige beschrijving"
 
@@ -4873,9 +4870,6 @@ msgstr "Om toegang te krijgen, stuurt u een verzoek naar {supportEmail}."
 
 msgid "To get your clouds under control, please fill in your data."
 msgstr "Om uw wolken onder controle te krijgen, gelieve uw gegevens in te vullen."
-
-msgid "To port"
-msgstr "Naar poort"
 
 msgid "To remove account, please send a request to {support}."
 msgstr "Om een account te verwijderen, stuurt u een verzoek naar {support}."

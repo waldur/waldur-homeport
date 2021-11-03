@@ -1613,9 +1613,6 @@ msgstr "FreeIPA-tillägget är inaktiverat."
 msgid "From"
 msgstr "Från"
 
-msgid "From port"
-msgstr "Från hamn"
-
 msgid "Full description"
 msgstr "Fullständig beskrivning"
 
@@ -4795,9 +4792,6 @@ msgstr "För att få åtkomst, skicka en begäran till {supportEmail}."
 
 msgid "To get your clouds under control, please fill in your data."
 msgstr "Fyll i dina data för att få dina moln under kontroll."
-
-msgid "To port"
-msgstr "Till port"
 
 msgid "To remove account, please send a request to {support}."
 msgstr "För att ta bort kontot, skicka en begäran till {support}."

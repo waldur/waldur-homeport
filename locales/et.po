@@ -1421,9 +1421,6 @@ msgstr "FreeIPA konto vajab seadistamist."
 msgid "From"
 msgstr "Saatja"
 
-msgid "From port"
-msgstr "Pordist"
-
 msgid "Full description"
 msgstr "Täielik kirjeldus"
 
@@ -3736,9 +3733,6 @@ msgstr "Kellele"
 
 msgid "To get your clouds under control, please fill in your data."
 msgstr "Oma pilvede kontrolli alla saamiseks sisestage oma andmed."
-
-msgid "To port"
-msgstr "Porti"
 
 msgid "To remove account, please send a request to {support}."
 msgstr "Konto eemaldamiseks saada palun taotlus {support}"

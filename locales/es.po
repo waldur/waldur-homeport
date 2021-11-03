@@ -1652,9 +1652,6 @@ msgstr "La extensión FreeIPA está desactivada."
 msgid "From"
 msgstr "De"
 
-msgid "From port"
-msgstr "Desde el puerto"
-
 msgid "Full description"
 msgstr "Descripción completa"
 
@@ -4873,9 +4870,6 @@ msgstr "Para obtener acceso, por favor, envíe una solicitud a {supportEmail}."
 
 msgid "To get your clouds under control, please fill in your data."
 msgstr "Para tener sus nubes bajo control, por favor, rellene sus datos."
-
-msgid "To port"
-msgstr "A puerto"
 
 msgid "To remove account, please send a request to {support}."
 msgstr "Para eliminar la cuenta, por favor, envíe una solicitud a {support}."

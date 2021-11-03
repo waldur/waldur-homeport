@@ -692,9 +692,6 @@ msgstr "FreeIPA hesabı qurulmalıdır"
 msgid "From"
 msgstr "Kimdən"
 
-msgid "From port"
-msgstr "Portdan "
-
 msgid "Full name"
 msgstr "Tam adı "
 
@@ -1945,9 +1942,6 @@ msgstr "Kimə"
 
 msgid "To get your clouds under control, please fill in your data."
 msgstr "Buludlarınızı nəzarətə almaq üçün, məlumatlarınızı doldurun."
-
-msgid "To port"
-msgstr "Porta "
 
 msgid "To remove account, please send a request to {support}."
 msgstr "Hesabı silmək üçün, {support} üçün sorğu göndərin."

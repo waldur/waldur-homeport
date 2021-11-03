@@ -1652,9 +1652,6 @@ msgstr "FreeIPA plėtinys yra išjungtas."
 msgid "From"
 msgstr "Nuo"
 
-msgid "From port"
-msgstr "Iš prievado"
-
 msgid "Full description"
 msgstr "Pilnas aprašymas"
 
@@ -4873,9 +4870,6 @@ msgstr "Norėdami gauti prieigą, siųskite užklausą adresu {supportEmail}."
 
 msgid "To get your clouds under control, please fill in your data."
 msgstr "Norėdami suvaldyti savo debesis, prašome užpildyti savo duomenis."
-
-msgid "To port"
-msgstr "Į prievadą"
 
 msgid "To remove account, please send a request to {support}."
 msgstr "Norėdami pašalinti paskyrą, siųskite užklausą adresu {support}."

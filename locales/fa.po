@@ -1226,9 +1226,6 @@ msgstr "حساب FreeIPA باید تنظیم شود."
 msgid "From"
 msgstr "از"
 
-msgid "From port"
-msgstr "از پورت"
-
 msgid "Full description"
 msgstr "توضیحات کامل"
 

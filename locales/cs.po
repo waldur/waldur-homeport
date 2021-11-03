@@ -1652,9 +1652,6 @@ msgstr "Rozšíření FreeIPA je zakázáno."
 msgid "From"
 msgstr "Od"
 
-msgid "From port"
-msgstr "Z portu"
-
 msgid "Full description"
 msgstr "Úplný popis"
 
@@ -4873,9 +4870,6 @@ msgstr "Chcete-li získat přístup, pošlete prosím požadavek na {supportEmai
 
 msgid "To get your clouds under control, please fill in your data."
 msgstr "Chcete-li mít vaše cloudy pod kontrolou, vyplňte prosím vaše údaje."
-
-msgid "To port"
-msgstr "Do portu"
 
 msgid "To remove account, please send a request to {support}."
 msgstr "Chcete-li účet odstranit, pošlete prosím požadavek na {support}."

@@ -1652,9 +1652,6 @@ msgstr "FreeIPA-udvidelsen er deaktiveret."
 msgid "From"
 msgstr "Fra"
 
-msgid "From port"
-msgstr "Fra port"
-
 msgid "Full description"
 msgstr "Fuld beskrivelse"
 
@@ -4873,9 +4870,6 @@ msgstr "For at få adgang bedes du sende en anmodning til {supportEmail}."
 
 msgid "To get your clouds under control, please fill in your data."
 msgstr "For at få dine skyer under kontrol, skal du udfylde dine data."
-
-msgid "To port"
-msgstr "Til port"
 
 msgid "To remove account, please send a request to {support}."
 msgstr "Hvis du vil fjerne en konto, skal du sende en anmodning til {support}."
