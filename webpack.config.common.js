@@ -16,7 +16,7 @@ module.exports = {
   },
   output: {
     path: utils.formatPath('.'),
-    publicPath: '',
+    publicPath: '/',
     filename: 'scripts/[name].bundle.js?[contenthash]',
     chunkFilename: 'scripts/[name].js?[chunkhash]',
   },
@@ -138,10 +138,16 @@ module.exports = {
       {
         test: /\.(eot|svg|otf|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?/,
         type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[hash][ext][query]',
+        },
       },
       {
         test: /\.(png|jpg|jpeg|gif|ico)$/,
         type: 'asset/resource',
+        generator: {
+          filename: 'images/[hash][ext][query]',
+        },
       },
       {
         test: /\.md$/,
