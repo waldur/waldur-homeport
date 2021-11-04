@@ -1,11 +1,21 @@
+export interface CustomerPermission extends Permission {
+  customer_name: string;
+  customer_uuid: string;
+}
+
+export interface ProjectPermission extends CustomerPermission {
+  project_name: string;
+  project_uuid: string;
+}
+
 export interface User {
   is_staff: boolean;
   is_support: boolean;
   url: string;
   uuid: string;
   username?: string;
-  customer_permissions?: Permission[];
-  project_permissions?: Permission[];
+  customer_permissions?: CustomerPermission[];
+  project_permissions?: ProjectPermission[];
   full_name?: string;
   email?: string;
   job_title?: string;
