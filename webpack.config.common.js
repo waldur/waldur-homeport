@@ -139,14 +139,14 @@ module.exports = {
         test: /\.(eot|svg|otf|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?/,
         type: 'asset/resource',
         generator: {
-          filename: 'fonts/[name].[ext]?[hash]',
+          filename: 'fonts/[name][ext]?[hash]',
         },
       },
       {
         test: /\.(png|jpg|jpeg|gif|ico)$/,
         type: 'asset/resource',
         generator: {
-          filename: 'images/[name].[ext]?[hash]',
+          filename: 'images/[name][ext]?[hash]',
         },
       },
       {
