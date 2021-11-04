@@ -3,7 +3,9 @@ import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { CustomerUsersListFilter } from '@waldur/customer/team/CustomerUsersListFilter';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
+import { GroupInvitationsList } from '@waldur/invitations/GroupInvitationsList';
 import { InvitationsList } from '@waldur/invitations/InvitationsList';
 import { useTitle } from '@waldur/navigation/title';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -36,6 +38,16 @@ export const CustomerTeam: FunctionComponent = () => {
             <InvitationsList />
           </PanelBody>
         </Tab>
+        {isFeatureVisible('invitations.show_group_invitations') && (
+          <Tab
+            title={translate('Group invitations')}
+            eventKey="group-invitations"
+          >
+            <PanelBody>
+              <GroupInvitationsList />
+            </PanelBody>
+          </Tab>
+        )}
         <Tab title={translate('Permissions log')} eventKey="permissions">
           <PanelBody>
             <CustomerPermissionsLogList />
