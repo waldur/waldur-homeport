@@ -167,7 +167,9 @@ msgstr ""
 #: src/customer/team/CustomerUsersList.tsx
 #: src/customer/team/OfferingPermissionsList.tsx
 #: src/events/BaseEventsList.tsx
+#: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
 #: src/invoices/details/InvoiceItemActions.tsx
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
@@ -248,6 +250,7 @@ msgstr ""
 msgid "Activation price"
 msgstr ""
 
+#: src/invitations/GroupInvitationsList.tsx
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/user/support/UserFilter.tsx
@@ -643,6 +646,7 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
+#: src/invitations/UserPermissionRequestApproveButton.tsx
 #: src/marketplace-flows/ReviewApproveAction.tsx
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/marketplace/orders/ApproveButton.tsx
@@ -654,6 +658,10 @@ msgstr ""
 
 #: src/paypal/PaymentApprove.tsx
 msgid "Approve payment"
+msgstr ""
+
+#: src/invitations/UserPermissionRequestApproveButton.tsx
+msgid "Approve permission request by {name}"
 msgstr ""
 
 #: src/marketplace-flows/RequestStateFilter.tsx
@@ -690,6 +698,10 @@ msgstr ""
 
 #: src/booking/CancelAction.tsx
 msgid "Are you sure you want to cancel a {name}?"
+msgstr ""
+
+#: src/invitations/GroupInvitationCancelButton.tsx
+msgid "Are you sure you want to cancel invitation by {name}?"
 msgstr ""
 
 #: src/resource/actions/DestroyActionItem.tsx
@@ -1161,6 +1173,7 @@ msgstr ""
 
 #: src/booking/CancelAction.tsx
 #: src/form/ListDialog.tsx
+#: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace-flows/FlowCancelAction.tsx
@@ -1453,6 +1466,8 @@ msgstr ""
 msgid "Collation"
 msgstr ""
 
+#: src/invitations/PermissionRequestActionDialog.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
 #: src/issues/comments/IssueCommentsFormMainContainer.tsx
 #: src/issues/feedback/SupportFeedback.tsx
@@ -1541,6 +1556,7 @@ msgstr ""
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
+#: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
 #: src/marketplace/offerings/images/ImagesActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
@@ -1716,6 +1732,11 @@ msgstr ""
 msgid "Create disk"
 msgstr ""
 
+#: src/invitations/actions/GroupInvitationCreateButton.tsx
+#: src/invitations/actions/GroupInvitationCreateDialog.tsx
+msgid "Create group invitation"
+msgstr ""
+
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Create horizontal pod autoscaler"
 msgstr ""
@@ -1828,7 +1849,9 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/team/OfferingPermissionsList.tsx
+#: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
 #: src/issues/notifications/BroadcastList.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
@@ -1850,6 +1873,8 @@ msgstr ""
 
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
+#: src/invitations/GroupInvitationsList.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 msgid "Created by"
@@ -2771,6 +2796,7 @@ msgid "Expired"
 msgstr ""
 
 #: src/customer/team/OfferingPermissionsList.tsx
+#: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 msgid "Expires at"
 msgstr ""
@@ -3144,6 +3170,14 @@ msgstr ""
 
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 msgid "Grant permission"
+msgstr ""
+
+#: src/invitations/GroupInvitationCancelButton.tsx
+msgid "Group invitation has been cancelled."
+msgstr ""
+
+#: src/customer/team/CustomerTeam.tsx
+msgid "Group invitations"
 msgstr ""
 
 #: src/invoices/growth/GrowthContainer.tsx
@@ -4880,6 +4914,10 @@ msgstr ""
 msgid "Only a created invoice can be marked as paid."
 msgstr ""
 
+#: src/invitations/actions/GroupInvitationCreateButton.tsx
+msgid "Only customer owner or staff can create group invitations."
+msgstr ""
+
 #: src/invitations/actions/InvitationCreateButton.tsx
 msgid "Only customer owner or staff can invite users."
 msgstr ""
@@ -5512,6 +5550,14 @@ msgstr ""
 
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
 msgid "Permission has been updated successfully."
+msgstr ""
+
+#: src/invitations/UserPermissionRequestApproveButton.tsx
+msgid "Permission request has been approved."
+msgstr ""
+
+#: src/invitations/UserPermissionRequestRejectButton.tsx
+msgid "Permission request has been rejected."
 msgstr ""
 
 #: src/customer/team/CustomerTeam.tsx
@@ -6456,11 +6502,16 @@ msgid "Regular user"
 msgstr ""
 
 #: src/booking/CancelAction.tsx
+#: src/invitations/UserPermissionRequestRejectButton.tsx
 #: src/marketplace-flows/ReviewRejectAction.tsx
 #: src/marketplace/orders/RejectButton.tsx
 #: src/marketplace/orders/item/list/OrderItemRejectButton.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemRejectButton.tsx
 msgid "Reject"
+msgstr ""
+
+#: src/invitations/UserPermissionRequestRejectButton.tsx
+msgid "Reject permission request by {name}"
 msgstr ""
 
 #: src/booking/BookingStateField.tsx
@@ -7078,6 +7129,7 @@ msgstr ""
 msgid "Review request"
 msgstr ""
 
+#: src/invitations/UserPermissionRequestsList.tsx
 #: src/marketplace-flows/utils.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 msgid "Reviewed at"
@@ -7844,6 +7896,10 @@ msgstr ""
 msgid "Show offerings"
 msgstr ""
 
+#: src/invitations/GroupInvitationsFilter.tsx
+msgid "Show only active group invitations"
+msgstr ""
+
 #: src/resource/UserPassword.tsx
 msgid "Show password"
 msgstr ""
@@ -7998,6 +8054,7 @@ msgstr ""
 #: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace-flows/FlowsList.tsx
@@ -8122,6 +8179,8 @@ msgstr ""
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
+#: src/invitations/PermissionRequestActionDialog.tsx
+#: src/invitations/actions/GroupInvitationCreateDialog.tsx
 #: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/issues/feedback/SupportFeedback.tsx
 #: src/marketplace-checklist/UserChecklist.tsx
@@ -8929,6 +8988,10 @@ msgstr ""
 msgid "Unable to approve order."
 msgstr ""
 
+#: src/invitations/UserPermissionRequestApproveButton.tsx
+msgid "Unable to approve permission request."
+msgstr ""
+
 #: src/openstack/openstack-volume/actions/AttachDialog.tsx
 msgid "Unable to attach volume to instance."
 msgstr ""
@@ -8947,6 +9010,10 @@ msgstr ""
 
 #: src/booking/CancelAction.tsx
 msgid "Unable to cancel booking."
+msgstr ""
+
+#: src/invitations/GroupInvitationCancelButton.tsx
+msgid "Unable to cancel group invitation."
 msgstr ""
 
 #: src/invitations/actions/InvitationCancelButton.tsx
@@ -9528,6 +9595,10 @@ msgstr ""
 
 #: src/marketplace/orders/store/effects.ts
 msgid "Unable to reject order."
+msgstr ""
+
+#: src/invitations/UserPermissionRequestRejectButton.tsx
+msgid "Unable to reject permission request."
 msgstr ""
 
 #: src/user/keys/KeyRemoveButton.tsx
@@ -10898,6 +10969,10 @@ msgstr ""
 msgid "generate automatically"
 msgstr ""
 
+#: src/invitations/GroupInvitationsList.tsx
+msgid "group invitations"
+msgstr ""
+
 #: src/i18n/constants.ts
 msgid "guest"
 msgstr ""
@@ -11152,6 +11227,10 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "token will not timeout"
+msgstr ""
+
+#: src/invitations/UserPermissionRequestsList.tsx
+msgid "user permission requests"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx

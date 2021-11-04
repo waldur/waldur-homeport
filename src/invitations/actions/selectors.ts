@@ -10,4 +10,5 @@ export const civilNumberSelector = (state: RootState) =>
 export const taxNumberSelector = (state: RootState) =>
   selector(state, 'tax_number');
 
-export const roleSelector = (state: RootState) => selector(state, 'role');
+export const roleSelector = (state: RootState, formId: string) =>
+  formValueSelector(formId)(state, 'role');

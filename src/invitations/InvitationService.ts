@@ -7,6 +7,10 @@ class InvitationServiceClass {
     return post('/user-invitations/', payload);
   }
 
+  createGroupInvitation(payload) {
+    return post('/user-group-invitations/', payload);
+  }
+
   check(invitation_uuid) {
     return this.executeAction(invitation_uuid, 'check');
   }
