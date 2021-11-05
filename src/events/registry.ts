@@ -5,6 +5,7 @@ import { EventGroup } from './types';
 export class EventRegistry {
   private groups = [];
   private formatters = {};
+  private initialized = false;
 
   registerGroup(group: EventGroup) {
     this.groups.push(group);
@@ -21,6 +22,9 @@ export class EventRegistry {
   }
 
   formatEvent(event) {
+    if (!this.initialized) {
+      this.init();
+    }
     const formatter = this.formatters[event.event_type];
     if (formatter) {
       return formatter(event.context) || event.message;
@@ -30,13 +34,19 @@ export class EventRegistry {
   }
 
   getGroups() {
+    if (!this.initialized) {
+      this.init();
+    }
     return this.groups;
+  }
+
+  init() {
+    this.initialized = true;
+    const modules = require.context('@waldur', true, /events\.tsx?$/);
+    modules.keys().forEach(modules);
   }
 }
 
 const registry = new EventRegistry();
-
-const modules = require.context('@waldur', true, /events\.tsx?$/);
-modules.keys().forEach(modules);
 
 export default registry;
