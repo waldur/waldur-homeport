@@ -16,7 +16,6 @@ import './marketplace/sidebar';
 import './marketplace-script/marketplace';
 import './marketplace-remote/marketplace';
 import './marketplace-checklist/sidebar-extension';
-import './paypal/events';
 import './vmware/module';
 
 ReactDOM.render(<Application />, document.getElementById('react-root'));

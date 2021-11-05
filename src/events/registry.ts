@@ -36,7 +36,7 @@ export class EventRegistry {
 
 const registry = new EventRegistry();
 
-const modules = require.context('@waldur', true, /events.ts$/);
+const modules = require.context('@waldur', true, /events\.tsx?$/);
 modules.keys().forEach(modules);
 
 export default registry;
