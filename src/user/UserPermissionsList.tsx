@@ -22,7 +22,7 @@ const TableComponent = (props: any) => {
     },
     {
       title: translate('Reviewed by'),
-      render: ({ row }) => row.reviewed_by,
+      render: ({ row }) => row.reviewed_by_full_name || 'N/A',
     },
     {
       title: translate('Reviewed at'),
