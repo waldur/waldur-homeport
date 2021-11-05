@@ -57,6 +57,13 @@ const FlowEditForm = lazyComponent(
     ),
   'FlowEditForm',
 );
+const UserPermissionsListContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "UserPermissionsListContainer" */ './UserPermissionsListContainer'
+    ),
+  'UserPermissionsListContainer',
+);
 
 export const tabs = {
   dashboard: {
@@ -98,6 +105,10 @@ export const tabs = {
   flowEdit: {
     url: 'resources/:flow_uuid/',
     component: FlowEditForm,
+  },
+  permissions: {
+    url: 'permissions/',
+    component: UserPermissionsListContainer,
   },
 };
 
