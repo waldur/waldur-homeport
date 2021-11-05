@@ -2,6 +2,8 @@ import { formatJsxTemplate, translate } from '@waldur/i18n';
 
 import { EventGroup } from './types';
 
+const modules = require.context('@waldur', true, /events\.tsx?$/);
+
 export class EventRegistry {
   private groups = [];
   private formatters = {};
@@ -42,7 +44,6 @@ export class EventRegistry {
 
   init() {
     this.initialized = true;
-    const modules = require.context('@waldur', true, /events\.tsx?$/);
     modules.keys().forEach(modules);
   }
 }
