@@ -14,6 +14,9 @@ msgstr "„{trimmed}” ületab {max_len} märgi FQDN piiri"
 msgid "10 - Very positive"
 msgstr "10 - Väga positiivne"
 
+msgid "1 - Very negative"
+msgstr "1 - Väga negatiivne"
+
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Teenuse tingimused</Link> on aktsepteeritud <Date></Date>"
 
@@ -380,6 +383,12 @@ msgstr "Kas olete kindel, et soovite makseprofiili kustutada?"
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr "Kas olete kindel, et soovite selle {resourceType} kustutada?"
 
+msgid "Are you sure you want to remove invoice item {name}?"
+msgstr "Kas olete kindel, et soovite eemaldada arve kirje {name}?"
+
+msgid "Are you sure you want to remove {userName}?"
+msgstr "Kas olete kindel, et soovite eemaldada {userName}?"
+
 msgid "Are you sure you want to revoke this permission?"
 msgstr "Kas olete kindel, et soovite selle loa tühistada?"
 
@@ -445,6 +454,9 @@ msgstr "Autentimise žetoon"
 
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr "Autentimine Mobile ID abil on katkestatud või siis aegunud. Detailid:"
+
+msgid "Author"
+msgstr "Autor"
 
 msgid "Authorized personnel"
 msgstr "Volitatud personal"
@@ -542,6 +554,9 @@ msgstr "Arved lubatud"
 msgid "Billing period"
 msgstr "Arvete periood"
 
+msgid "Book"
+msgstr "Broneeri"
+
 msgid "Booking"
 msgstr "Broneerimine"
 
@@ -575,6 +590,9 @@ msgstr "Sirvi image"
 msgid "Business hours"
 msgstr "Tööaeg"
 
+msgid "By authenticating you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
+msgstr "Autentides nõustute <tos>Teenuse</tos> ja <pp>Privaatsuspoliitika</pp> tingimustega."
+
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr "Kui määrasite tähise eluea määramatuks, lubate kõigil, kellel on märk, imiteerida teie tegevust, kuni märk on muutunud."
 
@@ -595,6 +613,9 @@ msgstr "Pöörduja"
 
 msgid "Cancel"
 msgstr "Tühista"
+
+msgid "Cancel booking"
+msgstr "Tühista broneering"
 
 msgid "Cancel invitation"
 msgstr "Tühista kutse"
@@ -743,6 +764,9 @@ msgstr "Ettevõtte andmed"
 msgid "Compare items"
 msgstr "Võrdle elemente"
 
+msgid "Compensation has been created."
+msgstr "Kompensatsioon on loodud."
+
 msgid "Competence"
 msgstr "Pädevus"
 
@@ -838,6 +862,9 @@ msgstr "Rakenduse loomine"
 
 msgid "Create catalog"
 msgstr "Loo kataloog"
+
+msgid "Create compensation"
+msgstr "Loo kompensatsioon"
 
 msgid "Create disk"
 msgstr "Loo ketas"
@@ -1010,6 +1037,9 @@ msgstr "Sihtkoht"
 msgid "Destination URL"
 msgstr "Sihtkoha URL"
 
+msgid "Destination port"
+msgstr "Sihtkoha port"
+
 msgid "Destroy"
 msgstr "Hävita"
 
@@ -1046,11 +1076,17 @@ msgstr "Keelake profiil FreeIPA-s. Väljalülitatud profiiliga ei ole lubatud si
 msgid "Disable data volume"
 msgstr "Lülita salvestusüksus välja"
 
+msgid "Disable gateway IP advertising via DHCP"
+msgstr "Lüüsi IP-reklaami keelamine DHCP kaudu"
+
 msgid "Disable profile"
 msgstr "Lülita profiil välja"
 
 msgid "Disabled"
 msgstr "Keelatud"
+
+msgid "Disconnect subnet"
+msgstr "Katkesta alamvõrgu ühendus"
 
 msgid "Disk has been created."
 msgstr "Ketas on loodud."
@@ -1094,6 +1130,9 @@ msgstr "Domeeni nimi. Kui seda pole defineeritud kasutatakse vaikedomeeni"
 msgid "Done"
 msgstr "Valmis"
 
+msgid "Download full price list"
+msgstr "Laadige alla kogu hinnakiri"
+
 msgid "Download invoice"
 msgstr "Lae arve alla"
 
@@ -1133,6 +1172,15 @@ msgstr "Muuda atribuute"
 msgid "Edit booking event"
 msgstr "Redigeeri broneeritavat sündmust"
 
+msgid "Edit confirmation message"
+msgstr "Redigeeri kinnitust"
+
+msgid "Edit end date"
+msgstr "Muuda lõppkuupäeva"
+
+msgid "Edit end date (staff)"
+msgstr "Muuda lõppkuupäeva (tugi)"
+
 msgid "Edit offering"
 msgstr "Muuda pakkumist"
 
@@ -1144,6 +1192,9 @@ msgstr "Muuda projekti liiget"
 
 msgid "Edit team member"
 msgstr "Muuda meeskonna liiget"
+
+msgid "Egress"
+msgstr "Egress"
 
 msgid "Email"
 msgstr "E-post"
@@ -1204,6 +1255,9 @@ msgstr "Veenduge, et sellel väljal ei ole rohkem kui 30 märki."
 
 msgid "Enter IPv4 address."
 msgstr "Sisestage IPv4 aadress."
+
+msgid "Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports."
+msgstr "Sisestage üks port (22) või pordivahemik (5000-6000) või jätke tühjaks kõigi portide jaoks."
 
 msgid "Enter private IPv4 CIDR."
 msgstr "Sisestage privaatne IPv4 CIDR."
@@ -1313,6 +1367,9 @@ msgstr "Laienda"
 msgid "Extend OpenStack volume"
 msgstr "Laienda OpenStacki salvestusüksust"
 
+msgid "Extend disk"
+msgstr "Laienda ketas"
+
 msgid "Extending"
 msgstr "Laiendan"
 
@@ -1366,6 +1423,9 @@ msgstr "Leidke lahendus"
 
 msgid "Fingerprint"
 msgstr "Sõrmejälg"
+
+msgid "Fixed IPs"
+msgstr "Fikseeritud IP-d"
 
 msgid "Fixed price"
 msgstr "Fikseeritud hind"
