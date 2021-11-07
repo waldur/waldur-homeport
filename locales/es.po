@@ -56,6 +56,9 @@ msgstr "Aceptado"
 msgid "Access"
 msgstr "Acceso"
 
+msgid "Access policy has been updated successfully."
+msgstr "La política de acceso se ha actualizado correctamente."
+
 msgid "Access subnets"
 msgstr "Subredes de acceso"
 

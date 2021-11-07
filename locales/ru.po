@@ -11,6 +11,12 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "Доменное имя «{trimmed}» должно иметь не более {max_len} символов"
 
+msgid "10 - Very positive"
+msgstr "10 — очень позитивный"
+
+msgid "1 - Very negative"
+msgstr "1 - очень негативный"
+
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Условия предоставления услуг</Link> были приняты <Date></Date>"
 
@@ -173,6 +179,9 @@ msgstr "Добавить предложение"
 msgid "Add organization"
 msgstr "Добавить организацию"
 
+msgid "Add owner"
+msgstr "Добавить владельца"
+
 msgid "Add pair"
 msgstr "Добавить пару"
 
@@ -251,6 +260,9 @@ msgstr "После смены старый API токен нельзя буде�
 msgid "Agree with ToS"
 msgstr "Подтвердить принятие условий обслуживания"
 
+msgid "Agreement details"
+msgstr "Сведения о соглашении"
+
 msgid "Agreement number"
 msgstr "Номер договора"
 
@@ -304,6 +316,9 @@ msgstr "Приложения"
 
 msgid "Apply"
 msgstr "Применить"
+
+msgid "Archive"
+msgstr "Архивировать"
 
 msgid "Archived plans"
 msgstr "Старые тарифы"
