@@ -7166,6 +7166,7 @@ msgstr ""
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
+#: src/user/UserPermissionsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Role"
@@ -7314,6 +7315,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 msgid "Schedules are invalid."
+msgstr ""
+
+#: src/user/UserPermissionsList.tsx
+msgid "Scope"
 msgstr ""
 
 #: src/marketplace-checklist/StatsTable.tsx

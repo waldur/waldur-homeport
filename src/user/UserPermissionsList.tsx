@@ -17,6 +17,14 @@ import { getUser } from '@waldur/workspace/selectors';
 const TableComponent = (props: any) => {
   const columns = [
     {
+      title: translate('Scope'),
+      render: ({ row }) => row.project_name || row.customer_name,
+    },
+    {
+      title: translate('Role'),
+      render: ({ row }) => row.project_role || row.customer_role,
+    },
+    {
       title: translate('Created at'),
       render: ({ row }) => formatDateTime(row.created),
     },
