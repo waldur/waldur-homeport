@@ -209,6 +209,9 @@ msgstr "Lisa projekti liige"
 msgid "Add resource"
 msgstr "Lisa resurss"
 
+msgid "Add resource allocator"
+msgstr "Lisa ressursijaotaja"
+
 msgid "Add route"
 msgstr "Lisa marsruut"
 
@@ -1181,6 +1184,9 @@ msgstr "Muuda lõppkuupäeva"
 msgid "Edit end date (staff)"
 msgstr "Muuda lõppkuupäeva (tugi)"
 
+msgid "Edit end date of {resourceName}"
+msgstr "Muuda lõppkuupäev {resourceName}"
+
 msgid "Edit offering"
 msgstr "Muuda pakkumist"
 
@@ -1199,6 +1205,9 @@ msgstr "Egress"
 msgid "Email"
 msgstr "E-post"
 
+msgid "Email address"
+msgstr "E-posti aadress"
+
 msgid "Email change request has been cancelled."
 msgstr "E-posti muutmise taotlus on tühistatud."
 
@@ -1207,6 +1216,9 @@ msgstr "E-post on uuendatud."
 
 msgid "Email verification has been sent. Please check your inbox."
 msgstr "E-posti kinnitus on saadetud. Palun kontrollige oma postkasti."
+
+msgid "Enable"
+msgstr "Aktiveeri"
 
 msgid "Enable DHCP"
 msgstr "Luba DHCP"
@@ -1237,6 +1249,9 @@ msgstr "Lubatud vaikimisi lüüs"
 
 msgid "Encountered an empty component"
 msgstr "Ilmnes tühi komponent"
+
+msgid "End"
+msgstr "Lõpp"
 
 msgid "End date"
 msgstr "Lõppkuupäev"
@@ -1487,6 +1502,9 @@ msgstr "Täielik kirjeldus"
 msgid "Full name"
 msgstr "Täisnimi"
 
+msgid "Full name:"
+msgstr "Täisnimi"
+
 msgid "GPU"
 msgstr "CPU"
 
@@ -1531,6 +1549,9 @@ msgstr "Google'i kalendri link"
 
 msgid "Got it!"
 msgstr "Korras!"
+
+msgid "Group invitation has been cancelled."
+msgstr "Grupikutse on tühistatud."
 
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr "Garanteeritud tõmmise säilitamise aeg. Kui null - hoida igavesti."

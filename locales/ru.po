@@ -56,6 +56,9 @@ msgstr "Принятый"
 msgid "Access"
 msgstr "Доступ"
 
+msgid "Access subnets"
+msgstr "Доступ к подсетям"
+
 msgid "Access token"
 msgstr "Токен доступа"
 
@@ -287,6 +290,9 @@ msgstr "Название аллокации"
 msgid "Allocation pools"
 msgstr "Пулы распределения IP адресов"
 
+msgid "Allow bookings to be scheduled at weekends"
+msgstr "Разрешить бронирование по выходным"
+
 msgid "Already have an account?"
 msgstr "У вас уже есть аккаунт?"
 
@@ -308,6 +314,12 @@ msgstr "Ответы были представлены"
 msgid "Any"
 msgstr "Любой"
 
+msgid "Application catalogues"
+msgstr "Каталоги приложений"
+
+msgid "Application has been created."
+msgstr "Приложение создано."
+
 msgid "Application templates"
 msgstr "Шаблоны приложений"
 
@@ -317,23 +329,83 @@ msgstr "Приложения"
 msgid "Apply"
 msgstr "Применить"
 
+msgid "Approve payment"
+msgstr "Утвердить платеж"
+
+msgid "Approved at"
+msgstr "Подтверждено"
+
 msgid "Archive"
 msgstr "Архивировать"
 
 msgid "Archived plans"
 msgstr "Старые тарифы"
 
+msgid "Are you sure you want to accept a {name}?"
+msgstr "Вы действительно хотите принять {name}?"
+
+msgid "Are you sure you want to delete the payment?"
+msgstr "Вы действительно хотите удалить платеж?"
+
+msgid "Are you sure you want to delete the payment profile?"
+msgstr "Вы действительно хотите удалить платежный профиль?"
+
+msgid "Are you sure you want to revoke this permission?"
+msgstr "Вы действительно хотите отозвать это разрешение?"
+
+msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
+msgstr "Вы действительно хотите удалить каталог Rancher {catalog}?"
+
+msgid "Are you sure you would like to delete project {projectName}?"
+msgstr "Вы действительно хотите удалить проект {projectName}?"
+
+msgid "Are you sure you would like to delete the key?"
+msgstr "Вы действительно хотите удалить ключ?"
+
+msgid "Are you sure you would like to terminate resource {resourceName}?"
+msgstr "Вы действительно хотите прекратить работу ресурса {resourceName}?"
+
 msgid "Article code"
 msgstr "Номер товара"
 
+msgid "At least one plan must be entered"
+msgstr "Необходимо ввести хотя бы один план"
+
+msgid "Attach has been scheduled."
+msgstr "Присоединение запланировано."
+
+msgid "Attached to"
+msgstr "Прикреплен к"
+
+msgid "Attributes are invalid."
+msgstr "Недопустимые атрибуты."
+
+msgid "Attributes filter"
+msgstr "Фильтр атрибутов"
+
 msgid "Audit logs"
 msgstr "Журнал аудита"
+
+msgid "Authenticate using Mobile ID"
+msgstr "Аутентификация с помощью Mobile ID"
+
+msgid "Authentication events"
+msgstr "События аутентификации"
+
+msgid "Authentication token"
+msgstr "Токен аутентификации"
+
+msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
+msgstr "Аутентификация с помощью Mobile ID была отменена пользователем или истекло время ожидания. Подробности:"
 
 msgid "Author"
 msgstr "Автор"
 
 msgid "Authorized personnel"
 msgstr "Уполномоченный персонал"
+
+msgid "Auto-assign floating IP"
+msgstr "Автоматическое назначить плавающий IP-адрес"
 
 msgid "Auto-generated"
 msgstr "Созданы автоматически"
@@ -347,8 +419,23 @@ msgstr "Доступность"
 msgid "Availability zone"
 msgstr "Зона доступности"
 
+msgid "Available quota usage: {usage}"
+msgstr "Доступное использование квот: {usage}"
+
 msgid "Average utilization"
 msgstr "Средний коэффициент использования"
+
+msgid "Azure Active Directory Application Secret"
+msgstr "Секрет приложения Azure Active Directory"
+
+msgid "Azure PostgreSQL database server"
+msgstr "Сервер баз данных Azure PostgreSQL"
+
+msgid "Azure Virtual Machine"
+msgstr "Виртуальная машина Azure"
+
+msgid "Azure provider"
+msgstr "Поставщик Azure"
 
 msgid "Back"
 msgstr "Назад"
@@ -359,8 +446,14 @@ msgstr "Назад ко входу"
 msgid "Back to organization"
 msgstr "Назад к организации"
 
+msgid "Back to personal dashboard"
+msgstr "Вернуться на персональную панель"
+
 msgid "Back to project"
 msgstr "Назад к проекту"
+
+msgid "Back to shopping"
+msgstr "Вернуться к покупкам"
 
 msgid "Bank account"
 msgstr "Банковский счёт"
@@ -368,11 +461,20 @@ msgstr "Банковский счёт"
 msgid "Bank name"
 msgstr "Название банка"
 
+msgid "Base image name"
+msgstr "Имя базового образа"
+
+msgid "Batch processing documentation"
+msgstr "Документация по пакетной обработке"
+
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr "Станьте клиентом нашего портала. Предоставляйте ИТ-услуги на маркетплейсе и управляйте своей командой."
 
 msgid "Billing"
 msgstr "Рассчёты"
+
+msgid "Billing enabled"
+msgstr "Биллинг включен"
 
 msgid "Billing period"
 msgstr "Расчетный период"
@@ -394,6 +496,12 @@ msgstr "Управление бронированием"
 
 msgid "Bookings"
 msgstr "Бронировки"
+
+msgid "Bootable"
+msgstr "Загрузочный"
+
+msgid "Browse image"
+msgstr "Просмотреть изображение"
 
 msgid "Business hours"
 msgstr "Рабочие часы"
@@ -446,6 +554,12 @@ msgstr "Планирование ресурсов"
 msgid "Catalog"
 msgstr "Каталог"
 
+msgid "Catalog URL"
+msgstr "URL-адрес каталога"
+
+msgid "Catalog has been created."
+msgstr "Каталог создан."
+
 msgid "Catalog has been deleted."
 msgstr "Каталог был удален."
 
@@ -463,6 +577,9 @@ msgstr "Недопустимая категория."
 
 msgid "Category name"
 msgstr "Название категории"
+
+msgid "Challenge code"
+msgstr "Код вызова"
 
 msgid "Change"
 msgstr "Изменить"
@@ -482,29 +599,77 @@ msgstr "Сменить тариф"
 msgid "Change request - client’s request to perform a generic modification of data or service."
 msgstr "Запрос на изменение - запрос клиента на изменение данных или услуг."
 
+msgid "Change resource limits"
+msgstr "Изменение лимитов ресурсов"
+
 msgid "Change resource plan"
 msgstr "Сменить тариф ресурса"
+
+msgid "Change user email"
+msgstr "Изменить адрес электронной почты пользователя"
+
+msgid "Checklist setup"
+msgstr "Настройка чек-листа"
+
+msgid "Choices as comma-separated list"
+msgstr "Варианты в виде списка, разделенного запятыми"
 
 msgid "Civil number"
 msgstr "Личный идентификационный номер"
 
+msgid "Client organization"
+msgstr "Клиентская организация"
+
+msgid "Client project"
+msgstr "Клиентский проект"
+
 msgid "Close"
 msgstr "Закрыть"
+
+msgid "Cloud RAM"
+msgstr "Облачная ОЗУ"
+
+msgid "Cloud block storage size"
+msgstr "Размер облачного блочного хранилища"
 
 msgid "Cloud init template"
 msgstr "Шаблон сloud-init"
 
+msgid "Cloud vCPU"
+msgstr "Облачные виртуальные ЦПУ"
+
 msgid "Cluster"
 msgstr "Кластер"
 
+msgid "Cluster IP"
+msgstr "IP-адрес кластера"
+
+msgid "Cluster description"
+msgstr "Описание кластера"
+
+msgid "Cluster name"
+msgstr "Имя кластера"
+
+msgid "Code is too short."
+msgstr "Слишком короткий код."
+
+msgid "Code should consist of latin symbols or numbers."
+msgstr "Код должен состоять из латинских символов или цифр."
+
 msgid "Collapse"
 msgstr "Свернуть"
+
+msgid "Collation"
+msgstr "Сортировка"
 
 msgid "Comment"
 msgstr "Комментарий"
 
 msgid "Comments"
 msgstr "Комментарии"
+
+msgid "Company data"
+msgstr "Данные компании"
 
 msgid "Competence"
 msgstr "Компетентность"
@@ -518,6 +683,12 @@ msgstr "Компоненты"
 msgid "Components are invalid."
 msgstr "Недопустимые компоненты."
 
+msgid "Compute generation"
+msgstr "Поколение"
+
+msgid "Configuration options"
+msgstr "Опции конфигурации"
+
 msgid "Configure"
 msgstr "Настроить"
 
@@ -529,6 +700,9 @@ msgstr "Подтверждение"
 
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr "Подтверждающее письмо было отправлено. Пожалуйста, проверьте свою почту!"
+
+msgid "Confirmation notification template"
+msgstr "Шаблон уведомления о подтверждении"
 
 msgid "Contact email"
 msgstr "Контактный email"
