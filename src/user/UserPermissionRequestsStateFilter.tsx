@@ -9,7 +9,7 @@ interface Option {
   label: string;
 }
 
-const getStates = (): Option[] => [
+export const getStates = (): Option[] => [
   { value: 'pending', label: translate('Pending') },
   { value: 'approved', label: translate('Approved') },
   { value: 'rejected', label: translate('Rejected') },
