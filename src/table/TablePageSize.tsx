@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import Select from 'react-select';
 
 import { translate } from '@waldur/i18n';
+import { Pagination } from '@waldur/table/types';
 import './TablePageSize.scss';
 
 const options = [10, 25, 50, 100].map((v) => ({
@@ -9,14 +10,13 @@ const options = [10, 25, 50, 100].map((v) => ({
   value: v,
 }));
 
-interface TablePageSizeProps {
-  pageSize: number;
+interface TablePageSizeProps extends Pagination {
   updatePageSize: (value: {}) => void;
 }
 
 export const TablePageSize: FunctionComponent<TablePageSizeProps> = (props) => {
   const pageSize = props.pageSize ? props.pageSize : 10;
-  return (
+  return props.resultCount > 10 ? (
     <div>
       <span className="m-r-sm">{translate('Show')}</span>
       <Select
@@ -31,5 +31,5 @@ export const TablePageSize: FunctionComponent<TablePageSizeProps> = (props) => {
       />
       <span className="m-l-sm">{translate('entries')}</span>
     </div>
-  );
+  ) : null;
 };
