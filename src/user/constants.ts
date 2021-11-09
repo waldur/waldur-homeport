@@ -60,6 +60,7 @@ export const getPrivateUserTabs = () => [
     icon: 'fa-file',
     state: 'profile.permission-requests',
     key: 'permission-requests',
+    feature: 'invitations.show_group_invitations',
   },
 ];
 
