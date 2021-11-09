@@ -9,8 +9,8 @@ import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 import {
-  USER_PERMISSIONS_FILTER_FORM_ID,
-  USER_PERMISSIONS_TABLE_ID,
+  USER_PERMISSION_REQUESTS_FILTER_FORM_ID,
+  USER_PERMISSION_REQUESTS_TABLE_ID,
 } from '@waldur/user/constants';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -59,16 +59,16 @@ const mapPropsToFilter = (props) => {
 };
 
 const TableOptions: TableOptionsType = {
-  table: USER_PERMISSIONS_TABLE_ID,
+  table: USER_PERMISSION_REQUESTS_TABLE_ID,
   fetchData: createFetcher('user-permission-requests'),
   mapPropsToFilter,
 };
 
 const mapStateToProps = (state: RootState) => ({
   user: getUser(state),
-  filter: getFormValues(USER_PERMISSIONS_FILTER_FORM_ID)(state),
+  filter: getFormValues(USER_PERMISSION_REQUESTS_FILTER_FORM_ID)(state),
 });
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-export const UserPermissionsList = enhance(TableComponent);
+export const UserPermissionRequestsList = enhance(TableComponent);

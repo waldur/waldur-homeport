@@ -56,10 +56,10 @@ export const getPrivateUserTabs = () => [
     feature: 'marketplace.flows',
   },
   {
-    label: translate('Permissions'),
+    label: translate('Permission requests'),
     icon: 'fa-file',
-    state: 'profile.permissions',
-    key: 'permissions',
+    state: 'profile.permission-requests',
+    key: 'permission-requests',
   },
 ];
 
@@ -88,6 +88,7 @@ export const getPublicUserTabs = (user) => [
 export const SELECT_AFFILIATION_FORM_ID = 'SelectAffiliation';
 export const ORGANIZATION_ROUTE = 'marketplace-category-customer';
 export const PROJECT_ROUTE = 'marketplace-category-project';
-export const USER_PERMISSIONS_TABLE_ID = 'user-permissions-table';
-export const USER_PERMISSIONS_FILTER_FORM_ID =
-  'user-permissions-table-filter-form';
+export const USER_PERMISSION_REQUESTS_TABLE_ID =
+  'user-permission-requests-table';
+export const USER_PERMISSION_REQUESTS_FILTER_FORM_ID =
+  'user-permission-requests-table-filter-form';

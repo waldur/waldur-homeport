@@ -15,7 +15,7 @@ const getStates = (): Option[] => [
   { value: 'rejected', label: translate('Rejected') },
 ];
 
-export const UserPermissionStateFilter: FunctionComponent = () => (
+export const UserPermissionRequestsStateFilter: FunctionComponent = () => (
   <div className="form-group">
     <label className="control-label">{translate('State')}</label>
     <Field
