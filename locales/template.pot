@@ -666,7 +666,7 @@ msgstr ""
 
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
-#: src/user/UserPermissionStateFilter.tsx
+#: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Approved"
 msgstr ""
 
@@ -1476,7 +1476,7 @@ msgstr ""
 #: src/marketplace-flows/ReviewDialog.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
-#: src/user/UserPermissionsList.tsx
+#: src/user/UserPermissionRequestsList.tsx
 msgid "Comment"
 msgstr ""
 
@@ -1870,7 +1870,7 @@ msgstr ""
 #: src/project/ProjectResourcesList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
-#: src/user/UserPermissionsList.tsx
+#: src/user/UserPermissionRequestsList.tsx
 msgid "Created at"
 msgstr ""
 
@@ -5483,7 +5483,7 @@ msgstr ""
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
-#: src/user/UserPermissionStateFilter.tsx
+#: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Pending"
 msgstr ""
 
@@ -5564,9 +5564,9 @@ msgstr ""
 msgid "Permission request has been rejected."
 msgstr ""
 
-#: src/user/UserPermissionsListContainer.tsx
+#: src/user/UserPermissionRequestsListContainer.tsx
 #: src/user/constants.ts
-msgid "Permissions"
+msgid "Permission requests"
 msgstr ""
 
 #: src/customer/team/CustomerTeam.tsx
@@ -6529,7 +6529,7 @@ msgstr ""
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
-#: src/user/UserPermissionStateFilter.tsx
+#: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Rejected"
 msgstr ""
 
@@ -7142,13 +7142,13 @@ msgstr ""
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/marketplace-flows/utils.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/user/UserPermissionsList.tsx
+#: src/user/UserPermissionRequestsList.tsx
 msgid "Reviewed at"
 msgstr ""
 
 #: src/marketplace-flows/utils.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/user/UserPermissionsList.tsx
+#: src/user/UserPermissionRequestsList.tsx
 msgid "Reviewed by"
 msgstr ""
 
@@ -7611,7 +7611,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
-#: src/user/UserPermissionStateFilter.tsx
+#: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Select state..."
 msgstr ""
 
@@ -8121,8 +8121,8 @@ msgstr ""
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportDetailsTable.tsx
-#: src/user/UserPermissionStateFilter.tsx
-#: src/user/UserPermissionsList.tsx
+#: src/user/UserPermissionRequestsList.tsx
+#: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/hooks/HooksList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -11245,7 +11245,7 @@ msgid "token will not timeout"
 msgstr ""
 
 #: src/invitations/UserPermissionRequestsList.tsx
-#: src/user/UserPermissionsList.tsx
+#: src/user/UserPermissionRequestsList.tsx
 msgid "user permission requests"
 msgstr ""
 

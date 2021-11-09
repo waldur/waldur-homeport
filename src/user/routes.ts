@@ -41,7 +41,7 @@ export const states: StateDeclaration[] = [
   { name: 'profile.remote-accounts', ...tabs.offerings },
   { name: 'profile.flows-list', ...tabs.flowsList },
   { name: 'profile.flow-edit', ...tabs.flowEdit },
-  { name: 'profile.permissions', ...tabs.permissions },
+  { name: 'profile.permission-requests', ...tabs.permissionRequests },
 
   {
     name: 'users',
