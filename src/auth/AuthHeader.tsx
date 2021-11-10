@@ -7,10 +7,10 @@ export const AuthHeader: FunctionComponent = () => {
   const router = useRouter();
   const sessionExpired = Boolean(router.globals.params?.toState);
   return sessionExpired ? (
-    <>
+    <p>
       {translate(
         'Your session has expired, please enter credentials to continue.',
       )}
-    </>
+    </p>
   ) : null;
 };
