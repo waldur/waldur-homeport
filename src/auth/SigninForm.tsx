@@ -1,11 +1,11 @@
 import { reduxForm, SubmissionError } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 
 import { AuthService } from './AuthService';
 import { InputGroup } from './InputGroup';
-import { SubmitButton } from './SubmitButton';
 
 interface FormData {
   username: string;
@@ -42,7 +42,21 @@ export const SigninForm = reduxForm<FormData>({ form: FORM_ID })(
         placeholder={translate('Password')}
         type="password"
       />
-      <SubmitButton label={translate('Login')} submitting={submitting} />
+      <button
+        type="submit"
+        className="LoginSubmitButton"
+        style={{
+          backgroundColor: ENV.plugins.WALDUR_CORE.BRAND_COLOR,
+        }}
+        disabled={submitting}
+      >
+        {submitting && (
+          <>
+            <i className="fa fa-spinner fa-spin m-r-xs" />{' '}
+          </>
+        )}
+        {translate('Login')}
+      </button>
       {error && <p className="text-danger">{JSON.stringify(error)}</p>}
     </form>
   ),

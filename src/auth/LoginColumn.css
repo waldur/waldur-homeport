@@ -1,0 +1,42 @@
+.LoginColumn {
+  height: 100%;
+  min-height: 100vh;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.LoginBody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.LoginFooter {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.LoginFooter select {
+  font-weight: 600;
+  border: none;
+  background-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .LoginGridItemContainer {
+    width: 50%;
+  }
+
+  .LoginLogo {
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

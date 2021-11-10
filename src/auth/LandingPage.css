@@ -1,0 +1,10 @@
+.LandingPage {
+  display: grid;
+}
+
+@media (min-width: 768px) {
+  .LandingPage {
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr;
+  }
+}

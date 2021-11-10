@@ -195,10 +195,6 @@ module.exports = {
           to: utils.formatPath('images/help'),
         },
         {
-          from: path.resolve(imagesPath, './waldur'),
-          to: utils.formatPath('images/waldur'),
-        },
-        {
           from: path.resolve(imagesPath, './service-providers'),
           to: utils.formatPath('images/service-providers'),
         },
@@ -209,8 +205,6 @@ module.exports = {
           to: utils.formatPath('images/favicon.ico'),
           toType: 'file',
         },
-        // manifest.json is an experimental feature that is currently breaking caching
-        // {from:  './app/manifest.json', to: utils.formatPath('manifest.json'), toType: 'file'},
       ],
     }),
   ],
