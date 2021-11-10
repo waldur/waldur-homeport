@@ -77,12 +77,6 @@ async function signin(username, password) {
   loginSuccess({ data: { ...user, method: 'local' } });
 }
 
-async function activate(user) {
-  const url = ENV.apiEndpoint + 'api-auth/activation/';
-  const response = await Axios.post(url, user);
-  loginSuccess(response);
-}
-
 function storeRedirect() {
   if (router.globals.params?.toState) {
     setRedirect({
@@ -153,7 +147,6 @@ export const AuthService = {
   getDownloadLink,
   getLink,
   signin,
-  activate,
   redirectOnSuccess,
   localLogout,
   logout,

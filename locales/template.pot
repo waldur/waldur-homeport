@@ -105,14 +105,6 @@ msgstr ""
 msgid "Accessible to all customers."
 msgstr ""
 
-#: src/auth/AuthActivation.tsx
-msgid "Account activation"
-msgstr ""
-
-#: src/auth/AuthActivation.tsx
-msgid "Account has been activated."
-msgstr ""
-
 #: src/user/support/actions.ts
 msgid "Account removal"
 msgstr ""
@@ -3846,6 +3838,7 @@ msgstr ""
 msgid "Labels"
 msgstr ""
 
+#: src/auth/HeroButton.tsx
 #: src/navigation/cookies/CookiesConsent.tsx
 msgid "Learn more"
 msgstr ""
@@ -8932,10 +8925,6 @@ msgstr ""
 
 #: src/booking/AcceptAction.tsx
 msgid "Unable to accept booking."
-msgstr ""
-
-#: src/auth/AuthActivation.tsx
-msgid "Unable to activate account."
 msgstr ""
 
 #: src/user/support/effects.ts

@@ -14,11 +14,6 @@ const LandingPage = lazyComponent(
   'LandingPage',
 );
 
-const AuthActivation = lazyComponent(
-  () => import(/* webpackChunkName: "AuthActivation" */ './AuthActivation'),
-  'AuthActivation',
-);
-
 const AuthInit = lazyComponent(
   () => import(/* webpackChunkName: "AuthInit" */ './AuthInit'),
   'AuthInit',
@@ -40,15 +35,6 @@ export const states: StateDeclaration[] = [
       toState: '',
       toParams: {},
     },
-    data: {
-      anonymous: true,
-    },
-  },
-
-  {
-    name: 'home.activate',
-    url: '/activate/:user_uuid/:token/',
-    component: AuthActivation,
     data: {
       anonymous: true,
     },
