@@ -1,28 +1,11 @@
 import { FunctionComponent } from 'react';
 
-import { useLanguageSelector } from './useLanguageSelector';
 import './LanguageSelectorMenuItem.scss';
+import { LanguageSelectorBox } from './LanguageSelectorBox';
 
-export const LanguageSelectorMenuItem: FunctionComponent = () => {
-  const { currentLanguage, languageChoices, setLanguage } =
-    useLanguageSelector();
-
-  const handleChange = (event) => {
-    setLanguage(
-      languageChoices.find((language) => language.code === event.target.value),
-    );
-  };
-
-  return (
-    <li className="navigation-menu-item">
-      <i className="fa fa-language fixed-width-icon m-r-xs"></i>
-      <select onChange={handleChange} value={currentLanguage.code}>
-        {languageChoices.map((option, index) => (
-          <option value={option.code} key={index}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </li>
-  );
-};
+export const LanguageSelectorMenuItem: FunctionComponent = () => (
+  <li className="navigation-menu-item">
+    <i className="fa fa-language fixed-width-icon m-r-xs"></i>
+    <LanguageSelectorBox />
+  </li>
+);

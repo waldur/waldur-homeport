@@ -1,4 +1,4 @@
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -9,11 +9,11 @@ import { InvitationService } from '@waldur/invitations/InvitationService';
 import { getInvitationToken } from '@waldur/invitations/InvitationStorage';
 import { showError, showErrorResponse } from '@waldur/store/notify';
 
-const checkRegistrationMethods = async (mode, router, dispatch) => {
+const checkRegistrationMethods = async (router, dispatch) => {
   /*
    This method validates invitation token for signup in four steps:
 
-   1) check if invitations are enabled and user tries to signup;
+   1) check if invitations are enabled;
 
    2) check if user is allowed to signup without invitation token;
 
@@ -22,7 +22,7 @@ const checkRegistrationMethods = async (mode, router, dispatch) => {
    4) check if invitation token is valid using REST API.
   */
 
-  if (!ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED || mode !== 'register') {
+  if (!ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED) {
     return;
   }
 
@@ -51,13 +51,12 @@ const checkRegistrationMethods = async (mode, router, dispatch) => {
 };
 
 export const useAuthFeatures = () => {
-  const { state } = useCurrentStateAndParams();
   const router = useRouter();
   const dispatch = useDispatch();
 
   const { loading, value: civilNumberRequired } = useAsync(
-    () => checkRegistrationMethods(state.name, router, dispatch),
-    [state.name, router.stateService, dispatch],
+    () => checkRegistrationMethods(router, dispatch),
+    [router.stateService, dispatch],
   );
 
   const methods = useMemo<Record<string, boolean>>(
@@ -69,18 +68,7 @@ export const useAuthFeatures = () => {
     [],
   );
 
-  const showSigninButton = methods.LOCAL_SIGNIN && state.name === 'register';
-
-  const showSigninForm = methods.LOCAL_SIGNIN && state.name === 'login';
-
-  const showSignupButton =
-    methods.LOCAL_SIGNUP &&
-    state.name === 'login' &&
-    (!ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED ||
-      ENV.plugins.WALDUR_CORE.ALLOW_SIGNUP_WITHOUT_INVITATION);
-
-  const showSignupForm =
-    methods.LOCAL_SIGNUP && state.name === 'register' && !civilNumberRequired;
+  const showSigninForm = methods.LOCAL_SIGNIN;
 
   const showSocialSignup = methods.SOCIAL_SIGNUP && !civilNumberRequired;
 
@@ -96,7 +84,7 @@ export const useAuthFeatures = () => {
   const showEduteams =
     showSocialSignup && !!ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_CLIENT_ID;
 
-  const showValimo = methods.VALIMO && state.name === 'login';
+  const showValimo = methods.VALIMO;
 
   const showSaml2 =
     methods.SAML2 && !!ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_URL;
@@ -112,12 +100,7 @@ export const useAuthFeatures = () => {
 
   return {
     loading,
-    mode: state.name,
-    SigninButton: showSigninButton,
     SigninForm: showSigninForm,
-    SignupButton: showSignupButton,
-    SignupForm: showSignupForm,
-    SocialSignup: showSocialSignup,
     smartid: showSmartId,
     tara: showTARA,
     valimo: showValimo,

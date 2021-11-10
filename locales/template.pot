@@ -1567,10 +1567,6 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#: src/auth/SignupForm.tsx
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr ""
-
 #: src/marketplace/offerings/store/effects.ts
 msgid "Confirmation message has been updated successfully."
 msgstr ""
@@ -1706,11 +1702,6 @@ msgstr ""
 
 #: src/issues/notifications/NotificationCreateDialog.tsx
 msgid "Create a broadcast"
-msgstr ""
-
-#: src/auth/AuthHeader.tsx
-#: src/auth/SignupButton.tsx
-msgid "Create an account"
 msgstr ""
 
 #: src/rancher/template/TemplateQuestions.tsx
@@ -2310,10 +2301,6 @@ msgstr ""
 msgid "Do not configure a gateway for this subnet"
 msgstr ""
 
-#: src/auth/SignupButton.tsx
-msgid "Do not have an account?"
-msgstr ""
-
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 msgid "Do you really want to delete comment?"
 msgstr ""
@@ -2510,7 +2497,6 @@ msgstr ""
 msgid "Egress"
 msgstr ""
 
-#: src/auth/SignupForm.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/popover/CustomerUsersList.tsx
@@ -3068,7 +3054,6 @@ msgstr ""
 msgid "Full description"
 msgstr ""
 
-#: src/auth/SignupForm.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/rancher/cluster/users/UserDetailsTable.tsx
@@ -4773,6 +4758,10 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
+#: src/auth/LocalLogin.tsx
+msgid "OR"
+msgstr ""
+
 #: src/error/InvalidRoutePage.tsx
 msgid "Object is not found."
 msgstr ""
@@ -5355,7 +5344,6 @@ msgid "Paid"
 msgstr ""
 
 #: src/auth/SigninForm.tsx
-#: src/auth/SignupForm.tsx
 #: src/azure/sql/AzureSQLServerSummary.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
@@ -5693,10 +5681,6 @@ msgstr ""
 msgid "Please enter username and password."
 msgstr ""
 
-#: src/auth/SignupForm.tsx
-msgid "Please enter username, password and email."
-msgstr ""
-
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Please enter volume size to see price estimate."
 msgstr ""
@@ -5972,7 +5956,7 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
-#: src/navigation/AppFooter.tsx
+#: src/navigation/FooterLinks.tsx
 msgid "Privacy policy"
 msgstr ""
 
@@ -6454,10 +6438,6 @@ msgstr ""
 msgid "Region name"
 msgstr ""
 
-#: src/auth/SignupForm.tsx
-msgid "Register"
-msgstr ""
-
 #: src/customer/create/CustomerCreatePrompt.tsx
 msgid "Register as a customer of our portal and provide your cloud services through the Marketplace."
 msgstr ""
@@ -6472,14 +6452,6 @@ msgstr ""
 
 #: src/customer/details/CustomerActionsPanel.tsx
 msgid "Register organization as service provider and remove organization."
-msgstr ""
-
-#: src/auth/AuthHeader.tsx
-msgid "Register to"
-msgstr ""
-
-#: src/auth/AuthLogin.tsx
-msgid "Register with"
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
@@ -7966,8 +7938,8 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: src/auth/AuthLogin.tsx
-msgid "Sign in with"
+#: src/auth/LoginButton.tsx
+msgid "Sign in with {label}"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -8518,7 +8490,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
-#: src/navigation/AppFooter.tsx
+#: src/navigation/FooterLinks.tsx
 msgid "Terms of Service"
 msgstr ""
 
@@ -10372,7 +10344,6 @@ msgid "User {user_link} logged out successfully with SAML2."
 msgstr ""
 
 #: src/auth/SigninForm.tsx
-#: src/auth/SignupForm.tsx
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/UsernameGroup.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
@@ -10652,7 +10623,6 @@ msgstr ""
 msgid "Website URL"
 msgstr ""
 
-#: src/auth/AuthHeader.tsx
 #: src/auth/AuthInit.tsx
 #: src/marketplace/offerings/service-providers/Description.tsx
 msgid "Welcome to {pageTitle}!"
@@ -11243,6 +11213,10 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "token will not timeout"
+msgstr ""
+
+#: src/auth/SmartidButton.tsx
+msgid "trusted identity"
 msgstr ""
 
 #: src/invitations/UserPermissionRequestsList.tsx

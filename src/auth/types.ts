@@ -33,6 +33,10 @@ export interface ExternalLink {
 }
 
 interface CoreConfiguration {
+  BRAND_COLOR: string;
+  HERO_LINK_URL: string;
+  HERO_LINK_LABEL: string;
+  HERO_IMAGE: string;
   POWERED_BY_LOGO: string;
   SIDEBAR_LOGO: string;
   LOGIN_LOGO: string;

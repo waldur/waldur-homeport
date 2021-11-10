@@ -77,10 +77,6 @@ async function signin(username, password) {
   loginSuccess({ data: { ...user, method: 'local' } });
 }
 
-function signup(user) {
-  return Axios.post(ENV.apiEndpoint + 'api-auth/registration/', user);
-}
-
 async function activate(user) {
   const url = ENV.apiEndpoint + 'api-auth/activation/';
   const response = await Axios.post(url, user);
@@ -157,7 +153,6 @@ export const AuthService = {
   getDownloadLink,
   getLink,
   signin,
-  signup,
   activate,
   redirectOnSuccess,
   localLogout,

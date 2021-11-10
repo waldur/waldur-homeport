@@ -9,9 +9,9 @@ const AnonymousLayout = lazyComponent(
   'AnonymousLayout',
 );
 
-const AuthLogin = lazyComponent(
-  () => import(/* webpackChunkName: "AuthLogin" */ './AuthLogin'),
-  'AuthLogin',
+const LandingPage = lazyComponent(
+  () => import(/* webpackChunkName: "LandingPage" */ './LandingPage'),
+  'LandingPage',
 );
 
 const AuthActivation = lazyComponent(
@@ -35,20 +35,11 @@ export const states: StateDeclaration[] = [
   {
     name: 'login',
     url: '/login/',
-    component: AuthLogin,
+    component: LandingPage,
     params: {
       toState: '',
       toParams: {},
     },
-    data: {
-      anonymous: true,
-    },
-  },
-
-  {
-    name: 'register',
-    url: '/register/',
-    component: AuthLogin,
     data: {
       anonymous: true,
     },
