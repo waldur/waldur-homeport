@@ -1,64 +1,8 @@
-import { useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
-import { useAsync } from 'react-use';
 
 import { ENV } from '@waldur/configs/default';
-import { translate } from '@waldur/i18n';
-import { InvitationService } from '@waldur/invitations/InvitationService';
-import { getInvitationToken } from '@waldur/invitations/InvitationStorage';
-import { showError, showErrorResponse } from '@waldur/store/notify';
-
-const checkRegistrationMethods = async (router, dispatch) => {
-  /*
-   This method validates invitation token for signup in four steps:
-
-   1) check if invitations are enabled;
-
-   2) check if user is allowed to signup without invitation token;
-
-   3) check if invitation token is present in local storage;
-
-   4) check if invitation token is valid using REST API.
-  */
-
-  if (!ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED) {
-    return;
-  }
-
-  if (ENV.plugins.WALDUR_CORE.ALLOW_SIGNUP_WITHOUT_INVITATION) {
-    return;
-  }
-
-  const token = getInvitationToken();
-  if (!token) {
-    dispatch(showError(translate('Invitation token is not found.')));
-    router.stateService.go('errorPage.notFound');
-    return;
-  }
-
-  try {
-    const result: any = await InvitationService.check(token);
-    if (result.data.civil_number_required) {
-      return true;
-    }
-  } catch (e) {
-    dispatch(
-      showErrorResponse(e, translate('Unable to validate invitation token.')),
-    );
-    router.stateService.go('errorPage.notFound');
-  }
-};
 
 export const useAuthFeatures = () => {
-  const router = useRouter();
-  const dispatch = useDispatch();
-
-  const { loading, value: civilNumberRequired } = useAsync(
-    () => checkRegistrationMethods(router, dispatch),
-    [router.stateService, dispatch],
-  );
-
   const methods = useMemo<Record<string, boolean>>(
     () =>
       ENV.plugins.WALDUR_CORE.AUTHENTICATION_METHODS.reduce((result, item) => {
@@ -70,7 +14,7 @@ export const useAuthFeatures = () => {
 
   const showSigninForm = methods.LOCAL_SIGNIN;
 
-  const showSocialSignup = methods.SOCIAL_SIGNUP && !civilNumberRequired;
+  const showSocialSignup = methods.SOCIAL_SIGNUP;
 
   const showSmartId =
     showSocialSignup && !!ENV.plugins.WALDUR_AUTH_SOCIAL.SMARTIDEE_CLIENT_ID;
@@ -99,7 +43,6 @@ export const useAuthFeatures = () => {
     ENV.plugins.WALDUR_AUTH_SAML2.DISCOVERY_SERVICE_LABEL;
 
   return {
-    loading,
     SigninForm: showSigninForm,
     smartid: showSmartId,
     tara: showTARA,
