@@ -65,12 +65,6 @@ msgstr "Přístupový token"
 msgid "Accessible to all customers."
 msgstr "Přístupné všem zákazníkům."
 
-msgid "Account activation"
-msgstr "Aktivace účtu"
-
-msgid "Account has been activated."
-msgstr "Účet byl aktivován."
-
 msgid "Account removal"
 msgstr "Odstranění účtu"
 
@@ -845,9 +839,6 @@ msgstr "Potvrdit odstranění?"
 msgid "Confirmation"
 msgstr "Potvrzení"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Potvrzující e-mail byl odeslán. Zkontrolujte prosím vaši doručenou poštu!"
-
 msgid "Confirmation message has been updated successfully."
 msgstr "Potvrzovací zpráva byla úspěšně aktualizována."
 
@@ -916,9 +907,6 @@ msgstr "Vytvořit snímek virtuálního počítače pro instanci OpenStack"
 
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr "Vytvořit plán snímků virtuálního počítače pro instanci OpenStack"
-
-msgid "Create an account"
-msgstr "Vytvořit účet"
 
 msgid "Create application"
 msgstr "Vytvořit aplikaci"
@@ -1213,9 +1201,6 @@ msgstr "Typ divize"
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Nekonfigurujte bránu pro tuto podsíť."
-
-msgid "Do not have an account?"
-msgstr "Nemáte účet?"
 
 msgid "Do you really want to delete comment?"
 msgstr "Opravdu chcete smazat komentář?"
@@ -3167,9 +3152,6 @@ msgstr "Do řádků níže prosím zadejte požadované hodnoty:"
 msgid "Please enter reason why offering has been paused."
 msgstr "Zadejte prosím důvod, proč byla nabídka pozastavena."
 
-msgid "Please enter username, password and email."
-msgstr "Zadejte prosím uživatelské jméno, heslo a e-mail."
-
 msgid "Please enter username and password."
 msgstr "Zadejte prosím uživatelské jméno a heslo."
 
@@ -3584,17 +3566,11 @@ msgstr "Region"
 msgid "Region name"
 msgstr "Název regionu"
 
-msgid "Register"
-msgstr "Registrovat"
-
 msgid "Register as service provider"
 msgstr "Zaregistrujte se jako poskytovatel služeb"
 
 msgid "Register organization as service provider and remove organization."
 msgstr "Zaregistrujte organizaci jako poskytovatele služeb a odstraňte ji."
-
-msgid "Register to"
-msgstr "Zaregistrujte se do"
 
 msgid "Registered at:"
 msgstr "Registrováno na:"
@@ -4418,6 +4394,9 @@ msgstr "Vypnutí"
 msgid "Sign in"
 msgstr "Přihlásit se"
 
+msgid "Sign in with {label}"
+msgstr "Přihlaste se pomocí {label}"
+
 msgid "Size"
 msgstr "Velikost"
 
@@ -4948,9 +4927,6 @@ msgstr "UUID"
 
 msgid "Unable to accept booking."
 msgstr "Nelze přijmout rezervaci."
-
-msgid "Unable to activate account."
-msgstr "Nelze aktivovat účet."
 
 msgid "Unable to activate user."
 msgstr "Nelze aktivovat uživatele."

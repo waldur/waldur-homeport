@@ -65,12 +65,6 @@ msgstr "Токен доступа"
 msgid "Accessible to all customers."
 msgstr "Доступно для всех организаций."
 
-msgid "Account activation"
-msgstr "Активация аккаунта"
-
-msgid "Account has been activated."
-msgstr "Аккаунт был активирован."
-
 msgid "Account removal"
 msgstr "Удаление аккаунта"
 
@@ -698,9 +692,6 @@ msgstr "Подтвердить удаление?"
 msgid "Confirmation"
 msgstr "Подтверждение"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Подтверждающее письмо было отправлено. Пожалуйста, проверьте свою почту!"
-
 msgid "Confirmation notification template"
 msgstr "Шаблон уведомления о подтверждении"
 
@@ -721,9 +712,6 @@ msgstr "Страна"
 
 msgid "Create"
 msgstr "Создать"
-
-msgid "Create an account"
-msgstr "Создать аккаунт"
 
 msgid "Create notification"
 msgstr "Создать уведомление"
@@ -772,9 +760,6 @@ msgstr "Детали"
 
 msgid "Device"
 msgstr "Устройство"
-
-msgid "Do not have an account?"
-msgstr "У вас ещё нет аккаунта?"
 
 msgid "Documentation"
 msgstr "Документация"

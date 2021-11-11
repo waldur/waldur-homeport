@@ -29,12 +29,6 @@ msgstr "Giriş"
 msgid "Access token"
 msgstr "Giriş token"
 
-msgid "Account activation"
-msgstr "Hesabatın aktiv edilməsi"
-
-msgid "Account has been activated."
-msgstr "Hesab aktiv edildi."
-
 msgid "Account removal"
 msgstr "Hesabın silinməsi"
 
@@ -308,9 +302,6 @@ msgstr "Konfiqurasiya etmək"
 msgid "Confirm deletion?"
 msgstr "Silinməni təsdiqləmək?"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Təsdiq mesajı göndərilib. Zəhmət olmazsa, daxil olanlar qutusuna baxın.  "
-
 msgid "Connect"
 msgstr "Birləşdirmək"
 
@@ -337,9 +328,6 @@ msgstr "Ölkə "
 
 msgid "Create"
 msgstr "Yaratmaq "
-
-msgid "Create an account"
-msgstr "Hesab yaratmaq  "
 
 msgid "Create application"
 msgstr "Proqram tətbiqi yaratmaq "
@@ -475,9 +463,6 @@ msgstr "Verilənlərin həcmini söndürmək"
 
 msgid "Disable profile"
 msgstr "Profili söndürmək"
-
-msgid "Do not have an account?"
-msgstr "Hesabınız yoxdur?"
 
 msgid "Do you really want to delete comment?"
 msgstr "Siz həqiqətən də şərhi silmək istəyirisiniz?"
@@ -1445,12 +1430,6 @@ msgstr "Təzələmək"
 msgid "Region name"
 msgstr "Region adı"
 
-msgid "Register"
-msgstr "Qeydiyyatdan keçin"
-
-msgid "Register to"
-msgstr "---- qeydiyyatdan keçin"
-
 msgid "Registration code"
 msgstr "Qeydiyyat kodu"
 
@@ -1748,6 +1727,9 @@ msgstr "{sliceStart} girişlərindən {sliceEnd}-dan {resultCount}-a kimi göst�
 msgid "Sign in"
 msgstr "Daxil ol"
 
+msgid "Sign in with {label}"
+msgstr "{label} ilə daxil ol"
+
 msgid "Size"
 msgstr "Ölçü"
 
@@ -1972,9 +1954,6 @@ msgstr "URL (resursun vahid göstərici)"
 
 msgid "UUID"
 msgstr "UUID (universal unikal idenifikator)"
-
-msgid "Unable to activate account."
-msgstr "Hesabı aktivləşdirmək olmur."
 
 msgid "Unable to authenticate using Mobile ID."
 msgstr "Mobil ID istifadə edərək identifikasiya təsdiqlənməsi edilə bilmir."

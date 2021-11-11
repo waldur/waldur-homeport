@@ -23,12 +23,6 @@ msgstr "Pieņemts"
 msgid "Access"
 msgstr "Pieeja"
 
-msgid "Account activation"
-msgstr "Konta aktivizēšana"
-
-msgid "Account has been activated."
-msgstr "Konts tika aktivizēts."
-
 msgid "Actions"
 msgstr "Darbības"
 
@@ -122,9 +116,6 @@ msgstr "Konfigurēt"
 msgid "Confirm deletion?"
 msgstr "Vai apstiprināt dzēšanu?"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Apstiprināšanas e-pasts tika nosūtīts. Lūdzu, pārbaudiet savu pastu!"
-
 msgid "Contact email"
 msgstr "E-pasts"
 
@@ -133,9 +124,6 @@ msgstr "Valsts"
 
 msgid "Create"
 msgstr "Izveidot"
-
-msgid "Create an account"
-msgstr "Izveidot kontu"
 
 msgid "Create project"
 msgstr "Izveidot projektu"

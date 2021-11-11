@@ -65,12 +65,6 @@ msgstr "Juurdepääsu žetoon"
 msgid "Accessible to all customers."
 msgstr "Ligipääsetav kõigile klientidele"
 
-msgid "Account activation"
-msgstr "Konto aktiveerimine"
-
-msgid "Account has been activated."
-msgstr "Konto on aktiveeritud."
-
 msgid "Account removal"
 msgstr "Konto eemaldamine"
 
@@ -800,9 +794,6 @@ msgstr "Kinnita kustutamine?"
 msgid "Confirmation"
 msgstr "Kinnitamine"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Kinnitus e-mail on saadetud. Palun kontrollige oma postkasti!"
-
 msgid "Confirmation notification template"
 msgstr "Kinnituse teatise mall"
 
@@ -856,9 +847,6 @@ msgstr "Loo võrguadapter"
 
 msgid "Create SQL database in PostgreSQL server"
 msgstr "Loo SQL andmebaas PostgreSQL serverisse"
-
-msgid "Create an account"
-msgstr "Loo konto"
 
 msgid "Create application"
 msgstr "Rakenduse loomine"
@@ -1105,9 +1093,6 @@ msgstr "Jaoskond"
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Ära seadista sellele võrgule võrguväravat"
-
-msgid "Do not have an account?"
-msgstr "Konto puudub?"
 
 msgid "Do you really want to delete comment?"
 msgstr "Kas sa soovid tõesti kommentaari kustutada?"
@@ -2915,14 +2900,8 @@ msgstr "Piirkond"
 msgid "Region name"
 msgstr "Piirkonna nimi"
 
-msgid "Register"
-msgstr "Registeeru"
-
 msgid "Register as service provider"
 msgstr "Registreeri ennast teenusepakkujaks"
-
-msgid "Register to"
-msgstr "Registreeru"
 
 msgid "Registered at:"
 msgstr "Registreeritud"
@@ -3509,6 +3488,9 @@ msgstr "Näitan {sliceStart} kuni {sliceEnd} kirjet {resultCount} kandest."
 msgid "Sign in"
 msgstr "Logi sisse"
 
+msgid "Sign in with {label}"
+msgstr "{label}"
+
 msgid "Size"
 msgstr "Suurus"
 
@@ -3850,9 +3832,6 @@ msgstr "Tüüp"
 
 msgid "Type of incident"
 msgstr "Vahejuhtumi liik"
-
-msgid "Unable to activate account."
-msgstr "Ei ole võimalik kontot aktiveerida."
 
 msgid "Unable to activate user."
 msgstr "Kasutajat pole võimalik aktiveerida"

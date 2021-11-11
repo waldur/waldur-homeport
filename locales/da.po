@@ -65,12 +65,6 @@ msgstr "Adgangstoken"
 msgid "Accessible to all customers."
 msgstr "Tilgængelig for alle kunder."
 
-msgid "Account activation"
-msgstr "Aktivering af konto"
-
-msgid "Account has been activated."
-msgstr "Kontoen er blevet aktiveret."
-
 msgid "Account removal"
 msgstr "Fjernelse af konto"
 
@@ -845,9 +839,6 @@ msgstr "Bekræft sletning?"
 msgid "Confirmation"
 msgstr "Bekræftelse"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Bekræftelsesmail er blevet sendt. Tjek venligst din indbakke!"
-
 msgid "Confirmation message has been updated successfully."
 msgstr "Bekræftelsesmeddelelsen er blevet opdateret med succes."
 
@@ -916,9 +907,6 @@ msgstr "Opret VM-snapshot til OpenStack-instans"
 
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr "Opret VM-snapshotplan for OpenStack-instans"
-
-msgid "Create an account"
-msgstr "Opret en konto"
 
 msgid "Create application"
 msgstr "Opret ansøgning"
@@ -1213,9 +1201,6 @@ msgstr "Division type"
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Konfigurer ikke en gateway for dette undernet"
-
-msgid "Do not have an account?"
-msgstr "Har du ikke en konto?"
 
 msgid "Do you really want to delete comment?"
 msgstr "Vil du virkelig slette en kommentar?"
@@ -3167,9 +3152,6 @@ msgstr "Indtast venligst de ønskede værdier i nedenstående rækker:"
 msgid "Please enter reason why offering has been paused."
 msgstr "Angiv venligst grunden til, at tilbuddet er blevet sat på pause."
 
-msgid "Please enter username, password and email."
-msgstr "Indtast venligst brugernavn, adgangskode og e-mail."
-
 msgid "Please enter username and password."
 msgstr "Indtast venligst brugernavn og adgangskode."
 
@@ -3584,17 +3566,11 @@ msgstr "Område"
 msgid "Region name"
 msgstr "Regionens navn"
 
-msgid "Register"
-msgstr "Registrer"
-
 msgid "Register as service provider"
 msgstr "Registrer dig som tjenesteudbyder"
 
 msgid "Register organization as service provider and remove organization."
 msgstr "Registrer organisation som tjenesteudbyder og fjern organisation."
-
-msgid "Register to"
-msgstr "Tilmeld dig"
 
 msgid "Registered at:"
 msgstr "Registreret på:"
@@ -4418,6 +4394,9 @@ msgstr "Lukke ned"
 msgid "Sign in"
 msgstr "Log ind"
 
+msgid "Sign in with {label}"
+msgstr "Log ind med {label}"
+
 msgid "Size"
 msgstr "Størrelse"
 
@@ -4948,9 +4927,6 @@ msgstr "UUID"
 
 msgid "Unable to accept booking."
 msgstr "Kan ikke acceptere booking."
-
-msgid "Unable to activate account."
-msgstr "Kan ikke aktivere konto."
 
 msgid "Unable to activate user."
 msgstr "Kan ikke aktivere brugeren."

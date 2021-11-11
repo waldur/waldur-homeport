@@ -11,12 +11,6 @@ msgstr ""
 msgid "A profile has been created."
 msgstr "Konto zostało utworzone."
 
-msgid "Account activation"
-msgstr "Aktywacja konta"
-
-msgid "Account has been activated."
-msgstr "Konto zostało aktywowane."
-
 msgid "Account removal"
 msgstr "Usunięcie konta"
 

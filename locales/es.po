@@ -68,12 +68,6 @@ msgstr "Token de acceso"
 msgid "Accessible to all customers."
 msgstr "Accesible para todos los clientes."
 
-msgid "Account activation"
-msgstr "Activación de la cuenta"
-
-msgid "Account has been activated."
-msgstr "Se ha activado la cuenta."
-
 msgid "Account removal"
 msgstr "Eliminación de cuenta"
 
@@ -848,9 +842,6 @@ msgstr "¿Confirmar la eliminación?"
 msgid "Confirmation"
 msgstr "Confirmación "
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Se ha enviado un correo de confirmación. ¡Por favor, compruebe su bandeja de entrada!"
-
 msgid "Confirmation message has been updated successfully."
 msgstr "El mensaje de confirmación se ha actualizado correctamente."
 
@@ -919,9 +910,6 @@ msgstr "Crear una instantánea de VM para la instancia de OpenStack"
 
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr "Crear programación de instantáneas de VM para la instancia de OpenStack"
-
-msgid "Create an account"
-msgstr "Crear una cuenta"
 
 msgid "Create application"
 msgstr "Crear aplicación"
@@ -1216,9 +1204,6 @@ msgstr "Tipo de división"
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "No configure una puerta de enlace para esta subred"
-
-msgid "Do not have an account?"
-msgstr "¿No tiene una cuenta?"
 
 msgid "Do you really want to delete comment?"
 msgstr "¿Realmente quieres eliminar el comentario?"
@@ -3170,9 +3155,6 @@ msgstr "Por favor, introduzca los valores deseados en las filas de abajo:"
 msgid "Please enter reason why offering has been paused."
 msgstr "Por favor, introduzca el motivo por el que se ha pausado la oferta."
 
-msgid "Please enter username, password and email."
-msgstr "Por favor, introduzca el nombre de usuario, la contraseña y el correo electrónico."
-
 msgid "Please enter username and password."
 msgstr "Por favor, introduzca el nombre de usuario y la contraseña."
 
@@ -3587,17 +3569,11 @@ msgstr "Región"
 msgid "Region name"
 msgstr "Nombre de la región"
 
-msgid "Register"
-msgstr "Registrarse"
-
 msgid "Register as service provider"
 msgstr "Registrarse como proveedor de servicios"
 
 msgid "Register organization as service provider and remove organization."
 msgstr "Registrar la organización como proveedor de servicios y eliminar la organización."
-
-msgid "Register to"
-msgstr "Regístrese en"
 
 msgid "Registered at:"
 msgstr "Registrado en:"
@@ -4421,6 +4397,9 @@ msgstr "Apagado"
 msgid "Sign in"
 msgstr "Iniciar sesión"
 
+msgid "Sign in with {label}"
+msgstr "Iniciar sesión con {label}"
+
 msgid "Size"
 msgstr "Tamaño"
 
@@ -4951,9 +4930,6 @@ msgstr "UUID"
 
 msgid "Unable to accept booking."
 msgstr "No se puede aceptar la reserva."
-
-msgid "Unable to activate account."
-msgstr "No se puede activar la cuenta."
 
 msgid "Unable to activate user."
 msgstr "No se puede activar al usuario."

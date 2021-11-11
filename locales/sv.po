@@ -59,12 +59,6 @@ msgstr "Åtkomsttoken"
 msgid "Accessible to all customers."
 msgstr "Tillgänglig för alla kunder."
 
-msgid "Account activation"
-msgstr "Aktivering av konto"
-
-msgid "Account has been activated."
-msgstr "Kontot har aktiverats."
-
 msgid "Account removal"
 msgstr "Kontoborttagning"
 
@@ -824,9 +818,6 @@ msgstr "Bekräfta radering?"
 msgid "Confirmation"
 msgstr "Bekräftelse"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Bekräftelse e-post har skickats. Vänligen kolla din inkorg!"
-
 msgid "Confirmation notification template"
 msgstr "Mall för bekräftelsemeddelande"
 
@@ -892,9 +883,6 @@ msgstr "Skapa VM-snapshot för OpenStack-instans"
 
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr "Skapa schema för VM-snapshot för OpenStack-instans"
-
-msgid "Create an account"
-msgstr "Skapa ett konto"
 
 msgid "Create application"
 msgstr "Skapa program"
@@ -1183,9 +1171,6 @@ msgstr "Typ av division"
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Konfigurera inte en gateway för det här undernätet"
-
-msgid "Do not have an account?"
-msgstr "Har du inget konto?"
 
 msgid "Do you really want to delete comment?"
 msgstr "Vill du verkligen ta bort kommentar?"
@@ -3101,9 +3086,6 @@ msgstr "Ange önskade värden i raderna nedan:"
 msgid "Please enter reason why offering has been paused."
 msgstr "Ange anledningen till varför erbjudandet har pausats."
 
-msgid "Please enter username, password and email."
-msgstr "Ange användarnamn, lösenord och e-post."
-
 msgid "Please enter username and password."
 msgstr "Ange användarnamn och lösenord."
 
@@ -3512,17 +3494,11 @@ msgstr "Område"
 msgid "Region name"
 msgstr "Regionens namn"
 
-msgid "Register"
-msgstr "Registrera"
-
 msgid "Register as service provider"
 msgstr "Registrera dig som tjänsteleverantör"
 
 msgid "Register organization as service provider and remove organization."
 msgstr "Registrera organisationen som tjänsteleverantör och ta bort organisationen."
-
-msgid "Register to"
-msgstr "Registrera dig på"
 
 msgid "Registered at:"
 msgstr "Registrerat på:"
@@ -4340,6 +4316,9 @@ msgstr "Avstängning"
 msgid "Sign in"
 msgstr "Logga in"
 
+msgid "Sign in with {label}"
+msgstr "Logga in med {label}"
+
 msgid "Size"
 msgstr "Storlek"
 
@@ -4870,9 +4849,6 @@ msgstr "UUID"
 
 msgid "Unable to accept booking."
 msgstr "Det går inte att acceptera bokningen."
-
-msgid "Unable to activate account."
-msgstr "Det gick inte att aktivera kontot."
 
 msgid "Unable to activate user."
 msgstr "Det gick inte att aktivera användaren."
