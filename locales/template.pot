@@ -7129,6 +7129,7 @@ msgstr ""
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
+#: src/user/UserPermissionRequestsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Role"
