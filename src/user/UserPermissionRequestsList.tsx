@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { PermissionRequestStateField } from '@waldur/invitations/PermissionRequestStateField';
+import { RoleField } from '@waldur/invitations/RoleField';
 import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -19,6 +20,10 @@ const TableComponent = (props: any) => {
     {
       title: translate('Created at'),
       render: ({ row }) => formatDateTime(row.created),
+    },
+    {
+      title: translate('Role'),
+      render: ({ row }) => <RoleField invitation={row} />,
     },
     {
       title: translate('Reviewed by'),
