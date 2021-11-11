@@ -9,6 +9,7 @@ import { GROUP_INVITATIONS_FILTER_FORM_ID } from '@waldur/invitations/constants'
 import { GroupInvitationRowActions } from '@waldur/invitations/GroupInvitationRowActions';
 import { GroupInvitationsFilter } from '@waldur/invitations/GroupInvitationsFilter';
 import { GroupInvitationsListExpandableRow } from '@waldur/invitations/GroupInvitationsListExpandableRow';
+import { RoleField } from '@waldur/invitations/RoleField';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
@@ -24,6 +25,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
         {
           title: translate('Created by'),
           render: ({ row }) => row.created_by_full_name,
+        },
+        {
+          title: translate('Role'),
+          render: ({ row }) => <RoleField invitation={row} />,
         },
         {
           title: translate('Created at'),
