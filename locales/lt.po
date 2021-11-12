@@ -1982,9 +1982,6 @@ msgstr "Kvietimo nuoroda"
 msgid "Invitation rejection"
 msgstr "Kvietimo atmetimas"
 
-msgid "Invitation token is not found."
-msgstr "Kvietimo atpažinimo ženklas nerastas."
-
 msgid "Invitations"
 msgstr "Kvietimai"
 
@@ -5497,9 +5494,6 @@ msgstr "Neįmanoma įkelti priedo."
 
 msgid "Unable to upload logo."
 msgstr "Neįmanoma įkelti logotipo."
-
-msgid "Unable to validate invitation token."
-msgstr "Neįmanoma patvirtinti kvietimo atpažinimo ženklo."
 
 msgid "Unconfirmed"
 msgstr "Nepatvirtintų"

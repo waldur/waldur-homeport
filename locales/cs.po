@@ -1982,9 +1982,6 @@ msgstr "Odkaz na pozvánku"
 msgid "Invitation rejection"
 msgstr "Odmítnutí pozvánky"
 
-msgid "Invitation token is not found."
-msgstr "Token pozvánky nebyl nalezen."
-
 msgid "Invitations"
 msgstr "Pozvánky"
 
@@ -5497,9 +5494,6 @@ msgstr "Nelze nahrát přílohu."
 
 msgid "Unable to upload logo."
 msgstr "Nelze nahrát logo."
-
-msgid "Unable to validate invitation token."
-msgstr "Nelze ověřit token pozvánky."
 
 msgid "Unconfirmed"
 msgstr "Nepotvrzeno"

@@ -1982,9 +1982,6 @@ msgstr "Uitnodiging koppeling"
 msgid "Invitation rejection"
 msgstr "Afwijzing uitnodiging"
 
-msgid "Invitation token is not found."
-msgstr "Uitnodigingstoken is niet gevonden."
-
 msgid "Invitations"
 msgstr "Uitnodigingen"
 
@@ -5497,9 +5494,6 @@ msgstr "Kan bijlage niet uploaden."
 
 msgid "Unable to upload logo."
 msgstr "Kan logo niet uploaden."
-
-msgid "Unable to validate invitation token."
-msgstr "Kan uitnodigingstoken niet valideren."
 
 msgid "Unconfirmed"
 msgstr "Niet bevestigd"

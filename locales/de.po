@@ -1982,9 +1982,6 @@ msgstr "Einladungslink"
 msgid "Invitation rejection"
 msgstr "Ablehnung einer Einladung"
 
-msgid "Invitation token is not found."
-msgstr "Einladungs-Token wurde nicht gefunden."
-
 msgid "Invitations"
 msgstr "Einladungen"
 
@@ -5497,9 +5494,6 @@ msgstr "Die Anlage kann nicht hochgeladen werden."
 
 msgid "Unable to upload logo."
 msgstr "Das Logo kann nicht hochgeladen werden."
-
-msgid "Unable to validate invitation token."
-msgstr "Einladungstoken kann nicht überprüft werden."
 
 msgid "Unconfirmed"
 msgstr "Unbestätigt"

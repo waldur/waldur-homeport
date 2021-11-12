@@ -1982,9 +1982,6 @@ msgstr "Invitationslink"
 msgid "Invitation rejection"
 msgstr "Afvisning af indbydelse"
 
-msgid "Invitation token is not found."
-msgstr "Indbydelsens token er ikke fundet."
-
 msgid "Invitations"
 msgstr "Invitationer"
 
@@ -5497,9 +5494,6 @@ msgstr "Kan ikke uploade vedhæftet fil."
 
 msgid "Unable to upload logo."
 msgstr "Kan ikke uploade logo."
-
-msgid "Unable to validate invitation token."
-msgstr "Kan ikke validere invitationstoken."
 
 msgid "Unconfirmed"
 msgstr "Ubekræftet"

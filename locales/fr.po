@@ -1982,9 +1982,6 @@ msgstr "Lien d'invitation"
 msgid "Invitation rejection"
 msgstr "Rejet de l'invitation"
 
-msgid "Invitation token is not found."
-msgstr "Le jeton d’invitation n’est pas trouvé."
-
 msgid "Invitations"
 msgstr "Invitations"
 
@@ -5497,9 +5494,6 @@ msgstr "Impossible de télécharger la pièce jointe."
 
 msgid "Unable to upload logo."
 msgstr "Impossible de télécharger le logo."
-
-msgid "Unable to validate invitation token."
-msgstr "Impossible de valider le jeton d'invitation."
 
 msgid "Unconfirmed"
 msgstr "Non confirmé"

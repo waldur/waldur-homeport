@@ -1409,9 +1409,6 @@ msgstr "لینک دعوت"
 msgid "Invitation rejection"
 msgstr "رد دعوت"
 
-msgid "Invitation token is not found."
-msgstr "نشانه دعوت یافت نشد."
-
 msgid "Invitations"
 msgstr "دعوت ها"
 

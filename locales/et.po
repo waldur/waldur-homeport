@@ -1757,9 +1757,6 @@ msgstr "Kutse link"
 msgid "Invitation rejection"
 msgstr "Kutse tagasilükkamine"
 
-msgid "Invitation token is not found."
-msgstr "Kutse žetooni ei leitud."
-
 msgid "Invitations"
 msgstr "Kutsed"
 
@@ -4093,9 +4090,6 @@ msgstr "Manust pole võimalik üles laadida"
 
 msgid "Unable to upload logo."
 msgstr "Logo ei saa üles laadida"
-
-msgid "Unable to validate invitation token."
-msgstr "Ei ole võimalik valideerida kutse žetooni."
 
 msgid "Unexpected exception happened during login process."
 msgstr "Sisselogimise ajal juhtus ootamatu probleem."

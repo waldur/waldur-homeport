@@ -1940,9 +1940,6 @@ msgstr "Länk till inbjudan"
 msgid "Invitation rejection"
 msgstr "Avslag på inbjudan"
 
-msgid "Invitation token is not found."
-msgstr "Inbjudningstoken hittades inte."
-
 msgid "Invitations"
 msgstr "Inbjudningar"
 
@@ -5410,9 +5407,6 @@ msgstr "Det gick inte att ladda upp bilagan."
 
 msgid "Unable to upload logo."
 msgstr "Det gick inte att ladda upp logotypen."
-
-msgid "Unable to validate invitation token."
-msgstr "Det gick inte att validera inbjudningstoken."
 
 msgid "Unconfirmed"
 msgstr "Obekräftad"

@@ -854,9 +854,6 @@ msgstr "Dəvət etibarlı deyil."
 msgid "Invitation is not valid anymore."
 msgstr "Dəvət artıq etibarlı deyil."
 
-msgid "Invitation token is not found."
-msgstr "Dəvət işarəsi tapılmadı."
-
 msgid "Invitations"
 msgstr "Dəvətlər"
 
@@ -2020,9 +2017,6 @@ msgstr "Provayderi yeniləmək mümkün deyil."
 
 msgid "Unable to upload attachment."
 msgstr "Əlavəni yükləmək mümkün deyil."
-
-msgid "Unable to validate invitation token."
-msgstr "Dəvət işarəsini təsdiqləmək olmur."
 
 msgid "Unexpected exception happened during login process."
 msgstr "Giriş prosesində gözlənilməyən istisna baş verdi."
