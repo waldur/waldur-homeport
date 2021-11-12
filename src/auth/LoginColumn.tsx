@@ -1,4 +1,3 @@
-import { ENV } from '@waldur/configs/default';
 import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
 import { FooterLinks } from '@waldur/navigation/FooterLinks';
 
@@ -11,8 +10,6 @@ import { UserAuthWarning } from './UserAuthWarning';
 
 import './LoginColumn.css';
 
-const WaldurLogo = require('@waldur/auth/WaldurLogo.svg');
-
 export const LoginColumn = () => {
   const features = useAuthFeatures();
   return (
@@ -20,7 +17,7 @@ export const LoginColumn = () => {
       <div className="LoginBody">
         <div className="LoginGridItemContainer">
           <div className="LoginLogo m-b-sm">
-            <img src={ENV.plugins.WALDUR_CORE.LOGIN_LOGO || WaldurLogo} />
+            <img src="/images/login_logo.png" />
           </div>
           <AuthHeader />
           {features.SigninForm && <LocalLogin />}

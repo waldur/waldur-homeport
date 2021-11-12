@@ -205,6 +205,10 @@ module.exports = {
           to: utils.formatPath('images/favicon.ico'),
           toType: 'file',
         },
+        {
+          from: path.resolve(imagesPath, './login_logo.png'),
+          to: utils.formatPath('images/login_logo.png'),
+        },
       ],
     }),
   ],

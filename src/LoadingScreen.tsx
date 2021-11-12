@@ -4,8 +4,6 @@ import { translate } from './i18n';
 
 import './LoadingScreen.css';
 
-const WaldurLogo = require('@waldur/auth/WaldurLogo.svg');
-
 export const LoadingScreen: FunctionComponent<{
   loading: boolean;
   error?: Error;
@@ -15,7 +13,7 @@ export const LoadingScreen: FunctionComponent<{
       {loading ? (
         <div className="loading-screen-container">
           <div className="loading-screen">
-            <img src={WaldurLogo} alt="Logo should be here" />
+            <img src="/images/login_logo.png" alt="Logo should be here" />
             <h1 className="loading-title">
               {translate('Loading assets, please wait.')}
             </h1>
