@@ -2118,6 +2118,7 @@ msgstr ""
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
+#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
@@ -2149,6 +2150,10 @@ msgstr ""
 #: src/user/support/UserEditForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Description"
+msgstr ""
+
+#: src/marketplace/offerings/service-providers/store/effects.ts
+msgid "Description has been updated."
 msgstr ""
 
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -7252,6 +7257,7 @@ msgstr ""
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/expandable/utils.ts
+#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
@@ -7705,6 +7711,10 @@ msgstr ""
 
 #: src/marketplace/offerings/service-providers/ServiceProviderOfferingsGrid.tsx
 msgid "Service provider offerings"
+msgstr ""
+
+#: src/customer/details/CustomerDetailsPanel.tsx
+msgid "Service provider profile"
 msgstr ""
 
 #: src/providers/support/FlowMapFilter.tsx
@@ -9741,6 +9751,10 @@ msgstr ""
 msgid "Unable to update confirmation message."
 msgstr ""
 
+#: src/marketplace/offerings/service-providers/store/effects.ts
+msgid "Unable to update description."
+msgstr ""
+
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 msgid "Unable to update enabled checklists."
 msgstr ""
@@ -9927,6 +9941,7 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
+#: src/marketplace/offerings/service-providers/ServiceProviderDescriptionUpdateButton.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
@@ -10027,6 +10042,10 @@ msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Update your organization name, logo, accounting and contact details."
+msgstr ""
+
+#: src/marketplace/offerings/service-providers/UpdateServiceProviderDescriptionDialog.tsx
+msgid "Update {name}"
 msgstr ""
 
 #: src/resource/actions/UpdateResourceDialog.tsx
