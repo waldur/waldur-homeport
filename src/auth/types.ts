@@ -39,7 +39,6 @@ interface CoreConfiguration {
   HERO_IMAGE: string;
   POWERED_BY_LOGO: string;
   SIDEBAR_LOGO: string;
-  LOGIN_LOGO: string;
   HOMEPORT_SENTRY_DSN: string;
   INVITATION_CIVIL_NUMBER_LABEL: string;
   INVITATION_CIVIL_NUMBER_HELP_TEXT: string;
