@@ -43,9 +43,10 @@ export const OrganizationGroup: FunctionComponent<{ onSearch }> = ({
       }),
     );
   const filterByCustomer = () => onSearch({ customer });
-  const loadOptions = useCallback((name) => refreshCustomers(name, caller), [
-    caller,
-  ]);
+  const loadOptions = useCallback(
+    (name) => refreshCustomers(name, caller),
+    [caller],
+  );
 
   useEffect(() => {
     dispatch(change(ISSUE_REGISTRATION_FORM_ID, 'customer', undefined));

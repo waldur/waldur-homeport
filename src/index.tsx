@@ -2,7 +2,6 @@ import ReactDOM from 'react-dom';
 
 import './vendor';
 import './sass/style.scss';
-import '../svgfonts.font';
 
 import { Application } from './Application';
 import './auth/module';

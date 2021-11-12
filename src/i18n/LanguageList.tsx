@@ -10,11 +10,8 @@ import { useLanguageSelector } from './useLanguageSelector';
 import './LanguageList.scss';
 
 export const LanguageList: FunctionComponent = () => {
-  const {
-    currentLanguage,
-    languageChoices,
-    setLanguage,
-  } = useLanguageSelector();
+  const { currentLanguage, languageChoices, setLanguage } =
+    useLanguageSelector();
 
   const len = languageChoices.length;
 

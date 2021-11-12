@@ -24,39 +24,38 @@ interface PureShoppingCartItemUpdateProps {
   limits: string[];
 }
 
-const PureShoppingCartItemUpdate: FunctionComponent<PureShoppingCartItemUpdateProps> = (
-  props,
-) => (
-  <>
-    {props.offering.description && (
-      <div className="bs-callout bs-callout-success">
-        <FormattedHtml html={props.offering.description} />
-      </div>
-    )}
-    <Row>
-      <Col md={9}>
-        <h3 className="header-bottom-border">
-          {translate('Shopping cart item update')}
-        </h3>
-        <ShoppingCartItemUpdateForm
-          initialAttributes={props.shoppingCartItem.attributes}
-          initialLimits={props.shoppingCartItem.limits}
-          offering={props.offering}
-          limits={props.limits}
-          plan={props.plan}
-        />
-      </Col>
-      <Col md={3}>
-        <h3 className="header-bottom-border">{translate('Order summary')}</h3>
-        <OrderSummary
-          offering={{ ...props.offering, uuid: props.shoppingCartItem.uuid }}
-          updateMode={true}
-          extraComponent={ShoppingCartItemUpdateExtraComponent}
-        />
-      </Col>
-    </Row>
-  </>
-);
+const PureShoppingCartItemUpdate: FunctionComponent<PureShoppingCartItemUpdateProps> =
+  (props) => (
+    <>
+      {props.offering.description && (
+        <div className="bs-callout bs-callout-success">
+          <FormattedHtml html={props.offering.description} />
+        </div>
+      )}
+      <Row>
+        <Col md={9}>
+          <h3 className="header-bottom-border">
+            {translate('Shopping cart item update')}
+          </h3>
+          <ShoppingCartItemUpdateForm
+            initialAttributes={props.shoppingCartItem.attributes}
+            initialLimits={props.shoppingCartItem.limits}
+            offering={props.offering}
+            limits={props.limits}
+            plan={props.plan}
+          />
+        </Col>
+        <Col md={3}>
+          <h3 className="header-bottom-border">{translate('Order summary')}</h3>
+          <OrderSummary
+            offering={{ ...props.offering, uuid: props.shoppingCartItem.uuid }}
+            updateMode={true}
+            extraComponent={ShoppingCartItemUpdateExtraComponent}
+          />
+        </Col>
+      </Row>
+    </>
+  );
 
 async function loadData(itemId) {
   const cartItem = await api.getCartItem(itemId);

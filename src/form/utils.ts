@@ -20,7 +20,7 @@ export const makeLastTwelveMonthsFilterPeriods = (): PeriodOption[] => {
   for (let i = 0; i < 12; i++) {
     const month = date.month;
     const year = date.year;
-    const label = date.toFormat('MMMM, YYYY');
+    const label = date.toFormat('MMMM, yyyy');
     choices.push({
       label,
       value: { year, month, current: i === 0 },

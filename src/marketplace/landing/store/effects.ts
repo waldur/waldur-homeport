@@ -21,6 +21,7 @@ function* getCategories() {
     params: {
       allowed_customer_uuid: customer?.uuid,
       project_uuid: project?.uuid,
+      has_offerings: true,
     },
   };
   try {

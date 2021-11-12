@@ -65,12 +65,6 @@ msgstr "Toegangstoken"
 msgid "Accessible to all customers."
 msgstr "Toegankelijk voor alle klanten."
 
-msgid "Account activation"
-msgstr "Account activering"
-
-msgid "Account has been activated."
-msgstr "Account is geactiveerd."
-
 msgid "Account removal"
 msgstr "Account verwijdering"
 
@@ -845,9 +839,6 @@ msgstr "Verwijdering bevestigen?"
 msgid "Confirmation"
 msgstr "Bevestiging"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Bevestigingsmail is verzonden. Controleer uw inbox!"
-
 msgid "Confirmation message has been updated successfully."
 msgstr "Bevestigingsbericht is succesvol bijgewerkt."
 
@@ -916,9 +907,6 @@ msgstr "Maak een VM-momentopname voor OpenStack-instantie"
 
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr "Maak VM-momentopnameschema voor OpenStack-instantie"
-
-msgid "Create an account"
-msgstr "Account aanmaken"
 
 msgid "Create application"
 msgstr "Toepassing aanmaken"
@@ -1213,9 +1201,6 @@ msgstr "Type divisie"
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Configureer geen gateway voor dit subnet"
-
-msgid "Do not have an account?"
-msgstr "Heb je geen account?"
 
 msgid "Do you really want to delete comment?"
 msgstr "Wil je echt je commentaar verwijderen?"
@@ -1652,9 +1637,6 @@ msgstr "FreeIPA-extensie is uitgeschakeld."
 msgid "From"
 msgstr "Van"
 
-msgid "From port"
-msgstr "Van poort"
-
 msgid "Full description"
 msgstr "Volledige beschrijving"
 
@@ -1999,9 +1981,6 @@ msgstr "Uitnodiging koppeling"
 
 msgid "Invitation rejection"
 msgstr "Afwijzing uitnodiging"
-
-msgid "Invitation token is not found."
-msgstr "Uitnodigingstoken is niet gevonden."
 
 msgid "Invitations"
 msgstr "Uitnodigingen"
@@ -3170,9 +3149,6 @@ msgstr "Voer de gewenste waarden in de onderstaande rijen in:"
 msgid "Please enter reason why offering has been paused."
 msgstr "Geef de reden op waarom het aanbod is gepauzeerd."
 
-msgid "Please enter username, password and email."
-msgstr "Voer gebruikersnaam, wachtwoord en e-mail in."
-
 msgid "Please enter username and password."
 msgstr "Voer gebruikersnaam en wachtwoord in."
 
@@ -3587,17 +3563,11 @@ msgstr "Regio"
 msgid "Region name"
 msgstr "Regio naam"
 
-msgid "Register"
-msgstr "Registreren"
-
 msgid "Register as service provider"
 msgstr "Registreren als dienstverlener"
 
 msgid "Register organization as service provider and remove organization."
 msgstr "Registreer organisatie als dienstverlener en verwijder organisatie."
-
-msgid "Register to"
-msgstr "Registreer naar"
 
 msgid "Registered at:"
 msgstr "Geregistreerd bij:"
@@ -4421,6 +4391,9 @@ msgstr "Afsluiten"
 msgid "Sign in"
 msgstr "Aanmelden"
 
+msgid "Sign in with {label}"
+msgstr "Aanmelden met {label}"
+
 msgid "Size"
 msgstr "Grootte"
 
@@ -4874,9 +4847,6 @@ msgstr "Om toegang te krijgen, stuurt u een verzoek naar {supportEmail}."
 msgid "To get your clouds under control, please fill in your data."
 msgstr "Om uw wolken onder controle te krijgen, gelieve uw gegevens in te vullen."
 
-msgid "To port"
-msgstr "Naar poort"
-
 msgid "To remove account, please send a request to {support}."
 msgstr "Om een account te verwijderen, stuurt u een verzoek naar {support}."
 
@@ -4954,9 +4924,6 @@ msgstr "UUID"
 
 msgid "Unable to accept booking."
 msgstr "Kan boeking niet accepteren."
-
-msgid "Unable to activate account."
-msgstr "Kan account niet activeren."
 
 msgid "Unable to activate user."
 msgstr "Kan gebruiker niet activeren."
@@ -5527,9 +5494,6 @@ msgstr "Kan bijlage niet uploaden."
 
 msgid "Unable to upload logo."
 msgstr "Kan logo niet uploaden."
-
-msgid "Unable to validate invitation token."
-msgstr "Kan uitnodigingstoken niet valideren."
 
 msgid "Unconfirmed"
 msgstr "Niet bevestigd"
@@ -6115,9 +6079,6 @@ msgstr "Uw organisatie heeft nog geen projecten."
 
 msgid "Your session has expired, please enter credentials to continue."
 msgstr "Uw sessie is verlopen, voer referenties in om door te gaan."
-
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Uw enkele controlepaneel voor alle wolkdiensten. Log in om het in actie te zien."
 
 msgid "(VAT is not included)"
 msgstr "(BTW is niet inbegrepen)"

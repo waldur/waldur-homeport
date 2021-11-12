@@ -24,26 +24,29 @@ interface MyOrderItemsContainerProps {
   setOrderStateFilter: (arg: StateOptions) => void;
 }
 
-export const MyOrderItemsContainer: React.FC<MyOrderItemsContainerProps> = () => {
-  useBreadcrumbsFn(getOrganizationWorkspaceBreadcrumb, []);
-  useTitle(translate('My orders'));
-  useSidebarKey('marketplace-services');
-  const dispatch = useDispatch();
-  const filterOptions = getOrderStateFilterOption();
-  React.useEffect(() => {
-    const { filterState } = router.globals.params;
-    if (filterState) {
-      const filterOption = filterOptions.find((op) => op.value === filterState);
-      if (filterOption) {
-        dispatch(setOrderStateFilter('MyOrderItemsFilter', filterOption));
+export const MyOrderItemsContainer: React.FC<MyOrderItemsContainerProps> =
+  () => {
+    useBreadcrumbsFn(getOrganizationWorkspaceBreadcrumb, []);
+    useTitle(translate('My orders'));
+    useSidebarKey('marketplace-services');
+    const dispatch = useDispatch();
+    const filterOptions = getOrderStateFilterOption();
+    React.useEffect(() => {
+      const { filterState } = router.globals.params;
+      if (filterState) {
+        const filterOption = filterOptions.find(
+          (op) => op.value === filterState,
+        );
+        if (filterOption) {
+          dispatch(setOrderStateFilter('MyOrderItemsFilter', filterOption));
+        }
       }
-    }
-  }, [filterOptions, dispatch]);
+    }, [filterOptions, dispatch]);
 
-  return (
-    <Panel>
-      <MyOrderItemsFilter />
-      <MyOrderItemsList />
-    </Panel>
-  );
-};
+    return (
+      <Panel>
+        <MyOrderItemsFilter />
+        <MyOrderItemsList />
+      </Panel>
+    );
+  };

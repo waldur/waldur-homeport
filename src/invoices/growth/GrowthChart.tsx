@@ -18,7 +18,11 @@ const getAccountingRunningFieldValue = (state: RootState) =>
 
 export const GrowthChart: FunctionComponent = () => {
   const accountRunningState = useSelector(getAccountingRunningFieldValue);
-  const { loading, error, value: option } = useAsync(
+  const {
+    loading,
+    error,
+    value: option,
+  } = useAsync(
     () =>
       getGrowthChartData(accountRunningState?.value).then(formatGrowthChart),
     [accountRunningState],

@@ -23,6 +23,5 @@ const mapStateToProps = (state: RootState) => ({
   canAddUser: canAddUser(state),
 });
 
-export const ProjectDashboardContainer = connect(mapStateToProps)(
-  ProjectDashboard,
-);
+export const ProjectDashboardContainer =
+  connect(mapStateToProps)(ProjectDashboard);

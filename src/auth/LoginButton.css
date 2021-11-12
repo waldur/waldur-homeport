@@ -1,0 +1,31 @@
+.LoginButton {
+  background: #e7eaec;
+  border-radius: 12px;
+  padding: 7px;
+  display: grid;
+  grid-auto-flow: column;
+  margin: 10px 0px;
+  width: 100%;
+  border: none;
+}
+
+.LoginButtonIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 100%;
+  margin-left: 5px;
+}
+
+.LoginButtonIcon img {
+  max-height: 30px;
+}
+
+.LoginButtonText {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}

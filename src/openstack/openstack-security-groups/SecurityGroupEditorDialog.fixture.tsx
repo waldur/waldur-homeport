@@ -20,9 +20,9 @@ export const fakeSecurityGroup = {
   description: 'Security group for HTTP',
   rules: [
     {
+      from_port: 80,
       to_port: 80,
       cidr: '192.168.42.0/24',
-      from_port: 80,
       protocol: 'tcp',
       ethertype: 'IPv4',
       direction: 'egress',
@@ -31,7 +31,7 @@ export const fakeSecurityGroup = {
   tenant: '/api/openstack-tenants/2bfc029827bb41e884ff60f4b8eff3b2/',
 } as SecurityGroup;
 
-export const defaultSecurityGroup = ({
+export const defaultSecurityGroup = {
   url: '/api/openstack-security-groups/c4d9e3ece3be48ddb6dcf86c81b695de/',
   uuid: 'c4d9e3ece3be48ddb6dcf86c81b695de',
   name: 'default',
@@ -39,19 +39,17 @@ export const defaultSecurityGroup = ({
   description: 'Default security group',
   rules: [
     {
-      to_port: -1,
       cidr: '0.0.0.0/0',
-      from_port: -1,
+      port_range: { min: -1, max: -1 },
       protocol: '',
     },
     {
-      to_port: -1,
       cidr: '0.0.0.0/0',
-      from_port: -1,
+      port_range: { min: -1, max: -1 },
       protocol: '',
     },
   ],
-} as unknown) as SecurityGroup;
+} as unknown as SecurityGroup;
 
 type DialogWrapperType = ReactWrapper<typeof SecurityGroupEditorDialog>;
 
@@ -142,48 +140,36 @@ export class DialogFixture {
     });
   }
 
-  get fromPort() {
+  get portRange() {
     return this.wrapper.find('input').at(0).props().value;
   }
 
-  set fromPort(value) {
+  set portRange(value) {
     this.wrapper.find('input').at(0).simulate('change', { target: { value } });
   }
 
-  get fromPortIsInvalid() {
+  get portRangeIsInvalid() {
     return this.wrapper.find('input').at(0).parents('td').hasClass('has-error');
   }
 
-  get toPort() {
+  get cidr() {
     return this.wrapper.find('input').at(1).props().value;
   }
 
-  set toPort(value) {
+  set cidr(value) {
     this.wrapper.find('input').at(1).simulate('change', { target: { value } });
   }
 
-  get toPortIsInvalid() {
+  get cidrIsInvalid() {
     return this.wrapper.find('input').at(1).parents('td').hasClass('has-error');
   }
 
-  get cidr() {
+  get description() {
     return this.wrapper.find('input').at(2).props().value;
   }
 
-  set cidr(value) {
-    this.wrapper.find('input').at(2).simulate('change', { target: { value } });
-  }
-
-  get cidrIsInvalid() {
-    return this.wrapper.find('input').at(2).parents('td').hasClass('has-error');
-  }
-
-  get description() {
-    return this.wrapper.find('input').at(3).props().value;
-  }
-
   set description(value) {
-    this.wrapper.find('input').at(3).simulate('change', { target: { value } });
+    this.wrapper.find('input').at(2).simulate('change', { target: { value } });
   }
 
   submitForm() {

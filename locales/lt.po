@@ -65,12 +65,6 @@ msgstr "Prieigos atpažinimo ženklas"
 msgid "Accessible to all customers."
 msgstr "Prieinama visiems klientams."
 
-msgid "Account activation"
-msgstr "Paskyros aktyvavimas"
-
-msgid "Account has been activated."
-msgstr "Paskyra suaktyvinta."
-
 msgid "Account removal"
 msgstr "Paskyros pašalinimas"
 
@@ -845,9 +839,6 @@ msgstr "Patvirtinti ištrynimą?"
 msgid "Confirmation"
 msgstr "Patvirtinimas"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Išsiųstas patvirtinimo laiškas. Patikrinkite savo pašto dėžutę!"
-
 msgid "Confirmation message has been updated successfully."
 msgstr "Patvirtinimo pranešimas buvo sėkmingai atnaujintas."
 
@@ -916,9 +907,6 @@ msgstr "Sukurkite VM momentinę nuotrauką OpenStack egzemplioriui"
 
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr "Sukurkite „OpenStack“ egzemplioriaus VM momentinių nuotraukų tvarkaraštį"
-
-msgid "Create an account"
-msgstr "Sukurti paskyrą"
 
 msgid "Create application"
 msgstr "Sukurti programą"
@@ -1213,9 +1201,6 @@ msgstr "Padalinio tipas"
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Nekonfigūruokite šio potinklio šliuzo"
-
-msgid "Do not have an account?"
-msgstr "Neturite paskyros?"
 
 msgid "Do you really want to delete comment?"
 msgstr "Ar tikrai norite ištrinti komentarą?"
@@ -1652,9 +1637,6 @@ msgstr "FreeIPA plėtinys yra išjungtas."
 msgid "From"
 msgstr "Nuo"
 
-msgid "From port"
-msgstr "Iš prievado"
-
 msgid "Full description"
 msgstr "Pilnas aprašymas"
 
@@ -1999,9 +1981,6 @@ msgstr "Kvietimo nuoroda"
 
 msgid "Invitation rejection"
 msgstr "Kvietimo atmetimas"
-
-msgid "Invitation token is not found."
-msgstr "Kvietimo atpažinimo ženklas nerastas."
 
 msgid "Invitations"
 msgstr "Kvietimai"
@@ -3170,9 +3149,6 @@ msgstr "Įveskite norimas reikšmes žemiau esančiose eilutėse:"
 msgid "Please enter reason why offering has been paused."
 msgstr "Įveskite priežastį, kodėl siūlymas buvo pristabdytas."
 
-msgid "Please enter username, password and email."
-msgstr "Įveskite vartotojo vardą, slaptažodį ir el. pašto adresą."
-
 msgid "Please enter username and password."
 msgstr "Įveskite vartotojo vardą ir slaptažodį."
 
@@ -3587,17 +3563,11 @@ msgstr "Regionas"
 msgid "Region name"
 msgstr "Regiono pavadinimas"
 
-msgid "Register"
-msgstr "Registruotis"
-
 msgid "Register as service provider"
 msgstr "Registruokitės kaip paslaugų teikėjas"
 
 msgid "Register organization as service provider and remove organization."
 msgstr "Užregistruokite organizaciją kaip paslaugų teikėją ir pašalinkite organizaciją."
-
-msgid "Register to"
-msgstr "Registruotis į"
 
 msgid "Registered at:"
 msgstr "Registruota:"
@@ -4421,6 +4391,9 @@ msgstr "Išjungimo"
 msgid "Sign in"
 msgstr "Prisijungti"
 
+msgid "Sign in with {label}"
+msgstr "Prisijunkite naudodami {label}"
+
 msgid "Size"
 msgstr "Dydis"
 
@@ -4874,9 +4847,6 @@ msgstr "Norėdami gauti prieigą, siųskite užklausą adresu {supportEmail}."
 msgid "To get your clouds under control, please fill in your data."
 msgstr "Norėdami suvaldyti savo debesis, prašome užpildyti savo duomenis."
 
-msgid "To port"
-msgstr "Į prievadą"
-
 msgid "To remove account, please send a request to {support}."
 msgstr "Norėdami pašalinti paskyrą, siųskite užklausą adresu {support}."
 
@@ -4954,9 +4924,6 @@ msgstr "UUID"
 
 msgid "Unable to accept booking."
 msgstr "Neįmanoma priimti užsakymo."
-
-msgid "Unable to activate account."
-msgstr "Neįmanoma suaktyvinti paskyros."
 
 msgid "Unable to activate user."
 msgstr "Neįmanoma suaktyvinti vartotojo."
@@ -5527,9 +5494,6 @@ msgstr "Neįmanoma įkelti priedo."
 
 msgid "Unable to upload logo."
 msgstr "Neįmanoma įkelti logotipo."
-
-msgid "Unable to validate invitation token."
-msgstr "Neįmanoma patvirtinti kvietimo atpažinimo ženklo."
 
 msgid "Unconfirmed"
 msgstr "Nepatvirtintų"
@@ -6115,9 +6079,6 @@ msgstr "Jūsų organizacija dar neturi jokių projektų."
 
 msgid "Your session has expired, please enter credentials to continue."
 msgstr "Jūsų sesija baigėsi, norėdami tęsti, įveskite kredencialus."
-
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Jūsų viena visų debesų paslaugų valdymo sritis. Prisijunkite, kad pamatytumėte, kaip tai veikia."
 
 msgid "(VAT is not included)"
 msgstr "(PVM neįskaičiuotas)"

@@ -15,8 +15,14 @@ export const InvoiceItemUpdateDialog = ({
     {
       name: 'article_code',
       label: translate('Article code'),
-      required: true,
+      required: false,
       type: 'string',
+    },
+    {
+      name: 'quantity',
+      label: translate('Quantity'),
+      required: false,
+      type: 'integer',
     },
   ];
   return (
@@ -24,7 +30,7 @@ export const InvoiceItemUpdateDialog = ({
       dialogTitle={translate('Update invoice item {name}', {
         name: resource.name,
       })}
-      fields={fields}
+      formFields={fields}
       submitForm={async (formData) => {
         try {
           await updateInvoiceItem(resource.uuid, formData);

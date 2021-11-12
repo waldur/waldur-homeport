@@ -9,11 +9,10 @@ interface AccountingPeriodFilterProps {
   options: PeriodOption[];
 }
 
-export const AccountingPeriodFilter: FunctionComponent<AccountingPeriodFilterProps> = (
-  props,
-) => (
-  <div className="form-group col-sm-3">
-    <label className="control-label">{translate('Accounting period')}</label>
-    <AccountingPeriodField options={props.options} />
-  </div>
-);
+export const AccountingPeriodFilter: FunctionComponent<AccountingPeriodFilterProps> =
+  (props) => (
+    <div className="form-group col-sm-3">
+      <label className="control-label">{translate('Accounting period')}</label>
+      <AccountingPeriodField options={props.options} />
+    </div>
+  );

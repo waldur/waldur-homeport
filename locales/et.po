@@ -14,6 +14,9 @@ msgstr "„{trimmed}” ületab {max_len} märgi FQDN piiri"
 msgid "10 - Very positive"
 msgstr "10 - Väga positiivne"
 
+msgid "1 - Very negative"
+msgstr "1 - Väga negatiivne"
+
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Teenuse tingimused</Link> on aktsepteeritud <Date></Date>"
 
@@ -61,12 +64,6 @@ msgstr "Juurdepääsu žetoon"
 
 msgid "Accessible to all customers."
 msgstr "Ligipääsetav kõigile klientidele"
-
-msgid "Account activation"
-msgstr "Konto aktiveerimine"
-
-msgid "Account has been activated."
-msgstr "Konto on aktiveeritud."
 
 msgid "Account removal"
 msgstr "Konto eemaldamine"
@@ -205,6 +202,9 @@ msgstr "Lisa projekti liige"
 
 msgid "Add resource"
 msgstr "Lisa resurss"
+
+msgid "Add resource allocator"
+msgstr "Lisa ressursijaotaja"
 
 msgid "Add route"
 msgstr "Lisa marsruut"
@@ -380,6 +380,12 @@ msgstr "Kas olete kindel, et soovite makseprofiili kustutada?"
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr "Kas olete kindel, et soovite selle {resourceType} kustutada?"
 
+msgid "Are you sure you want to remove invoice item {name}?"
+msgstr "Kas olete kindel, et soovite eemaldada arve kirje {name}?"
+
+msgid "Are you sure you want to remove {userName}?"
+msgstr "Kas olete kindel, et soovite eemaldada {userName}?"
+
 msgid "Are you sure you want to revoke this permission?"
 msgstr "Kas olete kindel, et soovite selle loa tühistada?"
 
@@ -445,6 +451,9 @@ msgstr "Autentimise žetoon"
 
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr "Autentimine Mobile ID abil on katkestatud või siis aegunud. Detailid:"
+
+msgid "Author"
+msgstr "Autor"
 
 msgid "Authorized personnel"
 msgstr "Volitatud personal"
@@ -542,6 +551,9 @@ msgstr "Arved lubatud"
 msgid "Billing period"
 msgstr "Arvete periood"
 
+msgid "Book"
+msgstr "Broneeri"
+
 msgid "Booking"
 msgstr "Broneerimine"
 
@@ -575,6 +587,9 @@ msgstr "Sirvi image"
 msgid "Business hours"
 msgstr "Tööaeg"
 
+msgid "By authenticating you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
+msgstr "Autentides nõustute <tos>Teenuse</tos> ja <pp>Privaatsuspoliitika</pp> tingimustega."
+
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr "Kui määrasite tähise eluea määramatuks, lubate kõigil, kellel on märk, imiteerida teie tegevust, kuni märk on muutunud."
 
@@ -595,6 +610,9 @@ msgstr "Pöörduja"
 
 msgid "Cancel"
 msgstr "Tühista"
+
+msgid "Cancel booking"
+msgstr "Tühista broneering"
 
 msgid "Cancel invitation"
 msgstr "Tühista kutse"
@@ -743,6 +761,9 @@ msgstr "Ettevõtte andmed"
 msgid "Compare items"
 msgstr "Võrdle elemente"
 
+msgid "Compensation has been created."
+msgstr "Kompensatsioon on loodud."
+
 msgid "Competence"
 msgstr "Pädevus"
 
@@ -772,9 +793,6 @@ msgstr "Kinnita kustutamine?"
 
 msgid "Confirmation"
 msgstr "Kinnitamine"
-
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Kinnitus e-mail on saadetud. Palun kontrollige oma postkasti!"
 
 msgid "Confirmation notification template"
 msgstr "Kinnituse teatise mall"
@@ -830,14 +848,14 @@ msgstr "Loo võrguadapter"
 msgid "Create SQL database in PostgreSQL server"
 msgstr "Loo SQL andmebaas PostgreSQL serverisse"
 
-msgid "Create an account"
-msgstr "Loo konto"
-
 msgid "Create application"
 msgstr "Rakenduse loomine"
 
 msgid "Create catalog"
 msgstr "Loo kataloog"
+
+msgid "Create compensation"
+msgstr "Loo kompensatsioon"
 
 msgid "Create disk"
 msgstr "Loo ketas"
@@ -1010,6 +1028,9 @@ msgstr "Sihtkoht"
 msgid "Destination URL"
 msgstr "Sihtkoha URL"
 
+msgid "Destination port"
+msgstr "Sihtkoha port"
+
 msgid "Destroy"
 msgstr "Hävita"
 
@@ -1046,11 +1067,17 @@ msgstr "Keelake profiil FreeIPA-s. Väljalülitatud profiiliga ei ole lubatud si
 msgid "Disable data volume"
 msgstr "Lülita salvestusüksus välja"
 
+msgid "Disable gateway IP advertising via DHCP"
+msgstr "Lüüsi IP-reklaami keelamine DHCP kaudu"
+
 msgid "Disable profile"
 msgstr "Lülita profiil välja"
 
 msgid "Disabled"
 msgstr "Keelatud"
+
+msgid "Disconnect subnet"
+msgstr "Katkesta alamvõrgu ühendus"
 
 msgid "Disk has been created."
 msgstr "Ketas on loodud."
@@ -1066,9 +1093,6 @@ msgstr "Jaoskond"
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Ära seadista sellele võrgule võrguväravat"
-
-msgid "Do not have an account?"
-msgstr "Konto puudub?"
 
 msgid "Do you really want to delete comment?"
 msgstr "Kas sa soovid tõesti kommentaari kustutada?"
@@ -1093,6 +1117,9 @@ msgstr "Domeeni nimi. Kui seda pole defineeritud kasutatakse vaikedomeeni"
 
 msgid "Done"
 msgstr "Valmis"
+
+msgid "Download full price list"
+msgstr "Laadige alla kogu hinnakiri"
 
 msgid "Download invoice"
 msgstr "Lae arve alla"
@@ -1133,6 +1160,18 @@ msgstr "Muuda atribuute"
 msgid "Edit booking event"
 msgstr "Redigeeri broneeritavat sündmust"
 
+msgid "Edit confirmation message"
+msgstr "Redigeeri kinnitust"
+
+msgid "Edit end date"
+msgstr "Muuda lõppkuupäeva"
+
+msgid "Edit end date (staff)"
+msgstr "Muuda lõppkuupäeva (tugi)"
+
+msgid "Edit end date of {resourceName}"
+msgstr "Muuda lõppkuupäev {resourceName}"
+
 msgid "Edit offering"
 msgstr "Muuda pakkumist"
 
@@ -1145,8 +1184,14 @@ msgstr "Muuda projekti liiget"
 msgid "Edit team member"
 msgstr "Muuda meeskonna liiget"
 
+msgid "Egress"
+msgstr "Egress"
+
 msgid "Email"
 msgstr "E-post"
+
+msgid "Email address"
+msgstr "E-posti aadress"
 
 msgid "Email change request has been cancelled."
 msgstr "E-posti muutmise taotlus on tühistatud."
@@ -1156,6 +1201,9 @@ msgstr "E-post on uuendatud."
 
 msgid "Email verification has been sent. Please check your inbox."
 msgstr "E-posti kinnitus on saadetud. Palun kontrollige oma postkasti."
+
+msgid "Enable"
+msgstr "Aktiveeri"
 
 msgid "Enable DHCP"
 msgstr "Luba DHCP"
@@ -1187,6 +1235,9 @@ msgstr "Lubatud vaikimisi lüüs"
 msgid "Encountered an empty component"
 msgstr "Ilmnes tühi komponent"
 
+msgid "End"
+msgstr "Lõpp"
+
 msgid "End date"
 msgstr "Lõppkuupäev"
 
@@ -1204,6 +1255,9 @@ msgstr "Veenduge, et sellel väljal ei ole rohkem kui 30 märki."
 
 msgid "Enter IPv4 address."
 msgstr "Sisestage IPv4 aadress."
+
+msgid "Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports."
+msgstr "Sisestage üks port (22) või pordivahemik (5000-6000) või jätke tühjaks kõigi portide jaoks."
 
 msgid "Enter private IPv4 CIDR."
 msgstr "Sisestage privaatne IPv4 CIDR."
@@ -1313,6 +1367,9 @@ msgstr "Laienda"
 msgid "Extend OpenStack volume"
 msgstr "Laienda OpenStacki salvestusüksust"
 
+msgid "Extend disk"
+msgstr "Laienda ketas"
+
 msgid "Extending"
 msgstr "Laiendan"
 
@@ -1366,6 +1423,9 @@ msgstr "Leidke lahendus"
 
 msgid "Fingerprint"
 msgstr "Sõrmejälg"
+
+msgid "Fixed IPs"
+msgstr "Fikseeritud IP-d"
 
 msgid "Fixed price"
 msgstr "Fikseeritud hind"
@@ -1421,13 +1481,13 @@ msgstr "FreeIPA konto vajab seadistamist."
 msgid "From"
 msgstr "Saatja"
 
-msgid "From port"
-msgstr "Pordist"
-
 msgid "Full description"
 msgstr "Täielik kirjeldus"
 
 msgid "Full name"
+msgstr "Täisnimi"
+
+msgid "Full name:"
 msgstr "Täisnimi"
 
 msgid "GPU"
@@ -1474,6 +1534,9 @@ msgstr "Google'i kalendri link"
 
 msgid "Got it!"
 msgstr "Korras!"
+
+msgid "Group invitation has been cancelled."
+msgstr "Grupikutse on tühistatud."
 
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr "Garanteeritud tõmmise säilitamise aeg. Kui null - hoida igavesti."
@@ -1693,9 +1756,6 @@ msgstr "Kutse link"
 
 msgid "Invitation rejection"
 msgstr "Kutse tagasilükkamine"
-
-msgid "Invitation token is not found."
-msgstr "Kutse žetooni ei leitud."
 
 msgid "Invitations"
 msgstr "Kutsed"
@@ -2837,14 +2897,8 @@ msgstr "Piirkond"
 msgid "Region name"
 msgstr "Piirkonna nimi"
 
-msgid "Register"
-msgstr "Registeeru"
-
 msgid "Register as service provider"
 msgstr "Registreeri ennast teenusepakkujaks"
-
-msgid "Register to"
-msgstr "Registreeru"
 
 msgid "Registered at:"
 msgstr "Registreeritud"
@@ -3431,6 +3485,9 @@ msgstr "Näitan {sliceStart} kuni {sliceEnd} kirjet {resultCount} kandest."
 msgid "Sign in"
 msgstr "Logi sisse"
 
+msgid "Sign in with {label}"
+msgstr "{label}"
+
 msgid "Size"
 msgstr "Suurus"
 
@@ -3737,9 +3794,6 @@ msgstr "Kellele"
 msgid "To get your clouds under control, please fill in your data."
 msgstr "Oma pilvede kontrolli alla saamiseks sisestage oma andmed."
 
-msgid "To port"
-msgstr "Porti"
-
 msgid "To remove account, please send a request to {support}."
 msgstr "Konto eemaldamiseks saada palun taotlus {support}"
 
@@ -3775,9 +3829,6 @@ msgstr "Tüüp"
 
 msgid "Type of incident"
 msgstr "Vahejuhtumi liik"
-
-msgid "Unable to activate account."
-msgstr "Ei ole võimalik kontot aktiveerida."
 
 msgid "Unable to activate user."
 msgstr "Kasutajat pole võimalik aktiveerida"
@@ -4039,9 +4090,6 @@ msgstr "Manust pole võimalik üles laadida"
 
 msgid "Unable to upload logo."
 msgstr "Logo ei saa üles laadida"
-
-msgid "Unable to validate invitation token."
-msgstr "Ei ole võimalik valideerida kutse žetooni."
 
 msgid "Unexpected exception happened during login process."
 msgstr "Sisselogimise ajal juhtus ootamatu probleem."
@@ -4402,9 +4450,6 @@ msgstr "Sinu kutse on töötlemisel."
 
 msgid "Your invitation was accepted."
 msgstr "Sinu kutse võeti vastu."
-
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Sinu ühtne kontrollkeskus pilveteenuste haldamiseks. Logi sisse et näha seda töös."
 
 msgid "(VAT is not included)"
 msgstr "(ei sisalda käibemaksu)"

@@ -11,9 +11,8 @@ export interface UpdateSecurityGroupsDialogProps {
   };
 }
 
-export const UpdateSecurityGroupsDialog: FC<UpdateSecurityGroupsDialogProps> = ({
-  resolve: { resource },
-}) => {
-  const formState = useUpdateSecurityGroupsForm(resource);
-  return <UpdateSecurityGroupsForm {...formState} />;
-};
+export const UpdateSecurityGroupsDialog: FC<UpdateSecurityGroupsDialogProps> =
+  ({ resolve: { resource } }) => {
+    const formState = useUpdateSecurityGroupsForm(resource);
+    return <UpdateSecurityGroupsForm {...formState} />;
+  };

@@ -16,7 +16,7 @@ export const ForceDestroyDialog = ({ resolve: { resource } }) => {
       dialogTitle={translate('Force destroy {name} instance', {
         name: resource.name,
       })}
-      fields={[
+      formFields={[
         {
           name: 'delete_volumes',
           label: translate('Delete volumes'),

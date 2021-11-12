@@ -59,68 +59,68 @@ interface ResourceDetailsPageProps {
   customer?: Customer;
 }
 
-export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = ({
-  customer,
-}) => {
-  const workspace = useSelector(getWorkspace);
-  const {
-    params: { resource_uuid },
-  } = useCurrentStateAndParams();
+export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> =
+  ({ customer }) => {
+    const workspace = useSelector(getWorkspace);
+    const {
+      params: { resource_uuid },
+    } = useCurrentStateAndParams();
 
-  const [state, reInitResource] = useAsyncFn(() => getResource(resource_uuid), [
-    resource_uuid,
-  ]);
+    const [state, reInitResource] = useAsyncFn(
+      () => getResource(resource_uuid),
+      [resource_uuid],
+    );
 
-  useEffectOnce(() => {
-    reInitResource();
-  });
+    useEffectOnce(() => {
+      reInitResource();
+    });
 
-  useTitle(state.value ? state.value.name : translate('Resource details'));
+    useTitle(state.value ? state.value.name : translate('Resource details'));
 
-  useBreadcrumbsFn(
-    () =>
-      state.value
-        ? getBreadcrumbs({ workspace, customer, resource: state.value })
-        : [],
-    [workspace, state.value, customer],
-  );
+    useBreadcrumbsFn(
+      () =>
+        state.value
+          ? getBreadcrumbs({ workspace, customer, resource: state.value })
+          : [],
+      [workspace, state.value, customer],
+    );
 
-  const router = useRouter();
+    const router = useRouter();
 
-  if (state.error) {
-    router.stateService.go('errorPage.notFound');
-    return null;
-  }
+    if (state.error) {
+      router.stateService.go('errorPage.notFound');
+      return null;
+    }
 
-  if (state.loading) {
-    return <LoadingSpinner />;
-  }
+    if (state.loading) {
+      return <LoadingSpinner />;
+    }
 
-  if (!state.value) {
-    return null;
-  }
+    if (!state.value) {
+      return null;
+    }
 
-  const resource = state.value;
-  return (
-    <div className="ibox-content">
-      <Row className="m-b-md">
-        <Col sm={12}>
-          <ResourceActions
-            resource={resource}
-            reInitResource={reInitResource}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col sm={12}>
-          <ResourceSummary resource={resource} />
-        </Col>
-      </Row>
-      <Row>
-        <Col sm={12}>
-          <ResourceTabs resource={resource} />
-        </Col>
-      </Row>
-    </div>
-  );
-};
+    const resource = state.value;
+    return (
+      <div className="ibox-content">
+        <Row className="m-b-md">
+          <Col sm={12}>
+            <ResourceActions
+              resource={resource}
+              reInitResource={reInitResource}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={12}>
+            <ResourceSummary resource={resource} />
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={12}>
+            <ResourceTabs resource={resource} />
+          </Col>
+        </Row>
+      </div>
+    );
+  };

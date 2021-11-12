@@ -8,14 +8,14 @@ import {
   propertySelectorFactory,
 } from './selectors';
 
-const state = ({
+const state = {
   serviceUsage: {
     data,
     selectedServiceProviderUuid: 'csc',
     loading: false,
     infoPanelIsVisible: false,
   },
-} as unknown) as RootState;
+} as unknown as RootState;
 
 describe('Selectors', () => {
   it('should return selected service provider', () => {
@@ -25,8 +25,7 @@ describe('Selectors', () => {
       latitude: '60.1781296',
       longitude: '24.830555',
       description: 'CSC is a Finnish center of expertise in ICT and HPC.',
-      logo:
-        'http://www.hermanit.fi/wp-content/uploads/2016/09/CSC_2012_LOGO_RGB_72dpi.jpg',
+      logo: 'http://www.hermanit.fi/wp-content/uploads/2016/09/CSC_2012_LOGO_RGB_72dpi.jpg',
     };
     expect(selectServiceProvider(state)).toEqual(expected);
   });

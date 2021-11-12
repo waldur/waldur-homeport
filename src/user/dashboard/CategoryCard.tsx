@@ -20,14 +20,15 @@ const SelectAffiliationDialog = lazyComponent(
     ),
   'SelectAffiliationDialog',
 );
+
 interface CategoryCardProps {
   category: Category;
 }
 
 export const CategoryCard: FunctionComponent<CategoryCardProps> = (props) => {
   const dispatch = useDispatch();
-  const customerPermissions: any[] = useSelector(getUserCustomerPermissions);
-  const projectPermissions: any[] = useSelector(getUserProjectPermissions);
+  const customerPermissions = useSelector(getUserCustomerPermissions);
+  const projectPermissions = useSelector(getUserProjectPermissions);
   const changeWorkspace = (categoryUuid: string) => {
     if (
       (customerPermissions.length === 1 && projectPermissions.length === 0) ||

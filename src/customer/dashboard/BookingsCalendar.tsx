@@ -76,10 +76,11 @@ interface BookingsCalendarProps {
 }
 
 export const BookingsCalendar = (props: BookingsCalendarProps) => {
-  const { loading, value: calendarEvents, error } = useAsync(
-    () => loadBookingOfferings(props),
-    [props],
-  );
+  const {
+    loading,
+    value: calendarEvents,
+    error,
+  } = useAsync(() => loadBookingOfferings(props), [props]);
 
   if (loading) {
     return <LoadingSpinner />;

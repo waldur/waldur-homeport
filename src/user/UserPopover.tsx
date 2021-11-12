@@ -32,7 +32,7 @@ const getCanSeeChecklist = createSelector(
 );
 
 export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
-  const [{ loading, value }, callback] = useAsyncFn(async () => {
+  const [{ loading, error, value }, callback] = useAsyncFn(async () => {
     let user;
     if (resolve.user_uuid) {
       user = await getUser(resolve.user_uuid);
@@ -49,52 +49,50 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
 
   const canSeeChecklist = useSelector(getCanSeeChecklist);
 
-  return (
+  return loading ? (
+    <LoadingSpinner />
+  ) : error ? (
+    <>
+      <p>{translate('Unable to load user.')}</p>
+      <button type="button" className="btn btn-default" onClick={callback}>
+        <i className="fa fa-refresh"></i> {translate('Try again')}
+      </button>
+    </>
+  ) : value?.user ? (
     <>
       <ModalHeader>
-        <ModalTitle>{translate('User details')}</ModalTitle>
+        <ModalTitle>
+          {translate('User details for {fullName}', {
+            fullName: value.user.full_name,
+          })}
+        </ModalTitle>
       </ModalHeader>
       <ModalBody>
-        {loading ? (
-          <LoadingSpinner />
-        ) : value?.user ? (
-          <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
-            <Tab eventKey={1} title={translate('Details')}>
+        <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
+          <Tab eventKey={1} title={translate('Details')}>
+            <div className="m-t-sm">
+              <UserDetailsTable user={value.user} />
+            </div>
+          </Tab>
+
+          {canSeeChecklist && value.checklistCount ? (
+            <Tab eventKey={2} title={translate('Checklists')}>
               <div className="m-t-sm">
-                <UserDetailsTable user={value.user} />
+                <UserChecklist userId={value.user.uuid} readOnly={true} />
               </div>
             </Tab>
+          ) : null}
 
-            {canSeeChecklist && value.checklistCount ? (
-              <Tab eventKey={2} title={translate('Checklists')}>
-                <div className="m-t-sm">
-                  <UserChecklist userId={value.user.uuid} readOnly={true} />
-                </div>
-              </Tab>
-            ) : null}
-
-            <Tab eventKey={3} title={translate('Keys')}>
-              <div className="m-t-sm">
-                <KeysList user={value.user} />
-              </div>
-            </Tab>
-          </Tabs>
-        ) : (
-          <>
-            <p>{translate('Unable to load user.')}</p>
-            <button
-              type="button"
-              className="btn btn-default"
-              onClick={callback}
-            >
-              <i className="fa fa-refresh"></i> {translate('Try again')}
-            </button>
-          </>
-        )}
+          <Tab eventKey={3} title={translate('Keys')}>
+            <div className="m-t-sm">
+              <KeysList user={value.user} />
+            </div>
+          </Tab>
+        </Tabs>
       </ModalBody>
       <ModalFooter>
         <CloseDialogButton />
       </ModalFooter>
     </>
-  );
+  ) : null;
 };

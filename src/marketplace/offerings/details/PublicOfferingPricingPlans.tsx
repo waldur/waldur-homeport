@@ -8,12 +8,15 @@ interface PublicOfferingPricingPlansProps {
   offering: Offering;
 }
 
-export const PublicOfferingPricingPlans: FunctionComponent<PublicOfferingPricingPlansProps> = ({
-  offering,
-}) => (
-  <div className="pricingPlans">
-    {offering.plans.map((plan: Plan, i: number) => (
-      <PublicOfferingPricingPlanItem key={i} offering={offering} plan={plan} />
-    ))}
-  </div>
-);
+export const PublicOfferingPricingPlans: FunctionComponent<PublicOfferingPricingPlansProps> =
+  ({ offering }) => (
+    <div className="pricingPlans">
+      {offering.plans.map((plan: Plan, i: number) => (
+        <PublicOfferingPricingPlanItem
+          key={i}
+          offering={offering}
+          plan={plan}
+        />
+      ))}
+    </div>
+  );

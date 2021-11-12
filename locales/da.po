@@ -65,12 +65,6 @@ msgstr "Adgangstoken"
 msgid "Accessible to all customers."
 msgstr "Tilgængelig for alle kunder."
 
-msgid "Account activation"
-msgstr "Aktivering af konto"
-
-msgid "Account has been activated."
-msgstr "Kontoen er blevet aktiveret."
-
 msgid "Account removal"
 msgstr "Fjernelse af konto"
 
@@ -845,9 +839,6 @@ msgstr "Bekræft sletning?"
 msgid "Confirmation"
 msgstr "Bekræftelse"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Bekræftelsesmail er blevet sendt. Tjek venligst din indbakke!"
-
 msgid "Confirmation message has been updated successfully."
 msgstr "Bekræftelsesmeddelelsen er blevet opdateret med succes."
 
@@ -916,9 +907,6 @@ msgstr "Opret VM-snapshot til OpenStack-instans"
 
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr "Opret VM-snapshotplan for OpenStack-instans"
-
-msgid "Create an account"
-msgstr "Opret en konto"
 
 msgid "Create application"
 msgstr "Opret ansøgning"
@@ -1213,9 +1201,6 @@ msgstr "Division type"
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Konfigurer ikke en gateway for dette undernet"
-
-msgid "Do not have an account?"
-msgstr "Har du ikke en konto?"
 
 msgid "Do you really want to delete comment?"
 msgstr "Vil du virkelig slette en kommentar?"
@@ -1652,9 +1637,6 @@ msgstr "FreeIPA-udvidelsen er deaktiveret."
 msgid "From"
 msgstr "Fra"
 
-msgid "From port"
-msgstr "Fra port"
-
 msgid "Full description"
 msgstr "Fuld beskrivelse"
 
@@ -1999,9 +1981,6 @@ msgstr "Invitationslink"
 
 msgid "Invitation rejection"
 msgstr "Afvisning af indbydelse"
-
-msgid "Invitation token is not found."
-msgstr "Indbydelsens token er ikke fundet."
 
 msgid "Invitations"
 msgstr "Invitationer"
@@ -3170,9 +3149,6 @@ msgstr "Indtast venligst de ønskede værdier i nedenstående rækker:"
 msgid "Please enter reason why offering has been paused."
 msgstr "Angiv venligst grunden til, at tilbuddet er blevet sat på pause."
 
-msgid "Please enter username, password and email."
-msgstr "Indtast venligst brugernavn, adgangskode og e-mail."
-
 msgid "Please enter username and password."
 msgstr "Indtast venligst brugernavn og adgangskode."
 
@@ -3587,17 +3563,11 @@ msgstr "Område"
 msgid "Region name"
 msgstr "Regionens navn"
 
-msgid "Register"
-msgstr "Registrer"
-
 msgid "Register as service provider"
 msgstr "Registrer dig som tjenesteudbyder"
 
 msgid "Register organization as service provider and remove organization."
 msgstr "Registrer organisation som tjenesteudbyder og fjern organisation."
-
-msgid "Register to"
-msgstr "Tilmeld dig"
 
 msgid "Registered at:"
 msgstr "Registreret på:"
@@ -4421,6 +4391,9 @@ msgstr "Lukke ned"
 msgid "Sign in"
 msgstr "Log ind"
 
+msgid "Sign in with {label}"
+msgstr "Log ind med {label}"
+
 msgid "Size"
 msgstr "Størrelse"
 
@@ -4874,9 +4847,6 @@ msgstr "For at få adgang bedes du sende en anmodning til {supportEmail}."
 msgid "To get your clouds under control, please fill in your data."
 msgstr "For at få dine skyer under kontrol, skal du udfylde dine data."
 
-msgid "To port"
-msgstr "Til port"
-
 msgid "To remove account, please send a request to {support}."
 msgstr "Hvis du vil fjerne en konto, skal du sende en anmodning til {support}."
 
@@ -4954,9 +4924,6 @@ msgstr "UUID"
 
 msgid "Unable to accept booking."
 msgstr "Kan ikke acceptere booking."
-
-msgid "Unable to activate account."
-msgstr "Kan ikke aktivere konto."
 
 msgid "Unable to activate user."
 msgstr "Kan ikke aktivere brugeren."
@@ -5527,9 +5494,6 @@ msgstr "Kan ikke uploade vedhæftet fil."
 
 msgid "Unable to upload logo."
 msgstr "Kan ikke uploade logo."
-
-msgid "Unable to validate invitation token."
-msgstr "Kan ikke validere invitationstoken."
 
 msgid "Unconfirmed"
 msgstr "Ubekræftet"
@@ -6115,9 +6079,6 @@ msgstr "Din organisation har endnu ikke nogen projekter."
 
 msgid "Your session has expired, please enter credentials to continue."
 msgstr "Din session er udløbet. Indtast venligst legitimationsoplysninger for at fortsætte."
-
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Din eneste kontrolrude til alle cloudtjenester. Log ind for at se det i aktion."
 
 msgid "(VAT is not included)"
 msgstr "(Moms er ikke inkluderet)"

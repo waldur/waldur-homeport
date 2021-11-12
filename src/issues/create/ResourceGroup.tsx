@@ -19,9 +19,10 @@ export const ResourceGroup: FunctionComponent<{ disabled }> = ({
 }) => {
   const dispatch = useDispatch();
   const project = useSelector(projectSelector);
-  const loadData = useCallback((name) => refreshResources(name, project), [
-    project,
-  ]);
+  const loadData = useCallback(
+    (name) => refreshResources(name, project),
+    [project],
+  );
 
   useEffect(() => {
     dispatch(change(ISSUE_REGISTRATION_FORM_ID, 'resource', undefined));

@@ -9,8 +9,7 @@ export const data: UsageData = {
       longitude: '26.7124485',
       description:
         'University of Tartu is the 2nd oldest university in Swedish Empire.',
-      logo:
-        'https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Tartu_%C3%9Clikool_logo.svg/1200px-Tartu_%C3%9Clikool_logo.svg.png',
+      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Tartu_%C3%9Clikool_logo.svg/1200px-Tartu_%C3%9Clikool_logo.svg.png',
     },
     csc: {
       name: 'CSC - IT center for Science',
@@ -18,8 +17,7 @@ export const data: UsageData = {
       latitude: '60.1781296',
       longitude: '24.830555',
       description: 'CSC is a Finnish center of expertise in ICT and HPC.',
-      logo:
-        'http://www.hermanit.fi/wp-content/uploads/2016/09/CSC_2012_LOGO_RGB_72dpi.jpg',
+      logo: 'http://www.hermanit.fi/wp-content/uploads/2016/09/CSC_2012_LOGO_RGB_72dpi.jpg',
     },
     kth: {
       name: 'KTH Royal Institute of Technology',
@@ -29,8 +27,7 @@ export const data: UsageData = {
       description:
         'KTH Royal Institute of Technology in Stockholm is Europe’s leading ' +
         'technical and engineering universities.',
-      logo:
-        'https://www.kth.se/polopoly_fs/1.77259!/KTH_Logotyp_RGB_2013-2.svg',
+      logo: 'https://www.kth.se/polopoly_fs/1.77259!/KTH_Logotyp_RGB_2013-2.svg',
     },
     hi: {
       name: 'University of Iceland',
@@ -39,8 +36,7 @@ export const data: UsageData = {
       longitude: '-21.9869085',
       description:
         'The University of Iceland is a progressive educational and scientific institution.',
-      logo:
-        'https://pbs.twimg.com/profile_images/504625818123780096/wQRvkgpC_400x400.jpeg',
+      logo: 'https://pbs.twimg.com/profile_images/504625818123780096/wQRvkgpC_400x400.jpeg',
     },
     tampere: {
       name: 'University of Tampere',
@@ -50,8 +46,7 @@ export const data: UsageData = {
       description:
         'The University of Tampere (UTA) is a higher education institution with the ' +
         'social mission of educating visionaries who understand the world.',
-      logo:
-        'http://www.uta.fi/sites/default/files/inline-images/logo_eng_small.jpg',
+      logo: 'http://www.uta.fi/sites/default/files/inline-images/logo_eng_small.jpg',
     },
     uiono: {
       name: 'University of Oslo',
@@ -60,8 +55,7 @@ export const data: UsageData = {
       longitude: '10.710839',
       description:
         'University of Oslo is one of the best universities in Scandinavia.',
-      logo:
-        'https://upload.wikimedia.org/wikipedia/en/thumb/3/31/University_of_Oslo_seal.svg/300px-University_of_Oslo_seal.svg.png',
+      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/31/University_of_Oslo_seal.svg/300px-University_of_Oslo_seal.svg.png',
     },
     sdudk: {
       name: 'University of Southern Denmark',
@@ -70,8 +64,7 @@ export const data: UsageData = {
       longitude: '9.6752609',
       description:
         'University of Southern Denmark is one of the best universities in Scandinavia.',
-      logo:
-        'https://2.bp.blogspot.com/-oIcNjSOAjoI/Vkojfh8s0PI/AAAAAAAAAz0/8cMLZkRZvqY/s1600/University-of-Southern-Denmark-new-scholarships.png',
+      logo: 'https://2.bp.blogspot.com/-oIcNjSOAjoI/Vkojfh8s0PI/AAAAAAAAAz0/8cMLZkRZvqY/s1600/University-of-Southern-Denmark-new-scholarships.png',
     },
     suse: {
       name: 'Stockholm University',
@@ -89,8 +82,7 @@ export const data: UsageData = {
       longitude: '11.9759345',
       description:
         'Chalmers University of Technology is one of the best universities in Scandinavia.',
-      logo:
-        'https://www.chalmers.se/SiteCollectionImages/Logotyper/Chalmers%20logotyp/ChalmersU_black.png',
+      logo: 'https://www.chalmers.se/SiteCollectionImages/Logotyper/Chalmers%20logotyp/ChalmersU_black.png',
     },
     bergen: {
       name: 'University of Bergen',
@@ -99,8 +91,7 @@ export const data: UsageData = {
       longitude: '5.3217549',
       description:
         'The University of Bergen is a public university located in Bergen, Norway.',
-      logo:
-        'https://en.wikipedia.org/wiki/University_of_Bergen#/media/File:Uni-Bergen-emblem.png',
+      logo: 'https://en.wikipedia.org/wiki/University_of_Bergen#/media/File:Uni-Bergen-emblem.png',
     },
   },
   service_providers: {

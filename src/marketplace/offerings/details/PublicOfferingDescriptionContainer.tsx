@@ -16,49 +16,47 @@ interface PublicOfferingDescriptionContainerProps {
   category: Category;
 }
 
-export const PublicOfferingDescriptionContainer: FunctionComponent<PublicOfferingDescriptionContainerProps> = ({
-  offering,
-  category,
-}) => (
-  <div
-    className={classNames('bordered publicOfferingDescriptionContainer', {
-      'publicOfferingDescriptionContainer--fullWidth': !(
-        shouldRenderAttributesSection(offering) ||
-        shouldRenderAttributesList(category.sections, offering.attributes)
-      ),
-    })}
-  >
-    <div className="publicOfferingDescriptionContainer__header bordered">
-      <div>
-        <b>{translate('Category')}: </b>
-        {offering.category_title}
+export const PublicOfferingDescriptionContainer: FunctionComponent<PublicOfferingDescriptionContainerProps> =
+  ({ offering, category }) => (
+    <div
+      className={classNames('bordered publicOfferingDescriptionContainer', {
+        'publicOfferingDescriptionContainer--fullWidth': !(
+          shouldRenderAttributesSection(offering) ||
+          shouldRenderAttributesList(category.sections, offering.attributes)
+        ),
+      })}
+    >
+      <div className="publicOfferingDescriptionContainer__header bordered">
+        <div>
+          <b>{translate('Category')}: </b>
+          {offering.category_title}
+        </div>
+        {offering.privacy_policy_link ? (
+          <ExternalLink
+            label={translate('Privacy Policy')}
+            url={offering.privacy_policy_link}
+          />
+        ) : (
+          <span>
+            <b>{translate('Privacy Policy')}: </b>N/A
+          </span>
+        )}
+        {offering.terms_of_service_link ? (
+          <ExternalLink
+            label={translate('Terms Of Service')}
+            url={offering.terms_of_service_link}
+          />
+        ) : (
+          <span>
+            <b>{translate('Terms Of Service')}: </b>N/A
+          </span>
+        )}
       </div>
-      {offering.privacy_policy_link ? (
-        <ExternalLink
-          label={translate('Privacy Policy')}
-          url={offering.privacy_policy_link}
-        />
-      ) : (
-        <span>
-          <b>{translate('Privacy Policy')}: </b>N/A
-        </span>
-      )}
-      {offering.terms_of_service_link ? (
-        <ExternalLink
-          label={translate('Terms Of Service')}
-          url={offering.terms_of_service_link}
-        />
-      ) : (
-        <span>
-          <b>{translate('Terms Of Service')}: </b>N/A
-        </span>
+      {offering.full_description && (
+        <div className="publicOfferingDescriptionContainer__description m-t-sm">
+          <b>{translate('Description')}</b>
+          <FormattedHtml html={offering.full_description} />
+        </div>
       )}
     </div>
-    {offering.full_description && (
-      <div className="publicOfferingDescriptionContainer__description m-t-sm">
-        <b>{translate('Description')}</b>
-        <FormattedHtml html={offering.full_description} />
-      </div>
-    )}
-  </div>
-);
+  );

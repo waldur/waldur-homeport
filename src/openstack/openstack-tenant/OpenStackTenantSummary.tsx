@@ -45,36 +45,37 @@ const formatPassword = (props: OpenStackTenantSummaryProps) =>
     <UserPassword password={props.resource.user_password} />
   ) : null;
 
-export const PureOpenStackTenantSummary: FunctionComponent<OpenStackTenantSummaryProps> = (
-  props,
-) => {
-  const { translate, resource } = props;
-  const limits = parseQuotas(resource.quotas);
-  return (
-    <>
-      <PureResourceSummaryBase {...props} />
-      <Field
-        label={translate('Summary')}
-        value={
-          resource.marketplace_offering_name
-            ? `${resource.marketplace_offering_name} (${formatFlavor(limits)})`
-            : formatFlavor(limits)
-        }
-      />
-      <Field label={translate('Access')} value={formatAccess(props)} />
-      <Field label={translate('Username')} value={formatUsername(props)} />
-      <Field label={translate('Password')} value={formatPassword(props)} />
-      <Field
-        label={translate('Internal network ID')}
-        value={resource.internal_network_id}
-      />
-      <Field
-        label={translate('External network ID')}
-        value={resource.external_network_id}
-      />
-    </>
-  );
-};
+export const PureOpenStackTenantSummary: FunctionComponent<OpenStackTenantSummaryProps> =
+  (props) => {
+    const { translate, resource } = props;
+    const limits = parseQuotas(resource.quotas);
+    return (
+      <>
+        <PureResourceSummaryBase {...props} />
+        <Field
+          label={translate('Summary')}
+          value={
+            resource.marketplace_offering_name
+              ? `${resource.marketplace_offering_name} (${formatFlavor(
+                  limits,
+                )})`
+              : formatFlavor(limits)
+          }
+        />
+        <Field label={translate('Access')} value={formatAccess(props)} />
+        <Field label={translate('Username')} value={formatUsername(props)} />
+        <Field label={translate('Password')} value={formatPassword(props)} />
+        <Field
+          label={translate('Internal network ID')}
+          value={resource.internal_network_id}
+        />
+        <Field
+          label={translate('External network ID')}
+          value={resource.external_network_id}
+        />
+      </>
+    );
+  };
 
 const mapStateToProps = (state: RootState) => ({
   tenantCredentialsVisible:

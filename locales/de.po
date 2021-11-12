@@ -65,12 +65,6 @@ msgstr "Zugangstoken"
 msgid "Accessible to all customers."
 msgstr "Für alle Kunden zugänglich."
 
-msgid "Account activation"
-msgstr "Kontoaktivierung"
-
-msgid "Account has been activated."
-msgstr "Das Konto wurde aktiviert."
-
 msgid "Account removal"
 msgstr "Kontoentfernung"
 
@@ -845,9 +839,6 @@ msgstr "Löschen bestätigen?"
 msgid "Confirmation"
 msgstr "Bestätigung"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Die Bestätigungsmail wurde gesendet. Bitte überprüfe deinen Posteingang!"
-
 msgid "Confirmation message has been updated successfully."
 msgstr "Die Bestätigungsnachricht wurde erfolgreich aktualisiert."
 
@@ -916,9 +907,6 @@ msgstr "Erstellen eines VM-Snapshots für die OpenStack-Instanz"
 
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr "Erstellen Sie einen VM-Snapshot-Zeitplan für die OpenStack-Instanz"
-
-msgid "Create an account"
-msgstr "Erstellen eines Kontos"
 
 msgid "Create application"
 msgstr "Erstellen einer Anwendung"
@@ -1213,9 +1201,6 @@ msgstr "Abteilungsart"
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Konfigurieren Sie kein Gateway für dieses Subnetz"
-
-msgid "Do not have an account?"
-msgstr "Haben Sie kein Konto?"
 
 msgid "Do you really want to delete comment?"
 msgstr "Möchten Sie den Kommentar wirklich löschen?"
@@ -1652,9 +1637,6 @@ msgstr "Die FreeIPA-Erweiterung ist deaktiviert."
 msgid "From"
 msgstr "Von"
 
-msgid "From port"
-msgstr "Vom Hafen"
-
 msgid "Full description"
 msgstr "Vollständige Beschreibung"
 
@@ -1999,9 +1981,6 @@ msgstr "Einladungslink"
 
 msgid "Invitation rejection"
 msgstr "Ablehnung einer Einladung"
-
-msgid "Invitation token is not found."
-msgstr "Einladungs-Token wurde nicht gefunden."
 
 msgid "Invitations"
 msgstr "Einladungen"
@@ -3170,9 +3149,6 @@ msgstr "Bitte geben Sie die gewünschten Werte in die folgenden Zeilen ein:"
 msgid "Please enter reason why offering has been paused."
 msgstr "Bitte geben Sie den Grund ein, warum das Angebot pausiert wurde."
 
-msgid "Please enter username, password and email."
-msgstr "Bitte geben Sie Benutzername, Passwort und E-Mail ein."
-
 msgid "Please enter username and password."
 msgstr "Bitte geben Sie Benutzername und Passwort ein."
 
@@ -3587,17 +3563,11 @@ msgstr "Region"
 msgid "Region name"
 msgstr "Regionsname"
 
-msgid "Register"
-msgstr "Registrieren"
-
 msgid "Register as service provider"
 msgstr "Registrieren Sie sich als Dienstanbieter"
 
 msgid "Register organization as service provider and remove organization."
 msgstr "Registrieren Sie die Organisation als Dienstanbieter und entfernen Sie die Organisation."
-
-msgid "Register to"
-msgstr "Registrieren Sie sich bei"
 
 msgid "Registered at:"
 msgstr "Registriert bei:"
@@ -4421,6 +4391,9 @@ msgstr "Herunterfahren"
 msgid "Sign in"
 msgstr "Einloggen"
 
+msgid "Sign in with {label}"
+msgstr "Melden Sie sich mit dem Befehl {label} an."
+
 msgid "Size"
 msgstr "Größe"
 
@@ -4874,9 +4847,6 @@ msgstr "Um Zugriff zu erhalten, senden Sie bitte eine Anfrage an {supportEmail}.
 msgid "To get your clouds under control, please fill in your data."
 msgstr "Um Ihre Wolken unter Kontrolle zu bekommen, geben Sie bitte Ihre Daten ein."
 
-msgid "To port"
-msgstr "Zum Hafen"
-
 msgid "To remove account, please send a request to {support}."
 msgstr "Um das Konto zu entfernen, senden Sie bitte eine Anfrage an {support}."
 
@@ -4954,9 +4924,6 @@ msgstr "UUID"
 
 msgid "Unable to accept booking."
 msgstr "Die Buchung kann nicht akzeptiert werden."
-
-msgid "Unable to activate account."
-msgstr "Konto kann nicht aktiviert werden."
 
 msgid "Unable to activate user."
 msgstr "Benutzer kann nicht aktiviert werden."
@@ -5527,9 +5494,6 @@ msgstr "Die Anlage kann nicht hochgeladen werden."
 
 msgid "Unable to upload logo."
 msgstr "Das Logo kann nicht hochgeladen werden."
-
-msgid "Unable to validate invitation token."
-msgstr "Einladungstoken kann nicht überprüft werden."
 
 msgid "Unconfirmed"
 msgstr "Unbestätigt"
@@ -6115,9 +6079,6 @@ msgstr "Ihre Organisation hat noch keine Projekte."
 
 msgid "Your session has expired, please enter credentials to continue."
 msgstr "Ihre Sitzung ist abgelaufen, geben Sie anmeldenachgeben, um fortzufahren."
-
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Ihr einziger Kontrollbereich für alle Cloud-Dienste. Melden Sie sich an, um es in Aktion zu sehen."
 
 msgid "(VAT is not included)"
 msgstr "(MwSt. ist nicht inbegriffen)"

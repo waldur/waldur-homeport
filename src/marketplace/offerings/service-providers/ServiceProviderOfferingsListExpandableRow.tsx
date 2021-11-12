@@ -13,7 +13,11 @@ import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 export const ServiceProviderOfferingsListExpandableRow: FunctionComponent<{
   row: Offering;
 }> = ({ row }) => {
-  const { loading, error, value: tabs } = useAsync(async () => {
+  const {
+    loading,
+    error,
+    value: tabs,
+  } = useAsync(async () => {
     const offering = await getOffering(row.uuid, ANONYMOUS_CONFIG);
     const category = await getCategory(
       offering.category_uuid,

@@ -53,7 +53,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
         )}
         {this.props.showPageSizeSelector && (
           <TablePageSize
-            pageSize={this.props.pagination.pageSize}
+            {...this.props.pagination}
             updatePageSize={this.props.updatePageSize}
           />
         )}

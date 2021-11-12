@@ -65,12 +65,6 @@ msgstr "Токен доступу"
 msgid "Accessible to all customers."
 msgstr "Доступно для всіх клієнтів."
 
-msgid "Account activation"
-msgstr "Активація облікового запису"
-
-msgid "Account has been activated."
-msgstr "Обліковий запис було активовано."
-
 msgid "Account removal"
 msgstr "Видалення облікового запису"
 

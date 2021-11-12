@@ -10,4 +10,5 @@ class ResourceStateConfiguration {
   }
 }
 
-export const ResourceStateConfigurationProvider = new ResourceStateConfiguration();
+export const ResourceStateConfigurationProvider =
+  new ResourceStateConfiguration();

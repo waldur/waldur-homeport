@@ -30,9 +30,9 @@ export const AnswersSummary = ({
   answers: Answers;
   questions: Question[];
 }) => {
-  const counters = useMemo(() => countStats(answers, questions), [
-    answers,
-    questions,
-  ]);
+  const counters = useMemo(
+    () => countStats(answers, questions),
+    [answers, questions],
+  );
   return <PieChart {...counters} />;
 };

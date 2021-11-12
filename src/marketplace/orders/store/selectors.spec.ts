@@ -43,7 +43,7 @@ describe('orderCanBeApproved utility function', () => {
       user: staff,
     };
     expect(
-      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+      orderCanBeApproved({ config, workspace } as unknown as RootState),
     ).toEqual(true);
   });
   it('should return true if OWNER_CAN_APPROVE_ORDER and current user is owner', () => {
@@ -66,7 +66,7 @@ describe('orderCanBeApproved utility function', () => {
       },
     };
     expect(
-      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+      orderCanBeApproved({ config, workspace } as unknown as RootState),
     ).toEqual(true);
   });
   it('should return false if OWNER_CAN_APPROVE_ORDER but current user is not the owner', () => {
@@ -89,7 +89,7 @@ describe('orderCanBeApproved utility function', () => {
       },
     };
     expect(
-      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+      orderCanBeApproved({ config, workspace } as unknown as RootState),
     ).toEqual(false);
   });
   it('should return false if OWNER_CAN_APPROVE_ORDER is equal to false but current user is the owner', () => {
@@ -112,7 +112,7 @@ describe('orderCanBeApproved utility function', () => {
       },
     };
     expect(
-      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+      orderCanBeApproved({ config, workspace } as unknown as RootState),
     ).toEqual(false);
   });
   it('should return true if ADMIN_CAN_APPROVE_ORDER and current user is the admin', () => {
@@ -135,7 +135,7 @@ describe('orderCanBeApproved utility function', () => {
       },
     };
     expect(
-      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+      orderCanBeApproved({ config, workspace } as unknown as RootState),
     ).toEqual(true);
   });
   it('should return false if ADMIN_CAN_APPROVE_ORDER is equal to false but current user is the admin', () => {
@@ -158,7 +158,7 @@ describe('orderCanBeApproved utility function', () => {
       },
     };
     expect(
-      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+      orderCanBeApproved({ config, workspace } as unknown as RootState),
     ).toEqual(false);
   });
   it('should return false if ADMIN_CAN_APPROVE_ORDER but current user is not the admin', () => {
@@ -181,7 +181,7 @@ describe('orderCanBeApproved utility function', () => {
       },
     };
     expect(
-      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+      orderCanBeApproved({ config, workspace } as unknown as RootState),
     ).toEqual(false);
   });
   it('should return true if MANAGER_CAN_APPROVE_ORDER and current user is the manager', () => {
@@ -204,7 +204,7 @@ describe('orderCanBeApproved utility function', () => {
       },
     };
     expect(
-      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+      orderCanBeApproved({ config, workspace } as unknown as RootState),
     ).toEqual(true);
   });
   it('should return false if MANAGER_CAN_APPROVE_ORDER is equal to false but current user is the manager', () => {
@@ -227,7 +227,7 @@ describe('orderCanBeApproved utility function', () => {
       },
     };
     expect(
-      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+      orderCanBeApproved({ config, workspace } as unknown as RootState),
     ).toEqual(false);
   });
   it('should return false if MANAGER_CAN_APPROVE_ORDER but current user is not the manager', () => {
@@ -250,7 +250,7 @@ describe('orderCanBeApproved utility function', () => {
       },
     };
     expect(
-      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+      orderCanBeApproved({ config, workspace } as unknown as RootState),
     ).toEqual(false);
   });
 });

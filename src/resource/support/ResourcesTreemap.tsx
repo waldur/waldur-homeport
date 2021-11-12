@@ -100,10 +100,11 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
     tooltipValueFormatter = quota.tooltipValueFormatter;
   }
 
-  const { loading, error, value: data } = useAsync(
-    () => loadData(props.quota?.key),
-    [props.quota],
-  );
+  const {
+    loading,
+    error,
+    value: data,
+  } = useAsync(() => loadData(props.quota?.key), [props.quota]);
   const chartData = data ? parseProjects(data) : [];
   let total = 0;
   if (props.quota && data) {

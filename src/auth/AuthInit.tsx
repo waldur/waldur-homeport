@@ -26,9 +26,11 @@ const formatInitialData = pick([
 export const AuthInit: FunctionComponent = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { loading, error, value: user } = useAsync(() =>
-    UsersService.getCurrentUser(),
-  );
+  const {
+    loading,
+    error,
+    value: user,
+  } = useAsync(() => UsersService.getCurrentUser());
   const onSave = useCallback(
     async (user) => {
       try {

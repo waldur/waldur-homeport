@@ -33,6 +33,10 @@ export interface ExternalLink {
 }
 
 interface CoreConfiguration {
+  BRAND_COLOR: string;
+  HERO_LINK_URL: string;
+  HERO_LINK_LABEL: string;
+  HERO_IMAGE: string;
   POWERED_BY_LOGO: string;
   SIDEBAR_LOGO: string;
   LOGIN_LOGO: string;
@@ -50,7 +54,6 @@ interface CoreConfiguration {
   GOOGLE_ANALYTICS_ID: string;
   AUTHENTICATION_METHODS: string[];
   INVITATIONS_ENABLED: boolean;
-  ALLOW_SIGNUP_WITHOUT_INVITATION: boolean;
   VALIDATE_INVITATION_EMAIL: boolean;
   OWNER_CAN_MANAGE_CUSTOMER: boolean;
   OWNERS_CAN_MANAGE_OWNERS: boolean;

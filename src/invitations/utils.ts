@@ -40,7 +40,7 @@ export function checkAndAccept(token) {
       });
   } else {
     setInvitationToken(token);
-    router.stateService.go('register');
+    router.stateService.go('login');
   }
 }
 

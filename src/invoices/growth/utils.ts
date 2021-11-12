@@ -30,7 +30,7 @@ export const formatGrowthChart = (growthChartData) => {
           type: 'shadow',
         },
         data: growthChartData.periods.map((row, index) => {
-          const date = DateTime.fromFormat(row, 'yyyy-MM');
+          const date = DateTime.fromFormat(row, 'yyyy-M');
           const monthName = date.toFormat('MMMM');
           const year = date.toFormat('yyyy');
           return index === growthChartData.periods.length - 1

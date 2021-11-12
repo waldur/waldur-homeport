@@ -21,6 +21,7 @@
 import Axios from 'axios';
 
 import { ENV } from '@waldur/configs/default';
+import { cleanObject } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { router } from '@waldur/router';
 import { showSuccess } from '@waldur/store/notify';
@@ -76,16 +77,6 @@ async function signin(username, password) {
   loginSuccess({ data: { ...user, method: 'local' } });
 }
 
-function signup(user) {
-  return Axios.post(ENV.apiEndpoint + 'api-auth/registration/', user);
-}
-
-async function activate(user) {
-  const url = ENV.apiEndpoint + 'api-auth/activation/';
-  const response = await Axios.post(url, user);
-  loginSuccess(response);
-}
-
 function storeRedirect() {
   if (router.globals.params?.toState) {
     setRedirect({
@@ -107,7 +98,19 @@ function redirectOnSuccess() {
   }
 }
 
+function storeCurrentState() {
+  if (router.globals.$current.name) {
+    setRedirect({
+      toState: router.globals.$current.name,
+      toParams: router.globals.params
+        ? cleanObject(router.globals.params)
+        : undefined,
+    });
+  }
+}
+
 function localLogout(params?) {
+  storeCurrentState();
   store.dispatch(setCurrentUser(undefined));
   delete Axios.defaults.headers.common['Authorization'];
   removeToken();
@@ -144,8 +147,6 @@ export const AuthService = {
   getDownloadLink,
   getLink,
   signin,
-  signup,
-  activate,
   redirectOnSuccess,
   localLogout,
   logout,

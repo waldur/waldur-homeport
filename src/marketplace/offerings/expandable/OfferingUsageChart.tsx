@@ -17,10 +17,11 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
   offeringUuid,
   components,
 }) => {
-  const { loading, error, value: usages } = useAsync(
-    () => getOfferingComponentStats(offeringUuid),
-    [offeringUuid],
-  );
+  const {
+    loading,
+    error,
+    value: usages,
+  } = useAsync(() => getOfferingComponentStats(offeringUuid), [offeringUuid]);
   return loading ? (
     <LoadingSpinner />
   ) : error ? (

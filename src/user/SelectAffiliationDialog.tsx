@@ -6,11 +6,16 @@
  */
 
 import { triggerTransition } from '@uirouter/redux';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { FormGroup, ToggleButton } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { compose } from 'redux';
-import { Field, formValueSelector, reduxForm } from 'redux-form';
+import {
+  Field,
+  formValueSelector,
+  InjectedFormProps,
+  reduxForm,
+} from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField, SubmitButton } from '@waldur/form';
@@ -25,20 +30,94 @@ import {
   PROJECT_ROUTE,
   SELECT_AFFILIATION_FORM_ID,
 } from '@waldur/user/constants';
+import { CustomerPermission, ProjectPermission } from '@waldur/workspace/types';
 
-const getOrganizationOptions = (customerPermissions) =>
-  customerPermissions.map((customerPermission) => ({
+interface OwnProps {
+  resolve: {
+    customerPermissions: CustomerPermission[];
+    projectPermissions: ProjectPermission[];
+    categoryUuid: string;
+  };
+}
+
+interface FormData {
+  affiliation: string;
+  organization: string;
+  project: string;
+}
+
+const selector = formValueSelector(SELECT_AFFILIATION_FORM_ID);
+
+const mapStateToProps = (state: RootState) => ({
+  affiliationValue: selector(state, 'affiliation'),
+});
+
+const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
+  onSubmit: (formData: FormData) => {
+    dispatch(
+      triggerTransition(formData.affiliation, {
+        uuid:
+          formData.affiliation === ORGANIZATION_ROUTE
+            ? formData.organization
+            : formData.project,
+        category_uuid: ownProps.resolve.categoryUuid,
+      }),
+    );
+  },
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const formConnector = reduxForm<FormData, PropsFromRedux>({
+  form: SELECT_AFFILIATION_FORM_ID,
+  initialValues: {
+    affiliation: ORGANIZATION_ROUTE,
+  },
+});
+
+const enhance = compose(connector, formConnector);
+
+const getUniqueCustomers = (customerPermissions: CustomerPermission[]) => {
+  const seen = {};
+  return customerPermissions.filter(({ customer_uuid }) => {
+    if (seen[customer_uuid]) {
+      return false;
+    } else {
+      seen[customer_uuid] = true;
+      return true;
+    }
+  });
+};
+
+const getUniqueProjects = (projectPermissions: ProjectPermission[]) => {
+  const seen = {};
+  return projectPermissions.filter(({ project_uuid }) => {
+    if (seen[project_uuid]) {
+      return false;
+    } else {
+      seen[project_uuid] = true;
+      return true;
+    }
+  });
+};
+
+const getOrganizationOptions = (customerPermissions: CustomerPermission[]) =>
+  getUniqueCustomers(customerPermissions).map((customerPermission) => ({
     label: customerPermission.customer_name,
     value: customerPermission.customer_uuid,
   }));
 
-const getProjectOptions = (projectPermissions) =>
-  projectPermissions.map((projectPermission) => ({
+const getProjectOptions = (projectPermissions: ProjectPermission[]) =>
+  getUniqueProjects(projectPermissions).map((projectPermission) => ({
     label: `${projectPermission.project_name} (${projectPermission.customer_name})`,
     value: projectPermission.project_uuid,
   }));
 
-const SelectAffiliationDialogContainer = (props) => {
+const SelectAffiliationDialogContainer: FC<
+  InjectedFormProps<FormData> & PropsFromRedux & OwnProps
+> = (props) => {
   const [organizationOptions, setOrganizationOptions] = useState([]);
   const [projectOptions, setProjectOptions] = useState([]);
   const [affiliationExist, setAffiliationExist] = useState<boolean>(true);
@@ -135,37 +214,6 @@ const SelectAffiliationDialogContainer = (props) => {
     </form>
   );
 };
-
-const selector = formValueSelector(SELECT_AFFILIATION_FORM_ID);
-
-const mapStateToProps = (state: RootState) => ({
-  affiliationValue: selector(state, 'affiliation'),
-});
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onSubmit: (formData) =>
-    dispatch(
-      triggerTransition(formData.affiliation, {
-        uuid:
-          formData.affiliation === ORGANIZATION_ROUTE
-            ? formData.organization
-            : formData.project,
-        category_uuid: ownProps.resolve.categoryUuid,
-      }),
-    ),
-});
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-const enhance = compose(
-  connector,
-  reduxForm({
-    form: SELECT_AFFILIATION_FORM_ID,
-    initialValues: {
-      affiliation: ORGANIZATION_ROUTE,
-    },
-  }),
-);
 
 export const SelectAffiliationDialog = enhance(
   SelectAffiliationDialogContainer,

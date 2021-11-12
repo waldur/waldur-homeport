@@ -43,7 +43,7 @@ export const CreatePortDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create port')}
-      fields={fields}
+      formFields={fields}
       submitForm={async (formData) => {
         try {
           await createPort(resource.uuid, {

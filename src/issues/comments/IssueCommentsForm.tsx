@@ -19,36 +19,35 @@ interface PureIssueCommentsFormProps extends TranslateProps, InjectedFormProps {
   onSubmit(data: any): void;
 }
 
-export const PureIssueCommentsForm: FunctionComponent<PureIssueCommentsFormProps> = (
-  props,
-) => {
-  const {
-    submitting,
-    uiDisabled,
-    pristine,
-    translate,
-    onCancel,
-    handleSubmit,
-    onSubmit,
-  } = props;
+export const PureIssueCommentsForm: FunctionComponent<PureIssueCommentsFormProps> =
+  (props) => {
+    const {
+      submitting,
+      uiDisabled,
+      pristine,
+      translate,
+      onCancel,
+      handleSubmit,
+      onSubmit,
+    } = props;
 
-  return (
-    <div className="comments-form">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <FormContainer submitting={submitting} clearOnUnmount={false}>
-          <TextField name={constants.FORM_FIELDS.comment} />
-        </FormContainer>
-        <div className="comments-form__controls m-t-md">
-          <SubmitButton
-            submitting={submitting}
-            disabled={uiDisabled || pristine}
-            label={translate('Add')}
-          />
-          <CancelButton onClick={onCancel} label={translate('Cancel')} />
-        </div>
-      </form>
-    </div>
-  );
-};
+    return (
+      <div className="comments-form">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormContainer submitting={submitting} clearOnUnmount={false}>
+            <TextField name={constants.FORM_FIELDS.comment} />
+          </FormContainer>
+          <div className="comments-form__controls m-t-md">
+            <SubmitButton
+              submitting={submitting}
+              disabled={uiDisabled || pristine}
+              label={translate('Add')}
+            />
+            <CancelButton onClick={onCancel} label={translate('Cancel')} />
+          </div>
+        </form>
+      </div>
+    );
+  };
 
 export const IssueCommentsForm = withTranslation(PureIssueCommentsForm);

@@ -14,8 +14,13 @@ import {
 } from '@waldur/core/constants';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
+import {
+  GROUP_INVITATION_CREATE_FORM_ID,
+  INVITATION_CREATE_FORM_ID,
+} from '@waldur/invitations/actions/constants';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { RootState } from '@waldur/store/reducers';
 
 import { InvitationService } from '../InvitationService';
 
@@ -64,18 +69,20 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
 
   const civilNumber = useSelector(civilNumberSelector);
   const taxNumber = useSelector(taxNumberSelector);
-  const role = useSelector(roleSelector);
+  const role = useSelector((state: RootState) =>
+    roleSelector(state, INVITATION_CREATE_FORM_ID),
+  );
   const [
     { loading: fetchingUserDetails, value: userDetails },
     fetchUserDetailsCallback,
-  ] = useAsyncFn(() => fetchUserDetails(civilNumber, taxNumber), [
-    civilNumber,
-    taxNumber,
-  ]);
+  ] = useAsyncFn(
+    () => fetchUserDetails(civilNumber, taxNumber),
+    [civilNumber, taxNumber],
+  );
 
   const roles = useMemo(() => getRoles(context), [context]);
   useEffect(() => {
-    dispatch(change('InvitationCreateDialog', 'role', roles[0].value));
+    dispatch(change(INVITATION_CREATE_FORM_ID, 'role', roles[0].value));
   }, [dispatch, roles]);
 
   const roleDisabled =
@@ -119,6 +126,53 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
     userDetails,
     createInvitation,
     roleDisabled,
+    roles,
+    projectEnabled,
+  };
+};
+
+export const useGroupInvitationCreateDialog = (context: InvitationContext) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const role = useSelector((state: RootState) =>
+    roleSelector(state, GROUP_INVITATION_CREATE_FORM_ID),
+  );
+
+  const roles = useMemo(() => getRoles(context), [context]);
+  useEffect(() => {
+    dispatch(change(GROUP_INVITATION_CREATE_FORM_ID, 'role', roles[0].value));
+  }, [dispatch, roles]);
+
+  const roleDisabled = isFeatureVisible('invitation.require_user_details');
+  const projectEnabled = PROJECT_ROLES.includes(role) && !roleDisabled;
+
+  const createInvitation = useCallback(
+    async (formData) => {
+      try {
+        const payload: Record<string, string> = {};
+        if (PROJECT_ROLES.includes(role)) {
+          payload.project_role = role;
+          payload.project = formData.project.url;
+        } else {
+          payload.customer_role = role;
+          payload.customer = context.customer.url;
+        }
+        await InvitationService.createGroupInvitation(payload);
+        dispatch(closeModalDialog());
+        dispatch(showSuccess('Group invitation has been created.'));
+        if (context.refreshList) {
+          context.refreshList();
+        }
+      } catch (e) {
+        dispatch(showErrorResponse(e, 'Unable to create group invitation.'));
+      }
+    },
+    [dispatch, router.stateService, context.customer, role],
+  );
+
+  return {
+    createInvitation,
     roles,
     projectEnabled,
   };

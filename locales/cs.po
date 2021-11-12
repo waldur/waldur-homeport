@@ -65,12 +65,6 @@ msgstr "Přístupový token"
 msgid "Accessible to all customers."
 msgstr "Přístupné všem zákazníkům."
 
-msgid "Account activation"
-msgstr "Aktivace účtu"
-
-msgid "Account has been activated."
-msgstr "Účet byl aktivován."
-
 msgid "Account removal"
 msgstr "Odstranění účtu"
 
@@ -845,9 +839,6 @@ msgstr "Potvrdit odstranění?"
 msgid "Confirmation"
 msgstr "Potvrzení"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Potvrzující e-mail byl odeslán. Zkontrolujte prosím vaši doručenou poštu!"
-
 msgid "Confirmation message has been updated successfully."
 msgstr "Potvrzovací zpráva byla úspěšně aktualizována."
 
@@ -916,9 +907,6 @@ msgstr "Vytvořit snímek virtuálního počítače pro instanci OpenStack"
 
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr "Vytvořit plán snímků virtuálního počítače pro instanci OpenStack"
-
-msgid "Create an account"
-msgstr "Vytvořit účet"
 
 msgid "Create application"
 msgstr "Vytvořit aplikaci"
@@ -1213,9 +1201,6 @@ msgstr "Typ divize"
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "Nekonfigurujte bránu pro tuto podsíť."
-
-msgid "Do not have an account?"
-msgstr "Nemáte účet?"
 
 msgid "Do you really want to delete comment?"
 msgstr "Opravdu chcete smazat komentář?"
@@ -1652,9 +1637,6 @@ msgstr "Rozšíření FreeIPA je zakázáno."
 msgid "From"
 msgstr "Od"
 
-msgid "From port"
-msgstr "Z portu"
-
 msgid "Full description"
 msgstr "Úplný popis"
 
@@ -1999,9 +1981,6 @@ msgstr "Odkaz na pozvánku"
 
 msgid "Invitation rejection"
 msgstr "Odmítnutí pozvánky"
-
-msgid "Invitation token is not found."
-msgstr "Token pozvánky nebyl nalezen."
 
 msgid "Invitations"
 msgstr "Pozvánky"
@@ -3170,9 +3149,6 @@ msgstr "Do řádků níže prosím zadejte požadované hodnoty:"
 msgid "Please enter reason why offering has been paused."
 msgstr "Zadejte prosím důvod, proč byla nabídka pozastavena."
 
-msgid "Please enter username, password and email."
-msgstr "Zadejte prosím uživatelské jméno, heslo a e-mail."
-
 msgid "Please enter username and password."
 msgstr "Zadejte prosím uživatelské jméno a heslo."
 
@@ -3587,17 +3563,11 @@ msgstr "Region"
 msgid "Region name"
 msgstr "Název regionu"
 
-msgid "Register"
-msgstr "Registrovat"
-
 msgid "Register as service provider"
 msgstr "Zaregistrujte se jako poskytovatel služeb"
 
 msgid "Register organization as service provider and remove organization."
 msgstr "Zaregistrujte organizaci jako poskytovatele služeb a odstraňte ji."
-
-msgid "Register to"
-msgstr "Zaregistrujte se do"
 
 msgid "Registered at:"
 msgstr "Registrováno na:"
@@ -4421,6 +4391,9 @@ msgstr "Vypnutí"
 msgid "Sign in"
 msgstr "Přihlásit se"
 
+msgid "Sign in with {label}"
+msgstr "Přihlaste se pomocí {label}"
+
 msgid "Size"
 msgstr "Velikost"
 
@@ -4874,9 +4847,6 @@ msgstr "Chcete-li získat přístup, pošlete prosím požadavek na {supportEmai
 msgid "To get your clouds under control, please fill in your data."
 msgstr "Chcete-li mít vaše cloudy pod kontrolou, vyplňte prosím vaše údaje."
 
-msgid "To port"
-msgstr "Do portu"
-
 msgid "To remove account, please send a request to {support}."
 msgstr "Chcete-li účet odstranit, pošlete prosím požadavek na {support}."
 
@@ -4954,9 +4924,6 @@ msgstr "UUID"
 
 msgid "Unable to accept booking."
 msgstr "Nelze přijmout rezervaci."
-
-msgid "Unable to activate account."
-msgstr "Nelze aktivovat účet."
 
 msgid "Unable to activate user."
 msgstr "Nelze aktivovat uživatele."
@@ -5527,9 +5494,6 @@ msgstr "Nelze nahrát přílohu."
 
 msgid "Unable to upload logo."
 msgstr "Nelze nahrát logo."
-
-msgid "Unable to validate invitation token."
-msgstr "Nelze ověřit token pozvánky."
 
 msgid "Unconfirmed"
 msgstr "Nepotvrzeno"
@@ -6115,9 +6079,6 @@ msgstr "Vaše organizace zatím nemá žádné projekty."
 
 msgid "Your session has expired, please enter credentials to continue."
 msgstr "Vaše relace vypršela, pro pokračování prosím zadejte přihlašovací údaje."
-
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Jediný panel pro ovládání všech cloudových služeb. Přihlaste se a podívejte se na to v akci."
 
 msgid "(VAT is not included)"
 msgstr "(DPH není zahrnuta)"

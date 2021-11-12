@@ -13,15 +13,13 @@ interface PublicOfferingDetailsProps {
   category: Category;
 }
 
-export const PublicOfferingDetails: FunctionComponent<PublicOfferingDetailsProps> = ({
-  offering,
-  category,
-}) => (
-  <div className="publicOfferingDetails m-b">
-    <PublicOfferingDetailsHeader offering={offering} />
-    <PublicOfferingDetailsBreadcrumbs offering={offering} />
-    <PublicOfferingInfo offering={offering} category={category} />
-    <PublicOfferingPricing offering={offering} />
-    <PublicOfferingLocation offering={offering} />
-  </div>
-);
+export const PublicOfferingDetails: FunctionComponent<PublicOfferingDetailsProps> =
+  ({ offering, category }) => (
+    <div className="publicOfferingDetails m-b">
+      <PublicOfferingDetailsHeader offering={offering} />
+      <PublicOfferingDetailsBreadcrumbs offering={offering} />
+      <PublicOfferingInfo offering={offering} category={category} />
+      <PublicOfferingPricing offering={offering} />
+      <PublicOfferingLocation offering={offering} />
+    </div>
+  );

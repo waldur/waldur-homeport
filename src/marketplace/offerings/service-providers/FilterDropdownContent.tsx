@@ -19,33 +19,31 @@ const getCategorySections = async (categoryUuid: string) => {
   return response?.sections;
 };
 
-export const FilterDropdownContent: FunctionComponent<FilterDropdownContentProps> = ({
-  toggle,
-  categoryUuid,
-  closeDropdown,
-}) => {
-  const { loading, error, value: sections } = useAsync(
-    () => getCategorySections(categoryUuid),
-    [categoryUuid],
-  );
-  return (
-    <div
-      className={classNames('filterDropdownContent', {
-        'filterDropdownContent--hidden': !toggle,
-      })}
-    >
-      {loading ? (
-        <LoadingSpinner />
-      ) : error ? (
-        <p> {translate('Unable to load category sections.')}</p>
-      ) : sections && sections.length === 0 ? (
-        <p> {translate("Category doesn't contain sections.")}</p>
-      ) : sections && sections.length > 0 ? (
-        <CategorySectionsFilterForm
-          sections={sections}
-          closeDropdown={closeDropdown}
-        />
-      ) : null}
-    </div>
-  );
-};
+export const FilterDropdownContent: FunctionComponent<FilterDropdownContentProps> =
+  ({ toggle, categoryUuid, closeDropdown }) => {
+    const {
+      loading,
+      error,
+      value: sections,
+    } = useAsync(() => getCategorySections(categoryUuid), [categoryUuid]);
+    return (
+      <div
+        className={classNames('filterDropdownContent', {
+          'filterDropdownContent--hidden': !toggle,
+        })}
+      >
+        {loading ? (
+          <LoadingSpinner />
+        ) : error ? (
+          <p> {translate('Unable to load category sections.')}</p>
+        ) : sections && sections.length === 0 ? (
+          <p> {translate("Category doesn't contain sections.")}</p>
+        ) : sections && sections.length > 0 ? (
+          <CategorySectionsFilterForm
+            sections={sections}
+            closeDropdown={closeDropdown}
+          />
+        ) : null}
+      </div>
+    );
+  };

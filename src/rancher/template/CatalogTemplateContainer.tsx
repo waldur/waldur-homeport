@@ -66,10 +66,10 @@ export const CatalogTemplateContainer: FunctionComponent = () => {
     params: { uuid: projectUuid, catalogUuid, clusterUuid },
   } = useCurrentStateAndParams();
 
-  const state = useAsync(() => loadData(clusterUuid, catalogUuid), [
-    clusterUuid,
-    catalogUuid,
-  ]);
+  const state = useAsync(
+    () => loadData(clusterUuid, catalogUuid),
+    [clusterUuid, catalogUuid],
+  );
 
   useBreadcrumbsFn(
     () =>

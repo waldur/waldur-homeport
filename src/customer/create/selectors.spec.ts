@@ -4,7 +4,7 @@ import { user, staff } from './fixtures';
 import { renderCustomerCreatePrompt } from './selectors';
 
 const check = (param, currentUser) =>
-  renderCustomerCreatePrompt(({
+  renderCustomerCreatePrompt({
     config: {
       plugins: {
         WALDUR_CORE: {
@@ -15,7 +15,7 @@ const check = (param, currentUser) =>
     workspace: {
       user: currentUser,
     },
-  } as unknown) as RootState);
+  } as unknown as RootState);
 
 describe('renderCustomerCreatePrompt', () => {
   it('should return true if user is staff', () => {

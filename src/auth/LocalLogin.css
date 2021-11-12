@@ -1,0 +1,42 @@
+.LoginInput {
+  border-radius: 8px;
+  margin-bottom: 14px;
+  width: 100%;
+  border: 1px solid #9d9d9d;
+  padding: 8px;
+}
+
+.LoginInput:focus {
+  outline: 0;
+  box-shadow: 0px 0px 2px #3a8500;
+}
+
+.LoginSeparator {
+  display: flex;
+  align-items: center;
+  margin: 12px 0px;
+}
+
+.LoginSeparatorBorder {
+  flex-grow: 1;
+  border-bottom: 1px solid #3a8500;
+}
+
+.LoginSeparatorText {
+  margin: 0 18px;
+}
+
+.LoginSubmitButton {
+  background: #3a8500;
+  color: white;
+  text-align: center;
+  border-radius: 12px;
+  padding: 0 8px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  display: flex;
+  width: 100%;
+  border: none;
+}

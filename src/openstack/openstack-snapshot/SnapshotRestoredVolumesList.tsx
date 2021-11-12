@@ -55,6 +55,5 @@ const TableOptions = {
   mapPropsToFilter,
 };
 
-export const SnapshotRestoredVolumesList = connectTable(TableOptions)(
-  TableComponent,
-);
+export const SnapshotRestoredVolumesList =
+  connectTable(TableOptions)(TableComponent);

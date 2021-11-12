@@ -70,16 +70,14 @@ export const getAllOfferings = (options?: {}) =>
   getAll<Offering>('/marketplace-offerings/', options);
 
 export const getOfferingsCount = (options?: {}) =>
-  Axios.head(
-    `${ENV.apiEndpoint}api/marketplace-offerings/`,
-    options,
-  ).then((response) => parseResultCount(response));
+  Axios.head(`${ENV.apiEndpoint}api/marketplace-offerings/`, options).then(
+    (response) => parseResultCount(response),
+  );
 
 export const getResourcesCount = (options?: {}) =>
-  Axios.head(
-    `${ENV.apiEndpoint}api/marketplace-resources/`,
-    options,
-  ).then((response) => parseResultCount(response));
+  Axios.head(`${ENV.apiEndpoint}api/marketplace-resources/`, options).then(
+    (response) => parseResultCount(response),
+  );
 
 export const getProviderOfferings = (customerUuid: string) =>
   getAllOfferings({ params: { customer_uuid: customerUuid } });

@@ -6,7 +6,14 @@ import {
 } from '@waldur/core/constants';
 import { RootState } from '@waldur/store/reducers';
 
-import { User, Customer, Project, WorkspaceType } from './types';
+import {
+  User,
+  Customer,
+  Project,
+  WorkspaceType,
+  CustomerPermission,
+  ProjectPermission,
+} from './types';
 
 export const getUser = (state: RootState): User => state.workspace.user;
 
@@ -15,7 +22,7 @@ export const getCustomer = (state: RootState): Customer =>
 
 export const getUserCustomerPermissions = createSelector(
   getUser,
-  (user: User) => {
+  (user: User): CustomerPermission[] => {
     if (user) {
       return user.customer_permissions;
     }
@@ -25,7 +32,7 @@ export const getUserCustomerPermissions = createSelector(
 
 export const getUserProjectPermissions = createSelector(
   getUser,
-  (user: User) => {
+  (user: User): ProjectPermission[] => {
     if (user) {
       return user.project_permissions;
     }

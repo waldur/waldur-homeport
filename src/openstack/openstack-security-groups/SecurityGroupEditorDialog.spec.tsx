@@ -83,8 +83,7 @@ describe('SecurityGroupEditorDialog', () => {
     expect(dialog.ethertype).toBe('IPv4');
     expect(dialog.direction).toBe('egress');
     expect(dialog.protocol).toBe('tcp');
-    expect(dialog.fromPort).toBe('80');
-    expect(dialog.toPort).toBe('80');
+    expect(dialog.portRange).toBe('80');
     expect(dialog.cidr).toBe('192.168.42.0/24');
     expect(dialog.description).toBe('');
   });
@@ -108,8 +107,7 @@ describe('SecurityGroupEditorDialog', () => {
     expect(dialog.ethertype).toBe('IPv4');
     expect(dialog.direction).toBe('ingress');
     expect(dialog.protocol).toBe('icmp');
-    expect(dialog.fromPort).toBe('-1');
-    expect(dialog.toPort).toBe('-1');
+    expect(dialog.portRange).toBe('');
     expect(dialog.cidr).toBe('');
     expect(dialog.description).toBe('');
   });
@@ -150,15 +148,15 @@ describe('SecurityGroupEditorDialog', () => {
     expect(dialog.cidrIsInvalid).toBe(false);
   });
 
-  it('checks from port max value for ICMP protocol', async () => {
+  it('checks port max value for ICMP protocol', async () => {
     const dialog = new DialogFixture(store);
     await dialog.render();
     await dialog.update();
 
-    expect(dialog.fromPortIsInvalid).toBe(false);
-    dialog.fromPort = 999;
+    expect(dialog.portRangeIsInvalid).toBe(false);
+    dialog.portRange = '999';
     dialog.protocol = 'icmp';
-    expect(dialog.fromPortIsInvalid).toBe(true);
+    expect(dialog.portRangeIsInvalid).toBe(true);
   });
 
   it('checks that to port is greater then from port', async () => {
@@ -166,22 +164,10 @@ describe('SecurityGroupEditorDialog', () => {
     await dialog.render();
     await dialog.update();
 
-    expect(dialog.toPortIsInvalid).toBe(false);
+    expect(dialog.portRangeIsInvalid).toBe(false);
     dialog.protocol = 'tcp';
-    dialog.fromPort = 80;
-    dialog.toPort = 50;
-    expect(dialog.toPortIsInvalid).toBe(true);
-  });
-
-  it('checks to port max value for ICMP protocol', async () => {
-    const dialog = new DialogFixture(store);
-    await dialog.render();
-    await dialog.update();
-
-    expect(dialog.toPortIsInvalid).toBe(false);
-    dialog.toPort = 999;
-    dialog.protocol = 'icmp';
-    expect(dialog.toPortIsInvalid).toBe(true);
+    dialog.portRange = '80-50';
+    expect(dialog.portRangeIsInvalid).toBe(true);
   });
 
   it('allows to use any port range with any protocol', async () => {
@@ -190,10 +176,8 @@ describe('SecurityGroupEditorDialog', () => {
     await dialog.update();
 
     dialog.protocol = 'any';
-    dialog.fromPort = -1;
-    dialog.toPort = -1;
-    expect(dialog.fromPortIsInvalid).toBe(false);
-    expect(dialog.toPortIsInvalid).toBe(false);
+    dialog.portRange = '';
+    expect(dialog.portRangeIsInvalid).toBe(false);
   });
 
   it('allows to use any port range with TCP protocol', async () => {
@@ -202,10 +186,8 @@ describe('SecurityGroupEditorDialog', () => {
     await dialog.update();
 
     dialog.protocol = 'tcp';
-    dialog.fromPort = -1;
-    dialog.toPort = -1;
-    expect(dialog.fromPortIsInvalid).toBe(false);
-    expect(dialog.toPortIsInvalid).toBe(false);
+    dialog.portRange = '';
+    expect(dialog.portRangeIsInvalid).toBe(false);
   });
 
   it('allows to use any port range with UDP protocol', async () => {
@@ -214,30 +196,8 @@ describe('SecurityGroupEditorDialog', () => {
     await dialog.update();
 
     dialog.protocol = 'udp';
-    dialog.fromPort = -1;
-    dialog.toPort = -1;
-    expect(dialog.fromPortIsInvalid).toBe(false);
-    expect(dialog.toPortIsInvalid).toBe(false);
-  });
-
-  it('validates to port as required', async () => {
-    const dialog = new DialogFixture(store);
-    await dialog.render();
-    await dialog.update();
-
-    expect(dialog.toPortIsInvalid).toBe(false);
-    dialog.toPort = '';
-    expect(dialog.toPortIsInvalid).toBe(false);
-  });
-
-  it('validates from port as required', async () => {
-    const dialog = new DialogFixture(store);
-    await dialog.render();
-    await dialog.update();
-
-    expect(dialog.fromPortIsInvalid).toBe(false);
-    dialog.fromPort = '';
-    expect(dialog.fromPortIsInvalid).toBe(false);
+    dialog.portRange = '';
+    expect(dialog.portRangeIsInvalid).toBe(false);
   });
 
   it('disables submit button when form is being submitted', async () => {

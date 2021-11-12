@@ -15,7 +15,7 @@ export const CreateSubnetDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create subnet')}
-      fields={[
+      formFields={[
         ...getFields(),
         {
           name: 'disable_gateway',

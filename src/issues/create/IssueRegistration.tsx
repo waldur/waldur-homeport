@@ -71,9 +71,11 @@ export const IssueRegistration = reduxForm<IssueFormData, OwnProps>({
     [dispatch],
   );
 
-  const { loading, error, value: priorities } = useAsync(() =>
-    getAll<Priority>('/support-priorities/'),
-  );
+  const {
+    loading,
+    error,
+    value: priorities,
+  } = useAsync(() => getAll<Priority>('/support-priorities/'));
 
   if (loading) {
     return <LoadingSpinner />;

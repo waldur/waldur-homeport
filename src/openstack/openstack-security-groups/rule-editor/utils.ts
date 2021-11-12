@@ -27,9 +27,9 @@ export const getPortMax = (rule: Rule) => {
 
 const FORM_NAME = 'securityGroupRuleEdit';
 
-export const getRuleSelector = (formName: string, name: string) => (
-  state: RootState,
-) => formValueSelector(formName)(state, name) as Rule;
+export const getRuleSelector =
+  (formName: string, name: string) => (state: RootState) =>
+    formValueSelector(formName)(state, name) as Rule;
 
 type OwnProps = ReturnType<typeof useRulesEditor>;
 
@@ -54,9 +54,11 @@ export const useRulesEditor = (resource: SecurityGroup) => {
     try {
       await setSecurityGroupRules(
         resource.uuid,
-        formData.rules.map((rule) => ({
-          ...rule,
-          protocol: rule.protocol === 'any' ? '' : rule.protocol,
+        formData.rules.map(({ protocol, port_range, ...rest }) => ({
+          ...rest,
+          protocol: protocol === 'any' ? '' : protocol,
+          from_port: port_range.min,
+          to_port: port_range.max,
         })),
       );
       dispatch(
@@ -78,6 +80,14 @@ export const useRulesEditor = (resource: SecurityGroup) => {
     asyncState,
     submitRequest,
     resource,
-    initialValues: { rules: resource.rules },
+    initialValues: {
+      rules: resource.rules.map(({ from_port, to_port, ...rest }) => ({
+        ...rest,
+        port_range: {
+          min: from_port,
+          max: to_port,
+        },
+      })),
+    },
   };
 };

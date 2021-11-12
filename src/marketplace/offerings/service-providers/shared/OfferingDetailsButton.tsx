@@ -9,17 +9,16 @@ interface OfferingDetailsButtonProps {
   offering: Offering;
 }
 
-export const OfferingDetailsButton: FunctionComponent<OfferingDetailsButtonProps> = ({
-  offering,
-}) => (
-  <div className="offeringDetailsButton m-b">
-    <Link
-      state="marketplace-public-offering.details"
-      params={{ uuid: offering.uuid }}
-    >
-      <button type="button" className="btn btn-default btn-card">
-        {translate('Details')}
-      </button>
-    </Link>
-  </div>
-);
+export const OfferingDetailsButton: FunctionComponent<OfferingDetailsButtonProps> =
+  ({ offering }) => (
+    <div className="offeringDetailsButton m-b">
+      <Link
+        state="marketplace-public-offering.details"
+        params={{ uuid: offering.uuid }}
+      >
+        <button type="button" className="btn btn-default btn-card">
+          {translate('Details')}
+        </button>
+      </Link>
+    </div>
+  );

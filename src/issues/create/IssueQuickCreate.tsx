@@ -84,9 +84,10 @@ export const ProjectGroup = ({ disabled, customer, formId }) => {
   const dispatch = useDispatch();
   const projectRequired = useSelector(projectRequiredSelector);
 
-  const loadOptions = useCallback((name) => refreshProjects(name, customer), [
-    customer,
-  ]);
+  const loadOptions = useCallback(
+    (name) => refreshProjects(name, customer),
+    [customer],
+  );
 
   useEffect(() => {
     dispatch(change(formId, 'project', undefined));
@@ -125,9 +126,10 @@ export const ProjectGroup = ({ disabled, customer, formId }) => {
 
 export const ResourceGroup = ({ disabled, project, formId }) => {
   const dispatch = useDispatch();
-  const loadData = useCallback((name) => refreshResources(name, project), [
-    project,
-  ]);
+  const loadData = useCallback(
+    (name) => refreshResources(name, project),
+    [project],
+  );
 
   useEffect(() => {
     dispatch(change(formId, 'resource', undefined));

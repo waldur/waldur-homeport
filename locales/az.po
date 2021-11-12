@@ -29,12 +29,6 @@ msgstr "Giriş"
 msgid "Access token"
 msgstr "Giriş token"
 
-msgid "Account activation"
-msgstr "Hesabatın aktiv edilməsi"
-
-msgid "Account has been activated."
-msgstr "Hesab aktiv edildi."
-
 msgid "Account removal"
 msgstr "Hesabın silinməsi"
 
@@ -308,9 +302,6 @@ msgstr "Konfiqurasiya etmək"
 msgid "Confirm deletion?"
 msgstr "Silinməni təsdiqləmək?"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "Təsdiq mesajı göndərilib. Zəhmət olmazsa, daxil olanlar qutusuna baxın.  "
-
 msgid "Connect"
 msgstr "Birləşdirmək"
 
@@ -337,9 +328,6 @@ msgstr "Ölkə "
 
 msgid "Create"
 msgstr "Yaratmaq "
-
-msgid "Create an account"
-msgstr "Hesab yaratmaq  "
 
 msgid "Create application"
 msgstr "Proqram tətbiqi yaratmaq "
@@ -475,9 +463,6 @@ msgstr "Verilənlərin həcmini söndürmək"
 
 msgid "Disable profile"
 msgstr "Profili söndürmək"
-
-msgid "Do not have an account?"
-msgstr "Hesabınız yoxdur?"
 
 msgid "Do you really want to delete comment?"
 msgstr "Siz həqiqətən də şərhi silmək istəyirisiniz?"
@@ -692,9 +677,6 @@ msgstr "FreeIPA hesabı qurulmalıdır"
 msgid "From"
 msgstr "Kimdən"
 
-msgid "From port"
-msgstr "Portdan "
-
 msgid "Full name"
 msgstr "Tam adı "
 
@@ -871,9 +853,6 @@ msgstr "Dəvət etibarlı deyil."
 
 msgid "Invitation is not valid anymore."
 msgstr "Dəvət artıq etibarlı deyil."
-
-msgid "Invitation token is not found."
-msgstr "Dəvət işarəsi tapılmadı."
 
 msgid "Invitations"
 msgstr "Dəvətlər"
@@ -1448,12 +1427,6 @@ msgstr "Təzələmək"
 msgid "Region name"
 msgstr "Region adı"
 
-msgid "Register"
-msgstr "Qeydiyyatdan keçin"
-
-msgid "Register to"
-msgstr "---- qeydiyyatdan keçin"
-
 msgid "Registration code"
 msgstr "Qeydiyyat kodu"
 
@@ -1751,6 +1724,9 @@ msgstr "{sliceStart} girişlərindən {sliceEnd}-dan {resultCount}-a kimi göst�
 msgid "Sign in"
 msgstr "Daxil ol"
 
+msgid "Sign in with {label}"
+msgstr "{label} ilə daxil ol"
+
 msgid "Size"
 msgstr "Ölçü"
 
@@ -1946,9 +1922,6 @@ msgstr "Kimə"
 msgid "To get your clouds under control, please fill in your data."
 msgstr "Buludlarınızı nəzarətə almaq üçün, məlumatlarınızı doldurun."
 
-msgid "To port"
-msgstr "Porta "
-
 msgid "To remove account, please send a request to {support}."
 msgstr "Hesabı silmək üçün, {support} üçün sorğu göndərin."
 
@@ -1978,9 +1951,6 @@ msgstr "URL (resursun vahid göstərici)"
 
 msgid "UUID"
 msgstr "UUID (universal unikal idenifikator)"
-
-msgid "Unable to activate account."
-msgstr "Hesabı aktivləşdirmək olmur."
 
 msgid "Unable to authenticate using Mobile ID."
 msgstr "Mobil ID istifadə edərək identifikasiya təsdiqlənməsi edilə bilmir."
@@ -2047,9 +2017,6 @@ msgstr "Provayderi yeniləmək mümkün deyil."
 
 msgid "Unable to upload attachment."
 msgstr "Əlavəni yükləmək mümkün deyil."
-
-msgid "Unable to validate invitation token."
-msgstr "Dəvət işarəsini təsdiqləmək olmur."
 
 msgid "Unexpected exception happened during login process."
 msgstr "Giriş prosesində gözlənilməyən istisna baş verdi."
@@ -2326,9 +2293,6 @@ msgstr "Dəvətiniz işlənilir."
 
 msgid "Your invitation was accepted."
 msgstr "Dəvətiniz qəbul edildi."
-
-msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr "Bütün bulud xidmətləriniz üçün tək nəzarət paneli. Bunu hərəkətdə görmək üçün daxil olun."
 
 msgid "(VAT is not included)"
 msgstr "(ƏDV daxil deyil)"

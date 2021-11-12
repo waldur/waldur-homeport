@@ -50,28 +50,28 @@ const onExport = (offeringName, rows) => {
   exportExcel(filename, data);
 };
 
-export const ExportFullPriceList: FunctionComponent<ExportFullPriceListProps> = ({
-  offering,
-}) => {
-  const { loading, error, value: components } = useAsync(
-    () => fetchPlanComponents(offering.uuid),
-    [offering],
-  );
-  return (
-    <div className="exportFullPriceList">
-      {loading ? (
-        <LoadingSpinner />
-      ) : error ? (
-        <>{translate('Unable to load full price list')}</>
-      ) : components ? (
-        <div
-          className="exportFullPriceList__download"
-          onClick={() => onExport(offering.name, components)}
-        >
-          <i className="fa fa-download" />
-          {translate('Download full price list')}
-        </div>
-      ) : null}
-    </div>
-  );
-};
+export const ExportFullPriceList: FunctionComponent<ExportFullPriceListProps> =
+  ({ offering }) => {
+    const {
+      loading,
+      error,
+      value: components,
+    } = useAsync(() => fetchPlanComponents(offering.uuid), [offering]);
+    return (
+      <div className="exportFullPriceList">
+        {loading ? (
+          <LoadingSpinner />
+        ) : error ? (
+          <>{translate('Unable to load full price list')}</>
+        ) : components ? (
+          <div
+            className="exportFullPriceList__download"
+            onClick={() => onExport(offering.name, components)}
+          >
+            <i className="fa fa-download" />
+            {translate('Download full price list')}
+          </div>
+        ) : null}
+      </div>
+    );
+  };

@@ -5,7 +5,7 @@ import { renderServiceProvider } from './selectors';
 
 describe('renderServiceProvider', () => {
   it('should return true if user is staff', () => {
-    const state = ({
+    const state = {
       config: {
         plugins: {
           WALDUR_MARKETPLACE: {
@@ -16,12 +16,12 @@ describe('renderServiceProvider', () => {
       workspace: {
         user: staff,
       },
-    } as unknown) as RootState;
+    } as unknown as RootState;
     expect(renderServiceProvider(state)).toEqual(true);
   });
 
   it('should return true if serviceProvider feature is enabled and user is staff', () => {
-    const state = ({
+    const state = {
       config: {
         featuresVisible: true,
         plugins: {
@@ -33,12 +33,12 @@ describe('renderServiceProvider', () => {
       workspace: {
         user: staff,
       },
-    } as unknown) as RootState;
+    } as unknown as RootState;
     expect(renderServiceProvider(state)).toEqual(true);
   });
 
   it('should return false if -OWNER_CAN_REGISTER_SERVICE_PROVIDER- is false and user is not staff', () => {
-    const state = ({
+    const state = {
       config: {
         featuresVisible: true,
         plugins: {
@@ -50,7 +50,7 @@ describe('renderServiceProvider', () => {
       workspace: {
         user,
       },
-    } as unknown) as RootState;
+    } as unknown as RootState;
     expect(renderServiceProvider(state)).toEqual(false);
   });
 });

@@ -38,12 +38,6 @@ msgstr "نشانه دسترسی"
 msgid "Accessible to all customers."
 msgstr "قابل دسترسی برای همه مشتریان."
 
-msgid "Account activation"
-msgstr "فعال سازی حساب"
-
-msgid "Account has been activated."
-msgstr "حساب ایجاد شده است."
-
 msgid "Account removal"
 msgstr "حذف حساب"
 
@@ -632,9 +626,6 @@ msgstr "حذف را تایید میکنید؟"
 msgid "Confirmation"
 msgstr "تاییدیه"
 
-msgid "Confirmation mail has been sent. Please check your inbox!"
-msgstr "ایمیل تاییدیه ارسال شده است.لطفا صندوق ورودی خودرا چک نمایید."
-
 msgid "Connect"
 msgstr "اتصال"
 
@@ -679,9 +670,6 @@ msgstr "ایجاد کردن تصویر VM برای OpenStack instance"
 
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr "ایجاد کردن تصویر برنامه VM برای OpenStack instance"
-
-msgid "Create an account"
-msgstr "یک حساب ایجاد کنید."
 
 msgid "Create application"
 msgstr "برنامه ایجاد کنید."
@@ -895,9 +883,6 @@ msgstr "نمایش نام"
 
 msgid "Do not configure a gateway for this subnet"
 msgstr "gateway را برای این subnet پیکربندی نکنید"
-
-msgid "Do not have an account?"
-msgstr "حساب کاربری ندارید؟"
 
 msgid "Do you really want to delete comment?"
 msgstr "آیا واقعا میخواهید یادداشت ها را حذف کنید؟"
@@ -1226,9 +1211,6 @@ msgstr "حساب FreeIPA باید تنظیم شود."
 msgid "From"
 msgstr "از"
 
-msgid "From port"
-msgstr "از پورت"
-
 msgid "Full description"
 msgstr "توضیحات کامل"
 
@@ -1426,9 +1408,6 @@ msgstr "لینک دعوت"
 
 msgid "Invitation rejection"
 msgstr "رد دعوت"
-
-msgid "Invitation token is not found."
-msgstr "نشانه دعوت یافت نشد."
 
 msgid "Invitations"
 msgstr "دعوت ها"

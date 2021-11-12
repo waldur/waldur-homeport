@@ -24,7 +24,7 @@ export const AttachVolumeDialog = ({ resolve: { resource } }) => {
   return (
     <ResourceActionDialog
       dialogTitle={translate('Attach volume')}
-      fields={[
+      formFields={[
         {
           name: 'volume',
           label: translate('Volume'),

@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { Col, Panel, PanelGroup, Row } from 'react-bootstrap';
 
+import { formatDate } from '@waldur/core/dateUtils';
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getDetailsComponent } from '@waldur/marketplace/common/registry';
@@ -33,6 +34,14 @@ let OrderItemDetails = (
               <Panel.Title toggle={true}>{translate('Summary')}</Panel.Title>
             </Panel.Heading>
             <Panel.Body collapsible={true}>
+              <OrderItemDetailsField label={translate('Project name')}>
+                {props.orderItem.project_name}
+              </OrderItemDetailsField>
+              {props.orderItem.project_description && (
+                <OrderItemDetailsField label={translate('Project description')}>
+                  {props.orderItem.project_description}
+                </OrderItemDetailsField>
+              )}
               <OrderItemDetailsField label={translate('Description')}>
                 <OrderItemSummary
                   orderItem={props.orderItem}
@@ -70,6 +79,16 @@ let OrderItemDetails = (
                     uuid={props.orderItem.uuid}
                     loadData={props.loadData}
                   />
+                </OrderItemDetailsField>
+              )}
+              {props.orderItem.reviewed_by && (
+                <OrderItemDetailsField label={translate('Reviewed by')}>
+                  {props.orderItem.reviewed_by}
+                </OrderItemDetailsField>
+              )}
+              {props.orderItem.reviewed_at && (
+                <OrderItemDetailsField label={translate('Reviewed at')}>
+                  {formatDate(props.orderItem.reviewed_at)}
                 </OrderItemDetailsField>
               )}
             </Panel.Body>

@@ -25,9 +25,10 @@ export const ProviderDetails: FunctionComponent = () => {
     params: { customer_uuid },
   } = useCurrentStateAndParams();
 
-  const { loading, value, error } = useAsync(() => loadData(customer_uuid), [
-    customer_uuid,
-  ]);
+  const { loading, value, error } = useAsync(
+    () => loadData(customer_uuid),
+    [customer_uuid],
+  );
 
   useTitle(value ? value.provider.name : translate('Provider details'));
 
