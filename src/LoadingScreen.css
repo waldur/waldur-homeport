@@ -7,7 +7,7 @@
 .loading-screen img {
   display: block;
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 300px;
 }
 .loading-title {
   color: #676a6c;
