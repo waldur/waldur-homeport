@@ -3914,7 +3914,7 @@ msgid "Loading actions"
 msgstr ""
 
 #: src/LoadingScreen.tsx
-msgid "Loading assets, please wait."
+msgid "Loading assets"
 msgstr ""
 
 #: src/customer/payments/InvoicesDropdown.tsx
