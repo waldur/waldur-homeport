@@ -1,0 +1,25 @@
+[
+    {
+        "url": "/api/user-invitations/bf6d515c9e6e445f9c339021b30fc96b/",
+        "uuid": "bf6d515c9e6e445f9c339021b30fc96b",
+        "email": "test@test.com",
+        "civil_number": "",
+        "project": null,
+        "project_role": null,
+        "customer": "/api/customers/bf6d515c9e6e445f9c339021b30fc96b/",
+        "customer_role": "owner",
+        "customer_name": "Allen-Rodriguez",
+        "state": "pending",
+        "error_message": "",
+        "created": "2021-11-12T10:14:08.476881Z",
+        "expires": "2021-11-19T10:14:08.476881Z",
+        "created_by_full_name": "Admin",
+        "created_by_username": "adminuser",
+        "full_name": "",
+        "native_name": "",
+        "tax_number": "",
+        "phone_number": "",
+        "organization": "",
+        "job_title": ""
+    }
+]

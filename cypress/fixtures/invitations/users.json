@@ -1,0 +1,122 @@
+[
+    {
+        "url": "/api/users/3f153be7a4804b3abcbc4a607b3ac136/",
+        "uuid": "3f153be7a4804b3abcbc4a607b3ac136",
+        "username": "adminuser",
+        "full_name": "Admin",
+        "email": "example@example.com",
+        "role": "owner",
+        "permission": "/api/customer-permissions/261/",
+        "projects": [],
+        "is_service_manager": true,
+        "expiration_time": null
+    },
+    {
+        "url": "/api/users/85c459fc9b3449cbabcd614bae5341fd/",
+        "uuid": "85c459fc9b3449cbabcd614bae5341fd",
+        "username": "ef0ebb9f594045a4ad6aa4dc3ac5cee8",
+        "full_name": "Adrian Little",
+        "email": "AdrianLittle@example.com",
+        "role": "service_manager",
+        "permission": "/api/customer-permissions/268/",
+        "projects": [],
+        "is_service_manager": true,
+        "expiration_time": null
+    },
+    {
+        "url": "/api/users/199a885c881b450ea041e8638893a344/",
+        "uuid": "199a885c881b450ea041e8638893a344",
+        "username": "6b865e600027437aa800dbb93309ab17",
+        "full_name": "Adrian Nolan",
+        "email": "AdrianNolan@example.com",
+        "role": "service_manager",
+        "permission": "/api/customer-permissions/269/",
+        "projects": [],
+        "is_service_manager": true,
+        "expiration_time": null
+    },
+    {
+        "url": "/api/users/31c43cc38b27407fb9d27de160e1ff27/",
+        "uuid": "31c43cc38b27407fb9d27de160e1ff27",
+        "username": "d134f5279cb94f27a391606e9eea4b7c",
+        "full_name": "Alan Williams",
+        "email": "AlanWilliams@example.com",
+        "role": "service_manager",
+        "permission": "/api/customer-permissions/270/",
+        "projects": [],
+        "is_service_manager": true,
+        "expiration_time": null
+    },
+    {
+        "url": "/api/users/34aee018014444ec89e7fa44c5aa88ea/",
+        "uuid": "34aee018014444ec89e7fa44c5aa88ea",
+        "username": "3abf689951af4353ae55ada71f0324ac",
+        "full_name": "David Gross",
+        "email": "DavidGross@example.com",
+        "role": "owner",
+        "permission": "/api/customer-permissions/232/",
+        "projects": [],
+        "is_service_manager": false,
+        "expiration_time": null
+    },
+    {
+        "url": "/api/users/799a322ed5ac4779bc598a8e18bb8b86/",
+        "uuid": "799a322ed5ac4779bc598a8e18bb8b86",
+        "username": "f87b5b2e072149059a43f89dce465e6e",
+        "full_name": "Jessica Edwards",
+        "email": "JessicaEdwards@example.com",
+        "role": "owner",
+        "permission": "/api/customer-permissions/238/",
+        "projects": [],
+        "is_service_manager": true,
+        "expiration_time": null
+    },
+    {
+        "url": "/api/users/7f529cbab44c42729169d0439697da7e/",
+        "uuid": "7f529cbab44c42729169d0439697da7e",
+        "username": "98327ba480e7431e9f8a5870d603bc40",
+        "full_name": "Laura Molina",
+        "email": "LauraMolina@example.com",
+        "role": "owner",
+        "permission": "/api/customer-permissions/239/",
+        "projects": [],
+        "is_service_manager": false,
+        "expiration_time": null
+    },
+    {
+        "url": "/api/users/76b86ca234ce40d2a256391ec02e29bb/",
+        "uuid": "76b86ca234ce40d2a256391ec02e29bb",
+        "username": "713ac58a6fad42e29e5fdc8a342502a0",
+        "full_name": "Nancy Beard",
+        "email": "NancyBeard@example.com",
+        "role": "owner",
+        "permission": "/api/customer-permissions/236/",
+        "projects": [],
+        "is_service_manager": false,
+        "expiration_time": null
+    },
+    {
+        "url": "/api/users/d0caf273c5694c5caf01278725ba527b/",
+        "uuid": "d0caf273c5694c5caf01278725ba527b",
+        "username": "155c8d19396f4d3680cfadb79d261d8a",
+        "full_name": "Robert Norman DDS",
+        "email": "RobertNormanDDS@example.com",
+        "role": "owner",
+        "permission": "/api/customer-permissions/235/",
+        "projects": [],
+        "is_service_manager": false,
+        "expiration_time": null
+    },
+    {
+        "url": "/api/users/879f6afebfdb44f3af257ba63da3c80b/",
+        "uuid": "879f6afebfdb44f3af257ba63da3c80b",
+        "username": "3aa9aaa270604012aa35c4a06487bf24",
+        "full_name": "Shirley Pennington",
+        "email": "ShirleyPennington@example.com",
+        "role": "owner",
+        "permission": "/api/customer-permissions/237/",
+        "projects": [],
+        "is_service_manager": false,
+        "expiration_time": null
+    }
+]
