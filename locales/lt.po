@@ -2171,9 +2171,6 @@ msgstr "Įkeliama"
 msgid "Loading actions"
 msgstr "Įkeliami veiksmai"
 
-msgid "Loading assets, please wait."
-msgstr "Įkeliamas turtas, palaukite."
-
 msgid "Loading invoices"
 msgstr "Įkeliamos sąskaitos faktūros"
 

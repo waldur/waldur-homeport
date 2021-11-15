@@ -2129,9 +2129,6 @@ msgstr "Laddar"
 msgid "Loading actions"
 msgstr "Laddning åtgärder"
 
-msgid "Loading assets, please wait."
-msgstr "Laddar tillgångar, vänta."
-
 msgid "Loading invoices"
 msgstr "Laddar fakturor"
 

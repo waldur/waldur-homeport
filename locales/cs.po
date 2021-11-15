@@ -2171,9 +2171,6 @@ msgstr "Načítání"
 msgid "Loading actions"
 msgstr "Načítání akcí"
 
-msgid "Loading assets, please wait."
-msgstr "Načítají se aktiva, počkejte prosím."
-
 msgid "Loading invoices"
 msgstr "Načítání faktur"
 

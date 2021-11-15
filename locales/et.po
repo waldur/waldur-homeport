@@ -1928,9 +1928,6 @@ msgstr "Laadimine..."
 msgid "Loading actions"
 msgstr "Tegevuste laadimine"
 
-msgid "Loading assets, please wait."
-msgstr "Varade laadimine, palun oodake."
-
 msgid "Loading invoices"
 msgstr "Arvete laadimine"
 

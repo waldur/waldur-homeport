@@ -2171,9 +2171,6 @@ msgstr "Indlæser"
 msgid "Loading actions"
 msgstr "Indlæsning af handlinger"
 
-msgid "Loading assets, please wait."
-msgstr "Indlæser aktiver, vent venligst."
-
 msgid "Loading invoices"
 msgstr "Indlæsning af fakturaer"
 

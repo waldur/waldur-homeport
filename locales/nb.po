@@ -2171,9 +2171,6 @@ msgstr "Laster"
 msgid "Loading actions"
 msgstr "Laste inn handlinger"
 
-msgid "Loading assets, please wait."
-msgstr "Laster eiendeler, vennligst vent."
-
 msgid "Loading invoices"
 msgstr "Laster inn fakturaer"
 

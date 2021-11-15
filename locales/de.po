@@ -2171,9 +2171,6 @@ msgstr "Laden"
 msgid "Loading actions"
 msgstr "Aktionen werden geladen"
 
-msgid "Loading assets, please wait."
-msgstr "Laden Von Assets, bitte warten."
-
 msgid "Loading invoices"
 msgstr "Laden von Rechnungen"
 
