@@ -1,5 +1,5 @@
 import type { EventInput, EventApi } from '@fullcalendar/core';
-import uniqueId from 'lodash.uniqueid';
+import { uniqueId } from 'lodash';
 import { DateTime, Duration } from 'luxon';
 
 import {

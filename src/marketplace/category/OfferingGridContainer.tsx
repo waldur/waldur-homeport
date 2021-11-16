@@ -1,4 +1,4 @@
-import debounce from 'lodash.debounce';
+import { debounce } from 'lodash';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
