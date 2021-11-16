@@ -1,4 +1,5 @@
 import { FunctionComponent, useEffect, useState } from 'react';
+// import { FunctionComponent, useState } from 'react';
 
 import { CategoriesListHeader } from '@waldur/marketplace/offerings/service-providers/CategoriesListHeader';
 import { Category } from '@waldur/marketplace/types';
@@ -23,6 +24,9 @@ export const CategoriesList: FunctionComponent<CategoriesListProps> = ({
   };
 
   useEffect(() => {
+    if (selectedCategory == null) {
+      return;
+    }
     onCategoryChange(selectedCategory);
   }, [onCategoryChange, selectedCategory]);
 
@@ -30,7 +34,7 @@ export const CategoriesList: FunctionComponent<CategoriesListProps> = ({
     <div className="categoriesListContainer">
       <CategoriesListHeader
         categories={categories}
-        onClearCategoriesFilter={() => setSelectedCategory(null)}
+        onClearCategoriesFilter={() => setSelectedCategory('')}
       />
       <ul>
         {categories.map((category: Category, i: number) => (
