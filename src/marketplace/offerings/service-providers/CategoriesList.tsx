@@ -1,5 +1,4 @@
 import { FunctionComponent, useEffect, useState } from 'react';
-// import { FunctionComponent, useState } from 'react';
 
 import { CategoriesListHeader } from '@waldur/marketplace/offerings/service-providers/CategoriesListHeader';
 import { Category } from '@waldur/marketplace/types';
