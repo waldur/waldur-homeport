@@ -1,4 +1,4 @@
-import debounce from 'lodash.debounce';
+import { debounce } from 'lodash';
 import { Component } from 'react';
 
 import { TranslateProps } from '@waldur/i18n';

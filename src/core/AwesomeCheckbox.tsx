@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import uniqueId from 'lodash.uniqueid';
+import { uniqueId } from 'lodash';
 import React, { FunctionComponent } from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';

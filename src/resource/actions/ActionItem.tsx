@@ -1,4 +1,4 @@
-import uniqueId from 'lodash.uniqueid';
+import { uniqueId } from 'lodash';
 import { FC } from 'react';
 import { MenuItem } from 'react-bootstrap';
 
