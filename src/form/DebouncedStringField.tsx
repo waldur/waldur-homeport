@@ -1,4 +1,4 @@
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash';
 import { FunctionComponent, useState } from 'react';
 
 import { FormField } from '@waldur/form/types';

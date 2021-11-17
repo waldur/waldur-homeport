@@ -62,6 +62,12 @@ module.exports = {
                       libraryName: 'react-use',
                       camel2DashComponentName: false,
                     },
+                    {
+                      style: false,
+                      libraryName: 'lodash',
+                      libraryDirectory: null,
+                      camel2DashComponentName: false,
+                    },
                   ]),
                 ],
               }),
