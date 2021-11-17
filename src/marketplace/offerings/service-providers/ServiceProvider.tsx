@@ -25,9 +25,7 @@ export const ServiceProvider: FunctionComponent<ServiceProviderProps> = ({
         <ServiceProviderOfferingsCategoriesFilter
           serviceProviderUuid={serviceProvider.customer_uuid}
           onQueryFilterChange={(q: string) => setQueryFilter(q)}
-          onCategoryChange={(newCategory: string) =>
-            setCategoryFilter(newCategory)
-          }
+          onCategoryChange={setCategoryFilter}
         />
         <div className="serviceProvider__grid">
           {categoryFilter && (
