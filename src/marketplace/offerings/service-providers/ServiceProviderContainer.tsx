@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
+import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
@@ -15,15 +15,17 @@ export const ServiceProviderContainer: FunctionComponent = () => {
   const {
     params: { uuid },
   } = useCurrentStateAndParams();
-  const {
-    loading,
-    error,
-    value: serviceProvider,
-  } = useAsync(() =>
-    getServiceProviderByCustomer({
-      customer_uuid: uuid,
-    }),
-  );
+  const [{ loading, error, value: serviceProvider }, refreshServiceProvider] =
+    useAsyncFn(() =>
+      getServiceProviderByCustomer({
+        customer_uuid: uuid,
+      }),
+    );
+
+  useEffectOnce(() => {
+    refreshServiceProvider();
+  });
+
   return loading ? (
     <LoadingSpinner />
   ) : error ? (
@@ -31,7 +33,10 @@ export const ServiceProviderContainer: FunctionComponent = () => {
   ) : serviceProvider ? (
     <>
       <AnonymousHeader />
-      <ServiceProvider serviceProvider={serviceProvider} />
+      <ServiceProvider
+        serviceProvider={serviceProvider}
+        refreshServiceProvider={refreshServiceProvider}
+      />
     </>
   ) : (
     <InvalidRoutePage />

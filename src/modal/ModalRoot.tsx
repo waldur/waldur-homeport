@@ -47,6 +47,8 @@ export const ModalRoot: FunctionComponent = () => {
       onHide={onHide}
       bsSize={modalProps?.size}
       backdrop={modalProps?.backdrop}
+      style={modalProps?.modalStyle}
+      dialogClassName={modalProps?.dialogClassName}
     >
       <ErrorBoundary fallback={ErrorMessage}>
         {modalComponent

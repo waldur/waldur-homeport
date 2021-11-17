@@ -2,16 +2,19 @@ import { FunctionComponent } from 'react';
 
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
 import { ServiceProvider } from '@waldur/marketplace/types';
+
 import './ServiceProviderHeader.scss';
+import { ServiceProviderEditorButton } from './ServiceProviderEditorButton';
 
 const GeorgiaNature = require('./georgia-nature.jpg');
 
 interface ServiceProviderHeaderProps {
   serviceProvider: ServiceProvider;
+  refreshServiceProvider(): void;
 }
 
 export const ServiceProviderHeader: FunctionComponent<ServiceProviderHeaderProps> =
-  ({ serviceProvider }) => (
+  ({ serviceProvider, refreshServiceProvider }) => (
     <div
       className="serviceProviderHeaderContainer"
       style={{
@@ -23,6 +26,10 @@ export const ServiceProviderHeader: FunctionComponent<ServiceProviderHeaderProps
       <div className="serviceProviderHeaderContainer__card">
         <div className="serviceProviderHeaderContainer__card__info">
           <h2>
+            <ServiceProviderEditorButton
+              provider={serviceProvider}
+              refreshServiceProvider={refreshServiceProvider}
+            />
             {serviceProvider.customer_abbreviation ||
               serviceProvider.customer_name}
           </h2>
