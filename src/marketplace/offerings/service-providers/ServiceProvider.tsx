@@ -1,11 +1,12 @@
 import { FunctionComponent, useState } from 'react';
 
-import { ServiceProviderBreadcrumbs } from '@waldur/marketplace/offerings/service-providers/ServiceProviderBreadcrumbs';
-import { ServiceProviderHeader } from '@waldur/marketplace/offerings/service-providers/ServiceProviderHeader';
-import { ServiceProviderOfferingsCategoriesFilter } from '@waldur/marketplace/offerings/service-providers/ServiceProviderOfferingsCategoriesFilter';
-import { ServiceProviderOfferingsFilterBar } from '@waldur/marketplace/offerings/service-providers/ServiceProviderOfferingsFilterBar';
-import { ServiceProviderOfferingsGrid } from '@waldur/marketplace/offerings/service-providers/ServiceProviderOfferingsGrid';
 import { ServiceProvider as ServiceProviderType } from '@waldur/marketplace/types';
+
+import { ServiceProviderBreadcrumbs } from './ServiceProviderBreadcrumbs';
+import { ServiceProviderHeader } from './ServiceProviderHeader';
+import { ServiceProviderOfferingsCategoriesFilter } from './ServiceProviderOfferingsCategoriesFilter';
+import { ServiceProviderOfferingsFilterBar } from './ServiceProviderOfferingsFilterBar';
+import { ServiceProviderOfferingsGrid } from './ServiceProviderOfferingsGrid';
 import './ServiceProvider.scss';
 
 interface ServiceProviderProps {
@@ -24,10 +25,8 @@ export const ServiceProvider: FunctionComponent<ServiceProviderProps> = ({
       <div className="serviceProvider__content">
         <ServiceProviderOfferingsCategoriesFilter
           serviceProviderUuid={serviceProvider.customer_uuid}
-          onQueryFilterChange={(q: string) => setQueryFilter(q)}
-          onCategoryChange={(newCategory: string) =>
-            setCategoryFilter(newCategory)
-          }
+          onQueryFilterChange={setQueryFilter}
+          onCategoryChange={setCategoryFilter}
         />
         <div className="serviceProvider__grid">
           {categoryFilter && (
