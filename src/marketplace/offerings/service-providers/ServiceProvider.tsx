@@ -11,16 +11,21 @@ import './ServiceProvider.scss';
 
 interface ServiceProviderProps {
   serviceProvider: ServiceProviderType;
+  refreshServiceProvider(): void;
 }
 
 export const ServiceProvider: FunctionComponent<ServiceProviderProps> = ({
   serviceProvider,
+  refreshServiceProvider,
 }) => {
   const [queryFilter, setQueryFilter] = useState<string>('');
   const [categoryFilter, setCategoryFilter] = useState<string>('');
   return (
     <div className="serviceProvider m-b-md">
-      <ServiceProviderHeader serviceProvider={serviceProvider} />
+      <ServiceProviderHeader
+        serviceProvider={serviceProvider}
+        refreshServiceProvider={refreshServiceProvider}
+      />
       <ServiceProviderBreadcrumbs serviceProvider={serviceProvider} />
       <div className="serviceProvider__content">
         <ServiceProviderOfferingsCategoriesFilter
