@@ -26,6 +26,8 @@ export const ServiceProviderEditorButton = ({
           openModalDialog(ServiceProviderEditor, {
             resolve: {
               uuid: provider.uuid,
+              image: provider.customer_image,
+              customer_uuid: provider.customer_uuid,
               initialValues: { description: provider.description },
               refreshServiceProvider,
             },

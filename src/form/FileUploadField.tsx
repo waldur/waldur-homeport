@@ -50,7 +50,7 @@ export class FileUploadField extends Component<FileUploadFieldProps> {
 
   render() {
     return (
-      <span>
+      <>
         {this.props.showFileName ? this.state.fileName || 'None' : null}{' '}
         <button
           type="button"
@@ -68,7 +68,7 @@ export class FileUploadField extends Component<FileUploadFieldProps> {
           onChange={this.handleFile}
           disabled={this.props.disabled}
         />
-      </span>
+      </>
     );
   }
 }
