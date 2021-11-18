@@ -1,8 +1,8 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Field } from 'redux-form';
 
-import { CustomerEditDetailsForm } from '@waldur/customer/details/CustomerEditDetailsForm';
 import { CustomerLogoUpdateFormData } from '@waldur/customer/details/types';
+import { FileUploadField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { Customer } from '@waldur/workspace/types';
@@ -16,7 +16,6 @@ interface CustomerLogoUpdateProps {
   uploadLogo?(): void;
   removeLogo?(): void;
   formData: CustomerLogoUpdateFormData;
-  canEdit: boolean;
 }
 
 const hasChosenImage = ({ formData }) => formData && formData.image;
@@ -42,37 +41,33 @@ const renderLogo = (props) => {
 
 export const CustomerLogoUpdate: React.FC<CustomerLogoUpdateProps> = (
   props,
-) => {
-  const { canEdit } = props;
-  return (
-    <div className="customer-edit-details">
-      <Row>
-        <Col md={3}>
-          <div className="organization-logo">
-            <div className="organization-img-wrapper">
-              <img src={renderLogo(props)} alt="Organization logo here" />
-            </div>
-          </div>
-        </Col>
-        {canEdit && (
-          <Col md={9}>
-            <div className="organization-logo-actions">
-              {renderRemoveButton(props) && (
-                <ActionButton
-                  className="btn btn-sm btn-danger m-b-sm"
-                  title={translate('Remove logo')}
-                  action={props.removeLogo}
-                  icon="fa fa-trash"
-                />
-              )}
-              <CustomerEditDetailsForm
-                hasChosenImage={hasChosenImage(props)}
-                onSubmit={props.uploadLogo}
-              />
-            </div>
-          </Col>
+) => (
+  <>
+    <img
+      src={renderLogo(props)}
+      alt="Organization logo here"
+      className="organization-img-wrapper"
+    />
+    <div className="m-t-md">
+      {renderRemoveButton(props) && (
+        <ActionButton
+          className="btn btn-sm btn-danger"
+          title={translate('Remove logo')}
+          action={props.removeLogo}
+          icon="fa fa-trash"
+        />
+      )}
+      <Field
+        name="image"
+        component={(fieldProps) => (
+          <FileUploadField
+            {...fieldProps}
+            accept=".jpg, .jpeg, .png, .svg"
+            buttonLabel={translate('Upload new')}
+            className="btn btn-sm btn-primary"
+          />
         )}
-      </Row>
+      />
     </div>
-  );
-};
+  </>
+);

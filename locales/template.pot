@@ -9935,7 +9935,6 @@ msgstr ""
 msgid "Unpublish as Google Calendar"
 msgstr ""
 
-#: src/customer/details/CustomerEditDetailsForm.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
@@ -10081,7 +10080,7 @@ msgstr ""
 msgid "Updating security groups"
 msgstr ""
 
-#: src/customer/details/CustomerEditDetailsForm.tsx
+#: src/customer/details/CustomerLogoUpdate.tsx
 msgid "Upload new"
 msgstr ""
 

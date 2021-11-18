@@ -13,7 +13,6 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { CustomerAccordion } from './CustomerAccordion';
-import { CustomerLogoUpdateContainer } from './CustomerLogoUpdateContainer';
 
 interface CustomerDetailsProps {
   customer: Partial<Customer>;
@@ -111,8 +110,6 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
           value={customer.bank_account}
         />
       </ResourceDetailsTable>
-
-      <CustomerLogoUpdateContainer customer={customer} />
     </CustomerAccordion>
   );
 };

@@ -7,12 +7,16 @@ import {
 import { connect, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
+import { CustomerLogoUpdateContainer } from '@waldur/customer/details/CustomerLogoUpdateContainer';
+import { uploadLogo } from '@waldur/customer/details/store/api';
 import { FormContainer, SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { updateServiceProvider } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showError, showSuccess } from '@waldur/store/notify';
+import { Customer } from '@waldur/workspace/types';
+
 require('./ServiceProviderEditor.css');
 
 export const ServiceProviderEditor = connect((_, props: any) => ({
@@ -24,7 +28,15 @@ export const ServiceProviderEditor = connect((_, props: any) => ({
     const dispatch = useDispatch();
     const updateCustomerHandler = async (formData) => {
       try {
-        await updateServiceProvider(resolve.uuid, formData);
+        await updateServiceProvider(resolve.uuid, {
+          description: formData.description,
+        });
+        if (formData.image) {
+          await uploadLogo({
+            customerUuid: resolve.customer_uuid,
+            image: formData.image,
+          });
+        }
         await resolve.refreshServiceProvider();
         dispatch(showSuccess(translate('Service provider has been updated.')));
         dispatch(closeModalDialog());
@@ -41,6 +53,14 @@ export const ServiceProviderEditor = connect((_, props: any) => ({
         <ModalBody>
           <FormContainer layout="vertical" submitting={submitting}>
             <TextField name={'description'} label={translate('Description')} />
+            <CustomerLogoUpdateContainer
+              customer={
+                {
+                  uuid: resolve.customer_uuid,
+                  image: resolve.image,
+                } as any as Customer
+              }
+            />
           </FormContainer>
         </ModalBody>
         <ModalFooter>
