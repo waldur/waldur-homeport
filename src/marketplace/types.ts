@@ -271,3 +271,14 @@ export interface ImportableResource {
   backend_id: string;
   name: string;
 }
+
+export interface OfferingInfo {
+  offering_name: string;
+  offering_uuid: string;
+}
+
+export interface OfferingsByServiceProvider {
+  customer_name: string;
+  customer_uuid: string;
+  offerings: OfferingInfo[];
+}

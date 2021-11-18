@@ -1,0 +1,8 @@
+@import '~sass/inspinia/_variables.scss';
+
+.spOfferingsPaging {
+  align-self: flex-end;
+  display: flex;
+  column-gap: 24px;
+  color: $blue;
+}

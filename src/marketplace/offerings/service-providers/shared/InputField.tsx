@@ -15,6 +15,7 @@ interface InputFieldProps extends FormField {
   className?: string;
   value?: string;
   onChange?: any;
+  onFocus?: any;
 }
 
 export const InputField: FunctionComponent<InputFieldProps> = (props) => {

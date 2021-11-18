@@ -1,7 +1,12 @@
 .anonymousHeader {
   display: flex;
-  padding: 16px 150px;
-  justify-content: space-between;
+  flex-direction: column;
+
+  .anonymousHeader__header {
+    padding: 16px 150px;
+    display: flex;
+    justify-content: space-between;
+  }
 
   .anonymousHeader__actions {
     display: flex;
