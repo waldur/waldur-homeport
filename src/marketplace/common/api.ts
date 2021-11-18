@@ -69,6 +69,9 @@ export const getOfferingsOptions = (params?: {}) =>
 export const getAllOfferings = (options?: {}) =>
   getAll<Offering>('/marketplace-offerings/', options);
 
+export const getOfferingsByServiceProvider = (options?: {}) =>
+  get('/marketplace-offerings/groups/', options);
+
 export const getOfferingsCount = (options?: {}) =>
   Axios.head(`${ENV.apiEndpoint}api/marketplace-offerings/`, options).then(
     (response) => parseResultCount(response),

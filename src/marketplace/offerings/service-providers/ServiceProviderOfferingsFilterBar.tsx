@@ -1,5 +1,6 @@
-import { FunctionComponent, useState, useRef, useEffect } from 'react';
+import { FunctionComponent } from 'react';
 
+import { useOutsideClickHandler } from '@waldur/core/useOutsideClickHandler';
 import { FilterDropdownContent } from '@waldur/marketplace/offerings/service-providers/FilterDropdownContent';
 import { FilterDropdownHeader } from '@waldur/marketplace/offerings/service-providers/FilterDropdownHeader';
 import './ServiceProviderOfferingsFilterBar.scss';
@@ -10,22 +11,7 @@ interface ServiceProviderOfferingsFilterBarProps {
 
 export const ServiceProviderOfferingsFilterBar: FunctionComponent<ServiceProviderOfferingsFilterBarProps> =
   ({ categoryUuid }) => {
-    const wrapperRef = useRef(null);
-    const [toggle, setToggle] = useState<boolean>(false);
-
-    // Refer to https://stackoverflow.com/a/42234988
-    useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-          setToggle(false);
-        }
-      };
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }, [wrapperRef]);
-
+    const { wrapperRef, toggle, setToggle } = useOutsideClickHandler();
     return (
       <div
         ref={wrapperRef}

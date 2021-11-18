@@ -1,0 +1,24 @@
+@import '~sass/inspinia/_variables.scss';
+
+.searchResultItem {
+  color: $blue;
+
+  &__name a {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  &__offerings {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+
+    a {
+      font-size: 14px;
+      line-height: 24px;
+    }
+  }
+}

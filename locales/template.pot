@@ -4528,7 +4528,7 @@ msgstr ""
 
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
-#: src/marketplace/offerings/service-providers/shared/grid/GridPagination.tsx
+#: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
 #: src/table/TablePagination.tsx
 msgid "Next"
 msgstr ""
@@ -4585,6 +4585,10 @@ msgstr ""
 
 #: src/customer/list/CustomerExpandableRow.tsx
 msgid "No invoice data available."
+msgstr ""
+
+#: src/navigation/SearchResultsDropdown.tsx
+msgid "No matching offerings found"
 msgstr ""
 
 #: src/marketplace/landing/LandingPage.tsx
@@ -5852,7 +5856,7 @@ msgid "Preview offering"
 msgstr ""
 
 #: src/customer/create/WizardForm.tsx
-#: src/marketplace/offerings/service-providers/shared/grid/GridPagination.tsx
+#: src/marketplace/offerings/service-providers/shared/grid/PrevPage.tsx
 #: src/table/TablePagination.tsx
 msgid "Previous"
 msgstr ""
@@ -7074,6 +7078,7 @@ msgstr ""
 
 #: src/LoadingScreen.tsx
 #: src/invoices/events/InvoiceEventsDialog.tsx
+#: src/navigation/SearchResultsDropdown.tsx
 msgid "Retry"
 msgstr ""
 
@@ -7324,7 +7329,7 @@ msgstr ""
 msgid "Search for offering by name"
 msgstr ""
 
-#: src/navigation/AnonymousHeader.tsx
+#: src/navigation/OfferingSearchField.tsx
 msgid "Search for offerings and providers"
 msgstr ""
 
@@ -9214,6 +9219,10 @@ msgstr ""
 #: src/marketplace/offerings/service-providers/shared/grid/Grid.tsx
 #: src/table/Table.tsx
 msgid "Unable to fetch data."
+msgstr ""
+
+#: src/navigation/SearchResultsDropdown.tsx
+msgid "Unable to fetch offerings"
 msgstr ""
 
 #: src/issues/comments/utils.ts
