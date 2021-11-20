@@ -11,7 +11,7 @@ export const OrderItemDetailsField: React.FC<OrderItemDetailsFieldProps> = (
 ) => (
   <FormGroup
     className="form-group row"
-    labelClassName="control-label col-sm-3 text-right"
+    labelClassName="control-label col-sm-3 text-right text-capitalize"
     valueClassName="col-sm-9 text-left"
     label={props.label}
     classNameWithoutLabel={!props.label && 'col-sm-offset-3 col-sm-9'}
