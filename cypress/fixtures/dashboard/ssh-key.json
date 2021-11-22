@@ -1,0 +1,10 @@
+{
+  "url": "http://localhost:8001/api/keys/62d919b5ed09439b96fab24e1f074edd/",
+  "uuid": "62d919b5ed09439b96fab24e1f074edd",
+  "name": "text key cy",
+  "public_key": "ssh-rsa AAAAB3NzaC1yo2EAAAADAQABAAABAQDqYjg9x9ZePpYOSsapYfzSf5SQKDOmIpuYsOhP87c3KqjHLhU8Y5BNrUPPrhJKW+i6CkZnQuBtVjHdhz0q/hAD05L0F1tGcez4doG9AbsZyS1mfmQ4molO18w1Cliw1wFrOe66+klsFYuIdzrkbIQIezb66RZN6P21nyRejgG7egNHrrU9gWDpzPTIaFKwDndqibTU89YyvRqCy8a5HYtAcrDyarHAymT9isUohPSem7FBj+t7Sdfu7UFmkl6r5Sc+fgj5CcjnZqAFBmb5rY2YuwCVUqi96ac027Wdy1LCSThqWTttpdiRpOiJxjLynI8rkcwxQftgUKvMdJBDEdAn",
+  "fingerprint": "4d:8e:79:d1:a7:ea:b0:1e:39:fe:93:55:6d:d3:0c:7a",
+  "user_uuid": "3a836bc76e1b40349ec1a0d8220f374f",
+  "is_shared": false,
+  "type": "ssh-rsa"
+}
