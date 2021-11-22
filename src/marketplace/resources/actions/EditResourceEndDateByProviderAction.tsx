@@ -50,6 +50,6 @@ export const EditResourceEndDateByProviderAction = ({
     );
 
   return isOwnerOrStaff || isServiceManager || isSupport ? (
-    <ActionItem title={translate('Edit end date')} action={callback} />
+    <ActionItem title={translate('Set termination date')} action={callback} />
   ) : null;
 };

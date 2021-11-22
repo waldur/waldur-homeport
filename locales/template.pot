@@ -1621,7 +1621,7 @@ msgid "Contract sum"
 msgstr ""
 
 #: src/invoices/list/AgreementInfo.tsx
-msgid "Contract sum is"
+msgid "Contract sum is {sum}."
 msgstr ""
 
 #: src/rancher/cluster/create/NodeRoleField.tsx
@@ -2441,19 +2441,6 @@ msgstr ""
 msgid "Edit confirmation message of {offeringName}"
 msgstr ""
 
-#: src/marketplace/resources/actions/EditResourceEndDateAction.tsx
-#: src/marketplace/resources/actions/EditResourceEndDateByProviderAction.tsx
-msgid "Edit end date"
-msgstr ""
-
-#: src/marketplace/resources/actions/EditResourceEndDateByStaffAction.tsx
-msgid "Edit end date (staff)"
-msgstr ""
-
-#: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
-msgid "Edit end date of {resourceName}"
-msgstr ""
-
 #: src/invoices/details/InvoiceItemUpdate.tsx
 msgid "Edit item"
 msgstr ""
@@ -2581,14 +2568,6 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
-#: src/marketplace-flows/ProjectCreateExpandableRow.tsx
-#: src/marketplace-flows/ResourceCreateExpandableRow.tsx
-#: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
-#: src/marketplace/resources/list/ExpandableResourceSummary.tsx
-#: src/project/ProjectCreateForm.tsx
-#: src/project/ProjectUpdateForm.tsx
-#: src/project/ProjectsList.tsx
-#: src/resource/summary/ResourceSummaryBase.tsx
 msgid "End date"
 msgstr ""
 
@@ -2597,7 +2576,7 @@ msgid "End date must be after start date."
 msgstr ""
 
 #: src/invoices/list/AgreementInfo.tsx
-msgid "End date of the agreement is"
+msgid "End date of the agreement is {date}."
 msgstr ""
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
@@ -7811,6 +7790,19 @@ msgstr ""
 msgid "Set static routes"
 msgstr ""
 
+#: src/marketplace/resources/actions/EditResourceEndDateAction.tsx
+#: src/marketplace/resources/actions/EditResourceEndDateByProviderAction.tsx
+msgid "Set termination date"
+msgstr ""
+
+#: src/marketplace/resources/actions/EditResourceEndDateByStaffAction.tsx
+msgid "Set termination date (staff)"
+msgstr ""
+
+#: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
+msgid "Set termination date of {resourceName}"
+msgstr ""
+
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 msgid "Set to draft"
 msgstr ""
@@ -8485,6 +8477,23 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Terminating"
+msgstr ""
+
+#: src/marketplace-flows/ProjectCreateExpandableRow.tsx
+#: src/marketplace-flows/ResourceCreateExpandableRow.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
+#: src/marketplace/resources/list/ExpandableResourceSummary.tsx
+#: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectDetails.tsx
+#: src/project/ProjectUpdateForm.tsx
+#: src/project/ProjectsList.tsx
+#: src/resource/summary/ResourceSummaryBase.tsx
+msgid "Termination date"
+msgstr ""
+
+#: src/marketplace/resources/list/EndDateTooltip.tsx
+msgid "Termination date: {date}"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx

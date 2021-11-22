@@ -8,6 +8,7 @@ import { Customer } from '@waldur/workspace/types';
 import { ResourceDetailsLink } from '../ResourceDetailsLink';
 import { Resource } from '../types';
 
+import { EndDateTooltip } from './EndDateTooltip';
 import { PublicResourceLink } from './PublicResourceLink';
 
 interface ResourceNameFieldProps {
@@ -20,13 +21,10 @@ export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
   customer,
 }) => {
   const label = row.name || row.offering_name;
-  let LinkComponent;
   if (row.resource_type && row.resource_uuid) {
-    LinkComponent = (
-      <ResourceDetailsLink item={row}>{label}</ResourceDetailsLink>
-    );
+    return <ResourceDetailsLink item={row}>{label}</ResourceDetailsLink>;
   } else if (row.offering_type === SUPPORT_OFFERING_TYPE) {
-    LinkComponent = (
+    return (
       <>
         <Link
           state="project.support-details"
@@ -37,10 +35,10 @@ export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
           label={label}
         />
         <BackendIdTooltip backendId={row.backend_id} />
+        <EndDateTooltip end_date={row.end_date} />
       </>
     );
   } else {
-    LinkComponent = <PublicResourceLink row={row} customer={customer} />;
+    return <PublicResourceLink row={row} customer={customer} />;
   }
-  return LinkComponent;
 };

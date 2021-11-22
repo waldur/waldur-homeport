@@ -26,7 +26,7 @@ const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => (
         )
       }
     />
-    <Field label={translate('End date')} value={row.end_date} />
+    <Field label={translate('Termination date')} value={row.end_date} />
   </ResourceDetailsTable>
 );
 

@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { CreatedField } from '@waldur/resource/summary/CreatedField';
@@ -25,6 +26,10 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
     <Field
       label={translate('Created')}
       value={<CreatedField resource={resource} />}
+    />
+    <Field
+      label={translate('Termination date')}
+      value={resource.end_date ? formatDate(resource.end_date) : null}
     />
     <Field
       label={translate('UUID')}

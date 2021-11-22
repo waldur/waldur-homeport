@@ -21,6 +21,7 @@ const ProjectUpdateComponent = (props) =>
     <ProjectDetails
       name={props.project.name}
       description={props.project.description}
+      end_date={props.project.end_date}
       translate={props.translate}
     />
   );

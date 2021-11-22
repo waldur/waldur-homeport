@@ -7,6 +7,7 @@ export interface ResourceReference {
   resource_type: string;
   backend_id?: string;
   project_uuid?: string;
+  end_date?: string;
 }
 
 export type ResourceState =
@@ -54,4 +55,5 @@ export interface Resource extends ResourceReference {
   provider_name: string;
   marketplace_offering_uuid?: string;
   marketplace_resource_uuid?: string;
+  end_date?: string;
 }
