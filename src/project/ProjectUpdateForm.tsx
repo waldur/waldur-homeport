@@ -56,7 +56,7 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
         )}
         <Field
           name="end_date"
-          label={translate('Termination date')}
+          label={translate('End date')}
           description={translate(
             'The date is inclusive. Once reached, all project resource will be scheduled for termination.',
           )}

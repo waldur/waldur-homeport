@@ -2568,6 +2568,10 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectDetails.tsx
+#: src/project/ProjectUpdateForm.tsx
+#: src/project/ProjectsList.tsx
 msgid "End date"
 msgstr ""
 
@@ -8484,10 +8488,6 @@ msgstr ""
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
-#: src/project/ProjectCreateForm.tsx
-#: src/project/ProjectDetails.tsx
-#: src/project/ProjectUpdateForm.tsx
-#: src/project/ProjectsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Termination date"
 msgstr ""

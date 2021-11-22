@@ -20,7 +20,7 @@ export const ProjectDetails: FunctionComponent<ProjectDetailsProps> = (
 
     {props.end_date ? (
       <>
-        <dt className="m-t-sm">{props.translate('Termination date')}:</dt>
+        <dt className="m-t-sm">{props.translate('End date')}:</dt>
         <dd className="m-t-sm">formatDate(props.end_date)</dd>
       </>
     ) : null}

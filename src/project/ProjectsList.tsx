@@ -48,7 +48,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       orderField: 'created',
     },
     {
-      title: translate('Termination date'),
+      title: translate('End date'),
       render: ({ row }) =>
         row.end_date ? formatDate(row.end_date) : DASH_ESCAPE_CODE,
       orderField: 'end_date',
