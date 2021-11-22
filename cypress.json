@@ -5,5 +5,8 @@
   "reporter": "junit",
   "reporterOptions": {
     "mochaFile": "cypress/results/output-[hash].xml"
+  },
+  "env": {
+    "USER_UUID": "3a836bc76e1b40349ec1a0d8220f374f"
   }
 }
