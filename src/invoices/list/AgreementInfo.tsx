@@ -34,30 +34,30 @@ export const AgreementInfo: FunctionComponent<AgreementInfoProps> = (props) => {
       {activeFixedPricePaymentProfile ? (
         <div style={{ marginBottom: '20px' }}>
           {activeFixedPricePaymentProfile.attributes.agreement_number ? (
-            <span>
+            <>
               {translate('Organization has signed a fixed price agreement')}{' '}
               {activeFixedPricePaymentProfile.attributes.agreement_number}.
               {activeFixedPricePaymentProfile.attributes.end_date ? (
-                <span>
+                <>
                   {' '}
-                  {translate('End date of the agreement is')}{' '}
-                  {formatDate(
-                    activeFixedPricePaymentProfile.attributes.end_date,
-                  )}
-                  .
-                </span>
+                  {translate('End date of the agreement is {date}.', {
+                    date: formatDate(
+                      activeFixedPricePaymentProfile.attributes.end_date,
+                    ),
+                  })}
+                </>
               ) : null}
               {activeFixedPricePaymentProfile.attributes.contract_sum ? (
-                <span>
+                <>
                   {' '}
-                  {translate('Contract sum is')}{' '}
-                  {defaultCurrency(
-                    activeFixedPricePaymentProfile.attributes.contract_sum,
-                  )}
-                  .
-                </span>
+                  {translate('Contract sum is {sum}.', {
+                    sum: defaultCurrency(
+                      activeFixedPricePaymentProfile.attributes.contract_sum,
+                    ),
+                  })}{' '}
+                </>
               ) : null}
-              <span>
+              <>
                 {' '}
                 {translate('Total paid')}{' '}
                 <span
@@ -74,8 +74,8 @@ export const AgreementInfo: FunctionComponent<AgreementInfoProps> = (props) => {
                   {defaultCurrency(totalOfSumPaid)}
                 </span>
                 .
-              </span>
-            </span>
+              </>
+            </>
           ) : null}
         </div>
       ) : null}

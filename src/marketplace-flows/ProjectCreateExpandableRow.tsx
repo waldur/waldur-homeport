@@ -7,7 +7,10 @@ export const ProjectCreateExpandableRow = ({ row }) => (
     <Field label={translate('Project name')} value={row.name} />
     <Field label={translate('Description')} value={row.description} />
     {row.end_date && (
-      <Field label={translate('End date')} value={formatDate(row.end_date)} />
+      <Field
+        label={translate('Termination date')}
+        value={formatDate(row.end_date)}
+      />
     )}
   </dl>
 );

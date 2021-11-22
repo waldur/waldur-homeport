@@ -107,7 +107,7 @@ export const ProjectCreateForm = reduxForm<
         )}
         <DateField
           name="end_date"
-          label={translate('End date')}
+          label={translate('Termination date')}
           description={translate(
             'The date is inclusive. Once reached, all project resource will be scheduled for termination.',
           )}

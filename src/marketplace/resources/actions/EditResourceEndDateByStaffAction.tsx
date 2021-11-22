@@ -44,6 +44,9 @@ export const EditResourceEndDateByStaffAction = ({
     );
 
   return isStaff ? (
-    <ActionItem title={translate('Edit end date (staff)')} action={callback} />
+    <ActionItem
+      title={translate('Set termination date (staff)')}
+      action={callback}
+    />
   ) : null;
 };

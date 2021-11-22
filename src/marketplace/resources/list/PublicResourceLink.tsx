@@ -12,6 +12,8 @@ import {
 
 import { Resource } from '../types';
 
+import { EndDateTooltip } from './EndDateTooltip';
+
 interface PublicResourceLinkProps {
   row: Resource;
   customer?: Customer;
@@ -53,6 +55,7 @@ export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
         label={label}
       />
       <BackendIdTooltip backendId={row.backend_id} />
+      <EndDateTooltip end_date={row.end_date} />
     </>
   );
 };

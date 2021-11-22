@@ -23,7 +23,7 @@ export function PureResourceSummaryBase<T extends Resource = any>(
         label={translate('Created')}
         value={<CreatedField resource={props.resource} />}
       />
-      <Field label={translate('End date')} value={resource.end_date} />
+      <Field label={translate('Termination date')} value={resource.end_date} />
       <Field
         label={translate('UUID')}
         value={resource.uuid}
