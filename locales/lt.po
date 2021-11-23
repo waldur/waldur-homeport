@@ -875,9 +875,6 @@ msgstr "Tęsti"
 msgid "Contract sum"
 msgstr "Sutarties suma"
 
-msgid "Contract sum is"
-msgstr "Sutarties suma yra"
-
 msgid "Control plane"
 msgstr "Valdymo plokštuma"
 
@@ -1354,9 +1351,6 @@ msgstr "Pabaigos data"
 
 msgid "End date must be after start date."
 msgstr "Pabaigos data turi būti vėlesnė už pradžios datą."
-
-msgid "End date of the agreement is"
-msgstr "Sutarties pabaigos data yra"
 
 msgid "End time"
 msgstr "Pabaigos laikas"

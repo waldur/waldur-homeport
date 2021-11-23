@@ -824,9 +824,6 @@ msgstr "Jätka"
 msgid "Contract sum"
 msgstr "Lepingu summa"
 
-msgid "Contract sum is"
-msgstr "Lepingu summa on"
-
 msgid "Copy to clipboard"
 msgstr "Kopeeri lõikelauale"
 
@@ -1163,15 +1160,6 @@ msgstr "Redigeeri broneeritavat sündmust"
 msgid "Edit confirmation message"
 msgstr "Redigeeri kinnitust"
 
-msgid "Edit end date"
-msgstr "Muuda lõppkuupäeva"
-
-msgid "Edit end date (staff)"
-msgstr "Muuda lõppkuupäeva (tugi)"
-
-msgid "Edit end date of {resourceName}"
-msgstr "Muuda lõppkuupäev {resourceName}"
-
 msgid "Edit offering"
 msgstr "Muuda pakkumist"
 
@@ -1243,9 +1231,6 @@ msgstr "Lõppkuupäev"
 
 msgid "End date must be after start date."
 msgstr "Lõppkuupäev peab olema pärast alguskuupäeva."
-
-msgid "End date of the agreement is"
-msgstr "Lepingu lõppkuupäev on"
 
 msgid "End time"
 msgstr "Lõppaeg"

@@ -875,9 +875,6 @@ msgstr "Continuer"
 msgid "Contract sum"
 msgstr "Montant du contrat"
 
-msgid "Contract sum is"
-msgstr "Le montant du contrat est de"
-
 msgid "Control plane"
 msgstr "Avion de contrôle"
 
@@ -1354,9 +1351,6 @@ msgstr "Date de fin"
 
 msgid "End date must be after start date."
 msgstr "La date de fin doit être postérieure à la date de début."
-
-msgid "End date of the agreement is"
-msgstr "La date de fin de l'accord est"
 
 msgid "End time"
 msgstr "Heure de fin"

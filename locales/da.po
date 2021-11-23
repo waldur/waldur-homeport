@@ -875,9 +875,6 @@ msgstr "Fortsæt"
 msgid "Contract sum"
 msgstr "Kontrakt sum"
 
-msgid "Contract sum is"
-msgstr "Kontrakt sum er"
-
 msgid "Control plane"
 msgstr "Kontrolplan"
 
@@ -1354,9 +1351,6 @@ msgstr "Slutdato"
 
 msgid "End date must be after start date."
 msgstr "Slutdatoen skal være efter startdatoen."
-
-msgid "End date of the agreement is"
-msgstr "Aftalens slutdato er"
 
 msgid "End time"
 msgstr "Sluttidspunkt"

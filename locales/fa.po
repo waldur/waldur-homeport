@@ -992,9 +992,6 @@ msgstr "پایان"
 msgid "End date"
 msgstr "تاریخ پایان"
 
-msgid "End date of the agreement is"
-msgstr "تاریخ پایان توافق نامه"
-
 msgid "End time"
 msgstr "زمان پایان"
 

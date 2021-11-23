@@ -875,9 +875,6 @@ msgstr "Doorgaan"
 msgid "Contract sum"
 msgstr "Contract som"
 
-msgid "Contract sum is"
-msgstr "Contract som is"
-
 msgid "Control plane"
 msgstr "Besturingsvlak"
 
@@ -1354,9 +1351,6 @@ msgstr "Einddatum"
 
 msgid "End date must be after start date."
 msgstr "De einddatum moet na de begindatum zijn."
-
-msgid "End date of the agreement is"
-msgstr "Einddatum van de overeenkomst is"
 
 msgid "End time"
 msgstr "Eindtijd"

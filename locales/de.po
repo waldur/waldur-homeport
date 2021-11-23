@@ -875,9 +875,6 @@ msgstr "Weiter"
 msgid "Contract sum"
 msgstr "Auftragssumme"
 
-msgid "Contract sum is"
-msgstr "Vertragssumme ist"
-
 msgid "Control plane"
 msgstr "Steuerebene"
 
@@ -1354,9 +1351,6 @@ msgstr "Enddatum"
 
 msgid "End date must be after start date."
 msgstr "Das Enddatum muss nach dem Startdatum liegen."
-
-msgid "End date of the agreement is"
-msgstr "Enddatum der Vereinbarung ist"
 
 msgid "End time"
 msgstr "Endzeit"

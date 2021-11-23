@@ -875,9 +875,6 @@ msgstr "Pokračovat"
 msgid "Contract sum"
 msgstr "Smluvní částka"
 
-msgid "Contract sum is"
-msgstr "Smluvní částka je"
-
 msgid "Control plane"
 msgstr "Řídicí rovina"
 
@@ -1354,9 +1351,6 @@ msgstr "Datum ukončení"
 
 msgid "End date must be after start date."
 msgstr "Datum ukončení musí být po datu zahájení."
-
-msgid "End date of the agreement is"
-msgstr "Datum ukončení smlouvy je"
 
 msgid "End time"
 msgstr "Čas ukončení"
