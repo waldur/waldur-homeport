@@ -42,6 +42,18 @@ export const useAuthFeatures = () => {
     ENV.plugins.WALDUR_AUTH_SAML2.DISCOVERY_SERVICE_URL &&
     ENV.plugins.WALDUR_AUTH_SAML2.DISCOVERY_SERVICE_LABEL;
 
+  const enableSeparator = !!(
+    showSigninForm &&
+    (showSmartId ||
+      showTARA ||
+      showValimo ||
+      showSaml2 ||
+      showSaml2Providers ||
+      showSaml2Discovery ||
+      showKeycloak ||
+      showEduteams)
+  );
+
   return {
     SigninForm: showSigninForm,
     smartid: showSmartId,
@@ -52,5 +64,6 @@ export const useAuthFeatures = () => {
     saml2discovery: showSaml2Discovery,
     keycloak: showKeycloak,
     eduteams: showEduteams,
+    enableSeperator: enableSeparator,
   };
 };
