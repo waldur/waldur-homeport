@@ -20,7 +20,9 @@ export const LoginColumn = () => {
             <img src="/images/login_logo.png" />
           </div>
           <AuthHeader />
-          {features.SigninForm && <LocalLogin />}
+          {features.SigninForm && (
+            <LocalLogin enableSeperator={features.enableSeperator} />
+          )}
           <IdentityProviderSelector features={features} />
           <UserAuthWarning />
           <PoweredBy />
