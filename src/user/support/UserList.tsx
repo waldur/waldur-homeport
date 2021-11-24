@@ -105,6 +105,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         {
           title: translate('Full name'),
           render: FullNameField,
+          orderField: 'full_name',
         },
         {
           title: translate('Email'),
