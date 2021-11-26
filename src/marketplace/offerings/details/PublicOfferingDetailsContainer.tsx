@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
+import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
@@ -22,7 +22,14 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
     params: { uuid },
   } = useCurrentStateAndParams();
 
-  const { loading, error, value } = useAsync(() => fetchData(uuid), [uuid]);
+  const [{ loading, error, value }, refreshOffering] = useAsyncFn(
+    () => fetchData(uuid),
+    [uuid],
+  );
+
+  useEffectOnce(() => {
+    refreshOffering();
+  });
 
   useTitle(
     value?.offering ? value.offering.name : translate('Offering details'),
@@ -37,6 +44,7 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
       <AnonymousHeader />
       <PublicOfferingDetails
         offering={value.offering}
+        refreshOffering={refreshOffering}
         category={value.category}
       />
     </>

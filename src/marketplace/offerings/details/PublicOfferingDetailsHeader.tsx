@@ -5,18 +5,20 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { Link } from '@waldur/core/Link';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
-import { OfferingPurchaseButton } from '@waldur/marketplace/offerings/service-providers/shared/OfferingPurchaseButton';
 import { Offering } from '@waldur/marketplace/types';
+
 import './PublicOfferingDetailsHeader.scss';
+import { PublicOfferingEditorButton } from './PublicOfferingEditorButton';
 
 const GeorgiaNature = require('./../service-providers/georgia-nature.jpg');
 
 interface PublicOfferingDetailsHeaderProps {
   offering: Offering;
+  refreshOffering;
 }
 
 export const PublicOfferingDetailsHeader: FunctionComponent<PublicOfferingDetailsHeaderProps> =
-  ({ offering }) => {
+  ({ offering, refreshOffering }) => {
     const context = {
       offering: (
         <h2 className="publicOfferingDetailsHeader__card__info__header">
@@ -45,14 +47,19 @@ export const PublicOfferingDetailsHeader: FunctionComponent<PublicOfferingDetail
             <div className="publicOfferingDetailsHeader__card__info__description">
               <FormattedHtml html={offering.description} />
             </div>
-            <div className="publicOfferingDetailsHeader__card__info__button m-t-sm">
-              <OfferingPurchaseButton
+            <div className="m-t-sm">
+              <Link
+                state="marketplace-offering-user"
+                params={{ offering_uuid: offering.uuid }}
+                className="btn btn-primary m-r-sm"
+              >
+                {offering.type === OFFERING_TYPE_BOOKING
+                  ? translate('Book')
+                  : translate('Purchase')}
+              </Link>
+              <PublicOfferingEditorButton
                 offering={offering}
-                label={
-                  offering.type === OFFERING_TYPE_BOOKING
-                    ? translate('Book')
-                    : translate('Purchase')
-                }
+                refreshOffering={refreshOffering}
               />
             </div>
           </div>
