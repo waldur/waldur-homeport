@@ -2114,6 +2114,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
@@ -2397,6 +2398,7 @@ msgstr ""
 #: src/customer/team/UserEditButton.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditorButton.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
@@ -2447,6 +2449,10 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
 msgid "Edit offering"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+msgid "Edit offering details"
 msgstr ""
 
 #: src/marketplace/details/CustomerCreateGroup.tsx
@@ -4809,6 +4815,7 @@ msgid "Offering has been imported."
 msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering has been updated."
 msgstr ""
@@ -9809,6 +9816,7 @@ msgstr ""
 msgid "Unable to update offering state."
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to update offering."
 msgstr ""
@@ -9954,6 +9962,7 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
