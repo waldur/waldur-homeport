@@ -3194,9 +3194,6 @@ msgstr "Norėdami pamatyti kainos įvertinimą, pasirinkite skonį."
 msgid "Please select type in Management tab first."
 msgstr "Pirmiausia skirtuke Valdymas pasirinkite tipą."
 
-msgid "Please select your language"
-msgstr "Pasirinkite savo kalbą"
-
 msgid "Please start instance first."
 msgstr "Pirmiausia pradėkite egzempliorių."
 

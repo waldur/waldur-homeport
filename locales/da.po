@@ -3194,9 +3194,6 @@ msgstr "Vælg venligst smag for at se prisoverslag."
 msgid "Please select type in Management tab first."
 msgstr "Vælg først typen under fanen Ledelse."
 
-msgid "Please select your language"
-msgstr "Vælg venligst dit sprog"
-
 msgid "Please start instance first."
 msgstr "Start venligst instans først."
 

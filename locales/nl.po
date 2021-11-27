@@ -3194,9 +3194,6 @@ msgstr "Selecteer smaak om de prijsschatting te zien."
 msgid "Please select type in Management tab first."
 msgstr "Selecteer eerst het type in het tabblad Beheer."
 
-msgid "Please select your language"
-msgstr "Selecteer uw taal"
-
 msgid "Please start instance first."
 msgstr "Begin de instantie eerst."
 

@@ -3194,9 +3194,6 @@ msgstr "Si prega di selezionare il sapore per vedere il preventivo."
 msgid "Please select type in Management tab first."
 msgstr "Selezionare prima digitare nella scheda Gestione."
 
-msgid "Please select your language"
-msgstr "Seleziona la tua lingua"
-
 msgid "Please start instance first."
 msgstr "Si prega di avviare prima istanza."
 

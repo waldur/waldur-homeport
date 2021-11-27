@@ -3194,9 +3194,6 @@ msgstr "Chcete-li zobrazit odhad ceny, vyberte příchuť."
 msgid "Please select type in Management tab first."
 msgstr "Nejprve vyberte typ na kartě Správa."
 
-msgid "Please select your language"
-msgstr "Vyberte prosím svůj jazyk"
-
 msgid "Please start instance first."
 msgstr "Nejprve spusťte instanci."
 

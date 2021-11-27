@@ -3194,9 +3194,6 @@ msgstr "Vennligst velg smak for å se prisestimat."
 msgid "Please select type in Management tab first."
 msgstr "Velg skriv inn i kategorien Administrasjon først."
 
-msgid "Please select your language"
-msgstr "Vennligst velg ditt språk"
-
 msgid "Please start instance first."
 msgstr "Vennligst start forekomsten først."
 

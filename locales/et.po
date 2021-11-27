@@ -2615,9 +2615,6 @@ msgstr "Palun vali meeskond"
 msgid "Please select type in Management tab first."
 msgstr "Palun valige esmalt halduse alamjaotusest tüüp"
 
-msgid "Please select your language"
-msgstr "Palun valige keel"
-
 msgid "Please use Latin letters without spaces only."
 msgstr "Palun kasutage ainult tühikuteta ladina tähti."
 

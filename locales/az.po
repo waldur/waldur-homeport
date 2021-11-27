@@ -1247,9 +1247,6 @@ msgstr "Avropa İttifaqında qeydiyyatdan keçdiyiniz təqdirdə, Aİ-nin ƏDV I
 msgid "Please select a username that you will use for login into the Linux systems."
 msgstr "Xahiş edirik, Linux sistemlərinə daxil olmaq üçün istifadə edəcəyiniz istifadəçi adını seçəsiniz."
 
-msgid "Please select your language"
-msgstr "Xahiş edirik, dili seçin"
-
 msgid "Please start instance first."
 msgstr "İlk növbədə, nümunəni başlayın."
 
