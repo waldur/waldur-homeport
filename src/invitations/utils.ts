@@ -18,6 +18,14 @@ const InvitationConfirmDialog = lazyComponent(
   'InvitationConfirmDialog',
 );
 
+const GroupInvitationConfirmDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "GroupInvitationConfirmDialog" */ './GroupInvitationConfirmDialog'
+    ),
+  'GroupInvitationConfirmDialog',
+);
+
 export function checkAndAccept(token) {
   /*
      Call confirm token dialog, accept it and redirect user to profile.
@@ -40,6 +48,24 @@ export function checkAndAccept(token) {
       });
   } else {
     setInvitationToken(token);
+    router.stateService.go('login');
+  }
+}
+
+export function submitPermissionRequest(token) {
+  if (AuthService.isAuthenticated()) {
+    return confirmUserGroupInvitation(token)
+      .then((accept) => {
+        if (accept) {
+          submitGroupRequest(token).then(() => {
+            router.stateService.go('profile.details');
+          });
+        }
+      })
+      .catch(() => {
+        router.stateService.go('profile.details');
+      });
+  } else {
     router.stateService.go('login');
   }
 }
@@ -69,10 +95,46 @@ export function acceptInvitation(token, replaceEmail) {
     });
 }
 
+export function submitGroupRequest(token) {
+  return InvitationService.submitRequest(token)
+    .then(() => {
+      store.dispatch(
+        showSuccess(translate('Your permission request has been submitted.')),
+      );
+    })
+    .catch(({ response }) => {
+      if (response.status === 404 || response.status === 400) {
+        store.dispatch(showError(translate('Request is not valid.')));
+      } else if (response.status === 500) {
+        store.dispatch(
+          showError(
+            translate(
+              'Internal server error occurred. Please try again or contact support.',
+            ),
+          ),
+        );
+      }
+    });
+}
+
 export function confirmInvitation(token) {
   const deferred = createDeferred();
   store.dispatch(
     openModalDialog(InvitationConfirmDialog, {
+      resolve: {
+        token,
+        deferred,
+      },
+      backdrop: 'static',
+    }),
+  );
+  return deferred.promise;
+}
+
+export function confirmUserGroupInvitation(token) {
+  const deferred = createDeferred();
+  store.dispatch(
+    openModalDialog(GroupInvitationConfirmDialog, {
       resolve: {
         token,
         deferred,
