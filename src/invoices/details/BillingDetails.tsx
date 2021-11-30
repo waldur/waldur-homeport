@@ -18,9 +18,8 @@ import { Invoice } from '../types';
 import { formatPeriod } from '../utils';
 
 import { BillingRecordDetails } from './BillingRecordDetails';
-import { DownloadInvoiceButton } from './DownloadInvoiceButton';
+import { InvoiceDetailActions } from './InvoiceDetailActions';
 import { InvoiceDetails } from './InvoiceDetails';
-import { PrintInvoiceButton } from './PrintInvoiceButton';
 
 import './BillingDetails.scss';
 
@@ -96,13 +95,7 @@ export const BillingDetails: FunctionComponent = () => {
 
   const layoutContext = useContext(LayoutContext);
   useEffect(() => {
-    layoutContext.setActions(
-      invoice?.pdf ? (
-        <DownloadInvoiceButton invoice={invoice} />
-      ) : (
-        <PrintInvoiceButton />
-      ),
-    );
+    layoutContext.setActions(<InvoiceDetailActions invoice={invoice} />);
     layoutContext.setSidebarClass('hidden-print');
     return () => {
       layoutContext.setActions(null);

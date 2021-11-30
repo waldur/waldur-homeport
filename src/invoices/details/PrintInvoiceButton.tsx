@@ -4,7 +4,7 @@ import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
 export const PrintInvoiceButton: FunctionComponent = () => (
-  <button className="btn btn-primary" onClick={() => window.print()}>
+  <button className="btn btn-default btn-sm" onClick={() => window.print()}>
     <i className="fa fa-print" />{' '}
     {ENV.accountingMode === 'accounting'
       ? translate('Print record')

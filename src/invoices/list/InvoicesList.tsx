@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -12,6 +13,8 @@ import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 import { getCustomer } from '@waldur/workspace/selectors';
+
+import { InvoicePayButton } from '../details/InvoicePayButton';
 
 import { InvoicesFilter } from './InvoicesFilter';
 import { SendNotificationButton } from './SendNotificationButton';
@@ -63,10 +66,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
       {
         title: translate('Actions'),
         render: ({ row }) => (
-          <>
+          <ButtonGroup>
             <SendNotificationButton row={row} />
             <MarkAsPaidButton row={row} />
-          </>
+            <InvoicePayButton invoice={row} />
+          </ButtonGroup>
         ),
       },
     );
@@ -90,6 +94,7 @@ const mapPropsToFilter = (props) => ({
     'price',
     'tax',
     'total',
+    'payment_url',
   ],
 });
 
