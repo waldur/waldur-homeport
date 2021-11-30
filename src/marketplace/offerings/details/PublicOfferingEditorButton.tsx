@@ -22,9 +22,8 @@ export const PublicOfferingEditorButton = ({ offering, refreshOffering }) => {
         dispatch(
           openModalDialog(PublicOfferingEditor, {
             resolve: {
-              uuid: offering.uuid,
+              offering,
               refreshOffering,
-              initialValues: { description: offering.description },
             },
             modalStyle: { left: 'auto', bottom: 'auto' },
             formId: 'PublicOfferingEditor',

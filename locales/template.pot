@@ -112,6 +112,7 @@ msgstr ""
 #: src/invoices/utils.ts
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Accounting"
 msgstr ""
 
@@ -1947,6 +1948,22 @@ msgstr ""
 
 #: src/issues/CustomerSupportRating.tsx
 msgid "Customer support satisfaction overall rating"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+msgid "Customize name, description and terms of service"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+msgid "Customize offering category and attributes"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+msgid "Customize plans and plan components"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+msgid "Customize service settings"
 msgstr ""
 
 #: src/openstack/openstack-subnet/fields.tsx
@@ -4040,6 +4057,7 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Management"
 msgstr ""
 
@@ -4821,7 +4839,7 @@ msgid "Offering has been imported."
 msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
-#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+#: src/marketplace/offerings/details/PageOverview.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering has been updated."
 msgstr ""
@@ -5283,6 +5301,8 @@ msgstr ""
 
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
+#: src/marketplace/offerings/details/PageOverview.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Overview"
 msgstr ""
 
@@ -9837,7 +9857,7 @@ msgstr ""
 msgid "Unable to update offering state."
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+#: src/marketplace/offerings/details/PageOverview.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to update offering."
 msgstr ""
@@ -9983,7 +10003,7 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
-#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+#: src/marketplace/offerings/details/PageOverview.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
