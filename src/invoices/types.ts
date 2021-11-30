@@ -35,4 +35,6 @@ export interface Invoice {
   year: number;
   month: number;
   url: string;
+  payment_url?: string;
+  state: 'pending' | 'created' | 'paid' | 'canceled';
 }

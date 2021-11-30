@@ -5364,6 +5364,10 @@ msgstr ""
 msgid "Paused"
 msgstr ""
 
+#: src/invoices/details/InvoicePayButton.tsx
+msgid "Pay"
+msgstr ""
+
 #: src/paypal/InvoiceActions.tsx
 msgid "Pay invoice"
 msgstr ""
