@@ -14,6 +14,13 @@ const InvitationReject = lazyComponent(
   () => import(/* webpackChunkName: "InvitationReject" */ './InvitationReject'),
   'InvitationReject',
 );
+const UserGroupInvitation = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "UserGroupInvitation" */ './UserGroupInvitation'
+    ),
+  'UserGroupInvitation',
+);
 
 export const states: StateDeclaration[] = [
   {
@@ -32,5 +39,11 @@ export const states: StateDeclaration[] = [
     name: 'invitation-reject',
     url: '/invitation_reject/:token/',
     component: InvitationReject,
+  },
+
+  {
+    name: 'user-group-invitation',
+    url: '/user-group-invitation/:token/',
+    component: UserGroupInvitation,
   },
 ];

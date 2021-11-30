@@ -1167,6 +1167,7 @@ msgstr ""
 #: src/booking/CancelAction.tsx
 #: src/form/ListDialog.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
+#: src/invitations/GroupinvitationButtons.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace-flows/FlowCancelAction.tsx
@@ -2299,6 +2300,10 @@ msgstr ""
 msgid "Do you really want to delete comment?"
 msgstr ""
 
+#: src/invitations/GroupInvitationMessage.tsx
+msgid "Do you want to submit permission request?"
+msgstr ""
+
 #: src/rancher/node/actions/UnlinkAction.tsx
 msgid "Do you want to unlink instance {name}?"
 msgstr ""
@@ -3115,6 +3120,7 @@ msgstr ""
 msgid "Go to my profile"
 msgstr ""
 
+#: src/invitations/GroupInvitationErrorMessage.tsx
 #: src/invitations/InvitationErrorMessage.tsx
 msgid "Go to profile"
 msgstr ""
@@ -5678,6 +5684,7 @@ msgstr ""
 msgid "Please enter volume size to see price estimate."
 msgstr ""
 
+#: src/invitations/GroupInvitationConfirmDialog.tsx
 #: src/invitations/InvitationConfirmDialog.tsx
 msgid "Please give us a moment to validate your invitation."
 msgstr ""
@@ -6713,8 +6720,17 @@ msgstr ""
 msgid "Request for a termination"
 msgstr ""
 
+#: src/invitations/GroupInvitationErrorMessage.tsx
+#: src/invitations/utils.ts
+msgid "Request is not valid."
+msgstr ""
+
 #: src/slurm/RequestLimitsChangeAction.tsx
 msgid "Request limits change"
+msgstr ""
+
+#: src/invitations/GroupInvitationConfirmDialog.tsx
+msgid "Request permission"
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
@@ -8176,6 +8192,7 @@ msgstr ""
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
+#: src/invitations/GroupinvitationButtons.tsx
 #: src/invitations/PermissionRequestActionDialog.tsx
 #: src/invitations/actions/GroupInvitationCreateDialog.tsx
 #: src/invoices/list/MarkAsPaidDialog.tsx
@@ -10825,10 +10842,12 @@ msgid "You need approval to finish purchasing of services."
 msgstr ""
 
 #: src/invitations/InvitationAccept.tsx
+#: src/invitations/UserGroupInvitation.tsx
 msgid "You will be redirected in a moment."
 msgstr ""
 
 #: src/error/InvalidObjectPage.tsx
+#: src/invitations/GroupInvitationErrorMessage.tsx
 #: src/invitations/InvitationErrorMessage.tsx
 msgid "You've either entered invalid URL or don't have enough permissions to view this page."
 msgstr ""
@@ -10867,6 +10886,14 @@ msgstr ""
 
 #: src/project/ProjectTablePlaceholder.tsx
 msgid "Your organization does not have any projects yet."
+msgstr ""
+
+#: src/invitations/utils.ts
+msgid "Your permission request has been submitted."
+msgstr ""
+
+#: src/invitations/UserGroupInvitation.tsx
+msgid "Your request is being processed."
 msgstr ""
 
 #: src/auth/AuthHeader.tsx
@@ -11084,6 +11111,7 @@ msgstr ""
 msgid "order items"
 msgstr ""
 
+#: src/invitations/GroupInvitationMessage.tsx
 #: src/invitations/InvitationMessage.tsx
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "organization"
@@ -11125,6 +11153,7 @@ msgstr ""
 msgid "ports"
 msgstr ""
 
+#: src/invitations/GroupInvitationMessage.tsx
 #: src/invitations/InvitationMessage.tsx
 msgid "project"
 msgstr ""
@@ -11449,6 +11478,7 @@ msgstr ""
 msgid "{role} in {project}"
 msgstr ""
 
+#: src/invitations/GroupInvitationMessage.tsx
 #: src/invitations/InvitationMessage.tsx
 msgid "{sender} has invited you to join {name} {type} in {role} role."
 msgstr ""
