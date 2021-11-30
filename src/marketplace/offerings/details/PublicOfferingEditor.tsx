@@ -1,60 +1,68 @@
+import { useState } from 'react';
 import {
   ModalBody,
   ModalFooter,
   ModalHeader,
   ModalTitle,
 } from 'react-bootstrap';
-import { connect, useDispatch } from 'react-redux';
-import { reduxForm } from 'redux-form';
 
-import { FormContainer, SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateOffering } from '@waldur/marketplace/common/api';
-import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { showError, showSuccess } from '@waldur/store/notify';
+
+import { PageOverview } from './PageOverview';
+import { SidebarNav, SidebarRow } from './SidebarNav';
 
 require('./PublicOfferingEditor.css');
 
-export const PublicOfferingEditor = connect((_, props: any) => ({
-  initialValues: props.resolve.initialValues,
-}))(
-  reduxForm<{}, any>({
-    form: 'PublicOfferingEditor',
-  })(({ submitting, invalid, handleSubmit, resolve }) => {
-    const dispatch = useDispatch();
-    const updateOfferingHandler = async (formData) => {
-      try {
-        await updateOffering(resolve.uuid, {
-          description: formData.description,
-        });
-        await resolve.refreshOffering();
-        dispatch(showSuccess(translate('Offering has been updated.')));
-        dispatch(closeModalDialog());
-      } catch (e) {
-        dispatch(showError(translate('Unable to update offering.')));
-      }
-    };
+export const PublicOfferingEditor = ({ resolve }) => {
+  const [page, setPage] = useState('nav');
 
-    return (
-      <form onSubmit={handleSubmit(updateOfferingHandler)}>
-        <ModalHeader>
-          <ModalTitle>{translate('Edit offering details')}</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
-          <FormContainer layout="vertical" submitting={submitting}>
-            <TextField name="description" label={translate('Description')} />
-          </FormContainer>
-        </ModalBody>
-        <ModalFooter>
-          <CloseDialogButton />
-          <SubmitButton
-            disabled={invalid}
-            submitting={submitting}
-            label={translate('Update')}
+  return page == 'nav' ? (
+    <>
+      <ModalHeader>
+        <ModalTitle>{translate('Edit offering details')}</ModalTitle>
+      </ModalHeader>
+      <ModalBody>
+        <SidebarNav>
+          <SidebarRow
+            iconClass="fa fa-edit"
+            title={translate('Overview')}
+            description={translate(
+              'Customize name, description and terms of service',
+            )}
+            onClick={() => setPage('overview')}
           />
-        </ModalFooter>
-      </form>
-    );
-  }),
-);
+          <SidebarRow
+            iconClass="fa fa-bookmark"
+            title={translate('Description')}
+            description={translate(
+              'Customize offering category and attributes',
+            )}
+            onClick={() => alert('Not yet implemented.')}
+          />
+          <SidebarRow
+            iconClass="fa fa-wrench"
+            title={translate('Management')}
+            description={translate('Customize service settings')}
+            onClick={() => alert('Not yet implemented.')}
+          />
+          <SidebarRow
+            iconClass="fa fa-file-text-o"
+            title={translate('Accounting')}
+            description={translate('Customize plans and plan components')}
+            onClick={() => alert('Not yet implemented.')}
+          />
+        </SidebarNav>
+      </ModalBody>
+      <ModalFooter>
+        <CloseDialogButton />
+      </ModalFooter>
+    </>
+  ) : page == 'overview' ? (
+    <PageOverview
+      offering={resolve.offering}
+      refreshOffering={resolve.refreshOffering}
+      onReturn={() => setPage('nav')}
+    />
+  ) : null;
+};

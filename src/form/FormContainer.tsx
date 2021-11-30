@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import { FormGroup } from './FormGroup';
 
-interface FormContainerProps {
+export interface FormContainerProps {
   submitting: boolean;
   clearOnUnmount?: boolean;
   labelClass?: string;

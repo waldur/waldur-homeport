@@ -340,14 +340,16 @@ function* updateAccessPolicy(action: Action<any>) {
     const formData = yield select(
       getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID),
     );
-    yield put(
-      updatePublicOfferingsList(
-        customer,
-        isServiceManager && !isOwnerOrStaff,
-        user,
-        formData.state,
-      ),
-    );
+    if (formData) {
+      yield put(
+        updatePublicOfferingsList(
+          customer,
+          isServiceManager && !isOwnerOrStaff,
+          user,
+          formData.state,
+        ),
+      );
+    }
     yield put(
       showSuccess(translate('Access policy has been updated successfully.')),
     );
