@@ -18,9 +18,6 @@ describe('OpenStack Volume detail view', () => {
       .intercept('GET', '/api/openstacktenant-instances/**', {
         fixture: 'openstack/openstacktenant-instances.json',
       })
-      .intercept('GET', '/api/service-metadata/', {
-        fixture: 'openstack/service-metadata.json',
-      })
       .intercept('GET', '/api/marketplace-cart-items/', {
         fixture: 'offerings/shoppingCartItem.json',
       })
