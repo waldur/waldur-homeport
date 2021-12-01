@@ -7,7 +7,7 @@ import { LanguageOption } from '@waldur/core/types';
 import { getLanguageKey, setLanguageKey } from './LanguageStorage';
 
 function getLocaleData(locale) {
-  return import(`json-loader!po-loader?format=mf!../../locales/${locale}.po`);
+  return import(`../../locales/${locale}.po`);
 }
 
 class LanguageUtilsServiceClass {
