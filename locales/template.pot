@@ -170,6 +170,7 @@ msgstr ""
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
 #: src/marketplace-flows/ResourceCreateRequestsList.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -1807,6 +1808,7 @@ msgstr ""
 #: src/issues/IssueDetails.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
@@ -2124,6 +2126,7 @@ msgstr ""
 #: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
@@ -2596,6 +2599,7 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectUpdateForm.tsx
@@ -2870,6 +2874,10 @@ msgstr ""
 #: src/issues/feedback/SupportFeedbackListContainer.tsx
 #: src/issues/workspace/IssueNavigationService.ts
 msgid "Feedback"
+msgstr ""
+
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+msgid "Field"
 msgstr ""
 
 #: src/issues/attachments/utils.ts
@@ -4344,6 +4352,7 @@ msgstr ""
 #: src/invoices/details/InvoiceItemCompensationDialog.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
@@ -4537,6 +4546,10 @@ msgstr ""
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "New size"
+msgstr ""
+
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+msgid "New value"
 msgstr ""
 
 #: src/customer/create/CustomerCreateForm.tsx
@@ -4762,6 +4775,7 @@ msgstr ""
 msgid "Number of worker nodes"
 msgstr ""
 
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/project/ProjectCreateForm.tsx
 msgid "OECD FoS code"
 msgstr ""
@@ -4894,6 +4908,10 @@ msgstr ""
 
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 msgid "Offerings images"
+msgstr ""
+
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+msgid "Old value"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
@@ -5992,6 +6010,7 @@ msgstr ""
 #: src/issues/create/ProjectGroup.tsx
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 #: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/OrderSummary.tsx
@@ -6145,6 +6164,11 @@ msgstr ""
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
 msgid "Project type"
+msgstr ""
+
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
+#: src/marketplace/sidebar.ts
+msgid "Project update requests"
 msgstr ""
 
 #: src/marketplace/details/utils.ts
@@ -7140,12 +7164,14 @@ msgstr ""
 
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/marketplace-flows/utils.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Reviewed at"
 msgstr ""
 
 #: src/marketplace-flows/utils.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Reviewed by"
@@ -8091,6 +8117,7 @@ msgstr ""
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/utils.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -8949,6 +8976,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/create/ManagementStep.tsx
@@ -11199,6 +11227,7 @@ msgstr ""
 #: src/marketplace-flows/CustomerCreateRequestsList.tsx
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
 #: src/marketplace-flows/ResourceCreateRequestsList.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 msgid "requests"
 msgstr ""
 

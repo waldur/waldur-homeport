@@ -87,6 +87,14 @@ export const getDefaultItems = (customerUuid: string): MenuItemType[] => [
           uuid: customerUuid,
         },
       },
+      {
+        icon: 'fa-file',
+        label: translate('Project update requests'),
+        state: 'marketplace-project-update-requests',
+        params: {
+          uuid: customerUuid,
+        },
+      },
     ],
   },
 ];
