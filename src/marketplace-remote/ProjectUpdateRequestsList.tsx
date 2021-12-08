@@ -1,9 +1,13 @@
 import { FunctionComponent } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ProjectUpdateRequestActions } from './ProjectUpdateRequestActions';
 import { ProjectUpdateRequestExpandable } from './ProjectUpdateRequestExpandable';
@@ -46,10 +50,20 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   );
 };
 
+const mapPropsToFilter = (props) => ({
+  offering_customer_uuid: props.customer.uuid,
+});
+
+const mapStateToProps = (state: RootState) => ({
+  customer: getCustomer(state),
+});
+
 const TableOptions = {
   table: 'marketplace-project-update-requests',
   fetchData: createFetcher('marketplace-project-update-requests'),
+  mapPropsToFilter,
 };
 
-export const ProjectUpdateRequestsList =
-  connectTable(TableOptions)(TableComponent);
+const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
+
+export const ProjectUpdateRequestsList = enhance(TableComponent);
