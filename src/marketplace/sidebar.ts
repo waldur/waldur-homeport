@@ -41,6 +41,14 @@ export const getPublicServices = (customerId: string): MenuItemType => ({
         uuid: customerId,
       },
     },
+    {
+      icon: 'fa-file',
+      label: translate('Project update requests'),
+      state: 'marketplace-organization-project-update-requests',
+      params: {
+        uuid: customerId,
+      },
+    },
   ],
 });
 
@@ -83,14 +91,6 @@ export const getDefaultItems = (customerUuid: string): MenuItemType[] => [
         icon: 'fa-file',
         label: translate('My resources'),
         state: 'marketplace-customer-resources',
-        params: {
-          uuid: customerUuid,
-        },
-      },
-      {
-        icon: 'fa-file',
-        label: translate('Project update requests'),
-        state: 'marketplace-project-update-requests',
         params: {
           uuid: customerUuid,
         },
@@ -157,6 +157,14 @@ SidebarExtensionService.register(PROJECT_WORKSPACE, async () => {
         key: `marketplace_category_${category.uuid}`,
         countFieldKey: `marketplace_category_${category.uuid}`,
       })),
+    },
+    {
+      icon: 'fa-file',
+      label: translate('Project update requests'),
+      state: 'marketplace-project-update-requests',
+      params: {
+        uuid: project.uuid,
+      },
     },
   ];
 });

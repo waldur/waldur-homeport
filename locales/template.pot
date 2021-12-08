@@ -170,7 +170,7 @@ msgstr ""
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
 #: src/marketplace-flows/ResourceCreateRequestsList.tsx
-#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -1808,6 +1808,7 @@ msgstr ""
 #: src/issues/IssueDetails.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -4799,6 +4800,7 @@ msgstr ""
 #: src/customer/team/OfferingPermissionsList.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/actions/tabs.ts
@@ -6010,7 +6012,7 @@ msgstr ""
 #: src/issues/create/ProjectGroup.tsx
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/OrderSummary.tsx
@@ -6166,6 +6168,7 @@ msgstr ""
 msgid "Project type"
 msgstr ""
 
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/sidebar.ts
 msgid "Project update requests"
@@ -7164,6 +7167,7 @@ msgstr ""
 
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/marketplace-flows/utils.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -7171,6 +7175,7 @@ msgid "Reviewed at"
 msgstr ""
 
 #: src/marketplace-flows/utils.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -8117,6 +8122,7 @@ msgstr ""
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/utils.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
@@ -11227,6 +11233,7 @@ msgstr ""
 #: src/marketplace-flows/CustomerCreateRequestsList.tsx
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
 #: src/marketplace-flows/ResourceCreateRequestsList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 msgid "requests"
 msgstr ""
