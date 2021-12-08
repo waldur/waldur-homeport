@@ -7,8 +7,9 @@ import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
-import { getProject } from '@waldur/workspace/selectors';
+import { getCustomer } from '@waldur/workspace/selectors';
 
+import { ProjectUpdateRequestActions } from './ProjectUpdateRequestActions';
 import { ProjectUpdateRequestExpandable } from './ProjectUpdateRequestExpandable';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
@@ -17,10 +18,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     <Table
       {...props}
       columns={[
-        {
-          title: translate('Offering'),
-          render: ({ row }) => row.offering_name,
-        },
+        { title: translate('Project'), render: ({ row }) => row.old_name },
         { title: translate('State'), render: ({ row }) => row.state },
         {
           title: translate('Created'),
@@ -36,6 +34,15 @@ export const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('Reviewed by'),
           render: ({ row }) => row.reviewed_by_full_name || 'N/A',
         },
+        {
+          title: translate('Actions'),
+          render: ({ row }) => (
+            <ProjectUpdateRequestActions
+              request={row}
+              refreshList={props.fetch}
+            />
+          ),
+        },
       ]}
       expandableRow={ProjectUpdateRequestExpandable}
       verboseName={translate('requests')}
@@ -44,11 +51,11 @@ export const TableComponent: FunctionComponent<any> = (props) => {
 };
 
 const mapPropsToFilter = (props) => ({
-  project_uuid: props.project.uuid,
+  offering_customer_uuid: props.customer.uuid,
 });
 
 const mapStateToProps = (state: RootState) => ({
-  project: getProject(state),
+  customer: getCustomer(state),
 });
 
 const TableOptions = {
@@ -59,4 +66,4 @@ const TableOptions = {
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-export const ProjectUpdateRequestsList = enhance(TableComponent);
+export const OrganizationProjectUpdateRequestsList = enhance(TableComponent);
