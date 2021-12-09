@@ -3,6 +3,13 @@ import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
+const OpenstackVolumeDetails = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OpenstackVolumeDetails" */ '@waldur/openstack/openstack-volume/OpenstackVolumeDetails'
+    ),
+  'OpenstackVolumeDetails',
+);
 const OpenstackVolumeCheckoutSummary = lazyComponent(
   () =>
     import(
@@ -29,6 +36,7 @@ registerOfferingType({
     return translate('OpenStack volume');
   },
   component: OpenstackVolumeCreateForm,
+  detailsComponent: OpenstackVolumeDetails,
   checkoutSummaryComponent: OpenstackVolumeCheckoutSummary,
   serializer,
   disableOfferingCreation: true,
