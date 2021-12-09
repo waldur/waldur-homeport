@@ -31,11 +31,14 @@ export const calculateSystemVolumeSize = (formData) => {
   return Math.max(currentValue, minValue);
 };
 
+export const formatVolumeTypeLabel = (volumeType: VolumeType): string =>
+  volumeType.description
+    ? `${volumeType.name} (${volumeType.description})`
+    : volumeType.name;
+
 export const formatVolumeTypeChoices = (volumeTypes: VolumeType[]): any[] =>
   volumeTypes.map((volumeType) => ({
-    label: volumeType.description
-      ? `${volumeType.name} (${volumeType.description})`
-      : volumeType.name,
+    label: formatVolumeTypeLabel(volumeType),
     value: volumeType.url,
     name: volumeType.name,
     is_default: volumeType.is_default,
