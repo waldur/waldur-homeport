@@ -1,11 +1,16 @@
+import { isEmpty } from 'lodash';
 import { memo } from 'react';
 import { Col, Panel, PanelGroup, Row } from 'react-bootstrap';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { getDetailsComponent } from '@waldur/marketplace/common/registry';
+import {
+  getDetailsComponent,
+  getFormLimitParser,
+} from '@waldur/marketplace/common/registry';
 import { PlanDetails } from '@waldur/marketplace/details/plan/PlanDetails';
+import { OrderItemLimits } from '@waldur/marketplace/orders/item/details/OrderItemLimits';
 import { ResourceReference } from '@waldur/marketplace/resources/types';
 import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 
@@ -21,6 +26,8 @@ let OrderItemDetails = (
   props: OrderItemDetailsProps & { loadData(): void },
 ) => {
   const DetailsComponent = getDetailsComponent(props.orderItem.offering_type);
+  const limitParser = getFormLimitParser(props.orderItem.offering_type);
+  const limits = limitParser(props.orderItem.limits);
   return (
     <Row>
       <Col md={9}>
@@ -107,6 +114,19 @@ let OrderItemDetails = (
                   orderItem={props.orderItem}
                   offering={props.offering}
                   limits={props.limits}
+                />
+              </Panel.Body>
+            </Panel>
+          )}
+          {props.offering.components.length > 0 && !isEmpty(limits) && (
+            <Panel eventKey="limits">
+              <Panel.Heading>
+                <Panel.Title toggle={true}>{translate('Limits')}</Panel.Title>
+              </Panel.Heading>
+              <Panel.Body collapsible={true}>
+                <OrderItemLimits
+                  components={props.offering.components}
+                  limits={limits}
                 />
               </Panel.Body>
             </Panel>

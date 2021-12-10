@@ -3886,6 +3886,7 @@ msgstr ""
 
 #: src/dashboard/chart.ts
 #: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/orders/item/details/OrderItemLimits.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "Limit"
 msgstr ""
@@ -3906,6 +3907,7 @@ msgstr ""
 msgid "Limit-based"
 msgstr ""
 
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Limits"
@@ -4163,6 +4165,7 @@ msgstr ""
 
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/create/ComponentMeasuredUnitField.tsx
+#: src/marketplace/orders/item/details/OrderItemLimits.tsx
 msgid "Measured unit"
 msgstr ""
 
@@ -4372,6 +4375,7 @@ msgstr ""
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
+#: src/marketplace/orders/item/details/OrderItemLimits.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
