@@ -5,19 +5,19 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 
+const BookingDetails = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "BookingDetails" */ '@waldur/booking/BookingDetails'
+    ),
+  'BookingDetails',
+);
 const BookingCheckoutSummary = lazyComponent(
   () =>
     import(
       /* webpackChunkName: "BookingCheckoutSummary" */ '@waldur/booking/BookingCheckoutSummary'
     ),
   'BookingCheckoutSummary',
-);
-const OfferingConfigurationDetails = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingConfigurationDetails" */ '@waldur/support/OfferingConfigurationDetails'
-    ),
-  'OfferingConfigurationDetails',
 );
 const OfferingConfigurationForm = lazyComponent(
   () =>
@@ -83,7 +83,7 @@ registerOfferingType({
   checkoutSummaryComponent: BookingCheckoutSummary,
   component: OfferingConfigurationForm,
   pluginOptionsForm: OfferingPluginOptionsForm,
-  detailsComponent: OfferingConfigurationDetails,
+  detailsComponent: BookingDetails,
   showOptions: true,
   showComponents: true,
   schedulable: true,
