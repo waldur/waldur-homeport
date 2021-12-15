@@ -2263,20 +2263,12 @@ msgstr ""
 msgid "Direction"
 msgstr ""
 
-#: src/freeipa/DisableProfile.tsx
-msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
-msgstr ""
-
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 msgid "Disable data volume"
 msgstr ""
 
 #: src/openstack/openstack-subnet/fields.tsx
 msgid "Disable gateway IP advertising via DHCP"
-msgstr ""
-
-#: src/freeipa/DisableProfile.tsx
-msgid "Disable profile"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -2556,20 +2548,12 @@ msgstr ""
 msgid "Enable DHCP"
 msgstr ""
 
-#: src/freeipa/EnableProfile.tsx
-msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
-msgstr ""
-
 #: src/marketplace/offerings/create/ComponentBooleanDefaultLimitField.tsx
 msgid "Enable by default"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentLimitEnableField.tsx
 msgid "Enable limit"
-msgstr ""
-
-#: src/freeipa/EnableProfile.tsx
-msgid "Enable profile"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
@@ -6005,6 +5989,14 @@ msgstr ""
 msgid "Private clouds"
 msgstr ""
 
+#: src/freeipa/FreeIPAAccountEdit.tsx
+msgid "Profile is disabled."
+msgstr ""
+
+#: src/freeipa/FreeIPAAccountEdit.tsx
+msgid "Profile is enabled."
+msgstr ""
+
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/components/utils.tsx
@@ -9268,20 +9260,12 @@ msgstr ""
 msgid "Unable to destroy instance."
 msgstr ""
 
-#: src/freeipa/DisableProfile.tsx
-msgid "Unable to disable FreeIPA profile."
-msgstr ""
-
 #: src/issues/comments/effects.ts
 msgid "Unable to edit comment."
 msgstr ""
 
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 msgid "Unable to edit resource."
-msgstr ""
-
-#: src/freeipa/EnableProfile.tsx
-msgid "Unable to enable FreeIPA profile."
 msgstr ""
 
 #: src/customer/payment-profiles/store/effects.ts
@@ -10919,14 +10903,6 @@ msgstr ""
 
 #: src/freeipa/SyncProfile.tsx
 msgid "Your FreeIPA has been synced successfully."
-msgstr ""
-
-#: src/freeipa/DisableProfile.tsx
-msgid "Your FreeIPA profile has been disabled."
-msgstr ""
-
-#: src/freeipa/EnableProfile.tsx
-msgid "Your FreeIPA profile has been enabled."
 msgstr ""
 
 #: src/slurm/details/SubmitWithField.tsx
