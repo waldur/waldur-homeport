@@ -1946,6 +1946,10 @@ msgstr ""
 msgid "Current type"
 msgstr ""
 
+#: src/marketplace-script/marketplace.ts
+msgid "Custom scripts"
+msgstr ""
+
 #: src/customer/team/utils.ts
 msgid "Customer support"
 msgstr ""
@@ -2248,10 +2252,6 @@ msgstr ""
 
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 msgid "Device"
-msgstr ""
-
-#: src/marketplace-script/marketplace.ts
-msgid "Devops-friendly offering"
 msgstr ""
 
 #: src/digitalocean/help.ts
