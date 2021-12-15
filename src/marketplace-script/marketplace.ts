@@ -25,7 +25,7 @@ const ScriptsForm = lazyComponent(
 registerOfferingType({
   type: 'Marketplace.Script',
   get label() {
-    return translate('Devops-friendly offering');
+    return translate('Custom scripts');
   },
   component: OfferingConfigurationForm,
   detailsComponent: OfferingConfigurationDetails,
