@@ -3,8 +3,6 @@ import React from 'react';
 
 import { translate } from '@waldur/i18n';
 
-import { DisableProfile } from './DisableProfile';
-import { EnableProfile } from './EnableProfile';
 import { SyncProfile } from './SyncProfile';
 
 interface FreeIPAAccountEditOwnProps {
@@ -37,16 +35,9 @@ export const FreeIPAAccountEdit: React.FC<FreeIPAAccountEditOwnProps> = ({
               setLoading={setLoading}
               refreshProfile={refreshProfile}
             />
-            <DisableProfile
-              profile={profile}
-              setLoading={setLoading}
-              refreshProfile={refreshProfile}
-            />
-            <EnableProfile
-              profile={profile}
-              setLoading={setLoading}
-              refreshProfile={refreshProfile}
-            />
+            {profile.is_active
+              ? translate('Profile is enabled.')
+              : translate('Profile is disabled.')}
           </div>
         </div>
       </div>
