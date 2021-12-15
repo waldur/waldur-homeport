@@ -7,6 +7,16 @@ import store from '@waldur/store/store';
 
 import { customer } from './fixtures';
 
+jest.mock('@waldur/configs/default', () => ({
+  ENV: {
+    plugins: {
+      WALDUR_AUTH_SOCIAL: {
+        ENABLE_EDUTEAMS_SYNC: false,
+      },
+    },
+  },
+}));
+
 jest.mock('@waldur/store/store');
 
 const storeMock = store as jest.Mocked<typeof store>;
@@ -20,6 +30,7 @@ describe('Sidebar', () => {
         },
       },
     } as any);
+
     expect(orgWorkspaceCallbackFn()).toContainEqual(
       expect.objectContaining(getPublicServices(customer.uuid)),
     );

@@ -1,3 +1,4 @@
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
@@ -41,7 +42,7 @@ export const getPublicServices = (customerId: string): MenuItemType => ({
         uuid: customerId,
       },
     },
-    {
+    ENV.plugins.WALDUR_AUTH_SOCIAL.ENABLE_EDUTEAMS_SYNC && {
       icon: 'fa-file',
       label: translate('Project update requests'),
       state: 'marketplace-organization-project-update-requests',
@@ -158,7 +159,7 @@ SidebarExtensionService.register(PROJECT_WORKSPACE, async () => {
         countFieldKey: `marketplace_category_${category.uuid}`,
       })),
     },
-    {
+    ENV.plugins.WALDUR_AUTH_SOCIAL.ENABLE_EDUTEAMS_SYNC && {
       icon: 'fa-file',
       label: translate('Project update requests'),
       state: 'marketplace-project-update-requests',
