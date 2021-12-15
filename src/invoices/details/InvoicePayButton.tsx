@@ -20,7 +20,7 @@ export const InvoicePayButton: FC<InvoicePayButtonProps> = ({ invoice }) => {
     <a
       className="btn btn-warning btn-sm"
       href={invoice.payment_url}
-      target="_blank"
+      target="_self"
       rel="noopener noreferrer"
     >
       <i className="fa fa-money" /> {translate('Pay')}
