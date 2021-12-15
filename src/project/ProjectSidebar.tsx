@@ -19,7 +19,7 @@ export const ProjectSidebar: FunctionComponent = () => {
 
   const { value } = useAsync<SidebarMenuProps>(async () => {
     const extraItems = await getExtraSidebarItems();
-    const items = mergeItems(sidebarItems, extraItems);
+    const items = mergeItems(sidebarItems.filter(Boolean), extraItems);
     const fields = getCounterFields(items);
     const counters = await getProjectCounters(project, fields);
     return { items, counters };
