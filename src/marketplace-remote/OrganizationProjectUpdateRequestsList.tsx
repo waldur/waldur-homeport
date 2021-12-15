@@ -13,11 +13,15 @@ import { ProjectUpdateRequestActions } from './ProjectUpdateRequestActions';
 import { ProjectUpdateRequestExpandable } from './ProjectUpdateRequestExpandable';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  useTitle(translate('Project update requests'));
+  useTitle(translate('Project updates'));
   return (
     <Table
       {...props}
       columns={[
+        {
+          title: translate('Organization'),
+          render: ({ row }) => row.customer_name,
+        },
         { title: translate('Project'), render: ({ row }) => row.old_name },
         { title: translate('State'), render: ({ row }) => row.state },
         {

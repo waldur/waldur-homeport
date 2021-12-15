@@ -44,7 +44,7 @@ export const getPublicServices = (customerId: string): MenuItemType => ({
     },
     ENV.plugins.WALDUR_AUTH_SOCIAL.ENABLE_EDUTEAMS_SYNC && {
       icon: 'fa-file',
-      label: translate('Project update requests'),
+      label: translate('Project updates'),
       state: 'marketplace-organization-project-update-requests',
       params: {
         uuid: customerId,
@@ -161,7 +161,7 @@ SidebarExtensionService.register(PROJECT_WORKSPACE, async () => {
     },
     ENV.plugins.WALDUR_AUTH_SOCIAL.ENABLE_EDUTEAMS_SYNC && {
       icon: 'fa-file',
-      label: translate('Project update requests'),
+      label: translate('Project updates'),
       state: 'marketplace-project-update-requests',
       params: {
         uuid: project.uuid,
