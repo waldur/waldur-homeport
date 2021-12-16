@@ -1121,26 +1121,17 @@ msgstr "Detaljer"
 msgid "Device"
 msgstr "Enhet"
 
-msgid "Devops-friendly offering"
-msgstr "Devops-vänligt erbjudande"
-
 msgid "DigitalOcean provider"
 msgstr "DigitalOcean leverantör"
 
 msgid "Direction"
 msgstr "Riktning"
 
-msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
-msgstr "Inaktivera en profil i FreeIPA. Inaktiverade profiler är inte tillåtna för inloggning i Linux-systemen"
-
 msgid "Disable data volume"
 msgstr "Inaktivera datavolym"
 
 msgid "Disable gateway IP advertising via DHCP"
 msgstr "Inaktivera gateway IP-annonsering via DHCP"
-
-msgid "Disable profile"
-msgstr "Inaktivera profil"
 
 msgid "Disabled"
 msgstr "Inaktiverad"
@@ -1277,17 +1268,11 @@ msgstr "Aktivera"
 msgid "Enable DHCP"
 msgstr "Aktivera DHCP"
 
-msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
-msgstr "Aktivera en profil i FreeIPA. Endast aktiverade profiler tillåts för inloggning i Linux-systemen"
-
 msgid "Enable by default"
 msgstr "Aktivera som standard"
 
 msgid "Enable limit"
 msgstr "Aktivera gräns"
-
-msgid "Enable profile"
-msgstr "Aktivera profil"
 
 msgid "Enable profile after creation"
 msgstr "Aktivera profil efter att ha skapats"
@@ -4988,14 +4973,8 @@ msgstr "Det gick inte att ta bort {resourceType}."
 msgid "Unable to destroy instance."
 msgstr "Det går inte att förstöra instans."
 
-msgid "Unable to disable FreeIPA profile."
-msgstr "Det gick inte att inaktivera FreeIPA-profilen."
-
 msgid "Unable to edit comment."
 msgstr "Det gick inte att redigera kommentar."
-
-msgid "Unable to enable FreeIPA profile."
-msgstr "Det gick inte att aktivera FreeIPA-profilen."
 
 msgid "Unable to enable payment profile."
 msgstr "Det gick inte att aktivera betalningsprofilen."
@@ -5953,12 +5932,6 @@ msgstr "Din FreeIPA har tagits bort i FreeIPA-servern."
 
 msgid "Your FreeIPA has been synced successfully."
 msgstr "Din FreeIPA har synkroniserats framgångsrikt."
-
-msgid "Your FreeIPA profile has been disabled."
-msgstr "Din FreeIPA-profil har inaktiverats."
-
-msgid "Your FreeIPA profile has been enabled."
-msgstr "Din FreeIPA-profil har aktiverats."
 
 msgid "Your account is not authorized to use this allocation"
 msgstr "Ditt konto har inte behörighet att använda den här allokeringen"

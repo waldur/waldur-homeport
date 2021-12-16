@@ -1151,26 +1151,17 @@ msgstr "Išsami informacija"
 msgid "Device"
 msgstr "Įrenginys"
 
-msgid "Devops-friendly offering"
-msgstr "Devops draugiškas pasiūlymas"
-
 msgid "DigitalOcean provider"
 msgstr "DigitalOcean teikėjas"
 
 msgid "Direction"
 msgstr "Kryptis"
 
-msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
-msgstr "Išjunkite profilį FreeIPA. Išjungti profiliai neleidžiami prisijungti prie Linux sistemų"
-
 msgid "Disable data volume"
 msgstr "Išjungti duomenų tomą"
 
 msgid "Disable gateway IP advertising via DHCP"
 msgstr "Išjunkite šliuzo IP reklamą per DHCP"
-
-msgid "Disable profile"
-msgstr "Išjungti profilį"
 
 msgid "Disabled"
 msgstr "Išjungta"
@@ -1316,17 +1307,11 @@ msgstr "Įgalinti"
 msgid "Enable DHCP"
 msgstr "Įgalinti DHCP"
 
-msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
-msgstr "Įgalinti profilį „FreeIPA“. Tik įgalintus profilius leidžiama prisijungti prie Linux sistemų"
-
 msgid "Enable by default"
 msgstr "Įgalinti pagal numatytuosius nustatymus"
 
 msgid "Enable limit"
 msgstr "Įjungti ribą"
-
-msgid "Enable profile"
-msgstr "Įgalinti profilį"
 
 msgid "Enable profile after creation"
 msgstr "Įgalinti profilį po sukūrimo"
@@ -5069,14 +5054,8 @@ msgstr "Nepavyko ištrinti {resourceType}."
 msgid "Unable to destroy instance."
 msgstr "Neįmanoma sunaikinti egzemplioriaus."
 
-msgid "Unable to disable FreeIPA profile."
-msgstr "Neįmanoma išjungti FreeIPA profilio."
-
 msgid "Unable to edit comment."
 msgstr "Neįmanoma redaguoti komentaro."
-
-msgid "Unable to enable FreeIPA profile."
-msgstr "Neįmanoma įgalinti FreeIPA profilio."
 
 msgid "Unable to enable payment profile."
 msgstr "Neįmanoma įgalinti mokėjimo profilio."
@@ -6043,12 +6022,6 @@ msgstr "Jūsų FreeIPA buvo pašalintas FreeIPA serverio."
 
 msgid "Your FreeIPA has been synced successfully."
 msgstr "Jūsų FreeIPA buvo sėkmingai sinchronizuotas."
-
-msgid "Your FreeIPA profile has been disabled."
-msgstr "Jūsų FreeIPA profilis buvo išjungtas."
-
-msgid "Your FreeIPA profile has been enabled."
-msgstr "Jūsų FreeIPA profilis buvo įgalintas."
 
 msgid "Your account is not authorized to use this allocation"
 msgstr "Jūsų paskyra nėra įgaliota naudoti šio paskirstymo"

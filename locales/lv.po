@@ -155,9 +155,6 @@ msgstr "Izmainīt komandas dalībnieku"
 msgid "Email"
 msgstr "E-pasts"
 
-msgid "Enable profile"
-msgstr "Aktivizēt profilu"
-
 msgid "Enabled"
 msgstr "Ieslēgts"
 

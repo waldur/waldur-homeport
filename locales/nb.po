@@ -1151,26 +1151,17 @@ msgstr "Detaljer"
 msgid "Device"
 msgstr "Enhet"
 
-msgid "Devops-friendly offering"
-msgstr "Devops-vennlig tilbud"
-
 msgid "DigitalOcean provider"
 msgstr "DigitalOcean leverandør"
 
 msgid "Direction"
 msgstr "Retning"
 
-msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
-msgstr "Deaktiver en profil i FreeIPA. Deaktiverte profiler er ikke tillatt for pålogging til Linux-systemene"
-
 msgid "Disable data volume"
 msgstr "Deaktivere datavolum"
 
 msgid "Disable gateway IP advertising via DHCP"
 msgstr "Deaktiver gateway IP-annonsering via DHCP"
-
-msgid "Disable profile"
-msgstr "Deaktiver profil"
 
 msgid "Disabled"
 msgstr "Deaktivert"
@@ -1316,17 +1307,11 @@ msgstr "Aktiver"
 msgid "Enable DHCP"
 msgstr "Aktiver DHCP"
 
-msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
-msgstr "Aktiver en profil i FreeIPA. Bare aktiverte profiler er tillatt for innlogging i Linux-systemene"
-
 msgid "Enable by default"
 msgstr "Aktiver som standard"
 
 msgid "Enable limit"
 msgstr "Aktiver grense"
-
-msgid "Enable profile"
-msgstr "Aktiver profil"
 
 msgid "Enable profile after creation"
 msgstr "Aktiver profil etter oppretting"
@@ -5069,14 +5054,8 @@ msgstr "Kan ikke slette {resourceType}."
 msgid "Unable to destroy instance."
 msgstr "Kan ikke ødelegge forekomst."
 
-msgid "Unable to disable FreeIPA profile."
-msgstr "Kan ikke deaktivere FreeIPA-profil."
-
 msgid "Unable to edit comment."
 msgstr "Kan ikke redigere kommentar."
-
-msgid "Unable to enable FreeIPA profile."
-msgstr "Kan ikke aktivere FreeIPA-profil."
 
 msgid "Unable to enable payment profile."
 msgstr "Kan ikke aktivere betalingsprofil."
@@ -6043,12 +6022,6 @@ msgstr "Din FreeIPA er fjernet i FreeIPA-server."
 
 msgid "Your FreeIPA has been synced successfully."
 msgstr "Din FreeIPA har blitt synkronisert."
-
-msgid "Your FreeIPA profile has been disabled."
-msgstr "FreeIPA-profilen din er deaktivert."
-
-msgid "Your FreeIPA profile has been enabled."
-msgstr "Din FreeIPA-profil er aktivert."
 
 msgid "Your account is not authorized to use this allocation"
 msgstr "Kontoen din er ikke autorisert til å bruke denne tildelingen"

@@ -860,9 +860,6 @@ msgstr "جزئیات"
 msgid "Device"
 msgstr "دستگاه"
 
-msgid "Devops-friendly offering"
-msgstr "پشنهاد دوستانه-Devops"
-
 msgid "DigitalOcean provider"
 msgstr "ارائه دهنده DigitalOcean"
 
@@ -871,9 +868,6 @@ msgstr "غیر فعال کردن data volume"
 
 msgid "Disable gateway IP advertising via DHCP"
 msgstr "غیر فعال کردن تبلیغات gateway IP از طریق DHCP"
-
-msgid "Disable profile"
-msgstr "غیرفعال کردن پروفایل"
 
 msgid "Disabled"
 msgstr "غیرفعال شده"
@@ -970,12 +964,6 @@ msgstr "فعال کردن"
 
 msgid "Enable DHCP"
 msgstr "فعال کردن DHCP"
-
-msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
-msgstr "فعال کردن پروفایل در FreeIPA. فقط پروفایل هایی را فعال میکند که اجازه ورود به سیستم Linux را دارند."
-
-msgid "Enable profile"
-msgstr "فعال کردن پروفایل"
 
 msgid "Enabled"
 msgstr "فعال شده"

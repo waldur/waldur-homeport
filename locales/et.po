@@ -1049,26 +1049,17 @@ msgstr "Lisainfo"
 msgid "Device"
 msgstr "Seade"
 
-msgid "Devops-friendly offering"
-msgstr "Devops-sõbralik pakkumine"
-
 msgid "DigitalOcean provider"
 msgstr "DigitalOceani pakkuja"
 
 msgid "Direction"
 msgstr "Suund"
 
-msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
-msgstr "Keelake profiil FreeIPA-s. Väljalülitatud profiiliga ei ole lubatud sisselogimise Linux süsteemidesse"
-
 msgid "Disable data volume"
 msgstr "Lülita salvestusüksus välja"
 
 msgid "Disable gateway IP advertising via DHCP"
 msgstr "Lüüsi IP-reklaami keelamine DHCP kaudu"
-
-msgid "Disable profile"
-msgstr "Lülita profiil välja"
 
 msgid "Disabled"
 msgstr "Keelatud"
@@ -1196,17 +1187,11 @@ msgstr "Aktiveeri"
 msgid "Enable DHCP"
 msgstr "Luba DHCP"
 
-msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
-msgstr "Luba profiil FreeIPA-s. Ainult sisselülitatud profiiliga on lubatud sisselogimise Linux süsteemidesse"
-
 msgid "Enable by default"
 msgstr "Vaikimisi lubamine"
 
 msgid "Enable limit"
 msgstr "Luba limiit"
-
-msgid "Enable profile"
-msgstr "Luba profiil"
 
 msgid "Enable profile after creation"
 msgstr "Luba profiil pärast loomist"
@@ -4414,9 +4399,6 @@ msgstr "Sinu FreeIPA on eemaldatud FreeIPA serverist."
 
 msgid "Your FreeIPA has been synced successfully."
 msgstr "Teie FreeIPA on edukalt sünkroonitud."
-
-msgid "Your FreeIPA profile has been disabled."
-msgstr "Sinu FreeIPA profiil on deaktiveeritud."
 
 msgid "Your account is not authorized to use this allocation"
 msgstr "Teie kontol ei ole lubatud seda jaotust kasutada"

@@ -455,14 +455,8 @@ msgstr "Cihaz "
 msgid "DigitalOcean provider"
 msgstr "DigitalOcean təchizatçısı (provayderi)"
 
-msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
-msgstr "FreeİPA-da profili söndürmək. Söndürülmüş profillərə Linux sisteminə daxil olmağa icazə verilmir "
-
 msgid "Disable data volume"
 msgstr "Verilənlərin həcmini söndürmək"
-
-msgid "Disable profile"
-msgstr "Profili söndürmək"
 
 msgid "Do you really want to delete comment?"
 msgstr "Siz həqiqətən də şərhi silmək istəyirisiniz?"
@@ -508,12 +502,6 @@ msgstr "e-poçt"
 
 msgid "Enable DHCP"
 msgstr "DHCP (əsas hissənin dinamik konfiqurasiya edilmə protokolu) işə salmaq"
-
-msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
-msgstr "FreeIPA profilini işə salmaq. Yalnız işə salınan profillərə Limux sisteminə daxil olmağa icazə verilir. "
-
-msgid "Enable profile"
-msgstr "Profili işə salmaq "
 
 msgid "Enabled"
 msgstr "İşə salındı"
@@ -2278,9 +2266,6 @@ msgstr "Sizin FreeIPA-nız FreeIPA serverində keçirilib."
 
 msgid "Your FreeIPA has been synced successfully."
 msgstr "Sizin FreeIPA uğurla sinxronlaşdırılıb."
-
-msgid "Your FreeIPA profile has been disabled."
-msgstr "Sizin FreeIPA profiliniz söndürülüb."
 
 msgid "Your current email is:"
 msgstr "Sizin mövcud e-poçtunuz:"
