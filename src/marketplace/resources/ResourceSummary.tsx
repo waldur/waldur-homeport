@@ -64,5 +64,6 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
         }
       />
     ) : null}
+    <Field label={translate('Username')} value={resource.username} />
   </ResourceDetailsTable>
 );
