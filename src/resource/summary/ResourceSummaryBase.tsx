@@ -1,3 +1,4 @@
+import { ENV } from '@waldur/configs/default';
 import { translate, withTranslation } from '@waldur/i18n';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Resource } from '@waldur/resource/types';
@@ -23,7 +24,12 @@ export function PureResourceSummaryBase<T extends Resource = any>(
         label={translate('Created')}
         value={<CreatedField resource={props.resource} />}
       />
-      <Field label={translate('Termination date')} value={resource.end_date} />
+      {ENV.plugins.WALDUR_MARKETPLACE.ENABLE_RESOURCE_END_DATE ? (
+        <Field
+          label={translate('Termination date')}
+          value={resource.end_date}
+        />
+      ) : null}
       <Field
         label={translate('UUID')}
         value={resource.uuid}

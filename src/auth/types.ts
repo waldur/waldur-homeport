@@ -74,6 +74,7 @@ interface MarketplaceConfiguration {
   ADMIN_CAN_APPROVE_ORDER: boolean;
   OWNER_CAN_REGISTER_SERVICE_PROVIDER: boolean;
   ANONYMOUS_USER_CAN_VIEW_OFFERINGS: boolean;
+  ENABLE_RESOURCE_END_DATE: boolean;
 }
 
 interface OpenStackConfiguration {
