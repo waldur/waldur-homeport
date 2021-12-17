@@ -56,4 +56,5 @@ export interface Resource extends ResourceReference {
   marketplace_offering_uuid?: string;
   marketplace_resource_uuid?: string;
   end_date?: string;
+  username?: string;
 }
