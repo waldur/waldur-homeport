@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { updateResourceEndDateByProvider } from '@waldur/marketplace/common/api';
@@ -48,6 +49,10 @@ export const EditResourceEndDateByProviderAction = ({
         size: 'md',
       }),
     );
+
+  if (!ENV.plugins.WALDUR_MARKETPLACE.ENABLE_RESOURCE_END_DATE) {
+    return null;
+  }
 
   return isOwnerOrStaff || isServiceManager || isSupport ? (
     <ActionItem title={translate('Set termination date')} action={callback} />

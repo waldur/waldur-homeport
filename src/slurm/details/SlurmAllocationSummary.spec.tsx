@@ -18,7 +18,10 @@ const slurmApiMock = slurmApi as jest.Mocked<typeof slurmApi>;
 
 jest.mock('@waldur/configs/default', () => ({
   ENV: {
-    plugins: { WALDUR_FREEIPA: { ENABLED: true, USERNAME_PREFIX: 'waldur_' } },
+    plugins: {
+      WALDUR_FREEIPA: { ENABLED: true, USERNAME_PREFIX: 'waldur_' },
+      WALDUR_MARKETPLACE: { ENABLE_RESOURCE_END_DATE: true },
+    },
   },
 }));
 
