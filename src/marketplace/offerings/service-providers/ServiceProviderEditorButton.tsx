@@ -20,7 +20,9 @@ export const ServiceProviderEditorButton = ({
   refreshServiceProvider,
 }) => {
   const dispatch = useDispatch();
-  const { value: user } = useAsync(getCurrentUser);
+  const { value: user } = useAsync(() =>
+    getCurrentUser({ __skipLogout__: true }),
+  );
   if (!user || !user.is_staff) {
     return null;
   }
