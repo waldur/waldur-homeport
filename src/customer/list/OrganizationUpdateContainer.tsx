@@ -3,7 +3,6 @@ import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { CustomerLogoUpdateContainer } from '@waldur/customer/details/CustomerLogoUpdateContainer';
 import { OrganizationUpdate } from '@waldur/customer/list/OrganizationUpdate';
 import { translate } from '@waldur/i18n';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
@@ -47,9 +46,6 @@ export const OrganizationUpdateContainer: FunctionComponent = () => {
   ) : error ? (
     <>{translate('Unable to load customer.')}</>
   ) : (
-    <>
-      <OrganizationUpdate customer={customer} />
-      <CustomerLogoUpdateContainer customer={customer} />
-    </>
+    <OrganizationUpdate customer={customer} />
   );
 };

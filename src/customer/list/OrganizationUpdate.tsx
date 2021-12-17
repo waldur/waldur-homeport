@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { getFormValues, reduxForm } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { ORGANIZATION_UPDATE_FORM_ID } from '@waldur/customer/list/constants';
@@ -18,6 +18,8 @@ import {
 } from '@waldur/form';
 import { EmailField } from '@waldur/form/EmailField';
 import { translate } from '@waldur/i18n';
+
+import { CustomerLogoUpdate } from '../details/CustomerLogoUpdate';
 
 const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
   <form
@@ -97,6 +99,8 @@ const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
         label={translate('Tax percent')}
       />
 
+      <CustomerLogoUpdate customer={props.customer} formData={props.formData} />
+
       <div className="form-group">
         <div
           className="col-sm-8 col-sm-offset-2"
@@ -113,8 +117,9 @@ const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
   </form>
 );
 
-const mapStateToProps = (_state, ownProps) => ({
+const mapStateToProps = (state, ownProps) => ({
   initialValues: getInitialValuesOfOrganizationUpdateForm(ownProps.customer),
+  formData: getFormValues(ORGANIZATION_UPDATE_FORM_ID)(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
