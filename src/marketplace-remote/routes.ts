@@ -1,33 +1,33 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
-const OrganizationProjectUpdateRequestsList = lazyComponent(
+const OrganizationProjectUpdateRequestListContainer = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "OrganizationProjectUpdateRequestsList" */ './OrganizationProjectUpdateRequestsList'
+      /* webpackChunkName: "OrganizationProjectUpdateRequestListContainer" */ './OrganizationProjectUpdateRequestListContainer'
     ),
-  'OrganizationProjectUpdateRequestsList',
+  'OrganizationProjectUpdateRequestListContainer',
 );
 
-const ProjectUpdateRequestsList = lazyComponent(
+const ProjectUpdateRequestListContainer = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "ProjectUpdateRequestsList" */ './ProjectUpdateRequestsList'
+      /* webpackChunkName: "ProjectUpdateRequestListContainer" */ './ProjectUpdateRequestListContainer'
     ),
-  'ProjectUpdateRequestsList',
+  'ProjectUpdateRequestListContainer',
 );
 
 export const states: StateDeclaration[] = [
   {
     name: 'marketplace-organization-project-update-requests',
     url: 'marketplace-project-update-requests/',
-    component: OrganizationProjectUpdateRequestsList,
+    component: OrganizationProjectUpdateRequestListContainer,
     parent: 'organization',
   },
   {
     name: 'marketplace-project-update-requests',
     url: 'marketplace-project-update-requests/',
-    component: ProjectUpdateRequestsList,
+    component: ProjectUpdateRequestListContainer,
     parent: 'project',
   },
 ];

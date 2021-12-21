@@ -660,6 +660,7 @@ msgstr ""
 
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Approved"
 msgstr ""
@@ -1202,6 +1203,7 @@ msgstr ""
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
 msgid "Canceled"
 msgstr ""
 
@@ -5499,6 +5501,7 @@ msgstr ""
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
@@ -6542,6 +6545,7 @@ msgstr ""
 #: src/invitations/InvitationsFilter.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Rejected"
@@ -7638,6 +7642,7 @@ msgstr ""
 
 #: src/booking/BookingStateFilter.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
@@ -8123,6 +8128,7 @@ msgstr ""
 #: src/marketplace-flows/utils.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
