@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -45,10 +46,15 @@ export const TableComponent: FunctionComponent<any> = (props) => {
 
 const mapPropsToFilter = (props) => ({
   project_uuid: props.project.uuid,
+  state: props.filter?.state?.map((choice) => choice.value),
 });
+
+const filterFormSelector = (state: RootState) =>
+  getFormValues('ProjectUpdateRequestListFilter')(state);
 
 const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
+  filter: filterFormSelector(state),
 });
 
 const TableOptions = {
