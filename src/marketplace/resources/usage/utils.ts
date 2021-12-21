@@ -78,22 +78,6 @@ const formatChart = (
   ],
 });
 
-// Filters usages by type and the last 12 months period
-const filterUsages = (
-  component: OfferingComponent,
-  usages: ComponentUsage[],
-) => {
-  const threshold = DateTime.now().minus({ months: 12 });
-  return usages.filter((usage) => {
-    const usageDate = parseDate(usage.date);
-    return (
-      threshold < usageDate &&
-      DateTime.now().diff(usageDate).as('days') >= 0 &&
-      usage.type === component.type
-    );
-  });
-};
-
 const getLastTwelveMonths = (): DateTime[] => {
   const periods = [];
   for (let i = 11; i >= 0; i--) {
@@ -137,7 +121,10 @@ export const getEChartOptions = (
 ) => {
   const periods = getLastTwelveMonths();
   const labels = periods.map((date) => `${date.month} - ${date.year}`);
-  const formattedUsages = getUsages(periods, filterUsages(component, usages));
+  const formattedUsages = getUsages(
+    periods,
+    usages.filter((usage) => usage.type === component.type),
+  );
   return formatChart(component.measured_unit, color, labels, formattedUsages);
 };
 

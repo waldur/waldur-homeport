@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from 'axios';
 import { DateTime } from 'luxon';
 
 import { ENV } from '@waldur/configs/default';
@@ -29,7 +30,11 @@ export const getOfferingCostChartData = (
     },
   }).then((response) => response);
 
-export const getOfferingComponentStats = (offeringUuid: string) =>
+export const getOfferingComponentStats = (
+  offeringUuid: string,
+  options?: AxiosRequestConfig,
+) =>
   getAll<ComponentUsage>(
     `/marketplace-offerings/${offeringUuid}/component_stats/`,
+    options,
   );

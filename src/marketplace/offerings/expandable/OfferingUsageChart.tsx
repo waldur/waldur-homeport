@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
@@ -21,7 +22,19 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
     loading,
     error,
     value: usages,
-  } = useAsync(() => getOfferingComponentStats(offeringUuid), [offeringUuid]);
+  } = useAsync(
+    () =>
+      getOfferingComponentStats(offeringUuid, {
+        params: {
+          start: DateTime.now()
+            .minus({ months: 12 })
+            .startOf('month')
+            .toFormat('yyyy-MM'),
+          end: DateTime.now().endOf('month').toFormat('yyyy-MM'),
+        },
+      }),
+    [offeringUuid],
+  );
   return loading ? (
     <LoadingSpinner />
   ) : error ? (
