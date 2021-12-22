@@ -9,6 +9,7 @@ import {
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
+import { PageHeroImage } from './PageHeroImage';
 import { PageOverview } from './PageOverview';
 import { SidebarNav, SidebarRow } from './SidebarNav';
 
@@ -52,6 +53,12 @@ export const PublicOfferingEditor = ({ resolve }) => {
             description={translate('Customize plans and plan components')}
             onClick={() => alert('Not yet implemented.')}
           />
+          <SidebarRow
+            iconClass="fa fa-image"
+            title={translate('Hero image')}
+            description={translate('Set hero image')}
+            onClick={() => setPage('hero_image')}
+          />
         </SidebarNav>
       </ModalBody>
       <ModalFooter>
@@ -60,6 +67,12 @@ export const PublicOfferingEditor = ({ resolve }) => {
     </>
   ) : page == 'overview' ? (
     <PageOverview
+      offering={resolve.offering}
+      refreshOffering={resolve.refreshOffering}
+      onReturn={() => setPage('nav')}
+    />
+  ) : page == 'hero_image' ? (
+    <PageHeroImage
       offering={resolve.offering}
       refreshOffering={resolve.refreshOffering}
       onReturn={() => setPage('nav')}
