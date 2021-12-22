@@ -1111,6 +1111,7 @@ msgstr ""
 #: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
+#: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 msgid "Browse"
 msgstr ""
@@ -3218,6 +3219,11 @@ msgstr ""
 msgid "Helpdesk dashboard"
 msgstr ""
 
+#: src/marketplace/offerings/details/PageHeroImage.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+msgid "Hero image"
+msgstr ""
+
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Hide controls"
 msgstr ""
@@ -3359,6 +3365,7 @@ msgid "Image name"
 msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
+#: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 msgid "Image:"
 msgstr ""
@@ -4846,6 +4853,7 @@ msgid "Offering has been imported."
 msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
+#: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/details/PageOverview.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering has been updated."
@@ -7861,6 +7869,10 @@ msgstr ""
 msgid "Set backend ID"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+msgid "Set hero image"
+msgstr ""
+
 #: src/slurm/SetLimitsAction.tsx
 msgid "Set limits"
 msgstr ""
@@ -9900,6 +9912,7 @@ msgstr ""
 msgid "Unable to update offering state."
 msgstr ""
 
+#: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/details/PageOverview.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to update offering."
@@ -10046,6 +10059,7 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
+#: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/details/PageOverview.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx

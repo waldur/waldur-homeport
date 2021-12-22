@@ -137,6 +137,7 @@ export interface Offering extends GeolocationPoint {
   referred_pids: ReferredPids[];
   google_calendar_is_public: boolean;
   google_calendar_link?: string;
+  image?: string;
   googlecalendar?: OfferingGoogleCalendar;
   divisions: Division[];
 }

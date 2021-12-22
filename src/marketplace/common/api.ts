@@ -143,6 +143,13 @@ export const uploadOfferingThumbnail = (offeringId, thumbnail) =>
     { thumbnail },
   );
 
+export const uploadOfferingHeroImage = (offeringId, image) =>
+  sendForm<Offering>(
+    'PATCH',
+    `${ENV.apiEndpoint}api/marketplace-offerings/${offeringId}/`,
+    { image },
+  );
+
 export const updateOfferingAttributes = (offeringId, data) =>
   post(`/marketplace-offerings/${offeringId}/update_attributes/`, data);
 

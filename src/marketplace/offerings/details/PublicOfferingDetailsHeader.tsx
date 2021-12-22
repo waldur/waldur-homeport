@@ -38,7 +38,7 @@ export const PublicOfferingDetailsHeader: FunctionComponent<PublicOfferingDetail
       <div
         className="publicOfferingDetailsHeader"
         style={{
-          backgroundImage: `url(${offering.customer_image || GeorgiaNature})`,
+          backgroundImage: `url(${offering.image || GeorgiaNature})`,
         }}
       >
         <div className="publicOfferingDetailsHeader__card">
