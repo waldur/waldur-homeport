@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useEffect, FunctionComponent, useContext } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 
 import { ENV } from '@waldur/configs/default';
@@ -12,6 +12,7 @@ import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { LayoutContext } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
+import { showError, showSuccess } from '@waldur/store/notify';
 import { getCustomer as getCustomerSelector } from '@waldur/workspace/selectors';
 
 import { Invoice } from '../types';
@@ -65,7 +66,7 @@ export const BillingDetails: FunctionComponent = () => {
 
   const router = useRouter();
   const {
-    params: { invoice_uuid: invoiceId },
+    params: { invoice_uuid: invoiceId, status },
   } = useCurrentStateAndParams();
 
   const [{ loading, error, value: invoice }, callback] = useAsyncFn(
@@ -102,6 +103,17 @@ export const BillingDetails: FunctionComponent = () => {
       layoutContext.setSidebarClass('');
     };
   }, [invoice, layoutContext]);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (status === 'succeeded') {
+      dispatch(showSuccess(translate('Payment succeeded.')));
+    } else if (status === 'failed') {
+      dispatch(showError(translate('Payment failed.')));
+    } else if (status === 'skipped') {
+      dispatch(showSuccess(translate('Payment has already been done.')));
+    }
+  }, [status, dispatch]);
 
   return loading ? (
     <LoadingSpinner />

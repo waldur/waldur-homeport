@@ -5414,6 +5414,10 @@ msgstr ""
 msgid "Payment events"
 msgstr ""
 
+#: src/invoices/details/BillingDetails.tsx
+msgid "Payment failed."
+msgstr ""
+
 #: src/paypal/events.ts
 msgid "Payment for {customer_link} has been approved."
 msgstr ""
@@ -5424,6 +5428,10 @@ msgstr ""
 
 #: src/customer/payment-profiles/utils.ts
 msgid "Payment gateways (monthly)"
+msgstr ""
+
+#: src/invoices/details/BillingDetails.tsx
+msgid "Payment has already been done."
 msgstr ""
 
 #: src/customer/payments/store/effects.ts
@@ -5482,6 +5490,10 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfilesPanel.tsx
 msgid "Payment profiles"
+msgstr ""
+
+#: src/invoices/details/BillingDetails.tsx
+msgid "Payment succeeded."
 msgstr ""
 
 #: src/customer/list/CustomerPaymentProfile.tsx

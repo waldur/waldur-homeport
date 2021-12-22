@@ -28,7 +28,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'billingDetails',
-    url: 'billing/:invoice_uuid/',
+    url: 'billing/:invoice_uuid/?status',
     component: BillingDetails,
     parent: 'organization',
   },
