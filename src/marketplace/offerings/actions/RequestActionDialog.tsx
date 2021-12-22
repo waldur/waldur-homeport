@@ -28,7 +28,7 @@ export const RequestActionDialog: FunctionComponent<{
         openIssueCreateDialog({
           issue: {
             type: ISSUE_IDS.SERVICE_REQUEST,
-            summary: translate('Request {mode} of Public Offering', {
+            summary: translate('Request {mode} of public offering', {
               mode: offeringRequestMode,
             }),
             description:
@@ -66,7 +66,7 @@ export const RequestActionDialog: FunctionComponent<{
             offeringRequestMode,
           },
           options: {
-            title: translate('Request {mode} of Public Offering', {
+            title: translate('Request {mode} of public offering', {
               mode: offeringRequestMode,
             }),
             descriptionPlaceholder: translate('Please provide a reason'),

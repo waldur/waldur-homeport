@@ -6815,7 +6815,7 @@ msgid "Request type"
 msgstr ""
 
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
-msgid "Request {mode} of Public Offering"
+msgid "Request {mode} of public offering"
 msgstr ""
 
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
