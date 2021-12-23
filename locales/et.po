@@ -2996,9 +2996,6 @@ msgstr "Päringu nimi"
 msgid "Request type"
 msgstr "Päringu liik"
 
-msgid "Request {mode} of Public Offering"
-msgstr "Avaliku pakkumise {mode} taotlus"
-
 msgid "Request {requestId} has been created."
 msgstr "Päring {requestId} on loodud."
 

@@ -3719,9 +3719,6 @@ msgstr "Název požadavku"
 msgid "Request type"
 msgstr "Typ požadavku"
 
-msgid "Request {mode} of Public Offering"
-msgstr "Žádost {mode} o veřejnou nabídku"
-
 msgid "Request {mode} of {name}"
 msgstr "Požadavek {mode} na {name}"
 

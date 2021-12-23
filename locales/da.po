@@ -3719,9 +3719,6 @@ msgstr "Anmodning titel"
 msgid "Request type"
 msgstr "Anmodningstype"
 
-msgid "Request {mode} of Public Offering"
-msgstr "Anmodning om {mode} af offentligt udbud"
-
 msgid "Request {mode} of {name}"
 msgstr "Anmodning {mode} af {name}"
 

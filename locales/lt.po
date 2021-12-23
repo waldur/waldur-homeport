@@ -3719,9 +3719,6 @@ msgstr "Prašyti pavadinimo"
 msgid "Request type"
 msgstr "Užklausos tipas"
 
-msgid "Request {mode} of Public Offering"
-msgstr "Prašymas {mode} apie viešą siūlymą"
-
 msgid "Request {mode} of {name}"
 msgstr "Prašymas {mode} iš {name}"
 

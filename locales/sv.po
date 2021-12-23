@@ -3647,9 +3647,6 @@ msgstr "Begär titel"
 msgid "Request type"
 msgstr "Begäran typ"
 
-msgid "Request {mode} of Public Offering"
-msgstr "Begär {mode} av offentligt erbjudande"
-
 msgid "Request {mode} of {name}"
 msgstr "Begär {mode} av {name}"
 
