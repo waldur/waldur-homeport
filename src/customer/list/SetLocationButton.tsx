@@ -30,6 +30,9 @@ const openSetLocationDialog = (
     resolve: {
       data: customer,
       setLocationFn: (data) => dispatch(setOrganizationLocation(data)),
+      label: translate('Location of {name} organization', {
+        name: customer.name,
+      }),
     },
     size: 'lg',
   });

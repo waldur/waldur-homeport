@@ -116,6 +116,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
           data: offering,
           setLocationFn: (offeringData) =>
             dispatch(addOfferingLocation(offeringData)),
+          label: translate('Location of {name} offering', {
+            name: offering.name,
+          }),
         },
         size: 'lg',
       }),
