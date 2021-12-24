@@ -28,6 +28,7 @@ import {
   CategoryComponentUsage,
   PluginMetadata,
   ImportableResource,
+  Division,
 } from '@waldur/marketplace/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -228,7 +229,8 @@ export const getOrganizationDivisionList = (params?: {}) =>
 export const getDivisionTypesList = (params?: {}) =>
   getSelectData('/division-types/', params);
 
-export const getAllOrganizationDivisions = () => getAll('/divisions/', {});
+export const getAllOrganizationDivisions = () =>
+  getAll<Division>('/divisions/', {});
 
 export const getCustomersDivisionUuids = (accounting_is_running: boolean) =>
   getAll('/customers/', {

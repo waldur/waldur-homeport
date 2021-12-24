@@ -12,6 +12,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { PageHeroImage } from './PageHeroImage';
 import { PageLocation } from './PageLocation';
 import { PageOverview } from './PageOverview';
+import { PagePolicies } from './PagePolicies';
 import { SidebarNav, SidebarRow } from './SidebarNav';
 
 require('./PublicOfferingEditor.css');
@@ -66,6 +67,12 @@ export const PublicOfferingEditor = ({ resolve }) => {
             description={translate('Set location')}
             onClick={() => setPage('location')}
           />
+          <SidebarRow
+            iconClass="fa fa-ban"
+            title={translate('Access policies')}
+            description={translate('Set access policy')}
+            onClick={() => setPage('policies')}
+          />
         </SidebarNav>
       </ModalBody>
       <ModalFooter>
@@ -86,6 +93,12 @@ export const PublicOfferingEditor = ({ resolve }) => {
     />
   ) : page == 'location' ? (
     <PageLocation
+      offering={resolve.offering}
+      refreshOffering={resolve.refreshOffering}
+      onReturn={() => setPage('nav')}
+    />
+  ) : page == 'policies' ? (
+    <PagePolicies
       offering={resolve.offering}
       refreshOffering={resolve.refreshOffering}
       onReturn={() => setPage('nav')}
