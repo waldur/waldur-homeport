@@ -88,6 +88,14 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+msgid "Access policies"
+msgstr ""
+
+#: src/marketplace/offerings/details/PagePolicies.tsx
+msgid "Access policy"
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Access policy has been updated successfully."
 msgstr ""
@@ -4866,6 +4874,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/details/PageLocation.tsx
 #: src/marketplace/offerings/details/PageOverview.tsx
+#: src/marketplace/offerings/details/PagePolicies.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering has been updated."
 msgstr ""
@@ -7859,6 +7868,7 @@ msgid "Set MTU"
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Set access policy"
 msgstr ""
 
@@ -9499,6 +9509,7 @@ msgid "Unable to load detail."
 msgstr ""
 
 #: src/marketplace/offerings/actions/SetAccessPolicyDialog.tsx
+#: src/marketplace/offerings/details/PagePolicies.tsx
 msgid "Unable to load divisions."
 msgstr ""
 
@@ -9927,6 +9938,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/details/PageLocation.tsx
 #: src/marketplace/offerings/details/PageOverview.tsx
+#: src/marketplace/offerings/details/PagePolicies.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to update offering."
 msgstr ""
@@ -10075,6 +10087,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/details/PageLocation.tsx
 #: src/marketplace/offerings/details/PageOverview.tsx
+#: src/marketplace/offerings/details/PagePolicies.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx

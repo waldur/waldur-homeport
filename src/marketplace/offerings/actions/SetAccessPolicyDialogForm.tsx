@@ -1,10 +1,9 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { FormContainer, SubmitButton } from '@waldur/form';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { SET_ACCESS_POLICY_FORM_ID } from '@waldur/marketplace/offerings/actions/constants';
 import {
@@ -15,6 +14,8 @@ import { setAccessPolicy } from '@waldur/marketplace/offerings/store/constants';
 import { Division, Offering } from '@waldur/marketplace/types';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+
+import { SetAccessPolicyFormContainer } from './SetAccessPolicyFormContainer';
 
 interface SetAccessPolicyDialogFormOwnProps {
   offering: Offering;
@@ -40,21 +41,10 @@ const PureSetAccessPolicyDialogForm: FunctionComponent<any> = (props) => (
         </>
       }
     >
-      <FormContainer
+      <SetAccessPolicyFormContainer
+        divisions={props.divisions}
         submitting={props.submitting}
-        labelClass="col-sm-2"
-        controlClass="col-sm-8"
-      >
-        {props.divisions.map((division) => (
-          <Field
-            key={division.uuid}
-            name={division.uuid}
-            component={(prop) => (
-              <AwesomeCheckbox label={division.name} {...prop.input} />
-            )}
-          />
-        ))}
-      </FormContainer>
+      />
     </ModalDialog>
   </form>
 );
