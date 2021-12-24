@@ -233,14 +233,16 @@ function* addOfferingLocation(action: Action<any>) {
     const formData = yield select(
       getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID),
     );
-    yield put(
-      updatePublicOfferingsList(
-        customer,
-        isServiceManager && !isOwnerOrStaff,
-        user,
-        formData.state,
-      ),
-    );
+    if (formData) {
+      yield put(
+        updatePublicOfferingsList(
+          customer,
+          isServiceManager && !isOwnerOrStaff,
+          user,
+          formData.state,
+        ),
+      );
+    }
     yield put(showSuccess(translate('Location has been saved successfully.')));
     yield put(closeModalDialog());
   } catch (error) {

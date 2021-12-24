@@ -2620,7 +2620,7 @@ msgstr ""
 msgid "Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports."
 msgstr ""
 
-#: src/map/SetLocationDialog.tsx
+#: src/map/LocationContainer.tsx
 msgid "Enter address..."
 msgstr ""
 
@@ -3947,6 +3947,8 @@ msgstr ""
 #: src/azure/AzureResourceSummary.tsx
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/marketplace/offerings/details/PageLocation.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Location"
 msgstr ""
 
@@ -3955,7 +3957,15 @@ msgstr ""
 msgid "Location has been saved successfully."
 msgstr ""
 
-#: src/map/SetLocationDialog.tsx
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Location of {name} offering"
+msgstr ""
+
+#: src/customer/list/SetLocationButton.tsx
+msgid "Location of {name} organization"
+msgstr ""
+
+#: src/marketplace/offerings/details/PageLocation.tsx
 msgid "Location of {offeringName} offering"
 msgstr ""
 
@@ -4854,6 +4864,7 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
+#: src/marketplace/offerings/details/PageLocation.tsx
 #: src/marketplace/offerings/details/PageOverview.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering has been updated."
@@ -7880,6 +7891,7 @@ msgstr ""
 #: src/customer/list/SetLocationButton.tsx
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Set location"
 msgstr ""
 
@@ -9913,6 +9925,7 @@ msgid "Unable to update offering state."
 msgstr ""
 
 #: src/marketplace/offerings/details/PageHeroImage.tsx
+#: src/marketplace/offerings/details/PageLocation.tsx
 #: src/marketplace/offerings/details/PageOverview.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to update offering."
@@ -10060,6 +10073,7 @@ msgstr ""
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
+#: src/marketplace/offerings/details/PageLocation.tsx
 #: src/marketplace/offerings/details/PageOverview.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx

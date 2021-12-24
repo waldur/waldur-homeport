@@ -10,6 +10,7 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 import { PageHeroImage } from './PageHeroImage';
+import { PageLocation } from './PageLocation';
 import { PageOverview } from './PageOverview';
 import { SidebarNav, SidebarRow } from './SidebarNav';
 
@@ -59,6 +60,12 @@ export const PublicOfferingEditor = ({ resolve }) => {
             description={translate('Set hero image')}
             onClick={() => setPage('hero_image')}
           />
+          <SidebarRow
+            iconClass="fa fa-location-arrow"
+            title={translate('Location')}
+            description={translate('Set location')}
+            onClick={() => setPage('location')}
+          />
         </SidebarNav>
       </ModalBody>
       <ModalFooter>
@@ -73,6 +80,12 @@ export const PublicOfferingEditor = ({ resolve }) => {
     />
   ) : page == 'hero_image' ? (
     <PageHeroImage
+      offering={resolve.offering}
+      refreshOffering={resolve.refreshOffering}
+      onReturn={() => setPage('nav')}
+    />
+  ) : page == 'location' ? (
+    <PageLocation
       offering={resolve.offering}
       refreshOffering={resolve.refreshOffering}
       onReturn={() => setPage('nav')}
