@@ -2121,8 +2121,7 @@ msgstr ""
 msgid "Delete catalog"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/DestroyDialog.tsx
-#: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
+#: src/openstack/openstack-instance/actions/utils.ts
 msgid "Delete volumes"
 msgstr ""
 
@@ -6591,8 +6590,7 @@ msgstr ""
 msgid "Rejected"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/DestroyDialog.tsx
-#: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
+#: src/openstack/openstack-instance/actions/utils.ts
 msgid "Release floating IPs"
 msgstr ""
 

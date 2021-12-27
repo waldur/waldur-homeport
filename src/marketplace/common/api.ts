@@ -299,8 +299,8 @@ export const switchPlan = (resource_uuid: string, plan_url: string) =>
     plan: plan_url,
   }).then((response) => response.data);
 
-export const terminateResource = (resource_uuid: string) =>
-  post(`/marketplace-resources/${resource_uuid}/terminate/`).then(
+export const terminateResource = (resource_uuid: string, data?) =>
+  post(`/marketplace-resources/${resource_uuid}/terminate/`, data).then(
     (response) => response.data,
   );
 
