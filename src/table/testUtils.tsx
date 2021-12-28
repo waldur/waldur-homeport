@@ -19,6 +19,7 @@ export const renderTable = (Component, tableId, rowId, row) => {
       resultCount: 1,
       currentPage: 1,
     },
+    toggled: {},
   };
   const store = mockStore({
     tables: {

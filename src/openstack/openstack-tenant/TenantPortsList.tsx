@@ -1,8 +1,11 @@
 import { FunctionComponent } from 'react';
 
+import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { Port } from '../types';
+
+import { ExpandablePortRow } from './ExpandablePortRow';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
@@ -23,7 +26,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('Network name'),
           render: ({ row }) => row.network_name || 'N/A',
         },
+        {
+          title: translate('Actions'),
+          render: ({ row }) => <ResourceRowActions resource={row} />,
+        },
       ]}
+      expandableRow={ExpandablePortRow}
       verboseName={translate('ports')}
     />
   );

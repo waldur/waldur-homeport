@@ -43,6 +43,7 @@ export interface SecurityGroupRule {
 
 export interface Port {
   uuid: string;
+  url?: string;
   fixed_ips?: FixedIP[];
   allowed_address_pairs?: any;
   mac_address?: string;

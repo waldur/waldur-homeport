@@ -12,6 +12,7 @@ const renderList = () => {
     network_uuid: '7350f289a6d14e4bbd780ee59b2899e6',
     allowed_address_pairs: [],
     uuid: 'uuid',
+    url: 'url',
   };
   return renderTable(TenantPortsList, 'openstack-ports', 'uuid', item);
 };
