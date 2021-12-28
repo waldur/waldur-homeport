@@ -570,6 +570,10 @@ msgstr ""
 msgid "Allow to enable/disable component only"
 msgstr ""
 
+#: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+msgid "Allowed address pairs"
+msgstr ""
+
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 msgid "Allowed address pairs update was scheduled."
 msgstr ""
@@ -2263,6 +2267,14 @@ msgstr ""
 
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 msgid "Device"
+msgstr ""
+
+#: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+msgid "Device ID"
+msgstr ""
+
+#: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+msgid "Device owner"
 msgstr ""
 
 #: src/digitalocean/help.ts
@@ -4594,6 +4606,7 @@ msgstr ""
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "No"
 msgstr ""
@@ -5888,6 +5901,10 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
 msgid "Port range"
+msgstr ""
+
+#: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+msgid "Port security enabled"
 msgstr ""
 
 #: src/openstack/openstack-tenant/tabs.ts
@@ -7458,6 +7475,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsForm.tsx
 #: src/openstack/openstack-security-groups/breadcrumbs.ts
+#: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/rancher/cluster/create/TenantGroup.tsx
 msgid "Security groups"
@@ -10828,6 +10846,7 @@ msgstr ""
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/project/ProjectRemoveDialog.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 #: src/user/hooks/HookRemoveDialog.tsx

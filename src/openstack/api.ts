@@ -296,6 +296,8 @@ export const forceDestroyInstance = (
   params: DestroyInstanceParams,
 ) => remove(`/openstacktenant-instances/${id}/force_destroy/`, { params });
 
+export const destroyPort = (id: string) => deleteById('/openstack-ports/', id);
+
 export const updateVolume = (id: string, data) =>
   put(`/openstacktenant-volumes/${id}/`, data);
 
