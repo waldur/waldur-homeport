@@ -5,7 +5,6 @@ interface SAML2AuthConfiguration {
   IDENTITY_PROVIDER_LABEL: string;
   DISCOVERY_SERVICE_URL: string;
   DISCOVERY_SERVICE_LABEL: string;
-  base_url: string;
 }
 
 interface SocialAuthConfiguration {
@@ -34,6 +33,7 @@ export interface ExternalLink {
 }
 
 interface CoreConfiguration {
+  MASTERMIND_URL: string;
   BRAND_COLOR: string;
   HERO_LINK_URL: string;
   HERO_LINK_LABEL: string;
