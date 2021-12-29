@@ -9,6 +9,8 @@ import {
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
+import { getDeleteField } from './utils';
+
 export const ForceDestroyDialog = ({ resolve: { resource } }) => {
   const dispatch = useDispatch();
   return (
@@ -16,25 +18,13 @@ export const ForceDestroyDialog = ({ resolve: { resource } }) => {
       dialogTitle={translate('Force destroy {name} instance', {
         name: resource.name,
       })}
-      formFields={[
-        {
-          name: 'delete_volumes',
-          label: translate('Delete volumes'),
-          type: 'boolean',
-        },
-        {
-          name: 'release_floating_ips',
-          label: translate('Release floating IPs'),
-          type: 'boolean',
-        },
-      ]}
-      initialValues={{
-        delete_volumes: true,
-        release_floating_ips: true,
-      }}
+      {...getDeleteField()}
       submitForm={async (formData: DestroyInstanceParams) => {
         try {
-          await forceDestroyInstance(resource.uuid, formData);
+          await forceDestroyInstance(
+            resource.marketplace_resource_uuid,
+            formData,
+          );
           dispatch(
             showSuccess(translate('Instance deletion has been scheduled.')),
           );

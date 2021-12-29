@@ -7,10 +7,10 @@ import {
   post,
   getSelectData,
   deleteById,
-  remove,
   get,
 } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
+import { terminateResource } from '@waldur/marketplace/common/api';
 import {
   Flavor,
   FloatingIp,
@@ -288,13 +288,18 @@ export const updateInstance = (id: string, data) =>
 export const changeFlavor = (id: string, data: ChangeFlavorRequestBody) =>
   post(`/openstacktenant-instances/${id}/change_flavor/`, data);
 
-export const destroyInstance = (id: string, params: DestroyInstanceParams) =>
-  deleteById('/openstacktenant-instances/', id, { params });
+export const destroyInstance = (
+  id: string,
+  attributes: DestroyInstanceParams,
+) => terminateResource(id, { attributes });
 
 export const forceDestroyInstance = (
   id: string,
-  params: DestroyInstanceParams,
-) => remove(`/openstacktenant-instances/${id}/force_destroy/`, { params });
+  attributes: DestroyInstanceParams,
+) =>
+  terminateResource(id, {
+    attributes: { action: 'force_destroy', ...attributes },
+  });
 
 export const destroyPort = (id: string) => deleteById('/openstack-ports/', id);
 
