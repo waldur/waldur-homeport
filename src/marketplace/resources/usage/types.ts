@@ -5,6 +5,7 @@ export interface UsageReport {
   resource_name: string;
   name: string;
   created: string;
+  date: string;
   usage: number;
   measured_unit: string;
   description?: string;

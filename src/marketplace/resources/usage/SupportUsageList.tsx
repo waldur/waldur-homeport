@@ -43,7 +43,7 @@ const TableComponent = (props: TableProps<UsageReport>) => {
     },
     {
       title: translate('Date of reporting'),
-      render: ({ row }) => <>{formatDateTime(row.created)}</>,
+      render: ({ row }) => <>{formatDateTime(row.date)}</>,
     },
     {
       title: translate('Value'),
