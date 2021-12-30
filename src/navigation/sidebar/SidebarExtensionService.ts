@@ -15,7 +15,9 @@ class SidebarExtensionRegistry {
       return Promise.resolve([]);
     }
     const promise = this.registry[sidebar].map((callable) => callable());
-    return Promise.all(promise).then(flatten);
+    return Promise.all(promise)
+      .then(flatten)
+      .then((xs) => xs.filter(Boolean));
   }
 }
 
