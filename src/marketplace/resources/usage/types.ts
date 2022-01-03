@@ -12,8 +12,7 @@ export interface UsageReport {
 }
 
 export interface UsageReportRequest {
-  date_after?: string;
-  date_before?: string;
+  billing_period?: string;
   customer_uuid?: string;
   project_uuid?: string;
   offering_uuid?: string;
