@@ -89,11 +89,10 @@ const mapPropsToFilter = (props) => {
   const filter: UsageReportRequest = {};
   if (props.usageFilter) {
     if (props.usageFilter.accounting_period) {
-      const { start, end } = getStartAndEndDatesOfMonth(
+      const { start } = getStartAndEndDatesOfMonth(
         props.usageFilter.accounting_period.value,
       );
-      filter.date_after = start;
-      filter.date_before = end;
+      filter.billing_period = start;
     }
     if (props.usageFilter.organization) {
       filter.customer_uuid = props.usageFilter.organization.uuid;
