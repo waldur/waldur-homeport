@@ -210,6 +210,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
+#: src/openstack/openstack-tenant/TenantPortsList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
@@ -4865,6 +4866,10 @@ msgstr ""
 msgid "Offering details"
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Offering details synchronization has been scheduled."
+msgstr ""
+
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 msgid "Offering does not have any usage-based components."
@@ -4899,6 +4904,10 @@ msgstr ""
 msgid "Offering images ({name})"
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Offering invoices synchronization has been scheduled."
+msgstr ""
+
 #: src/marketplace/offerings/create/ReviewStep.tsx
 msgid "Offering is not configured yet."
 msgstr ""
@@ -4912,8 +4921,16 @@ msgstr ""
 msgid "Offering name"
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Offering order items synchronization has been scheduled."
+msgstr ""
+
 #: src/customer/team/CustomerTeam.tsx
 msgid "Offering permissions"
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Offering resources synchronization has been scheduled."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -4925,8 +4942,16 @@ msgstr ""
 msgid "Offering type"
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Offering usage synchronization has been scheduled."
+msgstr ""
+
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 msgid "Offering user has been created."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Offering users synchronization has been scheduled."
 msgstr ""
 
 #: src/issues/notifications/NotificationCreateDialog.tsx
@@ -6363,6 +6388,30 @@ msgstr ""
 
 #: src/marketplace/referral/ReferralsList.tsx
 msgid "Publisher"
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Pull offering details"
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Pull offering users"
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Pull order items"
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Pull resources"
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Pull resources invoices"
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Pull usage"
 msgstr ""
 
 #: src/resource/state/constants.ts
@@ -9873,6 +9922,30 @@ msgstr ""
 
 #: src/resource/actions/PullActionItem.tsx
 msgid "Unable to synchronise resource."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to synchronize offering details."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to synchronize offering invoices."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to synchronize offering order items."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to synchronize offering resources."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to synchronize offering usage."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to synchronize offering users."
 msgstr ""
 
 #: src/rancher/node/actions/UnlinkAction.tsx

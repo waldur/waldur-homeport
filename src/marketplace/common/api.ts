@@ -376,3 +376,21 @@ export const updateOfferingLogo = (offeringUuid: string, formData) =>
 
 export const createOfferingUser = (payload) =>
   post(`/marketplace-offering-users/`, payload);
+
+export const pullRemoteOfferingDetails = (uuid) =>
+  post(`/remote-waldur-api/pull_offering_details/${uuid}/`);
+
+export const pullRemoteOfferingUsers = (uuid) =>
+  post(`/remote-waldur-api/pull_offering_users/${uuid}/`);
+
+export const pullRemoteOfferingUsage = (uuid) =>
+  post(`/remote-waldur-api/pull_offering_usage/${uuid}/`);
+
+export const pullRemoteOfferingResources = (uuid) =>
+  post(`/remote-waldur-api/pull_offering_resources/${uuid}/`);
+
+export const pullRemoteOfferingOrderItems = (uuid) =>
+  post(`/remote-waldur-api/pull_offering_order_items/${uuid}/`);
+
+export const pullRemoteOfferingInvoices = (uuid) =>
+  post(`/remote-waldur-api/pull_offering_invoices/${uuid}/`);
