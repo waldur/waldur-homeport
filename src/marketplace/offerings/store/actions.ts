@@ -132,3 +132,33 @@ export const googleCalendarUnpublish = (uuid: string) => ({
     uuid,
   },
 });
+
+export const pullRemoteOfferingDetails = (uuid: string) => ({
+  type: constants.PULL_REMOTE_OFFERING_DETAILS,
+  payload: { uuid },
+});
+
+export const pullRemoteOfferingUsers = (uuid: string) => ({
+  type: constants.PULL_REMOTE_OFFERING_USERS,
+  payload: { uuid },
+});
+
+export const pullRemoteOfferingUsage = (uuid: string) => ({
+  type: constants.PULL_REMOTE_OFFERING_USAGE,
+  payload: { uuid },
+});
+
+export const pullRemoteOfferingResources = (uuid: string) => ({
+  type: constants.PULL_REMOTE_OFFERING_RESOURCES,
+  payload: { uuid },
+});
+
+export const pullRemoteOfferingOrderItems = (uuid: string) => ({
+  type: constants.PULL_REMOTE_OFFERING_ORDER_ITEMS,
+  payload: { uuid },
+});
+
+export const pullRemoteOfferingInvoices = (uuid: string) => ({
+  type: constants.PULL_REMOTE_OFFERING_INVOICES,
+  payload: { uuid },
+});

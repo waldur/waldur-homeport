@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 import { googleCalendarActions } from '@waldur/marketplace/offerings/actions/GoogleCalendarActions';
 import { isVisible } from '@waldur/marketplace/offerings/actions/utils';
 import { Offering } from '@waldur/marketplace/types';
@@ -16,13 +17,7 @@ import {
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
 
-import {
-  addOfferingLocation,
-  googleCalendarPublish,
-  googleCalendarSync,
-  googleCalendarUnpublish,
-  updateOfferingState,
-} from '../store/actions';
+import * as actions from '../store/actions';
 import { DRAFT, ACTIVE, ARCHIVED, PAUSED } from '../store/constants';
 
 import { ActionsDropdown } from './ActionsDropdown';
@@ -89,7 +84,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   updateOfferingState: (offering: Offering, stateAction, reason?) => {
-    dispatch(updateOfferingState(offering, stateAction, reason));
+    dispatch(actions.updateOfferingState(offering, stateAction, reason));
   },
   pauseOffering: (offering: Offering) =>
     dispatch(
@@ -115,7 +110,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         resolve: {
           data: offering,
           setLocationFn: (offeringData) =>
-            dispatch(addOfferingLocation(offeringData)),
+            dispatch(actions.addOfferingLocation(offeringData)),
           label: translate('Location of {name} offering', {
             name: offering.name,
           }),
@@ -133,11 +128,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
       }),
     ),
   syncGoogleCalendar: (offering: Offering) =>
-    dispatch(googleCalendarSync(offering.uuid)),
+    dispatch(actions.googleCalendarSync(offering.uuid)),
   publishGoogleCalendar: (offering: Offering) =>
-    dispatch(googleCalendarPublish(offering.uuid)),
+    dispatch(actions.googleCalendarPublish(offering.uuid)),
   unpublishGoogleCalendar: (offering: Offering) =>
-    dispatch(googleCalendarUnpublish(offering.uuid)),
+    dispatch(actions.googleCalendarUnpublish(offering.uuid)),
   editConfirmationMessage: (offering: Offering) =>
     dispatch(
       openModalDialog(EditConfirmationMessageDialog, {
@@ -159,7 +154,33 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         resolve: { offering },
       }),
     ),
+  pullRemoteOfferingDetails: (offering: Offering) =>
+    dispatch(actions.pullRemoteOfferingDetails(offering.uuid)),
+
+  pullRemoteOfferingUsers: (offering: Offering) =>
+    dispatch(actions.pullRemoteOfferingUsers(offering.uuid)),
+
+  pullRemoteOfferingUsage: (offering: Offering) =>
+    dispatch(actions.pullRemoteOfferingUsage(offering.uuid)),
+
+  pullRemoteOfferingResources: (offering: Offering) =>
+    dispatch(actions.pullRemoteOfferingResources(offering.uuid)),
+
+  pullRemoteOfferingOrderItems: (offering: Offering) =>
+    dispatch(actions.pullRemoteOfferingOrderItems(offering.uuid)),
+
+  pullRemoteOfferingInvoices: (offering: Offering) =>
+    dispatch(actions.pullRemoteOfferingInvoices(offering.uuid)),
 });
+
+const remoteOfferingActionVisible = (
+  ownProps: OwnProps,
+  stateProps: ReturnType<typeof mapStateToProps>,
+) =>
+  ownProps.offering.type === REMOTE_OFFERING_TYPE &&
+  (stateProps.user.is_staff ||
+    stateProps.isOwner ||
+    stateProps.isServiceManager);
 
 const mergeProps = (
   stateProps: ReturnType<typeof mapStateToProps>,
@@ -266,6 +287,39 @@ const mergeProps = (
         stateProps.user.is_staff ||
         ([DRAFT, ACTIVE, PAUSED].includes(ownProps.offering.state) &&
           (stateProps.isOwner || stateProps.isServiceManager)),
+    },
+    {
+      label: translate('Pull offering details'),
+      handler: () => dispatchProps.pullRemoteOfferingDetails(ownProps.offering),
+      visible: remoteOfferingActionVisible(ownProps, stateProps),
+    },
+    {
+      label: translate('Pull offering users'),
+      handler: () => dispatchProps.pullRemoteOfferingUsers(ownProps.offering),
+      visible: remoteOfferingActionVisible(ownProps, stateProps),
+    },
+    {
+      label: translate('Pull usage'),
+      handler: () => dispatchProps.pullRemoteOfferingUsage(ownProps.offering),
+      visible: remoteOfferingActionVisible(ownProps, stateProps),
+    },
+    {
+      label: translate('Pull resources'),
+      handler: () =>
+        dispatchProps.pullRemoteOfferingResources(ownProps.offering),
+      visible: remoteOfferingActionVisible(ownProps, stateProps),
+    },
+    {
+      label: translate('Pull order items'),
+      handler: () =>
+        dispatchProps.pullRemoteOfferingOrderItems(ownProps.offering),
+      visible: remoteOfferingActionVisible(ownProps, stateProps),
+    },
+    {
+      label: translate('Pull resources invoices'),
+      handler: () =>
+        dispatchProps.pullRemoteOfferingInvoices(ownProps.offering),
+      visible: remoteOfferingActionVisible(ownProps, stateProps),
     },
   ].filter((offering) => offering.visible),
 });
