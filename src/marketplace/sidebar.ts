@@ -123,7 +123,12 @@ SidebarExtensionService.register(
 SidebarExtensionService.register(PROJECT_WORKSPACE, async () => {
   const project = getProject(store.getState());
   const categories = await getCategories({
-    params: { field: ['uuid', 'title'] },
+    params: {
+      field: ['uuid', 'title'],
+      allowed_customer_uuid: project.customer_uuid,
+      project_uuid: project.uuid,
+      has_offerings: true,
+    },
   });
 
   return [
