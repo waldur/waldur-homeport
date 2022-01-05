@@ -87,6 +87,36 @@ export const DOMAIN_MESSAGES = {
       gettext(
         'User {user_link} has revoked member {affected_user_link} from project {project_link}.',
       ),
+    'User {affected_user_link} has got project administrator role in project {project_link}.':
+      gettext(
+        'User {affected_user_link} has got member role in project {project_link}.',
+      ),
+    'User {affected_user_link} has got project manager role in project {project_link}.':
+      gettext(
+        'User {affected_user_link} has got Co-PI role in project {project_link}.',
+      ),
+    'User {affected_user_link} has got project member role in project {project_link}.':
+      gettext(
+        'User {affected_user_link} has got guest role in project {project_link}.',
+      ),
+    'User {affected_user_link} has lost organization owner role in {customer_link}.':
+      gettext('User {affected_user_link} has lost PI role in {customer_link}.'),
+    'User {affected_user_link} has lost organization support role in {customer_link}.':
+      gettext(
+        'User {affected_user_link} has lost organization support role in {customer_link}.',
+      ),
+    'User {affected_user_link} has lost project administrator role in {project_link}.':
+      gettext(
+        'User {affected_user_link} has lost member role in {project_link}.',
+      ),
+    'User {affected_user_link} has lost project manager role in {project_link}.':
+      gettext(
+        'User {affected_user_link} has lost Co-PI role in {project_link}.',
+      ),
+    'User {affected_user_link} has lost project member role in {project_link}.':
+      gettext(
+        'User {affected_user_link} has lost guest role in {project_link}.',
+      ),
   },
   academic_shared: {
     'Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place.':
@@ -175,6 +205,36 @@ export const DOMAIN_MESSAGES = {
     'User {user_link} has revoked project administrator {affected_user_link} from project {project_link}.':
       gettext(
         'User {user_link} has revoked Co-PI {affected_user_link} from project {project_link}.',
+      ),
+    'User {affected_user_link} has got project administrator role in project {project_link}.':
+      gettext(
+        'User {affected_user_link} has got Co-PI role in project {project_link}.',
+      ),
+    'User {affected_user_link} has got project manager role in project {project_link}.':
+      gettext(
+        'User {affected_user_link} has got PI role in project {project_link}.',
+      ),
+    'User {affected_user_link} has got project member role in project {project_link}.':
+      gettext(
+        'User {affected_user_link} has got member role in project {project_link}.',
+      ),
+    'User {affected_user_link} has lost organization owner role in {customer_link}.':
+      gettext(
+        'User {affected_user_link} has lost resource allocator role in {customer_link}.',
+      ),
+    'User {affected_user_link} has lost organization support role in {customer_link}.':
+      gettext(
+        'User {affected_user_link} has lost organization support role in {customer_link}.',
+      ),
+    'User {affected_user_link} has lost project administrator role in {project_link}.':
+      gettext(
+        'User {affected_user_link} has lost co-PI role in {project_link}.',
+      ),
+    'User {affected_user_link} has lost project manager role in {project_link}.':
+      gettext('User {affected_user_link} has lost PI role in {project_link}.'),
+    'User {affected_user_link} has lost project member role in {project_link}.':
+      gettext(
+        'User {affected_user_link} has lost member role in {project_link}.',
       ),
   },
 };

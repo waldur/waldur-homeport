@@ -10473,6 +10473,83 @@ msgstr ""
 msgid "User {affected_user_link} has been updated."
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "User {affected_user_link} has got Co-PI role in project {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {affected_user_link} has got PI role in project {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {affected_user_link} has got guest role in project {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {affected_user_link} has got member role in project {project_link}."
+msgstr ""
+
+#: src/project/team/events.ts
+msgid "User {affected_user_link} has got project administrator role in project {project_link}."
+msgstr ""
+
+#: src/project/team/events.ts
+msgid "User {affected_user_link} has got project manager role in project {project_link}."
+msgstr ""
+
+#: src/project/team/events.ts
+msgid "User {affected_user_link} has got project member role in project {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {affected_user_link} has lost Co-PI role in {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {affected_user_link} has lost PI role in {customer_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {affected_user_link} has lost PI role in {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {affected_user_link} has lost co-PI role in {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {affected_user_link} has lost guest role in {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {affected_user_link} has lost member role in {project_link}."
+msgstr ""
+
+#: src/project/team/events.ts
+msgid "User {affected_user_link} has lost organization owner role in {customer_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+#: src/project/team/events.ts
+msgid "User {affected_user_link} has lost organization support role in {customer_link}."
+msgstr ""
+
+#: src/project/team/events.ts
+msgid "User {affected_user_link} has lost project administrator role in {project_link}."
+msgstr ""
+
+#: src/project/team/events.ts
+msgid "User {affected_user_link} has lost project manager role in {project_link}."
+msgstr ""
+
+#: src/project/team/events.ts
+msgid "User {affected_user_link} has lost project member role in {project_link}."
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "User {affected_user_link} has lost resource allocator role in {customer_link}."
+msgstr ""
+
 #: src/user/events.ts
 msgid "User {affected_user_name} has been deleted."
 msgstr ""
@@ -10521,6 +10598,10 @@ msgstr ""
 msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
 msgstr ""
 
+#: src/project/team/events.ts
+msgid "User {user_link} has granted project member role in project {project_link} to {affected_user_link}."
+msgstr ""
+
 #: src/i18n/constants.ts
 msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
 msgstr ""
@@ -10563,6 +10644,10 @@ msgstr ""
 
 #: src/project/team/events.ts
 msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
+msgstr ""
+
+#: src/project/team/events.ts
+msgid "User {user_link} has revoked project member {affected_user_link} from project {project_link}."
 msgstr ""
 
 #: src/i18n/constants.ts
