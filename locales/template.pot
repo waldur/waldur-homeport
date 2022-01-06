@@ -983,8 +983,8 @@ msgstr ""
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
+#: src/project/ProjectExpandableRowContainer.tsx
 #: src/project/ProjectUpdateForm.tsx
-#: src/resource/ResourceExpandableRow.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportDetailsTable.tsx
@@ -8885,10 +8885,6 @@ msgstr ""
 
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "There are no resources available."
-msgstr ""
-
-#: src/resource/ResourceExpandableRow.tsx
-msgid "There are no resources yet."
 msgstr ""
 
 #: src/marketplace/compare/ComparisonSections.tsx

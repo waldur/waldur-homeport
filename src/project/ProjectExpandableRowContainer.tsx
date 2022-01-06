@@ -6,11 +6,14 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
-import {
-  ExpandableRow,
-  ResourceExpandableRow,
-} from '@waldur/resource/ResourceExpandableRow';
+import { Field } from '@waldur/resource/summary';
+import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { Project } from '@waldur/workspace/types';
+
+interface ExpandableRow {
+  label: string;
+  value: number | string;
+}
 
 const parseCounters = (
   categories: Category[],
@@ -54,7 +57,12 @@ export const ProjectExpandableRowContainer: React.FC<{
     return <>{translate('Unable to load project resources.')}</>;
   } else {
     return (
-      <ResourceExpandableRow backendId={props.row.backend_id} rows={value} />
+      <ResourceDetailsTable>
+        {value.map((row, index) => (
+          <Field key={index} label={row.label} value={row.value} />
+        ))}
+        <Field label={translate('Backend ID')} value={props.row.backend_id} />
+      </ResourceDetailsTable>
     );
   }
 };
