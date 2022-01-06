@@ -33,6 +33,7 @@ const mapStateToProps = (state, ownProps) => ({
     name: ownProps.project.name,
     description: ownProps.project.description,
     end_date: ownProps.project.end_date,
+    backend_id: ownProps.project.backend_id,
   },
   project_type: ownProps.project.type_name,
   canManage: isOwnerOrStaff(state),
