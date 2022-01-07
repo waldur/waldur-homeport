@@ -15,7 +15,11 @@ const PublicOfferingEditor = lazyComponent(
   'PublicOfferingEditor',
 );
 
-export const PublicOfferingEditorButton = ({ offering, refreshOffering }) => {
+export const PublicOfferingEditorButton = ({
+  offering,
+  category,
+  refreshOffering,
+}) => {
   const dispatch = useDispatch();
   const { value: user } = useAsync(() =>
     getCurrentUser({ __skipLogout__: true }),
@@ -31,6 +35,7 @@ export const PublicOfferingEditorButton = ({ offering, refreshOffering }) => {
           openModalDialog(PublicOfferingEditor, {
             resolve: {
               offering,
+              category,
               refreshOffering,
             },
             modalStyle: { left: 'auto', bottom: 'auto' },

@@ -5,7 +5,7 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { Link } from '@waldur/core/Link';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
-import { Offering } from '@waldur/marketplace/types';
+import { Category, Offering } from '@waldur/marketplace/types';
 
 import './PublicOfferingDetailsHeader.scss';
 import { PublicOfferingEditorButton } from './PublicOfferingEditorButton';
@@ -14,11 +14,12 @@ const GeorgiaNature = require('./../service-providers/georgia-nature.jpg');
 
 interface PublicOfferingDetailsHeaderProps {
   offering: Offering;
+  category: Category;
   refreshOffering;
 }
 
 export const PublicOfferingDetailsHeader: FunctionComponent<PublicOfferingDetailsHeaderProps> =
-  ({ offering, refreshOffering }) => {
+  ({ offering, category, refreshOffering }) => {
     const context = {
       offering: (
         <h2 className="publicOfferingDetailsHeader__card__info__header">
@@ -59,6 +60,7 @@ export const PublicOfferingDetailsHeader: FunctionComponent<PublicOfferingDetail
               </Link>
               <PublicOfferingEditorButton
                 offering={offering}
+                category={category}
                 refreshOffering={refreshOffering}
               />
             </div>
