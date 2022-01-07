@@ -1,3 +1,4 @@
+import { get } from '@waldur/core/api';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -96,3 +97,11 @@ export const formatRetentionTime = (props: ResourceSummaryProps<Schedule>) =>
     : props.translate('{number} days', {
         number: props.resource.retention_time,
       });
+
+export const getData = async (url) => {
+  try {
+    return await get(url).then((response) => response.data);
+  } catch (e) {
+    return null;
+  }
+};

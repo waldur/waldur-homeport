@@ -6,6 +6,13 @@ import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 
 import { getVolumeTypeRequirements } from './utils';
 
+const OpenstackInstanceDetails = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OpenstackInstanceDetails" */ '@waldur/openstack/openstack-instance/OpenstackInstanceDetails'
+    ),
+  'OpenstackInstanceDetails',
+);
 const OpenstackInstanceCheckoutSummary = lazyComponent(
   () =>
     import(
@@ -147,6 +154,7 @@ registerOfferingType({
     return translate('OpenStack instance');
   },
   component: OpenstackInstanceCreateForm,
+  detailsComponent: OpenstackInstanceDetails,
   checkoutSummaryComponent: OpenstackInstanceCheckoutSummary,
   serializer,
   formValidator,
