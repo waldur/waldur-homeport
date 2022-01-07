@@ -4751,9 +4751,6 @@ msgstr "Er zijn nog geen verzoeken."
 msgid "There are no resources available."
 msgstr "Er zijn geen hulpbronnen beschikbaar."
 
-msgid "There are no resources yet."
-msgstr "Er zijn nog geen hulpbronnen."
-
 msgid "There are no sections for comparison yet."
 msgstr "Er zijn nog geen secties voor vergelijking."
 

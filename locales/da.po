@@ -4751,9 +4751,6 @@ msgstr "Der er ingen anmodninger endnu."
 msgid "There are no resources available."
 msgstr "Der er ingen tilgængelige ressourcer."
 
-msgid "There are no resources yet."
-msgstr "Der er ingen ressourcer endnu."
-
 msgid "There are no sections for comparison yet."
 msgstr "Der er ingen sektioner til sammenligning endnu."
 

@@ -4751,9 +4751,6 @@ msgstr "Zatím nejsou žádné požadavky."
 msgid "There are no resources available."
 msgstr "Nejsou k dispozici žádné zdroje."
 
-msgid "There are no resources yet."
-msgstr "Zatím nejsou k dispozici žádné zdroje."
-
 msgid "There are no sections for comparison yet."
 msgstr "Zatím nejsou k dispozici žádné sekce pro srovnání."
 

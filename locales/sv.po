@@ -4673,9 +4673,6 @@ msgstr "Det finns inga förfrågningar ännu."
 msgid "There are no resources available."
 msgstr "Det finns inga resurser tillgängliga."
 
-msgid "There are no resources yet."
-msgstr "Det finns inga resurser ännu."
-
 msgid "There are no sections for comparison yet."
 msgstr "Det finns inga avsnitt för jämförelse ännu."
 

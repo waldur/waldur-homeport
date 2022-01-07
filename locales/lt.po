@@ -4751,9 +4751,6 @@ msgstr "Dar nėra užklausų."
 msgid "There are no resources available."
 msgstr "Nėra jokių išteklių."
 
-msgid "There are no resources yet."
-msgstr "Kol kas nėra jokių išteklių."
-
 msgid "There are no sections for comparison yet."
 msgstr "Kol kas nėra skyrių, kuriuos būtų galima palyginti."
 

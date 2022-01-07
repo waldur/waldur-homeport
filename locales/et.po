@@ -3716,9 +3716,6 @@ msgstr "Sellele organisatsioonil ei ole veel projekte."
 msgid "There are no requests yet."
 msgstr "Päringuid ei ole veel."
 
-msgid "There are no resources yet."
-msgstr "Ressursse veel ei ole"
-
 msgid "There are no sections for comparison yet."
 msgstr "Veel pole sektsioone mida võrrelda"
 

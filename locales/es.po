@@ -4754,9 +4754,6 @@ msgstr "Todavía no hay solicitudes."
 msgid "There are no resources available."
 msgstr "No hay recursos disponibles."
 
-msgid "There are no resources yet."
-msgstr "Todavía no hay recursos."
-
 msgid "There are no sections for comparison yet."
 msgstr "Todavía no hay secciones para la comparación."
 
