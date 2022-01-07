@@ -907,6 +907,7 @@ msgstr ""
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-instance/AvailabilityZoneGroup.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
@@ -2015,11 +2016,16 @@ msgstr ""
 msgid "Data volume should have at least {size} GB."
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
+msgid "Data volume size"
+msgstr ""
+
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 msgid "Data volume size:"
 msgstr ""
 
 #: src/openstack/openstack-instance/DataVolumeTypeGroup.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 msgid "Data volume type"
 msgstr ""
 
@@ -2975,6 +2981,7 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/rancher/cluster/create/NodeFlavorGroup.tsx
 msgid "Flavor"
 msgstr ""
@@ -3361,6 +3368,7 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/ImageGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 msgid "Image"
 msgstr ""
 
@@ -4544,6 +4552,7 @@ msgstr ""
 
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-network/breadcrumbs.ts
 #: src/openstack/openstack-subnet/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
@@ -7404,6 +7413,7 @@ msgid "SSH keys"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/rancher/cluster/create/RancherClusterForm.tsx
 msgid "SSH public key"
@@ -7520,6 +7530,7 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsForm.tsx
 #: src/openstack/openstack-security-groups/breadcrumbs.ts
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
@@ -8522,11 +8533,13 @@ msgstr ""
 msgid "System volume couldn't be detached."
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/SystemVolumeSizeGroup.tsx
 #: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
 msgid "System volume size"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/SystemVolumeTypeGroup.tsx
 #: src/rancher/cluster/create/SystemVolumeTypeGroup.tsx
 msgid "System volume type"
@@ -9628,6 +9641,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsContainer.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderOfferingsListExpandableRow.tsx
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 msgid "Unable to load offering details."
 msgstr ""
@@ -10394,6 +10408,7 @@ msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 msgid "User data"
 msgstr ""
 
