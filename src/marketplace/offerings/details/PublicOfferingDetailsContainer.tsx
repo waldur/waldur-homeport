@@ -1,12 +1,18 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
-import { getOffering, getCategory } from '@waldur/marketplace/common/api';
+import {
+  getOffering,
+  getCategory,
+  getCategories,
+} from '@waldur/marketplace/common/api';
 import { PublicOfferingDetails } from '@waldur/marketplace/offerings/details/PublicOfferingDetails';
+import * as actions from '@waldur/marketplace/offerings/store/actions';
 import { AnonymousHeader } from '@waldur/navigation/AnonymousHeader';
 import { useTitle } from '@waldur/navigation/title';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
@@ -14,7 +20,8 @@ import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 const fetchData = async (offeringUuid: string) => {
   const offering = await getOffering(offeringUuid, ANONYMOUS_CONFIG);
   const category = await getCategory(offering.category_uuid, ANONYMOUS_CONFIG);
-  return { offering, category };
+  const categories = await getCategories();
+  return { offering, category, categories };
 };
 
 export const PublicOfferingDetailsContainer: FunctionComponent = () => {
@@ -34,6 +41,21 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
   useTitle(
     value?.offering ? value.offering.name : translate('Offering details'),
   );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!value) return;
+
+    if (!value.offering || !value.categories) return;
+
+    dispatch(
+      actions.loadDataSuccess({
+        offering: value.offering,
+        categories: value.categories,
+      }),
+    );
+  }, [value]);
 
   return loading ? (
     <LoadingSpinner />

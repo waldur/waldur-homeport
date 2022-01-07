@@ -20,6 +20,7 @@ export const PublicOfferingDetails: FunctionComponent<PublicOfferingDetailsProps
     <div className="publicOfferingDetails m-b">
       <PublicOfferingDetailsHeader
         offering={offering}
+        category={category}
         refreshOffering={refreshOffering}
       />
       <PublicOfferingDetailsBreadcrumbs offering={offering} />

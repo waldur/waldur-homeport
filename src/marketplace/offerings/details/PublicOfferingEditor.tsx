@@ -9,6 +9,7 @@ import {
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
+import { PageDescription } from './PageDescription';
 import { PageHeroImage } from './PageHeroImage';
 import { PageLocation } from './PageLocation';
 import { PageOverview } from './PageOverview';
@@ -41,7 +42,7 @@ export const PublicOfferingEditor = ({ resolve }) => {
             description={translate(
               'Customize offering category and attributes',
             )}
-            onClick={() => alert('Not yet implemented.')}
+            onClick={() => setPage('description')}
           />
           <SidebarRow
             iconClass="fa fa-wrench"
@@ -82,6 +83,13 @@ export const PublicOfferingEditor = ({ resolve }) => {
   ) : page == 'overview' ? (
     <PageOverview
       offering={resolve.offering}
+      refreshOffering={resolve.refreshOffering}
+      onReturn={() => setPage('nav')}
+    />
+  ) : page === 'description' ? (
+    <PageDescription
+      offering={resolve.offering}
+      category={resolve.category}
       refreshOffering={resolve.refreshOffering}
       onReturn={() => setPage('nav')}
     />
