@@ -10,6 +10,10 @@ interface PlanSelectFieldProps {
   plans: Plan[];
 }
 
+const isDisabled = (plans) => {
+  return plans.length === 1;
+};
+
 export const PlanSelectField: FunctionComponent<PlanSelectFieldProps> = (
   props,
 ) => (
@@ -25,6 +29,7 @@ export const PlanSelectField: FunctionComponent<PlanSelectFieldProps> = (
           getOptionLabel={(option) => option.name}
           options={props.plans}
           isClearable={false}
+          isDisabled={isDisabled(props.plans)}
         />
         {fieldProps.meta.touched && (
           <FieldError error={fieldProps.meta.error} />
