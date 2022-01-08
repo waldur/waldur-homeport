@@ -5180,6 +5180,7 @@ msgstr ""
 #: src/booking/components/utils.tsx
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/SupportCustomerList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
 #: src/issues/IssueDetails.tsx
