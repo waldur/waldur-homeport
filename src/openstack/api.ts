@@ -336,9 +336,6 @@ export const pullVolume = (id: string) =>
 export const detachVolume = (id: string) =>
   post(`/openstacktenant-volumes/${id}/detach/`);
 
-export const destroyVolume = (id: string) =>
-  deleteById('/openstacktenant-volumes/', id);
-
 export const createBackupSchedule = (id: string, data) =>
   post(`/openstacktenant-instances/${id}/create_backup_schedule/`, data);
 

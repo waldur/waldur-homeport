@@ -2223,6 +2223,7 @@ msgid "Destination port"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.tsx
+#: src/openstack/openstack-volume/actions/DestroyAction.tsx
 #: src/resource/actions/DestroyActionItem.tsx
 msgid "Destroy"
 msgstr ""
@@ -2233,6 +2234,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyDialog.tsx
 msgid "Destroy {name} instance"
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/DestroyDialog.tsx
+msgid "Destroy {name} volume"
 msgstr ""
 
 #: src/resource/state/constants.ts
@@ -9382,6 +9387,10 @@ msgstr ""
 msgid "Unable to delete team member."
 msgstr ""
 
+#: src/openstack/openstack-volume/actions/DestroyDialog.tsx
+msgid "Unable to delete volume."
+msgstr ""
+
 #: src/rancher/cluster/ResourceDeleteButton.tsx
 msgid "Unable to delete {resourceType}."
 msgstr ""
@@ -10893,6 +10902,10 @@ msgstr ""
 #: src/openstack/openstack-instance/actions/AttachVolumeDialog.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 msgid "Volume"
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/DestroyDialog.tsx
+msgid "Volume deletion has been scheduled."
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/AttachDialog.tsx
