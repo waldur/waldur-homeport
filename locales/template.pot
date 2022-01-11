@@ -2532,6 +2532,10 @@ msgstr ""
 msgid "Edit team member"
 msgstr ""
 
+#: src/marketplace/resources/ResourceSummary.tsx
+msgid "Effective ID"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/rule-editor/DirectionField.tsx
 #: src/openstack/openstack-security-groups/utils.ts
 msgid "Egress"
