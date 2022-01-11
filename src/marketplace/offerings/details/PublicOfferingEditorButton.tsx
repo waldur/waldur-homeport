@@ -1,11 +1,16 @@
 import { Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getCurrentUser } from '@waldur/user/UsersService';
+import { setCurrentUser } from '@waldur/workspace/actions';
+import {
+  isOwnerOrStaff as isOwnerOrStaffSelector,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
 
 const PublicOfferingEditor = lazyComponent(
   () =>
@@ -24,7 +29,10 @@ export const PublicOfferingEditorButton = ({
   const { value: user } = useAsync(() =>
     getCurrentUser({ __skipLogout__: true }),
   );
-  if (!user || !user.is_staff) {
+  dispatch(setCurrentUser(user));
+  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  const isServiceManager = useSelector(isServiceManagerSelector);
+  if (!(isOwnerOrStaff || isServiceManager)) {
     return null;
   }
   return (
