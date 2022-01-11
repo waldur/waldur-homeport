@@ -18,7 +18,7 @@ import { RESOURCE_ACTION_FORM } from './constants';
 interface ResourceActionDialogOwnProps {
   submitForm(formData): void;
   dialogTitle: string;
-  formFields: any[];
+  formFields?: any[];
   loading?: boolean;
   error?: Error;
 }

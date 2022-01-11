@@ -1,9 +1,14 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { destroyVolume } from '@waldur/openstack/api';
 import { validateRuntimeState } from '@waldur/resource/actions/base';
-import { DestroyActionItem } from '@waldur/resource/actions/DestroyActionItem';
+import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { ActionContext } from '@waldur/resource/actions/types';
 import { Volume } from '@waldur/resource/types';
+
+const DestroyDialog = lazyComponent(
+  () => import(/* webpackChunkName: "DestroyDialog" */ './DestroyDialog'),
+  'DestroyDialog',
+);
 
 function validate(ctx: ActionContext<Volume>): string {
   if (ctx.resource.state === 'Erred') {
@@ -24,9 +29,11 @@ function validate(ctx: ActionContext<Volume>): string {
 const validators = [validate];
 
 export const DestroyAction = ({ resource }) => (
-  <DestroyActionItem
-    resource={resource}
+  <DialogActionItem
+    title={translate('Destroy')}
     validators={validators}
-    apiMethod={destroyVolume}
+    className="text-danger"
+    resource={resource}
+    modalComponent={DestroyDialog}
   />
 );
