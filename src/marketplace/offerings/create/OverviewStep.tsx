@@ -27,6 +27,11 @@ export const OverviewStep: FC<FormContainerProps> = (props) => (
       name="terms_of_service"
       label={translate('Terms of Service')}
     />
+    <StringField
+      name="access_url"
+      label={translate('Access console link')}
+      maxLength={200}
+    />
     <ImageUploadField
       name="thumbnail"
       label={translate('Offering logo')}

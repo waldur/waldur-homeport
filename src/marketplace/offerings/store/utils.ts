@@ -179,6 +179,7 @@ export const formatOfferingRequest = (
     description: request.description,
     full_description: request.full_description,
     terms_of_service: request.terms_of_service,
+    access_url: request.access_url,
     category: request.category.url,
     customer: customer ? customer.url : undefined,
     type: request.type ? request.type.value : undefined,

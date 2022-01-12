@@ -34,6 +34,11 @@ const PureOverviewSummary = (props) => {
         title: translate('Terms of Service'),
         type: 'string',
       },
+      {
+        key: 'access_url',
+        title: translate('Access URL'),
+        type: 'string',
+      },
     ],
   };
 

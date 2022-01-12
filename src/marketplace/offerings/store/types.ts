@@ -42,6 +42,7 @@ export interface OfferingFormData {
   description?: string;
   full_description?: string;
   terms_of_service?: string;
+  access_url?: string;
   category: Category;
   type: Option;
   attributes?: AttributesType;
@@ -79,6 +80,7 @@ export interface OfferingRequest {
   description?: string;
   full_description?: string;
   terms_of_service?: string;
+  access_url?: string;
   type: string;
   customer: string;
   category: string;

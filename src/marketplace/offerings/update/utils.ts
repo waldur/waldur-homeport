@@ -96,6 +96,7 @@ export const getInitialValues = (state: RootState) => {
     description: offering.description,
     full_description: offering.full_description,
     terms_of_service: offering.terms_of_service,
+    access_url: offering.access_url,
     thumbnail: offering.thumbnail,
     type: offeringTypes.find((option) => option.value === offering.type),
     category,

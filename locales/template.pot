@@ -88,6 +88,14 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
+#: src/marketplace/offerings/create/OverviewSummary.tsx
+msgid "Access URL"
+msgstr ""
+
+#: src/marketplace/offerings/create/OverviewStep.tsx
+msgid "Access console link"
+msgstr ""
+
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Access policies"
 msgstr ""
@@ -4109,6 +4117,10 @@ msgstr ""
 msgid "Management"
 msgstr ""
 
+#: src/marketplace/resources/ResourceSummary.tsx
+msgid "Management console URL"
+msgstr ""
+
 #: src/invoices/list/MarkAsPaidButton.tsx
 msgid "Mark as paid"
 msgstr ""
@@ -5048,6 +5060,7 @@ msgid "Only staff users are allowed to perform this action."
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/resource/summary/ResourceAccessInfo.tsx
