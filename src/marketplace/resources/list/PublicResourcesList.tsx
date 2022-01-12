@@ -13,6 +13,7 @@ import { Table, connectTable, createFetcher } from '@waldur/table';
 import {
   getCustomer,
   getUser,
+  isOwnerOrStaff,
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
@@ -121,7 +122,7 @@ const mapPropsToFilter = (props: StateProps) => {
       filter.category_uuid = props.filter.category.uuid;
     }
   }
-  if (props.isServiceManager) {
+  if (props.isServiceManager && !props.isOwnerOrStaff) {
     filter.service_manager_uuid = props.user.uuid;
   }
   return filter;
@@ -163,6 +164,7 @@ const mapStateToProps = (state: RootState) => ({
   ) as ResourceFilter,
   user: getUser(state),
   isServiceManager: isServiceManagerSelector(state),
+  isOwnerOrStaff: isOwnerOrStaff(state),
 });
 
 const enhance = compose(

@@ -12,6 +12,7 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 import {
   getCustomer,
   getUser,
+  isOwnerOrStaff,
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
@@ -96,7 +97,7 @@ const OrderItemsListTableOptions = {
         filter.type = props.filter.type.value;
       }
     }
-    if (props.isServiceManager) {
+    if (props.isServiceManager && !props.isOwnerOrStaff) {
       filter.service_manager_uuid = props.user.uuid;
     }
     return filter;
@@ -118,6 +119,7 @@ const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   user: getUser(state),
   isServiceManager: isServiceManagerSelector(state),
+  isOwnerOrStaff: isOwnerOrStaff(state),
 });
 
 const enhance = compose(
