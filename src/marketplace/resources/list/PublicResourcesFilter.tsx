@@ -13,6 +13,7 @@ import { RootState } from '@waldur/store/reducers';
 import {
   getCustomer,
   getUser,
+  isOwnerOrStaff as isOwnerOrStaffSelector,
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
 
@@ -34,8 +35,9 @@ const filterSelector = createSelector(
   getCustomer,
   getUser,
   isServiceManagerSelector,
-  (customer, user, isServiceManager) =>
-    isServiceManager
+  isOwnerOrStaffSelector,
+  (customer, user, isServiceManager, isOwnerOrStaff) =>
+    isServiceManager && !isOwnerOrStaff
       ? { customer_uuid: customer.uuid, service_manager_uuid: user.uuid }
       : {
           customer_uuid: customer.uuid,
