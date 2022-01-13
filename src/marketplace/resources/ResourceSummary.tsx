@@ -44,7 +44,7 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
     <Field label={translate('Effective ID')} value={resource.effective_id} />
     {resource.access_url ? (
       <Field
-        label={translate('Management console URL')}
+        label={translate('Access URL')}
         value={
           <ExternalLink label={translate('Open')} url={resource.access_url} />
         }

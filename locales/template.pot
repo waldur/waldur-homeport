@@ -4118,7 +4118,7 @@ msgid "Management"
 msgstr ""
 
 #: src/marketplace/resources/ResourceSummary.tsx
-msgid "Management console URL"
+msgid "Access URL"
 msgstr ""
 
 #: src/invoices/list/MarkAsPaidButton.tsx
