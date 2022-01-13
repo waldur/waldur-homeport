@@ -23,6 +23,7 @@ const mapComponents = (components: ComponentUsage[]) =>
       [component.type]: {
         amount: component.usage,
         description: component.description,
+        recurring: component.recurring,
       },
     }),
     {},

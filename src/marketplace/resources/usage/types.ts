@@ -35,6 +35,7 @@ export interface ComponentUsage {
   date: string;
   description: string;
   billing_period: string;
+  recurring: boolean;
 }
 
 export interface ResourcePlanPeriod {
