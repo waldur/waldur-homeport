@@ -5867,9 +5867,6 @@ msgstr "Volume is opnieuw getypt."
 msgid "Volume name"
 msgstr "Volumenaam"
 
-msgid "Volume should be in OK state."
-msgstr "Volume moet in OK staat zijn."
-
 msgid "Volume size"
 msgstr "Volumegrootte"
 

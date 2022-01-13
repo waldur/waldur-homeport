@@ -5867,9 +5867,6 @@ msgstr "Il volume è stato ridigitato."
 msgid "Volume name"
 msgstr "Nome volume"
 
-msgid "Volume should be in OK state."
-msgstr "Il volume deve essere in stato OK."
-
 msgid "Volume size"
 msgstr "Dimensione del volume"
 

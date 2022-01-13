@@ -5867,9 +5867,6 @@ msgstr "Svazek byl přepsán."
 msgid "Volume name"
 msgstr "Název svazku"
 
-msgid "Volume should be in OK state."
-msgstr "Svazek by měl být ve stavu OK."
-
 msgid "Volume size"
 msgstr "Velikost svazku"
 

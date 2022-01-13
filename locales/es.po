@@ -5870,9 +5870,6 @@ msgstr "Se ha vuelto a escribir el volumen."
 msgid "Volume name"
 msgstr "Nombre del volumen"
 
-msgid "Volume should be in OK state."
-msgstr "El volumen debería estar en estado OK."
-
 msgid "Volume size"
 msgstr "Tamaño del volumen"
 

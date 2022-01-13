@@ -5867,9 +5867,6 @@ msgstr "Volumen er blevet omskrevet."
 msgid "Volume name"
 msgstr "Navn på volumen"
 
-msgid "Volume should be in OK state."
-msgstr "Volumen skal være i OK-tilstand."
-
 msgid "Volume size"
 msgstr "Volumen størrelse"
 

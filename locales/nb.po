@@ -5867,9 +5867,6 @@ msgstr "Volumet er skrevet inn på nytt."
 msgid "Volume name"
 msgstr "Volumnavn"
 
-msgid "Volume should be in OK state."
-msgstr "Volumet skal være i OK-tilstand."
-
 msgid "Volume size"
 msgstr "Volumstørrelse"
 

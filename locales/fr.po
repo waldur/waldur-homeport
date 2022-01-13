@@ -5867,9 +5867,6 @@ msgstr "Le volume a été retapé."
 msgid "Volume name"
 msgstr "Nom du volume"
 
-msgid "Volume should be in OK state."
-msgstr "Le volume devrait être en état OK."
-
 msgid "Volume size"
 msgstr "Taille du volume"
 

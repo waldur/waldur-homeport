@@ -5867,9 +5867,6 @@ msgstr "Tomas įvestas iš naujo."
 msgid "Volume name"
 msgstr "Tomas pavadinimas"
 
-msgid "Volume should be in OK state."
-msgstr "Garsas turi būti OK būsena."
-
 msgid "Volume size"
 msgstr "Tūrio dydis"
 

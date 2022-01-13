@@ -5867,9 +5867,6 @@ msgstr "Volume wurde neu eingegeben."
 msgid "Volume name"
 msgstr "Volumename"
 
-msgid "Volume should be in OK state."
-msgstr "Die Lautstärke sollte sich im Status OK befinden."
-
 msgid "Volume size"
 msgstr "Volumengröße"
 

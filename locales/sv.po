@@ -5777,9 +5777,6 @@ msgstr "Volymen har skrivits om."
 msgid "Volume name"
 msgstr "Volym namn"
 
-msgid "Volume should be in OK state."
-msgstr "Volymen ska vara i OK-läge."
-
 msgid "Volume size"
 msgstr "Volym storlek"
 
