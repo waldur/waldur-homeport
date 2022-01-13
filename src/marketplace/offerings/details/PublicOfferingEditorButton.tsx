@@ -5,8 +5,9 @@ import { useAsync } from 'react-use';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { getCustomer } from '@waldur/project/api';
 import { getCurrentUser } from '@waldur/user/UsersService';
-import { setCurrentUser } from '@waldur/workspace/actions';
+import { setCurrentCustomer, setCurrentUser } from '@waldur/workspace/actions';
 import {
   isOwnerOrStaff as isOwnerOrStaffSelector,
   isServiceManagerSelector,
@@ -26,10 +27,14 @@ export const PublicOfferingEditorButton = ({
   refreshOffering,
 }) => {
   const dispatch = useDispatch();
-  const { value: user } = useAsync(() =>
-    getCurrentUser({ __skipLogout__: true }),
-  );
-  dispatch(setCurrentUser(user));
+  useAsync(async () => {
+    const user = await getCurrentUser({ __skipLogout__: true });
+    dispatch(setCurrentUser(user));
+    if (user) {
+      const customer = await getCustomer(offering.customer_uuid);
+      dispatch(setCurrentCustomer(customer));
+    }
+  });
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const isServiceManager = useSelector(isServiceManagerSelector);
   if (!(isOwnerOrStaff || isServiceManager)) {
