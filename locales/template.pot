@@ -89,6 +89,7 @@ msgid "Access"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 msgid "Access URL"
 msgstr ""
 
@@ -4117,10 +4118,6 @@ msgstr ""
 msgid "Management"
 msgstr ""
 
-#: src/marketplace/resources/ResourceSummary.tsx
-msgid "Access URL"
-msgstr ""
-
 #: src/invoices/list/MarkAsPaidButton.tsx
 msgid "Mark as paid"
 msgstr ""
@@ -5770,6 +5767,7 @@ msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsButton.tsx
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
+#: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 msgid "Plan details"
 msgstr ""
 
@@ -8059,6 +8057,7 @@ msgstr ""
 msgid "Shopping cart item update"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsLink.tsx
 #: src/table/TablePageSize.tsx
 msgid "Show"
 msgstr ""
