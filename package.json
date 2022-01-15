@@ -116,6 +116,7 @@
     "@types/leaflet-geosearch": "^2.7.1",
     "@types/lodash": "^4.14.21",
     "@types/luxon": "^2.0.4",
+    "@types/marked": "^4.0.1",
     "@types/qs": "^6.9.5",
     "@types/react": "^16.8.8",
     "@types/react-bootstrap": "^0.32.14",
