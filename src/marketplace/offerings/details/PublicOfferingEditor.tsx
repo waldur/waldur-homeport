@@ -11,6 +11,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 import { PageDescription } from './PageDescription';
 import { PageHeroImage } from './PageHeroImage';
+import { PageImages } from './PageImages';
 import { PageLocation } from './PageLocation';
 import { PageOverview } from './PageOverview';
 import { PagePolicies } from './PagePolicies';
@@ -74,6 +75,12 @@ export const PublicOfferingEditor = ({ resolve }) => {
             description={translate('Set access policy')}
             onClick={() => setPage('policies')}
           />
+          <SidebarRow
+            iconClass="fa fa-upload"
+            title={translate('Images')}
+            description={translate('Upload images')}
+            onClick={() => setPage('images')}
+          />
         </SidebarNav>
       </ModalBody>
       <ModalFooter>
@@ -111,5 +118,7 @@ export const PublicOfferingEditor = ({ resolve }) => {
       refreshOffering={resolve.refreshOffering}
       onReturn={() => setPage('nav')}
     />
+  ) : page == 'images' ? (
+    <PageImages offering={resolve.offering} onReturn={() => setPage('nav')} />
   ) : null;
 };
