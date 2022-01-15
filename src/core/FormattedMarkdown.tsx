@@ -1,5 +1,5 @@
 import DOMPurify from 'dompurify';
-import marked from 'marked';
+import { marked } from 'marked';
 import React from 'react';
 
 export const FormattedMarkdown: React.FC<{ text: string }> = (props) => {
