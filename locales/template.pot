@@ -3414,6 +3414,8 @@ msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/details/PageImages.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 msgid "Images"
 msgstr ""
@@ -10346,6 +10348,10 @@ msgstr ""
 
 #: src/resource/state/constants.ts
 msgid "Updating security groups"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+msgid "Upload images"
 msgstr ""
 
 #: src/customer/details/CustomerLogoUpdate.tsx
