@@ -20,6 +20,13 @@ export interface VolumeType {
   is_default: boolean;
 }
 
+export interface ServerGroupType {
+  url: string;
+  name: string;
+  description: string;
+  policy: string;
+}
+
 export type EthernetType = 'IPv4' | 'IPv6';
 
 export type SecurityGroupDirection = 'ingress' | 'egress';
