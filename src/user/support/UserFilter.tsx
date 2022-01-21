@@ -41,6 +41,11 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = (props) => (
         noUpdateOnBlur={true}
       />
       <DebouncedStringField
+        label={props.translate('Username')}
+        name="username"
+        noUpdateOnBlur={true}
+      />
+      <DebouncedStringField
         label={props.translate('Organization')}
         name="organization"
         noUpdateOnBlur={true}
