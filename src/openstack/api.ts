@@ -73,6 +73,12 @@ export interface UpdateSecurityGroupsRequestBody {
   }[];
 }
 
+export interface UpdateServerGroupsRequestBody {
+  server_groups: {
+    url: string;
+  }[];
+}
+
 export interface CreateNetworkRequestBody {
   name: string;
   description: string;
@@ -111,8 +117,14 @@ export const destroySubnet = (id: string) =>
 export const pullSecurityGroup = (id: string) =>
   post(`/openstack-security-groups/${id}/pull/`);
 
+export const pullServerGroup = (id: string) =>
+  post(`/openstack-server-groups/${id}/pull/`);
+
 export const destroySecurityGroup = (id: string) =>
   deleteById('/openstack-security-groups/', id);
+
+export const destroyServerGroup = (id: string) =>
+  deleteById('/openstack-server-groups/', id);
 
 export const pullNetwork = (id: string) =>
   post(`/openstack-networks/${id}/pull/`);
@@ -157,6 +169,9 @@ export const updateSecurityGroup = (id: string, data) =>
 
 export const setSecurityGroupRules = (id: string, data) =>
   post(`/openstack-security-groups/${id}/set_rules/`, data);
+
+export const updateServerGroup = (id: string, data) =>
+  put(`/openstack-server-groups/${id}/`, data);
 
 export const loadVolumeAvailabilityZones = (settings_uuid: string) =>
   getAll<AvailabilityZone>('/openstacktenant-volume-availability-zones/', {
@@ -207,6 +222,11 @@ export const updateSecurityGroups = (
   id: string,
   data: UpdateSecurityGroupsRequestBody,
 ) => post(`/openstacktenant-instances/${id}/update_security_groups/`, data);
+
+export const updateServerGroups = (
+  id: string,
+  data: UpdateServerGroupsRequestBody,
+) => post(`/openstacktenant-instances/${id}/update_server_groups/`, data);
 
 export const loadSshKeys = (user_uuid: string) =>
   getAll<SshKey>('/keys/', { params: { user_uuid } });
@@ -263,6 +283,9 @@ export const createNetwork = (id: string, data: CreateNetworkRequestBody) =>
 
 export const pullTenantSecurityGroups = (id: string) =>
   post(`/openstack-tenants/${id}/pull_security_groups/`);
+
+export const pullTenantServerGroups = (id: string) =>
+  post(`/openstack-tenants/${id}/pull_server_groups/`);
 
 export const pullTenantFloatingIps = (id: string) =>
   post(`/openstack-tenants/${id}/pull_floating_ips/`);
