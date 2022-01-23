@@ -5,12 +5,14 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 import { googleCalendarActions } from '@waldur/marketplace/offerings/actions/GoogleCalendarActions';
-import { isVisible } from '@waldur/marketplace/offerings/actions/utils';
+import {
+  isVisible,
+  supportOfferingActionVisible,
+} from '@waldur/marketplace/offerings/actions/utils';
 import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { router } from '@waldur/router';
 import { RootState } from '@waldur/store/reducers';
-import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
 import {
   getUser,
   isOwner,
@@ -268,12 +270,12 @@ const mergeProps = (
     {
       label: translate('Edit confirmation message'),
       handler: () => dispatchProps.editConfirmationMessage(ownProps.offering),
-      visible:
-        ownProps.offering.type === SUPPORT_OFFERING_TYPE &&
-        ownProps.offering.state !== ARCHIVED &&
-        (stateProps.user.is_staff ||
-          (ownProps.offering.state === DRAFT &&
-            (stateProps.isOwner || stateProps.isServiceManager))),
+      visible: supportOfferingActionVisible(
+        ownProps.offering,
+        stateProps.user,
+        stateProps.isOwner,
+        stateProps.isServiceManager,
+      ),
     },
     {
       label: translate('Set access policy'),
