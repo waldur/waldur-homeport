@@ -1590,12 +1590,17 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
+#: src/marketplace/offerings/details/PageConfirmationMessage.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+msgid "Confirmation message"
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Confirmation message has been updated successfully."
 msgstr ""
 
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
-#: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
+#: src/marketplace/offerings/actions/EditConfirmationMessageFormContainer.tsx
 #: src/support/OfferingPluginSecretOptionsForm.tsx
 msgid "Confirmation notification template"
 msgstr ""
@@ -2495,6 +2500,7 @@ msgid "Edit booking event"
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Edit confirmation message"
 msgstr ""
 
@@ -4915,6 +4921,7 @@ msgid "Offering has been imported."
 msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
+#: src/marketplace/offerings/details/PageConfirmationMessage.tsx
 #: src/marketplace/offerings/details/PageDescription.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/details/PageLocation.tsx
@@ -10066,6 +10073,7 @@ msgstr ""
 msgid "Unable to update offering state."
 msgstr ""
 
+#: src/marketplace/offerings/details/PageConfirmationMessage.tsx
 #: src/marketplace/offerings/details/PageDescription.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/details/PageLocation.tsx
@@ -10216,6 +10224,7 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
+#: src/marketplace/offerings/details/PageConfirmationMessage.tsx
 #: src/marketplace/offerings/details/PageDescription.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/details/PageLocation.tsx

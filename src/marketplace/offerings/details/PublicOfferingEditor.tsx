@@ -5,10 +5,18 @@ import {
   ModalHeader,
   ModalTitle,
 } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { supportOfferingActionVisible } from '@waldur/marketplace/offerings/actions/utils';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import {
+  getUser,
+  isOwner as isOwnerSelector,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
 
+import { PageConfirmationMessage } from './PageConfirmationMessage';
 import { PageDescription } from './PageDescription';
 import { PageHeroImage } from './PageHeroImage';
 import { PageImages } from './PageImages';
@@ -21,6 +29,10 @@ require('./PublicOfferingEditor.css');
 
 export const PublicOfferingEditor = ({ resolve }) => {
   const [page, setPage] = useState('nav');
+
+  const user = useSelector(getUser);
+  const isOwner = useSelector(isOwnerSelector);
+  const isServiceManager = useSelector(isServiceManagerSelector);
 
   return page == 'nav' ? (
     <>
@@ -81,6 +93,19 @@ export const PublicOfferingEditor = ({ resolve }) => {
             description={translate('Upload images')}
             onClick={() => setPage('images')}
           />
+          {supportOfferingActionVisible(
+            resolve.offering,
+            user,
+            isOwner,
+            isServiceManager,
+          ) && (
+            <SidebarRow
+              iconClass="fa fa-commenting"
+              title={translate('Confirmation message')}
+              description={translate('Edit confirmation message')}
+              onClick={() => setPage('confirmation-message')}
+            />
+          )}
         </SidebarNav>
       </ModalBody>
       <ModalFooter>
@@ -120,5 +145,11 @@ export const PublicOfferingEditor = ({ resolve }) => {
     />
   ) : page == 'images' ? (
     <PageImages offering={resolve.offering} onReturn={() => setPage('nav')} />
+  ) : page == 'confirmation-message' ? (
+    <PageConfirmationMessage
+      offering={resolve.offering}
+      refreshOffering={resolve.refreshOffering}
+      onReturn={() => setPage('nav')}
+    />
   ) : null;
 };

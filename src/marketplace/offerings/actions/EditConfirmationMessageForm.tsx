@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import { FormContainer, SubmitButton, TextField } from '@waldur/form';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { EDIT_CONFIRMATION_MESSAGE_FORM_ID } from '@waldur/marketplace/offerings/actions/constants';
 import { updateConfirmationMessage } from '@waldur/marketplace/offerings/store/constants';
 import { Offering } from '@waldur/marketplace/types';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+
+import { EditConfirmationMessageFormContainer } from './EditConfirmationMessageFormContainer';
 
 interface EditConfirmationMessageFormOwnProps {
   offering: Offering;
@@ -38,16 +40,7 @@ const PureEditConfirmationMessageForm: FunctionComponent<any> = (props) => (
         </>
       }
     >
-      <FormContainer
-        submitting={props.submitting}
-        labelClass="col-sm-2"
-        controlClass="col-sm-8"
-      >
-        <TextField
-          label={translate('Confirmation notification template')}
-          name="template_confirmation_comment"
-        />
-      </FormContainer>
+      <EditConfirmationMessageFormContainer submitting={props.submitting} />
     </ModalDialog>
   </form>
 );

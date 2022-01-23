@@ -15,11 +15,10 @@ import { PublicOfferingDetails } from '@waldur/marketplace/offerings/details/Pub
 import * as actions from '@waldur/marketplace/offerings/store/actions';
 import { AnonymousHeader } from '@waldur/navigation/AnonymousHeader';
 import { useTitle } from '@waldur/navigation/title';
-import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 
 const fetchData = async (offeringUuid: string) => {
-  const offering = await getOffering(offeringUuid, ANONYMOUS_CONFIG);
-  const category = await getCategory(offering.category_uuid, ANONYMOUS_CONFIG);
+  const offering = await getOffering(offeringUuid);
+  const category = await getCategory(offering.category_uuid);
   const categories = await getCategories();
   return { offering, category, categories };
 };
