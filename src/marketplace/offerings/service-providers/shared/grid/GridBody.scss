@@ -3,4 +3,10 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
   justify-items: center;
+
+  &.hasOneItem {
+    @media (min-width: 768px) {
+      justify-items: left;
+    }
+  }
 }

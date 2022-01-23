@@ -12,7 +12,7 @@ export const GridBody: FunctionComponent<GridBodyProps> = ({
   rows,
   gridItemComponent,
 }) => (
-  <div className="gridBody">
+  <div className={rows.length === 1 ? 'gridBody hasOneItem' : 'gridBody'}>
     {rows.map((row: ServiceProvider, index: number) =>
       React.createElement(gridItemComponent, { key: index, row }),
     )}
