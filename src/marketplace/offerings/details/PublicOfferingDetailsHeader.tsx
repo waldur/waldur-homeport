@@ -4,6 +4,7 @@ import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { Link } from '@waldur/core/Link';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { OfferingItemActions } from '@waldur/marketplace/offerings/actions/OfferingItemActions';
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
 import { Category, Offering } from '@waldur/marketplace/types';
 
@@ -61,6 +62,12 @@ export const PublicOfferingDetailsHeader: FunctionComponent<PublicOfferingDetail
               <PublicOfferingEditorButton
                 offering={offering}
                 category={category}
+                refreshOffering={refreshOffering}
+              />
+              <OfferingItemActions
+                offering={offering}
+                isPublic={true}
+                pullRight={false}
                 refreshOffering={refreshOffering}
               />
             </div>

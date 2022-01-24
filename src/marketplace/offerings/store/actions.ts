@@ -15,12 +15,16 @@ export const updateOfferingState = (
   offering: Offering,
   stateAction: string,
   reason?: string,
+  isPublic?: boolean,
+  refreshOffering?: () => void,
 ) => ({
   type: constants.UPDATE_OFFERING_STATE,
   payload: {
     offering,
     stateAction,
     reason,
+    isPublic,
+    refreshOffering,
   },
 });
 
