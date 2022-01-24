@@ -2801,6 +2801,10 @@ msgstr ""
 msgid "Every year"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
+msgid "Every year service provider can report up to the amount requested by user."
+msgstr ""
+
 #: src/marketplace/resources/report/SubmitReportDialog.tsx
 msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
 msgstr ""
@@ -4191,6 +4195,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentMaxValueField.tsx
 msgid "Maximum allowed value"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
+msgid "Maximum annually"
 msgstr ""
 
 #: src/vmware/VMwareForm.tsx
