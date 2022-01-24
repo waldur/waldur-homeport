@@ -148,7 +148,8 @@ function* updateOffering(action: Action<OfferingUpdateFormData>) {
 }
 
 function* updateOfferingState(action) {
-  const { offering, stateAction, reason } = action.payload;
+  const { offering, stateAction, reason, isPublic, refreshOffering } =
+    action.payload;
   try {
     const response = yield call(
       api.updateOfferingState,
@@ -163,6 +164,9 @@ function* updateOfferingState(action) {
       }),
     );
     yield put(showSuccess(translate('Offering state has been updated.')));
+    if (isPublic) {
+      refreshOffering();
+    }
     if (stateAction === 'pause') {
       yield put(closeModalDialog());
     }

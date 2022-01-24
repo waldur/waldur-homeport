@@ -7,12 +7,18 @@ import { OfferingAction } from './types';
 
 interface ActionsDropdownProps {
   actions: OfferingAction[];
+  pullRight: boolean;
 }
 
 export const ActionsDropdown: FunctionComponent<ActionsDropdownProps> = ({
   actions,
+  pullRight,
 }) => (
-  <Dropdown id="offering-actions" disabled={actions.length === 0} pullRight>
+  <Dropdown
+    id="offering-actions"
+    disabled={actions.length === 0}
+    pullRight={pullRight}
+  >
     <DropdownToggle className="btn-sm">{translate('Actions')}</DropdownToggle>
     <DropdownMenu>
       {actions.map((action, index) => (
@@ -25,3 +31,7 @@ export const ActionsDropdown: FunctionComponent<ActionsDropdownProps> = ({
     </DropdownMenu>
   </Dropdown>
 );
+
+ActionsDropdown.defaultProps = {
+  pullRight: true,
+};
