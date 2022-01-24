@@ -21,6 +21,13 @@ export function getLimitPeriods(): LimitPeriodOption[] {
       ),
     },
     {
+      value: 'annual',
+      label: translate('Maximum annually'),
+      description: translate(
+        'Every year service provider can report up to the amount requested by user.',
+      ),
+    },
+    {
       value: 'total',
       label: translate('Maximum total'),
       description: translate(
