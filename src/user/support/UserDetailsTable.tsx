@@ -29,6 +29,7 @@ interface StateProps {
 
 interface OwnProps {
   user: UserDetails;
+  profile?: any;
 }
 
 export type UserDetailsTableProps = TranslateProps & StateProps & OwnProps;
@@ -88,6 +89,11 @@ const PureUserDetailsTable: FunctionComponent<UserDetailsTableProps> = (
         label={props.translate('Status')}
         value={formatUserStatus(props.user)}
         isVisible={props.isVisibleForSupportOrStaff}
+      />
+      <Row
+        label={props.translate('FreeIPA')}
+        value={props.profile?.username}
+        isVisible={props.profile?.is_active}
       />
     </tbody>
   </Table>

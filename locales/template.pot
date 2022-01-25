@@ -3090,6 +3090,10 @@ msgstr ""
 msgid "Force destroy {name} instance"
 msgstr ""
 
+#: src/user/support/UserDetailsTable.tsx
+msgid "FreeIPA"
+msgstr ""
+
 #: src/freeipa/FreeIPAAccount.tsx
 #: src/user/constants.ts
 msgid "FreeIPA account"

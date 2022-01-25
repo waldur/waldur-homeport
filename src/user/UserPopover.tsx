@@ -11,8 +11,10 @@ import { useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 import { createSelector } from 'reselect';
 
+import { ENV } from '@waldur/configs/default';
 import { getById } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { getProfile } from '@waldur/freeipa/api';
 import { translate } from '@waldur/i18n';
 import { countChecklists } from '@waldur/marketplace-checklist/api';
 import { UserChecklist } from '@waldur/marketplace-checklist/UserChecklist';
@@ -40,7 +42,11 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
       user = resolve.user;
     }
     const checklistCount = await countChecklists();
-    return { user, checklistCount };
+    let profile = null;
+    if (ENV.plugins.WALDUR_FREEIPA?.ENABLED) {
+      profile = await getProfile(user.uuid);
+    }
+    return { user, checklistCount, profile };
   }, [resolve]);
 
   useEffectOnce(() => {
@@ -71,7 +77,7 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
         <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
           <Tab eventKey={1} title={translate('Details')}>
             <div className="m-t-sm">
-              <UserDetailsTable user={value.user} />
+              <UserDetailsTable user={value.user} profile={value.profile} />
             </div>
           </Tab>
 
