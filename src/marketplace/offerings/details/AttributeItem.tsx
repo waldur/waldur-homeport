@@ -4,6 +4,8 @@ import { FunctionComponent } from 'react';
 import { AttributeCell } from '@waldur/marketplace/common/AttributeCell';
 import { Section } from '@waldur/marketplace/types';
 
+import { isValidAttribute } from './utils';
+
 interface AttributeItemProps {
   index: number;
   section: Section;
@@ -21,12 +23,16 @@ export const AttributeItem: FunctionComponent<AttributeItemProps> = (props) => {
       })}
     >
       <b>{props.section.title}</b>
-      {filteredAttributes.map((attr, index) => (
-        <div key={index}>
-          {attr.title}:{' '}
-          <AttributeCell attr={attr} value={props.attributes[attr.key]} />
-        </div>
-      ))}
+      {filteredAttributes
+        .filter((attr) => isValidAttribute(props.attributes[attr.key]))
+        .map((attr, index) => (
+          <div key={index}>
+            {attr.title}:{' '}
+            {props.attributes[attr.key] && (
+              <AttributeCell attr={attr} value={props.attributes[attr.key]} />
+            )}
+          </div>
+        ))}
     </div>
   ) : null;
 };
