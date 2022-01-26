@@ -5,7 +5,7 @@ import { ARCHIVED } from '@waldur/marketplace/offerings/store/constants';
 const isVisible = (ownProps, stateProps): boolean =>
   ownProps.offering.type === OFFERING_TYPE_BOOKING &&
   ![ARCHIVED].includes(ownProps.offering.state) &&
-  (stateProps.user.is_staff || stateProps.isOwner);
+  (stateProps.user?.is_staff || stateProps.isOwner);
 
 export const googleCalendarActions = (dispatchProps, ownProps, stateProps) => [
   {
