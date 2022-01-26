@@ -1,4 +1,6 @@
 import { FunctionComponent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAsync } from 'react-use';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
@@ -7,6 +9,10 @@ import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { OfferingItemActions } from '@waldur/marketplace/offerings/actions/OfferingItemActions';
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
 import { Category, Offering } from '@waldur/marketplace/types';
+import { getCustomer } from '@waldur/project/api';
+import { getCurrentUser } from '@waldur/user/UsersService';
+import { setCurrentCustomer, setCurrentUser } from '@waldur/workspace/actions';
+import { getUser } from '@waldur/workspace/selectors';
 
 import './PublicOfferingDetailsHeader.scss';
 import { PublicOfferingEditorButton } from './PublicOfferingEditorButton';
@@ -36,6 +42,19 @@ export const PublicOfferingDetailsHeader: FunctionComponent<PublicOfferingDetail
         </Link>
       ),
     };
+
+    const dispatch = useDispatch();
+    useAsync(async () => {
+      const user = await getCurrentUser({ __skipLogout__: true });
+      dispatch(setCurrentUser(user));
+      if (user) {
+        const customer = await getCustomer(offering.customer_uuid);
+        dispatch(setCurrentCustomer(customer));
+      }
+    });
+
+    const user = useSelector(getUser);
+
     return (
       <div
         className="publicOfferingDetailsHeader"
@@ -59,17 +78,21 @@ export const PublicOfferingDetailsHeader: FunctionComponent<PublicOfferingDetail
                   ? translate('Book')
                   : translate('Purchase')}
               </Link>
-              <PublicOfferingEditorButton
-                offering={offering}
-                category={category}
-                refreshOffering={refreshOffering}
-              />
-              <OfferingItemActions
-                offering={offering}
-                isPublic={true}
-                pullRight={false}
-                refreshOffering={refreshOffering}
-              />
+              {user && (
+                <>
+                  <PublicOfferingEditorButton
+                    offering={offering}
+                    category={category}
+                    refreshOffering={refreshOffering}
+                  />
+                  <OfferingItemActions
+                    offering={offering}
+                    isPublic={true}
+                    pullRight={false}
+                    refreshOffering={refreshOffering}
+                  />
+                </>
+              )}
             </div>
           </div>
           <Logo
