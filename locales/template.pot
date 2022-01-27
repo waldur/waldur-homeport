@@ -87,7 +87,6 @@ msgid "Access"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewSummary.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
 msgid "Access URL"
 msgstr ""
 
@@ -5074,7 +5073,6 @@ msgid "Only staff users are allowed to perform this action."
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Open"

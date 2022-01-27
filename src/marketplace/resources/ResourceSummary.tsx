@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDate } from '@waldur/core/dateUtils';
-import { ExternalLink } from '@waldur/core/ExternalLink';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { CreatedField } from '@waldur/resource/summary/CreatedField';
@@ -42,14 +41,6 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
     />
     <Field label={translate('Backend ID')} value={resource.backend_id} />
     <Field label={translate('Effective ID')} value={resource.effective_id} />
-    {resource.access_url ? (
-      <Field
-        label={translate('Access URL')}
-        value={
-          <ExternalLink label={translate('Open')} url={resource.access_url} />
-        }
-      />
-    ) : null}
     <Field
       label={translate('State')}
       value={<MarketplaceResourceStateField resource={resource} />}
