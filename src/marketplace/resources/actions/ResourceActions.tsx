@@ -8,6 +8,7 @@ import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/Off
 import { ShowReportButton } from '@waldur/marketplace/resources/report/ShowReportButton';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
+import { ResourceAccessButton } from '@waldur/resource/ResourceAccessButton';
 
 import { ResourceActionsButton } from './ResourceActionsButton';
 
@@ -20,7 +21,8 @@ export const ResourceActions: FunctionComponent<ResourceActionsProps> = ({
   resource,
   reInitResource,
 }) => (
-  <div className="pull-right">
+  <div className="pull-right btn-group">
+    <ResourceAccessButton resource={resource} />
     <button className="btn btn-default btn-sm" onClick={reInitResource}>
       <i className="fa fa-refresh" /> {translate('Refresh')}
     </button>

@@ -4,7 +4,6 @@ import { withTranslation } from '@waldur/i18n';
 import { formatSummary, formatCommaList } from '@waldur/resource/utils';
 
 import { Field } from './Field';
-import { ResourceAccessInfo } from './ResourceAccessInfo';
 import { PureResourceSummaryBase } from './ResourceSummaryBase';
 import { ResourceSummaryProps } from './types';
 
@@ -46,10 +45,6 @@ export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
       <Field
         label={translate('Summary')}
         value={<ResourceSummaryField {...props} />}
-      />
-      <Field
-        label={translate('Access')}
-        value={<ResourceAccessInfo {...props} />}
       />
       <Field
         label={translate('Internal IP')}
