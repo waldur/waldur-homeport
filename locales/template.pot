@@ -83,8 +83,6 @@ msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/rancher/cluster/RancherClusterSummary.tsx
-#: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Access"
 msgstr ""
 
@@ -116,6 +114,10 @@ msgstr ""
 
 #: src/digitalocean/DigitalOceanForm.tsx
 msgid "Access token"
+msgstr ""
+
+#: src/resource/ResourceAccessButton.tsx
+msgid "Access {name}"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -1607,10 +1609,6 @@ msgstr ""
 
 #: src/customer/team/PendingReviewDialog.tsx
 msgid "Confirming that data is correct"
-msgstr ""
-
-#: src/resource/summary/ResourceAccessInfo.tsx
-msgid "Connect"
 msgstr ""
 
 #: src/openstack/openstack-subnet/ConnectSubnetAction.tsx
@@ -4656,10 +4654,6 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: src/resource/summary/ResourceAccessInfo.tsx
-msgid "No access info"
-msgstr ""
-
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "No access info."
 msgstr ""
@@ -5083,7 +5077,6 @@ msgstr ""
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
-#: src/resource/summary/ResourceAccessInfo.tsx
 msgid "Open"
 msgstr ""
 
