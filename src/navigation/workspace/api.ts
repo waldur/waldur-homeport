@@ -12,7 +12,7 @@ export const getCustomersPage = (query, page) =>
   Axios.get(`${ENV.apiEndpoint}api/customers/`, {
     params: {
       page: page + 1,
-      page_size: ENV.pageSize,
+      page_size: 20,
       field: [
         'name',
         'uuid',
