@@ -163,7 +163,7 @@ export const BookingModal: FC<BookingModalProps> = ({
             minuteStep={30}
             label={translate('Start')}
             isDisabled={newEvent.allDay}
-            currentTime={parseDate(newEvent.start).toFormat('dd/MM/yyyy T')}
+            currentTime={parseDate(newEvent.start)}
             onChange={(newDateValue) => handleChange('start', newDateValue)}
           />
 
@@ -172,7 +172,7 @@ export const BookingModal: FC<BookingModalProps> = ({
             label={translate('End')}
             minuteStep={30}
             isDisabled={newEvent.allDay}
-            currentTime={parseDate(newEvent.end).toFormat('dd/MM/yyyy T')}
+            currentTime={parseDate(newEvent.end)}
             onChange={(newDateValue) => handleChange('end', newDateValue)}
           />
 
@@ -184,7 +184,7 @@ export const BookingModal: FC<BookingModalProps> = ({
               marginTop: 30,
             }}
           >
-            <Button bsStyle="delete" onClick={handleDelete}>
+            <Button bsStyle="danger" onClick={handleDelete}>
               {translate('Delete')}
             </Button>
             <Button bsStyle="primary" onClick={handleSubmit}>
