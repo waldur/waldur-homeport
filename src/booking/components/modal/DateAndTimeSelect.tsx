@@ -34,7 +34,7 @@ export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> =
           showTodayButton={true}
           todayButtonLabel={translate('Today')}
           dateFormat="DD-MM-YYYY"
-          value={props.currentTime.format()}
+          value={props.currentTime.toISO()}
           onChange={(_, formattedValue) =>
             props.onChange(
               DateTime.fromFormat(formattedValue, 'dd-MM-yyyy').toJSDate(),
@@ -55,8 +55,8 @@ export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> =
         isClearable={false}
         isSearchable={false}
         value={{
-          value: props.currentTime.format('HH:mm'),
-          label: props.currentTime.format('HH:mm'),
+          value: props.currentTime.toFormat('HH:mm'),
+          label: props.currentTime.toFormat('HH:mm'),
         }}
         onChange={(selectOpt: TimeSelect) =>
           props.onChange(
