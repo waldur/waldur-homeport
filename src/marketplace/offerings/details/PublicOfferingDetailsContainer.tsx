@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
@@ -7,31 +7,60 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
 import {
-  getOffering,
-  getCategory,
   getCategories,
+  getCategory,
+  getOffering,
 } from '@waldur/marketplace/common/api';
 import { PublicOfferingDetails } from '@waldur/marketplace/offerings/details/PublicOfferingDetails';
 import * as actions from '@waldur/marketplace/offerings/store/actions';
 import { AnonymousHeader } from '@waldur/navigation/AnonymousHeader';
 import { useTitle } from '@waldur/navigation/title';
-
-const fetchData = async (offeringUuid: string) => {
-  const offering = await getOffering(offeringUuid);
-  const category = await getCategory(offering.category_uuid);
-  const categories = await getCategories();
-  return { offering, category, categories };
-};
+import { getCustomer } from '@waldur/project/api';
+import { ANONYMOUS_CONFIG } from '@waldur/table/api';
+import { getCurrentUser } from '@waldur/user/UsersService';
+import { setCurrentCustomer, setCurrentUser } from '@waldur/workspace/actions';
 
 export const PublicOfferingDetailsContainer: FunctionComponent = () => {
+  const dispatch = useDispatch();
+
   const {
     params: { uuid },
   } = useCurrentStateAndParams();
 
-  const [{ loading, error, value }, refreshOffering] = useAsyncFn(
-    () => fetchData(uuid),
-    [uuid],
-  );
+  const [{ loading, error, value }, refreshOffering] = useAsyncFn(async () => {
+    try {
+      const user = await getCurrentUser({ __skipLogout__: true });
+      dispatch(setCurrentUser(user));
+      const offering = await getOffering(uuid);
+      const category = await getCategory(offering.category_uuid);
+      const categories = await getCategories();
+      dispatch(
+        actions.loadDataSuccess({
+          offering,
+          categories,
+        }),
+      );
+      const customer = await getCustomer(offering.customer_uuid);
+      dispatch(setCurrentCustomer(customer));
+      return { offering, category };
+    } catch (e) {
+      if (e.response.status == 401) {
+        const offering = await getOffering(uuid, ANONYMOUS_CONFIG);
+        const category = await getCategory(
+          offering.category_uuid,
+          ANONYMOUS_CONFIG,
+        );
+        const categories = await getCategories(ANONYMOUS_CONFIG);
+        dispatch(
+          actions.loadDataSuccess({
+            offering,
+            categories,
+          }),
+        );
+        return { offering, category };
+      }
+    }
+  }, [uuid]);
 
   useEffectOnce(() => {
     refreshOffering();
@@ -41,26 +70,11 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
     value?.offering ? value.offering.name : translate('Offering details'),
   );
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!value) return;
-
-    if (!value.offering || !value.categories) return;
-
-    dispatch(
-      actions.loadDataSuccess({
-        offering: value.offering,
-        categories: value.categories,
-      }),
-    );
-  }, [value]);
-
   return loading ? (
     <LoadingSpinner />
   ) : error ? (
     <h3>{translate('Unable to load offering details.')}</h3>
-  ) : value?.offering ? (
+  ) : value ? (
     <>
       <AnonymousHeader />
       <PublicOfferingDetails
