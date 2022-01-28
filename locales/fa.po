@@ -626,9 +626,6 @@ msgstr "حذف را تایید میکنید؟"
 msgid "Confirmation"
 msgstr "تاییدیه"
 
-msgid "Connect"
-msgstr "اتصال"
-
 msgid "Connected subnets"
 msgstr "subnet ها متصل شدند"
 
@@ -1747,9 +1744,6 @@ msgstr "خیر"
 
 msgid "No, continue using current email"
 msgstr "خیر،به استفاده از ایمیل فعلی ادامه دهید"
-
-msgid "No access info"
-msgstr "دسترسی اطلاعات ندارد"
 
 msgid "No access info."
 msgstr "دسترسی اطلاعات ندارد."

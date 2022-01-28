@@ -824,9 +824,6 @@ msgstr "Mall för bekräftelsemeddelande"
 msgid "Confirming that data is correct"
 msgstr "Bekräfta att uppgifterna är korrekta"
 
-msgid "Connect"
-msgstr "Anslut"
-
 msgid "Connect subnet"
 msgstr "Anslut undernät"
 
@@ -2431,9 +2428,6 @@ msgstr "Nej"
 
 msgid "No, continue using current email"
 msgstr "Nej, fortsätt att använda aktuell e-post"
-
-msgid "No access info"
-msgstr "Ingen åtkomstinformation"
 
 msgid "No access info."
 msgstr "Ingen åtkomstinformation."

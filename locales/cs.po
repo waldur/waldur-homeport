@@ -848,9 +848,6 @@ msgstr "Šablona potvrzovacího oznámení"
 msgid "Confirming that data is correct"
 msgstr "Potvrzení správnosti údajů"
 
-msgid "Connect"
-msgstr "Připojit"
-
 msgid "Connect subnet"
 msgstr "Připojit podsíť"
 
@@ -2497,9 +2494,6 @@ msgstr "Ne"
 
 msgid "No, continue using current email"
 msgstr "Ne, pokračujte v používání stávajícího e-mailu"
-
-msgid "No access info"
-msgstr "Žádné přístupové informace"
 
 msgid "No access info."
 msgstr "Žádné přístupové informace."

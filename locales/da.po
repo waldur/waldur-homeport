@@ -848,9 +848,6 @@ msgstr "Skabelon til bekræftelsesmeddelelse"
 msgid "Confirming that data is correct"
 msgstr "Bekræftelse af, at dataene er korrekte"
 
-msgid "Connect"
-msgstr "Tilslut"
-
 msgid "Connect subnet"
 msgstr "Tilslut undernet"
 
@@ -2497,9 +2494,6 @@ msgstr "Nej"
 
 msgid "No, continue using current email"
 msgstr "Nej, fortsæt med at bruge nuværende e-mail"
-
-msgid "No access info"
-msgstr "Ingen adgangsoplysninger"
 
 msgid "No access info."
 msgstr "Ingen adgangsoplysninger."

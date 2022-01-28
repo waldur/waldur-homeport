@@ -848,9 +848,6 @@ msgstr "Sjabloon voor bevestiging van meldingen"
 msgid "Confirming that data is correct"
 msgstr "Bevestigen dat de gegevens juist zijn"
 
-msgid "Connect"
-msgstr "Verbinden"
-
 msgid "Connect subnet"
 msgstr "Subnet verbinden"
 
@@ -2497,9 +2494,6 @@ msgstr "Nee"
 
 msgid "No, continue using current email"
 msgstr "Nee, blijf huidige e-mail gebruiken"
-
-msgid "No access info"
-msgstr "Geen toegang info"
 
 msgid "No access info."
 msgstr "Geen toegang info."

@@ -302,9 +302,6 @@ msgstr "Konfiqurasiya etmək"
 msgid "Confirm deletion?"
 msgstr "Silinməni təsdiqləmək?"
 
-msgid "Connect"
-msgstr "Birləşdirmək"
-
 msgid "Connected subnets"
 msgstr "Birləşdirilmiş alt-şəbəkələr"
 
@@ -1057,9 +1054,6 @@ msgstr "Yox"
 
 msgid "No, continue using current email"
 msgstr "Xeyr, cari e-poçtdan istifadə etməyə davam edin"
-
-msgid "No access info"
-msgstr "Giriş məlumatı yoxdur"
 
 msgid "No access info."
 msgstr "Giriş məlumatı yoxdur."

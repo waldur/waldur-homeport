@@ -290,9 +290,6 @@ msgstr "Jauns izmērs"
 msgid "Next"
 msgstr "Tālāk"
 
-msgid "No access info"
-msgstr "Nav pieejas datu"
-
 msgid "Notifications"
 msgstr "Paziņojumi"
 

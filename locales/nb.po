@@ -848,9 +848,6 @@ msgstr "Bekreftelsesvarselmal"
 msgid "Confirming that data is correct"
 msgstr "Bekrefte at dataene er korrekte"
 
-msgid "Connect"
-msgstr "Koble"
-
 msgid "Connect subnet"
 msgstr "Koble til delnett"
 
@@ -2497,9 +2494,6 @@ msgstr "Nei"
 
 msgid "No, continue using current email"
 msgstr "Nei, fortsett å bruke gjeldende e-post"
-
-msgid "No access info"
-msgstr "Ingen tilgangsinfo"
 
 msgid "No access info."
 msgstr "Ingen tilgangsinfo"

@@ -848,9 +848,6 @@ msgstr "Modèle de notification de confirmation"
 msgid "Confirming that data is correct"
 msgstr "Confirmer que les données sont correctes"
 
-msgid "Connect"
-msgstr "Connecter"
-
 msgid "Connect subnet"
 msgstr "Connecter le sous-réseau"
 
@@ -2497,9 +2494,6 @@ msgstr "Non"
 
 msgid "No, continue using current email"
 msgstr "Non, continuez à utiliser l'e-mail actuel"
-
-msgid "No access info"
-msgstr "Aucune information d'accès"
 
 msgid "No access info."
 msgstr "Aucune information d'accès."

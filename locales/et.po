@@ -800,9 +800,6 @@ msgstr "Kinnituse teatise mall"
 msgid "Confirming that data is correct"
 msgstr "Kinnitus, et andmed on õiged"
 
-msgid "Connect"
-msgstr "Ühenda"
-
 msgid "Connected subnets"
 msgstr "Ühendatud alamvõrgud"
 
@@ -2134,9 +2131,6 @@ msgstr "Ei"
 
 msgid "No, continue using current email"
 msgstr "Ei, jätka kehtiva eposti aadressi kasutamist"
-
-msgid "No access info"
-msgstr "Juurdepääsi info puudub"
 
 msgid "No access info."
 msgstr "Juurdepääsi info puudub"

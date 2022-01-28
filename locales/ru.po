@@ -977,9 +977,6 @@ msgstr "Новый размер"
 msgid "Next"
 msgstr "Дальше"
 
-msgid "No access info"
-msgstr "Данных доступа нет"
-
 msgid "Node plan"
 msgstr "Тариф узла"
 

@@ -851,9 +851,6 @@ msgstr "Plantilla de notificación de confirmación"
 msgid "Confirming that data is correct"
 msgstr "Confirmando que los datos son correctos"
 
-msgid "Connect"
-msgstr "Conectar"
-
 msgid "Connect subnet"
 msgstr "Conectar la subred"
 
@@ -2500,9 +2497,6 @@ msgstr "No"
 
 msgid "No, continue using current email"
 msgstr "No, seguir utilizando el correo electrónico actual"
-
-msgid "No access info"
-msgstr "Sin información de acceso"
 
 msgid "No access info."
 msgstr "Sin información de acceso."

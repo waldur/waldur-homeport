@@ -848,9 +848,6 @@ msgstr "Patvirtinimo pranešimo šablonas"
 msgid "Confirming that data is correct"
 msgstr "Patvirtinimas, kad duomenys teisingi"
 
-msgid "Connect"
-msgstr "Prisijungti"
-
 msgid "Connect subnet"
 msgstr "Prijungti potinklį"
 
@@ -2497,9 +2494,6 @@ msgstr "Ne"
 
 msgid "No, continue using current email"
 msgstr "Ne, toliau naudoti dabartinį el. paštą"
-
-msgid "No access info"
-msgstr "Nėra prieigos informacijos"
 
 msgid "No access info."
 msgstr "Nėra prieigos informacijos."
