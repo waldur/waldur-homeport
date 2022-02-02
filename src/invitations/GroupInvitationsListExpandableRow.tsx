@@ -11,7 +11,7 @@ export const GroupInvitationsListExpandableRow: FunctionComponent<{
     <p>
       <b>{translate('Invitation link')}: </b>
       <CopyToClipboardContainer
-        value={`${location.origin}/invitation/${row.uuid}/`}
+        value={`${location.origin}/user-group-invitation/${row.uuid}/`}
       />
     </p>
     <UserPermissionRequestsList groupInvitationUuid={row.uuid} />
