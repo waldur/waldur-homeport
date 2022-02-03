@@ -1,11 +1,10 @@
 import { Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { useAsync } from 'react-use';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { getCurrentUser } from '@waldur/user/UsersService';
+import { getUser } from '@waldur/workspace/selectors';
 
 const ServiceProviderEditor = lazyComponent(
   () =>
@@ -20,9 +19,7 @@ export const ServiceProviderEditorButton = ({
   refreshServiceProvider,
 }) => {
   const dispatch = useDispatch();
-  const { value: user } = useAsync(() =>
-    getCurrentUser({ __skipLogout__: true }),
-  );
+  const user = useSelector(getUser);
   if (!user || !user.is_staff) {
     return null;
   }

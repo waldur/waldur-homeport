@@ -1,7 +1,10 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
+import { useDispatch } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
+import { clearTokenHeader } from '@waldur/auth/AuthService';
+import { removeToken } from '@waldur/auth/TokenStorage';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
@@ -9,18 +12,35 @@ import { getServiceProviderByCustomer } from '@waldur/marketplace/common/api';
 import { ServiceProvider } from '@waldur/marketplace/offerings/service-providers/ServiceProvider';
 import { AnonymousHeader } from '@waldur/navigation/AnonymousHeader';
 import { useTitle } from '@waldur/navigation/title';
+import { ANONYMOUS_CONFIG } from '@waldur/table/api';
+import { getCurrentUser } from '@waldur/user/UsersService';
+import { setCurrentUser } from '@waldur/workspace/actions';
 
-export const ServiceProviderContainer: FunctionComponent = () => {
+export const PublicServiceProviderDetails: FunctionComponent = () => {
+  const dispatch = useDispatch();
   useTitle(translate('Service provider'));
   const {
     params: { uuid },
   } = useCurrentStateAndParams();
   const [{ loading, error, value: serviceProvider }, refreshServiceProvider] =
-    useAsyncFn(() =>
-      getServiceProviderByCustomer({
-        customer_uuid: uuid,
-      }),
-    );
+    useAsyncFn(async () => {
+      try {
+        const user = await getCurrentUser({ __skipLogout__: true });
+        dispatch(setCurrentUser(user));
+      } catch (e) {
+        if (e.response.status == 401) {
+          removeToken();
+          clearTokenHeader();
+        }
+      }
+
+      return await getServiceProviderByCustomer(
+        {
+          customer_uuid: uuid,
+        },
+        ANONYMOUS_CONFIG,
+      );
+    });
 
   useEffectOnce(() => {
     refreshServiceProvider();

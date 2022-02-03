@@ -7899,7 +7899,7 @@ msgstr ""
 #: src/map/LeafletMap.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace/details/OrderSummary.tsx
-#: src/marketplace/offerings/service-providers/ServiceProviderContainer.tsx
+#: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/orders/ProviderAutocomplete.tsx
@@ -9458,6 +9458,10 @@ msgstr ""
 msgid "Unable to fetch comments."
 msgstr ""
 
+#: src/marketplace/offerings/service-providers/ServiceProvidersContainer.tsx
+msgid "Unable to fetch current user"
+msgstr ""
+
 #: src/user/support/UserEmailChangeCallback.tsx
 msgid "Unable to fetch current user."
 msgstr ""
@@ -9768,7 +9772,7 @@ msgstr ""
 msgid "Unable to load tenant."
 msgstr ""
 
-#: src/marketplace/offerings/service-providers/ServiceProviderContainer.tsx
+#: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 msgid "Unable to load the service provider."
 msgstr ""
 

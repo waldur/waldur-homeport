@@ -13,6 +13,7 @@ import { ServiceProviderOfferingDetailsCard } from '@waldur/marketplace/offering
 import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher } from '@waldur/table';
 import { updatePageSize } from '@waldur/table/actions';
+import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 
 interface OwnProps {
   serviceProviderUuid: string;
@@ -53,7 +54,7 @@ const mapPropsToFilter = (props: OwnProps) => {
 
 const GridOptions = {
   table: SERVICE_PROVIDER_OFFERING_GRID,
-  fetchData: createFetcher('marketplace-offerings'),
+  fetchData: createFetcher('marketplace-offerings', ANONYMOUS_CONFIG),
   mapPropsToFilter,
 };
 
