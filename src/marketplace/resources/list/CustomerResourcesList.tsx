@@ -17,6 +17,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
 import { CustomerResourcesListPlaceholder } from './CustomerResourcesListPlaceholder';
+import { ExpandableResourceSummary } from './ExpandableResourceSummary';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
 
@@ -76,6 +77,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       enableExport={true}
       hasQuery={true}
       showPageSizeSelector={true}
+      expandableRow={ExpandableResourceSummary}
     />
   );
 };
