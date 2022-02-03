@@ -10910,6 +10910,11 @@ msgstr ""
 msgid "Verify email"
 msgstr ""
 
+#: src/openstack/OpenStackForm.tsx
+#: src/openstack/OpenStackTenantForm.tsx
+msgid "Verify server certificate"
+msgstr ""
+
 #: src/user/support/UserEmailChangeCallback.tsx
 msgid "Verifying email change"
 msgstr ""

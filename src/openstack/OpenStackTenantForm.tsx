@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { StringField, SecretField, FormContainer } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 
 export const OpenStackTenantForm: FunctionComponent<{
   translate;
@@ -60,6 +61,11 @@ export const OpenStackTenantForm: FunctionComponent<{
       description={translate(
         'Flavors matching this regex expression will not be pulled from the backend.',
       )}
+    />
+    <AwesomeCheckboxField
+      hideLabel={true}
+      label={translate('Verify server certificate')}
+      name="verify_ssl"
     />
   </FormContainer>
 );
