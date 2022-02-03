@@ -8,6 +8,7 @@ import { getCategories } from '@waldur/marketplace/common/api';
 import { CategoriesList } from '@waldur/marketplace/offerings/service-providers/CategoriesList';
 import { ServiceProviderOfferingsQueryFilter } from '@waldur/marketplace/offerings/service-providers/ServiceProviderOfferingsQueryFilter';
 import { Category } from '@waldur/marketplace/types';
+import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 
 interface ServiceProviderOfferingsCategoriesFilterProps {
   serviceProviderUuid: string;
@@ -29,6 +30,7 @@ export const ServiceProviderOfferingsCategoriesFilter: FunctionComponent<Service
             has_offerings: true,
             has_shared: true,
           },
+          ...ANONYMOUS_CONFIG,
         }),
       [serviceProviderUuid],
     );

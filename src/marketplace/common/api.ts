@@ -41,7 +41,7 @@ export const getPlugins = () =>
     (response) => response.data,
   );
 
-export const getCategories = (options?: {}) =>
+export const getCategories = (options?: AxiosRequestConfig) =>
   getAll<Category>('/marketplace-categories/', options);
 
 export const getCategoryOptions = (options?: {}) =>
@@ -273,8 +273,8 @@ export const createServiceProvider = (params) =>
 export const updateServiceProvider = (uuid, params) =>
   patch(`/marketplace-service-providers/${uuid}/`, params);
 
-export const getServiceProviderByCustomer = (params) =>
-  getFirst<ServiceProvider>('/marketplace-service-providers/', params);
+export const getServiceProviderByCustomer = (params, options?) =>
+  getFirst<ServiceProvider>('/marketplace-service-providers/', params, options);
 
 export const getServiceProviderSecretCode = (id) =>
   get(`/marketplace-service-providers/${id}/api_secret_code/`).then(

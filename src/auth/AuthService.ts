@@ -109,10 +109,14 @@ function storeCurrentState() {
   }
 }
 
+export function clearTokenHeader() {
+  delete Axios.defaults.headers.common['Authorization'];
+}
+
 function localLogout(params?) {
   storeCurrentState();
   store.dispatch(setCurrentUser(undefined));
-  delete Axios.defaults.headers.common['Authorization'];
+  clearTokenHeader();
   removeToken();
   router.stateService.go('login', params);
   resetAuthenticationMethod();

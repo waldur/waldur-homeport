@@ -20,9 +20,12 @@ export function get<T = {}>(
   return Axios.get(fixURL(endpoint), options);
 }
 
-export async function getList<T = {}>(endpoint: string, params?: {}) {
-  const options = params ? { params } : undefined;
-  const response = await get<T>(endpoint, options);
+export async function getList<T = {}>(
+  endpoint: string,
+  params?: {},
+  options?: AxiosRequestConfig,
+) {
+  const response = await get<T>(endpoint, { ...options, params });
   return Array.isArray(response.data) ? (response.data as T[]) : [];
 }
 
@@ -34,8 +37,12 @@ export function getSelectData<T = {}>(endpoint: string, params?: {}) {
   }));
 }
 
-export async function getFirst<T = {}>(endpoint, params?) {
-  const data = await getList<T>(endpoint, params);
+export async function getFirst<T = {}>(
+  endpoint,
+  params?,
+  options?: AxiosRequestConfig,
+) {
+  const data = await getList<T>(endpoint, params, options);
   return data[0];
 }
 
