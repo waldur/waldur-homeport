@@ -29,6 +29,7 @@ ProvidersRegistry.register({
     'domain',
     'availability_zone',
     'flavor_exclude_regex',
+    'verify_ssl',
   ]),
 });
 
@@ -45,5 +46,6 @@ ProvidersRegistry.register({
     'tenant_name',
     'external_network_id',
     'availability_zone',
+    'verify_ssl',
   ]),
 });

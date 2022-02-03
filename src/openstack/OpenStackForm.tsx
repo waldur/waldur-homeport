@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { required } from '@waldur/core/validators';
 import { StringField, SecretField, FormContainer } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 
 export const OpenStackForm: FunctionComponent<{ translate; container }> = ({
   translate,
@@ -53,6 +54,11 @@ export const OpenStackForm: FunctionComponent<{ translate; container }> = ({
       description={translate(
         'Default availability zone for provisioned instances.',
       )}
+    />
+    <AwesomeCheckboxField
+      hideLabel={true}
+      label={translate('Verify server certificate')}
+      name="verify_ssl"
     />
   </FormContainer>
 );
