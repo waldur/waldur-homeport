@@ -8,6 +8,7 @@ import {
   shouldRenderAttributesList,
   shouldRenderAttributesSection,
 } from '@waldur/marketplace/offerings/details/utils';
+import { ImagesTab } from '@waldur/marketplace/offerings/images/ImagesTab';
 import { Category, Offering } from '@waldur/marketplace/types';
 import './PublicOfferingDescriptionContainer.scss';
 
@@ -56,6 +57,11 @@ export const PublicOfferingDescriptionContainer: FunctionComponent<PublicOfferin
         <div className="publicOfferingDescriptionContainer__description m-t-sm">
           <b>{translate('Description')}</b>
           <FormattedHtml html={offering.full_description} />
+        </div>
+      )}
+      {offering.screenshots.length > 0 && (
+        <div className="publicOfferingDescriptionContainer__screenshots m-t-sm">
+          <ImagesTab images={offering.screenshots} />
         </div>
       )}
     </div>
