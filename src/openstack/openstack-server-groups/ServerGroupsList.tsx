@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
+import { ButtonGroup } from 'react-bootstrap';
 
+import { PullServerGroupsAction } from '@waldur/openstack/openstack-tenant/actions/PullServerGroupsAction';
 import { ServerGroupType } from '@waldur/openstack/types';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
@@ -43,6 +45,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('server groups')}
       initialSorting={{ field: 'name', mode: 'asc' }}
       showPageSizeSelector={true}
+      actions={
+        <ButtonGroup>
+          <PullServerGroupsAction resource={props.resource} />
+        </ButtonGroup>
+      }
     />
   );
 };

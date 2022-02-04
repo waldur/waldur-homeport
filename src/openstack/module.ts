@@ -4,6 +4,7 @@ import './openstack-floating-ips/module';
 import './openstack-instance/module';
 import './openstack-network/module';
 import './openstack-security-groups/module';
+import './openstack-server-groups/module';
 import './openstack-snapshot-schedule/module';
 import './openstack-snapshot/module';
 import './openstack-subnet/module';
