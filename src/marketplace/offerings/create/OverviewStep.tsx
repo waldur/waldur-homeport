@@ -23,9 +23,19 @@ export const OverviewStep: FC<FormContainerProps> = (props) => (
       name="full_description"
       label={translate('Full description')}
     />
+    <StringField
+      name="privacy_policy_link"
+      label={translate('Privacy policy link')}
+      maxLength={200}
+    />
     <WysiwygEditor
       name="terms_of_service"
       label={translate('Terms of Service')}
+    />
+    <StringField
+      name="terms_of_service_link"
+      label={translate('Terms of Service link')}
+      maxLength={200}
     />
     <StringField
       name="access_url"

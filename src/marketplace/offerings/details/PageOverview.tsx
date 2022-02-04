@@ -23,7 +23,9 @@ export const PageOverview = connect<{}, {}, { offering }>((_, props) => ({
     name: props.offering.name,
     description: props.offering.description,
     full_description: props.offering.full_description,
+    privacy_policy_link: props.offering.privacy_policy_link,
     terms_of_service: props.offering.terms_of_service,
+    terms_of_service_link: props.offering.terms_of_service_link,
     thumbnail: props.offering.thumbnail,
   },
 }))(
