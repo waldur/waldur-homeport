@@ -6115,6 +6115,10 @@ msgstr ""
 msgid "Privacy policy"
 msgstr ""
 
+#: src/marketplace/offerings/create/OverviewStep.tsx
+msgid "Privacy policy link"
+msgstr ""
+
 #: src/openstack/utils.ts
 msgid "Private clouds"
 msgstr ""
@@ -8757,6 +8761,10 @@ msgstr ""
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
 #: src/navigation/FooterLinks.tsx
 msgid "Terms of Service"
+msgstr ""
+
+#: src/marketplace/offerings/create/OverviewStep.tsx
+msgid "Terms of Service link"
 msgstr ""
 
 #: src/core/CopyToClipboardButton.tsx
