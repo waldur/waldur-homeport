@@ -170,7 +170,7 @@ const formatFilter = (filter) => {
 
 const TableOptions = {
   table: 'customerList',
-  fetchData: createFetcher('customers'),
+  fetchData: createFetcher('financial-reports'),
   queryField: 'query',
   mapPropsToFilter: (props) => formatFilter(props.customerListFilter),
   exportRow,
