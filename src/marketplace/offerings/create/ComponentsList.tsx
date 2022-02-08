@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Col, Panel } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { WrappedFieldArrayProps, FormSection, change } from 'redux-form';
 
+import { FormLayoutContext } from '@waldur/form/context';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 import { parseComponents } from '@waldur/marketplace/offerings/update/utils';
@@ -31,15 +32,21 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => {
       );
     }
   }, []);
+
+  const { layout } = useContext(FormLayoutContext);
+
+  const col = layout === 'vertical' ? 0 : 8;
+  const offset = layout === 'vertical' ? 0 : 2;
+
   return (
     <div className="form-group">
-      <Col smOffset={2} sm={8} className="m-b-sm">
+      <Col smOffset={offset} sm={col} className="m-b-sm">
         <p className="form-control-static">
           <strong>{props.translate('Plan components')}</strong>
         </p>
       </Col>
 
-      <Col smOffset={2} sm={8}>
+      <Col smOffset={offset} sm={col}>
         {props.fields.map((component, index) => (
           <Panel key={index}>
             <Panel.Heading>

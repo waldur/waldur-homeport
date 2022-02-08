@@ -1,5 +1,6 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useContext } from 'react';
 
+import { FormFieldsContext, FormLayoutContext } from '@waldur/form/context';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { ArticleCodeField } from '../ArticleCodeField';
@@ -15,19 +16,30 @@ interface ComponentFormProps {
   builtinComponents: OfferingComponent[];
 }
 
-export const ComponentForm: FunctionComponent<ComponentFormProps> = (props) => (
-  <>
-    <InternalNameField
-      name="type"
-      disabled={!!props.builtinComponents.length}
-    />
-    <DisplayNameField name="name" disabled={!!props.builtinComponents.length} />
-    <ComponentMeasuredUnitField disabled={!!props.builtinComponents.length} />
-    <ComponentAccountingTypeField
-      removeOfferingQuotas={props.removeOfferingQuotas}
-      disabled={!!props.builtinComponents.length}
-    />
-    <ArticleCodeField />
-    <ComponentLimit />
-  </>
-);
+export const ComponentForm: FunctionComponent<ComponentFormProps> = (props) => {
+  const { layout } = useContext(FormLayoutContext);
+  const fieldsClassNames = {
+    labelClassName: layout === 'vertical' ? 'control-label' : undefined,
+    valueClassName: layout === 'vertical' ? '' : undefined,
+    classNameWithoutLabel: layout === 'vertical' ? '' : undefined,
+  };
+  return (
+    <FormFieldsContext.Provider value={fieldsClassNames}>
+      <InternalNameField
+        name="type"
+        disabled={!!props.builtinComponents.length}
+      />
+      <DisplayNameField
+        name="name"
+        disabled={!!props.builtinComponents.length}
+      />
+      <ComponentMeasuredUnitField disabled={!!props.builtinComponents.length} />
+      <ComponentAccountingTypeField
+        removeOfferingQuotas={props.removeOfferingQuotas}
+        disabled={!!props.builtinComponents.length}
+      />
+      <ArticleCodeField />
+      <ComponentLimit />
+    </FormFieldsContext.Provider>
+  );
+};

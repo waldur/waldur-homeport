@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
+import { FormFieldsContext } from '@waldur/form/context';
 
-interface FormGroupProps {
+export interface FormGroupProps {
   label?: React.ReactNode;
   description?: React.ReactNode;
   required?: boolean;
@@ -12,26 +13,35 @@ interface FormGroupProps {
   classNameWithoutLabel?: string;
 }
 
-export const FormGroup: React.FC<FormGroupProps> = (props) => (
-  <div className={props.className}>
-    {props.label ? (
-      <>
-        <label className={props.labelClassName}>
-          {props.description && (
-            <Tooltip id="form-field-tooltip" label={props.description}>
-              <i className="fa fa-question-circle" />{' '}
-            </Tooltip>
-          )}
-          {props.label}
-          {props.required && <span className="text-danger"> *</span>}
-        </label>
-        <div className={props.valueClassName}>{props.children}</div>
-      </>
-    ) : (
-      <div className={props.classNameWithoutLabel}>{props.children}</div>
-    )}
-  </div>
-);
+export const FormGroup: React.FC<FormGroupProps> = (props) => {
+  const { labelClassName, valueClassName, classNameWithoutLabel } =
+    useContext(FormFieldsContext);
+
+  return (
+    <div className={props.className}>
+      {props.label ? (
+        <>
+          <label className={labelClassName ?? props.labelClassName}>
+            {props.description && (
+              <Tooltip id="form-field-tooltip" label={props.description}>
+                <i className="fa fa-question-circle" />{' '}
+              </Tooltip>
+            )}
+            {props.label}
+            {props.required && <span className="text-danger"> *</span>}
+          </label>
+          <div className={valueClassName ?? props.valueClassName}>
+            {props.children}
+          </div>
+        </>
+      ) : (
+        <div className={classNameWithoutLabel ?? props.classNameWithoutLabel}>
+          {props.children}
+        </div>
+      )}
+    </div>
+  );
+};
 
 FormGroup.defaultProps = {
   className: 'form-group',
