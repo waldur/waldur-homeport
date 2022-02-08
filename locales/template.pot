@@ -2071,6 +2071,14 @@ msgstr ""
 msgid "Date and time of incident"
 msgstr ""
 
+#: src/invoices/details/InvoiceItemUpdateDialog.tsx
+msgid "Date and time when item usage has ended"
+msgstr ""
+
+#: src/invoices/details/InvoiceItemUpdateDialog.tsx
+msgid "Date and time when item usage has started"
+msgstr ""
+
 #: src/user/support/UserDetailsTable.tsx
 msgid "Date joined"
 msgstr ""
