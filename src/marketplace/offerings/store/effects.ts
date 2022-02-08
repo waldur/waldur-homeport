@@ -34,6 +34,7 @@ import { PUBLIC_OFFERINGS_FILTER_FORM_ID } from './constants';
 import { getPlans, getAttributes, getOfferingComponents } from './selectors';
 import { OfferingFormData, OfferingUpdateFormData } from './types';
 import {
+  filterPluginsData,
   formatOfferingRequest,
   planWithoutComponent,
   planWithoutQuotas,
@@ -43,10 +44,7 @@ import {
 function* loadCategories() {
   const categories: Category[] = yield call(api.getCategories);
   const pluginsData = yield call(api.getPlugins);
-  const plugins = pluginsData.reduce(
-    (result, plugin) => ({ ...result, [plugin.offering_type]: plugin }),
-    {},
-  );
+  const plugins = filterPluginsData(pluginsData);
   return { categories, plugins };
 }
 

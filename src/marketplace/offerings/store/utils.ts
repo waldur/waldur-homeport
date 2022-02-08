@@ -243,3 +243,9 @@ export const updatePublicOfferingsList = (
       ? user.uuid
       : undefined,
   });
+
+export const filterPluginsData = (pluginsData) =>
+  pluginsData.reduce(
+    (result, plugin) => ({ ...result, [plugin.offering_type]: plugin }),
+    {},
+  );

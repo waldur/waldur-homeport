@@ -19,7 +19,7 @@ interface ConnectedPlanStateProps {
 export const connectPlanComponents = connect<
   ConnectedPlanStateProps,
   {},
-  { plan: string; archived?: boolean },
+  { plan: string; archived?: boolean; layout?: 'vertical' | 'horizontal' },
   RootState
 >((state, ownProps) => {
   const total = getPlanPrice(state, ownProps.plan);

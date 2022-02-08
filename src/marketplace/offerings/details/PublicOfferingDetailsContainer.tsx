@@ -7,12 +7,14 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
 import {
-  getCategories,
-  getCategory,
   getOffering,
+  getCategory,
+  getPlugins,
+  getCategories,
 } from '@waldur/marketplace/common/api';
 import { PublicOfferingDetails } from '@waldur/marketplace/offerings/details/PublicOfferingDetails';
 import * as actions from '@waldur/marketplace/offerings/store/actions';
+import { filterPluginsData } from '@waldur/marketplace/offerings/store/utils';
 import { AnonymousHeader } from '@waldur/navigation/AnonymousHeader';
 import { useTitle } from '@waldur/navigation/title';
 import { getCustomer } from '@waldur/project/api';
@@ -28,6 +30,8 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
   } = useCurrentStateAndParams();
 
   const [{ loading, error, value }, refreshOffering] = useAsyncFn(async () => {
+    const pluginsData = await getPlugins();
+    const plugins = filterPluginsData(pluginsData);
     try {
       const user = await getCurrentUser({ __skipLogout__: true });
       dispatch(setCurrentUser(user));
@@ -38,6 +42,7 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
         actions.loadDataSuccess({
           offering,
           categories,
+          plugins,
         }),
       );
       const customer = await getCustomer(offering.customer_uuid);
@@ -55,6 +60,7 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
           actions.loadDataSuccess({
             offering,
             categories,
+            plugins,
           }),
         );
         return { offering, category };

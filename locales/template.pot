@@ -130,6 +130,7 @@ msgstr ""
 #: src/invoices/utils.ts
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/details/PageAccounting.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Accounting"
 msgstr ""
@@ -4926,6 +4927,7 @@ msgid "Offering has been imported."
 msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
+#: src/marketplace/offerings/details/PageAccounting.tsx
 #: src/marketplace/offerings/details/PageConfirmationMessage.tsx
 #: src/marketplace/offerings/details/PageDescription.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
@@ -10090,6 +10092,7 @@ msgstr ""
 msgid "Unable to update offering state."
 msgstr ""
 
+#: src/marketplace/offerings/details/PageAccounting.tsx
 #: src/marketplace/offerings/details/PageConfirmationMessage.tsx
 #: src/marketplace/offerings/details/PageDescription.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
@@ -10241,6 +10244,7 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
+#: src/marketplace/offerings/details/PageAccounting.tsx
 #: src/marketplace/offerings/details/PageConfirmationMessage.tsx
 #: src/marketplace/offerings/details/PageDescription.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx

@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { withTranslation } from '@waldur/i18n';
 import {
   showComponentsList,
   showOfferingLimits,
@@ -40,9 +38,6 @@ const mapStateToDispatch = {
   removeOfferingQuotas,
 };
 
-const connector = compose(
-  connect(mapStateToProps, mapStateToDispatch),
-  withTranslation,
-);
+const connector = connect(mapStateToProps, mapStateToDispatch);
 
 export const AccountingStepContainer = connector(AccountingStep);
