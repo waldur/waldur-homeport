@@ -34,6 +34,9 @@ const mapStateToProps = (state, ownProps) => ({
     description: ownProps.project.description,
     end_date: ownProps.project.end_date,
     backend_id: ownProps.project.backend_id,
+    oecd_fos_2007_code: ownProps.oecdCodes.find(
+      (option) => option.value === ownProps.project.oecd_fos_2007_code,
+    ),
   },
   project_type: ownProps.project.type_name,
   canManage: isOwnerOrStaff(state),

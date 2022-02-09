@@ -106,6 +106,7 @@ const TableOptions = {
       'type_name',
       'end_date',
       'backend_id',
+      'oecd_fos_2007_code',
     ];
 
     return filter;

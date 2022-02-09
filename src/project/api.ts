@@ -34,6 +34,7 @@ export const updateProject = (project) =>
     description: project.description,
     end_date: project.end_date ? formatDate(project.end_date) : undefined,
     backend_id: project.backend_id,
+    oecd_fos_2007_code: project.oecd_fos_2007_code?.value,
   });
 
 export const moveProject = (data) =>
