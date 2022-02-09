@@ -2,16 +2,21 @@ import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 
+import { isFeatureVisible } from '@waldur/features/connect';
 import {
   FieldError,
   FormContainer,
+  SelectField,
   StringField,
   SubmitButton,
   TextField,
 } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
 import { StaticField } from '@waldur/form/StaticField';
-import { datePickerOverlayContainerInDialogs } from '@waldur/form/utils';
+import {
+  datePickerOverlayContainerInDialogs,
+  reactSelectMenuPortaling,
+} from '@waldur/form/utils';
 import { translate, TranslateProps } from '@waldur/i18n';
 
 import { ProjectNameField } from './ProjectNameField';
@@ -29,6 +34,7 @@ interface ProjectUpdateFormProps extends TranslateProps, InjectedFormProps {
   isStaff: boolean;
   isOwner: boolean;
   isDisabled: boolean;
+  oecdCodes;
 }
 
 export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
@@ -48,6 +54,20 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
           name="description"
           disabled={props.isDisabled}
         />
+        {props.oecdCodes && isFeatureVisible('project.oecd_fos_2007_code') ? (
+          <SelectField
+            label={translate('OECD FoS code')}
+            help_text={translate(
+              'Please select OECD code corresponding to field of science and technology',
+            )}
+            name="oecd_fos_2007_code"
+            options={props.oecdCodes}
+            getOptionValue={(option) => option.value}
+            getOptionLabel={(option) => `${option.value}. ${option.label}`}
+            isClearable={true}
+            {...reactSelectMenuPortaling()}
+          />
+        ) : null}
         {props.project_type && (
           <StaticField
             label={props.translate('Project type')}

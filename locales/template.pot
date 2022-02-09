@@ -4850,6 +4850,7 @@ msgstr ""
 
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectUpdateForm.tsx
 msgid "OECD FoS code"
 msgstr ""
 
@@ -5910,6 +5911,7 @@ msgid "Please search for your organization"
 msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectUpdateForm.tsx
 msgid "Please select OECD code corresponding to field of science and technology"
 msgstr ""
 
