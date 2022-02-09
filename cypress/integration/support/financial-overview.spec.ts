@@ -15,10 +15,8 @@ describe('Financial overview', () => {
       .visit('/support/organizations/', { log: false });
   });
 
-  it('should render current cost and estimated cost columns if current month is selected', () => {
+  it('should render estimated cost columns if current month is selected', () => {
     cy.get('table th')
-      .contains('Current cost')
-      .get('table th')
       .contains('Estimated cost')
       .get('table th')
       .contains('Cost')
@@ -32,9 +30,6 @@ describe('Financial overview', () => {
       .get('*div[id^="react-select"]')
       .last()
       .click()
-      .get('table th')
-      .contains('Current cost')
-      .should('not.exist')
       .get('table th')
       .contains('Estimated cost')
       .should('not.exist')

@@ -11,7 +11,7 @@ import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
-import { CurrentCostField, ExportCurrentCostField } from './CurrentCostField';
+import { CurrentCostField } from './CurrentCostField';
 import { CustomerExpandableRow } from './CustomerExpandableRow';
 import {
   EstimatedCostField,
@@ -82,12 +82,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       orderField: 'agreement_number',
     },
     {
-      title: renderTitleWithPriceTooltip(translate('Current cost')),
-      render: CurrentCostField,
-      visible: accountingPeriodIsCurrent,
-      orderField: 'current_cost',
-    },
-    {
       title: renderTitleWithPriceTooltip(translate('Estimated cost')),
       render: EstimatedCostField,
       visible: accountingPeriodIsCurrent,
@@ -97,7 +91,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title: renderTitleWithPriceTooltip(translate('Cost')),
       render: CurrentCostField,
       visible: !accountingPeriodIsCurrent,
-      orderField: 'current_cost',
+      orderField: 'total_cost',
     },
   ]);
 
@@ -121,7 +115,6 @@ const exportRow = (row, props) => {
     formatDate(row.created),
     formatDate(row.accounting_start_date),
     renderFieldOrDash(row.agreement_number),
-    ExportCurrentCostField({ row }),
   ];
   return props.customerListFilter.accounting_period &&
     props.customerListFilter.accounting_period.value.current
@@ -145,11 +138,7 @@ const exportFields = (props) => {
     ? translate('VAT is not included')
     : translate('VAT is included');
   return accountingPeriodIsCurrent
-    ? [
-        ...base,
-        `${translate('Current cost')} (${vatMessage})`,
-        `${translate('Estimated cost')} (${vatMessage})`,
-      ]
+    ? [...base, `${translate('Estimated cost')} (${vatMessage})`]
     : [...base, `${translate('Cost')} (${vatMessage})`];
 };
 
