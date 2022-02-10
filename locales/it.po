@@ -989,9 +989,6 @@ msgstr "Credenziali"
 msgid "Current API token"
 msgstr "Token API corrente"
 
-msgid "Current cost"
-msgstr "Costo corrente"
-
 msgid "Current email"
 msgstr "Email corrente"
 

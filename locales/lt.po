@@ -989,9 +989,6 @@ msgstr "Kredencialus"
 msgid "Current API token"
 msgstr "Dabartinis API atpažinimo ženklas"
 
-msgid "Current cost"
-msgstr "Dabartinės išlaidos"
-
 msgid "Current email"
 msgstr "Dabartinis el. paštas"
 

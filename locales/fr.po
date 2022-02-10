@@ -989,9 +989,6 @@ msgstr "Informations d'identification"
 msgid "Current API token"
 msgstr "Jeton d'API actuel"
 
-msgid "Current cost"
-msgstr "Coût actuel"
-
 msgid "Current email"
 msgstr "E-mail actuel"
 

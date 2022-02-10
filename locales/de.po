@@ -989,9 +989,6 @@ msgstr "Anmeldedaten"
 msgid "Current API token"
 msgstr "Aktuelles API-Token"
 
-msgid "Current cost"
-msgstr "Aktuelle Kosten"
-
 msgid "Current email"
 msgstr "Aktuelle E-Mail"
 

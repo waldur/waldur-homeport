@@ -989,9 +989,6 @@ msgstr "Referenties"
 msgid "Current API token"
 msgstr "Huidige API-token"
 
-msgid "Current cost"
-msgstr "Huidige kosten"
-
 msgid "Current email"
 msgstr "Huidige e-mail"
 

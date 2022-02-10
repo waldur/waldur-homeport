@@ -992,9 +992,6 @@ msgstr "Credenciales"
 msgid "Current API token"
 msgstr "Token de API actual"
 
-msgid "Current cost"
-msgstr "Costo actual"
-
 msgid "Current email"
 msgstr "Correo electrónico actual"
 

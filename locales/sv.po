@@ -965,9 +965,6 @@ msgstr "Autentiseringsuppgifter"
 msgid "Current API token"
 msgstr "Aktuell API-token"
 
-msgid "Current cost"
-msgstr "Nuvarande kostnad"
-
 msgid "Current email"
 msgstr "Aktuell e-post"
 

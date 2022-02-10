@@ -743,9 +743,6 @@ msgstr "ایجاد کردن برنامه عکس فوری"
 msgid "Current API token"
 msgstr "نشانه API فعلی"
 
-msgid "Current cost"
-msgstr "هزینه فعلی"
-
 msgid "Current email"
 msgstr "ایمیل فعلی"
 

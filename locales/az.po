@@ -380,9 +380,6 @@ msgstr "Ani təsvir qrafiki yaratmaq"
 msgid "Current API token"
 msgstr "Cari APİ (Tətbiq Proqram İnterfeysi) işarəsi"
 
-msgid "Current cost"
-msgstr "Cari xərc "
-
 msgid "Current flavor"
 msgstr "Cari variant "
 

@@ -920,9 +920,6 @@ msgstr "Loon tõmmiste ajakava"
 msgid "Current API token"
 msgstr "Praegune API token"
 
-msgid "Current cost"
-msgstr "Praegune maksumus"
-
 msgid "Current email"
 msgstr "Praegune e-kiri"
 
