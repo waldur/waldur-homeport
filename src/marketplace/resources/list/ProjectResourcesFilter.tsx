@@ -1,6 +1,8 @@
 import { Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
+import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
+
 import { OfferingFilter } from './OfferingFilter';
 import { OfferingChoice } from './types';
 
@@ -9,7 +11,6 @@ interface OwnProps {
 }
 
 interface FormData {
-  state: string[];
   offering: OfferingChoice;
 }
 
@@ -21,4 +22,6 @@ const PureProjectResourcesFilter = ({ offerings }) => (
 
 export const ProjectResourcesFilter = reduxForm<FormData, OwnProps>({
   form: 'ProjectResourcesFilter',
+  onChange: syncFiltersToURL,
+  initialValues: getInitialValues(),
 })(PureProjectResourcesFilter);

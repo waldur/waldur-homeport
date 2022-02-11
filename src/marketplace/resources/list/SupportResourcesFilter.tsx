@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
+import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 
@@ -19,9 +20,10 @@ const PureSupportResourcesFilter: FunctionComponent = () => (
 
 const enhance = reduxForm({
   form: 'SupportResourcesFilter',
-  initialValues: {
-    state: getStates().find(({ value }) => value === 'OK'),
-  },
+  onChange: syncFiltersToURL,
+  initialValues: getInitialValues({
+    state: getStates()[1],
+  }),
 });
 
 export const SupportResourcesFilter = enhance(PureSupportResourcesFilter);
