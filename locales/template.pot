@@ -2353,6 +2353,10 @@ msgstr ""
 msgid "Division type"
 msgstr ""
 
+#: src/marketplace/category/filters/AttributeFilterDivision.tsx
+msgid "Divisions"
+msgstr ""
+
 #: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
 msgid "Do not configure a gateway for this subnet"
 msgstr ""
