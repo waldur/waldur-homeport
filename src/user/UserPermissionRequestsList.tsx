@@ -22,6 +22,14 @@ const TableComponent = (props: any) => {
       render: ({ row }) => formatDateTime(row.created),
     },
     {
+      title: translate('Organization'),
+      render: ({ row }) => row.customer_name || 'N/A',
+    },
+    {
+      title: translate('Project'),
+      render: ({ row }) => row.project_name || 'N/A',
+    },
+    {
       title: translate('Role'),
       render: ({ row }) => <RoleField invitation={row} />,
     },

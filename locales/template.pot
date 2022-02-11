@@ -5233,6 +5233,7 @@ msgstr ""
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/SelectAffiliationDialog.tsx
+#: src/user/UserPermissionRequestsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
@@ -6175,6 +6176,7 @@ msgstr ""
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/user/SelectAffiliationDialog.tsx
+#: src/user/UserPermissionRequestsList.tsx
 msgid "Project"
 msgstr ""
 
