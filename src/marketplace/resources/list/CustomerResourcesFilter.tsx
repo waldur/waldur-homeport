@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
+import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
 import { CUSTOMER_RESOURCES_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -34,9 +35,10 @@ const mapStateToProps = (state: RootState) => ({
 const enhance = compose(
   reduxForm({
     form: CUSTOMER_RESOURCES_FILTER_FORM_ID,
-    initialValues: {
+    onChange: syncFiltersToURL,
+    initialValues: getInitialValues({
       state: getStates()[1],
-    },
+    }),
   }),
   connect(mapStateToProps),
 );
