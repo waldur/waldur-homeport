@@ -23,6 +23,7 @@ import { PageDescription } from './PageDescription';
 import { PageHeroImage } from './PageHeroImage';
 import { PageImages } from './PageImages';
 import { PageLocation } from './PageLocation';
+import { PageManagement } from './PageManagement';
 import { PageOverview } from './PageOverview';
 import { PagePolicies } from './PagePolicies';
 import { SidebarNav, SidebarRow } from './SidebarNav';
@@ -64,7 +65,7 @@ export const PublicOfferingEditor = ({ resolve }) => {
               iconClass="fa fa-wrench"
               title={translate('Management')}
               description={translate('Customize service settings')}
-              onClick={() => alert('Not yet implemented.')}
+              onClick={() => setPage('management')}
             />
             <SidebarRow
               iconClass="fa fa-file-text-o"
@@ -125,6 +126,12 @@ export const PublicOfferingEditor = ({ resolve }) => {
       <PageDescription
         offering={resolve.offering}
         category={resolve.category}
+        refreshOffering={resolve.refreshOffering}
+        onReturn={() => setPage('nav')}
+      />
+    ) : page == 'management' ? (
+      <PageManagement
+        offering={resolve.offering}
         refreshOffering={resolve.refreshOffering}
         onReturn={() => setPage('nav')}
       />
