@@ -4137,6 +4137,7 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/details/PageManagement.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Management"
 msgstr ""
@@ -4941,6 +4942,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PageDescription.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/details/PageLocation.tsx
+#: src/marketplace/offerings/details/PageManagement.tsx
 #: src/marketplace/offerings/details/PageOverview.tsx
 #: src/marketplace/offerings/details/PagePolicies.tsx
 #: src/marketplace/offerings/store/effects.ts
@@ -10114,6 +10116,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PageDescription.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/details/PageLocation.tsx
+#: src/marketplace/offerings/details/PageManagement.tsx
 #: src/marketplace/offerings/details/PageOverview.tsx
 #: src/marketplace/offerings/details/PagePolicies.tsx
 #: src/marketplace/offerings/store/effects.ts
@@ -10266,6 +10269,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PageDescription.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/details/PageLocation.tsx
+#: src/marketplace/offerings/details/PageManagement.tsx
 #: src/marketplace/offerings/details/PageOverview.tsx
 #: src/marketplace/offerings/details/PagePolicies.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
