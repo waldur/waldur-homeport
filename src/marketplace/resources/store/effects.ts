@@ -30,7 +30,7 @@ function* redirectToDetailView(resource: Resource) {
           tab: 'orderItems',
         }
       : {
-          uuid: resource.resource_uuid,
+          resource_uuid: resource.resource_uuid || resource.uuid,
           resource_type: resource.resource_type,
           tab: 'orderItems',
         };
