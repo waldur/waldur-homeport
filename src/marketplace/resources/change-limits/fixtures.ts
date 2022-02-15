@@ -33,7 +33,7 @@ export const offering = {
       billing_type: 'limit',
     },
   ],
-  type: 'Packages.Template',
+  type: 'OpenStack.Admin',
 };
 
 export const newLimits = {

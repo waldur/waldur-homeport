@@ -9,7 +9,7 @@ import { MarketplaceResourceStateField } from './MarketplaceResourceStateField';
 const pickResource = pick(['action', 'action_details', 'runtime_state']);
 
 const OPENSTACK_OFFERINGS = [
-  'Packages.Template',
+  'OpenStack.Admin',
   'OpenStackTenant.Instance',
   'OpenStackTenant.Volume',
 ];
