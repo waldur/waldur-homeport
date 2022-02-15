@@ -102,9 +102,9 @@ const offeringComponentsFilter = (formData, components) => {
 };
 
 registerOfferingType({
-  type: 'Packages.Template',
+  type: 'OpenStack.Admin',
   get label() {
-    return translate('OpenStack package');
+    return translate('OpenStack admin');
   },
   component: OpenStackPackageForm,
   detailsComponent: OpenStackPackageDetails,
