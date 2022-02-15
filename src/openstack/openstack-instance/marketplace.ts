@@ -173,4 +173,5 @@ registerOfferingType({
   serializer,
   formValidator,
   allowToUpdateService: true,
+  providerType: 'OpenStackTenant',
 });
