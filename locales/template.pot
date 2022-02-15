@@ -5111,6 +5111,10 @@ msgstr ""
 msgid "OpenStack Instance"
 msgstr ""
 
+#: src/openstack/marketplace.ts
+msgid "OpenStack admin"
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/EditDialog.tsx
 #: src/openstack/openstack-instance/marketplace.ts
 #: src/rancher/node/actions/LinkDialog.tsx
@@ -5123,10 +5127,6 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateNetworkDialog.tsx
 msgid "OpenStack networks has been created."
-msgstr ""
-
-#: src/openstack/marketplace.ts
-msgid "OpenStack package"
 msgstr ""
 
 #: src/openstack/openstack-subnet/EditSubnetDialog.tsx
