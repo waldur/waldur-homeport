@@ -5129,6 +5129,10 @@ msgstr ""
 msgid "OpenStack package"
 msgstr ""
 
+#: src/openstack/openstack-instance/marketplace.ts
+msgid "OpenStack shared instance"
+msgstr ""
+
 #: src/openstack/openstack-subnet/EditSubnetDialog.tsx
 msgid "OpenStack subnet"
 msgstr ""

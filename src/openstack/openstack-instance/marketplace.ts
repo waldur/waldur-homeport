@@ -161,3 +161,16 @@ registerOfferingType({
   disableOfferingCreation: true,
   allowToUpdateService: true,
 });
+
+registerOfferingType({
+  type: 'OpenStackTenant.SharedInstance',
+  get label() {
+    return translate('OpenStack shared instance');
+  },
+  component: OpenstackInstanceCreateForm,
+  detailsComponent: OpenstackInstanceDetails,
+  checkoutSummaryComponent: OpenstackInstanceCheckoutSummary,
+  serializer,
+  formValidator,
+  allowToUpdateService: true,
+});
