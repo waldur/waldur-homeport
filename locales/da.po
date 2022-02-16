@@ -2726,9 +2726,6 @@ msgstr "OpenStack-instansen er blevet fjernet fra Rancher-noden."
 msgid "OpenStack networks has been created."
 msgstr "OpenStack-netværk er blevet oprettet."
 
-msgid "OpenStack package"
-msgstr "OpenStack-pakke"
-
 msgid "OpenStack subnet"
 msgstr "OpenStack undernet"
 

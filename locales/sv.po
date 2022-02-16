@@ -2660,9 +2660,6 @@ msgstr "OpenStack-instansen har kopplats från Rancher-noden."
 msgid "OpenStack networks has been created."
 msgstr "OpenStack-nätverk har skapats."
 
-msgid "OpenStack package"
-msgstr "OpenStack-paket"
-
 msgid "OpenStack subnet"
 msgstr "OpenStack-undernät"
 

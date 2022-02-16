@@ -2726,9 +2726,6 @@ msgstr "OpenStack-instantie is ontkoppeld van Rancher-knooppunt."
 msgid "OpenStack networks has been created."
 msgstr "OpenStack-netwerken zijn aangemaakt."
 
-msgid "OpenStack package"
-msgstr "OpenStack-pakket"
-
 msgid "OpenStack subnet"
 msgstr "OpenStack-subnet"
 

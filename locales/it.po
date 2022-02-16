@@ -2726,9 +2726,6 @@ msgstr "L'istanza OpenStack è stata scollegata dal nodo Rancher."
 msgid "OpenStack networks has been created."
 msgstr "Le reti OpenStack sono state create."
 
-msgid "OpenStack package"
-msgstr "Pacchetto OpenStack"
-
 msgid "OpenStack subnet"
 msgstr "Sottorete OpenStack"
 

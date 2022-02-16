@@ -2726,9 +2726,6 @@ msgstr "Instance OpenStack byla odpojena od uzlu Rancher."
 msgid "OpenStack networks has been created."
 msgstr "Byly vytvořeny sítě OpenStack."
 
-msgid "OpenStack package"
-msgstr "Balíček OpenStack"
-
 msgid "OpenStack subnet"
 msgstr "Podsíť OpenStack"
 

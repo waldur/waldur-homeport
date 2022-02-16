@@ -2726,9 +2726,6 @@ msgstr "OpenStack egzempliorius buvo atsietas nuo Rancher mazgo."
 msgid "OpenStack networks has been created."
 msgstr "OpenStack tinklai sukurti."
 
-msgid "OpenStack package"
-msgstr "OpenStack paketas"
-
 msgid "OpenStack subnet"
 msgstr "OpenStack potinklis"
 

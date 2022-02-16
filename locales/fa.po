@@ -1871,9 +1871,6 @@ msgstr "باز"
 msgid "OpenStack Images"
 msgstr "تصویر های OpenStack"
 
-msgid "OpenStack package"
-msgstr "بسته OpenStack"
-
 msgid "Open console"
 msgstr "console را باز کنید"
 

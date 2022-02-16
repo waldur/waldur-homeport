@@ -2726,9 +2726,6 @@ msgstr "Die OpenStack-Instanz wurde vom Rancher-Knoten getrennt."
 msgid "OpenStack networks has been created."
 msgstr "OpenStack-Netzwerke wurde erstellt."
 
-msgid "OpenStack package"
-msgstr "OpenStack-Paket"
-
 msgid "OpenStack subnet"
 msgstr "OpenStack-Subnetz"
 

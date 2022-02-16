@@ -2282,9 +2282,6 @@ msgstr "Ava"
 msgid "OpenStack Images"
 msgstr "Laienda OpenStack volüümi"
 
-msgid "OpenStack package"
-msgstr "OpenStacki pakett"
-
 msgid "Open console"
 msgstr "Ava konsool"
 
