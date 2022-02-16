@@ -27,26 +27,22 @@ export interface ManagementStepProps extends TranslateProps {
   openServiceSettingsDetails(): void;
 }
 
-const ContainerProps = () => {
+export const ManagementStep: FunctionComponent<ManagementStepProps> = (
+  props,
+) => {
   const { layout } = useContext(FormLayoutContext);
-  return {
+  const ContainerProps = {
     submitting: false,
     labelClass: layout === 'vertical' ? '' : 'col-sm-2',
     controlClass: layout === 'vertical' ? '' : 'col-sm-8',
     clearOnUnmount: false,
     layout,
   };
-};
-
-export const ManagementStep: FunctionComponent<ManagementStepProps> = (
-  props,
-) => {
-  const { layout } = useContext(FormLayoutContext);
   const serviceSettingWrapperClass =
     layout === 'vertical' ? '' : 'col-sm-8 col-sm-offset-2';
   return (
     <>
-      <FormContainer {...ContainerProps()}>
+      <FormContainer {...ContainerProps}>
         {props.editable ? (
           <SelectField
             name="type"
@@ -60,7 +56,7 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
           <StaticField
             label={translate('Type')}
             value={props.typeLabel}
-            {...ContainerProps()}
+            {...ContainerProps}
           />
         )}
       </FormContainer>
@@ -99,19 +95,19 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
       {props.secretOptionsForm && (
         <FormSection name="secret_options">
           {React.createElement(props.secretOptionsForm, {
-            container: ContainerProps(),
+            container: ContainerProps,
           })}
         </FormSection>
       )}
       {props.showBackendId && (
-        <FormContainer {...ContainerProps()}>
+        <FormContainer {...ContainerProps}>
           <StringField name="backend_id" label={translate('Backend ID')} />
         </FormContainer>
       )}
       {props.pluginOptionsForm && (
         <FormSection name="plugin_options">
           {React.createElement(props.pluginOptionsForm, {
-            container: ContainerProps(),
+            container: ContainerProps,
           })}
         </FormSection>
       )}

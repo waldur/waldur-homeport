@@ -253,6 +253,11 @@ describe('Offering creation', () => {
         category:
           '/api/marketplace-categories/4588ff519260461893ab371b8fe83363/',
         type: 'SlurmInvoices.SlurmPackage',
+        service_attributes: {
+          hostname: 'slurm.example.com',
+          username: 'admin',
+          default_account: 'waldur',
+        },
         shared: true,
         attributes: {},
         plans: [{ name: 'Default plan', unit: 'month', prices: { cpu: '1' } }],
