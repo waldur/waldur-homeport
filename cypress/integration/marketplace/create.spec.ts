@@ -150,6 +150,11 @@ describe('Offering creation', () => {
         category:
           '/api/marketplace-categories/4588ff519260461893ab371b8fe83363/',
         type: 'Support.OfferingTemplate',
+        service_attributes: {
+          hostname: 'slurm.example.com',
+          username: 'admin',
+          default_account: 'waldur',
+        },
         shared: true,
         attributes: {
           hpc_Security_certification: ['hpc_Security_certification_iskel'],
