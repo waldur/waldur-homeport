@@ -63,7 +63,15 @@ export const combinePrices = (
       0,
     );
 
-    const subscriptionSubTotal = usageSubTotal + fixedSubTotal;
+    const limitComponents = components.filter(
+      (component) => component.billing_type === 'limit',
+    );
+    const limitSubTotal = limitComponents.reduce(
+      (result, item) => result + item.subTotal,
+      0,
+    );
+
+    const subscriptionSubTotal = usageSubTotal + fixedSubTotal + limitSubTotal;
     const totalPeriods = multipliers.map(
       (mult) => mult * subscriptionSubTotal || 0,
     );
