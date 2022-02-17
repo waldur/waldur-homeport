@@ -90,7 +90,8 @@ let OrderItemDetails = (
               )}
               {props.orderItem.reviewed_by && (
                 <OrderItemDetailsField label={translate('Reviewed by')}>
-                  {props.orderItem.reviewed_by}
+                  {props.orderItem.reviewed_by_full_name ||
+                    props.orderItem.reviewed_by}
                 </OrderItemDetailsField>
               )}
               {props.orderItem.reviewed_at && (

@@ -85,6 +85,7 @@ export interface OrderItemDetailsType extends OrderItemResponse {
   can_terminate: boolean;
   reviewed_at: string;
   reviewed_by: string;
+  reviewed_by_full_name?: string;
 }
 
 export interface Order {
