@@ -5354,7 +5354,6 @@ msgstr ""
 msgid "Organization role"
 msgstr ""
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/support/UserList.tsx
@@ -5450,7 +5449,6 @@ msgid "Owned organizations"
 msgstr ""
 
 #: src/customer/team/CustomerUsersList.tsx
-#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 msgid "Owner"
 msgstr ""
@@ -6306,7 +6304,6 @@ msgstr ""
 msgid "Project role"
 msgstr ""
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
@@ -6351,7 +6348,6 @@ msgid "Project {project_name} has been deleted."
 msgstr ""
 
 #: src/customer/workspace/utils.ts
-#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
@@ -7776,10 +7772,6 @@ msgstr ""
 msgid "Select project..."
 msgstr ""
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
-msgid "Select projects..."
-msgstr ""
-
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Select provider..."
@@ -7789,7 +7781,6 @@ msgstr ""
 msgid "Select request type..."
 msgstr ""
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Select role"
 msgstr ""
@@ -8537,7 +8528,6 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/navigation/header/SupportLink.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
