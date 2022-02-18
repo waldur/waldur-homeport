@@ -722,6 +722,9 @@ msgstr "Pilve RAM"
 msgid "Cloud block storage size"
 msgstr "Pilve plokkseadme suurus"
 
+msgid "Cloud init template"
+msgstr "Cloud init mall"
+
 msgid "Cloud vCPU"
 msgstr "Pilve vCPU"
 
@@ -856,6 +859,9 @@ msgstr "Loo ketas"
 
 msgid "Create network for OpenStack tenant"
 msgstr "Loo tõmmis OpenStack tenantile"
+
+msgid "Create node"
+msgstr "Loo sõlm"
 
 msgid "Create notification"
 msgstr "Teate loomine"

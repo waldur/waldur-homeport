@@ -4124,9 +4124,6 @@ msgstr "Velg prosjekt..."
 msgid "Select project roles"
 msgstr "Velg prosjektroller"
 
-msgid "Select projects..."
-msgstr "Velg prosjekter..."
-
 msgid "Select provider..."
 msgstr "Velg leverandør..."
 

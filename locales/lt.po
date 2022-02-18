@@ -4124,9 +4124,6 @@ msgstr "Pasirinkite projektą..."
 msgid "Select project roles"
 msgstr "Pasirinkite projekto vaidmenis"
 
-msgid "Select projects..."
-msgstr "Pasirinkite projektus ..."
-
 msgid "Select provider..."
 msgstr "Pasirinkti teikėją..."
 
