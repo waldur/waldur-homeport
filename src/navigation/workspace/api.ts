@@ -8,11 +8,11 @@ export const getCustomersCount = () =>
     parseResultCount(response),
   );
 
-export const getCustomersPage = (query, page) =>
+export const getCustomersPage = (query, page, pageSize) =>
   Axios.get(`${ENV.apiEndpoint}api/customers/`, {
     params: {
       page: page + 1,
-      page_size: 20,
+      page_size: pageSize,
       field: [
         'name',
         'uuid',
