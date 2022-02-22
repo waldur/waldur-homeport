@@ -1,0 +1,119 @@
+{
+  "url": "/api/customers/6983ac22f2bb469189311ab21e493359/",
+  "uuid": "6983ac22f2bb469189311ab21e493359",
+  "created": "2020-10-26T09:51:25.554809Z",
+  "division": "/api/divisions/5a9e75a5a5ef473eb61a44e920a1130f/",
+  "division_name": "Group of citizen-scientists",
+  "division_uuid": "5a9e75a5a5ef473eb61a44e920a1130f",
+  "division_parent_name": "Citizen-scientists",
+  "division_parent_uuid": "83f8bf94e7b148d9bce03755ab692e1f",
+  "division_type_name": "Department",
+  "division_type_uuid": "72ecaac3ba9948f9857b75c00bd50eed",
+  "display_name": "All",
+  "projects": [
+    {
+      "url": "/api/projects/e48410f7608f4185a77902a1d0e8d75e/",
+      "uuid": "e48410f7608f4185a77902a1d0e8d75e",
+      "name": "Vision-oriented bifurcated capacity"
+    },
+    {
+      "url": "/api/projects/7473e687c7544560925cb88be9f42a89/",
+      "uuid": "7473e687c7544560925cb88be9f42a89",
+      "name": "Mandatory web-enabled concept"
+    }
+  ],
+  "owners": [
+    {
+      "url": "/api/users/d0caf273c5694c5caf01278725ba527b/",
+      "uuid": "d0caf273c5694c5caf01278725ba527b",
+      "username": "155c8d19396f4d3680cfadb79d261d8a",
+      "full_name": "Robert Norman DDS",
+      "native_name": ""
+    },
+    {
+      "url": "/api/users/879f6afebfdb44f3af257ba63da3c80b/",
+      "uuid": "879f6afebfdb44f3af257ba63da3c80b",
+      "username": "3aa9aaa270604012aa35c4a06487bf24",
+      "full_name": "Shirley Pennington",
+      "native_name": ""
+    },
+    {
+      "url": "/api/users/34aee018014444ec89e7fa44c5aa88ea/",
+      "uuid": "34aee018014444ec89e7fa44c5aa88ea",
+      "username": "3abf689951af4353ae55ada71f0324ac",
+      "full_name": "David Gross",
+      "native_name": ""
+    }
+  ],
+  "support_users": [],
+  "service_managers": [
+    {
+      "url": "/api/users/199a885c881b450ea041e8638893a344/",
+      "uuid": "199a885c881b450ea041e8638893a344",
+      "username": "6b865e600027437aa800dbb93309ab17",
+      "full_name": "Adrian Nolan",
+      "native_name": ""
+    },
+    {
+      "url": "/api/users/31c43cc38b27407fb9d27de160e1ff27/",
+      "uuid": "31c43cc38b27407fb9d27de160e1ff27",
+      "username": "d134f5279cb94f27a391606e9eea4b7c",
+      "full_name": "Alan Williams",
+      "native_name": ""
+    }
+  ],
+  "backend_id": "",
+  "image": null,
+  "default_tax_percent": "0.00",
+  "accounting_start_date": "2020-10-26T09:51:25.555324Z",
+  "name": "John Doe",
+  "native_name": "",
+  "abbreviation": "All",
+  "contact_details": "79408 Elizabeth Glen\r\nOlsenborough, ME 25711",
+  "agreement_number": null,
+  "email": "johndoe@example.com",
+  "phone_number": "",
+  "access_subnets": "",
+  "registration_code": "356-29-0556",
+  "homepage": "",
+  "domain": "example.com",
+  "vat_code": "",
+  "postal": "",
+  "address": "",
+  "bank_name": "",
+  "bank_account": "",
+  "latitude": null,
+  "longitude": null,
+  "country": "EE",
+  "payment_profiles": [
+    {
+      "uuid": "6553f71c115d45d781c24c665d33a34a",
+      "url": "/api/payment-profiles/6553f71c115d45d781c24c665d33a34a/",
+      "name": "test",
+      "organization_uuid": "6983ac22f2bb469189311ab21e493359",
+      "organization": "/api/customers/6983ac22f2bb469189311ab21e493359/",
+      "attributes": {
+        "end_date": "2021-05-14T08:00:00.000Z"
+      },
+      "payment_type": "fixed_price",
+      "payment_type_display": "Fixed-price contract",
+      "is_active": null
+    },
+    {
+      "uuid": "f5dacbfd03484d06a4c4390e63f885aa",
+      "url": "/api/payment-profiles/f5dacbfd03484d06a4c4390e63f885aa/",
+      "name": "demo",
+      "organization_uuid": "6983ac22f2bb469189311ab21e493359",
+      "organization": "/api/customers/6983ac22f2bb469189311ab21e493359/",
+      "attributes": {
+        "end_date": "2021-09-30T09:00:00.000Z",
+        "contract_sum": "12300",
+        "agreement_number": "sdfaa"
+      },
+      "payment_type": "fixed_price",
+      "payment_type_display": "Fixed-price contract",
+      "is_active": true
+    }
+  ],
+  "is_service_provider": true
+}

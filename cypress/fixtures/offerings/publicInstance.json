@@ -1,0 +1,180 @@
+{
+	"url": "/api/marketplace-offerings/36b6c5ab2f854df1a87ffd39b9d767c6/",
+	"uuid": "36b6c5ab2f854df1a87ffd39b9d767c6",
+	"created": "2021-03-09T14:23:46.085721Z",
+	"name": "Test request-based item (Test...)",
+	"description": "<p>Test Description edited 5000.&nbsp;</p>",
+	"full_description": "<p>This is demo description.</p>",
+	"terms_of_service": "<p>test tos</p>",
+	"terms_of_service_link": "https://test.com",
+	"privacy_policy_link": "https://privacy.policy",
+	"access_url": "",
+	"customer": "/api/customers/895e38d197e748459189f19285119edf/",
+	"customer_uuid": "895e38d197e748459189f19285119edf",
+	"customer_name": "Allen-Rodriguez",
+	"category": "/api/marketplace-categories/06e45986252244218bd062149fc3b5b5/",
+	"category_uuid": "06e45986252244218bd062149fc3b5b5",
+	"category_title": "Private clouds",
+	"rating": null,
+	"attributes": {
+		"vpc_Support_email": "testz@gmail.com",
+		"vpc_application_os": [
+			"vpc_application_os_ubuntu16.04"
+		],
+		"vpc_Support_description": "  Test",
+		"vpc_details_av_monitoring": true,
+		"vpc_Security_certification": [
+			"vpc_Security_certification_iskem"
+		],
+		"vpc_details_virtualization": "vpc_details_virtualization_vmware",
+		"vpc_application_application": [
+			"vpc_application_application_nginx"
+		],
+		"vpc_details_computing_network": [
+			"vpc_details_computing_network_private"
+		]
+	},
+	"options": {
+		"order": [
+			"Test",
+			"Test2"
+		],
+		"options": {
+			"Test": {
+				"max": 40,
+				"type": "money",
+				"label": "test desc moneying",
+				"required": false,
+				"help_text": "type money"
+			},
+			"Test2": {
+				"max": 100,
+				"min": 1,
+				"type": "money",
+				"label": "Test2",
+				"required": true,
+				"help_text": "Test2"
+			}
+		}
+	},
+	"components": [
+		{
+			"billing_type": "few",
+			"type": "Test12aa",
+			"name": "Test1",
+			"description": "",
+			"measured_unit": "USD",
+			"limit_period": null,
+			"limit_amount": null,
+			"article_code": "1113",
+			"max_value": null,
+			"min_value": null,
+			"is_boolean": false,
+			"default_limit": null,
+			"factor": null,
+			"is_builtin": false
+		}
+	],
+	"plugin_options": {
+		"auto_approve_in_service_provider_projects": true
+	},
+	"secret_options": {
+		"template_confirmation_comment": "Confirmation notification.",
+		"service_provider_can_create_offering_user": false
+	},
+	"state": "Active",
+	"native_name": "",
+	"native_description": "",
+	"vendor_details": "",
+	"thumbnail": "/media/files/marketplace_service_offering_thumbnails/Header_98LZWDA.png",
+	"order_item_count": 1,
+	"plans": [
+		{
+			"url": "/api/marketplace-plans/8a2a01cf51a04ee9a4904dffd1316387/",
+			"uuid": "8a2a01cf51a04ee9a4904dffd1316387",
+			"name": "Plan22",
+			"description": "<p>Test Description</p>",
+			"article_code": "123",
+			"prices": {},
+			"quotas": {},
+			"max_amount": null,
+			"archived": false,
+			"is_active": true,
+			"unit_price": "0.0000000",
+			"unit": "month",
+			"init_price": 0,
+			"switch_price": 0,
+			"backend_id": "",
+			"plan_type": null,
+			"minimal_price": 0
+		},
+		{
+			"url": "/api/marketplace-plans/ed1c15fa5196467886b54cbbd65b1fe6/",
+			"uuid": "ed1c15fa5196467886b54cbbd65b1fe6",
+			"name": "Test2",
+			"description": "<p>Test2</p>",
+			"article_code": "",
+			"prices": {
+				"Test12aa": 123
+			},
+			"quotas": {
+				"Test12aa": 0
+			},
+			"max_amount": null,
+			"archived": false,
+			"is_active": true,
+			"unit_price": "0.0000000",
+			"unit": "half_month",
+			"init_price": 0,
+			"switch_price": 123,
+			"backend_id": "",
+			"plan_type": "on-plan-switch",
+			"minimal_price": 0
+		}
+	],
+	"screenshots": [
+		{
+			"name": "Test request-based item (Test)",
+			"uuid": "5a0203d698214d9facb1123dc2adde6f",
+			"description": "Test",
+			"image": "/media/files/screenshot/5a0203d698214d9facb1123dc2adde6f.png",
+			"thumbnail": "/media/files/screenshot/5a0203d698214d9facb1123dc2adde6f_6pWriVZ.png",
+			"created": "2022-01-04T22:14:10.389608Z"
+		},
+		{
+			"name": "Test",
+			"uuid": "cc5ed2190f7e4d3287ef005821a15cec",
+			"description": "Test",
+			"image": "/media/files/screenshot/cc5ed2190f7e4d3287ef005821a15cec.png",
+			"thumbnail": "/media/files/screenshot/cc5ed2190f7e4d3287ef005821a15cec_ADskVGf.png",
+			"created": "2022-01-04T22:14:37.761669Z"
+		}
+	],
+	"type": "Marketplace.Basic",
+	"shared": true,
+	"billable": true,
+	"scope": null,
+	"files": [],
+	"quotas": null,
+	"paused_reason": "Test",
+	"datacite_doi": "",
+	"citation_count": -1,
+	"latitude": 2.9140567,
+	"longitude": 101.6838531,
+	"country": "",
+	"backend_id": "",
+	"divisions": [
+		{
+			"uuid": "5a9e75a5a5ef473eb61a44e920a1130f",
+			"url": "/api/divisions/5a9e75a5a5ef473eb61a44e920a1130f/",
+			"name": "Group of citizen-scientists",
+			"type": "Department",
+			"parent_uuid": "83f8bf94e7b148d9bce03755ab692e1f",
+			"parent_name": "Researcher",
+			"parent": "/api/divisions/83f8bf94e7b148d9bce03755ab692e1f/"
+		}
+	],
+	"image": "/media/files/offering/36b6c5ab2f854df1a87ffd39b9d767c6_TnS6xKx.jpg",
+	"google_calendar_is_public": null,
+	"google_calendar_link": null
+}

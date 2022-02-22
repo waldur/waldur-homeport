@@ -30,14 +30,14 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
   } = useCurrentStateAndParams();
 
   const [{ loading, error, value }, refreshOffering] = useAsyncFn(async () => {
-    const pluginsData = await getPlugins();
-    const plugins = filterPluginsData(pluginsData);
     try {
       const user = await getCurrentUser({ __skipLogout__: true });
       dispatch(setCurrentUser(user));
       const offering = await getOffering(uuid);
       const category = await getCategory(offering.category_uuid);
       const categories = await getCategories();
+      const pluginsData = await getPlugins();
+      const plugins = filterPluginsData(pluginsData);
       dispatch(
         actions.loadDataSuccess({
           offering,
@@ -60,7 +60,6 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
           actions.loadDataSuccess({
             offering,
             categories,
-            plugins,
           }),
         );
         return { offering, category };
