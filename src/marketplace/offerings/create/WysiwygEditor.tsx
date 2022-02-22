@@ -73,7 +73,12 @@ export const WysiwygEditor: FunctionComponent<any> = (props) => {
         moduleValue.convertToRaw(editorState.getCurrentContent()),
       );
       if (contentRef.current != htmlValue) {
-        props.input.onChange(htmlValue);
+        // check if the html is empty or not
+        if (editorState.getCurrentContent().getPlainText().trim().length) {
+          props.input.onChange(htmlValue);
+        } else {
+          props.input.onChange('');
+        }
         contentRef.current = htmlValue;
       }
       setEditorState(editorState);
