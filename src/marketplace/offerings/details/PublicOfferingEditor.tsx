@@ -27,6 +27,7 @@ import { PageManagement } from './PageManagement';
 import { PageOverview } from './PageOverview';
 import { PagePolicies } from './PagePolicies';
 import { SidebarNav, SidebarRow } from './SidebarNav';
+import { SidebarResizer } from './SidebarResizer';
 
 require('./PublicOfferingEditor.css');
 
@@ -173,6 +174,7 @@ export const PublicOfferingEditor = ({ resolve }) => {
 
   return (
     <FormLayoutContext.Provider value={{ layout: 'vertical' }}>
+      <SidebarResizer />
       {Editor}
     </FormLayoutContext.Provider>
   );
