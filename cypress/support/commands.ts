@@ -7,6 +7,7 @@ declare global {
       mockUser(): Chainable;
       mockCustomer(): Chainable;
       mockChecklists(): Chainable;
+      mockConfigs(): Chainable;
       fillAndSubmitLoginForm(username?: string, password?: string): Chainable;
       setToken(): Chainable;
       openDropdownByLabel(value: string): Chainable;
@@ -93,6 +94,15 @@ Cypress.Commands.add('openWorkspaceSelector', () => {
 
     // Wait until dialog is loaded
     .waitForSpinner();
+});
+
+Cypress.Commands.add('mockConfigs', () => {
+  cy.intercept('GET', '/api/configuration/', {
+    fixture: 'configuration.json',
+  })
+    .intercept('GET', '/api/customer-permissions/', [])
+    .intercept('GET', '/api/project-permissions/', [])
+    .intercept('GET', '/api/events/', []);
 });
 
 Cypress.Commands.add('mockUser', () => {

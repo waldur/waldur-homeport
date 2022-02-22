@@ -1,0 +1,12 @@
+[
+	{
+		"offering_name": "Another offering",
+		"plan_name": "Test2",
+		"plan_unit": "half_month",
+		"component_name": "Test1",
+		"measured_unit": "USD",
+		"billing_type": "few",
+		"amount": 0,
+		"price": "123.0000000000"
+	}
+]
