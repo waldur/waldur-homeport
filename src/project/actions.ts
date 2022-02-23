@@ -19,6 +19,7 @@ export const gotoProjectList = createFormAction('waldur/project/GOTO_LIST');
 
 export const GOTO_PROJECT_CREATE = 'waldur/project/GOTO_CREATE';
 export const DELETE_PROJECT = 'waldur/project/DELETE';
+export const UPDATE_PROJECT_COUNTERS = 'waldur/project/COUNTERS';
 
 export const gotoProjectCreate = () => ({
   type: GOTO_PROJECT_CREATE,
@@ -37,3 +38,8 @@ export const showProjectRemoveDialog = (
     resolve: { action, projectName },
     size: 'lg',
   });
+
+export const updateProjectCounters = (counters) => ({
+  type: UPDATE_PROJECT_COUNTERS,
+  payload: { counters },
+});
