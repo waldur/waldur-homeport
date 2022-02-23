@@ -69,6 +69,18 @@ export const NotificationCreateDialog = reduxForm({
       </ModalHeader>
       <ModalBody>
         <FormContainer submitting={submitting}>
+          <StringField
+            name="subject"
+            label={translate('Subject')}
+            required={true}
+            validate={required}
+          />
+          <TextField
+            name="body"
+            label={translate('Message')}
+            required={true}
+            validate={required}
+          />
           <AsyncSelectField
             name="offerings"
             label={translate('Offerings')}
@@ -83,18 +95,6 @@ export const NotificationCreateDialog = reduxForm({
             isMulti={true}
             {...reactSelectMenuPortaling()}
             onChange={(e) => setFetchNumber(e)}
-          />
-          <StringField
-            name="subject"
-            label={translate('Subject')}
-            required={true}
-            validate={required}
-          />
-          <TextField
-            name="body"
-            label={translate('Message')}
-            required={true}
-            validate={required}
           />
           <AsyncSelectField
             name="customers"
