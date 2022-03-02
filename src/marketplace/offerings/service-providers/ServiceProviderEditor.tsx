@@ -12,12 +12,11 @@ import { uploadLogo } from '@waldur/customer/details/store/api';
 import { FormContainer, SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { updateServiceProvider } from '@waldur/marketplace/common/api';
+import { SidebarResizer } from '@waldur/marketplace/offerings/SidebarResizer';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showError, showSuccess } from '@waldur/store/notify';
 import { Customer } from '@waldur/workspace/types';
-
-require('./ServiceProviderEditor.css');
 
 export const ServiceProviderEditor = connect((_, props: any) => ({
   initialValues: props.resolve.initialValues,
@@ -47,6 +46,7 @@ export const ServiceProviderEditor = connect((_, props: any) => ({
 
     return (
       <form onSubmit={handleSubmit(updateCustomerHandler)}>
+        <SidebarResizer />
         <ModalHeader>
           <ModalTitle>{translate('Edit service provider details')}</ModalTitle>
         </ModalHeader>
