@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import '@waldur/marketplace/offerings/SidebarResizer.css';
+
 export const SidebarResizer = () => {
   const sidebarRef = useRef(
     document.getElementsByClassName('sidebarEditor')[0] as HTMLElement,

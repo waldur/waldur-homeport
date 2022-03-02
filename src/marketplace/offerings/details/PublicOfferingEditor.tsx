@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { FormLayoutContext } from '@waldur/form/context';
 import { translate } from '@waldur/i18n';
 import { supportOfferingActionVisible } from '@waldur/marketplace/offerings/actions/utils';
+import { SidebarResizer } from '@waldur/marketplace/offerings/SidebarResizer';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import {
   getUser,
@@ -27,9 +28,6 @@ import { PageManagement } from './PageManagement';
 import { PageOverview } from './PageOverview';
 import { PagePolicies } from './PagePolicies';
 import { SidebarNav, SidebarRow } from './SidebarNav';
-import { SidebarResizer } from './SidebarResizer';
-
-require('./PublicOfferingEditor.css');
 
 export const PublicOfferingEditor = ({ resolve }) => {
   const [page, setPage] = useState('nav');
