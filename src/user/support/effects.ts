@@ -26,8 +26,10 @@ export function* handleUpdateUser(action) {
     yield put(updateUser.success());
     yield put(showSuccess(successMessage));
   } catch (error) {
+    const errorData = error?.response?.data;
     const formError = new SubmissionError({
       _error: errorMessage,
+      ...errorData,
     });
     yield put(updateUser.failure(formError));
   }
