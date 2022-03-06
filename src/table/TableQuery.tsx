@@ -1,5 +1,6 @@
 import { debounce } from 'lodash';
 import { Component } from 'react';
+import { Button, FormControl, FormGroup, InputGroup } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
@@ -33,17 +34,21 @@ export class TableQuery extends Component<TableQueryProps, State> {
 
   render() {
     return (
-      <div className="pull-right text-right table-query">
-        <label>
-          {translate('Search')}
-          <input
+      <FormGroup className="pull-right text-right table-query">
+        <InputGroup>
+          <FormControl
             type="search"
-            className="form-control input-sm"
+            placeholder={translate('Search') + ' ...'}
             value={this.state.query}
             onChange={this.setQuery}
           />
-        </label>
-      </div>
+          <InputGroup.Button>
+            <Button>
+              <i className="fa fa-search" />
+            </Button>
+          </InputGroup.Button>
+        </InputGroup>
+      </FormGroup>
     );
   }
 }
