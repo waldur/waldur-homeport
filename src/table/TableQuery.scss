@@ -1,14 +1,26 @@
+@import '~/src/sass/inspinia/variables';
+
 .table-query {
-  label {
-    font-weight: normal;
-    white-space: nowrap;
-    text-align: left;
-    margin-right: 5px;
-  }
+  width: 380px;
 
   input {
-    margin-left: 0.5em;
-    display: inline-block;
-    width: auto;
+    font-size: 13px;
+    height: 36px;
+  }
+
+  .btn {
+    padding: 7px 12px;
+  }
+
+  .fa {
+    color: fade-out($text-color, 0.4);
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 767px) {
+  .table-query {
+    width: 100%;
+    padding: 0 15px;
   }
 }

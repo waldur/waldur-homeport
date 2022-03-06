@@ -3,6 +3,7 @@
 }
 
 .dataTables_info {
+  padding-top: 8px;
   margin-bottom: 8px;
 }
 
@@ -45,6 +46,10 @@
   .table-container {
     width: 100%;
     overflow-x: scroll;
+  }
+
+  .dataTables_info {
+    padding-top: 0;
   }
 }
 @media (min-width: 768px) {

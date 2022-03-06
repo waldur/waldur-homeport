@@ -4,9 +4,9 @@ import './TableLoadingSpinner.scss';
 import { TableProps } from '@waldur/table/Table';
 
 export const LoadingSpinner: FunctionComponent = () => (
-  <h3 className="spinner-container">
+  <span className="spinner-container">
     <i className="fa fa-spinner fa-spin" />
-  </h3>
+  </span>
 );
 
 export const TableLoadingSpinnerContainer = (props: TableProps) =>
