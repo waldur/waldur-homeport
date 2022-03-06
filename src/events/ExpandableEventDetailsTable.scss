@@ -1,0 +1,11 @@
+@import '~sass/mixins/mediaqueries.scss';
+
+.event-details-table {
+  column-count: 2;
+  @include bp(xs) {
+    column-count: initial;
+  }
+  @include bp(sm) {
+    column-count: initial;
+  }
+}
