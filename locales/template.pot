@@ -178,7 +178,6 @@ msgstr ""
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/customer/team/OfferingPermissionsList.tsx
-#: src/events/BaseEventsList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
@@ -2266,7 +2265,6 @@ msgstr ""
 
 #: src/customer/list/OrganizationDetailsButton.tsx
 #: src/customer/team/UserDetailsButton.tsx
-#: src/events/EventDetailsButton.tsx
 #: src/issues/create/CallerGroup.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -2693,6 +2691,7 @@ msgid "Erred"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/resource/summary/ErrorMessageField.tsx
 msgid "Error message"
@@ -2743,6 +2742,7 @@ msgid "Event group"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 msgid "Event type"
 msgstr ""
 
@@ -3368,6 +3368,7 @@ msgid "ID code"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/TenantPortsList.tsx
@@ -3786,6 +3787,7 @@ msgid "Issue"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "Issue link"
 msgstr ""
@@ -5086,6 +5088,7 @@ msgid "Only staff users are allowed to perform this action."
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Open"
@@ -5227,6 +5230,7 @@ msgstr ""
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/events/EventDetailsTable.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
@@ -6158,6 +6162,7 @@ msgstr ""
 #: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/events/EventDetailsTable.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/ProjectGroup.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
@@ -6378,6 +6383,7 @@ msgid "Proof document"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/providers/support/MapInfoPanel.tsx
@@ -7057,6 +7063,7 @@ msgid "Resolution"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
@@ -7084,6 +7091,7 @@ msgid "Resource already has this plan."
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 msgid "Resource configuration"
 msgstr ""
 
@@ -10471,6 +10479,7 @@ msgstr ""
 #: src/customer/team/OfferingPermissionsList.tsx
 #: src/customer/team/UserGroup.tsx
 #: src/events/EventDetailsTable.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
