@@ -21,7 +21,7 @@ export const combinePrices = (
     const offeringLimits = parseOfferingLimits(offering);
     const offeringComponents = filterOfferingComponents(offering);
     const components: Component[] = offeringComponents.map((component) => {
-      let amount = 0;
+      let amount = 1;
       if (
         component.billing_type === 'limit' &&
         limits &&
@@ -84,7 +84,12 @@ export const combinePrices = (
 
     return { components, periods, total, totalPeriods };
   } else {
-    return { components: [], periods: [], total: 0, totalPeriods: [] };
+    return {
+      components: [],
+      periods: [],
+      total: 0,
+      totalPeriods: [],
+    };
   }
 };
 

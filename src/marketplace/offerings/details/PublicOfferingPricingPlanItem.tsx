@@ -4,6 +4,7 @@ import { FunctionComponent, useState } from 'react';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
+import { combinePrices } from '@waldur/marketplace/details/plan/utils';
 import { PlanItemExpandableContent } from '@waldur/marketplace/offerings/details/PlanItemExpandableContent';
 import { Offering, Plan } from '@waldur/marketplace/types';
 import './PublicOfferingPricingPlanItem.scss';
@@ -14,11 +15,11 @@ interface PublicOfferingPricingPlanItemProps {
 }
 
 const planTypes = () => [
-  { value: 'usage-based', label: translate('Usage based') },
-  { value: 'limit-based', label: translate('Limit based') },
-  { value: 'fixed-price', label: translate('Fixed price') },
-  { value: 'one-time', label: translate('One time') },
+  { value: 'fixed', label: translate('Fixed price') },
+  { value: 'usage', label: translate('Usage based') },
+  { value: 'one', label: translate('One time') },
   { value: 'few', label: translate('One time on plan switch') },
+  { value: 'limit', label: translate('Limit based') },
   { value: 'mixed', label: translate('Mixed') },
 ];
 
@@ -28,6 +29,7 @@ const getPlanTypeLabel = (key: string): string =>
 export const PublicOfferingPricingPlanItem: FunctionComponent<PublicOfferingPricingPlanItemProps> =
   ({ offering, plan }) => {
     const [toggle, setToggle] = useState<boolean>(false);
+    const { total: totalPrice } = combinePrices(plan, null, null, offering);
     return (
       <div className="pricingPlanItem">
         <div
@@ -42,7 +44,7 @@ export const PublicOfferingPricingPlanItem: FunctionComponent<PublicOfferingPric
           </div>
           <div className="pricingPlanItem__header__pricing">
             <span className="pricingPlanItem__header__pricing__price">
-              {getPlanTypeLabel(plan.plan_type)} {defaultCurrency(plan.price)}
+              {getPlanTypeLabel(plan.plan_type)} {defaultCurrency(totalPrice)}
             </span>
             <span
               className={classNames('pricingPlanItem__header__pricing__unit', {

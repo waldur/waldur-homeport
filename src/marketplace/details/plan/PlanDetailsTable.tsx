@@ -15,9 +15,15 @@ import { pricesSelector } from './utils';
 
 const HeaderRow = (props: { periods: string[] }) => (
   <tr>
-    <th className="col-sm-1">{translate('Component name')}</th>
-    <th className="col-sm-1">{translate('Quantity')}</th>
-    <th className="col-sm-1">{translate('Unit')}</th>
+    <th className="col-sm-1" style={{ width: '5%' }}>
+      {translate('Component name')}
+    </th>
+    <th className="col-sm-1" style={{ width: '5%' }}>
+      {translate('Quantity')}
+    </th>
+    <th className="col-sm-1" style={{ width: '5%' }}>
+      {translate('Unit')}
+    </th>
     {props.periods.map((period, index) => (
       <th className="col-sm-1" key={index}>
         {period}

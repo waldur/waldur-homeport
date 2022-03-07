@@ -284,3 +284,14 @@ export interface OfferingsByServiceProvider {
   customer_uuid: string;
   offerings: OfferingInfo[];
 }
+
+export interface PlanComponent {
+  amount: number;
+  billing_type: BillingType;
+  component_name: string;
+  measured_unit: string;
+  offering_name: string;
+  plan_name: string;
+  plan_unit: string;
+  price: string;
+}
