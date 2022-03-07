@@ -3,7 +3,7 @@ import { useAsync } from 'react-use';
 
 import { getAll } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
+import { Offering, PlanComponent } from '@waldur/marketplace/types';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 import exportExcel from '@waldur/table/excel';
 import { LoadingSpinner } from '@waldur/table/TableLoadingSpinnerContainer';
@@ -14,7 +14,7 @@ interface ExportFullPriceListProps {
 }
 
 const fetchPlanComponents = (offering_uuid: string) =>
-  getAll('/marketplace-plan-components/', {
+  getAll<PlanComponent>('/marketplace-plan-components/', {
     ...ANONYMOUS_CONFIG,
     params: {
       offering_uuid,
@@ -56,7 +56,15 @@ export const ExportFullPriceList: FunctionComponent<ExportFullPriceListProps> =
       loading,
       error,
       value: components,
-    } = useAsync(() => fetchPlanComponents(offering.uuid), [offering]);
+    } = useAsync(async () => {
+      const components = await fetchPlanComponents(offering.uuid);
+      components.map((plan) => {
+        if (plan.billing_type !== 'limit') return plan;
+        if (plan.amount === 0) plan.amount = 1;
+        return plan;
+      });
+      return components;
+    }, [offering]);
     return (
       <div className="exportFullPriceList">
         {loading ? (
