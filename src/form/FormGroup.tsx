@@ -5,6 +5,7 @@ import { clearFields, WrappedFieldMetaProps } from 'redux-form';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { omit } from '@waldur/core/utils';
 
+import { FormFieldsContext } from './context';
 import { FieldError } from './FieldError';
 import { FormField } from './types';
 
@@ -14,6 +15,8 @@ export interface FormGroupProps extends FormField {
 }
 
 export class FormGroup extends PureComponent<FormGroupProps> {
+  static contextType = FormFieldsContext;
+
   render() {
     const {
       input,
@@ -32,6 +35,7 @@ export class FormGroup extends PureComponent<FormGroupProps> {
     const newProps = {
       input,
       ...omit(rest, 'clearOnUnmount'),
+      readOnly: this.context.readOnlyFields.includes(input.name),
       onBlur: (event) => {
         if (!this.props.noUpdateOnBlur) {
           this.props.input.onBlur(event);

@@ -4,7 +4,7 @@ import { FieldArray, FormSection } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField, StringField } from '@waldur/form';
-import { FormLayoutContext } from '@waldur/form/context';
+import { FormFieldsContext, FormLayoutContext } from '@waldur/form/context';
 import { StaticField } from '@waldur/form/StaticField';
 import { translate, TranslateProps } from '@waldur/i18n';
 import { Option } from '@waldur/marketplace/common/registry';
@@ -31,6 +31,7 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
   props,
 ) => {
   const { layout } = useContext(FormLayoutContext);
+  const { readOnlyFields } = useContext(FormFieldsContext);
   const ContainerProps = {
     submitting: false,
     labelClass: layout === 'vertical' ? '' : 'col-sm-2',
@@ -90,6 +91,7 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
           name="options"
           component={OfferingOptions}
           layout={layout}
+          readOnly={readOnlyFields.includes('options')}
         />
       )}
       {props.secretOptionsForm && (

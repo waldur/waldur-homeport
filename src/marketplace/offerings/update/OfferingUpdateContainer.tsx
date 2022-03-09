@@ -11,6 +11,7 @@ import { updateOffering, FORM_ID } from '../store/constants';
 import {
   getStep,
   isOfferingManagementDisabled,
+  getReadOnlyFields,
   isLoading,
   isLoaded,
   isErred,
@@ -23,6 +24,7 @@ import { getInitialValues } from './utils';
 const mapStateToProps = (state: RootState) => ({
   step: getStep(state),
   disabled: isOfferingManagementDisabled(state),
+  readOnlyFields: getReadOnlyFields(state),
   initialValues: getInitialValues(state),
   loading: isLoading(state),
   loaded: isLoaded(state),

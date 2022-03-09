@@ -4,6 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import { InjectedFormProps } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { FormFieldsContext } from '@waldur/form/context';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 
@@ -20,6 +21,7 @@ interface OfferingUpdateDialogProps
   loaded: boolean;
   erred: boolean;
   disabled: boolean;
+  readOnlyFields: Array<string>;
   isLastStep: boolean;
   setStep(step: string): void;
   goBack(): void;
@@ -53,8 +55,15 @@ export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = (
     getBreadcrumbs();
   }, [offering_uuid, router]);
 
-  const { loading, loaded, erred, handleSubmit, updateOffering, ...rest } =
-    props;
+  const {
+    loading,
+    loaded,
+    erred,
+    handleSubmit,
+    updateOffering,
+    readOnlyFields,
+    ...rest
+  } = props;
 
   if (loading) {
     return <LoadingSpinner />;
@@ -62,23 +71,25 @@ export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = (
     return <p>{translate('Unable to load data.')}</p>;
   } else if (loaded) {
     return (
-      <Row>
-        <Col lg={10} lgOffset={1}>
-          <form
-            onSubmit={handleSubmit(updateOffering)}
-            className="form-horizontal"
-          >
-            <Wizard
-              steps={STEPS}
-              tabs={TABS}
-              {...rest}
-              submitLabel={translate('Update')}
-              mountOnEnter={true}
-              getTabLabel={getTabLabel}
-            />
-          </form>
-        </Col>
-      </Row>
+      <FormFieldsContext.Provider value={{ readOnlyFields }}>
+        <Row>
+          <Col lg={10} lgOffset={1}>
+            <form
+              onSubmit={handleSubmit(updateOffering)}
+              className="form-horizontal"
+            >
+              <Wizard
+                steps={STEPS}
+                tabs={TABS}
+                {...rest}
+                submitLabel={translate('Update')}
+                mountOnEnter={true}
+                getTabLabel={getTabLabel}
+              />
+            </form>
+          </Col>
+        </Row>
+      </FormFieldsContext.Provider>
     );
   }
 };

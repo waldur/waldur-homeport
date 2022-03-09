@@ -101,6 +101,7 @@ export const WysiwygEditor: FunctionComponent<any> = (props) => {
         editorState={editorState}
         wrapperClassName="demo-wrapper"
         editorClassName="demo-editor"
+        readOnly={props.readOnly}
         onEditorStateChange={onEditorStateChange}
         localization={{
           locale: LanguageUtilsService.getCurrentLanguage().code,
