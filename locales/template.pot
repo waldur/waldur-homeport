@@ -1545,6 +1545,7 @@ msgstr ""
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Component name"
 msgstr ""
 
@@ -2910,6 +2911,10 @@ msgstr ""
 
 #: src/issues/workspace/FeaturesList.tsx
 msgid "Features have been updated."
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+msgid "Fee applied according to the maximum value reported by service provider over the whole active state of resource."
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
@@ -6105,6 +6110,7 @@ msgstr ""
 
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Price per unit"
 msgstr ""
 
@@ -6523,6 +6529,7 @@ msgstr ""
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Quantity"
@@ -8524,6 +8531,7 @@ msgid "Subscription ID"
 msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Subtotal"
 msgstr ""
 
@@ -9121,6 +9129,7 @@ msgstr ""
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 msgid "Total"
@@ -10221,6 +10230,7 @@ msgstr ""
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Unit"
 msgstr ""
 
