@@ -18,8 +18,7 @@ import {
 
 import { getResource } from '../common/api';
 
-import { ResourceActions } from './actions/ResourceActions';
-import { ResourceSummary } from './ResourceSummary';
+import { ResourceDetailsHeader } from './ResourceDetailsHeader';
 import { ResourceTabs } from './ResourceTabs';
 import { Resource } from './types';
 
@@ -103,17 +102,12 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> =
     const resource = state.value;
     return (
       <div className="ibox-content">
-        <Row className="m-b-md">
+        <Row className="m-b-lg">
           <Col sm={12}>
-            <ResourceActions
+            <ResourceDetailsHeader
               resource={resource}
               reInitResource={reInitResource}
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={12}>
-            <ResourceSummary resource={resource} />
           </Col>
         </Row>
         <Row>

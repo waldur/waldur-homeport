@@ -11491,6 +11491,10 @@ msgstr ""
 msgid "organizations"
 msgstr ""
 
+#: src/marketplace/resources/ResourceDetailsHeader.tsx
+msgid "overview"
+msgstr ""
+
 #: src/invitations/RoleField.tsx
 msgid "owner"
 msgstr ""
