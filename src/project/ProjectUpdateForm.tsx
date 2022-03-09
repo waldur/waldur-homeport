@@ -11,6 +11,7 @@ import {
   SubmitButton,
   TextField,
 } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
 import { StaticField } from '@waldur/form/StaticField';
 import {
@@ -68,6 +69,15 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
             {...reactSelectMenuPortaling()}
           />
         ) : null}
+        {isFeatureVisible('project.show_industry_flag') && (
+          <AwesomeCheckboxField
+            name="is_industry"
+            label={translate(
+              'Please mark if project is aimed at industrial use',
+            )}
+            hideLabel={true}
+          />
+        )}
         {props.project_type && (
           <StaticField
             label={props.translate('Project type')}

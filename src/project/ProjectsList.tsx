@@ -107,6 +107,7 @@ const TableOptions = {
       'end_date',
       'backend_id',
       'oecd_fos_2007_code',
+      'is_industry',
     ];
 
     return filter;

@@ -26,6 +26,7 @@ export const createProject = (project) =>
     customer: project.customer.url,
     type: project.type?.url,
     oecd_fos_2007_code: project.oecd_fos_2007_code?.value,
+    is_industry: project.is_industry,
   });
 
 export const updateProject = (project) =>
@@ -35,6 +36,7 @@ export const updateProject = (project) =>
     end_date: project.end_date ? formatDate(project.end_date) : undefined,
     backend_id: project.backend_id,
     oecd_fos_2007_code: project.oecd_fos_2007_code?.value,
+    is_industry: project.is_industry,
   });
 
 export const moveProject = (data) =>

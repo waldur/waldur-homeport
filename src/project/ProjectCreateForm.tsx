@@ -11,6 +11,7 @@ import {
   FieldError,
   SubmitButton,
 } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
 import {
   datePickerOverlayContainerInDialogs,
@@ -52,6 +53,9 @@ export const ProjectCreateForm = reduxForm<
   const workspace = useSelector(getWorkspace);
   const showCode = useSelector((state: RootState) =>
     isVisible(state, 'project.oecd_fos_2007_code'),
+  );
+  const showIndustry = useSelector((state: RootState) =>
+    isVisible(state, 'project.show_industry_flag'),
   );
 
   if (loading) {
@@ -95,6 +99,15 @@ export const ProjectCreateForm = reduxForm<
             {...reactSelectMenuPortaling()}
           />
         ) : null}
+        {showIndustry && (
+          <AwesomeCheckboxField
+            name="is_industry"
+            label={translate(
+              'Please mark if project is aimed at industrial use',
+            )}
+            hideLabel={true}
+          />
+        )}
         {value.projectTypes.length >= 1 && (
           <SelectField
             label={translate('Project type')}
