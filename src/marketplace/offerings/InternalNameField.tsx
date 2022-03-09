@@ -9,6 +9,7 @@ import { FormGroupWithError } from './FormGroupWithError';
 interface InternalNameFieldProps {
   name: string;
   disabled?: boolean;
+  readOnly?: boolean;
 }
 
 const INTERNAL_NAME_PATTERN = new RegExp('^[a-zA-Z0-9_-]+$');
@@ -34,5 +35,6 @@ export const InternalNameField: FunctionComponent<InternalNameFieldProps> = (
     )}
     component={FormGroupWithError}
     disabled={props.disabled}
+    readOnly={props.readOnly}
   />
 );

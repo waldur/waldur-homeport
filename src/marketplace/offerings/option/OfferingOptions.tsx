@@ -26,7 +26,10 @@ export const OfferingOptions: FC<any> = (props) => {
         {props.fields.map((option, index) => (
           <Panel key={index}>
             <Panel.Heading>
-              <RemoveButton onClick={() => props.fields.remove(index)} />
+              <RemoveButton
+                onClick={() => props.fields.remove(index)}
+                disabled={props.readOnly}
+              />
               <h4>
                 {translate('User input field #{index}', {
                   index: index + 1,
@@ -34,11 +37,14 @@ export const OfferingOptions: FC<any> = (props) => {
               </h4>
             </Panel.Heading>
             <Panel.Body>
-              <OptionForm option={option} />
+              <OptionForm option={option} readOnly={props.readOnly} />
             </Panel.Body>
           </Panel>
         ))}
-        <AddOptionButton onClick={() => props.fields.push({})}>
+        <AddOptionButton
+          onClick={() => props.fields.push({})}
+          disabled={props.readOnly}
+        >
           {translate('Add user input field')}
         </AddOptionButton>
       </Col>

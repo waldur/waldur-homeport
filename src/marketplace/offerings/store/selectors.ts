@@ -2,6 +2,7 @@ import { formValueSelector, getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { BookingProps } from '@waldur/booking/types';
+import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 import { getOfferingComponentsFilter } from '@waldur/marketplace/common/registry';
 import { OfferingComponent } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
@@ -121,3 +122,19 @@ export const isOfferingManagementDisabled = createSelector(
 
 export const getSchedules = (state: RootState) =>
   getForm(state, 'schedules') as BookingProps[];
+
+export const getReadOnlyFields = createSelector(
+  getOffering,
+  (offeringState) => {
+    if (offeringState.offering.type === REMOTE_OFFERING_TYPE) {
+      return [
+        'name',
+        'description',
+        'full_description',
+        'terms_of_service',
+        'options',
+      ];
+    }
+    return [];
+  },
+);

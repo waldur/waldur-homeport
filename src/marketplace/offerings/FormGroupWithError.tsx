@@ -16,6 +16,7 @@ export const FormGroupWithError = (inputProps) => (
     <input
       {...inputProps.input}
       disabled={inputProps.disabled}
+      readOnly={inputProps.readOnly}
       className="form-control"
       type="text"
     />

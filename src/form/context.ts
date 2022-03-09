@@ -13,10 +13,13 @@ export const FormLayoutContext = createContext<FormLayoutContext>({
 type FormFieldsContext = Pick<
   FormGroupProps,
   'labelClassName' | 'valueClassName' | 'classNameWithoutLabel'
->;
+> & {
+  readOnlyFields?: Array<string>;
+};
 
 export const FormFieldsContext = createContext<FormFieldsContext>({
   labelClassName: undefined,
   valueClassName: undefined,
   classNameWithoutLabel: undefined,
+  readOnlyFields: [],
 });
