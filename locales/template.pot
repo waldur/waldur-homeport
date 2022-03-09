@@ -5869,6 +5869,11 @@ msgstr ""
 msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
 msgstr ""
 
+#: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectUpdateForm.tsx
+msgid "Please mark if project is aimed at industrial use"
+msgstr ""
+
 #: src/slurm/RequestLimitsChangeDialog.tsx
 msgid "Please note that request should specify allocation name and provide a reason for change."
 msgstr ""
