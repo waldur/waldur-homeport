@@ -1,10 +1,7 @@
-import { ErrorBoundary } from '@sentry/react';
 import React from 'react';
-import { PanelBody, Tab, Tabs } from 'react-bootstrap';
-
-import { ErrorMessage } from '@waldur/ErrorMessage';
 
 import { ResourceTab } from './types';
+import { VerticalTabs } from './VerticalTabs';
 
 export const ResourceTabsComponent = ({
   tabs,
@@ -17,22 +14,14 @@ export const ResourceTabsComponent = ({
   resource: any;
   onSelect: React.EventHandler<any>;
 }) => (
-  <Tabs
-    id="ResourceTabsComponent"
+  <VerticalTabs
+    containerId="ResourceTabsComponent"
+    items={tabs.map((tab) => ({
+      ...tab,
+      component: () => <tab.component resource={resource} />,
+    }))}
     activeKey={activeKey}
+    defaultActiveKey={tabs[0].key}
     onSelect={onSelect}
-    mountOnEnter
-    unmountOnExit
-    animation={false}
-  >
-    {tabs.map((tab) => (
-      <Tab key={tab.key} eventKey={tab.key} title={tab.title}>
-        <PanelBody>
-          <ErrorBoundary fallback={ErrorMessage}>
-            <tab.component resource={resource} />
-          </ErrorBoundary>
-        </PanelBody>
-      </Tab>
-    ))}
-  </Tabs>
+  />
 );

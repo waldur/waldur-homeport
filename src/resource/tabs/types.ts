@@ -7,3 +7,15 @@ export interface ResourceTab {
   feature?: string;
   isVisible?(resource): boolean;
 }
+
+export interface MenuItemType {
+  key: string;
+  title: string;
+  component: ComponentType<any>;
+  icon?: string;
+  visible?: boolean;
+}
+
+export interface SidebarMenuProps {
+  items: MenuItemType[];
+}
