@@ -1,51 +1,71 @@
-import { FC } from 'react';
-import { PanelBody, Tab, Tabs } from 'react-bootstrap';
+import { FC, useMemo } from 'react';
+import { PanelBody } from 'react-bootstrap';
 
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { ResourceUsageTabsContainer } from '@waldur/marketplace/resources/usage/ResourceUsageTabsContainer';
+import { VerticalTabs } from '@waldur/resource/tabs/VerticalTabs';
 
 import { ResourceOrderItems } from '../orders/item/list/ResourceOrderItems';
 
 import { ResourceIssuesTab } from './ResourceIssuesTab';
 import { Resource } from './types';
 
-export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => (
-  <Tabs
-    defaultActiveKey="orderItems"
-    id="resource-details"
-    mountOnEnter
-    unmountOnExit
-  >
-    <Tab eventKey="orderItems" title={translate('Order items')}>
-      <PanelBody>
-        <ResourceOrderItems resource_uuid={resource.uuid} />
-      </PanelBody>
-    </Tab>
-    {ENV.plugins.WALDUR_SUPPORT && resource.scope && (
-      <Tab eventKey="issues" title={translate('Issues')}>
-        <ResourceIssuesTab resource={resource} />
-      </Tab>
-    )}
-    {resource.attributes.schedules && (
-      <Tab eventKey="schedules" title={translate('Schedules')}>
-        <PanelBody>
-          <Calendar events={resource.attributes.schedules} />
-        </PanelBody>
-      </Tab>
-    )}
-    {(resource.is_usage_based || resource.is_limit_based) && (
-      <Tab eventKey="usage" title={translate('Usage')}>
-        <ResourceUsageTabsContainer
-          resource={{
-            ...resource,
-            offering_uuid:
-              resource.offering_uuid || resource.marketplace_offering_uuid,
-            resource_uuid: resource.uuid || resource.marketplace_resource_uuid,
-          }}
-        />
-      </Tab>
-    )}
-  </Tabs>
-);
+export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => {
+  const tabs = useMemo(
+    () => [
+      {
+        key: 'orderItems',
+        title: translate('Order items'),
+        visible: true,
+        component: () => (
+          <PanelBody>
+            <ResourceOrderItems resource_uuid={resource.uuid} />
+          </PanelBody>
+        ),
+      },
+      {
+        key: 'issues',
+        title: translate('Issues'),
+        visible: ENV.plugins.WALDUR_SUPPORT && resource.scope,
+        component: () => <ResourceIssuesTab resource={resource} />,
+      },
+      {
+        key: 'schedules',
+        title: translate('Schedules'),
+        visible: resource.attributes.schedules,
+        component: () => (
+          <PanelBody>
+            <Calendar events={resource.attributes.schedules} />
+          </PanelBody>
+        ),
+      },
+      {
+        key: 'usage',
+        title: translate('Usage'),
+        visible: resource.is_usage_based || resource.is_limit_based,
+        component: () => (
+          <ResourceUsageTabsContainer
+            resource={{
+              ...resource,
+              offering_uuid:
+                resource.offering_uuid || resource.marketplace_offering_uuid,
+              resource_uuid:
+                resource.uuid || resource.marketplace_resource_uuid,
+            }}
+          />
+        ),
+      },
+    ],
+    [],
+  );
+
+  return (
+    <VerticalTabs
+      containerId="resource-details"
+      items={tabs}
+      defaultActiveKey="orderItems"
+    />
+  );
+};
