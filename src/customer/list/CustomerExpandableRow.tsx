@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { AgreementInfo } from '@waldur/invoices/list/AgreementInfo';
@@ -15,8 +16,9 @@ export const CustomerExpandableRow = memo((props: any) => {
   const accountingPeriod = useSelector((state: RootState) =>
     formValueSelector('customerListFilter')(state, 'accounting_period'),
   );
+  const invoiceUrl = `${ENV.apiEndpoint}api/customers/${props.row.uuid}/`;
   const { loading, error, value } = useAsync(
-    () => getInvoice(props.row, accountingPeriod.value),
+    () => getInvoice(invoiceUrl, accountingPeriod.value),
     [props.row, accountingPeriod],
   );
   if (loading) {
