@@ -16,9 +16,9 @@ export const getTotal = (params) =>
     (response) => response.data,
   );
 
-export const getInvoice = (customer, date) =>
+export const getInvoice = (invoiceUrl, date) =>
   get('/invoices/', {
-    params: { customer: customer.url, year: date.year, month: date.month },
+    params: { customer: invoiceUrl, year: date.year, month: date.month },
   }).then((response) => response.data[0]);
 
 export const updateOrganization = (data) =>
