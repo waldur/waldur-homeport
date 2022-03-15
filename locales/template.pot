@@ -508,6 +508,10 @@ msgstr ""
 msgid "Affiliations"
 msgstr ""
 
+#: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
+msgid "Affinity"
+msgstr ""
+
 #: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
 msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
 msgstr ""
@@ -1702,6 +1706,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateNetworkAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.tsx
+#: src/openstack/openstack-tenant/actions/CreateServerGroupAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
 #: src/rancher/catalog/CatalogCreateButton.tsx
@@ -1811,6 +1816,10 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 msgid "Create security group for OpenStack tenant {name}"
+msgstr ""
+
+#: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
+msgid "Create server group for OpenStack tenant {name}"
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/CreateSnapshotDialog.tsx
@@ -4475,6 +4484,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
+#: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
@@ -5988,6 +5998,7 @@ msgid "Pods"
 msgstr ""
 
 #: src/openstack/openstack-server-groups/ServerGroupsList.tsx
+#: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
 msgid "Policy"
 msgstr ""
 
@@ -7776,6 +7787,10 @@ msgstr ""
 msgid "Select plan"
 msgstr ""
 
+#: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
+msgid "Select policy..."
+msgstr ""
+
 #: src/issues/create/PriorityGroup.tsx
 msgid "Select priority..."
 msgstr ""
@@ -7898,6 +7913,10 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
 msgid "Server"
+msgstr ""
+
+#: src/openstack/openstack-tenant/actions/utils.ts
+msgid "Server group creation has been scheduled."
 msgstr ""
 
 #: src/openstack/openstack-tenant/tabs.ts
@@ -9417,6 +9436,10 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/actions/utils.ts
 msgid "Unable to create security group."
+msgstr ""
+
+#: src/openstack/openstack-tenant/actions/utils.ts
+msgid "Unable to create server group."
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleDialog.tsx
