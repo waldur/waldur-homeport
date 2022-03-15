@@ -7,8 +7,11 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import {
   loadSecurityGroupsResources,
+  loadServerGroupsResources,
   createSecurityGroup,
+  createServerGroup,
   CreateSecurityGroupRequestBody,
+  CreateServerGroupRequestBody,
 } from '@waldur/openstack/api';
 import { ActionContext } from '@waldur/resource/actions/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -70,4 +73,48 @@ type OwnProps = ReturnType<typeof useCreateSecurityGroupForm>;
 
 export const connectForm = reduxForm<CreateSecurityGroupFormData, OwnProps>({
   form: FORM_NAME,
+});
+
+/////////////////////////////
+type CreateServerGroupFormData = CreateServerGroupRequestBody;
+
+export const useCreateServerGroupForm = (resource: OpenStackTenant) => {
+  const asyncState = useAsync(
+    () =>
+      loadServerGroupsResources({
+        tenant: resource.url,
+        field: ['name', 'url'],
+        o: 'name',
+      }),
+    [resource.url],
+  );
+  const dispatch = useDispatch();
+  const submitRequest = async (formData: CreateServerGroupFormData) => {
+    try {
+      await createServerGroup(resource.uuid, {
+        ...formData,
+        policy: formData.policy['value'],
+      });
+      dispatch(
+        showSuccess(translate('Server group creation has been scheduled.')),
+      );
+      dispatch(closeModalDialog());
+    } catch (e) {
+      dispatch(
+        showErrorResponse(e, translate('Unable to create server group.')),
+      );
+    }
+  };
+  return { asyncState, submitRequest, resource };
+};
+
+const SERVER_GROUP_FORM_NAME = 'CreateServerGroupForm';
+
+type ServerGroupOwnProps = ReturnType<typeof useCreateServerGroupForm>;
+
+export const connectServerGroupForm = reduxForm<
+  CreateServerGroupFormData,
+  ServerGroupOwnProps
+>({
+  form: SERVER_GROUP_FORM_NAME,
 });

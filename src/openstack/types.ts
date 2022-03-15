@@ -22,9 +22,12 @@ export interface VolumeType {
 
 export interface ServerGroupType {
   url: string;
+  uuid: string;
   name: string;
-  description: string;
+  settings: string;
   policy: string;
+  resource_type?: string;
+  tenant?: string;
 }
 
 export type EthernetType = 'IPv4' | 'IPv6';

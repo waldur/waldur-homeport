@@ -20,6 +20,7 @@ import {
   OpenStackInstance,
 } from '@waldur/openstack/openstack-instance/types';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
+import { ServerGroup } from '@waldur/openstack/openstack-server-groups/types';
 
 import {
   AvailabilityZone,
@@ -59,6 +60,11 @@ export interface CreateSecurityGroupRequestBody {
   name: string;
   description?: string;
   rules: CreateSecurityGroupRuleRequestBody[];
+}
+
+export interface CreateServerGroupRequestBody {
+  name: string;
+  policy: string;
 }
 
 export interface UpdateInternalIpsRequestBody {
@@ -163,6 +169,9 @@ export const loadSecurityGroups = (settings_uuid: string) =>
 
 export const loadSecurityGroupsResources = (params?) =>
   getAll<SecurityGroup>('/openstack-security-groups/', { params });
+
+export const loadServerGroupsResources = (params?) =>
+  getAll<ServerGroup>('/openstack-server-groups/', { params });
 
 export const updateSecurityGroup = (id: string, data) =>
   put(`/openstack-security-groups/${id}/`, data);
@@ -277,6 +286,11 @@ export const createSecurityGroup = (
   id: string,
   data: CreateSecurityGroupRequestBody,
 ) => post(`/openstack-tenants/${id}/create_security_group/`, data);
+
+export const createServerGroup = (
+  id: string,
+  data: CreateServerGroupRequestBody,
+) => post(`/openstack-tenants/${id}/create_server_group/`, data);
 
 export const createNetwork = (id: string, data: CreateNetworkRequestBody) =>
   post(`/openstack-tenants/${id}/create_network/`, data);
