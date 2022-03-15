@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 
+import { CreateServerGroupAction } from '@waldur/openstack/openstack-tenant/actions/CreateServerGroupAction';
 import { PullServerGroupsAction } from '@waldur/openstack/openstack-tenant/actions/PullServerGroupsAction';
 import { ServerGroupType } from '@waldur/openstack/types';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
@@ -48,6 +49,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       actions={
         <ButtonGroup>
           <PullServerGroupsAction resource={props.resource} />
+          <CreateServerGroupAction resource={props.resource} />
         </ButtonGroup>
       }
     />
