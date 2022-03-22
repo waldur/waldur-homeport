@@ -1,0 +1,25 @@
+[
+  {
+    "uuid": "ec282cea2e7248f392bcdf29c25bad64",
+    "created": "2021-04-14T11:45:08.928584Z",
+    "division_name": "Citizen-scientists",
+    "default_tax_percent": "0.00",
+    "accounting_start_date": "2021-04-14T11:43:11Z",
+    "name": "my test organization",
+    "abbreviation": "mto",
+    "contact_details": "",
+    "agreement_number": 4013,
+    "email": "",
+    "phone_number": "",
+    "access_subnets": "",
+    "registration_code": "",
+    "domain": "",
+    "vat_code": "",
+    "postal": "",
+    "address": "",
+    "bank_name": "",
+    "bank_account": "",
+    "country": "",
+    "is_service_provider": true
+  }
+]
