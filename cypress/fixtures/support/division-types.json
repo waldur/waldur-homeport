@@ -1,0 +1,12 @@
+[
+  {
+    "uuid": "72ecaac3ba9948f9857b75c00bd50eed",
+    "url": "/api/division-types/72ecaac3ba9948f9857b75c00bd50eed/",
+    "name": "Department"
+  },
+  {
+    "uuid": "3a6d247edd4c43e895d38bdf0e03ae82",
+    "url": "/api/division-types/3a6d247edd4c43e895d38bdf0e03ae82/",
+    "name": "Researcher"
+  }
+]
