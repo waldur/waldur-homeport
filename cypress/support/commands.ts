@@ -4,7 +4,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Chainable {
-      mockUser(): Chainable;
+      mockUser(userName?: string): Chainable;
       mockCustomer(): Chainable;
       mockChecklists(): Chainable;
       mockConfigs(): Chainable;
@@ -105,13 +105,18 @@ Cypress.Commands.add('mockConfigs', () => {
     .intercept('GET', '/api/events/', []);
 });
 
-Cypress.Commands.add('mockUser', () => {
+Cypress.Commands.add('mockUser', (userName) => {
+  const userData = userName === 'admin' ? 'admin.json' : 'alice.json';
+
+  const userConfiguration =
+    userName === 'admin' ? 'configuration-admin.json' : 'configuration.json';
+
   cy.intercept('GET', '/api/configuration/', {
-    fixture: 'configuration.json',
+    fixture: userConfiguration,
   })
     .intercept('POST', '/api-auth/password/', { token: 'valid' })
     .intercept('GET', '/api/users/me/', {
-      fixture: 'users/alice.json',
+      fixture: `users/${userData}`,
     })
     .intercept('GET', '/api/customer-permissions/', [])
     .intercept('GET', '/api/project-permissions/', [])

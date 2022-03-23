@@ -1,0 +1,183 @@
+{
+  "url": "/api/customers/895e38d197e748459189f19285119edf/",
+  "uuid": "895e38d197e748459189f19285119edf",
+  "created": "2020-10-26T09:51:25.554809Z",
+  "division": "/api/divisions/5a9e75a5a5ef473eb61a44e920a1130f/",
+  "division_name": "Group of citizen-scientists",
+  "division_uuid": "5a9e75a5a5ef473eb61a44e920a1130f",
+  "division_parent_name": "Citizen-scientists",
+  "division_parent_uuid": "83f8bf94e7b148d9bce03755ab692e1f",
+  "division_type_name": "Department",
+  "division_type_uuid": "72ecaac3ba9948f9857b75c00bd50eed",
+  "display_name": "All",
+  "projects": [
+    {
+      "url": "/api/projects/e48410f7608f4185a77902a1d0e8d75e/",
+      "uuid": "e48410f7608f4185a77902a1d0e8d75e",
+      "name": "Vision-oriented bifurcated capacity"
+    },
+    {
+      "url": "/api/projects/7473e687c7544560925cb88be9f42a89/",
+      "uuid": "7473e687c7544560925cb88be9f42a89",
+      "name": "Mandatory web-enabled concept"
+    },
+    {
+      "url": "/api/projects/5f05090ac8f94ad6a4bd2f5b750d64ae/",
+      "uuid": "5f05090ac8f94ad6a4bd2f5b750d64ae",
+      "name": "demo project"
+    },
+    {
+      "url": "/api/projects/e506990571634b1a8064980d1d124437/",
+      "uuid": "e506990571634b1a8064980d1d124437",
+      "name": "OpenStack"
+    },
+    {
+      "url": "/api/projects/06a02389a5f04fbba44364ddfda1f69b/",
+      "uuid": "06a02389a5f04fbba44364ddfda1f69b",
+      "name": "Universal local open architecture"
+    }
+  ],
+  "owners": [
+    {
+      "url": "/api/users/d0caf273c5694c5caf01278725ba527b/",
+      "uuid": "d0caf273c5694c5caf01278725ba527b",
+      "username": "155c8d19396f4d3680cfadb79d261d8a",
+      "full_name": "Robert Norman DDS",
+      "native_name": ""
+    },
+    {
+      "url": "/api/users/879f6afebfdb44f3af257ba63da3c80b/",
+      "uuid": "879f6afebfdb44f3af257ba63da3c80b",
+      "username": "3aa9aaa270604012aa35c4a06487bf24",
+      "full_name": "Shirley Pennington",
+      "native_name": ""
+    },
+    {
+      "url": "/api/users/34aee018014444ec89e7fa44c5aa88ea/",
+      "uuid": "34aee018014444ec89e7fa44c5aa88ea",
+      "username": "3abf689951af4353ae55ada71f0324ac",
+      "full_name": "David Gross",
+      "native_name": ""
+    },
+    {
+      "url": "/api/users/76b86ca234ce40d2a256391ec02e29bb/",
+      "uuid": "76b86ca234ce40d2a256391ec02e29bb",
+      "username": "713ac58a6fad42e29e5fdc8a342502a0",
+      "full_name": "Nancy Beard",
+      "native_name": ""
+    },
+    {
+      "url": "/api/users/7f529cbab44c42729169d0439697da7e/",
+      "uuid": "7f529cbab44c42729169d0439697da7e",
+      "username": "98327ba480e7431e9f8a5870d603bc40",
+      "full_name": "Laura Molina",
+      "native_name": ""
+    },
+    {
+      "url": "/api/users/3f153be7a4804b3abcbc4a607b3ac136/",
+      "uuid": "3f153be7a4804b3abcbc4a607b3ac136",
+      "username": "adminuser",
+      "full_name": "Admin",
+      "native_name": ""
+    },
+    {
+      "url": "/api/users/799a322ed5ac4779bc598a8e18bb8b86/",
+      "uuid": "799a322ed5ac4779bc598a8e18bb8b86",
+      "username": "f87b5b2e072149059a43f89dce465e6e",
+      "full_name": "Jessica Edwards",
+      "native_name": ""
+    },
+    {
+      "url": "/api/users/c46a7a8c620848c7bb643e28273cd136/",
+      "uuid": "c46a7a8c620848c7bb643e28273cd136",
+      "username": "owner",
+      "full_name": "",
+      "native_name": ""
+    }
+  ],
+  "support_users": [],
+  "service_managers": [
+    {
+      "url": "/api/users/199a885c881b450ea041e8638893a344/",
+      "uuid": "199a885c881b450ea041e8638893a344",
+      "username": "6b865e600027437aa800dbb93309ab17",
+      "full_name": "Adrian Nolan",
+      "native_name": ""
+    },
+    {
+      "url": "/api/users/31c43cc38b27407fb9d27de160e1ff27/",
+      "uuid": "31c43cc38b27407fb9d27de160e1ff27",
+      "username": "d134f5279cb94f27a391606e9eea4b7c",
+      "full_name": "Alan Williams",
+      "native_name": ""
+    },
+    {
+      "url": "/api/users/85c459fc9b3449cbabcd614bae5341fd/",
+      "uuid": "85c459fc9b3449cbabcd614bae5341fd",
+      "username": "ef0ebb9f594045a4ad6aa4dc3ac5cee8",
+      "full_name": "Adrian Little",
+      "native_name": ""
+    },
+    {
+      "url": "/api/users/799a322ed5ac4779bc598a8e18bb8b86/",
+      "uuid": "799a322ed5ac4779bc598a8e18bb8b86",
+      "username": "f87b5b2e072149059a43f89dce465e6e",
+      "full_name": "Jessica Edwards",
+      "native_name": ""
+    }
+  ],
+  "backend_id": "",
+  "image": null,
+  "default_tax_percent": "0.00",
+  "accounting_start_date": "2020-10-26T09:51:25.555324Z",
+  "name": "Allen-Rodriguez",
+  "native_name": "",
+  "abbreviation": "All",
+  "contact_details": "79408 Elizabeth Glen\r\nOlsenborough, ME 25711",
+  "agreement_number": null,
+  "email": "Allen-Rodriguez@example.com",
+  "phone_number": "",
+  "access_subnets": "",
+  "registration_code": "356-29-0556",
+  "homepage": "",
+  "domain": "example.com",
+  "vat_code": "",
+  "postal": "",
+  "address": "",
+  "bank_name": "",
+  "bank_account": "",
+  "latitude": null,
+  "longitude": null,
+  "country": "EE",
+  "payment_profiles": [
+    {
+      "uuid": "6553f71c115d45d781c24c665d33a34a",
+      "url": "/api/payment-profiles/6553f71c115d45d781c24c665d33a34a/",
+      "name": "test",
+      "organization_uuid": "895e38d197e748459189f19285119edf",
+      "organization": "/api/customers/895e38d197e748459189f19285119edf/",
+      "attributes": {
+        "end_date": "2021-05-14T08:00:00.000Z"
+      },
+      "payment_type": "fixed_price",
+      "payment_type_display": "Fixed-price contract",
+      "is_active": null
+    },
+    {
+      "uuid": "f5dacbfd03484d06a4c4390e63f885aa",
+      "url": "/api/payment-profiles/f5dacbfd03484d06a4c4390e63f885aa/",
+      "name": "demo",
+      "organization_uuid": "895e38d197e748459189f19285119edf",
+      "organization": "/api/customers/895e38d197e748459189f19285119edf/",
+      "attributes": {
+        "end_date": "2021-09-30T09:00:00.000Z",
+        "contract_sum": "12300",
+        "agreement_number": "sdfaa"
+      },
+      "payment_type": "fixed_price",
+      "payment_type_display": "Fixed-price contract",
+      "is_active": true
+    }
+  ],
+  "is_service_provider": true
+}
