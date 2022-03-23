@@ -1,0 +1,72 @@
+{
+  "url": "/api/users/3f153be7a4804b3abcbc4a607b3ac136/",
+  "uuid": "3f153be7a4804b3abcbc4a607b3ac136",
+  "username": "adminuser",
+  "full_name": "Admin",
+  "native_name": "",
+  "job_title": "test",
+  "email": "example@example.com",
+  "phone_number": "1234567890",
+  "organization": "test organization",
+  "civil_number": null,
+  "description": "test",
+  "is_staff": true,
+  "is_active": true,
+  "is_support": false,
+  "token": "44d29f9ddfa74d9255cb61b9431962f780dccbxx",
+  "token_lifetime": 3600,
+  "registration_method": "default",
+  "date_joined": "2021-03-01T09:55:30.043944Z",
+  "agreement_date": "2021-03-01T09:55:37.575225Z",
+  "preferred_language": "",
+  "competence": "",
+  "customer_permissions": [
+    {
+      "url": "/api/customer-permissions/261/",
+      "pk": 261,
+      "role": "owner",
+      "customer_uuid": "895e38d197e748459189f19285119edf",
+      "customer_name": "Allen-Rodriguez",
+      "customer_native_name": "",
+      "customer_abbreviation": "All"
+    }
+  ],
+  "project_permissions": [
+    {
+      "url": "/api/project-permissions/1044/",
+      "pk": 1044,
+      "role": "manager",
+      "project_uuid": "5f05090ac8f94ad6a4bd2f5b750d64ae",
+      "project_name": "demo project",
+      "customer_name": "Allen-Rodriguez"
+    },
+    {
+      "url": "/api/project-permissions/1040/",
+      "pk": 1040,
+      "role": "admin",
+      "project_uuid": "cf36932ef7c947fd8e8056e51564b0fe",
+      "project_name": "Up-sized maximized approach",
+      "customer_name": "Lopez, Jensen and Ortiz"
+    },
+    {
+      "url": "/api/project-permissions/1039/",
+      "pk": 1039,
+      "role": "admin",
+      "project_uuid": "64b13eac19d44f8aa3a573582df3a4b5",
+      "project_name": "Self-enabling fresh-thinking secured line",
+      "customer_name": "Bright PLC"
+    },
+    {
+      "url": "/api/project-permissions/1036/",
+      "pk": 1036,
+      "role": "manager",
+      "project_uuid": "e48410f7608f4185a77902a1d0e8d75e",
+      "project_name": "Vision-oriented bifurcated capacity",
+      "customer_name": "Allen-Rodriguez"
+    }
+  ],
+  "requested_email": null,
+  "affiliations": [],
+  "first_name": "Admin",
+  "last_name": ""
+}

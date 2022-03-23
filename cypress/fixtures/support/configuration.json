@@ -1,0 +1,229 @@
+{
+  "WALDUR_DISABLED_EXTENSIONS": null,
+  "FEATURES": {
+    "customer": {
+      "category_resources_list": false,
+      "project_requests": false,
+      "resource_requests": false,
+      "show_subnets": false,
+      "show_domain": false,
+      "billing": true,
+      "team": true,
+      "events": true,
+      "hide_organization_billing_step": true
+    },
+    "project": {
+      "member_role": true,
+      "team": true,
+      "estimated_cost": true,
+      "events": true,
+      "oecd_fos_2007_code": false,
+      "show_industry_flag": false
+    },
+    "user": {
+      "preferred_language": false,
+      "competence": false,
+      "ssh_keys": true,
+      "notifications": true
+    },
+    "marketplace": {
+      "offering_document": false,
+      "flows": false,
+      "private_offerings": true,
+      "import_resources": true,
+      "conceal_prices": false,
+      "terms_of_service": true,
+      "review": false
+    },
+    "support": {
+      "activity_stream": false,
+      "customers_list": true,
+      "pricelist": true,
+      "customers_requests": true,
+      "users": true,
+      "flowmap": false,
+      "heatmap": false,
+      "sankey_diagram": false,
+      "resources_treemap": false,
+      "shared_providers": true,
+      "resource_usage": false,
+      "vm_type_overview": false,
+      "offering_comments": false,
+      "conceal_change_request": false
+    },
+    "invitations": {
+      "conceal_civil_number": true,
+      "create_missing_user": false,
+      "disable_multiple_roles": false,
+      "show_tax_number": false,
+      "tax_number_required": false,
+      "civil_number_required": false,
+      "require_user_details": false,
+      "show_group_invitations": true
+    },
+    "invoice": {
+      "events": false
+    },
+    "openstack": {
+      "volume_types": true,
+      "server_groups": false
+    },
+    "rancher": {
+      "volume_mount_point": false
+    },
+    "slurm": {
+      "jobs": false
+    }
+  },
+  "LANGUAGES": [
+    [
+      "en",
+      "English"
+    ],
+    [
+      "et",
+      "Eesti"
+    ]
+  ],
+  "LANGUAGE_CODE": "en",
+  "WALDUR_CORE": {
+    "CURRENCY_NAME": "EUR",
+    "SITE_NAME": "Waldur",
+    "SITE_EMAIL": "",
+    "SITE_ADDRESS": "",
+    "SITE_PHONE": "",
+    "SITE_DESCRIPTION": "Your single pane of control for managing projects, teams and resources in a self-service manner.",
+    "MASTERMIND_URL": "",
+    "AUTHENTICATION_METHODS": [
+      "LOCAL_SIGNIN",
+      "SAML2",
+      "SOCIAL_SIGNUP"
+    ],
+    "INVITATIONS_ENABLED": true,
+    "VALIDATE_INVITATION_EMAIL": false,
+    "OWNER_CAN_MANAGE_CUSTOMER": false,
+    "OWNERS_CAN_MANAGE_OWNERS": false,
+    "NATIVE_NAME_ENABLED": false,
+    "ONLY_STAFF_MANAGES_SERVICES": false,
+    "PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS": [],
+    "TRANSLATION_DOMAIN": "",
+    "GOOGLE_ANALYTICS_ID": "",
+    "SUPPORT_PORTAL_URL": "",
+    "DOCS_URL": "",
+    "EXTERNAL_LINKS": [],
+    "SHORT_PAGE_TITLE": "Waldur",
+    "FULL_PAGE_TITLE": "Waldur | Cloud Service Management",
+    "USER_MANDATORY_FIELDS": [
+      "full_name",
+      "email"
+    ],
+    "USER_REGISTRATION_HIDDEN_FIELDS": [
+      "registration_method",
+      "job_title",
+      "phone_number",
+      "organization"
+    ],
+    "INVITATION_CIVIL_NUMBER_LABEL": "",
+    "INVITATION_CIVIL_NUMBER_HELP_TEXT": "Must start with a country prefix ie EE34501234215",
+    "INVITATION_TAX_NUMBER_LABEL": "",
+    "HOMEPORT_SENTRY_DSN": null,
+    "SIDEBAR_LOGO": null,
+    "POWERED_BY_LOGO": null,
+    "BRAND_COLOR": "#3a8500",
+    "HERO_IMAGE": null,
+    "HERO_LINK_LABEL": null,
+    "HERO_LINK_URL": null
+  },
+  "WALDUR_AUTH_SOCIAL": {
+    "SMARTIDEE_CLIENT_ID": "",
+    "TARA_CLIENT_ID": "",
+    "TARA_SANDBOX": true,
+    "TARA_LABEL": "Riigi Autentimisteenus",
+    "KEYCLOAK_CLIENT_ID": "waldur",
+    "KEYCLOAK_LABEL": "Keycloak",
+    "KEYCLOAK_AUTH_URL": "/auth/realms/Waldur/protocol/openid-connect/auth",
+    "EDUTEAMS_CLIENT_ID": "",
+    "EDUTEAMS_LABEL": "eduTEAMS",
+    "EDUTEAMS_AUTH_URL": "https://proxy.acc.eduteams.org/saml2sp/OIDC/authorization",
+    "REMOTE_EDUTEAMS_ENABLED": false,
+    "ENABLE_EDUTEAMS_SYNC": false
+  },
+  "WALDUR_FREEIPA": {
+    "USERNAME_PREFIX": "hpcu_",
+    "ENABLED": true
+  },
+  "WALDUR_KEYCLOAK": {
+    "ENABLED": false
+  },
+  "WALDUR_OPENSTACK": {
+    "MANAGER_CAN_MANAGE_TENANTS": false,
+    "TENANT_CREDENTIALS_VISIBLE": false
+  },
+  "WALDUR_OPENSTACK_TENANT": {
+    "ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS": true,
+    "REQUIRE_AVAILABILITY_ZONE": false
+  },
+  "WALDUR_MARKETPLACE": {
+    "OWNER_CAN_APPROVE_ORDER": true,
+    "MANAGER_CAN_APPROVE_ORDER": false,
+    "ADMIN_CAN_APPROVE_ORDER": false,
+    "OWNER_CAN_REGISTER_SERVICE_PROVIDER": false,
+    "ANONYMOUS_USER_CAN_VIEW_OFFERINGS": true,
+    "ENABLE_RESOURCE_END_DATE": true
+  },
+  "WALDUR_AUTH_SAML2": {
+    "ENABLE_SINGLE_LOGOUT": false,
+    "ALLOW_TO_SELECT_IDENTITY_PROVIDER": true,
+    "IDENTITY_PROVIDER_URL": null,
+    "IDENTITY_PROVIDER_LABEL": null,
+    "DISCOVERY_SERVICE_URL": null,
+    "DISCOVERY_SERVICE_LABEL": null
+  },
+  "WALDUR_AUTH_VALIMO": {
+    "LABEL": "Mobile ID",
+    "MOBILE_PREFIX": "+372"
+  },
+  "WALDUR_JIRA": {},
+  "WALDUR_RANCHER": {
+    "ROLE_REQUIREMENT": {
+      "controllplane": {
+        "CPU": 2,
+        "RAM": 4096
+      },
+      "etcd": {
+        "CPU": 2,
+        "RAM": 4096
+      },
+      "worker": {
+        "CPU": 1,
+        "RAM": 1024
+      }
+    },
+    "MOUNT_POINT_CHOICES": [
+      "/var/lib/docker",
+      "/var/lib/etcd",
+      "/opt/media01"
+    ],
+    "MOUNT_POINT_MIN_SIZE": {
+      "/var/lib/docker": 64,
+      "/var/lib/etcd": 10
+    },
+    "SYSTEM_VOLUME_MIN_SIZE": 64,
+    "READ_ONLY_MODE": false,
+    "MOUNT_POINT_CHOICE_IS_MANDATORY": false,
+    "DISABLE_SSH_KEY_INJECTION": false,
+    "DISABLE_DATA_VOLUME_CREATION": false
+  },
+  "WALDUR_VMWARE": {
+    "BASIC_MODE": false
+  },
+  "WALDUR_INVOICES": {},
+  "WALDUR_MARKETPLACE_OPENSTACK": {
+    "INSTANCE_CATEGORY_UUID": "e5a5e7651f394d10958328bbc3e967eb",
+    "VOLUME_CATEGORY_UUID": null,
+    "TENANT_CATEGORY_UUID": null
+  },
+  "WALDUR_SUPPORT": {
+    "ENABLED": true
+  }
+}
