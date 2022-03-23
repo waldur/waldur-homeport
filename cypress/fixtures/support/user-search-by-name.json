@@ -1,0 +1,38 @@
+[
+  {
+    "url": "/api/users/57223602e47648b0bef2da4c1d430f5f/",
+    "uuid": "57223602e47648b0bef2da4c1d430f5f",
+    "username": "0024c6a7885940bbb156e82073bc0244",
+    "full_name": "Tara Pierce",
+    "native_name": "",
+    "job_title": "Psychotherapist, child",
+    "email": "TaraPierce@example.com",
+    "phone_number": "(452)515-3460",
+    "organization": "Howard-Martin",
+    "civil_number": "367-32-5567",
+    "description": "",
+    "is_staff": true,
+    "is_active": true,
+    "is_support": false,
+    "registration_method": "saml2",
+    "date_joined": "2019-08-14T12:24:02.282730Z",
+    "agreement_date": "2019-08-14T12:24:08.443489Z",
+    "preferred_language": "et",
+    "competence": "",
+    "customer_permissions": [],
+    "project_permissions": [
+      {
+        "url": "/api/project-permissions/544/",
+        "pk": 544,
+        "role": "manager",
+        "project_uuid": "fc161955cc1f430fa0903a9b9f526f3b",
+        "project_name": "Reduced national moratorium",
+        "customer_name": "Padilla-Brown"
+      }
+    ],
+    "requested_email": null,
+    "affiliations": [],
+    "first_name": "Tara",
+    "last_name": "Pierce"
+  }
+]
