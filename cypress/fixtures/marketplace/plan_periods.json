@@ -1,0 +1,22 @@
+[
+  {
+    "uuid": "92e4f64db29645d88ede2b296c7c1126",
+    "plan_name": "a",
+    "plan_uuid": "21a25e8035e940f199534e85bb45daf1",
+    "start": "2022-01-12T16:44:51.872480Z",
+    "end": null,
+    "components": [
+      {
+        "uuid": "4c0759c97ff5413bbbcf22054bcdb600",
+        "created": "2022-03-01T00:00:05.872801Z",
+        "description": "Test Description!",
+        "type": "a",
+        "name": "a",
+        "measured_unit": "",
+        "usage": 120,
+        "date": "2022-03-01T00:00:05.786307Z",
+        "recurring": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,116 @@
+{
+  "url": "/api/marketplace-offerings/a472d235ef014ecdad3b0d8955a84975/",
+  "uuid": "a472d235ef014ecdad3b0d8955a84975",
+  "created": "2021-03-16T14:38:27.900912Z",
+  "name": "Test",
+  "description": "<p>Test description</p>",
+  "full_description": "<p>Test full description</p>",
+  "terms_of_service_link": "",
+  "privacy_policy_link": "",
+  "access_url": "",
+  "customer": "/api/customers/895e38d197e748459189f19285119edf/",
+  "customer_uuid": "895e38d197e748459189f19285119edf",
+  "customer_name": "Allen-Rodriguez",
+  "category": "/api/marketplace-categories/4588ff519260461893ab371b8fe83363/",
+  "category_uuid": "4588ff519260461893ab371b8fe83363",
+  "category_title": "HPC",
+  "rating": null,
+  "attributes": {
+    "hpc_Security_certification": [
+      "hpc_Security_certification_iskel"
+    ]
+  },
+  "options": {
+    "order": [
+      "test",
+      "namename"
+    ]
+  },
+  "components": [
+    {
+      "billing_type": "usage",
+      "type": "a",
+      "name": "a",
+      "description": "",
+      "measured_unit": "",
+      "limit_period": null,
+      "limit_amount": null,
+      "article_code": "",
+      "max_value": null,
+      "min_value": null,
+      "is_boolean": false,
+      "default_limit": null,
+      "factor": null,
+      "is_builtin": false
+    },
+    {
+      "billing_type": "usage",
+      "type": "b",
+      "name": "b",
+      "description": "",
+      "measured_unit": "",
+      "limit_period": null,
+      "limit_amount": null,
+      "article_code": "",
+      "max_value": null,
+      "min_value": null,
+      "is_boolean": false,
+      "default_limit": null,
+      "factor": null,
+      "is_builtin": false
+    }
+  ],
+  "plugin_options": {},
+  "secret_options": {},
+  "state": "Active",
+  "native_name": "",
+  "native_description": "",
+  "vendor_details": "",
+  "thumbnail": null,
+  "order_item_count": 4.0,
+  "plans": [
+    {
+      "url": "/api/marketplace-plans/21a25e8035e940f199534e85bb45daf1/",
+      "uuid": "21a25e8035e940f199534e85bb45daf1",
+      "name": "a",
+      "description": "",
+      "article_code": "",
+      "prices": {
+        "a": 1.0,
+        "b": 2.0
+      },
+      "quotas": {
+        "a": 0,
+        "b": 0
+      },
+      "max_amount": null,
+      "archived": false,
+      "is_active": true,
+      "unit_price": "0.0000000",
+      "unit": "month",
+      "init_price": 0,
+      "switch_price": 0,
+      "backend_id": "",
+      "plan_type": "usage-based",
+      "minimal_price": 0
+    }
+  ],
+  "screenshots": [],
+  "type": "Marketplace.Basic",
+  "shared": true,
+  "billable": true,
+  "scope": null,
+  "files": [],
+  "quotas": null,
+  "paused_reason": "",
+  "datacite_doi": "",
+  "citation_count": -1,
+  "latitude": 58.3801207,
+  "longitude": 26.72245,
+  "country": "",
+  "backend_id": "",
+  "divisions": [],
+  "image": "/media/files/offering/a472d235ef014ecdad3b0d8955a84975.png",
+  "google_calendar_is_public": null,
+  "google_calendar_link": null
+}
