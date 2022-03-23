@@ -1,0 +1,17 @@
+[
+  {
+    "url": "/api/user-group-invitations/d3830f4257d84e239f9700641227c222/",
+    "uuid": "d3830f4257d84e239f9700641227c222",
+    "project": "/api/projects/7473e687c7544560925cb88be9f42a89/",
+    "project_role": "manager",
+    "project_name": "Mandatory web-enabled concept",
+    "customer": "/api/customers/895e38d197e748459189f19285119edf/",
+    "customer_role": null,
+    "customer_name": "Allen-Rodriguez",
+    "created": "2021-11-26T16:36:03.647766Z",
+    "expires": "2021-12-03T16:36:03.647766Z",
+    "created_by_full_name": "Admin",
+    "created_by_username": "adminuser",
+    "is_active": true
+  }
+]
