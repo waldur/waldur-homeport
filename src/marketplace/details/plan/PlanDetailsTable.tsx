@@ -92,7 +92,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
     (subTotal, component) => subTotal + component.subTotal,
     0,
   );
-  const hasExtraRows = fixedRows.length > 0 || limitedRows.length > 0;
+  const hasExtraRows = fixedRows.length > 0 || otherLimitedRows.length > 0;
 
   return (
     <div className={props.formGroupClassName}>
@@ -158,6 +158,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
             <TotalLimitComponentsTable
               components={totalLimitedRows}
               total={totalLimitTotal}
+              viewMode={props.viewMode}
             />
           </>
         )}
