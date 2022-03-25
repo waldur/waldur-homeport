@@ -1,0 +1,274 @@
+[
+  {
+    "key": "customer",
+    "description": "Organization workspace",
+    "items": [
+      {
+        "key": "category_resources_list",
+        "description": "Render component usage charts in organization dashboard."
+      },
+      {
+        "key": "project_requests",
+        "description": "Render list of project creation requests in organization dashboard."
+      },
+      {
+        "key": "resource_requests",
+        "description": "Render list of resource creation requests in organization dashboard."
+      },
+      {
+        "key": "show_subnets",
+        "description": "Render list of subnets from where connection to self-service is allowed in organization details dialog."
+      },
+      {
+        "key": "show_domain",
+        "description": "Allows to hide domain field in organization detail."
+      },
+      {
+        "key": "billing",
+        "description": "Render billing menu in organization sidebar."
+      },
+      {
+        "key": "team",
+        "description": "Enable team management in organization workspace."
+      },
+      {
+        "key": "events",
+        "description": "Enable audit log in organization workspace."
+      },
+      {
+        "key": "hide_organization_billing_step",
+        "description": "Hide billing step in organization creation wizard."
+      }
+    ]
+  },
+  {
+    "key": "project",
+    "description": "Project workspace",
+    "items": [
+      {
+        "key": "member_role",
+        "description": "Allow to grant user a project member role."
+      },
+      {
+        "key": "team",
+        "description": "Enable team management in project workspace."
+      },
+      {
+        "key": "estimated_cost",
+        "description": "Render estimated cost column in projects list."
+      },
+      {
+        "key": "events",
+        "description": "Enable audit log in project workspace."
+      },
+      {
+        "key": "oecd_fos_2007_code",
+        "description": "Enable OECD code."
+      },
+      {
+        "key": "show_industry_flag",
+        "description": "Show industry flag."
+      }
+    ]
+  },
+  {
+    "key": "user",
+    "description": "User workspace",
+    "items": [
+      {
+        "key": "preferred_language",
+        "description": "Render preferred language column in users list."
+      },
+      {
+        "key": "competence",
+        "description": "Render competence column in users list."
+      },
+      {
+        "key": "ssh_keys",
+        "description": "Enable SSH keys management in user workspace."
+      },
+      {
+        "key": "notifications",
+        "description": "Enable email and webhook notifications management in user workspace."
+      }
+    ]
+  },
+  {
+    "key": "marketplace",
+    "description": "Marketplace offerings and resources",
+    "items": [
+      {
+        "key": "offering_document",
+        "description": "Allow to attach document to marketplace offering."
+      },
+      {
+        "key": "flows",
+        "description": "Allow to submit organization, project and resource creation requests simultaneously."
+      },
+      {
+        "key": "private_offerings",
+        "description": "Render list of private marketplace service providers in organization workspace."
+      },
+      {
+        "key": "import_resources",
+        "description": "Allow to import resources from service provider to project."
+      },
+      {
+        "key": "conceal_prices",
+        "description": "Do not render prices in shopping cart and order details."
+      },
+      {
+        "key": "terms_of_service",
+        "description": "Render terms of service when offering is ordered."
+      },
+      {
+        "key": "review",
+        "description": "Allow to write a review for marketplace offering."
+      }
+    ]
+  },
+  {
+    "key": "support",
+    "description": "Support workspace",
+    "items": [
+      {
+        "key": "activity_stream",
+        "description": "Render list of recent comments in support dashboard."
+      },
+      {
+        "key": "customers_list",
+        "description": "Render list of organizations in support workspace."
+      },
+      {
+        "key": "pricelist",
+        "description": "Render marketplace plan components pricelist in support workspace."
+      },
+      {
+        "key": "customers_requests",
+        "description": "Render list of organization creation requests in support workspace."
+      },
+      {
+        "key": "users",
+        "description": "Render list of users in support workspace."
+      },
+      {
+        "key": "flowmap",
+        "description": "Render service usage as a flowmap chart in support workspace."
+      },
+      {
+        "key": "heatmap",
+        "description": "Render service usage as a heatmap chart in support workspace."
+      },
+      {
+        "key": "sankey_diagram",
+        "description": "Render service usage as a sankey chart in support workspace."
+      },
+      {
+        "key": "resources_treemap",
+        "description": "Render resource usage as a treemap chart in support workspace."
+      },
+      {
+        "key": "shared_providers",
+        "description": "Render overview of shared marketplace service providers in support workspace."
+      },
+      {
+        "key": "resource_usage",
+        "description": "Enable resource usage overview charts in support workspace."
+      },
+      {
+        "key": "vm_type_overview",
+        "description": "Enable VM type overview in support workspace."
+      },
+      {
+        "key": "offering_comments",
+        "description": "Render comments tab in request-based item details page."
+      },
+      {
+        "key": "conceal_change_request",
+        "description": "Conceal \"Change request\" from a selection of issue types for non-staff/non-support users."
+      }
+    ]
+  },
+  {
+    "key": "invitations",
+    "description": "Invitations management",
+    "items": [
+      {
+        "key": "conceal_civil_number",
+        "description": "Conceal civil number in invitation creation dialog."
+      },
+      {
+        "key": "create_missing_user",
+        "description": "Allow to create FreeIPA user using details specified in invitation if user does not exist yet."
+      },
+      {
+        "key": "disable_multiple_roles",
+        "description": "Do not allow user to grant multiple roles in the same project or organization using invitation."
+      },
+      {
+        "key": "show_tax_number",
+        "description": "Show tax number field in invitation creation form."
+      },
+      {
+        "key": "tax_number_required",
+        "description": "Make tax number field mandatory in invitation creation form."
+      },
+      {
+        "key": "civil_number_required",
+        "description": "Make civil number field mandatory in invitation creation form."
+      },
+      {
+        "key": "require_user_details",
+        "description": "Render \"Show user details\" button in invitation creation form."
+      },
+      {
+        "key": "show_group_invitations",
+        "description": "Render elements supporting group invitation management."
+      }
+    ]
+  },
+  {
+    "key": "invoice",
+    "description": "Invoice management",
+    "items": [
+      {
+        "key": "events",
+        "description": "Render list of events related to invoice item in modal dialog."
+      }
+    ]
+  },
+  {
+    "key": "openstack",
+    "description": "OpenStack resources provisioning",
+    "items": [
+      {
+        "key": "volume_types",
+        "description": "Allow to select OpenStack volume type when instance or volume is provisioned."
+      },
+      {
+        "key": "server_groups",
+        "description": "Render server groups in OpenStack tenant details"
+      }
+    ]
+  },
+  {
+    "key": "rancher",
+    "description": "Rancher resources provisioning",
+    "items": [
+      {
+        "key": "volume_mount_point",
+        "description": "Allow to select mount point for data volume when Rancher cluster is provisioned."
+      }
+    ]
+  },
+  {
+    "key": "slurm",
+    "description": "SLURM resources provisioning",
+    "items": [
+      {
+        "key": "jobs",
+        "description": "Render list of SLURM jobs as a separate tab in allocation details page."
+      }
+    ]
+  }
+]
