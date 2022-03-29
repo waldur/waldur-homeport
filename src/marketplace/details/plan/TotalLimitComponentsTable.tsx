@@ -1,6 +1,7 @@
 import { Table } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { Field } from 'redux-form';
+import { connect, useSelector } from 'react-redux';
+import { compose } from 'redux';
+import { Field, reduxForm } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
 import { formatCurrency } from '@waldur/core/formatCurrency';
@@ -15,7 +16,7 @@ import { RootState } from '@waldur/store/reducers';
 
 import { Component } from './types';
 
-export const TotalLimitComponentsTable = (props: {
+const PureTotalLimitComponentsTable = (props: {
   components: Component[];
   total: number;
 }) => {
@@ -85,3 +86,24 @@ export const TotalLimitComponentsTable = (props: {
     </Table>
   );
 };
+
+const mapStateToProps = (_state, ownProps) => {
+  const values = ownProps.components.reduce((acc, component) => {
+    acc[component.type] = component.amount;
+    return acc;
+  }, {});
+  return {
+    initialValues: {
+      limits: values,
+    },
+  };
+};
+
+const enhance = compose(
+  connect(mapStateToProps),
+  reduxForm({
+    form: 'marketplace.conceal_prices',
+  }),
+);
+
+export const TotalLimitComponentsTable = enhance(PureTotalLimitComponentsTable);
