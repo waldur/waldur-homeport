@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
@@ -20,77 +21,81 @@ import { getLimitAmounts } from './utils';
 interface TotalLimitComponentsTableProps {
   components: Component[];
   total: number;
+  viewMode: boolean;
 }
 
-const PureTotalLimitComponentsTable = (
-  props: TotalLimitComponentsTableProps,
-) => {
-  const shouldConcealPrices = useSelector((state: RootState) =>
-    isVisible(state, 'marketplace.conceal_prices'),
-  );
-  return (
-    <Table bordered={true}>
-      <thead>
-        <tr>
-          <th className="col-sm-1">{translate('Component name')}</th>
-          <th className="col-sm-1">{translate('Unit')}</th>
-          <th className="col-sm-1">{translate('Quantity')}</th>
-          {!shouldConcealPrices && (
-            <th>
-              {translate('Price per unit')}
-              <PriceTooltip />
-            </th>
-          )}
-          <th>{translate('Subtotal')}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {props.components.map((component, index) => (
-          <tr key={index}>
-            <td>{component.name}</td>
-            <td>{component.measured_unit || 'N/A'}</td>
-            <td>
-              <Field
-                name={`limits.${component.type}`}
-                component="input"
-                type="number"
-                parse={parseIntField}
-                format={formatIntField}
-                className="form-control"
-              />
-            </td>
+export const PureTotalLimitComponentsTable: FunctionComponent<TotalLimitComponentsTableProps> =
+  (props) => {
+    const shouldConcealPrices = useSelector((state: RootState) =>
+      isVisible(state, 'marketplace.conceal_prices'),
+    );
+    return (
+      <Table bordered={true}>
+        <thead>
+          <tr>
+            <th className="col-sm-1">{translate('Component name')}</th>
+            <th className="col-sm-1">{translate('Unit')}</th>
+            <th className="col-sm-1">{translate('Quantity')}</th>
             {!shouldConcealPrices && (
+              <th>
+                {translate('Price per unit')}
+                <PriceTooltip />
+              </th>
+            )}
+            <th>{translate('Subtotal')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.components.map((component, index) => (
+            <tr key={index}>
+              <td>{component.name}</td>
+              <td>{component.measured_unit || 'N/A'}</td>
+              <td>
+                {props.viewMode ? (
+                  component.amount
+                ) : (
+                  <Field
+                    name={`limits.${component.type}`}
+                    component="input"
+                    type="number"
+                    parse={parseIntField}
+                    format={formatIntField}
+                    className="form-control"
+                  />
+                )}
+              </td>
+              {!shouldConcealPrices && (
+                <td>
+                  {formatCurrency(
+                    component.price,
+                    ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+                    4,
+                  )}
+                </td>
+              )}
               <td>
                 {formatCurrency(
-                  component.price,
+                  component.subTotal,
                   ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
                   4,
                 )}
               </td>
-            )}
+            </tr>
+          ))}
+          <tr>
+            <td colSpan={3}>{translate('Total')}</td>
             <td>
               {formatCurrency(
-                component.subTotal,
+                props.total,
                 ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
                 4,
               )}
             </td>
           </tr>
-        ))}
-        <tr>
-          <td colSpan={3}>{translate('Total')}</td>
-          <td>
-            {formatCurrency(
-              props.total,
-              ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-              4,
-            )}
-          </td>
-        </tr>
-      </tbody>
-    </Table>
-  );
-};
+        </tbody>
+      </Table>
+    );
+  };
 
 const mapStateToProps = (_state, ownProps: TotalLimitComponentsTableProps) => {
   return {
