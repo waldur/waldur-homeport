@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { PanelBody, Tab, Tabs } from 'react-bootstrap';
+import { Card, Tab, Tabs } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { EChart } from '@waldur/core/EChart';
@@ -32,13 +32,12 @@ export const AllocationUsageTable: FunctionComponent<{ resource }> = ({
         id="allocation-usage-tabs"
         unmountOnExit
         mountOnEnter
-        animation
       >
         {charts.map((chart, index) => (
           <Tab title={chart.name} key={index} eventKey={`tab-${index}`}>
-            <PanelBody>
+            <Card.Body>
               <EChart options={chart.options} height="350px" />
-            </PanelBody>
+            </Card.Body>
           </Tab>
         ))}
       </Tabs>

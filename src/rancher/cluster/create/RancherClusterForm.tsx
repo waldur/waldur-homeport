@@ -52,7 +52,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
   );
 
   return (
-    <form className="form-horizontal">
+    <form>
       <FormContainer
         submitting={props.submitting}
         labelClass="col-sm-3"

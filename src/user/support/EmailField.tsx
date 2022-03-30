@@ -1,5 +1,5 @@
 import { useCallback, useState, FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { post } from '@waldur/core/api';
@@ -51,19 +51,19 @@ export const EmailField: FunctionComponent<any> = (props) => {
 
   return (
     <>
-      <div className="form-group">
-        <label className="col-sm-3 col-md-4 col-lg-3 control-label">
+      <Form.Group>
+        <Form.Label className="col-sm-3 col-md-4 col-lg-3">
           {translate('Email')}
-        </label>
+        </Form.Label>
         <div className="col-sm-9 col-md-8">
-          <p className="form-control-static">{props.user.email}</p>
+          <Form.Control plaintext>{props.user.email}</Form.Control>
           {!props.user.requested_email && !props.protected && (
             <Button onClick={openChangeDialog}>
               {translate('Change email')}
             </Button>
           )}
         </div>
-      </div>
+      </Form.Group>
       {props.user.requested_email && !props.protected && (
         <RequestedEmail
           requestedEmail={props.user.requested_email}

@@ -1,11 +1,4 @@
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-  Col,
-  Row,
-} from 'react-bootstrap';
+import { Modal, Col, Row } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
@@ -62,12 +55,12 @@ export const PagePolicies = connect<{}, {}, { offering }>((_, props) => ({
       };
       return (
         <form onSubmit={handleSubmit(updateOfferingHandler)}>
-          <ModalHeader onClick={onReturn} style={{ cursor: 'pointer' }}>
-            <ModalTitle>
+          <Modal.Header onClick={onReturn} style={{ cursor: 'pointer' }}>
+            <Modal.Title>
               <i className="fa fa-arrow-left"></i> {translate('Access policy')}
-            </ModalTitle>
-          </ModalHeader>
-          <ModalBody>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <Row>
               <Col lg={12}>
                 {loading ? (
@@ -83,14 +76,14 @@ export const PagePolicies = connect<{}, {}, { offering }>((_, props) => ({
                 )}
               </Col>
             </Row>
-          </ModalBody>
-          <ModalFooter>
+          </Modal.Body>
+          <Modal.Footer>
             <SubmitButton
               disabled={invalid}
               submitting={submitting}
               label={translate('Update')}
             />
-          </ModalFooter>
+          </Modal.Footer>
         </form>
       );
     },

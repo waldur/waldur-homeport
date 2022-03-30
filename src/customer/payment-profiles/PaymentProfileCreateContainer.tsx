@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
@@ -31,10 +32,7 @@ const PaymentProfileCreate = (props) => {
   );
 
   return (
-    <form
-      onSubmit={props.handleSubmit(props.submitRequest)}
-      className="form-horizontal"
-    >
+    <form onSubmit={props.handleSubmit(props.submitRequest)}>
       <FormContainer
         submitting={false}
         labelClass="col-sm-2"
@@ -87,7 +85,7 @@ const PaymentProfileCreate = (props) => {
           )}
         />
 
-        <div className="form-group">
+        <Form.Group>
           <div
             className="col-sm-8 col-sm-offset-2"
             style={{ display: 'flex', justifyContent: 'flex-end' }}
@@ -98,7 +96,7 @@ const PaymentProfileCreate = (props) => {
               label={translate('Submit')}
             />
           </div>
-        </div>
+        </Form.Group>
       </FormContainer>
     </form>
   );

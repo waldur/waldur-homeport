@@ -1,4 +1,4 @@
-import { Dropdown, DropdownMenu, DropdownToggle } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -15,9 +15,11 @@ export const InvoiceItemActions = ({ item, refreshInvoiceItems }) => {
   }
 
   return (
-    <Dropdown id="invoice-item-actions" pullRight>
-      <DropdownToggle className="btn-sm">{translate('Actions')}</DropdownToggle>
-      <DropdownMenu>
+    <Dropdown id="invoice-item-actions" align="start">
+      <Dropdown.Toggle className="btn-sm">
+        {translate('Actions')}
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
         <InvoiceItemDelete
           item={item}
           refreshInvoiceItems={refreshInvoiceItems}
@@ -30,7 +32,7 @@ export const InvoiceItemActions = ({ item, refreshInvoiceItems }) => {
           item={item}
           refreshInvoiceItems={refreshInvoiceItems}
         />
-      </DropdownMenu>
+      </Dropdown.Menu>
     </Dropdown>
   );
 };

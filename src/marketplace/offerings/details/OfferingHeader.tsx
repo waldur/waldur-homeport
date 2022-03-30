@@ -4,7 +4,7 @@ import { Col } from 'react-bootstrap';
 import { AuthService } from '@waldur/auth/AuthService';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { GoogleCalendarLinkField } from '@waldur/marketplace/offerings/details/GoogleCalendarLinkField';
@@ -38,24 +38,24 @@ export const OfferingHeader: React.FC<OfferingHeaderProps> = (props) => (
       <Field
         label={translate('Shared')}
         value={
-          <Tooltip
+          <Tip
             id="shared-flag"
             label={translate('Accessible to all customers.')}
           >
             <BooleanField value={props.offering.shared} />
-          </Tooltip>
+          </Tip>
         }
       />
 
       <Field
         label={translate('Billing enabled')}
         value={
-          <Tooltip
+          <Tip
             id="billing-flag"
             label={translate('Purchase and usage is invoiced.')}
           >
             <BooleanField value={props.offering.billable} />
-          </Tooltip>
+          </Tip>
         }
       />
 

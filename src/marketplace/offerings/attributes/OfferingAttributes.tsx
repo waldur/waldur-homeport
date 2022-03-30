@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
@@ -20,17 +20,17 @@ export const OfferingAttributes: React.FC<OfferingAttributesProps> = (
   <>
     {props.sections.map((section, sectionIndex) => (
       <div key={sectionIndex}>
-        <div className="form-group">
+        <Form.Group>
           <Col smOffset={props.labelCols} sm={props.controlCols}>
-            <p className="form-control-static">
+            <Form.Control plaintext>
               <strong>{section.title}</strong>
-            </p>
+            </Form.Control>
           </Col>
-        </div>
+        </Form.Group>
         {section.attributes.map((attribute, attributeIndex) => {
           if (attribute.type === 'boolean') {
             return (
-              <div className="form-group" key={attributeIndex}>
+              <Form.Group key={attributeIndex}>
                 <Col smOffset={props.labelCols} sm={props.controlCols}>
                   <Field
                     name={`attributes.${attribute.key}`}
@@ -42,25 +42,20 @@ export const OfferingAttributes: React.FC<OfferingAttributesProps> = (
                     )}
                   />
                 </Col>
-              </div>
+              </Form.Group>
             );
           }
           const attr = configAttrField(attribute);
           return (
-            <div className="form-group" key={attributeIndex}>
-              <Col
-                className="control-label"
-                sm={props.labelCols}
-                componentClass="label"
-              >
+            <Form.Group key={attributeIndex}>
+              <Col sm={props.labelCols} as={Form.Label}>
                 {attribute.title}
               </Col>
               <Col sm={props.controlCols}>
                 <Field
                   key={attributeIndex}
                   name={`attributes.${attribute.key}`}
-                  component="input"
-                  className="form-control"
+                  component={Form.Control}
                   {...attr}
                 />
                 <Field
@@ -71,7 +66,7 @@ export const OfferingAttributes: React.FC<OfferingAttributesProps> = (
                   )}
                 />
               </Col>
-            </div>
+            </Form.Group>
           );
         })}
       </div>

@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
-import { ControlLabel, FormGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { DateField } from '@waldur/form/DateField';
@@ -13,10 +13,8 @@ interface OwnerExpirationTimeGroupProps {
 
 export const OwnerExpirationTimeGroup: FunctionComponent<OwnerExpirationTimeGroupProps> =
   ({ disabled }) => (
-    <FormGroup>
-      <ControlLabel>
-        {translate('Organization owner role expires on')}
-      </ControlLabel>
+    <Form.Group>
+      <Form.Label>{translate('Organization owner role expires on')}</Form.Label>
       <Field
         name="expiration_time"
         component={DateField}
@@ -25,7 +23,7 @@ export const OwnerExpirationTimeGroup: FunctionComponent<OwnerExpirationTimeGrou
         weekStartsOn={1}
         {...datePickerOverlayContainerInDialogs()}
       />
-    </FormGroup>
+    </Form.Group>
   );
 
 OwnerExpirationTimeGroup.defaultProps = {

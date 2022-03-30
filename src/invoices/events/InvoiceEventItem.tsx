@@ -47,8 +47,8 @@ export const InvoiceEventItem: FunctionComponent<InvoiceEventItemProps> = ({
       <div className="vertical-timeline-content">
         {event.message}
         <Button
-          bsSize="sm"
-          bsStyle="primary"
+          size="sm"
+          variant="primary"
           onClick={() => showEventDetails(event)}
         >
           <i className="fa fa-eye"></i>

@@ -7,7 +7,7 @@
 
 import { triggerTransition } from '@uirouter/redux';
 import { FC, useEffect, useState } from 'react';
-import { FormGroup, ToggleButton } from 'react-bootstrap';
+import { Form, ToggleButton } from 'react-bootstrap';
 import { connect, ConnectedProps } from 'react-redux';
 import { compose } from 'redux';
 import {
@@ -134,10 +134,7 @@ const SelectAffiliationDialogContainer: FC<
     }
   }, [props.resolve]);
   return (
-    <form
-      onSubmit={props.handleSubmit(props.onSubmit)}
-      className="form-horizontal"
-    >
+    <form onSubmit={props.handleSubmit(props.onSubmit)}>
       <ModalDialog
         title={translate('Select affiliation')}
         footer={
@@ -159,10 +156,10 @@ const SelectAffiliationDialogContainer: FC<
             labelClass="col-sm-2"
             controlClass="col-sm-8"
           >
-            <FormGroup>
-              <label className="control-label col-sm-2">
+            <Form.Group>
+              <Form.Label className="col-sm-2">
                 {translate('Select affiliation')}
-              </label>
+              </Form.Label>
               <div className="col-sm-8">
                 <Field
                   name="affiliation"
@@ -178,7 +175,7 @@ const SelectAffiliationDialogContainer: FC<
                   </ToggleButton>
                 </Field>
               </div>
-            </FormGroup>
+            </Form.Group>
             {props.affiliationValue === ORGANIZATION_ROUTE ? (
               <SelectField
                 name="organization"

@@ -44,7 +44,7 @@ export const OfferingCostsChart: FunctionComponent<OfferingCostChartProps> = (
     return <>{translate('Unable to load offering cost chart.')}</>;
   }
   return (
-    <div className="ibox-content m-t-md p-m">
+    <div className="card-body m-t-md p-m">
       <EChart options={option} height="400px" />
     </div>
   );

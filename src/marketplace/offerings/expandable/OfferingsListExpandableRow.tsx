@@ -1,4 +1,5 @@
 import { useState, FunctionComponent } from 'react';
+import { Card } from 'react-bootstrap';
 
 import { OfferingUsageChart } from '@waldur/marketplace/offerings/expandable/OfferingUsageChart';
 import { Offering } from '@waldur/marketplace/types';
@@ -17,12 +18,12 @@ export const OfferingsListExpandableRow: FunctionComponent<{
   return (
     <>
       <OfferingCustomersListFilter uniqueFormId={uniqueFormId} />
-      <div className="ibox-content">
+      <Card.Body>
         <OfferingCustomersList
           offeringUuid={row.uuid}
           uniqueFormId={uniqueFormId}
         />
-      </div>
+      </Card.Body>
       <OfferingCostsChart offeringUuid={row.uuid} uniqueFormId={uniqueFormId} />
       {row.components.length > 0 ? (
         <OfferingUsageChart

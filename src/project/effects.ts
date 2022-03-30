@@ -7,12 +7,8 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { showSuccess, showError } from '@waldur/store/notify';
-import {
-  deleteEntity,
-  fetchListStart,
-  FETCH_LIST_START,
-} from '@waldur/table/actions';
-import { getCustomer, getProject } from '@waldur/workspace/selectors';
+import { deleteEntity, fetchListStart } from '@waldur/table/actions';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import {
   createProject,
@@ -21,10 +17,8 @@ import {
   GOTO_PROJECT_CREATE,
   DELETE_PROJECT,
   moveProject,
-  updateProjectCounters,
 } from './actions';
 import * as api from './api';
-import { getProjectCounters } from './utils';
 
 export function* handleCreateProject(action) {
   const successMessage = translate('Project has been created.');
@@ -130,14 +124,6 @@ function* handleProjectDelete(action) {
   }
 }
 
-export function* refreshProjectCounters(action) {
-  if (action.payload.table.includes('ProjectResourcesList')) {
-    const project = yield select(getProject);
-    const counters = yield call(getProjectCounters, project, []);
-    yield put(updateProjectCounters(counters));
-  }
-}
-
 export default function* projectSaga() {
   yield takeEvery(createProject.REQUEST, handleCreateProject);
   yield takeEvery(gotoProjectList.REQUEST, handleGotoProjectList);
@@ -145,5 +131,4 @@ export default function* projectSaga() {
   yield takeEvery(updateProject.REQUEST, handleUpdateProject);
   yield takeEvery(moveProject.REQUEST, handleMoveProject);
   yield takeEvery(DELETE_PROJECT, handleProjectDelete);
-  yield takeEvery(FETCH_LIST_START, refreshProjectCounters);
 }

@@ -13,7 +13,7 @@ export const OfferingsPublicListButton: FunctionComponent = () => {
     uuid: customer.uuid,
   });
   return (
-    <Button bsSize="sm" href={url} target="_blank">
+    <Button size="sm" href={url} target="_blank">
       <i className="fa fa-external-link" /> {translate('Public list')}
     </Button>
   );

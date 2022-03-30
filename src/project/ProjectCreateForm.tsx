@@ -1,4 +1,5 @@
 import { DateTime } from 'luxon';
+import { Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
@@ -71,10 +72,7 @@ export const ProjectCreateForm = reduxForm<
   }
 
   return (
-    <form
-      onSubmit={props.handleSubmit(props.onSubmit)}
-      className="form-horizontal"
-    >
+    <form onSubmit={props.handleSubmit(props.onSubmit)}>
       <FormContainer
         submitting={props.submitting}
         labelClass="col-sm-3"
@@ -128,7 +126,7 @@ export const ProjectCreateForm = reduxForm<
           minDate={DateTime.now().plus({ days: 1 }).toISO()}
         />
       </FormContainer>
-      <div className="form-group">
+      <Form.Group>
         <div className="col-sm-offset-3 col-sm-5">
           <FieldError error={props.error} />
           <SubmitButton
@@ -142,13 +140,13 @@ export const ProjectCreateForm = reduxForm<
           />
           <button
             type="button"
-            className="btn btn-default m-l-sm"
+            className="btn btn-secondary m-l-sm"
             onClick={props.onCancel}
           >
             {translate('Cancel')}
           </button>
         </div>
-      </div>
+      </Form.Group>
     </form>
   );
 });

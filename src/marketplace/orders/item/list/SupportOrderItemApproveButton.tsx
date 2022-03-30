@@ -40,7 +40,7 @@ export const SupportOrderItemApproveButton: FunctionComponent<SupportOrderItemAp
     }, [setLoading, dispatch, props.itemUuid]);
     return (
       <ActionButton
-        className="btn btn-sm btn-default"
+        className="btn btn-sm btn-secondary"
         title={translate('Approve')}
         action={handler}
         disabled={loading}

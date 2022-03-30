@@ -8,15 +8,7 @@ class ResourceBreadcrumbsRegistryClass {
   }
 
   getItems(resource) {
-    const items = [
-      {
-        label: translate('Project workspace'),
-        state: 'project.details',
-        params: {
-          uuid: resource.project_uuid,
-        },
-      },
-    ];
+    const items = [];
 
     const func = this.breadcrumbs[resource.resource_type];
     if (func) {

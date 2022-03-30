@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import {
@@ -22,12 +22,9 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => (
   <div className="wrapper wrapper-content">
     {props.offering.shared && (
       <div className="pull-right m-r-md">
-        <button
-          className="btn btn-default btn-sm"
-          onClick={props.reInitResource}
-        >
+        <Button size="sm" onClick={props.reInitResource}>
           <i className="fa fa-refresh" /> {translate('Refresh')}
-        </button>
+        </Button>
         <OfferingItemActions offering={props.offering} />
       </div>
     )}

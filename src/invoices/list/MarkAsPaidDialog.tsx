@@ -12,10 +12,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 const MarkAsPaidDialogContainer: FunctionComponent<any> = (props) => (
-  <form
-    onSubmit={props.handleSubmit(props.submitRequest)}
-    className="form-horizontal"
-  >
+  <form onSubmit={props.handleSubmit(props.submitRequest)}>
     <ModalDialog
       title={translate('Mark invoice as paid')}
       footer={

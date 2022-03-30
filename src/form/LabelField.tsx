@@ -1,15 +1,16 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 
 interface LabelFieldProps {
   label: string;
 }
 
 export const LabelField: FunctionComponent<LabelFieldProps> = (props) => (
-  <div className="form-group">
+  <Form.Group>
     <div className="col-sm-offset-3 col-sm-3 col-md-8">
-      <p className="form-control-static">
+      <Form.Control plaintext>
         <strong>{props.label}</strong>
-      </p>
+      </Form.Control>
     </div>
-  </div>
+  </Form.Group>
 );

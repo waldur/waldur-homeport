@@ -27,13 +27,15 @@ export const VerticalTabs = ({
     activeKey={activeKey}
     defaultActiveKey={defaultActiveKey}
     onSelect={onSelect}
+    mountOnEnter
+    unmountOnExit
   >
     <Row className="clearfix">
       <Col sm={3}>
         <SidebarMenu items={items} />
       </Col>
       <Col sm={9}>
-        <Tab.Content mountOnEnter unmountOnExit animation={false}>
+        <Tab.Content>
           {items.map(
             (item) =>
               (item.visible === undefined || item.visible) && (

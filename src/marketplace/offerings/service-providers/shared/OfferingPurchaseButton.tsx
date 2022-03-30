@@ -1,7 +1,9 @@
 import { FunctionComponent } from 'react';
+import { Button } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
 import { Offering } from '@waldur/marketplace/types';
+
 import './OfferingPurchaseButton.scss';
 
 interface OfferingPurchaseButtonProps {
@@ -16,9 +18,7 @@ export const OfferingPurchaseButton: FunctionComponent<OfferingPurchaseButtonPro
         state="marketplace-offering-user"
         params={{ offering_uuid: offering.uuid }}
       >
-        <button type="button" className="btn btn-default btn-card">
-          {label}
-        </button>
+        <Button>{label}</Button>
       </Link>
     </div>
   );

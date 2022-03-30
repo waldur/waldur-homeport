@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 import WindowedSelect from 'react-windowed-select';
 import { Field } from 'redux-form';
@@ -17,8 +18,8 @@ export const SelectField = ({ input: { value, onChange }, ...props }) => (
 export const SelectCountryField: FunctionComponent = () => {
   const { loading, value } = useAsync(loadCountries);
   return (
-    <div className="form-group">
-      <label className="control-label col-sm-2">{translate('Country')}</label>
+    <Form.Group>
+      <Form.Label className="col-sm-2">{translate('Country')}</Form.Label>
       <div className="col-sm-8">
         <Field
           name="country"
@@ -32,6 +33,6 @@ export const SelectCountryField: FunctionComponent = () => {
           noOptionsMessage={() => translate('No countries')}
         />
       </div>
-    </div>
+    </Form.Group>
   );
 };

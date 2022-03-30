@@ -5,7 +5,7 @@ interface SubmitButtonProps {
   submitting: boolean;
   invalid?: boolean;
   label?: string;
-  bsStyle?: string;
+  variant?: string;
   block?: boolean;
 }
 
@@ -14,15 +14,9 @@ export const SubmitButton: React.FC<SubmitButtonProps> = ({
   invalid,
   label,
   children,
-  bsStyle,
-  block,
+  variant,
 }) => (
-  <Button
-    type="submit"
-    bsStyle={bsStyle}
-    block={block}
-    disabled={submitting || invalid}
-  >
+  <Button type="submit" variant={variant} disabled={submitting || invalid}>
     {submitting && (
       <>
         <i className="fa fa-spinner fa-spin m-r-xs" />{' '}
@@ -34,6 +28,6 @@ export const SubmitButton: React.FC<SubmitButtonProps> = ({
 );
 
 SubmitButton.defaultProps = {
-  bsStyle: 'primary',
+  variant: 'primary',
   block: true,
 };

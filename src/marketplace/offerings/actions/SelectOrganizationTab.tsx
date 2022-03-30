@@ -29,7 +29,7 @@ export const SelectOrganizationTab = () => {
   }
   if (error) {
     return (
-      <Alert bsStyle="danger">
+      <Alert variant="danger">
         <h4>{translate('Unable to load organizations')}</h4>
         {error?.message && <p>{error.message}</p>}
       </Alert>

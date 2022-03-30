@@ -1,11 +1,6 @@
 import { triggerTransition } from '@uirouter/redux';
 import { useState, FunctionComponent } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -37,18 +32,18 @@ export const PendingReviewDialog: FunctionComponent<{
   };
   return (
     <>
-      <ModalHeader>
-        <ModalTitle>
+      <Modal.Header>
+        <Modal.Title>
           {translate('Please review organization permissions')}
-        </ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <CustomerUsersList />
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <button
           type="button"
-          className="btn btn-default"
+          className="btn btn-secondary"
           onClick={closeReviewCallback}
         >
           {submitting && (
@@ -58,10 +53,8 @@ export const PendingReviewDialog: FunctionComponent<{
           )}
           {translate('Confirming that data is correct')}
         </button>
-        <button type="button" className="btn btn-default" onClick={gotoTeam}>
-          {translate('Edit permissions')}
-        </button>
-      </ModalFooter>
+        <Button onClick={gotoTeam}>{translate('Edit permissions')}</Button>
+      </Modal.Footer>
     </>
   );
 };

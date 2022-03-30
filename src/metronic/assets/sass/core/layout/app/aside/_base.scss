@@ -1,0 +1,152 @@
+//
+// Aside
+//
+
+// General mode
+.app-aside {
+  @include app-layout-transition();
+}
+
+// Desktop mode
+@include media-breakpoint-up(lg) {
+  // Base
+  .app-aside {
+    @include attr(width, get($app-aside-config, base, width));
+    @include attr(z-index, get($app-aside-config, base, z-index));
+    @include attr(background-color, get($app-aside-config, base, bg-color));
+    @include attr(box-shadow, get($app-aside-config, base, box-shadow));
+    @include attr(border-left, get($app-aside-config, base, border-start));
+    @include attr(border-right, get($app-aside-config, base, border-end));
+  }
+
+  // Vars
+  .app-aside-fixed {
+    --kt-app-aside-width: #{get($app-aside-config, base, width)};
+  }
+
+  [data-kt-app-aside-collapse='on'] {
+    --kt-app-aside-width: #{get($app-aside-config, collapse, width)};
+    --kt-app-aside-actual-width: #{get($app-aside-config, base, width)};
+  }
+
+  [data-kt-app-aside-minimize='on'] {
+    --kt-app-aside-width: #{get($app-aside-config, minimize, width)};
+  }
+
+  // States
+  .app-aside {
+    .app-aside-fixed & {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: var(--kt-app-aside-width);
+      @include app-layout-transition();
+      @include attr(z-index, get($app-aside-config, base, z-index));
+      @include attr(box-shadow, get($app-aside-config, base, box-shadow));
+      @include attr(border-left, get($app-aside-config, base, border-start));
+      @include attr(border-right, get($app-aside-config, base, border-end));
+    }
+
+    [data-kt-app-aside-sticky='on'] & {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      @include app-layout-transition();
+      @include attr(z-index, get($app-aside-config, sticky, z-index));
+      @include attr(box-shadow, get($app-aside-config, sticky, box-shadow));
+      @include attr(border-left, get($app-aside-config, sticky, border-start));
+      @include attr(border-right, get($app-aside-config, sticky, border-end));
+    }
+
+    [data-kt-app-aside-collapse='on'] & {
+      @include app-layout-transition();
+      left: calc(-1 * var(--kt-app-aside-actual-width));
+      //transform: translateX(-100%);
+      width: var(--kt-app-aside-actual-width);
+    }
+
+    [data-kt-app-aside-minimize='on'] & {
+      @include app-layout-transition();
+      @include attr(
+        background-color,
+        get($app-aside-config, minimize, bg-color)
+      );
+      @include attr(box-shadow, get($app-aside-config, minimize, box-shadow));
+      @include attr(
+        border-left,
+        get($app-aside-config, minimize, border-start)
+      );
+      @include attr(border-right, get($app-aside-config, minimize, border-end));
+    }
+  }
+
+  // Integration
+  .app-aside {
+    // Header
+    .app-aside-fixed.app-header-fixed:not(.app-aside-push-header) & {
+      top: var(--kt-app-header-height);
+    }
+
+    // Toolbar
+    .app-aside-fixed.app-header-fixed:not(.app-aside-push-toolbar) & {
+      top: calc(var(--kt-app-header-height) + var(--kt-app-toolbar-height, 0));
+    }
+  }
+}
+
+// Tablet & mobile modes
+@include media-breakpoint-down(lg) {
+  // Base
+  .app-aside {
+    display: none;
+    @include attr(width, get($app-aside-config, base, width-mobile));
+    @include attr(z-index, get($app-aside-config, base, z-index-mobile));
+    @include attr(
+      background-color,
+      get($app-aside-config, base, bg-color-mobile)
+    );
+    @include attr(box-shadow, get($app-aside-config, base, box-shadow-mobile));
+    @include attr(
+      border-left,
+      get($app-aside-config, base, border-start-mobile)
+    );
+    @include attr(
+      border-right,
+      get($app-aside-config, base, border-end-mobile)
+    );
+  }
+
+  // Vars
+  [data-kt-app-aside-minimize-mobile='on'] {
+    --kt-app-aside-width: #{get($app-aside-config, minimize, width-mobile)};
+  }
+
+  [data-kt-app-aside-collapse-mobile='on'] {
+    --kt-app-aside-width: #{get($app-aside-config, collapse, width)};
+    --kt-app-aside-actual-width: #{get($app-aside-config, base, width-mobile)};
+  }
+
+  // States
+  .app-aside {
+    [data-kt-app-aside-minimize-mobile='on'] & {
+      @include app-layout-transition();
+      @include attr(
+        background-color,
+        get($app-aside-config, minimize, bg-color)
+      );
+      @include attr(box-shadow, get($app-aside-config, minimize, box-shadow));
+      @include attr(
+        border-left,
+        get($app-aside-config, minimize, border-start)
+      );
+      @include attr(border-right, get($app-aside-config, minimize, border-end));
+    }
+
+    [data-kt-app-aside-collapse-mobile='on'] & {
+      --kt-app-aside-width: #{get($app-aside-config, collapse, width)};
+      --kt-app-aside-actual-width: #{get($app-aside-config, base, width-mobile)};
+    }
+  }
+}

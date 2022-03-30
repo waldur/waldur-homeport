@@ -1,12 +1,6 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent, Component } from 'react';
-import {
-  Col,
-  Dropdown,
-  DropdownMenu,
-  DropdownToggle,
-  Row,
-} from 'react-bootstrap';
+import { Col, Dropdown, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -88,7 +82,7 @@ export class PurePendingOrderIndicator extends Component<PendingOrderIndicatorPr
     if (!this.isValidWorkspace(this.props)) {
       return null;
     }
-    const { isOpen, handleToggleOpen, workspace, pendingOrders } = this.props;
+    const { handleToggleOpen, workspace, pendingOrders } = this.props;
     const count = pendingOrders.length;
     const limitedOrders = pendingOrders.slice(0, 5);
     if (!count || !isOwnerOrStaff) {
@@ -96,12 +90,11 @@ export class PurePendingOrderIndicator extends Component<PendingOrderIndicatorPr
     }
     return (
       <Dropdown
-        open={isOpen}
         onToggle={handleToggleOpen}
         className="PendingOrderDropdown"
         id="pending-dropdown"
       >
-        <DropdownToggle noCaret={true} className="PendingOrderDropdown__Toggle">
+        <Dropdown.Toggle className="PendingOrderDropdown__Toggle">
           <li className="navbar-indicator">
             <a onClick={handleToggleOpen}>
               <i className={'fa fa-bell'} />
@@ -110,8 +103,8 @@ export class PurePendingOrderIndicator extends Component<PendingOrderIndicatorPr
               )}
             </a>
           </li>
-        </DropdownToggle>
-        <DropdownMenu className="dropdown-orders dropdown-menu-right">
+        </Dropdown.Toggle>
+        <Dropdown.Menu className="dropdown-orders dropdown-menu-right">
           {limitedOrders.map((order) => (
             <PendingOrderDropdownItem
               key={order.uuid}
@@ -129,7 +122,7 @@ export class PurePendingOrderIndicator extends Component<PendingOrderIndicatorPr
               />
             </div>
           </li>
-        </DropdownMenu>
+        </Dropdown.Menu>
       </Dropdown>
     );
   }

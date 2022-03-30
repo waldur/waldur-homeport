@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { PanelBody, Tab, Tabs } from 'react-bootstrap';
+import { Card, Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { CustomerUsersListFilter } from '@waldur/customer/team/CustomerUsersListFilter';
@@ -25,44 +25,43 @@ export const CustomerTeam: FunctionComponent = () => {
         mountOnEnter
         defaultActiveKey="users"
         id="customer-team"
-        animation={false}
       >
         <Tab title={translate('Users')} eventKey="users">
-          <PanelBody>
+          <Card.Body>
             <CustomerUsersListFilter />
             <CustomerUsersList />
-          </PanelBody>
+          </Card.Body>
         </Tab>
         <Tab title={translate('Invitations')} eventKey="invitations">
-          <PanelBody>
+          <Card.Body>
             <InvitationsList />
-          </PanelBody>
+          </Card.Body>
         </Tab>
         {isFeatureVisible('invitations.show_group_invitations') && (
           <Tab
             title={translate('Group invitations')}
             eventKey="group-invitations"
           >
-            <PanelBody>
+            <Card.Body>
               <GroupInvitationsList />
-            </PanelBody>
+            </Card.Body>
           </Tab>
         )}
         <Tab title={translate('Permissions log')} eventKey="permissions">
-          <PanelBody>
+          <Card.Body>
             <CustomerPermissionsLogList />
-          </PanelBody>
+          </Card.Body>
         </Tab>
         <Tab title={translate('Reviews')} eventKey="reviews">
-          <PanelBody>
+          <Card.Body>
             <CustomerPermissionsReviewList />
-          </PanelBody>
+          </Card.Body>
         </Tab>
         {customer.is_service_provider && (
           <Tab title={translate('Offering permissions')} eventKey="offerings">
-            <PanelBody>
+            <Card.Body>
               <OfferingPermissionsList />
-            </PanelBody>
+            </Card.Body>
           </Tab>
         )}
       </Tabs>

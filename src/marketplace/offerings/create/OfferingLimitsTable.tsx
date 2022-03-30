@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { FormLayoutContext } from '@waldur/form/context';
@@ -23,11 +23,11 @@ export const OfferingLimitsTable: React.FC<OfferingLimitsTableProps> = (
   const offset = layout === 'vertical' ? 0 : 2;
 
   return (
-    <div className="form-group">
+    <Form.Group>
       <Col smOffset={offset} sm={col} className="m-b-sm">
-        <p className="form-control-static">
+        <Form.Control plaintext>
           <strong>{translate('Offering components')}</strong>
-        </p>
+        </Form.Control>
       </Col>
       <Col smOffset={offset} sm={col}>
         <table className="table table-borderless">
@@ -71,6 +71,6 @@ export const OfferingLimitsTable: React.FC<OfferingLimitsTableProps> = (
           </tbody>
         </table>
       </Col>
-    </div>
+    </Form.Group>
   );
 };

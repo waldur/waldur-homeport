@@ -1,10 +1,5 @@
 import { FunctionComponent } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -16,14 +11,14 @@ export const OrganizationRemovalErrorDialog: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   return (
     <>
-      <ModalHeader>
-        <ModalTitle>
+      <Modal.Header>
+        <Modal.Title>
           {translate('Removing organization {organizationName}', {
             organizationName: customer.name,
           })}
-        </ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         {ENV.plugins.WALDUR_CORE.SITE_EMAIL
           ? translate(
               'To remove your organization, please send an email to {supportEmail}. Thank you!',
@@ -37,10 +32,10 @@ export const OrganizationRemovalErrorDialog: FunctionComponent = () => {
               formatJsxTemplate,
             )
           : null}
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </>
   );
 };

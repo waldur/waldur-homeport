@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 import { ResourceLink } from './ResourceLink';
@@ -25,7 +25,7 @@ interface ResourceNameProps {
 }
 
 export const ResourceIcon: FunctionComponent<ResourceIconProps> = (props) => (
-  <Tooltip
+  <Tip
     id={`resourceIcon-${props.resource.uuid}`}
     label={formatResourceType(props.resource)}
   >
@@ -34,13 +34,13 @@ export const ResourceIcon: FunctionComponent<ResourceIconProps> = (props) => (
       className="img-xs m-r-xs"
     />{' '}
     {formatDefault(props.resource.name)}
-  </Tooltip>
+  </Tip>
 );
 
 const ResourceWarning = withTranslation(
   (props: ResourceNameProps & TranslateProps) =>
     props.resource.is_link_valid === false ? (
-      <Tooltip
+      <Tip
         id={`resourceWarning-${props.resource.uuid}`}
         label={props.translate(
           'Provider does not comply with project policies',
@@ -48,7 +48,7 @@ const ResourceWarning = withTranslation(
       >
         {' '}
         <i className="fa fa-exclamation-triangle text-muted" />
-      </Tooltip>
+      </Tip>
     ) : null,
 );
 

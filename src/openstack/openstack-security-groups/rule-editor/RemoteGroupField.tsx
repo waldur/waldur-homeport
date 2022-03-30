@@ -15,7 +15,7 @@ interface RemoteGroupFieldProps {
 }
 
 export const RemoteGroupField: FC<RemoteGroupFieldProps> = ({ choices }) => (
-  <Field name="remote_group" component={FormField} componentClass="select">
+  <Field name="remote_group" component={FormField} as="select">
     <option value="">{translate('None')}</option>
     {choices.map((choice, index) => (
       <option key={index} value={choice.url}>

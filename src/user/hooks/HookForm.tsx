@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormGroup } from 'react-bootstrap';
+import { Form, FormGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 
@@ -37,10 +37,10 @@ export const HookForm: React.FC<OwnProps> = ({ isNew, eventGroups }) => {
         </FormGroup>
       ) : (
         <>
-          <p className="form-control-static">
+          <Form.Control plaintext>
             <strong>{translate('Notification method')}: </strong>
             {titleCase(hookType)}
-          </p>
+          </Form.Control>
           <Field
             name="is_active"
             component={AwesomeCheckboxField}

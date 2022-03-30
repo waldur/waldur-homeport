@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
@@ -11,11 +12,11 @@ interface PlanFieldProps {
 
 export const PlanField: FunctionComponent<PlanFieldProps> = (props) =>
   props.offering.plans.length > 0 ? (
-    <div className="form-group">
-      <label className="control-label col-sm-3">
+    <Form.Group>
+      <Form.Label className="col-sm-3">
         {translate('Plan')}
         <span className="text-danger"> *</span>
-      </label>
+      </Form.Label>
       <div className="col-sm-9">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div style={{ flexGrow: 1 }}>
@@ -25,8 +26,8 @@ export const PlanField: FunctionComponent<PlanFieldProps> = (props) =>
               )}
             />
           </div>
-          <PlanDescriptionButton className="btn btn-md btn-default pull-right m-l-sm" />
+          <PlanDescriptionButton className="btn btn-md btn-secondary pull-right m-l-sm" />
         </div>
       </div>
-    </div>
+    </Form.Group>
   ) : null;

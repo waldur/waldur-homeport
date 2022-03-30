@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
@@ -7,7 +8,7 @@ interface NodeAddButtonProps {
 }
 
 export const NodeAddButton: FunctionComponent<NodeAddButtonProps> = (props) => (
-  <button type="button" className="btn btn-default" onClick={props.onClick}>
+  <Button onClick={props.onClick}>
     <i className="fa fa-plus" /> {translate('Node plan')}
-  </button>
+  </Button>
 );

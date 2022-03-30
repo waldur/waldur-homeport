@@ -1,7 +1,8 @@
 import ReactDOM from 'react-dom';
 
 import './vendor';
-import './sass/style.scss';
+import './sass/noscript.scss';
+import './metronic/assets/sass/style.scss';
 
 import { Application } from './Application';
 import './auth/module';

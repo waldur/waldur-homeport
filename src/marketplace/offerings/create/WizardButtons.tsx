@@ -29,7 +29,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
       icon="fa fa-arrow-left"
       className={classNames(
         { disabled: submitting },
-        'btn btn-outline btn-default',
+        'btn btn-outline btn-secondary',
       )}
     />
     {!isLastStep && (

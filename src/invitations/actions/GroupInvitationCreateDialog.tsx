@@ -1,9 +1,4 @@
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
@@ -27,23 +22,23 @@ export const GroupInvitationCreateDialog = reduxForm<{}, OwnProps>({
     useGroupInvitationCreateDialog(context);
   return (
     <form onSubmit={handleSubmit(createInvitation)}>
-      <ModalHeader>
-        <ModalTitle>{translate('Create group invitation')}</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+      <Modal.Header>
+        <Modal.Title>{translate('Create group invitation')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         {<RoleGroup roles={roles} />}
         {projectEnabled && (
           <ProjectGroup customer={context.customer} disabled={submitting} />
         )}
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <SubmitButton
           block={false}
           label={translate('Submit')}
           submitting={submitting}
         />
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </form>
   );
 });

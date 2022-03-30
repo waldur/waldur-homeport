@@ -1,0 +1,8 @@
+//
+// Layout Transition Mixin
+//
+
+@mixin app-layout-transition($property: all) {
+  transition: $property get($app-general-config, transition, duration)
+    get($app-general-config, transition, timing);
+}

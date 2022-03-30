@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { Panel } from '@waldur/core/Panel';
 import { CustomerBookingManagement } from '@waldur/customer/dashboard/CustomerBookingManagement';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
-import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { CustomerChecklistOverview } from '@waldur/marketplace-checklist/CustomerChecklistOverview';
@@ -32,12 +31,6 @@ export const CustomerDashboard: FunctionComponent = () => {
 
   return (
     <>
-      <DashboardHeader
-        title={translate('Welcome, {user}!', { user: user.full_name })}
-        subtitle={translate('Overview of {organization} organization', {
-          organization: customer.name,
-        })}
-      />
       {isServiceManager ? (
         <CustomerBookingManagement />
       ) : (

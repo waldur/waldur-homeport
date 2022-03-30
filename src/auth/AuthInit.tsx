@@ -1,5 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import { useCallback, FunctionComponent } from 'react';
+import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -53,9 +54,9 @@ export const AuthInit: FunctionComponent = () => {
   ) : error ? (
     <>{translate('Unable to load user.')}</>
   ) : (
-    <div className="wrapper">
-      <div className="row m-t-md">
-        <div className="col-md-6 col-md-offset-3 col-xs-12 col-lg-6 col-lg-offset-3">
+    <Container>
+      <Row className="m-t-md">
+        <Col md={6} mdOffset={3} xs={12} lg={6} lgOffset={3}>
           <h2>
             {translate('Welcome to {pageTitle}!', {
               pageTitle: ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE,
@@ -66,15 +67,15 @@ export const AuthInit: FunctionComponent = () => {
               'To get your clouds under control, please fill in your data.',
             )}
           </p>
-        </div>
-      </div>
-      <div className="row initial-data-page">
-        <div className="ibox col-md-offset-2 col-md-8 col-lg-6 col-lg-offset-3">
-          <div className="ibox-content">
+        </Col>
+      </Row>
+      <Row className="initial-data-page">
+        <Col mdOffset={2} md={8} lg={6} lgOffset={3} as={Card}>
+          <Card.Body>
             <UserEditContainer user={user} onSave={onSave} initial={true} />
-          </div>
-        </div>
-      </div>
-    </div>
+          </Card.Body>
+        </Col>
+      </Row>
+    </Container>
   );
 };

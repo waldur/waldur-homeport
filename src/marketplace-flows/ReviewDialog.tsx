@@ -31,7 +31,7 @@ export const ReviewDialog = enhance(
     };
 
     return (
-      <form onSubmit={handleSubmit(setRoutes)} className="form-horizontal">
+      <form onSubmit={handleSubmit(setRoutes)}>
         <ModalDialog
           title={translate('Review request')}
           footer={

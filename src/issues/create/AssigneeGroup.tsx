@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Col, ControlLabel, FormGroup } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -12,8 +12,8 @@ const filterOption = (options) => options;
 export const AssigneeGroup: FunctionComponent<{ disabled }> = ({
   disabled,
 }) => (
-  <FormGroup>
-    <Col sm={3} componentClass={ControlLabel}>
+  <Form.Group>
+    <Col sm={3} as={Form.Label}>
       {translate('Assigned to')}
     </Col>
     <Col sm={6}>
@@ -30,5 +30,5 @@ export const AssigneeGroup: FunctionComponent<{ disabled }> = ({
         filterOption={filterOption}
       />
     </Col>
-  </FormGroup>
+  </Form.Group>
 );

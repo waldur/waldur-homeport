@@ -1,12 +1,13 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
 export const OrderTypeFilter: FunctionComponent = () => (
-  <div className="form-group col-sm-3">
-    <label className="control-label">{translate('Type')}</label>
+  <Form.Group className="col-sm-3">
+    <Form.Label>{translate('Type')}</Form.Label>
     <Field
       name="type"
       component={(fieldProps) => (
@@ -23,5 +24,5 @@ export const OrderTypeFilter: FunctionComponent = () => (
         />
       )}
     />
-  </div>
+  </Form.Group>
 );

@@ -1,10 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 import { reduxForm, change } from 'redux-form';
@@ -126,14 +121,14 @@ export const AddProjectMemberDialog = reduxForm<
 
   return (
     <form onSubmit={handleSubmit(saveUser)}>
-      <ModalHeader>
-        <ModalTitle>
+      <Modal.Header>
+        <Modal.Title>
           {resolve.editUser
             ? translate('Edit project member')
             : translate('Add project member')}
-        </ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         {loading ? (
           <LoadingSpinner />
         ) : (
@@ -148,13 +143,13 @@ export const AddProjectMemberDialog = reduxForm<
             <ExpirationTimeGroup disabled={submitting} />
           </FormContainer>
         )}
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <SubmitButton block={false} submitting={submitting}>
           {resolve.editUser ? translate('Save') : translate('Add')}
         </SubmitButton>
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </form>
   );
 });

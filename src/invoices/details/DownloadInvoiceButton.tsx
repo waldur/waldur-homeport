@@ -6,7 +6,7 @@ export const DownloadInvoiceButton: FunctionComponent<{ invoice }> = ({
   invoice,
 }) => (
   <a
-    className="btn btn-default btn-sm"
+    className="btn btn-secondary btn-sm"
     download={`invoice-${invoice.number}.pdf`}
     href={invoice.pdf}
     target="_self"

@@ -39,7 +39,7 @@ export const SupportOrderItemRejectButton: FunctionComponent<SupportOrderItemRej
     }, [setLoading, dispatch, props.itemUuid]);
     return (
       <ActionButton
-        className="btn btn-sm btn-default"
+        className="btn btn-sm btn-secondary"
         title={translate('Reject')}
         action={handler}
         disabled={loading}

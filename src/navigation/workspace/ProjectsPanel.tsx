@@ -34,7 +34,7 @@ const CreateProjectButton: FunctionComponent<{
   }
   return (
     <Link
-      className="pull-right btn btn-sm btn-default"
+      className="pull-right btn btn-sm btn-secondary"
       state="organization.createProject"
       params={{
         uuid: selectedOrganization.uuid,
@@ -63,7 +63,7 @@ const ProjectsHeader: FunctionComponent<{
 
 const SelectProjectButton = ({ project }) => (
   <Link
-    className="btn btn-xs btn-default pull-right"
+    className="btn btn-sm btn-secondary pull-right"
     state="project.details"
     params={{ uuid: project.uuid }}
   >

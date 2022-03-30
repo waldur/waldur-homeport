@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 import { FormField } from './FormField';
 
 export const ProtocolField: FC = () => (
-  <Field name="protocol" component={FormField} componentClass="select" required>
+  <Field name="protocol" component={FormField} as="select" required>
     <option value="any">{translate('Any')}</option>
     <option value="tcp">TCP</option>
     <option value="udp">UDP</option>

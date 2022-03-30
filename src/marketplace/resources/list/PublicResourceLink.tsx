@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
-import { BackendIdTooltip } from '@waldur/core/Tooltip';
+import { BackendIdTip } from '@waldur/core/Tooltip';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import {
   Customer,
@@ -54,7 +54,7 @@ export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
         }}
         label={label}
       />
-      <BackendIdTooltip backendId={row.backend_id} />
+      <BackendIdTip backendId={row.backend_id} />
       <EndDateTooltip end_date={row.end_date} />
     </>
   );

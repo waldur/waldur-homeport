@@ -1,6 +1,7 @@
 import React from 'react';
+import { Button, Form } from 'react-bootstrap';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
 interface OpenstackInstanceDataVolumeProps {
@@ -36,13 +37,9 @@ export class OpenstackInstanceDataVolume extends React.Component<OpenstackInstan
           {!this.props.isActive && (
             <tr>
               <td className="no-padding">
-                <button
-                  type="button"
-                  className="btn btn-default"
-                  onClick={this.toggleField}
-                >
+                <Button onClick={this.toggleField}>
                   <i className="fa fa-plus" /> {translate('Add data volume')}
-                </button>
+                </Button>
               </td>
             </tr>
           )}
@@ -57,10 +54,9 @@ export class OpenstackInstanceDataVolume extends React.Component<OpenstackInstan
             <tr>
               <td className="no-padding" style={{ width: 220 }}>
                 <div className="input-group" style={{ maxWidth: 200 }}>
-                  <input
+                  <Form.Control
                     {...props.input}
                     type="number"
-                    className="form-control"
                     style={{ zIndex: 'unset' }}
                     min={props.min}
                     max={props.max}
@@ -72,18 +68,14 @@ export class OpenstackInstanceDataVolume extends React.Component<OpenstackInstan
                 </div>
               </td>
               <td className="no-padding">
-                <Tooltip
+                <Tip
                   id="data-volume-disable"
                   label={translate('Disable data volume')}
                 >
-                  <button
-                    type="button"
-                    className="btn btn-default"
-                    onClick={this.toggleField}
-                  >
+                  <Button onClick={this.toggleField}>
                     <i className="fa fa-trash-o" />
-                  </button>
-                </Tooltip>
+                  </Button>
+                </Tip>
               </td>
             </tr>
           )}

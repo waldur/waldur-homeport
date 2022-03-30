@@ -1,3 +1,5 @@
+import { Card } from 'react-bootstrap';
+
 import { translate } from '@waldur/i18n';
 import { useReportingBreadcrumbs } from '@waldur/issues/workspace/SupportWorkspace';
 import { useSidebarKey } from '@waldur/navigation/context';
@@ -10,11 +12,11 @@ export const SupportEventsContainer = () => {
   useReportingBreadcrumbs();
   useSidebarKey('reporting');
   return (
-    <div className="ibox">
-      <div className="ibox-content">
+    <Card>
+      <Card.Body>
         <SupportEventsListFilter />
         <SupportEventsList />
-      </div>
-    </div>
+      </Card.Body>
+    </Card>
   );
 };

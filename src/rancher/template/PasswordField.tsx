@@ -31,11 +31,9 @@ export const PasswordField: React.FC<FieldProps> = (props) => {
     (props) => (
       <InputGroup>
         <FormControl {...props.input} />
-        <InputGroup.Button>
-          <Button onClick={setGeneratedPassword}>
-            {translate('Generate password')}
-          </Button>
-        </InputGroup.Button>
+        <Button onClick={setGeneratedPassword}>
+          {translate('Generate password')}
+        </Button>
       </InputGroup>
     ),
     [setGeneratedPassword],

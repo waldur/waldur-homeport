@@ -1,8 +1,8 @@
 import { uniqueId } from 'lodash';
 import { FC } from 'react';
-import { MenuItem } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 
 interface ActionItemProps {
   title: string;
@@ -14,7 +14,7 @@ interface ActionItemProps {
 }
 
 export const ActionItem: FC<ActionItemProps> = (props) => (
-  <MenuItem
+  <Dropdown.Item
     className={props.className}
     // Workaround for rendering tooltips for disabled dropdown menu items.
     // See also: https://stackoverflow.com/questions/57349166/
@@ -23,13 +23,13 @@ export const ActionItem: FC<ActionItemProps> = (props) => (
   >
     {props.tooltip ? (
       <>
-        <Tooltip label={props.tooltip} id={`action-reason-${uniqueId()}`}>
+        <Tip label={props.tooltip} id={`action-reason-${uniqueId()}`}>
           <i className="fa fa-question-circle" />
-        </Tooltip>{' '}
+        </Tip>{' '}
         {props.title}
       </>
     ) : (
       props.title
     )}
-  </MenuItem>
+  </Dropdown.Item>
 );

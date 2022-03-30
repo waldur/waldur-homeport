@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { Col, Row } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
 
@@ -19,9 +20,9 @@ export const ExpandableEventField: FunctionComponent<ExpandableEventFieldProps> 
       value = <Link state={props.state} params={props.params} label={value} />;
     }
     return (
-      <div className="m-b-xs">
-        <dt>{props.label}</dt>
-        <dd>{value}</dd>
-      </div>
+      <Row className="m-b-xs">
+        <Col sm={3}>{props.label}</Col>
+        <Col sm={9}>{value}</Col>
+      </Row>
     );
   };

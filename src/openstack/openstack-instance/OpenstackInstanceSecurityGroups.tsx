@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import { compose } from 'redux';
@@ -87,13 +87,12 @@ class OpenstackInstanceSecurityGroupsComponent extends Component<
           />
         </Col>
         <Col md={3}>
-          <button
-            className="btn btn-default"
+          <Button
             disabled={this.props.input.value.length === 0}
             onClick={this.openDetailsDialog}
           >
             <i className="fa fa-eye" /> {this.props.translate('Details')}
-          </button>
+          </Button>
         </Col>
       </Row>
     );

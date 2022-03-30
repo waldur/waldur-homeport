@@ -27,7 +27,7 @@ export const PlanDetails = withTranslation((props: PlanDetailsProps) => {
       {plan_description ? (
         <OrderItemDetailsField label={props.translate('Description')}>
           <PlanDescriptionButton
-            className="btn btn-sm btn-default"
+            className="btn btn-sm btn-secondary"
             planDescription={plan_description}
           />
         </OrderItemDetailsField>

@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { Form, InputGroup } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
@@ -20,7 +21,7 @@ interface ComponentRowProps {
 }
 
 const CellWrapper: FunctionComponent<any> = (props) => (
-  <td className={props.meta.error ? 'form-group has-error' : 'form-group'}>
+  <Form.Group as="td">
     {props.offeringComponent.is_boolean ? (
       <AwesomeCheckbox
         label=""
@@ -28,22 +29,21 @@ const CellWrapper: FunctionComponent<any> = (props) => (
         onChange={(value) => props.input.onChange(value ? 1 : 0)}
       />
     ) : (
-      <div className="input-group">
-        <input
-          className="form-control"
+      <InputGroup>
+        <Form.Control
           type="number"
           min={props.limits.min}
           max={props.limits.max}
           {...props.input}
         />
         {props.offeringComponent.measured_unit ? (
-          <span className="input-group-addon">
+          <InputGroup.Text>
             {props.offeringComponent.measured_unit}
-          </span>
+          </InputGroup.Text>
         ) : null}
-      </div>
+      </InputGroup>
     )}
-  </td>
+  </Form.Group>
 );
 
 export const ComponentRow: React.FC<ComponentRowProps> = ({
@@ -53,13 +53,13 @@ export const ComponentRow: React.FC<ComponentRowProps> = ({
 }) => (
   <tr>
     <td>
-      <p className="form-control-static">{component.name}</p>
+      <Form.Control plaintext>{component.name}</Form.Control>
     </td>
     <td>
-      <p className="form-control-static">{component.usage || 'N/A'}</p>
+      <Form.Control plaintext>{component.usage || 'N/A'}</Form.Control>
     </td>
     <td>
-      <p className="form-control-static">{component.limit || 'N/A'}</p>
+      <Form.Control plaintext>{component.limit || 'N/A'}</Form.Control>
     </td>
     <Field
       name={`limits.${component.type}`}

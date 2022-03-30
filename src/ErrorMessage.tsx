@@ -13,7 +13,7 @@ export const ErrorMessage: FallbackRender = (props) => (
       title={translate(`An error has occurred.`)}
       description={props.error.message}
       action={
-        <Button onClick={() => location.reload()} bsStyle="success">
+        <Button onClick={() => location.reload()} variant="success">
           <i className="fa fa-refresh" /> {translate('Reload')}
         </Button>
       }

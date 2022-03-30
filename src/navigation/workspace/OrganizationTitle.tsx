@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 
 import { ServiceProviderIcon } from './ServiceProviderIcon';
 
@@ -8,7 +8,7 @@ export const OrganizationTitle: FunctionComponent<{ organization }> = ({
   organization,
 }) =>
   organization.abbreviation ? (
-    <Tooltip
+    <Tip
       label={organization.name}
       id={`full-name-${organization.uuid}`}
       className="select-workspace-dialog__tooltip--order"
@@ -17,7 +17,7 @@ export const OrganizationTitle: FunctionComponent<{ organization }> = ({
         {organization.abbreviation}
         <ServiceProviderIcon organization={organization} />
       </div>
-    </Tooltip>
+    </Tip>
   ) : (
     <div className="ellipsis">
       {organization.name}

@@ -1,11 +1,5 @@
 import { useCallback, useEffect, FunctionComponent } from 'react';
-import {
-  Button,
-  ButtonGroup,
-  Col,
-  ControlLabel,
-  FormGroup,
-} from 'react-bootstrap';
+import { Button, ButtonGroup, Col, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { Field, change } from 'redux-form';
@@ -53,8 +47,8 @@ export const OrganizationGroup: FunctionComponent<{ onSearch }> = ({
   }, [dispatch, caller]);
 
   return (
-    <FormGroup>
-      <Col sm={3} componentClass={ControlLabel}>
+    <Form.Group>
+      <Col sm={3} as={Form.Label}>
         {translate('Organization')}
         <span className="text-danger">*</span>
       </Col>
@@ -92,6 +86,6 @@ export const OrganizationGroup: FunctionComponent<{ onSearch }> = ({
           </ButtonGroup>
         </Col>
       )}
-    </FormGroup>
+    </Form.Group>
   );
 };

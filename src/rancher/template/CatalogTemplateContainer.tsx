@@ -19,10 +19,6 @@ const getBreadcrumbs = (
 ): BreadcrumbItem[] => {
   return [
     {
-      label: translate('Project workspace'),
-      state: 'project.details',
-    },
-    {
       label: translate('Resources'),
       state: 'marketplace-project-resources',
       params: {

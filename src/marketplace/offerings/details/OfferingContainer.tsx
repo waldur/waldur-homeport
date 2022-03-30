@@ -23,10 +23,6 @@ import { PlanUsageList } from './PlanUsageList';
 function getBreadcrumbs(offering: Offering): BreadcrumbItem[] {
   return [
     {
-      label: translate('Organization workspace'),
-      state: 'organization.details',
-    },
-    {
       label: translate('My services'),
     },
     offering.shared

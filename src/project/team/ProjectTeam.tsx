@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { PanelBody, Tab, Tabs } from 'react-bootstrap';
+import { Card, Tab, Tabs } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
@@ -15,18 +15,17 @@ export const ProjectTeam: FunctionComponent = () => {
         unmountOnExit
         mountOnEnter
         defaultActiveKey="users"
-        animation={false}
         id="project-team"
       >
         <Tab title={translate('Users')} eventKey="users">
-          <PanelBody>
+          <Card.Body>
             <ProjectUsersList />
-          </PanelBody>
+          </Card.Body>
         </Tab>
         <Tab title={translate('Permissions log')} eventKey="permissions">
-          <PanelBody>
+          <Card.Body>
             <ProjectPermissionsLogList />
-          </PanelBody>
+          </Card.Body>
         </Tab>
       </Tabs>
     </div>

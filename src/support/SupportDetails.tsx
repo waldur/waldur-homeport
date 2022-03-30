@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 
 import { Issue } from '@waldur/issues/list/types';
 import { ResourceActions } from '@waldur/marketplace/resources/actions/ResourceActions';
@@ -17,7 +17,7 @@ interface SupportSummaryProps {
 
 export const SupportDetails: React.FC<SupportSummaryProps> = (props) => (
   <div className="wrapper wrapper-content">
-    <div className="ibox-content">
+    <Card.Body>
       <Row className="m-b-md">
         <Col lg={12}>
           <ResourceActions
@@ -40,6 +40,6 @@ export const SupportDetails: React.FC<SupportSummaryProps> = (props) => (
           />
         </Col>
       </Row>
-    </div>
+    </Card.Body>
   </div>
 );

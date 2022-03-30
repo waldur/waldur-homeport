@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Form, Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -17,13 +17,13 @@ const PureSupportEventsListFilter: FunctionComponent = () => (
       </Col>
       <Col sm={4}>
         <div>
-          <label className="control-label">{translate('Date')}</label>
+          <Form.Label>{translate('Date')}</Form.Label>
           <EventDateFilter />
         </div>
       </Col>
       <Col sm={4}>
         <div>
-          <label className="control-label">{translate('User')}</label>
+          <Form.Label>{translate('User')}</Form.Label>
           <UserAutocomplete />
         </div>
       </Col>

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 
 export interface ActionButtonProps {
   title: string;
@@ -14,9 +14,9 @@ export interface ActionButtonProps {
 
 export const wrapTooltip = (label, children, rest?) =>
   label ? (
-    <Tooltip label={label} id="button-tooltip" {...rest}>
+    <Tip label={label} id="button-tooltip" {...rest}>
       {children}
-    </Tooltip>
+    </Tip>
   ) : (
     children
   );
@@ -34,5 +34,5 @@ export const ActionButton: React.FC<ActionButtonProps> = (props) =>
   );
 
 ActionButton.defaultProps = {
-  className: 'btn btn-sm btn-default',
+  className: 'btn btn-sm btn-secondary',
 };

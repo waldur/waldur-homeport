@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { StepsList } from '@waldur/marketplace/common/StepsList';
@@ -37,7 +37,7 @@ export const Wizard = withTranslation((props: WizardProps) => (
       tabs={props.tabs}
       mountOnEnter={props.mountOnEnter}
     />
-    <div className="form-group">
+    <Form.Group>
       <Col smOffset={2} sm={8}>
         <WizardButtons
           isLastStep={props.isLastStep}
@@ -48,6 +48,6 @@ export const Wizard = withTranslation((props: WizardProps) => (
           submitLabel={props.submitLabel}
         />
       </Col>
-    </div>
+    </Form.Group>
   </>
 ));

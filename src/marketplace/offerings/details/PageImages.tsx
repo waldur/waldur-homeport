@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { ModalBody, ModalHeader, ModalTitle } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
@@ -17,14 +17,14 @@ export const PageImages: FunctionComponent<PageImagesProps> = ({
   offering,
 }) => (
   <>
-    <ModalHeader onClick={onReturn} style={{ cursor: 'pointer' }}>
-      <ModalTitle>
+    <Modal.Header onClick={onReturn} style={{ cursor: 'pointer' }}>
+      <Modal.Title>
         <i className="fa fa-arrow-left"></i> {translate('Images')}
-      </ModalTitle>
-    </ModalHeader>
-    <ModalBody>
+      </Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
       <CreateImageButton offering={offering} />
       <OfferingImagesList />
-    </ModalBody>
+    </Modal.Body>
   </>
 );

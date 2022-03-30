@@ -1,0 +1,47 @@
+//
+// Custom Nav Pills
+//
+
+.nav.nav-pills.nav-pills-custom {
+  // States
+  .show > .nav-link,
+  .nav-link {
+    border: 1px dashed $border-dashed-color;
+    border-radius: 12px;
+
+    .nav-icon {
+      img {
+        width: 30px;
+        transition: $transition-link;
+
+        &.default {
+          display: inline-block;
+        }
+
+        &.active {
+          display: none;
+        }
+      }
+    }
+
+    &.active {
+      background-color: transparent;
+      border: 1px solid $border-dashed-color;
+      transition-duration: 1ms;
+      position: relative;
+
+      .nav-text {
+        color: $gray-800 !important;
+        transition: $transition-link;
+      }
+
+      .bullet-custom {
+        display: block;
+      }
+    }
+
+    .bullet-custom {
+      display: none;
+    }
+  }
+}

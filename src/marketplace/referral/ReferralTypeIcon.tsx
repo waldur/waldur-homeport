@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 
 interface ReferralTypeIconProps {
   resourceType: string;
@@ -31,7 +31,7 @@ export const ReferralTypeIcon: FunctionComponent<ReferralTypeIconProps> = (
     Default: 'fa fa-question-circle-o',
   };
   return (
-    <Tooltip label={props.resourceType} id="resource-type-label">
+    <Tip label={props.resourceType} id="resource-type-label">
       <i
         className={
           resourceTypeDict[props.resourceType]
@@ -39,6 +39,6 @@ export const ReferralTypeIcon: FunctionComponent<ReferralTypeIconProps> = (
             : resourceTypeDict.Default
         }
       />{' '}
-    </Tooltip>
+    </Tip>
   );
 };

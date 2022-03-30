@@ -12,7 +12,7 @@ export const AddOptionButton = withTranslation(
   (props: AddOptionButtonProps) => (
     <button
       type="button"
-      className="btn btn-default"
+      className="btn btn-secondary"
       onClick={props.onClick}
       disabled={props.disabled}
     >

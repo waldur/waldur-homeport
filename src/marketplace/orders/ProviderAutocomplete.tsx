@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form } from 'react-bootstrap';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
@@ -13,7 +14,7 @@ export const ProviderAutocomplete: React.FC<ProviderAutocompleteProps> = (
   props,
 ) => (
   <div className={`form-group ${props.className}`}>
-    <label className="control-label">{translate('Service provider')}</label>
+    <Form.Label>{translate('Service provider')}</Form.Label>
     <Field
       name="provider"
       component={(fieldProps) => (

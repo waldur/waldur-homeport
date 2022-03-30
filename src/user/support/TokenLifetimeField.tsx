@@ -1,8 +1,9 @@
 import { FC } from 'react';
+import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
@@ -16,30 +17,30 @@ export const tokenOptions = [
 ];
 
 export const tokenLifetimeTooltip = (
-  <Tooltip
+  <Tip
     id="token"
     label={translate(
       'Lifetime will be updated and reset upon saving the form.',
     )}
   >
     {translate('API token lifetime')} <i className="fa fa-question-circle" />
-  </Tooltip>
+  </Tip>
 );
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 
 const PureTokenLifetimeWarning: FC<StateProps> = (props) =>
   props.token_lifetime === null ? (
-    <div className="form-group">
-      <p className="help-block text-danger col-sm-offset-3 col-sm-7">
+    <Form.Group>
+      <Form.Text className="text-danger col-sm-offset-3 col-sm-7">
         {translate(
           'By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed.',
         )}
         {translate(
           'Please make sure you know what you are doing and set to 10 minutes if unsure.',
         )}
-      </p>
-    </div>
+      </Form.Text>
+    </Form.Group>
   ) : null;
 
 const mapStateToProps = (state: RootState) => {

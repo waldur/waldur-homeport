@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
-import { PanelBody, Tab, Tabs } from 'react-bootstrap';
+import { Card, Tab, Tabs } from 'react-bootstrap';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { ResourceUsageChart } from '@waldur/marketplace/resources/usage/ResourceUsageChart';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
@@ -17,41 +17,40 @@ interface ResourceUsageTabsProps {
 export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
   props,
 ) => (
-  <PanelBody>
+  <Card.Body>
     <div className="tabs-container">
       <Tabs
         defaultActiveKey="tab-0"
         id="resource-usage-component-tabs"
         unmountOnExit
         mountOnEnter
-        animation
       >
         {props.components.map((component, index: number) => (
           <Tab
             title={
               <>
-                <Tooltip
+                <Tip
                   id={`tab-${index}-tooltip`}
                   label={getBillingTypeLabel(component.billing_type)}
                 >
                   <i className="fa fa-question-circle" />
-                </Tooltip>{' '}
+                </Tip>{' '}
                 {component.name}
               </>
             }
             key={index}
             eventKey={`tab-${index}`}
           >
-            <PanelBody style={{ display: 'flex', justifyContent: 'center' }}>
+            <Card.Body style={{ display: 'flex', justifyContent: 'center' }}>
               <ResourceUsageChart
                 offeringComponent={component}
                 usages={props.usages}
                 chartColor={props.colors[index]}
               />
-            </PanelBody>
+            </Card.Body>
           </Tab>
         ))}
       </Tabs>
     </div>
-  </PanelBody>
+  </Card.Body>
 );

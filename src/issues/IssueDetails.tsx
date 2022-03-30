@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { Col } from 'react-bootstrap';
+import { Card, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -54,8 +54,8 @@ export const IssueDetails: FunctionComponent = () => {
   const staffOrSupport = currentUser.is_staff || currentUser.is_support;
   return (
     <>
-      <div className="ibox">
-        <div className="ibox-content">
+      <Card>
+        <Card.Body>
           <div className="row m-b-md">
             <div className="col-lg-12">
               <h2>
@@ -164,8 +164,8 @@ export const IssueDetails: FunctionComponent = () => {
               </div>
             </Col>
           </div>
-        </div>
-      </div>
+        </Card.Body>
+      </Card>
 
       <IssueAttachmentsContainer issue={issue} />
 

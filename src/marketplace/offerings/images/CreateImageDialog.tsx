@@ -23,10 +23,7 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { RootState } from '@waldur/store/reducers';
 
 const AddOfferingImageDialog: FunctionComponent<any> = (props) => (
-  <form
-    onSubmit={props.handleSubmit(props.submitRequest)}
-    className="form-horizontal"
-  >
+  <form onSubmit={props.handleSubmit(props.submitRequest)}>
     <ModalDialog
       title={translate('Add image')}
       footer={
@@ -51,7 +48,7 @@ const AddOfferingImageDialog: FunctionComponent<any> = (props) => (
           label={translate('Image: ')}
           accept={'image/*'}
           buttonLabel={translate('Browse')}
-          className="btn btn-default"
+          className="btn btn-secondary"
           required={true}
         />
         <StringField

@@ -13,7 +13,7 @@ export const CreateResourceFormGroup: FunctionComponent<CreateResourceFormGroupF
     <>
       {label ? (
         <FormGroup
-          labelClassName="control-label col-sm-3"
+          labelClassName="col-sm-3"
           valueClassName="col-sm-9"
           label={label}
           required={required}

@@ -39,7 +39,7 @@ async function loadOrder(order_uuid) {
 const OrderRefreshButton: FunctionComponent<any> = (props) => (
   <button
     type="button"
-    className="btn btn-default btn-sm m-r-sm"
+    className="btn btn-secondary btn-sm m-r-sm"
     onClick={props.loadData}
   >
     <i className="fa fa-refresh" /> {translate('Refresh')}

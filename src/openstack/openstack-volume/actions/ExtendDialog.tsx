@@ -1,14 +1,5 @@
 import { useEffect, useCallback } from 'react';
-import {
-  ControlLabel,
-  FormGroup,
-  InputGroup,
-  InputGroupAddon,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Form, InputGroup, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Field, reduxForm, change } from 'redux-form';
 
@@ -71,10 +62,10 @@ export const VolumeExtendDialog = reduxForm<
     );
     return (
       <form onSubmit={handleSubmit(extendVolume)}>
-        <ModalHeader>
-          <ModalTitle>{translate('Extend OpenStack volume')}</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
+        <Modal.Header>
+          <Modal.Title>{translate('Extend OpenStack volume')}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <p>
             <strong>{translate('Volume name')}:</strong> {resource.name}
           </p>
@@ -84,8 +75,8 @@ export const VolumeExtendDialog = reduxForm<
             {formatFilesize(resource.size)}
           </p>
 
-          <FormGroup>
-            <ControlLabel>{translate('New size')}:</ControlLabel>
+          <Form.Group>
+            <Form.Label>{translate('New size')}:</Form.Label>
             <InputGroup>
               <Field
                 name="size"
@@ -97,18 +88,18 @@ export const VolumeExtendDialog = reduxForm<
                 parse={parseIntField}
                 format={formatIntField}
               />
-              <InputGroupAddon>{translate('GB')}</InputGroupAddon>
+              <InputGroup.Text>{translate('GB')}</InputGroup.Text>
             </InputGroup>
-          </FormGroup>
-        </ModalBody>
-        <ModalFooter>
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
           <SubmitButton
             block={false}
             submitting={submitting}
             label={translate('Submit')}
           />
           <CloseDialogButton />
-        </ModalFooter>
+        </Modal.Footer>
       </form>
     );
   },

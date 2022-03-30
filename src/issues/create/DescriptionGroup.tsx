@@ -22,7 +22,7 @@ export const DescriptionGroup: FunctionComponent<{ layout; disabled }> = ({
       <Field
         name="description"
         component={InputField}
-        componentClass="textarea"
+        as="textarea"
         required={true}
         disabled={disabled}
       />

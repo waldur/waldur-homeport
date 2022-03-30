@@ -1,9 +1,4 @@
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
@@ -40,10 +35,10 @@ export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
   const disabled = submitting || fetchingUserDetails;
   return (
     <form onSubmit={handleSubmit(createInvitation)}>
-      <ModalHeader>
-        <ModalTitle>{translate('Invite user')}</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+      <Modal.Header>
+        <Modal.Title>{translate('Invite user')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <EmailGroup disabled={disabled} />
         {isFeatureVisible('invitations.conceal_civil_number') ? null : (
           <CivilNumberGroup disabled={disabled} />
@@ -59,8 +54,8 @@ export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
         {projectEnabled && (
           <ProjectGroup customer={context.customer} disabled={disabled} />
         )}
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         {!roleDisabled && (
           <SubmitButton
             block={false}
@@ -69,7 +64,7 @@ export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
           />
         )}
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </form>
   );
 });

@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,9 +16,6 @@ import {
 import {
   PROJECT_WORKSPACE,
   ORGANIZATION_WORKSPACE,
-  WorkspaceType,
-  USER_WORKSPACE,
-  SUPPORT_WORKSPACE,
 } from '@waldur/workspace/types';
 
 import './SelectWorkspaceToggle.scss';
@@ -31,25 +27,6 @@ const SelectWorkspaceDialog = lazyComponent(
     ),
   'SelectWorkspaceDialog',
 );
-
-const workspaceIconClasses: Record<WorkspaceType, string> = {
-  [ORGANIZATION_WORKSPACE]: 'fa-sitemap',
-  [PROJECT_WORKSPACE]: 'fa-bookmark',
-  [USER_WORKSPACE]: 'fa-user',
-  [SUPPORT_WORKSPACE]: 'fa-question-circle',
-};
-
-const workspaceButtonClasses: Record<WorkspaceType, string> = {
-  [ORGANIZATION_WORKSPACE]: 'primary',
-  [PROJECT_WORKSPACE]: 'success',
-  [USER_WORKSPACE]: 'info',
-  [SUPPORT_WORKSPACE]: 'warning',
-};
-
-const getIconClass = (workspace) => workspaceIconClasses[workspace];
-
-const getButtonClass = (workspace) =>
-  workspaceButtonClasses[workspace] || 'default';
 
 const getOrganizationDisplayName = (isWide, organization) => {
   return !isWide && organization.abbreviation
@@ -95,11 +72,9 @@ export const SelectWorkspaceToggle: FunctionComponent = () => {
   };
   return (
     <Button
-      bsStyle={getButtonClass(workspace)}
-      className="select-workspace-toggle"
+      className="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder"
       onClick={changeWorkspace}
     >
-      <i className={classNames(['fa', 'm-r-xs', getIconClass(workspace)])} />{' '}
       {wrapTooltip(
         titleTooltip,
         <span id="select-workspace-title">

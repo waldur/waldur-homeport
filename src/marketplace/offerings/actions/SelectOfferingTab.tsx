@@ -39,7 +39,7 @@ export const SelectOfferingTab = () => {
   }
   if (error) {
     return (
-      <Alert bsStyle="danger">
+      <Alert variant="danger">
         <h4>{translate('Unable to load offerings')}</h4>
         {error?.message && <p>{error.message}</p>}
       </Alert>

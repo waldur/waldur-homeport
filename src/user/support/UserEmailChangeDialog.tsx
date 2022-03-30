@@ -1,5 +1,5 @@
 import { useCallback, FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -25,7 +25,7 @@ export const UserEmailChangeDialog: FunctionComponent<{
       footer={
         <>
           <Button
-            bsStyle="primary"
+            variant="primary"
             onClick={handleSubmit}
             disabled={email === user.email || !email || submitting}
           >
@@ -48,9 +48,8 @@ export const UserEmailChangeDialog: FunctionComponent<{
       <p>
         <strong>{translate('New email')}</strong>:
       </p>
-      <input
+      <Form.Control
         type="email"
-        className="form-control"
         value={email}
         onChange={(event) => setEmail(event.target.value)}
       />

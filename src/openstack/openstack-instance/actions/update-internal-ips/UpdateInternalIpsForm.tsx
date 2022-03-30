@@ -1,4 +1,4 @@
-import { ControlLabel, FormGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { SelectField } from '@waldur/form';
@@ -27,8 +27,8 @@ export const UpdateInternalIpsForm = connectForm(
         invalid={invalid}
       >
         {asyncState.value ? (
-          <FormGroup>
-            <ControlLabel>{translate('Connected subnets')}</ControlLabel>
+          <Form.Group>
+            <Form.Label>{translate('Connected subnets')}</Form.Label>
             <Field
               component={SelectField}
               name="internal_ips_set"
@@ -36,7 +36,7 @@ export const UpdateInternalIpsForm = connectForm(
               options={asyncState.value}
               isMulti={true}
             />
-          </FormGroup>
+          </Form.Group>
         ) : null}
       </AsyncActionDialog>
     </form>

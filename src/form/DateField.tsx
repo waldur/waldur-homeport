@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import DatePicker from 'react-16-bootstrap-date-picker';
+import DatePicker from 'react-datepicker';
 
 export const DateField: FunctionComponent<any> = (props) => {
   const { input, ...rest } = props;

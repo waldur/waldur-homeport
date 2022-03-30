@@ -1,10 +1,5 @@
 import { useCallback } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
@@ -55,14 +50,14 @@ const PureUpdateOfferingPermissionExpirationTimeDialog = (props) => {
   );
   return (
     <form onSubmit={props.handleSubmit(update)}>
-      <ModalHeader>
-        <ModalTitle>
+      <Modal.Header>
+        <Modal.Title>
           {translate('Update permission of {name}', {
             name: props.resolve.permission.offering_name,
           })}
-        </ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <FormContainer submitting={props.submitting}>
           <Field
             name="expiration_time"
@@ -71,13 +66,13 @@ const PureUpdateOfferingPermissionExpirationTimeDialog = (props) => {
             {...datePickerOverlayContainerInDialogs()}
           />
         </FormContainer>
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <SubmitButton block={false} submitting={props.submitting}>
           {translate('Update')}
         </SubmitButton>
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </form>
   );
 };

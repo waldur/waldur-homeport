@@ -38,7 +38,7 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       title={title}
       footer={
         <>
-          <Button bsStyle="danger" onClick={handleSubmit}>
+          <Button variant="danger" onClick={handleSubmit}>
             {translate('Yes')}
           </Button>
           <Button onClick={handleCancel}>{translate('No')}</Button>

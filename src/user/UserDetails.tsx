@@ -1,5 +1,4 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
-import { useState, useEffect, FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { useEffectOnce } from 'react-use';
 
 import { translate } from '@waldur/i18n';
@@ -10,7 +9,6 @@ import store from '@waldur/store/store';
 import { setCurrentWorkspace, setCurrentUser } from '@waldur/workspace/actions';
 import { USER_WORKSPACE } from '@waldur/workspace/types';
 
-import { UserSidebar } from './UserSidebar';
 import { UsersService } from './UsersService';
 
 function loadUser() {
@@ -41,26 +39,9 @@ function loadUser() {
 }
 
 export const UserDetails: FunctionComponent = () => {
-  const [pageClass, setPageClass] = useState<string>();
-  const [hideBreadcrumbs, setHideBreadcrumbs] = useState<boolean>();
-  const { state, params } = useCurrentStateAndParams();
-
-  function refreshState() {
-    const data = state?.data;
-    setPageClass(data?.pageClass);
-    setHideBreadcrumbs(data?.hideBreadcrumbs);
-  }
-
   useEffectOnce(() => {
     loadUser();
   });
-  useEffect(refreshState, [state, params]);
 
-  return (
-    <Layout
-      sidebar={<UserSidebar />}
-      pageClass={pageClass}
-      hideBreadcrumbs={hideBreadcrumbs}
-    />
-  );
+  return <Layout />;
 };

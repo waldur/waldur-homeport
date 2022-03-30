@@ -3,15 +3,15 @@ import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { Panel } from '@waldur/core/Panel';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 
 const SelectOfferingButton = ({ value, onChange }) => (
   <a
     className={classNames(
-      'btn btn-xs btn-block-sm btn-block-md btn-outline',
-      value ? 'btn-primary' : 'btn-default',
+      'btn btn-block-sm btn-block-md btn-outline',
+      value ? 'btn-primary' : 'btn-secondary',
     )}
     onClick={onChange}
   >
@@ -26,12 +26,12 @@ const SelectOfferingButton = ({ value, onChange }) => (
 const OfferingItem = ({ offering, value, onChange, id }) => (
   <Panel className="provider-box cursor-pointer">
     <div className="m-md">
-      <Tooltip label={offering.name} id={id}>
+      <Tip label={offering.name} id={id}>
         <a className="h5 ellipsis">{offering.name}</a>
-      </Tooltip>
+      </Tip>
     </div>
     <div className="text-center m-b m-t">
-      <OfferingLogo src={offering.thumbnail} size="small" />
+      <OfferingLogo src={offering.thumbnail} size="sm" />
     </div>
     <div className="text-center">
       <SelectOfferingButton

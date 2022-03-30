@@ -17,7 +17,7 @@ export const LoginColumn = () => {
       <div className="LoginBody">
         <div className="LoginGridItemContainer">
           <div className="LoginLogo m-b-sm">
-            <img src="/images/login_logo.png" />
+            <img src="/images/login_logo.png" style={{ maxWidth: '100%' }} />
           </div>
           <AuthHeader />
           {features.SigninForm && (

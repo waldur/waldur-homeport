@@ -5,10 +5,6 @@ import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 export function getBreadcrumbs(): BreadcrumbItem[] {
   return [
     {
-      label: translate('Organization workspace'),
-      state: 'organization.details',
-    },
-    {
       label: translate('Public offerings'),
       state: 'marketplace-vendor-offerings',
     },

@@ -1,10 +1,5 @@
 import { DateTime } from 'luxon';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
@@ -60,10 +55,10 @@ export const AddProjectUserDialog = reduxForm<
 
   return (
     <form onSubmit={handleSubmit(saveUser)}>
-      <ModalHeader>
-        <ModalTitle>{translate('Add user')}</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+      <Modal.Header>
+        <Modal.Title>{translate('Add user')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <FormContainer submitting={submitting}>
           <AsyncSelectField
             name="user"
@@ -93,13 +88,13 @@ export const AddProjectUserDialog = reduxForm<
             {...datePickerOverlayContainerInDialogs()}
           />
         </FormContainer>
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <SubmitButton block={false} submitting={submitting}>
           {translate('Add')}
         </SubmitButton>
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </form>
   );
 });

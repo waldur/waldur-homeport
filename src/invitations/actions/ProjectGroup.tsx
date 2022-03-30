@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { ControlLabel, FormGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
@@ -10,11 +10,11 @@ export const ProjectGroup: FunctionComponent<{ customer; disabled }> = ({
   customer,
   disabled,
 }) => (
-  <FormGroup>
-    <ControlLabel>
+  <Form.Group>
+    <Form.Label>
       {translate('Project')}
       <span className="text-danger">*</span>
-    </ControlLabel>
+    </Form.Label>
     <Field
       name="project"
       component={SelectField}
@@ -27,5 +27,5 @@ export const ProjectGroup: FunctionComponent<{ customer; disabled }> = ({
       isClearable={true}
       {...reactSelectMenuPortaling()}
     />
-  </FormGroup>
+  </Form.Group>
 );

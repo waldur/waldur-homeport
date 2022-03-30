@@ -1,9 +1,4 @@
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
@@ -60,21 +55,21 @@ export const PageAccounting = connect(mapStateToProps)(
 
       return (
         <form onSubmit={handleSubmit(updateOfferingHandler)}>
-          <ModalHeader onClick={onReturn} style={{ cursor: 'pointer' }}>
-            <ModalTitle>
+          <Modal.Header onClick={onReturn} style={{ cursor: 'pointer' }}>
+            <Modal.Title>
               <i className="fa fa-arrow-left"></i> {translate('Accounting')}
-            </ModalTitle>
-          </ModalHeader>
-          <ModalBody>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <AccountingStepContainer />
-          </ModalBody>
-          <ModalFooter>
+          </Modal.Body>
+          <Modal.Footer>
             <SubmitButton
               disabled={invalid}
               submitting={submitting}
               label={translate('Update')}
             />
-          </ModalFooter>
+          </Modal.Footer>
         </form>
       );
     },

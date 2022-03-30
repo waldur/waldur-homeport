@@ -1,10 +1,12 @@
+import { Container } from 'react-bootstrap';
+
 import { ENV } from '@waldur/configs/default';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 
 export const ResourceCreateExpandableRow = ({ row }) => (
-  <dl className="dl-horizontal col-sm-12">
+  <Container>
     <Field label={translate('Resource name')} value={row.name} />
     <Field label={translate('Description')} value={row.description} />
     {row.end_date &&
@@ -14,5 +16,5 @@ export const ResourceCreateExpandableRow = ({ row }) => (
           value={formatDate(row.end_date)}
         />
       )}
-  </dl>
+  </Container>
 );

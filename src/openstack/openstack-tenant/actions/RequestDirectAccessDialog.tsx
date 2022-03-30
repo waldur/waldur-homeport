@@ -1,10 +1,5 @@
 import { useEffect, FunctionComponent } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -40,14 +35,14 @@ export const RequestDirectAccessDialog: FunctionComponent<{
   });
   return (
     <>
-      <ModalHeader>
-        <ModalTitle>
+      <Modal.Header>
+        <Modal.Title>
           {translate('Request direct access to {name}', {
             name: resource.name,
           })}
-        </ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <p>
           {translate(
             'To get access, please send a request to {supportEmail}.',
@@ -59,10 +54,10 @@ export const RequestDirectAccessDialog: FunctionComponent<{
             'Please note that request should specify tenant and provide a reason.',
           )}
         </p>
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </>
   );
 };

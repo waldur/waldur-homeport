@@ -1,10 +1,5 @@
 import { useEffect, FunctionComponent } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -34,10 +29,10 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
   }, [dispatch, resolve]);
   return (
     <>
-      <ModalHeader>
-        <ModalTitle>{translate('Incorrect organization details')}</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+      <Modal.Header>
+        <Modal.Title>{translate('Incorrect organization details')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         {ENV.plugins.WALDUR_CORE.SITE_EMAIL
           ? translate(
               'To correct details of your organization, please send an email to {supportEmail} highlighting the errors in current details. Thank you!',
@@ -51,10 +46,10 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
               formatJsxTemplate,
             )
           : null}
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </>
   );
 };

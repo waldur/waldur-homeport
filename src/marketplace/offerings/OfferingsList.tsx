@@ -6,7 +6,7 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { BackendIdTooltip } from '@waldur/core/Tooltip';
+import { BackendIdTip } from '@waldur/core/Tooltip';
 import { withTranslation } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
@@ -37,7 +37,7 @@ import { OfferingStateCell } from './OfferingStateCell';
 const OfferingNameColumn = ({ row }) => (
   <OfferingDetailsLink offering_uuid={row.uuid}>
     {row.name}
-    <BackendIdTooltip backendId={row.backend_id} />
+    <BackendIdTip backendId={row.backend_id} />
   </OfferingDetailsLink>
 );
 

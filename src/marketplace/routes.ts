@@ -237,9 +237,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace/',
     component: MarketplaceLanding,
     parent: 'project',
-    data: {
-      hideBreadcrumbs: true,
-    },
   },
 
   {
@@ -247,9 +244,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace/',
     component: MarketplaceLanding,
     parent: 'organization',
-    data: {
-      hideBreadcrumbs: true,
-    },
   },
 
   {
@@ -257,9 +251,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace/',
     component: MarketplaceLanding,
     parent: 'profile',
-    data: {
-      hideBreadcrumbs: true,
-    },
   },
 
   {

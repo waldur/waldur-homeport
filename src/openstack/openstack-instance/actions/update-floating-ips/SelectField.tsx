@@ -8,12 +8,7 @@ const FormField: FC<WrappedFieldProps> = ({ input, meta, ...rest }) => (
 );
 
 export const SelectField = ({ name, options, disabled = false }) => (
-  <Field
-    name={name}
-    component={FormField}
-    componentClass="select"
-    disabled={disabled}
-  >
+  <Field name={name} component={FormField} as="select" disabled={disabled}>
     {options.map((option, index) => (
       <option value={option.value} key={index}>
         {option.label}

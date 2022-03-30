@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from 'react';
 
 import { useOutsideClickHandler } from '@waldur/core/useOutsideClickHandler';
 import { translate } from '@waldur/i18n';
-import { Button } from '@waldur/marketplace/offerings/service-providers/shared/Button';
+import { SharedButton } from '@waldur/marketplace/offerings/service-providers/shared/Button';
 import { AnonymousLanguageSelector } from '@waldur/navigation/AnonymousLanguageSelector';
 import { OfferingSearchField } from '@waldur/navigation/OfferingSearchField';
 import { SearchResultsDropdown } from '@waldur/navigation/SearchResultsDropdown';
@@ -26,7 +26,7 @@ export const AnonymousHeader: FunctionComponent = () => {
         />
         <div className="anonymousHeader__actions">
           <AnonymousLanguageSelector />
-          <Button
+          <SharedButton
             label={translate('Log in')}
             onClick={() => router.stateService.go('login')}
           />

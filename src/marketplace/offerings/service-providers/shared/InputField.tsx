@@ -1,6 +1,8 @@
 import { FunctionComponent, ReactNode } from 'react';
+import { Form } from 'react-bootstrap';
 
 import { FormField } from '@waldur/form/types';
+
 import './InputField.scss';
 
 const SearchIcon = require('./SearchIcon.svg');
@@ -22,10 +24,10 @@ export const InputField: FunctionComponent<InputFieldProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, ...rest } = props;
   return (
-    <input
+    <Form.Control
       {...props.input}
       type="text"
-      className="input form-control"
+      className="input"
       style={{ backgroundImage: `url(${SearchIcon})` }}
       {...rest}
     />

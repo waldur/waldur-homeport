@@ -1,9 +1,9 @@
 import { UIView } from '@uirouter/react';
-import classNames from 'classnames';
 import React, { useMemo, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { MasterInit } from '@waldur/metronic/layout/MasterInit';
+import { SelectWorkspaceToggle } from '@waldur/navigation/workspace/SelectWorkspaceToggle';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { AppFooter } from './AppFooter';
@@ -11,67 +11,57 @@ import { BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';
 import { LayoutContext, LayoutContextInterface } from './context';
 import { CookiesConsent } from './cookies/CookiesConsent';
 import { AppHeader } from './header/AppHeader';
+import { UnifiedSidebar } from './sidebar/UnifiedSidebar';
 import { getTitle } from './title';
 
-interface LayoutProps {
-  sidebar: React.ReactNode;
-  pageClass?: string;
-  hideBreadcrumbs?: boolean;
-}
-
-export const Layout: React.FC<LayoutProps> = ({
-  sidebar,
-  pageClass,
-  hideBreadcrumbs,
-  children,
-}) => {
+export const Layout: React.FC = ({ children }) => {
   const pageTitle = useSelector(getTitle);
   const currentUser = useSelector(getUser);
   const [actions, setActions] = useState(null);
-  const [sidebarClass, setSidebarClass] = useState('');
   const [sidebarKey, setSidebarKey] = useState('');
   const context = useMemo<LayoutContextInterface>(
-    () => ({ setActions, setSidebarClass, sidebarKey, setSidebarKey }),
-    [setActions, setSidebarClass, sidebarKey, setSidebarKey],
+    () => ({ setActions, sidebarKey, setSidebarKey }),
+    [setActions, sidebarKey, setSidebarKey],
   );
   if (!currentUser) {
     return null;
   }
   return (
     <LayoutContext.Provider value={context}>
-      {sidebar}
-      <div id="page-wrapper" className={pageClass}>
-        <CookiesConsent />
-        <AppHeader />
-        {hideBreadcrumbs ? null : (
-          <Row
-            className={classNames(
-              'wrapper white-bg page-heading',
-              sidebarClass,
-            )}
-          >
-            <Col lg={actions ? 7 : 12}>
-              {pageTitle ? <h2>{pageTitle}</h2> : null}
-              <BreadcrumbsContainer />
-            </Col>
-            {actions && (
-              <Col lg={5}>
-                <div className="title-action">{actions}</div>
-              </Col>
-            )}
-          </Row>
-        )}
-        {children}
-        <div className="footer-indent">
-          <UIView />
+      <MasterInit />
+      <div className="d-flex flex-column flex-root">
+        <div className="page d-flex flex-row flex-column-fluid">
+          <UnifiedSidebar />
+          <div className="wrapper d-flex flex-column flex-row-fluid">
+            <CookiesConsent />
+            <AppHeader />
+            <div className="content d-flex flex-column flex-column-fluid">
+              <div className="toolbar">
+                <div className="container-fluid d-flex flex-stack">
+                  <div className="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                    <h1 className="d-flex text-dark fw-bolder fs-3 align-items-center my-1">
+                      {pageTitle}
+                    </h1>
+                    <span className="h-20px border-gray-300 border-start mx-4"></span>
+                    <BreadcrumbsContainer />
+                  </div>
+                  <div className="d-flex align-items-center gap-2 gap-lg-3">
+                    <SelectWorkspaceToggle />
+                    {actions}
+                  </div>
+                </div>
+              </div>
+              <div className="post d-flex flex-column-fluid">
+                <div className="container-xxl">
+                  {children}
+                  <UIView />
+                </div>
+              </div>
+            </div>
+            <AppFooter />
+          </div>
         </div>
-        <AppFooter />
       </div>
     </LayoutContext.Provider>
   );
-};
-
-Layout.defaultProps = {
-  hideBreadcrumbs: false,
-  pageClass: 'white-bg',
 };

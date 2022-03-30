@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Button, Card } from 'react-bootstrap';
 import Gravatar from 'react-gravatar';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -33,27 +34,27 @@ export const IssuesActivityStream: FunctionComponent = () => {
       }),
     );
   return (
-    <div className="ibox float-e-margins">
-      <div className="ibox-title">
+    <div className="card float-e-margins">
+      <Card.Header>
         <span className="pull-right">
-          <button className="btn btn-default btn-xs">
+          <Button size="sm">
             <small>
               <i className="fa fa-list"></i>
             </small>{' '}
             <>{translate('See all')}</>
-          </button>
+          </Button>
 
-          <button className="btn btn-default btn-xs">
+          <Button size="sm">
             <small>
               <i className="fa fa-refresh"></i>
             </small>{' '}
             <>{translate('Refresh')}</>
-          </button>
+          </Button>
         </span>
 
         <h5>{translate('Activity stream')}</h5>
-      </div>
-      <div className="ibox-content">
+      </Card.Header>
+      <Card.Body>
         {loading ? (
           <LoadingSpinner />
         ) : error ? (
@@ -109,7 +110,7 @@ export const IssuesActivityStream: FunctionComponent = () => {
             ))}
           </div>
         )}
-      </div>
+      </Card.Body>
     </div>
   );
 };

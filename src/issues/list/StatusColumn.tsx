@@ -1,14 +1,14 @@
 import { FunctionComponent } from 'react';
 import ReactStars from 'react-rating-stars-component';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { IssueTypeIcon } from '@waldur/issues/types/IssueTypeIcon';
 
 export const StatusColumn: FunctionComponent<{ row }> = ({ row }) => (
   <>
     <IssueTypeIcon type={row.type} /> {row.status || 'N/A'}
     {row.feedback ? (
-      <Tooltip
+      <Tip
         id="feedback-tooltip"
         label={`${row.feedback.evaluation_number} - ${row.feedback.comment}`}
       >
@@ -20,7 +20,7 @@ export const StatusColumn: FunctionComponent<{ row }> = ({ row }) => (
           activeColor="#ffd700"
           value={row.feedback.evaluation_number}
         />
-      </Tooltip>
+      </Tip>
     ) : null}
   </>
 );

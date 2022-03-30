@@ -25,7 +25,7 @@ export const UserTableActions = ({ refreshList }) => {
     );
   };
   return (
-    <Button onClick={openDialog} bsSize="small">
+    <Button onClick={openDialog} size="sm">
       <i className="fa fa-plus" />{' '}
       {translate('Add {provider} user', {
         provider: ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_LABEL,

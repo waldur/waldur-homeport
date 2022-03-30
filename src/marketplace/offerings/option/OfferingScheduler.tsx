@@ -1,5 +1,5 @@
 import { FunctionComponent, useContext } from 'react';
-import { Col, FormGroup, Panel } from 'react-bootstrap';
+import { Col, FormGroup, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { WrappedFieldArrayProps } from 'redux-form';
@@ -34,14 +34,14 @@ const PureOfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
   return (
     <FormGroup>
       <Col smOffset={offset} sm={col}>
-        <Panel>
-          <Panel.Heading>
+        <Card>
+          <Card.Header>
             <h4>{props.translate('Availability')}</h4>
-          </Panel.Heading>
-          <Panel.Body>
+          </Card.Header>
+          <Card.Body>
             <CalendarSettings />
-          </Panel.Body>
-        </Panel>
+          </Card.Body>
+        </Card>
 
         <CalendarComponent
           calendarType="create"

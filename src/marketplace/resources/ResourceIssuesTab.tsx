@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { PanelBody } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { IssuesList } from '@waldur/issues/list/IssuesList';
 
 import { Resource } from './types';
 
 export const ResourceIssuesTab: FC<{ resource: Resource }> = ({ resource }) => (
-  <PanelBody>
+  <Card.Body>
     <IssuesList
       filter={{
         resource:
@@ -15,5 +15,5 @@ export const ResourceIssuesTab: FC<{ resource: Resource }> = ({ resource }) => (
             : resource.scope,
       }}
     />
-  </PanelBody>
+  </Card.Body>
 );

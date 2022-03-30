@@ -1,9 +1,4 @@
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
@@ -47,10 +42,12 @@ export const ServiceProviderEditor = connect((_, props: any) => ({
     return (
       <form onSubmit={handleSubmit(updateCustomerHandler)}>
         <SidebarResizer />
-        <ModalHeader>
-          <ModalTitle>{translate('Edit service provider details')}</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
+        <Modal.Header>
+          <Modal.Title>
+            {translate('Edit service provider details')}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <FormContainer layout="vertical" submitting={submitting}>
             <TextField name={'description'} label={translate('Description')} />
             <CustomerLogoUpdateContainer
@@ -62,15 +59,15 @@ export const ServiceProviderEditor = connect((_, props: any) => ({
               }
             />
           </FormContainer>
-        </ModalBody>
-        <ModalFooter>
+        </Modal.Body>
+        <Modal.Footer>
           <CloseDialogButton />
           <SubmitButton
             disabled={invalid}
             submitting={submitting}
             label={translate('Update')}
           />
-        </ModalFooter>
+        </Modal.Footer>
       </form>
     );
   }),

@@ -1,10 +1,5 @@
 import { useEffect, useCallback, useMemo } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { reduxForm, change, arrayPush } from 'redux-form';
 
@@ -220,10 +215,10 @@ export const EditTeamMemberDialog = reduxForm<
 
   return (
     <form onSubmit={handleSubmit(saveUser)} id="edit-team-member-dialog">
-      <ModalHeader>
-        <ModalTitle>{translate('Edit team member')}</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+      <Modal.Header>
+        <Modal.Title>{translate('Edit team member')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <UserGroup editUser={resolve.editUser} />
         <OwnerGroup
           disabled={submitting}
@@ -234,13 +229,13 @@ export const EditTeamMemberDialog = reduxForm<
           disabled={submitting || !canChangeRole || !canManageOwner}
         />
         <ProjectsListGroup canChangeRole={canChangeRole} projects={projects} />
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <SubmitButton block={false} submitting={submitting}>
           {translate('Save')}
         </SubmitButton>
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </form>
   );
 });

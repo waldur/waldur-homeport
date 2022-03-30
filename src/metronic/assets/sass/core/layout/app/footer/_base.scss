@@ -1,0 +1,104 @@
+//
+// Footer
+//
+
+// General mode
+.app-footer {
+  @include app-layout-transition();
+}
+
+// Desktop mode
+@include media-breakpoint-up(lg) {
+  // Base
+  .app-footer {
+    @include attr(height, get($app-footer-config, base, height));
+    @include attr(z-index, get($app-footer-config, base, z-index));
+    @include attr(background-color, get($app-footer-config, base, bg-color));
+    @include attr(box-shadow, get($app-footer-config, base, box-shadow));
+    @include attr(border-top, get($app-footer-config, base, border-top));
+  }
+
+  // Vars
+  .app-footer-fixed {
+    --kt-app-footer-height: #{get($app-footer-config, fixed, height)};
+  }
+
+  // States
+  .app-footer {
+    .app-footer-fixed & {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: var(--kt-app-footer-height);
+      @include attr(z-index, get($app-footer-config, base, z-index));
+      @include attr(box-shadow, get($app-footer-config, base, box-shadow));
+      @include attr(border-top, get($app-footer-config, base, border-top));
+    }
+  }
+
+  // Integration
+  .app-footer {
+    // Aside
+    .app-aside-fixed.app-aside-push-footer & {
+      left: var(--kt-app-aside-width);
+    }
+
+    // Aside primary
+    .app-aside-primary-fixed.app-aside-primary-push-footer & {
+      left: var(--kt-app-aside-primary-width);
+    }
+
+    // Aside secondary
+    .app-aside-secondary-fixed.app-aside-secondary-push-footer & {
+      left: calc(
+        var(--kt-app-aside-primary-width) +
+          var(--kt-app-aside-secondary-width, 0px)
+      );
+    }
+
+    // Aside tertiary
+    .app-aside-tertiary-fixed.app-aside-tertiary-push-footer & {
+      left: calc(
+        var(--kt-app-aside-primary-width) +
+          var(--kt-app-aside-secondary-width, 0px) +
+          var(--kt-app-aside-tertiary-width, 0px)
+      );
+    }
+  }
+}
+
+// Tablet & mobile modes
+@include media-breakpoint-down(lg) {
+  // Base
+  .app-footer {
+    @include attr(height, get($app-footer-config, base, height-mobile));
+    @include attr(z-index, get($app-footer-config, base, z-index-mobile));
+    @include attr(
+      background-color,
+      get($app-footer-config, base, bg-color-mobile)
+    );
+    @include attr(box-shadow, get($app-footer-config, base, box-shadow-mobile));
+    @include attr(border-top, get($app-footer-config, base, border-top-mobile));
+  }
+
+  // States
+  .app-footer {
+    .app-footer-mobile-fixed & {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      @include attr(height, get($app-footer-config, base, height-mobile));
+      @include attr(z-index, get($app-footer-config, base, z-index-mobile));
+      @include attr(
+        box-shadow,
+        get($app-footer-config, base, box-shadow-mobile)
+      );
+      @include attr(
+        border-top,
+        get($app-footer-config, base, border-top-mobile)
+      );
+    }
+  }
+}

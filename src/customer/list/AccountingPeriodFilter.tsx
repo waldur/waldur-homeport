@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 
 import { PeriodOption } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
@@ -11,8 +12,8 @@ interface AccountingPeriodFilterProps {
 
 export const AccountingPeriodFilter: FunctionComponent<AccountingPeriodFilterProps> =
   (props) => (
-    <div className="form-group col-sm-3">
-      <label className="control-label">{translate('Accounting period')}</label>
+    <Form.Group className="col-sm-3">
+      <Form.Label>{translate('Accounting period')}</Form.Label>
       <AccountingPeriodField options={props.options} />
-    </div>
+    </Form.Group>
   );

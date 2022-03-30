@@ -1,11 +1,4 @@
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-  Row,
-  Col,
-} from 'react-bootstrap';
+import { Modal, Row, Col } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
@@ -47,12 +40,12 @@ export const PageHeroImage = connect<{}, {}, { offering }>((_, props) => ({
       };
       return (
         <form onSubmit={handleSubmit(updateOfferingHandler)}>
-          <ModalHeader onClick={onReturn} style={{ cursor: 'pointer' }}>
-            <ModalTitle>
+          <Modal.Header onClick={onReturn} style={{ cursor: 'pointer' }}>
+            <Modal.Title>
               <i className="fa fa-arrow-left"></i> {translate('Hero image')}
-            </ModalTitle>
-          </ModalHeader>
-          <ModalBody>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <Row>
               <Col lg={12}>
                 <FormContainer
@@ -70,14 +63,14 @@ export const PageHeroImage = connect<{}, {}, { offering }>((_, props) => ({
                 </FormContainer>
               </Col>
             </Row>
-          </ModalBody>
-          <ModalFooter>
+          </Modal.Body>
+          <Modal.Footer>
             <SubmitButton
               disabled={invalid}
               submitting={submitting}
               label={translate('Update')}
             />
-          </ModalFooter>
+          </Modal.Footer>
         </form>
       );
     },

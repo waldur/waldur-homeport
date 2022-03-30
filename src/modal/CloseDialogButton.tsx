@@ -1,3 +1,4 @@
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -21,13 +22,9 @@ const PureCloseDialogButton = ({
   label,
   className,
 }: Props) => (
-  <button
-    type="button"
-    className={className || 'btn btn-default'}
-    onClick={dismiss}
-  >
-    <>{label || translate('Cancel')}</>
-  </button>
+  <Button className={className} onClick={dismiss}>
+    {label || translate('Cancel')}
+  </Button>
 );
 
 const mapDispatchToProps = (dispatch) => ({

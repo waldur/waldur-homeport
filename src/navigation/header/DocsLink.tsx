@@ -9,10 +9,15 @@ export const DocsLink: FunctionComponent = () => {
     return null;
   }
   return (
-    <li>
-      <a href={link} target="_blank" rel="noopener noreferrer">
+    <div className="aside-footer flex-column-auto pt-5 pb-7 px-5">
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn btn-custom btn-primary w-100"
+      >
         {translate('Documentation')}
       </a>
-    </li>
+    </div>
   );
 };

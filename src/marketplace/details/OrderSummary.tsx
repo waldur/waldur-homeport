@@ -86,7 +86,7 @@ export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => (
 
 const PureOrderSummary: FunctionComponent<OrderSummaryProps> = (props) => (
   <>
-    <OfferingLogo src={props.offering.thumbnail} size="small" />
+    <OfferingLogo src={props.offering.thumbnail} size="sm" />
     <SummaryTable {...props} />
     <div className="display-flex justify-content-between">
       {!props.updateMode ? (

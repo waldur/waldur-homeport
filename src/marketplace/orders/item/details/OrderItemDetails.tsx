@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
 import { memo } from 'react';
-import { Col, Panel, PanelGroup, Row } from 'react-bootstrap';
+import { Accordion, Col, Row } from 'react-bootstrap';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { titleCase } from '@waldur/core/utils';
@@ -31,16 +31,10 @@ let OrderItemDetails = (
   return (
     <Row>
       <Col md={9}>
-        <PanelGroup
-          accordion={true}
-          id="order-item-details"
-          defaultActiveKey="summary"
-        >
-          <Panel eventKey="summary">
-            <Panel.Heading>
-              <Panel.Title toggle={true}>{translate('Summary')}</Panel.Title>
-            </Panel.Heading>
-            <Panel.Body collapsible={true}>
+        <Accordion id="order-item-details" defaultActiveKey="summary">
+          <Accordion.Item eventKey="summary">
+            <Accordion.Header>{translate('Summary')}</Accordion.Header>
+            <Accordion.Body>
               <OrderItemDetailsField label={translate('Project name')}>
                 {props.orderItem.project_name}
               </OrderItemDetailsField>
@@ -99,44 +93,38 @@ let OrderItemDetails = (
                   {formatDate(props.orderItem.reviewed_at)}
                 </OrderItemDetailsField>
               )}
-            </Panel.Body>
-          </Panel>
+            </Accordion.Body>
+          </Accordion.Item>
           {props.orderItem.plan && (
-            <Panel eventKey="plan">
-              <Panel.Heading>
-                <Panel.Title toggle={true}>
-                  {props.orderItem.type === 'Create'
-                    ? translate('New plan')
-                    : translate('Plan')}
-                </Panel.Title>
-              </Panel.Heading>
-              <Panel.Body collapsible={true}>
+            <Accordion.Item eventKey="plan">
+              <Accordion.Header>
+                {props.orderItem.type === 'Create'
+                  ? translate('New plan')
+                  : translate('Plan')}
+              </Accordion.Header>
+              <Accordion.Body>
                 <PlanDetails
                   orderItem={props.orderItem}
                   offering={props.offering}
                   limits={props.limits}
                 />
-              </Panel.Body>
-            </Panel>
+              </Accordion.Body>
+            </Accordion.Item>
           )}
           {props.offering.components.length > 0 && !isEmpty(limits) && (
-            <Panel eventKey="limits">
-              <Panel.Heading>
-                <Panel.Title toggle={true}>{translate('Limits')}</Panel.Title>
-              </Panel.Heading>
-              <Panel.Body collapsible={true}>
+            <Accordion.Item eventKey="limits">
+              <Accordion.Header>{translate('Limits')}</Accordion.Header>
+              <Accordion.Body>
                 <OrderItemLimits
                   components={props.offering.components}
                   limits={limits}
                 />
-              </Panel.Body>
-            </Panel>
+              </Accordion.Body>
+            </Accordion.Item>
           )}
-          <Panel eventKey="details">
-            <Panel.Heading>
-              <Panel.Title toggle={true}>{translate('Details')}</Panel.Title>
-            </Panel.Heading>
-            <Panel.Body collapsible={true}>
+          <Accordion.Item eventKey="details">
+            <Accordion.Header>{translate('Details')}</Accordion.Header>
+            <Accordion.Body>
               <OrderItemDetailsHeader
                 orderItem={props.orderItem}
                 offering={props.offering}
@@ -152,9 +140,9 @@ let OrderItemDetails = (
                   {props.orderItem.output}
                 </OrderItemDetailsField>
               )}
-            </Panel.Body>
-          </Panel>
-        </PanelGroup>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
       </Col>
       <Col md={3}>
         <OrderItemDetailsSummary offering={props.offering} />

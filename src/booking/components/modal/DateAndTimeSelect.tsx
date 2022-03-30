@@ -1,7 +1,7 @@
-import classNames from 'classnames';
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
-import DatePicker from 'react-16-bootstrap-date-picker';
+import { Form } from 'react-bootstrap';
+import DatePicker from 'react-datepicker';
 import Select from 'react-select';
 
 import { timelineLabels } from '@waldur/booking/utils';
@@ -26,8 +26,8 @@ interface TimeSelect {
 
 export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> =
   (props) => (
-    <div className="form-group">
-      <label className="control-label col-sm-2">{props.label}</label>
+    <Form.Group>
+      <Form.Label className="col-sm-2">{props.label}</Form.Label>
       <div className="col-sm-5">
         <DatePicker
           weekStartsOn={1}
@@ -43,13 +43,9 @@ export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> =
           calendarContainer={document.getElementsByClassName('modal')[0]}
         />
       </div>
-      <label
-        className={classNames('control-label', 'col-sm-1', {
-          disabled: props.isDisabled,
-        })}
-      >
+      <Form.Label className="col-sm-1" disabled={props.isDisabled}>
         <i className="fa fa-clock-o" />
-      </label>
+      </Form.Label>
       <Select
         className="col-sm-3"
         isClearable={false}
@@ -69,5 +65,5 @@ export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> =
         isDisabled={props.isDisabled}
         {...reactSelectMenuPortaling()}
       />
-    </div>
+    </Form.Group>
   );

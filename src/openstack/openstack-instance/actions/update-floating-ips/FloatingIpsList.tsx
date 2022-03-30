@@ -44,7 +44,7 @@ export const FloatingIpsList: FC<FloatingIpsListProps> = ({
         )}
 
         <Button
-          bsStyle="default"
+          variant="default"
           onClick={() => {
             fields.push({
               floating_ip: true,

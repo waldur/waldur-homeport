@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
@@ -16,8 +17,8 @@ export const getStates = (): Option[] => [
 ];
 
 export const UserPermissionRequestsStateFilter: FunctionComponent = () => (
-  <div className="form-group">
-    <label className="control-label">{translate('State')}</label>
+  <Form.Group>
+    <Form.Label>{translate('State')}</Form.Label>
     <Field
       name="state"
       component={(fieldProps) => (
@@ -31,5 +32,5 @@ export const UserPermissionRequestsStateFilter: FunctionComponent = () => (
         />
       )}
     />
-  </div>
+  </Form.Group>
 );

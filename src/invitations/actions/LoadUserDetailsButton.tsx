@@ -10,7 +10,7 @@ export const LoadUserDetailsButton: FunctionComponent<{ loading; onClick }> = ({
 }) =>
   isFeatureVisible('invitation.require_user_details') ? (
     <FormGroup>
-      <Button bsStyle="primary" disabled={loading} onClick={onClick}>
+      <Button variant="primary" disabled={loading} onClick={onClick}>
         {loading && (
           <>
             <i className="fa fa-spinner fa-spin m-r-xs" />{' '}

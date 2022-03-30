@@ -1,5 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import React from 'react';
+import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
@@ -59,7 +60,7 @@ const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = (props) => {
   return (
     <form
       onSubmit={props.handleSubmit(processRequest)}
-      className="form-horizontal col-sm-10 col-xs-12"
+      className="col-sm-10 col-xs-12"
     >
       <FormContainer
         submitting={props.submitting}
@@ -73,7 +74,7 @@ const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = (props) => {
           required={true}
         />
       </FormContainer>
-      <div className="form-group">
+      <Form.Group>
         <div className="col-sm-offset-3 col-sm-9">
           <FieldError error={props.error} />
           <SubmitButton
@@ -86,7 +87,7 @@ const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = (props) => {
             label={translate('Cancel')}
           />
         </div>
-      </div>
+      </Form.Group>
     </form>
   );
 };

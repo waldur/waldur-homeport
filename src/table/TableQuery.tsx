@@ -42,11 +42,9 @@ export class TableQuery extends Component<TableQueryProps, State> {
             value={this.state.query}
             onChange={this.setQuery}
           />
-          <InputGroup.Button>
-            <Button>
-              <i className="fa fa-search" />
-            </Button>
-          </InputGroup.Button>
+          <Button size="sm">
+            <i className="fa fa-search" />
+          </Button>
         </InputGroup>
       </FormGroup>
     );

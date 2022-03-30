@@ -10,14 +10,15 @@ import { FooterLinks } from './FooterLinks';
 export const AppFooter: FunctionComponent = () => {
   const { buildId } = useSelector(getConfig);
   return (
-    <footer className="footer hidden-print">
-      <div className="pull-right">
+    <div className="footer py-4 d-flex flex-lg-column">
+      <div className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
+        <div className="text-dark order-2 order-md-1">
+          <BackendHealthStatusIndicator />
+          <>{translate('Version')}</>: {buildId}
+        </div>
+
         <FooterLinks />
       </div>
-      <div>
-        <BackendHealthStatusIndicator />
-        <>{translate('Version')}</>: {buildId}
-      </div>
-    </footer>
+    </div>
   );
 };

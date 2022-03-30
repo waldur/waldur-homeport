@@ -1,4 +1,4 @@
-import { Radio } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 export const RadioField = ({
   input: { value, onChange },
@@ -6,4 +6,12 @@ export const RadioField = ({
   meta,
   groupName,
   ...props
-}) => <Radio value={value} onChange={onChange} {...props} name={groupName} />;
+}) => (
+  <Form.Check
+    type="radio"
+    value={value}
+    onChange={onChange}
+    {...props}
+    name={groupName}
+  />
+);

@@ -1,4 +1,5 @@
 import React, { useMemo, FunctionComponent } from 'react';
+import { Card } from 'react-bootstrap';
 
 import { PlanDetailsButton } from '@waldur/marketplace/details/plan/PlanDetailsButton';
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
@@ -26,7 +27,7 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
 
   return (
     <div className="wrapper wrapper-content">
-      <div className="ibox-content">
+      <Card.Body>
         <div className="row m-b-md">
           <div className="col-lg-12">
             <div className="pull-right btn-group">
@@ -62,7 +63,7 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
             <ResourceTabs resource={resource} />
           </div>
         </div>
-      </div>
+      </Card.Body>
     </div>
   );
 };

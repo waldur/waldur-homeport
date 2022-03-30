@@ -25,7 +25,7 @@ export const SelectOrganizationButton: FunctionComponent<{ organization }> = ({
   }
   return (
     <Link
-      className="btn btn-xs btn-default pull-right"
+      className="btn btn-sm btn-secondary pull-right"
       state="organization.dashboard"
       params={{ uuid: organization.uuid }}
     >

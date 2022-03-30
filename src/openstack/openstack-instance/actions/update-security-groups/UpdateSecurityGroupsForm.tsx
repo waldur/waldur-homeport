@@ -1,4 +1,4 @@
-import { ControlLabel, FormGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { SelectField } from '@waldur/form';
@@ -31,8 +31,8 @@ export const UpdateSecurityGroupsForm = connectForm(
         invalid={invalid}
       >
         {asyncState.value ? (
-          <FormGroup>
-            <ControlLabel>{translate('Security groups')}</ControlLabel>
+          <Form.Group>
+            <Form.Label>{translate('Security groups')}</Form.Label>
             <Field
               component={SelectField}
               name="security_groups"
@@ -41,7 +41,7 @@ export const UpdateSecurityGroupsForm = connectForm(
               isMulti={true}
               {...reactSelectMenuPortaling()}
             />
-          </FormGroup>
+          </Form.Group>
         ) : null}
       </AsyncActionDialog>
     </form>

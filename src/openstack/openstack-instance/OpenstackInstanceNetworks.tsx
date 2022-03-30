@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import { Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import Select from 'react-select';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { Subnet, FloatingIp } from '@waldur/openstack/openstack-instance/types';
 import { formatSubnet } from '@waldur/openstack/openstack-instance/utils';
@@ -120,7 +120,7 @@ export class OpenstackInstanceNetworks extends Component<OpenstackInstanceNetwor
   render() {
     return (
       <>
-        <Table bsClass="table table-borderless m-b-xs">
+        <Table bsPrefix="table table-borderless m-b-xs">
           <tbody>
             {this.props.input.value ? (
               this.props.input.value.map((_, index) => (
@@ -157,15 +157,11 @@ export class OpenstackInstanceNetworks extends Component<OpenstackInstanceNetwor
                     />
                   </td>
                   <td className="p-r-n">
-                    <Tooltip id="item-remove" label={translate('Delete')}>
-                      <button
-                        type="button"
-                        className="btn btn-default"
-                        onClick={() => this.removeItem(index)}
-                      >
+                    <Tip id="item-remove" label={translate('Delete')}>
+                      <Button onClick={() => this.removeItem(index)}>
                         <i className="fa fa-trash-o" />
-                      </button>
-                    </Tooltip>
+                      </Button>
+                    </Tip>
                   </td>
                 </tr>
               ))
@@ -174,14 +170,12 @@ export class OpenstackInstanceNetworks extends Component<OpenstackInstanceNetwor
             )}
           </tbody>
         </Table>
-        <button
-          type="button"
-          className="btn btn-default"
+        <Button
           disabled={!this.hasFreeSubnets()}
           onClick={() => this.addItem()}
         >
           <i className="fa fa-plus" /> {translate('Add')}
-        </button>
+        </Button>
       </>
     );
   }

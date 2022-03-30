@@ -38,7 +38,7 @@ interface FormData {
 }
 
 const defaultProps = {
-  labelClassName: 'control-label col-sm-3',
+  labelClassName: 'col-sm-3',
   valueClassName: 'col-sm-9',
 };
 
@@ -85,7 +85,7 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
   );
 
   return (
-    <form className="form-horizontal" onSubmit={props.handleSubmit(callback)}>
+    <form onSubmit={props.handleSubmit(callback)}>
       <ModalDialog
         title={translate('Create node')}
         footer={

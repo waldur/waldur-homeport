@@ -53,7 +53,7 @@ const PairRow = ({ pair, onRemove }) => (
       <Field name={`${pair}.mac_address`} component={ValidatedInputField} />
     </td>
     <td>
-      <Button bsStyle="default" onClick={onRemove}>
+      <Button variant="default" onClick={onRemove}>
         <i className="fa fa-trash" /> {translate('Remove')}
       </Button>
     </td>
@@ -61,7 +61,7 @@ const PairRow = ({ pair, onRemove }) => (
 );
 
 const PairAddButton = ({ onClick }) => (
-  <Button bsStyle="default" onClick={onClick}>
+  <Button variant="default" onClick={onClick}>
     <i className="fa fa-plus" /> {translate('Add pair')}
   </Button>
 );
@@ -132,10 +132,7 @@ export const SetAllowedAddressPairsDialog = enhance(
     };
 
     return (
-      <form
-        onSubmit={handleSubmit(setAllowedAddressPairs)}
-        className="form-horizontal"
-      >
+      <form onSubmit={handleSubmit(setAllowedAddressPairs)}>
         <ModalDialog
           title={translate(
             'Set allowed address pairs ({instance} / {ipAddress})',

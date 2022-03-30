@@ -1,5 +1,5 @@
 import { FC, useContext } from 'react';
-import { Col, Panel } from 'react-bootstrap';
+import { Col, Card, Form } from 'react-bootstrap';
 
 import { FormLayoutContext } from '@waldur/form/context';
 import { translate } from '@waldur/i18n';
@@ -16,7 +16,7 @@ export const OfferingOptions: FC<any> = (props) => {
   const offset = layout === 'vertical' ? 0 : 2;
 
   return (
-    <div className="form-group">
+    <Form.Group>
       <h3 className="content-center m-t-md m-b-lg">
         {translate(
           'If you want user to provide additional details when ordering, please configure input form for the user below',
@@ -24,8 +24,8 @@ export const OfferingOptions: FC<any> = (props) => {
       </h3>
       <Col smOffset={offset} sm={col}>
         {props.fields.map((option, index) => (
-          <Panel key={index}>
-            <Panel.Heading>
+          <Card key={index}>
+            <Card.Header>
               <RemoveButton
                 onClick={() => props.fields.remove(index)}
                 disabled={props.readOnly}
@@ -35,11 +35,11 @@ export const OfferingOptions: FC<any> = (props) => {
                   index: index + 1,
                 })}
               </h4>
-            </Panel.Heading>
-            <Panel.Body>
+            </Card.Header>
+            <Card.Body>
               <OptionForm option={option} readOnly={props.readOnly} />
-            </Panel.Body>
-          </Panel>
+            </Card.Body>
+          </Card>
         ))}
         <AddOptionButton
           onClick={() => props.fields.push({})}
@@ -48,6 +48,6 @@ export const OfferingOptions: FC<any> = (props) => {
           {translate('Add user input field')}
         </AddOptionButton>
       </Col>
-    </div>
+    </Form.Group>
   );
 };

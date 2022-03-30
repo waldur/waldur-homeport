@@ -1,7 +1,7 @@
 import { FunctionComponent, Fragment } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { Quota } from '@waldur/openstack/types';
 import { formatQuotaName, formatQuotaValue } from '@waldur/quotas/utils';
@@ -53,13 +53,13 @@ export const QuotaUsageBarChartDescription = ({ quota }) => (
     <span>
       <strong>{formatQuotaName(quota.name)}</strong>
       {exceeds(quota) && (
-        <Tooltip
+        <Tip
           id={quota.name}
           label={translate('Quota usage exceeds available limit.')}
         >
           {' '}
           <i className="fa fa-exclamation-triangle" />
-        </Tooltip>
+        </Tip>
       )}
     </span>
     <span className="pull-right text-muted">{getSummary(quota)}</span>
@@ -77,23 +77,23 @@ export const QuotaUsageBarChart: FunctionComponent<QuotaUsageBarChartProps> = (
             <div className="m-b-sm clearfix">
               <QuotaUsageBarChartDescription quota={quota} />
             </div>
-            <Tooltip
+            <Tip
               id="quota-usage"
               label={<ProgressTooltipMessage quota={quota} />}
             >
               <ProgressBar>
                 <ProgressBar
-                  bsStyle="success"
+                  variant="success"
                   now={(quota.usage * 100) / quota.limit}
                   key={1}
                 />
                 <ProgressBar
-                  bsStyle="warning"
+                  variant="warning"
                   now={(quota.required * 100) / quota.limit}
                   key={2}
                 />
               </ProgressBar>
-            </Tooltip>
+            </Tip>
           </Fragment>
         );
       }

@@ -1,3 +1,5 @@
+import { Card } from 'react-bootstrap';
+
 import { translate } from '@waldur/i18n';
 import { SupportFeedbackList } from '@waldur/issues/feedback/SupportFeedbackList';
 import { SupportFeedbackListFilter } from '@waldur/issues/feedback/SupportFeedbackListFilter';
@@ -13,11 +15,11 @@ export const SupportFeedbackListContainer = () => {
   useSidebarKey('reporting');
   useSupport();
   return (
-    <div className="ibox">
-      <div className="ibox-content">
+    <Card>
+      <Card.Body>
         <SupportFeedbackListFilter />
         <SupportFeedbackList />
-      </div>
-    </div>
+      </Card.Body>
+    </Card>
   );
 };

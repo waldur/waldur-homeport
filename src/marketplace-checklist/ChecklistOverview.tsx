@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { Panel } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import Select from 'react-select';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -44,13 +44,13 @@ export const ChecklistOverview: FunctionComponent = () => {
         ) : state.statsErred ? (
           <>{translate('Unable to load compliance overview.')}</>
         ) : (
-          <Panel className="m-t-md">
+          <Card className="m-t-md">
             <CustomerMap customers={state.statsList} />
             <StatsTable
               stats={state.statsList}
               scopeTitle={translate('Organization')}
             />
-          </Panel>
+          </Card>
         )}
       </>
     );

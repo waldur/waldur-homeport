@@ -19,18 +19,7 @@ import { useTitle } from '@waldur/navigation/title';
 import { SupportDetails } from './SupportDetails';
 
 const getBreadcrumbs = (resource: Resource): BreadcrumbItem[] => {
-  const items = [
-    {
-      label: translate('Project workspace'),
-      state: 'project.details',
-      params: {
-        uuid: resource.project_uuid,
-      },
-    },
-    {
-      label: translate('Resources'),
-    },
-  ];
+  const items: BreadcrumbItem[] = [{ label: translate('Resources') }];
   if (resource.category_title) {
     const params = {
       category_uuid: resource.category_uuid,

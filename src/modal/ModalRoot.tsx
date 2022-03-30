@@ -45,7 +45,7 @@ export const ModalRoot: FunctionComponent = () => {
     <Modal
       show={modalComponent ? true : false}
       onHide={onHide}
-      bsSize={modalProps?.size}
+      size={modalProps?.size}
       backdrop={modalProps?.backdrop}
       style={modalProps?.modalStyle}
       dialogClassName={modalProps?.dialogClassName}

@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Card, Form } from 'react-bootstrap';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 
@@ -31,11 +32,11 @@ const providerAutocomplete = async (
 };
 
 export const SharedProviderFilter: FunctionComponent = () => (
-  <div className="ibox">
-    <div className="ibox-content">
+  <Card>
+    <Card.Body>
       <div className="row">
-        <div className="form-group col-sm-3">
-          <label className="control-label">{translate('Provider')}</label>
+        <Form.Group className="col-sm-3">
+          <Form.Label>{translate('Provider')}</Form.Label>
           <Field
             name="provider"
             component={(fieldProps) => (
@@ -57,10 +58,10 @@ export const SharedProviderFilter: FunctionComponent = () => (
               />
             )}
           />
-        </div>
+        </Form.Group>
       </div>
-    </div>
-  </div>
+    </Card.Body>
+  </Card>
 );
 
 const FORM_ID = 'SharedProviderFilter';

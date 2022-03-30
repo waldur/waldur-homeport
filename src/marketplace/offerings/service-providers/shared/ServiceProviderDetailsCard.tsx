@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import './ServiceProviderDetailsCard.scss';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/offerings/service-providers/shared/CountryFlag';
 import { Division } from '@waldur/marketplace/offerings/service-providers/shared/Division';
@@ -15,11 +15,11 @@ interface ServiceProviderDetailsCardProps {
 
 const descriptionText = (text: string) =>
   text.length > 40 ? (
-    <Tooltip label={text} id="descriptionText">
+    <Tip label={text} id="descriptionText">
       <span className="detailsCardContainer__description--ellipsis">
         {text}
       </span>
-    </Tooltip>
+    </Tip>
   ) : (
     text
   );

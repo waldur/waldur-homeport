@@ -1,0 +1,35 @@
+//
+// Modal
+//
+
+// Base
+.modal {
+  // Mobile header
+  .modal-header {
+    align-items: center;
+    justify-content: space-between;
+    @include border-top-radius($modal-content-border-radius);
+
+    // Headings
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-bottom: 0;
+    }
+  }
+
+  // Mobile dialog
+  .modal-dialog {
+    outline: none !important;
+  }
+}
+
+// Utilities
+.modal-rounded {
+  @if $enable-rounded {
+    border-radius: $modal-content-border-radius !important;
+  }
+}

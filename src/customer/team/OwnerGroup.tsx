@@ -3,7 +3,7 @@ import { FormGroup } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
 export const OwnerGroup: FunctionComponent<{
@@ -22,7 +22,7 @@ export const OwnerGroup: FunctionComponent<{
         />
         {translate(ENV.roles.owner)}{' '}
         {(!canChangeRole || !canManageOwner) && (
-          <Tooltip
+          <Tip
             id="form-field-tooltip"
             label={
               !canChangeRole
@@ -33,7 +33,7 @@ export const OwnerGroup: FunctionComponent<{
             }
           >
             <i className="fa fa-question-circle" />
-          </Tooltip>
+          </Tip>
         )}
       </label>
     </div>

@@ -1,3 +1,5 @@
+import { Card } from 'react-bootstrap';
+
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
 interface MapInfoPanelProps extends TranslateProps {
@@ -8,20 +10,20 @@ interface MapInfoPanelProps extends TranslateProps {
 export const MapInfoPanel = withTranslation(
   ({ data, onPanelClose, translate }: MapInfoPanelProps) => (
     <div id="flow-map-panel">
-      <div className="ibox">
-        <div className="ibox-title">
+      <Card>
+        <Card.Header>
           <h5>{translate('Provider')}</h5>
-          <div className="ibox-tools">
+          <div className="card-tools">
             <a className="close-link m-r-xs" onClick={onPanelClose}>
               <i className="fa fa-times" />
             </a>
           </div>
-        </div>
-        <div className="ibox-content text-center">
+        </Card.Header>
+        <Card.Body className="text-center">
           <div className="m-b-sm">
             <img
               alt="image"
-              className="img-responsive img-circle"
+              className="img-fluid rounded-circle"
               src={data.logo}
             />
           </div>
@@ -36,10 +38,10 @@ export const MapInfoPanel = withTranslation(
               period: data.consumers[0].period,
             })}
           </h3>
-        </div>
+        </Card.Body>
         {data.consumers.map((consumer, index) => {
           return (
-            <div key={index} className="ibox-content">
+            <Card.Body key={index}>
               <h4 className="font-bold">{consumer.name}</h4>
               <div>
                 <div>
@@ -61,10 +63,10 @@ export const MapInfoPanel = withTranslation(
                   </small>
                 </div>
               </div>
-            </div>
+            </Card.Body>
           );
         })}
-      </div>
+      </Card>
     </div>
   ),
 );

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, FunctionComponent } from 'react';
-import { Col, ControlLabel, FormGroup } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
 import { Field, change } from 'redux-form';
@@ -29,8 +29,8 @@ export const ResourceGroup: FunctionComponent<{ disabled }> = ({
   }, [dispatch, project]);
 
   return (
-    <FormGroup>
-      <Col sm={3} componentClass={ControlLabel}>
+    <Form.Group>
+      <Col sm={3} as={Form.Label}>
         {translate('Affected resource')}
       </Col>
       <Col sm={6}>
@@ -55,6 +55,6 @@ export const ResourceGroup: FunctionComponent<{ disabled }> = ({
           />
         )}
       </Col>
-    </FormGroup>
+    </Form.Group>
   );
 };

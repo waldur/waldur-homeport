@@ -85,10 +85,6 @@ export function getBreadcrumbs(offering: Offering): BreadcrumbItem[] {
   if (workspace === ORGANIZATION_WORKSPACE) {
     return [
       {
-        label: translate('Organization workspace'),
-        state: 'organization.details',
-      },
-      {
         label: translate('Marketplace'),
         state: 'marketplace-landing-customer',
       },
@@ -103,10 +99,6 @@ export function getBreadcrumbs(offering: Offering): BreadcrumbItem[] {
   } else if (workspace === PROJECT_WORKSPACE) {
     return [
       {
-        label: translate('Project workspace'),
-        state: 'project.details',
-      },
-      {
         label: translate('Marketplace'),
         state: 'marketplace-landing-project',
       },
@@ -120,10 +112,6 @@ export function getBreadcrumbs(offering: Offering): BreadcrumbItem[] {
     ];
   } else if (workspace === USER_WORKSPACE) {
     return [
-      {
-        label: translate('User workspace'),
-        state: 'profile.details',
-      },
       {
         label: translate('Marketplace'),
         state: 'marketplace-landing-user',

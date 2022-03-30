@@ -2,7 +2,7 @@ import { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
@@ -41,9 +41,9 @@ class PurePriceTooltip extends PureComponent<PriceTooltipProps> {
     }
 
     return (
-      <Tooltip label={message} id="price-tooltip">
+      <Tip label={message} id="price-tooltip">
         <i className="fa fa-exclamation-circle m-l-xs hidden-print" />
-      </Tooltip>
+      </Tip>
     );
   }
 }

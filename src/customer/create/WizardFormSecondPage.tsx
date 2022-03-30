@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { PanelBody } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
@@ -10,7 +10,7 @@ import { WizardForm } from './WizardForm';
 
 export const WizardFormSecondPage: FunctionComponent<any> = (props) => (
   <WizardForm {...props}>
-    <PanelBody>
+    <Card.Body>
       <InputGroup
         name="registration_code"
         component={InputField}
@@ -55,6 +55,6 @@ export const WizardFormSecondPage: FunctionComponent<any> = (props) => (
           'Please provide your EU VAT ID if you are registered in the European Union.',
         )}
       />
-    </PanelBody>
+    </Card.Body>
   </WizardForm>
 );

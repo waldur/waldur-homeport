@@ -1,14 +1,14 @@
 import React from 'react';
-import { OverlayTrigger, Tooltip as BootstrapTooltip } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
-interface TooltipProps {
+interface TipProps {
   label: React.ReactNode;
   id: string;
   className?: string;
   onClick?(): void;
 }
 
-export const Tooltip: React.FC<TooltipProps> = ({
+export const Tip: React.FC<TipProps> = ({
   label,
   children,
   id,
@@ -18,7 +18,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
 }) => (
   <OverlayTrigger
     placement="top"
-    overlay={<BootstrapTooltip id={id}>{label}</BootstrapTooltip>}
+    overlay={<Tooltip id={id}>{label}</Tooltip>}
     {...rest}
   >
     <span className={className} onClick={onClick}>
@@ -27,12 +27,12 @@ export const Tooltip: React.FC<TooltipProps> = ({
   </OverlayTrigger>
 );
 
-export const BackendIdTooltip = ({ backendId }) =>
+export const BackendIdTip = ({ backendId }) =>
   backendId ? (
     <>
       {' '}
-      <Tooltip id="backend-id" label={backendId}>
+      <Tip id="backend-id" label={backendId}>
         <i className="fa fa-question-circle" />
-      </Tooltip>
+      </Tip>
     </>
   ) : null;

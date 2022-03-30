@@ -64,7 +64,7 @@ export const FreeIPAAccountCreate = reduxForm<
     );
 
     return (
-      <form className="form-horizontal" onSubmit={handleSubmit(callback)}>
+      <form onSubmit={handleSubmit(callback)}>
         <UsernameGroup />
         <FormGroup>
           <Col smOffset={3} sm={5}>

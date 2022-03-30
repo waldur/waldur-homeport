@@ -1,5 +1,5 @@
 import { useCallback, useEffect, FunctionComponent } from 'react';
-import { Button, Col, ControlLabel, FormGroup } from 'react-bootstrap';
+import { Button, Col, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
 import { Field, change } from 'redux-form';
@@ -36,8 +36,8 @@ export const ProjectGroup: FunctionComponent<{ onSearch; disabled }> = ({
   }, [dispatch, customer]);
 
   return (
-    <FormGroup>
-      <Col sm={3} componentClass={ControlLabel}>
+    <Form.Group>
+      <Col sm={3} as={Form.Label}>
         {translate('Project')}
       </Col>
       <Col sm={6}>
@@ -71,6 +71,6 @@ export const ProjectGroup: FunctionComponent<{ onSearch; disabled }> = ({
           </Button>
         </Col>
       )}
-    </FormGroup>
+    </Form.Group>
   );
 };

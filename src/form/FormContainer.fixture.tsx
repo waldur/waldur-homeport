@@ -44,7 +44,7 @@ export const getRequiredFields = (wrapper: ReactWrapper) =>
   wrapper.find('.text-danger');
 export const submitForm = (wrapper: ReactWrapper) =>
   wrapper.find('form').simulate('submit');
-export const getErrors = (wrapper: ReactWrapper) => wrapper.find('.help-block');
+export const getErrors = (wrapper: ReactWrapper) => wrapper.find('.form-text');
 export const getDescriptions = (wrapper: ReactWrapper) =>
   wrapper.find('.text-muted');
 export const renderTestForm = (options) => mountTestForm(Component(options));

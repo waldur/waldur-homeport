@@ -60,7 +60,7 @@ export const PureShoppingCartSidebar: FunctionComponent<ShoppingCartSidebarProps
             label={translate('Download order PDF file')}
             url={props.file}
             filename="marketplace-order.pdf"
-            className="btn btn-outline btn-default"
+            className="btn btn-outline btn-secondary"
           />
         )}
       </aside>

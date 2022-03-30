@@ -11,7 +11,7 @@ export const OfferingImportButton: FunctionComponent = () => {
   const dispatch = useDispatch();
   return (
     <Button
-      bsSize="sm"
+      size="sm"
       onClick={() =>
         dispatch(openModalDialog(OfferingImportDialog, { size: 'lg' }))
       }

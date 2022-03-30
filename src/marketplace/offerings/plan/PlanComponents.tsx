@@ -1,6 +1,6 @@
 import { Field } from 'redux-form';
 
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import {
   validateNonNegative,
   parseIntField,
@@ -8,24 +8,22 @@ import {
 } from '@waldur/marketplace/common/utils';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
-interface PlanComponentsProps extends TranslateProps {
+interface PlanComponentsProps {
   archived: boolean;
   components: OfferingComponent[];
   limits: string[];
 }
 
-const numberValidators = validateNonNegative;
-
-export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
+export const PlanComponents = (props: PlanComponentsProps) => (
   <table className="table table-borderless">
     <thead>
       <tr>
         <th>{/* Name */}</th>
-        <th>{props.translate('Amount')}</th>
+        <th>{translate('Amount')}</th>
         <th>
-          {props.translate('Price')} <span className="text-danger"> *</span>
+          {translate('Price')} <span className="text-danger"> *</span>
         </th>
-        <th>{props.translate('Units')}</th>
+        <th>{translate('Units')}</th>
       </tr>
     </thead>
     <tbody>
@@ -43,7 +41,7 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
                 className="form-control"
                 name={`quotas.${component.type}`}
                 type="number"
-                validate={props.archived ? undefined : numberValidators}
+                validate={props.archived ? undefined : validateNonNegative}
                 inputMode="numeric"
                 parse={parseIntField}
                 format={formatIntField}
@@ -59,7 +57,7 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
               className="form-control"
               name={`prices.${component.type}`}
               type="number"
-              validate={props.archived ? undefined : numberValidators}
+              validate={props.archived ? undefined : validateNonNegative}
               inputMode="numeric"
               step="0.0000001"
             />
@@ -71,4 +69,4 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
       ))}
     </tbody>
   </table>
-));
+);

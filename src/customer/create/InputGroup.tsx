@@ -1,13 +1,13 @@
-import { ControlLabel, FormGroup, HelpBlock } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { FieldError } from '@waldur/form';
 
 export const InputGroup = ({ label, helpText, validate, ...props }: any) => (
-  <FormGroup>
-    <ControlLabel>
+  <Form.Group>
+    <Form.Label>
       {label} {props.required && <span className="text-danger"> *</span>}
-    </ControlLabel>
+    </Form.Label>
     <Field {...props} />
     <Field
       name={props.name}
@@ -16,10 +16,6 @@ export const InputGroup = ({ label, helpText, validate, ...props }: any) => (
       }
       validate={validate}
     />
-    {helpText && (
-      <HelpBlock>
-        <span className="text-muted">{helpText}</span>
-      </HelpBlock>
-    )}
-  </FormGroup>
+    {helpText && <Form.Text muted={true}>{helpText}</Form.Text>}
+  </Form.Group>
 );

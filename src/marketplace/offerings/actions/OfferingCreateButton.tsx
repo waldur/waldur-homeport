@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 
 export const OfferingCreateButton: FunctionComponent = () => (
   <UISref to="marketplace-offering-create">
-    <Button bsSize="sm">
+    <Button size="sm">
       <i className="fa fa-plus" /> {translate('Add offering')}
     </Button>
   </UISref>

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useContext } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { FieldArray, FormSection } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -71,13 +71,13 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
       ) : !props.showOptions &&
         props.typeLabel &&
         props.allowToUpdateService ? (
-        <div className="form-group">
+        <Form.Group>
           <div className={serviceSettingWrapperClass}>
             <Button onClick={props.openServiceSettingsDetails}>
               {translate('Update service settings')}
             </Button>
           </div>
-        </div>
+        </Form.Group>
       ) : null}
       {props.schedulable && (
         <FieldArray

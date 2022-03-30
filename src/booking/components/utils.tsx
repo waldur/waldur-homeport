@@ -1,6 +1,10 @@
 import type { EventApi } from '@fullcalendar/core';
 import classNames from 'classnames';
-import { OverlayTrigger, Tooltip as BootstrapTooltip } from 'react-bootstrap';
+import {
+  Form,
+  OverlayTrigger,
+  Tooltip as BootstrapTooltip,
+} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 
 import { bookingStateAliases } from '@waldur/booking/BookingStateField';
@@ -15,12 +19,12 @@ export const bookingDataTemplate = (event) => {
   }));
   return getLabelValues.map((item, index) => (
     <div key={index} style={{ width: '280px' }}>
-      <div className="form-group">
-        <label className="control-label col-xs-4" style={{ marginTop: '-7px' }}>
+      <Form.Group>
+        <Form.Label className="col-xs-4" style={{ marginTop: '-7px' }}>
           {item.label}
-        </label>
+        </Form.Label>
         <>{item.value ? item.value : 'N/A'}</>
-      </div>
+      </Form.Group>
     </div>
   ));
 };
@@ -49,7 +53,7 @@ const renderEventWithTooltip = ({
       placement="top"
       overlay={
         <BootstrapTooltip id={event.id}>
-          <div className="container-fluid form-horizontal">
+          <div className="container-fluid">
             <h4 className="fc-title">{event.title}</h4>
             {bookingDataTemplate(getTooltipInformation(event))}
           </div>

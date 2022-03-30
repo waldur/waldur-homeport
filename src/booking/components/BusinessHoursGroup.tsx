@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import Select from 'react-select';
 
 import { getOptions } from '@waldur/form/TimeSelectField';
@@ -21,16 +22,13 @@ export const BusinessHoursGroup: FunctionComponent<BusinessHoursGroupProps> = ({
 }) => (
   <FormGroup
     label={translate('Business hours')}
-    labelClassName="control-label col-sm-3"
+    labelClassName="col-sm-3"
     valueClassName="col-sm-8"
     description={translate('Daily available booking time range')}
   >
-    <label
-      className="col-xs-2 control-label"
-      htmlFor="react-select-startTime--value"
-    >
+    <Form.Label className="col-xs-2" htmlFor="react-select-startTime--value">
       <i className="fa fa-clock-o" />
-    </label>
+    </Form.Label>
     <Select
       instanceId="startTime"
       className="col-xs-4"
@@ -43,12 +41,9 @@ export const BusinessHoursGroup: FunctionComponent<BusinessHoursGroupProps> = ({
       onChange={(option: any) => setStartTime(option.value)}
       {...reactSelectMenuPortaling()}
     />
-    <label
-      className="col-xs-2 control-label"
-      htmlFor="react-select-endTime--value"
-    >
+    <Form.Label className="col-xs-2" htmlFor="react-select-endTime--value">
       {translate('till')}
-    </label>
+    </Form.Label>
     <Select
       instanceId="endTime"
       name="endTime"

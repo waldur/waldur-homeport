@@ -1,5 +1,5 @@
 import { FunctionComponent, useContext } from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { FormLayoutContext } from '@waldur/form/context';
@@ -17,11 +17,11 @@ const PlansListComponent: FunctionComponent<any> = (props) => {
   const offset = layout === 'vertical' ? 0 : 2;
 
   return (
-    <div className="form-group">
+    <Form.Group>
       <Col smOffset={offset} sm={col} className="m-b-sm">
-        <p className="form-control-static">
+        <Form.Control plaintext>
           <strong>{translate('Accounting plans')}</strong>
-        </p>
+        </Form.Control>
       </Col>
 
       <Col smOffset={offset} sm={col}>
@@ -38,7 +38,7 @@ const PlansListComponent: FunctionComponent<any> = (props) => {
           <PlanAddButton onClick={() => props.fields.push({})} />
         )}
       </Col>
-    </div>
+    </Form.Group>
   );
 };
 

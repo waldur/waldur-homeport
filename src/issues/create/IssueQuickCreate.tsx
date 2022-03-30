@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { ControlLabel, FormGroup } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
 import { Field, reduxForm, formValueSelector, change } from 'redux-form';
@@ -42,8 +42,8 @@ const refreshCustomers = async (name: string) => {
 };
 
 const OrganizationGroup = ({ disabled }) => (
-  <FormGroup>
-    <ControlLabel>{translate('Organization')}</ControlLabel>
+  <Form.Group>
+    <Form.Label>{translate('Organization')}</Form.Label>
     <Field
       name="customer"
       component={AsyncSelectField}
@@ -56,7 +56,7 @@ const OrganizationGroup = ({ disabled }) => (
       filterOption={filterOption}
       isDisabled={disabled}
     />
-  </FormGroup>
+  </Form.Group>
 );
 
 const projectRequiredSelector = createSelector(
@@ -94,11 +94,11 @@ export const ProjectGroup = ({ disabled, customer, formId }) => {
   }, [dispatch, customer]);
 
   return (
-    <FormGroup>
-      <ControlLabel>
+    <Form.Group>
+      <Form.Label>
         {translate('Project')}
         {projectRequired && <span className="text-danger">*</span>}
-      </ControlLabel>
+      </Form.Label>
       {customer ? (
         <Field
           name="project"
@@ -120,7 +120,7 @@ export const ProjectGroup = ({ disabled, customer, formId }) => {
           placeholder={translate('Select project...')}
         />
       )}
-    </FormGroup>
+    </Form.Group>
   );
 };
 
@@ -136,8 +136,8 @@ export const ResourceGroup = ({ disabled, project, formId }) => {
   }, [dispatch, project]);
 
   return (
-    <FormGroup>
-      <ControlLabel>{translate('Affected resource')}</ControlLabel>
+    <Form.Group>
+      <Form.Label>{translate('Affected resource')}</Form.Label>
       {project ? (
         <Field
           name="resource"
@@ -158,7 +158,7 @@ export const ResourceGroup = ({ disabled, project, formId }) => {
           placeholder={translate('Select affected resource...')}
         />
       )}
-    </FormGroup>
+    </Form.Group>
   );
 };
 
@@ -198,11 +198,11 @@ export const IssueQuickCreate = reduxForm<IssueFormData>({
   );
 
   return (
-    <form className="ibox float-e-margins" onSubmit={handleSubmit(createIssue)}>
-      <div className="ibox-title">
+    <form className="card float-e-margins" onSubmit={handleSubmit(createIssue)}>
+      <Card.Header>
         <h5>{translate('Create request')}</h5>
-      </div>
-      <div className="ibox-content">
+      </Card.Header>
+      <Card.Body>
         <TypeGroup layout="vertical" disabled={submitting} />
         <SummaryGroup layout="vertical" disabled={submitting} />
         <DescriptionGroup layout="vertical" disabled={submitting} />
@@ -222,7 +222,7 @@ export const IssueQuickCreate = reduxForm<IssueFormData>({
             {translate('Create request')}
           </SubmitButton>
         </div>
-      </div>
+      </Card.Body>
     </form>
   );
 });

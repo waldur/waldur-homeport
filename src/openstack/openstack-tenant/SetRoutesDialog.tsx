@@ -52,7 +52,7 @@ export const SetRoutesDialog = enhance(
     };
 
     return (
-      <form onSubmit={handleSubmit(setRoutes)} className="form-horizontal">
+      <form onSubmit={handleSubmit(setRoutes)}>
         <ModalDialog
           title={translate('Update static routes')}
           footer={

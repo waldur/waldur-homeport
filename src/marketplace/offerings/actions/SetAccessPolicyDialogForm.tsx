@@ -23,10 +23,7 @@ interface SetAccessPolicyDialogFormOwnProps {
 }
 
 const PureSetAccessPolicyDialogForm: FunctionComponent<any> = (props) => (
-  <form
-    onSubmit={props.handleSubmit(props.submitRequest)}
-    className="form-horizontal"
-  >
+  <form onSubmit={props.handleSubmit(props.submitRequest)}>
     <ModalDialog
       title={translate('Set access policy for {offeringName}', {
         offeringName: props.offering.name,

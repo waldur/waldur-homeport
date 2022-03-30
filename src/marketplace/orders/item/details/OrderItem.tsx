@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
@@ -30,14 +30,14 @@ export const OrderItem: FunctionComponent<OrderItemProps> = (props) => {
       <td>
         <div className="offering-item">
           <div className="offering-thumb">
-            <Tooltip id="offering-tooltip" label={props.item.offering_name}>
+            <Tip id="offering-tooltip" label={props.item.offering_name}>
               <OrderItemDetailsLink
                 order_item_uuid={props.item.uuid}
                 project_uuid={props.project_uuid}
               >
                 <OfferingLogo src={props.item.offering_thumbnail} />
               </OrderItemDetailsLink>
-            </Tooltip>
+            </Tip>
           </div>
           <div className="offering-info">
             <h5 className="offering-title">
@@ -97,7 +97,7 @@ export const OrderItem: FunctionComponent<OrderItemProps> = (props) => {
       <td className="text-center">
         <span className="btn-group">
           {props.editable && (
-            <a className="btn btn-outline btn-default btn-sm m-r-xs">
+            <a className="btn btn-outline btn-secondary btn-sm m-r-xs">
               {translate('Edit')}
             </a>
           )}

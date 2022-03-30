@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
-import { ControlLabel, FormGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { DateField } from '@waldur/form/DateField';
@@ -19,8 +19,8 @@ export const ProjectsListGroup: FunctionComponent<{
       {translate('There are no available projects.')}
     </p>
   ) : (
-    <FormGroup id="projects-list-group">
-      <ControlLabel>{translate('Projects list')}</ControlLabel>
+    <Form.Group id="projects-list-group">
+      <Form.Label>{translate('Projects list')}</Form.Label>
       <div style={{ height: 300, overflow: 'visible', marginBottom: '33px' }}>
         <table className="table">
           <thead>
@@ -57,6 +57,6 @@ export const ProjectsListGroup: FunctionComponent<{
           </tbody>
         </table>
       </div>
-    </FormGroup>
+    </Form.Group>
   );
 };

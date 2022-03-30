@@ -2,7 +2,7 @@ import './IssuesListExpandableRow.scss';
 
 import { FunctionComponent } from 'react';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
 export const IssuesListExpandableRow: FunctionComponent<{ row }> = ({
@@ -18,11 +18,11 @@ export const IssuesListExpandableRow: FunctionComponent<{ row }> = ({
       <div className="m-b-xs">
         <dt>{translate('Description')}:</dt>
         <dd>
-          <Tooltip id="description-tooltip" label={row.description}>
+          <Tip id="description-tooltip" label={row.description}>
             <span className="ellipsis" style={{ width: 300 }}>
               {row.description}
             </span>
-          </Tooltip>
+          </Tip>
         </dd>
       </div>
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form } from 'react-bootstrap';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
@@ -9,8 +10,8 @@ import { OfferingChoice } from './types';
 export const OfferingFilter: React.FC<{ options: OfferingChoice[] }> = ({
   options,
 }) => (
-  <div className="form-group col-sm-3">
-    <label className="control-label">{translate('Offering')}</label>
+  <Form.Group className="col-sm-3">
+    <Form.Label>{translate('Offering')}</Form.Label>
     <Field
       name="offering"
       component={(fieldProps) => (
@@ -25,5 +26,5 @@ export const OfferingFilter: React.FC<{ options: OfferingChoice[] }> = ({
         />
       )}
     />
-  </div>
+  </Form.Group>
 );

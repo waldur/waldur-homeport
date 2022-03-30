@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { withTranslation } from '@waldur/i18n';
 import { getConfig } from '@waldur/store/config';
 import {
   getCustomer,
@@ -22,7 +20,6 @@ const ProjectUpdateComponent = (props) =>
       name={props.project.name}
       description={props.project.description}
       end_date={props.project.end_date}
-      translate={props.translate}
     />
   );
 
@@ -59,9 +56,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     ),
 });
 
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
 
 export const ProjectUpdateContainer = enhance(ProjectUpdateComponent);

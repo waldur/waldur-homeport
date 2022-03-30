@@ -35,7 +35,7 @@ export const CustomerCreateGroup = () => {
     );
   return (
     <FormGroup
-      labelClassName="control-label col-sm-3"
+      labelClassName="col-sm-3"
       valueClassName="col-sm-9"
       label={translate('Organization')}
       required={true}

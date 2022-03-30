@@ -69,10 +69,6 @@ export const tabs = {
   dashboard: {
     url: '',
     component: UserDashboard,
-    data: {
-      pageClass: 'gray-bg',
-      hideBreadcrumbs: true,
-    },
   },
   events: {
     url: 'events/',

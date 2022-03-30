@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Button } from 'react-bootstrap';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -17,9 +18,9 @@ interface CategoryResourcesListProps<ScopeType = Scope> {
 const LoadingErred = ({ loadData }) => (
   <div className="text-center">
     <h3>{translate('Unable to load charts.')}</h3>
-    <button onClick={loadData} type="button" className="btn btn-default">
+    <Button onClick={loadData}>
       <i className="fa fa-refresh" /> {translate('Reload')}
-    </button>
+    </Button>
   </div>
 );
 

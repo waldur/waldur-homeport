@@ -1,8 +1,10 @@
+import { Container } from 'react-bootstrap';
+
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 
 export const CustomerCreateExpandableRow = ({ row }) => (
-  <dl className="dl-horizontal col-sm-12">
+  <Container>
     <Field label={translate('Name')} value={row.name} />
     <Field
       label={translate('Organization native name')}
@@ -42,5 +44,5 @@ export const CustomerCreateExpandableRow = ({ row }) => (
       value={row.bank_name}
     />
     <Field label={translate('Bank account number')} value={row.bank_account} />
-  </dl>
+  </Container>
 );

@@ -1,5 +1,5 @@
 import { formatRelative } from '@waldur/core/dateUtils';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { withTranslation } from '@waldur/i18n';
 import { formatSummary, formatCommaList } from '@waldur/resource/utils';
 
@@ -14,7 +14,7 @@ const ResourceSummaryField = ({ translate, resource }) => (
   <>
     {formatSummary(resource)}
     {resource.flavor_name && (
-      <Tooltip
+      <Tip
         id="resourceSummary"
         label={translate('Flavor name: {flavor_name}', {
           flavor_name: resource.flavor_name,
@@ -22,7 +22,7 @@ const ResourceSummaryField = ({ translate, resource }) => (
       >
         {' '}
         <i className="fa fa-question-circle" />
-      </Tooltip>
+      </Tip>
     )}
   </>
 );

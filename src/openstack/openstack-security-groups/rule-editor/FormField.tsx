@@ -1,7 +1,6 @@
-import classNames from 'classnames';
 import { FC } from 'react';
 import {
-  FormControl,
+  Form,
   OverlayTrigger,
   Tooltip as BootstrapTooltip,
 } from 'react-bootstrap';
@@ -9,15 +8,12 @@ import { WrappedFieldProps } from 'redux-form';
 
 export const FormField: FC<WrappedFieldProps & { tooltip?: string }> = ({
   input,
-  meta: { invalid, error },
+  meta: { error },
   tooltip,
   ...rest
 }) => (
-  <td
-    className={classNames('form-group', { 'has-error': invalid })}
-    style={{ position: 'relative' }}
-  >
-    <FormControl
+  <Form.Group as="td" style={{ position: 'relative' }}>
+    <Form.Control
       value={input.value}
       onChange={input.onChange}
       {...rest}
@@ -33,5 +29,5 @@ export const FormField: FC<WrappedFieldProps & { tooltip?: string }> = ({
         </span>
       </OverlayTrigger>
     ) : null}
-  </td>
+  </Form.Group>
 );

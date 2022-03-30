@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
@@ -18,7 +18,7 @@ interface UserActivateButtonProps extends TranslateProps {
 
 const PureUserActivateButton = (props: UserActivateButtonProps) =>
   props.user.is_staff ? (
-    <Tooltip
+    <Tip
       id="user-activate"
       label={
         props.row.is_active
@@ -36,7 +36,7 @@ const PureUserActivateButton = (props: UserActivateButtonProps) =>
         }
         action={props.onClick}
       />
-    </Tooltip>
+    </Tip>
   ) : null;
 
 const mapStatToProps = (state: RootState) => ({

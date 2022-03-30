@@ -1,10 +1,4 @@
-import {
-  Button,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
@@ -30,17 +24,17 @@ export const WizardForm = reduxForm<{}, WizardFormProps>({
   forceUnregisterOnUnmount: true,
 })((props) => (
   <form onSubmit={props.handleSubmit(props.onSubmit)}>
-    <ModalHeader>
-      <ModalTitle>{translate('Create organization')}</ModalTitle>
-    </ModalHeader>
-    <ModalBody>
+    <Modal.Header>
+      <Modal.Title>{translate('Create organization')}</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
       <div className="wizard-big wizard clearfix">
         <StepsList steps={props.steps} step={props.step} />
         <h3>{props.steps[props.step]}</h3>
         <div className="content clearfix">{props.children}</div>
       </div>
-    </ModalBody>
-    <ModalFooter>
+    </Modal.Body>
+    <Modal.Footer>
       {props.step == 0 ? (
         <CloseDialogButton />
       ) : (
@@ -51,6 +45,6 @@ export const WizardForm = reduxForm<{}, WizardFormProps>({
         submitting={props.submitting}
         label={props.submitLabel}
       />
-    </ModalFooter>
+    </Modal.Footer>
   </form>
 ));

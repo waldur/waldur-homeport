@@ -1,11 +1,5 @@
 import { FunctionComponent } from 'react';
-import {
-  Button,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { useAsyncRetry } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -32,16 +26,16 @@ export const InvoiceEventsDialog: FunctionComponent<InvoiceEventsDialogProps> =
 
     return (
       <>
-        <ModalHeader>
-          <ModalTitle>{translate('Invoice events timeline')}</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
+        <Modal.Header>
+          <Modal.Title>{translate('Invoice events timeline')}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           {loading ? (
             <LoadingSpinner />
           ) : error ? (
             <>
               <p>{translate('Unable to load events for this resource.')}</p>
-              <Button bsStyle="primary" onClick={retry}>
+              <Button variant="primary" onClick={retry}>
                 <i className="fa fa-refresh"></i> {translate('Retry')}
               </Button>
             </>
@@ -57,10 +51,10 @@ export const InvoiceEventsDialog: FunctionComponent<InvoiceEventsDialogProps> =
               ))}
             </div>
           )}
-        </ModalBody>
-        <ModalFooter>
+        </Modal.Body>
+        <Modal.Footer>
           <CloseDialogButton />
-        </ModalFooter>
+        </Modal.Footer>
       </>
     );
   };

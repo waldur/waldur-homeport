@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Label } from 'react-bootstrap';
+import { Badge } from 'react-bootstrap';
 
 const getColor = (value) =>
   value === null
@@ -11,11 +11,11 @@ const getColor = (value) =>
     : 'success';
 
 export const PlanRemainingColumn: FunctionComponent<{ row }> = ({ row }) => (
-  <Label
-    bsStyle={getColor(row.remaining)}
+  <Badge
+    bg={getColor(row.remaining)}
     className="m-r-sm m-l-sm"
     style={{ fontSize: 12 }}
   >
     {row.remaining === null ? 'N/A' : row.remaining}
-  </Label>
+  </Badge>
 );

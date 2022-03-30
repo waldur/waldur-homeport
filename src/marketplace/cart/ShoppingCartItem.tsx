@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { showPriceSelector } from '@waldur/invoices/details/utils';
 import { ShoppingCartTimeSlots } from '@waldur/marketplace/cart/ShoppingCartTimeSlots';
@@ -49,11 +49,11 @@ export const ShoppingCartItem: FunctionComponent<ShoppingCartItemProps> = (
       <td>
         <div className="offering-item">
           <div className="offering-thumb">
-            <Tooltip id="offering-tooltip" label={props.item.offering_name}>
+            <Tip id="offering-tooltip" label={props.item.offering_name}>
               <ShoppingCartItemUpdateLink order_item_uuid={props.item.uuid}>
                 <OfferingLogo src={props.item.offering_thumbnail} />
               </ShoppingCartItemUpdateLink>
-            </Tooltip>
+            </Tip>
           </div>
           <div className="offering-info">
             <h5 className="offering-title">

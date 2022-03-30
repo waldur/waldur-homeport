@@ -35,10 +35,7 @@ const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
   );
 
   return (
-    <form
-      onSubmit={props.handleSubmit(props.submitRequest)}
-      className="form-horizontal"
-    >
+    <form onSubmit={props.handleSubmit(props.submitRequest)}>
       <ModalDialog
         title={translate('Update payment profile')}
         footer={

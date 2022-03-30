@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
@@ -7,11 +7,11 @@ import { EnvironmentVariableAddButton } from './EnvironmentVariableAddButton';
 import { EnvironmentVariablePanel } from './EnvironmentVariablePanel';
 
 export const EnvironmentVariablesList: FunctionComponent<any> = (props) => (
-  <div className="form-group">
+  <Form.Group>
     <Col smOffset={2} sm={8} className="m-b-sm">
-      <p className="form-control-static">
+      <Form.Control plaintext>
         <strong>{translate('Environment variables')}</strong>
-      </p>
+      </Form.Control>
     </Col>
 
     <Col smOffset={2} sm={8}>
@@ -25,5 +25,5 @@ export const EnvironmentVariablesList: FunctionComponent<any> = (props) => (
       ))}
       <EnvironmentVariableAddButton onClick={() => props.fields.push({})} />
     </Col>
-  </div>
+  </Form.Group>
 );

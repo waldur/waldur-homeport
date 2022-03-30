@@ -126,7 +126,7 @@ export const TenantGroup: React.FC<TenantGroupProps> = (props) => {
         <SubnetGroup options={resourceProps.value.subnets} />
         {resourceProps.value.templates.length > 0 ? (
           <FormGroup
-            labelClassName="control-label col-sm-3"
+            labelClassName="col-sm-3"
             valueClassName="col-sm-9"
             label={translate('Template')}
           >
@@ -142,7 +142,7 @@ export const TenantGroup: React.FC<TenantGroupProps> = (props) => {
         ) : null}
         {resourceProps.value.securityGroups.length > 0 ? (
           <FormGroup
-            labelClassName="control-label col-sm-3"
+            labelClassName="col-sm-3"
             valueClassName="col-sm-9"
             label={translate('Security groups')}
           >
@@ -158,7 +158,7 @@ export const TenantGroup: React.FC<TenantGroupProps> = (props) => {
           </FormGroup>
         ) : null}
         <FormGroup
-          labelClassName="control-label col-sm-3"
+          labelClassName="col-sm-3"
           valueClassName="col-sm-9"
           label={translate('Nodes')}
         >

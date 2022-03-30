@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { FormControlStatic } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
@@ -20,9 +20,9 @@ export const InternalNetworkAllocationPool: FunctionComponent = () => {
   const cidr = useSelector(cidrSelector);
   const body = cidr ? getAllocationPool(cidr) : <>&mdash;</>;
   return (
-    <div className="form-group">
+    <Form.Group>
       <label>{translate('Internal network allocation pool')}</label>
-      <FormControlStatic>{body}</FormControlStatic>
-    </div>
+      <Form.Control>{body}</Form.Control>
+    </Form.Group>
   );
 };

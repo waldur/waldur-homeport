@@ -21,7 +21,7 @@ export const SlotDurationGroup: FunctionComponent<SlotDurationGroupProps> = ({
   return (
     <FormGroup
       label={translate('Time slot')}
-      labelClassName="control-label col-sm-3"
+      labelClassName="col-sm-3"
       valueClassName={'col-sm-8'}
       description={translate('Minimum booking time slot duration.')}
     >

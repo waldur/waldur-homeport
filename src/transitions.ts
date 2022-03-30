@@ -1,6 +1,5 @@
 import ReactGA from 'react-ga';
 
-import { IssueNavigationService } from '@waldur/issues/workspace/IssueNavigationService';
 import store from '@waldur/store/store';
 
 import { AuthService } from './auth/AuthService';
@@ -11,7 +10,6 @@ import { tryAcceptInvitation } from './invitations/tryAcceptInvitation';
 import { closeModalDialog } from './modal/actions';
 import { setPrevParams, setPrevState } from './navigation/utils';
 import { router } from './router';
-import { StateUtilsService } from './user/StateUtilsService';
 import { UsersService } from './user/UsersService';
 
 export function attachTransitions() {
@@ -111,17 +109,6 @@ export function attachTransitions() {
       setPrevState(fromName);
       setPrevParams(transition.params('from'));
     }
-  });
-
-  router.transitionService.onSuccess({}, (transition) => {
-    IssueNavigationService.setPrevState(
-      transition.from().name,
-      transition.from().params,
-    );
-    StateUtilsService.setPrevState(
-      transition.from().name,
-      transition.from().params,
-    );
   });
 
   router.transitionService.onSuccess({}, (transition) => {

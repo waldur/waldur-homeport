@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { ControlLabel, FormGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
@@ -93,14 +93,14 @@ const PureReportSecurityIncidentDialog: FunctionComponent<any> = (props) => (
           />
         )}
 
-        <FormGroup>
-          <ControlLabel>{translate('Attachments')}</ControlLabel>
+        <Form.Group>
+          <Form.Label>{translate('Attachments')}</Form.Label>
           <Field
             name="files"
             component={FileField}
             disabled={props.submitting}
           />
-        </FormGroup>
+        </Form.Group>
       </FormContainer>
     </ModalDialog>
   </form>

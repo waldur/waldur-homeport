@@ -1,4 +1,3 @@
-import { DropdownButton, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { ExternalLink } from '@waldur/auth/types';
@@ -12,18 +11,19 @@ interface ExternalLinksComponentProps {
 
 const ExternalLinksComponent = (props: ExternalLinksComponentProps) =>
   props.externalLinks?.length > 0 && (
-    <DropdownButton
-      title={translate('External links')}
-      id="external-link-dropdown-btn"
-      onSelect={props.onSelect}
-      bsStyle="link"
-    >
-      {props.externalLinks.map((link, index) => (
-        <MenuItem eventKey={index} key={index}>
-          {link.label}
-        </MenuItem>
-      ))}
-    </DropdownButton>
+    <div className="menu-item here menu-lg-down-accordion me-lg-1">
+      <span className="menu-link py-3">
+        <span className="menu-title">{translate('External links')}</span>
+        <span className="menu-arrow d-lg-none"></span>
+      </span>
+      <div className="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
+        {props.externalLinks.map((link, index) => (
+          <div className="menu-item" key={index}>
+            {link.label}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 
 const mapStateToProps = () => {

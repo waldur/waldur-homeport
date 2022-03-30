@@ -1,0 +1,16 @@
+.footer-nav {
+  float: right;
+  margin: 0;
+  padding: 0;
+  li {
+    display: inline;
+    list-style: none;
+  }
+  li + li {
+    &:before {
+      display: inline;
+      content: ' | ';
+      opacity: 0.4;
+    }
+  }
+}

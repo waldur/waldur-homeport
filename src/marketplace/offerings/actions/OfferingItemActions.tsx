@@ -77,7 +77,6 @@ const UpdateOfferingLogoDialog = lazyComponent(
 interface OwnProps {
   offering: Offering;
   isPublic?: boolean;
-  pullRight?: boolean;
   refreshOffering?: () => void;
 }
 
@@ -394,7 +393,6 @@ const mergeProps = (
         !ownProps.isPublic && remoteOfferingActionVisible(ownProps, stateProps),
     },
   ].filter((offering) => offering.visible),
-  pullRight: ownProps.pullRight,
 });
 
 const enhance = connect(mapStateToProps, mapDispatchToProps, mergeProps);

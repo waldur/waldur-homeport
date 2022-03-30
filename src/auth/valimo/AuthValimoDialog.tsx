@@ -1,16 +1,7 @@
 import delay from '@redux-saga/delay-p';
 import { useRouter } from '@uirouter/react';
 import { useState } from 'react';
-import {
-  ControlLabel,
-  FormControl,
-  FormGroup,
-  InputGroup,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Form, InputGroup, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useMountedState } from 'react-use';
 import { reduxForm, Field } from 'redux-form';
@@ -98,16 +89,16 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(
 
     return (
       <form onSubmit={handleSubmit(authenticateValimo)}>
-        <ModalHeader>
-          <ModalTitle>{translate('Authenticate using Mobile ID')}</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
-          <FormGroup>
-            <ControlLabel>{translate('Mobile phone number')}</ControlLabel>
+        <Modal.Header>
+          <Modal.Title>{translate('Authenticate using Mobile ID')}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group>
+            <Form.Label>{translate('Mobile phone number')}</Form.Label>
             <InputGroup>
-              <InputGroup.Addon>
+              <InputGroup.Text>
                 {ENV.plugins.WALDUR_AUTH_VALIMO.MOBILE_PREFIX}
-              </InputGroup.Addon>
+              </InputGroup.Text>
               <Field
                 type="tel"
                 name="phoneNumber"
@@ -116,20 +107,20 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(
                 disabled={submitting}
               />
             </InputGroup>
-          </FormGroup>
+          </Form.Group>
           {challengeCode && (
-            <FormGroup>
-              <ControlLabel>{translate('Challenge code')}</ControlLabel>
-              <FormControl.Static>{challengeCode}</FormControl.Static>
-            </FormGroup>
+            <Form.Group>
+              <Form.Label>{translate('Challenge code')}</Form.Label>
+              <Form.Control plaintext>{challengeCode}</Form.Control>
+            </Form.Group>
           )}
-        </ModalBody>
-        <ModalFooter>
+        </Modal.Body>
+        <Modal.Footer>
           <SubmitButton block={false} invalid={invalid} submitting={submitting}>
             <i className="fa fa-sign-in" /> {translate('Sign in')}
           </SubmitButton>
           <CloseDialogButton />
-        </ModalFooter>
+        </Modal.Footer>
       </form>
     );
   },

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Panel } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { FormSection } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -10,14 +10,14 @@ import { NodeRoleGroup } from './NodeRoleGroup';
 import { NodeStorageGroup } from './NodeStorageGroup';
 
 export const NodePanel: FunctionComponent<any> = (props) => (
-  <Panel>
-    <Panel.Heading>
+  <Card>
+    <Card.Header>
       <NodeRemoveButton onClick={() => props.onRemove(props.index)} />
       <h4>
         {translate('Kubernetes node #{index}', { index: props.index + 1 })}
       </h4>
-    </Panel.Heading>
-    <Panel.Body>
+    </Card.Header>
+    <Card.Body>
       <FormSection name={props.node}>
         <NodeRoleGroup />
         <NodeFlavorGroup options={props.flavors} nodeIndex={props.index} />
@@ -28,6 +28,6 @@ export const NodePanel: FunctionComponent<any> = (props) => (
           defaultVolumeType={props.defaultVolumeType}
         />
       </FormSection>
-    </Panel.Body>
-  </Panel>
+    </Card.Body>
+  </Card>
 );

@@ -134,12 +134,14 @@ export const ChecklistCustomer: FunctionComponent = () => {
                       }
                       type="radio"
                       name={`checklist-${checklist.uuid}`}
-                      disabled={submitState.loading}
                     >
-                      <ToggleButton value="true">
+                      <ToggleButton value="true" disabled={submitState.loading}>
                         {translate('Yes')}
                       </ToggleButton>
-                      <ToggleButton value="false">
+                      <ToggleButton
+                        value="false"
+                        disabled={submitState.loading}
+                      >
                         {translate('No')}
                       </ToggleButton>
                     </ToggleButtonGroup>

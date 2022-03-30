@@ -1,9 +1,10 @@
 import React from 'react';
+import { Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
 import { formatCurrency } from '@waldur/core/formatCurrency';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -22,33 +23,30 @@ export const ComponentRow: React.FC<ComponentRowProps> = (props) => {
   return (
     <tr>
       <td>
-        <p className="form-control-static">
+        <Form.Control plaintext>
           {props.offeringComponent.name}
-          <Tooltip
-            label={props.offeringComponent.type}
-            id="componentTypeTooltip"
-          >
+          <Tip label={props.offeringComponent.type} id="componentTypeTooltip">
             {' '}
             <i className="fa fa-question-circle" />
-          </Tooltip>
-        </p>
+          </Tip>
+        </Form.Control>
       </td>
       <td className={props.className}>{props.children}</td>
       <td>
-        <p className="form-control-static">
+        <Form.Control plaintext>
           {props.offeringComponent.measured_unit || 'N/A'}
-        </p>
+        </Form.Control>
       </td>
       {!activeFixedPriceProfile
         ? props.offeringComponent.prices.map((price, innerIndex) => (
             <td key={innerIndex}>
-              <p className="form-control-static">
+              <Form.Control plaintext>
                 {formatCurrency(
                   price,
                   ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
                   3,
                 )}
-              </p>
+              </Form.Control>
             </td>
           ))
         : null}

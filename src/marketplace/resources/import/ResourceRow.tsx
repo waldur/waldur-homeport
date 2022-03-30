@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useMemo, useState, FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import Select from 'react-select';
 
 import { translate } from '@waldur/i18n';
@@ -9,7 +10,7 @@ const SelectResourceButton = ({ value, onChange }) => (
   <a
     className={classNames(
       'btn btn-sm btn-outline',
-      value ? 'btn-primary' : 'btn-default',
+      value ? 'btn-primary' : 'btn-secondary',
     )}
     onClick={onChange}
   >
@@ -70,16 +71,16 @@ export const ResourceRow: FunctionComponent<{
           />
         )}
         <td>
-          <p className="form-control-static">
+          <Form.Control plaintext>
             {resource.type ? (
               <ResourceIcon resource={payload} />
             ) : (
               resource.name
             )}
-          </p>
+          </Form.Control>
         </td>
         <td>
-          <p className="form-control-static">{resource.backend_id}</p>
+          <Form.Control plaintext>{resource.backend_id}</Form.Control>
         </td>
         <td>
           <SelectResourceButton

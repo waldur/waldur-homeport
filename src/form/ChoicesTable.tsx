@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';
 
 import './ChoicesTable.scss';
@@ -27,7 +27,7 @@ export const PureChoicesTable: FunctionComponent<ChoicesTableProps> = (
   props,
 ) => (
   <div className="table-responsive choices-table">
-    <Table bsClass="table">
+    <Table bsPrefix="table">
       <thead>
         <tr>
           {props.enableSelect && <th />}
@@ -57,9 +57,9 @@ export const PureChoicesTable: FunctionComponent<ChoicesTableProps> = (
             {props.enableSelect && (
               <td>
                 {choice.disabled ? (
-                  <Tooltip id={choice.uuid} label={choice.disabledReason}>
+                  <Tip id={choice.uuid} label={choice.disabledReason}>
                     <i className="fa fa-ban" />
-                  </Tooltip>
+                  </Tip>
                 ) : (
                   <input
                     type="radio"

@@ -1,15 +1,15 @@
 import { FunctionComponent } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 
 import { BookingResource } from './types';
 
 export const wrapScheduleTitleTooltip = (label: string, children) =>
   label ? (
-    <Tooltip label={label} id="schedule-title-label">
+    <Tip label={label} id="schedule-title-label">
       {children}
-    </Tooltip>
+    </Tip>
   ) : (
     children
   );

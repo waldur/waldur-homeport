@@ -8,8 +8,8 @@ import { PeriodFilterField } from '@waldur/issues/feedback/PeriodFilterField';
 import { UserAutocomplete } from '@waldur/issues/feedback/UserAutocomplete';
 
 export const PureSupportFeedbackListFilter = () => (
-  <div className="ibox">
-    <div className="ibox-content m-b-sm border-bottom">
+  <div className="card">
+    <div className="card-body m-b-sm border-bottom">
       <form className="form-inline">
         <Row>
           <Col sm={4}>

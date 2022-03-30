@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 
@@ -259,7 +260,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
     }
 
     return (
-      <form className="form-horizontal">
+      <form>
         <ProjectField />
         <CreateResourceFormGroup label={translate('VM name')} required={true}>
           <Field
@@ -319,11 +320,11 @@ export class OpenstackInstanceCreateFormComponent extends Component<
         </CreateResourceFormGroup>
         <CreateResourceFormGroup label={translate('User data')}>
           <Field name="attributes.user_data" component={TextField} />
-          <div className="help-block m-b-none text-muted">
+          <Form.Text className="m-b-none text-muted">
             {translate(
               'Additional data that will be added to instance on provisioning.',
             )}
-          </div>
+          </Form.Text>
         </CreateResourceFormGroup>
       </form>
     );
