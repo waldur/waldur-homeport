@@ -22,10 +22,7 @@ interface FormData {
 }
 
 const PureEditConfirmationMessageForm: FunctionComponent<any> = (props) => (
-  <form
-    onSubmit={props.handleSubmit(props.submitRequest)}
-    className="form-horizontal"
-  >
+  <form onSubmit={props.handleSubmit(props.submitRequest)}>
     <ModalDialog
       title={translate('Edit confirmation message of {offeringName}', {
         offeringName: props.offering.name,

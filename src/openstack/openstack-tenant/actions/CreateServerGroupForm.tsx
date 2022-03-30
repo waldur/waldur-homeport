@@ -1,4 +1,4 @@
-import { ControlLabel } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
@@ -34,7 +34,7 @@ export const CreateServerGroupForm = connectServerGroupForm(
       >
         {asyncState.value ? (
           <>
-            <ControlLabel>{translate('Name')}</ControlLabel>
+            <Form.Label>{translate('Name')}</Form.Label>
             <Field
               component={InputField}
               name="name"
@@ -42,7 +42,7 @@ export const CreateServerGroupForm = connectServerGroupForm(
               maxLength={150}
             />
 
-            <ControlLabel>{translate('Policy')}</ControlLabel>
+            <Form.Label>{translate('Policy')}</Form.Label>
             <Field
               name="policy"
               component={(fieldProps) => (

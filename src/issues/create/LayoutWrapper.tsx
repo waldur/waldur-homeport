@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Col, ControlLabel, FormGroup } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 
 export const LayoutWrapper: FunctionComponent<{ layout; header; body }> = ({
   layout,
@@ -7,15 +7,15 @@ export const LayoutWrapper: FunctionComponent<{ layout; header; body }> = ({
   body,
 }) =>
   layout === 'horizontal' ? (
-    <FormGroup>
-      <Col sm={3} componentClass={ControlLabel}>
+    <Form.Group>
+      <Col sm={3} as={Form.Label}>
         {header}
       </Col>
       <Col sm={6}>{body}</Col>
-    </FormGroup>
+    </Form.Group>
   ) : (
-    <FormGroup>
-      <ControlLabel>{header}</ControlLabel>
+    <Form.Group>
+      <Form.Label>{header}</Form.Label>
       {body}
-    </FormGroup>
+    </Form.Group>
   );

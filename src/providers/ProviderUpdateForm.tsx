@@ -14,10 +14,7 @@ export const PureProviderUpdateForm = (props) => {
   };
 
   return (
-    <form
-      onSubmit={props.handleSubmit(props.updateProvider)}
-      className="form-horizontal"
-    >
+    <form onSubmit={props.handleSubmit(props.updateProvider)}>
       <FormContainer {...container}>{ProviderNameField(props)}</FormContainer>
       <ProviderFormBody {...props} container={container} />
       <FieldError error={props.error} />

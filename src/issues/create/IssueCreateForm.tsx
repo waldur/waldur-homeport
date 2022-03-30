@@ -1,11 +1,4 @@
-import {
-  ControlLabel,
-  FormGroup,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Form, Modal } from 'react-bootstrap';
 import { connect, useSelector } from 'react-redux';
 import { AsyncState } from 'react-use/lib/useAsync';
 import { compose } from 'redux';
@@ -82,10 +75,10 @@ export const IssueCreateForm = enhance(
     submitting,
   }) => (
     <form onSubmit={handleSubmit(onCreateIssue)}>
-      <ModalHeader>
-        <ModalTitle>{options.title}</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+      <Modal.Header>
+        <Modal.Title>{options.title}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         {templateState.loading ? (
           <LoadingSpinner />
         ) : templateState.error ? (
@@ -94,14 +87,14 @@ export const IssueCreateForm = enhance(
           <>
             <IssueHeader issue={issue} />
             {!issue.type && (
-              <FormGroup>
-                <ControlLabel>{translate('Request type')}</ControlLabel>
+              <Form.Group>
+                <Form.Label>{translate('Request type')}</Form.Label>
                 <TypeField issueTypes={issueTypes} isDisabled={submitting} />
-              </FormGroup>
+              </Form.Group>
             )}
             {filteredTemplates.length > 0 && (
-              <FormGroup>
-                <ControlLabel>{translate('Template')}</ControlLabel>
+              <Form.Group>
+                <Form.Label>{translate('Template')}</Form.Label>
                 <Field
                   name="template"
                   component={SelectField}
@@ -112,11 +105,11 @@ export const IssueCreateForm = enhance(
                   getOptionLabel={(option) => option.name}
                   isClearable={true}
                 />
-              </FormGroup>
+              </Form.Group>
             )}
             {!options.hideTitle && (
-              <FormGroup>
-                <ControlLabel>{options.summaryLabel}</ControlLabel>
+              <Form.Group>
+                <Form.Label>{options.summaryLabel}</Form.Label>
                 <Field
                   name="summary"
                   component={InputField}
@@ -125,20 +118,20 @@ export const IssueCreateForm = enhance(
                   required={true}
                   disabled={submitting}
                 />
-              </FormGroup>
+              </Form.Group>
             )}
-            <FormGroup>
-              <ControlLabel>{options.descriptionLabel}</ControlLabel>
+            <Form.Group>
+              <Form.Label>{options.descriptionLabel}</Form.Label>
               <Field
                 name="description"
                 component={InputField}
-                componentClass="textarea"
+                as="textarea"
                 className="h-150"
                 placeholder={options.descriptionPlaceholder}
                 required={true}
                 disabled={submitting}
               />
-            </FormGroup>
+            </Form.Group>
             {!hideProjectAndResourceFields && (
               <>
                 <ProjectGroup
@@ -154,26 +147,26 @@ export const IssueCreateForm = enhance(
               </>
             )}
             {attachments.length > 0 && (
-              <FormGroup>
-                <ControlLabel>{translate('Template files')}</ControlLabel>
+              <Form.Group>
+                <Form.Label>{translate('Template files')}</Form.Label>
                 <AttachmentsList attachments={attachments} />
-              </FormGroup>
+              </Form.Group>
             )}
-            <FormGroup>
-              <ControlLabel>{translate('Attachments')}</ControlLabel>
+            <Form.Group>
+              <Form.Label>{translate('Attachments')}</Form.Label>
               <Field name="files" component={FileField} disabled={submitting} />
-            </FormGroup>
+            </Form.Group>
           </>
         )}
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <SubmitButton
           block={false}
           submitting={submitting}
           label={options.submitTitle}
         />
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </form>
   ),
 );

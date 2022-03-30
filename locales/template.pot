@@ -484,6 +484,10 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
+#: src/navigation/sidebar/UnifiedSidebar.tsx
+msgid "Admin"
+msgstr ""
+
 #: src/azure/sql/AzureSQLServerDetails.tsx
 #: src/azure/vm/AzureVirtualMachineDetails.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
@@ -974,21 +978,6 @@ msgstr ""
 msgid "Back to login"
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
-#: src/project/utils.ts
-#: src/user/UserSidebar.tsx
-msgid "Back to organization"
-msgstr ""
-
-#: src/issues/workspace/IssueNavigationService.ts
-msgid "Back to personal dashboard"
-msgstr ""
-
-#: src/issues/workspace/IssueNavigationService.ts
-#: src/user/UserSidebar.tsx
-msgid "Back to project"
-msgstr ""
-
 #: src/marketplace/cart/BackButton.tsx
 msgid "Back to shopping"
 msgstr ""
@@ -1182,10 +1171,6 @@ msgstr ""
 
 #: src/slurm/details/constants.ts
 msgid "CPU usage"
-msgstr ""
-
-#: src/table/TableExportButton.tsx
-msgid "CSV"
 msgstr ""
 
 #: src/marketplace/offerings/details/GoogleCalendarLink.tsx
@@ -2290,7 +2275,6 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
 #: src/slurm/DetailsAction.tsx
-#: src/user/UserDropdownMenu.tsx
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -2823,10 +2807,6 @@ msgstr ""
 
 #: src/marketplace/resources/report/SubmitReportDialog.tsx
 msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
-msgstr ""
-
-#: src/table/TableExportButton.tsx
-msgid "Excel"
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemStateCell.tsx
@@ -3936,6 +3916,10 @@ msgstr ""
 msgid "Labels"
 msgstr ""
 
+#: src/navigation/header/UserDropdown.tsx
+msgid "Language"
+msgstr ""
+
 #: src/auth/HeroButton.tsx
 #: src/navigation/cookies/CookiesConsent.tsx
 msgid "Learn more"
@@ -4056,7 +4040,7 @@ msgstr ""
 
 #: src/navigation/header/LogoutLink.tsx
 #: src/navigation/header/SiteHeader.tsx
-#: src/user/UserDropdownMenu.tsx
+#: src/navigation/header/UserDropdown.tsx
 msgid "Log out"
 msgstr ""
 
@@ -4653,7 +4637,6 @@ msgstr ""
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
-#: src/table/TablePagination.tsx
 msgid "Next"
 msgstr ""
 
@@ -5239,6 +5222,10 @@ msgstr ""
 msgid "Orders"
 msgstr ""
 
+#: src/navigation/sidebar/UnifiedSidebar.tsx
+msgid "Org management"
+msgstr ""
+
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/create/CustomerCreatePrompt.tsx
@@ -5395,19 +5382,6 @@ msgstr ""
 msgid "Organization users list"
 msgstr ""
 
-#: src/customer/workspace/CustomerWorkspace.tsx
-#: src/invoices/details/BillingDetails.tsx
-#: src/marketplace/details/utils.ts
-#: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/offerings/images/ImagesContainer.tsx
-#: src/marketplace/offerings/utils.ts
-#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
-#: src/marketplace/resources/ResourceDetailsPage.tsx
-#: src/navigation/breadcrumbs/utils.ts
-#: src/navigation/workspace/WorkspaceLabel.tsx
-msgid "Organization workspace"
-msgstr ""
-
 #: src/customer/events.ts
 msgid "Organization {customer_link} has been created."
 msgstr ""
@@ -5459,10 +5433,6 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: src/customer/dashboard/CustomerDashboard.tsx
-msgid "Overview of {organization} organization"
-msgstr ""
-
 #: src/project/ProjectDashboard.tsx
 msgid "Overview of {project} project"
 msgstr ""
@@ -5474,10 +5444,6 @@ msgstr ""
 #: src/customer/team/CustomerUsersList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 msgid "Owner"
-msgstr ""
-
-#: src/table/TableExportButton.tsx
-msgid "PDF"
 msgstr ""
 
 #: src/i18n/constants.ts
@@ -5745,10 +5711,6 @@ msgstr ""
 #: src/customer/team/CustomerTeam.tsx
 #: src/project/team/ProjectTeam.tsx
 msgid "Permissions log"
-msgstr ""
-
-#: src/navigation/workspace/WorkspaceLabel.tsx
-msgid "Personal workspace"
 msgstr ""
 
 #: src/invoices/details/CustomerDetails.tsx
@@ -6060,7 +6022,6 @@ msgstr ""
 
 #: src/customer/create/WizardForm.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/PrevPage.tsx
-#: src/table/TablePagination.tsx
 msgid "Previous"
 msgstr ""
 
@@ -6298,6 +6259,10 @@ msgstr ""
 msgid "Project is not selected."
 msgstr ""
 
+#: src/navigation/sidebar/UnifiedSidebar.tsx
+msgid "Project management"
+msgstr ""
+
 #: src/configs/default.ts
 msgid "Project manager"
 msgstr ""
@@ -6352,18 +6317,6 @@ msgstr ""
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/sidebar.ts
 msgid "Project updates"
-msgstr ""
-
-#: src/marketplace/details/utils.ts
-#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
-#: src/marketplace/resources/ResourceDetailsPage.tsx
-#: src/navigation/workspace/WorkspaceLabel.tsx
-#: src/project/ProjectWorkspace.tsx
-#: src/rancher/template/CatalogTemplateContainer.tsx
-#: src/rancher/template/breadcrumbs.ts
-#: src/resource/breadcrumbs/ResourceBreadcrumbsRegistry.ts
-#: src/support/SupportDetailsContainer.tsx
-msgid "Project workspace"
 msgstr ""
 
 #: src/project/events.ts
@@ -7266,7 +7219,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesContainer.tsx
-#: src/marketplace/sidebar.ts
+#: src/navigation/sidebar/UnifiedSidebar.tsx
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectWorkspace.tsx
@@ -8594,10 +8547,6 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "Support user"
-msgstr ""
-
-#: src/navigation/workspace/WorkspaceLabel.tsx
-msgid "Support workspace"
 msgstr ""
 
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
@@ -10586,16 +10535,8 @@ msgstr ""
 msgid "User management events"
 msgstr ""
 
-#: src/user/UserDropdownMenu.tsx
-msgid "User profile"
-msgstr ""
-
 #: src/user/support/UserEditForm.tsx
 msgid "User status"
-msgstr ""
-
-#: src/marketplace/details/utils.ts
-msgid "User workspace"
 msgstr ""
 
 #: src/user/events.ts
@@ -11092,7 +11033,6 @@ msgstr ""
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
-#: src/customer/dashboard/CustomerDashboard.tsx
 #: src/project/ProjectDashboard.tsx
 #: src/user/dashboard/UserDashboard.tsx
 msgid "Welcome, {user}!"

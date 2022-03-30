@@ -206,7 +206,7 @@ export const OpenstackInstanceCheckoutSummary: React.FC<OfferingDetailsProps> =
             )}
           </p>
         )}
-        <OfferingLogo src={offering.thumbnail} size="small" />
+        <OfferingLogo src={offering.thumbnail} size="sm" />
         {formIsValid && (
           <Table bordered={true}>
             <tbody>

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { components } from 'react-select';
 
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
@@ -39,15 +39,15 @@ export const UserGroup: FunctionComponent<{
   disabled;
 }> = ({ customerUuid, editUser, users, disabled }) =>
   editUser ? (
-    <FormGroup>
-      <FormControl.Static>
+    <Form.Group>
+      <Form.Control plaintext>
         <strong>{translate('User')}</strong>:{' '}
         {editUser.full_name || editUser.username}
-      </FormControl.Static>
-    </FormGroup>
+      </Form.Control>
+    </Form.Group>
   ) : users?.length ? (
-    <FormGroup>
-      <ControlLabel>{translate('User')}</ControlLabel>
+    <Form.Group>
+      <Form.Label>{translate('User')}</Form.Label>
       <AsyncSelectField
         name="user"
         isDisabled={disabled}
@@ -67,7 +67,7 @@ export const UserGroup: FunctionComponent<{
         getOptionLabel={(option) => option.full_name || option.username}
         {...reactSelectMenuPortaling()}
       />
-    </FormGroup>
+    </Form.Group>
   ) : (
     <p className="text-danger">{translate('There are no available users.')}</p>
   );

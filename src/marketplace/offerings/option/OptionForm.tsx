@@ -1,4 +1,5 @@
 import { FunctionComponent, useContext } from 'react';
+import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import { Field, formValueSelector } from 'redux-form';
@@ -33,8 +34,7 @@ const StringField: FunctionComponent<any> = (props) => (
   <Field
     name={`${props.option}.${props.name}`}
     type="text"
-    className="form-control"
-    component="input"
+    component={Form.Control}
     validate={props.validate}
     readOnly={props.readOnly}
   />
@@ -74,8 +74,7 @@ const MinMaxFields = withTranslation(
         <Field
           name={`${props.option}.min`}
           type="number"
-          className="form-control"
-          component="input"
+          component={Form.Control}
           readOnly={props.readOnly}
         />
       </FormGroup>
@@ -83,8 +82,7 @@ const MinMaxFields = withTranslation(
         <Field
           name={`${props.option}.max`}
           type="number"
-          className="form-control"
-          component="input"
+          component={Form.Control}
           readOnly={props.readOnly}
         />
       </FormGroup>
@@ -102,7 +100,7 @@ export const OptionForm = connector(
   withTranslation((props: OptionFormProps) => {
     const { layout } = useContext(FormLayoutContext);
     const fieldsClassNames = {
-      labelClassName: layout === 'vertical' ? 'control-label' : undefined,
+      labelClassName: layout === 'vertical' ? '' : undefined,
       valueClassName: layout === 'vertical' ? '' : undefined,
       classNameWithoutLabel: layout === 'vertical' ? '' : undefined,
     };

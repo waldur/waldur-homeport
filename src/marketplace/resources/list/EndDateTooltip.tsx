@@ -1,6 +1,6 @@
 import { ENV } from '@waldur/configs/default';
 import { formatDate } from '@waldur/core/dateUtils';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
 export const EndDateTooltip = ({ end_date }) => {
@@ -13,14 +13,14 @@ export const EndDateTooltip = ({ end_date }) => {
   return (
     <>
       {' '}
-      <Tooltip
+      <Tip
         id="end-date"
         label={translate('Termination date: {date}', {
           date: formatDate(end_date),
         })}
       >
         <i className="fa fa-clock-o" />
-      </Tooltip>
+      </Tip>
     </>
   );
 };

@@ -1,3 +1,5 @@
+import { Form } from 'react-bootstrap';
+
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { UserDetails } from '@waldur/workspace/types';
@@ -15,21 +17,20 @@ export const EmailChangeForm = ({ user }: { user: UserDetails }) => {
       }}
     >
       {user.requested_email && (
-        <div className="form-group">
+        <Form.Group>
           <label htmlFor="emailAddress">{translate('Requested email')}</label>
-          <p className="form-control-static">{user.requested_email}</p>
-        </div>
+          <Form.Control plaintext>{user.requested_email}</Form.Control>
+        </Form.Group>
       )}
-      <div className="form-group">
+      <Form.Group>
         <label htmlFor="emailAddress">{translate('New email address')}</label>
-        <input
+        <Form.Control
           type="email"
           id="emailAddress"
-          className="form-control"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
-      </div>
+      </Form.Group>
       <SubmitButton
         disabled={!email || submitting}
         submitting={submitting}

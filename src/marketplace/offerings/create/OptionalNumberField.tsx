@@ -16,11 +16,9 @@ export const OptionalNumberField: FunctionComponent<WrappedFieldProps> = ({
     <>
       <InputGroup>
         <FormControl {...input} min={0} type="number" />
-        <InputGroup.Button>
-          <Button onClick={() => input.onChange(null)} bsStyle="danger">
-            {translate('Reset value')}
-          </Button>
-        </InputGroup.Button>
+        <Button onClick={() => input.onChange(null)} variant="danger">
+          {translate('Reset value')}
+        </Button>
       </InputGroup>
     </>
   );

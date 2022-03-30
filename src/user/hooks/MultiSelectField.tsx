@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 
 export const MultiSelectField: FunctionComponent<{ input; options }> = ({
   input,
@@ -26,9 +26,9 @@ export const MultiSelectField: FunctionComponent<{ input; options }> = ({
           {option.title}
           {option.help_text && (
             <div className="pull-right">
-              <Tooltip id={`checkbox-${index}`} label={option.help_text}>
+              <Tip id={`checkbox-${index}`} label={option.help_text}>
                 <i className="fa fa-question-circle" aria-hidden="true" />
-              </Tooltip>
+              </Tip>
             </div>
           )}
         </label>

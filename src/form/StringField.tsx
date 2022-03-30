@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 
 import { FormField } from './types';
 
@@ -13,7 +14,5 @@ interface StringFieldProps extends FormField {
 export const StringField: FunctionComponent<StringFieldProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, ...rest } = props;
-  return (
-    <input {...props.input} type="text" className="form-control" {...rest} />
-  );
+  return <Form.Control {...props.input} type="text" {...rest} />;
 };

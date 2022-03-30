@@ -1,13 +1,14 @@
 import { FunctionComponent } from 'react';
+import { Form, InputGroup } from 'react-bootstrap';
 
 import { FieldError } from '@waldur/form';
 
 export const IntegerUnitField: FunctionComponent<any> = (props) => (
   <>
-    <div className="input-group" style={{ maxWidth: 200 }}>
-      <input {...props.input} type="number" className="form-control" min="0" />
-      <span className="input-group-addon">{props.units}</span>
-    </div>
+    <InputGroup style={{ maxWidth: 200 }}>
+      <Form.Control {...props.input} type="number" min="0" />
+      <InputGroup.Text>{props.units}</InputGroup.Text>
+    </InputGroup>
     {props.meta.touched && <FieldError error={props.meta.error} />}
   </>
 );

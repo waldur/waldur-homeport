@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
@@ -86,26 +87,24 @@ export const IssueRegistration = reduxForm<IssueFormData, OwnProps>({
   }
 
   return (
-    <form className="ibox" onSubmit={handleSubmit(createIssue)}>
-      <div className="ibox-content">
-        <div className="form-horizontal">
-          <CallerGroup onSearch={onSearch} />
-          <OrganizationGroup onSearch={onSearch} />
-          <TypeGroup layout="horizontal" disabled={submitting} />
-          <PriorityGroup priorities={priorities} disabled={submitting} />
-          <SummaryGroup layout="horizontal" disabled={submitting} />
-          <DescriptionGroup layout="horizontal" disabled={submitting} />
-          <ProjectGroup disabled={submitting} onSearch={onSearch} />
-          <ResourceGroup disabled={submitting} />
-          <AssigneeGroup disabled={submitting} />
-        </div>
-      </div>
-      <div className="ibox-content text-right">
+    <form className="card" onSubmit={handleSubmit(createIssue)}>
+      <Card.Body>
+        <CallerGroup onSearch={onSearch} />
+        <OrganizationGroup onSearch={onSearch} />
+        <TypeGroup layout="horizontal" disabled={submitting} />
+        <PriorityGroup priorities={priorities} disabled={submitting} />
+        <SummaryGroup layout="horizontal" disabled={submitting} />
+        <DescriptionGroup layout="horizontal" disabled={submitting} />
+        <ProjectGroup disabled={submitting} onSearch={onSearch} />
+        <ResourceGroup disabled={submitting} />
+        <AssigneeGroup disabled={submitting} />
+      </Card.Body>
+      <Card.Body className="text-right">
         <SearchButton onSearch={onSearch} />{' '}
         <SubmitButton submitting={submitting} block={false}>
           {translate('Create request')}
         </SubmitButton>
-      </div>
+      </Card.Body>
     </form>
   );
 });

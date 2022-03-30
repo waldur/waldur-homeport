@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
@@ -34,8 +35,8 @@ export const GrowthChart: FunctionComponent = () => {
     return <>{translate('Unable to load growth chart.')}</>;
   }
   return (
-    <div className="ibox-content m-t-md p-m">
+    <Card.Body className="m-t-md p-m">
       <EChart options={option} height="400px" />
-    </div>
+    </Card.Body>
   );
 };

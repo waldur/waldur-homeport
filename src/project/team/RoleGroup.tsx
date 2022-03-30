@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { FormControl, FormGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
@@ -10,32 +10,32 @@ export const RoleGroup: FunctionComponent<{ isProjectManager }> = ({
   isProjectManager,
 }) =>
   isProjectManager ? (
-    <FormGroup>
-      <FormControl.Static>
+    <Form.Group>
+      <Form.Control plaintext>
         <strong>{translate('Role')}</strong>: {translate(ENV.roles.manager)}
-      </FormControl.Static>
-    </FormGroup>
+      </Form.Control>
+    </Form.Group>
   ) : (
     <>
-      <FormGroup>
+      <Form.Group>
         <label>
           <Field name="role" component="input" type="radio" value="manager" />{' '}
           {translate(ENV.roles.manager)}
         </label>
-      </FormGroup>
-      <FormGroup>
+      </Form.Group>
+      <Form.Group>
         <label>
           <Field name="role" component="input" type="radio" value="admin" />{' '}
           {translate(ENV.roles.admin)}
         </label>
-      </FormGroup>
+      </Form.Group>
       {isFeatureVisible('project.member_role') && (
-        <FormGroup>
+        <Form.Group>
           <label>
             <Field name="role" component="input" type="radio" value="member" />{' '}
             {translate(ENV.roles.member)}
           </label>
-        </FormGroup>
+        </Form.Group>
       )}
     </>
   );

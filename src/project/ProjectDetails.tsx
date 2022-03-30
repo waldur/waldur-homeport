@@ -1,9 +1,10 @@
 import { formatDate } from '@fullcalendar/core';
 import { FunctionComponent } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 
-import { TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
-interface ProjectDetailsProps extends TranslateProps {
+interface ProjectDetailsProps {
   name: string;
   description: string;
   end_date?: string;
@@ -12,18 +13,30 @@ interface ProjectDetailsProps extends TranslateProps {
 export const ProjectDetails: FunctionComponent<ProjectDetailsProps> = (
   props,
 ) => (
-  <dl className="dl-horizontal">
-    <dt>{props.translate('Name')}:</dt>
-    <dd>{props.name}</dd>
+  <Container>
+    <Row>
+      <Col sm={3}>{translate('Name')}:</Col>
+      <Col sm={9}>{props.name}</Col>
+    </Row>
 
-    <dt className="m-t-sm">{props.translate('Description')}:</dt>
-    <dd className="m-t-sm">{props.description || 'N/A'}</dd>
+    <Row>
+      <Col sm={3} className="m-t-sm">
+        {translate('Description')}:
+      </Col>
+      <Col sm={9} className="m-t-sm">
+        {props.description || 'N/A'}
+      </Col>
+    </Row>
 
     {props.end_date ? (
-      <>
-        <dt className="m-t-sm">{props.translate('End date')}:</dt>
-        <dd className="m-t-sm">{formatDate(props.end_date)}</dd>
-      </>
+      <Row>
+        <Col sm={3} className="m-t-sm">
+          {translate('End date')}:
+        </Col>
+        <Col sm={9} className="m-t-sm">
+          {formatDate(props.end_date)}
+        </Col>
+      </Row>
     ) : null}
-  </dl>
+  </Container>
 );

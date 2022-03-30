@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Panel, PanelGroup } from 'react-bootstrap';
+import { Accordion } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { Report } from '@waldur/marketplace/resources/types';
@@ -11,18 +11,16 @@ interface ShowReportComponentProps {
 export const ShowReportComponent: FunctionComponent<ShowReportComponentProps> =
   (props) =>
     Array.isArray(props.report) ? (
-      <PanelGroup accordion={true} defaultActiveKey={0}>
+      <Accordion defaultActiveKey="0">
         {props.report.map((section, index) => (
-          <Panel eventKey={index} key={index}>
-            <Panel.Heading>
-              <Panel.Title toggle={true}>{section.header}</Panel.Title>
-            </Panel.Heading>
-            <Panel.Body collapsible={true}>
+          <Accordion.Item eventKey={index.toString()} key={index}>
+            <Accordion.Header>{section.header}</Accordion.Header>
+            <Accordion.Body>
               <pre>{section.body}</pre>
-            </Panel.Body>
-          </Panel>
+            </Accordion.Body>
+          </Accordion.Item>
         ))}
-      </PanelGroup>
+      </Accordion>
     ) : (
       <>{translate('Report is invalid.')}</>
     );

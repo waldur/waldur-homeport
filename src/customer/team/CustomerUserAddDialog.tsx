@@ -1,9 +1,4 @@
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
@@ -52,10 +47,10 @@ export const CustomerUserAddDialog = reduxForm<
   };
   return (
     <form onSubmit={handleSubmit(callback)}>
-      <ModalHeader>
-        <ModalTitle>{translate('Add owner')}</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+      <Modal.Header>
+        <Modal.Title>{translate('Add owner')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <FormContainer submitting={submitting}>
           <AsyncSelectField
             name="user"
@@ -72,15 +67,15 @@ export const CustomerUserAddDialog = reduxForm<
           />
           <OwnerExpirationTimeGroup />
         </FormContainer>
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <SubmitButton
           block={false}
           submitting={submitting}
           label={translate('Save')}
         />
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </form>
   );
 });

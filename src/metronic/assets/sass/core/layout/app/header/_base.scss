@@ -1,0 +1,173 @@
+//
+// Aside
+//
+
+// General mode
+.app-header {
+  @include app-layout-transition();
+}
+
+// Desktop mode
+@include media-breakpoint-up(lg) {
+  // Base
+  .app-header {
+    @include attr(height, get($app-header-config, base, height));
+    @include attr(z-index, get($app-header-config, base, z-index));
+    @include attr(background-color, get($app-header-config, base, bg-color));
+    @include attr(box-shadow, get($app-header-config, base, box-shadow));
+    @include attr(border-bottom, get($app-header-config, base, border-bottom));
+  }
+
+  // Vars
+  .app-header-fixed {
+    --kt-app-header-height: #{get($app-header-config, base, height)};
+  }
+
+  [data-kt-app-header-sticky='on'] {
+    --kt-app-aside-height: #{get($app-header-config, sticky, height)};
+  }
+
+  [data-kt-app-header-minimize='on'] {
+    --kt-app-aside-height: #{get($app-header-config, minimize, height)};
+  }
+
+  // States
+  .app-header {
+    .app-header-fixed & {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: var(--kt-app-header-height);
+      @include attr(z-index, get($app-header-config, base, z-index));
+      @include attr(box-shadow, get($app-header-config, base, box-shadow));
+      @include attr(
+        border-bottom,
+        get($app-header-config, base, border-bottom)
+      );
+    }
+
+    [data-kt-app-header-sticky='on'] & {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      @include app-layout-transition();
+      @include attr(height, get($app-header-config, sticky, height));
+      @include attr(z-index, get($app-header-config, sticky, z-index));
+      @include attr(box-shadow, get($app-header-config, sticky, box-shadow));
+      @include attr(
+        border-bottom,
+        get($app-header-config, sticky, border-bottom)
+      );
+    }
+
+    [data-kt-app-header-minimize='on'] & {
+      @include app-layout-transition();
+      @include attr(height, get($app-header-config, sticky, height));
+    }
+  }
+
+  // Integration
+  .app-header {
+    // Aside
+    .app-aside-fixed.app-aside-push-header & {
+      left: var(--kt-app-aside-width);
+    }
+
+    // Aside primary
+    .app-aside-primary-fixed.app-aside-primary-push-header & {
+      left: var(--kt-app-aside-primary-width);
+    }
+
+    // Aside secondary
+    .app-aside-secondary-fixed.app-aside-secondary-push-header & {
+      left: calc(
+        var(--kt-app-aside-primary-width) +
+          var(--kt-app-aside-secondary-width, 0px)
+      );
+    }
+
+    // Aside tertiary
+    .app-aside-tertiary-fixed.app-aside-tertiary-push-header & {
+      left: calc(
+        var(--kt-app-aside-primary-width) +
+          var(--kt-app-aside-secondary-width, 0px) +
+          var(--kt-app-aside-tertiary-width, 0px)
+      );
+    }
+  }
+}
+
+// Tablet & mobile modes
+@include media-breakpoint-down(lg) {
+  // Base
+  .app-header {
+    @include attr(height, get($app-header-config, base, height-mobile));
+    @include attr(z-index, get($app-header-config, base, z-index-mobile));
+    @include attr(
+      background-color,
+      get($app-header-config, base, bg-color-mobile)
+    );
+    @include attr(box-shadow, get($app-header-config, base, box-shadow-mobile));
+    @include attr(
+      border-bottom,
+      get($app-header-config, base, border-bottom-mobile)
+    );
+  }
+
+  // Vars
+  .app-toolbar-fixed {
+    --kt-app-header-height: #{get($app-header-config, base, height-mobile)};
+  }
+
+  [data-kt-app-toolbar-sticky='on'] {
+    --kt-app-header-height: #{get($app-header-config, sticky, height-mobile)};
+  }
+
+  [data-kt-app-toolbar-minimize='on'] {
+    --kt-app-header-height: #{get($app-header-config, minimize, height-mobile)};
+  }
+
+  // States
+  .app-header {
+    .app-header-mobile-fixed & {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: var(--kt-app-header-height);
+      @include app-layout-transition();
+      @include attr(z-index, get($app-header-config, base, z-index-mobile));
+      @include attr(
+        box-shadow,
+        get($app-header-config, base, box-shadow-mobile)
+      );
+      @include attr(
+        border-bottom,
+        get($app-header-config, base, border-bottom-mobile)
+      );
+    }
+
+    [data-kt-app-header-sticky='on'] & {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      @include app-layout-transition();
+      @include attr(z-index, get($app-header-config, sticky, z-index-mobile));
+      @include attr(
+        box-shadow,
+        get($app-header-config, sticky, box-shadow-mobile)
+      );
+      @include attr(
+        border-bottom,
+        get($app-header-config, sticky, border-bottom-mobile)
+      );
+    }
+
+    [data-kt-app-header-minimize='on'] & {
+      @include app-layout-transition();
+    }
+  }
+}

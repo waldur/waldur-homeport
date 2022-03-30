@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
@@ -6,8 +7,8 @@ import { divisionTypeAutocomplete } from '@waldur/customer/list/api';
 import { translate } from '@waldur/i18n';
 
 export const DivisionTypeFilter: FunctionComponent = () => (
-  <div className="form-group col-sm-3">
-    <label className="control-label">{translate('Division type')}</label>
+  <Form.Group className="col-sm-3">
+    <Form.Label>{translate('Division type')}</Form.Label>
     <Field
       name="division_type"
       component={(fieldProps) => (
@@ -28,5 +29,5 @@ export const DivisionTypeFilter: FunctionComponent = () => (
         />
       )}
     />
-  </div>
+  </Form.Group>
 );

@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { PanelBody } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { ENV } from '@waldur/configs/default';
@@ -20,9 +20,9 @@ export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => {
         title: translate('Order items'),
         visible: true,
         component: () => (
-          <PanelBody>
+          <Card.Body>
             <ResourceOrderItems resource_uuid={resource.uuid} />
-          </PanelBody>
+          </Card.Body>
         ),
       },
       {
@@ -36,9 +36,9 @@ export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => {
         title: translate('Schedules'),
         visible: resource.attributes.schedules,
         component: () => (
-          <PanelBody>
+          <Card.Body>
             <Calendar events={resource.attributes.schedules} />
-          </PanelBody>
+          </Card.Body>
         ),
       },
       {

@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Card } from 'react-bootstrap';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
@@ -41,8 +42,8 @@ const serviceProviderTypeOptions = [
 ];
 
 const PureFlowMapFilter: FunctionComponent<FlowMapFilterProps> = (props) => (
-  <div className="ibox">
-    <div className="ibox-content">
+  <Card>
+    <Card.Body>
       <form className="form-inline" id="flow-map-form">
         <FormContainer
           labelClass="m-r-md"
@@ -76,8 +77,8 @@ const PureFlowMapFilter: FunctionComponent<FlowMapFilterProps> = (props) => (
           />
         </FormContainer>
       </form>
-    </div>
-  </div>
+    </Card.Body>
+  </Card>
 );
 
 const enhance = compose(reduxForm({ form: 'flowMapFilter' }), withTranslation);

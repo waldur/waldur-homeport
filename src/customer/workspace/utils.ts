@@ -113,6 +113,6 @@ export const getCustomerCounters = (customer: Customer, fields: string[]) =>
     (response) => response.data,
   );
 
-export const getExtraSidebarItems = (): Promise<MenuItemType[]> => {
+export const getExtraCustomerSidebarItems = (): Promise<MenuItemType[]> => {
   return SidebarExtensionService.getItems(ORGANIZATION_WORKSPACE);
 };

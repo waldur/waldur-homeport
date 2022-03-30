@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -39,7 +40,7 @@ type ProjectFieldProps = StateProps & OwnProps;
 const PureProjectField: FC<ProjectFieldProps> = (props) =>
   props.projects ? (
     <FormGroup
-      labelClassName="control-label col-sm-3"
+      labelClassName="col-sm-3"
       valueClassName="col-sm-9"
       label={translate('Project')}
       required={true}
@@ -52,9 +53,9 @@ const PureProjectField: FC<ProjectFieldProps> = (props) =>
         )}
         {!props.previewMode && <ProjectCreateButton />}
       </div>
-      <div className="help-block m-b-none text-muted">
+      <Form.Text className="m-b-none text-muted">
         {translate('The project will be changed for all items in cart.')}
-      </div>
+      </Form.Text>
     </FormGroup>
   ) : props.workspace === USER_WORKSPACE ? (
     <>

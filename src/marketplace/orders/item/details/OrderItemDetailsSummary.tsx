@@ -19,7 +19,7 @@ const PureOrderItemDetailsSummary: React.FC<OrderSummaryProps> = (
   props: OrderSummaryProps,
 ) => (
   <>
-    <OfferingLogo src={props.offering.thumbnail} size="small" />
+    <OfferingLogo src={props.offering.thumbnail} size="sm" />
     <SummaryTable {...props} />
   </>
 );

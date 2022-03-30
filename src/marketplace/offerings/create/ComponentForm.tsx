@@ -19,7 +19,7 @@ interface ComponentFormProps {
 export const ComponentForm: FunctionComponent<ComponentFormProps> = (props) => {
   const { layout } = useContext(FormLayoutContext);
   const fieldsClassNames = {
-    labelClassName: layout === 'vertical' ? 'control-label' : undefined,
+    labelClassName: layout === 'vertical' ? '' : undefined,
     valueClassName: layout === 'vertical' ? '' : undefined,
     classNameWithoutLabel: layout === 'vertical' ? '' : undefined,
   };

@@ -120,7 +120,7 @@ export const FeaturesList = reduxForm({
           </tbody>
         </Table>
 
-        <Button type="submit" bsStyle="primary">
+        <Button type="submit" variant="primary">
           {translate('Save')}
         </Button>
       </form>

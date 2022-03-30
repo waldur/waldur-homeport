@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Field, getFormValues } from 'redux-form';
 
@@ -49,8 +50,7 @@ export const PureAttributeFilterSection: FunctionComponent<PureAttributeFilterSe
               <Field
                 key={outerIndex}
                 name={`${attribute.type}-${attrKey}-${outerIndex}`}
-                component="input"
-                className="form-control"
+                component={Form.Control}
                 {...attrConfig}
               />
             )}

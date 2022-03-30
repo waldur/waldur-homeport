@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { BooleanField } from '@waldur/table/BooleanField';
@@ -52,13 +52,13 @@ const OrganizationRolesField = ({ row }) => {
     return row.customer_permissions.map((permission, index) => {
       return (
         <span key={index}>
-          <Tooltip
+          <Tip
             key={index}
             label={translate(permission.role)}
             id="customer-role"
           >
             {permission.customer_name} <i className="fa fa-question-circle" />
-          </Tooltip>
+          </Tip>
           <br />
         </span>
       );
@@ -73,7 +73,7 @@ const ProjectRolesField = ({ row }) => {
     return row.project_permissions.map((permission, index) => {
       return (
         <span key={index}>
-          <Tooltip
+          <Tip
             key={index}
             label={translate('{role} ({name})', {
               role: permission.role,
@@ -82,7 +82,7 @@ const ProjectRolesField = ({ row }) => {
             id="project-role"
           >
             {permission.project_name} <i className="fa fa-question-circle" />
-          </Tooltip>
+          </Tip>
           <br />
         </span>
       );

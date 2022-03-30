@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Card } from 'react-bootstrap';
 
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
@@ -7,7 +8,7 @@ import { UserPermissionRequestsList } from '@waldur/invitations/UserPermissionRe
 export const GroupInvitationsListExpandableRow: FunctionComponent<{
   row;
 }> = ({ row }) => (
-  <div className="ibox-content">
+  <Card.Body>
     <p>
       <b>{translate('Invitation link')}: </b>
       <CopyToClipboardContainer
@@ -15,5 +16,5 @@ export const GroupInvitationsListExpandableRow: FunctionComponent<{
       />
     </p>
     <UserPermissionRequestsList groupInvitationUuid={row.uuid} />
-  </div>
+  </Card.Body>
 );

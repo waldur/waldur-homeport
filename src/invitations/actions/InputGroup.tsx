@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { ControlLabel, FormGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { InputField } from '@waldur/form/InputField';
@@ -21,11 +21,11 @@ export const InputGroup: FunctionComponent<InputGroupProps> = ({
   type,
   helpText,
 }) => (
-  <FormGroup>
-    <ControlLabel>
+  <Form.Group>
+    <Form.Label>
       {label}
       {required && <span className="text-danger">*</span>}
-    </ControlLabel>
+    </Form.Label>
     <Field
       name={name}
       component={InputField}
@@ -33,6 +33,10 @@ export const InputGroup: FunctionComponent<InputGroupProps> = ({
       disabled={disabled}
       type={type}
     />
-    {helpText && <p className="help-block m-b-n-xs text-muted">{helpText}</p>}
-  </FormGroup>
+    {helpText && (
+      <Form.Text muted={true} className="m-b-n-xs">
+        {helpText}
+      </Form.Text>
+    )}
+  </Form.Group>
 );

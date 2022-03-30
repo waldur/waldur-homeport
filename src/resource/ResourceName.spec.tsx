@@ -2,7 +2,7 @@ import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import '@waldur/openstack/provider';
 
 import { ResourceName } from './ResourceName';
@@ -40,7 +40,7 @@ describe('ResourceName', () => {
 
   it('renders a tooltip', () => {
     const wrapper = renderLink();
-    const tooltip = wrapper.find(Tooltip).prop('label');
+    const tooltip = wrapper.find(Tip).prop('label');
     expect(tooltip).toBe('OpenStack Instance');
   });
 

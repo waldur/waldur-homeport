@@ -1,12 +1,9 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { triggerTransition } from '@uirouter/redux';
-import { useState, useEffect, FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
-import { translate } from '@waldur/i18n';
-import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
-import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { Layout } from '@waldur/navigation/Layout';
 import { getCustomer } from '@waldur/project/api';
 import {
@@ -22,28 +19,10 @@ import {
 } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
-import { CustomerSidebar } from './CustomerSidebar';
-
-function getBreadcrumbs(customer): BreadcrumbItem[] {
-  if (customer) {
-    return [
-      {
-        label: translate('Organization workspace'),
-        state: 'organization.dashboard',
-        params: {
-          uuid: customer.uuid,
-        },
-      },
-    ];
-  }
-}
-
 export const CustomerWorkspace: FunctionComponent = () => {
-  const [pageClass, setPageClass] = useState<string>();
-  const [hideBreadcrumbs, setHideBreadcrumbs] = useState<boolean>();
   const customer = useSelector(getCustomerSelector);
   const currentUser = useSelector(getUser);
-  const { state, params } = useCurrentStateAndParams();
+  const { params } = useCurrentStateAndParams();
   const customerId = params?.uuid;
 
   const dispatch = useDispatch();
@@ -70,21 +49,5 @@ export const CustomerWorkspace: FunctionComponent = () => {
     }
   }, [customerId]);
 
-  function refreshState() {
-    const data = state?.data;
-    setPageClass(data?.pageClass);
-    setHideBreadcrumbs(data?.hideBreadcrumbs);
-  }
-
-  useBreadcrumbsFn(() => getBreadcrumbs(customer), [customer]);
-
-  useEffect(refreshState, [state, params]);
-
-  return customer ? (
-    <Layout
-      sidebar={<CustomerSidebar />}
-      pageClass={pageClass}
-      hideBreadcrumbs={hideBreadcrumbs}
-    />
-  ) : null;
+  return customer ? <Layout /> : null;
 };

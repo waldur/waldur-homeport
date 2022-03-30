@@ -1,0 +1,20 @@
+//
+// Page Container
+//
+
+// Desktop Mode
+@include media-breakpoint-up(lg) {
+  .app-container {
+    padding-left: get($app-container-config, padding-x) !important;
+    padding-right: get($app-container-config, padding-x) !important;
+  }
+}
+
+// Tablet & mobile modes
+@include media-breakpoint-down(lg) {
+  .app-container {
+    max-width: none;
+    padding-left: get($app-container-config, padding-x-mobile) !important;
+    padding-right: get($app-container-config, padding-x-mobile) !important;
+  }
+}

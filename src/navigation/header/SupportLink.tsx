@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { IssueNavigationService } from '@waldur/issues/workspace/IssueNavigationService';
-import { router } from '@waldur/router';
 import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -23,17 +22,16 @@ export const SupportLink: FunctionComponent = () => {
     return null;
   }
 
-  const gotoSupport = () => IssueNavigationService.gotoDashboard();
-
-  const isActive =
-    router.stateService.includes('support') ||
-    router.stateService.is('support');
-
   return (
-    <li>
-      <a onClick={gotoSupport} className={isActive ? 'active' : ''}>
-        <i className="fa fa-question-circle"></i> {translate('Support')}
+    <div
+      className="aside-footer flex-column-auto pt-5 pb-7 px-5"
+      onClick={() => IssueNavigationService.gotoDashboard()}
+    >
+      <a className="btn btn-custom btn-primary w-100">
+        <span className="btn-label">
+          <i className="fa fa-question-circle"></i> {translate('Support')}
+        </span>
       </a>
-    </li>
+    </div>
   );
 };

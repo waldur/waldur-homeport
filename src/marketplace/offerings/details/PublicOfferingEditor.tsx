@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { FormLayoutContext } from '@waldur/form/context';
@@ -39,10 +34,10 @@ export const PublicOfferingEditor = ({ resolve }) => {
   const Editor =
     page == 'nav' ? (
       <>
-        <ModalHeader>
-          <ModalTitle>{translate('Edit offering details')}</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
+        <Modal.Header>
+          <Modal.Title>{translate('Edit offering details')}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <SidebarNav>
             <SidebarRow
               iconClass="fa fa-edit"
@@ -110,10 +105,10 @@ export const PublicOfferingEditor = ({ resolve }) => {
               />
             )}
           </SidebarNav>
-        </ModalBody>
-        <ModalFooter>
+        </Modal.Body>
+        <Modal.Footer>
           <CloseDialogButton />
-        </ModalFooter>
+        </Modal.Footer>
       </>
     ) : page == 'overview' ? (
       <PageOverview

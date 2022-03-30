@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 
 import './OfferingButton.scss';
 
@@ -22,8 +22,8 @@ export const OfferingButton: FunctionComponent<OfferingButtonProps> = (
   if (props.flavor === 'primary') {
     return (
       <Button
-        bsSize="sm"
-        bsStyle="primary"
+        size="sm"
+        variant="primary"
         disabled={props.disabled}
         onClick={props.onClick}
       >
@@ -33,20 +33,20 @@ export const OfferingButton: FunctionComponent<OfferingButtonProps> = (
     );
   } else if (props.flavor === 'secondary') {
     return (
-      <Tooltip
+      <Tip
         label={props.title}
         id="offering-button"
-        className={classNames('btn btn-sm btn-default', {
+        className={classNames('btn btn-sm btn-secondary', {
           disabled: props.disabled,
         })}
         onClick={props.onClick}
       >
         <i className={props.icon} />
-      </Tooltip>
+      </Tip>
     );
   }
   return (
-    <Tooltip
+    <Tip
       label={props.title}
       id="offering-button"
       className={classNames('offering-button', {
@@ -55,7 +55,7 @@ export const OfferingButton: FunctionComponent<OfferingButtonProps> = (
       onClick={props.onClick}
     >
       <i className={props.icon} />
-    </Tooltip>
+    </Tip>
   );
 };
 

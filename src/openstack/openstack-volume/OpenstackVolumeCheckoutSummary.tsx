@@ -143,7 +143,7 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OfferingDetailsProps> = ({
           )}
         </p>
       )}
-      <OfferingLogo src={offering.thumbnail} size="small" />
+      <OfferingLogo src={offering.thumbnail} size="sm" />
       {!!formData.size && (
         <Table bordered={true}>
           <tbody>

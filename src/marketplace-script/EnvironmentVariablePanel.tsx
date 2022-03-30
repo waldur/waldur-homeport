@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Panel } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 import { Field, FormSection } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -15,20 +15,20 @@ interface OwnProps {
 export const EnvironmentVariablePanel: FunctionComponent<OwnProps> = (
   props,
 ) => (
-  <Panel>
-    <Panel.Heading>
+  <Card>
+    <Card.Header>
       <RemoveButton onClick={() => props.onRemove(props.index)} />
       <h4>{translate('Variable #{index}', { index: props.index + 1 })}</h4>
-    </Panel.Heading>
-    <Panel.Body>
+    </Card.Header>
+    <Card.Body>
       <FormSection name={props.variable}>
         <FormGroup label={translate('Name')} required={true}>
-          <Field name="name" component="input" className="form-control" />
+          <Field name="name" component={Form.Control} />
         </FormGroup>
         <FormGroup label={translate('Value')} required={true}>
-          <Field name="value" component="input" className="form-control" />
+          <Field name="value" component={Form.Control} />
         </FormGroup>
       </FormSection>
-    </Panel.Body>
-  </Panel>
+    </Card.Body>
+  </Card>
 );

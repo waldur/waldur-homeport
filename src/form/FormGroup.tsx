@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import { cloneElement, PureComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import { clearFields, WrappedFieldMetaProps } from 'redux-form';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { omit } from '@waldur/core/utils';
 
 import { FormFieldsContext } from './context';
@@ -43,23 +44,19 @@ export class FormGroup extends PureComponent<FormGroupProps> {
       },
     };
     return (
-      <div className="form-group">
+      <Form.Group>
         {!hideLabel && (
-          <label
-            className={
-              layout !== 'vertical'
-                ? classNames('control-label', labelClass)
-                : undefined
-            }
+          <Form.Label
+            className={layout !== 'vertical' ? labelClass : undefined}
           >
             {tooltip && (
-              <Tooltip id="form-field-tooltip" label={tooltip}>
+              <Tip id="form-field-tooltip" label={tooltip}>
                 <i className="fa fa-question-circle" />{' '}
-              </Tooltip>
+              </Tip>
             )}
             {label}
             {required && <span className="text-danger"> *</span>}
-          </label>
+          </Form.Label>
         )}
         <div
           className={
@@ -70,11 +67,13 @@ export class FormGroup extends PureComponent<FormGroupProps> {
         >
           {cloneElement(children as any, newProps)}
           {description && (
-            <p className="help-block m-b-none text-muted">{description}</p>
+            <Form.Text muted={true} className="m-b-none">
+              {description}
+            </Form.Text>
           )}
           {touched && <FieldError error={error} />}
         </div>
-      </div>
+      </Form.Group>
     );
   }
 

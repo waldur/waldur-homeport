@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import { CUSTOMERS_DIVISIONS_FORM_ID } from '@waldur/customer/divisions/constants';
@@ -9,8 +9,8 @@ import {
 } from '@waldur/customer/list/AccountingRunningField';
 
 export const PureCustomersDivisionsFilter: FunctionComponent = () => (
-  <div className="ibox">
-    <div className="ibox-content border-bottom m-t-md">
+  <Card>
+    <Card.Body className="border-bottom m-t-md">
       <form className="form-inline">
         <Row>
           <Col sm={3}>
@@ -18,8 +18,8 @@ export const PureCustomersDivisionsFilter: FunctionComponent = () => (
           </Col>
         </Row>
       </form>
-    </div>
-  </div>
+    </Card.Body>
+  </Card>
 );
 
 export const CustomersDivisionsFilter = reduxForm<{}, any>({

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form } from 'react-bootstrap';
 
 interface StaticFieldProps {
   label: string;
@@ -7,18 +8,14 @@ interface StaticFieldProps {
   controlClass?: string;
 }
 
-export const StaticField: React.FC<StaticFieldProps> = (props) => {
-  return (
-    <div className="form-group">
-      <label className={`${props.labelClass} control-label`}>
-        {props.label}
-      </label>
-      <div className={props.controlClass}>
-        <p className="form-control-static">{props.value}</p>
-      </div>
+export const StaticField: React.FC<StaticFieldProps> = (props) => (
+  <Form.Group>
+    <Form.Label className={props.labelClass}>{props.label}</Form.Label>
+    <div className={props.controlClass}>
+      <Form.Control plaintext>{props.value}</Form.Control>
     </div>
-  );
-};
+  </Form.Group>
+);
 
 StaticField.defaultProps = {
   labelClass: 'col-sm-3 col-md-4 col-lg-3',

@@ -1,10 +1,5 @@
 import { useCallback, useState } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
@@ -64,10 +59,10 @@ export const NotificationCreateDialog = reduxForm({
       onSubmit={handleSubmit(createNotification)}
       onChange={(e) => setFetchNumber(e)}
     >
-      <ModalHeader>
-        <ModalTitle>{translate('Create a broadcast')}</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+      <Modal.Header>
+        <Modal.Title>{translate('Create a broadcast')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <FormContainer submitting={submitting}>
           <StringField
             name="subject"
@@ -107,8 +102,8 @@ export const NotificationCreateDialog = reduxForm({
           />
         </FormContainer>
         <NumberIndicator shouldFetch={fetchNumber} />
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <SubmitButton
           block={false}
           label={translate('Create')}
@@ -116,7 +111,7 @@ export const NotificationCreateDialog = reduxForm({
           invalid={invalid}
         />
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </form>
   );
 });

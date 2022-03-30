@@ -7,13 +7,7 @@ import { router } from '@waldur/router';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { isOwnerOrStaff } from '@waldur/workspace/selectors';
-import {
-  ORGANIZATION_WORKSPACE,
-  PROJECT_WORKSPACE,
-  SUPPORT_WORKSPACE,
-  User,
-  USER_WORKSPACE,
-} from '@waldur/workspace/types';
+import { SUPPORT_WORKSPACE, User } from '@waldur/workspace/types';
 
 const getHelpdeskItems = (): MenuItemType[] => [
   {
@@ -245,12 +239,6 @@ class IssueNavigationServiceClass {
           return dashboardItems;
         }
       })
-      .then((items) => {
-        if (this.getBackItemLabel()) {
-          return [this.getBackItem(), ...items];
-        }
-        return items;
-      })
       .then((items) =>
         SidebarExtensionService.getItems(SUPPORT_WORKSPACE).then((extra) => [
           ...items,
@@ -263,40 +251,6 @@ class IssueNavigationServiceClass {
         }
         return items;
       });
-  }
-
-  setPrevState(state, params) {
-    if (
-      state.data &&
-      state.data.workspace &&
-      state.data.workspace !== SUPPORT_WORKSPACE
-    ) {
-      this.prevState = state;
-      this.prevParams = params;
-      this.prevWorkspace = state.data.workspace;
-    }
-  }
-
-  getBackItem() {
-    return {
-      label: this.getBackItemLabel(),
-      icon: 'fa-arrow-left',
-      action: () => router.stateService.go(this.prevState, this.prevParams),
-    };
-  }
-
-  getBackItemLabel() {
-    const prevWorkspace = this.prevWorkspace;
-    if (prevWorkspace === PROJECT_WORKSPACE) {
-      return translate('Back to project');
-    } else if (
-      prevWorkspace === ORGANIZATION_WORKSPACE &&
-      (isOwnerOrStaff(store.getState()) || this.currentUser.is_support)
-    ) {
-      return translate('Back to organization');
-    } else if (prevWorkspace === USER_WORKSPACE) {
-      return translate('Back to personal dashboard');
-    }
   }
 }
 

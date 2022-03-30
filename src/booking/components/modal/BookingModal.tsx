@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useState } from 'react';
-import { Button, ButtonGroup, Modal } from 'react-bootstrap';
+import { Button, ButtonGroup, Form, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BookingProps } from '@waldur/booking/types';
@@ -140,11 +140,9 @@ export const BookingModal: FC<BookingModalProps> = ({
       </Modal.Header>
 
       <Modal.Body>
-        <form className="form-horizontal">
-          <div className="form-group">
-            <label className="control-label col-sm-2">
-              {translate('All day')}
-            </label>
+        <form>
+          <Form.Group>
+            <Form.Label className="col-sm-2">{translate('All day')}</Form.Label>
             <div className="col-sm-9" style={{ paddingTop: 7 }}>
               <div className="checkbox-toggle">
                 <input
@@ -156,7 +154,7 @@ export const BookingModal: FC<BookingModalProps> = ({
                 <label htmlFor="AllDay">All-day toggler</label>
               </div>
             </div>
-          </div>
+          </Form.Group>
 
           <DateAndTimeSelectField
             name="start"
@@ -184,10 +182,10 @@ export const BookingModal: FC<BookingModalProps> = ({
               marginTop: 30,
             }}
           >
-            <Button bsStyle="danger" onClick={handleDelete}>
+            <Button variant="danger" onClick={handleDelete}>
               {translate('Delete')}
             </Button>
-            <Button bsStyle="primary" onClick={handleSubmit}>
+            <Button variant="primary" onClick={handleSubmit}>
               {translate('Save')}
             </Button>
           </ButtonGroup>

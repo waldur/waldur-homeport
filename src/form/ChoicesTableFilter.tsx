@@ -19,7 +19,7 @@ export class ChoicesTableFilter extends Component<ChoicesTableFilterProps> {
     }
     return classNames(
       'btn btn-sm',
-      { 'btn-default': choice.value !== props.input.value },
+      { 'btn-secondary': choice.value !== props.input.value },
       { 'btn-primary': choice.value === props.input.value },
     );
   };

@@ -1,21 +1,19 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
+import { Button, Form } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
 export const SigninButton: FunctionComponent = () => {
   const router = useRouter();
   return (
-    <div className="form-group m-b-sm">
+    <Form.Group className="m-b-sm">
       <p>
         <small>{translate('Already have an account?')}</small>
       </p>
-      <a
-        onClick={() => router.stateService.go('login')}
-        className="btn btn-default btn-block"
-      >
+      <Button as="a" onClick={() => router.stateService.go('login')}>
         {translate('Login')}
-      </a>
-    </div>
+      </Button>
+    </Form.Group>
   );
 };

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { DropdownButton, MenuItem } from 'react-bootstrap';
+import { DropdownButton, Dropdown } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { Invoice } from '@waldur/invoices/types';
@@ -15,9 +15,9 @@ interface ResourceActionComponentProps {
 }
 
 const ActionItem = ({ invoice, invoiceKey, onSelect }) => (
-  <MenuItem eventKey={invoiceKey} onSelect={() => onSelect(invoice)}>
+  <Dropdown.Item eventKey={invoiceKey} onSelect={() => onSelect(invoice)}>
     {invoice.month} - {invoice.year} ({invoice.state})
-  </MenuItem>
+  </Dropdown.Item>
 );
 
 export const InvoicesDropdown: FunctionComponent<ResourceActionComponentProps> =
@@ -31,21 +31,22 @@ export const InvoicesDropdown: FunctionComponent<ResourceActionComponentProps> =
       id="link-invoice-dropdown-btn"
       className="dropdown-btn"
       onToggle={props.onToggle}
-      open={props.open}
       disabled={props.disabled}
     >
       {props.open ? (
         props.loading ? (
-          <MenuItem eventKey="1">{translate('Loading invoices')}</MenuItem>
+          <Dropdown.Item eventKey="1">
+            {translate('Loading invoices')}
+          </Dropdown.Item>
         ) : props.error ? (
-          <MenuItem eventKey="1">
+          <Dropdown.Item eventKey="1">
             {translate('Unable to load invoices')}
-          </MenuItem>
+          </Dropdown.Item>
         ) : props.invoices ? (
           Object.keys(props.invoices).length === 0 ? (
-            <MenuItem eventKey="2">
+            <Dropdown.Item eventKey="2">
               {translate('There are no invoices.')}
-            </MenuItem>
+            </Dropdown.Item>
           ) : (
             Object.keys(props.invoices).map((invoice) => (
               <ActionItem

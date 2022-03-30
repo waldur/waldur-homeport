@@ -1,4 +1,5 @@
 import { FunctionComponent, useContext } from 'react';
+import { Form } from 'react-bootstrap';
 import { compose } from 'redux';
 import { Field, FormSection } from 'redux-form';
 
@@ -24,13 +25,7 @@ interface PlanFormProps extends TranslateProps {
 }
 
 const PlanNameField: FunctionComponent = () => (
-  <Field
-    name="name"
-    type="text"
-    component="input"
-    className="form-control"
-    validate={required}
-  />
+  <Field name="name" type="text" component={Form.Control} validate={required} />
 );
 
 const PlanDescriptionField: FunctionComponent = () => (
@@ -42,7 +37,7 @@ const enhance = compose(connectPlanComponents, withTranslation);
 export const PlanForm = enhance((props: PlanFormProps) => {
   const { layout } = useContext(FormLayoutContext);
   const fieldsClassNames = {
-    labelClassName: layout === 'vertical' ? 'control-label' : undefined,
+    labelClassName: layout === 'vertical' ? '' : undefined,
     valueClassName: layout === 'vertical' ? '' : undefined,
     classNameWithoutLabel: layout === 'vertical' ? '' : undefined,
   };

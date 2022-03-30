@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, FormGroup, HelpBlock } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import { Field, WrappedFieldProps } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -16,7 +16,7 @@ interface OwnProps extends FieldProps {
 
 export const DecoratedField: React.FC<OwnProps> = (props) => (
   <Col sm={6}>
-    <FormGroup>
+    <Form.Group>
       {props.action ? (
         <div className="pull-right">
           <small>{props.action}</small>
@@ -36,9 +36,7 @@ export const DecoratedField: React.FC<OwnProps> = (props) => (
             : undefined
         }
       />
-      <HelpBlock>
-        <span className="text-muted">{props.description}</span>
-      </HelpBlock>
-    </FormGroup>
+      <Form.Text muted={true}>{props.description}</Form.Text>
+    </Form.Group>
   </Col>
 );

@@ -1,5 +1,5 @@
 import { useCallback, FunctionComponent } from 'react';
-import { ModalBody, ModalFooter, ModalHeader } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -39,8 +39,8 @@ export const GroupInvitationConfirmDialog: FunctionComponent<{
 
   return (
     <>
-      <ModalHeader>{translate('Request permission')}</ModalHeader>
-      <ModalBody>
+      <Modal.Header>{translate('Request permission')}</Modal.Header>
+      <Modal.Body>
         {asyncResult.loading && (
           <>
             <LoadingSpinner />
@@ -57,15 +57,15 @@ export const GroupInvitationConfirmDialog: FunctionComponent<{
           ) : (
             <GroupInvitationMessage invitation={invitation} />
           ))}
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         {!asyncResult.loading && !asyncResult.error && (
           <GroupInvitationButtons
             dismiss={dismiss}
             submitRequest={submitRequest}
           />
         )}
-      </ModalFooter>
+      </Modal.Footer>
     </>
   );
 };

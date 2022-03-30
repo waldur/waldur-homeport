@@ -1,9 +1,11 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
+
 import './VmOverviewFilter.scss';
 
 interface VmOverviewFilterProps {
@@ -13,15 +15,15 @@ interface VmOverviewFilterProps {
 export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
   props,
 ) => (
-  <div className="ibox">
-    <div className="ibox-content m-b-sm border-bottom">
+  <div className="card">
+    <div className="card-body m-b-sm border-bottom">
       <form className="form-inline" id="vm-overview-filter">
         <Field
           name="shared"
           component={AwesomeCheckboxField}
           label={translate('Show shared')}
         />
-        <div className="form-group">
+        <Form.Group>
           <Field
             name="service_provider"
             component={(prop) => (
@@ -40,7 +42,7 @@ export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
               />
             )}
           />
-        </div>
+        </Form.Group>
       </form>
     </div>
   </div>

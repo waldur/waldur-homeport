@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { Col, Panel } from 'react-bootstrap';
+import { Col, Card, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { WrappedFieldArrayProps, FormSection, change } from 'redux-form';
 
@@ -39,17 +39,17 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => {
   const offset = layout === 'vertical' ? 0 : 2;
 
   return (
-    <div className="form-group">
+    <Form.Group>
       <Col smOffset={offset} sm={col} className="m-b-sm">
-        <p className="form-control-static">
+        <Form.Control plaintext>
           <strong>{props.translate('Plan components')}</strong>
-        </p>
+        </Form.Control>
       </Col>
 
       <Col smOffset={offset} sm={col}>
         {props.fields.map((component, index) => (
-          <Panel key={index}>
-            <Panel.Heading>
+          <Card key={index}>
+            <Card.Header>
               {!props.builtinComponents.length && (
                 <RemoveButton
                   onClick={() => {
@@ -61,8 +61,8 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => {
               <h4>
                 {props.translate('Component #{index}', { index: index + 1 })}
               </h4>
-            </Panel.Heading>
-            <Panel.Body>
+            </Card.Header>
+            <Card.Body>
               <FormSection name={component}>
                 <ComponentForm
                   removeOfferingQuotas={() =>
@@ -71,8 +71,8 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => {
                   builtinComponents={props.builtinComponents}
                 />
               </FormSection>
-            </Panel.Body>
-          </Panel>
+            </Card.Body>
+          </Card>
         ))}
         {!props.builtinComponents.length && (
           <ComponentAddButton
@@ -82,6 +82,6 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => {
           />
         )}
       </Col>
-    </div>
+    </Form.Group>
   );
 });

@@ -47,7 +47,7 @@ export const TenantSelector: FunctionComponent = () => {
   if (resourceProps.value) {
     return (
       <FormGroup
-        labelClassName="control-label col-sm-3"
+        labelClassName="col-sm-3"
         valueClassName="col-sm-9"
         required={true}
         label={translate('Tenant')}

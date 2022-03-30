@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
@@ -10,12 +11,12 @@ export const UserListView: FunctionComponent = () => {
   useTitle(translate('Users'));
   return (
     <>
-      <div className="ibox-content m-b-sm border-bottom">
+      <Card.Body className="m-b-sm border-bottom">
         <UserFilter />
-      </div>
-      <div className="ibox-content">
+      </Card.Body>
+      <Card.Body>
         <UserList />
-      </div>
+      </Card.Body>
     </>
   );
 };

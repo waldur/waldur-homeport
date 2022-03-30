@@ -1,4 +1,5 @@
 import { useState, useCallback, FunctionComponent } from 'react';
+import { Card, Col } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
@@ -32,13 +33,13 @@ export const IssuesHelpdesk: FunctionComponent = () => {
   }, []);
   useSupport();
   return (
-    <div className="col-md-12">
+    <Col md={12}>
       <IssueRegistration onSearch={onSearch} />
-      <div className="ibox">
-        <div className="ibox-content">
+      <Card>
+        <Card.Body>
           <IssuesList filter={filter} />
-        </div>
-      </div>
-    </div>
+        </Card.Body>
+      </Card>
+    </Col>
   );
 };

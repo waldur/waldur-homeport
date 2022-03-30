@@ -6,4 +6,4 @@ import 'leaflet-geosearch/assets/css/leaflet.css';
 
 import 'font-awesome/css/font-awesome.css';
 import 'npm-font-open-sans';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'react-datepicker/dist/react-datepicker.css';

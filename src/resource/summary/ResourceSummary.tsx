@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Container } from 'react-bootstrap';
 
 import * as ResourceSummaryRegistry from '@waldur/resource/summary/registry';
 
@@ -20,6 +21,6 @@ export const ResourceSummary: FunctionComponent<ResourceSummaryProps> = (
   return useDefaultWrapper ? (
     <ResourceDetailsTable>{body}</ResourceDetailsTable>
   ) : (
-    <dl className="dl-horizontal col-sm-12">{body}</dl>
+    <Container>{body}</Container>
   );
 };

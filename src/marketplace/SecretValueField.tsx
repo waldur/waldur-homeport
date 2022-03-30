@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import { Form } from 'react-bootstrap';
 import { useToggle } from 'react-use';
 
 interface SecretValueFieldProps {
@@ -17,12 +18,11 @@ export const SecretValueField: React.FC<SecretValueFieldProps> = (props) => {
 
   return (
     <div className={classNames('has-password', props.className)}>
-      <input
+      <Form.Control
         readOnly={true}
         value={props.value}
         type={showSecret ? 'text' : 'password'}
         autoComplete="new-password"
-        className="form-control"
       />
       <a
         className={iconClass}

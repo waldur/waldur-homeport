@@ -1,11 +1,5 @@
 import { FunctionComponent } from 'react';
-import {
-  Button,
-  ButtonGroup,
-  Col,
-  ControlLabel,
-  FormGroup,
-} from 'react-bootstrap';
+import { Button, ButtonGroup, Col, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
@@ -43,8 +37,8 @@ const CallerActions = ({ onSearch }) => {
 const filterOption = (options) => options;
 
 export const CallerGroup: FunctionComponent<{ onSearch }> = ({ onSearch }) => (
-  <FormGroup>
-    <Col sm={3} componentClass={ControlLabel}>
+  <Form.Group>
+    <Col sm={3} as={Form.Label}>
       {translate('Caller')}
       <span className="text-danger">*</span>
     </Col>
@@ -72,5 +66,5 @@ export const CallerGroup: FunctionComponent<{ onSearch }> = ({ onSearch }) => (
       />
     </Col>
     <CallerActions onSearch={onSearch} />
-  </FormGroup>
+  </Form.Group>
 );

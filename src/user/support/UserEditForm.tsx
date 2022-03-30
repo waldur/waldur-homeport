@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
@@ -59,7 +60,7 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
 ) => (
   <form
     onSubmit={props.handleSubmit(props.updateUser)}
-    className="form-horizontal col-sm-10 col-xs-12"
+    className="col-sm-10 col-xs-12"
   >
     <FormContainer
       submitting={props.submitting}
@@ -181,7 +182,7 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
         agreementDate={props.user.agreement_date}
       />
     </FormContainer>
-    <div className="form-group">
+    <Form.Group>
       <div className="col-sm-offset-3 col-sm-9">
         <FieldError error={props.error} />
         {!props.initial ? (
@@ -207,7 +208,7 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
           </button>
         )}
       </div>
-    </div>
+    </Form.Group>
   </form>
 );
 

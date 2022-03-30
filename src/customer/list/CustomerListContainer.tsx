@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
+import { Card } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { getList } from '@waldur/core/api';
@@ -62,10 +63,10 @@ export const CustomerListContainer: FunctionComponent = () => {
   return (
     <>
       <CustomerListFilter {...data} />
-      <div className="ibox-content">
+      <Card.Body>
         <CustomerList />
         <TotalCostContainer />
-      </div>
+      </Card.Body>
     </>
   );
 };

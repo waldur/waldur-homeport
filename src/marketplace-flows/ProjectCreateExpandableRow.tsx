@@ -1,9 +1,11 @@
+import { Container } from 'react-bootstrap';
+
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 
 export const ProjectCreateExpandableRow = ({ row }) => (
-  <dl className="dl-horizontal col-sm-12">
+  <Container>
     <Field label={translate('Project name')} value={row.name} />
     <Field label={translate('Description')} value={row.description} />
     {row.end_date && (
@@ -12,5 +14,5 @@ export const ProjectCreateExpandableRow = ({ row }) => (
         value={formatDate(row.end_date)}
       />
     )}
-  </dl>
+  </Container>
 );

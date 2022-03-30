@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Table } from 'react-bootstrap';
+import { Form, Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
@@ -54,11 +54,10 @@ export const TotalLimitComponentsTable: FunctionComponent<TotalLimitComponentsTa
                 ) : (
                   <Field
                     name={`limits.${component.type}`}
-                    component="input"
+                    component={Form.Control}
                     type="number"
                     parse={parseIntField}
                     format={formatIntField}
-                    className="form-control"
                   />
                 )}
               </td>

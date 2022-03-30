@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ControlLabel, FormGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field, FieldArray } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -33,17 +33,17 @@ const BackupRestoreForm = connectBackupRestoreForm(
       >
         {asyncState.value ? (
           <>
-            <FormGroup>
-              <ControlLabel>{translate('Flavor')}</ControlLabel>
+            <Form.Group>
+              <Form.Label>{translate('Flavor')}</Form.Label>
               <Field
                 component={SelectField}
                 name="flavor"
                 validate={required}
                 options={asyncState.value.flavors}
               />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>{translate('Security groups')}</ControlLabel>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>{translate('Security groups')}</Form.Label>
               <Field
                 component={SelectField}
                 name="security_groups"
@@ -51,16 +51,16 @@ const BackupRestoreForm = connectBackupRestoreForm(
                 isMulti={true}
                 options={asyncState.value.securityGroups}
               />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>{translate('Networks')}</ControlLabel>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>{translate('Networks')}</Form.Label>
               <FieldArray
                 name="networks"
                 component={NetworksList}
                 subnets={asyncState.value.subnets}
                 floatingIps={asyncState.value.floatingIps}
               />
-            </FormGroup>
+            </Form.Group>
           </>
         ) : null}
       </AsyncActionDialog>

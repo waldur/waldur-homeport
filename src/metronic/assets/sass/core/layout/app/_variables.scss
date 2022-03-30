@@ -1,0 +1,452 @@
+//
+// App Layout Variables
+//
+
+//// General
+
+// General base
+$app-general-config: (
+  transition: (
+    duration: 0.3s,
+    timing: ease,
+  ),
+  root-font-size: (
+    desktop: 13px,
+    tablet: 12px,
+    mobile: 12px,
+  ),
+) !default;
+
+//// Page
+
+// Page container
+$app-container-config: (
+  padding-x: 2rem,
+  padding-x-mobile: 1.5rem,
+) !default;
+
+//// Header
+
+// Header base
+$app-header-config: (
+  base: (
+    height: 70px,
+    height-mobile: 70px,
+    z-index: 100,
+    z-index-mobile: 100,
+    bg-color: null,
+    bg-color-mobile: null,
+    box-shadow: null,
+    box-shadow-mobile: null,
+    border-bottom: null,
+    border-bottom-mobile: null,
+  ),
+  minimize: (
+    height: 70px,
+    height-mobile: 70px,
+  ),
+  sticky: (
+    height: 70px,
+    height-mobile: 70px,
+    z-index: 100,
+    z-index-mobile: 100,
+    bg-color: null,
+    bg-color-mobile: null,
+    box-shadow: null,
+    box-shadow-mobile: null,
+    border-bottom: null,
+    border-bottom-mobile: null,
+  ),
+) !default;
+
+// Header primary
+$app-header-primary-config: (
+  base: (
+    height: 70px,
+    z-index: 100,
+    bg-color: null,
+    box-shadow: null,
+    border-bottom: null,
+  ),
+  sticky: (
+    height: 70px,
+    z-index: 100,
+    bg-color: null,
+    box-shadow: null,
+    border-bottom: null,
+  ),
+) !default;
+
+// Header secondary
+$app-header-secondary-config: (
+  base: (
+    height: 70px,
+    z-index: 100,
+    bg-color: null,
+    box-shadow: null,
+    border-bottom: null,
+  ),
+  sticky: (
+    height: 70px,
+    z-index: 100,
+    bg-color: null,
+    box-shadow: null,
+    border-bottom: null,
+  ),
+) !default;
+
+// Header mobile
+$app-header-mobile-config: (
+  base: (
+    height: 70px,
+    z-index: null,
+    bg-color: null,
+    box-shadow: null,
+    border-bottom: null,
+  ),
+  minimize: (
+    height: 70px,
+  ),
+  sticky: (
+    height: 70px,
+    z-index: null,
+    bg-color: null,
+    box-shadow: null,
+    border-bottom: null,
+  ),
+) !default;
+
+//// Toolbar
+
+// Toolbar base
+$app-toolbar-config: (
+  base: (
+    height: 70px,
+    height-mobile: 70px,
+    z-index: 100,
+    z-index-mobile: 100,
+    bg-color: null,
+    bg-color-mobile: null,
+    box-shadow: null,
+    box-shadow-mobile: null,
+    border-top: null,
+    border-top-mobile: null,
+    border-bottom: null,
+    border-bottom-mobile: null,
+  ),
+  minimize: (
+    height: 70px,
+    height-mobile: 70px,
+  ),
+  sticky: (
+    height: 70px,
+    height-mobile: 70px,
+    z-index: 100,
+    z-index-mobile: 100,
+    bg-color: null,
+    bg-color-mobile: null,
+    box-shadow: null,
+    box-shadow-mobile: null,
+    border-top: null,
+    border-top-mobile: null,
+    border-bottom: null,
+    border-bottom-mobile: null,
+  ),
+) !default;
+
+//// Aside
+
+// Aside base
+$app-aside-config: (
+  base: (
+    width: 300px,
+    width-mobile: 300px,
+    z-index: 100,
+    z-index-mobile: 100,
+    bg-color: null,
+    bg-color-mobile: null,
+    box-shadow: null,
+    box-shadow-mobile: null,
+    border-start: null,
+    border-start-mobile: null,
+    border-end: null,
+    border-end-mobile: null,
+  ),
+  sticky: (
+    top: auto,
+    bottom: auto,
+    width: 300px,
+    z-index: 100,
+    bg-color: null,
+    box-shadow: null,
+    border-start: null,
+    border-end: null,
+  ),
+  minimize: (
+    width: 75px,
+    width-mobile: 75px,
+    bg-color: null,
+    box-shadow: null,
+    border-start: null,
+    border-start-mobile: null,
+    border-end: null,
+    border-end-mobile: null,
+  ),
+  collapse: (
+    width: 0px,
+  ),
+) !default;
+
+// Aside primary
+$app-aside-primary-config: (
+  base: (
+    width: 250px,
+    width-mobile: 300px,
+    z-index: 103,
+    z-index-mobile: 103,
+    bg-color: null,
+    bg-color-mobile: null,
+    box-shadow: null,
+    box-shadow-mobile: null,
+    border-start: null,
+    border-start-mobile: null,
+    border-end: null,
+    border-end-mobile: null,
+    offset-start: null,
+    offset-end: null,
+    offset-top: null,
+    offset-bottom: null,
+  ),
+  sticky: (
+    width: 250px,
+    top: auto,
+    bottom: auto,
+    z-index: 103,
+    bg-color: null,
+    box-shadow: null,
+    border-start: null,
+    border-end: null,
+    offset-start: null,
+    offset-end: null,
+    offset-top: null,
+    offset-bottom: null,
+  ),
+  minimize: (
+    width: 75px,
+    z-index: null,
+    bg-color: null,
+    box-shadow: null,
+    border-start: null,
+    border-end: null,
+  ),
+  collapse: (
+    width: 0px,
+  ),
+) !default;
+
+// Aside secondary
+$app-aside-secondary-config: (
+  base: (
+    width: 250px,
+    width-mobile: 300px,
+    z-index: 102,
+    z-index-mobile: 102,
+    bg-color: null,
+    bg-color-mobile: null,
+    box-shadow: null,
+    box-shadow-mobile: null,
+    border-start: null,
+    border-start-mobile: null,
+    border-end: null,
+    border-end-mobile: null,
+    offset-start: null,
+    offset-end: null,
+    offset-top: null,
+    offset-bottom: null,
+  ),
+  sticky: (
+    width: 250px,
+    top: auto,
+    bottom: auto,
+    z-index: null,
+    bg-color: null,
+    box-shadow: null,
+    border-start: null,
+    border-end: null,
+  ),
+  minimize: (
+    width: 75px,
+    z-index: null,
+    bg-color: null,
+    box-shadow: null,
+    border-start: null,
+    border-end: null,
+  ),
+  collapse: (
+    width: 0px,
+  ),
+) !default;
+
+// Aside tertiary
+$app-aside-tertiary-config: (
+  base: (
+    width: 250px,
+    width-mobile: 300px,
+    z-index: 101,
+    z-index-mobile: 101,
+    bg-color: null,
+    bg-color-mobile: null,
+    box-shadow: null,
+    box-shadow-mobile: null,
+    border-start: null,
+    border-start-mobile: null,
+    border-end: null,
+    border-end-mobile: null,
+    offset-start: null,
+    offset-end: null,
+    offset-top: null,
+    offset-bottom: null,
+  ),
+  sticky: (
+    width: 250px,
+    top: auto,
+    bottom: auto,
+    z-index: null,
+    bg-color: null,
+    box-shadow: null,
+    border-start: null,
+    border-end: null,
+  ),
+  minimize: (
+    width: 75px,
+    z-index: null,
+    bg-color: null,
+    box-shadow: null,
+    border-start: null,
+    border-end: null,
+  ),
+  collapse: (
+    width: 0px,
+  ),
+) !default;
+
+//// Sidebar
+
+//// Wrapper
+
+// Wrapper base
+$app-wrapper-config: (
+  base: (
+    z-index: null,
+    z-index-mobile: null,
+    bg-color: null,
+    bg-color-mobile: null,
+    box-shadow: null,
+    box-shadow-mobile: null,
+    border-top: null,
+    border-top-mobile: null,
+    border-bottom: null,
+    border-bottom-mobile: null,
+    border-start: null,
+    border-start-mobile: null,
+    border-end: null,
+    border-end-mobile: null,
+  ),
+  fixed: (
+    z-index: 100,
+    z-index-mobile: 100,
+  ),
+) !default;
+
+//// Content
+
+// Content base
+$app-content-config: (
+  default: (
+    offset-start: null,
+    offset-end: null,
+    offset-top: null,
+    offset-bottom: null,
+  ),
+  fixed: (
+    top: auto,
+    bottom: auto,
+    z-index: 100,
+    bg-color: null,
+    box-shadow: null,
+    border-start: null,
+    border-end: null,
+    border-top: null,
+    border-bottom: null,
+    offset-start: null,
+    offset-end: null,
+    offset-top: null,
+    offset-bottom: null,
+  ),
+) !default;
+
+//// Footer
+
+// Footer base
+$app-footer-config: (
+  base: (
+    height: 50px,
+    height-mobile: 50px,
+    z-index: null,
+    z-index-mobile: null,
+    bg-color: null,
+    bg-color-mobile: null,
+    box-shadow: null,
+    box-shadow-mobile: null,
+    border-top: null,
+    border-top-mobile: null,
+  ),
+  fixed: (
+    height: 50px,
+    height-mobile: 50px,
+    z-index: 100,
+    z-index-mobile: 100,
+    bg-color: null,
+    bg-color-mobile: null,
+    box-shadow: null,
+    box-shadow-mobile: null,
+    border-top: null,
+    border-top-mobile: null,
+  ),
+) !default;
+
+// Footer primary
+$app-footer-primary-config: (
+  default: (
+    height: 70px,
+    z-index: null,
+    bg-color: null,
+    box-shadow: null,
+    border-bottom: null,
+  ),
+  fixed: (
+    height: 70px,
+    z-index: 100,
+    bg-color: null,
+    box-shadow: null,
+    border-bottom: null,
+  ),
+) !default;
+
+// Footer secondary
+$app-footer-secondary-config: (
+  default: (
+    height: 70px,
+    z-index: 100,
+    bg-color: null,
+    box-shadow: null,
+    border-top: null,
+  ),
+  fixed: (
+    height: 70px,
+    z-index: 100,
+    bg-color: null,
+    box-shadow: null,
+    border-top: null,
+  ),
+) !default;

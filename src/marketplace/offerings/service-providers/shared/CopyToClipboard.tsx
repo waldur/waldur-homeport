@@ -2,7 +2,7 @@ import copy from 'copy-to-clipboard';
 import { FunctionComponent, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/notify';
 import './CopyToClipboard.scss';
@@ -25,9 +25,9 @@ export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
   return (
     <div className="copyToClipboard">
       <a onClick={onClick}>
-        <Tooltip label={translate('Copy to clipboard')} id="copyToClipboard">
+        <Tip label={translate('Copy to clipboard')} id="copyToClipboard">
           <i className="fa fa-clone fa-lg" />
-        </Tooltip>
+        </Tip>
       </a>
     </div>
   );

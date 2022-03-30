@@ -1,3 +1,5 @@
+import { Form } from 'react-bootstrap';
+
 import { FieldError } from '@waldur/form';
 
 import { FormGroup } from './FormGroup';
@@ -7,17 +9,11 @@ export const FormGroupWithError = (inputProps) => (
     label={inputProps.label}
     description={inputProps.description}
     required={inputProps.required}
-    className={
-      inputProps.meta.touched && inputProps.meta.error
-        ? 'form-group has-error'
-        : 'form-group'
-    }
   >
-    <input
+    <Form.Control
       {...inputProps.input}
       disabled={inputProps.disabled}
       readOnly={inputProps.readOnly}
-      className="form-control"
       type="text"
     />
     {inputProps.meta.touched && <FieldError error={inputProps.meta.error} />}

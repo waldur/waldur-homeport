@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
 import { Field } from './Field';
@@ -21,9 +21,9 @@ const formatErrorField = (props: ResourceSummaryProps) => {
   }
   return (
     <>
-      <Tooltip id="error-traceback" label={props.resource.error_traceback}>
+      <Tip id="error-traceback" label={props.resource.error_traceback}>
         <i className="fa fa-question-circle" />
-      </Tooltip>{' '}
+      </Tip>{' '}
       {props.resource.error_message}
     </>
   );

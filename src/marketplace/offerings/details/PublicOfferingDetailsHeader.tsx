@@ -74,7 +74,6 @@ export const PublicOfferingDetailsHeader: FunctionComponent<PublicOfferingDetail
                   <OfferingItemActions
                     offering={offering}
                     isPublic={true}
-                    pullRight={false}
                     refreshOffering={refreshOffering}
                   />
                 </>

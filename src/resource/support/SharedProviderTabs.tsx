@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Card, Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -11,8 +11,8 @@ import { SharedProviderResources } from './SharedProviderResources';
 
 const SharedProviderTabs: FunctionComponent<{ provider }> = ({ provider }) =>
   provider ? (
-    <div className="ibox">
-      <div className="ibox-content">
+    <Card>
+      <Card.Body>
         <Tabs
           defaultActiveKey={1}
           id="shared-provider-tabs"
@@ -29,8 +29,8 @@ const SharedProviderTabs: FunctionComponent<{ provider }> = ({ provider }) =>
             </div>
           </Tab>
         </Tabs>
-      </div>
-    </div>
+      </Card.Body>
+    </Card>
   ) : null;
 
 const mapStateToProps = (state: RootState) => ({

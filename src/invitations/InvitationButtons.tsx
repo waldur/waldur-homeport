@@ -12,7 +12,7 @@ export const InvitationButtons = ({
   <>
     {user.email !== invitation.email ? (
       <>
-        <Button bsStyle="primary" onClick={closeAcceptingNewEmail}>
+        <Button variant="primary" onClick={closeAcceptingNewEmail}>
           {translate('Yes, use invitation email')}
         </Button>
         <Button onClick={closeDecliningNewEmail}>
@@ -20,7 +20,7 @@ export const InvitationButtons = ({
         </Button>
       </>
     ) : (
-      <Button bsStyle="primary" onClick={closeAcceptingNewEmail}>
+      <Button variant="primary" onClick={closeAcceptingNewEmail}>
         {translate('Accept invitation')}
       </Button>
     )}

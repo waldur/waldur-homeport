@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
@@ -6,8 +7,8 @@ import { getRoles } from '@waldur/customer/team/utils';
 import { translate } from '@waldur/i18n';
 
 export const ProjectRoleSelectField: FunctionComponent = () => (
-  <div className="form-group col-sm-3">
-    <label className="control-label">{translate('Project role')}</label>
+  <Form.Group className="col-sm-3">
+    <Form.Label>{translate('Project role')}</Form.Label>
     <Field
       name="project_role"
       component={(prop) => (
@@ -21,5 +22,5 @@ export const ProjectRoleSelectField: FunctionComponent = () => (
         />
       )}
     />
-  </div>
+  </Form.Group>
 );

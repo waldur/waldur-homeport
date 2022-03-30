@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import './Button.scss';
@@ -9,12 +10,12 @@ interface ButtonProps {
   onClick: () => void;
 }
 
-export const Button: FunctionComponent<ButtonProps> = ({
+export const SharedButton: FunctionComponent<ButtonProps> = ({
   label,
   iconPrefix,
   onClick,
 }) => (
-  <button type="button" className="btn btn-default button" onClick={onClick}>
+  <Button onClick={onClick}>
     {iconPrefix && (
       <>
         <img src={iconPrefix} />
@@ -22,5 +23,5 @@ export const Button: FunctionComponent<ButtonProps> = ({
       </>
     )}
     {translate(label)}
-  </button>
+  </Button>
 );

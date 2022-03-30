@@ -1,3 +1,5 @@
+import { Button } from 'react-bootstrap';
+
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
 interface PlanAddButtonProps extends TranslateProps {
@@ -5,7 +7,7 @@ interface PlanAddButtonProps extends TranslateProps {
 }
 
 export const PlanAddButton = withTranslation((props: PlanAddButtonProps) => (
-  <button type="button" className="btn btn-default" onClick={props.onClick}>
+  <Button onClick={props.onClick}>
     <i className="fa fa-plus" /> {props.translate('Add plan')}
-  </button>
+  </Button>
 ));

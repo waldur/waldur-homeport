@@ -20,7 +20,7 @@ export const BackButton: React.FC = () => {
     <ActionButton
       title={translate('Back to shopping')}
       icon="fa fa-arrow-left"
-      className="btn btn-outline btn-default"
+      className="btn btn-outline btn-secondary"
       action={goBack}
     />
   );

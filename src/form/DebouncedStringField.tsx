@@ -1,5 +1,6 @@
 import { debounce } from 'lodash';
 import { FunctionComponent, useState } from 'react';
+import { Form } from 'react-bootstrap';
 
 import { FormField } from '@waldur/form/types';
 
@@ -27,10 +28,9 @@ export const DebouncedStringField: FunctionComponent<DebouncedStringFieldProps> 
     };
 
     return (
-      <input
+      <Form.Control
         {...props.input}
         type="text"
-        className="form-control"
         {...rest}
         value={value}
         onChange={handleChange}

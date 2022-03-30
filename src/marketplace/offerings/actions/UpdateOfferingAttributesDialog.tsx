@@ -79,7 +79,7 @@ export const UpdateOfferingAttributesDialog = reduxForm<FormData, OwnProps>({
   };
 
   return (
-    <form onSubmit={handleSubmit(submitRequest)} className="form-horizontal">
+    <form onSubmit={handleSubmit(submitRequest)}>
       <Modal.Header>
         <Modal.Title>{translate('Edit offering')}</Modal.Title>
       </Modal.Header>

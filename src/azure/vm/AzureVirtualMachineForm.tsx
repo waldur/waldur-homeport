@@ -43,7 +43,7 @@ export const AzureVirtualMachineForm: React.FC<OfferingConfigurationFormProps> =
     }, [location]);
 
     return (
-      <form className="form-horizontal">
+      <form>
         <FormContainer
           submitting={false}
           labelClass="col-sm-3"

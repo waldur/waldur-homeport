@@ -1,14 +1,15 @@
 import { FunctionComponent } from 'react';
+import { Container } from 'react-bootstrap';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
-import { TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
 import { ExpandableEventField } from './ExpandableEventField';
 import { Event } from './types';
 
 import './ExpandableEventDetailsTable.scss';
 
-interface ExpandableEventDetailsTableProps extends TranslateProps {
+interface ExpandableEventDetailsTableProps {
   event: Event;
   isStaffOrSupport: boolean;
 }
@@ -17,8 +18,8 @@ const showLink = (event, isStaffOrSupport) =>
   event.issue_link && isStaffOrSupport;
 
 export const ExpandableEventDetailsTable: FunctionComponent<ExpandableEventDetailsTableProps> =
-  ({ translate, event, isStaffOrSupport }) => (
-    <dl className="dl-horizontal event-details-table">
+  ({ event, isStaffOrSupport }) => (
+    <Container className="event-details-table">
       {isStaffOrSupport ? (
         <ExpandableEventField
           label={translate('User')}
@@ -85,5 +86,5 @@ export const ExpandableEventDetailsTable: FunctionComponent<ExpandableEventDetai
           )
         }
       />
-    </dl>
+    </Container>
   );

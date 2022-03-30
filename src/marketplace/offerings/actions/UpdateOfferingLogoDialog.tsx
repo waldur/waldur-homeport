@@ -17,10 +17,7 @@ interface OwnProps {
 }
 
 export const PureUpdateOfferingLogoDialog: FunctionComponent<any> = (props) => (
-  <form
-    onSubmit={props.handleSubmit(props.submitRequest)}
-    className="form-horizontal"
-  >
+  <form onSubmit={props.handleSubmit(props.submitRequest)}>
     <ModalDialog
       title={translate('Update image for {offeringName}', {
         offeringName: props.resolve.offering.name,
@@ -51,7 +48,7 @@ export const PureUpdateOfferingLogoDialog: FunctionComponent<any> = (props) => (
           label={translate('Image: ')}
           accept={'image/*'}
           buttonLabel={translate('Browse')}
-          className="btn btn-default"
+          className="btn btn-secondary"
           required={true}
         />
       </FormContainer>

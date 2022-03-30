@@ -81,10 +81,7 @@ export const OfferingCreateDialog: React.FC<OfferingCreateDialogProps> = (
     return (
       <Row>
         <Col lg={10} lgOffset={1}>
-          <form
-            onSubmit={handleSubmit(createOffering)}
-            className="form-horizontal"
-          >
+          <form onSubmit={handleSubmit(createOffering)}>
             <Wizard
               steps={STEPS}
               tabs={TABS}

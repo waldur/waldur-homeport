@@ -1,17 +1,11 @@
 import { createSelector } from 'reselect';
 
 import { ENV } from '@waldur/configs/default';
-import { get } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
 import { RootState } from '@waldur/store/reducers';
-import {
-  getUser,
-  getCustomer,
-  isOwnerOrStaff,
-  getProject,
-} from '@waldur/workspace/selectors';
+import { getUser, getCustomer, getProject } from '@waldur/workspace/selectors';
 import {
   Project,
   Customer,
@@ -65,44 +59,19 @@ const getDefaultItems = (project) => [
   },
 ];
 
-export const getSidebarItems = createSelector<
+export const getProjectSidebarItems = createSelector<
   RootState,
   User,
   Customer,
   Project,
-  boolean,
   MenuItemType[]
->(
-  getUser,
-  getCustomer,
-  getProject,
-  isOwnerOrStaff,
-  (user, customer, project, ownerOrStaff) => {
-    if (!project || !customer || !user) {
-      return [];
-    }
-    if (ownerOrStaff || user.is_support) {
-      return [
-        {
-          key: 'back',
-          label: translate('Back to organization'),
-          icon: 'fa-arrow-left',
-          state: 'organization.dashboard',
-          params: { uuid: customer.uuid },
-        },
-        ...getDefaultItems(project).filter(Boolean),
-      ];
-    } else {
-      return getDefaultItems(project).filter(Boolean);
-    }
-  },
-);
+>(getUser, getCustomer, getProject, (user, customer, project) => {
+  if (!project || !customer || !user) {
+    return [];
+  }
+  return getDefaultItems(project).filter(Boolean);
+});
 
-export const getProjectCounters = (project: Project, fields: string[]) =>
-  get(`/projects/${project.uuid}/counters/`, { params: { fields } }).then(
-    (response) => response.data,
-  );
-
-export const getExtraSidebarItems = (): Promise<MenuItemType[]> => {
+export const getExtraProjectSidebarItems = (): Promise<MenuItemType[]> => {
   return SidebarExtensionService.getItems(PROJECT_WORKSPACE);
 };

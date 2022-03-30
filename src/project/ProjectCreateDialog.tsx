@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ModalBody, ModalHeader, ModalTitle } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
@@ -14,12 +14,12 @@ interface ProjectCreateDialogProps {
 export const ProjectCreateDialog: FC<ProjectCreateDialogProps> = (props) => {
   return (
     <>
-      <ModalHeader>
-        <ModalTitle>{translate('Create project')}</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+      <Modal.Header>
+        <Modal.Title>{translate('Create project')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <ProjectCreateForm {...props} />
-      </ModalBody>
+      </Modal.Body>
     </>
   );
 };

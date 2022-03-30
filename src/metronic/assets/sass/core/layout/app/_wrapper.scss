@@ -1,0 +1,63 @@
+//
+// Page wrapper
+//
+
+// General mode
+.app-wrapper {
+}
+
+// Desktop mode
+@include media-breakpoint-up(lg) {
+  // Integration
+  .app-wrapper {
+    @include app-layout-transition();
+
+    // Header
+    .app-header-fixed & {
+      margin-top: var(--kt-app-header-height);
+    }
+
+    // Toolbar
+    .app-toolbar-fixed & {
+      margin-top: calc(
+        var(--kt-app-header-height) + var(--kt-app-toolbar-height, 0px)
+      );
+    }
+
+    // Aside
+    .app-aside-fixed & {
+      margin-left: var(--kt-app-aside-width);
+    }
+
+    // Aside primary
+    .app-aside-primary-fixed & {
+      margin-left: var(--kt-app-aside-primary-width);
+    }
+
+    // Aside secondary
+    .app-aside-secondary-fixed & {
+      margin-left: calc(
+        var(--kt-app-aside-primary-width) +
+          var(--kt-app-aside-secondary-width, 0px)
+      );
+    }
+
+    // Aside tertiary
+    .app-aside-tertiary-fixed & {
+      margin-left: calc(
+        var(--kt-app-aside-primary-width) +
+          var(--kt-app-aside-secondary-width, 0px) +
+          var(--kt-app-aside-tertiary-width, 0px)
+      );
+    }
+
+    // Footer
+    .app-footer-fixed & {
+      margin-bottom: var(--kt-app-footer-height);
+    }
+  }
+}
+
+// Tablet & mobile modes
+@include media-breakpoint-down(lg) {
+}

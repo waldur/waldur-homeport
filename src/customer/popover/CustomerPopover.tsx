@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { PanelBody, Tab, Tabs } from 'react-bootstrap';
+import { Card, Tab, Tabs } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -30,17 +30,16 @@ export const CustomerPopover: FunctionComponent<{
           mountOnEnter
           defaultActiveKey="summary"
           id="customer-users"
-          animation={false}
         >
           <Tab title={translate('Company data')} eventKey="summary">
-            <PanelBody>
+            <Card.Body>
               <CustomerSummary customer={value} />
-            </PanelBody>
+            </Card.Body>
           </Tab>
           <Tab title={translate('Authorized personnel')} eventKey="users">
-            <PanelBody>
+            <Card.Body>
               <CustomerUsersList customer={value} />
-            </PanelBody>
+            </Card.Body>
           </Tab>
         </Tabs>
       )}

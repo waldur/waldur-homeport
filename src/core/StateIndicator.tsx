@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 
 export type StateVariant =
   | 'primary'
@@ -21,9 +21,9 @@ export interface StateIndicatorProps {
 
 const wrapTooltip = (label, children) =>
   label ? (
-    <Tooltip label={label} id="state-indicator">
+    <Tip label={label} id="state-indicator">
       {children}
-    </Tooltip>
+    </Tip>
   ) : (
     children
   );
@@ -35,11 +35,11 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = (props) =>
       <span
         className={classNames(
           'progress-bar',
-          `progress-bar-${props.variant}`,
+          `bg-${props.variant}`,
           'p-w-sm',
           'full-width',
           { 'progress-bar-striped': props.striped || props.active },
-          { active: props.active },
+          { 'progress-bar-animated': props.active },
         )}
       >
         {props.label.toUpperCase()}

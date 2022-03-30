@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { DropdownButton, MenuItem } from 'react-bootstrap';
+import { DropdownButton, Dropdown } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
@@ -24,17 +24,17 @@ export const ResourceActionComponent: FunctionComponent<ResourceActionComponentP
       id="actions-dropdown-btn"
       className="dropdown-btn"
       onToggle={props.onToggle}
-      open={props.open}
       disabled={props.disabled}
-      pullRight={window.innerWidth > 768}
     >
       {props.open ? (
         props.loading ? (
-          <MenuItem eventKey="1">{translate('Loading actions')}</MenuItem>
+          <Dropdown.Item eventKey="1">
+            {translate('Loading actions')}
+          </Dropdown.Item>
         ) : props.error ? (
-          <MenuItem eventKey="1">
+          <Dropdown.Item eventKey="1">
             {translate('Unable to load actions')}
-          </MenuItem>
+          </Dropdown.Item>
         ) : props.actions ? (
           <>
             {props.actions.map((ActionComponent, index) => (
@@ -47,7 +47,9 @@ export const ResourceActionComponent: FunctionComponent<ResourceActionComponentP
             ))}
           </>
         ) : (
-          <MenuItem eventKey="2">{translate('There are no actions.')}</MenuItem>
+          <Dropdown.Item eventKey="2">
+            {translate('There are no actions.')}
+          </Dropdown.Item>
         )
       ) : null}
     </DropdownButton>

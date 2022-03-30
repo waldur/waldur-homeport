@@ -1,10 +1,5 @@
 import { useMemo, FunctionComponent } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 import { AsyncState } from 'react-use/lib/useAsyncFn';
 import { reduxForm } from 'redux-form';
@@ -33,15 +28,15 @@ const HookDetailsComponent = ({
   const saveHook = useHookForm(hook);
   return (
     <form onSubmit={handleSubmit(saveHook)}>
-      <ModalHeader>
-        <ModalTitle>
+      <Modal.Header>
+        <Modal.Title>
           {hook
             ? translate('Update notification')
             : translate('Create notification')}
-        </ModalTitle>
-      </ModalHeader>
+        </Modal.Title>
+      </Modal.Header>
 
-      <ModalBody>
+      <Modal.Body>
         {eventGroupsState.loading ? (
           <LoadingSpinner />
         ) : eventGroupsState.error ? (
@@ -49,12 +44,12 @@ const HookDetailsComponent = ({
         ) : (
           <HookForm eventGroups={eventGroupsState.value} isNew={!hook} />
         )}
-      </ModalBody>
+      </Modal.Body>
 
-      <ModalFooter>
+      <Modal.Footer>
         {!eventGroupsState.error && (
           <SubmitButton
-            bsStyle="primary"
+            variant="primary"
             block={false}
             submitting={submitting}
             invalid={invalid}
@@ -63,7 +58,7 @@ const HookDetailsComponent = ({
           </SubmitButton>
         )}
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </form>
   );
 };

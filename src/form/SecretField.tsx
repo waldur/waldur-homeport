@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import { Form } from 'react-bootstrap';
 import { useToggle } from 'react-use';
 
 import { FormField } from './types';
@@ -20,11 +21,10 @@ export const SecretField: React.FC<SecretFieldProps> = (props) => {
 
   return (
     <div className="has-password">
-      <input
+      <Form.Control
         {...props.input}
         type={showSecret ? 'text' : 'password'}
         autoComplete="new-password"
-        className="form-control"
         placeholder={props.placeholder}
         {...rest}
       />

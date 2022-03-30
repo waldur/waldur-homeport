@@ -21,7 +21,6 @@ const PureExpandableEventDetails: FunctionComponent<ExpandableEventDetailsProps>
   (props) => (
     <ExpandableEventDetailsTable
       event={props.row}
-      translate={props.translate}
       isStaffOrSupport={props.isStaffOrSupport}
     />
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -14,24 +14,32 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   items,
   activeItem,
 }) => (
-  <ol className="breadcrumb">
+  <ul className="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
     {items.map((item, index) => (
-      <li key={index}>
-        {item.action ? (
-          <a onClick={() => item.action()}>{translate(item.label)}</a>
-        ) : item.state ? (
-          <Link state={item.state} params={item.params}>
-            {translate(item.label)}
-          </Link>
-        ) : (
-          translate(item.label)
-        )}
-      </li>
+      <Fragment key={index}>
+        <li className="breadcrumb-item text-muted">
+          {item.action ? (
+            <a
+              onClick={() => item.action()}
+              className="text-muted text-hover-primary"
+            >
+              {translate(item.label)}
+            </a>
+          ) : item.state ? (
+            <Link state={item.state} params={item.params}>
+              {translate(item.label)}
+            </Link>
+          ) : (
+            translate(item.label)
+          )}
+        </li>
+        <li className="breadcrumb-item">
+          <span className="bullet bg-gray-300 w-5px h-2px"></span>
+        </li>
+      </Fragment>
     ))}
     {activeItem && (
-      <li className="active">
-        <strong>{translate(activeItem)}</strong>
-      </li>
+      <li className="breadcrumb-item text-dark">{translate(activeItem)}</li>
     )}
-  </ol>
+  </ul>
 );

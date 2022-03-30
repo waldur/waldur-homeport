@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { BackendIdTooltip } from '@waldur/core/Tooltip';
+import { BackendIdTip } from '@waldur/core/Tooltip';
 
 import { EndDateTooltip } from './list/EndDateTooltip';
 import { ResourceReference } from './types';
@@ -23,7 +23,7 @@ export const ResourceDetailsLink: FunctionComponent<ResourceDetailsLinkProps> =
         }}
         label={props.children}
       />
-      <BackendIdTooltip backendId={props.item.backend_id} />
+      <BackendIdTip backendId={props.item.backend_id} />
       <EndDateTooltip end_date={props.item.end_date} />
     </>
   );

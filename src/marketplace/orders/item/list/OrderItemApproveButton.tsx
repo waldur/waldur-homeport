@@ -34,7 +34,7 @@ export const OrderItemApproveButton: React.FC<OrderItemApproveButtonProps> = (
   }, [setLoading, dispatch, props.uuid]);
   return (
     <ActionButton
-      className="btn btn-sm btn-default"
+      className="btn btn-sm btn-secondary"
       title={translate('Approve')}
       action={handler}
       disabled={loading}

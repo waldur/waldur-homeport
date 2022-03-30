@@ -14,7 +14,7 @@ export const AzureSQLServerForm: React.FC<OfferingConfigurationFormProps> = (
   props,
 ) => {
   return (
-    <form className="form-horizontal">
+    <form>
       <FormContainer
         submitting={false}
         labelClass="col-sm-3"

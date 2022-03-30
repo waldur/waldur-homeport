@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { BackendIdTooltip } from '@waldur/core/Tooltip';
+import { BackendIdTip } from '@waldur/core/Tooltip';
 import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
 import { Customer } from '@waldur/workspace/types';
 
@@ -34,7 +34,7 @@ export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
           }}
           label={label}
         />
-        <BackendIdTooltip backendId={row.backend_id} />
+        <BackendIdTip backendId={row.backend_id} />
         <EndDateTooltip end_date={row.end_date} />
       </>
     );

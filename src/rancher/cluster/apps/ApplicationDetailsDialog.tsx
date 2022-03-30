@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Panel, PanelGroup, Table } from 'react-bootstrap';
+import { Accordion, Table } from 'react-bootstrap';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { translate } from '@waldur/i18n';
@@ -69,29 +69,21 @@ export const ApplicationDetailsDialog: FunctionComponent<{
     title={translate('Application details')}
     footer={<CloseDialogButton />}
   >
-    <PanelGroup
-      accordion={true}
-      id="application-details"
-      defaultActiveKey="summary"
-    >
-      <Panel eventKey="summary">
-        <Panel.Heading>
-          <Panel.Title toggle={true}>{translate('Summary')}</Panel.Title>
-        </Panel.Heading>
-        <Panel.Body collapsible={true}>
+    <Accordion id="application-details" defaultActiveKey="summary">
+      <Accordion.Item eventKey="summary">
+        <Accordion.Header>{translate('Summary')}</Accordion.Header>
+        <Accordion.Body>
           <ApplicationDetailsTable application={application} />
-        </Panel.Body>
-      </Panel>
+        </Accordion.Body>
+      </Accordion.Item>
       {application.answers && (
-        <Panel eventKey="answers">
-          <Panel.Heading>
-            <Panel.Title toggle={true}>{translate('Answers')}</Panel.Title>
-          </Panel.Heading>
-          <Panel.Body collapsible={true}>
+        <Accordion.Item eventKey="answers">
+          <Accordion.Header>{translate('Answers')}</Accordion.Header>
+          <Accordion.Body>
             <ApplicationAnswersTable application={application} />
-          </Panel.Body>
-        </Panel>
+          </Accordion.Body>
+        </Accordion.Item>
       )}
-    </PanelGroup>
+    </Accordion>
   </ModalDialog>
 );

@@ -1,13 +1,5 @@
 import { useCallback } from 'react';
-import {
-  ControlLabel,
-  FormControl,
-  FormGroup,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Form, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { Field, reduxForm } from 'redux-form';
@@ -74,7 +66,7 @@ const getFlavors = async (currentFlavor: Flavor) => {
 
 const ResizeTypeGroup = ({ submitting }) => (
   <>
-    <FormGroup>
+    <Form.Group>
       <Field
         component={RadioField}
         name="resizeType"
@@ -89,9 +81,9 @@ const ResizeTypeGroup = ({ submitting }) => (
           )}
         </p>
       </Field>
-    </FormGroup>
+    </Form.Group>
 
-    <FormGroup>
+    <Form.Group>
       <Field
         component={RadioField}
         name="resizeType"
@@ -102,20 +94,20 @@ const ResizeTypeGroup = ({ submitting }) => (
         <strong>{translate('Permanent')}</strong>
         <p>{translate("Increase a droplet's RAM, CPU and SSD disk.")}</p>
       </Field>
-    </FormGroup>
+    </Form.Group>
   </>
 );
 
 const FlavorGroup = ({ resource, flavors, submitting }) => (
   <>
-    <FormGroup>
-      <FormControl.Static>
+    <Form.Group>
+      <Form.Control plaintext>
         <strong>{translate('Current size')}: </strong>
         {formatFlavor(resource)}
-      </FormControl.Static>
-    </FormGroup>
-    <FormGroup>
-      <ControlLabel>{translate('New size')}:</ControlLabel>
+      </Form.Control>
+    </Form.Group>
+    <Form.Group>
+      <Form.Label>{translate('New size')}:</Form.Label>
       <Field
         name="flavor"
         component={SelectField}
@@ -125,7 +117,7 @@ const FlavorGroup = ({ resource, flavors, submitting }) => (
         isClearable={false}
         required={true}
       />
-    </FormGroup>
+    </Form.Group>
   </>
 );
 
@@ -163,10 +155,10 @@ export const DropletResizeDialog = reduxForm<
     );
     return (
       <form onSubmit={handleSubmit(resizeDroplet)}>
-        <ModalHeader>
-          <ModalTitle>{translate('Resize droplet')}</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
+        <Modal.Header>
+          <Modal.Title>{translate('Resize droplet')}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           {loading ? (
             <LoadingSpinner />
           ) : error ? (
@@ -181,15 +173,15 @@ export const DropletResizeDialog = reduxForm<
               <ResizeTypeGroup submitting={submitting} />
             </>
           )}
-        </ModalBody>
-        <ModalFooter>
+        </Modal.Body>
+        <Modal.Footer>
           <SubmitButton
             block={false}
             submitting={submitting}
             label={translate('Submit')}
           />
           <CloseDialogButton />
-        </ModalFooter>
+        </Modal.Footer>
       </form>
     );
   },

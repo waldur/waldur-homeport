@@ -1,3 +1,4 @@
+import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { InjectedFormProps, reduxForm, Field } from 'redux-form';
@@ -49,8 +50,8 @@ export const PauseOfferingDialog = connector(
       >
         <Field
           name="reason"
-          className="form-control"
-          component="textarea"
+          component={Form.Control}
+          as="textarea"
           placeholder={translate(
             'Please enter reason why offering has been paused.',
           )}

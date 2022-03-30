@@ -26,7 +26,7 @@ export const PureIssueCommentsFormMainContainer: FunctionComponent<PureIssueComm
             <span className="text-muted">{translate('Comment')}</span>
           ) : (
             <button
-              className="btn btn-default"
+              className="btn btn-secondary"
               disabled={uiDisabled}
               onClick={toggle}
             >

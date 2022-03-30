@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form } from 'react-bootstrap';
 import { Field, WrappedFieldProps } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
@@ -18,10 +19,7 @@ interface ComponentEditRowProps {
 const RowWrapper = (
   props: WrappedFieldProps & { offeringComponent: Component },
 ) => (
-  <ComponentRow
-    offeringComponent={props.offeringComponent}
-    className={props.meta.error ? 'form-group has-error' : 'form-group'}
-  >
+  <ComponentRow offeringComponent={props.offeringComponent}>
     {props.offeringComponent.is_boolean ? (
       <AwesomeCheckbox
         label=""
@@ -29,8 +27,7 @@ const RowWrapper = (
         onChange={(value) => props.input.onChange(value ? 1 : 0)}
       />
     ) : (
-      <input
-        className="form-control"
+      <Form.Control
         type="number"
         min={props.offeringComponent.min_value || 0}
         max={props.offeringComponent.max_value}

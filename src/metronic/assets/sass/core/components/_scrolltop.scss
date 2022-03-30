@@ -1,0 +1,72 @@
+//
+// Scrolltop
+//
+
+.scrolltop {
+  position: fixed;
+  display: none;
+  cursor: pointer;
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+  width: get($scrolltop, size, desktop);
+  height: get($scrolltop, size, desktop);
+  bottom: get($scrolltop, bottom, desktop);
+  right: get($scrolltop, right, desktop);
+  background-color: get($scrolltop, bg-color, default);
+  box-shadow: $box-shadow;
+  opacity: get($scrolltop, opacity, default);
+  transition: $transition-link;
+  @include border-radius($border-radius);
+
+  .svg-icon {
+    @include svg-icon-size(24px);
+    @include svg-icon-color(get($scrolltop, icon-color, default));
+  }
+
+  > i {
+    font-size: 1.3rem;
+    color: get($scrolltop, icon-color, default);
+  }
+
+  &:hover {
+    background-color: get($scrolltop, bg-color, hover);
+
+    > i {
+      color: get($scrolltop, icon-color, hover);
+    }
+
+    .svg-icon {
+      @include svg-icon-color(get($scrolltop, icon-color, hover));
+    }
+  }
+
+  [data-kt-scrolltop='on'] & {
+    opacity: get($scrolltop, opacity, on);
+    animation: animation-scrolltop 0.4s ease-out 1;
+    display: flex;
+
+    &:hover {
+      transition: $transition-link;
+      opacity: get($scrolltop, opacity, hover);
+    }
+  }
+
+  // Tablet & Mobile Modess
+  @include media-breakpoint-down(lg) {
+    bottom: get($scrolltop, bottom, tablet-and-mobile);
+    right: get($scrolltop, right, tablet-and-mobile);
+    width: get($scrolltop, size, tablet-and-mobile);
+    height: get($scrolltop, size, tablet-and-mobile);
+  }
+}
+
+// Animations
+@keyframes animation-scrolltop {
+  from {
+    margin-bottom: -15px;
+  }
+  to {
+    margin-bottom: 0;
+  }
+}

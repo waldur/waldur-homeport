@@ -118,7 +118,7 @@ export const FlowEditForm = () => {
         </Col>
         <Col md={3}>
           <h3 className="header-bottom-border">{translate('Summary')}</h3>
-          <OfferingLogo src={offering.thumbnail} size="small" />
+          <OfferingLogo src={offering.thumbnail} size="sm" />
           <table className="table offering-details-section-table">
             <tbody>
               <tr>

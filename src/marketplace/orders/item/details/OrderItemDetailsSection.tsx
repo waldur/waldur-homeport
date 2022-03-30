@@ -1,7 +1,8 @@
 import React from 'react';
+import { Form } from 'react-bootstrap';
 
 export const OrderItemDetailsSection: React.FC = (props) => (
-  <p className="form-control-static">
+  <Form.Control plaintext>
     <strong>{props.children}</strong>
-  </p>
+  </Form.Control>
 );

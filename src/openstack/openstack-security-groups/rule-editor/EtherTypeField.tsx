@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import { FormField } from './FormField';
 
 export const EtherTypeField: FC = () => (
-  <Field name="ethertype" component={FormField} componentClass="select">
+  <Field name="ethertype" component={FormField} as="select">
     <option value="IPv4">IPv4</option>
     <option value="IPv6">IPv6</option>
   </Field>

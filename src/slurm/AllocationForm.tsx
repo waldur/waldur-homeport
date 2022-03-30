@@ -24,7 +24,7 @@ export class AllocationForm extends Component<OfferingConfigurationFormProps> {
   render() {
     const props = this.props;
     return (
-      <form className="form-horizontal">
+      <form>
         <FormContainer
           submitting={false}
           labelClass="col-sm-3"

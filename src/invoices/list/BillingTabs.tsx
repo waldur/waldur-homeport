@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { PanelBody } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { ENV } from '@waldur/configs/default';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -16,15 +16,15 @@ import { InvoicesList } from './InvoicesList';
 export const BillingTabs: FunctionComponent = () => {
   useTitle(getTabTitle());
   return ENV.accountingMode === 'accounting' ? (
-    <PanelBody>
+    <Card.Body>
       <AgreementInfo />
       <BillingRecordsList />
-    </PanelBody>
+    </Card.Body>
   ) : (
-    <PanelBody>
+    <Card.Body>
       <AgreementInfo />
       <EstimatedCost />
       {isFeatureVisible('paypal') ? <PayPalInvoicesList /> : <InvoicesList />}
-    </PanelBody>
+    </Card.Body>
   );
 };

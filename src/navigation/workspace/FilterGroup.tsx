@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 
 export const FilterGroup: FunctionComponent<{
   value;
@@ -6,12 +7,11 @@ export const FilterGroup: FunctionComponent<{
   placeholder;
   groupId;
 }> = ({ value, onChange, placeholder, groupId }) => (
-  <div className="form-group">
+  <Form.Group>
     <div className="search-box">
-      <input
+      <Form.Control
         id={groupId}
         type="text"
-        className="form-control"
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
@@ -20,5 +20,5 @@ export const FilterGroup: FunctionComponent<{
         <i className="fa fa-search" />
       </label>
     </div>
-  </div>
+  </Form.Group>
 );

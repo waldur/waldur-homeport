@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { issueAttachmentsGet } from '@waldur/issues/attachments/actions';
 import { getIsLoading as getAttachmentsIsLoading } from '@waldur/issues/attachments/selectors';
@@ -23,11 +23,11 @@ export const PureIssueReload: FunctionComponent<PureIssueReloadProps> = (
   const { fetchData, loading, translate } = props;
 
   return (
-    <Tooltip label={translate('Reload issue data')} id="reload_issue_tooltip">
+    <Tip label={translate('Reload issue data')} id="reload_issue_tooltip">
       <span className="issue-reload" onClick={fetchData}>
         <i className={`fa fa-refresh ${loading ? 'fa-spin' : ''}`} />
       </span>
-    </Tooltip>
+    </Tip>
   );
 };
 

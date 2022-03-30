@@ -62,7 +62,7 @@ export class PureOfferingConfigurationForm extends Component<OfferingConfigurati
   render() {
     const props = this.props;
     return (
-      <form className="form-horizontal">
+      <form>
         <FormContainer
           submitting={props.submitting}
           labelClass="col-sm-3"

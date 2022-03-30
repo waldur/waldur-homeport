@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Button } from 'react-bootstrap';
 
 import { BookingActions } from '@waldur/booking/BookingActions';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
@@ -23,9 +24,9 @@ export const ResourceActions: FunctionComponent<ResourceActionsProps> = ({
 }) => (
   <div className="pull-right btn-group">
     <ResourceAccessButton resource={resource} />
-    <button className="btn btn-default btn-sm" onClick={reInitResource}>
+    <Button size="sm" onClick={reInitResource}>
       <i className="fa fa-refresh" /> {translate('Refresh')}
-    </button>
+    </Button>
     {Array.isArray(resource.report) && (
       <ShowReportButton report={resource.report} />
     )}

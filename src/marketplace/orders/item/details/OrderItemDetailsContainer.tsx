@@ -26,10 +26,6 @@ function getBreadcrumbs(orderItem: OrderItemDetailsType): BreadcrumbItem[] {
   if (workspace === ORGANIZATION_WORKSPACE) {
     return [
       {
-        label: translate('Organization workspace'),
-        state: 'organization.details',
-      },
-      {
         label: translate('My services'),
       },
       {
@@ -49,10 +45,6 @@ function getBreadcrumbs(orderItem: OrderItemDetailsType): BreadcrumbItem[] {
     ];
   } else {
     return [
-      {
-        label: translate('Project workspace'),
-        state: 'project.details',
-      },
       {
         label: translate('My orders'),
         state: 'marketplace-order-list',

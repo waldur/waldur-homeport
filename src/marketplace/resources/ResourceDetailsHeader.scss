@@ -1,4 +1,4 @@
-@import '~/src/sass/inspinia/variables';
+@import '~/src/sass/theme/variables';
 
 .expandable-panel {
   border: none;
@@ -22,7 +22,7 @@
       color: fade-out($text-color, 0.4);
     }
   }
-  .panel-heading {
+  .card-header {
     background-color: #fff;
     color: $text-color;
     border-color: $border-color;

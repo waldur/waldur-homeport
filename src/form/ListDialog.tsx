@@ -37,7 +37,7 @@ export const ListDialog = withTranslation((props: ListDialogProps) => (
     <Modal.Footer>
       <>
         <ActionButton
-          className="btn btn-default"
+          className="btn btn-secondary"
           title={props.translate('Cancel')}
           action={() => {
             props.input.onChange(null);
@@ -45,7 +45,7 @@ export const ListDialog = withTranslation((props: ListDialogProps) => (
           }}
         />
         <ActionButton
-          className="btn btn-default"
+          className="btn btn-secondary"
           title={props.translate('Reset')}
           action={() => {
             props.input.onChange(null);

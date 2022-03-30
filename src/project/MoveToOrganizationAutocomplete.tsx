@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 
 import { required } from '@waldur/core/validators';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
@@ -12,11 +13,11 @@ interface MoveToOrganizationAutocompleteProps {
 
 export const MoveToOrganizationAutocomplete: FunctionComponent<MoveToOrganizationAutocompleteProps> =
   ({ isDisabled }) => (
-    <div className="form-group">
-      <label className="control-label">
+    <Form.Group>
+      <Form.Label>
         {translate('Move to organization')}
         <span className="text-danger"> *</span>
-      </label>
+      </Form.Label>
       <AsyncSelectField
         name="organization"
         validate={required}
@@ -32,5 +33,5 @@ export const MoveToOrganizationAutocomplete: FunctionComponent<MoveToOrganizatio
         isDisabled={isDisabled}
         {...reactSelectMenuPortaling()}
       />
-    </div>
+    </Form.Group>
   );

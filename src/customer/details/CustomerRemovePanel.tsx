@@ -14,7 +14,6 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { deleteCustomer } from '@waldur/project/api';
 import { showError } from '@waldur/store/notify';
 import store from '@waldur/store/store';
-import { StateUtilsService } from '@waldur/user/StateUtilsService';
 import { setCurrentCustomer } from '@waldur/workspace/actions';
 import {
   getUser,
@@ -93,9 +92,7 @@ export const CustomerRemovePanel: FunctionComponent = () => {
       store.dispatch(setCurrentCustomer(null));
       deleteCustomer(customer.uuid).then(
         () => {
-          router.stateService.go('profile.details').then(() => {
-            StateUtilsService.clear();
-          });
+          router.stateService.go('profile.details');
         },
         () => store.dispatch(setCurrentCustomer(customer)),
       );

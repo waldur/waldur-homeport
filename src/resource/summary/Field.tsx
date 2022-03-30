@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
+import { Col, Row } from 'react-bootstrap';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 
 export interface FieldProps {
   label: string;
@@ -12,24 +13,24 @@ export interface FieldProps {
 
 export const Field: FunctionComponent<FieldProps> = (props) =>
   props.value || props.children ? (
-    <div className="m-b-xs">
-      <dt>
+    <Row className="m-b-xs">
+      <Col sm={3}>
         {props.label.length > 20 ? (
-          <Tooltip label={props.label} id="fieldLabel">
+          <Tip label={props.label} id="fieldLabel">
             {props.label}:
-          </Tooltip>
+          </Tip>
         ) : (
           props.label
         )}
-      </dt>
-      <dd className={props.valueClass}>
+      </Col>
+      <Col sm={9} className={props.valueClass}>
         {props.value || props.children}
         {props.helpText && (
-          <Tooltip label={props.helpText} id="fieldHelpText">
+          <Tip label={props.helpText} id="fieldHelpText">
             {' '}
             <i className="fa fa-question-circle" />
-          </Tooltip>
+          </Tip>
         )}
-      </dd>
-    </div>
+      </Col>
+    </Row>
   ) : null;

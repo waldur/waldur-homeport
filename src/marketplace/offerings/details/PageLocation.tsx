@@ -1,9 +1,4 @@
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
@@ -46,12 +41,12 @@ export const PageLocation = connect<{}, {}, { offering }>((_, props) => ({
       };
       return (
         <form onSubmit={handleSubmit(updateOfferingHandler)}>
-          <ModalHeader onClick={onReturn} style={{ cursor: 'pointer' }}>
-            <ModalTitle>
+          <Modal.Header onClick={onReturn} style={{ cursor: 'pointer' }}>
+            <Modal.Title>
               <i className="fa fa-arrow-left"></i> {translate('Location')}
-            </ModalTitle>
-          </ModalHeader>
-          <ModalBody>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <Field
               name="location"
               component={LocationContainer}
@@ -59,14 +54,14 @@ export const PageLocation = connect<{}, {}, { offering }>((_, props) => ({
                 offeringName: offering.name,
               })}
             />
-          </ModalBody>
-          <ModalFooter>
+          </Modal.Body>
+          <Modal.Footer>
             <SubmitButton
               disabled={invalid}
               submitting={submitting}
               label={translate('Update')}
             />
-          </ModalFooter>
+          </Modal.Footer>
         </form>
       );
     },

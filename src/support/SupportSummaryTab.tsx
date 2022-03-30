@@ -1,4 +1,4 @@
-import { Panel } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { FormattedJira } from '@waldur/core/FormattedJira';
@@ -18,14 +18,14 @@ export const SupportSummaryTab = withTranslation(
           <FormattedHtml html={props.summary} />
         </p>
       )}
-      <Panel>
-        <Panel.Heading>
-          <Panel.Title>{props.translate('Description')}</Panel.Title>
-        </Panel.Heading>
-        <Panel.Body>
+      <Card>
+        <Card.Header>
+          <Card.Title>{props.translate('Description')}</Card.Title>
+        </Card.Header>
+        <Card.Body>
           <FormattedJira text={props.issue?.description} />
-        </Panel.Body>
-      </Panel>
+        </Card.Body>
+      </Card>
     </>
   ),
 );

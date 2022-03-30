@@ -9,7 +9,6 @@ import { reducer as issues } from '@waldur/issues/reducers';
 import { reducer as marketplace } from '@waldur/marketplace/store/reducers';
 import { reducer as modal } from '@waldur/modal/reducer';
 import { reducer as breadcrumbs } from '@waldur/navigation/breadcrumbs/store';
-import { reducer as sidebar } from '@waldur/navigation/sidebar/reducers';
 import { reducer as title } from '@waldur/navigation/title';
 import { reducer as serviceUsage } from '@waldur/providers/support/reducers';
 import { reducer as resource } from '@waldur/resource/reducers';
@@ -36,7 +35,6 @@ export const rootReducer = combineReducers({
   bookings,
   title,
   breadcrumbs,
-  sidebar,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -1,5 +1,5 @@
 import { AzureSQLServer } from '@waldur/azure/common/types';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
 import { withTranslation } from '@waldur/i18n';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
@@ -9,9 +9,9 @@ import { PureAzureResourceSummary } from '../AzureResourceSummary';
 
 const ValueWithTooltip = ({ value, tooltip }) => (
   <>
-    <Tooltip id="compute-generation" label={tooltip}>
+    <Tip id="compute-generation" label={tooltip}>
       <i className="fa fa-question-circle" />
-    </Tooltip>{' '}
+    </Tip>{' '}
     {value}
   </>
 );

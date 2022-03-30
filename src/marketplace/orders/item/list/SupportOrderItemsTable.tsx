@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Table } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { OrderItemStateCell } from '@waldur/marketplace/orders/item/list/OrderItemStateCell';
@@ -15,12 +15,12 @@ export const SupportOrderItemsTable: FunctionComponent<{ order }> = ({
   order,
 }) => (
   <>
-    <dl className="dl-horizontal">
+    <Container>
       <Field
         label={translate('Project description')}
         value={order.project_description}
       />
-    </dl>
+    </Container>
     {order.items.length ? (
       <Table>
         <thead>

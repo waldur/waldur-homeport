@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate, withTranslation } from '@waldur/i18n/translate';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
@@ -88,11 +88,11 @@ export function connectTable(options: TableOptionsType) {
 
 export const formatLongText = (value) =>
   value.length > 100 ? (
-    <Tooltip label={value} id="longText">
+    <Tip label={value} id="longText">
       <span className="ellipsis" style={{ width: 150 }}>
         {value}
       </span>
-    </Tooltip>
+    </Tip>
   ) : (
     value
   );

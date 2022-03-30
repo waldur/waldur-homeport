@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form } from 'react-bootstrap';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
@@ -10,8 +11,8 @@ interface ProjectFilterProps {
 }
 
 export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
-  <div className="form-group col-sm-3">
-    <label className="control-label">{translate('Project')}</label>
+  <Form.Group className="col-sm-3">
+    <Form.Label>{translate('Project')}</Form.Label>
     <Field
       name="project"
       component={(fieldProps) => (
@@ -33,5 +34,5 @@ export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
         />
       )}
     />
-  </div>
+  </Form.Group>
 );

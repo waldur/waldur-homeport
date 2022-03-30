@@ -2,7 +2,7 @@ import { useCallback, FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
@@ -43,13 +43,13 @@ export const SyncProfile: FunctionComponent<{
   }, [dispatch, setLoading, refreshProfile, profile.uuid]);
 
   return (
-    <Tooltip
+    <Tip
       label={translate('Add Waldur user SSH keys to the FreeIPA profile')}
       id="freeipa-sync-profile"
     >
-      <Button bsStyle="info" className="m-r-sm" onClick={callback}>
+      <Button variant="info" className="m-r-sm" onClick={callback}>
         <i className="fa fa-refresh"></i> {translate('Sync profile')}
       </Button>
-    </Tooltip>
+    </Tip>
   );
 };

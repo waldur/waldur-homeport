@@ -91,10 +91,6 @@ export const states: StateDeclaration[] = [
     name: 'organization.dashboard',
     url: 'dashboard/',
     component: CustomerDashboard,
-    data: {
-      pageClass: 'gray-bg',
-      hideBreadcrumbs: true,
-    },
   },
 
   {
@@ -137,9 +133,6 @@ export const states: StateDeclaration[] = [
     name: 'organization.manage',
     url: 'manage/',
     component: CustomerManage,
-    data: {
-      hideBreadcrumbs: true,
-    },
   },
 
   {

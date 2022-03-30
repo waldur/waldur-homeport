@@ -12,7 +12,7 @@ const ManageSecurityGroupsButton: FunctionComponent<any> = (props) => (
       uuid: props.resource.project_uuid,
       tab: 'security_groups',
     }}
-    className="btn btn-sm btn-default"
+    className="btn btn-sm btn-secondary"
   >
     <i className="fa fa-shield" /> {translate('Manage security groups')}
   </Link>
@@ -27,7 +27,7 @@ const ManageNetworksButton: FunctionComponent<any> = (props) => (
       uuid: props.resource.project_uuid,
       tab: 'networks',
     }}
-    className="btn btn-sm btn-default"
+    className="btn btn-sm btn-secondary"
   >
     <i className="fa fa-server" /> {translate('Manage networks')}
   </Link>

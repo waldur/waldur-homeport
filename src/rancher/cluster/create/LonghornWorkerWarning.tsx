@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
@@ -28,8 +29,8 @@ export const LonghornWorkerWarning: FunctionComponent<{ nodeIndex }> = ({
     return null;
   }
   return (
-    <p
-      className={classNames('help-block m-b-none', {
+    <Form.Text
+      className={classNames('m-b-none', {
         'text-danger': longhornSelected,
         'text-muted': !longhornSelected,
       })}
@@ -41,6 +42,6 @@ export const LonghornWorkerWarning: FunctionComponent<{ nodeIndex }> = ({
         : translate(
             'A minimal expected configuration of worker is 4 vCPU and 4 GB RAM.',
           )}
-    </p>
+    </Form.Text>
   );
 };

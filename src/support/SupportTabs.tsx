@@ -32,7 +32,6 @@ export const PureSupportTabs: React.FC<SupportTabsProps> = (props) => {
       unmountOnExit
       defaultActiveKey="summary"
       id="offeringSummary"
-      animation={false}
     >
       <Tab title={props.translate('Summary')} eventKey="summary">
         <div className="m-t-sm">

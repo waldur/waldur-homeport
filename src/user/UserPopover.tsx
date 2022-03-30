@@ -1,12 +1,5 @@
 import { FunctionComponent } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-  Tab,
-  Tabs,
-} from 'react-bootstrap';
+import { Button, Modal, Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 import { createSelector } from 'reselect';
@@ -60,20 +53,20 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
   ) : error ? (
     <>
       <p>{translate('Unable to load user.')}</p>
-      <button type="button" className="btn btn-default" onClick={callback}>
+      <Button onClick={callback}>
         <i className="fa fa-refresh"></i> {translate('Try again')}
-      </button>
+      </Button>
     </>
   ) : value?.user ? (
     <>
-      <ModalHeader>
-        <ModalTitle>
+      <Modal.Header>
+        <Modal.Title>
           {translate('User details for {fullName}', {
             fullName: value.user.full_name,
           })}
-        </ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
           <Tab eventKey={1} title={translate('Details')}>
             <div className="m-t-sm">
@@ -95,10 +88,10 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
             </div>
           </Tab>
         </Tabs>
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </>
   ) : null;
 };

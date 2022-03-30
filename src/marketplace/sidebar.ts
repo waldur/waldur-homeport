@@ -120,17 +120,8 @@ SidebarExtensionService.register(
   orgWorkspaceCallbackFn,
 );
 
-SidebarExtensionService.register(PROJECT_WORKSPACE, async () => {
+SidebarExtensionService.register(PROJECT_WORKSPACE, () => {
   const project = getProject(store.getState());
-  const categories = await getCategories({
-    params: {
-      field: ['uuid', 'title'],
-      allowed_customer_uuid: project.customer_uuid,
-      project_uuid: project.uuid,
-      has_offerings: true,
-    },
-  });
-
   return [
     {
       key: 'marketplace',
@@ -151,19 +142,6 @@ SidebarExtensionService.register(PROJECT_WORKSPACE, async () => {
       },
       index: 220,
     },
-    {
-      key: 'marketplace-project-resources',
-      label: translate('Resources'),
-      icon: 'fa-files-o',
-      index: 300,
-      children: categories.map((category) => ({
-        label: category.title,
-        icon: 'fa-cloud',
-        ...getCategoryLink(project.uuid, category.uuid),
-        key: `marketplace_category_${category.uuid}`,
-        countFieldKey: `marketplace_category_${category.uuid}`,
-      })),
-    },
     ENV.plugins.WALDUR_AUTH_SOCIAL.ENABLE_EDUTEAMS_SYNC && {
       icon: 'fa-file',
       label: translate('Project updates'),
@@ -174,3 +152,22 @@ SidebarExtensionService.register(PROJECT_WORKSPACE, async () => {
     },
   ];
 });
+
+export const getResourceSidebarItems = async (project) => {
+  const categories = await getCategories({
+    params: {
+      field: ['uuid', 'title'],
+      allowed_customer_uuid: project.customer_uuid,
+      project_uuid: project.uuid,
+      has_offerings: true,
+    },
+  });
+
+  return categories.map((category) => ({
+    label: category.title,
+    icon: 'fa-cloud',
+    ...getCategoryLink(project.uuid, category.uuid),
+    key: `marketplace_category_${category.uuid}`,
+    countFieldKey: `marketplace_category_${category.uuid}`,
+  }));
+};

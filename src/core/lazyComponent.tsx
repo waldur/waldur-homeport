@@ -7,7 +7,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 export type ImportStatement = () => Promise<any>;
 
 const RetryButton = ({ retry }) => (
-  <FormControl componentClass="button" onClick={retry}>
+  <FormControl as="button" onClick={retry}>
     Retry
   </FormControl>
 );

@@ -13,7 +13,11 @@ export interface MenuItemType {
   action?(): void;
 }
 
-export interface SidebarMenuProps {
+export interface SidebarSection {
+  label: string;
   items: MenuItemType[];
-  counters?: Record<string, number>;
+}
+
+export interface SidebarMenuProps {
+  sections: SidebarSection[];
 }

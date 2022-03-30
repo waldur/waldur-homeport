@@ -1,11 +1,4 @@
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-  Col,
-  Row,
-} from 'react-bootstrap';
+import { Modal, Col, Row } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
@@ -52,13 +45,13 @@ export const PageConfirmationMessage = connect<{}, {}, { offering }>(
       };
       return (
         <form onSubmit={handleSubmit(updateOfferingHandler)}>
-          <ModalHeader onClick={onReturn} style={{ cursor: 'pointer' }}>
-            <ModalTitle>
+          <Modal.Header onClick={onReturn} style={{ cursor: 'pointer' }}>
+            <Modal.Title>
               <i className="fa fa-arrow-left"></i>{' '}
               {translate('Confirmation message')}
-            </ModalTitle>
-          </ModalHeader>
-          <ModalBody>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <Row>
               <Col lg={12}>
                 <EditConfirmationMessageFormContainer
@@ -67,14 +60,14 @@ export const PageConfirmationMessage = connect<{}, {}, { offering }>(
                 />
               </Col>
             </Row>
-          </ModalBody>
-          <ModalFooter>
+          </Modal.Body>
+          <Modal.Footer>
             <SubmitButton
               disabled={invalid}
               submitting={submitting}
               label={translate('Update')}
             />
-          </ModalFooter>
+          </Modal.Footer>
         </form>
       );
     },

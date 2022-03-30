@@ -2,12 +2,12 @@ import classNames from 'classnames';
 import { uniqueId } from 'lodash';
 import React, { FunctionComponent } from 'react';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 
 type BootstrapStyle = 'primary' | 'success' | 'info' | 'warning' | 'danger';
 
 interface AwesomeCheckboxProps {
-  bsStyle?: BootstrapStyle;
+  variant?: BootstrapStyle;
   marginRight?: boolean;
   label: React.ReactNode;
   value: boolean;
@@ -25,7 +25,7 @@ export const AwesomeCheckbox: FunctionComponent<AwesomeCheckboxProps> = (
       className={classNames(
         'checkbox',
         'awesome-checkbox',
-        `checkbox-${props.bsStyle}`,
+        `checkbox-${props.variant}`,
         { 'm-r-sm': props.marginRight },
       )}
     >
@@ -39,12 +39,9 @@ export const AwesomeCheckbox: FunctionComponent<AwesomeCheckboxProps> = (
       <label htmlFor={id}>
         {props.tooltip && (
           <>
-            <Tooltip
-              label={props.tooltip}
-              id={`awesome-checkbox-tooltip-${id}`}
-            >
+            <Tip label={props.tooltip} id={`awesome-checkbox-tooltip-${id}`}>
               <i className="fa fa-question-circle" />
-            </Tooltip>{' '}
+            </Tip>{' '}
           </>
         )}
         {props.label}
@@ -54,6 +51,6 @@ export const AwesomeCheckbox: FunctionComponent<AwesomeCheckboxProps> = (
 };
 
 AwesomeCheckbox.defaultProps = {
-  bsStyle: 'primary',
+  variant: 'primary',
   marginRight: true,
 };

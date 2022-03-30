@@ -4,7 +4,6 @@ import ReactGA from 'react-ga';
 import { initAuthToken } from './auth/interceptor';
 import { ENV } from './configs/default';
 import { LanguageUtilsService } from './i18n/LanguageUtilsService';
-import loadInspinia from './inspinia';
 import { initConfig } from './store/config';
 import store from './store/store';
 import { attachTransitions } from './transitions';
@@ -19,7 +18,6 @@ export function afterBootstrap() {
       dsn: ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_DSN,
     });
   }
-  loadInspinia();
   initAuthToken();
   store.dispatch(initConfig(ENV));
   LanguageUtilsService.checkLanguage();

@@ -21,13 +21,7 @@ export const VmTypeOverview = connect((state: RootState) =>
   }
   return (
     <Panel>
-      <Tabs
-        defaultActiveKey={1}
-        id="vm-overview"
-        mountOnEnter
-        unmountOnExit
-        animation={false}
-      >
+      <Tabs defaultActiveKey={1} id="vm-overview" mountOnEnter unmountOnExit>
         <Tab eventKey={1} title={translate('Images')}>
           <div className="m-t-sm">
             <ImagesList />

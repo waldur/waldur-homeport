@@ -1,10 +1,5 @@
 import { useEffect, FunctionComponent } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -43,14 +38,14 @@ export const RequestLimitsChangeDialog: FunctionComponent<{
   });
   return (
     <>
-      <ModalHeader>
-        <ModalTitle>
+      <Modal.Header>
+        <Modal.Title>
           {translate('Change of limits of SLURM allocation {name}', {
             name: resource.name,
           })}
-        </ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <p>
           {translate(
             'To change allocation limits, please send a request to {supportEmail}.',
@@ -62,10 +57,10 @@ export const RequestLimitsChangeDialog: FunctionComponent<{
             'Please note that request should specify allocation name and provide a reason for change.',
           )}
         </p>
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </>
   );
 };

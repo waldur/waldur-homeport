@@ -20,7 +20,6 @@ const componentMeasuredUnitValidator = (value: string) => {
 export const ComponentMeasuredUnitField: FunctionComponent<ComponentMeasuredUnitFieldProps> =
   ({ disabled }) => (
     <Field
-      className="form-control"
       label={translate('Measured unit')}
       name="measured_unit"
       validate={componentMeasuredUnitValidator}

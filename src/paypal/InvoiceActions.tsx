@@ -1,21 +1,18 @@
 import { FunctionComponent } from 'react';
-import {
-  Dropdown,
-  DropdownMenu,
-  DropdownToggle,
-  MenuItem,
-} from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
 export const InvoiceActions: FunctionComponent<{ invoice }> = ({ invoice }) =>
   invoice.backend_id ? (
     <Dropdown id="InvoiceActions">
-      <DropdownToggle className="btn-sm">{translate('Actions')}</DropdownToggle>
-      <DropdownMenu>
+      <Dropdown.Toggle className="btn-sm">
+        {translate('Actions')}
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
         {invoice.pdf ? (
-          <MenuItem>
+          <Dropdown.Item>
             <a
               download={`invoice-${invoice.number}.pdf`}
               href={invoice.pdf}
@@ -23,9 +20,9 @@ export const InvoiceActions: FunctionComponent<{ invoice }> = ({ invoice }) =>
             >
               <i className="fa fa-download"></i> {translate('Download invoice')}
             </a>
-          </MenuItem>
+          </Dropdown.Item>
         ) : null}
-        <MenuItem>
+        <Dropdown.Item>
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -33,14 +30,14 @@ export const InvoiceActions: FunctionComponent<{ invoice }> = ({ invoice }) =>
           >
             <i className="fa fa-paypal"></i> {translate('Pay invoice')}
           </a>
-        </MenuItem>
-      </DropdownMenu>
+        </Dropdown.Item>
+      </Dropdown.Menu>
     </Dropdown>
   ) : (
-    <Tooltip
+    <Tip
       label={translate('Invoice has not been sent to PayPal yet')}
       id="paypal-tooltip"
     >
       N/A
-    </Tooltip>
+    </Tip>
   );

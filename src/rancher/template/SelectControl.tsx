@@ -10,7 +10,7 @@ export const SelectControl: FunctionComponent<{
   getValue;
 }> = ({ input, options, getLabel, getValue }) => (
   <FormControl
-    componentClass="select"
+    as="select"
     value={getValue(input.value)}
     onChange={(e: any) =>
       input.onChange(

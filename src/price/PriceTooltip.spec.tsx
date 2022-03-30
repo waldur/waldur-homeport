@@ -2,7 +2,7 @@ import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 
 import { PriceTooltip } from './PriceTooltip';
 
@@ -15,7 +15,7 @@ describe('PriceTooltip', () => {
       </Provider>,
     );
 
-  const getLabel = (wrapper) => wrapper.find(Tooltip).props().label;
+  const getLabel = (wrapper) => wrapper.find(Tip).props().label;
   const hasIcon = (wrapper) => wrapper.find('i').length === 1;
 
   it('does not render icon if billing mode is activated', () => {

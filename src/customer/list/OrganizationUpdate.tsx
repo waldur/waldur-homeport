@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues, reduxForm } from 'redux-form';
@@ -24,7 +25,6 @@ import { CustomerLogoUpdate } from '../details/CustomerLogoUpdate';
 const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
   <form
     onSubmit={props.handleSubmit(props.submitRequest)}
-    className="form-horizontal"
     style={{ marginTop: '20px' }}
   >
     <FormContainer
@@ -101,7 +101,7 @@ const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
 
       <CustomerLogoUpdate customer={props.customer} formData={props.formData} />
 
-      <div className="form-group">
+      <Form.Group>
         <div
           className="col-sm-8 col-sm-offset-2"
           style={{ display: 'flex', justifyContent: 'flex-end' }}
@@ -112,7 +112,7 @@ const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
             label={translate('Update')}
           />
         </div>
-      </div>
+      </Form.Group>
     </FormContainer>
   </form>
 );

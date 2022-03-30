@@ -1,0 +1,165 @@
+//
+// Aside Primary
+//
+
+// General mode
+.app-aside-primary {
+  @include app-layout-transition();
+}
+
+// Desktop mode
+@include media-breakpoint-up(lg) {
+  // Base
+  .app-aside-primary {
+    @include attr(width, get($app-aside-primary-config, base, width));
+    @include attr(z-index, get($app-aside-primary-config, base, z-index));
+    @include attr(
+      background-color,
+      get($app-aside-primary-config, base, bg-color)
+    );
+    @include attr(box-shadow, get($app-aside-primary-config, base, box-shadow));
+    @include attr(
+      border-left,
+      get($app-aside-primary-config, base, border-start)
+    );
+    @include attr(
+      border-right,
+      get($app-aside-primary-config, base, border-end)
+    );
+  }
+
+  // Vars
+  .app-aside-primary-fixed {
+    --kt-app-aside-primary-width: #{get($app-aside-primary-config, base, width)};
+  }
+
+  [data-kt-app-aside-primary-collapse='on'] {
+    --kt-app-aside-primary-width: #{get(
+        $app-aside-primary-config,
+        collapse,
+        width
+      )};
+  }
+
+  [data-kt-app-aside-primary-minimize='on'] {
+    --kt-app-aside-primary-width: #{get(
+        $app-aside-primary-config,
+        minimize,
+        width
+      )};
+  }
+
+  // States
+  .app-aside-primary {
+    .app-aside-primary-fixed & {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: var(--kt-app-aside-primary-width);
+      @include app-layout-transition();
+      @include attr(z-index, get($app-aside-primary-config, base, z-index));
+      @include attr(
+        box-shadow,
+        get($app-aside-primary-config, base, box-shadow)
+      );
+      @include attr(
+        border-left,
+        get($app-aside-primary-config, base, border-start)
+      );
+      @include attr(
+        border-right,
+        get($app-aside-primary-config, base, border-end)
+      );
+    }
+
+    [data-kt-app-aside-primary-sticky='on'] & {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      @include app-layout-transition();
+      @include attr(z-index, get($app-aside-primary-config, sticky, z-index));
+      @include attr(
+        box-shadow,
+        get($app-aside-primary-config, sticky, box-shadow)
+      );
+      @include attr(
+        border-left,
+        get($app-aside-primary-config, sticky, border-start)
+      );
+      @include attr(
+        border-right,
+        get($app-aside-primary-config, sticky, border-end)
+      );
+    }
+
+    [data-kt-app-aside-primary-collapse='on'] & {
+      @include app-layout-transition();
+      left: calc(-1 * var(--kt-app-aside-primary-width));
+    }
+
+    [data-kt-app-aside-primary-minimize='on'] & {
+      @include app-layout-transition();
+      @include attr(
+        background-color,
+        get($app-aside-primary-config, minimize, bg-color)
+      );
+      @include attr(
+        box-shadow,
+        get($app-aside-primary-config, minimize, box-shadow)
+      );
+      @include attr(
+        border-left,
+        get($app-aside-primary-config, minimize, border-start)
+      );
+      @include attr(
+        border-right,
+        get($app-aside-primary-config, minimize, border-end)
+      );
+    }
+  }
+
+  // Integration
+  .app-aside-primary {
+    // Header
+    .app-aside-primary-fixed.app-header-fixed:not(.app-aside-primary-push-header)
+      & {
+      top: var(--kt-app-header-height);
+    }
+
+    // Toolbar
+    .app-aside-primary-fixed.app-toolbar-fixed:not(.app-aside-primary-push-toolbar)
+      & {
+      top: calc(var(--kt-app-header-height) + var(--kt-app-toolbar-height, 0));
+    }
+  }
+}
+
+// Tablet & mobile modes
+@include media-breakpoint-down(lg) {
+  .app-aside-primary {
+    display: none;
+    @include attr(width, get($app-aside-primary-config, base, width-mobile));
+    @include attr(
+      z-index,
+      get($app-aside-primary-config, base, z-index-mobile)
+    );
+    @include attr(
+      background-color,
+      get($app-aside-primary-config, base, bg-color-mobile)
+    );
+    @include attr(
+      box-shadow,
+      get($app-aside-primary-config, base, box-shadow-mobile)
+    );
+    @include attr(
+      border-left,
+      get($app-aside-primary-config, base, border-start-mobile)
+    );
+    @include attr(
+      border-right,
+      get($app-aside-primary-config, base, border-end-mobile)
+    );
+  }
+}

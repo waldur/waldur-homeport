@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { InputField } from '@waldur/form/InputField';
@@ -20,14 +20,12 @@ export const DomainGroup: FunctionComponent = () => {
     );
   } else {
     return (
-      <FormGroup>
-        <ControlLabel>
-          {translate('Home organization domain name')}
-        </ControlLabel>
-        <FormControl.Static>
+      <Form.Group>
+        <Form.Label>{translate('Home organization domain name')}</Form.Label>
+        <Form.Control plaintext>
           <strong>{user.organization || 'N/A'}</strong>
-        </FormControl.Static>
-      </FormGroup>
+        </Form.Control>
+      </Form.Group>
     );
   }
 };

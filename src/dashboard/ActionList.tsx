@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
-import { Label, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Badge, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import { Action } from './types';
 
@@ -16,9 +16,9 @@ export const ActionList: FunctionComponent<ActionListProps> = (props) => (
         onClick={action.onClick}
         className={classNames({ 'fist-item': index === 0 })}
       >
-        <Label bsStyle="success" className="m-r-sm m-l-sm">
+        <Badge bg="success" className="m-r-sm m-l-sm">
           <i className="fa fa-plus" />
-        </Label>
+        </Badge>
         {action.title}
       </ListGroupItem>
     ))}

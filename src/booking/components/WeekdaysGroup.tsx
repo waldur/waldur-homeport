@@ -1,7 +1,7 @@
 import { Info } from 'luxon';
 import { FunctionComponent } from 'react';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { range } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
@@ -19,12 +19,12 @@ export const WeekdaysGroup: FunctionComponent<WeekdaysGroupProps> = ({
 }) => (
   <FormGroup
     label={translate('Select available weekdays')}
-    labelClassName="control-label col-sm-3"
+    labelClassName="col-sm-3"
     valueClassName={'col-sm-8'}
   >
     <div className="weekDays-selector">
       {range(7).map((day, index) => (
-        <Tooltip
+        <Tip
           key={index}
           label={Info.weekdays('long')[day]}
           id={`weekday-${day}`}
@@ -41,7 +41,7 @@ export const WeekdaysGroup: FunctionComponent<WeekdaysGroupProps> = ({
           <label htmlFor={`weekday-${day}`}>
             {Info.weekdays('narrow')[day]}
           </label>
-        </Tooltip>
+        </Tip>
       ))}
     </div>
   </FormGroup>

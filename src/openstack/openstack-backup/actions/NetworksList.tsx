@@ -20,13 +20,13 @@ import {
 type NetworkChoices = Pick<BackupFormChoices, 'subnets' | 'floatingIps'>;
 
 const AddButton = ({ onClick, disabled }) => (
-  <Button bsStyle="default" onClick={onClick} disabled={disabled}>
+  <Button variant="default" onClick={onClick} disabled={disabled}>
     <i className="fa fa-plus"></i> {translate('Add')}
   </Button>
 );
 
 const DeleteButton = ({ onClick }) => (
-  <Button bsStyle="default" title={translate('Delete')} onClick={onClick}>
+  <Button variant="default" title={translate('Delete')} onClick={onClick}>
     <i className="fa fa-trash-o"></i>
   </Button>
 );

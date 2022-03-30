@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -21,8 +22,7 @@ export const DisplayNameField: FunctionComponent<DisplayNameFieldProps> = (
     description={translate('Label that is visible to users in Marketplace.')}
   >
     <Field
-      component="input"
-      className="form-control"
+      component={Form.Control}
       name={props.name}
       type="text"
       validate={required}

@@ -1,0 +1,184 @@
+//
+// Aside
+//
+
+// General mode
+.app-toolbar {
+  @include app-layout-transition();
+}
+
+// Desktop mode
+@include media-breakpoint-up(lg) {
+  // Base
+  .app-toolbar {
+    @include attr(height, get($app-toolbar-config, base, height));
+    @include attr(z-index, get($app-toolbar-config, base, z-index));
+    @include attr(background-color, get($app-toolbar-config, base, bg-color));
+    @include attr(box-shadow, get($app-toolbar-config, base, box-shadow));
+    @include attr(border-bottom, get($app-toolbar-config, base, border-bottom));
+  }
+
+  // Vars
+  .app-toolbar-fixed {
+    --kt-app-toolbar-height: #{get($app-toolbar-config, base, height)};
+  }
+
+  [data-kt-app-toolbar-sticky='on'] {
+    --kt-app-aside-height: #{get($app-toolbar-config, sticky, height)};
+  }
+
+  [data-kt-app-toolbar-minimize='on'] {
+    --kt-app-aside-height: #{get($app-toolbar-config, minimize, height)};
+  }
+
+  // States
+  .app-toolbar {
+    .app-toolbar-fixed & {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: var(--kt-app-toolbar-height);
+      @include attr(z-index, get($app-toolbar-config, base, z-index));
+      @include attr(box-shadow, get($app-toolbar-config, base, box-shadow));
+      @include attr(
+        border-bottom,
+        get($app-toolbar-config, base, border-bottom)
+      );
+    }
+
+    [data-kt-app-toolbar-sticky='on'] & {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      @include app-layout-transition();
+      @include attr(height, get($app-toolbar-config, sticky, height));
+      @include attr(z-index, get($app-toolbar-config, sticky, z-index));
+      @include attr(box-shadow, get($app-toolbar-config, sticky, box-shadow));
+      @include attr(
+        border-bottom,
+        get($app-toolbar-config, sticky, border-bottom)
+      );
+    }
+
+    [data-kt-app-toolbar-minimize='on'] & {
+      @include app-layout-transition();
+      @include attr(height, get($app-toolbar-config, sticky, height));
+    }
+  }
+
+  // Integration
+  .app-toolbar {
+    // Header
+    .app-toolbar-fixed.app-header-fixed & {
+      top: var(--kt-app-header-height);
+    }
+
+    // Aside
+    .app-toolbar-fixed.app-aside-fixed:not(.app-aside-stacked).app-aside-push-toolbar
+      & {
+      left: var(--kt-app-aside-width);
+    }
+
+    // Aside primary
+    .app-toolbar-fixed.app-aside-primary-fixed.app-aside-primary-push-toolbar
+      & {
+      left: var(--kt-app-aside-primary-width);
+    }
+
+    // Aside secondary
+    .app-toolbar-fixed.app-aside-secondary-fixed.app-aside-secondary-push-toolbar
+      & {
+      left: calc(
+        var(--kt-app-aside-primary-width) +
+          var(--kt-app-aside-secondary-width, 0px)
+      );
+    }
+
+    // Aside tertiary
+    .app-toolbar-fixed.app-aside-tertiary-fixed.app-aside-tertiary-push-toolbar
+      & {
+      left: calc(
+        var(--kt-app-aside-primary-width) +
+          var(--kt-app-aside-secondary-width, 0px) +
+          var(--kt-app-aside-tertiary-width, 0px)
+      );
+    }
+  }
+}
+
+// Tablet & mobile modes
+@include media-breakpoint-down(lg) {
+  // Base
+  .app-toolbar {
+    @include attr(height, get($app-toolbar-config, base, height-mobile));
+    @include attr(z-index, get($app-toolbar-config, base, z-index-mobile));
+    @include attr(
+      background-color,
+      get($app-toolbar-config, base, bg-color-mobile)
+    );
+    @include attr(
+      box-shadow,
+      get($app-toolbar-config, base, box-shadow-mobile)
+    );
+    @include attr(
+      border-bottom,
+      get($app-toolbar-config, base, border-bottom-mobile)
+    );
+  }
+
+  // Vars
+  .app-toolbar-fixed {
+    --kt-app-toolbar-height: #{get($app-toolbar-config, base, height-mobile)};
+  }
+
+  [data-kt-app-toolbar-sticky='on'] {
+    --kt-app-aside-height: #{get($app-toolbar-config, sticky, height-mobile)};
+  }
+
+  [data-kt-app-toolbar-minimize='on'] {
+    --kt-app-aside-height: #{get($app-toolbar-config, minimize, height-mobile)};
+  }
+
+  // States
+  .app-toolbar {
+    .app-toolbar-mobile-fixed & {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: var(--kt-app-toolbar-height);
+      @include attr(z-index, get($app-toolbar-config, base, z-index-mobile));
+      @include attr(
+        box-shadow,
+        get($app-toolbar-config, base, box-shadow-mobile)
+      );
+      @include attr(
+        border-bottom,
+        get($app-toolbar-config, base, border-bottom-mobile)
+      );
+    }
+
+    [data-kt-app-toolbar-sticky='on'] & {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      @include app-layout-transition();
+      @include attr(z-index, get($app-toolbar-config, sticky, z-index-mobile));
+      @include attr(
+        box-shadow,
+        get($app-toolbar-config, sticky, box-shadow-mobile)
+      );
+      @include attr(
+        border-bottom,
+        get($app-toolbar-config, sticky, border-bottom-mobile)
+      );
+    }
+
+    [data-kt-app-toolbar-minimize='on'] & {
+      @include app-layout-transition();
+    }
+  }
+}

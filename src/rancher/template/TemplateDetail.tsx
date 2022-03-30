@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useMemo, useCallback, FunctionComponent } from 'react';
-import { Panel, PanelGroup } from 'react-bootstrap';
+import { Card, Accordion } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
@@ -112,28 +112,25 @@ export const TemplateDetail: FunctionComponent = () => {
     <>
       <TemplateHeader {...state.value} />
 
-      <PanelGroup
-        accordion={true}
+      <Accordion
         id="application-template-form"
         defaultActiveKey="configuration"
       >
         {state.value.version.readme && (
-          <Panel eventKey="readme">
-            <Panel.Heading>
-              <Panel.Title toggle={true}>{translate('Summary')}</Panel.Title>
-            </Panel.Heading>
-            <Panel.Body collapsible={true}>
+          <Accordion.Item eventKey="readme">
+            <Card.Header>
+              <Card.Title>{translate('Summary')}</Card.Title>
+            </Card.Header>
+            <Card.Body>
               <FormattedMarkdown text={state.value.version.readme} />
-            </Panel.Body>
-          </Panel>
+            </Card.Body>
+          </Accordion.Item>
         )}
-        <Panel eventKey="configuration">
-          <Panel.Heading>
-            <Panel.Title toggle={true}>
-              {translate('Configuration')}
-            </Panel.Title>
-          </Panel.Heading>
-          <Panel.Body collapsible={true}>
+        <Accordion.Item eventKey="configuration">
+          <Card.Header>
+            <Card.Title>{translate('Configuration')}</Card.Title>
+          </Card.Header>
+          <Card.Body>
             <TemplateQuestions
               questions={visibleQuestions}
               versions={state.value.template.versions}
@@ -142,9 +139,9 @@ export const TemplateDetail: FunctionComponent = () => {
               initialValues={state.value.initialValues}
               createApplication={createApplication}
             />
-          </Panel.Body>
-        </Panel>
-      </PanelGroup>
+          </Card.Body>
+        </Accordion.Item>
+      </Accordion>
     </>
   );
 };

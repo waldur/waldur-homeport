@@ -37,7 +37,7 @@ export const SearchResultsDropdown: FunctionComponent<SearchResultsDropdownProps
         ) : error ? (
           <div className="searchResultsDropdown__error">
             <p>{translate('Unable to fetch offerings')}</p>
-            <Button bsStyle="primary" onClick={() => loadData()}>
+            <Button variant="primary" onClick={() => loadData()}>
               <i className="fa fa-refresh"></i> {translate('Retry')}
             </Button>
           </div>

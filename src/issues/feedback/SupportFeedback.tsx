@@ -1,4 +1,5 @@
 import { triggerTransition } from '@uirouter/redux';
+import { Form } from 'react-bootstrap';
 import ReactStars from 'react-rating-stars-component';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
@@ -37,7 +38,7 @@ const SupportFeedbackContainer = (props) => {
     <>
       <form
         onSubmit={props.handleSubmit(submitRequest)}
-        className="form-horizontal center-vertically"
+        className="center-vertically"
       >
         <FormContainer
           submitting={props.submitting}
@@ -67,7 +68,7 @@ const SupportFeedbackContainer = (props) => {
             rows={2}
           />
 
-          <div className="form-group">
+          <Form.Group>
             <div
               className="col-sm-8 col-sm-offset-2"
               style={{ display: 'flex', justifyContent: 'flex-end' }}
@@ -78,7 +79,7 @@ const SupportFeedbackContainer = (props) => {
                 label={translate('Submit')}
               />
             </div>
-          </div>
+          </Form.Group>
         </FormContainer>
       </form>
     </>

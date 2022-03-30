@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Col, ControlLabel, FormGroup } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
@@ -17,8 +17,8 @@ export const PriorityGroup: FunctionComponent<{ priorities; disabled }> = ({
     return null;
   }
   return (
-    <FormGroup>
-      <Col sm={3} componentClass={ControlLabel}>
+    <Form.Group>
+      <Col sm={3} as={Form.Label}>
         {translate('Priority')}
       </Col>
       <Col sm={6}>
@@ -33,6 +33,6 @@ export const PriorityGroup: FunctionComponent<{ priorities; disabled }> = ({
           isClearable={true}
         />
       </Col>
-    </FormGroup>
+    </Form.Group>
   );
 };

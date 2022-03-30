@@ -39,7 +39,7 @@ const StaticRouteRow = ({ route, nexthopValidator, onRemove }) => (
       />
     </td>
     <td>
-      <Button bsStyle="default" onClick={onRemove} bsSize="small">
+      <Button variant="default" onClick={onRemove} size="sm">
         <i className="fa fa-trash" /> {translate('Remove')}
       </Button>
     </td>
@@ -47,7 +47,7 @@ const StaticRouteRow = ({ route, nexthopValidator, onRemove }) => (
 );
 
 const StaticRouteAddButton = ({ onClick }) => (
-  <Button bsStyle="default" onClick={onClick} bsSize="small">
+  <Button variant="default" onClick={onClick} size="sm">
     <i className="fa fa-plus" /> {translate('Add route')}
   </Button>
 );

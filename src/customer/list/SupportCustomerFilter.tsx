@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Row } from 'react-bootstrap';
+import { Form, Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import {
@@ -14,10 +14,10 @@ import { translate } from '@waldur/i18n';
 
 export const PureSupportCustomerFilter: FunctionComponent = () => (
   <Row>
-    <div className="form-group col-sm-3">
-      <label className="control-label">{translate('Accounting running')}</label>
+    <Form.Group className="col-sm-3">
+      <Form.Label>{translate('Accounting running')}</Form.Label>
       <AccountingRunningField />
-    </div>
+    </Form.Group>
     <ServiceProviderFilter />
     <SelectOrganizationDivisionField isFilterForm={true} />
     <DivisionTypeFilter />

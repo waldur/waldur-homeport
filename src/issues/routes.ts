@@ -142,7 +142,6 @@ export const states: StateDeclaration[] = [
     data: {
       auth: true,
       workspace: SUPPORT_WORKSPACE,
-      pageClass: 'gray-bg',
     },
   },
 
@@ -150,9 +149,6 @@ export const states: StateDeclaration[] = [
     name: 'support.dashboard',
     url: '',
     component: IssuesDashboard,
-    data: {
-      hideBreadcrumbs: true,
-    },
   },
 
   {
@@ -266,7 +262,6 @@ export const states: StateDeclaration[] = [
     component: OrganizationUpdateContainer,
     data: {
       feature: 'support.customers_list',
-      pageClass: 'white-bg',
     },
     resolve: {
       permission: checkPermission,

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import {
@@ -9,8 +9,8 @@ import {
 import { GROWTH_FILTER_ID } from '@waldur/invoices/constants';
 
 export const PureGrowthFilter: FunctionComponent = () => (
-  <div className="ibox">
-    <div className="ibox-content border-bottom m-t-md">
+  <Card>
+    <Card.Body className="border-bottom m-t-md">
       <form className="form-inline">
         <Row>
           <Col sm={3}>
@@ -18,8 +18,8 @@ export const PureGrowthFilter: FunctionComponent = () => (
           </Col>
         </Row>
       </form>
-    </div>
-  </div>
+    </Card.Body>
+  </Card>
 );
 
 export const GrowthFilter = reduxForm<{}, any>({

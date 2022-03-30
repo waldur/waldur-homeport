@@ -53,19 +53,12 @@ export const states: StateDeclaration[] = [
     name: 'project.details',
     url: '',
     component: ProjectDashboardContainer,
-    data: {
-      pageClass: 'gray-bg',
-      hideBreadcrumbs: true,
-    },
   },
 
   {
     name: 'project.issues',
     url: 'issues/',
     component: ProjectIssuesList,
-    data: {
-      pageClass: 'gray-bg',
-    },
   },
 
   {

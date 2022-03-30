@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Button, Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
@@ -21,25 +22,25 @@ export const IssuesShortList: FunctionComponent = () => {
     loadData();
   });
   return (
-    <div className="ibox float-e-margins">
-      <div className="ibox-title">
+    <div className="card float-e-margins">
+      <Card.Header>
         <span className="pull-right">
-          <Link className="btn btn-default btn-xs" state="support.list">
+          <Link className="btn btn-secondary" state="support.list">
             <small>
               <i className="fa fa-list" />
             </small>{' '}
             {translate('See all')}
           </Link>{' '}
-          <a className="btn btn-default btn-xs" onClick={loadData}>
+          <Button as="a" size="sm" onClick={loadData}>
             <small>
               <i className="fa fa-refresh" />
             </small>{' '}
             {translate('Refresh')}
-          </a>
+          </Button>
         </span>
         <h5>{translate('Reported by me')}</h5>
-      </div>
-      <div className="ibox-content">
+      </Card.Header>
+      <Card.Body>
         {loading ? (
           <LoadingSpinner />
         ) : error ? (
@@ -67,7 +68,7 @@ export const IssuesShortList: FunctionComponent = () => {
             </tbody>
           </table>
         )}
-      </div>
+      </Card.Body>
     </div>
   );
 };

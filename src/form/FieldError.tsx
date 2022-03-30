@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 
 interface FieldErrorProps {
   error?: string;
@@ -6,9 +7,9 @@ interface FieldErrorProps {
 
 export const FieldError: FunctionComponent<FieldErrorProps> = (props) =>
   props.error ? (
-    <div className="help-block text-danger">
+    <Form.Text className="text-danger">
       {Array.isArray(props.error)
         ? props.error.map((e, i) => <div key={i}>{e}</div>)
         : props.error}
-    </div>
+    </Form.Text>
   ) : null;

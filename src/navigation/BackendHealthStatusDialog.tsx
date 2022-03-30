@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Button } from 'react-bootstrap';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -25,9 +26,9 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
       ) : value ? (
         <>
           <div className="pull-right">
-            <button className="btn btn-default btn-sm" onClick={reFetch}>
+            <Button size="sm" onClick={reFetch}>
               <i className="fa fa-refresh" /> {translate('Refresh')}
-            </button>
+            </Button>
           </div>
           <table className="table table-hover no-margins">
             <thead>

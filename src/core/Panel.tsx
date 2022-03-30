@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import React from 'react';
+import { Card } from 'react-bootstrap';
 
 interface PanelProps {
   title?: React.ReactNode;
@@ -13,13 +13,13 @@ export const Panel: React.FC<PanelProps> = ({
   className,
   actions,
 }) => (
-  <div className={classNames('ibox', className)}>
+  <Card className={className}>
     {title && (
-      <div className="ibox-title">
+      <Card.Header>
         <h5>{title}</h5>
         {actions}
-      </div>
+      </Card.Header>
     )}
-    <div className="ibox-content">{children}</div>
-  </div>
+    <Card.Body>{children}</Card.Body>
+  </Card>
 );

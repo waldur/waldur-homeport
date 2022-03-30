@@ -1,5 +1,4 @@
 import { DropdownButton } from 'react-bootstrap';
-import { useBoolean } from 'react-use';
 
 import { translate } from '@waldur/i18n';
 import { EditResourceEndDateByProviderAction } from '@waldur/marketplace/resources/actions/EditResourceEndDateByProviderAction';
@@ -30,15 +29,12 @@ export const PublicResourceActions = ({
   resource,
   refreshList,
 }: PublicResourceActionsProps) => {
-  const [open, onToggle] = useBoolean(false);
   return (
     <DropdownButton
       title={translate('Actions')}
       id="public-resources-list-actions-dropdown-btn"
       className="dropdown-btn"
-      onToggle={onToggle}
-      open={open}
-      pullRight
+      align="start"
     >
       {ActionsList.map((ActionComponent: any, index: number) => (
         <ActionComponent

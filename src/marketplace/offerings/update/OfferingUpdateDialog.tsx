@@ -74,10 +74,7 @@ export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = (
       <FormFieldsContext.Provider value={{ readOnlyFields }}>
         <Row>
           <Col lg={10} lgOffset={1}>
-            <form
-              onSubmit={handleSubmit(updateOffering)}
-              className="form-horizontal"
-            >
+            <form onSubmit={handleSubmit(updateOffering)}>
               <Wizard
                 steps={STEPS}
                 tabs={TABS}

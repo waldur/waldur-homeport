@@ -20,10 +20,6 @@ import { OfferingImagesList } from './OfferingImagesList';
 
 const getBreadcrumbs = (offering: Offering): BreadcrumbItem[] => {
   return [
-    {
-      label: translate('Organization workspace'),
-      state: 'organization.details',
-    },
     offering.shared
       ? {
           label: translate('Public offerings'),

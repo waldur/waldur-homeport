@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { PaymentProfile } from '@waldur/workspace/types';
@@ -22,14 +22,14 @@ export const CustomerPaymentProfile: FunctionComponent<CustomerPaymentProfilePro
         <div className="m-b-xs m-t-sm ">
           <dt>{translate('Payment profile ')}</dt>
           <dd>
-            <Tooltip
+            <Tip
               label={translate('Payment type {type}', {
                 type: activePaymentProfile.payment_type,
               })}
               id="fieldLabel"
             >
               {activePaymentProfile.name}
-            </Tooltip>
+            </Tip>
           </dd>
         </div>
       </ResourceDetailsTable>

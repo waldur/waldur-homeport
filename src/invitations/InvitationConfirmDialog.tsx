@@ -1,10 +1,5 @@
 import { useCallback, FunctionComponent } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -48,10 +43,10 @@ export const InvitationConfirmDialog: FunctionComponent<{
 
   return (
     <>
-      <ModalHeader>
-        <ModalTitle>{translate('Invitation confirmation')}</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+      <Modal.Header>
+        <Modal.Title>{translate('Invitation confirmation')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         {!user ? null : asyncResult.loading ? (
           <>
             <LoadingSpinner />
@@ -66,8 +61,8 @@ export const InvitationConfirmDialog: FunctionComponent<{
         ) : asyncResult.value ? (
           <InvitationMessage invitation={invitation} user={user} />
         ) : null}
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         {asyncResult.value ? (
           <InvitationButtons
             user={user}
@@ -77,7 +72,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
             closeDecliningNewEmail={closeDecliningNewEmail}
           />
         ) : null}
-      </ModalFooter>
+      </Modal.Footer>
     </>
   );
 };

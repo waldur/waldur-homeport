@@ -1,5 +1,5 @@
 import { get } from '@waldur/core/api';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getTypeDisplay, getServiceIcon } from '@waldur/providers/registry';
@@ -86,9 +86,9 @@ export const formatCommaList = (items: string[]) =>
   items.length === 0 ? <>&ndash;</> : items.join(', ');
 
 export const formatSchedule = ({ resource }) => (
-  <Tooltip label={resource.schedule} id="scheduleTooltip">
+  <Tip label={resource.schedule} id="scheduleTooltip">
     {formatCrontab(resource.schedule)}
-  </Tooltip>
+  </Tip>
 );
 
 export const formatRetentionTime = (props: ResourceSummaryProps<Schedule>) =>

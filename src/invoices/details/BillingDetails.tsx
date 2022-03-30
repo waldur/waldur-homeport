@@ -27,13 +27,6 @@ import './BillingDetails.scss';
 const getBreadcrumbs = (customer, invoice): BreadcrumbItem[] => {
   return [
     {
-      label: translate('Organization workspace'),
-      state: 'organization.details',
-      params: {
-        uuid: customer.uuid,
-      },
-    },
-    {
       label:
         ENV.accountingMode === 'accounting'
           ? translate('Accounting records')

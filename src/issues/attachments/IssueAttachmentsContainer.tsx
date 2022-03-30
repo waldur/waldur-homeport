@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Card } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -65,14 +66,14 @@ export class PureIssueAttachmentsContainer extends Component<PureIssueAttachment
             </div>
           </div>
         )}
-        <div className="ibox">
-          <div className="ibox-title content-between-center">
+        <Card>
+          <Card.Header className="content-between-center">
             <h4>{translate('Attachments')}</h4>
             <div>
               <IssueReload issueUrl={issue.url} />
             </div>
-          </div>
-          <div className="ibox-content">
+          </Card.Header>
+          <Card.Body>
             {loading ? (
               <LoadingSpinner />
             ) : (
@@ -92,8 +93,8 @@ export class PureIssueAttachmentsContainer extends Component<PureIssueAttachment
                 />
               </div>
             )}
-          </div>
-        </div>
+          </Card.Body>
+        </Card>
       </Dropzone>
     );
   }

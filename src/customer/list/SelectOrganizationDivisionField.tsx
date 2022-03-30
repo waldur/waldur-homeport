@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import { components } from 'react-select';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
@@ -34,12 +35,10 @@ const SingleValue: FunctionComponent<any> = (props) => {
 
 export const SelectOrganizationDivisionField: FunctionComponent<SelectOrganizationDivisionFieldProps> =
   (props) => (
-    <div className={`form-group${props.isFilterForm ? ' col-sm-3' : ''}`}>
-      <label
-        className={`control-label${props.isFilterForm ? '' : ' col-sm-2'}`}
-      >
+    <Form.Group className={props.isFilterForm ? ' col-sm-3' : ''}>
+      <Form.Label className={props.isFilterForm ? '' : 'col-sm-2'}>
         {translate('Division')}
-      </label>
+      </Form.Label>
       <div className={props.isFilterForm ? '' : 'col-sm-8'}>
         <Field
           name="division"
@@ -62,5 +61,5 @@ export const SelectOrganizationDivisionField: FunctionComponent<SelectOrganizati
           )}
         />
       </div>
-    </div>
+    </Form.Group>
   );

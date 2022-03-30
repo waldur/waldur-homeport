@@ -7,9 +7,9 @@ interface FilterChoice {
 }
 
 interface ToogleButtonFilterProps {
-  defaultValue?: string | string[];
+  defaultValue?: any[];
   choices: FilterChoice[];
-  value: string;
+  value: any;
   onChange(values: any[]): void;
 }
 
@@ -23,7 +23,7 @@ export const ToogleButtonFilter: FunctionComponent<ToogleButtonFilterProps> = (
     onChange={props.onChange}
   >
     {props.choices.map((choice, index) => (
-      <ToggleButton key={index} value={choice.value} bsSize="small">
+      <ToggleButton key={index} value={choice.value} size="sm">
         {choice.label}
       </ToggleButton>
     ))}

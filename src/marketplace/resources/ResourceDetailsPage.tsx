@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
@@ -30,22 +30,7 @@ interface GetBreadcrumbsProps {
 
 const getBreadcrumbs = ({
   workspace,
-  customer,
-  resource,
 }: GetBreadcrumbsProps): BreadcrumbItem[] => [
-  {
-    label:
-      workspace === PROJECT_WORKSPACE
-        ? translate('Project workspace')
-        : translate('Organization workspace'),
-    state:
-      workspace === PROJECT_WORKSPACE
-        ? 'project.details'
-        : 'organization.details',
-    params: {
-      uuid: customer ? customer.uuid : resource.customer_uuid,
-    },
-  },
   {
     label:
       workspace === PROJECT_WORKSPACE
@@ -101,7 +86,7 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> =
 
     const resource = state.value;
     return (
-      <div className="ibox-content">
+      <Card.Body>
         <Row className="m-b-lg">
           <Col sm={12}>
             <ResourceDetailsHeader
@@ -115,6 +100,6 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> =
             <ResourceTabs resource={resource} />
           </Col>
         </Row>
-      </div>
+      </Card.Body>
     );
   };

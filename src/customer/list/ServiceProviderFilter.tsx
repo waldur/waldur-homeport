@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
@@ -11,8 +12,8 @@ export const getOptions = () => [
 ];
 
 export const ServiceProviderFilter: FunctionComponent = () => (
-  <div className="form-group col-sm-3">
-    <label className="control-label">{translate('Service provider')}</label>
+  <Form.Group className="col-sm-3">
+    <Form.Label>{translate('Service provider')}</Form.Label>
     <Field
       name="is_service_provider"
       component={(fieldProps) => (
@@ -25,5 +26,5 @@ export const ServiceProviderFilter: FunctionComponent = () => (
         />
       )}
     />
-  </div>
+  </Form.Group>
 );

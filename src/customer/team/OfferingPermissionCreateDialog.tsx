@@ -1,10 +1,5 @@
 import { useCallback } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
@@ -56,10 +51,10 @@ export const OfferingPermissionCreateDialog = reduxForm({
   );
   return (
     <form onSubmit={handleSubmit(saveUser)}>
-      <ModalHeader>
-        <ModalTitle>{translate('Grant permission')}</ModalTitle>
-      </ModalHeader>
-      <ModalBody>
+      <Modal.Header>
+        <Modal.Title>{translate('Grant permission')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <FormContainer submitting={submitting}>
           <AsyncSelectField
             name="user"
@@ -94,13 +89,13 @@ export const OfferingPermissionCreateDialog = reduxForm({
             {...datePickerOverlayContainerInDialogs()}
           />
         </FormContainer>
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <SubmitButton block={false} submitting={submitting}>
           {translate('Submit')}
         </SubmitButton>
         <CloseDialogButton />
-      </ModalFooter>
+      </Modal.Footer>
     </form>
   );
 });

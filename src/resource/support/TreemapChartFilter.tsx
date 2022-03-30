@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Panel } from 'react-bootstrap';
-import { useToggle } from 'react-use';
+import { Accordion } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
@@ -17,60 +16,54 @@ interface TreemapChartFilterProps {
 }
 
 export const PureTreemapChartFilter: FunctionComponent<TreemapChartFilterProps> =
-  (props) => {
-    const [open, togglePanel] = useToggle(true);
+  (props) => (
+    <Accordion defaultActiveKey="0">
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>
+          <h4 id="toggle-controls-label">
+            {open ? translate('Hide controls') : translate('Show controls')}
+          </h4>
+        </Accordion.Header>
 
-    return (
-      <Panel expanded={open}>
-        <Panel.Heading>
-          <Panel.Title>
-            <h4 id="toggle-controls-label" onClick={togglePanel}>
-              {open ? translate('Hide controls') : translate('Show controls')}
-            </h4>
-          </Panel.Title>
-        </Panel.Heading>
-
-        <Panel.Collapse>
-          <Panel.Body>
-            <div className="ibox">
-              <div className="ibox-content border-bottom">
-                <div className="row">
-                  <div className="col-sm-9">
-                    <Field
-                      name="accounting_is_running"
-                      component={AwesomeCheckboxField}
-                      label={translate('Show with running accounting')}
-                      disabled={props.loading}
-                    />
-                  </div>
-                  <div className="col-sm-3">
-                    <Field
-                      name="quota"
-                      component={(fieldProps) => (
-                        <QuotaSelector
-                          quotas={props.quotas}
-                          value={fieldProps.input.value}
-                          handleChange={fieldProps.input.onChange}
-                          disabled={props.loading}
-                        />
-                      )}
-                    />
-                  </div>
+        <Accordion.Body>
+          <div className="card">
+            <div className="card-body border-bottom">
+              <div className="row">
+                <div className="col-sm-9">
+                  <Field
+                    name="accounting_is_running"
+                    component={AwesomeCheckboxField}
+                    label={translate('Show with running accounting')}
+                    disabled={props.loading}
+                  />
                 </div>
-                <div className="row">
-                  <div className="col-sm-12 text-right">
-                    {translate('Total: {total}', {
-                      total: props.total,
-                    })}
-                  </div>
+                <div className="col-sm-3">
+                  <Field
+                    name="quota"
+                    component={(fieldProps) => (
+                      <QuotaSelector
+                        quotas={props.quotas}
+                        value={fieldProps.input.value}
+                        handleChange={fieldProps.input.onChange}
+                        disabled={props.loading}
+                      />
+                    )}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-12 text-right">
+                  {translate('Total: {total}', {
+                    total: props.total,
+                  })}
                 </div>
               </div>
             </div>
-          </Panel.Body>
-        </Panel.Collapse>
-      </Panel>
-    );
-  };
+          </div>
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
+  );
 
 export const TreemapChartFilter = reduxForm<
   {

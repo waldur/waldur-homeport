@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
@@ -23,10 +24,7 @@ import { Payment } from '@waldur/workspace/types';
 const PaymentUpdateDialog: FunctionComponent<
   InjectedFormProps & { resolve: Payment; submitRequest }
 > = (props) => (
-  <form
-    onSubmit={props.handleSubmit(props.submitRequest)}
-    className="form-horizontal"
-  >
+  <form onSubmit={props.handleSubmit(props.submitRequest)}>
     <ModalDialog
       title={translate('Update payment')}
       footer={
@@ -63,10 +61,8 @@ const PaymentUpdateDialog: FunctionComponent<
         ) : null}
 
         {props.resolve.invoice_uuid && props.resolve.invoice_period ? (
-          <div className="form-group">
-            <label className="control-label col-sm-2">
-              {translate('Invoice')}
-            </label>
+          <Form.Group>
+            <Form.Label className="col-sm-2">{translate('Invoice')}</Form.Label>
             <div className="col-sm-8" style={{ marginTop: '8px' }}>
               <Link
                 state="billingDetails"
@@ -79,7 +75,7 @@ const PaymentUpdateDialog: FunctionComponent<
                 {props.resolve.invoice_period}
               </Link>
             </div>
-          </div>
+          </Form.Group>
         ) : null}
       </FormContainer>
     </ModalDialog>

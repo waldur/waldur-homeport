@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Panel } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { FormName, FormSection } from 'redux-form';
 
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -20,14 +20,14 @@ interface OwnProps {
 }
 
 export const DataVolumePanel: FunctionComponent<OwnProps> = (props) => (
-  <Panel>
-    <Panel.Heading>
+  <Card>
+    <Card.Header>
       <RemoveButton onClick={() => props.onRemove(props.volumeIndex)} />
       <h4>
         {translate('Data volume #{index}', { index: props.volumeIndex + 1 })}
       </h4>
-    </Panel.Heading>
-    <Panel.Body>
+    </Card.Header>
+    <Card.Body>
       <FormSection name={props.volumePath}>
         {isFeatureVisible('rancher.volume_mount_point') && (
           <FormName>
@@ -47,6 +47,6 @@ export const DataVolumePanel: FunctionComponent<OwnProps> = (props) => (
         />
         <VolumeTypeGroup volumeTypes={props.volumeTypes} />
       </FormSection>
-    </Panel.Body>
-  </Panel>
+    </Card.Body>
+  </Card>
 );

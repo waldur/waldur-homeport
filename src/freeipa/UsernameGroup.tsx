@@ -1,9 +1,7 @@
-import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import {
   Col,
-  ControlLabel,
-  FormGroup,
+  Form,
   InputGroup,
   OverlayTrigger,
   Tooltip as BootstrapTooltip,
@@ -45,11 +43,7 @@ const validateUsername = (username: string) => {
 
 const UsernameField: FunctionComponent<WrappedFieldProps> = (props) => (
   <>
-    <div
-      className={classNames('m-b-sm', {
-        'input-group': ENV.plugins.WALDUR_FREEIPA.USERNAME_PREFIX !== '',
-      })}
-    >
+    <InputGroup className="m-b-sm">
       {ENV.plugins.WALDUR_FREEIPA.USERNAME_PREFIX && (
         <OverlayTrigger
           placement="top"
@@ -59,20 +53,20 @@ const UsernameField: FunctionComponent<WrappedFieldProps> = (props) => (
             </BootstrapTooltip>
           }
         >
-          <InputGroup.Addon>
+          <InputGroup.Text>
             {ENV.plugins.WALDUR_FREEIPA.USERNAME_PREFIX}
-          </InputGroup.Addon>
+          </InputGroup.Text>
         </OverlayTrigger>
       )}
       <InputField {...props} />
-    </div>
+    </InputGroup>
     {props.meta.touched && <FieldError error={props.meta.error} />}
   </>
 );
 
 export const UsernameGroup: FunctionComponent = () => (
-  <FormGroup>
-    <Col sm={3} componentClass={ControlLabel}>
+  <Form.Group>
+    <Col sm={3} as={Form.Label}>
       {translate('Username')}
     </Col>
     <Col sm={6}>
@@ -81,11 +75,11 @@ export const UsernameGroup: FunctionComponent = () => (
         validate={validateUsername}
         component={UsernameField}
       />
-      <p className="form-text text-muted">
+      <Form.Text muted={true}>
         {translate(
           'Please select a username that you will use for login into the Linux systems.',
         )}
-      </p>
+      </Form.Text>
     </Col>
-  </FormGroup>
+  </Form.Group>
 );

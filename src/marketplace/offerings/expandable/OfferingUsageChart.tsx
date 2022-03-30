@@ -41,7 +41,7 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
     <>{translate('Unable to load data')}</>
   ) : (
     <div
-      className="ibox-content m-t-md p-m"
+      className="card-body m-t-md p-m"
       style={{ maxWidth: '500px', minWidth: '100%' }}
     >
       <ResourceUsageTabs

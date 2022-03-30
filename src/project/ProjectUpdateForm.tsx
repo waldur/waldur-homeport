@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -40,10 +41,7 @@ interface ProjectUpdateFormProps extends TranslateProps, InjectedFormProps {
 
 export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
   (props) => (
-    <form
-      onSubmit={props.handleSubmit(props.updateProject)}
-      className="form-horizontal"
-    >
+    <form onSubmit={props.handleSubmit(props.updateProject)}>
       <FormContainer
         submitting={props.submitting}
         labelClass="col-sm-3"
@@ -101,7 +99,7 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
           disabled={props.isDisabled}
         />
       </FormContainer>
-      <div className="form-group">
+      <Form.Group>
         <div className="col-sm-offset-3 col-sm-9">
           <FieldError error={props.error} />
           <SubmitButton
@@ -110,7 +108,7 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
             label={props.translate('Update project details')}
           />
         </div>
-      </div>
+      </Form.Group>
     </form>
   );
 

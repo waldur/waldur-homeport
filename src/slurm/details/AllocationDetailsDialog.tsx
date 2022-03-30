@@ -1,10 +1,5 @@
 import { FunctionComponent } from 'react';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -15,14 +10,14 @@ export const AllocationDetailsDialog: FunctionComponent<{
   resolve: { resource };
 }> = ({ resolve: { resource } }) => (
   <>
-    <ModalHeader>
-      <ModalTitle>{translate('SLURM allocation usage')}</ModalTitle>
-    </ModalHeader>
-    <ModalBody>
+    <Modal.Header>
+      <Modal.Title>{translate('SLURM allocation usage')}</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
       <AllocationUsageTable resource={resource} />
-    </ModalBody>
-    <ModalFooter>
+    </Modal.Body>
+    <Modal.Footer>
       <CloseDialogButton />
-    </ModalFooter>
+    </Modal.Footer>
   </>
 );

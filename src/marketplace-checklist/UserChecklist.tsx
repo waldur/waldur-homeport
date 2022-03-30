@@ -14,7 +14,7 @@ import { AnswersTable } from './AnswersTable';
 import { useUserChecklist } from './useChecklist';
 
 const SubmitButton = ({ submitting, submit }) => (
-  <Button onClick={() => submit()} bsStyle="primary" disabled={submitting}>
+  <Button onClick={() => submit()} variant="primary" disabled={submitting}>
     {submitting && (
       <>
         <i className="fa fa-spinner fa-spin" />{' '}

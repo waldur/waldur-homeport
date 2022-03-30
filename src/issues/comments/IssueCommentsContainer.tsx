@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Card } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -92,15 +93,15 @@ export class PureIssueCommentsContainer extends Component<PureIssueCommentsConta
           />
         )}
         {this.props.renderHeader ? (
-          <div className="ibox">
-            <div className="ibox-title content-between-center">
+          <Card>
+            <div className="card-header content-between-center">
               <h4>{translate('Comments')}</h4>
               <div>
                 <IssueReload issueUrl={issue.url} />
               </div>
             </div>
-            <div className="ibox-content">{body}</div>
-          </div>
+            <Card.Body>{body}</Card.Body>
+          </Card>
         ) : (
           body
         )}

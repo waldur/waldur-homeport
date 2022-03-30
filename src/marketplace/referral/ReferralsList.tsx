@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/configs/default';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { REFERRALS_TABLE } from '@waldur/marketplace/referral/constants';
 import { ReferralTypeIcon } from '@waldur/marketplace/referral/ReferralTypeIcon';
@@ -33,9 +33,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('PID'),
       render: ({ row }) => (
-        <Tooltip label={row.relation_type} id="relation-type-label">
+        <Tip label={row.relation_type} id="relation-type-label">
           {row.pid}
-        </Tooltip>
+        </Tip>
       ),
     },
   ];

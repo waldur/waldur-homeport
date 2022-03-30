@@ -1,4 +1,4 @@
-import { ControlLabel, FormGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field, FieldArray } from 'redux-form';
 
 import { getLatinNameValidators } from '@waldur/core/validators';
@@ -30,24 +30,24 @@ export const CreateSecurityGroupForm = connectForm(
       >
         {asyncState.value ? (
           <>
-            <FormGroup>
-              <ControlLabel>{translate('Name')}</ControlLabel>
+            <Form.Group>
+              <Form.Label>{translate('Name')}</Form.Label>
               <Field
                 component={InputField}
                 name="name"
                 validate={getLatinNameValidators()}
                 maxLength={150}
               />
-            </FormGroup>
+            </Form.Group>
 
-            <FormGroup>
-              <ControlLabel>{translate('Description')}</ControlLabel>
+            <Form.Group>
+              <Form.Label>{translate('Description')}</Form.Label>
               <Field
                 component={InputField}
                 name="description"
                 maxLength={2000}
               />
-            </FormGroup>
+            </Form.Group>
 
             <FieldArray
               name="rules"
