@@ -129,3 +129,10 @@ export const pricesSelector = (state, props): PricesData => {
   const limits: Limits = getLimits(state, props);
   return combinePrices(plan, limits, {}, props.offering);
 };
+
+export const getLimitAmounts = (components: Component[]) => {
+  return components.reduce((acc, component) => {
+    acc[component.type] = component.amount;
+    return acc;
+  }, {});
+};

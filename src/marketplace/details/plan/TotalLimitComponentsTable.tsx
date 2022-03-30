@@ -15,11 +15,16 @@ import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 
 import { Component } from './types';
+import { getLimitAmounts } from './utils';
 
-const PureTotalLimitComponentsTable = (props: {
+interface TotalLimitComponentsTableProps {
   components: Component[];
   total: number;
-}) => {
+}
+
+const PureTotalLimitComponentsTable = (
+  props: TotalLimitComponentsTableProps,
+) => {
   const shouldConcealPrices = useSelector((state: RootState) =>
     isVisible(state, 'marketplace.conceal_prices'),
   );
@@ -87,14 +92,10 @@ const PureTotalLimitComponentsTable = (props: {
   );
 };
 
-const mapStateToProps = (_state, ownProps) => {
-  const values = ownProps.components.reduce((acc, component) => {
-    acc[component.type] = component.amount;
-    return acc;
-  }, {});
+const mapStateToProps = (_state, ownProps: TotalLimitComponentsTableProps) => {
   return {
     initialValues: {
-      limits: values,
+      limits: getLimitAmounts(ownProps.components),
     },
   };
 };
