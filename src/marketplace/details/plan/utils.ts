@@ -28,9 +28,17 @@ export const combinePrices = (
         limits[component.type]
       ) {
         amount = limits[component.type];
-      } else if (component.billing_type === 'usage') {
+      } else if (
+        component.billing_type === 'usage' &&
+        usages &&
+        usages[component.type]
+      ) {
         amount = usages[component.type] || 0;
-      } else if (component.billing_type === 'fixed') {
+      } else if (
+        component.billing_type === 'fixed' &&
+        plan.quotas &&
+        plan.quotas[component.type]
+      ) {
         amount = plan.quotas[component.type] || 0;
       }
       const price = plan.prices[component.type] || 0;
