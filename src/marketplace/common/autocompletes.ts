@@ -1,4 +1,5 @@
 import { ENV } from '@waldur/configs/default';
+import { getSelectData } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import {
   getCustomerList,
@@ -26,6 +27,24 @@ export const organizationAutocomplete = async (
     o: 'name',
   };
   const response = await getCustomerList(params);
+  return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
+};
+
+export const relatedCustomerAutocomplete = async (
+  customerId: string,
+  query: string,
+  prevOptions,
+  { page },
+) => {
+  const params = {
+    name: query,
+    page: page,
+    page_size: ENV.pageSize,
+  };
+  const response = await getSelectData(
+    `/marketplace-related-customers/${customerId}/`,
+    params,
+  );
   return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
 };
 
