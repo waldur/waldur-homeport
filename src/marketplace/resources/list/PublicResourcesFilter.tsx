@@ -7,7 +7,6 @@ import { createSelector } from 'reselect';
 
 import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
-import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { PUBLIC_RESOURCES_LIST_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { RootState } from '@waldur/store/reducers';
 import {
@@ -18,6 +17,7 @@ import {
 } from '@waldur/workspace/selectors';
 
 import { CategoryFilter } from './CategoryFilter';
+import { RelatedCustomerFilter } from './RelatedCustomerFilter';
 import { getStates, ResourceStateFilter } from './ResourceStateFilter';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -25,7 +25,7 @@ type StateProps = ReturnType<typeof mapStateToProps>;
 const PurePublicResourcesFilter: FunctionComponent<StateProps> = (props) => (
   <Row>
     <OfferingAutocomplete offeringFilter={props.offeringFilter} />
-    <OrganizationAutocomplete />
+    <RelatedCustomerFilter />
     <CategoryFilter />
     <ResourceStateFilter />
   </Row>
