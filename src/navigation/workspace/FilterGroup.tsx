@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 
+import './FilterGroup.scss';
+
 export const FilterGroup: FunctionComponent<{
   value;
   onChange;
