@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'enzyme';
 import { DropdownButton } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -25,27 +26,24 @@ interface PublicResourceActionsProps {
   refreshList(): void;
 }
 
-export const PublicResourceActions = ({
-  resource,
-  refreshList,
-}: PublicResourceActionsProps) => {
-  return (
-    <DropdownButton
-      title={translate('Actions')}
-      id="public-resources-list-actions-dropdown-btn"
-      className="dropdown-btn"
-      align="start"
-    >
-      {ActionsList.map((ActionComponent: any, index: number) => (
-        <ActionComponent
-          key={index}
-          resource={{
-            ...resource,
-            marketplace_resource_uuid: resource.uuid,
-          }}
-          refreshList={refreshList}
-        />
-      ))}
-    </DropdownButton>
-  );
-};
+export const PublicResourceActions: FunctionComponent<PublicResourceActionsProps> =
+  ({ resource, refreshList }) => {
+    return (
+      <DropdownButton
+        title={translate('Actions')}
+        variant="secondary"
+        size="sm"
+      >
+        {ActionsList.map((ActionComponent: any, index: number) => (
+          <ActionComponent
+            key={index}
+            resource={{
+              ...resource,
+              marketplace_resource_uuid: resource.uuid,
+            }}
+            refreshList={refreshList}
+          />
+        ))}
+      </DropdownButton>
+    );
+  };

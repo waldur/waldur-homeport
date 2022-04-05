@@ -21,10 +21,10 @@ export const ResourceActionComponent: FunctionComponent<ResourceActionComponentP
   (props) => (
     <DropdownButton
       title={translate('Actions')}
-      id="actions-dropdown-btn"
-      className="dropdown-btn"
       onToggle={props.onToggle}
       disabled={props.disabled}
+      variant="secondary"
+      size="sm"
     >
       {props.open ? (
         props.loading ? (
