@@ -22,7 +22,7 @@ const PureCloseDialogButton = ({
   label,
   className,
 }: Props) => (
-  <Button className={className} onClick={dismiss}>
+  <Button className={className} onClick={dismiss} variant="secondary">
     {label || translate('Cancel')}
   </Button>
 );

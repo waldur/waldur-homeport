@@ -44,6 +44,7 @@ export const GroupInvitationCancelButton: FunctionComponent<GroupInvitationCance
         action={callback}
         title={translate('Cancel')}
         icon="fa fa-ban"
+        className="btn-secondary"
       />
     );
   };

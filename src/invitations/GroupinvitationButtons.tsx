@@ -7,6 +7,8 @@ export const GroupInvitationButtons = ({ dismiss, submitRequest }) => (
     <Button variant="primary" onClick={submitRequest}>
       {translate('Submit')}
     </Button>
-    <Button onClick={dismiss}>{translate('Cancel')}</Button>
+    <Button onClick={dismiss} variant="secondary">
+      {translate('Cancel')}
+    </Button>
   </>
 );

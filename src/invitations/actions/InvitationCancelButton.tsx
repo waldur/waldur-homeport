@@ -65,6 +65,7 @@ export const InvitationCancelButton: FunctionComponent<{
       icon="fa fa-ban"
       disabled={isDisabled}
       tooltip={tooltip}
+      className="btn-secondary"
     />
   );
 };

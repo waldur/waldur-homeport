@@ -36,7 +36,11 @@ export const UserEmailChangeDialog: FunctionComponent<{
             )}
             {translate('Submit')}
           </Button>
-          <Button onClick={handleClose} disabled={submitting}>
+          <Button
+            onClick={handleClose}
+            disabled={submitting}
+            variant="secondary"
+          >
             {translate('Cancel')}
           </Button>
         </>
