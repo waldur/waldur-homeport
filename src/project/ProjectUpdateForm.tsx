@@ -19,7 +19,7 @@ import {
   datePickerOverlayContainerInDialogs,
   reactSelectMenuPortaling,
 } from '@waldur/form/utils';
-import { translate, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
 import { ProjectNameField } from './ProjectNameField';
 
@@ -30,7 +30,7 @@ interface ProjectUpdateFormData {
   backend_id: string;
 }
 
-interface ProjectUpdateFormProps extends TranslateProps, InjectedFormProps {
+interface ProjectUpdateFormProps extends InjectedFormProps {
   updateProject(data: ProjectUpdateFormData): Promise<void>;
   project_type?: string;
   isStaff: boolean;
@@ -49,7 +49,7 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
       >
         {ProjectNameField({ isDisabled: props.isDisabled })}
         <TextField
-          label={props.translate('Project description')}
+          label={translate('Project description')}
           name="description"
           disabled={props.isDisabled}
         />
@@ -78,7 +78,7 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
         )}
         {props.project_type && (
           <StaticField
-            label={props.translate('Project type')}
+            label={translate('Project type')}
             value={props.project_type}
           />
         )}
@@ -105,7 +105,7 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
           <SubmitButton
             submitting={props.submitting}
             disabled={props.invalid || props.isDisabled}
-            label={props.translate('Update project details')}
+            label={translate('Update project details')}
           />
         </div>
       </Form.Group>
