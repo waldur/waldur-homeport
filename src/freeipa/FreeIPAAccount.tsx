@@ -36,13 +36,9 @@ export const FreeIpaAccount = () => {
 
   if (error) return <>{translate('Unable to load data.')}</>;
 
-  return (
-    <div className="wrapper wrapper-content">
-      {profile ? (
-        <FreeIPAAccountEdit profile={profile} refreshProfile={refreshProfile} />
-      ) : (
-        <FreeIPAAccountCreate onProfileAdded={refreshProfile} />
-      )}
-    </div>
+  return profile ? (
+    <FreeIPAAccountEdit profile={profile} refreshProfile={refreshProfile} />
+  ) : (
+    <FreeIPAAccountCreate onProfileAdded={refreshProfile} />
   );
 };

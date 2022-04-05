@@ -19,7 +19,7 @@ interface OfferingDetailsProps {
 }
 
 export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => (
-  <div className="wrapper wrapper-content">
+  <>
     {props.offering.shared && (
       <div className="pull-right m-r-md">
         <Button size="sm" onClick={props.reInitResource}>
@@ -34,5 +34,5 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => (
         <OfferingTabsComponent tabs={props.tabs} />
       </Col>
     </Row>
-  </div>
+  </>
 );

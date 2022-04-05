@@ -30,7 +30,7 @@ export const BillingRecordDetails: FunctionComponent<BillingRecordDetailsProps> 
       <div className="row">
         <div className="col-lg-12">
           <div className="invoice-details">
-            <div className="wrapper wrapper-content invoice-details-content">
+            <div className="invoice-details-content">
               <div className="p-xs">
                 <div className="row">
                   <div className="col-sm-6 text-right col-sm-offset-6">

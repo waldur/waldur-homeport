@@ -31,14 +31,12 @@ export const ServiceProviderOfferingsListExpandableRow: FunctionComponent<{
   ) : error ? (
     <h3>{translate('Unable to load offering details.')}</h3>
   ) : tabs.length ? (
-    <div className="wrapper wrapper-content">
-      <div className="white-box">
-        <Row>
-          <Col lg={12}>
-            <OfferingTabsComponent tabs={tabs} />
-          </Col>
-        </Row>
-      </div>
+    <div className="white-box">
+      <Row>
+        <Col lg={12}>
+          <OfferingTabsComponent tabs={tabs} />
+        </Col>
+      </Row>
     </div>
   ) : null;
 };

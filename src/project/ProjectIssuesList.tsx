@@ -21,14 +21,12 @@ export const ProjectIssuesList: FunctionComponent = () => {
   useTitle(translate('Issues'));
   useSupport();
   return (
-    <div className="wrapper wrapper-content">
-      <Row>
-        <Col md={12}>
-          <Panel>
-            <ProjectIssuesListComponent hiddenColumns={['customer']} />
-          </Panel>
-        </Col>
-      </Row>
-    </div>
+    <Row>
+      <Col md={12}>
+        <Panel>
+          <ProjectIssuesListComponent hiddenColumns={['customer']} />
+        </Panel>
+      </Col>
+    </Row>
   );
 };

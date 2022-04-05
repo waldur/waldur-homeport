@@ -49,40 +49,38 @@ const UserDashboardContainer: React.FC<StateProps & DispatchProps> = (
         title={translate('Welcome, {user}!', { user: user.full_name })}
       />
       <UserDashboardChart user={user} hasChecklists={asyncState.value > 0} />
-      <div className="wrapper wrapper-content">
-        {asyncState.value > 0 && (
-          <Panel title={translate('Checklists')}>
-            <CategoryUserList />
-          </Panel>
-        )}
-        <Panel title={translate('Marketplace')}>
-          <CategoriesList {...props.categories} />
+      {asyncState.value > 0 && (
+        <Panel title={translate('Checklists')}>
+          <CategoryUserList />
         </Panel>
-        {renderPrompt && (
-          <div className="row">
-            <div className="col-md-12">
-              <CustomerCreatePromptContainer />
-            </div>
-          </div>
-        )}
-        <div className="row">
-          <div className="col-md-6">
-            <Panel title={translate('Owned organizations')}>
-              <CustomerPermissions />
-            </Panel>
-          </div>
-          <div className="col-md-6">
-            <Panel title={translate('Managed projects')}>
-              <ProjectPermissions />
-            </Panel>
-          </div>
-        </div>
+      )}
+      <Panel title={translate('Marketplace')}>
+        <CategoriesList {...props.categories} />
+      </Panel>
+      {renderPrompt && (
         <div className="row">
           <div className="col-md-12">
-            <Panel title={translate('Audit logs')}>
-              <CurrentUserEvents />
-            </Panel>
+            <CustomerCreatePromptContainer />
           </div>
+        </div>
+      )}
+      <div className="row">
+        <div className="col-md-6">
+          <Panel title={translate('Owned organizations')}>
+            <CustomerPermissions />
+          </Panel>
+        </div>
+        <div className="col-md-6">
+          <Panel title={translate('Managed projects')}>
+            <ProjectPermissions />
+          </Panel>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <Panel title={translate('Audit logs')}>
+            <CurrentUserEvents />
+          </Panel>
         </div>
       </div>
     </>

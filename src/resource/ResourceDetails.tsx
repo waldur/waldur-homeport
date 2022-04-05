@@ -26,45 +26,43 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
   }
 
   return (
-    <div className="wrapper wrapper-content">
-      <Card.Body>
-        <div className="row m-b-md">
-          <div className="col-lg-12">
-            <div className="pull-right btn-group">
-              <ResourceAccessButton resource={resource} />
-              <ActionButtonResource
-                url={resource.url}
-                refreshResource={refreshResource}
+    <Card.Body>
+      <div className="row m-b-md">
+        <div className="col-lg-12">
+          <div className="pull-right btn-group">
+            <ResourceAccessButton resource={resource} />
+            <ActionButtonResource
+              url={resource.url}
+              refreshResource={refreshResource}
+            />
+            <ResourceRefreshButton refreshResource={refreshResource} />
+            <OpenStackInstanceTenantButton resource={resource} />
+            {resource.marketplace_offering_uuid && (
+              <OfferingDetailsButton
+                offering={resource.marketplace_offering_uuid}
               />
-              <ResourceRefreshButton refreshResource={refreshResource} />
-              <OpenStackInstanceTenantButton resource={resource} />
-              {resource.marketplace_offering_uuid && (
-                <OfferingDetailsButton
-                  offering={resource.marketplace_offering_uuid}
-                />
-              )}
-              {resource.is_usage_based && (
-                <ResourceShowUsageButton resource={resource} />
-              )}
-              {resource.marketplace_plan_uuid && (
-                <PlanDetailsButton
-                  resource={resource.marketplace_resource_uuid}
-                />
-              )}
-            </div>
-            <h2>{header}</h2>
+            )}
+            {resource.is_usage_based && (
+              <ResourceShowUsageButton resource={resource} />
+            )}
+            {resource.marketplace_plan_uuid && (
+              <PlanDetailsButton
+                resource={resource.marketplace_resource_uuid}
+              />
+            )}
           </div>
+          <h2>{header}</h2>
         </div>
-        <div className="row m-b-md">
-          <ResourceSummary resource={resource} />
+      </div>
+      <div className="row m-b-md">
+        <ResourceSummary resource={resource} />
+      </div>
+      <div className="row">
+        <div className="col-lg-12">
+          <ResourceTabs resource={resource} />
         </div>
-        <div className="row">
-          <div className="col-lg-12">
-            <ResourceTabs resource={resource} />
-          </div>
-        </div>
-      </Card.Body>
-    </div>
+      </div>
+    </Card.Body>
   );
 };
 

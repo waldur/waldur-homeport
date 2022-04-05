@@ -16,7 +16,7 @@ interface SupportSummaryProps {
 }
 
 export const SupportDetails: React.FC<SupportSummaryProps> = (props) => (
-  <div className="wrapper wrapper-content">
+  <>
     <Card.Body>
       <Row className="m-b-md">
         <Col lg={12}>
@@ -41,5 +41,5 @@ export const SupportDetails: React.FC<SupportSummaryProps> = (props) => (
         </Col>
       </Row>
     </Card.Body>
-  </div>
+  </>
 );
