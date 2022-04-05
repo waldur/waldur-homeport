@@ -1,10 +1,11 @@
 import { FunctionComponent } from 'react';
+import { Variant } from 'react-bootstrap/types';
 
-import { StateIndicator, StateVariant } from '@waldur/core/StateIndicator';
+import { StateIndicator } from '@waldur/core/StateIndicator';
 
 export type BackupStateType = 'Unsupported' | 'Unset' | 'Warning' | 'OK';
 
-const LABEL_CLASSES: { [key in BackupStateType]: StateVariant } = {
+const LABEL_CLASSES: { [key in BackupStateType]: Variant } = {
   Unsupported: 'plain',
   Unset: 'danger',
   Warning: 'warning',

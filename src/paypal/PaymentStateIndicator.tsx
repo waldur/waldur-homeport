@@ -1,10 +1,11 @@
 import { FunctionComponent } from 'react';
+import { Variant } from 'react-bootstrap/types';
 
-import { StateIndicator, StateVariant } from '@waldur/core/StateIndicator';
+import { StateIndicator } from '@waldur/core/StateIndicator';
 
 export type PaymentStateType = 'Erred' | 'Approved' | 'Created' | 'Cancelled';
 
-const LABEL_CLASSES: { [key in PaymentStateType]: StateVariant } = {
+const LABEL_CLASSES: { [key in PaymentStateType]: Variant } = {
   Erred: 'warning',
   Approved: 'primary',
   Created: 'primary',
