@@ -12,11 +12,11 @@ import { CustomerDetailsPanel } from './CustomerDetailsPanel';
 export const CustomerManage: FunctionComponent = () => {
   useTitle(translate('Manage organization'));
   return (
-    <div style={{ paddingLeft: 10 }}>
+    <>
       <CustomerDetailsPanel />
       <PaymentProfilesPanel />
       <PaymentsPanel />
       <CustomerActionsPanel />
-    </div>
+    </>
   );
 };

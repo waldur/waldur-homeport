@@ -30,36 +30,34 @@ export const UserDashboardChart: FunctionComponent<UserDashboardChart> = ({
   ) : error ? (
     <>{translate('Unable to load user monthly activity data.')}</>
   ) : (
-    <div style={{ paddingLeft: 10 }}>
-      <Row>
-        <Col md={4}>
-          <DashboardCounter
-            label={value.events.title}
-            value={value.events.current}
-          >
-            <EChart options={value.events.chart} height="100px" />
-          </DashboardCounter>
-        </Col>
-        <Col md={4}>
-          {hasChecklists ? (
-            <>
-              <DashboardCounter
-                label={translate('Average of all checklists')}
-                value={`${value.checklists.score}%`}
-              >
-                <PieChart
-                  positive={value.checklists.score}
-                  negative={100 - value.checklists.score}
-                  height="100px"
-                />
-              </DashboardCounter>
-            </>
-          ) : null}
-        </Col>
-        <Col md={4}>
-          <UserActions user={user} />
-        </Col>
-      </Row>
-    </div>
+    <Row>
+      <Col md={4}>
+        <DashboardCounter
+          label={value.events.title}
+          value={value.events.current}
+        >
+          <EChart options={value.events.chart} height="100px" />
+        </DashboardCounter>
+      </Col>
+      <Col md={4}>
+        {hasChecklists ? (
+          <>
+            <DashboardCounter
+              label={translate('Average of all checklists')}
+              value={`${value.checklists.score}%`}
+            >
+              <PieChart
+                positive={value.checklists.score}
+                negative={100 - value.checklists.score}
+                height="100px"
+              />
+            </DashboardCounter>
+          </>
+        ) : null}
+      </Col>
+      <Col md={4}>
+        <UserActions user={user} />
+      </Col>
+    </Row>
   );
 };

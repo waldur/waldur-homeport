@@ -45,28 +45,24 @@ export const ProjectDashboard: FunctionComponent<ProjectDashboardProps> = (
           project: props.project.name,
         })}
       />
-      <div style={{ paddingLeft: 10 }}>
-        <Row>
-          <Col md={8}>
-            {!shouldConcealPrices && (
-              <ProjectCounters project={props.project} />
-            )}
-          </Col>
-          <Col md={4}>
-            <ProjectActions {...props} />
-          </Col>
-        </Row>
-        <ComplianceChecklists />
-        <CustomerBookingManagement />
-        <Panel title={translate('Resources')}>
-          <ProjectResourcesFilter />
-          <ProjectResourcesList />
-        </Panel>
-        <CategoryResourcesList
-          scopeType={PROJECT_WORKSPACE}
-          scope={props.project}
-        />
-      </div>
+      <Row>
+        <Col md={8}>
+          {!shouldConcealPrices && <ProjectCounters project={props.project} />}
+        </Col>
+        <Col md={4}>
+          <ProjectActions {...props} />
+        </Col>
+      </Row>
+      <ComplianceChecklists />
+      <CustomerBookingManagement />
+      <Panel title={translate('Resources')}>
+        <ProjectResourcesFilter />
+        <ProjectResourcesList />
+      </Panel>
+      <CategoryResourcesList
+        scopeType={PROJECT_WORKSPACE}
+        scope={props.project}
+      />
     </>
   );
 };
