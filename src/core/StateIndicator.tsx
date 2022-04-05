@@ -1,20 +1,13 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
+import { Variant } from 'react-bootstrap/types';
 
 import { Tip } from '@waldur/core/Tooltip';
-
-export type StateVariant =
-  | 'primary'
-  | 'plain'
-  | 'danger'
-  | 'warning'
-  | 'success'
-  | 'info';
 
 export interface StateIndicatorProps {
   label: string;
   tooltip?: string;
-  variant: StateVariant;
+  variant: Variant;
   striped?: boolean;
   active?: boolean;
 }
