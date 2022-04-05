@@ -1396,6 +1396,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
@@ -4703,6 +4704,7 @@ msgstr ""
 #: src/issues/create/CallerGroup.tsx
 #: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
+#: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
 msgid "No organizations"
 msgstr ""
@@ -7723,6 +7725,7 @@ msgstr ""
 #: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
+#: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
 #: src/user/SelectAffiliationDialog.tsx
 msgid "Select organization..."
