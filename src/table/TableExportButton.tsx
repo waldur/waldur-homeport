@@ -11,7 +11,7 @@ export const TableExportButton: FunctionComponent<TableExportButtonProps> = ({
   exportAs,
 }) => {
   return (
-    <Dropdown id="export-button">
+    <Dropdown>
       <Dropdown.Toggle variant="secondary" size="sm">
         <i className="fa fa-download fixed-width-icon" />
         {translate('Export as')}
