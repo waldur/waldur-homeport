@@ -16,8 +16,10 @@ export const Panel: React.FC<PanelProps> = ({
   <Card className={className}>
     {title && (
       <Card.Header>
-        <h5>{title}</h5>
-        {actions}
+        <Card.Title>
+          <h3>{title}</h3>
+        </Card.Title>
+        <div className="card-toolbar">{actions}</div>
       </Card.Header>
     )}
     <Card.Body>{children}</Card.Body>

@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { Card } from 'react-bootstrap';
 
 interface DashboardCounterProps {
   value: React.ReactNode;
@@ -9,17 +10,17 @@ export const DashboardCounter: FunctionComponent<DashboardCounterProps> = (
   props,
 ) =>
   props.value !== undefined ? (
-    <div className="card card-xl-stretch-50 mb-5 mb-xl-8">
-      <div className="card-body p-0 d-flex justify-content-between flex-column overflow-hidden">
-        <div className="d-flex flex-stack flex-wrap flex-grow-1 px-9 pt-9 pb-3">
-          <div className="me-2">
-            <span className="fw-bolder text-gray-800 d-block fs-3">
-              {props.label}
-            </span>
-          </div>
-          <div className="fw-bolder fs-3 text-primary">{props.value}</div>
+    <Card>
+      <Card.Header>
+        <Card.Title>
+          <h3>{props.label}</h3>
+        </Card.Title>
+        <div className="card-toolbar">
+          <h3>{props.value}</h3>
         </div>
-        {props.children}
-      </div>
-    </div>
+      </Card.Header>
+      <Card.Body>
+        <div className="mb-5">{props.children}</div>
+      </Card.Body>
+    </Card>
   ) : null;

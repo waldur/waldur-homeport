@@ -1,4 +1,5 @@
 import React from 'react';
+import { Col, Row } from 'react-bootstrap';
 import { connect, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -54,35 +55,37 @@ const UserDashboardContainer: React.FC<StateProps & DispatchProps> = (
           <CategoryUserList />
         </Panel>
       )}
-      <Panel title={translate('Marketplace')}>
-        <CategoriesList {...props.categories} />
-      </Panel>
+      <div className="mt-5">
+        <Panel title={translate('Marketplace')}>
+          <CategoriesList {...props.categories} />
+        </Panel>
+      </div>
       {renderPrompt && (
-        <div className="row">
-          <div className="col-md-12">
+        <Row className="mt-5">
+          <Col md={12}>
             <CustomerCreatePromptContainer />
-          </div>
-        </div>
+          </Col>
+        </Row>
       )}
-      <div className="row">
-        <div className="col-md-6">
+      <Row className="mt-5">
+        <Col md={6}>
           <Panel title={translate('Owned organizations')}>
             <CustomerPermissions />
           </Panel>
-        </div>
-        <div className="col-md-6">
+        </Col>
+        <Col md={6}>
           <Panel title={translate('Managed projects')}>
             <ProjectPermissions />
           </Panel>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-md-12">
+        </Col>
+      </Row>
+      <Row className="mt-5">
+        <Col md={12}>
           <Panel title={translate('Audit logs')}>
             <CurrentUserEvents />
           </Panel>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </>
   );
 };

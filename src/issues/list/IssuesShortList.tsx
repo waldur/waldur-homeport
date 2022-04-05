@@ -22,9 +22,12 @@ export const IssuesShortList: FunctionComponent = () => {
     loadData();
   });
   return (
-    <div className="card float-e-margins">
+    <Card>
       <Card.Header>
-        <span className="pull-right">
+        <Card.Title>
+          <h3>{translate('Reported by me')}</h3>
+        </Card.Title>
+        <div className="card-toolbar">
           <Link className="btn btn-secondary" state="support.list">
             <small>
               <i className="fa fa-list" />
@@ -37,8 +40,7 @@ export const IssuesShortList: FunctionComponent = () => {
             </small>{' '}
             {translate('Refresh')}
           </Button>
-        </span>
-        <h5>{translate('Reported by me')}</h5>
+        </div>
       </Card.Header>
       <Card.Body>
         {loading ? (
@@ -69,6 +71,6 @@ export const IssuesShortList: FunctionComponent = () => {
           </table>
         )}
       </Card.Body>
-    </div>
+    </Card>
   );
 };

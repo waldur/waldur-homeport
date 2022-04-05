@@ -26,15 +26,19 @@ export const OfferingOptions: FC<any> = (props) => {
         {props.fields.map((option, index) => (
           <Card key={index}>
             <Card.Header>
-              <RemoveButton
-                onClick={() => props.fields.remove(index)}
-                disabled={props.readOnly}
-              />
-              <h4>
-                {translate('User input field #{index}', {
-                  index: index + 1,
-                })}
-              </h4>
+              <Card.Title>
+                <h3>
+                  {translate('User input field #{index}', {
+                    index: index + 1,
+                  })}
+                </h3>
+              </Card.Title>
+              <div className="card-toolbar">
+                <RemoveButton
+                  onClick={() => props.fields.remove(index)}
+                  disabled={props.readOnly}
+                />
+              </div>
             </Card.Header>
             <Card.Body>
               <OptionForm option={option} readOnly={props.readOnly} />

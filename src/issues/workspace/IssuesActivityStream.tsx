@@ -34,9 +34,12 @@ export const IssuesActivityStream: FunctionComponent = () => {
       }),
     );
   return (
-    <div className="card float-e-margins">
+    <Card>
       <Card.Header>
-        <span className="pull-right">
+        <Card.Title>
+          <h3>{translate('Activity stream')}</h3>
+        </Card.Title>
+        <div className="card-toolbar">
           <Button size="sm">
             <small>
               <i className="fa fa-list"></i>
@@ -50,9 +53,7 @@ export const IssuesActivityStream: FunctionComponent = () => {
             </small>{' '}
             <>{translate('Refresh')}</>
           </Button>
-        </span>
-
-        <h5>{translate('Activity stream')}</h5>
+        </div>
       </Card.Header>
       <Card.Body>
         {loading ? (
@@ -111,6 +112,6 @@ export const IssuesActivityStream: FunctionComponent = () => {
           </div>
         )}
       </Card.Body>
-    </div>
+    </Card>
   );
 };

@@ -50,17 +50,23 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => {
         {props.fields.map((component, index) => (
           <Card key={index}>
             <Card.Header>
-              {!props.builtinComponents.length && (
-                <RemoveButton
-                  onClick={() => {
-                    props.removeOfferingComponent(props.fields.get(index).type);
-                    props.fields.remove(index);
-                  }}
-                />
-              )}
-              <h4>
-                {props.translate('Component #{index}', { index: index + 1 })}
-              </h4>
+              <Card.Title>
+                <h3>
+                  {props.translate('Component #{index}', { index: index + 1 })}
+                </h3>
+              </Card.Title>
+              <div className="card-toolbar">
+                {!props.builtinComponents.length && (
+                  <RemoveButton
+                    onClick={() => {
+                      props.removeOfferingComponent(
+                        props.fields.get(index).type,
+                      );
+                      props.fields.remove(index);
+                    }}
+                  />
+                )}
+              </div>
             </Card.Header>
             <Card.Body>
               <FormSection name={component}>

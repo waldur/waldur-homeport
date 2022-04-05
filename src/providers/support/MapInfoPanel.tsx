@@ -12,8 +12,10 @@ export const MapInfoPanel = withTranslation(
     <div id="flow-map-panel">
       <Card>
         <Card.Header>
-          <h5>{translate('Provider')}</h5>
-          <div className="card-tools">
+          <Card.Title>
+            <h3>{translate('Provider')}</h3>
+          </Card.Title>
+          <div className="card-toolbar">
             <a className="close-link me-1" onClick={onPanelClose}>
               <i className="fa fa-times" />
             </a>

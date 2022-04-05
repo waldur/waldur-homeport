@@ -198,31 +198,35 @@ export const IssueQuickCreate = reduxForm<IssueFormData>({
   );
 
   return (
-    <form className="card float-e-margins" onSubmit={handleSubmit(createIssue)}>
-      <Card.Header>
-        <h5>{translate('Create request')}</h5>
-      </Card.Header>
-      <Card.Body>
-        <TypeGroup layout="vertical" disabled={submitting} />
-        <SummaryGroup layout="vertical" disabled={submitting} />
-        <DescriptionGroup layout="vertical" disabled={submitting} />
-        <OrganizationGroup disabled={submitting} />
-        <ProjectGroup
-          disabled={submitting}
-          customer={useSelector(customerSelector)}
-          formId={ISSUE_QUICK_CREATE_FORM_ID}
-        />
-        <ResourceGroup
-          disabled={submitting}
-          project={useSelector(projectSelector)}
-          formId={ISSUE_QUICK_CREATE_FORM_ID}
-        />
-        <div className="text-right">
-          <SubmitButton submitting={submitting} block={false}>
-            {translate('Create request')}
-          </SubmitButton>
-        </div>
-      </Card.Body>
-    </form>
+    <Card>
+      <form onSubmit={handleSubmit(createIssue)}>
+        <Card.Header>
+          <Card.Title>
+            <h3>{translate('Create request')}</h3>
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <TypeGroup layout="vertical" disabled={submitting} />
+          <SummaryGroup layout="vertical" disabled={submitting} />
+          <DescriptionGroup layout="vertical" disabled={submitting} />
+          <OrganizationGroup disabled={submitting} />
+          <ProjectGroup
+            disabled={submitting}
+            customer={useSelector(customerSelector)}
+            formId={ISSUE_QUICK_CREATE_FORM_ID}
+          />
+          <ResourceGroup
+            disabled={submitting}
+            project={useSelector(projectSelector)}
+            formId={ISSUE_QUICK_CREATE_FORM_ID}
+          />
+          <div className="text-right">
+            <SubmitButton submitting={submitting} block={false}>
+              {translate('Create request')}
+            </SubmitButton>
+          </div>
+        </Card.Body>
+      </form>
+    </Card>
   );
 });

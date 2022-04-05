@@ -36,7 +36,9 @@ const PureOfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
       <Col smOffset={offset} sm={col}>
         <Card>
           <Card.Header>
-            <h4>{props.translate('Availability')}</h4>
+            <Card.Title>
+              <h3>{props.translate('Availability')}</h3>
+            </Card.Title>
           </Card.Header>
           <Card.Body>
             <CalendarSettings />

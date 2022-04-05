@@ -17,8 +17,10 @@ export const EnvironmentVariablePanel: FunctionComponent<OwnProps> = (
 ) => (
   <Card>
     <Card.Header>
+      <Card.Title>
+        <h3>{translate('Variable #{index}', { index: props.index + 1 })}</h3>
+      </Card.Title>
       <RemoveButton onClick={() => props.onRemove(props.index)} />
-      <h4>{translate('Variable #{index}', { index: props.index + 1 })}</h4>
     </Card.Header>
     <Card.Body>
       <FormSection name={props.variable}>

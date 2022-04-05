@@ -67,9 +67,11 @@ export class PureIssueAttachmentsContainer extends Component<PureIssueAttachment
           </div>
         )}
         <Card>
-          <Card.Header className="content-between-center">
-            <h4>{translate('Attachments')}</h4>
-            <div>
+          <Card.Header>
+            <Card.Title>
+              <h3>{translate('Attachments')}</h3>
+            </Card.Title>
+            <div className="card-toolbar">
               <IssueReload issueUrl={issue.url} />
             </div>
           </Card.Header>
