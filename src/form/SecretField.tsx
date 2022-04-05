@@ -5,6 +5,8 @@ import { useToggle } from 'react-use';
 
 import { FormField } from './types';
 
+import './SecretField.scss';
+
 interface SecretFieldProps extends FormField {
   placeholder?: string;
 }
