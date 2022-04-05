@@ -119,7 +119,6 @@
     "@types/marked": "^4.0.1",
     "@types/qs": "^6.9.5",
     "@types/react": "^16.8.8",
-    "@types/react-bootstrap": "^0.32.29",
     "@types/react-dom": "^16.8.3",
     "@types/react-loadable": "^5.5.4",
     "@types/react-redux": "^7.1.4",
