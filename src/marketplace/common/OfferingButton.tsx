@@ -27,7 +27,7 @@ export const OfferingButton: FunctionComponent<OfferingButtonProps> = (
         disabled={props.disabled}
         onClick={props.onClick}
       >
-        {props.isAddingItem && <i className="fa fa-spinner fa-spin m-r-xs" />}
+        {props.isAddingItem && <i className="fa fa-spinner fa-spin me-1" />}
         <i className={props.icon} /> {props.title}
       </Button>
     );

@@ -46,7 +46,7 @@ export const PureBackendHealthStatusIndicator: FunctionComponent<any> = (
 ) => {
   const { value } = useAsync(getBackendHealthStatus, []);
   return value ? (
-    <span className="m-r-sm">
+    <span className="me-2">
       <a onClick={() => props.openDialog()}>
         {isWorking(value) ? (
           <i className="fa fa-check-circle text-success" />

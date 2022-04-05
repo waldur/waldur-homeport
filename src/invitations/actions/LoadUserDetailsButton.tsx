@@ -13,7 +13,7 @@ export const LoadUserDetailsButton: FunctionComponent<{ loading; onClick }> = ({
       <Button variant="primary" disabled={loading} onClick={onClick}>
         {loading && (
           <>
-            <i className="fa fa-spinner fa-spin m-r-xs" />{' '}
+            <i className="fa fa-spinner fa-spin me-1" />{' '}
           </>
         )}
         {translate('Show user details')}

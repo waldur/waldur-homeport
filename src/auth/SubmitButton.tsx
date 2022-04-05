@@ -19,7 +19,7 @@ export const SubmitButton: React.FC<SubmitButtonProps> = ({
   <Button type="submit" variant={variant} disabled={submitting || invalid}>
     {submitting && (
       <>
-        <i className="fa fa-spinner fa-spin m-r-xs" />{' '}
+        <i className="fa fa-spinner fa-spin me-1" />{' '}
       </>
     )}
     {label}

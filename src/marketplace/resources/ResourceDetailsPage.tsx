@@ -87,7 +87,7 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> =
     const resource = state.value;
     return (
       <Card.Body>
-        <Row className="m-b-lg">
+        <Row className="mb-4">
           <Col sm={12}>
             <ResourceDetailsHeader
               resource={resource}

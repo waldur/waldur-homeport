@@ -22,7 +22,7 @@ const InitialCreateOrganizationButton = () => {
 export const EmptyOrganizationsPlaceholder: FunctionComponent = () => (
   <Row>
     <div className="middle-box text-center">
-      <h3 className="font-bold m-b-lg">
+      <h3 className="font-bold mb-4">
         {translate('You do not belong to any organization yet')}.
       </h3>
       <InitialCreateOrganizationButton />

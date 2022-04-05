@@ -78,7 +78,7 @@ const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = (props) => {
         <div className="col-sm-offset-3 col-sm-9">
           <FieldError error={props.error} />
           <SubmitButton
-            className="btn btn-primary m-r-sm m-b-sm m-t-sm"
+            className="btn btn-primary me-2 mb-2 mt-2"
             submitting={props.submitting}
             label={translate('Add key')}
           />

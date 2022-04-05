@@ -18,7 +18,7 @@ interface SupportSummaryProps {
 export const SupportDetails: React.FC<SupportSummaryProps> = (props) => (
   <>
     <Card.Body>
-      <Row className="m-b-md">
+      <Row className="mb-3">
         <Col lg={12}>
           <ResourceActions
             resource={props.resource}

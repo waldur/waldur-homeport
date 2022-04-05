@@ -16,11 +16,11 @@ interface PublicOfferingAttributesSectionProps {
 export const PublicOfferingAttributesSection: FunctionComponent<PublicOfferingAttributesSectionProps> =
   ({ offering }) =>
     shouldRenderAttributesSection(offering) ? (
-      <div className="bordered publicOfferingAttributesSection m-b-sm">
+      <div className="bordered publicOfferingAttributesSection mb-2">
         {offering.datacite_doi && (
           <div>
             <b>{translate('Datacite DOI')}:</b>
-            <span className="m-l-sm m-r">{offering.datacite_doi}</span>
+            <span className="ms-2 m-r">{offering.datacite_doi}</span>
             <CopyToClipboard value={offering.datacite_doi} />
           </div>
         )}
@@ -28,7 +28,7 @@ export const PublicOfferingAttributesSection: FunctionComponent<PublicOfferingAt
           <div className="publicOfferingAttributesSection__referralCount">
             <div>
               <b>{translate('Referral count')}:</b>
-              <span className="m-l-sm">{offering.citation_count}</span>
+              <span className="ms-2">{offering.citation_count}</span>
             </div>
             {offering.citation_count > 0 && (
               <ReferralDetailsButton offering={offering} />

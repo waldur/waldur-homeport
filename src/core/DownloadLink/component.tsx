@@ -22,7 +22,7 @@ export class PureDownloadLink extends Component<DownloadLinkProps> {
           onClick={onDownload}
           className={classNames({ disabled: loading }, this.props.className)}
         >
-          <i className="fa fa-download m-r-xs" /> {label}
+          <i className="fa fa-download me-1" /> {label}
         </a>{' '}
         {loading && <i className="text-info fa fa-spinner fa-spin" />}
         {loaded && <i className="text-success fa fa-check" />}

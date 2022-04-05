@@ -56,14 +56,14 @@ export const IssueDetails: FunctionComponent = () => {
     <>
       <Card>
         <Card.Body>
-          <div className="row m-b-md">
+          <div className="row mb-3">
             <div className="col-lg-12">
               <h2>
                 {issue.key ? `${issue.key}: ${issue.summary}` : issue.summary}
               </h2>
             </div>
           </div>
-          <div className="row m-b-md">
+          <div className="row mb-3">
             <Col sm={12}>
               <ResourceDetailsTable>
                 <Field

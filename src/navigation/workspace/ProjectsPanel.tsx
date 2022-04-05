@@ -54,7 +54,7 @@ const EmptyProjectsPlaceholder: FunctionComponent = () => (
 const ProjectsHeader: FunctionComponent<{
   selectedOrganization?: Customer;
 }> = ({ selectedOrganization }) => (
-  <h3 className="m-b-md">
+  <h3 className="mb-3">
     {translate('Projects ({count})', {
       count: selectedOrganization?.projects?.length || 0,
     })}

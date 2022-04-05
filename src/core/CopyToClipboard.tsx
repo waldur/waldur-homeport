@@ -14,7 +14,7 @@ export const CopyToClipboard: FunctionComponent<{ value }> = ({ value }) => {
   }, [dispatch, value]);
 
   return (
-    <p className="m-b-sm m-t-sm">
+    <p className="mb-2 mt-2">
       <a onClick={onClick}>
         <i className="fa fa-copy fa-lg" /> {translate('Copy to clipboard')}
       </a>

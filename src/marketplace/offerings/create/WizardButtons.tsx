@@ -22,7 +22,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
   invalid,
   submitLabel,
 }) => (
-  <div className="display-flex justify-content-between m-t-md">
+  <div className="display-flex justify-content-between mt-3">
     <ActionButton
       title={translate('Back')}
       action={goBack}

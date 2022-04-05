@@ -18,7 +18,7 @@ const PlansListComponent: FunctionComponent<any> = (props) => {
 
   return (
     <Form.Group>
-      <Col smOffset={offset} sm={col} className="m-b-sm">
+      <Col smOffset={offset} sm={col} className="mb-2">
         <Form.Control plaintext>
           <strong>{translate('Accounting plans')}</strong>
         </Form.Control>

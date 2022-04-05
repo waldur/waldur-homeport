@@ -54,13 +54,13 @@ export const PublicOfferingDescriptionContainer: FunctionComponent<PublicOfferin
         )}
       </div>
       {offering.full_description && (
-        <div className="publicOfferingDescriptionContainer__description m-t-sm">
+        <div className="publicOfferingDescriptionContainer__description mt-2">
           <b>{translate('Description')}</b>
           <FormattedHtml html={offering.full_description} />
         </div>
       )}
       {offering.screenshots.length > 0 && (
-        <div className="publicOfferingDescriptionContainer__screenshots m-t-sm">
+        <div className="publicOfferingDescriptionContainer__screenshots mt-2">
           <ImagesTab images={offering.screenshots} />
         </div>
       )}

@@ -46,7 +46,7 @@ export const TemplateQuestions = connector((props) => (
     <ApplicationConfiguration {...props} />
     {props.questions && <AnswersSection questions={props.questions} />}
     <SubmitButton
-      className="btn btn-sm btn-success m-t-sm"
+      className="btn btn-sm btn-success mt-2"
       submitting={props.submitting}
       label={translate('Create application')}
       disabled={props.invalid || ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE}

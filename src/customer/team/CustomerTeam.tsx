@@ -19,7 +19,7 @@ export const CustomerTeam: FunctionComponent = () => {
   useTitle(translate('Team'));
   const customer = useSelector(getCustomer);
   return (
-    <div className="tabs-container m-l-sm">
+    <div className="tabs-container ms-2">
       <Tabs
         unmountOnExit
         mountOnEnter

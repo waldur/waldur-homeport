@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 export const SigninButton: FunctionComponent = () => {
   const router = useRouter();
   return (
-    <Form.Group className="m-b-sm">
+    <Form.Group className="mb-2">
       <p>
         <small>{translate('Already have an account?')}</small>
       </p>

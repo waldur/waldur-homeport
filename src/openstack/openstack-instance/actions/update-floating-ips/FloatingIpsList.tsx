@@ -27,7 +27,7 @@ export const FloatingIpsList: FC<FloatingIpsListProps> = ({
         {fields.length === 0 ? (
           translate('Instance does not have any floating IPs yet.')
         ) : (
-          <table className="table table-borderless m-b-xs">
+          <table className="table table-borderless mb-1">
             <tbody>
               {fields.map((row, index) => (
                 <FormSection name={row} key={index}>

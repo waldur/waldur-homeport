@@ -15,7 +15,7 @@ export const SubmitButton: FunctionComponent<SubmitButtonProps> = (props) => (
     disabled={props.submitting || props.disabled === true}
     onClick={props.onClick}
   >
-    {props.submitting && <i className="fa fa-spinner fa-spin m-r-xs" />}
+    {props.submitting && <i className="fa fa-spinner fa-spin me-1" />}
     {props.label}
   </button>
 );

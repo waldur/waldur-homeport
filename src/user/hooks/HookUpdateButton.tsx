@@ -18,7 +18,7 @@ export const PureHookUpdateButton: FunctionComponent<HookUpdateButtonProps> = (
     title={translate('Update')}
     action={() => props.showHookUpdateDialog(props.row)}
     icon="fa fa-pencil"
-    className="btn btn-sm btn-secondary m-r-xs"
+    className="btn btn-sm btn-secondary me-1"
   />
 );
 

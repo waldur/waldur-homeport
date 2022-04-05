@@ -21,7 +21,7 @@ interface OfferingDetailsProps {
 export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => (
   <>
     {props.offering.shared && (
-      <div className="pull-right m-r-md">
+      <div className="pull-right me-3">
         <Button size="sm" onClick={props.reInitResource}>
           <i className="fa fa-refresh" /> {translate('Refresh')}
         </Button>

@@ -17,7 +17,7 @@ export const CopyToClipboardButton: FunctionComponent<{ value }> = ({
   }, [dispatch, value]);
 
   return (
-    <p className="m-b-sm m-t-sm">
+    <p className="mb-2 mt-2">
       <a onClick={onClick}>
         <Tip label={translate('Copy to clipboard')} id="copyToClipboard">
           <i className="fa fa-copy fa-lg" />

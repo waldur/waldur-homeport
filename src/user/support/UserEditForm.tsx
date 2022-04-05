@@ -187,7 +187,7 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
         <FieldError error={props.error} />
         {!props.initial ? (
           <SubmitButton
-            className="btn btn-primary m-r-sm m-b-sm m-t-sm"
+            className="btn btn-primary me-2 mb-2 mt-2"
             submitting={props.submitting}
             label={props.translate('Update profile')}
           />

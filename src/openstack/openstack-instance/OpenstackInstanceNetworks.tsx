@@ -120,7 +120,7 @@ export class OpenstackInstanceNetworks extends Component<OpenstackInstanceNetwor
   render() {
     return (
       <>
-        <Table bsPrefix="table table-borderless m-b-xs">
+        <Table bsPrefix="table table-borderless mb-1">
           <tbody>
             {this.props.input.value ? (
               this.props.input.value.map((_, index) => (

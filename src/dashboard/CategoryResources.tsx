@@ -26,7 +26,7 @@ export class CategoryResources extends Component<CategoryResourcesProps> {
 
   render() {
     return (
-      <Panel title={this.props.category.title} className="m-t-md">
+      <Panel title={this.props.category.title} className="mt-3">
         <ToggleButtonGroup
           value={this.state.choice}
           onChange={(value) => this.setState({ choice: value })}

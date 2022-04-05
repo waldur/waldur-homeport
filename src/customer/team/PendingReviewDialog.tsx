@@ -48,7 +48,7 @@ export const PendingReviewDialog: FunctionComponent<{
         >
           {submitting && (
             <>
-              <i className="fa fa-spinner fa-spin m-r-xs" />{' '}
+              <i className="fa fa-spinner fa-spin me-1" />{' '}
             </>
           )}
           {translate('Confirming that data is correct')}

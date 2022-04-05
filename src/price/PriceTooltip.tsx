@@ -42,7 +42,7 @@ class PurePriceTooltip extends PureComponent<PriceTooltipProps> {
 
     return (
       <Tip label={message} id="price-tooltip">
-        <i className="fa fa-exclamation-circle m-l-xs hidden-print" />
+        <i className="fa fa-exclamation-circle ms-1 hidden-print" />
       </Tip>
     );
   }

@@ -95,7 +95,7 @@ export const AnswersTable: FunctionComponent<TableProps> = ({
   setAnswers,
   readOnly,
 }) => (
-  <Table responsive={true} bordered={true} striped={true} className="m-t-md">
+  <Table responsive={true} bordered={true} striped={true} className="mt-3">
     <TableHeader />
     <TableBody
       questions={questions}

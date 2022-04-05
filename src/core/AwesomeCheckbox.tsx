@@ -26,7 +26,7 @@ export const AwesomeCheckbox: FunctionComponent<AwesomeCheckboxProps> = (
         'checkbox',
         'awesome-checkbox',
         `checkbox-${props.variant}`,
-        { 'm-r-sm': props.marginRight },
+        { 'me-2': props.marginRight },
       )}
     >
       <input

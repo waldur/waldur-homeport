@@ -17,7 +17,7 @@ export const OfferingOptions: FC<any> = (props) => {
 
   return (
     <Form.Group>
-      <h3 className="content-center m-t-md m-b-lg">
+      <h3 className="content-center mt-3 mb-4">
         {translate(
           'If you want user to provide additional details when ordering, please configure input form for the user below',
         )}

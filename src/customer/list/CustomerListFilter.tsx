@@ -14,7 +14,7 @@ interface CustomerListFilterProps {
 export const PureCustomerListFilter: FunctionComponent<CustomerListFilterProps> =
   (props) => (
     <Card>
-      <Card.Body className="m-b-sm border-bottom">
+      <Card.Body className="mb-2 border-bottom">
         <form className="form-inline">
           <Row>
             <Col sm={9}>

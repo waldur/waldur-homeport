@@ -39,7 +39,7 @@ export const PublicOfferingPricingPlanItem: FunctionComponent<PublicOfferingPric
           onClick={() => setToggle(!toggle)}
         >
           <div>
-            <b className="m-b-xs">{plan.name}</b>
+            <b className="mb-1">{plan.name}</b>
             <FormattedHtml html={plan.description} />
           </div>
           <div className="pricingPlanItem__header__pricing">

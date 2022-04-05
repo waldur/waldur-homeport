@@ -37,7 +37,7 @@ export const PureIssueCommentsForm: FunctionComponent<PureIssueCommentsFormProps
           <FormContainer submitting={submitting} clearOnUnmount={false}>
             <TextField name={constants.FORM_FIELDS.comment} />
           </FormContainer>
-          <div className="comments-form__controls m-t-md">
+          <div className="comments-form__controls mt-3">
             <SubmitButton
               submitting={submitting}
               disabled={uiDisabled || pristine}

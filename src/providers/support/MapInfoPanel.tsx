@@ -14,13 +14,13 @@ export const MapInfoPanel = withTranslation(
         <Card.Header>
           <h5>{translate('Provider')}</h5>
           <div className="card-tools">
-            <a className="close-link m-r-xs" onClick={onPanelClose}>
+            <a className="close-link me-1" onClick={onPanelClose}>
               <i className="fa fa-times" />
             </a>
           </div>
         </Card.Header>
         <Card.Body className="text-center">
-          <div className="m-b-sm">
+          <div className="mb-2">
             <img
               alt="image"
               className="img-fluid rounded-circle"

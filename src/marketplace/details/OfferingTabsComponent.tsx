@@ -28,7 +28,7 @@ export const OfferingTabsComponent: React.FC<OfferingTabsComponentProps> = (
     >
       {props.tabs.map((tab, index) => (
         <Tab key={index} eventKey={`tab-${index}`} title={tab.title}>
-          <div className="m-t-md">{React.createElement(tab.component)}</div>
+          <div className="mt-3">{React.createElement(tab.component)}</div>
         </Tab>
       ))}
     </Tabs>

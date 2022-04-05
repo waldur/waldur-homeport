@@ -7,7 +7,7 @@ export const KeysListExpandableRow: FunctionComponent<any> = ({ row }) =>
   row.public_key ? (
     <div className="container-fluid m-t">
       <p>
-        <b className="m-r-sm">{translate('Public key')}:</b>
+        <b className="me-2">{translate('Public key')}:</b>
         <CopyToClipboardContainer
           value={row.public_key}
           label={row.public_key}

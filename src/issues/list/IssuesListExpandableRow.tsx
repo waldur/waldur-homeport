@@ -10,12 +10,12 @@ export const IssuesListExpandableRow: FunctionComponent<{ row }> = ({
 }) => (
   <div className="container-fluid">
     <div className="issue-list-expandable-row col-sm-12">
-      <div className="m-b-xs">
+      <div className="mb-1">
         <dt>{translate('Reporter')}:</dt>
         <dd>{row.reporter_name || 'N/A'}</dd>
       </div>
 
-      <div className="m-b-xs">
+      <div className="mb-1">
         <dt>{translate('Description')}:</dt>
         <dd>
           <Tip id="description-tooltip" label={row.description}>
@@ -26,7 +26,7 @@ export const IssuesListExpandableRow: FunctionComponent<{ row }> = ({
         </dd>
       </div>
 
-      <div className="m-b-xs">
+      <div className="mb-1">
         <dt>{translate('Service type')}:</dt>
         <dd>{row.resource_type || 'N/A'}</dd>
       </div>

@@ -28,13 +28,13 @@ export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps
             <h4 className="title">
               {resource.name + ' ' + translate('overview')}
             </h4>
-            <div className="m-l-sm">
+            <div className="ms-2">
               <MarketplaceResourceStateField resource={resource} />
             </div>
           </div>
         </Accordion.Header>
         <Accordion.Body>
-          <Row className="m-b-md">
+          <Row className="mb-3">
             <Col sm={12}>
               <ResourceActions
                 resource={resource}

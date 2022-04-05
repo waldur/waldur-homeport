@@ -10,7 +10,7 @@ import { ProjectUsersList } from './ProjectUsersList';
 export const ProjectTeam: FunctionComponent = () => {
   useTitle(translate('Team'));
   return (
-    <div className="tabs-container m-l-sm">
+    <div className="tabs-container ms-2">
       <Tabs
         unmountOnExit
         mountOnEnter

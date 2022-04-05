@@ -11,7 +11,7 @@ interface PureAttributeFilterDivisionProps {
 
 export const AttributeFilterDivision: FunctionComponent<PureAttributeFilterDivisionProps> =
   (props) => (
-    <section className="m-t-md m-b-md">
+    <section className="mt-3 mb-3">
       <h3 className="division-title">{translate('Divisions')}</h3>
       {props.divisions.map((division: Division) => (
         <Field

@@ -10,7 +10,7 @@ import { EventGroupFilter } from '@waldur/support/EventGroupFilter';
 import { SUPPORT_EVENTS_LIST_FILTER_FORM_ID } from './constants';
 
 const PureSupportEventsListFilter: FunctionComponent = () => (
-  <div className="m-b-md">
+  <div className="mb-3">
     <Row>
       <Col sm={4}>
         <EventGroupFilter />

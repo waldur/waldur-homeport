@@ -15,7 +15,7 @@ export const PureOpenStackSecurityGroupsLink = (props) =>
   props.items && props.items.length > 0 ? (
     <span className="cursor-pointer" onClick={props.openDetailsDialog}>
       {props.items.map((item) => item.name).join(', ')}
-      <i className="fa fa-info-circle m-l-xs" aria-hidden="true" />
+      <i className="fa fa-info-circle ms-1" aria-hidden="true" />
     </span>
   ) : (
     <>&mdash;</>

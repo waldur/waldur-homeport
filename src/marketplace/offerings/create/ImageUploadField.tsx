@@ -36,13 +36,13 @@ export const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (
         <Col md={7}>
           <div>
             <FileUploadField
-              className="btn btn-sm btn-primary m-b-sm"
+              className="btn btn-sm btn-primary mb-2"
               {...props}
             />
           </div>
           {props.input.value && (
             <ActionButton
-              className="btn btn-sm btn-danger m-b-sm"
+              className="btn btn-sm btn-danger mb-2"
               title={translate('Remove')}
               action={() => props.input.onChange(null)}
               icon="fa fa-trash"

@@ -120,7 +120,7 @@ export class ChoicesTable extends React.Component<ChoicesTableProps> {
           <ChoicesTableFilter
             filterOptions={props.filterOptions}
             input={{ onChange: this.setFilter, value: this.state.filter }}
-            wrapperClassName="btn-group m-b-xs"
+            wrapperClassName="btn-group mb-1"
           />
         )}
         <PureChoicesTable

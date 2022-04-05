@@ -13,7 +13,7 @@ interface FreeIPAAccountEditOwnProps {
 const UsernameGroup = ({ profile }) => (
   <Form.Group className="m-b-n">
     <Form.Label className="col-sm-3">{translate('Username')}:</Form.Label>
-    <div className="col-sm-6 m-b-sm">
+    <div className="col-sm-6 mb-2">
       <Form.Control plaintext>{profile.username}</Form.Control>
     </div>
   </Form.Group>

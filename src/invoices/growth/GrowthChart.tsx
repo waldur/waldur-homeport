@@ -35,7 +35,7 @@ export const GrowthChart: FunctionComponent = () => {
     return <>{translate('Unable to load growth chart.')}</>;
   }
   return (
-    <Card.Body className="m-t-md p-m">
+    <Card.Body className="mt-3 p-m">
       <EChart options={option} height="400px" />
     </Card.Body>
   );

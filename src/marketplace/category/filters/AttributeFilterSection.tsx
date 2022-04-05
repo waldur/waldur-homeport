@@ -25,7 +25,7 @@ const markSelectedFilter = (filterValues, fieldName) => {
 
 export const PureAttributeFilterSection: FunctionComponent<PureAttributeFilterSectionProps> =
   (props) => (
-    <section className="m-t-md m-b-md">
+    <section className="mt-3 mb-3">
       <h3 className="shopping-cart-sidebar-title">{props.section.title}</h3>
       {props.section.attributes.map((attribute, outerIndex) => {
         const attrConfig = configAttrField(attribute);

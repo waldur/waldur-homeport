@@ -33,30 +33,30 @@ export const PureUserDetailsView: FunctionComponent<UserDetailsViewProps> = (
   <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
     {props.isVisibleForSupportOrStaff && (
       <Tab eventKey={1} title={props.translate('Details')}>
-        <div className="m-t-sm">
+        <div className="mt-2">
           <UserDetailsTable user={props.user} />
         </div>
       </Tab>
     )}
     <Tab eventKey={2} title={props.translate('Audit log')}>
-      <div className="m-t-sm">
+      <div className="mt-2">
         <UserEvents user={props.user} showActions={false} />
       </div>
     </Tab>
     {props.userManageIsVisible && (
       <Tab eventKey={3} title={props.translate('Manage')}>
-        <div className="m-t-sm">
+        <div className="mt-2">
           <UserEditContainer user={props.user} showDeleteButton={false} />
         </div>
       </Tab>
     )}
     <Tab eventKey={4} title={props.translate('Keys')}>
-      <div className="m-t-sm">
+      <div className="mt-2">
         <KeysList user={props.user} />
       </div>
     </Tab>
     <Tab eventKey={5} title={props.translate('Remote accounts')}>
-      <div className="m-t-sm">
+      <div className="mt-2">
         <UserOfferingList user={props.user} />
       </div>
     </Tab>

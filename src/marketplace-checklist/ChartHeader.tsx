@@ -8,7 +8,7 @@ interface ChartHeaderProps {
 export const ChartHeader: FunctionComponent<ChartHeaderProps> = (props) =>
   props.value ? (
     <>
-      <h2 className="m-b-xs ellipsis">{props.value}</h2>
+      <h2 className="mb-1 ellipsis">{props.value}</h2>
       <p className="text-uppercase">{props.label}</p>
     </>
   ) : null;

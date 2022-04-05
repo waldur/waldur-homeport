@@ -140,7 +140,7 @@ export const ProjectCreateForm = reduxForm<
           />
           <button
             type="button"
-            className="btn btn-secondary m-l-sm"
+            className="btn btn-secondary ms-2"
             onClick={props.onCancel}
           >
             {translate('Cancel')}

@@ -14,7 +14,7 @@ export const SupportSummaryTab = withTranslation(
   (props: SupportSummaryTabProps) => (
     <>
       {props.summary && (
-        <p className="m-b-md">
+        <p className="mb-3">
           <FormattedHtml html={props.summary} />
         </p>
       )}

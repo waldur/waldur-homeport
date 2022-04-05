@@ -38,7 +38,7 @@ export const OverviewTab: FunctionComponent<OverviewTabProps> = (props) => {
       <Col md={6}>
         {props.offering.vendor_details && (
           <>
-            <div className="display-flex justify-content-between align-items-baseline m-b-sm">
+            <div className="display-flex justify-content-between align-items-baseline mb-2">
               <h4>{translate('Service provider details')}</h4>
               <DemoButton />
             </div>

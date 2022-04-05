@@ -18,7 +18,7 @@ export const TablePageSize: FunctionComponent<TablePageSizeProps> = (props) => {
   const pageSize = props.pageSize ? props.pageSize : 10;
   return props.resultCount > 10 ? (
     <div>
-      <span className="m-r-sm">{translate('Show')}</span>
+      <span className="me-2">{translate('Show')}</span>
       <Select
         className="table-page-size"
         value={{
@@ -29,7 +29,7 @@ export const TablePageSize: FunctionComponent<TablePageSizeProps> = (props) => {
         isClearable={false}
         onChange={(value) => props.updatePageSize(value)}
       />
-      <span className="m-l-sm">{translate('entries')}</span>
+      <span className="ms-2">{translate('entries')}</span>
     </div>
   ) : null;
 };

@@ -12,11 +12,11 @@ export const BookingsCalendarLegend: FunctionComponent<BookingsCalendarLegendPro
   ({ events }) => {
     const legends: Legend[] = getDistinctColorsFromEvents(events);
     return (
-      <div className="bookings-calendar-legend-container m-b-md">
+      <div className="bookings-calendar-legend-container mb-3">
         {legends.map((legend: Legend, index: number) => (
           <div key={index} className="legend">
             <div
-              className="rectangle m-r-xs"
+              className="rectangle me-1"
               style={{ backgroundColor: `${legend.color}` }}
             ></div>
             {legend.name}

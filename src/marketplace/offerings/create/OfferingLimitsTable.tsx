@@ -24,7 +24,7 @@ export const OfferingLimitsTable: React.FC<OfferingLimitsTableProps> = (
 
   return (
     <Form.Group>
-      <Col smOffset={offset} sm={col} className="m-b-sm">
+      <Col smOffset={offset} sm={col} className="mb-2">
         <Form.Control plaintext>
           <strong>{translate('Offering components')}</strong>
         </Form.Control>

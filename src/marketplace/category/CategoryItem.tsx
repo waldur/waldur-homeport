@@ -10,7 +10,7 @@ interface CategoryItemProps {
 }
 
 export const CategoryItem: FunctionComponent<CategoryItemProps> = (props) => (
-  <li className={classNames('m-b-xs', { 'link--active': props.active })}>
+  <li className={classNames('mb-1', { 'link--active': props.active })}>
     <i className="fa fa-angle-right" />{' '}
     <CategoryLink category_uuid={props.category.uuid}>
       {props.category.title}

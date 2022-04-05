@@ -104,7 +104,7 @@ export const ChecklistCustomer: FunctionComponent = () => {
             responsive={true}
             bordered={true}
             striped={true}
-            className="m-t-md"
+            className="mt-3"
           >
             <thead>
               <tr>

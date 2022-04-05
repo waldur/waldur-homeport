@@ -36,14 +36,14 @@ class PureServiceProviderSecretCode extends Component<ServiceProviderSecretCodeP
 
   render() {
     return (
-      <div className="service-provider-secret-code m-t-xs">
+      <div className="service-provider-secret-code mt-1">
         <div className="service-provider-secret-code__label">
           {this.props.translate('API secret code:')}
         </div>
-        <div className="service-provider-secret-code__value m-l-xs">
+        <div className="service-provider-secret-code__value ms-1">
           <SecretValueField value={this.props.secretCode.code} />
         </div>
-        <div className="service-provider-secret-code__generate-btn m-l-xs">
+        <div className="service-provider-secret-code__generate-btn ms-1">
           <ActionButton
             title={this.props.translate('Regenerate')}
             action={this.props.showSecretCodeRegenerateConfirm}

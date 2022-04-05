@@ -97,7 +97,7 @@ export const OrderItem: FunctionComponent<OrderItemProps> = (props) => {
       <td className="text-center">
         <span className="btn-group">
           {props.editable && (
-            <a className="btn btn-outline btn-secondary btn-sm m-r-xs">
+            <a className="btn btn-outline btn-secondary btn-sm me-1">
               {translate('Edit')}
             </a>
           )}

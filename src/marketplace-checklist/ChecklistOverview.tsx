@@ -44,7 +44,7 @@ export const ChecklistOverview: FunctionComponent = () => {
         ) : state.statsErred ? (
           <>{translate('Unable to load compliance overview.')}</>
         ) : (
-          <Card className="m-t-md">
+          <Card className="mt-3">
             <CustomerMap customers={state.statsList} />
             <StatsTable
               stats={state.statsList}

@@ -18,6 +18,6 @@ export const ErrorMessage: FallbackRender = (props) => (
         </Button>
       }
     />
-    <pre className="m-t-md">{props.componentStack}</pre>
+    <pre className="mt-3">{props.componentStack}</pre>
   </>
 );

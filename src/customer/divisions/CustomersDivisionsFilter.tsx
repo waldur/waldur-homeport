@@ -10,7 +10,7 @@ import {
 
 export const PureCustomersDivisionsFilter: FunctionComponent = () => (
   <Card>
-    <Card.Body className="border-bottom m-t-md">
+    <Card.Body className="border-bottom mt-3">
       <form className="form-inline">
         <Row>
           <Col sm={3}>

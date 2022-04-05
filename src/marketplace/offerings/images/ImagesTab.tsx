@@ -28,7 +28,7 @@ export const ImagesTab: FunctionComponent<ImagesTabProps> = (props) => {
             onClick={() => dispatch(openViewOfferingImageDialog(item))}
             style={{ cursor: 'pointer' }}
           />
-          <h4 className="m-t-md">{item.name}</h4>
+          <h4 className="mt-3">{item.name}</h4>
           <p>{item.description}</p>
         </Col>
       ))}

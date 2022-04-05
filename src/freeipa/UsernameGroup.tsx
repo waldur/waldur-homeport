@@ -43,7 +43,7 @@ const validateUsername = (username: string) => {
 
 const UsernameField: FunctionComponent<WrappedFieldProps> = (props) => (
   <>
-    <InputGroup className="m-b-sm">
+    <InputGroup className="mb-2">
       {ENV.plugins.WALDUR_FREEIPA.USERNAME_PREFIX && (
         <OverlayTrigger
           placement="top"

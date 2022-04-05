@@ -11,7 +11,7 @@ import {
 
 export const PureCustomersListFilter: FunctionComponent = () => (
   <div className="card">
-    <div className="card-body m-b-sm border-bottom">
+    <div className="card-body mb-2 border-bottom">
       <form className="form-inline">
         <Row>
           <Col sm={3}>

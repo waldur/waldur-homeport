@@ -48,7 +48,7 @@ export const CustomerLogoUpdate: React.FC<CustomerLogoUpdateProps> = (
       alt="Organization logo here"
       className="organization-img-wrapper"
     />
-    <div className="m-t-md">
+    <div className="mt-3">
       {renderRemoveButton(props) && (
         <ActionButton
           className="btn btn-sm btn-danger"

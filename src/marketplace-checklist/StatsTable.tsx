@@ -12,7 +12,7 @@ export const StatsTable = ({
   stats: ChecklistStats[];
   scopeTitle: string;
 }) => (
-  <Table responsive={true} bordered={true} striped={true} className="m-t-md">
+  <Table responsive={true} bordered={true} striped={true} className="mt-3">
     <thead>
       <tr>
         <th className="col-sm-1">#</th>

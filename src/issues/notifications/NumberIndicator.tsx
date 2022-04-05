@@ -37,7 +37,7 @@ export const NumberIndicator: FunctionComponent<NumberIndicatorProps> = ({
   }, [shouldFetch, getNumber, formValues]);
 
   return (
-    <p className="m-t-md">
+    <p className="mt-3">
       <b>
         {translate(
           'The number of recipients who will receive the notification:',

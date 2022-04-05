@@ -5,7 +5,7 @@ import { LanguageSelectorBox } from './LanguageSelectorBox';
 
 export const LanguageSelectorMenuItem: FunctionComponent = () => (
   <li className="navigation-menu-item">
-    <i className="fa fa-language fixed-width-icon m-r-xs"></i>
+    <i className="fa fa-language fixed-width-icon me-1"></i>
     <LanguageSelectorBox />
   </li>
 );

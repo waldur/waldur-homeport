@@ -3,7 +3,7 @@ export const countryInfo = ({ data }) => {
   let consumers = '';
   data.providers.map((provider) => {
     providers += `<div class="card-body text-center">
-                  <div class="m-b-sm">
+                  <div class="mb-2">
                     <img alt="image" class="img-fluid rounded-circle img-center" src=${provider.logo}>
                   </div>
                   <h3 class="font-bold">${provider.name}</h3>
@@ -14,7 +14,7 @@ export const countryInfo = ({ data }) => {
   });
   data.consumers.map((consumer) => {
     consumers += `<div class="card-body text-center">
-                  <div class="m-b-sm">
+                  <div class="mb-2">
                     <img alt="image" class="img-fluid rounded-circle img-center" src=${consumer.logo}>
                   </div>
                   <h3 class="font-bold">${consumer.name}</h3>

@@ -34,25 +34,25 @@ export const PureSupportTabs: React.FC<SupportTabsProps> = (props) => {
       id="offeringSummary"
     >
       <Tab title={props.translate('Summary')} eventKey="summary">
-        <div className="m-t-sm">
+        <div className="mt-2">
           <SupportSummaryTab issue={props.issue} summary={props.summary} />
         </div>
       </Tab>
       <Tab title={props.translate('Audit log')} eventKey="events">
-        <div className="m-t-sm">
+        <div className="mt-2">
           <SupportEvents resource={props.resource} />
         </div>
       </Tab>
       {props.showComments && (
         <Tab title={props.translate('Comments')} eventKey="comments">
-          <div className="m-t-sm">
+          <div className="mt-2">
             <IssueCommentsContainer issue={props.issue} renderHeader={false} />
           </div>
         </Tab>
       )}
       {props.resource.uuid && (
         <Tab title={props.translate('Order items')} eventKey="order-items">
-          <div className="m-t-sm">
+          <div className="mt-2">
             <ResourceOrderItems resource_uuid={props.resource.uuid} />
           </div>
         </Tab>

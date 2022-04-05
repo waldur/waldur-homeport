@@ -31,7 +31,7 @@ const FORM_ID = 'SigninForm';
 
 export const SigninForm = reduxForm<FormData>({ form: FORM_ID })(
   ({ submitting, handleSubmit, error }) => (
-    <form className="m-b-sm" onSubmit={handleSubmit(signin)}>
+    <form className="mb-2" onSubmit={handleSubmit(signin)}>
       <InputGroup
         fieldName="username"
         placeholder={translate('Username')}
@@ -52,7 +52,7 @@ export const SigninForm = reduxForm<FormData>({ form: FORM_ID })(
       >
         {submitting && (
           <>
-            <i className="fa fa-spinner fa-spin m-r-xs" />{' '}
+            <i className="fa fa-spinner fa-spin me-1" />{' '}
           </>
         )}
         {translate('Login')}

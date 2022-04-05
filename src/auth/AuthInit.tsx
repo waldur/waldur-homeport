@@ -55,7 +55,7 @@ export const AuthInit: FunctionComponent = () => {
     <>{translate('Unable to load user.')}</>
   ) : (
     <Container>
-      <Row className="m-t-md">
+      <Row className="mt-3">
         <Col md={6} mdOffset={3} xs={12} lg={6} lgOffset={3}>
           <h2>
             {translate('Welcome to {pageTitle}!', {

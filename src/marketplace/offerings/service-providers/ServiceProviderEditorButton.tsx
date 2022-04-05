@@ -25,7 +25,7 @@ export const ServiceProviderEditorButton = ({
   }
   return (
     <Button
-      className="m-r-sm"
+      className="me-2"
       onClick={() =>
         dispatch(
           openModalDialog(ServiceProviderEditor, {

@@ -19,7 +19,7 @@ export const CustomerPaymentProfile: FunctionComponent<CustomerPaymentProfilePro
     );
     return activePaymentProfile ? (
       <ResourceDetailsTable>
-        <div className="m-b-xs m-t-sm ">
+        <div className="mb-1 mt-2 ">
           <dt>{translate('Payment profile ')}</dt>
           <dd>
             <Tip

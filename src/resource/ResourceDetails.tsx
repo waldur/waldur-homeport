@@ -27,7 +27,7 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
 
   return (
     <Card.Body>
-      <div className="row m-b-md">
+      <div className="row mb-3">
         <div className="col-lg-12">
           <div className="pull-right btn-group">
             <ResourceAccessButton resource={resource} />
@@ -54,7 +54,7 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
           <h2>{header}</h2>
         </div>
       </div>
-      <div className="row m-b-md">
+      <div className="row mb-3">
         <ResourceSummary resource={resource} />
       </div>
       <div className="row">

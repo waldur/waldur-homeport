@@ -14,6 +14,6 @@ export const ServiceProviderIcon: FunctionComponent<{ organization }> = ({
       id={`service-provider-${organization.uuid}`}
       className="pull-right"
     >
-      <img src={ProviderIcon} width="18" className="m-r-sm" />
+      <img src={ProviderIcon} width="18" className="me-2" />
     </Tip>
   ) : null;

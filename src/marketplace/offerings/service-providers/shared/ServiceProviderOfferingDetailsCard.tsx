@@ -18,8 +18,8 @@ export const ServiceProviderOfferingDetailsCard: FunctionComponent<ServiceProvid
   ({ row }) => (
     <div className="offeringCard">
       <OfferingLogo offering={row} />
-      <div className="card-title m-t-sm">{row.name}</div>
-      <div className="offeringCard__description m-t-xs">
+      <div className="card-title mt-2">{row.name}</div>
+      <div className="offeringCard__description mt-1">
         <FormattedHtml html={row.description} />
       </div>
       <div className="offeringCard__contentAlwaysOnBottom m-t">

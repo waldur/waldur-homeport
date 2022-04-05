@@ -23,9 +23,7 @@ export const RequestedEmail: FunctionComponent<RequestedEmailProps> = (
     <label className="col-sm-3 col-md-4 col-lg-3" />
     <div className="col-sm-9 col-md-8">
       <Button id="cancel-request-btn" onClick={props.onCancelRequest}>
-        {props.waiting && (
-          <i className="fa fa-spinner fa-spin m-r-xs spinner" />
-        )}
+        {props.waiting && <i className="fa fa-spinner fa-spin me-1 spinner" />}
         {translate('Cancel request')}
       </Button>
     </div>

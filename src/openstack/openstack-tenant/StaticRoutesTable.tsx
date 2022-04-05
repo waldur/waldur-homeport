@@ -66,7 +66,7 @@ export const StaticRoutesTable: React.FC<any> = ({ fields, fixedIps }) => {
             responsive={true}
             bordered={true}
             striped={true}
-            className="m-t-md"
+            className="mt-3"
           >
             <thead>
               <tr>

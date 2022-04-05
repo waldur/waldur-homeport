@@ -26,7 +26,7 @@ export const PlanField: FunctionComponent<PlanFieldProps> = (props) =>
               )}
             />
           </div>
-          <PlanDescriptionButton className="btn btn-md btn-secondary pull-right m-l-sm" />
+          <PlanDescriptionButton className="btn btn-md btn-secondary pull-right ms-2" />
         </div>
       </div>
     </Form.Group>

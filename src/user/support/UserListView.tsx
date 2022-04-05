@@ -11,7 +11,7 @@ export const UserListView: FunctionComponent = () => {
   useTitle(translate('Users'));
   return (
     <>
-      <Card.Body className="m-b-sm border-bottom">
+      <Card.Body className="mb-2 border-bottom">
         <UserFilter />
       </Card.Body>
       <Card.Body>

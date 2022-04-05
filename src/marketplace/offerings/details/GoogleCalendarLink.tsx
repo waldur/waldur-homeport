@@ -18,7 +18,7 @@ export const GoogleCalendarLink: FunctionComponent<GoogleCalendarLinkProps> = ({
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="m-l-sm m-r"
+        className="ms-2 m-r"
       >
         {translate('Click to see Google Calendar')}
       </a>

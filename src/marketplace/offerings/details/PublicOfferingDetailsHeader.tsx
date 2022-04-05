@@ -54,11 +54,11 @@ export const PublicOfferingDetailsHeader: FunctionComponent<PublicOfferingDetail
             <div className="publicOfferingDetailsHeader__card__info__description">
               <FormattedHtml html={offering.description} />
             </div>
-            <div className="m-t-sm">
+            <div className="mt-2">
               <Link
                 state="marketplace-offering-user"
                 params={{ offering_uuid: offering.uuid }}
-                className="btn btn-primary m-r-sm"
+                className="btn btn-primary me-2"
               >
                 {offering.type === OFFERING_TYPE_BOOKING
                   ? translate('Book')

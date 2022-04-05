@@ -69,21 +69,21 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
       <Modal.Body>
         <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
           <Tab eventKey={1} title={translate('Details')}>
-            <div className="m-t-sm">
+            <div className="mt-2">
               <UserDetailsTable user={value.user} profile={value.profile} />
             </div>
           </Tab>
 
           {canSeeChecklist && value.checklistCount ? (
             <Tab eventKey={2} title={translate('Checklists')}>
-              <div className="m-t-sm">
+              <div className="mt-2">
                 <UserChecklist userId={value.user.uuid} readOnly={true} />
               </div>
             </Tab>
           ) : null}
 
           <Tab eventKey={3} title={translate('Keys')}>
-            <div className="m-t-sm">
+            <div className="mt-2">
               <KeysList user={value.user} />
             </div>
           </Tab>

@@ -10,7 +10,7 @@ import { OrganizationListItem } from './OrganizationListItem';
 import { VirtualPaginatedList } from './VirtualPaginatedList';
 
 const OrganizationsHeader = ({ organizationsCount }) => (
-  <h3 className="m-b-md">
+  <h3 className="mb-3">
     {translate('Organizations ({count})', {
       count: organizationsCount,
     })}
@@ -37,7 +37,7 @@ export const OrganizationsPanel: FunctionComponent<{
   );
 
   return (
-    <Col className="workspace-listing m-b-md" md={6} xs={12}>
+    <Col className="workspace-listing mb-3" md={6} xs={12}>
       <CreateOrganizationButton />
       <OrganizationsHeader organizationsCount={organizationsCount} />
       <FilterGroup

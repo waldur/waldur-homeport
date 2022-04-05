@@ -23,6 +23,6 @@ export const RejectButton: FunctionComponent<RejectButtonProps> = ({
       disabled={submitting}
     >
       <i className="fa fa-ban" /> {translate('Reject')}{' '}
-      {submitting && <i className="fa fa-spinner fa-spin m-r-xs" />}
+      {submitting && <i className="fa fa-spinner fa-spin me-1" />}
     </button>,
   );

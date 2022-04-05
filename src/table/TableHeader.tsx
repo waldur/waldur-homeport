@@ -28,11 +28,11 @@ function renderSortingIcon(column: Column, sorting: Sorting) {
   if (!column.orderField || !sorting) {
     return null;
   } else if (column.orderField !== sorting.field) {
-    return <i className="fa fa-sort m-l-xs" />;
+    return <i className="fa fa-sort ms-1" />;
   } else if (sorting.mode === 'asc') {
-    return <i className="fa fa-sort-asc m-l-xs" />;
+    return <i className="fa fa-sort-asc ms-1" />;
   } else {
-    return <i className="fa fa-sort-desc m-l-xs" />;
+    return <i className="fa fa-sort-desc ms-1" />;
   }
 }
 

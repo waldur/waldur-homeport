@@ -7,7 +7,7 @@ export const HeroButton = () =>
   ENV.plugins.WALDUR_CORE.HERO_LINK_URL ? (
     <Button
       as="a"
-      className="m-t-md"
+      className="mt-3"
       style={{ fontWeight: 'bold' }}
       href={ENV.plugins.WALDUR_CORE.HERO_LINK_URL}
     >

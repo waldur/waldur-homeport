@@ -38,7 +38,7 @@ class PureOrderItemTerminateButton extends Component<OrderItemTerminateButtonPro
   render() {
     return (
       <ActionButton
-        className="btn btn-sm btn-danger m-b-sm"
+        className="btn btn-sm btn-danger mb-2"
         title={translate('Cancel')}
         action={this.terminateOrderItem}
         disabled={this.state.loading}

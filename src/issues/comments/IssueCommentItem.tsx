@@ -95,7 +95,7 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
           />
         </div>
         <div className="vertical-timeline-content">
-          <div className="comment-item__header m-b-sm">
+          <div className="comment-item__header mb-2">
             <div className="comment-item__title">
               {translate(
                 '{user} commented:',
@@ -138,7 +138,7 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
             }}
             onClick={onCommentClick}
           />
-          <div className="small text-muted m-t-sm">
+          <div className="small text-muted mt-2">
             <div>{userList}</div>
             <div>{formatMediumDateTime(comment.created)}</div>
           </div>

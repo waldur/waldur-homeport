@@ -20,20 +20,20 @@ export const ProjectDetails: FunctionComponent<ProjectDetailsProps> = (
     </Row>
 
     <Row>
-      <Col sm={3} className="m-t-sm">
+      <Col sm={3} className="mt-2">
         {translate('Description')}:
       </Col>
-      <Col sm={9} className="m-t-sm">
+      <Col sm={9} className="mt-2">
         {props.description || 'N/A'}
       </Col>
     </Row>
 
     {props.end_date ? (
       <Row>
-        <Col sm={3} className="m-t-sm">
+        <Col sm={3} className="mt-2">
           {translate('End date')}:
         </Col>
-        <Col sm={9} className="m-t-sm">
+        <Col sm={9} className="mt-2">
           {formatDate(props.end_date)}
         </Col>
       </Row>

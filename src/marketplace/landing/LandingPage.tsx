@@ -39,7 +39,7 @@ export const LandingPage = withTranslation((props: LandingPageProps) => (
       />
     </HeroSection>
     <CategoriesList {...props.categories} />
-    <h2 className="m-b-md">{props.translate('Recent additions')}</h2>
+    <h2 className="mb-3">{props.translate('Recent additions')}</h2>
     <OfferingGrid width={2} {...props.offerings} />
   </div>
 ));

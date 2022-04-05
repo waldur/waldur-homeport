@@ -23,12 +23,12 @@ export const VmTypeOverview = connect((state: RootState) =>
     <Panel>
       <Tabs defaultActiveKey={1} id="vm-overview" mountOnEnter unmountOnExit>
         <Tab eventKey={1} title={translate('Images')}>
-          <div className="m-t-sm">
+          <div className="mt-2">
             <ImagesList />
           </div>
         </Tab>
         <Tab eventKey={2} title={translate('Flavors')}>
-          <div className="m-t-sm">
+          <div className="mt-2">
             <FlavorsList />
           </div>
         </Tab>

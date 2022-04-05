@@ -40,7 +40,7 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => {
 
   return (
     <Form.Group>
-      <Col smOffset={offset} sm={col} className="m-b-sm">
+      <Col smOffset={offset} sm={col} className="mb-2">
         <Form.Control plaintext>
           <strong>{props.translate('Plan components')}</strong>
         </Form.Control>

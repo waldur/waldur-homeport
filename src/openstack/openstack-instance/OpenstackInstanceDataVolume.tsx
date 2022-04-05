@@ -32,7 +32,7 @@ export class OpenstackInstanceDataVolume extends React.Component<OpenstackInstan
   render() {
     const props = this.props;
     return (
-      <table className="table table-borderless m-b-xs">
+      <table className="table table-borderless mb-1">
         <tbody>
           {!this.props.isActive && (
             <tr>

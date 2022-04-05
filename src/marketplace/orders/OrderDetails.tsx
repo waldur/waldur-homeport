@@ -39,7 +39,7 @@ async function loadOrder(order_uuid) {
 const OrderRefreshButton: FunctionComponent<any> = (props) => (
   <button
     type="button"
-    className="btn btn-secondary btn-sm m-r-sm"
+    className="btn btn-secondary btn-sm me-2"
     onClick={props.loadData}
   >
     <i className="fa fa-refresh" /> {translate('Refresh')}
@@ -112,7 +112,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = (props) => {
                   tooltip={translate(
                     'You need approval to finish purchasing of services.',
                   )}
-                  className="btn btn-primary btn-sm m-r-xs"
+                  className="btn btn-primary btn-sm me-1"
                 />
                 <RejectButton
                   submitting={props.stateChangeStatus.rejecting}

@@ -19,8 +19,8 @@ interface UserFilterProps extends TranslateProps {
 const PureUserFilter: FunctionComponent<UserFilterProps> = (props) => (
   <form className="form-inline" id="user-filter">
     <FormContainer
-      labelClass="m-r-md"
-      controlClass="m-r-md"
+      labelClass="me-3"
+      controlClass="me-3"
       submitting={props.submitting}
     >
       <DebouncedStringField

@@ -17,7 +17,7 @@ export const CopyToClipboardContainer: FunctionComponent<CopyToClipboardContaine
     <div className="pre-container">
       <pre>
         <div className="copyable-content">{label ? label : value}</div>
-        <div className="m-l-xs copy-to-clipboard-container">
+        <div className="ms-1 copy-to-clipboard-container">
           <CopyToClipboardButton value={value} />
         </div>
       </pre>

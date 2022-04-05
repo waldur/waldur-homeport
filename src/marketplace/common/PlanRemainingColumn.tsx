@@ -13,7 +13,7 @@ const getColor = (value) =>
 export const PlanRemainingColumn: FunctionComponent<{ row }> = ({ row }) => (
   <Badge
     bg={getColor(row.remaining)}
-    className="m-r-sm m-l-sm"
+    className="me-2 ms-2"
     style={{ fontSize: 12 }}
   >
     {row.remaining === null ? 'N/A' : row.remaining}

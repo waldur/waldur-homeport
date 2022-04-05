@@ -37,7 +37,7 @@ export const getAvailable = (quota) => {
 
 export const ProgressTooltipMessage = ({ quota }) => (
   <div>
-    <p className="m-t-sm">{getPlanned(quota)}</p>
+    <p className="mt-2">{getPlanned(quota)}</p>
     <p>{getAvailable(quota)}</p>
     <p>{getExisting(quota)}</p>
     {exceeds(quota) && (
@@ -74,7 +74,7 @@ export const QuotaUsageBarChart: FunctionComponent<QuotaUsageBarChartProps> = (
       if (quota.limit !== -1) {
         return (
           <Fragment key={index}>
-            <div className="m-b-sm clearfix">
+            <div className="mb-2 clearfix">
               <QuotaUsageBarChartDescription quota={quota} />
             </div>
             <Tip

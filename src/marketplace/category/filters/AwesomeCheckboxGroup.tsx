@@ -19,7 +19,7 @@ export const AwesomeCheckBoxGroup: FunctionComponent<AwesomeCheckBoxGroupProps> 
   (props) => (
     <span>
       {props.options.map((option, index) => (
-        <div key={index} className="m-l-sm">
+        <div key={index} className="ms-2">
           <Field
             name={`${props.groupType}-${props.fieldName}-${index}`}
             component={(prop) => (

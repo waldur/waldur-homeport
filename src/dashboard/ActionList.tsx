@@ -16,7 +16,7 @@ export const ActionList: FunctionComponent<ActionListProps> = (props) => (
         onClick={action.onClick}
         className={classNames({ 'fist-item': index === 0 })}
       >
-        <Badge bg="success" className="m-r-sm m-l-sm">
+        <Badge bg="success" className="me-2 ms-2">
           <i className="fa fa-plus" />
         </Badge>
         {action.title}

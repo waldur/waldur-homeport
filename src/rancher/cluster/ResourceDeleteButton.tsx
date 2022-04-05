@@ -46,7 +46,7 @@ export const ResourceDeleteButton: FunctionComponent<{
       title={translate('Delete')}
       disabled={loading}
       action={callback}
-      icon={loading ? 'fa fa-spinner fa-spin m-r-xs' : 'fa fa-trash'}
+      icon={loading ? 'fa fa-spinner fa-spin me-1' : 'fa fa-trash'}
     />
   );
 };

@@ -25,6 +25,6 @@ export const ApproveButton: FunctionComponent<ApproveButtonProps> = ({
       disabled={submitting}
     >
       <i className="fa fa-check" /> {translate('Approve')}{' '}
-      {submitting && <i className="fa fa-spinner fa-spin m-r-xs" />}
+      {submitting && <i className="fa fa-spinner fa-spin me-1" />}
     </button>,
   );

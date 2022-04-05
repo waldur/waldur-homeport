@@ -80,7 +80,7 @@ export const NetworksList: FC<WrappedFieldArrayProps & NetworkChoices> = ({
   );
   return (
     <>
-      <table className="table table-borderless m-b-xs">
+      <table className="table table-borderless mb-1">
         <tbody>
           {fields.map((field, index) => (
             <FormSection key={index} name={field}>

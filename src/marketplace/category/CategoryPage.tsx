@@ -22,7 +22,7 @@ export const CategoryPage: FunctionComponent = () => {
         </MediaQuery>
       </Col>
       <Col lg={9}>
-        <div className="m-b-md p-sm gray-bg">
+        <div className="mb-3 p-sm gray-bg">
           <div style={{ display: 'flex' }}>
             <FilterBarContainer />
             <MediaQuery maxWidth={768}>

@@ -92,7 +92,7 @@ export const FeaturesList = reduxForm({
           responsive={true}
           bordered={true}
           striped={true}
-          className="m-t-md"
+          className="mt-3"
         >
           <tbody>
             {value.data.map((section) => (
