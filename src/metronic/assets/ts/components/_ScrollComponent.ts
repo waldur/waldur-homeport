@@ -30,7 +30,6 @@ class ScrollComponent {
     this.options = Object.assign(defaultScrollOptions, options);
     this.id = this.element.getAttribute('id') || '';
     this.update();
-    // this.element.setAttribute('data-kt-scrolltop', 'true')
     DataUtil.set(this.element, 'scroll', this);
   }
 
