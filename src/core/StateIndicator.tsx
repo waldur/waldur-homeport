@@ -31,18 +31,9 @@ const wrapTooltip = (label, children) =>
 export const StateIndicator: FunctionComponent<StateIndicatorProps> = (props) =>
   wrapTooltip(
     props.tooltip,
-    <div className={`progress state-indicator m-b-none`}>
-      <span
-        className={classNames(
-          'progress-bar',
-          `bg-${props.variant}`,
-          'p-w-sm',
-          'full-width',
-          { 'progress-bar-striped': props.striped || props.active },
-          { 'progress-bar-animated': props.active },
-        )}
-      >
-        {props.label.toUpperCase()}
-      </span>
-    </div>,
+    <span
+      className={classNames('badge fs-8 fw-bolder', `badge-${props.variant}`)}
+    >
+      {props.label.toUpperCase()}
+    </span>,
   );
