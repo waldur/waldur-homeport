@@ -8,13 +8,13 @@ import { EnvironmentVariablePanel } from './EnvironmentVariablePanel';
 
 export const EnvironmentVariablesList: FunctionComponent<any> = (props) => (
   <Form.Group>
-    <Col smOffset={2} sm={8} className="mb-2">
+    <Col sm={{ span: 8, offset: 2 }} className="mb-2">
       <Form.Control plaintext>
         <strong>{translate('Environment variables')}</strong>
       </Form.Control>
     </Col>
 
-    <Col smOffset={2} sm={8}>
+    <Col sm={{ span: 8, offset: 2 }}>
       {props.fields.map((variable, index) => (
         <EnvironmentVariablePanel
           key={index}

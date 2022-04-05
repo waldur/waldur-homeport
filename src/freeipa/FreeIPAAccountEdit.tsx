@@ -28,7 +28,7 @@ export const FreeIPAAccountEdit: React.FC<FreeIPAAccountEditOwnProps> = ({
     <Row disabled={loading}>
       <UsernameGroup profile={profile} />
       <Form.Group>
-        <Col smOffset={3} sm={5}>
+        <Col sm={{ span: 5, offset: 3 }}>
           <SyncProfile
             profile={profile}
             setLoading={setLoading}

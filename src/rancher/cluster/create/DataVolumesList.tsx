@@ -6,7 +6,7 @@ import { DataVolumePanel } from './DataVolumePanel';
 
 export const DataVolumesList: FunctionComponent<any> = (props) => (
   <Form.Group>
-    <Col smOffset={props.smOffset} sm={props.sm}>
+    <Col sm={{ span: props.sm, offset: props.smOffset }}>
       {props.fields.map((volume, index) => (
         <DataVolumePanel
           key={index}
