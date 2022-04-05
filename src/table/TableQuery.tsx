@@ -1,10 +1,9 @@
 import { debounce } from 'lodash';
 import { Component } from 'react';
-import { Button, FormControl, FormGroup, InputGroup } from 'react-bootstrap';
+import { FormGroup } from 'react-bootstrap';
 
+import { FilterBox } from '@waldur/form/FilterBox';
 import { translate } from '@waldur/i18n';
-
-import './TableQuery.scss';
 
 interface TableQueryProps {
   query: string;
@@ -34,18 +33,13 @@ export class TableQuery extends Component<TableQueryProps, State> {
 
   render() {
     return (
-      <FormGroup className="pull-right text-right table-query">
-        <InputGroup>
-          <FormControl
-            type="search"
-            placeholder={translate('Search') + ' ...'}
-            value={this.state.query}
-            onChange={this.setQuery}
-          />
-          <Button size="sm">
-            <i className="fa fa-search" />
-          </Button>
-        </InputGroup>
+      <FormGroup className="pull-right text-right pe-5">
+        <FilterBox
+          type="search"
+          placeholder={translate('Search') + ' ...'}
+          value={this.state.query}
+          onChange={this.setQuery}
+        />
       </FormGroup>
     );
   }
