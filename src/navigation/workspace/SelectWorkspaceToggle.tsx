@@ -90,6 +90,7 @@ export const SelectWorkspaceToggle: FunctionComponent = () => {
     dispatch(
       openModalDialog(SelectWorkspaceDialog, {
         size: 'lg',
+        dialogClassName: 'modal-metro',
       }),
     );
   };

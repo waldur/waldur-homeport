@@ -11,7 +11,7 @@ export const CreateOrganizationButton: FunctionComponent = () => {
   }
   return (
     <a
-      className="pull-right btn btn-sm btn-default"
+      className="pull-right btn btn-sm btn-metro"
       onClick={onClick as any}
       id="add-new-organization"
     >

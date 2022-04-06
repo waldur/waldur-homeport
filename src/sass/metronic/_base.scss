@@ -1,0 +1,62 @@
+/* MODAL */
+.modal-metro {
+  .modal-body {
+    background: #fff;
+  }
+
+  .modal-header {
+    padding: 30px 20px 0;
+    text-align: center;
+    border-bottom: none;
+  }
+
+  .modal-title {
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+
+  .modal-subtitle {
+    font-size: 14px;
+  }
+
+  .modal-footer {
+    border-top: none;
+  }
+}
+
+/* BUTTON */
+.btn-metro {
+  background: $btn-primary;
+  color: $btn-primary-text;
+  border-radius: 7px;
+  padding: 5px 12px;
+  border: 0;
+  letter-spacing: 0.56px;
+
+  &:hover {
+    background: $btn-primary-hover;
+  }
+}
+
+.btn-group-metro {
+  .btn,
+  .btn.btn-default {
+    background: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    letter-spacing: 0px;
+    color: #a1b7a6;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+
+    &.active {
+      color: $primary-color;
+      border-bottom: 1px solid $primary-color;
+    }
+    &:hover {
+      background: $btn-primary-hover;
+    }
+  }
+}

@@ -1855,6 +1855,7 @@ msgstr ""
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
+#: src/navigation/workspace/ProjectsPanel.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
@@ -2972,6 +2973,7 @@ msgid "Filter"
 msgstr ""
 
 #: src/navigation/workspace/OrganizationsPanel.tsx
+#: src/navigation/workspace/OrganizationsSelector.tsx
 msgid "Filter organizations"
 msgstr ""
 
@@ -3934,6 +3936,10 @@ msgstr ""
 
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Labels"
+msgstr ""
+
+#: src/navigation/workspace/ProjectsPanel.tsx
+msgid "Last Modified"
 msgstr ""
 
 #: src/auth/HeroButton.tsx
@@ -5433,6 +5439,7 @@ msgid "Organizations"
 msgstr ""
 
 #: src/navigation/workspace/OrganizationsPanel.tsx
+#: src/navigation/workspace/OrganizationsSelector.tsx
 msgid "Organizations ({count})"
 msgstr ""
 
@@ -6203,6 +6210,7 @@ msgstr ""
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/navigation/workspace/ProjectsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -7267,6 +7275,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesContainer.tsx
 #: src/marketplace/sidebar.ts
+#: src/navigation/workspace/ProjectsPanel.tsx
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectWorkspace.tsx
@@ -7672,6 +7681,10 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
+#: src/navigation/workspace/SelectWorkspaceDialog.tsx
+msgid "Select Project Scope"
+msgstr ""
+
 #: src/customer/list/AccountingPeriodField.tsx
 msgid "Select accounting period"
 msgstr ""
@@ -7687,6 +7700,10 @@ msgstr ""
 
 #: src/rancher/template/SelectControl.tsx
 msgid "Select an option..."
+msgstr ""
+
+#: src/navigation/workspace/OrganizationsSelector.tsx
+msgid "Select an organization..."
 msgstr ""
 
 #: src/issues/create/AssigneeGroup.tsx
@@ -8972,6 +8989,7 @@ msgid "There are no offerings yet."
 msgstr ""
 
 #: src/navigation/workspace/OrganizationsPanel.tsx
+#: src/navigation/workspace/OrganizationsSelector.tsx
 msgid "There are no organizations matching filter."
 msgstr ""
 

@@ -5,7 +5,14 @@ import {
   useEffect,
   FunctionComponent,
 } from 'react';
-import { Col } from 'react-bootstrap';
+import {
+  ButtonToolbar,
+  Col,
+  Row,
+  Table,
+  ToggleButton,
+  ToggleButtonGroup,
+} from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
@@ -17,9 +24,9 @@ import {
 } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
-import { BaseList } from './BaseList';
-import { FilterGroup } from './FilterGroup';
+import { SearchBox } from './SearchBox';
 import { useProjectFilter } from './utils';
+import './ProjectsPanel.scss';
 
 const CreateProjectButton: FunctionComponent<{
   selectedOrganization: Customer;
@@ -34,7 +41,7 @@ const CreateProjectButton: FunctionComponent<{
   }
   return (
     <Link
-      className="pull-right btn btn-sm btn-default"
+      className="pull-right btn btn-sm btn-metro"
       state="organization.createProject"
       params={{
         uuid: selectedOrganization.uuid,
@@ -63,7 +70,7 @@ const ProjectsHeader: FunctionComponent<{
 
 const SelectProjectButton = ({ project }) => (
   <Link
-    className="btn btn-xs btn-default pull-right"
+    className="btn btn-xs btn-metro pull-right"
     state="project.details"
     params={{ uuid: project.uuid }}
   >
@@ -72,16 +79,32 @@ const SelectProjectButton = ({ project }) => (
 );
 
 const EmptyProjectListPlaceholder: FunctionComponent = () => (
-  <span className="ellipsis">
-    {translate('There are no projects matching filter.')}
-  </span>
+  <tr className="text-center">
+    <td colSpan={5}>{translate('There are no projects matching filter.')}</td>
+  </tr>
 );
 
-const ProjectListItem = ({ item }) => (
-  <>
-    <SelectProjectButton project={item} />
-    <div className="ellipsis">{item.name}</div>
-  </>
+const ProjectListItem = ({ project, onClick }) => (
+  <tr>
+    <td>
+      <div className="project-list-item">
+        <img src="https://via.placeholder.com/32/E2E2E2/FFFFFF?text=+" />
+        <a className="title m-l-md" onClick={() => onClick(project)}>
+          {project.name}
+        </a>
+      </div>
+    </td>
+    <td>{'21.01.22' /*formatDateTime(project.created)*/}</td>
+    <td>
+      {
+        '21.01.22' /*project.end_date ? formatDate(project.end_date) : DASH_ESCAPE_CODE*/
+      }
+    </td>
+    <td>{'2'}</td>
+    <td>
+      <SelectProjectButton project={project} />
+    </td>
+  </tr>
 );
 
 export const ProjectsPanel: FunctionComponent<{
@@ -107,26 +130,60 @@ export const ProjectsPanel: FunctionComponent<{
   useEffect(selectFirstProject, [selectedOrganization]);
 
   return (
-    <Col md={6} xs={12}>
-      <CreateProjectButton selectedOrganization={selectedOrganization} />
-      <ProjectsHeader selectedOrganization={selectedOrganization} />
-      <FilterGroup
-        groupId="project-search-box"
-        value={filter}
-        onChange={setFilter}
-        placeholder={translate('Filter projects')}
-      />
-      {selectedOrganization && selectedOrganization.projects.length == 0 ? (
-        <EmptyProjectsPlaceholder />
-      ) : (
-        <BaseList
-          items={filteredProjects}
-          selectedItem={selectedProject}
-          selectItem={selectProject}
-          EmptyPlaceholder={EmptyProjectListPlaceholder}
-          ItemComponent={ProjectListItem}
+    <Row>
+      <Col xs={12}>
+        <CreateProjectButton selectedOrganization={selectedOrganization} />
+        <ProjectsHeader selectedOrganization={selectedOrganization} />
+        <SearchBox
+          groupId="project-search-box"
+          value={filter}
+          onChange={setFilter}
+          placeholder={translate('Filter projects')}
+          className="pull-right"
         />
-      )}
-    </Col>
+        {selectedOrganization && selectedOrganization.projects.length == 0 ? (
+          <EmptyProjectsPlaceholder />
+        ) : (
+          <>
+            <ButtonToolbar>
+              <ToggleButtonGroup
+                className="btn-group-metro"
+                type="radio"
+                name="tabs"
+                defaultValue={1}
+              >
+                <ToggleButton value={1}>Recent</ToggleButton>
+                <ToggleButton value={2}>Starred</ToggleButton>
+                <ToggleButton value={3}>All Projects</ToggleButton>
+              </ToggleButtonGroup>
+            </ButtonToolbar>
+            <Table className="table-metro" responsive hover>
+              <thead>
+                <tr>
+                  <th>{translate('Project')}</th>
+                  <th>{translate('Last Modified')}</th>
+                  <th>{translate('Created')}</th>
+                  <th>{translate('Resources')}</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredProjects.length === 0 ? (
+                  <EmptyProjectListPlaceholder />
+                ) : (
+                  filteredProjects.map((project) => (
+                    <ProjectListItem
+                      key={project.uuid}
+                      project={project}
+                      onClick={selectProject}
+                    />
+                  ))
+                )}
+              </tbody>
+            </Table>
+          </>
+        )}
+      </Col>
+    </Row>
   );
 };

@@ -1,0 +1,23 @@
+/* TABLE */
+.table.table-metro {
+  thead > tr > th {
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: $table-header-color;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-top: 2px dashed $table-header-border-color;
+    border-bottom: 2px dashed $table-header-border-color;
+  }
+
+  > caption + thead > tr:first-child > th,
+  > colgroup + thead > tr:first-child > th,
+  > thead:first-child > tr:first-child > th {
+    border-top: 2px dashed $table-header-border-color;
+  }
+
+  tbody > tr > td {
+    color: $table-data-color;
+    border-top: 0;
+  }
+}
