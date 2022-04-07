@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
-
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { Form } from 'react-bootstrap';
 
 import { FormField } from './types';
 
@@ -10,8 +9,14 @@ interface AwesomeCheckboxFieldProps extends FormField {
 }
 
 export const AwesomeCheckboxField: FunctionComponent<AwesomeCheckboxFieldProps> =
-  (props) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { input, label, validate, ...rest } = props;
-    return <AwesomeCheckbox label={label} {...input} {...rest} />;
-  };
+  ({ input, label }) => (
+    <label className="form-check form-switch form-check-custom form-check-solid">
+      <Form.Check
+        checked={input.value}
+        onChange={(e: React.ChangeEvent<any>) =>
+          input.onChange(e.target.checked)
+        }
+      />
+      <span className="form-check-label fw-bold">{label}</span>
+    </label>
+  );

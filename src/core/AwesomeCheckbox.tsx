@@ -1,14 +1,8 @@
-import classNames from 'classnames';
-import { uniqueId } from 'lodash';
 import React, { FunctionComponent } from 'react';
 
-import { Tip } from '@waldur/core/Tooltip';
-
-type BootstrapStyle = 'primary' | 'success' | 'info' | 'warning' | 'danger';
+import { Tip } from './Tooltip';
 
 interface AwesomeCheckboxProps {
-  variant?: BootstrapStyle;
-  marginRight?: boolean;
   label: React.ReactNode;
   value: boolean;
   onChange(value: boolean): void;
@@ -19,38 +13,27 @@ interface AwesomeCheckboxProps {
 export const AwesomeCheckbox: FunctionComponent<AwesomeCheckboxProps> = (
   props,
 ) => {
-  const [id] = React.useState(uniqueId('checkbox-'));
   return (
-    <div
-      className={classNames(
-        'checkbox',
-        'awesome-checkbox',
-        `checkbox-${props.variant}`,
-        { 'me-2': props.marginRight },
-      )}
-    >
+    <label className="form-check form-switch form-check-custom form-check-solid">
       <input
+        className="form-check-input"
         type="checkbox"
-        id={id}
-        checked={props.value}
-        onChange={(event) => props.onChange(event.target.checked)}
         disabled={props.disabled}
+        checked={props.value}
+        onChange={(e: React.ChangeEvent<any>) =>
+          props.onChange(e.target.checked)
+        }
       />
-      <label htmlFor={id}>
+      <span className="form-check-label fw-bold">
         {props.tooltip && (
           <>
-            <Tip label={props.tooltip} id={`awesome-checkbox-tooltip-${id}`}>
+            <Tip label={props.tooltip} id="tooltip">
               <i className="fa fa-question-circle" />
             </Tip>{' '}
           </>
         )}
         {props.label}
-      </label>
-    </div>
+      </span>
+    </label>
   );
-};
-
-AwesomeCheckbox.defaultProps = {
-  variant: 'primary',
-  marginRight: true,
 };
