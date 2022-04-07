@@ -743,8 +743,9 @@ class MenuComponent {
     EventHandlerUtil.trigger(this.element, 'kt.menu.link.clicked');
   };
 
-  private _click = (element: HTMLElement, e: Event) => {
-    e.preventDefault();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private _click = (element: HTMLElement, _e: Event) => {
+    // _e.preventDefault();
     const item = this._getItemElement(element);
     if (this._getItemOption(item, 'trigger') !== 'click') {
       return;

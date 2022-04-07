@@ -18,10 +18,11 @@ export const Layout: React.FC = ({ children }) => {
   const pageTitle = useSelector(getTitle);
   const currentUser = useSelector(getUser);
   const [actions, setActions] = useState(null);
+  const [tabs, setTabs] = useState(null);
   const [sidebarKey, setSidebarKey] = useState('');
-  const context = useMemo<LayoutContextInterface>(
-    () => ({ setActions, sidebarKey, setSidebarKey }),
-    [setActions, sidebarKey, setSidebarKey],
+  const context = useMemo<Partial<LayoutContextInterface>>(
+    () => ({ setActions, sidebarKey, setSidebarKey, tabs, setTabs }),
+    [setActions, sidebarKey, setSidebarKey, tabs, setTabs],
   );
   if (!currentUser) {
     return null;
