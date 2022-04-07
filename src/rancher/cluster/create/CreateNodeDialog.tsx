@@ -112,8 +112,7 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
               volumeTypes={state.value.volumeTypes}
               mountPoints={state.value.mountPoints}
               defaultVolumeType={state.value.defaultVolumeType}
-              smOffset={3}
-              sm={9}
+              sm={{ span: 9, offset: 3 }}
               {...defaultProps}
             />
           </>

@@ -27,7 +27,6 @@ export const NodeStorageGroup: FunctionComponent<any> = (props) => (
           mountPoints={props.mountPoints}
           volumeTypes={props.volumeTypes}
           defaultVolumeType={props.defaultVolumeType}
-          smOffset={props.smOffset}
           sm={props.sm}
         />
       )}

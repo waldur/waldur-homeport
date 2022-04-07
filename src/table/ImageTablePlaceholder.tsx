@@ -14,9 +14,9 @@ export const ImageTablePlaceholder: React.FC<ImageTablePlaceholderProps> = (
   props,
 ) => (
   <Row className="ImageTablePlaceholder">
-    <Col sm={6} smOffset={3}>
+    <Col sm={{ span: 6, offset: 3 }}>
       <Row>
-        <Col className="ImageTablePlaceholder__img" sm={8} smOffset={2}>
+        <Col className="ImageTablePlaceholder__img" sm={{ span: 8, offset: 2 }}>
           <img src={props.illustration} />
         </Col>
       </Row>
