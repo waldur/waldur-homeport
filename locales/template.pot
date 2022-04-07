@@ -2648,6 +2648,10 @@ msgstr ""
 msgid "End"
 msgstr ""
 
+#: src/navigation/workspace/ProjectsPanel.tsx
+msgid "End Date"
+msgstr ""
+
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
@@ -3936,10 +3940,6 @@ msgstr ""
 
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Labels"
-msgstr ""
-
-#: src/navigation/workspace/ProjectsPanel.tsx
-msgid "Last Modified"
 msgstr ""
 
 #: src/auth/HeroButton.tsx

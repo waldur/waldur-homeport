@@ -20,7 +20,6 @@ export const SearchBox: FunctionComponent<{
       />
       <label htmlFor={groupId}>
         <i className="fa fa-search" />
-        {/* <span className="placeholder">{placeholder}</span> */}
       </label>
     </div>
   </div>

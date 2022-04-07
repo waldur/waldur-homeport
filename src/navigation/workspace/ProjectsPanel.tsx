@@ -14,9 +14,14 @@ import {
   ToggleButtonGroup,
 } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { useAsync, useEffectOnce } from 'react-use';
 
+import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { getCategories, getProjectList } from '@waldur/marketplace/common/api';
+import { Category } from '@waldur/marketplace/types';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import {
   getProject,
   getUser,
@@ -24,9 +29,53 @@ import {
 } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
+import { getProjectCounters } from './api';
 import { SearchBox } from './SearchBox';
 import { useProjectFilter } from './utils';
 import './ProjectsPanel.scss';
+
+interface ResourceItem {
+  label: string;
+  value: number | string;
+}
+
+const parseCounters = (
+  categories: Category[],
+  counters: object,
+): ResourceItem[] => {
+  return categories
+    .map((category) => ({
+      label: category.title,
+      value: counters[`marketplace_category_${category.uuid}`],
+    }))
+    .filter((row) => row.value);
+};
+
+const combineRows = (rows: ResourceItem[]): ResourceItem[] =>
+  rows
+    .filter((item) => item.value)
+    .sort((a, b) => a.label.localeCompare(b.label));
+
+async function loadProjects(customer): Promise<Project[]> {
+  return (
+    await getProjectList({
+      customer: customer.uuid,
+      field: ['uuid', 'name', 'description', 'created', 'end_date'],
+    })
+  ).options;
+}
+async function loadResources(
+  projects: Project[],
+  categories,
+): Promise<Record<'string', ResourceItem[]>> {
+  const result = {};
+  for (const project of projects) {
+    const counters = await getProjectCounters(project.uuid);
+    const counterRows = parseCounters(categories, counters);
+    result[project.uuid] = combineRows(counterRows);
+  }
+  return result as Record<'string', ResourceItem[]>;
+}
 
 const CreateProjectButton: FunctionComponent<{
   selectedOrganization: Customer;
@@ -84,23 +133,51 @@ const EmptyProjectListPlaceholder: FunctionComponent = () => (
   </tr>
 );
 
-const ProjectListItem = ({ project, onClick }) => (
+const ProjectListItem = ({
+  project,
+  resources,
+  projectLoading,
+  resourcesLoading,
+  onClick,
+}: {
+  project: Project;
+  resources: ResourceItem[];
+  projectLoading?: boolean;
+  resourcesLoading?: boolean;
+  onClick?: Function;
+}) => (
   <tr>
     <td>
       <div className="project-list-item">
         <img src="https://via.placeholder.com/32/E2E2E2/FFFFFF?text=+" />
-        <a className="title m-l-md" onClick={() => onClick(project)}>
+        <a className="title m-l-md" onClick={() => onClick && onClick(project)}>
           {project.name}
         </a>
       </div>
     </td>
-    <td>{'21.01.22' /*formatDateTime(project.created)*/}</td>
     <td>
-      {
-        '21.01.22' /*project.end_date ? formatDate(project.end_date) : DASH_ESCAPE_CODE*/
-      }
+      {projectLoading ? (
+        <i className="fa fa-spinner fa-spin" />
+      ) : (
+        formatDateTime(project.created)
+      )}
     </td>
-    <td>{'2'}</td>
+    <td>
+      {projectLoading ? (
+        <i className="fa fa-spinner fa-spin" />
+      ) : project.end_date ? (
+        formatDate(project.end_date)
+      ) : (
+        DASH_ESCAPE_CODE
+      )}
+    </td>
+    <td>
+      {resourcesLoading ? (
+        <i className="fa fa-spinner fa-spin" />
+      ) : (
+        resources?.length
+      )}
+    </td>
     <td>
       <SelectProjectButton project={project} />
     </td>
@@ -112,9 +189,26 @@ export const ProjectsPanel: FunctionComponent<{
 }> = ({ selectedOrganization }) => {
   const currentProject = useSelector(getProject);
   const [selectedProject, selectProject] = useState<Project>(currentProject);
+  const [categories, setCategories] = useState<Category[]>([]);
+  useEffectOnce(() => {
+    (async () => {
+      const categoriesRes = await getCategories({
+        params: { field: ['uuid', 'title'] },
+      });
+      setCategories(categoriesRes);
+    })();
+  });
+  const { loading: projectsLoading, value: projects } = useAsync(
+    () => loadProjects(selectedOrganization),
+    [selectedOrganization],
+  );
+  const { loading: resourcesLoading, value: projectsResources } = useAsync(
+    () => loadResources(projects, categories),
+    [projects, categories],
+  );
 
   const { filter, setFilter, filteredProjects } = useProjectFilter(
-    selectedOrganization?.projects,
+    projects || selectedOrganization?.projects,
   );
 
   const selectFirstProject = useCallback(() => {
@@ -161,8 +255,8 @@ export const ProjectsPanel: FunctionComponent<{
               <thead>
                 <tr>
                   <th>{translate('Project')}</th>
-                  <th>{translate('Last Modified')}</th>
                   <th>{translate('Created')}</th>
+                  <th>{translate('End Date')}</th>
                   <th>{translate('Resources')}</th>
                   <th></th>
                 </tr>
@@ -175,6 +269,11 @@ export const ProjectsPanel: FunctionComponent<{
                     <ProjectListItem
                       key={project.uuid}
                       project={project}
+                      projectLoading={projectsLoading}
+                      resources={
+                        projectsResources ? projectsResources[project.uuid] : []
+                      }
+                      resourcesLoading={resourcesLoading}
                       onClick={selectProject}
                     />
                   ))
