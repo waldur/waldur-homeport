@@ -67,7 +67,7 @@ export const FreeIPAAccountCreate = reduxForm<
       <form className="form-horizontal" onSubmit={handleSubmit(callback)}>
         <UsernameGroup />
         <FormGroup>
-          <Col smOffset={3} sm={5}>
+          <Col sm={{ span: 5, offset: 3 }}>
             <SubmitButton
               submitting={submitting}
               invalid={invalid}

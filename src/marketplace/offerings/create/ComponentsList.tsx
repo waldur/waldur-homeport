@@ -40,13 +40,13 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => {
 
   return (
     <div className="form-group">
-      <Col smOffset={offset} sm={col} className="m-b-sm">
+      <Col sm={{ span: col, offset: offset }} className="m-b-sm">
         <p className="form-control-static">
           <strong>{props.translate('Plan components')}</strong>
         </p>
       </Col>
 
-      <Col smOffset={offset} sm={col}>
+      <Col sm={{ span: col, offset: offset }}>
         {props.fields.map((component, index) => (
           <Panel key={index}>
             <Panel.Heading>

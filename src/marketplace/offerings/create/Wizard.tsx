@@ -38,7 +38,7 @@ export const Wizard = withTranslation((props: WizardProps) => (
       mountOnEnter={props.mountOnEnter}
     />
     <div className="form-group">
-      <Col smOffset={2} sm={8}>
+      <Col sm={{ span: 8, offset: 2 }}>
         <WizardButtons
           isLastStep={props.isLastStep}
           goBack={props.goBack}

@@ -24,12 +24,12 @@ export const OfferingLimitsTable: React.FC<OfferingLimitsTableProps> = (
 
   return (
     <div className="form-group">
-      <Col smOffset={offset} sm={col} className="m-b-sm">
+      <Col sm={{ span: col, offset: offset }} className="m-b-sm">
         <p className="form-control-static">
           <strong>{translate('Offering components')}</strong>
         </p>
       </Col>
-      <Col smOffset={offset} sm={col}>
+      <Col sm={{ span: col, offset: offset }}>
         <table className="table table-borderless">
           <thead>
             <tr>
