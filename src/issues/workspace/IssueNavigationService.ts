@@ -33,7 +33,7 @@ const getDashboardItems = (): MenuItemType[] => [
   },
 ];
 
-const getReportItems = (): MenuItemType[] => [
+export const getReportItems = (): MenuItemType[] => [
   {
     label: translate('Users'),
     icon: 'fa-users',
@@ -71,6 +71,7 @@ const getReportItems = (): MenuItemType[] => [
     label: translate('Reporting'),
     icon: 'fa-files-o',
     key: 'reporting',
+    state: 'marketplace-support-plan-usages',
     children: [
       {
         label: translate('Capacity'),

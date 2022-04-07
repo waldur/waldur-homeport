@@ -1,13 +1,20 @@
 import { createContext, useContext, useEffect } from 'react';
 
-export interface LayoutContextInterface {
-  setActions?(actions: React.ReactNode): void;
-  setSidebarClass?(sidebarClass: string): void;
-  setSidebarKey?(sidebarKey: string): void;
-  sidebarKey?: string;
+interface Tab {
+  title: string;
+  to: string;
 }
 
-export const LayoutContext = createContext<LayoutContextInterface>({});
+export interface LayoutContextInterface {
+  setActions(actions: React.ReactNode): void;
+  setSidebarClass(sidebarClass: string): void;
+  setSidebarKey(sidebarKey: string): void;
+  sidebarKey: string;
+  tabs: Tab[];
+  setTabs(tabs: Tab[]): void;
+}
+
+export const LayoutContext = createContext<Partial<LayoutContextInterface>>({});
 
 export const useSidebarKey = (sidebarKey: string) => {
   const layoutContext = useContext(LayoutContext);
@@ -17,4 +24,14 @@ export const useSidebarKey = (sidebarKey: string) => {
       layoutContext.setSidebarKey('');
     };
   }, [sidebarKey, layoutContext]);
+};
+
+export const useTabs = (tabs: Tab[]) => {
+  const layoutContext = useContext(LayoutContext);
+  useEffect(() => {
+    layoutContext.setTabs(tabs);
+    return () => {
+      layoutContext.setTabs([]);
+    };
+  }, [tabs, layoutContext]);
 };
