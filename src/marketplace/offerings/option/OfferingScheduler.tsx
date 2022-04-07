@@ -33,7 +33,7 @@ const PureOfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
 
   return (
     <FormGroup>
-      <Col sm={{ span: col, offset: offset }}>
+      <Col smOffset={offset} sm={col}>
         <Panel>
           <Panel.Heading>
             <h4>{props.translate('Availability')}</h4>

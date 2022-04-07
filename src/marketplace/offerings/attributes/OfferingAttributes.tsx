@@ -21,7 +21,7 @@ export const OfferingAttributes: React.FC<OfferingAttributesProps> = (
     {props.sections.map((section, sectionIndex) => (
       <div key={sectionIndex}>
         <div className="form-group">
-          <Col sm={{ span: props.controlCols, offset: props.labelCols }}>
+          <Col smOffset={props.labelCols} sm={props.controlCols}>
             <p className="form-control-static">
               <strong>{section.title}</strong>
             </p>
@@ -31,7 +31,7 @@ export const OfferingAttributes: React.FC<OfferingAttributesProps> = (
           if (attribute.type === 'boolean') {
             return (
               <div className="form-group" key={attributeIndex}>
-                <Col sm={{ span: props.controlCols, offset: props.labelCols }}>
+                <Col smOffset={props.labelCols} sm={props.controlCols}>
                   <Field
                     name={`attributes.${attribute.key}`}
                     component={(prop) => (
