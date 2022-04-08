@@ -30,6 +30,7 @@ import {
 import { Customer, Project } from '@waldur/workspace/types';
 
 import { getProjectCounters } from './api';
+import { PopupFlat } from './PopupFlat';
 import { SearchBox } from './SearchBox';
 import { useProjectFilter } from './utils';
 import './ProjectsPanel.scss';
@@ -133,6 +134,12 @@ const EmptyProjectListPlaceholder: FunctionComponent = () => (
   </tr>
 );
 
+const PopoverResourceComponent = (props) => (
+  <p>
+    {props.label}: {props.value}
+  </p>
+);
+
 const ProjectListItem = ({
   project,
   resources,
@@ -145,44 +152,62 @@ const ProjectListItem = ({
   projectLoading?: boolean;
   resourcesLoading?: boolean;
   onClick?: Function;
-}) => (
-  <tr>
-    <td>
-      <div className="project-list-item">
-        <img src="https://via.placeholder.com/32/E2E2E2/FFFFFF?text=+" />
-        <a className="title m-l-md" onClick={() => onClick && onClick(project)}>
-          {project.name}
-        </a>
-      </div>
-    </td>
-    <td>
-      {projectLoading ? (
-        <i className="fa fa-spinner fa-spin" />
-      ) : (
-        formatDateTime(project.created)
-      )}
-    </td>
-    <td>
-      {projectLoading ? (
-        <i className="fa fa-spinner fa-spin" />
-      ) : project.end_date ? (
-        formatDate(project.end_date)
-      ) : (
-        DASH_ESCAPE_CODE
-      )}
-    </td>
-    <td>
-      {resourcesLoading ? (
-        <i className="fa fa-spinner fa-spin" />
-      ) : (
-        resources?.length
-      )}
-    </td>
-    <td>
-      <SelectProjectButton project={project} />
-    </td>
-  </tr>
-);
+}) => {
+  const resourceItems = resources.map((resource) => (
+    <PopoverResourceComponent key={resource.label} {...resource} />
+  ));
+  return (
+    <tr>
+      <td>
+        <div className="project-list-item">
+          <img src="https://via.placeholder.com/32/E2E2E2/FFFFFF?text=+" />
+          <a
+            className="title m-l-md"
+            onClick={() => onClick && onClick(project)}
+          >
+            {project.name}
+          </a>
+        </div>
+      </td>
+      <td>
+        {projectLoading ? (
+          <i className="fa fa-spinner fa-spin" />
+        ) : (
+          formatDateTime(project.created)
+        )}
+      </td>
+      <td>
+        {projectLoading ? (
+          <i className="fa fa-spinner fa-spin" />
+        ) : project.end_date ? (
+          formatDate(project.end_date)
+        ) : (
+          DASH_ESCAPE_CODE
+        )}
+      </td>
+      <td>
+        {resourcesLoading ? (
+          <i className="fa fa-spinner fa-spin" />
+        ) : (
+          <>
+            {resources?.length + ' '}
+            <PopupFlat
+              groupId={'resources_' + project.uuid}
+              items={resourceItems}
+              placement="left"
+              cols={3}
+            >
+              <i className="fa fa-info-circle" />
+            </PopupFlat>
+          </>
+        )}
+      </td>
+      <td>
+        <SelectProjectButton project={project} />
+      </td>
+    </tr>
+  );
+};
 
 export const ProjectsPanel: FunctionComponent<{
   selectedOrganization: Customer;

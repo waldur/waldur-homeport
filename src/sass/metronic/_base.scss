@@ -60,3 +60,41 @@
     }
   }
 }
+
+/* POPOVER */
+.popover.popover-metro {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  border-bottom: 0;
+  border-right: 0;
+  border-top: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  z-index: 10000;
+
+  .popover-content {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+  }
+  .arrow {
+    display: none;
+  }
+
+  .tile {
+    background-color: #fff;
+    padding: 1rem;
+    border-bottom: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+    float: left;
+  }
+  .tile-1 {
+    width: 100%;
+  }
+  .tile-2 {
+    width: 50%;
+  }
+  .tile-3 {
+    width: 33.33333%;
+  }
+}
