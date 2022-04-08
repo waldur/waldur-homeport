@@ -1,8 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import './ImageTablePlaceholder.scss';
-
 export interface ImageTablePlaceholderProps {
   illustration: string;
   title: React.ReactNode;
@@ -13,22 +11,14 @@ export interface ImageTablePlaceholderProps {
 export const ImageTablePlaceholder: React.FC<ImageTablePlaceholderProps> = (
   props,
 ) => (
-  <Row className="ImageTablePlaceholder">
-    <Col sm={{ span: 6, offset: 3 }}>
-      <Row>
-        <Col className="ImageTablePlaceholder__img" sm={{ span: 8, offset: 2 }}>
-          <img src={props.illustration} />
-        </Col>
-      </Row>
-      <Row>
-        <Col className="ImageTablePlaceholder__body">
-          <div className="text-center">
-            <h2>{props.title}</h2>
-            <p>{props.description}</p>
-            {props.action}
-          </div>
-        </Col>
-      </Row>
+  <Row className="justify-content-center" style={{ clear: 'both' }}>
+    <Col sm={4}>
+      <img src={props.illustration} style={{ width: '100%' }} />
+      <div className="text-center">
+        <h2>{props.title}</h2>
+        <p>{props.description}</p>
+        {props.action}
+      </div>
     </Col>
   </Row>
 );
