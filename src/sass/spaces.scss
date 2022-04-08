@@ -3,9 +3,15 @@
 .p-r-n {
   padding-right: 0 !important;
 }
+.p-r-sm {
+  padding-right: 0.5rem !important;
+}
 
 .p-l-n {
   padding-left: 0 !important;
+}
+.p-l-sm {
+  padding-left: 0.5rem !important;
 }
 
 .p-b-n {
@@ -14,6 +20,11 @@
 
 .p-b-xl {
   padding: 40px !important;
+}
+
+.p-x-sm {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
 }
 
 @media (min-width: 768px) {

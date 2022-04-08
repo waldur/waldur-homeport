@@ -33,7 +33,7 @@ export const TotalLimitComponentsTable: FunctionComponent<TotalLimitComponentsTa
           <tr>
             <th className="col-sm-1">{translate('Component name')}</th>
             <th className="col-sm-1">{translate('Unit')}</th>
-            <th className="col-sm-1">{translate('Quantity')}</th>
+            <th className="col-md-2 col-sm-3">{translate('Quantity')}</th>
             {!shouldConcealPrices && (
               <th>
                 {translate('Price per unit')}
@@ -58,7 +58,7 @@ export const TotalLimitComponentsTable: FunctionComponent<TotalLimitComponentsTa
                     type="number"
                     parse={parseIntField}
                     format={formatIntField}
-                    className="form-control"
+                    className="form-control p-x-sm"
                   />
                 )}
               </td>
