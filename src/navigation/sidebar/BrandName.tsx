@@ -1,74 +1,46 @@
-import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
-import {
-  getWorkspace,
-  getCustomer,
-  getProject,
-} from '@waldur/workspace/selectors';
-import {
-  ORGANIZATION_WORKSPACE,
-  SUPPORT_WORKSPACE,
-  PROJECT_WORKSPACE,
-  USER_WORKSPACE,
-} from '@waldur/workspace/types';
 
-export const BrandName: FunctionComponent = () => {
-  const router = useRouter();
-  const workspace = useSelector(getWorkspace);
-  const customer = useSelector(getCustomer);
-  const project = useSelector(getProject);
-  const onLogoClick = (event) => {
-    event.preventDefault();
-    switch (workspace) {
-      case ORGANIZATION_WORKSPACE:
-        router.stateService.go(
-          'organization.dashboard',
-          { uuid: customer.uuid },
-          { reload: true },
-        );
-        break;
-      case SUPPORT_WORKSPACE:
-        // temporary solution till WAL-3909 (support dashboard) is done
-        if (!ENV.plugins.WALDUR_SUPPORT) {
-          return router.stateService.go('marketplace-support-resources');
-        }
-        router.stateService.go('support.dashboard', { reload: true });
-        break;
-      case PROJECT_WORKSPACE:
-        router.stateService.go(
-          'project.details',
-          { uuid: project.uuid },
-          { reload: true },
-        );
-        break;
-      case USER_WORKSPACE:
-        router.stateService.go('profile.details', { reload: true });
-        break;
-      default:
-        router.stateService.go('profile.details', { reload: true });
-        break;
-    }
-  };
-  return (
-    <li className="brand-name hidden-xs">
-      <a onClick={onLogoClick}>
-        {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
-          <img
-            src={ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO}
-            style={{ maxHeight: 100, maxWidth: 175 }}
-          />
-        ) : (
-          <>
-            <i className="fa fa-th-large"></i>{' '}
-            <span className="ellipsis">
-              {ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
-            </span>
-          </>
-        )}
-      </a>
-    </li>
-  );
-};
+export const BrandName: FunctionComponent = () => (
+  <div className="aside-logo flex-column-auto" id="kt_aside_logo">
+    {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
+      <img src={ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO} className="h-25px logo" />
+    ) : (
+      <>
+        <i className="fa fa-th-large"></i>{' '}
+        <h3 className="mt-2" style={{ color: 'white' }}>
+          {ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
+        </h3>
+      </>
+    )}
+    <div
+      id="kt_aside_toggle"
+      className="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
+      data-kt-toggle="true"
+      data-kt-toggle-state="active"
+      data-kt-toggle-target="body"
+      data-kt-toggle-name="aside-minimize"
+    >
+      <span className="svg-icon svg-icon-1 rotate-180">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            opacity="0.5"
+            d="M14.2657 11.4343L18.45 7.25C18.8642 6.83579 18.8642 6.16421 18.45 5.75C18.0358 5.33579 17.3642 5.33579 16.95 5.75L11.4071 11.2929C11.0166 11.6834 11.0166 12.3166 11.4071 12.7071L16.95 18.25C17.3642 18.6642 18.0358 18.6642 18.45 18.25C18.8642 17.8358 18.8642 17.1642 18.45 16.75L14.2657 12.5657C13.9533 12.2533 13.9533 11.7467 14.2657 11.4343Z"
+            fill="currentColor"
+          ></path>
+          <path
+            d="M8.2657 11.4343L12.45 7.25C12.8642 6.83579 12.8642 6.16421 12.45 5.75C12.0358 5.33579 11.3642 5.33579 10.95 5.75L5.40712 11.2929C5.01659 11.6834 5.01659 12.3166 5.40712 12.7071L10.95 18.25C11.3642 18.6642 12.0358 18.6642 12.45 18.25C12.8642 17.8358 12.8642 17.1642 12.45 16.75L8.2657 12.5657C7.95328 12.2533 7.95328 11.7467 8.2657 11.4343Z"
+            fill="currentColor"
+          ></path>
+        </svg>
+      </span>
+    </div>
+  </div>
+);
