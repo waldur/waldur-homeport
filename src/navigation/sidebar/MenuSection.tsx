@@ -15,8 +15,10 @@ export const MenuSection: FunctionComponent<SidebarSection> = ({
         </span>
       </div>
     </div>
-    {items.map((item, itemIndex) => (
-      <MenuItem key={itemIndex} item={item} />
-    ))}
+    {items
+      .filter((item) => item.state)
+      .map((item, itemIndex) => (
+        <MenuItem key={itemIndex} item={item} />
+      ))}
   </>
 );
