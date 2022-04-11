@@ -12,7 +12,7 @@ export const StaticField: React.FC<StaticFieldProps> = (props) => (
   <Form.Group>
     <Form.Label className={props.labelClass}>{props.label}</Form.Label>
     <div className={props.controlClass}>
-      <Form.Control plaintext>{props.value}</Form.Control>
+      <p>{props.value}</p>
     </div>
   </Form.Group>
 );

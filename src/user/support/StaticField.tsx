@@ -12,7 +12,7 @@ export const StaticField: FunctionComponent<StaticFieldProps> = (props) => (
       {props.label}
     </Form.Label>
     <div className="col-sm-9 col-md-8">
-      <Form.Control plaintext>{props.value}</Form.Control>
+      <p>{props.value}</p>
     </div>
   </Form.Group>
 );

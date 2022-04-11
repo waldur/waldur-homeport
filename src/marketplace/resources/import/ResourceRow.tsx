@@ -80,7 +80,7 @@ export const ResourceRow: FunctionComponent<{
           </Form.Control>
         </td>
         <td>
-          <Form.Control plaintext>{resource.backend_id}</Form.Control>
+          <p>{resource.backend_id}</p>
         </td>
         <td>
           <SelectResourceButton

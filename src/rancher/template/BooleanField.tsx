@@ -26,9 +26,7 @@ export const BooleanField: React.FC<FieldProps> = (props) => (
         label={props.label}
         required={props.required}
       />
-      {props.description && (
-        <Form.Control plaintext>{props.description}</Form.Control>
-      )}
+      {props.description && <p>{props.description}</p>}
     </Form.Group>
   </Col>
 );

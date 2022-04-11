@@ -111,7 +111,7 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(
           {challengeCode && (
             <Form.Group>
               <Form.Label>{translate('Challenge code')}</Form.Label>
-              <Form.Control plaintext>{challengeCode}</Form.Control>
+              <p>{challengeCode}</p>
             </Form.Group>
           )}
         </Modal.Body>

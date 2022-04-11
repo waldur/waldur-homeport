@@ -56,7 +56,7 @@ export const EmailField: FunctionComponent<any> = (props) => {
           {translate('Email')}
         </Form.Label>
         <div className="col-sm-9 col-md-8">
-          <Form.Control plaintext>{props.user.email}</Form.Control>
+          <p>{props.user.email}</p>
           {!props.user.requested_email && !props.protected && (
             <Button onClick={openChangeDialog}>
               {translate('Change email')}

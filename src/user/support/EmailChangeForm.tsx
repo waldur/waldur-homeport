@@ -19,7 +19,7 @@ export const EmailChangeForm = ({ user }: { user: UserDetails }) => {
       {user.requested_email && (
         <Form.Group>
           <label htmlFor="emailAddress">{translate('Requested email')}</label>
-          <Form.Control plaintext>{user.requested_email}</Form.Control>
+          <p>{user.requested_email}</p>
         </Form.Group>
       )}
       <Form.Group>

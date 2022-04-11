@@ -53,13 +53,13 @@ export const ComponentRow: React.FC<ComponentRowProps> = ({
 }) => (
   <tr>
     <td>
-      <Form.Control plaintext>{component.name}</Form.Control>
+      <p>{component.name}</p>
     </td>
     <td>
-      <Form.Control plaintext>{component.usage || 'N/A'}</Form.Control>
+      <p>{component.usage || 'N/A'}</p>
     </td>
     <td>
-      <Form.Control plaintext>{component.limit || 'N/A'}</Form.Control>
+      <p>{component.limit || 'N/A'}</p>
     </td>
     <Field
       name={`limits.${component.type}`}
