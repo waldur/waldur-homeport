@@ -134,15 +134,33 @@ const EmptyProjectListPlaceholder: FunctionComponent = () => (
   </tr>
 );
 
+const getResourceIcon = (name) => {
+  if (name === 'HPC') return 'fa fa-microchip';
+  else if (name === 'AKKA') return 'fa fa-microchip';
+  else if (name === 'Platform') return 'fa fa-window-maximize';
+  else if (name === 'Private clouds') return 'fa fa-cloud';
+  else if (name === 'Storage') return 'fa fa-database';
+  else if (name === 'VMs') return 'fa fa-desktop';
+  else return 'fa fa-server';
+};
+const getResourcesCount = (resources: ResourceItem[]) => {
+  return resources.reduce((acc, item) => {
+    return acc + Number(item.value);
+  }, 0);
+};
 const PopoverResourceComponent = (props) => (
-  <p>
-    {props.label}: {props.value}
-  </p>
+  <div className="resource-item">
+    <i className={getResourceIcon(props.label)} />
+    <div className="title">
+      <span>{props.label}: </span>
+      <span className="value">{props.value}</span>
+    </div>
+  </div>
 );
 
 const ProjectListItem = ({
   project,
-  resources,
+  resources = [],
   projectLoading,
   resourcesLoading,
   onClick,
@@ -153,9 +171,11 @@ const ProjectListItem = ({
   resourcesLoading?: boolean;
   onClick?: Function;
 }) => {
-  const resourceItems = resources.map((resource) => (
-    <PopoverResourceComponent key={resource.label} {...resource} />
-  ));
+  const resourceItems = resources
+    ? resources.map((resource) => (
+        <PopoverResourceComponent key={resource.label} {...resource} />
+      ))
+    : [];
   return (
     <tr>
       <td>
@@ -190,15 +210,19 @@ const ProjectListItem = ({
           <i className="fa fa-spinner fa-spin" />
         ) : (
           <>
-            {resources?.length + ' '}
-            <PopupFlat
-              groupId={'resources_' + project.uuid}
-              items={resourceItems}
-              placement="left"
-              cols={3}
-            >
-              <i className="fa fa-info-circle" />
-            </PopupFlat>
+            {getResourcesCount(resources) + ' '}
+            {resourceItems.length ? (
+              <PopupFlat
+                groupId={'resources_' + project.uuid}
+                items={resourceItems}
+                placement="left"
+                cols={3}
+              >
+                <i className="fa fa-info-circle" />
+              </PopupFlat>
+            ) : (
+              ''
+            )}
           </>
         )}
       </td>

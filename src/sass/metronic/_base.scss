@@ -63,7 +63,7 @@
 
 /* POPOVER */
 .popover.popover-metro {
-  background: transparent;
+  min-width: 400px;
   border-radius: 0;
   padding: 0;
   border-bottom: 0;
@@ -89,12 +89,15 @@
     float: left;
   }
   .tile-1 {
-    width: 100%;
+    flex-basis: 100%;
+    flex-grow: 1;
   }
   .tile-2 {
-    width: 50%;
+    flex-basis: 50%;
+    flex-grow: 1;
   }
   .tile-3 {
-    width: 33.33333%;
+    flex-basis: 33.33333%;
+    flex-grow: 1;
   }
 }

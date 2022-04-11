@@ -16,3 +16,21 @@
     }
   }
 }
+
+.resource-item {
+  color: #7f998a;
+  font-weight: bold;
+  text-align: center;
+
+  i {
+    font-size: 36px;
+    color: #008800;
+  }
+  .title {
+    font-size: 14px;
+    margin: 8px 0 0px;
+  }
+  .value {
+    color: #008800;
+  }
+}
