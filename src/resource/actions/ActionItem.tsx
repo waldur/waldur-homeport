@@ -19,7 +19,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => (
     // Workaround for rendering tooltips for disabled dropdown menu items.
     // See also: https://stackoverflow.com/questions/57349166/
     style={props.disabled ? { opacity: 0.3 } : undefined}
-    onSelect={() => !props.disabled && props.action()}
+    onClick={() => !props.disabled && props.action()}
   >
     {props.tooltip ? (
       <>
