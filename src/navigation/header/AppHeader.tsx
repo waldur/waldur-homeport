@@ -13,7 +13,7 @@ const TabsList: FunctionComponent = () => {
     <>
       {(ctx.tabs || []).map((tab, index) => (
         <UISrefActive class="here" key={index}>
-          <div className="menu-item">
+          <div className="menu-item" data-kt-menu-trigger="click">
             <span className="menu-link py-3">
               <UISref to={tab.to}>
                 <a className="menu-title">{tab.title}</a>

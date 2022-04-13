@@ -1,4 +1,4 @@
-import { UISref } from '@uirouter/react';
+import { UISref, UISrefActive } from '@uirouter/react';
 import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 import Gravatar from 'react-gravatar';
@@ -92,7 +92,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
         data-kt-menu="true"
         data-popper-placement="bottom-end"
       >
-        <div className="menu-item px-3">
+        <div className="menu-item px-3" data-kt-menu-trigger="click">
           <div className="menu-content d-flex align-items-center px-3">
             <div className="symbol symbol-50px me-5">
               <Gravatar email={user.email} size={40} />
@@ -113,18 +113,20 @@ export const UserDropdownMenu: FunctionComponent = () => {
         </div>
 
         {items.map((item, index) => (
-          <div key={index} className="menu-item px-5">
-            <UISref to={item.state}>
-              <a className="menu-link px-5">{item.label}</a>
-            </UISref>
-          </div>
+          <UISrefActive class="showing" key={index}>
+            <div className="menu-item px-5" data-kt-menu-trigger="click">
+              <UISref to={item.state}>
+                <a className="menu-link px-5">{item.label}</a>
+              </UISref>
+            </div>
+          </UISrefActive>
         ))}
 
         <div className="separator my-2"></div>
 
         <LanguageSelector />
 
-        <div className="menu-item px-5">
+        <div className="menu-item px-5" data-kt-menu-trigger="click">
           <a onClick={AuthService.logout} className="menu-link px-5">
             {translate('Log out')}
           </a>
