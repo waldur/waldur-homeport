@@ -22,7 +22,7 @@ export const OfferingOptions: FC<any> = (props) => {
           'If you want user to provide additional details when ordering, please configure input form for the user below',
         )}
       </h3>
-      <Col sm={{ span: col, offset: offset }}>
+      <Col smOffset={offset} sm={col}>
         {props.fields.map((option, index) => (
           <Card key={index}>
             <Card.Header>

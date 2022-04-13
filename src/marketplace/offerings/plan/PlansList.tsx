@@ -19,12 +19,12 @@ const PlansListComponent: FunctionComponent<any> = (props) => {
   return (
     <Form.Group>
       <Col sm={{ span: col, offset: offset }} className="mb-2">
-        <Form.Control plaintext>
+        <p>
           <strong>{translate('Accounting plans')}</strong>
-        </Form.Control>
+        </p>
       </Col>
 
-      <Col sm={{ span: col, offset: offset }}>
+      <Col smOffset={offset} sm={col}>
         {props.fields.map((plan, index) => (
           <PlanPanel
             key={index}

@@ -41,12 +41,12 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => {
   return (
     <Form.Group>
       <Col sm={{ span: col, offset: offset }} className="mb-2">
-        <Form.Control plaintext>
+        <p>
           <strong>{props.translate('Plan components')}</strong>
-        </Form.Control>
+        </p>
       </Col>
 
-      <Col sm={{ span: col, offset: offset }}>
+      <Col smOffset={offset} sm={col}>
         {props.fields.map((component, index) => (
           <Card key={index}>
             <Card.Header>

@@ -22,9 +22,9 @@ export const OfferingAttributes: React.FC<OfferingAttributesProps> = (
       <div key={sectionIndex}>
         <Form.Group>
           <Col sm={{ span: props.controlCols, offset: props.labelCols }}>
-            <Form.Control plaintext>
+            <p>
               <strong>{section.title}</strong>
-            </Form.Control>
+            </p>
           </Col>
         </Form.Group>
         {section.attributes.map((attribute, attributeIndex) => {
