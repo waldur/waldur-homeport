@@ -6,7 +6,7 @@ export const DateField: FunctionComponent<any> = (props) => (
   <DatePicker
     dateFormat="yyyy-MM-dd"
     selected={
-      typeof props.input.value === 'string'
+      props.input.value && typeof props.input.value === 'string'
         ? DateTime.fromISO(props.input.value).toJSDate()
         : props.input.value
     }
