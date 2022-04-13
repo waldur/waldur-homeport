@@ -73,7 +73,7 @@ export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = (
     return (
       <FormFieldsContext.Provider value={{ readOnlyFields }}>
         <Row>
-          <Col lg={10} lgOffset={1}>
+          <Col lg={{ span: 10, offset: 1 }}>
             <form onSubmit={handleSubmit(updateOffering)}>
               <Wizard
                 steps={STEPS}

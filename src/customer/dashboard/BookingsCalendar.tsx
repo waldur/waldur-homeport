@@ -96,7 +96,7 @@ export const BookingsCalendar = (props: BookingsCalendarProps) => {
         <BookingsCalendarLegend events={calendarEvents} />
       </Row>
       <Row style={{ marginBottom: '30px' }}>
-        <Col md={8} mdOffset={2}>
+        <Col md={{ span: 8, offset: 2 }}>
           <Calendar
             height="auto"
             eventLimit={false}

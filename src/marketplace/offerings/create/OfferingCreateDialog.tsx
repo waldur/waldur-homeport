@@ -80,7 +80,7 @@ export const OfferingCreateDialog: React.FC<OfferingCreateDialogProps> = (
   } else if (loaded) {
     return (
       <Row>
-        <Col lg={10} lgOffset={1}>
+        <Col lg={{ span: 10, offset: 1 }}>
           <form onSubmit={handleSubmit(createOffering)}>
             <Wizard
               steps={STEPS}

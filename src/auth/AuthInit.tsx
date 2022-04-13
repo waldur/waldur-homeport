@@ -56,7 +56,7 @@ export const AuthInit: FunctionComponent = () => {
   ) : (
     <Container>
       <Row className="mt-3">
-        <Col md={6} mdOffset={3} xs={12} lg={6} lgOffset={3}>
+        <Col md={{ span: 6, offset: 3 }} xs={12} lg={{ span: 6, offset: 3 }}>
           <h2>
             {translate('Welcome to {pageTitle}!', {
               pageTitle: ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE,
@@ -70,7 +70,7 @@ export const AuthInit: FunctionComponent = () => {
         </Col>
       </Row>
       <Row className="initial-data-page">
-        <Col mdOffset={2} md={8} lg={6} lgOffset={3} as={Card}>
+        <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }} as={Card}>
           <Card.Body>
             <UserEditContainer user={user} onSave={onSave} initial={true} />
           </Card.Body>
