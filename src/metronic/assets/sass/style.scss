@@ -11,6 +11,7 @@ $mode: default;
 // Components
 @import './core/components/components';
 @import 'components/components';
+@import './custom/style';
 
 // Layout
 @import 'layout/layout';

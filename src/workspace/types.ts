@@ -90,6 +90,9 @@ export interface Project {
   url: string;
   permissions: Permission[];
   quotas: Quota[];
+  description?: string;
+  created?: string;
+  end_date?: string;
   billing_price_estimate?: BillingPriceEstimate;
   customer_uuid?: string;
   customer_name?: string;

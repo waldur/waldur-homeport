@@ -561,6 +561,10 @@ msgstr ""
 msgid "All ports"
 msgstr ""
 
+#: src/navigation/workspace/ProjectsPanel.tsx
+msgid "All projects"
+msgstr ""
+
 #: src/marketplace/resources/import/useImportDialog.tsx
 msgid "All resources have been imported."
 msgstr ""
@@ -1841,6 +1845,7 @@ msgstr ""
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
+#: src/navigation/workspace/ProjectsPanel.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
@@ -2635,6 +2640,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/navigation/workspace/ProjectsPanel.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectUpdateForm.tsx
@@ -2952,7 +2958,7 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-#: src/navigation/workspace/OrganizationsPanel.tsx
+#: src/navigation/workspace/OrganizationsSelector.tsx
 msgid "Filter organizations"
 msgstr ""
 
@@ -5408,7 +5414,7 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: src/navigation/workspace/OrganizationsPanel.tsx
+#: src/navigation/workspace/OrganizationsSelector.tsx
 msgid "Organizations ({count})"
 msgstr ""
 
@@ -6166,6 +6172,7 @@ msgstr ""
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/navigation/workspace/ProjectsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -6576,6 +6583,10 @@ msgstr ""
 
 #: src/vmware/actions/RebootAction.tsx
 msgid "Reboot"
+msgstr ""
+
+#: src/navigation/workspace/ProjectsPanel.tsx
+msgid "Recent"
 msgstr ""
 
 #: src/marketplace/landing/LandingPage.tsx
@@ -7222,6 +7233,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesContainer.tsx
 #: src/navigation/sidebar/UnifiedSidebar.tsx
+#: src/navigation/workspace/ProjectsPanel.tsx
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectWorkspace.tsx
@@ -7644,6 +7656,10 @@ msgstr ""
 msgid "Select an option..."
 msgstr ""
 
+#: src/navigation/workspace/OrganizationsSelector.tsx
+msgid "Select an organization..."
+msgstr ""
+
 #: src/issues/create/AssigneeGroup.tsx
 msgid "Select assignee..."
 msgstr ""
@@ -7757,6 +7773,10 @@ msgstr ""
 
 #: src/customer/team/ProjectRoleSelectField.tsx
 msgid "Select project roles"
+msgstr ""
+
+#: src/navigation/workspace/SelectWorkspaceDialog.tsx
+msgid "Select project scope"
 msgstr ""
 
 #: src/issues/create/IssueQuickCreate.tsx
@@ -8270,6 +8290,10 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "Staff and Support user"
+msgstr ""
+
+#: src/navigation/workspace/ProjectsPanel.tsx
+msgid "Starred"
 msgstr ""
 
 #: src/azure/vm/actions/StartAction.tsx
@@ -8923,7 +8947,7 @@ msgstr ""
 msgid "There are no offerings yet."
 msgstr ""
 
-#: src/navigation/workspace/OrganizationsPanel.tsx
+#: src/navigation/workspace/OrganizationsSelector.tsx
 msgid "There are no organizations matching filter."
 msgstr ""
 

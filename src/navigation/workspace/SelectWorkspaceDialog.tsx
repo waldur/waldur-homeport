@@ -1,19 +1,20 @@
 import { useRouter } from '@uirouter/react';
 import { useState, FunctionComponent } from 'react';
-import { Button, Modal, Row } from 'react-bootstrap';
+import { Row, Col, Button, Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { ModalSubtitle } from '@waldur/modal/ModalSubtitle';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import './SelectWorkspaceDialog.scss';
 import { getCustomersCount } from './api';
 import { EmptyOrganizationsPlaceholder } from './EmptyOrganizationsPlaceholder';
-import { OrganizationsPanel } from './OrganizationsPanel';
+import { OrganizationsSelector } from './OrganizationsSelector';
 import { ProjectsPanel } from './ProjectsPanel';
 
 export const SelectWorkspaceDialog: FunctionComponent = () => {
@@ -33,6 +34,7 @@ export const SelectWorkspaceDialog: FunctionComponent = () => {
     <>
       <Modal.Header>
         <Modal.Title>{translate('Select workspace')}</Modal.Title>
+        <ModalSubtitle>{translate('Select project scope')}</ModalSubtitle>
       </Modal.Header>
       <Modal.Body>
         {loading ? (
@@ -42,14 +44,22 @@ export const SelectWorkspaceDialog: FunctionComponent = () => {
         ) : organizationsCount === 0 ? (
           <EmptyOrganizationsPlaceholder />
         ) : (
-          <Row>
-            <OrganizationsPanel
-              selectedOrganization={selectedOrganization}
-              selectOrganization={selectOrganization}
-              organizationsCount={organizationsCount}
-            />
-            <ProjectsPanel selectedOrganization={selectedOrganization} />
-          </Row>
+          <>
+            <Row className="mb-8">
+              <Col className="workspace-listing" xs={12}>
+                <OrganizationsSelector
+                  selectedOrganization={selectedOrganization}
+                  selectOrganization={selectOrganization}
+                  organizationsCount={organizationsCount}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <ProjectsPanel selectedOrganization={selectedOrganization} />
+              </Col>
+            </Row>
+          </>
         )}
       </Modal.Body>
       <Modal.Footer>
