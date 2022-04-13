@@ -1,35 +1,16 @@
-import { UISref, UISrefActive } from '@uirouter/react';
-import { useContext, FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
 
 import 'world-flags-sprite/stylesheets/flags16.css';
 
 import { ENV } from '@waldur/configs/default';
 
-import { LayoutContext } from '../context';
+import { BreadcrumbsContainer } from '../breadcrumbs/BreadcrumbsContainer';
+import { getTitle } from '../title';
 
-import { ExternalLinks } from './ExternalLinks';
 import { UserDropdownMenu } from './UserDropdown';
 
 const Logo = require('@waldur/images/logo.svg');
-
-const TabsList: FunctionComponent = () => {
-  const ctx = useContext(LayoutContext);
-  return (
-    <>
-      {(ctx.tabs || []).map((tab, index) => (
-        <UISrefActive class="here" key={index}>
-          <div className="menu-item" data-kt-menu-trigger="click">
-            <span className="menu-link py-3">
-              <UISref to={tab.to}>
-                <a className="menu-title">{tab.title}</a>
-              </UISref>
-            </span>
-          </div>
-        </UISrefActive>
-      ))}
-    </>
-  );
-};
 
 const AsideMobileToggle: FunctionComponent = () => (
   <div
@@ -58,37 +39,39 @@ const AsideMobileToggle: FunctionComponent = () => (
   </div>
 );
 
-export const AppHeader: FunctionComponent = () => (
-  <div className="header align-items-stretch">
-    <div className="container-fluid d-flex align-items-stretch justify-content-between">
-      <div className="d-flex align-items-center d-lg-none ms-n2 me-2">
-        <AsideMobileToggle />
+export const AppHeader: FunctionComponent = () => {
+  const pageTitle = useSelector(getTitle);
+  return (
+    <div className="header align-items-stretch">
+      <div className="container-fluid d-flex align-items-stretch justify-content-between">
+        <div className="d-flex align-items-center d-lg-none ms-n2 me-2">
+          <AsideMobileToggle />
 
-        <div className="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-          <a className="d-lg-none">
-            <img
-              alt="Logo"
-              src={ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE || Logo}
-              className="h-30px"
-            />
-          </a>
-        </div>
-      </div>
-      <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
-        <div className="d-flex align-items-stretch">
-          <div className="header-menu align-items-stretch">
-            <div className="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch">
-              <TabsList />
-              <ExternalLinks />
-            </div>
+          <div className="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
+            <a className="d-lg-none">
+              <img
+                alt="Logo"
+                src={ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE || Logo}
+                className="h-30px"
+              />
+            </a>
           </div>
         </div>
-        <div className="d-flex align-items-stretch flex-shrink-0">
-          <div className="d-flex align-items-center ms-1 ms-lg-3">
-            <UserDropdownMenu />
+        <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+          <div className="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+            <h1 className="d-flex text-dark fw-bolder fs-3 align-items-center my-1">
+              {pageTitle}
+            </h1>
+            <span className="h-20px border-gray-300 border-start mx-4"></span>
+            <BreadcrumbsContainer />
+          </div>
+          <div className="d-flex align-items-stretch flex-shrink-0">
+            <div className="d-flex align-items-center ms-1 ms-lg-3">
+              <UserDropdownMenu />
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
