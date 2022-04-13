@@ -1,0 +1,105 @@
+/* MODAL */
+.modal-metro {
+  .modal-body {
+    background: #fff;
+  }
+
+  .modal-header {
+    display: block;
+    padding: 30px 20px 0;
+    text-align: center;
+    border-bottom: none;
+
+    .modal-title {
+      color: #405448;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+
+    .modal-subtitle {
+      color: #405448;
+      font-size: 14px;
+    }
+  }
+
+  .modal-footer {
+    border-top: none;
+  }
+}
+
+/* BUTTON */
+.btn-metro {
+  background: $btn-primary;
+  color: $btn-primary-text;
+  border-radius: 7px;
+  padding: 5px 12px;
+  border: 0;
+  letter-spacing: 0.56px;
+
+  &:hover {
+    background: $btn-primary-hover;
+  }
+}
+
+.list-group.list-group-metro {
+  button {
+    background: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 0 !important;
+    letter-spacing: 0px;
+    color: #a1b7a6;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+
+    &.active {
+      color: $primary-color;
+      border-bottom: 1px solid $primary-color;
+    }
+    &:hover {
+      background: $btn-primary-hover;
+    }
+  }
+}
+
+/* POPOVER */
+.popover.popover-metro {
+  min-width: 400px;
+  border-radius: 0;
+  padding: 0;
+  border-bottom: 0;
+  border-right: 0;
+  border-top: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  z-index: 10000;
+
+  .popover-body {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+  }
+  .arrow {
+    display: none;
+  }
+
+  .tile {
+    background-color: #fff;
+    padding: 1rem;
+    border-bottom: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+    float: left;
+  }
+  .tile-1 {
+    flex-basis: 100%;
+    flex-grow: 1;
+  }
+  .tile-2 {
+    flex-basis: 50%;
+    flex-grow: 1;
+  }
+  .tile-3 {
+    flex-basis: 33.33333%;
+    flex-grow: 1;
+  }
+}
