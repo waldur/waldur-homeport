@@ -4,7 +4,7 @@ import {
   Form,
   InputGroup,
   OverlayTrigger,
-  Tooltip as BootstrapTooltip,
+  Tooltip,
 } from 'react-bootstrap';
 import { Field, WrappedFieldProps } from 'redux-form';
 
@@ -48,9 +48,9 @@ const UsernameField: FunctionComponent<WrappedFieldProps> = (props) => (
         <OverlayTrigger
           placement="top"
           overlay={
-            <BootstrapTooltip id="freeipa-username-prefix">
+            <Tooltip id="freeipa-username-prefix">
               {translate('Username prefix')}
-            </BootstrapTooltip>
+            </Tooltip>
           }
         >
           <InputGroup.Text>

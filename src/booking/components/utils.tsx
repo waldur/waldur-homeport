@@ -1,10 +1,6 @@
 import type { EventApi } from '@fullcalendar/core';
 import classNames from 'classnames';
-import {
-  Form,
-  OverlayTrigger,
-  Tooltip as BootstrapTooltip,
-} from 'react-bootstrap';
+import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 
 import { bookingStateAliases } from '@waldur/booking/BookingStateField';
@@ -52,12 +48,12 @@ const renderEventWithTooltip = ({
     <OverlayTrigger
       placement="top"
       overlay={
-        <BootstrapTooltip id={event.id}>
+        <Tooltip id={event.id}>
           <div className="container-fluid">
             <h4 className="fc-title">{event.title}</h4>
             {bookingDataTemplate(getTooltipInformation(event))}
           </div>
-        </BootstrapTooltip>
+        </Tooltip>
       }
     >
       <div className={el.children[0].className}>

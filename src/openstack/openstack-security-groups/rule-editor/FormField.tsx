@@ -1,9 +1,5 @@
 import { FC } from 'react';
-import {
-  Form,
-  OverlayTrigger,
-  Tooltip as BootstrapTooltip,
-} from 'react-bootstrap';
+import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { WrappedFieldProps } from 'redux-form';
 
 export const FormField: FC<WrappedFieldProps & { tooltip?: string }> = ({
@@ -22,7 +18,7 @@ export const FormField: FC<WrappedFieldProps & { tooltip?: string }> = ({
     {tooltip ? (
       <OverlayTrigger
         placement="top"
-        overlay={<BootstrapTooltip id={input.name}>{tooltip}</BootstrapTooltip>}
+        overlay={<Tooltip id={input.name}>{tooltip}</Tooltip>}
       >
         <span style={{ position: 'absolute', right: 16, top: 16 }}>
           <i className="fa fa-question-circle" />
