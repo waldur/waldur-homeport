@@ -90,10 +90,8 @@ export const BillingDetails: FunctionComponent = () => {
   const layoutContext = useContext(LayoutContext);
   useEffect(() => {
     layoutContext.setActions(<InvoiceDetailActions invoice={invoice} />);
-    layoutContext.setSidebarClass('hidden-print');
     return () => {
       layoutContext.setActions(null);
-      layoutContext.setSidebarClass('');
     };
   }, [invoice, layoutContext]);
 

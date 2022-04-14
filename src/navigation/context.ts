@@ -7,7 +7,6 @@ interface Tab {
 
 export interface LayoutContextInterface {
   setActions(actions: React.ReactNode): void;
-  setSidebarClass(sidebarClass: string): void;
   setSidebarKey(sidebarKey: string): void;
   sidebarKey: string;
   tabs: Tab[];
