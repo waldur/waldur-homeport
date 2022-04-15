@@ -7,9 +7,10 @@ $docs-page-bg-color: if(isDarkMode(), #151521, $gray-100) !default;
 
 // Content Spacing
 $docs-content-spacing: (
-  desktop: 30px,
   // Padding for desktop mode
-  tablet-and-mobile: 15px // Padding for tablet and mobile modes,,
+  desktop: 30px,
+  // Padding for tablet and mobile modes
+  tablet-and-mobile: 15px
 ) !default;
 
 // Aside

@@ -15,9 +15,10 @@ $content-border-radius: 1.5rem !default;
 
 // Content Spacing
 $content-spacing: (
-  desktop: 30px,
   // Padding for desktop mode
-  tablet-and-mobile: 15px // Padding for tablet and mobile modes,,
+  desktop: 30px,
+  // Padding for tablet and mobile modes
+  tablet-and-mobile: 15px
 ) !default;
 
 // Header
@@ -70,15 +71,15 @@ $aside-config: (
   logo-bg-color: darken(#1e1e2d, 2%),
   scrollbar-color: if(isDarkMode(), $gray-200, #3b3b64),
   scrollbar-hover-color: if(isDarkMode(), $gray-300, lighten(#3b3b64, 3%)),
-  width: 265px,
   // Aside width for desktop mode
-  minimized-width: 75px,
+  width: 265px,
   // Aside minimized width for desktop mode
-  box-shadow: if(isDarkMode(), none, 0 0 28px 0 rgba(82, 63, 105, 0.05)),
+  minimized-width: 75px,
   // Aside box shadow
+  box-shadow: if(isDarkMode(), none, 0 0 28px 0 rgba(82, 63, 105, 0.05)),
+  // Minimized hover box shadow
   minimized-hover-box-shadow:
-    if(isDarkMode(), none, 5px 0px 10px rgba(70, 78, 95, 0.075))
-    // Monimized hover box shadow,,
+    if(isDarkMode(), none, 5px 0px 10px rgba(70, 78, 95, 0.075)),
 ) !default;
 
 // Footer
