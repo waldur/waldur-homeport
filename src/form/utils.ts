@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 
 import { PeriodOption } from '@waldur/form/types';
+import { translate } from '@waldur/i18n';
 
 export const reactSelectMenuPortaling = (): any => ({
   menuPortalTarget: document.body,
@@ -29,3 +30,8 @@ export const makeLastTwelveMonthsFilterPeriods = (): PeriodOption[] => {
   }
   return choices;
 };
+
+export const validateMaxLength = (value: string) =>
+  value && value.length > 2000
+    ? translate(`Must be 2000 characters or less.`)
+    : undefined;
