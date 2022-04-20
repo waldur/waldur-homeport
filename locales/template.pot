@@ -4392,6 +4392,14 @@ msgstr ""
 msgid "Move to project"
 msgstr ""
 
+#: src/form/utils.ts
+msgid "Must be 2000 characters or less."
+msgstr ""
+
+#: src/project/ProjectNameField.tsx
+msgid "Must be 500 characters or less."
+msgstr ""
+
 #: src/core/validators.ts
 msgid "Must be at least {min}"
 msgstr ""

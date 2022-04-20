@@ -42,9 +42,10 @@ export function* handleCreateProject(action) {
     yield put(showSuccess(successMessage));
     yield put(fetchListStart(PROJECTS_LIST));
   } catch (error) {
+    const errorData = error?.response?.data;
     const formError = new SubmissionError({
       _error: errorMessage,
-      name: error.data.name,
+      ...errorData,
     });
 
     yield put(createProject.failure(formError));
@@ -77,8 +78,10 @@ export function* handleUpdateProject(action) {
     yield put(showSuccess(successMessage));
     yield put(fetchListStart(PROJECTS_LIST));
   } catch (error) {
+    const errorData = error?.response?.data;
     const formError = new SubmissionError({
       _error: errorMessage,
+      ...errorData,
     });
 
     yield put(updateProject.failure(formError));
