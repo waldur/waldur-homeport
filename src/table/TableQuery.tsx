@@ -1,6 +1,5 @@
 import { debounce } from 'lodash';
 import { Component } from 'react';
-import { FormGroup } from 'react-bootstrap';
 
 import { FilterBox } from '@waldur/form/FilterBox';
 import { translate } from '@waldur/i18n';
@@ -33,14 +32,12 @@ export class TableQuery extends Component<TableQueryProps, State> {
 
   render() {
     return (
-      <FormGroup className="pull-right text-right pe-5">
-        <FilterBox
-          type="search"
-          placeholder={translate('Search') + ' ...'}
-          value={this.state.query}
-          onChange={this.setQuery}
-        />
-      </FormGroup>
+      <FilterBox
+        type="search"
+        placeholder={translate('Search') + ' ...'}
+        value={this.state.query}
+        onChange={this.setQuery}
+      />
     );
   }
 }

@@ -47,10 +47,21 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
     return (
       <div className="table-responsive dataTables_wrapper">
         {this.props.blocked && <div className="table-block" />}
-        <TableButtons {...this.props} />
-        {this.props.hasQuery && (
-          <TableQuery query={this.props.query} setQuery={this.props.setQuery} />
-        )}
+        <div className="card-header border-0 pt-6">
+          <div className="card-title">
+            {this.props.hasQuery && (
+              <TableQuery
+                query={this.props.query}
+                setQuery={this.props.setQuery}
+              />
+            )}
+          </div>
+          <div className="card-toolbar">
+            <div className="d-flex justify-content-end">
+              <TableButtons {...this.props} />
+            </div>
+          </div>
+        </div>
         {this.props.showPageSizeSelector && (
           <TablePageSize
             {...this.props.pagination}
@@ -90,7 +101,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
 
     return (
       <>
-        <table className="table table-striped dataTable">
+        <table className="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
           <TableHeader
             onSortClick={this.props.sortList}
             currentSorting={this.props.sorting}

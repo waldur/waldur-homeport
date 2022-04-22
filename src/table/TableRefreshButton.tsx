@@ -10,7 +10,7 @@ export const TableRefreshButton: FunctionComponent<TableRefreshButtonProps> = ({
   fetch,
   translate,
 }) => (
-  <a className="btn btn-secondary btn-sm" onClick={fetch}>
+  <a className="btn btn-light-primary me-3" onClick={fetch}>
     <i className="fa fa-refresh" />
     &nbsp;{translate('Refresh')}
   </a>
