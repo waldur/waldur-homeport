@@ -18,6 +18,7 @@ import { StaticField } from '@waldur/form/StaticField';
 import {
   datePickerOverlayContainerInDialogs,
   reactSelectMenuPortaling,
+  validateMaxLength,
 } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 
@@ -52,6 +53,7 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
           label={translate('Project description')}
           name="description"
           disabled={props.isDisabled}
+          validate={validateMaxLength}
         />
         {props.oecdCodes && isFeatureVisible('project.oecd_fos_2007_code') ? (
           <SelectField

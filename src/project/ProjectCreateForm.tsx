@@ -17,6 +17,7 @@ import { DateField } from '@waldur/form/DateField';
 import {
   datePickerOverlayContainerInDialogs,
   reactSelectMenuPortaling,
+  validateMaxLength,
 } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { isVisible } from '@waldur/store/config';
@@ -82,6 +83,7 @@ export const ProjectCreateForm = reduxForm<
         <TextField
           label={translate('Project description')}
           name="description"
+          validate={validateMaxLength}
         />
         {showCode ? (
           <SelectField
