@@ -1,35 +1,33 @@
 import { FunctionComponent } from 'react';
-import Select from 'react-select';
 
-import { translate } from '@waldur/i18n';
 import { Pagination } from '@waldur/table/types';
 import './TablePageSize.scss';
 
-const options = [10, 25, 50, 100].map((v) => ({
-  label: v.toString(),
-  value: v,
-}));
+const PAGE_SIZES = [10, 25, 50, 100];
 
 interface TablePageSizeProps extends Pagination {
-  updatePageSize: (value: {}) => void;
+  updatePageSize: (value: number) => void;
 }
 
 export const TablePageSize: FunctionComponent<TablePageSizeProps> = (props) => {
-  const pageSize = props.pageSize ? props.pageSize : 10;
-  return props.resultCount > 10 ? (
-    <div>
-      <span className="me-2">{translate('Show')}</span>
-      <Select
-        className="table-page-size"
-        value={{
-          label: pageSize.toString(),
-          value: pageSize,
+  if (props.resultCount <= 10) {
+    return null;
+  }
+  return (
+    <label>
+      <select
+        className="form-select form-select-sm form-select-solid"
+        onChange={(event) => {
+          props.updatePageSize(parseInt(event.target.value, 10));
         }}
-        options={options}
-        isClearable={false}
-        onChange={(value) => props.updatePageSize(value)}
-      />
-      <span className="ms-2">{translate('entries')}</span>
-    </div>
-  ) : null;
+        value={props.pageSize}
+      >
+        {PAGE_SIZES.map((option) => (
+          <option value={option} key={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
 };

@@ -113,7 +113,7 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         ...state,
         pagination: {
           ...state.pagination,
-          pageSize: action.payload.size.value,
+          pageSize: action.payload.size,
         },
       };
 

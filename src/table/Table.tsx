@@ -1,4 +1,5 @@
 import React from 'react';
+import { Col, Row } from 'react-bootstrap';
 
 import { TranslateProps } from '@waldur/i18n/types';
 
@@ -6,7 +7,6 @@ import './Table.scss';
 import { TableBody } from './TableBody';
 import { TableButtons } from './TableButtons';
 import { TableHeader } from './TableHeader';
-import { TableInfo } from './TableInfo';
 import { TablePageSize } from './TablePageSize';
 import { TablePagination } from './TablePagination';
 import { TablePlaceholder } from './TablePlaceholder';
@@ -45,38 +45,53 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
 
   render() {
     return (
-      <div className="table-responsive dataTables_wrapper">
-        {this.props.blocked && <div className="table-block" />}
-        <div className="card-header border-0 pt-6">
-          <div className="card-title">
-            {this.props.hasQuery && (
-              <TableQuery
-                query={this.props.query}
-                setQuery={this.props.setQuery}
-              />
-            )}
-          </div>
-          <div className="card-toolbar">
-            <div className="d-flex justify-content-end">
-              <TableButtons {...this.props} />
+      <>
+        <div className="table-responsive dataTables_wrapper">
+          {this.props.blocked && <div className="table-block" />}
+          <div className="card-header border-0 px-0">
+            <div className="card-title">
+              {this.props.hasQuery && (
+                <TableQuery
+                  query={this.props.query}
+                  setQuery={this.props.setQuery}
+                />
+              )}
+            </div>
+            <div className="card-toolbar">
+              <div className="d-flex justify-content-end">
+                <TableButtons {...this.props} />
+              </div>
             </div>
           </div>
+          <div className="table-container">{this.renderBody()}</div>
         </div>
-        {this.props.showPageSizeSelector && (
-          <TablePageSize
-            {...this.props.pagination}
-            updatePageSize={this.props.updatePageSize}
-          />
-        )}
-        {this.hasRows() && <TableInfo {...this.props.pagination} />}
-        <div className="table-container">{this.renderBody()}</div>
-        {this.hasRows() && (
-          <TablePagination
-            {...this.props.pagination}
-            gotoPage={this.props.gotoPage}
-          />
-        )}
-      </div>
+        <Row>
+          <Col
+            sm={12}
+            md={5}
+            className="d-flex align-items-center justify-content-center justify-content-md-start"
+          >
+            {this.props.showPageSizeSelector && (
+              <TablePageSize
+                {...this.props.pagination}
+                updatePageSize={this.props.updatePageSize}
+              />
+            )}
+          </Col>
+          <Col
+            sm={12}
+            md={7}
+            className="d-flex align-items-center justify-content-center justify-content-md-end"
+          >
+            {this.hasRows() && (
+              <TablePagination
+                {...this.props.pagination}
+                gotoPage={this.props.gotoPage}
+              />
+            )}
+          </Col>
+        </Row>
+      </>
     );
   }
 
