@@ -212,7 +212,7 @@ describe('Table reducer', () => {
         type: actions.PAGE_SIZE_UPDATE,
         payload: {
           table: 'users',
-          size: { value: 40 },
+          size: 40,
         },
       },
     );
