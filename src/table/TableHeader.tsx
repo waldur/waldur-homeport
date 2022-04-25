@@ -43,7 +43,7 @@ export const TableHeader: React.FC<TableHeaderProps> = ({
   expandableRow,
 }) => (
   <thead>
-    <tr>
+    <tr className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
       {expandableRow && <th style={{ width: '10px' }} />}
       {columns.map((column, index) => (
         <th
