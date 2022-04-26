@@ -21,6 +21,7 @@
     "gettext:extract": "angular-gettext-cli --files 'src/**/*.+(js|ts|tsx|html)' --exclude '**/*.spec.(js|ts|tsx)' --dest './locales/template.pot' --marker-names translate,gettext --no-line-numbers"
   },
   "dependencies": {
+    "@fontsource/poppins": "^4.5.5",
     "@fullcalendar/bootstrap": "~4.2.0",
     "@fullcalendar/core": "~4.2.0",
     "@fullcalendar/daygrid": "~4.2.0",
@@ -62,7 +63,6 @@
     "luxon": "^2.0.2",
     "monaco-editor": "^0.29.1",
     "monaco-editor-webpack-plugin": "^5.0.0",
-    "npm-font-open-sans": "^1.0.3",
     "papaparse": "^5.2.0",
     "pdfmake": "^0.2.2",
     "po-loader": "^0.5.0",
