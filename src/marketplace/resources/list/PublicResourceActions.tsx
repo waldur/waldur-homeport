@@ -29,11 +29,7 @@ interface PublicResourceActionsProps {
 export const PublicResourceActions: FunctionComponent<PublicResourceActionsProps> =
   ({ resource, refreshList }) => {
     return (
-      <DropdownButton
-        title={translate('Actions')}
-        variant="secondary"
-        size="sm"
-      >
+      <DropdownButton title={translate('Actions')} variant="light" size="sm">
         {ActionsList.map((ActionComponent: any, index: number) => (
           <ActionComponent
             key={index}

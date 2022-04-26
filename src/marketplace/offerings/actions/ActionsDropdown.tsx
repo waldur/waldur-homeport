@@ -13,7 +13,7 @@ export const ActionsDropdown: FunctionComponent<ActionsDropdownProps> = ({
   actions,
 }) => (
   <Dropdown id="offering-actions">
-    <Dropdown.Toggle disabled={actions.length === 0} className="btn-sm">
+    <Dropdown.Toggle disabled={actions.length === 0} variant="light" size="sm">
       {translate('Actions')}
     </Dropdown.Toggle>
     <Dropdown.Menu>

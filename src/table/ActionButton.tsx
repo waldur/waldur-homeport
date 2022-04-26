@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
 
@@ -10,6 +11,7 @@ export interface ActionButtonProps {
   className?: string;
   disabled?: boolean;
   tooltip?: string;
+  variant?: string;
 }
 
 export const wrapTooltip = (label, children, rest?) =>
@@ -24,15 +26,15 @@ export const wrapTooltip = (label, children, rest?) =>
 export const ActionButton: React.FC<ActionButtonProps> = (props) =>
   wrapTooltip(
     props.tooltip,
-    <button
-      type="button"
+    <Button
       className={classNames(props.className, { disabled: props.disabled })}
       onClick={props.action}
     >
       {props.icon && <i className={props.icon} />} {props.title}
-    </button>,
+    </Button>,
   );
 
 ActionButton.defaultProps = {
-  className: 'btn btn-light-primary me-3',
+  className: 'me-3',
+  variant: 'light-primary',
 };

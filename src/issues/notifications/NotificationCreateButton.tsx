@@ -22,6 +22,7 @@ export const NotificationCreateButton: FunctionComponent = () => {
       action={callback}
       title={translate('Create')}
       icon="fa fa-plus"
+      variant="primary"
     />
   );
 };
