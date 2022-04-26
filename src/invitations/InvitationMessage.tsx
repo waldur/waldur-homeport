@@ -27,7 +27,7 @@ export const InvitationMessage: FunctionComponent<{
         },
       )}
     </p>
-    {user.email !== invitation.email ? (
+    {user.email.toLowerCase() !== invitation.email.toLowerCase() ? (
       <>
         <p>
           {translate('Your current email is:')} <strong>{user.email}</strong>
