@@ -19,14 +19,14 @@ const SharedProviderTabs: FunctionComponent<{ provider }> = ({ provider }) =>
           unmountOnExit={true}
         >
           <Tab eventKey={1} title={translate('Organizations')}>
-            <div className="mt-2">
+            <Card>
               <SharedProviderCustomers provider_uuid={provider.uuid} />
-            </div>
+            </Card>
           </Tab>
           <Tab eventKey={2} title={translate('VMs')}>
-            <div className="mt-2">
+            <Card>
               <SharedProviderResources provider_uuid={provider.uuid} />
-            </div>
+            </Card>
           </Tab>
         </Tabs>
       </Card.Body>

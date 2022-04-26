@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Card, Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -33,32 +33,32 @@ export const PureUserDetailsView: FunctionComponent<UserDetailsViewProps> = (
   <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
     {props.isVisibleForSupportOrStaff && (
       <Tab eventKey={1} title={props.translate('Details')}>
-        <div className="mt-2">
+        <Card>
           <UserDetailsTable user={props.user} />
-        </div>
+        </Card>
       </Tab>
     )}
     <Tab eventKey={2} title={props.translate('Audit log')}>
-      <div className="mt-2">
+      <Card>
         <UserEvents user={props.user} showActions={false} />
-      </div>
+      </Card>
     </Tab>
     {props.userManageIsVisible && (
       <Tab eventKey={3} title={props.translate('Manage')}>
-        <div className="mt-2">
+        <Card>
           <UserEditContainer user={props.user} showDeleteButton={false} />
-        </div>
+        </Card>
       </Tab>
     )}
     <Tab eventKey={4} title={props.translate('Keys')}>
-      <div className="mt-2">
+      <Card>
         <KeysList user={props.user} />
-      </div>
+      </Card>
     </Tab>
     <Tab eventKey={5} title={props.translate('Remote accounts')}>
-      <div className="mt-2">
+      <Card>
         <UserOfferingList user={props.user} />
-      </div>
+      </Card>
     </Tab>
   </Tabs>
 );

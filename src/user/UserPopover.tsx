@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Button, Modal, Tab, Tabs } from 'react-bootstrap';
+import { Button, Card, Modal, Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 import { createSelector } from 'reselect';
@@ -69,23 +69,23 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
       <Modal.Body>
         <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
           <Tab eventKey={1} title={translate('Details')}>
-            <div className="mt-2">
+            <Card>
               <UserDetailsTable user={value.user} profile={value.profile} />
-            </div>
+            </Card>
           </Tab>
 
           {canSeeChecklist && value.checklistCount ? (
             <Tab eventKey={2} title={translate('Checklists')}>
-              <div className="mt-2">
+              <Card>
                 <UserChecklist userId={value.user.uuid} readOnly={true} />
-              </div>
+              </Card>
             </Tab>
           ) : null}
 
           <Tab eventKey={3} title={translate('Keys')}>
-            <div className="mt-2">
+            <Card>
               <KeysList user={value.user} />
-            </div>
+            </Card>
           </Tab>
         </Tabs>
       </Modal.Body>

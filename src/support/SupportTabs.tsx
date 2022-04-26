@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Card, Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
@@ -34,27 +34,27 @@ export const PureSupportTabs: React.FC<SupportTabsProps> = (props) => {
       id="offeringSummary"
     >
       <Tab title={props.translate('Summary')} eventKey="summary">
-        <div className="mt-2">
+        <Card>
           <SupportSummaryTab issue={props.issue} summary={props.summary} />
-        </div>
+        </Card>
       </Tab>
       <Tab title={props.translate('Audit log')} eventKey="events">
-        <div className="mt-2">
+        <Card>
           <SupportEvents resource={props.resource} />
-        </div>
+        </Card>
       </Tab>
       {props.showComments && (
         <Tab title={props.translate('Comments')} eventKey="comments">
-          <div className="mt-2">
+          <Card>
             <IssueCommentsContainer issue={props.issue} renderHeader={false} />
-          </div>
+          </Card>
         </Tab>
       )}
       {props.resource.uuid && (
         <Tab title={props.translate('Order items')} eventKey="order-items">
-          <div className="mt-2">
+          <Card>
             <ResourceOrderItems resource_uuid={props.resource.uuid} />
-          </div>
+          </Card>
         </Tab>
       )}
     </Tabs>

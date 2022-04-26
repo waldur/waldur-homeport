@@ -23,7 +23,7 @@ export const ResourceActionComponent: FunctionComponent<ResourceActionComponentP
       title={translate('Actions')}
       onToggle={props.onToggle}
       disabled={props.disabled}
-      variant="secondary"
+      variant="light"
       size="sm"
     >
       {props.open ? (

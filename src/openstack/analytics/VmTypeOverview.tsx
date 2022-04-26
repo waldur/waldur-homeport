@@ -1,9 +1,8 @@
 import React from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Card, Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
-import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
@@ -20,19 +19,19 @@ export const VmTypeOverview = connect((state: RootState) =>
     return null;
   }
   return (
-    <Panel>
+    <Card>
       <Tabs defaultActiveKey={1} id="vm-overview" mountOnEnter unmountOnExit>
         <Tab eventKey={1} title={translate('Images')}>
-          <div className="mt-2">
+          <Card>
             <ImagesList />
-          </div>
+          </Card>
         </Tab>
         <Tab eventKey={2} title={translate('Flavors')}>
-          <div className="mt-2">
+          <Card>
             <FlavorsList />
-          </div>
+          </Card>
         </Tab>
       </Tabs>
-    </Panel>
+    </Card>
   );
 }) as React.ComponentType;

@@ -10,13 +10,13 @@ import { UserList } from './UserList';
 export const UserListView: FunctionComponent = () => {
   useTitle(translate('Users'));
   return (
-    <>
+    <Card>
       <Card.Body className="mb-2 border-bottom">
         <UserFilter />
       </Card.Body>
       <Card.Body>
         <UserList />
       </Card.Body>
-    </>
+    </Card>
   );
 };

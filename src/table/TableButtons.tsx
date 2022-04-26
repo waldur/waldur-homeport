@@ -9,10 +9,10 @@ import './TableButtons.scss';
 
 export const TableButtons: FunctionComponent<any> = (props) => (
   <>
+    {props.actions}
     {props.rows.length > 0 && props.enableExport && (
       <TableExportButton {...props} />
     )}
-    {props.actions}
     <TableRefreshButton {...props} />
     <TableLoadingSpinnerContainer {...props} />
   </>
