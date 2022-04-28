@@ -24,6 +24,8 @@ export const SelectField: FunctionComponent<any> = (props) => {
           props.input.onBlur(props.input.value);
         }
       }}
+      className="react-select-container"
+      classNamePrefix="react-select"
     />
   );
 };

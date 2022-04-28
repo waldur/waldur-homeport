@@ -31,6 +31,8 @@ export const AsyncSelectField: FunctionComponent<any> = (props) => {
         page: 1,
       }}
       {...rest}
+      className="react-select-container"
+      classNamePrefix="react-select"
     />
   );
 };

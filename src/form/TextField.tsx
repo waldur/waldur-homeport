@@ -15,6 +15,7 @@ export const TextField: FunctionComponent<TextFieldProps> = (props) => {
   return (
     <Form.Control
       as="textarea"
+      className="form-control-solid"
       {...props.input}
       rows={rows ? rows : 5}
       {...rest}

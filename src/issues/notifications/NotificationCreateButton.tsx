@@ -16,7 +16,12 @@ const NotificationCreateDialog = lazyComponent(
 
 export const NotificationCreateButton: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const callback = () => dispatch(openModalDialog(NotificationCreateDialog));
+  const callback = () =>
+    dispatch(
+      openModalDialog(NotificationCreateDialog, {
+        dialogClassName: 'modal-dialog-centered mw-650px',
+      }),
+    );
   return (
     <ActionButton
       action={callback}

@@ -59,10 +59,10 @@ export const NotificationCreateDialog = reduxForm({
       onSubmit={handleSubmit(createNotification)}
       onChange={(e) => setFetchNumber(e)}
     >
-      <Modal.Header>
-        <Modal.Title>{translate('Create a broadcast')}</Modal.Title>
+      <Modal.Header closeButton>
+        <h2 className="fw-bolder">{translate('Create a broadcast')}</h2>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="scroll-y mx-5 mx-xl-15 my-7">
         <FormContainer submitting={submitting}>
           <StringField
             name="subject"
