@@ -44,10 +44,14 @@ export class FormGroup extends PureComponent<FormGroupProps> {
       },
     };
     return (
-      <Form.Group>
+      <Form.Group className="mb-7">
         {!hideLabel && (
           <Form.Label
-            className={layout !== 'vertical' ? labelClass : undefined}
+            className={classNames(
+              { required },
+              layout !== 'vertical' && labelClass,
+              'fs-6 fw-bold mb-2',
+            )}
           >
             {tooltip && (
               <Tip id="form-field-tooltip" label={tooltip}>
@@ -55,7 +59,6 @@ export class FormGroup extends PureComponent<FormGroupProps> {
               </Tip>
             )}
             {label}
-            {required && <span className="text-danger"> *</span>}
           </Form.Label>
         )}
         <div

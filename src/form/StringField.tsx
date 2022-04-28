@@ -14,5 +14,12 @@ interface StringFieldProps extends FormField {
 export const StringField: FunctionComponent<StringFieldProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, ...rest } = props;
-  return <Form.Control {...props.input} type="text" {...rest} />;
+  return (
+    <Form.Control
+      className="form-control-solid"
+      {...props.input}
+      type="text"
+      {...rest}
+    />
+  );
 };
