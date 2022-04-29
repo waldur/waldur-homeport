@@ -12,9 +12,9 @@ export const TableExportButton: FunctionComponent<TableExportButtonProps> = ({
 }) => {
   return (
     <Dropdown>
-      <Dropdown.Toggle className="btn-light-primary me-3">
-        <i className="fa fa-download fixed-width-icon" />
-        {translate('Export as')}
+      <Dropdown.Toggle className="me-3" variant="light">
+        <i className="fa fa-download" />
+        {translate('Export')}
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item onClick={() => exportAs('clipboard')}>

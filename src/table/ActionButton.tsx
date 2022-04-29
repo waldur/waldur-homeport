@@ -29,6 +29,7 @@ export const ActionButton: React.FC<ActionButtonProps> = (props) =>
     <Button
       className={classNames(props.className, { disabled: props.disabled })}
       onClick={props.action}
+      variant={props.variant}
     >
       {props.icon && <i className={props.icon} />} {props.title}
     </Button>,
@@ -36,5 +37,5 @@ export const ActionButton: React.FC<ActionButtonProps> = (props) =>
 
 ActionButton.defaultProps = {
   className: 'me-3',
-  variant: 'light-primary',
+  variant: 'light',
 };
