@@ -13,7 +13,8 @@ const mapPropsToFilter = (props) => {
       filter.feature = props.filter.feature.map((option) => option.value);
     }
     if (props.filter.date) {
-      const dt = DateTime.fromObject(props.filter.date.value);
+      const { year, month } = props.filter.date.value;
+      const dt = DateTime.fromObject({ year, month });
       filter.created_from = dt.startOf('month').valueOf();
       filter.created_to = dt.endOf('month').valueOf();
     }
