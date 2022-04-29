@@ -1,11 +1,5 @@
-import {
-  useMemo,
-  useState,
-  useCallback,
-  useEffect,
-  FunctionComponent,
-} from 'react';
-import { Col, ListGroup, Row, Stack, Tab, Table } from 'react-bootstrap';
+import { useState, useCallback, useEffect, FunctionComponent } from 'react';
+import { Col, ListGroup, Row, Tab, Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync, useEffectOnce } from 'react-use';
 
@@ -16,11 +10,7 @@ import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import {
-  getProject,
-  getUser,
-  checkCustomerUser,
-} from '@waldur/workspace/selectors';
+import { getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
 import { getProjectCounters } from './api';
@@ -70,49 +60,15 @@ async function loadResources(
   return result as Record<'string', ResourceItem[]>;
 }
 
-const CreateProjectButton: FunctionComponent<{
-  selectedOrganization: Customer;
-}> = ({ selectedOrganization }) => {
-  const user = useSelector(getUser);
-  const canCreate = useMemo(
-    () => checkCustomerUser(selectedOrganization, user),
-    [selectedOrganization, user],
-  );
-  if (!selectedOrganization || !canCreate) {
-    return null;
-  }
-  return (
-    <Link
-      className="btn btn-sm btn-metro ms-auto"
-      state="organization.createProject"
-      params={{
-        uuid: selectedOrganization.uuid,
-      }}
-    >
-      <i className="fa fa-plus" /> {translate('Add new project')}
-    </Link>
-  );
-};
-
 const EmptyProjectsPlaceholder: FunctionComponent = () => (
   <p className="text-center text-danger">
     {translate('There are no projects yet for this organization.')}
   </p>
 );
 
-const ProjectsHeader: FunctionComponent<{
-  selectedOrganization?: Customer;
-}> = ({ selectedOrganization }) => (
-  <h5>
-    {translate('Projects ({count})', {
-      count: selectedOrganization?.projects?.length || 0,
-    })}
-  </h5>
-);
-
 const SelectProjectButton = ({ project }) => (
   <Link
-    className="btn btn-sm btn-metro pull-right"
+    className="btn btn-sm btn-metro btn-secondary pull-right"
     state="project.details"
     params={{ uuid: project.uuid }}
   >
@@ -122,7 +78,7 @@ const SelectProjectButton = ({ project }) => (
 
 const EmptyProjectListPlaceholder: FunctionComponent = () => (
   <tr className="text-center">
-    <td colSpan={5}>{translate('There are no projects matching filter.')}</td>
+    <td colSpan={5}>{translate('There are no projects')}</td>
   </tr>
 );
 
@@ -263,10 +219,6 @@ export const ProjectsPanel: FunctionComponent<{
 
   return (
     <>
-      <Stack direction="horizontal" gap={2} className="mb-4">
-        <ProjectsHeader selectedOrganization={selectedOrganization} />
-        <CreateProjectButton selectedOrganization={selectedOrganization} />
-      </Stack>
       <Row className="mb-4">
         <Col sm={12} md={6} lg={8}>
           <Tab.Container id="list-group-tabs-projects" defaultActiveKey={1}>

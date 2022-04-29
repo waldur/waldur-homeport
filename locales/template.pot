@@ -349,20 +349,12 @@ msgstr ""
 msgid "Add member"
 msgstr ""
 
-#: src/navigation/workspace/CreateOrganizationButton.tsx
-msgid "Add new"
-msgstr ""
-
 #: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
 msgid "Add new offering"
 msgstr ""
 
 #: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
 msgid "Add new organization"
-msgstr ""
-
-#: src/navigation/workspace/ProjectsPanel.tsx
-msgid "Add new project"
 msgstr ""
 
 #: src/user/hooks/HookCreateButton.tsx
@@ -1977,6 +1969,7 @@ msgid "Custom scripts"
 msgstr ""
 
 #: src/customer/team/utils.ts
+#: src/navigation/workspace/utils.ts
 msgid "Customer support"
 msgstr ""
 
@@ -2956,10 +2949,6 @@ msgstr ""
 #: src/issues/create/ProjectGroup.tsx
 #: src/marketplace/category/filters/MobileFilterActions.tsx
 msgid "Filter"
-msgstr ""
-
-#: src/navigation/workspace/OrganizationsSelector.tsx
-msgid "Filter organizations"
 msgstr ""
 
 #: src/navigation/workspace/ProjectsPanel.tsx
@@ -5422,10 +5411,6 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: src/navigation/workspace/OrganizationsSelector.tsx
-msgid "Organizations ({count})"
-msgstr ""
-
 #: src/customer/divisions/CustomersDivisionsChart.tsx
 msgid "Organizations by divisions"
 msgstr ""
@@ -6325,6 +6310,10 @@ msgstr ""
 msgid "Project roles"
 msgstr ""
 
+#: src/navigation/workspace/SelectWorkspaceDialog.tsx
+msgid "Project selector"
+msgstr ""
+
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
 msgid "Project type"
@@ -6353,10 +6342,6 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Projects"
-msgstr ""
-
-#: src/navigation/workspace/ProjectsPanel.tsx
-msgid "Projects ({count})"
 msgstr ""
 
 #: src/customer/team/ProjectsListGroup.tsx
@@ -7578,6 +7563,10 @@ msgstr ""
 msgid "Search for offerings..."
 msgstr ""
 
+#: src/navigation/workspace/OrganizationsSelector.tsx
+msgid "Search for organization..."
+msgstr ""
+
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 msgid "Second"
 msgstr ""
@@ -7643,7 +7632,6 @@ msgstr ""
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
-#: src/navigation/workspace/SelectOrganizationButton.tsx
 msgid "Select"
 msgstr ""
 
@@ -7776,6 +7764,7 @@ msgid "Select priority..."
 msgstr ""
 
 #: src/invitations/actions/ProjectGroup.tsx
+#: src/navigation/workspace/SelectWorkspaceToggle.tsx
 msgid "Select project"
 msgstr ""
 
@@ -7873,11 +7862,6 @@ msgstr ""
 msgid "Select user..."
 msgstr ""
 
-#: src/navigation/workspace/SelectWorkspaceDialog.tsx
-#: src/navigation/workspace/SelectWorkspaceToggle.tsx
-msgid "Select workspace"
-msgstr ""
-
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
 msgid "Selected"
@@ -7928,6 +7912,7 @@ msgid "Service catalog offerings"
 msgstr ""
 
 #: src/customer/team/utils.ts
+#: src/navigation/workspace/utils.ts
 msgid "Service manager"
 msgstr ""
 
@@ -8972,7 +8957,7 @@ msgid "There are no other volume types available."
 msgstr ""
 
 #: src/navigation/workspace/ProjectsPanel.tsx
-msgid "There are no projects matching filter."
+msgid "There are no projects"
 msgstr ""
 
 #: src/navigation/workspace/ProjectsPanel.tsx
@@ -11504,7 +11489,6 @@ msgstr ""
 
 #: src/invitations/GroupInvitationMessage.tsx
 #: src/invitations/InvitationMessage.tsx
-#: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "organization"
 msgstr ""
 

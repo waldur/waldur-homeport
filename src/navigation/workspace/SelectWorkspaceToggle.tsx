@@ -73,17 +73,19 @@ export const SelectWorkspaceToggle: FunctionComponent = () => {
   };
   return (
     <Button
-      className="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder"
+      variant="secondary"
+      size="sm"
+      className="btn-metro fw-bolder text-primary-dark"
       onClick={changeWorkspace}
     >
       {wrapTooltip(
         titleTooltip,
-        <span id="select-workspace-title">
-          {title || translate('Select workspace')}
+        <span id="select-workspace-title" className="text-capitalize">
+          {title || translate('Select project')}
         </span>,
         { placement: 'bottom' },
       )}{' '}
-      <i className="fa fa-angle-down" />
+      <i className="fa fa-caret-down" />
     </Button>
   );
 };

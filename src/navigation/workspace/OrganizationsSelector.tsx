@@ -1,24 +1,17 @@
 import classNames from 'classnames';
 import { useState, useCallback, FunctionComponent } from 'react';
-import { Stack } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
+import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { translate } from '@waldur/i18n';
+import { getUser } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { getCustomersPage } from './api';
-import { CreateOrganizationButton } from './CreateOrganizationButton';
 import { OrganizationListItem } from './OrganizationListItem';
 import { SearchBox } from './SearchBox';
 import { VirtualPaginatedList } from './VirtualPaginatedList';
 import './OrganizationsSelector.scss';
-
-const OrganizationsHeader = ({ organizationsCount }) => (
-  <h5>
-    {translate('Organizations ({count})', {
-      count: organizationsCount,
-    })}
-  </h5>
-);
 
 const EmptyOrganizationListPlaceholder: FunctionComponent = () => (
   <span className="ellipsis">
@@ -31,8 +24,8 @@ const VIRTUALIZED_SELECTOR_PAGE_SIZE = 20;
 export const OrganizationsSelector: FunctionComponent<{
   selectedOrganization: Customer;
   selectOrganization;
-  organizationsCount;
-}> = ({ selectedOrganization, selectOrganization, organizationsCount }) => {
+}> = ({ selectedOrganization, selectOrganization }) => {
+  const user = useSelector(getUser);
   const [filter, setFilter] = useState('');
   const [showOptions, setShowOptions] = useState(false);
   const getPage = useCallback(
@@ -49,7 +42,9 @@ export const OrganizationsSelector: FunctionComponent<{
   );
 
   return (
-    <div className={classNames('metro-select', { active: showOptions })}>
+    <div
+      className={classNames('organization-selector', { active: showOptions })}
+    >
       <div className="d-grid gap-2">
         <button
           className="toggle btn btn-lg"
@@ -57,7 +52,11 @@ export const OrganizationsSelector: FunctionComponent<{
         >
           {selectedOrganization?.name ? (
             <span className="organization-selected">
-              <span className="image-placeholder"></span>
+              <ImagePlaceholder
+                width="32px"
+                height="32px"
+                backgroundColor="#e2e2e2"
+              />
               <span className="mx-4">{selectedOrganization.name}</span>
               <i
                 className="fa fa-times"
@@ -78,20 +77,16 @@ export const OrganizationsSelector: FunctionComponent<{
         </button>
       </div>
       <div
-        className={classNames('metro-select-options', {
+        className={classNames('organization-select-options', {
           active: showOptions,
         })}
       >
         <div className="p-4">
-          <Stack direction="horizontal" gap={2} className="mb-4">
-            <OrganizationsHeader organizationsCount={organizationsCount} />
-            <CreateOrganizationButton />
-          </Stack>
           <SearchBox
             groupId="organization-search-box"
             value={filter}
             onChange={setFilter}
-            placeholder={translate('Filter organizations')}
+            placeholder={translate('Search for organization...')}
           />
         </div>
         <VirtualPaginatedList
@@ -109,6 +104,7 @@ export const OrganizationsSelector: FunctionComponent<{
                 {...listItemProps}
                 selected={selectedOrganization?.uuid === item.uuid}
                 onSelect={() => selectItem(item)}
+                user={user}
               />
             );
           }}

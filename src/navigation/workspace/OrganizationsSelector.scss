@@ -1,4 +1,4 @@
-.metro-select {
+.organization-selector {
   position: relative;
 
   &.active {
@@ -29,7 +29,7 @@
     }
   }
 
-  .metro-select-options {
+  .organization-select-options {
     position: absolute;
     display: none;
     background: #fff;
@@ -50,12 +50,5 @@
 .organization-selected {
   > * {
     vertical-align: middle;
-  }
-  .image-placeholder {
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    background-color: #7d9b83;
-    border-radius: 7px;
   }
 }

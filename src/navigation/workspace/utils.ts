@@ -1,12 +1,26 @@
 import { useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { ENV } from '@waldur/configs/default';
+import {
+  CUSTOMER_OWNER_ROLE,
+  CUSTOMER_SERVICE_MANAGER_ROLE,
+  CUSTOMER_SUPPORT_ROLE,
+} from '@waldur/core/constants';
 import { customerCreateDialog } from '@waldur/customer/create/actions';
+import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { getConfig } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
-import { getUser } from '@waldur/workspace/selectors';
-import { Project } from '@waldur/workspace/types';
+import {
+  checkIsCustomerSupport,
+  checkIsOwner,
+  checkIsServiceManager,
+  getUser,
+} from '@waldur/workspace/selectors';
+import { Customer, Project, User } from '@waldur/workspace/types';
+
+import { OrganizationUserRole } from './types';
 
 export const useCreateOrganization = () => {
   const dispatch = useDispatch();
@@ -44,4 +58,27 @@ export const useProjectFilter = (projects: Project[]) => {
     [filter, projects],
   );
   return { filter, setFilter, filteredProjects };
+};
+
+export const organizationUserRoles = (
+  organization: Customer,
+  user: User,
+): OrganizationUserRole[] => {
+  return [
+    {
+      value: CUSTOMER_OWNER_ROLE,
+      label: translate(ENV.roles.owner),
+      visible: checkIsOwner(organization, user),
+    },
+    {
+      value: CUSTOMER_SERVICE_MANAGER_ROLE,
+      label: translate('Service manager'),
+      visible: checkIsServiceManager(organization, user),
+    },
+    {
+      value: CUSTOMER_SUPPORT_ROLE,
+      label: translate('Customer support'),
+      visible: checkIsCustomerSupport(organization, user),
+    },
+  ];
 };

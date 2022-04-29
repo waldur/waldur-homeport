@@ -144,6 +144,7 @@ export interface Customer {
   owners?: User[];
   billing_price_estimate?: BillingPriceEstimate;
   service_managers?: User[];
+  support_users?: User[];
   projects?: Project[];
   payment_profiles?: PaymentProfile[];
 }
