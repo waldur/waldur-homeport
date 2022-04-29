@@ -35,6 +35,7 @@ export interface TableOptionsType<RowType = any> {
   mapPropsToFilter?: (props: any) => any;
   placeholderComponent?: React.ComponentType;
   pullInterval?: number | (() => number);
+  filters?: React.ReactNode;
 }
 
 export interface Column<RowType = any> {
@@ -61,6 +62,7 @@ export interface TableState {
   query?: string;
   sorting?: SortingState;
   toggled?: object;
+  filterVisible?: boolean;
 }
 
 export interface Sorting {

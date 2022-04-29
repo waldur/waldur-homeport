@@ -16,16 +16,12 @@ const PureSupportEventsListFilter: FunctionComponent = () => (
         <EventGroupFilter />
       </Col>
       <Col sm={4}>
-        <div>
-          <Form.Label>{translate('Date')}</Form.Label>
-          <EventDateFilter />
-        </div>
+        <Form.Label>{translate('Date')}</Form.Label>
+        <EventDateFilter />
       </Col>
       <Col sm={4}>
-        <div>
-          <Form.Label>{translate('User')}</Form.Label>
-          <UserAutocomplete />
-        </div>
+        <Form.Label>{translate('User')}</Form.Label>
+        <UserAutocomplete />
       </Col>
     </Row>
   </div>
@@ -33,6 +29,7 @@ const PureSupportEventsListFilter: FunctionComponent = () => (
 
 const enhance = reduxForm({
   form: SUPPORT_EVENTS_LIST_FILTER_FORM_ID,
+  destroyOnUnmount: false,
 });
 
 export const SupportEventsListFilter = enhance(PureSupportEventsListFilter);

@@ -14,8 +14,7 @@ export const SupportEventsContainer = () => {
   return (
     <Card>
       <Card.Body>
-        <SupportEventsListFilter />
-        <SupportEventsList />
+        <SupportEventsList filters={<SupportEventsListFilter />} />
       </Card.Body>
     </Card>
   );

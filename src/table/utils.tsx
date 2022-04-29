@@ -54,6 +54,7 @@ export function connectTable(options: TableOptionsType) {
         sortList: (sorting: Sorting) =>
           dispatch(actions.sortListStart(table, sorting)),
         toggleRow: (row: any) => dispatch(actions.toggleRow(table, row)),
+        toggleFilter: () => dispatch(actions.toggleFilter(table)),
       });
 
       const filterByFeature = (state: RootState) => (columns) =>

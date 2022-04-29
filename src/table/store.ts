@@ -22,6 +22,7 @@ const INITIAL_STATE: TableState = {
     loading: false,
   },
   toggled: {},
+  filterVisible: false,
 };
 
 const deleteEntity = (state, action) => {
@@ -155,6 +156,12 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
           ...state.toggled,
           [action.payload.row]: !state.toggled[action.payload.row],
         },
+      };
+
+    case actions.TOGGLE_FILTER:
+      return {
+        ...state,
+        filterVisible: !state.filterVisible,
       };
 
     default:

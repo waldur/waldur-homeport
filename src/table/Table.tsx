@@ -1,6 +1,7 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 
+import { translate } from '@waldur/i18n';
 import { TranslateProps } from '@waldur/i18n/types';
 
 import './Table.scss';
@@ -31,9 +32,11 @@ export interface TableProps<RowType = any> extends TranslateProps, TableState {
   initialSorting?: Sorting;
   expandableRow?: React.ComponentType<{ row: any }>;
   toggleRow?(row: any): void;
+  toggleFilter?(): void;
   toggled?: object;
   enableExport?: boolean;
   placeholderComponent?: React.ReactNode;
+  filters?: React.ReactNode;
 }
 
 class Table<RowType = any> extends React.Component<TableProps<RowType>> {
@@ -56,6 +59,13 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
                   setQuery={this.props.setQuery}
                 />
               )}
+              <Button
+                className="ms-3"
+                variant="light"
+                onClick={this.props.toggleFilter}
+              >
+                <i className="fa fa-filter"></i> {translate('Filter')}
+              </Button>
             </div>
             <div className="card-toolbar">
               <div className="d-flex justify-content-end">
@@ -63,6 +73,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
               </div>
             </div>
           </div>
+          {this.props.filterVisible && this.props.filters}
           <div className="table-container">{this.renderBody()}</div>
         </div>
         <Row>

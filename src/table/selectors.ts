@@ -45,3 +45,9 @@ export const selectTableSorting = (state: RootState, table: string) => {
     return state.tables[table].sorting;
   }
 };
+
+export const selectFilterVisible = (state: RootState, table: string) => {
+  if (state.tables && state.tables[table]) {
+    return state.tables[table].filterVisible;
+  }
+};

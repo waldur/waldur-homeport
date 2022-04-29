@@ -16,6 +16,7 @@ export const PAGE_SIZE_UPDATE = 'waldur/table/PAGE_SIZE_UPDATE';
 export const SORT_LIST_START = 'waldur/table/SORT_LIST_START';
 export const SORT_LIST_DONE = 'waldur/table/SORT_LIST_DONE';
 export const TOGGLE_ROW = 'waldur/table/TOGGLE_ROW';
+export const TOGGLE_FILTER = 'waldur/table/TOGGLE_FILTER';
 
 export const fetchListStart = (
   table: string,
@@ -153,5 +154,12 @@ export const toggleRow = (table: string, row: string | number) => ({
   payload: {
     table,
     row,
+  },
+});
+
+export const toggleFilter = (table: string) => ({
+  type: TOGGLE_FILTER,
+  payload: {
+    table,
   },
 });
