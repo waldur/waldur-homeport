@@ -33,8 +33,10 @@ export const SelectWorkspaceDialog: FunctionComponent = () => {
   return (
     <>
       <Modal.Header>
-        <Modal.Title>{translate('Select workspace')}</Modal.Title>
-        <ModalSubtitle>{translate('Select project scope')}</ModalSubtitle>
+        <Modal.Title>{translate('Project selector')}</Modal.Title>
+        <ModalSubtitle className="text-capitalize">
+          {translate('Select project scope')}
+        </ModalSubtitle>
       </Modal.Header>
       <Modal.Body>
         {loading ? (
@@ -50,7 +52,6 @@ export const SelectWorkspaceDialog: FunctionComponent = () => {
                 <OrganizationsSelector
                   selectedOrganization={selectedOrganization}
                   selectOrganization={selectOrganization}
-                  organizationsCount={organizationsCount}
                 />
               </Col>
             </Row>
