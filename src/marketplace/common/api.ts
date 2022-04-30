@@ -345,6 +345,14 @@ export const unpublishGoogleCalendar = (uuid: string) =>
     (response) => response.data,
   );
 
+export const updateOfferingOverview = (offeringId, data) =>
+  post(`/marketplace-offerings/${offeringId}/update_overview/`, data);
+
+export const updateOfferingDescription = (offeringId, category) =>
+  post(`/marketplace-offerings/${offeringId}/update_description/`, {
+    category,
+  });
+
 export const updateOfferingConfirmationMessage = (
   offeringUuid,
   template_confirmation_comment,
