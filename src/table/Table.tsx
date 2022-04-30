@@ -60,11 +60,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
                 />
               )}
               {this.props.filters && (
-                <Button
-                  className="ms-3"
-                  variant="light"
-                  onClick={this.props.toggleFilter}
-                >
+                <Button variant="light" onClick={this.props.toggleFilter}>
                   <i className="fa fa-filter"></i> {translate('Filter')}
                 </Button>
               )}
