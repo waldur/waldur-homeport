@@ -59,13 +59,15 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
                   setQuery={this.props.setQuery}
                 />
               )}
-              <Button
-                className="ms-3"
-                variant="light"
-                onClick={this.props.toggleFilter}
-              >
-                <i className="fa fa-filter"></i> {translate('Filter')}
-              </Button>
+              {this.props.filters && (
+                <Button
+                  className="ms-3"
+                  variant="light"
+                  onClick={this.props.toggleFilter}
+                >
+                  <i className="fa fa-filter"></i> {translate('Filter')}
+                </Button>
+              )}
             </div>
             <div className="card-toolbar">
               <div className="d-flex justify-content-end">
