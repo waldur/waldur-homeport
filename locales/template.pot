@@ -43,8 +43,17 @@ msgstr ""
 msgid "API URL"
 msgstr ""
 
+#: src/user/api-key/UserApiKey.tsx
+#: src/user/constants.ts
+msgid "API key"
+msgstr ""
+
 #: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
 msgid "API secret code:"
+msgstr ""
+
+#: src/user/api-key/UserEditTokenContainer.tsx
+msgid "API token"
 msgstr ""
 
 #: src/user/support/TokenLifetimeField.tsx
@@ -1142,6 +1151,7 @@ msgstr ""
 msgid "By authenticating you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
 msgstr ""
 
+#: src/user/api-key/TokenLifetimeField.tsx
 #: src/user/support/TokenLifetimeField.tsx
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr ""
@@ -2281,6 +2291,7 @@ msgid "Details"
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
+#: src/user/api-key/UserLoginSessions.tsx
 msgid "Device"
 msgstr ""
 
@@ -2848,7 +2859,7 @@ msgid "Explore {deployment} service catalog"
 msgstr ""
 
 #: src/table/TableExportButton.tsx
-msgid "Export as"
+msgid "Export"
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/ExtendAction.tsx
@@ -2948,6 +2959,8 @@ msgstr ""
 #: src/issues/create/OrganizationGroup.tsx
 #: src/issues/create/ProjectGroup.tsx
 #: src/marketplace/category/filters/MobileFilterActions.tsx
+#: src/support/EventFilterButton.tsx
+#: src/table/Table.tsx
 msgid "Filter"
 msgstr ""
 
@@ -3362,6 +3375,7 @@ msgstr ""
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/TenantPortsList.tsx
+#: src/user/api-key/UserLoginSessions.tsx
 msgid "IP address"
 msgstr ""
 
@@ -3934,6 +3948,7 @@ msgstr ""
 msgid "Legal address"
 msgstr ""
 
+#: src/user/api-key/TokenLifetimeField.tsx
 #: src/user/support/TokenLifetimeField.tsx
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr ""
@@ -4010,6 +4025,7 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/marketplace/offerings/details/PageLocation.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+#: src/user/api-key/UserLoginSessions.tsx
 msgid "Location"
 msgstr ""
 
@@ -4054,6 +4070,10 @@ msgstr ""
 #: src/auth/callbacks/AuthLoginFailed.tsx
 #: src/auth/callbacks/OauthLoginCompleted.tsx
 msgid "Login failed"
+msgstr ""
+
+#: src/user/api-key/UserLoginSessions.tsx
+msgid "Login sessions"
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
@@ -5843,6 +5863,7 @@ msgstr ""
 msgid "Please give us a moment to validate your invitation."
 msgstr ""
 
+#: src/user/api-key/TokenLifetimeField.tsx
 #: src/user/support/TokenLifetimeField.tsx
 msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
 msgstr ""
@@ -7497,6 +7518,10 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: src/user/api-key/UserEditTokenContainer.tsx
+msgid "Save changes"
+msgstr ""
+
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 msgid "Scale"
 msgstr ""
@@ -8108,7 +8133,6 @@ msgid "Shopping cart item update"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsLink.tsx
-#: src/table/TablePageSize.tsx
 msgid "Show"
 msgstr ""
 
@@ -8390,6 +8414,7 @@ msgstr ""
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
+#: src/user/api-key/UserLoginSessions.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -9029,6 +9054,10 @@ msgstr ""
 msgid "Thumbnail"
 msgstr ""
 
+#: src/user/api-key/UserLoginSessions.tsx
+msgid "Time"
+msgstr ""
+
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesShortList.tsx
 msgid "Time in progress"
@@ -9109,6 +9138,10 @@ msgstr ""
 
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
 msgid "Token"
+msgstr ""
+
+#: src/user/api-key/TokenLifetimeField.tsx
+msgid "Token lifetime"
 msgstr ""
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
@@ -11343,10 +11376,6 @@ msgstr ""
 
 #: src/rancher/template/NamespaceField.tsx
 msgid "e.g. MyApp"
-msgstr ""
-
-#: src/table/TablePageSize.tsx
-msgid "entries"
 msgstr ""
 
 #: src/resource/state/utils.ts

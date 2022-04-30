@@ -1,14 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import {
   FieldError,
   FormContainer,
-  SecretField,
-  SelectField,
   StringField,
   SubmitButton,
 } from '@waldur/form';
@@ -22,11 +18,6 @@ import { UserDetails } from '@waldur/workspace/types';
 
 import { EmailField } from './EmailField';
 import { TermsOfService } from './TermsOfService';
-import {
-  tokenLifetimeTooltip,
-  TokenLifetimeWarning,
-  tokenOptions,
-} from './TokenLifetimeField';
 
 interface UserEditFormData {
   full_name: string;
@@ -165,18 +156,6 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
         />
       )}
       <hr />
-      {props.userTokenIsVisible && (
-        <SecretField name="token" label={translate('Current API token')} />
-      )}
-      {props.userTokenIsVisible && (
-        <SelectField
-          options={tokenOptions}
-          name="token_lifetime"
-          label={tokenLifetimeTooltip}
-          getOptionLabel={(option) => option.name}
-        />
-      )}
-      {props.userTokenIsVisible && <TokenLifetimeWarning />}
       <TermsOfService
         initial={props.initial}
         agreementDate={props.user.agreement_date}
@@ -212,20 +191,8 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
   </form>
 );
 
-const mapStateToProps = (_state, ownProps) => ({
-  initialValues: {
-    ...ownProps.initialValues,
-    token_lifetime: tokenOptions.find(
-      (option) => option.value === ownProps.initialValues.token_lifetime,
-    ),
-  },
+const enhance = reduxForm({
+  form: 'userEdit',
 });
-
-const enhance = compose(
-  connect(mapStateToProps),
-  reduxForm({
-    form: 'userEdit',
-  }),
-);
 
 export const UserEditForm = enhance(PureUserEditForm);

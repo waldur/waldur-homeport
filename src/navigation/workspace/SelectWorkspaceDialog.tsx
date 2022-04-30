@@ -34,9 +34,7 @@ export const SelectWorkspaceDialog: FunctionComponent = () => {
     <>
       <Modal.Header>
         <Modal.Title>{translate('Project selector')}</Modal.Title>
-        <ModalSubtitle className="text-capitalize">
-          {translate('Select project scope')}
-        </ModalSubtitle>
+        <ModalSubtitle>{translate('Select project scope')}</ModalSubtitle>
       </Modal.Header>
       <Modal.Body>
         {loading ? (

@@ -32,3 +32,20 @@
     padding-right: 0.75rem;
   }
 }
+
+/* TABLE FULL IN CARD, WITHOUT CARD-BODY */
+.card {
+  > .table,
+  > .table-responsive > .table {
+    td:first-child,
+    th:first-child,
+    tr:first-child {
+      padding-left: 2.25rem;
+    }
+    td:last-child,
+    th:last-child,
+    tr:last-child {
+      padding-right: 2.25rem;
+    }
+  }
+}
