@@ -54,10 +54,12 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
           <div className="card-header border-0 px-0">
             <div className="card-title">
               {this.props.hasQuery && (
-                <TableQuery
-                  query={this.props.query}
-                  setQuery={this.props.setQuery}
-                />
+                <div className="me-3">
+                  <TableQuery
+                    query={this.props.query}
+                    setQuery={this.props.setQuery}
+                  />
+                </div>
               )}
               {this.props.filters && (
                 <Button variant="light" onClick={this.props.toggleFilter}>
