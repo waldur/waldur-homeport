@@ -15,8 +15,8 @@ const mapPropsToFilter = (props) => {
     if (props.filter.date) {
       const { year, month } = props.filter.date.value;
       const dt = DateTime.fromObject({ year, month });
-      filter.created_from = dt.startOf('month').valueOf();
-      filter.created_to = dt.endOf('month').valueOf();
+      filter.created_from = Math.trunc(dt.startOf('month').valueOf() / 1000);
+      filter.created_to = Math.trunc(dt.endOf('month').valueOf() / 1000);
     }
     if (props.filter.user) {
       filter.scope = props.filter.user.url;
