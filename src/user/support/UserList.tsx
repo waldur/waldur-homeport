@@ -1,5 +1,4 @@
-import { FunctionComponent } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
+import { FunctionComponent, ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -17,10 +16,10 @@ import { UserDetailsButton } from './UserDetailsButton';
 import { UserTableActions } from './UserTableActions';
 
 const UserActionsButton: FunctionComponent<any> = (props) => (
-  <ButtonGroup>
+  <>
     <UserDetailsButton {...props} />
     <UserActivateButton {...props} />
-  </ButtonGroup>
+  </>
 );
 
 const renderFieldOrDash = (field) => {
@@ -233,4 +232,4 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-export const UserList = enhance(TableComponent);
+export const UserList = enhance(TableComponent) as ComponentType<any>;

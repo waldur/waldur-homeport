@@ -15,13 +15,7 @@ interface UserDetailsButtonProps extends TranslateProps {
 
 const PureUserDetailsButton: FunctionComponent<UserDetailsButtonProps> = (
   props,
-) => (
-  <ActionButton
-    title={props.translate('Details')}
-    action={props.onClick}
-    icon="fa fa-icon-info-sign"
-  />
-);
+) => <ActionButton title={props.translate('Details')} action={props.onClick} />;
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onClick: (e) => {
