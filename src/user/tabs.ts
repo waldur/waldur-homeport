@@ -64,6 +64,10 @@ const UserPermissionRequestsListContainer = lazyComponent(
     ),
   'UserPermissionRequestsListContainer',
 );
+const UserApiKey = lazyComponent(
+  () => import(/* webpackChunkName: "UserApiKey" */ './api-key/UserApiKey'),
+  'UserApiKey',
+);
 
 export const tabs = {
   dashboard: {
@@ -105,6 +109,10 @@ export const tabs = {
   permissionRequests: {
     url: 'permission-requests/',
     component: UserPermissionRequestsListContainer,
+  },
+  ApiKey: {
+    url: 'api-key/',
+    component: UserApiKey,
   },
 };
 

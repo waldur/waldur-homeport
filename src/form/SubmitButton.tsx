@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 interface SubmitButtonProps {
   submitting: boolean;
   label: string;
+  id?: string;
   disabled?: boolean;
   className?: string;
   onClick?(): void;
@@ -10,6 +11,7 @@ interface SubmitButtonProps {
 
 export const SubmitButton: FunctionComponent<SubmitButtonProps> = (props) => (
   <button
+    id={props.id}
     type="submit"
     className={props.className}
     disabled={props.submitting || props.disabled === true}

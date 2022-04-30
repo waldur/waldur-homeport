@@ -28,6 +28,7 @@ export const SecretField: React.FC<SecretFieldProps> = (props) => {
         type={showSecret ? 'text' : 'password'}
         autoComplete="new-password"
         placeholder={props.placeholder}
+        className="form-control-solid"
         {...rest}
       />
       <a

@@ -7,23 +7,23 @@ import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
-export const tokenOptions = [
-  { name: '10 min', value: 600 },
-  { name: '30 min', value: 1800 },
-  { name: '1 h', value: 3600 },
-  { name: '2 h', value: 7200 },
-  { name: '12 h', value: 43200 },
-  { name: 'token will not timeout', value: null },
+export const getTokenOptions = () => [
+  { name: translate('10 minutes'), value: 600 },
+  { name: translate('30 minutes'), value: 1800 },
+  { name: translate('1 hour'), value: 3600 },
+  { name: translate('2 hours'), value: 7200 },
+  { name: translate('12 hours'), value: 43200 },
+  { name: translate('token will not timeout'), value: null },
 ];
 
-export const tokenLifetimeTooltip = (
+export const TokenLifetimeTooltip = (
   <Tip
     id="token"
     label={translate(
       'Lifetime will be updated and reset upon saving the form.',
     )}
   >
-    {translate('API token lifetime')} <i className="fa fa-question-circle" />
+    {translate('Token lifetime')} <i className="fa fa-question-circle" />
   </Tip>
 );
 

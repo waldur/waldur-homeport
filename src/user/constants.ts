@@ -34,6 +34,12 @@ export const getPrivateUserTabs = () => [
     state: 'profile.manage',
     key: 'manage',
   },
+  {
+    label: translate('API key'),
+    icon: 'fa-key',
+    state: 'profile.api-key',
+    key: 'api-key',
+  },
   ENV.plugins.WALDUR_FREEIPA?.ENABLED
     ? {
         label: translate('FreeIPA account'),
