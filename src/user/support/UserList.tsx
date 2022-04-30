@@ -146,7 +146,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         {
           title: translate('Actions'),
           render: UserActionsButton,
-          className: 'text-center col-md-2',
+          className: 'text-center col-md-2 d-flex',
         },
       ]}
       showPageSizeSelector={true}
