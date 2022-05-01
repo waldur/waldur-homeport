@@ -22,7 +22,7 @@ const PaymentCreateDialog: FunctionComponent<any> = (props) => (
       title={translate('Add payment')}
       footer={
         <>
-          <CloseDialogButton />
+          <CloseDialogButton className="me-3" />
           <SubmitButton
             disabled={props.invalid}
             submitting={props.submitting}

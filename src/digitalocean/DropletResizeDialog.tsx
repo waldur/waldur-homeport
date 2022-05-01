@@ -175,12 +175,12 @@ export const DropletResizeDialog = reduxForm<
           )}
         </Modal.Body>
         <Modal.Footer>
+          <CloseDialogButton />
           <SubmitButton
             block={false}
             submitting={submitting}
             label={translate('Submit')}
           />
-          <CloseDialogButton />
         </Modal.Footer>
       </form>
     );

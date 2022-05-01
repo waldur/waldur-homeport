@@ -23,12 +23,12 @@ export const ActionDialog: React.FC<ActionDialogProps> = (props) => (
       title={props.title}
       footer={
         <div>
+          <CloseDialogButton className="me-3" />
           <SubmitButton
             disabled={props.invalid}
             submitting={props.submitting}
             label={props.submitLabel}
           />
-          <CloseDialogButton />
         </div>
       }
     >

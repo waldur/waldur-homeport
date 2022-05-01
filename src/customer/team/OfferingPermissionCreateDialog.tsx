@@ -91,10 +91,10 @@ export const OfferingPermissionCreateDialog = reduxForm({
         </FormContainer>
       </Modal.Body>
       <Modal.Footer>
+        <CloseDialogButton />
         <SubmitButton block={false} submitting={submitting}>
           {translate('Submit')}
         </SubmitButton>
-        <CloseDialogButton />
       </Modal.Footer>
     </form>
   );

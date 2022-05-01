@@ -22,6 +22,7 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = (props) => (
       labelClass="me-3"
       controlClass="me-3"
       submitting={props.submitting}
+      clearOnUnmount={false}
     >
       <DebouncedStringField
         label={props.translate('Full name')}
@@ -106,7 +107,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const enhance = compose(
-  reduxForm({ form: 'userFilter' }),
+  reduxForm({ form: 'userFilter', destroyOnUnmount: false }),
   connect(mapStateToProps),
   withTranslation,
 );
