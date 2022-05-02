@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Col } from 'react-bootstrap';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
@@ -15,7 +15,7 @@ interface OrganizationAutocompleteProps {
 
 export const OrganizationAutocomplete: FunctionComponent<OrganizationAutocompleteProps> =
   (props) => (
-    <Form.Group className="col-sm-3">
+    <Col sm={3}>
       <Form.Label>{props.label || translate('Client organization')}</Form.Label>
       <Field
         name="organization"
@@ -47,5 +47,5 @@ export const OrganizationAutocomplete: FunctionComponent<OrganizationAutocomplet
           />
         )}
       />
-    </Form.Group>
+    </Col>
   );

@@ -48,8 +48,7 @@ const renderTitleWithPriceTooltip = (title) => (
 export const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns, customerListFilter } = props;
   const accountingPeriodIsCurrent =
-    customerListFilter.accounting_period &&
-    customerListFilter.accounting_period.value.current;
+    customerListFilter?.accounting_period?.value.current;
   const columns = filterColumns([
     {
       title: translate('Organization'),
@@ -176,4 +175,4 @@ const enhance = compose(
   withTranslation,
 );
 
-export const CustomerList = enhance(TableComponent);
+export const CustomerList = enhance(TableComponent) as React.ComponentType<any>;

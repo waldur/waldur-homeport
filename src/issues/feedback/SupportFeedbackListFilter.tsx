@@ -8,23 +8,17 @@ import { PeriodFilterField } from '@waldur/issues/feedback/PeriodFilterField';
 import { UserAutocomplete } from '@waldur/issues/feedback/UserAutocomplete';
 
 export const PureSupportFeedbackListFilter = () => (
-  <div className="card">
-    <div className="card-body mb-2 border-bottom">
-      <form className="form-inline">
-        <Row>
-          <Col sm={4}>
-            <PeriodFilterField options={makeLastTwelveMonthsFilterPeriods()} />
-          </Col>
-          <Col sm={4}>
-            <EvaluationSelectField />
-          </Col>
-          <Col sm={4}>
-            <UserAutocomplete />
-          </Col>
-        </Row>
-      </form>
-    </div>
-  </div>
+  <Row>
+    <Col sm={4}>
+      <PeriodFilterField options={makeLastTwelveMonthsFilterPeriods()} />
+    </Col>
+    <Col sm={4}>
+      <EvaluationSelectField />
+    </Col>
+    <Col sm={4}>
+      <UserAutocomplete />
+    </Col>
+  </Row>
 );
 
 export const SupportFeedbackListFilter = reduxForm({
@@ -32,4 +26,5 @@ export const SupportFeedbackListFilter = reduxForm({
   initialValues: {
     period: makeLastTwelveMonthsFilterPeriods()[0],
   },
+  destroyOnUnmount: false,
 })(PureSupportFeedbackListFilter);

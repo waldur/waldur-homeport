@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import { PeriodOption } from '@waldur/form/types';
@@ -13,22 +13,17 @@ interface CustomerListFilterProps {
 
 export const PureCustomerListFilter: FunctionComponent<CustomerListFilterProps> =
   (props) => (
-    <Card>
-      <Card.Body className="mb-2 border-bottom">
-        <form className="form-inline">
-          <Row>
-            <Col sm={9}>
-              <AccountingPeriodField options={props.accountingPeriods} />
-            </Col>
-            <Col sm={3}>
-              <AccountingRunningField />
-            </Col>
-          </Row>
-        </form>
-      </Card.Body>
-    </Card>
+    <Row>
+      <Col sm={9}>
+        <AccountingPeriodField options={props.accountingPeriods} />
+      </Col>
+      <Col sm={3}>
+        <AccountingRunningField />
+      </Col>
+    </Row>
   );
 
 export const CustomerListFilter = reduxForm<{}, CustomerListFilterProps>({
   form: 'customerListFilter',
+  destroyOnUnmount: false,
 })(PureCustomerListFilter);

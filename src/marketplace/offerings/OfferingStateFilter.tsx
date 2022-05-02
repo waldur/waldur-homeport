@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
@@ -13,7 +13,7 @@ export const getStates = () => [
 ];
 
 export const OfferingStateFilter: FunctionComponent = () => (
-  <Form.Group className="col-sm-3">
+  <Col sm={3}>
     <Form.Label>{translate('State')}</Form.Label>
     <Field
       name="state"
@@ -28,5 +28,5 @@ export const OfferingStateFilter: FunctionComponent = () => (
         />
       )}
     />
-  </Form.Group>
+  </Col>
 );

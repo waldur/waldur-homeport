@@ -24,6 +24,7 @@ const enhance = reduxForm({
   initialValues: getInitialValues({
     state: getStates()[1],
   }),
+  destroyOnUnmount: false,
 });
 
 export const SupportResourcesFilter = enhance(PureSupportResourcesFilter);

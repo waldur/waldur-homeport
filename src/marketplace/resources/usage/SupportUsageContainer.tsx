@@ -13,8 +13,7 @@ export const SupportUsageContainer: FunctionComponent = () => {
   useReportingBreadcrumbs();
   return (
     <Panel>
-      <SupportUsageFilter />
-      <SupportUsageList />
+      <SupportUsageList filters={<SupportUsageFilter />} />
     </Panel>
   );
 };

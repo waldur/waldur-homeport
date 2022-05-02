@@ -35,4 +35,5 @@ export const SupportOrdersListFilter = reduxForm({
   initialValues: {
     state: getOrderStateFilterOptions()[0],
   },
+  destroyOnUnmount: false,
 })(PureSupportOrdersListFilter) as React.ComponentType;

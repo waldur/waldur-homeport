@@ -121,4 +121,6 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-export const SupportUsageList = enhance(TableComponent);
+export const SupportUsageList = enhance(
+  TableComponent,
+) as React.ComponentType<any>;

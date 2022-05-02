@@ -17,8 +17,7 @@ export const SupportFeedbackListContainer = () => {
   return (
     <Card>
       <Card.Body>
-        <SupportFeedbackListFilter />
-        <SupportFeedbackList />
+        <SupportFeedbackList filters={<SupportFeedbackListFilter />} />
       </Card.Body>
     </Card>
   );
