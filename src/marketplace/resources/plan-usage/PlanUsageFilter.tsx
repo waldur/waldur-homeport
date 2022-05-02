@@ -18,6 +18,6 @@ const PurePlanUsageFilter: FunctionComponent = () => (
   </Row>
 );
 
-const enhance = reduxForm({ form: 'PlanUsageFilter' });
+const enhance = reduxForm({ form: 'PlanUsageFilter', destroyOnUnmount: false });
 
 export const PlanUsageFilter = enhance(PurePlanUsageFilter);

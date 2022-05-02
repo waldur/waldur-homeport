@@ -122,4 +122,6 @@ const enhance = compose(
   withTranslation,
 );
 
-export const SupportOrdersList = enhance(TableComponent);
+export const SupportOrdersList = enhance(
+  TableComponent,
+) as React.ComponentType<any>;

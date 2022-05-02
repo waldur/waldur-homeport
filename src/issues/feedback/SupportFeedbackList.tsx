@@ -52,6 +52,9 @@ const TableComponent = (props) => {
 
 const mapPropsToFilter = ({ supportFeedbackListFilter }) => {
   const filter: Record<string, string | number> = {};
+  if (!supportFeedbackListFilter) {
+    return {};
+  }
   if (supportFeedbackListFilter.evaluation) {
     filter.evaluation = supportFeedbackListFilter.evaluation.value;
   }
@@ -99,4 +102,6 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-export const SupportFeedbackList = enhance(TableComponent);
+export const SupportFeedbackList = enhance(
+  TableComponent,
+) as React.ComponentType<any>;

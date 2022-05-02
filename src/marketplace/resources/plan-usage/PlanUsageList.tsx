@@ -101,4 +101,6 @@ const connector = compose(
   withTranslation,
 );
 
-export const PlanUsageList = connector(TableComponent);
+export const PlanUsageList = connector(
+  TableComponent,
+) as React.ComponentType<any>;

@@ -29,4 +29,5 @@ export const SupportCustomerFilter = reduxForm<{}, any>({
   initialValues: {
     accounting_is_running: AccountingRunningFieldOptions()[0],
   },
+  destroyOnUnmount: false,
 })(PureSupportCustomerFilter);

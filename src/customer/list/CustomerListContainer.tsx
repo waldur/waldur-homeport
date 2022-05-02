@@ -61,12 +61,11 @@ export const CustomerListContainer: FunctionComponent = () => {
     return <>{translate('Unable to load financial overview.')}</>;
   }
   return (
-    <>
-      <CustomerListFilter {...data} />
+    <Card>
       <Card.Body>
-        <CustomerList />
+        <CustomerList filters={<CustomerListFilter {...data} />} />
         <TotalCostContainer />
       </Card.Body>
-    </>
+    </Card>
   );
 };

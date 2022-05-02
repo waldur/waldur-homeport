@@ -50,6 +50,7 @@ const enhance = compose(
     initialValues: {
       accounting_period: makeLastTwelveMonthsFilterPeriods()[0],
     },
+    destroyOnUnmount: false,
   }),
   connect(mapStateToProps),
 );

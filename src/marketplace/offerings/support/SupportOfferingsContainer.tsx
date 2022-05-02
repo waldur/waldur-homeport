@@ -13,8 +13,7 @@ export const SupportOfferingsContainer: FunctionComponent = () => {
   useReportingBreadcrumbs();
   return (
     <Panel>
-      <SupportOfferingsFilter />
-      <SupportOfferingsList />
+      <SupportOfferingsList filters={<SupportOfferingsFilter />} />
     </Panel>
   );
 };

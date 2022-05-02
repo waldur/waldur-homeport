@@ -13,8 +13,7 @@ export const PlanUsageContainer: FunctionComponent = () => {
   useReportingBreadcrumbs();
   return (
     <Panel>
-      <PlanUsageFilter />
-      <PlanUsageList />
+      <PlanUsageList filters={<PlanUsageFilter />} />
     </Panel>
   );
 };
