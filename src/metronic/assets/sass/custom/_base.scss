@@ -49,6 +49,7 @@
   &:focus,
   &:hover {
     background: $btn-secondary-hover !important;
+    color: $btn-secondary-hover-text !important;
   }
 
   &.btn-secondary {
