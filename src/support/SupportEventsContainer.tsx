@@ -1,5 +1,3 @@
-import { Card } from 'react-bootstrap';
-
 import { translate } from '@waldur/i18n';
 import { useReportingBreadcrumbs } from '@waldur/issues/workspace/SupportWorkspace';
 import { useSidebarKey } from '@waldur/navigation/context';
@@ -11,11 +9,5 @@ export const SupportEventsContainer = () => {
   useTitle(translate('Audit logs'));
   useReportingBreadcrumbs();
   useSidebarKey('reporting');
-  return (
-    <Card>
-      <Card.Body>
-        <SupportEventsList filters={<SupportEventsListFilter />} />
-      </Card.Body>
-    </Card>
-  );
+  return <SupportEventsList filters={<SupportEventsListFilter />} />;
 };

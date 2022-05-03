@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { getList } from '@waldur/core/api';
@@ -61,11 +60,9 @@ export const CustomerListContainer: FunctionComponent = () => {
     return <>{translate('Unable to load financial overview.')}</>;
   }
   return (
-    <Card>
-      <Card.Body>
-        <CustomerList filters={<CustomerListFilter {...data} />} />
-        <TotalCostContainer />
-      </Card.Body>
-    </Card>
+    <>
+      <CustomerList filters={<CustomerListFilter {...data} />} />
+      <TotalCostContainer />
+    </>
   );
 };

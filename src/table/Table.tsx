@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Card, Col, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { TranslateProps } from '@waldur/i18n/types';
@@ -37,6 +37,7 @@ export interface TableProps<RowType = any> extends TranslateProps, TableState {
   enableExport?: boolean;
   placeholderComponent?: React.ReactNode;
   filters?: React.ReactNode;
+  title?: React.ReactNode;
 }
 
 class Table<RowType = any> extends React.Component<TableProps<RowType>> {
@@ -48,11 +49,15 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
 
   render() {
     return (
-      <>
-        <div className="table-responsive dataTables_wrapper">
-          {this.props.blocked && <div className="table-block" />}
-          <div className="card-header border-0 px-0">
-            <div className="card-title">
+      <Card>
+        {this.props.title && (
+          <Card.Header>
+            <Card.Title>{this.props.title}</Card.Title>
+          </Card.Header>
+        )}
+        <Card.Header>
+          {(this.props.hasQuery || this.props.filters) && (
+            <Card.Title>
               {this.props.hasQuery && (
                 <div className="me-3">
                   <TableQuery
@@ -66,43 +71,48 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
                   <i className="fa fa-filter"></i> {translate('Filter')}
                 </Button>
               )}
-            </div>
-            <div className="card-toolbar">
-              <div className="d-flex justify-content-end">
-                <TableButtons {...this.props} />
-              </div>
+            </Card.Title>
+          )}
+          {this.props.blocked && <div className="table-block" />}
+          <div className="card-toolbar">
+            <div className="d-flex justify-content-end">
+              <TableButtons {...this.props} />
             </div>
           </div>
-          {this.props.filterVisible && this.props.filters}
-          <div className="table-container">{this.renderBody()}</div>
-        </div>
-        <Row>
-          <Col
-            sm={12}
-            md={5}
-            className="d-flex align-items-center justify-content-center justify-content-md-start"
-          >
-            {this.props.showPageSizeSelector && (
-              <TablePageSize
-                {...this.props.pagination}
-                updatePageSize={this.props.updatePageSize}
-              />
-            )}
-          </Col>
-          <Col
-            sm={12}
-            md={7}
-            className="d-flex align-items-center justify-content-center justify-content-md-end"
-          >
-            {this.hasRows() && (
-              <TablePagination
-                {...this.props.pagination}
-                gotoPage={this.props.gotoPage}
-              />
-            )}
-          </Col>
-        </Row>
-      </>
+        </Card.Header>
+        <Card.Body>
+          <div className="table-responsive dataTables_wrapper">
+            {this.props.filterVisible && this.props.filters}
+            <div className="table-container">{this.renderBody()}</div>
+          </div>
+          <Row>
+            <Col
+              sm={12}
+              md={5}
+              className="d-flex align-items-center justify-content-center justify-content-md-start"
+            >
+              {this.props.showPageSizeSelector && (
+                <TablePageSize
+                  {...this.props.pagination}
+                  updatePageSize={this.props.updatePageSize}
+                />
+              )}
+            </Col>
+            <Col
+              sm={12}
+              md={7}
+              className="d-flex align-items-center justify-content-center justify-content-md-end"
+            >
+              {this.hasRows() && (
+                <TablePagination
+                  {...this.props.pagination}
+                  gotoPage={this.props.gotoPage}
+                />
+              )}
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
     );
   }
 

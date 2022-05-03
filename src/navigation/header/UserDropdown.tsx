@@ -114,7 +114,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
 
         {items.map((item, index) => (
           <UISrefActive class="showing" key={index}>
-            <div className="menu-item px-5" data-kt-menu-trigger="click">
+            <div className="menu-item px-5">
               <UISref to={item.state}>
                 <a className="menu-link px-5">{item.label}</a>
               </UISref>
@@ -126,7 +126,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
 
         <LanguageSelector />
 
-        <div className="menu-item px-5" data-kt-menu-trigger="click">
+        <div className="menu-item px-5">
           <a onClick={AuthService.logout} className="menu-link px-5">
             {translate('Log out')}
           </a>

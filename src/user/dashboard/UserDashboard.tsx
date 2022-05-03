@@ -69,21 +69,15 @@ const UserDashboardContainer: React.FC<StateProps & DispatchProps> = (
       )}
       <Row className="mt-5">
         <Col md={6}>
-          <Panel title={translate('Owned organizations')}>
-            <CustomerPermissions />
-          </Panel>
+          <CustomerPermissions title={translate('Owned organizations')} />
         </Col>
         <Col md={6}>
-          <Panel title={translate('Managed projects')}>
-            <ProjectPermissions />
-          </Panel>
+          <ProjectPermissions title={translate('Managed projects')} />
         </Col>
       </Row>
       <Row className="mt-5">
         <Col md={12}>
-          <Panel title={translate('Audit logs')}>
-            <CurrentUserEvents />
-          </Panel>
+          <CurrentUserEvents title={translate('Audit logs')} />
         </Col>
       </Row>
     </>

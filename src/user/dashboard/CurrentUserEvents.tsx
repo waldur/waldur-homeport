@@ -7,4 +7,6 @@ import { UserEvents } from './UserEvents';
 
 const mapsStateToProps = (state: RootState) => ({ user: getUser(state) });
 
-export const CurrentUserEvents = connect(mapsStateToProps)(UserEvents);
+export const CurrentUserEvents = connect(mapsStateToProps)(
+  UserEvents,
+) as React.ComponentType<any>;

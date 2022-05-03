@@ -1,5 +1,3 @@
-import { Card } from 'react-bootstrap';
-
 import { translate } from '@waldur/i18n';
 import { SupportFeedbackList } from '@waldur/issues/feedback/SupportFeedbackList';
 import { SupportFeedbackListFilter } from '@waldur/issues/feedback/SupportFeedbackListFilter';
@@ -14,11 +12,5 @@ export const SupportFeedbackListContainer = () => {
   useReportingBreadcrumbs();
   useSidebarKey('reporting');
   useSupport();
-  return (
-    <Card>
-      <Card.Body>
-        <SupportFeedbackList filters={<SupportFeedbackListFilter />} />
-      </Card.Body>
-    </Card>
-  );
+  return <SupportFeedbackList filters={<SupportFeedbackListFilter />} />;
 };

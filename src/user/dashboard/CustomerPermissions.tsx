@@ -26,6 +26,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('organizations')}
       actions={<CustomerCreateButton />}
       enableExport={true}
+      title={translate('Owned organizations')}
     />
   );
 };
