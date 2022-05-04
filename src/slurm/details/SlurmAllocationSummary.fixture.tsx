@@ -24,8 +24,15 @@ export const renderSummary = async (props) => {
   return wrapper;
 };
 
-export const getField = (wrapper: ReactWrapper, label: string): string =>
-  wrapper.find({ label }).find('dd').text().trim();
+export const getField = (wrapper: ReactWrapper, children: string): string =>
+  wrapper
+    .find({ children })
+    .at(0)
+    .closest('div')
+    .find('div')
+    .at(2)
+    .text()
+    .trim();
 
 export const resource = {
   resource_type: 'SLURM.Allocation',

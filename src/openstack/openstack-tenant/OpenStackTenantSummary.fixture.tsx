@@ -52,20 +52,28 @@ export const resource = {
   user_password: 'secret',
 };
 
-export const getField = (wrapper: ReactWrapper, label: string): ReactWrapper =>
-  wrapper.find({ label }).find('dd');
+export const getField = (
+  wrapper: ReactWrapper,
+  children: string,
+): ReactWrapper => {
+  const match = wrapper.find({ children });
+  if (match.length === 0) {
+    return null;
+  }
+  return match.at(0).closest('div').find('div').at(2);
+};
 
 export const hasUsername = (wrapper: ReactWrapper): boolean =>
-  getField(wrapper, 'Username').length === 1;
+  !!getField(wrapper, 'Username');
 
 export const hasPassword = (wrapper: ReactWrapper): boolean =>
-  getField(wrapper, 'Password').length === 1;
+  !!getField(wrapper, 'Password');
 
 export const hasAccess = (wrapper: ReactWrapper): boolean =>
-  getField(wrapper, 'Access').length === 1;
+  !!getField(wrapper, 'Access');
 
 export const hasExternalLink = (wrapper: ReactWrapper): boolean =>
-  wrapper.find(ExternalLink).length === 1;
+  !!wrapper.find(ExternalLink);
 
 export const getSummary = (wrapper: ReactWrapper): string =>
   getField(wrapper, 'Summary').text();

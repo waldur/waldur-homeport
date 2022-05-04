@@ -14,6 +14,7 @@ export const FormField: FC<WrappedFieldProps & { tooltip?: string }> = ({
       onChange={input.onChange}
       {...rest}
       title={error}
+      isInvalid={!!error}
     />
     {tooltip ? (
       <OverlayTrigger

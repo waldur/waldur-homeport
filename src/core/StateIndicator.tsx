@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import { FunctionComponent } from 'react';
+import { Badge } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/types';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -24,9 +24,7 @@ const wrapTooltip = (label, children) =>
 export const StateIndicator: FunctionComponent<StateIndicatorProps> = (props) =>
   wrapTooltip(
     props.tooltip,
-    <span
-      className={classNames('badge fs-8 fw-bolder', `badge-${props.variant}`)}
-    >
+    <Badge bg={props.variant} className="fs-8 fw-bolder">
       {props.label.toUpperCase()}
-    </span>,
+    </Badge>,
   );
