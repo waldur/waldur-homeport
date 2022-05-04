@@ -35,8 +35,6 @@ describe('UserEditForm', () => {
     expect(wrapper.find({ label: 'Job position' }).length).toBe(1);
     expect(wrapper.find({ label: 'Description' }).length).toBe(1);
     expect(wrapper.find({ label: 'Phone number' }).length).toBe(1);
-    expect(wrapper.find({ label: 'Current API token' }).length).toBe(1);
-    expect(wrapper.find({ name: 'token_lifetime' }).length).toBe(1);
     expect(wrapper.find(TermsOfService).length).toBe(1);
     expect(wrapper.find({ label: 'Update profile' }).length).toBe(1);
     expect(wrapper.find('#remove-btn').length).toBe(1);

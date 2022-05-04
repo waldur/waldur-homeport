@@ -1,6 +1,5 @@
 import {
   renderTestForm,
-  getFieldGroups,
   getNameField,
   getDescriptionField,
   getRequiredFields,
@@ -12,11 +11,6 @@ import {
 import { errorOnSubmit, setFieldValue, getTestFormValues } from './testUtils';
 
 describe('FormContainer', () => {
-  it('renders form group for each field', () => {
-    const wrapper = renderTestForm({});
-    expect(getFieldGroups(wrapper).length).toBe(2);
-  });
-
   describe('disable fields on submit', () => {
     it('enables all input fields by default', () => {
       const wrapper = renderTestForm({});

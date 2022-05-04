@@ -38,10 +38,8 @@ export const getNameField = (wrapper: ReactWrapper) =>
   wrapper.find('input').first();
 export const getDescriptionField = (wrapper: ReactWrapper) =>
   wrapper.find('textarea').first();
-export const getFieldGroups = (wrapper: ReactWrapper) =>
-  wrapper.find('.form-group');
 export const getRequiredFields = (wrapper: ReactWrapper) =>
-  wrapper.find('.text-danger');
+  wrapper.find('label.required');
 export const submitForm = (wrapper: ReactWrapper) =>
   wrapper.find('form').simulate('submit');
 export const getErrors = (wrapper: ReactWrapper) => wrapper.find('.form-text');

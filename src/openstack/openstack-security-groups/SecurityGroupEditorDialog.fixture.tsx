@@ -149,7 +149,7 @@ export class DialogFixture {
   }
 
   get portRangeIsInvalid() {
-    return this.wrapper.find('input').at(0).parents('td').hasClass('has-error');
+    return this.wrapper.find('input').at(0).hasClass('is-invalid');
   }
 
   get cidr() {
@@ -161,7 +161,7 @@ export class DialogFixture {
   }
 
   get cidrIsInvalid() {
-    return this.wrapper.find('input').at(1).parents('td').hasClass('has-error');
+    return this.wrapper.find('input').at(1).hasClass('is-invalid');
   }
 
   get description() {
