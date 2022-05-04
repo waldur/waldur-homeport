@@ -19,6 +19,10 @@ export const ProjectResourcesContainer: React.FC = () => {
 
   const project = useSelector(getProject);
 
+  if (!project) {
+    return null;
+  }
+
   const { loading, value, error } = useAsync(
     () => loadData(category_uuid, project.uuid),
     [category_uuid],
@@ -29,10 +33,6 @@ export const ProjectResourcesContainer: React.FC = () => {
       ? translate('{category} resources', { category: value.title })
       : translate('Project resources'),
   );
-
-  if (!project) {
-    return null;
-  }
 
   if (loading) {
     return <LoadingSpinner />;
