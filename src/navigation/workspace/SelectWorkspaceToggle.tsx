@@ -66,8 +66,8 @@ export const SelectWorkspaceToggle: FunctionComponent = () => {
   const changeWorkspace = () => {
     dispatch(
       openModalDialog(SelectWorkspaceDialog, {
-        size: 'lg',
-        dialogClassName: 'modal-metro',
+        size: 'xl',
+        dialogClassName: 'modal-metro modal-1000',
       }),
     );
   };
