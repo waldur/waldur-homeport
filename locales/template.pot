@@ -16,8 +16,28 @@ msgstr ""
 msgid "1 - Very negative"
 msgstr ""
 
+#: src/user/api-key/TokenLifetimeField.tsx
+msgid "1 hour"
+msgstr ""
+
 #: src/issues/feedback/utils.ts
 msgid "10 - Very positive"
+msgstr ""
+
+#: src/user/api-key/TokenLifetimeField.tsx
+msgid "10 minutes"
+msgstr ""
+
+#: src/user/api-key/TokenLifetimeField.tsx
+msgid "12 hours"
+msgstr ""
+
+#: src/user/api-key/TokenLifetimeField.tsx
+msgid "2 hours"
+msgstr ""
+
+#: src/user/api-key/TokenLifetimeField.tsx
+msgid "30 minutes"
 msgstr ""
 
 #: src/user/support/TermsOfService.tsx
@@ -54,10 +74,6 @@ msgstr ""
 
 #: src/user/api-key/UserEditTokenContainer.tsx
 msgid "API token"
-msgstr ""
-
-#: src/user/support/TokenLifetimeField.tsx
-msgid "API token lifetime"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
@@ -1152,7 +1168,6 @@ msgid "By authenticating you are agreeing to the <tos>Terms of Service</tos> and
 msgstr ""
 
 #: src/user/api-key/TokenLifetimeField.tsx
-#: src/user/support/TokenLifetimeField.tsx
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr ""
 
@@ -1934,10 +1949,6 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/tabs.ts
 msgid "Credentials"
-msgstr ""
-
-#: src/user/support/UserEditForm.tsx
-msgid "Current API token"
 msgstr ""
 
 #: src/user/support/UserEmailChangeDialog.tsx
@@ -3949,7 +3960,6 @@ msgid "Legal address"
 msgstr ""
 
 #: src/user/api-key/TokenLifetimeField.tsx
-#: src/user/support/TokenLifetimeField.tsx
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr ""
 
@@ -5458,6 +5468,7 @@ msgstr ""
 msgid "Overview of {project} project"
 msgstr ""
 
+#: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/dashboard/UserDashboard.tsx
 msgid "Owned organizations"
 msgstr ""
@@ -5864,7 +5875,6 @@ msgid "Please give us a moment to validate your invitation."
 msgstr ""
 
 #: src/user/api-key/TokenLifetimeField.tsx
-#: src/user/support/TokenLifetimeField.tsx
 msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
 msgstr ""
 
@@ -11678,6 +11688,7 @@ msgstr ""
 msgid "till"
 msgstr ""
 
+#: src/user/api-key/TokenLifetimeField.tsx
 #: src/user/support/utils.ts
 msgid "token will not timeout"
 msgstr ""

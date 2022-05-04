@@ -81,7 +81,7 @@
     box-shadow: none;
     border: none;
     border-radius: 0 !important;
-    letter-spacing: 0px;
+    letter-spacing: 0;
     color: #a1b7a6;
     font-weight: bold;
     font-size: 14px;
@@ -93,6 +93,7 @@
     }
     &:hover {
       background: $btn-secondary-hover;
+      color: $btn-secondary-hover-text;
     }
   }
 }
