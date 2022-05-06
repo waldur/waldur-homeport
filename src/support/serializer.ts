@@ -30,7 +30,9 @@ export const serializer = (attributes, offering) => {
           value = typeof value === 'object' ? value.value : value;
         }
       } else if (SELECT_MULTI_VALUE_TYPES.includes(options.type)) {
-        value = value.map((item) => item.value);
+        if (value) {
+          value = value.map((item) => item.value);
+        }
       }
       payload[key] = value;
     });
