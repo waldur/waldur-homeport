@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Button, Row } from 'react-bootstrap';
+import './EmptyOrganizationsPlaceholder.scss';
 
 import { translate } from '@waldur/i18n';
 
@@ -11,21 +11,23 @@ const InitialCreateOrganizationButton = () => {
     return null;
   }
   return (
-    <div>
-      <Button onClick={onClick as any}>
-        <i className="fa fa-plus" /> {translate('Add new organization')}
-      </Button>
-    </div>
+    <button className="btn btn-primary" onClick={onClick as any}>
+      {translate('Create organization')}
+    </button>
   );
 };
 
 export const EmptyOrganizationsPlaceholder: FunctionComponent = () => (
-  <Row>
-    <div className="middle-box text-center">
-      <h3 className="font-bold mb-4">
-        {translate('You do not belong to any organization yet')}.
-      </h3>
+  <div className="middle-box text-center no-organization-modal">
+    <div className="inner-container">
+      <div className="circle rounded-circle border-dark">icon</div>
+      <h3 className="mb-3">{translate('No organization')}.</h3>
+      <p className="description mb-7">
+        {translate(
+          'You are not part of an organisation. Create an organization or request access from your organization administrator.',
+        )}
+      </p>
       <InitialCreateOrganizationButton />
     </div>
-  </Row>
+  </div>
 );

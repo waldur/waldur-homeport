@@ -30,43 +30,47 @@ export const SelectWorkspaceDialog: FunctionComponent = () => {
     value: organizationsCount,
   } = useAsync(getCustomersCount);
 
-  return (
+  return loading ? (
+    <LoadingSpinner />
+  ) : error ? (
+    <h2>{translate('Unable to load data')}</h2>
+  ) : (
     <>
-      <Modal.Header>
-        <Modal.Title>{translate('Project selector')}</Modal.Title>
-        <ModalSubtitle>{translate('Select project scope')}</ModalSubtitle>
-      </Modal.Header>
+      {organizationsCount !== 0 && (
+        <Modal.Header>
+          <Modal.Title>{translate('Project selector')}</Modal.Title>
+          <ModalSubtitle>{translate('Select project scope')}</ModalSubtitle>
+        </Modal.Header>
+      )}
       <Modal.Body>
-        {loading ? (
-          <LoadingSpinner />
-        ) : error ? (
-          translate('Unable to load data')
-        ) : organizationsCount === 0 ? (
-          <EmptyOrganizationsPlaceholder />
-        ) : (
-          <>
-            <Row className="mb-8">
-              <Col className="workspace-listing" xs={12}>
-                <OrganizationsSelector
-                  selectedOrganization={selectedOrganization}
-                  selectOrganization={selectOrganization}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
+        <>
+          <Row className="mb-8">
+            <Col className="workspace-listing" xs={12}>
+              <OrganizationsSelector
+                selectedOrganization={selectedOrganization}
+                selectOrganization={selectOrganization}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              {organizationsCount === 0 ? (
+                <EmptyOrganizationsPlaceholder />
+              ) : (
                 <ProjectsPanel selectedOrganization={selectedOrganization} />
-              </Col>
-            </Row>
-          </>
-        )}
+              )}
+            </Col>
+          </Row>
+        </>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={() => router.stateService.go('profile.details')}>
-          {translate('Go to my profile')}
-        </Button>
-        <CloseDialogButton />
-      </Modal.Footer>
+      {organizationsCount !== 0 && (
+        <Modal.Footer>
+          <Button onClick={() => router.stateService.go('profile.details')}>
+            {translate('Go to my profile')}
+          </Button>
+          <CloseDialogButton />
+        </Modal.Footer>
+      )}
     </>
   );
 };

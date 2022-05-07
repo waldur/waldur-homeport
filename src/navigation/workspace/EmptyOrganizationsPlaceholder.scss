@@ -1,0 +1,19 @@
+.no-organization-modal {
+  display: grid;
+  height: 70vh;
+  max-height: 400px;
+  place-items: center;
+}
+
+.circle {
+  height: 60px;
+  width: 60px;
+  border: 1px solid;
+  margin: auto auto 1rem;
+  display: grid;
+  place-items: center;
+}
+
+.description {
+  max-width: 393px;
+}
