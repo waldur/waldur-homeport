@@ -378,10 +378,6 @@ msgstr ""
 msgid "Add new offering"
 msgstr ""
 
-#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
-msgid "Add new organization"
-msgstr ""
-
 #: src/user/hooks/HookCreateButton.tsx
 msgid "Add notification"
 msgstr ""
@@ -1791,6 +1787,7 @@ msgstr ""
 
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/customer/create/WizardForm.tsx
+#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
 msgid "Create organization"
 msgstr ""
 
@@ -4732,6 +4729,10 @@ msgstr ""
 #: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 msgid "No offerings"
+msgstr ""
+
+#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
+msgid "No organization"
 msgstr ""
 
 #: src/issues/create/CallerGroup.tsx
@@ -11160,6 +11161,10 @@ msgstr ""
 msgid "Yes, use invitation email"
 msgstr ""
 
+#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
+msgid "You are not part of an organisation. Create an organization or request access from your organization administrator."
+msgstr ""
+
 #: src/customer/details/CustomerErrorPanel.tsx
 msgid "You can create issue by pressing the button below"
 msgstr ""
@@ -11198,10 +11203,6 @@ msgstr ""
 
 #: src/i18n/constants.ts
 msgid "You cannot manage other resource allocator"
-msgstr ""
-
-#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
-msgid "You do not belong to any organization yet"
 msgstr ""
 
 #: src/customer/create/CustomerCreatePrompt.tsx
