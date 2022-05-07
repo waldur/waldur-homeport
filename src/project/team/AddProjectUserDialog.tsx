@@ -22,7 +22,7 @@ import {
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { UserListOption } from '@waldur/project/team/UserGroup';
+import { UserListOptionInline } from '@waldur/project/team/UserGroup';
 import { showErrorResponse } from '@waldur/store/notify';
 import { getProject } from '@waldur/workspace/selectors';
 
@@ -42,6 +42,11 @@ export const AddProjectUserDialog = reduxForm<
 })(({ submitting, handleSubmit, refreshList }) => {
   const dispatch = useDispatch();
   const currentProject = useSelector(getProject);
+
+  const getOptionLabel = (option) =>
+    option.email
+      ? (option.full_name || option.username) + ` (${option.email})`
+      : option.full_name || option.username;
 
   const saveUser = async (formData) => {
     try {
@@ -74,8 +79,8 @@ export const AddProjectUserDialog = reduxForm<
             }
             {...reactSelectMenuPortaling()}
             getOptionValue={(option) => option.full_name || option.username}
-            getOptionLabel={(option) => option.full_name || option.username}
-            components={{ Option: UserListOption }}
+            getOptionLabel={getOptionLabel}
+            components={{ Option: UserListOptionInline }}
             required={true}
           />
           <SelectField
