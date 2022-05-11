@@ -10,11 +10,6 @@ export const reactSelectMenuPortaling = (): any => ({
   menuPlacement: 'bottom',
 });
 
-export const datePickerOverlayContainerInDialogs = () => ({
-  calendarPlacement: 'bottom',
-  calendarContainer: document.getElementsByClassName('modal-dialog')[0],
-});
-
 export const makeLastTwelveMonthsFilterPeriods = (): PeriodOption[] => {
   let date = DateTime.now().startOf('month');
   const choices = [];

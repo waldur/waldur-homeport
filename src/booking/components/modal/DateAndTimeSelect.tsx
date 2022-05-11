@@ -1,14 +1,11 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
-import DatePicker from 'react-datepicker';
+import Flatpickr from 'react-flatpickr';
 import Select from 'react-select';
 
 import { timelineLabels } from '@waldur/booking/utils';
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
-import { translate } from '@waldur/i18n';
-
-import './DateAndTimeSelect.scss';
 
 interface DateAndTimeSelectField {
   name: string;
@@ -29,18 +26,15 @@ export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> =
     <Form.Group>
       <Form.Label className="col-sm-2">{props.label}</Form.Label>
       <div className="col-sm-5">
-        <DatePicker
-          weekStartsOn={1}
-          showTodayButton={true}
-          todayButtonLabel={translate('Today')}
-          dateFormat="DD-MM-YYYY"
+        <Flatpickr
+          options={{ dateFormat: 'd-m-Y' }}
           value={props.currentTime.toISO()}
           onChange={(_, formattedValue) =>
             props.onChange(
-              DateTime.fromFormat(formattedValue, 'dd-MM-yyyy').toJSDate(),
+              DateTime.fromFormat(formattedValue[0], 'dd-MM-yyyy').toJSDate(),
             )
           }
-          calendarContainer={document.getElementsByClassName('modal')[0]}
+          className="form-control form-control-solid"
         />
       </div>
       <Form.Label className="col-sm-1" disabled={props.isDisabled}>

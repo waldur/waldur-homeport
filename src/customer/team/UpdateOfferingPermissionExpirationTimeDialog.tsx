@@ -7,7 +7,6 @@ import { Field, reduxForm } from 'redux-form';
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { FormContainer } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
-import { datePickerOverlayContainerInDialogs } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -63,7 +62,6 @@ const PureUpdateOfferingPermissionExpirationTimeDialog = (props) => {
             name="expiration_time"
             label={translate('Expiration time')}
             component={DateField}
-            {...datePickerOverlayContainerInDialogs()}
           />
         </FormContainer>
       </Modal.Body>
