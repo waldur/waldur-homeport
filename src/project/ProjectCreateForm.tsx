@@ -15,7 +15,6 @@ import {
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
 import {
-  datePickerOverlayContainerInDialogs,
   reactSelectMenuPortaling,
   validateMaxLength,
 } from '@waldur/form/utils';
@@ -124,7 +123,6 @@ export const ProjectCreateForm = reduxForm<
           description={translate(
             'The date is inclusive. Once reached, all project resource will be scheduled for termination.',
           )}
-          {...datePickerOverlayContainerInDialogs()}
           minDate={DateTime.now().plus({ days: 1 }).toISO()}
         />
       </FormContainer>

@@ -7,10 +7,7 @@ import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { FormContainer } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { DateField } from '@waldur/form/DateField';
-import {
-  datePickerOverlayContainerInDialogs,
-  reactSelectMenuPortaling,
-} from '@waldur/form/utils';
+import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -86,7 +83,6 @@ export const OfferingPermissionCreateDialog = reduxForm({
             name="expiration_time"
             label={translate('Expiration time')}
             component={DateField}
-            {...datePickerOverlayContainerInDialogs()}
           />
         </FormContainer>
       </Modal.Body>

@@ -16,7 +16,6 @@ import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
 import { StaticField } from '@waldur/form/StaticField';
 import {
-  datePickerOverlayContainerInDialogs,
   reactSelectMenuPortaling,
   validateMaxLength,
 } from '@waldur/form/utils';
@@ -91,7 +90,6 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
             'The date is inclusive. Once reached, all project resource will be scheduled for termination.',
           )}
           component={DateField}
-          {...datePickerOverlayContainerInDialogs()}
           disabled={props.isDisabled}
           minDate={DateTime.now().plus({ days: 1 }).toISO()}
         />

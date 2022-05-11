@@ -10,10 +10,7 @@ import { getRoles } from '@waldur/customer/team/utils';
 import { FormContainer, SelectField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { DateField } from '@waldur/form/DateField';
-import {
-  reactSelectMenuPortaling,
-  datePickerOverlayContainerInDialogs,
-} from '@waldur/form/utils';
+import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -84,8 +81,6 @@ export const AddProjectUserDialog = reduxForm<
             name="expiration_time"
             label={translate('Role expires on')}
             minDate={DateTime.now().plus({ days: 1 }).toISO()}
-            weekStartsOn={1}
-            {...datePickerOverlayContainerInDialogs()}
           />
         </FormContainer>
       </Modal.Body>

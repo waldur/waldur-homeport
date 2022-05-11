@@ -11,4 +11,6 @@ import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/500.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/700.css';
-import 'react-datepicker/dist/react-datepicker.css';
+
+import flatpickr from 'flatpickr';
+flatpickr.l10ns.default.firstDayOfWeek = 1; // Monday

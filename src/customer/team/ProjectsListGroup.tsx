@@ -4,7 +4,6 @@ import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { DateField } from '@waldur/form/DateField';
-import { datePickerOverlayContainerInDialogs } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 
 import './ProjectsListGroup.scss';
@@ -48,8 +47,6 @@ export const ProjectsListGroup: FunctionComponent<{
                     component={DateField}
                     disabled={!canChangeRole}
                     minDate={DateTime.now().plus({ days: 1 }).toISO()}
-                    weekStartsOn={1}
-                    {...datePickerOverlayContainerInDialogs()}
                   />
                 </td>
               </tr>

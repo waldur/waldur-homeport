@@ -7,7 +7,6 @@ import { Field, reduxForm } from 'redux-form';
 import { formatDate } from '@waldur/core/dateUtils';
 import { FormContainer, SubmitButton } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
-import { datePickerOverlayContainerInDialogs } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -77,7 +76,6 @@ const PureEditResourceEndDateDialog: FunctionComponent<any> = (props) => {
             name="end_date"
             label={translate('Termination date')}
             component={DateField}
-            {...datePickerOverlayContainerInDialogs()}
             disabled={props.submitting}
             description={translate(
               'The date is inclusive. Once reached, resource will be scheduled for termination.',
