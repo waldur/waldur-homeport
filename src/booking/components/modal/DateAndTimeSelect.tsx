@@ -31,7 +31,7 @@ export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> =
           value={props.currentTime.toISO()}
           onChange={(_, formattedValue) =>
             props.onChange(
-              DateTime.fromFormat(formattedValue[0], 'dd-MM-yyyy').toJSDate(),
+              DateTime.fromFormat(formattedValue, 'dd-MM-yyyy').toJSDate(),
             )
           }
           className="form-control form-control-solid"
