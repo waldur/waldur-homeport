@@ -16,7 +16,7 @@ export function getBreadcrumbs(): BreadcrumbItem[] {
 }
 
 const ARTICLE_CODE_PATTERN = new RegExp(
-  '^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$',
+  '^[A-Za-z0-9][A-Za-z0-9-_]*[A-Za-z0-9]$',
 );
 
 export const articleCodeValidator = (value: string) => {
@@ -27,7 +27,9 @@ export const articleCodeValidator = (value: string) => {
     return translate('Code is too short.');
   }
   if (!value.match(ARTICLE_CODE_PATTERN)) {
-    return translate('Code should consist of latin symbols or numbers.');
+    return translate(
+      'Code should consist of latin symbols, numbers, dashes and underscores.',
+    );
   }
 };
 
