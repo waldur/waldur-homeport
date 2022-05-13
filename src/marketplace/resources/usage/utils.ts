@@ -95,7 +95,7 @@ const getUsages = (
     for (let j = 0; j < usages.length; j++) {
       if (
         periods[i].toFormat('yyyy-MM') ===
-        parseDate(usages[j].date).toFormat('yyyy-MM')
+        parseDate(usages[j].billing_period).toFormat('yyyy-MM')
       ) {
         result.push({
           value: usages[j].usage,
