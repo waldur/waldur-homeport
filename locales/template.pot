@@ -326,10 +326,6 @@ msgstr ""
 msgid "Add PI"
 msgstr ""
 
-#: src/user/keys/KeyCreateForm.tsx
-msgid "Add SSH key"
-msgstr ""
-
 #: src/freeipa/SyncProfile.tsx
 msgid "Add Waldur user SSH keys to the FreeIPA profile"
 msgstr ""
@@ -366,7 +362,6 @@ msgid "Add item"
 msgstr ""
 
 #: src/user/keys/KeyCreateButton.tsx
-#: src/user/keys/KeyCreateForm.tsx
 msgid "Add key"
 msgstr ""
 
@@ -1210,7 +1205,6 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 #: src/modal/CloseDialogButton.tsx
 #: src/project/ProjectCreateForm.tsx
-#: src/user/keys/KeyCreateForm.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
 msgstr ""
@@ -3463,9 +3457,17 @@ msgstr ""
 msgid "Import YAML"
 msgstr ""
 
+#: src/user/keys/KeyCreateDialog.tsx
+msgid "Import key"
+msgstr ""
+
 #: src/marketplace/offerings/actions/OfferingImportButton.tsx
 #: src/marketplace/offerings/actions/OfferingImportDialog.tsx
 msgid "Import offering"
+msgstr ""
+
+#: src/user/keys/KeyCreateDialog.tsx
+msgid "Import public key"
 msgstr ""
 
 #: src/marketplace/resources/import/ResourceImportButton.tsx
@@ -3887,7 +3889,7 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: src/user/keys/KeyCreateForm.tsx
+#: src/user/keys/KeyCreateDialog.tsx
 msgid "Key name"
 msgstr ""
 
@@ -6431,7 +6433,7 @@ msgstr ""
 msgid "Public SSH keys will be injected into services that allow key-based access."
 msgstr ""
 
-#: src/user/keys/KeyCreateForm.tsx
+#: src/user/keys/KeyCreateDialog.tsx
 #: src/user/keys/KeysListExpandableRow.tsx
 msgid "Public key"
 msgstr ""
@@ -8849,7 +8851,7 @@ msgstr ""
 msgid "The invoice has been marked as paid."
 msgstr ""
 
-#: src/user/keys/KeyCreateForm.tsx
+#: src/user/keys/KeyCreateDialog.tsx
 msgid "The key has been created."
 msgstr ""
 
@@ -9143,10 +9145,6 @@ msgstr ""
 msgid "To report an issue, please send an email to {supportEmail}."
 msgstr ""
 
-#: src/booking/components/modal/DateAndTimeSelect.tsx
-msgid "Today"
-msgstr ""
-
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
 msgid "Token"
 msgstr ""
@@ -9407,7 +9405,7 @@ msgstr ""
 msgid "Unable to create horizontal pod autoscaler."
 msgstr ""
 
-#: src/user/keys/KeyCreateForm.tsx
+#: src/user/keys/KeyCreateDialog.tsx
 msgid "Unable to create key."
 msgstr ""
 

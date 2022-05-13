@@ -1,16 +1,19 @@
-import { useRouter } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n/translate';
 import { ActionButton } from '@waldur/table/ActionButton';
 
+import { keyCreateDialog } from './actions';
+
 export const KeyCreateButton: FunctionComponent = () => {
-  const router = useRouter();
+  const dispatch = useDispatch();
+  const openFormDialog = useCallback(() => dispatch(keyCreateDialog()), []);
 
   return (
     <ActionButton
       title={translate('Add key')}
-      action={() => router.stateService.go('keys.create')}
+      action={openFormDialog}
       icon="fa fa-plus"
     />
   );
