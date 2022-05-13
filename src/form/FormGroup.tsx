@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { cloneElement, PureComponent } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Row } from 'react-bootstrap';
 import { clearFields, WrappedFieldMetaProps } from 'redux-form';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -44,7 +44,7 @@ export class FormGroup extends PureComponent<FormGroupProps> {
       },
     };
     return (
-      <Form.Group className="mb-7">
+      <Form.Group as={Row} className="mb-8">
         {!hideLabel && (
           <Form.Label
             className={classNames(

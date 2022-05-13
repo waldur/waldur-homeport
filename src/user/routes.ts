@@ -4,10 +4,6 @@ import { USER_WORKSPACE } from '@waldur/workspace/types';
 
 import { tabs, requireIdParam } from './tabs';
 
-const KeyCreateForm = lazyComponent(
-  () => import(/* webpackChunkName: "KeyCreateForm" */ './keys/KeyCreateForm'),
-  'KeyCreateForm',
-);
 const UserEmailChangeCallback = lazyComponent(
   () =>
     import(
@@ -84,6 +80,4 @@ export const states: StateDeclaration[] = [
       workspace: USER_WORKSPACE,
     },
   },
-
-  { name: 'keys.create', url: 'add/', component: KeyCreateForm },
 ];
