@@ -8,5 +8,6 @@
   },
   "env": {
     "USER_UUID": "3a836bc76e1b40349ec1a0d8220f374f"
-  }
+  },
+  "defaultCommandTimeout": 10000
 }
