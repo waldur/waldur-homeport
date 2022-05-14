@@ -782,9 +782,6 @@ msgstr "Klasterio vaidmenys"
 msgid "Code is too short."
 msgstr "Kodas yra per trumpas."
 
-msgid "Code should consist of latin symbols or numbers."
-msgstr "Kodą turėtų sudaryti lotyniški simboliai arba skaičiai."
-
 msgid "Collapse"
 msgstr "Sutraukti"
 

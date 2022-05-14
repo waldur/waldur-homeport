@@ -761,9 +761,6 @@ msgstr "Klusterroller"
 msgid "Code is too short."
 msgstr "Koden är för kort."
 
-msgid "Code should consist of latin symbols or numbers."
-msgstr "Koden ska bestå av latinska symboler eller siffror."
-
 msgid "Collapse"
 msgstr "Kollaps"
 

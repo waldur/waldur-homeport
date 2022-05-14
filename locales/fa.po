@@ -572,9 +572,6 @@ msgstr "نام Cluster"
 msgid "Code is too short."
 msgstr "کد خیلی کوتاه است."
 
-msgid "Code should consist of latin symbols or numbers."
-msgstr "کد باید شامل علامت های لاتین و یا عدد باشد."
-
 msgid "Collapse"
 msgstr "فروپاشی"
 

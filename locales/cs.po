@@ -782,9 +782,6 @@ msgstr "Role klastru"
 msgid "Code is too short."
 msgstr "Kód je příliš krátký."
 
-msgid "Code should consist of latin symbols or numbers."
-msgstr "Kód by měl sestávat z latinských symbolů nebo čísel."
-
 msgid "Collapse"
 msgstr "Sbalit"
 

@@ -782,9 +782,6 @@ msgstr "Klyngeroller"
 msgid "Code is too short."
 msgstr "Kode er for kort."
 
-msgid "Code should consist of latin symbols or numbers."
-msgstr "Koden skal bestå av latinske symboler eller tall."
-
 msgid "Collapse"
 msgstr "Skjul"
 

@@ -647,9 +647,6 @@ msgstr "Имя кластера"
 msgid "Code is too short."
 msgstr "Слишком короткий код."
 
-msgid "Code should consist of latin symbols or numbers."
-msgstr "Код должен состоять из латинских символов или цифр."
-
 msgid "Collapse"
 msgstr "Свернуть"
 

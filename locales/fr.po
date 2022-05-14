@@ -782,9 +782,6 @@ msgstr "Rôles du cluster"
 msgid "Code is too short."
 msgstr "Le code est trop court."
 
-msgid "Code should consist of latin symbols or numbers."
-msgstr "Le code doit être composé de symboles ou de chiffres latins."
-
 msgid "Collapse"
 msgstr "Effondrement"
 

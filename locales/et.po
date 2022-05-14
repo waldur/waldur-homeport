@@ -746,9 +746,6 @@ msgstr "Klastri rollid"
 msgid "Code is too short."
 msgstr "Kood on liiga lühike."
 
-msgid "Code should consist of latin symbols or numbers."
-msgstr "Kood peaks koosnema ladina sümbolitest või arvudest"
-
 msgid "Collation"
 msgstr "Kõrvutamine"
 
