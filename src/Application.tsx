@@ -10,6 +10,7 @@ import store from '@waldur/store/store';
 import { loadConfig } from './core/bootstrap';
 import { ErrorMessage } from './ErrorMessage';
 import { LoadingScreen } from './LoadingScreen';
+import { MasterInit } from './metronic/layout/MasterInit';
 import { NotificationContainer } from './NotificationContainer';
 import { UIRouter } from './UIRouter';
 
@@ -18,6 +19,7 @@ export const Application: FunctionComponent = () => {
   if (!value) {
     return <LoadingScreen loading={loading} error={error} />;
   }
+
   return (
     <Provider store={store}>
       <NotificationContainer />
@@ -27,6 +29,7 @@ export const Application: FunctionComponent = () => {
           <UIView />
         </ErrorBoundary>
       </UIRouter>
+      <MasterInit />
     </Provider>
   );
 };

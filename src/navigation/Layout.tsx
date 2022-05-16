@@ -1,8 +1,8 @@
-import { UIView, UISref, UISrefActive } from '@uirouter/react';
+import { UISref, UISrefActive } from '@uirouter/react';
 import React, { FunctionComponent, useMemo, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 
-import { MasterInit } from '@waldur/metronic/layout/MasterInit';
+import { MasterLayout } from '@waldur/metronic/layout/MasterLayout';
 import { SelectWorkspaceToggle } from '@waldur/navigation/workspace/SelectWorkspaceToggle';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -46,7 +46,6 @@ export const Layout: React.FC = ({ children }) => {
   }
   return (
     <LayoutContext.Provider value={context}>
-      <MasterInit />
       <div className="d-flex flex-column flex-root">
         <div className="page d-flex flex-row flex-column-fluid">
           <UnifiedSidebar />
@@ -73,7 +72,7 @@ export const Layout: React.FC = ({ children }) => {
               <div className="post d-flex flex-column-fluid">
                 <div className="container-xxl">
                   {children}
-                  <UIView />
+                  <MasterLayout />
                 </div>
               </div>
             </div>
