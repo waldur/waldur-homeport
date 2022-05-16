@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { useMemo, useState, FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
 import Select from 'react-select';
 
 import { translate } from '@waldur/i18n';
@@ -71,13 +70,13 @@ export const ResourceRow: FunctionComponent<{
           />
         )}
         <td>
-          <Form.Control plaintext>
+          <p>
             {resource.type ? (
               <ResourceIcon resource={payload} />
             ) : (
               resource.name
             )}
-          </Form.Control>
+          </p>
         </td>
         <td>
           <p>{resource.backend_id}</p>

@@ -40,7 +40,7 @@ describe('OpenStack Volume detail view', () => {
 
   it('Attaches OpenStack Volume to Instance', () => {
     cy.log('Open "Attach OpenStack Volume to Instance" dialog')
-      .get('#actions-dropdown-btn')
+      .get('[data-cy=actions-dropdown-btn]')
       .click({ force: true })
       .wait('@getOpenstackTenantVolume')
       .wait(500)

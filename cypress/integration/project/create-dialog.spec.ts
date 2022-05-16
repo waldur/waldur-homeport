@@ -56,7 +56,7 @@ describe('Project creation dialog', () => {
           name: 'Internal OpenStack project',
           description: 'Test project',
           type: '/api/project-types/b4736efa2cc44777b4143463ba8f9bf8/',
-          end_date: '2021-04-25',
+          end_date: '2021-03-28',
         });
     });
   });

@@ -21,7 +21,7 @@ describe('Customer creation dialog', () => {
       .click({ force: true })
 
       // Modal dialog should be displayed
-      .get('h4.modal-title', { withinSubject: null })
+      .get('.modal-title', { withinSubject: null })
       .contains('Create organization');
   });
 

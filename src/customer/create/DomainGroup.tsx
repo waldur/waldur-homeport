@@ -22,9 +22,9 @@ export const DomainGroup: FunctionComponent = () => {
     return (
       <Form.Group>
         <Form.Label>{translate('Home organization domain name')}</Form.Label>
-        <Form.Control plaintext>
+        <p>
           <strong>{user.organization || 'N/A'}</strong>
-        </Form.Control>
+        </p>
       </Form.Group>
     );
   }

@@ -36,12 +36,6 @@ describe('User manage', () => {
       // Ensure that phone_number input field is present
       .get('input[name="phone_number"]')
 
-      // Ensure that token input field is present
-      .get('input[name="token"]')
-
-      // Ensure that token_lifetime input field is present
-      .get('input[name="token_lifetime"]')
-
       // Ensure that Remove profile button works
       .get('button')
       .contains('Remove profile')

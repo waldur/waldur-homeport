@@ -77,6 +77,7 @@ export const SelectWorkspaceToggle: FunctionComponent = () => {
       size="sm"
       className="btn-metro fw-bolder text-primary-dark"
       onClick={changeWorkspace}
+      data-cy="select-workspace-toggle"
     >
       {wrapTooltip(
         titleTooltip,

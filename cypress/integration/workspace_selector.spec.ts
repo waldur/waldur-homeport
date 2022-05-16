@@ -38,9 +38,10 @@ describe('Workspace selector', () => {
   });
 
   it('Lists all organizations by default', () => {
-    cy
+    cy.contains('button', 'Select an organization...')
+      .click()
       // Get filtered organization rows
-      .get('.list-group-item div')
+      .get('.organization-list-item .title')
 
       // Only matching organizations should be present
       .should(($p) =>
@@ -53,13 +54,14 @@ describe('Workspace selector', () => {
   });
 
   it('Allows to filter organizations by name', () => {
-    cy
+    cy.contains('button', 'Select an organization...')
+      .click()
       // Enter query in organization list filter
-      .get('input[placeholder="Filter organizations"]')
+      .get('input[placeholder="Search for organization...')
       .type('lebowski')
 
       // Get filtered organization rows
-      .get('.list-group-item div')
+      .get('.organization-list-item .title')
 
       // Only matching organizations should be present
       .should(($p) =>
@@ -68,21 +70,19 @@ describe('Workspace selector', () => {
   });
 
   it('Allows to filter projects by name', () => {
-    cy
+    cy.contains('button', 'Select an organization...')
+      .click()
       // Select first available organization
-      .get('.list-group-item a')
-      .contains('Select')
-      .parent()
-      .click({ force: true })
+      .get('.organization-list-item')
+      .first()
+      .click()
 
       // Filter projects by name
       .get('input[placeholder="Filter projects"]')
       .type('OpenStack')
 
       // Get filtered project rows
-      .get('.list-group')
-      .last()
-      .find('.list-group-item div')
+      .get('.project-list-item .title')
 
       // Only matching projects should be present
       .should(($p) =>
@@ -90,32 +90,18 @@ describe('Workspace selector', () => {
       );
   });
 
-  it('Allows to go switch to organization workspace', () => {
-    cy
-      // Click on first available organization
-      .get('.list-group-item a')
-      .contains('Select')
-      .click({ force: true })
-
-      // Workspace selector indicates organization workspace
-      .get('.select-workspace-toggle.btn-primary');
-  });
-
   it('Allows to go switch to project workspace', () => {
-    cy
+    cy.contains('button', 'Select an organization...')
+      .click()
       // Select first available organization
-      .get('.list-group-item div')
+      .get('.organization-list-item')
       .contains('Alice Lebowski')
       .click({ force: true })
 
       // Select last available project
-      .get('.list-group')
+      .get('.projects-table a')
       .last()
-      .find('.list-group-item a')
       .contains('Select')
-      .click({ force: true })
-
-      // Workspace selector indicates project workspace
-      .get('.select-workspace-toggle.btn-success');
+      .click();
   });
 });

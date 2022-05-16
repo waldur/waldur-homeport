@@ -6,9 +6,9 @@ import { translate } from '@waldur/i18n';
 export const UserGroup: FunctionComponent<{ editUser }> = ({ editUser }) =>
   editUser ? (
     <Form.Group>
-      <Form.Control plaintext>
+      <p>
         <strong>{translate('User')}</strong>:{' '}
         {editUser.full_name || editUser.username}
-      </Form.Control>
+      </p>
     </Form.Group>
   ) : null;
