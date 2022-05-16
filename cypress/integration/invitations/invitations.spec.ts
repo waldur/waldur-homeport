@@ -77,10 +77,9 @@ describe('Invitations', () => {
 
     cy
       //role selection
-      .contains('label', 'Role')
       .get('.fa-users')
-      .click()
-      .get('div')
+      .click({ force: true })
+      .get('.modal-body div')
       .contains('Select project')
       .type('OpenStack Alice project{enter}')
 
@@ -103,10 +102,9 @@ describe('Invitations', () => {
 
     cy
       //role selection
-      .contains('label', 'Role')
       .get('.fa-server')
-      .click()
-      .get('div')
+      .click({ force: true })
+      .get('.modal-body div')
       .contains('Select project')
       .type('OpenStack Alice project{enter}')
 
@@ -123,21 +121,25 @@ describe('Invitations', () => {
   it(`Can select all the toggle buttons in Invitations component`, () => {
     cy
       //select rejection toggle button
-      .get('label[type="button"]')
+      .get('label')
       .contains('Rejected')
       .click()
       .wait('@pendingRejected');
   });
 
   it(`Resend invitation`, () => {
-    cy.contains('[type="button"]', 'Resend')
+    cy.get('tr')
+      .get('button')
+      .contains('Resend')
       .click()
       .get('p')
       .contains('Invitation has been sent again.');
   });
 
   it(`Cancel invitation`, () => {
-    cy.get('.fa-ban')
+    cy.get('tr')
+      .get('button')
+      .contains('Cancel')
       .click()
       .get('p')
       .contains('Invitation has been canceled.');

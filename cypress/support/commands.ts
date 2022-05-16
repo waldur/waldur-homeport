@@ -71,10 +71,10 @@ Cypress.Commands.add('selectTheFirstOptionOfDropdown', () => {
 });
 
 Cypress.Commands.add('selectDate', () => {
-  cy.get("input[placeholder='YYYY-MM-DD']")
+  cy.get(".react-datepicker-wrapper input")
     .click()
     .get(
-      '.date-picker-popover .popover-content tbody tr:last-child td:first-child',
+      '.react-datepicker__week:last-child .react-datepicker__day:first-child',
     )
     .click();
 });
@@ -82,10 +82,10 @@ Cypress.Commands.add('selectDate', () => {
 Cypress.Commands.add('openWorkspaceSelector', () => {
   cy.waitForSpinner()
     // Workspace selector indicates user workspace
-    .get('.select-workspace-toggle.btn-info')
+    .get('[data-cy=select-workspace-toggle]')
 
     // Open workspace selector by clicking on button
-    .contains('Select workspace')
+    .contains('Select project')
     .click()
 
     // Modal dialog should be displayed

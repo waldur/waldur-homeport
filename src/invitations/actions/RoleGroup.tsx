@@ -16,7 +16,7 @@ export const RoleGroup: FunctionComponent<{ roles }> = ({ roles }) => (
         defaultValue={roles[0].value}
       >
         {roles.map((role, index) => (
-          <ToggleButton key={index} value={role.value}>
+          <ToggleButton key={index} value={role.value} id={role.value}>
             <i className={`fa ${role.icon}`} /> {translate(role.title)}
           </ToggleButton>
         ))}

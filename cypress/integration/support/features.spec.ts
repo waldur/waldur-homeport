@@ -18,7 +18,7 @@ describe('Features', () => {
   });
 
   it('renders title', () => {
-    cy.get('h2').contains('Features').should('be.visible');
+    cy.get('.page-title h1').contains('Features').should('be.visible');
   });
 
   it('should yes & no radio button select works correctly', () => {

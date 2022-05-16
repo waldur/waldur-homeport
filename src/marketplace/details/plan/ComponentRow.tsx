@@ -1,5 +1,4 @@
 import React from 'react';
-import { Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -23,30 +22,28 @@ export const ComponentRow: React.FC<ComponentRowProps> = (props) => {
   return (
     <tr>
       <td>
-        <Form.Control plaintext>
+        <p>
           {props.offeringComponent.name}
           <Tip label={props.offeringComponent.type} id="componentTypeTooltip">
             {' '}
             <i className="fa fa-question-circle" />
           </Tip>
-        </Form.Control>
+        </p>
       </td>
       <td className={props.className}>{props.children}</td>
       <td>
-        <Form.Control plaintext>
-          {props.offeringComponent.measured_unit || 'N/A'}
-        </Form.Control>
+        <p>{props.offeringComponent.measured_unit || 'N/A'}</p>
       </td>
       {!activeFixedPriceProfile
         ? props.offeringComponent.prices.map((price, innerIndex) => (
             <td key={innerIndex}>
-              <Form.Control plaintext>
+              <p>
                 {formatCurrency(
                   price,
                   ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
                   3,
                 )}
-              </Form.Control>
+              </p>
             </td>
           ))
         : null}

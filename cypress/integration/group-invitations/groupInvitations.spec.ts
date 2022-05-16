@@ -46,7 +46,6 @@ describe('Group invitations', () => {
 
       .waitForSpinner()
 
-      .get('#customer-team-tab-group-invitations')
       .contains('Group invitations')
       .click();
   });
@@ -64,14 +63,14 @@ describe('Group invitations', () => {
   });
 
   it('Should open modal when Create group invitation button is clicked', () => {
-    cy.get('.pull-right > .btn-group > button.btn')
+    cy.contains('button', 'Create group invitation')
       .click()
       .get('.modal-title')
       .should('be.visible');
   });
 
   it('Should close modal when cancel button is clicked', () => {
-    cy.get('.pull-right > .btn-group > button.btn')
+    cy.contains('button', 'Create group invitation')
       .click()
       .get('.modal-footer > .btn-default')
       .click()
@@ -80,7 +79,7 @@ describe('Group invitations', () => {
   });
 
   it('Should invitation works correctly using role (Organization owner)', () => {
-    cy.get('.pull-right > .btn-group > button.btn')
+    cy.contains('button', 'Create group invitation')
       .click()
       .get('.btn-group label')
       .eq(0)
@@ -92,7 +91,7 @@ describe('Group invitations', () => {
   });
 
   it('Should invitation works correctly using role (Project manager)', () => {
-    cy.get('.pull-right > .btn-group > button.btn')
+    cy.contains('button', 'Create group invitation')
       .click()
       .get('.btn-group label')
       .eq(1)
@@ -106,7 +105,7 @@ describe('Group invitations', () => {
   });
 
   it('Should invitation works correctly using role (System administrator)', () => {
-    cy.get('.pull-right > .btn-group > button.btn')
+    cy.contains('button', 'Create group invitation')
       .click()
       .get('.btn-group label')
       .eq(2)
@@ -120,7 +119,7 @@ describe('Group invitations', () => {
   });
 
   it('Should invitation works correctly using role (Project member)', () => {
-    cy.get('.pull-right > .btn-group > button.btn')
+    cy.contains('button', 'Create group invitation')
       .click()
       .get('.btn-group label')
       .eq(3)

@@ -38,7 +38,7 @@ describe('Public resources (Report usage)', () => {
       .visit(
         '/organizations/895e38d197e748459189f19285119edf/marketplace-public-resources/',
       )
-      .get('#public-resources-list-actions-dropdown-btn')
+      .get('[data-cy="public-resources-list-actions-dropdown-btn"]')
       .click({ force: true })
       .get('li > a')
       .contains('Report usage')

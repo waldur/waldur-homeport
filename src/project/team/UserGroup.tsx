@@ -49,10 +49,10 @@ export const UserGroup: FunctionComponent<{
 }> = ({ customerUuid, editUser, users, disabled }) =>
   editUser ? (
     <Form.Group>
-      <Form.Control plaintext>
+      <p>
         <strong>{translate('User')}</strong>:{' '}
         {editUser.full_name || editUser.username}
-      </Form.Control>
+      </p>
     </Form.Group>
   ) : users?.length ? (
     <Form.Group>

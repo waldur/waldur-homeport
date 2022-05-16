@@ -56,6 +56,7 @@ describe('Users', () => {
       .intercept('GET', '/api/users/?page=1&page_size=10', {
         fixture: 'support/users.json',
       })
+      .as('getUsers')
 
       .setToken()
 
@@ -64,7 +65,7 @@ describe('Users', () => {
   });
 
   it('renders title', () => {
-    cy.get('h2').contains('Users').should('exist');
+    cy.get('.page-title h1').contains('Users').should('exist');
   });
 
   it('renders user items', () => {
@@ -72,51 +73,81 @@ describe('Users', () => {
   });
 
   it('should full name search works correctly', () => {
-    cy.get('input[name=full_name]')
-      .type('Tara Pierce')
-      .get('.spinner-container > .fa')
-      .get('table tbody tr')
-      .should('have.length', 1);
+    cy.wait('@getUsers').then(() => {
+      cy.get('button')
+        .contains('Filter')
+        .click()
+        .get('input[name=full_name]')
+        .type('Tara Pierce')
+        .get('.spinner-container > .fa')
+        .get('table tbody tr')
+        .should('have.length', 1);
+    });
   });
 
   it('should username search works correctly', () => {
-    cy.get('input[name=username]')
-      .type('0024c6a7885940bbb156e82073bc0244')
-      .get('.spinner-container > .fa')
-      .get('table tbody tr')
-      .should('have.length', 1);
+    cy.wait('@getUsers').then(() => {
+      cy.get('button')
+        .contains('Filter')
+        .click()
+        .get('input[name=username]')
+        .type('0024c6a7885940bbb156e82073bc0244')
+        .get('.spinner-container > .fa')
+        .get('table tbody tr')
+        .should('have.length', 1);
+    });
   });
 
   it('should organization search works correctly', () => {
-    cy.get('input[name=organization]')
-      .type('Howard-Martin')
-      .get('.spinner-container > .fa')
-      .get('table tbody tr')
-      .should('have.length', 1);
+    cy.wait('@getUsers').then(() => {
+      cy.get('button')
+        .contains('Filter')
+        .click()
+        .get('input[name=organization]')
+        .type('Howard-Martin')
+        .get('.spinner-container > .fa')
+        .get('table tbody tr')
+        .should('have.length', 1);
+    });
   });
 
   it('should email search works correctly', () => {
-    cy.get('input[name=email]')
-      .type('TaraPierce@example.com')
-      .get('.spinner-container > .fa')
-      .get('table tbody tr')
-      .should('have.length', 1);
+    cy.wait('@getUsers').then(() => {
+      cy.get('button')
+        .contains('Filter')
+        .click()
+        .get('input[name=email]')
+        .type('TaraPierce@example.com')
+        .get('.spinner-container > .fa')
+        .get('table tbody tr')
+        .should('have.length', 1);
+    });
   });
 
   it('should search works correctly using account role', () => {
-    cy.openDropdownByLabel('Role')
-      .selectTheFirstOptionOfDropdown()
-      .get('table tbody tr')
-      .should('have.length', 10);
+    cy.wait('@getUsers').then(() => {
+      cy.get('button')
+        .contains('Filter')
+        .click()
+        .openDropdownByLabel('Role')
+        .selectTheFirstOptionOfDropdown()
+        .get('table tbody tr')
+        .should('have.length', 10);
+    });
   });
 
   it('should search works correctly using account status', () => {
-    cy.openDropdownByLabel('Status')
-      .get('*div[id^="react-select"]')
-      .eq(1)
-      .click({ force: true })
-      .get('table tbody tr')
-      .should('have.length', 10);
+    cy.wait('@getUsers').then(() => {
+      cy.get('button')
+        .contains('Filter')
+        .click()
+        .openDropdownByLabel('Status')
+        .get('*div[id^="react-select"]')
+        .eq(1)
+        .click({ force: true })
+        .get('table tbody tr')
+        .should('have.length', 10);
+    });
   });
 
   it('should open details modal when click details button', () => {

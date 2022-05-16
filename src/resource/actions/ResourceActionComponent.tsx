@@ -25,6 +25,7 @@ export const ResourceActionComponent: FunctionComponent<ResourceActionComponentP
       disabled={props.disabled}
       variant="light"
       size="sm"
+      data-cy="actions-dropdown-btn"
     >
       {props.open ? (
         props.loading ? (

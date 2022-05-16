@@ -23,7 +23,12 @@ export const ToogleButtonFilter: FunctionComponent<ToogleButtonFilterProps> = (
     onChange={props.onChange}
   >
     {props.choices.map((choice, index) => (
-      <ToggleButton key={index} value={choice.value} size="sm">
+      <ToggleButton
+        key={index}
+        value={choice.value}
+        size="sm"
+        id={choice.value}
+      >
         {choice.label}
       </ToggleButton>
     ))}

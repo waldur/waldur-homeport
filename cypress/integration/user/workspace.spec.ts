@@ -1,6 +1,12 @@
 describe('User workspace', function () {
   beforeEach(() => {
-    cy.mockUser().mockChecklists().setToken().visit('/profile/').wait(500);
+    cy.mockUser()
+      .mockChecklists()
+      .setToken()
+      .visit('/profile/')
+      .wait(500)
+      .get('[data-cy="user-dropdown-menu"]')
+      .click();
   });
 
   it('Should go to audit log', () => {

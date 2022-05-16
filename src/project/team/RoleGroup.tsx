@@ -11,9 +11,9 @@ export const RoleGroup: FunctionComponent<{ isProjectManager }> = ({
 }) =>
   isProjectManager ? (
     <Form.Group>
-      <Form.Control plaintext>
+      <p>
         <strong>{translate('Role')}</strong>: {translate(ENV.roles.manager)}
-      </Form.Control>
+      </p>
     </Form.Group>
   ) : (
     <>

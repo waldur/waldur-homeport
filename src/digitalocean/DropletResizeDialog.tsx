@@ -101,10 +101,10 @@ const ResizeTypeGroup = ({ submitting }) => (
 const FlavorGroup = ({ resource, flavors, submitting }) => (
   <>
     <Form.Group>
-      <Form.Control plaintext>
+      <p>
         <strong>{translate('Current size')}: </strong>
         {formatFlavor(resource)}
-      </Form.Control>
+      </p>
     </Form.Group>
     <Form.Group>
       <Form.Label>{translate('New size')}:</Form.Label>

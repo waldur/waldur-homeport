@@ -12,7 +12,7 @@ export const StaticField: FunctionComponent<StaticFieldProps> = (props) => (
       {props.label}
     </Form.Label>
     <Col sm={9} md={8}>
-      <Form.Control plaintext readOnly defaultValue={props.value} />
+      <p>{props.value}</p>
     </Col>
   </Form.Group>
 );

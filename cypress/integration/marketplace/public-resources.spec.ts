@@ -30,7 +30,7 @@ describe('Public resources', () => {
   });
 
   it('should render public resources view', () => {
-    cy.get('h2').contains('Public resources').should('exist');
+    cy.get('h1').contains('Public resources').should('exist');
   });
 
   it('should sync filters to url query params', () => {

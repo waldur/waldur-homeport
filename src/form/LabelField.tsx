@@ -8,9 +8,9 @@ interface LabelFieldProps {
 export const LabelField: FunctionComponent<LabelFieldProps> = (props) => (
   <Form.Group>
     <div className="col-sm-offset-3 col-sm-3 col-md-8">
-      <Form.Control plaintext>
+      <p>
         <strong>{props.label}</strong>
-      </Form.Control>
+      </p>
     </div>
   </Form.Group>
 );
