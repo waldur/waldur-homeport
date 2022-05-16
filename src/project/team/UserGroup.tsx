@@ -7,6 +7,15 @@ import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { usersAutocomplete } from '@waldur/project/team/api';
 
+export const UserListOptionInline: FunctionComponent<any> = (props) => (
+  <components.Option {...props}>
+    <div>
+      {props.data.full_name}
+      {props.data.email && <>&nbsp;({props.data.email})</>}
+    </div>
+  </components.Option>
+);
+
 export const UserListOption: FunctionComponent<any> = (props) => (
   <components.Option {...props}>
     <>

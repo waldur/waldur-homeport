@@ -5,7 +5,10 @@ import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateOffering } from '@waldur/marketplace/common/api';
+import {
+  updateOfferingAttributes,
+  updateOfferingDescription,
+} from '@waldur/marketplace/common/api';
 import { DescriptionUpdateContainer } from '@waldur/marketplace/offerings/create/DescriptionUpdateContainer';
 import * as actions from '@waldur/marketplace/offerings/store/actions';
 import { formatOfferingRequest } from '@waldur/marketplace/offerings/store/utils';
@@ -33,7 +36,14 @@ export const PageDescription = connect((state: RootState) => ({
       const updateOfferingHandler = async (formData) => {
         try {
           const offeringRequest = formatOfferingRequest(formData, []);
-          await updateOffering(offering.uuid, offeringRequest);
+          await updateOfferingDescription(
+            offering.uuid,
+            offeringRequest.category,
+          );
+          await updateOfferingAttributes(
+            offering.uuid,
+            offeringRequest.attributes,
+          );
           await refreshOffering();
           dispatch(showSuccess(translate('Offering has been updated.')));
           dispatch(closeModalDialog());

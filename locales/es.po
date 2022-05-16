@@ -785,9 +785,6 @@ msgstr "Roles de los clústeres"
 msgid "Code is too short."
 msgstr "El código es demasiado corto."
 
-msgid "Code should consist of latin symbols or numbers."
-msgstr "El código debe consistir en símbolos o números latinos."
-
 msgid "Collapse"
 msgstr "Colapso"
 

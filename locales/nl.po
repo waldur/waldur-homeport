@@ -782,9 +782,6 @@ msgstr "Clusterrollen"
 msgid "Code is too short."
 msgstr "Code is te kort."
 
-msgid "Code should consist of latin symbols or numbers."
-msgstr "Code moet bestaan uit Latijnse symbolen of cijfers."
-
 msgid "Collapse"
 msgstr "Samenvouwen"
 

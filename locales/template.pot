@@ -1481,7 +1481,7 @@ msgid "Code is too short."
 msgstr ""
 
 #: src/marketplace/offerings/utils.ts
-msgid "Code should consist of latin symbols or numbers."
+msgid "Code should consist of latin symbols, numbers, dashes and underscores."
 msgstr ""
 
 #: src/customer/details/CustomerAccordion.tsx
