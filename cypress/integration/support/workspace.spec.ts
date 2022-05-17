@@ -37,7 +37,7 @@ describe('Financial overview', () => {
       })
       .setToken()
       .visit('/support/helpdesk/')
-      .get('h2')
+      .get('h1')
       .contains('Helpdesk dashboard')
       .waitForSpinner();
   });
@@ -51,28 +51,19 @@ describe('Financial overview', () => {
 
   it('should browse menus in support workspace', () => {
     cy.wait(500);
-    // Check support reporting menu items
-    cy.contains('.nav-label', 'Reporting').click();
-
     // Reporting => Capacity
-    cy.contains('.nav-label', 'Capacity').click();
+    cy.contains('.menu-title', 'Capacity').click();
 
     // Reporting => Financial
-    cy.contains('.nav-label', 'Financial').click();
+    cy.contains('.menu-title', 'Financial').click();
 
     // Reporting => Growth
-    cy.contains('.nav-label', 'Growth').click();
+    cy.contains('.menu-title', 'Growth').click();
 
     // Reporting => Offerings
-    cy.contains('.nav-label', 'Offerings').click();
+    cy.contains('.menu-title', 'Offerings').click();
 
     // Reporting => Usage reports
-    cy.contains('.nav-label', 'Usage reports').click();
-
-    // Resources
-    cy.contains('.nav-label', 'Resources').click();
-
-    // Orders
-    cy.contains('.nav-label', 'Orders').click();
+    cy.contains('.menu-title', 'Usage reports').click();
   });
 });
