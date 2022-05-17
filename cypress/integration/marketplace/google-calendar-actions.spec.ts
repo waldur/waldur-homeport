@@ -37,8 +37,7 @@ describe('Google Calendar actions in public offerings view', () => {
       .first()
       .contains('Actions')
       .click({ force: true })
-      .get('.dropdown-menu')
-      .find('li > a')
+      .get('.dropdown-item')
       .contains('Sync with Google Calendar')
       .click({ force: true })
 
@@ -52,8 +51,7 @@ describe('Google Calendar actions in public offerings view', () => {
       .last()
       .contains('Actions')
       .click({ force: true })
-      .get('.dropdown-menu')
-      .find('li > a')
+      .get('.dropdown-item')
       .contains('Publish as Google Calendar')
       .click({ force: true })
 
@@ -67,8 +65,7 @@ describe('Google Calendar actions in public offerings view', () => {
       .first()
       .contains('Actions')
       .click({ force: true })
-      .get('.dropdown-menu')
-      .find('li > a')
+      .get('.dropdown-item')
       .contains('Unpublish as Google Calendar')
       .click({ force: true })
 
