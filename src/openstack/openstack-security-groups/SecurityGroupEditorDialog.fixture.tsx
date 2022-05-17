@@ -77,7 +77,7 @@ export class DialogFixture {
   }
 
   get modalTitle() {
-    return this.wrapper.find('.modal-title').text();
+    return this.wrapper.find('.modal-title').first().text();
   }
 
   get modalBody() {
