@@ -44,8 +44,7 @@ describe('OpenStack Volume detail view', () => {
       .click({ force: true })
       .wait('@getOpenstackTenantVolume')
       .wait(500)
-      .get('ul.dropdown-menu a')
-      .contains('Attach')
+      .contains('.dropdown-item', 'Attach')
       .click({ force: true })
 
       .log('Select an option of Instance field')
