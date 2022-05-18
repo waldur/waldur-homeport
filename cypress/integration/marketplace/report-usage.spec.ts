@@ -38,9 +38,9 @@ describe('Public resources (Report usage)', () => {
       .visit(
         '/organizations/895e38d197e748459189f19285119edf/marketplace-public-resources/',
       )
-      .get('[data-cy="public-resources-list-actions-dropdown-btn"]')
-      .click({ force: true })
-      .get('li > a')
+      .contains('button', 'Actions')
+      .click()
+      .get('a')
       .contains('Report usage')
       .click({ force: true });
   });
@@ -58,14 +58,10 @@ describe('Public resources (Report usage)', () => {
       .get('textarea[name="components.a.description"]')
       .clear()
       .type('Hello, world!')
-      .get('#checkbox-1')
-      .dblclick()
       .get('input[name="components.b.amount"]')
       .type('135')
       .get('textarea[name="components.b.description"]')
       .type('Test Test Test')
-      .get('#checkbox-2')
-      .click()
       .get('form > .btn-primary')
       .click()
       .get('.reapop__notification-message')
