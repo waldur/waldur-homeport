@@ -1,16 +1,20 @@
 import { UISref, UISrefActive } from '@uirouter/react';
 import classNames from 'classnames';
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 import Gravatar from 'react-gravatar';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AuthService } from '@waldur/auth/AuthService';
 import { Link } from '@waldur/core/Link';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { useLanguageSelector } from '@waldur/i18n/useLanguageSelector';
+import { RootState } from '@waldur/store/reducers';
 import { getPrivateUserTabs } from '@waldur/user/constants';
 import { getUser } from '@waldur/workspace/selectors';
+import './UserDropdown.scss';
+
+import { updateThemeMode } from './store';
 
 const getSidebarItems = () =>
   getPrivateUserTabs().filter((item) => item && isFeatureVisible(item.feature));
@@ -76,6 +80,34 @@ const LanguageSelector: FunctionComponent = () => {
   );
 };
 
+export const DarkLightMode: FunctionComponent = () => {
+  const { theme } = useSelector((state: RootState) => state.theme);
+  const [switchCount, setSwitchCount] = useState(0);
+  const dispatch = useDispatch();
+  const handleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('themeMode', newTheme);
+    dispatch(updateThemeMode(newTheme));
+    setSwitchCount(switchCount + 1);
+  };
+
+  useEffect(() => {
+    if (switchCount < 1) return;
+    window.location.reload();
+  }, [switchCount]);
+
+  return (
+    <div className="menu-item px-5" data-kt-menu-trigger="click">
+      <div className="px-5 menu-link" onClick={handleTheme}>
+        <div className={`toggler_button ${theme}`}>
+          <span />
+        </div>
+        {theme === 'dark' ? translate('Light mode') : translate('Dark mode')}
+      </div>
+    </div>
+  );
+};
+
 export const UserDropdownMenu: FunctionComponent = () => {
   const user = useSelector(getUser);
   const items = useMemo(getSidebarItems, []);
@@ -134,6 +166,8 @@ export const UserDropdownMenu: FunctionComponent = () => {
             {translate('Log out')}
           </a>
         </div>
+        <div className="separator my-2"></div>
+        <DarkLightMode />
       </div>
     </>
   );

@@ -22,7 +22,7 @@ module.exports = {
   },
   cache: { type: 'filesystem' },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss'],
     alias: {
       '@waldur': path.resolve('./src/'),
       sass: path.resolve('./src/sass/'),
@@ -180,29 +180,29 @@ module.exports = {
                 replacements: [
                   {
                     pattern: /%(\d+)(?:\$\w)?/g,
-                    replacement: (_, n) => `{${n - 1}}`
+                    replacement: (_, n) => `{${n - 1}}`,
                   },
                   {
                     pattern: /%\((\w+)\)\w/g,
-                    replacement: '{$1}'
+                    replacement: '{$1}',
                   },
                   {
                     pattern: /%\w/g,
                     replacement: function () {
-                      return `{${this.n++}}`
+                      return `{${this.n++}}`;
                     },
-                    state: {n: 0}
+                    state: { n: 0 },
                   },
                   {
                     pattern: /%%/g,
-                    replacement: '%'
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      }
+                    replacement: '%',
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [

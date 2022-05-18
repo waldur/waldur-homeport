@@ -1,0 +1,20 @@
+.toggler_button {
+  width: 30px;
+  height: 20px;
+  border-radius: 9px;
+  margin-right: 0.5rem;
+  display: flex;
+  background-color: lightgray;
+  padding: 1px;
+  &.dark {
+    background-color: #6a6a6a;
+    justify-content: flex-end;
+  }
+  span {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    display: block;
+    background-color: #fff;
+  }
+}
