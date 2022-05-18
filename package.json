@@ -159,7 +159,7 @@
     "lint-staged": "^10.0.8",
     "markdown-loader": "^6.0.0",
     "marked": "^4.0.10",
-    "mini-css-extract-plugin": "^2.4.3",
+    "mini-css-extract-plugin": "^2.6.0",
     "postcss": "8",
     "postcss-import": "^14.0.2",
     "postcss-loader": "^6.2.0",

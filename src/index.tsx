@@ -1,10 +1,10 @@
-import ReactDOM from 'react-dom';
-
 import './vendor';
 import './sass/noscript.scss';
-import './metronic/assets/sass/style.scss';
+
+import ReactDOM from 'react-dom';
 
 import { Application } from './Application';
+
 import './auth/module';
 import './digitalocean/module';
 import './issues/module';

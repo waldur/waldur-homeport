@@ -12,6 +12,7 @@ import { ErrorMessage } from './ErrorMessage';
 import { LoadingScreen } from './LoadingScreen';
 import { MasterInit } from './metronic/layout/MasterInit';
 import { NotificationContainer } from './NotificationContainer';
+import { ThemeSelector } from './ThemeSelector';
 import { UIRouter } from './UIRouter';
 
 export const Application: FunctionComponent = () => {
@@ -22,6 +23,7 @@ export const Application: FunctionComponent = () => {
 
   return (
     <Provider store={store}>
+      <ThemeSelector />
       <NotificationContainer />
       <UIRouter>
         <ErrorBoundary fallback={ErrorMessage}>
