@@ -4704,6 +4704,10 @@ msgstr ""
 msgid "No access info."
 msgstr ""
 
+#: src/auth/WarningBar.tsx
+msgid "No association"
+msgstr ""
+
 #: src/marketplace/resources/list/CategoryFilter.tsx
 msgid "No categories"
 msgstr ""
@@ -11292,6 +11296,10 @@ msgstr ""
 
 #: src/slurm/details/SubmitWithField.tsx
 msgid "Your account is not authorized to use this allocation"
+msgstr ""
+
+#: src/auth/WarningBar.tsx
+msgid "Your account is not part of any organization. Your view will be restricted."
 msgstr ""
 
 #: src/invitations/InvitationMessage.tsx
