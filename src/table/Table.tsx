@@ -38,6 +38,8 @@ export interface TableProps<RowType = any> extends TranslateProps, TableState {
   placeholderComponent?: React.ReactNode;
   filters?: React.ReactNode;
   title?: React.ReactNode;
+  fullWidth?: boolean;
+  hasActions?: boolean;
 }
 
 class Table<RowType = any> extends React.Component<TableProps<RowType>> {
@@ -45,41 +47,45 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
     rows: [],
     columns: [],
     hasQuery: false,
+    fullWidth: false,
+    hasActions: true,
   };
 
   render() {
     return (
-      <Card>
+      <Card className={this.props.fullWidth ? 'full-width' : ''}>
         {this.props.title && (
           <Card.Header>
             <Card.Title>{this.props.title}</Card.Title>
           </Card.Header>
         )}
-        <Card.Header>
-          {(this.props.hasQuery || this.props.filters) && (
-            <Card.Title>
-              {this.props.hasQuery && (
-                <div className="me-3">
-                  <TableQuery
-                    query={this.props.query}
-                    setQuery={this.props.setQuery}
-                  />
-                </div>
-              )}
-              {this.props.filters && (
-                <Button variant="light" onClick={this.props.toggleFilter}>
-                  <i className="fa fa-filter"></i> {translate('Filter')}
-                </Button>
-              )}
-            </Card.Title>
-          )}
-          {this.props.blocked && <div className="table-block" />}
-          <div className="card-toolbar">
-            <div className="d-flex justify-content-end">
-              <TableButtons {...this.props} />
+        {this.props.hasActions && (
+          <Card.Header>
+            {(this.props.hasQuery || this.props.filters) && (
+              <Card.Title>
+                {this.props.hasQuery && (
+                  <div className="me-3">
+                    <TableQuery
+                      query={this.props.query}
+                      setQuery={this.props.setQuery}
+                    />
+                  </div>
+                )}
+                {this.props.filters && (
+                  <Button variant="light" onClick={this.props.toggleFilter}>
+                    <i className="fa fa-filter"></i> {translate('Filter')}
+                  </Button>
+                )}
+              </Card.Title>
+            )}
+            {this.props.blocked && <div className="table-block" />}
+            <div className="card-toolbar">
+              <div className="d-flex justify-content-end">
+                <TableButtons {...this.props} />
+              </div>
             </div>
-          </div>
-        </Card.Header>
+          </Card.Header>
+        )}
         <Card.Body>
           <div className="table-responsive dataTables_wrapper">
             {this.props.filterVisible && this.props.filters}

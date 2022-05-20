@@ -7,8 +7,8 @@ import { useTitle } from '@waldur/navigation/title';
 import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails } from '@waldur/workspace/types';
 
+import { AuthenticationEvents } from './AuthenticationEvents';
 import { UserEditTokenContainer } from './UserEditTokenContainer';
-import { UserLoginSessions } from './UserLoginSessions';
 
 export const UserApiKey: FunctionComponent = () => {
   useTitle(translate('API key'));
@@ -19,7 +19,7 @@ export const UserApiKey: FunctionComponent = () => {
   return (
     <>
       <UserEditTokenContainer user={user} />
-      <UserLoginSessions user={user} />
+      <AuthenticationEvents user={user} />
     </>
   );
 };

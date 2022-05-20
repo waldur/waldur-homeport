@@ -1,5 +1,5 @@
 /* TABLE */
-.table.table-metro {
+.table {
   thead > tr > th {
     font-size: 14px;
     letter-spacing: 0px;
@@ -33,19 +33,24 @@
   }
 }
 
-/* TABLE FULL IN CARD, WITHOUT CARD-BODY */
-.card {
-  > .table,
-  > .table-responsive > .table {
-    td:first-child,
-    th:first-child,
-    tr:first-child {
-      padding-left: 2.25rem;
-    }
-    td:last-child,
-    th:last-child,
-    tr:last-child {
-      padding-right: 2.25rem;
+/* TABLE FULL IN CARD */
+.card.full-width {
+  .card-body {
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+
+    .table {
+      td:first-child,
+      th:first-child,
+      tr:first-child {
+        padding-left: 2.5rem;
+      }
+      td:last-child,
+      th:last-child,
+      tr:last-child {
+        padding-right: 2.5rem;
+      }
     }
   }
 }

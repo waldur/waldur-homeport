@@ -895,6 +895,7 @@ msgid "Authenticate using Mobile ID"
 msgstr ""
 
 #: src/auth/events.ts
+#: src/user/api-key/AuthenticationEvents.tsx
 msgid "Authentication events"
 msgstr ""
 
@@ -2293,7 +2294,6 @@ msgid "Details"
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/user/api-key/UserLoginSessions.tsx
 msgid "Device"
 msgstr ""
 
@@ -3377,7 +3377,7 @@ msgstr ""
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/TenantPortsList.tsx
-#: src/user/api-key/UserLoginSessions.tsx
+#: src/user/api-key/AuthenticationEvents.tsx
 msgid "IP address"
 msgstr ""
 
@@ -4034,7 +4034,6 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/marketplace/offerings/details/PageLocation.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
-#: src/user/api-key/UserLoginSessions.tsx
 msgid "Location"
 msgstr ""
 
@@ -4079,10 +4078,6 @@ msgstr ""
 #: src/auth/callbacks/AuthLoginFailed.tsx
 #: src/auth/callbacks/OauthLoginCompleted.tsx
 msgid "Login failed"
-msgstr ""
-
-#: src/user/api-key/UserLoginSessions.tsx
-msgid "Login sessions"
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
@@ -4290,6 +4285,7 @@ msgstr ""
 #: src/events/EventDetailsTable.tsx
 #: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr ""
 
@@ -8427,7 +8423,6 @@ msgstr ""
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
-#: src/user/api-key/UserLoginSessions.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -9067,7 +9062,7 @@ msgstr ""
 msgid "Thumbnail"
 msgstr ""
 
-#: src/user/api-key/UserLoginSessions.tsx
+#: src/user/api-key/AuthenticationEvents.tsx
 msgid "Time"
 msgstr ""
 
