@@ -87,7 +87,41 @@ module.exports = {
         ],
       },
       {
+        test: /style\.(dark\.)?scss$/,
+        include: [
+          path.resolve(scssPath, 'metronic/assets/sass/style.scss'),
+          path.resolve(scssPath, 'metronic/assets/sass/style.dark.scss'),
+        ],
+        use: [
+          utils.isProd || utils.darkModeEnabledInDevEnv
+            ? MiniCssExtractPlugin.loader
+            : 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: !utils.isProd,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: !utils.isProd,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: !utils.isProd,
+            },
+          },
+        ],
+      },
+      {
         test: /\.scss$/,
+        exclude: [
+          path.resolve(scssPath, 'metronic/assets/sass/style.scss'),
+          path.resolve(scssPath, 'metronic/assets/sass/style.dark.scss'),
+        ],
         use: [
           utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           {

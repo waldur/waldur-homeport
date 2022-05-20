@@ -1,34 +1,75 @@
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '@waldur/store/reducers';
 
-import { updateThemeMode } from './navigation/header/store';
+import { addTheme } from './navigation/header/store';
+
+function getThemeLinkTag(dark = false) {
+  const matchRegex = dark ? /dark-bundle/ : /light-bundle/;
+  const linkTags = document.getElementsByTagName('link');
+  for (let i = 0; i < linkTags.length; i++) {
+    if (linkTags.item(i).href.match(matchRegex)) {
+      return linkTags.item(i);
+    }
+  }
+  return null;
+}
+function removeAnotherTheme(newTheme) {
+  const tag = getThemeLinkTag(newTheme !== 'dark');
+  if (tag) tag.remove();
+}
+function replaceTheme(newTheme, newThemeHref) {
+  const tag = getThemeLinkTag(newTheme !== 'dark');
+  if (tag) tag.setAttribute('href', newThemeHref);
+}
 
 export const ThemeSelector: FunctionComponent = () => {
-  const { theme } = useSelector((state: RootState) => state.theme);
+  const { theme, themes } = useSelector((state: RootState) => state.theme);
   const dispatch = useDispatch();
-  useEffect(() => {
-    const themeMode = localStorage.getItem('themeMode');
-    if (themeMode) {
-      dispatch(updateThemeMode(themeMode));
-      return;
-    }
-    const isDark = window.matchMedia('(prefers-color-scheme:dark)').matches;
-    const currentTheme = isDark ? 'dark' : 'light';
-    dispatch(updateThemeMode(currentTheme));
-    localStorage.setItem('themeMode', 'light');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+  /**
+   * This function uses dynamic import to load themes, without reloading the webpage
+   */
+  const loadTheme = useCallback(
+    (newTheme) => {
+      // Replace href attribute of link tag, for next times
+      if (themes[newTheme]) {
+        replaceTheme(newTheme, themes[newTheme]);
+        return;
+      }
+      // For the first time invoke of dark/light theme
+      if (newTheme === 'dark') {
+        import(
+          /* webpackChunkName: "dark" */ '@waldur/metronic/assets/sass/style.dark.scss'
+        ).then(() => {
+          const newThemes = {
+            ...themes,
+            [newTheme]: getThemeLinkTag(true)?.getAttribute('href'),
+          };
+          dispatch(addTheme(newThemes));
+          removeAnotherTheme(newTheme);
+        });
+      } else if (newTheme === 'light') {
+        import(
+          /* webpackChunkName: "light" */ '@waldur/metronic/assets/sass/style.scss'
+        ).then(() => {
+          const newThemes = {
+            ...themes,
+            [newTheme]: getThemeLinkTag()?.getAttribute('href'),
+          };
+          dispatch(addTheme(newThemes));
+          removeAnotherTheme(newTheme);
+        });
+      }
+    },
+    [themes],
+  );
 
   useEffect(() => {
-    if (theme === 'dark') {
-      require('@waldur/metronic/assets/sass/style.dark.scss');
-      require('flatpickr/dist/themes/dark.css');
-    } else {
-      require('@waldur/metronic/assets/sass/style.scss');
-      require('flatpickr/dist/themes/light.css');
-    }
+    if (theme === 'dark') loadTheme('dark');
+    else loadTheme('light');
   }, [theme]);
+
   return <></>;
 };
