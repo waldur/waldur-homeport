@@ -2014,7 +2014,7 @@ msgid "Daily available booking time range"
 msgstr ""
 
 #: src/navigation/header/UserDropdown.tsx
-msgid "Dark mode"
+msgid "Dark theme"
 msgstr ""
 
 #: src/customer/dashboard/CustomerDashboard.tsx
@@ -3964,10 +3964,6 @@ msgstr ""
 
 #: src/user/api-key/TokenLifetimeField.tsx
 msgid "Lifetime will be updated and reset upon saving the form."
-msgstr ""
-
-#: src/navigation/header/UserDropdown.tsx
-msgid "Light mode"
 msgstr ""
 
 #: src/dashboard/chart.ts

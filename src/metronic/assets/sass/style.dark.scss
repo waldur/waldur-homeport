@@ -11,7 +11,10 @@ $mode: dark;
 // Components
 @import './core/components/components';
 @import 'components/components';
+@import './custom/style';
 
 // Layout
 @import 'layout/layout';
 @import './core/layout/docs/layout';
+
+@import '~flatpickr/dist/themes/dark';
