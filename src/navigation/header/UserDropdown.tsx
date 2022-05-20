@@ -161,7 +161,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
 
         <LanguageSelector />
 
-        <div className="menu-item px-5">
+        <div className="menu-item px-5" data-kt-menu-trigger="click">
           <a onClick={AuthService.logout} className="menu-link px-5">
             {translate('Log out')}
           </a>
