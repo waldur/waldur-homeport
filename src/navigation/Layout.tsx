@@ -2,6 +2,7 @@ import { UISref, UISrefActive } from '@uirouter/react';
 import React, { FunctionComponent, useMemo, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 
+import WarningBar from '@waldur/auth/WarningBar';
 import { MasterLayout } from '@waldur/metronic/layout/MasterLayout';
 import { SelectWorkspaceToggle } from '@waldur/navigation/workspace/SelectWorkspaceToggle';
 import { getUser } from '@waldur/workspace/selectors';
@@ -52,6 +53,7 @@ export const Layout: React.FC = ({ children }) => {
           <div className="wrapper d-flex flex-column flex-row-fluid">
             <CookiesConsent />
             <AppHeader />
+            <WarningBar />
             <div className="content d-flex flex-column flex-column-fluid">
               <div className="toolbar">
                 <div className="container-fluid d-flex flex-stack">
