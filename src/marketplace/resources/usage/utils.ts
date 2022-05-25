@@ -78,7 +78,7 @@ const formatChart = (
   ],
 });
 
-const getLast24Months = (): DateTime[] => {
+const getLastTwelveMonths = (): DateTime[] => {
   const periods = [];
   for (let i = 23; i >= 0; i--) {
     periods.push(DateTime.now().minus({ months: i }));
@@ -123,7 +123,7 @@ export const getEChartOptions = (
 ) => {
   const toMinutes =
     component.measured_unit === 'hours' && measureUnit === 'minutes';
-  const periods = getLast24Months();
+  const periods = getLastTwelveMonths();
   const labels = periods.map((date) => `${date.month} - ${date.year}`);
   const formattedUsages = getUsages(
     periods,

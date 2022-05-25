@@ -68,7 +68,7 @@ const getDistinctUsers = (userUsages: UserUsage[]): UserUsage[] => {
   return distinctUsers;
 };
 
-const getLast24Months = (): string[] => {
+const getLastTwelveMonths = (): string[] => {
   const last24Months: string[] = [];
   for (let i = 23; i >= 0; i--) {
     const date = DateTime.now().minus({ months: i });
@@ -195,7 +195,7 @@ export const getEChartOptions = (
   const option = eChartInitialOption(measureUnit || 'hour');
 
   // filling periods
-  option.xAxis[0].data = getLast24Months();
+  option.xAxis[0].data = getLastTwelveMonths();
   const periods = getPeriods(option.xAxis[0].data);
 
   usages = filterUsagesBy24MonthsPeriod(usages);
