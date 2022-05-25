@@ -19,3 +19,5 @@ export interface SlurmAssociation {
   username: string;
   allocation: string;
 }
+
+export type MeasureUnit = 'hour' | 'minute';

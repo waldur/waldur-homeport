@@ -18,7 +18,7 @@ export const ResourceUsageChart: FunctionComponent<ResourceUsageChartProps> = ({
   chartColor,
 }) => {
   const options = useMemo(
-    () => getEChartOptions(offeringComponent, usages, chartColor),
+    () => getEChartOptions(offeringComponent, usages, chartColor, 'minutes'),
     [offeringComponent, usages, chartColor],
   );
   return <EChart options={options} height="400px" />;

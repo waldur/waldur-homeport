@@ -5,9 +5,9 @@ import { getComponentUsages } from '@waldur/marketplace/common/api';
 import { getChartSpec, palette } from '@waldur/slurm/details/constants';
 
 import { getAllocationUserUsages } from './api';
-import { Period, Usage, UserUsage } from './types';
+import { MeasureUnit, Period, Usage, UserUsage } from './types';
 
-const eChartInitialOption = () => ({
+const eChartInitialOption = (measureUnit?: MeasureUnit) => ({
   color: palette,
   tooltip: {
     trigger: 'axis',
@@ -35,14 +35,14 @@ const eChartInitialOption = () => ({
       type: 'value',
       name: translate('Usage'),
       axisLabel: {
-        formatter: '{value} h',
+        formatter: '{value} ' + measureUnit === 'minute' ? 'm' : 'h',
       },
     },
     {
       type: 'value',
       name: '',
       axisLabel: {
-        formatter: '{value} h',
+        formatter: '{value} ' + measureUnit === 'minute' ? 'm' : 'h',
       },
     },
   ],
@@ -68,13 +68,13 @@ const getDistinctUsers = (userUsages: UserUsage[]): UserUsage[] => {
   return distinctUsers;
 };
 
-const getLastSixMonths = (): string[] => {
-  const lastSixMonths: string[] = [];
-  for (let i = 5; i >= 0; i--) {
+const getLast24Months = (): string[] => {
+  const last24Months: string[] = [];
+  for (let i = 23; i >= 0; i--) {
     const date = DateTime.now().minus({ months: i });
-    lastSixMonths.push(`${date.month} - ${date.year}`);
+    last24Months.push(`${date.month} - ${date.year}`);
   }
-  return lastSixMonths;
+  return last24Months;
 };
 
 export const getPeriods = (xAxisPeriods: string[]): Period[] => {
@@ -101,7 +101,13 @@ const setUnitForRamUsage = (option, chart) => {
   }
 };
 
-const fillUsages = (option, periods: Period[], usages: Usage[], chart) => {
+const fillUsages = (
+  option,
+  periods: Period[],
+  usages: Usage[],
+  chart,
+  measureUnit?: MeasureUnit,
+) => {
   // filling data of line chart (general usages)
   for (let i = 0; i < periods.length; i++) {
     for (let j = 0; j < usages.length; j++) {
@@ -113,7 +119,10 @@ const fillUsages = (option, periods: Period[], usages: Usage[], chart) => {
         if (chart.field === 'ram_usage') {
           usageValue = convertMBToGB(usageValue);
         }
-        usageValue = convertMinuteToHour(usageValue);
+        usageValue =
+          measureUnit === 'minute'
+            ? usageValue
+            : convertMinuteToHour(usageValue);
         option.series[0].data.push(usageValue);
         break;
       }
@@ -150,15 +159,15 @@ const fillUserUsages = (option, periods, userUsages, chart) => {
   }
 };
 
-const filterUsagesBySixMonthsPeriod = (usages: Usage[]): Usage[] =>
+const filterUsagesBy24MonthsPeriod = (usages: Usage[]): Usage[] =>
   usages.filter((usage) => {
-    const sixMonthsAgo = DateTime.now().minus({ months: 6 });
+    const _24MonthsAgo = DateTime.now().minus({ months: 24 });
     const usageDate = DateTime.fromObject({
       day: 1,
       month: usage.month,
       year: usage.year,
     });
-    return sixMonthsAgo <= usageDate && usageDate <= DateTime.now();
+    return _24MonthsAgo <= usageDate && usageDate <= DateTime.now();
   });
 
 const fillSeriesAndLegendWithDistinctUsers = (
@@ -181,16 +190,17 @@ export const getEChartOptions = (
   chart,
   usages: Usage[],
   userUsages: UserUsage[],
+  measureUnit?: MeasureUnit,
 ) => {
-  const option = eChartInitialOption();
+  const option = eChartInitialOption(measureUnit || 'hour');
 
   // filling periods
-  option.xAxis[0].data = getLastSixMonths();
+  option.xAxis[0].data = getLast24Months();
   const periods = getPeriods(option.xAxis[0].data);
 
-  usages = filterUsagesBySixMonthsPeriod(usages);
+  usages = filterUsagesBy24MonthsPeriod(usages);
   setUnitForRamUsage(option, chart);
-  fillUsages(option, periods, usages, chart);
+  fillUsages(option, periods, usages, chart, measureUnit || 'hour');
   fillSeriesAndLegendWithDistinctUsers(option, userUsages);
   fillUserUsages(option, periods, userUsages, chart);
 
@@ -228,6 +238,6 @@ export const loadCharts = async (
   });
   return getChartSpec().map((chart) => ({
     ...chart,
-    options: getEChartOptions(chart, usages, userUsages),
+    options: getEChartOptions(chart, usages, userUsages, 'minute'),
   }));
 };

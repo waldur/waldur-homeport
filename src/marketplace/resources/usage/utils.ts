@@ -78,9 +78,9 @@ const formatChart = (
   ],
 });
 
-const getLastTwelveMonths = (): DateTime[] => {
+const getLast24Months = (): DateTime[] => {
   const periods = [];
-  for (let i = 11; i >= 0; i--) {
+  for (let i = 23; i >= 0; i--) {
     periods.push(DateTime.now().minus({ months: i }));
   }
   return periods;
@@ -89,6 +89,7 @@ const getLastTwelveMonths = (): DateTime[] => {
 const getUsages = (
   periods: DateTime[],
   usages: ComponentUsage[],
+  convertHoursToMinutes = false,
 ): RowData[] => {
   const result = [];
   for (let i = 0; i < periods.length; i++) {
@@ -98,7 +99,7 @@ const getUsages = (
         parseDate(usages[j].billing_period).toFormat('yyyy-MM')
       ) {
         result.push({
-          value: usages[j].usage,
+          value: convertHoursToMinutes ? usages[j].usage * 60 : usages[j].usage,
           description: usages[j].description,
         });
         break;
@@ -118,14 +119,23 @@ export const getEChartOptions = (
   component: OfferingComponent,
   usages: ComponentUsage[],
   color: string,
+  measureUnit?: 'hours' | 'minutes',
 ) => {
-  const periods = getLastTwelveMonths();
+  const toMinutes =
+    component.measured_unit === 'hours' && measureUnit === 'minutes';
+  const periods = getLast24Months();
   const labels = periods.map((date) => `${date.month} - ${date.year}`);
   const formattedUsages = getUsages(
     periods,
     usages.filter((usage) => usage.type === component.type),
+    toMinutes,
   );
-  return formatChart(component.measured_unit, color, labels, formattedUsages);
+  return formatChart(
+    measureUnit || component.measured_unit,
+    color,
+    labels,
+    formattedUsages,
+  );
 };
 
 export const getBillingTypeLabel = (value) =>
