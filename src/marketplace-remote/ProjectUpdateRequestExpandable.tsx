@@ -48,6 +48,13 @@ export const ProjectUpdateRequestExpandable = ({ row }) => (
           <td>{row.new_oecd_fos_2007_code}</td>
         </tr>
       ) : null}
+      {row.old_is_industry != row.new_is_industry ? (
+        <tr>
+          <td>{translate('Industry project')}</td>
+          <td>{row.old_is_industry}</td>
+          <td>{row.new_is_industry}</td>
+        </tr>
+      ) : null}
     </tbody>
   </Table>
 );

@@ -171,7 +171,7 @@ Download translation:
     - find locales -type f -name '*.po' -exec sed -i 's/{__\([^}]*\)__\}/{\1}/g' {} \;
     - git status
     - git add locales/*
-    - git commit locales -m "Updates translations [skip ci]" || exit 0
+    - git commit locales -m "Updates translations" || exit 0
     - git status
     - echo "Committing updated translations"
     - git branch new-translations
