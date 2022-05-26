@@ -1,5 +1,8 @@
+import { useMemo } from 'react';
+
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
+import { useTabs } from '@waldur/navigation/context';
 
 export const getPrivateUserTabs = () => [
   {
@@ -99,3 +102,17 @@ export const USER_PERMISSION_REQUESTS_TABLE_ID =
   'user-permission-requests-table';
 export const USER_PERMISSION_REQUESTS_FILTER_FORM_ID =
   'user-permission-requests-table-filter-form';
+
+export const useUserTabs = () => {
+  const tabs = useMemo(
+    () =>
+      getPrivateUserTabs()
+        .filter((item) => item)
+        .map((item) => ({
+          title: item.label,
+          to: item.state,
+        })),
+    [],
+  );
+  useTabs(tabs);
+};

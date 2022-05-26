@@ -16,11 +16,14 @@ import {
 } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
+import { useCustomerItems } from '../utils';
+
 import { CustomerDashboardChart } from './CustomerDashboardChart';
 import { CustomerResourcesList } from './CustomerResourcesList';
 
 export const CustomerDashboard: FunctionComponent = () => {
   useTitle(translate('Dashboard'));
+  useCustomerItems();
 
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);

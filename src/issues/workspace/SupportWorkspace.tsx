@@ -1,9 +1,10 @@
 import { useEffect, useMemo, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import {
-  getReportItems,
+  getReportingItems,
   IssueNavigationService,
 } from '@waldur/issues/workspace/IssueNavigationService';
 import {
@@ -29,9 +30,12 @@ export function useReportingBreadcrumbs() {
   const dispatch = useDispatch();
   const tabs = useMemo(
     () =>
-      getReportItems()
-        .find((item) => item.key == 'reporting')
-        .children.map((item) => ({ title: item.label, to: item.state })),
+      getReportingItems()
+        .filter((item) => !item.feature || isFeatureVisible(item.feature))
+        .map((item) => ({
+          title: item.label,
+          to: item.state,
+        })),
     [],
   );
   useTabs(tabs);

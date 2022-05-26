@@ -1,24 +1,11 @@
-import { FunctionComponent } from 'enzyme';
+import React from 'react';
 
-import { MenuItem } from './MenuItem';
-import { SidebarSection } from './types';
-
-export const MenuSection: FunctionComponent<SidebarSection> = ({
-  label,
-  items,
-}) => (
-  <>
-    <div className="menu-item">
-      <div className="menu-content pt-8 pb-0">
-        <span className="menu-section text-muted text-uppercase fs-8 ls-1">
-          {label}
-        </span>
-      </div>
+export const MenuSection: React.FC<{ title: React.ReactNode }> = (props) => (
+  <div className="menu-item">
+    <div className="menu-content pt-8 pb-2">
+      <span className="menu-section text-muted text-uppercase fs-8 ls-1">
+        {props.title}
+      </span>
     </div>
-    {items
-      .filter((item) => item.state)
-      .map((item, itemIndex) => (
-        <MenuItem key={itemIndex} item={item} />
-      ))}
-  </>
+  </div>
 );

@@ -4,6 +4,7 @@ import { compose } from 'redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { useTeamItems } from '@waldur/navigation/navitems';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -61,4 +62,9 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-export const CustomerPermissionsReviewList = enhance(TableComponent);
+const CustomerPermissionsReviewListView = enhance(TableComponent);
+
+export const CustomerPermissionsReviewList = () => {
+  useTeamItems();
+  return <CustomerPermissionsReviewListView />;
+};

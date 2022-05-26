@@ -1,11 +1,15 @@
 import { Panel } from '@waldur/core/Panel';
+import { useUserTabs } from '@waldur/user/constants';
 
 import { FlowListFilter } from './FlowListFilter';
 import { FlowsList } from './FlowsList';
 
-export const FlowListContainer = () => (
-  <Panel>
-    <FlowListFilter />
-    <FlowsList />
-  </Panel>
-);
+export const FlowListContainer = () => {
+  useUserTabs();
+  return (
+    <Panel>
+      <FlowListFilter />
+      <FlowsList />
+    </Panel>
+  );
+};

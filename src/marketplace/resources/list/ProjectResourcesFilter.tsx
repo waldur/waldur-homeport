@@ -24,4 +24,5 @@ export const ProjectResourcesFilter = reduxForm<FormData, OwnProps>({
   form: 'ProjectResourcesFilter',
   onChange: syncFiltersToURL,
   initialValues: getInitialValues(),
+  destroyOnUnmount: false,
 })(PureProjectResourcesFilter);

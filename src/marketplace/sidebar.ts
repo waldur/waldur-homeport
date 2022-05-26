@@ -1,6 +1,5 @@
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
-import { getCategories } from '@waldur/marketplace/common/api';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
 import store from '@waldur/store/store';
@@ -9,8 +8,6 @@ import {
   PROJECT_WORKSPACE,
   ORGANIZATION_WORKSPACE,
 } from '@waldur/workspace/types';
-
-import { getCategoryLink } from './utils';
 
 export const getPublicServices = (customerId: string): MenuItemType => ({
   key: 'marketplace-services',
@@ -152,22 +149,3 @@ SidebarExtensionService.register(PROJECT_WORKSPACE, () => {
     },
   ];
 });
-
-export const getResourceSidebarItems = async (project) => {
-  const categories = await getCategories({
-    params: {
-      field: ['uuid', 'title'],
-      allowed_customer_uuid: project.customer_uuid,
-      project_uuid: project.uuid,
-      has_offerings: true,
-    },
-  });
-
-  return categories.map((category) => ({
-    label: category.title,
-    icon: 'fa-cloud',
-    ...getCategoryLink(project.uuid, category.uuid),
-    key: `marketplace_category_${category.uuid}`,
-    countFieldKey: `marketplace_category_${category.uuid}`,
-  }));
-};

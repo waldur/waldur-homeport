@@ -7,6 +7,7 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { withTranslation } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { useProjectItems } from '@waldur/navigation/navitems';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
@@ -15,6 +16,7 @@ import { getProject } from '@waldur/workspace/selectors';
 export const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   useTitle(translate('My orders'));
+  useProjectItems();
   const columns = [
     {
       title: translate('Created at'),

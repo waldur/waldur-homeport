@@ -16,6 +16,8 @@ import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
 
+import { useUserTabs } from '../constants';
+
 import { CategoriesList } from './CategoriesList';
 import { CategoryUserList } from './CategoryUserList';
 import { CurrentUserEvents } from './CurrentUserEvents';
@@ -30,6 +32,7 @@ type DispatchProps = typeof mapDispatchToProps;
 const UserDashboardContainer: React.FC<StateProps & DispatchProps> = (
   props,
 ) => {
+  useUserTabs();
   const user = useSelector(getUser);
   useTitle(translate('User dashboard'));
   const { getCategories } = props;

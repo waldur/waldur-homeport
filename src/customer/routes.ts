@@ -1,6 +1,9 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { Layout } from '@waldur/navigation/Layout';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
+
+import { fetchCustomer } from './workspace/CustomerWorkspace';
 
 const ProjectsList = lazyComponent(
   () =>
@@ -49,10 +52,50 @@ const CustomerManage = lazyComponent(
     import(/* webpackChunkName: "CustomerManage" */ './details/CustomerManage'),
   'CustomerManage',
 );
-const CustomerTeam = lazyComponent(
-  () => import(/* webpackChunkName: "CustomerTeam" */ './team/CustomerTeam'),
-  'CustomerTeam',
+const CustomerUsersTab = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerUsersTab" */ './team/CustomerUsersTab'
+    ),
+  'CustomerUsersTab',
 );
+const InvitationsList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "InvitationsList" */ '../invitations/InvitationsList'
+    ),
+  'InvitationsList',
+);
+const GroupInvitationsList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "GroupInvitationsList" */ '../invitations/GroupInvitationsList'
+    ),
+  'GroupInvitationsList',
+);
+const CustomerPermissionsLogList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerPermissionsLogList" */ './team/CustomerPermissionsLogList'
+    ),
+  'CustomerPermissionsLogList',
+);
+const CustomerPermissionsReviewList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerPermissionsReviewList" */ './team/CustomerPermissionsReviewList'
+    ),
+  'CustomerPermissionsReviewList',
+);
+
+const OfferingPermissionsList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingPermissionsList" */ './team/OfferingPermissionsList'
+    ),
+  'OfferingPermissionsList',
+);
+
 const CustomerEventsView = lazyComponent(
   () =>
     import(
@@ -67,13 +110,6 @@ const CustomerIssuesList = lazyComponent(
     ),
   'CustomerIssuesList',
 );
-const CustomerWorkspace = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerWorkspace" */ './workspace/CustomerWorkspace'
-    ),
-  'CustomerWorkspace',
-);
 
 export const states: StateDeclaration[] = [
   {
@@ -84,7 +120,14 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: ORGANIZATION_WORKSPACE,
     },
-    component: CustomerWorkspace,
+    component: Layout,
+    resolve: [
+      {
+        token: 'fetchCustomer',
+        resolveFn: fetchCustomer,
+        deps: ['$transition$'],
+      },
+    ],
   },
 
   {
@@ -124,9 +167,39 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'organization.team',
-    url: 'team/',
-    component: CustomerTeam,
+    name: 'organization.users',
+    url: 'users/',
+    component: CustomerUsersTab,
+  },
+
+  {
+    name: 'organization.invitations',
+    url: 'invitations/',
+    component: InvitationsList,
+  },
+
+  {
+    name: 'organization.group-invitations',
+    url: 'group-invitations/',
+    component: GroupInvitationsList,
+  },
+
+  {
+    name: 'organization.permissions-log',
+    url: 'permissions-log/',
+    component: CustomerPermissionsLogList,
+  },
+
+  {
+    name: 'organization.permissions-reviews',
+    url: 'permissions-reviews/',
+    component: CustomerPermissionsReviewList,
+  },
+
+  {
+    name: 'organization.offering-permissions',
+    url: 'offering-permissions/',
+    component: OfferingPermissionsList,
   },
 
   {

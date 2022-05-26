@@ -1,11 +1,9 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
+import { Transition } from '@uirouter/react';
 import { triggerTransition } from '@uirouter/redux';
-import { FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useAsync } from 'react-use';
 
-import { Layout } from '@waldur/navigation/Layout';
+import { getFirst } from '@waldur/core/api';
 import { getCustomer } from '@waldur/project/api';
+import store from '@waldur/store/store';
 import {
   setCurrentCustomer,
   setCurrentProject,
@@ -14,40 +12,41 @@ import {
 import {
   checkCustomerUser,
   checkIsServiceManager,
-  getCustomer as getCustomerSelector,
+  getProject as getProjectSelector,
   getUser,
 } from '@waldur/workspace/selectors';
-import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
+import { ORGANIZATION_WORKSPACE, Project } from '@waldur/workspace/types';
 
-export const CustomerWorkspace: FunctionComponent = () => {
-  const customer = useSelector(getCustomerSelector);
-  const currentUser = useSelector(getUser);
-  const { params } = useCurrentStateAndParams();
-  const customerId = params?.uuid;
+export async function fetchCustomer(transition: Transition) {
+  const project = getProjectSelector(store.getState());
+  const currentUser = getUser(store.getState());
+  const customerId = transition.params()?.uuid;
 
-  const dispatch = useDispatch();
-  useAsync(async () => {
-    if (!customerId) {
-      dispatch(triggerTransition('errorPage.notFound', {}));
-    } else {
-      try {
-        const currentCustomer = await getCustomer(customerId);
-        dispatch(setCurrentCustomer(currentCustomer));
-        dispatch(setCurrentProject(null));
-        dispatch(setCurrentWorkspace(ORGANIZATION_WORKSPACE));
-
-        if (
-          !checkCustomerUser(currentCustomer, currentUser) &&
-          !checkIsServiceManager(currentCustomer, currentUser) &&
-          !currentUser.is_support
-        ) {
-          dispatch(triggerTransition('errorPage.notFound', {}));
-        }
-      } catch {
-        dispatch(triggerTransition('errorPage.notFound', {}));
+  if (!customerId) {
+    store.dispatch(triggerTransition('errorPage.notFound', {}));
+  } else {
+    try {
+      const currentCustomer = await getCustomer(customerId);
+      store.dispatch(setCurrentCustomer(currentCustomer));
+      if (!project) {
+        const newProject = await getFirst<Project>('/projects/', {
+          customer: customerId,
+        });
+        store.dispatch(setCurrentProject(newProject));
+      } else if (project.customer_uuid != customerId) {
+        store.dispatch(setCurrentProject(null));
       }
-    }
-  }, [customerId]);
+      store.dispatch(setCurrentWorkspace(ORGANIZATION_WORKSPACE));
 
-  return customer ? <Layout /> : null;
-};
+      if (
+        !checkCustomerUser(currentCustomer, currentUser) &&
+        !checkIsServiceManager(currentCustomer, currentUser) &&
+        !currentUser.is_support
+      ) {
+        store.dispatch(triggerTransition('errorPage.notFound', {}));
+      }
+    } catch {
+      store.dispatch(triggerTransition('errorPage.notFound', {}));
+    }
+  }
+}

@@ -1,7 +1,9 @@
 import { FunctionComponent } from 'react';
-import './EmptyOrganizationsPlaceholder.scss';
+import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+
+import './EmptyOrganizationsPlaceholder.scss';
 
 import { useCreateOrganization } from './utils';
 
@@ -11,9 +13,9 @@ const InitialCreateOrganizationButton = () => {
     return null;
   }
   return (
-    <button className="btn btn-primary" onClick={onClick as any}>
+    <Button variant="primary" onClick={onClick as any}>
       {translate('Create organization')}
-    </button>
+    </Button>
   );
 };
 
