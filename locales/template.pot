@@ -3511,6 +3511,10 @@ msgstr ""
 msgid "Increase a droplet's RAM, CPU and SSD disk."
 msgstr ""
 
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+msgid "Industry project"
+msgstr ""
+
 #: src/issues/types/constants.ts
 msgid "Informational"
 msgstr ""
