@@ -1,23 +1,17 @@
 import { UISref, UISrefActive } from '@uirouter/react';
-import classNames from 'classnames';
 import React from 'react';
 
-import { MenuItemType } from './types';
-
-interface MenuItemProps {
-  item: MenuItemType;
-}
-
-export const MenuItem: React.FC<MenuItemProps> = ({ item }) => (
-  <UISrefActive class="show">
-    <div className="menu-item" data-kt-menu-trigger="click">
-      <UISref to={item.state} params={item.params}>
-        <a className="menu-link without-sub">
-          <span className="menu-icon">
-            <i className={classNames('fa', item.icon, 'fixed-width-icon')}></i>
-          </span>
-          <span className="menu-title">{item.label}</span>
-        </a>
+export const MenuItem: React.FC<{
+  title: React.ReactNode;
+  state?: string;
+  params?;
+}> = (props) => (
+  <UISrefActive class="here">
+    <div data-kt-menu-trigger="click" className="menu-item">
+      <UISref to={props.state} params={props.params}>
+        <span className="menu-link">
+          <span className="menu-title">{props.title}</span>
+        </span>
       </UISref>
     </div>
   </UISrefActive>

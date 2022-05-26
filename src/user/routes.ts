@@ -39,6 +39,8 @@ export const states: StateDeclaration[] = [
   { name: 'profile.flow-edit', ...tabs.flowEdit },
   { name: 'profile.permission-requests', ...tabs.permissionRequests },
   { name: 'profile.api-key', ...tabs.ApiKey },
+  { name: 'profile.no-customer', ...tabs.noCustomer },
+  { name: 'profile.no-project', ...tabs.noProject },
 
   {
     name: 'users',

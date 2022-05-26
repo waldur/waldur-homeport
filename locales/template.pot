@@ -492,10 +492,6 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: src/navigation/sidebar/UnifiedSidebar.tsx
-msgid "Admin"
-msgstr ""
-
 #: src/azure/sql/AzureSQLServerDetails.tsx
 #: src/azure/vm/AzureVirtualMachineDetails.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
@@ -506,6 +502,10 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineDetails.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 msgid "Admin username"
+msgstr ""
+
+#: src/navigation/sidebar/AdminMenu.tsx
+msgid "Administration"
 msgstr ""
 
 #: src/issues/IssueDetails.tsx
@@ -873,15 +873,17 @@ msgstr ""
 msgid "Attributes filter"
 msgstr ""
 
+#: src/navigation/navitems.ts
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr ""
 
+#: src/customer/utils.ts
 #: src/customer/workspace/CustomerEventsList.tsx
 #: src/customer/workspace/utils.ts
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/navigation/navitems.ts
 #: src/project/utils.ts
 #: src/support/SupportEventsContainer.tsx
 #: src/user/constants.ts
@@ -1062,6 +1064,7 @@ msgstr ""
 msgid "Become a customer of our portal. Provision IT services from the catalog and manage your team from one place."
 msgstr ""
 
+#: src/customer/utils.ts
 #: src/invoices/utils.ts
 msgid "Billing"
 msgstr ""
@@ -1133,7 +1136,7 @@ msgid "Branch"
 msgstr ""
 
 #: src/issues/notifications/BroadcastList.tsx
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/navigation/navitems.ts
 msgid "Broadcast"
 msgstr ""
 
@@ -2020,7 +2023,6 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/workspace/utils.ts
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/project/ProjectDashboard.tsx
 #: src/project/utils.ts
 #: src/user/constants.ts
@@ -2910,8 +2912,8 @@ msgid "Failed to operate with backend."
 msgstr ""
 
 #: src/issues/workspace/FeaturesList.tsx
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/details/OfferingTabs.tsx
+#: src/navigation/navitems.ts
 msgid "Features"
 msgstr ""
 
@@ -2929,7 +2931,7 @@ msgstr ""
 
 #: src/issues/feedback/SupportFeedback.tsx
 #: src/issues/feedback/SupportFeedbackListContainer.tsx
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/navigation/navitems.ts
 msgid "Feedback"
 msgstr ""
 
@@ -3084,7 +3086,6 @@ msgstr ""
 msgid "Flow update"
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/FlowMapViewContainer.tsx
 msgid "Flowmap"
 msgstr ""
@@ -3242,7 +3243,7 @@ msgstr ""
 msgid "Group invitation has been cancelled."
 msgstr ""
 
-#: src/customer/team/CustomerTeam.tsx
+#: src/navigation/navitems.ts
 msgid "Group invitations"
 msgstr ""
 
@@ -3277,13 +3278,8 @@ msgstr ""
 msgid "HPA"
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/HeatMapContainer.tsx
 msgid "Heatmap"
-msgstr ""
-
-#: src/issues/workspace/IssueNavigationService.ts
-msgid "Helpdesk"
 msgstr ""
 
 #: src/issues/workspace/IssuesHelpdesk.tsx
@@ -3690,7 +3686,7 @@ msgstr ""
 msgid "Invitation rejection"
 msgstr ""
 
-#: src/customer/team/CustomerTeam.tsx
+#: src/navigation/navitems.ts
 msgid "Invitations"
 msgstr ""
 
@@ -3818,6 +3814,7 @@ msgstr ""
 #: src/customer/workspace/utils.ts
 #: src/issues/SupportIssues.tsx
 #: src/marketplace/resources/ResourceTabs.tsx
+#: src/navigation/navitems.ts
 #: src/project/ProjectIssuesList.tsx
 #: src/project/utils.ts
 #: src/resource/tabs/constants.ts
@@ -4163,6 +4160,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/PageManagement.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+#: src/navigation/sidebar/ManagementMenu.tsx
 msgid "Management"
 msgstr ""
 
@@ -4416,6 +4414,7 @@ msgstr ""
 msgid "Must be at most {max}"
 msgstr ""
 
+#: src/customer/utils.ts
 #: src/marketplace/offerings/MyOfferingsListContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/images/ImagesContainer.tsx
@@ -4427,6 +4426,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsContainer.tsx
 #: src/marketplace/sidebar.ts
+#: src/navigation/navitems.ts
 msgid "My orders"
 msgstr ""
 
@@ -4749,6 +4749,10 @@ msgstr ""
 msgid "No organizations"
 msgstr ""
 
+#: src/navigation/workspace/EmptyProjectPlaceholder.tsx
+msgid "No project"
+msgstr ""
+
 #: src/issues/create/ProjectGroup.tsx
 #: src/marketplace/resources/actions/MoveToProjectAutocomplete.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
@@ -5020,7 +5024,7 @@ msgstr ""
 msgid "Offering order items synchronization has been scheduled."
 msgstr ""
 
-#: src/customer/team/CustomerTeam.tsx
+#: src/navigation/navitems.ts
 msgid "Offering permissions"
 msgstr ""
 
@@ -5051,11 +5055,11 @@ msgstr ""
 
 #: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsContainer.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
+#: src/navigation/navitems.ts
 msgid "Offerings"
 msgstr ""
 
@@ -5257,15 +5261,11 @@ msgstr ""
 msgid "Order summary"
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/SupportOrdersContainer.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/navigation/navitems.ts
 msgid "Orders"
-msgstr ""
-
-#: src/navigation/sidebar/UnifiedSidebar.tsx
-msgid "Org management"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
@@ -5288,6 +5288,7 @@ msgstr ""
 #: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/navigation/sidebar/ManagementMenu.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/SelectAffiliationDialog.tsx
@@ -5398,7 +5399,7 @@ msgstr ""
 msgid "Organization removal"
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/navigation/navitems.ts
 msgid "Organization requests"
 msgstr ""
 
@@ -5444,6 +5445,7 @@ msgstr ""
 #: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/navigation/navitems.ts
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "Organizations"
 msgstr ""
@@ -5734,6 +5736,10 @@ msgstr ""
 msgid "Permission has been updated successfully."
 msgstr ""
 
+#: src/navigation/navitems.ts
+msgid "Permission log"
+msgstr ""
+
 #: src/invitations/UserPermissionRequestApproveButton.tsx
 msgid "Permission request has been approved."
 msgstr ""
@@ -5747,7 +5753,6 @@ msgstr ""
 msgid "Permission requests"
 msgstr ""
 
-#: src/customer/team/CustomerTeam.tsx
 #: src/project/team/ProjectTeam.tsx
 msgid "Permissions log"
 msgstr ""
@@ -6171,6 +6176,11 @@ msgstr ""
 msgid "Private clouds"
 msgstr ""
 
+#: src/customer/utils.ts
+#: src/navigation/navitems.ts
+msgid "Profile"
+msgstr ""
+
 #: src/freeipa/FreeIPAAccountEdit.tsx
 msgid "Profile is disabled."
 msgstr ""
@@ -6203,6 +6213,7 @@ msgstr ""
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -6297,10 +6308,6 @@ msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
 msgid "Project is not selected."
-msgstr ""
-
-#: src/navigation/sidebar/UnifiedSidebar.tsx
-msgid "Project management"
 msgstr ""
 
 #: src/configs/default.ts
@@ -6401,6 +6408,7 @@ msgstr ""
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/navigation/sidebar/ManagementMenu.tsx
 #: src/providers/support/MapInfoPanel.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
@@ -6451,17 +6459,20 @@ msgstr ""
 #: src/marketplace/offerings/images/ImagesContainer.tsx
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/sidebar.ts
+#: src/navigation/navitems.ts
 msgid "Public offerings"
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemsContainer.tsx
 #: src/marketplace/sidebar.ts
+#: src/navigation/navitems.ts
 msgid "Public orders"
 msgstr ""
 
 #: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/resources/list/PublicResourcesContainer.tsx
 #: src/marketplace/sidebar.ts
+#: src/navigation/navitems.ts
 msgid "Public resources"
 msgstr ""
 
@@ -6905,8 +6916,8 @@ msgstr ""
 msgid "Reporter"
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/issues/workspace/SupportWorkspace.tsx
+#: src/navigation/sidebar/ReportingMenu.tsx
 msgid "Reporting"
 msgstr ""
 
@@ -7256,14 +7267,13 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesContainer.tsx
-#: src/navigation/sidebar/UnifiedSidebar.tsx
+#: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
@@ -7387,7 +7397,7 @@ msgstr ""
 msgid "Reviewed by"
 msgstr ""
 
-#: src/customer/team/CustomerTeam.tsx
+#: src/navigation/navitems.ts
 msgid "Reviews"
 msgstr ""
 
@@ -7509,7 +7519,6 @@ msgstr ""
 msgid "SSH public key"
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/SankeyDiagramContainer.tsx
 msgid "Sankey diagram"
 msgstr ""
@@ -8128,11 +8137,15 @@ msgstr ""
 msgid "Set value"
 msgstr ""
 
+#: src/customer/utils.ts
+msgid "Settings"
+msgstr ""
+
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 msgid "Shared"
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/navigation/navitems.ts
 #: src/resource/support/SharedProviderContainer.tsx
 msgid "Shared providers"
 msgstr ""
@@ -8586,7 +8599,7 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
-#: src/navigation/header/SupportLink.tsx
+#: src/navigation/sidebar/SupportMenu.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Support"
@@ -8600,10 +8613,6 @@ msgstr ""
 
 #: src/issues/events.tsx
 msgid "Support request events"
-msgstr ""
-
-#: src/issues/workspace/IssueNavigationService.ts
-msgid "Support requests"
 msgstr ""
 
 #: src/user/support/utils.ts
@@ -8701,8 +8710,8 @@ msgstr ""
 msgid "Tax percent"
 msgstr ""
 
-#: src/customer/team/CustomerTeam.tsx
 #: src/customer/workspace/utils.ts
+#: src/navigation/sidebar/ManagementMenu.tsx
 #: src/project/team/ProjectTeam.tsx
 #: src/project/utils.ts
 msgid "Team"
@@ -10492,10 +10501,6 @@ msgstr ""
 msgid "Usage based"
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
-msgid "Usage overview"
-msgstr ""
-
 #: src/marketplace/resources/store/effects.ts
 msgid "Usage report has been submitted."
 msgstr ""
@@ -10843,9 +10848,8 @@ msgstr ""
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
 
-#: src/customer/team/CustomerTeam.tsx
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/navigation/navitems.ts
 #: src/project/team/ProjectTeam.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/slurm/tabs.ts
@@ -11160,6 +11164,10 @@ msgstr ""
 
 #: src/invitations/InvitationButtons.tsx
 msgid "Yes, use invitation email"
+msgstr ""
+
+#: src/navigation/workspace/EmptyProjectPlaceholder.tsx
+msgid "You are not part of a project. Create a project or request access from your organization administrator."
 msgstr ""
 
 #: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx

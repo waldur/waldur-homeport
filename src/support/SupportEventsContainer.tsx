@@ -1,13 +1,11 @@
 import { translate } from '@waldur/i18n';
-import { useReportingBreadcrumbs } from '@waldur/issues/workspace/SupportWorkspace';
-import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
+import { useSupportItems } from '@waldur/navigation/navitems';
 import { SupportEventsList } from '@waldur/support/SupportEventsList';
 import { SupportEventsListFilter } from '@waldur/support/SupportEventsListFilter';
 
 export const SupportEventsContainer = () => {
   useTitle(translate('Audit logs'));
-  useReportingBreadcrumbs();
-  useSidebarKey('reporting');
+  useSupportItems();
   return <SupportEventsList filters={<SupportEventsListFilter />} />;
 };

@@ -8,6 +8,8 @@ import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { useCustomerItems } from '../utils';
+
 import { CustomerEventsFilter } from './CustomerEventsFilter';
 
 export const PureCustomerEvents = getEventsList({
@@ -33,6 +35,7 @@ const CustomerEvents = connect(mapStateToProps)(PureCustomerEvents);
 
 export const CustomerEventsView = (props) => {
   useTitle(translate('Audit logs'));
+  useCustomerItems();
   return (
     <>
       <CustomerEventsFilter />

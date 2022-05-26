@@ -10,6 +10,7 @@ import { GroupInvitationRowActions } from '@waldur/invitations/GroupInvitationRo
 import { GroupInvitationsFilter } from '@waldur/invitations/GroupInvitationsFilter';
 import { GroupInvitationsListExpandableRow } from '@waldur/invitations/GroupInvitationsListExpandableRow';
 import { RoleField } from '@waldur/invitations/RoleField';
+import { useTeamItems } from '@waldur/navigation/navitems';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
@@ -76,9 +77,12 @@ const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 const GroupInvitationsListComponent = enhance(TableComponent);
 
-export const GroupInvitationsList: FunctionComponent = () => (
-  <>
-    <GroupInvitationsFilter />
-    <GroupInvitationsListComponent />
-  </>
-);
+export const GroupInvitationsList: FunctionComponent = () => {
+  useTeamItems();
+  return (
+    <>
+      <GroupInvitationsFilter />
+      <GroupInvitationsListComponent />
+    </>
+  );
+};

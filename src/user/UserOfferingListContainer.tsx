@@ -4,7 +4,10 @@ import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { UserOfferingList } from '@waldur/user/UserOfferingList';
 
+import { useUserTabs } from './constants';
+
 export const UserOfferingListContainer: FunctionComponent = () => {
   useTitle(translate('Remote accounts'));
+  useUserTabs();
   return <UserOfferingList />;
 };

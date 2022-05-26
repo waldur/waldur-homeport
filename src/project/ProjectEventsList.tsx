@@ -7,6 +7,7 @@ import { getEventsList } from '@waldur/events/BaseEventsList';
 import { RootState } from '@waldur/store/reducers';
 import { getProject } from '@waldur/workspace/selectors';
 
+import { useProjectItems } from '../navigation/navitems';
 import { ProjectEventsFilter } from './ProjectEventsFilter';
 
 export const PureProjectEvents = getEventsList({
@@ -32,9 +33,12 @@ const mapStateToProps = (state: RootState) => ({
 
 const ProjectEvents = connect(mapStateToProps)(PureProjectEvents);
 
-export const ProjectEventsView: FunctionComponent<any> = (props) => (
-  <>
-    <ProjectEventsFilter />
-    <ProjectEvents {...props} />
-  </>
-);
+export const ProjectEventsView: FunctionComponent<any> = (props) => {
+  useProjectItems();
+  return (
+    <>
+      <ProjectEventsFilter />
+      <ProjectEvents {...props} />
+    </>
+  );
+};

@@ -9,6 +9,8 @@ import { Table, createFetcher, connectTable } from '@waldur/table';
 import { HookListTablePlaceholder } from '@waldur/user/hooks/HookListTablePlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
 
+import { useUserTabs } from '../constants';
+
 import { HOOK_LIST_ID } from './constants';
 import { HookCreateButton } from './HookCreateButton';
 import { HookRemoveButton } from './HookRemoveButton';
@@ -28,6 +30,7 @@ const getEventsField = (row) =>
 const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   useTitle(translate('Notifications'));
+  useUserTabs();
   return (
     <Table
       {...props}

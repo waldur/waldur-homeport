@@ -1,5 +1,6 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { Layout } from '@waldur/navigation/Layout';
 import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
 import { loadProject } from './resolve';
@@ -21,10 +22,6 @@ const ProjectIssuesList = lazyComponent(
     import(/* webpackChunkName: "ProjectIssuesList" */ './ProjectIssuesList'),
   'ProjectIssuesList',
 );
-const ProjectWorkspace = lazyComponent(
-  () => import(/* webpackChunkName: "ProjectWorkspace" */ './ProjectWorkspace'),
-  'ProjectWorkspace',
-);
 const ProjectTeam = lazyComponent(
   () => import(/* webpackChunkName: "team/ProjectTeam" */ './team/ProjectTeam'),
   'ProjectTeam',
@@ -35,7 +32,7 @@ export const states: StateDeclaration[] = [
     name: 'project',
     url: '/projects/:uuid/',
     abstract: true,
-    component: ProjectWorkspace,
+    component: Layout,
     data: {
       auth: true,
       workspace: PROJECT_WORKSPACE,

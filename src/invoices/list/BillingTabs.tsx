@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { ENV } from '@waldur/configs/default';
+import { useCustomerItems } from '@waldur/customer/utils';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { useTitle } from '@waldur/navigation/title';
 import { PayPalInvoicesList } from '@waldur/paypal/PayPalInvoicesList';
@@ -15,6 +16,7 @@ import { InvoicesList } from './InvoicesList';
 
 export const BillingTabs: FunctionComponent = () => {
   useTitle(getTabTitle());
+  useCustomerItems();
   return ENV.accountingMode === 'accounting' ? (
     <Card.Body>
       <AgreementInfo />

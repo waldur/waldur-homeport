@@ -1,6 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import React from 'react';
-import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -41,15 +40,11 @@ export const ProjectResourcesContainer: React.FC = () => {
     return <>{translate('Unable to load category details')}</>;
   } else {
     return (
-      <Card>
-        <Card.Body>
-          <ProjectResourcesFilter offerings={value.offerings} />
-          <ProjectResourcesList
-            columns={value.columns}
-            category_uuid={category_uuid}
-          />
-        </Card.Body>
-      </Card>
+      <ProjectResourcesList
+        columns={value.columns}
+        category_uuid={category_uuid}
+        filters={<ProjectResourcesFilter offerings={value.offerings} />}
+      />
     );
   }
 };

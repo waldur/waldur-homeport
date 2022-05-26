@@ -6,6 +6,7 @@ import { getFormValues } from 'redux-form';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
+import { useTeamItems } from '@waldur/navigation/navitems';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -94,9 +95,12 @@ const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 const InvitationsListComponent = enhance(TableComponent);
 
-export const InvitationsList: FunctionComponent = () => (
-  <>
-    <InvitationsFilter />
-    <InvitationsListComponent />
-  </>
-);
+export const InvitationsList: FunctionComponent = () => {
+  useTeamItems();
+  return (
+    <>
+      <InvitationsFilter />
+      <InvitationsListComponent />
+    </>
+  );
+};

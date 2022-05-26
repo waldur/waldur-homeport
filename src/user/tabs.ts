@@ -68,6 +68,20 @@ const UserApiKey = lazyComponent(
   () => import(/* webpackChunkName: "UserApiKey" */ './api-key/UserApiKey'),
   'UserApiKey',
 );
+const EmptyOrganizationsPlaceholder = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "EmptyOrganizationsPlaceholder" */ '@waldur/navigation/workspace/EmptyOrganizationsPlaceholder'
+    ),
+  'EmptyOrganizationsPlaceholder',
+);
+const EmptyProjectPlaceholder = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "EmptyProjectPlaceholder" */ '@waldur/navigation/workspace/EmptyProjectPlaceholder'
+    ),
+  'EmptyProjectPlaceholder',
+);
 
 export const tabs = {
   dashboard: {
@@ -113,6 +127,14 @@ export const tabs = {
   ApiKey: {
     url: 'api-key/',
     component: UserApiKey,
+  },
+  noCustomer: {
+    url: 'no-customer/',
+    component: EmptyOrganizationsPlaceholder,
+  },
+  noProject: {
+    url: 'no-project/',
+    component: EmptyProjectPlaceholder,
   },
 };
 

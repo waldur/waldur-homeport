@@ -14,6 +14,7 @@ import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { Project, PROJECT_WORKSPACE, User } from '@waldur/workspace/types';
 
+import { useProjectItems } from '../navigation/navitems';
 import { ProjectActions } from './ProjectActions';
 import { ProjectCounters } from './ProjectCounters';
 import { ProjectResourcesList } from './ProjectResourcesList';
@@ -31,6 +32,7 @@ export const ProjectDashboard: FunctionComponent<ProjectDashboardProps> = (
   const shouldConcealPrices = useSelector((state: RootState) =>
     isVisible(state, 'marketplace.conceal_prices'),
   );
+  useProjectItems();
   if (!props.project) {
     return null;
   }

@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
 import { showError } from '@waldur/store/notify';
+import { useUserTabs } from '@waldur/user/constants';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getProfile } from './api';
@@ -15,6 +16,7 @@ import { FreeIPAAccountEdit } from './FreeIPAAccountEdit';
 
 export const FreeIpaAccount = () => {
   useTitle(translate('FreeIPA account'));
+  useUserTabs();
   const user = useSelector(getUser);
   const dispatch = useDispatch();
 
