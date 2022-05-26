@@ -68,6 +68,7 @@ export interface Payment {
 }
 
 export interface Permission {
+  project_uuid?: string;
   user_uuid: string;
   role: string;
 }
