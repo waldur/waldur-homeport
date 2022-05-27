@@ -55,12 +55,12 @@ const LanguageSelector: FunctionComponent = () => {
             <div
               className="menu-item px-3"
               key={language.code}
+              data-kt-menu-trigger="click"
               onClick={() => {
                 setLanguage(language);
               }}
             >
               <a
-                href="#"
                 className={classNames('menu-link d-flex px-5', {
                   active: language.code === currentLanguage.code,
                 })}
