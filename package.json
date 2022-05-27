@@ -30,7 +30,7 @@
     "@fullcalendar/luxon": "~4",
     "@fullcalendar/react": "~4.2.0",
     "@fullcalendar/timegrid": "~4.2.0",
-    "@popperjs/core": "^2.11.2",
+    "@popperjs/core": "~2.10.1",
     "@sentry/react": "^5.29.2",
     "@tweenjs/tween.js": "^18.6.4",
     "@uirouter/react": "^1.0.5",
