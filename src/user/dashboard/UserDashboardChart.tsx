@@ -1,15 +1,12 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { DashboardCounter } from '@waldur/dashboard/DashboardCounter';
 import { translate } from '@waldur/i18n';
-import { PieChart } from '@waldur/marketplace-checklist/PieChart';
 import { User } from '@waldur/workspace/types';
 
-import { UserActions } from './UserActions';
 import { loadCharts } from './utils';
 
 interface UserDashboardChart {
@@ -30,34 +27,22 @@ export const UserDashboardChart: FunctionComponent<UserDashboardChart> = ({
   ) : error ? (
     <>{translate('Unable to load user monthly activity data.')}</>
   ) : (
-    <Row>
-      <Col md={4}>
-        <DashboardCounter
-          label={value.events.title}
-          value={value.events.current}
-        >
-          <EChart options={value.events.chart} height="100px" />
-        </DashboardCounter>
-      </Col>
-      <Col md={4}>
-        {hasChecklists ? (
-          <>
-            <DashboardCounter
-              label={translate('Average of all checklists')}
-              value={`${value.checklists.score}%`}
-            >
-              <PieChart
-                positive={value.checklists.score}
-                negative={100 - value.checklists.score}
-                height="100px"
-              />
-            </DashboardCounter>
-          </>
-        ) : null}
-      </Col>
-      <Col md={4}>
-        <UserActions user={user} />
-      </Col>
-    </Row>
+    <Card className="mb-6">
+      <Card.Body>
+        <Row>
+          <Col md={6}>
+            <Row>
+              <Col xs={7}>
+                <EChart options={value.events.chart} height="100px" />
+              </Col>
+              <Col>
+                <h1 className="fw-bold">{value.events.current}</h1>
+                <h5 className="fw-bold text-uppercase">{value.events.title}</h5>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Card.Body>
+    </Card>
   );
 };

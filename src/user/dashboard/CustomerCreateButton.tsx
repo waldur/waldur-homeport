@@ -25,6 +25,7 @@ const CustomerCreateButton: FunctionComponent<CustomerCreateButtonProps> = ({
       title={translate('Add organization')}
       action={onClick}
       icon="fa fa-plus"
+      variant="primary"
     />
   ) : null;
 

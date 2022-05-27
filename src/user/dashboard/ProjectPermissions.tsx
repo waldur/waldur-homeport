@@ -25,7 +25,6 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('projects')}
-      enableExport={true}
     />
   );
 };

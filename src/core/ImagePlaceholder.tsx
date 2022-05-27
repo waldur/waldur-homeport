@@ -10,12 +10,13 @@ export const ImagePlaceholder = (props: ImagePlaceholderProps) => {
     <span
       style={{
         width: props.width,
+        minWidth: props.width,
         height: props.height,
         backgroundColor: props.backgroundColor,
         borderRadius: '7px',
         display: 'inline-block',
       }}
-    ></span>
+    />
   );
 };
 
