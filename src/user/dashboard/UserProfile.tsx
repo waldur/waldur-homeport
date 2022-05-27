@@ -11,7 +11,7 @@ export const UserProfile = ({ user }: { user: UserDetails }) => {
       <Card.Body>
         <Row>
           <Col xs="auto">
-            <Gravatar email={user.email} size={200} className="rounded" />
+            <Gravatar email={user.email} size={100} className="rounded" />
           </Col>
           <Col>
             <Row className="mb-6">
