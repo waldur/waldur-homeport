@@ -8,15 +8,7 @@ import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { wrapTooltip } from '@waldur/table/ActionButton';
-import {
-  getWorkspace,
-  getCustomer,
-  getProject,
-} from '@waldur/workspace/selectors';
-import {
-  PROJECT_WORKSPACE,
-  ORGANIZATION_WORKSPACE,
-} from '@waldur/workspace/types';
+import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import './SelectWorkspaceToggle.scss';
 
@@ -34,35 +26,40 @@ const getOrganizationDisplayName = (isWide, organization) => {
     : organization.display_name || '';
 };
 
-const getTitle = (isWide, workspace, customer, project) => {
-  const customerName = customer && getOrganizationDisplayName(isWide, customer);
-  if (customer && workspace === ORGANIZATION_WORKSPACE) {
-    return truncate(customerName);
-  } else if (project && workspace === PROJECT_WORKSPACE) {
+const getTitle = (isWide, customer, project) => {
+  if (!customer) {
+    return '';
+  }
+  const customerName = getOrganizationDisplayName(isWide, customer);
+  if (project) {
     return `${truncate(customerName)} > ${truncate(project.name)}`;
+  } else {
+    return truncate(customerName);
   }
 };
 
-const getTitleTooltip = (isWide, workspace, customer, project) => {
-  if (customer && customer.display_name && customer.display_name.length < 30) {
+const getTitleTooltip = (isWide, customer, project) => {
+  if (!customer) {
+    return;
+  }
+  if (customer.display_name.length < 30) {
     return;
   }
   const customerName = customer && getOrganizationDisplayName(isWide, customer);
-  if (customer && workspace === ORGANIZATION_WORKSPACE) {
-    return customerName;
-  } else if (project && workspace === PROJECT_WORKSPACE) {
+  if (project) {
     return `${customerName} > ${project.name}`;
+  } else {
+    return customerName;
   }
 };
 
 export const SelectWorkspaceToggle: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const workspace = useSelector(getWorkspace);
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
   const isWide = useMedia('(min-width: 640px)');
-  const title = getTitle(isWide, workspace, customer, project);
-  const titleTooltip = getTitleTooltip(isWide, workspace, customer, project);
+  const title = getTitle(isWide, customer, project);
+  const titleTooltip = getTitleTooltip(isWide, customer, project);
   const changeWorkspace = () => {
     dispatch(
       openModalDialog(SelectWorkspaceDialog, {
@@ -79,13 +76,9 @@ export const SelectWorkspaceToggle: FunctionComponent = () => {
       onClick={changeWorkspace}
       data-cy="select-workspace-toggle"
     >
-      {wrapTooltip(
-        titleTooltip,
-        <span id="select-workspace-title" className="text-capitalize">
-          {title || translate('Select project')}
-        </span>,
-        { placement: 'bottom' },
-      )}{' '}
+      {wrapTooltip(titleTooltip, title || translate('Select project'), {
+        placement: 'bottom',
+      })}{' '}
       <i className="fa fa-caret-down" />
     </Button>
   );
