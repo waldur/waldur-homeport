@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 
@@ -53,7 +54,12 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
 
   render() {
     return (
-      <Card className={this.props.fullWidth ? 'full-width' : ''}>
+      <Card
+        className={classNames(
+          'card-table',
+          this.props.fullWidth ? 'full-width' : '',
+        )}
+      >
         {this.props.title && (
           <Card.Header>
             <Card.Title>{this.props.title}</Card.Title>
