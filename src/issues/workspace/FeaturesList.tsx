@@ -10,8 +10,8 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
 import { CustomRadioButton } from '@waldur/marketplace/offerings/attributes/CustomRadioButton';
-import { useTitle } from '@waldur/navigation/title';
 import { useAdminItems } from '@waldur/navigation/navitems';
+import { useTitle } from '@waldur/navigation/title';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 interface FeatureItem {

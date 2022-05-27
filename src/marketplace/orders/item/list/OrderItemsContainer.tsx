@@ -2,8 +2,8 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { useProviderItems } from '@waldur/navigation/navitems';
+import { useTitle } from '@waldur/navigation/title';
 
 import { OrderItemsFilter } from './OrderItemsFilter';
 import { OrderItemsList } from './OrderItemsList';

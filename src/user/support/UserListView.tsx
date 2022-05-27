@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { useAdminItems } from '@waldur/navigation/navitems';
+import { useTitle } from '@waldur/navigation/title';
 
 import { UserFilter } from './UserFilter';
 import { UserList } from './UserList';

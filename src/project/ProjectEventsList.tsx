@@ -8,6 +8,7 @@ import { RootState } from '@waldur/store/reducers';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { useProjectItems } from '../navigation/navitems';
+
 import { ProjectEventsFilter } from './ProjectEventsFilter';
 
 export const PureProjectEvents = getEventsList({

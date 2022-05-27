@@ -20,7 +20,7 @@ export async function loadCharts(user: User, hasChecklists: boolean) {
   const values = eventStats.map((row) => row.count);
   const events = {
     chart: getScopeChartOptions(dates, values),
-    title: translate('User events this month'),
+    title: translate('User events (month)'),
     current: eventStats[eventStats.length - 1].count,
   };
   if (hasChecklists) {

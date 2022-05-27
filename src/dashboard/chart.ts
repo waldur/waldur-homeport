@@ -26,10 +26,10 @@ export const getScopeChartOptions = (dates: string[], values: Value[]) => ({
       type: 'line',
       itemStyle: {
         normal: {
-          color: '#83bff6',
+          color: '#19311E',
         },
         emphasis: {
-          color: '#2378f7',
+          color: '#52c76c',
         },
       },
       data: values,

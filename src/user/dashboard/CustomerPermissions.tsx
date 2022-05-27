@@ -5,7 +5,6 @@ import { Table, connectTable, createFetcher } from '@waldur/table';
 import { filterByUser } from '@waldur/workspace/selectors';
 
 import CustomerCreateButton from './CustomerCreateButton';
-import { CustomerRole } from './CustomerRole';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   const { translate, filterColumns } = props;
@@ -18,15 +17,13 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: CustomerLink,
         },
         {
-          title: translate('Owner'),
-          render: CustomerRole,
+          title: translate('Role'),
+          render: ({ row }) => <>{translate(row.role)}</>,
           className: 'text-center col-md-1',
         },
       ])}
       verboseName={translate('organizations')}
       actions={<CustomerCreateButton />}
-      enableExport={true}
-      title={translate('Owned organizations')}
     />
   );
 };

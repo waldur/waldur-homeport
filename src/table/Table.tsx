@@ -79,7 +79,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
               </Card.Title>
             )}
             {this.props.blocked && <div className="table-block" />}
-            <div className="card-toolbar">
+            <div className="card-toolbar ms-auto">
               <div className="d-flex justify-content-end">
                 <TableButtons {...this.props} />
               </div>

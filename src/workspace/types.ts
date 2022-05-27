@@ -17,6 +17,8 @@ export interface User {
   customer_permissions?: CustomerPermission[];
   project_permissions?: ProjectPermission[];
   full_name?: string;
+  first_name?: string;
+  last_name?: string;
   email?: string;
   job_title?: string;
   organization?: string;

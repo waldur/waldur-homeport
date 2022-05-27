@@ -369,6 +369,10 @@ msgstr ""
 msgid "Add member"
 msgstr ""
 
+#: src/navigation/workspace/CreateOrganizationButton.tsx
+msgid "Add new"
+msgstr ""
+
 #: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
 msgid "Add new offering"
 msgstr ""
@@ -512,6 +516,10 @@ msgstr ""
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ResourceGroup.tsx
 msgid "Affected resource"
+msgstr ""
+
+#: src/user/dashboard/UserProfile.tsx
+msgid "Affiliation"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
@@ -887,7 +895,6 @@ msgstr ""
 #: src/project/utils.ts
 #: src/support/SupportEventsContainer.tsx
 #: src/user/constants.ts
-#: src/user/dashboard/UserDashboard.tsx
 #: src/user/dashboard/UserEventsWrapper.tsx
 msgid "Audit logs"
 msgstr ""
@@ -950,10 +957,6 @@ msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
 msgid "Available quota usage: {usage}"
-msgstr ""
-
-#: src/user/dashboard/UserDashboardChart.tsx
-msgid "Average of all checklists"
 msgstr ""
 
 #: src/rancher/cluster/hpas/utils.ts
@@ -1378,7 +1381,6 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace-checklist/ComplianceChecklists.tsx
 #: src/user/UserPopover.tsx
-#: src/user/dashboard/UserDashboard.tsx
 msgid "Checklists"
 msgstr ""
 
@@ -2542,6 +2544,10 @@ msgstr ""
 
 #: src/customer/team/PendingReviewDialog.tsx
 msgid "Edit permissions"
+msgstr ""
+
+#: src/user/dashboard/UserProfile.tsx
+msgid "Edit profile"
 msgstr ""
 
 #: src/project/team/AddProjectMemberDialog.tsx
@@ -4156,10 +4162,6 @@ msgstr ""
 msgid "Manage security groups"
 msgstr ""
 
-#: src/user/dashboard/UserDashboard.tsx
-msgid "Managed projects"
-msgstr ""
-
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/PageManagement.tsx
@@ -4179,7 +4181,6 @@ msgstr ""
 #: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/sidebar.ts
-#: src/user/dashboard/UserDashboard.tsx
 msgid "Marketplace"
 msgstr ""
 
@@ -5451,6 +5452,7 @@ msgstr ""
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/navigation/navitems.ts
 #: src/resource/support/SharedProviderTabs.tsx
+#: src/user/dashboard/UserDashboard.tsx
 msgid "Organizations"
 msgstr ""
 
@@ -5481,13 +5483,7 @@ msgstr ""
 msgid "Overview of {project} project"
 msgstr ""
 
-#: src/user/dashboard/CustomerPermissions.tsx
-#: src/user/dashboard/UserDashboard.tsx
-msgid "Owned organizations"
-msgstr ""
-
 #: src/customer/team/CustomerUsersList.tsx
-#: src/user/dashboard/CustomerPermissions.tsx
 msgid "Owner"
 msgstr ""
 
@@ -6390,6 +6386,7 @@ msgstr ""
 #: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
+#: src/user/dashboard/UserDashboard.tsx
 msgid "Projects"
 msgstr ""
 
@@ -6772,6 +6769,7 @@ msgid "Release floating IPs"
 msgstr ""
 
 #: src/ErrorMessage.tsx
+#: src/core/LoadingErred.tsx
 #: src/dashboard/CategoryResourcesList.tsx
 msgid "Reload"
 msgstr ""
@@ -7417,6 +7415,7 @@ msgstr ""
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Role"
@@ -9694,6 +9693,7 @@ msgstr ""
 msgid "Unable to load data"
 msgstr ""
 
+#: src/core/LoadingErred.tsx
 #: src/customer/list/TotalCostComponent.tsx
 #: src/customer/popover/CustomerPopover.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
@@ -10578,7 +10578,7 @@ msgid "User details of {fullName}"
 msgstr ""
 
 #: src/user/dashboard/utils.ts
-msgid "User events this month"
+msgid "User events (month)"
 msgstr ""
 
 #: src/user/support/effects.ts
@@ -11107,7 +11107,6 @@ msgid "Welcome to {pageTitle}!"
 msgstr ""
 
 #: src/project/ProjectDashboard.tsx
-#: src/user/dashboard/UserDashboard.tsx
 msgid "Welcome, {user}!"
 msgstr ""
 
@@ -11341,6 +11340,10 @@ msgstr ""
 msgid "allocation users"
 msgstr ""
 
+#: src/user/dashboard/UserProfile.tsx
+msgid "and"
+msgstr ""
+
 #: src/rancher/cluster/apps/ApplicationDeleteButton.tsx
 msgid "application"
 msgstr ""
@@ -11546,6 +11549,7 @@ msgstr ""
 
 #: src/invitations/GroupInvitationMessage.tsx
 #: src/invitations/InvitationMessage.tsx
+#: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "organization"
 msgstr ""
 
@@ -11786,6 +11790,10 @@ msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "{category} resources"
+msgstr ""
+
+#: src/user/dashboard/UserProfile.tsx
+msgid "{count} more affiliations"
 msgstr ""
 
 #: src/user/dashboard/utils.ts

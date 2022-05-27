@@ -15,6 +15,7 @@ import { RootState } from '@waldur/store/reducers';
 import { Project, PROJECT_WORKSPACE, User } from '@waldur/workspace/types';
 
 import { useProjectItems } from '../navigation/navitems';
+
 import { ProjectActions } from './ProjectActions';
 import { ProjectCounters } from './ProjectCounters';
 import { ProjectResourcesList } from './ProjectResourcesList';

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { translate } from '@waldur/i18n/translate';
 import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
-import { isOwnerOrStaff } from '@waldur/workspace/selectors';
+import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 import { gotoProjectCreate } from './actions';
 
@@ -14,14 +14,16 @@ const PureProjectCreateButton: FunctionComponent<any> = (props) => (
     action={props.gotoProjectCreate}
     tooltip={props.tooltip}
     icon="fa fa-plus"
+    variant="primary"
     disabled={props.disabled}
   />
 );
 
 const mapStateToProps = (state: RootState) => {
   const ownerOrStaff = isOwnerOrStaff(state);
+  const customer = getCustomer(state);
 
-  if (!ownerOrStaff) {
+  if (!ownerOrStaff || !customer) {
     return {
       disabled: true,
       tooltip: translate(
