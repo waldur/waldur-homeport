@@ -2547,6 +2547,7 @@ msgid "Edit permissions"
 msgstr ""
 
 #: src/user/dashboard/UserProfile.tsx
+#: src/user/dashboard/UserWelcome.tsx
 msgid "Edit profile"
 msgstr ""
 
@@ -6181,6 +6182,10 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
+#: src/user/dashboard/UserWelcome.tsx
+msgid "Profile completion"
+msgstr ""
+
 #: src/freeipa/FreeIPAAccountEdit.tsx
 msgid "Profile is disabled."
 msgstr ""
@@ -8853,6 +8858,10 @@ msgstr ""
 msgid "Thank you for your response!"
 msgstr ""
 
+#: src/user/dashboard/UserWelcome.tsx
+msgid "Thanks for signing up. In order to help you make the most out of the platform, please complete your profile by pressing \"{link}\" and fill out the blank fields."
+msgstr ""
+
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
 msgid "The date is inclusive. Once reached, all project resource will be scheduled for termination."
@@ -11107,6 +11116,7 @@ msgid "Welcome to {pageTitle}!"
 msgstr ""
 
 #: src/project/ProjectDashboard.tsx
+#: src/user/dashboard/UserWelcome.tsx
 msgid "Welcome, {user}!"
 msgstr ""
 

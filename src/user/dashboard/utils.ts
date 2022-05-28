@@ -1,8 +1,12 @@
+import { isEmpty } from 'lodash';
+
 import { getScopeChartOptions } from '@waldur/dashboard/chart';
 import { getEventStats } from '@waldur/events/api';
 import { translate } from '@waldur/i18n';
 import { getUserChecklistScore } from '@waldur/marketplace-checklist/api';
-import { User } from '@waldur/workspace/types';
+import { User, UserDetails } from '@waldur/workspace/types';
+
+import { USER_PROFILE_COMPLETION_FIELDS } from '../constants';
 
 export async function loadCharts(user: User, hasChecklists: boolean) {
   const eventStats = (
@@ -29,4 +33,15 @@ export async function loadCharts(user: User, hasChecklists: boolean) {
   } else {
     return { events };
   }
+}
+
+export function calculateProfileCompletionPercentage(
+  user: UserDetails,
+  completionFields: Array<keyof UserDetails> = USER_PROFILE_COMPLETION_FIELDS,
+) {
+  let completionValue = 0;
+  for (const key of completionFields) {
+    if (!isEmpty(user[key])) completionValue++;
+  }
+  return Math.round((completionValue / completionFields.length) * 100);
 }

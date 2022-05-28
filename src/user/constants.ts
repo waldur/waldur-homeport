@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { useTabs } from '@waldur/navigation/context';
+import { UserDetails } from '@waldur/workspace/types';
 
 export const getPrivateUserTabs = () => [
   {
@@ -93,6 +94,16 @@ export const getPublicUserTabs = (user) => [
     },
     feature: 'user.ssh_keys',
   },
+];
+
+export const USER_PROFILE_COMPLETION_FIELDS: Array<keyof UserDetails> = [
+  'first_name',
+  'last_name',
+  'email',
+  'job_title',
+  'organization',
+  'description',
+  'phone_number',
 ];
 
 export const SELECT_AFFILIATION_FORM_ID = 'SelectAffiliation';
