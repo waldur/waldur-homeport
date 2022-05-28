@@ -15,6 +15,7 @@ export const KeyCreateButton: FunctionComponent = () => {
       title={translate('Add key')}
       action={openFormDialog}
       icon="fa fa-plus"
+      variant="primary"
     />
   );
 };

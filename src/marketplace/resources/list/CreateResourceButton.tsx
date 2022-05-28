@@ -17,6 +17,7 @@ const PureCreateResourceButton = (props: OwnProps & DispatchProps) => (
     action={props.onClick}
     icon="fa fa-plus"
     title={translate('Add resource')}
+    variant="primary"
   />
 );
 

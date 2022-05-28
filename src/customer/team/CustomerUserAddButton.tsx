@@ -31,6 +31,7 @@ export const CustomerUserAddButton: FunctionComponent<CustomerUserAddButtonProps
         action={callback}
         title={translate('Add owner')}
         icon="fa fa-plus"
+        variant="primary"
       />
     );
   };

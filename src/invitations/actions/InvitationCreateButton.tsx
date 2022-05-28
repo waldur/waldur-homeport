@@ -43,6 +43,7 @@ export const InvitationCreateButton: FunctionComponent<{
       action={callback}
       title={translate('Invite user')}
       icon="fa fa-plus"
+      variant="primary"
       disabled={!isOwnerOrStaff}
       tooltip={
         !isOwnerOrStaff &&

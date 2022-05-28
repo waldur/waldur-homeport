@@ -43,6 +43,7 @@ export const GroupInvitationCreateButton: FunctionComponent<{
       action={callback}
       title={translate('Create group invitation')}
       icon="fa fa-plus"
+      variant="primary"
       disabled={!isOwnerOrStaff}
       tooltip={
         !isOwnerOrStaff &&

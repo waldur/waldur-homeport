@@ -24,6 +24,7 @@ export const OfferingPermissionCreateButton: React.FC = () => {
       action={callback}
       title={translate('Add user')}
       icon="fa fa-plus"
+      variant="primary"
     />
   );
 };
