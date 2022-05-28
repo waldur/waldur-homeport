@@ -28,13 +28,13 @@ export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => {
       {
         key: 'issues',
         title: translate('Issues'),
-        visible: ENV.plugins.WALDUR_SUPPORT && resource.scope,
+        visible: ENV.plugins.WALDUR_SUPPORT && Boolean(resource.scope),
         component: () => <ResourceIssuesTab resource={resource} />,
       },
       {
         key: 'schedules',
         title: translate('Schedules'),
-        visible: resource.attributes.schedules,
+        visible: resource.offering_type === 'Marketplace.Booking',
         component: () => (
           <Card.Body>
             <Calendar events={resource.attributes.schedules} />
