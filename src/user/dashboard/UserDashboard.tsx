@@ -16,6 +16,7 @@ import { CustomerPermissions } from './CustomerPermissions';
 import { ProjectPermissions } from './ProjectPermissions';
 import { UserDashboardChart } from './UserDashboardChart';
 import { UserProfile } from './UserProfile';
+import { UserWelcome } from './UserWelcome';
 
 export const UserDashboard: React.FC = () => {
   useUserTabs();
@@ -30,6 +31,7 @@ export const UserDashboard: React.FC = () => {
     <>{translate('Unable to load data.')}</>
   ) : (
     <>
+      <UserWelcome user={user} />
       <UserProfile user={user} />
       <UserDashboardChart user={user} hasChecklists={asyncState.value > 0} />
       <Row>
