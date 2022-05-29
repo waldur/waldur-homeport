@@ -31,7 +31,13 @@ export const HookTypeField: FunctionComponent<{ input; defaultValue }> = ({
       onChange={input.onChange}
     >
       {options.map((option) => (
-        <ToggleButton key={option.key} value={option.key}>
+        <ToggleButton
+          key={option.key}
+          id={option.key}
+          value={option.key}
+          variant="outline-default"
+          className="btn-outline btn-active-primary"
+        >
           <i className={option.iconClass} /> {option.label}
         </ToggleButton>
       ))}
