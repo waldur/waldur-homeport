@@ -19,3 +19,9 @@ export interface SlurmAssociation {
   username: string;
   allocation: string;
 }
+
+export interface ChartSpec {
+  name: string;
+  field: string;
+  units: string;
+}

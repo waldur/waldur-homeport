@@ -5,7 +5,7 @@ import { getComponentUsages } from '@waldur/marketplace/common/api';
 import { getChartSpec, palette } from '@waldur/slurm/details/constants';
 
 import { getAllocationUserUsages } from './api';
-import { Period, Usage, UserUsage } from './types';
+import { ChartSpec, Period, Usage, UserUsage } from './types';
 
 const eChartInitialOption = () => ({
   color: palette,
@@ -88,19 +88,6 @@ export const getPeriods = (xAxisPeriods: string[]): Period[] => {
   return periods;
 };
 
-const convertMBToGB = (mb: number): number =>
-  parseFloat((mb / 1024).toFixed(2));
-
-const convertMinuteToHour = (minutes: number): number =>
-  parseFloat((minutes / 60).toFixed(2));
-
-const setUnitForRamUsage = (option, chart) => {
-  if (chart.field === 'ram_usage') {
-    option.yAxis[0].axisLabel.formatter = option.yAxis[1].axisLabel.formatter =
-      '{value} GB-hours';
-  }
-};
-
 const fillUsages = (option, periods: Period[], usages: Usage[], chart) => {
   // filling data of line chart (general usages)
   for (let i = 0; i < periods.length; i++) {
@@ -109,11 +96,7 @@ const fillUsages = (option, periods: Period[], usages: Usage[], chart) => {
         periods[i].month === usages[j].month &&
         periods[i].year === usages[j].year
       ) {
-        let usageValue = usages[j][chart.field];
-        if (chart.field === 'ram_usage') {
-          usageValue = convertMBToGB(usageValue);
-        }
-        usageValue = convertMinuteToHour(usageValue);
+        const usageValue = usages[j][chart.field];
         option.series[0].data.push(usageValue);
         break;
       }
@@ -134,11 +117,7 @@ const fillUserUsages = (option, periods, userUsages, chart) => {
           periods[j].month === userUsages[k].month &&
           periods[j].year === userUsages[k].year
         ) {
-          let usageValue = userUsages[k][chart.field];
-          if (chart.field === 'ram_usage') {
-            usageValue = convertMBToGB(usageValue);
-          }
-          usageValue = convertMinuteToHour(usageValue);
+          const usageValue = userUsages[k][chart.field];
           option.series[i].data.push(usageValue);
           break;
         }
@@ -178,7 +157,7 @@ const fillSeriesAndLegendWithDistinctUsers = (
 };
 
 export const getEChartOptions = (
-  chart,
+  chart: ChartSpec,
   usages: Usage[],
   userUsages: UserUsage[],
 ) => {
@@ -189,7 +168,8 @@ export const getEChartOptions = (
   const periods = getPeriods(option.xAxis[0].data);
 
   usages = filterUsagesBySixMonthsPeriod(usages);
-  setUnitForRamUsage(option, chart);
+  option.yAxis[0].axisLabel.formatter = option.yAxis[1].axisLabel.formatter =
+    '{value} ' + chart.units;
   fillUsages(option, periods, usages, chart);
   fillSeriesAndLegendWithDistinctUsers(option, userUsages);
   fillUserUsages(option, periods, userUsages, chart);

@@ -3162,6 +3162,10 @@ msgstr ""
 msgid "GB"
 msgstr ""
 
+#: src/slurm/details/constants.ts
+msgid "GB-hours"
+msgstr ""
+
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "GPU"
 msgstr ""
@@ -11458,6 +11462,7 @@ msgid "hour"
 msgstr ""
 
 #: src/providers/support/MapInfoPanel.tsx
+#: src/slurm/details/constants.ts
 msgid "hours"
 msgstr ""
 
@@ -11925,12 +11930,15 @@ msgid "{sender} has invited you to join {name} {type} in {role} role."
 msgstr ""
 
 #: src/quotas/QuotasTable.tsx
-#: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "{usage} of {limit}"
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
 msgid "{usage} of {limit} used"
+msgstr ""
+
+#: src/slurm/details/SlurmAllocationSummary.tsx
+msgid "{usage} of {limit} {units}"
 msgstr ""
 
 #: src/issues/workspace/IssuesActivityStream.tsx

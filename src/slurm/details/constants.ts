@@ -1,19 +1,25 @@
 import { translate } from '@waldur/i18n';
 
-export const getChartSpec = () => [
-  {
-    name: translate('CPU usage'),
-    field: 'cpu_usage',
-  },
-  {
-    name: translate('GPU usage'),
-    field: 'gpu_usage',
-  },
-  {
-    name: translate('RAM usage'),
-    field: 'ram_usage',
-  },
-];
+import { ChartSpec } from './types';
+
+export const getChartSpec = () =>
+  [
+    {
+      name: translate('CPU usage'),
+      field: 'cpu_usage',
+      units: translate('hours'),
+    },
+    {
+      name: translate('GPU usage'),
+      field: 'gpu_usage',
+      units: translate('hours'),
+    },
+    {
+      name: translate('RAM usage'),
+      field: 'ram_usage',
+      units: translate('GB-hours'),
+    },
+  ] as ChartSpec[];
 
 export const palette = [
   '#003366',
