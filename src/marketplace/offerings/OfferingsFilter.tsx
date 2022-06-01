@@ -17,6 +17,7 @@ const enhance = reduxForm({
   initialValues: {
     state: [getStates()[0], getStates()[1]],
   },
+  destroyOnUnmount: false,
 });
 
 export const OfferingsFilter = enhance(PureOfferingsFilter);

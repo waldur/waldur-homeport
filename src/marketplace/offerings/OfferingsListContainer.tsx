@@ -13,8 +13,7 @@ export const OfferingsListContainer: FunctionComponent = () => {
   useProviderItems();
   return (
     <Panel>
-      <OfferingsFilter />
-      <OfferingsList />
+      <OfferingsList filters={<OfferingsFilter />} />
     </Panel>
   );
 };
