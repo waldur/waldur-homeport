@@ -29,8 +29,5 @@ export const useTabs = (tabs: Tab[]) => {
   const layoutContext = useContext(LayoutContext);
   useEffect(() => {
     layoutContext.setTabs(tabs);
-    return () => {
-      layoutContext.setTabs([]);
-    };
   }, [tabs, layoutContext]);
 };
