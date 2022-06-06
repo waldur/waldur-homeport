@@ -38,8 +38,7 @@ export const CustomerEventsView = (props) => {
   useCustomerItems();
   return (
     <>
-      <CustomerEventsFilter />
-      <CustomerEvents {...props} />
+      <CustomerEvents {...props} filters={<CustomerEventsFilter />} />
     </>
   );
 };

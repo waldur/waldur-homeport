@@ -21,4 +21,5 @@ export const ProjectResourcesFilter = reduxForm({
   initialValues: {
     state: getStates()[1],
   },
+  destroyOnUnmount: false,
 })(PureProjectResourcesFilter);

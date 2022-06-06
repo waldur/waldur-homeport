@@ -75,14 +75,15 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-const GroupInvitationsListComponent = enhance(TableComponent);
+const GroupInvitationsListComponent = enhance(
+  TableComponent,
+) as React.ComponentType<any>;
 
 export const GroupInvitationsList: FunctionComponent = () => {
   useTeamItems();
   return (
     <>
-      <GroupInvitationsFilter />
-      <GroupInvitationsListComponent />
+      <GroupInvitationsListComponent filters={<GroupInvitationsFilter />} />
     </>
   );
 };

@@ -39,6 +39,7 @@ const enhance = compose(
     initialValues: getInitialValues({
       state: getStates()[1],
     }),
+    destroyOnUnmount: false,
   }),
   connect(mapStateToProps),
 );

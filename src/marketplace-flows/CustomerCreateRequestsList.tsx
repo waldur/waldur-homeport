@@ -43,7 +43,7 @@ export const TableOptions: TableOptionsType = {
   table: 'CustomerCreateRequestsList',
   fetchData: createFetcher('marketplace-customer-creation-requests'),
   mapPropsToFilter: (props) => ({
-    state: props.filter.state?.map((choice) => choice.value),
+    state: props.filter?.state?.map((choice) => choice.value),
   }),
 };
 
@@ -53,4 +53,6 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-export const CustomerCreateRequestsList = enhance(TableComponent);
+export const CustomerCreateRequestsList = enhance(
+  TableComponent,
+) as React.ComponentType<any>;

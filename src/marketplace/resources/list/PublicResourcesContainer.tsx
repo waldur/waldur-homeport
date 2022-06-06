@@ -13,8 +13,7 @@ export const PublicResourcesContainer: FunctionComponent = () => {
   useProviderItems();
   return (
     <Panel>
-      <PublicResourcesFilter />
-      <PublicResourcesList />
+      <PublicResourcesList filters={<PublicResourcesFilter />} />
     </Panel>
   );
 };

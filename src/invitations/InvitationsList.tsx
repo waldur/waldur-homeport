@@ -93,14 +93,15 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-const InvitationsListComponent = enhance(TableComponent);
+const InvitationsListComponent = enhance(
+  TableComponent,
+) as React.ComponentType<any>;
 
 export const InvitationsList: FunctionComponent = () => {
   useTeamItems();
   return (
     <>
-      <InvitationsFilter />
-      <InvitationsListComponent />
+      <InvitationsListComponent filters={<InvitationsFilter />} />
     </>
   );
 };

@@ -15,8 +15,7 @@ export const MyOfferingsListContainer: FunctionComponent = () => {
   useCustomerItems();
   return (
     <Card.Body>
-      <MyOfferingsFilter />
-      <MyOfferingsList />
+      <MyOfferingsList filters={<MyOfferingsFilter />} />
     </Card.Body>
   );
 };

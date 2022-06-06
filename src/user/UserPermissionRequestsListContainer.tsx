@@ -12,8 +12,9 @@ export const UserPermissionRequestsListContainer: FunctionComponent = () => {
   useUserTabs();
   return (
     <>
-      <UserPermissionRequestsListFilter />
-      <UserPermissionRequestsList />
+      <UserPermissionRequestsList
+        filters={<UserPermissionRequestsListFilter />}
+      />
     </>
   );
 };

@@ -13,11 +13,14 @@ export const OrderItemsContainer: FunctionComponent = () => {
   useProviderItems();
   return (
     <Card.Body>
-      <OrderItemsFilter
-        showOrganizationFilter={true}
-        showOfferingFilter={true}
+      <OrderItemsList
+        filters={
+          <OrderItemsFilter
+            showOrganizationFilter={true}
+            showOfferingFilter={true}
+          />
+        }
       />
-      <OrderItemsList />
     </Card.Body>
   );
 };

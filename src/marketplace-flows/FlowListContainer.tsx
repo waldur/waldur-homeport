@@ -8,8 +8,7 @@ export const FlowListContainer = () => {
   useUserTabs();
   return (
     <Panel>
-      <FlowListFilter />
-      <FlowsList />
+      <FlowsList filters={<FlowListFilter />} />
     </Panel>
   );
 };

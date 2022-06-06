@@ -15,6 +15,7 @@ const enhance = reduxForm({
   initialValues: {
     state: [getStates()[0]],
   },
+  destroyOnUnmount: false,
 });
 
 export const FlowListFilter = enhance(PureFlowFilter);

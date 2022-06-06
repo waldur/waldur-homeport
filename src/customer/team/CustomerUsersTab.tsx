@@ -9,8 +9,7 @@ export const CustomerUsersTab = () => {
   useTeamItems();
   return (
     <Card.Body>
-      <CustomerUsersListFilter />
-      <CustomerUsersList />
+      <CustomerUsersList filters={<CustomerUsersListFilter />} />
     </Card.Body>
   );
 };

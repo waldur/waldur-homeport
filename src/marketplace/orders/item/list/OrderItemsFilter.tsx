@@ -52,7 +52,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const enhance = compose(
-  reduxForm<{}, OwnProps>({ form: 'OrderItemFilter' }),
+  reduxForm<{}, OwnProps>({ form: 'OrderItemFilter', destroyOnUnmount: false }),
   connect<StateProps, {}, OwnProps>(mapStateToProps),
 );
 

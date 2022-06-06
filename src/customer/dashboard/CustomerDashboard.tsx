@@ -42,8 +42,7 @@ export const CustomerDashboard: FunctionComponent = () => {
           <CustomerChecklistOverview customer={customer} />
           <CustomerBookingManagement />
           <Panel title={translate('Resources')}>
-            <CustomerResourcesFilter />
-            <CustomerResourcesList />
+            <CustomerResourcesList filters={<CustomerResourcesFilter />} />
           </Panel>
           {isFeatureVisible('customer.category_resources_list') && (
             <CategoryResourcesList

@@ -109,4 +109,6 @@ const enhance = compose(
   connectTable(TableOptions),
 );
 
-export const CustomerResourcesList = enhance(TableComponent);
+export const CustomerResourcesList = enhance(
+  TableComponent,
+) as React.ComponentType<any>;

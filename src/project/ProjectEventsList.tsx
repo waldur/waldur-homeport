@@ -38,8 +38,7 @@ export const ProjectEventsView: FunctionComponent<any> = (props) => {
   useProjectItems();
   return (
     <>
-      <ProjectEventsFilter />
-      <ProjectEvents {...props} />
+      <ProjectEvents {...props} filters={<ProjectEventsFilter />} />
     </>
   );
 };
