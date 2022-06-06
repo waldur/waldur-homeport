@@ -25,7 +25,7 @@ export const UserWelcome = ({ user }: { user: UserDetails }) => {
             <h2>{translate('Welcome, {user}!', { user: user.first_name })}</h2>
             <p>
               {translate(
-                'Thanks for signing up. In order to help you make the most out of the platform, please complete your profile by pressing "{link}" and fill out the blank fields.',
+                'Thanks for signing up. In order to help you make the most out of the platform, please complete your profile by pressing "{link}" and filling out the blank fields.',
                 {
                   link: (
                     <Link
