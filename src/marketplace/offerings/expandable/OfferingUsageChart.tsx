@@ -5,9 +5,12 @@ import { useAsync } from 'react-use';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { generateColors } from '@waldur/customer/divisions/utils';
 import { translate } from '@waldur/i18n';
+import { getOffering } from '@waldur/marketplace/common/api';
 import { getOfferingComponentStats } from '@waldur/marketplace/offerings/expandable/api';
 import { ResourceUsageTabs } from '@waldur/marketplace/resources/usage/ResourceUsageTabs';
 import { OfferingComponent } from '@waldur/marketplace/types';
+import { SLURM_PLUGIN } from '@waldur/slurm/constants';
+import { parseSlurmUsage } from '@waldur/slurm/details/utils';
 
 interface OfferingUsageChartProps {
   offeringUuid: string;
@@ -22,19 +25,22 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
     loading,
     error,
     value: usages,
-  } = useAsync(
-    () =>
-      getOfferingComponentStats(offeringUuid, {
-        params: {
-          start: DateTime.now()
-            .minus({ months: 12 })
-            .startOf('month')
-            .toFormat('yyyy-MM'),
-          end: DateTime.now().endOf('month').toFormat('yyyy-MM'),
-        },
-      }),
-    [offeringUuid],
-  );
+  } = useAsync(async () => {
+    const offering = await getOffering(offeringUuid);
+    const usages = await getOfferingComponentStats(offeringUuid, {
+      params: {
+        start: DateTime.now()
+          .minus({ months: 12 })
+          .startOf('month')
+          .toFormat('yyyy-MM'),
+        end: DateTime.now().endOf('month').toFormat('yyyy-MM'),
+      },
+    });
+    if (offering.type === SLURM_PLUGIN) {
+      return usages.map(parseSlurmUsage);
+    }
+    return usages;
+  }, [offeringUuid]);
   return loading ? (
     <LoadingSpinner />
   ) : error ? (
