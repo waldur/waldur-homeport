@@ -32,6 +32,7 @@ const PureOfferingDetailsButton: FunctionComponent<OfferingDetailsButton> = (
     title={translate('Offering details')}
     icon="fa fa-eye"
     action={props.openDialog}
+    className="me-3"
   />
 );
 

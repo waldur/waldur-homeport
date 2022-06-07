@@ -10,5 +10,6 @@ export const ResourceRefreshButton: FunctionComponent<{ refreshResource }> = ({
     title={translate('Refresh')}
     icon="fa fa-refresh"
     action={refreshResource}
+    className="me-3"
   />
 );

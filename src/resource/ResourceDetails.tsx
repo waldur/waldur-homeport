@@ -1,5 +1,5 @@
 import React, { useMemo, FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Row, Col } from 'react-bootstrap';
 
 import { PlanDetailsButton } from '@waldur/marketplace/details/plan/PlanDetailsButton';
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
@@ -26,43 +26,45 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
   }
 
   return (
-    <Card.Body>
-      <div className="row mb-3">
-        <div className="col-lg-12">
-          <div className="pull-right btn-group">
-            <ResourceAccessButton resource={resource} />
-            <ActionButtonResource
-              url={resource.url}
-              refreshResource={refreshResource}
-            />
-            <ResourceRefreshButton refreshResource={refreshResource} />
-            <OpenStackInstanceTenantButton resource={resource} />
-            {resource.marketplace_offering_uuid && (
-              <OfferingDetailsButton
-                offering={resource.marketplace_offering_uuid}
+    <Card>
+      <Card.Body>
+        <Row className="mb-3">
+          <Col lg={12}>
+            <div className="pull-right">
+              <ResourceAccessButton resource={resource} />
+              <ActionButtonResource
+                url={resource.url}
+                refreshResource={refreshResource}
               />
-            )}
-            {resource.is_usage_based && (
-              <ResourceShowUsageButton resource={resource} />
-            )}
-            {resource.marketplace_plan_uuid && (
-              <PlanDetailsButton
-                resource={resource.marketplace_resource_uuid}
-              />
-            )}
-          </div>
-          <h2>{header}</h2>
-        </div>
-      </div>
-      <div className="row mb-3">
-        <ResourceSummary resource={resource} />
-      </div>
-      <div className="row">
-        <div className="col-lg-12">
-          <ResourceTabs resource={resource} />
-        </div>
-      </div>
-    </Card.Body>
+              <ResourceRefreshButton refreshResource={refreshResource} />
+              <OpenStackInstanceTenantButton resource={resource} />
+              {resource.marketplace_offering_uuid && (
+                <OfferingDetailsButton
+                  offering={resource.marketplace_offering_uuid}
+                />
+              )}
+              {resource.is_usage_based && (
+                <ResourceShowUsageButton resource={resource} />
+              )}
+              {resource.marketplace_plan_uuid && (
+                <PlanDetailsButton
+                  resource={resource.marketplace_resource_uuid}
+                />
+              )}
+            </div>
+            <h2>{header}</h2>
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <ResourceSummary resource={resource} />
+        </Row>
+        <Row className="mb-3">
+          <Col lg={12}>
+            <ResourceTabs resource={resource} />
+          </Col>
+        </Row>
+      </Card.Body>
+    </Card>
   );
 };
 

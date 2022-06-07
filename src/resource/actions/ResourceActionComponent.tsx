@@ -24,8 +24,8 @@ export const ResourceActionComponent: FunctionComponent<ResourceActionComponentP
       onToggle={props.onToggle}
       disabled={props.disabled}
       variant="light"
-      size="sm"
       data-cy="actions-dropdown-btn"
+      className="me-3 d-inline-block"
     >
       {props.open ? (
         props.loading ? (

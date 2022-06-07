@@ -18,7 +18,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
   ) {
     return (
       <a
-        className="btn btn-sm btn-warning"
+        className="btn btn-warning me-3"
         href={resource.access_url}
         target="_blank"
         rel="noopener noreferrer"

@@ -20,6 +20,7 @@ const PurePlanDetailsButton: FunctionComponent<Props> = (props) => (
   <ActionButton
     title={translate('Plan details')}
     action={props.showPlanDetailsDialog}
+    className="me-3"
   />
 );
 

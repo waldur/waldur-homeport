@@ -35,6 +35,7 @@ const PureResourceUsageButton: FunctionComponent<ResourceUsageButton> = (
     title={translate('Show usage')}
     icon="fa fa-eye"
     action={props.openDialog}
+    className="me-3"
   />
 );
 
