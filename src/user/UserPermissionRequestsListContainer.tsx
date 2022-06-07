@@ -11,10 +11,8 @@ export const UserPermissionRequestsListContainer: FunctionComponent = () => {
   useTitle(translate('Permission requests'));
   useUserTabs();
   return (
-    <>
-      <UserPermissionRequestsList
-        filters={<UserPermissionRequestsListFilter />}
-      />
-    </>
+    <UserPermissionRequestsList
+      filters={<UserPermissionRequestsListFilter />}
+    />
   );
 };

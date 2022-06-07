@@ -81,9 +81,5 @@ const GroupInvitationsListComponent = enhance(
 
 export const GroupInvitationsList: FunctionComponent = () => {
   useTeamItems();
-  return (
-    <>
-      <GroupInvitationsListComponent filters={<GroupInvitationsFilter />} />
-    </>
-  );
+  return <GroupInvitationsListComponent filters={<GroupInvitationsFilter />} />;
 };

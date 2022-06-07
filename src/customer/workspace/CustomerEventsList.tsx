@@ -36,9 +36,5 @@ const CustomerEvents = connect(mapStateToProps)(PureCustomerEvents);
 export const CustomerEventsView = (props) => {
   useTitle(translate('Audit logs'));
   useCustomerItems();
-  return (
-    <>
-      <CustomerEvents {...props} filters={<CustomerEventsFilter />} />
-    </>
-  );
+  return <CustomerEvents {...props} filters={<CustomerEventsFilter />} />;
 };

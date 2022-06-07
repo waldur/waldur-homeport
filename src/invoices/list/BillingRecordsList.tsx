@@ -87,7 +87,5 @@ const BillingRecordsListComponent = enhance(
 ) as React.ComponentType<any>;
 
 export const BillingRecordsList: FunctionComponent = () => (
-  <>
-    <BillingRecordsListComponent filters={<InvoicesFilter />} />
-  </>
+  <BillingRecordsListComponent filters={<InvoicesFilter />} />
 );

@@ -36,9 +36,5 @@ const ProjectEvents = connect(mapStateToProps)(PureProjectEvents);
 
 export const ProjectEventsView: FunctionComponent<any> = (props) => {
   useProjectItems();
-  return (
-    <>
-      <ProjectEvents {...props} filters={<ProjectEventsFilter />} />
-    </>
-  );
+  return <ProjectEvents {...props} filters={<ProjectEventsFilter />} />;
 };

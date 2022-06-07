@@ -99,9 +99,5 @@ const InvitationsListComponent = enhance(
 
 export const InvitationsList: FunctionComponent = () => {
   useTeamItems();
-  return (
-    <>
-      <InvitationsListComponent filters={<InvitationsFilter />} />
-    </>
-  );
+  return <InvitationsListComponent filters={<InvitationsFilter />} />;
 };
