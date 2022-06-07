@@ -1,22 +1,19 @@
-import { useSelector } from 'react-redux';
-import { useAsync } from 'react-use';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { getCategories } from '@waldur/marketplace/common/api';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { MenuItem } from './MenuItem';
 import { MenuSection } from './MenuSection';
+import { getCategoriesSelector, sidebarInitStart } from './store';
 
 export const ResourcesMenu = () => {
-  const { value } = useAsync(() =>
-    getCategories({
-      params: {
-        field: ['uuid', 'title'],
-        has_offerings: true,
-      },
-    }),
-  );
+  const value = useSelector(getCategoriesSelector);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(sidebarInitStart());
+  });
   const project = useSelector(getProject);
   return value ? (
     <>
