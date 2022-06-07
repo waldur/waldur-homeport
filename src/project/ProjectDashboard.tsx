@@ -59,8 +59,7 @@ export const ProjectDashboard: FunctionComponent<ProjectDashboardProps> = (
       <ComplianceChecklists />
       <CustomerBookingManagement />
       <Panel title={translate('Resources')}>
-        <ProjectResourcesFilter />
-        <ProjectResourcesList />
+        <ProjectResourcesList filters={<ProjectResourcesFilter />} />
       </Panel>
       <CategoryResourcesList
         scopeType={PROJECT_WORKSPACE}

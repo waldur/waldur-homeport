@@ -53,6 +53,7 @@ const PureInvoicesFilter = () => {
 
 const enhance = reduxForm({
   form: 'InvoicesFilter',
+  destroyOnUnmount: false,
 });
 
 export const InvoicesFilter = enhance(PureInvoicesFilter);

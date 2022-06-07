@@ -15,6 +15,7 @@ const PureGroupInvitationsFilter = () => (
 
 const enhance = reduxForm({
   form: GROUP_INVITATIONS_FILTER_FORM_ID,
+  destroyOnUnmount: false,
 });
 
 export const GroupInvitationsFilter = enhance(PureGroupInvitationsFilter);

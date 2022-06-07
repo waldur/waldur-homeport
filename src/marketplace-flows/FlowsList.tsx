@@ -72,7 +72,7 @@ export const TableOptions: TableOptionsType = {
   fetchData: createFetcher('marketplace-resource-creation-flows'),
   mapPropsToFilter: (props) => ({
     user_uuid: props.user?.uuid,
-    state: props.filter.state?.map((choice) => choice.value),
+    state: props.filter?.state?.map((choice) => choice.value),
   }),
 };
 
@@ -83,4 +83,4 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-export const FlowsList = enhance(TableComponent);
+export const FlowsList = enhance(TableComponent) as React.ComponentType<any>;

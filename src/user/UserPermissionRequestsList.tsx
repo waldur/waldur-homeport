@@ -84,4 +84,6 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-export const UserPermissionRequestsList = enhance(TableComponent);
+export const UserPermissionRequestsList = enhance(
+  TableComponent,
+) as React.ComponentType<any>;

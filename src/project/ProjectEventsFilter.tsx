@@ -32,6 +32,7 @@ const enhance = compose(
     initialValues: {
       feature: ['projects'],
     },
+    destroyOnUnmount: false,
   }),
   withTranslation,
 );

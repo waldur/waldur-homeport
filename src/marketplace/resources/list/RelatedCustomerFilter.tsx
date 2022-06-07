@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { FormLabel } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
@@ -11,9 +12,7 @@ export const RelatedCustomerFilter: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   return (
     <div className="form-group col-sm-3">
-      <label className="control-label">
-        {translate('Client organization')}
-      </label>
+      <FormLabel>{translate('Client organization')}</FormLabel>
       <Field
         name="organization"
         component={(fieldProps) => (

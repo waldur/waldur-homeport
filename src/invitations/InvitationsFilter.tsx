@@ -53,6 +53,7 @@ const enhance = reduxForm({
   initialValues: {
     state: 'pending',
   },
+  destroyOnUnmount: false,
 });
 
 export const InvitationsFilter = enhance(PureInvitationsFilter);

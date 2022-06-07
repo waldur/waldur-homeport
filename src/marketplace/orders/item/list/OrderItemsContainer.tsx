@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { useProviderItems } from '@waldur/navigation/navitems';
@@ -12,12 +11,13 @@ export const OrderItemsContainer: FunctionComponent = () => {
   useTitle(translate('Public orders'));
   useProviderItems();
   return (
-    <Card.Body>
-      <OrderItemsFilter
-        showOrganizationFilter={true}
-        showOfferingFilter={true}
-      />
-      <OrderItemsList />
-    </Card.Body>
+    <OrderItemsList
+      filters={
+        <OrderItemsFilter
+          showOrganizationFilter={true}
+          showOfferingFilter={true}
+        />
+      }
+    />
   );
 };

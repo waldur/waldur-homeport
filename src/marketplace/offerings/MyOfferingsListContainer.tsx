@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { useCustomerItems } from '@waldur/customer/utils';
 import { translate } from '@waldur/i18n';
@@ -13,10 +12,5 @@ export const MyOfferingsListContainer: FunctionComponent = () => {
   useTitle(translate('My offerings'));
   useSidebarKey('marketplace-services');
   useCustomerItems();
-  return (
-    <Card.Body>
-      <MyOfferingsFilter />
-      <MyOfferingsList />
-    </Card.Body>
-  );
+  return <MyOfferingsList filters={<MyOfferingsFilter />} />;
 };

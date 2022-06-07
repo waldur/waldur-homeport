@@ -113,11 +113,12 @@ const mapsStateToProps = (state: RootState) => ({
 
 const enhance = compose(connect(mapsStateToProps), connectTable(TableOptions));
 
-const InvoicesListComponent = enhance(TableComponent);
+const InvoicesListComponent = enhance(
+  TableComponent,
+) as React.ComponentType<any>;
 
 export const InvoicesList: FunctionComponent = () => (
   <>
-    <InvoicesFilter />
-    <InvoicesListComponent />
+    <InvoicesListComponent filters={<InvoicesFilter />} />
   </>
 );

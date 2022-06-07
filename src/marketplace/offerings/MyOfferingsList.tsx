@@ -40,4 +40,6 @@ const enhance = compose(
   withTranslation,
 );
 
-export const MyOfferingsList = enhance(TableComponent);
+export const MyOfferingsList = enhance(
+  TableComponent,
+) as React.ComponentType<any>;

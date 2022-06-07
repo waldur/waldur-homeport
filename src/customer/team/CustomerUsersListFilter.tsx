@@ -15,6 +15,7 @@ const PureCustomerUsersListFilter: FunctionComponent = () => (
 
 const enhance = reduxForm({
   form: CUSTOMER_USERS_LIST_FILTER_FORM_ID,
+  destroyOnUnmount: false,
 });
 
 export const CustomerUsersListFilter = enhance(PureCustomerUsersListFilter);
