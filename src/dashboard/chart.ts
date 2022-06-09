@@ -24,14 +24,6 @@ export const getScopeChartOptions = (dates: string[], values: Value[]) => ({
   series: [
     {
       type: 'line',
-      itemStyle: {
-        normal: {
-          color: '#19311E',
-        },
-        emphasis: {
-          color: '#52c76c',
-        },
-      },
       data: values,
     },
   ],
@@ -50,25 +42,18 @@ export const getResourceChartOptions = (
           type: 'line',
           stack: 'Quota',
           data: usages,
-          lineStyle: { color: '#91c7ae' },
-          itemStyle: { color: '#91c7ae' },
-          areaStyle: { color: '#91c7ae' },
         },
         {
           name: translate('Limit'),
           type: 'line',
           stack: 'Quota',
           data: limits,
-          lineStyle: { color: '#d48265' },
-          itemStyle: { color: '#d48265' },
-          areaStyle: { color: '#d48265' },
         },
       ]
     : [
         {
           type: 'bar',
           data: usages,
-          itemStyle: { color: '#91c7ae' },
           barMinHeight: 5,
         },
       ];
