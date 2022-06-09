@@ -25,13 +25,13 @@ export const OrganizationAutocomplete: FunctionComponent<OrganizationAutocomplet
             placeholder={
               props.placeholder || translate('Select organization...')
             }
-            loadOptions={(query, prevOptions, additional) =>
-              organizationAutocomplete(
-                query,
-                prevOptions,
-                additional,
-                props.isServiceProvider,
-              )
+            loadOptions={(query, prevOptions, { page }) =>
+              organizationAutocomplete(query, prevOptions, page, {
+                field: ['name', 'uuid'],
+                o: 'name',
+                is_service_provider: props.isServiceProvider,
+                has_resources: props.isServiceProvider ? undefined : true,
+              })
             }
             defaultOptions
             getOptionValue={(option) => option.uuid}

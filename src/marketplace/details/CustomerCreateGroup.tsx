@@ -47,14 +47,11 @@ export const CustomerCreateGroup = () => {
             component={(fieldProps) => (
               <AsyncPaginate
                 placeholder={translate('Select organization...')}
-                loadOptions={(query, prevOptions, additional) =>
-                  organizationAutocomplete(
-                    query,
-                    prevOptions,
-                    additional,
-                    null,
-                    ['name', 'url'],
-                  )
+                loadOptions={(query, prevOptions, { page }) =>
+                  organizationAutocomplete(query, prevOptions, page, {
+                    field: ['name', 'url'],
+                    o: 'name',
+                  })
                 }
                 defaultOptions
                 value={fieldProps.input.value}
