@@ -3238,10 +3238,6 @@ msgstr ""
 msgid "Google Calendar link"
 msgstr ""
 
-#: src/navigation/cookies/CookiesConsent.tsx
-msgid "Got it!"
-msgstr ""
-
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 msgid "Grant permission"
 msgstr ""
@@ -3367,6 +3363,10 @@ msgstr ""
 
 #: src/digitalocean/help.ts
 msgid "How to obtain credentials for DigitalOcean provider"
+msgstr ""
+
+#: src/navigation/cookies/CookiesConsent.tsx
+msgid "I agree"
 msgstr ""
 
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx

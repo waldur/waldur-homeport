@@ -1,9 +1,10 @@
 import { useState, FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
 import { getConsent, setConsent } from './CookiesStorage';
+
+import './CookiesConsent.css';
 
 export const CookiesConsent: FunctionComponent = () => {
   const [accepted, setAccepted] = useState(getConsent() === 'true');
@@ -18,28 +19,25 @@ export const CookiesConsent: FunctionComponent = () => {
   };
 
   return (
-    <Row className="blue-bg p-xs">
-      <Col sm={10} xs={12} className="text-center">
-        <h3 className="font-normal">
-          {translate(
-            'This website uses cookies to ensure you get the best experience on our website.',
-          )}{' '}
-          <a
-            className="text-white"
-            href="http://cookies.insites.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: 'underline' }}
-          >
-            {translate('Learn more')}
-          </a>
-        </h3>
-      </Col>
-      <Col sm={2} xs={12} className="text-center">
-        <button className="btn btn-xl btn-primary" onClick={hideConsent}>
-          {translate('Got it!')}
-        </button>
-      </Col>
-    </Row>
+    <div className="d-flex d-lg-block flex-column bg-dark text-light text-center rounded-0 cookiealert py-5">
+      {translate(
+        'This website uses cookies to ensure you get the best experience on our website.',
+      )}{' '}
+      <a
+        href="http://cookies.insites.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ textDecoration: 'underline' }}
+      >
+        {translate('Learn more')}
+      </a>
+      <button
+        type="button"
+        className="btn btn-primary d-inline mx-auto ms-lg-5 acceptcookies mt-5 mt-lg-0"
+        onClick={hideConsent}
+      >
+        {translate('I agree')}
+      </button>
+    </div>
   );
 };
