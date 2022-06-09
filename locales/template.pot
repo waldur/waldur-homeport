@@ -3372,6 +3372,10 @@ msgstr ""
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
+msgid "Hypervisor"
+msgstr ""
+
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "ID"
 msgstr ""
