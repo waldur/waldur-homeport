@@ -2,6 +2,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
+import { SLURM_PLUGIN } from '@waldur/slurm/constants';
 
 const AllocationForm = lazyComponent(
   () =>
@@ -45,7 +46,7 @@ const ServiceSettingsAttributes = (): Attribute[] => [
 ];
 
 registerOfferingType({
-  type: 'SlurmInvoices.SlurmPackage',
+  type: SLURM_PLUGIN,
   get label() {
     return translate('SLURM allocation');
   },

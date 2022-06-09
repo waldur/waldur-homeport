@@ -22,11 +22,11 @@ export const MoveToOrganizationAutocomplete: FunctionComponent<MoveToOrganizatio
         name="organization"
         validate={required}
         placeholder={translate('Select organization...')}
-        loadOptions={(query, prevOptions, additional) =>
-          organizationAutocomplete(query, prevOptions, additional, null, [
-            'name',
-            'url',
-          ])
+        loadOptions={(query, prevOptions, page) =>
+          organizationAutocomplete(query, prevOptions, page, {
+            field: ['name', 'url'],
+            o: 'name',
+          })
         }
         getOptionValue={(option) => option.url}
         noOptionsMessage={() => translate('No organizations')}

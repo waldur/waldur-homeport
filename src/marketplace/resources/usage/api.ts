@@ -6,6 +6,8 @@ import {
   getOffering,
   getResourcePlanPeriods,
 } from '@waldur/marketplace/common/api';
+import { SLURM_PLUGIN } from '@waldur/slurm/constants';
+import { parseSlurmUsage } from '@waldur/slurm/details/utils';
 
 import { UsageReportContext, ResourcePlanPeriod } from './types';
 
@@ -26,9 +28,11 @@ export const getPeriodLabel = (
 };
 
 export const getUsageComponents = async (params: UsageReportContext) => {
-  const components = await getUsageBasedOfferingComponents(
-    params.offering_uuid,
-  );
+  let components = null;
+  if (params.offering_uuid) {
+    const offering = await getOffering(params.offering_uuid);
+    components = await getUsageBasedOfferingComponents(offering);
+  }
   const periods = await getResourcePlanPeriods(params.resource_uuid);
   const options =
     periods.length > 0
@@ -47,11 +51,7 @@ export const getUsageComponents = async (params: UsageReportContext) => {
   };
 };
 
-const getUsageBasedOfferingComponents = async (offering_uuid: string) => {
-  if (!offering_uuid) {
-    return null;
-  }
-  const offering = await getOffering(offering_uuid);
+const getUsageBasedOfferingComponents = (offering) => {
   const components = offering.components.filter((component) =>
     // Allow to report usage for limit-based components
     ['usage', 'limit'].includes(component.billing_type),
@@ -59,14 +59,22 @@ const getUsageBasedOfferingComponents = async (offering_uuid: string) => {
   return components.sort((a, b) => a.name.localeCompare(b.name));
 };
 
-const getUsages = async (resource_uuid: string) =>
-  resource_uuid ? await getComponentUsages(resource_uuid) : null;
-
 export const getComponentsAndUsages = async (
   offering_uuid: string,
   resource_uuid: string,
 ) => {
-  const components = await getUsageBasedOfferingComponents(offering_uuid);
-  const usages = await getUsages(resource_uuid);
+  if (!offering_uuid || !resource_uuid) {
+    return { components: null, usages: null };
+  }
+  const offering = await getOffering(offering_uuid);
+  const components = await getUsageBasedOfferingComponents(offering);
+  const date_after = DateTime.now()
+    .startOf('month')
+    .minus({ months: 12 })
+    .toFormat('yyyy-MM-dd');
+  let usages = await getComponentUsages(resource_uuid, date_after);
+  if (offering.type === SLURM_PLUGIN) {
+    usages = usages.map(parseSlurmUsage);
+  }
   return { components, usages };
 };

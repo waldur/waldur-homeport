@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 
 import { translate } from '@waldur/i18n';
 import { getComponentUsages } from '@waldur/marketplace/common/api';
+import { ComponentUsage } from '@waldur/marketplace/resources/usage/types';
 import { getChartSpec, palette } from '@waldur/slurm/details/constants';
 
 import { getAllocationUserUsages } from './api';
@@ -230,4 +231,15 @@ export const loadCharts = async (
     ...chart,
     options: getEChartOptions(chart, usages, userUsages),
   }));
+};
+
+export const parseSlurmUsage = (record: ComponentUsage): ComponentUsage => {
+  if (record.type === 'ram') {
+    return {
+      ...record,
+      usage: convertMinuteToHour(convertMBToGB(record.usage)),
+    };
+  } else {
+    return { ...record, usage: convertMinuteToHour(record.usage) };
+  }
 };

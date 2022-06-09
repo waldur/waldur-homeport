@@ -13,18 +13,14 @@ import {
 export const organizationAutocomplete = async (
   query: string,
   prevOptions,
-  { page },
-  isServiceProvider?: boolean,
-  field = ['name', 'uuid'],
+  page,
+  extraQueryParams?,
 ) => {
   const params = {
     name: query,
     page: page,
     page_size: ENV.pageSize,
-    is_service_provider: isServiceProvider,
-    has_resources: isServiceProvider ? undefined : true,
-    field,
-    o: 'name',
+    ...extraQueryParams,
   };
   const response = await getCustomerList(params);
   return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
