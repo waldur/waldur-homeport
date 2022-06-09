@@ -8859,7 +8859,7 @@ msgid "Thank you for your response!"
 msgstr ""
 
 #: src/user/dashboard/UserWelcome.tsx
-msgid "Thanks for signing up. In order to help you make the most out of the platform, please complete your profile by pressing \"{link}\" and fill out the blank fields."
+msgid "Thanks for signing up. In order to help you make the most out of the platform, please complete your profile by pressing \"{link}\" and filling out the blank fields."
 msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
