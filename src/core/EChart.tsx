@@ -1,9 +1,11 @@
 import classNames from 'classnames';
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import ResizeObserver from 'resize-observer-polyfill';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import loadEcharts from '@waldur/shims/load-echarts';
+import { RootState } from '@waldur/store/reducers';
 
 interface ChartProps {
   width?: string;
@@ -12,7 +14,7 @@ interface ChartProps {
   options: any;
 }
 
-export class EChart extends Component<ChartProps> {
+export class EChartComponent extends Component<ChartProps> {
   container = undefined;
   chart = undefined;
 
@@ -38,8 +40,12 @@ export class EChart extends Component<ChartProps> {
   }
 
   componentDidUpdate(prevProps) {
-    const { options } = this.props;
-    if (options === prevProps.options) {
+    const { options, theme } = this.props;
+    if (options === prevProps.options && theme === prevProps.theme) {
+      return;
+    } else if (theme !== prevProps.theme) {
+      this.chart.dispose();
+      this.drawChart();
       return;
     }
     if (this.chart) {
@@ -63,7 +69,10 @@ export class EChart extends Component<ChartProps> {
       const echarts = module.default;
       const chart = echarts.getInstanceByDom(this.container);
       if (!chart) {
-        this.chart = echarts.init(this.container);
+        this.chart = echarts.init(
+          this.container,
+          this.props.theme + '-metronic',
+        );
       }
       this.renderChart();
       const resizeObserver = new ResizeObserver((entries) => {
@@ -79,7 +88,7 @@ export class EChart extends Component<ChartProps> {
   }
 
   renderChart() {
-    this.chart.setOption(this.props.options, this.props.theme);
+    this.chart.setOption(this.props.options, this.props.theme + '-metronic');
   }
 
   render() {
@@ -98,3 +107,9 @@ export class EChart extends Component<ChartProps> {
     );
   }
 }
+
+const mapStateToProps = (state: RootState) => ({
+  theme: state.theme.theme,
+});
+
+export const EChart = connect(mapStateToProps)(EChartComponent);

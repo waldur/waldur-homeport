@@ -9,5 +9,6 @@ import 'echarts/lib/chart/pie';
 import 'echarts/lib/chart/sankey';
 import 'echarts/lib/chart/treemap';
 import 'echarts/lib/chart/sunburst';
+import './echart-custom-themes';
 
 export default echarts;
