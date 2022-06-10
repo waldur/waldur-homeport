@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Row } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -13,7 +13,7 @@ interface TermsOfServiceProps {
 export const TermsOfService: FunctionComponent<TermsOfServiceProps> = (
   props,
 ) => (
-  <Form.Group>
+  <Form.Group as={Row} className="mb-8">
     <div className="col-sm-offset-3 col-sm-9">
       {!props.initial
         ? props.agreementDate &&

@@ -26,7 +26,7 @@ export const showUserRemoval = () => {
   const resolve = {
     issue: {
       type: ISSUE_IDS.CHANGE_REQUEST,
-      summary: 'Account removal',
+      summary: translate('Account removal'),
     },
     options: {
       title: translate('Account removal'),
@@ -37,6 +37,7 @@ export const showUserRemoval = () => {
       descriptionLabel: translate('Reason'),
       submitTitle: translate('Request removal'),
     },
+    hideProjectAndResourceFields: true,
   };
   return openIssueCreateDialog(resolve);
 };

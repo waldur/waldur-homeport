@@ -1,4 +1,3 @@
-import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 export const formatUserStatus = (user) => {
@@ -10,16 +9,6 @@ export const formatUserStatus = (user) => {
     return translate('Support user');
   } else {
     return translate('Regular user');
-  }
-};
-
-export const formatRegistrationMethod = (user) => {
-  if (!user.registration_method) {
-    return translate('Default');
-  } else if (user.registration_method === 'saml2') {
-    return 'SAML2';
-  } else {
-    return titleCase(user.registration_method);
   }
 };
 

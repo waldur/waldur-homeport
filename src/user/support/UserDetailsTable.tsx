@@ -7,10 +7,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
-import {
-  formatRegistrationMethod,
-  formatUserStatus,
-} from '@waldur/user/support/utils';
+import { formatUserStatus } from '@waldur/user/support/utils';
 import { UserDetails } from '@waldur/workspace/types';
 
 import { Row } from './Row';
@@ -64,7 +61,7 @@ const PureUserDetailsTable: FunctionComponent<UserDetailsTableProps> = (
       />
       <Row
         label={props.translate('Registration method')}
-        value={formatRegistrationMethod(props.user)}
+        value={props.user.identity_provider_label}
       />
       <Row
         label={props.translate('Date joined')}

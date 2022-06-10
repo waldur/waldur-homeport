@@ -16,28 +16,8 @@ msgstr ""
 msgid "1 - Very negative"
 msgstr ""
 
-#: src/user/api-key/TokenLifetimeField.tsx
-msgid "1 hour"
-msgstr ""
-
 #: src/issues/feedback/utils.ts
 msgid "10 - Very positive"
-msgstr ""
-
-#: src/user/api-key/TokenLifetimeField.tsx
-msgid "10 minutes"
-msgstr ""
-
-#: src/user/api-key/TokenLifetimeField.tsx
-msgid "12 hours"
-msgstr ""
-
-#: src/user/api-key/TokenLifetimeField.tsx
-msgid "2 hours"
-msgstr ""
-
-#: src/user/api-key/TokenLifetimeField.tsx
-msgid "30 minutes"
 msgstr ""
 
 #: src/user/support/TermsOfService.tsx
@@ -1320,10 +1300,6 @@ msgstr ""
 msgid "Change Request"
 msgstr ""
 
-#: src/user/support/EmailField.tsx
-msgid "Change email"
-msgstr ""
-
 #: src/openstack/openstack-instance/actions/ChangeFlavorAction.tsx
 #: src/openstack/openstack-instance/actions/ChangeFlavorDialog.tsx
 msgid "Change flavor"
@@ -2111,10 +2087,6 @@ msgstr ""
 msgid "Deactivating"
 msgstr ""
 
-#: src/user/support/utils.ts
-msgid "Default"
-msgstr ""
-
 #: src/slurm/SlurmForm.tsx
 msgid "Default SLURM account for user"
 msgstr ""
@@ -2157,6 +2129,10 @@ msgstr ""
 #: src/rancher/cluster/ServiceActions.tsx
 #: src/rancher/cluster/WorkloadActions.tsx
 msgid "Delete"
+msgstr ""
+
+#: src/user/support/UserDeleteAccount.tsx
+msgid "Delete account"
 msgstr ""
 
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
@@ -2335,6 +2311,10 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
+#: src/user/support/UserEditForm.tsx
+msgid "Discard"
+msgstr ""
+
 #: src/openstack/openstack-subnet/DisconnectSubnetAction.tsx
 msgid "Disconnect subnet"
 msgstr ""
@@ -2497,6 +2477,7 @@ msgstr ""
 #: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
+#: src/user/support/IdentityProviderContainer.tsx
 #: src/vmware/actions/EditAction.tsx
 msgid "Edit"
 msgstr ""
@@ -3009,6 +2990,10 @@ msgstr ""
 msgid "First"
 msgstr ""
 
+#: src/user/support/UserEditForm.tsx
+msgid "First name"
+msgstr ""
+
 #: src/openstack/openstack-tenant/OpenStackRouterSummary.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
 msgid "Fixed IPs"
@@ -3369,6 +3354,10 @@ msgstr ""
 msgid "I agree"
 msgstr ""
 
+#: src/user/support/UserDeleteAccount.tsx
+msgid "I confirm my account deletion"
+msgstr ""
+
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "ID"
 msgstr ""
@@ -3407,6 +3396,10 @@ msgstr ""
 
 #: src/auth/callbacks/SAML2DiscoveryCompleted.tsx
 msgid "Identity provided has been selected via SAML2 discovery service. You will be redirected to the login page soon."
+msgstr ""
+
+#: src/user/support/IdentityProviderContainer.tsx
+msgid "Identity provider"
 msgstr ""
 
 #: src/marketplace/offerings/option/OfferingOptions.tsx
@@ -3952,6 +3945,10 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+#: src/user/support/UserEditForm.tsx
+msgid "Last name"
+msgstr ""
+
 #: src/auth/HeroButton.tsx
 #: src/navigation/cookies/CookiesConsent.tsx
 msgid "Learn more"
@@ -4141,12 +4138,11 @@ msgid "MTU"
 msgstr ""
 
 #: src/customer/workspace/utils.ts
-#: src/user/UserManage.tsx
-#: src/user/constants.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Manage"
 msgstr ""
 
+#: src/user/support/AvatarField.tsx
 #: src/user/support/UserEditContainer.tsx
 msgid "Manage avatar at {link}"
 msgstr ""
@@ -6194,6 +6190,14 @@ msgstr ""
 msgid "Profile is enabled."
 msgstr ""
 
+#: src/user/support/AvatarField.tsx
+msgid "Profile picture"
+msgstr ""
+
+#: src/user/support/UserEditFormContainer.tsx
+msgid "Profile settings"
+msgstr ""
+
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/components/utils.tsx
@@ -6729,7 +6733,6 @@ msgid "Registration code"
 msgstr ""
 
 #: src/user/support/UserDetailsTable.tsx
-#: src/user/support/UserEditForm.tsx
 msgid "Registration method"
 msgstr ""
 
@@ -6855,10 +6858,6 @@ msgstr ""
 msgid "Remove organization"
 msgstr ""
 
-#: src/user/support/UserEditForm.tsx
-msgid "Remove profile"
-msgstr ""
-
 #: src/customer/details/CustomerRemovePanel.tsx
 msgid "Removed organizations cannot be restored!"
 msgstr ""
@@ -6941,8 +6940,16 @@ msgstr ""
 msgid "Request an approval"
 msgstr ""
 
+#: src/user/support/EmailField.tsx
+msgid "Request change"
+msgstr ""
+
 #: src/slurm/RequestLimitsChangeDialog.tsx
 msgid "Request change of limits of SLURM allocation"
+msgstr ""
+
+#: src/user/support/UserDeleteAccount.tsx
+msgid "Request deletion"
 msgstr ""
 
 #: src/marketplace/details/OverviewTab.tsx
@@ -7553,6 +7560,7 @@ msgid "Save"
 msgstr ""
 
 #: src/user/api-key/UserEditTokenContainer.tsx
+#: src/user/support/UserEditForm.tsx
 msgid "Save changes"
 msgstr ""
 
@@ -8146,6 +8154,8 @@ msgid "Set value"
 msgstr ""
 
 #: src/customer/utils.ts
+#: src/user/UserManage.tsx
+#: src/user/constants.ts
 msgid "Settings"
 msgstr ""
 
@@ -8652,6 +8662,11 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/PullServerGroupsAction.tsx
 #: src/resource/actions/PullActionItem.tsx
 msgid "Synchronise"
+msgstr ""
+
+#: src/user/support/EmailField.tsx
+#: src/user/support/StaticField.tsx
+msgid "Synchronized from identity provider"
 msgstr ""
 
 #: src/configs/default.ts
@@ -10423,10 +10438,6 @@ msgstr ""
 msgid "Update plan for an existing resource"
 msgstr ""
 
-#: src/user/support/UserEditForm.tsx
-msgid "Update profile"
-msgstr ""
-
 #: src/project/ProjectUpdateForm.tsx
 msgid "Update project details"
 msgstr ""
@@ -11800,6 +11811,18 @@ msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "{category} resources"
+msgstr ""
+
+#: src/user/api-key/TokenLifetimeField.tsx
+msgid "{count} hour"
+msgstr ""
+
+#: src/user/api-key/TokenLifetimeField.tsx
+msgid "{count} hours"
+msgstr ""
+
+#: src/user/api-key/TokenLifetimeField.tsx
+msgid "{count} minutes"
 msgstr ""
 
 #: src/user/dashboard/UserProfile.tsx

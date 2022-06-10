@@ -8,11 +8,11 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
 export const getTokenOptions = () => [
-  { name: translate('10 minutes'), value: 600 },
-  { name: translate('30 minutes'), value: 1800 },
-  { name: translate('1 hour'), value: 3600 },
-  { name: translate('2 hours'), value: 7200 },
-  { name: translate('12 hours'), value: 43200 },
+  { name: translate('{count} minutes', { count: 10 }), value: 600 },
+  { name: translate('{count} minutes', { count: 30 }), value: 1800 },
+  { name: translate('{count} hour', { count: 1 }), value: 3600 },
+  { name: translate('{count} hours', { count: 2 }), value: 7200 },
+  { name: translate('{count} hours', { count: 12 }), value: 43200 },
   { name: translate('token will not timeout'), value: null },
 ];
 
