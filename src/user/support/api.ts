@@ -2,8 +2,10 @@ import { patch, post } from '@waldur/core/api';
 
 export const updateUser = (user) =>
   patch(`/users/${user.uuid}/`, {
-    full_name: user.full_name,
+    full_name: user.first_name + ' ' + user.last_name,
     native_name: user.native_name,
+    first_name: user.first_name,
+    last_name: user.last_name,
     email: user.email,
     organization: user.organization,
     job_title: user.job_title,

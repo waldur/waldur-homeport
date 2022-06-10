@@ -1,5 +1,5 @@
 import { useCallback, useState, FunctionComponent } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { post } from '@waldur/core/api';
@@ -8,6 +8,9 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/notify';
+import { setCurrentUser } from '@waldur/workspace/actions';
+
+import { getCurrentUser } from '../UsersService';
 
 import { RequestedEmail } from './RequestedEmail';
 
@@ -35,6 +38,8 @@ export const EmailField: FunctionComponent<any> = (props) => {
       await post(`/users/${props.user.uuid}/cancel_change_email/`, {
         user: props.user,
       });
+      const newUser = await getCurrentUser();
+      dispatch(setCurrentUser(newUser));
     } catch (error) {
       setWaiting(false);
       const errorMessage = `${translate('Unable to cancel request.')} ${format(
@@ -51,18 +56,29 @@ export const EmailField: FunctionComponent<any> = (props) => {
 
   return (
     <>
-      <Form.Group>
-        <Form.Label className="col-sm-3 col-md-4 col-lg-3">
+      <Form.Group as={Row} className="mb-8">
+        <Form.Label column sm={3} md={4}>
           {translate('Email')}
         </Form.Label>
-        <div className="col-sm-9 col-md-8">
-          <p>{props.user.email}</p>
+        <Col>
+          <Form.Control
+            readOnly
+            defaultValue={props.user.email}
+            className="form-control-solid"
+          />
+          {props.protected && (
+            <Form.Text muted>
+              {translate('Synchronized from identity provider')}
+            </Form.Text>
+          )}
+        </Col>
+        <Col xs="auto">
           {!props.user.requested_email && !props.protected && (
-            <Button onClick={openChangeDialog}>
-              {translate('Change email')}
+            <Button onClick={openChangeDialog} variant="secondary" size="sm">
+              {translate('Request change')}
             </Button>
           )}
-        </div>
+        </Col>
       </Form.Group>
       {props.user.requested_email && !props.protected && (
         <RequestedEmail

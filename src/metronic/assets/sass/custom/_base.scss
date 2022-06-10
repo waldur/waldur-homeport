@@ -1,3 +1,5 @@
+@import '~/src/metronic/assets/sass/core/components/_variables.scss';
+
 /* BASIC */
 .bg-success-light {
   background-color: $bg-success-light;
@@ -139,11 +141,41 @@
   }
 }
 
+/* CARD */
+.card .card-header {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: $gray-700;
+  border-bottom-color: $light;
+}
+
 /* *** FORM ELEMENTS *** */
 /* LABEL */
 .col-form-label,
 .form-label {
-  color: #5f7a66;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 0.95rem; // fs-7
+  font-weight: 500; // fw-bold
+}
+
+/* FORM CONTROL (INPUT) */
+.form-control {
+  border-radius: 9px;
+  font-size: 0.95rem;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+  &:disabled,
+  &[readonly] {
+    background-color: $gray-200;
+  }
+}
+
+/* CHECKBOX */
+.form-check {
+  &-label {
+    font-size: 0.95rem;
+  }
 }

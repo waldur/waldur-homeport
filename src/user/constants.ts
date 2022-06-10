@@ -13,6 +13,12 @@ export const getPrivateUserTabs = () => [
     key: 'details',
   },
   {
+    label: translate('Settings'),
+    icon: 'fa-wrench',
+    state: 'profile.manage',
+    key: 'manage',
+  },
+  {
     label: translate('Audit logs'),
     icon: 'fa-bell-o',
     state: 'profile.events',
@@ -31,12 +37,6 @@ export const getPrivateUserTabs = () => [
     state: 'profile.notifications',
     key: 'notifications',
     feature: 'user.notifications',
-  },
-  {
-    label: translate('Manage'),
-    icon: 'fa-wrench',
-    state: 'profile.manage',
-    key: 'manage',
   },
   {
     label: translate('API key'),

@@ -73,16 +73,16 @@ const getProtectedMethods = (state: any): string[] => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state, ownProps: { user: UserDetails }) => ({
   isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),
   initialValues: ownProps.user,
   userTokenIsVisible: userTokenIsVisible(state, ownProps),
   fieldIsVisible: fieldIsVisible(ownProps),
   isRequired,
   nativeNameIsVisible: getNativeNameVisible(state),
-  protected: getProtectedMethods(state).includes(
-    ownProps.user.registration_method,
-  ),
+  fieldIsProtected: (field: string) =>
+    ownProps.user.identity_provider_fields.includes(field) ||
+    getProtectedMethods(state).includes(ownProps.user.registration_method),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {

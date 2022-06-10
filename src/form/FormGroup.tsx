@@ -44,13 +44,13 @@ export class FormGroup extends PureComponent<FormGroupProps> {
       },
     };
     return (
-      <Form.Group as={Row} className="mb-8">
+      <Form.Group as={Row} className="mb-7">
         {!hideLabel && (
           <Form.Label
+            column={layout !== 'vertical'}
             className={classNames(
               { required },
               layout !== 'vertical' && labelClass,
-              'fs-6 fw-bold mb-2',
             )}
           >
             {tooltip && (

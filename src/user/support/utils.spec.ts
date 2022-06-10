@@ -3,13 +3,8 @@ import {
   staffUser,
   supportAndStaffUser,
   supportUser,
-  userWithTARA,
 } from '@waldur/user/support/fixtures';
-import {
-  formatLifetime,
-  formatRegistrationMethod,
-  formatUserStatus,
-} from '@waldur/user/support/utils';
+import { formatLifetime, formatUserStatus } from '@waldur/user/support/utils';
 
 describe('Utils functions', () => {
   it('should return appropriate user status', () => {
@@ -19,11 +14,6 @@ describe('Utils functions', () => {
       'Staff and Support user',
     );
     expect(formatUserStatus(ordinaryUser)).toEqual('Regular user');
-  });
-
-  it('should return appropriate registration method', () => {
-    expect(formatRegistrationMethod(ordinaryUser)).toEqual('Default');
-    expect(formatRegistrationMethod(userWithTARA)).toEqual('Tara');
   });
 
   it('should return appropriate time format', () => {

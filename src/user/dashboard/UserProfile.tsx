@@ -46,7 +46,7 @@ export const UserProfile = ({ user }: { user: UserDetails }) => {
               </Col>
               <Col xs="auto">
                 <Link
-                  className="btn btn-sm btn-secondary text-capitalize"
+                  className="btn btn-sm btn-secondary"
                   state="profile.manage"
                 >
                   {translate('Edit profile')}

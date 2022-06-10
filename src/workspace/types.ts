@@ -41,6 +41,10 @@ export interface UserDetails extends User {
   token: string;
   agreement_date: string;
   is_active: boolean;
+  identity_provider_name?: string;
+  identity_provider_label?: string;
+  identity_provider_management_url?: string;
+  identity_provider_fields?: string[];
 }
 
 interface PaymentProfileAttributes {
