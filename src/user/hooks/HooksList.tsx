@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { titleCase } from '@waldur/core/utils';
+import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { Table, createFetcher, connectTable } from '@waldur/table';
@@ -13,14 +14,20 @@ import { useUserTabs } from '../constants';
 
 import { HOOK_LIST_ID } from './constants';
 import { HookCreateButton } from './HookCreateButton';
+import './HookList.scss';
 import { HookRemoveButton } from './HookRemoveButton';
 import { HookUpdateButton } from './HookUpdateButton';
 import { formatEventTitle } from './utils';
 
 const StateField = ({ row }) => {
-  const cls = (row.is_active && 'online') || '';
-  const title = (row.is_active && 'Enabled') || 'Disabled';
-  return <a className={`status-circle ${cls}`} title={title} />;
+  const cls = row.is_active ? 'bg-success' : 'bg-danger';
+  const title = row.is_active ? translate('Enabled') : translate('Disabled');
+  return (
+    <a
+      className={`status-circle d-inline-block rounded square ${cls}`}
+      title={title}
+    />
+  );
 };
 
 const getDestinationField = (row) => row.destination_url || row.email || 'N/A';
@@ -58,10 +65,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
         {
           title: translate('Actions'),
           render: ({ row }) => (
-            <>
+            <div className="list_active_button_container">
               <HookUpdateButton row={row} />
               <HookRemoveButton uuid={row.uuid} url={row.url} />
-            </>
+            </div>
           ),
           className: 'text-center col-md-2',
         },

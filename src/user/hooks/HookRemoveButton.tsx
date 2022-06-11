@@ -2,9 +2,9 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { ActionButtonSmall } from '@waldur/table/ActionButtonSmall';
 import { deleteEntity } from '@waldur/table/actions';
 
 import { showHookRemoveConfirmation } from './actions';
@@ -58,14 +58,20 @@ class HookRemoveButtonComponent extends Component<
   render() {
     const { uuid, url } = this.props;
     return (
-      <ActionButton
-        title={this.props.translate('Remove')}
+      <ActionButtonSmall
+        title={translate('Remove')}
         action={() =>
           this.props.showConfirmDialog(() => this.removeHook(uuid, url))
         }
-        icon={this.state.removing ? 'fa fa-spinner fa-spin' : 'fa fa-trash'}
-        disabled={this.state.removing}
-      />
+        disable={this.state.removing}
+        className="btn btn-secondary"
+      >
+        <i
+          className={
+            this.state.removing ? 'fa fa-spinner fa-spin' : 'fa fa-trash'
+          }
+        />
+      </ActionButtonSmall>
     );
   }
 }

@@ -2331,6 +2331,7 @@ msgid "Disable gateway IP advertising via DHCP"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/user/hooks/HooksList.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Disabled"
 msgstr ""
@@ -2636,6 +2637,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/hooks/HookForm.tsx
+#: src/user/hooks/HooksList.tsx
 msgid "Enabled"
 msgstr ""
 
