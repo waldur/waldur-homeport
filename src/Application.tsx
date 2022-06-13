@@ -1,6 +1,7 @@
 import { ErrorBoundary } from '@sentry/react';
 import { UIView } from '@uirouter/react';
 import { FunctionComponent } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -15,6 +16,8 @@ import { NotificationContainer } from './NotificationContainer';
 import { ThemeSelector } from './ThemeSelector';
 import { UIRouter } from './UIRouter';
 
+const queryClient = new QueryClient();
+
 export const Application: FunctionComponent = () => {
   const { loading, error, value } = useAsync(loadConfig);
   if (!value) {
@@ -22,16 +25,18 @@ export const Application: FunctionComponent = () => {
   }
 
   return (
-    <Provider store={store}>
-      <ThemeSelector />
-      <NotificationContainer />
-      <UIRouter>
-        <ErrorBoundary fallback={ErrorMessage}>
-          <ModalRoot />
-          <UIView />
-        </ErrorBoundary>
-      </UIRouter>
-      <MasterInit />
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <ThemeSelector />
+        <NotificationContainer />
+        <UIRouter>
+          <ErrorBoundary fallback={ErrorMessage}>
+            <ModalRoot />
+            <UIView />
+          </ErrorBoundary>
+        </UIRouter>
+        <MasterInit />
+      </Provider>
+    </QueryClientProvider>
   );
 };

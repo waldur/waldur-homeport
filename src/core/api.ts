@@ -134,7 +134,7 @@ export async function getAll<T = {}>(
     }
     const url = getNextPageUrl(response);
     if (url) {
-      response = await Axios.get(url);
+      response = await Axios.get(url, { signal: options?.signal });
     } else {
       break;
     }

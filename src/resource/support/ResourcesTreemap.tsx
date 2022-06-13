@@ -1,11 +1,10 @@
+import { useQuery } from 'react-query';
 import { connect, useSelector } from 'react-redux';
-import { useAsync } from 'react-use';
-import { compose } from 'redux';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { formatFilesize } from '@waldur/core/utils';
-import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { useReportingBreadcrumbs } from '@waldur/issues/workspace/SupportWorkspace';
 import { useTitle } from '@waldur/navigation/title';
 import { isVisible } from '@waldur/store/config';
@@ -15,7 +14,7 @@ import { loadData, parseProjects } from './api';
 import { treemapFilterSelector } from './selectors';
 import { TreemapChart } from './TreemapChart';
 import { TreemapChartFilter } from './TreemapChartFilter';
-import { QuotaList, QuotaChoice } from './types';
+import { QuotaList, QuotaChoice, ProjectQuota } from './types';
 
 const getQuotas = (hidden: boolean): QuotaList => [
   {
@@ -83,7 +82,7 @@ interface StateProps {
   quota: QuotaChoice;
 }
 
-const TreemapContainer = (props: StateProps & TranslateProps) => {
+const TreemapContainer = (props: StateProps) => {
   useTitle(translate('Resources usage'));
   useReportingBreadcrumbs();
   const shouldConcealPrices = useSelector((state: RootState) =>
@@ -101,10 +100,13 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
   }
 
   const {
-    loading,
+    isLoading: loading,
     error,
-    value: data,
-  } = useAsync(() => loadData(props.quota?.key), [props.quota]);
+    data,
+  } = useQuery<any, any, ProjectQuota[]>(
+    `resources-treemap-${props.quota?.key}`,
+    async ({ signal }) => await loadData(props.quota?.key, { signal }),
+  );
   const chartData = data ? parseProjects(data) : [];
   let total = 0;
   if (props.quota && data) {
@@ -119,7 +121,7 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
         <>{translate('Unable to load locations.')}</>
       ) : (
         <TreemapChart
-          title={props.translate('Resource usage')}
+          title={translate('Resource usage')}
           width="100%"
           height={500}
           data={chartData}
@@ -135,6 +137,6 @@ const mapStateToProps = (state: RootState) => ({
   quota: treemapFilterSelector(state, 'quota'),
 });
 
-const enhance = compose(connect(mapStateToProps), withTranslation);
+const enhance = connect(mapStateToProps);
 
 export const ResourcesTreemap = enhance(TreemapContainer);

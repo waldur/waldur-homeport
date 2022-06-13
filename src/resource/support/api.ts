@@ -37,7 +37,8 @@ export function parseProjects(projectQuotas: ProjectQuota[]): TreemapData {
   return tree;
 }
 
-export const loadData = (quota_name: string) =>
+export const loadData = (quota_name: string, options?) =>
   getAll<ProjectQuota>('/project-quotas/', {
     params: { quota_name },
+    ...options,
   });
