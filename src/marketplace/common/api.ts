@@ -232,12 +232,16 @@ export const getOrganizationDivisionList = (params?: {}) =>
 export const getDivisionTypesList = (params?: {}) =>
   getSelectData('/division-types/', params);
 
-export const getAllOrganizationDivisions = () =>
-  getAll<Division>('/divisions/', {});
+export const getAllOrganizationDivisions = (options?) =>
+  getAll<Division>('/divisions/', options);
 
-export const getCustomersDivisionUuids = (accounting_is_running: boolean) =>
+export const getCustomersDivisionUuids = (
+  accounting_is_running: boolean,
+  options?,
+) =>
   getAll('/customers/', {
     params: { accounting_is_running, size: 200, field: ['division_uuid'] },
+    ...options,
   });
 
 export const updateOfferingState = (offeringUuid, action, reason) =>

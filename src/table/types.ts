@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from 'axios';
 import React from 'react';
 
 export interface TableRequest {
@@ -7,6 +8,7 @@ export interface TableRequest {
   query?: string;
   sortField?: string;
   sortOrder?: boolean;
+  options?: AxiosRequestConfig;
 }
 
 export interface StateTables {

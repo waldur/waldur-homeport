@@ -17,9 +17,11 @@ import * as actions from './actions';
 import { exportTable } from './export';
 import { getTableOptions } from './registry';
 import { getTableState } from './store';
+import { TableRequest } from './types';
 
 export function* fetchList(action) {
   const { table, extraFilter, pullInterval } = action.payload;
+  const controller = new AbortController();
   try {
     const state = yield select(getTableState(table));
     const options = getTableOptions(table);
@@ -27,7 +29,7 @@ export function* fetchList(action) {
     if (options.getDefaultFilter) {
       filter = yield select(options.getDefaultFilter);
     }
-    const request = {
+    const request: TableRequest = {
       currentPage: state.pagination.currentPage,
       pageSize: state.pagination.pageSize,
       filter: {
@@ -41,6 +43,7 @@ export function* fetchList(action) {
     if (state.sorting && state.sorting.field) {
       request.filter.o = orderByFilter(state.sorting);
     }
+    request.options = { signal: controller.signal };
 
     // Debounce
     yield delay(100);
@@ -69,10 +72,11 @@ export function* fetchList(action) {
       }
     }
   } catch (error) {
-    if (cancelled()) {
-      return;
-    }
     yield put(actions.fetchListError(table, error));
+  } finally {
+    if (yield cancelled()) {
+      controller.abort();
+    }
   }
 }
 

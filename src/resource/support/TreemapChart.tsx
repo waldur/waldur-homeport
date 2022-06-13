@@ -1,5 +1,6 @@
 import { Component } from 'react';
 
+import { translate } from '@waldur/i18n';
 import loadEcharts from '@waldur/shims/load-echarts';
 
 import { levelOptions } from './styles';
@@ -19,7 +20,7 @@ export class TreemapChart extends Component<TreemapChartProps> {
   chart = undefined;
 
   static defaultProps = {
-    tooltipValueFormatter: (value) => `${value} resources`,
+    tooltipValueFormatter: (count) => translate('{count} resources', { count }),
   };
 
   componentDidMount() {
@@ -27,7 +28,9 @@ export class TreemapChart extends Component<TreemapChartProps> {
   }
 
   componentWillUnmount() {
-    this.chart.dispose();
+    if (this.chart) {
+      this.chart.dispose();
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -49,8 +52,10 @@ export class TreemapChart extends Component<TreemapChartProps> {
   }
 
   renderChart() {
-    const options = this.getChartsOptions();
-    this.chart.setOption(options, this.props.theme);
+    if (this.chart) {
+      const options = this.getChartsOptions();
+      this.chart.setOption(options, this.props.theme);
+    }
   }
 
   getChartsOptions() {

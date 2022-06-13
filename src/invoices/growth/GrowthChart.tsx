@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
+import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
-import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
 
 import { EChart } from '@waldur/core/EChart';
@@ -20,13 +20,15 @@ const getAccountingRunningFieldValue = (state: RootState) =>
 export const GrowthChart: FunctionComponent = () => {
   const accountRunningState = useSelector(getAccountingRunningFieldValue);
   const {
-    loading,
+    isLoading: loading,
     error,
-    value: option,
-  } = useAsync(
-    () =>
-      getGrowthChartData(accountRunningState?.value).then(formatGrowthChart),
-    [accountRunningState],
+    data: option,
+  } = useQuery(
+    `growth-chart-${Boolean(accountRunningState?.value)}`,
+    async ({ signal }) =>
+      await getGrowthChartData(accountRunningState?.value, { signal }).then(
+        formatGrowthChart,
+      ),
   );
   if (loading) {
     return <LoadingSpinner />;

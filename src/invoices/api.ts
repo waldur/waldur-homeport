@@ -16,12 +16,13 @@ export const markAsPaid = (data) => {
   );
 };
 
-export const getGrowthChartData = (accounting_is_running: boolean) =>
+export const getGrowthChartData = (accounting_is_running: boolean, options?) =>
   get('/invoices/growth/', {
     params: {
       accounting_is_running,
       accounting_mode: ENV.accountingMode,
     },
+    ...options,
   }).then((response) => response.data);
 
 export const fetchInvoicesStats: Fetcher = (request: TableRequest) => {

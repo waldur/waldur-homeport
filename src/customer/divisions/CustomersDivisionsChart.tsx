@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
+import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
-import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
 
 import { EChart } from '@waldur/core/EChart';
@@ -20,10 +20,10 @@ const growthFilterFormSelector = formValueSelector(CUSTOMERS_DIVISIONS_FORM_ID);
 const getAccountingRunningFieldValue = (state: RootState) =>
   growthFilterFormSelector(state, 'accounting_is_running');
 
-const loadData = (accounting_is_running: boolean) =>
+const loadData = (accounting_is_running: boolean, options?) =>
   Promise.all([
-    getAllOrganizationDivisions(),
-    getCustomersDivisionUuids(accounting_is_running),
+    getAllOrganizationDivisions(options),
+    getCustomersDivisionUuids(accounting_is_running, options),
   ]).then(([divisions, customers]) => ({
     divisions,
     customers,
@@ -32,12 +32,15 @@ const loadData = (accounting_is_running: boolean) =>
 export const CustomersDivisionsChart: FunctionComponent = () => {
   const accountRunningState = useSelector(getAccountingRunningFieldValue);
   const {
-    loading,
+    isLoading: loading,
     error,
-    value: option,
-  } = useAsync(
-    () => loadData(accountRunningState?.value).then(getEChartOptions),
-    [accountRunningState],
+    data: option,
+  } = useQuery(
+    `customer-divisions-chart-${Boolean(accountRunningState?.value)}`,
+    async ({ signal }) =>
+      await loadData(accountRunningState?.value, { signal }).then(
+        getEChartOptions,
+      ),
   );
   return loading ? (
     <LoadingSpinner />
