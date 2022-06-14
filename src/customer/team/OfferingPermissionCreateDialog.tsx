@@ -7,7 +7,6 @@ import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { FormContainer } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { DateField } from '@waldur/form/DateField';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -60,7 +59,6 @@ export const OfferingPermissionCreateDialog = reduxForm({
             loadOptions={(query, prevOptions, page) =>
               usersAutocomplete({ full_name: query }, prevOptions, page)
             }
-            {...reactSelectMenuPortaling()}
             getOptionLabel={({ full_name }) => full_name}
             required={true}
           />
@@ -75,7 +73,6 @@ export const OfferingPermissionCreateDialog = reduxForm({
                 page,
               )
             }
-            {...reactSelectMenuPortaling()}
             getOptionLabel={({ name }) => name}
             required={true}
           />

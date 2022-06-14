@@ -1,4 +1,4 @@
-import Select from 'react-select';
+import { Select } from '@waldur/form/themed-select';
 
 export const SelectField = ({
   input: { value, onChange },

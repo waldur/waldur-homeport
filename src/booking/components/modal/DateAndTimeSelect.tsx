@@ -2,10 +2,9 @@ import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 import Flatpickr from 'react-flatpickr';
-import Select from 'react-select';
 
 import { timelineLabels } from '@waldur/booking/utils';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
+import { Select } from '@waldur/form/themed-select';
 
 interface DateAndTimeSelectField {
   name: string;
@@ -57,7 +56,6 @@ export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> =
         }
         options={timelineLabels(props.minuteStep)}
         isDisabled={props.isDisabled}
-        {...reactSelectMenuPortaling()}
       />
     </Form.Group>
   );

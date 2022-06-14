@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
-import Select from 'react-select';
 import { useAsync } from 'react-use';
 import { Field } from 'redux-form';
 
 import { get } from '@waldur/core/api';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
 const getEventGroupOptions = async () => {

@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
-import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FieldError } from '@waldur/form';
+import { Select } from '@waldur/form/themed-select';
 import { Plan } from '@waldur/marketplace/types';
 
 interface PlanSelectFieldProps {

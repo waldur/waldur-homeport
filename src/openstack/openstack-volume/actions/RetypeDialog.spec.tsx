@@ -1,8 +1,8 @@
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import Select from 'react-select';
 
 import { updateWrapper } from '@waldur/core/testUtils';
+import { Select } from '@waldur/form/themed-select';
 import * as api from '@waldur/openstack/api';
 import { VolumeType } from '@waldur/openstack/types';
 import { createActionStore } from '@waldur/resource/actions/testUtils';

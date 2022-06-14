@@ -3,13 +3,6 @@ import { DateTime } from 'luxon';
 import { PeriodOption } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
 
-export const reactSelectMenuPortaling = (): any => ({
-  menuPortalTarget: document.body,
-  styles: { menuPortal: (base) => ({ ...base, zIndex: 9999 }) },
-  menuPosition: 'fixed',
-  menuPlacement: 'bottom',
-});
-
 export const makeLastTwelveMonthsFilterPeriods = (): PeriodOption[] => {
   let date = DateTime.now().startOf('month');
   const choices = [];

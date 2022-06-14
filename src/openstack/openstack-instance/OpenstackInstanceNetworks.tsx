@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import { Button, Table } from 'react-bootstrap';
-import Select from 'react-select';
 
 import { Tip } from '@waldur/core/Tooltip';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { Subnet, FloatingIp } from '@waldur/openstack/openstack-instance/types';
 import { formatSubnet } from '@waldur/openstack/openstack-instance/utils';

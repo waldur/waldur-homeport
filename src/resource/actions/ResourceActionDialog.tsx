@@ -9,7 +9,6 @@ import { DateField } from '@waldur/form/DateField';
 import { MonacoField } from '@waldur/form/MonacoField';
 import { NumberField } from '@waldur/form/NumberField';
 import { TimezoneField } from '@waldur/form/TimezoneField';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 
@@ -110,7 +109,6 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
                   {...props}
                   options={field.options}
                   simpleValue={true}
-                  {...reactSelectMenuPortaling()}
                 />
               );
             } else if (field.type === 'async_select') {
@@ -119,7 +117,6 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
                   {...props}
                   loadOptions={field.loadOptions}
                   getOptionLabel={field.getOptionLabel}
-                  {...reactSelectMenuPortaling()}
                 />
               );
             }

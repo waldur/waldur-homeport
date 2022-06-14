@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import { FormLabel } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
+import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { relatedCustomerAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { getCustomer } from '@waldur/workspace/selectors';

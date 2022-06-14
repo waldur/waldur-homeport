@@ -1,12 +1,12 @@
 import { useState, FunctionComponent } from 'react';
 import { Table, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Select from 'react-select';
 import { useAsync, useAsyncFn } from 'react-use';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';

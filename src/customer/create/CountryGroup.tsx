@@ -2,9 +2,9 @@ import Axios from 'axios';
 import { FunctionComponent } from 'react';
 import { components } from 'react-select';
 import { useAsync } from 'react-use';
-import WindowedSelect from 'react-windowed-select';
 
 import { ENV } from '@waldur/configs/default';
+import { WindowedSelect } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
 import { InputGroup } from './InputGroup';

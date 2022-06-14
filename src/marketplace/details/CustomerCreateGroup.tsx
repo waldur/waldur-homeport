@@ -1,9 +1,9 @@
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { AsyncPaginate } from 'react-select-async-paginate';
 import { change, Field } from 'redux-form';
 
 import { CustomerCreateForm } from '@waldur/customer/create/CustomerCreateForm';
+import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';

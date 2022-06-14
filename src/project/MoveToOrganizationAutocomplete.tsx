@@ -3,7 +3,6 @@ import { Form } from 'react-bootstrap';
 
 import { required } from '@waldur/core/validators';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
 
@@ -31,7 +30,6 @@ export const MoveToOrganizationAutocomplete: FunctionComponent<MoveToOrganizatio
         getOptionValue={(option) => option.url}
         noOptionsMessage={() => translate('No organizations')}
         isDisabled={isDisabled}
-        {...reactSelectMenuPortaling()}
       />
     </Form.Group>
   );

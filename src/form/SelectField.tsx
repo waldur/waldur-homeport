@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
-import Select from 'react-select';
+
+import { Select } from '@waldur/form/themed-select';
 
 export const SelectField: FunctionComponent<any> = (props) => {
   const { input, simpleValue, options, ...rest } = props;
@@ -24,8 +25,6 @@ export const SelectField: FunctionComponent<any> = (props) => {
           props.input.onBlur(props.input.value);
         }
       }}
-      className="react-select-container"
-      classNamePrefix="react-select"
     />
   );
 };

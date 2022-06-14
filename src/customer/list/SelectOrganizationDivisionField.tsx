@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 import { components } from 'react-select';
-import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
 import { organizationDivisionAutocomplete } from '@waldur/customer/list/api';
 import { RIGHT_ARROW_HTML } from '@waldur/customer/list/constants';
+import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
 interface SelectOrganizationDivisionFieldProps {

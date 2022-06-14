@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from 'react';
 import { Card, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import Select from 'react-select';
 import { Field, reduxForm, formValueSelector, change } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { formatResourceShort } from '@waldur/marketplace/utils';
 import { getCustomersList } from '@waldur/project/api';

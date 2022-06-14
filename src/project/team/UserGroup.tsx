@@ -3,7 +3,6 @@ import { Form } from 'react-bootstrap';
 import { components } from 'react-select';
 
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { usersAutocomplete } from '@waldur/project/team/api';
 
@@ -74,7 +73,6 @@ export const UserGroup: FunctionComponent<{
         }
         getOptionValue={(option) => option.full_name || option.username}
         getOptionLabel={(option) => option.full_name || option.username}
-        {...reactSelectMenuPortaling()}
       />
     </Form.Group>
   ) : (

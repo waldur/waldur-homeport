@@ -1,10 +1,10 @@
 import { useCallback, useEffect, FunctionComponent } from 'react';
 import { Button, ButtonGroup, Col, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Select from 'react-select';
 import { Field, change } from 'redux-form';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 

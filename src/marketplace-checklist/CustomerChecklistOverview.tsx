@@ -1,9 +1,9 @@
 import { useState, FunctionComponent } from 'react';
-import Select from 'react-select';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
 import {

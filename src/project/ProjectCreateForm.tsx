@@ -14,10 +14,7 @@ import {
 } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
-import {
-  reactSelectMenuPortaling,
-  validateMaxLength,
-} from '@waldur/form/utils';
+import { validateMaxLength } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
@@ -95,7 +92,6 @@ export const ProjectCreateForm = reduxForm<
             getOptionValue={(option) => option.value}
             getOptionLabel={(option) => `${option.value}. ${option.label}`}
             isClearable={true}
-            {...reactSelectMenuPortaling()}
           />
         ) : null}
         {showIndustry && (

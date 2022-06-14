@@ -19,7 +19,6 @@ import {
   TextField,
 } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -73,7 +72,6 @@ const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
             onChange={(value: any) =>
               setIsFixedPrice(value.value === 'fixed_price')
             }
-            {...reactSelectMenuPortaling()}
           />
 
           {isFixedPrice ? (

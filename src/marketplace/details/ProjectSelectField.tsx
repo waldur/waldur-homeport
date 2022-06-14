@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import Select from 'react-select';
 import { Field, change, FormAction } from 'redux-form';
 
+import { Select } from '@waldur/form/themed-select';
 import { setCurrentProject } from '@waldur/workspace/actions';
 import { Project } from '@waldur/workspace/types';
 

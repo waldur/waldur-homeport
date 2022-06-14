@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import { Button, ButtonGroup, Col, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
+import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { openUserPopover } from '@waldur/user/actions';
 

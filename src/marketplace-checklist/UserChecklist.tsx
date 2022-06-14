@@ -2,9 +2,9 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import Select from 'react-select';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { getUser } from '@waldur/workspace/selectors';
