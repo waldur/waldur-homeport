@@ -1,10 +1,9 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
-import Select from 'react-select';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { ChecklistSelectorOption } from '@waldur/marketplace-checklist/types';
 import { useTitle } from '@waldur/navigation/title';
@@ -37,7 +36,6 @@ export const ChecklistOverview: FunctionComponent = () => {
           onChange={state.setChecklist}
           options={state.checklistOptions}
           isClearable={false}
-          {...reactSelectMenuPortaling()}
         />
         {state.statsLoading ? (
           <LoadingSpinner />

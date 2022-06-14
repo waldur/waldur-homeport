@@ -15,10 +15,7 @@ import {
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
 import { StaticField } from '@waldur/form/StaticField';
-import {
-  reactSelectMenuPortaling,
-  validateMaxLength,
-} from '@waldur/form/utils';
+import { validateMaxLength } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 
 import { ProjectNameField } from './ProjectNameField';
@@ -65,7 +62,6 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
             getOptionValue={(option) => option.value}
             getOptionLabel={(option) => `${option.value}. ${option.label}`}
             isClearable={true}
-            {...reactSelectMenuPortaling()}
           />
         ) : null}
         {isFeatureVisible('project.show_industry_flag') && (

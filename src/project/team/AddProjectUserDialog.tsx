@@ -10,7 +10,6 @@ import { getRoles } from '@waldur/customer/team/utils';
 import { FormContainer, SelectField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { DateField } from '@waldur/form/DateField';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -69,7 +68,6 @@ export const AddProjectUserDialog = reduxForm<
             loadOptions={(query, prevOptions, page) =>
               usersAutocomplete({ full_name: query }, prevOptions, page)
             }
-            {...reactSelectMenuPortaling()}
             getOptionValue={(option) => option.full_name || option.username}
             getOptionLabel={getOptionLabel}
             components={{ Option: UserListOptionInline }}
@@ -79,7 +77,6 @@ export const AddProjectUserDialog = reduxForm<
             name="role"
             label={translate('Role')}
             options={getRoles()}
-            {...reactSelectMenuPortaling()}
             required={true}
           />
           <DateField

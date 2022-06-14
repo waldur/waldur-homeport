@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { components } from 'react-select';
-import { AsyncPaginate } from 'react-select-async-paginate';
+
+import { AsyncPaginate } from '@waldur/form/themed-select';
 
 const renderIcon = (src: string, imgStyle: any) => (
   <img

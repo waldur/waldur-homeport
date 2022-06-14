@@ -11831,6 +11831,10 @@ msgstr ""
 msgid "{count} more affiliations"
 msgstr ""
 
+#: src/resource/support/TreemapChart.tsx
+msgid "{count} resources"
+msgstr ""
+
 #: src/user/dashboard/utils.ts
 msgid "{count} user events in {date}"
 msgstr ""

@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
-import Select from 'react-select';
+
+import { Select } from '@waldur/form/themed-select';
 
 import { QuotaChoice, QuotaList } from './types';
 

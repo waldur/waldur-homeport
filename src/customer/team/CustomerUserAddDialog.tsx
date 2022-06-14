@@ -5,7 +5,6 @@ import { reduxForm } from 'redux-form';
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { FormContainer } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -59,7 +58,6 @@ export const CustomerUserAddDialog = reduxForm<
             loadOptions={(query, prevOptions, page) =>
               usersAutocomplete({ full_name: query }, prevOptions, page)
             }
-            {...reactSelectMenuPortaling()}
             getOptionValue={(option) => option.full_name || option.username}
             getOptionLabel={(option) => option.full_name || option.username}
             components={{ Option: UserListOption }}

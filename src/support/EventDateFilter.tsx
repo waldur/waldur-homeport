@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
-import Select from 'react-select';
 import { Field } from 'redux-form';
 
+import { Select } from '@waldur/form/themed-select';
 import { makeLastTwelveMonthsFilterPeriods } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 

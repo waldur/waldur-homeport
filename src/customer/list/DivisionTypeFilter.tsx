@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
-import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
 import { divisionTypeAutocomplete } from '@waldur/customer/list/api';
+import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
 export const DivisionTypeFilter: FunctionComponent = () => (

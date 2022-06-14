@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
-import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { getRoles } from '@waldur/customer/team/utils';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
 export const ProjectRoleSelectField: FunctionComponent = () => (

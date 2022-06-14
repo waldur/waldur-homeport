@@ -1,9 +1,8 @@
 import { DateTime } from 'luxon';
 import { useMemo, FunctionComponent } from 'react';
-import WindowedSelect from 'react-windowed-select';
 
 import { TIMEZONES } from '@waldur/core/timezones';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
+import { WindowedSelect } from '@waldur/form/themed-select';
 
 function getTimezoneMetadata(zone: string) {
   const zonedDate = DateTime.utc().setZone(zone);
@@ -29,7 +28,6 @@ export const TimezoneField: FunctionComponent<any> = (props) => {
   const options = useMemo(getTimezoneItems, []);
   return (
     <WindowedSelect
-      {...reactSelectMenuPortaling()}
       options={options}
       value={options.find((option) => option.value === input.value)}
       onChange={(option: any) => input.onChange(option.value)}

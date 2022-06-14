@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 import { Card, Form } from 'react-bootstrap';
-import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
 import { getSelectData } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
+import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 

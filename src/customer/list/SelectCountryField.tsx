@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 import { useAsync } from 'react-use';
-import WindowedSelect from 'react-windowed-select';
 import { Field } from 'redux-form';
 
 import {
@@ -9,6 +8,7 @@ import {
   Option,
   SingleValue,
 } from '@waldur/customer/create/CountryGroup';
+import { WindowedSelect } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
 export const SelectField = ({ input: { value, onChange }, ...props }) => (

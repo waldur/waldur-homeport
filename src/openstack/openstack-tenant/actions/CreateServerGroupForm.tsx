@@ -1,9 +1,9 @@
 import { Form } from 'react-bootstrap';
-import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { getLatinNameValidators, required } from '@waldur/core/validators';
 import { InputField } from '@waldur/form/InputField';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
 

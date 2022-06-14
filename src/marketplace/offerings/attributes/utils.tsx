@@ -1,6 +1,6 @@
-import Select from 'react-select';
 import { Validator } from 'redux-form';
 
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import {
   parseIntField,

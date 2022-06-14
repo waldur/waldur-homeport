@@ -1,6 +1,5 @@
 import { mount, ReactWrapper } from 'enzyme';
 import { Provider } from 'react-redux';
-import Select from 'react-select';
 import { Store } from 'redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -9,6 +8,7 @@ import {
   findButtonByText,
   updateWrapper,
 } from '@waldur/core/testUtils';
+import { Select } from '@waldur/form/themed-select';
 import { Flavor, Subnet } from '@waldur/openstack/openstack-instance/types';
 
 import { OpenStackBackup } from '../types';

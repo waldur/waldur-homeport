@@ -1,7 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
-import Select from 'react-select';
 
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
@@ -33,7 +32,6 @@ export const SlotDurationGroup: FunctionComponent<SlotDurationGroupProps> = ({
         options={durationOptions}
         value={durationOptions.filter(({ value }) => value === slotDuration)}
         onChange={(newValue: any) => setSlotDuration(newValue.value)}
-        {...reactSelectMenuPortaling()}
       />
     </FormGroup>
   );

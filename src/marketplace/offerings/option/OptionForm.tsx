@@ -1,12 +1,12 @@
 import { FunctionComponent, useContext } from 'react';
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import Select from 'react-select';
 import { Field, formValueSelector } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { FormFieldsContext, FormLayoutContext } from '@waldur/form/context';
+import { Select } from '@waldur/form/themed-select';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 

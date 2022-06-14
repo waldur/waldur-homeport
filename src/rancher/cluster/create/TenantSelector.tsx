@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-import Select from 'react-select';
 import { useAsync } from 'react-use';
 import { Field } from 'redux-form';
 
 import { getAll } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { getCustomer } from '@waldur/workspace/selectors';

@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import Select from 'react-select';
 import { useAsync } from 'react-use';
+
+import { Select } from '@waldur/form/themed-select';
 
 export const AsyncSelectField = ({
   input: { value: selectedValue, onChange },

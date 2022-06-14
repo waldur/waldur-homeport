@@ -1,9 +1,9 @@
 import { useCallback, useEffect, FunctionComponent } from 'react';
 import { Col, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import Select from 'react-select';
 import { Field, change } from 'redux-form';
 
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { formatResourceShort } from '@waldur/marketplace/utils';
 

@@ -1,6 +1,6 @@
-import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
+import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { userAutocomplete } from '@waldur/marketplace/common/autocompletes';
 

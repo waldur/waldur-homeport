@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Form, Col } from 'react-bootstrap';
-import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
+import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
 

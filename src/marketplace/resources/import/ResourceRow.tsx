@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useMemo, useState, FunctionComponent } from 'react';
-import Select from 'react-select';
 
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { ResourceIcon } from '@waldur/resource/ResourceName';
 

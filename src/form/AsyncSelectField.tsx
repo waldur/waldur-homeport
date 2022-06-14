@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
-import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
+import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
 const Select = ({ input, loadOptions, ...rest }) => (
@@ -31,8 +31,6 @@ export const AsyncSelectField: FunctionComponent<any> = (props) => {
         page: 1,
       }}
       {...rest}
-      className="react-select-container"
-      classNamePrefix="react-select"
     />
   );
 };

@@ -8,7 +8,6 @@ import { post } from '@waldur/core/api';
 import { required } from '@waldur/core/validators';
 import { FormContainer, StringField, TextField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { NOTIFICATION_CREATE_FORM_ID } from '@waldur/issues/notifications/constants';
 import { NumberIndicator } from '@waldur/issues/notifications/NumberIndicator';
@@ -88,7 +87,6 @@ export const NotificationCreateDialog = reduxForm({
               )
             }
             isMulti={true}
-            {...reactSelectMenuPortaling()}
             onChange={(e) => setFetchNumber(e)}
           />
           <AsyncSelectField
@@ -102,7 +100,6 @@ export const NotificationCreateDialog = reduxForm({
               })
             }
             isMulti={true}
-            {...reactSelectMenuPortaling()}
             onChange={(e) => setFetchNumber(e)}
           />
         </FormContainer>

@@ -20,7 +20,6 @@ import {
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField, SubmitButton } from '@waldur/form';
 import { ToggleButtonGroupInput } from '@waldur/form/ToggleButtonGroupInput';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -185,7 +184,6 @@ const SelectAffiliationDialogContainer: FC<
                 options={organizationOptions}
                 simpleValue={true}
                 validate={required}
-                {...reactSelectMenuPortaling()}
               />
             ) : (
               <SelectField
@@ -196,7 +194,6 @@ const SelectAffiliationDialogContainer: FC<
                 options={projectOptions}
                 simpleValue={true}
                 validate={required}
-                {...reactSelectMenuPortaling()}
               />
             )}
           </FormContainer>
