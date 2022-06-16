@@ -8,7 +8,7 @@ import { PoweredBy } from './PoweredBy';
 import { useAuthFeatures } from './useAuthFeatures';
 import { UserAuthWarning } from './UserAuthWarning';
 
-import './LoginColumn.css';
+import './LoginColumn.scss';
 
 export const LoginColumn = () => {
   const features = useAuthFeatures();
