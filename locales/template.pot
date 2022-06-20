@@ -866,9 +866,7 @@ msgstr ""
 
 #: src/customer/utils.ts
 #: src/customer/workspace/CustomerEventsList.tsx
-#: src/customer/workspace/utils.ts
 #: src/navigation/navitems.ts
-#: src/project/utils.ts
 #: src/support/SupportEventsContainer.tsx
 #: src/user/constants.ts
 #: src/user/dashboard/UserEventsWrapper.tsx
@@ -1344,10 +1342,6 @@ msgstr ""
 
 #: src/navigation/BackendHealthStatusDialog.tsx
 msgid "Check name"
-msgstr ""
-
-#: src/marketplace-checklist/utils.ts
-msgid "Checklist setup"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -1996,9 +1990,7 @@ msgid "Dark theme"
 msgstr ""
 
 #: src/customer/dashboard/CustomerDashboard.tsx
-#: src/customer/workspace/utils.ts
 #: src/project/ProjectDashboard.tsx
-#: src/project/utils.ts
 #: src/user/constants.ts
 msgid "Dashboard"
 msgstr ""
@@ -3813,12 +3805,10 @@ msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr ""
 
 #: src/customer/workspace/CustomerIssuesList.tsx
-#: src/customer/workspace/utils.ts
 #: src/issues/SupportIssues.tsx
 #: src/marketplace/resources/ResourceTabs.tsx
 #: src/navigation/navitems.ts
 #: src/project/ProjectIssuesList.tsx
-#: src/project/utils.ts
 #: src/resource/tabs/constants.ts
 msgid "Issues"
 msgstr ""
@@ -4135,7 +4125,6 @@ msgstr ""
 msgid "MTU"
 msgstr ""
 
-#: src/customer/workspace/utils.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Manage"
 msgstr ""
@@ -4175,7 +4164,6 @@ msgstr ""
 
 #: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
-#: src/marketplace/sidebar.ts
 msgid "Marketplace"
 msgstr ""
 
@@ -4418,26 +4406,22 @@ msgstr ""
 #: src/marketplace/offerings/MyOfferingsListContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/images/ImagesContainer.tsx
-#: src/marketplace/sidebar.ts
 msgid "My offerings"
 msgstr ""
 
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsContainer.tsx
-#: src/marketplace/sidebar.ts
 #: src/navigation/navitems.ts
 msgid "My orders"
 msgstr ""
 
 #: src/marketplace/resources/list/CustomerResourcesContainer.tsx
-#: src/marketplace/sidebar.ts
 msgid "My resources"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
-#: src/marketplace/sidebar.ts
 msgid "My services"
 msgstr ""
 
@@ -6276,7 +6260,6 @@ msgstr ""
 msgid "Project creation request review"
 msgstr ""
 
-#: src/customer/workspace/utils.ts
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
 msgid "Project creation requests"
 msgstr ""
@@ -6375,7 +6358,6 @@ msgstr ""
 
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
-#: src/marketplace/sidebar.ts
 msgid "Project updates"
 msgstr ""
 
@@ -6391,7 +6373,6 @@ msgstr ""
 msgid "Project {project_name} has been deleted."
 msgstr ""
 
-#: src/customer/workspace/utils.ts
 #: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
@@ -6468,26 +6449,19 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/images/ImagesContainer.tsx
 #: src/marketplace/offerings/utils.ts
-#: src/marketplace/sidebar.ts
 #: src/navigation/navitems.ts
 msgid "Public offerings"
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemsContainer.tsx
-#: src/marketplace/sidebar.ts
 #: src/navigation/navitems.ts
 msgid "Public orders"
 msgstr ""
 
 #: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/resources/list/PublicResourcesContainer.tsx
-#: src/marketplace/sidebar.ts
 #: src/navigation/navitems.ts
 msgid "Public resources"
-msgstr ""
-
-#: src/marketplace/sidebar.ts
-msgid "Public services"
 msgstr ""
 
 #: src/marketplace/offerings/actions/GoogleCalendarActions.ts
@@ -7176,7 +7150,6 @@ msgstr ""
 msgid "Resource creation request review"
 msgstr ""
 
-#: src/customer/workspace/utils.ts
 #: src/marketplace-flows/ResourceCreateRequestsList.tsx
 msgid "Resource creation requests"
 msgstr ""
@@ -8737,10 +8710,8 @@ msgstr ""
 msgid "Tax percent"
 msgstr ""
 
-#: src/customer/workspace/utils.ts
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/project/team/ProjectTeam.tsx
-#: src/project/utils.ts
 msgid "Team"
 msgstr ""
 

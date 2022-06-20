@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { useTabs } from '@waldur/navigation/context';
 
@@ -71,17 +72,24 @@ export const useAdminItems = () => {
   useTabs(tabs);
 };
 
-const getSupportItems = () => [
-  { title: translate('Issues'), to: 'support.list' },
-  { title: translate('Feedback'), to: 'support.feedback' },
-  { title: translate('Broadcast'), to: 'support.broadcast' },
-  {
-    title: translate('Organization requests'),
-    to: 'support.customers-requests',
-  },
-  { title: translate('Shared providers'), to: 'support.shared-providers' },
-  { title: translate('Audit log'), to: 'support.events' },
-];
+const getSupportItems = () =>
+  [
+    ENV.plugins.WALDUR_SUPPORT && {
+      title: translate('Issues'),
+      to: 'support.list',
+    },
+    ENV.plugins.WALDUR_SUPPORT && {
+      title: translate('Feedback'),
+      to: 'support.feedback',
+    },
+    { title: translate('Broadcast'), to: 'support.broadcast' },
+    {
+      title: translate('Organization requests'),
+      to: 'support.customers-requests',
+    },
+    { title: translate('Shared providers'), to: 'support.shared-providers' },
+    { title: translate('Audit log'), to: 'support.events' },
+  ].filter((x) => x);
 
 export const useSupportItems = () => {
   const tabs = useMemo(() => getSupportItems(), []);
