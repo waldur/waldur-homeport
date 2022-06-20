@@ -102,7 +102,6 @@ export const USER_PROFILE_COMPLETION_FIELDS: Array<keyof UserDetails> = [
   'email',
   'job_title',
   'organization',
-  'description',
   'phone_number',
 ];
 
