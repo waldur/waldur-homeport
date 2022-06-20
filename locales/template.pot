@@ -5293,6 +5293,7 @@ msgstr ""
 #: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
+#: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/SelectAffiliationDialog.tsx
@@ -6226,6 +6227,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
+#: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -7636,6 +7638,10 @@ msgstr ""
 msgid "Search for organization..."
 msgstr ""
 
+#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
+msgid "Search..."
+msgstr ""
+
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 msgid "Second"
 msgstr ""
@@ -7833,7 +7839,6 @@ msgid "Select priority..."
 msgstr ""
 
 #: src/invitations/actions/ProjectGroup.tsx
-#: src/navigation/workspace/SelectWorkspaceToggle.tsx
 msgid "Select project"
 msgstr ""
 
@@ -9027,6 +9032,10 @@ msgstr ""
 msgid "There are no organizations yet."
 msgstr ""
 
+#: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
+msgid "There are no organizations."
+msgstr ""
+
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "There are no other plans available."
 msgstr ""
@@ -9040,7 +9049,12 @@ msgid "There are no projects"
 msgstr ""
 
 #: src/navigation/workspace/ProjectsPanel.tsx
+#: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
 msgid "There are no projects yet for this organization."
+msgstr ""
+
+#: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
+msgid "There are no projects."
 msgstr ""
 
 #: src/user/UserOfferingListPlaceholder.tsx
@@ -9714,6 +9728,7 @@ msgstr ""
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
+#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/slurm/details/AllocationUsageTable.tsx
 msgid "Unable to load data"
@@ -11045,6 +11060,10 @@ msgstr ""
 msgid "View YAML"
 msgstr ""
 
+#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
+msgid "View all"
+msgstr ""
+
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx
 msgid "Viewing image"
 msgstr ""
@@ -11450,10 +11469,12 @@ msgid "events"
 msgstr ""
 
 #: src/navigation/workspace/OrganizationListItem.tsx
+#: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
 msgid "failed"
 msgstr ""
 
 #: src/navigation/workspace/OrganizationListItem.tsx
+#: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
 msgid "fetching"
 msgstr ""
 

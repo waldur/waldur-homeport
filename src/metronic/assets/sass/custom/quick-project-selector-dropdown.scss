@@ -1,0 +1,41 @@
+@import '~/src/metronic/assets/sass/core/components/_variables.scss';
+
+.quick-project-selector {
+  .scrollbar-view {
+    height: calc(100vh - 280px) !important;
+  }
+
+  .list-group {
+    border-radius: unset;
+  }
+
+  .organization-listing {
+    .list-group-item {
+      background-color: unset;
+      border: 0;
+
+      &.active {
+        background-color: $gray-200;
+        color: unset;
+      }
+    }
+  }
+  .project-listing {
+    .list-group-item {
+      background-color: unset;
+      border: 0;
+
+      &.active {
+        background-color: $gray-700;
+
+        a {
+          color: #fff;
+        }
+      }
+
+      a {
+        color: unset;
+      }
+    }
+  }
+}
