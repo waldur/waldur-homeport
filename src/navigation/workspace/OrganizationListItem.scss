@@ -1,13 +1,7 @@
-@import '~/src/metronic/assets/sass/custom/variables';
-
 .organization-list-item {
   border: none;
   padding: 0.5rem 2rem;
-
-  &:hover,
-  &.active {
-    background-color: $bg-success-light;
-  }
+  font-weight: 500;
 
   @media (min-width: 992px) {
     .title {

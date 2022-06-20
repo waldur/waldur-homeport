@@ -47,7 +47,7 @@ export const OrganizationsSelector: FunctionComponent<{
     >
       <div className="d-grid gap-2">
         <button
-          className="toggle btn btn-lg"
+          className="toggle btn btn-light btn-lg"
           onClick={() => setShowOptions(!showOptions)}
         >
           {selectedOrganization?.name ? (
@@ -77,7 +77,7 @@ export const OrganizationsSelector: FunctionComponent<{
         </button>
       </div>
       <div
-        className={classNames('organization-select-options', {
+        className={classNames('organization-select-options', 'bg-body', {
           active: showOptions,
         })}
       >

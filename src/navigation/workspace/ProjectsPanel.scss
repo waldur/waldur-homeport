@@ -4,26 +4,6 @@
   }
 }
 
-.project-list-item {
-  display: flex;
-  align-items: center;
-
-  .image-placeholder {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    background-color: #e2e2e2;
-    border-radius: 7px;
-  }
-  .title {
-    color: #19311e;
-
-    &:hover {
-      text-decoration: underline !important;
-    }
-  }
-}
-
 .resource-item {
   color: #7f998a;
   font-weight: bold;

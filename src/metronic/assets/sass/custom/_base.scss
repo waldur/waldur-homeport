@@ -1,20 +1,7 @@
 @import '~/src/metronic/assets/sass/core/components/_variables.scss';
 
-/* BASIC */
-.bg-success-light {
-  background-color: $bg-success-light;
-}
-
-.text-primary-dark {
-  color: $primary-dark-color !important;
-}
-
 /* MODAL */
 .modal-metro {
-  .modal-body {
-    background: #fff;
-  }
-
   .modal-header {
     display: block;
     padding: 30px 20px 0;
@@ -22,13 +9,13 @@
     border-bottom: none;
 
     .modal-title {
-      color: #405448;
+      color: $gray-800;
       font-size: 18px;
       text-transform: uppercase;
     }
 
     .modal-subtitle {
-      color: #405448;
+      color: $gray-800;
       font-size: 14px;
     }
   }
@@ -39,42 +26,11 @@
 }
 
 /* BUTTON */
-.btn.btn-metro {
-  background: $btn-secondary;
-  color: $btn-secondary-text;
+.btn {
   border-radius: 7px;
   padding: 5px 12px;
   border: 0;
   letter-spacing: 0.56px;
-
-  &:active,
-  &:focus,
-  &:hover {
-    background: $btn-secondary-hover !important;
-    color: $btn-secondary-hover-text !important;
-  }
-
-  &.btn-secondary {
-    background: $bg-success-light;
-    color: $btn-secondary-text;
-
-    &:active,
-    &:focus,
-    &:hover {
-      background: $btn-secondary-hover !important;
-    }
-  }
-
-  &.btn-primary {
-    background: $bg-success;
-    color: $btn-primary-text;
-
-    &:active,
-    &:focus,
-    &:hover {
-      background: $btn-primary-hover !important;
-    }
-  }
 }
 
 .list-group.list-group-metro {
@@ -83,19 +39,18 @@
     box-shadow: none;
     border: none;
     border-radius: 0 !important;
-    letter-spacing: 0;
-    color: #a1b7a6;
+    letter-spacing: 0px;
+    color: $gray-500;
     font-weight: bold;
     font-size: 14px;
     text-transform: uppercase;
 
     &.active {
-      color: $primary-color;
-      border-bottom: 1px solid $primary-color;
+      color: $primary;
+      border-bottom: 1px solid $primary;
     }
     &:hover {
-      background: $btn-secondary-hover;
-      color: $btn-secondary-hover-text;
+      background: $light;
     }
   }
 }
@@ -107,8 +62,8 @@
   padding: 0;
   border-bottom: 0;
   border-right: 0;
-  border-top: 1px solid $border-color;
-  border-left: 1px solid $border-color;
+  border-top: 1px solid $gray-600;
+  border-left: 1px solid $gray-600;
   z-index: 10000;
 
   .popover-body {
@@ -121,10 +76,9 @@
   }
 
   .tile {
-    background-color: #fff;
     padding: 1rem;
-    border-bottom: 1px solid $border-color;
-    border-right: 1px solid $border-color;
+    border-bottom: 1px solid $gray-600;
+    border-right: 1px solid $gray-600;
     float: left;
   }
   .tile-1 {
@@ -149,6 +103,19 @@
   font-weight: bold;
   color: $gray-700;
   border-bottom-color: $light;
+}
+
+/* LIST-GROUP & ITEMS */
+.list-group-item {
+  background-color: $dark-inverse;
+
+  &:hover {
+    background-color: $gray-200;
+  }
+  &.active {
+    background-color: $gray-200;
+    border-color: $gray-200;
+  }
 }
 
 /* *** FORM ELEMENTS *** */

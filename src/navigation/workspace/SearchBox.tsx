@@ -15,11 +15,11 @@ export const SearchBox: FunctionComponent<{
         id={groupId}
         size="sm"
         type="text"
-        className="form-control-solid"
         autoFocus
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
+        className="form-control-solid"
       />
       <label htmlFor={groupId}>
         <i className="fa fa-search" />
