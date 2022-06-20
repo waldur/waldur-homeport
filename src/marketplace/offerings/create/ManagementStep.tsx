@@ -25,6 +25,7 @@ export interface ManagementStepProps extends TranslateProps {
   showBackendId?: boolean;
   allowToUpdateService?: boolean;
   openServiceSettingsDetails(): void;
+  dryRunOfferingScript(): void;
 }
 
 export const ManagementStep: FunctionComponent<ManagementStepProps> = (
@@ -98,6 +99,7 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
         <FormSection name="secret_options">
           {React.createElement(props.secretOptionsForm, {
             container: ContainerProps,
+            dryRunOfferingScript: props.dryRunOfferingScript,
           })}
         </FormSection>
       )}
