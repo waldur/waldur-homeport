@@ -34,6 +34,10 @@ const PureOpenStackInstanceSummary = (
         label={translate('Availability zone')}
         value={props.resource.availability_zone_name}
       />
+      <Field
+        label={translate('Hypervisor')}
+        value={props.resource.hypervisor_hostname}
+      />
       {props.resource.rancher_cluster && (
         <Field
           label={translate('Rancher cluster')}

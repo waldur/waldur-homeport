@@ -1,6 +1,7 @@
+import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -15,6 +16,7 @@ import {
   OFFERING_TABLE_NAME,
   PUBLIC_OFFERINGS_FILTER_FORM_ID,
 } from '@waldur/marketplace/offerings/store/constants';
+import { openModalDialog } from '@waldur/modal/actions';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -28,8 +30,8 @@ import {
 
 import { Offering } from '../types';
 
+import { OfferingImportDialog } from './actions/OfferingImportDialog';
 import { OfferingItemActions } from './actions/OfferingItemActions';
-import { OfferingListActions } from './actions/OfferingListActions';
 import { OfferingDetailsLink } from './details/OfferingDetailsLink';
 import { OfferingsListTablePlaceholder } from './OfferingsListTablePlaceholder';
 import { OfferingStateCell } from './OfferingStateCell';
@@ -43,6 +45,8 @@ const OfferingNameColumn = ({ row }) => (
 
 export const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const columns = [
     {
@@ -85,13 +89,39 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     });
   }
 
+  const actions = [
+    {
+      label: translate('Add offerings'),
+      icon: 'fa fa-plus',
+      handler: () => {
+        router.stateService.go('marketplace-offering-create');
+      },
+    },
+    {
+      label: translate('Import offerings'),
+      icon: 'fa fa-plus',
+      handler: () => {
+        dispatch(openModalDialog(OfferingImportDialog, { size: 'lg' }));
+      },
+    },
+    {
+      label: translate('Public list'),
+      icon: 'fa fa-external-link',
+      handler: () => {
+        router.stateService.go('marketplace-service-provider.details', {
+          uuid: props.customer.uuid,
+        });
+      },
+    },
+  ];
+
   return (
     <Table
       {...props}
       placeholderComponent={<OfferingsListTablePlaceholder />}
       columns={columns}
       verboseName={translate('Offerings')}
-      actions={props.showOfferingListActions && <OfferingListActions />}
+      actions={props.showOfferingListActions && actions}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
       expandableRow={OfferingsListExpandableRow}

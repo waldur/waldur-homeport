@@ -1,0 +1,16 @@
+.state_filter_container {
+  &.dark {
+    > div {
+      > div {
+        background-color: #151521;
+        > div > div {
+          background: #323248;
+          > div {
+            color: #fff !important;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

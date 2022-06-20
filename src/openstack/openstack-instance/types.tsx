@@ -13,6 +13,7 @@ export interface OpenStackInstance extends VirtualMachine {
   runtime_state: 'SHUTOFF' | 'ACTIVE';
   security_groups?: SecurityGroup[];
   availability_zone_name?: string;
+  hypervisor_hostname?: string;
   rancher_cluster?: RancherClusterReference;
 }
 

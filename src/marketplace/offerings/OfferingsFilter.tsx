@@ -5,7 +5,6 @@ import { reduxForm } from 'redux-form';
 import { PUBLIC_OFFERINGS_FILTER_FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 
 import { OfferingStateFilter, getStates } from './OfferingStateFilter';
-
 const PureOfferingsFilter: FunctionComponent = () => (
   <Row>
     <OfferingStateFilter />
