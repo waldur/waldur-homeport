@@ -1,5 +1,5 @@
 import { SubmissionError } from 'redux-form';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
@@ -10,6 +10,8 @@ import {
   activateUser,
   deactivateUser,
 } from '@waldur/user/support/actions';
+import { setCurrentUser } from '@waldur/workspace/actions';
+import { getUser } from '@waldur/workspace/selectors';
 
 import * as api from './api';
 
@@ -22,6 +24,12 @@ export function* handleUpdateUser(action) {
   try {
     const response = yield call(api.updateUser, action.payload);
     const user = response.data;
+
+    const currentUser = yield select(getUser);
+    if (user.uuid === currentUser.uuid) {
+      yield put(setCurrentUser(user));
+    }
+
     yield put(updateEntity(USERS_TABLE, user.uuid, user));
     yield put(updateUser.success());
     yield put(showSuccess(successMessage));
