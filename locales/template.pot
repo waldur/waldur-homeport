@@ -357,9 +357,12 @@ msgstr ""
 msgid "Add notification"
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingCreateButton.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 msgid "Add offering"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingsList.tsx
+msgid "Add offerings"
 msgstr ""
 
 #: src/user/dashboard/CustomerCreateButton.tsx
@@ -1644,6 +1647,7 @@ msgstr ""
 #: src/core/CopyToClipboard.tsx
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
+#: src/table/ExportDropdown.tsx
 #: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr ""
@@ -2852,6 +2856,7 @@ msgstr ""
 msgid "Explore {deployment} service catalog"
 msgstr ""
 
+#: src/table/ExportDropdown.tsx
 #: src/table/TableExportButton.tsx
 msgid "Export"
 msgstr ""
@@ -3348,6 +3353,10 @@ msgstr ""
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
+msgid "Hypervisor"
+msgstr ""
+
 #: src/navigation/cookies/CookiesConsent.tsx
 msgid "I agree"
 msgstr ""
@@ -3459,9 +3468,12 @@ msgstr ""
 msgid "Import key"
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingImportButton.tsx
 #: src/marketplace/offerings/actions/OfferingImportDialog.tsx
 msgid "Import offering"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingsList.tsx
+msgid "Import offerings"
 msgstr ""
 
 #: src/user/keys/KeyCreateDialog.tsx
@@ -6460,7 +6472,7 @@ msgstr ""
 msgid "Public key"
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingsPublicListButton.tsx
+#: src/marketplace/offerings/OfferingsList.tsx
 msgid "Public list"
 msgstr ""
 
@@ -6686,6 +6698,7 @@ msgstr ""
 #: src/marketplace/resources/actions/ResourceActions.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/resource/ResourceRefreshButton.tsx
+#: src/table/TableDropdowns.tsx
 #: src/table/TableRefreshButton.tsx
 msgid "Refresh"
 msgstr ""

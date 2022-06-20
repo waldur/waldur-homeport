@@ -126,7 +126,7 @@ export const getSchedules = (state: RootState) =>
 export const getReadOnlyFields = createSelector(
   getOffering,
   (offeringState) => {
-    if (offeringState.offering.type === REMOTE_OFFERING_TYPE) {
+    if (offeringState.offering?.type === REMOTE_OFFERING_TYPE) {
       return [
         'name',
         'description',

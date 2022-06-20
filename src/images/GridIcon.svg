@@ -1,0 +1,44 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="28px"
+  height="28px"
+  viewBox="0 0 24 24"
+>
+  <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+    <rect
+      x="5"
+      y="5"
+      width="6"
+      height="6"
+      rx="1"
+      fill="currentColor"
+    />
+    <rect
+      x="14"
+      y="5"
+      width="6"
+      height="6"
+      rx="1"
+      fill="currentColor"
+      opacity="0.3"
+    />
+    <rect
+      x="5"
+      y="14"
+      width="6"
+      height="6"
+      rx="1"
+      fill="currentColor"
+      opacity="0.3"
+    />
+    <rect
+      x="14"
+      y="14"
+      width="6"
+      height="6"
+      rx="1"
+      fill="currentColor"
+      opacity="0.3"
+    />
+  </g>
+</svg>

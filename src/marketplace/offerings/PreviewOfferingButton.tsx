@@ -4,7 +4,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { getFormComponent } from '@waldur/marketplace/common/registry';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { ActionButtonSmall } from '@waldur/table/ActionButtonSmall';
 
 import { Offering } from '../types';
 
@@ -34,11 +34,13 @@ const PurePreviewOfferingButton = (props: PreviewOfferingButtonProps) => {
     return null;
   }
   return (
-    <ActionButton
+    <ActionButtonSmall
       title={translate('Preview')}
-      icon="fa fa-eye"
+      className="ms-2 rounded btn-light border-0"
       action={props.openDialog}
-    />
+    >
+      <i className="fa fa-eye" />
+    </ActionButtonSmall>
   );
 };
 
