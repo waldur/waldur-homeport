@@ -53,16 +53,16 @@ export const OrganizationListItem: FunctionComponent<{
               tag.visible && (
                 <Badge
                   key={tag.value}
-                  bg="success-light"
+                  bg="success"
                   text="success"
-                  className="ms-1"
+                  className="bg-opacity-10 ms-1"
                 >
                   {tag.label}
                 </Badge>
               ),
           )}
         </span>
-        <i className="fa fa-wrench text-black ms-auto" />
+        <i className="fa fa-wrench text-dark ms-auto" />
       </Stack>
     </ListGroupItem>
   );

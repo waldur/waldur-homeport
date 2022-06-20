@@ -44,6 +44,7 @@ export const ProjectsPanel: FunctionComponent<{
     }
   }, [projects, selectedProject]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(selectFirstProject, [projects]);
 
   const handleProjectClick = useCallback(

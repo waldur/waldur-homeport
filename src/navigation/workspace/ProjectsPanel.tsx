@@ -1,10 +1,11 @@
 import { useState, useCallback, useEffect, FunctionComponent } from 'react';
-import { Col, ListGroup, Row, Tab, Table } from 'react-bootstrap';
+import { Col, ListGroup, Row, Stack, Tab, Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync, useEffectOnce } from 'react-use';
 
 import { getList } from '@waldur/core/api';
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
+import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
@@ -68,7 +69,7 @@ const EmptyProjectsPlaceholder: FunctionComponent = () => (
 
 const SelectProjectButton = ({ project }) => (
   <Link
-    className="btn btn-sm btn-metro btn-secondary pull-right"
+    className="btn btn-sm btn-secondary pull-right"
     state="project.details"
     params={{ uuid: project.uuid }}
   >
@@ -127,12 +128,19 @@ const ProjectListItem = ({
   return (
     <tr>
       <td>
-        <div className="project-list-item">
-          <span className="image-placeholder"></span>
-          <a className="title ms-2" onClick={() => onClick && onClick(project)}>
+        <Stack direction="horizontal" gap={2}>
+          <ImagePlaceholder
+            width="32px"
+            height="32px"
+            backgroundColor="#e2e2e2"
+          />
+          <a
+            className="text-dark ms-2"
+            onClick={() => onClick && onClick(project)}
+          >
             {project.name}
           </a>
-        </div>
+        </Stack>
       </td>
       <td>
         {projectLoading ? (

@@ -349,10 +349,6 @@ msgstr ""
 msgid "Add member"
 msgstr ""
 
-#: src/navigation/workspace/CreateOrganizationButton.tsx
-msgid "Add new"
-msgstr ""
-
 #: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
 msgid "Add new offering"
 msgstr ""
@@ -7839,6 +7835,7 @@ msgid "Select priority..."
 msgstr ""
 
 #: src/invitations/actions/ProjectGroup.tsx
+#: src/navigation/workspace/SelectWorkspaceToggle.tsx
 msgid "Select project"
 msgstr ""
 
@@ -11593,7 +11590,6 @@ msgstr ""
 
 #: src/invitations/GroupInvitationMessage.tsx
 #: src/invitations/InvitationMessage.tsx
-#: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "organization"
 msgstr ""
 
