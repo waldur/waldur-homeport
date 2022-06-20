@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 
 import WarningBar from '@waldur/auth/WarningBar';
 import { MasterLayout } from '@waldur/metronic/layout/MasterLayout';
-import { SelectWorkspaceToggle } from '@waldur/navigation/workspace/SelectWorkspaceToggle';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { AppFooter } from './AppFooter';
@@ -13,6 +12,7 @@ import { CookiesConsent } from './cookies/CookiesConsent';
 import { AppHeader } from './header/AppHeader';
 import { ExternalLinks } from './header/ExternalLinks';
 import { UnifiedSidebar } from './sidebar/UnifiedSidebar';
+import { QuickProjectSelectorToggle } from './workspace/quick-project-selector/QuickProjectSelectorToggle';
 
 const TabsList: FunctionComponent = () => {
   const ctx = useContext(LayoutContext);
@@ -60,13 +60,13 @@ export const Layout: React.FC = ({ children }) => {
                   <div className="d-flex align-items-stretch">
                     <div className="header-menu align-items-stretch">
                       <div className="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch">
+                        <QuickProjectSelectorToggle />
                         <TabsList />
                         <ExternalLinks />
                       </div>
                     </div>
                   </div>
                   <div className="d-flex align-items-center gap-2 gap-lg-3">
-                    <SelectWorkspaceToggle />
                     {actions}
                   </div>
                 </div>

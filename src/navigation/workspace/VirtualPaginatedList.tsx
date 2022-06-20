@@ -22,6 +22,7 @@ const CustomScrollbars = ({ onScroll, forwardedRef, style, children }) => {
       ref={refSetter}
       style={{ ...style, overflow: 'hidden' }}
       onScroll={onScroll}
+      className="scrollbar-view"
     >
       {children}
     </Scrollbars>
