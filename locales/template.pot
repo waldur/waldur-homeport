@@ -6674,7 +6674,6 @@ msgstr ""
 #: src/marketplace/resources/actions/ResourceActions.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/resource/ResourceRefreshButton.tsx
-#: src/table/TableButtons.tsx
 #: src/table/TableDropdowns.tsx
 #: src/table/TableRefreshButton.tsx
 msgid "Refresh"
@@ -8853,6 +8852,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Terms of Service link"
+msgstr ""
+
+#: src/marketplace-script/TestScriptButton.tsx
+msgid "Test {type}"
 msgstr ""
 
 #: src/core/CopyToClipboardButton.tsx
@@ -11975,6 +11978,14 @@ msgstr ""
 #: src/invitations/GroupInvitationMessage.tsx
 #: src/invitations/InvitationMessage.tsx
 msgid "{sender} has invited you to join {name} {type} in {role} role."
+msgstr ""
+
+#: src/marketplace-script/TestScriptButton.tsx
+msgid "{type} script got an error"
+msgstr ""
+
+#: src/marketplace-script/TestScriptButton.tsx
+msgid "{type} script was executed successfully"
 msgstr ""
 
 #: src/quotas/QuotasTable.tsx

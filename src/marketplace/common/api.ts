@@ -372,6 +372,16 @@ export const updateOfferingConfirmationMessage = (
     },
   });
 
+export const runOfferingScript = (
+  offeringUuid: string,
+  plan: string,
+  type: string,
+) =>
+  post(`/marketplace-script-dry-run/${offeringUuid}/run/`, {
+    plan,
+    type,
+  });
+
 export const updateOfferingAccessPolicy = (
   offeringUuid: string,
   divisions: string[],
