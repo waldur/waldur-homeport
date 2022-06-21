@@ -2,9 +2,7 @@ import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
 import { router } from '@waldur/router';
-import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
-import { isOwnerOrStaff } from '@waldur/workspace/selectors';
 import { User } from '@waldur/workspace/types';
 
 // This service checks users status and returns different sidebar items and router state
@@ -13,13 +11,6 @@ class IssueNavigationServiceClass {
   prevState;
   prevParams;
   prevWorkspace;
-
-  get isVisible() {
-    if (ENV.plugins.WALDUR_SUPPORT) {
-      return true;
-    }
-    return isOwnerOrStaff(store.getState());
-  }
 
   gotoDashboard() {
     if (!ENV.plugins.WALDUR_SUPPORT) {
