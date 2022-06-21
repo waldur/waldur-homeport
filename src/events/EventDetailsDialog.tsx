@@ -1,8 +1,7 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { RootState } from '@waldur/store/reducers';
@@ -15,7 +14,7 @@ interface StateProps {
   isStaffOrSupport: boolean;
 }
 
-interface EventDetailsDialogProps extends TranslateProps, StateProps {
+interface EventDetailsDialogProps extends StateProps {
   resolve: { event: Event };
 }
 
@@ -23,12 +22,11 @@ const PureEventDetailsDialog: FunctionComponent<EventDetailsDialogProps> = (
   props,
 ) => (
   <ModalDialog
-    title={props.translate('Event details')}
+    title={translate('Event details')}
     footer={<CloseDialogButton />}
   >
     <EventDetailsTable
       event={props.resolve.event}
-      translate={props.translate}
       isStaffOrSupport={props.isStaffOrSupport}
     />
   </ModalDialog>
@@ -38,6 +36,6 @@ const mapStateToProps = (state: RootState) => ({
   isStaffOrSupport: isStaffOrSupport(state),
 });
 
-const enhance = compose(connect<StateProps>(mapStateToProps), withTranslation);
+const enhance = connect<StateProps>(mapStateToProps);
 
 export const EventDetailsDialog = enhance(PureEventDetailsDialog);

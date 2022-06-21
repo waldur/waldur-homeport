@@ -10,8 +10,6 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { wrapTooltip } from '@waldur/table/ActionButton';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
-import './SelectWorkspaceToggle.scss';
-
 const SelectWorkspaceDialog = lazyComponent(
   () =>
     import(

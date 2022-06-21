@@ -2,12 +2,12 @@ import { FunctionComponent } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { ExternalLink } from '@waldur/core/ExternalLink';
-import { TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
 import { EventField } from './EventField';
 import { Event } from './types';
 
-interface EventDetailsTableProps extends TranslateProps {
+interface EventDetailsTableProps {
   event: Event;
   isStaffOrSupport: boolean;
 }
@@ -16,7 +16,6 @@ const showLink = (event, isStaffOrSupport) =>
   event.issue_link && isStaffOrSupport;
 
 export const EventDetailsTable: FunctionComponent<EventDetailsTableProps> = ({
-  translate,
   event,
   isStaffOrSupport,
 }) => (

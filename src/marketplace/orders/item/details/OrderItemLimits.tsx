@@ -1,13 +1,13 @@
-import { translate, TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { Limits } from '@waldur/marketplace/common/registry';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
-interface OfferingProps extends TranslateProps {
+interface OfferingProps {
   components: OfferingComponent[];
   limits: Limits;
 }
 
-export const OrderItemLimits = withTranslation((props: OfferingProps) => {
+export const OrderItemLimits = (props: OfferingProps) => {
   return (
     <>
       <table className="table table-bordered">
@@ -35,4 +35,4 @@ export const OrderItemLimits = withTranslation((props: OfferingProps) => {
       </table>
     </>
   );
-});
+};

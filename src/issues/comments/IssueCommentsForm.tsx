@@ -7,25 +7,24 @@ import {
   SubmitButton,
   TextField,
 } from '@waldur/form';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
 import * as constants from './constants';
 import './IssueCommentsForm.scss';
 
-interface PureIssueCommentsFormProps extends TranslateProps, InjectedFormProps {
+interface PureIssueCommentsFormProps extends InjectedFormProps {
   submitting: boolean;
   uiDisabled: boolean;
   onCancel(): void;
   onSubmit(data: any): void;
 }
 
-export const PureIssueCommentsForm: FunctionComponent<PureIssueCommentsFormProps> =
+export const IssueCommentsForm: FunctionComponent<PureIssueCommentsFormProps> =
   (props) => {
     const {
       submitting,
       uiDisabled,
       pristine,
-      translate,
       onCancel,
       handleSubmit,
       onSubmit,
@@ -49,5 +48,3 @@ export const PureIssueCommentsForm: FunctionComponent<PureIssueCommentsFormProps
       </div>
     );
   };
-
-export const IssueCommentsForm = withTranslation(PureIssueCommentsForm);

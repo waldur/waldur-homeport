@@ -1,7 +1,7 @@
 import { AzureSQLServer } from '@waldur/azure/common/types';
 import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { UserPassword } from '@waldur/resource/UserPassword';
 
@@ -16,10 +16,10 @@ const ValueWithTooltip = ({ value, tooltip }) => (
   </>
 );
 
-const PureAzureSQLServerSummary = (
+export const AzureSQLServerSummary = (
   props: ResourceSummaryProps<AzureSQLServer>,
 ) => {
-  const { translate, resource } = props;
+  const { resource } = props;
   return (
     <>
       <PureAzureResourceSummary {...props} />
@@ -52,5 +52,3 @@ const PureAzureSQLServerSummary = (
     </>
   );
 };
-
-export const AzureSQLServerSummary = withTranslation(PureAzureSQLServerSummary);

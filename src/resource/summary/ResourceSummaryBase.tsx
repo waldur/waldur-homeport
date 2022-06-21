@@ -1,5 +1,5 @@
 import { ENV } from '@waldur/configs/default';
-import { translate, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Resource } from '@waldur/resource/types';
 
@@ -8,7 +8,7 @@ import { ErrorMessageField } from './ErrorMessageField';
 import { Field } from './Field';
 import { ResourceSummaryProps } from './types';
 
-export function PureResourceSummaryBase<T extends Resource = any>(
+export function ResourceSummaryBase<T extends Resource = any>(
   props: ResourceSummaryProps<T>,
 ) {
   const { resource } = props;
@@ -57,5 +57,3 @@ export function PureResourceSummaryBase<T extends Resource = any>(
     </>
   );
 }
-
-export const ResourceSummaryBase = withTranslation(PureResourceSummaryBase);

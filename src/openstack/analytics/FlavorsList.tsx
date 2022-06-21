@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { createFetcher } from '@waldur/table/api';
 import { Table, connectTable } from '@waldur/table/index';
@@ -18,7 +19,6 @@ const NumOfCreatedInstancesField = ({ row }) => (
 );
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

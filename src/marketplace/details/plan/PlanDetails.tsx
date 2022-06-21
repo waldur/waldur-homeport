@@ -1,11 +1,11 @@
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
 import { OrderItemDetailsField } from '@waldur/marketplace/orders/item/details/OrderItemDetailsField';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { Offering } from '@waldur/marketplace/types';
 
-interface PlanDetailsProps extends TranslateProps {
+interface PlanDetailsProps {
   orderItem: OrderItemResponse;
   offering: Offering;
   limits?: string[];
@@ -14,18 +14,18 @@ interface PlanDetailsProps extends TranslateProps {
 
 const renderValue = (value) => (value ? value : <>&mdash;</>);
 
-export const PlanDetails = withTranslation((props: PlanDetailsProps) => {
+export const PlanDetails = (props: PlanDetailsProps) => {
   const { plan_name, plan_description } = props.orderItem;
   if (!plan_name) {
     return null;
   }
   return (
     <>
-      <OrderItemDetailsField label={props.translate('Name')}>
+      <OrderItemDetailsField label={translate('Name')}>
         {renderValue(plan_name)}
       </OrderItemDetailsField>
       {plan_description ? (
-        <OrderItemDetailsField label={props.translate('Description')}>
+        <OrderItemDetailsField label={translate('Description')}>
           <PlanDescriptionButton
             className="btn btn-sm btn-secondary"
             planDescription={plan_description}
@@ -43,4 +43,4 @@ export const PlanDetails = withTranslation((props: PlanDetailsProps) => {
       </OrderItemDetailsField>
     </>
   );
-});
+};

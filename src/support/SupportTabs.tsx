@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { IssueCommentsContainer } from '@waldur/issues/comments/IssueCommentsContainer';
 import { Issue } from '@waldur/issues/list/types';
 import { ResourceOrderItems } from '@waldur/marketplace/orders/item/list/ResourceOrderItems';
@@ -23,7 +23,7 @@ interface StateProps {
   showComments: boolean;
 }
 
-type SupportTabsProps = OwnProps & TranslateProps & StateProps;
+type SupportTabsProps = OwnProps & StateProps;
 
 export const PureSupportTabs: React.FC<SupportTabsProps> = (props) => {
   return (
@@ -33,25 +33,25 @@ export const PureSupportTabs: React.FC<SupportTabsProps> = (props) => {
       defaultActiveKey="summary"
       id="offeringSummary"
     >
-      <Tab title={props.translate('Summary')} eventKey="summary">
+      <Tab title={translate('Summary')} eventKey="summary">
         <Card>
           <SupportSummaryTab issue={props.issue} summary={props.summary} />
         </Card>
       </Tab>
-      <Tab title={props.translate('Audit log')} eventKey="events">
+      <Tab title={translate('Audit log')} eventKey="events">
         <Card>
           <SupportEvents resource={props.resource} />
         </Card>
       </Tab>
       {props.showComments && (
-        <Tab title={props.translate('Comments')} eventKey="comments">
+        <Tab title={translate('Comments')} eventKey="comments">
           <Card>
             <IssueCommentsContainer issue={props.issue} renderHeader={false} />
           </Card>
         </Tab>
       )}
       {props.resource.uuid && (
-        <Tab title={props.translate('Order items')} eventKey="order-items">
+        <Tab title={translate('Order items')} eventKey="order-items">
           <Card>
             <ResourceOrderItems resource_uuid={props.resource.uuid} />
           </Card>
@@ -69,6 +69,6 @@ const connector = connect<StateProps, {}, OwnProps>(
   }),
 );
 
-export const SupportTabs = withTranslation(
-  connector(PureSupportTabs),
+export const SupportTabs = connector(
+  PureSupportTabs,
 ) as React.ComponentType<OwnProps>;

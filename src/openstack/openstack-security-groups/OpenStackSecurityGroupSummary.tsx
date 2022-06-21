@@ -1,9 +1,9 @@
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import {
   Field,
   ResourceSummaryProps,
-  PureResourceSummaryBase,
+  ResourceSummaryBase,
 } from '@waldur/resource/summary';
 
 const formatTenant = (props) => (
@@ -15,16 +15,11 @@ const formatTenant = (props) => (
   />
 );
 
-const PureOpenStackSecurityGroupSummary = (props: ResourceSummaryProps) => {
-  const { translate } = props;
+export const OpenStackSecurityGroupSummary = (props: ResourceSummaryProps) => {
   return (
     <span>
-      <PureResourceSummaryBase {...props} />
+      <ResourceSummaryBase {...props} />
       <Field label={translate('Tenant')} value={formatTenant(props.resource)} />
     </span>
   );
 };
-
-export const OpenStackSecurityGroupSummary = withTranslation(
-  PureOpenStackSecurityGroupSummary,
-);

@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { getById } from '@waldur/core/api';
+import { translate } from '@waldur/i18n';
 import { VirtualMachine, InternalIP } from '@waldur/resource/types';
 import { Table, connectTable } from '@waldur/table';
 
@@ -9,7 +10,6 @@ import { SetAllowedAddressPairsButton } from './SetAllowedAddressPairsButton';
 import { formatAddressList } from './utils';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table<InternalIP>
       {...props}

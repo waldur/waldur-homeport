@@ -20,7 +20,7 @@ const checkDuplicate = (value, props) =>
   props.customer?.projects.find(
     (project) => project.name === value && project.uuid !== props.project_uuid,
   )
-    ? props.translate('Name is duplicated. Choose other name.')
+    ? translate('Name is duplicated. Choose other name.')
     : undefined;
 
 const validateProjectName = (value, _, props) =>

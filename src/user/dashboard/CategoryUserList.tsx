@@ -2,12 +2,12 @@ import { Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace-checklist/api';
 
 import { CategoryUserCard } from './CategoryUserCard';
 
-export const CategoryUserList = withTranslation(() => {
+export const CategoryUserList = () => {
   const { loading, value: categories, error } = useAsync(getCategories, []);
 
   if (loading) {
@@ -31,4 +31,4 @@ export const CategoryUserList = withTranslation(() => {
       )}
     </Row>
   );
-});
+};

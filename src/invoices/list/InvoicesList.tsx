@@ -6,6 +6,7 @@ import { getFormValues } from 'redux-form';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
+import { translate } from '@waldur/i18n';
 import { INVOICES_TABLE } from '@waldur/invoices/constants';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { MarkAsPaidButton } from '@waldur/invoices/list/MarkAsPaidButton';
@@ -20,7 +21,6 @@ import { InvoicesFilter } from './InvoicesFilter';
 import { SendNotificationButton } from './SendNotificationButton';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   const columns = [
     {
       title: translate('Invoice number'),

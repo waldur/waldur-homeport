@@ -1,8 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { deleteEntity } from '@waldur/table/actions';
@@ -36,7 +35,7 @@ interface KeyRemoveButtonState {
 }
 
 class KeyRemoveButtonComponent extends Component<
-  OwnProps & DispatchProps & TranslateProps,
+  OwnProps & DispatchProps,
   KeyRemoveButtonState
 > {
   state = {
@@ -48,9 +47,9 @@ class KeyRemoveButtonComponent extends Component<
       this.setState({ removing: true });
       await removeKey(id);
       this.props.removeEntity(id);
-      this.props.showSuccess(this.props.translate('SSH key has been removed.'));
+      this.props.showSuccess(translate('SSH key has been removed.'));
     } catch (e) {
-      this.props.showError(this.props.translate('Unable to remove SSH key.'));
+      this.props.showError(translate('Unable to remove SSH key.'));
     }
   }
 
@@ -58,7 +57,7 @@ class KeyRemoveButtonComponent extends Component<
     return (
       <>
         <ActionButton
-          title={this.props.translate('Remove')}
+          title={translate('Remove')}
           action={() =>
             this.props.showConfirmDialog(() => this.removeKey(this.props.uuid))
           }
@@ -70,9 +69,6 @@ class KeyRemoveButtonComponent extends Component<
   }
 }
 
-const enhance = compose(
-  connect<{}, DispatchProps, OwnProps>(null, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = connect<{}, DispatchProps, OwnProps>(null, mapDispatchToProps);
 
 export const KeyRemoveButton = enhance(KeyRemoveButtonComponent);

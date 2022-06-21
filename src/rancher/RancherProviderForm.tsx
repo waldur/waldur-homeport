@@ -7,11 +7,11 @@ import {
   SecretField,
   TextField,
 } from '@waldur/form';
+import { translate } from '@waldur/i18n';
 
 export const RancherProviderForm: FunctionComponent<{
-  translate;
   container;
-}> = ({ translate, container }) => (
+}> = ({ container }) => (
   <FormContainer {...container}>
     <StringField
       name="backend_url"

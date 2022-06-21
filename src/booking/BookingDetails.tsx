@@ -1,9 +1,8 @@
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
-import { withTranslation } from '@waldur/i18n';
 import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 import { OfferingConfigurationDetails } from '@waldur/support/OfferingConfigurationDetails';
 
-const PureBookingDetails = (props: OrderItemDetailsProps) => {
+export const BookingDetails = (props: OrderItemDetailsProps) => {
   const schedules = props.orderItem.attributes.schedules;
   return (
     <>
@@ -12,5 +11,3 @@ const PureBookingDetails = (props: OrderItemDetailsProps) => {
     </>
   );
 };
-
-export const BookingDetails = withTranslation(PureBookingDetails);

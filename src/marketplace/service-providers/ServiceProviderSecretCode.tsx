@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { SecretValueField } from '@waldur/marketplace/SecretValueField';
 import { ServiceProvider } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
@@ -12,7 +12,7 @@ import './ServiceProviderSecretCode.scss';
 import * as actions from './store/actions';
 import * as selectors from './store/selectors';
 
-interface ServiceProviderSecretCodeProps extends TranslateProps {
+interface ServiceProviderSecretCodeProps {
   serviceProvider: ServiceProvider;
   secretCode: {
     code: string;
@@ -38,14 +38,14 @@ class PureServiceProviderSecretCode extends Component<ServiceProviderSecretCodeP
     return (
       <div className="service-provider-secret-code mt-1">
         <div className="service-provider-secret-code__label">
-          {this.props.translate('API secret code:')}
+          {translate('API secret code:')}
         </div>
         <div className="service-provider-secret-code__value ms-1">
           <SecretValueField value={this.props.secretCode.code} />
         </div>
         <div className="service-provider-secret-code__generate-btn ms-1">
           <ActionButton
-            title={this.props.translate('Regenerate')}
+            title={translate('Regenerate')}
             action={this.props.showSecretCodeRegenerateConfirm}
             className="btn btn-primary"
             icon={

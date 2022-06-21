@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { withTranslation } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
@@ -19,9 +17,6 @@ const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
 });
 
-const enhance = compose(
-  connect<StateProps, {}, OwnProps>(mapStateToProps),
-  withTranslation,
-);
+const enhance = connect<StateProps, {}, OwnProps>(mapStateToProps);
 
 export const OrderSummary = enhance(PureShoppingCartSidebar);

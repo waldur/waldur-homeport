@@ -7,11 +7,9 @@ import {
   NumberField,
   SecretField,
 } from '@waldur/form';
+import { translate } from '@waldur/i18n';
 
-export const VMwareForm: FunctionComponent<{ translate; container }> = ({
-  translate,
-  container,
-}) => (
+export const VMwareForm: FunctionComponent<{ container }> = ({ container }) => (
   <FormContainer {...container}>
     <StringField
       name="backend_url"

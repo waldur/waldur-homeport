@@ -1,30 +1,26 @@
 import { Col, Row } from 'react-bootstrap';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { CategoriesListType } from '@waldur/marketplace/types';
 
 import { CategoryCard } from './CategoryCard';
 
-interface CategoriesListProps extends TranslateProps, CategoriesListType {}
-
-export const CategoriesList = withTranslation((props: CategoriesListProps) => {
+export const CategoriesList = (props: CategoriesListType) => {
   if (props.loading) {
     return <LoadingSpinner />;
   }
 
   if (!props.loaded) {
     return (
-      <h3 className="text-center">
-        {props.translate('Unable to load categories.')}
-      </h3>
+      <h3 className="text-center">{translate('Unable to load categories.')}</h3>
     );
   }
 
   if (!props.items) {
     return (
       <h3 className="text-center">
-        {props.translate('There are no categories in marketplace yet.')}
+        {translate('There are no categories in marketplace yet.')}
       </h3>
     );
   }
@@ -38,4 +34,4 @@ export const CategoriesList = withTranslation((props: CategoriesListProps) => {
       ))}
     </Row>
   );
-});
+};

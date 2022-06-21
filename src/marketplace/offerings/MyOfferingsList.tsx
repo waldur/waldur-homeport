@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
-import { withTranslation } from '@waldur/i18n';
 import { PUBLIC_OFFERINGS_FILTER_FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 import { RootState } from '@waldur/store/reducers';
 import { connectTable } from '@waldur/table';
@@ -37,7 +36,6 @@ const enhance = compose(
     table: 'marketplace-my-offerings',
     mapPropsToFilter,
   }),
-  withTranslation,
 );
 
 export const MyOfferingsList = enhance(

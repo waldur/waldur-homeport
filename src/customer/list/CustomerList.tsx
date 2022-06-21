@@ -5,7 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDate } from '@waldur/core/dateUtils';
-import { withTranslation, translate } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -169,10 +169,6 @@ const mapStateToProps = (state: RootState) => ({
   customerListFilter: getFormValues('customerListFilter')(state),
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  connectTable(TableOptions),
-  withTranslation,
-);
+const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const CustomerList = enhance(TableComponent) as React.ComponentType<any>;

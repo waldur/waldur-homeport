@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
+import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

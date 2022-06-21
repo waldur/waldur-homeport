@@ -2,10 +2,9 @@ import { Component } from 'react';
 import { Card } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { IssueReload } from '@waldur/issues/IssueReload';
 import { RootState } from '@waldur/store/reducers';
 
@@ -15,7 +14,7 @@ import { IssueAttachmentsList } from './IssueAttachmentsList';
 import { getAttachments, getUploading, getIsLoading } from './selectors';
 import { Attachment } from './types';
 
-interface PureIssueAttachmentsContainerProps extends TranslateProps {
+interface PureIssueAttachmentsContainerProps {
   getAttachments(): void;
   putAttachments(files: File[]): void;
   issue: { [key: string]: string };
@@ -47,7 +46,7 @@ export class PureIssueAttachmentsContainer extends Component<PureIssueAttachment
   openDownloadModal = () => this.dropzoneNode.open();
 
   render() {
-    const { attachments, loading, uploading, issue, translate } = this.props;
+    const { attachments, loading, uploading, issue } = this.props;
     const { dropzoneActive } = this.state;
 
     return (
@@ -115,9 +114,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(actions.issueAttachmentsPut(ownProps.issue.url, files)),
 });
 
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
 
 export const IssueAttachmentsContainer = enhance(PureIssueAttachmentsContainer);

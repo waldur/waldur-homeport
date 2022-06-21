@@ -1,13 +1,12 @@
 import React from 'react';
 import { Col, Form } from 'react-bootstrap';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { StepsList } from '@waldur/marketplace/common/StepsList';
 
 import { WizardButtons } from './WizardButtons';
 import { WizardTabs } from './WizardTabs';
 
-interface WizardProps extends TranslateProps {
+interface WizardProps {
   steps: string[];
   step: string;
   setStep?(step: string): void;
@@ -22,7 +21,7 @@ interface WizardProps extends TranslateProps {
   getTabLabel(tab: string): string;
 }
 
-export const Wizard = withTranslation((props: WizardProps) => (
+export const Wizard = (props: WizardProps) => (
   <>
     <StepsList
       choices={props.steps}
@@ -50,4 +49,4 @@ export const Wizard = withTranslation((props: WizardProps) => (
       </Col>
     </Form.Group>
   </>
-));
+);

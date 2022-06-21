@@ -1,8 +1,6 @@
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { withTranslation } from '@waldur/i18n';
 import {
   getOfferingTypes,
   showOfferingOptions,
@@ -58,9 +56,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(openModalDialog(ServiceSettingsDetailsDialog, { size: 'lg' })),
 });
 
-const connector = compose(
-  withTranslation,
-  connect(mapStateToProps, mapDispatchToProps),
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 export const ManagementStepContainer = connector(ManagementStep);

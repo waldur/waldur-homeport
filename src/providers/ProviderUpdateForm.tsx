@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form';
 
 import { FormContainer, FieldError, SubmitButton } from '@waldur/form';
-import { TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
 import { ProviderFormBody } from './ProviderFormBody';
 import { ProviderNameField } from './ProviderNameField';
@@ -19,16 +19,13 @@ export const PureProviderUpdateForm = (props) => {
       <ProviderFormBody {...props} container={container} />
       <FieldError error={props.error} />
       <div className="text-center">
-        <SubmitButton
-          submitting={props.submitting}
-          label={props.translate('Save')}
-        />
+        <SubmitButton submitting={props.submitting} label={translate('Save')} />
       </div>
     </form>
   );
 };
 
-interface OwnProps<FormData = {}> extends TranslateProps {
+interface OwnProps<FormData = {}> {
   updateProvider(data: FormData): void;
 }
 

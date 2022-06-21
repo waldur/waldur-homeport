@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { withTranslation } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
 import { OrderDetails } from './OrderDetails';
@@ -18,9 +16,6 @@ const mapDispatchToProps = {
   rejectOrder: actions.rejectOrder,
 };
 
-const enhance = compose(
-  withTranslation,
-  connect(mapStateToProps, mapDispatchToProps),
-);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
 
 export const OrderDetailsContainer = enhance(OrderDetails);

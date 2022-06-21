@@ -2,11 +2,11 @@ import { FunctionComponent } from 'react';
 
 import { StringField, SecretField, FormContainer } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { translate } from '@waldur/i18n';
 
 export const OpenStackTenantForm: FunctionComponent<{
-  translate;
   container;
-}> = ({ translate, container }) => (
+}> = ({ container }) => (
   <FormContainer {...container}>
     <StringField
       name="backend_url"

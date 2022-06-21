@@ -3,7 +3,6 @@ import React from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import { TranslateProps } from '@waldur/i18n/types';
 
 import './Table.scss';
 import { TableBody } from './TableBody';
@@ -16,7 +15,7 @@ import { TableQuery } from './TableQuery';
 import { TableRefreshButton } from './TableRefreshButton';
 import { Column, TableState, Sorting } from './types';
 
-export interface TableProps<RowType = any> extends TranslateProps, TableState {
+export interface TableProps<RowType = any> extends TableState {
   rows: any[];
   fetch: () => void;
   gotoPage?: (page: number) => void;
@@ -132,7 +131,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
     if (this.props.error) {
       return (
         <div>
-          <p>{this.props.translate('Unable to fetch data.')}</p>
+          <p>{translate('Unable to fetch data.')}</p>
           <TableRefreshButton {...this.props} />
         </div>
       );

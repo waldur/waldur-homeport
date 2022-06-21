@@ -96,7 +96,6 @@ const SupportStatusField = ({ row }) => {
 };
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

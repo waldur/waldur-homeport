@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { Tip } from '@waldur/core/Tooltip';
-import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
@@ -10,7 +9,7 @@ import { UserDetails, User } from '@waldur/workspace/types';
 
 import * as actions from './actions';
 
-interface UserActivateButtonProps extends TranslateProps {
+interface UserActivateButtonProps {
   user: User;
   row: UserDetails;
   onClick: () => void;
@@ -30,9 +29,7 @@ const PureUserActivateButton = (props: UserActivateButtonProps) =>
     >
       <ActionButton
         title={
-          props.row.is_active
-            ? props.translate('Deactivate')
-            : props.translate('Activate')
+          props.row.is_active ? translate('Deactivate') : translate('Activate')
         }
         action={props.onClick}
       />
@@ -54,9 +51,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-const enhance = compose(
-  connect(mapStatToProps, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = connect(mapStatToProps, mapDispatchToProps);
 
 export const UserActivateButton = enhance(PureUserActivateButton);

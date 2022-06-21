@@ -1,12 +1,12 @@
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import {
   Field,
   ResourceSummaryProps,
   PureVirtualMachineSummary,
 } from '@waldur/resource/summary';
 
-const PureDigitalOceanDropletSummary = (props: ResourceSummaryProps) => {
-  const { translate, resource } = props;
+export const DigitalOceanDropletSummary = (props: ResourceSummaryProps) => {
+  const { resource } = props;
   return (
     <span>
       <PureVirtualMachineSummary {...props} />
@@ -14,7 +14,3 @@ const PureDigitalOceanDropletSummary = (props: ResourceSummaryProps) => {
     </span>
   );
 };
-
-export const DigitalOceanDropletSummary = withTranslation(
-  PureDigitalOceanDropletSummary,
-);

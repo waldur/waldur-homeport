@@ -52,11 +52,7 @@ export const ServiceSettingsDetailsDialog: FunctionComponent = () => {
       ) : state.error ? (
         <h3>{translate('Unable to load provider details.')}</h3>
       ) : !state.value ? null : (
-        <ProviderUpdateForm
-          {...state.value}
-          updateProvider={updateProvider}
-          translate={translate}
-        />
+        <ProviderUpdateForm {...state.value} updateProvider={updateProvider} />
       )}
     </ModalDialog>
   );

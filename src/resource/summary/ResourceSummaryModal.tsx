@@ -1,9 +1,8 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { BaseResource } from '@waldur/resource/types';
@@ -12,7 +11,7 @@ import * as actions from './actions';
 import { ResourceSummary } from './ResourceSummary';
 import { getResource, getLoading } from './selectors';
 
-interface PureResourceSummaryModalProps extends TranslateProps {
+interface PureResourceSummaryModalProps {
   loading: boolean;
   resolve: {
     url: string;
@@ -27,7 +26,7 @@ export class PureResourceSummaryModal extends Component<PureResourceSummaryModal
   }
 
   render() {
-    const { resource, translate, loading } = this.props;
+    const { resource, loading } = this.props;
     return (
       <ModalDialog title={translate('Details')} footer={<CloseDialogButton />}>
         {loading ? (
@@ -50,9 +49,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(actions.summaryResourceFetch(ownProps.resolve.url)),
 });
 
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
 
 export const ResourceSummaryModal = enhance(PureResourceSummaryModal);

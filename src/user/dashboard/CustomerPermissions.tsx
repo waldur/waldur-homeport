@@ -1,13 +1,14 @@
 import { FunctionComponent } from 'react';
 
 import { CustomerLink } from '@waldur/customer/CustomerLink';
+import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { filterByUser } from '@waldur/workspace/selectors';
 
 import CustomerCreateButton from './CustomerCreateButton';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate, filterColumns } = props;
+  const { filterColumns } = props;
   return (
     <Table
       {...props}

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Link } from '@waldur/core/Link';
+import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
@@ -15,7 +16,6 @@ interface OwnProps {
 }
 
 const TableComponent = (props: TableProps<Catalog> & OwnProps) => {
-  const { translate } = props;
   return (
     <Table<Catalog>
       {...props}

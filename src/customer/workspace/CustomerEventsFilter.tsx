@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 
-import { translate, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ToogleButtonFilter } from '@waldur/table/ToggleButtonFilter';
 
 const PureCustomerEventsFilter: FunctionComponent = () => (
@@ -38,7 +38,6 @@ const enhance = compose(
     },
     destroyOnUnmount: false,
   }),
-  withTranslation,
 );
 
 export const CustomerEventsFilter = enhance(PureCustomerEventsFilter);

@@ -1,10 +1,10 @@
 import { getUUID } from '@waldur/core/utils';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import {
   Field,
   ResourceSummaryProps,
-  PureResourceSummaryBase,
+  ResourceSummaryBase,
 } from '@waldur/resource/summary';
 import { formatDefault } from '@waldur/resource/utils';
 
@@ -19,11 +19,13 @@ const formatTenant = (props) => (
   />
 );
 
-const PureOpenStackNetworkSummary = (props: ResourceSummaryProps<Network>) => {
-  const { translate, resource } = props;
+export const OpenStackNetworkSummary = (
+  props: ResourceSummaryProps<Network>,
+) => {
+  const { resource } = props;
   return (
     <span>
-      <PureResourceSummaryBase {...props} />
+      <ResourceSummaryBase {...props} />
       <Field label={translate('Tenant')} value={formatTenant(resource)} />
       <Field
         label={translate('Type')}
@@ -42,7 +44,3 @@ const PureOpenStackNetworkSummary = (props: ResourceSummaryProps<Network>) => {
     </span>
   );
 };
-
-export const OpenStackNetworkSummary = withTranslation(
-  PureOpenStackNetworkSummary,
-);

@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 
-import { translate } from '@waldur/i18n';
 import { ordinaryUser, staffUser } from '@waldur/user/support/fixtures';
 import { TermsOfService } from '@waldur/user/support/TermsOfService';
 import { PureUserEditForm } from '@waldur/user/support/UserEditForm';
@@ -8,7 +7,6 @@ import { PureUserEditForm } from '@waldur/user/support/UserEditForm';
 const renderForm = (props) =>
   shallow(
     <PureUserEditForm
-      translate={translate}
       handleSubmit={jest.fn()}
       showUserRemoval={jest.fn()}
       {...props}

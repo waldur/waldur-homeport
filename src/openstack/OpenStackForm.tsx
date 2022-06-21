@@ -3,9 +3,9 @@ import { FunctionComponent } from 'react';
 import { required } from '@waldur/core/validators';
 import { StringField, SecretField, FormContainer } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { translate } from '@waldur/i18n';
 
-export const OpenStackForm: FunctionComponent<{ translate; container }> = ({
-  translate,
+export const OpenStackForm: FunctionComponent<{ container }> = ({
   container,
 }) => (
   <FormContainer {...container}>

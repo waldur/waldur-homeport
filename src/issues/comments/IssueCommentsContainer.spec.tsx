@@ -1,7 +1,6 @@
 import { shallow } from 'enzyme';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
 import { LoadingOverlay } from '@waldur/issues/comments/LoadingOverlay';
 
 import { comment, issue } from './fixture';
@@ -10,7 +9,6 @@ import { IssueCommentsList } from './IssueCommentsList';
 
 const initialProps = {
   comments: [comment],
-  translate,
   issue,
   fetchComments: () => null,
   setIssue: (x) => x,

@@ -2849,6 +2849,8 @@ msgid "Explore {deployment} service catalog"
 msgstr ""
 
 #: src/table/ExportDropdown.tsx
+#: src/table/TableButtons.tsx
+#: src/table/TableDropdowns.tsx
 #: src/table/TableExportButton.tsx
 msgid "Export"
 msgstr ""
@@ -6672,6 +6674,7 @@ msgstr ""
 #: src/marketplace/resources/actions/ResourceActions.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/resource/ResourceRefreshButton.tsx
+#: src/table/TableButtons.tsx
 #: src/table/TableDropdowns.tsx
 #: src/table/TableRefreshButton.tsx
 msgid "Refresh"

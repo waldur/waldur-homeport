@@ -1,8 +1,6 @@
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
-import { withTranslation } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
 import { CustomerLogoUpdate } from './CustomerLogoUpdate';
@@ -21,9 +19,6 @@ const mapDispatchToProps = (dispatch, props) => ({
   removeLogo: () => actions.removeLogo({ customer: props.customer }, dispatch),
 });
 
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
 
 export const CustomerLogoUpdateContainer = enhance(CustomerLogoUpdate);

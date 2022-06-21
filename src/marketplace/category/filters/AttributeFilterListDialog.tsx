@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { ResetFormButton } from '@waldur/form/ResetFormButton';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
@@ -9,15 +9,13 @@ import { MARKETPLACE_FILTER_FORM } from '../store/constants';
 
 import { AttributeFilterListContainer } from './AttributeFilterListContainer';
 
-const PureAttributeFilterListDialog: FunctionComponent<TranslateProps> = (
-  props,
-) => (
+export const AttributeFilterListDialog: FunctionComponent<{}> = () => (
   <ModalDialog
-    title={props.translate('Attributes filter')}
+    title={translate('Attributes filter')}
     footer={[
       <CloseDialogButton
         key={1}
-        label={props.translate('Apply')}
+        label={translate('Apply')}
         className="btn btn-primary"
       />,
       <ResetFormButton key={2} formName={MARKETPLACE_FILTER_FORM} />,
@@ -26,8 +24,4 @@ const PureAttributeFilterListDialog: FunctionComponent<TranslateProps> = (
   >
     <AttributeFilterListContainer />
   </ModalDialog>
-);
-
-export const AttributeFilterListDialog = withTranslation(
-  PureAttributeFilterListDialog,
 );

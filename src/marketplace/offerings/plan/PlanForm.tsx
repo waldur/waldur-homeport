@@ -5,7 +5,7 @@ import { Field, FormSection } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FormFieldsContext, FormLayoutContext } from '@waldur/form/context';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { WysiwygEditor } from '@waldur/marketplace/offerings/create/WysiwygEditor';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
@@ -17,7 +17,7 @@ import { PlanComponents } from './PlanComponents';
 import { PriceField } from './PriceField';
 import { connectPlanComponents } from './utils';
 
-interface PlanFormProps extends TranslateProps {
+interface PlanFormProps {
   archived: boolean;
   components: OfferingComponent[];
   limits: string[];
@@ -32,7 +32,7 @@ const PlanDescriptionField: FunctionComponent = () => (
   <Field name="description" component={WysiwygEditor} />
 );
 
-const enhance = compose(connectPlanComponents, withTranslation);
+const enhance = compose(connectPlanComponents);
 
 export const PlanForm = enhance((props: PlanFormProps) => {
   const { layout } = useContext(FormLayoutContext);
@@ -44,16 +44,16 @@ export const PlanForm = enhance((props: PlanFormProps) => {
   return (
     <FormFieldsContext.Provider value={fieldsClassNames}>
       <FormSection name={props.plan}>
-        <FormGroup label={props.translate('Name')} required={true}>
+        <FormGroup label={translate('Name')} required={true}>
           <PlanNameField />
         </FormGroup>
-        <FormGroup label={props.translate('Price')}>
+        <FormGroup label={translate('Price')}>
           <PriceField plan={props.plan} />
         </FormGroup>
-        <FormGroup label={props.translate('Billing period')} required={true}>
+        <FormGroup label={translate('Billing period')} required={true}>
           <PlanBillingPeriodField />
         </FormGroup>
-        <FormGroup label={props.translate('Description')}>
+        <FormGroup label={translate('Description')}>
           <PlanDescriptionField />
         </FormGroup>
         <ArticleCodeField />

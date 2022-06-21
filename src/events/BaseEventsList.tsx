@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import eventsRegistry from '@waldur/events/registry';
+import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 
@@ -12,7 +13,6 @@ import { ExpandableEventDetails } from './ExpandableEventDetails';
 const EventDateField = ({ row }) => <>{formatDateTime(row.created)}</>;
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

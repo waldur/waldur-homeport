@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -12,7 +12,6 @@ import { PlanUsageButton } from './PlanUsageButton';
 import { PlanUsageRowProps } from './types';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   const columns = [
     {
       title: translate('Service provider'),
@@ -95,11 +94,7 @@ const mapStateToProps = (state: RootState) => ({
   filter: getFormValues('PlanUsageFilter')(state),
 });
 
-const connector = compose(
-  connect(mapStateToProps),
-  connectTable(TableOptions),
-  withTranslation,
-);
+const connector = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const PlanUsageList = connector(
   TableComponent,

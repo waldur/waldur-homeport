@@ -7,7 +7,6 @@ import { PureIssueCommentsFormMainContainer } from './IssueCommentsFormMainConta
 
 const initialProps = {
   formId: constants.MAIN_FORM_ID,
-  translate,
 };
 const renderWrapper = (props?) =>
   shallow(<PureIssueCommentsFormMainContainer {...initialProps} {...props} />);

@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react';
 
-import { TranslateProps } from '@waldur/i18n/types';
 import { SharedButton } from '@waldur/marketplace/offerings/service-providers/shared/Button';
 
-interface GridRefreshButtonProps extends TranslateProps {
+interface GridRefreshButtonProps {
   fetch: () => void;
 }
 

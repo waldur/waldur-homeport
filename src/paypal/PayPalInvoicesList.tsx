@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
+import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -15,7 +16,6 @@ import { InvoicesFilter } from './InvoicesFilter';
 import { InvoiceStateIndicator } from './InvoiceStateIndicator';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

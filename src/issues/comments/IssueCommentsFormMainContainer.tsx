@@ -2,13 +2,13 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
 import * as actions from './actions';
 import { IssueCommentsFormContainer } from './IssueCommentsFormContainer';
 import { getCommentFormIsOpen, getIsUiDisabled } from './selectors';
 
-interface PureIssueCommentsFomrMainContainerProps extends TranslateProps {
+interface PureIssueCommentsFomrMainContainerProps {
   formId: string;
   opened: boolean;
   uiDisabled: boolean;
@@ -17,7 +17,7 @@ interface PureIssueCommentsFomrMainContainerProps extends TranslateProps {
 
 export const PureIssueCommentsFormMainContainer: FunctionComponent<PureIssueCommentsFomrMainContainerProps> =
   (props) => {
-    const { opened, toggle, formId, uiDisabled, translate } = props;
+    const { opened, toggle, formId, uiDisabled } = props;
 
     return (
       <div>
@@ -50,10 +50,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(actions.issueCommentsFormToggle(ownProps.formId)),
 });
 
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = compose(connect(mapStateToProps, mapDispatchToProps));
 
 export const IssueCommentsFormMainContainer = enhance(
   PureIssueCommentsFormMainContainer,

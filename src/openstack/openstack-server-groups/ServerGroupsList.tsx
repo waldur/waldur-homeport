@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 
+import { translate } from '@waldur/i18n';
 import { CreateServerGroupAction } from '@waldur/openstack/openstack-tenant/actions/CreateServerGroupAction';
 import { PullServerGroupsAction } from '@waldur/openstack/openstack-tenant/actions/PullServerGroupsAction';
 import { ServerGroupType } from '@waldur/openstack/types';
@@ -17,7 +18,6 @@ interface ResourceRules extends Resource {
 const ResourcePolicy = (resource: ResourceRules) => resource.policy;
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

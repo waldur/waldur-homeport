@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 
+import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

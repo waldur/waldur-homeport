@@ -1,10 +1,9 @@
 import React from 'react';
 import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { ENV } from '@waldur/configs/default';
-import { formatJsxTemplate, translate, withTranslation } from '@waldur/i18n';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { getNativeNameVisible, getConfig } from '@waldur/store/config';
 import {
   fieldIsVisible,
@@ -136,9 +135,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps, mergeProps),
-  withTranslation,
-);
+const enhance = connect(mapStateToProps, mapDispatchToProps, mergeProps);
 
 export const UserEditContainer = enhance(UserUpdateComponent);

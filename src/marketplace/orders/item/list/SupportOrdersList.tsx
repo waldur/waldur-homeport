@@ -5,7 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import {
   SUPPORT_ORDERS_LIST_FILTER_FORM_ID,
   TABLE_SUPPORT_ORDERS,
@@ -16,7 +16,6 @@ import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   const columns = [
     {
       title: translate('Created at'),
@@ -116,11 +115,7 @@ const mapStateToProps = (state: RootState) => ({
   filter: getFormValues(SUPPORT_ORDERS_LIST_FILTER_FORM_ID)(state) as FormData,
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  connectTable(TableOptions),
-  withTranslation,
-);
+const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const SupportOrdersList = enhance(
   TableComponent,

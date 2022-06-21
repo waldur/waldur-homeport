@@ -1,15 +1,13 @@
 import { formatFilesize } from '@waldur/core/utils';
-import { withTranslation } from '@waldur/i18n';
-import { Field, PureResourceSummaryBase } from '@waldur/resource/summary';
+import { translate } from '@waldur/i18n';
+import { Field, ResourceSummaryBase } from '@waldur/resource/summary';
 
-const PureVMwareDiskSummary = (props) => {
-  const { translate, resource } = props;
+export const VMwareDiskSummary = (props) => {
+  const { resource } = props;
   return (
     <>
-      <PureResourceSummaryBase {...props} />
+      <ResourceSummaryBase {...props} />
       <Field label={translate('Size')} value={formatFilesize(resource.size)} />
     </>
   );
 };
-
-export const VMwareDiskSummary = withTranslation(PureVMwareDiskSummary);

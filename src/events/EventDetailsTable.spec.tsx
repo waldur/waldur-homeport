@@ -1,7 +1,5 @@
 import { mount, ReactWrapper } from 'enzyme';
 
-import { translate } from '@waldur/i18n';
-
 import { EventDetailsTable } from './EventDetailsTable';
 import { event } from './fixtures';
 
@@ -12,14 +10,7 @@ jest.mock('@waldur/core/Link', () => {
 });
 
 const renderTable = (props?) =>
-  mount(
-    <EventDetailsTable
-      event={event}
-      translate={translate}
-      isStaffOrSupport={true}
-      {...props}
-    />,
-  );
+  mount(<EventDetailsTable event={event} isStaffOrSupport={true} {...props} />);
 
 const getRowLabels = (wrapper: ReactWrapper) =>
   wrapper.find('tr').map((tr) => tr.find('td').first().text());

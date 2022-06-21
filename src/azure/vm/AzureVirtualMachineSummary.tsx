@@ -1,5 +1,5 @@
 import { AzureVirtualMachine } from '@waldur/azure/common/types';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { formatIpList } from '@waldur/resource/summary/VirtualMachineSummary';
 import { UserPassword } from '@waldur/resource/UserPassword';
@@ -7,10 +7,10 @@ import { formatSummary } from '@waldur/resource/utils';
 
 import { PureAzureResourceSummary } from '../AzureResourceSummary';
 
-const PureAzureVirtualMachineSummary = (
+export const AzureVirtualMachineSummary = (
   props: ResourceSummaryProps<AzureVirtualMachine>,
 ) => {
-  const { translate, resource } = props;
+  const { resource } = props;
   return (
     <>
       <PureAzureResourceSummary {...props} />
@@ -32,7 +32,3 @@ const PureAzureVirtualMachineSummary = (
     </>
   );
 };
-
-export const AzureVirtualMachineSummary = withTranslation(
-  PureAzureVirtualMachineSummary,
-);

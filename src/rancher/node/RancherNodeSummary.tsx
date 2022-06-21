@@ -1,10 +1,10 @@
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { KeyValueButton } from '@waldur/marketplace/resources/KeyValueButton';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import {
   Field,
   ResourceSummaryProps,
-  PureResourceSummaryBase,
+  ResourceSummaryBase,
 } from '@waldur/resource/summary';
 
 import { NodeRoleField } from './NodeRoleField';
@@ -21,11 +21,10 @@ const formatInstance = (resource) =>
     <>&ndash;</>
   );
 
-const PureRancherNodeSummary = (props: ResourceSummaryProps) => {
-  const { translate } = props;
+export const RancherNodeSummary = (props: ResourceSummaryProps) => {
   return (
     <>
-      <PureResourceSummaryBase {...props} />
+      <ResourceSummaryBase {...props} />
       <Field
         label={translate('Kubernetes version')}
         value={props.resource.k8s_version}
@@ -82,5 +81,3 @@ const PureRancherNodeSummary = (props: ResourceSummaryProps) => {
     </>
   );
 };
-
-export const RancherNodeSummary = withTranslation(PureRancherNodeSummary);

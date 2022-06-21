@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { useProjectItems } from '@waldur/navigation/navitems';
 import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
@@ -14,7 +14,6 @@ import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { getProject } from '@waldur/workspace/selectors';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   useTitle(translate('My orders'));
   useProjectItems();
   const columns = [
@@ -99,10 +98,6 @@ const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  connectTable(TableOptions),
-  withTranslation,
-);
+const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const OrdersList = enhance(TableComponent);

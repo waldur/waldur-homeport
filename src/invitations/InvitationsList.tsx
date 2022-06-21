@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDate } from '@waldur/core/dateUtils';
+import { translate } from '@waldur/i18n';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { useTeamItems } from '@waldur/navigation/navitems';
 import { RootState } from '@waldur/store/reducers';
@@ -19,7 +20,6 @@ import { InvitationsFilter } from './InvitationsFilter';
 import { RoleField } from './RoleField';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

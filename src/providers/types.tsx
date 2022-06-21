@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { TranslateProps } from '@waldur/i18n';
-
-export interface ProviderFormProps extends TranslateProps {
+export interface ProviderFormProps {
   container: {};
 }
 

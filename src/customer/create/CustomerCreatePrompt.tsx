@@ -6,14 +6,14 @@ import {
   RadioButtonChoice,
   RadioButtonField,
 } from '@waldur/form/RadioButtonField';
-import { TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import * as constants from './constants';
 import './CustomerCreatePrompt.scss';
 import { MessageButton } from './MessageButton';
 
-interface CustomerCreatePromptProps extends TranslateProps, InjectedFormProps {
+interface CustomerCreatePromptProps extends InjectedFormProps {
   renderServiceProvider: boolean;
   closeModal(): void;
   onSubmit(data: { [key: string]: string }): void;
@@ -21,14 +21,8 @@ interface CustomerCreatePromptProps extends TranslateProps, InjectedFormProps {
 
 export const CustomerCreatePrompt: FunctionComponent<CustomerCreatePromptProps> =
   (props) => {
-    const {
-      renderServiceProvider,
-      translate,
-      handleSubmit,
-      submitting,
-      error,
-      onSubmit,
-    } = props;
+    const { renderServiceProvider, handleSubmit, submitting, error, onSubmit } =
+      props;
 
     const getColumnsNumber = () => {
       let counter = 1;

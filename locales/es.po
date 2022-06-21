@@ -6324,7 +6324,7 @@ msgid "{relative} ago"
 msgstr "{relative} de hace"
 
 msgid "{relative} ago, {date}"
-msgstr "{relative} de hace , {date}"
+msgstr "{relative} de hace, {date}"
 
 msgid "{resourceName} resource has been moved to {projectName} project."
 msgstr "El recurso {resourceName} se ha movido al proyecto {projectName}."

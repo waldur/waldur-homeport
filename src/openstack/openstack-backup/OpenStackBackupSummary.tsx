@@ -1,10 +1,10 @@
 import { getUUID } from '@waldur/core/utils';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import {
   Field,
   ResourceSummaryProps,
-  PureResourceSummaryBase,
+  ResourceSummaryBase,
 } from '@waldur/resource/summary';
 
 const formatInstance = (props) => (
@@ -16,16 +16,12 @@ const formatInstance = (props) => (
   />
 );
 
-const PureOpenStackBackupSummary = (props: ResourceSummaryProps) => {
-  const { translate, resource } = props;
+export const OpenStackBackupSummary = (props: ResourceSummaryProps) => {
+  const { resource } = props;
   return (
     <span>
-      <PureResourceSummaryBase {...props} />
+      <ResourceSummaryBase {...props} />
       <Field label={translate('Instance')} value={formatInstance(resource)} />
     </span>
   );
 };
-
-export const OpenStackBackupSummary = withTranslation(
-  PureOpenStackBackupSummary,
-);

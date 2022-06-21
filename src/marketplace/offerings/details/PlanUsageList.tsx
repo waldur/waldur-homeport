@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { compose } from 'redux';
 
-import { withTranslation, translate } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
 import { PlanUsageButton } from '@waldur/marketplace/resources/plan-usage/PlanUsageButton';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -59,7 +59,7 @@ const TableOptions = {
   exportFields: ['Plan', 'Limit', 'Active plan count'],
 };
 
-const connector = compose(connectTable(TableOptions), withTranslation);
+const connector = compose(connectTable(TableOptions));
 
 export const PlanUsageList = connector(
   TableComponent,

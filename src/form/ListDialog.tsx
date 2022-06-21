@@ -1,7 +1,7 @@
 import { Modal } from 'react-bootstrap';
 
 import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 import { ChoicesTable } from './ChoicesTable';
@@ -10,7 +10,7 @@ import {
   SelectDialogFieldChoice,
 } from './SelectDialogField';
 
-interface ListDialogProps extends TranslateProps {
+interface ListDialogProps {
   title: string;
   show: boolean;
   columns: SelectDialogFieldColumn[];
@@ -21,7 +21,7 @@ interface ListDialogProps extends TranslateProps {
   onSelect(value: SelectDialogFieldChoice): void;
 }
 
-export const ListDialog = withTranslation((props: ListDialogProps) => (
+export const ListDialog = (props: ListDialogProps) => (
   <Modal show={props.show} onHide={props.onClose}>
     <Modal.Header>
       <Modal.Title>{props.title}</Modal.Title>
@@ -38,7 +38,7 @@ export const ListDialog = withTranslation((props: ListDialogProps) => (
       <>
         <ActionButton
           className="btn btn-secondary"
-          title={props.translate('Cancel')}
+          title={translate('Cancel')}
           action={() => {
             props.input.onChange(null);
             props.onClose();
@@ -46,7 +46,7 @@ export const ListDialog = withTranslation((props: ListDialogProps) => (
         />
         <ActionButton
           className="btn btn-secondary"
-          title={props.translate('Reset')}
+          title={translate('Reset')}
           action={() => {
             props.input.onChange(null);
             props.onSelect(null);
@@ -55,7 +55,7 @@ export const ListDialog = withTranslation((props: ListDialogProps) => (
         />
         <ActionButton
           className="btn btn-primary"
-          title={props.translate('Select')}
+          title={translate('Select')}
           action={() => {
             props.onSelect(props.input.value);
             props.onClose();
@@ -64,4 +64,4 @@ export const ListDialog = withTranslation((props: ListDialogProps) => (
       </>
     </Modal.Footer>
   </Modal>
-));
+);

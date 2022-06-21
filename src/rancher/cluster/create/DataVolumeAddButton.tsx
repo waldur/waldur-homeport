@@ -1,15 +1,13 @@
 import { Button } from 'react-bootstrap';
 
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
-interface DataVolumeAddButtonProps extends TranslateProps {
+interface DataVolumeAddButtonProps {
   onClick(): void;
 }
 
-export const DataVolumeAddButton = withTranslation(
-  (props: DataVolumeAddButtonProps) => (
-    <Button onClick={props.onClick}>
-      <i className="fa fa-plus" /> {props.translate('Add data volume')}
-    </Button>
-  ),
+export const DataVolumeAddButton = (props: DataVolumeAddButtonProps) => (
+  <Button onClick={props.onClick}>
+    <i className="fa fa-plus" /> {translate('Add data volume')}
+  </Button>
 );

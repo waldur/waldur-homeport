@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
-import { translate } from '@waldur/i18n';
 import '@waldur/openstack/provider';
 
 import { OpenStackTenantSummary } from './OpenStackTenantSummary';
@@ -22,7 +21,7 @@ export const renderSummary = (props) => {
   });
   return mount(
     <Provider store={store}>
-      <OpenStackTenantSummary {...rest} translate={translate} />
+      <OpenStackTenantSummary {...rest} />
     </Provider>,
   );
 };

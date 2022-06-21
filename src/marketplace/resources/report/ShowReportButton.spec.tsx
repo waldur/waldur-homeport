@@ -2,14 +2,11 @@ import { render } from 'enzyme';
 import { FunctionComponent } from 'react';
 
 import { withReduxForm } from '@waldur/form/testUtils';
-import { translate } from '@waldur/i18n';
 
 import { ShowReportButton } from './ShowReportButton';
 
 const renderButton = (props?) => {
-  const Component: FunctionComponent = () => (
-    <ShowReportButton translate={translate} {...props} />
-  );
+  const Component: FunctionComponent = () => <ShowReportButton {...props} />;
   return render(withReduxForm(Component));
 };
 

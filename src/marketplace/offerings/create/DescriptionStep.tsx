@@ -3,14 +3,12 @@ import { FunctionComponent } from 'react';
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField } from '@waldur/form';
 import { FormContainerProps } from '@waldur/form/FormContainer';
-import { TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { Category } from '@waldur/marketplace/types';
 
 import { OfferingAttributes } from '../attributes/OfferingAttributes';
 
-export interface DescriptionStepProps
-  extends TranslateProps,
-    FormContainerProps {
+export interface DescriptionStepProps extends FormContainerProps {
   categories: Category[];
   category?: Category;
   onCategoryChange(): void;
@@ -23,7 +21,7 @@ export const DescriptionStep: FunctionComponent<DescriptionStepProps> = (
     <FormContainer {...props}>
       <SelectField
         name="category"
-        label={props.translate('Category')}
+        label={translate('Category')}
         options={props.categories}
         required={true}
         getOptionValue={(option) => option.url}

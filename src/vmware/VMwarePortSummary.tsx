@@ -1,15 +1,13 @@
-import { withTranslation } from '@waldur/i18n';
-import { Field, PureResourceSummaryBase } from '@waldur/resource/summary';
+import { translate } from '@waldur/i18n';
+import { Field, ResourceSummaryBase } from '@waldur/resource/summary';
 
-const PureVMwarePortSummary = (props) => {
-  const { translate, resource } = props;
+export const VMwarePortSummary = (props) => {
+  const { resource } = props;
   return (
     <>
-      <PureResourceSummaryBase {...props} />
+      <ResourceSummaryBase {...props} />
       <Field label={translate('MAC address')} value={resource.mac_address} />
       <Field label={translate('Network')} value={resource.network_name} />
     </>
   );
 };
-
-export const VMwarePortSummary = withTranslation(PureVMwarePortSummary);

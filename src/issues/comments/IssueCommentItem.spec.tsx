@@ -1,6 +1,5 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { translate } from '@waldur/i18n';
 import { attachment } from '@waldur/issues/attachments/fixture';
 
 import { comment, users } from './fixture';
@@ -10,7 +9,6 @@ const initialProps = {
   user: users.same,
   comment,
   attachments: [attachment],
-  translate,
 };
 const renderWrapper = (props?) =>
   shallow(<PureIssueCommentItem {...initialProps} {...props} />);

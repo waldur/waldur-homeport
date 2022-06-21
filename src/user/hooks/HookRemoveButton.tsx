@@ -1,8 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/notify';
 import { ActionButtonSmall } from '@waldur/table/ActionButtonSmall';
 import { deleteEntity } from '@waldur/table/actions';
@@ -37,7 +36,7 @@ interface HookRemoveButtonState {
 }
 
 class HookRemoveButtonComponent extends Component<
-  OwnProps & DispatchProps & TranslateProps,
+  OwnProps & DispatchProps,
   HookRemoveButtonState
 > {
   state = {
@@ -49,9 +48,9 @@ class HookRemoveButtonComponent extends Component<
       this.setState({ removing: true });
       await removeHook(url);
       this.props.removeEntity(uuid);
-      this.props.showSuccess(this.props.translate('Hook has been removed.'));
+      this.props.showSuccess(translate('Hook has been removed.'));
     } catch (e) {
-      this.props.showError(this.props.translate('Unable to remove hook.'));
+      this.props.showError(translate('Unable to remove hook.'));
     }
   }
 
@@ -76,9 +75,6 @@ class HookRemoveButtonComponent extends Component<
   }
 }
 
-const enhance = compose(
-  connect<{}, DispatchProps, OwnProps>(null, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = connect<{}, DispatchProps, OwnProps>(null, mapDispatchToProps);
 
 export const HookRemoveButton = enhance(HookRemoveButtonComponent);
