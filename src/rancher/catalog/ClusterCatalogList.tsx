@@ -1,13 +1,13 @@
 import { FunctionComponent, useMemo } from 'react';
 
 import { Link } from '@waldur/core/Link';
+import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { CatalogCreateButton } from './CatalogCreateButton';
 import { CatalogDeleteButton } from './CatalogDeleteButton';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   const columns = useMemo(
     () => [
       {
@@ -42,7 +42,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
           ),
       },
     ],
-    [translate, props.resource],
+    [props.resource],
   );
   return (
     <Table

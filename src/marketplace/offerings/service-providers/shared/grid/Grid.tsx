@@ -1,18 +1,18 @@
 import React from 'react';
 
-import './Grid.scss';
-import { TranslateProps } from '@waldur/i18n/types';
+import { translate } from '@waldur/i18n';
 import { GridPagination } from '@waldur/marketplace/offerings/service-providers/shared/grid/GridPagination';
 import { TablePlaceholder } from '@waldur/table/TablePlaceholder';
 import { TableState } from '@waldur/table/types';
 
+import './Grid.scss';
 import { GridBody } from './GridBody';
 import { GridButtons } from './GridButtons';
 import { GridInfo } from './GridInfo';
 import { GridQuery } from './GridQuery';
 import { GridRefreshButton } from './GridRefreshButton';
 
-interface GridProps extends TranslateProps, TableState {
+interface GridProps extends TableState {
   rows: any[];
   fetch: () => void;
   gotoPage?: (page: number) => void;
@@ -67,7 +67,7 @@ class Grid extends React.Component<GridProps> {
     if (this.props.error) {
       return (
         <div>
-          <p>{this.props.translate('Unable to fetch data.')}</p>
+          <p>{translate('Unable to fetch data.')}</p>
           <GridRefreshButton {...this.props} />
         </div>
       );

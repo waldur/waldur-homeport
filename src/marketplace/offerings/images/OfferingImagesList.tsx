@@ -4,6 +4,7 @@ import { compose } from 'redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { translate } from '@waldur/i18n';
 import { IMAGES_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { Offering, Image } from '@waldur/marketplace/types';
@@ -27,8 +28,6 @@ const openImageDetailsDialog = (image: Image) =>
   });
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
-
   const columns = [
     {
       title: translate('Thumbnail'),

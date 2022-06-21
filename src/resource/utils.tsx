@@ -93,8 +93,8 @@ export const formatSchedule = ({ resource }) => (
 
 export const formatRetentionTime = (props: ResourceSummaryProps<Schedule>) =>
   props.resource.retention_time === 0
-    ? props.translate('Keep forever')
-    : props.translate('{number} days', {
+    ? translate('Keep forever')
+    : translate('{number} days', {
         number: props.resource.retention_time,
       });
 

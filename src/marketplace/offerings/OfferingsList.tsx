@@ -8,7 +8,7 @@ import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { BackendIdTip } from '@waldur/core/Tooltip';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
 import { PreviewOfferingButton } from '@waldur/marketplace/offerings/PreviewOfferingButton';
@@ -44,7 +44,6 @@ const OfferingNameColumn = ({ row }) => (
 );
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -186,11 +185,7 @@ const mapStateToProps = (state: RootState) => ({
   filter: getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID)(state) as FilterData,
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  connectTable(TableOptions),
-  withTranslation,
-);
+const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const OfferingsList = enhance(
   TableComponent,

@@ -1,7 +1,6 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
 
 import { ResourceSummary } from './ResourceSummary';
 import { PureResourceSummaryModal } from './ResourceSummaryModal';
@@ -10,7 +9,6 @@ const initialProps = {
   loading: false,
   resource: {},
   fetchResource: () => null,
-  translate,
 };
 const renderWrapper = (props?) =>
   shallow(<PureResourceSummaryModal {...initialProps} {...props} />);

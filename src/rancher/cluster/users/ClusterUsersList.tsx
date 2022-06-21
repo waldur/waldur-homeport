@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
@@ -7,7 +8,6 @@ import { RolesRenderer } from './RolesRenderer';
 import { UserDetailsButton } from './UserDetailsButton';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

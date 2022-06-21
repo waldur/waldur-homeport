@@ -8,7 +8,7 @@ import { required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { TextField, StringField } from '@waldur/form';
 import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
-import { translate, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { getUser } from '@waldur/issues/comments/selectors';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { offeringSelector } from '@waldur/marketplace/details/selectors';
@@ -78,8 +78,7 @@ const nameValidators = [required, validateOpenstackInstanceName];
 export class OpenstackInstanceCreateFormComponent extends Component<
   OfferingConfigurationFormProps &
     OpenstackInstanceCreateFormComponentProps &
-    TranslateProps,
-  OpenstackInstanceCreateFormState
+    OpenstackInstanceCreateFormState
 > {
   state = {
     loading: false,

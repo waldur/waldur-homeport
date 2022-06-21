@@ -2,10 +2,9 @@ import { Component } from 'react';
 import { Card } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { issueAttachmentsPut } from '@waldur/issues/attachments/actions';
 import { LoadingOverlay } from '@waldur/issues/comments/LoadingOverlay';
 import { IssueReload } from '@waldur/issues/IssueReload';
@@ -22,7 +21,7 @@ import {
 } from './selectors';
 import { Comment, Issue } from './types';
 
-interface PureIssueCommentsContainerProps extends TranslateProps {
+interface PureIssueCommentsContainerProps {
   comments: Comment[];
   issue: Issue;
   loading: boolean;
@@ -63,7 +62,7 @@ export class PureIssueCommentsContainer extends Component<PureIssueCommentsConta
   openDownloadModal = () => this.dropzoneNode.open();
 
   render() {
-    const { comments, loading, issue, translate, erred } = this.props;
+    const { comments, loading, issue, erred } = this.props;
     const { dropzoneActive } = this.state;
     const body = loading ? (
       <LoadingSpinner />
@@ -125,9 +124,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(actions.issueCommentsIssueSet(issue)),
 });
 
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
 
 export const IssueCommentsContainer = enhance(PureIssueCommentsContainer);

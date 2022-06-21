@@ -1,16 +1,16 @@
 import { formatRelative } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { formatSummary, formatCommaList } from '@waldur/resource/utils';
 
 import { Field } from './Field';
-import { PureResourceSummaryBase } from './ResourceSummaryBase';
+import { ResourceSummaryBase } from './ResourceSummaryBase';
 import { ResourceSummaryProps } from './types';
 
 const formatUptime = (props) =>
   props.resource.start_time ? formatRelative(props.resource.start_time) : null;
 
-const ResourceSummaryField = ({ translate, resource }) => (
+const ResourceSummaryField = ({ resource }) => (
   <>
     {formatSummary(resource)}
     {resource.flavor_name && (
@@ -38,10 +38,9 @@ export const formatIpList = (value) => {
 };
 
 export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
-  const { translate } = props;
   return (
     <>
-      <PureResourceSummaryBase {...props} />
+      <ResourceSummaryBase {...props} />
       <Field
         label={translate('Summary')}
         value={<ResourceSummaryField {...props} />}
@@ -63,5 +62,3 @@ export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
     </>
   );
 };
-
-export const VirtualMachineSummary = withTranslation(PureVirtualMachineSummary);

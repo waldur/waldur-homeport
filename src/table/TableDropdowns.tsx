@@ -80,7 +80,7 @@ export const TableDropdowns: FunctionComponent<any> = (props) => {
           className="table_dropdown_menu shadow-sm menu-gray-800 menu-state-bg-light-primary px-3"
         >
           {actions?.map((item) =>
-            item.label === 'Export' ? (
+            item.label === translate('Export') ? (
               <Dropdown.Item
                 onClick={(e) => {
                   e.stopPropagation();
@@ -93,7 +93,7 @@ export const TableDropdowns: FunctionComponent<any> = (props) => {
               >
                 <ExportDropdown exportAs={exportAs} />
               </Dropdown.Item>
-            ) : item.label === 'Refresh' ? (
+            ) : item.label === translate('Refresh') ? (
               <Dropdown.Item
                 key={item.label}
                 onClick={props.fetch}

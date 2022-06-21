@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { UpdateOfferingPermissionExpirationTimeButton } from '@waldur/customer/team/UpdateOfferingPermissionExpirationTimeButton';
+import { translate } from '@waldur/i18n';
 import { useTeamItems } from '@waldur/navigation/navitems';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -14,7 +15,6 @@ import { OfferingPermissionCreateButton } from './OfferingPermissionCreateButton
 import { OfferingPermissionRemoveButton } from './OfferingPermissionRemoveButton';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

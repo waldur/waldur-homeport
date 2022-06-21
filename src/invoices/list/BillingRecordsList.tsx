@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
+import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -19,7 +20,6 @@ import { SendNotificationButton } from './SendNotificationButton';
 const RecordPeriodField = ({ row }) => formatPeriod(row);
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

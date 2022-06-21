@@ -1,9 +1,9 @@
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import {
   Field,
   ResourceSummaryProps,
-  PureResourceSummaryBase,
+  ResourceSummaryBase,
 } from '@waldur/resource/summary';
 
 const formatTenant = (props) => (
@@ -15,11 +15,11 @@ const formatTenant = (props) => (
   />
 );
 
-const PureOpenStackFloatingIpSummary = (props: ResourceSummaryProps) => {
-  const { translate, resource } = props;
+export const OpenStackFloatingIpSummary = (props: ResourceSummaryProps) => {
+  const { resource } = props;
   return (
     <span>
-      <PureResourceSummaryBase {...props} />
+      <ResourceSummaryBase {...props} />
       <Field label={translate('Tenant')} value={formatTenant(props.resource)} />
       <Field label={translate('Address')} value={resource.address} />
       <Field
@@ -29,7 +29,3 @@ const PureOpenStackFloatingIpSummary = (props: ResourceSummaryProps) => {
     </span>
   );
 };
-
-export const OpenStackFloatingIpSummary = withTranslation(
-  PureOpenStackFloatingIpSummary,
-);

@@ -1,18 +1,18 @@
 import { FunctionComponent } from 'react';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
 import { IssueCommentItem } from './IssueCommentItem';
 import { Comment } from './types';
 
-interface PureIssueCommentsListProps extends TranslateProps {
+interface PureIssueCommentsListProps {
   comments: Comment[];
   erred?: boolean;
 }
 
-export const PureIssueCommentsList: FunctionComponent<PureIssueCommentsListProps> =
+export const IssueCommentsList: FunctionComponent<PureIssueCommentsListProps> =
   (props) => {
-    const { comments, erred, translate } = props;
+    const { comments, erred } = props;
 
     if (erred) {
       return <div>{translate('Unable to load comments.')}</div>;
@@ -28,5 +28,3 @@ export const PureIssueCommentsList: FunctionComponent<PureIssueCommentsListProps
       </div>
     );
   };
-
-export const IssueCommentsList = withTranslation(PureIssueCommentsList);

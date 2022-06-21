@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { Tip } from '@waldur/core/Tooltip';
-import { translate, withTranslation } from '@waldur/i18n/translate';
+import { translate } from '@waldur/i18n/translate';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
@@ -74,12 +73,11 @@ export function connectTable(options: TableOptionsType) {
         rows: selectTableRows(state, table),
       });
 
-      const enhance = compose(
-        connect(mapStateToProps, mapDispatchToProps),
-        withTranslation,
-      );
+      const enhance = connect(mapStateToProps, mapDispatchToProps);
 
+      /* @ts-ignore */
       const ConnectedComponent = enhance(Component);
+      /* @ts-ignore */
       return <ConnectedComponent {...props} />;
     };
     Wrapper.displayName = `connectTable(${Component.name})`;

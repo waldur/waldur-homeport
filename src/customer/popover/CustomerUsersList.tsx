@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 import Gravatar from 'react-gravatar';
 
+import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

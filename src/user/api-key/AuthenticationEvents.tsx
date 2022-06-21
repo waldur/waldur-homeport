@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { formatRelative } from '@waldur/core/dateUtils';
 import eventsRegistry from '@waldur/events/registry';
+import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 import { UserDetails } from '@waldur/workspace/types';
@@ -13,7 +14,6 @@ interface AuthenticationEventsProps {
 const EventDateField = ({ row }) => <>{formatRelative(row.created)}</>;
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

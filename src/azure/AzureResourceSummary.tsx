@@ -1,7 +1,8 @@
+import { translate } from '@waldur/i18n';
 import {
   Field,
   ResourceSummaryProps,
-  PureResourceSummaryBase,
+  ResourceSummaryBase,
 } from '@waldur/resource/summary';
 
 import { AzureResource } from './types';
@@ -9,10 +10,10 @@ import { AzureResource } from './types';
 export function PureAzureResourceSummary<R extends AzureResource = any>(
   props: ResourceSummaryProps<R>,
 ) {
-  const { translate, resource } = props;
+  const { resource } = props;
   return (
     <>
-      <PureResourceSummaryBase {...props} hideBackendId={true} />
+      <ResourceSummaryBase {...props} hideBackendId={true} />
       <Field
         label={translate('Resource group')}
         value={resource.resource_group_name}

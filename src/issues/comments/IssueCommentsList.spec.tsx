@@ -4,14 +4,13 @@ import { translate } from '@waldur/i18n';
 
 import { comment } from './fixture';
 import { IssueCommentItem } from './IssueCommentItem';
-import { PureIssueCommentsList } from './IssueCommentsList';
+import { IssueCommentsList } from './IssueCommentsList';
 
 const initialProps = {
   comments: [comment],
-  translate,
 };
 const renderWrapper = (props?) =>
-  shallow(<PureIssueCommentsList {...initialProps} {...props} />);
+  shallow(<IssueCommentsList {...initialProps} {...props} />);
 
 const getIssueComment = (container) => container.find(IssueCommentItem);
 const hasNoCommentsMessage = (container) =>

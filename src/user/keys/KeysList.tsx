@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 
+import { translate } from '@waldur/i18n';
 import { router } from '@waldur/router';
 import { RootState } from '@waldur/store/reducers';
 import { Table, createFetcher, connectTable } from '@waldur/table';
@@ -20,8 +21,6 @@ interface OwnProps {
 }
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
-
   const workspace = useSelector(getWorkspace);
   const columns: Column[] = [
     {

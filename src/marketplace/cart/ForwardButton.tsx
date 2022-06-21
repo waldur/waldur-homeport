@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createSelector } from 'reselect';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
@@ -20,7 +20,7 @@ import {
   isCreatingOrder,
 } from './store/selectors';
 
-interface ForwardButtonComponentProps extends TranslateProps {
+interface ForwardButtonComponentProps {
   createOrder(): void;
   items: OrderItemResponse[];
   disabled: boolean;
@@ -54,18 +54,18 @@ const ForwardButtonComponent = (props: ForwardButtonComponentProps) =>
       <PureForwardButton
         title={
           props.shouldConcealPrices
-            ? props.translate('Request')
-            : props.translate('Purchase')
+            ? translate('Request')
+            : translate('Purchase')
         }
         action={props.createOrder}
         disabled={props.disabled}
-        tooltip={props.translate(
+        tooltip={translate(
           'You have the right to purchase service without additional approval.',
         )}
       />
     ) : (
       <PureForwardButton
-        title={props.translate('Request an approval')}
+        title={translate('Request an approval')}
         action={props.createOrder}
         disabled={props.disabled}
       />
@@ -88,7 +88,6 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = compose(
   connect(mapStateToProps, { createOrder: createOrderRequest }),
-  withTranslation,
 );
 
 export const ForwardButton = enhance(ForwardButtonComponent);

@@ -1,28 +1,25 @@
 import { ENV } from '@waldur/configs/default';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import {
   Field,
-  PureResourceSummaryBase,
+  ResourceSummaryBase,
   ResourceSummaryProps,
 } from '@waldur/resource/summary';
 import { formatSummary } from '@waldur/resource/utils';
 
 import { VMwareVirtualMachine } from './types';
 
-const PureVMwareVirtualMachineSummary = (
+export const VMwareVirtualMachineSummary = (
   props: ResourceSummaryProps<VMwareVirtualMachine>,
 ) => {
-  const { translate, resource } = props;
+  const { resource } = props;
   const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
   return (
     <>
-      <PureResourceSummaryBase {...props} />
+      <ResourceSummaryBase {...props} />
       <Field label={translate('Summary')} value={formatSummary(resource)} />
       <Field label={translate('Guest OS')} value={resource.guest_os_name} />
-      <Field
-        label={props.translate('VMware Tools')}
-        value={resource.tools_state}
-      />
+      <Field label={translate('VMware Tools')} value={resource.tools_state} />
       {advancedMode && (
         <>
           <Field label={translate('Template')} value={resource.template_name} />
@@ -36,7 +33,3 @@ const PureVMwareVirtualMachineSummary = (
     </>
   );
 };
-
-export const VMwareVirtualMachineSummary = withTranslation(
-  PureVMwareVirtualMachineSummary,
-);

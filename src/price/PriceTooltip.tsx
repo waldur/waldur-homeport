@@ -1,21 +1,20 @@
 import { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { Tip } from '@waldur/core/Tooltip';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
 type AccountingMode = 'billing' | 'accounting';
 
-interface PriceTooltipProps extends TranslateProps {
+interface PriceTooltipProps {
   estimated?: boolean;
   accountingMode: AccountingMode;
 }
 
 class PurePriceTooltip extends PureComponent<PriceTooltipProps> {
   getTooltipMessage() {
-    const { translate, accountingMode, estimated } = this.props;
+    const { accountingMode, estimated } = this.props;
 
     // VAT is not included only when accounting mode is activated
     const vatNotIncluded = accountingMode === 'accounting';
@@ -52,6 +51,6 @@ const mapStateToProps = (state: RootState) => ({
   accountingMode: state.config.accountingMode,
 });
 
-const enhance = compose(connect(mapStateToProps), withTranslation);
+const enhance = connect(mapStateToProps);
 
 export const PriceTooltip = enhance(PurePriceTooltip);

@@ -1,16 +1,16 @@
 import { formatFilesize, getUUID } from '@waldur/core/utils';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import {
   Field,
   ResourceSummaryProps,
-  PureResourceSummaryBase,
+  ResourceSummaryBase,
 } from '@waldur/resource/summary';
 
 const formatSize = (props) => {
   const filesize = formatFilesize(props.resource.size);
   return props.resource.bootable
-    ? `${props.translate('bootable')} ${filesize}`
+    ? `${translate('bootable')} ${filesize}`
     : filesize;
 };
 
@@ -26,11 +26,11 @@ const formatInstance = (props) =>
     <>&ndash;</>
   );
 
-const PureOpenStackVolumeSummary = (props: ResourceSummaryProps) => {
-  const { translate, resource } = props;
+export const OpenStackVolumeSummary = (props: ResourceSummaryProps) => {
+  const { resource } = props;
   return (
     <span>
-      <PureResourceSummaryBase {...props} />
+      <ResourceSummaryBase {...props} />
       <Field label={translate('Size')} value={formatSize(props)} />
       <Field label={translate('Attached to')} value={formatInstance(props)} />
       <Field label={translate('Device')} value={resource.device} />
@@ -42,7 +42,3 @@ const PureOpenStackVolumeSummary = (props: ResourceSummaryProps) => {
     </span>
   );
 };
-
-export const OpenStackVolumeSummary = withTranslation(
-  PureOpenStackVolumeSummary,
-);

@@ -1,4 +1,4 @@
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { OpenStackSecurityGroupsLink } from '@waldur/openstack/openstack-security-groups/OpenStackSecurityGroupsLink';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import {
@@ -19,10 +19,9 @@ const formatSecurityGroups = (props) => {
   }
 };
 
-const PureOpenStackInstanceSummary = (
+export const OpenStackInstanceSummary = (
   props: ResourceSummaryProps<OpenStackInstance>,
 ) => {
-  const { translate } = props;
   return (
     <>
       <PureVirtualMachineSummary {...props} />
@@ -54,7 +53,3 @@ const PureOpenStackInstanceSummary = (
     </>
   );
 };
-
-export const OpenStackInstanceSummary = withTranslation(
-  PureOpenStackInstanceSummary,
-);

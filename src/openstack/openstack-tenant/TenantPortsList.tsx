@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { translate } from '@waldur/i18n';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
@@ -8,7 +9,6 @@ import { Port } from '../types';
 import { ExpandablePortRow } from './ExpandablePortRow';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table<Port>
       {...props}

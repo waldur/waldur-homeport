@@ -35,7 +35,6 @@ const getEventsField = (row) =>
   row.event_groups.map(formatEventTitle).join(', ');
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   useTitle(translate('Notifications'));
   useUserTabs();
   return (

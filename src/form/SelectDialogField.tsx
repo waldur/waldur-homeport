@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
 import { ListDialog } from './ListDialog';
 
@@ -32,9 +32,7 @@ interface OwnProps {
   input: CustomComponentInputProps<SelectDialogFieldChoice>;
 }
 
-export class SelectDialogFieldComponent extends React.Component<
-  OwnProps & TranslateProps
-> {
+export class SelectDialogField extends React.Component<OwnProps> {
   state = {
     showListDialog: false,
     value: null,
@@ -78,7 +76,7 @@ export class SelectDialogFieldComponent extends React.Component<
         <a onClick={this.openSelectDialog} id={props.id}>
           {(props.input.value && props.input.value.name) ||
             props.label ||
-            props.translate('Show choices')}{' '}
+            translate('Show choices')}{' '}
           <i className="fa fa-caret-down" />
         </a>
         <ListDialog
@@ -99,5 +97,3 @@ export class SelectDialogFieldComponent extends React.Component<
     );
   }
 }
-
-export const SelectDialogField = withTranslation(SelectDialogFieldComponent);

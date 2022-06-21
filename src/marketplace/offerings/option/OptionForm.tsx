@@ -7,7 +7,7 @@ import { required } from '@waldur/core/validators';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { FormFieldsContext, FormLayoutContext } from '@waldur/form/context';
 import { Select } from '@waldur/form/themed-select';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 
 import { DisplayNameField } from '../DisplayNameField';
@@ -40,15 +40,13 @@ const StringField: FunctionComponent<any> = (props) => (
   />
 );
 
-const RequiredField = withTranslation(
-  (props: TranslateProps & { option: string; readOnly?: boolean }) => (
-    <Field
-      name={`${props.option}.required`}
-      component={AwesomeCheckboxField}
-      label={props.translate('Required')}
-      disabled={props.readOnly}
-    />
-  ),
+const RequiredField = (props: { option: string; readOnly?: boolean }) => (
+  <Field
+    name={`${props.option}.required`}
+    component={AwesomeCheckboxField}
+    label={translate('Required')}
+    disabled={props.readOnly}
+  />
 );
 
 const OptionTypeField: FunctionComponent<any> = (props) => (
@@ -67,97 +65,93 @@ const OptionTypeField: FunctionComponent<any> = (props) => (
   />
 );
 
-const MinMaxFields = withTranslation(
-  (props: TranslateProps & { option: string; readOnly?: boolean }) => (
-    <>
-      <FormGroup label={props.translate('Minimal value')}>
-        <Field
-          name={`${props.option}.min`}
-          type="number"
-          component={Form.Control}
-          readOnly={props.readOnly}
-        />
-      </FormGroup>
-      <FormGroup label={props.translate('Maximal value')}>
-        <Field
-          name={`${props.option}.max`}
-          type="number"
-          component={Form.Control}
-          readOnly={props.readOnly}
-        />
-      </FormGroup>
-    </>
-  ),
+const MinMaxFields = (props: { option: string; readOnly?: boolean }) => (
+  <>
+    <FormGroup label={translate('Minimal value')}>
+      <Field
+        name={`${props.option}.min`}
+        type="number"
+        component={Form.Control}
+        readOnly={props.readOnly}
+      />
+    </FormGroup>
+    <FormGroup label={translate('Maximal value')}>
+      <Field
+        name={`${props.option}.max`}
+        type="number"
+        component={Form.Control}
+        readOnly={props.readOnly}
+      />
+    </FormGroup>
+  </>
 );
 
-interface OptionFormProps extends TranslateProps {
+interface OptionFormProps {
   option: string;
   type: FieldType;
   readOnly?: boolean;
 }
 
-export const OptionForm = connector(
-  withTranslation((props: OptionFormProps) => {
-    const { layout } = useContext(FormLayoutContext);
-    const fieldsClassNames = {
-      labelClassName: layout === 'vertical' ? '' : undefined,
-      valueClassName: layout === 'vertical' ? '' : undefined,
-      classNameWithoutLabel: layout === 'vertical' ? '' : undefined,
-    };
-    return (
-      <FormFieldsContext.Provider value={fieldsClassNames}>
-        <InternalNameField
-          name={`${props.option}.name`}
+export const OptionForm = connector((props: OptionFormProps) => {
+  const { layout } = useContext(FormLayoutContext);
+  const fieldsClassNames = {
+    labelClassName: layout === 'vertical' ? '' : undefined,
+    valueClassName: layout === 'vertical' ? '' : undefined,
+    classNameWithoutLabel: layout === 'vertical' ? '' : undefined,
+  };
+  return (
+    <FormFieldsContext.Provider value={fieldsClassNames}>
+      <InternalNameField
+        name={`${props.option}.name`}
+        readOnly={props.readOnly}
+      />
+      <DisplayNameField
+        name={`${props.option}.label`}
+        readOnly={props.readOnly}
+      />
+      <FormGroup label={translate('Description')}>
+        <StringField
+          option={props.option}
+          name="help_text"
           readOnly={props.readOnly}
         />
-        <DisplayNameField
-          name={`${props.option}.label`}
+      </FormGroup>
+      <FormGroup label={translate('Type')} required={true}>
+        <OptionTypeField
+          option={props.option}
+          validate={required}
           readOnly={props.readOnly}
         />
-        <FormGroup label={props.translate('Description')}>
+      </FormGroup>
+      {(props.type === 'integer' || props.type === 'money') && (
+        <MinMaxFields option={props.option} readOnly={props.readOnly} />
+      )}
+      {(props.type === 'select_string' ||
+        props.type === 'select_string_multi') && (
+        <FormGroup
+          label={translate('Choices as comma-separated list')}
+          required={true}
+        >
           <StringField
             option={props.option}
-            name="help_text"
-            readOnly={props.readOnly}
-          />
-        </FormGroup>
-        <FormGroup label={props.translate('Type')} required={true}>
-          <OptionTypeField
-            option={props.option}
+            name="choices"
             validate={required}
             readOnly={props.readOnly}
           />
         </FormGroup>
-        {(props.type === 'integer' || props.type === 'money') && (
-          <MinMaxFields option={props.option} readOnly={props.readOnly} />
-        )}
-        {(props.type === 'select_string' ||
-          props.type === 'select_string_multi') && (
-          <FormGroup
-            label={props.translate('Choices as comma-separated list')}
-            required={true}
-          >
-            <StringField
-              option={props.option}
-              name="choices"
-              validate={required}
-              readOnly={props.readOnly}
-            />
-          </FormGroup>
-        )}
-        {props.type === 'string' && (
-          <FormGroup label={props.translate('Default value')}>
-            <StringField
-              option={props.option}
-              name="default"
-              readOnly={props.readOnly}
-            />
-          </FormGroup>
-        )}
-        <FormGroup>
-          <RequiredField option={props.option} readOnly={props.readOnly} />
+      )}
+      {props.type === 'string' && (
+        <FormGroup label={translate('Default value')}>
+          <StringField
+            option={props.option}
+            name="default"
+            readOnly={props.readOnly}
+          />
         </FormGroup>
-      </FormFieldsContext.Provider>
-    );
-  }),
-);
+      )}
+      <FormGroup>
+        <RequiredField option={props.option} readOnly={props.readOnly} />
+      </FormGroup>
+    </FormFieldsContext.Provider>
+  );
+});

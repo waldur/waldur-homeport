@@ -1,6 +1,7 @@
 import { FunctionComponent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { translate } from '@waldur/i18n';
 import { SERVICE_PROVIDERS_GRID } from '@waldur/marketplace/offerings/service-providers/constants';
 import { GRID_PAGE_SIZE_CONFIG } from '@waldur/marketplace/offerings/service-providers/shared/grid/constants';
 import Grid from '@waldur/marketplace/offerings/service-providers/shared/grid/Grid';
@@ -10,7 +11,6 @@ import { updatePageSize } from '@waldur/table/actions';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 
 const GridComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(updatePageSize(SERVICE_PROVIDERS_GRID, GRID_PAGE_SIZE_CONFIG));

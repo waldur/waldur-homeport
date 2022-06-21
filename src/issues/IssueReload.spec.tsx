@@ -1,15 +1,9 @@
 import { shallow } from 'enzyme';
 
-import { translate } from '@waldur/i18n';
-
 import { PureIssueReload } from './IssueReload';
 
 describe('IssueReload', () => {
-  const initialProps = {
-    translate,
-  };
-  const renderWrapper = (props?) =>
-    shallow(<PureIssueReload {...initialProps} {...props} />);
+  const renderWrapper = (props?) => shallow(<PureIssueReload {...props} />);
 
   it('spinning if prop loading is true', () => {
     const wrapper = renderWrapper({ loading: true });

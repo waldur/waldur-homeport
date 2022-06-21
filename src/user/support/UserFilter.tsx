@@ -5,13 +5,13 @@ import { reduxForm } from 'redux-form';
 
 import { FormContainer, SelectField } from '@waldur/form';
 import { DebouncedStringField } from '@waldur/form/DebouncedStringField';
-import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 
 import './UserFilter.scss';
 
-interface UserFilterProps extends TranslateProps {
+interface UserFilterProps {
   submitting: boolean;
   nativeNameVisible: boolean;
 }
@@ -25,42 +25,42 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = (props) => (
       clearOnUnmount={false}
     >
       <DebouncedStringField
-        label={props.translate('Full name')}
+        label={translate('Full name')}
         name="full_name"
         noUpdateOnBlur={true}
       />
       {props.nativeNameVisible && (
         <DebouncedStringField
-          label={props.translate('Native name')}
+          label={translate('Native name')}
           name="native_name"
           noUpdateOnBlur={true}
         />
       )}
       <DebouncedStringField
-        label={props.translate('ID code')}
+        label={translate('ID code')}
         name="civil_number"
         noUpdateOnBlur={true}
       />
       <DebouncedStringField
-        label={props.translate('Username')}
+        label={translate('Username')}
         name="username"
         noUpdateOnBlur={true}
       />
       <DebouncedStringField
-        label={props.translate('Organization')}
+        label={translate('Organization')}
         name="organization"
         noUpdateOnBlur={true}
       />
       <DebouncedStringField
-        label={props.translate('Email')}
+        label={translate('Email')}
         name="email"
         noUpdateOnBlur={true}
       />
       <SelectField
         className="Select"
-        label={props.translate('Role')}
+        label={translate('Role')}
         name="role"
-        placeholder={props.translate('Select role')}
+        placeholder={translate('Select role')}
         options={[
           {
             label: translate('Staff'),
@@ -77,9 +77,9 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = (props) => (
       />
       <SelectField
         className="Select"
-        label={props.translate('Status')}
+        label={translate('Status')}
         name="status"
-        placeholder={props.translate('Select status')}
+        placeholder={translate('Select status')}
         options={[
           {
             label: translate('Any'),
@@ -109,7 +109,6 @@ const mapStateToProps = (state: RootState) => ({
 const enhance = compose(
   reduxForm({ form: 'userFilter', destroyOnUnmount: false }),
   connect(mapStateToProps),
-  withTranslation,
 );
 
 export const UserFilter = enhance(PureUserFilter);

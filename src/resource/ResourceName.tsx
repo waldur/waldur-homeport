@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { Tip } from '@waldur/core/Tooltip';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
 import { ResourceLink } from './ResourceLink';
 import { formatDefault, formatResourceType, getResourceIcon } from './utils';
@@ -37,20 +37,16 @@ export const ResourceIcon: FunctionComponent<ResourceIconProps> = (props) => (
   </Tip>
 );
 
-const ResourceWarning = withTranslation(
-  (props: ResourceNameProps & TranslateProps) =>
-    props.resource.is_link_valid === false ? (
-      <Tip
-        id={`resourceWarning-${props.resource.uuid}`}
-        label={props.translate(
-          'Provider does not comply with project policies',
-        )}
-      >
-        {' '}
-        <i className="fa fa-exclamation-triangle text-muted" />
-      </Tip>
-    ) : null,
-);
+const ResourceWarning = (props: ResourceNameProps) =>
+  props.resource.is_link_valid === false ? (
+    <Tip
+      id={`resourceWarning-${props.resource.uuid}`}
+      label={translate('Provider does not comply with project policies')}
+    >
+      {' '}
+      <i className="fa fa-exclamation-triangle text-muted" />
+    </Tip>
+  ) : null;
 
 // TODO: remove extra check after resources list is migrated to ReactJS
 export const ResourceName = (props: ResourceNameProps) =>

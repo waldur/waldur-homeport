@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { WrappedFieldArrayProps, FormSection, change } from 'redux-form';
 
 import { FormLayoutContext } from '@waldur/form/context';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 import { parseComponents } from '@waldur/marketplace/offerings/update/utils';
 import { OfferingComponent } from '@waldur/marketplace/types';
@@ -15,15 +15,14 @@ import { ComponentAddButton } from './ComponentAddButton';
 import { ComponentForm } from './ComponentForm';
 
 interface ComponentsListProps
-  extends TranslateProps,
-    WrappedFieldArrayProps<OfferingComponent> {
+  extends WrappedFieldArrayProps<OfferingComponent> {
   removeOfferingComponent(component: string): void;
   removeOfferingQuotas(component: string): void;
   builtinComponents: OfferingComponent[];
   isUpdatingOffering: boolean;
 }
 
-export const ComponentsList = withTranslation((props: ComponentsListProps) => {
+export const ComponentsList = (props: ComponentsListProps) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (props.builtinComponents.length > 0 && !props.isUpdatingOffering) {
@@ -42,7 +41,7 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => {
     <Form.Group>
       <Col sm={{ span: col, offset: offset }} className="mb-2">
         <p>
-          <strong>{props.translate('Plan components')}</strong>
+          <strong>{translate('Plan components')}</strong>
         </p>
       </Col>
 
@@ -51,9 +50,7 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => {
           <Card key={index}>
             <Card.Header>
               <Card.Title>
-                <h3>
-                  {props.translate('Component #{index}', { index: index + 1 })}
-                </h3>
+                <h3>{translate('Component #{index}', { index: index + 1 })}</h3>
               </Card.Title>
               <div className="card-toolbar">
                 {!props.builtinComponents.length && (
@@ -90,4 +87,4 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => {
       </Col>
     </Form.Group>
   );
-});
+};

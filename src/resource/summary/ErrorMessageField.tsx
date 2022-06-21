@@ -14,7 +14,7 @@ const formatErrorField = (props: ResourceSummaryProps) => {
     return null;
   }
   if (!props.resource.error_message) {
-    return props.translate('Reason unknown, please contact support.');
+    return translate('Reason unknown, please contact support.');
   }
   if (!props.resource.error_traceback) {
     return props.resource.error_message;

@@ -1,12 +1,11 @@
 import { Fragment, ReactNode } from 'react';
-import { connect } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
 import { RootState } from '@waldur/store/reducers';
 
 import { DOMAIN_MESSAGES } from './constants';
 import { LanguageUtilsService } from './LanguageUtilsService';
-import { Translate, TranslateProps } from './types';
+import { Translate } from './types';
 
 export const formatJsxTemplate = (template, context) => {
   if (!context) {
@@ -75,5 +74,3 @@ export const getLocale = (state: RootState) => ({
   locale: state.locale,
   translate,
 });
-
-export const withTranslation = connect<TranslateProps>(getLocale);

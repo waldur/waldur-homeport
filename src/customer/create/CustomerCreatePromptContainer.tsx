@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm, SubmissionError } from 'redux-form';
 
-import { translate, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { renderServiceProvider } from '@waldur/marketplace/service-providers/selectors';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { RootState } from '@waldur/store/reducers';
@@ -40,7 +40,6 @@ const enhance = compose(
       [constants.FIELD_NAMES.role]: constants.ROLES.customer,
     },
   }),
-  withTranslation,
 );
 
 export const CustomerCreatePromptContainer = enhance(CustomerCreatePrompt);

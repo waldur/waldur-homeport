@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { withTranslation } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
 import { categoryChanged } from '../store/actions';
@@ -14,13 +12,10 @@ const mapStateToProps = (state: RootState) => ({
   categories: getCategories(state),
 });
 
-const mapDispatchToProps = {
-  onCategoryChange: categoryChanged,
-};
+const mapDispatchToProps = (dispatch) => ({
+  onCategoryChange: (category) => dispatch(categoryChanged(category)),
+});
 
-const connector = compose(
-  withTranslation,
-  connect(mapStateToProps, mapDispatchToProps),
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 export const DescriptionStepContainer = connector(DescriptionStep);

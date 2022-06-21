@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { ProjectsListActions } from '@waldur/project/ProjectsListActions';
@@ -30,7 +30,7 @@ const ProjectCostField = ({ row }) =>
   );
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate, filterColumns } = props;
+  const { filterColumns } = props;
   useTitle(translate('Projects'));
   const columns = filterColumns([
     {
@@ -116,6 +116,6 @@ const TableOptions = {
   exportFields: ['Name', 'Description', 'Created'],
 };
 
-const enhance = compose(connectTable(TableOptions), withTranslation);
+const enhance = compose(connectTable(TableOptions));
 
 export const ProjectsList = enhance(TableComponent);

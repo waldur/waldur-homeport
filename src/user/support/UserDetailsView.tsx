@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Card, Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { UserEvents } from '@waldur/user/dashboard/UserEvents';
 import { KeysList } from '@waldur/user/keys/KeysList';
@@ -25,37 +24,37 @@ interface OwnProps {
   user: UserDetails;
 }
 
-export type UserDetailsViewProps = TranslateProps & StateProps & OwnProps;
+export type UserDetailsViewProps = StateProps & OwnProps;
 
 export const PureUserDetailsView: FunctionComponent<UserDetailsViewProps> = (
   props,
 ) => (
   <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
     {props.isVisibleForSupportOrStaff && (
-      <Tab eventKey={1} title={props.translate('Details')}>
+      <Tab eventKey={1} title={translate('Details')}>
         <Card>
           <UserDetailsTable user={props.user} />
         </Card>
       </Tab>
     )}
-    <Tab eventKey={2} title={props.translate('Audit log')}>
+    <Tab eventKey={2} title={translate('Audit log')}>
       <Card>
         <UserEvents user={props.user} showActions={false} />
       </Card>
     </Tab>
     {props.userManageIsVisible && (
-      <Tab eventKey={3} title={props.translate('Manage')}>
+      <Tab eventKey={3} title={translate('Manage')}>
         <Card>
           <UserEditContainer user={props.user} showDeleteButton={false} />
         </Card>
       </Tab>
     )}
-    <Tab eventKey={4} title={props.translate('Keys')}>
+    <Tab eventKey={4} title={translate('Keys')}>
       <Card>
         <KeysList user={props.user} />
       </Card>
     </Tab>
-    <Tab eventKey={5} title={props.translate('Remote accounts')}>
+    <Tab eventKey={5} title={translate('Remote accounts')}>
       <Card>
         <UserOfferingList user={props.user} />
       </Card>
@@ -68,9 +67,6 @@ const mapStateToProps = (state: RootState) => ({
   isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),
 });
 
-const enhance = compose(
-  connect<StateProps, {}, OwnProps>(mapStateToProps),
-  withTranslation,
-);
+const enhance = connect<StateProps, {}, OwnProps>(mapStateToProps);
 
 export const UserDetailsView = enhance(PureUserDetailsView);

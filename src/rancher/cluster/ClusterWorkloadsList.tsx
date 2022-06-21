@@ -1,13 +1,13 @@
 import { FunctionComponent } from 'react';
 
 import { formatDate } from '@waldur/core/dateUtils';
+import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 
 import { WorkloadActions } from './WorkloadActions';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

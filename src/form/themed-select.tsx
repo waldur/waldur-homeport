@@ -24,7 +24,7 @@ const DARK_COLORS = {
 };
 
 const useTheme = (): ThemeConfig => {
-  const theme = useSelector((state: RootState) => state.theme.theme);
+  const theme = useSelector((state: RootState) => state.theme?.theme);
   return (boxTheme) => {
     if (theme === 'dark') {
       return {

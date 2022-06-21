@@ -2,9 +2,9 @@ import { debounce } from 'lodash';
 import { Component } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
-interface FilterBarProps extends TranslateProps {
+interface FilterBarProps {
   filterQuery: string;
   setFilterQuery: (query: string) => void;
 }
@@ -35,7 +35,7 @@ export class FilterBar extends Component<FilterBarProps, FilterBarState> {
       <Form.Control
         type="text"
         value={this.state.filter}
-        placeholder={this.props.translate('Search for offerings...')}
+        placeholder={translate('Search for offerings...')}
         onChange={this.setFilterQuery}
       />
     );

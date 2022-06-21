@@ -1,8 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { ServiceProvider } from '@waldur/marketplace/types';
 import { showError, showSuccess } from '@waldur/store/notify';
@@ -15,7 +14,7 @@ import { canRegisterServiceProviderForCustomer } from './selectors';
 import { ServiceProviderRegisterButton } from './ServiceProviderRegisterButton';
 import { ServiceProviderSecretCode } from './ServiceProviderSecretCode';
 
-interface ServiceProviderWrapperProps extends TranslateProps {
+interface ServiceProviderWrapperProps {
   customer: Customer;
   canRegisterServiceProvider: boolean;
   showError?(message: string): void;
@@ -95,7 +94,6 @@ class ServiceProviderWrapper extends Component<
               serviceProvider={this.state.serviceProvider}
               showError={this.props.showError}
               showSuccess={this.props.showSuccess}
-              translate={translate}
             />
           </>
         )}
@@ -109,13 +107,10 @@ const mapStateToProps = (state: RootState) => ({
   canRegisterServiceProvider: canRegisterServiceProviderForCustomer(state),
 });
 
-const enhance = compose(
-  withTranslation,
-  connect(mapStateToProps, {
-    showError,
-    showSuccess,
-    updateCustomer,
-  }),
-);
+const enhance = connect(mapStateToProps, {
+  showError,
+  showSuccess,
+  updateCustomer,
+});
 
 export const ServiceProviderManagement = enhance(ServiceProviderWrapper);

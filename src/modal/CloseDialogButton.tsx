@@ -1,8 +1,7 @@
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 
 interface OwnProps {
@@ -14,14 +13,9 @@ interface DispatchProps {
   dismiss(): void;
 }
 
-type Props = TranslateProps & OwnProps & DispatchProps;
+type Props = OwnProps & DispatchProps;
 
-const PureCloseDialogButton = ({
-  translate,
-  dismiss,
-  label,
-  className,
-}: Props) => (
+const PureCloseDialogButton = ({ dismiss, label, className }: Props) => (
   <Button className={className} onClick={dismiss} variant="secondary">
     {label || translate('Cancel')}
   </Button>
@@ -31,9 +25,9 @@ const mapDispatchToProps = (dispatch) => ({
   dismiss: () => dispatch(closeModalDialog()),
 });
 
-const enhance = compose(
-  connect<{}, DispatchProps, OwnProps>(undefined, mapDispatchToProps),
-  withTranslation,
+const enhance = connect<{}, DispatchProps, OwnProps>(
+  undefined,
+  mapDispatchToProps,
 );
 
 export const CloseDialogButton = enhance(PureCloseDialogButton);

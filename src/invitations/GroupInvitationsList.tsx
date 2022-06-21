@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { translate } from '@waldur/i18n';
 import { GroupInvitationCreateButton } from '@waldur/invitations/actions/GroupInvitationCreateButton';
 import { GROUP_INVITATIONS_FILTER_FORM_ID } from '@waldur/invitations/constants';
 import { GroupInvitationRowActions } from '@waldur/invitations/GroupInvitationRowActions';
@@ -18,7 +19,6 @@ import { TableOptionsType } from '@waldur/table/types';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table
       {...props}

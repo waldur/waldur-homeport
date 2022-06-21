@@ -3,6 +3,7 @@ import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { translate } from '@waldur/i18n';
 import {
   OFFERING_CATEGORY_SECTION_FORM_ID,
   SERVICE_PROVIDER_OFFERING_GRID,
@@ -22,7 +23,6 @@ interface OwnProps {
 }
 
 const GridComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(

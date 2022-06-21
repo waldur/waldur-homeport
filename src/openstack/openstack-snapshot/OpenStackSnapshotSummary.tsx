@@ -1,10 +1,10 @@
 import { formatFilesize, getUUID } from '@waldur/core/utils';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import {
   Field,
   ResourceSummaryProps,
-  PureResourceSummaryBase,
+  ResourceSummaryBase,
 } from '@waldur/resource/summary';
 
 const formatVolume = (props) => (
@@ -16,17 +16,13 @@ const formatVolume = (props) => (
   />
 );
 
-const PureOpenStackSnapshotSummary = (props: ResourceSummaryProps) => {
-  const { translate, resource } = props;
+export const OpenStackSnapshotSummary = (props: ResourceSummaryProps) => {
+  const { resource } = props;
   return (
     <span>
-      <PureResourceSummaryBase {...props} />
+      <ResourceSummaryBase {...props} />
       <Field label={translate('Size')} value={formatFilesize(resource.size)} />
       <Field label={translate('Volume')} value={formatVolume(resource)} />
     </span>
   );
 };
-
-export const OpenStackSnapshotSummary = withTranslation(
-  PureOpenStackSnapshotSummary,
-);

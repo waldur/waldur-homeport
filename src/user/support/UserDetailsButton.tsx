@@ -1,21 +1,20 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { UserDetails } from '@waldur/workspace/types';
 
 import * as actions from './actions';
 
-interface UserDetailsButtonProps extends TranslateProps {
+interface UserDetailsButtonProps {
   row: UserDetails;
   onClick: () => void;
 }
 
 const PureUserDetailsButton: FunctionComponent<UserDetailsButtonProps> = (
   props,
-) => <ActionButton title={props.translate('Details')} action={props.onClick} />;
+) => <ActionButton title={translate('Details')} action={props.onClick} />;
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onClick: (e) => {
@@ -24,6 +23,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-const enhance = compose(connect(null, mapDispatchToProps), withTranslation);
+const enhance = connect(null, mapDispatchToProps);
 
 export const UserDetailsButton = enhance(PureUserDetailsButton);

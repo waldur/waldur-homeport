@@ -1,21 +1,20 @@
 import { FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/configs/default';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-interface UserRemovalMessageDialogProps extends TranslateProps {
+interface UserRemovalMessageDialogProps {
   resolve: {
     userName: string;
   };
 }
 
-export const PureUserRemovalMessageDialog: FunctionComponent<UserRemovalMessageDialogProps> =
+export const UserRemovalMessageDialog: FunctionComponent<UserRemovalMessageDialogProps> =
   (props) => {
     const {
       resolve: { userName },
-      translate,
     } = props;
     return (
       <ModalDialog
@@ -41,7 +40,3 @@ export const PureUserRemovalMessageDialog: FunctionComponent<UserRemovalMessageD
       </ModalDialog>
     );
   };
-
-export const UserRemovalMessageDialog = withTranslation(
-  PureUserRemovalMessageDialog,
-);

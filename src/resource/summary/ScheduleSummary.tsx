@@ -1,22 +1,22 @@
 import React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import {
   Field,
   ResourceSummaryProps,
-  PureResourceSummaryBase,
+  ResourceSummaryBase,
 } from '@waldur/resource/summary';
 import { Schedule } from '@waldur/resource/types';
 import { formatRetentionTime, formatSchedule } from '@waldur/resource/utils';
 
-export const PureScheduleSummary: React.FC<ResourceSummaryProps<Schedule>> = (
+export const ScheduleSummary: React.FC<ResourceSummaryProps<Schedule>> = (
   props,
 ) => {
-  const { translate, resource } = props;
+  const { resource } = props;
   return (
     <>
-      <PureResourceSummaryBase {...props} />
+      <ResourceSummaryBase {...props} />
       <Field label={translate('Schedule')} value={formatSchedule(props)} />
       <Field label={translate('Time zone')} value={resource.timezone} />
       <Field
@@ -34,5 +34,3 @@ export const PureScheduleSummary: React.FC<ResourceSummaryProps<Schedule>> = (
     </>
   );
 };
-
-export const ScheduleSummary = withTranslation(PureScheduleSummary);

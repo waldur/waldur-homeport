@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import {
   Field,
-  PureResourceSummaryBase,
+  ResourceSummaryBase,
   ResourceSummaryProps,
 } from '@waldur/resource/summary';
 import { UserPassword } from '@waldur/resource/UserPassword';
@@ -27,13 +27,10 @@ const formatAccess = (props: OpenStackTenantSummaryProps) => {
     return null;
   }
   if (!props.resource.access_url) {
-    return props.translate('No access info.');
+    return translate('No access info.');
   }
   return (
-    <ExternalLink
-      label={props.translate('Open')}
-      url={props.resource.access_url}
-    />
+    <ExternalLink label={translate('Open')} url={props.resource.access_url} />
   );
 };
 
@@ -47,11 +44,11 @@ const formatPassword = (props: OpenStackTenantSummaryProps) =>
 
 export const PureOpenStackTenantSummary: FunctionComponent<OpenStackTenantSummaryProps> =
   (props) => {
-    const { translate, resource } = props;
+    const { resource } = props;
     const limits = parseQuotas(resource.quotas);
     return (
       <>
-        <PureResourceSummaryBase {...props} />
+        <ResourceSummaryBase {...props} />
         <Field
           label={translate('Summary')}
           value={
@@ -82,6 +79,6 @@ const mapStateToProps = (state: RootState) => ({
     state.config.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE,
 });
 
-const enhance = compose(connect(mapStateToProps), withTranslation);
+const enhance = compose(connect(mapStateToProps));
 
 export const OpenStackTenantSummary = enhance(PureOpenStackTenantSummary);

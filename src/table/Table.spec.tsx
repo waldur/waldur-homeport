@@ -1,6 +1,5 @@
 import { shallow, mount } from 'enzyme';
 
-import { formatTemplate } from '@waldur/i18n/translate';
 import {
   LoadingSpinner,
   TableLoadingSpinnerContainer,
@@ -11,7 +10,6 @@ import Table from './Table';
 describe('Table', () => {
   const fetch = jest.fn();
   const defaultProps = {
-    translate: formatTemplate,
     loading: false,
     error: null,
     fetch,
@@ -65,7 +63,6 @@ describe('Table', () => {
           fetch={fetch}
           loading={false}
           error={null}
-          translate={formatTemplate}
           pagination={{
             resultCount: 1,
             currentPage: 1,

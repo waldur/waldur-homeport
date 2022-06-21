@@ -1,15 +1,13 @@
 import { Button } from 'react-bootstrap';
 
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
-interface ComponentAddButtonProps extends TranslateProps {
+interface ComponentAddButtonProps {
   onClick(): void;
 }
 
-export const ComponentAddButton = withTranslation(
-  (props: ComponentAddButtonProps) => (
-    <Button onClick={props.onClick}>
-      <i className="fa fa-plus" /> {props.translate('Add component')}
-    </Button>
-  ),
+export const ComponentAddButton = (props: ComponentAddButtonProps) => (
+  <Button onClick={props.onClick}>
+    <i className="fa fa-plus" /> {translate('Add component')}
+  </Button>
 );

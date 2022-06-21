@@ -6,14 +6,14 @@ import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField, StringField } from '@waldur/form';
 import { FormFieldsContext, FormLayoutContext } from '@waldur/form/context';
 import { StaticField } from '@waldur/form/StaticField';
-import { translate, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { Option } from '@waldur/marketplace/common/registry';
 import { ProviderFormProps } from '@waldur/providers/types';
 
 import { OfferingOptions } from '../option/OfferingOptions';
 import { OfferingScheduler } from '../option/OfferingScheduler';
 
-export interface ManagementStepProps extends TranslateProps {
+export interface ManagementStepProps {
   pluginOptionsForm?: React.ComponentType<any>;
   secretOptionsForm?: React.ComponentType<any>;
   showOptions: boolean;
@@ -64,7 +64,6 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
       {props.editable && props.serviceSettingsForm ? (
         <FormSection name="service_settings">
           {React.createElement(props.serviceSettingsForm, {
-            translate,
             container: ContainerProps,
           })}
         </FormSection>
@@ -80,11 +79,7 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
         </Form.Group>
       ) : null}
       {props.schedulable && (
-        <FieldArray
-          name="schedules"
-          component={OfferingScheduler}
-          layout={layout}
-        />
+        <FieldArray name="schedules" component={OfferingScheduler} />
       )}
       {props.showOptions && (
         <FieldArray

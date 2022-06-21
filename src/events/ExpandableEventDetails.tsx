@@ -1,8 +1,6 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
@@ -13,7 +11,7 @@ interface StateProps {
   isStaffOrSupport: boolean;
 }
 
-interface ExpandableEventDetailsProps extends TranslateProps, StateProps {
+interface ExpandableEventDetailsProps extends StateProps {
   row: Event;
 }
 
@@ -29,6 +27,6 @@ const mapStateToProps = (state: RootState) => ({
   isStaffOrSupport: isStaffOrSupport(state),
 });
 
-const enhance = compose(connect<StateProps>(mapStateToProps), withTranslation);
+const enhance = connect<StateProps>(mapStateToProps);
 
 export const ExpandableEventDetails = enhance(PureExpandableEventDetails);

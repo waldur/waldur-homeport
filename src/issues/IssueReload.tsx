@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { Tip } from '@waldur/core/Tooltip';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { issueAttachmentsGet } from '@waldur/issues/attachments/actions';
 import { getIsLoading as getAttachmentsIsLoading } from '@waldur/issues/attachments/selectors';
 import { issueCommentsGet } from '@waldur/issues/comments/actions';
@@ -11,7 +10,7 @@ import { getIsLoading as getCommentsIsLoading } from '@waldur/issues/comments/se
 import './IssueReload.scss';
 import { RootState } from '@waldur/store/reducers';
 
-interface PureIssueReloadProps extends TranslateProps {
+interface PureIssueReloadProps {
   issueUrl: string;
   loading: boolean;
   fetchData(): void;
@@ -20,7 +19,7 @@ interface PureIssueReloadProps extends TranslateProps {
 export const PureIssueReload: FunctionComponent<PureIssueReloadProps> = (
   props,
 ) => {
-  const { fetchData, loading, translate } = props;
+  const { fetchData, loading } = props;
 
   return (
     <Tip label={translate('Reload issue data')} id="reload_issue_tooltip">
@@ -42,9 +41,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
 
 export const IssueReload = enhance(PureIssueReload);

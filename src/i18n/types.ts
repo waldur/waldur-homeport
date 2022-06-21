@@ -5,8 +5,3 @@ export type Translate = (
   context?: {},
   interpolator?: Interpolator,
 ) => string;
-
-export interface TranslateProps {
-  translate: Translate;
-  locale?: string;
-}

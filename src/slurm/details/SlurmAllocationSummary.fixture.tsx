@@ -4,7 +4,6 @@ import configureStore from 'redux-mock-store';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { actWait, updateWrapper } from '@waldur/core/testUtils';
-import { translate } from '@waldur/i18n';
 import { SlurmAssociation } from '@waldur/slurm/details/types';
 import '@waldur/slurm/provider';
 
@@ -15,7 +14,7 @@ export const renderSummary = async (props) => {
   const store = mockStore();
   const wrapper = mount(
     <Provider store={store}>
-      <SlurmAllocationSummary {...props} translate={translate} />
+      <SlurmAllocationSummary {...props} />
     </Provider>,
   );
   await actWait();

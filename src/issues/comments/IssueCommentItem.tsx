@@ -6,16 +6,13 @@ import { compose } from 'redux';
 
 import { formatMediumDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import {
-  formatJsxTemplate,
-  TranslateProps,
-  withTranslation,
-} from '@waldur/i18n';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { getAttachments } from '@waldur/issues/attachments/selectors';
 import { Attachment } from '@waldur/issues/attachments/types';
 import { openAttachmentModal } from '@waldur/issues/attachments/utils';
 import { LoadingOverlay } from '@waldur/issues/comments/LoadingOverlay';
 import { openModalDialog } from '@waldur/modal/actions';
+import { UserDetails } from '@waldur/workspace/types';
 
 import * as actions from './actions';
 import './IssueCommentItem.scss';
@@ -26,7 +23,7 @@ import {
   getIsUiDisabled,
   getUser,
 } from './selectors';
-import { Comment, User } from './types';
+import { Comment } from './types';
 import * as utils from './utils';
 
 const IssueCommentDeleteDialog = lazyComponent(
@@ -36,9 +33,9 @@ const IssueCommentDeleteDialog = lazyComponent(
     ),
   'IssueCommentDeleteDialog',
 );
-interface PureIssueCommentItemProps extends TranslateProps {
+interface PureIssueCommentItemProps {
   comment: Comment;
-  user: User;
+  user: UserDetails;
   users: any;
   attachments: Attachment[];
   deleting: boolean;
@@ -66,7 +63,6 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
       openUserDialog,
       openAttachmentPreview,
       toggleForm,
-      translate,
     } = props;
     const userList =
       users &&
@@ -173,9 +169,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(openAttachmentModal(url, name)),
 });
 
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = compose(connect(mapStateToProps, mapDispatchToProps));
 
 export const IssueCommentItem = enhance(PureIssueCommentItem);

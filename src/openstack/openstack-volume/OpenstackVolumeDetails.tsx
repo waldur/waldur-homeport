@@ -2,7 +2,7 @@ import { useAsync } from 'react-use';
 
 import { get } from '@waldur/core/api';
 import { formatFilesize } from '@waldur/core/utils';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { OrderItemDetailsField } from '@waldur/marketplace/orders/item/details/OrderItemDetailsField';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
@@ -13,12 +13,12 @@ const formatSize = (props) => {
   return formatFilesize(props.orderItem.attributes.size);
 };
 
-export interface OpenstackVolumeDetailsProps extends TranslateProps {
+export interface OpenstackVolumeDetailsProps {
   orderItem: OrderItemResponse;
 }
 
-const PureOpenstackVolumeDetails = (props: OpenstackVolumeDetailsProps) => {
-  const { translate, orderItem } = props;
+export const OpenstackVolumeDetails = (props: OpenstackVolumeDetailsProps) => {
+  const { orderItem } = props;
   const { value: volumeType } = useAsync(() =>
     get<VolumeType>(orderItem.attributes.type).then(
       (response) => response.data,
@@ -42,7 +42,3 @@ const PureOpenstackVolumeDetails = (props: OpenstackVolumeDetailsProps) => {
     </>
   );
 };
-
-export const OpenstackVolumeDetails = withTranslation(
-  PureOpenstackVolumeDetails,
-);

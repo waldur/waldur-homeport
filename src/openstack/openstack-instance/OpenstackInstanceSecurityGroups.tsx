@@ -1,11 +1,10 @@
 import { Component } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Select } from '@waldur/form/themed-select';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import {
   SecurityGroup,
@@ -39,7 +38,7 @@ interface DispatchProps {
 }
 
 class OpenstackInstanceSecurityGroupsComponent extends Component<
-  OwnProps & DispatchProps & TranslateProps
+  OwnProps & DispatchProps
 > {
   openDetailsDialog = (e) => {
     e.preventDefault();
@@ -73,7 +72,7 @@ class OpenstackInstanceSecurityGroupsComponent extends Component<
         <Col md={9}>
           <Select
             name="security-group"
-            placeholder={this.props.translate('Select security groups...')}
+            placeholder={translate('Select security groups...')}
             value={this.props.input.value}
             options={this.props.securityGroups}
             getOptionValue={(option) => option.uuid}
@@ -91,7 +90,7 @@ class OpenstackInstanceSecurityGroupsComponent extends Component<
             disabled={this.props.input.value.length === 0}
             onClick={this.openDetailsDialog}
           >
-            <i className="fa fa-eye" /> {this.props.translate('Details')}
+            <i className="fa fa-eye" /> {translate('Details')}
           </Button>
         </Col>
       </Row>
@@ -104,9 +103,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(openSecurityGroupsDetailsDialog(securityGroups)),
 });
 
-const enhance = compose(
-  connect<{}, DispatchProps, OwnProps>(undefined, mapDispatchToProps),
-  withTranslation,
+const enhance = connect<{}, DispatchProps, OwnProps>(
+  undefined,
+  mapDispatchToProps,
 );
 
 export const OpenstackInstanceSecurityGroups = enhance(

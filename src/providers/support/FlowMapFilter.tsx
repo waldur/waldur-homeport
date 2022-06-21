@@ -5,9 +5,9 @@ import { reduxForm } from 'redux-form';
 
 import { StringField, FormContainer, SelectField } from '@waldur/form';
 import { CheckboxField } from '@waldur/form/CheckboxField';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
-interface FlowMapFilterProps extends TranslateProps {
+interface FlowMapFilterProps {
   submitting: boolean;
 }
 
@@ -50,27 +50,27 @@ const PureFlowMapFilter: FunctionComponent<FlowMapFilterProps> = (props) => (
           controlClass="me-3"
           submitting={props.submitting}
         >
-          <StringField label={props.translate('Month')} name="month" />
+          <StringField label={translate('Month')} name="month" />
           <SelectField
             className="metrics-select"
-            label={props.translate('Metric')}
+            label={translate('Metric')}
             name="metric"
             options={metricOptions}
             isClearable={true}
           />
           <CheckboxField
             checked={false}
-            label={props.translate('Show shared')}
+            label={translate('Show shared')}
             name="show_shared"
           />
           <CheckboxField
             checked={false}
-            label={props.translate('Show private')}
+            label={translate('Show private')}
             name="show_private"
           />
           <SelectField
             className="metrics-select"
-            label={props.translate('Service provider type')}
+            label={translate('Service provider type')}
             name="service_provider_type"
             options={serviceProviderTypeOptions}
             isClearable={true}
@@ -81,6 +81,6 @@ const PureFlowMapFilter: FunctionComponent<FlowMapFilterProps> = (props) => (
   </Card>
 );
 
-const enhance = compose(reduxForm({ form: 'flowMapFilter' }), withTranslation);
+const enhance = compose(reduxForm({ form: 'flowMapFilter' }));
 
 export const FlowMapFilter = enhance(PureFlowMapFilter);

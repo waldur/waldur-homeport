@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 
 import { formatDate } from '@waldur/core/dateUtils';
+import { translate } from '@waldur/i18n';
 import { HPA } from '@waldur/rancher/types';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -13,7 +14,6 @@ import { HPADeleteButton } from './HPADeleteButton';
 import { HPAUpdateButton } from './HPAUpdateButton';
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
   return (
     <Table<HPA>
       {...props}

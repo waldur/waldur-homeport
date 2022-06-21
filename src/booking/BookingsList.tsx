@@ -10,7 +10,7 @@ import {
   BOOKING_RESOURCES_TABLE,
   OFFERING_TYPE_BOOKING,
 } from '@waldur/booking/constants';
-import { translate, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
@@ -129,11 +129,7 @@ const mapStateToProps = (state: RootState) => ({
   filter: bookingFormSelector(state),
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  connectTable(TableOptions),
-  withTranslation,
-);
+const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const BookingsList = enhance(
   TableComponent,

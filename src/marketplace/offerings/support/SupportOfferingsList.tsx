@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
 import { OfferingsListTablePlaceholder } from '@waldur/marketplace/offerings/OfferingsListTablePlaceholder';
 import { Offering } from '@waldur/marketplace/types';
@@ -19,8 +19,6 @@ import {
 } from './constants';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
-
   const columns = [
     {
       title: translate('Name'),
@@ -96,11 +94,7 @@ const mapStateToProps = (state: RootState) => ({
   filter: getFormValues(SUPPORT_OFFERINGS_FILTER_FORM_ID)(state),
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  connectTable(TableOptions),
-  withTranslation,
-);
+const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const SupportOfferingsList = enhance(
   TableComponent,
