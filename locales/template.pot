@@ -2849,7 +2849,6 @@ msgid "Explore {deployment} service catalog"
 msgstr ""
 
 #: src/table/ExportDropdown.tsx
-#: src/table/TableButtons.tsx
 #: src/table/TableDropdowns.tsx
 #: src/table/TableExportButton.tsx
 msgid "Export"

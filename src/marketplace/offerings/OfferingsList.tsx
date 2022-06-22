@@ -19,6 +19,7 @@ import {
 import { openModalDialog } from '@waldur/modal/actions';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableDropdowns } from '@waldur/table/TableDropdowns';
 import { TableOptionsType } from '@waldur/table/types';
 import {
   getCustomer,
@@ -88,31 +89,35 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     });
   }
 
-  const actions = [
-    {
-      label: translate('Add offerings'),
-      icon: 'fa fa-plus',
-      handler: () => {
-        router.stateService.go('marketplace-offering-create');
-      },
-    },
-    {
-      label: translate('Import offerings'),
-      icon: 'fa fa-plus',
-      handler: () => {
-        dispatch(openModalDialog(OfferingImportDialog, { size: 'lg' }));
-      },
-    },
-    {
-      label: translate('Public list'),
-      icon: 'fa fa-external-link',
-      handler: () => {
-        router.stateService.go('marketplace-service-provider.details', {
-          uuid: props.customer.uuid,
-        });
-      },
-    },
-  ];
+  const actions = (
+    <TableDropdowns
+      actions={[
+        {
+          label: translate('Add offerings'),
+          icon: 'fa fa-plus',
+          handler: () => {
+            router.stateService.go('marketplace-offering-create');
+          },
+        },
+        {
+          label: translate('Import offerings'),
+          icon: 'fa fa-plus',
+          handler: () => {
+            dispatch(openModalDialog(OfferingImportDialog, { size: 'lg' }));
+          },
+        },
+        {
+          label: translate('Public list'),
+          icon: 'fa fa-external-link',
+          handler: () => {
+            router.stateService.go('marketplace-service-provider.details', {
+              uuid: props.customer.uuid,
+            });
+          },
+        },
+      ]}
+    />
+  );
 
   return (
     <Table
