@@ -38,7 +38,7 @@ export const TestScriptButton: FunctionComponent<{
       <div className={container.labelClass} />
       <div className={container.controlClass}>
         <Button
-          bsStyle="success"
+          variant="success"
           onClick={() => testScript()}
           disabled={disabled || loading}
         >
