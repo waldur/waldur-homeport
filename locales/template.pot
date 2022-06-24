@@ -52,6 +52,7 @@ msgstr ""
 msgid "API secret code:"
 msgstr ""
 
+#: src/navigation/header/UserDropdown.tsx
 #: src/user/api-key/UserEditTokenContainer.tsx
 msgid "API token"
 msgstr ""
@@ -1636,6 +1637,10 @@ msgstr ""
 
 #: src/rancher/cluster/create/NodeRoleField.tsx
 msgid "Control plane"
+msgstr ""
+
+#: src/navigation/header/UserDropdown.tsx
+msgid "Copy"
 msgstr ""
 
 #: src/core/CopyToClipboard.tsx
@@ -9212,7 +9217,12 @@ msgid "To report an issue, please send an email to {supportEmail}."
 msgstr ""
 
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
+#: src/navigation/header/UserDropdown.tsx
 msgid "Token"
+msgstr ""
+
+#: src/navigation/header/UserDropdown.tsx
+msgid "Token has been copied"
 msgstr ""
 
 #: src/user/api-key/TokenLifetimeField.tsx
