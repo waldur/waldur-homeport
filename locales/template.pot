@@ -8211,6 +8211,10 @@ msgstr ""
 msgid "Show events"
 msgstr ""
 
+#: src/navigation/sidebar/ResourcesMenu.tsx
+msgid "Show less"
+msgstr ""
+
 #: src/marketplace/offerings/service-providers/shared/ShowOfferingsButton.tsx
 msgid "Show offerings"
 msgstr ""
@@ -8252,6 +8256,10 @@ msgstr ""
 #: src/customer/list/AccountingRunningField.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
+msgstr ""
+
+#: src/navigation/sidebar/ResourcesMenu.tsx
+msgid "Show {count} more"
 msgstr ""
 
 #: src/marketplace/offerings/service-providers/FilteredBy.tsx
