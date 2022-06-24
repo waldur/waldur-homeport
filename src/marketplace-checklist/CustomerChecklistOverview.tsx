@@ -49,7 +49,7 @@ const CategoryPanel = ({ category, checklists, customer }) => {
   );
 
   return (
-    <Panel title={category.name}>
+    <Panel title={category.name} className="mb-6">
       <Select
         getOptionValue={(option) => option.uuid}
         getOptionLabel={(option) => option.name}
