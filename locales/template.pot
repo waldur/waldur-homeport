@@ -3203,6 +3203,10 @@ msgstr ""
 msgid "Go to service catalog"
 msgstr ""
 
+#: src/customer/dashboard/CustomerProfile.tsx
+msgid "Go to support"
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Google Calendar has been published successfully."
 msgstr ""
@@ -4138,6 +4142,7 @@ msgstr ""
 msgid "MTU"
 msgstr ""
 
+#: src/customer/dashboard/CustomerProfile.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Manage"
 msgstr ""
@@ -4270,6 +4275,10 @@ msgstr ""
 #: src/i18n/constants.ts
 #: src/project/team/ProjectUsersList.tsx
 msgid "Member"
+msgstr ""
+
+#: src/customer/dashboard/CustomerProfile.tsx
+msgid "Members:"
 msgstr ""
 
 #: src/rancher/cluster/hpas/utils.ts
@@ -5478,6 +5487,10 @@ msgstr ""
 
 #: src/customer/team/CustomerUsersList.tsx
 msgid "Owner"
+msgstr ""
+
+#: src/customer/dashboard/CustomerProfile.tsx
+msgid "Owners:"
 msgstr ""
 
 #: src/i18n/constants.ts
@@ -7266,7 +7279,6 @@ msgstr ""
 msgid "Resource usage for {resource}"
 msgstr ""
 
-#: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/resources/ResourceDetailsPage.tsx
@@ -7978,6 +7990,7 @@ msgstr ""
 msgid "Service manager of:"
 msgstr ""
 
+#: src/customer/dashboard/CustomerProfile.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
 #: src/invoices/details/ResourceRow.tsx
@@ -8634,6 +8647,10 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "Support user"
+msgstr ""
+
+#: src/customer/dashboard/CustomerProfile.tsx
+msgid "Support:"
 msgstr ""
 
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
@@ -11056,6 +11073,10 @@ msgstr ""
 
 #: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
 msgid "View all"
+msgstr ""
+
+#: src/customer/dashboard/CustomerProfile.tsx
+msgid "View resources"
 msgstr ""
 
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx

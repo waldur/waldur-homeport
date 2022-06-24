@@ -1,14 +1,13 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Panel } from '@waldur/core/Panel';
 import { CustomerBookingManagement } from '@waldur/customer/dashboard/CustomerBookingManagement';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { CustomerChecklistOverview } from '@waldur/marketplace-checklist/CustomerChecklistOverview';
-import { CustomerResourcesFilter } from '@waldur/marketplace/resources/list/CustomerResourcesFilter';
 import { useTitle } from '@waldur/navigation/title';
+import { ProjectsListOnly } from '@waldur/project/ProjectsList';
 import {
   getUser,
   getCustomer,
@@ -19,7 +18,7 @@ import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 import { useCustomerItems } from '../utils';
 
 import { CustomerDashboardChart } from './CustomerDashboardChart';
-import { CustomerResourcesList } from './CustomerResourcesList';
+import { CustomerProfile } from './CustomerProfile';
 
 export const CustomerDashboard: FunctionComponent = () => {
   useTitle(translate('Dashboard'));
@@ -38,12 +37,13 @@ export const CustomerDashboard: FunctionComponent = () => {
         <CustomerBookingManagement />
       ) : (
         <>
+          <CustomerProfile customer={customer} />
           <CustomerDashboardChart customer={customer} user={user} />
           <CustomerChecklistOverview customer={customer} />
           <CustomerBookingManagement />
-          <Panel title={translate('Resources')}>
-            <CustomerResourcesList filters={<CustomerResourcesFilter />} />
-          </Panel>
+          <div className="mb-6">
+            <ProjectsListOnly />
+          </div>
           {isFeatureVisible('customer.category_resources_list') && (
             <CategoryResourcesList
               scopeType={ORGANIZATION_WORKSPACE}

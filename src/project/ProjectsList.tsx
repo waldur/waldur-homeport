@@ -118,4 +118,9 @@ const TableOptions = {
 
 const enhance = compose(connectTable(TableOptions));
 
-export const ProjectsList = enhance(TableComponent);
+export const ProjectsList = enhance((props) => {
+  useTitle(translate('Projects'));
+  return <TableComponent {...props} />;
+});
+
+export const ProjectsListOnly = enhance(TableComponent);

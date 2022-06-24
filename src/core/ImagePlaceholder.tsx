@@ -1,3 +1,5 @@
+import './ImagePlaceholder.css';
+
 interface ImagePlaceholderProps {
   width?: string;
   height?: string;
@@ -7,14 +9,13 @@ interface ImagePlaceholderProps {
 
 export const ImagePlaceholder = (props: ImagePlaceholderProps) => {
   return (
-    <span
+    <div
+      className="image-placeholder"
       style={{
         width: props.width,
         minWidth: props.width,
         height: props.height,
         backgroundColor: props.backgroundColor,
-        borderRadius: '7px',
-        display: 'inline-block',
       }}
     />
   );

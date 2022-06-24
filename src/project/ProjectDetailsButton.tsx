@@ -28,6 +28,7 @@ export const ProjectDetailsButton = ({ project }: { project: Project }) => {
     <ActionButton
       title={translate('Details')}
       action={callback}
+      className="d-flex align-items-center"
       icon="fa fa-eye"
     />
   );
