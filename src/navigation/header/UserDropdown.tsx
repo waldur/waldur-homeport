@@ -1,6 +1,8 @@
 import { UISref, UISrefActive } from '@uirouter/react';
 import classNames from 'classnames';
-import { FunctionComponent, useMemo } from 'react';
+import copy from 'copy-to-clipboard';
+import { FunctionComponent, useCallback, useMemo } from 'react';
+import { Button, FormControl, InputGroup } from 'react-bootstrap';
 import Gravatar from 'react-gravatar';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,9 +12,11 @@ import { Link } from '@waldur/core/Link';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { useLanguageSelector } from '@waldur/i18n/useLanguageSelector';
+import { showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
 import { getPrivateUserTabs } from '@waldur/user/constants';
 import { getUser } from '@waldur/workspace/selectors';
+import { UserDetails } from '@waldur/workspace/types';
 
 import { updateThemeMode } from './store';
 
@@ -102,8 +106,46 @@ export const DarkLightMode: FunctionComponent = () => {
   );
 };
 
+const UserToken = ({ token }) => {
+  const dispatch = useDispatch();
+
+  const onClick = useCallback(() => {
+    copy(token);
+    dispatch(showSuccess(translate('Token has been copied')));
+  }, [dispatch, token]);
+
+  return (
+    <div className="menu-item px-5" data-kt-menu-trigger="click">
+      <div className="px-5 menu-link">
+        <span className="menu-title me-2 text-nowrap">
+          {translate('API token')}
+        </span>
+        <InputGroup>
+          <FormControl
+            value={token}
+            readOnly={true}
+            type="password"
+            className="form-control-solid"
+            size="sm"
+            placeholder={translate('Token')}
+          />
+          <Button
+            variant="primary"
+            size="sm"
+            className="px-3"
+            onClick={onClick}
+          >
+            <i className="fa fa-copy" />
+            {translate('Copy')}
+          </Button>
+        </InputGroup>
+      </div>
+    </div>
+  );
+};
+
 export const UserDropdownMenu: FunctionComponent = () => {
-  const user = useSelector(getUser);
+  const user = useSelector(getUser) as UserDetails;
   const items = useMemo(getSidebarItems, []);
   return (
     <>
@@ -163,6 +205,9 @@ export const UserDropdownMenu: FunctionComponent = () => {
 
         <div className="separator my-2"></div>
         <DarkLightMode />
+
+        <div className="separator my-2"></div>
+        <UserToken token={user.token} />
       </div>
     </>
   );
