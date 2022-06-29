@@ -67,6 +67,13 @@ const serializeSecurityGroups = (groups) => {
   }));
 };
 
+const serializeServerGroup = (group) => {
+  if (!group) {
+    return undefined;
+  }
+  return group.url;
+};
+
 const serializer = ({
   name,
   description,
@@ -80,6 +87,7 @@ const serializer = ({
   data_volume_type,
   ssh_public_key,
   security_groups,
+  server_group,
   availability_zone,
 }) => ({
   name,
@@ -89,6 +97,7 @@ const serializer = ({
   flavor: flavor ? flavor.url : undefined,
   ssh_public_key: ssh_public_key ? ssh_public_key.url : undefined,
   security_groups: serializeSecurityGroups(security_groups),
+  server_group: serializeServerGroup(server_group),
   internal_ips_set: serializeInternalIps(networks),
   floating_ips: serializeFloatingIPs(networks),
   system_volume_size,
