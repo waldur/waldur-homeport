@@ -7690,6 +7690,10 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceServerGroups.tsx
+msgid "Select a server group..."
+msgstr ""
+
 #: src/customer/list/AccountingPeriodField.tsx
 msgid "Select accounting period"
 msgstr ""
@@ -7932,6 +7936,10 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
 msgid "Server"
+msgstr ""
+
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+msgid "Server group"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/utils.ts
