@@ -31,7 +31,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
 
   // Search input autofocus
   useEffect(() => {
-    if (isVisible) refSearch.current.focus();
+    if (isVisible && refSearch.current) refSearch.current.focus();
   }, [isVisible]);
 
   const {
