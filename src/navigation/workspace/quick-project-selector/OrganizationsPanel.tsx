@@ -1,9 +1,11 @@
-import { useCallback, FunctionComponent } from 'react';
+import { useCurrentStateAndParams } from '@uirouter/react';
+import { useMemo, useCallback, FunctionComponent } from 'react';
 import { Col, ListGroupItem, Stack } from 'react-bootstrap';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { getProviderItems } from '@waldur/navigation/navitems';
 
 import { getCustomersPage } from '../api';
 import { VirtualPaginatedList } from '../VirtualPaginatedList';
@@ -66,9 +68,23 @@ export const OrganizationsPanel: FunctionComponent<{
   selectOrganization;
   filter;
 }> = ({ selectedOrganization, selectOrganization, filter }) => {
+  const { state } = useCurrentStateAndParams();
+  const isServiceProvider = useMemo(
+    () =>
+      getProviderItems()
+        .map((item) => item.to)
+        .includes(state.name),
+    [state.name],
+  );
   const getPage = useCallback(
-    (page) => getCustomersPage(filter, page, VIRTUALIZED_SELECTOR_PAGE_SIZE),
-    [filter],
+    (page) =>
+      getCustomersPage(
+        filter,
+        page,
+        VIRTUALIZED_SELECTOR_PAGE_SIZE,
+        isServiceProvider,
+      ),
+    [filter, isServiceProvider],
   );
 
   return (
@@ -82,7 +98,7 @@ export const OrganizationsPanel: FunctionComponent<{
         height={800}
         itemSize={50}
         getPage={getPage}
-        key={filter}
+        key={`${filter}-${isServiceProvider}`}
         elementsPerPage={VIRTUALIZED_SELECTOR_PAGE_SIZE}
         noResultsRenderer={EmptyOrganizationListPlaceholder}
       >

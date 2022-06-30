@@ -8,7 +8,7 @@ export const getCustomersCount = () =>
     parseResultCount(response),
   );
 
-export const getCustomersPage = (query, page, pageSize) =>
+export const getCustomersPage = (query, page, pageSize, isServiceProvider?) =>
   Axios.get(`${ENV.apiEndpoint}api/customers/`, {
     params: {
       page: page + 1,
@@ -24,6 +24,7 @@ export const getCustomersPage = (query, page, pageSize) =>
       ],
       o: 'name',
       query,
+      is_service_provider: isServiceProvider,
     },
   }).then((response) => ({
     pageElements: response.data,
