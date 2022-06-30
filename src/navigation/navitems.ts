@@ -96,7 +96,7 @@ export const useSupportItems = () => {
   useTabs(tabs);
 };
 
-const getProviderItems = () => [
+export const getProviderItems = () => [
   {
     title: translate('Public offerings'),
     to: 'marketplace-vendor-offerings',
