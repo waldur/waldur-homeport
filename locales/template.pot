@@ -3763,6 +3763,10 @@ msgstr ""
 msgid "Invoice has not been sent to PayPal yet"
 msgstr ""
 
+#: src/invoices/details/InvoiceItemMoveDialog.tsx
+msgid "Invoice item has been moved."
+msgstr ""
+
 #: src/invoices/details/InvoiceItemDelete.tsx
 msgid "Invoice item has been removed."
 msgstr ""
@@ -4391,6 +4395,14 @@ msgstr ""
 
 #: src/marketplace/resources/actions/MoveResourceAction.tsx
 msgid "Move"
+msgstr ""
+
+#: src/invoices/details/InvoiceItemMoveDialog.tsx
+msgid "Move invoice item {name}"
+msgstr ""
+
+#: src/invoices/details/InvoiceItemMove.tsx
+msgid "Move item"
 msgstr ""
 
 #: src/project/MoveProjectAction.tsx
@@ -8731,6 +8743,10 @@ msgstr ""
 msgid "Target"
 msgstr ""
 
+#: src/invoices/details/InvoiceItemMoveDialog.tsx
+msgid "Target invoice"
+msgstr ""
+
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Target type"
@@ -9950,6 +9966,10 @@ msgstr ""
 
 #: src/invoices/store/effects.ts
 msgid "Unable to mark the invoice as paid."
+msgstr ""
+
+#: src/invoices/details/InvoiceItemMoveDialog.tsx
+msgid "Unable to move invoice item."
 msgstr ""
 
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx

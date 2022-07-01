@@ -1,5 +1,12 @@
 import { ENV } from '@waldur/configs/default';
-import { deleteById, get, patch, post, sendForm } from '@waldur/core/api';
+import {
+  deleteById,
+  get,
+  getAll,
+  patch,
+  post,
+  sendForm,
+} from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';
@@ -44,3 +51,12 @@ export const createInvoiceItemCompensation = (itemId, payload) =>
 
 export const updateInvoiceItem = (itemId, payload) =>
   patch(`/invoice-items/${itemId}/`, payload);
+
+export const moveInvoiceItem = (itemId, payload) =>
+  post(`/invoice-items/${itemId}/migrate_to/`, payload);
+
+export const loadInvoices = (options) =>
+  getAll<{ url: string; number: string; year: number; month: number }>(
+    '/invoices/',
+    options,
+  );

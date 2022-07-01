@@ -6,6 +6,7 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { InvoiceItemCompensation } from './InvoiceItemCompensation';
 import { InvoiceItemDelete } from './InvoiceItemDelete';
+import { InvoiceItemMove } from './InvoiceItemMove';
 import { InvoiceItemUpdate } from './InvoiceItemUpdate';
 
 export const InvoiceItemActions = ({ item, refreshInvoiceItems }) => {
@@ -20,7 +21,11 @@ export const InvoiceItemActions = ({ item, refreshInvoiceItems }) => {
         {translate('Actions')}
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <InvoiceItemDelete
+        <InvoiceItemUpdate
+          item={item}
+          refreshInvoiceItems={refreshInvoiceItems}
+        />
+        <InvoiceItemMove
           item={item}
           refreshInvoiceItems={refreshInvoiceItems}
         />
@@ -28,7 +33,7 @@ export const InvoiceItemActions = ({ item, refreshInvoiceItems }) => {
           item={item}
           refreshInvoiceItems={refreshInvoiceItems}
         />
-        <InvoiceItemUpdate
+        <InvoiceItemDelete
           item={item}
           refreshInvoiceItems={refreshInvoiceItems}
         />
