@@ -59,38 +59,28 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
           this.props.fullWidth ? 'full-width' : '',
         )}
       >
-        {this.props.title && (
+        {this.props.blocked && <div className="table-block" />}
+        {(this.props.title || this.props.hasActions) && (
           <Card.Header>
-            <Card.Title>{this.props.title}</Card.Title>
-          </Card.Header>
-        )}
-        {this.props.hasActions && (
-          <Card.Header>
-            {(this.props.hasQuery || this.props.filters) && (
-              <Card.Title>
-                {this.props.hasQuery && (
-                  <div className="me-3">
-                    <TableQuery
-                      query={this.props.query}
-                      setQuery={this.props.setQuery}
-                    />
-                  </div>
-                )}
-                {this.props.filters && (
-                  <Button variant="light" onClick={this.props.toggleFilter}>
-                    <i className="fa fa-filter"></i> {translate('Filter')}
-                  </Button>
-                )}
-              </Card.Title>
+            {this.props.title ? (
+              <Card.Title>{this.props.title}</Card.Title>
+            ) : (
+              this.renderQueryAndFilter()
             )}
-            {this.props.blocked && <div className="table-block" />}
-            <div className="card-toolbar ms-auto">
-              <div className="d-flex justify-content-end">
-                <TableButtons {...this.props} />
+            {this.props.hasActions && (
+              <div className="card-toolbar ms-auto">
+                <div className="d-flex justify-content-end">
+                  <TableButtons {...this.props} />
+                </div>
               </div>
-            </div>
+            )}
           </Card.Header>
         )}
+        {this.props.hasActions &&
+          this.props.title &&
+          (this.props.hasQuery || this.props.filters) && (
+            <Card.Header>{this.renderQueryAndFilter()}</Card.Header>
+          )}
         <Card.Body>
           <div className="table-responsive dataTables_wrapper">
             {this.props.filterVisible && this.props.filters}
@@ -164,6 +154,26 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
           />
         </table>
       </>
+    );
+  }
+
+  renderQueryAndFilter() {
+    return (
+      <Card.Title>
+        {this.props.hasQuery && (
+          <div className="me-3">
+            <TableQuery
+              query={this.props.query}
+              setQuery={this.props.setQuery}
+            />
+          </div>
+        )}
+        {this.props.filters && (
+          <Button variant="light" onClick={this.props.toggleFilter}>
+            <i className="fa fa-filter" /> {translate('Filter')}
+          </Button>
+        )}
+      </Card.Title>
     );
   }
 
