@@ -8,6 +8,7 @@ import {
   SUPPORT_CUSTOMERS_FORM_ID,
   SUPPORT_CUSTOMER_LIST,
 } from '@waldur/customer/list/constants';
+import { OrganizationCreateButton } from '@waldur/customer/list/OrganizationCreateButton';
 import { OrganizationDetailsButton } from '@waldur/customer/list/OrganizationDetailsButton';
 import { OrganizationEditButton } from '@waldur/customer/list/OrganizationEditButton';
 import { SetLocationButton } from '@waldur/customer/list/SetLocationButton';
@@ -57,6 +58,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       {...props}
       columns={columns}
       verboseName={translate('Organizations')}
+      actions={<OrganizationCreateButton />}
       hasQuery={true}
       enableExport={true}
       showPageSizeSelector={true}
