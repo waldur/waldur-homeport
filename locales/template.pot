@@ -366,6 +366,7 @@ msgstr ""
 msgid "Add offerings"
 msgstr ""
 
+#: src/customer/list/OrganizationCreateButton.tsx
 #: src/user/dashboard/CustomerCreateButton.tsx
 msgid "Add organization"
 msgstr ""
