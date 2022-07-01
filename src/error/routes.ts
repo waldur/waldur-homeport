@@ -1,13 +1,8 @@
+import { UIView } from '@uirouter/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
-const AnonymousLayout = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AnonymousLayout" */ '@waldur/navigation/AnonymousLayout'
-    ),
-  'AnonymousLayout',
-);
 const InvalidObjectPage = lazyComponent(
   () =>
     import(/* webpackChunkName: "InvalidObjectPage" */ './InvalidObjectPage'),
@@ -25,7 +20,7 @@ const InvalidRoutePage = lazyComponent(
 export const states: StateDeclaration[] = [
   {
     name: 'errorPage',
-    component: AnonymousLayout,
+    component: UIView,
     abstract: true,
   },
 
