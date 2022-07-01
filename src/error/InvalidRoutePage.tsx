@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
@@ -15,9 +16,7 @@ export const InvalidRoutePage: FunctionComponent = () => {
             "Page is not found. You've either entered invalid URL or trying to reach disabled feature.",
           )}
         </h1>
-        <a onClick={goBack} className="btn btn-primary">
-          {translate('Back')}
-        </a>
+        <Button onClick={goBack}>{translate('Back')}</Button>
       </div>
     </div>
   );

@@ -12,12 +12,7 @@ export function setPrevParams(newParams) {
 }
 
 export const goBack = () => {
-  if (
-    state &&
-    state.name &&
-    state.name !== 'errorPage.notFound' &&
-    state.name !== 'errorPage.limitQuota'
-  ) {
+  if (state && state.name && state.name !== 'errorPage.notFound') {
     router.stateService.go(state.name, params);
   } else {
     router.stateService.go('profile.details');
