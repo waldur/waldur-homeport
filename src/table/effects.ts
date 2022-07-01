@@ -69,7 +69,7 @@ export function* fetchList(action) {
       }
     }
   } catch (error) {
-    if (cancelled()) {
+    if (yield cancelled()) {
       return;
     }
     yield put(actions.fetchListError(table, error));
