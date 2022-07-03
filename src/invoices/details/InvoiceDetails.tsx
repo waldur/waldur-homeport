@@ -86,6 +86,7 @@ export const InvoiceDetails = ({
                     {project.resources.map((resource, resourceIndex) => (
                       <ResourceRow
                         key={resourceIndex}
+                        invoice={invoice}
                         resource={resource}
                         customer={customer}
                         showPrice={showPrice}
