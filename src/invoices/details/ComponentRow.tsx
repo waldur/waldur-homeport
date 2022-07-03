@@ -10,6 +10,7 @@ import './ComponentRow.scss';
 
 export const ComponentRow = ({
   item,
+  invoice,
   showPrice,
   showVat,
   refreshInvoiceItems,
@@ -52,6 +53,7 @@ export const ComponentRow = ({
     <td>
       <InvoiceItemActions
         item={item}
+        invoice={invoice}
         refreshInvoiceItems={refreshInvoiceItems}
       />
     </td>

@@ -9,6 +9,7 @@ import { ComponentRow } from './ComponentRow';
 import { ResourceHeader } from './ResourceHeader';
 
 export const ResourceRow = ({
+  invoice,
   resource,
   customer,
   showPrice,
@@ -72,6 +73,7 @@ export const ResourceRow = ({
           {resource.items.map((item: InvoiceItem, itemIndex: number) => (
             <ComponentRow
               key={itemIndex}
+              invoice={invoice}
               item={item}
               showPrice={showPrice}
               showVat={showVat}
