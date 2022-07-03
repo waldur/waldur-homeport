@@ -3764,10 +3764,6 @@ msgstr ""
 msgid "Invoice has not been sent to PayPal yet"
 msgstr ""
 
-#: src/invoices/details/InvoiceItemMoveDialog.tsx
-msgid "Invoice item has been moved."
-msgstr ""
-
 #: src/invoices/details/InvoiceItemDelete.tsx
 msgid "Invoice item has been removed."
 msgstr ""
@@ -3858,6 +3854,10 @@ msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
 msgid "Item has been added to shopping cart."
+msgstr ""
+
+#: src/invoices/details/InvoiceItemMoveDialog.tsx
+msgid "Item has been moved from invoice {origin} to {target}."
 msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
@@ -4398,12 +4398,12 @@ msgstr ""
 msgid "Move"
 msgstr ""
 
-#: src/invoices/details/InvoiceItemMoveDialog.tsx
-msgid "Move invoice item {name}"
-msgstr ""
-
 #: src/invoices/details/InvoiceItemMove.tsx
 msgid "Move item"
+msgstr ""
+
+#: src/invoices/details/InvoiceItemMoveDialog.tsx
+msgid "Move item {name} from invoice {origin}"
 msgstr ""
 
 #: src/project/MoveProjectAction.tsx
@@ -9970,7 +9970,7 @@ msgid "Unable to mark the invoice as paid."
 msgstr ""
 
 #: src/invoices/details/InvoiceItemMoveDialog.tsx
-msgid "Unable to move invoice item."
+msgid "Unable to move item from invoice {origin} to {target}."
 msgstr ""
 
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx

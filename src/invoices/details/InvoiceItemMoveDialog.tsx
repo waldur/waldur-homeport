@@ -9,8 +9,10 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { loadInvoices, moveInvoiceItem } from '../api';
 
+const formatDate = (invoice) => `${invoice.year}-${invoice.month}`;
+
 export const InvoiceItemMoveDialog = ({
-  resolve: { resource, refreshInvoiceItems },
+  resolve: { invoice, resource, refreshInvoiceItems },
 }) => {
   const dispatch = useDispatch();
   const customer = useSelector(getCustomer);
@@ -24,10 +26,10 @@ export const InvoiceItemMoveDialog = ({
     });
     return {
       invoices: invoices
-        .filter((invoice) => invoice.url !== resource.url)
+        .filter((currentInvoice) => currentInvoice.url !== invoice.url)
         .map((invoice) => ({
-          label: `${invoice.year}-${invoice.month} (${invoice.number})`,
-          value: invoice.url,
+          label: formatDate(invoice),
+          value: invoice,
         })),
     };
   });
@@ -45,21 +47,45 @@ export const InvoiceItemMoveDialog = ({
 
   return (
     <ResourceActionDialog
-      dialogTitle={translate('Move invoice item {name}', {
+      dialogTitle={translate('Move item {name} from invoice {origin}', {
         name: resource.name,
+        origin: formatDate(invoice),
       })}
       formFields={fields}
       loading={asyncState.loading}
       error={asyncState.error}
       submitForm={async (formData) => {
         try {
-          await moveInvoiceItem(resource.uuid, formData);
-          dispatch(showSuccess(translate('Invoice item has been moved.')));
+          await moveInvoiceItem(resource.uuid, {
+            invoice: formData.invoice.url,
+          });
+          dispatch(
+            showSuccess(
+              translate(
+                'Item {item} has been moved from invoice {origin} to {target}.',
+                {
+                  item: resource.name,
+                  origin: formatDate(invoice),
+                  target: formatDate(formData.invoice),
+                },
+              ),
+            ),
+          );
           await refreshInvoiceItems();
           dispatch(closeModalDialog());
         } catch (e) {
           dispatch(
-            showErrorResponse(e, translate('Unable to move invoice item.')),
+            showErrorResponse(
+              e,
+              translate(
+                'Unable to move item {item} from invoice {origin} to {target}.',
+                {
+                  item: resource.name,
+                  origin: formatDate(invoice),
+                  target: formatDate(formData.invoice),
+                },
+              ),
+            ),
           );
         }
       }}

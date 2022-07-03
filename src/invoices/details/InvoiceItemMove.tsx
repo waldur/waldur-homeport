@@ -10,12 +10,12 @@ const InvoiceItemMoveDialog = lazyComponent(
   'InvoiceItemMoveDialog',
 );
 
-export const InvoiceItemMove = ({ item, refreshInvoiceItems }) => (
+export const InvoiceItemMove = ({ invoice, item, refreshInvoiceItems }) => (
   <DialogActionItem
     title={translate('Move item')}
     icon="fa fa-exchange"
     modalComponent={InvoiceItemMoveDialog}
     resource={item}
-    extraResolve={{ refreshInvoiceItems }}
+    extraResolve={{ invoice, refreshInvoiceItems }}
   />
 );

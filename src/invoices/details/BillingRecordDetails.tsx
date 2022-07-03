@@ -90,6 +90,7 @@ export const BillingRecordDetails: FunctionComponent<BillingRecordDetailsProps> 
                         {project.resources.map((resource, resourceIndex) => (
                           <ResourceRow
                             key={resourceIndex}
+                            invoice={invoice}
                             resource={resource}
                             customer={customer}
                             showPrice={true}
