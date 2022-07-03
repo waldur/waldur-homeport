@@ -9,6 +9,7 @@ import { ResourceLimitPeriodsTable } from './ResourceLimitPeriodsTable';
 import './ComponentRow.scss';
 
 export const ComponentRow = ({
+  invoice,
   item,
   showPrice,
   showVat,
@@ -51,6 +52,7 @@ export const ComponentRow = ({
     )}
     <td>
       <InvoiceItemActions
+        invoice={invoice}
         item={item}
         refreshInvoiceItems={refreshInvoiceItems}
       />

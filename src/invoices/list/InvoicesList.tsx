@@ -118,7 +118,5 @@ const InvoicesListComponent = enhance(
 ) as React.ComponentType<any>;
 
 export const InvoicesList: FunctionComponent = () => (
-  <>
-    <InvoicesListComponent filters={<InvoicesFilter />} />
-  </>
+  <InvoicesListComponent filters={<InvoicesFilter />} />
 );
