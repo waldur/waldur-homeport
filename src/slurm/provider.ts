@@ -6,6 +6,11 @@ const SlurmForm = lazyComponent(
   'SlurmForm',
 );
 
+const SlurmRemoteForm = lazyComponent(
+  () => import(/* webpackChunkName: "SlurmRemoteForm" */ './SlurmForm'),
+  'SlurmRemoteForm',
+);
+
 const serializer = (fields) => ({
   hostname: fields.hostname,
   username: fields.username,
@@ -13,6 +18,9 @@ const serializer = (fields) => ({
   gateway: fields.gateway,
   use_sudo: fields.use_sudo,
   default_account: fields.default_account,
+});
+
+const serializerRemote = (_) => ({
 });
 
 ProvidersRegistry.register({
@@ -23,3 +31,13 @@ ProvidersRegistry.register({
   component: SlurmForm,
   serializer,
 });
+
+ProvidersRegistry.register({
+  name: 'Batch processing (remote)',
+  type: 'SLURM remote',
+  icon: 'icon-slurm.png',
+  endpoint: 'slurm',
+  component: SlurmRemoteForm,
+  serializer: serializerRemote,
+});
+
