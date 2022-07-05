@@ -1,11 +1,14 @@
-import { useState, FunctionComponent, useRef, useEffect } from 'react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useMemo, useState, FunctionComponent, useRef, useEffect } from 'react';
 import { Button, FormControl } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import useOnScreen from '@waldur/core/useOnScreen';
+import { getCustomerItems } from '@waldur/customer/utils';
 import { translate } from '@waldur/i18n';
+import { getProjectItems, getProviderItems } from '@waldur/navigation/navitems';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
@@ -15,6 +18,8 @@ import { EmptyOrganizationsPlaceholder } from '../EmptyOrganizationsPlaceholder'
 
 import { OrganizationsPanel } from './OrganizationsPanel';
 import { ProjectsPanel } from './ProjectsPanel';
+
+require('./QuickProjectSelectorDropdown.scss');
 
 export const QuickProjectSelectorDropdown: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -33,6 +38,33 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
   useEffect(() => {
     if (isVisible && refSearch.current) refSearch.current.focus();
   }, [isVisible]);
+
+  const router = useRouter();
+  const { state } = useCurrentStateAndParams();
+
+  const isCustomer = useMemo(
+    () =>
+      getCustomerItems()
+        .map((item) => item.to)
+        .includes(state.name),
+    [state.name],
+  );
+
+  const isProject = useMemo(
+    () =>
+      getProjectItems()
+        .map((item) => item.to)
+        .includes(state.name),
+    [state.name],
+  );
+
+  const isProvider = useMemo(
+    () =>
+      getProviderItems()
+        .map((item) => item.to)
+        .includes(state.name),
+    [state.name],
+  );
 
   const {
     loading,
@@ -72,12 +104,25 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
             />
           </div>
           <div className="d-flex border-gray-300 border-bottom">
-            <OrganizationsPanel
-              selectedOrganization={selectedOrganization}
-              selectOrganization={selectOrganization}
-              filter={filter}
-            />
-            <ProjectsPanel projects={selectedOrganization?.projects} />
+            {!isProject && (
+              <OrganizationsPanel
+                selectedOrganization={selectedOrganization}
+                onClick={(item) => {
+                  if (isCustomer || isProvider) {
+                    router.stateService.go('organization.dashboard', {
+                      uuid: item.uuid,
+                    });
+                  } else {
+                    selectOrganization(item);
+                  }
+                }}
+                onMouseEnter={selectOrganization}
+                filter={filter}
+              />
+            )}
+            {!isProvider && (
+              <ProjectsPanel projects={selectedOrganization?.projects} />
+            )}
           </div>
           <Button
             variant="link"

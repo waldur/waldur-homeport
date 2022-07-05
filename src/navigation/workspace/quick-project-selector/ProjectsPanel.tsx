@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, FunctionComponent } from 'react';
-import { Col, Stack } from 'react-bootstrap';
+import { Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
@@ -58,7 +58,7 @@ export const ProjectsPanel: FunctionComponent<{
   );
 
   return (
-    <Col xs={7} className="project-listing">
+    <div className="project-listing">
       <div className="py-1 px-4 border-gray-300 border-bottom">
         <span className="fw-bold fs-7 text-decoration-underline text-muted">
           {translate('Project')}
@@ -75,6 +75,6 @@ export const ProjectsPanel: FunctionComponent<{
       ) : (
         <EmptyProjectsPlaceholder />
       )}
-    </Col>
+    </div>
   );
 };

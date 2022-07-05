@@ -4,7 +4,7 @@ import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { useTabs } from '@waldur/navigation/context';
 
-const getProjectItems = () => [
+export const getProjectItems = () => [
   {
     title: translate('Profile'),
     to: 'project.details',

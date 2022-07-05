@@ -10,6 +10,7 @@
   }
 
   .organization-listing {
+    flex: 1 1 auto;
     .list-group-item {
       background-color: unset;
       border: 0;
@@ -21,6 +22,7 @@
     }
   }
   .project-listing {
+    flex: 2 1 auto;
     .list-group-item {
       background-color: unset;
       border: 0;

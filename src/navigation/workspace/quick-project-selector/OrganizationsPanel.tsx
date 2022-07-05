@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo, useCallback, FunctionComponent } from 'react';
-import { Col, ListGroupItem, Stack } from 'react-bootstrap';
+import { ListGroupItem, Stack } from 'react-bootstrap';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { truncate } from '@waldur/core/utils';
@@ -20,9 +20,10 @@ export const OrganizationListItem: FunctionComponent<{
   data;
   index;
   style;
-  selected;
-  onSelect;
-}> = ({ data, index, style, selected, onSelect }) => {
+  active;
+  onClick;
+  onMouseEnter;
+}> = ({ data, index, style, active, onClick, onMouseEnter }) => {
   const item = data[index];
 
   if (item.isFetching) {
@@ -43,9 +44,9 @@ export const OrganizationListItem: FunctionComponent<{
 
   return (
     <ListGroupItem
-      active={selected}
-      onClick={onSelect}
-      onMouseEnter={onSelect}
+      active={active}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
       style={style}
       className="cursor-pointer"
     >
@@ -65,9 +66,10 @@ const VIRTUALIZED_SELECTOR_PAGE_SIZE = 20;
 
 export const OrganizationsPanel: FunctionComponent<{
   selectedOrganization;
-  selectOrganization;
+  onClick;
+  onMouseEnter;
   filter;
-}> = ({ selectedOrganization, selectOrganization, filter }) => {
+}> = ({ selectedOrganization, onClick, onMouseEnter, filter }) => {
   const { state } = useCurrentStateAndParams();
   const isServiceProvider = useMemo(
     () =>
@@ -88,7 +90,7 @@ export const OrganizationsPanel: FunctionComponent<{
   );
 
   return (
-    <Col className="organization-listing" xs={5}>
+    <div className="organization-listing">
       <div className="py-1 px-4 border-gray-300 border-bottom">
         <span className="fw-bold fs-7 text-decoration-underline text-muted">
           {translate('Organization')}
@@ -107,12 +109,13 @@ export const OrganizationsPanel: FunctionComponent<{
           return (
             <OrganizationListItem
               {...listItemProps}
-              selected={selectedOrganization?.uuid === item.uuid}
-              onSelect={() => selectOrganization(item)}
+              active={selectedOrganization?.uuid === item.uuid}
+              onClick={() => onClick(item)}
+              onMouseEnter={() => onMouseEnter(item)}
             />
           );
         }}
       </VirtualPaginatedList>
-    </Col>
+    </div>
   );
 };
