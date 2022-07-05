@@ -7491,6 +7491,10 @@ msgstr ""
 msgid "SLURM allocation usage"
 msgstr ""
 
+#: src/slurm/marketplace.ts
+msgid "SLURM remote allocation"
+msgstr ""
+
 #: src/azure/sql/CreateDatabaseDialog.tsx
 msgid "SQL database has been created."
 msgstr ""
