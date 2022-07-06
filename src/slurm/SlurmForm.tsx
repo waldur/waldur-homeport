@@ -2,9 +2,11 @@ import { FunctionComponent } from 'react';
 
 import { required } from '@waldur/core/validators';
 import { StringField, FormContainer } from '@waldur/form';
-import { translate } from '@waldur/i18n';
 
-export const SlurmForm: FunctionComponent<{ container }> = ({ container }) => (
+export const SlurmForm: FunctionComponent<{ translate; container }> = ({
+  translate,
+  container,
+}) => (
   <FormContainer {...container}>
     <StringField
       name="hostname"
@@ -36,6 +38,20 @@ export const SlurmForm: FunctionComponent<{ container }> = ({ container }) => (
       description={translate('Default SLURM account for user')}
       required={true}
       validate={required}
+    />
+  </FormContainer>
+);
+
+export const SlurmRemoteForm: FunctionComponent<{ translate; container }> = ({
+  translate,
+  container,
+}) => (
+  <FormContainer {...container}>
+    {/* TODO: change the container */}
+    <StringField
+      name="hostname"
+      label={translate('Hostname')}
+      description={translate('Hostname or IP address of master node')}
     />
   </FormContainer>
 );
