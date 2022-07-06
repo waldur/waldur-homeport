@@ -5,6 +5,7 @@ import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { translate } from '@waldur/i18n';
 
 import './OrganizationListItem.scss';
+import { ServiceProviderIcon } from './ServiceProviderIcon';
 import { organizationUserRoles } from './utils';
 
 export const OrganizationListItem: FunctionComponent<{
@@ -48,6 +49,7 @@ export const OrganizationListItem: FunctionComponent<{
         />
         <span className="title">
           <span className={selected ? 'text-success' : ''}>{item.name}</span>
+          <ServiceProviderIcon organization={item} className="ms-1" />
           {organizationUserRoles(item, user).map(
             (tag) =>
               tag.visible && (

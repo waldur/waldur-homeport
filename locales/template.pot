@@ -8012,7 +8012,6 @@ msgstr ""
 msgid "Service manager of:"
 msgstr ""
 
-#: src/customer/dashboard/CustomerProfile.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
 #: src/invoices/details/ResourceRow.tsx

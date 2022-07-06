@@ -8,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { getProviderItems } from '@waldur/navigation/navitems';
 
 import { getCustomersPage } from '../api';
+import { ServiceProviderIcon } from '../ServiceProviderIcon';
 import { VirtualPaginatedList } from '../VirtualPaginatedList';
 
 const EmptyOrganizationListPlaceholder: FunctionComponent = () => (
@@ -56,6 +57,7 @@ export const OrganizationListItem: FunctionComponent<{
           backgroundColor="#e2e2e2"
         />
         <span className="title lh-1">{truncate(item.name)}</span>
+        <ServiceProviderIcon organization={item} className="ms-auto" />
       </Stack>
     </ListGroupItem>
   );
