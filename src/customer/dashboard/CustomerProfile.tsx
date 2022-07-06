@@ -6,9 +6,9 @@ import 'world-flags-sprite/stylesheets/flags32.css';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { ServiceProviderIcon } from '@waldur/navigation/workspace/ServiceProviderIcon';
 import { Customer } from '@waldur/workspace/types';
 
-import { BlueTick } from './BlueTick';
 import { SymbolsGroup } from './SymbolsGroup';
 
 export const CustomerProfile = ({ customer }: { customer: Customer }) => {
@@ -59,14 +59,7 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
                     )}
                     <h2 className="mb-0">{customer.name}</h2>
                   </div>
-                  {customer.is_service_provider && (
-                    <span className="d-flex align-items-center gap-1">
-                      <BlueTick />
-                      <span className="text-primary">
-                        {translate('Service provider')}
-                      </span>
-                    </span>
-                  )}
+                  <ServiceProviderIcon organization={customer} />
                 </Stack>
                 <Stack direction="horizontal" className="gap-6 text-muted">
                   {customer.division_name && <>{customer.division_name}</>}
