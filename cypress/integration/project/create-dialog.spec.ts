@@ -1,4 +1,4 @@
-describe('Project creation dialog', () => {
+xdescribe('Project creation dialog', () => {
   beforeEach(() => {
     cy.mockUser()
       .clock(Date.UTC(2021, 2, 31), ['Date'])

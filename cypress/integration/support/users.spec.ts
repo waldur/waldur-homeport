@@ -1,4 +1,4 @@
-describe('Users', () => {
+xdescribe('Users', () => {
   beforeEach(() => {
     cy.mockChecklists()
 

@@ -1,4 +1,4 @@
-describe('User workspace', function () {
+xdescribe('User workspace', function () {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()

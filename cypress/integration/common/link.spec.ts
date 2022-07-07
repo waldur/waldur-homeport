@@ -27,7 +27,7 @@ describe('Link persistance after login', () => {
   });
 });
 
-describe('Expired token redirect', () => {
+xdescribe('Expired token redirect', () => {
   // See also: https://github.com/cypress-io/cypress/issues/9302
   it('should redirect to attempted url with params after login', () => {
     cy.server()
