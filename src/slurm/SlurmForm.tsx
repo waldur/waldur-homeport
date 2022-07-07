@@ -42,16 +42,4 @@ export const SlurmForm: FunctionComponent<{ translate; container }> = ({
   </FormContainer>
 );
 
-export const SlurmRemoteForm: FunctionComponent<{ translate; container }> = ({
-  translate,
-  container,
-}) => (
-  <FormContainer {...container}>
-    {/* TODO: change the container */}
-    <StringField
-      name="hostname"
-      label={translate('Hostname')}
-      description={translate('Hostname or IP address of master node')}
-    />
-  </FormContainer>
-);
+export const SlurmRemoteForm = () => null;

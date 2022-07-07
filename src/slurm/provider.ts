@@ -32,7 +32,7 @@ ProvidersRegistry.register({
 });
 
 ProvidersRegistry.register({
-  name: 'Batch processing (remote)',
+  name: 'Batch processing (agent)',
   type: 'SLURM remote',
   icon: 'icon-slurm.png',
   endpoint: 'slurm',
