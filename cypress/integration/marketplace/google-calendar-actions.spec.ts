@@ -1,4 +1,4 @@
-describe('Google Calendar actions in public offerings view', () => {
+xdescribe('Google Calendar actions in public offerings view', () => {
   beforeEach(() => {
     cy.mockCustomer()
       .mockUser()

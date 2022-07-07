@@ -161,6 +161,7 @@
     "markdown-loader": "^6.0.0",
     "marked": "^4.0.10",
     "mini-css-extract-plugin": "^2.6.0",
+    "mock-match-media": "^0.3.0",
     "postcss": "8",
     "postcss-import": "^14.0.2",
     "postcss-loader": "^6.2.0",

@@ -8897,6 +8897,13 @@ mkdirp@~0.5.1:
   dependencies:
     minimist "0.0.8"
 
+mock-match-media@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/mock-match-media/-/mock-match-media-0.3.0.tgz#1fff5e70edaa0a37e7f2b5f1e75fe77aec79a09e"
+  integrity sha512-fT0MDsCcTSITZMyz9w7kU/tFJ/Lmrcrr6EVHS9cfcog46202YKGlpmBAXKzr25XpqMfTyufZJHwMFp+B4IfknQ==
+  dependencies:
+    css-mediaquery "^0.1.2"
+
 moment@^2.27.0:
   version "2.29.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"

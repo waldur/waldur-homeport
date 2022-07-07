@@ -1,4 +1,4 @@
-describe('OpenStack Volume detail view', () => {
+xdescribe('OpenStack Volume detail view', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()

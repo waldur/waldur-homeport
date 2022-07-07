@@ -1,4 +1,4 @@
-describe('OpenStackInstanceCreateForm', () => {
+xdescribe('OpenStackInstanceCreateForm', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockCustomer()

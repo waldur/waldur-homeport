@@ -207,6 +207,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourceActions.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -560,6 +561,11 @@ msgstr ""
 
 #: src/navigation/workspace/ProjectsPanel.tsx
 msgid "All projects"
+msgstr ""
+
+#: src/marketplace/resources/list/ProjectResourcesAllContainer.tsx
+#: src/navigation/sidebar/ResourcesMenu.tsx
+msgid "All resources"
 msgstr ""
 
 #: src/marketplace/resources/import/useImportDialog.tsx
@@ -1270,6 +1276,7 @@ msgstr ""
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/CategoryFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/project/ProjectResourcesList.tsx
 msgid "Category"
@@ -1874,6 +1881,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/project/ProjectResourcesList.tsx
@@ -4510,6 +4518,7 @@ msgstr ""
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
@@ -4957,6 +4966,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/resources/list/OfferingFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
@@ -7301,6 +7311,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesContainer.tsx
@@ -7856,7 +7867,6 @@ msgid "Select priority..."
 msgstr ""
 
 #: src/invitations/actions/ProjectGroup.tsx
-#: src/navigation/workspace/SelectWorkspaceToggle.tsx
 msgid "Select project"
 msgstr ""
 
@@ -8446,6 +8456,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
