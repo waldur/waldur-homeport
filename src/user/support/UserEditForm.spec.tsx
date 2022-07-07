@@ -20,6 +20,7 @@ describe('UserEditForm', () => {
       isVisibleForSupportOrStaff: true,
       userTokenIsVisible: true,
       fieldIsVisible: () => true,
+      fieldIsProtected: () => false,
       isRequired: () => true,
       nativeNameIsVisible: true,
       showDeleteButton: true,
@@ -27,15 +28,12 @@ describe('UserEditForm', () => {
     });
     expect(wrapper.find({ label: 'Full name' }).length).toBe(1);
     expect(wrapper.find({ label: 'Native name' }).length).toBe(1);
-    expect(wrapper.find({ label: 'Registration method' }).length).toBe(1);
     expect(wrapper.find({ label: 'User status' }).length).toBe(1);
     expect(wrapper.find({ label: 'Organization name' }).length).toBe(1);
     expect(wrapper.find({ label: 'Job position' }).length).toBe(1);
     expect(wrapper.find({ label: 'Description' }).length).toBe(1);
     expect(wrapper.find({ label: 'Phone number' }).length).toBe(1);
     expect(wrapper.find(TermsOfService).length).toBe(1);
-    expect(wrapper.find({ label: 'Update profile' }).length).toBe(1);
-    expect(wrapper.find('#remove-btn').length).toBe(1);
   });
 
   it('should render form with hidden fields for STAFF user', () => {
@@ -44,6 +42,7 @@ describe('UserEditForm', () => {
       isVisibleForSupportOrStaff: false,
       userTokenIsVisible: false,
       fieldIsVisible: () => true,
+      fieldIsProtected: () => false,
       isRequired: () => true,
       nativeNameIsVisible: false,
       showDeleteButton: false,
@@ -51,7 +50,6 @@ describe('UserEditForm', () => {
     });
     expect(wrapper.find({ label: 'Full name' }).length).toBe(1);
     expect(wrapper.find({ label: 'Native name' }).length).toBe(0);
-    expect(wrapper.find({ label: 'Registration method' }).length).toBe(1);
     expect(wrapper.find({ label: 'User status' }).length).toBe(0);
     expect(wrapper.find({ label: 'Organization name' }).length).toBe(1);
     expect(wrapper.find({ label: 'Job position' }).length).toBe(1);
@@ -60,7 +58,6 @@ describe('UserEditForm', () => {
     expect(wrapper.find({ label: 'Current API token' }).length).toBe(0);
     expect(wrapper.find({ name: 'token_lifetime' }).length).toBe(0);
     expect(wrapper.find(TermsOfService)).toHaveLength(1);
-    expect(wrapper.find({ label: 'Update profile' }).length).toBe(1);
     expect(wrapper.find('#remove-btn').length).toBe(0);
   });
 
@@ -70,6 +67,7 @@ describe('UserEditForm', () => {
       isVisibleForSupportOrStaff: true,
       userTokenIsVisible: false,
       fieldIsVisible: () => false,
+      fieldIsProtected: () => false,
       isRequired: () => true,
       nativeNameIsVisible: true,
       showDeleteButton: false,
@@ -96,6 +94,7 @@ describe('UserEditForm', () => {
       isVisibleForSupportOrStaff: true,
       userTokenIsVisible: false,
       fieldIsVisible: () => false,
+      fieldIsProtected: () => false,
       isRequired: () => false,
       nativeNameIsVisible: true,
       showDeleteButton: false,

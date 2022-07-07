@@ -29,11 +29,11 @@ describe('Public resources', () => {
       );
   });
 
-  it('should render public resources view', () => {
+  xit('should render public resources view', () => {
     cy.get('h1').contains('Public resources').should('exist');
   });
 
-  it('should sync filters to url query params', () => {
+  xit('should sync filters to url query params', () => {
     cy.openDropdownByLabel('Offering')
       .selectTheFirstOptionOfDropdown()
       .url()

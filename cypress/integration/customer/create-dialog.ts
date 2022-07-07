@@ -1,4 +1,4 @@
-describe('Customer creation dialog', () => {
+xdescribe('Customer creation dialog', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockCustomer()

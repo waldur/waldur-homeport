@@ -18,7 +18,7 @@ describe('SSH Keys', () => {
     cy.visit('/profile/keys/');
   });
 
-  it('Should display error messages for invalid key input', () => {
+  xit('Should display error messages for invalid key input', () => {
     cy.intercept('POST', '/api/keys/', {
       statusCode: 400,
       body: {
@@ -35,7 +35,7 @@ describe('SSH Keys', () => {
     cy.get("[data-testid='notification']").contains(errorInvalidInput);
   });
 
-  it('Should display error messages for existing key input', () => {
+  xit('Should display error messages for existing key input', () => {
     cy.intercept('POST', '/api/keys/', {
       statusCode: 400,
       body: {
@@ -54,7 +54,7 @@ describe('SSH Keys', () => {
     cy.get("[data-testid='notification']").contains(errorKeyExist);
   });
 
-  it('Should add a ssh key with appropriate inputs', () => {
+  xit('Should add a ssh key with appropriate inputs', () => {
     cy.intercept('POST', '/api/keys/', {
       statusCode: 201,
       fixture: 'dashboard/ssh-key',
@@ -71,7 +71,7 @@ describe('SSH Keys', () => {
     });
   });
 
-  it('Should be able to delete a ssh key', () => {
+  xit('Should be able to delete a ssh key', () => {
     cy.fixture('dashboard/ssh-keys').then((keys) => {
       cy.intercept('DELETE', `/api/keys/${keys[0].uuid}/`, {});
       cy.get('.table-container tbody tr')

@@ -7867,7 +7867,6 @@ msgid "Select priority..."
 msgstr ""
 
 #: src/invitations/actions/ProjectGroup.tsx
-#: src/navigation/workspace/SelectWorkspaceToggle.tsx
 msgid "Select project"
 msgstr ""
 

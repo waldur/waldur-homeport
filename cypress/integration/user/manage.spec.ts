@@ -10,7 +10,7 @@ describe('User manage', () => {
       .visit('/profile/manage/');
   });
 
-  it('allows to update user details', () => {
+  xit('allows to update user details', () => {
     cy
       // Ensure that full_name input field is present
       .get('input[name="full_name"]')

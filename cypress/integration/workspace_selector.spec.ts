@@ -1,7 +1,7 @@
 const getTextList = ($p) =>
   $p.map((i, el) => Cypress.$(el).text().trim()).get();
 
-describe('Workspace selector', () => {
+xdescribe('Workspace selector', () => {
   beforeEach(() => {
     cy.intercept('HEAD', '/api/customers/', {
       headers: {

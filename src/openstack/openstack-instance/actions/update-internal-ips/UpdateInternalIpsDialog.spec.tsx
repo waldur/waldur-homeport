@@ -1,3 +1,4 @@
+import Select from 'react-select';
 import { Store } from 'redux';
 
 import * as api from '@waldur/openstack/api';
@@ -50,8 +51,7 @@ describe('UpdateInternalIpsDialog', () => {
     await dialog.update();
 
     // Act
-    const selectComponent = dialog.wrapper.find('Select').instance() as any;
-    selectComponent.clearValue();
+    dialog.wrapper.find(Select).instance()['select'].clearValue();
     dialog.submitForm();
     await dialog.update();
 
