@@ -78,6 +78,15 @@ export const ResourcesMenu = () => {
   return value ? (
     <>
       <MenuSection title={translate('Resources')} />
+      {project && (
+        <MenuItem
+          title={translate('All resources')}
+          state="marketplace-project-resources-all"
+          params={{
+            uuid: project.uuid,
+          }}
+        />
+      )}
       <RenderMenuItems
         items={value.slice(0, MAX_COLLAPSE_MENU_COUNT)}
         project={project}
