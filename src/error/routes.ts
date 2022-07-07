@@ -1,21 +1,12 @@
+import { UIView } from '@uirouter/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
-const AnonymousLayout = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AnonymousLayout" */ '@waldur/navigation/AnonymousLayout'
-    ),
-  'AnonymousLayout',
-);
 const InvalidObjectPage = lazyComponent(
   () =>
     import(/* webpackChunkName: "InvalidObjectPage" */ './InvalidObjectPage'),
   'InvalidObjectPage',
-);
-const InvalidQuotaPage = lazyComponent(
-  () => import(/* webpackChunkName: "InvalidQuotaPage" */ './InvalidQuotaPage'),
-  'InvalidQuotaPage',
 );
 const InvalidRoutePage = lazyComponent(
   () => import(/* webpackChunkName: "InvalidRoutePage" */ './InvalidRoutePage'),
@@ -25,7 +16,7 @@ const InvalidRoutePage = lazyComponent(
 export const states: StateDeclaration[] = [
   {
     name: 'errorPage',
-    component: AnonymousLayout,
+    component: UIView,
     abstract: true,
   },
 
@@ -38,10 +29,5 @@ export const states: StateDeclaration[] = [
     name: 'errorPage.otherwise',
     url: '*path',
     component: InvalidRoutePage,
-  },
-
-  {
-    name: 'errorPage.limitQuota',
-    component: InvalidQuotaPage,
   },
 ];

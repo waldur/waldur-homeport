@@ -1,4 +1,5 @@
 .image-placeholder {
+  display: inline-block;
   border-radius: 7px;
   flex-shrink: 0;
 }

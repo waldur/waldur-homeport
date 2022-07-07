@@ -1,11 +1,14 @@
-import { useCallback, FunctionComponent } from 'react';
+import { useCurrentStateAndParams } from '@uirouter/react';
+import { useMemo, useCallback, FunctionComponent } from 'react';
 import { Col, ListGroupItem, Stack } from 'react-bootstrap';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { getProviderItems } from '@waldur/navigation/navitems';
 
 import { getCustomersPage } from '../api';
+import { ServiceProviderIcon } from '../ServiceProviderIcon';
 import { VirtualPaginatedList } from '../VirtualPaginatedList';
 
 const EmptyOrganizationListPlaceholder: FunctionComponent = () => (
@@ -19,8 +22,9 @@ export const OrganizationListItem: FunctionComponent<{
   index;
   style;
   selected;
-  onSelect;
-}> = ({ data, index, style, selected, onSelect }) => {
+  onClick;
+  onMouseEnter;
+}> = ({ data, index, style, selected, onClick, onMouseEnter }) => {
   const item = data[index];
 
   if (item.isFetching) {
@@ -42,8 +46,8 @@ export const OrganizationListItem: FunctionComponent<{
   return (
     <ListGroupItem
       active={selected}
-      onClick={onSelect}
-      onMouseEnter={onSelect}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
       style={style}
       className="cursor-pointer"
     >
@@ -54,6 +58,7 @@ export const OrganizationListItem: FunctionComponent<{
           backgroundColor="#e2e2e2"
         />
         <span className="title lh-1">{truncate(item.name)}</span>
+        <ServiceProviderIcon organization={item} className="ms-auto" />
       </Stack>
     </ListGroupItem>
   );
@@ -62,13 +67,28 @@ export const OrganizationListItem: FunctionComponent<{
 const VIRTUALIZED_SELECTOR_PAGE_SIZE = 20;
 
 export const OrganizationsPanel: FunctionComponent<{
-  selectedOrganization;
-  selectOrganization;
+  active;
   filter;
-}> = ({ selectedOrganization, selectOrganization, filter }) => {
+  onClick;
+  onMouseEnter;
+}> = ({ active, filter, onClick, onMouseEnter }) => {
+  const { state } = useCurrentStateAndParams();
+  const isServiceProvider = useMemo(
+    () =>
+      getProviderItems()
+        .map((item) => item.to)
+        .includes(state.name),
+    [state.name],
+  );
   const getPage = useCallback(
-    (page) => getCustomersPage(filter, page, VIRTUALIZED_SELECTOR_PAGE_SIZE),
-    [filter],
+    (page) =>
+      getCustomersPage(
+        filter,
+        page,
+        VIRTUALIZED_SELECTOR_PAGE_SIZE,
+        isServiceProvider,
+      ),
+    [filter, isServiceProvider],
   );
 
   return (
@@ -82,7 +102,7 @@ export const OrganizationsPanel: FunctionComponent<{
         height={800}
         itemSize={50}
         getPage={getPage}
-        key={filter}
+        key={`${filter}-${isServiceProvider}`}
         elementsPerPage={VIRTUALIZED_SELECTOR_PAGE_SIZE}
         noResultsRenderer={EmptyOrganizationListPlaceholder}
       >
@@ -91,8 +111,9 @@ export const OrganizationsPanel: FunctionComponent<{
           return (
             <OrganizationListItem
               {...listItemProps}
-              selected={selectedOrganization?.uuid === item.uuid}
-              onSelect={() => selectOrganization(item)}
+              selected={active?.uuid === item.uuid}
+              onClick={() => onClick(item)}
+              onMouseEnter={() => onMouseEnter(item)}
             />
           );
         }}

@@ -5,7 +5,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 export const BaseList: FunctionComponent<{
   items;
-  selectedItem;
+  selectedItem?;
   selectItem;
   EmptyPlaceholder;
   ItemComponent;

@@ -366,6 +366,7 @@ msgstr ""
 msgid "Add offerings"
 msgstr ""
 
+#: src/customer/list/OrganizationCreateButton.tsx
 #: src/user/dashboard/CustomerCreateButton.tsx
 msgid "Add organization"
 msgstr ""
@@ -3863,6 +3864,10 @@ msgstr ""
 msgid "Item type"
 msgstr ""
 
+#: src/invoices/details/InvoiceItemMoveDialog.tsx
+msgid "Item {item} has been moved from invoice {origin} to {target}."
+msgstr ""
+
 #: src/slurm/details/SubmitJobDialog.tsx
 msgid "Job has been submitted."
 msgstr ""
@@ -4391,6 +4396,14 @@ msgstr ""
 
 #: src/marketplace/resources/actions/MoveResourceAction.tsx
 msgid "Move"
+msgstr ""
+
+#: src/invoices/details/InvoiceItemMove.tsx
+msgid "Move item"
+msgstr ""
+
+#: src/invoices/details/InvoiceItemMoveDialog.tsx
+msgid "Move item {name} from invoice {origin}"
 msgstr ""
 
 #: src/project/MoveProjectAction.tsx
@@ -7999,7 +8012,6 @@ msgstr ""
 msgid "Service manager of:"
 msgstr ""
 
-#: src/customer/dashboard/CustomerProfile.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
 #: src/invoices/details/ResourceRow.tsx
@@ -8733,6 +8745,10 @@ msgstr ""
 
 #: src/rancher/cluster/ClusterServicesList.tsx
 msgid "Target"
+msgstr ""
+
+#: src/invoices/details/InvoiceItemMoveDialog.tsx
+msgid "Target invoice"
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
@@ -9954,6 +9970,10 @@ msgstr ""
 
 #: src/invoices/store/effects.ts
 msgid "Unable to mark the invoice as paid."
+msgstr ""
+
+#: src/invoices/details/InvoiceItemMoveDialog.tsx
+msgid "Unable to move item {item} from invoice {origin} to {target}."
 msgstr ""
 
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx

@@ -4,7 +4,7 @@ import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { useTabs } from '@waldur/navigation/context';
 
-const getProjectItems = () => [
+export const getProjectItems = () => [
   {
     title: translate('Profile'),
     to: 'project.details',
@@ -21,7 +21,7 @@ export const useProjectItems = () => {
   useTabs(tabs);
 };
 
-const getTeamItems = () => [
+export const getTeamItems = () => [
   {
     title: translate('Users'),
     to: 'organization.users',
@@ -96,7 +96,7 @@ export const useSupportItems = () => {
   useTabs(tabs);
 };
 
-const getProviderItems = () => [
+export const getProviderItems = () => [
   {
     title: translate('Public offerings'),
     to: 'marketplace-vendor-offerings',
