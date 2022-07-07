@@ -207,6 +207,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourceActions.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -560,6 +561,11 @@ msgstr ""
 
 #: src/navigation/workspace/ProjectsPanel.tsx
 msgid "All projects"
+msgstr ""
+
+#: src/marketplace/resources/list/ProjectResourcesAllContainer.tsx
+#: src/navigation/sidebar/ResourcesMenu.tsx
+msgid "All resources"
 msgstr ""
 
 #: src/marketplace/resources/import/useImportDialog.tsx
@@ -1270,6 +1276,7 @@ msgstr ""
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/CategoryFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/project/ProjectResourcesList.tsx
 msgid "Category"
@@ -1874,6 +1881,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/project/ProjectResourcesList.tsx
@@ -3856,16 +3864,16 @@ msgstr ""
 msgid "Item has been added to shopping cart."
 msgstr ""
 
-#: src/invoices/details/InvoiceItemMoveDialog.tsx
-msgid "Item has been moved from invoice {origin} to {target}."
-msgstr ""
-
 #: src/marketplace/cart/store/effects.ts
 msgid "Item has been removed from shopping cart."
 msgstr ""
 
 #: src/marketplace/orders/Order.tsx
 msgid "Item type"
+msgstr ""
+
+#: src/invoices/details/InvoiceItemMoveDialog.tsx
+msgid "Item {item} has been moved from invoice {origin} to {target}."
 msgstr ""
 
 #: src/slurm/details/SubmitJobDialog.tsx
@@ -4510,6 +4518,7 @@ msgstr ""
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
@@ -4957,6 +4966,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/resources/list/OfferingFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
@@ -7301,6 +7311,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesContainer.tsx
@@ -8446,6 +8457,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
@@ -9973,7 +9985,7 @@ msgid "Unable to mark the invoice as paid."
 msgstr ""
 
 #: src/invoices/details/InvoiceItemMoveDialog.tsx
-msgid "Unable to move item from invoice {origin} to {target}."
+msgid "Unable to move item {item} from invoice {origin} to {target}."
 msgstr ""
 
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx

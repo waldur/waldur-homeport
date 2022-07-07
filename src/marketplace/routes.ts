@@ -195,6 +195,13 @@ const ProjectResourcesContainer = lazyComponent(
     ),
   'ProjectResourcesContainer',
 );
+const ProjectResourcesAllContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ProjectResourcesAllContainer" */ './resources/list/ProjectResourcesAllContainer'
+    ),
+  'ProjectResourcesAllContainer',
+);
 const PublicResourcesContainer = lazyComponent(
   () =>
     import(
@@ -552,6 +559,13 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-project-resources',
     url: 'marketplace-resources/:category_uuid/',
     component: ProjectResourcesContainer,
+    parent: 'project',
+  },
+
+  {
+    name: 'marketplace-project-resources-all',
+    url: 'marketplace-resources/',
+    component: ProjectResourcesAllContainer,
     parent: 'project',
   },
 
