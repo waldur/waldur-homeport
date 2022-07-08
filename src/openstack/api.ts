@@ -167,6 +167,11 @@ export const loadSecurityGroups = (settings_uuid: string) =>
     params: { settings_uuid },
   });
 
+export const loadServerGroups = (settings_uuid: string) =>
+  getAll<ServerGroup>('/openstacktenant-server-groups/', {
+    params: { settings_uuid },
+  });
+
 export const loadSecurityGroupsResources = (params?) =>
   getAll<SecurityGroup>('/openstack-security-groups/', { params });
 

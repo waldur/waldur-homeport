@@ -368,6 +368,9 @@ msgstr "Kas olete kindel, et soovite nõustuda {name}?"
 msgid "Are you sure you want to cancel a {name}?"
 msgstr "Kas olete kindel, et soovite tühistada {name}?"
 
+msgid "Are you sure you want to delete a {name} {resourceType}?"
+msgstr "Kas olete kindel, et soovite kustutada {name} {resourceType}?"
+
 msgid "Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
 msgstr "Kas olete kindel, et soovite kustutada veateatega olekus {name} {resourceType}? Kui kinnitate valiku, tehakse eemaldamise katse."
 

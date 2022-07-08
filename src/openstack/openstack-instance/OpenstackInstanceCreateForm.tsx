@@ -19,6 +19,7 @@ import {
   getDefaultFloatingIps,
 } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
 import { OpenstackInstanceSecurityGroups } from '@waldur/openstack/openstack-instance/OpenstackInstanceSecurityGroups';
+import { OpenstackInstanceServerGroups } from '@waldur/openstack/openstack-instance/OpenstackInstanceServerGroups';
 import {
   Subnet,
   FloatingIp,
@@ -37,6 +38,7 @@ import {
   validateOpenstackInstanceName,
 } from '@waldur/openstack/openstack-instance/utils';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
+import { ServerGroup } from '@waldur/openstack/openstack-server-groups/types';
 import { RootState } from '@waldur/store/reducers';
 import { User } from '@waldur/workspace/types';
 
@@ -56,6 +58,7 @@ interface OpenstackInstanceCreateFormState {
   loading: boolean;
   loaded: boolean;
   securityGroups: SecurityGroup[];
+  serverGroups: ServerGroup[];
   subnets: Subnet[];
   floatingIps: FloatingIp[];
   images: ServiceComponent[];
@@ -84,6 +87,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
     loading: false,
     loaded: false,
     securityGroups: [],
+    serverGroups: [],
     subnets: [],
     floatingIps: [],
     images: [],
@@ -102,6 +106,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
       const flavors = await api.loadFlavors(scopeUuid);
       const sshKeys = await api.loadSshKeys(this.props.currentUser.uuid);
       const securityGroups = await api.loadSecurityGroups(scopeUuid);
+      const serverGroups = await api.loadServerGroups(scopeUuid);
       const subnets = await api.loadSubnets(scopeUuid);
       const floatingIps = await api.loadFloatingIps(scopeUuid);
       const availabilityZones = await api.loadInstanceAvailabilityZones(
@@ -120,6 +125,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
         loading: false,
         loaded: true,
         securityGroups,
+        serverGroups,
         subnets,
         floatingIps,
         images,
@@ -134,6 +140,9 @@ export class OpenstackInstanceCreateFormComponent extends Component<
         const image = images.find((s) => s.url === initial.image);
         const security_groups = initial.security_groups.map((s) =>
           securityGroups.find((g) => g.url === s.url),
+        );
+        const server_group = serverGroups.find(
+          (s) => s.url === initial.server_group,
         );
         const availability_zone =
           initial.availability_zone &&
@@ -175,6 +184,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
           flavor,
           image,
           security_groups,
+          server_group,
           availability_zone,
           networks,
           system_volume_type,
@@ -292,6 +302,17 @@ export class OpenstackInstanceCreateFormComponent extends Component<
             component={(fieldProps) => (
               <OpenstackInstanceSecurityGroups
                 securityGroups={this.state.securityGroups}
+                input={fieldProps.input}
+              />
+            )}
+          />
+        </CreateResourceFormGroup>
+        <CreateResourceFormGroup label={translate('Server group')}>
+          <Field
+            name="attributes.server_group"
+            component={(fieldProps) => (
+              <OpenstackInstanceServerGroups
+                serverGroups={this.state.serverGroups}
                 input={fieldProps.input}
               />
             )}
