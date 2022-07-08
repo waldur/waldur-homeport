@@ -28,13 +28,11 @@ export async function fetchCustomer(transition: Transition) {
     try {
       const currentCustomer = await getCustomer(customerId);
       store.dispatch(setCurrentCustomer(currentCustomer));
-      if (!project) {
+      if (!project || project.customer_uuid != customerId) {
         const newProject = await getFirst<Project>('/projects/', {
           customer: customerId,
         });
         store.dispatch(setCurrentProject(newProject));
-      } else if (project.customer_uuid != customerId) {
-        store.dispatch(setCurrentProject(null));
       }
       store.dispatch(setCurrentWorkspace(ORGANIZATION_WORKSPACE));
 
