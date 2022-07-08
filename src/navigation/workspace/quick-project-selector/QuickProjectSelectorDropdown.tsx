@@ -111,11 +111,9 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
                   const targetState = isProvider
                     ? 'marketplace-vendor-offerings'
                     : 'organization.dashboard';
-                  if (isProvider) {
-                    router.stateService.go(targetState, {
-                      uuid: customer.uuid,
-                    });
-                  }
+                  router.stateService.go(targetState, {
+                    uuid: customer.uuid,
+                  });
                 }
               }}
               onMouseEnter={(customer) => {
