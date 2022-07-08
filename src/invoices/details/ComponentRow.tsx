@@ -11,7 +11,6 @@ import './ComponentRow.scss';
 export const ComponentRow = ({
   invoice,
   item,
-  invoice,
   showPrice,
   showVat,
   refreshInvoiceItems,
@@ -55,7 +54,6 @@ export const ComponentRow = ({
       <InvoiceItemActions
         invoice={invoice}
         item={item}
-        invoice={invoice}
         refreshInvoiceItems={refreshInvoiceItems}
       />
     </td>
