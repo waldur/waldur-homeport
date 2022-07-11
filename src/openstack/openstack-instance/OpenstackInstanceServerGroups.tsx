@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import Select from 'react-select';
 
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import {
   ServerGroup,

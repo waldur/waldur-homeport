@@ -14,13 +14,14 @@ const reactSelectMenuPortaling = (): Partial<SelectProps> => ({
 });
 
 const DARK_COLORS = {
-  primary50: '#4B5563',
-  primary25: '#4B5563',
-  neutral20: '#4B5563',
-  neutral50: '#4B5563',
   neutral0: '#1b1b29',
-  neutral80: 'white',
+  neutral10: '#4B5563',
+  neutral20: '#4B5563',
   neutral30: '#4B5563',
+  neutral50: '#4B5563',
+  neutral80: 'white',
+  primary25: '#4B5563',
+  primary50: '#4B5563',
 };
 
 const useTheme = (): ThemeConfig => {
