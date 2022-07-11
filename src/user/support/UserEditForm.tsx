@@ -52,16 +52,18 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
         user={props.user}
         protected={props.fieldIsProtected('email')}
       />
-      <StaticField
-        label={translate('Full name')}
-        value={props.user.full_name}
-        disabled
-        protected={
-          props.fieldIsProtected('first_name') ||
-          props.fieldIsProtected('last_name') ||
-          props.fieldIsProtected('full_name')
-        }
-      />
+      {props.user.full_name && (
+        <StaticField
+          label={translate('Full name')}
+          value={props.user.full_name}
+          disabled
+          protected={
+            props.fieldIsProtected('first_name') ||
+            props.fieldIsProtected('last_name') ||
+            props.fieldIsProtected('full_name')
+          }
+        />
+      )}
       {!props.fieldIsProtected('first_name') && (
         <StringField
           name="first_name"
