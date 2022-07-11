@@ -18,7 +18,9 @@ export const GeoSearchControlElement: FunctionComponent<any> = (props) => {
       }
     });
 
-    return () => map.removeControl(searchControl);
+    return () => {
+      map.removeControl(searchControl);
+    };
   }, [props, map]);
 
   return null;
