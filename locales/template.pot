@@ -2484,7 +2484,7 @@ msgstr ""
 #: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
-#: src/user/support/IdentityProviderContainer.tsx
+#: src/user/support/IdentityProviderIndicator.tsx
 #: src/vmware/actions/EditAction.tsx
 msgid "Edit"
 msgstr ""
@@ -3417,6 +3417,7 @@ msgid "Identity provided has been selected via SAML2 discovery service. You will
 msgstr ""
 
 #: src/user/support/IdentityProviderContainer.tsx
+#: src/user/support/IdentityProviderIndicator.tsx
 msgid "Identity provider"
 msgstr ""
 
@@ -4166,7 +4167,6 @@ msgid "Manage"
 msgstr ""
 
 #: src/user/support/AvatarField.tsx
-#: src/user/support/UserEditContainer.tsx
 msgid "Manage avatar at {link}"
 msgstr ""
 

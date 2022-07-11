@@ -1,9 +1,7 @@
 import React from 'react';
-import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { getNativeNameVisible, getConfig } from '@waldur/store/config';
 import {
   fieldIsVisible,
@@ -27,38 +25,7 @@ const UserUpdateComponent: React.FC<UserUpdateComponentProps> = (props) => {
   if (!props.user.email) {
     return <EmailChangeForm user={props.user} />;
   }
-  return (
-    <div className="row">
-      <div className="col-sm-2 col-xs-12 user-edit">
-        <div className="logo">
-          <div className="img-wrapper">
-            <Gravatar email={props.user.email} size={100} />
-          </div>
-          <span className="manage-gravatar">
-            {translate(
-              'Manage avatar at {link}',
-              {
-                link: (
-                  <>
-                    <br />
-                    <a
-                      href="https://gravatar.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      gravatar.com
-                    </a>
-                  </>
-                ),
-              },
-              formatJsxTemplate,
-            )}
-          </span>
-        </div>
-      </div>
-      <UserEditForm {...props} />
-    </div>
-  );
+  return <UserEditForm {...props} />;
 };
 
 UserUpdateComponent.defaultProps = {

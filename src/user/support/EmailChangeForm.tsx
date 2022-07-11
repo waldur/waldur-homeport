@@ -1,4 +1,4 @@
-import { Form } from 'react-bootstrap';
+import { Form, InputGroup } from 'react-bootstrap';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -23,19 +23,23 @@ export const EmailChangeForm = ({ user }: { user: UserDetails }) => {
         </Form.Group>
       )}
       <Form.Group>
-        <label htmlFor="emailAddress">{translate('New email address')}</label>
-        <Form.Control
-          type="email"
-          id="emailAddress"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
+        <label htmlFor="emailAddress" className="mb-2">
+          {translate('New email address')}
+        </label>
+        <InputGroup>
+          <Form.Control
+            type="email"
+            id="emailAddress"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <SubmitButton
+            disabled={!email || submitting}
+            submitting={submitting}
+            label={translate('Verify email')}
+          />
+        </InputGroup>
       </Form.Group>
-      <SubmitButton
-        disabled={!email || submitting}
-        submitting={submitting}
-        label={translate('Verify email')}
-      />
     </form>
   );
 };

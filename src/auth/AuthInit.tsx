@@ -9,6 +9,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { pick } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { IdentityProviderIndicator } from '@waldur/user/support/IdentityProviderIndicator';
 import { UserEditContainer } from '@waldur/user/support/UserEditContainer';
 import { UsersService } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
@@ -72,6 +73,8 @@ export const AuthInit: FunctionComponent = () => {
       <Row className="initial-data-page">
         <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }} as={Card}>
           <Card.Body>
+            <IdentityProviderIndicator user={user} />
+            <hr />
             <UserEditContainer user={user} onSave={onSave} initial={true} />
           </Card.Body>
         </Col>

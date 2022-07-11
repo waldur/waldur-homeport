@@ -1,22 +1,30 @@
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { useEffect, FunctionComponent } from 'react';
 
 import { AppFooter } from '@waldur/navigation/AppFooter';
 import { SiteHeader } from '@waldur/navigation/header/SiteHeader';
 
 import { CookiesConsent } from './cookies/CookiesConsent';
-import './AnonymousLayout.scss';
 
 export const AnonymousLayout: FunctionComponent = () => {
   const { state } = useCurrentStateAndParams();
+  useEffect(() => {
+    document.body.className = '';
+  });
   return (
-    <div className="anonymousLayout">
-      <CookiesConsent />
-      <div className="app-wrap">
+    <div className="page d-flex flex-row flex-column-fluid">
+      <div className="wrapper d-flex flex-column flex-row-fluid">
+        <CookiesConsent />
         {!state.data?.hideHeader && <SiteHeader />}
-        <UIView className="app-content"></UIView>
+        <div className="content d-flex flex-column flex-column-fluid">
+          <div className="post d-flex flex-column-fluid">
+            <div className="container-xxl">
+              <UIView />
+            </div>
+          </div>
+        </div>
+        <AppFooter />
       </div>
-      <AppFooter />
     </div>
   );
 };
