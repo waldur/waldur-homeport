@@ -2343,6 +2343,7 @@ msgstr ""
 msgid "Display name"
 msgstr ""
 
+#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectOrganizationDivisionField.tsx
 msgid "Division"
@@ -9827,6 +9828,10 @@ msgstr ""
 
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 msgid "Unable to load detail."
+msgstr ""
+
+#: src/customer/create/WizardFormFirstPage.tsx
+msgid "Unable to load divisions"
 msgstr ""
 
 #: src/marketplace/offerings/actions/SetAccessPolicyDialog.tsx
