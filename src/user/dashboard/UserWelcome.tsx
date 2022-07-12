@@ -14,6 +14,10 @@ export const UserWelcome = ({ user }: { user: UserDetails }) => {
     [user],
   );
 
+  if (profileCompletionPercentage === 100) {
+    return null;
+  }
+
   return (
     <Card className="mb-6">
       <Card.Body>
