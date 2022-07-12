@@ -22,6 +22,7 @@ const CUSTOMER_FIELDS = [
   'name',
   'native_name',
   'domain',
+  'division',
   'email',
   'phone_number',
   'registration_code',
