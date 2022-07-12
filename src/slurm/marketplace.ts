@@ -62,7 +62,7 @@ registerOfferingType({
     return translate('SLURM remote allocation');
   },
   component: AllocationForm,
-  providerType: 'SLURM',
-  attributes: ServiceSettingsAttributes,
+  providerType: 'SLURM remote',
+  attributes: (): Attribute[] => [],
   allowToUpdateService: true,
 });
