@@ -11,7 +11,7 @@ import './SiteHeader.scss';
 export const SiteHeader: FunctionComponent = () => {
   return (
     <div className="border-bottom">
-      <nav className="navbar navbar-static-top white-bg m-b-none">
+      <nav className="navbar navbar-static-top white-bg mb-0">
         <div className="navbar-header ms-2-xl">
           <a className="header-logo" onClick={goBack}>
             <img src="/images/login_logo.png" />

@@ -64,13 +64,13 @@ export class FormGroup extends PureComponent<FormGroupProps> {
         <div
           className={
             layout !== 'vertical'
-              ? classNames(controlClass, { 'col-sm-offset-3': hideLabel })
+              ? classNames(controlClass, { 'offset-sm-3': hideLabel })
               : undefined
           }
         >
           {cloneElement(children as any, newProps)}
           {description && (
-            <Form.Text muted={true} className="m-b-none">
+            <Form.Text muted={true} className="mb-0">
               {description}
             </Form.Text>
           )}

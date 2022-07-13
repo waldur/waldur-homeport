@@ -32,7 +32,7 @@ type StateProps = ReturnType<typeof mapStateToProps>;
 const PureTokenLifetimeWarning: FC<StateProps> = (props) =>
   props.token_lifetime === null ? (
     <Form.Group>
-      <Form.Text className="text-danger col-sm-offset-3 col-sm-7">
+      <Form.Text className="text-danger offset-sm-3 col-sm-7">
         {translate(
           'By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed.',
         )}

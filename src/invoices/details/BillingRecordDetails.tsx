@@ -33,7 +33,7 @@ export const BillingRecordDetails: FunctionComponent<BillingRecordDetailsProps> 
             <div className="invoice-details-content">
               <div className="p-xs">
                 <div className="row">
-                  <div className="col-sm-6 text-right col-sm-offset-6">
+                  <div className="col-sm-6 text-right offset-sm-6">
                     <h4>{customer.name}</h4>
                     {customer.agreement_number && (
                       <>

@@ -340,7 +340,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
         </CreateResourceFormGroup>
         <CreateResourceFormGroup label={translate('User data')}>
           <Field name="attributes.user_data" component={TextField} />
-          <Form.Text className="m-b-none text-muted">
+          <Form.Text className="mb-0 text-muted">
             {translate(
               'Additional data that will be added to instance on provisioning.',
             )}

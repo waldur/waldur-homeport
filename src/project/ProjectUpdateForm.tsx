@@ -96,7 +96,7 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
         />
       </FormContainer>
       <Form.Group>
-        <div className="col-sm-offset-3 col-sm-9">
+        <div className="offset-sm-3 col-sm-9">
           <FieldError error={props.error} />
           <SubmitButton
             submitting={props.submitting}

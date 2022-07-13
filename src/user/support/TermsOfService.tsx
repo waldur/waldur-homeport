@@ -14,7 +14,7 @@ export const TermsOfService: FunctionComponent<TermsOfServiceProps> = (
   props,
 ) => (
   <Form.Group as={Row} className="mb-8">
-    <div className="col-sm-offset-3 col-sm-9">
+    <div className="offset-sm-3 col-sm-9">
       {!props.initial
         ? props.agreementDate &&
           translate(

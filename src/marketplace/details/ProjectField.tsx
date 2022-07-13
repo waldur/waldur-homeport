@@ -53,7 +53,7 @@ const PureProjectField: FC<ProjectFieldProps> = (props) =>
         )}
         {!props.previewMode && <ProjectCreateButton />}
       </div>
-      <Form.Text className="m-b-none text-muted">
+      <Form.Text className="mb-0 text-muted">
         {translate('The project will be changed for all items in cart.')}
       </Form.Text>
     </FormGroup>

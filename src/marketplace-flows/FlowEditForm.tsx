@@ -141,7 +141,7 @@ export const FlowEditForm = () => {
               </tr>
             </tbody>
           </table>
-          <div className="display-flex justify-content-between">
+          <div className="d-flex justify-content-between">
             <ShoppingCartUpdateButton
               updateItem={updateItem}
               flavor="primary"

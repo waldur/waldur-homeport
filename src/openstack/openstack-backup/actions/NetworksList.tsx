@@ -51,7 +51,7 @@ const NetworkRow: FC<NetworkChoices & { name: string; onDelete(): void }> = ({
   );
   return (
     <tr>
-      <td className="p-l-n col-md-6">
+      <td className="ps-0 col-md-6">
         <SelectField name="subnet" options={freeSubnets} />
       </td>
       <td className="col-md-5">
@@ -61,7 +61,7 @@ const NetworkRow: FC<NetworkChoices & { name: string; onDelete(): void }> = ({
           disabled={!network.subnet}
         />
       </td>
-      <td className="p-r-n">
+      <td className="pe-0">
         <DeleteButton onClick={onDelete} />
       </td>
     </tr>

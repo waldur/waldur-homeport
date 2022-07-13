@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
@@ -36,7 +36,7 @@ export class OpenstackInstanceDataVolume extends React.Component<OpenstackInstan
         <tbody>
           {!this.props.isActive && (
             <tr>
-              <td className="no-padding">
+              <td className="p-0">
                 <Button onClick={this.toggleField}>
                   <i className="fa fa-plus" /> {translate('Add data volume')}
                 </Button>
@@ -45,15 +45,15 @@ export class OpenstackInstanceDataVolume extends React.Component<OpenstackInstan
           )}
           {this.props.isActive && (
             <tr>
-              <td className="no-padding">
+              <td className="p-0">
                 <label>{translate('Data volume size:')}</label>
               </td>
             </tr>
           )}
           {this.props.isActive && (
             <tr>
-              <td className="no-padding" style={{ width: 220 }}>
-                <div className="input-group" style={{ maxWidth: 200 }}>
+              <td className="p-0" style={{ width: 220 }}>
+                <InputGroup style={{ maxWidth: 200 }}>
                   <Form.Control
                     {...props.input}
                     type="number"
@@ -63,11 +63,11 @@ export class OpenstackInstanceDataVolume extends React.Component<OpenstackInstan
                     step={props.step}
                   />
                   {props.units && (
-                    <span className="input-group-addon">{props.units}</span>
+                    <InputGroup.Text>{props.units}</InputGroup.Text>
                   )}
-                </div>
+                </InputGroup>
               </td>
-              <td className="no-padding">
+              <td className="p-0">
                 <Tip
                   id="data-volume-disable"
                   label={translate('Disable data volume')}
