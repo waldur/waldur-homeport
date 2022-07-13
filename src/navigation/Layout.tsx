@@ -1,5 +1,13 @@
 import { UISref, UISrefActive } from '@uirouter/react';
-import React, { FunctionComponent, useMemo, useState, useContext } from 'react';
+import React, {
+  FunctionComponent,
+  useMemo,
+  useState,
+  useContext,
+  useLayoutEffect,
+  useRef,
+} from 'react';
+import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import WarningBar from '@waldur/auth/WarningBar';
@@ -21,7 +29,7 @@ const TabsList: FunctionComponent = () => {
       {(ctx.tabs || []).map((tab, index) => (
         <UISrefActive class="here" key={index}>
           <UISref to={tab.to}>
-            <a className="menu-item" data-kt-menu-trigger="click">
+            <a className="menu-item text-nowrap" data-kt-menu-trigger="click">
               <span className="menu-link py-3">
                 <span className="menu-title">{tab.title}</span>
               </span>
@@ -33,6 +41,25 @@ const TabsList: FunctionComponent = () => {
   );
 };
 
+const TabsScrollArrows: FunctionComponent = () => (
+  <>
+    <Button
+      variant="flush"
+      size="sm"
+      className="px-2 top-0 start-0 position-absolute h-100"
+    >
+      <i className="fa fa-chevron-left" />
+    </Button>
+    <Button
+      variant="flush"
+      size="sm"
+      className="px-2 top-0 end-0 position-absolute h-100"
+    >
+      <i className="fa fa-chevron-right" />
+    </Button>
+  </>
+);
+
 export const Layout: React.FC = ({ children }) => {
   const currentUser = useSelector(getUser);
   const [actions, setActions] = useState(null);
@@ -42,6 +69,21 @@ export const Layout: React.FC = ({ children }) => {
     () => ({ setActions, sidebarKey, setSidebarKey, tabs, setTabs }),
     [setActions, sidebarKey, setSidebarKey, tabs, setTabs],
   );
+
+  const tabsScrollRef = useRef<HTMLDivElement>();
+  const tabsWrapperRef = useRef<HTMLDivElement>();
+  const [showScrollArrows, setShowScrollArrows] = useState(false);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setShowScrollArrows(
+        tabsWrapperRef.current.clientWidth > tabsScrollRef.current.clientWidth,
+      );
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, [tabsScrollRef.current, tabsWrapperRef.current]);
+
   if (!currentUser) {
     return null;
   }
@@ -57,9 +99,16 @@ export const Layout: React.FC = ({ children }) => {
             <div className="content d-flex flex-column flex-column-fluid">
               <div className="toolbar">
                 <div className="container-fluid d-flex flex-stack">
-                  <div className="d-flex align-items-stretch">
-                    <div className="header-menu align-items-stretch">
-                      <div className="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch">
+                  {showScrollArrows && <TabsScrollArrows />}
+                  <div
+                    ref={tabsScrollRef}
+                    className="d-flex align-items-stretch scroll-x"
+                  >
+                    <div
+                      ref={tabsWrapperRef}
+                      className="header-menu align-items-stretch"
+                    >
+                      <div className="menu menu-rounded menu-column menu-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch">
                         <QuickProjectSelectorToggle />
                         <TabsList />
                         <ExternalLinks />

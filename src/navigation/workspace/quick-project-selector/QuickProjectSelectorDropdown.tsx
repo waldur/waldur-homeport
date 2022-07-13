@@ -79,7 +79,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
   return (
     <div
       ref={refProjectSelector}
-      className="quick-project-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 min-w-600px w-50"
+      className="quick-project-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-100 mw-600px"
       data-kt-menu="true"
       data-popper-placement="bottom-start"
     >
