@@ -5,7 +5,10 @@ import { FieldArray } from 'redux-form';
 import { FormContainer, SelectField } from '@waldur/form';
 import { MonacoField } from '@waldur/form/MonacoField';
 import { translate } from '@waldur/i18n';
-import { getForm } from '@waldur/marketplace/offerings/store/selectors';
+import {
+  getForm,
+  getOffering,
+} from '@waldur/marketplace/offerings/store/selectors';
 import { RootState } from '@waldur/store/reducers';
 
 import { EnvironmentVariablesList } from './EnvironmentVariablesList';
@@ -41,6 +44,7 @@ export const ScriptsForm: FunctionComponent<{
 }> = ({ container }) => {
   const language = useSelector(getLanguage);
   const scripts = useSelector(getScripts);
+  const offering = useSelector(getOffering);
 
   return (
     <>
@@ -59,33 +63,39 @@ export const ScriptsForm: FunctionComponent<{
           required={true}
           mode={language}
         />
-        <TestScriptButton
-          container={container}
-          type="Create"
-          disabled={!scripts.create}
-        />
+        {offering.isUpdatingOffering ? (
+          <TestScriptButton
+            container={container}
+            type="Create"
+            disabled={!scripts.create}
+          />
+        ) : null}
         <MonacoField
           name="delete"
           label={translate('Script for termination of a resource')}
           required={true}
           mode={language}
         />
-        <TestScriptButton
-          container={container}
-          type="Terminate"
-          disabled={!scripts.delete}
-        />
+        {offering.isUpdatingOffering ? (
+          <TestScriptButton
+            container={container}
+            type="Terminate"
+            disabled={!scripts.delete}
+          />
+        ) : null}
         <MonacoField
           name="update"
           label={translate('Script for updating a resource on plan change')}
           required={true}
           mode={language}
         />
-        <TestScriptButton
-          container={container}
-          type="Update"
-          disabled={!scripts.update}
-        />
+        {offering.isUpdatingOffering ? (
+          <TestScriptButton
+            container={container}
+            type="Update"
+            disabled={!scripts.update}
+          />
+        ) : null}
         <MonacoField
           name="pull"
           label={translate(
