@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { getFormValues, isValid } from 'redux-form';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Panel } from '@waldur/core/Panel';
 import { formatFilesize } from '@waldur/core/utils';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
@@ -308,11 +307,12 @@ export const OpenstackInstanceCheckoutSummary: React.FC<OfferingDetailsProps> =
           </Table>
         )}
         {components && (
-          <Panel title={translate('Limits')}>
+          <>
+            <h3 className="header-bottom-border">{translate('Limits')}</h3>
             <QuotaUsageBarChart quotas={quotas} />
-          </Panel>
+          </>
         )}
-        <div className="display-flex justify-content-between">
+        <div className="d-flex justify-content-between mt-5">
           <ShoppingCartButtonContainer
             item={orderItem}
             flavor="primary"

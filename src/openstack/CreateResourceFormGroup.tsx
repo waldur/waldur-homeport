@@ -22,7 +22,7 @@ export const CreateResourceFormGroup: FunctionComponent<CreateResourceFormGroupF
         </FormGroup>
       ) : (
         <FormGroup
-          classNameWithoutLabel="col-sm-offset-3 col-sm-9"
+          classNameWithoutLabel="offset-sm-3 col-sm-9"
           required={required}
         >
           {children}

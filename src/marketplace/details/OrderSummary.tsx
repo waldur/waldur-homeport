@@ -88,7 +88,7 @@ const PureOrderSummary: FunctionComponent<OrderSummaryProps> = (props) => (
   <>
     <OfferingLogo src={props.offering.thumbnail} size="sm" />
     <SummaryTable {...props} />
-    <div className="display-flex justify-content-between">
+    <div className="d-flex justify-content-between mt-5">
       {!props.updateMode ? (
         <ShoppingCartButtonContainer
           item={formatOrderItemForCreate(props)}

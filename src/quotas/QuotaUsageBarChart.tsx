@@ -74,7 +74,7 @@ export const QuotaUsageBarChart: FunctionComponent<QuotaUsageBarChartProps> = (
       if (quota.limit !== -1) {
         return (
           <Fragment key={index}>
-            <div className="mb-2 clearfix">
+            <div className="mb-2 mt-5">
               <QuotaUsageBarChartDescription quota={quota} />
             </div>
             <Tip

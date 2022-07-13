@@ -30,7 +30,7 @@ export const LonghornWorkerWarning: FunctionComponent<{ nodeIndex }> = ({
   }
   return (
     <Form.Text
-      className={classNames('m-b-none', {
+      className={classNames('mb-0', {
         'text-danger': longhornSelected,
         'text-muted': !longhornSelected,
       })}

@@ -87,7 +87,7 @@ const PaymentProfileCreate = (props) => {
 
         <Form.Group>
           <div
-            className="col-sm-8 col-sm-offset-2"
+            className="col-sm-8 offset-sm-2"
             style={{ display: 'flex', justifyContent: 'flex-end' }}
           >
             <SubmitButton

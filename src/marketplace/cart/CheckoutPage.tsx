@@ -17,7 +17,7 @@ export const CheckoutPage: FunctionComponent = () => {
       <Col lg={8}>
         <ShoppingCartSteps />
         <ShoppingCart />
-        <div className="display-flex justify-content-between mt-3">
+        <div className="d-flex justify-content-between mt-3">
           <BackButton />
           <ForwardButton />
         </div>

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Row } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { FormFieldsContext } from '@waldur/form/context';
@@ -14,11 +14,14 @@ export interface FormGroupProps {
 }
 
 export const FormGroup: React.FC<FormGroupProps> = (props) => {
-  const { labelClassName, valueClassName, classNameWithoutLabel } =
-    useContext(FormFieldsContext);
+  const ctx = useContext(FormFieldsContext);
+  const labelClassName = ctx.labelClassName || props.labelClassName;
+  const valueClassName = ctx.valueClassName || props.valueClassName;
+  const classNameWithoutLabel =
+    ctx.classNameWithoutLabel || props.classNameWithoutLabel;
 
   return (
-    <Form.Group>
+    <Form.Group as={Row} className="mb-2">
       {props.label ? (
         <>
           <Form.Label className={labelClassName}>
@@ -30,14 +33,10 @@ export const FormGroup: React.FC<FormGroupProps> = (props) => {
             {props.label}
             {props.required && <span className="text-danger"> *</span>}
           </Form.Label>
-          <div className={valueClassName ?? props.valueClassName}>
-            {props.children}
-          </div>
+          <div className={valueClassName}>{props.children}</div>
         </>
       ) : (
-        <div className={classNameWithoutLabel ?? props.classNameWithoutLabel}>
-          {props.children}
-        </div>
+        <div className={classNameWithoutLabel}>{props.children}</div>
       )}
     </Form.Group>
   );
@@ -46,5 +45,5 @@ export const FormGroup: React.FC<FormGroupProps> = (props) => {
 FormGroup.defaultProps = {
   labelClassName: 'col-sm-4',
   valueClassName: 'col-sm-8',
-  classNameWithoutLabel: 'col-sm-offset-4 col-sm-8',
+  classNameWithoutLabel: 'offset-sm-4 col-sm-8',
 };

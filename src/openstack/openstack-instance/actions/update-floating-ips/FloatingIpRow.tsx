@@ -10,7 +10,7 @@ export const FloatingIpRow = ({ row, subnets, floatingIps, onRemove }) => {
   const pair = useSelector(getPairSelector(row));
   return (
     <tr>
-      <td className="col-md-6 p-l-n">
+      <td className="col-md-6 ps-0">
         {pair.address ? (
           pair.subnet_name
         ) : (

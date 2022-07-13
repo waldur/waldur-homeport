@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
@@ -32,21 +32,31 @@ export const OfferingDetails: FunctionComponent<OfferingDetailsProps> = (
       )}
       <Row>
         <Col md={9}>
-          <h3 className="header-bottom-border">
-            {translate('Offering configuration')}
-          </h3>
-          <OfferingConfigurator
-            offering={props.offering}
-            limits={props.limits}
-          />
+          <Card>
+            <Card.Body>
+              <h3 className="header-bottom-border">
+                {translate('Offering configuration')}
+              </h3>
+              <OfferingConfigurator
+                offering={props.offering}
+                limits={props.limits}
+              />
+            </Card.Body>
+          </Card>
         </Col>
         <Col md={3}>
-          <h3 className="header-bottom-border">{translate('Order summary')}</h3>
-          {CheckoutSummaryComponent ? (
-            <CheckoutSummaryComponent {...props} />
-          ) : (
-            <OrderSummary offering={props.offering} />
-          )}
+          <Card>
+            <Card.Body>
+              <h3 className="header-bottom-border">
+                {translate('Order summary')}
+              </h3>
+              {CheckoutSummaryComponent ? (
+                <CheckoutSummaryComponent {...props} />
+              ) : (
+                <OrderSummary offering={props.offering} />
+              )}
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
       <OfferingTabsComponent tabs={props.tabs} />

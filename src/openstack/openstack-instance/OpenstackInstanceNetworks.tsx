@@ -125,7 +125,7 @@ export class OpenstackInstanceNetworks extends Component<OpenstackInstanceNetwor
             {this.props.input.value ? (
               this.props.input.value.map((_, index) => (
                 <tr key={index}>
-                  <td className="p-l-n col-md-6">
+                  <td className="ps-0 col-md-6">
                     <Select
                       name="subnets"
                       value={this.getSelectValue('subnet')(index)}
@@ -156,7 +156,7 @@ export class OpenstackInstanceNetworks extends Component<OpenstackInstanceNetwor
                       getOptionLabel={(option) => option.address}
                     />
                   </td>
-                  <td className="p-r-n">
+                  <td className="pe-0">
                     <Tip id="item-remove" label={translate('Delete')}>
                       <Button onClick={() => this.removeItem(index)}>
                         <i className="fa fa-trash-o" />

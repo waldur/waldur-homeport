@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { InputGroup } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -9,12 +10,10 @@ import { translate } from '@waldur/i18n';
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
 const IntegerField = renderValidationWrapper((fieldProps) => (
-  <>
-    <div className="input-group" style={{ maxWidth: 200, zIndex: 0 }}>
-      <NumberField min={1} max={1 * 10240} {...fieldProps.input} />
-      <span className="input-group-addon">GB</span>
-    </div>
-  </>
+  <InputGroup style={{ maxWidth: 200, zIndex: 0 }}>
+    <NumberField min={1} max={1 * 10240} {...fieldProps.input} />
+    <InputGroup.Text>GB</InputGroup.Text>
+  </InputGroup>
 ));
 
 export const SystemVolumeSizeGroup: FunctionComponent = () => (

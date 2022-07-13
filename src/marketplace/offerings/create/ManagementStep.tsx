@@ -41,7 +41,7 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
     layout,
   };
   const serviceSettingWrapperClass =
-    layout === 'vertical' ? '' : 'col-sm-8 col-sm-offset-2';
+    layout === 'vertical' ? '' : 'col-sm-8 offset-sm-2';
   return (
     <>
       <FormContainer {...ContainerProps}>

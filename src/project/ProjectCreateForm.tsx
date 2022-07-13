@@ -123,7 +123,7 @@ export const ProjectCreateForm = reduxForm<
         />
       </FormContainer>
       <Form.Group>
-        <div className="col-sm-offset-3 col-sm-5">
+        <div className="offset-sm-3 col-sm-5">
           <FieldError error={props.error} />
           <SubmitButton
             disabled={props.invalid}
