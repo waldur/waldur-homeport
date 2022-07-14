@@ -13,6 +13,10 @@ export const getCustomerItems = () => [
     to: 'organization.manage',
   },
   {
+    title: translate('Payments'),
+    to: 'organization.payments',
+  },
+  {
     title: translate('My offerings'),
     to: 'marketplace-my-offerings',
   },

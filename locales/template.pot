@@ -5683,6 +5683,11 @@ msgstr ""
 msgid "Payment type {type}"
 msgstr ""
 
+#: src/customer/details/CustomerPayments.tsx
+#: src/customer/utils.ts
+msgid "Payments"
+msgstr ""
+
 #: src/customer/payments/PaymentsPanel.tsx
 msgid "Payments connected with an active payment profile."
 msgstr ""
