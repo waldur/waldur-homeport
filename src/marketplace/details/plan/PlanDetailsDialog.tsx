@@ -84,12 +84,7 @@ export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
               </p>
             </>
           )}
-          <PureDetailsTable
-            {...data}
-            formGroupClassName=""
-            columnClassName=""
-            viewMode={true}
-          />
+          <PureDetailsTable {...data} viewMode={true} />
         </>
       )}
     </ModalDialog>

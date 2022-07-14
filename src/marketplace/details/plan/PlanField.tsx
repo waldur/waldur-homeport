@@ -13,21 +13,19 @@ interface PlanFieldProps {
 export const PlanField: FunctionComponent<PlanFieldProps> = (props) =>
   props.offering.plans.length > 0 ? (
     <Form.Group>
-      <Form.Label className="col-sm-3">
+      <Form.Label>
         {translate('Plan')}
         <span className="text-danger"> *</span>
       </Form.Label>
-      <div className="col-sm-9">
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div style={{ flexGrow: 1 }}>
-            <PlanSelectField
-              plans={props.offering.plans.filter(
-                (plan) => plan.archived === false,
-              )}
-            />
-          </div>
-          <PlanDescriptionButton className="btn btn-md btn-secondary pull-right ms-2" />
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{ flexGrow: 1 }}>
+          <PlanSelectField
+            plans={props.offering.plans.filter(
+              (plan) => plan.archived === false,
+            )}
+          />
         </div>
+        <PlanDescriptionButton className="btn btn-md btn-secondary pull-right ms-2" />
       </div>
     </Form.Group>
   ) : null;

@@ -63,11 +63,7 @@ export class PureOfferingConfigurationForm extends Component<OfferingConfigurati
     const props = this.props;
     return (
       <form>
-        <FormContainer
-          submitting={props.submitting}
-          labelClass="col-sm-3"
-          controlClass="col-sm-9"
-        >
+        <FormContainer submitting={props.submitting}>
           <ProjectField previewMode={props.previewMode} />
           <StringField
             name="attributes.name"
