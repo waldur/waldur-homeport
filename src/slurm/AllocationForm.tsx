@@ -25,11 +25,7 @@ export class AllocationForm extends Component<OfferingConfigurationFormProps> {
     const props = this.props;
     return (
       <form>
-        <FormContainer
-          submitting={false}
-          labelClass="col-sm-3"
-          controlClass="col-sm-9"
-        >
+        <FormContainer submitting={false}>
           <ProjectField />
           <StringField
             label={translate('Allocation name')}

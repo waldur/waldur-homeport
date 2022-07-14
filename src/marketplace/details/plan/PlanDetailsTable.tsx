@@ -179,11 +179,4 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
   );
 };
 
-PureDetailsTable.defaultProps = {
-  formGroupClassName: 'form-group',
-  columnClassName: 'offset-sm-3 col-sm-9',
-};
-
-const connector = connect(pricesSelector);
-
-export const PlanDetailsTable = connector(PureDetailsTable);
+export const PlanDetailsTable = connect(pricesSelector)(PureDetailsTable);

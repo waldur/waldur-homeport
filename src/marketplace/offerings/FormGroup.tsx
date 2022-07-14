@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
-import { Form, Row } from 'react-bootstrap';
+import React from 'react';
+import { Form } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
-import { FormFieldsContext } from '@waldur/form/context';
 
 export interface FormGroupProps {
   label?: React.ReactNode;
@@ -14,17 +13,11 @@ export interface FormGroupProps {
 }
 
 export const FormGroup: React.FC<FormGroupProps> = (props) => {
-  const ctx = useContext(FormFieldsContext);
-  const labelClassName = ctx.labelClassName || props.labelClassName;
-  const valueClassName = ctx.valueClassName || props.valueClassName;
-  const classNameWithoutLabel =
-    ctx.classNameWithoutLabel || props.classNameWithoutLabel;
-
   return (
-    <Form.Group as={Row} className="mb-2">
+    <Form.Group className="mb-7">
       {props.label ? (
         <>
-          <Form.Label className={labelClassName}>
+          <Form.Label className="fs-6 fw-semibold form-label mt-3">
             {props.description && (
               <Tip id="form-field-tooltip" label={props.description}>
                 <i className="fa fa-question-circle" />{' '}
@@ -33,10 +26,10 @@ export const FormGroup: React.FC<FormGroupProps> = (props) => {
             {props.label}
             {props.required && <span className="text-danger"> *</span>}
           </Form.Label>
-          <div className={valueClassName}>{props.children}</div>
+          <div>{props.children}</div>
         </>
       ) : (
-        <div className={classNameWithoutLabel}>{props.children}</div>
+        <div>{props.children}</div>
       )}
     </Form.Group>
   );

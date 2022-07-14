@@ -17,8 +17,8 @@ export const NumberField: FunctionComponent<NumberFieldProps> = (props) => {
   const control = <Form.Control {...props.input} type="number" {...rest} />;
   if (props.unit) {
     return (
-      <InputGroup style={{ maxWidth: '15em', zIndex: 0 }}>
-        <div style={{ minWidth: '8em' }}>{control}</div>
+      <InputGroup style={{ minWidth: '8em', maxWidth: '15em', zIndex: 0 }}>
+        {control}
         <InputGroup.Text>{props.unit}</InputGroup.Text>
       </InputGroup>
     );
