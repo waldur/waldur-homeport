@@ -41,3 +41,5 @@ export const SlurmForm: FunctionComponent<{ translate; container }> = ({
     />
   </FormContainer>
 );
+
+export const SlurmRemoteForm = () => null;
