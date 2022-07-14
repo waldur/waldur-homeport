@@ -7319,6 +7319,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesContainer.tsx
+#: src/navigation/navitems.ts
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
 #: src/project/ProjectDashboard.tsx

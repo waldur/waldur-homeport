@@ -84,6 +84,10 @@ const getSupportItems = () =>
     },
     { title: translate('Broadcast'), to: 'support.broadcast' },
     {
+      title: translate('Resources'),
+      to: 'marketplace-support-resources',
+    },
+    {
       title: translate('Organization requests'),
       to: 'support.customers-requests',
     },
