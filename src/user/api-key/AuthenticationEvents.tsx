@@ -21,11 +21,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={props.filterColumns([
         {
           title: translate('Message'),
-          render: ({ row }) => eventsRegistry.formatEvent(row),
+          render: ({ row }) => eventsRegistry.formatEvent(row) || 'N/A',
         },
         {
           title: translate('IP address'),
-          render: ({ row }) => row.context.ip_address,
+          render: ({ row }) => row.context.ip_address || 'N/A',
         },
         {
           title: translate('Time'),
