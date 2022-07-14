@@ -52,6 +52,13 @@ const CustomerManage = lazyComponent(
     import(/* webpackChunkName: "CustomerManage" */ './details/CustomerManage'),
   'CustomerManage',
 );
+const CustomerPayments = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerPayments" */ './details/CustomerPayments'
+    ),
+  'CustomerPayments',
+);
 const CustomerUsersTab = lazyComponent(
   () =>
     import(
@@ -206,6 +213,12 @@ export const states: StateDeclaration[] = [
     name: 'organization.manage',
     url: 'manage/',
     component: CustomerManage,
+  },
+
+  {
+    name: 'organization.payments',
+    url: 'payments/',
+    component: CustomerPayments,
   },
 
   {
