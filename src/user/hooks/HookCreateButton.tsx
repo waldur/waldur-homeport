@@ -17,6 +17,7 @@ export const PureHookCreateButton: FunctionComponent<HookCreateButtonProps> = (
     title={translate('Add notification')}
     action={props.showHookUpdateDialog}
     icon="fa fa-plus"
+    variant="primary"
   />
 );
 

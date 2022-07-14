@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { ButtonVariant } from 'react-bootstrap/esm/types';
 
 import { Tip } from '@waldur/core/Tooltip';
 
@@ -11,7 +12,7 @@ export interface ActionButtonProps {
   className?: string;
   disabled?: boolean;
   tooltip?: string;
-  variant?: string;
+  variant?: ButtonVariant;
 }
 
 export const wrapTooltip = (label, children, rest?) =>

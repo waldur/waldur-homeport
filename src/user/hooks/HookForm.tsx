@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 
@@ -26,11 +26,7 @@ export const HookForm: React.FC<OwnProps> = ({ isNew, eventGroups }) => {
     selector(state, 'hook_type'),
   );
   return (
-    <FormContainer
-      submitting={false}
-      labelClass="col-sm-12"
-      controlClass="col-sm-12"
-    >
+    <FormContainer layout="vertical" submitting={false}>
       {isNew ? (
         <Field
           name="hook_type"
@@ -40,7 +36,7 @@ export const HookForm: React.FC<OwnProps> = ({ isNew, eventGroups }) => {
         />
       ) : (
         <>
-          <Form.Group as={Row} className="mb-7">
+          <Form.Group className="mb-7">
             <Form.Label column sm={6}>
               {translate('Notification method')}
             </Form.Label>
