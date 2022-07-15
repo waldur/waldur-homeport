@@ -113,7 +113,7 @@ registerOfferingType({
   limitParser,
   providerType: 'OpenStack',
   attributes: ServiceSettingsAttributes,
-  onlyOnePlan: true,
+  onlyOnePlan: false,
   showComponents: true,
   offeringComponentsFilter,
   allowToUpdateService: true,
