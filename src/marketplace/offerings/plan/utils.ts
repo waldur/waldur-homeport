@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { OfferingComponent } from '@waldur/marketplace/types';
+import { Division, OfferingComponent } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
 
 import {
@@ -19,7 +19,12 @@ interface ConnectedPlanStateProps {
 export const connectPlanComponents = connect<
   ConnectedPlanStateProps,
   {},
-  { plan: string; archived?: boolean; layout?: 'vertical' | 'horizontal' },
+  {
+    plan: string;
+    archived?: boolean;
+    divisions?: Division[];
+    layout?: 'vertical' | 'horizontal';
+  },
   RootState
 >((state, ownProps) => {
   const total = getPlanPrice(state, ownProps.plan);

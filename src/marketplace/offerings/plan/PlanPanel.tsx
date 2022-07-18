@@ -3,6 +3,7 @@ import { Panel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { Division } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
 
 import { RemoveButton } from '../RemoveButton';
@@ -20,6 +21,7 @@ interface OwnProps {
 
 interface StateProps {
   archived: boolean;
+  divisions: Division[];
 }
 
 const PurePlanPanel = (props: OwnProps & StateProps) => {
@@ -41,7 +43,11 @@ const PurePlanPanel = (props: OwnProps & StateProps) => {
 
       <Panel.Collapse>
         <Panel.Body className={props.archived ? 'disabled' : undefined}>
-          <PlanForm plan={props.plan} archived={props.archived} />
+          <PlanForm
+            plan={props.plan}
+            archived={props.archived}
+            divisions={props.divisions}
+          />
         </Panel.Body>
       </Panel.Collapse>
     </Panel>
@@ -51,6 +57,7 @@ const PurePlanPanel = (props: OwnProps & StateProps) => {
 const connector = connect<StateProps, {}, OwnProps, RootState>(
   (state, ownProps) => ({
     archived: getPlanData(state, ownProps.plan).archived,
+    divisions: getPlanData(state, ownProps.plan).divisions,
   }),
 );
 
