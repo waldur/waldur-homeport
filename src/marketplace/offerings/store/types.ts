@@ -2,6 +2,7 @@ import { Option } from '@waldur/marketplace/common/registry';
 import {
   AttributesType,
   Category,
+  Division,
   OfferingComponent,
   OfferingOptions,
 } from '@waldur/marketplace/types';
@@ -15,6 +16,7 @@ export interface PlanFormData {
   quotas: { [key: string]: number };
   description?: string;
   article_code?: string;
+  divisions?: Division[];
   uuid?: string;
 }
 

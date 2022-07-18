@@ -594,6 +594,10 @@ msgstr ""
 msgid "Allowed address pairs update was scheduled."
 msgstr ""
 
+#: src/marketplace/offerings/plan/PlanForm.tsx
+msgid "Allowed divisions"
+msgstr ""
+
 #: src/auth/SigninButton.tsx
 msgid "Already have an account?"
 msgstr ""
