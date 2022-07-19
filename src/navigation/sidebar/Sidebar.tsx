@@ -3,6 +3,7 @@ import React from 'react';
 import './Sidebar.css';
 
 import { BrandName } from './BrandName';
+import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
 
 export const Sidebar: React.FC = (props) => {
   return (
@@ -17,6 +18,7 @@ export const Sidebar: React.FC = (props) => {
       data-kt-drawer-toggle="#kt_aside_mobile_toggle"
     >
       <BrandName />
+      <MarketplaceTrigger />
       <div className="aside-menu flex-column-fluid">
         <div
           className="hover-scroll-overlay-y my-5 my-lg-5"

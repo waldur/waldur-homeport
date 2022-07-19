@@ -408,6 +408,7 @@ msgstr ""
 #: src/dashboard/marketplace.ts
 #: src/marketplace-flows/FlowCreateButton.tsx
 #: src/marketplace/resources/list/CreateResourceButton.tsx
+#: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
 msgid "Add resource"
 msgstr ""
 
@@ -1135,6 +1136,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Browse"
 msgstr ""
 
@@ -7676,6 +7678,10 @@ msgstr ""
 msgid "Search for organization..."
 msgstr ""
 
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+msgid "Search offering..."
+msgstr ""
+
 #: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
 msgid "Search..."
 msgstr ""
@@ -7723,6 +7729,10 @@ msgstr ""
 #: src/issues/list/IssuesShortList.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 msgid "See all"
+msgstr ""
+
+#: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
+msgid "See all offerings"
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
@@ -7911,6 +7921,10 @@ msgstr ""
 
 #: src/user/support/UserFilter.tsx
 msgid "Select role"
+msgstr ""
+
+#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
+msgid "Select root category"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
@@ -8326,6 +8340,10 @@ msgstr ""
 
 #: src/marketplace/offerings/service-providers/FilteredBy.tsx
 msgid "Showing all"
+msgstr ""
+
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+msgid "Showing services available for"
 msgstr ""
 
 #: src/marketplace/offerings/service-providers/shared/grid/GridInfo.tsx
@@ -9040,6 +9058,7 @@ msgid "There are no categories yet."
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/navigation/sidebar/marketplace-popup/CategoriesPanel.tsx
 msgid "There are no categories."
 msgstr ""
 
@@ -9085,8 +9104,16 @@ msgstr ""
 msgid "There are no offerings in marketplace yet."
 msgstr ""
 
+#: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
+msgid "There are no offerings yet for this category."
+msgstr ""
+
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 msgid "There are no offerings yet."
+msgstr ""
+
+#: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
+msgid "There are no offerings."
 msgstr ""
 
 #: src/navigation/workspace/OrganizationsSelector.tsx
@@ -9743,6 +9770,7 @@ msgid "Unable to load booking offerings."
 msgstr ""
 
 #: src/marketplace/offerings/actions/SelectCategoryTab.tsx
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
 msgid "Unable to load categories"
 msgstr ""
 
@@ -11224,6 +11252,10 @@ msgstr ""
 msgid "Website URL"
 msgstr ""
 
+#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
+msgid "Welcome to marketplace"
+msgstr ""
+
 #: src/auth/AuthInit.tsx
 #: src/marketplace/offerings/service-providers/Description.tsx
 msgid "Welcome to {pageTitle}!"
@@ -11460,6 +11492,10 @@ msgstr ""
 msgid "Your session has expired, please enter credentials to continue."
 msgstr ""
 
+#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
+msgid "Your source for everything as a service."
+msgstr ""
+
 #: src/slurm/details/AllocationUsersTable.tsx
 msgid "allocation users"
 msgstr ""
@@ -11499,6 +11535,10 @@ msgstr ""
 
 #: src/rancher/catalog/ClusterCatalogList.tsx
 msgid "catalogues"
+msgstr ""
+
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+msgid "change"
 msgstr ""
 
 #: src/i18n/constants.ts
@@ -11923,6 +11963,10 @@ msgstr ""
 
 #: src/user/api-key/TokenLifetimeField.tsx
 msgid "{count} hours"
+msgstr ""
+
+#: src/navigation/sidebar/marketplace-popup/CategoriesPanel.tsx
+msgid "{count} items"
 msgstr ""
 
 #: src/user/api-key/TokenLifetimeField.tsx
