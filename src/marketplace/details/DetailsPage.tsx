@@ -1,11 +1,13 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { useTitle } from '@waldur/navigation/title';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { getOffering, getCategory, getPlugins } from '../common/api';
 
@@ -13,8 +15,12 @@ import { OfferingDetails } from './OfferingDetails';
 import { getTabs } from './OfferingTabs';
 import { getBreadcrumbs } from './utils';
 
-async function loadData(offering_uuid: string) {
-  const offering = await getOffering(offering_uuid);
+async function loadData(offering_uuid: string, customer_uuid: string) {
+  const offering = await getOffering(offering_uuid, {
+    params: {
+      allowed_customer_uuid: customer_uuid,
+    },
+  });
   const category = await getCategory(offering.category_uuid);
   const sections = category.sections;
   const tabs = getTabs({ offering, sections });
@@ -29,12 +35,13 @@ export const OfferingDetailsPage: React.FC = () => {
   const {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
+  const customer = useSelector(getCustomer);
 
   const router = useRouter();
 
   const { loading, value, error } = useAsync(
-    () => loadData(offering_uuid),
-    [offering_uuid],
+    () => loadData(offering_uuid, customer.uuid),
+    [offering_uuid, customer?.uuid],
   );
 
   useBreadcrumbsFn(
