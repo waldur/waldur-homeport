@@ -1,9 +1,10 @@
 import React from 'react';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger, OverlayTriggerProps, Tooltip } from 'react-bootstrap';
 
 interface TipProps {
   label: React.ReactNode;
   id: string;
+  placement?: OverlayTriggerProps['placement'];
   autoWidth?: boolean;
   className?: string;
   onClick?(): void;
@@ -13,25 +14,31 @@ export const Tip: React.FC<TipProps> = ({
   label,
   children,
   id,
+  placement,
   autoWidth,
   className,
   onClick,
   ...rest
-}) => (
-  <OverlayTrigger
-    placement="top"
-    overlay={
-      <Tooltip id={id} className={autoWidth && 'tooltip-auto-width'}>
-        {label}
-      </Tooltip>
-    }
-    {...rest}
-  >
-    <span className={className} onClick={onClick}>
+}) =>
+  label ? (
+    <OverlayTrigger
+      placement={placement}
+      overlay={
+        <Tooltip id={id} className={autoWidth && 'tooltip-auto-width'}>
+          {label}
+        </Tooltip>
+      }
+      {...rest}
+    >
+      <span className={className} onClick={onClick}>
+        {children}
+      </span>
+    </OverlayTrigger>
+  ) : (
+    <span className={className} onClick={onClick} {...rest}>
       {children}
     </span>
-  </OverlayTrigger>
-);
+  );
 
 export const BackendIdTip = ({ backendId }) =>
   backendId ? (

@@ -1,0 +1,97 @@
+@import '~/src/metronic/assets/sass/core/components/_variables.scss';
+
+$dark-color: #1e1e2d;
+
+#marketplaces-selector {
+  .marketplaces-selector-header {
+    background-color: $dark-color;
+    border-bottom: 1px solid lighten($dark-color, 5%);
+  }
+  .welcome-view {
+    background-image: linear-gradient($dark-color, $primary-active);
+  }
+
+  .list-group {
+    border-radius: unset;
+  }
+  .list-group-item {
+    padding: 1.25rem 1.5rem 1.25rem 3rem;
+    cursor: pointer;
+
+    &.active {
+      z-index: unset;
+    }
+  }
+
+  .category-listing {
+    .scrollbar {
+      height: calc(100vh - 160px) !important;
+    }
+    .list-group-item {
+      background-color: $dark-light;
+      border: 0;
+
+      &:hover {
+        background-color: $dark-inverse;
+        color: unset !important;
+      }
+      &.active {
+        background-color: $dark-inverse;
+        color: unset !important;
+        z-index: unset;
+      }
+    }
+  }
+  .offering-listing {
+    .scrollbar {
+      height: calc(100vh - 225px) !important;
+    }
+    .offerings-footer {
+      position: relative;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 0.75rem;
+    }
+
+    .list-group-item {
+      background-color: $dark-inverse;
+      color: $gray-700 !important;
+      border: 0;
+
+      &:hover {
+        background-color: $hover-bg;
+      }
+      &.active {
+        background-color: $gray-700;
+
+        .title {
+          color: $dark-inverse;
+        }
+        .description {
+          color: $gray-300;
+        }
+      }
+      &.disabled {
+        background-color: $gray-200 !important;
+        opacity: 0.5;
+
+        .title {
+          color: $light-inverse !important;
+        }
+      }
+
+      .description {
+        color: $text-muted;
+      }
+    }
+  }
+
+  .message-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+}
