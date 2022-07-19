@@ -8,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { useTitle } from '@waldur/navigation/title';
 import { getCustomer } from '@waldur/workspace/selectors';
+import { Customer } from '@waldur/workspace/types';
 
 import { getOffering, getCategory, getPlugins } from '../common/api';
 
@@ -15,12 +16,14 @@ import { OfferingDetails } from './OfferingDetails';
 import { getTabs } from './OfferingTabs';
 import { getBreadcrumbs } from './utils';
 
-async function loadData(offering_uuid: string, customer_uuid: string) {
-  const offering = await getOffering(offering_uuid, {
-    params: {
-      allowed_customer_uuid: customer_uuid,
-    },
-  });
+async function loadData(offering_uuid: string, customer: Customer) {
+  const offering = customer?.uuid
+    ? await getOffering(offering_uuid, {
+        params: {
+          allowed_customer_uuid: customer.uuid,
+        },
+      })
+    : await getOffering(offering_uuid);
   const category = await getCategory(offering.category_uuid);
   const sections = category.sections;
   const tabs = getTabs({ offering, sections });
@@ -40,8 +43,8 @@ export const OfferingDetailsPage: React.FC = () => {
   const router = useRouter();
 
   const { loading, value, error } = useAsync(
-    () => loadData(offering_uuid, customer.uuid),
-    [offering_uuid, customer?.uuid],
+    () => loadData(offering_uuid, customer),
+    [offering_uuid, customer],
   );
 
   useBreadcrumbsFn(
