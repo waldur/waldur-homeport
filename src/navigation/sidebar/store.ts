@@ -2,6 +2,7 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { getCategories } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 const SIDEBAR_INIT_START = 'waldur/navigation/SIDEBAR_INIT_START';
 const SIDEBAR_INIT_SUCCESS = 'waldur/navigation/SIDEBAR_INIT_SUCCESS';
@@ -34,14 +35,12 @@ export const sidebarInitSuccess = (categories: Category[]) => ({
 export const getCategoriesSelector = (store) => store.sidebar.categories;
 
 function* loadCategories() {
-  const oldCategories = yield select(getCategoriesSelector);
-  if (oldCategories.length > 0) {
-    return;
-  }
+  const customer = yield select(getCustomer);
   try {
     const newCategories = yield call(getCategories, {
       params: {
-        field: ['uuid', 'title'],
+        allowed_customer_uuid: customer?.uuid,
+        field: ['uuid', 'title', 'offering_count'],
         has_offerings: true,
       },
     });
