@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { useCustomerItems } from '@waldur/customer/utils';
 import { translate } from '@waldur/i18n';
 import { GroupInvitationCreateButton } from '@waldur/invitations/actions/GroupInvitationCreateButton';
 import { GROUP_INVITATIONS_FILTER_FORM_ID } from '@waldur/invitations/constants';
@@ -11,7 +12,6 @@ import { GroupInvitationRowActions } from '@waldur/invitations/GroupInvitationRo
 import { GroupInvitationsFilter } from '@waldur/invitations/GroupInvitationsFilter';
 import { GroupInvitationsListExpandableRow } from '@waldur/invitations/GroupInvitationsListExpandableRow';
 import { RoleField } from '@waldur/invitations/RoleField';
-import { useTeamItems } from '@waldur/navigation/navitems';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
@@ -80,6 +80,6 @@ const GroupInvitationsListComponent = enhance(
 ) as React.ComponentType<any>;
 
 export const GroupInvitationsList: FunctionComponent = () => {
-  useTeamItems();
+  useCustomerItems();
   return <GroupInvitationsListComponent filters={<GroupInvitationsFilter />} />;
 };

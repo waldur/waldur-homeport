@@ -9,6 +9,10 @@ export const getProjectItems = () => [
     title: translate('Profile'),
     to: 'project.details',
   },
+  {
+    title: translate('Team'),
+    to: 'project.team',
+  },
   { title: translate('My orders'), to: 'marketplace-order-list' },
   {
     title: translate('Audit logs'),
@@ -18,38 +22,6 @@ export const getProjectItems = () => [
 
 export const useProjectItems = () => {
   const tabs = useMemo(() => getProjectItems(), []);
-  useTabs(tabs);
-};
-
-export const getTeamItems = () => [
-  {
-    title: translate('Users'),
-    to: 'organization.users',
-  },
-  {
-    title: translate('Invitations'),
-    to: 'organization.invitations',
-  },
-  {
-    title: translate('Group invitations'),
-    to: 'organization.group-invitations',
-  },
-  {
-    title: translate('Permission log'),
-    to: 'organization.permissions-log',
-  },
-  {
-    title: translate('Reviews'),
-    to: 'organization.permissions-reviews',
-  },
-  {
-    title: translate('Offering permissions'),
-    to: 'organization.offering-permissions',
-  },
-];
-
-export const useTeamItems = () => {
-  const tabs = useMemo(() => getTeamItems(), []);
   useTabs(tabs);
 };
 

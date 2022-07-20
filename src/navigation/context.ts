@@ -2,7 +2,8 @@ import { createContext, useContext, useEffect } from 'react';
 
 interface Tab {
   title: string;
-  to: string;
+  to?: string;
+  children?: Tab[];
 }
 
 export interface LayoutContextInterface {

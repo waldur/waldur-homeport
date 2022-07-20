@@ -3248,7 +3248,7 @@ msgstr ""
 msgid "Group invitation has been cancelled."
 msgstr ""
 
-#: src/navigation/navitems.ts
+#: src/customer/utils.ts
 msgid "Group invitations"
 msgstr ""
 
@@ -3715,7 +3715,7 @@ msgstr ""
 msgid "Invitation rejection"
 msgstr ""
 
-#: src/navigation/navitems.ts
+#: src/customer/utils.ts
 msgid "Invitations"
 msgstr ""
 
@@ -5061,7 +5061,7 @@ msgstr ""
 msgid "Offering order items synchronization has been scheduled."
 msgstr ""
 
-#: src/navigation/navitems.ts
+#: src/customer/utils.ts
 msgid "Offering permissions"
 msgstr ""
 
@@ -5779,7 +5779,7 @@ msgstr ""
 msgid "Permission has been updated successfully."
 msgstr ""
 
-#: src/navigation/navitems.ts
+#: src/customer/utils.ts
 msgid "Permission log"
 msgstr ""
 
@@ -7451,7 +7451,7 @@ msgstr ""
 msgid "Reviewed by"
 msgstr ""
 
-#: src/navigation/navitems.ts
+#: src/customer/utils.ts
 msgid "Reviews"
 msgstr ""
 
@@ -8821,7 +8821,8 @@ msgstr ""
 msgid "Tax percent"
 msgstr ""
 
-#: src/navigation/sidebar/ManagementMenu.tsx
+#: src/customer/utils.ts
+#: src/navigation/navitems.ts
 #: src/project/team/ProjectTeam.tsx
 msgid "Team"
 msgstr ""
@@ -10995,6 +10996,7 @@ msgstr ""
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
 
+#: src/customer/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/navigation/navitems.ts
 #: src/project/team/ProjectTeam.tsx

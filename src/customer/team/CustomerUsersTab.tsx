@@ -1,9 +1,9 @@
 import { CustomerUsersListFilter } from '@waldur/customer/team/CustomerUsersListFilter';
-import { useTeamItems } from '@waldur/navigation/navitems';
+import { useCustomerItems } from '@waldur/customer/utils';
 
 import { CustomerUsersList } from './CustomerUsersList';
 
 export const CustomerUsersTab = () => {
-  useTeamItems();
+  useCustomerItems();
   return <CustomerUsersList filters={<CustomerUsersListFilter />} />;
 };

@@ -39,13 +39,6 @@ export const ManagementMenu = () => {
       ) : (
         <MenuItem title={translate('Project')} state="profile.no-project" />
       )}
-      {customer && (
-        <MenuItem
-          title={translate('Team')}
-          state="organization.users"
-          params={{ uuid: customer.uuid }}
-        />
-      )}
       {customer && (checkIsServiceManager(customer, user) || user.is_staff) && (
         <MenuItem
           title={translate('Provider')}
