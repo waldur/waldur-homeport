@@ -178,14 +178,9 @@ function* updateOfferingState(action) {
 
 function* loadOffering(action) {
   const { offeringUuid } = action.payload;
-  const customer = yield select(getCustomer);
   try {
     const data = yield loadCategories();
-    const offering = yield call(api.getOffering, offeringUuid, {
-      params: {
-        allowed_customer_uuid: customer.uuid,
-      },
-    });
+    const offering = yield call(api.getOffering, offeringUuid);
     yield put(loadDataSuccess({ offering, ...data }));
   } catch {
     yield put(loadDataError());
