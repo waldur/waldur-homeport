@@ -8,6 +8,7 @@ import { ENV } from '@waldur/configs/default';
 import { BreadcrumbsContainer } from '../breadcrumbs/BreadcrumbsContainer';
 import { getTitle } from '../title';
 
+import { SearchToggle } from './SearchToggle';
 import { UserDropdownMenu } from './UserDropdown';
 
 const Logo = require('@waldur/images/logo.svg');
@@ -66,6 +67,7 @@ export const AppHeader: FunctionComponent = () => {
             <BreadcrumbsContainer />
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
+            <SearchToggle />
             <div className="d-flex align-items-center ms-1 ms-lg-3">
               <UserDropdownMenu />
             </div>
