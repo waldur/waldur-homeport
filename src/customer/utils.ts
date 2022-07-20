@@ -13,6 +13,35 @@ export const getCustomerItems = () => [
     to: 'organization.manage',
   },
   {
+    title: translate('Team'),
+    children: [
+      {
+        title: translate('Users'),
+        to: 'organization.users',
+      },
+      {
+        title: translate('Invitations'),
+        to: 'organization.invitations',
+      },
+      {
+        title: translate('Group invitations'),
+        to: 'organization.group-invitations',
+      },
+      {
+        title: translate('Permission log'),
+        to: 'organization.permissions-log',
+      },
+      {
+        title: translate('Reviews'),
+        to: 'organization.permissions-reviews',
+      },
+      {
+        title: translate('Offering permissions'),
+        to: 'organization.offering-permissions',
+      },
+    ],
+  },
+  {
     title: translate('Payments'),
     to: 'organization.payments',
   },

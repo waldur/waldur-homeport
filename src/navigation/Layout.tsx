@@ -26,17 +26,43 @@ const TabsList: FunctionComponent = () => {
   const ctx = useContext(LayoutContext);
   return (
     <>
-      {(ctx.tabs || []).map((tab, index) => (
-        <UISrefActive class="here" key={index}>
-          <UISref to={tab.to}>
-            <a className="menu-item text-nowrap" data-kt-menu-trigger="click">
-              <span className="menu-link py-3">
-                <span className="menu-title">{tab.title}</span>
-              </span>
-            </a>
-          </UISref>
-        </UISrefActive>
-      ))}
+      {(ctx.tabs || []).map((parentTab, parentIndex) =>
+        parentTab.to ? (
+          <UISrefActive class="here" key={parentIndex}>
+            <UISref to={parentTab.to}>
+              <a className="menu-item text-nowrap" data-kt-menu-trigger="click">
+                <span className="menu-link py-3">
+                  <span className="menu-title">{parentTab.title}</span>
+                </span>
+              </a>
+            </UISref>
+          </UISrefActive>
+        ) : (
+          <div
+            data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+            data-kt-menu-placement="bottom-start"
+            className="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2"
+          >
+            <span className="menu-link">
+              <span className="menu-title">{parentTab.title}</span>
+              <span className="menu-arrow d-lg-none"></span>
+            </span>
+            <div className="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
+              {parentTab.children.map((childTab, childIndex) => (
+                <UISrefActive class="showing" key={childIndex}>
+                  <UISref to={childTab.to}>
+                    <a className="menu-item" data-kt-menu-trigger="click">
+                      <span className="menu-link">
+                        <span className="menu-title">{childTab.title}</span>
+                      </span>
+                    </a>
+                  </UISref>
+                </UISrefActive>
+              ))}
+            </div>
+          </div>
+        ),
+      )}
     </>
   );
 };
@@ -108,7 +134,10 @@ export const Layout: React.FC = ({ children }) => {
                       ref={tabsWrapperRef}
                       className="header-menu align-items-stretch"
                     >
-                      <div className="menu menu-rounded menu-column menu-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch">
+                      <div
+                        className="menu menu-rounded menu-column menu-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch"
+                        data-kt-menu="true"
+                      >
                         <QuickProjectSelectorToggle />
                         <TabsList />
                         <ExternalLinks />
