@@ -7682,6 +7682,7 @@ msgstr ""
 msgid "Search offering..."
 msgstr ""
 
+#: src/navigation/header/SearchToggle.tsx
 #: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
 msgid "Search..."
 msgstr ""
