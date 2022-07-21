@@ -98,16 +98,6 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
                 </Col>
               </Form.Group>
             )}
-            <Form.Group as={Row} className="align-items-center mb-1">
-              <Form.Label column sm={3} md={2}>
-                {translate('Support:')}
-              </Form.Label>
-              <Col>
-                <Link state="" className="text-decoration-underline text-dark">
-                  {translate('Go to support')}
-                </Link>
-              </Col>
-            </Form.Group>
           </Col>
         </Row>
       </Card.Body>

@@ -3220,10 +3220,6 @@ msgstr ""
 msgid "Go to service catalog"
 msgstr ""
 
-#: src/customer/dashboard/CustomerProfile.tsx
-msgid "Go to support"
-msgstr ""
-
 #: src/marketplace/offerings/store/effects.ts
 msgid "Google Calendar has been published successfully."
 msgstr ""
@@ -8716,10 +8712,6 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "Support user"
-msgstr ""
-
-#: src/customer/dashboard/CustomerProfile.tsx
-msgid "Support:"
 msgstr ""
 
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
