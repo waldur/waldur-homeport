@@ -4,6 +4,7 @@ import { Col, ListGroupItem, Stack } from 'react-bootstrap';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
+import { TextWithoutFormatting } from '@waldur/core/TextWithoutFormatting';
 import { Tip } from '@waldur/core/Tooltip';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -66,7 +67,7 @@ const OfferingListItem = ({
         <div>
           <h6 className="title ellipsis mb-0">{truncate(item.name, 40)}</h6>
           <p className="description ellipsis fs-7 mb-0">
-            {truncate(item.description, 120)}
+            <TextWithoutFormatting html={truncate(item.description, 120)} />
           </p>
         </div>
       </Stack>
