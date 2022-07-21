@@ -10,13 +10,13 @@ interface MenuItemProps {
 }
 
 export const MenuItem: React.FC<MenuItemProps> = ({ item }) => (
-  <span>
+  <>
     {item.icon && (
       <i className={classNames('fa', item.icon, 'fixed-width-icon')}></i>
     )}
     {wrapTooltip(
       item.title.length > 20 ? item.title : null,
-      <span className="menu-item-label">{item.title}</span>,
+      <a className="menu-item-label">{item.title}</a>,
     )}
-  </span>
+  </>
 );
