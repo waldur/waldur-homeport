@@ -29,9 +29,11 @@
     .list-group-item {
       background-color: unset;
       border: 0;
+      cursor: pointer;
 
       &.active {
         background-color: $gray-700;
+        cursor: default;
 
         a {
           color: #fff;

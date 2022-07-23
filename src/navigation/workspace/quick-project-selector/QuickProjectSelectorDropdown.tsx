@@ -19,8 +19,6 @@ import { EmptyOrganizationsPlaceholder } from '../EmptyOrganizationsPlaceholder'
 import { OrganizationsPanel } from './OrganizationsPanel';
 import { ProjectsPanel } from './ProjectsPanel';
 
-import './QuickProjectSelectorDropdown.scss';
-
 export const QuickProjectSelectorDropdown: FunctionComponent = () => {
   const dispatch = useDispatch();
   const currentCustomer = useSelector(getCustomer);

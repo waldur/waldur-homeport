@@ -44,7 +44,6 @@ export const BaseList: FunctionComponent<{
               data-uuid={item.uuid}
               className={classNames({
                 active: selectedItem && item.uuid == selectedItem.uuid,
-                'text-white': selectedItem && item.uuid == selectedItem.uuid,
               })}
               onClick={() => selectItem(item)}
               key={item.uuid}
