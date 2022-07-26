@@ -3,6 +3,7 @@ import {
   deleteById,
   get,
   getAll,
+  getList,
   patch,
   post,
   sendForm,
@@ -10,6 +11,9 @@ import {
 import { formatDate } from '@waldur/core/dateUtils';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';
+import { Customer } from '@waldur/workspace/types';
+
+import { Invoice } from './types';
 
 export const markAsPaid = (data) => {
   const reqData = {
@@ -60,3 +64,24 @@ export const loadInvoices = (options) =>
     '/invoices/',
     options,
   );
+
+export const fetchLatestInvoices = (customer: Customer, size: number) => {
+  const url = `/invoices/`;
+  const params = {
+    page: 1,
+    page_size: size,
+    customer: customer.url,
+    field: [
+      'uuid',
+      'items',
+      'month',
+      'year',
+      'invoice_date',
+      'state',
+      'price',
+      'total',
+      'tax',
+    ],
+  };
+  return getList<Invoice>(url, params);
+};

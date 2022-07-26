@@ -2264,6 +2264,7 @@ msgstr ""
 
 #: src/customer/list/OrganizationDetailsButton.tsx
 #: src/customer/team/UserDetailsButton.tsx
+#: src/invoices/list/MonthOverview.tsx
 #: src/issues/create/CallerGroup.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -2718,13 +2719,10 @@ msgid "Esimated price per month"
 msgstr ""
 
 #: src/customer/list/CustomerList.tsx
+#: src/invoices/list/EstimatedCost.tsx
 #: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
 msgid "Estimated cost"
-msgstr ""
-
-#: src/invoices/list/EstimatedCost.tsx
-msgid "Estimated cost for the current month: {cost}"
 msgstr ""
 
 #: src/customer/dashboard/api.ts
@@ -8676,6 +8674,7 @@ msgid "Subscription ID"
 msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Subtotal"
 msgstr ""
@@ -9307,6 +9306,7 @@ msgstr ""
 #: src/invoices/growth/utils.ts
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
+#: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
@@ -9821,6 +9821,7 @@ msgstr ""
 
 #: src/customer/divisions/CustomersDivisionsChart.tsx
 #: src/customer/team/OfferingNamesManagedByUser.tsx
+#: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
@@ -11004,6 +11005,7 @@ msgid "Users"
 msgstr ""
 
 #: src/invoices/details/CustomerDetails.tsx
+#: src/invoices/list/MonthOverview.tsx
 msgid "VAT"
 msgstr ""
 

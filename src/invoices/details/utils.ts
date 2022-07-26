@@ -6,7 +6,11 @@ import { PaymentProfile } from '@waldur/workspace/types';
 
 import { InvoiceItem } from '../types';
 
-export const groupInvoiceItems = (items: InvoiceItem[]) => {
+export const groupInvoiceItems = (
+  items: InvoiceItem[],
+  sortKey = 'name',
+  desc = false,
+) => {
   const projectsMap = items.reduce((map, item) => {
     if (!item.project_uuid) {
       return map;
@@ -41,7 +45,7 @@ export const groupInvoiceItems = (items: InvoiceItem[]) => {
     return map;
   }, {});
 
-  return Object.keys(projectsMap)
+  const invoiceItems = Object.keys(projectsMap)
     .map((projectKey) => {
       const resources = Object.keys(itemsMap[projectKey])
         .map((resourceKey) => ({
@@ -64,7 +68,12 @@ export const groupInvoiceItems = (items: InvoiceItem[]) => {
         price: resources.reduce((sum, item) => sum + item.price, 0),
       };
     })
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort((a, b) =>
+      String(a[sortKey]).localeCompare(String(b[sortKey]), undefined, {
+        numeric: true,
+      }),
+    );
+  return desc ? invoiceItems.reverse() : invoiceItems;
 };
 
 // phone numbers specification https://www.itu.int/rec/T-REC-E.164-201011-I
