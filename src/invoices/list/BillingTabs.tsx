@@ -11,21 +11,22 @@ import { getTabTitle } from '../utils';
 
 import { AgreementInfo } from './AgreementInfo';
 import { BillingRecordsList } from './BillingRecordsList';
-import { EstimatedCost } from './EstimatedCost';
 import { InvoicesList } from './InvoicesList';
+import { OverviewLastMonths } from './OverviewLastMonths';
 
 export const BillingTabs: FunctionComponent = () => {
   useTitle(getTabTitle());
   useCustomerItems();
   return ENV.accountingMode === 'accounting' ? (
     <Card.Body>
+      <OverviewLastMonths />
       <AgreementInfo />
       <BillingRecordsList />
     </Card.Body>
   ) : (
     <Card.Body>
+      <OverviewLastMonths />
       <AgreementInfo />
-      <EstimatedCost />
       {isFeatureVisible('paypal') ? <PayPalInvoicesList /> : <InvoicesList />}
     </Card.Body>
   );

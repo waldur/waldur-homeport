@@ -21,6 +21,7 @@ export interface InvoiceItem {
 }
 
 export interface Invoice {
+  uuid: string;
   pdf?: string;
   number: string;
   customer_details: Customer;

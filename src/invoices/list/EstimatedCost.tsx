@@ -20,11 +20,14 @@ const AsyncEstimatedCost = ({ customer }) => {
     return null;
   }
   return (
-    <p>
-      {translate('Estimated cost for the current month: {cost}', {
-        cost: defaultCurrency(value.billing_price_estimate.total),
-      })}
-    </p>
+    <>
+      <p className="text-muted text-uppercase fw-bolder mb-0">
+        {translate('Estimated cost')}
+      </p>
+      <h2 className="mb-0">
+        {defaultCurrency(value.billing_price_estimate.total)}
+      </h2>
+    </>
   );
 };
 
