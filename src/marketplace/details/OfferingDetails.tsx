@@ -59,7 +59,15 @@ export const OfferingDetails: FunctionComponent<OfferingDetailsProps> = (
           </Card>
         </Col>
       </Row>
-      <OfferingTabsComponent tabs={props.tabs} />
+      <Row className="mt-6">
+        <Col md={12}>
+          <Card>
+            <Card.Body>
+              <OfferingTabsComponent tabs={props.tabs} />
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 };
