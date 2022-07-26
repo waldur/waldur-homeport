@@ -150,13 +150,23 @@ export const UserDropdownMenu: FunctionComponent = () => {
   return (
     <>
       <div
-        className="cursor-pointer symbol symbol-30px symbol-md-40px"
+        className="btn btn-active-light d-flex align-items-center bg-hover-light py-2 px-2 px-md-3"
         data-kt-menu-trigger="click"
         data-kt-menu-attach="parent"
         data-kt-menu-placement="bottom-end"
         data-kt-menu-flip="bottom"
       >
-        <Gravatar email={user.email} size={40} />
+        <div className="d-none d-md-flex flex-column align-items-end justify-content-center me-2">
+          <span className="text-muted fs-7 fw-semibold lh-1 mb-2">
+            {translate('Hello')}
+          </span>
+          <span className="text-dark fs-base fw-bold lh-1">
+            {user.first_name}
+          </span>
+        </div>
+        <div className="cursor-pointer symbol symbol-30px symbol-md-40px">
+          <Gravatar email={user.email} size={40} />
+        </div>
       </div>
       <div
         className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"

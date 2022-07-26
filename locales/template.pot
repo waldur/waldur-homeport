@@ -3283,6 +3283,10 @@ msgstr ""
 msgid "Heatmap"
 msgstr ""
 
+#: src/navigation/header/UserDropdown.tsx
+msgid "Hello"
+msgstr ""
+
 #: src/issues/workspace/IssuesHelpdesk.tsx
 msgid "Helpdesk dashboard"
 msgstr ""
