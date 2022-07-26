@@ -1,8 +1,6 @@
 import React from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 
-import './OfferingTabs.scss';
-
 export interface OfferingTab {
   title: React.ReactNode;
   component: React.FC;
@@ -23,7 +21,7 @@ export const OfferingTabsComponent: React.FC<OfferingTabsComponentProps> = (
     <Tabs
       defaultActiveKey="tab-0"
       id="offering-tabs"
-      className="m-t-lg offering-tabs"
+      className="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fw-bold"
       unmountOnExit={true}
     >
       {props.tabs.map((tab, index) => (
