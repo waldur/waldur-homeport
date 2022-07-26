@@ -21,7 +21,7 @@ export const FormField: FC<WrappedFieldProps & { tooltip?: string }> = ({
         placement="top"
         overlay={<Tooltip id={input.name}>{tooltip}</Tooltip>}
       >
-        <span style={{ position: 'absolute', right: 16, top: 16 }}>
+        <span style={{ position: 'absolute', right: 20, top: 20 }}>
           <i className="fa fa-question-circle" />
         </span>
       </OverlayTrigger>

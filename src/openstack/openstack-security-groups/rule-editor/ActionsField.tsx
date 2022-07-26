@@ -9,7 +9,12 @@ interface ActionsFieldProps {
 
 export const ActionsField: FC<ActionsFieldProps> = ({ onRemove }) => (
   <td>
-    <Button variant="danger" size="sm" onClick={onRemove}>
+    <Button
+      variant="danger"
+      size="sm"
+      onClick={onRemove}
+      className="d-flex align-items-center"
+    >
       <i className="fa fa-trash"></i>&nbsp;
       {translate('Delete')}
     </Button>
