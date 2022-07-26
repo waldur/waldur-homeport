@@ -3555,6 +3555,10 @@ msgstr ""
 msgid "Instance"
 msgstr ""
 
+#: src/openstack/openstack-server-groups/ServerGroupMemberList.tsx
+msgid "Instance ID"
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/DestroyDialog.tsx
 #: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
 msgid "Instance deletion has been scheduled."
@@ -3582,6 +3586,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr ""
+
+#: src/openstack/openstack-server-groups/ServerGroupMemberList.tsx
+msgid "Instance name"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ForceDestroyAction.tsx
@@ -4282,6 +4290,10 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
+#: src/openstack/openstack-server-groups/tabs.ts
+msgid "Members"
+msgstr ""
+
 #: src/rancher/cluster/hpas/utils.ts
 msgid "Memory"
 msgstr ""
@@ -4739,6 +4751,10 @@ msgstr ""
 
 #: src/customer/list/CustomerExpandableRow.tsx
 msgid "No invoice data available."
+msgstr ""
+
+#: src/openstack/openstack-server-groups/ServerGroupMemberList.tsx
+msgid "No items to display"
 msgstr ""
 
 #: src/navigation/SearchResultsDropdown.tsx

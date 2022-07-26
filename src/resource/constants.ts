@@ -1,6 +1,7 @@
 export const RESOURCE_ENDPOINTS = {
   'OpenStack.FloatingIP': '/openstack-floating-ips/',
   'OpenStack.SecurityGroup': '/openstack-security-groups/',
+  'OpenStack.ServerGroup': '/openstack-server-groups/',
   'OpenStack.Tenant': '/openstack-tenants/',
   'OpenStack.Router': '/openstack-routers/',
   'OpenStack.Port': '/openstack-ports/',
