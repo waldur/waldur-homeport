@@ -1,3 +1,4 @@
+import { ServerGroup } from '@waldur/openstack/openstack-server-groups/types';
 import { VirtualMachine } from '@waldur/resource/types';
 
 import { SecurityGroup } from '../openstack-security-groups/types';
@@ -15,6 +16,7 @@ export interface OpenStackInstance extends VirtualMachine {
   availability_zone_name?: string;
   hypervisor_hostname?: string;
   rancher_cluster?: RancherClusterReference;
+  server_group: ServerGroup;
 }
 
 export interface Subnet {
