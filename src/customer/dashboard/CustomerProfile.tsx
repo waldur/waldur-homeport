@@ -69,7 +69,10 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
               </Col>
               <Col xs="auto">
                 <div className="buttons">
-                  <Link className="btn btn-light me-4" state="">
+                  <Link
+                    className="btn btn-light me-4"
+                    state="marketplace-customer-resources"
+                  >
                     {translate('View resources')}
                   </Link>
                   <Link className="btn btn-light" state="organization.manage">
