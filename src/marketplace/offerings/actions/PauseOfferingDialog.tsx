@@ -1,9 +1,8 @@
-import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { InjectedFormProps, reduxForm, Field } from 'redux-form';
 
-import { SubmitButton } from '@waldur/form';
+import { SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -50,7 +49,7 @@ export const PauseOfferingDialog = connector(
       >
         <Field
           name="reason"
-          component={Form.Control}
+          component={TextField}
           as="textarea"
           placeholder={translate(
             'Please enter reason why offering has been paused.',
