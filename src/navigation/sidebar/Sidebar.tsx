@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import './Sidebar.css';
+
+import {
+  DrawerComponent,
+  ScrollComponent,
+  ToggleComponent,
+} from '@waldur/metronic/assets/ts/components';
 
 import { BrandName } from './BrandName';
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
 
 export const Sidebar: React.FC = (props) => {
+  const sidebarRef = useRef<HTMLElement>(undefined);
+  useEffect(() => {
+    if (sidebarRef?.current) {
+      ToggleComponent.reinitialization();
+      DrawerComponent.reinitialization();
+      ScrollComponent.reinitialization();
+    }
+  }, [sidebarRef]);
   return (
     <nav
+      ref={sidebarRef}
       className="aside aside-dark aside-hoverable"
       data-kt-drawer="true"
       data-kt-drawer-name="aside"
