@@ -1,6 +1,7 @@
 import { StateDeclaration } from '@waldur/core/types';
 
 import { lazyComponent } from './core/lazyComponent';
+import { useAboutItems } from './navigation/navitems';
 import { useTitle } from './navigation/title';
 import { TemplateComponent } from './TemplateComponent';
 
@@ -14,6 +15,7 @@ const AnonymousLayout = lazyComponent(
 
 const TosPage = () => {
   useTitle('Terms of Service');
+  useAboutItems();
   return <TemplateComponent url="views/tos/index.html" />;
 };
 
@@ -24,6 +26,7 @@ const AboutPage = () => {
 
 const PricacyPage = () => {
   useTitle('Privacy policy');
+  useAboutItems();
   return <TemplateComponent url="views/policy/privacy.html" />;
 };
 

@@ -1,11 +1,12 @@
 import classNames from 'classnames';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import {
   Accordion,
   AccordionContext,
   useAccordionButton,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffectOnce } from 'react-use';
 
 import { Arr082 } from '@waldur/core/svg/Arr082';
 import { translate } from '@waldur/i18n';
@@ -68,11 +69,11 @@ const CustomToggle = ({ eventKey, itemsCount }) => {
   );
 };
 
-export const ResourcesMenu = () => {
+export const ResourcesMenu = ({ anonymous }) => {
   const value = useSelector(getCategoriesSelector);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(sidebarInitStart());
+  useEffectOnce(() => {
+    dispatch(sidebarInitStart(anonymous));
   });
   const project = useSelector(getProject);
   return value ? (
@@ -107,4 +108,8 @@ export const ResourcesMenu = () => {
       ) : null}
     </>
   ) : null;
+};
+
+ResourcesMenu.defaultProps = {
+  anonymous: false,
 };

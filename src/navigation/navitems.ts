@@ -91,3 +91,19 @@ export const useProviderItems = () => {
   const tabs = useMemo(() => getProviderItems(), []);
   useTabs(tabs);
 };
+
+export const getAboutItems = () => [
+  {
+    title: translate('Terms of Service'),
+    to: 'tos.index',
+  },
+  {
+    title: translate('Privacy policy'),
+    to: 'policy.privacy',
+  },
+];
+
+export const useAboutItems = () => {
+  const tabs = useMemo(() => getAboutItems(), []);
+  useTabs(tabs);
+};
