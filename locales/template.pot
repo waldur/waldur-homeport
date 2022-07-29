@@ -4106,6 +4106,7 @@ msgstr ""
 #: src/auth/SigninButton.tsx
 #: src/auth/SigninForm.tsx
 #: src/auth/saml2/AuthSaml2Dialog.tsx
+#: src/navigation/header/SiteHeader.tsx
 msgid "Login"
 msgstr ""
 
@@ -4188,6 +4189,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PageManagement.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
+#: src/navigation/sidebar/SiteSidebar.tsx
 msgid "Management"
 msgstr ""
 
@@ -5325,6 +5327,7 @@ msgstr ""
 #: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
+#: src/navigation/sidebar/SiteSidebar.tsx
 #: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -5927,6 +5930,10 @@ msgstr ""
 msgid "Please give us a moment to validate your invitation."
 msgstr ""
 
+#: src/navigation/AnonymousLayout.tsx
+msgid "Please login to select a project"
+msgstr ""
+
 #: src/user/api-key/TokenLifetimeField.tsx
 msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
 msgstr ""
@@ -6206,6 +6213,7 @@ msgid "Privacy Policy"
 msgstr ""
 
 #: src/navigation/FooterLinks.tsx
+#: src/navigation/navitems.ts
 msgid "Privacy policy"
 msgstr ""
 
@@ -6267,6 +6275,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
+#: src/navigation/sidebar/SiteSidebar.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
 #: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -8940,6 +8949,7 @@ msgstr ""
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
 #: src/navigation/FooterLinks.tsx
+#: src/navigation/navitems.ts
 msgid "Terms of Service"
 msgstr ""
 

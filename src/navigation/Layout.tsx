@@ -22,7 +22,7 @@ import { ExternalLinks } from './header/ExternalLinks';
 import { UnifiedSidebar } from './sidebar/UnifiedSidebar';
 import { QuickProjectSelectorToggle } from './workspace/quick-project-selector/QuickProjectSelectorToggle';
 
-const TabsList: FunctionComponent = () => {
+export const TabsList: FunctionComponent = () => {
   const ctx = useContext(LayoutContext);
   return (
     <>
@@ -101,6 +101,7 @@ export const Layout: React.FC = ({ children }) => {
   const [showScrollArrows, setShowScrollArrows] = useState(false);
   useLayoutEffect(() => {
     function updateSize() {
+      if (!tabsWrapperRef.current || !tabsScrollRef.current) return;
       setShowScrollArrows(
         tabsWrapperRef.current.clientWidth > tabsScrollRef.current.clientWidth,
       );
