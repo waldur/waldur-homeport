@@ -33,3 +33,6 @@ export const getCustomersPage = (query, page, pageSize, isServiceProvider?) =>
 
 export const getProjectCounters = (projectUuid: string) =>
   get(`/projects/${projectUuid}/counters/`).then((response) => response.data);
+
+export const getOrganizationCounters = (customerUuid: string) =>
+  get(`/customers/${customerUuid}/counters/`).then((response) => response.data);
