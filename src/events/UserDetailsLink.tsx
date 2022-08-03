@@ -12,6 +12,6 @@ export const UserDetailsLink = ({ uuid, name }) => {
       </UISref>
     );
   } else {
-    return name;
+    return name || 'N/A';
   }
 };
