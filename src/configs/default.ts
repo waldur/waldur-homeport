@@ -25,6 +25,7 @@ export const ENV: ApplicationConfigurationOptions = {
     manager: gettext('Project manager'),
     admin: gettext('System administrator'),
     member: gettext('Project member'),
+    service_manager: gettext('Service manager'),
   },
   invitationRedirectTime: 5000,
 

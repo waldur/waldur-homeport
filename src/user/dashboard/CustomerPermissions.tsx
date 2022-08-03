@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { ENV } from '@waldur/configs/default';
 import { CustomerLink } from '@waldur/customer/CustomerLink';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -19,7 +20,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Role'),
-          render: ({ row }) => <>{translate(row.role)}</>,
+          render: ({ row }) => (
+            <>
+              {ENV.roles[row.role] ? translate(ENV.roles[row.role]) : row.role}
+            </>
+          ),
           className: 'text-center col-md-1',
         },
       ])}
