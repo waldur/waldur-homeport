@@ -1,6 +1,6 @@
-import { translate } from '@waldur/i18n';
+import { Col, Row } from 'react-bootstrap';
 
-import './QuotasTable.scss';
+import { translate } from '@waldur/i18n';
 
 import { formatQuotaValue, formatQuotaName } from './utils';
 
@@ -24,17 +24,17 @@ export const QuotasTable = ({ resource }: { resource: Resource }) =>
       {resource.quotas
         .sort((q1, q2) => q1.name.localeCompare(q2.name))
         .map((quota) => (
-          <div key={quota.name} className="details-table__row">
-            <div className="details-table__key">
+          <Row key={quota.name} className="mb-2">
+            <Col sm={4} xs={6}>
               {formatQuotaName(quota.name)}:
-            </div>
-            <div className="details-table__value">
+            </Col>
+            <Col sm={8} xs={6}>
               {translate('{usage} of {limit}', {
                 usage: formatQuotaValue(quota.usage, quota.name),
                 limit: formatQuotaValue(quota.limit, quota.name),
               })}
-            </div>
-          </div>
+            </Col>
+          </Row>
         ))}
     </div>
   );
