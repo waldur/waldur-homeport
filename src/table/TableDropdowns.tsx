@@ -15,64 +15,61 @@ export const TableDropdowns: FunctionComponent<any> = (props) => {
   return (
     <>
       <Dropdown
-        id="offering-actions"
+        id="table-dropdown-actions"
         onToggle={() => setOpenExport(false)}
-        className="table_dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary py-3 card-toolbar"
+        className="table_dropdown menu-gray-800 menu-state-bg-light-primary"
       >
-        <Dropdown.Toggle variant="transparent" size="sm" bsPrefix="p-0">
-          <button
-            type="button"
-            className="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
-            data-kt-menu-trigger="click"
-            data-kt-menu-placement="bottom-end"
-          >
-            <span className="svg-icon svg-icon-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24px"
-                height="24px"
-                viewBox="0 0 24 24"
-              >
-                <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                  <rect
-                    x="5"
-                    y="5"
-                    width="5"
-                    height="5"
-                    rx="1"
-                    fill="currentColor"
-                  />
-                  <rect
-                    x="14"
-                    y="5"
-                    width="5"
-                    height="5"
-                    rx="1"
-                    fill="currentColor"
-                    opacity="0.3"
-                  />
-                  <rect
-                    x="5"
-                    y="14"
-                    width="5"
-                    height="5"
-                    rx="1"
-                    fill="currentColor"
-                    opacity="0.3"
-                  />
-                  <rect
-                    x="14"
-                    y="14"
-                    width="5"
-                    height="5"
-                    rx="1"
-                    fill="currentColor"
-                    opacity="0.3"
-                  />
-                </g>
-              </svg>
-            </span>
-          </button>
+        <Dropdown.Toggle
+          variant="transparent"
+          bsPrefix="p-0"
+          className="btn-icon btn-color-primary btn-active-light-primary me-3"
+        >
+          <span className="svg-icon svg-icon-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+            >
+              <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                <rect
+                  x="5"
+                  y="5"
+                  width="5"
+                  height="5"
+                  rx="1"
+                  fill="currentColor"
+                />
+                <rect
+                  x="14"
+                  y="5"
+                  width="5"
+                  height="5"
+                  rx="1"
+                  fill="currentColor"
+                  opacity="0.3"
+                />
+                <rect
+                  x="5"
+                  y="14"
+                  width="5"
+                  height="5"
+                  rx="1"
+                  fill="currentColor"
+                  opacity="0.3"
+                />
+                <rect
+                  x="14"
+                  y="14"
+                  width="5"
+                  height="5"
+                  rx="1"
+                  fill="currentColor"
+                  opacity="0.3"
+                />
+              </g>
+            </svg>
+          </span>
         </Dropdown.Toggle>
         <Dropdown.Menu
           align="end"
