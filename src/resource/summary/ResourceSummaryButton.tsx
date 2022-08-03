@@ -32,7 +32,7 @@ export const ResourceSummaryButton: React.FC<ResourceSummaryButtonProps> = ({
     );
   };
   return (
-    <Button disabled={disabled} size="sm" onClick={showDetailsModal}>
+    <Button variant="light" disabled={disabled} onClick={showDetailsModal}>
       {translate('Details')}
     </Button>
   );

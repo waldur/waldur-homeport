@@ -1,6 +1,13 @@
 .page-sidebar-menu.nav {
   flex-direction: column;
 
+  .nav-item {
+    :hover,
+    :focus {
+      background-color: #f1f2f4;
+    }
+  }
+
   .nav-link {
     margin: 0;
     padding: 8px 20px;
@@ -18,11 +25,6 @@
     :not(.active):hover,
     :not(.active):focus {
       border-left-color: #f1f2f4;
-    }
-
-    :hover,
-    :focus {
-      background-color: #f1f2f4;
     }
 
     &.active {

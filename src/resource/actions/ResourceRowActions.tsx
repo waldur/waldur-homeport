@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { getUser } from '@waldur/workspace/selectors';
@@ -16,9 +15,9 @@ export const ResourceRowActions: FunctionComponent<{ resource }> = ({
     return null;
   }
   return (
-    <ButtonGroup>
+    <div className="d-flex">
       <ActionButtonResource url={resource.url} />
       <ResourceSummaryButton url={resource.url} />
-    </ButtonGroup>
+    </div>
   );
 };
