@@ -8,10 +8,9 @@ import {
   CUSTOMER_SUPPORT_ROLE,
 } from '@waldur/core/constants';
 import { customerCreateDialog } from '@waldur/customer/create/actions';
+import { canManageCustomer } from '@waldur/customer/create/selectors';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { getConfig } from '@waldur/store/config';
-import { RootState } from '@waldur/store/reducers';
 import {
   checkIsCustomerSupport,
   checkIsOwner,
@@ -25,10 +24,7 @@ import { OrganizationUserRole } from './types';
 export const useCreateOrganization = () => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
-  const ownerCanManage = useSelector(
-    (state: RootState) =>
-      getConfig(state).plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER,
-  );
+  const ownerCanManage = useSelector(canManageCustomer);
   const canCreateOrganization = user.is_staff || ownerCanManage;
   const createOrganization = () => {
     dispatch(closeModalDialog());

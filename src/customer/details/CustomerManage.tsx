@@ -5,8 +5,9 @@ import { useTitle } from '@waldur/navigation/title';
 
 import { useCustomerItems } from '../utils';
 
-import { CustomerActionsPanel } from './CustomerActionsPanel';
 import { CustomerDetailsPanel } from './CustomerDetailsPanel';
+import { CustomerMarketplacePanel } from './CustomerMarketplacePanel';
+import { CustomerRemovePanel } from './CustomerRemovePanel';
 
 export const CustomerManage: FunctionComponent = () => {
   useTitle(translate('Manage organization'));
@@ -14,7 +15,8 @@ export const CustomerManage: FunctionComponent = () => {
   return (
     <>
       <CustomerDetailsPanel />
-      <CustomerActionsPanel />
+      <CustomerMarketplacePanel />
+      <CustomerRemovePanel />
     </>
   );
 };

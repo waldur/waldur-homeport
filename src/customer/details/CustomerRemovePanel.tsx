@@ -1,5 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
+import { Button, Card } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -21,6 +22,8 @@ import {
   getCustomer,
 } from '@waldur/workspace/selectors';
 
+import { canManageCustomer } from '../create/selectors';
+
 const OrganizationRemovalErrorDialog = lazyComponent(
   () =>
     import(
@@ -38,9 +41,8 @@ export const CustomerRemovePanel: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   const user = useSelector(getUser);
   const isOwner = useSelector(isOwnerSelector);
-  const canDeleteCustomer =
-    user.is_staff ||
-    (isOwner && ENV.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER);
+  const ownerCanManage = useSelector(canManageCustomer);
+  const canDeleteCustomer = user.is_staff || (isOwner && ownerCanManage);
   const { loading, value: invoices } = useAsync(() => loadInvoices(customer));
   const dispatch = useDispatch();
   const router = useRouter();
@@ -74,6 +76,7 @@ export const CustomerRemovePanel: FunctionComponent = () => {
             type: ISSUE_IDS.CHANGE_REQUEST,
             summary: translate('Organization removal'),
           },
+          hideProjectAndResourceFields: true,
           options: {
             title: translate('Organization removal'),
             hideTitle: true,
@@ -102,26 +105,32 @@ export const CustomerRemovePanel: FunctionComponent = () => {
   return loading ? (
     <LoadingSpinner />
   ) : canDeleteCustomer ? (
-    <div className="highlight">
-      <h3 className="text-danger">{translate('Remove organization')}</h3>
-      <ul>
-        <li>
-          {translate('You can remove this organization by pressing the button')}
-        </li>
-        <li>
-          {translate(
-            'Removing the organization will delete all related resources.',
-          )}
-        </li>
-        <li>{translate('Removed organizations cannot be restored!')}</li>
-      </ul>
-      <a onClick={removeCustomer} className="btn btn-danger">
-        <i className="fa fa-trash" /> {translate('Remove organization')}
-      </a>
-    </div>
-  ) : (
-    <div className="highlight">
-      <h3>{translate('Only staff can remove organization.')}</h3>
-    </div>
-  );
+    <Card className="mt-5">
+      <Card.Header>
+        <Card.Title>
+          <h3 className="text-danger">{translate('Remove organization')}</h3>
+        </Card.Title>
+      </Card.Header>
+      <Card.Body className="d-flex justify-content-between">
+        <ul>
+          <li>
+            {translate(
+              'You can remove this organization by pressing the button',
+            )}
+          </li>
+          <li>
+            {translate(
+              'Removing the organization will delete all related resources.',
+            )}
+          </li>
+          <li>{translate('Removed organizations cannot be restored!')}</li>
+        </ul>
+        <div>
+          <Button onClick={removeCustomer} variant="danger">
+            <i className="fa fa-trash" /> {translate('Remove organization')}
+          </Button>
+        </div>
+      </Card.Body>
+    </Card>
+  ) : null;
 };

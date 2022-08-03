@@ -26,7 +26,7 @@ const UserDeleteAccountComponent: React.FC<UserDeleteAccountComponentProps> = (
         <Card.Header className="text-danger">
           {translate('Delete account')}
         </Card.Header>
-        <Card.Body>
+        <Card.Body className="d-flex justify-content-between">
           <Form.Check
             id="chk-confirm-delete-account"
             type="checkbox"
@@ -34,19 +34,15 @@ const UserDeleteAccountComponent: React.FC<UserDeleteAccountComponentProps> = (
             onChange={(value) => setConfirm(value.target.checked)}
             label={translate('I confirm my account deletion')}
           />
-          <Form.Group>
-            <div className="pull-right">
-              <Button
-                id="remove-btn"
-                variant="danger"
-                size="sm"
-                onClick={props.showUserRemoval}
-                disabled={!confirm}
-              >
-                {translate('Request deletion')}
-              </Button>
-            </div>
-          </Form.Group>
+          <Button
+            id="remove-btn"
+            variant="danger"
+            size="sm"
+            onClick={props.showUserRemoval}
+            disabled={!confirm}
+          >
+            {translate('Request deletion')}
+          </Button>
         </Card.Body>
       </Card>
     )

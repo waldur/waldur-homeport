@@ -78,7 +78,7 @@ export const IssueCreateForm = enhance(
       <Modal.Header>
         <Modal.Title>{options.title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="scroll-y mx-5 mx-xl-15 my-7">
         {templateState.loading ? (
           <LoadingSpinner />
         ) : templateState.error ? (
