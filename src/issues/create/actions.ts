@@ -10,4 +10,8 @@ const IssueCreateDialog = lazyComponent(
 );
 
 export const openIssueCreateDialog = (resolve, formId?: string) =>
-  openModalDialog(IssueCreateDialog, { resolve, formId });
+  openModalDialog(IssueCreateDialog, {
+    resolve,
+    formId,
+    dialogClassName: 'modal-dialog-centered mw-650px',
+  });

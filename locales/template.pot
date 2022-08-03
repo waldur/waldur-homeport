@@ -48,7 +48,7 @@ msgstr ""
 msgid "API key"
 msgstr ""
 
-#: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "API secret code:"
 msgstr ""
 
@@ -1470,10 +1470,6 @@ msgstr ""
 msgid "Code should consist of latin symbols, numbers, dashes and underscores."
 msgstr ""
 
-#: src/customer/details/CustomerAccordion.tsx
-msgid "Collapse"
-msgstr ""
-
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
 msgid "Collation"
 msgstr ""
@@ -1934,8 +1930,48 @@ msgstr ""
 msgid "Credentials"
 msgstr ""
 
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current VAT code: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current VAT rate: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current abbreviation: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current address: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current agreement number: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current bank account: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current bank name: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current contact phone: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current domain name: {value}."
+msgstr ""
+
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Current email"
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current email: {value}."
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenStackInstanceCurrentFlavor.tsx
@@ -1946,13 +1982,29 @@ msgstr ""
 msgid "Current limit"
 msgstr ""
 
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current name: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current native name: {value}."
+msgstr ""
+
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "Current plan"
 msgstr ""
 
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current postal code: {value}."
+msgstr ""
+
 #: src/resource/support/ResourcesTreemap.tsx
 msgid "Current price per month"
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current registry code: {value}."
 msgstr ""
 
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -1962,6 +2014,10 @@ msgstr ""
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "Current size"
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current subnets: {value}."
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/RetypeDialog.tsx
@@ -2321,6 +2377,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Discard"
 msgstr ""
@@ -2393,6 +2450,7 @@ msgstr ""
 msgid "Domain"
 msgstr ""
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/marketplace.ts
 msgid "Domain name"
@@ -2833,10 +2891,6 @@ msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
 msgid "Existing quota usage: {usage}"
-msgstr ""
-
-#: src/customer/details/CustomerAccordion.tsx
-msgid "Expand"
 msgstr ""
 
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
@@ -4744,6 +4798,7 @@ msgstr ""
 msgid "No categories"
 msgstr ""
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "No countries"
 msgstr ""
@@ -4841,10 +4896,6 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/rule-editor/RemoteGroupField.tsx
 msgid "None"
-msgstr ""
-
-#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
-msgid "Not a service provider."
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
@@ -5160,10 +5211,6 @@ msgstr ""
 msgid "Only staff can manage OpenStack tenant."
 msgstr ""
 
-#: src/customer/details/CustomerRemovePanel.tsx
-msgid "Only staff can remove organization."
-msgstr ""
-
 #: src/marketplace/resources/actions/utils.ts
 msgid "Only staff users are allowed to perform this action."
 msgstr ""
@@ -5346,10 +5393,6 @@ msgstr ""
 
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Organization abbreviation"
-msgstr ""
-
-#: src/customer/details/CustomerActionsPanel.tsx
-msgid "Organization actions"
 msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
@@ -6108,6 +6151,10 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Preview changes"
+msgstr ""
+
 #: src/marketplace/offerings/PreviewOfferingDialog.tsx
 msgid "Preview offering"
 msgstr ""
@@ -6466,6 +6513,71 @@ msgstr ""
 msgid "Proof document"
 msgstr ""
 
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Propose changes"
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed VAT code: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed VAT rate: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed abbreviation: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed address: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed agreement number: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed bank account: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed bank name: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed contact phone: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed domain name: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed email: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed name: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed native name: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed postal code: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed registry code: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed subnets: {value}."
+msgstr ""
+
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/FlowsList.tsx
@@ -6737,7 +6849,7 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
 #: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
 msgid "Regenerate"
 msgstr ""
@@ -6759,15 +6871,11 @@ msgstr ""
 msgid "Register as a customer of our portal and provide your cloud services through the service catalog."
 msgstr ""
 
-#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Register as service provider"
 msgstr ""
 
-#: src/customer/details/CustomerActionsPanel.tsx
-msgid "Register organization as service provider and remove organization."
-msgstr ""
-
-#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Registered at:"
 msgstr ""
 
@@ -6936,10 +7044,6 @@ msgstr ""
 
 #: src/marketplace/resources/report/SubmitReportDialog.tsx
 msgid "Report has been submitted"
-msgstr ""
-
-#: src/customer/details/CustomerErrorPanel.tsx
-msgid "Report incorrect data"
 msgstr ""
 
 #: src/marketplace/resources/report/ShowReportComponent.tsx
@@ -7610,6 +7714,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/user/api-key/UserEditTokenContainer.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Save changes"
@@ -7813,6 +7918,7 @@ msgid "Select connected subnet"
 msgstr ""
 
 #: src/customer/create/CountryGroup.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "Select country..."
 msgstr ""
@@ -8668,6 +8774,7 @@ msgstr ""
 msgid "Subnet name"
 msgstr ""
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-network/tabs.ts
 #: src/openstack/openstack-subnet/breadcrumbs.ts
@@ -10590,10 +10697,6 @@ msgstr ""
 msgid "Update static routes"
 msgstr ""
 
-#: src/customer/details/CustomerDetailsPanel.tsx
-msgid "Update your organization name, logo, accounting and contact details."
-msgstr ""
-
 #: src/resource/actions/UpdateResourceDialog.tsx
 msgid "Update {resourceType} {resourceName}"
 msgstr ""
@@ -11344,10 +11447,6 @@ msgstr ""
 msgid "You are not part of an organisation. Create an organization or request access from your organization administrator."
 msgstr ""
 
-#: src/customer/details/CustomerErrorPanel.tsx
-msgid "You can create issue by pressing the button below"
-msgstr ""
-
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "You can find offerings to order in the marketplace"
 msgstr ""
@@ -11356,8 +11455,8 @@ msgstr ""
 msgid "You can find offerings to order in the service catalog"
 msgstr ""
 
-#: src/customer/details/CustomerMarketplacePanel.tsx
-msgid "You can register organization as a service provider by pressing the button below"
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+msgid "You can register organization as a service provider by pressing the button"
 msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx

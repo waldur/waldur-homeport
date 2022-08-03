@@ -72,13 +72,13 @@ export const EmailField: FunctionComponent<any> = (props) => {
             </Form.Text>
           )}
         </Col>
-        <Col xs="auto">
-          {!props.user.requested_email && !props.protected && (
+        {!props.user.requested_email && !props.protected && (
+          <Col xs="auto">
             <Button onClick={openChangeDialog} variant="secondary" size="sm">
               {translate('Request change')}
             </Button>
-          )}
-        </Col>
+          </Col>
+        )}
       </Form.Group>
       {props.user.requested_email && !props.protected && (
         <RequestedEmail

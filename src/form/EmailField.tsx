@@ -10,5 +10,12 @@ interface EmailFieldProps extends FormField {
 export const EmailField: FunctionComponent<EmailFieldProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, ...rest } = props;
-  return <Form.Control {...props.input} type="email" {...rest} />;
+  return (
+    <Form.Control
+      {...props.input}
+      type="email"
+      className="form-control-solid"
+      {...rest}
+    />
+  );
 };

@@ -1,123 +1,250 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import { Button, Card, Form, Row } from 'react-bootstrap';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { useAsync } from 'react-use';
+import { compose } from 'redux';
+import { Field, reduxForm } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
-import { formatDateTime } from '@waldur/core/dateUtils';
+import { patch } from '@waldur/core/api';
+import { lazyComponent } from '@waldur/core/lazyComponent';
+import {
+  loadCountries,
+  Option,
+  SingleValue,
+} from '@waldur/customer/create/CountryGroup';
 import { isFeatureVisible } from '@waldur/features/connect';
+import {
+  FormContainer,
+  NumberField,
+  StringField,
+  SubmitButton,
+} from '@waldur/form';
+import { DateField } from '@waldur/form/DateField';
+import { EmailField } from '@waldur/form/EmailField';
+import { WindowedSelect } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
+import { openModalDialog } from '@waldur/modal/actions';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
-import { getCustomer } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+import {
+  getUser,
+  isOwner as isOwnerSelector,
+  getCustomer,
+} from '@waldur/workspace/selectors';
 
-import { CustomerAccordion } from './CustomerAccordion';
+import { canManageCustomer } from '../create/selectors';
 
-interface CustomerDetailsProps {
-  customer: Partial<Customer>;
-  nativeNameVisible: boolean;
-}
+const CustomerErrorDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerErrorDialog" */ './CustomerErrorDialog'
+    ),
+  'CustomerErrorDialog',
+);
 
-export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
-  customer,
-  nativeNameVisible,
-}) => {
-  return (
-    <CustomerAccordion
-      title={translate('Organization details')}
-      subtitle={translate(
-        'Update your organization name, logo, accounting and contact details.',
-      )}
-    >
-      <ResourceDetailsTable>
-        <Field label={translate('Name')} value={customer.display_name} />
+const enhance = compose(
+  connect((state: RootState) => {
+    const customer = getCustomer(state);
+    const initialValues = {
+      name: customer.name,
+      native_name: customer.native_name,
+      abbreviation: customer.abbreviation,
+      domain: customer.domain,
+      registration_code: customer.registration_code,
+      accounting_start_date: customer.accounting_start_date,
+      agreement_number: customer.agreement_number,
+      address: customer.address,
+      email: customer.email,
+      phone_number: customer.phone_number,
+      vat_code: customer.vat_code,
+      default_tax_percent: customer.default_tax_percent,
+      access_subnets: customer.access_subnets,
+      country: customer.country,
+      postal: customer.postal,
+      bank_name: customer.bank_name,
+      bank_account: customer.bank_account,
+    };
+    return { initialValues };
+  }),
+  reduxForm({
+    form: 'customerEdit',
+  }),
+);
 
-        {nativeNameVisible && (
-          <Field
-            label={translate('Native name')}
-            value={customer.native_name}
-          />
-        )}
+const WindowedSelectField = ({ input: { value, onChange }, ...props }) => (
+  <WindowedSelect value={value} onChange={onChange} {...props} />
+);
 
-        <Field
-          label={translate('Abbreviation')}
-          value={customer.abbreviation}
-        />
+const StaticField: React.FC<{
+  labelClass?: string;
+  controlClass?: string;
+  label: string;
+  value: string;
+}> = (props) => (
+  <Row>
+    <Form.Label className={props.labelClass}>{props.label}</Form.Label>
+    <div className={props.controlClass}>
+      <p>{props.value}</p>
+    </div>
+  </Row>
+);
 
-        {isFeatureVisible('customer.show_domain') && (
-          <Field
-            label={translate('Home organization domain name')}
-            value={customer.domain}
-          />
-        )}
-
-        <Field
-          label={translate('Registry code')}
-          value={customer.registration_code}
-        />
-
-        <Field
-          label={translate('Accounting start date')}
-          value={
-            customer.accounting_start_date &&
-            formatDateTime(customer.accounting_start_date)
-          }
-        />
-
-        <Field
-          label={translate('Agreement number')}
-          value={customer.agreement_number}
-        />
-
-        <Field
-          label={translate('Address')}
-          value={customer.address || customer.contact_details}
-        />
-
-        <Field label={translate('Contact email')} value={customer.email} />
-
-        <Field
-          label={translate('Contact phone')}
-          value={customer.phone_number}
-        />
-
-        <Field label={translate('VAT code')} value={customer.vat_code} />
-
-        <Field
-          label={translate('VAT rate')}
-          value={`${customer.default_tax_percent}%`}
-        />
-
-        <Field
-          label={translate(
-            'Subnets from where connection to self-service is allowed.',
-          )}
-          value={
-            ENV.plugins.WALDUR_CORE.ORGANIZATION_SUBNETS_VISIBLE &&
-            customer.access_subnets
-          }
-        />
-
-        <Field label={translate('Country')} value={customer.country_name} />
-
-        <Field label={translate('Postal code')} value={customer.postal} />
-
-        <Field label={translate('Bank name')} value={customer.bank_name} />
-
-        <Field
-          label={translate('Bank account')}
-          value={customer.bank_account}
-        />
-      </ResourceDetailsTable>
-    </CustomerAccordion>
-  );
+StaticField.defaultProps = {
+  labelClass: 'col-sm-3 col-md-4 col-lg-3',
+  controlClass: 'col-sm-9 col-md-8',
 };
 
-const mapStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-  nativeNameVisible: getNativeNameVisible(state),
-});
+export const CustomerDetailsPanel = enhance((props) => {
+  const dispatch = useDispatch();
+  const customer = useSelector(getCustomer);
+  const nativeNameVisible = useSelector(getNativeNameVisible);
+  const user = useSelector(getUser);
+  const isOwner = useSelector(isOwnerSelector);
+  const ownerCanManage = useSelector(canManageCustomer);
+  const canEditCustomer = user.is_staff || (isOwner && ownerCanManage);
+  const { loading, value } = useAsync(loadCountries);
+  const updateCustomer = (formData) => {
+    if (canEditCustomer) {
+      const { country, ...rest } = formData;
+      return patch(`/customers/${customer.uuid}/`, {
+        country: country?.value,
+        ...rest,
+      });
+    } else {
+      dispatch(
+        openModalDialog(CustomerErrorDialog, {
+          resolve: { customer, formData },
+        }),
+      );
+    }
+  };
 
-export const CustomerDetailsPanel =
-  connect(mapStateToProps)(PureCustomerDetails);
+  return (
+    <Card>
+      <Card.Header>
+        <Card.Title>
+          <h3>{translate('Organization details')}</h3>
+        </Card.Title>
+      </Card.Header>
+      <Card.Body>
+        <form onSubmit={props.handleSubmit(updateCustomer)}>
+          <FormContainer
+            submitting={props.submitting}
+            labelClass="col-sm-3 col-md-4"
+            controlClass="col-sm-9 col-md-8"
+          >
+            <StringField name="name" label={translate('Name')} />
+
+            {nativeNameVisible ? (
+              <StringField
+                name="native_name"
+                label={translate('Native name')}
+              />
+            ) : null}
+
+            <StringField
+              name="abbreviation"
+              label={translate('Abbreviation')}
+            />
+
+            {isFeatureVisible('customer.show_domain') ? (
+              <StringField
+                name="domain"
+                label={translate('Domain name')}
+                description={translate('Home organization domain name')}
+              />
+            ) : null}
+
+            <StringField
+              name="registration_code"
+              label={translate('Registry code')}
+            />
+
+            <DateField
+              name="accounting_start_date"
+              label={translate('Accounting start date')}
+            />
+
+            <StringField
+              name="agreement_number"
+              label={translate('Agreement number')}
+            />
+
+            <StringField name="address" label={translate('Address')} />
+
+            <EmailField name="email" label={translate('Contact email')} />
+
+            <StringField
+              name="phone_number"
+              label={translate('Contact phone')}
+            />
+
+            <StringField name="vat_code" label={translate('VAT code')} />
+
+            <NumberField
+              name="default_tax_percent"
+              label={translate('VAT rate')}
+              unit="%"
+              max={50}
+            />
+
+            {ENV.plugins.WALDUR_CORE.ORGANIZATION_SUBNETS_VISIBLE ? (
+              <StringField
+                name="access_subnets"
+                label={translate('Subnets')}
+                description={translate(
+                  'Subnets from where connection to self-service is allowed.',
+                )}
+              />
+            ) : null}
+
+            <Field
+              label={translate('Country')}
+              name="country"
+              component={WindowedSelectField}
+              components={{ Option, SingleValue }}
+              placeholder={translate('Select country...')}
+              getOptionLabel={(option) => option.display_name}
+              getOptionValue={(option) => option.value}
+              options={value || []}
+              isLoading={loading}
+              isClearable={true}
+              noOptionsMessage={() => translate('No countries')}
+            />
+
+            <StringField name="postal" label={translate('Postal code')} />
+
+            <StringField name="bank_name" label={translate('Bank name')} />
+
+            <StringField
+              name="bank_account"
+              label={translate('Bank account')}
+            />
+          </FormContainer>
+
+          {props.dirty && (
+            <div className="pull-right">
+              <Button
+                variant="secondary"
+                size="sm"
+                className="me-2"
+                onClick={props.reset}
+              >
+                {translate('Discard')}
+              </Button>
+              <SubmitButton
+                className="btn btn-primary btn-sm me-2"
+                submitting={props.submitting}
+                label={
+                  canEditCustomer
+                    ? translate('Save changes')
+                    : translate('Propose changes')
+                }
+              />
+            </div>
+          )}
+        </form>
+      </Card.Body>
+    </Card>
+  );
+});
