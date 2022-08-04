@@ -56,6 +56,12 @@ msgstr "Kinnitatud"
 msgid "Access"
 msgstr "Ligipääs"
 
+msgid "Access URL"
+msgstr "Juurdepääsu URL"
+
+msgid "Access policy"
+msgstr "Juurdepääsupoliitika"
+
 msgid "Access subnets"
 msgstr "Juurdepääsu alamvõrgud"
 
