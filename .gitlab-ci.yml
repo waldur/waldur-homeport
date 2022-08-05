@@ -2,8 +2,6 @@ include:
   - project: "waldur/waldur-pipelines"
     file: "/templates/stages.yml"
   - project: "waldur/waldur-pipelines"
-    file: "/templates/release/publish.yml"
-  - project: "waldur/waldur-pipelines"
     file: "/templates/validate/docker-compose-trigger.yml"
   - project: "waldur/waldur-pipelines"
     file: "/templates/test/lint-docker-image.yaml"
@@ -177,3 +175,17 @@ Download translation:
     - git branch new-translations
     - git push --set-upstream origin new-translations:develop
   before_script: []
+
+Build develop and next:
+  stage: test
+  interruptible: true
+  image: "registry.hpc.ut.ee/mirror/library/docker:19.03.12"
+  script:
+    - mkdir next
+    - cd next
+    - git config --global user.name "$GITLAB_USER_NAME"
+    - git config --global user.email "$GITLAB_USER_EMAIL"
+    - echo https://gitlab-ci-token:$GIT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git
+    - git remote set-url origin "https://gitlab-ci-token:$GITLAB_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
+    - git fetch
+    - git co next
