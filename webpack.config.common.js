@@ -16,7 +16,7 @@ module.exports = {
   },
   output: {
     path: utils.formatPath('.'),
-    publicPath: '/',
+    publicPath: utils.ASSET_PATH,
     filename: 'scripts/[name].bundle.js?[contenthash]',
     chunkFilename: 'scripts/[name].js?[chunkhash]',
   },
