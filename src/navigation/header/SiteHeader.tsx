@@ -14,7 +14,7 @@ export const SiteHeader: FunctionComponent = () => {
       <nav className="navbar navbar-static-top white-bg m-b-none">
         <div className="navbar-header m-l-sm-xl">
           <a className="header-logo" onClick={goBack}>
-            <img src="/images/login_logo.png" />
+            <img src="images/login_logo.png" />
           </a>
         </div>
         <ul className="nav navbar-top-links pull-right">

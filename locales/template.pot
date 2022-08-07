@@ -7974,6 +7974,7 @@ msgstr ""
 msgid "Server"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "Server group"
 msgstr ""
@@ -9280,6 +9281,10 @@ msgstr ""
 
 #: src/user/UserPopover.tsx
 msgid "Try again"
+msgstr ""
+
+#: src/navigation/header/NextBranchLink.tsx
+msgid "Try out new version"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
