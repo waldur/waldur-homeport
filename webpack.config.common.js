@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -245,9 +246,13 @@ module.exports = {
       // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
       languages: ['json', 'yaml', 'shell', 'python'],
     }),
-
+    new webpack.DefinePlugin({
+      'process.env': {
+        'ASSET_PATH': JSON.stringify(utils.ASSET_PATH),
+      }
+    }),
     new HtmlWebpackPlugin({
-      template: './src/index-template.html',
+      template: './src/index.ejs',
       filename: utils.formatPath('index.html'),
       inject: 'body',
       chunks: ['index'],
