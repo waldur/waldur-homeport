@@ -14,6 +14,7 @@ import { DocsLink } from './DocsLink';
 import { ExternalLinks } from './ExternalLinks';
 import { LogoutLink } from './LogoutLink';
 import { MainSearch } from './MainSearch';
+import { NextBranchLink } from './NextBranchLink';
 import { SupportLink } from './SupportLink';
 
 export const AppHeader: FunctionComponent = () => (
@@ -29,6 +30,7 @@ export const AppHeader: FunctionComponent = () => (
         <ul className="nav navbar-top-links navbar-right hidden-xs-stable">
           <ExternalLinks />
           <SupportLink />
+          <NextBranchLink />
           <DocsLink />
           <ComparisonIndicator />
           <PendingOrderIndicator />

@@ -27,6 +27,17 @@ then
   cat build-info/COMMIT_TAG
 fi
 
+mkdir next
+cd next
+apk add git
+git config --global user.name "$GITLAB_USER_NAME"
+git config --global user.email "$GITLAB_USER_EMAIL"
+echo https://gitlab-ci-token:$GIT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git
+git remote set-url origin "https://gitlab-ci-token:$GITLAB_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
+git fetch
+git checkout next
+cd ..
+
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 docker build -t opennode/waldur-homeport:$VERSION . --build-arg VERSION
 docker push "opennode/waldur-homeport:$VERSION"

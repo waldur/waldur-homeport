@@ -13,7 +13,7 @@ export const LoadingScreen: FunctionComponent<{
       {loading ? (
         <div className="loading-screen-container">
           <div className="loading-screen">
-            <img src="/images/login_logo.png" alt="Logo should be here" />
+            <img src="images/login_logo.png" alt="Logo should be here" />
             <h1 className="loading-title">{translate('Loading assets')}</h1>
           </div>
         </div>

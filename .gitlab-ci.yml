@@ -107,20 +107,6 @@ Build artifact:
       - build/
     expire_in: 1 week
 
-Publish docker image for next branch:
-  image: "registry.hpc.ut.ee/mirror/library/docker:19.03.12"
-  stage: release
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "next"'
-  services:
-    - name: "registry.hpc.ut.ee/mirror/library/docker:19.03.12-dind"
-      alias: docker
-      command: ["--mtu=1400"]
-  before_script:
-    - echo "[+] Build and publish docker image for next branch"
-  script:
-    - sh docker_push.sh next
-
 Lint docker image:
   extends: .Lint docker image template
   variables:
