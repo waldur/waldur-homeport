@@ -37,7 +37,7 @@ module.exports = merge(baseConfig, {
     },
     port: PORT,
     devMiddleware: {
-      publicPath: '/',
+      publicPath: utils.ASSET_PATH,
     },
     historyApiFallback: {
       index: 'index.html',

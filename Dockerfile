@@ -24,7 +24,7 @@ RUN apk add --no-cache git && yarn install --frozen-lockfile
 COPY next /app
 ARG VERSION=latest
 RUN sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" src/configs/default.ts
-RUN yarn build
+RUN ASSET_PATH=/next/ yarn build
 
 # production environment
 FROM nginx:stable-alpine
