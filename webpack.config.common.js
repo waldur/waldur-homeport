@@ -16,7 +16,7 @@ module.exports = {
   },
   output: {
     path: utils.formatPath('.'),
-    publicPath: '/',
+    publicPath: utils.ASSET_PATH,
     filename: 'scripts/[name].bundle.js?[contenthash]',
     chunkFilename: 'scripts/[name].js?[chunkhash]',
   },
@@ -242,7 +242,7 @@ module.exports = {
           to: utils.formatPath('images/service-providers'),
         },
         // favicon is a part of white-labeling, store such resources separately.
-        // https://opennode.atlassian.net/wiki/display/WD/HomePort+configuration#HomePortconfiguration-White-labeling
+        // https://docs.waldur.com/admin-guide/deployment/helm/docs/whitelabeling/
         {
           from: path.resolve(imagesPath, './favicon.ico'),
           to: utils.formatPath('images/favicon.ico'),
