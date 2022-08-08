@@ -50,15 +50,23 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
   const { state } = useCurrentStateAndParams();
   const router = useRouter();
 
-  const isCustomer = useMemo(
-    () =>
-      getCustomerItems()
-        .map((item) => item.to)
-        .includes(state.name),
-    [state.name],
-  );
+  const isCustomerPages = useMemo(() => {
+    for (const link of getCustomerItems()) {
+      if (link.children && link.children.length) {
+        for (const link2 of link.children) {
+          if (link2.to === state.name) {
+            return true;
+          }
+        }
+      }
+      if (link.to === state.name) {
+        return true;
+      }
+    }
+    return false;
+  }, [state.name]);
 
-  const isProject = useMemo(
+  const isProjectPages = useMemo(
     () =>
       getProjectItems()
         .map((item) => item.to)
@@ -66,7 +74,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
     [state.name],
   );
 
-  const isProvider = useMemo(
+  const isProviderPages = useMemo(
     () =>
       getProviderItems()
         .map((item) => item.to)
@@ -105,8 +113,12 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
             <OrganizationsPanel
               active={selectedOrganization}
               onClick={(customer) => {
-                if (!isProject) {
-                  const targetState = isProvider
+                if (isCustomerPages || isProviderPages) {
+                  router.stateService.go(state.name, {
+                    uuid: customer.uuid,
+                  });
+                } else {
+                  const targetState = isProviderPages
                     ? 'marketplace-vendor-offerings'
                     : 'organization.dashboard';
                   router.stateService.go(targetState, {
@@ -122,13 +134,16 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
             <ProjectsPanel
               projects={selectedOrganization?.projects}
               onSelect={(item) => {
-                if (!isCustomer && !isProvider) {
+                if (isProjectPages) {
+                  router.stateService.go(state.name, {
+                    uuid: item.uuid,
+                  });
+                } else {
                   router.stateService.go('project.details', {
                     uuid: item.uuid,
                   });
                 }
               }}
-              isDisabled={isCustomer || isProvider}
             />
           </div>
           <Button

@@ -33,7 +33,7 @@ const ProjectListItem = ({ item }) => (
 export const ProjectsPanel: FunctionComponent<{
   projects: Project[];
   onSelect(project: Project): void;
-  isDisabled: boolean;
+  isDisabled?: boolean;
 }> = ({ projects, onSelect, isDisabled }) => {
   const currentProject = useSelector(getProject);
   const [selectedProject, selectProject] = useState<Project>(currentProject);

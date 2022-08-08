@@ -3263,6 +3263,7 @@ msgstr ""
 msgid "Go to my profile"
 msgstr ""
 
+#: src/auth/PermissionLayout.tsx
 #: src/invitations/GroupInvitationErrorMessage.tsx
 #: src/invitations/InvitationErrorMessage.tsx
 msgid "Go to profile"
@@ -4790,7 +4791,7 @@ msgstr ""
 msgid "No access info."
 msgstr ""
 
-#: src/auth/WarningBar.tsx
+#: src/auth/PermissionLayout.tsx
 msgid "No association"
 msgstr ""
 
@@ -7490,6 +7491,14 @@ msgstr ""
 
 #: src/openstack/openstack-snapshot/tabs.ts
 msgid "Restored volumes"
+msgstr ""
+
+#: src/auth/PermissionLayout.tsx
+msgid "Restricted"
+msgstr ""
+
+#: src/auth/PermissionLayout.tsx
+msgid "Restricted page"
 msgstr ""
 
 #: src/issues/attachments/utils.ts
@@ -11492,6 +11501,18 @@ msgstr ""
 msgid "You do not have any resources yet."
 msgstr ""
 
+#: src/auth/PermissionLayout.tsx
+msgid "You do not have sufficient privileges to visit this page. Ensure you have the correct rights for accessing this page for customer \"{customer}\""
+msgstr ""
+
+#: src/auth/PermissionLayout.tsx
+msgid "You do not have sufficient privileges to visit this page. Ensure you have the correct rights for accessing this page for project \"{project}\""
+msgstr ""
+
+#: src/auth/PermissionLayout.tsx
+msgid "You do not have the permissions for accessing this page."
+msgstr ""
+
 #: src/project/ProjectCreateButton.tsx
 msgid "You don't have enough privileges to perform this operation."
 msgstr ""
@@ -11571,7 +11592,7 @@ msgstr ""
 msgid "Your account is not authorized to use this allocation"
 msgstr ""
 
-#: src/auth/WarningBar.tsx
+#: src/auth/PermissionLayout.tsx
 msgid "Your account is not part of any organization. Your view will be restricted."
 msgstr ""
 

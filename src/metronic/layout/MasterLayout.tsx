@@ -1,6 +1,8 @@
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { useEffect } from 'react';
 
+import { PermissionLayout } from '@waldur/auth/PermissionLayout';
+
 import { MenuComponent } from '../assets/ts/components';
 
 import { Content } from './components/Content';
@@ -23,7 +25,9 @@ const MasterLayout = () => {
   return (
     <PageDataProvider>
       <Content>
-        <UIView />
+        <PermissionLayout>
+          <UIView />
+        </PermissionLayout>
       </Content>
     </PageDataProvider>
   );
