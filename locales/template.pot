@@ -606,6 +606,10 @@ msgstr ""
 msgid "Allowed address pairs update was scheduled."
 msgstr ""
 
+#: src/form/ImageField.tsx
+msgid "Allowed file types"
+msgstr ""
+
 #: src/auth/SigninButton.tsx
 msgid "Already have an account?"
 msgstr ""
@@ -1306,6 +1310,10 @@ msgstr ""
 
 #: src/issues/types/constants.ts
 msgid "Change Request"
+msgstr ""
+
+#: src/form/ImageField.tsx
+msgid "Change avatar"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ChangeFlavorAction.tsx
@@ -6290,6 +6298,7 @@ msgid "Profile is enabled."
 msgstr ""
 
 #: src/user/support/AvatarField.tsx
+#: src/user/support/UserEditForm.tsx
 msgid "Profile picture"
 msgstr ""
 
@@ -6414,6 +6423,11 @@ msgstr ""
 
 #: src/project/effects.ts
 msgid "Project has been updated."
+msgstr ""
+
+#: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectUpdateForm.tsx
+msgid "Project image"
 msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
@@ -7001,6 +7015,10 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
+#: src/form/ImageField.tsx
+msgid "Remove avatar"
+msgstr ""
+
 #: src/marketplace/compare/OfferingCompareButton.tsx
 msgid "Remove from comparison"
 msgstr ""
@@ -7244,6 +7262,10 @@ msgstr ""
 #: src/form/ResetFormButton.tsx
 #: src/vmware/actions/ResetAction.tsx
 msgid "Reset"
+msgstr ""
+
+#: src/form/ImageField.tsx
+msgid "Reset avatar"
 msgstr ""
 
 #: src/marketplace/offerings/create/OptionalNumberField.tsx

@@ -29,6 +29,7 @@ export interface UserDetails extends User {
   civil_number: string;
   phone_number: string;
   email: string;
+  image?: string;
   requested_email?: string;
   registration_method: string;
   preferred_language: string;
@@ -106,6 +107,7 @@ export interface Project {
   customer_name?: string;
   customer_abbreviation?: string;
   backend_id?: string;
+  image?: string;
 }
 
 export type PhoneNumber =

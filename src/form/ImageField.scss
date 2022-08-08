@@ -1,0 +1,12 @@
+.image-input {
+  // Input Changed to Empty State
+  &.image-input-changed.image-input-empty {
+    [data-kt-image-input-action='cancel'] {
+      display: flex;
+    }
+
+    [data-kt-image-input-action='remove'] {
+      display: none;
+    }
+  }
+}

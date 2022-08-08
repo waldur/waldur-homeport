@@ -6,12 +6,12 @@ import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { getNameFieldValidators } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { ImageField } from '@waldur/form/ImageField';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { getAllOrganizationDivisions } from '@waldur/marketplace/common/api';
 
 import { DomainGroup } from './DomainGroup';
-import { ImageFileField } from './ImageFileField';
 import { InputGroup } from './InputGroup';
 import { SelectField } from './SelectField';
 import { WizardForm } from './WizardForm';
@@ -90,9 +90,10 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => {
               />
               <InputGroup
                 name="image"
-                component={ImageFileField}
+                component={ImageField}
                 type="file"
                 label={translate('Logo')}
+                className="mt-6"
               />
             </>
           )}

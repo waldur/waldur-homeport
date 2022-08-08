@@ -14,9 +14,11 @@ import {
 } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
+import { ImageField } from '@waldur/form/ImageField';
 import { StaticField } from '@waldur/form/StaticField';
 import { validateMaxLength } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
+import { Project } from '@waldur/workspace/types';
 
 import { ProjectNameField } from './ProjectNameField';
 
@@ -29,6 +31,7 @@ interface ProjectUpdateFormData {
 
 interface ProjectUpdateFormProps extends InjectedFormProps {
   updateProject(data: ProjectUpdateFormData): Promise<void>;
+  initialValues: Partial<Project>;
   project_type?: string;
   isStaff: boolean;
   isOwner: boolean;
@@ -93,6 +96,11 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
           label={translate('Backend ID')}
           name="backend_id"
           disabled={props.isDisabled}
+        />
+        <ImageField
+          label={translate('Project image')}
+          name="image"
+          initialValue={props.initialValues.image}
         />
       </FormContainer>
       <Form.Group>

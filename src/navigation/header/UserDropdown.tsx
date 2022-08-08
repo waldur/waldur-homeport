@@ -165,7 +165,14 @@ export const UserDropdownMenu: FunctionComponent = () => {
           </span>
         </div>
         <div className="cursor-pointer symbol symbol-30px symbol-md-40px">
-          <Gravatar email={user.email} size={40} />
+          {user.image ? (
+            <div
+              className="symbol-label"
+              style={{ backgroundImage: `url(${user.image})` }}
+            />
+          ) : (
+            <Gravatar email={user.email} size={40} />
+          )}
         </div>
       </div>
       <div
@@ -176,7 +183,14 @@ export const UserDropdownMenu: FunctionComponent = () => {
         <div className="menu-item px-3">
           <div className="menu-content d-flex align-items-center px-3">
             <div className="symbol symbol-50px me-5">
-              <Gravatar email={user.email} size={40} />
+              {user.image ? (
+                <div
+                  className="symbol-label"
+                  style={{ backgroundImage: `url(${user.image})` }}
+                />
+              ) : (
+                <Gravatar email={user.email} size={40} />
+              )}
             </div>
 
             <div className="d-flex flex-column">

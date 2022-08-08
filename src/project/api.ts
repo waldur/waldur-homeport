@@ -1,10 +1,11 @@
+import { ENV } from '@waldur/configs/default';
 import {
   deleteById,
   get,
   getById,
   getList,
-  patch,
   post,
+  sendForm,
 } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
 import { Customer, Project } from '@waldur/workspace/types';
@@ -18,8 +19,8 @@ export const getCustomer = (customerId: string) =>
 export const getCustomersList = (params) =>
   getList<Customer>('/customers/', params);
 
-export const createProject = (project) =>
-  post(`/projects/`, {
+export const createProject = (project) => {
+  const data = {
     name: project.name,
     description: project.description,
     end_date: project.end_date ? formatDate(project.end_date) : undefined,
@@ -27,17 +28,39 @@ export const createProject = (project) =>
     type: project.type?.url,
     oecd_fos_2007_code: project.oecd_fos_2007_code?.value,
     is_industry: project.is_industry,
-  });
+    image: project.image,
+  };
+  if (!project.image) {
+    // If user tries to remove image
+    data.image = '';
+  } else if (!(project.image instanceof File)) {
+    // if user tries to keep the current image we should not send the image key
+    data.image = undefined;
+  }
+  return sendForm('POST', `${ENV.apiEndpoint}api/projects/`, data);
+};
 
-export const updateProject = (project) =>
-  patch(`/projects/${project.uuid}/`, {
+export const updateProject = (project) => {
+  const data = {
     name: project.name,
     description: project.description,
     end_date: project.end_date ? formatDate(project.end_date) : undefined,
     backend_id: project.backend_id,
     oecd_fos_2007_code: project.oecd_fos_2007_code?.value,
     is_industry: project.is_industry,
-  });
+    image: project.image,
+  };
+  if (!project.image) {
+    data.image = '';
+  } else if (!(project.image instanceof File)) {
+    data.image = undefined;
+  }
+  return sendForm(
+    'PATCH',
+    `${ENV.apiEndpoint}api/projects/${project.uuid}/`,
+    data,
+  );
+};
 
 export const moveProject = (data) =>
   post(`/projects/${data.project.uuid}/move_project/`, {
