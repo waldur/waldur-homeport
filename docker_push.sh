@@ -28,8 +28,6 @@ then
 fi
 
 apk add git
-git config --global user.name "$GITLAB_USER_NAME"
-git config --global user.email "$GITLAB_USER_EMAIL"
 git clone -b next --single-branch "https://gitlab-ci-token:$GITLAB_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git" next
 
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
