@@ -1,29 +1,20 @@
-import { useRouter } from '@uirouter/react';
-import { useSelector } from 'react-redux';
+import { useContext } from 'react';
 
-import { translate } from '@waldur/i18n';
-import {
-  getUserCustomerPermissions,
-  getUserProjectPermissions,
-} from '@waldur/workspace/selectors';
+import { PermissionContext } from './PermissionLayout';
+
 import './WarningBar.scss';
 
 export default function WarningBar() {
-  const customerPermissions = useSelector(getUserCustomerPermissions);
-  const projectPermissions = useSelector(getUserProjectPermissions);
-  const router = useRouter();
-  const show =
-    customerPermissions.length === 0 &&
-    projectPermissions.length === 0 &&
-    router.stateService.is('profile.details');
+  const { permission, banner } = useContext(PermissionContext);
 
-  return show ? (
-    <div className="warning_bar">
+  return permission !== 'allowed' ? (
+    <div
+      className={
+        permission === 'restricted' ? 'bar bar-danger' : 'bar bar-warning'
+      }
+    >
       <p>
-        <strong>{translate('No association')}</strong>:{' '}
-        {translate(
-          'Your account is not part of any organization. Your view will be restricted.',
-        )}
+        <strong>{banner.title}</strong>: {banner.message}
       </p>
     </div>
   ) : null;

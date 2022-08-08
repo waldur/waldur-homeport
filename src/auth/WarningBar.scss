@@ -1,11 +1,24 @@
-.warning_bar {
-  background-color: #fce0b6;
+.bar {
   height: 37px;
   text-align: center;
   display: grid;
   place-items: center;
+
   p {
     line-height: 37px;
-    color: #975e06;
+  }
+
+  &.bar-warning {
+    background-color: #fce0b6;
+    p {
+      color: #975e06;
+    }
+  }
+
+  &.bar-danger {
+    background-color: #ffebf0;
+    p {
+      color: #f1416c;
+    }
   }
 }
