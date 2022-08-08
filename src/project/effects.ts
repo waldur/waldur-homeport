@@ -8,7 +8,8 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { showSuccess, showError } from '@waldur/store/notify';
 import { deleteEntity, fetchListStart } from '@waldur/table/actions';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { setCurrentProject } from '@waldur/workspace/actions';
+import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import {
   createProject,
@@ -69,6 +70,10 @@ export function* handleUpdateProject(action) {
     const project = response.data;
     yield call(api.dangerouslyUpdateProject, action.payload.cache, project);
     yield put(updateProject.success());
+    const currentProject = yield select(getProject);
+    if (project.uuid === currentProject.uuid) {
+      yield put(setCurrentProject(project));
+    }
     yield put(showSuccess(successMessage));
     yield put(fetchListStart(PROJECTS_LIST));
   } catch (error) {

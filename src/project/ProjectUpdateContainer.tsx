@@ -35,6 +35,7 @@ const mapStateToProps = (state, ownProps) => ({
       (option) => option.value === ownProps.project.oecd_fos_2007_code,
     ),
     is_industry: ownProps.project.is_industry,
+    image: ownProps.project.image,
   },
   project_type: ownProps.project.type_name,
   canManage: isOwnerOrStaff(state),

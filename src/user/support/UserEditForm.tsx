@@ -8,12 +8,12 @@ import {
   StringField,
   SubmitButton,
 } from '@waldur/form';
+import { ImageField } from '@waldur/form/ImageField';
 import { translate } from '@waldur/i18n';
 import { StaticField } from '@waldur/user/support/StaticField';
 import { formatUserStatus } from '@waldur/user/support/utils';
 import { UserDetails } from '@waldur/workspace/types';
 
-import { AvatarField } from './AvatarField';
 import { EmailField } from './EmailField';
 import { TermsOfService } from './TermsOfService';
 
@@ -175,7 +175,11 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
           />
         )}
       <hr />
-      <AvatarField user={props.user} />
+      <ImageField
+        label={translate('Profile picture')}
+        name="image"
+        initialValue={props.user.image}
+      />
       <TermsOfService
         initial={props.initial}
         agreementDate={props.user.agreement_date}

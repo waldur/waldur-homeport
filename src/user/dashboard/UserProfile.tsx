@@ -11,7 +11,16 @@ export const UserProfile = ({ user }: { user: UserDetails }) => {
       <Card.Body>
         <Row>
           <Col xs="auto">
-            <Gravatar email={user.email} size={100} className="rounded" />
+            {user.image ? (
+              <div className="symbol symbol-100px">
+                <div
+                  className="symbol-label"
+                  style={{ backgroundImage: `url(${user.image})` }}
+                ></div>
+              </div>
+            ) : (
+              <Gravatar email={user.email} size={100} className="rounded" />
+            )}
           </Col>
           <Col>
             <Row className="mb-6">

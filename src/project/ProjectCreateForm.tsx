@@ -14,6 +14,7 @@ import {
 } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
+import { ImageField } from '@waldur/form/ImageField';
 import { validateMaxLength } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { isVisible } from '@waldur/store/config';
@@ -121,6 +122,7 @@ export const ProjectCreateForm = reduxForm<
           )}
           minDate={DateTime.now().plus({ days: 1 }).toISO()}
         />
+        <ImageField label={translate('Project image')} name="image" />
       </FormContainer>
       <Form.Group>
         <div className="offset-sm-3 col-sm-5">

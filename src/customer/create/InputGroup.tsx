@@ -3,8 +3,14 @@ import { Field } from 'redux-form';
 
 import { FieldError } from '@waldur/form';
 
-export const InputGroup = ({ label, helpText, validate, ...props }: any) => (
-  <Form.Group>
+export const InputGroup = ({
+  label,
+  helpText,
+  validate,
+  className,
+  ...props
+}: any) => (
+  <Form.Group className={className}>
     <Form.Label>
       {label} {props.required && <span className="text-danger"> *</span>}
     </Form.Label>
