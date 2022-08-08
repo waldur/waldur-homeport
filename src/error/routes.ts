@@ -1,4 +1,5 @@
 import { UIView } from '@uirouter/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
@@ -51,6 +52,6 @@ export const states: StateDeclaration[] = [
     component: UIView,
     onEnter: () => {
       window.location.pathname = '/next/';
-    }
-  }
+    },
+  },
 ];
