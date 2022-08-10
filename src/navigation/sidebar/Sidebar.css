@@ -12,3 +12,20 @@
   float: left;
   margin-top: 4px;
 }
+
+.aside-footer .btn-custom.btn-marketplace .btn-label {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.aside-footer .btn-custom.btn-marketplace .btn-label i {
+  color: #b5b5c3;
+  font-size: 1.5rem;
+  padding: 0;
+}
+.aside-footer .btn-custom.btn-marketplace .btn-label i.line {
+  width: 1px;
+  height: 12px;
+  background-color: #b5b5c3;
+}

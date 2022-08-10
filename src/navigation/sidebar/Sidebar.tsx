@@ -10,6 +10,7 @@ import {
 
 import { BrandName } from './BrandName';
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
+import { SidebarFooter } from './SidebarFooter';
 
 export const Sidebar: React.FC = (props) => {
   const sidebarRef = useRef<HTMLElement>(undefined);
@@ -41,7 +42,7 @@ export const Sidebar: React.FC = (props) => {
           data-kt-scroll="true"
           data-kt-scroll-activate="{default: false, lg: true}"
           data-kt-scroll-height="auto"
-          data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer"
+          data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_buttons, #kt_aside_footer"
           data-kt-scroll-wrappers="#kt_aside_menu"
           data-kt-scroll-offset="0"
         >
@@ -54,6 +55,7 @@ export const Sidebar: React.FC = (props) => {
           </div>
         </div>
       </div>
+      <SidebarFooter />
     </nav>
   );
 };
