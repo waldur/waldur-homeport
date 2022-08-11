@@ -1971,6 +1971,10 @@ msgid "Current contact phone: {value}."
 msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current country: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
 msgid "Current domain name: {value}."
 msgstr ""
 
@@ -2211,12 +2215,20 @@ msgstr ""
 msgid "Delete catalog"
 msgstr ""
 
+#: src/project/ProjectDelete.tsx
+msgid "Delete project"
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/utils.ts
 msgid "Delete volumes"
 msgstr ""
 
 #: src/azure/sql/DestroyServerAction.tsx
 msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
+msgstr ""
+
+#: src/project/ProjectDelete.tsx
+msgid "Deletion"
 msgstr ""
 
 #: src/rancher/cluster/create/RancherClusterForm.tsx
@@ -6456,6 +6468,10 @@ msgstr ""
 msgid "Project name"
 msgstr ""
 
+#: src/project/ProjectUpdateForm.tsx
+msgid "Project owner"
+msgstr ""
+
 #: src/invoices/details/BillingRecordDetails.tsx
 #: src/invoices/details/InvoiceDetails.tsx
 msgid "Project price"
@@ -6483,6 +6499,10 @@ msgstr ""
 
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
 msgid "Project selector"
+msgstr ""
+
+#: src/project/ProjectManage.tsx
+msgid "Project settings"
 msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
@@ -6564,6 +6584,10 @@ msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
 msgid "Proposed contact phone: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed country: {value}."
 msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
@@ -7176,6 +7200,10 @@ msgstr ""
 
 #: src/invitations/GroupInvitationConfirmDialog.tsx
 msgid "Request permission"
+msgstr ""
+
+#: src/project/ProjectDelete.tsx
+msgid "Request project deletion"
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
@@ -8368,6 +8396,8 @@ msgid "Set value"
 msgstr ""
 
 #: src/customer/utils.ts
+#: src/navigation/navitems.ts
+#: src/project/ProjectManage.tsx
 #: src/user/UserManage.tsx
 #: src/user/constants.ts
 msgid "Settings"

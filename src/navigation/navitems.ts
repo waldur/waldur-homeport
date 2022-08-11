@@ -10,6 +10,10 @@ export const getProjectItems = () => [
     to: 'project.details',
   },
   {
+    title: translate('Settings'),
+    to: 'project.manage',
+  },
+  {
     title: translate('Team'),
     to: 'project.team',
   },
