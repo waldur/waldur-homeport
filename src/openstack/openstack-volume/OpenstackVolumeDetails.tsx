@@ -20,9 +20,11 @@ export interface OpenstackVolumeDetailsProps extends TranslateProps {
 const PureOpenstackVolumeDetails = (props: OpenstackVolumeDetailsProps) => {
   const { translate, orderItem } = props;
   const { value: volumeType } = useAsync(() =>
-    get<VolumeType>(orderItem.attributes.type).then(
-      (response) => response.data,
-    ),
+    orderItem.attributes.type
+      ? get<VolumeType>(orderItem.attributes.type).then(
+          (response) => response.data,
+        )
+      : Promise.resolve(null),
   );
   return (
     <>
