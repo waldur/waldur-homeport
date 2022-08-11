@@ -20,9 +20,11 @@ export interface OpenstackVolumeDetailsProps {
 export const OpenstackVolumeDetails = (props: OpenstackVolumeDetailsProps) => {
   const { orderItem } = props;
   const { value: volumeType } = useAsync(() =>
-    get<VolumeType>(orderItem.attributes.type).then(
-      (response) => response.data,
-    ),
+    orderItem.attributes.type
+      ? get<VolumeType>(orderItem.attributes.type).then(
+          (response) => response.data,
+        )
+      : Promise.resolve(null),
   );
   return (
     <>

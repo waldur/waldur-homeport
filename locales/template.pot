@@ -1971,6 +1971,10 @@ msgid "Current contact phone: {value}."
 msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
+msgid "Current country: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
 msgid "Current domain name: {value}."
 msgstr ""
 
@@ -6564,6 +6568,10 @@ msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
 msgid "Proposed contact phone: {value}."
+msgstr ""
+
+#: src/customer/details/CustomerErrorDialog.tsx
+msgid "Proposed country: {value}."
 msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
