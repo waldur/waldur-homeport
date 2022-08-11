@@ -8,26 +8,103 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/list/SupportCustomerList.tsx
+#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/marketplace/service-providers/ProviderDetailsBody.tsx
+#: src/resource/support/SharedProviderCustomers.tsx
 msgid "Abbreviation"
 msgstr "Lyhenne"
 
+#: src/booking/CancelAction.tsx
+#: src/form/ListDialog.tsx
+#: src/invitations/GroupInvitationCancelButton.tsx
+#: src/invitations/GroupinvitationButtons.tsx
+#: src/invitations/actions/InvitationCancelButton.tsx
+#: src/issues/comments/IssueCommentsForm.tsx
+#: src/marketplace-flows/FlowCancelAction.tsx
+#: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
+#: src/modal/CloseDialogButton.tsx
+#: src/project/ProjectCreateForm.tsx
+#: src/user/keys/KeyCreateForm.tsx
+#: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
 msgstr "Peruuttaa"
 
+#: src/customer/dashboard/CustomerDashboard.tsx
+#: src/customer/workspace/utils.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/project/ProjectDashboard.tsx
+#: src/project/utils.ts
+#: src/user/constants.ts
 msgid "Dashboard"
 msgstr "Kojelauta"
 
+#: src/customer/workspace/utils.ts
+#: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/project/ProjectsList.tsx
+#: src/rancher/cluster/tabs.ts
 msgid "Projects"
 msgstr "Projektit"
 
+#: src/customer/dashboard/CustomerDashboard.tsx
+#: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/SupportResourcesContainer.tsx
+#: src/marketplace/sidebar.ts
+#: src/project/ProjectDashboard.tsx
+#: src/project/ProjectResourcesList.tsx
+#: src/project/ProjectWorkspace.tsx
+#: src/rancher/template/CatalogTemplateContainer.tsx
+#: src/rancher/template/breadcrumbs.ts
+#: src/resource/breadcrumbs/ResourceBreadcrumbsRegistry.ts
+#: src/resource/support/ResourcesTreemap.tsx
+#: src/resource/support/TreemapChartFilter.tsx
+#: src/support/SupportDetailsContainer.tsx
+#: src/user/constants.ts
 msgid "Resources"
 msgstr "Resurssit"
 
+#: src/booking/components/modal/BookingModal.tsx
+#: src/customer/divisions/utils.ts
+#: src/customer/team/CustomerUserAddDialog.tsx
+#: src/customer/team/EditTeamMemberDialog.tsx
+#: src/invoices/growth/utils.ts
+#: src/issues/workspace/FeaturesList.tsx
+#: src/map/SetLocationDialog.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
+#: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
+#: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
+#: src/marketplace/offerings/expandable/utils.ts
+#: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
+#: src/marketplace/resources/actions/MoveResourceDialog.tsx
+#: src/marketplace/resources/usage/utils.ts
+#: src/project/MoveProjectDialog.tsx
+#: src/project/team/AddProjectMemberDialog.tsx
+#: src/providers/ProviderUpdateForm.tsx
 msgid "Save"
 msgstr "Tallenna"
 
+#: src/rancher/cluster/tabs.ts
 msgid "Services"
 msgstr "Palvelut"
 
+#: src/customer/team/CustomerTeam.tsx
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/project/team/ProjectTeam.tsx
+#: src/rancher/cluster/tabs.ts
+#: src/slurm/tabs.ts
+#: src/user/support/UserListView.tsx
 msgid "Users"
 msgstr "Käyttäjät"

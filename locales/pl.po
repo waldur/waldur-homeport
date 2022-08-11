@@ -8,125 +8,201 @@ msgstr ""
 "Language: pl\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : ((n%10>=2 && n%10<=4) && ((n%100<12 || n%100>14))) ? 1 : 2;\n"
 
+#: src/freeipa/FreeIPAAccountCreate.tsx
 msgid "A profile has been created."
 msgstr "Konto zostało utworzone."
 
+#: src/user/support/actions.ts
 msgid "Account removal"
 msgstr "Usunięcie konta"
 
+#: src/invoices/utils.ts
+#: src/marketplace/offerings/create/AccountingSummary.tsx
+#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/details/PageAccounting.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Accounting"
 msgstr "Księgowość"
 
+#: src/invitations/GroupInvitationsList.tsx
+#: src/marketplace/offerings/OfferingStateCell.tsx
+#: src/marketplace/offerings/OfferingStateFilter.tsx
+#: src/user/support/UserFilter.tsx
 msgid "Active"
 msgstr "Aktywny"
 
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "Activity stream"
 msgstr "Strumień aktywności"
 
+#: src/user/keys/KeyCreateButton.tsx
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Add key"
 msgstr "Dodaj klucz"
 
+#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
 msgid "Add new organization"
 msgstr "Dodaj nową organizację"
 
+#: src/navigation/workspace/ProjectsPanel.tsx
 msgid "Add new project"
 msgstr "Dodaj nowy projekt"
 
+#: src/user/hooks/HookCreateButton.tsx
 msgid "Add notification"
 msgstr "Dodaj powiadomienie"
 
+#: src/user/dashboard/CustomerCreateButton.tsx
 msgid "Add organization"
 msgstr "Dodaj organizację"
 
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/customer/payments/PaymentsList.tsx
 msgid "Add payment"
 msgstr "Dodaj płatność"
 
+#: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 msgid "Add security group"
 msgstr "Dodaj grupę zabezpieczeń"
 
+#: src/project/ProjectActions.tsx
 msgid "Add team member"
 msgstr "Dodaj członka zespołu"
 
+#: src/marketplace/compare/OfferingCompareButton.tsx
 msgid "Add to comparison"
 msgstr "Dodaj do porównania"
 
+#: src/customer/team/OfferingPermissionCreateButton.tsx
+#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/AddUserButton.tsx
 msgid "Add user"
 msgstr "Dodaj użytkownika"
 
+#: src/customer/create/WizardFormSecondPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
 msgstr "Adres"
 
+#: src/azure/sql/AzureSQLServerDetails.tsx
+#: src/azure/vm/AzureVirtualMachineDetails.tsx
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
 msgid "Admin password"
 msgstr "Hasło administratora"
 
+#: src/azure/sql/AzureSQLServerDetails.tsx
+#: src/azure/vm/AzureVirtualMachineDetails.tsx
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
 msgid "Admin username"
 msgstr "Nazwa użytkownika administratora"
 
+#: src/slurm/AllocationForm.tsx
 msgid "Allocation name"
 msgstr "Nazwa alokacji"
 
+#: src/marketplace/offerings/PriceList.tsx
+#: src/marketplace/offerings/create/PlanSummary.tsx
+#: src/marketplace/offerings/plan/PlanComponents.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
+#: src/paypal/PaymentsList.tsx
 msgid "Amount"
 msgstr "Kwota"
 
+#: src/marketplace-checklist/AnswersTable.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Answer"
 msgstr "Odpowiedź"
 
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Answers"
 msgstr "Odpowiedzi"
 
+#: src/rancher/template/TemplateDetail.tsx
 msgid "Application has been created."
 msgstr "Aplikacja została utworzona."
 
+#: src/rancher/cluster/tabs.ts
 msgid "Applications"
 msgstr "Aplikacje"
 
+#: src/marketplace/category/filters/AttributeFilterListDialog.tsx
 msgid "Apply"
 msgstr "Zastosuj"
 
+#: src/resource/actions/DestroyActionItem.tsx
 msgid "Are you sure you want to delete a {name} {resourceType}?"
 msgstr "Czy na pewno chcesz usunąć {name} {resourceType}?"
 
+#: src/marketplace/offerings/images/ImagesActions.tsx
 msgid "Are you sure you want to delete the image?"
 msgstr "Czy na pewno chcesz usunąć ten obraz?"
 
+#: src/customer/payments/PaymentActions.tsx
 msgid "Are you sure you want to delete the payment?"
 msgstr "Czy na pewno chcesz usunąć płatność?"
 
+#: src/rancher/cluster/ResourceDeleteButton.tsx
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr "Czy na pewno chcesz usunąć {resourceType}?"
 
+#: src/project/ProjectRemoveDialog.tsx
 msgid "Are you sure you would like to delete project {projectName}?"
 msgstr "Czy na pewno chcesz usunąć projekt {projectName}?"
 
+#: src/user/hooks/HookRemoveDialog.tsx
 msgid "Are you sure you would like to delete the hook?"
 msgstr "Czy na pewno chcesz usunąć hak?"
 
+#: src/user/keys/KeyRemoveDialog.tsx
 msgid "Are you sure you would like to delete the key?"
 msgstr "Czy na pewno chcesz usunąć klucz?"
 
+#: src/openstack/openstack-volume/actions/AttachAction.tsx
 msgid "Attach"
 msgstr "Dołącz"
 
+#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 msgid "Attributes"
 msgstr "Atrybuty"
 
+#: src/marketplace/offerings/create/DescriptionSummary.tsx
 msgid "Attributes are invalid."
 msgstr "Atrybuty są nieprawidłowe."
 
+#: src/auth/events.ts
 msgid "Authentication events"
 msgstr "Aktywność uwierzytelniania"
 
+#: src/marketplace/offerings/actions/CredentialsTab.tsx
 msgid "Authentication token"
 msgstr "Token uwierzytelniania"
 
+#: src/issues/notifications/BroadcastList.tsx
 msgid "Author"
 msgstr "Autor"
 
+#: src/marketplace/offerings/option/OfferingScheduler.tsx
 msgid "Availability"
 msgstr "Dostępność"
 
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/openstack/OpenStackForm.tsx
+#: src/openstack/OpenStackTenantForm.tsx
+#: src/openstack/marketplace.ts
+#: src/openstack/openstack-instance/AvailabilityZoneGroup.tsx
+#: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
+#: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
 msgid "Availability zone"
 msgstr "Strefa dostępności"
 
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/project/utils.ts
+#: src/user/UserSidebar.tsx
 msgid "Back to organization"
 msgstr "Powrót do organizacji"
