@@ -36,6 +36,7 @@ const mapStateToProps = (state, ownProps) => ({
     ),
     is_industry: ownProps.project.is_industry,
     image: ownProps.project.image,
+    customer_name: ownProps.project.customer_name,
   },
   project_type: ownProps.project.type_name,
   canManage: isOwnerOrStaff(state),

@@ -12,6 +12,10 @@ const ProjectDashboardContainer = lazyComponent(
     ),
   'ProjectDashboardContainer',
 );
+const ProjectManage = lazyComponent(
+  () => import(/* webpackChunkName: "ProjectManage" */ './ProjectManage'),
+  'ProjectManage',
+);
 const ProjectEventsView = lazyComponent(
   () =>
     import(/* webpackChunkName: "ProjectEventsList" */ './ProjectEventsList'),
@@ -50,6 +54,12 @@ export const states: StateDeclaration[] = [
     name: 'project.details',
     url: '',
     component: ProjectDashboardContainer,
+  },
+
+  {
+    name: 'project.manage',
+    url: 'manage/',
+    component: ProjectManage,
   },
 
   {
