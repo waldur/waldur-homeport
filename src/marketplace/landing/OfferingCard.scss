@@ -1,0 +1,40 @@
+.offering-card {
+  margin-bottom: 30px;
+  overflow: hidden;
+
+  &.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .offering-toolbar {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .offering-card-body {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .offering-description {
+    overflow: hidden;
+  }
+
+  .buttons-overlay {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem 2rem;
+    transform: translateY(100%);
+    transition: all 0.3s;
+  }
+  &:hover .buttons-overlay {
+    opacity: 1;
+    transform: none;
+  }
+}

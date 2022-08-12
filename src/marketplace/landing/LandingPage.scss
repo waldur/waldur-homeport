@@ -1,0 +1,51 @@
+.marketplace-landing-page {
+  position: relative;
+
+  .marketplace-hero__background {
+    position: absolute;
+    height: 500px;
+    width: 100%;
+    background-color: #2f4050;
+    background-image: url(./marketplace-background.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    margin-bottom: 20px;
+  }
+
+  .marketplace-hero__table {
+    display: table;
+    height: 350px;
+    width: 100%;
+
+    .marketplace-hero__cell {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .marketplace-hero__main {
+      max-width: 800px;
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+
+      > * {
+        position: relative;
+      }
+
+      h1,
+      h2 {
+        color: #fff;
+        font-weight: 500;
+      }
+      h2 {
+        font-size: 32px;
+      }
+      h1 {
+        font-size: 38px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

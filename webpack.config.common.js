@@ -248,8 +248,8 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'ASSET_PATH': JSON.stringify(utils.ASSET_PATH),
-      }
+        ASSET_PATH: JSON.stringify(utils.ASSET_PATH),
+      },
     }),
     new HtmlWebpackPlugin({
       template: './src/index.ejs',

@@ -28,7 +28,7 @@ export const CategoriesList = (props: CategoriesListType) => {
   return (
     <Row>
       {props.items.map((category, index) => (
-        <Col key={index} md={2} sm={6}>
+        <Col key={index} xxl={2} xl={3} lg={4} sm={6}>
           <CategoryCard category={category} />
         </Col>
       ))}

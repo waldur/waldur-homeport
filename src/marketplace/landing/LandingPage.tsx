@@ -1,14 +1,16 @@
 import { ENV } from '@waldur/configs/default';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { OfferingGrid } from '@waldur/marketplace/common/OfferingGrid';
 import {
   CategoriesListType,
   OfferingsListType,
 } from '@waldur/marketplace/types';
 
-import { AutocompleteField } from './AutocompleteField';
 import { CategoriesList } from './CategoriesList';
+import { FeaturedOfferings } from './FeaturedOfferings';
 import { HeroSection } from './HeroSection';
+
+import './LandingPage.scss';
 
 interface LandingPageProps {
   categories: CategoriesListType;
@@ -22,24 +24,23 @@ interface LandingPageProps {
 }
 
 export const LandingPage = (props: LandingPageProps) => (
-  <div>
+  <div className="marketplace-landing-page">
     <HeroSection
       title={
         ENV.marketplaceLandingPageTitle ||
-        translate('Explore {deployment} Marketplace', {
+        translate('{deployment} Marketplace', {
           deployment: ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE,
         })
       }
     >
-      <AutocompleteField
-        placeholder={translate('Search for offerings...')}
-        loadOfferings={props.loadOfferings}
-        onChange={(offering: any) => props.gotoOffering(offering.uuid)}
-        noOptionsMessage={() => translate('No offerings')}
-      />
+      <Link state="" className="btn text-black btn-bg-white btn-hover-rise">
+        {translate('Browse all categories')}
+      </Link>
     </HeroSection>
-    <CategoriesList {...props.categories} />
-    <h2 className="mb-3">{translate('Recent additions')}</h2>
-    <OfferingGrid width={2} {...props.offerings} />
+    <div className="container-xxl">
+      <CategoriesList {...props.categories} />
+      <h2 className="mb-10 text-center">{translate('Featured offerings')}</h2>
+      <FeaturedOfferings {...props.offerings} />
+    </div>
   </div>
 );
