@@ -7,6 +7,7 @@ import {
   CategoriesListType,
   OfferingsListType,
 } from '@waldur/marketplace/types';
+import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -28,6 +29,7 @@ interface LandingPageContainerProps {
 export const LandingPageContainer: React.FC<LandingPageContainerProps> = (
   props,
 ) => {
+  useFullPage();
   useTitle(translate('Marketplace'));
   const { getCategories, getOfferings } = props;
 

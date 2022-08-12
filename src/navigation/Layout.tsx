@@ -1,4 +1,5 @@
 import { UISref, UISrefActive } from '@uirouter/react';
+import classNames from 'classnames';
 import React, {
   FunctionComponent,
   useMemo,
@@ -92,9 +93,26 @@ export const Layout: React.FC = ({ children }) => {
   const [actions, setActions] = useState(null);
   const [tabs, setTabs] = useState(null);
   const [sidebarKey, setSidebarKey] = useState('');
+  const [fullPage, setFullPage] = useState(false);
   const context = useMemo<Partial<LayoutContextInterface>>(
-    () => ({ setActions, sidebarKey, setSidebarKey, tabs, setTabs }),
-    [setActions, sidebarKey, setSidebarKey, tabs, setTabs],
+    () => ({
+      setActions,
+      sidebarKey,
+      setSidebarKey,
+      tabs,
+      setTabs,
+      fullPage,
+      setFullPage,
+    }),
+    [
+      setActions,
+      sidebarKey,
+      setSidebarKey,
+      tabs,
+      setTabs,
+      fullPage,
+      setFullPage,
+    ],
   );
 
   const tabsScrollRef = useRef<HTMLDivElement>();
@@ -125,7 +143,12 @@ export const Layout: React.FC = ({ children }) => {
               <CookiesConsent />
               <AppHeader />
               <WarningBar />
-              <div className="content d-flex flex-column flex-column-fluid">
+              <div
+                className={classNames(
+                  'content d-flex flex-column flex-column-fluid',
+                  { 'full-page': fullPage },
+                )}
+              >
                 <div className="toolbar">
                   <div className="container-fluid d-flex flex-stack">
                     {showScrollArrows && <TabsScrollArrows />}
@@ -152,11 +175,11 @@ export const Layout: React.FC = ({ children }) => {
                     </div>
                   </div>
                 </div>
-                <div className="post d-flex flex-column-fluid">
-                  <div className="container-xxl">
-                    {children}
-                    <MasterLayout />
-                  </div>
+              </div>
+              <div className="post d-flex flex-column-fluid">
+                <div className={fullPage ? 'w-100' : 'container-xxl'}>
+                  {children}
+                  <MasterLayout />
                 </div>
               </div>
               <AppFooter />
