@@ -21,10 +21,9 @@ export const OfferingCardButtonsOverlay = (
           {translate('Deploy')}
         </OfferingLink>
         <Link
-          state="marketplace-offering-details"
+          state="marketplace-public-offering.details"
           params={{
-            uuid: props.offering.customer_uuid,
-            offering_uuid: props.offering.uuid,
+            uuid: props.offering.uuid,
           }}
           className="btn btn-primary btn-sm border border-primary"
         >
