@@ -10,29 +10,10 @@ import {
   getOffering,
   getOrderItemList,
 } from '@waldur/marketplace/common/api';
-import { Resource } from '@waldur/marketplace/resources/types';
-import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
-import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { SupportDetails } from './SupportDetails';
-
-const getBreadcrumbs = (resource: Resource): BreadcrumbItem[] => {
-  const items: BreadcrumbItem[] = [{ label: translate('Resources') }];
-  if (resource.category_title) {
-    const params = {
-      category_uuid: resource.category_uuid,
-      uuid: resource.project_uuid,
-    };
-    items.push({
-      label: resource.category_title,
-      state: 'marketplace-project-resources',
-      params,
-    });
-  }
-  return items;
-};
 
 const loadData = async (resource_uuid: string) => {
   const resource = await getResource(resource_uuid);
@@ -63,11 +44,6 @@ export const SupportDetailsContainer: FunctionComponent = () => {
   );
 
   useTitle(value ? value.resource.name : translate('Request details'));
-
-  useBreadcrumbsFn(
-    () => (value ? getBreadcrumbs(value.resource) : []),
-    [value],
-  );
 
   const router = useRouter();
 

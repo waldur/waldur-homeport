@@ -5,12 +5,10 @@ import { InjectedFormProps } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { STEPS, OfferingStep } from '../types';
-import { getBreadcrumbs } from '../utils';
 
 import { AccountingStepContainer } from './AccountingStepContainer';
 import { DescriptionStepContainer } from './DescriptionStepContainer';
@@ -56,8 +54,6 @@ export const OfferingCreateDialog: React.FC<OfferingCreateDialogProps> = (
 ) => {
   useTitle(translate('Add offering'));
   useSidebarKey('marketplace-services');
-
-  useBreadcrumbsFn(getBreadcrumbs, []);
 
   const router = useRouter();
 

@@ -10,55 +10,10 @@ import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
-import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
-import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
-import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
-import store from '@waldur/store/store';
-import { getWorkspace } from '@waldur/workspace/selectors';
-import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { OrderItemDetails } from './OrderItemDetails';
-
-function getBreadcrumbs(orderItem: OrderItemDetailsType): BreadcrumbItem[] {
-  const workspace = getWorkspace(store.getState());
-  if (workspace === ORGANIZATION_WORKSPACE) {
-    return [
-      {
-        label: translate('My services'),
-      },
-      {
-        label: translate('My orders'),
-        state: 'marketplace-my-order-items',
-        params: {
-          uuid: orderItem.customer_uuid,
-        },
-      },
-      {
-        label: translate('Order details'),
-        state: 'marketplace-order-details-customer',
-        params: {
-          order_uuid: orderItem.order_uuid,
-        },
-      },
-    ];
-  } else {
-    return [
-      {
-        label: translate('My orders'),
-        state: 'marketplace-order-list',
-      },
-      {
-        label: translate('Order details'),
-        state: 'marketplace-order-details',
-        params: {
-          order_uuid: orderItem.order_uuid,
-        },
-      },
-    ];
-  }
-}
 
 async function loadOrderItem(order_item_uuid) {
   const orderItem = await api.getOrderItem(order_item_uuid);
@@ -113,11 +68,6 @@ export const OrderItemDetailsContainer: React.FC = () => {
       setAsyncValue(value);
     }
   }, [value, asyncValue]);
-
-  useBreadcrumbsFn(
-    () => (asyncValue ? getBreadcrumbs(asyncValue.orderItem) : []),
-    [asyncValue],
-  );
 
   useTitle(
     asyncValue

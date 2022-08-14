@@ -2,7 +2,6 @@ import { FunctionComponent, useState } from 'react';
 
 import { ServiceProvider as ServiceProviderType } from '@waldur/marketplace/types';
 
-import { ServiceProviderBreadcrumbs } from './ServiceProviderBreadcrumbs';
 import { ServiceProviderHeader } from './ServiceProviderHeader';
 import { ServiceProviderOfferingsCategoriesFilter } from './ServiceProviderOfferingsCategoriesFilter';
 import { ServiceProviderOfferingsFilterBar } from './ServiceProviderOfferingsFilterBar';
@@ -26,7 +25,6 @@ export const ServiceProvider: FunctionComponent<ServiceProviderProps> = ({
         serviceProvider={serviceProvider}
         refreshServiceProvider={refreshServiceProvider}
       />
-      <ServiceProviderBreadcrumbs serviceProvider={serviceProvider} />
       <div className="serviceProvider__content">
         <ServiceProviderOfferingsCategoriesFilter
           serviceProviderUuid={serviceProvider.customer_uuid}

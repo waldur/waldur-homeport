@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 
 import { Category, Offering } from '@waldur/marketplace/types';
 
-import { PublicOfferingDetailsBreadcrumbs } from './PublicOfferingDetailsBreadcrumbs';
 import { PublicOfferingDetailsHeader } from './PublicOfferingDetailsHeader';
 import { PublicOfferingInfo } from './PublicOfferingInfo';
 import { PublicOfferingLocation } from './PublicOfferingLocation';
@@ -23,7 +22,6 @@ export const PublicOfferingDetails: FunctionComponent<PublicOfferingDetailsProps
         category={category}
         refreshOffering={refreshOffering}
       />
-      <PublicOfferingDetailsBreadcrumbs offering={offering} />
       <PublicOfferingInfo offering={offering} category={category} />
       <PublicOfferingPricing offering={offering} />
       <PublicOfferingLocation offering={offering} />

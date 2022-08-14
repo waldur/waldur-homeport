@@ -11,7 +11,6 @@ import { useTitle } from '@waldur/navigation/title';
 import { getTabLabel, TABS } from '../create/OfferingCreateDialog';
 import { Wizard } from '../create/Wizard';
 import { STEPS, OfferingStep } from '../types';
-import { getBreadcrumbs } from '../utils';
 
 interface OfferingUpdateDialogProps
   extends InjectedFormProps<{ name: string }> {
@@ -52,7 +51,6 @@ export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = (
     props.loadOffering(offering_uuid);
     props.setIsUpdatingOffering(true);
     props.setStep(STEPS[0]);
-    getBreadcrumbs();
   }, [offering_uuid, router]);
 
   const {

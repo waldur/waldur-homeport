@@ -12,4 +12,3 @@ import './openstack-tenant/module';
 import './openstack-volume/module';
 import './provider';
 import './marketplace';
-import './router-breadcrumbs';

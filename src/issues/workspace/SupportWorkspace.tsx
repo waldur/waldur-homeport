@@ -1,33 +1,11 @@
-import { useEffect, useMemo, FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
+import { useMemo, FunctionComponent } from 'react';
 
 import { isFeatureVisible } from '@waldur/features/connect';
-import { translate } from '@waldur/i18n';
-import {
-  getReportingItems,
-  IssueNavigationService,
-} from '@waldur/issues/workspace/IssueNavigationService';
-import {
-  setBreadcrumbs,
-  useBreadcrumbsFn,
-} from '@waldur/navigation/breadcrumbs/store';
-import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
+import { getReportingItems } from '@waldur/issues/workspace/IssueNavigationService';
 import { useTabs } from '@waldur/navigation/context';
 import { Layout } from '@waldur/navigation/Layout';
-import { setCurrentWorkspace } from '@waldur/workspace/actions';
-import { SUPPORT_WORKSPACE } from '@waldur/workspace/types';
 
-function getBreadcrumbs(): BreadcrumbItem[] {
-  return [
-    {
-      label: translate('Support dashboard'),
-      action: () => IssueNavigationService.gotoDashboard(),
-    },
-  ];
-}
-
-export function useReportingBreadcrumbs() {
-  const dispatch = useDispatch();
+export function useReportingTabs() {
   const tabs = useMemo(
     () =>
       getReportingItems()
@@ -39,30 +17,8 @@ export function useReportingBreadcrumbs() {
     [],
   );
   useTabs(tabs);
-
-  useEffect(() => {
-    dispatch(
-      setBreadcrumbs([
-        ...getBreadcrumbs(),
-        {
-          label: translate('Reporting'),
-        },
-      ]),
-    );
-    return () => {
-      dispatch(setBreadcrumbs(getBreadcrumbs()));
-    };
-  });
 }
 
 export const SupportWorkspace: FunctionComponent = () => {
-  const dispatch = useDispatch();
-
-  useBreadcrumbsFn(getBreadcrumbs, []);
-
-  useEffect(() => {
-    dispatch(setCurrentWorkspace(SUPPORT_WORKSPACE));
-  }, [dispatch]);
-
   return <Layout />;
 };

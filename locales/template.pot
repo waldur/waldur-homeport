@@ -153,10 +153,6 @@ msgstr ""
 msgid "Accounting record"
 msgstr ""
 
-#: src/invoices/details/BillingDetails.tsx
-msgid "Accounting records"
-msgstr ""
-
 #: src/customer/list/SupportCustomerFilter.tsx
 msgid "Accounting running"
 msgstr ""
@@ -653,11 +649,6 @@ msgstr ""
 msgid "Any"
 msgstr ""
 
-#: src/rancher/template/CatalogTemplateContainer.tsx
-#: src/rancher/template/breadcrumbs.ts
-msgid "Application catalogues"
-msgstr ""
-
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Application configuration"
 msgstr ""
@@ -672,7 +663,6 @@ msgstr ""
 
 #: src/rancher/cluster/tabs.ts
 #: src/rancher/template/CatalogTemplateContainer.tsx
-#: src/rancher/template/breadcrumbs.ts
 msgid "Application templates"
 msgstr ""
 
@@ -2421,7 +2411,6 @@ msgstr ""
 msgid "Disk has been created."
 msgstr ""
 
-#: src/vmware/breadcrumbs.ts
 #: src/vmware/tabs.ts
 msgid "Disks"
 msgstr ""
@@ -3157,7 +3146,6 @@ msgstr ""
 msgid "Floating IP count"
 msgstr ""
 
-#: src/openstack/openstack-floating-ips/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Floating IPs"
 msgstr ""
@@ -3884,10 +3872,6 @@ msgstr ""
 msgid "Invoiced to"
 msgstr ""
 
-#: src/invoices/details/BillingDetails.tsx
-msgid "Invoices list"
-msgstr ""
-
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/rancher/cluster/users/UserDetailsTable.tsx
@@ -4287,7 +4271,6 @@ msgstr ""
 msgid "Mark invoice as paid"
 msgstr ""
 
-#: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Marketplace"
@@ -4542,13 +4525,10 @@ msgstr ""
 
 #: src/customer/utils.ts
 #: src/marketplace/offerings/MyOfferingsListContainer.tsx
-#: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/offerings/images/ImagesContainer.tsx
 msgid "My offerings"
 msgstr ""
 
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsContainer.tsx
 #: src/navigation/navitems.ts
 msgid "My orders"
@@ -4556,11 +4536,6 @@ msgstr ""
 
 #: src/marketplace/resources/list/CustomerResourcesContainer.tsx
 msgid "My resources"
-msgstr ""
-
-#: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
-msgid "My services"
 msgstr ""
 
 #: src/marketplace-checklist/AnswersTable.tsx
@@ -4741,7 +4716,6 @@ msgstr ""
 msgid "Network MTU has been updated."
 msgstr ""
 
-#: src/vmware/breadcrumbs.ts
 #: src/vmware/tabs.ts
 msgid "Network adapters"
 msgstr ""
@@ -4753,8 +4727,6 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
-#: src/openstack/openstack-network/breadcrumbs.ts
-#: src/openstack/openstack-subnet/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
@@ -4922,7 +4894,6 @@ msgstr ""
 
 #: src/rancher/cluster/create/TenantGroup.tsx
 #: src/rancher/cluster/tabs.ts
-#: src/rancher/node/breadcrumbs.ts
 msgid "Nodes"
 msgstr ""
 
@@ -5326,7 +5297,6 @@ msgid "Order Summary"
 msgstr ""
 
 #: src/marketplace/orders/OrderDetails.tsx
-#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 msgid "Order details"
 msgstr ""
 
@@ -5387,7 +5357,6 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/create/CustomerCreatePrompt.tsx
-#: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/events/EventDetailsTable.tsx
@@ -5553,7 +5522,6 @@ msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
 #: src/customer/list/CustomerList.tsx
-#: src/customer/list/OrganizationUpdateContainer.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/list/SupportCustomersContainer.tsx
 #: src/issues/notifications/NotificationCreateDialog.tsx
@@ -6359,7 +6327,6 @@ msgstr ""
 #: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/project/ProjectDashboard.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
@@ -6630,7 +6597,6 @@ msgstr ""
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace/offerings/OfferingsListContainer.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/providers/support/MapInfoPanel.tsx
@@ -6679,9 +6645,6 @@ msgid "Public list"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingsListContainer.tsx
-#: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/offerings/images/ImagesContainer.tsx
-#: src/marketplace/offerings/utils.ts
 #: src/navigation/navitems.ts
 msgid "Public offerings"
 msgstr ""
@@ -6691,7 +6654,6 @@ msgstr ""
 msgid "Public orders"
 msgstr ""
 
-#: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/resources/list/PublicResourcesContainer.tsx
 #: src/navigation/navitems.ts
 msgid "Public resources"
@@ -7126,7 +7088,6 @@ msgstr ""
 msgid "Reporter"
 msgstr ""
 
-#: src/issues/workspace/SupportWorkspace.tsx
 #: src/navigation/sidebar/ReportingMenu.tsx
 msgid "Reporting"
 msgstr ""
@@ -7493,7 +7454,6 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -7504,13 +7464,8 @@ msgstr ""
 #: src/navigation/workspace/ProjectsPanel.tsx
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
-#: src/project/ProjectWorkspace.tsx
-#: src/rancher/template/CatalogTemplateContainer.tsx
-#: src/rancher/template/breadcrumbs.ts
-#: src/resource/breadcrumbs/ResourceBreadcrumbsRegistry.ts
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
-#: src/support/SupportDetailsContainer.tsx
 #: src/user/constants.ts
 msgid "Resources"
 msgstr ""
@@ -7673,7 +7628,6 @@ msgid "Roles"
 msgstr ""
 
 #: src/openstack/openstack-tenant/tabs.ts
-#: src/openstack/router-breadcrumbs.ts
 msgid "Routers"
 msgstr ""
 
@@ -7889,7 +7843,6 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsForm.tsx
-#: src/openstack/openstack-security-groups/breadcrumbs.ts
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -8292,8 +8245,6 @@ msgstr ""
 msgid "Service provider:"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsBreadcrumbs.tsx
-#: src/marketplace/offerings/service-providers/ServiceProviderBreadcrumbs.tsx
 #: src/marketplace/offerings/service-providers/ServiceProvidersGrid.tsx
 msgid "Service providers"
 msgstr ""
@@ -8591,7 +8542,6 @@ msgstr ""
 msgid "Snapshot schedule for volume has been created."
 msgstr ""
 
-#: src/openstack/openstack-snapshot-schedule/breadcrumbs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshot schedules"
 msgstr ""
@@ -8850,7 +8800,6 @@ msgstr ""
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-network/tabs.ts
-#: src/openstack/openstack-subnet/breadcrumbs.ts
 msgid "Subnets"
 msgstr ""
 
@@ -8892,9 +8841,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: src/customer/list/OrganizationUpdateContainer.tsx
 #: src/issues/workspace/IssuesDashboard.tsx
-#: src/issues/workspace/SupportWorkspace.tsx
 msgid "Support dashboard"
 msgstr ""
 
@@ -10884,7 +10831,6 @@ msgstr ""
 msgid "User could not been updated"
 msgstr ""
 
-#: src/user/UserDetails.tsx
 #: src/user/dashboard/UserDashboard.tsx
 msgid "User dashboard"
 msgstr ""
@@ -11250,14 +11196,12 @@ msgid "VM snapshot schedule has been created."
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
-#: src/openstack/openstack-backup-schedule/breadcrumbs.ts
 #: src/openstack/openstack-instance/tabs.ts
 msgid "VM snapshot schedules"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/tabs.ts
 #: src/openstack/openstack-backup/BackupsList.tsx
-#: src/openstack/openstack-backup/breadcrumbs.ts
 #: src/openstack/openstack-instance/tabs.ts
 msgid "VM snapshots"
 msgstr ""

@@ -4,50 +4,11 @@ import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
-import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
 
 import { getCluster, getCatalog } from '../api';
-import { Cluster, Catalog } from '../types';
 
 import { CatalogTemplatesList } from './CatalogTemplateList';
-
-const getBreadcrumbs = (
-  cluster: Cluster,
-  catalog: Catalog,
-): BreadcrumbItem[] => {
-  return [
-    {
-      label: translate('Resources'),
-      state: 'marketplace-project-resources',
-      params: {
-        category_uuid: cluster.marketplace_category_uuid,
-      },
-    },
-    {
-      label: cluster.name,
-      state: 'resource-details',
-      params: {
-        uuid: cluster.project_uuid,
-        resource_type: 'Rancher.Cluster',
-        resource_uuid: cluster.uuid,
-        tab: 'catalogs',
-      },
-    },
-    {
-      label: translate('Application catalogues'),
-    },
-    {
-      label: catalog.name,
-      state: 'rancher-catalog-details',
-      params: {
-        clusterUuid: cluster.uuid,
-        catalogUuid: catalog.uuid,
-      },
-    },
-  ];
-};
 
 const loadData = async (clusterUuid: string, catalogUuid: string) => {
   const cluster = await getCluster(clusterUuid);
@@ -65,14 +26,6 @@ export const CatalogTemplateContainer: FunctionComponent = () => {
   const state = useAsync(
     () => loadData(clusterUuid, catalogUuid),
     [clusterUuid, catalogUuid],
-  );
-
-  useBreadcrumbsFn(
-    () =>
-      state.value
-        ? getBreadcrumbs(state.value.cluster, state.value.catalog)
-        : [],
-    [state.value],
   );
 
   if (state.loading) {

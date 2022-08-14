@@ -8,32 +8,12 @@ import { translate } from '@waldur/i18n';
 import { OfferingHeader } from '@waldur/marketplace/offerings/details/OfferingHeader';
 import { loadOfferingStart } from '@waldur/marketplace/offerings/store/actions';
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
-import { Offering } from '@waldur/marketplace/types';
-import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
-import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 
 import { CreateImageButton } from './CreateImageButton';
 import { OfferingImagesList } from './OfferingImagesList';
-
-const getBreadcrumbs = (offering: Offering): BreadcrumbItem[] => {
-  return [
-    offering.shared
-      ? {
-          label: translate('Public offerings'),
-          state: 'marketplace-vendor-offerings',
-        }
-      : {
-          label: translate('My offerings'),
-          state: 'marketplace-my-offerings',
-        },
-    {
-      label: offering.name,
-    },
-  ];
-};
 
 export const ImagesContainer: FunctionComponent = () => {
   const {
@@ -50,11 +30,6 @@ export const ImagesContainer: FunctionComponent = () => {
 
   const offering = useSelector(
     (state: RootState) => getOffering(state).offering,
-  );
-
-  useBreadcrumbsFn(
-    () => (offering ? getBreadcrumbs(offering) : []),
-    [offering],
   );
 
   useTitle(

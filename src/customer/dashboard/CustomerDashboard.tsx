@@ -6,7 +6,6 @@ import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { CustomerChecklistOverview } from '@waldur/marketplace-checklist/CustomerChecklistOverview';
-import { useBreadcrumbs } from '@waldur/navigation/breadcrumbs/store';
 import { useTitle } from '@waldur/navigation/title';
 import { ProjectsListOnly } from '@waldur/project/ProjectsList';
 import {
@@ -23,7 +22,6 @@ import { CustomerProfile } from './CustomerProfile';
 
 export const CustomerDashboard: FunctionComponent = () => {
   useTitle(translate('Dashboard'));
-  useBreadcrumbs([{ label: translate('Organization') }]);
   useCustomerItems();
 
   const user = useSelector(getUser);
