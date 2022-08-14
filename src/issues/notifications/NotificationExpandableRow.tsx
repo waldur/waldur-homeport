@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { ENV } from '@waldur/configs/default';
+import { formatRole } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 const OptionsList = ({ label, list }) =>
@@ -12,12 +12,7 @@ const OptionsList = ({ label, list }) =>
   ) : null;
 
 const RolesList = ({ label, list }) => (
-  <OptionsList
-    label={label}
-    list={list?.map((role) =>
-      ENV.roles[role] ? translate(ENV.roles[role]) : role,
-    )}
-  />
+  <OptionsList label={label} list={list?.map(formatRole)} />
 );
 
 export const NotificationExpandableRow: FunctionComponent<{ row }> = ({

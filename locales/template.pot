@@ -5499,7 +5499,6 @@ msgid "Organization native name"
 msgstr ""
 
 #: src/configs/default.ts
-#: src/invitations/RoleField.tsx
 msgid "Organization owner"
 msgstr ""
 
