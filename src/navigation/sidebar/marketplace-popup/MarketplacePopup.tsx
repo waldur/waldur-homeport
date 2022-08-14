@@ -1,7 +1,7 @@
-import { FunctionComponent, useEffect, useRef, useState } from 'react';
+import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 import { Button, Col, FormControl, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAsyncFn, useDebounce } from 'react-use';
+import { useAsync, useAsyncFn, useDebounce } from 'react-use';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -15,8 +15,10 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CategoriesPanel } from './CategoriesPanel';
 import { OfferingsPanel } from './OfferingsPanel';
-import { fetchCategories, fetchOfferings } from './utils';
+import { fetchCategories, fetchLastNOfferings, fetchOfferings } from './utils';
 import { WelcomeView } from './WelcomeView';
+
+const RECENTLY_ADDED_OFFERINGS_UUID = 'recently_added_offerings_category';
 
 export const MarketplacePopup: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -38,8 +40,17 @@ export const MarketplacePopup: FunctionComponent = () => {
     if (isVisible && refSearch.current) refSearch.current.focus();
   }, [isVisible, refSearch]);
 
+  const { value: lastOfferings } = useAsync(
+    () => fetchLastNOfferings(currentCustomer),
+    [currentCustomer],
+  );
+
   const [
-    { loading: loadingCategories, error: errorCategories, value: categories },
+    {
+      loading: loadingCategories,
+      error: errorCategories,
+      value: mainCategories,
+    },
     loadCategories,
   ] = useAsyncFn<Category[]>(
     (search?: string) => fetchCategories(currentCustomer, search),
@@ -51,17 +62,31 @@ export const MarketplacePopup: FunctionComponent = () => {
   }, [currentCustomer]);
 
   const [
-    {
-      loading: loadingOfferings,
-      value: groupedOfferings,
-      error: errorOfferings,
-    },
+    { loading: loadingOfferings, value: offerings, error: errorOfferings },
     loadOfferings,
   ] = useAsyncFn(
-    (category: Category, search: string) =>
-      fetchOfferings(currentCustomer, category, search),
-    [currentCustomer],
+    (category: Category, search: string) => {
+      if (category && category.uuid === RECENTLY_ADDED_OFFERINGS_UUID) {
+        return Promise.resolve(lastOfferings);
+      }
+      return fetchOfferings(currentCustomer, category, search);
+    },
+    [currentCustomer, lastOfferings],
   );
+
+  const categories = useMemo(() => {
+    if (lastOfferings && lastOfferings.length > 0) {
+      const recentlyAddedOfferingsCategory: Category = {
+        icon: undefined,
+        offering_count: lastOfferings.length,
+        title: translate('Recently added offerings'),
+        uuid: RECENTLY_ADDED_OFFERINGS_UUID,
+        url: undefined,
+      };
+      return [recentlyAddedOfferingsCategory].concat(mainCategories);
+    }
+    return mainCategories;
+  }, [mainCategories, lastOfferings]);
 
   // search with delay
   useDebounce(
@@ -164,7 +189,7 @@ export const MarketplacePopup: FunctionComponent = () => {
           </Col>
         ) : (
           <OfferingsPanel
-            offerings={groupedOfferings[selectedCategory?.uuid]}
+            offerings={offerings}
             customer={currentCustomer}
             category={selectedCategory}
           />

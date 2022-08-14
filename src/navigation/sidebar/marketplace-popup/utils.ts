@@ -1,6 +1,8 @@
-import { groupBy } from 'lodash';
-
-import { getAllOfferings, getCategories } from '@waldur/marketplace/common/api';
+import {
+  getAllOfferings,
+  getCategories,
+  getOfferingsList,
+} from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
 import { Customer } from '@waldur/workspace/types';
 
@@ -42,6 +44,30 @@ export const fetchOfferings = async (
       state: ['Active', 'Paused'],
     },
   });
-  if (!offerings) return {};
-  else return groupBy(offerings, 'category_uuid');
+  return offerings;
+};
+
+export const fetchLastNOfferings = async (
+  customer: Customer,
+  page_size = 5,
+) => {
+  const offerings = await getOfferingsList({
+    page: 1,
+    page_size,
+    allowed_customer_uuid: customer.uuid,
+    field: [
+      'uuid',
+      'category_uuid',
+      'customer_uuid',
+      'category_title',
+      'name',
+      'description',
+      'image',
+      'state',
+      'paused_reason',
+    ],
+    state: ['Active', 'Paused'],
+    o: '-created',
+  });
+  return offerings;
 };
