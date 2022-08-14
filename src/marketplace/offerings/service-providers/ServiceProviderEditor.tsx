@@ -48,7 +48,7 @@ export const ServiceProviderEditor = connect((_, props: any) => ({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FormContainer layout="vertical" submitting={submitting}>
+          <FormContainer submitting={submitting}>
             <TextField name={'description'} label={translate('Description')} />
             <CustomerLogoUpdateContainer
               customer={

@@ -1,6 +1,5 @@
-import { FunctionComponent, useContext } from 'react';
+import { FunctionComponent } from 'react';
 
-import { FormFieldsContext, FormLayoutContext } from '@waldur/form/context';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { ArticleCodeField } from '../ArticleCodeField';
@@ -17,14 +16,8 @@ interface ComponentFormProps {
 }
 
 export const ComponentForm: FunctionComponent<ComponentFormProps> = (props) => {
-  const { layout } = useContext(FormLayoutContext);
-  const fieldsClassNames = {
-    labelClassName: layout === 'vertical' ? '' : undefined,
-    valueClassName: layout === 'vertical' ? '' : undefined,
-    classNameWithoutLabel: layout === 'vertical' ? '' : undefined,
-  };
   return (
-    <FormFieldsContext.Provider value={fieldsClassNames}>
+    <>
       <InternalNameField
         name="type"
         disabled={!!props.builtinComponents.length}
@@ -40,6 +33,6 @@ export const ComponentForm: FunctionComponent<ComponentFormProps> = (props) => {
       />
       <ArticleCodeField />
       <ComponentLimit />
-    </FormFieldsContext.Provider>
+    </>
   );
 };

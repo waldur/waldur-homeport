@@ -53,11 +53,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
 
   return (
     <form>
-      <FormContainer
-        submitting={props.submitting}
-        labelClass="col-sm-3"
-        controlClass="col-sm-9"
-      >
+      <FormContainer submitting={props.submitting}>
         <ProjectField />
         <StringField
           label={translate('Cluster name')}

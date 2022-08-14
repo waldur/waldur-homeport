@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
@@ -7,14 +8,21 @@ export const InputGroup = ({
   label,
   helpText,
   validate,
-  className,
+  floating,
   ...props
 }: any) => (
-  <Form.Group className={className}>
-    <Form.Label>
-      {label} {props.required && <span className="text-danger"> *</span>}
-    </Form.Label>
+  <Form.Group className={classNames({ 'form-floating': floating }, 'mb-7')}>
+    {!floating && label && (
+      <Form.Label>
+        {label} {props.required && <span className="text-danger"> *</span>}
+      </Form.Label>
+    )}
     <Field {...props} />
+    {floating && label && (
+      <Form.Label>
+        {label} {props.required && <span className="text-danger"> *</span>}
+      </Form.Label>
+    )}
     <Field
       name={props.name}
       component={({ meta }) =>
@@ -25,3 +33,7 @@ export const InputGroup = ({
     {helpText && <Form.Text muted={true}>{helpText}</Form.Text>}
   </Form.Group>
 );
+
+InputGroup.defaultProps = {
+  floating: true,
+};

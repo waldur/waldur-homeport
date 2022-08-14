@@ -6,12 +6,8 @@ import { translate } from '@waldur/i18n';
 
 import { LayoutWrapper } from './LayoutWrapper';
 
-export const SummaryGroup: FunctionComponent<{ layout; disabled }> = ({
-  layout,
-  disabled,
-}) => (
+export const SummaryGroup: FunctionComponent<{ disabled }> = ({ disabled }) => (
   <LayoutWrapper
-    layout={layout}
     header={
       <>
         {translate('Title')}

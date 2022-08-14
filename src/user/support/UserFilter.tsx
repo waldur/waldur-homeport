@@ -18,12 +18,7 @@ interface UserFilterProps {
 
 const PureUserFilter: FunctionComponent<UserFilterProps> = (props) => (
   <form className="form-inline" id="user-filter">
-    <FormContainer
-      labelClass="me-3"
-      controlClass="me-3"
-      submitting={props.submitting}
-      clearOnUnmount={false}
-    >
+    <FormContainer submitting={props.submitting} clearOnUnmount={false}>
       <DebouncedStringField
         label={translate('Full name')}
         name="full_name"

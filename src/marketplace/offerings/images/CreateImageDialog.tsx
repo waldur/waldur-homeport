@@ -37,12 +37,7 @@ const AddOfferingImageDialog: FunctionComponent<any> = (props) => (
         </>
       }
     >
-      <FormContainer
-        submitting={false}
-        labelClass="col-sm-2"
-        controlClass="col-sm-8"
-        clearOnUnmount={false}
-      >
+      <FormContainer submitting={false} clearOnUnmount={false}>
         <ImageUploadField
           name="images"
           label={translate('Image: ')}

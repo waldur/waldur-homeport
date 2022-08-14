@@ -57,7 +57,7 @@ export const PageOverview = connect<{}, {}, { offering }>((_, props) => ({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <OverviewStep layout="vertical" submitting={submitting} />
+            <OverviewStep submitting={submitting} />
           </Modal.Body>
           <Modal.Footer>
             <SubmitButton

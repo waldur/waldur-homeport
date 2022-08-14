@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Col, Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { FormLayoutContext } from '@waldur/form/context';
 import { translate } from '@waldur/i18n';
 import {
   parseIntField,
@@ -17,19 +16,14 @@ interface OfferingLimitsTableProps {
 export const OfferingLimitsTable: React.FC<OfferingLimitsTableProps> = (
   props,
 ) => {
-  const { layout } = useContext(FormLayoutContext);
-
-  const col = layout === 'vertical' ? 0 : 8;
-  const offset = layout === 'vertical' ? 0 : 2;
-
   return (
     <Form.Group>
-      <Col sm={{ span: col, offset: offset }} className="mb-2">
+      <Col className="mb-2">
         <p>
           <strong>{translate('Offering components')}</strong>
         </p>
       </Col>
-      <Col smOffset={offset} sm={col}>
+      <Col>
         <table className="table table-borderless">
           <thead>
             <tr>

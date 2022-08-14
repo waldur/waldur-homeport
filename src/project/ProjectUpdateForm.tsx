@@ -42,11 +42,7 @@ interface ProjectUpdateFormProps extends InjectedFormProps {
 export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
   (props) => (
     <form onSubmit={props.handleSubmit(props.updateProject)}>
-      <FormContainer
-        submitting={props.submitting}
-        labelClass="col-sm-3"
-        controlClass="col-sm-9"
-      >
+      <FormContainer submitting={props.submitting} floating={true}>
         <StringField
           label={translate('Project owner')}
           name="customer_name"
@@ -61,6 +57,7 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
         />
         {props.oecdCodes && isFeatureVisible('project.oecd_fos_2007_code') ? (
           <SelectField
+            floating={false}
             label={translate('OECD FoS code')}
             help_text={translate(
               'Please select OECD code corresponding to field of science and technology',
@@ -103,20 +100,21 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
           disabled={props.isDisabled}
         />
         <ImageField
+          floating={false}
           label={translate('Project image')}
           name="image"
           initialValue={props.initialValues.image}
         />
       </FormContainer>
-      <Form.Group>
-        <div className="offset-sm-3 col-sm-9">
-          <FieldError error={props.error} />
+      <Form.Group className="pull-right">
+        <FieldError error={props.error} />
+        {props.dirty && (
           <SubmitButton
             submitting={props.submitting}
             disabled={props.invalid || props.isDisabled}
             label={translate('Update project details')}
           />
-        </div>
+        )}
       </Form.Group>
     </form>
   );

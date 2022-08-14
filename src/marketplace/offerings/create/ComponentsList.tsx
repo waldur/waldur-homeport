@@ -1,9 +1,8 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Col, Card, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { WrappedFieldArrayProps, FormSection, change } from 'redux-form';
 
-import { FormLayoutContext } from '@waldur/form/context';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 import { parseComponents } from '@waldur/marketplace/offerings/update/utils';
@@ -32,20 +31,15 @@ export const ComponentsList = (props: ComponentsListProps) => {
     }
   }, []);
 
-  const { layout } = useContext(FormLayoutContext);
-
-  const col = layout === 'vertical' ? 0 : 8;
-  const offset = layout === 'vertical' ? 0 : 2;
-
   return (
     <Form.Group>
-      <Col sm={{ span: col, offset: offset }} className="mb-2">
+      <Col className="mb-2">
         <p>
           <strong>{translate('Plan components')}</strong>
         </p>
       </Col>
 
-      <Col smOffset={offset} sm={col}>
+      <Col>
         {props.fields.map((component, index) => (
           <Card key={index}>
             <Card.Header>

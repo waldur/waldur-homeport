@@ -23,3 +23,7 @@ export const StringField: FunctionComponent<StringFieldProps> = (props) => {
     />
   );
 };
+
+StringField.defaultProps = {
+  placeholder: '  ',
+};

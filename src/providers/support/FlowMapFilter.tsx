@@ -45,11 +45,7 @@ const PureFlowMapFilter: FunctionComponent<FlowMapFilterProps> = (props) => (
   <Card>
     <Card.Body>
       <form className="form-inline" id="flow-map-form">
-        <FormContainer
-          labelClass="me-3"
-          controlClass="me-3"
-          submitting={props.submitting}
-        >
+        <FormContainer submitting={props.submitting}>
           <StringField label={translate('Month')} name="month" />
           <SelectField
             className="metrics-select"

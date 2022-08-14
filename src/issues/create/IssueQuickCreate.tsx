@@ -206,9 +206,9 @@ export const IssueQuickCreate = reduxForm<IssueFormData>({
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          <TypeGroup layout="vertical" disabled={submitting} />
-          <SummaryGroup layout="vertical" disabled={submitting} />
-          <DescriptionGroup layout="vertical" disabled={submitting} />
+          <TypeGroup disabled={submitting} />
+          <SummaryGroup disabled={submitting} />
+          <DescriptionGroup disabled={submitting} />
           <OrganizationGroup disabled={submitting} />
           <ProjectGroup
             disabled={submitting}

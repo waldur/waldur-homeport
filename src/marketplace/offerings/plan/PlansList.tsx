@@ -1,8 +1,7 @@
-import { FunctionComponent, useContext } from 'react';
+import { FunctionComponent } from 'react';
 import { Col, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { FormLayoutContext } from '@waldur/form/context';
 import { translate } from '@waldur/i18n';
 import { hidePlanAddButton } from '@waldur/marketplace/common/registry';
 import { RootState } from '@waldur/store/reducers';
@@ -11,20 +10,15 @@ import { PlanAddButton } from './PlanAddButton';
 import { PlanPanel } from './PlanPanel';
 
 const PlansListComponent: FunctionComponent<any> = (props) => {
-  const { layout } = useContext(FormLayoutContext);
-
-  const col = layout === 'vertical' ? 0 : 8;
-  const offset = layout === 'vertical' ? 0 : 2;
-
   return (
     <Form.Group>
-      <Col sm={{ span: col, offset: offset }} className="mb-2">
+      <Col className="mb-2">
         <p>
           <strong>{translate('Accounting plans')}</strong>
         </p>
       </Col>
 
-      <Col smOffset={offset} sm={col}>
+      <Col>
         {props.fields.map((plan, index) => (
           <PlanPanel
             key={index}

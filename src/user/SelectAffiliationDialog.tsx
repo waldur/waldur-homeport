@@ -150,16 +150,10 @@ const SelectAffiliationDialogContainer: FC<
         }
       >
         {affiliationExist ? (
-          <FormContainer
-            submitting={props.submitting}
-            labelClass="col-sm-2"
-            controlClass="col-sm-8"
-          >
+          <FormContainer submitting={props.submitting}>
             <Form.Group>
-              <Form.Label className="col-sm-2">
-                {translate('Select affiliation')}
-              </Form.Label>
-              <div className="col-sm-8">
+              <Form.Label>{translate('Select affiliation')}</Form.Label>
+              <div>
                 <Field
                   name="affiliation"
                   component={ToggleButtonGroupInput}

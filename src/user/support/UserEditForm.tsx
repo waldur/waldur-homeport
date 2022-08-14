@@ -43,11 +43,7 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
   props,
 ) => (
   <form onSubmit={props.handleSubmit(props.updateUser)}>
-    <FormContainer
-      submitting={props.submitting}
-      labelClass="col-sm-3 col-md-4"
-      controlClass="col-sm-9 col-md-8"
-    >
+    <FormContainer submitting={props.submitting} floating={true}>
       <EmailField
         user={props.user}
         protected={props.fieldIsProtected('email')}
@@ -175,11 +171,7 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
           />
         )}
       <hr />
-      <ImageField
-        label={translate('Profile picture')}
-        name="image"
-        initialValue={props.user.image}
-      />
+      <ImageField name="image" initialValue={props.user.image} />
       <TermsOfService
         initial={props.initial}
         agreementDate={props.user.agreement_date}
@@ -199,11 +191,13 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
           </Button>
         )}
         {!props.initial ? (
-          <SubmitButton
-            className="btn btn-primary btn-sm me-2"
-            submitting={props.submitting}
-            label={translate('Save changes')}
-          />
+          props.dirty ? (
+            <SubmitButton
+              className="btn btn-primary btn-sm me-2"
+              submitting={props.submitting}
+              label={translate('Save changes')}
+            />
+          ) : null
         ) : (
           <SubmitButton
             submitting={props.submitting}

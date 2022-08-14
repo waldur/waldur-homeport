@@ -45,11 +45,7 @@ const UserEditTokenComponent: React.FC<UserEditTokenComponentProps> = (
       </Card.Header>
       <Card.Body>
         <form onSubmit={props.handleSubmit(props.updateUser)}>
-          <FormContainer
-            submitting={props.submitting}
-            labelClass="col-sm-3 col-md-2"
-            controlClass="col-sm-6 col-md-5"
-          >
+          <FormContainer submitting={props.submitting}>
             {props.userTokenIsVisible && (
               <SecretField name="token" label={translate('API token')} />
             )}

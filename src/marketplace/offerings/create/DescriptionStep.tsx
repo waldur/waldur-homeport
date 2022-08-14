@@ -32,18 +32,12 @@ export const DescriptionStep: FunctionComponent<DescriptionStepProps> = (
       />
     </FormContainer>
     {props.category && (
-      <OfferingAttributes
-        sections={props.category.sections}
-        labelCols={props.layout === 'vertical' ? 0 : 2}
-        controlCols={props.layout === 'vertical' ? 0 : 8}
-      />
+      <OfferingAttributes sections={props.category.sections} />
     )}
   </>
 );
 
 DescriptionStep.defaultProps = {
   submitting: false,
-  labelClass: 'col-sm-2',
-  controlClass: 'col-sm-8',
   clearOnUnmount: false,
 };

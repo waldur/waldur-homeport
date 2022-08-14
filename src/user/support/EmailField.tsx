@@ -1,5 +1,5 @@
 import { useCallback, useState, FunctionComponent } from 'react';
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Button, Col, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { post } from '@waldur/core/api';
@@ -56,21 +56,21 @@ export const EmailField: FunctionComponent<any> = (props) => {
 
   return (
     <>
-      <Form.Group as={Row} className="mb-8">
-        <Form.Label column sm={3} md={4}>
-          {translate('Email')}
-        </Form.Label>
+      <div className="row mb-7">
         <Col>
-          <Form.Control
-            readOnly
-            defaultValue={props.user.email}
-            className="form-control-solid"
-          />
-          {props.protected && (
-            <Form.Text muted>
-              {translate('Synchronized from identity provider')}
-            </Form.Text>
-          )}
+          <div className="form-floating">
+            <Form.Control
+              readOnly
+              defaultValue={props.user.email}
+              className="form-control-solid"
+            />
+            <Form.Label>{translate('Email')}</Form.Label>
+            {props.protected && (
+              <Form.Text muted>
+                {translate('Synchronized from identity provider')}
+              </Form.Text>
+            )}
+          </div>
         </Col>
         {!props.user.requested_email && !props.protected && (
           <Col xs="auto">
@@ -79,7 +79,7 @@ export const EmailField: FunctionComponent<any> = (props) => {
             </Button>
           </Col>
         )}
-      </Form.Group>
+      </div>
       {props.user.requested_email && !props.protected && (
         <RequestedEmail
           requestedEmail={props.user.requested_email}

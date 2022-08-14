@@ -68,7 +68,5 @@ export const OverviewStep: FC<FormContainerProps> = (props) => (
 
 OverviewStep.defaultProps = {
   submitting: false,
-  labelClass: 'col-sm-2',
-  controlClass: 'col-sm-8',
   clearOnUnmount: false,
 };

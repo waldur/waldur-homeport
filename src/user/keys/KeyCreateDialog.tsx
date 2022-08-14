@@ -76,16 +76,13 @@ const PureKeyCreateDialog: React.FC<InjectedFormProps<FormData>> = (props) => {
           </>
         }
       >
-        <FormContainer
-          submitting={props.submitting}
-          labelClass="col-sm-12"
-          controlClass="col-sm-12"
-        >
+        <FormContainer submitting={props.submitting}>
           <StringField label={translate('Key name')} name="name" />
           <TextField
             label={translate('Public key')}
             name="public_key"
             required={true}
+            style={{ height: 100 }}
           />
         </FormContainer>
       </ModalDialog>

@@ -88,8 +88,8 @@ export const IssueCreateForm = enhance(
             <IssueHeader issue={issue} />
             {!issue.type && (
               <Form.Group>
-                <Form.Label>{translate('Request type')}</Form.Label>
                 <TypeField issueTypes={issueTypes} isDisabled={submitting} />
+                <Form.Label>{translate('Request type')}</Form.Label>
               </Form.Group>
             )}
             {filteredTemplates.length > 0 && (

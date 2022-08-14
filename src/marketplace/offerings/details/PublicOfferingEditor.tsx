@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { FormLayoutContext } from '@waldur/form/context';
 import { translate } from '@waldur/i18n';
 import { supportOfferingActionVisible } from '@waldur/marketplace/offerings/actions/utils';
 import { SidebarResizer } from '@waldur/marketplace/offerings/SidebarResizer';
@@ -166,9 +165,9 @@ export const PublicOfferingEditor = ({ resolve }) => {
   if (!Editor) return null;
 
   return (
-    <FormLayoutContext.Provider value={{ layout: 'vertical' }}>
+    <>
       <SidebarResizer />
       {Editor}
-    </FormLayoutContext.Provider>
+    </>
   );
 };

@@ -91,10 +91,10 @@ export const IssueRegistration = reduxForm<IssueFormData, OwnProps>({
       <Card.Body>
         <CallerGroup onSearch={onSearch} />
         <OrganizationGroup onSearch={onSearch} />
-        <TypeGroup layout="horizontal" disabled={submitting} />
+        <TypeGroup disabled={submitting} />
         <PriorityGroup priorities={priorities} disabled={submitting} />
-        <SummaryGroup layout="horizontal" disabled={submitting} />
-        <DescriptionGroup layout="horizontal" disabled={submitting} />
+        <SummaryGroup disabled={submitting} />
+        <DescriptionGroup disabled={submitting} />
         <ProjectGroup disabled={submitting} onSearch={onSearch} />
         <ResourceGroup disabled={submitting} />
         <AssigneeGroup disabled={submitting} />

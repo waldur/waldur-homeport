@@ -17,5 +17,5 @@ const mapDispatchToProps = (dispatch) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 export const DescriptionUpdateContainer = connector((props) => {
-  return <DescriptionStep {...props} layout="vertical" />;
+  return <DescriptionStep {...props} />;
 });
