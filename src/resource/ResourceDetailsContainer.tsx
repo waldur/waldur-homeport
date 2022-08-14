@@ -7,12 +7,10 @@ import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { useRecursiveTimeout } from '@waldur/core/useRecursiveTimeout';
 import { translate } from '@waldur/i18n';
-import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { LayoutContext } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { getResource } from './api';
-import { ResourceBreadcrumbsRegistry } from './breadcrumbs/ResourceBreadcrumbsRegistry';
 import { ResourceDetails } from './ResourceDetails';
 import { BaseResource } from './types';
 
@@ -46,11 +44,6 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
       setResource(asyncResult.value);
     }
   }, [resource, asyncResult.value]);
-
-  useBreadcrumbsFn(
-    () => (resource ? ResourceBreadcrumbsRegistry.getItems(resource) : []),
-    [resource],
-  );
 
   const layoutContext = useContext(LayoutContext);
   useEffect(() => {

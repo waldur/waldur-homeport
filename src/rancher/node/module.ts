@@ -4,7 +4,6 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
 import nodeActions from './actions';
-import './breadcrumbs';
 
 const RancherNodeSummary = lazyComponent(
   () =>

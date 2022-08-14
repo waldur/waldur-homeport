@@ -2,8 +2,6 @@ import { FunctionComponent } from 'react';
 import { useEffectOnce } from 'react-use';
 
 import { getFirst } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
-import { setBreadcrumbs } from '@waldur/navigation/breadcrumbs/store';
 import { Layout } from '@waldur/navigation/Layout';
 import { getProject, getCustomer } from '@waldur/project/api';
 import { router } from '@waldur/router';
@@ -31,13 +29,11 @@ async function loadUser() {
   ) {
     store.dispatch(setCurrentWorkspace(USER_WORKSPACE));
     store.dispatch(setCurrentUser(currentUser));
-    store.dispatch(setBreadcrumbs([{ label: translate('User dashboard') }]));
   } else if (currentUser.is_staff || currentUser.is_support) {
     try {
       const user = await UsersService.get(router.globals.params.uuid);
       store.dispatch(setCurrentUser(user));
       store.dispatch(setCurrentWorkspace(USER_WORKSPACE));
-      store.dispatch(setBreadcrumbs([{ label: user.full_name }]));
     } catch (response) {
       if (response.status === 404) {
         router.stateService.go('errorPage.notFound');

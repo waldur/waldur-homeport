@@ -9,9 +9,6 @@ import { getOffering, getCategory } from '@waldur/marketplace/common/api';
 import { OfferingResourcesFilter } from '@waldur/marketplace/details/OfferingResourcesFilter';
 import { OfferingResourcesList } from '@waldur/marketplace/details/OfferingResourcesList';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
-import { Offering } from '@waldur/marketplace/types';
-import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
-import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
@@ -19,23 +16,6 @@ import { OfferingBookingTab } from './OfferingBookingTab';
 import { OfferingDetails } from './OfferingDetails';
 import { OfferingUsersTab } from './OfferingUsersTab';
 import { PlanUsageList } from './PlanUsageList';
-
-function getBreadcrumbs(offering: Offering): BreadcrumbItem[] {
-  return [
-    {
-      label: translate('My services'),
-    },
-    offering.shared
-      ? {
-          label: translate('Public offerings'),
-          state: 'marketplace-vendor-offerings',
-        }
-      : {
-          label: translate('My offerings'),
-          state: 'marketplace-my-offerings',
-        },
-  ];
-}
 
 async function loadData(offering_uuid: string) {
   const offering = await getOffering(offering_uuid);
@@ -86,11 +66,6 @@ export const OfferingContainer: FunctionComponent = () => {
   useEffectOnce(() => {
     reInitResource();
   });
-
-  useBreadcrumbsFn(
-    () => (value ? getBreadcrumbs(value.offering) : []),
-    [value],
-  );
 
   useTitle(value ? value.offering.name : translate('Offering details'));
 

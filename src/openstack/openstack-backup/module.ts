@@ -3,7 +3,6 @@ import { ActionRegistry } from '@waldur/resource/actions/registry';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import actions from './actions';
-import './breadcrumbs';
 const OpenStackBackupSummary = lazyComponent(
   () =>
     import(

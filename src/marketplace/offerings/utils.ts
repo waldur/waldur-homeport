@@ -1,15 +1,5 @@
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
-import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
-
-export function getBreadcrumbs(): BreadcrumbItem[] {
-  return [
-    {
-      label: translate('Public offerings'),
-      state: 'marketplace-vendor-offerings',
-    },
-  ];
-}
 
 const ARTICLE_CODE_PATTERN = new RegExp(
   '^[A-Za-z0-9][A-Za-z0-9-_]*[A-Za-z0-9]$',

@@ -5,7 +5,6 @@ import 'world-flags-sprite/stylesheets/flags16.css';
 
 import { ENV } from '@waldur/configs/default';
 
-import { BreadcrumbsContainer } from '../breadcrumbs/BreadcrumbsContainer';
 import { getTitle } from '../title';
 
 import { SearchToggle } from './SearchToggle';
@@ -63,8 +62,6 @@ export const AppHeader: FunctionComponent = () => {
             <h1 className="d-flex text-dark fw-bolder fs-3 align-items-center my-1">
               {pageTitle}
             </h1>
-            <span className="h-20px border-gray-300 border-start mx-4"></span>
-            <BreadcrumbsContainer />
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
             <SearchToggle />

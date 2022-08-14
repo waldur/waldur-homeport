@@ -8,7 +8,6 @@ import { formValueSelector } from 'redux-form';
 import { FormattedMarkdown } from '@waldur/core/FormattedMarkdown';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { useTitle } from '@waldur/navigation/title';
 import { TemplateQuestions } from '@waldur/rancher/template/TemplateQuestions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -16,7 +15,6 @@ import { RootState } from '@waldur/store/reducers';
 
 import { createApp } from '../api';
 
-import { getBreadcrumbs } from './breadcrumbs';
 import { FORM_ID } from './constants';
 import { TemplateHeader } from './TemplateHeader';
 import { FormData } from './types';
@@ -32,14 +30,6 @@ export const TemplateDetail: FunctionComponent = () => {
   const state = useAsync(
     () => loadData(templateUuid, clusterUuid),
     [templateUuid, clusterUuid],
-  );
-
-  useBreadcrumbsFn(
-    () =>
-      state.value
-        ? getBreadcrumbs(state.value.cluster, state.value.template)
-        : [],
-    [state.value],
   );
 
   useTitle(

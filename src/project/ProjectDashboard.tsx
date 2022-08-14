@@ -8,7 +8,6 @@ import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { translate } from '@waldur/i18n';
 import { ComplianceChecklists } from '@waldur/marketplace-checklist/ComplianceChecklists';
-import { useBreadcrumbs } from '@waldur/navigation/breadcrumbs/store';
 import { useTitle } from '@waldur/navigation/title';
 import { ProjectResourcesFilter } from '@waldur/project/ProjectResourcesFilter';
 import { isVisible } from '@waldur/store/config';
@@ -31,7 +30,6 @@ export const ProjectDashboard: FunctionComponent<ProjectDashboardProps> = (
   props,
 ) => {
   useTitle(translate('Dashboard'));
-  useBreadcrumbs([{ label: translate('Project') }]);
   const shouldConcealPrices = useSelector((state: RootState) =>
     isVisible(state, 'marketplace.conceal_prices'),
   );

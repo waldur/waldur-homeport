@@ -4,7 +4,6 @@ import { ResourceStateConfigurationProvider } from '@waldur/resource/state/Resou
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import actions from './actions';
-import './breadcrumbs';
 import './tabs';
 const OpenStackSnapshotScheduleSummary = lazyComponent(
   () =>
