@@ -1681,7 +1681,6 @@ msgid "Could not create organization"
 msgstr ""
 
 #: src/customer/create/CountryGroup.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "Country"
@@ -3375,6 +3374,10 @@ msgstr ""
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Hero image"
+msgstr ""
+
+#: src/form/SecretField.tsx
+msgid "Hide"
 msgstr ""
 
 #: src/resource/support/TreemapChartFilter.tsx
@@ -5496,6 +5499,7 @@ msgid "Organization native name"
 msgstr ""
 
 #: src/configs/default.ts
+#: src/invitations/RoleField.tsx
 msgid "Organization owner"
 msgstr ""
 
@@ -6319,7 +6323,6 @@ msgid "Profile is enabled."
 msgstr ""
 
 #: src/user/support/AvatarField.tsx
-#: src/user/support/UserEditForm.tsx
 msgid "Profile picture"
 msgstr ""
 
@@ -8431,6 +8434,7 @@ msgstr ""
 msgid "Shopping cart item update"
 msgstr ""
 
+#: src/form/SecretField.tsx
 #: src/marketplace/details/plan/PlanDetailsLink.tsx
 msgid "Show"
 msgstr ""
@@ -11928,10 +11932,6 @@ msgstr ""
 
 #: src/marketplace/resources/ResourceDetailsHeader.tsx
 msgid "overview"
-msgstr ""
-
-#: src/invitations/RoleField.tsx
-msgid "owner"
 msgstr ""
 
 #: src/form/CronField.tsx

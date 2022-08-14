@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { ENV } from '@waldur/configs/default';
 import { Link } from '@waldur/core/Link';
 import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -8,17 +9,25 @@ export const RoleField: FunctionComponent<{ invitation }> = ({
   invitation,
 }) => {
   if (invitation.customer_role) {
-    return <>{translate('owner')}</>;
+    return <>{translate('Organization owner')}</>;
   } else if (invitation.project_role) {
     if (!invitation.project) {
-      return <>{translate(invitation.project_role)}</>;
+      return (
+        <>
+          {ENV.roles[invitation.project_role]
+            ? translate(ENV.roles[invitation.project_role])
+            : ENV.roles[invitation.project_role]}
+        </>
+      );
     }
     return (
       <Link
         state="project.details"
         params={{ uuid: getUUID(invitation.project) }}
         label={translate('{role} in {project}', {
-          role: translate(invitation.project_role),
+          role: ENV.roles[invitation.project_role]
+            ? translate(ENV.roles[invitation.project_role])
+            : ENV.roles[invitation.project_role],
           project: invitation.project_name,
         })}
       />
