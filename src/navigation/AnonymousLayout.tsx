@@ -28,7 +28,7 @@ export const AnonymousLayout: FunctionComponent = () => {
         <div className="wrapper d-flex flex-column flex-row-fluid">
           <CookiesConsent />
           {!state.data?.hideHeader && <SiteHeader />}
-          <div className="content d-flex flex-column flex-column-fluid">
+          <div className="content d-flex flex-column">
             <div className="toolbar">
               <div className="container-fluid d-flex flex-stack">
                 <div className="d-flex align-items-stretch scroll-x">

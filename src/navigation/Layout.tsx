@@ -144,10 +144,9 @@ export const Layout: React.FC = ({ children }) => {
               <AppHeader />
               <WarningBar />
               <div
-                className={classNames(
-                  'content d-flex flex-column flex-column-fluid',
-                  { 'full-page': fullPage },
-                )}
+                className={classNames('content d-flex flex-column', {
+                  'full-page': fullPage,
+                })}
               >
                 <div className="toolbar">
                   <div className="container-fluid d-flex flex-stack">
