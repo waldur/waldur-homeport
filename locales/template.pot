@@ -6846,6 +6846,10 @@ msgstr ""
 msgid "Recent"
 msgstr ""
 
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+msgid "Recently added offerings"
+msgstr ""
+
 #: src/issues/notifications/NotificationExpandableRow.tsx
 msgid "Recipients"
 msgstr ""
