@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { cloneElement, PureComponent } from 'react';
-import { Form, Row } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { clearFields, WrappedFieldMetaProps } from 'redux-form';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -18,6 +18,10 @@ export interface FormGroupProps extends FormField {
 export class FormGroup extends PureComponent<FormGroupProps> {
   static contextType = FormFieldsContext;
 
+  static defaultProps = {
+    floating: false,
+  };
+
   render() {
     const {
       input,
@@ -25,12 +29,10 @@ export class FormGroup extends PureComponent<FormGroupProps> {
       label,
       description,
       tooltip,
-      labelClass,
       hideLabel,
-      controlClass,
-      layout,
       meta: { touched, error },
       children,
+      floating,
       ...rest
     } = this.props;
     const newProps = {
@@ -43,40 +45,28 @@ export class FormGroup extends PureComponent<FormGroupProps> {
         }
       },
     };
-    return (
-      <Form.Group as={Row} className="mb-7">
-        {!hideLabel && (
-          <Form.Label
-            column={layout !== 'vertical'}
-            className={classNames(
-              { required },
-              layout !== 'vertical' && labelClass,
-            )}
-          >
-            {tooltip && (
-              <Tip id="form-field-tooltip" label={tooltip}>
-                <i className="fa fa-question-circle" />{' '}
-              </Tip>
-            )}
-            {label}
-          </Form.Label>
+    const labelNode = !hideLabel && (
+      <Form.Label className={classNames({ required })}>
+        {tooltip && (
+          <Tip id="form-field-tooltip" label={tooltip}>
+            <i className="fa fa-question-circle" />{' '}
+          </Tip>
         )}
-        <div
-          className={
-            layout !== 'vertical'
-              ? classNames(controlClass, { 'offset-sm-3': hideLabel })
-              : undefined
-          }
-        >
-          {cloneElement(children as any, newProps)}
-          {description && (
-            <Form.Text muted={true} className="mb-0">
-              {description}
-            </Form.Text>
-          )}
-          {touched && <FieldError error={error} />}
-        </div>
-      </Form.Group>
+        {label}
+      </Form.Label>
+    );
+    return (
+      <div className={classNames({ 'form-floating': floating }, 'mb-7')}>
+        {!floating && labelNode}
+        {cloneElement(children as any, newProps)}
+        {floating && labelNode}
+        {description && (
+          <Form.Text muted={true} className="mb-0">
+            {description}
+          </Form.Text>
+        )}
+        {touched && <FieldError error={error} />}
+      </div>
     );
   }
 

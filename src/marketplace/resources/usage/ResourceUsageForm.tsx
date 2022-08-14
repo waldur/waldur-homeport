@@ -85,7 +85,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
 
   return (
     <form onSubmit={props.handleSubmit(props.submitReport)}>
-      <FormContainer submitting={props.submitting} layout="vertical">
+      <FormContainer submitting={props.submitting}>
         <SummaryField
           label={translate('Client organization')}
           value={props.params.customer_name}

@@ -26,11 +26,7 @@ const MarkAsPaidDialogContainer: FunctionComponent<any> = (props) => (
       }
     >
       <div style={{ paddingBottom: '95px' }}>
-        <FormContainer
-          submitting={props.submitting}
-          labelClass="col-sm-2"
-          controlClass="col-sm-8"
-        >
+        <FormContainer submitting={props.submitting}>
           <DateField name="date" label={translate('Date')} />
 
           <FileUploadField

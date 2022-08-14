@@ -4,7 +4,7 @@ import { FieldArray, FormSection } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField, StringField } from '@waldur/form';
-import { FormFieldsContext, FormLayoutContext } from '@waldur/form/context';
+import { FormFieldsContext } from '@waldur/form/context';
 import { StaticField } from '@waldur/form/StaticField';
 import { translate } from '@waldur/i18n';
 import { Option } from '@waldur/marketplace/common/registry';
@@ -31,17 +31,11 @@ export interface ManagementStepProps {
 export const ManagementStep: FunctionComponent<ManagementStepProps> = (
   props,
 ) => {
-  const { layout } = useContext(FormLayoutContext);
   const { readOnlyFields } = useContext(FormFieldsContext);
   const ContainerProps = {
     submitting: false,
-    labelClass: layout === 'vertical' ? '' : 'col-sm-2',
-    controlClass: layout === 'vertical' ? '' : 'col-sm-8',
     clearOnUnmount: false,
-    layout,
   };
-  const serviceSettingWrapperClass =
-    layout === 'vertical' ? '' : 'col-sm-8 offset-sm-2';
   return (
     <>
       <FormContainer {...ContainerProps}>
@@ -72,11 +66,9 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
         props.typeLabel &&
         props.allowToUpdateService ? (
         <Form.Group>
-          <div className={serviceSettingWrapperClass}>
-            <Button onClick={props.openServiceSettingsDetails}>
-              {translate('Update service settings')}
-            </Button>
-          </div>
+          <Button onClick={props.openServiceSettingsDetails}>
+            {translate('Update service settings')}
+          </Button>
         </Form.Group>
       ) : null}
       {props.schedulable && (
@@ -86,7 +78,6 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
         <FieldArray
           name="options"
           component={OfferingOptions}
-          layout={layout}
           readOnly={readOnlyFields.includes('options')}
         />
       )}

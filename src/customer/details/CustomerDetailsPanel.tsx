@@ -128,11 +128,7 @@ export const CustomerDetailsPanel = enhance((props) => {
       </Card.Header>
       <Card.Body>
         <form onSubmit={props.handleSubmit(updateCustomer)}>
-          <FormContainer
-            submitting={props.submitting}
-            labelClass="col-sm-3 col-md-4"
-            controlClass="col-sm-9 col-md-8"
-          >
+          <FormContainer submitting={props.submitting} floating={true}>
             <StringField name="name" label={translate('Name')} />
 
             {nativeNameVisible ? (
@@ -199,8 +195,8 @@ export const CustomerDetailsPanel = enhance((props) => {
             ) : null}
 
             <Field
-              label={translate('Country')}
               name="country"
+              floating={false}
               component={WindowedSelectField}
               components={{ Option, SingleValue }}
               placeholder={translate('Select country...')}

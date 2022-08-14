@@ -3,7 +3,7 @@ import { StringField, FormContainer, SecretField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 
 export const CredentialsTab = () => (
-  <FormContainer submitting={false} layout="vertical" clearOnUnmount={false}>
+  <FormContainer submitting={false} clearOnUnmount={false}>
     <StringField
       name="api_url"
       label={translate('Remote Waldur API URL')}

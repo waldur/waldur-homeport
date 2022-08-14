@@ -26,7 +26,7 @@ export const HookForm: React.FC<OwnProps> = ({ isNew, eventGroups }) => {
     selector(state, 'hook_type'),
   );
   return (
-    <FormContainer layout="vertical" submitting={false}>
+    <FormContainer submitting={false}>
       {isNew ? (
         <Field
           name="hook_type"
@@ -59,18 +59,16 @@ export const HookForm: React.FC<OwnProps> = ({ isNew, eventGroups }) => {
           name="email"
           component={StringField}
           type="email"
-          placeholder={translate('Email address')}
+          label={translate('Email address')}
           validate={required}
-          hideLabel={true}
         />
       ) : hookType == 'webhook' ? (
         <Field
           name="destination_url"
           component={StringField}
           type="url"
-          placeholder={translate('Destination URL')}
+          label={translate('Destination URL')}
           validate={required}
-          hideLabel={true}
         />
       ) : null}
 

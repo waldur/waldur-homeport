@@ -45,6 +45,7 @@ export const CountryGroup: FunctionComponent = () => {
     <InputGroup
       name="country"
       label={translate('Country')}
+      floating={false}
       component={({ input: { value, onChange } }) => (
         <WindowedSelect
           value={value}

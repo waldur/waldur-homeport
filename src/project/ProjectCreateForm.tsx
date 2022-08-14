@@ -71,11 +71,7 @@ export const ProjectCreateForm = reduxForm<
 
   return (
     <form onSubmit={props.handleSubmit(props.onSubmit)}>
-      <FormContainer
-        submitting={props.submitting}
-        labelClass="col-sm-3"
-        controlClass="col-sm-5"
-      >
+      <FormContainer submitting={props.submitting}>
         {ProjectNameField({ customer })}
         <TextField
           label={translate('Project description')}
@@ -84,6 +80,7 @@ export const ProjectCreateForm = reduxForm<
         />
         {showCode ? (
           <SelectField
+            floating={false}
             label={translate('OECD FoS code')}
             help_text={translate(
               'Please select OECD code corresponding to field of science and technology',

@@ -48,12 +48,7 @@ const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
           </>
         }
       >
-        <FormContainer
-          submitting={false}
-          labelClass="col-sm-2"
-          controlClass="col-sm-8"
-          clearOnUnmount={false}
-        >
+        <FormContainer submitting={false} clearOnUnmount={false}>
           <StringField
             name="name"
             label={translate('Name')}

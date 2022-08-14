@@ -27,11 +27,7 @@ const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
     onSubmit={props.handleSubmit(props.submitRequest)}
     style={{ marginTop: '20px' }}
   >
-    <FormContainer
-      submitting={props.submitting}
-      labelClass="col-sm-2"
-      controlClass="col-sm-8"
-    >
+    <FormContainer submitting={props.submitting}>
       <StringField
         name="name"
         label={translate('Name')}

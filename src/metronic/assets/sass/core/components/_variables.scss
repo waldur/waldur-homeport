@@ -736,7 +736,7 @@ $input-border-radius-lg: $btn-border-radius-lg !default;
 $input-focus-border-color: $gray-400 !default;
 $input-focus-color: $input-color !default;
 
-$form-floating-height: add(3.75rem, $input-height-border) !default;
+$form-floating-height: calc(3.75rem + $input-height-border) !default;
 $form-floating-input-padding-t: 2.15rem !default;
 
 $form-check-input-width: 1.75rem !default;

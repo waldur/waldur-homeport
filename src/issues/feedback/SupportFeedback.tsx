@@ -40,11 +40,7 @@ const SupportFeedbackContainer = (props) => {
         onSubmit={props.handleSubmit(submitRequest)}
         className="center-vertically"
       >
-        <FormContainer
-          submitting={props.submitting}
-          labelClass="col-sm-2"
-          controlClass="col-sm-8"
-        >
+        <FormContainer submitting={props.submitting}>
           <Field
             name="evaluation"
             label={translate('Evaluation')}
@@ -69,10 +65,7 @@ const SupportFeedbackContainer = (props) => {
           />
 
           <Form.Group>
-            <div
-              className="col-sm-8 offset-sm-2"
-              style={{ display: 'flex', justifyContent: 'flex-end' }}
-            >
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <SubmitButton
                 disabled={props.invalid}
                 submitting={props.submitting}

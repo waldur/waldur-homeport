@@ -21,22 +21,23 @@ export const InputGroup: FunctionComponent<InputGroupProps> = ({
   type,
   helpText,
 }) => (
-  <Form.Group>
-    <Form.Label>
-      {label}
-      {required && <span className="text-danger">*</span>}
-    </Form.Label>
+  <div className="form-floating mb-7">
     <Field
       name={name}
       component={InputField}
       required={required}
       disabled={disabled}
       type={type}
+      placeholder="  "
     />
+    <Form.Label>
+      {label}
+      {required && <span className="text-danger">*</span>}
+    </Form.Label>
     {helpText && (
       <Form.Text muted={true} className="m-b-n-xs">
         {helpText}
       </Form.Text>
     )}
-  </Form.Group>
+  </div>
 );

@@ -1,11 +1,10 @@
-import { FunctionComponent, useContext } from 'react';
+import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { FormFieldsContext, FormLayoutContext } from '@waldur/form/context';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
@@ -93,14 +92,8 @@ interface OptionFormProps {
 }
 
 export const OptionForm = connector((props: OptionFormProps) => {
-  const { layout } = useContext(FormLayoutContext);
-  const fieldsClassNames = {
-    labelClassName: layout === 'vertical' ? '' : undefined,
-    valueClassName: layout === 'vertical' ? '' : undefined,
-    classNameWithoutLabel: layout === 'vertical' ? '' : undefined,
-  };
   return (
-    <FormFieldsContext.Provider value={fieldsClassNames}>
+    <>
       <InternalNameField
         name={`${props.option}.name`}
         readOnly={props.readOnly}
@@ -152,6 +145,6 @@ export const OptionForm = connector((props: OptionFormProps) => {
       <FormGroup>
         <RequiredField option={props.option} readOnly={props.readOnly} />
       </FormGroup>
-    </FormFieldsContext.Provider>
+    </>
   );
 });

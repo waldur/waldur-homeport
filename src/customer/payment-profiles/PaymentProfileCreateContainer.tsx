@@ -33,12 +33,7 @@ const PaymentProfileCreate = (props) => {
 
   return (
     <form onSubmit={props.handleSubmit(props.submitRequest)}>
-      <FormContainer
-        submitting={false}
-        labelClass="col-sm-2"
-        controlClass="col-sm-8"
-        clearOnUnmount={false}
-      >
+      <FormContainer submitting={false} clearOnUnmount={false}>
         <StringField
           name="name"
           label={translate('Name')}
@@ -48,6 +43,7 @@ const PaymentProfileCreate = (props) => {
         />
 
         <SelectField
+          floating={false}
           name="payment_type"
           label={translate('Type')}
           required={true}

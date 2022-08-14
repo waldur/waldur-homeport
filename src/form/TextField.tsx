@@ -7,6 +7,7 @@ interface TextFieldProps extends FormField {
   maxLength?: number;
   placeholder?: string;
   rows?: number;
+  style?;
 }
 
 export const TextField: FunctionComponent<TextFieldProps> = (props) => {
@@ -16,6 +17,8 @@ export const TextField: FunctionComponent<TextFieldProps> = (props) => {
     <Form.Control
       as="textarea"
       className="form-control-solid"
+      style={props.style}
+      placeholder="  "
       {...props.input}
       rows={rows ? rows : 5}
       {...rest}

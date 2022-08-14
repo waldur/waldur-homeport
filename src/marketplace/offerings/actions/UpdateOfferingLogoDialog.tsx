@@ -38,11 +38,7 @@ export const PureUpdateOfferingLogoDialog: FunctionComponent<any> = (props) => (
           alt={translate('Logo here')}
         />
       )}
-      <FormContainer
-        submitting={props.submitting}
-        labelClass="col-sm-2"
-        controlClass="col-sm-8"
-      >
+      <FormContainer submitting={props.submitting}>
         <ImageUploadField
           name="images"
           label={translate('Image: ')}

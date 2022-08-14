@@ -3,6 +3,8 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useToggle } from 'react-use';
 
+import { translate } from '@waldur/i18n';
+
 import { FormField } from './types';
 
 import './SecretField.scss';
@@ -33,7 +35,7 @@ export const SecretField: React.FC<SecretFieldProps> = (props) => {
       />
       <a
         className={iconClass}
-        title={showSecret ? 'Hide' : 'Show'}
+        title={showSecret ? translate('Hide') : translate('Show')}
         onClick={onToggle}
       />
     </div>

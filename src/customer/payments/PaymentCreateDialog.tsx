@@ -32,12 +32,7 @@ const PaymentCreateDialog: FunctionComponent<any> = (props) => (
       }
     >
       <div style={{ paddingBottom: '50px' }}>
-        <FormContainer
-          submitting={false}
-          labelClass="col-sm-2"
-          controlClass="col-sm-8"
-          clearOnUnmount={false}
-        >
+        <FormContainer submitting={false} clearOnUnmount={false}>
           <DateField
             name="date_of_payment"
             label={translate('Date')}

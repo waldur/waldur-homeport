@@ -98,7 +98,6 @@ error has been renamed to header-error due to conflict with error class in compo
 }
 
 .wizard > .content {
-  background: #eee;
   display: block;
   margin: 5px 5px 10px 5px;
   min-height: 120px;

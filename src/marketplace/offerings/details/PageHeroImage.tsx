@@ -48,11 +48,7 @@ export const PageHeroImage = connect<{}, {}, { offering }>((_, props) => ({
           <Modal.Body>
             <Row>
               <Col lg={12}>
-                <FormContainer
-                  submitting={submitting}
-                  labelClass="col-lg-12"
-                  controlClass="col-lg-12"
-                >
+                <FormContainer submitting={submitting}>
                   <ImageUploadField
                     name="images"
                     label={translate('Image: ')}

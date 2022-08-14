@@ -58,6 +58,9 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
       if (formData.country) {
         payload.country = formData.country.value;
       }
+      if (formData.division) {
+        payload.division = formData.division.value;
+      }
 
       try {
         const response = await sendForm<Customer>(

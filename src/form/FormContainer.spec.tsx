@@ -75,14 +75,4 @@ describe('FormContainer', () => {
     const actual = getDescriptions(wrapper).first();
     expect(actual.text()).toBe(description);
   });
-
-  it('renders label class for each form group if provided', () => {
-    const wrapper = renderTestForm({ labelClass: 'col-sm-3' });
-    expect(wrapper.find('label.col-sm-3').length).toBe(2);
-  });
-
-  it('renders control class for each form group if provided', () => {
-    const wrapper = renderTestForm({ controlClass: 'col-sm-5' });
-    expect(wrapper.find('div.col-sm-5').length).toBe(2);
-  });
 });

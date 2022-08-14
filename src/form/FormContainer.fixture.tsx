@@ -7,21 +7,10 @@ import { mountTestForm } from './testUtils';
 import { TextField } from './TextField';
 
 export const Component = (options) => (props) => {
-  const {
-    submitting,
-    required,
-    onSubmit,
-    description,
-    labelClass,
-    controlClass,
-  } = options;
+  const { submitting, required, onSubmit, description } = options;
   return (
     <form onSubmit={onSubmit && props.handleSubmit(onSubmit)}>
-      <FormContainer
-        submitting={submitting}
-        labelClass={labelClass}
-        controlClass={controlClass}
-      >
+      <FormContainer submitting={submitting}>
         <StringField name="name" label="Project name" required={required} />
         <TextField
           name="description"

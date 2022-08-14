@@ -54,10 +54,7 @@ export const PageConfirmationMessage = connect<{}, {}, { offering }>(
           <Modal.Body>
             <Row>
               <Col lg={12}>
-                <EditConfirmationMessageFormContainer
-                  submitting={submitting}
-                  layout="vertical"
-                />
+                <EditConfirmationMessageFormContainer submitting={submitting} />
               </Col>
             </Row>
           </Modal.Body>

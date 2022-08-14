@@ -26,7 +26,7 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => {
       getAllOrganizationDivisions().then((items) => {
         return items.map((item) => ({
           name: item.name,
-          value: item.uuid,
+          value: item.url,
         }));
       }),
     [],
@@ -62,6 +62,7 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => {
               {isFeatureVisible('customer.show_domain') && <DomainGroup />}
               <InputGroup
                 name="division"
+                floating={false}
                 component={SelectField}
                 label={translate('Division')}
                 required={true}
@@ -93,7 +94,6 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => {
                 component={ImageField}
                 type="file"
                 label={translate('Logo')}
-                className="mt-6"
               />
             </>
           )}

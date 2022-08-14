@@ -71,7 +71,6 @@ export const PagePolicies = connect<{}, {}, { offering }>((_, props) => ({
                   <SetAccessPolicyFormContainer
                     divisions={divisions}
                     submitting={submitting}
-                    layout="vertical"
                   />
                 )}
               </Col>

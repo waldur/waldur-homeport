@@ -8,16 +8,11 @@ import { Division } from '@waldur/marketplace/types';
 interface SetAccessPolicyFormContainerProps {
   divisions: Division[];
   submitting: boolean;
-  layout?: 'horizontal' | 'vertical';
 }
 
 export const SetAccessPolicyFormContainer: FunctionComponent<SetAccessPolicyFormContainerProps> =
-  ({ divisions, submitting, layout }) => (
-    <FormContainer
-      submitting={submitting}
-      labelClass={layout === 'vertical' ? '' : 'col-sm-2'}
-      controlClass={layout === 'vertical' ? 'col-sm-12' : 'col-sm-8'}
-    >
+  ({ divisions, submitting }) => (
+    <FormContainer submitting={submitting}>
       {divisions.map((division) => (
         <Field
           key={division.uuid}
@@ -29,7 +24,3 @@ export const SetAccessPolicyFormContainer: FunctionComponent<SetAccessPolicyForm
       ))}
     </FormContainer>
   );
-
-SetAccessPolicyFormContainer.defaultProps = {
-  layout: 'horizontal',
-};

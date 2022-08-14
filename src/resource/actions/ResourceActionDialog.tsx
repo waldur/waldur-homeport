@@ -50,7 +50,6 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
         onSubmit={handleSubmit(submitForm)}
         submitting={submitting}
         invalid={invalid}
-        layout="vertical"
       >
         {loading ? (
           <LoadingSpinner />

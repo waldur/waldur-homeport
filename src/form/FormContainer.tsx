@@ -6,9 +6,7 @@ import { FormGroup } from './FormGroup';
 export interface FormContainerProps {
   submitting: boolean;
   clearOnUnmount?: boolean;
-  labelClass?: string;
-  controlClass?: string;
-  layout?: 'horizontal' | 'vertical';
+  floating?: boolean;
 }
 
 export const FormContainer: React.FC<FormContainerProps> = (props) => (
@@ -16,13 +14,11 @@ export const FormContainer: React.FC<FormContainerProps> = (props) => (
     {React.Children.map(props.children, (input: any) =>
       input && input.props && input.props.name ? (
         <Field
+          floating={props.floating}
           {...input.props}
           component={FormGroup}
           disabled={props.submitting || input.props.disabled}
-          labelClass={props.labelClass}
-          controlClass={props.controlClass}
           clearOnUnmount={props.clearOnUnmount}
-          layout={props.layout}
           validate={input.props.validate}
         >
           {input}
@@ -33,7 +29,3 @@ export const FormContainer: React.FC<FormContainerProps> = (props) => (
     )}
   </div>
 );
-
-FormContainer.defaultProps = {
-  layout: 'horizontal',
-};
