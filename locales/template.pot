@@ -1620,6 +1620,10 @@ msgstr ""
 msgid "Confirming that data is correct"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+msgid "Connect instance directly to external network"
+msgstr ""
+
 #: src/openstack/openstack-subnet/ConnectSubnetAction.tsx
 msgid "Connect subnet"
 msgstr ""
@@ -2904,6 +2908,10 @@ msgstr ""
 
 #: src/navigation/header/ExternalLinks.tsx
 msgid "External links"
+msgstr ""
+
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+msgid "External network"
 msgstr ""
 
 #: src/openstack/OpenStackForm.tsx

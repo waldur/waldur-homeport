@@ -89,6 +89,7 @@ const serializer = ({
   security_groups,
   server_group,
   availability_zone,
+  connect_directly_to_external_network,
 }) => ({
   name,
   description,
@@ -105,6 +106,7 @@ const serializer = ({
   system_volume_type: system_volume_type && system_volume_type.value,
   data_volume_type: data_volume_type && data_volume_type.value,
   availability_zone,
+  connect_directly_to_external_network: connect_directly_to_external_network,
 });
 
 const formValidator = (props) => {
