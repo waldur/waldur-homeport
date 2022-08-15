@@ -85,6 +85,7 @@ interface OpenStackConfiguration {
 interface OpenStackTenantConfiguration {
   ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS: boolean;
   REQUIRE_AVAILABILITY_ZONE: boolean;
+  ALLOW_DIRECT_EXTERNAL_NETWORK_CONNECTION: boolean;
 }
 
 interface MarketplaceOpenStackTenantConfiguration {

@@ -2,10 +2,11 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { TextField, StringField } from '@waldur/form';
+import { TextField, StringField, AwesomeCheckboxField } from '@waldur/form';
 import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
 import { translate, TranslateProps } from '@waldur/i18n';
 import { getUser } from '@waldur/issues/comments/selectors';
@@ -66,6 +67,7 @@ interface OpenstackInstanceCreateFormState {
   availabilityZones: AvailabilityZone[];
   volumeTypes: any[];
   isDataVolumeActive: boolean;
+  connect_directly_to_external_network: boolean;
 }
 
 interface OpenstackInstanceCreateFormComponentProps {
@@ -96,6 +98,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
     availabilityZones: [],
     volumeTypes: [],
     isDataVolumeActive: false,
+    connect_directly_to_external_network: false,
   };
 
   async loadData() {
@@ -144,6 +147,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
         const server_group = serverGroups.find(
           (s) => s.url === initial.server_group,
         );
+        const connect_directly_to_external_network = false;
         const availability_zone =
           initial.availability_zone &&
           availabilityZones.find((s) => s.url === initial.availability_zone);
@@ -189,6 +193,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
           networks,
           system_volume_type,
           data_volume_type,
+          connect_directly_to_external_network,
         };
         this.props.initialize({ attributes, project: this.props.project });
       } else {
@@ -329,6 +334,23 @@ export class OpenstackInstanceCreateFormComponent extends Component<
             )}
           />
         </CreateResourceFormGroup>
+        {ENV.plugins.WALDUR_OPENSTACK_TENANT
+          .ALLOW_DIRECT_EXTERNAL_NETWORK_CONNECTION ? (
+          <CreateResourceFormGroup label={translate('External network')}>
+            <Field
+              name="attributes.connect_directly_to_external_network"
+              component={(fieldProps) => (
+                <AwesomeCheckboxField
+                  label={translate(
+                    'Connect instance directly to external network',
+                  )}
+                  {...fieldProps.input}
+                />
+              )}
+              hideLabel={true}
+            />
+          </CreateResourceFormGroup>
+        ) : null}
         <CreateResourceFormGroup label={translate('Description')}>
           <Field
             name="attributes.description"
