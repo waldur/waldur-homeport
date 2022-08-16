@@ -52,9 +52,7 @@ export const ProjectsPanel: FunctionComponent<{
       className={classNames({ disabled: isDisabled }, 'project-listing')}
     >
       <div className="py-1 px-4 border-gray-300 border-bottom">
-        <span className="fw-bold fs-7 text-decoration-underline text-muted">
-          {translate('Project')}
-        </span>
+        <span className="fw-bold fs-7 text-muted">{translate('Project')}</span>
       </div>
       {projects?.length > 0 ? (
         <BaseList

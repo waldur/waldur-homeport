@@ -10,5 +10,11 @@ export const AdminMenu = () => {
   if (!visible) {
     return null;
   }
-  return <MenuItem title={translate('Administration')} state="support.users" />;
+  return (
+    <MenuItem
+      title={translate('Administration')}
+      state="support.users"
+      child={false}
+    />
+  );
 };

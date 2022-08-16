@@ -54,27 +54,25 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
   const titleTooltip = getTitleTooltip(isWide, customer, project);
 
   return (
-    <>
+    <div className="aside-footer flex-column-auto p-5" id="kt_aside_footer">
       <Button
-        variant="secondary"
-        size="sm"
-        className="text-nowrap min-w-125px me-4"
-        data-cy="quick-project-selector-toggle"
+        variant="primary"
+        className="btn-custom w-100 btn-marketplace"
         data-kt-menu-trigger="click"
-        data-kt-menu-attach="parent"
+        data-kt-menu-attach=".page .header"
         data-kt-menu-placement="bottom-start"
         data-kt-menu-flip="bottom"
       >
-        {wrapTooltip(
-          titleTooltip,
-          <span id="select-workspace-title">{title || 'N/A'}</span>,
-          { placement: 'bottom' },
-        )}
-        <span className="svg-icon svg-icon-1 ms-2">
-          <i className="fa fa-caret-down lh-base" />
+        <span className="btn-label">
+          {wrapTooltip(
+            titleTooltip,
+            <span id="select-workspace-title">{title || 'N/A'}</span>,
+            { placement: 'bottom' },
+          )}
+          <i className="fa fa-angle-right"></i>
         </span>
       </Button>
       <QuickProjectSelectorDropdown />
-    </>
+    </div>
   );
 };

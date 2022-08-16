@@ -10,5 +10,11 @@ export const SupportMenu = () => {
   if (!visible) {
     return null;
   }
-  return <MenuItem title={translate('Support')} state="support.broadcast" />;
+  return (
+    <MenuItem
+      title={translate('Support')}
+      state="support.broadcast"
+      child={false}
+    />
+  );
 };

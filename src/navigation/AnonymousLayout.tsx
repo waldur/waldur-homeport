@@ -10,8 +10,8 @@ import { wrapTooltip } from '@waldur/table/ActionButton';
 
 import { LayoutContext, LayoutContextInterface } from './context';
 import { CookiesConsent } from './cookies/CookiesConsent';
-import { TabsList } from './Layout';
 import { SiteSidebar } from './sidebar/SiteSidebar';
+import { TabsList } from './TabsList';
 
 export const AnonymousLayout: FunctionComponent = () => {
   const { state } = useCurrentStateAndParams();
