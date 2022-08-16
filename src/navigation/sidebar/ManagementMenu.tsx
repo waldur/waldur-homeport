@@ -8,16 +8,15 @@ import {
   getUser,
 } from '@waldur/workspace/selectors';
 
+import { MenuAccordion } from './MenuAccordion';
 import { MenuItem } from './MenuItem';
-import { MenuSection } from './MenuSection';
 
 export const ManagementMenu = () => {
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
   const user = useSelector(getUser);
   return (
-    <>
-      <MenuSection title={translate('Management')} />
+    <MenuAccordion title={translate('Management')}>
       {customer ? (
         <MenuItem
           title={translate('Organization')}
@@ -46,11 +45,6 @@ export const ManagementMenu = () => {
           params={{ uuid: customer.uuid }}
         />
       )}
-      <div className="menu-item">
-        <div className="menu-content">
-          <div className="separator mx-1 my-4"></div>
-        </div>
-      </div>
-    </>
+    </MenuAccordion>
   );
 };

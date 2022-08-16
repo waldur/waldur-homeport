@@ -149,7 +149,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
           <Button
             variant="link"
             size="sm"
-            className="text-decoration-underline text-dark mx-4 mt-4"
+            className="text-dark mx-4 mt-4"
             onClick={changeWorkspace}
           >
             {translate('View all')}

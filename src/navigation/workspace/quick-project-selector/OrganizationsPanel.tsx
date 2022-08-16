@@ -94,7 +94,7 @@ export const OrganizationsPanel: FunctionComponent<{
   return (
     <Col className="organization-listing" xs={5}>
       <div className="py-1 px-4 border-gray-300 border-bottom">
-        <span className="fw-bold fs-7 text-decoration-underline text-muted">
+        <span className="fw-bold fs-7 text-muted">
           {translate('Organization')}
         </span>
       </div>

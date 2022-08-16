@@ -8,8 +8,9 @@ import {
   ToggleComponent,
 } from '@waldur/metronic/assets/ts/components';
 
+import { QuickProjectSelectorToggle } from '../workspace/quick-project-selector/QuickProjectSelectorToggle';
+
 import { BrandName } from './BrandName';
-import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
 import { SidebarFooter } from './SidebarFooter';
 
 export const Sidebar: React.FC = (props) => {
@@ -34,7 +35,8 @@ export const Sidebar: React.FC = (props) => {
       data-kt-drawer-toggle="#kt_aside_mobile_toggle"
     >
       <BrandName />
-      <MarketplaceTrigger />
+      <QuickProjectSelectorToggle />
+
       <div className="aside-menu flex-column-fluid">
         <div
           className="hover-scroll-overlay-y my-5 my-lg-5"
