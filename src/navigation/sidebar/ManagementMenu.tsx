@@ -16,7 +16,7 @@ export const ManagementMenu = () => {
   const project = useSelector(getProject);
   const user = useSelector(getUser);
   return (
-    <MenuAccordion title={translate('Management')}>
+    <MenuAccordion title={translate('Management')} itemId="management-menu">
       {customer ? (
         <MenuItem
           title={translate('Organization')}
