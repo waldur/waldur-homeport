@@ -118,7 +118,7 @@ export const ResourcesMenu = ({ anonymous }) => {
   }, [categories, preferredCounters]);
 
   return categories ? (
-    <MenuAccordion title={translate('Resources')}>
+    <MenuAccordion title={translate('Resources')} itemId="resources-menu">
       {project && (
         <MenuItem
           title={translate('All resources')}
