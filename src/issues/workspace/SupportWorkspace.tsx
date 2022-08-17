@@ -1,9 +1,8 @@
-import { useMemo, FunctionComponent } from 'react';
+import { useMemo } from 'react';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { getReportingItems } from '@waldur/issues/workspace/IssueNavigationService';
 import { useTabs } from '@waldur/navigation/context';
-import { Layout } from '@waldur/navigation/Layout';
 
 export function useReportingTabs() {
   const tabs = useMemo(
@@ -18,7 +17,3 @@ export function useReportingTabs() {
   );
   useTabs(tabs);
 }
-
-export const SupportWorkspace: FunctionComponent = () => {
-  return <Layout />;
-};

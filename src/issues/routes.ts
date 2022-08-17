@@ -1,5 +1,6 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { Layout } from '@waldur/navigation/Layout';
 import { SUPPORT_WORKSPACE } from '@waldur/workspace/types';
 
 import { checkPermission } from './utils';
@@ -120,13 +121,6 @@ const IssuesHelpdesk = lazyComponent(
     ),
   'IssuesHelpdesk',
 );
-const SupportWorkspace = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SupportWorkspace" */ './workspace/SupportWorkspace'
-    ),
-  'SupportWorkspace',
-);
 const FeaturesList = lazyComponent(
   () =>
     import(/* webpackChunkName: "FeaturesList" */ './workspace/FeaturesList'),
@@ -137,7 +131,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support',
     url: '/support/',
-    component: SupportWorkspace,
+    component: Layout,
     abstract: true,
     data: {
       auth: true,
