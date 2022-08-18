@@ -10,7 +10,6 @@ import {
   getOffering,
   getOrderItemList,
 } from '@waldur/marketplace/common/api';
-import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { SupportDetails } from './SupportDetails';
@@ -60,8 +59,6 @@ export const SupportDetailsContainer: FunctionComponent = () => {
       router.stateService.go('errorPage.notFound');
     }
   }, [error, router.stateService]);
-
-  useSidebarKey('marketplace-project-resources');
 
   return loading ? (
     <LoadingSpinner />

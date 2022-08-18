@@ -10,7 +10,6 @@ import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
-import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { OrderItemDetails } from './OrderItemDetails';
@@ -74,8 +73,6 @@ export const OrderItemDetailsContainer: React.FC = () => {
       ? asyncValue.orderItem.offering_name
       : translate('Order item details'),
   );
-
-  useSidebarKey('marketplace-services');
 
   // Don't render loading indicator if order item is refreshing
   // since if it is in pending state it is refreshed via periodic polling
