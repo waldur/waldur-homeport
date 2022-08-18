@@ -864,6 +864,7 @@ msgid "Attributes filter"
 msgstr ""
 
 #: src/navigation/navitems.ts
+#: src/project/InvoicesSummary.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -1049,6 +1050,7 @@ msgstr ""
 
 #: src/customer/utils.ts
 #: src/invoices/utils.ts
+#: src/project/ProjectDashboardChart.tsx
 msgid "Billing"
 msgstr ""
 
@@ -2742,6 +2744,10 @@ msgstr ""
 msgid "End date of the agreement is {date}."
 msgstr ""
 
+#: src/project/ProjectProfile.tsx
+msgid "End date:"
+msgstr ""
+
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "End time"
 msgstr ""
@@ -2796,6 +2802,7 @@ msgstr ""
 #: src/invoices/list/EstimatedCost.tsx
 #: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/utils.ts
 msgid "Estimated cost"
 msgstr ""
 
@@ -4234,6 +4241,7 @@ msgid "MTU"
 msgstr ""
 
 #: src/customer/dashboard/CustomerProfile.tsx
+#: src/project/ProjectProfile.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Manage"
 msgstr ""
@@ -5555,10 +5563,6 @@ msgstr ""
 #: src/marketplace/offerings/details/PageOverview.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Overview"
-msgstr ""
-
-#: src/project/ProjectDashboard.tsx
-msgid "Overview of {project} project"
 msgstr ""
 
 #: src/customer/team/CustomerUsersList.tsx
@@ -7462,7 +7466,6 @@ msgstr ""
 #: src/navigation/navitems.ts
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
-#: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
@@ -10163,6 +10166,10 @@ msgstr ""
 msgid "Unable to load user."
 msgstr ""
 
+#: src/project/ProjectProfile.tsx
+msgid "Unable to load users"
+msgstr ""
+
 #: src/auth/saml2/store/effects.ts
 msgid "Unable to login via SAML2 protocol."
 msgstr ""
@@ -11402,7 +11409,6 @@ msgstr ""
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
-#: src/project/ProjectDashboard.tsx
 #: src/user/dashboard/UserWelcome.tsx
 msgid "Welcome, {user}!"
 msgstr ""
@@ -12315,10 +12321,12 @@ msgid "{user} has requested termination of {resource_name} with active plan \"{p
 msgstr ""
 
 #: src/customer/dashboard/api.ts
+#: src/project/utils.ts
 msgid "{value} at {date}"
 msgstr ""
 
 #: src/customer/dashboard/api.ts
+#: src/project/utils.ts
 msgid "{value} at {date}, estimated"
 msgstr ""
 

@@ -53,6 +53,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('Resources')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       showPageSizeSelector={true}
+      hasQuery={true}
     />
   );
 };
