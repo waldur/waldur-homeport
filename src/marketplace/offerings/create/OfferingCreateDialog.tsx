@@ -5,7 +5,6 @@ import { InjectedFormProps } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { STEPS, OfferingStep } from '../types';
@@ -53,7 +52,6 @@ export const OfferingCreateDialog: React.FC<OfferingCreateDialogProps> = (
   props,
 ) => {
   useTitle(translate('Add offering'));
-  useSidebarKey('marketplace-services');
 
   const router = useRouter();
 

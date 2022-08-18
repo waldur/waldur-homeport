@@ -1,13 +1,12 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import equal from 'fast-deep-equal';
-import { useState, useEffect, FunctionComponent, useContext } from 'react';
+import { useState, useEffect, FunctionComponent } from 'react';
 import { useAsyncFn, useEffectOnce, useNetwork } from 'react-use';
 
 import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { useRecursiveTimeout } from '@waldur/core/useRecursiveTimeout';
 import { translate } from '@waldur/i18n';
-import { LayoutContext } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { getResource } from './api';
@@ -44,18 +43,6 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
       setResource(asyncResult.value);
     }
   }, [resource, asyncResult.value]);
-
-  const layoutContext = useContext(LayoutContext);
-  useEffect(() => {
-    if (resource) {
-      layoutContext.setSidebarKey(
-        `marketplace_category_${resource.marketplace_category_uuid}`,
-      );
-    }
-    return () => {
-      layoutContext.setSidebarKey('');
-    };
-  }, [resource, layoutContext]);
 
   useTitle(resource ? resource.name : translate('Resource details'));
 

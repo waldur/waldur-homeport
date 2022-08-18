@@ -8,7 +8,6 @@ import { translate } from '@waldur/i18n';
 import { OfferingHeader } from '@waldur/marketplace/offerings/details/OfferingHeader';
 import { loadOfferingStart } from '@waldur/marketplace/offerings/store/actions';
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
-import { useSidebarKey } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 
@@ -39,8 +38,6 @@ export const ImagesContainer: FunctionComponent = () => {
         })
       : translate('Offering images'),
   );
-
-  useSidebarKey('marketplace-services');
 
   if (!offering) {
     return <LoadingSpinner />;
