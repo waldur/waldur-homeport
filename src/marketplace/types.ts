@@ -195,6 +195,7 @@ export interface Category {
   sections?: Section[];
   columns?: CategoryColumn[];
   components?: BaseComponent[];
+  description?: string;
 }
 
 export interface CategoryComponentUsage {

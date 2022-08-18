@@ -1077,7 +1077,6 @@ msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
-#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
 msgid "Book"
 msgstr ""
 
@@ -1260,6 +1259,7 @@ msgid "Catalogues"
 msgstr ""
 
 #: src/marketplace/category/ShopCategories.tsx
+#: src/marketplace/offerings/service-providers/ServiceProviderPageBar.tsx
 msgid "Categories"
 msgstr ""
 
@@ -2225,6 +2225,7 @@ msgid "Deletion"
 msgstr ""
 
 #: src/marketplace/landing/OfferingCardButtonsOverlay.tsx
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "Deploy"
 msgstr ""
 
@@ -2430,6 +2431,7 @@ msgid "Division type"
 msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterDivision.tsx
+#: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
 msgid "Divisions"
 msgstr ""
 
@@ -6706,7 +6708,6 @@ msgstr ""
 #: src/marketplace/cart/ForwardButton.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
-#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
 msgid "Purchase"
 msgstr ""
 
@@ -7240,6 +7241,7 @@ msgstr ""
 
 #: src/marketplace/common/OfferingCard.tsx
 #: src/marketplace/landing/OfferingCard.tsx
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
 msgid "Requesting of new resources has been temporarily paused"
 msgstr ""
 
@@ -9316,6 +9318,10 @@ msgstr ""
 msgid "There is no activity yet."
 msgstr ""
 
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
+msgid "There is no description"
+msgstr ""
+
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 msgid "Third"
 msgstr ""
@@ -9912,6 +9918,7 @@ msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/landing/CategoriesList.tsx
+#: src/marketplace/offerings/service-providers/ServiceProvider.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderOfferingsCategoriesFilter.tsx
 #: src/user/dashboard/CategoriesList.tsx
 #: src/user/dashboard/CategoryUserList.tsx
@@ -9923,6 +9930,7 @@ msgid "Unable to load category details"
 msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterList.tsx
+#: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
 #: src/marketplace/offerings/service-providers/FilterDropdownContent.tsx
 msgid "Unable to load category sections."
 msgstr ""
@@ -11304,6 +11312,7 @@ msgid "View all"
 msgstr ""
 
 #: src/marketplace/landing/OfferingCardButtonsOverlay.tsx
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "View item"
 msgstr ""
 
