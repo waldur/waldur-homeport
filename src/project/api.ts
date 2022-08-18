@@ -8,7 +8,10 @@ import {
   sendForm,
 } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
+import { Event } from '@waldur/events/types';
 import { Customer, Project } from '@waldur/workspace/types';
+
+import { InvoiceCostSummary, ProjectTeamUser } from './types';
 
 export const getProject = (projectId: string) =>
   getById<Project>('/projects/', projectId);
@@ -95,3 +98,23 @@ export const dangerouslyUpdateCustomer = (customer, project) => {
     item.description = project.description;
   }
 };
+
+export const fetchLatestEvents = (project: Project, size: number) =>
+  getList<Event>('/events/', {
+    page: 1,
+    page_size: size,
+    scope: project.url,
+    field: ['uuid', 'created', 'event_type', 'message'],
+  });
+
+export const fetchAllProjectUsers = (projectId: string) =>
+  getList<ProjectTeamUser>(`/projects/${projectId}/users/`, {
+    field: ['uuid', 'full_name', 'email', 'role'],
+  });
+
+export const fetchLast12MonthProjectCosts = (projectId: string) =>
+  getList<InvoiceCostSummary>('/invoice-items/costs/', {
+    project_uuid: projectId,
+    page: 1,
+    page_size: 12,
+  });

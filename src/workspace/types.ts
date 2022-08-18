@@ -108,6 +108,8 @@ export interface Project {
   customer_abbreviation?: string;
   backend_id?: string;
   image?: string;
+  oecd_fos_2007_code?: string;
+  type?: string;
 }
 
 export type PhoneNumber =

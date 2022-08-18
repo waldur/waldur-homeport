@@ -2,22 +2,18 @@ import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { Panel } from '@waldur/core/Panel';
-import { CustomerBookingManagement } from '@waldur/customer/dashboard/CustomerBookingManagement';
-import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
-import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { translate } from '@waldur/i18n';
-import { ComplianceChecklists } from '@waldur/marketplace-checklist/ComplianceChecklists';
 import { useTitle } from '@waldur/navigation/title';
 import { ProjectResourcesFilter } from '@waldur/project/ProjectResourcesFilter';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
-import { Project, PROJECT_WORKSPACE, User } from '@waldur/workspace/types';
+import { Project, User } from '@waldur/workspace/types';
 
 import { useProjectItems } from '../navigation/navitems';
 
-import { ProjectActions } from './ProjectActions';
-import { ProjectCounters } from './ProjectCounters';
+import { InvoicesSummary } from './InvoicesSummary';
+import { ProjectDashboardChart } from './ProjectDashboardChart';
+import { ProjectProfile } from './ProjectProfile';
 import { ProjectResourcesList } from './ProjectResourcesList';
 
 interface ProjectDashboardProps {
@@ -42,29 +38,18 @@ export const ProjectDashboard: FunctionComponent<ProjectDashboardProps> = (
   }
   return (
     <>
-      <DashboardHeader
-        title={translate('Welcome, {user}!', { user: props.user.full_name })}
-        subtitle={translate('Overview of {project} project', {
-          project: props.project.name,
-        })}
-      />
-      <Row>
-        <Col md={8}>
-          {!shouldConcealPrices && <ProjectCounters project={props.project} />}
-        </Col>
-        <Col md={4}>
-          <ProjectActions {...props} />
-        </Col>
-      </Row>
-      <ComplianceChecklists />
-      <CustomerBookingManagement />
-      <Panel title={translate('Resources')}>
-        <ProjectResourcesList filters={<ProjectResourcesFilter />} />
-      </Panel>
-      <CategoryResourcesList
-        scopeType={PROJECT_WORKSPACE}
-        scope={props.project}
-      />
+      <ProjectProfile project={props.project} />
+      {!shouldConcealPrices && (
+        <Row className="mb-6">
+          <Col md={6} sm={12} className="mb-md-0 mb-sm-6">
+            <ProjectDashboardChart project={props.project} />
+          </Col>
+          <Col md={6} sm={12} className="mb-md-0 mb-sm-6">
+            <InvoicesSummary project={props.project} />
+          </Col>
+        </Row>
+      )}
+      <ProjectResourcesList filters={<ProjectResourcesFilter />} />
     </>
   );
 };
