@@ -10,7 +10,7 @@ import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
 import { getServiceProviderByCustomer } from '@waldur/marketplace/common/api';
 import { ServiceProvider } from '@waldur/marketplace/offerings/service-providers/ServiceProvider';
-import { AnonymousHeader } from '@waldur/navigation/AnonymousHeader';
+import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 import { getCurrentUser } from '@waldur/user/UsersService';
@@ -18,6 +18,7 @@ import { setCurrentUser } from '@waldur/workspace/actions';
 
 export const PublicServiceProviderDetails: FunctionComponent = () => {
   const dispatch = useDispatch();
+  useFullPage();
   useTitle(translate('Service provider'));
   const {
     params: { uuid },
@@ -52,7 +53,6 @@ export const PublicServiceProviderDetails: FunctionComponent = () => {
     <p>{translate('Unable to load the service provider.')}</p>
   ) : serviceProvider ? (
     <>
-      <AnonymousHeader />
       <ServiceProvider
         serviceProvider={serviceProvider}
         refreshServiceProvider={refreshServiceProvider}

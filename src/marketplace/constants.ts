@@ -23,6 +23,6 @@ export const WORKSPACE_LANDING = {
 };
 
 export const ANONYMOUS_LAYOUT_ROUTE_CONFIG = {
-  hideHeader: true,
+  hideHeader: false,
   skipAuth: true,
 };

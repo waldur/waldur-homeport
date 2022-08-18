@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
+import classNames from 'classnames';
 import { FunctionComponent, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 
@@ -16,9 +17,10 @@ import { TabsList } from './TabsList';
 export const AnonymousLayout: FunctionComponent = () => {
   const { state } = useCurrentStateAndParams();
   const [tabs, setTabs] = useState(null);
+  const [fullPage, setFullPage] = useState(false);
   const context = useMemo<Partial<LayoutContextInterface>>(
-    () => ({ tabs, setTabs }),
-    [tabs, setTabs],
+    () => ({ tabs, setTabs, fullPage, setFullPage }),
+    [tabs, setTabs, fullPage, setFullPage],
   );
 
   return (
@@ -28,7 +30,11 @@ export const AnonymousLayout: FunctionComponent = () => {
         <div className="wrapper d-flex flex-column flex-row-fluid">
           <CookiesConsent />
           {!state.data?.hideHeader && <SiteHeader />}
-          <div className="content d-flex flex-column">
+          <div
+            className={classNames('content d-flex flex-column', {
+              'full-page': fullPage,
+            })}
+          >
             <div className="toolbar">
               <div className="container-fluid d-flex flex-stack">
                 <div className="d-flex align-items-stretch scroll-x">
@@ -56,7 +62,7 @@ export const AnonymousLayout: FunctionComponent = () => {
               </div>
             </div>
             <div className="post d-flex flex-column-fluid">
-              <div className="container-xxl">
+              <div className={fullPage ? 'w-100' : 'container-xxl'}>
                 <MasterLayout />
               </div>
             </div>
