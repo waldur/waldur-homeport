@@ -11,20 +11,22 @@ interface SetTitleAction {
   type: typeof SET_TITLE;
   payload: {
     title: string;
+    subtitle: string;
   };
 }
 
-export const setTitle = (title: string): SetTitleAction => ({
+export const setTitle = (title: string, subtitle?: string): SetTitleAction => ({
   type: SET_TITLE,
   payload: {
     title,
+    subtitle,
   },
 });
 
-export const reducer = (state = '', action) => {
+export const reducer = (state = { title: '', subtitle: '' }, action) => {
   switch (action.type) {
     case SET_TITLE:
-      return action.payload.title;
+      return action.payload;
 
     default:
       return state;
@@ -38,14 +40,16 @@ export function* effects() {
   });
 }
 
-export const getTitle = (state: RootState) => state.title;
+export const getTitle = (state: RootState) => state.title.title;
 
-export const useTitle = (title: string) => {
+export const getSubtitle = (state: RootState) => state.title.subtitle;
+
+export const useTitle = (title: string, subtitle?: string) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (!title) {
       return;
     }
-    dispatch(setTitle(title));
-  }, [dispatch, title]);
+    dispatch(setTitle(title, subtitle));
+  }, [dispatch, title, subtitle]);
 };
