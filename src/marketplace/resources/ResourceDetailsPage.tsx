@@ -1,11 +1,12 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { formatResourceType } from '@waldur/resource/utils';
 
 import { getResource } from '../common/api';
 
@@ -26,7 +27,14 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     reInitResource();
   });
 
-  useTitle(state.value ? state.value.name : translate('Resource details'));
+  const resource = state.value;
+
+  const header = useMemo(
+    () => (resource ? formatResourceType(resource) : null),
+    [resource],
+  );
+
+  useTitle(resource ? resource.name : translate('Resource details'), header);
 
   const router = useRouter();
 
@@ -39,11 +47,10 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     return <LoadingSpinner />;
   }
 
-  if (!state.value) {
+  if (!resource) {
     return null;
   }
 
-  const resource = state.value;
   return (
     <Card.Body>
       <Row className="mb-4">

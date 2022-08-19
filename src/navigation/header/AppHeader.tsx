@@ -5,7 +5,7 @@ import 'world-flags-sprite/stylesheets/flags16.css';
 
 import { ENV } from '@waldur/configs/default';
 
-import { getTitle } from '../title';
+import { getTitle, getSubtitle } from '../title';
 
 import { SearchToggle } from './SearchToggle';
 import { UserDropdownMenu } from './UserDropdown';
@@ -41,6 +41,7 @@ const AsideMobileToggle: FunctionComponent = () => (
 
 export const AppHeader: FunctionComponent = () => {
   const pageTitle = useSelector(getTitle);
+  const pageSubtitle = useSelector(getSubtitle);
   return (
     <div className="header align-items-stretch">
       <div className="container-fluid d-flex align-items-stretch justify-content-between">
@@ -58,10 +59,13 @@ export const AppHeader: FunctionComponent = () => {
           </div>
         </div>
         <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
-          <div className="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-            <h1 className="d-flex text-dark fw-bolder fs-3 align-items-center my-1">
-              {pageTitle}
-            </h1>
+          <div className="page-title flex-wrap me-3 mb-5 mt-3 mb-lg-0">
+            <h1 className="text-dark fw-bolder fs-3 my-1">{pageTitle}</h1>
+            {pageSubtitle && (
+              <small className="text-muted text-uppercase">
+                {pageSubtitle}
+              </small>
+            )}
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
             <SearchToggle />

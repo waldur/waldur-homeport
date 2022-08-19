@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import equal from 'fast-deep-equal';
-import { useState, useEffect, FunctionComponent } from 'react';
+import { useState, useEffect, FunctionComponent, useMemo } from 'react';
 import { useAsyncFn, useEffectOnce, useNetwork } from 'react-use';
 
 import { ENV } from '@waldur/configs/default';
@@ -12,6 +12,7 @@ import { useTitle } from '@waldur/navigation/title';
 import { getResource } from './api';
 import { ResourceDetails } from './ResourceDetails';
 import { BaseResource } from './types';
+import { formatResourceType } from './utils';
 
 export const ResourceDetailsContainer: FunctionComponent = () => {
   const { params } = useCurrentStateAndParams();
@@ -44,7 +45,12 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
     }
   }, [resource, asyncResult.value]);
 
-  useTitle(resource ? resource.name : translate('Resource details'));
+  const header = useMemo(
+    () => (resource ? formatResourceType(resource) : null),
+    [resource],
+  );
+
+  useTitle(resource ? resource.name : translate('Resource details'), header);
 
   useEffect(() => {
     if (!asyncResult.error) {
