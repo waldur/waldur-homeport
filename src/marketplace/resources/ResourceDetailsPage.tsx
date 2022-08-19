@@ -30,7 +30,7 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
   const resource = state.value;
 
   const header = useMemo(
-    () => (resource ? formatResourceType(resource) : null),
+    () => (resource?.resource_type ? formatResourceType(resource) : null),
     [resource],
   );
 

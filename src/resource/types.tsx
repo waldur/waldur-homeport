@@ -29,6 +29,7 @@ export interface BaseResource {
   marketplace_category_uuid?: string;
   project_uuid: string;
   quotas?: Quota[];
+  resource_type?: string;
 }
 
 export interface Resource extends BaseResource {
