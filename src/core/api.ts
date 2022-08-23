@@ -91,7 +91,8 @@ export function sendForm<T = {}>(
   const data = new FormData();
   for (const name of Object.keys(options)) {
     if (options[name] !== undefined) {
-      data.append(name, options[name]);
+      const option = options[name] === null ? '' : options[name];
+      data.append(name, option);
     }
   }
   return Axios.request({
