@@ -89,7 +89,7 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
               <Col xs="auto">
                 <div className="buttons">
                   <Link
-                    state="project.settings"
+                    state="project.manage"
                     params={{ uuid: project.uuid }}
                     className="btn btn-light"
                   >
