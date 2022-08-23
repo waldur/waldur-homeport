@@ -5468,6 +5468,10 @@ msgstr ""
 msgid "Organization has signed a fixed price agreement"
 msgstr ""
 
+#: src/customer/details/CustomerDetailsPanel.tsx
+msgid "Organization image"
+msgstr ""
+
 #: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Organization name"

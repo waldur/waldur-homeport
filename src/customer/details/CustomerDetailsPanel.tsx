@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
-import { patch } from '@waldur/core/api';
+import { sendForm } from '@waldur/core/api';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import {
   loadCountries,
@@ -21,6 +21,7 @@ import {
 } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
 import { EmailField } from '@waldur/form/EmailField';
+import { ImageField } from '@waldur/form/ImageField';
 import { WindowedSelect } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -63,6 +64,7 @@ const enhance = compose(
       postal: customer.postal,
       bank_name: customer.bank_name,
       bank_account: customer.bank_account,
+      image: customer.image,
     };
     return { initialValues };
   }),
@@ -103,13 +105,21 @@ export const CustomerDetailsPanel = enhance((props) => {
   const ownerCanManage = useSelector(canManageCustomer);
   const canEditCustomer = user.is_staff || (isOwner && ownerCanManage);
   const { loading, value } = useAsync(loadCountries);
+
   const updateCustomer = (formData) => {
     if (canEditCustomer) {
-      const { country, ...rest } = formData;
-      return patch(`/customers/${customer.uuid}/`, {
-        country: country?.value,
-        ...rest,
-      });
+      const data = { ...formData };
+      if (!data.image) {
+        data.image = '';
+      } else if (!(data.image instanceof File)) {
+        data.image = undefined;
+      }
+
+      return sendForm(
+        'PATCH',
+        `${ENV.apiEndpoint}api/customers/${customer.uuid}/`,
+        { ...data, country: data.country.value },
+      );
     } else {
       dispatch(
         openModalDialog(CustomerErrorDialog, {
@@ -215,6 +225,13 @@ export const CustomerDetailsPanel = enhance((props) => {
             <StringField
               name="bank_account"
               label={translate('Bank account')}
+            />
+
+            <ImageField
+              label={translate('Organization image')}
+              name="image"
+              initialValue={props.initialValues.image}
+              floating={false}
             />
           </FormContainer>
 
