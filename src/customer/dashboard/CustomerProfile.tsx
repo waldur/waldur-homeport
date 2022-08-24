@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Form, Image, Row, Stack } from 'react-bootstrap';
+import { Card, Col, Form, Row, Stack } from 'react-bootstrap';
 
 import 'world-flags-sprite/stylesheets/flags32.css';
 
@@ -35,12 +35,12 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
         <Row>
           <Col xs="auto">
             {customer.image ? (
-              <Image
-                width={200}
-                height={200}
-                src={customer.image}
-                rounded={true}
-              />
+              <div className="symbol symbol-200px">
+                <div
+                  className="symbol-label"
+                  style={{ backgroundImage: `url(${customer.image})` }}
+                />
+              </div>
             ) : (
               <ImagePlaceholder width="200px" height="200px" />
             )}
