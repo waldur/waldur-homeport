@@ -26,9 +26,19 @@ const ProjectIssuesList = lazyComponent(
     import(/* webpackChunkName: "ProjectIssuesList" */ './ProjectIssuesList'),
   'ProjectIssuesList',
 );
-const ProjectTeam = lazyComponent(
-  () => import(/* webpackChunkName: "team/ProjectTeam" */ './team/ProjectTeam'),
-  'ProjectTeam',
+const ProjectUsersList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "team/ProjectUsersList" */ './team/ProjectUsersList'
+    ),
+  'ProjectUsersList',
+);
+const ProjectPermissionsLogList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "team/ProjectPermissionsLogList" */ './team/ProjectPermissionsLogList'
+    ),
+  'ProjectPermissionsLogList',
 );
 
 export const states: StateDeclaration[] = [
@@ -73,10 +83,14 @@ export const states: StateDeclaration[] = [
     url: 'events/',
     component: ProjectEventsView,
   },
-
   {
-    name: 'project.team',
-    url: 'team/',
-    component: ProjectTeam,
+    name: 'project.users',
+    url: 'users/',
+    component: ProjectUsersList,
+  },
+  {
+    name: 'project.permissions-log',
+    url: 'permissions-log/',
+    component: ProjectPermissionsLogList,
   },
 ];

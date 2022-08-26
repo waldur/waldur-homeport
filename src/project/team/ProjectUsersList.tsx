@@ -7,6 +7,8 @@ import { useAsync } from 'react-use';
 import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { useProjectItems } from '@waldur/navigation/navitems';
+import { useTitle } from '@waldur/navigation/title';
 import { Table, connectTable } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 import {
@@ -106,6 +108,8 @@ const TableOptions: TableOptionsType = {
 const ProjectUsersListComponent = connectTable(TableOptions)(TableComponent);
 
 export const ProjectUsersList: FunctionComponent = () => {
+  useTitle(translate('Users'));
+  useProjectItems();
   const user = useSelector(getUser);
   const project = useSelector(getProject);
   const { loading, error, value } = useAsync(

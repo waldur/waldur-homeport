@@ -20,6 +20,7 @@ export function loadProject(transition: Transition) {
 
   async function loadData() {
     try {
+      store.dispatch(setCurrentWorkspace(PROJECT_WORKSPACE));
       const user = await UsersService.getCurrentUser();
       const project = await getProject(transition.params().uuid);
       const customer = await getCustomer(project.customer_uuid);
@@ -30,7 +31,6 @@ export function loadProject(transition: Transition) {
       project.permissions = permissions;
       store.dispatch(setCurrentCustomer(customer));
       store.dispatch(setCurrentProject(project));
-      store.dispatch(setCurrentWorkspace(PROJECT_WORKSPACE));
     } catch (response) {
       if (response.status === 404) {
         router.stateService.go('errorPage.notFound');
