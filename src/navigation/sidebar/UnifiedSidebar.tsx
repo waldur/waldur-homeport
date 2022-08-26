@@ -26,6 +26,10 @@ export const UnifiedSidebar = () => {
     const states = [];
     for (const item of menuItems) {
       states.push(item.to);
+      // @ts-ignore
+      for (const child of item.children || []) {
+        states.push(child.to);
+      }
     }
     return states;
   }, []);
