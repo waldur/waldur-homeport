@@ -5,9 +5,9 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDate } from '@waldur/core/dateUtils';
-import { useCustomerItems } from '@waldur/customer/utils';
 import { translate } from '@waldur/i18n';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
+import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -98,6 +98,6 @@ const InvitationsListComponent = enhance(
 ) as React.ComponentType<any>;
 
 export const InvitationsList: FunctionComponent = () => {
-  useCustomerItems();
+  useTitle(translate('Invitations'));
   return <InvitationsListComponent filters={<InvitationsFilter />} />;
 };

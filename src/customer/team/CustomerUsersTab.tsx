@@ -1,9 +1,10 @@
 import { CustomerUsersListFilter } from '@waldur/customer/team/CustomerUsersListFilter';
-import { useCustomerItems } from '@waldur/customer/utils';
+import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 
 import { CustomerUsersList } from './CustomerUsersList';
 
 export const CustomerUsersTab = () => {
-  useCustomerItems();
+  useTitle(translate('Users'));
   return <CustomerUsersList filters={<CustomerUsersListFilter />} />;
 };

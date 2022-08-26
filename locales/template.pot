@@ -3323,6 +3323,7 @@ msgid "Group invitation has been cancelled."
 msgstr ""
 
 #: src/customer/utils.ts
+#: src/invitations/GroupInvitationsList.tsx
 msgid "Group invitations"
 msgstr ""
 
@@ -3798,6 +3799,7 @@ msgid "Invitation rejection"
 msgstr ""
 
 #: src/customer/utils.ts
+#: src/invitations/InvitationsList.tsx
 msgid "Invitations"
 msgstr ""
 
@@ -5126,6 +5128,7 @@ msgstr ""
 msgid "Offering order items synchronization has been scheduled."
 msgstr ""
 
+#: src/customer/team/OfferingPermissionsList.tsx
 #: src/customer/utils.ts
 msgid "Offering permissions"
 msgstr ""
@@ -5834,6 +5837,7 @@ msgstr ""
 msgid "Permission has been updated successfully."
 msgstr ""
 
+#: src/customer/team/CustomerPermissionsLogList.tsx
 #: src/customer/utils.ts
 msgid "Permission log"
 msgstr ""
@@ -7598,6 +7602,7 @@ msgstr ""
 msgid "Reviewed by"
 msgstr ""
 
+#: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/customer/utils.ts
 msgid "Reviews"
 msgstr ""
@@ -11148,6 +11153,7 @@ msgstr ""
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
 
+#: src/customer/team/CustomerUsersTab.tsx
 #: src/customer/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/navigation/navitems.ts

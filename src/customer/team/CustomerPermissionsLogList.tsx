@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 
-import { useCustomerItems } from '@waldur/customer/utils';
 import { getEventsList } from '@waldur/events/BaseEventsList';
+import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -20,6 +21,6 @@ const enhance = connect((state: RootState) => ({
 const CustomerPermissionsLogListView = enhance(PureCustomerPermissionsLogList);
 
 export const CustomerPermissionsLogList = () => {
-  useCustomerItems();
+  useTitle(translate('Permission log'));
   return <CustomerPermissionsLogListView />;
 };

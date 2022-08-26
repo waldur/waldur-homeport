@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { useCustomerItems } from '@waldur/customer/utils';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -65,6 +65,6 @@ const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 const CustomerPermissionsReviewListView = enhance(TableComponent);
 
 export const CustomerPermissionsReviewList = () => {
-  useCustomerItems();
+  useTitle(translate('Reviews'));
   return <CustomerPermissionsReviewListView />;
 };
