@@ -9,7 +9,7 @@ class ActionConfiguration {
   }
 
   getActions(type) {
-    return [...this.resources[type], UnlinkActionItem];
+    return [...(this.resources[type] || []), UnlinkActionItem];
   }
 }
 
