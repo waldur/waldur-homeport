@@ -1,6 +1,7 @@
+import { UIView } from '@uirouter/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { Layout } from '@waldur/navigation/Layout';
 import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
 import { loadProject } from './resolve';
@@ -46,7 +47,8 @@ export const states: StateDeclaration[] = [
     name: 'project',
     url: '/projects/:uuid/',
     abstract: true,
-    component: Layout,
+    parent: 'layout',
+    component: UIView,
     data: {
       auth: true,
       workspace: PROJECT_WORKSPACE,

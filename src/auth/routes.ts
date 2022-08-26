@@ -1,5 +1,6 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { Layout } from '@waldur/navigation/Layout';
 
 const AnonymousLayout = lazyComponent(
   () =>
@@ -45,6 +46,16 @@ export const states: StateDeclaration[] = [
     parent: 'home',
     url: '/initial-data/',
     component: AuthInit,
+    data: {
+      auth: true,
+    },
+  },
+
+  {
+    name: 'layout',
+    url: '',
+    abstract: true,
+    component: Layout,
     data: {
       auth: true,
     },

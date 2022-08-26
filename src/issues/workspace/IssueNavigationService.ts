@@ -39,15 +39,15 @@ export function getReportingItems(): MenuItemType[] {
     {
       label: translate('Financial'),
       icon: 'fa-university',
-      state: 'support.organizations',
-      key: 'support.organizations',
+      state: 'reporting.organizations',
+      key: 'reporting.organizations',
       feature: 'support.customers_list',
     },
     {
       label: translate('Pricelist'),
       icon: 'fa-table',
-      state: 'support.pricelist',
-      key: 'support.pricelist',
+      state: 'reporting.pricelist',
+      key: 'reporting.pricelist',
       feature: 'support.pricelist',
     },
     {
@@ -59,15 +59,15 @@ export function getReportingItems(): MenuItemType[] {
     {
       label: translate('Organizations'),
       icon: 'fa-building',
-      state: 'support.organizations-divisions',
-      key: 'support.organizations-divisions',
+      state: 'reporting.organizations-divisions',
+      key: 'reporting.organizations-divisions',
       feature: 'support.customers_list',
     },
     {
       label: translate('Resources usage'),
       icon: 'fa-map',
-      state: 'support.resources-treemap',
-      key: 'support.resources-treemap',
+      state: 'reporting.resources-treemap',
+      key: 'reporting.resources-treemap',
       feature: 'support.resources_treemap',
     },
     {
@@ -79,7 +79,7 @@ export function getReportingItems(): MenuItemType[] {
     {
       label: translate('VM type overview'),
       icon: 'fa-desktop',
-      state: 'support.vm-type-overview',
+      state: 'reporting.vm-type-overview',
       key: 'vm-type-overview',
       feature: 'support.vm_type_overview',
     },

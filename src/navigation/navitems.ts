@@ -41,15 +41,15 @@ export const useProjectItems = () => {
 const getAdminItems = () => [
   {
     title: translate('Users'),
-    to: 'support.users',
+    to: 'admin.users',
   },
   {
     title: translate('Organizations'),
-    to: 'support.customers',
+    to: 'admin.customers',
   },
   { title: translate('Offerings'), to: 'marketplace-support-offerings' },
   { title: translate('Orders'), to: 'marketplace-support-orders' },
-  { title: translate('Features'), to: 'support.features' },
+  { title: translate('Features'), to: 'admin.features' },
 ];
 
 export const useAdminItems = () => {

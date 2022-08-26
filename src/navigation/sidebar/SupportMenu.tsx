@@ -14,6 +14,7 @@ export const SupportMenu = () => {
     <MenuItem
       title={translate('Support')}
       state="support.broadcast"
+      activeState="support"
       child={false}
     />
   );

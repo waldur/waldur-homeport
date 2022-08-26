@@ -14,6 +14,7 @@ export const ReportingMenu = () => {
     <MenuItem
       title={translate('Reporting')}
       state="marketplace-support-plan-usages"
+      activeState="reporting"
       child={false}
     />
   );

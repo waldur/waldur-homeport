@@ -1,9 +1,12 @@
+import { UIView } from '@uirouter/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { Layout } from '@waldur/navigation/Layout';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
+import { AdminContainer } from './workspace/AdminContainer';
 import { fetchCustomer } from './workspace/CustomerWorkspace';
+import { ReportingContainer } from './workspace/ReportingContainer';
 
 const ProjectsList = lazyComponent(
   () =>
@@ -127,7 +130,8 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: ORGANIZATION_WORKSPACE,
     },
-    component: Layout,
+    parent: 'layout',
+    component: UIView,
     resolve: [
       {
         token: 'fetchCustomer',
@@ -135,6 +139,28 @@ export const states: StateDeclaration[] = [
         deps: ['$transition$'],
       },
     ],
+  },
+
+  {
+    name: 'reporting',
+    url: '/reporting/',
+    abstract: true,
+    data: {
+      auth: true,
+    },
+    parent: 'layout',
+    component: ReportingContainer,
+  },
+
+  {
+    name: 'admin',
+    url: '/admin/',
+    abstract: true,
+    data: {
+      auth: true,
+    },
+    parent: 'layout',
+    component: AdminContainer,
   },
 
   {

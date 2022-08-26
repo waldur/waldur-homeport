@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { useSupportItems } from '@waldur/navigation/navitems';
 import { useTitle } from '@waldur/navigation/title';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -49,6 +48,5 @@ const BroadcastListComponent = connectTable(TableOptions)(TableComponent);
 
 export const BroadcastList: FunctionComponent = () => {
   useTitle(translate('Broadcast'));
-  useSupportItems();
   return <BroadcastListComponent />;
 };

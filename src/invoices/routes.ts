@@ -37,7 +37,7 @@ export const states: StateDeclaration[] = [
     name: 'invoicesGrowth',
     url: 'growth/',
     component: GrowthContainer,
-    parent: 'support',
+    parent: 'reporting',
     resolve: {
       permission: checkPermission,
     },

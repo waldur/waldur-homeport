@@ -16,7 +16,7 @@ const SharedProviderContainer = lazyComponent(
 
 export const states: StateDeclaration[] = [
   {
-    name: 'support.resources-treemap',
+    name: 'reporting.resources-treemap',
     url: 'resources-treemap/',
     component: ResourcesTreemap,
     data: {
