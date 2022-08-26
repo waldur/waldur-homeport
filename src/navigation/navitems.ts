@@ -15,7 +15,16 @@ export const getProjectItems = () => [
   },
   {
     title: translate('Team'),
-    to: 'project.team',
+    children: [
+      {
+        title: translate('Users'),
+        to: 'project.users',
+      },
+      {
+        title: translate('Permissions log'),
+        to: 'project.permissions-log',
+      },
+    ],
   },
   { title: translate('My orders'), to: 'marketplace-order-list' },
   {

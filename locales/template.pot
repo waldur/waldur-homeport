@@ -874,6 +874,7 @@ msgstr ""
 #: src/customer/utils.ts
 #: src/customer/workspace/CustomerEventsList.tsx
 #: src/navigation/navitems.ts
+#: src/project/ProjectEventsList.tsx
 #: src/support/SupportEventsContainer.tsx
 #: src/user/constants.ts
 #: src/user/dashboard/UserEventsWrapper.tsx
@@ -5850,7 +5851,8 @@ msgstr ""
 msgid "Permission requests"
 msgstr ""
 
-#: src/project/team/ProjectTeam.tsx
+#: src/navigation/navitems.ts
+#: src/project/team/ProjectPermissionsLogList.tsx
 msgid "Permissions log"
 msgstr ""
 
@@ -8964,7 +8966,6 @@ msgstr ""
 
 #: src/customer/utils.ts
 #: src/navigation/navitems.ts
-#: src/project/team/ProjectTeam.tsx
 msgid "Team"
 msgstr ""
 
@@ -11150,7 +11151,7 @@ msgstr ""
 #: src/customer/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/navigation/navitems.ts
-#: src/project/team/ProjectTeam.tsx
+#: src/project/team/ProjectUsersList.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/slurm/tabs.ts
 #: src/user/support/UserListView.tsx
