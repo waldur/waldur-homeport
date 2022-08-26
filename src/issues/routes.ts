@@ -1,9 +1,9 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { Layout } from '@waldur/navigation/Layout';
 import { SUPPORT_WORKSPACE } from '@waldur/workspace/types';
 
 import { checkPermission } from './utils';
+import { SupportContainer } from './workspace/SupportWorkspace';
 
 const CustomersDivisionsContainer = lazyComponent(
   () =>
@@ -131,7 +131,8 @@ export const states: StateDeclaration[] = [
   {
     name: 'support',
     url: '/support/',
-    component: Layout,
+    parent: 'layout',
+    component: SupportContainer,
     abstract: true,
     data: {
       auth: true,
@@ -179,7 +180,7 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'support.organizations',
+    name: 'reporting.organizations',
     url: 'organizations/',
     component: CustomerListContainer,
     data: {
@@ -191,7 +192,7 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'support.pricelist',
+    name: 'reporting.pricelist',
     url: 'pricelist/',
     component: PriceListContainer,
     data: {
@@ -215,7 +216,7 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'support.organizations-divisions',
+    name: 'reporting.organizations-divisions',
     url: 'organizations-divisions/',
     component: CustomersDivisionsContainer,
     data: {
@@ -227,7 +228,7 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'support.users',
+    name: 'admin.users',
     url: 'users/',
     component: UserListView,
     data: {
@@ -239,7 +240,7 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'support.customers',
+    name: 'admin.customers',
     url: 'customers/',
     component: SupportCustomersContainer,
     data: {
@@ -308,7 +309,7 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'support.features',
+    name: 'admin.features',
     url: 'features/',
     component: FeaturesList,
     resolve: {

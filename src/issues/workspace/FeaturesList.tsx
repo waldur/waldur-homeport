@@ -10,7 +10,6 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
 import { CustomRadioButton } from '@waldur/marketplace/offerings/attributes/CustomRadioButton';
-import { useAdminItems } from '@waldur/navigation/navitems';
 import { useTitle } from '@waldur/navigation/title';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -58,7 +57,6 @@ export const FeaturesList = reduxForm({
   form: 'features',
 })(({ handleSubmit }) => {
   useTitle(translate('Features'));
-  useAdminItems();
   const dispatch = useDispatch();
   const { loading, error, value } = useAsync(loadFeatures);
   useEffect(() => {

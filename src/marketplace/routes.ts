@@ -1,7 +1,11 @@
+import { UIView } from '@uirouter/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { fetchCustomer } from '@waldur/customer/workspace/CustomerWorkspace';
 import { checkPermission } from '@waldur/issues/utils';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
+import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 const SupportOfferingsContainer = lazyComponent(
   () =>
@@ -366,10 +370,29 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'marketplace-provider',
+    abstract: true,
+    url: '/providers/:uuid/',
+    parent: 'layout',
+    component: UIView,
+    data: {
+      auth: true,
+      workspace: ORGANIZATION_WORKSPACE,
+    },
+    resolve: [
+      {
+        token: 'fetchCustomer',
+        resolveFn: fetchCustomer,
+        deps: ['$transition$'],
+      },
+    ],
+  },
+
+  {
     name: 'marketplace-vendor-offerings',
     url: 'marketplace-offerings/',
     component: OfferingsListContainer,
-    parent: 'organization',
+    parent: 'marketplace-provider',
   },
 
   {
@@ -460,7 +483,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-order-items',
     url: 'marketplace-order-items/',
     component: OrderItemsContainer,
-    parent: 'organization',
+    parent: 'marketplace-provider',
   },
 
   {
@@ -481,7 +504,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-public-resources',
     url: 'marketplace-public-resources/',
     component: PublicResourcesContainer,
-    parent: 'organization',
+    parent: 'marketplace-provider',
   },
 
   {
@@ -519,7 +542,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-support-offerings',
     url: 'offerings/',
     component: SupportOfferingsContainer,
-    parent: 'support',
+    parent: 'admin',
     resolve: {
       permission: checkPermission,
     },
@@ -529,7 +552,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-support-orders',
     url: 'orders/',
     component: SupportOrdersContainer,
-    parent: 'support',
+    parent: 'admin',
     resolve: {
       permission: checkPermission,
     },
@@ -539,7 +562,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-support-plan-usages',
     url: 'plan-usages/',
     component: PlanUsageContainer,
-    parent: 'support',
+    parent: 'reporting',
     resolve: {
       permission: checkPermission,
     },
@@ -547,9 +570,9 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-support-usage-reports',
-    url: 'usage-reports/',
+    url: 'usage/',
     component: SupportUsageContainer,
-    parent: 'support',
+    parent: 'reporting',
     resolve: {
       permission: checkPermission,
     },

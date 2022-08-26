@@ -12,7 +12,7 @@ const VmTypeOverviewContainer = lazyComponent(
 
 export const states: StateDeclaration[] = [
   {
-    name: 'support.vm-type-overview',
+    name: 'reporting.vm-type-overview',
     url: 'vm-type-overview/',
     component: VmTypeOverviewContainer,
     data: {

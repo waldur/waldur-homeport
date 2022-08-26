@@ -24,7 +24,7 @@ function* organizationUpdate(action) {
     yield put(
       showSuccess(translate('Organization has been updated successfully.')),
     );
-    yield put(triggerTransition('support.customers', {}));
+    yield put(triggerTransition('admin.customers', {}));
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to update organization.',

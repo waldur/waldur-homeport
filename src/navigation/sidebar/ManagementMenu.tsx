@@ -22,6 +22,7 @@ export const ManagementMenu = () => {
           title={translate('Organization')}
           state="organization.dashboard"
           params={{ uuid: customer.uuid }}
+          activeState="organization"
         />
       ) : (
         <MenuItem
@@ -33,6 +34,7 @@ export const ManagementMenu = () => {
         <MenuItem
           title={translate('Project')}
           state="project.details"
+          activeState="project"
           params={{ uuid: project.uuid }}
         />
       ) : (
@@ -43,6 +45,7 @@ export const ManagementMenu = () => {
           title={translate('Provider')}
           state="marketplace-vendor-offerings"
           params={{ uuid: customer.uuid }}
+          activeState="marketplace-provider"
         />
       )}
     </MenuAccordion>

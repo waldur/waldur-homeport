@@ -13,7 +13,8 @@ export const AdminMenu = () => {
   return (
     <MenuItem
       title={translate('Administration')}
-      state="support.users"
+      state="admin.users"
+      activeState="admin"
       child={false}
     />
   );

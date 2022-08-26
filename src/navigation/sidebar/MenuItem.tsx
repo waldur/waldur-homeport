@@ -1,15 +1,23 @@
-import { UISref, UISrefActive } from '@uirouter/react';
+import { UISref, useIsActive } from '@uirouter/react';
+import classNames from 'classnames';
 import React from 'react';
 
 export const MenuItem: React.FC<{
   title: React.ReactNode;
   badge?: React.ReactNode;
   state?: string;
+  activeState?: string;
   child?: boolean;
   params?;
-}> = (props) => (
-  <UISrefActive class="here">
-    <div data-kt-menu-trigger="click" className="menu-item">
+}> = (props) => {
+  const isActive = props.activeState
+    ? useIsActive(props.activeState)
+    : useIsActive(props.state, props.params);
+  return (
+    <div
+      data-kt-menu-trigger="click"
+      className={classNames('menu-item', { here: isActive })}
+    >
       <UISref to={props.state} params={props.params}>
         <span className="menu-link">
           {props.child && (
@@ -22,8 +30,8 @@ export const MenuItem: React.FC<{
         </span>
       </UISref>
     </div>
-  </UISrefActive>
-);
+  );
+};
 
 MenuItem.defaultProps = {
   child: true,
