@@ -382,8 +382,8 @@ msgstr ""
 msgid "Add payment"
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
-#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateButton.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 msgid "Add payment profile"
 msgstr ""
 
@@ -531,7 +531,7 @@ msgstr ""
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
 msgid "Agreement number"
@@ -746,7 +746,7 @@ msgstr ""
 msgid "Are you sure you want to delete the image?"
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfileActions.tsx
+#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 msgid "Are you sure you want to delete the payment profile?"
 msgstr ""
 
@@ -1567,7 +1567,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfileActions.tsx
+#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
@@ -1637,7 +1637,7 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 msgid "Contract sum"
 msgstr ""
@@ -2186,7 +2186,7 @@ msgid "Default value"
 msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/customer/payment-profiles/PaymentProfileActions.tsx
+#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/marketplace/offerings/images/ImagesActions.tsx
@@ -2544,7 +2544,7 @@ msgid "Each usage report must be connected with a billing plan to assure correct
 msgstr ""
 
 #: src/customer/list/OrganizationEditButton.tsx
-#: src/customer/payment-profiles/PaymentProfileActions.tsx
+#: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeButton.tsx
 #: src/customer/team/UserEditButton.tsx
@@ -2684,7 +2684,7 @@ msgstr ""
 msgid "Email verification has been sent. Please check your inbox."
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfileActions.tsx
+#: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
 msgid "Enable"
 msgstr ""
 
@@ -2700,7 +2700,7 @@ msgstr ""
 msgid "Enable limit"
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 msgid "Enable profile after creation"
 msgstr ""
 
@@ -2728,7 +2728,7 @@ msgstr ""
 msgid "End"
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
@@ -4565,7 +4565,7 @@ msgstr ""
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
@@ -5707,10 +5707,6 @@ msgstr ""
 msgid "Payment profile"
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfilesPanel.tsx
-msgid "Payment profile defines how invoices are processed."
-msgstr ""
-
 #: src/customer/payment-profiles/store/effects.ts
 msgid "Payment profile has been created and enabled."
 msgstr ""
@@ -5731,7 +5727,8 @@ msgstr ""
 msgid "Payment profile has been updated."
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfilesPanel.tsx
+#: src/customer/details/CustomerPaymentProfiles.tsx
+#: src/customer/utils.ts
 msgid "Payment profiles"
 msgstr ""
 
@@ -5746,14 +5743,6 @@ msgstr ""
 #: src/customer/details/CustomerPayments.tsx
 #: src/customer/utils.ts
 msgid "Payments"
-msgstr ""
-
-#: src/customer/payments/PaymentsPanel.tsx
-msgid "Payments connected with an active payment profile."
-msgstr ""
-
-#: src/customer/payments/PaymentsPanel.tsx
-msgid "Payments list"
 msgstr ""
 
 #: src/customer/team/CustomerPermissionsReviewList.tsx
@@ -8747,7 +8736,7 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
@@ -9529,7 +9518,7 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx

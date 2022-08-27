@@ -1,26 +1,21 @@
-import { PaymentProfile } from '@waldur/workspace/types';
-
 import * as constants from '../constants';
 
-export const addPaymentProfile = (formData: PaymentProfile) => ({
+export const addPaymentProfile = (payload) => ({
   type: constants.ADD_PAYMENT_PROFILE,
-  payload: formData,
+  payload,
 });
 
-export const editPaymentProfile = (uuid: string, formData: PaymentProfile) => ({
+export const editPaymentProfile = (payload) => ({
   type: constants.EDIT_PAYMENT_PROFILE,
-  payload: {
-    uuid: uuid,
-    formData: formData,
-  },
+  payload,
 });
 
-export const removePaymentProfile = (uuid: string) => ({
+export const removePaymentProfile = (payload) => ({
   type: constants.REMOVE_PAYMENT_PROFILE,
-  payload: uuid,
+  payload,
 });
 
-export const enablePaymentProfile = (uuid: string) => ({
+export const enablePaymentProfile = (payload) => ({
   type: constants.ENABLE_PAYMENT_PROFILE,
-  payload: uuid,
+  payload,
 });

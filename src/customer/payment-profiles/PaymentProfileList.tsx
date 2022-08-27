@@ -1,4 +1,3 @@
-import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -8,14 +7,12 @@ import { PAYMENT_PROFILES_TABLE } from '@waldur/customer/details/constants';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
-import { ActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, isStaff, isSupport } from '@waldur/workspace/selectors';
 
 import { PaymentProfileActions } from './PaymentProfileActions';
+import { PaymentProfileCreateButton } from './PaymentProfileCreateButton';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  const router = useRouter();
-
   const tooltipAndDisabledAttributes = {
     disabled: props.isSupport && !props.isStaff,
     tooltip:
@@ -50,6 +47,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => (
         <PaymentProfileActions
           profile={row}
+          refreshList={props.fetch}
           tooltipAndDisabledAttributes={tooltipAndDisabledAttributes}
         />
       ),
@@ -63,10 +61,8 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('payment profiles')}
       showPageSizeSelector={true}
       actions={
-        <ActionButton
-          title={translate('Add payment profile')}
-          action={() => router.stateService.go('payment-profile-create')}
-          icon="fa fa-plus"
+        <PaymentProfileCreateButton
+          refreshList={props.fetch}
           {...tooltipAndDisabledAttributes}
         />
       }

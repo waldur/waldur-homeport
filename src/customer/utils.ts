@@ -43,7 +43,16 @@ export const getCustomerItems = () => [
   },
   {
     title: translate('Payments'),
-    to: 'organization.payments',
+    children: [
+      {
+        title: translate('Payment profiles'),
+        to: 'organization.payment-profiles',
+      },
+      {
+        title: translate('Payments'),
+        to: 'organization.payments',
+      },
+    ],
   },
   {
     title: translate('My offerings'),

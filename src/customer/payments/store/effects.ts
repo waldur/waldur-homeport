@@ -1,12 +1,11 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
-import { format } from '@waldur/core/ErrorMessageFormatter';
 import { Action } from '@waldur/core/reducerActions';
 import * as api from '@waldur/customer/payments/api';
 import { updatePaymentsList } from '@waldur/customer/payments/utils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as constants from '../constants';
@@ -21,10 +20,7 @@ function* createPayment(action) {
     const customer = yield select(getCustomer);
     yield put(updatePaymentsList(customer));
   } catch (error) {
-    const errorMessage = `${translate('Unable to create payment.')} ${format(
-      error,
-    )}`;
-    yield put(showError(errorMessage));
+    yield put(showErrorResponse(error, translate('Unable to create payment.')));
   }
 }
 
@@ -36,10 +32,7 @@ function* updatePayment(action) {
     const customer = yield select(getCustomer);
     yield put(updatePaymentsList(customer));
   } catch (error) {
-    const errorMessage = `${translate('Unable to update payment.')} ${format(
-      error,
-    )}`;
-    yield put(showError(errorMessage));
+    yield put(showErrorResponse(error, translate('Unable to update payment.')));
   }
 }
 
@@ -51,10 +44,7 @@ function* deletePayment(action: Action<any>) {
     const customer = yield select(getCustomer);
     yield put(updatePaymentsList(customer));
   } catch (error) {
-    const errorMessage = `${translate('Unable to delete payment.')} ${format(
-      error,
-    )}`;
-    yield put(showError(errorMessage));
+    yield put(showErrorResponse(error, translate('Unable to delete payment.')));
   }
 }
 
@@ -69,10 +59,12 @@ function* linkInvoice(action: Action<any>) {
     const customer = yield select(getCustomer);
     yield put(updatePaymentsList(customer));
   } catch (error) {
-    const errorMessage = `${translate(
-      'Unable to link invoice to the payment.',
-    )} ${format(error)}`;
-    yield put(showError(errorMessage));
+    yield put(
+      showErrorResponse(
+        error,
+        translate('Unable to link invoice to the payment.'),
+      ),
+    );
   }
 }
 
@@ -87,10 +79,12 @@ function* unlinkInvoice(action: Action<any>) {
     const customer = yield select(getCustomer);
     yield put(updatePaymentsList(customer));
   } catch (error) {
-    const errorMessage = `${translate(
-      'Unable to unlink invoice from the payment.',
-    )} ${format(error)}`;
-    yield put(showError(errorMessage));
+    yield put(
+      showErrorResponse(
+        error,
+        translate('Unable to unlink invoice from the payment.'),
+      ),
+    );
   }
 }
 

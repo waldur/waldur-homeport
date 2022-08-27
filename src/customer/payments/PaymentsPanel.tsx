@@ -2,7 +2,6 @@ import { useEffect, useState, FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { PaymentsList } from '@waldur/customer/payments/PaymentsList';
-import { translate } from '@waldur/i18n';
 import { getActivePaymentProfile } from '@waldur/invoices/details/utils';
 import {
   getCustomer,
@@ -10,8 +9,6 @@ import {
   isSupport as isSupportSelector,
   isOwner as isOwnerSelector,
 } from '@waldur/workspace/selectors';
-
-import { CustomerAccordion } from '../details/CustomerAccordion';
 
 export const PaymentsPanel: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
@@ -30,16 +27,7 @@ export const PaymentsPanel: FunctionComponent = () => {
     (isStaff || isSupport || (isOwner && customer.payment_profiles.length)) &&
     activePaymentProfile
   ) {
-    return (
-      <CustomerAccordion
-        title={translate('Payments list')}
-        subtitle={translate(
-          'Payments connected with an active payment profile.',
-        )}
-      >
-        {(isStaff || isSupport) && <PaymentsList />}
-      </CustomerAccordion>
-    );
+    return isStaff || isSupport ? <PaymentsList /> : null;
   } else {
     return null;
   }

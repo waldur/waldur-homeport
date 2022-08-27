@@ -37,13 +37,6 @@ const ProjectCreateContainer = lazyComponent(
     ),
   'ProjectCreateContainer',
 );
-const PaymentProfileCreateContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PaymentProfileCreateContainer" */ '@waldur/customer/payment-profiles/PaymentProfileCreateContainer'
-    ),
-  'PaymentProfileCreateContainer',
-);
 const CustomerDashboard = lazyComponent(
   () =>
     import(
@@ -55,6 +48,13 @@ const CustomerManage = lazyComponent(
   () =>
     import(/* webpackChunkName: "CustomerManage" */ './details/CustomerManage'),
   'CustomerManage',
+);
+const CustomerPaymentProfiles = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerPaymentProfiles" */ './details/CustomerPaymentProfiles'
+    ),
+  'CustomerPaymentProfiles',
 );
 const CustomerPayments = lazyComponent(
   () =>
@@ -237,16 +237,15 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'organization.payments',
-    url: 'payments/',
-    component: CustomerPayments,
+    name: 'organization.payment-profiles',
+    url: 'payment-profiles/',
+    component: CustomerPaymentProfiles,
   },
 
   {
-    name: 'payment-profile-create',
-    url: 'payment-profile-create/',
-    parent: 'organization',
-    component: PaymentProfileCreateContainer,
+    name: 'organization.payments',
+    url: 'payments/',
+    component: CustomerPayments,
   },
 
   {

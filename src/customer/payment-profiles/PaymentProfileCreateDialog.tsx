@@ -1,15 +1,13 @@
-import { useMemo, useState, FunctionComponent } from 'react';
+import { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
+import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { required } from '@waldur/core/validators';
-import { EDIT_PAYMENT_PROFILE_FORM_ID } from '@waldur/customer/payment-profiles/constants';
-import { editPaymentProfile } from '@waldur/customer/payment-profiles/store/actions';
-import {
-  getInitialValues,
-  getPaymentProfileTypeOptions,
-} from '@waldur/customer/payment-profiles/utils';
+import { ADD_PAYMENT_PROFILE_FORM_ID } from '@waldur/customer/payment-profiles/constants';
+import { addPaymentProfile } from '@waldur/customer/payment-profiles/store/actions';
+import { getPaymentProfileTypeOptions } from '@waldur/customer/payment-profiles/utils';
 import {
   FormContainer,
   NumberField,
@@ -23,10 +21,8 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
-  const [isFixedPrice, setIsFixedPrice] = useState(
-    props.resolve.payment_type === 'fixed_price',
-  );
+const PaymentProfileCreate = (props) => {
+  const [isFixedPrice, setIsFixedPrice] = useState(false);
 
   const paymentProfileTypeOptions = useMemo(
     () => getPaymentProfileTypeOptions(),
@@ -36,14 +32,14 @@ const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
   return (
     <form onSubmit={props.handleSubmit(props.submitRequest)}>
       <ModalDialog
-        title={translate('Update payment profile')}
+        title={translate('Add payment profile')}
         footer={
           <>
             <CloseDialogButton />
             <SubmitButton
               disabled={props.invalid}
               submitting={props.submitting}
-              label={translate('Update')}
+              label={translate('Submit')}
             />
           </>
         }
@@ -58,6 +54,7 @@ const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
           />
 
           <SelectField
+            floating={false}
             name="payment_type"
             label={translate('Type')}
             required={true}
@@ -87,36 +84,39 @@ const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
               label={translate('Contract sum')}
             />
           )}
+
+          <Field
+            name="enabled"
+            component={(prop) => (
+              <AwesomeCheckbox
+                label={translate('Enable profile after creation')}
+                {...prop.input}
+              />
+            )}
+          />
         </FormContainer>
       </ModalDialog>
     </form>
   );
 };
 
-const mapStateToProps = (_state, ownProps) => ({
-  initialValues: getInitialValues(ownProps.resolve.profile),
-});
-
 const mapDispatchToProps = (dispatch, ownProps) => ({
   submitRequest: (formData) =>
     dispatch(
-      editPaymentProfile({
-        uuid: ownProps.resolve.profile.uuid,
+      addPaymentProfile({
         formData,
         refreshList: ownProps.resolve.refreshList,
       }),
     ),
 });
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(null, mapDispatchToProps);
 
 const enhance = compose(
   connector,
   reduxForm({
-    form: EDIT_PAYMENT_PROFILE_FORM_ID,
+    form: ADD_PAYMENT_PROFILE_FORM_ID,
   }),
 );
 
-export const PaymentProfileUpdateDialogContainer = enhance(
-  PaymentProfileUpdateDialog,
-);
+export const PaymentProfileCreateDialog = enhance(PaymentProfileCreate);
