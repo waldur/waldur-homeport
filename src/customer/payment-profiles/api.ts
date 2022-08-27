@@ -1,31 +1,31 @@
 import { deleteById, post, patch } from '@waldur/core/api';
 
-export const createPaymentProfile = (data) => {
+export const createPaymentProfile = (formData) => {
   const reqData = {
     is_active: false,
-    name: data.name,
-    organization: data.customer.url,
-    payment_type: data.payment_type.value,
+    name: formData.name,
+    organization: formData.customer.url,
+    payment_type: formData.payment_type.value,
     attributes: {
-      end_date: data.end_date,
-      agreement_number: data.agreement_number,
-      contract_sum: data.contract_sum,
+      end_date: formData.end_date,
+      agreement_number: formData.agreement_number,
+      contract_sum: formData.contract_sum,
     },
   };
   return post('/payment-profiles/', reqData).then((response) => response.data);
 };
 
-export const updatePaymentProfile = (data) => {
+export const updatePaymentProfile = (uuid, formData) => {
   const reqData = {
-    name: data.formData.name,
-    payment_type: data.formData.payment_type.value,
+    name: formData.name,
+    payment_type: formData.payment_type.value,
     attributes: {
-      end_date: data.formData.end_date,
-      agreement_number: data.formData.agreement_number,
-      contract_sum: data.formData.contract_sum,
+      end_date: formData.end_date,
+      agreement_number: formData.agreement_number,
+      contract_sum: formData.contract_sum,
     },
   };
-  return patch(`/payment-profiles/${data.uuid}/`, reqData).then(
+  return patch(`/payment-profiles/${uuid}/`, reqData).then(
     (response) => response.data,
   );
 };
