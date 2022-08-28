@@ -39,6 +39,9 @@ const connector = connect<StateProps, {}, OwnProps, RootState>(
     if (workspace === ORGANIZATION_WORKSPACE) {
       return {
         state: 'marketplace-order-item-details-customer',
+        params: {
+          uuid: ownProps.customer_uuid,
+        },
       };
     } else if (workspace === PROJECT_WORKSPACE) {
       return {
