@@ -4,11 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from '@waldur/core/Link';
 import { RootState } from '@waldur/store/reducers';
 import { getWorkspace } from '@waldur/workspace/selectors';
-import {
-  ORGANIZATION_WORKSPACE,
-  PROJECT_WORKSPACE,
-  SUPPORT_WORKSPACE,
-} from '@waldur/workspace/types';
+import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
 const PureOrderItemDetailsLink: FunctionComponent<any> = (props) => (
   <Link
@@ -36,21 +32,14 @@ interface OwnProps {
 const connector = connect<StateProps, {}, OwnProps, RootState>(
   (state, ownProps) => {
     const workspace = getWorkspace(state);
-    if (workspace === ORGANIZATION_WORKSPACE) {
-      return {
-        state: 'marketplace-order-item-details-customer',
-        params: {
-          uuid: ownProps.customer_uuid,
-        },
-      };
-    } else if (workspace === PROJECT_WORKSPACE) {
+    if (workspace === PROJECT_WORKSPACE) {
       return {
         state: 'marketplace-order-item-details',
         params: {
           uuid: ownProps.project_uuid,
         },
       };
-    } else if (workspace === SUPPORT_WORKSPACE) {
+    } else {
       return {
         state: 'marketplace-order-item-details-customer',
         params: {
