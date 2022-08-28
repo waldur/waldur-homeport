@@ -864,7 +864,7 @@ msgid "Attributes filter"
 msgstr ""
 
 #: src/navigation/navitems.ts
-#: src/project/InvoicesSummary.tsx
+#: src/project/ShortEventsList.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
 #: src/user/support/UserDetailsView.tsx

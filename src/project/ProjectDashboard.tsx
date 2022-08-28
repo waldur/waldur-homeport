@@ -11,10 +11,10 @@ import { Project, User } from '@waldur/workspace/types';
 
 import { useProjectItems } from '../navigation/navitems';
 
-import { InvoicesSummary } from './InvoicesSummary';
 import { ProjectDashboardChart } from './ProjectDashboardChart';
 import { ProjectProfile } from './ProjectProfile';
 import { ProjectResourcesList } from './ProjectResourcesList';
+import { ShortEventsList } from './ShortEventsList';
 
 interface ProjectDashboardProps {
   user: User;
@@ -45,7 +45,7 @@ export const ProjectDashboard: FunctionComponent<ProjectDashboardProps> = (
             <ProjectDashboardChart project={props.project} />
           </Col>
           <Col md={6} sm={12} className="mb-md-0 mb-sm-6">
-            <InvoicesSummary project={props.project} />
+            <ShortEventsList project={props.project} />
           </Col>
         </Row>
       )}

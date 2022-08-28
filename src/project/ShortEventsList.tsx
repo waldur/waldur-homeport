@@ -30,7 +30,6 @@ const EventItemTr = (item: Event, expanded, onClick: (item) => void) => {
             </Tip>
           </span>
         </td>
-        <td className="text-nowrap">{item.event_type}</td>
         <td className="text-nowrap">{date}</td>
       </tr>
       {expanded === item.uuid && (
@@ -42,7 +41,7 @@ const EventItemTr = (item: Event, expanded, onClick: (item) => void) => {
   );
 };
 
-export const InvoicesSummary: FunctionComponent<{ project: Project }> = ({
+export const ShortEventsList: FunctionComponent<{ project: Project }> = ({
   project,
 }) => {
   const [expanded, setExpanded] = useState('');
