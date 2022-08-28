@@ -171,6 +171,7 @@ export const SearchToggle = () => (
       </Popover>
     }
     rootClose={true}
+    offset={[-100, 0]}
   >
     <div className="d-flex align-items-stretch ms-1 ms-lg-3">
       <div className="d-flex align-items-stretch">
