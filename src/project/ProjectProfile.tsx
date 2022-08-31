@@ -11,6 +11,7 @@ import {
   PROJECT_MEMBER_ROLE,
 } from '@waldur/core/constants';
 import { formatDate } from '@waldur/core/dateUtils';
+import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -56,14 +57,9 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
         <Row>
           <Col xs="auto">
             {project.image ? (
-              <div className="symbol symbol-200px">
-                <div
-                  className="symbol-label"
-                  style={{ backgroundImage: `url(${project.image})` }}
-                ></div>
-              </div>
+              <Image src={project.image} size={100} />
             ) : (
-              <ImagePlaceholder width="200px" height="200px" />
+              <ImagePlaceholder width="100px" height="100px" />
             )}
           </Col>
           <Col className="d-flex flex-column justify-content-between">
