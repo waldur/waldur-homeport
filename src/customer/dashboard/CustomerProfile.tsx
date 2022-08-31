@@ -3,6 +3,7 @@ import { Card, Col, Form, Row, Stack } from 'react-bootstrap';
 
 import 'world-flags-sprite/stylesheets/flags32.css';
 
+import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -35,14 +36,9 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
         <Row>
           <Col xs="auto">
             {customer.image ? (
-              <div className="symbol symbol-200px">
-                <div
-                  className="symbol-label"
-                  style={{ backgroundImage: `url(${customer.image})` }}
-                />
-              </div>
+              <Image src={customer.image} size={100} />
             ) : (
-              <ImagePlaceholder width="200px" height="200px" />
+              <ImagePlaceholder width="100px" height="100px" />
             )}
           </Col>
           <Col>
