@@ -33,7 +33,10 @@ export const LandingPage = (props: LandingPageProps) => (
         })
       }
     >
-      <Link state="" className="btn text-black btn-bg-white btn-hover-rise">
+      <Link
+        state="marketplace-categories-profile"
+        className="btn text-black btn-bg-white btn-hover-rise"
+      >
         {translate('Browse all categories')}
       </Link>
     </HeroSection>

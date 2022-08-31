@@ -1,0 +1,32 @@
+.category-card {
+  display: block;
+  position: relative;
+  height: 180px;
+  margin-bottom: 30px;
+
+  .category-thumb {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 10px;
+
+    & > img {
+      display: block;
+      height: 4em;
+      width: 4em;
+      margin: 10px auto;
+      margin-bottom: 0px;
+    }
+  }
+
+  .category-card-body {
+    padding: 18px;
+    padding-top: 0px;
+    text-align: center;
+  }
+
+  .category-title {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: normal;
+  }
+}

@@ -548,6 +548,11 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+#: src/marketplace/category/list/AllCategoriesPage.tsx
+#: src/marketplace/category/list/CategoriesList.tsx
+msgid "All categories"
+msgstr ""
+
 #: src/booking/components/modal/BookingModal.tsx
 msgid "All day"
 msgstr ""
@@ -3364,6 +3369,10 @@ msgstr ""
 
 #: src/navigation/header/UserDropdown.tsx
 msgid "Hello"
+msgstr ""
+
+#: src/marketplace/category/list/CategoryHelpArticles.tsx
+msgid "Help or promo articles"
 msgstr ""
 
 #: src/issues/workspace/IssuesHelpdesk.tsx
@@ -6814,6 +6823,7 @@ msgstr ""
 msgid "Recent"
 msgstr ""
 
+#: src/marketplace/category/list/RecentlyAddedOfferings.tsx
 #: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
 msgid "Recently added offerings"
 msgstr ""
@@ -7242,6 +7252,7 @@ msgstr ""
 msgid "Requested for approval"
 msgstr ""
 
+#: src/marketplace/category/list/OfferingCard.tsx
 #: src/marketplace/common/OfferingCard.tsx
 #: src/marketplace/landing/OfferingCard.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
@@ -9186,6 +9197,7 @@ msgstr ""
 msgid "There are no categories in catalog yet."
 msgstr ""
 
+#: src/marketplace/category/list/CategoriesList.tsx
 #: src/marketplace/landing/CategoriesList.tsx
 #: src/user/dashboard/CategoriesList.tsx
 msgid "There are no categories in marketplace yet."
@@ -9241,6 +9253,10 @@ msgstr ""
 #: src/marketplace/common/OfferingGrid.tsx
 #: src/marketplace/landing/FeaturedOfferings.tsx
 msgid "There are no offerings in marketplace yet."
+msgstr ""
+
+#: src/marketplace/category/list/RecentlyAddedOfferings.tsx
+msgid "There are no offerings recently added in marketplace."
 msgstr ""
 
 #: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
@@ -9919,6 +9935,7 @@ msgid "Unable to load categories"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/category/list/CategoriesList.tsx
 #: src/marketplace/landing/CategoriesList.tsx
 #: src/marketplace/offerings/service-providers/ServiceProvider.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderOfferingsCategoriesFilter.tsx
@@ -10088,6 +10105,7 @@ msgstr ""
 msgid "Unable to load offerings"
 msgstr ""
 
+#: src/marketplace/category/list/RecentlyAddedOfferings.tsx
 #: src/marketplace/common/OfferingGrid.tsx
 #: src/marketplace/landing/FeaturedOfferings.tsx
 msgid "Unable to load offerings."
@@ -11318,6 +11336,10 @@ msgstr ""
 msgid "View all"
 msgstr ""
 
+#: src/marketplace/category/list/CategoriesList.tsx
+msgid "View all offerings"
+msgstr ""
+
 #: src/marketplace/landing/OfferingCardButtonsOverlay.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "View item"
@@ -11846,6 +11868,7 @@ msgstr ""
 msgid "of"
 msgstr ""
 
+#: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offering"
 msgstr ""
@@ -11862,6 +11885,7 @@ msgstr ""
 msgid "offering users"
 msgstr ""
 
+#: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offerings"
 msgstr ""

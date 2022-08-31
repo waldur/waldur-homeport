@@ -1,0 +1,43 @@
+.marketplace-all-categories-page {
+  position: relative;
+
+  .all-categories__background {
+    position: absolute;
+    height: 400px;
+    width: 100%;
+    background-color: #2f4050;
+    background-image: url(../../landing/marketplace-background.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    margin-bottom: 20px;
+  }
+
+  .all-categories__table {
+    display: table;
+    height: 200px;
+    width: 100%;
+
+    .all-categories__cell {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .all-categories__main {
+      margin-right: auto;
+      margin-left: auto;
+      text-align: start;
+
+      > * {
+        position: relative;
+      }
+
+      h1 {
+        color: #fff;
+        font-size: 38px;
+        font-weight: 900;
+      }
+    }
+  }
+}

@@ -57,6 +57,13 @@ const ShoppingCartItemUpdate = lazyComponent(
     ),
   'ShoppingCartItemUpdate',
 );
+const AllCategoriesPage = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "AllCategoriesPage" */ './category/list/AllCategoriesPage'
+    ),
+  'AllCategoriesPage',
+);
 const CategoryPage = lazyComponent(
   () =>
     import(/* webpackChunkName: "CategoryPage" */ './category/CategoryPage'),
@@ -325,6 +332,13 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-public-offering.details',
     url: ':uuid/',
     component: PublicOfferingDetailsContainer,
+  },
+
+  {
+    name: 'marketplace-categories-profile',
+    url: 'marketplace/all/',
+    component: AllCategoriesPage,
+    parent: 'profile',
   },
 
   {
