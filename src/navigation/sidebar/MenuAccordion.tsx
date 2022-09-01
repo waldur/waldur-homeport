@@ -1,8 +1,10 @@
 import React from 'react';
+import SVG from 'react-inlinesvg';
 
 export const MenuAccordion: React.FC<{
   title: React.ReactNode;
   itemId?: string;
+  iconPath?: string;
 }> = (props) => (
   <div
     className="menu-item menu-accordion"
@@ -11,6 +13,13 @@ export const MenuAccordion: React.FC<{
     id={props.itemId}
   >
     <span className="menu-link">
+      {props.iconPath && (
+        <span className="menu-icon">
+          <span className="svg-icon svg-icon-2">
+            <SVG src={props.iconPath} />
+          </span>
+        </span>
+      )}
       <span className="menu-title">{props.title}</span>
       <span className="menu-arrow"></span>
     </span>

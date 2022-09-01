@@ -2,7 +2,7 @@ import { Link } from '@waldur/core/Link';
 import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
 
-const marketplaceIcon = require('@waldur/images/icons/gen005.svg');
+const marketplaceIcon = require('./Marketplace.svg');
 
 export const SidebarFooter = () => {
   return (
@@ -14,11 +14,10 @@ export const SidebarFooter = () => {
         data-kt-menu-trigger="click"
       >
         <span className="btn-label">
-          <i className="line"></i>
+          <InlineSVG path={marketplaceIcon} className="btn-icon svg-icon-2" />
           {translate('Marketplace')}
           <i className="fa fa-angle-right"></i>
         </span>
-        <InlineSVG path={marketplaceIcon} className="btn-icon svg-icon-2" />
       </Link>
     </div>
   );
