@@ -29,9 +29,7 @@
       display: inline-block;
       transition: opacity get($aside-config, transition-speed) ease;
       overflow: hidden;
-      opacity: 0;
       margin: 0;
-      width: 0;
     }
   }
 

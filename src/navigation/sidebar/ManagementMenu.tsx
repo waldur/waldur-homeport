@@ -11,12 +11,18 @@ import {
 import { MenuAccordion } from './MenuAccordion';
 import { MenuItem } from './MenuItem';
 
+const Icon = require('./Management.svg');
+
 export const ManagementMenu = () => {
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
   const user = useSelector(getUser);
   return (
-    <MenuAccordion title={translate('Management')} itemId="management-menu">
+    <MenuAccordion
+      title={translate('Management')}
+      itemId="management-menu"
+      iconPath={Icon}
+    >
       {customer ? (
         <MenuItem
           title={translate('Organization')}

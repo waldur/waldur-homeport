@@ -5,6 +5,8 @@ import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
 import { MenuItem } from './MenuItem';
 
+const Icon = require('./Reporting.svg');
+
 export const ReportingMenu = () => {
   const visible = useSelector(isStaffOrSupport);
   if (!visible) {
@@ -16,6 +18,7 @@ export const ReportingMenu = () => {
       state="marketplace-support-plan-usages"
       activeState="reporting"
       child={false}
+      iconPath={Icon}
     />
   );
 };

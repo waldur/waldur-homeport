@@ -13,6 +13,8 @@ import { MenuAccordion } from './MenuAccordion';
 import { MenuItem } from './MenuItem';
 import { getCategoriesSelector, sidebarInitStart } from './store';
 
+const Icon = require('./Resources.svg');
+
 const MAX_COLLAPSE_MENU_COUNT = 5;
 
 const getCounterText = (counter: number) => {
@@ -118,7 +120,11 @@ export const ResourcesMenu = ({ anonymous }) => {
   }, [categories, preferredCounters]);
 
   return categories ? (
-    <MenuAccordion title={translate('Resources')} itemId="resources-menu">
+    <MenuAccordion
+      title={translate('Resources')}
+      itemId="resources-menu"
+      iconPath={Icon}
+    >
       {project && (
         <MenuItem
           title={translate('All resources')}

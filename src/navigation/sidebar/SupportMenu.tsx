@@ -5,6 +5,8 @@ import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
 import { MenuItem } from './MenuItem';
 
+const Icon = require('./Support.svg');
+
 export const SupportMenu = () => {
   const visible = useSelector(isStaffOrSupport);
   if (!visible) {
@@ -16,6 +18,7 @@ export const SupportMenu = () => {
       state="support.broadcast"
       activeState="support"
       child={false}
+      iconPath={Icon}
     />
   );
 };

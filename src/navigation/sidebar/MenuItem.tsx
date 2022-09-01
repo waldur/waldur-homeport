@@ -1,6 +1,7 @@
 import { UISref, useIsActive } from '@uirouter/react';
 import classNames from 'classnames';
 import React from 'react';
+import SVG from 'react-inlinesvg';
 
 export const MenuItem: React.FC<{
   title: React.ReactNode;
@@ -9,6 +10,7 @@ export const MenuItem: React.FC<{
   activeState?: string;
   child?: boolean;
   params?;
+  iconPath?: string;
 }> = (props) => {
   const isActive = props.activeState
     ? useIsActive(props.activeState)
@@ -20,6 +22,13 @@ export const MenuItem: React.FC<{
     >
       <UISref to={props.state} params={props.params}>
         <span className="menu-link">
+          {props.iconPath && (
+            <span className="menu-icon">
+              <span className="svg-icon svg-icon-2">
+                <SVG src={props.iconPath} />
+              </span>
+            </span>
+          )}
           {props.child && (
             <span className="menu-bullet">
               <span className="bullet bullet-dot"></span>
