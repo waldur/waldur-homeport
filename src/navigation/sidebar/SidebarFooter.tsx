@@ -13,8 +13,8 @@ export const SidebarFooter = () => {
         data-cy="marketplace-button"
         data-kt-menu-trigger="click"
       >
+        <InlineSVG path={marketplaceIcon} svgClassName="btn-icon svg-icon-2" />
         <span className="btn-label">
-          <InlineSVG path={marketplaceIcon} className="btn-icon svg-icon-2" />
           {translate('Marketplace')}
           <i className="fa fa-angle-right"></i>
         </span>
