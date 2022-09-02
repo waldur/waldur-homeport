@@ -1,16 +1,18 @@
-.sidebar-collapse .nav-label {
-  max-width: 133px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-block;
+.aside-toolbar {
+  cursor: pointer;
+  border-top: 1px solid #2d2d43;
+  border-bottom: 1px solid #2d2d43;
 }
 
-.sidebar-collapse .nav > li > a i {
-  margin-right: 6px;
-  display: block;
-  float: left;
-  margin-top: 4px;
+.aside-toolbar:hover {
+  background-color: #1b1b28;
+}
+
+[data-kt-aside-minimize='on']
+  .aside:not(:hover)
+  .aside-toolbar
+  .flex-row-fluid {
+  display: none;
 }
 
 .aside-footer .btn-custom.btn-marketplace .btn-label {
@@ -19,11 +21,13 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .aside-footer .btn-custom.btn-marketplace .btn-label i {
   color: #b5b5c3;
   font-size: 1.5rem;
   padding: 0;
 }
+
 .aside-footer .btn-custom.btn-marketplace .btn-label i.line {
   width: 1px;
   height: 12px;

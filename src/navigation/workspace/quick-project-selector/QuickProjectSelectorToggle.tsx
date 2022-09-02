@@ -1,77 +1,94 @@
+import classNames from 'classnames';
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { useMedia } from 'react-use';
 
-import { truncate } from '@waldur/core/utils';
-import { wrapTooltip } from '@waldur/table/ActionButton';
-import { getCustomer, getProject } from '@waldur/workspace/selectors';
+import { ENV } from '@waldur/configs/default';
+import { Image } from '@waldur/core/Image';
+import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
+import { formatRole } from '@waldur/core/utils';
+import { translate } from '@waldur/i18n';
+import { formatUserStatus } from '@waldur/user/support/utils';
+import {
+  getCustomer,
+  getProject,
+  getUser,
+  getWorkspace,
+} from '@waldur/workspace/selectors';
+import {
+  ORGANIZATION_WORKSPACE,
+  PROJECT_WORKSPACE,
+} from '@waldur/workspace/types';
 
 import { QuickProjectSelectorDropdown } from './QuickProjectSelectorDropdown';
 
-const MAX_LENGTH_TITLE_DISPLAY = 12;
-
-const getOrganizationDisplayName = (isWide, organization) => {
-  return !isWide && organization.abbreviation
-    ? organization.abbreviation
-    : organization.display_name || '';
-};
-
-const getTitle = (isWide, customer, project) => {
-  if (!customer) {
-    return '';
-  }
-  const customerName = getOrganizationDisplayName(isWide, customer);
-  if (project) {
-    return `${truncate(customerName, MAX_LENGTH_TITLE_DISPLAY)} > ${truncate(
-      project.name,
-      MAX_LENGTH_TITLE_DISPLAY,
-    )}`;
-  } else {
-    return truncate(customerName);
-  }
-};
-
-const getTitleTooltip = (isWide, customer, project) => {
-  if (!customer || !project) {
-    return;
-  }
-
-  const displayName = `${getOrganizationDisplayName(isWide, customer)} > ${
-    project.name
-  }`;
-
-  if (displayName.length < MAX_LENGTH_TITLE_DISPLAY) return;
-
-  return displayName;
-};
-
 export const QuickProjectSelectorToggle: FunctionComponent = () => {
+  const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
-  const isWide = useMedia('(min-width: 640px)');
-  const title = getTitle(isWide, customer, project);
-  const titleTooltip = getTitleTooltip(isWide, customer, project);
-
+  const isOwner = customer?.owners?.find((perm) => perm.uuid === user.uuid);
+  const isServiceManager = customer?.service_managers?.find(
+    (perm) => perm.uuid === user.uuid,
+  );
+  const projectUser = project?.permissions?.find(
+    (perm) => perm.user_uuid === user.uuid,
+  );
+  const image = project?.image || customer?.image;
+  const workspace = useSelector(getWorkspace);
+  const isProject = workspace === PROJECT_WORKSPACE;
+  const isCustomer = workspace === ORGANIZATION_WORKSPACE;
   return (
-    <div className="aside-footer flex-column-auto p-5" id="kt_aside_footer">
-      <Button
-        variant="primary"
-        className="btn-custom w-100 btn-marketplace"
+    <div className="aside-toolbar flex-column-auto" id="kt_aside_toolbar">
+      <div
+        className="d-flex align-items-sm-center justify-content-center py-5"
+        style={{ padding: '0 25px' }}
         data-kt-menu-trigger="click"
         data-kt-menu-attach=".page .header"
         data-kt-menu-placement="bottom-start"
         data-kt-menu-flip="bottom"
       >
-        <span className="btn-label">
-          {wrapTooltip(
-            titleTooltip,
-            <span id="select-workspace-title">{title || 'N/A'}</span>,
-            { placement: 'bottom' },
+        <div className="symbol symbol-50px">
+          {image ? (
+            <Image src={image} size={50} />
+          ) : (
+            <ImagePlaceholder width="50px" height="50px" />
           )}
-          <i className="fa fa-angle-right"></i>
-        </span>
-      </Button>
+        </div>
+        <div className="flex-row-fluid flex-wrap ms-5">
+          <div className="d-flex">
+            <div className="flex-grow-1 me-2">
+              <span
+                className={classNames(
+                  { 'text-white': isProject, 'text-gray-600': !isProject },
+                  'fs-6 fw-bold',
+                )}
+              >
+                {project ? project.name : translate('Select project')}
+              </span>
+              <span
+                className={classNames(
+                  { 'text-white': isCustomer, 'text-gray-600': !isCustomer },
+                  'fw-semibold d-block fs-7 mb-1',
+                )}
+              >
+                {customer
+                  ? customer.abbreviation
+                    ? customer.abbreviation
+                    : customer.display_name
+                  : translate('Select organization')}
+              </span>
+              <div className="d-flex align-items-center text-success fs-8">
+                {projectUser
+                  ? formatRole(projectUser.role)
+                  : isOwner
+                  ? translate(ENV.roles.owner)
+                  : isServiceManager
+                  ? translate(ENV.roles.service_manager)
+                  : formatUserStatus(user)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <QuickProjectSelectorDropdown />
     </div>
   );
