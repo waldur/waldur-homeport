@@ -8007,6 +8007,10 @@ msgstr ""
 msgid "Select offerings..."
 msgstr ""
 
+#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorToggle.tsx
+msgid "Select organization"
+msgstr ""
+
 #: src/customer/team/OrganizationRoleSelectField.tsx
 msgid "Select organization roles"
 msgstr ""
@@ -8043,6 +8047,7 @@ msgid "Select priority..."
 msgstr ""
 
 #: src/invitations/actions/ProjectGroup.tsx
+#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorToggle.tsx
 msgid "Select project"
 msgstr ""
 
