@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 
-import './Sidebar.css';
-
 import {
   DrawerComponent,
   ScrollComponent,
@@ -12,6 +10,7 @@ import { QuickProjectSelectorToggle } from '../workspace/quick-project-selector/
 
 import { BrandName } from './BrandName';
 import { SidebarFooter } from './SidebarFooter';
+import './Sidebar.css';
 
 export const Sidebar: React.FC = (props) => {
   const sidebarRef = useRef<HTMLElement>(undefined);
@@ -22,6 +21,21 @@ export const Sidebar: React.FC = (props) => {
       ScrollComponent.reinitialization();
     }
   }, [sidebarRef]);
+  useEffect(() => {
+    if (document.body.getAttribute('data-waldur-sidebar')) {
+      return;
+    }
+    document.body.setAttribute('data-waldur-sidebar', 'on');
+    const menuElement = document.querySelector('#kt_aside_toggle');
+    if (!menuElement) {
+      return;
+    }
+    const menu = ToggleComponent.getInstance(menuElement as HTMLElement);
+    if (!menu) {
+      return;
+    }
+    menu.toggle();
+  }, []);
   return (
     <nav
       ref={sidebarRef}
