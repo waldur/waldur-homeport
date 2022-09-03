@@ -45,25 +45,30 @@ export const TableHeader: React.FC<TableHeaderProps> = ({
   <thead>
     <tr>
       {expandableRow && <th style={{ width: '10px' }} />}
-      {columns.map((column, index) => (
-        <th
-          key={index}
-          className={
-            classNames(
-              column.className,
-              column.orderField && 'sorting-column',
-            ) || undefined
-          }
-          onClick={
-            column.orderField &&
-            (() =>
-              onSortClick(handleOrdering(currentSorting, column.orderField)))
-          }
-        >
-          {column.title}
-          {renderSortingIcon(column, currentSorting)}
-        </th>
-      ))}
+      {columns.map(
+        (column, index) =>
+          (column.visible ?? true) && (
+            <th
+              key={index}
+              className={
+                classNames(
+                  column.className,
+                  column.orderField && 'sorting-column',
+                ) || undefined
+              }
+              onClick={
+                column.orderField &&
+                (() =>
+                  onSortClick(
+                    handleOrdering(currentSorting, column.orderField),
+                  ))
+              }
+            >
+              {column.title}
+              {renderSortingIcon(column, currentSorting)}
+            </th>
+          ),
+      )}
     </tr>
   </thead>
 );

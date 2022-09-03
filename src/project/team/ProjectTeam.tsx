@@ -4,6 +4,7 @@ import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 
+import { InvitationsList } from './InvitationsList';
 import { ProjectPermissionsLogList } from './ProjectPermissionsLogList';
 import { ProjectUsersList } from './ProjectUsersList';
 
@@ -21,6 +22,11 @@ export const ProjectTeam: FunctionComponent = () => {
         <Tab title={translate('Users')} eventKey="users">
           <PanelBody>
             <ProjectUsersList />
+          </PanelBody>
+        </Tab>
+        <Tab title={translate('Invitations')} eventKey="invitations">
+          <PanelBody>
+            <InvitationsList />
           </PanelBody>
         </Tab>
         <Tab title={translate('Permissions log')} eventKey="permissions">
