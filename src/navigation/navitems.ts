@@ -21,6 +21,10 @@ export const getProjectItems = () => [
         to: 'project.users',
       },
       {
+        title: translate('Invitations'),
+        to: 'project.invitations',
+      },
+      {
         title: translate('Permissions log'),
         to: 'project.permissions-log',
       },

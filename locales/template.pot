@@ -232,6 +232,7 @@ msgstr ""
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -1892,6 +1893,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/project/ProjectResourcesList.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -2662,6 +2664,7 @@ msgstr ""
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/EmailGroup.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -2937,6 +2940,7 @@ msgstr ""
 #: src/customer/team/OfferingPermissionsList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
+#: src/project/team/InvitationsList.tsx
 msgid "Expires at"
 msgstr ""
 
@@ -3809,6 +3813,7 @@ msgstr ""
 
 #: src/customer/utils.ts
 #: src/invitations/InvitationsList.tsx
+#: src/navigation/navitems.ts
 msgid "Invitations"
 msgstr ""
 
@@ -3818,7 +3823,13 @@ msgstr ""
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/InvitationCreateDialog.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
+#: src/project/team/InviteUserToProjectButton.tsx
 msgid "Invite user"
+msgstr ""
+
+#: src/project/team/InviteProjectUserDialog.tsx
+msgid "Invite user to this project"
 msgstr ""
 
 #: src/customer/payments/PaymentUpdateDialog.tsx
@@ -7616,6 +7627,8 @@ msgstr ""
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -7627,6 +7640,7 @@ msgstr ""
 
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 msgid "Role expires on"
 msgstr ""
 
@@ -8145,6 +8159,7 @@ msgstr ""
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Select user..."
 msgstr ""
@@ -8700,6 +8715,7 @@ msgstr ""
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -8979,9 +8995,17 @@ msgstr ""
 msgid "Team"
 msgstr ""
 
+#: src/project/team/InvitationsList.tsx
+msgid "Team invitations"
+msgstr ""
+
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 msgid "Team member has been removed."
+msgstr ""
+
+#: src/project/team/ProjectUsersList.tsx
+msgid "Team members"
 msgstr ""
 
 #: src/customer/dashboard/api.ts
@@ -9909,6 +9933,10 @@ msgstr ""
 msgid "Unable to initialize shopping cart."
 msgstr ""
 
+#: src/project/team/InviteProjectUserDialog.tsx
+msgid "Unable to invite user."
+msgstr ""
+
 #: src/rancher/node/actions/LinkDialog.tsx
 msgid "Unable to link instance."
 msgstr ""
@@ -9996,6 +10024,7 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/slurm/details/AllocationUsageTable.tsx
 msgid "Unable to load data"
@@ -10858,6 +10887,7 @@ msgstr ""
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportEventsListFilter.tsx
@@ -12057,7 +12087,6 @@ msgid "team invitations"
 msgstr ""
 
 #: src/customer/team/CustomerUsersList.tsx
-#: src/project/team/ProjectUsersList.tsx
 msgid "team members"
 msgstr ""
 
