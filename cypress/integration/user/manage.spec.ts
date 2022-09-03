@@ -6,24 +6,27 @@ describe('User manage', () => {
       .intercept('PATCH', '/api/users/3a836bc76e1b40349ec1a0d8220f374f/', {
         fixture: 'users/alice.json',
       })
+      .intercept('HEAD', '/api/customers/', [])
+      .intercept('GET', '/api/marketplace-categories/?field=uuid&field=title&has_offerings=true', [])
+      .intercept('GET', '/api/customers/?page=1&page_size=20&field=name&field=uuid&field=projects&field=owners&field=service_managers&field=abbreviation&field=is_service_provider&o=name&query=&is_service_provider=false', [])
       .setToken()
       .visit('/profile/manage/');
   });
 
-  xit('allows to update user details', () => {
+  it('allows to update user details', () => {
     cy
-      // Ensure that full_name input field is present
-      .get('input[name="full_name"]')
+      // Ensure that first_name input field is present
+      .get('input[name="first_name"]')
 
       // Ensure that Change email button is present
       .get('button')
-      .contains('Change email')
+      .contains('Request change')
       .click()
+
       // Close dialog
       .get('button')
       .contains('Cancel')
       .click()
-
       // Ensure that organization input field is present
       .get('input[name="organization"]')
 
@@ -33,26 +36,29 @@ describe('User manage', () => {
       // Ensure that description input field is present
       .get('input[name="description"]')
 
+      // Adding text to ensure that 'discard' and 'save changes' buttons appear 
+      .type('some text')
+
       // Ensure that phone_number input field is present
       .get('input[name="phone_number"]')
 
-      // Ensure that Remove profile button works
-      .get('button')
-      .contains('Remove profile')
-      .click()
-      // Close remove profile dialog
-      .get('button:contains(Cancel)')
+      // Ensure that Request deletion button works
+      .get('input[type="checkbox"]')
       .last()
       .click()
-
-      // Ensure that Update profile button works
       .get('button')
-      .contains('Update profile')
+      .contains('Request deletion')
       .click()
 
-      // Ensure that link to terms of services is present
-      .get('a')
-      .contains('Terms of Service')
-      .click();
+      // Close remove profile dialog
+      .get('button')
+      .contains('Cancel')
+      .last()
+      .click()
+      
+      // Ensure that Discard button exists and works
+      .get('button')
+      .contains('Discard')
+      .click()
   });
 });
