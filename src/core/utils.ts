@@ -1,4 +1,5 @@
 import { ENV } from '@waldur/configs/default';
+import { translate } from '@waldur/i18n';
 
 export function wait(amount = 0) {
   return new Promise((resolve) => setTimeout(resolve, amount));
@@ -168,3 +169,6 @@ export const orderByFilter = (sorting: {
   mode: 'asc' | 'desc';
   field: string;
 }): string => `${sorting.mode === 'desc' ? '-' : ''}${sorting.field}`;
+
+export const formatRole = (role) =>
+  ENV.roles[role] ? translate(ENV.roles[role]) : role;
