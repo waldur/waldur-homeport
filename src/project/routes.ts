@@ -34,6 +34,13 @@ const ProjectUsersList = lazyComponent(
     ),
   'ProjectUsersList',
 );
+const InvitationsList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "team/InvitationsList" */ './team/InvitationsList'
+    ),
+  'InvitationsList',
+);
 const ProjectPermissionsLogList = lazyComponent(
   () =>
     import(
@@ -89,6 +96,11 @@ export const states: StateDeclaration[] = [
     name: 'project.users',
     url: 'users/',
     component: ProjectUsersList,
+  },
+  {
+    name: 'project.invitations',
+    url: 'invitations/',
+    component: InvitationsList,
   },
   {
     name: 'project.permissions-log',

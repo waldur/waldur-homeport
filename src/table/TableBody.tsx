@@ -12,11 +12,14 @@ interface TableBodyProps {
 
 const TableCells = ({ row, columns }) => (
   <>
-    {columns.map((column, colIndex) => (
-      <td key={colIndex} className={column.className}>
-        {React.createElement(column.render, { row })}
-      </td>
-    ))}
+    {columns.map(
+      (column, colIndex) =>
+        (column.visible ?? true) && (
+          <td key={colIndex} className={column.className}>
+            {React.createElement(column.render, { row })}
+          </td>
+        ),
+    )}
   </>
 );
 

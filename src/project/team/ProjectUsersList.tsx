@@ -87,7 +87,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
           ) : null}
         </ButtonGroup>
       }
-      verboseName={translate('team members')}
+      verboseName={translate('Team members')}
     />
   );
 };
