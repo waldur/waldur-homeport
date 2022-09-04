@@ -101,6 +101,7 @@ msgstr "Pieeja"
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -431,6 +432,7 @@ msgstr "Izmainīt komandas dalībnieku"
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/EmailGroup.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -571,11 +573,13 @@ msgid "Invitation is not valid anymore."
 msgstr "Uzaicinājums vairs nav derīgs."
 
 #: src/customer/team/CustomerTeam.tsx
+#: src/project/team/ProjectTeam.tsx
 msgid "Invitations"
 msgstr "Uzaicinājumi"
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/InvitationCreateDialog.tsx
+#: src/project/team/InvitationToProjectButton.tsx
 msgid "Invite user"
 msgstr "Uzaicināt lietotāju"
 
@@ -781,6 +785,7 @@ msgstr "Apmaksāt rēķinu"
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportEventsListFilter.tsx

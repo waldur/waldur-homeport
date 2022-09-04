@@ -205,6 +205,7 @@ msgstr "Дію було застосовано."
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx

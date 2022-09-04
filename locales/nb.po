@@ -205,6 +205,7 @@ msgstr "Handling har blitt brukt."
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -1676,6 +1677,7 @@ msgstr "Opprettet en ny betaling for {customer_link}."
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/project/ProjectResourcesList.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -2273,6 +2275,7 @@ msgstr "Utgang"
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/EmailGroup.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -2536,6 +2539,7 @@ msgstr "Utløpt"
 #: src/customer/team/OfferingPermissionsList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
+#: src/project/team/InvitationsList.tsx
 msgid "Expires at"
 msgstr "Utløper den"
 
@@ -3289,6 +3293,7 @@ msgid "Invitation rejection"
 msgstr "Avvisning av invitasjon"
 
 #: src/customer/team/CustomerTeam.tsx
+#: src/project/team/ProjectTeam.tsx
 msgid "Invitations"
 msgstr "Invitasjoner"
 
@@ -3298,6 +3303,7 @@ msgstr "Inviter teammedlem"
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/InvitationCreateDialog.tsx
+#: src/project/team/InvitationToProjectButton.tsx
 msgid "Invite user"
 msgstr "Inviter bruker"
 
@@ -6495,6 +6501,8 @@ msgstr "Tilbakekalle"
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -6505,6 +6513,7 @@ msgstr "Rolle"
 
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 msgid "Role expires on"
 msgstr "Rollen utløper den"
 
@@ -6951,6 +6960,7 @@ msgstr "Velg type..."
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Select user..."
 msgstr "Velg bruker..."
@@ -7395,6 +7405,7 @@ msgstr "Oppdatering av statiske ruter ble planlagt."
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -8534,6 +8545,7 @@ msgstr "Kan ikke laste inn generell vurdering av kundestøttetilfredshet."
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/slurm/details/AllocationUsageTable.tsx
 msgid "Unable to load data"
@@ -9264,6 +9276,7 @@ msgstr "Brukes i perioden {period} av:"
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportEventsListFilter.tsx
@@ -10203,7 +10216,6 @@ msgid "team invitations"
 msgstr "teaminvitasjoner"
 
 #: src/customer/team/CustomerUsersList.tsx
-#: src/project/team/ProjectUsersList.tsx
 msgid "team members"
 msgstr "gruppemedlemmer"
 
@@ -10397,6 +10409,7 @@ msgid "{resource_name} has been deleted."
 msgstr "{resource_name} har blitt slettet."
 
 #: src/invitations/RoleField.tsx
+#: src/project/team/RoleField.tsx
 msgid "{role} in {project}"
 msgstr "{role} i {project}"
 

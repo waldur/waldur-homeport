@@ -205,6 +205,7 @@ msgstr "Действие было применено."
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -1283,6 +1284,7 @@ msgstr "Создать запрос"
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/project/ProjectResourcesList.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -1632,11 +1634,13 @@ msgid "Invitation is not valid anymore."
 msgstr "Приглашение больше не действительно."
 
 #: src/customer/team/CustomerTeam.tsx
+#: src/project/team/ProjectTeam.tsx
 msgid "Invitations"
 msgstr "Приглашения"
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/InvitationCreateDialog.tsx
+#: src/project/team/InvitationToProjectButton.tsx
 msgid "Invite user"
 msgstr "Пригласить пользователя"
 

@@ -135,6 +135,7 @@ msgstr "Uçotun başlama tarixi "
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -777,6 +778,7 @@ msgstr "{customer_link} üçün yeni ödəniş yaradıldı."
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/project/ProjectResourcesList.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -1102,6 +1104,7 @@ msgstr "Heyət üzvünü redaktə etmək"
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/EmailGroup.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -1226,6 +1229,7 @@ msgstr "Vaxtı bitmiş"
 #: src/customer/team/OfferingPermissionsList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
+#: src/project/team/InvitationsList.tsx
 msgid "Expires at"
 msgstr "---- da vaxtı bitir"
 
@@ -1634,11 +1638,13 @@ msgid "Invitation is not valid anymore."
 msgstr "Dəvət artıq etibarlı deyil."
 
 #: src/customer/team/CustomerTeam.tsx
+#: src/project/team/ProjectTeam.tsx
 msgid "Invitations"
 msgstr "Dəvətlər"
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/InvitationCreateDialog.tsx
+#: src/project/team/InvitationToProjectButton.tsx
 msgid "Invite user"
 msgstr "İstifadəçini dəvət edin"
 
@@ -2981,6 +2987,8 @@ msgstr "Yenidən cəhd edin"
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -2991,6 +2999,7 @@ msgstr "Vəzifə"
 
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 msgid "Role expires on"
 msgstr "Vəzifə ______başa çatır"
 
@@ -3188,6 +3197,7 @@ msgstr "____qoşulmaq üçün alt şəbəkələri seçin ..."
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Select user..."
 msgstr "İstifadəçini seçin ..."
@@ -4003,6 +4013,7 @@ msgstr "“Sudo”  istifadə edin"
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportEventsListFilter.tsx

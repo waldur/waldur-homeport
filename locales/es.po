@@ -209,6 +209,7 @@ msgstr "Se ha aplicado una acción."
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -1680,6 +1681,7 @@ msgstr "Creado un nuevo pago para {customer_link}."
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/project/ProjectResourcesList.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -2277,6 +2279,7 @@ msgstr "Salida"
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/EmailGroup.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -2540,6 +2543,7 @@ msgstr "Expirado"
 #: src/customer/team/OfferingPermissionsList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
+#: src/project/team/InvitationsList.tsx
 msgid "Expires at"
 msgstr "Expira en"
 
@@ -3293,6 +3297,7 @@ msgid "Invitation rejection"
 msgstr "Rechazo de la invitación"
 
 #: src/customer/team/CustomerTeam.tsx
+#: src/project/team/ProjectTeam.tsx
 msgid "Invitations"
 msgstr "Invitaciones"
 
@@ -3302,6 +3307,7 @@ msgstr "Invitar a un miembro del equipo"
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/InvitationCreateDialog.tsx
+#: src/project/team/InvitationToProjectButton.tsx
 msgid "Invite user"
 msgstr "Invitar al usuario"
 
@@ -6499,6 +6505,8 @@ msgstr "Revocar"
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -6509,6 +6517,7 @@ msgstr "Rol"
 
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 msgid "Role expires on"
 msgstr "El rol expira el"
 
@@ -6955,6 +6964,7 @@ msgstr "Seleccione el tipo..."
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Select user..."
 msgstr "Seleccione el usuario..."
@@ -7399,6 +7409,7 @@ msgstr "Se programó la actualización de rutas estáticas."
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -8538,6 +8549,7 @@ msgstr "No se puede cargar la calificación general de satisfacción del soporte
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
+#: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/slurm/details/AllocationUsageTable.tsx
 msgid "Unable to load data"
@@ -9268,6 +9280,7 @@ msgstr "Utilizado en el período {period} por:"
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportEventsListFilter.tsx
@@ -10207,7 +10220,6 @@ msgid "team invitations"
 msgstr "invitaciones del equipo"
 
 #: src/customer/team/CustomerUsersList.tsx
-#: src/project/team/ProjectUsersList.tsx
 msgid "team members"
 msgstr "miembros del equipo"
 
@@ -10401,6 +10413,7 @@ msgid "{resource_name} has been deleted."
 msgstr "{resource_name} se ha eliminado."
 
 #: src/invitations/RoleField.tsx
+#: src/project/team/RoleField.tsx
 msgid "{role} in {project}"
 msgstr "{role} en {project}"
 
