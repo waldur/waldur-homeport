@@ -5546,6 +5546,10 @@ msgstr ""
 msgid "Organization update ({name})"
 msgstr ""
 
+#: src/customer/details/CustomerDetailsPanel.tsx
+msgid "Organization updated successfully"
+msgstr ""
+
 #: src/customer/popover/CustomerPopover.tsx
 msgid "Organization users list"
 msgstr ""

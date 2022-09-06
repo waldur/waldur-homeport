@@ -26,6 +26,7 @@ import { WindowedSelect } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getNativeNameVisible } from '@waldur/store/config';
+import { showError, showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
 import {
   getUser,
@@ -106,7 +107,7 @@ export const CustomerDetailsPanel = enhance((props) => {
   const canEditCustomer = user.is_staff || (isOwner && ownerCanManage);
   const { loading, value } = useAsync(loadCountries);
 
-  const updateCustomer = (formData) => {
+  const updateCustomer = async (formData) => {
     if (canEditCustomer) {
       const data = { ...formData };
       if (!data.image) {
@@ -115,11 +116,17 @@ export const CustomerDetailsPanel = enhance((props) => {
         data.image = undefined;
       }
 
-      return sendForm(
-        'PATCH',
-        `${ENV.apiEndpoint}api/customers/${customer.uuid}/`,
-        { ...data, country: data.country.value },
-      );
+      try {
+        const response = await sendForm(
+          'PATCH',
+          `${ENV.apiEndpoint}api/customers/${customer.uuid}/`,
+          { ...data, country: data.country.value },
+        );
+        dispatch(showSuccess(translate('Organization updated successfully')));
+        return response;
+      } catch (error) {
+        dispatch(showError(error.message));
+      }
     } else {
       dispatch(
         openModalDialog(CustomerErrorDialog, {
