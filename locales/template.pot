@@ -3289,6 +3289,10 @@ msgstr ""
 msgid "Generate password"
 msgstr ""
 
+#: src/navigation/sidebar/SidebarFooter.tsx
+msgid "Go to Marketplace"
+msgstr ""
+
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "Go to marketplace"
 msgstr ""
@@ -4305,7 +4309,6 @@ msgid "Mark invoice as paid"
 msgstr ""
 
 #: src/marketplace/landing/LandingPageContainer.tsx
-#: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Marketplace"
 msgstr ""
 

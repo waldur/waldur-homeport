@@ -18,7 +18,9 @@
 .aside-footer .btn-custom.btn-marketplace .btn-label {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  font-weight: 400;
+  font-size: 12px;
   align-items: center;
 }
 
@@ -28,8 +30,11 @@
   padding: 0;
 }
 
-.aside-footer .btn-custom.btn-marketplace .btn-label i.line {
-  width: 1px;
-  height: 12px;
-  background-color: #b5b5c3;
+.aside-footer .btn-custom.btn-marketplace .btn-label i.shop {
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.aside-footer .btn-custom.btn-marketplace .btn-label i.angle {
+  margin-left: auto;
 }
