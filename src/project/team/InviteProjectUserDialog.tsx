@@ -4,29 +4,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { usersAutocomplete } from '@waldur/customer/team/api';
 import { getRoles } from '@waldur/customer/team/utils';
 import { FormContainer, SelectField } from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
+import { EmailGroup } from '@waldur/invitations/actions/EmailGroup';
 import { InvitationService } from '@waldur/invitations/InvitationService';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { UserListOptionInline } from '@waldur/project/team/UserGroup';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getProject } from '@waldur/workspace/selectors';
 
 const FORM_ID = 'AddProjectUserDialog';
 
-interface AddProjectUserDialogFormData {
+interface InviteProjectUserDialogFormData {
   role: string;
   expiration_time: string;
-  user: any;
+  email: string;
 }
 
 export const InviteProjectUserDialog = reduxForm<
-  AddProjectUserDialogFormData,
+  InviteProjectUserDialogFormData,
   { refreshList }
 >({
   form: FORM_ID,
@@ -34,16 +32,10 @@ export const InviteProjectUserDialog = reduxForm<
   const dispatch = useDispatch();
   const currentProject = useSelector(getProject);
 
-  const getOptionLabel = (option) =>
-    option.email
-      ? (option.full_name || option.username) + ` (${option.email})`
-      : option.full_name || option.username;
-
   const inviteUser = async (formData) => {
     try {
       const payload = {
-        user: formData.user.url,
-        email: formData.user.email,
+        email: formData.email,
         project: currentProject.url,
         expiration_time: formData.expiration_time,
         project_role: formData.role.value,
@@ -64,18 +56,7 @@ export const InviteProjectUserDialog = reduxForm<
       </Modal.Header>
       <Modal.Body>
         <FormContainer submitting={submitting}>
-          <AsyncSelectField
-            name="user"
-            label={translate('User')}
-            placeholder={translate('Select user...')}
-            loadOptions={(query, prevOptions, page) =>
-              usersAutocomplete({ full_name: query }, prevOptions, page)
-            }
-            getOptionValue={(option) => option.full_name || option.username}
-            getOptionLabel={getOptionLabel}
-            components={{ Option: UserListOptionInline }}
-            required={true}
-          />
+          <EmailGroup disabled={false} />
           <SelectField
             name="role"
             label={translate('Role')}

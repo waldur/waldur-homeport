@@ -8159,7 +8159,6 @@ msgstr ""
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Select user..."
 msgstr ""
@@ -10887,7 +10886,6 @@ msgstr ""
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportEventsListFilter.tsx
