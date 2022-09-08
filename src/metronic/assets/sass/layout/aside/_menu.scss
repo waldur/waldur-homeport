@@ -51,10 +51,10 @@
 
       //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
       @include menu-link-default-state(
-        #9899ac,
+        #d2d5d3,
         #494b74,
-        #9899ac,
-        #9899ac,
+        #d2d5d3,
+        #d2d5d3,
         null
       );
       @include menu-link-hover-state(
@@ -62,7 +62,7 @@
         $primary,
         $primary,
         $white,
-        #1b1b28
+        #405448
       );
       @include menu-link-here-state(
         $white,
