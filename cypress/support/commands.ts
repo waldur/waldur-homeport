@@ -22,7 +22,7 @@ declare global {
   }
 }
 
-import '../integration/openstack/instance/commands';
+import '../e2e/openstack/instance/commands';
 
 Cypress.Commands.add('setToken', () => {
   window.localStorage.setItem('AUTH_TOKEN', 'valid');
