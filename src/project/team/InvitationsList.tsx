@@ -9,6 +9,7 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { InvitationCancelButton } from '@waldur/invitations/actions/InvitationCancelButton';
+import { InvitationCreateButton } from '@waldur/invitations/actions/InvitationCreateButton';
 import { InvitationSendButton } from '@waldur/invitations/actions/InvitationSendButton';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { InvitationsFilter } from '@waldur/invitations/InvitationsFilter';
@@ -22,7 +23,6 @@ import {
 } from '@waldur/workspace/selectors';
 
 import { fetchProjectManagers } from './api';
-import { InviteUserToProjectButton } from './InviteUserToProjectButton';
 import { RoleField } from './RoleField';
 
 const TableComponent: FunctionComponent<any> = (props) => {
@@ -74,9 +74,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       verboseName={translate('Team invitations')}
       actions={
-        props.canManage ? (
-          <InviteUserToProjectButton refreshList={props.fetch} />
-        ) : null
+        <InvitationCreateButton
+          project={props.project}
+          refreshList={props.fetch}
+        />
       }
       hasQuery={true}
       expandableRow={InvitationExpandableRow}
@@ -127,6 +128,7 @@ export const InvitationsList: FunctionComponent = () => {
     <InvitationsListComponent
       filters={<InvitationsFilter />}
       canManage={isProjectManager || isOwnerOrStaff}
+      project={project}
     />
   );
 };
