@@ -67,8 +67,8 @@ $aside-config: (
   // transition speed
   padding-x: 25px,
   menu-indention: 0.75rem,
-  bg-color: #1e2d22,
-  logo-bg-color: #19271a,
+  bg-color: #1e1e2d,
+  logo-bg-color: darken(#1e1e2d, 2%),
   scrollbar-color: if(isDarkMode(), $gray-200, #3b3b64),
   scrollbar-hover-color: if(isDarkMode(), $gray-300, lighten(#3b3b64, 3%)),
   // Aside width for desktop mode

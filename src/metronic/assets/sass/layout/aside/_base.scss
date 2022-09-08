@@ -56,19 +56,19 @@
     .btn-custom {
       //$color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active
       @include button-custom-variant(
-        #ffffff,
+        #b5b5c3,
         null,
         null,
-        #405448,
-        #ffffff,
+        rgba(63, 66, 84, 0.35),
+        #b5b5c3,
         null,
         null,
-        #405448
+        rgba(63, 66, 84, 0.35)
       );
 
       .btn-icon {
-        color: #ffffff;
-        @include svg-icon-color(#ffffff);
+        color: #b5b5c3;
+        @include svg-icon-color(#b5b5c3);
       }
     }
   }
