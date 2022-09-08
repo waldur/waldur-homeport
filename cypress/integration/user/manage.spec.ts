@@ -43,7 +43,7 @@ describe('User manage', () => {
       .get('input[name="phone_number"]')
 
       // Ensure that Request deletion button works
-      /*.get('input[type="checkbox"]')
+      .get('input[type="checkbox"]')
       .last()
       .click()
       .get('button')
@@ -59,6 +59,6 @@ describe('User manage', () => {
       // Ensure that Discard button exists and works
       .get('button')
       .contains('Discard')
-      .click()*/
+      .click()
   });
 });

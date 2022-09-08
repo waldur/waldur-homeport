@@ -3,10 +3,7 @@ import { FunctionComponent } from 'react';
 import { ENV } from '@waldur/configs/default';
 
 export const BrandName: FunctionComponent = () => (
-  <div
-    className="aside-logo flex-column-auto position-relative"
-    id="kt_aside_logo"
-  >
+  <div className="aside-logo flex-column-auto" id="kt_aside_logo">
     {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
       <img src={ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO} className="h-25px logo" />
     ) : (
@@ -19,23 +16,19 @@ export const BrandName: FunctionComponent = () => (
     )}
     <div
       id="kt_aside_toggle"
-      className="btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
+      className="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
       data-kt-toggle="true"
       data-kt-toggle-state="active"
       data-kt-toggle-target="body"
       data-kt-toggle-name="aside-minimize"
-      style={{
-        background: 'white',
-        boxShadow: '0px 0px 10px rgba(113, 121, 136, 0.1)',
-      }}
     >
-      <span className="svg-icon svg-icon-2 rotate-180">
+      <span className="svg-icon svg-icon-1 rotate-180">
         <svg
+          xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             opacity="0.5"

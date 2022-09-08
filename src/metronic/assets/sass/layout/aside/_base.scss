@@ -106,6 +106,7 @@
       bottom: 0;
       left: 0;
       z-index: get($aside-config, z-index);
+      overflow: hidden;
     }
 
     // Static aside mode
