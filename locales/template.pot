@@ -1681,7 +1681,6 @@ msgstr ""
 
 #: src/customer/create/CountryGroup.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/SelectCountryField.tsx
 msgid "Country"
 msgstr ""
 
@@ -5496,6 +5495,7 @@ msgid "Organization has signed a fixed price agreement"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationUpdate.tsx
 msgid "Organization image"
 msgstr ""
 

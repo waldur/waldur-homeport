@@ -1,5 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
+import { Card } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -31,6 +32,8 @@ export const OrganizationUpdateContainer: FunctionComponent = () => {
   ) : error ? (
     <>{translate('Unable to load customer.')}</>
   ) : (
-    <OrganizationUpdate customer={customer} />
+    <Card body>
+      <OrganizationUpdate customer={customer} />
+    </Card>
   );
 };

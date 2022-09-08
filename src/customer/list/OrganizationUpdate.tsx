@@ -18,16 +18,15 @@ import {
   TextField,
 } from '@waldur/form';
 import { EmailField } from '@waldur/form/EmailField';
+import { ImageField } from '@waldur/form/ImageField';
 import { translate } from '@waldur/i18n';
-
-import { CustomerLogoUpdate } from '../details/CustomerLogoUpdate';
 
 const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
   <form
     onSubmit={props.handleSubmit(props.submitRequest)}
     style={{ marginTop: '20px' }}
   >
-    <FormContainer submitting={props.submitting}>
+    <FormContainer submitting={props.submitting} floating={true}>
       <StringField
         name="name"
         label={translate('Name')}
@@ -56,6 +55,7 @@ const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
         name="contact_details"
         label={translate('Contact details')}
         rows={2}
+        style={{ height: '120px' }}
       />
 
       <StringField
@@ -93,9 +93,16 @@ const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
       <NumberField
         name="default_tax_percent"
         label={translate('Tax percent')}
+        unit="%"
+        max={50}
       />
 
-      <CustomerLogoUpdate customer={props.customer} formData={props.formData} />
+      <ImageField
+        floating={false}
+        label={translate('Organization image')}
+        name="image"
+        initialValue={props.initialValues.image}
+      />
 
       <Form.Group>
         <div
