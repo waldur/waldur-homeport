@@ -82,8 +82,13 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
 
   const roles = useMemo(() => getRoles(context), [context]);
   useEffect(() => {
-    dispatch(change(INVITATION_CREATE_FORM_ID, 'role', roles[0].value));
-  }, [dispatch, roles]);
+    if (context.project) {
+      dispatch(change(INVITATION_CREATE_FORM_ID, 'role', roles[1].value));
+      dispatch(change(INVITATION_CREATE_FORM_ID, 'project', context.project));
+    } else {
+      dispatch(change(INVITATION_CREATE_FORM_ID, 'role', roles[0].value));
+    }
+  }, [dispatch, roles, context]);
 
   const roleDisabled =
     isFeatureVisible('invitation.require_user_details') && !userDetails;
@@ -117,7 +122,14 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
         dispatch(showErrorResponse(e, 'Unable to create invitation.'));
       }
     },
-    [dispatch, router.stateService, context.customer, userDetails, role],
+    [
+      dispatch,
+      router.stateService,
+      context.customer,
+      userDetails,
+      role,
+      context,
+    ],
   );
 
   return {

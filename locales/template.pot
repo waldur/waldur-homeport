@@ -3826,13 +3826,7 @@ msgstr ""
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/InvitationCreateDialog.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
-#: src/project/team/InviteUserToProjectButton.tsx
 msgid "Invite user"
-msgstr ""
-
-#: src/project/team/InviteProjectUserDialog.tsx
-msgid "Invite user to this project"
 msgstr ""
 
 #: src/customer/payments/PaymentUpdateDialog.tsx
@@ -7635,7 +7629,6 @@ msgstr ""
 #: src/invitations/actions/RoleGroup.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -7647,7 +7640,6 @@ msgstr ""
 
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 msgid "Role expires on"
 msgstr ""
 
@@ -9937,10 +9929,6 @@ msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
 msgid "Unable to initialize shopping cart."
-msgstr ""
-
-#: src/project/team/InviteProjectUserDialog.tsx
-msgid "Unable to invite user."
 msgstr ""
 
 #: src/rancher/node/actions/LinkDialog.tsx
