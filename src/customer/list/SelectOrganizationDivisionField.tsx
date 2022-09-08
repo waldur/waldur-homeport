@@ -36,10 +36,10 @@ const SingleValue: FunctionComponent<any> = (props) => {
 export const SelectOrganizationDivisionField: FunctionComponent<SelectOrganizationDivisionFieldProps> =
   (props) => (
     <Form.Group className={props.isFilterForm ? ' col-sm-3' : ''}>
-      <Form.Label className={props.isFilterForm ? '' : 'col-sm-2'}>
+      <Form.Label className={props.isFilterForm ? '' : 'd-none'}>
         {translate('Division')}
       </Form.Label>
-      <div className={props.isFilterForm ? '' : 'col-sm-8'}>
+      <div className={props.isFilterForm ? '' : 'mb-7'}>
         <Field
           name="division"
           component={(fieldProps) => (

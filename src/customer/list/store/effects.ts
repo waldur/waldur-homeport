@@ -2,7 +2,6 @@ import { triggerTransition } from '@uirouter/redux';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import { uploadLogo } from '@waldur/customer/details/store/api';
 import * as api from '@waldur/customer/list/api';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -13,14 +12,8 @@ import * as constants from '../constants';
 
 function* organizationUpdate(action) {
   try {
-    const { image, ...payload } = action.payload;
+    const { ...payload } = action.payload;
     yield call(api.updateOrganization, payload);
-    if (image) {
-      yield call(uploadLogo, {
-        customerUuid: payload.uuid,
-        image,
-      });
-    }
     yield put(
       showSuccess(translate('Organization has been updated successfully.')),
     );

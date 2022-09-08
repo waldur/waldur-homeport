@@ -56,7 +56,12 @@ export class FormGroup extends PureComponent<FormGroupProps> {
       </Form.Label>
     );
     return (
-      <div className={classNames({ 'form-floating': floating }, 'mb-7')}>
+      <div
+        className={classNames(
+          { 'form-floating': floating, 'd-flex': floating },
+          'mb-7',
+        )}
+      >
         {!floating && labelNode}
         {cloneElement(children as any, newProps)}
         {floating && labelNode}

@@ -22,6 +22,7 @@ export const getInitialValuesOfOrganizationUpdateForm = (
   phone_number: customer.phone_number,
   access_subnets: customer.access_subnets,
   homepage: customer.homepage,
+  image: customer.image,
   country: {
     value: customer.country,
     display_name: customer.country_name,

@@ -1,5 +1,5 @@
 import { ENV } from '@waldur/configs/default';
-import { get, put } from '@waldur/core/api';
+import { get, sendForm } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import {
   getDivisionTypesList,
@@ -21,8 +21,20 @@ export const getInvoice = (invoiceUrl, date) =>
     params: { customer: invoiceUrl, year: date.year, month: date.month },
   }).then((response) => response.data[0]);
 
-export const updateOrganization = (data) =>
-  put(`/customers/${data.uuid}/`, data);
+export const updateOrganization = (formData) => {
+  const data = { ...formData };
+  if (!data.image) {
+    data.image = '';
+  } else if (!(data.image instanceof File)) {
+    data.image = undefined;
+  }
+
+  return sendForm(
+    'PATCH',
+    `${ENV.apiEndpoint}api/customers/${data.uuid}/`,
+    data,
+  );
+};
 
 export const organizationDivisionAutocomplete = async (
   query: string,
