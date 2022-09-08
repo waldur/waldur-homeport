@@ -10,7 +10,7 @@ export interface FormContainerProps {
 }
 
 export const FormContainer: React.FC<FormContainerProps> = (props) => (
-  <div>
+  <div className="size-sm">
     {React.Children.map(props.children, (input: any) =>
       input && input.props && input.props.name ? (
         <Field
