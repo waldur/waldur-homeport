@@ -37,6 +37,13 @@ export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
     roles,
     projectEnabled,
   } = useInvitationCreateDialog(context);
+  const getRoles = () => {
+    if (context.project) {
+      return roles.slice(1);
+    }
+    return roles;
+  };
+
   const disabled = submitting || fetchingUserDetails;
   return (
     <form onSubmit={handleSubmit(createInvitation)}>
@@ -54,9 +61,9 @@ export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
           onClick={fetchUserDetailsCallback}
         />
         <UserDetailsGroup userDetails={userDetails} />
-        {!roleDisabled && <RoleGroup roles={roles} />}
+        {!roleDisabled && <RoleGroup roles={getRoles()} />}
 
-        {projectEnabled && (
+        {projectEnabled && !context.project && (
           <ProjectGroup customer={context.customer} disabled={disabled} />
         )}
       </ModalBody>
