@@ -1,4 +1,4 @@
-import { Customer } from '@waldur/workspace/types';
+import { Customer, Project } from '@waldur/workspace/types';
 
 export interface UserDetails {
   full_name: string;
@@ -10,4 +10,5 @@ export interface UserDetails {
 export interface InvitationContext {
   customer: Customer;
   refreshList?(): void;
+  project?: Project;
 }

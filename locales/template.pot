@@ -3724,22 +3724,13 @@ msgstr ""
 msgid "Invitations"
 msgstr ""
 
-#: src/project/team/InviteProjectUserDialog.tsx
-msgid "Invite"
-msgstr ""
-
 #: src/customer/dashboard/InviteUserAction.ts
 msgid "Invite team member"
 msgstr ""
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/InvitationCreateDialog.tsx
-#: src/project/team/InvitationToProjectButton.tsx
 msgid "Invite user"
-msgstr ""
-
-#: src/project/team/InviteProjectUserDialog.tsx
-msgid "Invite user to project"
 msgstr ""
 
 #: src/customer/payments/PaymentUpdateDialog.tsx
@@ -4259,6 +4250,10 @@ msgstr ""
 msgid "Maximal number of resources"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentMaxAvailableLimitField.tsx
+msgid "Maximal safe amount of resource to allocate."
+msgstr ""
+
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Maximal value"
 msgstr ""
@@ -4273,6 +4268,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
 msgid "Maximum annually"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentMaxAvailableLimitField.tsx
+msgid "Maximum available limit"
 msgstr ""
 
 #: src/vmware/VMwareForm.tsx
@@ -7475,7 +7474,6 @@ msgstr ""
 #: src/invitations/actions/RoleGroup.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -7486,7 +7484,6 @@ msgstr ""
 
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 msgid "Role expires on"
 msgstr ""
 
@@ -7969,7 +7966,6 @@ msgstr ""
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Select user..."
 msgstr ""
@@ -9692,10 +9688,6 @@ msgstr ""
 msgid "Unable to initialize shopping cart."
 msgstr ""
 
-#: src/project/team/InviteProjectUserDialog.tsx
-msgid "Unable to invite user."
-msgstr ""
-
 #: src/rancher/node/actions/LinkDialog.tsx
 msgid "Unable to link instance."
 msgstr ""
@@ -10641,7 +10633,6 @@ msgstr ""
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportEventsListFilter.tsx
