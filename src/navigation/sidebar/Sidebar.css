@@ -15,6 +15,10 @@
   display: none;
 }
 
+.aside:not(:hover) #kt_aside_toggle {
+  display: none;
+}
+
 .aside-footer .btn-custom.btn-marketplace .btn-label {
   width: 100%;
   display: flex;
