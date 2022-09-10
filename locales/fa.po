@@ -2459,7 +2459,6 @@ msgstr "از اعضای تیم دعوت کنید"
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/InvitationCreateDialog.tsx
-#: src/project/team/InvitationToProjectButton.tsx
 msgid "Invite user"
 msgstr "کاربر را دعوت کنید"
 

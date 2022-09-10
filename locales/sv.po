@@ -3243,7 +3243,6 @@ msgstr "Bjud in teammedlem"
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/InvitationCreateDialog.tsx
-#: src/project/team/InvitationToProjectButton.tsx
 msgid "Invite user"
 msgstr "Bjud in användare"
 
@@ -6401,7 +6400,6 @@ msgstr "Återkalla"
 #: src/invitations/actions/RoleGroup.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -6412,7 +6410,6 @@ msgstr "Roll"
 
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 msgid "Role expires on"
 msgstr "Rollen upphör att gälla den"
 
@@ -6859,7 +6856,6 @@ msgstr "Välj typ..."
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Select user..."
 msgstr "Välj användare..."
@@ -9155,7 +9151,6 @@ msgstr "Används under perioden {period} av:"
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportEventsListFilter.tsx

@@ -2989,7 +2989,6 @@ msgstr "Kutsu meeskonna liiget"
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/InvitationCreateDialog.tsx
-#: src/project/team/InvitationToProjectButton.tsx
 msgid "Invite user"
 msgstr "Kutsu kasutaja"
 
@@ -5417,7 +5416,6 @@ msgstr "Arvustused"
 #: src/invitations/actions/RoleGroup.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -5428,7 +5426,6 @@ msgstr "Roll"
 
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 msgid "Role expires on"
 msgstr "Roll vananeb"
 
@@ -5752,7 +5749,6 @@ msgstr "Vali tüüp..."
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Select user..."
 msgstr "Valige kasutaja..."
@@ -7201,7 +7197,6 @@ msgstr "Kasuda sudo"
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportEventsListFilter.tsx

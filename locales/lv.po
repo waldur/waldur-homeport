@@ -579,7 +579,6 @@ msgstr "Uzaicinājumi"
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/InvitationCreateDialog.tsx
-#: src/project/team/InvitationToProjectButton.tsx
 msgid "Invite user"
 msgstr "Uzaicināt lietotāju"
 
@@ -785,7 +784,6 @@ msgstr "Apmaksāt rēķinu"
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportEventsListFilter.tsx

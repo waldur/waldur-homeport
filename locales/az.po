@@ -1644,7 +1644,6 @@ msgstr "Dəvətlər"
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/InvitationCreateDialog.tsx
-#: src/project/team/InvitationToProjectButton.tsx
 msgid "Invite user"
 msgstr "İstifadəçini dəvət edin"
 
@@ -2988,7 +2987,6 @@ msgstr "Yenidən cəhd edin"
 #: src/invitations/actions/RoleGroup.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -2999,7 +2997,6 @@ msgstr "Vəzifə"
 
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 msgid "Role expires on"
 msgstr "Vəzifə ______başa çatır"
 
@@ -3197,7 +3194,6 @@ msgstr "____qoşulmaq üçün alt şəbəkələri seçin ..."
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Select user..."
 msgstr "İstifadəçini seçin ..."
@@ -4013,7 +4009,6 @@ msgstr "“Sudo”  istifadə edin"
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/InviteProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportEventsListFilter.tsx
