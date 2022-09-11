@@ -7,6 +7,8 @@ describe('SSH Keys', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()
+      .mockCustomers()
+      .intercept('GET', '/api/marketplace-categories/**', [])
       .setToken()
       .intercept(
         'GET',
@@ -14,11 +16,11 @@ describe('SSH Keys', () => {
         {
           fixture: 'dashboard/ssh-keys.json',
         },
-      );
+      )
     cy.visit('/profile/keys/');
   });
 
-  xit('Should display error messages for invalid key input', () => {
+  it('Should display error messages for invalid key input', () => {
     cy.intercept('POST', '/api/keys/', {
       statusCode: 400,
       body: {
@@ -35,7 +37,7 @@ describe('SSH Keys', () => {
     cy.get("[data-testid='notification']").contains(errorInvalidInput);
   });
 
-  xit('Should display error messages for existing key input', () => {
+  it('Should display error messages for existing key input', () => {
     cy.intercept('POST', '/api/keys/', {
       statusCode: 400,
       body: {
@@ -54,7 +56,7 @@ describe('SSH Keys', () => {
     cy.get("[data-testid='notification']").contains(errorKeyExist);
   });
 
-  xit('Should add a ssh key with appropriate inputs', () => {
+  it('Should add a ssh key with appropriate inputs', () => {
     cy.intercept('POST', '/api/keys/', {
       statusCode: 201,
       fixture: 'dashboard/ssh-key',
@@ -71,7 +73,7 @@ describe('SSH Keys', () => {
     });
   });
 
-  xit('Should be able to delete a ssh key', () => {
+  it('Should be able to delete a ssh key', () => {
     cy.fixture('dashboard/ssh-keys').then((keys) => {
       cy.intercept('DELETE', `/api/keys/${keys[0].uuid}/`, {});
       cy.get('.table-container tbody tr')
