@@ -6,6 +6,7 @@ declare global {
     interface Chainable {
       mockUser(userName?: string): Chainable;
       mockCustomer(): Chainable;
+      mockCustomers(): Chainable;
       mockChecklists(): Chainable;
       mockConfigs(): Chainable;
       fillAndSubmitLoginForm(username?: string, password?: string): Chainable;
@@ -124,11 +125,12 @@ Cypress.Commands.add('mockUser', (userName) => {
 });
 
 Cypress.Commands.add('mockCustomer', () => {
-  cy.intercept(
-    'GET',
-    '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/counters/',
-    {},
-  )
+  cy
+    .intercept(
+      'GET',
+      '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/counters/',
+      {},
+    )
     .intercept('GET', '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/', {
       fixture: 'customers/alice.json',
     })
@@ -146,3 +148,9 @@ Cypress.Commands.add('mockChecklists', () => {
     fixture: 'marketplace/checklists_categories.json',
   });
 });
+
+Cypress.Commands.add('mockCustomers', ()=> {
+  cy
+    .intercept('HEAD', '/api/customers/', [])
+    .intercept('GET', '/api/customers/**', [])
+})
