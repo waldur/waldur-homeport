@@ -3,6 +3,8 @@
   "uuid": "3a836bc76e1b40349ec1a0d8220f374f",
   "username": "staff",
   "full_name": "Alice Lebowski",
+  "first_name": "Alice",
+  "last_name": "Lebowski",
   "native_name": "Alice Lebowski",
   "job_title": "Administrator",
   "email": "alice@lebowski.com",

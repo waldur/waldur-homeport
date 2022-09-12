@@ -18,7 +18,8 @@ import { EmailField } from './EmailField';
 import { TermsOfService } from './TermsOfService';
 
 interface UserEditFormData {
-  full_name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   user_status?: string;
   id_code?: string;
@@ -48,18 +49,6 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
         user={props.user}
         protected={props.fieldIsProtected('email')}
       />
-      {props.user.full_name && (
-        <StaticField
-          label={translate('Full name')}
-          value={props.user.full_name}
-          disabled
-          protected={
-            props.fieldIsProtected('first_name') ||
-            props.fieldIsProtected('last_name') ||
-            props.fieldIsProtected('full_name')
-          }
-        />
-      )}
       {!props.fieldIsProtected('first_name') && (
         <StringField
           name="first_name"
