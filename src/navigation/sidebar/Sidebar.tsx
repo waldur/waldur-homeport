@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 import {
   DrawerComponent,
+  MenuComponent,
   ScrollComponent,
   ToggleComponent,
 } from '@waldur/metronic/assets/ts/components';
@@ -12,6 +13,14 @@ import { BrandName } from './BrandName';
 import { SidebarFooter } from './SidebarFooter';
 import './Sidebar.css';
 
+function getSidebarToggle() {
+  const menuElement = document.querySelector('#kt_aside_toggle');
+  if (!menuElement) {
+    return;
+  }
+  return ToggleComponent.getInstance(menuElement as HTMLElement);
+}
+
 export const Sidebar: React.FC = (props) => {
   const sidebarRef = useRef<HTMLElement>(undefined);
   useEffect(() => {
@@ -19,22 +28,38 @@ export const Sidebar: React.FC = (props) => {
       ToggleComponent.reinitialization();
       DrawerComponent.reinitialization();
       ScrollComponent.reinitialization();
+      MenuComponent.reinitialization();
+
+      // Expand sidebar when project selector is shown
+      const menuElement = document.querySelector('.quick-project-selector');
+      if (!menuElement) {
+        return;
+      }
+      const menu = MenuComponent.getInstance(menuElement as HTMLElement);
+      if (!menu) {
+        return;
+      }
+      menu.on('kt.menu.dropdown.shown', function () {
+        const control = getSidebarToggle();
+        if (!control) {
+          return;
+        }
+        if (document.body.hasAttribute('data-kt-aside-minimize')) {
+          control.toggle();
+        }
+      });
     }
   }, [sidebarRef]);
   useEffect(() => {
+    // Collapse sidebar once when application is initialized
     if (document.body.getAttribute('data-waldur-sidebar')) {
       return;
     }
     document.body.setAttribute('data-waldur-sidebar', 'on');
-    const menuElement = document.querySelector('#kt_aside_toggle');
-    if (!menuElement) {
-      return;
+    const control = getSidebarToggle();
+    if (control) {
+      control.toggle();
     }
-    const menu = ToggleComponent.getInstance(menuElement as HTMLElement);
-    if (!menu) {
-      return;
-    }
-    menu.toggle();
   }, []);
   return (
     <nav

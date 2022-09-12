@@ -42,8 +42,7 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
         className="d-flex align-items-sm-center justify-content-center py-5"
         style={{ padding: '0 25px' }}
         data-kt-menu-trigger="click"
-        data-kt-menu-attach=".page .header"
-        data-kt-menu-placement="bottom-start"
+        data-kt-menu-placement="right-start"
         data-kt-menu-flip="bottom"
       >
         <div className="symbol symbol-50px">
