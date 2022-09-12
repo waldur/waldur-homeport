@@ -3226,7 +3226,6 @@ msgstr ""
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/user/support/UserDetailsTable.tsx
-#: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Full name"

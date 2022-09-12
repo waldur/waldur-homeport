@@ -26,7 +26,8 @@ describe('UserEditForm', () => {
       showDeleteButton: true,
       user: staffUser,
     });
-    expect(wrapper.find({ label: 'Full name' }).length).toBe(1);
+    expect(wrapper.find({ label: 'First name' }).length).toBe(1);
+    expect(wrapper.find({ label: 'Last name' }).length).toBe(1);
     expect(wrapper.find({ label: 'Native name' }).length).toBe(1);
     expect(wrapper.find({ label: 'User status' }).length).toBe(1);
     expect(wrapper.find({ label: 'Organization name' }).length).toBe(1);
@@ -48,7 +49,8 @@ describe('UserEditForm', () => {
       showDeleteButton: false,
       user: staffUser,
     });
-    expect(wrapper.find({ label: 'Full name' }).length).toBe(1);
+    expect(wrapper.find({ label: 'First name' }).length).toBe(1);
+    expect(wrapper.find({ label: 'Last name' }).length).toBe(1);
     expect(wrapper.find({ label: 'Native name' }).length).toBe(0);
     expect(wrapper.find({ label: 'User status' }).length).toBe(0);
     expect(wrapper.find({ label: 'Organization name' }).length).toBe(1);
@@ -73,7 +75,8 @@ describe('UserEditForm', () => {
       showDeleteButton: false,
       user: staffUser,
     });
-    expect(wrapper.find({ label: 'Full name' }).length).toBe(1);
+    expect(wrapper.find({ label: 'First name' }).length).toBe(1);
+    expect(wrapper.find({ label: 'Last name' }).length).toBe(1);
     expect(wrapper.find({ label: 'Native name' }).length).toBe(1);
     expect(wrapper.find({ label: 'Registration method' }).length).toBe(0);
     expect(wrapper.find({ label: 'User status' }).length).toBe(1);
