@@ -51,7 +51,7 @@ export const Sidebar: React.FC = (props) => {
       <BrandName />
       <QuickProjectSelectorToggle />
 
-      <div className="aside-menu flex-column-fluid">
+      <div className="aside-menu flex-column-fluid overflow-hidden">
         <div
           className="hover-scroll-overlay-y my-5 my-lg-5"
           id="kt_aside_menu_wrapper"
