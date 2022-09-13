@@ -164,14 +164,13 @@ const SearchPopover = () => {
 export const SearchToggle = () => (
   <OverlayTrigger
     trigger="click"
-    placement="bottom-start"
+    placement="bottom-end"
     overlay={
       <Popover id="GlobalSearch">
         <SearchPopover />{' '}
       </Popover>
     }
     rootClose={true}
-    offset={[-100, 0]}
   >
     <div className="d-flex align-items-stretch ms-1 ms-lg-3">
       <div className="d-flex align-items-stretch">
