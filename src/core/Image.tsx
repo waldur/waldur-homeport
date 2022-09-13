@@ -16,3 +16,7 @@ export const Image: React.FC<ImageProps> = ({ src, size, classes }) => {
     </div>
   );
 };
+
+Image.defaultProps = {
+  classes: '',
+};

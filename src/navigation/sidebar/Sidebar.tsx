@@ -11,7 +11,7 @@ import { QuickProjectSelectorToggle } from '../workspace/quick-project-selector/
 
 import { BrandName } from './BrandName';
 import { SidebarFooter } from './SidebarFooter';
-import './Sidebar.css';
+import './Sidebar.scss';
 
 function getSidebarToggle() {
   const menuElement = document.querySelector('#kt_aside_toggle');

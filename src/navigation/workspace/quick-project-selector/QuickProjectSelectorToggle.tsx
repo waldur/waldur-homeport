@@ -37,10 +37,12 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
   const isProject = workspace === PROJECT_WORKSPACE;
   const isCustomer = workspace === ORGANIZATION_WORKSPACE;
   return (
-    <div className="aside-toolbar flex-column-auto" id="kt_aside_toolbar">
+    <div
+      className="aside-toolbar flex-column-auto overflow-hidden"
+      id="kt_aside_toolbar"
+    >
       <div
-        className="d-flex align-items-sm-center justify-content-center py-5"
-        style={{ padding: '0 25px' }}
+        className="d-flex align-items-sm-center justify-content-center py-5 quick-project-selector-toggle"
         data-kt-menu-trigger="click"
         data-kt-menu-placement="right-start"
         data-kt-menu-flip="bottom"
@@ -54,7 +56,14 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
         </div>
         <div className="flex-row-fluid flex-wrap ms-5">
           <div className="d-flex">
-            <div className="flex-grow-1 me-2">
+            <div
+              className="flex-grow-1 me-2"
+              style={{
+                overflowX: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+              }}
+            >
               <span
                 className={classNames(
                   { 'text-white': isProject, 'text-gray-600': !isProject },

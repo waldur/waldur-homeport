@@ -1,3 +1,7 @@
+@import '@waldur/metronic/assets/sass/core/base/_functions';
+@import '@waldur/metronic/assets/sass/core/components/_variables';
+@import '@waldur/metronic/assets/sass/layout/_variables';
+
 .aside-toolbar {
   cursor: pointer;
   border-top: 1px solid #2d2d43;
@@ -6,13 +10,6 @@
 
 .aside-toolbar:hover {
   background-color: #1b1b28;
-}
-
-[data-kt-aside-minimize='on']
-  .aside:not(:hover)
-  .aside-toolbar
-  .flex-row-fluid {
-  display: none;
 }
 
 .aside:not(:hover) #kt_aside_toggle {
@@ -41,4 +38,10 @@
 
 .aside-footer .btn-custom.btn-marketplace .btn-label i.angle {
   margin-left: auto;
+}
+
+.quick-project-selector-toggle {
+  width: get($aside-config, width);
+  padding: 0 25px;
+  padding-left: 10px;
 }
