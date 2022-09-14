@@ -18,7 +18,8 @@
     "owners": [],
     "service_managers": [],
     "is_expert_provider": false,
-    "quotas": []
+    "quotas": [],
+    "archived": false
   },
   {
     "uuid": "8f2f80601d82422ea4124559da92dddb",
@@ -36,7 +37,8 @@
     ],
     "service_managers": [],
     "is_expert_provider": true,
-    "quotas": []
+    "quotas": [],
+    "archived": false
   },
   {
     "uuid": "bbf6d302440644f0ba5d21a7d7b244fa",
@@ -51,6 +53,8 @@
     ],
     "owners": [],
     "is_expert_provider": false,
-    "quotas": []
+    "quotas": [],
+    "archived": false
+
   }
 ]

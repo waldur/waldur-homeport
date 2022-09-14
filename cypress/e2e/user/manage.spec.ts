@@ -8,7 +8,7 @@ describe('User manage', () => {
       })
       .intercept('HEAD', '/api/customers/', [])
       .intercept('GET', '/api/marketplace-categories/?field=uuid&field=title&has_offerings=true', [])
-      .intercept('GET', '/api/customers/?page=1&page_size=20&field=name&field=uuid&field=projects&field=owners&field=service_managers&field=abbreviation&field=is_service_provider&o=name&query=&is_service_provider=false', [])
+      .intercept('GET', '/api/customers/**', [])
       .setToken()
       .visit('/profile/manage/');
   });

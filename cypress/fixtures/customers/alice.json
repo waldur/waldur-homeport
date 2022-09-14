@@ -17,5 +17,6 @@
   "owners": [],
   "service_managers": [],
   "is_service_provider": true,
-  "is_staff": true
+  "is_staff": true,
+  "archived": false
 }
