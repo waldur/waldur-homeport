@@ -4,13 +4,14 @@ import { ENV } from '@waldur/configs/default';
 import { parseResultCount } from '@waldur/core/api';
 
 export const getCustomersCount = () =>
-  Axios.head(`${ENV.apiEndpoint}api/customers/`).then((response) =>
-    parseResultCount(response),
-  );
+  Axios.head(`${ENV.apiEndpoint}api/customers/`, {
+    params: { archived: false },
+  }).then((response) => parseResultCount(response));
 
 export const getCustomersPage = (query, page, pageSize) =>
   Axios.get(`${ENV.apiEndpoint}api/customers/`, {
     params: {
+      archived: false,
       page: page + 1,
       page_size: pageSize,
       field: [
