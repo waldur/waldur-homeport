@@ -28,25 +28,20 @@ export const InvoiceDetails = ({
   );
 
   return (
-    <div className="row">
-      <div className="col-lg-12">
-        <div className="invoice-details">
-          <div className="invoice-details-content">
+    <div className="invoice-details">
+      <div className="invoice-details-content">
+        <div className="card">
+          <div className="card-body">
             <div className="p-xs">
               <div className="row">
-                <div className="col-sm-6">
-                  <h5>{translate('From')}: </h5>
-                  <CustomerDetails customer={invoice.issuer_details} />
-                </div>
-                <div className="col-sm-6 text-right">
+                <div className="text-end">
                   {invoice.number && (
                     <>
-                      <h4>{translate('Invoice No.')}</h4>
-                      <h4 className="text-navy">{invoice.number}</h4>
+                      <h4>
+                        {translate('Invoice No.')} {invoice.number}
+                      </h4>
                     </>
                   )}
-                  {translate('To')}:{' '}
-                  <CustomerDetails customer={invoice.customer_details} />
                   <div>
                     <strong>{translate('Invoice date')}: </strong>
                     {invoice.invoice_date || '-'}
@@ -72,9 +67,11 @@ export const InvoiceDetails = ({
                     {project.name ? (
                       <tr>
                         <td colSpan={showPrice ? 6 : 7}>
-                          <h3>{project.name}</h3>
+                          <div className="fs-5 fw-bold text-dark mt-4">
+                            {project.name}
+                          </div>
                           {showPrice && (
-                            <p>
+                            <p className="mb-0">
                               {translate('Project price')}
                               {': '}
                               {defaultCurrency(project.total)}
@@ -123,6 +120,16 @@ export const InvoiceDetails = ({
                 </tbody>
               </table>
             )}
+
+            <div className="fs-5 mb-3 text-uppercase">
+              {translate('Invoice to')}
+            </div>
+            <CustomerDetails customer={invoice.customer_details} />
+
+            <div className="fs-5 mb-3 text-uppercase">
+              {translate('Invoice from')}
+            </div>
+            <CustomerDetails customer={invoice.issuer_details} />
           </div>
         </div>
       </div>
