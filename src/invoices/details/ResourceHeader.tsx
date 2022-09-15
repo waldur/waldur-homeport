@@ -1,7 +1,7 @@
 import { Link } from '@waldur/core/Link';
 
 export const ResourceHeader = ({ toggled, resource, customer }) => (
-  <h4>
+  <div className="fs-6">
     {toggled ? (
       <i className="fa fa-chevron-down" />
     ) : (
@@ -17,5 +17,5 @@ export const ResourceHeader = ({ toggled, resource, customer }) => (
         <i className="fa fa-external-link"></i>
       </Link>
     ) : null}
-  </h4>
+  </div>
 );

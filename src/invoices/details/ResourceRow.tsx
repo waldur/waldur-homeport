@@ -20,7 +20,7 @@ export const ResourceRow = ({
   return (
     <>
       <tr onClick={onToggle}>
-        <td colSpan={showPrice ? 5 : 6}>
+        <td colSpan={showPrice ? 6 : 7}>
           <ResourceHeader
             toggled={toggled}
             resource={resource}
@@ -34,7 +34,7 @@ export const ResourceRow = ({
         <>
           {(resource.service_provider_name || resource.plan_name) && (
             <tr>
-              <td colSpan={showPrice ? 5 : 6}>
+              <td colSpan={showPrice ? 6 : 7}>
                 {resource.service_provider_name && (
                   <div>
                     <small>
