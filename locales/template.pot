@@ -1142,6 +1142,7 @@ msgstr ""
 msgid "Browse"
 msgstr ""
 
+#: src/marketplace/landing/CategoryCardAll.tsx
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Browse all categories"
 msgstr ""
@@ -1673,6 +1674,10 @@ msgstr ""
 #: src/marketplace/offerings/expandable/utils.ts
 #: src/marketplace/orders/OrdersList.tsx
 msgid "Cost"
+msgstr ""
+
+#: src/marketplace/landing/DeploymentIntroduction.tsx
+msgid "Cost efficiently"
 msgstr ""
 
 #: src/customer/create/CustomerCreateDialog.tsx
@@ -2240,6 +2245,18 @@ msgstr ""
 
 #: src/rancher/cluster/create/RancherClusterForm.tsx
 msgid "Deploy Longhorn block storage after cluster is deployed"
+msgstr ""
+
+#: src/marketplace/landing/DeploymentIntroduction.tsx
+msgid "Deploy in minutes"
+msgstr ""
+
+#: src/marketplace/landing/FooterSection.tsx
+msgid "Deploy in seconds"
+msgstr ""
+
+#: src/marketplace/landing/DeploymentIntroduction.tsx
+msgid "Deployment made easy, for everyone"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -3186,6 +3203,10 @@ msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
 msgid "For"
+msgstr ""
+
+#: src/marketplace/landing/FooterSection.tsx
+msgid "For vendors"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ForceDestroyAction.tsx
@@ -4259,6 +4280,10 @@ msgstr ""
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-network/actions/SetMtuDialog.tsx
 msgid "MTU"
+msgstr ""
+
+#: src/marketplace/landing/DeploymentIntroduction.tsx
+msgid "Magento server deployment is quick and easy so you don’t fret over the technicalities."
 msgstr ""
 
 #: src/customer/dashboard/CustomerProfile.tsx
@@ -6816,6 +6841,10 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
+#: src/marketplace/landing/FooterSection.tsx
+msgid "Reach a new audience"
+msgstr ""
+
 #: src/customer/details/CustomerRemovePanel.tsx
 #: src/user/support/actions.ts
 msgid "Reason"
@@ -6832,6 +6861,10 @@ msgstr ""
 
 #: src/navigation/workspace/ProjectsPanel.tsx
 msgid "Recent"
+msgstr ""
+
+#: src/marketplace/landing/LandingPage.tsx
+msgid "Recent offerings"
 msgstr ""
 
 #: src/marketplace/category/list/RecentlyAddedOfferings.tsx
@@ -7896,6 +7929,10 @@ msgstr ""
 
 #: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
 msgid "See all offerings"
+msgstr ""
+
+#: src/marketplace/landing/FooterSection.tsx
+msgid "See offerings"
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
@@ -9277,7 +9314,7 @@ msgid "There are no offerings in catalog yet."
 msgstr ""
 
 #: src/marketplace/common/OfferingGrid.tsx
-#: src/marketplace/landing/FeaturedOfferings.tsx
+#: src/marketplace/landing/OfferingsGroup.tsx
 msgid "There are no offerings in marketplace yet."
 msgstr ""
 
@@ -10134,7 +10171,7 @@ msgstr ""
 
 #: src/marketplace/category/list/RecentlyAddedOfferings.tsx
 #: src/marketplace/common/OfferingGrid.tsx
-#: src/marketplace/landing/FeaturedOfferings.tsx
+#: src/marketplace/landing/OfferingsGroup.tsx
 msgid "Unable to load offerings."
 msgstr ""
 
@@ -11334,6 +11371,10 @@ msgstr ""
 
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 msgid "Variable #{index}"
+msgstr ""
+
+#: src/marketplace/landing/DeploymentIntroduction.tsx
+msgid "Vendor Neutral"
 msgstr ""
 
 #: src/user/support/EmailChangeForm.tsx

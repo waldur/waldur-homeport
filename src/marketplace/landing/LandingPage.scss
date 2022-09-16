@@ -48,4 +48,35 @@
       }
     }
   }
+
+  .providers-brands {
+    opacity: 0.6;
+
+    .symbol-label {
+      background-size: contain;
+      background-color: transparent;
+    }
+  }
+
+  .footer-section {
+    display: table;
+    width: 100%;
+    min-height: 300px;
+
+    .left-side,
+    .right-side {
+      display: table-cell;
+      width: 50%;
+      height: 300px;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .left-side {
+      text-align: left;
+    }
+    .right-side {
+      text-align: right;
+    }
+  }
 }

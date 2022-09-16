@@ -7,9 +7,9 @@ import { OfferingsListType } from '@waldur/marketplace/types';
 
 import { OfferingCard } from './OfferingCard';
 
-type FeaturedOfferingsProps = OfferingsListType;
+type OfferingsGroupProps = OfferingsListType;
 
-export const FeaturedOfferings: React.FC<FeaturedOfferingsProps> = (props) => {
+export const OfferingsGroup: React.FC<OfferingsGroupProps> = (props) => {
   if (props.loading) {
     return <LoadingSpinner />;
   }
