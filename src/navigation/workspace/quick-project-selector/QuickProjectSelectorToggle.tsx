@@ -96,6 +96,9 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
                 </div>
               )}
             </div>
+            <div className="d-flex align-items-center">
+              <i className="fa fa-angle-right display-5 fw-light"></i>
+            </div>
           </div>
         </div>
       </div>
