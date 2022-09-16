@@ -5308,7 +5308,7 @@ msgid "One-time on plan switch"
 msgstr ""
 
 #: src/i18n/constants.ts
-msgid "Only PI or staff can invite users."
+msgid "Only PI, Co-PI or staff can invite users."
 msgstr ""
 
 #: src/invoices/list/MarkAsPaidButton.tsx
@@ -5320,7 +5320,7 @@ msgid "Only customer owner or staff can create group invitations."
 msgstr ""
 
 #: src/invitations/actions/InvitationCreateButton.tsx
-msgid "Only customer owner or staff can invite users."
+msgid "Only customer owner, project manager or staff can invite users."
 msgstr ""
 
 #: src/invitations/actions/InvitationSendButton.tsx
@@ -5332,7 +5332,7 @@ msgid "Only pending invitation can be canceled."
 msgstr ""
 
 #: src/i18n/constants.ts
-msgid "Only resource allocator or staff can invite users."
+msgid "Only resource allocator, PI or staff can invite users."
 msgstr ""
 
 #: src/openstack/utils.ts

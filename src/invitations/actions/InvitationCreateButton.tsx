@@ -9,6 +9,7 @@ import {
   getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
   getCustomer,
+  isManager,
 } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
@@ -27,6 +28,8 @@ export const InvitationCreateButton: FunctionComponent<{
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  const isProjectManager = useSelector(isManager);
+  const isAllowed = isOwnerOrStaff || isProjectManager;
   const dispatch = useDispatch();
   const callback = () =>
     dispatch(
@@ -47,10 +50,12 @@ export const InvitationCreateButton: FunctionComponent<{
       title={translate('Invite user')}
       icon="fa fa-plus"
       variant="primary"
-      disabled={!isOwnerOrStaff}
+      disabled={!isAllowed}
       tooltip={
-        !isOwnerOrStaff &&
-        translate('Only customer owner or staff can invite users.')
+        !isAllowed &&
+        translate(
+          'Only customer owner, project manager or staff can invite users.',
+        )
       }
     />
   );
