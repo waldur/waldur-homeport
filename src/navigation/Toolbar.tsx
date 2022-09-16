@@ -4,6 +4,10 @@ import { Button } from 'react-bootstrap';
 import { ExternalLinks } from './header/ExternalLinks';
 import { TabsList } from './TabsList';
 
+interface OwnProps {
+  actions?: React.ReactNode;
+}
+
 const TabsScrollArrows: FunctionComponent = () => (
   <>
     <Button
@@ -23,7 +27,7 @@ const TabsScrollArrows: FunctionComponent = () => (
   </>
 );
 
-export const Toolbar = ({ actions }) => {
+export const Toolbar: FunctionComponent<OwnProps> = ({ actions }) => {
   const tabsScrollRef = useRef<HTMLDivElement>();
   const tabsWrapperRef = useRef<HTMLDivElement>();
   const [showScrollArrows, setShowScrollArrows] = useState(false);

@@ -28,6 +28,7 @@ msgstr ""
 msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "A one-time fee applied on activation."
 msgstr ""
@@ -465,6 +466,7 @@ msgstr ""
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Additionally service provider can charge for usage of the following components"
 msgstr ""
@@ -556,6 +558,10 @@ msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
 msgid "All day"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "All plans comes with"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/rule-editor/PortRangeField.tsx
@@ -721,6 +727,7 @@ msgstr ""
 
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 msgid "Archived"
 msgstr ""
 
@@ -810,6 +817,10 @@ msgstr ""
 msgid "Article code"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
+msgid "Ask a question"
+msgstr ""
+
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/AssigneeGroup.tsx
 #: src/issues/list/IssuesList.tsx
@@ -856,6 +867,7 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 msgid "Attributes"
@@ -943,6 +955,10 @@ msgstr ""
 msgid "Availability zone"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingFacility.tsx
+msgid "Availability:"
+msgstr ""
+
 #: src/quotas/QuotaUsageBarChart.tsx
 msgid "Available quota usage: {usage}"
 msgstr ""
@@ -975,7 +991,6 @@ msgstr ""
 #: src/error/InvalidQuotaPage.tsx
 #: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
-#: src/navigation/header/SiteHeader.tsx
 msgid "Back"
 msgstr ""
 
@@ -1055,6 +1070,14 @@ msgstr ""
 msgid "Become a customer of our portal. Provision IT services from the catalog and manage your team from one place."
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Billed monthly"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Billed yearly (20% discount)"
+msgstr ""
+
 #: src/customer/utils.ts
 #: src/invoices/utils.ts
 #: src/project/ProjectDashboardChart.tsx
@@ -1085,7 +1108,7 @@ msgid "Billing type"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingOld.tsx
 msgid "Book"
 msgstr ""
 
@@ -1281,6 +1304,7 @@ msgstr ""
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
@@ -1539,11 +1563,16 @@ msgstr ""
 
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
+#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Component name"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingComponents.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Components"
 msgstr ""
@@ -1638,6 +1667,11 @@ msgstr ""
 #: src/customer/popover/CustomerSummary.tsx
 #: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
 msgid "Contact phone"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingGetHelp.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Contact vendor"
 msgstr ""
 
 #: src/user/SelectAffiliationDialog.tsx
@@ -2239,6 +2273,8 @@ msgid "Deletion"
 msgstr ""
 
 #: src/marketplace/landing/OfferingCardButtonsOverlay.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "Deploy"
 msgstr ""
@@ -2277,8 +2313,11 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/details/PageDescription.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
@@ -2481,6 +2520,10 @@ msgstr ""
 msgid "Docker version"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingComponents.tsx
+msgid "Docs & resources"
+msgstr ""
+
 #: src/navigation/header/DocsLink.tsx
 msgid "Documentation"
 msgstr ""
@@ -2527,6 +2570,7 @@ msgstr ""
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
 msgstr ""
@@ -3007,6 +3051,15 @@ msgstr ""
 msgid "External network ID"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
+msgid "FAQ"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingFacility.tsx
+msgid "Facility"
+msgstr ""
+
 #: src/resource/state/utils.ts
 msgid "Failed to operate with backend."
 msgstr ""
@@ -3025,10 +3078,12 @@ msgstr ""
 msgid "Features have been updated."
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Fee applied according to the maximum value reported by service provider over the whole active state of resource."
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Fee applied each time this plan is activated."
 msgstr ""
@@ -3116,7 +3171,7 @@ msgid "Fixed IPs"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
-#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
 msgid "Fixed price"
 msgstr ""
 
@@ -3234,10 +3289,6 @@ msgstr ""
 msgid "FreeIPA extension is disabled."
 msgstr ""
 
-#: src/invoices/details/InvoiceDetails.tsx
-msgid "From"
-msgstr ""
-
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 msgid "Full description"
@@ -3296,6 +3347,10 @@ msgstr ""
 msgid "Gateway IP of this subnet"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+msgid "General"
+msgstr ""
+
 #: src/customer/create/CustomerCreateForm.tsx
 msgid "General information"
 msgstr ""
@@ -3306,6 +3361,15 @@ msgstr ""
 
 #: src/rancher/template/PasswordField.tsx
 msgid "Generate password"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingGetHelp.tsx
+msgid "Get help"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingGettingStarted.tsx
+msgid "Getting started"
 msgstr ""
 
 #: src/navigation/sidebar/SidebarFooter.tsx
@@ -3584,7 +3648,9 @@ msgstr ""
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/offerings/details/PageImages.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+#: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 msgid "Images"
 msgstr ""
@@ -3885,6 +3951,10 @@ msgstr ""
 msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
 msgstr ""
 
+#: src/invoices/details/InvoiceDetails.tsx
+msgid "Invoice from"
+msgstr ""
+
 #: src/customer/payments/store/effects.ts
 msgid "Invoice has been successfully linked to payment."
 msgstr ""
@@ -3912,6 +3982,10 @@ msgstr ""
 
 #: src/invoices/list/InvoicesStatsList.tsx
 msgid "Invoice statistics"
+msgstr ""
+
+#: src/invoices/details/InvoiceDetails.tsx
+msgid "Invoice to"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
@@ -4126,7 +4200,7 @@ msgstr ""
 msgid "Limit amount"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
 msgid "Limit based"
 msgstr ""
 
@@ -4496,7 +4570,7 @@ msgstr ""
 msgid "Minimum username length is 3 characters."
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
 msgid "Mixed"
 msgstr ""
 
@@ -4627,6 +4701,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/OfferingUsersTab.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
@@ -5216,11 +5291,11 @@ msgstr ""
 msgid "Old value"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
 msgid "One time"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
 msgid "One time on plan switch"
 msgstr ""
 
@@ -5605,6 +5680,10 @@ msgstr ""
 msgid "Organizations divisions"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Other requirements?"
+msgstr ""
+
 #: src/invoices/growth/utils.ts
 msgid "Others"
 msgstr ""
@@ -5687,6 +5766,7 @@ msgstr ""
 
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 msgid "Paused"
 msgstr ""
 
@@ -5830,7 +5910,7 @@ msgstr ""
 msgid "Per month"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
 msgid "Per {unit}"
 msgstr ""
 
@@ -5851,6 +5931,7 @@ msgid "Performed by"
 msgstr ""
 
 #: src/booking/BookingCheckoutSummary.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Period"
 msgstr ""
@@ -6021,10 +6102,6 @@ msgstr ""
 #: src/invitations/GroupInvitationConfirmDialog.tsx
 #: src/invitations/InvitationConfirmDialog.tsx
 msgid "Please give us a moment to validate your invitation."
-msgstr ""
-
-#: src/navigation/AnonymousLayout.tsx
-msgid "Please login to select a project"
 msgstr ""
 
 #: src/user/api-key/TokenLifetimeField.tsx
@@ -6271,6 +6348,7 @@ msgstr ""
 
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Price per unit"
 msgstr ""
@@ -6282,6 +6360,11 @@ msgstr ""
 #: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/PriceListContainer.tsx
 msgid "Pricelist"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Pricing"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingPricingPlansContainer.tsx
@@ -6755,7 +6838,7 @@ msgstr ""
 
 #: src/marketplace/cart/ForwardButton.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingOld.tsx
 msgid "Purchase"
 msgstr ""
 
@@ -6845,6 +6928,10 @@ msgstr ""
 msgid "Reach a new audience"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Ready to sign up? (Custom title)"
+msgstr ""
+
 #: src/customer/details/CustomerRemovePanel.tsx
 #: src/user/support/actions.ts
 msgid "Reason"
@@ -6874,6 +6961,10 @@ msgstr ""
 
 #: src/issues/notifications/NotificationExpandableRow.tsx
 msgid "Recipients"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+msgid "Recommended"
 msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
@@ -7648,6 +7739,8 @@ msgstr ""
 
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/customer/utils.ts
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingReviews.tsx
 msgid "Reviews"
 msgstr ""
 
@@ -8283,6 +8376,7 @@ msgstr ""
 msgid "Service provider API secret code has been generated."
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Service provider can charge for usage of the following components"
 msgstr ""
@@ -8764,6 +8858,10 @@ msgstr ""
 msgid "Step 2. Select resources"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
+msgid "Still unsure? Ask a question"
+msgstr ""
+
 #: src/azure/vm/actions/StopAction.tsx
 #: src/openstack/openstack-instance/actions/StopAction.tsx
 #: src/vmware/actions/StopAction.tsx
@@ -8884,6 +8982,7 @@ msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/invoices/list/MonthOverview.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Subtotal"
 msgstr ""
@@ -9424,6 +9523,18 @@ msgstr ""
 msgid "This name will be visible in accounting data."
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+msgid "This offering has been archived."
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+msgid "This offering has been paused and new resources cannot be added at the moment."
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+msgid "This offering has not been activated by the operator yet."
+msgstr ""
+
 #: src/resource/actions/ResourceActionDialog.tsx
 msgid "This value is invalid JSON."
 msgstr ""
@@ -9478,10 +9589,6 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: src/invoices/details/InvoiceDetails.tsx
-msgid "To"
-msgstr ""
-
 #: src/slurm/RequestLimitsChangeDialog.tsx
 msgid "To change allocation limits, please send a request to {supportEmail}."
 msgstr ""
@@ -9533,7 +9640,9 @@ msgstr ""
 #: src/invoices/list/InvoicesList.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -9607,6 +9716,7 @@ msgstr ""
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -10662,6 +10772,7 @@ msgstr ""
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 msgid "Unit"
 msgstr ""
 
@@ -10874,7 +10985,7 @@ msgstr ""
 msgid "Usage"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
 msgid "Usage based"
 msgstr ""
 
@@ -11377,6 +11488,10 @@ msgstr ""
 msgid "Vendor Neutral"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingGetHelp.tsx
+msgid "Vendor support pages"
+msgstr ""
+
 #: src/user/support/EmailChangeForm.tsx
 msgid "Verify email"
 msgstr ""
@@ -11390,6 +11505,7 @@ msgstr ""
 msgid "Verifying email change"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/navigation/AppFooter.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
@@ -11535,6 +11651,10 @@ msgstr ""
 
 #: src/invitations/InvitationMessage.tsx
 msgid "Would you like to update your current email with the one from the invitation?"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingReviews.tsx
+msgid "Write a review"
 msgstr ""
 
 #: src/marketplace/common/ReviewButton.tsx

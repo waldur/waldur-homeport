@@ -19,7 +19,7 @@ export const AttributeItem: FunctionComponent<AttributeItemProps> = (props) => {
   return filteredAttributes.length ? (
     <div
       className={classNames({
-        'm-t-lg': props.index !== 0,
+        'mt-5': props.index !== 0,
       })}
     >
       <b>{props.section.title}</b>

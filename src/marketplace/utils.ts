@@ -1,6 +1,7 @@
 import { getFormValues } from 'redux-form';
 
 import { formatErrorObject } from '@waldur/core/ErrorMessageFormatter';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { RootState } from '@waldur/store/reducers';
 
@@ -43,3 +44,6 @@ export const handleMarketplaceErrorResponse = (
   }
   return message;
 };
+
+export const isExperimentalUiComponentsVisible = () =>
+  isFeatureVisible('marketplace.show_experimental_ui_components');

@@ -1,11 +1,11 @@
 import { ENV } from '@waldur/configs/default';
 import { Link } from '@waldur/core/Link';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import {
   CategoriesListType,
   OfferingsListType,
 } from '@waldur/marketplace/types';
+import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
 import { CategoriesList } from './CategoriesList';
 import { DeploymentIntroduction } from './DeploymentIntroduction';
@@ -15,9 +15,6 @@ import { OfferingsGroup } from './OfferingsGroup';
 import { ProvidersBrands } from './ProvidersBrands';
 
 import './LandingPage.scss';
-
-const isExperimentalUiComponentsVisible = () =>
-  isFeatureVisible('marketplace.show_experimental_ui_components');
 
 interface LandingPageProps {
   categories: CategoriesListType;

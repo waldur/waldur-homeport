@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { PublicOfferingPricingPlanItem } from '@waldur/marketplace/offerings/details/PublicOfferingPricingPlanItem';
+import { PublicOfferingPricingPlanItem } from '@waldur/marketplace/offerings/details/PublicOfferingPricingPlanItemOld';
 import { Offering, Plan } from '@waldur/marketplace/types';
 import './PublicOfferingPricingPlans.scss';
 

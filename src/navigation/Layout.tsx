@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { PermissionDataProvider } from '@waldur/auth/PermissionLayout';
 import WarningBar from '@waldur/auth/WarningBar';
+import { DefaultLayoutConfig, useLayout } from '@waldur/metronic/layout/core';
 import { MasterLayout } from '@waldur/metronic/layout/MasterLayout';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -30,6 +31,27 @@ export const Layout: React.FC = ({ children }) => {
     [setActions, tabs, setTabs, fullPage, setFullPage],
   );
 
+  const layout = useLayout();
+  useEffect(() => {
+    if (actions || tabs) {
+      layout.setLayout({
+        toolbar: DefaultLayoutConfig.toolbar,
+        content: {
+          width: fullPage ? 'fluid' : 'fixed',
+        },
+      });
+    } else {
+      layout.setLayout({
+        toolbar: {
+          display: false,
+        },
+        content: {
+          width: fullPage ? 'fluid' : 'fixed',
+        },
+      });
+    }
+  }, [tabs, fullPage]);
+
   if (!currentUser) {
     return null;
   }
@@ -43,17 +65,13 @@ export const Layout: React.FC = ({ children }) => {
               <CookiesConsent />
               <AppHeader />
               <WarningBar />
-              {(actions || tabs) && (
-                <div
-                  className={classNames('content d-flex flex-column', {
-                    'full-page': fullPage,
-                  })}
-                >
-                  <Toolbar actions={actions} />
-                </div>
-              )}
-              <div className="post d-flex flex-column-fluid">
-                <div className={fullPage ? 'w-100' : 'container-xxl'}>
+              <div
+                className={classNames('content d-flex flex-column', {
+                  'full-page': fullPage,
+                })}
+              >
+                {(actions || tabs) && <Toolbar actions={actions} />}
+                <div className="post d-flex flex-column-fluid">
                   {children}
                   <MasterLayout />
                 </div>

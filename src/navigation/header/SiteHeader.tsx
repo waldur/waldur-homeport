@@ -4,10 +4,8 @@ import { useSelector } from 'react-redux';
 
 import { AuthService } from '@waldur/auth/AuthService';
 import { translate } from '@waldur/i18n';
-import { UsersService } from '@waldur/user/UsersService';
 
 import { getTitle } from '../title';
-import { goBack } from '../utils';
 
 import './SiteHeader.scss';
 
@@ -24,14 +22,6 @@ export const SiteHeader: FunctionComponent = () => {
         </div>
         <nav className="navbar navbar-static-top white-bg mb-0">
           <ul className="nav navbar-top-links pull-right">
-            {AuthService.isAuthenticated() &&
-              UsersService.isCurrentUserValid() && (
-                <li className="ms-2">
-                  <Button variant="light" onClick={goBack}>
-                    <i className="fa fa-arrow-left" /> {translate('Back')}
-                  </Button>
-                </li>
-              )}
             {AuthService.isAuthenticated() ? (
               <li className="ms-2">
                 <Button variant="danger" onClick={() => AuthService.logout()}>

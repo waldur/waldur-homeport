@@ -1,5 +1,12 @@
 .publicOfferingDetails {
-  display: flex;
-  flex-direction: column;
-  row-gap: 24px;
+  .public-offering-page-bar {
+    position: sticky;
+    top: calc(65px + var(--kt-toolbar-height)); /* header and toolbar height */
+    z-index: 10;
+  }
+}
+body:not(.toolbar-fixed) .publicOfferingDetails {
+  .public-offering-page-bar {
+    top: 65px; /* header height */
+  }
 }
