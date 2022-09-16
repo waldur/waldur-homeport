@@ -57,8 +57,8 @@ export const DOMAIN_MESSAGES = {
     'You cannot manage other organization owner.': gettext(
       'You cannot manage other PI',
     ),
-    'Only customer owner or staff can invite users.': gettext(
-      'Only PI or staff can invite users.',
+    'Only customer owner, project manager or staff can invite users.': gettext(
+      'Only PI, Co-PI or staff can invite users.',
     ),
     'User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}.':
       gettext(
@@ -176,8 +176,8 @@ export const DOMAIN_MESSAGES = {
     'You cannot manage other organization owner.': gettext(
       'You cannot manage other resource allocator',
     ),
-    'Only customer owner or staff can invite users.': gettext(
-      'Only resource allocator or staff can invite users.',
+    'Only customer owner, project manager or staff can invite users.': gettext(
+      'Only resource allocator, PI or staff can invite users.',
     ),
     'User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}.':
       gettext(
