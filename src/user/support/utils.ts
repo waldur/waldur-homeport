@@ -1,6 +1,9 @@
 import { translate } from '@waldur/i18n';
 
 export const formatUserStatus = (user) => {
+  if (!user) {
+    return '—';
+  }
   if (user.is_staff && !user.is_support) {
     return translate('Staff');
   } else if (user.is_staff && user.is_support) {

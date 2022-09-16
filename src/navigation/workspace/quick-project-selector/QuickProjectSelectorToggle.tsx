@@ -42,7 +42,7 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
       id="kt_aside_toolbar"
     >
       <div
-        className="d-flex align-items-sm-center justify-content-center py-5 quick-project-selector-toggle"
+        className="d-flex align-items-center justify-content-center py-5 quick-project-selector-toggle"
         data-kt-menu-trigger="click"
         data-kt-menu-placement="right-start"
         data-kt-menu-flip="bottom"
@@ -67,7 +67,7 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
               <span
                 className={classNames(
                   { 'text-white': isProject, 'text-gray-600': !isProject },
-                  'fs-6 fw-bold',
+                  'fs-6 fw-bold text-nowrap',
                 )}
               >
                 {project ? project.name : translate('Select project')}
@@ -84,15 +84,17 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
                     : customer.display_name
                   : translate('Select organization')}
               </span>
-              <div className="d-flex align-items-center text-success fs-8">
-                {projectUser
-                  ? formatRole(projectUser.role)
-                  : isOwner
-                  ? translate(ENV.roles.owner)
-                  : isServiceManager
-                  ? translate(ENV.roles.service_manager)
-                  : formatUserStatus(user)}
-              </div>
+              {user && (
+                <div className="d-flex align-items-center text-success fs-8">
+                  {projectUser
+                    ? formatRole(projectUser.role)
+                    : isOwner
+                    ? translate(ENV.roles.owner)
+                    : isServiceManager
+                    ? translate(ENV.roles.service_manager)
+                    : formatUserStatus(user)}
+                </div>
+              )}
             </div>
           </div>
         </div>

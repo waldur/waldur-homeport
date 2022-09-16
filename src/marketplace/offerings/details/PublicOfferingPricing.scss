@@ -4,7 +4,6 @@
 .publicOfferingPricing {
   display: flex;
   column-gap: 40px;
-  margin: 0 150px;
   border: 1px solid $border-color;
   border-radius: 4px;
   background-color: $white;
@@ -22,6 +21,89 @@
     button {
       max-width: 120px;
       margin-top: 24px;
+    }
+  }
+}
+
+.public-offering-pricing {
+  .pricing-plan {
+    position: relative;
+    border-radius: 0.5rem;
+    margin: 0 0.25rem;
+    text-align: center;
+    max-width: 300px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &.recommended {
+      .pricing-plan-title {
+        margin: 0;
+      }
+    }
+
+    .pricing-plan-title {
+      margin: 0.25rem;
+      padding: 1rem 0.5rem 0.75rem;
+      border-radius: 0.45rem 0.45rem 0 0;
+    }
+    .recommended {
+      width: 100%;
+      position: absolute;
+      top: -10px;
+      text-align: center;
+
+      span {
+        padding: 3px 14px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin: 0 auto;
+      }
+    }
+    .pricing-plan-info {
+      padding: 1rem 0.5rem;
+    }
+    .pricing-plan-details {
+      margin: 0.25rem;
+      padding: 1rem 0.5rem;
+      border-radius: 0 0 0.45rem 0.45rem;
+    }
+
+    &.single-plan {
+      width: 800px;
+      max-width: unset;
+
+      .plan-components {
+        max-width: 660px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .description,
+      .btn,
+      .pricing-plan-details-list {
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+  .pricing-plan-details-list {
+    list-style: none;
+    text-align: start;
+    padding: 0;
+
+    li {
+      display: flex;
+
+      .dot {
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
     }
   }
 }

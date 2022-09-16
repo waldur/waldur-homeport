@@ -2,18 +2,18 @@
 @import '~sass/variables.scss';
 
 .publicOfferingInfo {
-  display: flex;
-  column-gap: 24px;
-  margin: 0 150px;
+  // display: flex;
+  // column-gap: 24px;
+  // margin: 0 150px;
 
-  .bordered {
-    border: 1px solid $border-color;
-    border-radius: 4px;
-  }
+  // .bordered {
+  //   border: 1px solid $border-color;
+  //   border-radius: 4px;
+  // }
 
-  & > div {
-    background-color: $white;
-    padding: 24px;
-    color: #000000;
-  }
+  // & > div {
+  //   background-color: $white;
+  //   padding: 24px;
+  //   color: #000000;
+  // }
 }

@@ -18,7 +18,7 @@ export const PublicOfferingAttributes: FunctionComponent<PublicOfferingAttribute
   ({ offering, category }) =>
     shouldRenderAttributesSection(offering) ||
     shouldRenderAttributesList(category.sections, offering.attributes) ? (
-      <div className="publicOfferingAttributes bordered">
+      <>
         <PublicOfferingAttributesSection offering={offering} />
         {shouldRenderAttributesList(category.sections, offering.attributes) && (
           <AttributesList
@@ -26,5 +26,5 @@ export const PublicOfferingAttributes: FunctionComponent<PublicOfferingAttribute
             sections={category.sections}
           />
         )}
-      </div>
+      </>
     ) : null;

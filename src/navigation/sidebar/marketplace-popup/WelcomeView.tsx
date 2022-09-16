@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Col } from 'react-bootstrap';
 
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { LandingLink } from '@waldur/marketplace/links/LandingLink';
 import { Customer } from '@waldur/workspace/types';
 
 export const WelcomeView: FunctionComponent<{
@@ -17,13 +17,9 @@ export const WelcomeView: FunctionComponent<{
         </p>
         {customer && (
           <span data-kt-menu-dismiss="true">
-            <Link
-              state="marketplace-landing-customer"
-              params={{ uuid: customer.uuid }}
-              className="btn btn-white btn-hover-rise btn-active-light-primary"
-            >
+            <LandingLink className="btn btn-white btn-hover-rise btn-active-light-primary">
               {translate('Browse')}
-            </Link>
+            </LandingLink>
           </span>
         )}
       </div>

@@ -11,6 +11,7 @@ import store from '@waldur/store/store';
 import { loadConfig } from './core/bootstrap';
 import { ErrorMessage } from './ErrorMessage';
 import { LoadingScreen } from './LoadingScreen';
+import { LayoutProvider } from './metronic/layout/core';
 import { MasterInit } from './metronic/layout/MasterInit';
 import { NotificationContainer } from './NotificationContainer';
 import { ThemeSelector } from './ThemeSelector';
@@ -27,15 +28,17 @@ export const Application: FunctionComponent = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <ThemeSelector />
-        <NotificationContainer />
-        <UIRouter>
-          <ErrorBoundary fallback={ErrorMessage}>
-            <ModalRoot />
-            <UIView />
-          </ErrorBoundary>
-        </UIRouter>
-        <MasterInit />
+        <LayoutProvider>
+          <ThemeSelector />
+          <NotificationContainer />
+          <UIRouter>
+            <ErrorBoundary fallback={ErrorMessage}>
+              <ModalRoot />
+              <UIView />
+            </ErrorBoundary>
+          </UIRouter>
+          <MasterInit />
+        </LayoutProvider>
       </Provider>
     </QueryClientProvider>
   );
