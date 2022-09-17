@@ -96,69 +96,69 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
             </Row>
             <Row>
               <Col xs={12}>
-                <Row className="align-items-center mb-1">
-                  <Form.Label column xs="auto">
-                    {translate(ENV.roles.owner)}:
-                  </Form.Label>
-                  <Col>
-                    <div className="form-control-plaintext">
-                      <Link
-                        state="organization.dashboard"
-                        params={{ uuid: project.customer_uuid }}
-                      >
-                        <u className="text-dark">{project.customer_name}</u>
-                      </Link>
-                    </div>
-                  </Col>
-                </Row>
-              </Col>
-              {loading ? (
-                <LoadingSpinner />
-              ) : error ? (
-                <>{translate('Unable to load users')}</>
-              ) : (
-                <Col xs={12}>
-                  <div className="d-flex align-items-xl-center flex-xl-row flex-column gap-xl-6">
-                    {admin && (
-                      <Form.Group as={Row} className="mb-1">
-                        <Form.Label column xs="auto">
-                          {translate(ENV.roles.admin)}:
-                        </Form.Label>
-                        <Col>
-                          <Link state="">
-                            <div className="symbol symbol-circle symbol-35px me-2">
-                              <div className="symbol-label fs-4 fw-bold bg-dark text-inverse-dark">
-                                {admin.full_name[0]}
+                <div className="d-flex justify-content-between align-items-xl-center flex-xl-row flex-column gap-xl-6">
+                  <Row className="align-items-center mb-1">
+                    <Form.Label column xs="auto">
+                      {translate(ENV.roles.owner)}:
+                    </Form.Label>
+                    <Col>
+                      <div className="form-control-plaintext">
+                        <Link
+                          state="organization.dashboard"
+                          params={{ uuid: project.customer_uuid }}
+                        >
+                          <u className="text-dark">{project.customer_name}</u>
+                        </Link>
+                      </div>
+                    </Col>
+                  </Row>
+                  {loading ? (
+                    <LoadingSpinner />
+                  ) : error ? (
+                    <>{translate('Unable to load users')}</>
+                  ) : (
+                    <>
+                      {admin && (
+                        <Form.Group as={Row} className="mb-1">
+                          <Form.Label column xs="auto">
+                            {translate(ENV.roles.admin)}:
+                          </Form.Label>
+                          <Col>
+                            <Link state="">
+                              <div className="symbol symbol-circle symbol-35px me-2">
+                                <div className="symbol-label fs-4 fw-bold bg-dark text-inverse-dark">
+                                  {admin.full_name[0]}
+                                </div>
                               </div>
-                            </div>
-                            <u className="text-dark">{admin.full_name}</u>
-                          </Link>
-                        </Col>
-                      </Form.Group>
-                    )}
-                    {managers && managers.length > 0 && (
-                      <Form.Group as={Row} className="mb-1">
-                        <Form.Label column xs="auto">
-                          {translate(ENV.roles.manager)}:
-                        </Form.Label>
-                        <Col>
-                          <SymbolsGroup items={managers} max={6} />
-                        </Col>
-                      </Form.Group>
-                    )}
-                    {members && members.length > 0 && (
-                      <Form.Group as={Row} className="mb-1">
-                        <Form.Label column xs="auto">
-                          {translate(ENV.roles.member)}:
-                        </Form.Label>
-                        <Col>
-                          <SymbolsGroup items={members} max={6} />
-                        </Col>
-                      </Form.Group>
-                    )}
-                  </div>
-                </Col>
-              )}
+                              <u className="text-dark">{admin.full_name}</u>
+                            </Link>
+                          </Col>
+                        </Form.Group>
+                      )}
+                      {managers && managers.length > 0 && (
+                        <Form.Group as={Row} className="mb-1">
+                          <Form.Label column xs="auto">
+                            {translate(ENV.roles.manager)}:
+                          </Form.Label>
+                          <Col>
+                            <SymbolsGroup items={managers} max={6} />
+                          </Col>
+                        </Form.Group>
+                      )}
+                      {members && members.length > 0 && (
+                        <Form.Group as={Row} className="mb-1">
+                          <Form.Label column xs="auto">
+                            {translate(ENV.roles.member)}:
+                          </Form.Label>
+                          <Col>
+                            <SymbolsGroup items={members} max={6} />
+                          </Col>
+                        </Form.Group>
+                      )}
+                    </>
+                  )}
+                </div>
+              </Col>
             </Row>
           </Col>
         </Row>
