@@ -3298,10 +3298,6 @@ msgstr "یکبار"
 msgid "One-time on plan switch"
 msgstr "یکبار در  plan switch"
 
-#: src/invitations/actions/InvitationCreateButton.tsx
-msgid "Only customer owner or staff can invite users."
-msgstr "فقط صاحب مشتری یا کارمند میتواند کاربر دعوت کند."
-
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "Only pending and expired invitations can be sent again."
 msgstr "فقط دعوت های تاریخ گذشته یا منتظر ارسال میتوانند مجدد ارسال شوند."

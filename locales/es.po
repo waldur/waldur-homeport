@@ -4547,10 +4547,6 @@ msgstr "Cambio de plan una sola vez"
 msgid "Only a created invoice can be marked as paid."
 msgstr "Solo una factura creada se puede marcar como pagada."
 
-#: src/invitations/actions/InvitationCreateButton.tsx
-msgid "Only customer owner or staff can invite users."
-msgstr "Solo el propietario del cliente o el personal pueden invitar a los usuarios."
-
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "Only pending and expired invitations can be sent again."
 msgstr "Solo las invitaciones pendientes y expiradas se pueden enviar de nuevo."

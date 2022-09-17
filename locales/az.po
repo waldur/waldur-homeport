@@ -2131,10 +2131,6 @@ msgstr "Ok"
 msgid "Object is not found."
 msgstr "Obyekt tapılmadı."
 
-#: src/invitations/actions/InvitationCreateButton.tsx
-msgid "Only customer owner or staff can invite users."
-msgstr "Yalnız müştəri sahibi və ya işçi istifadəçiləri dəvət edə bilər."
-
 #: src/invitations/actions/InvitationCancelButton.tsx
 msgid "Only pending invitation can be canceled."
 msgstr "Yalnız natamam dəvət ləğv edilə bilər."

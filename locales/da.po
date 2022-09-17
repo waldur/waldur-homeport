@@ -4543,10 +4543,6 @@ msgstr "Engangskontakt på planen"
 msgid "Only a created invoice can be marked as paid."
 msgstr "Kun en oprettet faktura kan markeres som betalt."
 
-#: src/invitations/actions/InvitationCreateButton.tsx
-msgid "Only customer owner or staff can invite users."
-msgstr "Kun kundeejer eller personale kan invitere brugere."
-
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "Only pending and expired invitations can be sent again."
 msgstr "Kun ventende og udløbne invitationer kan sendes igen."

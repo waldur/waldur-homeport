@@ -4543,10 +4543,6 @@ msgstr "Interruttore di piano una tantum"
 msgid "Only a created invoice can be marked as paid."
 msgstr "Solo una fattura creata può essere contrassegnata come pagata."
 
-#: src/invitations/actions/InvitationCreateButton.tsx
-msgid "Only customer owner or staff can invite users."
-msgstr "Solo il proprietario del cliente o il personale può invitare gli utenti."
-
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "Only pending and expired invitations can be sent again."
 msgstr "Solo gli inviti in sospeso e scaduti possono essere inviati di nuovo."

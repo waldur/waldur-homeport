@@ -4543,10 +4543,6 @@ msgstr "Eenmalige wissel op plan"
 msgid "Only a created invoice can be marked as paid."
 msgstr "Alleen een aangemaakte factuur kan als betaald worden gemarkeerd."
 
-#: src/invitations/actions/InvitationCreateButton.tsx
-msgid "Only customer owner or staff can invite users."
-msgstr "Alleen klanteneigenaren of personeel kunnen gebruikers uitnodigen."
-
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "Only pending and expired invitations can be sent again."
 msgstr "Alleen in afwachting zijnde en verlopen uitnodigingen kunnen opnieuw worden verzonden."

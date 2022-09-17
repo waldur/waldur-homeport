@@ -3941,10 +3941,6 @@ msgstr "Ühekordne plaanivahetus"
 msgid "Only a created invoice can be marked as paid."
 msgstr "Tasuks saab märkida ainult loodud arve."
 
-#: src/invitations/actions/InvitationCreateButton.tsx
-msgid "Only customer owner or staff can invite users."
-msgstr "Ainult kliendi omanik või töötaja saab kutsuda uusi kasutajaid."
-
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "Only pending and expired invitations can be sent again."
 msgstr "Ainult ootel olevat või aegunud kutset saab uuesti saata."

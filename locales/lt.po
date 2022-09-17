@@ -4543,10 +4543,6 @@ msgstr "Vienkartinis plano perjungimas"
 msgid "Only a created invoice can be marked as paid."
 msgstr "Tik sukurtą sąskaitą faktūrą galima pažymėti kaip apmokėtą."
 
-#: src/invitations/actions/InvitationCreateButton.tsx
-msgid "Only customer owner or staff can invite users."
-msgstr "Tik kliento savininkas arba darbuotojai gali kviesti vartotojus."
-
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "Only pending and expired invitations can be sent again."
 msgstr "Vėl galima siųsti tik laukiančius ir nebegaliojančius kvietimus."

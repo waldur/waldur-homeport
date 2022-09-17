@@ -4543,10 +4543,6 @@ msgstr "Commutateur de plan unique"
 msgid "Only a created invoice can be marked as paid."
 msgstr "Seule une facture créée peut être marquée comme payée."
 
-#: src/invitations/actions/InvitationCreateButton.tsx
-msgid "Only customer owner or staff can invite users."
-msgstr "Seul le propriétaire du client ou le personnel peut inviter des utilisateurs."
-
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "Only pending and expired invitations can be sent again."
 msgstr "Seules les invitations en attente et expirées peuvent être envoyées à nouveau."
