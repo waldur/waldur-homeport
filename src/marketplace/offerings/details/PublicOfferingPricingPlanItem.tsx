@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { PlanDetailsList } from '@waldur/marketplace/details/plan/PlanDetailsList';
@@ -48,7 +49,9 @@ export const PublicOfferingPricingPlanItem: FunctionComponent<PricingPlanItemPro
           {plan.name}
         </h4>
         <div className="pricing-plan-info">
-          <p className="description fs-7 text-muted">{plan.description}</p>
+          <p className="description fs-7 text-muted">
+            <FormattedHtml html={plan.description} />
+          </p>
           <div className="m-4">
             <h5 className="text-nowrap">
               Base: {defaultCurrency(totalPrice)}
