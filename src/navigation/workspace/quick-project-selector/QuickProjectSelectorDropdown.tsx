@@ -37,6 +37,12 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
     if (isVisible && refSearch.current) refSearch.current.focus();
   }, [isVisible]);
 
+  useEffect(() => {
+    if (isVisible && refProjectSelector.current) {
+      refProjectSelector.current.style.zIndex = '1055';
+    }
+  }, [isVisible]);
+
   const {
     loading,
     error,
@@ -83,79 +89,82 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
   );
 
   return (
-    <div
-      ref={refProjectSelector}
-      className="quick-project-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-100 mw-600px"
-      data-kt-menu="true"
-      data-popper-placement="bottom-start"
-    >
-      {loading ? (
-        <LoadingSpinner />
-      ) : error ? (
-        translate('Unable to load data')
-      ) : organizationsCount === 0 ? (
-        <EmptyOrganizationsPlaceholder />
-      ) : (
-        <>
-          <div className="form-group pb-3 px-20 border-gray-300 border-bottom">
-            <FormControl
-              id="quick-selector-search-box"
-              ref={refSearch}
-              type="text"
-              className="form-control-solid text-center bg-light"
-              autoFocus
-              value={filter}
-              onChange={(event) => setFilter(event.target.value)}
-              placeholder={translate('Search...')}
-            />
-          </div>
-          <div className="d-flex border-gray-300 border-bottom">
-            <OrganizationsPanel
-              active={selectedOrganization}
-              onClick={(customer) => {
-                if (isCustomerPages || isProviderPages) {
-                  router.stateService.go(state.name, {
-                    uuid: customer.uuid,
-                  });
-                } else {
-                  const targetState = isProviderPages
-                    ? 'marketplace-vendor-offerings'
-                    : 'organization.dashboard';
-                  router.stateService.go(targetState, {
-                    uuid: customer.uuid,
-                  });
-                }
-              }}
-              onMouseEnter={(customer) => {
-                selectOrganization(customer);
-              }}
-              filter={filter}
-            />
-            <ProjectsPanel
-              projects={selectedOrganization?.projects}
-              onSelect={(item) => {
-                if (isProjectPages) {
-                  router.stateService.go(state.name, {
-                    uuid: item.uuid,
-                  });
-                } else {
-                  router.stateService.go('project.details', {
-                    uuid: item.uuid,
-                  });
-                }
-              }}
-            />
-          </div>
-          <Button
-            variant="link"
-            size="sm"
-            className="text-dark mx-4 mt-4"
-            onClick={changeWorkspace}
-          >
-            {translate('View all')}
-          </Button>
-        </>
-      )}
-    </div>
+    <>
+      {isVisible && <div className="fade modal-backdrop show" />}
+      <div
+        ref={refProjectSelector}
+        className="quick-project-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-100 mw-600px"
+        data-kt-menu="true"
+        data-popper-placement="bottom-start"
+      >
+        {loading ? (
+          <LoadingSpinner />
+        ) : error ? (
+          translate('Unable to load data')
+        ) : organizationsCount === 0 ? (
+          <EmptyOrganizationsPlaceholder />
+        ) : (
+          <>
+            <div className="form-group pb-3 px-20 border-gray-300 border-bottom">
+              <FormControl
+                id="quick-selector-search-box"
+                ref={refSearch}
+                type="text"
+                className="form-control-solid text-center bg-light"
+                autoFocus
+                value={filter}
+                onChange={(event) => setFilter(event.target.value)}
+                placeholder={translate('Search...')}
+              />
+            </div>
+            <div className="d-flex border-gray-300 border-bottom">
+              <OrganizationsPanel
+                active={selectedOrganization}
+                onClick={(customer) => {
+                  if (isCustomerPages || isProviderPages) {
+                    router.stateService.go(state.name, {
+                      uuid: customer.uuid,
+                    });
+                  } else {
+                    const targetState = isProviderPages
+                      ? 'marketplace-vendor-offerings'
+                      : 'organization.dashboard';
+                    router.stateService.go(targetState, {
+                      uuid: customer.uuid,
+                    });
+                  }
+                }}
+                onMouseEnter={(customer) => {
+                  selectOrganization(customer);
+                }}
+                filter={filter}
+              />
+              <ProjectsPanel
+                projects={selectedOrganization?.projects}
+                onSelect={(item) => {
+                  if (isProjectPages) {
+                    router.stateService.go(state.name, {
+                      uuid: item.uuid,
+                    });
+                  } else {
+                    router.stateService.go('project.details', {
+                      uuid: item.uuid,
+                    });
+                  }
+                }}
+              />
+            </div>
+            <Button
+              variant="link"
+              size="sm"
+              className="text-dark mx-4 mt-4"
+              onClick={changeWorkspace}
+            >
+              {translate('View all')}
+            </Button>
+          </>
+        )}
+      </div>
+    </>
   );
 };
