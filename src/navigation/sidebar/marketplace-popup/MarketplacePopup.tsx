@@ -40,6 +40,12 @@ export const MarketplacePopup: FunctionComponent = () => {
     if (isVisible && refSearch.current) refSearch.current.focus();
   }, [isVisible, refSearch]);
 
+  useEffect(() => {
+    if (isVisible && refPopup.current) {
+      refPopup.current.style.zIndex = '1055';
+    }
+  }, [isVisible]);
+
   const { value: lastOfferings } = useAsync(
     () => fetchLastNOfferings(currentCustomer),
     [currentCustomer],
@@ -105,96 +111,99 @@ export const MarketplacePopup: FunctionComponent = () => {
   };
 
   return (
-    <div
-      id="marketplaces-selector"
-      ref={refPopup}
-      className="marketplaces-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold rounded-0 pb-4 fs-6 w-100 w-lg-50 min-w-lg-600px min-w-xl-850px h-100"
-      data-kt-menu="true"
-      data-popper-placement="end"
-    >
-      <div className="marketplaces-selector-header py-8 px-12">
-        <Row>
-          <Col xs={5} xl={3} className="text-white fs-7">
-            <span className="text-nowrap">
-              {translate('Showing services available for')}:{' '}
-            </span>
-            {currentCustomer && (
-              <Tip
-                id="marketplaces-selector-customer-tip"
-                label={currentCustomer?.name}
-                className="d-block"
-              >
-                <Button
-                  variant="link"
-                  className="btn-color-white btn-active-color-muted fs-7 fw-bolder text-nowrap p-0"
-                  onClick={changeWorkspace}
+    <>
+      {isVisible && <div className="fade modal-backdrop show" />}
+      <div
+        id="marketplaces-selector"
+        ref={refPopup}
+        className="marketplaces-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold rounded-0 pb-4 fs-6 w-100 w-lg-50 min-w-lg-600px min-w-xl-850px h-100"
+        data-kt-menu="true"
+        data-popper-placement="end"
+      >
+        <div className="marketplaces-selector-header py-8 px-12">
+          <Row>
+            <Col xs={5} xl={3} className="text-white fs-7">
+              <span className="text-nowrap">
+                {translate('Showing services available for')}:{' '}
+              </span>
+              {currentCustomer && (
+                <Tip
+                  id="marketplaces-selector-customer-tip"
+                  label={currentCustomer?.name}
+                  className="d-block"
                 >
-                  {currentCustomer?.name
-                    ? truncate(currentCustomer?.name, 15)
-                    : currentCustomer?.abbreviation}{' '}
-                  ({translate('change')})
-                </Button>
-              </Tip>
-            )}
-          </Col>
-          <Col xs={7} xl={6}>
-            <div className="form-group">
-              <FormControl
-                id="marketplaces-selector-search-box"
-                ref={refSearch}
-                type="text"
-                className="form-control-solid text-center bg-white"
-                autoFocus
-                value={filter}
-                onChange={(event) => setFilter(event.target.value)}
-                placeholder={translate('Search offering...')}
-              />
-            </div>
-          </Col>
-        </Row>
-      </div>
-      <div className="d-flex h-100">
-        {loadingCategories ? (
-          <Col className="message-wrapper p-4">
-            <LoadingSpinner />
-          </Col>
-        ) : errorCategories ? (
-          <Col className="message-wrapper">
-            <p className="text-center text-danger my-10 mx-4">
-              {translate('Unable to load categories')}
-            </p>
-          </Col>
-        ) : (
-          <CategoriesPanel
-            categories={categories}
-            selectedCategory={selectedCategory}
-            selectCategory={selectCategoryAndLoadData}
-            filter={filter}
-          />
-        )}
+                  <Button
+                    variant="link"
+                    className="btn-color-white btn-active-color-muted fs-7 fw-bolder text-nowrap p-0"
+                    onClick={changeWorkspace}
+                  >
+                    {currentCustomer?.name
+                      ? truncate(currentCustomer?.name, 15)
+                      : currentCustomer?.abbreviation}{' '}
+                    ({translate('change')})
+                  </Button>
+                </Tip>
+              )}
+            </Col>
+            <Col xs={7} xl={6}>
+              <div className="form-group">
+                <FormControl
+                  id="marketplaces-selector-search-box"
+                  ref={refSearch}
+                  type="text"
+                  className="form-control-solid text-center bg-white"
+                  autoFocus
+                  value={filter}
+                  onChange={(event) => setFilter(event.target.value)}
+                  placeholder={translate('Search offering...')}
+                />
+              </div>
+            </Col>
+          </Row>
+        </div>
+        <div className="d-flex h-100">
+          {loadingCategories ? (
+            <Col className="message-wrapper p-4">
+              <LoadingSpinner />
+            </Col>
+          ) : errorCategories ? (
+            <Col className="message-wrapper">
+              <p className="text-center text-danger my-10 mx-4">
+                {translate('Unable to load categories')}
+              </p>
+            </Col>
+          ) : (
+            <CategoriesPanel
+              categories={categories}
+              selectedCategory={selectedCategory}
+              selectCategory={selectCategoryAndLoadData}
+              filter={filter}
+            />
+          )}
 
-        {!selectedCategory ? (
-          <WelcomeView customer={currentCustomer} />
-        ) : loadingOfferings ? (
-          <Col className="message-wrapper p-4">
-            <LoadingSpinner />
-          </Col>
-        ) : errorOfferings ? (
-          <Col className="message-wrapper">
-            <p className="text-center my-10 mx-4">
-              <LoadingErred
-                loadData={() => selectCategoryAndLoadData(selectedCategory)}
-              />
-            </p>
-          </Col>
-        ) : (
-          <OfferingsPanel
-            offerings={offerings}
-            customer={currentCustomer}
-            category={selectedCategory}
-          />
-        )}
+          {!selectedCategory ? (
+            <WelcomeView customer={currentCustomer} />
+          ) : loadingOfferings ? (
+            <Col className="message-wrapper p-4">
+              <LoadingSpinner />
+            </Col>
+          ) : errorOfferings ? (
+            <Col className="message-wrapper">
+              <p className="text-center my-10 mx-4">
+                <LoadingErred
+                  loadData={() => selectCategoryAndLoadData(selectedCategory)}
+                />
+              </p>
+            </Col>
+          ) : (
+            <OfferingsPanel
+              offerings={offerings}
+              customer={currentCustomer}
+              category={selectedCategory}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
