@@ -5,6 +5,7 @@ import { formValueSelector } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { makeLastTwelveMonthsFilterPeriods } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { AgreementInfo } from '@waldur/invoices/list/AgreementInfo';
 import { InvoicesStatsList } from '@waldur/invoices/list/InvoicesStatsList';
@@ -18,7 +19,11 @@ export const CustomerExpandableRow = memo((props: any) => {
   );
   const invoiceUrl = `${ENV.apiEndpoint}api/customers/${props.row.uuid}/`;
   const { loading, error, value } = useAsync(
-    () => getInvoice(invoiceUrl, accountingPeriod.value),
+    () =>
+      getInvoice(
+        invoiceUrl,
+        (accountingPeriod || makeLastTwelveMonthsFilterPeriods()[0]).value,
+      ),
     [props.row, accountingPeriod],
   );
   if (loading) {
