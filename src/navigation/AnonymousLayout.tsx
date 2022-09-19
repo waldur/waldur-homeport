@@ -54,7 +54,7 @@ export const AnonymousLayout: FunctionComponent = () => {
             {!state.data?.hideHeader && <SiteHeader />}
             <WarningBar />
             <div
-              className={classNames('content d-flex flex-column-fluid', {
+              className={classNames('content d-flex flex-column', {
                 'full-page': fullPage,
               })}
             >

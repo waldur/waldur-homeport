@@ -66,7 +66,7 @@ export const Layout: React.FC = ({ children }) => {
               <AppHeader />
               <WarningBar />
               <div
-                className={classNames('content d-flex flex-column-fluid', {
+                className={classNames('content d-flex flex-column', {
                   'full-page': fullPage,
                 })}
               >
