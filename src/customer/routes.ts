@@ -152,7 +152,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'admin',
-    url: '/admin/',
+    url: '/administration/',
     abstract: true,
     parent: 'layout',
     component: AdminContainer,
