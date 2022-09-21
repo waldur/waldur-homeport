@@ -2118,7 +2118,6 @@ msgstr ""
 msgid "Dark theme"
 msgstr ""
 
-#: src/customer/dashboard/CustomerDashboard.tsx
 #: src/project/ProjectDashboard.tsx
 #: src/user/constants.ts
 msgid "Dashboard"
@@ -4374,10 +4373,6 @@ msgstr ""
 msgid "Manage networks"
 msgstr ""
 
-#: src/customer/details/CustomerManage.tsx
-msgid "Manage organization"
-msgstr ""
-
 #: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
 msgid "Manage security groups"
 msgstr ""
@@ -5486,6 +5481,9 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/create/CustomerCreatePrompt.tsx
+#: src/customer/dashboard/CustomerDashboard.tsx
+#: src/customer/details/CustomerManage.tsx
+#: src/customer/details/CustomerPaymentProfiles.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/events/EventDetailsTable.tsx
@@ -6405,6 +6403,7 @@ msgstr ""
 msgid "Private clouds"
 msgstr ""
 
+#: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/utils.ts
 #: src/navigation/navitems.ts
 msgid "Profile"
@@ -8519,6 +8518,7 @@ msgstr ""
 msgid "Set value"
 msgstr ""
 
+#: src/customer/details/CustomerManage.tsx
 #: src/customer/utils.ts
 #: src/navigation/navitems.ts
 #: src/project/ProjectManage.tsx
