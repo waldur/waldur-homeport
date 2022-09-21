@@ -12,22 +12,20 @@ interface CategoryCardProps {
 }
 
 export const CategoryCard: FunctionComponent<CategoryCardProps> = (props) => (
-  <Card className="shadow-sm category-card">
+  <Card
+    as={CategoryLink}
+    category_uuid={props.category.uuid}
+    className="shadow-sm category-card"
+  >
     <Card.Body className="p-6">
-      <CategoryLink
-        className="category-thumb"
-        category_uuid={props.category.uuid}
-      >
+      <div className="category-thumb">
         <OfferingLogo src={props.category.icon} />
-      </CategoryLink>
-      <div className="category-card-body">
+      </div>
+      <div className="category-card-body text-dark">
         <h3 className="category-title">
-          <CategoryLink
-            category_uuid={props.category.uuid}
-            className="text-dark fw-bold text-hover-primary fs-6"
-          >
+          <span className="fw-bold text-hover-primary fs-6">
             {props.category.title}
-          </CategoryLink>
+          </span>
         </h3>
         {props.category.offering_count}{' '}
         {props.category.offering_count === 1
