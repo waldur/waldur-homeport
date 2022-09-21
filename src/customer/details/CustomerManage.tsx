@@ -12,8 +12,8 @@ import { CustomerRemovePanel } from './CustomerRemovePanel';
 export const CustomerManage: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   useTitle(
-    translate('Settings'),
-    translate('Organization') + ': ' + customer.display_name,
+    translate('Organization') + ' / ' + translate('Settings'),
+    customer.display_name,
   );
 
   return (
