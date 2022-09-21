@@ -19,13 +19,16 @@ import { CustomerDashboardChart } from './CustomerDashboardChart';
 import { CustomerProfile } from './CustomerProfile';
 
 export const CustomerDashboard: FunctionComponent = () => {
-  useTitle(translate('Dashboard'));
-
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
   const isServiceManager = useMemo(
     () => checkIsServiceManager(customer, user),
     [customer, user],
+  );
+
+  useTitle(
+    translate('Profile'),
+    translate('Organization') + ': ' + customer.display_name,
   );
 
   return (
