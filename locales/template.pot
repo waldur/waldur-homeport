@@ -3004,6 +3004,10 @@ msgstr ""
 msgid "Expires at"
 msgstr ""
 
+#: src/navigation/FooterLinks.tsx
+msgid "Explore marketplace"
+msgstr ""
+
 #: src/i18n/constants.ts
 msgid "Explore {deployment} service catalog"
 msgstr ""
@@ -9252,13 +9256,16 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
-#: src/navigation/FooterLinks.tsx
 #: src/navigation/navitems.ts
 msgid "Terms of Service"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Terms of Service link"
+msgstr ""
+
+#: src/navigation/FooterLinks.tsx
+msgid "Terms of service"
 msgstr ""
 
 #: src/marketplace-script/TestScriptButton.tsx

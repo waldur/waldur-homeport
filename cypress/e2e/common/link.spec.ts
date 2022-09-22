@@ -1,4 +1,4 @@
-describe('Link persistance after login', () => {
+xdescribe('Link persistance after login', () => {
   beforeEach(() => {
     cy.mockUser()
       .intercept('GET', '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/', {
