@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 
 import { Column } from './types';
 
@@ -29,30 +29,43 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   expandableRow,
   toggleRow,
   toggled,
-}) => (
-  <tbody>
-    {rows.map((row, rowIndex) => (
-      <React.Fragment key={rowIndex}>
-        <tr>
-          {expandableRow && (
-            <td onClick={() => toggleRow(row.uuid)}>
-              {toggled[row.uuid] ? (
-                <i className="fa fa-chevron-down" />
-              ) : (
-                <i className="fa fa-chevron-right" />
-              )}
-            </td>
-          )}
-          <TableCells row={row} columns={columns} />
-        </tr>
-        {expandableRow && toggled[row.uuid] && (
-          <tr>
-            <td colSpan={columns.length + 1}>
-              {React.createElement(expandableRow, { row })}
-            </td>
+}) => {
+  const trClick = useCallback(
+    (row, e) => {
+      if (!expandableRow) return;
+      // prevent expandable row to toggle when clicking on inner clickable elements
+      const el = e.target as HTMLElement;
+      if (el.onclick) return;
+      toggleRow(row.uuid);
+    },
+    [toggleRow],
+  );
+
+  return (
+    <tbody>
+      {rows.map((row, rowIndex) => (
+        <React.Fragment key={rowIndex}>
+          <tr onClick={(event) => trClick(row, event)}>
+            {expandableRow && (
+              <td>
+                {toggled[row.uuid] ? (
+                  <i className="fa fa-chevron-down" />
+                ) : (
+                  <i className="fa fa-chevron-right" />
+                )}
+              </td>
+            )}
+            <TableCells row={row} columns={columns} />
           </tr>
-        )}
-      </React.Fragment>
-    ))}
-  </tbody>
-);
+          {expandableRow && toggled[row.uuid] && (
+            <tr>
+              <td colSpan={columns.length + 1}>
+                {React.createElement(expandableRow, { row })}
+              </td>
+            </tr>
+          )}
+        </React.Fragment>
+      ))}
+    </tbody>
+  );
+};
