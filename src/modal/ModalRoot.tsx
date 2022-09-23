@@ -49,6 +49,7 @@ export const ModalRoot: FunctionComponent = () => {
       backdrop={modalProps?.backdrop}
       style={modalProps?.modalStyle}
       dialogClassName={modalProps?.dialogClassName}
+      centered
     >
       <ErrorBoundary fallback={ErrorMessage}>
         {modalComponent
