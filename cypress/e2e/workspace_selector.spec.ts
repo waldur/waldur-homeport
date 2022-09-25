@@ -1,14 +1,15 @@
 const getTextList = ($p) =>
   $p.map((i, el) => Cypress.$(el).text().trim()).get();
 
-xdescribe('Workspace selector', () => {
+describe('Workspace selector', () => {
   beforeEach(() => {
-    cy.intercept('HEAD', '/api/customers/', {
+    cy
+    .intercept('HEAD', '/api/customers/', {
       headers: {
         'x-result-count': '3',
       },
     });
-    cy.intercept('GET', '/api/customers/?', (req) => {
+    cy.intercept('GET', '/api/customers/**', (req) => {
       if (req.url.indexOf('lebowski') !== -1) {
         req.reply({
           fixture: 'customers/lebowski.json',
@@ -26,6 +27,10 @@ xdescribe('Workspace selector', () => {
       }
     })
       .mockUser()
+      .mockChecklists()
+      .mockEvents()
+      .mockPermissions()
+      .intercept('GET', '/api/marketplace-categories/**', [])
       .intercept('GET', '/api/projects/6f3ae6f43d284ca196afeb467880b3b9/', {
         fixture: 'projects/alice_azure.json',
       })
@@ -34,74 +39,97 @@ xdescribe('Workspace selector', () => {
       })
       .setToken()
       .visit('/profile/')
-      .openWorkspaceSelector();
   });
 
   it('Lists all organizations by default', () => {
-    cy.contains('button', 'Select an organization...')
-      .click()
-      // Get filtered organization rows
-      .get('.organization-list-item .title')
-
+    cy
+      .get('span[class="title lh-1"]')
+      .click(
+        {
+          force: true, 
+          multiple: true
+        }
+      )
       // Only matching organizations should be present
       .should(($p) =>
-        expect(getTextList($p)).to.deep.eq([
-          'Alice Lebowski',
-          'Bob Lebowski',
-          'Web Services',
-        ]),
+        expect(getTextList($p)).to.deep.eq(
+          [
+            'Alice Lebowski',
+            'Bob Lebowski',
+            'Web Services'
+          ]
+        ),
       );
   });
 
   it('Allows to filter organizations by name', () => {
-    cy.contains('button', 'Select an organization...')
-      .click()
+    cy
       // Enter query in organization list filter
-      .get('input[placeholder="Search for organization...')
-      .type('lebowski')
-
+      .get('input[placeholder="Search..."]')
+      .focus()
+      .type('Bob', {force: true})
       // Get filtered organization rows
-      .get('.organization-list-item .title')
+      .get('span[class="title lh-1"]')
+      .contains('Bob')
+      .click(
+        {
+          force: true
+        }
+      )
 
       // Only matching organizations should be present
       .should(($p) =>
-        expect(getTextList($p)).to.deep.eq(['Alice Lebowski', 'Bob Lebowski']),
+        expect(getTextList($p)).to.deep.eq(
+          [
+            'Bob Lebowski'
+          ]
+        ),
       );
   });
 
   it('Allows to filter projects by name', () => {
-    cy.contains('button', 'Select an organization...')
-      .click()
-      // Select first available organization
-      .get('.organization-list-item')
-      .first()
-      .click()
+    cy
+      // Enter query in projects list filter
+      .get('input[placeholder="Search..."]')
+      .focus()
+      .type('Openstack', {
+          force: true
+        }
+      )
 
-      // Filter projects by name
-      .get('input[placeholder="Filter projects"]')
-      .type('OpenStack')
-
-      // Get filtered project rows
-      .get('.project-list-item .title')
+      // There is a bug in Cypress - it doesn't show the projects before we hover on organizations - so firstly we need to hover on organizations  
+      .get('span[class="title lh-1"]')
+      .contains('Alice')
+      .click({force: true})
+      
+      // And now we get filtered project rows
+      .get('span[class="title ellipsis"]')
+      .contains('OpenStack')
 
       // Only matching projects should be present
       .should(($p) =>
-        expect(getTextList($p)).to.deep.eq(['OpenStack Alice project']),
+        expect(getTextList($p)).to.deep.eq(
+          [
+            'OpenStack Alice project'
+          ]
+        ),
       );
   });
 
   it('Allows to go switch to project workspace', () => {
-    cy.contains('button', 'Select an organization...')
-      .click()
+    cy
+      .get('.organization-listing')
+
       // Select first available organization
-      .get('.organization-list-item')
-      .contains('Alice Lebowski')
-      .click({ force: true })
+      .get('span[class="title lh-1"]')
+      .contains('Alice')
+      .click({force: true})
 
       // Select last available project
-      .get('.projects-table a')
+      .get('.project-listing')
+      .get('.list-group')
       .last()
-      .contains('Select')
-      .click();
+      .click({force: true});
+
   });
 });
