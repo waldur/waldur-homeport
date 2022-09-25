@@ -7,6 +7,8 @@ declare global {
       mockUser(userName?: string): Chainable;
       mockCustomer(): Chainable;
       mockCustomers(): Chainable;
+      mockEvents(): Chainable;
+      mockPermissions(): Chainable;
       mockChecklists(): Chainable;
       mockConfigs(): Chainable;
       fillAndSubmitLoginForm(username?: string, password?: string): Chainable;
@@ -119,9 +121,6 @@ Cypress.Commands.add('mockUser', (userName) => {
     .intercept('GET', '/api/users/me/', {
       fixture: `users/${userData}`,
     })
-    .intercept('GET', '/api/customer-permissions/', [])
-    .intercept('GET', '/api/project-permissions/', [])
-    .intercept('GET', '/api/events/', []);
 });
 
 Cypress.Commands.add('mockCustomer', () => {
@@ -149,8 +148,37 @@ Cypress.Commands.add('mockChecklists', () => {
   });
 });
 
+Cypress.Commands.add('mockEvents', ()=> {
+  cy
+  .intercept('GET', '/api/events-stats/**', [])
+})
+
 Cypress.Commands.add('mockCustomers', ()=> {
   cy
     .intercept('HEAD', '/api/customers/', [])
     .intercept('GET', '/api/customers/**', [])
+})
+
+Cypress.Commands.add('mockPermissions', ()=> {
+  cy
+    .intercept(
+      'GET',
+      '/api/customer-permissions/',
+      {},
+    )
+    .intercept(
+      'GET',
+      '/api/customer-permissions/**',
+      {},
+    )
+    .intercept(
+      'GET',
+      '/api/project-permissions/',
+      [],
+    )
+    .intercept(
+      'GET',
+      '/api/project-permissions/**',
+      [],
+    );
 })
