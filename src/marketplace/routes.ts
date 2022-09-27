@@ -3,8 +3,8 @@ import { UIView } from '@uirouter/react';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { fetchCustomer } from '@waldur/customer/workspace/CustomerWorkspace';
-import { checkPermission } from '@waldur/issues/utils';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
+import { checkPermission } from '@waldur/utils';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 const SupportOfferingsContainer = lazyComponent(

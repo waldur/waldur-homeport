@@ -1,6 +1,6 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { checkPermission } from '@waldur/issues/utils';
+import { checkPermission } from '@waldur/utils';
 
 const GrowthContainer = lazyComponent(
   () =>

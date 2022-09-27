@@ -1,13 +1,21 @@
-import { UISref, UISrefActive } from '@uirouter/react';
-import { FunctionComponent, useContext } from 'react';
+import { UISref, UISrefActive, useRouter } from '@uirouter/react';
+import { FunctionComponent, useContext, useEffect, useState } from 'react';
 
 import { LayoutContext } from './context';
+import { getFilteredTabs } from './utils';
 
 export const TabsList: FunctionComponent = () => {
   const ctx = useContext(LayoutContext);
+  const router = useRouter();
+  const [filteredTabs, setFilteredTabs] = useState(ctx.tabs || []);
+
+  useEffect(() => {
+    getFilteredTabs(ctx.tabs).then((tabs) => setFilteredTabs(tabs));
+  }, [ctx.tabs, router]);
+
   return (
     <>
-      {(ctx.tabs || []).map((parentTab, parentIndex) =>
+      {filteredTabs.map((parentTab, parentIndex) =>
         parentTab.to ? (
           <UISrefActive class="here" key={parentIndex}>
             <UISref to={parentTab.to}>
@@ -20,6 +28,7 @@ export const TabsList: FunctionComponent = () => {
           </UISrefActive>
         ) : (
           <div
+            key={parentIndex}
             data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
             data-kt-menu-placement="bottom-start"
             className="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2"
