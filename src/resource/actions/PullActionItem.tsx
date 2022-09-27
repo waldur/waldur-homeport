@@ -12,11 +12,9 @@ interface PullActionItemProps<T> {
   resource: T;
 }
 
-export const PullActionItem: <T extends { uuid: string; backend_id?: string }>(
-  props: PullActionItemProps<T>,
-) => ReactElement = ({ resource, apiMethod }) => {
+export const usePull = ({ resource, apiMethod }) => {
   const dispatch = useDispatch();
-  const callback = async () => {
+  const action = async () => {
     try {
       await apiMethod(resource.uuid);
       dispatch(showSuccess(translate('Synchronisation has been scheduled.')));
@@ -26,8 +24,18 @@ export const PullActionItem: <T extends { uuid: string; backend_id?: string }>(
       );
     }
   };
-  if (!resource.backend_id) {
+  return {
+    action,
+    title: translate('Synchronise'),
+  };
+};
+
+export const PullActionItem: <T extends { uuid: string; backend_id?: string }>(
+  props: PullActionItemProps<T>,
+) => ReactElement = (props) => {
+  const { action, title } = usePull(props);
+  if (!props.resource.backend_id) {
     return null;
   }
-  return <ActionItem title={translate('Synchronise')} action={callback} />;
+  return <ActionItem title={title} action={action} />;
 };

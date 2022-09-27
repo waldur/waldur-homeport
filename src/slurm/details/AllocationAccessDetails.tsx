@@ -4,10 +4,7 @@ import { ENV } from '@waldur/configs/default';
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
 import { SubmitWithField } from '@waldur/slurm/details/SubmitWithField';
-
-import './SlurmAllocationSummaryExtraDetails.scss';
 
 const formatLoginDetails = (props) => {
   const value = `ssh ${props.resource.username}@${props.resource.gateway}`;
@@ -17,22 +14,16 @@ const formatLoginDetails = (props) => {
       label={translate('FreeIPA account needs to be set up.')}
     />
   ) : (
-    <CopyToClipboardContainer value={value} />
+    <>
+      <p>{translate('Login with')}</p>{' '}
+      <CopyToClipboardContainer value={value} />
+    </>
   );
 };
 
-export const SlurmAllocationSummaryExtraDetails: FunctionComponent<any> = (
-  props,
-) => (
-  <div className="slurm-allocation-summary-extra-details-container">
-    {ENV.plugins.WALDUR_FREEIPA?.ENABLED && (
-      <div className={props.resource.username ? 'field-container' : ''}>
-        <Field
-          label={translate('Login with')}
-          value={formatLoginDetails(props)}
-        />
-      </div>
-    )}
+export const AllocationAccessDetails: FunctionComponent<any> = (props) => (
+  <>
+    {ENV.plugins.WALDUR_FREEIPA?.ENABLED && <p>{formatLoginDetails(props)}</p>}
     <SubmitWithField resource={props.resource} />
-  </div>
+  </>
 );

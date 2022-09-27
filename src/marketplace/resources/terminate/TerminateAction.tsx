@@ -1,8 +1,10 @@
 import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { validateState } from '@waldur/resource/actions/base';
-import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
+import { useModalDialogCallback } from '@waldur/resource/actions/useModalDialogCallback';
+import { useValidators } from '@waldur/resource/actions/useValidators';
 
 import { TerminateDialogContainer } from './TerminateDialogContainer';
 
@@ -13,16 +15,35 @@ interface TerminateActionProps {
   dialogSubtitle?: string;
 }
 
+export const useTerminate = ({
+  resource,
+  dialogSubtitle,
+}: {
+  resource;
+  dialogSubtitle?;
+}) => {
+  const { tooltip, disabled } = useValidators(validators, resource);
+  const action = useModalDialogCallback(
+    TerminateDialogContainer,
+    null,
+    resource,
+    null,
+    { dialogSubtitle },
+  );
+  return {
+    title: translate('Terminate'),
+    action,
+    tooltip,
+    disabled,
+  };
+};
+
 export const TerminateAction: FC<TerminateActionProps> = ({
   resource,
   dialogSubtitle,
-}) =>
-  resource.marketplace_resource_uuid !== null ? (
-    <DialogActionItem
-      validators={validators}
-      title={translate('Terminate')}
-      modalComponent={TerminateDialogContainer}
-      extraResolve={{ dialogSubtitle }}
-      resource={resource}
-    />
+}) => {
+  const props = useTerminate({ resource, dialogSubtitle });
+  return resource.marketplace_resource_uuid !== null ? (
+    <ActionItem {...props} />
   ) : null;
+};

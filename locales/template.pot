@@ -20,6 +20,14 @@ msgstr ""
 msgid "10 - Very positive"
 msgstr ""
 
+#: src/slurm/details/StatusPage.tsx
+msgid "90 days ago"
+msgstr ""
+
+#: src/slurm/details/StatusPage.tsx
+msgid "99.98% uptime"
+msgstr ""
+
 #: src/user/support/TermsOfService.tsx
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr ""
@@ -287,6 +295,10 @@ msgstr ""
 
 #: src/user/support/UserActivateButton.tsx
 msgid "Active user will be able to login into the portal."
+msgstr ""
+
+#: src/slurm/details/AllocationDetails.tsx
+msgid "Activity"
 msgstr ""
 
 #: src/issues/workspace/IssuesActivityStream.tsx
@@ -1197,7 +1209,7 @@ msgstr ""
 
 #: src/rancher/cluster/hpas/utils.ts
 #: src/rancher/node/RancherNodeSummary.tsx
-#: src/slurm/details/SlurmAllocationSummary.tsx
+#: src/slurm/details/AllocationQuotas.tsx
 msgid "CPU"
 msgstr ""
 
@@ -2120,6 +2132,7 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerDashboard.tsx
 #: src/project/ProjectDashboard.tsx
+#: src/slurm/details/AllocationDetails.tsx
 #: src/user/constants.ts
 msgid "Dashboard"
 msgstr ""
@@ -3285,7 +3298,7 @@ msgstr ""
 msgid "FreeIPA account"
 msgstr ""
 
-#: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
+#: src/slurm/details/AllocationAccessDetails.tsx
 msgid "FreeIPA account needs to be set up."
 msgstr ""
 
@@ -3322,7 +3335,7 @@ msgstr ""
 msgid "GB"
 msgstr ""
 
-#: src/slurm/details/SlurmAllocationSummary.tsx
+#: src/slurm/details/AllocationQuotas.tsx
 msgid "GPU"
 msgstr ""
 
@@ -3540,6 +3553,10 @@ msgstr ""
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "Hours"
+msgstr ""
+
+#: src/slurm/details/AllocationDetails.tsx
+msgid "How to"
 msgstr ""
 
 #: src/user/keys/help.js
@@ -4312,7 +4329,7 @@ msgstr ""
 msgid "Login failed"
 msgstr ""
 
-#: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
+#: src/slurm/details/AllocationAccessDetails.tsx
 msgid "Login with"
 msgstr ""
 
@@ -4995,6 +5012,10 @@ msgstr ""
 msgid "No providers"
 msgstr ""
 
+#: src/slurm/details/StatusPage.tsx
+msgid "No reported incidents in the last 24 hours"
+msgstr ""
+
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/form/AsyncSelectField.tsx
 msgid "No results found"
@@ -5421,6 +5442,10 @@ msgstr ""
 msgid "Opened by {user} from {organization} at {date}"
 msgstr ""
 
+#: src/slurm/details/StatusPage.tsx
+msgid "Operational"
+msgstr ""
+
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 msgid "Options are invalid."
 msgstr ""
@@ -5447,6 +5472,10 @@ msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
 msgid "Order has been submitted."
+msgstr ""
+
+#: src/slurm/details/ResourceOrderItemsLink.tsx
+msgid "Order history"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
@@ -6886,7 +6915,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
-#: src/slurm/details/SlurmAllocationSummary.tsx
+#: src/slurm/details/AllocationQuotas.tsx
 msgid "RAM"
 msgstr ""
 
@@ -7229,6 +7258,10 @@ msgstr ""
 
 #: src/issues/list/IssuesShortList.tsx
 msgid "Reported by me"
+msgstr ""
+
+#: src/slurm/details/StatusPage.tsx
+msgid "Reported incidents"
 msgstr ""
 
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
@@ -7575,6 +7608,11 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Resource name"
+msgstr ""
+
+#: src/marketplace/orders/item/list/ResourceOrderItemsDialog.tsx
+#: src/slurm/details/ResourceMetadataDialog.tsx
+msgid "Resource order items"
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
@@ -8026,6 +8064,11 @@ msgstr ""
 
 #: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
 msgid "See all offerings"
+msgstr ""
+
+#: src/slurm/details/ResourceIssues.tsx
+#: src/slurm/details/ResourceTimeline.tsx
+msgid "See more"
 msgstr ""
 
 #: src/marketplace/landing/FooterSection.tsx
@@ -8597,6 +8640,10 @@ msgstr ""
 msgid "Show less"
 msgstr ""
 
+#: src/slurm/details/ResourceMetadataLink.tsx
+msgid "Show metadata"
+msgstr ""
+
 #: src/marketplace/offerings/service-providers/shared/ShowOfferingsButton.tsx
 msgid "Show offerings"
 msgstr ""
@@ -8829,6 +8876,7 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
+#: src/slurm/details/ResourceHeader.tsx
 #: src/support/SupportDetailsTable.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
@@ -8852,6 +8900,10 @@ msgstr ""
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Status"
+msgstr ""
+
+#: src/slurm/details/AllocationDetails.tsx
+msgid "Status page"
 msgstr ""
 
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
@@ -9481,6 +9533,14 @@ msgstr ""
 msgid "There are no requests yet."
 msgstr ""
 
+#: src/slurm/details/ResourceTimeline.tsx
+msgid "There are no resource events."
+msgstr ""
+
+#: src/slurm/details/ResourceIssues.tsx
+msgid "There are no resource issues."
+msgstr ""
+
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "There are no resources available."
 msgstr ""
@@ -9552,6 +9612,10 @@ msgstr ""
 
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 msgid "Thumbnail"
+msgstr ""
+
+#: src/slurm/details/AllocationDetails.tsx
+msgid "Tickets"
 msgstr ""
 
 #: src/user/api-key/AuthenticationEvents.tsx
@@ -9628,6 +9692,10 @@ msgstr ""
 msgid "To report an issue, please send an email to {supportEmail}."
 msgstr ""
 
+#: src/slurm/details/StatusPage.tsx
+msgid "Today"
+msgstr ""
+
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
 #: src/navigation/header/UserDropdown.tsx
 msgid "Token"
@@ -9660,15 +9728,15 @@ msgstr ""
 msgid "Total CPU"
 msgstr ""
 
-#: src/slurm/details/SlurmAllocationSummary.tsx
+#: src/slurm/details/AllocationQuotas.tsx
 msgid "Total CPU hours consumed this month"
 msgstr ""
 
-#: src/slurm/details/SlurmAllocationSummary.tsx
+#: src/slurm/details/AllocationQuotas.tsx
 msgid "Total GPU hours consumed this month"
 msgstr ""
 
-#: src/slurm/details/SlurmAllocationSummary.tsx
+#: src/slurm/details/AllocationQuotas.tsx
 msgid "Total RAM GB-hours consumed this month"
 msgstr ""
 
@@ -10046,6 +10114,14 @@ msgstr ""
 
 #: src/navigation/SearchResultsDropdown.tsx
 msgid "Unable to fetch offerings"
+msgstr ""
+
+#: src/slurm/details/ResourceTimeline.tsx
+msgid "Unable to fetch resource events."
+msgstr ""
+
+#: src/slurm/details/ResourceIssues.tsx
+msgid "Unable to fetch resource issues."
 msgstr ""
 
 #: src/issues/comments/utils.ts
@@ -10994,6 +11070,10 @@ msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
 msgid "Usage based"
+msgstr ""
+
+#: src/slurm/details/AllocationDetails.tsx
+msgid "Usage history"
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
@@ -12011,6 +12091,7 @@ msgid "hour"
 msgstr ""
 
 #: src/providers/support/MapInfoPanel.tsx
+#: src/slurm/details/AllocationQuotas.tsx
 msgid "hours"
 msgstr ""
 
@@ -12511,7 +12592,6 @@ msgid "{type} script was executed successfully"
 msgstr ""
 
 #: src/quotas/QuotasTable.tsx
-#: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "{usage} of {limit}"
 msgstr ""
 

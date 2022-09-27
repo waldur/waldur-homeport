@@ -3,7 +3,6 @@ import { useAsync } from 'react-use';
 
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
 import { getSlurmAssociations } from '@waldur/slurm/details/api';
 import { SlurmAssociation } from '@waldur/slurm/details/types';
 
@@ -47,15 +46,15 @@ export const SubmitWithField: FunctionComponent<any> = ({ resource }) => {
     return null;
   }
   return (
-    <div className={value ? 'field-container' : ''}>
-      <Field
-        label={translate('Submit with')}
-        value={
-          value
-            ? formatSubmitDetails(resource)
-            : translate('Your account is not authorized to use this allocation')
-        }
-      />
-    </div>
+    <>
+      {value ? (
+        <>
+          <p>{translate('Submit with')}</p>
+          {formatSubmitDetails(resource)}
+        </>
+      ) : (
+        translate('Your account is not authorized to use this allocation')
+      )}
+    </>
   );
 };
