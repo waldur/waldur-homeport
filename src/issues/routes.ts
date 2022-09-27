@@ -1,8 +1,8 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { checkPermission } from '@waldur/utils';
 import { SUPPORT_WORKSPACE } from '@waldur/workspace/types';
 
-import { checkPermission } from './utils';
 import { SupportContainer } from './workspace/SupportWorkspace';
 
 const CustomersDivisionsContainer = lazyComponent(
