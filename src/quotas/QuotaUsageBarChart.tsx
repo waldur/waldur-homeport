@@ -50,18 +50,16 @@ export const ProgressTooltipMessage = ({ quota }) => (
 
 export const QuotaUsageBarChartDescription = ({ quota }) => (
   <>
-    <span>
-      <strong>{formatQuotaName(quota.name)}</strong>
-      {exceeds(quota) && (
-        <Tip
-          id={quota.name}
-          label={translate('Quota usage exceeds available limit.')}
-        >
-          {' '}
-          <i className="fa fa-exclamation-triangle" />
-        </Tip>
-      )}
-    </span>
+    <strong>{formatQuotaName(quota.name)}</strong>
+    {exceeds(quota) && (
+      <Tip
+        id={quota.name}
+        label={translate('Quota usage exceeds available limit.')}
+      >
+        {' '}
+        <i className="fa fa-exclamation-triangle" />
+      </Tip>
+    )}
     <span className="pull-right text-muted">{getSummary(quota)}</span>
   </>
 );

@@ -25,8 +25,11 @@ export interface BaseResource {
   end_date?: string;
   modified?: string;
   marketplace_offering_uuid?: boolean;
+  marketplace_offering_thumbnail?: string;
   marketplace_resource_uuid?: string;
   marketplace_category_uuid?: string;
+  marketplace_category_name?: string;
+  marketplace_category_icon?: string;
   project_uuid: string;
   quotas?: Quota[];
   resource_type?: string;

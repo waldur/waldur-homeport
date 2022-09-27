@@ -7,8 +7,8 @@ export const useModalDialogCallback = (
   modalComponent,
   dialogSize,
   resource,
-  formId,
-  extraResolve,
+  formId?,
+  extraResolve?,
 ) => {
   const dispatch = useDispatch();
   return useCallback(() => {
