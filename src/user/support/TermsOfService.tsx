@@ -20,7 +20,9 @@ export const TermsOfService: FunctionComponent<TermsOfServiceProps> = (
             translate(
               '<Link>Terms of Service</Link> have been accepted on <Date></Date>',
               {
-                Link: (s) => <Link state="tos.index" label={s} />,
+                Link: (s) => (
+                  <Link state="tos.index" label={s} target="_blank" />
+                ),
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 Date: (_) => formatDateTime(props.agreementDate),
               },
