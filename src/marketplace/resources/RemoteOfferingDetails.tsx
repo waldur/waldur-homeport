@@ -1,34 +1,24 @@
 import { FC, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
+import { Calendar } from '@waldur/booking/components/calendar/Calendar';
+import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
-import { ResourceIssues } from '@waldur/marketplace/resources/ResourceIssues';
-import { ResourceTimeline } from '@waldur/marketplace/resources/ResourceTimeline';
 import { StatusPage } from '@waldur/marketplace/resources/StatusPage';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { useFullPage, useTabs } from '@waldur/navigation/context';
+import { OpenStackResourceUsage } from '@waldur/openstack/OpenStackResourceUsage';
+
 import '@waldur/marketplace/offerings/details/PublicOfferingDetailsHero.scss';
-import { Resource } from '@waldur/resource/types';
+import { QuickActions } from './QuickActions';
+import { ResourceComponents } from './ResourceComponents';
+import { ResourceDetailsHeader } from './ResourceDetailsHeader';
+import { ResourceIssues } from './ResourceIssues';
+import { ResourceTimeline } from './ResourceTimeline';
 
-import { AllocationAccessDetails } from './AllocationAccessDetails';
-import { AllocationQuotas } from './AllocationQuotas';
-import { AllocationUsageTable } from './AllocationUsageTable';
-import { ResourceHeader } from './ResourceHeader';
-
-interface AllocationDetailsProps {
-  resource: Resource & {
-    cpu_usage: number;
-    cpu_limit: number;
-    gpu_usage: number;
-    gpu_limit: number;
-    ram_usage: number;
-    ram_limit: number;
-  };
-}
-
-export const AllocationDetails: FC<AllocationDetailsProps> = ({ resource }) => {
+export const RemoteOfferingDetails: FC<any> = ({ resource }) => {
   useFullPage();
   const tabs = useMemo(
     () => [
@@ -53,26 +43,38 @@ export const AllocationDetails: FC<AllocationDetailsProps> = ({ resource }) => {
                     <Card className="public-offering-logo">
                       <Card.Body>
                         <OfferingLogo
-                          src={resource.marketplace_offering_thumbnail}
+                          src={resource.offering_thumbnail}
                           size={50}
                           className="offering-small-logo"
                         />
                         <Logo
-                          image={resource.marketplace_category_icon}
-                          placeholder={resource.marketplace_category_name[0]}
+                          image={resource.category_icon}
+                          placeholder={resource.category_title[0]}
                           height={100}
                           width={100}
                         />
                       </Card.Body>
                     </Card>
                     <Card className="flex-grow-1">
-                      <ResourceHeader resource={resource} />
+                      <ResourceDetailsHeader resource={resource} />
                     </Card>
                   </div>
                 </Col>
                 <Col md={4} sm={12}>
                   <Card>
-                    <AllocationQuotas resource={resource} />
+                    <Card.Body>
+                      <div className="d-flex justify-content-between mb-5">
+                        <QuickActions
+                          resource={
+                            {
+                              ...resource,
+                              marketplace_resource_uuid: resource.uuid,
+                            } as any
+                          }
+                        />
+                      </div>
+                      <ResourceComponents resource={resource} />
+                    </Card.Body>
                   </Card>
                 </Col>
               </Row>
@@ -84,12 +86,25 @@ export const AllocationDetails: FC<AllocationDetailsProps> = ({ resource }) => {
       <div className="container-xxl py-10">
         <Row className="mb-10">
           <Col md={8} sm={12}>
-            <Card>
-              <Card.Body>
-                <h3 className="mb-5">{translate('Usage history')}</h3>
-                <AllocationUsageTable resource={resource} />
-              </Card.Body>
-            </Card>
+            {(resource.is_usage_based || resource.is_limit_based) && (
+              <Card>
+                <Card.Body>
+                  <h3 className="mb-5">{translate('Usage history')}</h3>
+                  <OpenStackResourceUsage
+                    resource={resource}
+                    hideHeader={true}
+                  />
+                </Card.Body>
+              </Card>
+            )}
+            {resource.offering_type === OFFERING_TYPE_BOOKING && (
+              <Card>
+                <Card.Body>
+                  <Calendar events={resource.attributes.schedules} />
+                </Card.Body>
+              </Card>
+            )}
+
             <div className="mt-7 d-flex gap-10">
               <Card style={{ flexGrow: 1, flexBasis: 0, minWidth: 0 }}>
                 <Card.Body>
@@ -114,13 +129,6 @@ export const AllocationDetails: FC<AllocationDetailsProps> = ({ resource }) => {
                 </Card.Body>
               </Card>
             )}
-
-            <Card>
-              <Card.Body>
-                <h3 className="mb-5">{translate('How to')}</h3>
-                <AllocationAccessDetails resource={resource} />
-              </Card.Body>
-            </Card>
           </Col>
         </Row>
       </div>

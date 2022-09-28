@@ -1,9 +1,9 @@
 import { Card, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { QuotaCell } from '@waldur/marketplace/resources/QuotaCell';
 
 import { QuickActions } from './QuickActions';
-import { QuotaCell } from './QuotaCell';
 
 const minutesToHours = (value: number) => Math.ceil(value / 60);
 

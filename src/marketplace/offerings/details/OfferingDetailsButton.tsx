@@ -14,7 +14,7 @@ const OfferingDetailsDialog = lazyComponent(
   'OfferingDetailsDialog',
 );
 
-const openOfferingDetailsDialog = (offeringUuid: string) =>
+export const openOfferingDetailsDialog = (offeringUuid: string) =>
   openModalDialog(OfferingDetailsDialog, {
     resolve: { offeringUuid },
     size: 'lg',

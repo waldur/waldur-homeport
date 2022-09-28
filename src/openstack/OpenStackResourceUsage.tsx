@@ -5,7 +5,8 @@ import { ResourceUsageTabsContainer } from '@waldur/marketplace/resources/usage/
 
 export const OpenStackResourceUsage: FunctionComponent<{
   resource: Resource;
-}> = ({ resource }) => (
+  hideHeader?: boolean;
+}> = ({ resource, hideHeader }) => (
   <ResourceUsageTabsContainer
     resource={{
       ...resource,
@@ -13,5 +14,6 @@ export const OpenStackResourceUsage: FunctionComponent<{
         resource.offering_uuid || resource.marketplace_offering_uuid,
       resource_uuid: resource.uuid || resource.marketplace_resource_uuid,
     }}
+    hideHeader={hideHeader}
   />
 );

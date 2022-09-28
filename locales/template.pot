@@ -20,11 +20,11 @@ msgstr ""
 msgid "10 - Very positive"
 msgstr ""
 
-#: src/slurm/details/StatusPage.tsx
+#: src/marketplace/resources/StatusPage.tsx
 msgid "90 days ago"
 msgstr ""
 
-#: src/slurm/details/StatusPage.tsx
+#: src/marketplace/resources/StatusPage.tsx
 msgid "99.98% uptime"
 msgstr ""
 
@@ -297,6 +297,7 @@ msgstr ""
 msgid "Active user will be able to login into the portal."
 msgstr ""
 
+#: src/marketplace/resources/RemoteOfferingDetails.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "Activity"
 msgstr ""
@@ -2131,6 +2132,7 @@ msgid "Dark theme"
 msgstr ""
 
 #: src/customer/dashboard/CustomerDashboard.tsx
+#: src/marketplace/resources/RemoteOfferingDetails.tsx
 #: src/project/ProjectDashboard.tsx
 #: src/slurm/details/AllocationDetails.tsx
 #: src/user/constants.ts
@@ -3555,6 +3557,7 @@ msgstr ""
 msgid "Hours"
 msgstr ""
 
+#: src/marketplace/resources/RemoteOfferingDetails.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "How to"
 msgstr ""
@@ -5012,7 +5015,7 @@ msgstr ""
 msgid "No providers"
 msgstr ""
 
-#: src/slurm/details/StatusPage.tsx
+#: src/marketplace/resources/StatusPage.tsx
 msgid "No reported incidents in the last 24 hours"
 msgstr ""
 
@@ -5260,6 +5263,7 @@ msgid "Offering logo"
 msgstr ""
 
 #: src/invoices/list/InvoicesStatsList.tsx
+#: src/marketplace/resources/OfferingDetailsField.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 msgid "Offering name"
 msgstr ""
@@ -5442,7 +5446,7 @@ msgstr ""
 msgid "Opened by {user} from {organization} at {date}"
 msgstr ""
 
-#: src/slurm/details/StatusPage.tsx
+#: src/marketplace/resources/StatusPage.tsx
 msgid "Operational"
 msgstr ""
 
@@ -5474,7 +5478,7 @@ msgstr ""
 msgid "Order has been submitted."
 msgstr ""
 
-#: src/slurm/details/ResourceOrderItemsLink.tsx
+#: src/marketplace/resources/ResourceOrderItemsLink.tsx
 msgid "Order history"
 msgstr ""
 
@@ -6032,6 +6036,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/resources/PlanDetailsField.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
@@ -7034,7 +7039,6 @@ msgstr ""
 #: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/orders/OrderDetails.tsx
-#: src/marketplace/resources/actions/ResourceActions.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/resource/ResourceRefreshButton.tsx
 #: src/table/TableDropdowns.tsx
@@ -7260,7 +7264,7 @@ msgstr ""
 msgid "Reported by me"
 msgstr ""
 
-#: src/slurm/details/StatusPage.tsx
+#: src/marketplace/resources/StatusPage.tsx
 msgid "Reported incidents"
 msgstr ""
 
@@ -7611,6 +7615,7 @@ msgid "Resource name"
 msgstr ""
 
 #: src/marketplace/orders/item/list/ResourceOrderItemsDialog.tsx
+#: src/marketplace/resources/ResourceMetadataDialog.tsx
 #: src/slurm/details/ResourceMetadataDialog.tsx
 msgid "Resource order items"
 msgstr ""
@@ -8066,8 +8071,8 @@ msgstr ""
 msgid "See all offerings"
 msgstr ""
 
-#: src/slurm/details/ResourceIssues.tsx
-#: src/slurm/details/ResourceTimeline.tsx
+#: src/marketplace/resources/ResourceIssues.tsx
+#: src/marketplace/resources/ResourceTimeline.tsx
 msgid "See more"
 msgstr ""
 
@@ -8640,8 +8645,13 @@ msgstr ""
 msgid "Show less"
 msgstr ""
 
+#: src/marketplace/resources/ResourceMetadataLink.tsx
 #: src/slurm/details/ResourceMetadataLink.tsx
 msgid "Show metadata"
+msgstr ""
+
+#: src/marketplace/resources/OfferingDetailsField.tsx
+msgid "Show offering"
 msgstr ""
 
 #: src/marketplace/offerings/service-providers/shared/ShowOfferingsButton.tsx
@@ -8654,6 +8664,10 @@ msgstr ""
 
 #: src/resource/UserPassword.tsx
 msgid "Show password"
+msgstr ""
+
+#: src/marketplace/resources/PlanDetailsField.tsx
+msgid "Show plan"
 msgstr ""
 
 #: src/providers/support/FlowMapFilter.tsx
@@ -8842,6 +8856,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/marketplace/resources/ResourceDetailsHeader.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
@@ -8902,6 +8917,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
+#: src/marketplace/resources/RemoteOfferingDetails.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "Status page"
 msgstr ""
@@ -9533,11 +9549,11 @@ msgstr ""
 msgid "There are no requests yet."
 msgstr ""
 
-#: src/slurm/details/ResourceTimeline.tsx
+#: src/marketplace/resources/ResourceTimeline.tsx
 msgid "There are no resource events."
 msgstr ""
 
-#: src/slurm/details/ResourceIssues.tsx
+#: src/marketplace/resources/ResourceIssues.tsx
 msgid "There are no resource issues."
 msgstr ""
 
@@ -9614,6 +9630,7 @@ msgstr ""
 msgid "Thumbnail"
 msgstr ""
 
+#: src/marketplace/resources/RemoteOfferingDetails.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "Tickets"
 msgstr ""
@@ -9692,7 +9709,7 @@ msgstr ""
 msgid "To report an issue, please send an email to {supportEmail}."
 msgstr ""
 
-#: src/slurm/details/StatusPage.tsx
+#: src/marketplace/resources/StatusPage.tsx
 msgid "Today"
 msgstr ""
 
@@ -10112,15 +10129,19 @@ msgstr ""
 msgid "Unable to fetch data."
 msgstr ""
 
+#: src/marketplace/resources/ResourceComponents.tsx
+msgid "Unable to fetch offering."
+msgstr ""
+
 #: src/navigation/SearchResultsDropdown.tsx
 msgid "Unable to fetch offerings"
 msgstr ""
 
-#: src/slurm/details/ResourceTimeline.tsx
+#: src/marketplace/resources/ResourceTimeline.tsx
 msgid "Unable to fetch resource events."
 msgstr ""
 
-#: src/slurm/details/ResourceIssues.tsx
+#: src/marketplace/resources/ResourceIssues.tsx
 msgid "Unable to fetch resource issues."
 msgstr ""
 
@@ -11072,6 +11093,7 @@ msgstr ""
 msgid "Usage based"
 msgstr ""
 
+#: src/marketplace/resources/RemoteOfferingDetails.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "Usage history"
 msgstr ""
@@ -12186,10 +12208,6 @@ msgstr ""
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 msgid "organizations"
-msgstr ""
-
-#: src/marketplace/resources/ResourceDetailsHeader.tsx
-msgid "overview"
 msgstr ""
 
 #: src/form/CronField.tsx

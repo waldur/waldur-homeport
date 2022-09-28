@@ -39,7 +39,16 @@ export const ResourceTimeline = ({ resource }) => {
     <>
       <div className="timeline">
         {value.data.map((event, index) => {
-          const eventIcon = EVENT_ICONS[event.event_type];
+          let eventIcon = EVENT_ICONS[event.event_type];
+          if (!eventIcon && event.event_type.endsWith('_failed')) {
+            eventIcon = 'fa-warning';
+          }
+          if (!eventIcon && event.event_type.endsWith('_scheduled')) {
+            eventIcon = 'fa-spinner';
+          }
+          if (!eventIcon && event.event_type.endsWith('_succeeded')) {
+            eventIcon = 'fa-check';
+          }
           return (
             <div key={index} className="timeline-item">
               <div className="timeline-line w-40px"></div>

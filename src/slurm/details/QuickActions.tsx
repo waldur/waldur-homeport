@@ -1,10 +1,9 @@
+import { ActionButton } from '@waldur/marketplace/resources/ActionButton';
 import { useTerminate } from '@waldur/marketplace/resources/terminate/TerminateAction';
 import { usePull } from '@waldur/resource/actions/PullActionItem';
 
 import { pullAllocation } from '../api';
 import { useSetLimits } from '../SetLimitsAction';
-
-import { ActionButton } from './ActionButton';
 
 const PullActionButton = ({ resource }) => {
   const buttonProps = usePull({ resource, apiMethod: pullAllocation });
