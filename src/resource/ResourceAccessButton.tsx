@@ -5,7 +5,6 @@ import { translate } from '@waldur/i18n';
 interface ResourceAccessButtonProps {
   resource: {
     access_url?: string;
-    name?: string;
   };
 }
 
@@ -18,12 +17,12 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
   ) {
     return (
       <a
-        className="btn btn-warning me-3"
+        className="btn btn-success"
         href={resource.access_url}
         target="_blank"
         rel="noopener noreferrer"
       >
-        {translate('Access {name}', { name: resource.name })}
+        {translate('Access')}
       </a>
     );
   }

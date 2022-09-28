@@ -1,6 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -10,8 +9,7 @@ import { formatResourceType } from '@waldur/resource/utils';
 
 import { getResource } from '../common/api';
 
-import { ResourceDetailsHeader } from './ResourceDetailsHeader';
-import { ResourceTabs } from './ResourceTabs';
+import { RemoteOfferingDetails } from './RemoteOfferingDetails';
 
 export const ResourceDetailsPage: FunctionComponent<{}> = () => {
   const {
@@ -30,7 +28,10 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
   const resource = state.value;
 
   const header = useMemo(
-    () => (resource?.resource_type ? formatResourceType(resource) : null),
+    () =>
+      resource?.resource_type
+        ? formatResourceType(resource)
+        : resource?.offering_name,
     [resource],
   );
 
@@ -51,21 +52,5 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     return null;
   }
 
-  return (
-    <Card.Body>
-      <Row className="mb-4">
-        <Col sm={12}>
-          <ResourceDetailsHeader
-            resource={resource}
-            reInitResource={reInitResource}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col sm={12}>
-          <ResourceTabs resource={resource} />
-        </Col>
-      </Row>
-    </Card.Body>
-  );
+  return <RemoteOfferingDetails resource={resource} />;
 };

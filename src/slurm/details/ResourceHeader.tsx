@@ -1,12 +1,12 @@
 import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { ResourceOrderItemsLink } from '@waldur/marketplace/resources/ResourceOrderItemsLink';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Field } from '@waldur/resource/summary';
 
 import { ResourceActions } from './ResourceActions';
 import { ResourceMetadataLink } from './ResourceMetadataLink';
-import { ResourceOrderItemsLink } from './ResourceOrderItemsLink';
 
 export const ResourceHeader = ({ resource }) => (
   <Card.Body className="d-flex flex-column">

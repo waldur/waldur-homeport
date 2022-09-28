@@ -12,10 +12,11 @@ import { getComponentsAndUsages } from './api';
 
 interface ResourceUsageTabsContainerProps {
   resource: Resource;
+  hideHeader?: boolean;
 }
 
 export const ResourceUsageTabsContainer: FunctionComponent<ResourceUsageTabsContainerProps> =
-  ({ resource }) => {
+  ({ resource, hideHeader }) => {
     const { loading, error, value } = useAsync(
       () =>
         getComponentsAndUsages(resource.offering_uuid, resource.resource_uuid),
@@ -29,7 +30,7 @@ export const ResourceUsageTabsContainer: FunctionComponent<ResourceUsageTabsCont
       <h3>{translate('Offering does not have any usage-based components.')}</h3>
     ) : (
       <>
-        <ResourceMetaInfo resource={resource} />
+        {!hideHeader && <ResourceMetaInfo resource={resource} />}
         <ResourceUsageTabs
           components={value.components}
           usages={value.usages}

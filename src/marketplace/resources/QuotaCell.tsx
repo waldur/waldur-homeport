@@ -8,9 +8,11 @@ export const QuotaCell = ({ usage, limit, units, title, description }) => {
     <Col sm={6}>
       <div className="text-center text-dark py-3">
         {usage} {units}{' '}
-        <Tip id="quota" label={description}>
-          <i className="fa fa-question-circle" />
-        </Tip>
+        {description && (
+          <Tip id="quota" label={description}>
+            <i className="fa fa-question-circle" />
+          </Tip>
+        )}
       </div>
       <ProgressBar
         variant={percent < 50 ? 'success' : 'danger'}

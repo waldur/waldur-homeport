@@ -11,7 +11,9 @@ export const ResourceOrderItemsDialog = ({ resolve }) => (
     </Modal.Header>
     <Modal.Body>
       <ResourceOrderItems
-        resource_uuid={resolve.resource.marketplace_resource_uuid}
+        resource_uuid={
+          resolve.resource.marketplace_resource_uuid || resolve.resource.uuid
+        }
       />
     </Modal.Body>
   </>
