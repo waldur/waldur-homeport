@@ -1,5 +1,6 @@
 import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 import { Button, Col, FormControl, Row } from 'react-bootstrap';
+import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsync, useAsyncFn, useDebounce } from 'react-use';
 
@@ -112,7 +113,11 @@ export const MarketplacePopup: FunctionComponent = () => {
 
   return (
     <>
-      {isVisible && <div className="fade modal-backdrop show" />}
+      {isVisible &&
+        ReactDOM.createPortal(
+          <div className="fade modal-backdrop show" />,
+          document.getElementById('kt_aside_toolbar'),
+        )}
       <div
         id="marketplaces-selector"
         ref={refPopup}
