@@ -1,37 +1,42 @@
-import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
-import MediaQuery from 'react-responsive';
+import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { getCategories } from '@waldur/marketplace/landing/store/selectors';
+import { useExtraTabs, useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
-import { AttributeFilterListContainer } from './filters/AttributeFilterListContainer';
+import { CategoryPageBar } from './CategoryPageBar';
 import { FilterBarContainer } from './filters/FilterBarContainer';
-import { MobileFilterActions } from './filters/MobileFilterActions';
+import { HeroSection } from './HeroSection';
 import { OfferingGridContainer } from './OfferingGridContainer';
-import { ShopCategoriesContainer } from './ShopCategoriesContainer';
+import { categoryRouteState } from './store/selectors';
+import { getCategoryItems } from './utils';
+
+import './CategoryPage.scss';
 
 export const CategoryPage: FunctionComponent = () => {
+  useFullPage();
   useTitle(translate('Marketplace offerings'));
+
+  const categories = useSelector(getCategories).items;
+  const categoryState = useSelector(categoryRouteState);
+  const categoryTabs = useMemo(
+    () => getCategoryItems(categories, categoryState),
+    [categories, categoryState],
+  );
+  useExtraTabs(categoryTabs);
+
   return (
-    <Row>
-      <Col lg={3}>
-        <ShopCategoriesContainer />
-        <MediaQuery minWidth={768}>
-          <AttributeFilterListContainer />
-        </MediaQuery>
-      </Col>
-      <Col lg={9}>
-        <div className="mb-3 p-sm gray-bg">
-          <div style={{ display: 'flex' }}>
-            <FilterBarContainer />
-            <MediaQuery maxWidth={768}>
-              <MobileFilterActions />
-            </MediaQuery>
-          </div>
+    <div className="marketplace-category-page">
+      <HeroSection />
+      <CategoryPageBar />
+      <div className="container-xxl py-20">
+        <div className="mb-8">
+          <FilterBarContainer />
         </div>
         <OfferingGridContainer />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

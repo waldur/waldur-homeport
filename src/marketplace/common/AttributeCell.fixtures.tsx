@@ -61,6 +61,7 @@ export const StringAttribute: Attribute = {
 };
 
 export const SystemSection: Section = {
+  key: 'system',
   attributes: [
     ListAttribute,
     BooleanAttribute,

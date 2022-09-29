@@ -19,16 +19,19 @@ export const Layout: React.FC = ({ children }) => {
   const currentUser = useSelector(getUser);
   const [actions, setActions] = useState(null);
   const [tabs, setTabs] = useState(null);
+  const [extraTabs, setExtraTabs] = useState(null);
   const [fullPage, setFullPage] = useState(false);
   const context = useMemo<Partial<LayoutContextInterface>>(
     () => ({
       setActions,
       tabs,
       setTabs,
+      extraTabs,
+      setExtraTabs,
       fullPage,
       setFullPage,
     }),
-    [setActions, tabs, setTabs, fullPage, setFullPage],
+    [setActions, tabs, setTabs, extraTabs, setExtraTabs, fullPage, setFullPage],
   );
 
   const layout = useLayout();

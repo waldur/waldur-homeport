@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 
@@ -9,8 +10,13 @@ interface AwesomeCheckboxFieldProps extends FormField {
 }
 
 export const AwesomeCheckboxField: FunctionComponent<AwesomeCheckboxFieldProps> =
-  ({ input, label }) => (
-    <label className="form-check form-switch form-check-custom form-check-solid">
+  ({ input, label, className }) => (
+    <label
+      className={classNames(
+        'form-check form-switch form-check-custom form-check-solid',
+        className,
+      )}
+    >
       <Form.Check
         checked={input.value}
         onChange={(e: React.ChangeEvent<any>) =>

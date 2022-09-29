@@ -18,7 +18,7 @@ export const TabsList: FunctionComponent = () => {
       {filteredTabs.map((parentTab, parentIndex) =>
         parentTab.to ? (
           <UISrefActive class="here" key={parentIndex}>
-            <UISref to={parentTab.to}>
+            <UISref to={parentTab.to} params={parentTab.params}>
               <a className="menu-item text-nowrap" data-kt-menu-trigger="click">
                 <span className="menu-link py-3">
                   <span className="menu-title">{parentTab.title}</span>
@@ -40,7 +40,7 @@ export const TabsList: FunctionComponent = () => {
             <div className="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
               {parentTab.children.map((childTab, childIndex) => (
                 <UISrefActive class="showing" key={childIndex}>
-                  <UISref to={childTab.to}>
+                  <UISref to={childTab.to} params={childTab.params}>
                     <a className="menu-item" data-kt-menu-trigger="click">
                       <span className="menu-link">
                         <span className="menu-title">{childTab.title}</span>

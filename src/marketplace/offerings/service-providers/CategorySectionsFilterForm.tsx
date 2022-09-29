@@ -2,8 +2,8 @@ import { FunctionComponent } from 'react';
 import { reduxForm } from 'redux-form';
 
 import { AttributeFilterDivision } from '@waldur/marketplace/category/filters/AttributeFilterDivision';
-import { prepareSections } from '@waldur/marketplace/category/filters/AttributeFilterList';
 import { AttributeFilterSection } from '@waldur/marketplace/category/filters/AttributeFilterSection';
+import { prepareAttributeSections } from '@waldur/marketplace/category/utils';
 import { CategorySectionsFilterFormActions } from '@waldur/marketplace/offerings/service-providers/CategorySectionsFilterFormActions';
 import { OFFERING_CATEGORY_SECTION_FORM_ID } from '@waldur/marketplace/offerings/service-providers/constants';
 import { Division, Section } from '@waldur/marketplace/types';
@@ -21,7 +21,7 @@ const PureCategorySectionsFilterForm: FunctionComponent<any> = (props) => (
       {props.divisions?.length > 0 && (
         <AttributeFilterDivision divisions={props.divisions} />
       )}
-      {prepareSections(props.sections).map(
+      {prepareAttributeSections(props.sections).map(
         (section: Section, index: number) => (
           <AttributeFilterSection key={index} section={section} />
         ),

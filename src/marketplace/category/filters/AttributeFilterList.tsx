@@ -4,20 +4,9 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { Section } from '@waldur/marketplace/types';
 
-import './AttributeFilterList.scss';
+import { prepareAttributeSections } from '../utils';
+
 import { AttributeFilterSection } from './AttributeFilterSection';
-
-const SUPPORTED_TYPES = ['choice', 'list', 'boolean'];
-
-export const prepareSections = (sections) =>
-  sections
-    .map((section) => ({
-      ...section,
-      attributes: section.attributes.filter(
-        (attribute) => SUPPORTED_TYPES.indexOf(attribute.type) !== -1,
-      ),
-    }))
-    .filter((section) => section.attributes.length > 0);
 
 interface AttributeFilterListContainerState {
   sections: Section[];
@@ -45,7 +34,7 @@ export const AttributeFilterList: FunctionComponent<AttributeFilterListContainer
 
     return (
       <form>
-        {prepareSections(props.sections).map((section, index) => (
+        {prepareAttributeSections(props.sections).map((section, index) => (
           <AttributeFilterSection key={index} section={section} />
         ))}
       </form>

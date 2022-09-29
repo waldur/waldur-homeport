@@ -174,6 +174,7 @@ interface AttributeOption {
 }
 
 export interface Section {
+  key: string;
   title: string;
   attributes: Attribute[];
   is_standalone?: boolean;

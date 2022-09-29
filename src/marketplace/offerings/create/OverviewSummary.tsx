@@ -12,6 +12,7 @@ import { hasError } from './utils';
 
 const PureOverviewSummary = (props) => {
   const schema: Section = {
+    key: 'overview',
     title: translate('Overview'),
     attributes: [
       {
