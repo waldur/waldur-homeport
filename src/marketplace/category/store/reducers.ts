@@ -1,4 +1,4 @@
-import { Offering, Section } from '@waldur/marketplace/types';
+import { Division, Offering, Section } from '@waldur/marketplace/types';
 
 import * as constants from './constants';
 
@@ -98,6 +98,56 @@ export const categoryOfferingsReducer = (
       };
 
     case constants.LOAD_OFFERINGS_ERROR:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        erred: true,
+      };
+
+    default:
+      return state;
+  }
+};
+
+interface DivisionsState {
+  items: Division[];
+  loading: boolean;
+  loaded: boolean;
+  erred: boolean;
+}
+
+const DIVISIONS_INITIAL_STATE: DivisionsState = {
+  items: [],
+  loading: false,
+  loaded: false,
+  erred: false,
+};
+
+export const divisionsReducer = (
+  state = DIVISIONS_INITIAL_STATE,
+  action,
+): DivisionsState => {
+  const { type, payload } = action;
+  switch (type) {
+    case constants.LOAD_DIVISIONS_START:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+        erred: false,
+      };
+
+    case constants.LOAD_DIVISIONS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        erred: false,
+        items: payload.items,
+      };
+
+    case constants.LOAD_DIVISIONS_ERROR:
       return {
         ...state,
         loading: false,

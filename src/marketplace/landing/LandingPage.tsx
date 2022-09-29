@@ -1,11 +1,12 @@
 import { ENV } from '@waldur/configs/default';
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import {
   CategoriesListType,
   OfferingsListType,
 } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
+
+import { AllCategoriesLink } from '../links/AllCategoriesLink';
 
 import { CategoriesList } from './CategoriesList';
 import { DeploymentIntroduction } from './DeploymentIntroduction';
@@ -40,12 +41,9 @@ export const LandingPage = (props: LandingPageProps) => {
           })
         }
       >
-        <Link
-          state="marketplace-categories-profile"
-          className="btn text-black btn-bg-white btn-hover-rise"
-        >
+        <AllCategoriesLink className="btn text-black btn-bg-white btn-hover-rise">
           {translate('Browse all categories')}
-        </Link>
+        </AllCategoriesLink>
       </HeroSection>
       <div className="container-xxl mb-20">
         <CategoriesList {...props.categories} />

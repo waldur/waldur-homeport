@@ -11,14 +11,16 @@ interface PureAttributeFilterDivisionProps {
 
 export const AttributeFilterDivision: FunctionComponent<PureAttributeFilterDivisionProps> =
   (props) => (
-    <section className="mt-3 mb-3">
-      <h3 className="division-title">{translate('Divisions')}</h3>
-      {props.divisions.map((division: Division) => (
+    <section>
+      <h3 className="text-gray-700 mb-6">{translate('Divisions')}</h3>
+      {props.divisions.map((division: Division, i) => (
         <Field
-          name={`division-${division.type}`}
+          name={`list-divisions-${i}`}
           key={division.uuid}
           component={AwesomeCheckboxField}
           label={division.name}
+          className="ms-2 mb-2"
+          normalize={(v) => (v ? division.uuid : '')}
         />
       ))}
     </section>

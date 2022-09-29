@@ -335,7 +335,19 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-categories-profile',
+    name: 'marketplace-categories-project',
+    url: 'marketplace/all/',
+    component: AllCategoriesPage,
+    parent: 'project',
+  },
+  {
+    name: 'marketplace-categories-customer',
+    url: 'marketplace/all/',
+    component: AllCategoriesPage,
+    parent: 'organization',
+  },
+  {
+    name: 'marketplace-categories-user',
     url: 'marketplace/all/',
     component: AllCategoriesPage,
     parent: 'profile',

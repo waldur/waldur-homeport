@@ -9,7 +9,11 @@ import { RootState } from '@waldur/store/reducers';
 import { OfferingGrid } from '../common/OfferingGrid';
 import * as actions from '../landing/store/actions';
 
-import { loadOfferingsStart, loadDataStart } from './store/actions';
+import {
+  loadOfferingsStart,
+  loadDataStart,
+  loadDivisionsStart,
+} from './store/actions';
 import { MARKETPLACE_FILTER_FORM } from './store/constants';
 import {
   getOfferings,
@@ -41,6 +45,9 @@ const mapDispatchToProps = (dispatch) => ({
   loadOfferings: () => {
     dispatch(loadOfferingsStart());
   },
+  loadDivisions: () => {
+    dispatch(loadDivisionsStart());
+  },
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -53,6 +60,7 @@ class OfferingGridWrapper extends Component<OfferingGridWrapperProps> {
   componentDidMount() {
     this.props.getCategories();
     this.props.loadCategories();
+    this.props.loadDivisions();
     this.loadOfferings();
   }
 

@@ -1,11 +1,6 @@
 .offering-card {
-  display: block;
-  position: relative;
-  width: 100%;
-  border: 1px solid #e5e5e5;
-  border-radius: 5px;
-  background-color: #fff;
   margin-bottom: 30px;
+  overflow: hidden;
 
   &.disabled {
     opacity: 0.3;
@@ -13,31 +8,33 @@
     pointer-events: none;
   }
 
-  .offering-thumb {
-    display: block;
-    overflow: hidden;
-    padding-bottom: 10px;
-
-    & > img {
-      display: block;
-      height: 6em;
-      margin: 10px auto;
-      margin-bottom: 0px;
-    }
+  .offering-toolbar {
+    display: flex;
+    justify-content: flex-end;
   }
 
   .offering-card-body {
-    padding: 18px;
-    padding-top: 0px;
-    text-align: center;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
   }
 
-  .offering-title {
-    margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: normal;
-    height: 4em;
+  .offering-description {
     overflow: hidden;
-    line-height: 1.4em;
+  }
+
+  .buttons-overlay {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem 2rem;
+    transform: translateY(100%);
+    transition: all 0.3s;
+  }
+  &:hover .buttons-overlay {
+    opacity: 1;
+    transform: none;
   }
 }

@@ -38,6 +38,7 @@ const PureManagementSummary = (props) => {
   }
 
   const section: Section = {
+    key: 'management',
     title: translate('Management'),
     attributes: getAttributes(type.value),
   };

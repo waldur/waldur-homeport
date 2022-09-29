@@ -12,3 +12,10 @@ export const LOAD_OFFERINGS_SUCCESS =
   'waldur/marketplace/category/LOAD_OFFERINGS_SUCCESS';
 export const LOAD_OFFERINGS_ERROR =
   'waldur/marketplace/category/LOAD_OFFERINGS_ERROR';
+
+export const LOAD_DIVISIONS_START =
+  'waldur/marketplace/category/LOAD_DIVISIONS_START';
+export const LOAD_DIVISIONS_SUCCESS =
+  'waldur/marketplace/category/LOAD_DIVISIONS_SUCCESS';
+export const LOAD_DIVISIONS_ERROR =
+  'waldur/marketplace/category/LOAD_DIVISIONS_ERROR';

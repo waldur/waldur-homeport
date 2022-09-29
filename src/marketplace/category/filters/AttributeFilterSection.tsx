@@ -25,15 +25,15 @@ const markSelectedFilter = (filterValues, fieldName) => {
 
 export const PureAttributeFilterSection: FunctionComponent<PureAttributeFilterSectionProps> =
   (props) => (
-    <section className="mt-3 mb-3">
-      <h3 className="shopping-cart-sidebar-title">{props.section.title}</h3>
+    <section>
+      <h3 className="text-gray-700 mb-6">{props.section.title}</h3>
       {props.section.attributes.map((attribute, outerIndex) => {
         const attrConfig = configAttrField(attribute);
         const attrKey = attribute.key;
         return (
           <AttributeFilterItem
             key={outerIndex}
-            title={<h4 className="attribute__title">{attribute.title}</h4>}
+            title={<h4 className="text-gray-800 my-4">{attribute.title}</h4>}
             selected={markSelectedFilter(
               props.filterValues,
               `${attribute.type}-${attrKey}-${outerIndex}`,
@@ -51,6 +51,7 @@ export const PureAttributeFilterSection: FunctionComponent<PureAttributeFilterSe
                 key={outerIndex}
                 name={`${attribute.type}-${attrKey}-${outerIndex}`}
                 component={Form.Control}
+                className="mb-2"
                 {...attrConfig}
               />
             )}

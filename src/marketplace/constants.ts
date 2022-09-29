@@ -16,6 +16,12 @@ export const WORKSPACE_CATEGORY = {
   [USER_WORKSPACE]: 'marketplace-category-user',
 };
 
+export const WORKSPACE_ALL_CATEGORIES = {
+  [ORGANIZATION_WORKSPACE]: 'marketplace-categories-customer',
+  [PROJECT_WORKSPACE]: 'marketplace-categories-project',
+  [USER_WORKSPACE]: 'marketplace-categories-user',
+};
+
 export const WORKSPACE_LANDING = {
   [ORGANIZATION_WORKSPACE]: 'marketplace-landing-customer',
   [PROJECT_WORKSPACE]: 'marketplace-landing-project',

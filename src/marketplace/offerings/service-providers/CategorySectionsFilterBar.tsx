@@ -5,8 +5,8 @@ import { reduxForm } from 'redux-form';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { AttributeFilterDivision } from '@waldur/marketplace/category/filters/AttributeFilterDivision';
-import { prepareSections } from '@waldur/marketplace/category/filters/AttributeFilterList';
 import { AttributeFilterSection } from '@waldur/marketplace/category/filters/AttributeFilterSection';
+import { prepareAttributeSections } from '@waldur/marketplace/category/utils';
 import {
   getAllOrganizationDivisions,
   getCategory,
@@ -73,7 +73,7 @@ const PureCategorySectionsFilterBar: FunctionComponent<any> = ({
           <AttributeFilterDivision divisions={filterData.divisions} />
         </CategorySectionsFilterBarItem>
       )}
-      {prepareSections(filterData.sections).map(
+      {prepareAttributeSections(filterData.sections).map(
         (section: Section, index: number) => (
           <CategorySectionsFilterBarItem key={index} text={section.title}>
             <AttributeFilterSection section={section} />

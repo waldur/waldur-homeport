@@ -1,12 +1,10 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import MediaQuery from 'react-responsive';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { OfferingsListType } from '@waldur/marketplace/types';
 
-import { MobileOfferingCard } from './MobileOfferingCard';
 import { OfferingCard } from './OfferingCard';
 
 interface OfferingGridProps extends OfferingsListType {
@@ -33,26 +31,13 @@ export const OfferingGrid: React.FC<OfferingGridProps> = (props) => {
   }
 
   return (
-    <>
-      <MediaQuery maxWidth={768}>
-        <table className="table table-borderless">
-          <tbody>
-            {props.items.map((offering, index) => (
-              <MobileOfferingCard key={index} offering={offering} />
-            ))}
-          </tbody>
-        </table>
-      </MediaQuery>
-      <MediaQuery minWidth={768}>
-        <Row>
-          {props.items.map((offering, index) => (
-            <Col key={index} md={props.width} sm={6}>
-              <OfferingCard offering={offering} />
-            </Col>
-          ))}
-        </Row>
-      </MediaQuery>
-    </>
+    <Row>
+      {props.items.map((offering, index) => (
+        <Col key={index} xl={2} lg={props.width} sm={6}>
+          <OfferingCard offering={offering} />
+        </Col>
+      ))}
+    </Row>
   );
 };
 

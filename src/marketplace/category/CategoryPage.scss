@@ -1,0 +1,12 @@
+.category-page-bar {
+  min-height: 50px;
+
+  button.dropdown {
+    height: 50px;
+    border-radius: unset;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+  }
+}

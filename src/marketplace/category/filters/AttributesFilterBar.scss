@@ -1,0 +1,33 @@
+.filterBar {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .filterDropdownContent {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    z-index: 90;
+  }
+
+  .categorySectionsFilterForm {
+    width: calc(100% - 2rem);
+    margin: 0 auto 1rem;
+    padding: 2rem 3rem;
+    overflow: auto;
+
+    form {
+      display: flex;
+      justify-content: space-between;
+
+      section {
+        min-width: 250px;
+        margin-right: 1rem;
+
+        :last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
