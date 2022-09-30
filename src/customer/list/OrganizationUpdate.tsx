@@ -94,7 +94,8 @@ const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
         name="default_tax_percent"
         label={translate('Tax percent')}
         unit="%"
-        max={50}
+        min={0}
+        max={200}
       />
 
       <ImageField
