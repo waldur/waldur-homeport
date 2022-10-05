@@ -58,6 +58,9 @@ const getRoles = (context) => {
       icon: 'fa-user-o',
     });
   }
+  if (context.project) {
+    roles.splice(0, 1);
+  }
   return roles.filter((role) =>
     InvitationPolicyService.canManageRole(context, role),
   );
