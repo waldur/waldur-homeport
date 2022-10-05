@@ -11,10 +11,10 @@ import { setCurrentWorkspace, setCurrentUser } from '@waldur/workspace/actions';
 import { USER_WORKSPACE } from '@waldur/workspace/types';
 
 import { UserSidebar } from './UserSidebar';
-import { UsersService } from './UsersService';
+import { UsersService, getCurrentUser } from './UsersService';
 
 function loadUser() {
-  UsersService.getCurrentUser().then(function (currentUser) {
+  getCurrentUser().then(function (currentUser) {
     if (
       router.globals.params.uuid === undefined ||
       router.globals.params.uuid === currentUser.uuid

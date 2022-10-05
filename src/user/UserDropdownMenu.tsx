@@ -7,20 +7,20 @@ import {
   MenuItem,
 } from 'react-bootstrap';
 import Gravatar from 'react-gravatar';
-import { useSelector } from 'react-redux';
+import { useAsync } from 'react-use';
 
 import { AuthService } from '@waldur/auth/AuthService';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
-import { getUser } from '@waldur/workspace/selectors';
 
 import { getPrivateUserTabs } from './constants';
+import { getCurrentUser } from './UsersService';
 
 const getSidebarItems = () =>
   getPrivateUserTabs().filter((item) => item && isFeatureVisible(item.feature));
 
 export const UserDropdownMenu: FunctionComponent = () => {
-  const user = useSelector(getUser);
+  const { value: user } = useAsync(getCurrentUser);
   const menuItems = useMemo(getSidebarItems, []);
   if (!user) {
     return null;

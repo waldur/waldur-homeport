@@ -15,7 +15,6 @@ import store from '@waldur/store/store';
 import {
   getCustomer,
   getProject,
-  getUser,
   isOwnerOrStaff,
 } from '@waldur/workspace/selectors';
 import {
@@ -26,6 +25,7 @@ import {
 
 import { getPrivateUserTabs, getPublicUserTabs } from './constants';
 import { StateUtilsService } from './StateUtilsService';
+import { getCurrentUser } from './UsersService';
 
 const getExtraSidebarItems = (): Promise<MenuItemType[]> => {
   return SidebarExtensionService.getItems(USER_WORKSPACE);
@@ -33,6 +33,7 @@ const getExtraSidebarItems = (): Promise<MenuItemType[]> => {
 
 function getNavItems(user, customer, project) {
   const prevWorkspace = StateUtilsService.getPrevWorkspace();
+
   if (prevWorkspace === PROJECT_WORKSPACE) {
     return [
       {
@@ -64,7 +65,7 @@ export const UserSidebar: FunctionComponent = () => {
   const workspaceUser = useSelector(
     (state: RootState) => state.workspace?.user,
   );
-  const currentUser = useSelector(getUser);
+  const { value: currentUser } = useAsync(getCurrentUser);
   const currentCustomer = useSelector(getCustomer);
   const currentProject = useSelector(getProject);
 
@@ -79,7 +80,7 @@ export const UserSidebar: FunctionComponent = () => {
             ...getPrivateUserTabs(),
           ])
         : filterItems([
-            ...getNavItems(currentUser, currentCustomer, currentProject),
+            ...getNavItems(workspaceUser, currentCustomer, currentProject),
             ...getPublicUserTabs(workspaceUser),
           ]);
     const extraItems = await getExtraSidebarItems();
