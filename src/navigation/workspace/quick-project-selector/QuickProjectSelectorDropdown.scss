@@ -1,0 +1,25 @@
+.quick-project-selector {
+  width: 100%;
+  cursor: default;
+}
+
+@media (min-width: 1500px) {
+  .quick-project-selector {
+    max-width: 1200px;
+  }
+  [data-kt-aside-minimize='on'] .aside {
+    .quick-project-selector {
+      max-width: 1400px;
+    }
+  }
+}
+@media (max-width: 1500px) {
+  .quick-project-selector {
+    max-width: calc(100% - 350px);
+  }
+  [data-kt-aside-minimize='on'] .aside {
+    .quick-project-selector {
+      max-width: calc(100% - 100px);
+    }
+  }
+}
