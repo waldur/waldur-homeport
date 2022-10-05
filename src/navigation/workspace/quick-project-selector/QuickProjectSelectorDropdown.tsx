@@ -1,6 +1,7 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useState, FunctionComponent, useRef, useEffect, useMemo } from 'react';
 import { Button, FormControl } from 'react-bootstrap';
+import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -18,6 +19,7 @@ import { EmptyOrganizationsPlaceholder } from '../EmptyOrganizationsPlaceholder'
 
 import { OrganizationsPanel } from './OrganizationsPanel';
 import { ProjectsPanel } from './ProjectsPanel';
+import './QuickProjectSelectorDropdown.scss';
 
 export const QuickProjectSelectorDropdown: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -90,10 +92,14 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
 
   return (
     <>
-      {isVisible && <div className="fade modal-backdrop show" />}
+      {isVisible &&
+        ReactDOM.createPortal(
+          <div className="fade modal-backdrop show" />,
+          document.getElementById('kt_aside_toolbar'),
+        )}
       <div
         ref={refProjectSelector}
-        className="quick-project-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-100 mw-600px"
+        className="quick-project-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold rounded-0 py-4 fs-6"
         data-kt-menu="true"
         data-popper-placement="bottom-start"
       >

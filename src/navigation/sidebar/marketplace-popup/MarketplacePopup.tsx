@@ -19,6 +19,8 @@ import { OfferingsPanel } from './OfferingsPanel';
 import { fetchCategories, fetchLastNOfferings, fetchOfferings } from './utils';
 import { WelcomeView } from './WelcomeView';
 
+import './MarketplacePopup.scss';
+
 const RECENTLY_ADDED_OFFERINGS_UUID = 'recently_added_offerings_category';
 
 export const MarketplacePopup: FunctionComponent = () => {
@@ -121,7 +123,7 @@ export const MarketplacePopup: FunctionComponent = () => {
       <div
         id="marketplaces-selector"
         ref={refPopup}
-        className="marketplaces-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold rounded-0 pb-4 fs-6 w-100 w-lg-50 min-w-lg-600px min-w-xl-850px h-100"
+        className="marketplaces-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold rounded-0 pb-4 fs-6 h-100"
         data-kt-menu="true"
         data-popper-placement="end"
       >
