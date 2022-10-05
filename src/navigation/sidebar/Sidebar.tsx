@@ -6,6 +6,7 @@ import {
   ScrollComponent,
   ToggleComponent,
 } from '@waldur/metronic/assets/ts/components';
+import { useLayout } from '@waldur/metronic/layout/core';
 
 import { QuickProjectSelectorToggle } from '../workspace/quick-project-selector/QuickProjectSelectorToggle';
 
@@ -13,16 +14,10 @@ import { BrandName } from './BrandName';
 import { SidebarFooter } from './SidebarFooter';
 import './Sidebar.scss';
 
-function getSidebarToggle() {
-  const menuElement = document.querySelector('#kt_aside_toggle');
-  if (!menuElement) {
-    return;
-  }
-  return ToggleComponent.getInstance(menuElement as HTMLElement);
-}
-
 export const Sidebar: React.FC = (props) => {
   const sidebarRef = useRef<HTMLElement>(undefined);
+  const layout = useLayout();
+
   useEffect(() => {
     if (sidebarRef?.current) {
       ToggleComponent.reinitialization();
@@ -40,27 +35,18 @@ export const Sidebar: React.FC = (props) => {
         return;
       }
       menu.on('kt.menu.dropdown.shown', function () {
-        const control = getSidebarToggle();
-        if (!control) {
-          return;
-        }
         if (document.body.hasAttribute('data-kt-aside-minimize')) {
-          control.toggle();
+          layout.setLayout({
+            aside: {
+              ...layout.config.aside,
+              minimized: true,
+            },
+          });
         }
       });
     }
-  }, [sidebarRef]);
-  useEffect(() => {
-    // Collapse sidebar once when application is initialized
-    if (document.body.getAttribute('data-waldur-sidebar')) {
-      return;
-    }
-    document.body.setAttribute('data-waldur-sidebar', 'on');
-    const control = getSidebarToggle();
-    if (control) {
-      control.toggle();
-    }
-  }, []);
+  }, [sidebarRef, layout]);
+
   return (
     <nav
       ref={sidebarRef}

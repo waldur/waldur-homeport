@@ -12,7 +12,9 @@ interface OwnProps {
 
 const stateSelector = (state: RootState) => {
   const workspace = getWorkspace(state);
-  return WORKSPACE_ALL_CATEGORIES[workspace];
+  return (
+    WORKSPACE_ALL_CATEGORIES[workspace] || 'marketplace-categories.details'
+  );
 };
 
 export const AllCategoriesLink: React.FC<OwnProps> = (props) => {

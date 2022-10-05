@@ -321,6 +321,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'marketplace-landing',
+    url: '/marketplace/',
+    abstract: true,
+    component: AnonymousLayout,
+    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+  },
+
+  {
+    name: 'marketplace-landing.details',
+    url: '',
+    component: MarketplaceLanding,
+  },
+
+  {
     name: 'marketplace-public-offering',
     url: '/marketplace-public-offering/',
     abstract: true,
@@ -352,6 +366,18 @@ export const states: StateDeclaration[] = [
     component: AllCategoriesPage,
     parent: 'profile',
   },
+  {
+    name: 'marketplace-categories',
+    url: '/marketplace/all/',
+    abstract: true,
+    component: AnonymousLayout,
+    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+  },
+  {
+    name: 'marketplace-categories.details',
+    url: '',
+    component: AllCategoriesPage,
+  },
 
   {
     name: 'marketplace-category-project',
@@ -359,19 +385,29 @@ export const states: StateDeclaration[] = [
     component: CategoryPage,
     parent: 'project',
   },
-
   {
     name: 'marketplace-category-customer',
     url: 'marketplace-category/:category_uuid/',
     component: CategoryPage,
     parent: 'organization',
   },
-
   {
     name: 'marketplace-category-user',
     url: 'marketplace-category/:category_uuid/',
     component: CategoryPage,
     parent: 'profile',
+  },
+  {
+    name: 'marketplace-category',
+    url: '/marketplace-category/',
+    abstract: true,
+    component: AnonymousLayout,
+    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+  },
+  {
+    name: 'marketplace-category.details',
+    url: ':category_uuid/',
+    component: CategoryPage,
   },
 
   {

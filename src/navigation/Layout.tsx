@@ -36,23 +36,12 @@ export const Layout: React.FC = ({ children }) => {
 
   const layout = useLayout();
   useEffect(() => {
-    if (actions || tabs) {
-      layout.setLayout({
-        toolbar: DefaultLayoutConfig.toolbar,
-        content: {
-          width: fullPage ? 'fluid' : 'fixed',
-        },
-      });
-    } else {
-      layout.setLayout({
-        toolbar: {
-          display: false,
-        },
-        content: {
-          width: fullPage ? 'fluid' : 'fixed',
-        },
-      });
-    }
+    layout.setLayout({
+      toolbar: actions || tabs ? DefaultLayoutConfig.toolbar : false,
+      content: {
+        width: fullPage ? 'fluid' : 'fixed',
+      },
+    });
   }, [tabs, fullPage]);
 
   if (!currentUser) {

@@ -17,10 +17,11 @@ import { Toolbar } from './Toolbar';
 export const AnonymousLayout: FunctionComponent = () => {
   const { state } = useCurrentStateAndParams();
   const [tabs, setTabs] = useState(null);
+  const [extraTabs, setExtraTabs] = useState(null);
   const [fullPage, setFullPage] = useState(false);
   const context = useMemo<Partial<LayoutContextInterface>>(
-    () => ({ tabs, setTabs, fullPage, setFullPage }),
-    [tabs, setTabs, fullPage, setFullPage],
+    () => ({ tabs, setTabs, extraTabs, setExtraTabs, fullPage, setFullPage }),
+    [tabs, setTabs, extraTabs, setExtraTabs, fullPage, setFullPage],
   );
 
   const layout = useLayout();

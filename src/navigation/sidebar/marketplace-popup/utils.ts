@@ -1,7 +1,7 @@
 import {
-  getAllOfferings,
+  getAllPublicOfferings,
   getCategories,
-  getOfferingsList,
+  getPublicOfferingsList,
 } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
 import { Customer } from '@waldur/workspace/types';
@@ -25,7 +25,7 @@ export const fetchOfferings = async (
   category: Category,
   search: string,
 ) => {
-  const offerings = await getAllOfferings({
+  const offerings = await getAllPublicOfferings({
     params: {
       allowed_customer_uuid: customer.uuid,
       category_uuid: category.uuid,
@@ -51,7 +51,7 @@ export const fetchLastNOfferings = async (
   customer: Customer,
   page_size = 5,
 ) => {
-  const offerings = await getOfferingsList({
+  const offerings = await getPublicOfferingsList({
     page: 1,
     page_size,
     allowed_customer_uuid: customer.uuid,

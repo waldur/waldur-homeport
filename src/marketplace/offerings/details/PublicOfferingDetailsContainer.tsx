@@ -11,6 +11,7 @@ import {
   getCategory,
   getPlugins,
   getCategories,
+  getPublicOffering,
 } from '@waldur/marketplace/common/api';
 import { PublicOfferingDetails } from '@waldur/marketplace/offerings/details/PublicOfferingDetails';
 import * as actions from '@waldur/marketplace/offerings/store/actions';
@@ -51,7 +52,7 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
       return { offering, category };
     } catch (e) {
       if (e.response.status == 401) {
-        const offering = await getOffering(uuid, ANONYMOUS_CONFIG);
+        const offering = await getPublicOffering(uuid, ANONYMOUS_CONFIG);
         const category = await getCategory(
           offering.category_uuid,
           ANONYMOUS_CONFIG,

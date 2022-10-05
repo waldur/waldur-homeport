@@ -1,7 +1,7 @@
-import { getOfferingsList } from '../common/api';
+import { getPublicOfferingsList } from '../common/api';
 
 export const fetchLastNOfferings = async (page_size = 5) => {
-  const offerings = await getOfferingsList({
+  const offerings = await getPublicOfferingsList({
     page: 1,
     page_size,
     field: [

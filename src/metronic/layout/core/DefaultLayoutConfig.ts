@@ -31,7 +31,7 @@ export const DefaultLayoutConfig: ILayout = {
     theme: 'dark',
     menu: 'main',
     fixed: true,
-    minimized: false,
+    minimized: true,
     minimize: true,
     hoverable: true,
     menuIcon: 'svg',

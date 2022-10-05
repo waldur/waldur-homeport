@@ -67,11 +67,17 @@ export const getCategory = (id: string, options?: AxiosRequestConfig) =>
 export const getOfferingsList = (params?: {}) =>
   getList<Offering>('/marketplace-offerings/', params);
 
+export const getPublicOfferingsList = (params?: {}) =>
+  getList<Offering>('/marketplace-public-offerings/', params);
+
 export const getOfferingsOptions = (params?: {}) =>
   getSelectData<Offering>('/marketplace-offerings/', params);
 
 export const getAllOfferings = (options?: {}) =>
   getAll<Offering>('/marketplace-offerings/', options);
+
+export const getAllPublicOfferings = (options?: {}) =>
+  getAll<Offering>('/marketplace-public-offerings/', options);
 
 export const getOfferingsByServiceProvider = (options?: {}) =>
   get('/marketplace-offerings/groups/', options);
@@ -93,6 +99,9 @@ export const getPlan = (id: string) => getById<any>('/marketplace-plans/', id);
 
 export const getOffering = (id: string, options?: AxiosRequestConfig) =>
   getById<Offering>('/marketplace-offerings/', id, options);
+
+export const getPublicOffering = (id: string, options?: AxiosRequestConfig) =>
+  getById<Offering>('/marketplace-public-offerings/', id, options);
 
 export const createOffering = (data) =>
   post<Offering>('/marketplace-offerings/', data);

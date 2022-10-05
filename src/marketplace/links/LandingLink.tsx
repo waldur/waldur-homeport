@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { getWorkspace } from '@waldur/workspace/selectors';
-import { USER_WORKSPACE } from '@waldur/workspace/types';
 
 import { WORKSPACE_LANDING } from '../constants';
 
@@ -13,8 +12,7 @@ interface OwnProps {
 
 export const LandingLink: FunctionComponent<OwnProps> = (props) => {
   const workspace = useSelector(getWorkspace);
-  const state =
-    WORKSPACE_LANDING[workspace] || WORKSPACE_LANDING[USER_WORKSPACE];
+  const state = WORKSPACE_LANDING[workspace] || 'marketplace-landing.details';
   return (
     <Link state={state} className={props.className}>
       {props.children}
