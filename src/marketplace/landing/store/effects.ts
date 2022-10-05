@@ -62,7 +62,7 @@ function* getOfferings() {
     params.shared = true;
   }
   try {
-    const offerings = yield call(api.getOfferingsList, params);
+    const offerings = yield call(api.getPublicOfferingsList, params);
     yield put(actions.offeringsFetchSuccess(offerings));
   } catch {
     yield put(actions.offeringsFetchError());

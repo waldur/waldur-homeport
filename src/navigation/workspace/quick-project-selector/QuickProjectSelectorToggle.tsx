@@ -102,7 +102,7 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
           </div>
         </div>
       </div>
-      <QuickProjectSelectorDropdown />
+      {user && <QuickProjectSelectorDropdown />}
     </div>
   );
 };

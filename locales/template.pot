@@ -98,6 +98,7 @@ msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/resource/ResourceAccessButton.tsx
 msgid "Access"
 msgstr ""
 
@@ -128,10 +129,6 @@ msgstr ""
 
 #: src/digitalocean/DigitalOceanForm.tsx
 msgid "Access token"
-msgstr ""
-
-#: src/resource/ResourceAccessButton.tsx
-msgid "Access {name}"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -3570,7 +3567,6 @@ msgstr ""
 msgid "Hours"
 msgstr ""
 
-#: src/marketplace/resources/RemoteOfferingDetails.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "How to"
 msgstr ""
@@ -9144,10 +9140,6 @@ msgstr ""
 
 #: src/configs/default.ts
 msgid "System administrator"
-msgstr ""
-
-#: src/marketplace/common/AttributeCell.fixtures.tsx
-msgid "System information"
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/utils.ts
