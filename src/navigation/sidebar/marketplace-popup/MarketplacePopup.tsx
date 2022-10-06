@@ -14,6 +14,8 @@ import { Category } from '@waldur/marketplace/types';
 import { openSelectWorkspaceDialog } from '@waldur/navigation/workspace/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { getSidebarToggle } from '../Sidebar';
+
 import { CategoriesPanel } from './CategoriesPanel';
 import { OfferingsPanel } from './OfferingsPanel';
 import { fetchCategories, fetchLastNOfferings, fetchOfferings } from './utils';
@@ -46,6 +48,16 @@ export const MarketplacePopup: FunctionComponent = () => {
   useEffect(() => {
     if (isVisible && refPopup.current) {
       refPopup.current.style.zIndex = '1055';
+      refPopup.current.style.transform = 'translate(265px, 65px)';
+
+      const control = getSidebarToggle();
+      if (!control) {
+        return;
+      }
+
+      if (document.body.hasAttribute('data-kt-aside-minimize')) {
+        control.toggle();
+      }
     }
   }, [isVisible]);
 
