@@ -198,7 +198,8 @@ export const CustomerDetailsPanel = enhance((props) => {
               name="default_tax_percent"
               label={translate('VAT rate')}
               unit="%"
-              max={50}
+              min={0}
+              max={200}
             />
 
             {ENV.plugins.WALDUR_CORE.ORGANIZATION_SUBNETS_VISIBLE ? (
