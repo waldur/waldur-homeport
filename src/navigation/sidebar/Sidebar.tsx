@@ -14,6 +14,14 @@ import { BrandName } from './BrandName';
 import { SidebarFooter } from './SidebarFooter';
 import './Sidebar.scss';
 
+export function getSidebarToggle() {
+  const menuElement = document.querySelector('#kt_aside_toggle');
+  if (!menuElement) {
+    return;
+  }
+  return ToggleComponent.getInstance(menuElement as HTMLElement);
+}
+
 export const Sidebar: React.FC = (props) => {
   const sidebarRef = useRef<HTMLElement>(undefined);
   const layout = useLayout();
