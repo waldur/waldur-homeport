@@ -11645,10 +11645,6 @@ msgstr ""
 msgid "View all"
 msgstr ""
 
-#: src/marketplace/category/list/CategoriesList.tsx
-msgid "View all offerings"
-msgstr ""
-
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
 #: src/marketplace/landing/OfferingCardButtonsOverlay.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
