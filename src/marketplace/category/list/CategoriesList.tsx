@@ -1,6 +1,5 @@
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { CategoriesListType } from '@waldur/marketplace/types';
@@ -11,14 +10,8 @@ export const CategoriesList = (props: CategoriesListType) => {
   return (
     <Card className="mb-6">
       <Card.Header>
-        <div className="d-flex justify-content-between w-100 align-items-center">
+        <div>
           <h3>{translate('All categories')}</h3>
-          <Link
-            state=""
-            className="text-decoration-underline text-dark text-hover-primary fs-7"
-          >
-            {translate('View all offerings')}
-          </Link>
         </div>
       </Card.Header>
       <Card.Body>
