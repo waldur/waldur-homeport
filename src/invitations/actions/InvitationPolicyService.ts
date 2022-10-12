@@ -50,4 +50,18 @@ export const InvitationPolicyService = {
       return ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS;
     }
   },
+
+  // Check user permissions to see invitations
+  canAccessInvitations(context) {
+    if (context.user.is_staff) {
+      return true;
+    }
+    if (checkIsOwner(context.customer, context.user)) {
+      return true;
+    }
+    if (checkRole(context.project, context.user, PROJECT_MANAGER_ROLE)) {
+      return true;
+    }
+    return false;
+  },
 };
