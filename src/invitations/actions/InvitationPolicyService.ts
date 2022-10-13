@@ -1,6 +1,10 @@
 import { ENV } from '@waldur/configs/default';
-import { CUSTOMER_OWNER_ROLE, PROJECT_ROLES } from '@waldur/core/constants';
-import { checkIsOwner } from '@waldur/workspace/selectors';
+import {
+  CUSTOMER_OWNER_ROLE,
+  PROJECT_MANAGER_ROLE,
+  PROJECT_ROLES,
+} from '@waldur/core/constants';
+import { checkIsOwner, checkRole } from '@waldur/workspace/selectors';
 
 export const InvitationPolicyService = {
   // This service provides business logic for invitation permissions:
@@ -39,5 +43,19 @@ export const InvitationPolicyService = {
     if (invitation.customer_role) {
       return ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS;
     }
+  },
+
+  // Check user permissions to see invitations
+  canAccessInvitations(context) {
+    if (context.user.is_staff) {
+      return true;
+    }
+    if (checkIsOwner(context.customer, context.user)) {
+      return true;
+    }
+    if (checkRole(context.project, context.user, PROJECT_MANAGER_ROLE)) {
+      return true;
+    }
+    return false;
   },
 };
