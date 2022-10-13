@@ -8,6 +8,7 @@ import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
+import { INSTANCE_TYPE } from '../constants';
 import { CreateFloatingIpAction } from '../openstack-tenant/actions/CreateFloatingIpAction';
 import { PullFloatingIpsAction } from '../openstack-tenant/actions/PullFloatingIpsAction';
 
@@ -36,7 +37,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
                 params={{
                   uuid: row.project_uuid,
                   resource_uuid: row.instance_uuid,
-                  resource_type: 'OpenStackTenant.Instance',
+                  resource_type: INSTANCE_TYPE,
                 }}
                 label={row.instance_name}
               />

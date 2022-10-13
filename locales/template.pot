@@ -20,11 +20,11 @@ msgstr ""
 msgid "10 - Very positive"
 msgstr ""
 
-#: src/marketplace/resources/StatusPage.tsx
+#: src/marketplace/resources/details/StatusPage.tsx
 msgid "90 days ago"
 msgstr ""
 
-#: src/marketplace/resources/StatusPage.tsx
+#: src/marketplace/resources/details/StatusPage.tsx
 msgid "99.98% uptime"
 msgstr ""
 
@@ -294,7 +294,7 @@ msgstr ""
 msgid "Active user will be able to login into the portal."
 msgstr ""
 
-#: src/marketplace/resources/RemoteOfferingDetails.tsx
+#: src/marketplace/resources/details/RemoteOfferingDetails.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "Activity"
 msgstr ""
@@ -357,6 +357,10 @@ msgstr ""
 
 #: src/project/team/AddMemberButton.tsx
 msgid "Add member"
+msgstr ""
+
+#: src/marketplace/resources/details/ResourcesSection.tsx
+msgid "Add new"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
@@ -486,6 +490,10 @@ msgstr ""
 #: src/customer/list/OrganizationDetails.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-tenant/FloatingIPsSection.tsx
+msgid "Address: {address}, instance: {instance}"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerDetails.tsx
@@ -878,7 +886,7 @@ msgid "Attachments"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingInfo.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 msgid "Attributes"
 msgstr ""
@@ -1014,8 +1022,8 @@ msgid "Back to shopping"
 msgstr ""
 
 #: src/marketplace/offerings/create/ManagementStep.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/SetBackendIdDialog.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
@@ -1317,7 +1325,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/CategoryFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
@@ -1442,7 +1450,7 @@ msgstr ""
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
@@ -1451,7 +1459,7 @@ msgstr ""
 msgid "Client organization"
 msgstr ""
 
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
@@ -1472,6 +1480,10 @@ msgstr ""
 
 #: src/resource/support/ResourcesTreemap.tsx
 msgid "Cloud block storage size"
+msgstr ""
+
+#: src/marketplace/resources/details/RemoteOfferingDetails.tsx
+msgid "Cloud components"
 msgstr ""
 
 #: src/rancher/RancherProviderForm.tsx
@@ -1573,6 +1585,7 @@ msgid "Compliance"
 msgstr ""
 
 #: src/marketplace/offerings/PriceList.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 msgid "Component"
 msgstr ""
 
@@ -1598,6 +1611,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Components are invalid."
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+msgid "Compute"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
@@ -1906,7 +1923,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
@@ -2138,7 +2155,7 @@ msgid "Dark theme"
 msgstr ""
 
 #: src/customer/dashboard/CustomerDashboard.tsx
-#: src/marketplace/resources/RemoteOfferingDetails.tsx
+#: src/marketplace/resources/details/RemoteOfferingDetails.tsx
 #: src/project/ProjectDashboard.tsx
 #: src/slurm/details/AllocationDetails.tsx
 #: src/user/constants.ts
@@ -2432,6 +2449,7 @@ msgstr ""
 #: src/marketplace/offerings/service-providers/shared/OfferingDetailsButton.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
@@ -2732,7 +2750,7 @@ msgstr ""
 msgid "Edit team member"
 msgstr ""
 
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 msgid "Effective ID"
 msgstr ""
 
@@ -2875,6 +2893,10 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Erred"
+msgstr ""
+
+#: src/marketplace/resources/details/ResourcesList.tsx
+msgid "Error"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
@@ -3121,6 +3143,10 @@ msgstr ""
 msgid "Feedback"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourcesList.tsx
+msgid "Fetching..."
+msgstr ""
+
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 msgid "Field"
 msgstr ""
@@ -3199,6 +3225,10 @@ msgstr ""
 msgid "Fixed IPs"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/RoutersSection.tsx
+msgid "Fixed IPs: {fixed_ips}"
+msgstr ""
+
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
 msgid "Fixed price"
@@ -3237,6 +3267,11 @@ msgstr ""
 msgid "Flavor name: {flavor_name}"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/InstancesSection.tsx
+msgid "Flavor: {flavor_name}, image: {image_name}"
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-tenant/FlavorsSection.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 msgid "Flavors"
 msgstr ""
@@ -3265,6 +3300,7 @@ msgstr ""
 msgid "Floating IP count"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/FloatingIPsSection.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Floating IPs"
 msgstr ""
@@ -3830,6 +3866,10 @@ msgstr ""
 msgid "Instance should be shutoff and OK or erred. Please contact support."
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/InstancesSection.tsx
+msgid "Instances"
+msgstr ""
+
 #: src/quotas/constants.ts
 msgid "Instances count"
 msgstr ""
@@ -4065,7 +4105,7 @@ msgstr ""
 
 #: src/customer/workspace/CustomerIssuesList.tsx
 #: src/issues/SupportIssues.tsx
-#: src/marketplace/resources/ResourceTabs.tsx
+#: src/marketplace/resources/details/ResourceTabs.tsx
 #: src/navigation/navitems.ts
 #: src/project/ProjectIssuesList.tsx
 #: src/resource/tabs/constants.ts
@@ -4273,7 +4313,12 @@ msgstr ""
 msgid "List of IPv4 or IPv6 CIDR addresses from where connection to self-service is allowed"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourcesList.tsx
+msgid "Load more"
+msgstr ""
+
 #: src/customer/list/TotalCostComponent.tsx
+#: src/marketplace/resources/details/ResourcesList.tsx
 msgid "Loading"
 msgstr ""
 
@@ -4287,6 +4332,10 @@ msgstr ""
 
 #: src/customer/payments/InvoicesDropdown.tsx
 msgid "Loading invoices"
+msgstr ""
+
+#: src/marketplace/resources/details/ResourcesList.tsx
+msgid "Loading more..."
 msgstr ""
 
 #: src/azure/AzureResourceSummary.tsx
@@ -4382,6 +4431,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 msgid "MAC address (optional)"
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-tenant/PortsSection.tsx
+msgid "MAC address: {mac_address}"
 msgstr ""
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
@@ -4885,6 +4938,15 @@ msgstr ""
 msgid "Network name"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/SubnetsSection.tsx
+msgid "Network: {network_name}, CIDR: {cidr}"
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+msgid "Networking"
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-tenant/NetworksSection.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
@@ -5025,7 +5087,7 @@ msgstr ""
 msgid "No providers"
 msgstr ""
 
-#: src/marketplace/resources/StatusPage.tsx
+#: src/marketplace/resources/details/StatusPage.tsx
 msgid "No reported incidents in the last 24 hours"
 msgstr ""
 
@@ -5273,8 +5335,8 @@ msgid "Offering logo"
 msgstr ""
 
 #: src/invoices/list/InvoicesStatsList.tsx
-#: src/marketplace/resources/OfferingDetailsField.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/OfferingDetailsField.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 msgid "Offering name"
 msgstr ""
 
@@ -5456,7 +5518,7 @@ msgstr ""
 msgid "Opened by {user} from {organization} at {date}"
 msgstr ""
 
-#: src/marketplace/resources/StatusPage.tsx
+#: src/marketplace/resources/details/StatusPage.tsx
 msgid "Operational"
 msgstr ""
 
@@ -5488,7 +5550,7 @@ msgstr ""
 msgid "Order has been submitted."
 msgstr ""
 
-#: src/marketplace/resources/ResourceOrderItemsLink.tsx
+#: src/marketplace/resources/details/ResourceOrderItemsLink.tsx
 msgid "Order history"
 msgstr ""
 
@@ -5512,7 +5574,7 @@ msgstr ""
 
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/resources/ResourceTabs.tsx
+#: src/marketplace/resources/details/ResourceTabs.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
 msgid "Order items"
@@ -6046,8 +6108,8 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/PlanDetailsField.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/PlanDetailsField.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
@@ -6274,6 +6336,10 @@ msgstr ""
 msgid "Policy"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/ServerGroupsSection.tsx
+msgid "Policy: {policy}"
+msgstr ""
+
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 msgid "Port"
@@ -6295,6 +6361,7 @@ msgstr ""
 msgid "Port security enabled"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/PortsSection.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Ports"
 msgstr ""
@@ -7274,7 +7341,7 @@ msgstr ""
 msgid "Reported by me"
 msgstr ""
 
-#: src/marketplace/resources/StatusPage.tsx
+#: src/marketplace/resources/details/StatusPage.tsx
 msgid "Reported incidents"
 msgstr ""
 
@@ -7491,7 +7558,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 msgid "Resource"
 msgstr ""
 
@@ -7564,7 +7631,7 @@ msgstr ""
 msgid "Resource description"
 msgstr ""
 
-#: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/resource/ResourceDetailsContainer.tsx
 msgid "Resource details"
 msgstr ""
@@ -7614,7 +7681,7 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 msgid "Resource link"
 msgstr ""
 
@@ -7625,7 +7692,7 @@ msgid "Resource name"
 msgstr ""
 
 #: src/marketplace/orders/item/list/ResourceOrderItemsDialog.tsx
-#: src/marketplace/resources/ResourceMetadataDialog.tsx
+#: src/marketplace/resources/details/ResourceMetadataDialog.tsx
 #: src/slurm/details/ResourceMetadataDialog.tsx
 msgid "Resource order items"
 msgstr ""
@@ -7838,6 +7905,7 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/RoutersSection.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Routers"
 msgstr ""
@@ -7848,6 +7916,10 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/tabs.ts
 msgid "Rules"
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-tenant/SecurityGroupsSection.tsx
+msgid "Rules: {rules}"
 msgstr ""
 
 #: src/customer/list/AccountingRunningField.tsx
@@ -7966,7 +8038,7 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
-#: src/marketplace/resources/ResourceTabs.tsx
+#: src/marketplace/resources/details/ResourceTabs.tsx
 msgid "Schedules"
 msgstr ""
 
@@ -8049,6 +8121,7 @@ msgstr ""
 msgid "Security group rules update has been scheduled."
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/SecurityGroupsSection.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -8074,6 +8147,7 @@ msgstr ""
 
 #: src/issues/list/IssuesShortList.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
+#: src/marketplace/resources/details/ResourcesSection.tsx
 msgid "See all"
 msgstr ""
 
@@ -8081,8 +8155,8 @@ msgstr ""
 msgid "See all offerings"
 msgstr ""
 
-#: src/marketplace/resources/ResourceIssues.tsx
-#: src/marketplace/resources/ResourceTimeline.tsx
+#: src/marketplace/resources/details/ResourceIssues.tsx
+#: src/marketplace/resources/details/ResourceTimeline.tsx
 msgid "See more"
 msgstr ""
 
@@ -8382,6 +8456,7 @@ msgstr ""
 msgid "Server group creation has been scheduled."
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/ServerGroupsSection.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Server groups"
 msgstr ""
@@ -8655,12 +8730,12 @@ msgstr ""
 msgid "Show less"
 msgstr ""
 
-#: src/marketplace/resources/ResourceMetadataLink.tsx
+#: src/marketplace/resources/details/ResourceMetadataLink.tsx
 #: src/slurm/details/ResourceMetadataLink.tsx
 msgid "Show metadata"
 msgstr ""
 
-#: src/marketplace/resources/OfferingDetailsField.tsx
+#: src/marketplace/resources/details/OfferingDetailsField.tsx
 msgid "Show offering"
 msgstr ""
 
@@ -8676,7 +8751,7 @@ msgstr ""
 msgid "Show password"
 msgstr ""
 
-#: src/marketplace/resources/PlanDetailsField.tsx
+#: src/marketplace/resources/details/PlanDetailsField.tsx
 msgid "Show plan"
 msgstr ""
 
@@ -8768,6 +8843,14 @@ msgstr ""
 msgid "Size should be between 1 and 10240 GB."
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/SnapshotsSection.tsx
+msgid "Size: {size}"
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-tenant/VolumesSection.tsx
+msgid "Size: {size}, attached to: {device}"
+msgstr ""
+
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 msgid "Skip connection to external network"
@@ -8790,6 +8873,7 @@ msgstr ""
 msgid "Snapshot size limit"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/SnapshotsSection.tsx
 #: src/openstack/openstack-snapshot-schedule/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshots"
@@ -8867,8 +8951,9 @@ msgstr ""
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/resources/ResourceDetailsHeader.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceDetailsHeader.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -8928,7 +9013,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: src/marketplace/resources/RemoteOfferingDetails.tsx
+#: src/marketplace/resources/details/RemoteOfferingDetails.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "Status page"
 msgstr ""
@@ -8956,6 +9041,7 @@ msgid "Stopping"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/quotas/constants.ts
@@ -9050,6 +9136,7 @@ msgid "Subnet name"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/marketplace/resources/details/openstack-tenant/SubnetsSection.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-network/tabs.ts
 msgid "Subnets"
@@ -9057,6 +9144,10 @@ msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Subnets from where connection to self-service is allowed."
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-tenant/NetworksSection.tsx
+msgid "Subnets: {subnets}"
 msgstr ""
 
 #: src/azure/provider/AzureForm.tsx
@@ -9079,6 +9170,7 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/TemplateDetail.tsx
@@ -9315,8 +9407,8 @@ msgstr ""
 
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Termination date"
@@ -9560,11 +9652,11 @@ msgstr ""
 msgid "There are no requests yet."
 msgstr ""
 
-#: src/marketplace/resources/ResourceTimeline.tsx
+#: src/marketplace/resources/details/ResourceTimeline.tsx
 msgid "There are no resource events."
 msgstr ""
 
-#: src/marketplace/resources/ResourceIssues.tsx
+#: src/marketplace/resources/details/ResourceIssues.tsx
 msgid "There are no resource issues."
 msgstr ""
 
@@ -9641,7 +9733,7 @@ msgstr ""
 msgid "Thumbnail"
 msgstr ""
 
-#: src/marketplace/resources/RemoteOfferingDetails.tsx
+#: src/marketplace/resources/details/RemoteOfferingDetails.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "Tickets"
 msgstr ""
@@ -9704,6 +9796,10 @@ msgstr ""
 msgid "To get your clouds under control, please fill in your data."
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceLink.tsx
+msgid "To instance"
+msgstr ""
+
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "To remove account, please send a request to {support}."
 msgstr ""
@@ -9720,7 +9816,7 @@ msgstr ""
 msgid "To report an issue, please send an email to {supportEmail}."
 msgstr ""
 
-#: src/marketplace/resources/StatusPage.tsx
+#: src/marketplace/resources/details/StatusPage.tsx
 msgid "Today"
 msgstr ""
 
@@ -9849,7 +9945,7 @@ msgstr ""
 
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "UUID"
@@ -10140,7 +10236,7 @@ msgstr ""
 msgid "Unable to fetch data."
 msgstr ""
 
-#: src/marketplace/resources/ResourceComponents.tsx
+#: src/marketplace/resources/details/ResourceComponents.tsx
 msgid "Unable to fetch offering."
 msgstr ""
 
@@ -10148,11 +10244,11 @@ msgstr ""
 msgid "Unable to fetch offerings"
 msgstr ""
 
-#: src/marketplace/resources/ResourceTimeline.tsx
+#: src/marketplace/resources/details/ResourceTimeline.tsx
 msgid "Unable to fetch resource events."
 msgstr ""
 
-#: src/marketplace/resources/ResourceIssues.tsx
+#: src/marketplace/resources/details/ResourceIssues.tsx
 msgid "Unable to fetch resource issues."
 msgstr ""
 
@@ -10445,6 +10541,10 @@ msgstr ""
 #: src/marketplace-checklist/UserChecklist.tsx
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "Unable to load questions and answers."
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+msgid "Unable to load resource details."
 msgstr ""
 
 #: src/resource/ResourceDetailsContainer.tsx
@@ -11096,8 +11196,8 @@ msgid "Uptime"
 msgstr ""
 
 #: src/dashboard/chart.ts
-#: src/marketplace/resources/ResourceTabs.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/marketplace/resources/details/ResourceTabs.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/slurm/details/utils.ts
@@ -11109,7 +11209,7 @@ msgstr ""
 msgid "Usage based"
 msgstr ""
 
-#: src/marketplace/resources/RemoteOfferingDetails.tsx
+#: src/marketplace/resources/details/RemoteOfferingDetails.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "Usage history"
 msgstr ""
@@ -11430,7 +11530,7 @@ msgstr ""
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/UsernameGroup.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
@@ -11717,6 +11817,7 @@ msgstr ""
 msgid "Volume type storage limit is exceeded"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/VolumesSection.tsx
 #: src/openstack/openstack-instance/tabs.ts
 msgid "Volumes"
 msgstr ""
@@ -12481,6 +12582,10 @@ msgstr ""
 msgid "{deployment} Marketplace"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+msgid "{instances} instances, {flavors} flavors, {server_groups} server groups"
+msgstr ""
+
 #: src/customer/team/CustomerUsersListExpandableRow.tsx
 msgid "{label} in:"
 msgstr ""
@@ -12610,6 +12715,10 @@ msgstr ""
 msgid "{role} in {project}"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+msgid "{routers} routers, {networks} networks, {subnets} subnets, {security_groups} security groups, {floating_ips} floating IPs, {ports} ports"
+msgstr ""
+
 #: src/invitations/GroupInvitationMessage.tsx
 #: src/invitations/InvitationMessage.tsx
 msgid "{sender} has invited you to join {name} {type} in {role} role."
@@ -12671,6 +12780,10 @@ msgstr ""
 
 #: src/resource/actions/UpdateResourceDialog.tsx
 msgid "{verboseName} has been updated."
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+msgid "{volumes} volumes, {snapshots} snapshots"
 msgstr ""
 
 #: src/customer/create/CustomerCreatePromptContainer.tsx

@@ -4,13 +4,13 @@ import { Card } from 'react-bootstrap';
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
+import { ResourceOrderItems } from '@waldur/marketplace/orders/item/list/ResourceOrderItems';
 import { ResourceUsageTabsContainer } from '@waldur/marketplace/resources/usage/ResourceUsageTabsContainer';
 import { VerticalTabs } from '@waldur/resource/tabs/VerticalTabs';
 
-import { ResourceOrderItems } from '../orders/item/list/ResourceOrderItems';
+import { Resource } from '../types';
 
 import { ResourceIssuesTab } from './ResourceIssuesTab';
-import { Resource } from './types';
 
 export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => {
   const tabs = useMemo(

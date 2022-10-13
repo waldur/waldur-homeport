@@ -7,9 +7,11 @@ import {
   ResourceSummaryBase,
 } from '@waldur/resource/summary';
 
+import { VOLUME_TYPE } from '../constants';
+
 const formatVolume = (props) => (
   <ResourceLink
-    type="OpenStackTenant.Volume"
+    type={VOLUME_TYPE}
     uuid={getUUID(props.source_volume)}
     project={props.project_uuid}
     label={props.source_volume_name}

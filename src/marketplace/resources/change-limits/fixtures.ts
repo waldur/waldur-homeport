@@ -1,4 +1,5 @@
 import { StateProps } from '@waldur/marketplace/resources/change-limits/connector';
+import { TENANT_TYPE } from '@waldur/openstack/constants';
 
 export const plan = {
   prices: {
@@ -33,7 +34,7 @@ export const offering = {
       billing_type: 'limit',
     },
   ],
-  type: 'OpenStack.Admin',
+  type: TENANT_TYPE,
 };
 
 export const newLimits = {

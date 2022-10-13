@@ -3,6 +3,8 @@ import { translate } from '@waldur/i18n';
 import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
+import { INSTANCE_TYPE } from '../constants';
+
 const BackupsSchedulesList = lazyComponent(
   () =>
     import(
@@ -29,7 +31,7 @@ const InternalIpsList = lazyComponent(
   'InternalIpsList',
 );
 
-ResourceTabsConfiguration.register('OpenStackTenant.Instance', () => [
+ResourceTabsConfiguration.register(INSTANCE_TYPE, () => [
   {
     key: 'volumes',
     title: translate('Volumes'),

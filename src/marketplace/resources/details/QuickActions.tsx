@@ -1,8 +1,9 @@
-import { ActionButton } from '@waldur/marketplace/resources/ActionButton';
 import { useTerminate } from '@waldur/marketplace/resources/terminate/TerminateAction';
 import { ResourceAccessButton } from '@waldur/resource/ResourceAccessButton';
 
-import { useChangeLimits } from './change-limits/ChangeLimitsAction';
+import { useChangeLimits } from '../change-limits/ChangeLimitsAction';
+
+import { ActionButton } from './ActionButton';
 
 const TerminateActionButton = ({ resource }) => {
   const buttonProps = useTerminate({ resource });

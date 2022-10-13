@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 
-import { openOfferingDetailsDialog } from '../offerings/details/OfferingDetailsButton';
+import { openOfferingDetailsDialog } from '../../offerings/details/OfferingDetailsButton';
 
 export const OfferingDetailsField = ({ resource }) => {
   const dispatch = useDispatch();

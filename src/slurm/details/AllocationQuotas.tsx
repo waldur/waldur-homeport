@@ -1,7 +1,7 @@
 import { Card, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import { QuotaCell } from '@waldur/marketplace/resources/QuotaCell';
+import { QuotaCell } from '@waldur/marketplace/resources/details/QuotaCell';
 
 import { QuickActions } from './QuickActions';
 

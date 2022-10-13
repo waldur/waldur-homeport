@@ -7,9 +7,11 @@ import {
   ResourceSummaryBase,
 } from '@waldur/resource/summary';
 
+import { INSTANCE_TYPE } from '../constants';
+
 const formatInstance = (props) => (
   <ResourceLink
-    type="OpenStackTenant.Instance"
+    type={INSTANCE_TYPE}
     uuid={getUUID(props.instance)}
     project={props.project_uuid}
     label={props.instance_name}

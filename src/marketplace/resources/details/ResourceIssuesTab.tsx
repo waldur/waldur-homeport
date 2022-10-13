@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 
 import { IssuesList } from '@waldur/issues/list/IssuesList';
 
-import { Resource } from './types';
+import { Resource } from '../types';
 
 export const ResourceIssuesTab: FC<{ resource: Resource }> = ({ resource }) => (
   <Card.Body>

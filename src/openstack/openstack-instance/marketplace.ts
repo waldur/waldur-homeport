@@ -4,6 +4,8 @@ import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 
+import { INSTANCE_TYPE, SHARED_INSTANCE_TYPE } from '../constants';
+
 import { getVolumeTypeRequirements } from './utils';
 
 const OpenstackInstanceDetails = lazyComponent(
@@ -158,7 +160,7 @@ const formValidator = (props) => {
 };
 
 registerOfferingType({
-  type: 'OpenStackTenant.Instance',
+  type: INSTANCE_TYPE,
   get label() {
     return translate('OpenStack instance');
   },
@@ -172,7 +174,7 @@ registerOfferingType({
 });
 
 registerOfferingType({
-  type: 'OpenStackTenant.SharedInstance',
+  type: SHARED_INSTANCE_TYPE,
   get label() {
     return translate('OpenStack shared instance');
   },

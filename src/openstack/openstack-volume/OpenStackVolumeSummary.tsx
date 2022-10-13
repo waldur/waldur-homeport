@@ -7,6 +7,8 @@ import {
   ResourceSummaryBase,
 } from '@waldur/resource/summary';
 
+import { INSTANCE_TYPE } from '../constants';
+
 const formatSize = (props) => {
   const filesize = formatFilesize(props.resource.size);
   return props.resource.bootable
@@ -17,7 +19,7 @@ const formatSize = (props) => {
 const formatInstance = (props) =>
   props.resource.instance ? (
     <ResourceLink
-      type="OpenStackTenant.Instance"
+      type={INSTANCE_TYPE}
       uuid={getUUID(props.resource.instance)}
       project={props.resource.project_uuid}
       label={props.resource.instance_name}

@@ -2,10 +2,10 @@ import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { BackendIdTip } from '@waldur/core/Tooltip';
+import { ResourceDetailsLink } from '@waldur/marketplace/resources/details/ResourceDetailsLink';
 import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
 import { Customer } from '@waldur/workspace/types';
 
-import { ResourceDetailsLink } from '../ResourceDetailsLink';
 import { Resource } from '../types';
 
 import { EndDateTooltip } from './EndDateTooltip';
@@ -22,6 +22,9 @@ export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
 }) => {
   const label = row.name || row.offering_name;
   if (row.resource_type && row.resource_uuid) {
+    if (row.resource_type === 'OpenStack.Tenant') {
+      return <PublicResourceLink row={row} customer={customer} />;
+    }
     return <ResourceDetailsLink item={row}>{label}</ResourceDetailsLink>;
   } else if (row.offering_type === SUPPORT_OFFERING_TYPE) {
     return (

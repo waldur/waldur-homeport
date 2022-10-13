@@ -1,9 +1,10 @@
 import { FunctionComponent } from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
+import { ResourceDetailsLink } from '@waldur/marketplace/resources/details/ResourceDetailsLink';
 import { CategoryColumn } from '@waldur/marketplace/types';
+import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 
-import { ResourceDetailsLink } from '../ResourceDetailsLink';
 import { Resource } from '../types';
 
 interface CategoryColumnFieldProps {
@@ -32,9 +33,9 @@ export const CategoryColumnField: FunctionComponent<CategoryColumnFieldProps> =
         return (
           <ResourceDetailsLink
             item={{
-              offering_type: 'OpenStackTenant.Instance',
+              offering_type: INSTANCE_TYPE,
               resource_uuid: metadata.instance_uuid,
-              resource_type: 'OpenStackTenant.Instance',
+              resource_type: INSTANCE_TYPE,
             }}
           >
             {metadata.instance_name}

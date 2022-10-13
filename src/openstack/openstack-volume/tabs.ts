@@ -3,6 +3,8 @@ import { translate } from '@waldur/i18n';
 import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
+import { VOLUME_TYPE } from '../constants';
+
 const SnapshotSchedulesList = lazyComponent(
   () =>
     import(
@@ -18,7 +20,7 @@ const VolumeSnapshotsList = lazyComponent(
   'VolumeSnapshotsList',
 );
 
-ResourceTabsConfiguration.register('OpenStackTenant.Volume', () => [
+ResourceTabsConfiguration.register(VOLUME_TYPE, () => [
   {
     key: 'snapshots',
     title: translate('Snapshots'),

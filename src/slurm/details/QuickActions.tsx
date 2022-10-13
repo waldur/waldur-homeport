@@ -1,4 +1,4 @@
-import { ActionButton } from '@waldur/marketplace/resources/ActionButton';
+import { ActionButton } from '@waldur/marketplace/resources/details/ActionButton';
 import { useTerminate } from '@waldur/marketplace/resources/terminate/TerminateAction';
 import { usePull } from '@waldur/resource/actions/PullActionItem';
 

@@ -1,9 +1,8 @@
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { showPlanDetailsDialog } from '@waldur/marketplace/details/plan/actions';
 import { Field } from '@waldur/resource/summary';
-
-import { showPlanDetailsDialog } from '../details/plan/actions';
 
 export const PlanDetailsField = ({ resource }) => {
   const dispatch = useDispatch();

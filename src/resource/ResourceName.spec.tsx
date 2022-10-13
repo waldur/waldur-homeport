@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
 import { Tip } from '@waldur/core/Tooltip';
+import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 import '@waldur/openstack/provider';
 
 import { ResourceName } from './ResourceName';
@@ -16,7 +17,7 @@ jest.mock('@waldur/core/Link', () => {
 const resource = {
   name: 'FreeIPA server',
   uuid: 'VALID_UUID',
-  resource_type: 'OpenStackTenant.Instance',
+  resource_type: INSTANCE_TYPE,
   is_link_valid: true,
 };
 
