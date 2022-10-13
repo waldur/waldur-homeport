@@ -2895,6 +2895,7 @@ msgstr ""
 msgid "Erred"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceTimeline.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
 msgid "Error"
 msgstr ""
@@ -3143,6 +3144,7 @@ msgstr ""
 msgid "Feedback"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceTimeline.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
 msgid "Fetching..."
 msgstr ""
@@ -4313,11 +4315,13 @@ msgstr ""
 msgid "List of IPv4 or IPv6 CIDR addresses from where connection to self-service is allowed"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceTimeline.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
 msgid "Load more"
 msgstr ""
 
 #: src/customer/list/TotalCostComponent.tsx
+#: src/marketplace/resources/details/ResourceTimeline.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
 msgid "Loading"
 msgstr ""
@@ -4334,6 +4338,7 @@ msgstr ""
 msgid "Loading invoices"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceTimeline.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
 msgid "Loading more..."
 msgstr ""
@@ -8156,7 +8161,6 @@ msgid "See all offerings"
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceIssues.tsx
-#: src/marketplace/resources/details/ResourceTimeline.tsx
 msgid "See more"
 msgstr ""
 
@@ -10242,10 +10246,6 @@ msgstr ""
 
 #: src/navigation/SearchResultsDropdown.tsx
 msgid "Unable to fetch offerings"
-msgstr ""
-
-#: src/marketplace/resources/details/ResourceTimeline.tsx
-msgid "Unable to fetch resource events."
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceIssues.tsx
