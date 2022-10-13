@@ -1,23 +1,21 @@
 import { formatDateTime } from '@waldur/core/dateUtils';
-import eventsRegistry from '@waldur/events/registry';
-import { Event } from '@waldur/events/types';
+import { Issue } from '@waldur/issues/list/types';
+import { IssueTypeIcon } from '@waldur/issues/types/IssueTypeIcon';
 
-import { EventIcon } from './EventIcon';
-
-export const EventRow = ({ row }: { row: Event }) => (
+export const IssueRow = ({ row }: { row: Issue }) => (
   <div className="timeline-item">
     <div className="timeline-line w-40px"></div>
     <div className="timeline-icon symbol symbol-circle symbol-40px me-4">
-      <EventIcon type={row.event_type} />
+      <div className="symbol-label bg-light">
+        <IssueTypeIcon type={row.type} />
+      </div>
     </div>
     <div className="timeline-content mb-10 mt-n1">
       <div className="pe-3 mb-5">
-        <div className="fs-5 fw-semibold mb-2">
-          {eventsRegistry.formatEvent(row)}
-        </div>
+        <div className="fs-5 fw-semibold mb-2">{row.summary}</div>
         <div className="d-flex align-items-center mt-1 fs-6">
           <div className="text-muted me-2 fs-7">
-            {formatDateTime(row.created)}
+            {formatDateTime(row.modified)}
           </div>
         </div>
       </div>
