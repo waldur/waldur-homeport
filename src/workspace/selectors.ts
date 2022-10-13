@@ -128,8 +128,8 @@ export const isOwnerOrStaff = createSelector(
   },
 );
 
-const checkRole = (project: Project, user: User, role: string) => {
-  if (!project.permissions) {
+export const checkRole = (project: Project, user: User, role: string) => {
+  if (!project.permissions || !user) {
     return false;
   }
   const projectUser = project.permissions.find(

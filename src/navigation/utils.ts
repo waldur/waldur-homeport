@@ -1,6 +1,11 @@
+import { StateDeclaration } from '@uirouter/react';
+
 import { isFeatureVisible } from '@waldur/features/connect';
+import { InvitationPolicyService } from '@waldur/invitations/actions/InvitationPolicyService';
 import { router } from '@waldur/router';
+import store from '@waldur/store/store';
 import { hasPermission } from '@waldur/utils';
+import { getCustomer, getProject, getUser } from '@waldur/workspace/selectors';
 
 let state;
 let params;
@@ -24,22 +29,64 @@ export const goBack = () => {
 export const getFilteredTabs = async (tabs) => {
   if (!tabs) return [];
   const filtered = [];
-  for (const tab of tabs) {
-    const state = router.stateService.get(tab.to);
-    if (state?.data?.feature) {
-      if (!isFeatureVisible(state.data.feature)) {
-        continue;
-      }
-    }
 
-    const permissionFn = (state?.resolve as any)?.permission;
-    if (permissionFn) {
-      if (await hasPermission()) {
-        filtered.push(tab);
+  for (const tab of tabs) {
+    if (tab.children && tab.children.length) {
+      // Tab has children
+      const filteredChildren = [];
+      for (const childTab of tab.children) {
+        const state = router.stateService.get(childTab.to);
+        if (await canShow(state)) {
+          filteredChildren.push(childTab);
+        }
+      }
+      if (filteredChildren.length) {
+        filtered.push({ ...tab, children: filteredChildren });
       }
     } else {
-      filtered.push(tab);
+      // Tab is single
+      const state = router.stateService.get(tab.to);
+      if (await canShow(state)) {
+        filtered.push(tab);
+      }
     }
   }
   return filtered;
+};
+
+const canShow = async (state: StateDeclaration) => {
+  if (state?.data?.feature) {
+    if (!isFeatureVisible(state.data.feature)) {
+      return false;
+    }
+  }
+  if (!hasExtraPermissions(state)) {
+    return false;
+  }
+
+  const permissionFn = (state?.resolve as any)?.permission;
+
+  if (permissionFn) {
+    if (await hasPermission()) {
+      return true;
+    }
+  } else {
+    return true;
+  }
+};
+
+const hasExtraPermissions = (state: StateDeclaration) => {
+  if (state.name === 'project.invitations') {
+    const user = getUser(store.getState());
+    const customer = getCustomer(store.getState());
+    const project = getProject(store.getState());
+    const canAccess = InvitationPolicyService.canAccessInvitations({
+      user,
+      customer,
+      project,
+    });
+    if (canAccess) return true;
+    return false;
+  }
+  return true;
 };
