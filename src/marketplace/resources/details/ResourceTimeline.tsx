@@ -1,80 +1,82 @@
-import { useAsync } from 'react-use';
+import { Fragment } from 'react';
+import { QueryFunction, useInfiniteQuery } from 'react-query';
 
-import { get } from '@waldur/core/api';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import eventsRegistry from '@waldur/events/registry';
+import { fixURL } from '@waldur/core/api';
 import { Event } from '@waldur/events/types';
 import { translate } from '@waldur/i18n';
+import { parseResponse } from '@waldur/table/api';
 
-const EVENT_ICONS = {
-  resource_creation_failed: 'fa-warning',
-  resource_creation_scheduled: 'fa-spinner',
-  resource_creation_succeeded: 'fa-check',
+import { EventRow } from './EventRow';
+
+interface DataPage {
+  data: Event[];
+  nextPage?: number;
+}
+
+const useResourceTimeline = (resource) => {
+  const loadData: QueryFunction<DataPage> = async (context) => {
+    const response = await parseResponse(
+      fixURL('/events/'),
+      {
+        scope: resource.url,
+        page: context.pageParam,
+      },
+      { signal: context.signal },
+    );
+    return {
+      data: response.rows,
+      nextPage: response.nextPage,
+    };
+  };
+
+  return useInfiniteQuery<any, any, DataPage>('resource-events', loadData, {
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+  });
 };
 
 export const ResourceTimeline = ({ resource }) => {
-  const { loading, error, value } = useAsync(() =>
-    get<Event[]>('/events/', { params: { scope: resource.url } }),
-  );
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-  if (error) {
-    return (
-      <p className="text-center">
-        {translate('Unable to fetch resource events.')}
-      </p>
-    );
-  }
-  if (value.data.length === 0) {
-    return (
-      <p className="text-center">
-        {translate('There are no resource events.')}
-      </p>
-    );
-  }
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useResourceTimeline(resource);
 
-  return (
+  return status === 'loading' ? (
+    <p className="text-center">{translate('Loading')}</p>
+  ) : status === 'error' ? (
+    <p className="text-center">{translate('Error')}</p>
+  ) : data.pages[0].data.length === 0 ? (
+    <p className="text-center">{translate('There are no resource events.')}</p>
+  ) : (
     <>
       <div className="timeline">
-        {value.data.map((event, index) => {
-          let eventIcon = EVENT_ICONS[event.event_type];
-          if (!eventIcon && event.event_type.endsWith('_failed')) {
-            eventIcon = 'fa-warning';
-          }
-          if (!eventIcon && event.event_type.endsWith('_scheduled')) {
-            eventIcon = 'fa-spinner';
-          }
-          if (!eventIcon && event.event_type.endsWith('_succeeded')) {
-            eventIcon = 'fa-check';
-          }
-          return (
-            <div key={index} className="timeline-item">
-              <div className="timeline-line w-40px"></div>
-              <div className="timeline-icon symbol symbol-circle symbol-40px me-4">
-                <div className="symbol-label bg-light">
-                  {eventIcon && <i className={`fa ${eventIcon}`} />}
-                </div>
-              </div>
-              <div className="timeline-content mb-10 mt-n1">
-                <div className="pe-3 mb-5">
-                  <div className="fs-5 fw-semibold mb-2">
-                    {eventsRegistry.formatEvent(event)}
-                  </div>
-                  <div className="d-flex align-items-center mt-1 fs-6">
-                    <div className="text-muted me-2 fs-7">
-                      {formatDateTime(event.created)}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        {data.pages.map((page, i) => (
+          <Fragment key={i}>
+            {page.data.map((event, index) => (
+              <EventRow event={event} key={index} />
+            ))}
+          </Fragment>
+        ))}
       </div>
       <p className="text-center">
-        <a>{translate('See more')}</a>
+        {hasNextPage && (
+          <div>
+            <button
+              onClick={() => fetchNextPage()}
+              disabled={isFetchingNextPage}
+            >
+              {isFetchingNextPage
+                ? translate('Loading more...')
+                : translate('Load more')}
+            </button>
+          </div>
+        )}
+        <div>
+          {isFetching && !isFetchingNextPage ? translate('Fetching...') : null}
+        </div>
       </p>
     </>
   );
