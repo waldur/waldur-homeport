@@ -1,4 +1,5 @@
 import { pick } from '@waldur/core/utils';
+import { INSTANCE_TYPE, TENANT_TYPE } from '@waldur/openstack/constants';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Resource as ResourceType } from '@waldur/resource/types';
 
@@ -9,8 +10,8 @@ import { MarketplaceResourceStateField } from './MarketplaceResourceStateField';
 const pickResource = pick(['action', 'action_details', 'runtime_state']);
 
 const OPENSTACK_OFFERINGS = [
-  'OpenStack.Admin',
-  'OpenStackTenant.Instance',
+  TENANT_TYPE,
+  INSTANCE_TYPE,
   'OpenStackTenant.Volume',
 ];
 

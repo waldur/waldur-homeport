@@ -1,3 +1,5 @@
+import { INSTANCE_TYPE, VOLUME_TYPE } from '@waldur/openstack/constants';
+
 export const RESOURCE_ENDPOINTS = {
   'OpenStack.FloatingIP': '/openstack-floating-ips/',
   'OpenStack.SecurityGroup': '/openstack-security-groups/',
@@ -6,9 +8,9 @@ export const RESOURCE_ENDPOINTS = {
   'OpenStack.Port': '/openstack-ports/',
   'OpenStack.Network': '/openstack-networks/',
   'OpenStack.SubNet': '/openstack-subnets/',
-  'OpenStackTenant.Volume': '/openstacktenant-volumes/',
+  [VOLUME_TYPE]: '/openstacktenant-volumes/',
   'OpenStackTenant.Snapshot': '/openstacktenant-snapshots/',
-  'OpenStackTenant.Instance': '/openstacktenant-instances/',
+  [INSTANCE_TYPE]: '/openstacktenant-instances/',
   'OpenStackTenant.Backup': '/openstacktenant-backups/',
   'OpenStackTenant.BackupSchedule': '/openstacktenant-backup-schedules/',
   'OpenStackTenant.SnapshotSchedule': '/openstacktenant-snapshot-schedules/',

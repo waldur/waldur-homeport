@@ -3,9 +3,9 @@ import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { QuotaCell } from '@waldur/marketplace/resources/QuotaCell';
+import { getOffering } from '@waldur/marketplace/common/api';
 
-import { getOffering } from '../common/api';
+import { QuotaCell } from './QuotaCell';
 
 export const ResourceComponents = ({ resource }) => {
   const { loading, error, value } = useAsync(() =>

@@ -7,6 +7,7 @@ import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
+import { INSTANCE_TYPE } from '../constants';
 import { CreateBackupAction } from '../openstack-instance/actions/CreateBackupAction';
 
 const TableComponent: FunctionComponent<any> = (props) => {
@@ -48,7 +49,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
 const mapPropsToFilter = (props) => {
   const fields = {
-    'OpenStackTenant.Instance': 'instance',
+    [INSTANCE_TYPE]: 'instance',
     'OpenStackTenant.BackupSchedule': 'backup_schedule',
   };
   const { resource_type, url } = props.resource;

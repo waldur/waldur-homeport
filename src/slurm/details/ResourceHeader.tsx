@@ -1,7 +1,7 @@
 import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import { ResourceOrderItemsLink } from '@waldur/marketplace/resources/ResourceOrderItemsLink';
+import { ResourceOrderItemsLink } from '@waldur/marketplace/resources/details/ResourceOrderItemsLink';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Field } from '@waldur/resource/summary';
 

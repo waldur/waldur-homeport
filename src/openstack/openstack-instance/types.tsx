@@ -8,6 +8,7 @@ interface RancherClusterReference {
 }
 
 export interface OpenStackInstance extends VirtualMachine {
+  image_name: string;
   flavor_name: string;
   floating_ips?: FloatingIp[];
   runtime_state: 'SHUTOFF' | 'ACTIVE';

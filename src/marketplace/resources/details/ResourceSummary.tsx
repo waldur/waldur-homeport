@@ -7,10 +7,11 @@ import { Field } from '@waldur/resource/summary';
 import { CreatedField } from '@waldur/resource/summary/CreatedField';
 import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 
-import { KeyValueButton } from './KeyValueButton';
-import { MarketplaceResourceStateField } from './list/MarketplaceResourceStateField';
+import { KeyValueButton } from '../KeyValueButton';
+import { MarketplaceResourceStateField } from '../list/MarketplaceResourceStateField';
+import { Resource } from '../types';
+
 import { ResourceDetailsLink } from './ResourceDetailsLink';
-import { Resource } from './types';
 
 export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
   resource,

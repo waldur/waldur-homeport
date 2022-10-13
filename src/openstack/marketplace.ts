@@ -3,6 +3,8 @@ import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 
+import { TENANT_TYPE } from './constants';
+
 const OpenStackPackageDetails = lazyComponent(
   () =>
     import(
@@ -102,7 +104,7 @@ const offeringComponentsFilter = (formData, components) => {
 };
 
 registerOfferingType({
-  type: 'OpenStack.Admin',
+  type: TENANT_TYPE,
   get label() {
     return translate('OpenStack admin');
   },

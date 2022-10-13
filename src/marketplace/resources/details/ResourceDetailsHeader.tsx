@@ -4,13 +4,14 @@ import { Card } from 'react-bootstrap';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 
-import { MarketplaceResourceStateField } from './list/MarketplaceResourceStateField';
+import { MarketplaceResourceStateField } from '../list/MarketplaceResourceStateField';
+import { ResourceActions } from '../ResourceActions';
+import { Resource } from '../types';
+
 import { OfferingDetailsField } from './OfferingDetailsField';
 import { PlanDetailsField } from './PlanDetailsField';
-import { ResourceActions } from './ResourceActions';
 import { ResourceMetadataLink } from './ResourceMetadataLink';
 import { ResourceOrderItemsLink } from './ResourceOrderItemsLink';
-import { Resource } from './types';
 
 interface ResourceDetailsHeaderProps {
   resource: Resource;

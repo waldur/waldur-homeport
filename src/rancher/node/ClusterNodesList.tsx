@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
@@ -40,7 +41,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
                 params={{
                   uuid: row.project_uuid,
                   resource_uuid: row.instance_uuid,
-                  resource_type: 'OpenStackTenant.Instance',
+                  resource_type: INSTANCE_TYPE,
                 }}
                 label={row.instance_name}
               />

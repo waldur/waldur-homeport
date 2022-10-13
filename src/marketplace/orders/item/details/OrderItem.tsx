@@ -6,7 +6,7 @@ import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
-import { ResourceDetailsLink } from '@waldur/marketplace/resources/ResourceDetailsLink';
+import { ResourceDetailsLink } from '@waldur/marketplace/resources/details/ResourceDetailsLink';
 import { ResourceReference } from '@waldur/marketplace/resources/types';
 import { BillingPeriod } from '@waldur/marketplace/types';
 

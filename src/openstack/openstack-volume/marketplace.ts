@@ -3,6 +3,8 @@ import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
+import { VOLUME_TYPE } from '../constants';
+
 const OpenstackVolumeDetails = lazyComponent(
   () =>
     import(
@@ -31,7 +33,7 @@ const serializer = (attrs) => ({
 });
 
 registerOfferingType({
-  type: 'OpenStackTenant.Volume',
+  type: VOLUME_TYPE,
   get label() {
     return translate('OpenStack volume');
   },

@@ -4,10 +4,9 @@ import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { getResource } from '@waldur/marketplace/common/api';
 import { useTitle } from '@waldur/navigation/title';
 import { formatResourceType } from '@waldur/resource/utils';
-
-import { getResource } from '../common/api';
 
 import { RemoteOfferingDetails } from './RemoteOfferingDetails';
 

@@ -1,5 +1,6 @@
 import { translate } from '@waldur/i18n';
 import { KeyValueButton } from '@waldur/marketplace/resources/KeyValueButton';
+import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import {
   Field,
@@ -12,7 +13,7 @@ import { NodeRoleField } from './NodeRoleField';
 const formatInstance = (resource) =>
   resource.instance ? (
     <ResourceLink
-      type="OpenStackTenant.Instance"
+      type={INSTANCE_TYPE}
       uuid={resource.instance_uuid}
       project={resource.project_uuid}
       label={resource.instance_name}

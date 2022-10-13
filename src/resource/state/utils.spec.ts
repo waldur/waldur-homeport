@@ -1,3 +1,4 @@
+import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 import '@waldur/openstack/provider';
 import { Resource } from '@waldur/resource/types';
 
@@ -6,7 +7,7 @@ import { getResourceState } from './utils';
 const baseResource = {
   name: 'Instance',
   uuid: 'uuid',
-  resource_type: 'OpenStackTenant.Instance',
+  resource_type: INSTANCE_TYPE,
   project_uuid: 'project_uuid',
 };
 

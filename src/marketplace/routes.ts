@@ -14,30 +14,12 @@ const SupportOfferingsContainer = lazyComponent(
     ),
   'SupportOfferingsContainer',
 );
-const ResourceDetailsPageForCustomer = lazyComponent(
+const ResourceDetailsPage = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "ResourceDetailsPageForCustomer" */ '@waldur/marketplace/resources/ResourceDetailsPageForCustomer'
+      /* webpackChunkName: "ResourceDetailsPage" */ '@waldur/marketplace/resources/details/ResourceDetailsPage'
     ),
-  'ResourceDetailsPageForCustomer',
-);
-const ResourceDetailsPageForServiceProvider = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceDetailsPageForServiceProvider" */
-
-      '@waldur/marketplace/resources/ResourceDetailsPageForServiceProvider'
-    ),
-  'ResourceDetailsPageForServiceProvider',
-);
-const ResourceDetailsPageForProjectWorkspace = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceDetailsPageForProjectWorkspace" */
-
-      '@waldur/marketplace/resources/ResourceDetailsPageForProjectWorkspace'
-    ),
-  'ResourceDetailsPageForProjectWorkspace',
+  'ResourceDetailsPage',
 );
 const AnonymousLayout = lazyComponent(
   () =>
@@ -572,21 +554,21 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-public-resource-details',
     url: 'marketplace-public-resource-details/:resource_uuid/',
-    component: ResourceDetailsPageForCustomer,
+    component: ResourceDetailsPage,
     parent: 'organization',
   },
 
   {
     name: 'marketplace-service-provider-public-resource-details',
     url: 'marketplace-service-provider-public-resource-details/:resource_uuid/',
-    component: ResourceDetailsPageForServiceProvider,
+    component: ResourceDetailsPage,
     parent: 'organization',
   },
 
   {
     name: 'marketplace-project-resource-details',
     url: 'marketplace-project-resource-details/:resource_uuid/',
-    component: ResourceDetailsPageForProjectWorkspace,
+    component: ResourceDetailsPage,
     parent: 'project',
   },
 

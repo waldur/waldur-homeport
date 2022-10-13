@@ -6,17 +6,19 @@ import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
-import { StatusPage } from '@waldur/marketplace/resources/StatusPage';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { useFullPage, useTabs } from '@waldur/navigation/context';
+import { TENANT_TYPE } from '@waldur/openstack/constants';
 import { OpenStackResourceUsage } from '@waldur/openstack/OpenStackResourceUsage';
 
 import '@waldur/marketplace/offerings/details/PublicOfferingDetailsHero.scss';
+import { TenantDetails } from './openstack-tenant/TenantDetails';
 import { QuickActions } from './QuickActions';
 import { ResourceComponents } from './ResourceComponents';
 import { ResourceDetailsHeader } from './ResourceDetailsHeader';
 import { ResourceIssues } from './ResourceIssues';
 import { ResourceTimeline } from './ResourceTimeline';
+import { StatusPage } from './StatusPage';
 
 export const RemoteOfferingDetails: FC<any> = ({ resource }) => {
   useFullPage();
@@ -40,8 +42,11 @@ export const RemoteOfferingDetails: FC<any> = ({ resource }) => {
               <Row>
                 <Col md={8} sm={12} className="d-flex">
                   <div className="d-flex gap-10 flex-grow-1">
-                    <Card className="public-offering-logo">
-                      <Card.Body>
+                    <Card
+                      className="public-offering-logo"
+                      style={{ width: 255 }}
+                    >
+                      <Card.Body className="d-flex align-items-center justify-content-center">
                         <OfferingLogo
                           src={resource.offering_thumbnail}
                           size={50}
@@ -86,6 +91,20 @@ export const RemoteOfferingDetails: FC<any> = ({ resource }) => {
       <div className="container-xxl py-10">
         <Row className="mb-10">
           <Col md={8} sm={12}>
+            {resource.offering_type === TENANT_TYPE && resource.scope && (
+              <div className="mb-10">
+                <Card>
+                  <Card.Header>
+                    <Card.Title>
+                      <h3>{translate('Cloud components')}</h3>
+                    </Card.Title>
+                  </Card.Header>
+                  <Card.Body>
+                    <TenantDetails resource={resource} />
+                  </Card.Body>
+                </Card>
+              </div>
+            )}
             {(resource.is_usage_based || resource.is_limit_based) && (
               <Card>
                 <Card.Body>

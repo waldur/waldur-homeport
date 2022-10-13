@@ -3,8 +3,8 @@ import React, { FunctionComponent } from 'react';
 import { Link } from '@waldur/core/Link';
 import { BackendIdTip } from '@waldur/core/Tooltip';
 
-import { EndDateTooltip } from './list/EndDateTooltip';
-import { ResourceReference } from './types';
+import { EndDateTooltip } from '../list/EndDateTooltip';
+import { ResourceReference } from '../types';
 
 interface ResourceDetailsLinkProps {
   item: ResourceReference;
