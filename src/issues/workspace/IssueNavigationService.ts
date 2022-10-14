@@ -55,6 +55,12 @@ const getReportItems = (): MenuItemType[] => [
     feature: 'support.customers_list',
   },
   {
+    label: translate('Projects'),
+    icon: 'fa-bookmark',
+    state: 'support.projects',
+    key: 'support.projects',
+  },
+  {
     label: translate('Organization requests'),
     icon: 'fa-building',
     state: 'support.customers-requests',
