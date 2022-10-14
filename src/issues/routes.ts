@@ -47,6 +47,13 @@ const SupportCustomersContainer = lazyComponent(
     ),
   'SupportCustomersContainer',
 );
+const SupportProjectsList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SupportProjectsList" */ '@waldur/project/SupportProjectsList'
+    ),
+  'SupportProjectsList',
+);
 const SupportFeedback = lazyComponent(
   () =>
     import(
@@ -258,6 +265,15 @@ export const states: StateDeclaration[] = [
     data: {
       feature: 'support.customers_list',
     },
+    resolve: {
+      permission: checkPermission,
+    },
+  },
+
+  {
+    name: 'admin.projects',
+    url: 'projects/',
+    component: SupportProjectsList,
     resolve: {
       permission: checkPermission,
     },
