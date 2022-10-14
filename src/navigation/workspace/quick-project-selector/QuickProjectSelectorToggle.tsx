@@ -19,6 +19,7 @@ import {
   PROJECT_WORKSPACE,
 } from '@waldur/workspace/types';
 
+import { GuestDropdown } from './GuestDropdown';
 import { QuickProjectSelectorDropdown } from './QuickProjectSelectorDropdown';
 
 export const QuickProjectSelectorToggle: FunctionComponent = () => {
@@ -64,26 +65,38 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
                 whiteSpace: 'nowrap',
               }}
             >
-              <span
-                className={classNames(
-                  { 'text-white': isProject, 'text-gray-600': !isProject },
-                  'fs-6 fw-bold text-nowrap',
-                )}
-              >
-                {project ? project.name : translate('Select project')}
-              </span>
-              <span
-                className={classNames(
-                  { 'text-white': isCustomer, 'text-gray-600': !isCustomer },
-                  'fw-semibold d-block fs-7 mb-1',
-                )}
-              >
-                {customer
-                  ? customer.abbreviation
+              {user ? (
+                <span
+                  className={classNames(
+                    { 'text-white': isProject, 'text-gray-600': !isProject },
+                    'fs-6 fw-bold text-nowrap',
+                  )}
+                >
+                  {project ? project.name : translate('Select project')}
+                </span>
+              ) : (
+                <span className="text-gray-600 fs-6 fw-bold">
+                  {translate('Guest')}
+                </span>
+              )}
+              {user ? (
+                <span
+                  className={classNames(
+                    { 'text-white': isCustomer, 'text-gray-600': !isCustomer },
+                    'fw-semibold d-block fs-7 mb-1',
+                  )}
+                >
+                  {customer
                     ? customer.abbreviation
-                    : customer.display_name
-                  : translate('Select organization')}
-              </span>
+                      ? customer.abbreviation
+                      : customer.display_name
+                    : translate('Select organization')}
+                </span>
+              ) : (
+                <span className="text-gray-600 d-block fs-7 fw-semibold">
+                  {translate('Guest')}
+                </span>
+              )}
               {user && (
                 <div className="d-flex align-items-center text-success fs-8">
                   {projectUser
@@ -102,7 +115,7 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
           </div>
         </div>
       </div>
-      {user && <QuickProjectSelectorDropdown />}
+      {user ? <QuickProjectSelectorDropdown /> : <GuestDropdown />}
     </div>
   );
 };

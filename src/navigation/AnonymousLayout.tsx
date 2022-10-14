@@ -1,13 +1,17 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { AuthService } from '@waldur/auth/AuthService';
 import { PermissionDataProvider } from '@waldur/auth/PermissionLayout';
 import WarningBar from '@waldur/auth/WarningBar';
 import { DefaultLayoutConfig, useLayout } from '@waldur/metronic/layout/core';
 import { MasterLayout } from '@waldur/metronic/layout/MasterLayout';
 import { AppFooter } from '@waldur/navigation/AppFooter';
 import { SiteHeader } from '@waldur/navigation/header/SiteHeader';
+import { getCurrentUser } from '@waldur/user/UsersService';
+import { setCurrentUser } from '@waldur/workspace/actions';
 
 import { LayoutContext, LayoutContextInterface } from './context';
 import { CookiesConsent } from './cookies/CookiesConsent';
@@ -15,6 +19,7 @@ import { SiteSidebar } from './sidebar/SiteSidebar';
 import { Toolbar } from './Toolbar';
 
 export const AnonymousLayout: FunctionComponent = () => {
+  const dispatch = useDispatch();
   const { state } = useCurrentStateAndParams();
   const [tabs, setTabs] = useState(null);
   const [extraTabs, setExtraTabs] = useState(null);
@@ -44,6 +49,14 @@ export const AnonymousLayout: FunctionComponent = () => {
       });
     }
   }, [tabs, fullPage]);
+
+  useEffect(() => {
+    if (AuthService.isAuthenticated()) {
+      getCurrentUser({ __skipLogout__: true }).then((user) => {
+        dispatch(setCurrentUser(user));
+      });
+    }
+  }, []);
 
   return (
     <LayoutContext.Provider value={context}>
