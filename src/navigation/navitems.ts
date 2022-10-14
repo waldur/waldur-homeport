@@ -51,6 +51,10 @@ const getAdminItems = () => [
     title: translate('Organizations'),
     to: 'admin.customers',
   },
+  {
+    title: translate('Projects'),
+    to: 'admin.projects',
+  },
   { title: translate('Offerings'), to: 'marketplace-support-offerings' },
   { title: translate('Orders'), to: 'marketplace-support-orders' },
   { title: translate('Features'), to: 'admin.features' },
