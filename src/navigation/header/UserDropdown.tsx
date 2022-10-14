@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { AuthService } from '@waldur/auth/AuthService';
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
@@ -161,11 +162,13 @@ export const UserDropdownMenu: FunctionComponent = () => {
             {translate('Hello')}
           </span>
           <span className="text-dark fs-base fw-bold lh-1">
-            {user.first_name}
+            {user ? user.first_name : translate('Guest')}
           </span>
         </div>
         <div className="cursor-pointer symbol symbol-30px symbol-md-40px">
-          {user.image ? (
+          {!user ? (
+            <ImagePlaceholder width="40px" height="40px" />
+          ) : user.image ? (
             <div
               className="symbol-label"
               style={{ backgroundImage: `url(${user.image})` }}
@@ -183,7 +186,9 @@ export const UserDropdownMenu: FunctionComponent = () => {
         <div className="menu-item px-3">
           <div className="menu-content d-flex align-items-center px-3">
             <div className="symbol symbol-50px me-5">
-              {user.image ? (
+              {!user ? (
+                <ImagePlaceholder width="40px" height="40px" />
+              ) : user.image ? (
                 <div
                   className="symbol-label"
                   style={{ backgroundImage: `url(${user.image})` }}
@@ -195,43 +200,66 @@ export const UserDropdownMenu: FunctionComponent = () => {
 
             <div className="d-flex flex-column">
               <div className="fw-bolder d-flex align-items-center fs-5">
-                {user.full_name}
+                {user ? user.full_name : translate('Guest')}
               </div>
-              <Link
-                state="profile.details"
-                className="fw-bold text-muted text-hover-primary fs-7"
-              >
-                {user.email}
-              </Link>
+              {user ? (
+                <Link
+                  state="profile.details"
+                  className="fw-bold text-muted text-hover-primary fs-7"
+                >
+                  {user.email}
+                </Link>
+              ) : (
+                <span className="fw-bold text-muted fs-7">
+                  {translate('Not signed in')}
+                </span>
+              )}
             </div>
           </div>
         </div>
 
-        {items.map((item, index) => (
-          <UISrefActive class="showing" key={index}>
-            <div className="menu-item px-5" data-kt-menu-trigger="click">
-              <UISref to={item.state}>
-                <a className="menu-link px-5">{item.label}</a>
-              </UISref>
-            </div>
-          </UISrefActive>
-        ))}
+        {user ? (
+          items.map((item, index) => (
+            <UISrefActive class="showing" key={index}>
+              <div className="menu-item px-5" data-kt-menu-trigger="click">
+                <UISref to={item.state}>
+                  <a className="menu-link px-5">{item.label}</a>
+                </UISref>
+              </div>
+            </UISrefActive>
+          ))
+        ) : (
+          <div className="d-grid gap-2 px-6">
+            <Link
+              state="login"
+              className="btn btn-light btn-color-dark btn-active-color-dark"
+            >
+              {translate('Sign in')}
+            </Link>
+          </div>
+        )}
 
         <div className="separator my-2"></div>
 
         <LanguageSelector />
 
-        <div className="menu-item px-5" data-kt-menu-trigger="click">
-          <a onClick={AuthService.logout} className="menu-link px-5">
-            {translate('Log out')}
-          </a>
-        </div>
+        {user && (
+          <div className="menu-item px-5" data-kt-menu-trigger="click">
+            <a onClick={AuthService.logout} className="menu-link px-5">
+              {translate('Log out')}
+            </a>
+          </div>
+        )}
 
         <div className="separator my-2"></div>
         <DarkLightMode />
 
-        <div className="separator my-2"></div>
-        <UserToken token={user.token} />
+        {user && (
+          <>
+            <div className="separator my-2"></div>
+            <UserToken token={user.token} />
+          </>
+        )}
       </div>
     </>
   );

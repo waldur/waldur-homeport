@@ -1,6 +1,10 @@
 .quick-project-selector {
   width: 100%;
   cursor: default;
+
+  &.guest-popup {
+    height: calc(100vh - 70px);
+  }
 }
 
 @media (min-width: 1500px) {

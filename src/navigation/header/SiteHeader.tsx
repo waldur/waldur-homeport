@@ -1,11 +1,9 @@
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { AuthService } from '@waldur/auth/AuthService';
-import { translate } from '@waldur/i18n';
-
 import { getTitle } from '../title';
+
+import { UserDropdownMenu } from './UserDropdown';
 
 import './SiteHeader.scss';
 
@@ -20,26 +18,11 @@ export const SiteHeader: FunctionComponent = () => {
             {pageTitle}
           </h1>
         </div>
-        <nav className="navbar navbar-static-top white-bg mb-0">
-          <ul className="nav navbar-top-links pull-right">
-            {AuthService.isAuthenticated() ? (
-              <li className="ms-2">
-                <Button variant="danger" onClick={() => AuthService.logout()}>
-                  <i className="fa fa-sign-out" /> {translate('Log out')}
-                </Button>
-              </li>
-            ) : (
-              <li className="ms-2">
-                <Button
-                  variant="primary"
-                  onClick={() => AuthService.localLogout()}
-                >
-                  <i className="fa fa-sign-in" /> {translate('Login')}
-                </Button>
-              </li>
-            )}
-          </ul>
-        </nav>
+        <div className="d-flex align-items-stretch flex-shrink-0">
+          <div className="d-flex align-items-center ms-1 ms-lg-3">
+            <UserDropdownMenu />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -3509,6 +3509,8 @@ msgid "Guaranteed time of volume snapshot retention. If null - keep forever."
 msgstr ""
 
 #: src/i18n/constants.ts
+#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorToggle.tsx
 msgid "Guest"
 msgstr ""
 
@@ -4373,7 +4375,6 @@ msgid "Log in"
 msgstr ""
 
 #: src/navigation/header/LogoutLink.tsx
-#: src/navigation/header/SiteHeader.tsx
 #: src/navigation/header/UserDropdown.tsx
 msgid "Log out"
 msgstr ""
@@ -4386,7 +4387,7 @@ msgstr ""
 #: src/auth/SigninButton.tsx
 #: src/auth/SigninForm.tsx
 #: src/auth/saml2/AuthSaml2Dialog.tsx
-#: src/navigation/header/SiteHeader.tsx
+#: src/navigation/sidebar/SiteSidebar.tsx
 msgid "Login"
 msgstr ""
 
@@ -5139,8 +5140,16 @@ msgstr ""
 msgid "Not assigned"
 msgstr ""
 
+#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
+msgid "Not logged in"
+msgstr ""
+
 #: src/customer/list/AccountingRunningField.tsx
 msgid "Not running accounting"
+msgstr ""
+
+#: src/navigation/header/UserDropdown.tsx
+msgid "Not signed in"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -5619,6 +5628,7 @@ msgstr ""
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/sidebar/SiteSidebar.tsx
+#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
 #: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -6577,6 +6587,7 @@ msgstr ""
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/sidebar/SiteSidebar.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
+#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
 #: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -8106,6 +8117,7 @@ msgid "Search offering..."
 msgstr ""
 
 #: src/navigation/header/SearchToggle.tsx
+#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
 #: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
 msgid "Search..."
 msgstr ""
@@ -8809,6 +8821,8 @@ msgid "Shutdown"
 msgstr ""
 
 #: src/auth/valimo/AuthValimoDialog.tsx
+#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
 msgid "Sign in"
 msgstr ""
 
@@ -11906,6 +11920,10 @@ msgstr ""
 
 #: src/invitations/InvitationButtons.tsx
 msgid "Yes, use invitation email"
+msgstr ""
+
+#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
+msgid "You are accessing as a guest user. To manage organizations or projects, please sign in."
 msgstr ""
 
 #: src/navigation/workspace/EmptyProjectPlaceholder.tsx
