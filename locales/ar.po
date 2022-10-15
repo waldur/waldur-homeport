@@ -34,7 +34,9 @@ msgstr "لوحة القيادة"
 
 #: src/customer/workspace/utils.ts
 #: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Projects"
 msgstr "مشاريع"

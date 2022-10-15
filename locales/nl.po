@@ -205,6 +205,7 @@ msgstr "Actie is toegepast."
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -1641,6 +1642,7 @@ msgstr "Maak uw eerste project"
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -1960,6 +1962,7 @@ msgstr "Implementeer Longhorn blokopslag nadat cluster is geïmplementeerd"
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -2353,6 +2356,7 @@ msgstr "Einde"
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectUpdateForm.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 msgid "End date"
 msgstr "Einddatum"
 
@@ -2409,6 +2413,7 @@ msgstr "Geschatte prijs per maand"
 #: src/customer/list/CustomerList.tsx
 #: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 msgid "Estimated cost"
 msgstr "Geschatte kosten"
 
@@ -4033,6 +4038,7 @@ msgstr "N/A"
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -4712,6 +4718,7 @@ msgstr "Bestellingen"
 #: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/SelectAffiliationDialog.tsx
@@ -5634,7 +5641,9 @@ msgstr "Project {project_name} is verwijderd."
 
 #: src/customer/workspace/utils.ts
 #: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Projects"
 msgstr "Projecten"
@@ -10124,6 +10133,7 @@ msgid "project"
 msgstr "project"
 
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 msgid "projects"

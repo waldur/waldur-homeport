@@ -156,6 +156,7 @@ msgstr "نوع حسابداری"
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -1275,6 +1276,7 @@ msgstr "اولین پروژه را ایجاد کنید"
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -1544,6 +1546,7 @@ msgstr "حذف کردن سرور PostgreSQLباعث خواهدشد تمام پا
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -1830,6 +1833,7 @@ msgstr "پایان"
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectUpdateForm.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 msgid "End date"
 msgstr "تاریخ پایان"
 
@@ -1866,6 +1870,7 @@ msgstr "قیمت تخمین زده شده برای هر ماه"
 #: src/customer/list/CustomerList.tsx
 #: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 msgid "Estimated cost"
 msgstr "هزینه تخمین زده شده"
 
@@ -2968,6 +2973,7 @@ msgstr "سرویس های من"
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -3402,6 +3408,7 @@ msgstr "سفارش ها"
 #: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/SelectAffiliationDialog.tsx
