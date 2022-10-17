@@ -1,153 +1,21 @@
-import { UISref, UISrefActive } from '@uirouter/react';
-import classNames from 'classnames';
-import copy from 'copy-to-clipboard';
-import { FunctionComponent, useCallback, useMemo } from 'react';
-import { Button, FormControl, InputGroup } from 'react-bootstrap';
+import { FunctionComponent } from 'react';
 import Gravatar from 'react-gravatar';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { AuthService } from '@waldur/auth/AuthService';
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
-import { useLanguageSelector } from '@waldur/i18n/useLanguageSelector';
-import { showSuccess } from '@waldur/store/notify';
-import { RootState } from '@waldur/store/reducers';
-import { getPrivateUserTabs } from '@waldur/user/constants';
 import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails } from '@waldur/workspace/types';
 
-import { updateThemeMode } from './store';
-
-const getSidebarItems = () =>
-  getPrivateUserTabs().filter((item) => item && isFeatureVisible(item.feature));
-
-const LanguageCountry = {
-  en: 'us',
-  et: 'ee',
-};
-
-const LanguageSelector: FunctionComponent = () => {
-  const { currentLanguage, languageChoices, setLanguage } =
-    useLanguageSelector();
-
-  return (
-    <>
-      <div
-        className="menu-item px-5"
-        data-kt-menu-trigger="hover"
-        data-kt-menu-placement="left-start"
-        data-kt-menu-flip="bottom"
-      >
-        <a href="#" className="menu-link px-5">
-          <span className="menu-title position-relative">
-            {translate('Language')}
-            <span className="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
-              {currentLanguage.label}{' '}
-              <i className="f16">
-                <i
-                  className={`flag ${LanguageCountry[currentLanguage.code]}`}
-                ></i>
-              </i>
-            </span>
-          </span>
-        </a>
-
-        <div className="menu-sub menu-sub-dropdown w-175px py-4">
-          {languageChoices.map((language) => (
-            <div
-              className="menu-item px-3"
-              key={language.code}
-              data-kt-menu-trigger="click"
-              onClick={() => {
-                setLanguage(language);
-              }}
-            >
-              <a
-                className={classNames('menu-link d-flex px-5', {
-                  active: language.code === currentLanguage.code,
-                })}
-              >
-                <span className="symbol symbol-20px me-4">
-                  <i className="f16">
-                    <i className={`flag ${LanguageCountry[language.code]}`}></i>
-                  </i>
-                </span>
-                {language.label}
-              </a>
-            </div>
-          ))}
-        </div>
-      </div>
-    </>
-  );
-};
-
-export const DarkLightMode: FunctionComponent = () => {
-  const { theme } = useSelector((state: RootState) => state.theme);
-  const dispatch = useDispatch();
-  const handleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('themeMode', newTheme);
-    dispatch(updateThemeMode(newTheme));
-  };
-
-  return (
-    <div className="menu-item px-5" data-kt-menu-trigger="click">
-      <div className="px-5 menu-link">
-        <AwesomeCheckbox
-          label={translate('Dark theme')}
-          value={theme === 'dark'}
-          onChange={handleTheme}
-        />
-      </div>
-    </div>
-  );
-};
-
-const UserToken = ({ token }) => {
-  const dispatch = useDispatch();
-
-  const onClick = useCallback(() => {
-    copy(token);
-    dispatch(showSuccess(translate('Token has been copied')));
-  }, [dispatch, token]);
-
-  return (
-    <div className="menu-item px-5" data-kt-menu-trigger="click">
-      <div className="px-5 menu-link">
-        <span className="menu-title me-2 text-nowrap">
-          {translate('API token')}
-        </span>
-        <InputGroup>
-          <FormControl
-            value={token}
-            readOnly={true}
-            type="password"
-            className="form-control-solid"
-            size="sm"
-            placeholder={translate('Token')}
-          />
-          <Button
-            variant="primary"
-            size="sm"
-            className="px-3"
-            onClick={onClick}
-          >
-            <i className="fa fa-copy" />
-            {translate('Copy')}
-          </Button>
-        </InputGroup>
-      </div>
-    </div>
-  );
-};
+import { LanguageSelectorDropdown } from './LanguageSelectorDropdown';
+import { ThemeSwitcher } from './ThemeSwitcher';
+import { UserDropdownMenuItems } from './UserDropdownMenuItems';
+import { UserToken } from './UserToken';
 
 export const UserDropdownMenu: FunctionComponent = () => {
   const user = useSelector(getUser) as UserDetails;
-  const items = useMemo(getSidebarItems, []);
   return (
     <>
       <div
@@ -219,15 +87,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
         </div>
 
         {user ? (
-          items.map((item, index) => (
-            <UISrefActive class="showing" key={index}>
-              <div className="menu-item px-5" data-kt-menu-trigger="click">
-                <UISref to={item.state}>
-                  <a className="menu-link px-5">{item.label}</a>
-                </UISref>
-              </div>
-            </UISrefActive>
-          ))
+          <UserDropdownMenuItems />
         ) : (
           <div className="d-grid gap-2 px-6">
             <Link
@@ -241,7 +101,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
 
         <div className="separator my-2"></div>
 
-        <LanguageSelector />
+        <LanguageSelectorDropdown />
 
         {user && (
           <div className="menu-item px-5" data-kt-menu-trigger="click">
@@ -252,7 +112,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
         )}
 
         <div className="separator my-2"></div>
-        <DarkLightMode />
+        <ThemeSwitcher />
 
         {user && (
           <>

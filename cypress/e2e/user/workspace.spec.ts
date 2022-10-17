@@ -22,10 +22,11 @@ describe('User workspace', function () {
   });
 
   it('Should go to "SSH keys" list', () => {
+    cy.get('a').contains('Credentials').trigger('mouseover', {force: true});
     cy
       .get('a')
       .contains('SSH Keys')
-      .click();
+      .click({force: true});
     cy
       .title()
       .should('contain', 'SSH keys');
