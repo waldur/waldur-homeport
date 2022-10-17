@@ -26,7 +26,7 @@ export const TabsList: FunctionComponent = () => {
               </a>
             </UISref>
           </UISrefActive>
-        ) : (
+        ) : parentTab.children ? (
           <div
             key={parentIndex}
             data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
@@ -51,7 +51,7 @@ export const TabsList: FunctionComponent = () => {
               ))}
             </div>
           </div>
-        ),
+        ) : null,
       )}
     </>
   );

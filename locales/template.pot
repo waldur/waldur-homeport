@@ -61,7 +61,7 @@ msgstr ""
 msgid "API secret code:"
 msgstr ""
 
-#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/header/UserToken.tsx
 #: src/user/api-key/UserEditTokenContainer.tsx
 msgid "API token"
 msgstr ""
@@ -1728,7 +1728,7 @@ msgstr ""
 msgid "Control plane"
 msgstr ""
 
-#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/header/UserToken.tsx
 msgid "Copy"
 msgstr ""
 
@@ -2014,6 +2014,7 @@ msgid "Creating snapshot schedule"
 msgstr ""
 
 #: src/marketplace/offerings/actions/tabs.ts
+#: src/user/constants.ts
 msgid "Credentials"
 msgstr ""
 
@@ -2152,7 +2153,7 @@ msgstr ""
 msgid "Daily available booking time range"
 msgstr ""
 
-#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/header/ThemeSwitcher.tsx
 msgid "Dark theme"
 msgstr ""
 
@@ -4241,7 +4242,7 @@ msgstr ""
 msgid "Labels"
 msgstr ""
 
-#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/header/LanguageSelectorDropdown.tsx
 msgid "Language"
 msgstr ""
 
@@ -9844,11 +9845,11 @@ msgid "Today"
 msgstr ""
 
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
-#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/header/UserToken.tsx
 msgid "Token"
 msgstr ""
 
-#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/header/UserToken.tsx
 msgid "Token has been copied"
 msgstr ""
 
