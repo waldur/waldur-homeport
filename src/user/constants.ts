@@ -42,7 +42,7 @@ export const getUserTabs = () =>
           title: translate('Remote accounts'),
           to: 'profile.remote-accounts',
         },
-      ],
+      ].filter((item) => item),
     },
     {
       title: translate('Notifications'),
@@ -59,9 +59,7 @@ export const getUserTabs = () =>
       to: 'profile.permission-requests',
       feature: 'invitations.show_group_invitations',
     },
-  ]
-    .filter((item) => item && isFeatureVisible(item.feature))
-    .filter((item) => item);
+  ].filter((item) => item && isFeatureVisible(item.feature));
 
 export const USER_PROFILE_COMPLETION_FIELDS: Array<keyof UserDetails> = [
   'first_name',
