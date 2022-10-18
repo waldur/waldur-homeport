@@ -61,7 +61,7 @@ const PureShoppingCartItemUpdate: FunctionComponent<PureShoppingCartItemUpdatePr
 
 async function loadData(itemId) {
   const cartItem = await api.getCartItem(itemId);
-  const offering = await api.getOffering(cartItem.offering_uuid);
+  const offering = await api.getCartItemOffering(itemId);
   const plugins = await api.getPlugins();
   const limits = plugins.find(
     (plugin) => plugin.offering_type === offering.type,

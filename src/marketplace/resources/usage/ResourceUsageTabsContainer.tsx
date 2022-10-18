@@ -17,8 +17,7 @@ interface ResourceUsageTabsContainerProps {
 export const ResourceUsageTabsContainer: FunctionComponent<ResourceUsageTabsContainerProps> =
   ({ resource }) => {
     const { loading, error, value } = useAsync(
-      () =>
-        getComponentsAndUsages(resource.offering_uuid, resource.resource_uuid),
+      () => getComponentsAndUsages(resource.resource_uuid),
       [resource],
     );
     return loading ? (

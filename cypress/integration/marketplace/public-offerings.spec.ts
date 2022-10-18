@@ -1,4 +1,4 @@
-describe('Public offerings page', () => {
+xdescribe('Public offerings page', () => {
 
   beforeEach(() => {
     cy.mockConfigs()

@@ -37,9 +37,9 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
               />
               <ResourceRefreshButton refreshResource={refreshResource} />
               <OpenStackInstanceTenantButton resource={resource} />
-              {resource.marketplace_offering_uuid && (
+              {resource.marketplace_resource_uuid && (
                 <OfferingDetailsButton
-                  offering={resource.marketplace_offering_uuid}
+                  resource={resource.marketplace_resource_uuid}
                 />
               )}
               {resource.is_usage_based && (

@@ -10,7 +10,7 @@ import { useTitle } from '@waldur/navigation/title';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
-import { getOffering, getCategory, getPlugins } from '../common/api';
+import { getPublicOffering, getCategory, getPlugins } from '../common/api';
 
 import { OfferingDetails } from './OfferingDetails';
 import { getTabs } from './OfferingTabs';
@@ -18,12 +18,12 @@ import { getBreadcrumbs } from './utils';
 
 async function loadData(offering_uuid: string, customer: Customer) {
   const offering = customer?.uuid
-    ? await getOffering(offering_uuid, {
+    ? await getPublicOffering(offering_uuid, {
         params: {
           allowed_customer_uuid: customer.uuid,
         },
       })
-    : await getOffering(offering_uuid);
+    : await getPublicOffering(offering_uuid);
   const category = await getCategory(offering.category_uuid);
   const sections = category.sections;
   const tabs = getTabs({ offering, sections });

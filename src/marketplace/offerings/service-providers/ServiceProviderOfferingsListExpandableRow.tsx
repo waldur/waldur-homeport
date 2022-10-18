@@ -4,7 +4,7 @@ import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { getCategory, getOffering } from '@waldur/marketplace/common/api';
+import { getCategory, getPublicOffering } from '@waldur/marketplace/common/api';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
 import { Offering } from '@waldur/marketplace/types';
@@ -18,7 +18,7 @@ export const ServiceProviderOfferingsListExpandableRow: FunctionComponent<{
     error,
     value: tabs,
   } = useAsync(async () => {
-    const offering = await getOffering(row.uuid, ANONYMOUS_CONFIG);
+    const offering = await getPublicOffering(row.uuid, ANONYMOUS_CONFIG);
     const category = await getCategory(
       offering.category_uuid,
       ANONYMOUS_CONFIG,

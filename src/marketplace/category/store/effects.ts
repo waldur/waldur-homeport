@@ -1,6 +1,9 @@
 import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 
-import { getCategory, getAllOfferings } from '@waldur/marketplace/common/api';
+import {
+  getCategory,
+  getAllPublicOfferings,
+} from '@waldur/marketplace/common/api';
 import { router } from '@waldur/router';
 
 import * as actions from './actions';
@@ -22,7 +25,7 @@ function* loadOfferings() {
   const categoryId = router.globals.params.category_uuid;
 
   try {
-    const offerings = yield call(getAllOfferings, {
+    const offerings = yield call(getAllPublicOfferings, {
       params: {
         ...params,
         category_uuid: categoryId,
