@@ -14,9 +14,9 @@ const OfferingDetailsDialog = lazyComponent(
   'OfferingDetailsDialog',
 );
 
-const openOfferingDetailsDialog = (offeringUuid: string) =>
+const openOfferingDetailsDialog = (resource: string) =>
   openModalDialog(OfferingDetailsDialog, {
-    resolve: { offeringUuid },
+    resolve: { resource },
     size: 'lg',
   });
 
@@ -36,7 +36,7 @@ const PureOfferingDetailsButton: FunctionComponent<OfferingDetailsButton> = (
 );
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  openDialog: () => dispatch(openOfferingDetailsDialog(ownProps.offering)),
+  openDialog: () => dispatch(openOfferingDetailsDialog(ownProps.resource)),
 });
 
 export const OfferingDetailsButton = connect(

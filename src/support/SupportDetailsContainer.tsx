@@ -7,8 +7,8 @@ import { translate } from '@waldur/i18n';
 import { getIssue } from '@waldur/issues/api';
 import {
   getResource,
-  getOffering,
   getOrderItemList,
+  getResourceOffering,
 } from '@waldur/marketplace/common/api';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
@@ -47,7 +47,7 @@ const getBreadcrumbs = (resource: Resource): BreadcrumbItem[] => {
 
 const loadData = async (resource_uuid: string) => {
   const resource = await getResource(resource_uuid);
-  const offering = await getOffering(resource.offering_uuid);
+  const offering = await getResourceOffering(resource_uuid);
   const orderItems = await getOrderItemList({
     type: 'Create',
     resource_uuid: resource.uuid,

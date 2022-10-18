@@ -4,7 +4,10 @@ import { useAsync } from 'react-use';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { getResource, getOffering } from '@waldur/marketplace/common/api';
+import {
+  getResource,
+  getResourceOffering,
+} from '@waldur/marketplace/common/api';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -19,7 +22,7 @@ interface PlanDetailsDialogProps {
 
 async function loadData(resourceId: string) {
   const resource = await getResource(resourceId);
-  const offering = await getOffering(resource.offering_uuid);
+  const offering = await getResourceOffering(resourceId);
   const plan =
     resource.plan && offering.plans.find((item) => item.url === resource.plan);
   const limitParser = getFormLimitParser(offering.type);

@@ -51,6 +51,7 @@ export interface Template {
 export interface Cluster {
   name: string;
   uuid: string;
+  marketplace_resource_uuid: string;
   marketplace_category_uuid: string;
   marketplace_offering_uuid: string;
   service_settings: string;

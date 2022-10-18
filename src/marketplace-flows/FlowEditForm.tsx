@@ -8,7 +8,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartUpdateButton } from '@waldur/marketplace/cart/ShoppingCartUpdateButton';
 import { flattenAttributes } from '@waldur/marketplace/cart/store/effects';
-import { getOffering, getPlugins } from '@waldur/marketplace/common/api';
+import { getFlowOffering, getPlugins } from '@waldur/marketplace/common/api';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import {
@@ -26,9 +26,7 @@ import { getFlow, updateFlow } from './api';
 
 async function loadData(itemId) {
   const flow = await getFlow(itemId);
-  const offering = await getOffering(
-    flow.resource_create_request.offering_uuid,
-  );
+  const offering = await getFlowOffering(flow.uuid);
   const plugins = await getPlugins();
   const limits = plugins.find(
     (plugin) => plugin.offering_type === offering.type,

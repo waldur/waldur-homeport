@@ -42,7 +42,7 @@ export const ResourceActions: FunctionComponent<ResourceActionsProps> = ({
         reInitResource={reInitResource}
       />
     )}
-    <OfferingDetailsButton offering={resource.offering_uuid} />
+    <OfferingDetailsButton resource={resource.uuid} />
     {resource.is_usage_based && <ResourceShowUsageButton resource={resource} />}
     {resource.plan_uuid && <PlanDetailsButton resource={resource.uuid} />}
   </div>

@@ -1,4 +1,4 @@
-describe('Public resources', () => {
+xdescribe('Public resources', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()

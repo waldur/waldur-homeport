@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 import { formatDateTime, parseDate } from '@waldur/core/dateUtils';
 import {
   getComponentUsages,
-  getOffering,
+  getResourceOffering,
   getResourcePlanPeriods,
 } from '@waldur/marketplace/common/api';
 import { SLURM_PLUGIN } from '@waldur/slurm/constants';
@@ -30,7 +30,7 @@ export const getPeriodLabel = (
 export const getUsageComponents = async (params: UsageReportContext) => {
   let components = null;
   if (params.offering_uuid) {
-    const offering = await getOffering(params.offering_uuid);
+    const offering = await getResourceOffering(params.resource_uuid);
     components = await getUsageBasedOfferingComponents(offering);
   }
   const periods = await getResourcePlanPeriods(params.resource_uuid);
@@ -59,14 +59,11 @@ const getUsageBasedOfferingComponents = (offering) => {
   return components.sort((a, b) => a.name.localeCompare(b.name));
 };
 
-export const getComponentsAndUsages = async (
-  offering_uuid: string,
-  resource_uuid: string,
-) => {
-  if (!offering_uuid || !resource_uuid) {
+export const getComponentsAndUsages = async (resource_uuid: string) => {
+  if (!resource_uuid) {
     return { components: null, usages: null };
   }
-  const offering = await getOffering(offering_uuid);
+  const offering = await getResourceOffering(resource_uuid);
   const components = await getUsageBasedOfferingComponents(offering);
   const date_after = DateTime.now()
     .startOf('month')
