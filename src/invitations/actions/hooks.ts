@@ -113,7 +113,7 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
         }
         await InvitationService.createInvitation(payload);
         dispatch(closeModalDialog());
-        router.stateService.go('organization.invitations');
+        router.stateService.go('organization-invitations');
         dispatch(showSuccess('Invitation has been created.'));
         if (context.refreshList) {
           context.refreshList();

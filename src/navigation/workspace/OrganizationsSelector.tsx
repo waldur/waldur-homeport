@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
-import { useState, useCallback, FunctionComponent, useMemo } from 'react';
+import { useState, useCallback, FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
@@ -8,7 +8,7 @@ import { translate } from '@waldur/i18n';
 import { getUser } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
-import { getProviderItems } from '../navitems';
+import { isChildOf } from '../useTabs';
 
 import { getCustomersPage } from './api';
 import { OrganizationListItem } from './OrganizationListItem';
@@ -33,13 +33,7 @@ export const OrganizationsSelector: FunctionComponent<{
   const [filter, setFilter] = useState('');
   const [showOptions, setShowOptions] = useState(false);
   const { state } = useCurrentStateAndParams();
-  const isServiceProvider = useMemo(
-    () =>
-      getProviderItems()
-        .map((item) => item.to)
-        .includes(state.name),
-    [state.name],
-  );
+  const isServiceProvider = isChildOf('marketplace-provider', state);
   const getPage = useCallback(
     (page) =>
       getCustomersPage(

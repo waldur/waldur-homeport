@@ -1,13 +1,14 @@
+import { UIView } from '@uirouter/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { translate } from '@waldur/i18n';
+import { hasSupport } from '@waldur/issues/hooks';
+import store from '@waldur/store/store';
+import { getCustomer, isStaffOrSupport } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
-import { AdminContainer } from './workspace/AdminContainer';
-import {
-  CustomerContainer,
-  fetchCustomer,
-} from './workspace/CustomerWorkspace';
-import { ReportingContainer } from './workspace/ReportingContainer';
+import { fetchCustomer } from './workspace/CustomerWorkspace';
 
 const ProjectsList = lazyComponent(
   () =>
@@ -49,12 +50,12 @@ const CustomerManage = lazyComponent(
     import(/* webpackChunkName: "CustomerManage" */ './details/CustomerManage'),
   'CustomerManage',
 );
-const CustomerPaymentProfiles = lazyComponent(
+const PaymentProfilesPanel = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "CustomerPaymentProfiles" */ './details/CustomerPaymentProfiles'
+      /* webpackChunkName: "PaymentProfilesPanel" */ './payment-profiles/PaymentProfilesPanel'
     ),
-  'CustomerPaymentProfiles',
+  'PaymentProfilesPanel',
 );
 const CustomerPayments = lazyComponent(
   () =>
@@ -107,12 +108,12 @@ const OfferingPermissionsList = lazyComponent(
   'OfferingPermissionsList',
 );
 
-const CustomerEventsView = lazyComponent(
+const CustomerEventsList = lazyComponent(
   () =>
     import(
       /* webpackChunkName: "CustomerEventsList" */ './workspace/CustomerEventsList'
     ),
-  'CustomerEventsView',
+  'CustomerEventsList',
 );
 const CustomerIssuesList = lazyComponent(
   () =>
@@ -130,9 +131,10 @@ export const states: StateDeclaration[] = [
     data: {
       auth: true,
       workspace: ORGANIZATION_WORKSPACE,
+      title: () => getCustomer(store.getState()).name,
     },
     parent: 'layout',
-    component: CustomerContainer,
+    component: UIView,
     resolve: [
       {
         token: 'fetchCustomer',
@@ -147,7 +149,11 @@ export const states: StateDeclaration[] = [
     url: '/reporting/',
     abstract: true,
     parent: 'layout',
-    component: ReportingContainer,
+    component: UIView,
+    data: {
+      title: () => translate('Reporting'),
+      permissions: [isStaffOrSupport],
+    },
   },
 
   {
@@ -155,97 +161,194 @@ export const states: StateDeclaration[] = [
     url: '/administration/',
     abstract: true,
     parent: 'layout',
-    component: AdminContainer,
+    component: UIView,
+    data: {
+      title: () => translate('Administration'),
+      permissions: [isStaffOrSupport],
+    },
+  },
+
+  {
+    name: 'organization-requests',
+    abstract: true,
+    parent: 'organization',
+    component: UIView,
+    data: {
+      breadcrumb: () => translate('Requests'),
+    },
+  },
+
+  {
+    name: 'organization-team',
+    abstract: true,
+    parent: 'organization',
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Team'),
+    },
   },
 
   {
     name: 'organization.dashboard',
     url: 'dashboard/',
     component: CustomerDashboard,
+    data: {
+      breadcrumb: () => translate('Dashboard'),
+      priority: 100,
+    },
   },
 
   {
-    name: 'organization.details',
+    name: 'organization.events',
     url: 'events/',
-    component: CustomerEventsView,
+    component: CustomerEventsList,
+    data: {
+      breadcrumb: () => translate('Audit logs'),
+      skipBreadcrumb: true,
+    },
   },
 
   {
     name: 'organization.issues',
     url: 'issues/',
     component: CustomerIssuesList,
+    data: {
+      breadcrumb: () => translate('Issues'),
+      skipBreadcrumb: true,
+      permissions: [hasSupport],
+    },
   },
 
   {
     name: 'organization.projects',
     url: 'projects/',
     component: ProjectsList,
+    data: {
+      breadcrumb: () => translate('Projects'),
+      skipBreadcrumb: true,
+    },
   },
 
   {
-    name: 'organization.project-requests',
+    name: 'organization-project-requests',
     url: 'project-requests/',
     component: ProjectCreateRequestsList,
+    parent: 'organization-requests',
+    data: {
+      breadcrumb: () => translate('Project creation requests'),
+    },
   },
 
   {
-    name: 'organization.resource-requests',
-    url: 'project-requests/',
+    name: 'organization-resource-requests',
+    url: 'resource-requests/',
     component: ResourceCreateRequestsList,
+    parent: 'organization-requests',
+    data: {
+      breadcrumb: () => translate('Resource creation requests'),
+    },
   },
 
   {
-    name: 'organization.users',
+    name: 'organization-users',
     url: 'users/',
     component: CustomerUsersTab,
+    parent: 'organization-team',
+    data: {
+      breadcrumb: () => translate('Users'),
+    },
   },
 
   {
-    name: 'organization.invitations',
+    name: 'organization-invitations',
     url: 'invitations/',
     component: InvitationsList,
+    parent: 'organization-team',
+    data: {
+      breadcrumb: () => translate('Invitations'),
+    },
   },
 
   {
-    name: 'organization.group-invitations',
+    name: 'organization-group-invitations',
     url: 'group-invitations/',
     component: GroupInvitationsList,
+    parent: 'organization-team',
+    data: {
+      breadcrumb: () => translate('Group invitations'),
+    },
   },
 
   {
-    name: 'organization.permissions-log',
+    name: 'organization-permissions-log',
     url: 'permissions-log/',
     component: CustomerPermissionsLogList,
+    parent: 'organization-team',
+    data: {
+      breadcrumb: () => translate('Permission log'),
+    },
   },
 
   {
-    name: 'organization.permissions-reviews',
+    name: 'organization-permissions-reviews',
     url: 'permissions-reviews/',
     component: CustomerPermissionsReviewList,
+    parent: 'organization-team',
+    data: {
+      breadcrumb: () => translate('Reviews'),
+    },
   },
 
   {
-    name: 'organization.offering-permissions',
+    name: 'organization-offering-permissions',
     url: 'offering-permissions/',
     component: OfferingPermissionsList,
+    parent: 'organization-team',
+    data: {
+      breadcrumb: () => translate('Offering permissions'),
+    },
   },
 
   {
     name: 'organization.manage',
     url: 'manage/',
     component: CustomerManage,
+    data: {
+      breadcrumb: () => translate('Settings'),
+      skipBreadcrumb: true,
+    },
   },
 
   {
-    name: 'organization.payment-profiles',
+    name: 'organization-payments',
+    abstract: true,
+    parent: 'organization',
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Payments'),
+    },
+  },
+
+  {
+    name: 'organization-payment-profiles',
     url: 'payment-profiles/',
-    component: CustomerPaymentProfiles,
+    parent: 'organization-payments',
+    component: PaymentProfilesPanel,
+    data: {
+      breadcrumb: () => translate('Payment profiles'),
+    },
   },
 
   {
-    name: 'organization.payments',
+    name: 'organization-payment-list',
     url: 'payments/',
+    parent: 'organization-payments',
     component: CustomerPayments,
+    data: {
+      breadcrumb: () => translate('Payments list'),
+    },
   },
 
   {

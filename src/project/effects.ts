@@ -32,7 +32,7 @@ export function* handleCreateProject(action) {
       customer,
     });
     const project = response.data;
-    yield put(triggerTransition('project.details', { uuid: project.uuid }));
+    yield put(triggerTransition('project.dashboard', { uuid: project.uuid }));
     yield put(createProject.success());
     yield put(showSuccess(successMessage));
     yield put(fetchListStart(PROJECTS_LIST));

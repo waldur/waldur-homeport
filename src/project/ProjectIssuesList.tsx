@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { Panel } from '@waldur/core/Panel';
-import { translate } from '@waldur/i18n';
-import { useSupport } from '@waldur/issues/hooks';
 import { IssuesList } from '@waldur/issues/list/IssuesList';
-import { useTitle } from '@waldur/navigation/title';
 import { getProject } from '@waldur/workspace/selectors';
 
 const mapStateToProps = createSelector(getProject, (project) => ({
@@ -17,16 +14,12 @@ const mapStateToProps = createSelector(getProject, (project) => ({
 
 const ProjectIssuesListComponent = connect(mapStateToProps)(IssuesList);
 
-export const ProjectIssuesList: FunctionComponent = () => {
-  useTitle(translate('Issues'));
-  useSupport();
-  return (
-    <Row>
-      <Col md={12}>
-        <Panel>
-          <ProjectIssuesListComponent hiddenColumns={['customer']} />
-        </Panel>
-      </Col>
-    </Row>
-  );
-};
+export const ProjectIssuesList: FunctionComponent = () => (
+  <Row>
+    <Col md={12}>
+      <Panel>
+        <ProjectIssuesListComponent hiddenColumns={['customer']} />
+      </Panel>
+    </Col>
+  </Row>
+);

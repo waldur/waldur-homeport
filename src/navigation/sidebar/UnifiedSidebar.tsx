@@ -1,11 +1,10 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
-import { useEffect, useMemo } from 'react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useEffect } from 'react';
 
-import { getCustomerItems } from '@waldur/customer/utils';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
 import { DocsLink } from '@waldur/navigation/header/DocsLink';
 
-import { getProjectItems, getProviderItems } from '../navitems';
+import { isDescendantOf } from '../useTabs';
 
 import { AdminMenu } from './AdminMenu';
 import { ManagementMenu } from './ManagementMenu';
@@ -16,23 +15,8 @@ import { Sidebar } from './Sidebar';
 import { SupportMenu } from './SupportMenu';
 
 export const UnifiedSidebar = () => {
+  const router = useRouter();
   const { state } = useCurrentStateAndParams();
-  const managementItems = useMemo(() => {
-    const menuItems = [
-      ...getCustomerItems(),
-      ...getProjectItems(),
-      ...getProviderItems(),
-    ];
-    const states = [];
-    for (const item of menuItems) {
-      states.push(item.to);
-      // @ts-ignore
-      for (const child of item.children || []) {
-        states.push(child.to);
-      }
-    }
-    return states;
-  }, []);
   useEffect(() => {
     MenuComponent.reinitialization();
     const menuElement = document.querySelector('#kt_aside_menu');
@@ -43,15 +27,23 @@ export const UnifiedSidebar = () => {
     if (!menu) {
       return;
     }
-    if (state.name === 'marketplace-project-resources') {
+    if (
+      [
+        'marketplace-project-resources-all',
+        'marketplace-project-resources',
+      ].includes(state.name)
+    ) {
       const item = document.querySelector('#resources-menu');
       menu.show(item);
-    }
-    if (managementItems.includes(state.name)) {
+    } else if (
+      isDescendantOf('organization', state) ||
+      isDescendantOf('project', state) ||
+      isDescendantOf('marketplace-provider', state)
+    ) {
       const item = document.querySelector('#management-menu');
       menu.show(item);
     }
-  }, [state, managementItems]);
+  }, [router, state]);
   return (
     <Sidebar>
       <MarketplaceTrigger />

@@ -62,7 +62,7 @@ export const getAffectedUserContext = (event: AffectedUserContext) => ({
 
 export const getCustomerContext = (event: CustomerContext) => ({
   customer_link: (
-    <UISref to="organization.details" params={{ uuid: event.customer_uuid }}>
+    <UISref to="organization.events" params={{ uuid: event.customer_uuid }}>
       <a>{event.customer_name}</a>
     </UISref>
   ),
@@ -70,7 +70,7 @@ export const getCustomerContext = (event: CustomerContext) => ({
 
 export const getProjectContext = (event: ProjectContext) => ({
   project_link: (
-    <UISref to="project.details" params={{ uuid: event.project_uuid }}>
+    <UISref to="project.dashboard" params={{ uuid: event.project_uuid }}>
       <a>{event.project_name}</a>
     </UISref>
   ),

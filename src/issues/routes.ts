@@ -1,9 +1,12 @@
+import { UIView } from '@uirouter/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { checkPermission } from '@waldur/utils';
+import { translate } from '@waldur/i18n';
+import { isStaffOrSupport } from '@waldur/workspace/selectors';
 import { SUPPORT_WORKSPACE } from '@waldur/workspace/types';
 
-import { SupportContainer } from './workspace/SupportWorkspace';
+import { hasSupport } from './hooks';
 
 const CustomersDivisionsContainer = lazyComponent(
   () =>
@@ -19,12 +22,12 @@ const CustomerListContainer = lazyComponent(
     ),
   'CustomerListContainer',
 );
-const PriceListContainer = lazyComponent(
+const PriceList = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "PriceListContainer" */ '@waldur/marketplace/offerings/PriceListContainer'
+      /* webpackChunkName: "PriceList" */ '@waldur/marketplace/offerings/PriceList'
     ),
-  'PriceListContainer',
+  'PriceList',
 );
 const CustomerRequestContainer = lazyComponent(
   () =>
@@ -114,23 +117,8 @@ const BroadcastList = lazyComponent(
     ),
   'BroadcastList',
 );
-const IssuesDashboard = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "IssuesDashboard" */ './workspace/IssuesDashboard'
-    ),
-  'IssuesDashboard',
-);
-const IssuesHelpdesk = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "IssuesHelpdesk" */ './workspace/IssuesHelpdesk'
-    ),
-  'IssuesHelpdesk',
-);
 const FeaturesList = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "FeaturesList" */ './workspace/FeaturesList'),
+  () => import(/* webpackChunkName: "FeaturesList" */ './FeaturesList'),
   'FeaturesList',
 );
 
@@ -139,24 +127,14 @@ export const states: StateDeclaration[] = [
     name: 'support',
     url: '/support/',
     parent: 'layout',
-    component: SupportContainer,
+    component: UIView,
     abstract: true,
     data: {
       auth: true,
       workspace: SUPPORT_WORKSPACE,
+      title: () => translate('Support'),
+      permissions: [isStaffOrSupport, hasSupport],
     },
-  },
-
-  {
-    name: 'support.dashboard',
-    url: '',
-    component: IssuesDashboard,
-  },
-
-  {
-    name: 'support.helpdesk',
-    url: 'helpdesk/',
-    component: IssuesHelpdesk,
   },
 
   {
@@ -169,20 +147,26 @@ export const states: StateDeclaration[] = [
     name: 'support.list',
     url: 'list/',
     component: SupportIssues,
+    data: {
+      breadcrumb: () => translate('Issues'),
+    },
   },
 
   {
     name: 'supportFeedback',
     url: '/support/feedback/?token&evaluation',
     component: SupportFeedback,
+    data: {
+      permissions: [hasSupport],
+    },
   },
 
   {
     name: 'support.feedback',
     url: 'feedback/',
     component: SupportFeedbackListContainer,
-    resolve: {
-      permission: checkPermission,
+    data: {
+      breadcrumb: () => translate('Feedback'),
     },
   },
 
@@ -192,21 +176,17 @@ export const states: StateDeclaration[] = [
     component: CustomerListContainer,
     data: {
       feature: 'support.customers_list',
-    },
-    resolve: {
-      permission: checkPermission,
+      breadcrumb: () => translate('Financial'),
     },
   },
 
   {
     name: 'reporting.pricelist',
     url: 'pricelist/',
-    component: PriceListContainer,
+    component: PriceList,
     data: {
       feature: 'support.pricelist',
-    },
-    resolve: {
-      permission: checkPermission,
+      breadcrumb: () => translate('Pricelist'),
     },
   },
 
@@ -216,9 +196,7 @@ export const states: StateDeclaration[] = [
     component: CustomerRequestContainer,
     data: {
       feature: 'support.customers_requests',
-    },
-    resolve: {
-      permission: checkPermission,
+      breadcrumb: () => translate('Organization requests'),
     },
   },
 
@@ -228,9 +206,7 @@ export const states: StateDeclaration[] = [
     component: CustomersDivisionsContainer,
     data: {
       feature: 'support.customers_list',
-    },
-    resolve: {
-      permission: checkPermission,
+      breadcrumb: () => translate('Organizations'),
     },
   },
 
@@ -240,9 +216,7 @@ export const states: StateDeclaration[] = [
     component: UserListView,
     data: {
       feature: 'support.users',
-    },
-    resolve: {
-      permission: checkPermission,
+      breadcrumb: () => translate('Users'),
     },
   },
 
@@ -252,9 +226,7 @@ export const states: StateDeclaration[] = [
     component: SupportCustomersContainer,
     data: {
       feature: 'support.customers_list',
-    },
-    resolve: {
-      permission: checkPermission,
+      breadcrumb: () => translate('Organizations'),
     },
   },
 
@@ -265,17 +237,14 @@ export const states: StateDeclaration[] = [
     data: {
       feature: 'support.customers_list',
     },
-    resolve: {
-      permission: checkPermission,
-    },
   },
 
   {
     name: 'admin.projects',
     url: 'projects/',
     component: SupportProjectsList,
-    resolve: {
-      permission: checkPermission,
+    data: {
+      breadcrumb: () => translate('Projects'),
     },
   },
 
@@ -286,9 +255,6 @@ export const states: StateDeclaration[] = [
     data: {
       feature: 'support.flowmap',
     },
-    resolve: {
-      permission: checkPermission,
-    },
   },
 
   {
@@ -297,9 +263,6 @@ export const states: StateDeclaration[] = [
     component: HeatMapContainer,
     data: {
       feature: 'support.heatmap',
-    },
-    resolve: {
-      permission: checkPermission,
     },
   },
 
@@ -310,17 +273,14 @@ export const states: StateDeclaration[] = [
     data: {
       feature: 'support.sankey_diagram',
     },
-    resolve: {
-      permission: checkPermission,
-    },
   },
 
   {
     name: 'support.broadcast',
     url: 'broadcast/',
     component: BroadcastList,
-    resolve: {
-      permission: checkPermission,
+    data: {
+      breadcrumb: () => translate('Broadcast'),
     },
   },
 
@@ -328,8 +288,8 @@ export const states: StateDeclaration[] = [
     name: 'admin.features',
     url: 'features/',
     component: FeaturesList,
-    resolve: {
-      permission: checkPermission,
+    data: {
+      breadcrumb: () => translate('Features'),
     },
   },
 ];

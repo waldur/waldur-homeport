@@ -20,6 +20,7 @@ import { translate } from '@waldur/i18n';
 import { Project } from '@waldur/workspace/types';
 
 import { fetchAllProjectUsers, loadOecdCodes } from './api';
+import { ProjectActions } from './ProjectActions';
 
 export const ProjectProfile = ({ project }: { project: Project }) => {
   const {
@@ -83,15 +84,7 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
                 <p className="text-muted">{project.description}</p>
               </Col>
               <Col xs="auto">
-                <div className="buttons">
-                  <Link
-                    state="project.manage"
-                    params={{ uuid: project.uuid }}
-                    className="btn btn-light"
-                  >
-                    {translate('Manage')}
-                  </Link>
-                </div>
+                <ProjectActions project={project} />
               </Col>
             </Row>
             <Row>

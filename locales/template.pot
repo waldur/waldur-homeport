@@ -53,7 +53,7 @@ msgid "API URL"
 msgstr ""
 
 #: src/user/api-key/UserApiKey.tsx
-#: src/user/constants.ts
+#: src/user/routes.ts
 msgid "API key"
 msgstr ""
 
@@ -76,6 +76,10 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 msgid "Abbreviation"
+msgstr ""
+
+#: src/about.tsx
+msgid "About"
 msgstr ""
 
 #: src/booking/AcceptAction.tsx
@@ -139,6 +143,7 @@ msgstr ""
 msgid "Account removal"
 msgstr ""
 
+#: src/invoices/routes.ts
 #: src/invoices/utils.ts
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
@@ -156,6 +161,7 @@ msgid "Accounting plans"
 msgstr ""
 
 #: src/invoices/details/BillingDetails.tsx
+#: src/invoices/routes.ts
 msgid "Accounting record"
 msgstr ""
 
@@ -300,10 +306,6 @@ msgstr ""
 msgid "Activity"
 msgstr ""
 
-#: src/issues/workspace/IssuesActivityStream.tsx
-msgid "Activity stream"
-msgstr ""
-
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -408,7 +410,6 @@ msgstr ""
 msgid "Add plan"
 msgstr ""
 
-#: src/customer/dashboard/CreateProjectAction.ts
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectCreateForm.tsx
 msgid "Add project"
@@ -439,10 +440,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 msgid "Add security group"
-msgstr ""
-
-#: src/project/ProjectActions.tsx
-msgid "Add team member"
 msgstr ""
 
 #: src/rancher/template/NamespaceField.tsx
@@ -509,6 +506,7 @@ msgstr ""
 msgid "Admin username"
 msgstr ""
 
+#: src/customer/routes.ts
 #: src/navigation/sidebar/AdminMenu.tsx
 msgid "Administration"
 msgstr ""
@@ -900,21 +898,24 @@ msgstr ""
 msgid "Attributes filter"
 msgstr ""
 
-#: src/navigation/navitems.ts
 #: src/project/ShortEventsList.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
+#: src/support/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr ""
 
-#: src/customer/utils.ts
+#: src/customer/dashboard/CustomerActions.tsx
+#: src/customer/routes.ts
 #: src/customer/workspace/CustomerEventsList.tsx
-#: src/navigation/navitems.ts
+#: src/project/ProjectActions.tsx
 #: src/project/ProjectEventsList.tsx
+#: src/project/routes.ts
 #: src/support/SupportEventsContainer.tsx
-#: src/user/constants.ts
+#: src/user/UserActions.tsx
 #: src/user/dashboard/UserEventsWrapper.tsx
+#: src/user/routes.ts
 msgid "Audit logs"
 msgstr ""
 
@@ -1097,7 +1098,7 @@ msgstr ""
 msgid "Billed yearly (20% discount)"
 msgstr ""
 
-#: src/customer/utils.ts
+#: src/invoices/routes.ts
 #: src/invoices/utils.ts
 #: src/project/ProjectDashboardChart.tsx
 msgid "Billing"
@@ -1169,7 +1170,7 @@ msgid "Branch"
 msgstr ""
 
 #: src/issues/notifications/BroadcastList.tsx
-#: src/navigation/navitems.ts
+#: src/issues/routes.ts
 msgid "Broadcast"
 msgstr ""
 
@@ -1284,7 +1285,7 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/marketplace/routes.ts
 msgid "Capacity"
 msgstr ""
 
@@ -1876,7 +1877,6 @@ msgstr ""
 
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/create/IssueQuickCreate.tsx
-#: src/issues/create/IssueRegistration.tsx
 msgid "Create request"
 msgstr ""
 
@@ -2014,7 +2014,7 @@ msgid "Creating snapshot schedule"
 msgstr ""
 
 #: src/marketplace/offerings/actions/tabs.ts
-#: src/user/constants.ts
+#: src/user/routes.ts
 msgid "Credentials"
 msgstr ""
 
@@ -2158,10 +2158,10 @@ msgid "Dark theme"
 msgstr ""
 
 #: src/customer/dashboard/CustomerDashboard.tsx
-#: src/marketplace/resources/details/RemoteOfferingDetails.tsx
+#: src/customer/routes.ts
 #: src/project/ProjectDashboard.tsx
-#: src/slurm/details/AllocationDetails.tsx
-#: src/user/constants.ts
+#: src/project/routes.ts
+#: src/user/routes.ts
 msgid "Dashboard"
 msgstr ""
 
@@ -2455,7 +2455,6 @@ msgstr ""
 #: src/marketplace/referral/ReferralDetailsButton.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
-#: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/team/UserDetailsButton.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
@@ -2729,7 +2728,6 @@ msgstr ""
 msgid "Edit permissions"
 msgstr ""
 
-#: src/user/dashboard/UserProfile.tsx
 #: src/user/dashboard/UserWelcome.tsx
 msgid "Edit profile"
 msgstr ""
@@ -3124,13 +3122,13 @@ msgstr ""
 msgid "Featured offerings"
 msgstr ""
 
-#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/FeaturesList.tsx
+#: src/issues/routes.ts
 #: src/marketplace/details/OfferingTabs.tsx
-#: src/navigation/navitems.ts
 msgid "Features"
 msgstr ""
 
-#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/FeaturesList.tsx
 msgid "Features have been updated."
 msgstr ""
 
@@ -3146,7 +3144,7 @@ msgstr ""
 
 #: src/issues/feedback/SupportFeedback.tsx
 #: src/issues/feedback/SupportFeedbackListContainer.tsx
-#: src/navigation/navitems.ts
+#: src/issues/routes.ts
 msgid "Feedback"
 msgstr ""
 
@@ -3202,7 +3200,7 @@ msgstr ""
 msgid "Filtered by"
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/issues/routes.ts
 msgid "Financial"
 msgstr ""
 
@@ -3349,8 +3347,7 @@ msgstr ""
 msgid "FreeIPA"
 msgstr ""
 
-#: src/freeipa/FreeIPAAccount.tsx
-#: src/user/constants.ts
+#: src/user/routes.ts
 msgid "FreeIPA account"
 msgstr ""
 
@@ -3491,13 +3488,13 @@ msgstr ""
 msgid "Group invitation has been cancelled."
 msgstr ""
 
-#: src/customer/utils.ts
+#: src/customer/routes.ts
 #: src/invitations/GroupInvitationsList.tsx
 msgid "Group invitations"
 msgstr ""
 
 #: src/invoices/growth/GrowthContainer.tsx
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/invoices/routes.ts
 msgid "Growth"
 msgstr ""
 
@@ -3539,10 +3536,6 @@ msgstr ""
 
 #: src/marketplace/category/list/CategoryHelpArticles.tsx
 msgid "Help or promo articles"
-msgstr ""
-
-#: src/issues/workspace/IssuesHelpdesk.tsx
-msgid "Helpdesk dashboard"
 msgstr ""
 
 #: src/marketplace/offerings/details/PageHeroImage.tsx
@@ -3983,14 +3976,10 @@ msgstr ""
 msgid "Invitation rejection"
 msgstr ""
 
-#: src/customer/utils.ts
+#: src/customer/routes.ts
 #: src/invitations/InvitationsList.tsx
-#: src/navigation/navitems.ts
+#: src/project/routes.ts
 msgid "Invitations"
-msgstr ""
-
-#: src/customer/dashboard/InviteUserAction.ts
-msgid "Invite team member"
 msgstr ""
 
 #: src/invitations/actions/InvitationCreateButton.tsx
@@ -4001,6 +3990,7 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
 #: src/invoices/details/BillingDetails.tsx
+#: src/invoices/routes.ts
 msgid "Invoice"
 msgstr ""
 
@@ -4113,11 +4103,15 @@ msgstr ""
 msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr ""
 
+#: src/customer/dashboard/CustomerActions.tsx
+#: src/customer/routes.ts
 #: src/customer/workspace/CustomerIssuesList.tsx
 #: src/issues/SupportIssues.tsx
+#: src/issues/routes.ts
 #: src/marketplace/resources/details/ResourceTabs.tsx
-#: src/navigation/navitems.ts
+#: src/project/ProjectActions.tsx
 #: src/project/ProjectIssuesList.tsx
+#: src/project/routes.ts
 #: src/resource/tabs/constants.ts
 msgid "Issues"
 msgstr ""
@@ -4458,8 +4452,9 @@ msgstr ""
 msgid "Magento server deployment is quick and easy so you don’t fret over the technicalities."
 msgstr ""
 
-#: src/customer/dashboard/CustomerProfile.tsx
-#: src/project/ProjectProfile.tsx
+#: src/customer/dashboard/CustomerActions.tsx
+#: src/project/ProjectActions.tsx
+#: src/user/UserActions.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Manage"
 msgstr ""
@@ -4748,14 +4743,14 @@ msgstr ""
 msgid "Must be at most {max}"
 msgstr ""
 
-#: src/customer/utils.ts
 #: src/marketplace/offerings/MyOfferingsListContainer.tsx
+#: src/marketplace/routes.ts
 msgid "My offerings"
 msgstr ""
 
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsContainer.tsx
-#: src/navigation/navitems.ts
+#: src/marketplace/routes.ts
 msgid "My orders"
 msgstr ""
 
@@ -5014,7 +5009,7 @@ msgstr ""
 
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -5191,8 +5186,8 @@ msgstr ""
 msgid "Notification method"
 msgstr ""
 
-#: src/user/constants.ts
 #: src/user/hooks/HooksList.tsx
+#: src/user/routes.ts
 msgid "Notifications"
 msgstr ""
 
@@ -5365,8 +5360,8 @@ msgstr ""
 msgid "Offering order items synchronization has been scheduled."
 msgstr ""
 
+#: src/customer/routes.ts
 #: src/customer/team/OfferingPermissionsList.tsx
-#: src/customer/utils.ts
 msgid "Offering permissions"
 msgstr ""
 
@@ -5400,8 +5395,8 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsContainer.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
+#: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
-#: src/navigation/navitems.ts
 msgid "Offerings"
 msgstr ""
 
@@ -5609,7 +5604,7 @@ msgstr ""
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/SupportOrdersContainer.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/navigation/navitems.ts
+#: src/marketplace/routes.ts
 msgid "Orders"
 msgstr ""
 
@@ -5749,7 +5744,7 @@ msgstr ""
 msgid "Organization removal"
 msgstr ""
 
-#: src/navigation/navitems.ts
+#: src/issues/routes.ts
 msgid "Organization requests"
 msgstr ""
 
@@ -5796,9 +5791,8 @@ msgstr ""
 #: src/customer/list/SupportCustomersContainer.tsx
 #: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/issues/routes.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
-#: src/navigation/navitems.ts
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/dashboard/UserDashboard.tsx
 msgid "Organizations"
@@ -5985,7 +5979,7 @@ msgid "Payment profile has been updated."
 msgstr ""
 
 #: src/customer/details/CustomerPaymentProfiles.tsx
-#: src/customer/utils.ts
+#: src/customer/routes.ts
 msgid "Payment profiles"
 msgstr ""
 
@@ -5998,8 +5992,12 @@ msgid "Payment type {type}"
 msgstr ""
 
 #: src/customer/details/CustomerPayments.tsx
-#: src/customer/utils.ts
+#: src/customer/routes.ts
 msgid "Payments"
+msgstr ""
+
+#: src/customer/routes.ts
+msgid "Payments list"
 msgstr ""
 
 #: src/customer/team/CustomerPermissionsReviewList.tsx
@@ -6084,8 +6082,8 @@ msgstr ""
 msgid "Permission has been updated successfully."
 msgstr ""
 
+#: src/customer/routes.ts
 #: src/customer/team/CustomerPermissionsLogList.tsx
-#: src/customer/utils.ts
 msgid "Permission log"
 msgstr ""
 
@@ -6098,11 +6096,11 @@ msgid "Permission request has been rejected."
 msgstr ""
 
 #: src/user/UserPermissionRequestsListContainer.tsx
-#: src/user/constants.ts
+#: src/user/routes.ts
 msgid "Permission requests"
 msgstr ""
 
-#: src/navigation/navitems.ts
+#: src/project/routes.ts
 #: src/project/team/ProjectPermissionsLogList.tsx
 msgid "Permissions log"
 msgstr ""
@@ -6495,7 +6493,7 @@ msgstr ""
 msgid "Price per year"
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/issues/routes.ts
 #: src/marketplace/offerings/PriceListContainer.tsx
 msgid "Pricelist"
 msgstr ""
@@ -6530,8 +6528,8 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
+#: src/about.tsx
 #: src/navigation/FooterLinks.tsx
-#: src/navigation/navitems.ts
 msgid "Privacy policy"
 msgstr ""
 
@@ -6541,11 +6539,6 @@ msgstr ""
 
 #: src/openstack/utils.ts
 msgid "Private clouds"
-msgstr ""
-
-#: src/customer/utils.ts
-#: src/navigation/navitems.ts
-msgid "Profile"
 msgstr ""
 
 #: src/user/dashboard/UserWelcome.tsx
@@ -6649,6 +6642,7 @@ msgstr ""
 msgid "Project creation request review"
 msgstr ""
 
+#: src/customer/routes.ts
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
 msgid "Project creation requests"
 msgstr ""
@@ -6775,8 +6769,9 @@ msgstr ""
 msgid "Project {project_name} has been deleted."
 msgstr ""
 
+#: src/customer/routes.ts
 #: src/issues/notifications/NotificationExpandableRow.tsx
-#: src/navigation/navitems.ts
+#: src/issues/routes.ts
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
@@ -6919,17 +6914,17 @@ msgid "Public list"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingsListContainer.tsx
-#: src/navigation/navitems.ts
+#: src/marketplace/routes.ts
 msgid "Public offerings"
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemsContainer.tsx
-#: src/navigation/navitems.ts
+#: src/marketplace/routes.ts
 msgid "Public orders"
 msgstr ""
 
 #: src/marketplace/resources/list/PublicResourcesContainer.tsx
-#: src/navigation/navitems.ts
+#: src/marketplace/routes.ts
 msgid "Public resources"
 msgstr ""
 
@@ -7139,7 +7134,6 @@ msgid "Referrals for {name}"
 msgstr ""
 
 #: src/issues/list/IssuesShortList.tsx
-#: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/orders/OrderDetails.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
@@ -7260,7 +7254,7 @@ msgid "Remote Waldur API URL"
 msgstr ""
 
 #: src/user/UserOfferingListContainer.tsx
-#: src/user/constants.ts
+#: src/user/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Remote accounts"
 msgstr ""
@@ -7381,6 +7375,7 @@ msgstr ""
 msgid "Reporter"
 msgstr ""
 
+#: src/customer/routes.ts
 #: src/navigation/sidebar/ReportingMenu.tsx
 msgid "Reporting"
 msgstr ""
@@ -7538,6 +7533,10 @@ msgstr ""
 msgid "Requesting of new resources has been temporarily paused"
 msgstr ""
 
+#: src/customer/routes.ts
+msgid "Requests"
+msgstr ""
+
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Required"
 msgstr ""
@@ -7645,6 +7644,7 @@ msgstr ""
 msgid "Resource creation request review"
 msgstr ""
 
+#: src/customer/routes.ts
 #: src/marketplace-flows/ResourceCreateRequestsList.tsx
 msgid "Resource creation requests"
 msgstr ""
@@ -7760,13 +7760,13 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesContainer.tsx
-#: src/navigation/navitems.ts
+#: src/marketplace/routes.ts
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
-#: src/user/constants.ts
+#: src/user/routes.ts
 msgid "Resources"
 msgstr ""
 
@@ -7778,8 +7778,8 @@ msgstr ""
 msgid "Resources represent the services you are using."
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/resource/support/ResourcesTreemap.tsx
+#: src/resource/support/routes.ts
 msgid "Resources usage"
 msgstr ""
 
@@ -7887,8 +7887,8 @@ msgstr ""
 msgid "Reviewed by"
 msgstr ""
 
+#: src/customer/routes.ts
 #: src/customer/team/CustomerPermissionsReviewList.tsx
-#: src/customer/utils.ts
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
 msgid "Reviews"
@@ -7986,10 +7986,6 @@ msgstr ""
 msgid "SQL server name"
 msgstr ""
 
-#: src/user/constants.ts
-msgid "SSH Keys"
-msgstr ""
-
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "SSH key"
 msgstr ""
@@ -8011,7 +8007,7 @@ msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr ""
 
 #: src/user/keys/KeysList.tsx
-#: src/user/keys/KeysListContainer.tsx
+#: src/user/routes.ts
 msgid "SSH keys"
 msgstr ""
 
@@ -8031,7 +8027,7 @@ msgstr ""
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
-#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/FeaturesList.tsx
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
@@ -8173,7 +8169,6 @@ msgid "Security incident type: {type}"
 msgstr ""
 
 #: src/issues/list/IssuesShortList.tsx
-#: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/resources/details/ResourcesSection.tsx
 msgid "See all"
 msgstr ""
@@ -8525,6 +8520,7 @@ msgstr ""
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/marketplace/routes.ts
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -8678,11 +8674,11 @@ msgstr ""
 msgid "Set value"
 msgstr ""
 
-#: src/customer/utils.ts
-#: src/navigation/navitems.ts
+#: src/customer/routes.ts
 #: src/project/ProjectManage.tsx
+#: src/project/routes.ts
 #: src/user/UserManage.tsx
-#: src/user/constants.ts
+#: src/user/routes.ts
 msgid "Settings"
 msgstr ""
 
@@ -8690,8 +8686,8 @@ msgstr ""
 msgid "Shared"
 msgstr ""
 
-#: src/navigation/navitems.ts
 #: src/resource/support/SharedProviderContainer.tsx
+#: src/resource/support/routes.ts
 msgid "Shared providers"
 msgstr ""
 
@@ -9204,14 +9200,11 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
+#: src/issues/routes.ts
 #: src/navigation/sidebar/SupportMenu.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Support"
-msgstr ""
-
-#: src/issues/workspace/IssuesDashboard.tsx
-msgid "Support dashboard"
 msgstr ""
 
 #: src/issues/events.tsx
@@ -9322,8 +9315,8 @@ msgstr ""
 msgid "Tax percent"
 msgstr ""
 
-#: src/customer/utils.ts
-#: src/navigation/navitems.ts
+#: src/customer/routes.ts
+#: src/project/routes.ts
 msgid "Team"
 msgstr ""
 
@@ -9446,12 +9439,12 @@ msgstr ""
 msgid "Terms Of Service"
 msgstr ""
 
+#: src/about.tsx
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
-#: src/navigation/navitems.ts
 msgid "Terms of Service"
 msgstr ""
 
@@ -9702,10 +9695,6 @@ msgstr ""
 
 #: src/rancher/ProjectExpandableRow.tsx
 msgid "There are not namespaces in this project yet."
-msgstr ""
-
-#: src/issues/workspace/IssuesActivityStream.tsx
-msgid "There is no activity yet."
 msgstr ""
 
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
@@ -10410,9 +10399,7 @@ msgstr ""
 #: src/invoices/details/BillingDetails.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueCreateForm.tsx
-#: src/issues/create/IssueRegistration.tsx
 #: src/issues/list/IssuesShortList.tsx
-#: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
@@ -10530,7 +10517,7 @@ msgid "Unable to load organizations"
 msgstr ""
 
 #: src/TemplateComponent.tsx
-#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/FeaturesList.tsx
 msgid "Unable to load page"
 msgstr ""
 
@@ -10864,7 +10851,7 @@ msgstr ""
 msgid "Unable to update enabled checklists."
 msgstr ""
 
-#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/FeaturesList.tsx
 msgid "Unable to update features."
 msgstr ""
 
@@ -11234,8 +11221,8 @@ msgstr ""
 msgid "Usage report has been submitted."
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/resources/usage/SupportUsageContainer.tsx
+#: src/marketplace/routes.ts
 msgid "Usage reports"
 msgstr ""
 
@@ -11576,10 +11563,11 @@ msgstr ""
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
 
+#: src/customer/routes.ts
 #: src/customer/team/CustomerUsersTab.tsx
-#: src/customer/utils.ts
+#: src/issues/routes.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/navigation/navitems.ts
+#: src/project/routes.ts
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/slurm/tabs.ts
@@ -11655,8 +11643,8 @@ msgstr ""
 msgid "VM snapshots"
 msgstr ""
 
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/openstack/analytics/VmTypeOverviewContainer.tsx
+#: src/openstack/analytics/routes.ts
 msgid "VM type overview"
 msgstr ""
 
@@ -11765,10 +11753,6 @@ msgstr ""
 #: src/marketplace/landing/OfferingCardButtonsOverlay.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "View item"
-msgstr ""
-
-#: src/customer/dashboard/CustomerProfile.tsx
-msgid "View resources"
 msgstr ""
 
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx
@@ -11911,7 +11895,7 @@ msgstr ""
 
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -12759,10 +12743,6 @@ msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
 msgid "{usage} of {limit} used"
-msgstr ""
-
-#: src/issues/workspace/IssuesActivityStream.tsx
-msgid "{user} commented on {issue}"
 msgstr ""
 
 #: src/issues/comments/IssueCommentItem.tsx

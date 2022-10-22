@@ -4,10 +4,8 @@ import { useSelector } from 'react-redux';
 import { CustomerBookingManagement } from '@waldur/customer/dashboard/CustomerBookingManagement';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { translate } from '@waldur/i18n';
 import { CustomerChecklistOverview } from '@waldur/marketplace-checklist/CustomerChecklistOverview';
-import { useTitle } from '@waldur/navigation/title';
-import { ProjectsListOnly } from '@waldur/project/ProjectsList';
+import { ProjectsList } from '@waldur/project/ProjectsList';
 import {
   getUser,
   getCustomer,
@@ -19,8 +17,6 @@ import { CustomerDashboardChart } from './CustomerDashboardChart';
 import { CustomerProfile } from './CustomerProfile';
 
 export const CustomerDashboard: FunctionComponent = () => {
-  useTitle(translate('Dashboard'));
-
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
   const isServiceManager = useMemo(
@@ -39,7 +35,7 @@ export const CustomerDashboard: FunctionComponent = () => {
           <CustomerChecklistOverview customer={customer} />
           <CustomerBookingManagement />
           <div className="mb-6">
-            <ProjectsListOnly />
+            <ProjectsList />
           </div>
           {isFeatureVisible('customer.category_resources_list') && (
             <CategoryResourcesList

@@ -4,10 +4,8 @@ import { useAsyncFn, useEffectOnce } from 'react-use';
 import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
 import { showError } from '@waldur/store/notify';
-import { useUserTabs } from '@waldur/user/constants';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getProfile } from './api';
@@ -15,8 +13,6 @@ import { FreeIPAAccountCreate } from './FreeIPAAccountCreate';
 import { FreeIPAAccountEdit } from './FreeIPAAccountEdit';
 
 export const FreeIpaAccount = () => {
-  useTitle(translate('FreeIPA account'));
-  useUserTabs();
   const user = useSelector(getUser);
   const dispatch = useDispatch();
 

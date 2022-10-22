@@ -1,6 +1,7 @@
+import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { checkPermission } from '@waldur/utils';
+import { translate } from '@waldur/i18n';
 
 const GrowthContainer = lazyComponent(
   () =>
@@ -24,6 +25,12 @@ export const states: StateDeclaration[] = [
     name: 'organization.billing',
     url: 'billing/',
     component: BillingTabs,
+    data: {
+      breadcrumb: () =>
+        ENV.accountingMode === 'accounting'
+          ? translate('Accounting')
+          : translate('Billing'),
+    },
   },
 
   {
@@ -31,6 +38,13 @@ export const states: StateDeclaration[] = [
     url: 'billing/:invoice_uuid/?status',
     component: BillingDetails,
     parent: 'organization',
+    data: {
+      breadcrumb: () =>
+        ENV.accountingMode === 'accounting'
+          ? translate('Accounting record')
+          : translate('Invoice'),
+      skipBreadcrumb: true,
+    },
   },
 
   {
@@ -38,8 +52,8 @@ export const states: StateDeclaration[] = [
     url: 'growth/',
     component: GrowthContainer,
     parent: 'reporting',
-    resolve: {
-      permission: checkPermission,
+    data: {
+      breadcrumb: () => translate('Growth'),
     },
   },
 ];

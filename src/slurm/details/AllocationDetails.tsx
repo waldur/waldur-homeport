@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -8,7 +8,7 @@ import { ResourceIssues } from '@waldur/marketplace/resources/details/ResourceIs
 import { ResourceTimeline } from '@waldur/marketplace/resources/details/ResourceTimeline';
 import { StatusPage } from '@waldur/marketplace/resources/details/StatusPage';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { useFullPage, useTabs } from '@waldur/navigation/context';
+import { useFullPage } from '@waldur/navigation/context';
 import '@waldur/marketplace/offerings/details/PublicOfferingDetailsHero.scss';
 import { Resource } from '@waldur/resource/types';
 
@@ -30,16 +30,6 @@ interface AllocationDetailsProps {
 
 export const AllocationDetails: FC<AllocationDetailsProps> = ({ resource }) => {
   useFullPage();
-  const tabs = useMemo(
-    () => [
-      {
-        title: translate('Dashboard'),
-        to: '.',
-      },
-    ],
-    [],
-  );
-  useTabs(tabs);
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   return (
     <>

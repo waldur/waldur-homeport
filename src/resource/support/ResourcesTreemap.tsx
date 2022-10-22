@@ -5,7 +5,6 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 
@@ -82,7 +81,6 @@ interface StateProps {
 }
 
 const TreemapContainer = (props: StateProps) => {
-  useTitle(translate('Resources usage'));
   const shouldConcealPrices = useSelector((state: RootState) =>
     isVisible(state, 'marketplace.conceal_prices'),
   );

@@ -1,6 +1,6 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { checkPermission } from '@waldur/utils';
+import { translate } from '@waldur/i18n';
 
 const VmTypeOverviewContainer = lazyComponent(
   () =>
@@ -17,9 +17,7 @@ export const states: StateDeclaration[] = [
     component: VmTypeOverviewContainer,
     data: {
       feature: 'support.vm_type_overview',
-    },
-    resolve: {
-      permission: checkPermission,
+      breadcrumb: () => translate('VM type overview'),
     },
   },
 ];

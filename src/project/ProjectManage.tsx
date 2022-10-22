@@ -5,8 +5,6 @@ import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { useProjectItems } from '@waldur/navigation/navitems';
-import { useTitle } from '@waldur/navigation/title';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { loadOecdCodes } from './api';
@@ -14,9 +12,6 @@ import { ProjectDelete } from './ProjectDelete';
 import { ProjectUpdateContainer } from './ProjectUpdateContainer';
 
 export const ProjectManage: FunctionComponent = () => {
-  useTitle(translate('Settings'));
-  useProjectItems();
-
   const project = useSelector(getProject);
   const { loading, value: oecdCodes } = useAsync(loadOecdCodes);
   return loading ? (

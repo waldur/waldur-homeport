@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { UpdateOfferingPermissionExpirationTimeButton } from '@waldur/customer/team/UpdateOfferingPermissionExpirationTimeButton';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
@@ -63,12 +62,7 @@ const TableOptions = {
   }),
 };
 
-const OfferingPermissionsListView = connect((state: RootState) => ({
+export const OfferingPermissionsList = connect((state: RootState) => ({
   customer: getCustomer(state),
   isOwnerOrStaff: isOwnerOrStaff(state),
 }))(connectTable(TableOptions)(TableComponent));
-
-export const OfferingPermissionsList = () => {
-  useTitle(translate('Offering permissions'));
-  return <OfferingPermissionsListView />;
-};

@@ -6,11 +6,8 @@ import { useAsync } from 'react-use';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { countChecklists } from '@waldur/marketplace-checklist/api';
-import { useTitle } from '@waldur/navigation/title';
 import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails } from '@waldur/workspace/types';
-
-import { useUserTabs } from '../constants';
 
 import { CustomerPermissions } from './CustomerPermissions';
 import { ProjectPermissions } from './ProjectPermissions';
@@ -19,9 +16,7 @@ import { UserProfile } from './UserProfile';
 import { UserWelcome } from './UserWelcome';
 
 export const UserDashboard: React.FC = () => {
-  useUserTabs();
   const user = useSelector(getUser) as UserDetails;
-  useTitle(translate('User dashboard'));
 
   const asyncState = useAsync(countChecklists);
 

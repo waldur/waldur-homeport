@@ -17,17 +17,19 @@ import { LayoutContext, LayoutContextInterface } from './context';
 import { CookiesConsent } from './cookies/CookiesConsent';
 import { SiteSidebar } from './sidebar/SiteSidebar';
 import { Toolbar } from './Toolbar';
+import { useTabs } from './useTabs';
 
 export const AnonymousLayout: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { state } = useCurrentStateAndParams();
-  const [tabs, setTabs] = useState(null);
   const [extraTabs, setExtraTabs] = useState(null);
   const [fullPage, setFullPage] = useState(false);
   const context = useMemo<Partial<LayoutContextInterface>>(
-    () => ({ tabs, setTabs, extraTabs, setExtraTabs, fullPage, setFullPage }),
-    [tabs, setTabs, extraTabs, setExtraTabs, fullPage, setFullPage],
+    () => ({ extraTabs, setExtraTabs, fullPage, setFullPage }),
+    [extraTabs, setExtraTabs, fullPage, setFullPage],
   );
+
+  const tabs = useTabs();
 
   const layout = useLayout();
   useEffect(() => {

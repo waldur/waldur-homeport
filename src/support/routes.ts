@@ -1,6 +1,6 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { checkPermission } from '@waldur/utils';
+import { translate } from '@waldur/i18n';
 
 const SupportDetailsContainer = lazyComponent(
   () =>
@@ -28,8 +28,8 @@ export const states: StateDeclaration[] = [
     name: 'support.events',
     url: 'events/',
     component: SupportEventsContainer,
-    resolve: {
-      permission: checkPermission,
+    data: {
+      breadcrumb: () => translate('Audit log'),
     },
   },
 ];

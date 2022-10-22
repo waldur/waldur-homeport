@@ -1,10 +1,5 @@
-import { useRouter } from '@uirouter/react';
+import { getConfig } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 
-import { ENV } from '@waldur/configs/default';
-
-export const useSupport = () => {
-  const router = useRouter();
-  if (!ENV.plugins.WALDUR_SUPPORT) {
-    router.stateService.go('errorPage.notFound');
-  }
-};
+export const hasSupport = (state: RootState) =>
+  !!getConfig(state).plugins.WALDUR_SUPPORT;

@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { useFullPage, useTabs } from '@waldur/navigation/context';
+import { useFullPage } from '@waldur/navigation/context';
 import { TENANT_TYPE } from '@waldur/openstack/constants';
 import { OpenStackResourceUsage } from '@waldur/openstack/OpenStackResourceUsage';
 
@@ -22,16 +22,6 @@ import { StatusPage } from './StatusPage';
 
 export const RemoteOfferingDetails: FC<any> = ({ resource }) => {
   useFullPage();
-  const tabs = useMemo(
-    () => [
-      {
-        title: translate('Dashboard'),
-        to: '.',
-      },
-    ],
-    [],
-  );
-  useTabs(tabs);
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   return (
     <>

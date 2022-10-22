@@ -39,7 +39,7 @@ export const reducer = (
 
 export const getConfig = (state: RootState) => state.config;
 
-export const isVisible = (state: RootState, feature: string): boolean => {
+export const isVisibleSelector = (feature: string) => (state: RootState) => {
   if (feature === undefined || feature === null) {
     return true;
   }
@@ -47,6 +47,10 @@ export const isVisible = (state: RootState, feature: string): boolean => {
     return false;
   }
   return state.config.FEATURES[feature];
+};
+
+export const isVisible = (state: RootState, feature: string): boolean => {
+  return isVisibleSelector(feature)(state);
 };
 
 export const getNativeNameVisible = (state: RootState) =>

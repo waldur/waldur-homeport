@@ -15,7 +15,7 @@ export const RoleField: FunctionComponent<{ invitation }> = ({
     }
     return (
       <Link
-        state="project.details"
+        state="project.dashboard"
         params={{ uuid: getUUID(invitation.project) }}
         label={translate('{role} in {project}', {
           role: formatRole(invitation.project_role),

@@ -1,3 +1,4 @@
+import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -5,7 +6,7 @@ import 'world-flags-sprite/stylesheets/flags16.css';
 
 import { ENV } from '@waldur/configs/default';
 
-import { getTitle, getSubtitle } from '../title';
+import { getTitle } from '../title';
 
 import { SearchToggle } from './SearchToggle';
 import { UserDropdownMenu } from './UserDropdown';
@@ -41,7 +42,13 @@ const AsideMobileToggle: FunctionComponent = () => (
 
 export const AppHeader: FunctionComponent = () => {
   const pageTitle = useSelector(getTitle);
-  const pageSubtitle = useSelector(getSubtitle);
+  const router = useRouter();
+  const breadcrumbs = router.globals.$current.path
+    .filter((part) => part.data?.breadcrumb)
+    .map((part) => part.data.breadcrumb());
+  const routerTitle = router.globals.$current.path
+    .find((part) => part.data?.title)
+    ?.data.title();
   return (
     <div className="header align-items-stretch">
       <div className="container-fluid d-flex align-items-stretch justify-content-between">
@@ -60,12 +67,14 @@ export const AppHeader: FunctionComponent = () => {
         </div>
         <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
           <div className="page-title flex-wrap me-3 mb-5 mt-3 mb-lg-0">
-            <h1 className="text-dark fw-bolder fs-3 my-1">{pageTitle}</h1>
-            {pageSubtitle && (
+            <h1 className="text-dark fw-bolder fs-3 my-1">
+              {pageTitle || routerTitle}
+            </h1>
+            <div>
               <small className="text-muted text-uppercase">
-                {pageSubtitle}
+                {breadcrumbs.join(' > ')}
               </small>
-            )}
+            </div>
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
             <SearchToggle />

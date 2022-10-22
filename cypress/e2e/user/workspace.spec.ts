@@ -7,8 +7,19 @@ describe('User workspace', function () {
       .intercept('GET', `/api/events-stats/?scope=/api/users/bf6d515c9e6e445f9c339021b30fc96b/&page_size=12`, {})
       .wait(3000)
       .setToken()
-      .visit('/profile/manage/')
+      .visit('/profile/')
       .wait(2000)
+  });
+
+
+  it('Should go to "manage"', () => {
+    cy
+      .get('a')
+      .contains('Manage')
+      .click();
+    cy
+      .title()
+      .should('contain', 'Settings');
   });
 
   it('Should go to "audit log"', () => {
@@ -25,7 +36,7 @@ describe('User workspace', function () {
     cy.get('a').contains('Credentials').trigger('mouseover', {force: true});
     cy
       .get('a')
-      .contains('SSH Keys')
+      .contains('SSH keys')
       .click({force: true});
     cy
       .title()
@@ -40,15 +51,5 @@ describe('User workspace', function () {
     cy
       .title()
       .should('contain', 'Notifications');
-  });
-
-  it('Should go to "settings" user tab', () => {
-    cy
-      .get('a')
-      .contains('Settings')
-      .click();
-    cy
-      .title()
-      .should('contain', 'Settings');
   });
 });

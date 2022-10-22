@@ -1,7 +1,7 @@
 import { StateDeclaration } from '@waldur/core/types';
 
 import { lazyComponent } from './core/lazyComponent';
-import { useAboutItems } from './navigation/navitems';
+import { translate } from './i18n';
 import { useTitle } from './navigation/title';
 import { TemplateComponent } from './TemplateComponent';
 
@@ -15,58 +15,39 @@ const AnonymousLayout = lazyComponent(
 
 const TosPage = () => {
   useTitle('Terms of Service');
-  useAboutItems();
   return <TemplateComponent url="views/tos/index.html" />;
-};
-
-const AboutPage = () => {
-  useTitle('About');
-  return <TemplateComponent url="views/about/index.html" />;
 };
 
 const PricacyPage = () => {
   useTitle('Privacy policy');
-  useAboutItems();
   return <TemplateComponent url="views/policy/privacy.html" />;
 };
 
 export const states: StateDeclaration[] = [
   {
-    name: 'tos',
-    url: '/tos/',
-    abstract: true,
-    component: AnonymousLayout,
-  },
-
-  {
-    name: 'tos.index',
-    url: '',
-    component: TosPage,
-  },
-
-  {
     name: 'about',
-    url: '/about/',
-    abstract: true,
-    component: AnonymousLayout,
-  },
-
-  {
-    name: 'about.index',
     url: '',
-    component: AboutPage,
-  },
-
-  {
-    name: 'policy',
-    url: '/policy/',
     abstract: true,
     component: AnonymousLayout,
+    data: {
+      title: () => translate('About'),
+    },
+  },
+  {
+    name: 'about.tos',
+    url: '/tos/',
+    component: TosPage,
+    data: {
+      breadcrumb: () => translate('Terms of Service'),
+    },
   },
 
   {
-    name: 'policy.privacy',
-    url: 'privacy/',
+    name: 'about.privacy',
+    url: '/privacy/',
     component: PricacyPage,
+    data: {
+      breadcrumb: () => translate('Privacy policy'),
+    },
   },
 ];

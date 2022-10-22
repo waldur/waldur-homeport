@@ -20,6 +20,11 @@ interface DataDeclaration {
   /** Workspace declaration is used by workspace selector. */
   workspace: string;
   skipAuth: boolean;
+  title?(): string;
+  breadcrumb?(): string;
+  skipBreadcrumb?: boolean;
+  priority?: number;
+  permissions: Array<(state) => boolean>;
 }
 
 export interface StateDeclaration extends BaseStateDeclaration {

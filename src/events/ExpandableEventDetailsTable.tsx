@@ -48,13 +48,13 @@ export const ExpandableEventDetailsTable: FunctionComponent<ExpandableEventDetai
       <ExpandableEventField
         label={translate('Organization')}
         value={event.context.customer_name}
-        state="organization.details"
+        state="organization.events"
         params={{ uuid: event.context.customer_uuid }}
       />
       <ExpandableEventField
         label={translate('Project')}
         value={event.context.project_name}
-        state="project.details"
+        state="project.dashboard"
         params={{ uuid: event.context.project_uuid }}
       />
       <ExpandableEventField

@@ -4,12 +4,8 @@ import { getFormValues } from 'redux-form';
 
 import { isEmpty } from '@waldur/core/utils';
 import { getEventsList } from '@waldur/events/BaseEventsList';
-import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { getProject } from '@waldur/workspace/selectors';
-
-import { useProjectItems } from '../navigation/navitems';
 
 import { ProjectEventsFilter } from './ProjectEventsFilter';
 
@@ -37,7 +33,5 @@ const mapStateToProps = (state: RootState) => ({
 const ProjectEvents = connect(mapStateToProps)(PureProjectEvents);
 
 export const ProjectEventsView: FunctionComponent<any> = (props) => {
-  useTitle(translate('Audit logs'));
-  useProjectItems();
   return <ProjectEvents {...props} filters={<ProjectEventsFilter />} />;
 };

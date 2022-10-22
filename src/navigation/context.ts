@@ -1,16 +1,9 @@
 import { createContext, useContext, useEffect } from 'react';
 
-interface Tab {
-  title: string;
-  to?: string;
-  params?: Object;
-  children?: Tab[];
-}
+import { Tab } from './Tab';
 
 export interface LayoutContextInterface {
   setActions(actions: React.ReactNode): void;
-  tabs: Tab[];
-  setTabs(tabs: Tab[]): void;
   extraTabs: Tab[];
   setExtraTabs(tabs: Tab[]): void;
   fullPage: boolean;
@@ -19,12 +12,6 @@ export interface LayoutContextInterface {
 
 export const LayoutContext = createContext<Partial<LayoutContextInterface>>({});
 
-export const useTabs = (tabs: Tab[]) => {
-  const layoutContext = useContext(LayoutContext);
-  useEffect(() => {
-    layoutContext.setTabs(tabs);
-  }, [tabs, layoutContext]);
-};
 export const useExtraTabs = (tabs: Tab[]) => {
   const layoutContext = useContext(LayoutContext);
   useEffect(() => {

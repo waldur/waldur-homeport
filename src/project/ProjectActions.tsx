@@ -1,47 +1,31 @@
-import { FunctionComponent } from 'react';
-
-import { ActionList } from '@waldur/dashboard/ActionList';
-import { getIssueAction } from '@waldur/dashboard/ReportIssueAction';
-import { getSupportPortalAction } from '@waldur/dashboard/SupportPortalAction';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { router } from '@waldur/router';
-import { Project, User } from '@waldur/workspace/types';
+import { Project } from '@waldur/workspace/types';
 
-interface ProjectActionsProps {
-  user: User;
-  project: Project;
-  canAddUser: boolean;
-}
+export const ProjectActions = ({ project }: { project: Project }) => (
+  <div>
+    <Link
+      state="project.manage"
+      params={{ uuid: project.uuid }}
+      className="btn btn-light me-3"
+    >
+      {translate('Manage')}
+    </Link>
 
-const getDetailsAction = (project) => ({
-  title: translate('Details'),
-  onClick() {
-    router.stateService.go('project.manage', { uuid: project.uuid });
-  },
-});
+    <Link
+      state="project.events"
+      params={{ uuid: project.uuid }}
+      className="btn btn-light me-3"
+    >
+      {translate('Audit logs')}
+    </Link>
 
-const getTeamAction = (props: ProjectActionsProps) => {
-  if (!props.canAddUser) {
-    return undefined;
-  }
-  return {
-    title: translate('Add team member'),
-    onClick() {
-      router.stateService.go('project.team');
-    },
-  };
-};
-
-export const ProjectActions: FunctionComponent<ProjectActionsProps> = (
-  props,
-) => {
-  const actions = [
-    getDetailsAction(props.project),
-    getTeamAction(props),
-    getIssueAction({
-      issue: { project: props.project },
-    }),
-    getSupportPortalAction(),
-  ].filter((action) => action !== undefined);
-  return <ActionList actions={actions} />;
-};
+    <Link
+      state="project.issues"
+      params={{ uuid: project.uuid }}
+      className="btn btn-light"
+    >
+      {translate('Issues')}
+    </Link>
+  </div>
+);

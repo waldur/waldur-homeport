@@ -28,7 +28,7 @@ export const PublicKeyGroup: FunctionComponent<any> = (props) => (
           preSelectFirst={true}
           emptyMessage={translate(
             'You have not added any SSH keys to your <Link>profile</Link>.',
-            { Link: (s) => <Link state="profile.keys">{s}</Link> },
+            { Link: (s) => <Link state="profile-keys">{s}</Link> },
             formatJsx,
           )}
         />

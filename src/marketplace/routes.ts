@@ -3,8 +3,8 @@ import { UIView } from '@uirouter/react';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { fetchCustomer } from '@waldur/customer/workspace/CustomerWorkspace';
+import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
-import { checkPermission } from '@waldur/utils';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 const SupportOfferingsContainer = lazyComponent(
@@ -397,6 +397,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-order-list/',
     component: OrdersList,
     parent: 'project',
+    data: {
+      breadcrumb: () => translate('My orders'),
+    },
   },
 
   {
@@ -422,6 +425,7 @@ export const states: StateDeclaration[] = [
     data: {
       auth: true,
       workspace: ORGANIZATION_WORKSPACE,
+      title: () => translate('Service provider'),
     },
     resolve: [
       {
@@ -437,6 +441,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-offerings/',
     component: OfferingsListContainer,
     parent: 'marketplace-provider',
+    data: {
+      breadcrumb: () => translate('Public offerings'),
+    },
   },
 
   {
@@ -472,6 +479,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-my-offerings/',
     component: MyOfferingsListContainer,
     parent: 'organization',
+    data: {
+      breadcrumb: () => translate('My offerings'),
+    },
   },
 
   {
@@ -528,6 +538,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-order-items/',
     component: OrderItemsContainer,
     parent: 'marketplace-provider',
+    data: {
+      breadcrumb: () => translate('Public orders'),
+    },
   },
 
   {
@@ -541,7 +554,11 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-customer-resources',
     url: 'marketplace-customer-resources/',
     component: CustomerResourcesContainer,
-    parent: 'organization',
+    parent: 'organization-resources',
+    data: {
+      breadcrumb: () => translate('Resources'),
+      skipBreadcrumb: true,
+    },
   },
 
   {
@@ -549,6 +566,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-public-resources/',
     component: PublicResourcesContainer,
     parent: 'marketplace-provider',
+    data: {
+      breadcrumb: () => translate('Public resources'),
+    },
   },
 
   {
@@ -577,8 +597,8 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-support-resources/',
     component: SupportResourcesContainer,
     parent: 'support',
-    resolve: {
-      permission: checkPermission,
+    data: {
+      breadcrumb: () => translate('Resources'),
     },
   },
 
@@ -587,8 +607,8 @@ export const states: StateDeclaration[] = [
     url: 'offerings/',
     component: SupportOfferingsContainer,
     parent: 'admin',
-    resolve: {
-      permission: checkPermission,
+    data: {
+      breadcrumb: () => translate('Offerings'),
     },
   },
 
@@ -597,8 +617,8 @@ export const states: StateDeclaration[] = [
     url: 'orders/',
     component: SupportOrdersContainer,
     parent: 'admin',
-    resolve: {
-      permission: checkPermission,
+    data: {
+      breadcrumb: () => translate('Orders'),
     },
   },
 
@@ -607,8 +627,8 @@ export const states: StateDeclaration[] = [
     url: 'plan-usages/',
     component: PlanUsageContainer,
     parent: 'reporting',
-    resolve: {
-      permission: checkPermission,
+    data: {
+      breadcrumb: () => translate('Capacity'),
     },
   },
 
@@ -617,8 +637,8 @@ export const states: StateDeclaration[] = [
     url: 'usage/',
     component: SupportUsageContainer,
     parent: 'reporting',
-    resolve: {
-      permission: checkPermission,
+    data: {
+      breadcrumb: () => translate('Usage reports'),
     },
   },
 
