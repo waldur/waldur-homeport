@@ -133,9 +133,9 @@
 
   &:disabled {
     cursor: not-allowed;
+    background-color: $gray-200;
   }
-  &:disabled,
-  &[readonly] {
+  &[readonly]:not(.flatpickr-input) {
     background-color: $gray-200;
   }
 }
