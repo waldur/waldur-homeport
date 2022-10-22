@@ -4,13 +4,10 @@ import { compose } from 'redux';
 
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { Table, createFetcher, connectTable } from '@waldur/table';
 import { HookListTablePlaceholder } from '@waldur/user/hooks/HookListTablePlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
-
-import { useUserTabs } from '../constants';
 
 import { HOOK_LIST_ID } from './constants';
 import { HookCreateButton } from './HookCreateButton';
@@ -35,8 +32,6 @@ const getEventsField = (row) =>
   row.event_groups.map(formatEventTitle).join(', ');
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  useTitle(translate('Notifications'));
-  useUserTabs();
   return (
     <Table
       {...props}

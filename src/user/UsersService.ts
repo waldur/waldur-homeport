@@ -18,13 +18,18 @@ class UsersServiceClass {
   }
 
   getCurrentUser() {
-    if (getUser(store.getState())) {
-      return Promise.resolve(getUser(store.getState()));
+    const cached = this.getCachedUser();
+    if (cached) {
+      return Promise.resolve(cached);
     }
     return getCurrentUser().then((user) => {
       store.dispatch(setCurrentUser(user));
       return user;
     });
+  }
+
+  getCachedUser() {
+    return getUser(store.getState());
   }
 
   isCurrentUserValid() {

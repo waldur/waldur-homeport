@@ -2,50 +2,40 @@ import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { ProjectResourcesFilter } from '@waldur/project/ProjectResourcesFilter';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
-import { Project, User } from '@waldur/workspace/types';
-
-import { useProjectItems } from '../navigation/navitems';
+import { getProject, getUser } from '@waldur/workspace/selectors';
 
 import { ProjectDashboardChart } from './ProjectDashboardChart';
 import { ProjectProfile } from './ProjectProfile';
 import { ProjectResourcesList } from './ProjectResourcesList';
 import { ShortEventsList } from './ShortEventsList';
 
-interface ProjectDashboardProps {
-  user: User;
-  project: Project;
-  canAddUser: boolean;
-}
-
-export const ProjectDashboard: FunctionComponent<ProjectDashboardProps> = (
-  props,
-) => {
-  useTitle(translate('Dashboard'));
+export const ProjectDashboard: FunctionComponent<{}> = () => {
   const shouldConcealPrices = useSelector((state: RootState) =>
     isVisible(state, 'marketplace.conceal_prices'),
   );
-  useProjectItems();
-  if (!props.project) {
+
+  const user = useSelector(getUser);
+  const project = useSelector(getProject);
+
+  if (!project) {
     return null;
   }
-  if (!props.user) {
+  if (!user) {
     return null;
   }
   return (
     <>
-      <ProjectProfile project={props.project} />
+      <ProjectProfile project={project} />
       {!shouldConcealPrices && (
         <Row className="mb-6">
           <Col md={6} sm={12} className="mb-md-0 mb-sm-6">
-            <ProjectDashboardChart project={props.project} />
+            <ProjectDashboardChart project={project} />
           </Col>
           <Col md={6} sm={12} className="mb-md-0 mb-sm-6">
-            <ShortEventsList project={props.project} />
+            <ShortEventsList project={project} />
           </Col>
         </Row>
       )}

@@ -11,7 +11,6 @@ import { GroupInvitationRowActions } from '@waldur/invitations/GroupInvitationRo
 import { GroupInvitationsFilter } from '@waldur/invitations/GroupInvitationsFilter';
 import { GroupInvitationsListExpandableRow } from '@waldur/invitations/GroupInvitationsListExpandableRow';
 import { RoleField } from '@waldur/invitations/RoleField';
-import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
@@ -80,6 +79,5 @@ const GroupInvitationsListComponent = enhance(
 ) as React.ComponentType<any>;
 
 export const GroupInvitationsList: FunctionComponent = () => {
-  useTitle(translate('Group invitations'));
   return <GroupInvitationsListComponent filters={<GroupInvitationsFilter />} />;
 };

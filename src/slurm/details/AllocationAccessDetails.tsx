@@ -10,7 +10,7 @@ const formatLoginDetails = (props) => {
   const value = `ssh ${props.resource.username}@${props.resource.gateway}`;
   return !props.resource.username ? (
     <Link
-      state="profile.freeipa"
+      state="profile-freeipa"
       label={translate('FreeIPA account needs to be set up.')}
     />
   ) : (

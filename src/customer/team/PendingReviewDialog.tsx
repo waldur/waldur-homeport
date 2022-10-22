@@ -15,7 +15,7 @@ export const PendingReviewDialog: FunctionComponent<{
 }> = ({ resolve: { reviewId } }) => {
   const dispatch = useDispatch();
   const gotoTeam = () => {
-    dispatch(triggerTransition('organization.permissions-reviews', {}));
+    dispatch(triggerTransition('organization-permissions-reviews', {}));
     dispatch(closeModalDialog());
   };
   const [submitting, setSubmitting] = useState(false);

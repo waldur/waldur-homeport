@@ -154,7 +154,7 @@ export default {
         },
       ],
       warningMessage:
-        'SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref="profile.keys">profile</a>.',
+        'SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref="profile-keys">profile</a>.',
     },
     user_data: {
       type: 'text',

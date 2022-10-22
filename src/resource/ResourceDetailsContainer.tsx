@@ -66,7 +66,7 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
         uuid: resource.project_uuid,
       });
     } else {
-      router.stateService.go('project.details', {
+      router.stateService.go('project.dashboard', {
         uuid: resource.project_uuid,
       });
     }

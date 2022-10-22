@@ -16,7 +16,6 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { IssueAttachmentsContainer } from './attachments/IssueAttachmentsContainer';
 import { IssueCommentsContainer } from './comments/IssueCommentsContainer';
-import { useSupport } from './hooks';
 
 const linkify = (s) =>
   s.replace(
@@ -41,8 +40,6 @@ export const IssueDetails: FunctionComponent = () => {
   }
 
   const { loading, error, value: issue } = useAsync(() => loadIssue(uuid));
-
-  useSupport();
 
   if (loading) {
     return <LoadingSpinner />;

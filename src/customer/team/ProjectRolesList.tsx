@@ -19,7 +19,7 @@ export const ProjectRolesList: FunctionComponent<{ roleName; row }> = ({
         return (
           <Fragment key={index}>
             <Link
-              state="project.details"
+              state="project.dashboard"
               params={{ uuid: item.uuid }}
               label={item.name}
             />

@@ -15,12 +15,12 @@ export const FooterLinks = () => (
       </li>
     )}
     <li className="menu-item">
-      <Link className="menu-link px-2" state="policy.privacy">
+      <Link className="menu-link px-2" state="about.privacy">
         {translate('Privacy policy')}
       </Link>
     </li>
     <li className="menu-item">
-      <Link className="menu-link px-2" state="tos.index">
+      <Link className="menu-link px-2" state="about.tos">
         {translate('Terms of service')}
       </Link>
     </li>

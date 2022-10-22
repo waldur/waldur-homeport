@@ -5,7 +5,6 @@ import { useAsync } from 'react-use';
 import { getList } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 
 import { getOptions } from './AccountingRunningField';
 import { CustomerList } from './CustomerList';
@@ -49,7 +48,6 @@ async function loadData() {
 }
 
 export const CustomerListContainer: FunctionComponent = () => {
-  useTitle(translate('Financial overview'));
   const { loading, error, value: data } = useAsync(loadData);
   if (loading) {
     return <LoadingSpinner />;

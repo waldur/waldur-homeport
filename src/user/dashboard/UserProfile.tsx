@@ -2,9 +2,10 @@ import { Card, Col, Row, Stack } from 'react-bootstrap';
 import Gravatar from 'react-gravatar';
 
 import { Image } from '@waldur/core/Image';
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { UserDetails } from '@waldur/workspace/types';
+
+import { UserActions } from '../UserActions';
 
 export const UserProfile = ({ user }: { user: UserDetails }) => {
   return (
@@ -50,12 +51,7 @@ export const UserProfile = ({ user }: { user: UserDetails }) => {
                 </Stack>
               </Col>
               <Col xs="auto">
-                <Link
-                  className="btn btn-sm btn-secondary"
-                  state="profile.manage"
-                >
-                  {translate('Edit profile')}
-                </Link>
+                <UserActions />{' '}
               </Col>
             </Row>
             {Array.isArray(user.affiliations) && user.affiliations.length > 0 && (

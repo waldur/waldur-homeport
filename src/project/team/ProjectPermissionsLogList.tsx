@@ -2,9 +2,6 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { getEventsList } from '@waldur/events/BaseEventsList';
-import { translate } from '@waldur/i18n';
-import { useProjectItems } from '@waldur/navigation/navitems';
-import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { getProject } from '@waldur/workspace/selectors';
 
@@ -25,8 +22,6 @@ const enhance = connect((state: RootState) => ({
   project: getProject(state),
 }));
 
-export const ProjectPermissionsLogList: FunctionComponent = enhance(() => {
-  useTitle(translate('Permissions log'));
-  useProjectItems();
-  return <PureProjectPermissionsLogList />;
-});
+export const ProjectPermissionsLogList: FunctionComponent = enhance(
+  PureProjectPermissionsLogList,
+);

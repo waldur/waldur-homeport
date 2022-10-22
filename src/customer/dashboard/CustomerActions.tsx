@@ -1,26 +1,18 @@
-import { FunctionComponent } from 'react';
+import { Link } from '@waldur/core/Link';
+import { translate } from '@waldur/i18n';
 
-import { ActionList } from '@waldur/dashboard/ActionList';
-import { getIssueAction } from '@waldur/dashboard/ReportIssueAction';
-import { getReportSecurityIncidentAction } from '@waldur/dashboard/ReportSecurityIncidentAction';
-import { getSupportPortalAction } from '@waldur/dashboard/SupportPortalAction';
+export const CustomerActions = () => (
+  <div>
+    <Link state="organization.manage" className="btn btn-light me-3">
+      {translate('Manage')}
+    </Link>
 
-import { getProjectAction } from './CreateProjectAction';
-import { getInviteAction } from './InviteUserAction';
-import { CustomerActionsProps } from './types';
+    <Link state="organization.events" className="btn btn-light me-3">
+      {translate('Audit logs')}
+    </Link>
 
-export const CustomerActions: FunctionComponent<CustomerActionsProps> = (
-  props,
-) => (
-  <ActionList
-    actions={[
-      getProjectAction(props),
-      getInviteAction(props),
-      getIssueAction({
-        issue: { customer: props.customer },
-      }),
-      getSupportPortalAction(),
-      getReportSecurityIncidentAction(),
-    ].filter((action) => action !== undefined)}
-  />
+    <Link state="organization.issues" className="btn btn-light">
+      {translate('Issues')}
+    </Link>
+  </div>
 );

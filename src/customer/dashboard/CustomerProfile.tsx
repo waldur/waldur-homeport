@@ -5,11 +5,11 @@ import 'world-flags-sprite/stylesheets/flags32.css';
 
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ServiceProviderIcon } from '@waldur/navigation/workspace/ServiceProviderIcon';
 import { Customer } from '@waldur/workspace/types';
 
+import { CustomerActions } from './CustomerActions';
 import { SymbolsGroup } from './SymbolsGroup';
 
 export const CustomerProfile = ({ customer }: { customer: Customer }) => {
@@ -64,17 +64,7 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
                 </Stack>
               </Col>
               <Col xs="auto">
-                <div className="buttons">
-                  <Link
-                    className="btn btn-light me-4"
-                    state="marketplace-customer-resources"
-                  >
-                    {translate('View resources')}
-                  </Link>
-                  <Link className="btn btn-light" state="organization.manage">
-                    {translate('Manage')}
-                  </Link>
-                </div>
+                <CustomerActions />
               </Col>
             </Row>
             {owners && owners.length > 0 && (

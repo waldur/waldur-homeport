@@ -6,14 +6,11 @@ import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { ProjectsListActions } from '@waldur/project/ProjectsListActions';
-import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { formatLongText } from '@waldur/table/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ProjectCreateButton } from './ProjectCreateButton';
 import { ProjectDetailsButton } from './ProjectDetailsButton';
@@ -21,7 +18,11 @@ import { ProjectExpandableRowContainer } from './ProjectExpandableRowContainer';
 import { ProjectTablePlaceholder } from './ProjectTablePlaceholder';
 
 const ProjectLink = ({ row }) => (
-  <Link state="project.details" params={{ uuid: row.uuid }} label={row.name} />
+  <Link
+    state="project.dashboard"
+    params={{ uuid: row.uuid }}
+    label={row.name}
+  />
 );
 
 const ProjectCostField = ({ row }) =>
@@ -39,7 +40,6 @@ const OrganizationLink: FunctionComponent<{ row }> = ({ row }) => (
 
 export const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns } = props;
-  useTitle(translate('Projects'));
   const columns = filterColumns([
     {
       title: translate('Name'),
@@ -102,10 +102,6 @@ const TableOptions = {
   table: PROJECTS_LIST,
   fetchData: createFetcher('projects'),
   queryField: 'query',
-  getDefaultFilter: (state: RootState) => ({
-    customer: getCustomer(state) ? getCustomer(state).uuid : undefined,
-    o: 'name',
-  }),
   mapPropsToFilter: () => {
     const filter: Record<string, string[]> = {};
     // select required fields
@@ -133,7 +129,4 @@ const TableOptions = {
 
 const enhance = compose(connectTable(TableOptions));
 
-export const SupportProjectsList = enhance((props) => {
-  useTitle(translate('Projects'));
-  return <TableComponent {...props} />;
-});
+export const SupportProjectsList = enhance(TableComponent);

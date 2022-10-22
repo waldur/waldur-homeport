@@ -1,12 +1,10 @@
 import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
-import { compose } from 'redux';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { ProjectsListActions } from '@waldur/project/ProjectsListActions';
 import { RootState } from '@waldur/store/reducers';
@@ -21,7 +19,11 @@ import { ProjectExpandableRowContainer } from './ProjectExpandableRowContainer';
 import { ProjectTablePlaceholder } from './ProjectTablePlaceholder';
 
 const ProjectLink = ({ row }) => (
-  <Link state="project.details" params={{ uuid: row.uuid }} label={row.name} />
+  <Link
+    state="project.dashboard"
+    params={{ uuid: row.uuid }}
+    label={row.name}
+  />
 );
 
 const ProjectCostField = ({ row }) =>
@@ -31,7 +33,6 @@ const ProjectCostField = ({ row }) =>
 
 export const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns } = props;
-  useTitle(translate('Projects'));
   const columns = filterColumns([
     {
       title: translate('Name'),
@@ -116,11 +117,4 @@ const TableOptions = {
   exportFields: ['Name', 'Description', 'Created'],
 };
 
-const enhance = compose(connectTable(TableOptions));
-
-export const ProjectsList = enhance((props) => {
-  useTitle(translate('Projects'));
-  return <TableComponent {...props} />;
-});
-
-export const ProjectsListOnly = enhance(TableComponent);
+export const ProjectsList = connectTable(TableOptions)(TableComponent);

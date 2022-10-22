@@ -8,8 +8,8 @@ export const UserAuthWarning: FunctionComponent = () => (
     {translate(
       'By authenticating you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>.',
       {
-        tos: (s: string) => <Link state="tos.index" label={s} />,
-        pp: (s: string) => <Link state="policy.privacy" label={s} />,
+        tos: (s: string) => <Link state="about.tos" label={s} />,
+        pp: (s: string) => <Link state="about.privacy" label={s} />,
       },
       formatJsx,
     )}

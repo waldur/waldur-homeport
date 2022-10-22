@@ -21,7 +21,6 @@ import { Plan } from '@waldur/marketplace/types';
 import { useTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { useUserTabs } from '@waldur/user/constants';
 
 import { getFlow, updateFlow } from './api';
 
@@ -50,7 +49,6 @@ const FlowUpdateForm = reduxForm<{}, PureOfferingConfiguratorProps>({
 
 export const FlowEditForm = () => {
   useTitle(translate('Flow update'));
-  useUserTabs();
 
   const state = useAsync(
     () => loadData(router.globals.params.flow_uuid),

@@ -1,5 +1,9 @@
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { useState, FunctionComponent, useRef, useEffect, useMemo } from 'react';
+import {
+  useCurrentStateAndParams,
+  useOnStateChanged,
+  useRouter,
+} from '@uirouter/react';
+import { useState, FunctionComponent, useRef, useEffect } from 'react';
 import { Button, FormControl } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,18 +11,19 @@ import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import useOnScreen from '@waldur/core/useOnScreen';
-import { getCustomerItems } from '@waldur/customer/utils';
 import { translate } from '@waldur/i18n';
+import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { isChildOf } from '@waldur/navigation/useTabs';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
-import { getProjectItems, getProviderItems } from '../../navitems';
 import { openSelectWorkspaceDialog } from '../actions';
 import { getCustomersCount } from '../api';
 import { EmptyOrganizationsPlaceholder } from '../EmptyOrganizationsPlaceholder';
 
 import { OrganizationsPanel } from './OrganizationsPanel';
 import { ProjectsPanel } from './ProjectsPanel';
+
 import './QuickProjectSelectorDropdown.scss';
 
 export const QuickProjectSelectorDropdown: FunctionComponent = () => {
@@ -58,37 +63,15 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
   const { state } = useCurrentStateAndParams();
   const router = useRouter();
 
-  const isCustomerPages = useMemo(() => {
-    for (const link of getCustomerItems()) {
-      if (link.children && link.children.length) {
-        for (const link2 of link.children) {
-          if (link2.to === state.name) {
-            return true;
-          }
-        }
-      }
-      if (link.to === state.name) {
-        return true;
-      }
-    }
-    return false;
-  }, [state.name]);
+  const isCustomerPages = isChildOf('organization', state);
 
-  const isProjectPages = useMemo(
-    () =>
-      getProjectItems()
-        .map((item) => item.to)
-        .includes(state.name),
-    [state.name],
-  );
+  const isProjectPages = isChildOf('project', state);
 
-  const isProviderPages = useMemo(
-    () =>
-      getProviderItems()
-        .map((item) => item.to)
-        .includes(state.name),
-    [state.name],
-  );
+  const isProviderPages = isChildOf('marketplace-provider', state);
+
+  useOnStateChanged(() => {
+    MenuComponent.hideDropdowns(undefined);
+  });
 
   return (
     <>
@@ -153,7 +136,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
                       uuid: item.uuid,
                     });
                   } else {
-                    router.stateService.go('project.details', {
+                    router.stateService.go('project.dashboard', {
                       uuid: item.uuid,
                     });
                   }

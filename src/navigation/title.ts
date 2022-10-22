@@ -51,5 +51,8 @@ export const useTitle = (title: string, subtitle?: string) => {
       return;
     }
     dispatch(setTitle(title, subtitle));
+    return () => {
+      dispatch(setTitle('', ''));
+    };
   }, [dispatch, title, subtitle]);
 };

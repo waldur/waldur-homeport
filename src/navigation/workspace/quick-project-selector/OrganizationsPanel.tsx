@@ -1,11 +1,11 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { useMemo, useCallback, FunctionComponent } from 'react';
+import { useCallback, FunctionComponent } from 'react';
 import { Col, ListGroupItem, Stack } from 'react-bootstrap';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { getProviderItems } from '@waldur/navigation/navitems';
+import { isChildOf } from '@waldur/navigation/useTabs';
 
 import { getCustomersPage } from '../api';
 import { ServiceProviderIcon } from '../ServiceProviderIcon';
@@ -73,13 +73,7 @@ export const OrganizationsPanel: FunctionComponent<{
   onMouseEnter;
 }> = ({ active, filter, onClick, onMouseEnter }) => {
   const { state } = useCurrentStateAndParams();
-  const isServiceProvider = useMemo(
-    () =>
-      getProviderItems()
-        .map((item) => item.to)
-        .includes(state.name),
-    [state.name],
-  );
+  const isServiceProvider = isChildOf('marketplace-provider', state);
   const getPage = useCallback(
     (page) =>
       getCustomersPage(

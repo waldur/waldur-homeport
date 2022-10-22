@@ -39,7 +39,7 @@ export const ManagementMenu = () => {
       {project ? (
         <MenuItem
           title={translate('Project')}
-          state="project.details"
+          state="project.dashboard"
           activeState="project"
           params={{ uuid: project.uuid }}
         />

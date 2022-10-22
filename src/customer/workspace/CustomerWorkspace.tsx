@@ -1,4 +1,4 @@
-import { Transition, UIView } from '@uirouter/react';
+import { Transition } from '@uirouter/react';
 import { triggerTransition } from '@uirouter/redux';
 
 import { getFirst } from '@waldur/core/api';
@@ -16,8 +16,6 @@ import {
   getUser,
 } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE, Project } from '@waldur/workspace/types';
-
-import { useCustomerItems } from '../utils';
 
 export async function fetchCustomer(transition: Transition) {
   const project = getProjectSelector(store.getState());
@@ -50,8 +48,3 @@ export async function fetchCustomer(transition: Transition) {
     }
   }
 }
-
-export const CustomerContainer = () => {
-  useCustomerItems();
-  return <UIView />;
-};

@@ -1,6 +1,6 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { checkPermission } from '@waldur/utils';
+import { translate } from '@waldur/i18n';
 
 const ResourcesTreemap = lazyComponent(
   () => import(/* webpackChunkName: "ResourcesTreemap" */ './ResourcesTreemap'),
@@ -21,9 +21,7 @@ export const states: StateDeclaration[] = [
     component: ResourcesTreemap,
     data: {
       feature: 'support.resources_treemap',
-    },
-    resolve: {
-      permission: checkPermission,
+      breadcrumb: () => translate('Resources usage'),
     },
   },
 
@@ -33,9 +31,7 @@ export const states: StateDeclaration[] = [
     component: SharedProviderContainer,
     data: {
       feature: 'support.shared_providers',
-    },
-    resolve: {
-      permission: checkPermission,
+      breadcrumb: () => translate('Shared providers'),
     },
   },
 ];

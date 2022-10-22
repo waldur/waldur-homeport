@@ -93,7 +93,7 @@ describe('TOS and PP pages', () => {
   });
 
   it('Assure that PP page is visible without auth token', () => {
-    cy.visit('/policy/privacy/');
+    cy.visit('/privacy/');
 
     cy.get('h2:contains(Privacy Policy)').should('be.visible');
   });

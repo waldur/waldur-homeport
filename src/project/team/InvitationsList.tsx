@@ -1,4 +1,3 @@
-import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import Gravatar from 'react-gravatar';
 import { connect, useSelector } from 'react-redux';
@@ -11,7 +10,6 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { InvitationCancelButton } from '@waldur/invitations/actions/InvitationCancelButton';
 import { InvitationCreateButton } from '@waldur/invitations/actions/InvitationCreateButton';
-import { InvitationPolicyService } from '@waldur/invitations/actions/InvitationPolicyService';
 import { InvitationSendButton } from '@waldur/invitations/actions/InvitationSendButton';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { InvitationsFilter } from '@waldur/invitations/InvitationsFilter';
@@ -19,7 +17,6 @@ import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 import {
-  getCustomer,
   getProject,
   getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
@@ -120,17 +117,6 @@ export const InvitationsList: FunctionComponent = () => {
   );
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const isProjectManager = value && value.length > 0;
-
-  const customer = useSelector(getCustomer);
-  const router = useRouter();
-  const canAccessInvitations = InvitationPolicyService.canAccessInvitations({
-    user,
-    customer,
-    project,
-  });
-  if (!canAccessInvitations) {
-    router.stateService.go('profile.details');
-  }
 
   if (loading) {
     return <LoadingSpinner />;

@@ -70,7 +70,7 @@ const EmptyProjectsPlaceholder: FunctionComponent = () => (
 const SelectProjectButton = ({ project }) => (
   <Link
     className="btn btn-sm btn-secondary pull-right"
-    state="project.details"
+    state="project.dashboard"
     params={{ uuid: project.uuid }}
   >
     {translate('Select')}

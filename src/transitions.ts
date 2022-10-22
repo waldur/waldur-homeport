@@ -86,6 +86,18 @@ export function attachTransitions() {
     (transition) => transition.router.stateService.target('errorPage.notFound'),
   );
 
+  router.transitionService.onStart(
+    {
+      to: (state) =>
+        state.data &&
+        state.data.permission &&
+        !state.data.permissions.every((permission) =>
+          permission(store.getState()),
+        ),
+    },
+    (transition) => transition.router.stateService.target('errorPage.notFound'),
+  );
+
   router.transitionService.onError({}, (transition) => {
     const error = transition.error();
     // Erred state is terminal, user should not be redirected from erred state to login
@@ -116,16 +128,6 @@ export function attachTransitions() {
       if (router.urlService.path().split('/')[1] !== 'user-group-invitations') {
         tryAcceptInvitation();
       }
-    }
-  });
-
-  router.transitionService.onStart({}, function () {
-    const bodyClasses = document.body.classList;
-    if (
-      bodyClasses.contains('mini-navbar') &&
-      bodyClasses.contains('body-small')
-    ) {
-      bodyClasses.remove('mini-navbar');
     }
   });
 

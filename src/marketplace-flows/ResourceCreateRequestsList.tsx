@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -15,7 +14,6 @@ import { ReviewActions } from './ReviewActions';
 import { getColumns } from './utils';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  useTitle(translate('Resource creation requests'));
   const columns = [
     ...getColumns(),
     {

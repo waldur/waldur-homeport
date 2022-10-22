@@ -1,10 +1,17 @@
-import { UISref, UISrefActive } from '@uirouter/react';
+import { UISref, UISrefActive, useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 
-import { getUserTabs } from '@waldur/user/constants';
+import { getTabs } from '../useTabs';
 
 export const UserDropdownMenuItems = () => {
-  const items = useMemo(() => getUserTabs(), []);
+  const router = useRouter();
+
+  const items = useMemo(() => {
+    const allStates = router.stateRegistry.get();
+    const root = router.stateRegistry.get('profile');
+    return getTabs(root, allStates);
+  }, [router]);
+
   return (
     <>
       {items.map((item, index) => (
@@ -22,7 +29,7 @@ export const UserDropdownMenuItems = () => {
             ) : (
               <a className="menu-link px-5">{item.title}</a>
             )}
-            {item.children && (
+            {item.children?.length > 0 && (
               <div className="menu-sub menu-sub-dropdown w-175px py-4">
                 {item.children.map((child, childIndex) => (
                   <div key={childIndex} className="menu-item px-3">
