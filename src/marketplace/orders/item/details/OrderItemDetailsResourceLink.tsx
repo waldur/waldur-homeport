@@ -34,9 +34,5 @@ export const OrderItemDetailsResourceLink: FunctionComponent<OrderItemDetailsRes
         resource_uuid: props.item.marketplace_resource_uuid,
       };
     }
-    return (
-      <>
-        <Link state={state} params={params} label={props.children} />
-      </>
-    );
+    return <Link state={state} params={params} label={props.children} />;
   };
