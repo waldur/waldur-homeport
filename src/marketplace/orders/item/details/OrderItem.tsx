@@ -55,7 +55,15 @@ export const OrderItem: FunctionComponent<OrderItemProps> = (props) => {
                 <FormattedHtml html={props.item.offering_description} />
               )}
             </p>
-            {props.item.resource_uuid && props.item.resource_type ? (
+            {props.item.marketplace_resource_uuid ? (
+              <p>
+                <OrderItemDetailsResourceLink
+                  item={props.item as ResourceReference}
+                >
+                  {translate('Resource link')}
+                </OrderItemDetailsResourceLink>
+              </p>
+            ) : props.item.resource_uuid && props.item.resource_type ? (
               <p>
                 <ResourceDetailsLink
                   item={
@@ -67,14 +75,6 @@ export const OrderItem: FunctionComponent<OrderItemProps> = (props) => {
                 >
                   {translate('Resource link')}
                 </ResourceDetailsLink>
-              </p>
-            ) : props.item.marketplace_resource_uuid ? (
-              <p>
-                <OrderItemDetailsResourceLink
-                  item={props.item as ResourceReference}
-                >
-                  {translate('Resource link')}
-                </OrderItemDetailsResourceLink>
               </p>
             ) : null}
           </div>
