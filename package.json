@@ -21,7 +21,7 @@
     "gettext:extract": "angular-gettext-cli --files 'src/**/*.+(js|ts|tsx|html)' --exclude '**/*.spec.(js|ts|tsx)' --dest './locales/template.pot' --marker-names translate,gettext --no-line-numbers"
   },
   "dependencies": {
-    "@fontsource/poppins": "^4.5.5",
+    "@fontsource/inter": "^4.5.14",
     "@fullcalendar/bootstrap": "~4.2.0",
     "@fullcalendar/core": "~4.2.0",
     "@fullcalendar/daygrid": "~4.2.0",
