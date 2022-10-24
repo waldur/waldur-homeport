@@ -28,14 +28,17 @@ export const NotificationCreateDialog = reduxForm({
   const createNotification = useCallback(
     async (formData) => {
       try {
-        const response = await post<{ emails: string[] }>('/notifications/', {
-          subject: formData.subject,
-          body: formData.body,
-          query: {
-            customers: formData.customers?.map((c) => c.uuid),
-            offerings: formData.offerings?.map((c) => c.uuid),
+        const response = await post<{ emails: string[] }>(
+          '/broadcast_messages/',
+          {
+            subject: formData.subject,
+            body: formData.body,
+            query: {
+              customers: formData.customers?.map((c) => c.uuid),
+              offerings: formData.offerings?.map((c) => c.uuid),
+            },
           },
-        });
+        );
         dispatch(
           showSuccess(
             translate('Notifications has been sent to {count} users.', {
