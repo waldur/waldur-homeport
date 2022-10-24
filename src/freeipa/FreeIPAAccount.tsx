@@ -1,3 +1,4 @@
+import { Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
@@ -34,9 +35,19 @@ export const FreeIpaAccount = () => {
 
   if (error) return <>{translate('Unable to load data.')}</>;
 
-  return profile ? (
-    <FreeIPAAccountEdit profile={profile} refreshProfile={refreshProfile} />
-  ) : (
-    <FreeIPAAccountCreate onProfileAdded={refreshProfile} />
+  return (
+    <Card>
+      <Card.Header>{translate('FreeIPA account')}</Card.Header>
+      <Card.Body>
+        {profile ? (
+          <FreeIPAAccountEdit
+            profile={profile}
+            refreshProfile={refreshProfile}
+          />
+        ) : (
+          <FreeIPAAccountCreate onProfileAdded={refreshProfile} />
+        )}
+      </Card.Body>
+    </Card>
   );
 };

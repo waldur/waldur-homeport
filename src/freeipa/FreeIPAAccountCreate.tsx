@@ -1,9 +1,10 @@
 import { useEffect, useCallback } from 'react';
-import { Col, FormGroup } from 'react-bootstrap';
+import { FormGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxForm, change } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { FormContainer } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import {
   showSuccess,
@@ -65,18 +66,20 @@ export const FreeIPAAccountCreate = reduxForm<
 
     return (
       <form onSubmit={handleSubmit(callback)}>
-        <UsernameGroup />
-        <FormGroup>
-          <Col smOffset={3} sm={5}>
-            <SubmitButton
-              submitting={submitting}
-              invalid={invalid}
-              block={false}
-            >
-              <i className="fa fa-plus" /> {translate('Create')}
-            </SubmitButton>
-          </Col>
-        </FormGroup>
+        <FormContainer submitting={submitting}>
+          <UsernameGroup />
+          <FormGroup>
+            <div className="pull-right">
+              <SubmitButton
+                submitting={submitting}
+                invalid={invalid}
+                block={false}
+              >
+                <i className="fa fa-plus" /> {translate('Create')}
+              </SubmitButton>
+            </div>
+          </FormGroup>
+        </FormContainer>
       </form>
     );
   },
