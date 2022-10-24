@@ -40,7 +40,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
 const TableOptions: TableOptionsType = {
   table: 'broadcast',
-  fetchData: createFetcher('notifications'),
+  fetchData: createFetcher('broadcast_messages'),
 };
 
 const BroadcastListComponent = connectTable(TableOptions)(TableComponent);
