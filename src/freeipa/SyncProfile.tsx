@@ -47,7 +47,7 @@ export const SyncProfile: FunctionComponent<{
       label={translate('Add Waldur user SSH keys to the FreeIPA profile')}
       id="freeipa-sync-profile"
     >
-      <Button variant="info" className="me-2" onClick={callback}>
+      <Button variant="primary" className="ms-2" onClick={callback}>
         <i className="fa fa-refresh"></i> {translate('Sync profile')}
       </Button>
     </Tip>

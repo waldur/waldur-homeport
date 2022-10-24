@@ -1,6 +1,7 @@
 import React from 'react';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
+import { FormContainer } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 
 import { SyncProfile } from './SyncProfile';
@@ -11,12 +12,14 @@ interface FreeIPAAccountEditOwnProps {
 }
 
 const UsernameGroup = ({ profile }) => (
-  <Form.Group className="m-b-n">
-    <Form.Label className="col-sm-3">{translate('Username')}:</Form.Label>
-    <div className="col-sm-6 mb-2">
-      <p>{profile.username}</p>
-    </div>
-  </Form.Group>
+  <div className="form-floating mb-7">
+    <Form.Control
+      readOnly
+      defaultValue={profile.username}
+      className="form-control-solid"
+    />
+    <Form.Label>{translate('Username')}</Form.Label>
+  </div>
 );
 
 export const FreeIPAAccountEdit: React.FC<FreeIPAAccountEditOwnProps> = ({
@@ -25,20 +28,20 @@ export const FreeIPAAccountEdit: React.FC<FreeIPAAccountEditOwnProps> = ({
 }) => {
   const [loading, setLoading] = React.useState<boolean>();
   return (
-    <Row disabled={loading}>
+    <FormContainer submitting={loading} floating={true}>
       <UsernameGroup profile={profile} />
       <Form.Group>
-        <Col sm={{ span: 5, offset: 3 }}>
+        <div className="pull-right">
+          {profile.is_active
+            ? translate('Profile is enabled.')
+            : translate('Profile is disabled.')}
           <SyncProfile
             profile={profile}
             setLoading={setLoading}
             refreshProfile={refreshProfile}
           />
-          {profile.is_active
-            ? translate('Profile is enabled.')
-            : translate('Profile is disabled.')}
-        </Col>
+        </div>
       </Form.Group>
-    </Row>
+    </FormContainer>
   );
 };

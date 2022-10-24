@@ -1,16 +1,9 @@
 import { FunctionComponent } from 'react';
-import {
-  Col,
-  Form,
-  InputGroup,
-  OverlayTrigger,
-  Tooltip,
-} from 'react-bootstrap';
+import { Form, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Field, WrappedFieldProps } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
-import { FieldError } from '@waldur/form';
-import { InputField } from '@waldur/form/InputField';
+import { FieldError, StringField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 
 // These limitations are imposed by underlying operating system
@@ -58,28 +51,24 @@ const UsernameField: FunctionComponent<WrappedFieldProps> = (props) => (
           </InputGroup.Text>
         </OverlayTrigger>
       )}
-      <InputField {...props} />
+      <StringField {...props} />
     </InputGroup>
     {props.meta.touched && <FieldError error={props.meta.error} />}
   </>
 );
 
 export const UsernameGroup: FunctionComponent = () => (
-  <Form.Group>
-    <Col sm={3} as={Form.Label}>
-      {translate('Username')}
-    </Col>
-    <Col sm={6}>
-      <Field
-        name="username"
-        validate={validateUsername}
-        component={UsernameField}
-      />
-      <Form.Text muted={true}>
-        {translate(
-          'Please select a username that you will use for login into the Linux systems.',
-        )}
-      </Form.Text>
-    </Col>
+  <Form.Group className="mb-7">
+    <Form.Label>{translate('Username')}</Form.Label>
+    <Field
+      name="username"
+      validate={validateUsername}
+      component={UsernameField}
+    />
+    <Form.Text muted={true}>
+      {translate(
+        'Please select a username that you will use for login into the Linux systems.',
+      )}
+    </Form.Text>
   </Form.Group>
 );

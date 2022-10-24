@@ -1,11 +1,20 @@
+import { FunctionComponent } from 'react';
 import { FormControl } from 'react-bootstrap';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const InputField = ({ input, meta, ...props }) => (
-  <FormControl
-    className="form-control-solid"
-    placeholder="  "
-    {...input}
-    {...props}
-  />
+import { FormField } from './types';
+
+interface InputFieldProps extends FormField {
+  className?: string;
+}
+
+export const InputField: FunctionComponent<InputFieldProps> = ({
+  input,
+  className,
+  ...props
+}) => (
+  <FormControl className={className} placeholder="  " {...input} {...props} />
 );
+
+InputField.defaultProps = {
+  className: 'form-control-solid',
+};
