@@ -8,10 +8,15 @@ import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { useFullPage } from '@waldur/navigation/context';
-import { TENANT_TYPE } from '@waldur/openstack/constants';
+import {
+  INSTANCE_TYPE,
+  TENANT_TYPE,
+  VOLUME_TYPE,
+} from '@waldur/openstack/constants';
 import { OpenStackResourceUsage } from '@waldur/openstack/OpenStackResourceUsage';
 
 import '@waldur/marketplace/offerings/details/PublicOfferingDetailsHero.scss';
+import { MonitoringCharts } from './MonitoringCharts';
 import { TenantDetails } from './openstack-tenant/TenantDetails';
 import { QuickActions } from './QuickActions';
 import { ResourceComponents } from './ResourceComponents';
@@ -19,6 +24,8 @@ import { ResourceDetailsHeader } from './ResourceDetailsHeader';
 import { ResourceIssues } from './ResourceIssues';
 import { ResourceTimeline } from './ResourceTimeline';
 import { StatusPage } from './StatusPage';
+
+const openstackIcon = require('@waldur/images/appstore/icon-openstack.png');
 
 export const RemoteOfferingDetails: FC<any> = ({ resource }) => {
   useFullPage();
@@ -42,12 +49,18 @@ export const RemoteOfferingDetails: FC<any> = ({ resource }) => {
                           size={50}
                           className="offering-small-logo"
                         />
-                        <Logo
-                          image={resource.category_icon}
-                          placeholder={resource.category_title[0]}
-                          height={100}
-                          width={100}
-                        />
+                        {[INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE].includes(
+                          resource.offering_type,
+                        ) ? (
+                          <img src={openstackIcon} width={100} />
+                        ) : (
+                          <Logo
+                            image={resource.category_icon}
+                            placeholder={resource.category_title[0]}
+                            height={100}
+                            width={100}
+                          />
+                        )}
                       </Card.Body>
                     </Card>
                     <Card className="flex-grow-1">
@@ -95,6 +108,8 @@ export const RemoteOfferingDetails: FC<any> = ({ resource }) => {
                 </Card>
               </div>
             )}
+            {resource.offering_type === INSTANCE_TYPE &&
+              showExperimentalUiComponents && <MonitoringCharts />}
             {(resource.is_usage_based || resource.is_limit_based) && (
               <Card>
                 <Card.Body>

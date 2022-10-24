@@ -1044,6 +1044,10 @@ msgstr ""
 msgid "Backing up"
 msgstr ""
 
+#: src/marketplace/resources/details/MonitoringCharts.tsx
+msgid "Bandwidth"
+msgstr ""
+
 #: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -1209,6 +1213,7 @@ msgstr ""
 msgid "CIDR"
 msgstr ""
 
+#: src/marketplace/resources/details/MonitoringCharts.tsx
 #: src/rancher/cluster/hpas/utils.ts
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/slurm/details/AllocationQuotas.tsx
@@ -2510,6 +2515,10 @@ msgstr ""
 
 #: src/vmware/actions/CreateDiskDialog.tsx
 msgid "Disk has been created."
+msgstr ""
+
+#: src/marketplace/resources/details/MonitoringCharts.tsx
+msgid "Disk usage"
 msgstr ""
 
 #: src/vmware/tabs.ts
@@ -4569,6 +4578,7 @@ msgstr ""
 msgid "Members:"
 msgstr ""
 
+#: src/marketplace/resources/details/MonitoringCharts.tsx
 #: src/rancher/cluster/hpas/utils.ts
 msgid "Memory"
 msgstr ""
@@ -4646,6 +4656,10 @@ msgstr ""
 
 #: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Mobile phone number"
+msgstr ""
+
+#: src/marketplace/resources/details/MonitoringCharts.tsx
+msgid "Monitoring"
 msgstr ""
 
 #: src/providers/support/FlowMapFilter.tsx
