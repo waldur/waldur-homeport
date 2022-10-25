@@ -17,7 +17,6 @@ import {
   getCustomer,
 } from '@waldur/workspace/selectors';
 
-import { AddMemberButton } from './AddMemberButton';
 import { AddUserButton } from './AddUserButton';
 import { fetchProjectUsers, fetchProjectManagers } from './api';
 import { UserDetailsButton } from './UserDetailsButton';
@@ -51,16 +50,6 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => (
             <>
               <UserDetailsButton user={row} />
-              {props.isOwnerOrStaff ? (
-                <AddMemberButton
-                  user={row}
-                  users={props.rows}
-                  project={props.project}
-                  customer={props.customer}
-                  isProjectManager={props.isProjectManager}
-                  refreshList={props.fetch}
-                />
-              ) : null}
               {props.isOwnerOrStaff || props.isProjectManager ? (
                 <UserRemoveButton
                   user={row}
@@ -75,15 +64,6 @@ const TableComponent: FunctionComponent<any> = (props) => {
       actions={
         <ButtonGroup>
           {props.isStaff && <AddUserButton refreshList={props.fetch} />}
-          {props.isOwnerOrStaff || props.isProjectManager ? (
-            <AddMemberButton
-              users={props.rows}
-              project={props.project}
-              customer={props.customer}
-              isProjectManager={props.isProjectManager}
-              refreshList={props.fetch}
-            />
-          ) : null}
         </ButtonGroup>
       }
       verboseName={translate('Team members')}
