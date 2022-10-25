@@ -53,6 +53,8 @@ export interface Resource extends ResourceReference {
   current_usages?: Record<string, number>;
   plan_uuid?: string;
   plan_name?: string;
+  parent_uuid?: string;
+  parent_name?: string;
   report?: Report;
   provider_name: string;
   marketplace_offering_uuid?: string;

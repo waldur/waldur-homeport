@@ -10,7 +10,7 @@ export const ResourceLink = ({ row }) => (
       resource_uuid: row.marketplace_resource_uuid,
     }}
   >
-    <a className="text-dark text-decoration-underline text-hover-primary">
+    <a className="cursor-pointer text-dark text-decoration-underline text-hover-primary">
       {translate('To instance')}
     </a>
   </UISref>

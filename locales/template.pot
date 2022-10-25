@@ -3342,6 +3342,7 @@ msgstr ""
 msgid "FreeIPA"
 msgstr ""
 
+#: src/freeipa/FreeIPAAccount.tsx
 #: src/user/routes.ts
 msgid "FreeIPA account"
 msgstr ""
@@ -5838,6 +5839,10 @@ msgstr ""
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Paid"
+msgstr ""
+
+#: src/marketplace/resources/details/ParentResourceLink.tsx
+msgid "Part of {resource}"
 msgstr ""
 
 #: src/auth/SigninForm.tsx

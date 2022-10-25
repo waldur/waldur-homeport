@@ -33,11 +33,11 @@ export const ResourcesSection: FC<ResourcesSectionProps> = ({
         <td></td>
         <td></td>
         <td>
-          <a className="text-dark text-decoration-underline text-hover-primary">
+          <a className="cursor-pointer text-dark text-decoration-underline text-hover-primary">
             {translate('See all')}
           </a>{' '}
           {canAdd && (
-            <a className="text-dark text-decoration-underline text-hover-primary">
+            <a className="cursor-pointer text-dark text-decoration-underline text-hover-primary">
               {translate('Add new')}
             </a>
           )}
