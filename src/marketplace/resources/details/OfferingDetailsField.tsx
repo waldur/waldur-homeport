@@ -14,7 +14,7 @@ export const OfferingDetailsField = ({ resource }) => {
         <>
           {resource.offering_name}{' '}
           <a
-            className="text-dark text-decoration-underline text-hover-primary"
+            className="cursor-pointer text-dark text-decoration-underline text-hover-primary"
             onClick={() =>
               dispatch(openOfferingDetailsDialog(resource.offering_uuid))
             }

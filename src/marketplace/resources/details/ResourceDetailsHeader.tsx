@@ -9,6 +9,7 @@ import { ResourceActions } from '../ResourceActions';
 import { Resource } from '../types';
 
 import { OfferingDetailsField } from './OfferingDetailsField';
+import { ParentResourceLink } from './ParentResourceLink';
 import { PlanDetailsField } from './PlanDetailsField';
 import { ResourceMetadataLink } from './ResourceMetadataLink';
 import { ResourceOrderItemsLink } from './ResourceOrderItemsLink';
@@ -25,6 +26,7 @@ export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps
         <div className="d-flex flex-grow-1">
           <div className="flex-grow-1">
             <h3>{resource.name}</h3>
+            <ParentResourceLink resource={resource} />
             <i>{`${resource.customer_name} / ${resource.project_name}`}</i>
           </div>
           <ResourceActions resource={resource} />
@@ -37,7 +39,7 @@ export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps
           <OfferingDetailsField resource={resource} />
           <PlanDetailsField resource={resource} />
 
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between mt-3">
             <ResourceMetadataLink resource={resource} />
             <ResourceOrderItemsLink resource={resource} />
           </div>

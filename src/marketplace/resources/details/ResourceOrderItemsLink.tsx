@@ -23,7 +23,7 @@ export const ResourceOrderItemsLink = ({ resource }) => {
 
   return (
     <a
-      className="text-dark text-decoration-underline text-hover-primary"
+      className="cursor-pointer text-dark text-decoration-underline text-hover-primary"
       onClick={() => dispatch(showOrderItems(resource))}
     >
       {translate('Order history')}
