@@ -91,7 +91,7 @@ const SearchItem = ({ item }) => (
     to="marketplace-project-resource-details"
     params={{ uuid: item.project_uuid, resource_uuid: item.uuid }}
   >
-    <a className="d-flex text-dark text-hover-primary align-items-center mb-5">
+    <a className="d-flex text-dark text-hover-primary align-items-center mb-5 mw-300px mw-md-350px">
       <div className="symbol symbol-40px me-4">
         <img src={item.offering_thumbnail} />
       </div>
@@ -166,7 +166,10 @@ export const SearchToggle = () => (
     trigger="click"
     placement="bottom-end"
     overlay={
-      <Popover id="GlobalSearch">
+      <Popover
+        id="GlobalSearch"
+        className="mw-350px mw-md-400px w-350px w-md-400px"
+      >
         <SearchPopover />{' '}
       </Popover>
     }
