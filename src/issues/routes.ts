@@ -133,7 +133,7 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: SUPPORT_WORKSPACE,
       title: () => translate('Support'),
-      permissions: [isStaffOrSupport, hasSupport],
+      permissions: [isStaffOrSupport],
     },
   },
 
@@ -141,6 +141,9 @@ export const states: StateDeclaration[] = [
     name: 'support.detail',
     url: 'issue/:uuid/',
     component: IssueDetailsContainer,
+    data: {
+      permissions: [isStaffOrSupport, hasSupport],
+    },
   },
 
   {
@@ -149,6 +152,7 @@ export const states: StateDeclaration[] = [
     component: SupportIssues,
     data: {
       breadcrumb: () => translate('Issues'),
+      permissions: [isStaffOrSupport, hasSupport],
     },
   },
 
@@ -167,6 +171,7 @@ export const states: StateDeclaration[] = [
     component: SupportFeedbackListContainer,
     data: {
       breadcrumb: () => translate('Feedback'),
+      permissions: [isStaffOrSupport, hasSupport],
     },
   },
 
