@@ -1,12 +1,11 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent } from 'react';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { getResource } from '@waldur/marketplace/common/api';
 import { useTitle } from '@waldur/navigation/title';
-import { formatResourceType } from '@waldur/resource/utils';
 
 import { RemoteOfferingDetails } from './RemoteOfferingDetails';
 
@@ -26,15 +25,7 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
 
   const resource = state.value;
 
-  const header = useMemo(
-    () =>
-      resource?.resource_type
-        ? formatResourceType(resource)
-        : resource?.offering_name,
-    [resource],
-  );
-
-  useTitle(resource ? resource.name : translate('Resource details'), header);
+  useTitle(resource ? resource.category_title : translate('Resource details'));
 
   const router = useRouter();
 
