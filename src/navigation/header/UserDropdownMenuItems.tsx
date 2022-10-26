@@ -32,7 +32,11 @@ export const UserDropdownMenuItems = () => {
             {item.children?.length > 0 && (
               <div className="menu-sub menu-sub-dropdown w-175px py-4">
                 {item.children.map((child, childIndex) => (
-                  <div key={childIndex} className="menu-item px-3">
+                  <div
+                    key={childIndex}
+                    className="menu-item px-3"
+                    data-kt-menu-trigger="click"
+                  >
                     <UISref to={child.to}>
                       <a className="menu-link px-5">{child.title}</a>
                     </UISref>
