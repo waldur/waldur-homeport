@@ -7,7 +7,7 @@ import { parseResponse } from '@waldur/table/api';
 import { ResourcesSection } from '../ResourcesSection';
 import { DataPage } from '../types';
 
-export const InstancesSection = ({ resource, count }) => {
+export const InstancesSection = ({ resource, title }) => {
   const loadData: QueryFunction<DataPage> = async (context) => {
     const service_settings_uuid: string = (
       await getFirst('/service-settings/', {
@@ -38,9 +38,8 @@ export const InstancesSection = ({ resource, count }) => {
   };
   return (
     <ResourcesSection
-      title={translate('Instances')}
+      title={title}
       loadData={loadData}
-      count={count}
       queryKey="instance"
       canAdd={true}
     />

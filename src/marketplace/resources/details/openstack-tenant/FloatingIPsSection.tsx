@@ -7,7 +7,7 @@ import { parseResponse } from '@waldur/table/api';
 import { ResourcesSection } from '../ResourcesSection';
 import { DataPage } from '../types';
 
-export const FloatingIPsSection = ({ resource, count }) => {
+export const FloatingIPsSection = ({ resource, title }) => {
   const loadData: QueryFunction<DataPage> = async (context) => {
     const response = await parseResponse(
       fixURL('/openstack-floating-ips/'),
@@ -32,9 +32,8 @@ export const FloatingIPsSection = ({ resource, count }) => {
   };
   return (
     <ResourcesSection
-      title={translate('Floating IPs')}
+      title={title}
       loadData={loadData}
-      count={count}
       queryKey="floating_ips"
       canAdd={true}
     />

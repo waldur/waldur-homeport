@@ -10,7 +10,6 @@ interface ResourcesSectionProps {
   loadData: QueryFunction<DataPage>;
   queryKey: string;
   title: string;
-  count: number;
   canAdd?: boolean;
 }
 
@@ -18,7 +17,6 @@ export const ResourcesSection: FC<ResourcesSectionProps> = ({
   loadData,
   queryKey,
   title,
-  count,
   canAdd,
 }) => {
   const [toggle, setToggle] = useState(false);
@@ -27,7 +25,7 @@ export const ResourcesSection: FC<ResourcesSectionProps> = ({
       <tr>
         <td></td>
         <td onClick={() => setToggle(!toggle)}>
-          {`${title} (${count}) `}
+          {title}{' '}
           <i className={toggle ? 'fa fa-angle-down' : 'fa fa-angle-right'}></i>
         </td>
         <td></td>

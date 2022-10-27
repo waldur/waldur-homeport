@@ -1,9 +1,11 @@
+import { useMemo } from 'react';
 import { Table } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { useExtraTabs } from '@waldur/navigation/context';
 import { OpenStackTenant } from '@waldur/openstack/openstack-tenant/types';
 
 import { GroupSection } from '../GroupSection';
@@ -42,6 +44,115 @@ export const TenantDetails = ({ resource }) => {
       .data;
     return { tenant, counters };
   });
+  const tabs = useMemo(
+    () =>
+      resource && value
+        ? [
+            {
+              title: translate('Dashboard'),
+              to: 'marketplace-project-resource-details',
+              params: {
+                resource_uuid: resource.uuid,
+              },
+            },
+            {
+              title: translate('Compute'),
+              children: [
+                {
+                  title: translate('Instances ({count})', {
+                    count: value.counters.instances,
+                  }),
+                  to: 'marketplace-project-resource-details',
+                  component: InstancesSection,
+                },
+                {
+                  title: translate('Flavors ({count})', {
+                    count: value.counters.flavors,
+                  }),
+                  to: 'marketplace-project-resource-details',
+                  component: FlavorsSection,
+                },
+                {
+                  title: translate('Server groups ({count})', {
+                    count: value.counters.server_groups,
+                  }),
+                  to: 'marketplace-project-resource-details',
+                  component: ServerGroupsSection,
+                },
+              ],
+            },
+            {
+              title: translate('Networking'),
+              children: [
+                {
+                  title: translate('Routers ({count})', {
+                    count: value.counters.routers,
+                  }),
+                  to: 'marketplace-project-resource-details',
+                  component: RoutersSection,
+                },
+                {
+                  title: translate('Networks ({count})', {
+                    count: value.counters.networks,
+                  }),
+                  to: 'marketplace-project-resource-details',
+                  component: NetworksSection,
+                },
+                {
+                  title: translate('Subnets ({count})', {
+                    count: value.counters.subnets,
+                  }),
+                  to: 'marketplace-project-resource-details',
+                  component: SubnetsSection,
+                },
+                {
+                  title: translate('Security groups ({count})', {
+                    count: value.counters.security_groups,
+                  }),
+                  to: 'marketplace-project-resource-details',
+                  component: SecurityGroupsSection,
+                },
+                {
+                  title: translate('Floating IPs ({count})', {
+                    count: value.counters.floating_ips,
+                  }),
+                  to: 'marketplace-project-resource-details',
+                  component: FloatingIPsSection,
+                },
+                {
+                  title: translate('Ports ({count})', {
+                    count: value.counters.ports,
+                  }),
+                  to: 'marketplace-project-resource-details',
+                  component: PortsSection,
+                },
+              ],
+            },
+            {
+              title: translate('Storage'),
+              children: [
+                {
+                  title: translate('Volumes ({count})', {
+                    count: value.counters.volumes,
+                  }),
+                  to: 'marketplace-project-resource-details',
+                  component: VolumesSection,
+                },
+                {
+                  title: translate('Snapshots ({count})', {
+                    count: value.counters.snapshots,
+                  }),
+                  to: 'marketplace-project-resource-details',
+                  component: SnapshotsSection,
+                },
+              ],
+            },
+          ]
+        : [],
+    [resource, value],
+  );
+
+  useExtraTabs(tabs);
 
   if (loading) return <LoadingSpinner />;
 
@@ -58,71 +169,23 @@ export const TenantDetails = ({ resource }) => {
           <th>{translate('Details')}</th>
         </tr>
       </thead>
-      <GroupSection
-        title={translate('Compute')}
-        summary={translate(
-          '{instances} instances, {flavors} flavors, {server_groups} server groups',
-          value.counters,
-        )}
-      >
-        <InstancesSection
-          resource={value.tenant}
-          count={value.counters.instances}
-        />
-        <FlavorsSection
-          resource={value.tenant}
-          count={value.counters.flavors}
-        />
-        <ServerGroupsSection
-          resource={value.tenant}
-          count={value.counters.server_groups}
-        />
-      </GroupSection>
-      <GroupSection
-        title={translate('Networking')}
-        summary={translate(
-          '{routers} routers, {networks} networks, {subnets} subnets, {security_groups} security groups, {floating_ips} floating IPs, {ports} ports',
-          value.counters,
-        )}
-      >
-        <RoutersSection
-          resource={value.tenant}
-          count={value.counters.routers}
-        />
-        <NetworksSection
-          resource={value.tenant}
-          count={value.counters.networks}
-        />
-        <SubnetsSection
-          resource={value.tenant}
-          count={value.counters.subnets}
-        />
-        <SecurityGroupsSection
-          resource={value.tenant}
-          count={value.counters.security_groups}
-        />
-        <FloatingIPsSection
-          resource={value.tenant}
-          count={value.counters.floating_ips}
-        />
-        <PortsSection resource={value.tenant} count={value.counters.ports} />
-      </GroupSection>
-      <GroupSection
-        title={translate('Storage')}
-        summary={translate(
-          '{volumes} volumes, {snapshots} snapshots',
-          value.counters,
-        )}
-      >
-        <VolumesSection
-          resource={value.tenant}
-          count={value.counters.volumes}
-        />
-        <SnapshotsSection
-          resource={value.tenant}
-          count={value.counters.snapshots}
-        />
-      </GroupSection>
+      {tabs
+        .filter((tab) => !!tab.children)
+        .map((tab, tabIndex) => (
+          <GroupSection
+            key={tabIndex}
+            title={tab.title}
+            summary={tab.children.map((child) => child.title).join(', ')}
+          >
+            {tab.children.map((section, sectionIndex) => (
+              <section.component
+                key={sectionIndex}
+                resource={value.tenant}
+                title={section.title}
+              />
+            ))}
+          </GroupSection>
+        ))}
     </Table>
   );
 };

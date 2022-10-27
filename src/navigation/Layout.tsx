@@ -13,13 +13,14 @@ import { LayoutContext, LayoutContextInterface } from './context';
 import { CookiesConsent } from './cookies/CookiesConsent';
 import { AppHeader } from './header/AppHeader';
 import { UnifiedSidebar } from './sidebar/UnifiedSidebar';
+import { Tab } from './Tab';
 import { Toolbar } from './Toolbar';
 import { useTabs } from './useTabs';
 
 export const Layout: React.FC = ({ children }) => {
   const currentUser = useSelector(getUser);
   const [actions, setActions] = useState(null);
-  const [extraTabs, setExtraTabs] = useState(null);
+  const [extraTabs, setExtraTabs] = useState<Tab[]>([]);
   const [fullPage, setFullPage] = useState(false);
   const context = useMemo<Partial<LayoutContextInterface>>(
     () => ({

@@ -25,6 +25,7 @@ interface DataDeclaration {
   skipBreadcrumb?: boolean;
   priority?: number;
   permissions: Array<(state) => boolean>;
+  useExtraTabs?: boolean;
 }
 
 export interface StateDeclaration extends BaseStateDeclaration {

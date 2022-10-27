@@ -29,6 +29,7 @@ const openstackIcon = require('@waldur/images/appstore/icon-openstack.png');
 
 export const RemoteOfferingDetails: FC<any> = ({ resource }) => {
   useFullPage();
+
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   return (
     <>
