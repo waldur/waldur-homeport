@@ -6,6 +6,7 @@ import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { isChildOf } from '@waldur/navigation/useTabs';
+import { Customer } from '@waldur/workspace/types';
 
 import { getCustomersPage } from '../api';
 import { ServiceProviderIcon } from '../ServiceProviderIcon';
@@ -69,7 +70,7 @@ const VIRTUALIZED_SELECTOR_PAGE_SIZE = 20;
 export const OrganizationsPanel: FunctionComponent<{
   active;
   filter;
-  onClick;
+  onClick(customer: Customer): void;
   onMouseEnter;
 }> = ({ active, filter, onClick, onMouseEnter }) => {
   const { state } = useCurrentStateAndParams();

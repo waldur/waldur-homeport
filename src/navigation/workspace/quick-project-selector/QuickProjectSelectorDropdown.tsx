@@ -3,7 +3,13 @@ import {
   useOnStateChanged,
   useRouter,
 } from '@uirouter/react';
-import { useState, FunctionComponent, useRef, useEffect } from 'react';
+import {
+  useState,
+  FunctionComponent,
+  useRef,
+  useEffect,
+  useCallback,
+} from 'react';
 import { Button, FormControl } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,7 +29,6 @@ import { EmptyOrganizationsPlaceholder } from '../EmptyOrganizationsPlaceholder'
 
 import { OrganizationsPanel } from './OrganizationsPanel';
 import { ProjectsPanel } from './ProjectsPanel';
-
 import './QuickProjectSelectorDropdown.scss';
 
 export const QuickProjectSelectorDropdown: FunctionComponent = () => {
@@ -73,6 +78,36 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
     MenuComponent.hideDropdowns(undefined);
   });
 
+  const handleOrganizationSelect = useCallback(
+    (customer) => {
+      if (isCustomerPages || isProviderPages) {
+        router.stateService.go(state.name, {
+          uuid: customer.uuid,
+        });
+      } else {
+        router.stateService.go('organization.dashboard', {
+          uuid: customer.uuid,
+        });
+      }
+    },
+    [isCustomerPages, isProviderPages, router, state],
+  );
+
+  const handleProjectSelect = useCallback(
+    (project) => {
+      if (isProjectPages) {
+        router.stateService.go(state.name, {
+          uuid: project.uuid,
+        });
+      } else {
+        router.stateService.go('project.dashboard', {
+          uuid: project.uuid,
+        });
+      }
+    },
+    [isProjectPages, router, state],
+  );
+
   return (
     <>
       {isVisible &&
@@ -109,20 +144,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
             <div className="d-flex border-gray-300 border-bottom">
               <OrganizationsPanel
                 active={selectedOrganization}
-                onClick={(customer) => {
-                  if (isCustomerPages || isProviderPages) {
-                    router.stateService.go(state.name, {
-                      uuid: customer.uuid,
-                    });
-                  } else {
-                    const targetState = isProviderPages
-                      ? 'marketplace-vendor-offerings'
-                      : 'organization.dashboard';
-                    router.stateService.go(targetState, {
-                      uuid: customer.uuid,
-                    });
-                  }
-                }}
+                onClick={handleOrganizationSelect}
                 onMouseEnter={(customer) => {
                   selectOrganization(customer);
                 }}
@@ -130,17 +152,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
               />
               <ProjectsPanel
                 projects={selectedOrganization?.projects}
-                onSelect={(item) => {
-                  if (isProjectPages) {
-                    router.stateService.go(state.name, {
-                      uuid: item.uuid,
-                    });
-                  } else {
-                    router.stateService.go('project.dashboard', {
-                      uuid: item.uuid,
-                    });
-                  }
-                }}
+                onSelect={handleProjectSelect}
               />
             </div>
             <Button
