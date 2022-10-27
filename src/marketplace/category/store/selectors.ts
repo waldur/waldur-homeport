@@ -7,6 +7,7 @@ import { RootState } from '@waldur/store/reducers';
 import {
   getCustomer,
   getProject,
+  getUser,
   getWorkspace,
 } from '@waldur/workspace/selectors';
 
@@ -40,6 +41,10 @@ export const isDivisionsErred = (state: RootState) => getDivisions(state).erred;
 
 export const categoryRouteState = (state: RootState) => {
   const workspace = getWorkspace(state);
+  const user = getUser(state);
+  if (!user) {
+    return 'marketplace-category.details';
+  }
   return WORKSPACE_CATEGORY[workspace];
 };
 
