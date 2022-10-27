@@ -7,7 +7,7 @@ import { ResourceSummary } from './ResourceSummary';
 export const ResourceMetadataDialog = ({ resolve }) => (
   <>
     <Modal.Header>
-      <Modal.Title>{translate('Resource order items')}</Modal.Title>
+      <Modal.Title>{translate('Resource metadata')}</Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <ResourceSummary resource={resolve.resource} />

@@ -7675,6 +7675,11 @@ msgstr ""
 msgid "Resource link"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceMetadataDialog.tsx
+#: src/slurm/details/ResourceMetadataDialog.tsx
+msgid "Resource metadata"
+msgstr ""
+
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
@@ -7682,8 +7687,6 @@ msgid "Resource name"
 msgstr ""
 
 #: src/marketplace/orders/item/list/ResourceOrderItemsDialog.tsx
-#: src/marketplace/resources/details/ResourceMetadataDialog.tsx
-#: src/slurm/details/ResourceMetadataDialog.tsx
 msgid "Resource order items"
 msgstr ""
 

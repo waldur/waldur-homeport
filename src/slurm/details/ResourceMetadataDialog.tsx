@@ -6,7 +6,7 @@ import { ResourceSummaryBase } from '@waldur/resource/summary';
 export const ResourceMetadataDialog = ({ resolve }) => (
   <>
     <Modal.Header>
-      <Modal.Title>{translate('Resource order items')}</Modal.Title>
+      <Modal.Title>{translate('Resource metadata')}</Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <ResourceSummaryBase resource={resolve.resource} />
