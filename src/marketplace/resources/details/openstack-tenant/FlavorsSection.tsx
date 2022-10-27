@@ -1,14 +1,13 @@
 import { QueryFunction } from 'react-query';
 
 import { fixURL } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
 import { formatFlavor } from '@waldur/resource/utils';
 import { parseResponse } from '@waldur/table/api';
 
 import { ResourcesSection } from '../ResourcesSection';
 import { DataPage } from '../types';
 
-export const FlavorsSection = ({ resource, count }) => {
+export const FlavorsSection = ({ resource, title }) => {
   const loadData: QueryFunction<DataPage> = async (context) => {
     const response = await parseResponse(
       fixURL('/openstack-flavors/'),
@@ -28,11 +27,6 @@ export const FlavorsSection = ({ resource, count }) => {
     };
   };
   return (
-    <ResourcesSection
-      title={translate('Flavors')}
-      loadData={loadData}
-      count={count}
-      queryKey="flavors"
-    />
+    <ResourcesSection title={title} loadData={loadData} queryKey="flavors" />
   );
 };

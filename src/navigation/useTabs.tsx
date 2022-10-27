@@ -72,8 +72,12 @@ export const useTabs = (): Tab[] => {
   const syncTabs = () => {
     const allStates = router.stateRegistry.get();
     const current = router.globals.$current;
-    const root = current.path.find((part) => part.data?.title);
-    setTabs(getTabs(root, allStates));
+    if (!current.data.useExtraTabs) {
+      const root = current.path.find((part) => part.data?.title);
+      setTabs(getTabs(root, allStates));
+    } else {
+      setTabs([]);
+    }
     const breadcrumb = current.data?.breadcrumb
       ? current.data?.breadcrumb()
       : undefined;

@@ -16,13 +16,14 @@ import { setCurrentUser } from '@waldur/workspace/actions';
 import { LayoutContext, LayoutContextInterface } from './context';
 import { CookiesConsent } from './cookies/CookiesConsent';
 import { SiteSidebar } from './sidebar/SiteSidebar';
+import { Tab } from './Tab';
 import { Toolbar } from './Toolbar';
 import { useTabs } from './useTabs';
 
 export const AnonymousLayout: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { state } = useCurrentStateAndParams();
-  const [extraTabs, setExtraTabs] = useState(null);
+  const [extraTabs, setExtraTabs] = useState<Tab[]>([]);
   const [fullPage, setFullPage] = useState(false);
   const context = useMemo<Partial<LayoutContextInterface>>(
     () => ({ extraTabs, setExtraTabs, fullPage, setFullPage }),

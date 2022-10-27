@@ -7,7 +7,7 @@ import { parseResponse } from '@waldur/table/api';
 import { ResourcesSection } from '../ResourcesSection';
 import { DataPage } from '../types';
 
-export const SecurityGroupsSection = ({ resource, count }) => {
+export const SecurityGroupsSection = ({ resource, title }) => {
   const loadData: QueryFunction<DataPage> = async (context) => {
     const response = await parseResponse(
       fixURL('/openstack-security-groups/'),
@@ -31,9 +31,8 @@ export const SecurityGroupsSection = ({ resource, count }) => {
   };
   return (
     <ResourcesSection
-      title={translate('Security groups')}
+      title={title}
       loadData={loadData}
-      count={count}
       queryKey="security_groups"
       canAdd={true}
     />

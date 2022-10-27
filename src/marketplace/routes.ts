@@ -576,6 +576,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-public-resource-details/:resource_uuid/',
     component: ResourceDetailsPage,
     parent: 'organization',
+    data: {
+      useExtraTabs: true,
+    },
   },
 
   {
@@ -583,6 +586,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-service-provider-public-resource-details/:resource_uuid/',
     component: ResourceDetailsPage,
     parent: 'organization',
+    data: {
+      useExtraTabs: true,
+    },
   },
 
   {
@@ -590,6 +596,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-project-resource-details/:resource_uuid/',
     component: ResourceDetailsPage,
     parent: 'project',
+    data: {
+      useExtraTabs: true,
+    },
   },
 
   {

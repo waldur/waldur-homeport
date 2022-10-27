@@ -7,7 +7,7 @@ import { parseResponse } from '@waldur/table/api';
 import { ResourcesSection } from '../ResourcesSection';
 import { DataPage } from '../types';
 
-export const PortsSection = ({ resource, count }) => {
+export const PortsSection = ({ resource, title }) => {
   const loadData: QueryFunction<DataPage> = async (context) => {
     const response = await parseResponse(
       fixURL('/openstack-ports/'),
@@ -30,11 +30,6 @@ export const PortsSection = ({ resource, count }) => {
     };
   };
   return (
-    <ResourcesSection
-      title={translate('Ports')}
-      loadData={loadData}
-      count={count}
-      queryKey="ports"
-    />
+    <ResourcesSection title={title} loadData={loadData} queryKey="ports" />
   );
 };
