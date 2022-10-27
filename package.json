@@ -58,7 +58,7 @@
     "json-loader": "^0.5.7",
     "jszip": "^3.7.1",
     "leaflet": "^1.7.1",
-    "leaflet-geosearch": "^3.0.6",
+    "leaflet-geosearch": "^3.7.0",
     "lodash": "^4.17.21",
     "luxon": "^2.0.2",
     "monaco-editor": "^0.29.1",
