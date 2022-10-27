@@ -7,6 +7,7 @@ export const GeoSearchControlElement: FunctionComponent<any> = (props) => {
   const map = useMap();
 
   useEffect(() => {
+    // @ts-ignore
     const searchControl = new GeoSearchControl(props);
 
     map.addControl(searchControl);
