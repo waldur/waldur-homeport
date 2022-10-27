@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
 import { ENV } from '@waldur/configs/default';
+import { PROJECT_ADMIN_ROLE } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable } from '@waldur/table';
@@ -62,8 +63,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
               ) : null}
               {props.isOwnerOrStaff || props.isProjectManager ? (
                 <UserRemoveButton
-                  user={row}
-                  isProjectManager={props.isProjectManager}
+                  permission={row.permission}
+                  isDisabled={
+                    !props.isOwnerOrStaff &&
+                    (!props.isProjectManager || row.role !== PROJECT_ADMIN_ROLE)
+                  }
                   refreshList={props.fetch}
                 />
               ) : null}

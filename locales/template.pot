@@ -6669,10 +6669,6 @@ msgstr ""
 msgid "Project manager"
 msgstr ""
 
-#: src/project/team/UserRemoveButton.tsx
-msgid "Project manager cannot edit users with same role."
-msgstr ""
-
 #: src/configs/default.ts
 msgid "Project member"
 msgstr ""
@@ -11948,6 +11944,10 @@ msgstr ""
 
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "You don't have permission to send this invitation."
+msgstr ""
+
+#: src/project/team/UserRemoveButton.tsx
+msgid "You don't have permissions to delete this user."
 msgstr ""
 
 #: src/modal/ModalRoot.tsx
