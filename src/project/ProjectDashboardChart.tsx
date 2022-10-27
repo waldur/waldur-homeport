@@ -16,9 +16,14 @@ interface ProjectDashboardProps {
 
 export const ProjectDashboardChart: FunctionComponent<ProjectDashboardProps> =
   ({ project }) => {
-    const { loading, value } = useAsync(() => loadChart(project), [project]);
+    const { loading, error, value } = useAsync(
+      () => loadChart(project),
+      [project],
+    );
     if (loading) {
       return <LoadingSpinner />;
+    } else if (error) {
+      <>{translate('Unable to load data.')}</>;
     }
     return (
       <Card className="h-100">
