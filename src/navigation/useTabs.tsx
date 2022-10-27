@@ -3,7 +3,7 @@ import {
   useOnStateChanged,
   useRouter,
 } from '@uirouter/react';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 
@@ -12,6 +12,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { router } from '@waldur/router';
 import store from '@waldur/store/store';
 
+import { LayoutContext } from './context';
 import { Tab } from './Tab';
 import { getTitle } from './title';
 
@@ -77,11 +78,13 @@ export const useTabs = (): Tab[] => {
       ? current.data?.breadcrumb()
       : undefined;
     document.title =
-      ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE + ' | ' + breadcrumb ||
-      pageTitle;
+      ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE +
+      ' | ' +
+      (breadcrumb || pageTitle);
   };
+  const { extraTabs } = useContext(LayoutContext);
   useEffect(syncTabs, [pageTitle]);
   useEffectOnce(syncTabs);
   useOnStateChanged(syncTabs);
-  return tabs;
+  return extraTabs?.length > 0 ? extraTabs : tabs;
 };
