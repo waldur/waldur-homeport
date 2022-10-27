@@ -347,10 +347,6 @@ msgstr ""
 msgid "Add key"
 msgstr ""
 
-#: src/project/team/AddMemberButton.tsx
-msgid "Add member"
-msgstr ""
-
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr ""
@@ -2504,7 +2500,6 @@ msgstr ""
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
@@ -6378,10 +6373,6 @@ msgstr ""
 
 #: src/configs/default.ts
 msgid "Project manager"
-msgstr ""
-
-#: src/project/team/UserRemoveButton.tsx
-msgid "Project manager cannot edit users with same role."
 msgstr ""
 
 #: src/configs/default.ts
@@ -11340,6 +11331,10 @@ msgstr ""
 
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "You don't have permission to send this invitation."
+msgstr ""
+
+#: src/project/team/UserRemoveButton.tsx
+msgid "You don't have permissions to delete this user."
 msgstr ""
 
 #: src/modal/ModalRoot.tsx

@@ -2,26 +2,25 @@ import Axios from 'axios';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { PROJECT_MANAGER_ROLE } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 interface UserRemoveButtonProps {
-  user: any;
-  isProjectManager: boolean;
-  refreshList;
+  permission: string;
+  isDisabled: boolean;
+  refreshList(): void;
 }
 
 export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
-  user,
-  isProjectManager,
+  permission,
+  isDisabled,
   refreshList,
 }) => {
   const dispatch = useDispatch();
   const callback = async () => {
     try {
-      await Axios.delete(user.permission);
+      await Axios.delete(permission);
       refreshList();
       dispatch(showSuccess(translate('Team member has been removed.')));
     } catch (e) {
@@ -32,10 +31,10 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   };
   return (
     <ActionButton
-      disabled={isProjectManager && user.role === PROJECT_MANAGER_ROLE}
+      disabled={isDisabled}
       tooltip={
-        isProjectManager && user.role === PROJECT_MANAGER_ROLE
-          ? translate('Project manager cannot edit users with same role.')
+        isDisabled
+          ? translate(`You don't have permissions to delete this user.`)
           : ''
       }
       action={callback}
