@@ -311,10 +311,6 @@ msgstr "Lägg till objekt"
 msgid "Add key"
 msgstr "Lägg till nyckel"
 
-#: src/project/team/AddMemberButton.tsx
-msgid "Add member"
-msgstr "Lägg till medlem"
-
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr "Lägg till ny"
@@ -2177,7 +2173,6 @@ msgstr "Varje användningsrapport måste vara kopplad till en faktureringsplan f
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
@@ -5472,10 +5467,6 @@ msgstr "Projektet är inte markerat."
 #: src/configs/default.ts
 msgid "Project manager"
 msgstr "Projektledare"
-
-#: src/project/team/UserRemoveButton.tsx
-msgid "Project manager cannot edit users with same role."
-msgstr "Projektledare kan inte redigera användare med samma roll."
 
 #: src/configs/default.ts
 msgid "Project member"

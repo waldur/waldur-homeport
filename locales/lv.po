@@ -140,10 +140,6 @@ msgstr "Pievienot  SSH atslēgu"
 msgid "Add key"
 msgstr "Pievienot atslēgu"
 
-#: src/project/team/AddMemberButton.tsx
-msgid "Add member"
-msgstr "Pievienot dalībnieku"
-
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr "Pievieno jaunu"

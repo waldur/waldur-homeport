@@ -252,10 +252,6 @@ msgstr "اضافه کردن مورد"
 msgid "Add key"
 msgstr "اضافه کردن کلید"
 
-#: src/project/team/AddMemberButton.tsx
-msgid "Add member"
-msgstr "اضافه کردن عضو"
-
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr "جدید اضافه کنید"
@@ -1747,7 +1743,6 @@ msgstr "برای اطمینان از محاسبه صحیح داده های حس�
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx

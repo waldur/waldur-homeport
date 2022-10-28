@@ -327,10 +327,6 @@ msgstr "Lisa element"
 msgid "Add key"
 msgstr "Lisa võti"
 
-#: src/project/team/AddMemberButton.tsx
-msgid "Add member"
-msgstr "Lisa liige"
-
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr "Lisa uus"
@@ -2075,7 +2071,6 @@ msgstr "Iga kasutusaruanne peab olema ühendatud arveldusplaaniga, et tagada raa
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
@@ -4716,10 +4711,6 @@ msgstr "Projekti pole valitud."
 #: src/configs/default.ts
 msgid "Project manager"
 msgstr "Projektihaldur"
-
-#: src/project/team/UserRemoveButton.tsx
-msgid "Project manager cannot edit users with same role."
-msgstr "Projektijuht ei saa muuta kasutajaid kes on samas rollis."
 
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx

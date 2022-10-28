@@ -319,10 +319,6 @@ msgstr "Ajouter un article"
 msgid "Add key"
 msgstr "Ajouter une clé"
 
-#: src/project/team/AddMemberButton.tsx
-msgid "Add member"
-msgstr "Ajouter un membre"
-
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr "Ajouter un nouveau"
@@ -2219,7 +2215,6 @@ msgstr "Chaque rapport d'utilisation doit être relié à un plan de facturation
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
@@ -5568,10 +5563,6 @@ msgstr "Le projet n'est pas sélectionné."
 #: src/configs/default.ts
 msgid "Project manager"
 msgstr "Chef de projet"
-
-#: src/project/team/UserRemoveButton.tsx
-msgid "Project manager cannot edit users with same role."
-msgstr "Le chef de projet ne peut pas modifier les utilisateurs ayant le même rôle."
 
 #: src/configs/default.ts
 msgid "Project member"

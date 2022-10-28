@@ -203,10 +203,6 @@ msgstr "Bənd əlavə edin"
 msgid "Add key"
 msgstr "Açar əlavə edin"
 
-#: src/project/team/AddMemberButton.tsx
-msgid "Add member"
-msgstr "Üzv əlavə edin"
-
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr "Yeni əlavə edin"
@@ -1086,7 +1082,6 @@ msgstr "Aİ ƏDV İdentifikasiyası "
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
@@ -2578,10 +2573,6 @@ msgstr "Layihə yeniləndi."
 #: src/configs/default.ts
 msgid "Project manager"
 msgstr "Layihə meneceri"
-
-#: src/project/team/UserRemoveButton.tsx
-msgid "Project manager cannot edit users with same role."
-msgstr "Layihə meneceri eyni vəzifəsi olan istifadəçiləri redaktə edə bilməz."
 
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx

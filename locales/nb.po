@@ -319,10 +319,6 @@ msgstr "Legg til element"
 msgid "Add key"
 msgstr "Legg til nøkkel"
 
-#: src/project/team/AddMemberButton.tsx
-msgid "Add member"
-msgstr "Legg til medlem"
-
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr "Legg til ny"
@@ -2219,7 +2215,6 @@ msgstr "Hver bruksrapport må være koblet til en faktureringsplan for å sikre 
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
@@ -5568,10 +5563,6 @@ msgstr "Prosjektet er ikke valgt."
 #: src/configs/default.ts
 msgid "Project manager"
 msgstr "Prosjektleder"
-
-#: src/project/team/UserRemoveButton.tsx
-msgid "Project manager cannot edit users with same role."
-msgstr "Prosjektleder kan ikke redigere brukere med samme rolle."
 
 #: src/configs/default.ts
 msgid "Project member"

@@ -319,10 +319,6 @@ msgstr "Přidat položku"
 msgid "Add key"
 msgstr "Přidat klíč"
 
-#: src/project/team/AddMemberButton.tsx
-msgid "Add member"
-msgstr "Přidat člena"
-
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr "Přidat nový"
@@ -2219,7 +2215,6 @@ msgstr "Každé hlášení o využití musí být spojeno s platebním plánem, 
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
@@ -5568,10 +5563,6 @@ msgstr "Projekt není vybrán."
 #: src/configs/default.ts
 msgid "Project manager"
 msgstr "Vedoucí projektu"
-
-#: src/project/team/UserRemoveButton.tsx
-msgid "Project manager cannot edit users with same role."
-msgstr "Vedoucí projektu nemůže upravovat uživatele se stejnou rolí."
 
 #: src/configs/default.ts
 msgid "Project member"

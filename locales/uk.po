@@ -314,10 +314,6 @@ msgstr "Додати позицію"
 msgid "Add key"
 msgstr "Додати ключ"
 
-#: src/project/team/AddMemberButton.tsx
-msgid "Add member"
-msgstr "Додати учасника"
-
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr "Створити організацію"

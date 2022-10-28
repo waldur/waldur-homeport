@@ -314,10 +314,6 @@ msgstr "Добавить элемент"
 msgid "Add key"
 msgstr "Добавить ключ"
 
-#: src/project/team/AddMemberButton.tsx
-msgid "Add member"
-msgstr "Добавить участника"
-
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr "Добавить новый"
@@ -1476,7 +1472,6 @@ msgstr "Срок"
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
