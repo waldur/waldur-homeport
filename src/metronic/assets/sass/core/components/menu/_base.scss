@@ -52,6 +52,7 @@
 
       .svg-icon {
         line-height: 1;
+        @include svg-icon-size(2rem, true);
       }
     }
 
