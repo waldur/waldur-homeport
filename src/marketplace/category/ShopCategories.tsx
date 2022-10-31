@@ -24,13 +24,15 @@ export const ShopCategories: FunctionComponent<ShopCategoriesProps> = (
     <section>
       <h3 className="shopping-cart-sidebar-title">{translate('Categories')}</h3>
       <ul className="list-unstyled">
-        {sortedCategories.map((category, index) => (
-          <CategoryItem
-            category={category}
-            key={index}
-            active={props.currentCategoryUuid === category.uuid}
-          />
-        ))}
+        {sortedCategories.map((category, index) =>
+          category.offering_count > 0 ? (
+            <CategoryItem
+              category={category}
+              key={index}
+              active={props.currentCategoryUuid === category.uuid}
+            />
+          ) : null,
+        )}
       </ul>
     </section>
   );
