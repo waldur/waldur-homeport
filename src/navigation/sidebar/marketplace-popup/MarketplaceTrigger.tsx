@@ -13,7 +13,7 @@ export const MarketplaceTrigger: FunctionComponent = () => (
     data-kt-menu-flip="bottom"
   >
     <span className="menu-link">
-      <span className="menu-icon">
+      <span className="menu-icon justify-content-center">
         <span className="svg-icon svg-icon-2">
           <i className="fa fa-plus fs-2" />
         </span>
