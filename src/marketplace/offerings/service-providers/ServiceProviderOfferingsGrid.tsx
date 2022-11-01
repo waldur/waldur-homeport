@@ -54,7 +54,7 @@ const mapPropsToFilter = (props: OwnProps) => {
 
 const GridOptions = {
   table: SERVICE_PROVIDER_OFFERING_GRID,
-  fetchData: createFetcher('marketplace-offerings', ANONYMOUS_CONFIG),
+  fetchData: createFetcher('marketplace-public-offerings', ANONYMOUS_CONFIG),
   mapPropsToFilter,
 };
 
