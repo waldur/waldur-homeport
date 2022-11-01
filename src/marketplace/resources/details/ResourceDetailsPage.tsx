@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import { getResource } from '@waldur/marketplace/common/api';
 import { useTitle } from '@waldur/navigation/title';
 
-import { RemoteOfferingDetails } from './RemoteOfferingDetails';
+import { ResourceDetailsView } from './ResourceDetailsView';
 
 export const ResourceDetailsPage: FunctionComponent<{}> = () => {
   const {
@@ -42,5 +42,5 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     return null;
   }
 
-  return <RemoteOfferingDetails resource={resource} />;
+  return <ResourceDetailsView resource={resource} />;
 };

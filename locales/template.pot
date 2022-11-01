@@ -300,7 +300,7 @@ msgstr ""
 msgid "Active user will be able to login into the portal."
 msgstr ""
 
-#: src/marketplace/resources/details/RemoteOfferingDetails.tsx
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "Activity"
 msgstr ""
@@ -1483,7 +1483,7 @@ msgstr ""
 msgid "Cloud block storage size"
 msgstr ""
 
-#: src/marketplace/resources/details/RemoteOfferingDetails.tsx
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 msgid "Cloud components"
 msgstr ""
 
@@ -2157,6 +2157,7 @@ msgid "Dark theme"
 msgstr ""
 
 #: src/customer/routes.ts
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/project/routes.ts
 #: src/user/routes.ts
@@ -3092,6 +3093,7 @@ msgid "External ID of the sponsor covering the costs"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "External IP"
 msgstr ""
@@ -3883,10 +3885,12 @@ msgid "Internal"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Internal IP"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/openstack/openstack-instance/tabs.ts
 msgid "Internal IPs"
 msgstr ""
@@ -4947,6 +4951,7 @@ msgstr ""
 msgid "Network: {network_name}, CIDR: {cidr}"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 msgid "Networking"
 msgstr ""
@@ -7966,6 +7971,7 @@ msgstr ""
 msgid "SQL server name"
 msgstr ""
 
+#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "SSH key"
 msgstr ""
@@ -8124,6 +8130,8 @@ msgstr ""
 msgid "Security group rules update has been scheduled."
 msgstr ""
 
+#: src/marketplace/resources/details/NetworkingTab.tsx
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -9020,7 +9028,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: src/marketplace/resources/details/RemoteOfferingDetails.tsx
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "Status page"
 msgstr ""
@@ -9048,6 +9056,7 @@ msgid "Stopping"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -9736,7 +9745,7 @@ msgstr ""
 msgid "Thumbnail"
 msgstr ""
 
-#: src/marketplace/resources/details/RemoteOfferingDetails.tsx
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "Tickets"
 msgstr ""
@@ -10537,6 +10546,7 @@ msgstr ""
 msgid "Unable to load questions and answers."
 msgstr ""
 
+#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 msgid "Unable to load resource details."
 msgstr ""
@@ -11203,7 +11213,7 @@ msgstr ""
 msgid "Usage based"
 msgstr ""
 
-#: src/marketplace/resources/details/RemoteOfferingDetails.tsx
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/slurm/details/AllocationDetails.tsx
 msgid "Usage history"
 msgstr ""
@@ -11615,11 +11625,13 @@ msgstr ""
 msgid "VM snapshot schedule has been created."
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-instance/tabs.ts
 msgid "VM snapshot schedules"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/openstack/openstack-backup-schedule/tabs.ts
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/tabs.ts
@@ -11799,6 +11811,7 @@ msgstr ""
 msgid "Volume type storage limit is exceeded"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/openstack/openstack-instance/tabs.ts
 msgid "Volumes"
 msgstr ""
