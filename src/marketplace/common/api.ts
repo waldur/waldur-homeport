@@ -307,8 +307,8 @@ export const submitUsageReport = (payload) =>
     (response) => response.data,
   );
 
-export const getResource = (id: string) =>
-  getById<Resource>('/marketplace-resources/', id);
+export const getResource = (id: string, options?: AxiosRequestConfig) =>
+  getById<Resource>('/marketplace-resources/', id, options);
 
 export const switchPlan = (resource_uuid: string, plan_url: string) =>
   post(`/marketplace-resources/${resource_uuid}/switch_plan/`, {

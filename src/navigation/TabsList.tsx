@@ -1,21 +1,31 @@
-import { UISref, UISrefActive, UISrefProps } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { UISref, UISrefActive, UISrefProps, useRouter } from '@uirouter/react';
+import classNames from 'classnames';
+import { FunctionComponent, useMemo } from 'react';
 
 import { useTabs } from './useTabs';
 
 const MenuLink: FunctionComponent<UISrefProps> = ({ to, params, children }) =>
   to ? (
-    <UISrefActive class="here">
-      <UISref to={to} params={params}>
-        {children}
-      </UISref>
-    </UISrefActive>
+    <UISref to={to} params={params}>
+      {children}
+    </UISref>
   ) : (
     children
   );
 
+const findActiveTab = (tabs, router) =>
+  tabs.find(
+    (parent) =>
+      router.stateService.is(parent.to, parent.params) ||
+      parent.children?.find((child) =>
+        router.stateService.is(child.to, child.params),
+      ),
+  );
+
 export const TabsList: FunctionComponent = () => {
   const tabs = useTabs();
+  const router = useRouter();
+  const activeTab = useMemo(() => findActiveTab(tabs, router), [tabs, router]);
 
   return (
     <>
@@ -25,7 +35,10 @@ export const TabsList: FunctionComponent = () => {
             <a
               data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
               data-kt-menu-placement="bottom-start"
-              className="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2"
+              className={classNames(
+                'menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2',
+                { here: parentTab === activeTab },
+              )}
             >
               <span className="menu-link">
                 <span className="menu-title">{parentTab.title}</span>
@@ -52,7 +65,12 @@ export const TabsList: FunctionComponent = () => {
             to={parentTab.to}
             params={parentTab.params}
           >
-            <a className="menu-item text-nowrap" data-kt-menu-trigger="click">
+            <a
+              className={classNames('menu-item text-nowrap', {
+                here: parentTab === activeTab,
+              })}
+              data-kt-menu-trigger="click"
+            >
               <span className="menu-link py-3">
                 <span className="menu-title">{parentTab.title}</span>
               </span>
