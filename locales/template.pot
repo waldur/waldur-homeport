@@ -3890,7 +3890,6 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/openstack/openstack-instance/tabs.ts
 msgid "Internal IPs"
 msgstr ""
@@ -4953,6 +4952,8 @@ msgstr ""
 
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/openstack-instance/tabs.ts
+#: src/openstack/openstack-tenant/tabs.ts
 msgid "Networking"
 msgstr ""
 
@@ -8131,12 +8132,12 @@ msgid "Security group rules update has been scheduled."
 msgstr ""
 
 #: src/marketplace/resources/details/NetworkingTab.tsx
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsForm.tsx
+#: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -9056,9 +9057,9 @@ msgid "Stopping"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/FlavorGroup.tsx
+#: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/quotas/constants.ts
 msgid "Storage"
@@ -10246,10 +10247,6 @@ msgstr ""
 #: src/marketplace/offerings/service-providers/shared/grid/Grid.tsx
 #: src/table/Table.tsx
 msgid "Unable to fetch data."
-msgstr ""
-
-#: src/marketplace/resources/details/ResourceComponents.tsx
-msgid "Unable to fetch offering."
 msgstr ""
 
 #: src/navigation/SearchResultsDropdown.tsx
@@ -11625,13 +11622,11 @@ msgstr ""
 msgid "VM snapshot schedule has been created."
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-instance/tabs.ts
 msgid "VM snapshot schedules"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/openstack/openstack-backup-schedule/tabs.ts
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/tabs.ts
@@ -11811,7 +11806,6 @@ msgstr ""
 msgid "Volume type storage limit is exceeded"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/openstack/openstack-instance/tabs.ts
 msgid "Volumes"
 msgstr ""

@@ -16,7 +16,7 @@
     "paths": {
       "@waldur/*": ["src/*"]
     },
-    "lib": ["es2016", "dom"]
+    "lib": ["es2019", "dom"]
   },
   "include": ["./src/**/*", "./typings.d.ts"],
   "exclude": ["./cypress/**/*"],

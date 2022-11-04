@@ -5,7 +5,6 @@ import { useAsync } from 'react-use';
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { useExtraTabs } from '@waldur/navigation/context';
 import { OpenStackTenant } from '@waldur/openstack/openstack-tenant/types';
 
 import { GroupSection } from '../GroupSection';
@@ -63,6 +62,9 @@ export const TenantDetails = ({ resource }) => {
                     count: value.counters.instances,
                   }),
                   to: 'marketplace-project-resource-details',
+                  params: {
+                    tab: 'openstack-tenant-instances',
+                  },
                   component: InstancesSection,
                 },
                 {
@@ -70,6 +72,9 @@ export const TenantDetails = ({ resource }) => {
                     count: value.counters.flavors,
                   }),
                   to: 'marketplace-project-resource-details',
+                  params: {
+                    tab: 'openstack-tenant-flavors',
+                  },
                   component: FlavorsSection,
                 },
                 {
@@ -77,6 +82,9 @@ export const TenantDetails = ({ resource }) => {
                     count: value.counters.server_groups,
                   }),
                   to: 'marketplace-project-resource-details',
+                  params: {
+                    tab: 'openstack-tenant-server-groups',
+                  },
                   component: ServerGroupsSection,
                 },
               ],
@@ -89,6 +97,9 @@ export const TenantDetails = ({ resource }) => {
                     count: value.counters.routers,
                   }),
                   to: 'marketplace-project-resource-details',
+                  params: {
+                    tab: 'openstack-tenant-routers',
+                  },
                   component: RoutersSection,
                 },
                 {
@@ -96,6 +107,9 @@ export const TenantDetails = ({ resource }) => {
                     count: value.counters.networks,
                   }),
                   to: 'marketplace-project-resource-details',
+                  params: {
+                    tab: 'openstack-tenant-networks',
+                  },
                   component: NetworksSection,
                 },
                 {
@@ -103,6 +117,9 @@ export const TenantDetails = ({ resource }) => {
                     count: value.counters.subnets,
                   }),
                   to: 'marketplace-project-resource-details',
+                  params: {
+                    tab: 'openstack-tenant-subnets',
+                  },
                   component: SubnetsSection,
                 },
                 {
@@ -110,6 +127,9 @@ export const TenantDetails = ({ resource }) => {
                     count: value.counters.security_groups,
                   }),
                   to: 'marketplace-project-resource-details',
+                  params: {
+                    tab: 'openstack-tenant-security-groups',
+                  },
                   component: SecurityGroupsSection,
                 },
                 {
@@ -117,6 +137,9 @@ export const TenantDetails = ({ resource }) => {
                     count: value.counters.floating_ips,
                   }),
                   to: 'marketplace-project-resource-details',
+                  params: {
+                    tab: 'openstack-tenant-floating-ips',
+                  },
                   component: FloatingIPsSection,
                 },
                 {
@@ -124,6 +147,9 @@ export const TenantDetails = ({ resource }) => {
                     count: value.counters.ports,
                   }),
                   to: 'marketplace-project-resource-details',
+                  params: {
+                    tab: 'openstack-tenant-ports',
+                  },
                   component: PortsSection,
                 },
               ],
@@ -136,6 +162,9 @@ export const TenantDetails = ({ resource }) => {
                     count: value.counters.volumes,
                   }),
                   to: 'marketplace-project-resource-details',
+                  params: {
+                    tab: 'openstack-tenant-volumes',
+                  },
                   component: VolumesSection,
                 },
                 {
@@ -143,6 +172,9 @@ export const TenantDetails = ({ resource }) => {
                     count: value.counters.snapshots,
                   }),
                   to: 'marketplace-project-resource-details',
+                  params: {
+                    tab: 'openstack-tenant-snapshots',
+                  },
                   component: SnapshotsSection,
                 },
               ],
@@ -151,8 +183,6 @@ export const TenantDetails = ({ resource }) => {
         : [],
     [resource, value],
   );
-
-  useExtraTabs(tabs);
 
   if (loading) return <LoadingSpinner />;
 
