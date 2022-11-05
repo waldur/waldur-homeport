@@ -12733,6 +12733,14 @@ msgstr ""
 msgid "{usage} of {limit} used"
 msgstr ""
 
+#: src/marketplace/resources/details/QuotaCell.tsx
+msgid "{usage} out of {limit} {units}"
+msgstr ""
+
+#: src/marketplace/resources/details/ShortResourceHeader.tsx
+msgid "{usage} out of {limit} {unit} {name}"
+msgstr ""
+
 #: src/issues/comments/IssueCommentItem.tsx
 msgid "{user} commented:"
 msgstr ""
