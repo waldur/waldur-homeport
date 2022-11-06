@@ -78,30 +78,33 @@ export const ResourceDetailsView: FC<any> = ({
   useFullPage();
 
   const tabs = useMemo(
-    () => [
-      {
-        title: translate('Dashboard'),
-        to: 'marketplace-project-resource-details',
-        params: {
-          tab: '',
-        },
-      },
-      ...NestedResourceTabsConfiguration.get(scope.resource_type)
-        .map((parentTab) => ({
-          title: parentTab.title,
-          children: parentTab.children
-            .map((childTab) => ({
-              title: childTab.title,
+    () =>
+      scope
+        ? [
+            {
+              title: translate('Dashboard'),
               to: 'marketplace-project-resource-details',
               params: {
-                tab: childTab.key,
+                tab: '',
               },
-            }))
-            .sort((t1, t2) => t1.title.localeCompare(t2.title)),
-        }))
-        .sort((t1, t2) => t1.title.localeCompare(t2.title)),
-    ],
-    [scope.resource_type],
+            },
+            ...NestedResourceTabsConfiguration.get(scope.resource_type)
+              .map((parentTab) => ({
+                title: parentTab.title,
+                children: parentTab.children
+                  .map((childTab) => ({
+                    title: childTab.title,
+                    to: 'marketplace-project-resource-details',
+                    params: {
+                      tab: childTab.key,
+                    },
+                  }))
+                  .sort((t1, t2) => t1.title.localeCompare(t2.title)),
+              }))
+              .sort((t1, t2) => t1.title.localeCompare(t2.title)),
+          ]
+        : [],
+    [scope?.resource_type],
   );
   useExtraTabs(tabs);
 
@@ -113,12 +116,15 @@ export const ResourceDetailsView: FC<any> = ({
     }[resource.offering_type] || null;
 
   const TabsComponent = useMemo(() => {
+    if (!scope) {
+      return null;
+    }
     const conf = NestedResourceTabsConfiguration.get(scope.resource_type);
     return conf
       .map((conf) => conf.children)
       .flat()
       .find((child) => child.key === tab)?.component;
-  }, [scope.resource_type]);
+  }, [scope]);
 
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   return (
