@@ -86,18 +86,20 @@ export const ResourceDetailsView: FC<any> = ({
           tab: '',
         },
       },
-      ...NestedResourceTabsConfiguration.get(scope.resource_type).map(
-        (parentTab) => ({
+      ...NestedResourceTabsConfiguration.get(scope.resource_type)
+        .map((parentTab) => ({
           title: parentTab.title,
-          children: parentTab.children.map((childTab) => ({
-            title: childTab.title,
-            to: 'marketplace-project-resource-details',
-            params: {
-              tab: childTab.key,
-            },
-          })),
-        }),
-      ),
+          children: parentTab.children
+            .map((childTab) => ({
+              title: childTab.title,
+              to: 'marketplace-project-resource-details',
+              params: {
+                tab: childTab.key,
+              },
+            }))
+            .sort((t1, t2) => t1.title.localeCompare(t2.title)),
+        }))
+        .sort((t1, t2) => t1.title.localeCompare(t2.title)),
     ],
     [scope.resource_type],
   );
