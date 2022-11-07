@@ -15,6 +15,7 @@ interface AsyncActionItemProps<T> {
   validators: ActionValidator<T>[];
   title: string;
   icon?: string;
+  iconClass?: string;
   className?: string;
   successMessage?: string;
   errorMessage?: string;

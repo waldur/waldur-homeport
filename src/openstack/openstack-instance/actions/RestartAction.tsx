@@ -20,11 +20,13 @@ const validators = [
   validateRuntimeState('ACTIVE'),
 ];
 
-export const RestartAction = ({ resource }) => (
+export const RestartAction = ({ resource, ...rest }) => (
   <AsyncActionItem
     title={translate('Restart')}
+    iconClass="fa-refresh"
     resource={resource}
     validators={validators}
     apiMethod={restartInstance}
+    {...rest}
   />
 );

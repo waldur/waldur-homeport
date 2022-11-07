@@ -1,26 +1,19 @@
-import { useTerminate } from '@waldur/marketplace/resources/terminate/TerminateAction';
-import { ResourceAccessButton } from '@waldur/resource/ResourceAccessButton';
-
-import { useChangeLimits } from '../change-limits/ChangeLimitsAction';
+import { ActionRegistry } from '@waldur/resource/actions/registry';
 
 import { ActionButton } from './ActionButton';
 
-const TerminateActionButton = ({ resource }) => {
-  const buttonProps = useTerminate({ resource });
-  return <ActionButton iconClass="fa-trash" {...buttonProps} />;
+export const QuickActions = ({ resource, reInitResource }) => {
+  const actions = ActionRegistry.getQuickActions(resource.resource_type);
+  return (
+    <>
+      {actions.map((ActionComponent, index) => (
+        <ActionComponent
+          key={index}
+          resource={resource}
+          reInitResource={reInitResource}
+          as={ActionButton}
+        />
+      ))}
+    </>
+  );
 };
-
-const ChangeLimitsActionButton = ({ resource }) => {
-  const buttonProps = useChangeLimits({ resource });
-  return resource.is_limit_based ? (
-    <ActionButton iconClass="fa-pencil" {...buttonProps} />
-  ) : null;
-};
-
-export const QuickActions = ({ resource }) => (
-  <>
-    <ResourceAccessButton resource={resource} />
-    <ChangeLimitsActionButton resource={resource} />
-    <TerminateActionButton resource={resource} />
-  </>
-);

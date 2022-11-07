@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
 import { EditResourceEndDateAction } from '@waldur/marketplace/resources/actions/EditResourceEndDateAction';
@@ -19,7 +20,14 @@ const ActionsList = [
 ];
 
 export const ResourceActions = ({ resource, scope, reInitResource }) => {
-  const extraActions = ActionRegistry.getActions(resource.resource_type);
+  const extraActions = useMemo(() => {
+    const quickActions = ActionRegistry.getQuickActions(resource.resource_type);
+    return ActionRegistry.getActions(resource.resource_type).filter(
+      (action) =>
+        // @ts-ignore
+        !quickActions.includes(action) && !ActionsList.includes(action),
+    );
+  }, [resource]);
   return (
     <Dropdown>
       <Dropdown.Toggle
@@ -30,7 +38,11 @@ export const ResourceActions = ({ resource, scope, reInitResource }) => {
       </Dropdown.Toggle>
       <Dropdown.Menu>
         {ActionsList.map((ActionComponent, index) => (
-          <ActionComponent key={index} resource={resource} />
+          <ActionComponent
+            key={index}
+            resource={resource}
+            reInitResource={reInitResource}
+          />
         ))}
         {extraActions.map((ActionComponent, index) => (
           <ActionComponent

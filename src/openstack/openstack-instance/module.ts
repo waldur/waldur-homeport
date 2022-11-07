@@ -6,6 +6,9 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 import { INSTANCE_TYPE } from '../constants';
 
 import actions from './actions';
+import { RestartAction } from './actions/RestartAction';
+import { StartAction } from './actions/StartAction';
+import { StopAction } from './actions/StopAction';
 
 import './marketplace';
 import './tabs';
@@ -20,6 +23,11 @@ const OpenStackInstanceSummary = lazyComponent(
 
 ResourceSummary.register(INSTANCE_TYPE, OpenStackInstanceSummary);
 ActionRegistry.register(INSTANCE_TYPE, actions);
+ActionRegistry.registerQuickActions(INSTANCE_TYPE, [
+  StartAction,
+  RestartAction,
+  StopAction,
+]);
 ResourceStateConfigurationProvider.register(INSTANCE_TYPE, {
   error_states: ['ERROR'],
   shutdown_states: ['SHUTOFF', 'STOPPED', 'SUSPENDED'],

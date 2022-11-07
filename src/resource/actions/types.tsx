@@ -52,4 +52,5 @@ export type ActionItem = ComponentType<{
   resource;
   reInitResource;
   refreshList?;
+  as?;
 }>;

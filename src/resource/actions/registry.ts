@@ -2,14 +2,23 @@ import { ActionItem } from './types';
 import { UnlinkActionItem } from './UnlinkActionItem';
 
 class ActionConfiguration {
-  private resources: Record<string, ActionItem[]> = {};
+  private actions: Record<string, ActionItem[]> = {};
+  private quickActions: Record<string, ActionItem[]> = {};
 
   register(type, config: any) {
-    this.resources[type] = config;
+    this.actions[type] = config;
+  }
+
+  registerQuickActions(type, config: any) {
+    this.quickActions[type] = config;
   }
 
   getActions(type) {
-    return [...(this.resources[type] || []), UnlinkActionItem];
+    return [...(this.actions[type] || []), UnlinkActionItem];
+  }
+
+  getQuickActions(type) {
+    return this.quickActions[type] || [];
   }
 }
 
