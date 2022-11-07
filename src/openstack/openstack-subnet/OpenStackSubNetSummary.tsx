@@ -2,11 +2,7 @@ import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { formatAllocationPool } from '@waldur/openstack/openstack-network/utils';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
-import {
-  Field,
-  ResourceSummaryProps,
-  ResourceSummaryBase,
-} from '@waldur/resource/summary';
+import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { formatDefault } from '@waldur/resource/utils';
 
 const formatNetwork = (props) => (
@@ -30,8 +26,7 @@ const formatTenant = (props) => (
 export const OpenStackSubNetSummary = (props: ResourceSummaryProps) => {
   const { resource } = props;
   return (
-    <span>
-      <ResourceSummaryBase {...props} />
+    <>
       <Field label={translate('Tenant')} value={formatTenant(props.resource)} />
       <Field
         label={translate('Network')}
@@ -63,6 +58,6 @@ export const OpenStackSubNetSummary = (props: ResourceSummaryProps) => {
         label={translate('Enable DHCP')}
         value={resource.enable_dhcp ? translate('Yes') : translate('No')}
       />
-    </span>
+    </>
   );
 };

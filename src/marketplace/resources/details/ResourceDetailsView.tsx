@@ -105,7 +105,7 @@ export const ResourceDetailsView: FC<any> = ({
               .sort((t1, t2) => t1.title.localeCompare(t2.title)),
           ]
         : [],
-    [scope?.resource_type],
+    [scope],
   );
   useExtraTabs(tabs);
 

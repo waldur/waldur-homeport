@@ -12,19 +12,19 @@ const ResourceMetadataDialog = lazyComponent(
   'ResourceMetadataDialog',
 );
 
-const showMetadata = (resource) =>
+const showMetadata = (resource, scope) =>
   openModalDialog(ResourceMetadataDialog, {
-    resolve: { resource },
+    resolve: { resource, scope },
     size: 'lg',
   });
 
-export const ResourceMetadataLink = ({ resource }) => {
+export const ResourceMetadataLink = ({ resource, scope }) => {
   const dispatch = useDispatch();
 
   return (
     <a
       className="cursor-pointer text-dark text-decoration-underline text-hover-primary"
-      onClick={() => dispatch(showMetadata(resource))}
+      onClick={() => dispatch(showMetadata(resource, scope))}
     >
       {translate('Show metadata')}
     </a>

@@ -4,7 +4,6 @@ import { translate } from '@waldur/i18n';
 import { formatSummary, formatCommaList } from '@waldur/resource/utils';
 
 import { Field } from './Field';
-import { ResourceSummaryBase } from './ResourceSummaryBase';
 import { ResourceSummaryProps } from './types';
 
 const formatUptime = (props) =>
@@ -40,7 +39,6 @@ export const formatIpList = (value) => {
 export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
   return (
     <>
-      <ResourceSummaryBase {...props} />
       <Field
         label={translate('Summary')}
         value={<ResourceSummaryField {...props} />}

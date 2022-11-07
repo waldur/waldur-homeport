@@ -1,10 +1,6 @@
 import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
-import {
-  Field,
-  ResourceSummaryProps,
-  ResourceSummaryBase,
-} from '@waldur/resource/summary';
+import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 
 const formatTenant = (props) => (
   <ResourceLink
@@ -16,8 +12,5 @@ const formatTenant = (props) => (
 );
 
 export const OpenStackServerGroupSummary = (props: ResourceSummaryProps) => (
-  <>
-    <ResourceSummaryBase {...props} />
-    <Field label={translate('Tenant')} value={formatTenant(props.resource)} />
-  </>
+  <Field label={translate('Tenant')} value={formatTenant(props.resource)} />
 );

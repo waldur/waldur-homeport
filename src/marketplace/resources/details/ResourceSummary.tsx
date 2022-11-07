@@ -15,6 +15,7 @@ import { ResourceDetailsLink } from './ResourceDetailsLink';
 
 export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
   resource,
+  children,
 }) => (
   <ResourceDetailsTable>
     <Field label={translate('Offering name')} value={resource.offering_name} />
@@ -65,5 +66,6 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
       />
     ) : null}
     <Field label={translate('Username')} value={resource.username} />
+    {children}
   </ResourceDetailsTable>
 );

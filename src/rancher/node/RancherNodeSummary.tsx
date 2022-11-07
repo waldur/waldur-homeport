@@ -2,11 +2,7 @@ import { translate } from '@waldur/i18n';
 import { KeyValueButton } from '@waldur/marketplace/resources/KeyValueButton';
 import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
-import {
-  Field,
-  ResourceSummaryProps,
-  ResourceSummaryBase,
-} from '@waldur/resource/summary';
+import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 
 import { NodeRoleField } from './NodeRoleField';
 
@@ -25,7 +21,6 @@ const formatInstance = (resource) =>
 export const RancherNodeSummary = (props: ResourceSummaryProps) => {
   return (
     <>
-      <ResourceSummaryBase {...props} />
       <Field
         label={translate('Kubernetes version')}
         value={props.resource.k8s_version}
