@@ -74,6 +74,7 @@ export const ResourceDetailsView: FC<any> = ({
   scope,
   components,
   tab,
+  reInitResource,
 }) => {
   useFullPage();
 
@@ -170,7 +171,11 @@ export const ResourceDetailsView: FC<any> = ({
                           </Card.Body>
                         </Card>
                         <Card className="flex-grow-1">
-                          <ResourceDetailsHeader resource={resource} />
+                          <ResourceDetailsHeader
+                            resource={resource}
+                            scope={scope}
+                            reInitResource={reInitResource}
+                          />
                         </Card>
                       </div>
                     </Col>
