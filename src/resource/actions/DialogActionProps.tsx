@@ -24,4 +24,5 @@ export interface DialogActionProps<T>
   resource: T;
   validators?: ActionValidator<T>[];
   extraResolve?: any;
+  iconClass?: string;
 }

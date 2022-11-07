@@ -184,12 +184,8 @@ export const ResourceDetailsView: FC<any> = ({
                         <Card.Body>
                           <div className="d-flex justify-content-between mb-5">
                             <QuickActions
-                              resource={
-                                {
-                                  ...resource,
-                                  marketplace_resource_uuid: resource.uuid,
-                                } as any
-                              }
+                              resource={scope}
+                              reInitResource={reInitResource}
                             />
                           </div>
                           <ResourceComponents

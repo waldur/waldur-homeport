@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -23,11 +24,11 @@ interface EditResourceEndDateActionProps {
   refreshList?(): void;
 }
 
-export const EditResourceEndDateAction = ({
+export const EditResourceEndDateAction: FC<EditResourceEndDateActionProps> = ({
   resource,
   reInitResource,
   refreshList,
-}: EditResourceEndDateActionProps) => {
+}) => {
   const dispatch = useDispatch();
   const isStaff = useSelector(isStaffSelector);
 

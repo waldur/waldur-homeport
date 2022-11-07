@@ -20,11 +20,13 @@ const validators = [
   validateRuntimeState('SHUTOFF'),
 ];
 
-export const StartAction = ({ resource }) => (
+export const StartAction = ({ resource, ...rest }) => (
   <AsyncActionItem
     title={translate('Start')}
+    iconClass="fa-play"
     resource={resource}
     validators={validators}
     apiMethod={startInstance}
+    {...rest}
   />
 );

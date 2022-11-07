@@ -11,11 +11,13 @@ const RequestDirectAccessDialog = lazyComponent(
   'RequestDirectAccessDialog',
 );
 
-export const RequestDirectAccessAction = ({ resource }) =>
+export const RequestDirectAccessAction = ({ resource, ...rest }) =>
   !ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE ? (
     <DialogActionItem
       title={translate('Request direct access')}
       modalComponent={RequestDirectAccessDialog}
       resource={resource}
+      iconClass="fa-server"
+      {...rest}
     />
   ) : null;

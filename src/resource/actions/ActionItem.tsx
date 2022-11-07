@@ -11,25 +11,36 @@ interface ActionItemProps {
   className?: string;
   disabled?: boolean;
   tooltip?: string;
+  as?;
+  iconClass?;
 }
 
-export const ActionItem: FC<ActionItemProps> = (props) => (
-  <Dropdown.Item
-    className={props.className}
-    // Workaround for rendering tooltips for disabled dropdown menu items.
-    // See also: https://stackoverflow.com/questions/57349166/
-    style={props.disabled ? { opacity: 0.3 } : undefined}
-    onClick={() => !props.disabled && props.action()}
-  >
-    {props.tooltip ? (
-      <>
-        <Tip label={props.tooltip} id={`action-reason-${uniqueId()}`}>
-          <i className="fa fa-question-circle" />
-        </Tip>{' '}
-        {props.title}
-      </>
-    ) : (
-      props.title
-    )}
-  </Dropdown.Item>
-);
+export const ActionItem: FC<ActionItemProps> = (props) => {
+  const Component = props.as;
+  return Component === Dropdown.Item ? (
+    <Component
+      className={props.className}
+      // Workaround for rendering tooltips for disabled dropdown menu items.
+      // See also: https://stackoverflow.com/questions/57349166/
+      style={props.disabled ? { opacity: 0.3 } : undefined}
+      onClick={() => !props.disabled && props.action()}
+    >
+      {props.tooltip ? (
+        <>
+          <Tip label={props.tooltip} id={`action-reason-${uniqueId()}`}>
+            <i className="fa fa-question-circle" />
+          </Tip>{' '}
+          {props.title}
+        </>
+      ) : (
+        props.title
+      )}
+    </Component>
+  ) : (
+    <Component {...props} />
+  );
+};
+
+ActionItem.defaultProps = {
+  as: Dropdown.Item,
+};

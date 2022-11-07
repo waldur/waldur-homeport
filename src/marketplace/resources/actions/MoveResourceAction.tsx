@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -19,11 +20,11 @@ interface MoveResourceActionProps {
   refreshList?(): void;
 }
 
-export const MoveResourceAction = ({
+export const MoveResourceAction: FC<MoveResourceActionProps> = ({
   resource,
   reInitResource,
   refreshList,
-}: MoveResourceActionProps) => {
+}) => {
   const dispatch = useDispatch();
   const isStaff = useSelector(isStaffSelector);
 

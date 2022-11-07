@@ -21,10 +21,13 @@ export const useChangeLimits = ({ resource }) => {
     action,
     tooltip,
     disabled,
+    iconClass: 'fa-edit',
   };
 };
 
-export const ChangeLimitsAction = ({ resource }) => {
+export const ChangeLimitsAction = ({ resource, ...rest }) => {
   const buttonProps = useChangeLimits({ resource });
-  return resource.is_limit_based ? <ActionItem {...buttonProps} /> : null;
+  return resource.is_limit_based ? (
+    <ActionItem {...buttonProps} {...rest} />
+  ) : null;
 };

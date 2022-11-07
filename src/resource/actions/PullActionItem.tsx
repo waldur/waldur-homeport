@@ -10,6 +10,8 @@ import { ActionItem } from './ActionItem';
 interface PullActionItemProps<T> {
   apiMethod(id: string): Promise<AxiosResponse>;
   resource: T;
+  iconClass?: string;
+  as?;
 }
 
 export const usePull = ({ resource, apiMethod }) => {
@@ -27,15 +29,16 @@ export const usePull = ({ resource, apiMethod }) => {
   return {
     action,
     title: translate('Synchronise'),
+    iconClass: 'fa-refresh',
   };
 };
 
 export const PullActionItem: <T extends { uuid: string; backend_id?: string }>(
   props: PullActionItemProps<T>,
 ) => ReactElement = (props) => {
-  const { action, title } = usePull(props);
+  const buttonProps = usePull(props);
   if (!props.resource.backend_id) {
     return null;
   }
-  return <ActionItem title={title} action={action} />;
+  return <ActionItem {...buttonProps} as={props.as} />;
 };
