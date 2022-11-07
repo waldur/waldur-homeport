@@ -74,6 +74,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
                   {...props}
                   maxLength={field.maxlength}
                   pattern={field.pattern?.source}
+                  validate={field.validate}
                   autoFocus
                 />
               );
