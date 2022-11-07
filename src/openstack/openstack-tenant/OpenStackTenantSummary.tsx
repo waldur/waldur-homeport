@@ -4,11 +4,7 @@ import { compose } from 'redux';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { translate } from '@waldur/i18n';
-import {
-  Field,
-  ResourceSummaryBase,
-  ResourceSummaryProps,
-} from '@waldur/resource/summary';
+import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { UserPassword } from '@waldur/resource/UserPassword';
 import { formatFlavor } from '@waldur/resource/utils';
 import { RootState } from '@waldur/store/reducers';
@@ -48,7 +44,6 @@ export const PureOpenStackTenantSummary: FunctionComponent<OpenStackTenantSummar
     const limits = parseQuotas(resource.quotas);
     return (
       <>
-        <ResourceSummaryBase {...props} />
         <Field
           label={translate('Summary')}
           value={

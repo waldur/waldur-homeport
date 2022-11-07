@@ -45,7 +45,7 @@ export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps
           <PlanDetailsField resource={resource} />
 
           <div className="d-flex justify-content-between mt-3">
-            <ResourceMetadataLink resource={resource} />
+            <ResourceMetadataLink resource={resource} scope={scope} />
             <ResourceOrderItemsLink resource={resource} />
           </div>
         </div>

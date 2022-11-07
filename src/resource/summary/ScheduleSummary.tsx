@@ -2,11 +2,7 @@ import React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import {
-  Field,
-  ResourceSummaryProps,
-  ResourceSummaryBase,
-} from '@waldur/resource/summary';
+import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { Schedule } from '@waldur/resource/types';
 import { formatRetentionTime, formatSchedule } from '@waldur/resource/utils';
 
@@ -16,7 +12,6 @@ export const ScheduleSummary: React.FC<ResourceSummaryProps<Schedule>> = (
   const { resource } = props;
   return (
     <>
-      <ResourceSummaryBase {...props} />
       <Field label={translate('Schedule')} value={formatSchedule(props)} />
       <Field label={translate('Time zone')} value={resource.timezone} />
       <Field

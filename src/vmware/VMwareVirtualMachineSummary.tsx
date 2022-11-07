@@ -1,10 +1,6 @@
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
-import {
-  Field,
-  ResourceSummaryBase,
-  ResourceSummaryProps,
-} from '@waldur/resource/summary';
+import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { formatSummary } from '@waldur/resource/utils';
 
 import { VMwareVirtualMachine } from './types';
@@ -16,7 +12,6 @@ export const VMwareVirtualMachineSummary = (
   const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
   return (
     <>
-      <ResourceSummaryBase {...props} />
       <Field label={translate('Summary')} value={formatSummary(resource)} />
       <Field label={translate('Guest OS')} value={resource.guest_os_name} />
       <Field label={translate('VMware Tools')} value={resource.tools_state} />

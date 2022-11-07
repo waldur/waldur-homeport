@@ -1,11 +1,7 @@
 import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
-import {
-  Field,
-  ResourceSummaryProps,
-  ResourceSummaryBase,
-} from '@waldur/resource/summary';
+import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 
 import { INSTANCE_TYPE } from '../constants';
 
@@ -21,9 +17,6 @@ const formatInstance = (props) => (
 export const OpenStackBackupSummary = (props: ResourceSummaryProps) => {
   const { resource } = props;
   return (
-    <span>
-      <ResourceSummaryBase {...props} />
-      <Field label={translate('Instance')} value={formatInstance(resource)} />
-    </span>
+    <Field label={translate('Instance')} value={formatInstance(resource)} />
   );
 };

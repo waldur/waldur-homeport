@@ -1,11 +1,7 @@
 import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
-import {
-  Field,
-  ResourceSummaryProps,
-  ResourceSummaryBase,
-} from '@waldur/resource/summary';
+import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { formatDefault } from '@waldur/resource/utils';
 
 import { Network } from './types';
@@ -24,8 +20,7 @@ export const OpenStackNetworkSummary = (
 ) => {
   const { resource } = props;
   return (
-    <span>
-      <ResourceSummaryBase {...props} />
+    <>
       <Field label={translate('Tenant')} value={formatTenant(resource)} />
       <Field
         label={translate('Type')}
@@ -41,6 +36,6 @@ export const OpenStackNetworkSummary = (
         value={resource.is_external ? translate('Yes') : translate('No')}
       />
       <Field label={translate('MTU')} value={formatDefault(resource.mtu)} />
-    </span>
+    </>
   );
 };
