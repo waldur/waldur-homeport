@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 import { ActionItem } from './types';
 
 interface ResourceActionComponentProps {
-  onToggle: (isOpen: boolean) => void;
+  onToggle?: (isOpen: boolean) => void;
   disabled?: boolean;
   open?: boolean;
   loading?: boolean;

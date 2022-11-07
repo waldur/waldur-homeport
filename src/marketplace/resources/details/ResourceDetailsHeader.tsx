@@ -17,10 +17,11 @@ import { ResourceOrderItemsLink } from './ResourceOrderItemsLink';
 interface ResourceDetailsHeaderProps {
   resource: Resource;
   reInitResource?(): void;
+  scope;
 }
 
 export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps> =
-  ({ resource }) => {
+  ({ resource, scope, reInitResource }) => {
     return (
       <Card.Body className="d-flex flex-column">
         <div className="d-flex flex-grow-1">
@@ -29,7 +30,11 @@ export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps
             <ParentResourceLink resource={resource} />
             <i>{`${resource.customer_name} / ${resource.project_name}`}</i>
           </div>
-          <ResourceActions resource={resource} />
+          <ResourceActions
+            resource={resource}
+            scope={scope}
+            reInitResource={reInitResource}
+          />
         </div>
         <div className="mt-7">
           <Field

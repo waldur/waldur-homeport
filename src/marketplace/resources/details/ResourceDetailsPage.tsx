@@ -53,5 +53,11 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     return null;
   }
 
-  return <ResourceDetailsView {...result.data} tab={tab} />;
+  return (
+    <ResourceDetailsView
+      {...result.data}
+      tab={tab}
+      reInitResource={() => result.refetch()}
+    />
+  );
 };
