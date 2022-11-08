@@ -5,10 +5,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const ResourceMetadataDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceMetadataDialog" */ './ResourceMetadataDialog'
-    ),
+  () => import('./ResourceMetadataDialog'),
   'ResourceMetadataDialog',
 );
 

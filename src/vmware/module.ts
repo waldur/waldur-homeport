@@ -8,20 +8,15 @@ import { registerResourceTypeLabel } from '@waldur/resource/utils';
 import './actions';
 
 const VMwareDiskSummary = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "VMwareDiskSummary" */ './VMwareDiskSummary'),
+  () => import('./VMwareDiskSummary'),
   'VMwareDiskSummary',
 );
 const VMwarePortSummary = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "VMwarePortSummary" */ './VMwarePortSummary'),
+  () => import('./VMwarePortSummary'),
   'VMwarePortSummary',
 );
 const VMwareVirtualMachineSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "VMwareVirtualMachineSummary" */ './VMwareVirtualMachineSummary'
-    ),
+  () => import('./VMwareVirtualMachineSummary'),
   'VMwareVirtualMachineSummary',
 );
 

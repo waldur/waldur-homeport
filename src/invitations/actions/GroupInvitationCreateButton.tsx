@@ -12,10 +12,7 @@ import {
 } from '@waldur/workspace/selectors';
 
 const GroupInvitationCreateDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "GroupInvitationCreateDialog" */ './GroupInvitationCreateDialog'
-    ),
+  () => import('./GroupInvitationCreateDialog'),
   'GroupInvitationCreateDialog',
 );
 

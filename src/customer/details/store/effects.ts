@@ -12,10 +12,7 @@ import * as actions from './actions';
 import * as api from './api';
 
 const PendingReviewDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PendingReviewDialog" */ '@waldur/customer/team/PendingReviewDialog'
-    ),
+  () => import('@waldur/customer/team/PendingReviewDialog'),
   'PendingReviewDialog',
 );
 

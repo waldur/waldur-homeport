@@ -7,10 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const OfferingPermissionCreateDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingPermissionCreateDialog" */ './OfferingPermissionCreateDialog'
-    ),
+  () => import('./OfferingPermissionCreateDialog'),
   'OfferingPermissionCreateDialog',
 );
 

@@ -7,10 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const OfferingDetailsDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingDetailsDialog" */ './OfferingDetailsDialog'
-    ),
+  () => import('./OfferingDetailsDialog'),
   'OfferingDetailsDialog',
 );
 

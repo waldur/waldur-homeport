@@ -2,10 +2,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
 const ResourceDetailsContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceDetailsContainer" */ './ResourceDetailsContainer'
-    ),
+  () => import('./ResourceDetailsContainer'),
   'ResourceDetailsContainer',
 );
 

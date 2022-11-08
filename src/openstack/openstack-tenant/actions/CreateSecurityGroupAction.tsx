@@ -8,10 +8,7 @@ import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton'
 import { TenantActionProps } from './types';
 
 const CreateSecurityGroupDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CreateSecurityGroupDialog" */ './CreateSecurityGroupDialog'
-    ),
+  () => import('./CreateSecurityGroupDialog'),
   'CreateSecurityGroupDialog',
 );
 

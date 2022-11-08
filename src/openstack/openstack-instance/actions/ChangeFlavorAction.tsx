@@ -9,8 +9,7 @@ import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { ActionContext } from '@waldur/resource/actions/types';
 
 const ChangeFlavorDialog = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "ChangeFlavorDialog" */ './ChangeFlavorDialog'),
+  () => import('./ChangeFlavorDialog'),
   'ChangeFlavorDialog',
 );
 

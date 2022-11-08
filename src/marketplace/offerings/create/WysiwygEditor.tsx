@@ -38,8 +38,7 @@ interface DraftModule {
   EditorState: any;
 }
 
-const loadModule = () =>
-  import(/* webpackChunkName: "draft-js" */ './draftjs-module');
+const loadModule = () => import('./draftjs-module');
 
 export const WysiwygEditor: FunctionComponent<any> = (props) => {
   const [editorState, setEditorState] = useState();

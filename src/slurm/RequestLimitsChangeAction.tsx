@@ -3,10 +3,7 @@ import { translate } from '@waldur/i18n';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
 const RequestLimitsChangeDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RequestLimitsChangeDialog" */ './RequestLimitsChangeDialog'
-    ),
+  () => import('./RequestLimitsChangeDialog'),
   'RequestLimitsChangeDialog',
 );
 

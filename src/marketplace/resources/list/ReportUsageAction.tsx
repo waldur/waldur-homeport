@@ -9,10 +9,7 @@ import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { isSupportOnly as isSupportOnlySelector } from '@waldur/workspace/selectors';
 
 const ResourceCreateUsageDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceCreateUsageDialog" */ '@waldur/marketplace/resources/usage/ResourceCreateUsageDialog'
-    ),
+  () => import('@waldur/marketplace/resources/usage/ResourceCreateUsageDialog'),
   'ResourceCreateUsageDialog',
 );
 

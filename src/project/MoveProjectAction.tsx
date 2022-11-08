@@ -8,8 +8,7 @@ import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
 const MoveProjectDialog = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "MoveProjectDialog" */ './MoveProjectDialog'),
+  () => import('./MoveProjectDialog'),
   'MoveProjectDialog',
 );
 

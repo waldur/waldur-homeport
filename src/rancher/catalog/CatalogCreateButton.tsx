@@ -8,10 +8,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const CatalogCreateDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CatalogCreateDialog" */ './CatalogCreateDialog'
-    ),
+  () => import('./CatalogCreateDialog'),
   'CatalogCreateDialog',
 );
 

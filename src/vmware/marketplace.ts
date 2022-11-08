@@ -3,10 +3,7 @@ import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 
 const VMwareVirtualMachineForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "VMwareVirtualMachineForm" */ './VMwareVirtualMachineForm'
-    ),
+  () => import('./VMwareVirtualMachineForm'),
   'VMwareVirtualMachineForm',
 );
 

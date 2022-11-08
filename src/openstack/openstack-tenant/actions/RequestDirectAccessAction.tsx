@@ -4,10 +4,7 @@ import { translate } from '@waldur/i18n';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
 const RequestDirectAccessDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RequestDirectAccessDialog" */ './RequestDirectAccessDialog'
-    ),
+  () => import('./RequestDirectAccessDialog'),
   'RequestDirectAccessDialog',
 );
 

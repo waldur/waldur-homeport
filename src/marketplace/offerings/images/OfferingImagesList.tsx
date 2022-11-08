@@ -17,8 +17,7 @@ import { ImagesListPlaceholder } from './ImagesListPlaceholder';
 import { ImageThumbnail } from './ImageThumbnail';
 
 const ImageDetailsDialog = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "ImageDetailsDialog" */ './ImageDetailsDialog'),
+  () => import('./ImageDetailsDialog'),
   'ImageDetailsDialog',
 );
 

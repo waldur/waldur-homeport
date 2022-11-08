@@ -14,8 +14,7 @@ import { UsageData } from './types';
 
 /*Source: https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json */
 
-const loadCountries = () =>
-  import(/* webpackChunkName: "countries" */ './countries.geo.json');
+const loadCountries = () => import('./countries.geo.json');
 
 interface HeatMapProps {
   center?: LatLngTuple;

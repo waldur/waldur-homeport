@@ -8,10 +8,7 @@ import { ActionContext } from '@waldur/resource/actions/types';
 import { getUser } from '@waldur/workspace/selectors';
 
 const RancherClusterKubeconfigDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RancherClusterKubeconfigDialog" */ './RancherClusterKubeconfigDialog'
-    ),
+  () => import('./RancherClusterKubeconfigDialog'),
   'RancherClusterKubeconfigDialog',
 );
 

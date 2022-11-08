@@ -4,10 +4,7 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import actions from './actions';
 const OpenStackBackupSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackBackupSummary" */ './OpenStackBackupSummary'
-    ),
+  () => import('./OpenStackBackupSummary'),
   'OpenStackBackupSummary',
 );
 

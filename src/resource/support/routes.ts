@@ -3,14 +3,11 @@ import { StateDeclaration } from '@waldur/core/types';
 import { translate } from '@waldur/i18n';
 
 const ResourcesTreemap = lazyComponent(
-  () => import(/* webpackChunkName: "ResourcesTreemap" */ './ResourcesTreemap'),
+  () => import('./ResourcesTreemap'),
   'ResourcesTreemap',
 );
 const SharedProviderContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SharedProviderContainer" */ './SharedProviderContainer'
-    ),
+  () => import('./SharedProviderContainer'),
   'SharedProviderContainer',
 );
 

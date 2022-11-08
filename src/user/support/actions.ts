@@ -7,15 +7,11 @@ import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const UserDetailsDialog = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "UserDetailsDialog" */ './UserDetailsDialog'),
+  () => import('./UserDetailsDialog'),
   'UserDetailsDialog',
 );
 const UserRemovalMessageDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "UserRemovalMessageDialog" */ './UserRemovalMessageDialog'
-    ),
+  () => import('./UserRemovalMessageDialog'),
   'UserRemovalMessageDialog',
 );
 

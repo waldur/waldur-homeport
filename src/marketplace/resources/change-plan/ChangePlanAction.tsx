@@ -7,7 +7,7 @@ import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { Resource } from '@waldur/resource/types';
 
 const ChangePlanDialog = lazyComponent(
-  () => import(/* webpackChunkName: "ChangePlanDialog" */ './ChangePlanDialog'),
+  () => import('./ChangePlanDialog'),
   'ChangePlanDialog',
 );
 

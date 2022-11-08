@@ -7,10 +7,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const InvoiceEventsDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "InvoiceEventsDialog" */ './InvoiceEventsDialog'
-    ),
+  () => import('./InvoiceEventsDialog'),
   'InvoiceEventsDialog',
 );
 

@@ -27,10 +27,7 @@ import { Comment } from './types';
 import * as utils from './utils';
 
 const IssueCommentDeleteDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "IssueCommentDeleteDialog" */ './IssueCommentDeleteDialog'
-    ),
+  () => import('./IssueCommentDeleteDialog'),
   'IssueCommentDeleteDialog',
 );
 interface PureIssueCommentItemProps {

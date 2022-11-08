@@ -7,10 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { LoginButton } from './LoginButton';
 
 const AuthValimoDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AuthValimoDialog" */ './valimo/AuthValimoDialog'
-    ),
+  () => import('./valimo/AuthValimoDialog'),
   'AuthValimoDialog',
 );
 

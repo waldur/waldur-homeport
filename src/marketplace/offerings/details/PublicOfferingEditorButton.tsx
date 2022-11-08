@@ -10,10 +10,7 @@ import {
 } from '@waldur/workspace/selectors';
 
 const PublicOfferingEditor = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PublicOfferingEditor" */ './PublicOfferingEditor'
-    ),
+  () => import('./PublicOfferingEditor'),
   'PublicOfferingEditor',
 );
 

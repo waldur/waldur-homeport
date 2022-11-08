@@ -4,10 +4,7 @@ import { getEventsTab } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
 const BackupSnapshotsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "BackupSnapshotsList" */ './BackupSnapshotsList'
-    ),
+  () => import('./BackupSnapshotsList'),
   'BackupSnapshotsList',
 );
 

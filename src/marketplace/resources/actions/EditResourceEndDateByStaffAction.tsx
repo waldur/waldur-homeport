@@ -10,10 +10,7 @@ import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
 const EditResourceEndDateDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "EditResourceEndDateDialog" */ './EditResourceEndDateDialog'
-    ),
+  () => import('./EditResourceEndDateDialog'),
   'EditResourceEndDateDialog',
 );
 

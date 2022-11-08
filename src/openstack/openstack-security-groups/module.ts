@@ -5,10 +5,7 @@ import './actions';
 import './tabs';
 
 const OpenStackSecurityGroupSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackSecurityGroupSummary" */ './OpenStackSecurityGroupSummary'
-    ),
+  () => import('./OpenStackSecurityGroupSummary'),
   'OpenStackSecurityGroupSummary',
 );
 

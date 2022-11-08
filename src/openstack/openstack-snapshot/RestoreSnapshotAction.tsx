@@ -4,10 +4,7 @@ import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
 const RestoreSnapshotDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RestoreSnapshotDialog" */ './RestoreSnapshotDialog'
-    ),
+  () => import('./RestoreSnapshotDialog'),
   'RestoreSnapshotDialog',
 );
 

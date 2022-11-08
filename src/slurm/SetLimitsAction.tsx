@@ -7,7 +7,7 @@ import { useModalDialogCallback } from '@waldur/resource/actions/useModalDialogC
 import { useValidators } from '@waldur/resource/actions/useValidators';
 
 const SetLimitsDialog = lazyComponent(
-  () => import(/* webpackChunkName: "SetLimitsDialog" */ './SetLimitsDialog'),
+  () => import('./SetLimitsDialog'),
   'SetLimitsDialog',
 );
 

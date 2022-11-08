@@ -9,10 +9,7 @@ import { ActionButtonSmall } from '@waldur/table/ActionButtonSmall';
 import { Offering } from '../types';
 
 const PreviewOfferingDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PreviewOfferingDialog" */ './PreviewOfferingDialog'
-    ),
+  () => import('./PreviewOfferingDialog'),
   'PreviewOfferingDialog',
 );
 

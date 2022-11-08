@@ -3,14 +3,8 @@ import { translate } from '@waldur/i18n';
 import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
-const DisksList = lazyComponent(
-  () => import(/* webpackChunkName: "DisksList" */ './DisksList'),
-  'DisksList',
-);
-const PortsList = lazyComponent(
-  () => import(/* webpackChunkName: "PortsList" */ './PortsList'),
-  'PortsList',
-);
+const DisksList = lazyComponent(() => import('./DisksList'), 'DisksList');
+const PortsList = lazyComponent(() => import('./PortsList'), 'PortsList');
 
 ResourceTabsConfiguration.register('VMware.VirtualMachine', () => [
   {

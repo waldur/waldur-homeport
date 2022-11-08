@@ -9,10 +9,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 import { Customer } from '@waldur/workspace/types';
 
 const SetLocationDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SetLocationDialog" */ '@waldur/map/SetLocationDialog'
-    ),
+  () => import('@waldur/map/SetLocationDialog'),
   'SetLocationDialog',
 );
 

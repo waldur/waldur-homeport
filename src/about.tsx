@@ -6,10 +6,7 @@ import { useTitle } from './navigation/title';
 import { TemplateComponent } from './TemplateComponent';
 
 const AnonymousLayout = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AnonymousLayout" */ '@waldur/navigation/AnonymousLayout'
-    ),
+  () => import('@waldur/navigation/AnonymousLayout'),
   'AnonymousLayout',
 );
 

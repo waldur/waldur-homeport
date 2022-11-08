@@ -9,116 +9,71 @@ import { SUPPORT_WORKSPACE } from '@waldur/workspace/types';
 import { hasSupport } from './hooks';
 
 const CustomersDivisionsContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomersDivisionsContainer" */ '@waldur/customer/divisions/CustomersDivisionsContainer'
-    ),
+  () => import('@waldur/customer/divisions/CustomersDivisionsContainer'),
   'CustomersDivisionsContainer',
 );
 const CustomerListContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerListContainer" */ '@waldur/customer/list/CustomerListContainer'
-    ),
+  () => import('@waldur/customer/list/CustomerListContainer'),
   'CustomerListContainer',
 );
 const PriceList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PriceList" */ '@waldur/marketplace/offerings/PriceList'
-    ),
+  () => import('@waldur/marketplace/offerings/PriceList'),
   'PriceList',
 );
 const CustomerRequestContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerRequestContainer" */ '@waldur/marketplace-flows/CustomerRequestContainer'
-    ),
+  () => import('@waldur/marketplace-flows/CustomerRequestContainer'),
   'CustomerRequestContainer',
 );
 const OrganizationUpdateContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OrganizationUpdateContainer" */ '@waldur/customer/list/OrganizationUpdateContainer'
-    ),
+  () => import('@waldur/customer/list/OrganizationUpdateContainer'),
   'OrganizationUpdateContainer',
 );
 const SupportCustomersContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SupportCustomersContainer" */ '@waldur/customer/list/SupportCustomersContainer'
-    ),
+  () => import('@waldur/customer/list/SupportCustomersContainer'),
   'SupportCustomersContainer',
 );
 const SupportProjectsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SupportProjectsList" */ '@waldur/project/SupportProjectsList'
-    ),
+  () => import('@waldur/project/SupportProjectsList'),
   'SupportProjectsList',
 );
 const SupportFeedback = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SupportFeedback" */ '@waldur/issues/feedback/SupportFeedback'
-    ),
+  () => import('@waldur/issues/feedback/SupportFeedback'),
   'SupportFeedback',
 );
 const SupportFeedbackListContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SupportFeedbackListContainer" */ '@waldur/issues/feedback/SupportFeedbackListContainer'
-    ),
+  () => import('@waldur/issues/feedback/SupportFeedbackListContainer'),
   'SupportFeedbackListContainer',
 );
 const SupportIssues = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SupportIssues" */ '@waldur/issues/SupportIssues'
-    ),
+  () => import('@waldur/issues/SupportIssues'),
   'SupportIssues',
 );
 const FlowMapViewContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "FlowMapViewContainer" */ '@waldur/providers/support/FlowMapViewContainer'
-    ),
+  () => import('@waldur/providers/support/FlowMapViewContainer'),
   'FlowMapViewContainer',
 );
 const HeatMapContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "HeatMapContainer" */ '@waldur/providers/support/HeatMapContainer'
-    ),
+  () => import('@waldur/providers/support/HeatMapContainer'),
   'HeatMapContainer',
 );
 const SankeyDiagramContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SankeyDiagramContainer" */ '@waldur/providers/support/SankeyDiagramContainer'
-    ),
+  () => import('@waldur/providers/support/SankeyDiagramContainer'),
   'SankeyDiagramContainer',
 );
 const UserListView = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "UserListView" */ '@waldur/user/support/UserListView'
-    ),
+  () => import('@waldur/user/support/UserListView'),
   'UserListView',
 );
 const IssueDetailsContainer = lazyComponent(
-  () => import(/* webpackChunkName: "IssueDetails" */ './IssueDetails'),
+  () => import('./IssueDetails'),
   'IssueDetails',
 );
 const BroadcastList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "BroadcastList" */ './notifications/BroadcastList'
-    ),
+  () => import('./notifications/BroadcastList'),
   'BroadcastList',
 );
 const FeaturesList = lazyComponent(
-  () => import(/* webpackChunkName: "FeaturesList" */ './FeaturesList'),
+  () => import('./FeaturesList'),
   'FeaturesList',
 );
 

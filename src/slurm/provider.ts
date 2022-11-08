@@ -1,13 +1,10 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import * as ProvidersRegistry from '@waldur/providers/registry';
 
-const SlurmForm = lazyComponent(
-  () => import(/* webpackChunkName: "SlurmForm" */ './SlurmForm'),
-  'SlurmForm',
-);
+const SlurmForm = lazyComponent(() => import('./SlurmForm'), 'SlurmForm');
 
 const SlurmRemoteForm = lazyComponent(
-  () => import(/* webpackChunkName: "SlurmRemoteForm" */ './SlurmForm'),
+  () => import('./SlurmForm'),
   'SlurmRemoteForm',
 );
 

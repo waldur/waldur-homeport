@@ -16,10 +16,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 import { Payment } from '@waldur/workspace/types';
 
 const PaymentUpdateDialogContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PaymentUpdateDialog" */ '@waldur/customer/payments/PaymentUpdateDialog'
-    ),
+  () => import('@waldur/customer/payments/PaymentUpdateDialog'),
   'PaymentUpdateDialogContainer',
 );
 

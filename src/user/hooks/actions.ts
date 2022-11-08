@@ -2,12 +2,11 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const HookDetailsDialog = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "HookDetailsDialog" */ './HookDetailsDialog'),
+  () => import('./HookDetailsDialog'),
   'HookDetailsDialog',
 );
 const HookRemoveDialog = lazyComponent(
-  () => import(/* webpackChunkName: "HookRemoveDialog" */ './HookRemoveDialog'),
+  () => import('./HookRemoveDialog'),
   'HookRemoveDialog',
 );
 

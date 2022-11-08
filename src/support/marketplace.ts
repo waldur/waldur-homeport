@@ -6,31 +6,19 @@ import { BASIC_OFFERING_TYPE, SUPPORT_OFFERING_TYPE } from './constants';
 import { serializer } from './serializer';
 
 const OfferingConfigurationDetails = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingConfigurationDetails" */ '@waldur/support/OfferingConfigurationDetails'
-    ),
+  () => import('@waldur/support/OfferingConfigurationDetails'),
   'OfferingConfigurationDetails',
 );
 const OfferingConfigurationForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingConfigurationForm" */ '@waldur/support/OfferingConfigurationForm'
-    ),
+  () => import('@waldur/support/OfferingConfigurationForm'),
   'OfferingConfigurationForm',
 );
 const OfferingPluginOptionsForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingPluginOptionsForm" */ './OfferingPluginOptionsForm'
-    ),
+  () => import('./OfferingPluginOptionsForm'),
   'OfferingPluginOptionsForm',
 );
 const OfferingPluginSecretOptionsForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingPluginSecretOptionsForm" */ './OfferingPluginSecretOptionsForm'
-    ),
+  () => import('./OfferingPluginSecretOptionsForm'),
   'OfferingPluginSecretOptionsForm',
 );
 

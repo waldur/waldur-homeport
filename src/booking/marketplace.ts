@@ -6,31 +6,19 @@ import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 
 const BookingDetails = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "BookingDetails" */ '@waldur/booking/BookingDetails'
-    ),
+  () => import('@waldur/booking/BookingDetails'),
   'BookingDetails',
 );
 const BookingCheckoutSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "BookingCheckoutSummary" */ '@waldur/booking/BookingCheckoutSummary'
-    ),
+  () => import('@waldur/booking/BookingCheckoutSummary'),
   'BookingCheckoutSummary',
 );
 const OfferingConfigurationForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingConfigurationForm" */ '@waldur/support/OfferingConfigurationForm'
-    ),
+  () => import('@waldur/support/OfferingConfigurationForm'),
   'OfferingConfigurationForm',
 );
 const OfferingPluginOptionsForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingPluginOptionsForm" */ '@waldur/support/OfferingPluginOptionsForm'
-    ),
+  () => import('@waldur/support/OfferingPluginOptionsForm'),
   'OfferingPluginOptionsForm',
 );
 

@@ -5,19 +5,15 @@ import { translate } from '@waldur/i18n';
 import type { ResourceTab } from './types';
 
 const ResourceOrderItemsTab = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceOrderItems" */ '@waldur/marketplace/orders/item/list/ResourceOrderItems'
-    ),
+  () => import('@waldur/marketplace/orders/item/list/ResourceOrderItems'),
   'ResourceOrderItemsTab',
 );
 const ResourceEvents = lazyComponent(
-  () => import(/* webpackChunkName: "ResourceEvents" */ './ResourceEvents'),
+  () => import('./ResourceEvents'),
   'ResourceEvents',
 );
 const ResourceIssuesList = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "ResourceIssuesList" */ './ResourceIssuesList'),
+  () => import('./ResourceIssuesList'),
   'ResourceIssuesList',
 );
 

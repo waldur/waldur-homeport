@@ -12,10 +12,7 @@ import {
 } from '@waldur/openstack/openstack-security-groups/types';
 
 const OpenStackSecurityGroupsDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackSecurityGroupsDialog" */ '../openstack-security-groups/OpenStackSecurityGroupsDialog'
-    ),
+  () => import('../openstack-security-groups/OpenStackSecurityGroupsDialog'),
   'OpenStackSecurityGroupsDialog',
 );
 

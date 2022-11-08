@@ -9,10 +9,7 @@ import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton'
 import { OpenStackInstance } from '../types';
 
 const CreateBackupScheduleDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CreateBackupScheduleDialog" */ './CreateBackupScheduleDialog'
-    ),
+  () => import('./CreateBackupScheduleDialog'),
   'CreateBackupScheduleDialog',
 );
 

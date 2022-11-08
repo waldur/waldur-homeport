@@ -7,7 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const HPACreateDialog = lazyComponent(
-  () => import(/* webpackChunkName: "HPACreateDialog" */ './HPACreateDialog'),
+  () => import('./HPACreateDialog'),
   'HPACreateDialog',
 );
 

@@ -4,19 +4,15 @@ import { StateDeclaration } from '@waldur/core/types';
 import { translate } from '@waldur/i18n';
 
 const GrowthContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "GrowthContainer" */ '@waldur/invoices/growth/GrowthContainer'
-    ),
+  () => import('@waldur/invoices/growth/GrowthContainer'),
   'GrowthContainer',
 );
 const BillingDetails = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "BillingDetails" */ './details/BillingDetails'),
+  () => import('./details/BillingDetails'),
   'BillingDetails',
 );
 const BillingTabs = lazyComponent(
-  () => import(/* webpackChunkName: "BillingTabs" */ './list/BillingTabs'),
+  () => import('./list/BillingTabs'),
   'BillingTabs',
 );
 

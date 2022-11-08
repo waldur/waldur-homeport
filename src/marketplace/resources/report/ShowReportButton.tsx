@@ -7,7 +7,7 @@ import { Report } from '@waldur/marketplace/resources/types';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const ShowReportDialog = lazyComponent(
-  () => import(/* webpackChunkName: "ShowReportDialog" */ './ShowReportDialog'),
+  () => import('./ShowReportDialog'),
   'ShowReportDialog',
 );
 

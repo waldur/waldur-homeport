@@ -11,8 +11,7 @@ import {
 } from '@waldur/workspace/selectors';
 
 const SetBackendIdDialog = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "SetBackendIdDialog" */ './SetBackendIdDialog'),
+  () => import('./SetBackendIdDialog'),
   'SetBackendIdDialog',
 );
 

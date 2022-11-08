@@ -6,7 +6,7 @@ import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
 
 const CreatePortDialog = lazyComponent(
-  () => import(/* webpackChunkName: "CreatePortDialog" */ './CreatePortDialog'),
+  () => import('./CreatePortDialog'),
   'CreatePortDialog',
 );
 

@@ -7,10 +7,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const AddRemoteUserDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AddRemoteUserDialog" */ './AddRemoteUserDialog'
-    ),
+  () => import('./AddRemoteUserDialog'),
   'AddRemoteUserDialog',
 );
 

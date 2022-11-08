@@ -14,10 +14,7 @@ import './marketplace';
 import './tabs';
 
 const OpenStackInstanceSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackInstanceSummary" */ './OpenStackInstanceSummary'
-    ),
+  () => import('./OpenStackInstanceSummary'),
   'OpenStackInstanceSummary',
 );
 

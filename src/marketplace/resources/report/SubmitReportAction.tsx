@@ -8,8 +8,7 @@ import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { validateStaffAction } from '../actions/utils';
 
 const SubmitReportDialog = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "SubmitReportDialog" */ './SubmitReportDialog'),
+  () => import('./SubmitReportDialog'),
   'SubmitReportDialog',
 );
 

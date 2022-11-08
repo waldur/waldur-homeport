@@ -2,18 +2,12 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
 const OrganizationProjectUpdateRequestListContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OrganizationProjectUpdateRequestListContainer" */ './OrganizationProjectUpdateRequestListContainer'
-    ),
+  () => import('./OrganizationProjectUpdateRequestListContainer'),
   'OrganizationProjectUpdateRequestListContainer',
 );
 
 const ProjectUpdateRequestListContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ProjectUpdateRequestListContainer" */ './ProjectUpdateRequestListContainer'
-    ),
+  () => import('./ProjectUpdateRequestListContainer'),
   'ProjectUpdateRequestListContainer',
 );
 

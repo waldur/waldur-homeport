@@ -3,10 +3,7 @@ import { pick } from '@waldur/core/utils';
 import * as ProvidersRegistry from '@waldur/providers/registry';
 
 const RancherProviderForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RancherProviderForm" */ './RancherProviderForm'
-    ),
+  () => import('./RancherProviderForm'),
   'RancherProviderForm',
 );
 

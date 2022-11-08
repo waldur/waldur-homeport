@@ -9,10 +9,7 @@ import { INSTANCE_TYPE, SHARED_INSTANCE_TYPE } from '../constants';
 import { getVolumeTypeRequirements } from './utils';
 
 const OpenstackInstanceDetails = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenstackInstanceDetails" */ '@waldur/openstack/openstack-instance/OpenstackInstanceDetails'
-    ),
+  () => import('@waldur/openstack/openstack-instance/OpenstackInstanceDetails'),
   'OpenstackInstanceDetails',
 );
 const OpenstackInstanceCheckoutSummary = lazyComponent(
@@ -23,10 +20,7 @@ const OpenstackInstanceCheckoutSummary = lazyComponent(
   'OpenstackInstanceCheckoutSummary',
 );
 const OpenstackInstanceCreateForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenstackInstanceCreateForm" */ './OpenstackInstanceCreateForm'
-    ),
+  () => import('./OpenstackInstanceCreateForm'),
   'OpenstackInstanceCreateForm',
 );
 

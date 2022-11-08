@@ -20,10 +20,7 @@ import { getOffering, getType, getTypeLabel } from '../store/selectors';
 import { ManagementStep, ManagementStepProps } from './ManagementStep';
 
 const ServiceSettingsDetailsDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ServiceSettingsDetailsDialog" */ './ServiceSettingsDetailsDialog'
-    ),
+  () => import('./ServiceSettingsDetailsDialog'),
   'ServiceSettingsDetailsDialog',
 );
 

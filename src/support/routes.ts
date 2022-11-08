@@ -3,17 +3,11 @@ import { StateDeclaration } from '@waldur/core/types';
 import { translate } from '@waldur/i18n';
 
 const SupportDetailsContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SupportDetailsContainer" */ './SupportDetailsContainer'
-    ),
+  () => import('./SupportDetailsContainer'),
   'SupportDetailsContainer',
 );
 const SupportEventsContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SupportEventsContainer" */ './SupportEventsContainer'
-    ),
+  () => import('./SupportEventsContainer'),
   'SupportEventsContainer',
 );
 

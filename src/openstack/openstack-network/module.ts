@@ -5,10 +5,7 @@ import './actions';
 import './tabs';
 
 const OpenStackNetworkSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackNetworkSummary" */ './OpenStackNetworkSummary'
-    ),
+  () => import('./OpenStackNetworkSummary'),
   'OpenStackNetworkSummary',
 );
 

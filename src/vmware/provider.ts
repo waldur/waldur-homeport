@@ -2,10 +2,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { pick } from '@waldur/core/utils';
 import * as ProvidersRegistry from '@waldur/providers/registry';
 
-const VMwareForm = lazyComponent(
-  () => import(/* webpackChunkName: "VMwareForm" */ './VMwareForm'),
-  'VMwareForm',
-);
+const VMwareForm = lazyComponent(() => import('./VMwareForm'), 'VMwareForm');
 
 const serializer = pick([
   'backend_url',

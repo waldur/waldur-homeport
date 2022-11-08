@@ -9,10 +9,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 const MarkAsPaidDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "MarkAsPaidDialog" */ '@waldur/invoices/list/MarkAsPaidDialog'
-    ),
+  () => import('@waldur/invoices/list/MarkAsPaidDialog'),
   'MarkAsPaidDialog',
 );
 

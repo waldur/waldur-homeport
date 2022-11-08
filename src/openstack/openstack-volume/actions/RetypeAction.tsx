@@ -8,7 +8,7 @@ import {
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
 const RetypeDialog = lazyComponent(
-  () => import(/* webpackChunkName: "RetypeDialog" */ './RetypeDialog'),
+  () => import('./RetypeDialog'),
   'RetypeDialog',
 );
 

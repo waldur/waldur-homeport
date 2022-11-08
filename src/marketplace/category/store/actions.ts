@@ -3,10 +3,7 @@ import type { Section, Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const AttributeFilterListDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AttributeFilterListDialog" */ '../filters/AttributeFilterListDialog'
-    ),
+  () => import('../filters/AttributeFilterListDialog'),
   'AttributeFilterListDialog',
 );
 

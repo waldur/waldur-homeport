@@ -3,15 +3,11 @@ import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 
 const AzureSQLServerDetails = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AzureSQLServerDetails" */ './AzureSQLServerDetails'
-    ),
+  () => import('./AzureSQLServerDetails'),
   'AzureSQLServerDetails',
 );
 const AzureSQLServerForm = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "AzureSQLServerForm" */ './AzureSQLServerForm'),
+  () => import('./AzureSQLServerForm'),
   'AzureSQLServerForm',
 );
 

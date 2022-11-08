@@ -7,10 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const AddProjectUserDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AddProjectUserDialog" */ './AddProjectUserDialog'
-    ),
+  () => import('./AddProjectUserDialog'),
   'AddProjectUserDialog',
 );
 

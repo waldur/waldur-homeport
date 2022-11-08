@@ -9,7 +9,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 import type { PlanUsageRowProps } from './types';
 
 const PlanUsageDialog = lazyComponent(
-  () => import(/* webpackChunkName: "PlanUsageDialog" */ './PlanUsageDialog'),
+  () => import('./PlanUsageDialog'),
   'PlanUsageDialog',
 );
 

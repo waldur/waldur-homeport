@@ -8,10 +8,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const BackendHealthStatusDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "BackendHealthStatusDialog" */ './BackendHealthStatusDialog'
-    ),
+  () => import('./BackendHealthStatusDialog'),
   'BackendHealthStatusDialog',
 );
 

@@ -5,10 +5,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { Project } from '@waldur/workspace/types';
 
 const ProjectRemoveDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ProjectRemoveDialog" */ './ProjectRemoveDialog'
-    ),
+  () => import('./ProjectRemoveDialog'),
   'ProjectRemoveDialog',
 );
 

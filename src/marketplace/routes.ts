@@ -9,225 +9,135 @@ import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 const SupportOfferingsContainer = lazyComponent(
   () =>
-    import(
-      /* webpackChunkName: "SupportOfferingsContainer" */ '@waldur/marketplace/offerings/support/SupportOfferingsContainer'
-    ),
+    import('@waldur/marketplace/offerings/support/SupportOfferingsContainer'),
   'SupportOfferingsContainer',
 );
 const ResourceDetailsPage = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceDetailsPage" */ '@waldur/marketplace/resources/details/ResourceDetailsPage'
-    ),
+  () => import('@waldur/marketplace/resources/details/ResourceDetailsPage'),
   'ResourceDetailsPage',
 );
 const AnonymousLayout = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AnonymousLayout" */ '@waldur/navigation/AnonymousLayout'
-    ),
+  () => import('@waldur/navigation/AnonymousLayout'),
   'AnonymousLayout',
 );
 const CheckoutPage = lazyComponent(
-  () => import(/* webpackChunkName: "CheckoutPage" */ './cart/CheckoutPage'),
+  () => import('./cart/CheckoutPage'),
   'CheckoutPage',
 );
 const ShoppingCartItemUpdate = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ShoppingCartItemUpdate" */ './cart/ShoppingCartItemUpdate'
-    ),
+  () => import('./cart/ShoppingCartItemUpdate'),
   'ShoppingCartItemUpdate',
 );
 const AllCategoriesPage = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AllCategoriesPage" */ './category/list/AllCategoriesPage'
-    ),
+  () => import('./category/list/AllCategoriesPage'),
   'AllCategoriesPage',
 );
 const CategoryPage = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "CategoryPage" */ './category/CategoryPage'),
+  () => import('./category/CategoryPage'),
   'CategoryPage',
 );
 const ComparisonTable = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ComparisonTable" */ './compare/ComparisonTable'
-    ),
+  () => import('./compare/ComparisonTable'),
   'ComparisonTable',
 );
 const OfferingDetailsPage = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingDetailsPage" */ './details/DetailsPage'
-    ),
+  () => import('./details/DetailsPage'),
   'OfferingDetailsPage',
 );
 const MarketplaceLanding = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "MarketplaceLanding" */ './landing/LandingPageContainer'
-    ),
+  () => import('./landing/LandingPageContainer'),
   'MarketplaceLanding',
 );
 const OfferingCreateContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingCreateContainer" */ './offerings/create/OfferingCreateContainer'
-    ),
+  () => import('./offerings/create/OfferingCreateContainer'),
   'OfferingCreateContainer',
 );
 const OfferingContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingContainer" */ './offerings/details/OfferingContainer'
-    ),
+  () => import('./offerings/details/OfferingContainer'),
   'OfferingContainer',
 );
 const PublicOfferingDetailsContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PublicOfferingDetailsContainer" */ './offerings/details/PublicOfferingDetailsContainer'
-    ),
+  () => import('./offerings/details/PublicOfferingDetailsContainer'),
   'PublicOfferingDetailsContainer',
 );
 const MyOfferingsListContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "MyOfferingsListContainer" */ './offerings/MyOfferingsListContainer'
-    ),
+  () => import('./offerings/MyOfferingsListContainer'),
   'MyOfferingsListContainer',
 );
 const OfferingsListContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingsListContainer" */ './offerings/OfferingsListContainer'
-    ),
+  () => import('./offerings/OfferingsListContainer'),
   'OfferingsListContainer',
 );
 const PublicServiceProviderDetails = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PublicServiceProviderDetails" */ './offerings/service-providers/PublicServiceProviderDetails'
-    ),
+  () => import('./offerings/service-providers/PublicServiceProviderDetails'),
   'PublicServiceProviderDetails',
 );
 const ServiceProvidersContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ServiceProvidersContainer" */ './offerings/service-providers/ServiceProvidersContainer'
-    ),
+  () => import('./offerings/service-providers/ServiceProvidersContainer'),
   'ServiceProvidersContainer',
 );
 const ImagesContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingImagesContainer" */ './offerings/images/ImagesContainer'
-    ),
+  () => import('./offerings/images/ImagesContainer'),
   'ImagesContainer',
 );
 const OfferingUpdateContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingUpdateContainer" */ './offerings/update/OfferingUpdateContainer'
-    ),
+  () => import('./offerings/update/OfferingUpdateContainer'),
   'OfferingUpdateContainer',
 );
 const OrderItemDetailsContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OrderItemDetailsContainer" */ './orders/item/details/OrderItemDetailsContainer'
-    ),
+  () => import('./orders/item/details/OrderItemDetailsContainer'),
   'OrderItemDetailsContainer',
 );
 const MyOrderItemsContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "MyOrderItemsContainer" */ './orders/item/list/MyOrderItemsContainer'
-    ),
+  () => import('./orders/item/list/MyOrderItemsContainer'),
   'MyOrderItemsContainer',
 );
 const OrderItemsContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OrderItemsContainer" */ './orders/item/list/OrderItemsContainer'
-    ),
+  () => import('./orders/item/list/OrderItemsContainer'),
   'OrderItemsContainer',
 );
 const SupportOrdersContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SupportOrdersContainer" */ './orders/SupportOrdersContainer'
-    ),
+  () => import('./orders/SupportOrdersContainer'),
   'SupportOrdersContainer',
 );
 const OrderDetailsContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OrderDetailsContainer" */ './orders/OrderDetailsContainer'
-    ),
+  () => import('./orders/OrderDetailsContainer'),
   'OrderDetailsContainer',
 );
 const OrdersList = lazyComponent(
-  () => import(/* webpackChunkName: "OrdersList" */ './orders/OrdersList'),
+  () => import('./orders/OrdersList'),
   'OrdersList',
 );
 const CustomerResourcesContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerResourcesContainer" */ './resources/list/CustomerResourcesContainer'
-    ),
+  () => import('./resources/list/CustomerResourcesContainer'),
   'CustomerResourcesContainer',
 );
 const ProjectResourcesContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ProjectResourcesContainer" */ './resources/list/ProjectResourcesContainer'
-    ),
+  () => import('./resources/list/ProjectResourcesContainer'),
   'ProjectResourcesContainer',
 );
 const ProjectResourcesAllContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ProjectResourcesAllContainer" */ './resources/list/ProjectResourcesAllContainer'
-    ),
+  () => import('./resources/list/ProjectResourcesAllContainer'),
   'ProjectResourcesAllContainer',
 );
 const PublicResourcesContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PublicResourcesContainer" */ './resources/list/PublicResourcesContainer'
-    ),
+  () => import('./resources/list/PublicResourcesContainer'),
   'PublicResourcesContainer',
 );
 const SupportResourcesContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SupportResourcesContainer" */ './resources/list/SupportResourcesContainer'
-    ),
+  () => import('./resources/list/SupportResourcesContainer'),
   'SupportResourcesContainer',
 );
 const PlanUsageContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PlanUsageContainer" */ './resources/plan-usage/PlanUsageContainer'
-    ),
+  () => import('./resources/plan-usage/PlanUsageContainer'),
   'PlanUsageContainer',
 );
 const SupportUsageContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SupportUsageContainer" */ './resources/usage/SupportUsageContainer'
-    ),
+  () => import('./resources/usage/SupportUsageContainer'),
   'SupportUsageContainer',
 );
 const ProviderDetails = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ProviderDetails" */ './service-providers/ProviderDetails'
-    ),
+  () => import('./service-providers/ProviderDetails'),
   'ProviderDetails',
 );
 

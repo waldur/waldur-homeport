@@ -6,10 +6,7 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 import actions from './actions';
 
 const AzureVirtualMachineSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AzureVirtualMachineSummary" */ './AzureVirtualMachineSummary'
-    ),
+  () => import('./AzureVirtualMachineSummary'),
   'AzureVirtualMachineSummary',
 );
 

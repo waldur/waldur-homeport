@@ -8,10 +8,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 import { User, Project, Customer } from '@waldur/workspace/types';
 
 const AddProjectMemberDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AddProjectMemberDialog" */ './AddProjectMemberDialog'
-    ),
+  () => import('./AddProjectMemberDialog'),
   'AddProjectMemberDialog',
 );
 

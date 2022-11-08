@@ -3,10 +3,7 @@ import { StateDeclaration } from '@waldur/core/types';
 import { translate } from '@waldur/i18n';
 
 const VmTypeOverviewContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "VmTypeOverviewContainer" */ './VmTypeOverviewContainer'
-    ),
+  () => import('./VmTypeOverviewContainer'),
   'VmTypeOverviewContainer',
 );
 

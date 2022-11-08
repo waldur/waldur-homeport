@@ -6,10 +6,7 @@ import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
 
 const CreateDatabaseDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CreateDatabaseDialog" */ './CreateDatabaseDialog'
-    ),
+  () => import('./CreateDatabaseDialog'),
   'CreateDatabaseDialog',
 );
 

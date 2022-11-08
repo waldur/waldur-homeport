@@ -4,10 +4,7 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 import './help';
 import './provider';
 const DigitalOceanDropletSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "DigitalOceanDropletSummary" */ './DigitalOceanDropletSummary'
-    ),
+  () => import('./DigitalOceanDropletSummary'),
   'DigitalOceanDropletSummary',
 );
 

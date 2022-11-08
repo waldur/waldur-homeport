@@ -25,52 +25,31 @@ import { DRAFT, ACTIVE, ARCHIVED, PAUSED } from '../store/constants';
 import { ActionsDropdown } from './ActionsDropdown';
 
 const SetLocationDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SetLocationDialog" */ '@waldur/map/SetLocationDialog'
-    ),
+  () => import('@waldur/map/SetLocationDialog'),
   'SetLocationDialog',
 );
 const RequestActionDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RequestActionDialog" */ '@waldur/marketplace/offerings/actions/RequestActionDialog'
-    ),
+  () => import('@waldur/marketplace/offerings/actions/RequestActionDialog'),
   'RequestActionDialog',
 );
 const PauseOfferingDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PauseOfferingDialog" */ './PauseOfferingDialog'
-    ),
+  () => import('./PauseOfferingDialog'),
   'PauseOfferingDialog',
 );
 const UpdateOfferingAttributesDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "UpdateOfferingAttributesDialog" */ './UpdateOfferingAttributesDialog'
-    ),
+  () => import('./UpdateOfferingAttributesDialog'),
   'UpdateOfferingAttributesDialog',
 );
 const EditConfirmationMessageDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "EditConfirmationMessageDialog" */ './EditConfirmationMessageDialog'
-    ),
+  () => import('./EditConfirmationMessageDialog'),
   'EditConfirmationMessageDialog',
 );
 const SetAccessPolicyDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SetAccessPolicyDialog" */ './SetAccessPolicyDialog'
-    ),
+  () => import('./SetAccessPolicyDialog'),
   'SetAccessPolicyDialog',
 );
 const UpdateOfferingLogoDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "UpdateOfferingLogoDialog" */ './UpdateOfferingLogoDialog'
-    ),
+  () => import('./UpdateOfferingLogoDialog'),
   'UpdateOfferingLogoDialog',
 );
 

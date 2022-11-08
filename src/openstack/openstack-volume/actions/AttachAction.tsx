@@ -4,7 +4,7 @@ import { validateRuntimeState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
 const AttachDialog = lazyComponent(
-  () => import(/* webpackChunkName: "AttachDialog" */ './AttachDialog'),
+  () => import('./AttachDialog'),
   'AttachDialog',
 );
 

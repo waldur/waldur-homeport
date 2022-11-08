@@ -7,10 +7,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 import { Customer } from '@waldur/workspace/types';
 
 const OrganizationDetailsDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OrganizationDetailsDialog" */ '@waldur/customer/list/OrganizationDetailsDialog'
-    ),
+  () => import('@waldur/customer/list/OrganizationDetailsDialog'),
   'OrganizationDetailsDialog',
 );
 

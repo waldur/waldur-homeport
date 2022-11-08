@@ -14,10 +14,7 @@ import {
 } from '@waldur/workspace/selectors';
 
 const SelectAffiliationDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SelectAffiliationDialog" */ '@waldur/user/SelectAffiliationDialog'
-    ),
+  () => import('@waldur/user/SelectAffiliationDialog'),
   'SelectAffiliationDialog',
 );
 

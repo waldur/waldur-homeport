@@ -17,8 +17,7 @@ interface MonacoFieldProps {
   options?: any;
 }
 
-const loader = () =>
-  import(/* webpackChunkName: "react-monaco-editor" */ 'react-monaco-editor');
+const loader = () => import('react-monaco-editor');
 
 const ReactMonacoEditor = lazy(loader);
 
