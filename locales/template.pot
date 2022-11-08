@@ -305,7 +305,6 @@ msgid "Active user will be able to login into the portal."
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/slurm/details/AllocationDetails.tsx
 msgid "Activity"
 msgstr ""
 
@@ -1220,7 +1219,6 @@ msgstr ""
 #: src/marketplace/resources/details/MonitoringCharts.tsx
 #: src/rancher/cluster/hpas/utils.ts
 #: src/rancher/node/RancherNodeSummary.tsx
-#: src/slurm/details/AllocationQuotas.tsx
 msgid "CPU"
 msgstr ""
 
@@ -2464,7 +2462,7 @@ msgstr ""
 #: src/rancher/cluster/users/UserDetailsButton.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
-#: src/slurm/DetailsAction.tsx
+#: src/slurm/tabs.ts
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -3398,10 +3396,6 @@ msgstr ""
 msgid "GB"
 msgstr ""
 
-#: src/slurm/details/AllocationQuotas.tsx
-msgid "GPU"
-msgstr ""
-
 #: src/slurm/SetLimitsDialog.tsx
 msgid "GPU limit (hours)"
 msgstr ""
@@ -3612,10 +3606,6 @@ msgstr ""
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "Hours"
-msgstr ""
-
-#: src/slurm/details/AllocationDetails.tsx
-msgid "How to"
 msgstr ""
 
 #: src/user/keys/help.js
@@ -7009,15 +6999,10 @@ msgstr ""
 msgid "Quota usage exceeds available limit."
 msgstr ""
 
-#: src/openstack/openstack-tenant/tabs.ts
-msgid "Quotas"
-msgstr ""
-
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
-#: src/slurm/details/AllocationQuotas.tsx
 msgid "RAM"
 msgstr ""
 
@@ -7709,7 +7694,6 @@ msgid "Resource link"
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceMetadataDialog.tsx
-#: src/slurm/details/ResourceMetadataDialog.tsx
 msgid "Resource metadata"
 msgstr ""
 
@@ -7964,10 +7948,6 @@ msgstr ""
 #: src/slurm/SetLimitsDialog.tsx
 #: src/slurm/marketplace.ts
 msgid "SLURM allocation"
-msgstr ""
-
-#: src/slurm/details/AllocationDetailsDialog.tsx
-msgid "SLURM allocation usage"
 msgstr ""
 
 #: src/slurm/marketplace.ts
@@ -8756,7 +8736,6 @@ msgid "Show less"
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceMetadataLink.tsx
-#: src/slurm/details/ResourceMetadataLink.tsx
 msgid "Show metadata"
 msgstr ""
 
@@ -9017,7 +8996,6 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
-#: src/slurm/details/ResourceHeader.tsx
 #: src/support/SupportDetailsTable.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
@@ -9044,7 +9022,6 @@ msgid "Status"
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/slurm/details/AllocationDetails.tsx
 msgid "Status page"
 msgstr ""
 
@@ -9765,7 +9742,6 @@ msgid "Thumbnail"
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/slurm/details/AllocationDetails.tsx
 msgid "Tickets"
 msgstr ""
 
@@ -9881,18 +9857,6 @@ msgstr ""
 
 #: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
 msgid "Total CPU"
-msgstr ""
-
-#: src/slurm/details/AllocationQuotas.tsx
-msgid "Total CPU hours consumed this month"
-msgstr ""
-
-#: src/slurm/details/AllocationQuotas.tsx
-msgid "Total GPU hours consumed this month"
-msgstr ""
-
-#: src/slurm/details/AllocationQuotas.tsx
-msgid "Total RAM GB-hours consumed this month"
 msgstr ""
 
 #: src/customer/list/TotalCostField.tsx
@@ -10401,7 +10365,6 @@ msgstr ""
 #: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
-#: src/slurm/details/AllocationUsageTable.tsx
 msgid "Unable to load data"
 msgstr ""
 
@@ -11218,9 +11181,7 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/details/ResourceTabs.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/openstack/openstack-tenant/tabs.ts
 #: src/slurm/details/utils.ts
-#: src/slurm/tabs.ts
 msgid "Usage"
 msgstr ""
 
@@ -11229,7 +11190,6 @@ msgid "Usage based"
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/slurm/details/AllocationDetails.tsx
 msgid "Usage history"
 msgstr ""
 
@@ -12246,7 +12206,6 @@ msgid "hour"
 msgstr ""
 
 #: src/providers/support/MapInfoPanel.tsx
-#: src/slurm/details/AllocationQuotas.tsx
 msgid "hours"
 msgstr ""
 
