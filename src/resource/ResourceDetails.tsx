@@ -6,8 +6,6 @@ import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/Off
 import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { OpenStackInstanceTenantButton } from '@waldur/openstack/openstack-instance/OpenStackInstanceTenantButton';
 
-import { AllocationDetails } from '../slurm/details/AllocationDetails';
-
 import { ActionButtonResource } from './actions/ActionButtonResource';
 import { ResourceAccessButton } from './ResourceAccessButton';
 import { ResourceRefreshButton } from './ResourceRefreshButton';
@@ -20,10 +18,6 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
 }) => {
   if (!resource) {
     return null;
-  }
-
-  if (resource.resource_type === 'SLURM.Allocation') {
-    return <AllocationDetails resource={resource} />;
   }
 
   return (

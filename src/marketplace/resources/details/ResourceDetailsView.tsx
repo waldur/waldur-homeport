@@ -182,12 +182,14 @@ export const ResourceDetailsView: FC<any> = ({
                     <Col md={4} sm={12}>
                       <Card>
                         <Card.Body>
-                          <div className="d-flex justify-content-between mb-5">
-                            <QuickActions
-                              resource={scope}
-                              reInitResource={reInitResource}
-                            />
-                          </div>
+                          {scope && (
+                            <div className="d-flex justify-content-between mb-5">
+                              <QuickActions
+                                resource={scope}
+                                reInitResource={reInitResource}
+                              />
+                            </div>
+                          )}
                           <ResourceComponents
                             resource={resource}
                             components={components}
