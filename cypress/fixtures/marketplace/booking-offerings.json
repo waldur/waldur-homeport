@@ -1,6 +1,6 @@
 [
   {
-    "url": "/api/marketplace-offerings/7a980d6131cd441d94482c7128be0731/",
+    "url": "/api/marketplace-provider-offerings/7a980d6131cd441d94482c7128be0731/",
     "uuid": "7a980d6131cd441d94482c7128be0731",
     "created": "2020-12-28T10:54:43.480065Z",
     "name": "booking-offering-1",
@@ -104,7 +104,7 @@
     "google_calendar_is_public": true
   },
   {
-    "url": "/api/marketplace-offerings/2dac7b969de443d9a9214ebecd26fe4b/",
+    "url": "/api/marketplace-provider-offerings/2dac7b969de443d9a9214ebecd26fe4b/",
     "uuid": "2dac7b969de443d9a9214ebecd26fe4b",
     "created": "2020-12-17T12:29:42.974538Z",
     "name": "my new booking offering",

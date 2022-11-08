@@ -11,7 +11,7 @@ xdescribe('Marketplace landing view', () => {
       .intercept('GET', '/api/customers/', {
         fixture: 'marketplace/anderson_and_sons.json',
       })
-      .intercept('GET', '/api/marketplace-offerings/', {
+      .intercept('GET', '/api/marketplace-public-offerings/', {
         fixture: 'marketplace/offerings.json',
       })
       .intercept('GET', '/api/marketplace-categories/', {

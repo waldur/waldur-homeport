@@ -4,7 +4,7 @@ import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import {
   getCustomerList,
   getServiceProviderList,
-  getOfferingsOptions,
+  getProviderOfferingsOptions,
   getProjectList,
   getCategoryOptions,
   getUsers,
@@ -132,7 +132,7 @@ export const offeringsAutocomplete = async (
     page: currentPage,
     page_size: ENV.pageSize,
   };
-  const response = await getOfferingsOptions(params);
+  const response = await getProviderOfferingsOptions(params);
   return returnReactSelectAsyncPaginateObject(
     response,
     prevOptions,

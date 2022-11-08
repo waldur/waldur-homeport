@@ -8,7 +8,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
-import { getOfferingCostChartData } from './api';
+import { getProviderOfferingCostChartData } from './api';
 import { formatOfferingCostsChart } from './utils';
 
 const getAccountingRunningFieldValue = (state, formId) =>
@@ -31,7 +31,7 @@ export const OfferingCostsChart: FunctionComponent<OfferingCostChartProps> = (
     value: option,
   } = useAsync(
     () =>
-      getOfferingCostChartData(
+      getProviderOfferingCostChartData(
         accountRunningState?.value,
         props.offeringUuid,
       ).then(formatOfferingCostsChart),

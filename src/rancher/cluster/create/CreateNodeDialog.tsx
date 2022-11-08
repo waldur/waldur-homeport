@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { getOffering } from '@waldur/marketplace/common/api';
+import { getProviderOffering } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -58,7 +58,7 @@ const serializeNode = (cluster, formData) => ({
 });
 
 const loadNodeCreateData = async (cluster: Cluster) => {
-  const offering = await getOffering(cluster.marketplace_offering_uuid);
+  const offering = await getProviderOffering(cluster.marketplace_offering_uuid);
   return await loadData(cluster.tenant_settings, offering);
 };
 

@@ -5,7 +5,10 @@ import { useQuery } from 'react-query';
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { getOffering, getResource } from '@waldur/marketplace/common/api';
+import {
+  getProviderOffering,
+  getResource,
+} from '@waldur/marketplace/common/api';
 import { useTitle } from '@waldur/navigation/title';
 
 import { ResourceDetailsView } from './ResourceDetailsView';
@@ -25,7 +28,7 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
           (response) => response.data,
         );
       }
-      const components = await getOffering(resource.offering_uuid, {
+      const components = await getProviderOffering(resource.offering_uuid, {
         signal,
       }).then((offering) => offering.components);
       return { resource, scope, components };

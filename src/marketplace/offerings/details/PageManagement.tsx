@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateOffering } from '@waldur/marketplace/common/api';
+import { updateProviderOffering } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
@@ -33,7 +33,7 @@ export const PageManagement = connect((state: RootState) => ({
       const updateOfferingHandler = async (formData) => {
         try {
           const offeringRequest = formatOfferingRequest(formData, []);
-          await updateOffering(offering.uuid, offeringRequest);
+          await updateProviderOffering(offering.uuid, offeringRequest);
           await refreshOffering();
           dispatch(showSuccess(translate('Offering has been updated.')));
           dispatch(closeModalDialog());

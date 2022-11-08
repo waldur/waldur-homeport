@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { LocationContainer } from '@waldur/map/LocationContainer';
-import { updateOffering } from '@waldur/marketplace/common/api';
+import { updateProviderOffering } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/notify';
 
@@ -31,7 +31,7 @@ export const PageLocation = connect<{}, {}, { offering }>((_, props) => ({
       const dispatch = useDispatch();
       const updateOfferingHandler = async ({ location }) => {
         try {
-          await updateOffering(offering.uuid, location);
+          await updateProviderOffering(offering.uuid, location);
           await refreshOffering();
           dispatch(showSuccess(translate('Offering has been updated.')));
           dispatch(closeModalDialog());

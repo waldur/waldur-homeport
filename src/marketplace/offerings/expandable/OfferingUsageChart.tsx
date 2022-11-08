@@ -5,8 +5,8 @@ import { useAsync } from 'react-use';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { generateColors } from '@waldur/customer/divisions/utils';
 import { translate } from '@waldur/i18n';
-import { getOffering } from '@waldur/marketplace/common/api';
-import { getOfferingComponentStats } from '@waldur/marketplace/offerings/expandable/api';
+import { getProviderOffering } from '@waldur/marketplace/common/api';
+import { getProviderOfferingComponentStats } from '@waldur/marketplace/offerings/expandable/api';
 import { ResourceUsageTabs } from '@waldur/marketplace/resources/usage/ResourceUsageTabs';
 import { OfferingComponent } from '@waldur/marketplace/types';
 import { SLURM_PLUGIN } from '@waldur/slurm/constants';
@@ -26,8 +26,8 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
     error,
     value: usages,
   } = useAsync(async () => {
-    const offering = await getOffering(offeringUuid);
-    const usages = await getOfferingComponentStats(offeringUuid, {
+    const offering = await getProviderOffering(offeringUuid);
+    const usages = await getProviderOfferingComponentStats(offeringUuid, {
       params: {
         start: DateTime.now()
           .minus({ months: 12 })

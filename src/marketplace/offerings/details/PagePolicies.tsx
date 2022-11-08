@@ -8,7 +8,7 @@ import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import {
   getAllOrganizationDivisions,
-  updateOfferingAccessPolicy,
+  updateProviderOfferingAccessPolicy,
 } from '@waldur/marketplace/common/api';
 import { SetAccessPolicyFormContainer } from '@waldur/marketplace/offerings/actions/SetAccessPolicyFormContainer';
 import {
@@ -42,7 +42,7 @@ export const PagePolicies = connect<{}, {}, { offering }>((_, props) => ({
       } = useAsync(async () => await getAllOrganizationDivisions(), [offering]);
       const updateOfferingHandler = async (formData) => {
         try {
-          await updateOfferingAccessPolicy(
+          await updateProviderOfferingAccessPolicy(
             offering.uuid,
             formatRequestBodyForSetAccessPolicyForm(formData, divisions),
           );

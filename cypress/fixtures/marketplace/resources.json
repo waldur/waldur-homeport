@@ -1,6 +1,6 @@
 [
   {
-    "offering": "/api/marketplace-offerings/a472d235ef014ecdad3b0d8955a84975/",
+    "offering": "/api/marketplace-provider-offerings/a472d235ef014ecdad3b0d8955a84975/",
     "offering_name": "Test Offer",
     "offering_uuid": "a472d235ef014ecdad3b0d8955a84975",
     "offering_description": "Offering description",
@@ -54,7 +54,7 @@
     "username": null
   },
   {
-    "offering": "/api/marketplace-offerings/fe8ca1ff14e14be9bdd30c40a5aa5a6d/",
+    "offering": "/api/marketplace-provider-offerings/fe8ca1ff14e14be9bdd30c40a5aa5a6d/",
     "offering_name": "Focused explicit workforce",
     "offering_uuid": "fe8ca1ff14e14be9bdd30c40a5aa5a6d",
     "offering_description": "Style color claim theory.",

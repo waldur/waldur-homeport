@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 
 import { FormContainer, SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { uploadOfferingHeroImage } from '@waldur/marketplace/common/api';
+import { uploadProviderOfferingHeroImage } from '@waldur/marketplace/common/api';
 import { ImageUploadField } from '@waldur/marketplace/offerings/create/ImageUploadField';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/notify';
@@ -29,7 +29,10 @@ export const PageHeroImage = connect<{}, {}, { offering }>((_, props) => ({
       const updateOfferingHandler = async (formData) => {
         try {
           if (formData.images instanceof File || formData.images === '') {
-            await uploadOfferingHeroImage(offering.uuid, formData.images);
+            await uploadProviderOfferingHeroImage(
+              offering.uuid,
+              formData.images,
+            );
           }
           await refreshOffering();
           dispatch(showSuccess(translate('Offering has been updated.')));

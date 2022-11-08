@@ -23,7 +23,7 @@ xdescribe('Broadcast', () => {
       )
       .intercept(
         'GET',
-        '/api/marketplace-offerings/?field=name&field=uuid&field=url&field=category_title&field=thumbnail&o=name&state=Active&name=&shared=true&page=1&page_size=10',
+        '/api/marketplace-provider-offerings/?field=name&field=uuid&field=url&field=category_title&field=thumbnail&o=name&state=Active&name=&shared=true&page=1&page_size=10',
         {
           fixture: 'support/marketplace-offerings.json',
         },

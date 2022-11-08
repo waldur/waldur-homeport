@@ -5,7 +5,10 @@ import { useAsyncFn, useEffectOnce } from 'react-use';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { getOffering, getCategory } from '@waldur/marketplace/common/api';
+import {
+  getProviderOffering,
+  getCategory,
+} from '@waldur/marketplace/common/api';
 import { OfferingResourcesFilter } from '@waldur/marketplace/details/OfferingResourcesFilter';
 import { OfferingResourcesList } from '@waldur/marketplace/details/OfferingResourcesList';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
@@ -17,7 +20,7 @@ import { OfferingUsersTab } from './OfferingUsersTab';
 import { PlanUsageList } from './PlanUsageList';
 
 async function loadData(offering_uuid: string) {
-  const offering = await getOffering(offering_uuid);
+  const offering = await getProviderOffering(offering_uuid);
   const category = await getCategory(offering.category_uuid);
   const sections = category.sections;
 

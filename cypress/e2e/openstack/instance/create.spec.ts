@@ -7,7 +7,7 @@ xdescribe('OpenStackInstanceCreateForm', () => {
         fixture: 'offerings/marketplacePlugins.json',
       })
       .intercept('GET', '/api/marketplace-orders/', [])
-      .intercept('GET', '/api/marketplace-offerings/', {
+      .intercept('GET', '/api/marketplace-public-offerings/', {
         fixture: 'offerings/openstackInstance.json',
       })
       .intercept('GET', '/api/marketplace-categories/', {
