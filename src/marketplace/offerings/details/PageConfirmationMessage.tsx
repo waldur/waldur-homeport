@@ -11,7 +11,7 @@ import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateOfferingConfirmationMessage } from '@waldur/marketplace/common/api';
+import { updateProviderOfferingConfirmationMessage } from '@waldur/marketplace/common/api';
 import { EditConfirmationMessageFormContainer } from '@waldur/marketplace/offerings/actions/EditConfirmationMessageFormContainer';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/notify';
@@ -38,7 +38,7 @@ export const PageConfirmationMessage = connect<{}, {}, { offering }>(
       const dispatch = useDispatch();
       const updateOfferingHandler = async ({ ...formData }) => {
         try {
-          await updateOfferingConfirmationMessage(
+          await updateProviderOfferingConfirmationMessage(
             offering.uuid,
             formData.template_confirmation_comment,
             offering.secret_options,

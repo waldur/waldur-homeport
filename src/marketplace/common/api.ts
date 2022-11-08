@@ -64,8 +64,8 @@ export const getComponentUsages = (
 export const getCategory = (id: string, options?: AxiosRequestConfig) =>
   getById<Category>('/marketplace-categories/', id, options);
 
-export const getOfferingsList = (params?: {}) =>
-  getList<Offering>('/marketplace-offerings/', params);
+export const getProviderOfferingsList = (params?: {}) =>
+  getList<Offering>('/marketplace-provider-offerings/', params);
 
 export const getPublicOfferingsList = (params?: {}) =>
   getList<Offering>('/marketplace-public-offerings/', params);
@@ -73,19 +73,20 @@ export const getPublicOfferingsList = (params?: {}) =>
 export const getOfferingsOptions = (params?: {}) =>
   getSelectData<Offering>('/marketplace-public-offerings/', params);
 
-export const getAllOfferings = (options?: {}) =>
-  getAll<Offering>('/marketplace-offerings/', options);
+export const getAllProviderOfferings = (options?: {}) =>
+  getAll<Offering>('/marketplace-provider-offerings/', options);
 
 export const getAllPublicOfferings = (options?: {}) =>
   getAll<Offering>('/marketplace-public-offerings/', options);
 
-export const getOfferingsByServiceProvider = (options?: {}) =>
-  get('/marketplace-offerings/groups/', options);
+export const getProviderOfferingsByServiceProvider = (options?: {}) =>
+  get('/marketplace-provider-offerings/groups/', options);
 
-export const getOfferingsCount = (options?: {}) =>
-  Axios.head(`${ENV.apiEndpoint}api/marketplace-offerings/`, options).then(
-    (response) => parseResultCount(response),
-  );
+export const getProviderOfferingsCount = (options?: {}) =>
+  Axios.head(
+    `${ENV.apiEndpoint}api/marketplace-provider-offerings/`,
+    options,
+  ).then((response) => parseResultCount(response));
 
 export const getResourcesCount = (options?: {}) =>
   Axios.head(`${ENV.apiEndpoint}api/marketplace-resources/`, options).then(
@@ -93,12 +94,15 @@ export const getResourcesCount = (options?: {}) =>
   );
 
 export const getProviderOfferings = (customerUuid: string) =>
-  getAllOfferings({ params: { customer_uuid: customerUuid } });
+  getAllProviderOfferings({ params: { customer_uuid: customerUuid } });
 
 export const getPlan = (id: string) => getById<any>('/marketplace-plans/', id);
 
-export const getOffering = (id: string, options?: AxiosRequestConfig) =>
-  getById<Offering>('/marketplace-offerings/', id, options);
+export const getPublicPlan = (id: string) =>
+  getById<any>('/marketplace-public-plans/', id);
+
+export const getProviderOffering = (id: string, options?: AxiosRequestConfig) =>
+  getById<Offering>('/marketplace-provider-offerings/', id, options);
 
 export const getPublicOffering = (id: string, options?: AxiosRequestConfig) =>
   getById<Offering>('/marketplace-public-offerings/', id, options);
@@ -123,11 +127,11 @@ export const getFlowOffering = (flowId: string) =>
     `/marketplace-resource-creation-requests/${flowId}/offering/`,
   ).then((response) => response.data);
 
-export const createOffering = (data) =>
-  post<Offering>('/marketplace-offerings/', data);
+export const createProviderOffering = (data) =>
+  post<Offering>('/marketplace-provider-offerings/', data);
 
-export const updateOffering = (offeringId, data) =>
-  patch<Offering>(`/marketplace-offerings/${offeringId}/`, data);
+export const updateProviderOffering = (offeringId, data) =>
+  patch<Offering>(`/marketplace-provider-offerings/${offeringId}/`, data);
 
 export const updateResource = (resourceId: string, data) =>
   put<Resource>(`/marketplace-resources/${resourceId}/`, data);
@@ -172,19 +176,22 @@ export const setBackendId = (resourceId: string, payload) =>
 export const uploadOfferingThumbnail = (offeringId, thumbnail) =>
   sendForm<Offering>(
     'PATCH',
-    `${ENV.apiEndpoint}api/marketplace-offerings/${offeringId}/`,
+    `${ENV.apiEndpoint}api/marketplace-provider-offerings/${offeringId}/`,
     { thumbnail },
   );
 
 export const uploadOfferingHeroImage = (offeringId, image) =>
   sendForm<Offering>(
     'PATCH',
-    `${ENV.apiEndpoint}api/marketplace-offerings/${offeringId}/`,
+    `${ENV.apiEndpoint}api/marketplace-provider-offerings/${offeringId}/`,
     { image },
   );
 
-export const updateOfferingAttributes = (offeringId, data) =>
-  post(`/marketplace-offerings/${offeringId}/update_attributes/`, data);
+export const updateProviderOfferingAttributes = (offeringId, data) =>
+  post(
+    `/marketplace-provider-offerings/${offeringId}/update_attributes/`,
+    data,
+  );
 
 export const uploadOfferingDocument = (
   offeringUrl: string,
@@ -269,9 +276,9 @@ export const getCustomersDivisionUuids = (accounting_is_running: boolean) =>
     params: { accounting_is_running, size: 200, field: ['division_uuid'] },
   });
 
-export const updateOfferingState = (offeringUuid, action, reason) =>
+export const updateProviderOfferingState = (offeringUuid, action, reason) =>
   post(
-    `/marketplace-offerings/${offeringUuid}/${action}/`,
+    `/marketplace-provider-offerings/${offeringUuid}/${action}/`,
     reason && { paused_reason: reason },
   ).then((response) => response.data);
 
@@ -353,12 +360,12 @@ export const changeLimits = (
 
 export const getImportableResources = (offering_uuid: string) =>
   getAll<ImportableResource>(
-    `/marketplace-offerings/${offering_uuid}/importable_resources/`,
+    `/marketplace-provider-offerings/${offering_uuid}/importable_resources/`,
   );
 
 export const importResource = ({ offering_uuid, ...payload }) =>
   post<Resource>(
-    `/marketplace-offerings/${offering_uuid}/import_resource/`,
+    `/marketplace-provider-offerings/${offering_uuid}/import_resource/`,
     payload,
   ).then((response) => response.data);
 
@@ -377,20 +384,20 @@ export const unpublishGoogleCalendar = (uuid: string) =>
     (response) => response.data,
   );
 
-export const updateOfferingOverview = (offeringId, data) =>
-  post(`/marketplace-offerings/${offeringId}/update_overview/`, data);
+export const updateProviderOfferingOverview = (offeringId, data) =>
+  post(`/marketplace-provider-offerings/${offeringId}/update_overview/`, data);
 
-export const updateOfferingDescription = (offeringId, category) =>
-  post(`/marketplace-offerings/${offeringId}/update_description/`, {
+export const updateProviderOfferingDescription = (offeringId, category) =>
+  post(`/marketplace-provider-offerings/${offeringId}/update_description/`, {
     category,
   });
 
-export const updateOfferingConfirmationMessage = (
+export const updateProviderOfferingConfirmationMessage = (
   offeringUuid,
   template_confirmation_comment,
   secretOptions,
 ) =>
-  patch(`/marketplace-offerings/${offeringUuid}/`, {
+  patch(`/marketplace-provider-offerings/${offeringUuid}/`, {
     secret_options: {
       ...secretOptions,
       template_confirmation_comment,
@@ -407,18 +414,18 @@ export const runOfferingScript = (
     type,
   });
 
-export const updateOfferingAccessPolicy = (
+export const updateProviderOfferingAccessPolicy = (
   offeringUuid: string,
   divisions: string[],
 ) =>
-  post(`/marketplace-offerings/${offeringUuid}/update_divisions/`, {
+  post(`/marketplace-provider-offerings/${offeringUuid}/update_divisions/`, {
     divisions,
   });
 
-export const updateOfferingLogo = (offeringUuid: string, formData) =>
+export const updateProviderOfferingLogo = (offeringUuid: string, formData) =>
   sendForm(
     'POST',
-    `${ENV.apiEndpoint}api/marketplace-offerings/${offeringUuid}/update_thumbnail/`,
+    `${ENV.apiEndpoint}api/marketplace-provider-offerings/${offeringUuid}/update_thumbnail/`,
     {
       thumbnail: formData.images,
     },

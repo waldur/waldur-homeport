@@ -7,7 +7,7 @@ describe('Google Calendar actions in public offerings view', () => {
       .intercept('GET', '/api/customers/', {
         fixture: 'marketplace/anderson_and_sons.json',
       })
-      .intercept('GET', '/api/marketplace-offerings/', {
+      .intercept('GET', '/api/marketplace-provider-offerings/', {
         fixture: 'marketplace/booking-offerings.json',
       })
       .intercept('GET', '/api/customers/**/counters/', {
@@ -27,7 +27,7 @@ describe('Google Calendar actions in public offerings view', () => {
 
       .log('Visit public offerings')
       .visit(
-        '/organizations/6983ac22f2bb469189311ab21e493359/marketplace-offerings/',
+        '/organizations/6983ac22f2bb469189311ab21e493359/marketplace-provider-offerings/',
       )
       .waitForSpinner();
   });

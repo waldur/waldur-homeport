@@ -4,7 +4,7 @@ import { useAsync, useAsyncFn } from 'react-use';
 
 import { translate } from '@waldur/i18n';
 import {
-  getAllOfferings,
+  getAllProviderOfferings,
   getImportableResources,
   importResource,
 } from '@waldur/marketplace/common/api';
@@ -16,7 +16,7 @@ import { createEntity } from '@waldur/table/actions';
 import { ImportDialogProps } from './types';
 
 const getOfferingsForImport = (resolve) =>
-  getAllOfferings({ params: { ...resolve, importable: true } });
+  getAllProviderOfferings({ params: { ...resolve, importable: true } });
 
 const toggleElement = (element, list) =>
   list.includes(element)

@@ -10,7 +10,7 @@ import { reduxForm } from 'redux-form';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import {
-  updateOfferingOverview,
+  updateProviderOfferingOverview,
   uploadOfferingThumbnail,
 } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -43,7 +43,7 @@ export const PageOverview = connect<{}, {}, { offering }>((_, props) => ({
       const dispatch = useDispatch();
       const updateOfferingHandler = async ({ thumbnail, ...formData }) => {
         try {
-          await updateOfferingOverview(offering.uuid, formData);
+          await updateProviderOfferingOverview(offering.uuid, formData);
           if (thumbnail instanceof File || thumbnail === '') {
             await uploadOfferingThumbnail(offering.uuid, thumbnail);
           }

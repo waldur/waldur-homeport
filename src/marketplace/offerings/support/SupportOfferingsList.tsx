@@ -78,7 +78,7 @@ const mapPropsToFilter = (props) => {
 
 export const TableOptions = {
   table: SUPPORT_OFFERING_TABLE_NAME,
-  fetchData: createFetcher('marketplace-offerings'),
+  fetchData: createFetcher('marketplace-provider-offerings'),
   mapPropsToFilter,
   exportRow: (row: Offering) => [
     row.name,
