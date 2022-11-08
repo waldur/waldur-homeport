@@ -4,14 +4,19 @@ import { useAsync } from 'react-use';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { generateColors } from '@waldur/customer/divisions/utils';
 import { translate } from '@waldur/i18n';
-import { Resource } from '@waldur/marketplace/resources/types';
 import { ResourceMetaInfo } from '@waldur/marketplace/resources/usage/ResourceMetaInfo';
 import { ResourceUsageTabs } from '@waldur/marketplace/resources/usage/ResourceUsageTabs';
 
 import { getComponentsAndUsages } from './api';
 
 interface ResourceUsageTabsContainerProps {
-  resource: Resource;
+  resource: {
+    resource_uuid: string;
+    offering_uuid: string;
+    customer_name?: string;
+    project_name?: string;
+    backend_id?: string;
+  };
   hideHeader?: boolean;
 }
 

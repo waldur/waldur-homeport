@@ -1,10 +1,13 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { Resource } from '@waldur/marketplace/resources/types';
 
 interface ResourceMetaInfoProps {
-  resource: Resource;
+  resource: {
+    customer_name?: string;
+    project_name?: string;
+    backend_id?: string;
+  };
 }
 
 export const ResourceMetaInfo: FunctionComponent<ResourceMetaInfoProps> = ({

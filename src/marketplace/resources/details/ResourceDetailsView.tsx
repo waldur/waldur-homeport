@@ -14,9 +14,10 @@ import {
   TENANT_TYPE,
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
-import { OpenStackResourceUsage } from '@waldur/openstack/OpenStackResourceUsage';
 import { NestedResourceTabsConfiguration } from '@waldur/resource/tabs/NestedResourceTabsConfiguration';
 import '@waldur/marketplace/offerings/details/PublicOfferingDetailsHero.scss';
+
+import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer';
 
 import { MonitoringCharts } from './MonitoringCharts';
 import { NetworkingTab } from './NetworkingTab';
@@ -127,6 +128,14 @@ export const ResourceDetailsView: FC<any> = ({
       .find((child) => child.key === tab)?.component;
   }, [scope]);
 
+  const resourceRef = useMemo(
+    () => ({
+      offering_uuid: resource.offering_uuid,
+      resource_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   return (
     <>
@@ -210,8 +219,8 @@ export const ResourceDetailsView: FC<any> = ({
                   <Card>
                     <Card.Body>
                       <h3 className="mb-5">{translate('Usage history')}</h3>
-                      <OpenStackResourceUsage
-                        resource={resource}
+                      <ResourceUsageTabsContainer
+                        resource={resourceRef}
                         hideHeader={true}
                       />
                     </Card.Body>
