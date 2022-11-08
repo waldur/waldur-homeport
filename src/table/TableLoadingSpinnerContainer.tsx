@@ -1,10 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import './TableLoadingSpinner.scss';
 import { TableProps } from '@waldur/table/Table';
 
 export const LoadingSpinner: FunctionComponent = () => (
-  <span className="spinner-container">
+  <span>
     <i className="fa fa-spinner fa-spin" />
   </span>
 );

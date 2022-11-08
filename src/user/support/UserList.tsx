@@ -142,12 +142,8 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: UserStatusField,
           className: 'text-center',
         },
-        {
-          title: translate('Actions'),
-          render: UserActionsButton,
-          className: 'text-center col-md-2 d-flex',
-        },
       ]}
+      hoverableRow={UserActionsButton}
       showPageSizeSelector={true}
       verboseName={translate('users')}
       enableExport={true}

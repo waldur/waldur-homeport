@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { Select } from '@waldur/form/themed-select';
@@ -21,19 +20,16 @@ interface OrderStateFilterProps {
 export const OrderStateFilter: FunctionComponent<OrderStateFilterProps> = ({
   options,
 }) => (
-  <Form.Group className="col-sm-3">
-    <Form.Label>{translate('State')}</Form.Label>
-    <Field
-      name="state"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Select state...')}
-          options={options ? options() : getOrderStateFilterOption()}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          isClearable={true}
-        />
-      )}
-    />
-  </Form.Group>
+  <Field
+    name="state"
+    component={(fieldProps) => (
+      <Select
+        placeholder={translate('Select state...')}
+        options={options ? options() : getOrderStateFilterOption()}
+        value={fieldProps.input.value}
+        onChange={(value) => fieldProps.input.onChange(value)}
+        isClearable={true}
+      />
+    )}
+  />
 );

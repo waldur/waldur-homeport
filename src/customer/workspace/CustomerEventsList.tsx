@@ -12,6 +12,7 @@ export const PureCustomerEvents = getEventsList({
   mapPropsToFilter: (props) => {
     const filter = {
       ...props.userFilter,
+      feature: props.userFilter?.feature?.map((option) => option.value),
       scope: props.customer.url,
     };
     if (props.userFilter && isEmpty(props.userFilter.feature)) {

@@ -146,3 +146,13 @@
     font-size: 0.95rem;
   }
 }
+
+/* SVG ICON */
+.collapsible:not(.collapsed),
+.show,
+.active {
+  > .rotate-180 {
+    transform: rotateZ(180deg);
+    transition: transform 0.3s ease;
+  }
+}

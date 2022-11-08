@@ -13,6 +13,7 @@ export const PureProjectEvents = getEventsList({
   mapPropsToFilter: (props) => {
     const filter = {
       ...props.userFilter,
+      feature: props.userFilter?.feature?.map((option) => option.value),
     };
     if (props.project) {
       filter.scope = props.project.url;

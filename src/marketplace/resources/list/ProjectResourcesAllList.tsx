@@ -55,16 +55,13 @@ export const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('State'),
           render: ResourceStateField,
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => (
-            <ResourceActionsButton row={row} refreshList={props.fetch} />
-          ),
-        },
       ]}
       verboseName={translate('Resources')}
       placeholderComponent={<EmptyResourcesListPlaceholder />}
       initialSorting={{ field: 'created', mode: 'desc' }}
+      hoverableRow={({ row }) => (
+        <ResourceActionsButton row={row} refreshList={props.fetch} />
+      )}
       hasQuery={true}
       showPageSizeSelector={true}
       expandableRow={ExpandableResourceSummary}

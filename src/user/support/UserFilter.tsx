@@ -1,13 +1,15 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
-import { FormContainer, SelectField } from '@waldur/form';
+import { SelectField } from '@waldur/form';
 import { DebouncedStringField } from '@waldur/form/DebouncedStringField';
 import { translate } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
+import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
+import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import './UserFilter.scss';
 
@@ -17,84 +19,112 @@ interface UserFilterProps {
 }
 
 const PureUserFilter: FunctionComponent<UserFilterProps> = (props) => (
-  <form className="form-inline" id="user-filter">
-    <FormContainer submitting={props.submitting} clearOnUnmount={false}>
-      <DebouncedStringField
-        label={translate('Full name')}
+  <TableFilterFormContainer form="userFilter">
+    <TableFilterItem title={translate('Full name')}>
+      <Field
         name="full_name"
-        noUpdateOnBlur={true}
-      />
-      {props.nativeNameVisible && (
-        <DebouncedStringField
-          label={translate('Native name')}
+        component={(fieldProps) => (
+          <DebouncedStringField {...fieldProps} noUpdateOnBlur={true} />
+        )}
+      ></Field>
+    </TableFilterItem>
+    {props.nativeNameVisible && (
+      <TableFilterItem title={translate('Native name')}>
+        <Field
           name="native_name"
-          noUpdateOnBlur={true}
-        />
-      )}
-      <DebouncedStringField
-        label={translate('ID code')}
+          component={(fieldProps) => (
+            <DebouncedStringField {...fieldProps} noUpdateOnBlur={true} />
+          )}
+        ></Field>
+      </TableFilterItem>
+    )}
+    <TableFilterItem title={translate('ID code')} name="civil_number">
+      <Field
         name="civil_number"
-        noUpdateOnBlur={true}
-      />
-      <DebouncedStringField
-        label={translate('Username')}
+        component={(fieldProps) => (
+          <DebouncedStringField {...fieldProps} noUpdateOnBlur={true} />
+        )}
+      ></Field>
+    </TableFilterItem>
+    <TableFilterItem title={translate('Username')}>
+      <Field
         name="username"
-        noUpdateOnBlur={true}
-      />
-      <DebouncedStringField
-        label={translate('Organization')}
+        component={(fieldProps) => (
+          <DebouncedStringField {...fieldProps} noUpdateOnBlur={true} />
+        )}
+      ></Field>
+    </TableFilterItem>
+    <TableFilterItem title={translate('Organization')}>
+      <Field
         name="organization"
-        noUpdateOnBlur={true}
-      />
-      <DebouncedStringField
-        label={translate('Email')}
+        component={(fieldProps) => (
+          <DebouncedStringField {...fieldProps} noUpdateOnBlur={true} />
+        )}
+      ></Field>
+    </TableFilterItem>
+    <TableFilterItem title={translate('Email')}>
+      <Field
         name="email"
-        noUpdateOnBlur={true}
-      />
-      <SelectField
-        className="Select"
-        label={translate('Role')}
+        component={(fieldProps) => (
+          <DebouncedStringField {...fieldProps} noUpdateOnBlur={true} />
+        )}
+      ></Field>
+    </TableFilterItem>
+    <TableFilterItem title={translate('Role')}>
+      <Field
         name="role"
-        placeholder={translate('Select role')}
-        options={[
-          {
-            label: translate('Staff'),
-            value: 'is_staff',
-          },
-          {
-            label: translate('Support'),
-            value: 'is_support',
-          },
-        ]}
-        isMulti={true}
-        noUpdateOnBlur={true}
-        isClearable={true}
-      />
-      <SelectField
-        className="Select"
-        label={translate('Status')}
+        component={(fieldProps) => (
+          <SelectField
+            {...fieldProps}
+            className="Select"
+            placeholder={translate('Select role')}
+            options={[
+              {
+                label: translate('Staff'),
+                value: 'is_staff',
+              },
+              {
+                label: translate('Support'),
+                value: 'is_support',
+              },
+            ]}
+            isMulti={true}
+            noUpdateOnBlur={true}
+            isClearable={true}
+          />
+        )}
+      ></Field>
+    </TableFilterItem>
+    <TableFilterItem title={translate('Status')}>
+      <Field
         name="status"
-        placeholder={translate('Select status')}
-        options={[
-          {
-            label: translate('Any'),
-            value: undefined,
-          },
-          {
-            label: translate('Active'),
-            value: true,
-          },
-          {
-            label: translate('Disabled'),
-            value: false,
-          },
-        ]}
-        noUpdateOnBlur={true}
-        simpleValue={true}
-        isClearable={true}
-      />
-    </FormContainer>
-  </form>
+        component={(fieldProps) => (
+          <SelectField
+            {...fieldProps}
+            className="Select"
+            placeholder={translate('Select status')}
+            options={[
+              {
+                label: translate('Any'),
+                value: undefined,
+              },
+              {
+                label: translate('Active'),
+                value: true,
+              },
+              {
+                label: translate('Disabled'),
+                value: false,
+              },
+            ]}
+            noUpdateOnBlur={true}
+            simpleValue={true}
+            isClearable={true}
+          />
+        )}
+      ></Field>
+    </TableFilterItem>
+  </TableFilterFormContainer>
 );
 
 const mapStateToProps = (state: RootState) => ({

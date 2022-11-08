@@ -2,10 +2,12 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { getConfig } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
-import { ToogleButtonFilter } from '@waldur/table/ToggleButtonFilter';
+import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
+import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 const PureInvoicesFilter = () => {
   const accountingMode = useSelector(
@@ -39,15 +41,23 @@ const PureInvoicesFilter = () => {
   }, [accountingMode]);
 
   return (
-    <Field
-      name="state"
-      normalize={(value) =>
-        Array.isArray(value) ? value.filter((x) => x) : value
-      }
-      component={(props) => (
-        <ToogleButtonFilter choices={choices} {...props.input} />
-      )}
-    />
+    <TableFilterFormContainer form="InvoicesFilter">
+      <TableFilterItem title={translate('State')}>
+        <Field
+          name="state"
+          component={(fieldProps) => (
+            <Select
+              placeholder={translate('Select state...')}
+              options={choices}
+              value={fieldProps.input.value}
+              onChange={(value) => fieldProps.input.onChange(value)}
+              isMulti={true}
+              isClearable={true}
+            />
+          )}
+        />
+      </TableFilterItem>
+    </TableFilterFormContainer>
   );
 };
 

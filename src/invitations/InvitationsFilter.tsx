@@ -1,57 +1,63 @@
-import { useMemo } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
-import { ToogleButtonFilter } from '@waldur/table/ToggleButtonFilter';
+import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
+import { TableFilterItem } from '@waldur/table/TableFilterItem';
+
+const choices = [
+  {
+    label: translate('Requested'),
+    value: 'requested',
+  },
+  {
+    label: translate('Rejected'),
+    value: 'rejected',
+  },
+  {
+    label: translate('Pending'),
+    value: 'pending',
+  },
+  {
+    label: translate('Canceled'),
+    value: 'canceled',
+  },
+  {
+    label: translate('Expired'),
+    value: 'expired',
+  },
+  {
+    label: translate('Accepted'),
+    value: 'accepted',
+  },
+];
 
 const PureInvitationsFilter = () => {
-  const choices = useMemo(
-    () => [
-      {
-        label: translate('Requested'),
-        value: 'requested',
-      },
-      {
-        label: translate('Rejected'),
-        value: 'rejected',
-      },
-      {
-        label: translate('Pending'),
-        value: 'pending',
-      },
-      {
-        label: translate('Canceled'),
-        value: 'canceled',
-      },
-      {
-        label: translate('Expired'),
-        value: 'expired',
-      },
-      {
-        label: translate('Accepted'),
-        value: 'accepted',
-      },
-    ],
-    [],
-  );
-
   return (
-    <Field
-      name="state"
-      normalize={(value) =>
-        Array.isArray(value) ? value.filter((x) => x) : value
-      }
-      component={(props) => (
-        <ToogleButtonFilter choices={choices} {...props.input} />
-      )}
-    />
+    <TableFilterFormContainer form="InvitationsFilter">
+      <TableFilterItem title={translate('State')} name="state">
+        <Field
+          name="state"
+          component={(fieldProps) => (
+            <Select
+              placeholder={translate('Select state...')}
+              options={choices}
+              value={fieldProps.input.value}
+              onChange={(item) => fieldProps.input.onChange(item)}
+              isMulti={true}
+              isClearable={true}
+            />
+          )}
+        />
+      </TableFilterItem>
+    </TableFilterFormContainer>
   );
 };
 
 const enhance = reduxForm({
   form: 'InvitationsFilter',
   initialValues: {
-    state: 'pending',
+    state: [choices[2]],
   },
   destroyOnUnmount: false,
 });

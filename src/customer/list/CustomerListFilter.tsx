@@ -1,8 +1,10 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import { PeriodOption } from '@waldur/form/types';
+import { translate } from '@waldur/i18n';
+import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
+import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { AccountingPeriodField } from './AccountingPeriodField';
 import { AccountingRunningField } from './AccountingRunningField';
@@ -13,14 +15,23 @@ interface CustomerListFilterProps {
 
 export const PureCustomerListFilter: FunctionComponent<CustomerListFilterProps> =
   (props) => (
-    <Row>
-      <Col sm={9}>
+    <TableFilterFormContainer form="customerListFilter">
+      <TableFilterItem
+        title={translate('Accounting period')}
+        name="accounting_period"
+        badgeValue={(value) => value?.label}
+        ellipsis={false}
+      >
         <AccountingPeriodField options={props.accountingPeriods} />
-      </Col>
-      <Col sm={3}>
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Accounting running')}
+        name="accounting_is_running"
+        badgeValue={(value) => value?.label}
+      >
         <AccountingRunningField />
-      </Col>
-    </Row>
+      </TableFilterItem>
+    </TableFilterFormContainer>
   );
 
 export const CustomerListFilter = reduxForm<{}, CustomerListFilterProps>({

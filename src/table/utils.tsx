@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n/translate';
+import { getTitle } from '@waldur/navigation/title';
+import { router } from '@waldur/router';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
@@ -54,6 +56,9 @@ export function connectTable(options: TableOptionsType) {
           dispatch(actions.sortListStart(table, sorting)),
         toggleRow: (row: any) => dispatch(actions.toggleRow(table, row)),
         toggleFilter: () => dispatch(actions.toggleFilter(table)),
+        selectRow: (row: any) => dispatch(actions.selectRow(table, row)),
+        selectAllRows: (rows: any[]) =>
+          dispatch(actions.selectAllRows(table, rows)),
       });
 
       const filterByFeature = (state: RootState) => (columns) =>
@@ -67,7 +72,17 @@ export function connectTable(options: TableOptionsType) {
         );
       };
 
+      const getDefaultTitle = (state: RootState) => {
+        const pageTitle = getTitle(state);
+        const breadcrumbs = router.globals.$current.path
+          .filter((part) => part.data?.breadcrumb)
+          .map((part) => part.data.breadcrumb());
+
+        return breadcrumbs.pop() || pageTitle;
+      };
+
       const mapStateToProps = (state: RootState) => ({
+        title: getDefaultTitle(state),
         filterColumns: filterColumns(state),
         ...getTableState(table)(state),
         rows: selectTableRows(state, table),
@@ -75,8 +90,10 @@ export function connectTable(options: TableOptionsType) {
 
       const enhance = connect(mapStateToProps, mapDispatchToProps);
 
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       /* @ts-ignore */
       const ConnectedComponent = enhance(Component);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       /* @ts-ignore */
       return <ConnectedComponent {...props} />;
     };

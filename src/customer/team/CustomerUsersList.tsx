@@ -43,15 +43,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('Owner'),
           render: CustomerRole,
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => (
-            <CustomerUserRowActions row={row} refreshList={props.fetch} />
-          ),
-        },
       ]}
       verboseName={translate('team members')}
       hasQuery={true}
+      hoverableRow={({ row }) => (
+        <CustomerUserRowActions row={row} refreshList={props.fetch} />
+      )}
       expandableRow={CustomerUsersListExpandableRow}
       actions={
         props.isStaff ? (

@@ -33,6 +33,29 @@ const SingleValue: FunctionComponent<any> = (props) => {
   );
 };
 
+export const SelectOrganizationDivisionFieldPure: FunctionComponent = () => (
+  <Field
+    name="division"
+    component={(fieldProps) => (
+      <AsyncPaginate
+        placeholder={translate('Select division...')}
+        loadOptions={organizationDivisionAutocomplete}
+        components={{ Option, SingleValue }}
+        defaultOptions
+        getOptionValue={(option) => option.url}
+        getOptionLabel={(option) => option.name}
+        value={fieldProps.input.value}
+        onChange={(value) => fieldProps.input.onChange(value)}
+        noOptionsMessage={() => translate('No divisions')}
+        isClearable={true}
+        additional={{
+          page: 1,
+        }}
+      />
+    )}
+  />
+);
+
 export const SelectOrganizationDivisionField: FunctionComponent<SelectOrganizationDivisionFieldProps> =
   (props) => (
     <Form.Group className={props.isFilterForm ? ' col-sm-3' : ''}>
@@ -40,26 +63,7 @@ export const SelectOrganizationDivisionField: FunctionComponent<SelectOrganizati
         {translate('Division')}
       </Form.Label>
       <div className={props.isFilterForm ? '' : 'mb-7'}>
-        <Field
-          name="division"
-          component={(fieldProps) => (
-            <AsyncPaginate
-              placeholder={translate('Select division...')}
-              loadOptions={organizationDivisionAutocomplete}
-              components={{ Option, SingleValue }}
-              defaultOptions
-              getOptionValue={(option) => option.url}
-              getOptionLabel={(option) => option.name}
-              value={fieldProps.input.value}
-              onChange={(value) => fieldProps.input.onChange(value)}
-              noOptionsMessage={() => translate('No divisions')}
-              isClearable={true}
-              additional={{
-                page: 1,
-              }}
-            />
-          )}
-        />
+        <SelectOrganizationDivisionFieldPure />
       </div>
     </Form.Group>
   );

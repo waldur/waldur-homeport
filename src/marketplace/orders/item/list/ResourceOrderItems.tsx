@@ -48,8 +48,10 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
       {...props}
+      title={translate('Resource order items')}
       columns={columns}
       verboseName={translate('order items')}
+      fullWidth
     />
   );
 };

@@ -51,3 +51,10 @@ export const selectFilterVisible = (state: RootState, table: string) => {
     return state.tables[table].filterVisible;
   }
 };
+
+export const selectSelectedRows = (state: RootState, table: string) => {
+  if (state.tables && state.tables[table]) {
+    return state.tables[table].selectedRows;
+  }
+  return [];
+};

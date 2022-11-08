@@ -46,34 +46,6 @@ const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('Role in project'),
           render: ({ row }) => translate(ENV.roles[row.role]) || 'N/A',
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => (
-            <>
-              <UserDetailsButton user={row} />
-              {props.isOwnerOrStaff ? (
-                <AddMemberButton
-                  user={row}
-                  users={props.rows}
-                  project={props.project}
-                  customer={props.customer}
-                  isProjectManager={props.isProjectManager}
-                  refreshList={props.fetch}
-                />
-              ) : null}
-              {props.isOwnerOrStaff || props.isProjectManager ? (
-                <UserRemoveButton
-                  permission={row.permission}
-                  isDisabled={
-                    !props.isOwnerOrStaff &&
-                    (!props.isProjectManager || row.role !== PROJECT_ADMIN_ROLE)
-                  }
-                  refreshList={props.fetch}
-                />
-              ) : null}
-            </>
-          ),
-        },
       ]}
       actions={
         <ButtonGroup>
@@ -90,6 +62,31 @@ const TableComponent: FunctionComponent<any> = (props) => {
         </ButtonGroup>
       }
       verboseName={translate('Team members')}
+      hoverableRow={({ row }) => (
+        <>
+          <UserDetailsButton user={row} />
+          {props.isOwnerOrStaff ? (
+            <AddMemberButton
+              user={row}
+              users={props.rows}
+              project={props.project}
+              customer={props.customer}
+              isProjectManager={props.isProjectManager}
+              refreshList={props.fetch}
+            />
+          ) : null}
+          {props.isOwnerOrStaff || props.isProjectManager ? (
+            <UserRemoveButton
+              permission={row.permission}
+              isDisabled={
+                !props.isOwnerOrStaff &&
+                (!props.isProjectManager || row.role !== PROJECT_ADMIN_ROLE)
+              }
+              refreshList={props.fetch}
+            />
+          ) : null}
+        </>
+      )}
     />
   );
 };

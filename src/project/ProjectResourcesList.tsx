@@ -50,6 +50,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     <Table
       {...props}
       columns={columns}
+      title={translate('Resources')}
       verboseName={translate('Resources')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       showPageSizeSelector={true}

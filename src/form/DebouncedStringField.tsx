@@ -34,6 +34,11 @@ export const DebouncedStringField: FunctionComponent<DebouncedStringFieldProps> 
         {...rest}
         value={value}
         onChange={handleChange}
+        onBlur={() => {
+          if (!props.noUpdateOnBlur) {
+            props.input.onBlur(props.input.value);
+          }
+        }}
       />
     );
   };

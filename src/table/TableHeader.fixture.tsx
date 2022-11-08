@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import { TableHeader } from './TableHeader';
 
@@ -9,8 +9,9 @@ const EmailField = ({ row }) => <>{row.email}</>;
 const PhoneNumberField = ({ row }) => <>{row.phone_number}</>;
 
 export const renderWrapper = (columns, currentSorting?, expandableRow?) =>
-  shallow(
+  mount(
     <TableHeader
+      rows={[]}
       columns={columns}
       currentSorting={currentSorting}
       expandableRow={expandableRow}

@@ -56,10 +56,6 @@ const TableComponent: FunctionComponent<any> = (props) => {
       title: translate('Plan'),
       render: ({ row }) => renderFieldOrDash(row.plan_name),
     },
-    {
-      title: translate('Actions'),
-      render: OrderItemActionsCell,
-    },
   ];
 
   return (
@@ -67,8 +63,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
       {...props}
       placeholderComponent={<OrderItemslistTablePlaceholder />}
       columns={columns}
+      title={translate('Order items')}
       verboseName={translate('Order items')}
       initialSorting={{ field: 'created', mode: 'desc' }}
+      hoverableRow={OrderItemActionsCell}
     />
   );
 };

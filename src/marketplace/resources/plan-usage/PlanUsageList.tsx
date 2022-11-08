@@ -40,10 +40,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: PlanRemainingColumn,
       orderField: 'remaining',
     },
-    {
-      title: translate('Actions'),
-      render: PlanUsageButton,
-    },
   ];
 
   return (
@@ -54,6 +50,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       enableExport={true}
       initialSorting={{ field: 'usage', mode: 'desc' }}
+      hoverableRow={PlanUsageButton}
     />
   );
 };

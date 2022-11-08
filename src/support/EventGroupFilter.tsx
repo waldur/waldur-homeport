@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 import { Field } from 'redux-form';
 
@@ -25,7 +24,6 @@ export const EventGroupFilter: FunctionComponent = () => {
     <>{translate('Unable to load event groups.')}</>
   ) : (
     <>
-      <Form.Label>{translate('Event group')}</Form.Label>
       <Field
         name="feature"
         component={(props) => (

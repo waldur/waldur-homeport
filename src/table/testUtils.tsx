@@ -28,6 +28,10 @@ export const renderTable = (Component, tableId, rowId, row) => {
     workspace: {
       user: {},
     },
+    title: {
+      title: '',
+      subtitle: '',
+    },
   });
   return render(
     <Provider store={store}>

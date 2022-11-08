@@ -110,7 +110,7 @@ export function getQueryString() {
   return '';
 }
 
-export const isEmpty = (obj) => Object.keys(obj).length === 0;
+export const isEmpty = (obj) => !obj || Object.keys(obj).length === 0;
 
 const entityMap = {
   '<': '&lt;',

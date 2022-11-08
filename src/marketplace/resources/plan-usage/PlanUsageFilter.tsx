@@ -1,9 +1,11 @@
 import { FunctionComponent } from 'react';
-import { Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
+import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { ProviderAutocomplete } from '@waldur/marketplace/orders/ProviderAutocomplete';
+import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
+import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 const offeringProps = {
   offeringFilter: {
@@ -12,10 +14,14 @@ const offeringProps = {
 };
 
 const PurePlanUsageFilter: FunctionComponent = () => (
-  <Row>
-    <ProviderAutocomplete className="col-sm-6" />
-    <OfferingAutocomplete {...offeringProps} className="col-sm-6" />
-  </Row>
+  <TableFilterFormContainer form="PlanUsageFilter">
+    <TableFilterItem title={translate('Service provider')} name="provider">
+      <ProviderAutocomplete />
+    </TableFilterItem>
+    <TableFilterItem title={translate('Offering')} name="offering">
+      <OfferingAutocomplete {...offeringProps} />
+    </TableFilterItem>
+  </TableFilterFormContainer>
 );
 
 const enhance = reduxForm({ form: 'PlanUsageFilter', destroyOnUnmount: false });

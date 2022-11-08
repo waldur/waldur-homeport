@@ -58,20 +58,20 @@ const TableComponent: FunctionComponent<any> = (props) => {
           orderField: 'expires',
           render: ({ row }) => formatDate(row.expires),
         },
-        {
-          title: translate('Actions'),
-          visible: props.canManage,
-          render: ({ row }) => (
-            <>
-              <InvitationSendButton invitation={row} />
-              <InvitationCancelButton
-                invitation={row}
-                refreshList={props.fetch}
-              />
-            </>
-          ),
-        },
       ]}
+      hoverableRow={
+        props.canManage ?? true
+          ? ({ row }) => (
+              <>
+                <InvitationSendButton invitation={row} />
+                <InvitationCancelButton
+                  invitation={row}
+                  refreshList={props.fetch}
+                />
+              </>
+            )
+          : undefined
+      }
       verboseName={translate('Team invitations')}
       actions={
         <InvitationCreateButton
@@ -88,6 +88,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 const mapPropsToFilter = (props) => ({
   ...props.stateFilter,
   project: props.project.uuid,
+  state: props.stateFilter?.state?.map((option) => option.value),
 });
 
 const TableOptions: TableOptionsType = {
