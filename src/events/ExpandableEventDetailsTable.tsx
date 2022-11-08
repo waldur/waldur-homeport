@@ -7,8 +7,6 @@ import { translate } from '@waldur/i18n';
 import { ExpandableEventField } from './ExpandableEventField';
 import { Event } from './types';
 
-import './ExpandableEventDetailsTable.scss';
-
 interface ExpandableEventDetailsTableProps {
   event: Event;
   isStaffOrSupport: boolean;
@@ -19,7 +17,7 @@ const showLink = (event, isStaffOrSupport) =>
 
 export const ExpandableEventDetailsTable: FunctionComponent<ExpandableEventDetailsTableProps> =
   ({ event, isStaffOrSupport }) => (
-    <Container className="event-details-table">
+    <Container>
       {isStaffOrSupport ? (
         <ExpandableEventField
           label={translate('User')}
