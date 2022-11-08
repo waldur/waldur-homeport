@@ -37,6 +37,6 @@ export const ActionButton: React.FC<ActionButtonProps> = (props) =>
   );
 
 ActionButton.defaultProps = {
-  className: 'me-3',
+  className: 'ms-3',
   variant: 'light',
 };

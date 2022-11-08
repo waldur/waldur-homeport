@@ -1,5 +1,4 @@
 import React from 'react';
-import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { Select } from '@waldur/form/themed-select';
@@ -10,21 +9,18 @@ import { OfferingChoice } from './types';
 export const OfferingFilter: React.FC<{ options: OfferingChoice[] }> = ({
   options,
 }) => (
-  <Form.Group className="col-sm-3">
-    <Form.Label>{translate('Offering')}</Form.Label>
-    <Field
-      name="offering"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Select offering...')}
-          options={options}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          isClearable={true}
-          getOptionLabel={(option) => option.name}
-          getOptionValue={(option) => option.uuid}
-        />
-      )}
-    />
-  </Form.Group>
+  <Field
+    name="offering"
+    component={(fieldProps) => (
+      <Select
+        placeholder={translate('Select offering...')}
+        options={options}
+        value={fieldProps.input.value}
+        onChange={(value) => fieldProps.input.onChange(value)}
+        isClearable={true}
+        getOptionLabel={(option) => option.name}
+        getOptionValue={(option) => option.uuid}
+      />
+    )}
+  />
 );

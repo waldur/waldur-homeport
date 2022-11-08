@@ -1,13 +1,15 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { ProviderAutocomplete } from '@waldur/marketplace/orders/ProviderAutocomplete';
+import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
+import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
@@ -26,15 +28,37 @@ interface StateProps {
 }
 
 const PureOrderItemsFilter = (props: OwnProps & StateProps) => (
-  <Row>
+  <TableFilterFormContainer form="OrderItemFilter">
     {props.showOfferingFilter && (
-      <OfferingAutocomplete offeringFilter={props.offeringFilter} />
+      <TableFilterItem title={translate('Offering')} name="offering">
+        <OfferingAutocomplete offeringFilter={props.offeringFilter} />
+      </TableFilterItem>
     )}
-    {props.showOrganizationFilter && <OrganizationAutocomplete />}
-    {props.showProviderFilter && <ProviderAutocomplete />}
-    <OrderStateFilter />
-    <OrderTypeFilter />
-  </Row>
+    {props.showOrganizationFilter && (
+      <TableFilterItem title={translate('Organization')} name="organization">
+        <OrganizationAutocomplete />
+      </TableFilterItem>
+    )}
+    {props.showProviderFilter && (
+      <TableFilterItem title={translate('Service provider')} name="provider">
+        <ProviderAutocomplete />
+      </TableFilterItem>
+    )}
+    <TableFilterItem
+      title={translate('State')}
+      name="state"
+      badgeValue={(value) => value?.label}
+    >
+      <OrderStateFilter />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Type')}
+      name="type"
+      badgeValue={(value) => value?.label}
+    >
+      <OrderTypeFilter />
+    </TableFilterItem>
+  </TableFilterFormContainer>
 );
 
 const filterSelector = createSelector(

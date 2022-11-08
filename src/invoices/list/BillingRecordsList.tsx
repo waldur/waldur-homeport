@@ -51,11 +51,8 @@ const TableComponent: FunctionComponent<any> = (props) => {
           ),
           render: ({ row }) => defaultCurrency(row.price),
         },
-        {
-          title: translate('Actions'),
-          render: SendNotificationButton,
-        },
       ]}
+      hoverableRow={SendNotificationButton}
       verboseName={translate('records')}
     />
   );
@@ -64,6 +61,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 const mapPropsToFilter = (props) => ({
   ...props.stateFilter,
   customer: props.customer.url,
+  state: props.stateFilter?.state?.map((option) => option.value),
   field: ['uuid', 'state', 'month', 'year', 'invoice_date', 'number', 'price'],
 });
 

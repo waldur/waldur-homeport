@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Form, Col } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { AsyncPaginate } from '@waldur/form/themed-select';
@@ -15,37 +14,32 @@ interface OrganizationAutocompleteProps {
 
 export const OrganizationAutocomplete: FunctionComponent<OrganizationAutocompleteProps> =
   (props) => (
-    <Col sm={3}>
-      <Form.Label>{props.label || translate('Client organization')}</Form.Label>
-      <Field
-        name="organization"
-        component={(fieldProps) => (
-          <AsyncPaginate
-            placeholder={
-              props.placeholder || translate('Select organization...')
-            }
-            loadOptions={(query, prevOptions, { page }) =>
-              organizationAutocomplete(query, prevOptions, page, {
-                field: ['name', 'uuid'],
-                o: 'name',
-                is_service_provider: props.isServiceProvider,
-                has_resources: props.isServiceProvider ? undefined : true,
-              })
-            }
-            defaultOptions
-            getOptionValue={(option) => option.uuid}
-            getOptionLabel={(option) => option.name}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            noOptionsMessage={() =>
-              props.noOptionsMessage || translate('No organizations')
-            }
-            isClearable={true}
-            additional={{
-              page: 1,
-            }}
-          />
-        )}
-      />
-    </Col>
+    <Field
+      name="organization"
+      component={(fieldProps) => (
+        <AsyncPaginate
+          placeholder={props.placeholder || translate('Select organization...')}
+          loadOptions={(query, prevOptions, { page }) =>
+            organizationAutocomplete(query, prevOptions, page, {
+              field: ['name', 'uuid'],
+              o: 'name',
+              is_service_provider: props.isServiceProvider,
+              has_resources: props.isServiceProvider ? undefined : true,
+            })
+          }
+          defaultOptions
+          getOptionValue={(option) => option.uuid}
+          getOptionLabel={(option) => option.name}
+          value={fieldProps.input.value}
+          onChange={(value) => fieldProps.input.onChange(value)}
+          noOptionsMessage={() =>
+            props.noOptionsMessage || translate('No organizations')
+          }
+          isClearable={true}
+          additional={{
+            page: 1,
+          }}
+        />
+      )}
+    />
   );

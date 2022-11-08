@@ -42,15 +42,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('Active'),
           render: ({ row }) => <BooleanField value={row.is_active} />,
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => (
-            <GroupInvitationRowActions row={row} refreshList={props.fetch} />
-          ),
-        },
       ]}
       verboseName={translate('group invitations')}
       actions={<GroupInvitationCreateButton refreshList={props.fetch} />}
+      hoverableRow={({ row }) => (
+        <GroupInvitationRowActions row={row} refreshList={props.fetch} />
+      )}
       expandableRow={GroupInvitationsListExpandableRow}
     />
   );

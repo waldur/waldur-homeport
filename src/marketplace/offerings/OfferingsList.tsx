@@ -19,7 +19,6 @@ import {
 import { openModalDialog } from '@waldur/modal/actions';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableDropdowns } from '@waldur/table/TableDropdowns';
 import { TableOptionsType } from '@waldur/table/types';
 import {
   getCustomer,
@@ -73,51 +72,31 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
   ];
 
-  if (!props.actionsDisabled) {
-    columns.push({
-      title: translate('Actions'),
-      render: ({ row }) => {
-        return (
-          <ButtonGroup>
-            {!props.hideOfferingItemActions && (
-              <OfferingItemActions offering={row} />
-            )}
-            <PreviewOfferingButton offering={row} />
-          </ButtonGroup>
-        );
+  const dropdownActions = [
+    {
+      label: translate('Add offerings'),
+      icon: 'fa fa-plus',
+      action: () => {
+        router.stateService.go('marketplace-offering-create');
       },
-    });
-  }
-
-  const actions = (
-    <TableDropdowns
-      actions={[
-        {
-          label: translate('Add offerings'),
-          icon: 'fa fa-plus',
-          handler: () => {
-            router.stateService.go('marketplace-offering-create');
-          },
-        },
-        {
-          label: translate('Import offerings'),
-          icon: 'fa fa-plus',
-          handler: () => {
-            dispatch(openModalDialog(OfferingImportDialog, { size: 'lg' }));
-          },
-        },
-        {
-          label: translate('Public list'),
-          icon: 'fa fa-external-link',
-          handler: () => {
-            router.stateService.go('marketplace-service-provider.details', {
-              uuid: props.customer.uuid,
-            });
-          },
-        },
-      ]}
-    />
-  );
+    },
+    {
+      label: translate('Import offerings'),
+      icon: 'fa fa-plus',
+      action: () => {
+        dispatch(openModalDialog(OfferingImportDialog, { size: 'lg' }));
+      },
+    },
+    {
+      label: translate('Public list'),
+      icon: 'fa fa-external-link',
+      action: () => {
+        router.stateService.go('marketplace-service-provider.details', {
+          uuid: props.customer.uuid,
+        });
+      },
+    },
+  ];
 
   return (
     <Table
@@ -125,9 +104,21 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       placeholderComponent={<OfferingsListTablePlaceholder />}
       columns={columns}
       verboseName={translate('Offerings')}
-      actions={props.showOfferingListActions && actions}
+      dropdownActions={props.showOfferingListActions && dropdownActions}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
+      hoverableRow={
+        !props.actionsDisabled ?? true
+          ? ({ row }) => (
+              <ButtonGroup>
+                {!props.hideOfferingItemActions && (
+                  <OfferingItemActions offering={row} />
+                )}
+                <PreviewOfferingButton offering={row} />
+              </ButtonGroup>
+            )
+          : undefined
+      }
       expandableRow={OfferingsListExpandableRow}
       hasQuery={true}
     />

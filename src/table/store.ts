@@ -22,7 +22,8 @@ const INITIAL_STATE: TableState = {
     loading: false,
   },
   toggled: {},
-  filterVisible: false,
+  filterVisible: true,
+  selectedRows: [],
 };
 
 const deleteEntity = (state, action) => {
@@ -163,6 +164,44 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         ...state,
         filterVisible: !state.filterVisible,
       };
+
+    case actions.SELECT_ROW: {
+      const row = action.payload.row;
+      const index = state.selectedRows.findIndex(
+        (item) => item.uuid === row.uuid,
+      );
+      if (index > -1) {
+        return {
+          ...state,
+          selectedRows: [
+            ...state.selectedRows.slice(0, index),
+            ...state.selectedRows.slice(index + 1),
+          ],
+        };
+      } else {
+        return {
+          ...state,
+          selectedRows: state.selectedRows.concat([row]),
+        };
+      }
+    }
+
+    case actions.SELECT_ALL_ROWS: {
+      const rows = action.payload.rows;
+      const isAllSelected =
+        state.selectedRows && state.selectedRows.length >= rows.length;
+      if (isAllSelected) {
+        return {
+          ...state,
+          selectedRows: [],
+        };
+      } else {
+        return {
+          ...state,
+          selectedRows: [...rows],
+        };
+      }
+    }
 
     default:
       return state;

@@ -35,13 +35,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) =>
             row.is_pending ? translate('Pending') : translate('Performed'),
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) =>
-            row.is_pending ? <ReviewCloseButton reviewId={row.uuid} /> : 'N/A',
-        },
       ]}
       verboseName={translate('permission reviews')}
+      hoverableRow={({ row }) =>
+        row.is_pending ? <ReviewCloseButton reviewId={row.uuid} /> : 'N/A'
+      }
     />
   );
 };

@@ -65,6 +65,7 @@ export interface TableState {
   sorting?: SortingState;
   toggled?: object;
   filterVisible?: boolean;
+  selectedRows?: any[];
 }
 
 export interface Sorting {
@@ -74,4 +75,15 @@ export interface Sorting {
 
 export interface SortingState extends Sorting {
   loading?: boolean;
+}
+
+export interface TableDropdownItem {
+  label: string;
+  icon?: string;
+  action?: () => void;
+  children?: Array<{
+    label: string;
+    icon?: string;
+    action: () => void;
+  }>;
 }

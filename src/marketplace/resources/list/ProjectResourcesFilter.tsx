@@ -1,7 +1,9 @@
-import { Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
+import { translate } from '@waldur/i18n';
+import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
+import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { OfferingFilter } from './OfferingFilter';
 import { OfferingChoice } from './types';
@@ -15,9 +17,15 @@ interface FormData {
 }
 
 const PureProjectResourcesFilter = ({ offerings }) => (
-  <Row>
-    <OfferingFilter options={offerings} />
-  </Row>
+  <TableFilterFormContainer form="ProjectResourcesFilter">
+    <TableFilterItem
+      title={translate('Offering')}
+      name="offering"
+      badgeValue={(value) => value?.name}
+    >
+      <OfferingFilter options={offerings} />
+    </TableFilterItem>
+  </TableFilterFormContainer>
 );
 
 export const ProjectResourcesFilter = reduxForm<FormData, OwnProps>({

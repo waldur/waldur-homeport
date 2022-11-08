@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Form, Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import {
@@ -8,20 +7,39 @@ import {
 } from '@waldur/customer/list/AccountingRunningField';
 import { SUPPORT_CUSTOMERS_FORM_ID } from '@waldur/customer/list/constants';
 import { DivisionTypeFilter } from '@waldur/customer/list/DivisionTypeFilter';
-import { SelectOrganizationDivisionField } from '@waldur/customer/list/SelectOrganizationDivisionField';
+import { SelectOrganizationDivisionFieldPure } from '@waldur/customer/list/SelectOrganizationDivisionField';
 import { ServiceProviderFilter } from '@waldur/customer/list/ServiceProviderFilter';
 import { translate } from '@waldur/i18n';
+import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
+import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 export const PureSupportCustomerFilter: FunctionComponent = () => (
-  <Row>
-    <Form.Group className="col-sm-3">
-      <Form.Label>{translate('Accounting running')}</Form.Label>
+  <TableFilterFormContainer form={SUPPORT_CUSTOMERS_FORM_ID}>
+    <TableFilterItem
+      title={translate('Accounting running')}
+      name="accounting_is_running"
+      badgeValue={(value) => value?.label}
+    >
       <AccountingRunningField />
-    </Form.Group>
-    <ServiceProviderFilter />
-    <SelectOrganizationDivisionField isFilterForm={true} />
-    <DivisionTypeFilter />
-  </Row>
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Service provider')}
+      name="is_service_provider"
+      badgeValue={(value) => value?.label}
+    >
+      <ServiceProviderFilter />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Division')}
+      name="division"
+      badgeValue={(value) => value?.name}
+    >
+      <SelectOrganizationDivisionFieldPure />
+    </TableFilterItem>
+    <TableFilterItem title={translate('Division type')} name="division_type">
+      <DivisionTypeFilter />
+    </TableFilterItem>
+  </TableFilterFormContainer>
 );
 
 export const SupportCustomerFilter = reduxForm<{}, any>({

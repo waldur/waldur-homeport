@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -7,6 +6,8 @@ import { Option } from '@waldur/marketplace/common/registry';
 import { SUPPORT_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/orders/item/list/constants';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
+import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
+import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { OrderStateFilter } from './OrderStateFilter';
 
@@ -23,11 +24,30 @@ const getOrderStateFilterOptions = (): Option[] => [
 ];
 
 const PureSupportOrdersListFilter = () => (
-  <Row>
-    <OrganizationAutocomplete />
-    <ProjectFilter />
-    <OrderStateFilter options={getOrderStateFilterOptions} />
-  </Row>
+  <TableFilterFormContainer form={SUPPORT_ORDERS_LIST_FILTER_FORM_ID}>
+    <TableFilterItem
+      title={translate('Organization')}
+      name="organization"
+      badgeValue={(value) => value?.name}
+    >
+      <OrganizationAutocomplete />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Project')}
+      name="project"
+      badgeValue={(value) => value?.name}
+    >
+      <ProjectFilter />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('State')}
+      name="state"
+      badgeValue={(value) => value?.label}
+      ellipsis={false}
+    >
+      <OrderStateFilter options={getOrderStateFilterOptions} />
+    </TableFilterItem>
+  </TableFilterFormContainer>
 );
 
 export const SupportOrdersListFilter = reduxForm({

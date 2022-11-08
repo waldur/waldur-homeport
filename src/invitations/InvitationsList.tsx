@@ -52,23 +52,23 @@ const TableComponent: FunctionComponent<any> = (props) => {
           orderField: 'expires',
           render: ({ row }) => formatDate(row.expires),
         },
-        {
-          title: translate('Actions'),
-          visible: props.showActions,
-          render: ({ row }) => (
-            <>
-              <InvitationSendButton invitation={row} />
-              <InvitationCancelButton
-                invitation={row}
-                refreshList={props.fetch}
-              />
-            </>
-          ),
-        },
       ]}
       verboseName={translate('team invitations')}
       actions={<InvitationCreateButton refreshList={props.fetch} />}
       hasQuery={true}
+      hoverableRow={
+        props.showActions ?? true
+          ? ({ row }) => (
+              <>
+                <InvitationSendButton invitation={row} />
+                <InvitationCancelButton
+                  invitation={row}
+                  refreshList={props.fetch}
+                />
+              </>
+            )
+          : undefined
+      }
       expandableRow={InvitationExpandableRow}
     />
   );
@@ -76,6 +76,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
 const mapPropsToFilter = (props) => ({
   ...props.stateFilter,
+  state: props.stateFilter?.state?.map((option) => option.value),
   customer: props.customer.uuid,
 });
 

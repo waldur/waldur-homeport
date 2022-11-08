@@ -35,19 +35,19 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) =>
             row.expiration_time ? formatDateTime(row.expiration_time) : 'N/A',
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) =>
-            props.isOwnerOrStaff ? (
+      ]}
+      hoverableRow={
+        props.isOwnerOrStaff
+          ? ({ row }) => (
               <ButtonGroup>
                 <OfferingPermissionRemoveButton permission={row} />
                 <UpdateOfferingPermissionExpirationTimeButton
                   permission={row}
                 />
               </ButtonGroup>
-            ) : null,
-        },
-      ]}
+            )
+          : null
+      }
       verboseName={translate('offering permissions')}
       actions={props.isOwnerOrStaff ? <OfferingPermissionCreateButton /> : null}
     />

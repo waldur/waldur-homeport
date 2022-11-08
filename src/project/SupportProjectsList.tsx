@@ -70,17 +70,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       feature: 'project.estimated_cost',
       render: ProjectCostField,
     },
-    {
-      title: translate('Actions'),
-      render: ({ row }) => {
-        return (
-          <ButtonGroup>
-            <ProjectsListActions project={row} />
-            <ProjectDetailsButton project={row} />
-          </ButtonGroup>
-        );
-      },
-    },
   ]);
 
   return (
@@ -92,6 +81,12 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       placeholderComponent={<ProjectTablePlaceholder />}
       actions={<ProjectCreateButton />}
+      hoverableRow={({ row }) => (
+        <ButtonGroup>
+          <ProjectsListActions project={row} />
+          <ProjectDetailsButton project={row} />
+        </ButtonGroup>
+      )}
       expandableRow={ProjectExpandableRowContainer}
       enableExport={true}
     />

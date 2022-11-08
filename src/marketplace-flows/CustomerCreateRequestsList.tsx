@@ -13,27 +13,20 @@ import { ReviewActions } from './ReviewActions';
 import { flowFilterFormSelector, getColumns } from './utils';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  const columns = [
-    ...getColumns(),
-    {
-      title: translate('Actions'),
-      render: ({ row }) => (
+  return (
+    <Table
+      {...props}
+      columns={getColumns()}
+      verboseName={translate('requests')}
+      showPageSizeSelector={true}
+      hoverableRow={({ row }) => (
         <ReviewActions
           request={row}
           refreshList={props.fetch}
           approveMethod={approveCustomer}
           rejectMethod={rejectCustomer}
         />
-      ),
-    },
-  ];
-
-  return (
-    <Table
-      {...props}
-      columns={columns}
-      verboseName={translate('requests')}
-      showPageSizeSelector={true}
+      )}
       expandableRow={CustomerCreateExpandableRow}
     />
   );

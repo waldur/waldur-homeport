@@ -156,6 +156,8 @@ msgid "Accounting"
 msgstr ""
 
 #: src/customer/list/AccountingPeriodFilter.tsx
+#: src/customer/list/CustomerListFilter.tsx
+#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 msgid "Accounting period"
 msgstr ""
 
@@ -168,6 +170,7 @@ msgstr ""
 msgid "Accounting record"
 msgstr ""
 
+#: src/customer/list/CustomerListFilter.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 msgid "Accounting running"
 msgstr ""
@@ -189,40 +192,23 @@ msgstr ""
 
 #: src/azure/sql/DatabasesList.tsx
 #: src/booking/BookingsList.tsx
-#: src/customer/list/SupportCustomerList.tsx
-#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payments/PaymentsList.tsx
-#: src/customer/team/CustomerPermissionsReviewList.tsx
-#: src/customer/team/CustomerUsersList.tsx
-#: src/customer/team/OfferingPermissionsList.tsx
-#: src/invitations/GroupInvitationsList.tsx
-#: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/invoices/details/InvoiceItemActions.tsx
-#: src/invoices/list/BillingRecordsList.tsx
-#: src/invoices/list/InvoicesList.tsx
-#: src/marketplace-flows/CustomerCreateRequestsList.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
-#: src/marketplace-flows/ResourceCreateRequestsList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
-#: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourceActions.tsx
-#: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -245,11 +231,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/InvoiceActions.tsx
 #: src/paypal/PayPalInvoicesList.tsx
-#: src/project/ProjectsList.tsx
 #: src/project/ProjectsListActions.tsx
-#: src/project/SupportProjectsList.tsx
-#: src/project/team/InvitationsList.tsx
-#: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
@@ -259,10 +241,7 @@ msgstr ""
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
-#: src/resource/support/SharedProviderResources.tsx
-#: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
-#: src/user/support/UserList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Actions"
@@ -1329,10 +1308,13 @@ msgstr ""
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
-#: src/marketplace/resources/list/CategoryFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/project/ProjectResourcesFilter.tsx
 #: src/project/ProjectResourcesList.tsx
 msgid "Category"
 msgstr ""
@@ -1450,12 +1432,12 @@ msgid "Client ID"
 msgstr ""
 
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/list/RelatedCustomerFilter.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
@@ -1738,6 +1720,7 @@ msgstr ""
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
 #: src/table/ExportDropdown.tsx
+#: src/table/TableButtons.tsx
 #: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr ""
@@ -2206,6 +2189,7 @@ msgstr ""
 #: src/customer/payments/PaymentsList.tsx
 #: src/dashboard/chart.ts
 #: src/invoices/list/MarkAsPaidDialog.tsx
+#: src/issues/feedback/SupportFeedbackListFilter.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/paypal/PaymentsList.tsx
 #: src/support/SupportEventsListFilter.tsx
@@ -2536,10 +2520,11 @@ msgstr ""
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectOrganizationDivisionField.tsx
+#: src/customer/list/SupportCustomerFilter.tsx
 msgid "Division"
 msgstr ""
 
-#: src/customer/list/DivisionTypeFilter.tsx
+#: src/customer/list/SupportCustomerFilter.tsx
 msgid "Division type"
 msgstr ""
 
@@ -2948,6 +2933,7 @@ msgstr ""
 
 #: src/issues/feedback/SupportFeedback.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
+#: src/issues/feedback/SupportFeedbackListFilter.tsx
 msgid "Evaluation"
 msgstr ""
 
@@ -2955,7 +2941,7 @@ msgstr ""
 msgid "Event details"
 msgstr ""
 
-#: src/support/EventGroupFilter.tsx
+#: src/support/SupportEventsListFilter.tsx
 msgid "Event group"
 msgstr ""
 
@@ -3069,6 +3055,7 @@ msgid "Explore {deployment} service catalog"
 msgstr ""
 
 #: src/table/ExportDropdown.tsx
+#: src/table/TableButtons.tsx
 #: src/table/TableDropdowns.tsx
 #: src/table/TableExportButton.tsx
 msgid "Export"
@@ -4684,6 +4671,10 @@ msgstr ""
 msgid "Months"
 msgstr ""
 
+#: src/table/TableMoreActions.tsx
+msgid "More actions"
+msgstr ""
+
 #: src/invoices/events/InvoiceEventItem.tsx
 msgid "More info"
 msgstr ""
@@ -5272,15 +5263,20 @@ msgstr ""
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/actions/tabs.ts
-#: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/list/OfferingFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesFilter.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/project/ProjectResourcesList.tsx
@@ -5635,6 +5631,9 @@ msgstr ""
 #: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
+#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/sidebar/SiteSidebar.tsx
 #: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
@@ -5751,7 +5750,7 @@ msgstr ""
 msgid "Organization requests"
 msgstr ""
 
-#: src/customer/team/OrganizationRoleSelectField.tsx
+#: src/customer/team/CustomerUsersListFilter.tsx
 msgid "Organization role"
 msgstr ""
 
@@ -6581,9 +6580,10 @@ msgstr ""
 #: src/marketplace/details/ProjectField.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/sidebar/SiteSidebar.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
@@ -6721,7 +6721,7 @@ msgstr ""
 msgid "Project resources"
 msgstr ""
 
-#: src/customer/team/ProjectRoleSelectField.tsx
+#: src/customer/team/CustomerUsersListFilter.tsx
 msgid "Project role"
 msgstr ""
 
@@ -6766,6 +6766,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/issues/routes.ts
+#: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/user/dashboard/UserDashboard.tsx
 msgid "Projects"
@@ -7123,7 +7124,6 @@ msgstr ""
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/resource/ResourceRefreshButton.tsx
 #: src/table/TableDropdowns.tsx
-#: src/table/TableRefreshButton.tsx
 msgid "Refresh"
 msgstr ""
 
@@ -7703,7 +7703,7 @@ msgstr ""
 msgid "Resource name"
 msgstr ""
 
-#: src/marketplace/orders/item/list/ResourceOrderItemsDialog.tsx
+#: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "Resource order items"
 msgstr ""
 
@@ -8389,6 +8389,8 @@ msgid "Select some files"
 msgstr ""
 
 #: src/booking/BookingStateFilter.tsx
+#: src/invitations/InvitationsFilter.tsx
+#: src/invoices/list/InvoicesFilter.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
@@ -8418,7 +8420,9 @@ msgstr ""
 msgid "Select tenants..."
 msgstr ""
 
+#: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+#: src/project/ProjectEventsFilter.tsx
 msgid "Select type..."
 msgstr ""
 
@@ -8498,7 +8502,7 @@ msgid "Service manager of:"
 msgstr ""
 
 #: src/customer/details/CustomerMarketplacePanel.tsx
-#: src/customer/list/ServiceProviderFilter.tsx
+#: src/customer/list/SupportCustomerFilter.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/map/LeafletMap.tsx
@@ -8507,7 +8511,8 @@ msgstr ""
 #: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/orders/ProviderAutocomplete.tsx
+#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/routes.ts
 #: src/navigation/workspace/ServiceProviderIcon.tsx
@@ -8936,38 +8941,44 @@ msgstr ""
 #: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
+#: src/invitations/InvitationsFilter.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/invoices/list/BillingRecordsList.tsx
+#: src/invoices/list/InvoicesFilter.tsx
 #: src/invoices/list/InvoicesList.tsx
+#: src/marketplace-flows/FlowListFilter.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/utils.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/OfferingStateFilter.tsx
+#: src/marketplace/offerings/OfferingsFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/details/ResourceDetailsHeader.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/list/ResourceStateFilter.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -8984,6 +8995,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/paypal/PaymentsList.tsx
+#: src/project/ProjectResourcesFilter.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -9904,6 +9916,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
@@ -9914,13 +9927,14 @@ msgstr ""
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/paypal/PaymentsList.tsx
+#: src/project/ProjectEventsFilter.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Type"
@@ -11229,6 +11243,7 @@ msgstr ""
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
+#: src/issues/feedback/SupportFeedbackListFilter.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
@@ -12552,12 +12567,20 @@ msgstr ""
 msgid "{count} resources"
 msgstr ""
 
+#: src/table/Table.tsx
+msgid "{count} rows selected"
+msgstr ""
+
 #: src/user/dashboard/utils.ts
 msgid "{count} user events in {date}"
 msgstr ""
 
 #: src/marketplace/landing/LandingPage.tsx
 msgid "{deployment} Marketplace"
+msgstr ""
+
+#: src/table/TablePagination.tsx
+msgid "{from}-{to} of {all} items"
 msgstr ""
 
 #: src/customer/team/CustomerUsersListExpandableRow.tsx

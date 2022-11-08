@@ -41,10 +41,6 @@ const TableComponent = (
       title: translate('State'),
       render: ({ row }) => <ResourceState resource={row} />,
     },
-    {
-      title: translate('Actions'),
-      render: ({ row }) => <ResourceRowActions resource={row} />,
-    },
   ];
 
   return (
@@ -54,6 +50,7 @@ const TableComponent = (
       verboseName={translate('resources')}
       showPageSizeSelector={true}
       enableExport={true}
+      hoverableRow={({ row }) => <ResourceRowActions resource={row} />}
     />
   );
 };

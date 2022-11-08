@@ -22,7 +22,8 @@ describe('Table reducer', () => {
         loading: false,
       },
       toggled: {},
-      filterVisible: false,
+      filterVisible: true,
+      selectedRows: [],
     });
   });
 

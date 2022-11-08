@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { FormLabel } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
@@ -11,34 +10,31 @@ import { getCustomer } from '@waldur/workspace/selectors';
 export const RelatedCustomerFilter: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   return (
-    <div className="form-group col-sm-3">
-      <FormLabel>{translate('Client organization')}</FormLabel>
-      <Field
-        name="organization"
-        component={(fieldProps) => (
-          <AsyncPaginate
-            placeholder={translate('Select organization...')}
-            loadOptions={(query, prevOptions, additional) =>
-              relatedCustomerAutocomplete(
-                customer.uuid,
-                query,
-                prevOptions,
-                additional,
-              )
-            }
-            defaultOptions
-            getOptionValue={(option) => option.uuid}
-            getOptionLabel={(option) => option.name}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            noOptionsMessage={() => translate('No organizations')}
-            isClearable={true}
-            additional={{
-              page: 1,
-            }}
-          />
-        )}
-      />
-    </div>
+    <Field
+      name="organization"
+      component={(fieldProps) => (
+        <AsyncPaginate
+          placeholder={translate('Select organization...')}
+          loadOptions={(query, prevOptions, additional) =>
+            relatedCustomerAutocomplete(
+              customer.uuid,
+              query,
+              prevOptions,
+              additional,
+            )
+          }
+          defaultOptions
+          getOptionValue={(option) => option.uuid}
+          getOptionLabel={(option) => option.name}
+          value={fieldProps.input.value}
+          onChange={(value) => fieldProps.input.onChange(value)}
+          noOptionsMessage={() => translate('No organizations')}
+          isClearable={true}
+          additional={{
+            page: 1,
+          }}
+        />
+      )}
+    />
   );
 };

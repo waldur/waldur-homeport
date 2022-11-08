@@ -39,18 +39,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title: translate('Contact phone'),
       render: ({ row }) => renderFieldOrDash(row.phone_number),
     },
-    {
-      title: translate('Actions'),
-      render: ({ row }) => {
-        return (
-          <ButtonGroup>
-            {props.isStaff && <OrganizationEditButton customer={row} />}
-            {props.isStaff && <SetLocationButton customer={row} />}
-            <OrganizationDetailsButton customer={row} />
-          </ButtonGroup>
-        );
-      },
-    },
   ];
 
   return (
@@ -62,6 +50,13 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       hasQuery={true}
       enableExport={true}
       showPageSizeSelector={true}
+      hoverableRow={({ row }) => (
+        <ButtonGroup>
+          {props.isStaff && <OrganizationEditButton customer={row} />}
+          {props.isStaff && <SetLocationButton customer={row} />}
+          <OrganizationDetailsButton customer={row} />
+        </ButtonGroup>
+      )}
     />
   );
 };

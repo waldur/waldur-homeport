@@ -10,6 +10,7 @@ import { PublicResourceActions } from '@waldur/marketplace/resources/list/Public
 import { Category, Offering } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
+import { ActionButton } from '@waldur/table/ActionButton';
 import {
   getCustomer,
   getUser,
@@ -76,12 +77,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title: translate('State'),
       render: ResourceStateField,
     },
-    {
-      title: translate('Actions'),
-      render: ({ row }) => (
-        <PublicResourceActions resource={row} refreshList={props.fetch} />
-      ),
-    },
   ];
 
   return (
@@ -90,11 +85,35 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       placeholderComponent={<PublicResourcesListPlaceholder />}
       columns={columns}
       verboseName={translate('Resources')}
+      title={translate('Resources')}
       enableExport={true}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
       showPageSizeSelector={true}
       expandableRow={ExpandableResourceSummary}
+      hoverableRow={({ row }) => (
+        <PublicResourceActions resource={row} refreshList={props.fetch} />
+      )}
+      filterVisible={true}
+      enableMultiSelect={true}
+      multiSelectActions={({ rows }) => (
+        <>
+          <ActionButton
+            action={() => {
+              return true; /* for test */
+            }}
+            title="action 1"
+          />
+          <ActionButton
+            action={() => {
+              return true; /* for test */
+            }}
+            className="ms-3 btn-success"
+            icon="fa fa-check"
+            title={'approve ' + rows.length}
+          />
+        </>
+      )}
     />
   );
 };

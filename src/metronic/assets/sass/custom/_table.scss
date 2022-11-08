@@ -23,12 +23,131 @@
   tr:last-child {
     padding-right: 0.75rem;
   }
+
+  /* TR */
+  &.table-expandable tr {
+    th:first-child,
+    td:first-child {
+      border-left: 4px solid transparent;
+    }
+    &.expanded,
+    &.expanded + tr {
+      td:first-child {
+        border-left-color: $gray-500;
+      }
+    }
+  }
+  tr {
+    position: relative;
+
+    td.row-actions {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      background: $body-bg;
+      transition: all 0.1s;
+      right: 0;
+      height: 100%;
+      padding-left: 6px;
+      border: 0;
+      opacity: 0;
+
+      &::before {
+        width: 144px;
+        transition: all 0.1s;
+        content: '';
+        height: 100%;
+        margin-left: -144px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: linear-gradient(
+          90deg,
+          rgba($body-bg, 0) 0%,
+          $body-bg 100%
+        );
+        opacity: 0;
+      }
+    }
+
+    &:hover {
+      td.row-actions {
+        background: $body-bg;
+        opacity: 1;
+
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
 }
 
 /* TABLE IN CARD */
 .card.card-table {
   .card-header {
     border-bottom-style: dashed;
+  }
+
+  .table-filter {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+
+    .scroll-x {
+      margin-bottom: -0.5rem;
+    }
+
+    .filter-toggle {
+      display: flex;
+      align-items: center;
+      border-radius: 0;
+      position: relative;
+
+      .filter-field {
+        max-height: 50px;
+        width: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: all 0.3s;
+      }
+
+      .filter-value {
+        max-width: 100px;
+        margin-left: 0.5rem;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        > * {
+          display: block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      &.active {
+        .filter-field {
+          opacity: 1;
+          width: 300px;
+          margin-left: 0.5rem;
+        }
+        .filter-value {
+          display: none;
+        }
+      }
+
+      &:not(:last-child)::after {
+        content: '';
+        width: 2px;
+        height: 40px;
+        position: absolute;
+        top: 15px;
+        right: 0;
+        background-color: $border-color;
+      }
+    }
   }
 
   /* TABLE FULL IN CARD */
@@ -49,6 +168,11 @@
         tr:last-child {
           padding-right: 2.5rem;
         }
+      }
+
+      .table-filters {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
       }
     }
   }

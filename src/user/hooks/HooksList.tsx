@@ -11,10 +11,10 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { HOOK_LIST_ID } from './constants';
 import { HookCreateButton } from './HookCreateButton';
-import './HookList.scss';
 import { HookRemoveButton } from './HookRemoveButton';
 import { HookUpdateButton } from './HookUpdateButton';
 import { formatEventTitle } from './utils';
+import './HookList.scss';
 
 const StateField = ({ row }) => {
   const cls = row.is_active ? 'bg-success' : 'bg-danger';
@@ -56,21 +56,17 @@ const TableComponent: FunctionComponent<any> = (props) => {
           className: 'min-tablet-l',
           render: ({ row }) => getEventsField(row),
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => (
-            <div className="list_active_button_container">
-              <HookUpdateButton row={row} />
-              <HookRemoveButton uuid={row.uuid} url={row.url} />
-            </div>
-          ),
-          className: 'text-center col-md-2',
-        },
       ]}
       showPageSizeSelector={true}
       verboseName={translate('Notifications')}
       actions={<HookCreateButton />}
       placeholderComponent={<HookListTablePlaceholder />}
+      hoverableRow={({ row }) => (
+        <div className="list_active_button_container">
+          <HookUpdateButton row={row} />
+          <HookRemoveButton uuid={row.uuid} url={row.url} />
+        </div>
+      )}
       enableExport={true}
     />
   );

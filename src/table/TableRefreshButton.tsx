@@ -1,17 +1,22 @@
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { TableProps } from '@waldur/table/Table';
 
-interface TableRefreshButtonProps {
-  fetch: () => void;
-}
-
-export const TableRefreshButton: FunctionComponent<TableRefreshButtonProps> = ({
-  fetch,
-}) => (
-  <Button variant="light" onClick={fetch}>
-    <i className="fa fa-refresh" />
-    {translate('Refresh')}
-  </Button>
+export const LoadingSpinner: FunctionComponent = () => (
+  <button className="btn btn-icon btn-flush">
+    <i className="fa fa-refresh fa-spin fs-4" />
+  </button>
 );
+
+export const TableRefreshButton = (props: TableProps) =>
+  (props.loading && props.sorting && !props.sorting.loading) ||
+  (props.sorting && props.sorting.loading) ? (
+    <LoadingSpinner />
+  ) : (
+    <button
+      className="btn btn-icon btn-active-light-dark"
+      onClick={props.fetch}
+    >
+      <i className="fa fa-refresh fs-4"></i>
+    </button>
+  );

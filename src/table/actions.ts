@@ -17,6 +17,8 @@ export const SORT_LIST_START = 'waldur/table/SORT_LIST_START';
 export const SORT_LIST_DONE = 'waldur/table/SORT_LIST_DONE';
 export const TOGGLE_ROW = 'waldur/table/TOGGLE_ROW';
 export const TOGGLE_FILTER = 'waldur/table/TOGGLE_FILTER';
+export const SELECT_ROW = 'waldur/table/SELECT_ROW';
+export const SELECT_ALL_ROWS = 'waldur/table/SELECT_ALL_ROWS';
 
 export const fetchListStart = (
   table: string,
@@ -161,5 +163,21 @@ export const toggleFilter = (table: string) => ({
   type: TOGGLE_FILTER,
   payload: {
     table,
+  },
+});
+
+export const selectRow = (table: string, row: any) => ({
+  type: SELECT_ROW,
+  payload: {
+    table,
+    row,
+  },
+});
+
+export const selectAllRows = (table: string, rows: any[]) => ({
+  type: SELECT_ALL_ROWS,
+  payload: {
+    table,
+    rows,
   },
 });

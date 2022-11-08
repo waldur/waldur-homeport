@@ -42,16 +42,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       ),
       orderField: 'is_active',
     },
-    {
-      title: translate('Actions'),
-      render: ({ row }) => (
-        <PaymentProfileActions
-          profile={row}
-          refreshList={props.fetch}
-          tooltipAndDisabledAttributes={tooltipAndDisabledAttributes}
-        />
-      ),
-    },
   ];
 
   return (
@@ -66,6 +56,13 @@ export const TableComponent: FunctionComponent<any> = (props) => {
           {...tooltipAndDisabledAttributes}
         />
       }
+      hoverableRow={({ row }) => (
+        <PaymentProfileActions
+          profile={row}
+          refreshList={props.fetch}
+          tooltipAndDisabledAttributes={tooltipAndDisabledAttributes}
+        />
+      )}
     />
   );
 };

@@ -68,13 +68,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     });
   });
 
-  columns.push({
-    title: translate('Actions'),
-    render: ({ row }) => (
-      <ResourceActionsButton row={row} refreshList={props.fetch} />
-    ),
-  });
-
   const tableActions = (
     <>
       {props.importVisible && (
@@ -93,6 +86,9 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       columns={columns}
       verboseName={translate('Resources')}
       placeholderComponent={<EmptyResourcesListPlaceholder />}
+      hoverableRow={({ row }) => (
+        <ResourceActionsButton row={row} refreshList={props.fetch} />
+      )}
       actions={tableActions}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}

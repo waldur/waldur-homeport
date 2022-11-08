@@ -63,26 +63,28 @@ const TableComponent: FunctionComponent<any> = (props) => {
         title: translate('Total'),
         render: ({ row }) => defaultCurrency(row.total),
       },
-      {
-        title: translate('Actions'),
-        render: ({ row }) => (
-          <ButtonGroup>
-            <SendNotificationButton row={row} />
-            <MarkAsPaidButton row={row} />
-            <InvoicePayButton invoice={row} />
-          </ButtonGroup>
-        ),
-      },
     );
   }
   return (
-    <Table {...props} columns={columns} verboseName={translate('invoices')} />
+    <Table
+      {...props}
+      columns={columns}
+      verboseName={translate('invoices')}
+      hoverableRow={({ row }) => (
+        <ButtonGroup>
+          <SendNotificationButton row={row} />
+          <MarkAsPaidButton row={row} />
+          <InvoicePayButton invoice={row} />
+        </ButtonGroup>
+      )}
+    />
   );
 };
 
 const mapPropsToFilter = (props) => ({
   ...props.stateFilter,
   customer: props.customer.url,
+  state: props.stateFilter?.state?.map((option) => option.value),
   field: [
     'uuid',
     'state',
