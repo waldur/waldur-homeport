@@ -3,7 +3,7 @@ xdescribe('Issue details view', () => {
     cy.mockUser()
       .mockChecklists()
 
-      .intercept('GET', '/api/marketplace-offerings/', {
+      .intercept('GET', '/api/marketplace-provider-offerings/', {
         fixture: 'marketplace/offerings.json',
       })
 

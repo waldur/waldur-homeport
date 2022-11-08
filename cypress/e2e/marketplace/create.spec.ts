@@ -11,7 +11,7 @@ xdescribe('Offering creation', () => {
       .intercept('GET', '/api/marketplace-plugins/', {
         fixture: 'marketplace/plugins.json',
       })
-      .intercept('POST', '/api/marketplace-offerings/', {})
+      .intercept('POST', '/api/marketplace-provider-offerings/', {})
       .as('createOffering')
       .visit(
         '/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offering-create/',
@@ -179,7 +179,7 @@ xdescribe('Offering creation', () => {
       .location()
       .should((loc) => {
         expect(loc.href).to.eq(
-          'http://localhost:8001/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offerings/',
+          'http://localhost:8001/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-provider-offerings/',
         );
       });
   });

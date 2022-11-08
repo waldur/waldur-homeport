@@ -3,7 +3,7 @@ import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { getOffering } from '@waldur/marketplace/common/api';
+import { getProviderOffering } from '@waldur/marketplace/common/api';
 import { EditConfirmationMessageForm } from '@waldur/marketplace/offerings/actions/EditConfirmationMessageForm';
 
 interface EditConfirmationMessageDialogProps {
@@ -17,7 +17,7 @@ export const EditConfirmationMessageDialog: FunctionComponent<EditConfirmationMe
       error,
       value: offering,
     } = useAsync(
-      async () => await getOffering(resolve.offeringUuid),
+      async () => await getProviderOffering(resolve.offeringUuid),
       [resolve.offeringUuid],
     );
     return loading ? (

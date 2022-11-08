@@ -97,10 +97,10 @@ function* createOffering(action: Action<OfferingFormData>) {
   try {
     const components = yield select(getOfferingComponents, rest.type.value);
     const offeringRequest = formatOfferingRequest(rest, components, customer);
-    const response = yield call(api.createOffering, offeringRequest);
+    const response = yield call(api.createProviderOffering, offeringRequest);
     if (thumbnail) {
       const offeringId = response.data.uuid;
-      yield call(api.uploadOfferingThumbnail, offeringId, thumbnail);
+      yield call(api.uploadProviderOfferingThumbnail, offeringId, thumbnail);
     }
     if (document && document.file) {
       yield call(api.uploadOfferingDocument, response.data.url, document);
@@ -126,9 +126,9 @@ function* updateOffering(action: Action<OfferingUpdateFormData>) {
   const components = yield select(getOfferingComponents, rest.type.value);
   try {
     const offeringRequest = formatOfferingRequest(rest, components);
-    yield call(api.updateOffering, offeringUuid, offeringRequest);
+    yield call(api.updateProviderOffering, offeringUuid, offeringRequest);
     if (thumbnail instanceof File || thumbnail === '') {
-      yield call(api.uploadOfferingThumbnail, offeringUuid, thumbnail);
+      yield call(api.uploadProviderOfferingThumbnail, offeringUuid, thumbnail);
     }
   } catch (error) {
     const errorMessage = `${translate('Unable to update offering.')} ${format(
@@ -150,7 +150,7 @@ function* updateOfferingState(action) {
     action.payload;
   try {
     const response = yield call(
-      api.updateOfferingState,
+      api.updateProviderOfferingState,
       offering.uuid,
       stateAction,
       reason,
@@ -180,7 +180,7 @@ function* loadOffering(action) {
   const { offeringUuid } = action.payload;
   try {
     const data = yield loadCategories();
-    const offering = yield call(api.getOffering, offeringUuid);
+    const offering = yield call(api.getProviderOffering, offeringUuid);
     yield put(loadDataSuccess({ offering, ...data }));
   } catch {
     yield put(loadDataError());
@@ -231,7 +231,7 @@ function* removeOfferingImage(action: Action<any>) {
 function* addOfferingLocation(action: Action<any>) {
   try {
     const { offering } = action.payload;
-    yield call(api.updateOffering, offering.uuid, offering);
+    yield call(api.updateProviderOffering, offering.uuid, offering);
     const customer = yield select(getCustomer);
     const isServiceManager = yield select(isServiceManagerSelector);
     const isOwnerOrStaff = yield select(isOwnerOrStaffSelector);
@@ -430,7 +430,7 @@ function* updateConfirmationMessage(action: Action<any>) {
     action.payload;
   try {
     yield call(
-      api.updateOfferingConfirmationMessage,
+      api.updateProviderOfferingConfirmationMessage,
       offeringUuid,
       templateConfirmationMessage,
       secretOptions,
@@ -454,7 +454,7 @@ function* updateConfirmationMessage(action: Action<any>) {
 function* updateAccessPolicy(action: Action<any>) {
   const { offeringUuid, divisions } = action.payload;
   try {
-    yield call(api.updateOfferingAccessPolicy, offeringUuid, divisions);
+    yield call(api.updateProviderOfferingAccessPolicy, offeringUuid, divisions);
     const customer = yield select(getCustomer);
     const isServiceManager = yield select(isServiceManagerSelector);
     const isOwnerOrStaff = yield select(isOwnerOrStaffSelector);
@@ -489,7 +489,7 @@ function* updateAccessPolicy(action: Action<any>) {
 function* updateOfferingLogo(action: Action<any>) {
   const { offeringUuid, formData } = action.payload;
   try {
-    yield call(api.updateOfferingLogo, offeringUuid, formData);
+    yield call(api.updateProviderOfferingLogo, offeringUuid, formData);
     const customer = yield select(getCustomer);
     const isServiceManager = yield select(isServiceManagerSelector);
     const isOwnerOrStaff = yield select(isOwnerOrStaffSelector);

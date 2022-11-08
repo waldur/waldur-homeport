@@ -10,7 +10,7 @@ export const OfferingDetailsLink: React.FC<OfferingDetailsLinkProps> = (
   props,
 ) => (
   <Link
-    state="marketplace-offering-details"
+    state="marketplace-provider-offering-details"
     params={{ offering_uuid: props.offering_uuid }}
   >
     {props.children}

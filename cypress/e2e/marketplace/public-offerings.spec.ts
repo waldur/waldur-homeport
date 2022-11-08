@@ -19,11 +19,11 @@ xdescribe('Public offerings page', () => {
       .intercept('GET', "/api/marketplace-categories/", {
         fixture: 'marketplace/categories.json',
       })
-      .intercept('GET', '/api/marketplace-offerings/?page=1&page_size=9', {
+      .intercept('GET', '/api/marketplace-public-offerings/?page=1&page_size=9', {
         fixture: 'marketplace/offerings.json',
       })
 
-      .intercept('GET', '/api/marketplace-offerings/*/', {
+      .intercept('GET', '/api/marketplace-public-offerings/*/', {
         fixture: 'offerings/publicInstance.json',
       })
       .visit('/service-providers/');

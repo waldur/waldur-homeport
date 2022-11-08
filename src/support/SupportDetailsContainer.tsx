@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import { getIssue } from '@waldur/issues/api';
 import {
   getResource,
-  getOffering,
+  getProviderOffering,
   getOrderItemList,
 } from '@waldur/marketplace/common/api';
 import { useTitle } from '@waldur/navigation/title';
@@ -16,7 +16,7 @@ import { SupportDetails } from './SupportDetails';
 
 const loadData = async (resource_uuid: string) => {
   const resource = await getResource(resource_uuid);
-  const offering = await getOffering(resource.offering_uuid);
+  const offering = await getProviderOffering(resource.offering_uuid);
   const orderItems = await getOrderItemList({
     type: 'Create',
     resource_uuid: resource.uuid,

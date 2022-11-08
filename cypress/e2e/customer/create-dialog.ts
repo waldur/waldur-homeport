@@ -11,7 +11,7 @@ xdescribe('Customer creation dialog', () => {
       .intercept('GET', '/api/daily-quotas/', { nc_user_count: [] })
       .intercept('GET', '/api/marketplace-category-component-usages/', [])
       .intercept('GET', '/api/marketplace-resources/', [])
-      .intercept('GET', '/api/marketplace-offerings/', [])
+      .intercept('GET', '/api/marketplace-public-offerings/', [])
       .setToken()
       .visit('/profile/')
       .waitForSpinner()

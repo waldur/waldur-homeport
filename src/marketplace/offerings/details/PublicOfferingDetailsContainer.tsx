@@ -7,7 +7,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
 import {
-  getOffering,
+  getProviderOffering,
   getCategory,
   getPlugins,
   getCategories,
@@ -35,7 +35,7 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
     try {
       const user = await getCurrentUser({ __skipLogout__: true });
       dispatch(setCurrentUser(user));
-      const offering = await getOffering(uuid);
+      const offering = await getProviderOffering(uuid);
       const category = await getCategory(offering.category_uuid);
       const categories = await getCategories();
       const pluginsData = await getPlugins();

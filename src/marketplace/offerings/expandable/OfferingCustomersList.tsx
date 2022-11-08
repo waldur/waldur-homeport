@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import { Table, connectTable } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
-import { fetchOfferingCustomers } from './api';
+import { fetchProviderOfferingCustomers } from './api';
 import { OFFERING_CUSTOMERS_LIST_TABLE_ID } from './constants';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
@@ -44,7 +44,7 @@ const mapPropsToFilter = ({ customerListFilter, offeringUuid }) => ({
 
 const TableOptions = {
   table: OFFERING_CUSTOMERS_LIST_TABLE_ID,
-  fetchData: fetchOfferingCustomers,
+  fetchData: fetchProviderOfferingCustomers,
   queryField: 'query',
   mapPropsToFilter: (props) => mapPropsToFilter(props),
   mapPropsToTableId: (props) => [props.offeringUuid],

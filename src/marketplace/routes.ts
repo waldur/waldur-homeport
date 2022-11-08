@@ -276,28 +276,28 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-offering-project',
-    url: 'marketplace-offering/:offering_uuid/',
+    url: 'marketplace-provider-offering/:offering_uuid/',
     component: OfferingDetailsPage,
     parent: 'project',
   },
 
   {
     name: 'marketplace-offering-customer',
-    url: 'marketplace-offering/:offering_uuid/',
+    url: 'marketplace-provider-offering/:offering_uuid/',
     component: OfferingDetailsPage,
     parent: 'organization',
   },
 
   {
     name: 'marketplace-offering-user',
-    url: 'marketplace-offering/:offering_uuid/',
+    url: 'marketplace-provider-offering/:offering_uuid/',
     component: OfferingDetailsPage,
     parent: 'profile',
   },
 
   {
     name: 'marketplace-offering-details',
-    url: 'marketplace-offering-details/:offering_uuid/',
+    url: 'marketplace-provider-offering-details/:offering_uuid/',
     component: OfferingContainer,
     parent: 'organization',
   },
@@ -438,7 +438,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-vendor-offerings',
-    url: 'marketplace-offerings/',
+    url: 'marketplace-provider-offerings/',
     component: OfferingsListContainer,
     parent: 'marketplace-provider',
     data: {
@@ -486,21 +486,21 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-offering-create',
-    url: 'marketplace-offering-create/',
+    url: 'marketplace-provider-offering-create/',
     component: OfferingCreateContainer,
     parent: 'organization',
   },
 
   {
     name: 'marketplace-offering-update',
-    url: 'marketplace-offering-update/:offering_uuid/',
+    url: 'marketplace-provider-offering-update/:offering_uuid/',
     component: OfferingUpdateContainer,
     parent: 'organization',
   },
 
   {
     name: 'marketplace-offering-images',
-    url: 'marketplace-offering-images/:offering_uuid/',
+    url: 'marketplace-provider-offering-images/:offering_uuid/',
     component: ImagesContainer,
     parent: 'organization',
   },

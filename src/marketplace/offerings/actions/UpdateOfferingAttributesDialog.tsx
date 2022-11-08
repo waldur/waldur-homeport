@@ -9,7 +9,7 @@ import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import {
   getCategory,
-  updateOfferingAttributes,
+  updateProviderOfferingAttributes,
 } from '@waldur/marketplace/common/api';
 import { isOfferingTypeSchedulable } from '@waldur/marketplace/common/registry';
 import { Offering } from '@waldur/marketplace/types';
@@ -62,7 +62,7 @@ export const UpdateOfferingAttributesDialog = reduxForm<FormData, OwnProps>({
       attributes.schedules = formatSchedules(formData.schedules);
     }
     try {
-      await updateOfferingAttributes(offering.uuid, attributes);
+      await updateProviderOfferingAttributes(offering.uuid, attributes);
       dispatch(showSuccess(translate('Offering has been updated.')));
       dispatch(closeModalDialog());
       dispatch(

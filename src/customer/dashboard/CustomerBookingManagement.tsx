@@ -11,14 +11,14 @@ import { BookingsCalendar } from '@waldur/customer/dashboard/BookingsCalendar';
 import { useBookingsCalendarProps } from '@waldur/customer/dashboard/utils';
 import { translate } from '@waldur/i18n';
 import {
-  getOfferingsCount,
+  getProviderOfferingsCount,
   getResourcesCount,
 } from '@waldur/marketplace/common/api';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 const loadBookingOfferingsCount = (customerUuid: string, projectUuid: string) =>
-  getOfferingsCount({
+  getProviderOfferingsCount({
     params: {
       customer_uuid: customerUuid,
       project_uuid: projectUuid,
