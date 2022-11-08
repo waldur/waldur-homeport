@@ -11,8 +11,8 @@ import { reduxForm } from 'redux-form';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import {
-  updateOfferingAttributes,
-  updateOfferingDescription,
+  updateProviderOfferingAttributes,
+  updateProviderOfferingDescription,
 } from '@waldur/marketplace/common/api';
 import { DescriptionUpdateContainer } from '@waldur/marketplace/offerings/create/DescriptionUpdateContainer';
 import * as actions from '@waldur/marketplace/offerings/store/actions';
@@ -41,11 +41,11 @@ export const PageDescription = connect((state: RootState) => ({
       const updateOfferingHandler = async (formData) => {
         try {
           const offeringRequest = formatOfferingRequest(formData, []);
-          await updateOfferingDescription(
+          await updateProviderOfferingDescription(
             offering.uuid,
             offeringRequest.category,
           );
-          await updateOfferingAttributes(
+          await updateProviderOfferingAttributes(
             offering.uuid,
             offeringRequest.attributes,
           );

@@ -14,7 +14,7 @@ xdescribe('Public resources', () => {
       .intercept('GET', '/api/marketplace-related-customers/**', {
         fixture: 'customers/alice_bob_web.json',
       })
-      .intercept('GET', '/api/marketplace-offerings/', {
+      .intercept('GET', '/api/marketplace-provider-offerings/', {
         fixture: 'marketplace/offerings.json',
       })
       .intercept('GET', '/api/marketplace-categories/', {

@@ -1,69 +1,69 @@
 [
   {
-    "url": "/api/marketplace-offerings/13055b883a964e1580c881c059be2ac5/",
+    "url": "/api/marketplace-provider-offerings/13055b883a964e1580c881c059be2ac5/",
     "uuid": "13055b883a964e1580c881c059be2ac5",
     "name": "Advanced client-driven success",
     "category_title": "AKKI",
     "thumbnail": null
   },
   {
-    "url": "/api/marketplace-offerings/4ce883470b7242beb7368becf614d1ec/",
+    "url": "/api/marketplace-provider-offerings/4ce883470b7242beb7368becf614d1ec/",
     "uuid": "4ce883470b7242beb7368becf614d1ec",
     "name": "Ameliorated systemic policy",
     "category_title": "Private clouds",
     "thumbnail": null
   },
   {
-    "url": "/api/marketplace-offerings/f48403fd8fe54c758d43af680f404be9/",
+    "url": "/api/marketplace-provider-offerings/f48403fd8fe54c758d43af680f404be9/",
     "uuid": "f48403fd8fe54c758d43af680f404be9",
     "name": "another req based item",
     "category_title": "HPC",
     "thumbnail": null
   },
   {
-    "url": "/api/marketplace-offerings/2816ed33309e4bacb96dc651980c4154/",
+    "url": "/api/marketplace-provider-offerings/2816ed33309e4bacb96dc651980c4154/",
     "uuid": "2816ed33309e4bacb96dc651980c4154",
     "name": "demo offering",
     "category_title": "AKKI",
     "thumbnail": null
   },
   {
-    "url": "/api/marketplace-offerings/d7b3aade9ec34301a87ae1b533f08b57/",
+    "url": "/api/marketplace-provider-offerings/d7b3aade9ec34301a87ae1b533f08b57/",
     "uuid": "d7b3aade9ec34301a87ae1b533f08b57",
     "name": "Exclusive foreground paradigm",
     "category_title": "Private clouds",
     "thumbnail": null
   },
   {
-    "url": "/api/marketplace-offerings/b28aba0230b64d04813d62eb9cb83499/",
+    "url": "/api/marketplace-provider-offerings/b28aba0230b64d04813d62eb9cb83499/",
     "uuid": "b28aba0230b64d04813d62eb9cb83499",
     "name": "Exclusive real-time synergy",
     "category_title": "Private clouds",
     "thumbnail": null
   },
   {
-    "url": "/api/marketplace-offerings/bc636616fd3f4aae9086c7dca70fe2ad/",
+    "url": "/api/marketplace-provider-offerings/bc636616fd3f4aae9086c7dca70fe2ad/",
     "uuid": "bc636616fd3f4aae9086c7dca70fe2ad",
     "name": "Managed maximized superstructure",
     "category_title": "AKKI",
     "thumbnail": null
   },
   {
-    "url": "/api/marketplace-offerings/d6d63f69936949eb9ae3c768f58bcb2d/",
+    "url": "/api/marketplace-provider-offerings/d6d63f69936949eb9ae3c768f58bcb2d/",
     "uuid": "d6d63f69936949eb9ae3c768f58bcb2d",
     "name": "Monitored object-oriented firmware",
     "category_title": "HPC",
     "thumbnail": null
   },
   {
-    "url": "/api/marketplace-offerings/77792820a24d4d40ad54b92b2462764b/",
+    "url": "/api/marketplace-provider-offerings/77792820a24d4d40ad54b92b2462764b/",
     "uuid": "77792820a24d4d40ad54b92b2462764b",
     "name": "Multi-lateral bi-directional data-warehouse",
     "category_title": "AKKI",
     "thumbnail": null
   },
   {
-    "url": "/api/marketplace-offerings/ba3d57179cf2435b93283c6f75291ad5/",
+    "url": "/api/marketplace-provider-offerings/ba3d57179cf2435b93283c6f75291ad5/",
     "uuid": "ba3d57179cf2435b93283c6f75291ad5",
     "name": "my-new-request-based-test-offering",
     "category_title": "AKKI",

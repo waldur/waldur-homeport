@@ -1,12 +1,12 @@
 import { parseResultCount } from '@waldur/core/api';
-import { getOfferingsByServiceProvider } from '@waldur/marketplace/common/api';
+import { getProviderOfferingsByServiceProvider } from '@waldur/marketplace/common/api';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 
 export const fetchOfferings = async (keyword: string, pageIndex: number) => {
   if (!keyword) {
     return [];
   }
-  const response = await getOfferingsByServiceProvider({
+  const response = await getProviderOfferingsByServiceProvider({
     ...ANONYMOUS_CONFIG,
     params: {
       keyword,
