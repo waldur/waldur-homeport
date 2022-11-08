@@ -9,6 +9,7 @@ import { TableBody } from './TableBody';
 import { TableButtons } from './TableButtons';
 import { TableFilter } from './TableFilter';
 import { TableHeader } from './TableHeader';
+import { TableLoadingSpinnerContainer } from './TableLoadingSpinnerContainer';
 import { TablePageSize } from './TablePageSize';
 import { TablePagination } from './TablePagination';
 import { TablePlaceholder } from './TablePlaceholder';
@@ -150,6 +151,14 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
   }
 
   renderBody() {
+    if (this.props.loading && !this.hasRows()) {
+      return (
+        <h1 className="text-center">
+          <TableLoadingSpinnerContainer {...this.props} />
+        </h1>
+      );
+    }
+
     if (this.props.error) {
       return (
         <div>
