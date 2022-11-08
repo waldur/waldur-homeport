@@ -40,7 +40,7 @@ interface OwnProps {
 }
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  const columns = [
+  const columns: any[] = [
     {
       title: translate('Name'),
       render: ResourceNameField,
@@ -49,11 +49,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Offering'),
       render: ({ row }: FieldProps) => row.offering_name,
-    },
-    {
-      title: translate('Created at'),
-      render: ({ row }) => formatDateTime(row.created),
-      orderField: 'created',
     },
     {
       title: translate('State'),
@@ -66,6 +61,11 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title: column.title,
       render: ({ row }) => CategoryColumnField({ row, column }),
     });
+  });
+  columns.push({
+    title: translate('Created at'),
+    render: ({ row }) => formatDateTime(row.created),
+    orderField: 'created',
   });
 
   const tableActions = (
