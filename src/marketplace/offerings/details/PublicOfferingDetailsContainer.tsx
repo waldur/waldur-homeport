@@ -7,7 +7,6 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
 import {
-  getProviderOffering,
   getCategory,
   getPlugins,
   getCategories,
@@ -18,10 +17,9 @@ import * as actions from '@waldur/marketplace/offerings/store/actions';
 import { filterPluginsData } from '@waldur/marketplace/offerings/store/utils';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
-import { getCustomer } from '@waldur/project/api';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 import { getCurrentUser } from '@waldur/user/UsersService';
-import { setCurrentCustomer, setCurrentUser } from '@waldur/workspace/actions';
+import { setCurrentUser } from '@waldur/workspace/actions';
 
 export const PublicOfferingDetailsContainer: FunctionComponent = () => {
   useFullPage();
@@ -35,7 +33,7 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
     try {
       const user = await getCurrentUser({ __skipLogout__: true });
       dispatch(setCurrentUser(user));
-      const offering = await getProviderOffering(uuid);
+      const offering = await getPublicOffering(uuid);
       const category = await getCategory(offering.category_uuid);
       const categories = await getCategories();
       const pluginsData = await getPlugins();
@@ -47,8 +45,6 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
           plugins,
         }),
       );
-      const customer = await getCustomer(offering.customer_uuid);
-      dispatch(setCurrentCustomer(customer));
       return { offering, category };
     } catch (e) {
       if (e.response.status == 401) {
