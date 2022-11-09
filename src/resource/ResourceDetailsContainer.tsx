@@ -53,6 +53,15 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
   useTitle(resource ? resource.name : translate('Resource details'), header);
 
   useEffect(() => {
+    if (resource?.marketplace_resource_uuid) {
+      router.stateService.go('marketplace-project-resource-details', {
+        resource_uuid: resource.marketplace_resource_uuid,
+        uuid: resource.project_uuid,
+      });
+    }
+  }, [resource, router.stateService]);
+
+  useEffect(() => {
     if (!asyncResult.error) {
       return;
     }
