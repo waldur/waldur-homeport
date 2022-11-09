@@ -11,115 +11,69 @@ import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 import { fetchCustomer } from './workspace/CustomerWorkspace';
 
 const ProjectsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ProjectsList" */ '@waldur/project/ProjectsList'
-    ),
+  () => import('@waldur/project/ProjectsList'),
   'ProjectsList',
 );
 const ProjectCreateRequestsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ProjectCreateRequestsList" */ '@waldur/marketplace-flows/ProjectCreateRequestsList'
-    ),
+  () => import('@waldur/marketplace-flows/ProjectCreateRequestsList'),
   'ProjectCreateRequestsList',
 );
 const ResourceCreateRequestsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceCreateRequestsList" */ '@waldur/marketplace-flows/ResourceCreateRequestsList'
-    ),
+  () => import('@waldur/marketplace-flows/ResourceCreateRequestsList'),
   'ResourceCreateRequestsList',
 );
 const ProjectCreateContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ProjectCreateContainer" */ '../project/ProjectCreateContainer'
-    ),
+  () => import('../project/ProjectCreateContainer'),
   'ProjectCreateContainer',
 );
 const CustomerDashboard = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerDashboard" */ './dashboard/CustomerDashboard'
-    ),
+  () => import('./dashboard/CustomerDashboard'),
   'CustomerDashboard',
 );
 const CustomerManage = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "CustomerManage" */ './details/CustomerManage'),
+  () => import('./details/CustomerManage'),
   'CustomerManage',
 );
 const PaymentProfilesPanel = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PaymentProfilesPanel" */ './payment-profiles/PaymentProfilesPanel'
-    ),
+  () => import('./payment-profiles/PaymentProfilesPanel'),
   'PaymentProfilesPanel',
 );
 const CustomerPayments = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerPayments" */ './details/CustomerPayments'
-    ),
+  () => import('./details/CustomerPayments'),
   'CustomerPayments',
 );
 const CustomerUsersTab = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerUsersTab" */ './team/CustomerUsersTab'
-    ),
+  () => import('./team/CustomerUsersTab'),
   'CustomerUsersTab',
 );
 const InvitationsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "InvitationsList" */ '../invitations/InvitationsList'
-    ),
+  () => import('../invitations/InvitationsList'),
   'InvitationsList',
 );
 const GroupInvitationsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "GroupInvitationsList" */ '../invitations/GroupInvitationsList'
-    ),
+  () => import('../invitations/GroupInvitationsList'),
   'GroupInvitationsList',
 );
 const CustomerPermissionsLogList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerPermissionsLogList" */ './team/CustomerPermissionsLogList'
-    ),
+  () => import('./team/CustomerPermissionsLogList'),
   'CustomerPermissionsLogList',
 );
 const CustomerPermissionsReviewList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerPermissionsReviewList" */ './team/CustomerPermissionsReviewList'
-    ),
+  () => import('./team/CustomerPermissionsReviewList'),
   'CustomerPermissionsReviewList',
 );
 
 const OfferingPermissionsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingPermissionsList" */ './team/OfferingPermissionsList'
-    ),
+  () => import('./team/OfferingPermissionsList'),
   'OfferingPermissionsList',
 );
 
 const CustomerEventsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerEventsList" */ './workspace/CustomerEventsList'
-    ),
+  () => import('./workspace/CustomerEventsList'),
   'CustomerEventsList',
 );
 const CustomerIssuesList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerIssuesList" */ './workspace/CustomerIssuesList'
-    ),
+  () => import('./workspace/CustomerIssuesList'),
   'CustomerIssuesList',
 );
 

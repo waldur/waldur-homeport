@@ -7,10 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
 const ResourceShowUsageDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceShowUsageDialog" */ '@waldur/marketplace/resources/usage/ResourceShowUsageDialog'
-    ),
+  () => import('@waldur/marketplace/resources/usage/ResourceShowUsageDialog'),
   'ResourceShowUsageDialog',
 );
 

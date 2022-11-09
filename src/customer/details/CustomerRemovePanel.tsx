@@ -25,10 +25,7 @@ import {
 import { canManageCustomer } from '../create/selectors';
 
 const OrganizationRemovalErrorDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OrganizationRemovalErrorDialog" */ '@waldur/customer/details/OrganizationRemovalErrorDialog'
-    ),
+  () => import('@waldur/customer/details/OrganizationRemovalErrorDialog'),
   'OrganizationRemovalErrorDialog',
 );
 

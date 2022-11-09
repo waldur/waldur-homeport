@@ -4,18 +4,12 @@ import { translate } from '@waldur/i18n';
 import { NestedResourceTabsConfiguration } from '@waldur/resource/tabs/NestedResourceTabsConfiguration';
 
 const AllocationUsersTable = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SlurmAllocationUsersTable" */ './details/AllocationUsersTable'
-    ),
+  () => import('./details/AllocationUsersTable'),
   'AllocationUsersTable',
 );
 
 const AllocationJobsTable = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SlurmAllocationJobsTable" */ './details/AllocationJobsTable'
-    ),
+  () => import('./details/AllocationJobsTable'),
   'AllocationJobsTable',
 );
 

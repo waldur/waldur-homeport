@@ -4,22 +4,15 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 
 const RancherClusterCheckoutSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RancherClusterCheckoutSummary" */ './RancherClusterCheckoutSummary'
-    ),
+  () => import('./RancherClusterCheckoutSummary'),
   'RancherClusterCheckoutSummary',
 );
 const RancherClusterForm = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "RancherClusterForm" */ './RancherClusterForm'),
+  () => import('./RancherClusterForm'),
   'RancherClusterForm',
 );
 const RancherPluginOptionsForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RancherPluginOptionsForm" */ './RancherPluginOptionsForm'
-    ),
+  () => import('./RancherPluginOptionsForm'),
   'RancherPluginOptionsForm',
 );
 

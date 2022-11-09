@@ -7,10 +7,7 @@ import { Cluster } from '@waldur/rancher/types';
 import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
 
 const CreateNodeDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CreateNodeDialog" */ '../create/CreateNodeDialog'
-    ),
+  () => import('../create/CreateNodeDialog'),
   'CreateNodeDialog',
 );
 

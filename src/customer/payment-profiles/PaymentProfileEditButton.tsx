@@ -6,10 +6,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const PaymentProfileUpdateDialogContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PaymentProfileUpdateDialog" */ './PaymentProfileUpdateDialog'
-    ),
+  () => import('./PaymentProfileUpdateDialog'),
   'PaymentProfileUpdateDialogContainer',
 );
 

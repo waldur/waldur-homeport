@@ -5,10 +5,7 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 import { DestroyFloatingIpAction } from './DestroyFloatingIpAction';
 import { PullFloatingIpAction } from './PullFloatingIpAction';
 const OpenStackFloatingIpSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackFloatingIpSummary" */ './OpenStackFloatingIpSummary'
-    ),
+  () => import('./OpenStackFloatingIpSummary'),
   'OpenStackFloatingIpSummary',
 );
 

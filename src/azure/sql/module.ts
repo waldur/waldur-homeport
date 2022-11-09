@@ -6,17 +6,11 @@ import './actions';
 import './tabs';
 
 const AzureSQLDatabaseSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AzureSQLDatabaseSummary" */ './AzureSQLDatabaseSummary'
-    ),
+  () => import('./AzureSQLDatabaseSummary'),
   'AzureSQLDatabaseSummary',
 );
 const AzureSQLServerSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AzureSQLServerSummary" */ './AzureSQLServerSummary'
-    ),
+  () => import('./AzureSQLServerSummary'),
   'AzureSQLServerSummary',
 );
 

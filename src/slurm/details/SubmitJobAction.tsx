@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
 
 const SubmitJobDialog = lazyComponent(
-  () => import(/* webpackChunkName: "SubmitJobDialog" */ './SubmitJobDialog'),
+  () => import('./SubmitJobDialog'),
   'SubmitJobDialog',
 );
 

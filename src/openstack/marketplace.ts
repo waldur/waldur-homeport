@@ -6,24 +6,15 @@ import { Attribute } from '@waldur/marketplace/types';
 import { TENANT_TYPE } from './constants';
 
 const OpenStackPackageDetails = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackPackageDetails" */ './OpenStackPackageDetails'
-    ),
+  () => import('./OpenStackPackageDetails'),
   'OpenStackPackageDetails',
 );
 const OpenStackPackageForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackPackageForm" */ './OpenStackPackageForm'
-    ),
+  () => import('./OpenStackPackageForm'),
   'OpenStackPackageForm',
 );
 const OpenStackPluginOptionsForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackPluginOptionsForm" */ './OpenStackPluginOptionsForm'
-    ),
+  () => import('./OpenStackPluginOptionsForm'),
   'OpenStackPluginOptionsForm',
 );
 

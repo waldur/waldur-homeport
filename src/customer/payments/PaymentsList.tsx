@@ -18,10 +18,7 @@ import { getCustomer, isStaff, isSupport } from '@waldur/workspace/selectors';
 import { PaymentActions } from './PaymentActions';
 
 const PaymentCreateDialogContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PaymentCreateDialog" */ '@waldur/customer/payments/PaymentCreateDialog'
-    ),
+  () => import('@waldur/customer/payments/PaymentCreateDialog'),
   'PaymentCreateDialogContainer',
 );
 

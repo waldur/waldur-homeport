@@ -6,10 +6,7 @@ import { COMMON_OPTIONS } from '@waldur/support/marketplace';
 import { REMOTE_OFFERING_TYPE } from './constants';
 
 const RemoteOfferingSecretOptions = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RemoteOfferingSecretOptions" */ './RemoteOfferingSecretOptions'
-    ),
+  () => import('./RemoteOfferingSecretOptions'),
   'RemoteOfferingSecretOptions',
 );
 

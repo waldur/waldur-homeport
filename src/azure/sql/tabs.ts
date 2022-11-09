@@ -4,7 +4,7 @@ import { getEventsTab } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
 const DatabasesList = lazyComponent(
-  () => import(/* webpackChunkName: "DatabasesList" */ './DatabasesList'),
+  () => import('./DatabasesList'),
   'DatabasesList',
 );
 

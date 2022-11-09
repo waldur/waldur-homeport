@@ -4,8 +4,7 @@ import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
 const EditNetworkDialog = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "EditNetworkDialog" */ './EditNetworkDialog'),
+  () => import('./EditNetworkDialog'),
   'EditNetworkDialog',
 );
 

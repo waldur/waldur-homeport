@@ -2,17 +2,15 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
 const ChecklistCustomer = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "ChecklistCustomer" */ './ChecklistCustomer'),
+  () => import('./ChecklistCustomer'),
   'ChecklistCustomer',
 );
 const ChecklistOverview = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "ChecklistOverview" */ './ChecklistOverview'),
+  () => import('./ChecklistOverview'),
   'ChecklistOverview',
 );
 const UserChecklist = lazyComponent(
-  () => import(/* webpackChunkName: "UserChecklist" */ './UserChecklist'),
+  () => import('./UserChecklist'),
   'UserChecklist',
 );
 

@@ -5,28 +5,19 @@ import { NestedResourceTabsConfiguration } from '@waldur/resource/tabs/NestedRes
 import { INSTANCE_TYPE } from '../constants';
 
 const BackupsSchedulesList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "BackupSchedulesList" */ '../openstack-backup-schedule/BackupSchedulesList'
-    ),
+  () => import('../openstack-backup-schedule/BackupSchedulesList'),
   'BackupsSchedulesList',
 );
 const BackupsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "BackupsList" */ '../openstack-backup/BackupsList'
-    ),
+  () => import('../openstack-backup/BackupsList'),
   'BackupsList',
 );
 const InstanceVolumesList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "InstanceVolumesList" */ '../openstack-volume/InstanceVolumesList'
-    ),
+  () => import('../openstack-volume/InstanceVolumesList'),
   'InstanceVolumesList',
 );
 const InternalIpsList = lazyComponent(
-  () => import(/* webpackChunkName: "InternalIpsList" */ './InternalIpsList'),
+  () => import('./InternalIpsList'),
   'InternalIpsList',
 );
 

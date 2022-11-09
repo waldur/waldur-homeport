@@ -9,10 +9,7 @@ import actions from './actions';
 import './marketplace';
 import './tabs';
 const OpenStackVolumeSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackVolumeSummary" */ './OpenStackVolumeSummary'
-    ),
+  () => import('./OpenStackVolumeSummary'),
   'OpenStackVolumeSummary',
 );
 

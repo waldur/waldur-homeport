@@ -4,10 +4,7 @@ import { getEventsTab } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
 const ScheduleSnapshotsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ScheduleSnapshotsList" */ '../openstack-snapshot/ScheduleSnapshotsList'
-    ),
+  () => import('../openstack-snapshot/ScheduleSnapshotsList'),
   'ScheduleSnapshotsList',
 );
 

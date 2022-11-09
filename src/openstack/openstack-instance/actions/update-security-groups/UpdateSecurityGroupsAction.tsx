@@ -4,10 +4,7 @@ import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
 const UpdateSecurityGroupsDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "UpdateSecurityGroupsDialog" */ './UpdateSecurityGroupsDialog'
-    ),
+  () => import('./UpdateSecurityGroupsDialog'),
   'UpdateSecurityGroupsDialog',
 );
 

@@ -7,8 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const CreateImageDialog = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "CreateImageDialog" */ './CreateImageDialog'),
+  () => import('./CreateImageDialog'),
   'CreateImageDialog',
 );
 

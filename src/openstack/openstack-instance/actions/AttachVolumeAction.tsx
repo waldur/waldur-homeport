@@ -11,8 +11,7 @@ import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton'
 import { OpenStackInstance } from '../types';
 
 const AttachVolumeDialog = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "AttachVolumeDialog" */ './AttachVolumeDialog'),
+  () => import('./AttachVolumeDialog'),
   'AttachVolumeDialog',
 );
 

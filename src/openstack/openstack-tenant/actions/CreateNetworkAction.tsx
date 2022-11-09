@@ -8,10 +8,7 @@ import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton'
 import { TenantActionProps } from './types';
 
 const CreateNetworkDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CreateNetworkDialog" */ './CreateNetworkDialog'
-    ),
+  () => import('./CreateNetworkDialog'),
   'CreateNetworkDialog',
 );
 

@@ -6,8 +6,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { LoginButton } from './LoginButton';
 
 const AuthSaml2Dialog = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "AuthSaml2Dialog" */ './saml2/AuthSaml2Dialog'),
+  () => import('./saml2/AuthSaml2Dialog'),
   'AuthSaml2Dialog',
 );
 

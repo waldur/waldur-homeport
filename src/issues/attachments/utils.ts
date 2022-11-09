@@ -5,10 +5,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const IssueAttachmentModal = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "IssueAttachmentModal" */ './IssueAttachmentModal'
-    ),
+  () => import('./IssueAttachmentModal'),
   'IssueAttachmentModal',
 );
 

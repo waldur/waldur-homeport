@@ -9,10 +9,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 import { UsageReportContext } from './types';
 
 const ResourceCreateUsageDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceCreateUsageDialog" */ './ResourceCreateUsageDialog'
-    ),
+  () => import('./ResourceCreateUsageDialog'),
   'ResourceCreateUsageDialog',
 );
 

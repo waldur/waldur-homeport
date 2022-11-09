@@ -4,12 +4,11 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
 const InvalidObjectPage = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "InvalidObjectPage" */ './InvalidObjectPage'),
+  () => import('./InvalidObjectPage'),
   'InvalidObjectPage',
 );
 const InvalidRoutePage = lazyComponent(
-  () => import(/* webpackChunkName: "InvalidRoutePage" */ './InvalidRoutePage'),
+  () => import('./InvalidRoutePage'),
   'InvalidRoutePage',
 );
 

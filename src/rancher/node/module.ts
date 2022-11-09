@@ -6,8 +6,7 @@ import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsCon
 import nodeActions from './actions';
 
 const RancherNodeSummary = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "RancherNodeSummary" */ './RancherNodeSummary'),
+  () => import('./RancherNodeSummary'),
   'RancherNodeSummary',
 );
 

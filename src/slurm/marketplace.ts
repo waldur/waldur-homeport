@@ -5,10 +5,7 @@ import { Attribute } from '@waldur/marketplace/types';
 import { SLURM_PLUGIN, SLURM_REMOTE_PLUGIN } from '@waldur/slurm/constants';
 
 const AllocationForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AllocationForm" */ '@waldur/slurm/AllocationForm'
-    ),
+  () => import('@waldur/slurm/AllocationForm'),
   'AllocationForm',
 );
 

@@ -8,10 +8,7 @@ import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton'
 import { VolumeActionProps } from './VolumeActionProps';
 
 const CreateSnapshotScheduleDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CreateSnapshotScheduleDialog" */ './CreateSnapshotScheduleDialog'
-    ),
+  () => import('./CreateSnapshotScheduleDialog'),
   'CreateSnapshotScheduleDialog',
 );
 

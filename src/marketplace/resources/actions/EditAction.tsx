@@ -3,10 +3,7 @@ import { translate } from '@waldur/i18n';
 import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
-const EditDialog = lazyComponent(
-  () => import(/* webpackChunkName: "EditDialog" */ './EditDialog'),
-  'EditDialog',
-);
+const EditDialog = lazyComponent(() => import('./EditDialog'), 'EditDialog');
 
 const validators = [validateState('OK')];
 

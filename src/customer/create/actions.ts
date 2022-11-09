@@ -2,10 +2,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const CustomerCreateDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerCreateDialog" */ './CustomerCreateDialog'
-    ),
+  () => import('./CustomerCreateDialog'),
   'CustomerCreateDialog',
 );
 

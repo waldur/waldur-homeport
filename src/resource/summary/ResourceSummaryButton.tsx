@@ -7,10 +7,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const ResourceSummaryModal = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceSummaryModal" */ './ResourceSummaryModal'
-    ),
+  () => import('./ResourceSummaryModal'),
   'ResourceSummaryModal',
 );
 

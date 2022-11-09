@@ -7,10 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const ResourceImportDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceImportDialog" */ './ResourceImportDialog'
-    ),
+  () => import('./ResourceImportDialog'),
   'ResourceImportDialog',
 );
 

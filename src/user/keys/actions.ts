@@ -2,11 +2,11 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const KeyRemoveDialog = lazyComponent(
-  () => import(/* webpackChunkName: "KeyRemoveDialog" */ './KeyRemoveDialog'),
+  () => import('./KeyRemoveDialog'),
   'KeyRemoveDialog',
 );
 const KeyCreateDialog = lazyComponent(
-  () => import(/* webpackChunkName: "KeyCreateDialog" */ './KeyCreateDialog'),
+  () => import('./KeyCreateDialog'),
   'KeyCreateDialog',
 );
 

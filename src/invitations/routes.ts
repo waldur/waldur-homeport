@@ -2,23 +2,19 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
 const InvitationAccept = lazyComponent(
-  () => import(/* webpackChunkName: "InvitationAccept" */ './InvitationAccept'),
+  () => import('./InvitationAccept'),
   'InvitationAccept',
 );
 const InvitationApprove = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "InvitationApprove" */ './InvitationApprove'),
+  () => import('./InvitationApprove'),
   'InvitationApprove',
 );
 const InvitationReject = lazyComponent(
-  () => import(/* webpackChunkName: "InvitationReject" */ './InvitationReject'),
+  () => import('./InvitationReject'),
   'InvitationReject',
 );
 const UserGroupInvitation = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "UserGroupInvitation" */ './UserGroupInvitation'
-    ),
+  () => import('./UserGroupInvitation'),
   'UserGroupInvitation',
 );
 

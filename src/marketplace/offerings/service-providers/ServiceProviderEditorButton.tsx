@@ -7,10 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
 
 const ServiceProviderEditor = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ServiceProviderEditor" */ './ServiceProviderEditor'
-    ),
+  () => import('./ServiceProviderEditor'),
   'ServiceProviderEditor',
 );
 

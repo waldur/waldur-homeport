@@ -3,17 +3,11 @@ import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 
 const AzureVirtualMachineDetails = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AzureVirtualMachineDetails" */ './AzureVirtualMachineDetails'
-    ),
+  () => import('./AzureVirtualMachineDetails'),
   'AzureVirtualMachineDetails',
 );
 const AzureVirtualMachineForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AzureVirtualMachineForm" */ './AzureVirtualMachineForm'
-    ),
+  () => import('./AzureVirtualMachineForm'),
   'AzureVirtualMachineForm',
 );
 

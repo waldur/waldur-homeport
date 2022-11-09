@@ -4,73 +4,43 @@ import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
 const ClusterUsersList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ClusterUsersList" */ '@waldur/rancher/cluster/users/ClusterUsersList'
-    ),
+  () => import('@waldur/rancher/cluster/users/ClusterUsersList'),
   'ClusterUsersList',
 );
 const ClusterCatalogList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ClusterCatalogList" */ '../catalog/ClusterCatalogList'
-    ),
+  () => import('../catalog/ClusterCatalogList'),
   'ClusterCatalogList',
 );
 const ClusterProjectList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ClusterProjectList" */ '../ClusterProjectList'
-    ),
+  () => import('../ClusterProjectList'),
   'ClusterProjectList',
 );
 const ClusterNodesList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ClusterNodesList" */ '../node/ClusterNodesList'
-    ),
+  () => import('../node/ClusterNodesList'),
   'ClusterNodesList',
 );
 const ClusterTemplatesList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ClusterTemplateList" */ '../template/ClusterTemplateList'
-    ),
+  () => import('../template/ClusterTemplateList'),
   'ClusterTemplatesList',
 );
 const ClusterApplicationsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RancherClusterApplicationsList" */ './apps/ClusterApplicationsList'
-    ),
+  () => import('./apps/ClusterApplicationsList'),
   'ClusterApplicationsList',
 );
 const ClusterIngressesList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RancherClusterIngressesList" */ './ClusterIngressesList'
-    ),
+  () => import('./ClusterIngressesList'),
   'ClusterIngressesList',
 );
 const ClusterServicesList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RancherClusterServicesList" */ './ClusterServicesList'
-    ),
+  () => import('./ClusterServicesList'),
   'ClusterServicesList',
 );
 const ClusterWorkloadsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RancherClusterWorkloadsList" */ './ClusterWorkloadsList'
-    ),
+  () => import('./ClusterWorkloadsList'),
   'ClusterWorkloadsList',
 );
 const ClusterHPAList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RancherClusterHPAList" */ './hpas/ClusterHPAList'
-    ),
+  () => import('./hpas/ClusterHPAList'),
   'ClusterHPAList',
 );
 

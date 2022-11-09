@@ -7,7 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const ImportYAMLDialog = lazyComponent(
-  () => import(/* webpackChunkName: "ImportYAMLDialog" */ './ImportYAMLDialog'),
+  () => import('./ImportYAMLDialog'),
   'ImportYAMLDialog',
 );
 

@@ -14,10 +14,7 @@ import {
 } from '@waldur/workspace/selectors';
 
 const EditResourceEndDateDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "EditResourceEndDateDialog" */ './EditResourceEndDateDialog'
-    ),
+  () => import('./EditResourceEndDateDialog'),
   'EditResourceEndDateDialog',
 );
 

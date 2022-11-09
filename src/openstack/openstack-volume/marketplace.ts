@@ -6,24 +6,16 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import { VOLUME_TYPE } from '../constants';
 
 const OpenstackVolumeDetails = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenstackVolumeDetails" */ '@waldur/openstack/openstack-volume/OpenstackVolumeDetails'
-    ),
+  () => import('@waldur/openstack/openstack-volume/OpenstackVolumeDetails'),
   'OpenstackVolumeDetails',
 );
 const OpenstackVolumeCheckoutSummary = lazyComponent(
   () =>
-    import(
-      /* webpackChunkName: "OpenstackVolumeCheckoutSummary" */ '@waldur/openstack/openstack-volume/OpenstackVolumeCheckoutSummary'
-    ),
+    import('@waldur/openstack/openstack-volume/OpenstackVolumeCheckoutSummary'),
   'OpenstackVolumeCheckoutSummary',
 );
 const OpenstackVolumeCreateForm = lazyComponent<OfferingConfigurationFormProps>(
-  () =>
-    import(
-      /* webpackChunkName: "OpenstackVolumeCreateForm" */ './OpenstackVolumeCreateForm'
-    ),
+  () => import('./OpenstackVolumeCreateForm'),
   'OpenstackVolumeCreateForm',
 );
 

@@ -6,7 +6,7 @@ import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
 
 const CreateDiskDialog = lazyComponent(
-  () => import(/* webpackChunkName: "CreateDiskDialog" */ './CreateDiskDialog'),
+  () => import('./CreateDiskDialog'),
   'CreateDiskDialog',
 );
 

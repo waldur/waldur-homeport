@@ -4,7 +4,7 @@ import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
 const VolumeExtendDialog = lazyComponent(
-  () => import(/* webpackChunkName: "VolumeExtendDialog" */ './ExtendDialog'),
+  () => import('./ExtendDialog'),
   'VolumeExtendDialog',
 );
 

@@ -2,17 +2,11 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
 const CatalogTemplateContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RancherCatalogTemplateContainer" */ './template/CatalogTemplateContainer'
-    ),
+  () => import('./template/CatalogTemplateContainer'),
   'CatalogTemplateContainer',
 );
 const TemplateDetail = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "RancherTemplateDetail" */ './template/TemplateDetail'
-    ),
+  () => import('./template/TemplateDetail'),
   'TemplateDetail',
 );
 

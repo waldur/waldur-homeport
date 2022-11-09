@@ -7,17 +7,11 @@ import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsCon
 import { VOLUME_TYPE } from '../constants';
 
 const SnapshotSchedulesList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SnapshotSchedulesList" */ '../openstack-snapshot-schedule/SnapshotSchedulesList'
-    ),
+  () => import('../openstack-snapshot-schedule/SnapshotSchedulesList'),
   'SnapshotSchedulesList',
 );
 const VolumeSnapshotsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "VolumeSnapshotsList" */ './VolumeSnapshotsList'
-    ),
+  () => import('./VolumeSnapshotsList'),
   'VolumeSnapshotsList',
 );
 

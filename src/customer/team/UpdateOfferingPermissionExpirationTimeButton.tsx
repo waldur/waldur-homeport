@@ -7,10 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const UpdateOfferingPermissionExpirationTimeDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OfferingPermissionCreateDialog" */ './UpdateOfferingPermissionExpirationTimeDialog'
-    ),
+  () => import('./UpdateOfferingPermissionExpirationTimeDialog'),
   'UpdateOfferingPermissionExpirationTimeDialog',
 );
 

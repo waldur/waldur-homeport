@@ -37,10 +37,7 @@ import {
 import { canManageCustomer } from '../create/selectors';
 
 const CustomerErrorDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerErrorDialog" */ './CustomerErrorDialog'
-    ),
+  () => import('./CustomerErrorDialog'),
   'CustomerErrorDialog',
 );
 

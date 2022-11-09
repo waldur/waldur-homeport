@@ -14,10 +14,7 @@ import {
 import { Project } from '@waldur/workspace/types';
 
 const InvitationCreateDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "InvitationCreateDialog" */ './InvitationCreateDialog'
-    ),
+  () => import('./InvitationCreateDialog'),
   'InvitationCreateDialog',
 );
 

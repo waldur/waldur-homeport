@@ -2,7 +2,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import * as ProvidersRegistry from '@waldur/providers/registry';
 
 const DigitalOceanForm = lazyComponent(
-  () => import(/* webpackChunkName: "DigitalOceanForm" */ './DigitalOceanForm'),
+  () => import('./DigitalOceanForm'),
   'DigitalOceanForm',
 );
 

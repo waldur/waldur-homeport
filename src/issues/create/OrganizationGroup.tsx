@@ -14,10 +14,7 @@ import { ISSUE_REGISTRATION_FORM_ID } from './constants';
 import { callerSelector, customerSelector } from './selectors';
 
 const CustomerPopover = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerPopover" */ '@waldur/customer/popover/CustomerPopover'
-    ),
+  () => import('@waldur/customer/popover/CustomerPopover'),
   'CustomerPopover',
 );
 

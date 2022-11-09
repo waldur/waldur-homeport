@@ -3,10 +3,7 @@ import { translate } from '@waldur/i18n';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
 const InvoiceItemUpdateDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "InvoiceItemUpdateDialog" */ './InvoiceItemUpdateDialog'
-    ),
+  () => import('./InvoiceItemUpdateDialog'),
   'InvoiceItemUpdateDialog',
 );
 

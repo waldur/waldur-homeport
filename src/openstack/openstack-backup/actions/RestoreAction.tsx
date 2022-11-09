@@ -4,10 +4,7 @@ import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
 const BackupRestoreDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "BackupRestoreDialog" */ './BackupRestoreDialog'
-    ),
+  () => import('./BackupRestoreDialog'),
   'BackupRestoreDialog',
 );
 

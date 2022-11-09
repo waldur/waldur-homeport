@@ -7,18 +7,12 @@ import { DestroyPortAction } from './DestroyPortAction';
 import './tabs';
 
 const OpenStackTenantSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackTenantSummary" */ './OpenStackTenantSummary'
-    ),
+  () => import('./OpenStackTenantSummary'),
   'OpenStackTenantSummary',
 );
 
 const OpenStackRouterSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackRouterSummary" */ './OpenStackRouterSummary'
-    ),
+  () => import('./OpenStackRouterSummary'),
   'OpenStackRouterSummary',
 );
 

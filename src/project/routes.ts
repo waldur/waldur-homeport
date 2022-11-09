@@ -12,42 +12,31 @@ import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
 import { loadProject } from './resolve';
 
 const ProjectDashboard = lazyComponent(
-  () => import(/* webpackChunkName: "ProjectDashboard" */ './ProjectDashboard'),
+  () => import('./ProjectDashboard'),
   'ProjectDashboard',
 );
 const ProjectManage = lazyComponent(
-  () => import(/* webpackChunkName: "ProjectManage" */ './ProjectManage'),
+  () => import('./ProjectManage'),
   'ProjectManage',
 );
 const ProjectEventsView = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "ProjectEventsList" */ './ProjectEventsList'),
+  () => import('./ProjectEventsList'),
   'ProjectEventsView',
 );
 const ProjectIssuesList = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "ProjectIssuesList" */ './ProjectIssuesList'),
+  () => import('./ProjectIssuesList'),
   'ProjectIssuesList',
 );
 const ProjectUsersList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "team/ProjectUsersList" */ './team/ProjectUsersList'
-    ),
+  () => import('./team/ProjectUsersList'),
   'ProjectUsersList',
 );
 const InvitationsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "team/InvitationsList" */ './team/InvitationsList'
-    ),
+  () => import('./team/InvitationsList'),
   'InvitationsList',
 );
 const ProjectPermissionsLogList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "team/ProjectPermissionsLogList" */ './team/ProjectPermissionsLogList'
-    ),
+  () => import('./team/ProjectPermissionsLogList'),
   'ProjectPermissionsLogList',
 );
 

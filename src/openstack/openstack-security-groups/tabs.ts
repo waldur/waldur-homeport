@@ -4,10 +4,7 @@ import { getEventsTab } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
 const SecurityGroupRulesList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SecurityGroupRulesList" */ './SecurityGroupRulesList'
-    ),
+  () => import('./SecurityGroupRulesList'),
   'SecurityGroupRulesList',
 );
 

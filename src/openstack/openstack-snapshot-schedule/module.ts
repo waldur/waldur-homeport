@@ -6,10 +6,7 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 import actions from './actions';
 import './tabs';
 const OpenStackSnapshotScheduleSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackSnapshotScheduleSummary" */ './OpenStackSnapshotScheduleSummary'
-    ),
+  () => import('./OpenStackSnapshotScheduleSummary'),
   'OpenStackSnapshotScheduleSummary',
 );
 

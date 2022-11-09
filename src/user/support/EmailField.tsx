@@ -15,10 +15,7 @@ import { getCurrentUser } from '../UsersService';
 import { RequestedEmail } from './RequestedEmail';
 
 const UserEmailChangeDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "UserEmailChangeDialog" */ './UserEmailChangeDialog'
-    ),
+  () => import('./UserEmailChangeDialog'),
   'UserEmailChangeDialog',
 );
 

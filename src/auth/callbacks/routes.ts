@@ -2,42 +2,32 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
 const AuthLoginCompleted = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "AuthLoginCompleted" */ './AuthLoginCompleted'),
+  () => import('./AuthLoginCompleted'),
   'AuthLoginCompleted',
 );
 
 const OauthLoginCompleted = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OauthLoginCompleted" */ './OauthLoginCompleted'
-    ),
+  () => import('./OauthLoginCompleted'),
   'OauthLoginCompleted',
 );
 
 const SAML2DiscoveryCompleted = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SAML2DiscoveryCompleted" */ './SAML2DiscoveryCompleted'
-    ),
+  () => import('./SAML2DiscoveryCompleted'),
   'SAML2DiscoveryCompleted',
 );
 
 const AuthLoginFailed = lazyComponent(
-  () => import(/* webpackChunkName: "AuthLoginFailed" */ './AuthLoginFailed'),
+  () => import('./AuthLoginFailed'),
   'AuthLoginFailed',
 );
 
 const AuthLogoutCompleted = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AuthLogoutCompleted" */ './AuthLogoutCompleted'
-    ),
+  () => import('./AuthLogoutCompleted'),
   'AuthLogoutCompleted',
 );
 
 const AuthLogoutFailed = lazyComponent(
-  () => import(/* webpackChunkName: "AuthLogoutFailed" */ './AuthLogoutFailed'),
+  () => import('./AuthLogoutFailed'),
   'AuthLogoutFailed',
 );
 

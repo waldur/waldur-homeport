@@ -11,10 +11,7 @@ import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { InvoiceEvent } from './types';
 
 const EventDetailsDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "EventDetailsDialog" */ '@waldur/events/EventDetailsDialog'
-    ),
+  () => import('@waldur/events/EventDetailsDialog'),
   'EventDetailsDialog',
 );
 

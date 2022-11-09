@@ -14,10 +14,7 @@ interface UserPermissionRequestApproveButtonProps {
 }
 
 const PermissionRequestActionDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "PermissionRequestActionDialog" */ './PermissionRequestActionDialog'
-    ),
+  () => import('./PermissionRequestActionDialog'),
   'PermissionRequestActionDialog',
 );
 

@@ -8,10 +8,7 @@ import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton'
 import { OpenStackInstance } from '../../types';
 
 const UpdateInternalIpsDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "UpdateInternalIpsDialog" */ './UpdateInternalIpsDialog'
-    ),
+  () => import('./UpdateInternalIpsDialog'),
   'UpdateInternalIpsDialog',
 );
 

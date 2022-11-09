@@ -5,10 +5,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const ResourceOrderItemsDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceOrderItemsDialog" */ '@waldur/marketplace/orders/item/list/ResourceOrderItemsDialog'
-    ),
+  () => import('@waldur/marketplace/orders/item/list/ResourceOrderItemsDialog'),
   'ResourceOrderItemsDialog',
 );
 

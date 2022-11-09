@@ -7,10 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const NotificationCreateDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "NotificationCreateDialog" */ './NotificationCreateDialog'
-    ),
+  () => import('./NotificationCreateDialog'),
   'NotificationCreateDialog',
 );
 

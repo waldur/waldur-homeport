@@ -5,8 +5,7 @@ import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { ActionContext } from '@waldur/resource/actions/types';
 
 const ForceDestroyDialog = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "ForceDestroyDialog" */ './ForceDestroyDialog'),
+  () => import('./ForceDestroyDialog'),
   'ForceDestroyDialog',
 );
 

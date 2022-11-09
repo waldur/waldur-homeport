@@ -25,9 +25,7 @@ async function loadVfs(fontFamilies) {
 export async function loadPdfMake() {
   if (!pdfMakeInstance) {
     const fontFamilies = ENV.fontFamilies;
-    const pdfMake = (
-      await import(/* webpackChunkName: "pdfmake" */ 'pdfmake/build/pdfmake')
-    ).default;
+    const pdfMake = (await import('pdfmake/build/pdfmake')).default;
     pdfMake.fonts = fontFamilies;
     pdfMake.vfs = await loadVfs(fontFamilies);
     pdfMakeInstance = pdfMake;

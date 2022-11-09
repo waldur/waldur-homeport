@@ -4,10 +4,7 @@ import { getEventsTab } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
 const NetworkSubnetsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "NetworkSubnetsList" */ '../openstack-subnet/NetworkSubnetsList'
-    ),
+  () => import('../openstack-subnet/NetworkSubnetsList'),
   'NetworkSubnetsList',
 );
 

@@ -9,10 +9,7 @@ import { getUser, getCustomer } from '@waldur/workspace/selectors';
 import { User } from '@waldur/workspace/types';
 
 const EditTeamMemberDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "EditTeamMemberDialog" */ './EditTeamMemberDialog'
-    ),
+  () => import('./EditTeamMemberDialog'),
   'EditTeamMemberDialog',
 );
 

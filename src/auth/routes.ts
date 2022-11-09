@@ -3,22 +3,13 @@ import { StateDeclaration } from '@waldur/core/types';
 import { Layout } from '@waldur/navigation/Layout';
 
 const AnonymousLayout = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "AnonymousLayout" */ '@waldur/navigation/AnonymousLayout'
-    ),
+  () => import('@waldur/navigation/AnonymousLayout'),
   'AnonymousLayout',
 );
 
-const LandingPage = lazyComponent(
-  () => import(/* webpackChunkName: "LandingPage" */ './LandingPage'),
-  'LandingPage',
-);
+const LandingPage = lazyComponent(() => import('./LandingPage'), 'LandingPage');
 
-const AuthInit = lazyComponent(
-  () => import(/* webpackChunkName: "AuthInit" */ './AuthInit'),
-  'AuthInit',
-);
+const AuthInit = lazyComponent(() => import('./AuthInit'), 'AuthInit');
 
 export const states: StateDeclaration[] = [
   {

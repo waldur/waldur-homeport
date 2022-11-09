@@ -11,18 +11,12 @@ import { InvitationService } from './InvitationService';
 import { clearInvitationToken, setInvitationToken } from './InvitationStorage';
 
 const InvitationConfirmDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "InvitationConfirmDialog" */ './InvitationConfirmDialog'
-    ),
+  () => import('./InvitationConfirmDialog'),
   'InvitationConfirmDialog',
 );
 
 const GroupInvitationConfirmDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "GroupInvitationConfirmDialog" */ './GroupInvitationConfirmDialog'
-    ),
+  () => import('./GroupInvitationConfirmDialog'),
   'GroupInvitationConfirmDialog',
 );
 

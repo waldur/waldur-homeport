@@ -4,10 +4,7 @@ import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
 const SecurityGroupEditorDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SecurityGroupEditorDialog" */ './SecurityGroupEditorDialog'
-    ),
+  () => import('./SecurityGroupEditorDialog'),
   'SecurityGroupEditorDialog',
 );
 

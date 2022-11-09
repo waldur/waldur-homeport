@@ -3,14 +3,11 @@ import { pick } from '@waldur/core/utils';
 import * as ProvidersRegistry from '@waldur/providers/registry';
 
 const OpenStackForm = lazyComponent(
-  () => import(/* webpackChunkName: "OpenStackForm" */ './OpenStackForm'),
+  () => import('./OpenStackForm'),
   'OpenStackForm',
 );
 const OpenStackTenantForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackTenantForm" */ './OpenStackTenantForm'
-    ),
+  () => import('./OpenStackTenantForm'),
   'OpenStackTenantForm',
 );
 

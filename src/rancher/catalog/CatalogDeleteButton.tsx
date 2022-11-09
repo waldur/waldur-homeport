@@ -8,10 +8,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const CatalogDeleteDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CatalogDeleteDialog" */ './CatalogDeleteDialog'
-    ),
+  () => import('./CatalogDeleteDialog'),
   'CatalogDeleteDialog',
 );
 

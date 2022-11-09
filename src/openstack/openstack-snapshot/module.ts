@@ -3,10 +3,7 @@ import { ResourceStateConfigurationProvider } from '@waldur/resource/state/Resou
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 const OpenStackSnapshotSummary = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "OpenStackSnapshotSummary" */ './OpenStackSnapshotSummary'
-    ),
+  () => import('./OpenStackSnapshotSummary'),
   'OpenStackSnapshotSummary',
 );
 import './actions';

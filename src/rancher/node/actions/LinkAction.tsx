@@ -6,10 +6,7 @@ import { translate } from '@waldur/i18n';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { getUser } from '@waldur/workspace/selectors';
 
-const LinkDialog = lazyComponent(
-  () => import(/* webpackChunkName: "LinkDialog" */ './LinkDialog'),
-  'LinkDialog',
-);
+const LinkDialog = lazyComponent(() => import('./LinkDialog'), 'LinkDialog');
 
 export const LinkAction = ({ resource }) => {
   const user = useSelector(getUser);

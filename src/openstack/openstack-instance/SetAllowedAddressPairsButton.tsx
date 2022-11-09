@@ -7,10 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const SetAllowedAddressPairsDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SetAllowedAddressPairsDialog" */ './SetAllowedAddressPairsDialog'
-    ),
+  () => import('./SetAllowedAddressPairsDialog'),
   'SetAllowedAddressPairsDialog',
 );
 

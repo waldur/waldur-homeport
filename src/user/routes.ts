@@ -9,94 +9,54 @@ import { USER_WORKSPACE } from '@waldur/workspace/types';
 import { UsersService } from './UsersService';
 
 const FreeIpaAccount = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "FreeIPAAccount" */ '@waldur/freeipa/FreeIPAAccount'
-    ),
+  () => import('@waldur/freeipa/FreeIPAAccount'),
   'FreeIpaAccount',
 );
-const HooksList = lazyComponent(
-  () => import(/* webpackChunkName: "HooksList" */ './hooks/HooksList'),
-  'HooksList',
-);
-const KeysList = lazyComponent(
-  () => import(/* webpackChunkName: "KeysList" */ './keys/KeysList'),
-  'KeysList',
-);
+const HooksList = lazyComponent(() => import('./hooks/HooksList'), 'HooksList');
+const KeysList = lazyComponent(() => import('./keys/KeysList'), 'KeysList');
 const UserDashboard = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "UserDashboard" */ './dashboard/UserDashboard'),
+  () => import('./dashboard/UserDashboard'),
   'UserDashboard',
 );
 const UserEventsWrapper = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "UserEventsWrapper" */ './dashboard/UserEventsWrapper'
-    ),
+  () => import('./dashboard/UserEventsWrapper'),
   'UserEventsWrapper',
 );
-const UserManage = lazyComponent(
-  () => import(/* webpackChunkName: "UserManage" */ './UserManage'),
-  'UserManage',
-);
+const UserManage = lazyComponent(() => import('./UserManage'), 'UserManage');
 const UserOfferingListContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "UserOfferingListContainer" */ './UserOfferingListContainer'
-    ),
+  () => import('./UserOfferingListContainer'),
   'UserOfferingListContainer',
 );
 const FlowListContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "FlowListContainer" */ '@waldur/marketplace-flows/FlowListContainer'
-    ),
+  () => import('@waldur/marketplace-flows/FlowListContainer'),
   'FlowListContainer',
 );
 const FlowEditForm = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "FlowEditForm" */ '@waldur/marketplace-flows/FlowEditForm'
-    ),
+  () => import('@waldur/marketplace-flows/FlowEditForm'),
   'FlowEditForm',
 );
 const UserPermissionRequestsListContainer = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "UserPermissionRequestsListContainer" */ './UserPermissionRequestsListContainer'
-    ),
+  () => import('./UserPermissionRequestsListContainer'),
   'UserPermissionRequestsListContainer',
 );
 const UserApiKey = lazyComponent(
-  () => import(/* webpackChunkName: "UserApiKey" */ './api-key/UserApiKey'),
+  () => import('./api-key/UserApiKey'),
   'UserApiKey',
 );
 const EmptyOrganizationsPlaceholder = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "EmptyOrganizationsPlaceholder" */ '@waldur/navigation/workspace/EmptyOrganizationsPlaceholder'
-    ),
+  () => import('@waldur/navigation/workspace/EmptyOrganizationsPlaceholder'),
   'EmptyOrganizationsPlaceholder',
 );
 const EmptyProjectPlaceholder = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "EmptyProjectPlaceholder" */ '@waldur/navigation/workspace/EmptyProjectPlaceholder'
-    ),
+  () => import('@waldur/navigation/workspace/EmptyProjectPlaceholder'),
   'EmptyProjectPlaceholder',
 );
 
 const UserEmailChangeCallback = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "UserEmailChangeCallback" */ './support/UserEmailChangeCallback'
-    ),
+  () => import('./support/UserEmailChangeCallback'),
   'UserEmailChangeCallback',
 );
-const UserDetails = lazyComponent(
-  () => import(/* webpackChunkName: "UserDetails" */ './UserDetails'),
-  'UserDetails',
-);
+const UserDetails = lazyComponent(() => import('./UserDetails'), 'UserDetails');
 
 export const states: StateDeclaration[] = [
   {

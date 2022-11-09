@@ -4,40 +4,27 @@ import { translate } from '@waldur/i18n';
 import { NestedResourceTabsConfiguration } from '@waldur/resource/tabs/NestedResourceTabsConfiguration';
 
 const FloatingIpsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "FloatingIpsList" */ '../openstack-floating-ips/FloatingIpsList'
-    ),
+  () => import('../openstack-floating-ips/FloatingIpsList'),
   'FloatingIpsList',
 );
 const TenantNetworksList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "TenantNetworksList" */ '../openstack-network/TenantNetworksList'
-    ),
+  () => import('../openstack-network/TenantNetworksList'),
   'TenantNetworksList',
 );
 const SecurityGroupsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "SecurityGroupsList" */ '../openstack-security-groups/SecurityGroupsList'
-    ),
+  () => import('../openstack-security-groups/SecurityGroupsList'),
   'SecurityGroupsList',
 );
 const ServerGroupsList = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "ServerGroupsList" */ '../openstack-server-groups/ServerGroupsList'
-    ),
+  () => import('../openstack-server-groups/ServerGroupsList'),
   'ServerGroupsList',
 );
 const TenantPortsList = lazyComponent(
-  () => import(/* webpackChunkName: "TenantPortsList" */ './TenantPortsList'),
+  () => import('./TenantPortsList'),
   'TenantPortsList',
 );
 const TenantRoutersList = lazyComponent(
-  () =>
-    import(/* webpackChunkName: "TenantRoutersList" */ './TenantRoutersList'),
+  () => import('./TenantRoutersList'),
   'TenantRoutersList',
 );
 

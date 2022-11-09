@@ -8,10 +8,7 @@ import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton'
 import { TenantActionProps } from './types';
 
 const CreateServerGroupDialog = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CreateServerGroupDialog" */ './CreateServerGroupDialog'
-    ),
+  () => import('./CreateServerGroupDialog'),
   'CreateServerGroupDialog',
 );
 
