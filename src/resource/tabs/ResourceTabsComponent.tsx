@@ -21,7 +21,7 @@ export const ResourceTabsComponent = ({
       component: () => <tab.component resource={resource} />,
     }))}
     activeKey={activeKey}
-    defaultActiveKey={tabs[0].key}
+    defaultActiveKey={tabs[0]?.key}
     onSelect={onSelect}
   />
 );

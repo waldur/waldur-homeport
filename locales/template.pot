@@ -719,6 +719,10 @@ msgstr ""
 msgid "Approved by"
 msgstr ""
 
+#: src/rancher/cluster/tabs.ts
+msgid "Apps"
+msgstr ""
+
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 msgid "Archive"
 msgstr ""
@@ -1480,6 +1484,7 @@ msgstr ""
 msgid "Cloud vCPU"
 msgstr ""
 
+#: src/rancher/cluster/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Cluster"
@@ -8489,6 +8494,10 @@ msgstr ""
 
 #: src/i18n/constants.ts
 msgid "Service catalog offerings"
+msgstr ""
+
+#: src/rancher/cluster/tabs.ts
+msgid "Service discovery"
 msgstr ""
 
 #: src/configs/default.ts

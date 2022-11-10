@@ -483,7 +483,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-public-resource-details',
-    url: 'marketplace-public-resource-details/:resource_uuid/',
+    url: 'marketplace-public-resource-details/:resource_uuid?tab',
     component: ResourceDetailsPage,
     parent: 'organization',
     data: {
@@ -493,7 +493,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-service-provider-public-resource-details',
-    url: 'marketplace-service-provider-public-resource-details/:resource_uuid/',
+    url: 'marketplace-service-provider-public-resource-details/:resource_uuid?tab',
     component: ResourceDetailsPage,
     parent: 'organization',
     data: {
