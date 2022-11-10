@@ -36,12 +36,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('State'),
           render: ({ row }) => <>{row.runtime_state}</>,
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => <WorkloadActions workload={row} />,
-        },
       ]}
       verboseName={translate('workloads')}
+      hoverableRow={({ row }) => <WorkloadActions workload={row} />}
     />
   );
 };

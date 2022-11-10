@@ -32,15 +32,6 @@ const TableComponent: FunctionComponent<any> = (props) => {
         title: translate('URL'),
         render: ({ row }) => <>{row.catalog_url}</>,
       },
-      {
-        title: translate('Actions'),
-        render: ({ row }) =>
-          row.scope_type === 'cluster' ? (
-            <CatalogDeleteButton catalog={row} />
-          ) : (
-            'N/A'
-          ),
-      },
     ],
     [props.resource],
   );
@@ -50,6 +41,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={columns}
       verboseName={translate('catalogues')}
       actions={<CatalogCreateButton cluster={props.resource} />}
+      hoverableRow={({ row }) =>
+        row.scope_type === 'cluster' ? (
+          <CatalogDeleteButton catalog={row} />
+        ) : null
+      }
     />
   );
 };

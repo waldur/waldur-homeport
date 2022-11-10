@@ -3,9 +3,9 @@ import { FunctionComponent } from 'react';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { INSTANCE_TYPE } from '@waldur/openstack/constants';
-import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
-import { ResourceName } from '@waldur/resource/ResourceName';
+import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
+import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { CreateNodeAction } from '../cluster/actions/CreateNodeAction';
@@ -19,7 +19,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={[
         {
           title: translate('Node'),
-          render: ({ row }) => <ResourceName resource={row} />,
+          render: ({ row }) => <>{row.name}</>,
         },
         {
           title: translate('Roles'),
@@ -48,13 +48,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
             );
           },
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => <ResourceRowActions resource={row} />,
-        },
       ]}
       verboseName={translate('Kubernetes nodes')}
       actions={<CreateNodeAction resource={props.resource} />}
+      hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
+      expandableRow={({ row }) => <ResourceSummary resource={row} />}
     />
   );
 };

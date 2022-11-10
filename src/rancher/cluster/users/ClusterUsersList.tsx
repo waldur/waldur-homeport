@@ -5,7 +5,6 @@ import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
 import { RolesRenderer } from './RolesRenderer';
-import { UserDetailsButton } from './UserDetailsButton';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   return (
@@ -39,8 +38,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
             ),
         },
         {
-          title: translate('Actions'),
-          render: ({ row }) => <UserDetailsButton user={row} />,
+          title: translate('Is active'),
+          render: ({ row }) =>
+            row.is_active ? translate('Yes') : translate('No'),
         },
       ]}
       verboseName={translate('users')}
