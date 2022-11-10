@@ -1,7 +1,6 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
-import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
+import { NestedResourceTabsConfiguration } from '@waldur/resource/tabs/NestedResourceTabsConfiguration';
 
 const ClusterUsersList = lazyComponent(
   () => import('@waldur/rancher/cluster/users/ClusterUsersList'),
@@ -44,56 +43,70 @@ const ClusterHPAList = lazyComponent(
   'ClusterHPAList',
 );
 
-ResourceTabsConfiguration.register('Rancher.Cluster', () => [
+NestedResourceTabsConfiguration.register('Rancher.Cluster', () => [
   {
-    key: 'nodes',
-    title: translate('Nodes'),
-    component: ClusterNodesList,
+    title: translate('Cluster'),
+    children: [
+      {
+        key: 'nodes',
+        title: translate('Nodes'),
+        component: ClusterNodesList,
+      },
+      {
+        key: 'projects',
+        title: translate('Projects'),
+        component: ClusterProjectList,
+      },
+      {
+        key: 'users',
+        title: translate('Users'),
+        component: ClusterUsersList,
+      },
+    ],
   },
   {
-    key: 'catalogs',
-    title: translate('Catalogues'),
-    component: ClusterCatalogList,
+    title: translate('Apps'),
+    children: [
+      {
+        key: 'templates',
+        title: translate('Application templates'),
+        component: ClusterTemplatesList,
+      },
+      {
+        key: 'applications',
+        title: translate('Applications'),
+        component: ClusterApplicationsList,
+      },
+      {
+        key: 'workloads',
+        title: translate('Workloads'),
+        component: ClusterWorkloadsList,
+      },
+      {
+        key: 'catalogs',
+        title: translate('Catalogues'),
+        component: ClusterCatalogList,
+      },
+    ],
   },
   {
-    key: 'projects',
-    title: translate('Projects'),
-    component: ClusterProjectList,
+    title: translate('Service discovery'),
+    children: [
+      {
+        key: 'hpas',
+        title: translate('HPA'),
+        component: ClusterHPAList,
+      },
+      {
+        key: 'ingresses',
+        title: translate('Ingress'),
+        component: ClusterIngressesList,
+      },
+      {
+        key: 'services',
+        title: translate('Services'),
+        component: ClusterServicesList,
+      },
+    ],
   },
-  {
-    key: 'templates',
-    title: translate('Application templates'),
-    component: ClusterTemplatesList,
-  },
-  {
-    key: 'applications',
-    title: translate('Applications'),
-    component: ClusterApplicationsList,
-  },
-  {
-    key: 'workloads',
-    title: translate('Workloads'),
-    component: ClusterWorkloadsList,
-  },
-  {
-    key: 'users',
-    title: translate('Users'),
-    component: ClusterUsersList,
-  },
-  {
-    key: 'hpas',
-    title: translate('HPA'),
-    component: ClusterHPAList,
-  },
-  {
-    key: 'ingresses',
-    title: translate('Ingress'),
-    component: ClusterIngressesList,
-  },
-  {
-    key: 'services',
-    title: translate('Services'),
-    component: ClusterServicesList,
-  },
-  ...getDefaultResourceTabs(),
 ]);

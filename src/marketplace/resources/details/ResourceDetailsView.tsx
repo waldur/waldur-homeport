@@ -74,8 +74,9 @@ export const ResourceDetailsView: FC<any> = ({
   resource,
   scope,
   components,
-  tab,
   reInitResource,
+  state,
+  tabSpec,
 }) => {
   useFullPage();
 
@@ -85,7 +86,7 @@ export const ResourceDetailsView: FC<any> = ({
         ? [
             {
               title: translate('Dashboard'),
-              to: 'marketplace-project-resource-details',
+              to: state.name,
               params: {
                 tab: '',
               },
@@ -96,7 +97,7 @@ export const ResourceDetailsView: FC<any> = ({
                 children: parentTab.children
                   .map((childTab) => ({
                     title: childTab.title,
-                    to: 'marketplace-project-resource-details',
+                    to: state.name,
                     params: {
                       tab: childTab.key,
                     },
@@ -117,17 +118,6 @@ export const ResourceDetailsView: FC<any> = ({
       [OFFERING_TYPE_BOOKING]: OfferingMainComponent,
     }[resource.offering_type] || null;
 
-  const TabsComponent = useMemo(() => {
-    if (!scope) {
-      return null;
-    }
-    const conf = NestedResourceTabsConfiguration.get(scope.resource_type);
-    return conf
-      .map((conf) => conf.children)
-      .flat()
-      .find((child) => child.key === tab)?.component;
-  }, [scope]);
-
   const resourceRef = useMemo(
     () => ({
       offering_uuid: resource.offering_uuid,
@@ -139,11 +129,11 @@ export const ResourceDetailsView: FC<any> = ({
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   return (
     <>
-      {scope && TabsComponent ? (
+      {scope && tabSpec ? (
         <>
           <ShortResourceHeader resource={resource} components={components} />
           <div className="container-xxl py-10">
-            <TabsComponent resource={scope} />
+            <tabSpec.component resource={scope} />
           </div>
         </>
       ) : (

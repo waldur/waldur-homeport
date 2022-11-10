@@ -10,11 +10,13 @@ import {
   getResource,
 } from '@waldur/marketplace/common/api';
 import { useTitle } from '@waldur/navigation/title';
+import { NestedResourceTabsConfiguration } from '@waldur/resource/tabs/NestedResourceTabsConfiguration';
 
 import { ResourceDetailsView } from './ResourceDetailsView';
 
 export const ResourceDetailsPage: FunctionComponent<{}> = () => {
   const {
+    state,
     params: { resource_uuid, tab },
   } = useCurrentStateAndParams();
 
@@ -31,13 +33,24 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
       const components = await getProviderOffering(resource.offering_uuid, {
         signal,
       }).then((offering) => offering.components);
-      return { resource, scope, components };
+
+      const tabSpec =
+        tab && scope
+          ? NestedResourceTabsConfiguration.get(scope.resource_type)
+              .map((conf) => conf.children)
+              .flat()
+              .find((child) => child.key === tab)
+          : null;
+
+      return { resource, scope, components, tabSpec };
     },
   );
 
   useTitle(
     result.data
-      ? result.data.resource.category_title
+      ? result.data.tabSpec
+        ? result.data.tabSpec.title
+        : result.data.resource.category_title
       : translate('Resource details'),
   );
 
@@ -59,7 +72,7 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
   return (
     <ResourceDetailsView
       {...result.data}
-      tab={tab}
+      state={state}
       reInitResource={() => result.refetch()}
     />
   );
