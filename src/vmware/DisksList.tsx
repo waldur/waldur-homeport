@@ -3,9 +3,9 @@ import { FunctionComponent } from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
-import { ResourceName } from '@waldur/resource/ResourceName';
+import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
+import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { CreateDiskAction } from './actions/CreateDiskAction';
@@ -17,7 +17,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => <ResourceName resource={row} />,
+          render: ({ row }) => <>{row.name}</>,
           orderField: 'name',
         },
         {
@@ -33,14 +33,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('State'),
           render: ({ row }) => <ResourceState resource={row} />,
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => <ResourceRowActions resource={row} />,
-        },
       ]}
       verboseName={translate('disks')}
       hasQuery={false}
       actions={<CreateDiskAction resource={props.resource} />}
+      expandableRow={({ row }) => <ResourceSummary resource={row} />}
+      hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
     />
   );
 };

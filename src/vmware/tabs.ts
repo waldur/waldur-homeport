@@ -1,21 +1,24 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
-import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
+import { NestedResourceTabsConfiguration } from '@waldur/resource/tabs/NestedResourceTabsConfiguration';
 
 const DisksList = lazyComponent(() => import('./DisksList'), 'DisksList');
 const PortsList = lazyComponent(() => import('./PortsList'), 'PortsList');
 
-ResourceTabsConfiguration.register('VMware.VirtualMachine', () => [
+NestedResourceTabsConfiguration.register('VMware.VirtualMachine', () => [
   {
-    key: 'disks',
-    title: translate('Disks'),
-    component: DisksList,
+    title: translate('Details'),
+    children: [
+      {
+        key: 'disks',
+        title: translate('Disks'),
+        component: DisksList,
+      },
+      {
+        key: 'ports',
+        title: translate('Network adapters'),
+        component: PortsList,
+      },
+    ],
   },
-  {
-    key: 'ports',
-    title: translate('Network adapters'),
-    component: PortsList,
-  },
-  ...getDefaultResourceTabs(),
 ]);
