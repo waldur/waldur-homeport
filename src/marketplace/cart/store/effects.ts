@@ -8,6 +8,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 
+import { fixURL } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { CustomerCreateFormData } from '@waldur/customer/create/types';
@@ -52,7 +53,7 @@ const formatItem = (item) => ({
 });
 
 const formatItemToCreate = (item) => ({
-  offering: item.offering.url,
+  offering: fixURL(`/marketplace-public-offerings/${item.offering.uuid}/`),
   ...formatItem(item),
 });
 
