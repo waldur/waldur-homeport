@@ -26,11 +26,8 @@ const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('Network name'),
           render: ({ row }) => row.network_name || 'N/A',
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => <ResourceRowActions resource={row} />,
-        },
       ]}
+      hoverableRow={({ row }) => <ResourceRowActions resource={row} />}
       expandableRow={ExpandablePortRow}
       verboseName={translate('ports')}
     />
