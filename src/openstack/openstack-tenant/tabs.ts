@@ -27,8 +27,48 @@ const TenantRoutersList = lazyComponent(
   () => import('./TenantRoutersList'),
   'TenantRoutersList',
 );
+const TenantFlavorsList = lazyComponent(
+  () => import('./TenantFlavorsList'),
+  'TenantFlavorsList',
+);
+const TenantServerGroupsList = lazyComponent(
+  () => import('./TenantServerGroupsList'),
+  'TenantServerGroupsList',
+);
+const TenantInstancesList = lazyComponent(
+  () => import('./TenantInstancesList'),
+  'TenantInstancesList',
+);
+const TenantVolumesList = lazyComponent(
+  () => import('../openstack-volume/TenantVolumesList'),
+  'TenantVolumesList',
+);
+const TenantSnapshotsList = lazyComponent(
+  () => import('../openstack-snapshot/TenantSnapshotsList'),
+  'TenantSnapshotsList',
+);
 
 NestedResourceTabsConfiguration.register('OpenStack.Tenant', () => [
+  {
+    title: translate('Compute'),
+    children: [
+      {
+        key: 'instances',
+        title: translate('Instances'),
+        component: TenantInstancesList,
+      },
+      {
+        key: 'flavors',
+        title: translate('Flavors'),
+        component: TenantFlavorsList,
+      },
+      {
+        key: 'server-groups',
+        title: translate('Server groups'),
+        component: TenantServerGroupsList,
+      },
+    ],
+  },
   {
     title: translate('Networking'),
     children: [
@@ -65,6 +105,21 @@ NestedResourceTabsConfiguration.register('OpenStack.Tenant', () => [
         key: 'ports',
         title: translate('Ports'),
         component: TenantPortsList,
+      },
+    ],
+  },
+  {
+    title: translate('Storage'),
+    children: [
+      {
+        key: 'volumes',
+        title: translate('Volumes'),
+        component: TenantVolumesList,
+      },
+      {
+        key: 'snapshots',
+        title: translate('Snapshots'),
+        component: TenantSnapshotsList,
       },
     ],
   },
