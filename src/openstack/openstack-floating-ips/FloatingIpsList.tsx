@@ -3,9 +3,9 @@ import { ButtonGroup } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
-import { ResourceName } from '@waldur/resource/ResourceName';
+import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
+import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { INSTANCE_TYPE } from '../constants';
@@ -19,7 +19,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={[
         {
           title: translate('Floating IP'),
-          render: ({ row }) => <ResourceName resource={row} />,
+          render: ({ row }) => <>{row.name}</>,
         },
         {
           title: translate('State'),
@@ -44,10 +44,6 @@ const TableComponent: FunctionComponent<any> = (props) => {
             );
           },
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => <ResourceRowActions resource={row} />,
-        },
       ]}
       verboseName={translate('floating IPs')}
       actions={
@@ -56,6 +52,8 @@ const TableComponent: FunctionComponent<any> = (props) => {
           <CreateFloatingIpAction resource={props.resource} />
         </ButtonGroup>
       }
+      hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
+      expandableRow={({ row }) => <ResourceSummary resource={row} />}
     />
   );
 };

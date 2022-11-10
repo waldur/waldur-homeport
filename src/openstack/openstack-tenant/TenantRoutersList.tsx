@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
+import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { SetRoutersButton } from './SetRoutersButton';
@@ -14,7 +14,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => <ResourceName resource={row} />,
+          render: ({ row }) => <>{row.name}</>,
         },
         {
           title: translate('Fixed IPs'),
@@ -24,12 +24,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('State'),
           render: ({ row }) => <ResourceState resource={row} />,
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => <SetRoutersButton router={row} />,
-        },
       ]}
       verboseName={translate('routers')}
+      hoverableRow={({ row }) => <SetRoutersButton router={row} />}
+      expandableRow={({ row }) => <ResourceSummary resource={row} />}
     />
   );
 };
