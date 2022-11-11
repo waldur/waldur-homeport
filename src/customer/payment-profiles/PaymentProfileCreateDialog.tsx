@@ -50,6 +50,7 @@ const PaymentProfileCreate = (props) => {
             label={translate('Name')}
             required={true}
             validate={required}
+            placeholder="e.g: Daniel"
             maxLength={150}
           />
 
