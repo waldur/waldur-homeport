@@ -26,7 +26,7 @@ export const useChangeLimits = ({ resource }) => {
 
 export const ChangeLimitsAction = ({ resource, ...rest }) => {
   const buttonProps = useChangeLimits({ resource });
-  return resource.is_limit_based ? (
+  return resource.plan_uuid && resource.is_limit_based ? (
     <ActionItem {...buttonProps} {...rest} />
   ) : null;
 };
