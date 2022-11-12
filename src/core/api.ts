@@ -7,7 +7,7 @@ import Axios, {
 
 import { ENV } from '@waldur/configs/default';
 
-export const fixURL = (endpoint: string) =>
+const fixURL = (endpoint: string) =>
   endpoint.startsWith('http') ? endpoint : `${ENV.apiEndpoint}api${endpoint}`;
 
 export const parseResultCount = (response: AxiosResponse): number =>
