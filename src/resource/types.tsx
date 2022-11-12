@@ -47,6 +47,7 @@ export interface Resource extends BaseResource {
 }
 
 export interface Volume extends Resource {
+  type_name?: string;
   size: number;
   bootable: boolean;
   instance?: string;

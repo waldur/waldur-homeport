@@ -49,16 +49,14 @@ const ResourceWarning = (props: ResourceNameProps) =>
     </Tip>
   ) : null;
 
-// TODO: remove extra check after resources list is migrated to ReactJS
-export const ResourceName = (props: ResourceNameProps) =>
-  props.resource ? (
-    <span>
-      <ResourceLink
-        uuid={props.resource.uuid}
-        type={props.resource.resource_type}
-        project={props.resource.project_uuid}
-        label={<ResourceIcon resource={props.resource} />}
-      />
-      <ResourceWarning resource={props.resource} />
-    </span>
-  ) : null;
+export const ResourceName = (props: ResourceNameProps) => (
+  <>
+    <ResourceLink
+      uuid={props.resource.uuid}
+      type={props.resource.resource_type}
+      project={props.resource.project_uuid}
+      label={<ResourceIcon resource={props.resource} />}
+    />
+    <ResourceWarning resource={props.resource} />
+  </>
+);

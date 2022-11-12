@@ -2,9 +2,10 @@ import { FunctionComponent } from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
+import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
+import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
 
@@ -39,13 +40,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('State'),
           render: ({ row }) => <ResourceState resource={row} />,
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => <ResourceRowActions resource={row} />,
-        },
       ]}
       actions={<AttachVolumeAction resource={props.resource} />}
       verboseName={translate('volumes')}
+      hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
+      expandableRow={({ row }) => <ResourceSummary resource={row} />}
     />
   );
 };
