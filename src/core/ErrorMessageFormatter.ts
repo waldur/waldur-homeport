@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
@@ -6,7 +8,7 @@ export const formatErrorObject = (error) =>
     .map((key) => `${key}: ${error[key]}`)
     .join(', ');
 
-export const format = (response, parseResponse?) => {
+export const format = (error, parseResponse?) => {
   /*
   Empty response or status code -1 denotes network error.
   Usually it is caused by one of the following reasons:
@@ -21,35 +23,35 @@ export const format = (response, parseResponse?) => {
   See also: https://fetch.spec.whatwg.org/#concept-filtered-response
   */
 
-  if (response && response.isAxiosError) {
-    response = response.response;
+  if (axios.isAxiosError(error)) {
+    error = error.response;
   }
 
-  if (!response || response.status === -1) {
+  if (!error || error.status === -1) {
     return translate(
       'Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues.',
       { apiEndpoint: ENV.apiEndpoint },
     );
   }
 
-  if (!response.hasOwnProperty('status')) {
-    return response;
+  if (!error.hasOwnProperty('status')) {
+    return error;
   }
 
-  let message = `${response.status}: ${response.statusText}.`;
+  let message = `${error.status}: ${error.statusText}.`;
 
-  if (response.data) {
+  if (error.data) {
     if (parseResponse) {
-      message += ' ' + parseResponse(response, message);
+      message += ' ' + parseResponse(error, message);
     }
-    if (response.data.non_field_errors) {
-      message += ' ' + response.data.non_field_errors;
-    } else if (response.data.detail) {
-      message += ' ' + response.data.detail;
-    } else if (Array.isArray(response.data)) {
+    if (error.data.non_field_errors) {
+      message += ' ' + error.data.non_field_errors;
+    } else if (error.data.detail) {
+      message += ' ' + error.data.detail;
+    } else if (Array.isArray(error.data)) {
       message +=
         ' ' +
-        response.data
+        error.data
           .map((item) => {
             if (typeof item === 'object') {
               return formatErrorObject(item);
@@ -58,8 +60,8 @@ export const format = (response, parseResponse?) => {
             }
           })
           .join('. ');
-    } else if (typeof response.data === 'object') {
-      message += ' ' + formatErrorObject(response.data);
+    } else if (typeof error.data === 'object') {
+      message += ' ' + formatErrorObject(error.data);
     }
   }
 

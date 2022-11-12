@@ -31,8 +31,8 @@ export function loadProject(transition: Transition) {
       project.permissions = permissions;
       store.dispatch(setCurrentCustomer(customer));
       store.dispatch(setCurrentProject(project));
-    } catch (response) {
-      if (response.status === 404) {
+    } catch (error) {
+      if (error.response.status === 404) {
         router.stateService.go('errorPage.notFound');
       }
     }

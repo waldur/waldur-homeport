@@ -31,8 +31,8 @@ export function loadResource(trans: Transition) {
         return { customer, project };
       });
     })
-    .catch((response) => {
-      if (response.status === 404) {
+    .catch((error) => {
+      if (error.response.status === 404) {
         router.stateService.go('errorPage.notFound');
       }
     });

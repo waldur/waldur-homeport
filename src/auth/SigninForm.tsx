@@ -23,7 +23,7 @@ const signin = async (values: FormData) => {
     await AuthService.signin(values.username, values.password);
     await AuthService.redirectOnSuccess();
   } catch (error) {
-    throw new SubmissionError({ _error: format(error.response) });
+    throw new SubmissionError({ _error: format(error) });
   }
 };
 

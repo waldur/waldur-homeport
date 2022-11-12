@@ -34,8 +34,8 @@ export async function loadUser() {
       const user = await UsersService.get(router.globals.params.uuid);
       store.dispatch(setCurrentUser(user));
       store.dispatch(setCurrentWorkspace(USER_WORKSPACE));
-    } catch (response) {
-      if (response.status === 404) {
+    } catch (error) {
+      if (error.response.status === 404) {
         router.stateService.go('errorPage.notFound');
       }
     }

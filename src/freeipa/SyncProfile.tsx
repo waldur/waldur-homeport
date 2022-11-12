@@ -31,12 +31,9 @@ export const SyncProfile: FunctionComponent<{
         );
       }
       setLoading(false);
-    } catch (response) {
+    } catch (error) {
       dispatch(
-        showErrorResponse(
-          response,
-          translate('Unable to sync FreeIPA profile.'),
-        ),
+        showErrorResponse(error, translate('Unable to sync FreeIPA profile.')),
       );
       setLoading(false);
     }
