@@ -1,3 +1,4 @@
+import { UISref } from '@uirouter/react';
 import { FC, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
@@ -227,15 +228,33 @@ export const ResourceDetailsView: FC<any> = ({
                   </Card>
                 )}
                 <Card className="mb-7">
+                  <Card.Header>
+                    <Card.Title>
+                      <h3 className="mb-5">{translate('Activity')}</h3>
+                    </Card.Title>
+                    <div className="card-toolbar">
+                      <UISref to={state.name} params={{ tab: 'events' }}>
+                        <a className="btn btn-link">{translate('See all')}</a>
+                      </UISref>
+                    </div>
+                  </Card.Header>
                   <Card.Body>
-                    <h3 className="mb-5">{translate('Activity')}</h3>
                     <ResourceTimeline resource={resource} />
                   </Card.Body>
                 </Card>
                 {ENV.plugins.WALDUR_SUPPORT && (
                   <Card className="mb-7">
+                    <Card.Header>
+                      <Card.Title>
+                        <h3 className="mb-5">{translate('Tickets')}</h3>
+                      </Card.Title>
+                      <div className="card-toolbar">
+                        <UISref to={state.name} params={{ tab: 'issues' }}>
+                          <a className="btn btn-link">{translate('See all')}</a>
+                        </UISref>
+                      </div>
+                    </Card.Header>
                     <Card.Body>
-                      <h3 className="mb-5">{translate('Tickets')}</h3>
                       <ResourceIssues resource={resource} />
                     </Card.Body>
                   </Card>

@@ -225,7 +225,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
-#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/InvoiceActions.tsx
@@ -2965,6 +2964,7 @@ msgstr ""
 msgid "Event types"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
 msgstr ""
@@ -4108,6 +4108,7 @@ msgstr ""
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
 #: src/issues/routes.ts
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/ResourceTabs.tsx
 #: src/project/ProjectActions.tsx
 #: src/project/routes.ts
@@ -8173,6 +8174,7 @@ msgid "Security incident type: {type}"
 msgstr ""
 
 #: src/issues/list/IssuesShortList.tsx
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/marketplace/resources/details/ResourcesSection.tsx
 msgid "See all"
 msgstr ""

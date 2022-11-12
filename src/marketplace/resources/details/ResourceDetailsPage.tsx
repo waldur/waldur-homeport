@@ -11,6 +11,8 @@ import {
 } from '@waldur/marketplace/common/api';
 import { useTitle } from '@waldur/navigation/title';
 import { NestedResourceTabsConfiguration } from '@waldur/resource/tabs/NestedResourceTabsConfiguration';
+import { ResourceEvents } from '@waldur/resource/tabs/ResourceEvents';
+import { ResourceIssuesList } from '@waldur/resource/tabs/ResourceIssuesList';
 
 import { ResourceDetailsView } from './ResourceDetailsView';
 
@@ -34,13 +36,24 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
         signal,
       }).then((offering) => offering.components);
 
+      const tabSources = [
+        ...NestedResourceTabsConfiguration.get(scope.resource_type)
+          .map((conf) => conf.children)
+          .flat(),
+        {
+          key: 'events',
+          title: translate('Events'),
+          component: ResourceEvents,
+        },
+        {
+          key: 'issues',
+          title: translate('Issues'),
+          component: ResourceIssuesList,
+        },
+      ];
+
       const tabSpec =
-        tab && scope
-          ? NestedResourceTabsConfiguration.get(scope.resource_type)
-              .map((conf) => conf.children)
-              .flat()
-              .find((child) => child.key === tab)
-          : null;
+        tab && scope ? tabSources.find((child) => child.key === tab) : null;
 
       return { resource, scope, components, tabSpec };
     },
