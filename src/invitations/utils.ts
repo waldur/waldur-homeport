@@ -72,12 +72,12 @@ export function acceptInvitation(token, replaceEmail) {
       // TODO: Invalidate customers list
     })
     .catch((error) => {
-      if (error.response.status === 404) {
+      if (error.response?.status === 404) {
         store.dispatch(showError(translate('Invitation is not found.')));
-      } else if (error.response.status === 400) {
+      } else if (error.response?.status === 400) {
         clearInvitationToken();
         store.dispatch(showError(translate('Invitation is not valid.')));
-      } else if (error.response.status === 500) {
+      } else if (error.response?.status === 500) {
         store.dispatch(
           showError(
             translate(
@@ -97,9 +97,9 @@ export function submitGroupRequest(token) {
       );
     })
     .catch((error) => {
-      if (error.response.status === 404 || error.response.status === 400) {
+      if (error.response?.status === 404 || error.response?.status === 400) {
         store.dispatch(showError(translate('Request is not valid.')));
-      } else if (error.response.status === 500) {
+      } else if (error.response?.status === 500) {
         store.dispatch(
           showError(
             translate(

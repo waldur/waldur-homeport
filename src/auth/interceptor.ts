@@ -28,7 +28,7 @@ Axios.interceptors.response.use(
   function invalidTokenInterceptor(error) {
     if (
       error.response &&
-      error.response.status === 401 &&
+      error.response?.status === 401 &&
       error.config.url !== ENV.apiEndpoint + 'api-auth/password/' &&
       !error.config.hasOwnProperty('__skipLogout__')
     ) {

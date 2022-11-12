@@ -35,7 +35,7 @@ export async function loadUser() {
       store.dispatch(setCurrentUser(user));
       store.dispatch(setCurrentWorkspace(USER_WORKSPACE));
     } catch (error) {
-      if (error.response.status === 404) {
+      if (error.response?.status === 404) {
         router.stateService.go('errorPage.notFound');
       }
     }

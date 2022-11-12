@@ -13,7 +13,7 @@ export async function loadConfig() {
   } catch (error) {
     if (!error) {
       throw new Error(`Unable to fetch client configuration file.`);
-    } else if (error.response.status === 404) {
+    } else if (error.response?.status === 404) {
       // fallback to default configuration
       frontendSettings = {
         apiEndpoint: 'http://localhost:8080/',
@@ -40,7 +40,7 @@ export async function loadConfig() {
       throw new Error(
         `Unfortunately, connection to server has failed. Please check if you can connect to ${frontendSettings.apiEndpoint} from your browser and contact support if the error continues.`,
       );
-    } else if (error.response.status >= 400) {
+    } else if (error.response?.status >= 400) {
       throw new Error(
         `Unable to fetch server configuration. Error message: ${error.statusText}`,
       );

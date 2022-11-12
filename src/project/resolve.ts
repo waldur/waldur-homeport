@@ -32,7 +32,7 @@ export function loadProject(transition: Transition) {
       store.dispatch(setCurrentCustomer(customer));
       store.dispatch(setCurrentProject(project));
     } catch (error) {
-      if (error.response.status === 404) {
+      if (error.response?.status === 404) {
         router.stateService.go('errorPage.notFound');
       }
     }

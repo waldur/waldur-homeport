@@ -32,7 +32,7 @@ export function loadResource(trans: Transition) {
       });
     })
     .catch((error) => {
-      if (error.response.status === 404) {
+      if (error.response?.status === 404) {
         router.stateService.go('errorPage.notFound');
       }
     });
