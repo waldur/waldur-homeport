@@ -1,10 +1,12 @@
 import { useDispatch } from 'react-redux';
 
 import { getAll } from '@waldur/core/api';
+import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { attachVolume } from '@waldur/openstack/api';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { Volume } from '@waldur/resource/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 const getAttachableVolumes = (instanceId, query) =>
@@ -19,6 +21,11 @@ const getAttachableVolumes = (instanceId, query) =>
     options,
   }));
 
+const getOptionLabel = (option: Volume) =>
+  `${option.name} (${formatFilesize(option.size)}, ${
+    option.type_name || 'default type'
+  })`;
+
 export const AttachVolumeDialog = ({ resolve: { resource } }) => {
   const dispatch = useDispatch();
   return (
@@ -30,6 +37,7 @@ export const AttachVolumeDialog = ({ resolve: { resource } }) => {
           label: translate('Volume'),
           type: 'async_select',
           loadOptions: (query) => getAttachableVolumes(resource.uuid, query),
+          getOptionLabel,
         },
       ]}
       submitForm={async (formData) => {
