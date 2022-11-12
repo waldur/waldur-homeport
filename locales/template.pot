@@ -2951,6 +2951,10 @@ msgstr ""
 msgid "Event group"
 msgstr ""
 
+#: src/events/ExpandableEventDetailsTable.tsx
+msgid "Event message"
+msgstr ""
+
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 msgid "Event type"

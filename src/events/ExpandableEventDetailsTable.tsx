@@ -40,6 +40,10 @@ export const ExpandableEventDetailsTable: FunctionComponent<ExpandableEventDetai
         value={event.event_type}
       />
       <ExpandableEventField
+        label={translate('Event message')}
+        value={event.message}
+      />
+      <ExpandableEventField
         label={translate('Error message')}
         value={event.context.error_message}
       />
