@@ -258,6 +258,7 @@ const mergeProps = (
       handler: () =>
         router.stateService.go('marketplace-offering-update', {
           offering_uuid: ownProps.offering.uuid,
+          uuid: ownProps.offering.customer_uuid,
         }),
       visible:
         !ownProps.isPublic &&
@@ -276,6 +277,7 @@ const mergeProps = (
       handler: () =>
         router.stateService.go('marketplace-offering-images', {
           offering_uuid: ownProps.offering.uuid,
+          uuid: ownProps.offering.customer_uuid,
         }),
       visible:
         !ownProps.isPublic &&

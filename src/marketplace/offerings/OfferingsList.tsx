@@ -7,7 +7,6 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { BackendIdTip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
@@ -32,16 +31,9 @@ import { Offering } from '../types';
 
 import { OfferingImportDialog } from './actions/OfferingImportDialog';
 import { OfferingItemActions } from './actions/OfferingItemActions';
-import { OfferingDetailsLink } from './details/OfferingDetailsLink';
+import { OfferingNameColumn } from './OfferingNameColumn';
 import { OfferingsListTablePlaceholder } from './OfferingsListTablePlaceholder';
 import { OfferingStateCell } from './OfferingStateCell';
-
-const OfferingNameColumn = ({ row }) => (
-  <OfferingDetailsLink offering_uuid={row.uuid}>
-    {row.name}
-    <BackendIdTip backendId={row.backend_id} />
-  </OfferingDetailsLink>
-);
 
 export const TableComponent: FunctionComponent<any> = (props) => {
   const router = useRouter();
