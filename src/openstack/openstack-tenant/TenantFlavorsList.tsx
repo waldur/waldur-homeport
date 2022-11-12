@@ -27,7 +27,7 @@ const TableOptions = {
   table: 'openstacktenant-flavors',
   fetchData: createFetcher('openstacktenant-flavors'),
   mapPropsToFilter: (props) => ({
-    service_settings_uuid: props.resource.child_settings,
+    settings_uuid: props.resource.child_settings,
   }),
 };
 
