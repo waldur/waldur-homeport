@@ -6,13 +6,13 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 
-import { getProviderOffering, getCategory, getPlugins } from '../common/api';
+import { getPublicOffering, getCategory, getPlugins } from '../common/api';
 
 import { OfferingDetails } from './OfferingDetails';
 import { getTabs } from './OfferingTabs';
 
 async function loadData(offering_uuid: string) {
-  const offering = await getProviderOffering(offering_uuid);
+  const offering = await getPublicOffering(offering_uuid);
   const category = await getCategory(offering.category_uuid);
   const sections = category.sections;
   const tabs = getTabs({ offering, sections });
