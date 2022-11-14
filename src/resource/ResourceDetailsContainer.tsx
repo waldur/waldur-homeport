@@ -54,10 +54,14 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
 
   useEffect(() => {
     if (resource?.marketplace_resource_uuid) {
-      router.stateService.go('marketplace-project-resource-details', {
-        resource_uuid: resource.marketplace_resource_uuid,
-        uuid: resource.project_uuid,
-      });
+      router.stateService.go(
+        'marketplace-project-resource-details',
+        {
+          resource_uuid: resource.marketplace_resource_uuid,
+          uuid: resource.project_uuid,
+        },
+        { location: 'replace' },
+      );
     }
   }, [resource, router.stateService]);
 
