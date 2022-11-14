@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
@@ -23,7 +21,7 @@ export const format = (error, parseResponse?) => {
   See also: https://fetch.spec.whatwg.org/#concept-filtered-response
   */
 
-  if (axios.isAxiosError(error)) {
+  if (error && error.isAxiosError) {
     error = error.response;
   }
 
