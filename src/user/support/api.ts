@@ -3,7 +3,6 @@ import { patch, post, sendForm } from '@waldur/core/api';
 
 export const updateUser = (user) => {
   const data = {
-    full_name: user.first_name + ' ' + user.last_name,
     native_name: user.native_name,
     first_name: user.first_name,
     last_name: user.last_name,
