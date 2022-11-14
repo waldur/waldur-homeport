@@ -6,6 +6,7 @@ import {
   getCustomer,
   getProject,
   getUser,
+  isOwnerOrStaff as isOwnerOrStaffSelector,
 } from '@waldur/workspace/selectors';
 
 import { MenuAccordion } from './MenuAccordion';
@@ -17,13 +18,14 @@ export const ManagementMenu = () => {
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
   const user = useSelector(getUser);
+  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   return (
     <MenuAccordion
       title={translate('Management')}
       itemId="management-menu"
       iconPath={Icon}
     >
-      {customer ? (
+      {!isOwnerOrStaff ? null : customer ? (
         <MenuItem
           title={translate('Organization')}
           state="organization.dashboard"
