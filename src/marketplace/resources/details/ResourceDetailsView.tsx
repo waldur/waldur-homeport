@@ -15,7 +15,6 @@ import {
   TENANT_TYPE,
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
-import { NestedResourceTabsConfiguration } from '@waldur/resource/tabs/NestedResourceTabsConfiguration';
 import '@waldur/marketplace/offerings/details/PublicOfferingDetailsHero.scss';
 
 import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer';
@@ -77,39 +76,11 @@ export const ResourceDetailsView: FC<any> = ({
   components,
   reInitResource,
   state,
+  tabs,
   tabSpec,
 }) => {
   useFullPage();
 
-  const tabs = useMemo(
-    () =>
-      scope
-        ? [
-            {
-              title: translate('Dashboard'),
-              to: state.name,
-              params: {
-                tab: '',
-              },
-            },
-            ...NestedResourceTabsConfiguration.get(scope.resource_type)
-              .map((parentTab) => ({
-                title: parentTab.title,
-                children: parentTab.children
-                  .map((childTab) => ({
-                    title: childTab.title,
-                    to: state.name,
-                    params: {
-                      tab: childTab.key,
-                    },
-                  }))
-                  .sort((t1, t2) => t1.title.localeCompare(t2.title)),
-              }))
-              .sort((t1, t2) => t1.title.localeCompare(t2.title)),
-          ]
-        : [],
-    [scope],
-  );
   useExtraTabs(tabs);
 
   const MainComponent =
@@ -130,11 +101,11 @@ export const ResourceDetailsView: FC<any> = ({
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   return (
     <>
-      {scope && tabSpec ? (
+      {tabSpec ? (
         <>
           <ShortResourceHeader resource={resource} components={components} />
           <div className="container-xxl py-10">
-            <tabSpec.component resource={scope} />
+            <tabSpec.component resource={scope || resource} />
           </div>
         </>
       ) : (
