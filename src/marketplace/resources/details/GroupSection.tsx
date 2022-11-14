@@ -15,14 +15,13 @@ export const GroupSection: FC<{ title: string; summary?: string }> = ({
           <img src={openstackIcon} width={25} />
         </td>
         <td>
-          <td onClick={() => setToggle(!toggle)}>
+          <td onClick={() => setToggle(!toggle)} className="cursor-pointer">
             <strong>{title}</strong>{' '}
             <i
               className={toggle ? 'fa fa-angle-down' : 'fa fa-angle-right'}
             ></i>
           </td>
         </td>
-        <td></td>
         <td>{summary}</td>
         <td></td>
       </tr>

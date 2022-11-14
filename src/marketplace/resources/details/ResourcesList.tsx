@@ -40,9 +40,9 @@ export const ResourcesList: FC<ResourcesListProps> = ({
               <td></td>
               <td className="bg-light">{row.name}</td>
               <td className="bg-light">
-                {row.state && <ResourceStateIndicator state={row.state} />}
+                {row.state && <ResourceStateIndicator state={row.state} />}{' '}
+                {row.summary}
               </td>
-              <td className="bg-light">{row.summary}</td>
               <td className="bg-light">
                 {row.marketplace_resource_uuid && <ResourceLink row={row} />}
               </td>

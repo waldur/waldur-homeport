@@ -43,16 +43,13 @@ export const TenantDetails = ({ resource }) => {
       .data;
     return { tenant, counters };
   });
+
   const tabs = useMemo(
     () =>
       resource && value
         ? [
             {
               title: translate('Dashboard'),
-              to: 'marketplace-project-resource-details',
-              params: {
-                resource_uuid: resource.uuid,
-              },
             },
             {
               title: translate('Compute'),
@@ -61,30 +58,18 @@ export const TenantDetails = ({ resource }) => {
                   title: translate('Instances ({count})', {
                     count: value.counters.instances,
                   }),
-                  to: 'marketplace-project-resource-details',
-                  params: {
-                    tab: 'openstack-tenant-instances',
-                  },
                   component: InstancesSection,
                 },
                 {
                   title: translate('Flavors ({count})', {
                     count: value.counters.flavors,
                   }),
-                  to: 'marketplace-project-resource-details',
-                  params: {
-                    tab: 'openstack-tenant-flavors',
-                  },
                   component: FlavorsSection,
                 },
                 {
                   title: translate('Server groups ({count})', {
                     count: value.counters.server_groups,
                   }),
-                  to: 'marketplace-project-resource-details',
-                  params: {
-                    tab: 'openstack-tenant-server-groups',
-                  },
                   component: ServerGroupsSection,
                 },
               ],
@@ -96,60 +81,36 @@ export const TenantDetails = ({ resource }) => {
                   title: translate('Routers ({count})', {
                     count: value.counters.routers,
                   }),
-                  to: 'marketplace-project-resource-details',
-                  params: {
-                    tab: 'openstack-tenant-routers',
-                  },
                   component: RoutersSection,
                 },
                 {
                   title: translate('Networks ({count})', {
                     count: value.counters.networks,
                   }),
-                  to: 'marketplace-project-resource-details',
-                  params: {
-                    tab: 'openstack-tenant-networks',
-                  },
                   component: NetworksSection,
                 },
                 {
                   title: translate('Subnets ({count})', {
                     count: value.counters.subnets,
                   }),
-                  to: 'marketplace-project-resource-details',
-                  params: {
-                    tab: 'openstack-tenant-subnets',
-                  },
                   component: SubnetsSection,
                 },
                 {
                   title: translate('Security groups ({count})', {
                     count: value.counters.security_groups,
                   }),
-                  to: 'marketplace-project-resource-details',
-                  params: {
-                    tab: 'openstack-tenant-security-groups',
-                  },
                   component: SecurityGroupsSection,
                 },
                 {
                   title: translate('Floating IPs ({count})', {
                     count: value.counters.floating_ips,
                   }),
-                  to: 'marketplace-project-resource-details',
-                  params: {
-                    tab: 'openstack-tenant-floating-ips',
-                  },
                   component: FloatingIPsSection,
                 },
                 {
                   title: translate('Ports ({count})', {
                     count: value.counters.ports,
                   }),
-                  to: 'marketplace-project-resource-details',
-                  params: {
-                    tab: 'openstack-tenant-ports',
-                  },
                   component: PortsSection,
                 },
               ],
@@ -161,20 +122,12 @@ export const TenantDetails = ({ resource }) => {
                   title: translate('Volumes ({count})', {
                     count: value.counters.volumes,
                   }),
-                  to: 'marketplace-project-resource-details',
-                  params: {
-                    tab: 'openstack-tenant-volumes',
-                  },
                   component: VolumesSection,
                 },
                 {
                   title: translate('Snapshots ({count})', {
                     count: value.counters.snapshots,
                   }),
-                  to: 'marketplace-project-resource-details',
-                  params: {
-                    tab: 'openstack-tenant-snapshots',
-                  },
                   component: SnapshotsSection,
                 },
               ],
@@ -194,7 +147,6 @@ export const TenantDetails = ({ resource }) => {
         <tr>
           <th style={{ width: 10 }}>{/* Icon column */}</th>
           <th>{translate('Component')}</th>
-          <th>{translate('State')}</th>
           <th>{translate('Summary')}</th>
           <th>{translate('Details')}</th>
         </tr>
