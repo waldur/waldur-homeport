@@ -40,7 +40,9 @@ export const ThemeSelector: FunctionComponent = () => {
       }
       // For the first time invoke of dark/light theme
       if (newTheme === 'dark') {
-        import('@waldur/metronic/assets/sass/style.dark.scss').then(() => {
+        import(
+          /* webpackChunkName: "dark" */ '@waldur/metronic/assets/sass/style.dark.scss'
+        ).then(() => {
           const newThemes = {
             ...themes,
             [newTheme]: getThemeLinkTag(true)?.getAttribute('href'),
@@ -49,7 +51,9 @@ export const ThemeSelector: FunctionComponent = () => {
           removeAnotherTheme(newTheme);
         });
       } else if (newTheme === 'light') {
-        import('@waldur/metronic/assets/sass/style.scss').then(() => {
+        import(
+          /* webpackChunkName: "light" */ '@waldur/metronic/assets/sass/style.scss'
+        ).then(() => {
           const newThemes = {
             ...themes,
             [newTheme]: getThemeLinkTag()?.getAttribute('href'),

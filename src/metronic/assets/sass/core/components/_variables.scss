@@ -714,8 +714,8 @@ $input-font-size: $input-btn-font-size !default;
 $input-font-weight: $font-weight-bold !default;
 $input-line-height: $input-btn-line-height !default;
 
-$input-solid-bg: #f6faf7 !default; // Custom variable
-$input-solid-bg-focus: darken(#f6faf7, 2%) !default; // Custom variable
+$input-solid-bg: $light !default; // Custom variable
+$input-solid-bg-focus: $light-active !default; // Custom variable
 $input-solid-placeholder-color: $input-placeholder-color !default; // Custom variable
 $input-solid-color: $gray-700 !default; // Custom variable
 

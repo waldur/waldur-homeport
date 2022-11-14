@@ -11,7 +11,7 @@ interface AwesomeCheckboxFieldProps extends FormField {
 
 export const AwesomeCheckboxField: FunctionComponent<AwesomeCheckboxFieldProps> =
   ({ input, label, className }) => (
-    <label
+    <div
       className={classNames(
         'form-check form-switch form-check-custom form-check-solid',
         className,
@@ -24,5 +24,5 @@ export const AwesomeCheckboxField: FunctionComponent<AwesomeCheckboxFieldProps> 
         }
       />
       <span className="form-check-label fw-bold">{label}</span>
-    </label>
+    </div>
   );
