@@ -4,16 +4,19 @@ const EVENT_ICONS = {
   resource_creation_succeeded: 'fa-check',
 };
 
+const SUFFIXES = {
+  _failed: 'fa-warning',
+  _scheduled: 'fa-spinner',
+  _succeeded: 'fa-check',
+  _requested: 'fa-first-order',
+};
+
 export const EventIcon = ({ type }) => {
-  let eventIcon = EVENT_ICONS[type];
-  if (!eventIcon && type.endsWith('_failed')) {
-    eventIcon = 'fa-warning';
-  }
-  if (!eventIcon && type.endsWith('_scheduled')) {
-    eventIcon = 'fa-spinner';
-  }
-  if (!eventIcon && type.endsWith('_succeeded')) {
-    eventIcon = 'fa-check';
+  let eventIcon: string = EVENT_ICONS[type];
+  for (const suffix in SUFFIXES) {
+    if (!eventIcon && type.endsWith(suffix)) {
+      eventIcon = SUFFIXES[suffix];
+    }
   }
   return (
     <div className="symbol-label bg-light">
