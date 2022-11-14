@@ -27,19 +27,20 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     async ({ signal }) => {
       const resource = await getResource(resource_uuid, { signal });
       let scope;
+      let tabSources = [];
       if (resource.scope) {
         scope = await get(resource.scope, { signal }).then(
           (response) => response.data,
         );
+        tabSources = NestedResourceTabsConfiguration.get(scope.resource_type)
+          .map((conf) => conf.children)
+          .flat();
       }
       const components = await getProviderOffering(resource.offering_uuid, {
         signal,
       }).then((offering) => offering.components);
 
-      const tabSources = [
-        ...NestedResourceTabsConfiguration.get(scope.resource_type)
-          .map((conf) => conf.children)
-          .flat(),
+      tabSources = tabSources.concat([
         {
           key: 'events',
           title: translate('Events'),
@@ -50,7 +51,7 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
           title: translate('Issues'),
           component: ResourceIssuesList,
         },
-      ];
+      ]);
 
       const tabSpec =
         tab && scope ? tabSources.find((child) => child.key === tab) : null;
