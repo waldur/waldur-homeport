@@ -11,13 +11,13 @@ interface OwnProps {
   className?: string;
 }
 
-const stateSelector = (state: RootState) => {
+export const offeringCategoryStateSelector = (state: RootState) => {
   const workspace = getWorkspace(state);
   return WORKSPACE_CATEGORY[workspace] || 'marketplace-category.details';
 };
 
 export const CategoryLink: React.FC<OwnProps> = (props) => {
-  const state = useSelector(stateSelector);
+  const state = useSelector(offeringCategoryStateSelector);
   return (
     <Link
       state={state}

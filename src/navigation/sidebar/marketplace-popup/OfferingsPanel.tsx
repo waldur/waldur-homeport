@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { useState, useCallback, FunctionComponent } from 'react';
 import { Col, ListGroupItem, Stack } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
@@ -8,6 +9,8 @@ import { TextWithoutFormatting } from '@waldur/core/TextWithoutFormatting';
 import { Tip } from '@waldur/core/Tooltip';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { offeringCategoryStateSelector } from '@waldur/marketplace/links/CategoryLink';
+import { offeringDetailsSelector } from '@waldur/marketplace/links/OfferingLink';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { Customer } from '@waldur/workspace/types';
 
@@ -29,10 +32,12 @@ const OfferingListItem = ({
   item,
   onClick,
   selectedItem,
+  linkState,
 }: {
   item: Offering;
   onClick;
   selectedItem: Offering;
+  linkState: string;
 }) => (
   <Tip
     label={
@@ -49,7 +54,7 @@ const OfferingListItem = ({
       })}
       onClick={() => onClick(item)}
       disabled={item.state === 'Paused'}
-      state="marketplace-offering-customer"
+      state={linkState}
       params={{ uuid: item.customer_uuid, offering_uuid: item.uuid }}
     >
       <Stack direction="horizontal" gap={4}>
@@ -86,6 +91,9 @@ export const OfferingsPanel: FunctionComponent<{
     selectOffering(offering);
   }, []);
 
+  const offeringDetailsState = useSelector(offeringDetailsSelector);
+  const offeringCategoryState = useSelector(offeringCategoryStateSelector);
+
   return (
     <Col xs={6} className="offering-listing">
       {offerings?.length > 0 ? (
@@ -96,12 +104,13 @@ export const OfferingsPanel: FunctionComponent<{
             selectItem={handleOfferingClick}
             EmptyPlaceholder={EmptyOfferingListPlaceholder}
             ItemComponent={OfferingListItem}
+            linkState={offeringDetailsState}
           />
           <div className="offerings-footer">
             <div className="text-center">
               <span data-kt-menu-dismiss="true">
                 <Link
-                  state="marketplace-category-customer"
+                  state={offeringCategoryState}
                   params={{
                     uuid: customer.uuid,
                     category_uuid: category?.uuid,

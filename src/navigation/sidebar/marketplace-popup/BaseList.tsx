@@ -8,7 +8,15 @@ export const BaseList: FunctionComponent<{
   selectItem;
   EmptyPlaceholder;
   ItemComponent;
-}> = ({ items, selectedItem, selectItem, EmptyPlaceholder, ItemComponent }) => {
+  linkState?;
+}> = ({
+  items,
+  selectedItem,
+  selectItem,
+  EmptyPlaceholder,
+  ItemComponent,
+  linkState,
+}) => {
   const scrollBarRef = useRef<Scrollbars>();
   const itemId = selectedItem?.uuid;
 
@@ -40,6 +48,7 @@ export const BaseList: FunctionComponent<{
               item={item}
               selectedItem={selectedItem}
               onClick={selectItem}
+              linkState={linkState}
             />
           ))
         )}

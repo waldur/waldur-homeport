@@ -13,7 +13,7 @@ interface OwnProps {
   className?: string;
 }
 
-const stateSelector = (state: RootState) => {
+export const offeringDetailsSelector = (state: RootState) => {
   const workspace = getWorkspace(state);
   return (
     WORKSPACE_OFFERING_DETAILS[workspace] ||
@@ -22,7 +22,7 @@ const stateSelector = (state: RootState) => {
 };
 
 export const OfferingLink: React.FC<OwnProps> = (props) => {
-  const state = useSelector(stateSelector);
+  const state = useSelector(offeringDetailsSelector);
   return (
     <Link
       state={state}
