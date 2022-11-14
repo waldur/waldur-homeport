@@ -27,7 +27,6 @@ export const BrandName: FunctionComponent = () => {
         />
       ) : (
         <>
-          <i className="fa fa-th-large"></i>{' '}
           <h3 className="mt-2" style={{ color: 'white' }}>
             {ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
           </h3>
