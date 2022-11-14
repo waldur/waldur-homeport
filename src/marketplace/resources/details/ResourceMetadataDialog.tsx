@@ -18,7 +18,7 @@ export const ResourceMetadataDialog = ({ resolve }) => {
       </Modal.Header>
       <Modal.Body>
         <ResourceSummary resource={resolve.resource}>
-          <SummaryComponent resource={resolve.scope} />
+          {resolve.scope && <SummaryComponent resource={resolve.scope} />}
         </ResourceSummary>
       </Modal.Body>
     </>
