@@ -138,6 +138,15 @@
   &[readonly]:not(.flatpickr-input) {
     background-color: $gray-200;
   }
+
+  &.form-control-solid {
+    border-color: $gray-300;
+
+    &:focus,
+    &:active {
+      border-color: $gray-400;
+    }
+  }
 }
 
 /* CHECKBOX */
