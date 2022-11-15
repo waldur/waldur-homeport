@@ -1,3 +1,4 @@
+import { UISref, useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useState } from 'react';
 import { QueryFunction } from 'react-query';
 
@@ -20,20 +21,22 @@ export const ResourcesSection: FC<ResourcesSectionProps> = ({
   canAdd,
 }) => {
   const [toggle, setToggle] = useState(false);
+  const { state } = useCurrentStateAndParams();
   return (
     <>
       <tr>
         <td></td>
-        <td onClick={() => setToggle(!toggle)}>
+        <td onClick={() => setToggle(!toggle)} className="cursor-pointer">
           {title}{' '}
           <i className={toggle ? 'fa fa-angle-down' : 'fa fa-angle-right'}></i>
         </td>
         <td></td>
-        <td></td>
         <td>
-          <a className="cursor-pointer text-dark text-decoration-underline text-hover-primary">
-            {translate('See all')}
-          </a>{' '}
+          <UISref to={state.name} params={{ tab: queryKey }}>
+            <a className="cursor-pointer text-dark text-decoration-underline text-hover-primary">
+              {translate('See all')}
+            </a>
+          </UISref>{' '}
           {canAdd && (
             <a className="cursor-pointer text-dark text-decoration-underline text-hover-primary">
               {translate('Add new')}

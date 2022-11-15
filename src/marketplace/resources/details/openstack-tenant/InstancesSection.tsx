@@ -40,7 +40,7 @@ export const InstancesSection = ({ resource, title }) => {
     <ResourcesSection
       title={title}
       loadData={loadData}
-      queryKey="instance"
+      queryKey="instances"
       canAdd={true}
     />
   );
