@@ -6,7 +6,7 @@ import {
   useRouter,
 } from '@uirouter/react';
 import classNames from 'classnames';
-import { FunctionComponent, useCallback, useState } from 'react';
+import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import { useTabs } from './useTabs';
 
@@ -35,7 +35,8 @@ export const TabsList: FunctionComponent = () => {
     () => setActiveTab(findActiveTab(tabs, router)),
     [tabs, router],
   );
-  const [activeTab, setActiveTab] = useState(() => findActiveTab(tabs, router));
+  const [activeTab, setActiveTab] = useState();
+  useEffect(updateActiveTab, [tabs, router]);
   useOnStateChanged(updateActiveTab);
 
   return (

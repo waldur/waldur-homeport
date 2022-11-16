@@ -76,7 +76,8 @@ export function connectTable(options: TableOptionsType) {
         const pageTitle = getTitle(state);
         const breadcrumbs = router.globals.$current.path
           .filter((part) => part.data?.breadcrumb)
-          .map((part) => part.data.breadcrumb());
+          .map((part) => part.data.breadcrumb())
+          .flat();
 
         return breadcrumbs.pop() || pageTitle;
       };

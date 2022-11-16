@@ -1,11 +1,15 @@
-import { UIView } from '@uirouter/react';
+import { Transition, UIView } from '@uirouter/react';
 
+import { queryClient } from '@waldur/Application';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { fetchCustomer } from '@waldur/customer/workspace/CustomerWorkspace';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
+import { router } from '@waldur/router';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
+
+import { fetchData } from './resources/details/fetchData';
 
 const SupportOfferingsContainer = lazyComponent(
   () =>
@@ -486,8 +490,34 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-public-resource-details/:resource_uuid?tab',
     component: ResourceDetailsPage,
     parent: 'organization',
+    resolve: [
+      {
+        token: 'result',
+        resolveFn: (transition: Transition) =>
+          queryClient.fetchQuery(
+            ['resource-details-page', transition.params()['resource_uuid']],
+            () => fetchData(transition.to(), transition.params()),
+          ),
+        deps: ['$transition$'],
+      },
+    ],
     data: {
       useExtraTabs: true,
+      breadcrumb: () => {
+        const params = router.globals.params;
+        const resource_uuid = params['resource_uuid'];
+        if (!resource_uuid) {
+          return '';
+        }
+        const queryData = queryClient.getQueryData([
+          'resource-details-page',
+          resource_uuid,
+        ]);
+        if (!queryData) {
+          return '';
+        }
+        return queryData['breadcrumbs'];
+      },
     },
   },
 
