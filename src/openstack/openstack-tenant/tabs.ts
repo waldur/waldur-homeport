@@ -11,6 +11,10 @@ const TenantNetworksList = lazyComponent(
   () => import('../openstack-network/TenantNetworksList'),
   'TenantNetworksList',
 );
+const TenantSubnetsList = lazyComponent(
+  () => import('../openstack-subnet/TenantSubnetsList'),
+  'TenantSubnetsList',
+);
 const SecurityGroupsList = lazyComponent(
   () => import('../openstack-security-groups/SecurityGroupsList'),
   'SecurityGroupsList',
@@ -81,6 +85,11 @@ NestedResourceTabsConfiguration.register('OpenStack.Tenant', () => [
         key: 'networks',
         title: translate('Networks'),
         component: TenantNetworksList,
+      },
+      {
+        key: 'subnets',
+        title: translate('Subnets'),
+        component: TenantSubnetsList,
       },
       {
         key: 'security_groups',

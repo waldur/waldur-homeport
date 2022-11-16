@@ -214,7 +214,6 @@ msgstr ""
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
-#: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 #: src/openstack/openstack-server-groups/ServerGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
@@ -1190,6 +1189,7 @@ msgstr ""
 
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 msgid "CIDR"
 msgstr ""
 
@@ -2142,7 +2142,7 @@ msgid "Dark theme"
 msgstr ""
 
 #: src/customer/routes.ts
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/project/routes.ts
 #: src/user/routes.ts
@@ -4823,6 +4823,7 @@ msgstr ""
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 #: src/openstack/openstack-tenant/TenantFlavorsList.tsx
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
@@ -4945,6 +4946,7 @@ msgid "Negative"
 msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
 #: src/vmware/actions/CreatePortDialog.tsx
@@ -8998,7 +9000,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/details/ResourceDetailsHeader.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
@@ -9018,6 +9019,7 @@ msgstr ""
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
@@ -9188,6 +9190,7 @@ msgstr ""
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-network/tabs.ts
+#: src/openstack/openstack-tenant/tabs.ts
 msgid "Subnets"
 msgstr ""
 
@@ -12474,6 +12477,7 @@ msgid "storage"
 msgstr ""
 
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 msgid "subnets"
 msgstr ""
 
