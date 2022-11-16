@@ -2,6 +2,8 @@ import { Stack } from 'react-bootstrap';
 
 import { Image } from '@waldur/core/Image';
 
+import { isExperimentalUiComponentsVisible } from '../utils';
+
 const akki = require('./images/akki.png');
 const lumi = require('./images/lumi.png');
 const taltech = require('./images/taltech.png');
@@ -9,7 +11,8 @@ const telia = require('./images/telia.png');
 const uniOfTartu = require('./images/uni-of-tartu.png');
 
 export const ProvidersBrands = () => {
-  return (
+  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
+  return showExperimentalUiComponents ? (
     <Stack
       gap={5}
       direction="horizontal"
@@ -21,5 +24,5 @@ export const ProvidersBrands = () => {
       <Image src={telia} size={100} classes="symbol-2by3" />
       <Image src={akki} size={75} classes="symbol-2by3" />
     </Stack>
-  );
+  ) : null;
 };
