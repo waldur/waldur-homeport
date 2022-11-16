@@ -1,6 +1,12 @@
-import { UISref, UISrefActive, UISrefProps, useRouter } from '@uirouter/react';
+import {
+  UISref,
+  UISrefActive,
+  UISrefProps,
+  useOnStateChanged,
+  useRouter,
+} from '@uirouter/react';
 import classNames from 'classnames';
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent, useCallback, useState } from 'react';
 
 import { useTabs } from './useTabs';
 
@@ -25,7 +31,12 @@ const findActiveTab = (tabs, router) =>
 export const TabsList: FunctionComponent = () => {
   const tabs = useTabs();
   const router = useRouter();
-  const activeTab = useMemo(() => findActiveTab(tabs, router), [tabs, router]);
+  const updateActiveTab = useCallback(
+    () => setActiveTab(findActiveTab(tabs, router)),
+    [tabs, router],
+  );
+  const [activeTab, setActiveTab] = useState(() => findActiveTab(tabs, router));
+  useOnStateChanged(updateActiveTab);
 
   return (
     <>
