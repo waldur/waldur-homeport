@@ -2142,7 +2142,7 @@ msgid "Dark theme"
 msgstr ""
 
 #: src/customer/routes.ts
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/project/routes.ts
 #: src/user/routes.ts
@@ -2964,7 +2964,7 @@ msgstr ""
 msgid "Event types"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
 msgstr ""
@@ -4108,8 +4108,8 @@ msgstr ""
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
 #: src/issues/routes.ts
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/ResourceTabs.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 #: src/project/ProjectActions.tsx
 #: src/project/routes.ts
 #: src/resource/tabs/constants.ts
@@ -7664,7 +7664,6 @@ msgstr ""
 msgid "Resource description"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/resource/ResourceDetailsContainer.tsx
 msgid "Resource details"
 msgstr ""

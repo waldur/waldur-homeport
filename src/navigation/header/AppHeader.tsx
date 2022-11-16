@@ -1,5 +1,5 @@
-import { useRouter } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import 'world-flags-sprite/stylesheets/flags16.css';
@@ -43,9 +43,16 @@ const AsideMobileToggle: FunctionComponent = () => (
 export const AppHeader: FunctionComponent = () => {
   const pageTitle = useSelector(getTitle);
   const router = useRouter();
-  const breadcrumbs = router.globals.$current.path
-    .filter((part) => part.data?.breadcrumb)
-    .map((part) => part.data.breadcrumb());
+  const { state, params } = useCurrentStateAndParams();
+  const getBreadcrumbs = () =>
+    router.globals.$current.path
+      .filter((part) => part.data?.breadcrumb)
+      .map((part) => part.data.breadcrumb())
+      .flat();
+  const [breadcrumbs, setBreadcrumbs] = useState<string[]>([]);
+  useEffect(() => {
+    setBreadcrumbs(getBreadcrumbs());
+  }, [state, params]);
   const routerTitle = router.globals.$current.path
     .find((part) => part.data?.title)
     ?.data.title();

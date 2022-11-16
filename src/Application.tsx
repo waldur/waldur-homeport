@@ -17,7 +17,7 @@ import { NotificationContainer } from './NotificationContainer';
 import { ThemeSelector } from './ThemeSelector';
 import { UIRouter } from './UIRouter';
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 export const Application: FunctionComponent = () => {
   const { loading, error, value } = useAsync(loadConfig);
