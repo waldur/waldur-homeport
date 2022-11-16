@@ -90,7 +90,7 @@ export function attachTransitions() {
     {
       to: (state) =>
         state.data &&
-        state.data.permission &&
+        state.data.permissions &&
         !state.data.permissions.every((permission) =>
           permission(store.getState()),
         ),
