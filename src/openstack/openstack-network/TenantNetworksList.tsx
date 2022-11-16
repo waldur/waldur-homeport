@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
-import { ResourceName } from '@waldur/resource/ResourceName';
+import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
+import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
 
@@ -16,7 +16,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => <ResourceName resource={row} />,
+          render: ({ row }) => <>{row.name}</>,
         },
         {
           title: translate('Subnets'),
@@ -33,13 +33,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('Is external'),
           render: ({ row }) => <BooleanField value={row.is_external} />,
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => <ResourceRowActions resource={row} />,
-        },
       ]}
       verboseName={translate('networks')}
       actions={<CreateNetworkAction resource={props.resource} />}
+      hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
+      expandableRow={({ row }) => <ResourceSummary resource={row} />}
     />
   );
 };

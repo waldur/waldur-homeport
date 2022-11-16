@@ -22,7 +22,7 @@ export const InternalNetworkAllocationPool: FunctionComponent = () => {
   return (
     <Form.Group>
       <label>{translate('Internal network allocation pool')}</label>
-      <Form.Control>{body}</Form.Control>
+      {body}
     </Form.Group>
   );
 };
