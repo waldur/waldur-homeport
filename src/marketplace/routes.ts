@@ -145,6 +145,39 @@ const ProviderDetails = lazyComponent(
   'ProviderDetails',
 );
 
+const getResourceDetailsParams = () => ({
+  component: ResourceDetailsPage,
+  resolve: [
+    {
+      token: 'result',
+      resolveFn: (transition: Transition) =>
+        queryClient.fetchQuery(
+          ['resource-details-page', transition.params()['resource_uuid']],
+          () => fetchData(transition.to(), transition.params()),
+        ),
+      deps: ['$transition$'],
+    },
+  ],
+  data: {
+    useExtraTabs: true,
+    breadcrumb: () => {
+      const params = router.globals.params;
+      const resource_uuid = params['resource_uuid'];
+      if (!resource_uuid) {
+        return '';
+      }
+      const queryData = queryClient.getQueryData([
+        'resource-details-page',
+        resource_uuid,
+      ]);
+      if (!queryData) {
+        return '';
+      }
+      return queryData['breadcrumbs'];
+    },
+  },
+});
+
 export const states: StateDeclaration[] = [
   {
     name: 'marketplace-landing-project',
@@ -488,57 +521,22 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-public-resource-details',
     url: 'marketplace-public-resource-details/:resource_uuid?tab',
-    component: ResourceDetailsPage,
     parent: 'organization',
-    resolve: [
-      {
-        token: 'result',
-        resolveFn: (transition: Transition) =>
-          queryClient.fetchQuery(
-            ['resource-details-page', transition.params()['resource_uuid']],
-            () => fetchData(transition.to(), transition.params()),
-          ),
-        deps: ['$transition$'],
-      },
-    ],
-    data: {
-      useExtraTabs: true,
-      breadcrumb: () => {
-        const params = router.globals.params;
-        const resource_uuid = params['resource_uuid'];
-        if (!resource_uuid) {
-          return '';
-        }
-        const queryData = queryClient.getQueryData([
-          'resource-details-page',
-          resource_uuid,
-        ]);
-        if (!queryData) {
-          return '';
-        }
-        return queryData['breadcrumbs'];
-      },
-    },
+    ...getResourceDetailsParams(),
   },
 
   {
     name: 'marketplace-service-provider-public-resource-details',
     url: 'marketplace-service-provider-public-resource-details/:resource_uuid?tab',
-    component: ResourceDetailsPage,
     parent: 'organization',
-    data: {
-      useExtraTabs: true,
-    },
+    ...getResourceDetailsParams(),
   },
 
   {
     name: 'marketplace-project-resource-details',
     url: 'marketplace-project-resource-details/:resource_uuid?tab',
-    component: ResourceDetailsPage,
     parent: 'project',
-    data: {
-      useExtraTabs: true,
-    },
+    ...getResourceDetailsParams(),
   },
 
   {
