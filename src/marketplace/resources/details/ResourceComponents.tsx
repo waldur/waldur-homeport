@@ -1,4 +1,4 @@
-import { Row } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 import { Limits } from '@waldur/marketplace/common/registry';
 import { OfferingComponent } from '@waldur/marketplace/types';
@@ -15,7 +15,7 @@ export const ResourceComponents = ({
   const normalize = (value: number, factor: number) =>
     ((value || 0) / (factor || 1)).toFixed();
   return (
-    <Row>
+    <Table className="gs-0 gy-1 gx-3">
       {components.map((component) => (
         <QuotaCell
           key={component.type}
@@ -29,6 +29,6 @@ export const ResourceComponents = ({
           description={component.description}
         />
       ))}
-    </Row>
+    </Table>
   );
 };
