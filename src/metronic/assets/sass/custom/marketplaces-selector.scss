@@ -1,6 +1,6 @@
 @import '~/src/metronic/assets/sass/core/components/_variables.scss';
 
-$dark-color: #1e1e2d;
+$dark-color: #1f2e23;
 
 #marketplaces-selector {
   .marketplaces-selector-header {
@@ -63,7 +63,7 @@ $dark-color: #1e1e2d;
         background-color: $hover-bg;
       }
       &.active {
-        background-color: $gray-700;
+        background-color: if(isDarkMode(), $gray-400, $gray-700);
 
         .title {
           color: $dark-inverse;

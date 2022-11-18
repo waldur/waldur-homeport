@@ -372,6 +372,7 @@
 .menu-state-title-primary {
   .menu-item {
     @include menu-link-hover-state($primary, null, null, null, null);
+    @include menu-link-here-state($primary, null, null, null, null);
     @include menu-link-show-state($primary, null, null, null, null);
     @include menu-link-active-state($primary, null, null, null, null);
   }

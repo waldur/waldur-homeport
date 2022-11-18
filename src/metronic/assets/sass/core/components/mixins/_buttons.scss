@@ -44,6 +44,7 @@
   &:focus:not(.btn-active),
   &:hover:not(.btn-active),
   &:active:not(.btn-active),
+  &.hover,
   &.active,
   &.show,
   .show > & {

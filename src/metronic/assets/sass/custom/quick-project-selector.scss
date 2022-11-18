@@ -14,8 +14,11 @@
       background-color: unset;
       border: 0;
 
+      &:hover {
+        background-color: $hover-bg;
+      }
       &.active {
-        background-color: $gray-200;
+        background-color: if(isDarkMode(), $gray-100, $gray-200);
         color: unset;
       }
     }
@@ -31,8 +34,11 @@
       border: 0;
       cursor: pointer;
 
+      &:hover {
+        background-color: $hover-bg;
+      }
       &.active {
-        background-color: $gray-700;
+        background-color: if(isDarkMode(), $gray-400, $gray-700);
         cursor: default;
 
         a {

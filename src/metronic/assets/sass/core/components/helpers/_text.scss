@@ -148,7 +148,7 @@
 i {
   line-height: 1;
   font-size: 1rem;
-  color: $text-muted;
+  color: if(isDarkMode(), #9fbf86, $text-muted);
 }
 
 // Link transition

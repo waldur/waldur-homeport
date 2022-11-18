@@ -31,7 +31,7 @@ export const BaseList: FunctionComponent<{
     <Scrollbars
       style={{ height: 'calc(100vh - 280px)' }}
       ref={scrollBarRef}
-      className="bg-gray-200"
+      className="bg-gray-100"
     >
       <ListGroup>
         {items.length === 0 ? (

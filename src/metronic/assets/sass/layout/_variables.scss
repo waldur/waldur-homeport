@@ -8,7 +8,7 @@ $root-font-size-lg: 13px; // Root font size for tablet mode
 $root-font-size-md: 12px; // Root font size for mobile mode
 
 // Page bg
-$page-bg: if(isDarkMode(), #151521, $gray-100) !default;
+$page-bg: if(isDarkMode(), #172219, $gray-100) !default;
 
 // Content border radius
 $content-border-radius: 1.5rem !default;
@@ -30,7 +30,7 @@ $header-config: (
         desktop: 65px,
         tablet-and-mobile: 55px,
       ),
-      bg-color: if(isDarkMode(), #1e1e2d, $white),
+      bg-color: if(isDarkMode(), #253629, $white),
     ),
   // Fixed Mode
   fixed:
@@ -40,7 +40,7 @@ $header-config: (
         tablet-and-mobile: 55px,
       ),
       z-index: 100,
-      bg-color: if(isDarkMode(), #1e1e2d, $white),
+      bg-color: if(isDarkMode(), #253629, $white),
       box-shadow:
         if(isDarkMode(), none, 0px 10px 30px 0px rgba(82, 63, 105, 0.05)),
     )
@@ -54,9 +54,15 @@ $toolbar-config: (
     tablet-and-mobile: 60px,
   ),
   padding: 0.5rem 0,
-  bg-color: if(isDarkMode(), darken(#1e1e2d, 2%), $white),
-  box-shadow: if(isDarkMode(), none, 0px 10px 30px 0px rgba(82, 63, 105, 0.05)),
-  border-top: if(isDarkMode(), 0, 1px solid $border-color),
+  bg-color: if(isDarkMode(), #213025, $white),
+  box-shadow:
+    if(
+      isDarkMode(),
+      0px 10px 30px 0px rgba(17, 26, 19, 0.05),
+      0px 10px 30px 0px rgba(82, 63, 105, 0.05)
+    ),
+  border-top: 1px solid $border-color,
+  border-bottom: if(isDarkMode(), 1px solid $border-color, 0),
 ) !default;
 
 // Aside
@@ -67,8 +73,9 @@ $aside-config: (
   // transition speed
   padding-x: 25px,
   menu-indention: 0.75rem,
-  bg-color: #1e1e2d,
-  logo-bg-color: darken(#1e1e2d, 2%),
+  bg-color: #111a13,
+  logo-bg-color: #111a13,
+  border-right: if(isDarkMode(), 1px solid #253629, 0),
   scrollbar-color: if(isDarkMode(), $gray-200, #3b3b64),
   scrollbar-hover-color: if(isDarkMode(), $gray-300, lighten(#3b3b64, 3%)),
   // Aside width for desktop mode
@@ -84,5 +91,5 @@ $aside-config: (
 
 // Footer
 $footer-config: (
-  bg-color: if(isDarkMode(), #1b1b28, $white),
+  bg-color: if(isDarkMode(), #1a261d, $white),
 ) !default;

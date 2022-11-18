@@ -34,6 +34,8 @@
 
 // Aside dark theme
 .aside-dark {
+  border-right: get($aside-config, border-right);
+
   .hover-scroll-overlay-y {
     --scrollbar-space: 0.4rem;
 
@@ -46,15 +48,15 @@
   .menu {
     .menu-item {
       .menu-section {
-        color: #4c4e6f !important;
+        color: #253629 !important;
       }
 
       //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
       @include menu-link-default-state(
-        #9899ac,
-        #494b74,
-        #9899ac,
-        #9899ac,
+        #96ab9b,
+        #9fbf86,
+        #96ab9b,
+        #96ab9b,
         null
       );
       @include menu-link-hover-state(
@@ -62,28 +64,28 @@
         $primary,
         $primary,
         $white,
-        #1b1b28
+        #172219
       );
       @include menu-link-here-state(
         $white,
         $primary,
         $primary,
         $white,
-        #1b1b28
+        #172219
       );
       @include menu-link-show-state(
         $white,
         $primary,
         $primary,
         $white,
-        #1b1b28
+        #172219
       );
       @include menu-link-active-state(
         $white,
         $primary,
         $primary,
         $white,
-        #1b1b28
+        #172219
       );
     }
   }
