@@ -4,12 +4,12 @@
 
 .aside-toolbar {
   cursor: pointer;
-  border-top: 1px solid #2d2d43;
-  border-bottom: 1px solid #2d2d43;
+  border-top: 1px solid #253629;
+  border-bottom: 1px solid #253629;
 }
 
 .aside-toolbar:hover {
-  background-color: #1b1b28;
+  background-color: #172219;
 }
 
 .aside:not(:hover) #kt_aside_toggle {
@@ -26,7 +26,7 @@
 }
 
 .aside-footer .btn-custom.btn-marketplace .btn-label i {
-  color: #b5b5c3;
+  color: #1a261d;
   font-size: 1.5rem;
   padding: 0;
 }

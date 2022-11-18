@@ -32,7 +32,7 @@
     &:focus,
     &.focus {
       background-color: $input-solid-bg-focus;
-      border-color: $input-solid-bg-focus;
+      border-color: if(isDarkMode(), $gray-400, $input-solid-bg-focus);
       color: $input-solid-color;
       transition: $transition-input;
     }

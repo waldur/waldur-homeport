@@ -34,6 +34,7 @@
       padding: 0;
       top: get($header-config, fixed, height, desktop);
       border-top: get($toolbar-config, border-top);
+      border-bottom: get($toolbar-config, border-bottom);
     }
 
     // Aside default enabled, aside fixed & header sticky modes
@@ -62,6 +63,7 @@
       left: 0;
       z-index: get($toolbar-config, z-index);
       box-shadow: get($toolbar-config, box-shadow);
+      border-bottom: get($toolbar-config, border-bottom);
     }
 
     // Toolbar enabled & toolbar not fixed modes
@@ -74,6 +76,7 @@
       padding: 0;
       top: get($header-config, default, height, tablet-and-mobile);
       border-top: get($toolbar-config, border-top);
+      border-bottom: get($toolbar-config, border-bottom);
     }
 
     // Page title
