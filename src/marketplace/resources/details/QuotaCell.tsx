@@ -16,6 +16,7 @@ export const QuotaCell = ({ usage, limit, units, title, description }) => {
         )}
       </div>
       <ProgressBar
+        className="h-6px"
         variant={percent < 50 ? 'success' : 'danger'}
         now={percent}
       />
