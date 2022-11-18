@@ -150,7 +150,7 @@ export const ResourceDetailsView: FC<any> = ({
                         </Card>
                       </div>
                     </Col>
-                    <Col md={4} sm={12}>
+                    <Col md={4} sm={12} className="d-flex flex-grow-1">
                       <Card>
                         <Card.Body>
                           {scope && (
