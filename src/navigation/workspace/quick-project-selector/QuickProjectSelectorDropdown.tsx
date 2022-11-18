@@ -153,6 +153,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
               <ProjectsPanel
                 projects={selectedOrganization?.projects}
                 onSelect={handleProjectSelect}
+                filter={filter}
               />
             </div>
             <Button

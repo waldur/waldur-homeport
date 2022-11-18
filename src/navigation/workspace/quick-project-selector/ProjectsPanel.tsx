@@ -9,6 +9,8 @@ import { translate } from '@waldur/i18n';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
+import { highlightMatch } from '../highlightMatch';
+
 import { BaseList } from './BaseList';
 
 const EmptyProjectsPlaceholder: FunctionComponent = () => (
@@ -23,18 +25,25 @@ const EmptyProjectListPlaceholder: FunctionComponent = () => (
   </p>
 );
 
-const ProjectListItem = ({ item }) => (
-  <Stack direction="horizontal" gap={4}>
-    <ImagePlaceholder width="36px" height="36px" backgroundColor="#e2e2e2" />
-    <span className="title ellipsis">{truncate(item.name, 40)}</span>
-  </Stack>
-);
+const ProjectListItem = ({ item, filter }) => {
+  return (
+    <Stack direction="horizontal" gap={4}>
+      <ImagePlaceholder width="36px" height="36px" backgroundColor="#e2e2e2" />
+      <span className="title ellipsis">
+        {filter
+          ? highlightMatch(truncate(item.name, 40), filter)
+          : truncate(item.name, 40)}
+      </span>
+    </Stack>
+  );
+};
 
 export const ProjectsPanel: FunctionComponent<{
   projects: Project[];
   onSelect(project: Project): void;
   isDisabled?: boolean;
-}> = ({ projects, onSelect, isDisabled }) => {
+  filter: string;
+}> = ({ projects, onSelect, isDisabled, filter }) => {
   const currentProject = useSelector(getProject);
   const [selectedProject, selectProject] = useState<Project>(currentProject);
 
@@ -61,6 +70,7 @@ export const ProjectsPanel: FunctionComponent<{
           selectItem={handleProjectClick}
           EmptyPlaceholder={EmptyProjectListPlaceholder}
           ItemComponent={ProjectListItem}
+          filter={filter}
         />
       ) : (
         <EmptyProjectsPlaceholder />

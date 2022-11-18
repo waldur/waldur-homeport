@@ -9,6 +9,7 @@ import { isChildOf } from '@waldur/navigation/useTabs';
 import { Customer } from '@waldur/workspace/types';
 
 import { getCustomersPage } from '../api';
+import { highlightMatch } from '../highlightMatch';
 import { ServiceProviderIcon } from '../ServiceProviderIcon';
 import { VirtualPaginatedList } from '../VirtualPaginatedList';
 
@@ -25,9 +26,9 @@ export const OrganizationListItem: FunctionComponent<{
   selected;
   onClick;
   onMouseEnter;
-}> = ({ data, index, style, selected, onClick, onMouseEnter }) => {
+  filter;
+}> = ({ data, index, style, selected, onClick, onMouseEnter, filter }) => {
   const item = data[index];
-
   if (item.isFetching) {
     return (
       <ListGroupItem className="text-center" style={style}>
@@ -58,7 +59,11 @@ export const OrganizationListItem: FunctionComponent<{
           height="36px"
           backgroundColor="#e2e2e2"
         />
-        <span className="title lh-1">{truncate(item.name)}</span>
+        <span className="title lh-1">
+          {filter
+            ? highlightMatch(truncate(item.name), filter)
+            : truncate(item.name)}
+        </span>
         <ServiceProviderIcon organization={item} className="ms-auto" />
       </Stack>
     </ListGroupItem>
@@ -109,6 +114,7 @@ export const OrganizationsPanel: FunctionComponent<{
               selected={active?.uuid === item.uuid}
               onClick={() => onClick(item)}
               onMouseEnter={() => onMouseEnter(item)}
+              filter={filter}
             />
           );
         }}
