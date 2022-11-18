@@ -4,7 +4,7 @@ export const highlightMatch = (string: string, search: string) => {
     return (
       <>
         {string.substring(0, indexOfSearch)}
-        <span style={{ backgroundColor: 'lightblue' }}>
+        <span className="highlight-color">
           {string.substring(indexOfSearch, indexOfSearch + search.length)}
         </span>
         {string.substring(indexOfSearch + search.length)}
