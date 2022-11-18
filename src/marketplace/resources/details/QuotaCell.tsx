@@ -6,18 +6,18 @@ import { translate } from '@waldur/i18n';
 export const QuotaCell = ({ usage, limit, units, title, description }) => {
   const percent = Math.round((usage / limit) * 100);
   return (
-    <tr className="pb-1">
+    <tr>
       <td>{title}</td>
-      <td style={{ padding: 0 }}>
+      <td>
         <ProgressBar
           variant={
             percent < 33 ? 'success' : percent < 66 ? 'warning' : 'danger'
           }
           now={percent}
-          style={{ padding: 0, width: 150 }}
-          className="h-6px"
+          style={{ width: 100 }}
+          className="h-6px mt-2"
         />
-      </td>{' '}
+      </td>
       <td>
         {translate('{usage} out of {limit} {units}', { usage, limit, units })}{' '}
         {description && (
