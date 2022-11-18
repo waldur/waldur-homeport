@@ -47,21 +47,17 @@ export function checkAndAccept(token) {
 }
 
 export function submitPermissionRequest(token) {
-  if (AuthService.isAuthenticated()) {
-    return confirmUserGroupInvitation(token)
-      .then((accept) => {
-        if (accept) {
-          submitGroupRequest(token).then(() => {
-            router.stateService.go('profile.details');
-          });
-        }
-      })
-      .catch(() => {
-        router.stateService.go('profile.details');
-      });
-  } else {
-    router.stateService.go('login');
-  }
+  return confirmUserGroupInvitation(token)
+    .then((accept) => {
+      if (accept) {
+        submitGroupRequest(token).then(() => {
+          router.stateService.go('profile.details');
+        });
+      }
+    })
+    .catch(() => {
+      router.stateService.go('profile.details');
+    });
 }
 
 export function acceptInvitation(token, replaceEmail) {

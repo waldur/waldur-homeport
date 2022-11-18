@@ -41,5 +41,8 @@ export const states: StateDeclaration[] = [
     name: 'user-group-invitation',
     url: '/user-group-invitation/:token/',
     component: UserGroupInvitation,
+    data: {
+      auth: true,
+    },
   },
 ];
