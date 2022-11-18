@@ -134,7 +134,7 @@ Upload translatable strings:
     - if: '$CI_COMMIT_BRANCH == "develop"'
     - if: '$CI_COMMIT_BRANCH == "master"'
   image:
-    name: registry.hpc.ut.ee/mirror/localazy/cli:latest
+    name: registry.hpc.ut.ee/mirror/localazy/cli:v1.6.3
   script:
     - sed 's/{\([^}]*\)\}/{__\1__}/g' locales/template.pot > template-for-localazy.pot
     - localazy upload source -w $LOCALAZY_WRITE_KEY -r $LOCALAZY_READ_KEY
