@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { required } from '@waldur/core/validators';
+import { required, getNameFieldValidators } from '@waldur/core/validators';
 import { ADD_PAYMENT_PROFILE_FORM_ID } from '@waldur/customer/payment-profiles/constants';
 import { addPaymentProfile } from '@waldur/customer/payment-profiles/store/actions';
 import { getPaymentProfileTypeOptions } from '@waldur/customer/payment-profiles/utils';
@@ -12,14 +12,16 @@ import {
   FormContainer,
   NumberField,
   SelectField,
-  StringField,
   SubmitButton,
   TextField,
 } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+
+import { InputGroup } from '../create/InputGroup';
 
 const PaymentProfileCreate = (props) => {
   const [isFixedPrice, setIsFixedPrice] = useState(false);
@@ -45,13 +47,12 @@ const PaymentProfileCreate = (props) => {
         }
       >
         <FormContainer submitting={false} clearOnUnmount={false}>
-          <StringField
-            name="name"
-            label={translate('Name')}
+          <InputGroup
+            component={InputField}
             required={true}
-            validate={required}
-            placeholder="e.g: Daniel "
+            label={translate('Name')}
             maxLength={150}
+            validate={getNameFieldValidators()}
           />
 
           <SelectField
