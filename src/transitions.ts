@@ -25,7 +25,7 @@ export function attachTransitions() {
     }
   });
 
-  router.transitionService.onStart(
+  router.transitionService.onBefore(
     {
       to: (state) =>
         state.data && state.data.auth && AuthService.isAuthenticated(),
