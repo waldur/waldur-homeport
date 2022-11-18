@@ -160,6 +160,7 @@ const getResourceDetailsParams = () => ({
   ],
   data: {
     useExtraTabs: true,
+    skipBreadcrumb: true,
     breadcrumb: () => {
       const params = router.globals.params;
       const resource_uuid = params['resource_uuid'];
