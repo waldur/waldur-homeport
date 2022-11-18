@@ -4,7 +4,7 @@ const getTextList = ($p) =>
 describe('Workspace selector', () => {
   beforeEach(() => {
     cy
-    .intercept('HEAD', '/api/customers/', {
+    .intercept('HEAD', '/api/customers/**', {
       headers: {
         'x-result-count': '3',
       },
@@ -65,23 +65,20 @@ describe('Workspace selector', () => {
   it('Allows to filter organizations by name', () => {
     cy
       // Enter query in organization list filter
+      .get('div[class="symbol symbol-50px"]').trigger('mouseover', {force: true})
+      .get('i[class="fa fa-angle-right display-5 fw-light"]').click()
       .get('input[placeholder="Search..."]')
       .focus()
       .type('Bob', {force: true})
       // Get filtered organization rows
       .get('span[class="title lh-1"]')
-      .contains('Bob')
-      .click(
-        {
-          force: true
-        }
-      )
+      .get('span[class="highlight-color"]')
 
       // Only matching organizations should be present
       .should(($p) =>
         expect(getTextList($p)).to.deep.eq(
           [
-            'Bob Lebowski'
+            'Bob'
           ]
         ),
       );
