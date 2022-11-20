@@ -48,6 +48,7 @@ const PaymentProfileCreate = (props) => {
       >
         <FormContainer submitting={false} clearOnUnmount={false}>
           <InputGroup
+            name=""
             component={InputField}
             required={true}
             label={translate('Name')}
