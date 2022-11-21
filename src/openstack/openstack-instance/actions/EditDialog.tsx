@@ -9,6 +9,9 @@ const MAX_LEN = 150;
 const DNS_LABEL_REGEX = new RegExp('^([a-zA-Z0-9-]{1,63})$');
 
 const validateInstanceName = (data: string) => {
+  if (!data) {
+    return;
+  }
   // A trailing period is allowed to indicate that a name is fully
   // qualified per RFC 1034 (page 7).
   const trimmed = data.endsWith('.') ? data.slice(0, -1) : data;
