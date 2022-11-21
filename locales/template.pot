@@ -223,7 +223,6 @@ msgstr ""
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
-#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/InvoiceActions.tsx
@@ -3098,6 +3097,10 @@ msgstr ""
 msgid "External IP"
 msgstr ""
 
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
+msgid "External IPs"
+msgstr ""
+
 #: src/navigation/header/ExternalLinks.tsx
 msgid "External links"
 msgstr ""
@@ -3250,7 +3253,6 @@ msgstr ""
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
-#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/rancher/cluster/create/NodeFlavorGroup.tsx
 msgid "Flavor"
 msgstr ""
@@ -3684,7 +3686,6 @@ msgstr ""
 #: src/openstack/openstack-instance/ImageGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
-#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 msgid "Image"
 msgstr ""
 
@@ -3889,6 +3890,7 @@ msgid "Internal IP"
 msgstr ""
 
 #: src/openstack/openstack-instance/tabs.ts
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 msgid "Internal IPs"
 msgstr ""
 
@@ -4463,11 +4465,11 @@ msgstr ""
 msgid "Manage avatar at {link}"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
+#: src/openstack/openstack-instance/InstanceNetworkButton.tsx
 msgid "Manage networks"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
+#: src/openstack/openstack-instance/InstanceNetworkButton.tsx
 msgid "Manage security groups"
 msgstr ""
 
@@ -9019,6 +9021,7 @@ msgstr ""
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-subnet/TenantSubnetsList.tsx
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
@@ -9228,6 +9231,7 @@ msgstr ""
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/openstack/openstack-tenant/TenantFlavorsList.tsx
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/TemplateDetail.tsx
@@ -10573,7 +10577,6 @@ msgstr ""
 msgid "Unable to load questions and answers."
 msgstr ""
 
-#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 msgid "Unable to load resource details."
 msgstr ""

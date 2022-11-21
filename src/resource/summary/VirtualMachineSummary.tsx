@@ -9,7 +9,7 @@ import { ResourceSummaryProps } from './types';
 const formatUptime = (props) =>
   props.resource.start_time ? formatRelative(props.resource.start_time) : null;
 
-const ResourceSummaryField = ({ resource }) => (
+export const ResourceSummaryField = ({ resource }) => (
   <>
     {formatSummary(resource)}
     {resource.flavor_name && (
