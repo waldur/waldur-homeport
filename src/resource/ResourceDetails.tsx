@@ -4,7 +4,6 @@ import { Card } from 'react-bootstrap';
 import { PlanDetailsButton } from '@waldur/marketplace/details/plan/PlanDetailsButton';
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
 import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
-import { OpenStackInstanceTenantButton } from '@waldur/openstack/openstack-instance/OpenStackInstanceTenantButton';
 
 import { ActionButtonResource } from './actions/ActionButtonResource';
 import { ResourceAccessButton } from './ResourceAccessButton';
@@ -31,7 +30,6 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
               refreshResource={refreshResource}
             />
             <ResourceRefreshButton refreshResource={refreshResource} />
-            <OpenStackInstanceTenantButton resource={resource} />
             {resource.marketplace_offering_uuid && (
               <OfferingDetailsButton
                 offering={resource.marketplace_offering_uuid}
