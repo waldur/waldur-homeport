@@ -1,3 +1,4 @@
+import { ErrorBoundary } from '@sentry/react';
 import { UISref } from '@uirouter/react';
 import { FC, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
@@ -5,6 +6,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { ENV } from '@waldur/configs/default';
+import { ErrorMessage } from '@waldur/ErrorMessage';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
@@ -48,13 +50,13 @@ const TenantMainComponent = ({ resource }) =>
     </div>
   ) : null;
 
-const InstanceMainComponent = ({ resource }) => {
+const InstanceMainComponent = ({ resource, scope, state }) => {
   return (
     <>
       <Card className="mb-7">
         <Card.Body>
           <h3 className="mb-5">{translate('Networking')}</h3>
-          <NetworkingTab resource={resource} />
+          <NetworkingTab resource={resource} scope={scope} state={state} />
         </Card.Body>
       </Card>
       {isExperimentalUiComponentsVisible() ? <MonitoringCharts /> : null}
@@ -176,7 +178,15 @@ export const ResourceDetailsView: FC<any> = ({
           <div className="container-xxl py-10">
             <Row className="mb-10">
               <Col md={8} sm={12}>
-                {MainComponent && <MainComponent resource={resource} />}
+                {MainComponent && (
+                  <ErrorBoundary fallback={ErrorMessage}>
+                    <MainComponent
+                      resource={resource}
+                      scope={scope}
+                      state={state}
+                    />
+                  </ErrorBoundary>
+                )}
                 {(resource.is_usage_based || resource.is_limit_based) && (
                   <Card>
                     <Card.Body>
