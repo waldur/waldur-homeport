@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
@@ -21,6 +22,7 @@ interface ResourceNameProps {
     resource_type: string;
     project_uuid: string;
     is_link_valid?: boolean;
+    marketplace_resource_uuid?: string;
   };
 }
 
@@ -49,14 +51,24 @@ const ResourceWarning = (props: ResourceNameProps) =>
     </Tip>
   ) : null;
 
-export const ResourceName = (props: ResourceNameProps) => (
-  <>
-    <ResourceLink
-      uuid={props.resource.uuid}
-      type={props.resource.resource_type}
-      project={props.resource.project_uuid}
-      label={<ResourceIcon resource={props.resource} />}
+export const ResourceName = (props: ResourceNameProps) =>
+  props.resource.marketplace_resource_uuid ? (
+    <Link
+      state="marketplace-project-resource-details"
+      params={{
+        resource_uuid: props.resource.marketplace_resource_uuid,
+        uuid: props.resource.project_uuid,
+      }}
+      label={props.resource.name}
     />
-    <ResourceWarning resource={props.resource} />
-  </>
-);
+  ) : (
+    <>
+      <ResourceLink
+        uuid={props.resource.uuid}
+        type={props.resource.resource_type}
+        project={props.resource.project_uuid}
+        label={<ResourceIcon resource={props.resource} />}
+      />
+      <ResourceWarning resource={props.resource} />
+    </>
+  );
