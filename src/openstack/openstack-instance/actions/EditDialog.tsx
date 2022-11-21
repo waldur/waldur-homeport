@@ -1,3 +1,4 @@
+import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { updateInstance } from '@waldur/openstack/api';
 import { createDescriptionField } from '@waldur/resource/actions/base';
@@ -49,7 +50,7 @@ const createInstanceNameField = () => ({
   maxlength: 150,
   required: true,
   type: 'string',
-  validate: validateInstanceName,
+  validate: [required, validateInstanceName],
 });
 
 export const EditDialog = ({ resolve: { resource } }) => {
