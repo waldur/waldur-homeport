@@ -2,13 +2,16 @@ import { FunctionComponent } from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
+import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
+import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
 
 import { AttachVolumeAction } from '../openstack-instance/actions/AttachVolumeAction';
+
+import { formatInstance } from './OpenStackVolumeSummary';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   return (
@@ -33,19 +36,18 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Attached to'),
-          render: ({ row }) => row.device || 'N/A',
+          render: ({ row }) => formatInstance(row),
         },
         {
           title: translate('State'),
           render: ({ row }) => <ResourceState resource={row} />,
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => <ResourceRowActions resource={row} />,
-        },
       ]}
+      hasQuery={true}
       actions={<AttachVolumeAction resource={props.resource} />}
       verboseName={translate('volumes')}
+      expandableRow={({ row }) => <ResourceSummary resource={row} />}
+      hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
     />
   );
 };
@@ -56,6 +58,7 @@ const TableOptions = {
   mapPropsToFilter: (props) => ({
     service_settings_uuid: props.resource.child_settings,
   }),
+  queryField: 'name',
 };
 
 export const TenantVolumesList = connectTable(TableOptions)(TableComponent);

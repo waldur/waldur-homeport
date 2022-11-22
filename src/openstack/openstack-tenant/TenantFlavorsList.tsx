@@ -19,6 +19,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('flavors')}
+      hasQuery={true}
     />
   );
 };
@@ -29,6 +30,7 @@ const TableOptions = {
   mapPropsToFilter: (props) => ({
     settings_uuid: props.resource.child_settings,
   }),
+  queryField: 'name',
 };
 
 export const TenantFlavorsList = connectTable(TableOptions)(TableComponent);

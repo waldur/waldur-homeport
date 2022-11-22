@@ -223,7 +223,6 @@ msgstr ""
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/InvoiceActions.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -3278,6 +3277,7 @@ msgstr ""
 msgid "Flavor: {flavor_name}, image: {image_name}"
 msgstr ""
 
+#: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Flavors"
@@ -3285,10 +3285,6 @@ msgstr ""
 
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 msgid "Flavors ({count})"
-msgstr ""
-
-#: src/openstack/analytics/FlavorsList.tsx
-msgid "Flavors List"
 msgstr ""
 
 #: src/openstack/OpenStackTenantForm.tsx

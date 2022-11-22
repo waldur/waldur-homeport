@@ -28,6 +28,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('routers')}
       hoverableRow={({ row }) => <SetRoutersButton router={row} />}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
+      hasQuery={true}
     />
   );
 };
@@ -38,6 +39,7 @@ const TableOptions = {
   mapPropsToFilter: (props) => ({
     tenant_uuid: props.resource.uuid,
   }),
+  queryField: 'name',
 };
 
 export const TenantRoutersList = connectTable(TableOptions)(TableComponent);

@@ -36,7 +36,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: NumOfCreatedInstancesField,
         },
       ]}
-      verboseName={translate('Flavors List')}
+      verboseName={translate('Flavors')}
     />
   );
 };

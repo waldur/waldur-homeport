@@ -40,6 +40,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('instances')}
       hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
+      hasQuery={true}
     />
   );
 };
@@ -50,6 +51,7 @@ const TableOptions = {
   mapPropsToFilter: (props) => ({
     service_settings_uuid: props.resource.child_settings,
   }),
+  queryField: 'name',
 };
 
 export const TenantInstancesList = connectTable(TableOptions)(TableComponent);

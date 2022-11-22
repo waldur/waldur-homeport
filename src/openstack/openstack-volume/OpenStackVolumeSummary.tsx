@@ -12,13 +12,13 @@ const formatSize = (props) => {
     : filesize;
 };
 
-const formatInstance = (props) =>
-  props.resource.instance ? (
+export const formatInstance = (resource) =>
+  resource.instance ? (
     <ResourceLink
       type={INSTANCE_TYPE}
-      uuid={getUUID(props.resource.instance)}
-      project={props.resource.project_uuid}
-      label={props.resource.instance_name}
+      uuid={getUUID(resource.instance)}
+      project={resource.project_uuid}
+      label={resource.instance_name}
     />
   ) : (
     <>&ndash;</>
@@ -29,7 +29,10 @@ export const OpenStackVolumeSummary = (props: ResourceSummaryProps) => {
   return (
     <>
       <Field label={translate('Size')} value={formatSize(props)} />
-      <Field label={translate('Attached to')} value={formatInstance(props)} />
+      <Field
+        label={translate('Attached to')}
+        value={formatInstance(props.resource)}
+      />
       <Field label={translate('Device')} value={resource.device} />
       <Field
         label={translate('Availability zone')}
