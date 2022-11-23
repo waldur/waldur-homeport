@@ -1,3 +1,13 @@
+export interface Permission {
+  project_uuid?: string;
+  user_uuid: string;
+  role: string;
+  created: string;
+  expiration_time?: string;
+  created_by_username: string;
+  created_by_full_name?: string;
+}
+
 export interface CustomerPermission extends Permission {
   customer_name: string;
   customer_uuid: string;
@@ -75,12 +85,6 @@ export interface Payment {
   customer_uuid?: string;
 }
 
-export interface Permission {
-  project_uuid?: string;
-  user_uuid: string;
-  role: string;
-}
-
 export interface Quota {
   name: string;
   usage: number;
@@ -110,6 +114,8 @@ export interface Project {
   image?: string;
   oecd_fos_2007_code?: string;
   type?: string;
+  marketplace_resource_count?: object;
+  is_industry?: boolean;
 }
 
 export type PhoneNumber =

@@ -10,11 +10,12 @@ import {
   useEffect,
   useCallback,
 } from 'react';
-import { Button, FormControl } from 'react-bootstrap';
+import { Col, FormControl } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
+import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import useOnScreen from '@waldur/core/useOnScreen';
 import { translate } from '@waldur/i18n';
@@ -23,7 +24,6 @@ import { isChildOf } from '@waldur/navigation/useTabs';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
-import { openSelectWorkspaceDialog } from '../actions';
 import { getCustomersCount } from '../api';
 import { EmptyOrganizationsPlaceholder } from '../EmptyOrganizationsPlaceholder';
 
@@ -32,7 +32,6 @@ import { ProjectsPanel } from './ProjectsPanel';
 import './QuickProjectSelectorDropdown.scss';
 
 export const QuickProjectSelectorDropdown: FunctionComponent = () => {
-  const dispatch = useDispatch();
   const currentCustomer = useSelector(getCustomer);
   const [selectedOrganization, selectOrganization] =
     useState<Customer>(currentCustomer);
@@ -60,10 +59,6 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
     error,
     value: organizationsCount,
   } = useAsync(getCustomersCount);
-
-  const changeWorkspace = () => {
-    dispatch(openSelectWorkspaceDialog());
-  };
 
   const { state } = useCurrentStateAndParams();
   const router = useRouter();
@@ -156,14 +151,24 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
                 filter={filter}
               />
             </div>
-            <Button
-              variant="link"
-              size="sm"
-              className="text-dark mx-4 mt-4"
-              onClick={changeWorkspace}
-            >
-              {translate('View all')}
-            </Button>
+            <div className="d-flex">
+              <Col className="organization-listing d-flex flex-column" xs={5}>
+                <Link
+                  className="btn btn-sm btn-link text-dark mx-4 mt-4"
+                  state="profile-organizations"
+                >
+                  {translate('View all organizations')}
+                </Link>
+              </Col>
+              <Col className="organization-listing d-flex flex-column" xs={7}>
+                <Link
+                  className="btn btn-sm btn-link text-dark mx-4 mt-4"
+                  state="profile-projects"
+                >
+                  {translate('View all projects')}
+                </Link>
+              </Col>
+            </div>
           </>
         )}
       </div>

@@ -13,6 +13,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
       {...props}
+      title={translate('Organizations')}
       columns={filterColumns([
         {
           title: translate('Organization name'),

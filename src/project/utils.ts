@@ -6,10 +6,11 @@ import { DateValuePair, padMissingValues } from '@waldur/dashboard/api';
 import { getScopeChartOptions } from '@waldur/dashboard/chart';
 import { Chart } from '@waldur/dashboard/types';
 import { translate } from '@waldur/i18n';
+import { Category } from '@waldur/marketplace/types';
 import { Project } from '@waldur/workspace/types';
 
-import { fetchLast12MonthProjectCosts } from './api';
-import { InvoiceCostSummary } from './types';
+import { fetchLast12MonthProjectCosts, getProjectCounters } from './api';
+import { InvoiceCostSummary, ProjectCounterResourceItem } from './types';
 
 const formatCostChartLabel = (
   value: number,
@@ -65,4 +66,40 @@ export async function loadChart(project: Project) {
       chart.data.map((item) => item.value),
     ),
   };
+}
+
+export const parseProjectCounters = (
+  categories: Category[],
+  counters: object,
+): ProjectCounterResourceItem[] => {
+  const countersPrefix =
+    counters && Object.keys(counters)[0].startsWith('marketplace_category')
+      ? 'marketplace_category_'
+      : '';
+  return categories
+    .map((category) => ({
+      label: category.title,
+      value: counters[`${countersPrefix}${category.uuid}`],
+    }))
+    .filter((row) => row.value);
+};
+
+export const combineProjectCounterRows = (
+  rows: ProjectCounterResourceItem[],
+): ProjectCounterResourceItem[] =>
+  rows
+    .filter((item) => item.value)
+    .sort((a, b) => a.label.localeCompare(b.label));
+
+export async function loadProjectsResourceCounters(
+  projects: Project[],
+  categories: Category[],
+): Promise<Record<'string', ProjectCounterResourceItem[]>> {
+  const result = {};
+  for (const project of projects) {
+    const counters = await getProjectCounters(project.uuid);
+    const counterRows = parseProjectCounters(categories, counters);
+    result[project.uuid] = combineProjectCounterRows(counterRows);
+  }
+  return result as Record<'string', ProjectCounterResourceItem[]>;
 }

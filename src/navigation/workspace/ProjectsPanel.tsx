@@ -10,55 +10,22 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
+import { ProjectCounterResourceItem } from '@waldur/project/types';
+import { loadProjectsResourceCounters } from '@waldur/project/utils';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
-import { getProjectCounters } from './api';
 import { PopupFlat } from './PopupFlat';
 import { SearchBox } from './SearchBox';
 import { useProjectFilter } from './utils';
 import './ProjectsPanel.scss';
-
-interface ResourceItem {
-  label: string;
-  value: number | string;
-}
-
-const parseCounters = (
-  categories: Category[],
-  counters: object,
-): ResourceItem[] => {
-  return categories
-    .map((category) => ({
-      label: category.title,
-      value: counters[`marketplace_category_${category.uuid}`],
-    }))
-    .filter((row) => row.value);
-};
-
-const combineRows = (rows: ResourceItem[]): ResourceItem[] =>
-  rows
-    .filter((item) => item.value)
-    .sort((a, b) => a.label.localeCompare(b.label));
 
 async function loadProjects(customer): Promise<Project[]> {
   return await getList('/projects/', {
     customer: customer.uuid,
     field: ['uuid', 'name', 'description', 'created', 'end_date'],
   });
-}
-async function loadResources(
-  projects: Project[],
-  categories,
-): Promise<Record<'string', ResourceItem[]>> {
-  const result = {};
-  for (const project of projects) {
-    const counters = await getProjectCounters(project.uuid);
-    const counterRows = parseCounters(categories, counters);
-    result[project.uuid] = combineRows(counterRows);
-  }
-  return result as Record<'string', ResourceItem[]>;
 }
 
 const EmptyProjectsPlaceholder: FunctionComponent = () => (
@@ -92,7 +59,7 @@ const getResourceIcon = (name) => {
   else if (name === 'VMs') return 'fa fa-desktop';
   else return 'fa fa-server';
 };
-const getResourcesCount = (resources: ResourceItem[]) => {
+const getResourcesCount = (resources: ProjectCounterResourceItem[]) => {
   return resources.reduce((acc, item) => {
     return acc + Number(item.value);
   }, 0);
@@ -115,7 +82,7 @@ const ProjectListItem = ({
   onClick,
 }: {
   project: Project;
-  resources: ResourceItem[];
+  resources: ProjectCounterResourceItem[];
   projectLoading?: boolean;
   resourcesLoading?: boolean;
   onClick?: Function;
@@ -205,7 +172,7 @@ export const ProjectsPanel: FunctionComponent<{
     [selectedOrganization],
   );
   const { loading: resourcesLoading, value: projectsResources } = useAsync(
-    () => loadResources(projects, categories),
+    () => loadProjectsResourceCounters(projects, categories),
     [projects, categories],
   );
 

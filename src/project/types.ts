@@ -23,3 +23,13 @@ export interface InvoiceCostSummary {
   month: number;
   price: number;
 }
+
+export interface ProjectCounterResourceItem {
+  label: string;
+  value: number | string;
+}
+
+export interface OecdCode {
+  label: string;
+  value: string;
+}

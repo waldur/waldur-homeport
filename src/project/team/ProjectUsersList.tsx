@@ -4,12 +4,12 @@ import Gravatar from 'react-gravatar';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
-import { ENV } from '@waldur/configs/default';
 import { PROJECT_ADMIN_ROLE } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
+import { RoleField } from '@waldur/user/affiliations/RoleField';
 import {
   getProject,
   getUser,
@@ -44,9 +44,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Role in project'),
-          render: ({ row }) => translate(ENV.roles[row.role]) || 'N/A',
+          render: RoleField,
         },
       ]}
+      hasQuery={true}
       actions={
         <ButtonGroup>
           {props.isStaff && <AddUserButton refreshList={props.fetch} />}

@@ -9,15 +9,15 @@ import {
   SUPPORT_CUSTOMER_LIST,
 } from '@waldur/customer/list/constants';
 import { OrganizationCreateButton } from '@waldur/customer/list/OrganizationCreateButton';
-import { OrganizationDetailsButton } from '@waldur/customer/list/OrganizationDetailsButton';
 import { OrganizationEditButton } from '@waldur/customer/list/OrganizationEditButton';
-import { SetLocationButton } from '@waldur/customer/list/SetLocationButton';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
+import { OrganizationHoverableRow } from '@waldur/user/affiliations/OrganizationHoverableRow';
 import { isStaff } from '@waldur/workspace/selectors';
 
+import { OrganizationDetails } from './OrganizationDetails';
 import { OrganizationLink } from './OrganizationLink';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
@@ -52,11 +52,11 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       hoverableRow={({ row }) => (
         <ButtonGroup>
+          <OrganizationHoverableRow row={{ customer_uuid: row.uuid }} />
           {props.isStaff && <OrganizationEditButton customer={row} />}
-          {props.isStaff && <SetLocationButton customer={row} />}
-          <OrganizationDetailsButton customer={row} />
         </ButtonGroup>
       )}
+      expandableRow={({ row }) => <OrganizationDetails customer={row} />}
     />
   );
 };

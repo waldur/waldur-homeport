@@ -1,9 +1,10 @@
+import { Container } from 'react-bootstrap';
+
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
-import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 
 export const ExpandablePortRow = ({ row }) => (
-  <ResourceDetailsTable>
+  <Container>
     <Field label={translate('Device ID')} value={row.device_id || 'N/A'} />
     <Field
       label={translate('Device owner')}
@@ -29,5 +30,5 @@ export const ExpandablePortRow = ({ row }) => (
           : 'N/A'
       }
     />
-  </ResourceDetailsTable>
+  </Container>
 );

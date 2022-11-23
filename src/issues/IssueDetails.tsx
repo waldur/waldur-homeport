@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { Card, Col } from 'react-bootstrap';
+import { Card, Col, Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -11,7 +11,6 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { Field } from '@waldur/resource/summary';
-import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { IssueAttachmentsContainer } from './attachments/IssueAttachmentsContainer';
@@ -62,7 +61,7 @@ export const IssueDetails: FunctionComponent = () => {
           </div>
           <div className="row mb-3">
             <Col sm={12}>
-              <ResourceDetailsTable>
+              <Container>
                 <Field
                   label={translate('Caller')}
                   value={issue.caller_full_name}
@@ -151,7 +150,7 @@ export const IssueDetails: FunctionComponent = () => {
                     date: formatDateTime(issue.created),
                   })}
                 />
-              </ResourceDetailsTable>
+              </Container>
             </Col>
 
             <Col sm={12}>

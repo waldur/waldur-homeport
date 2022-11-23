@@ -1,4 +1,4 @@
-import { Button, Card, Form, Row } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { compose } from 'redux';
@@ -35,6 +35,7 @@ import {
 } from '@waldur/workspace/selectors';
 
 import { canManageCustomer } from '../create/selectors';
+import { SetLocationButton } from '../list/SetLocationButton';
 
 const CustomerErrorDialog = lazyComponent(
   () => import('./CustomerErrorDialog'),
@@ -74,25 +75,6 @@ const enhance = compose(
 const WindowedSelectField = ({ input: { value, onChange }, ...props }) => (
   <WindowedSelect value={value} onChange={onChange} {...props} />
 );
-
-const StaticField: React.FC<{
-  labelClass?: string;
-  controlClass?: string;
-  label: string;
-  value: string;
-}> = (props) => (
-  <Row>
-    <Form.Label className={props.labelClass}>{props.label}</Form.Label>
-    <div className={props.controlClass}>
-      <p>{props.value}</p>
-    </div>
-  </Row>
-);
-
-StaticField.defaultProps = {
-  labelClass: 'col-sm-3 col-md-4 col-lg-3',
-  controlClass: 'col-sm-9 col-md-8',
-};
 
 export const CustomerDetailsPanel = enhance((props) => {
   const dispatch = useDispatch();
@@ -239,6 +221,8 @@ export const CustomerDetailsPanel = enhance((props) => {
               floating={false}
             />
           </FormContainer>
+
+          <SetLocationButton customer={customer} />
 
           {props.dirty && (
             <div className="pull-right">

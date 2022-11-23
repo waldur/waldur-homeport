@@ -78,6 +78,7 @@ msgstr ""
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
+#: src/user/affiliations/OrganizationsList.tsx
 msgid "Abbreviation"
 msgstr ""
 
@@ -492,6 +493,7 @@ msgid "Affiliation"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
+#: src/user/routes.ts
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Affiliations"
@@ -1005,6 +1007,7 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportDetailsTable.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Backend ID"
 msgstr ""
 
@@ -1733,6 +1736,10 @@ msgstr ""
 msgid "Cost efficiently"
 msgstr ""
 
+#: src/user/affiliations/ProjectExpandableRow.tsx
+msgid "Cost estimation"
+msgstr ""
+
 #: src/customer/create/CustomerCreateDialog.tsx
 msgid "Could not create organization"
 msgstr ""
@@ -1922,6 +1929,8 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/support/SupportDetailsTable.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Created"
@@ -2432,7 +2441,6 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
-#: src/customer/list/OrganizationDetailsButton.tsx
 #: src/customer/team/UserDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/issues/create/CallerGroup.tsx
@@ -2524,6 +2532,7 @@ msgstr ""
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectOrganizationDivisionField.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
+#: src/user/affiliations/OrganizationsList.tsx
 msgid "Division"
 msgstr ""
 
@@ -2763,6 +2772,7 @@ msgstr ""
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
+#: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
 #: src/user/support/UserDetailsTable.tsx
@@ -2842,6 +2852,7 @@ msgstr ""
 #: src/project/ProjectUpdateForm.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
 msgid "End date"
 msgstr ""
 
@@ -3788,6 +3799,7 @@ msgid "Increase a droplet's RAM, CPU and SSD disk."
 msgstr ""
 
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Industry project"
 msgstr ""
 
@@ -4853,6 +4865,7 @@ msgstr ""
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/OfferingConfigurationForm.tsx
 #: src/support/SupportDetailsTable.tsx
+#: src/user/affiliations/ProjectsList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -5044,6 +5057,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "No"
 msgstr ""
 
@@ -5260,6 +5274,7 @@ msgstr ""
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "OECD FoS code"
 msgstr ""
 
@@ -5666,6 +5681,9 @@ msgstr ""
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/SelectAffiliationDialog.tsx
 #: src/user/UserPermissionRequestsList.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/affiliations/ProjectsListFilter.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
@@ -5714,7 +5732,6 @@ msgid "Organization creation request review"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
-#: src/customer/list/OrganizationDetailsDialog.tsx
 msgid "Organization details"
 msgstr ""
 
@@ -5818,7 +5835,10 @@ msgstr ""
 #: src/issues/routes.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/dashboard/UserDashboard.tsx
+#: src/user/routes.ts
 msgid "Organizations"
 msgstr ""
 
@@ -6094,6 +6114,18 @@ msgstr ""
 
 #: src/digitalocean/DropletResizeDialog.tsx
 msgid "Permanent"
+msgstr ""
+
+#: src/user/affiliations/PermissionDetails.tsx
+msgid "Permission expires at"
+msgstr ""
+
+#: src/user/affiliations/PermissionDetails.tsx
+msgid "Permission granted at"
+msgstr ""
+
+#: src/user/affiliations/PermissionDetails.tsx
+msgid "Permission granted by"
 msgstr ""
 
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
@@ -6791,7 +6823,11 @@ msgstr ""
 #: src/issues/routes.ts
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/dashboard/UserDashboard.tsx
+#: src/user/routes.ts
 msgid "Projects"
 msgstr ""
 
@@ -7771,6 +7807,7 @@ msgstr ""
 #: src/project/ProjectResourcesList.tsx
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
+#: src/user/affiliations/ProjectsList.tsx
 #: src/user/routes.ts
 msgid "Resources"
 msgstr ""
@@ -7910,6 +7947,8 @@ msgstr ""
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
@@ -8206,6 +8245,8 @@ msgstr ""
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
+#: src/user/affiliations/OrganizationHoverableRow.tsx
+#: src/user/affiliations/ProjectHoverableRow.tsx
 msgid "Select"
 msgstr ""
 
@@ -8455,6 +8496,8 @@ msgstr ""
 
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
+#: src/user/affiliations/OrganizationHoverableRow.tsx
+#: src/user/affiliations/ProjectHoverableRow.tsx
 msgid "Selected"
 msgstr ""
 
@@ -10557,6 +10600,7 @@ msgid "Unable to load plan details."
 msgstr ""
 
 #: src/project/ProjectExpandableRowContainer.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Unable to load project resources."
 msgstr ""
 
@@ -11757,7 +11801,11 @@ msgid "View YAML"
 msgstr ""
 
 #: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
-msgid "View all"
+msgid "View all organizations"
+msgstr ""
+
+#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
+msgid "View all projects"
 msgstr ""
 
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
@@ -11923,6 +11971,7 @@ msgstr ""
 #: src/project/ProjectRemoveDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
 #: src/user/hooks/HookRemoveDialog.tsx
 #: src/user/keys/KeyRemoveDialog.tsx
 msgid "Yes"
@@ -12352,6 +12401,7 @@ msgid "organization"
 msgstr ""
 
 #: src/resource/support/SharedProviderCustomers.tsx
+#: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 msgid "organizations"
 msgstr ""
@@ -12391,6 +12441,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
+#: src/user/affiliations/ProjectsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 msgid "projects"
 msgstr ""

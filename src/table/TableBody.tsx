@@ -1,11 +1,14 @@
+import classNames from 'classnames';
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
 import { Column } from './types';
+import { getId } from './utils';
 
 interface TableBodyProps {
   rows: any[];
   columns: Column[];
+  rowClass?: (({ row }) => string) | string;
   expandableRow?: React.ComponentType<{ row: any }>;
   hoverableRow?: React.ComponentType<{ row: any }>;
   enableMultiSelect?: boolean;
@@ -31,6 +34,7 @@ const TableCells = ({ row, columns }) => (
 export const TableBody: FunctionComponent<TableBodyProps> = ({
   rows,
   columns,
+  rowClass,
   expandableRow,
   hoverableRow,
   enableMultiSelect,
@@ -40,12 +44,12 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   toggled,
 }) => {
   const trClick = useCallback(
-    (row, e) => {
+    (row, index, e) => {
       if (!expandableRow) return;
       // prevent expandable row to toggle when clicking on inner clickable elements
       const el = e.target as HTMLElement;
       if (el.onclick || el instanceof HTMLInputElement) return;
-      toggleRow(row.uuid);
+      toggleRow(getId(row, index));
     },
     [toggleRow],
   );
@@ -60,9 +64,14 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
         <React.Fragment key={rowIndex}>
           <tr
             className={
-              expandableRow && toggled[row.uuid] ? 'expanded' : undefined
+              classNames(
+                expandableRow && toggled[getId(row, rowIndex)]
+                  ? 'expanded'
+                  : undefined,
+                typeof rowClass === 'function' ? rowClass({ row }) : rowClass,
+              ) || undefined
             }
-            onClick={(event) => trClick(row, event)}
+            onClick={(event) => trClick(row, rowIndex, event)}
           >
             {enableMultiSelect && (
               <td>
@@ -80,7 +89,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
             )}
             {expandableRow && (
               <td>
-                {toggled[row.uuid] ? (
+                {toggled[getId(row, rowIndex)] ? (
                   <i className="fa fa-chevron-down" />
                 ) : (
                   <i className="fa fa-chevron-right" />
@@ -94,7 +103,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
               </td>
             )}
           </tr>
-          {expandableRow && toggled[row.uuid] && (
+          {expandableRow && toggled[getId(row, rowIndex)] && (
             <tr>
               <td colSpan={columns.length + 1}>
                 {React.createElement(expandableRow, { row })}

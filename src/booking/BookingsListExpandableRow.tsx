@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
+import { Container } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
-import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { BookingResource } from './types';
@@ -18,7 +18,7 @@ export const BookingsListExpandableRow: FunctionComponent<DetailedInfo> = ({
   isServiceProvider,
 }) => (
   <div className="container-fluid m-t">
-    <ResourceDetailsTable>
+    <Container>
       <Field
         label={translate('Created')}
         value={renderFieldOrDash(formatDateTime(row.created))}
@@ -37,6 +37,6 @@ export const BookingsListExpandableRow: FunctionComponent<DetailedInfo> = ({
         label={translate('Booking description')}
         value={renderFieldOrDash(row.description)}
       />
-    </ResourceDetailsTable>
+    </Container>
   </div>
 );

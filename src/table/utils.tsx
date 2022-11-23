@@ -15,7 +15,7 @@ import { registerTable } from './registry';
 import { getTableState } from './store';
 import { TableOptionsType, Sorting } from './types';
 
-const getId = (row, index) => {
+export const getId = (row, index) => {
   if (row.uuid) {
     return row.uuid;
   } else if (row.pk) {
