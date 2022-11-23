@@ -267,7 +267,6 @@ module.exports = {
     // some files are not referenced explicitly, copy them.
     new CopyWebpackPlugin({
       patterns: [
-        { from: './src/views', to: utils.formatPath('./views') },
         {
           from: path.resolve(imagesPath, './appstore'),
           to: utils.formatPath('images/appstore'),
