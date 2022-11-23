@@ -9,7 +9,7 @@ import { translate } from '@waldur/i18n';
 import { Category } from '@waldur/marketplace/types';
 import { Project } from '@waldur/workspace/types';
 
-import { fetchLast12MonthProjectCosts, getProjectCounters } from './api';
+import { fetchLast12MonthProjectCosts } from './api';
 import { InvoiceCostSummary, ProjectCounterResourceItem } from './types';
 
 const formatCostChartLabel = (
@@ -90,16 +90,3 @@ export const combineProjectCounterRows = (
   rows
     .filter((item) => item.value)
     .sort((a, b) => a.label.localeCompare(b.label));
-
-export async function loadProjectsResourceCounters(
-  projects: Project[],
-  categories: Category[],
-): Promise<Record<'string', ProjectCounterResourceItem[]>> {
-  const result = {};
-  for (const project of projects) {
-    const counters = await getProjectCounters(project.uuid);
-    const counterRows = parseProjectCounters(categories, counters);
-    result[project.uuid] = combineProjectCounterRows(counterRows);
-  }
-  return result as Record<'string', ProjectCounterResourceItem[]>;
-}

@@ -1,10 +1,3 @@
-/** Difference between "SelectAffiliationDialog" and "SelectWorkspaceDialog" components:
- * "SelectAffiliationDialog" component is for selecting an organization or a project
- * which is directly connected to a user account.
- * While "SelectWorkspaceDialog" component is for selecting organization/project
- * that the user is authorized to see.
- */
-
 import { triggerTransition } from '@uirouter/redux';
 import { FC, useEffect, useState } from 'react';
 import { Form, ToggleButton } from 'react-bootstrap';

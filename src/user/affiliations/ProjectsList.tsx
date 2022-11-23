@@ -12,7 +12,7 @@ import { ProjectTablePlaceholder } from '@waldur/project/ProjectTablePlaceholder
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { getUser } from '@waldur/workspace/selectors';
+import { getProject, getUser } from '@waldur/workspace/selectors';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 import { ProjectHoverableRow } from './ProjectHoverableRow';
@@ -116,6 +116,7 @@ const TableOptions = {
 const mapStateToProps = (state: RootState) => ({
   stateFilter: getFormValues('affiliationProjectsListFilter')(state),
   user: getUser(state),
+  currentProject: getProject(state),
 });
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));

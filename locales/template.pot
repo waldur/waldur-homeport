@@ -557,10 +557,6 @@ msgstr ""
 msgid "All ports"
 msgstr ""
 
-#: src/navigation/workspace/ProjectsPanel.tsx
-msgid "All projects"
-msgstr ""
-
 #: src/marketplace/resources/list/ProjectResourcesAllContainer.tsx
 #: src/navigation/sidebar/ResourcesMenu.tsx
 msgid "All resources"
@@ -1913,7 +1909,6 @@ msgstr ""
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
-#: src/navigation/workspace/ProjectsPanel.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
@@ -2112,7 +2107,6 @@ msgid "Custom scripts"
 msgstr ""
 
 #: src/customer/team/utils.ts
-#: src/navigation/workspace/utils.ts
 msgid "Customer support"
 msgstr ""
 
@@ -2846,7 +2840,6 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
-#: src/navigation/workspace/ProjectsPanel.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectUpdateForm.tsx
@@ -3206,10 +3199,6 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-#: src/navigation/workspace/ProjectsPanel.tsx
-msgid "Filter projects"
-msgstr ""
-
 #: src/marketplace/category/filters/FilteredBy.tsx
 #: src/marketplace/offerings/service-providers/FilteredBy.tsx
 msgid "Filtered by"
@@ -3459,10 +3448,6 @@ msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "Go to marketplace"
-msgstr ""
-
-#: src/navigation/workspace/SelectWorkspaceDialog.tsx
-msgid "Go to my profile"
 msgstr ""
 
 #: src/auth/PermissionLayout.tsx
@@ -6642,7 +6627,6 @@ msgstr ""
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/sidebar/SiteSidebar.tsx
-#: src/navigation/workspace/ProjectsPanel.tsx
 #: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
 #: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -6786,10 +6770,6 @@ msgstr ""
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "Project roles"
-msgstr ""
-
-#: src/navigation/workspace/SelectWorkspaceDialog.tsx
-msgid "Project selector"
 msgstr ""
 
 #: src/project/ProjectManage.tsx
@@ -7124,10 +7104,6 @@ msgstr ""
 
 #: src/vmware/actions/RebootAction.tsx
 msgid "Reboot"
-msgstr ""
-
-#: src/navigation/workspace/ProjectsPanel.tsx
-msgid "Recent"
 msgstr ""
 
 #: src/marketplace/landing/LandingPage.tsx
@@ -7803,7 +7779,6 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/routes.ts
 #: src/navigation/sidebar/ResourcesMenu.tsx
-#: src/navigation/workspace/ProjectsPanel.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
@@ -8152,10 +8127,6 @@ msgstr ""
 msgid "Search for offerings..."
 msgstr ""
 
-#: src/navigation/workspace/OrganizationsSelector.tsx
-msgid "Search for organization..."
-msgstr ""
-
 #: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
 msgid "Search offering..."
 msgstr ""
@@ -8244,7 +8215,6 @@ msgstr ""
 #: src/form/ListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
-#: src/navigation/workspace/ProjectsPanel.tsx
 #: src/user/affiliations/OrganizationHoverableRow.tsx
 #: src/user/affiliations/ProjectHoverableRow.tsx
 msgid "Select"
@@ -8269,10 +8239,6 @@ msgstr ""
 
 #: src/rancher/template/SelectControl.tsx
 msgid "Select an option..."
-msgstr ""
-
-#: src/navigation/workspace/OrganizationsSelector.tsx
-msgid "Select an organization..."
 msgstr ""
 
 #: src/issues/create/AssigneeGroup.tsx
@@ -8394,10 +8360,6 @@ msgstr ""
 
 #: src/customer/team/ProjectRoleSelectField.tsx
 msgid "Select project roles"
-msgstr ""
-
-#: src/navigation/workspace/SelectWorkspaceDialog.tsx
-msgid "Select project scope"
 msgstr ""
 
 #: src/issues/create/IssueQuickCreate.tsx
@@ -8559,7 +8521,6 @@ msgstr ""
 
 #: src/configs/default.ts
 #: src/customer/team/utils.ts
-#: src/navigation/workspace/utils.ts
 msgid "Service manager"
 msgstr ""
 
@@ -8978,10 +8939,6 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "Staff and Support user"
-msgstr ""
-
-#: src/navigation/workspace/ProjectsPanel.tsx
-msgid "Starred"
 msgstr ""
 
 #: src/azure/vm/actions/StartAction.tsx
@@ -9712,10 +9669,6 @@ msgstr ""
 msgid "There are no offerings."
 msgstr ""
 
-#: src/navigation/workspace/OrganizationsSelector.tsx
-msgid "There are no organizations matching filter."
-msgstr ""
-
 #: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
 msgid "There are no organizations yet."
 msgstr ""
@@ -9732,11 +9685,6 @@ msgstr ""
 msgid "There are no other volume types available."
 msgstr ""
 
-#: src/navigation/workspace/ProjectsPanel.tsx
-msgid "There are no projects"
-msgstr ""
-
-#: src/navigation/workspace/ProjectsPanel.tsx
 #: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
 msgid "There are no projects yet for this organization."
 msgstr ""
@@ -10453,7 +10401,6 @@ msgstr ""
 #: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
-#: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
@@ -12262,12 +12209,10 @@ msgstr ""
 msgid "events"
 msgstr ""
 
-#: src/navigation/workspace/OrganizationListItem.tsx
 #: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
 msgid "failed"
 msgstr ""
 
-#: src/navigation/workspace/OrganizationListItem.tsx
 #: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
 msgid "fetching"
 msgstr ""
