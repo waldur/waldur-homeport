@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
+import { Container } from 'react-bootstrap';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { CreatedField } from '@waldur/resource/summary/CreatedField';
-import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 
 import { KeyValueButton } from '../KeyValueButton';
 import { MarketplaceResourceStateField } from '../list/MarketplaceResourceStateField';
@@ -17,7 +17,7 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
   resource,
   children,
 }) => (
-  <ResourceDetailsTable>
+  <Container>
     <Field label={translate('Offering name')} value={resource.offering_name} />
     <Field
       label={translate('Client organization')}
@@ -67,5 +67,5 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
     ) : null}
     <Field label={translate('Username')} value={resource.username} />
     {children}
-  </ResourceDetailsTable>
+  </Container>
 );

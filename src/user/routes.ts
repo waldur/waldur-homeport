@@ -51,6 +51,14 @@ const EmptyProjectPlaceholder = lazyComponent(
   () => import('@waldur/navigation/workspace/EmptyProjectPlaceholder'),
   'EmptyProjectPlaceholder',
 );
+const ProjectsList = lazyComponent(
+  () => import('@waldur/user/affiliations/ProjectsList'),
+  'ProjectsList',
+);
+const OrganizationsList = lazyComponent(
+  () => import('@waldur/user/affiliations/OrganizationsList'),
+  'OrganizationsList',
+);
 
 const UserEmailChangeCallback = lazyComponent(
   () => import('./support/UserEmailChangeCallback'),
@@ -79,6 +87,17 @@ export const states: StateDeclaration[] = [
     url: '',
     data: {
       breadcrumb: () => translate('Credentials'),
+    },
+  },
+
+  {
+    name: 'profile-affiliations',
+    abstract: true,
+    parent: 'profile',
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Affiliations'),
     },
   },
 
@@ -191,6 +210,24 @@ export const states: StateDeclaration[] = [
     name: 'profile.no-project',
     url: 'no-project/',
     component: EmptyProjectPlaceholder,
+  },
+  {
+    name: 'profile-projects',
+    url: 'projects/',
+    component: ProjectsList,
+    parent: 'profile-affiliations',
+    data: {
+      breadcrumb: () => translate('Projects'),
+    },
+  },
+  {
+    name: 'profile-organizations',
+    url: 'organizations/',
+    component: OrganizationsList,
+    parent: 'profile-affiliations',
+    data: {
+      breadcrumb: () => translate('Organizations'),
+    },
   },
   {
     name: 'user-email-change',

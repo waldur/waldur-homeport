@@ -1,10 +1,9 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Container } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { OfferingGrid } from '@waldur/marketplace/common/OfferingGrid';
 import { Field } from '@waldur/resource/summary';
-import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 
 import { OfferingLogo } from '../common/OfferingLogo';
 
@@ -27,7 +26,7 @@ export const ProviderDetailsBody: FunctionComponent<{
     <Col md={9}>
       <h2 className="font-bold mb-4">{provider.customer_name}</h2>
       <Col sm={12}>
-        <ResourceDetailsTable>
+        <Container>
           {provider.customer_native_name && (
             <Field
               label={translate('Native name')}
@@ -40,7 +39,7 @@ export const ProviderDetailsBody: FunctionComponent<{
               value={provider.customer_abbreviation}
             />
           )}
-        </ResourceDetailsTable>
+        </Container>
       </Col>
 
       <hr />

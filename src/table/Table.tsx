@@ -28,6 +28,7 @@ export interface TableProps<RowType = any> extends TableState {
   dropdownActions?: TableDropdownItem[];
   actions?: React.ReactNode;
   verboseName?: string;
+  rowClass?: (({ row }) => string) | string;
   showPageSizeSelector?: boolean;
   updatePageSize?: (size: number) => void;
   resetPagination?: () => void;
@@ -119,7 +120,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
           <div className="table-responsive dataTables_wrapper">
             <div className="table-container">{this.renderBody()}</div>
           </div>
-          <Row>
+          <Row className="table-pagination">
             <Col
               sm={'auto'}
               md={2}
@@ -161,7 +162,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
 
     if (this.props.error) {
       return (
-        <div>
+        <div className="text-center mt-4">
           <p>{translate('Unable to fetch data.')}</p>
           <TableRefreshButton {...this.props} />
         </div>
@@ -198,6 +199,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
           <TableBody
             rows={this.props.rows}
             columns={this.props.columns}
+            rowClass={this.props.rowClass}
             expandableRow={this.props.expandableRow}
             hoverableRow={this.props.hoverableRow}
             enableMultiSelect={this.props.enableMultiSelect}

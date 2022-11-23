@@ -1,11 +1,10 @@
 import { FunctionComponent } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { RIGHT_ARROW_HTML } from '@waldur/customer/list/constants';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
-import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { Customer } from '@waldur/workspace/types';
 
 interface OrganizationDetailsProps {
@@ -16,7 +15,7 @@ export const OrganizationDetails: FunctionComponent<OrganizationDetailsProps> =
   (props) => (
     <Row>
       <Col sm={12}>
-        <ResourceDetailsTable>
+        <Container>
           <Field label={translate('Name')} value={props.customer.name} />
           <Field label={translate('UUID')} value={props.customer.uuid} />
           <Field
@@ -93,7 +92,7 @@ export const OrganizationDetails: FunctionComponent<OrganizationDetailsProps> =
                 : translate('No')
             }
           />
-        </ResourceDetailsTable>
+        </Container>
       </Col>
     </Row>
   );

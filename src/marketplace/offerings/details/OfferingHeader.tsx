@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Container } from 'react-bootstrap';
 
 import { AuthService } from '@waldur/auth/AuthService';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
@@ -11,7 +11,6 @@ import { GoogleCalendarLinkField } from '@waldur/marketplace/offerings/details/G
 import { ReferralDetailsField } from '@waldur/marketplace/referral/ReferralDetailsField';
 import { Offering } from '@waldur/marketplace/types';
 import { Field } from '@waldur/resource/summary';
-import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { BooleanField } from '@waldur/table/BooleanField';
 
 interface OfferingHeaderProps {
@@ -21,7 +20,7 @@ interface OfferingHeaderProps {
 
 export const OfferingHeader: React.FC<OfferingHeaderProps> = (props) => (
   <Col sm={12}>
-    <ResourceDetailsTable>
+    <Container>
       {!props.hideName && (
         <Field label={translate('Name')} value={props.offering.name} />
       )}
@@ -70,7 +69,7 @@ export const OfferingHeader: React.FC<OfferingHeaderProps> = (props) => (
       />
 
       <ReferralDetailsField offering={props.offering} />
-    </ResourceDetailsTable>
+    </Container>
     {AuthService.isAuthenticated() &&
       props.offering.type === OFFERING_TYPE_BOOKING && (
         <GoogleCalendarLinkField offering={props.offering} />

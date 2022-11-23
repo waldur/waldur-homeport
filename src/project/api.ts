@@ -11,7 +11,7 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { Event } from '@waldur/events/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
-import { InvoiceCostSummary, ProjectTeamUser } from './types';
+import { InvoiceCostSummary, OecdCode, ProjectTeamUser } from './types';
 
 export const getProject = (projectId: string) =>
   getById<Project>('/projects/', projectId);
@@ -82,9 +82,7 @@ export const loadProjectTypes = () =>
   get<{ url; name }[]>(`/project-types/`).then((response) => response.data);
 
 export const loadOecdCodes = () =>
-  get<{ value; label }[]>(`/projects/oecd_codes/`).then(
-    (response) => response.data,
-  );
+  get<OecdCode[]>(`/projects/oecd_codes/`).then((response) => response.data);
 
 export const dangerouslyUpdateProject = (cache, project) => {
   cache.name = project.name;
@@ -118,3 +116,6 @@ export const fetchLast12MonthProjectCosts = (projectId: string) =>
     page: 1,
     page_size: 12,
   });
+
+export const getProjectCounters = (projectUuid: string) =>
+  get(`/projects/${projectUuid}/counters/`).then((response) => response.data);

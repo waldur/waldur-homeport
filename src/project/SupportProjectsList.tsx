@@ -11,6 +11,7 @@ import { ProjectsListActions } from '@waldur/project/ProjectsListActions';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { formatLongText } from '@waldur/table/utils';
+import { ProjectHoverableRow } from '@waldur/user/affiliations/ProjectHoverableRow';
 
 import { ProjectCreateButton } from './ProjectCreateButton';
 import { ProjectDetailsButton } from './ProjectDetailsButton';
@@ -83,6 +84,9 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       actions={<ProjectCreateButton />}
       hoverableRow={({ row }) => (
         <ButtonGroup>
+          <ProjectHoverableRow
+            row={{ project_uuid: row.uuid, customer_uuid: row.customer_uuid }}
+          />
           <ProjectsListActions project={row} />
           <ProjectDetailsButton project={row} />
         </ButtonGroup>

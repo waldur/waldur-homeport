@@ -11,6 +11,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
       {...props}
+      title={translate('Projects')}
       columns={[
         {
           title: translate('Project name'),

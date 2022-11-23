@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
+import { Container } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
-import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { PaymentProfile } from '@waldur/workspace/types';
 
 interface CustomerPaymentProfileProps {
@@ -18,7 +18,7 @@ export const CustomerPaymentProfile: FunctionComponent<CustomerPaymentProfilePro
       (element) => element.is_active,
     );
     return activePaymentProfile ? (
-      <ResourceDetailsTable>
+      <Container>
         <div className="mb-1 mt-2 ">
           <dt>{translate('Payment profile ')}</dt>
           <dd>
@@ -32,6 +32,6 @@ export const CustomerPaymentProfile: FunctionComponent<CustomerPaymentProfilePro
             </Tip>
           </dd>
         </div>
-      </ResourceDetailsTable>
+      </Container>
     ) : null;
   };

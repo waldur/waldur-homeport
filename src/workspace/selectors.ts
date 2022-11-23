@@ -64,6 +64,7 @@ export const isStaffOrSupport = (state: RootState): boolean =>
 export const checkIsOwner = (customer: Customer, user: User): boolean =>
   customer &&
   user &&
+  customer.owners &&
   customer.owners.find((owner) => owner.uuid === user.uuid) !== undefined;
 
 export const checkIsServiceManager = (

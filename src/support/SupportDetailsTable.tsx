@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
+import { Container } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { MarketplaceResourceStateField } from '@waldur/marketplace/resources/list/MarketplaceResourceStateField';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { Field } from '@waldur/resource/summary';
-import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 
 interface SupportDetailsTableProps {
   resource: Resource;
@@ -13,7 +13,7 @@ interface SupportDetailsTableProps {
 
 export const SupportDetailsTable: FunctionComponent<SupportDetailsTableProps> =
   ({ resource }) => (
-    <ResourceDetailsTable>
+    <Container>
       <Field label={translate('State')}>
         <MarketplaceResourceStateField resource={resource} />
       </Field>
@@ -39,5 +39,5 @@ export const SupportDetailsTable: FunctionComponent<SupportDetailsTableProps> =
           {resource.backend_id}
         </Field>
       )}
-    </ResourceDetailsTable>
+    </Container>
   );
