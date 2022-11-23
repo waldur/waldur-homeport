@@ -1,7 +1,8 @@
+import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 import { Button, Col, FormControl, Row } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAsync, useAsyncFn, useDebounce } from 'react-use';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -11,7 +12,7 @@ import useOnScreen from '@waldur/core/useOnScreen';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { Category } from '@waldur/marketplace/types';
-import { openSelectWorkspaceDialog } from '@waldur/navigation/workspace/actions';
+import { MenuComponent } from '@waldur/metronic/assets/ts/components';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { getSidebarToggle } from '../Sidebar';
@@ -22,17 +23,16 @@ import { fetchCategories, fetchLastNOfferings, fetchOfferings } from './utils';
 import { WelcomeView } from './WelcomeView';
 
 import './MarketplacePopup.scss';
-
 const RECENTLY_ADDED_OFFERINGS_UUID = 'recently_added_offerings_category';
 
 export const MarketplacePopup: FunctionComponent = () => {
-  const dispatch = useDispatch();
-
   const currentCustomer = useSelector(getCustomer);
   const [selectedCategory, selectCategory] = useState<Category>();
+  const router = useRouter();
 
   const changeWorkspace = () => {
-    dispatch(openSelectWorkspaceDialog());
+    router.stateService.go('profile-projects');
+    MenuComponent.hideDropdowns(undefined);
   };
 
   const [filter, setFilter] = useState('');
