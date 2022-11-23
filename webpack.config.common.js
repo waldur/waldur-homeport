@@ -180,29 +180,29 @@ module.exports = {
                 replacements: [
                   {
                     pattern: /%(\d+)(?:\$\w)?/g,
-                    replacement: (_, n) => `{${n - 1}}`
+                    replacement: (_, n) => `{${n - 1}}`,
                   },
                   {
                     pattern: /%\((\w+)\)\w/g,
-                    replacement: '{$1}'
+                    replacement: '{$1}',
                   },
                   {
                     pattern: /%\w/g,
                     replacement: function () {
-                      return `{${this.n++}}`
+                      return `{${this.n++}}`;
                     },
-                    state: {n: 0}
+                    state: { n: 0 },
                   },
                   {
                     pattern: /%%/g,
-                    replacement: '%'
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      }
+                    replacement: '%',
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -228,7 +228,6 @@ module.exports = {
     // some files are not referenced explicitly, copy them.
     new CopyWebpackPlugin({
       patterns: [
-        { from: './src/views', to: utils.formatPath('./views') },
         {
           from: path.resolve(imagesPath, './appstore'),
           to: utils.formatPath('images/appstore'),
