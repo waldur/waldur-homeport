@@ -3,7 +3,6 @@ import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import { loadOecdCodes } from './api';
@@ -14,14 +13,15 @@ export const ProjectDetailsDialog: FunctionComponent<{
 }> = ({ resolve: { project } }) => {
   const { loading, value: oecdCodes } = useAsync(loadOecdCodes);
   return (
-    <ModalDialog
-      title={translate('Project details')}
-      footer={<CloseDialogButton />}
-    >
+    <ModalDialog title={translate('Project details')}>
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <ProjectUpdateContainer project={project} oecdCodes={oecdCodes} />
+        <ProjectUpdateContainer
+          project={project}
+          oecdCodes={oecdCodes}
+          isModal={true}
+        />
       )}
     </ModalDialog>
   );

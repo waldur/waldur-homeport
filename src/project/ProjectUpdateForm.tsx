@@ -18,6 +18,7 @@ import { ImageField } from '@waldur/form/ImageField';
 import { StaticField } from '@waldur/form/StaticField';
 import { validateMaxLength } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { Project } from '@waldur/workspace/types';
 
 import { ProjectNameField } from './ProjectNameField';
@@ -37,6 +38,7 @@ interface ProjectUpdateFormProps extends InjectedFormProps {
   isOwner: boolean;
   isDisabled: boolean;
   oecdCodes;
+  isModal?: boolean;
 }
 
 export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
@@ -106,13 +108,15 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
           initialValue={props.initialValues.image}
         />
       </FormContainer>
-      <Form.Group className="pull-right">
+      <Form.Group className="text-end">
         <FieldError error={props.error} />
+        {(props.isModal ?? false) && <CloseDialogButton />}
         {props.dirty && (
           <SubmitButton
             submitting={props.submitting}
             disabled={props.invalid || props.isDisabled}
             label={translate('Update project details')}
+            className="btn btn-primary ms-4"
           />
         )}
       </Form.Group>
