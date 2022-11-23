@@ -41,6 +41,7 @@ const PureUserDetailsTable: FunctionComponent<UserDetailsTableProps> = (
       )}
       <Row label={translate('ID code')} value={props.user.civil_number} />
       <Row label={translate('Phone numbers')} value={props.user.phone_number} />
+      <Row label={translate('Username')} value={props.user.username} />
       <Row label={translate('Email')} value={props.user.email} />
       <Row
         label={translate('Preferred language')}
