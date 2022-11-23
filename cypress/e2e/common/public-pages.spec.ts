@@ -78,23 +78,23 @@ describe('TOS and PP pages', () => {
       .intercept('GET', '/api/marketplace-categories/', {
         fixture: 'marketplace/categories.json',
       })
-      .intercept('GET', '/views/tos/index.html', '<h2>Terms of Services</h2>')
-      .intercept(
-        'GET',
-        '/views/policy/privacy.html',
-        '<h2>Privacy Policy</h2>',
-      );
+        .intercept('GET', '/api/user-agreements/?agreement_type=TOS', {
+          fixture: 'marketplace/user-agreement-tos.json',
+        })
+        .intercept('GET', '/api/user-agreements/?agreement_type=PP', {
+          fixture: 'marketplace/user-agreement-pp.json',
+        })
   });
 
   it('Assure that TOS page is visible without auth token', () => {
     cy.visit('/tos/');
 
-    cy.get('h2:contains(Terms of Services)').should('be.visible');
+    cy.get('P:contains(TOS)').should('be.visible');
   });
 
   it('Assure that PP page is visible without auth token', () => {
     cy.visit('/privacy/');
 
-    cy.get('h2:contains(Privacy Policy)').should('be.visible');
+    cy.get('p:contains(PP)').should('be.visible');
   });
 });

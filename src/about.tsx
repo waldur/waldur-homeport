@@ -1,9 +1,12 @@
 import { StateDeclaration } from '@waldur/core/types';
+import { translate } from '@waldur/i18n';
+import {
+  UserAgreementComponent,
+  USER_AGREEMENT_TYPES,
+} from '@waldur/UserAgreementComponent';
 
 import { lazyComponent } from './core/lazyComponent';
-import { translate } from './i18n';
 import { useTitle } from './navigation/title';
-import { TemplateComponent } from './TemplateComponent';
 
 const AnonymousLayout = lazyComponent(
   () => import('@waldur/navigation/AnonymousLayout'),
@@ -11,13 +14,23 @@ const AnonymousLayout = lazyComponent(
 );
 
 const TosPage = () => {
-  useTitle('Terms of Service');
-  return <TemplateComponent url="views/tos/index.html" />;
+  useTitle(translate('Terms of Service'));
+  return (
+    <UserAgreementComponent
+      agreement_type={USER_AGREEMENT_TYPES.terms_of_service}
+      title={'Terms of Service'}
+    />
+  );
 };
 
-const PricacyPage = () => {
-  useTitle('Privacy policy');
-  return <TemplateComponent url="views/policy/privacy.html" />;
+const PrivacyPage = () => {
+  useTitle(translate('Privacy Policy'));
+  return (
+    <UserAgreementComponent
+      agreement_type={USER_AGREEMENT_TYPES.privacy_policy}
+      title={'Privacy Policy'}
+    />
+  );
 };
 
 export const states: StateDeclaration[] = [
@@ -42,7 +55,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'about.privacy',
     url: '/privacy/',
-    component: PricacyPage,
+    component: PrivacyPage,
     data: {
       breadcrumb: () => translate('Privacy policy'),
     },
