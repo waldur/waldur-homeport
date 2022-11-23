@@ -11552,6 +11552,7 @@ msgstr ""
 #: src/slurm/details/AllocationUsersTable.tsx
 #: src/slurm/marketplace.ts
 #: src/user/UserOfferingList.tsx
+#: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/vmware/VMwareForm.tsx
 msgid "Username"
