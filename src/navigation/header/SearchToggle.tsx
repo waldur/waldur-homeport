@@ -79,7 +79,9 @@ const useSearch = () => {
             'customer_name',
             'project_name',
             'project_uuid',
+            'state',
           ],
+          state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
         },
       }).then((response) => groupBy(response.data, 'category_title')),
   );
