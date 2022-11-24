@@ -2187,6 +2187,7 @@ msgstr "Lubatud kontrollloendeid on värskendatud."
 msgid "Enabled default gateway"
 msgstr "Lubatud vaikimisi lüüs"
 
+#: src/openstack/openstack-instance/actions/EditDialog.tsx
 #: src/openstack/openstack-instance/utils.ts
 msgid "Encountered an empty component"
 msgstr "Ilmnes tühi komponent"
@@ -3576,6 +3577,7 @@ msgstr "Minu teenused"
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
+#: src/openstack/openstack-instance/actions/EditDialog.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-server-groups/ServerGroupsList.tsx
@@ -7319,6 +7321,7 @@ msgstr "Kasutaja {affected_user_full_name} on nõudnud endale organisatsiooni {a
 #: src/slurm/details/AllocationUsersTable.tsx
 #: src/slurm/marketplace.ts
 #: src/user/UserOfferingList.tsx
+#: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/vmware/VMwareForm.tsx
 msgid "Username"
