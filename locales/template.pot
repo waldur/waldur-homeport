@@ -6563,6 +6563,7 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
+#: src/about.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
 msgid "Privacy Policy"
 msgstr ""
@@ -7703,6 +7704,10 @@ msgstr ""
 
 #: src/resource/actions/UnlinkActionItem.tsx
 msgid "Resource has been unlinked."
+msgstr ""
+
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+msgid "Resource is TERMINATED"
 msgstr ""
 
 #: src/resource/state/utils.ts
@@ -10534,6 +10539,7 @@ msgid "Unable to load organizations"
 msgstr ""
 
 #: src/TemplateComponent.tsx
+#: src/UserAgreementComponent.tsx
 #: src/issues/FeaturesList.tsx
 msgid "Unable to load page"
 msgstr ""

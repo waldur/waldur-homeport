@@ -27,6 +27,12 @@ export interface PermissionContextInterface {
   setBanner: (value: PermissionMessage) => void;
   pageMessage: PermissionMessage;
   setPageMessage: (value: PermissionMessage) => void;
+  clearPermissionView: () => void;
+}
+interface PermissionViewProps {
+  permission: Permission;
+  banner?: PermissionMessage;
+  pageMessage?: PermissionMessage;
 }
 
 export const PermissionContext = createContext<
@@ -44,6 +50,12 @@ const PermissionDataProvider: React.FC = ({ children }) => {
     message: '',
   });
 
+  const clearPermissionView = () => {
+    setPermission('allowed');
+    setBanner({ title: '', message: '' });
+    setPageMessage({ title: '', message: '' });
+  };
+
   const value: PermissionContextInterface = {
     permission,
     setPermission,
@@ -51,6 +63,7 @@ const PermissionDataProvider: React.FC = ({ children }) => {
     setBanner,
     pageMessage,
     setPageMessage,
+    clearPermissionView,
   };
 
   return (
@@ -81,8 +94,13 @@ const RestrictedView = () => {
 };
 
 const PermissionLayout: React.FC = ({ children }) => {
-  const { permission, setPermission, setBanner, setPageMessage } =
-    useContext(PermissionContext);
+  const {
+    permission,
+    setPermission,
+    setBanner,
+    setPageMessage,
+    clearPermissionView,
+  } = useContext(PermissionContext);
 
   const hasAllAccess = useSelector(isStaff);
   const projectPermissions = useSelector(getUserProjectPermissions);
@@ -93,8 +111,7 @@ const PermissionLayout: React.FC = ({ children }) => {
 
   // Check users permissions
   useEffect(() => {
-    if (hasAllAccess) return;
-    if (state.name) {
+    if (!hasAllAccess && state.name) {
       if (state.name.startsWith('project.') || state.parent === 'project') {
         if (
           !projectPermissions.find((item) => item.project_uuid === params.uuid)
@@ -156,6 +173,11 @@ const PermissionLayout: React.FC = ({ children }) => {
         });
       }
     }
+    return () => {
+      if (permission !== 'allowed') {
+        clearPermissionView();
+      }
+    };
   }, [
     state,
     params,
@@ -168,4 +190,27 @@ const PermissionLayout: React.FC = ({ children }) => {
   return permission === 'restricted' ? <RestrictedView /> : <>{children}</>;
 };
 
-export { PermissionDataProvider, PermissionLayout };
+const usePermissionView = (
+  resolve: () => PermissionViewProps,
+  deps: Array<any>,
+) => {
+  const { setPermission, setBanner, setPageMessage, clearPermissionView } =
+    useContext(PermissionContext);
+  const { state } = useCurrentStateAndParams();
+
+  useEffect(() => {
+    const params = resolve();
+    if (params) {
+      setPermission(params.permission);
+      setBanner(params.banner);
+      setPageMessage(params.pageMessage);
+    } else {
+      clearPermissionView();
+    }
+    return () => {
+      clearPermissionView();
+    };
+  }, [...deps, state]);
+};
+
+export { PermissionDataProvider, PermissionLayout, usePermissionView };

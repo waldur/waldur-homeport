@@ -1,6 +1,6 @@
-import { FunctionComponent, useContext, useEffect, useMemo } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
-import { PermissionContext } from '@waldur/auth/PermissionLayout';
+import { usePermissionView } from '@waldur/auth/PermissionLayout';
 import { translate } from '@waldur/i18n';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
@@ -26,43 +26,44 @@ interface PublicOfferingDetailsProps {
 
 export const PublicOfferingDetails: FunctionComponent<PublicOfferingDetailsProps> =
   ({ offering, category }) => {
-    const { setBanner, setPermission } = useContext(PermissionContext);
     const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
     const canDeploy = useMemo(() => offering.state === 'Active', [offering]);
 
-    useEffect(() => {
+    usePermissionView(() => {
       switch (offering.state) {
         case 'Paused':
-          setPermission('limited');
-          setBanner({
-            title: translate('Paused'),
-            message: translate(
-              'This offering has been paused and new resources cannot be added at the moment.',
-            ),
-          });
-          break;
+          return {
+            permission: 'limited',
+            banner: {
+              title: translate('Paused'),
+              message: translate(
+                'This offering has been paused and new resources cannot be added at the moment.',
+              ),
+            },
+          };
         case 'Draft':
-          setPermission('limited');
-          setBanner({
-            title: translate('Draft'),
-            message: translate(
-              'This offering has not been activated by the operator yet.',
-            ),
-          });
-          break;
+          return {
+            permission: 'limited',
+            banner: {
+              title: translate('Draft'),
+              message: translate(
+                'This offering has not been activated by the operator yet.',
+              ),
+            },
+          };
         case 'Archived':
-          setPermission('limited');
-          setBanner({
-            title: translate('Archived'),
-            message: translate('This offering has been archived.'),
-          });
-          break;
+          return {
+            permission: 'limited',
+            banner: {
+              title: translate('Archived'),
+              message: translate('This offering has been archived.'),
+            },
+          };
 
         default:
-          setPermission('allowed');
-          break;
+          return null;
       }
-    }, [offering, setPermission, setBanner]);
+    }, [offering]);
 
     return (
       <div className="publicOfferingDetails m-b" id="general">
