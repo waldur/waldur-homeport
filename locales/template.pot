@@ -7706,6 +7706,10 @@ msgstr ""
 msgid "Resource has been unlinked."
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+msgid "Resource is TERMINATED"
+msgstr ""
+
 #: src/resource/state/utils.ts
 msgid "Resource is in sync"
 msgstr ""

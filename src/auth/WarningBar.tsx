@@ -14,7 +14,8 @@ export default function WarningBar() {
       }
     >
       <p>
-        <strong>{banner.title}</strong>: {banner.message}
+        <strong>{banner.title}</strong>
+        {Boolean(banner.title && banner.message) && ':'} {banner.message}
       </p>
     </div>
   ) : null;
