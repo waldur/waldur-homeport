@@ -69,6 +69,14 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => <>{row.plan_name || 'N/A'}</>,
     },
     {
+      title: translate('Limits'),
+      render: ({ row }) => JSON.stringify(row.limits, null, 4) || 'N/A',
+    },
+    {
+      title: translate('Effective ID'),
+      render: ({ row }) => <>{row.effective_id || 'N/A'}</>,
+    },
+    {
       title: translate('Created at'),
       render: ({ row }) => formatDateTime(row.created),
       orderField: 'created',
@@ -152,8 +160,12 @@ const exportRow = (row) => [
   row.uuid,
   row.offering_name,
   row.customer_name,
+  row.project_name,
   row.category_title,
   row.plan_name,
+  JSON.stringify(row.limits),
+  row.effective_id,
+  formatDateTime(row.created),
   row.state,
 ];
 
@@ -162,8 +174,12 @@ const exportFields = [
   'Resource UUID',
   'Offering type',
   'Client organization',
+  'Project',
   'Category',
   'Plan',
+  'Limits',
+  'Effective ID',
+  'Created at',
   'State',
 ];
 
