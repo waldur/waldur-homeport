@@ -11,6 +11,7 @@ export const ShortResourceHeader = ({
     customer_name: string;
     project_name: string;
     current_usages: Limits;
+    offering_name: string;
     limits: Limits;
   };
   components: OfferingComponent[];
@@ -39,7 +40,9 @@ export const ShortResourceHeader = ({
         color: 'white',
       }}
     >
-      <div style={{ flexGrow: 1 }}>{`${resource.name}: ${componentsList}`}</div>
+      <div style={{ flexGrow: 1 }}>
+        [{resource.offering_name}] {`${resource.name}: ${componentsList}`}
+      </div>
       <div>{`${resource.customer_name} / ${resource.project_name}`}</div>
     </div>
   );
