@@ -2749,6 +2749,7 @@ msgid "Edit team member"
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 msgid "Effective ID"
 msgstr ""
 
@@ -4285,6 +4286,7 @@ msgid "Limit-based"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Limits"

@@ -6,7 +6,6 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { getStartingPrice } from '@waldur/marketplace/details/plan/utils';
-import { offering } from '@waldur/marketplace/resources/change-limits/fixtures';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
@@ -24,10 +23,17 @@ export const PublicOfferingDetailsHero: FunctionComponent<OwnProps> = (
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   const startingPrice = useMemo(() => {
     return getStartingPrice(props.offering);
-  }, [offering]);
+  }, [props.offering]);
 
   return (
-    <div className="public-offering-hero__background">
+    <div
+      className="public-offering-hero__background"
+      style={
+        props.offering.image
+          ? { backgroundImage: `url(${props.offering.image})` }
+          : {}
+      }
+    >
       <div className="public-offering-hero__table">
         <div className="public-offering-hero__cell">
           <div className="container-xxl pb-16">
