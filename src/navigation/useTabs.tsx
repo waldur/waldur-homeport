@@ -78,9 +78,12 @@ export const useTabs = (): Tab[] => {
     } else {
       setTabs([]);
     }
-    const breadcrumb = current.data?.breadcrumb
+    let breadcrumb = current.data?.breadcrumb
       ? current.data?.breadcrumb()
       : undefined;
+    if (Array.isArray(breadcrumb)) {
+      breadcrumb = breadcrumb.join(' > ');
+    }
     document.title =
       ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE +
       ' | ' +
