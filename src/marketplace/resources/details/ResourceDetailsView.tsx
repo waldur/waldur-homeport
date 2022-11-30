@@ -76,6 +76,7 @@ export const ResourceDetailsView: FC<any> = ({
   resource,
   scope,
   components,
+  offering,
   reInitResource,
   state,
   tabs,
@@ -112,7 +113,14 @@ export const ResourceDetailsView: FC<any> = ({
         </>
       ) : (
         <>
-          <div className="public-offering-hero__background">
+          <div
+            className="public-offering-hero__background"
+            style={
+              offering.image
+                ? { backgroundImage: `url(${offering.image})` }
+                : {}
+            }
+          >
             <div className="public-offering-hero__table">
               <div className="public-offering-hero__cell">
                 <div className="container-xxl py-16">

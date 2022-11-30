@@ -43,9 +43,8 @@ export const fetchData = async (state, params) => {
         .sort((t1, t2) => t1.title.localeCompare(t2.title)),
     );
   }
-  const components = await getProviderOffering(resource.offering_uuid).then(
-    (offering) => offering.components,
-  );
+  const offering = await getProviderOffering(resource.offering_uuid);
+  const components = offering.components;
 
   tabSources = tabSources.concat([
     {
@@ -74,5 +73,5 @@ export const fetchData = async (state, params) => {
   if (tabSpec) {
     breadcrumbs.push(tabSpec.title);
   }
-  return { resource, scope, components, tabSpec, tabs, breadcrumbs };
+  return { resource, scope, components, offering, tabSpec, tabs, breadcrumbs };
 };
