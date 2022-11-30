@@ -24,7 +24,8 @@ async function loadData(resourceId: string) {
   const resource = await getResource(resourceId);
   const offering = await getProviderOffering(resource.offering_uuid);
   const plan =
-    resource.plan && offering.plans.find((item) => item.url === resource.plan);
+    resource.plan &&
+    offering.plans.find((item) => item.uuid === resource.plan_uuid);
   const limitParser = getFormLimitParser(offering.type);
   return {
     offering,
