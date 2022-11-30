@@ -156,6 +156,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
                 <Link
                   className="btn btn-sm btn-link text-dark mx-4 mt-4"
                   state="profile-organizations"
+                  onClick={() => MenuComponent.hideDropdowns(undefined)}
                 >
                   {translate('View all organizations')}
                 </Link>
@@ -164,6 +165,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
                 <Link
                   className="btn btn-sm btn-link text-dark mx-4 mt-4"
                   state="profile-projects"
+                  onClick={() => MenuComponent.hideDropdowns(undefined)}
                 >
                   {translate('View all projects')}
                 </Link>
