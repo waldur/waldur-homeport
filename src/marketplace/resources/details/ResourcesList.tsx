@@ -36,23 +36,27 @@ export const ResourcesList: FC<ResourcesListProps> = ({
       {data.pages.map((page, i) => (
         <Fragment key={i}>
           {page.data.map((row, index) => (
-            <tr key={index}>
-              <td></td>
-              <td className="bg-light">{row.name}</td>
-              <td className="bg-light">
-                {row.state && <ResourceStateIndicator state={row.state} />}{' '}
-                {row.summary}
-              </td>
-              <td className="bg-light">
-                {row.marketplace_resource_uuid && <ResourceLink row={row} />}
-              </td>
-            </tr>
+            <p key={index} className="d-flex">
+              <div className="flex-grow-1">
+                <h5>
+                  {row.marketplace_resource_uuid ? (
+                    <ResourceLink row={row}>{row.name}</ResourceLink>
+                  ) : (
+                    row.name
+                  )}
+                </h5>
+                <p>{row.summary}</p>
+              </div>
+              <div>
+                {row.state && <ResourceStateIndicator state={row.state} />}
+              </div>
+            </p>
           ))}
         </Fragment>
       ))}
       <tr>
         <td></td>
-        <td className="bg-light text-center" colSpan={5}>
+        <td className="text-center" colSpan={5}>
           {hasNextPage && (
             <div>
               <button

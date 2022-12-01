@@ -1,13 +1,12 @@
-import { useMemo } from 'react';
-import { Table } from 'react-bootstrap';
+import classNames from 'classnames';
+import { Fragment, useEffect, useMemo, useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { OpenStackTenant } from '@waldur/openstack/openstack-tenant/types';
-
-import { GroupSection } from '../GroupSection';
 
 import { FlavorsSection } from './FlavorsSection';
 import { FloatingIPsSection } from './FloatingIPsSection';
@@ -49,27 +48,21 @@ export const TenantDetails = ({ resource }) => {
       resource && value
         ? [
             {
-              title: translate('Dashboard'),
-            },
-            {
               title: translate('Compute'),
               children: [
                 {
-                  title: translate('Instances ({count})', {
-                    count: value.counters.instances,
-                  }),
+                  title: translate('Instances'),
+                  count: value.counters.instances,
                   component: InstancesSection,
                 },
                 {
-                  title: translate('Flavors ({count})', {
-                    count: value.counters.flavors,
-                  }),
+                  title: translate('Flavors'),
+                  count: value.counters.flavors,
                   component: FlavorsSection,
                 },
                 {
-                  title: translate('Server groups ({count})', {
-                    count: value.counters.server_groups,
-                  }),
+                  title: translate('Server groups'),
+                  count: value.counters.server_groups,
                   component: ServerGroupsSection,
                 },
               ],
@@ -78,39 +71,33 @@ export const TenantDetails = ({ resource }) => {
               title: translate('Networking'),
               children: [
                 {
-                  title: translate('Routers ({count})', {
-                    count: value.counters.routers,
-                  }),
+                  title: translate('Routers'),
+                  count: value.counters.routers,
                   component: RoutersSection,
                 },
                 {
-                  title: translate('Networks ({count})', {
-                    count: value.counters.networks,
-                  }),
+                  title: translate('Networks'),
+                  count: value.counters.networks,
                   component: NetworksSection,
                 },
                 {
-                  title: translate('Subnets ({count})', {
-                    count: value.counters.subnets,
-                  }),
+                  title: translate('Subnets'),
+                  count: value.counters.subnets,
                   component: SubnetsSection,
                 },
                 {
-                  title: translate('Security groups ({count})', {
-                    count: value.counters.security_groups,
-                  }),
+                  title: translate('Security groups'),
+                  count: value.counters.security_groups,
                   component: SecurityGroupsSection,
                 },
                 {
-                  title: translate('Floating IPs ({count})', {
-                    count: value.counters.floating_ips,
-                  }),
+                  title: translate('Floating IPs'),
+                  count: value.counters.floating_ips,
                   component: FloatingIPsSection,
                 },
                 {
-                  title: translate('Ports ({count})', {
-                    count: value.counters.ports,
-                  }),
+                  title: translate('Ports'),
+                  count: value.counters.ports,
                   component: PortsSection,
                 },
               ],
@@ -119,15 +106,13 @@ export const TenantDetails = ({ resource }) => {
               title: translate('Storage'),
               children: [
                 {
-                  title: translate('Volumes ({count})', {
-                    count: value.counters.volumes,
-                  }),
+                  title: translate('Volumes'),
+                  count: value.counters.volumes,
                   component: VolumesSection,
                 },
                 {
-                  title: translate('Snapshots ({count})', {
-                    count: value.counters.snapshots,
-                  }),
+                  title: translate('Snapshots'),
+                  count: value.counters.snapshots,
                   component: SnapshotsSection,
                 },
               ],
@@ -137,37 +122,69 @@ export const TenantDetails = ({ resource }) => {
     [resource, value],
   );
 
+  const [selectedSection, selectSection] = useState<any>();
+
+  useEffect(() => {
+    Array.isArray(tabs) &&
+      tabs.length > 0 &&
+      selectSection(tabs[0].children[0]);
+  }, [tabs]);
+
   if (loading) return <LoadingSpinner />;
 
   if (error) return <>{translate('Unable to load resource details.')}</>;
 
   return (
-    <Table>
-      <thead>
-        <tr>
-          <th style={{ width: 10 }}>{/* Icon column */}</th>
-          <th>{translate('Component')}</th>
-          <th>{translate('Summary')}</th>
-          <th>{translate('Details')}</th>
-        </tr>
-      </thead>
-      {tabs
-        .filter((tab) => !!tab.children)
-        .map((tab, tabIndex) => (
-          <GroupSection
-            key={tabIndex}
-            title={tab.title}
-            summary={tab.children.map((child) => child.title).join(', ')}
-          >
-            {tab.children.map((section, sectionIndex) => (
-              <section.component
-                key={sectionIndex}
-                resource={value.tenant}
-                title={section.title}
-              />
-            ))}
-          </GroupSection>
-        ))}
-    </Table>
+    <Row>
+      <Col sm={4}>
+        <div
+          className="menu menu-rounded menu-column menu-active-bg menu-hover-bg menu-title-gray-700 fs-5 fw-semibold w-250px"
+          id="#kt_aside_menu"
+          data-kt-menu="true"
+        >
+          {tabs.map((tab, tabIndex) => (
+            <Fragment key={tabIndex}>
+              <div className="menu-item">
+                <div className="menu-content pb-2">
+                  <span className="menu-section text-muted text-uppercase fs-7 fw-bold">
+                    {tab.title}
+                  </span>
+                </div>
+              </div>
+              <div className="menu-sub menu-sub-accordion show">
+                {tab.children.map((section, sectionIndex) => (
+                  <div
+                    className="menu-item"
+                    data-kt-menu-trigger="click"
+                    data-kt-menu-permanent="true"
+                    key={sectionIndex}
+                  >
+                    <a
+                      className={classNames(
+                        'menu-link active border-3 border-start',
+                        selectedSection === section
+                          ? 'border-primary'
+                          : 'border-transparent',
+                      )}
+                      onClick={() => selectSection(section)}
+                    >
+                      <span className="menu-title">{section.title}</span>
+                      <span className="menu-badge fs-7 fw-normal text-muted">
+                        {section.count}
+                      </span>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </Fragment>
+          ))}
+        </div>
+      </Col>
+      <Col sm={8}>
+        {selectedSection && (
+          <selectedSection.component resource={value.tenant} />
+        )}
+      </Col>
+    </Row>
   );
 };

@@ -333,10 +333,6 @@ msgstr ""
 msgid "Add member"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourcesSection.tsx
-msgid "Add new"
-msgstr ""
-
 #: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
 msgid "Add new offering"
 msgstr ""
@@ -1577,7 +1573,6 @@ msgid "Compliance"
 msgstr ""
 
 #: src/marketplace/offerings/PriceList.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 msgid "Component"
 msgstr ""
 
@@ -2158,7 +2153,6 @@ msgstr ""
 
 #: src/customer/routes.ts
 #: src/marketplace/resources/details/fetchData.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/project/routes.ts
 #: src/user/routes.ts
 msgid "Dashboard"
@@ -2457,7 +2451,6 @@ msgstr ""
 #: src/marketplace/offerings/service-providers/shared/OfferingDetailsButton.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/team/UserDetailsButton.tsx
@@ -3292,14 +3285,11 @@ msgstr ""
 msgid "Flavor: {flavor_name}, image: {image_name}"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Flavors"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-msgid "Flavors ({count})"
 msgstr ""
 
 #: src/openstack/OpenStackTenantForm.tsx
@@ -3322,12 +3312,9 @@ msgstr ""
 msgid "Floating IP count"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Floating IPs"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-msgid "Floating IPs ({count})"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/update-floating-ips/utils.tsx
@@ -3875,12 +3862,9 @@ msgstr ""
 msgid "Instance should be shutoff and OK or erred. Please contact support."
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Instances"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-msgid "Instances ({count})"
 msgstr ""
 
 #: src/quotas/constants.ts
@@ -4989,16 +4973,13 @@ msgstr ""
 msgid "Networking"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-msgid "Networks ({count})"
 msgstr ""
 
 #: src/user/support/UserEmailChangeDialog.tsx
@@ -6462,12 +6443,9 @@ msgstr ""
 msgid "Port security enabled"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Ports"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-msgid "Ports ({count})"
 msgstr ""
 
 #: src/marketplace-checklist/PieChart.tsx
@@ -8003,12 +7981,9 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Routers"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-msgid "Routers ({count})"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/tabs.ts
@@ -8209,6 +8184,7 @@ msgid "Security group rules update has been scheduled."
 msgstr ""
 
 #: src/marketplace/resources/details/NetworkingTab.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -8219,10 +8195,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/rancher/cluster/create/TenantGroup.tsx
 msgid "Security groups"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-msgid "Security groups ({count})"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
@@ -8239,7 +8211,6 @@ msgstr ""
 
 #: src/issues/list/IssuesShortList.tsx
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/marketplace/resources/details/ResourcesSection.tsx
 msgid "See all"
 msgstr ""
 
@@ -8542,12 +8513,9 @@ msgstr ""
 msgid "Server group creation has been scheduled."
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Server groups"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-msgid "Server groups ({count})"
 msgstr ""
 
 #: src/customer/create/CustomerCreatePrompt.tsx
@@ -8968,14 +8936,11 @@ msgstr ""
 msgid "Snapshot size limit"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-snapshot-schedule/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshots"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-msgid "Snapshots ({count})"
 msgstr ""
 
 #: src/quotas/constants.ts
@@ -9242,14 +9207,11 @@ msgid "Subnet name"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-network/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Subnets"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-msgid "Subnets ({count})"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
@@ -9280,7 +9242,6 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/openstack/openstack-tenant/TenantFlavorsList.tsx
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
@@ -9894,10 +9855,6 @@ msgstr ""
 
 #: src/auth/AuthInit.tsx
 msgid "To get your clouds under control, please fill in your data."
-msgstr ""
-
-#: src/marketplace/resources/details/ResourceLink.tsx
-msgid "To instance"
 msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
@@ -11898,13 +11855,10 @@ msgstr ""
 msgid "Volume type storage limit is exceeded"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Volumes"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-msgid "Volumes ({count})"
 msgstr ""
 
 #: src/quotas/constants.ts
