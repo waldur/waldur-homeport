@@ -11770,6 +11770,14 @@ msgstr ""
 msgid "View item"
 msgstr ""
 
+#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
+msgid "View my organizations"
+msgstr ""
+
+#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
+msgid "View my projects"
+msgstr ""
+
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx
 msgid "Viewing image"
 msgstr ""

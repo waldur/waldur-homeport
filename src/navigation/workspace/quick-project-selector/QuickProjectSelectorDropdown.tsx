@@ -21,7 +21,7 @@ import useOnScreen from '@waldur/core/useOnScreen';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
 import { isChildOf } from '@waldur/navigation/useTabs';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, isStaffOrSupport } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { getCustomersCount } from '../api';
@@ -33,6 +33,7 @@ import './QuickProjectSelectorDropdown.scss';
 
 export const QuickProjectSelectorDropdown: FunctionComponent = () => {
   const currentCustomer = useSelector(getCustomer);
+  const canSeeAll = useSelector(isStaffOrSupport);
   const [selectedOrganization, selectOrganization] =
     useState<Customer>(currentCustomer);
 
@@ -158,8 +159,17 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
                   state="profile-organizations"
                   onClick={() => MenuComponent.hideDropdowns(undefined)}
                 >
-                  {translate('View all organizations')}
+                  {translate('View my organizations')}
                 </Link>
+                {canSeeAll && (
+                  <Link
+                    className="btn btn-sm btn-link text-dark mx-4 mt-4"
+                    state="admin.customers"
+                    onClick={() => MenuComponent.hideDropdowns(undefined)}
+                  >
+                    {translate('View all organizations')}
+                  </Link>
+                )}
               </Col>
               <Col className="organization-listing d-flex flex-column" xs={7}>
                 <Link
@@ -167,8 +177,17 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
                   state="profile-projects"
                   onClick={() => MenuComponent.hideDropdowns(undefined)}
                 >
-                  {translate('View all projects')}
+                  {translate('View my projects')}
                 </Link>
+                {canSeeAll && (
+                  <Link
+                    className="btn btn-sm btn-link text-dark mx-4 mt-4"
+                    state="admin.projects"
+                    onClick={() => MenuComponent.hideDropdowns(undefined)}
+                  >
+                    {translate('View all projects')}
+                  </Link>
+                )}
               </Col>
             </div>
           </>
