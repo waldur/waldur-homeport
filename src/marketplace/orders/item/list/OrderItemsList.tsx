@@ -36,8 +36,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
       render: ResourceNameField,
     },
     {
-      title: translate('Client organization'),
+      title: translate('Organization'),
       render: ({ row }) => row.customer_name,
+    },
+    {
+      title: translate('Project'),
+      render: ({ row }) => row.project_name,
     },
     {
       title: translate('Created at'),
@@ -67,6 +71,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('Order items')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hoverableRow={OrderItemActionsCell}
+      fullWidth={true}
     />
   );
 };

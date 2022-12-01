@@ -31,6 +31,7 @@ export interface TableProps<RowType = any> extends TableState {
   rowClass?: (({ row }) => string) | string;
   showPageSizeSelector?: boolean;
   updatePageSize?: (size: number) => void;
+  initialPageSize?: number;
   resetPagination?: () => void;
   sortList?(sorting: Sorting): void;
   initialSorting?: Sorting;
@@ -234,11 +235,14 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
   }
 
   componentDidMount() {
+    const doFetch = !this.props.initialPageSize && !this.props.initialSorting;
+    if (this.props.initialPageSize) {
+      this.props.updatePageSize(this.props.initialPageSize);
+    }
     if (this.props.initialSorting) {
       this.props.sortList(this.props.initialSorting);
-    } else {
-      this.props.fetch();
     }
+    doFetch && this.props.fetch();
   }
 
   componentDidUpdate(prevProps: TableProps) {

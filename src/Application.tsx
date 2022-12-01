@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { useAsync } from 'react-use';
 
+import { DrawerRoot } from '@waldur/drawer/DrawerRoot';
 import { ModalRoot } from '@waldur/modal/ModalRoot';
 import store from '@waldur/store/store';
 
@@ -34,6 +35,7 @@ export const Application: FunctionComponent = () => {
           <UIRouter>
             <ErrorBoundary fallback={ErrorMessage}>
               <ModalRoot />
+              <DrawerRoot />
               <UIView />
             </ErrorBoundary>
           </UIRouter>

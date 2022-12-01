@@ -8,6 +8,7 @@ import { ENV } from '@waldur/configs/default';
 
 import { getTitle } from '../title';
 
+import { ConfirmationDrawerToggle } from './ConfirmationDrawerToggle';
 import { SearchToggle } from './SearchToggle';
 import { UserDropdownMenu } from './UserDropdown';
 
@@ -84,6 +85,7 @@ export const AppHeader: FunctionComponent = () => {
             </div>
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
+            <ConfirmationDrawerToggle />
             <SearchToggle />
             <div className="d-flex align-items-center ms-1 ms-lg-3">
               <UserDropdownMenu />

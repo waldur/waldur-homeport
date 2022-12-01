@@ -5,6 +5,7 @@ import { reducer as formReducer } from 'redux-form';
 
 import { reducer as bookings } from '@waldur/booking/store/reducer';
 import { reducer as downloadLink } from '@waldur/core/DownloadLink/reducers';
+import { reducer as drawer } from '@waldur/drawer/reducer';
 import { reducer as issues } from '@waldur/issues/reducers';
 import { reducer as marketplace } from '@waldur/marketplace/store/reducers';
 import { reducer as modal } from '@waldur/modal/reducer';
@@ -25,6 +26,7 @@ export const rootReducer = combineReducers({
   router: routerReducer,
   config,
   modal,
+  drawer,
   tables,
   issues,
   workspace,

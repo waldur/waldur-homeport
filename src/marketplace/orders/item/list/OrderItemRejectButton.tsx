@@ -7,7 +7,11 @@ import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { updateEntity } from '@waldur/table/actions';
 
-import { TABLE_PUBLIC_ORDERS } from './constants';
+import {
+  TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
+  TABLE_PENDING_PUBLIC_ORDERS,
+  TABLE_PUBLIC_ORDERS,
+} from './constants';
 
 interface OrderItemRejectButtonProps {
   uuid: string;
@@ -23,7 +27,19 @@ export const OrderItemRejectButton: React.FC<OrderItemRejectButtonProps> = (
     try {
       await rejectOrderItem(props.uuid);
       const newOrderItem = await getOrderItem(props.uuid);
+      // update order items table on the main page
       dispatch(updateEntity(TABLE_PUBLIC_ORDERS, props.uuid, newOrderItem));
+      // update pending order items tables on the drawer
+      dispatch(
+        updateEntity(TABLE_PENDING_PUBLIC_ORDERS, props.uuid, newOrderItem),
+      );
+      dispatch(
+        updateEntity(
+          TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
+          props.uuid,
+          newOrderItem,
+        ),
+      );
       dispatch(showSuccess(translate('Order item has been rejected.')));
     } catch (response) {
       dispatch(
