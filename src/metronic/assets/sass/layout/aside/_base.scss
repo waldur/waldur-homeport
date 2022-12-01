@@ -56,15 +56,15 @@
     .btn-custom {
       //$color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active
       @include button-custom-variant(
-        #1a261d,
+        white,
         //$color
         null,
-        #1a261d,
-        $primary,
+        white,
+        $dark-mode-page-bg-color,
         // $bg-color
         #ffffff,
         // $color-active
-        #1a261d,
+        white,
         null,
         #52a341 // $bg-color-active
       );

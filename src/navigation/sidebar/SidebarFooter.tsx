@@ -1,6 +1,7 @@
 import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
 import { LandingLink } from '@waldur/marketplace/links/LandingLink';
+import { DocsLink } from '@waldur/navigation/header/DocsLink';
 
 const marketplaceIcon = require('./Marketplace.svg');
 
@@ -18,6 +19,7 @@ export const SidebarFooter = () => {
           <i className="fa fa-angle-right angle" />
         </span>
       </LandingLink>
+      <DocsLink />
     </div>
   );
 };

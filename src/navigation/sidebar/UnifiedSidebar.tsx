@@ -2,7 +2,6 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useEffect } from 'react';
 
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
-import { DocsLink } from '@waldur/navigation/header/DocsLink';
 
 import { isDescendantOf } from '../useTabs';
 
@@ -52,7 +51,6 @@ export const UnifiedSidebar = () => {
       <ReportingMenu />
       <SupportMenu />
       <AdminMenu />
-      <DocsLink />
     </Sidebar>
   );
 };
