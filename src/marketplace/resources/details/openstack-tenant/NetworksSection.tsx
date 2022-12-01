@@ -7,7 +7,7 @@ import { parseResponse } from '@waldur/table/api';
 import { ResourcesSection } from '../ResourcesSection';
 import { DataPage } from '../types';
 
-export const NetworksSection = ({ resource, title }) => {
+export const NetworksSection = ({ resource }) => {
   const loadData: QueryFunction<DataPage> = async (context) => {
     const response = await parseResponse(
       fixURL('/openstack-networks/'),
@@ -33,11 +33,6 @@ export const NetworksSection = ({ resource, title }) => {
     };
   };
   return (
-    <ResourcesSection
-      title={title}
-      loadData={loadData}
-      queryKey="networks"
-      canAdd={true}
-    />
+    <ResourcesSection loadData={loadData} queryKey="networks" canAdd={true} />
   );
 };
