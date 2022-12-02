@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
 import { ENV } from '@waldur/configs/default';
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 
 import { LoadingSpinner } from './core/LoadingSpinner';
 import { translate } from './i18n';
@@ -44,10 +45,9 @@ export const UserAgreementComponent: FunctionComponent<TemplateComponentProps> =
             <h1>{props.title}</h1>
           </div>
 
-          <div
-            className="white-box text-page"
-            dangerouslySetInnerHTML={{ __html: value }}
-          />
+          <div className="white-box text-page">
+            <FormattedHtml html={value} />
+          </div>
         </div>
       </div>
     );
