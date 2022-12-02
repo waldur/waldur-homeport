@@ -1,10 +1,10 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { Layout } from '@waldur/navigation/Layout';
+// import { Layout } from '@waldur/navigation/Layout';
 
-const AnonymousLayout = lazyComponent(
-  () => import('@waldur/navigation/AnonymousLayout'),
-  'AnonymousLayout',
+const Layout = lazyComponent(
+  () => import('@waldur/navigation/Layout'),
+  'Layout',
 );
 
 const LandingPage = lazyComponent(() => import('./LandingPage'), 'LandingPage');
@@ -16,7 +16,7 @@ export const states: StateDeclaration[] = [
     name: 'home',
     url: '',
     abstract: true,
-    component: AnonymousLayout,
+    component: Layout,
   },
 
   {

@@ -1,9 +1,9 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
-const AnonymousLayout = lazyComponent(
-  () => import('@waldur/navigation/AnonymousLayout'),
-  'AnonymousLayout',
+const Layout = lazyComponent(
+  () => import('@waldur/navigation/Layout'),
+  'Layout',
 );
 const PaymentApprove = lazyComponent(
   () => import('./PaymentApprove'),
@@ -19,7 +19,7 @@ export const states: StateDeclaration[] = [
     name: 'payment',
     url: '/payment/',
     abstract: true,
-    component: AnonymousLayout,
+    component: Layout,
     data: {
       auth: true,
     },

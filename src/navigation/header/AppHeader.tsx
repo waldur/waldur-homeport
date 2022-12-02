@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import 'world-flags-sprite/stylesheets/flags16.css';
 
 import { ENV } from '@waldur/configs/default';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { getTitle } from '../title';
 
@@ -57,6 +58,9 @@ export const AppHeader: FunctionComponent = () => {
   const routerTitle = router.globals.$current.path
     .find((part) => part.data?.title)
     ?.data.title();
+
+  const user = useSelector(getUser);
+
   return (
     <div className="header align-items-stretch">
       <div className="container-fluid d-flex align-items-stretch justify-content-between">
@@ -86,7 +90,7 @@ export const AppHeader: FunctionComponent = () => {
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
             <ConfirmationDrawerToggle />
-            <SearchToggle />
+            {user && <SearchToggle />}
             <div className="d-flex align-items-center ms-1 ms-lg-3">
               <UserDropdownMenu />
             </div>

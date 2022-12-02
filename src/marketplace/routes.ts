@@ -20,9 +20,9 @@ const ResourceDetailsPage = lazyComponent(
   () => import('@waldur/marketplace/resources/details/ResourceDetailsPage'),
   'ResourceDetailsPage',
 );
-const AnonymousLayout = lazyComponent(
-  () => import('@waldur/navigation/AnonymousLayout'),
-  'AnonymousLayout',
+const Layout = lazyComponent(
+  () => import('@waldur/navigation/Layout'),
+  'Layout',
 );
 const CheckoutPage = lazyComponent(
   () => import('./cart/CheckoutPage'),
@@ -254,7 +254,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-landing',
     url: '/marketplace/',
     abstract: true,
-    component: AnonymousLayout,
+    component: Layout,
     data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
 
@@ -268,7 +268,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-public-offering',
     url: '/marketplace-public-offering/',
     abstract: true,
-    component: AnonymousLayout,
+    component: Layout,
     data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
 
@@ -300,7 +300,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-categories',
     url: '/marketplace/all/',
     abstract: true,
-    component: AnonymousLayout,
+    component: Layout,
     data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
   {
@@ -331,7 +331,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-category',
     url: '/marketplace-category/',
     abstract: true,
-    component: AnonymousLayout,
+    component: Layout,
     data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
   {
@@ -398,7 +398,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-service-provider',
     url: '/service-providers/',
     abstract: true,
-    component: AnonymousLayout,
+    component: Layout,
     data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
 
@@ -412,7 +412,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-service-providers',
     url: '/service-providers/',
     abstract: true,
-    component: AnonymousLayout,
+    component: Layout,
     data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
 

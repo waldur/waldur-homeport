@@ -1,11 +1,15 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
 import React, { useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { AuthService } from '@waldur/auth/AuthService';
 import { PermissionDataProvider } from '@waldur/auth/PermissionLayout';
 import WarningBar from '@waldur/auth/WarningBar';
 import { DefaultLayoutConfig, useLayout } from '@waldur/metronic/layout/core';
 import { MasterLayout } from '@waldur/metronic/layout/MasterLayout';
+import { getCurrentUser } from '@waldur/user/UsersService';
+import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { AppFooter } from './AppFooter';
@@ -18,6 +22,8 @@ import { Toolbar } from './Toolbar';
 import { useTabs } from './useTabs';
 
 export const Layout: React.FC = ({ children }) => {
+  const dispatch = useDispatch();
+  const { state } = useCurrentStateAndParams();
   const currentUser = useSelector(getUser);
   const [actions, setActions] = useState(null);
   const [extraTabs, setExtraTabs] = useState<Tab[]>([]);
@@ -45,9 +51,14 @@ export const Layout: React.FC = ({ children }) => {
     });
   }, [tabs, fullPage]);
 
-  if (!currentUser) {
-    return null;
-  }
+  useEffect(() => {
+    if (AuthService.isAuthenticated() && !currentUser) {
+      getCurrentUser({ __skipLogout__: state?.data?.skipAuth }).then((user) => {
+        dispatch(setCurrentUser(user));
+      });
+    }
+  }, []);
+
   return (
     <LayoutContext.Provider value={context}>
       <PermissionDataProvider>
@@ -56,7 +67,7 @@ export const Layout: React.FC = ({ children }) => {
             <UnifiedSidebar />
             <div className="wrapper d-flex flex-column flex-row-fluid">
               <CookiesConsent />
-              <AppHeader />
+              {!state?.data?.hideHeader && <AppHeader />}
               <WarningBar />
               <div
                 className={classNames('content d-flex flex-column-fluid', {
