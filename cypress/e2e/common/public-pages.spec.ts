@@ -89,12 +89,12 @@ describe('TOS and PP pages', () => {
   it('Assure that TOS page is visible without auth token', () => {
     cy.visit('/tos/');
 
-    cy.get('P:contains(TOS)').should('be.visible');
+    cy.get('span:contains(TOS)').should('be.visible');
   });
 
   it('Assure that PP page is visible without auth token', () => {
     cy.visit('/privacy/');
 
-    cy.get('p:contains(PP)').should('be.visible');
+    cy.get('span:contains(PP)').should('be.visible');
   });
 });

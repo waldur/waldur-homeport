@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 
 import { LoadingSpinner } from './core/LoadingSpinner';
 import { translate } from './i18n';
@@ -53,7 +54,7 @@ export const UserAgreementComponent: FunctionComponent<TemplateComponentProps> =
             </p>
 
             <h2 className="fw-bold">{props.title}</h2>
-            <p dangerouslySetInnerHTML={{ __html: option.content }} />
+            <FormattedHtml html={option.content} />
           </div>
         </div>
       </div>
