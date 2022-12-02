@@ -53,7 +53,7 @@ export const UserAgreementComponent: FunctionComponent<TemplateComponentProps> =
             </p>
 
             <h2 className="fw-bold">{props.title}</h2>
-            <p>{option.content}</p>
+            <p dangerouslySetInnerHTML={{ __html: option.content }} />
           </div>
         </div>
       </div>
