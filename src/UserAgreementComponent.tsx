@@ -44,9 +44,10 @@ export const UserAgreementComponent: FunctionComponent<TemplateComponentProps> =
             <h1>{props.title}</h1>
           </div>
 
-          <div className="white-box text-page">
-            <h2>{value}</h2>
-          </div>
+          <div
+            className="white-box text-page"
+            dangerouslySetInnerHTML={{ __html: value }}
+          />
         </div>
       </div>
     );
