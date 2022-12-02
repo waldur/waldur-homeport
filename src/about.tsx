@@ -8,9 +8,9 @@ import {
 import { lazyComponent } from './core/lazyComponent';
 import { useTitle } from './navigation/title';
 
-const AnonymousLayout = lazyComponent(
-  () => import('@waldur/navigation/AnonymousLayout'),
-  'AnonymousLayout',
+const Layout = lazyComponent(
+  () => import('@waldur/navigation/Layout'),
+  'Layout',
 );
 
 const TosPage = () => {
@@ -38,7 +38,7 @@ export const states: StateDeclaration[] = [
     name: 'about',
     url: '',
     abstract: true,
-    component: AnonymousLayout,
+    component: Layout,
     data: {
       title: () => translate('About'),
     },

@@ -74,7 +74,7 @@ export const states: StateDeclaration[] = [
     data: {
       auth: true,
       workspace: USER_WORKSPACE,
-      title: () => UsersService.getCachedUser().full_name,
+      title: () => UsersService.getCachedUser()?.full_name,
     },
     component: UserDetails,
   },

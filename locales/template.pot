@@ -4383,7 +4383,7 @@ msgstr ""
 #: src/auth/SigninButton.tsx
 #: src/auth/SigninForm.tsx
 #: src/auth/saml2/AuthSaml2Dialog.tsx
-#: src/navigation/sidebar/SiteSidebar.tsx
+#: src/navigation/sidebar/UnifiedSidebar.tsx
 msgid "Login"
 msgstr ""
 
@@ -4472,7 +4472,6 @@ msgstr ""
 #: src/marketplace/offerings/details/PageManagement.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
-#: src/navigation/sidebar/SiteSidebar.tsx
 msgid "Management"
 msgstr ""
 
@@ -5665,7 +5664,6 @@ msgstr ""
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/navigation/header/pending-order-items/OrderItemsTable.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
-#: src/navigation/sidebar/SiteSidebar.tsx
 #: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
 #: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
 #: src/project/SupportProjectsList.tsx
@@ -6650,7 +6648,6 @@ msgstr ""
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/navigation/header/pending-order-items/OrderItemsTable.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
-#: src/navigation/sidebar/SiteSidebar.tsx
 #: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
 #: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx

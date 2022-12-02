@@ -26,12 +26,12 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
-  const isOwner = customer?.owners?.find((perm) => perm.uuid === user.uuid);
+  const isOwner = customer?.owners?.find((perm) => perm.uuid === user?.uuid);
   const isServiceManager = customer?.service_managers?.find(
     (perm) => perm.uuid === user.uuid,
   );
   const projectUser = project?.permissions?.find(
-    (perm) => perm.user_uuid === user.uuid,
+    (perm) => perm.user_uuid === user?.uuid,
   );
   const image = project?.image || customer?.image;
   const workspace = useSelector(getWorkspace);
