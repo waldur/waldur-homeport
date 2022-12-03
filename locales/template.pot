@@ -2975,7 +2975,6 @@ msgid "Event types"
 msgstr ""
 
 #: src/marketplace/resources/details/fetchData.tsx
-#: src/project/ShortEventsList.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
 msgstr ""
@@ -12237,7 +12236,6 @@ msgid "etcd"
 msgstr ""
 
 #: src/events/BaseEventsList.tsx
-#: src/project/ShortEventsList.tsx
 msgid "events"
 msgstr ""
 
