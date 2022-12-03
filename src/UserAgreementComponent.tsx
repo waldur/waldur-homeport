@@ -43,13 +43,21 @@ export const UserAgreementComponent: FunctionComponent<TemplateComponentProps> =
       return <>{translate('Unable to load page')}</>;
     }
 
+    if (!option) {
+      return (
+        <h2>
+          {props.title} {translate('is not defined.')}
+        </h2>
+      );
+    }
+
     return (
       <div>
         <div className="mb-6 card">
           <div className="card-body">
             <p className="mb-10">
               <em className="fw-light ms-4">
-                Published: {formatDateTime(option.created)}
+                {translate('Published')}: {formatDateTime(option.created)}
               </em>
             </p>
 
