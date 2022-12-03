@@ -44,7 +44,6 @@ export interface TableProps<RowType = any> extends TableState {
   placeholderComponent?: React.ReactNode;
   filters?: React.ReactNode;
   title?: React.ReactNode;
-  alterTitle?: React.ReactNode;
   fullWidth?: boolean;
   enableMultiSelect?: boolean;
   multiSelectActions?: React.ComponentType<{ rows: any[] }>;
@@ -73,9 +72,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
           <Row className="card-toolbar w-100">
             <Col xs className="order-0 pe-5">
               <Card.Title>
-                <span className="me-2">
-                  {this.props.title || this.props.alterTitle}
-                </span>
+                <span className="me-2">{this.props.title}</span>
                 <TableRefreshButton {...this.props} />
               </Card.Title>
             </Col>

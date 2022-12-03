@@ -83,7 +83,7 @@ export function connectTable(options: TableOptionsType) {
       };
 
       const mapStateToProps = (state: RootState) => ({
-        alterTitle: getDefaultTitle(state),
+        title: getDefaultTitle(state),
         filterColumns: filterColumns(state),
         ...getTableState(table)(state),
         rows: selectTableRows(state, table),
