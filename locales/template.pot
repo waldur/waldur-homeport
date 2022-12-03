@@ -6982,6 +6982,7 @@ msgstr ""
 msgid "Publish as Google Calendar"
 msgstr ""
 
+#: src/UserAgreementComponent.tsx
 #: src/marketplace/referral/ReferralsList.tsx
 msgid "Published"
 msgstr ""
@@ -12298,6 +12299,10 @@ msgstr ""
 #: src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 msgid "invoices"
+msgstr ""
+
+#: src/UserAgreementComponent.tsx
+msgid "is not defined."
 msgstr ""
 
 #: src/table/utils.tsx
