@@ -118,6 +118,7 @@ const TableOptions = {
       'backend_id',
       'oecd_fos_2007_code',
       'is_industry',
+      'marketplace_resource_count',
     ];
 
     return filter;

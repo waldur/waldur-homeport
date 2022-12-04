@@ -72,14 +72,10 @@ export const parseProjectCounters = (
   categories: Category[],
   counters: object,
 ): ProjectCounterResourceItem[] => {
-  const countersPrefix =
-    counters && Object.keys(counters)[0].startsWith('marketplace_category')
-      ? 'marketplace_category_'
-      : '';
   return categories
     .map((category) => ({
       label: category.title,
-      value: counters[`${countersPrefix}${category.uuid}`],
+      value: counters[category.uuid],
     }))
     .filter((row) => row.value);
 };

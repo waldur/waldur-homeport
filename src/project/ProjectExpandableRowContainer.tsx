@@ -8,7 +8,6 @@ import { getCategories } from '@waldur/marketplace/common/api';
 import { Field } from '@waldur/resource/summary';
 import { Project } from '@waldur/workspace/types';
 
-import { getProjectCounters } from './api';
 import { ProjectCounterResourceItem } from './types';
 import { combineProjectCounterRows, parseProjectCounters } from './utils';
 
@@ -16,8 +15,10 @@ async function loadData(props): Promise<ProjectCounterResourceItem[]> {
   const categories = await getCategories({
     params: { field: ['uuid', 'title'] },
   });
-  const counters = await getProjectCounters(props.uuid);
-  const counterRows = parseProjectCounters(categories, counters);
+  const counterRows = parseProjectCounters(
+    categories,
+    props.marketplace_resource_count,
+  );
   return combineProjectCounterRows(counterRows);
 }
 
@@ -35,9 +36,11 @@ export const ProjectExpandableRowContainer: React.FC<{
   } else {
     return (
       <Container>
-        {value.map((row, index) => (
-          <Field key={index} label={row.label} value={row.value} />
-        ))}
+        {value.length === 0
+          ? translate('There are no resources')
+          : value.map((row, index) => (
+              <Field key={index} label={row.label} value={row.value} />
+            ))}
         <Field label={translate('Backend ID')} value={props.row.backend_id} />
       </Container>
     );

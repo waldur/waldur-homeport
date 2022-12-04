@@ -116,6 +116,3 @@ export const fetchLast12MonthProjectCosts = (projectId: string) =>
     page: 1,
     page_size: 12,
   });
-
-export const getProjectCounters = (projectUuid: string) =>
-  get(`/projects/${projectUuid}/counters/`).then((response) => response.data);
