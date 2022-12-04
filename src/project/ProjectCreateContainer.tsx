@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -12,5 +13,11 @@ export const ProjectCreateContainer: React.FC<{}> = () => {
   const dispatch = useDispatch();
   const onSubmit = (data) => createProject(data, dispatch);
   const onCancel = () => gotoProjectList(null, dispatch);
-  return <ProjectCreateForm onSubmit={onSubmit} onCancel={onCancel} />;
+  return (
+    <Card>
+      <Card.Body>
+        <ProjectCreateForm onSubmit={onSubmit} onCancel={onCancel} />
+      </Card.Body>
+    </Card>
+  );
 };
