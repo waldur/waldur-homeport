@@ -2443,6 +2443,10 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourcesList.tsx
+msgid "Detailed view"
+msgstr ""
+
 #: src/customer/team/UserDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/issues/create/CallerGroup.tsx

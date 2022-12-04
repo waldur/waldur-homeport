@@ -1,7 +1,9 @@
+import { UISref, useCurrentStateAndParams } from '@uirouter/react';
 import { FC, Fragment } from 'react';
 import { QueryFunction, useInfiniteQuery } from 'react-query';
 
 import { translate } from '@waldur/i18n';
+import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 
 import { ResourceLink } from './ResourceLink';
 import { ResourceStateIndicator } from './ResourceStateIndicator';
@@ -27,56 +29,73 @@ export const ResourcesList: FC<ResourcesListProps> = ({
     getNextPageParam: (lastPage: DataPage) => lastPage.nextPage,
   });
 
+  const { state } = useCurrentStateAndParams();
+
   return status === 'loading' ? (
     <p>{translate('Loading')}</p>
   ) : status === 'error' ? (
     <p>{translate('Error')}</p>
+  ) : data.pages.length === 1 && data.pages[0].data.length === 0 ? (
+    <p className="text-center">{translate('List is empty.')}</p>
   ) : (
-    <>
-      {data.pages.map((page, i) => (
-        <Fragment key={i}>
-          {page.data.map((row, index) => (
-            <p key={index} className="d-flex">
-              <div className="flex-grow-1">
-                <h5>
-                  {row.marketplace_resource_uuid ? (
-                    <ResourceLink row={row}>{row.name}</ResourceLink>
-                  ) : (
-                    row.name
+    <div>
+      <div className="d-flex justify-content-end">
+        <UISref to={state.name} params={{ tab: queryKey }}>
+          <a className="mb-3 btn btn-light">{translate('Detailed view')}</a>
+        </UISref>
+      </div>
+      <table className="table">
+        <tbody>
+          {data.pages.map((page, i) => (
+            <Fragment key={i}>
+              {page.data.map((row, index) => (
+                <tr key={index}>
+                  <td>
+                    <h5>
+                      {row.marketplace_resource_uuid ? (
+                        <ResourceLink row={row}>{row.name}</ResourceLink>
+                      ) : (
+                        row.name
+                      )}
+                    </h5>
+                    <p>{row.summary}</p>
+                  </td>
+                  <td>
+                    {row.state && <ResourceStateIndicator state={row.state} />}
+                  </td>
+                  {row.url && (
+                    <td className="row-actions">
+                      <ActionButtonResource url={row.url} />
+                    </td>
                   )}
-                </h5>
-                <p>{row.summary}</p>
-              </div>
-              <div>
-                {row.state && <ResourceStateIndicator state={row.state} />}
-              </div>
-            </p>
+                </tr>
+              ))}
+            </Fragment>
           ))}
-        </Fragment>
-      ))}
-      <tr>
-        <td></td>
-        <td className="text-center" colSpan={5}>
-          {hasNextPage && (
-            <div>
-              <button
-                onClick={() => fetchNextPage()}
-                disabled={isFetchingNextPage}
-                className="btn btn-default"
-              >
-                {isFetchingNextPage
-                  ? translate('Loading more...')
-                  : translate('Load more')}
-              </button>
-            </div>
-          )}
-          <div>
-            {isFetching && !isFetchingNextPage
-              ? translate('Fetching...')
-              : null}
-          </div>
-        </td>
-      </tr>
-    </>
+          <tr>
+            <td className="text-center" colSpan={5}>
+              {hasNextPage && (
+                <div>
+                  <button
+                    onClick={() => fetchNextPage()}
+                    disabled={isFetchingNextPage}
+                    className="btn btn-default"
+                  >
+                    {isFetchingNextPage
+                      ? translate('Loading more...')
+                      : translate('Load more')}
+                  </button>
+                </div>
+              )}
+              <div>
+                {isFetching && !isFetchingNextPage
+                  ? translate('Fetching...')
+                  : null}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 };

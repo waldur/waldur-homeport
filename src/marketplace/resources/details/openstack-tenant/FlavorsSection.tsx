@@ -4,7 +4,7 @@ import { fixURL } from '@waldur/core/api';
 import { formatFlavor } from '@waldur/resource/utils';
 import { parseResponse } from '@waldur/table/api';
 
-import { ResourcesSection } from '../ResourcesSection';
+import { ResourcesList } from '../ResourcesList';
 import { DataPage } from '../types';
 
 export const FlavorsSection = ({ resource }) => {
@@ -26,5 +26,5 @@ export const FlavorsSection = ({ resource }) => {
       nextPage: response.nextPage,
     };
   };
-  return <ResourcesSection loadData={loadData} queryKey="flavors" />;
+  return <ResourcesList loadData={loadData} queryKey="flavors" />;
 };

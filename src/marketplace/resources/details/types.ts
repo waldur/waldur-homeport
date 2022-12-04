@@ -5,6 +5,7 @@ interface DataRow {
   state?: ResourceState;
   summary: string;
   marketplace_resource_uuid?: string;
+  url?: string;
   project_uuid?: string;
 }
 

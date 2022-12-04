@@ -5,7 +5,7 @@ import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { parseResponse } from '@waldur/table/api';
 
-import { ResourcesSection } from '../ResourcesSection';
+import { ResourcesList } from '../ResourcesList';
 import { DataPage } from '../types';
 
 export const SnapshotsSection = ({ resource }) => {
@@ -30,9 +30,10 @@ export const SnapshotsSection = ({ resource }) => {
           size: formatFilesize(instance.size),
         }),
         state: instance.state,
+        url: instance.url,
       })),
       nextPage: response.nextPage,
     };
   };
-  return <ResourcesSection loadData={loadData} queryKey="snapshots" />;
+  return <ResourcesList loadData={loadData} queryKey="snapshots" />;
 };

@@ -5,7 +5,7 @@ import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { parseResponse } from '@waldur/table/api';
 
-import { ResourcesSection } from '../ResourcesSection';
+import { ResourcesList } from '../ResourcesList';
 import { DataPage } from '../types';
 
 export const VolumesSection = ({ resource }) => {
@@ -33,11 +33,10 @@ export const VolumesSection = ({ resource }) => {
         state: instance.state,
         marketplace_resource_uuid: instance.marketplace_resource_uuid,
         project_uuid: instance.project_uuid,
+        url: instance.url,
       })),
       nextPage: response.nextPage,
     };
   };
-  return (
-    <ResourcesSection loadData={loadData} queryKey="volumes" canAdd={true} />
-  );
+  return <ResourcesList loadData={loadData} queryKey="volumes" />;
 };
