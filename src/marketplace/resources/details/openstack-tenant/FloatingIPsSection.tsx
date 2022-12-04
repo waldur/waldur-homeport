@@ -4,7 +4,7 @@ import { fixURL } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { parseResponse } from '@waldur/table/api';
 
-import { ResourcesSection } from '../ResourcesSection';
+import { ResourcesList } from '../ResourcesList';
 import { DataPage } from '../types';
 
 export const FloatingIPsSection = ({ resource }) => {
@@ -26,15 +26,10 @@ export const FloatingIPsSection = ({ resource }) => {
           instance: instance.instance_name || 'N/A',
         }),
         state: instance.state,
+        url: instance.url,
       })),
       nextPage: response.nextPage,
     };
   };
-  return (
-    <ResourcesSection
-      loadData={loadData}
-      queryKey="floating_ips"
-      canAdd={true}
-    />
-  );
+  return <ResourcesList loadData={loadData} queryKey="floating_ips" />;
 };

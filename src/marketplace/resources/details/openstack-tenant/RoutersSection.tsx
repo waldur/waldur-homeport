@@ -4,7 +4,7 @@ import { fixURL } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { parseResponse } from '@waldur/table/api';
 
-import { ResourcesSection } from '../ResourcesSection';
+import { ResourcesList } from '../ResourcesList';
 import { DataPage } from '../types';
 
 export const RoutersSection = ({ resource }) => {
@@ -29,5 +29,5 @@ export const RoutersSection = ({ resource }) => {
       nextPage: response.nextPage,
     };
   };
-  return <ResourcesSection loadData={loadData} queryKey="routers" />;
+  return <ResourcesList loadData={loadData} queryKey="routers" />;
 };

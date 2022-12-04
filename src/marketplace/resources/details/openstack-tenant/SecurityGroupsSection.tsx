@@ -4,7 +4,7 @@ import { fixURL } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { parseResponse } from '@waldur/table/api';
 
-import { ResourcesSection } from '../ResourcesSection';
+import { ResourcesList } from '../ResourcesList';
 import { DataPage } from '../types';
 
 export const SecurityGroupsSection = ({ resource }) => {
@@ -25,15 +25,10 @@ export const SecurityGroupsSection = ({ resource }) => {
           rules: instance.rules.length,
         }),
         state: instance.state,
+        url: instance.url,
       })),
       nextPage: response.nextPage,
     };
   };
-  return (
-    <ResourcesSection
-      loadData={loadData}
-      queryKey="security_groups"
-      canAdd={true}
-    />
-  );
+  return <ResourcesList loadData={loadData} queryKey="security_groups" />;
 };

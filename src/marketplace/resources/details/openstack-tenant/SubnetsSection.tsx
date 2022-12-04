@@ -4,7 +4,7 @@ import { fixURL } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { parseResponse } from '@waldur/table/api';
 
-import { ResourcesSection } from '../ResourcesSection';
+import { ResourcesList } from '../ResourcesList';
 import { DataPage } from '../types';
 
 export const SubnetsSection = ({ resource }) => {
@@ -27,5 +27,5 @@ export const SubnetsSection = ({ resource }) => {
       nextPage: response.nextPage,
     };
   };
-  return <ResourcesSection loadData={loadData} queryKey="subnets" />;
+  return <ResourcesList loadData={loadData} queryKey="subnets" />;
 };

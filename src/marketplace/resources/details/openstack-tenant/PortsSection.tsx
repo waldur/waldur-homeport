@@ -4,7 +4,7 @@ import { fixURL } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { parseResponse } from '@waldur/table/api';
 
-import { ResourcesSection } from '../ResourcesSection';
+import { ResourcesList } from '../ResourcesList';
 import { DataPage } from '../types';
 
 export const PortsSection = ({ resource }) => {
@@ -25,9 +25,10 @@ export const PortsSection = ({ resource }) => {
         summary: translate('MAC address: {mac_address}', {
           mac_address: instance.mac_address || 'N/A',
         }),
+        url: instance.url,
       })),
       nextPage: response.nextPage,
     };
   };
-  return <ResourcesSection loadData={loadData} queryKey="ports" />;
+  return <ResourcesList loadData={loadData} queryKey="ports" />;
 };
