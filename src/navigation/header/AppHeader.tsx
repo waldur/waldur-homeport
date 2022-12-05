@@ -89,7 +89,7 @@ export const AppHeader: FunctionComponent = () => {
             </div>
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
-            <ConfirmationDrawerToggle />
+            {user && <ConfirmationDrawerToggle />}
             {user && <SearchToggle />}
             <div className="d-flex align-items-center ms-1 ms-lg-3">
               <UserDropdownMenu />
