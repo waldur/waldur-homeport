@@ -20,7 +20,7 @@ export const UserDashboard: React.FC = () => {
 
   const asyncState = useAsync(countChecklists);
 
-  return asyncState.loading ? (
+  return !user || asyncState.loading ? (
     <LoadingSpinner />
   ) : asyncState.error ? (
     <>{translate('Unable to load data.')}</>
