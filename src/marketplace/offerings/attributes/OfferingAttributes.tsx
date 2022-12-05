@@ -4,6 +4,7 @@ import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { FieldError } from '@waldur/form';
+import { InputField } from '@waldur/form/InputField';
 import { Section } from '@waldur/marketplace/types';
 
 import { configAttrField } from './utils';
@@ -55,7 +56,7 @@ export const OfferingAttributes: React.FC<OfferingAttributesProps> = (
                 <Field
                   key={attributeIndex}
                   name={`attributes.${attribute.key}`}
-                  component={Form.Control}
+                  component={InputField}
                   {...attr}
                 />
                 <Field

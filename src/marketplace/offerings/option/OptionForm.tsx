@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { InputField } from '@waldur/form/InputField';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
@@ -33,7 +33,7 @@ const StringField: FunctionComponent<any> = (props) => (
   <Field
     name={`${props.option}.${props.name}`}
     type="text"
-    component={Form.Control}
+    component={InputField}
     validate={props.validate}
     readOnly={props.readOnly}
   />
@@ -70,7 +70,7 @@ const MinMaxFields = (props: { option: string; readOnly?: boolean }) => (
       <Field
         name={`${props.option}.min`}
         type="number"
-        component={Form.Control}
+        component={InputField}
         readOnly={props.readOnly}
       />
     </FormGroup>
@@ -78,7 +78,7 @@ const MinMaxFields = (props: { option: string; readOnly?: boolean }) => (
       <Field
         name={`${props.option}.max`}
         type="number"
-        component={Form.Control}
+        component={InputField}
         readOnly={props.readOnly}
       />
     </FormGroup>

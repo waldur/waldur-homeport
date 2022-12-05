@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
 import { compose } from 'redux';
 import { Field, FormSection } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { WysiwygEditor } from '@waldur/marketplace/offerings/create/WysiwygEditor';
 import { OfferingComponent } from '@waldur/marketplace/types';
@@ -24,7 +24,7 @@ interface PlanFormProps {
 }
 
 const PlanNameField: FunctionComponent = () => (
-  <Field name="name" type="text" component={Form.Control} validate={required} />
+  <Field name="name" type="text" component={InputField} validate={required} />
 );
 
 const PlanDescriptionField: FunctionComponent = () => (
