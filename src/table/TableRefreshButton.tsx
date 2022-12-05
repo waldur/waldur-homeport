@@ -13,10 +13,7 @@ export const TableRefreshButton = (props: TableProps) =>
   (props.sorting && props.sorting.loading) ? (
     <LoadingSpinner />
   ) : (
-    <button
-      className="btn btn-icon btn-active-light-dark"
-      onClick={props.fetch}
-    >
+    <button className="btn btn-icon btn-active-light" onClick={props.fetch}>
       <i className="fa fa-refresh fs-4"></i>
     </button>
   );
