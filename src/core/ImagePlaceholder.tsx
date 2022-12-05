@@ -1,13 +1,13 @@
+import { FC } from 'react';
 import './ImagePlaceholder.css';
 
 interface ImagePlaceholderProps {
   width?: string;
   height?: string;
   backgroundColor?: string;
-  className?: string;
 }
 
-export const ImagePlaceholder = (props: ImagePlaceholderProps) => {
+export const ImagePlaceholder: FC<ImagePlaceholderProps> = (props) => {
   return (
     <div
       className="image-placeholder"
@@ -17,7 +17,9 @@ export const ImagePlaceholder = (props: ImagePlaceholderProps) => {
         height: props.height,
         backgroundColor: props.backgroundColor,
       }}
-    />
+    >
+      {props.children}
+    </div>
   );
 };
 
