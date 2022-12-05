@@ -22,6 +22,7 @@ export const getCustomersPage = (query, page, pageSize, isServiceProvider?) =>
         'service_managers',
         'abbreviation',
         'is_service_provider',
+        'image',
       ],
       o: 'name',
       query,
