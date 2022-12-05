@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { formatRole } from '@waldur/core/utils';
+import { formatRole, getAbbreviation } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { formatUserStatus } from '@waldur/user/support/utils';
 import {
@@ -22,6 +22,19 @@ import {
 import { GuestDropdown } from './GuestDropdown';
 import { QuickProjectSelectorDropdown } from './QuickProjectSelectorDropdown';
 
+const getProjectAbbreviation = (project) => {
+  // Projects don't have abbreviation
+  return getAbbreviation(project.name);
+};
+
+const getCustomerAbbreviation = (customer) => {
+  // Customer abbreviation is optional
+  if (customer.abbreviation) {
+    return customer.abbreviation.toUpperCase();
+  }
+  return getAbbreviation(customer.name);
+};
+
 export const QuickProjectSelectorToggle: FunctionComponent = () => {
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
@@ -37,6 +50,21 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
   const workspace = useSelector(getWorkspace);
   const isProject = workspace === PROJECT_WORKSPACE;
   const isCustomer = workspace === ORGANIZATION_WORKSPACE;
+  const abbreviation = useMemo(() => {
+    if (isProject) {
+      return getProjectAbbreviation(project);
+    }
+    if (isCustomer) {
+      return getCustomerAbbreviation(customer);
+    }
+    if (project) {
+      return getProjectAbbreviation(project);
+    }
+    if (customer) {
+      return getCustomerAbbreviation(customer);
+    }
+    return '';
+  }, [customer, project, isProject, isCustomer]);
   return (
     <div
       className="aside-toolbar flex-column-auto overflow-hidden"
@@ -52,7 +80,13 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
           {image ? (
             <Image src={image} size={50} />
           ) : (
-            <ImagePlaceholder width="50px" height="50px" />
+            <ImagePlaceholder width="50px" height="50px">
+              {abbreviation && (
+                <div className="symbol-label fs-6 fw-bold">
+                  {abbreviation.substr(0, 4)}
+                </div>
+              )}
+            </ImagePlaceholder>
           )}
         </div>
         <div className="flex-row-fluid flex-wrap ms-5">

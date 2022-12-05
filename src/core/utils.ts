@@ -52,6 +52,9 @@ export const formatSnakeCase = (input) =>
     (letter, pos) => (pos ? '-' : '') + letter.toLowerCase(),
   );
 
+export const getAbbreviation = (text) =>
+  text.replace(/(\w)\w*\W*/g, (_, i) => i.toUpperCase());
+
 export const flatten = (lists) => Array.prototype.concat.apply([], lists);
 
 export const listToDict = (key, value) => (list) => {
