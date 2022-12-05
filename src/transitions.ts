@@ -83,7 +83,10 @@ export function attachTransitions() {
         state.data.feature &&
         !isFeatureVisible(state.data.feature),
     },
-    (transition) => transition.router.stateService.target('errorPage.notFound'),
+    (transition) =>
+      transition.router.stateService.target(
+        transition.options().custom?.fallbackState || 'errorPage.notFound',
+      ),
   );
 
   router.transitionService.onStart(
@@ -95,7 +98,10 @@ export function attachTransitions() {
           permission(store.getState()),
         ),
     },
-    (transition) => transition.router.stateService.target('errorPage.notFound'),
+    (transition) =>
+      transition.router.stateService.target(
+        transition.options().custom?.fallbackState || 'errorPage.notFound',
+      ),
   );
 
   router.transitionService.onError({}, (transition) => {

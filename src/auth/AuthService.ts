@@ -92,6 +92,9 @@ function redirectOnSuccess() {
     resetRedirect();
     return router.stateService.go(redirect.toState, redirect.toParams, {
       reload: true,
+      custom: {
+        fallbackState: 'profile.details',
+      },
     });
   } else {
     return router.stateService.go('profile.details', { reload: true });
