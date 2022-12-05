@@ -4313,6 +4313,10 @@ msgstr ""
 msgid "Link invoice"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourcesList.tsx
+msgid "List is empty."
+msgstr ""
+
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "List of IPv4 or IPv6 CIDR addresses from where connection to self-service is allowed"
 msgstr ""
@@ -9726,6 +9730,10 @@ msgstr ""
 
 #: src/marketplace/resources/details/ResourceIssues.tsx
 msgid "There are no resource issues."
+msgstr ""
+
+#: src/project/ProjectExpandableRowContainer.tsx
+msgid "There are no resources"
 msgstr ""
 
 #: src/marketplace/resources/import/ResourceImportDialog.tsx

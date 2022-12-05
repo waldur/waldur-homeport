@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { ENV } from '@waldur/configs/default';
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { formatRole, getAbbreviation } from '@waldur/core/utils';
+import { formatRole } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { formatUserStatus } from '@waldur/user/support/utils';
 import {
@@ -21,19 +21,7 @@ import {
 
 import { GuestDropdown } from './GuestDropdown';
 import { QuickProjectSelectorDropdown } from './QuickProjectSelectorDropdown';
-
-const getProjectAbbreviation = (project) => {
-  // Projects don't have abbreviation
-  return getAbbreviation(project.name);
-};
-
-const getCustomerAbbreviation = (customer) => {
-  // Customer abbreviation is optional
-  if (customer.abbreviation) {
-    return customer.abbreviation.toUpperCase();
-  }
-  return getAbbreviation(customer.name);
-};
+import { getItemAbbreviation } from './utils';
 
 export const QuickProjectSelectorToggle: FunctionComponent = () => {
   const user = useSelector(getUser);
@@ -51,17 +39,17 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
   const isProject = workspace === PROJECT_WORKSPACE;
   const isCustomer = workspace === ORGANIZATION_WORKSPACE;
   const abbreviation = useMemo(() => {
-    if (isProject) {
-      return getProjectAbbreviation(project);
+    if (isProject && project) {
+      return getItemAbbreviation(project);
     }
-    if (isCustomer) {
-      return getCustomerAbbreviation(customer);
+    if (isCustomer && customer) {
+      return getItemAbbreviation(customer);
     }
     if (project) {
-      return getProjectAbbreviation(project);
+      return getItemAbbreviation(project);
     }
     if (customer) {
-      return getCustomerAbbreviation(customer);
+      return getItemAbbreviation(customer);
     }
     return '';
   }, [customer, project, isProject, isCustomer]);
@@ -82,9 +70,7 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
           ) : (
             <ImagePlaceholder width="50px" height="50px">
               {abbreviation && (
-                <div className="symbol-label fs-6 fw-bold">
-                  {abbreviation.substr(0, 4)}
-                </div>
+                <div className="symbol-label fs-6 fw-bold">{abbreviation}</div>
               )}
             </ImagePlaceholder>
           )}

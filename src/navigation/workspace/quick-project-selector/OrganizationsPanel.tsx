@@ -2,7 +2,6 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback, FunctionComponent } from 'react';
 import { Col, ListGroupItem, Stack } from 'react-bootstrap';
 
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { isChildOf } from '@waldur/navigation/useTabs';
@@ -12,6 +11,8 @@ import { getCustomersPage } from '../api';
 import { highlightMatch } from '../highlightMatch';
 import { ServiceProviderIcon } from '../ServiceProviderIcon';
 import { VirtualPaginatedList } from '../VirtualPaginatedList';
+
+import { ItemIcon } from './ItemIcon';
 
 const EmptyOrganizationListPlaceholder: FunctionComponent = () => (
   <p className="text-center ellipsis my-10 mx-4">
@@ -54,11 +55,7 @@ export const OrganizationListItem: FunctionComponent<{
       className="cursor-pointer"
     >
       <Stack direction="horizontal" gap={4}>
-        <ImagePlaceholder
-          width="36px"
-          height="36px"
-          backgroundColor="#e2e2e2"
-        />
+        <ItemIcon item={item} />
         <span className="title lh-1">
           {filter
             ? highlightMatch(truncate(item.name), filter)
