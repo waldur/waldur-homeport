@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Field, getFormValues } from 'redux-form';
 
+import { InputField } from '@waldur/form/InputField';
 import { configAttrField } from '@waldur/marketplace/offerings/attributes/utils';
 import { Section } from '@waldur/marketplace/types';
 
@@ -50,7 +50,7 @@ export const PureAttributeFilterSection: FunctionComponent<PureAttributeFilterSe
               <Field
                 key={outerIndex}
                 name={`${attribute.type}-${attrKey}-${outerIndex}`}
-                component={Form.Control}
+                component={InputField}
                 className="mb-2"
                 {...attrConfig}
               />

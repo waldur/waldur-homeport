@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Field, FormSection } from 'redux-form';
 
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { RemoveButton } from '@waldur/marketplace/offerings/RemoveButton';
@@ -25,10 +26,10 @@ export const EnvironmentVariablePanel: FunctionComponent<OwnProps> = (
     <Card.Body>
       <FormSection name={props.variable}>
         <FormGroup label={translate('Name')} required={true}>
-          <Field name="name" component={Form.Control} />
+          <Field name="name" component={InputField} />
         </FormGroup>
         <FormGroup label={translate('Value')} required={true}>
-          <Field name="value" component={Form.Control} />
+          <Field name="value" component={InputField} />
         </FormGroup>
       </FormSection>
     </Card.Body>

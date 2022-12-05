@@ -1,10 +1,11 @@
 import { FunctionComponent } from 'react';
-import { Form, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
 import { formatCurrency } from '@waldur/core/formatCurrency';
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import {
   formatIntField,
@@ -54,7 +55,7 @@ export const TotalLimitComponentsTable: FunctionComponent<TotalLimitComponentsTa
                 ) : (
                   <Field
                     name={`limits.${component.type}`}
-                    component={Form.Control}
+                    component={InputField}
                     type="number"
                     parse={parseIntField}
                     format={formatIntField}
