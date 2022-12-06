@@ -69,7 +69,7 @@
     "po-loader": "^0.5.0",
     "po2json": "https://github.com/mikeedwards/po2json/#51e2310485bbe35e9e57f2eee238185459ca0eab",
     "prop-types": "^15.6.2",
-    "qs": "^6.9.3",
+    "qs": "^6.9.7",
     "react": "^16.13.1",
     "react-16-bootstrap-date-picker": "^5.1.2",
     "react-bootstrap": "0.33.1",
