@@ -85,6 +85,8 @@
 
 /* TABLE IN CARD */
 .card.card-table {
+  border: unset;
+
   .card-header {
     border-bottom-style: dashed;
   }
