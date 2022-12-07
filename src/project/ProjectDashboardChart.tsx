@@ -8,6 +8,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { Project } from '@waldur/workspace/types';
 
+import { ProjectOrderItemsList } from './ProjectOrderItemsList';
 import { loadChart } from './utils';
 
 interface ProjectDashboardProps {
@@ -27,19 +28,22 @@ export const ProjectDashboardChart: FunctionComponent<ProjectDashboardProps> =
     }
     return (
       <Card className="h-100">
-        <Card.Body>
-          <Row className="h-100">
+        <Card.Body className="d-flex flex-column">
+          <Row className="mb-10">
             <Col xs={7}>
               <EChart options={value.options} height="100px" />
             </Col>
             <Col>
+              <div>
+                <h1 className="fw-bold">{value.chart.current}</h1>
+                <h5 className="fw-bold text-uppercase">{value.chart.title}</h5>
+              </div>
+            </Col>
+          </Row>
+          <Row className="flex-grow-1">
+            <Col>
               <div className="d-flex flex-column justify-content-between h-100">
-                <div>
-                  <h1 className="fw-bold">{value.chart.current}</h1>
-                  <h5 className="fw-bold text-uppercase">
-                    {value.chart.title}
-                  </h5>
-                </div>
+                <ProjectOrderItemsList />
                 <div className="text-end">
                   <Link
                     state="marketplace-order-list"

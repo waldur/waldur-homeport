@@ -8,9 +8,9 @@ import { RootState } from '@waldur/store/reducers';
 import { getProject, getUser } from '@waldur/workspace/selectors';
 
 import { ProjectDashboardChart } from './ProjectDashboardChart';
+import { ProjectEventsTimeline } from './ProjectEventsTimeline';
 import { ProjectProfile } from './ProjectProfile';
 import { ProjectResourcesList } from './ProjectResourcesList';
-import { ShortEventsList } from './ShortEventsList';
 
 export const ProjectDashboard: FunctionComponent<{}> = () => {
   const shouldConcealPrices = useSelector((state: RootState) =>
@@ -35,7 +35,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
             <ProjectDashboardChart project={project} />
           </Col>
           <Col md={6} sm={12} className="mb-md-0 mb-sm-6">
-            <ShortEventsList project={project} />
+            <ProjectEventsTimeline project={project} />
           </Col>
         </Row>
       )}

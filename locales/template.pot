@@ -880,7 +880,7 @@ msgstr ""
 msgid "Attributes filter"
 msgstr ""
 
-#: src/project/ShortEventsList.tsx
+#: src/project/ProjectEventsTimeline.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
 #: src/support/routes.ts
@@ -1962,6 +1962,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/navigation/header/pending-order-items/OrderItemExpandableRow.tsx
+#: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -4329,6 +4330,7 @@ msgstr ""
 #: src/customer/list/TotalCostComponent.tsx
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
+#: src/project/ProjectEventsTimeline.tsx
 msgid "Loading"
 msgstr ""
 
@@ -5313,6 +5315,7 @@ msgstr ""
 #: src/navigation/header/pending-order-items/OrderItemsTable.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/support/SupportDetailsTable.tsx
 #: src/user/UserOfferingList.tsx
@@ -6201,6 +6204,7 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/pending-order-items/OrderItemExpandableRow.tsx
+#: src/project/ProjectOrderItemsList.tsx
 msgid "Plan"
 msgstr ""
 
@@ -9051,6 +9055,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/paypal/PaymentsList.tsx
+#: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesFilter.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -9708,6 +9713,10 @@ msgstr ""
 msgid "There are no other volume types available."
 msgstr ""
 
+#: src/project/ProjectEventsTimeline.tsx
+msgid "There are no project events."
+msgstr ""
+
 #: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
 msgid "There are no projects yet for this organization."
 msgstr ""
@@ -9985,6 +9994,7 @@ msgstr ""
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/paypal/PaymentsList.tsx
 #: src/project/ProjectEventsFilter.tsx
+#: src/project/ProjectOrderItemsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Type"
