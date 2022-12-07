@@ -13,7 +13,11 @@ const InfoSummary: FunctionComponent<{ infoObj }> = ({ infoObj }) => {
   return (
     <Container className="border-2 border-start border-gray-500 ps-4">
       {entries.map(([key, value]) => (
-        <Field key={key} label={key} value={value} />
+        <Field
+          key={key}
+          label={key}
+          value={typeof value === 'object' && JSON.stringify(value)}
+        />
       ))}
     </Container>
   );
