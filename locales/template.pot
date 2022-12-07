@@ -5058,10 +5058,6 @@ msgstr ""
 msgid "No access info."
 msgstr ""
 
-#: src/navigation/header/pending-order-items/PendingConfirmationContainer.tsx
-msgid "No active confirmations"
-msgstr ""
-
 #: src/auth/PermissionLayout.tsx
 msgid "No association"
 msgstr ""
@@ -5109,6 +5105,10 @@ msgstr ""
 #: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
 msgid "No organizations"
+msgstr ""
+
+#: src/navigation/header/pending-order-items/PendingConfirmationContainer.tsx
+msgid "No pending confirmations"
 msgstr ""
 
 #: src/navigation/workspace/EmptyProjectPlaceholder.tsx
