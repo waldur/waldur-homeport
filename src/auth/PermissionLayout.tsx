@@ -114,6 +114,7 @@ const PermissionLayout: React.FC = ({ children }) => {
     if (!hasAllAccess && state.name) {
       if (state.name.startsWith('project.') || state.parent === 'project') {
         if (
+          !state?.data?.skipPermission &&
           !projectPermissions.find((item) => item.project_uuid === params.uuid)
         ) {
           setPermission('restricted');
@@ -138,6 +139,7 @@ const PermissionLayout: React.FC = ({ children }) => {
         state.parent === 'organization'
       ) {
         if (
+          !state?.data?.skipPermission &&
           !customerPermissions.find(
             (item) => item.customer_uuid === params.uuid,
           )

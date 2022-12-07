@@ -28,7 +28,7 @@ export const CustomerDashboard: FunctionComponent = () => {
     <>
       {isServiceManager ? (
         <CustomerBookingManagement />
-      ) : (
+      ) : customer ? (
         <>
           <CustomerProfile customer={customer} />
           <CustomerDashboardChart customer={customer} user={user} />
@@ -44,7 +44,7 @@ export const CustomerDashboard: FunctionComponent = () => {
             />
           )}
         </>
-      )}
+      ) : null}
     </>
   );
 };

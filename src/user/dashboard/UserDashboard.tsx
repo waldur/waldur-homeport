@@ -24,7 +24,7 @@ export const UserDashboard: React.FC = () => {
     <LoadingSpinner />
   ) : asyncState.error ? (
     <>{translate('Unable to load data.')}</>
-  ) : (
+  ) : user ? (
     <>
       <UserWelcome user={user} />
       <UserProfile user={user} />
@@ -38,5 +38,5 @@ export const UserDashboard: React.FC = () => {
         </Col>
       </Row>
     </>
-  );
+  ) : null;
 };

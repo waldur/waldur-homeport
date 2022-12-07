@@ -26,6 +26,8 @@ interface DataDeclaration {
   priority?: number;
   permissions: Array<(state) => boolean>;
   useExtraTabs?: boolean;
+  /** Project/Organization permission is skipped for the route, if this parameter is passed */
+  skipPermission?: boolean;
 }
 
 export interface StateDeclaration extends BaseStateDeclaration {

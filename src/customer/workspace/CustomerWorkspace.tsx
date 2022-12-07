@@ -37,6 +37,7 @@ export async function fetchCustomer(transition: Transition) {
       store.dispatch(setCurrentWorkspace(ORGANIZATION_WORKSPACE));
 
       if (
+        !transition.to()?.data?.skipPermission &&
         !checkCustomerUser(currentCustomer, currentUser) &&
         !checkIsServiceManager(currentCustomer, currentUser) &&
         !currentUser.is_support
@@ -44,7 +45,9 @@ export async function fetchCustomer(transition: Transition) {
         store.dispatch(triggerTransition('errorPage.notFound', {}));
       }
     } catch {
-      store.dispatch(triggerTransition('errorPage.notFound', {}));
+      if (!transition.to()?.data?.skipPermission) {
+        store.dispatch(triggerTransition('errorPage.notFound', {}));
+      }
     }
   }
 }

@@ -33,7 +33,9 @@ export function loadProject(transition: Transition) {
       store.dispatch(setCurrentProject(project));
     } catch (error) {
       if (error.response?.status === 404) {
-        router.stateService.go('errorPage.notFound');
+        if (!transition.to()?.data?.skipPermission) {
+          router.stateService.go('errorPage.notFound');
+        }
       }
     }
   }

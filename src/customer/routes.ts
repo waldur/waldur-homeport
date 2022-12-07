@@ -85,7 +85,7 @@ export const states: StateDeclaration[] = [
     data: {
       auth: true,
       workspace: ORGANIZATION_WORKSPACE,
-      title: () => getCustomer(store.getState()).name,
+      title: () => getCustomer(store.getState())?.name,
     },
     parent: 'layout',
     component: UIView,

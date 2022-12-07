@@ -39,6 +39,7 @@ export function calculateProfileCompletionPercentage(
   user: UserDetails,
   completionFields: Array<keyof UserDetails> = USER_PROFILE_COMPLETION_FIELDS,
 ) {
+  if (!user) return 0;
   let completionValue = 0;
   for (const key of completionFields) {
     if (!isEmpty(user[key])) completionValue++;

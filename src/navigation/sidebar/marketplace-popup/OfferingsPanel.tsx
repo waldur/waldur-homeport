@@ -112,7 +112,7 @@ export const OfferingsPanel: FunctionComponent<{
                 <Link
                   state={offeringCategoryState}
                   params={{
-                    uuid: customer.uuid,
+                    uuid: customer?.uuid,
                     category_uuid: category?.uuid,
                   }}
                   className="btn btn-dark"
