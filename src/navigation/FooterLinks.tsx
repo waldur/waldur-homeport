@@ -25,10 +25,18 @@ export const FooterLinks = () => (
       </Link>
     </li>
     {ENV.plugins.WALDUR_CORE.SITE_EMAIL && (
-      <li className="menu-item">{ENV.plugins.WALDUR_CORE.SITE_EMAIL}</li>
+      <li className="menu-item">
+        <span className="menu-link px-2">
+          {ENV.plugins.WALDUR_CORE.SITE_EMAIL}
+        </span>
+      </li>
     )}
     {ENV.plugins.WALDUR_CORE.SITE_PHONE && (
-      <li className="menu-item">{ENV.plugins.WALDUR_CORE.SITE_PHONE}</li>
+      <li className="menu-item">
+        <span className="menu-link px-2">
+          {ENV.plugins.WALDUR_CORE.SITE_PHONE}
+        </span>
+      </li>
     )}
   </ul>
 );
