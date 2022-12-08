@@ -1,11 +1,19 @@
 import { UISref } from '@uirouter/react';
-import { groupBy } from 'lodash';
+import classNames from 'classnames';
+import { groupBy, isEmpty } from 'lodash';
 import { Fragment, useEffect, useState, useRef } from 'react';
-import { OverlayTrigger, Popover } from 'react-bootstrap';
+import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import { useQuery } from 'react-query';
+import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
 
 import { get } from '@waldur/core/api';
+import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
+
+import { SearchFilters } from './SearchFilters';
+
+const iconEmpty = require('./file-search.svg');
 
 const SearchIcon = () => (
   <svg
@@ -64,13 +72,28 @@ const CloseIcon = () => (
 
 const useSearch = () => {
   const [query, setQuery] = useState('');
+  const form: any = useSelector(getFormValues('globalSearchFilters'));
+
+  const params = {
+    query: query || form?.query,
+    offering_uuid: form?.offering?.uuid,
+    category_uuid: form?.category?.uuid,
+    state: form?.state?.value || [
+      'Creating',
+      'OK',
+      'Erred',
+      'Updating',
+      'Terminating',
+    ],
+  };
+
   const result = useQuery(
     [`global-search`, query],
     async ({ signal }) =>
       await get<any[]>('/marketplace-resources/', {
         signal,
         params: {
-          query,
+          ...params,
           field: [
             'name',
             'uuid',
@@ -81,7 +104,6 @@ const useSearch = () => {
             'project_uuid',
             'state',
           ],
-          state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
         },
       }).then((response) => groupBy(response.data, 'category_title')),
   );
@@ -108,6 +130,7 @@ const SearchItem = ({ item }) => (
 );
 
 const SearchPopover = () => {
+  const [menuState, setMenuState] = useState<'main' | 'advanced'>('main');
   const { query, setQuery, result } = useSearch();
 
   const refSearch = useRef<HTMLInputElement>();
@@ -117,48 +140,131 @@ const SearchPopover = () => {
     }
   }, []);
 
+  const doSearch = () => {
+    setMenuState('main');
+    result.refetch();
+  };
+
   return (
     <div className="menu menu-sub menu-sub-dropdown p-7 show">
-      <form className="w-100 position-relative mb-3" auto-complete="off">
-        <span className="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 translate-middle-y ms-0">
-          <SearchIcon />
-        </span>
-        <input
-          ref={refSearch}
-          type="text"
-          className="search-input form-control form-control-flush ps-10"
-          name="search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder={translate('Search...')}
-        />
-        <span className="position-absolute top-50 end-0 translate-middle-y lh-0 me-1 d-none">
-          <span className="spinner-border h-15px w-15px align-middle text-gray-400"></span>
-        </span>
-        <span
-          className="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0"
-          onClick={() => setQuery('')}
-        >
-          <span className="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
-            <CloseIcon />
+      <div className={`${menuState === 'main' ? '' : 'd-none'}`}>
+        <form className="w-100 position-relative mb-3" auto-complete="off">
+          <span className="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 translate-middle-y ms-0">
+            <SearchIcon />
           </span>
-        </span>
-      </form>
-      <div className="separator border-gray-200 mb-6"></div>
-      <div>
-        <div className="scroll-y mh-200px mh-lg-350px">
-          {result.data
-            ? Object.keys(result.data).map((item, categoryIndex) => (
-                <Fragment key={categoryIndex}>
-                  <h3 className="fs-5 text-muted m-0 pb-5">{item}</h3>
-                  {result.data[item].map((item, resourceIndex) => (
-                    <SearchItem item={item} key={resourceIndex} />
-                  ))}
-                </Fragment>
-              ))
-            : null}
+          <input
+            ref={refSearch}
+            type="text"
+            className="search-input form-control form-control-flush ps-10"
+            name="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder={translate('Search...')}
+          />
+          <span
+            className={classNames(
+              'position-absolute top-50 end-0 translate-middle-y lh-0 me-1',
+              result.status === 'loading' ? '' : 'd-none',
+            )}
+          >
+            <span className="spinner-border h-15px w-15px align-middle text-gray-400"></span>
+          </span>
+          <span
+            className={classNames(
+              'btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0',
+              result.status === 'success' && query ? '' : 'd-none',
+            )}
+            onClick={() => setQuery('')}
+          >
+            <span className="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
+              <CloseIcon />
+            </span>
+          </span>
+
+          <div
+            className={classNames(
+              'position-absolute top-50 end-0 translate-middle-y',
+              result.status === 'success' && !query ? '' : 'd-none',
+            )}
+            data-kt-search-element="toolbar"
+          >
+            <div
+              data-kt-search-element="advanced-options-form-show"
+              className="btn btn-icon w-20px btn-sm btn-active-color-primary"
+              data-bs-toggle="tooltip"
+              onClick={() => {
+                setMenuState('advanced');
+              }}
+              title="Show more search options"
+            >
+              <i className="fa fa-chevron-down"></i>
+            </div>
+          </div>
+        </form>
+        <div className="separator border-gray-200 mb-6"></div>
+        <div>
+          <div className="scroll-y mh-200px mh-lg-350px">
+            {result.data
+              ? Object.keys(result.data).map((item, categoryIndex) => (
+                  <Fragment key={categoryIndex}>
+                    <h3 className="fs-5 text-muted m-0 pb-5">{item}</h3>
+                    {result.data[item].map((item, resourceIndex) => (
+                      <SearchItem item={item} key={resourceIndex} />
+                    ))}
+                  </Fragment>
+                ))
+              : null}
+          </div>
+          <div
+            className={classNames('text-center', {
+              'd-none': !isEmpty(result.data) || result.status === 'loading',
+            })}
+          >
+            <div className="pt-10 pb-10">
+              <InlineSVG path={iconEmpty} className="svg-icon-4x opacity-50" />
+            </div>
+
+            <div className="pb-15 fw-bold">
+              <h3 className="text-gray-600 fs-5 mb-2">
+                {translate('No result found')}
+              </h3>
+              <div className="text-muted fs-7">
+                {translate('Please try again with a different query')}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <form className={`pt-1 ${menuState === 'advanced' ? '' : 'd-none'}`}>
+        <h3 className="fw-bold text-dark mb-7">
+          {translate('Advanced Search')}
+        </h3>
+
+        <SearchFilters />
+
+        <div className="d-flex justify-content-end">
+          <Button
+            variant="light"
+            size="sm"
+            onClick={() => {
+              setMenuState('main');
+            }}
+            className="fw-bolder btn-active-light-primary me-2"
+          >
+            {translate('Cancel')}
+          </Button>
+
+          <Button
+            variant="primary"
+            size="sm"
+            className="fw-bolder"
+            onClick={doSearch}
+          >
+            {translate('Search')}
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };
@@ -175,7 +281,6 @@ export const SearchToggle = () => (
         <SearchPopover />{' '}
       </Popover>
     }
-    rootClose={true}
   >
     <div className="d-flex align-items-center ms-1 ms-lg-3">
       <div className="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px">
