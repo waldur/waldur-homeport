@@ -65,19 +65,18 @@ export const getTabs = (root, allStates) =>
     }),
   );
 
-export const useTabs = (): Tab[] => {
+export const useTabs = (
+  type: undefined | 'main' | 'extra' = undefined,
+): Tab[] => {
   const router = useRouter();
   const [tabs, setTabs] = useState([]);
   const pageTitle = useSelector(getTitle);
   const syncTabs = () => {
     const allStates = router.stateRegistry.get();
     const current = router.globals.$current;
-    if (!current.data.useExtraTabs) {
-      const root = current.path.find((part) => part.data?.title);
-      setTabs(getTabs(root, allStates));
-    } else {
-      setTabs([]);
-    }
+    const root = current.path.find((part) => part.data?.title);
+    setTabs(getTabs(root, allStates));
+
     let breadcrumb = current.data?.breadcrumb
       ? current.data?.breadcrumb()
       : undefined;
@@ -93,5 +92,9 @@ export const useTabs = (): Tab[] => {
   useEffect(syncTabs, [pageTitle]);
   useEffectOnce(syncTabs);
   useOnStateChanged(syncTabs);
-  return extraTabs?.length > 0 ? extraTabs : tabs;
+  const current = router.globals.$current;
+
+  if (!type) return current.data?.useExtraTabs ? extraTabs : tabs;
+  else if (type === 'main') return tabs;
+  else if (type === 'extra') return extraTabs;
 };

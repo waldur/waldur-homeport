@@ -42,14 +42,16 @@ export const Layout: React.FC = ({ children }) => {
   const layout = useLayout();
   const tabs = useTabs();
 
+  const showToolbar = actions || tabs || extraTabs;
+
   useEffect(() => {
     layout.setLayout({
-      toolbar: actions || tabs ? DefaultLayoutConfig.toolbar : false,
+      toolbar: showToolbar ? DefaultLayoutConfig.toolbar : false,
       content: {
         width: fullPage ? 'fluid' : 'fixed',
       },
     });
-  }, [tabs, fullPage]);
+  }, [showToolbar, fullPage]);
 
   useEffect(() => {
     if (AuthService.isAuthenticated() && !currentUser) {
@@ -74,7 +76,7 @@ export const Layout: React.FC = ({ children }) => {
                   'full-page': fullPage,
                 })}
               >
-                {(actions || tabs) && <Toolbar actions={actions} />}
+                {showToolbar && <Toolbar actions={actions} />}
                 <div className="post d-flex flex-column-fluid">
                   {children}
                   <MasterLayout />
