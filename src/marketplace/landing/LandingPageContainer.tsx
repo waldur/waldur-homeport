@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -7,8 +7,9 @@ import {
   CategoriesListType,
   OfferingsListType,
 } from '@waldur/marketplace/types';
-import { useFullPage } from '@waldur/navigation/context';
+import { useExtraTabs, useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
+import { useTabs } from '@waldur/navigation/useTabs';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
@@ -32,6 +33,10 @@ export const LandingPageContainer: React.FC<LandingPageContainerProps> = (
   useFullPage();
   useTitle(translate('Marketplace'));
   const { getCategories, getOfferings } = props;
+
+  const tabs = useTabs('main');
+  const extraTabs = useMemo(() => tabs.slice(0, 1), [tabs]);
+  useExtraTabs(extraTabs);
 
   React.useEffect(() => {
     getCategories();
