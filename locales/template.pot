@@ -478,6 +478,10 @@ msgstr ""
 msgid "Administration"
 msgstr ""
 
+#: src/navigation/header/SearchToggle.tsx
+msgid "Advanced Search"
+msgstr ""
+
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ResourceGroup.tsx
@@ -1232,6 +1236,7 @@ msgstr ""
 #: src/marketplace-flows/FlowCancelAction.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 #: src/modal/CloseDialogButton.tsx
+#: src/navigation/header/SearchToggle.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
@@ -1696,6 +1701,10 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingGetHelp.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
 msgid "Contact vendor"
+msgstr ""
+
+#: src/navigation/header/SearchFilters.tsx
+msgid "Contains the word"
 msgstr ""
 
 #: src/user/SelectAffiliationDialog.tsx
@@ -5132,6 +5141,10 @@ msgstr ""
 msgid "No reported incidents in the last 24 hours"
 msgstr ""
 
+#: src/navigation/header/SearchToggle.tsx
+msgid "No result found"
+msgstr ""
+
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/form/AsyncSelectField.tsx
 msgid "No results found"
@@ -6396,6 +6409,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.tsx
 msgid "Please stop the instance before its removal."
+msgstr ""
+
+#: src/navigation/header/SearchToggle.tsx
+msgid "Please try again with a different query"
 msgstr ""
 
 #: src/marketplace/offerings/InternalNameField.tsx
@@ -8143,6 +8160,8 @@ msgstr ""
 
 #: src/issues/create/SearchButton.tsx
 #: src/navigation/header/MainSearch.tsx
+#: src/navigation/header/SearchFilters.tsx
+#: src/navigation/header/SearchToggle.tsx
 #: src/table/TableQuery.tsx
 msgid "Search"
 msgstr ""
