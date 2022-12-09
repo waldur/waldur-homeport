@@ -5853,6 +5853,7 @@ msgstr ""
 #: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/dashboard/UserDashboard.tsx
 #: src/user/routes.ts
+#: src/user/support/UserDetailsView.tsx
 msgid "Organizations"
 msgstr ""
 
@@ -6858,6 +6859,7 @@ msgstr ""
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/dashboard/UserDashboard.tsx
 #: src/user/routes.ts
+#: src/user/support/UserDetailsView.tsx
 msgid "Projects"
 msgstr ""
 

@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
@@ -12,6 +11,7 @@ import { ProjectTablePlaceholder } from '@waldur/project/ProjectTablePlaceholder
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { TableOptionsType } from '@waldur/table/types';
 import { getProject, getUser } from '@waldur/workspace/selectors';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
@@ -78,40 +78,55 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   );
 };
 
-const TableOptions = {
-  table: PROJECTS_LIST,
-  fetchData: createFetcher('project-permissions'),
-  queryField: 'project_name',
-  mapPropsToFilter: (props) => {
-    const filter: Record<string, string[]> = {};
-    if (props.stateFilter && props.stateFilter.organization) {
-      filter.customer = props.stateFilter.organization.uuid;
-    }
-    // select required fields
-    filter.field = [
-      'project_uuid',
-      'project_name',
-      'project_resources_count',
-      'role',
-      'customer_uuid',
-      'customer_name',
-      'expiration_time',
-      'created',
-    ];
-    filter.user = props.user.uuid;
-    return filter;
-  },
-  exportRow: (row) => [
-    row.project_name,
-    row.customer_name,
-    row.project_resources_count || 0,
-    row.expiration_time
-      ? formatDateTime(row.expiration_time)
-      : DASH_ESCAPE_CODE,
-    formatDateTime(row.created),
-  ],
-  exportFields: ['Project', 'Organization', 'Resources', 'End date', 'Created'],
+export const getUserProjectsList = (
+  extraOptions?: Partial<TableOptionsType>,
+) => {
+  const TableOptions = {
+    table: PROJECTS_LIST,
+    fetchData: createFetcher('project-permissions'),
+    queryField: 'project_name',
+    mapPropsToFilter: (props) => {
+      const filter: Record<string, string[]> = {};
+      if (props.stateFilter && props.stateFilter.organization) {
+        filter.customer = props.stateFilter.organization.uuid;
+      }
+      // select required fields
+      filter.field = [
+        'project_uuid',
+        'project_name',
+        'project_resources_count',
+        'role',
+        'customer_uuid',
+        'customer_name',
+        'expiration_time',
+        'created',
+      ];
+      filter.user = props.user.uuid;
+      return filter;
+    },
+    exportRow: (row) => [
+      row.project_name,
+      row.customer_name,
+      row.project_resources_count || 0,
+      row.expiration_time
+        ? formatDateTime(row.expiration_time)
+        : DASH_ESCAPE_CODE,
+      formatDateTime(row.created),
+    ],
+    exportFields: [
+      'Project',
+      'Organization',
+      'Resources',
+      'End date',
+      'Created',
+    ],
+    ...extraOptions,
+  };
+
+  return connectTable(TableOptions)(TableComponent);
 };
+
+const PureProjects = getUserProjectsList();
 
 const mapStateToProps = (state: RootState) => ({
   stateFilter: getFormValues('affiliationProjectsListFilter')(state),
@@ -119,8 +134,8 @@ const mapStateToProps = (state: RootState) => ({
   currentProject: getProject(state),
 });
 
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
+const Projects = connect(mapStateToProps)(PureProjects);
 
-export const ProjectsList = enhance((props) => {
-  return <TableComponent filters={<ProjectsListFilter />} {...props} />;
-});
+export const ProjectsList = (props) => {
+  return <Projects filters={<ProjectsListFilter />} {...props} />;
+};

@@ -15,6 +15,9 @@ import { UserEditContainer } from '@waldur/user/support/UserEditContainer';
 import { UserOfferingList } from '@waldur/user/UserOfferingList';
 import { UserDetails } from '@waldur/workspace/types';
 
+import { UserOrganizationsList } from './UserOrganizationsList';
+import { UserProjectsList } from './UserProjectsList';
+
 interface StateProps {
   isVisibleForSupportOrStaff: boolean;
   userManageIsVisible: boolean;
@@ -57,6 +60,16 @@ export const PureUserDetailsView: FunctionComponent<UserDetailsViewProps> = (
     <Tab eventKey={5} title={translate('Remote accounts')}>
       <Card>
         <UserOfferingList user={props.user} />
+      </Card>
+    </Tab>
+    <Tab eventKey={6} title={translate('Organizations')}>
+      <Card>
+        <UserOrganizationsList user={props.user} />
+      </Card>
+    </Tab>
+    <Tab eventKey={7} title={translate('Projects')}>
+      <Card>
+        <UserProjectsList user={props.user} />
       </Card>
     </Tab>
   </Tabs>
