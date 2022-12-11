@@ -67,7 +67,7 @@ const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
         label={translate('Registration code')}
       />
 
-      <NumberField
+      <StringField
         name="agreement_number"
         label={translate('Agreement number')}
       />
