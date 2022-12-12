@@ -55,7 +55,7 @@ const OfferingListItem = ({
       onClick={() => onClick(item)}
       disabled={item.state === 'Paused'}
       state={linkState}
-      params={{ uuid: item.customer_uuid, offering_uuid: item.uuid }}
+      params={{ offering_uuid: item.uuid }}
     >
       <Stack direction="horizontal" gap={4}>
         {item.image ? (
