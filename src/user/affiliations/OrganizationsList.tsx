@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { TableOptionsType } from '@waldur/table/types';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import {
   getCustomer as getCustomerSelector,
@@ -76,39 +77,48 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   );
 };
 
-const TableOptions = {
-  table: 'customerList',
-  fetchData: createFetcher('customer-permissions'),
-  queryField: 'customer_name',
-  mapPropsToFilter: (props) => {
-    const filter: Record<string, string[]> = {};
-    // select required fields
-    filter.field = [
-      'customer_uuid',
-      'customer_name',
-      'customer_abbreviation',
-      'role',
-      'customer_email',
-      'customer_division_name',
-      'customer_projects_count',
-      'created',
-      'created_by_full_name',
-      'created_by_username',
-    ];
-    filter.user = props.currentUser.uuid;
-    return filter;
-  },
-  exportRow: (row) => [
-    row.customer_name,
-    row.customer_email || DASH_ESCAPE_CODE,
-    row.customer_division_name || DASH_ESCAPE_CODE,
-    row.projects_count || 0,
-    formatDateTime(row.customer_created),
-  ],
-  exportFields: ['Name', 'Email', 'Division', 'Projects', 'Created'],
+export const getUserOrganizationsList = (
+  extraOptions?: Partial<TableOptionsType>,
+) => {
+  const TableOptions = {
+    table: 'customerList',
+    fetchData: createFetcher('customer-permissions'),
+    queryField: 'customer_name',
+    mapPropsToFilter: (props) => {
+      const filter: Record<string, string[]> = {};
+      // select required fields
+      filter.field = [
+        'customer_uuid',
+        'customer_name',
+        'customer_abbreviation',
+        'role',
+        'customer_email',
+        'customer_division_name',
+        'customer_projects_count',
+        'created',
+        'created_by_full_name',
+        'created_by_username',
+      ];
+      filter.user = props.user.uuid;
+      return filter;
+    },
+    exportRow: (row) => [
+      row.customer_name,
+      row.customer_email || DASH_ESCAPE_CODE,
+      row.customer_division_name || DASH_ESCAPE_CODE,
+      row.projects_count || 0,
+      formatDateTime(row.customer_created),
+    ],
+    exportFields: ['Name', 'Email', 'Division', 'Projects', 'Created'],
+    ...extraOptions,
+  };
+
+  return connectTable(TableOptions)(TableComponent);
 };
+
+const PureOrganizations = getUserOrganizationsList();
 
 export const OrganizationsList = connect((state: RootState) => ({
   currentOrganization: getCustomerSelector(state),
-  currentUser: getUser(state),
-}))(connectTable(TableOptions)(TableComponent));
+  user: getUser(state),
+}))(PureOrganizations);

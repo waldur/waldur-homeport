@@ -9,23 +9,22 @@ import {
 } from 'redux-saga/effects';
 
 import { formatDate } from '@waldur/core/dateUtils';
-import { format } from '@waldur/core/ErrorMessageFormatter';
 import { CustomerCreateFormData } from '@waldur/customer/create/types';
 import { translate } from '@waldur/i18n';
 import { createFlow } from '@waldur/marketplace-flows/api';
 import * as api from '@waldur/marketplace/common/api';
 import { ProjectCreateFormData } from '@waldur/project/ProjectCreateForm';
-import { showError, showSuccess } from '@waldur/store/notify';
+import {
+  showError,
+  showErrorResponse,
+  showSuccess,
+} from '@waldur/store/notify';
 import {
   SET_CURRENT_PROJECT,
   SET_CURRENT_CUSTOMER,
 } from '@waldur/workspace/constants';
 import { getProject, getWorkspace } from '@waldur/workspace/selectors';
-import {
-  WorkspaceType,
-  ORGANIZATION_WORKSPACE,
-  USER_WORKSPACE,
-} from '@waldur/workspace/types';
+import { WorkspaceType, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import * as actions from './actions';
 import * as constants from './constants';
@@ -76,10 +75,12 @@ function* initCart() {
     if (error.status === -1 || error.status === 401) {
       return;
     }
-    const errorMessage = `${translate(
-      'Unable to initialize shopping cart.',
-    )} ${format(error)}`;
-    yield put(showError(errorMessage));
+    yield put(
+      showErrorResponse(
+        error,
+        translate('Unable to initialize shopping cart.'),
+      ),
+    );
   }
 }
 
@@ -94,8 +95,7 @@ const formatCustomerCreateRequest = (request: CustomerCreateFormData) => ({
 });
 
 function* addItem(action) {
-  const workspace = yield select(getWorkspace);
-  if (workspace === USER_WORKSPACE) {
+  if (action.payload.item.project_create_request) {
     const payload = {
       resource_create_request: {
         ...formatItemToCreate(action.payload.item),
@@ -138,10 +138,12 @@ function* addItem(action) {
       triggerTransition('marketplace-checkout', { uuid: item.project_uuid }),
     );
   } catch (error) {
-    const errorMessage = `${translate(
-      'Unable to add item to shopping cart.',
-    )} ${format(error)}`;
-    yield put(showError(errorMessage));
+    yield put(
+      showErrorResponse(
+        error,
+        translate('Unable to add item to shopping cart.'),
+      ),
+    );
     yield put(actions.addItemError());
   }
 }
@@ -158,10 +160,12 @@ function* removeItem(action) {
       showSuccess(translate('Item has been removed from shopping cart.')),
     );
   } catch (error) {
-    const errorMessage = `${translate(
-      'Unable to remove item from shopping cart.',
-    )} ${format(error)}`;
-    yield put(showError(errorMessage));
+    yield put(
+      showErrorResponse(
+        error,
+        translate('Unable to remove item from shopping cart.'),
+      ),
+    );
     yield put(actions.removeItemError());
   }
 }
@@ -183,10 +187,12 @@ function* updateItem(action) {
       triggerTransition('marketplace-checkout', { uuid: item.project_uuid }),
     );
   } catch (error) {
-    const errorMessage = `${translate(
-      'Unable to update shopping cart item.',
-    )} ${format(error)}`;
-    yield put(showError(errorMessage));
+    yield put(
+      showErrorResponse(
+        error,
+        translate('Unable to update shopping cart item.'),
+      ),
+    );
     yield put(actions.updateItemError());
   }
 }
@@ -217,10 +223,7 @@ function* createOrder() {
       );
     }
   } catch (error) {
-    const errorMessage = `${translate('Unable to submit order.')} ${format(
-      error,
-    )}`;
-    yield put(showError(errorMessage));
+    yield put(showErrorResponse(error, translate('Unable to submit order.')));
     yield put(actions.createOrderError());
   }
 }

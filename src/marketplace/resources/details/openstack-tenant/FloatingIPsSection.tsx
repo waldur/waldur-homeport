@@ -2,6 +2,7 @@ import { QueryFunction } from 'react-query';
 
 import { fixURL } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
+import { getResourceState } from '@waldur/resource/state/utils';
 import { parseResponse } from '@waldur/table/api';
 
 import { ResourcesList } from '../ResourcesList';
@@ -25,7 +26,7 @@ export const FloatingIPsSection = ({ resource }) => {
           address: instance.address,
           instance: instance.instance_name || 'N/A',
         }),
-        state: instance.state,
+        state: getResourceState(instance),
         url: instance.url,
       })),
       nextPage: response.nextPage,

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { Link } from '@waldur/core/Link';
 import { Gen048 } from '@waldur/core/svg/Gen048';
 import { translate } from '@waldur/i18n';
+import { isDescendantOf } from '@waldur/navigation/useTabs';
 import {
   getCustomer,
   getProject,
@@ -112,10 +113,15 @@ const PermissionLayout: React.FC = ({ children }) => {
   // Check users permissions
   useEffect(() => {
     if (!hasAllAccess && state.name) {
-      if (state.name.startsWith('project.') || state.parent === 'project') {
+      if (isDescendantOf('project', state)) {
         if (
           !state?.data?.skipPermission &&
-          !projectPermissions.find((item) => item.project_uuid === params.uuid)
+          !projectPermissions.find(
+            (item) => item.project_uuid === params.uuid,
+          ) &&
+          !customerPermissions.find(
+            (item) => item.customer_uuid === project.customer_uuid,
+          )
         ) {
           setPermission('restricted');
           setBanner({
@@ -134,10 +140,7 @@ const PermissionLayout: React.FC = ({ children }) => {
             ),
           });
         }
-      } else if (
-        state.name.startsWith('organization.') ||
-        state.parent === 'organization'
-      ) {
+      } else if (isDescendantOf('organization', state)) {
         if (
           !state?.data?.skipPermission &&
           !customerPermissions.find(

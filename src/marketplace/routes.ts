@@ -185,6 +185,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace/',
     component: MarketplaceLanding,
     parent: 'project',
+    data: {
+      useExtraTabs: true,
+    },
   },
 
   {
@@ -192,6 +195,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace/',
     component: MarketplaceLanding,
     parent: 'organization',
+    data: {
+      useExtraTabs: true,
+    },
   },
 
   {
@@ -199,6 +205,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace/',
     component: MarketplaceLanding,
     parent: 'profile',
+    data: {
+      useExtraTabs: true,
+    },
   },
 
   {
@@ -320,18 +329,27 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-category/:category_uuid/',
     component: CategoryPage,
     parent: 'project',
+    data: {
+      useExtraTabs: true,
+    },
   },
   {
     name: 'marketplace-category-customer',
     url: 'marketplace-category/:category_uuid/',
     component: CategoryPage,
     parent: 'organization',
+    data: {
+      useExtraTabs: true,
+    },
   },
   {
     name: 'marketplace-category-user',
     url: 'marketplace-category/:category_uuid/',
     component: CategoryPage,
     parent: 'profile',
+    data: {
+      useExtraTabs: true,
+    },
   },
   {
     name: 'marketplace-category',
@@ -344,6 +362,9 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-category.details',
     url: ':category_uuid/',
     component: CategoryPage,
+    data: {
+      useExtraTabs: true,
+    },
   },
 
   {

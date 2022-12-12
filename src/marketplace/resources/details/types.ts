@@ -1,8 +1,8 @@
-import { ResourceState } from '../types';
+import { StateIndicatorProps } from '@waldur/core/StateIndicator';
 
 interface DataRow {
   name: string;
-  state?: ResourceState;
+  state?: StateIndicatorProps;
   summary: string;
   marketplace_resource_uuid?: string;
   url?: string;

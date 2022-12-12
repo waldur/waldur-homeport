@@ -29,6 +29,7 @@ $dark-color: #1f2e23;
     }
     .list-group-item {
       background-color: $dark-light;
+      color: $white;
       border: 0;
 
       &:hover {

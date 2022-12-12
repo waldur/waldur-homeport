@@ -17,6 +17,7 @@ import {
   TENANT_TYPE,
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
+import { ResourceAccessButton } from '@waldur/resource/ResourceAccessButton';
 import '@waldur/marketplace/offerings/details/PublicOfferingDetailsHero.scss';
 
 import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer';
@@ -160,9 +161,10 @@ export const ResourceDetailsView: FC<any> = ({
                         </Card>
                       </div>
                     </Col>
-                    <Col md={4} sm={12} className="d-flex flex-grow-1">
-                      <Card>
+                    <Col md={4} sm={12} className="d-flex">
+                      <Card className="flex-grow-1">
                         <Card.Body>
+                          <ResourceAccessButton resource={resource} />
                           {scope && (
                             <div className="d-flex justify-content-between mb-5">
                               <QuickActions

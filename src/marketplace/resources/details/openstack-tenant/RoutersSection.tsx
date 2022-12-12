@@ -2,6 +2,7 @@ import { QueryFunction } from 'react-query';
 
 import { fixURL } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
+import { getResourceState } from '@waldur/resource/state/utils';
 import { parseResponse } from '@waldur/table/api';
 
 import { ResourcesList } from '../ResourcesList';
@@ -24,7 +25,7 @@ export const RoutersSection = ({ resource }) => {
         summary: translate('Fixed IPs: {fixed_ips}', {
           fixed_ips: instance.fixed_ips.join(', '),
         }),
-        state: instance.state,
+        state: getResourceState(instance),
       })),
       nextPage: response.nextPage,
     };

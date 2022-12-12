@@ -15,7 +15,6 @@ const EventDateField = ({ row }) => <>{formatDateTime(row.created)}</>;
 const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
-      {...props}
       columns={props.filterColumns([
         {
           title: translate('Message'),
@@ -32,6 +31,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       actions={<EventTypesButton />}
       enableExport={true}
       expandableRow={ExpandableEventDetails}
+      {...props}
     />
   );
 };

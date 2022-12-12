@@ -478,6 +478,10 @@ msgstr ""
 msgid "Administration"
 msgstr ""
 
+#: src/navigation/header/SearchToggle.tsx
+msgid "Advanced Search"
+msgstr ""
+
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ResourceGroup.tsx
@@ -880,7 +884,7 @@ msgstr ""
 msgid "Attributes filter"
 msgstr ""
 
-#: src/project/ShortEventsList.tsx
+#: src/project/ProjectEventsTimeline.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
 #: src/support/routes.ts
@@ -1083,7 +1087,7 @@ msgstr ""
 
 #: src/invoices/routes.ts
 #: src/invoices/utils.ts
-#: src/project/ProjectDashboardChart.tsx
+#: src/project/ProjectDashboard.tsx
 msgid "Billing"
 msgstr ""
 
@@ -1232,6 +1236,7 @@ msgstr ""
 #: src/marketplace-flows/FlowCancelAction.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 #: src/modal/CloseDialogButton.tsx
+#: src/navigation/header/SearchToggle.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
@@ -1698,6 +1703,10 @@ msgstr ""
 msgid "Contact vendor"
 msgstr ""
 
+#: src/navigation/header/SearchFilters.tsx
+msgid "Contains the word"
+msgstr ""
+
 #: src/user/SelectAffiliationDialog.tsx
 msgid "Continue"
 msgstr ""
@@ -1962,6 +1971,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/navigation/header/pending-order-items/OrderItemExpandableRow.tsx
+#: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -4329,6 +4339,7 @@ msgstr ""
 #: src/customer/list/TotalCostComponent.tsx
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
+#: src/project/ProjectEventsTimeline.tsx
 msgid "Loading"
 msgstr ""
 
@@ -5056,10 +5067,6 @@ msgstr ""
 msgid "No access info."
 msgstr ""
 
-#: src/navigation/header/pending-order-items/PendingConfirmationContainer.tsx
-msgid "No active confirmations"
-msgstr ""
-
 #: src/auth/PermissionLayout.tsx
 msgid "No association"
 msgstr ""
@@ -5109,6 +5116,10 @@ msgstr ""
 msgid "No organizations"
 msgstr ""
 
+#: src/navigation/header/pending-order-items/PendingConfirmationContainer.tsx
+msgid "No pending confirmations"
+msgstr ""
+
 #: src/navigation/workspace/EmptyProjectPlaceholder.tsx
 msgid "No project"
 msgstr ""
@@ -5130,6 +5141,10 @@ msgstr ""
 
 #: src/marketplace/resources/details/StatusPage.tsx
 msgid "No reported incidents in the last 24 hours"
+msgstr ""
+
+#: src/navigation/header/SearchToggle.tsx
+msgid "No result found"
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
@@ -5313,6 +5328,7 @@ msgstr ""
 #: src/navigation/header/pending-order-items/OrderItemsTable.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/support/SupportDetailsTable.tsx
 #: src/user/UserOfferingList.tsx
@@ -5837,6 +5853,7 @@ msgstr ""
 #: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/dashboard/UserDashboard.tsx
 #: src/user/routes.ts
+#: src/user/support/UserDetailsView.tsx
 msgid "Organizations"
 msgstr ""
 
@@ -6201,6 +6218,7 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/pending-order-items/OrderItemExpandableRow.tsx
+#: src/project/ProjectOrderItemsList.tsx
 msgid "Plan"
 msgstr ""
 
@@ -6396,6 +6414,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.tsx
 msgid "Please stop the instance before its removal."
+msgstr ""
+
+#: src/navigation/header/SearchToggle.tsx
+msgid "Please try again with a different query"
 msgstr ""
 
 #: src/marketplace/offerings/InternalNameField.tsx
@@ -6837,6 +6859,7 @@ msgstr ""
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/dashboard/UserDashboard.tsx
 #: src/user/routes.ts
+#: src/user/support/UserDetailsView.tsx
 msgid "Projects"
 msgstr ""
 
@@ -8143,6 +8166,8 @@ msgstr ""
 
 #: src/issues/create/SearchButton.tsx
 #: src/navigation/header/MainSearch.tsx
+#: src/navigation/header/SearchFilters.tsx
+#: src/navigation/header/SearchToggle.tsx
 #: src/table/TableQuery.tsx
 msgid "Search"
 msgstr ""
@@ -9051,6 +9076,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/paypal/PaymentsList.tsx
+#: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesFilter.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -9708,6 +9734,10 @@ msgstr ""
 msgid "There are no other volume types available."
 msgstr ""
 
+#: src/project/ProjectEventsTimeline.tsx
+msgid "There are no project events."
+msgstr ""
+
 #: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
 msgid "There are no projects yet for this organization."
 msgstr ""
@@ -9985,6 +10015,7 @@ msgstr ""
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/paypal/PaymentsList.tsx
 #: src/project/ProjectEventsFilter.tsx
+#: src/project/ProjectOrderItemsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Type"

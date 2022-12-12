@@ -16,7 +16,7 @@ const UserRemovalMessageDialog = lazyComponent(
 );
 
 export const showUserDetails = (user) =>
-  openModalDialog(UserDetailsDialog, { resolve: { user }, size: 'lg' });
+  openModalDialog(UserDetailsDialog, { resolve: { user }, size: 'xl' });
 
 export const showUserRemoval = () => {
   const resolve = {

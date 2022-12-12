@@ -9,8 +9,7 @@ interface ResourceStateProps {
   resource: Resource;
 }
 
-// TODO: remove extra check after resources list is migrated to ReactJS
 export const ResourceState: FunctionComponent<ResourceStateProps> = (props) =>
-  props.resource ? (
+  props.resource?.resource_type ? (
     <StateIndicator {...getResourceState(props.resource)} />
   ) : null;
