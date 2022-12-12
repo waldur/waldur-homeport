@@ -23,7 +23,9 @@ export const isChild = (parent, child) =>
     child.name.toString().startsWith(`${parent.name}.`));
 
 export const isChildOf = (parentName: string, state: StateDeclaration) =>
-  state.name.startsWith(`${parent.name}.`) || state.parent === parentName;
+  state.name.startsWith(`${parent.name}.`) ||
+  state.name.startsWith(`${parentName}.`) ||
+  state.parent === parentName;
 
 export const isDescendantOf = (parentName: string, state: StateDeclaration) =>
   isChildOf(parentName, state) ||
@@ -65,18 +67,19 @@ export const getTabs = (root, allStates) =>
     }),
   );
 
-export const useTabs = (
-  type: undefined | 'main' | 'extra' = undefined,
-): Tab[] => {
+export const useTabs = (): Tab[] => {
   const router = useRouter();
   const [tabs, setTabs] = useState([]);
   const pageTitle = useSelector(getTitle);
   const syncTabs = () => {
     const allStates = router.stateRegistry.get();
     const current = router.globals.$current;
-    const root = current.path.find((part) => part.data?.title);
-    setTabs(getTabs(root, allStates));
-
+    if (!current.data.useExtraTabs) {
+      const root = current.path.find((part) => part.data?.title);
+      setTabs(getTabs(root, allStates));
+    } else {
+      setTabs([]);
+    }
     let breadcrumb = current.data?.breadcrumb
       ? current.data?.breadcrumb()
       : undefined;
@@ -92,9 +95,5 @@ export const useTabs = (
   useEffect(syncTabs, [pageTitle]);
   useEffectOnce(syncTabs);
   useOnStateChanged(syncTabs);
-  const current = router.globals.$current;
-
-  if (!type) return current.data?.useExtraTabs ? extraTabs : tabs;
-  else if (type === 'main') return tabs;
-  else if (type === 'extra') return extraTabs;
+  return extraTabs?.length > 0 ? extraTabs : tabs;
 };

@@ -1087,7 +1087,7 @@ msgstr ""
 
 #: src/invoices/routes.ts
 #: src/invoices/utils.ts
-#: src/project/ProjectDashboardChart.tsx
+#: src/project/ProjectDashboard.tsx
 msgid "Billing"
 msgstr ""
 
