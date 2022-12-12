@@ -2,6 +2,7 @@ import { QueryFunction } from 'react-query';
 
 import { fixURL } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
+import { getResourceState } from '@waldur/resource/state/utils';
 import { parseResponse } from '@waldur/table/api';
 
 import { ResourcesList } from '../ResourcesList';
@@ -22,7 +23,7 @@ export const SubnetsSection = ({ resource }) => {
       data: response.rows.map((instance) => ({
         name: instance.name,
         summary: translate('Network: {network_name}, CIDR: {cidr}', instance),
-        state: instance.state,
+        state: getResourceState(instance),
       })),
       nextPage: response.nextPage,
     };

@@ -2,11 +2,11 @@ import { UISref, useCurrentStateAndParams } from '@uirouter/react';
 import { FC, Fragment } from 'react';
 import { QueryFunction, useInfiniteQuery } from 'react-query';
 
+import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 
 import { ResourceLink } from './ResourceLink';
-import { ResourceStateIndicator } from './ResourceStateIndicator';
 import { DataPage } from './types';
 
 interface ResourcesListProps {
@@ -60,9 +60,7 @@ export const ResourcesList: FC<ResourcesListProps> = ({
                     </h5>
                     <p>{row.summary}</p>
                   </td>
-                  <td>
-                    {row.state && <ResourceStateIndicator state={row.state} />}
-                  </td>
+                  <td>{row.state && <StateIndicator {...row.state} />}</td>
                   {row.url && (
                     <td className="row-actions">
                       <ActionButtonResource url={row.url} />
