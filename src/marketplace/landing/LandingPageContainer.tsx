@@ -34,7 +34,7 @@ export const LandingPageContainer: React.FC<LandingPageContainerProps> = (
   useTitle(translate('Marketplace'));
   const { getCategories, getOfferings } = props;
 
-  const tabs = useTabs('main');
+  const tabs = useTabs();
   const extraTabs = useMemo(() => tabs.slice(0, 1), [tabs]);
   useExtraTabs(extraTabs);
 
