@@ -6,6 +6,7 @@ import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { OfferingFilter } from './OfferingFilter';
+import { ResourceStateFilter } from './ResourceStateFilter';
 import { OfferingChoice } from './types';
 
 interface OwnProps {
@@ -24,6 +25,13 @@ const PureProjectResourcesFilter = ({ offerings }) => (
       badgeValue={(value) => value?.name}
     >
       <OfferingFilter options={offerings} />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('State')}
+      name="state"
+      badgeValue={(value) => value?.label}
+    >
+      <ResourceStateFilter />
     </TableFilterItem>
   </TableFilterFormContainer>
 );
