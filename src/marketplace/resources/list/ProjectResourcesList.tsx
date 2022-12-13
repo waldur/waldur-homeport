@@ -111,6 +111,9 @@ const mapPropsToFilter = (props: StateProps & OwnProps) => {
   if (props.filter?.offering) {
     filter.offering_uuid = props.filter.offering.uuid;
   }
+  if (props.filter?.state) {
+    filter.state = props.filter.state.value;
+  }
   return filter;
 };
 
