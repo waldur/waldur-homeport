@@ -29,11 +29,17 @@ export const CategoryListItem: FunctionComponent<{
       onClick={() => onClick(item)}
     >
       <Stack direction="horizontal" gap={4}>
-        <ImagePlaceholder
-          width="35px"
-          height="35px"
-          backgroundColor="#e2e2e2"
-        />
+        {item.icon ? (
+          <div className="symbol symbol-35px">
+            <img src={item.icon} />
+          </div>
+        ) : (
+          <ImagePlaceholder
+            width="35px"
+            height="35px"
+            backgroundColor="#e2e2e2"
+          />
+        )}
         <span className="title lh-1">{truncate(item.title)}</span>
         {item.offering_count && (
           <span className="lh-1 text-muted ms-auto">
