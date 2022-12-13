@@ -7,8 +7,6 @@ import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { Offering } from '@waldur/marketplace/types';
 import { wrapTooltip } from '@waldur/table/ActionButton';
 
-import './OfferingCard.scss';
-
 interface OfferingCardProps {
   offering: Offering;
 }
