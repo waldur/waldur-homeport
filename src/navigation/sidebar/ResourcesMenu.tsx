@@ -102,6 +102,9 @@ export const ResourcesMenu = ({ anonymous }) => {
 
   const sortedCategories = useMemo(() => {
     if (!categories) return [];
+    if (!preferredCounters) {
+      return categories;
+    }
     return categories.sort((a, b) => {
       const aCount = preferredCounters['marketplace_category_' + a.uuid] || 0;
       const bCount = preferredCounters['marketplace_category_' + b.uuid] || 0;
