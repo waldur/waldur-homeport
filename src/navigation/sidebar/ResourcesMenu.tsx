@@ -72,7 +72,7 @@ const RenderMenuItems = ({ items, project, counters = {} }) => (
 
 export const ResourcesMenu = ({ anonymous }) => {
   const currentCustomer = useSelector(getCustomer);
-  const categories = useSelector(getCategoriesSelector);
+  const categories: any[] = useSelector(getCategoriesSelector);
   const dispatch = useDispatch();
   useEffectOnce(() => {
     dispatch(sidebarInitStart(anonymous));
@@ -100,15 +100,24 @@ export const ResourcesMenu = ({ anonymous }) => {
     }
   }, [projectCounters, organizationCounters]);
 
+  const sortedCategories = useMemo(() => {
+    if (!categories) return [];
+    return categories.sort((a, b) => {
+      const aCount = preferredCounters['marketplace_category_' + a.uuid] || 0;
+      const bCount = preferredCounters['marketplace_category_' + b.uuid] || 0;
+      return bCount - aCount;
+    });
+  }, [categories, preferredCounters]);
+
   const [allResourcesCount, collapsedResourcesCount] = useMemo(() => {
     if (!preferredCounters) return [0, 0];
-    const all = categories.reduce(
+    const all = sortedCategories.reduce(
       (acc, category) =>
         (acc +=
           preferredCounters['marketplace_category_' + category.uuid] || 0),
       0,
     );
-    const collapsed = categories
+    const collapsed = sortedCategories
       .slice(MAX_COLLAPSE_MENU_COUNT)
       .reduce(
         (acc, category) =>
@@ -117,9 +126,9 @@ export const ResourcesMenu = ({ anonymous }) => {
         0,
       );
     return [all, collapsed];
-  }, [categories, preferredCounters]);
+  }, [sortedCategories, preferredCounters]);
 
-  return categories ? (
+  return sortedCategories ? (
     <MenuAccordion
       title={translate('Resources')}
       itemId="resources-menu"
@@ -136,21 +145,21 @@ export const ResourcesMenu = ({ anonymous }) => {
         />
       )}
       <RenderMenuItems
-        items={categories.slice(0, MAX_COLLAPSE_MENU_COUNT)}
+        items={sortedCategories.slice(0, MAX_COLLAPSE_MENU_COUNT)}
         project={project}
         counters={preferredCounters}
       />
-      {categories.length > MAX_COLLAPSE_MENU_COUNT ? (
+      {sortedCategories.length > MAX_COLLAPSE_MENU_COUNT ? (
         <>
           {expanded && (
             <RenderMenuItems
-              items={categories.slice(MAX_COLLAPSE_MENU_COUNT)}
+              items={sortedCategories.slice(MAX_COLLAPSE_MENU_COUNT)}
               project={project}
               counters={preferredCounters}
             />
           )}
           <CustomToggle
-            itemsCount={categories.slice(MAX_COLLAPSE_MENU_COUNT).length}
+            itemsCount={sortedCategories.slice(MAX_COLLAPSE_MENU_COUNT).length}
             badge={getCounterText(collapsedResourcesCount)}
             onClick={() => setExpanded(!expanded)}
             expanded={expanded}
