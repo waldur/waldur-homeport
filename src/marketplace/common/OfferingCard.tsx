@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
@@ -10,9 +9,9 @@ import { wrapTooltip } from '@waldur/table/ActionButton';
 
 import { Offering } from '../types';
 
-import { OfferingCardButtonsOverlay } from './OfferingCardButtonsOverlay';
-
 import './OfferingCard.scss';
+import { OfferingCardButtonsOverlay } from './OfferingCardButtonsOverlay';
+import { OfferingDescription } from './OfferingDescription';
 
 interface OfferingCardProps {
   offering: Offering;
@@ -47,15 +46,7 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) =>
             >
               {props.offering.customer_name}
             </Link>
-            {props.offering.description ? (
-              <div className="offering-description text-gray-700 fs-7">
-                <FormattedHtml html={props.offering.description} />
-              </div>
-            ) : (
-              <p className="text-muted fst-italic fs-7">
-                {'There is no description'}
-              </p>
-            )}
+            <OfferingDescription offering={props.offering} />
           </div>
         </Card.Body>
         <OfferingCardButtonsOverlay offering={props.offering} />

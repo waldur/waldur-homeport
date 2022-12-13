@@ -5,11 +5,9 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { OfferingsListType } from '@waldur/marketplace/types';
 
-import { OfferingCard } from './OfferingCard';
+import { OfferingCard } from '../common/OfferingCard';
 
-type OfferingsGroupProps = OfferingsListType;
-
-export const OfferingsGroup: React.FC<OfferingsGroupProps> = (props) => {
+export const OfferingsGroup: React.FC<OfferingsListType> = (props) => {
   if (props.loading) {
     return <LoadingSpinner />;
   }
