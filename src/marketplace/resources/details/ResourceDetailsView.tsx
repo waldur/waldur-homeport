@@ -22,6 +22,7 @@ import '@waldur/marketplace/offerings/details/PublicOfferingDetailsHero.scss';
 
 import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer';
 
+import { InstanceComponents } from './InstanceComponents';
 import { MonitoringCharts } from './MonitoringCharts';
 import { NetworkingTab } from './NetworkingTab';
 import { TenantDetails } from './openstack-tenant/TenantDetails';
@@ -173,10 +174,14 @@ export const ResourceDetailsView: FC<any> = ({
                               />
                             </div>
                           )}
-                          <ResourceComponents
-                            resource={resource}
-                            components={components}
-                          />
+                          {resource.offering_type === INSTANCE_TYPE ? (
+                            <InstanceComponents resource={scope} />
+                          ) : (
+                            <ResourceComponents
+                              resource={resource}
+                              components={components}
+                            />
+                          )}
                         </Card.Body>
                       </Card>
                     </Col>
