@@ -83,6 +83,10 @@
   }
 }
 
+.table-responsive {
+  overflow: inherit;
+}
+
 /* TABLE IN CARD */
 .card.card-table {
   border: unset;
