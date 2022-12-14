@@ -5,7 +5,10 @@ import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
 import { ENV } from '@waldur/configs/default';
-import { PROJECT_ADMIN_ROLE } from '@waldur/core/constants';
+import {
+  PROJECT_ADMIN_ROLE,
+  PROJECT_MEMBER_ROLE,
+} from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable } from '@waldur/table';
@@ -18,6 +21,7 @@ import {
   getCustomer,
 } from '@waldur/workspace/selectors';
 
+import { AddMemberButton } from './AddMemberButton';
 import { AddUserButton } from './AddUserButton';
 import { fetchProjectUsers, fetchProjectManagers } from './api';
 import { UserDetailsButton } from './UserDetailsButton';
@@ -50,12 +54,24 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => (
             <>
               <UserDetailsButton user={row} />
+              {props.isOwnerOrStaff ? (
+                <AddMemberButton
+                  user={row}
+                  users={props.rows}
+                  project={props.project}
+                  customer={props.customer}
+                  isProjectManager={props.isProjectManager}
+                  refreshList={props.fetch}
+                />
+              ) : null}
               {props.isOwnerOrStaff || props.isProjectManager ? (
                 <UserRemoveButton
                   permission={row.permission}
                   isDisabled={
                     !props.isOwnerOrStaff &&
-                    (!props.isProjectManager || row.role !== PROJECT_ADMIN_ROLE)
+                    (!props.isProjectManager ||
+                      (row.role !== PROJECT_ADMIN_ROLE &&
+                        row.role !== PROJECT_MEMBER_ROLE))
                   }
                   refreshList={props.fetch}
                 />
@@ -67,6 +83,15 @@ const TableComponent: FunctionComponent<any> = (props) => {
       actions={
         <ButtonGroup>
           {props.isStaff && <AddUserButton refreshList={props.fetch} />}
+          {props.isOwnerOrStaff ? (
+            <AddMemberButton
+              users={props.rows}
+              project={props.project}
+              customer={props.customer}
+              isProjectManager={props.isProjectManager}
+              refreshList={props.fetch}
+            />
+          ) : null}
         </ButtonGroup>
       }
       verboseName={translate('Team members')}
