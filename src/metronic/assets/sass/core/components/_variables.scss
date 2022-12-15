@@ -12,7 +12,7 @@ $gray-300: if(isDarkMode(), #45594a, #e4e6ef) !default;
 $gray-400: if(isDarkMode(), #507359, #b5b5c3) !default;
 $gray-500: if(isDarkMode(), #e0f2da, #a1a5b7) !default;
 $gray-600: if(isDarkMode(), #b8ccbd, #7e8299) !default;
-$gray-700: if(isDarkMode(), #98b38f, #5e6278) !default;
+$gray-700: if(isDarkMode(), #adcba2, #5e6278) !default;
 $gray-800: if(isDarkMode(), #ffffff, #3f4254) !default;
 $gray-900: if(isDarkMode(), #ffffff, #181c32) !default;
 $text-muted: $gray-500 !default;
@@ -129,7 +129,11 @@ $danger-inverse: $white !default; // Custom variable
 // White colors
 $white: $white !default; // Bootstrap variable
 $white-active: $gray-100 !default; // Custom variable
-$white-inverse: $gray-600 !default; // Custom variable
+$white-inverse: if(
+  isDarkMode(),
+  $gray-200,
+  $gray-600
+) !default; // Custom variable
 
 // Theme colors
 $theme-colors: (
@@ -780,7 +784,8 @@ $form-check-input-active-filter: brightness(90%) !default;
 
 $form-check-input-bg: $body-bg !default;
 $form-check-input-bg-solid: $gray-200 !default; // Custom variable
-$form-check-input-border: 1px solid rgba(0, 0, 0, 0.25) !default;
+$form-check-input-border: 1px solid
+  if(isDarkMode(), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.25)) !default;
 $form-check-input-border-radius: 0.45em !default;
 $form-check-radio-border-radius: 50% !default;
 $form-check-input-focus-border: $input-focus-border-color !default;
@@ -1283,7 +1288,7 @@ $menu: (
   dropdown: (
     box-shadow: $dropdown-box-shadow,
     z-index: 105,
-    background-color: if(isDarkMode(), #213025, $body-bg),
+    background-color: if(isDarkMode(), #253629, $body-bg),
     border-radius: $border-radius,
     animation: true,
     animation-speed: 0.3s,

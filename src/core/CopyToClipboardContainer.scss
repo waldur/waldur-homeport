@@ -4,7 +4,7 @@
   pre {
     display: flex;
     align-items: center;
-    background-color: #ffffff;
+    background-color: if(isDarkMode(), #1a261d, white);
     padding: 0;
     margin-bottom: 0;
 

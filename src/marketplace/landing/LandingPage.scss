@@ -50,7 +50,8 @@
   }
 
   .providers-brands {
-    opacity: 0.6;
+    opacity: if(isDarkMode(), 1, 0.6);
+    align-items: stretch;
 
     .symbol-label {
       background-size: contain;
