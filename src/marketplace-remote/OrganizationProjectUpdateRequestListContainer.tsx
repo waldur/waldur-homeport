@@ -5,7 +5,8 @@ import { OrganizationProjectUpdateRequestsList } from './OrganizationProjectUpda
 
 export const OrganizationProjectUpdateRequestListContainer = () => (
   <Panel>
-    <OrganizationProjectUpdateRequestListFilter />
-    <OrganizationProjectUpdateRequestsList />
+    <OrganizationProjectUpdateRequestsList
+      filters={<OrganizationProjectUpdateRequestListFilter />}
+    />
   </Panel>
 );

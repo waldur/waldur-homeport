@@ -5,13 +5,14 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { openDrawerDialog } from '@waldur/drawer/actions';
 import { translate } from '@waldur/i18n';
+import { getProjectUpdateRequestsList } from '@waldur/marketplace-remote/api';
 import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 import { getOrderItemList } from '@waldur/marketplace/common/api';
 
 import { HeaderButtonBullet } from './HeaderButtonBullet';
 
 const PendingConfirmationContainer = lazyComponent(
-  () => import('./pending-order-items/PendingConfirmationContainer'),
+  () => import('./confirmation-drawer/PendingConfirmationContainer'),
   'PendingConfirmationContainer',
 );
 
@@ -38,9 +39,21 @@ export const ConfirmationDrawerToggle: React.FC = () => {
       can_manage_as_service_provider: 'True',
     }),
   );
+  const { value: pendingProjectUpdatesFlag } = useAsync(() =>
+    getProjectUpdateRequestsList({
+      page_size: 1,
+      state: 'pending',
+      field: 'uuid',
+    }),
+  );
 
   const pendingOrdersCount = pendingOrderFlag?.length || 0;
   const pendingProvidersCount = pendingProviderFlag?.length || 0;
+  const pendingProjectUpdatesCount = pendingProjectUpdatesFlag?.length || 0;
+
+  const showBullet = Boolean(
+    pendingOrdersCount || pendingProvidersCount || pendingProjectUpdatesCount,
+  );
 
   const openDrawer = () => {
     dispatch(
@@ -49,6 +62,7 @@ export const ConfirmationDrawerToggle: React.FC = () => {
         props: {
           pendingOrdersCount,
           pendingProvidersCount,
+          pendingProjectUpdatesCount,
         },
       }),
     );
@@ -61,9 +75,7 @@ export const ConfirmationDrawerToggle: React.FC = () => {
         onClick={openDrawer}
       >
         <InlineSVG path={icon} className="svg-icon-1" />
-        {Boolean(pendingOrdersCount || pendingProvidersCount) && (
-          <HeaderButtonBullet />
-        )}
+        {showBullet && <HeaderButtonBullet />}
       </div>
     </div>
   );

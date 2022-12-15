@@ -5,7 +5,6 @@ import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -14,7 +13,6 @@ import { ProjectUpdateRequestActions } from './ProjectUpdateRequestActions';
 import { ProjectUpdateRequestExpandable } from './ProjectUpdateRequestExpandable';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  useTitle(translate('Project updates'));
   return (
     <Table
       {...props}
@@ -39,27 +37,29 @@ export const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('Reviewed by'),
           render: ({ row }) => row.reviewed_by_full_name || 'N/A',
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => (
-            <ProjectUpdateRequestActions
-              request={row}
-              refreshList={props.fetch}
-            />
-          ),
-        },
       ]}
+      title={translate('Project updates')}
+      hoverableRow={({ row }) => (
+        <ProjectUpdateRequestActions request={row} refreshList={props.fetch} />
+      )}
       expandableRow={ProjectUpdateRequestExpandable}
       verboseName={translate('requests')}
     />
   );
 };
 
-const mapPropsToFilter = (props) => ({
-  offering_customer_uuid: props.customer.uuid,
-  state: props.filter.state?.map((choice) => choice.value),
-  customer_uuid: props.filter.organization?.uuid,
-});
+const mapPropsToFilter = (props) => {
+  const filter: Record<string, any> = {
+    offering_customer_uuid: props.customer.uuid,
+  };
+  if (props?.filter?.state) {
+    filter.state = props.filter.state?.map((choice) => choice.value);
+  }
+  if (props?.filter?.organization) {
+    filter.customer_uuid = props.filter.organization?.uuid;
+  }
+  return filter;
+};
 
 const filterFormSelector = (state: RootState) =>
   getFormValues('OrganizationProjectUpdateRequestListFilter')(state);
@@ -69,7 +69,7 @@ const mapStateToProps = (state: RootState) => ({
   filter: filterFormSelector(state),
 });
 
-const TableOptions = {
+export const TableOptions = {
   table: 'marketplace-project-update-requests',
   fetchData: createFetcher('marketplace-project-update-requests'),
   mapPropsToFilter,
@@ -77,4 +77,6 @@ const TableOptions = {
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-export const OrganizationProjectUpdateRequestsList = enhance(TableComponent);
+export const OrganizationProjectUpdateRequestsList = enhance(
+  TableComponent,
+) as React.ComponentType<any>;

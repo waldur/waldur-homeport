@@ -198,7 +198,6 @@ msgstr ""
 #: src/invoices/details/InvoiceItemActions.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
-#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
@@ -549,11 +548,11 @@ msgstr ""
 msgid "All day"
 msgstr ""
 
-#: src/navigation/header/pending-order-items/ApproveAllButton.tsx
+#: src/navigation/header/confirmation-drawer/ApproveAllButton.tsx
 msgid "All order items has been approved."
 msgstr ""
 
-#: src/navigation/header/pending-order-items/RejectAllButton.tsx
+#: src/navigation/header/confirmation-drawer/RejectAllButton.tsx
 msgid "All order items has been rejected."
 msgstr ""
 
@@ -689,7 +688,7 @@ msgstr ""
 msgid "Approve"
 msgstr ""
 
-#: src/navigation/header/pending-order-items/ApproveAllButton.tsx
+#: src/navigation/header/confirmation-drawer/ApproveAllButton.tsx
 msgid "Approve all"
 msgstr ""
 
@@ -872,7 +871,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingInfo.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
-#: src/navigation/header/pending-order-items/OrderItemExpandableRow.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "Attributes"
 msgstr ""
 
@@ -1970,7 +1969,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/navigation/header/pending-order-items/OrderItemExpandableRow.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 #: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/team/InvitationsList.tsx
@@ -1986,7 +1985,7 @@ msgstr ""
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/navigation/header/pending-order-items/OrderItemExpandableRow.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "Created by"
 msgstr ""
 
@@ -2318,7 +2317,6 @@ msgid "Deletion"
 msgstr ""
 
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
-#: src/marketplace/landing/OfferingCardButtonsOverlay.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
@@ -4299,7 +4297,7 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/navigation/header/pending-order-items/OrderItemExpandableRow.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Limits"
@@ -5018,7 +5016,7 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
-#: src/navigation/header/pending-order-items/OrderItemExpandableRow.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "New plan"
 msgstr ""
 
@@ -5116,7 +5114,7 @@ msgstr ""
 msgid "No organizations"
 msgstr ""
 
-#: src/navigation/header/pending-order-items/PendingConfirmationContainer.tsx
+#: src/navigation/header/confirmation-drawer/PendingConfirmationContainer.tsx
 msgid "No pending confirmations"
 msgstr ""
 
@@ -5325,7 +5323,7 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
-#: src/navigation/header/pending-order-items/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/project/ProjectOrderItemsList.tsx
@@ -5645,7 +5643,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/details/ResourceTabs.tsx
-#: src/navigation/header/pending-order-items/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
 msgid "Order items"
@@ -5678,6 +5676,7 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-flows/FlowExpandableRow.tsx
 #: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/offerings/actions/tabs.ts
@@ -5686,7 +5685,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
-#: src/navigation/header/pending-order-items/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
 #: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
@@ -6085,11 +6084,11 @@ msgstr ""
 msgid "Pending confirmations"
 msgstr ""
 
-#: src/navigation/header/pending-order-items/PendingConfirmationContainer.tsx
+#: src/navigation/header/confirmation-drawer/PendingConfirmationContainer.tsx
 msgid "Pending order confirmation"
 msgstr ""
 
-#: src/navigation/header/pending-order-items/PendingConfirmationContainer.tsx
+#: src/navigation/header/confirmation-drawer/PendingConfirmationContainer.tsx
 msgid "Pending provider confirmation"
 msgstr ""
 
@@ -6217,7 +6216,7 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/navigation/header/pending-order-items/OrderItemExpandableRow.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 #: src/project/ProjectOrderItemsList.tsx
 msgid "Plan"
 msgstr ""
@@ -6269,7 +6268,7 @@ msgstr ""
 msgid "Plan price"
 msgstr ""
 
-#: src/navigation/header/pending-order-items/OrderItemExpandableRow.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "Plan unit"
 msgstr ""
 
@@ -6676,7 +6675,7 @@ msgstr ""
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
-#: src/navigation/header/pending-order-items/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
 #: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
@@ -6832,8 +6831,14 @@ msgstr ""
 msgid "Project type"
 msgstr ""
 
+#: src/navigation/header/confirmation-drawer/PendingConfirmationContainer.tsx
+msgid "Project update requests"
+msgstr ""
+
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/routes.ts
+#: src/navigation/header/confirmation-drawer/PendingProjectUpdates.tsx
 msgid "Project updates"
 msgstr ""
 
@@ -7278,7 +7283,7 @@ msgstr ""
 msgid "Reject"
 msgstr ""
 
-#: src/navigation/header/pending-order-items/RejectAllButton.tsx
+#: src/navigation/header/confirmation-drawer/RejectAllButton.tsx
 msgid "Reject all"
 msgstr ""
 
@@ -7603,7 +7608,6 @@ msgstr ""
 
 #: src/marketplace/category/list/OfferingCard.tsx
 #: src/marketplace/common/OfferingCard.tsx
-#: src/marketplace/landing/OfferingCard.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
 msgid "Requesting of new resources has been temporarily paused"
 msgstr ""
@@ -7659,7 +7663,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
-#: src/navigation/header/pending-order-items/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 msgid "Resource"
 msgstr ""
 
@@ -9026,9 +9030,9 @@ msgstr ""
 #: src/marketplace-flows/FlowListFilter.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-flows/utils.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
-#: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/OfferingsFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -9056,7 +9060,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/navigation/header/pending-order-items/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -10010,7 +10014,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/navigation/header/pending-order-items/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
@@ -10071,7 +10075,7 @@ msgstr ""
 msgid "Unable to apply action."
 msgstr ""
 
-#: src/navigation/header/pending-order-items/ApproveAllButton.tsx
+#: src/navigation/header/confirmation-drawer/ApproveAllButton.tsx
 msgid "Unable to approve all order items."
 msgstr ""
 
@@ -10720,7 +10724,7 @@ msgstr ""
 msgid "Unable to register service provider."
 msgstr ""
 
-#: src/navigation/header/pending-order-items/RejectAllButton.tsx
+#: src/navigation/header/confirmation-drawer/RejectAllButton.tsx
 msgid "Unable to reject all order items."
 msgstr ""
 
@@ -11822,7 +11826,6 @@ msgid "View all projects"
 msgstr ""
 
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
-#: src/marketplace/landing/OfferingCardButtonsOverlay.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "View item"
 msgstr ""
