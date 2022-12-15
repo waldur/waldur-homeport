@@ -7,12 +7,13 @@
   .step {
     display: block;
     position: relative;
+    cursor: pointer;
     width: 100%;
     margin-bottom: -1px;
     margin-left: -1px;
     padding: 20px 15px;
-    border: 1px solid #e5e5e5;
-    background-color: #fff;
+    border: 1px solid if(isDarkMode(), #405448, #e5e5e5);
+    background-color: if(isDarkMode(), #213025, #fff);
     z-index: 1;
     text-align: center;
     text-decoration: none;
@@ -22,8 +23,13 @@
       border-bottom-left-radius: 5px;
     }
 
+    &:last-child {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
     &.active {
-      border-color: #05f;
+      border-color: if(isDarkMode(), #78bf69, #05f);
       cursor: default;
       z-index: 5;
       pointer-events: none;
@@ -46,7 +52,7 @@
     }
 
     &:not(.active):hover {
-      background-color: #f5f5f5;
+      background-color: if(isDarkMode(), #253629, #f5f5f5);
     }
 
     &:not(.active) {

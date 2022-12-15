@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
 import { Step } from './Step';
-import './StepsList.scss';
 
 interface StepsListProps {
   choices: string[];

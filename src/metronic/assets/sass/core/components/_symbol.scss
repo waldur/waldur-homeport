@@ -4,10 +4,22 @@
 
 // Base
 .symbol {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
   position: relative;
   @include border-radius($border-radius);
+
+  // Darkmode background in lists
+  .list-group-item & {
+    background-color: if(isDarkMode(), #ffffff, inherit);
+  }
+
+  // Darkmode background in providers
+  .providers-brands & {
+    background-color: if(isDarkMode(), #ffffff, inherit);
+    padding: if(isDarkMode(), 0 24px, inherit);
+  }
 
   // Label
   .symbol-label {

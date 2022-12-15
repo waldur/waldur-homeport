@@ -170,7 +170,7 @@ export const MarketplacePopup: FunctionComponent = () => {
                   id="marketplaces-selector-search-box"
                   ref={refSearch}
                   type="text"
-                  className="form-control-solid text-center bg-white"
+                  className="form-control-solid text-center"
                   autoFocus
                   value={filter}
                   onChange={(event) => setFilter(event.target.value)}
