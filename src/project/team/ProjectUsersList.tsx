@@ -4,7 +4,10 @@ import Gravatar from 'react-gravatar';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
-import { PROJECT_ADMIN_ROLE } from '@waldur/core/constants';
+import {
+  PROJECT_ADMIN_ROLE,
+  PROJECT_MEMBER_ROLE,
+} from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable } from '@waldur/table';
@@ -51,7 +54,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       actions={
         <ButtonGroup>
           {props.isStaff && <AddUserButton refreshList={props.fetch} />}
-          {props.isOwnerOrStaff || props.isProjectManager ? (
+          {props.isOwnerOrStaff ? (
             <AddMemberButton
               users={props.rows}
               project={props.project}
@@ -81,7 +84,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
               permission={row.permission}
               isDisabled={
                 !props.isOwnerOrStaff &&
-                (!props.isProjectManager || row.role !== PROJECT_ADMIN_ROLE)
+                (!props.isProjectManager ||
+                  (row.role !== PROJECT_ADMIN_ROLE &&
+                    row.role !== PROJECT_MEMBER_ROLE))
               }
               refreshList={props.fetch}
             />
