@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 interface FieldErrorProps {
-  error?: string;
+  error?: string | object | Array<any>;
 }
 
 export const FieldError: FunctionComponent<FieldErrorProps> = (props) =>
@@ -9,6 +9,8 @@ export const FieldError: FunctionComponent<FieldErrorProps> = (props) =>
     <div className="help-block text-danger">
       {Array.isArray(props.error)
         ? props.error.map((e, i) => <div key={i}>{e}</div>)
+        : typeof props.error === 'object'
+        ? Object.values(props.error).map((e, i) => <div key={i}>{e}</div>)
         : props.error}
     </div>
   ) : null;
