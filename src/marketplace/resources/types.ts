@@ -8,6 +8,7 @@ export interface ResourceReference {
   backend_id?: string;
   project_uuid?: string;
   end_date?: string;
+  project_end_date?: string;
 }
 
 export type ResourceState =
@@ -26,6 +27,7 @@ interface ReportSection {
 export type Report = ReportSection[];
 
 export interface Resource extends ResourceReference {
+  description: any;
   name?: string;
   uuid: string;
   url?: string;

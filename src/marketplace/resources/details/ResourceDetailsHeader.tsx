@@ -8,6 +8,7 @@ import { MarketplaceResourceStateField } from '../list/MarketplaceResourceStateF
 import { ResourceActions } from '../ResourceActions';
 import { Resource } from '../types';
 
+import { EndDateField, ProjectEndDateField } from './EndDateField';
 import { OfferingDetailsField } from './OfferingDetailsField';
 import { ParentResourceLink } from './ParentResourceLink';
 import { PlanDetailsField } from './PlanDetailsField';
@@ -29,6 +30,7 @@ export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps
             <h3>{resource.name}</h3>
             <ParentResourceLink resource={resource} />
             <i>{`${resource.customer_name} / ${resource.project_name}`}</i>
+            {resource.description ? <p>{resource.description}</p> : null}
           </div>
           <ResourceActions
             resource={resource}
@@ -43,6 +45,8 @@ export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps
           />
           <OfferingDetailsField resource={resource} />
           <PlanDetailsField resource={resource} />
+          <EndDateField resource={resource} />
+          <ProjectEndDateField resource={resource} />
 
           <div className="d-flex justify-content-between mt-3">
             <ResourceMetadataLink resource={resource} scope={scope} />

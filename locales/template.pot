@@ -3297,6 +3297,10 @@ msgstr ""
 msgid "Flavor: {flavor_name}, image: {image_name}"
 msgstr ""
 
+#: src/marketplace/resources/details/InstanceComponents.tsx
+msgid "Flavor: {flavor}"
+msgstr ""
+
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
@@ -3719,6 +3723,10 @@ msgstr ""
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 msgid "Image:"
+msgstr ""
+
+#: src/marketplace/resources/details/InstanceComponents.tsx
+msgid "Image: {image}"
 msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
@@ -6747,6 +6755,10 @@ msgstr ""
 msgid "Project details"
 msgstr ""
 
+#: src/marketplace/resources/details/EndDateField.tsx
+msgid "Project end date"
+msgstr ""
+
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/project/ProjectEventsFilter.tsx
 #: src/project/events.ts
@@ -7098,6 +7110,7 @@ msgid "Quota usage exceeds available limit."
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
+#: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
@@ -9520,6 +9533,7 @@ msgstr ""
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
+#: src/marketplace/resources/details/EndDateField.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -12602,6 +12616,7 @@ msgid "users"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
+#: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/resource/utils.tsx
 msgid "vCPU"
@@ -12844,6 +12859,10 @@ msgstr ""
 
 #: src/marketplace-script/TestScriptButton.tsx
 msgid "{type} script was executed successfully"
+msgstr ""
+
+#: src/marketplace/resources/details/InstanceComponents.tsx
+msgid "{type} storage"
 msgstr ""
 
 #: src/quotas/QuotasTable.tsx
