@@ -57,7 +57,7 @@ export const DialogBody = connector((props: DialogBodyProps) => (
           {!props.asyncState.loading && (
             <SubmitButton
               submitting={props.submitting}
-              disabled={!props.asyncState.value.initialValues}
+              disabled={!props.asyncState.value?.initialValues}
               label={
                 props.orderCanBeApproved
                   ? translate('Submit')
