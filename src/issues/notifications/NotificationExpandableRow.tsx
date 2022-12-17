@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { formatRole } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
@@ -41,5 +42,11 @@ export const NotificationExpandableRow: FunctionComponent<{ row }> = ({
       list={row.query.project_roles}
     />
     <OptionsList label={translate('Offerings')} list={row.query.offerings} />
+    {row.send_at && (
+      <p>
+        <b>{translate('Send at')}: </b>
+        {formatDateTime(row.send_at)}
+      </p>
+    )}
   </>
 );

@@ -6,20 +6,25 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-const NotificationCreateDialog = lazyComponent(
-  () => import('./NotificationCreateDialog'),
-  'NotificationCreateDialog',
+import { parseNotification } from './utils';
+
+const NotificationUpdateDialog = lazyComponent(
+  () => import('./NotificationUpdateDialog'),
+  'NotificationUpdateDialog',
 );
 
-export const NotificationCreateButton: FunctionComponent<{ refreshList }> = ({
-  refreshList,
-}) => {
+export const NotificationUpdateButton: FunctionComponent<{
+  notification;
+  refreshList;
+}> = ({ notification, refreshList }) => {
   const dispatch = useDispatch();
   const callback = () =>
     dispatch(
-      openModalDialog(NotificationCreateDialog, {
+      openModalDialog(NotificationUpdateDialog, {
         dialogClassName: 'modal-dialog-centered mw-650px',
         resolve: {
+          initialValues: parseNotification(notification),
+          uuid: notification.uuid,
           refreshList,
         },
       }),
@@ -27,9 +32,10 @@ export const NotificationCreateButton: FunctionComponent<{ refreshList }> = ({
   return (
     <ActionButton
       action={callback}
-      title={translate('Create')}
-      icon="fa fa-plus"
-      variant="primary"
+      title={translate('Update')}
+      icon="fa fa-edit"
+      variant="light"
+      className="me-3"
     />
   );
 };

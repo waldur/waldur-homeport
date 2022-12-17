@@ -1,51 +1,30 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { post } from '@waldur/core/api';
-import { required } from '@waldur/core/validators';
-import { FormContainer, StringField, TextField } from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { translate } from '@waldur/i18n';
 import { NOTIFICATION_CREATE_FORM_ID } from '@waldur/issues/notifications/constants';
-import { NumberIndicator } from '@waldur/issues/notifications/NumberIndicator';
-import {
-  offeringsAutocomplete,
-  organizationAutocomplete,
-} from '@waldur/marketplace/common/autocompletes';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-export const NotificationCreateDialog = reduxForm({
+import { createNotification } from './api';
+import { NotificationForm } from './NotificationForm';
+import { serializeNotification } from './utils';
+
+export const NotificationCreateDialog = reduxForm<any, any>({
   form: NOTIFICATION_CREATE_FORM_ID,
-})(({ submitting, invalid, handleSubmit }) => {
-  const [fetchNumber, setFetchNumber] = useState<any>();
+})(({ submitting, invalid, handleSubmit, resolve }) => {
   const dispatch = useDispatch();
 
-  const createNotification = useCallback(
+  const callback = useCallback(
     async (formData) => {
       try {
-        const response = await post<{ emails: string[] }>(
-          '/broadcast_messages/',
-          {
-            subject: formData.subject,
-            body: formData.body,
-            query: {
-              customers: formData.customers?.map((c) => c.uuid),
-              offerings: formData.offerings?.map((c) => c.uuid),
-            },
-          },
-        );
-        dispatch(
-          showSuccess(
-            translate('Notifications has been sent to {count} users.', {
-              count: response.data.emails.length,
-            }),
-          ),
-        );
+        await createNotification(serializeNotification(formData));
+        await resolve.refreshList();
+        dispatch(showSuccess(translate('Notification has been created.')));
         dispatch(closeModalDialog());
       } catch (e) {
         dispatch(
@@ -57,57 +36,11 @@ export const NotificationCreateDialog = reduxForm({
   );
 
   return (
-    <form
-      onSubmit={handleSubmit(createNotification)}
-      onChange={(e) => setFetchNumber(e)}
-    >
+    <form onSubmit={handleSubmit(callback)}>
       <Modal.Header closeButton>
         <h2 className="fw-bolder">{translate('Create a broadcast')}</h2>
       </Modal.Header>
-      <Modal.Body className="scroll-y mx-5 mx-xl-15 my-7">
-        <FormContainer submitting={submitting}>
-          <StringField
-            name="subject"
-            label={translate('Subject')}
-            required={true}
-            validate={required}
-          />
-          <TextField
-            name="body"
-            label={translate('Message')}
-            required={true}
-            validate={required}
-          />
-          <AsyncSelectField
-            name="offerings"
-            label={translate('Offerings')}
-            placeholder={translate('Select offerings...')}
-            loadOptions={(query, prevOptions, page) =>
-              offeringsAutocomplete(
-                { name: query, shared: true },
-                prevOptions,
-                page,
-              )
-            }
-            isMulti={true}
-            onChange={(e) => setFetchNumber(e)}
-          />
-          <AsyncSelectField
-            name="customers"
-            label={translate('Organizations')}
-            placeholder={translate('Select organizations...')}
-            loadOptions={(query, prevOptions, page) =>
-              organizationAutocomplete(query, prevOptions, page, {
-                field: ['name', 'uuid'],
-                o: 'name',
-              })
-            }
-            isMulti={true}
-            onChange={(e) => setFetchNumber(e)}
-          />
-        </FormContainer>
-        <NumberIndicator shouldFetch={fetchNumber} />
-      </Modal.Body>
+      <NotificationForm submitting={submitting} />
       <Modal.Footer>
         <SubmitButton
           block={false}
