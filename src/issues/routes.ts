@@ -68,9 +68,9 @@ const IssueDetailsContainer = lazyComponent(
   () => import('./IssueDetails'),
   'IssueDetails',
 );
-const BroadcastList = lazyComponent(
-  () => import('./notifications/BroadcastList'),
-  'BroadcastList',
+const NotificationList = lazyComponent(
+  () => import('./notifications/NotificationList'),
+  'NotificationList',
 );
 const FeaturesList = lazyComponent(
   () => import('./FeaturesList'),
@@ -238,7 +238,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.broadcast',
     url: 'broadcast/',
-    component: BroadcastList,
+    component: NotificationList,
     data: {
       breadcrumb: () => translate('Broadcast'),
     },
