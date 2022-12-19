@@ -16,7 +16,7 @@ import { OrderItemDetails } from './OrderItemDetails';
 
 async function loadOrderItem(order_item_uuid) {
   const orderItem = await api.getOrderItem(order_item_uuid);
-  const offering = await api.getProviderOffering(orderItem.offering_uuid);
+  const offering = await api.getPublicOffering(orderItem.offering_uuid);
   const plugins = await api.getPlugins();
   const limits = plugins.find(
     (plugin) => plugin.offering_type === offering.type,
