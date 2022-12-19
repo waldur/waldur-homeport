@@ -307,17 +307,19 @@ export class OpenstackInstanceCreateFormComponent extends Component<
             )}
           />
         </CreateResourceFormGroup>
-        <CreateResourceFormGroup label={translate('Server group')}>
-          <Field
-            name="attributes.server_group"
-            component={(fieldProps) => (
-              <OpenstackInstanceServerGroups
-                serverGroups={this.state.serverGroups}
-                input={fieldProps.input}
-              />
-            )}
-          />
-        </CreateResourceFormGroup>
+        {this.state.serverGroups.length > 0 ? (
+          <CreateResourceFormGroup label={translate('Server group')}>
+            <Field
+              name="attributes.server_group"
+              component={(fieldProps) => (
+                <OpenstackInstanceServerGroups
+                  serverGroups={this.state.serverGroups}
+                  input={fieldProps.input}
+                />
+              )}
+            />
+          </CreateResourceFormGroup>
+        ) : null}
         <CreateResourceFormGroup label={translate('Networks')}>
           <Field
             name="attributes.networks"
