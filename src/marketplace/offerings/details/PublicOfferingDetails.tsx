@@ -81,7 +81,9 @@ export const PublicOfferingDetails: FunctionComponent<PublicOfferingDetailsProps
           {showExperimentalUiComponents && <PublicOfferingFAQ />}
           {showExperimentalUiComponents && <PublicOfferingReviews />}
           <PublicOfferingPricing offering={offering} canDeploy={canDeploy} />
-          <PublicOfferingFacility offering={offering} />
+          {showExperimentalUiComponents && (
+            <PublicOfferingFacility offering={offering} />
+          )}
           {showExperimentalUiComponents && <PublicOfferingGetHelp />}
         </div>
       </div>
