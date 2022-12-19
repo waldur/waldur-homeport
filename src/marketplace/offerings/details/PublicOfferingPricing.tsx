@@ -32,36 +32,39 @@ export const PublicOfferingPricing: FunctionComponent<PublicOfferingPricingProps
           <PublicOfferingCardTitle>
             {translate('Pricing')}
           </PublicOfferingCardTitle>
+
           <div className="text-center">
-            <h2 className="mb-16">
-              {translate('Ready to sign up? (Custom title)')}
-            </h2>
+            <h2 className="mb-16">{translate('Available plans')}</h2>
 
-            {/* Period Switch */}
-            <Stack
-              direction="horizontal"
-              gap={5}
-              className="justify-content-center fw-bold mb-16"
-            >
-              <label
-                className={period === 'yearly' ? 'text-muted' : 'text-primary'}
-                onClick={() => setPeriod('monthly')}
+            {showExperimentalUiComponents && (
+              <Stack
+                direction="horizontal"
+                gap={5}
+                className="justify-content-center fw-bold mb-16"
               >
-                {translate('Billed monthly')}
-              </label>
-              <FormCheck
-                checked={period === 'yearly'}
-                type="switch"
-                onChange={switchPeriod}
-              />
-              <label
-                className={period === 'monthly' ? 'text-muted' : 'text-primary'}
-                onClick={() => setPeriod('yearly')}
-              >
-                {translate('Billed yearly (20% discount)')}
-              </label>
-            </Stack>
-
+                <label
+                  className={
+                    period === 'yearly' ? 'text-muted' : 'text-primary'
+                  }
+                  onClick={() => setPeriod('monthly')}
+                >
+                  {translate('Billed monthly')}
+                </label>
+                <FormCheck
+                  checked={period === 'yearly'}
+                  type="switch"
+                  onChange={switchPeriod}
+                />
+                <label
+                  className={
+                    period === 'monthly' ? 'text-muted' : 'text-primary'
+                  }
+                  onClick={() => setPeriod('yearly')}
+                >
+                  {translate('Billed yearly (20% discount)')}
+                </label>
+              </Stack>
+            )}
             {/* Pricing Plans */}
             <div className="d-flex scroll-x py-2 mb-5">
               <div className="d-flex align-items-stretch justify-content-center w-100">
