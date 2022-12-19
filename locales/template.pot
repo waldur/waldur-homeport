@@ -8548,6 +8548,7 @@ msgid "Send"
 msgstr ""
 
 #: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/issues/notifications/NotificationForm.tsx
 msgid "Send at"
 msgstr ""
 

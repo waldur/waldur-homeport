@@ -7,7 +7,6 @@ import { CustomerLink } from '@waldur/customer/CustomerLink';
 import { translate } from '@waldur/i18n';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { ProjectLink } from '@waldur/project/ProjectLink';
-import { ProjectTablePlaceholder } from '@waldur/project/ProjectTablePlaceholder';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
@@ -67,7 +66,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       hasQuery={true}
       showPageSizeSelector={true}
       enableExport={true}
-      placeholderComponent={<ProjectTablePlaceholder />}
       rowClass={({ row }) =>
         props.currentProject?.uuid === row.project_uuid ? 'bg-gray-200' : ''
       }
