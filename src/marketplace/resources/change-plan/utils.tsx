@@ -4,10 +4,7 @@ import {
   SelectDialogFieldChoice,
 } from '@waldur/form/SelectDialogField';
 import { translate } from '@waldur/i18n';
-import {
-  getProviderOffering,
-  getResource,
-} from '@waldur/marketplace/common/api';
+import { getPublicOffering, getResource } from '@waldur/marketplace/common/api';
 import { filterOfferingComponents } from '@waldur/marketplace/common/registry';
 import { Offering, Plan } from '@waldur/marketplace/types';
 
@@ -84,7 +81,7 @@ const getChoices = (
 
 export async function loadData(resource_uuid): Promise<FetchedData> {
   const resource = await getResource(resource_uuid);
-  const offering = await getProviderOffering(resource.offering_uuid);
+  const offering = await getPublicOffering(resource.offering_uuid);
   const columns = getColumns(offering);
   const choices = getChoices(offering, resource);
   const validPlan = choices.find((choice) => !choice.disabled);

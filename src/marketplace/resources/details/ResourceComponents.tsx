@@ -9,7 +9,7 @@ export const ResourceComponents = ({
   resource,
   components,
 }: {
-  resource: { current_usages: Limits; limits: Limits };
+  resource: { current_usages: Limits; limits: Limits; limit_usage: Limits };
   components: OfferingComponent[];
 }) => {
   const normalize = (value: number, factor: number) =>
@@ -20,10 +20,17 @@ export const ResourceComponents = ({
         {components.map((component) => (
           <QuotaCell
             key={component.type}
-            usage={normalize(
-              resource.current_usages[component.type],
-              component.factor,
-            )}
+            usage={
+              component.billing_type === 'limit'
+                ? normalize(
+                    resource.limit_usage[component.type],
+                    component.factor,
+                  )
+                : normalize(
+                    resource.current_usages[component.type],
+                    component.factor,
+                  )
+            }
             limit={normalize(resource.limits[component.type], component.factor)}
             units={component.measured_unit}
             title={component.name}
