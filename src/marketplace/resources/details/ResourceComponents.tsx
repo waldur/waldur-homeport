@@ -21,7 +21,7 @@ export const ResourceComponents = ({
           <QuotaCell
             key={component.type}
             usage={
-              component.billing_type === 'limit'
+              component.billing_type === 'limit' && resource.limit_usage
                 ? normalize(
                     resource.limit_usage[component.type],
                     component.factor,
