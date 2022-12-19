@@ -59,7 +59,7 @@ const TableOptions = {
   table: 'ProjectOrderItemsList',
   fetchData: createFetcher('marketplace-order-items'),
   getDefaultFilter: () => ({
-    page_size: 3,
+    page_size: 2,
     field: [
       'uuid',
       'customer_uuid',

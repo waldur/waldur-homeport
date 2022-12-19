@@ -14,7 +14,7 @@ export const ProjectEventsTimeline = ({ project }) => {
       params: {
         scope: project ? project.url : undefined,
         feature: ['projects', 'resources'],
-        page_size: 4,
+        page_size: 3,
         field: ['created', 'event_type', 'message', 'uuid', 'context'],
       },
     }).then((res) => res.data);

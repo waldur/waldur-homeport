@@ -21,7 +21,7 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
       })),
     [customer],
   );
-  const members = React.useMemo(
+  const managers = React.useMemo(
     () =>
       customer.service_managers.map((member) => ({
         email: member.email,
@@ -67,26 +67,32 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
                 <CustomerActions />
               </Col>
             </Row>
-            {owners && owners.length > 0 && (
-              <Form.Group as={Row} className="mb-1">
-                <Form.Label column sm={3} md={2}>
-                  {translate('Owners:')}
-                </Form.Label>
-                <Col>
-                  <SymbolsGroup items={owners} />
-                </Col>
-              </Form.Group>
-            )}
-            {members && members.length > 0 && (
-              <Form.Group as={Row} className="mb-1">
-                <Form.Label column sm={3} md={2}>
-                  {translate('Members:')}
-                </Form.Label>
-                <Col>
-                  <SymbolsGroup items={members} />
-                </Col>
-              </Form.Group>
-            )}
+            <Row>
+              <Col xs={12}>
+                <div className="d-flex justify-content-start align-items-xl-center flex-xl-row flex-column gap-xl-6">
+                  {owners && owners.length > 0 && (
+                    <Form.Group as={Row} className="mb-1">
+                      <Form.Label column xs="auto">
+                        {translate('Owners:')}
+                      </Form.Label>
+                      <Col>
+                        <SymbolsGroup items={owners} max={6} />
+                      </Col>
+                    </Form.Group>
+                  )}
+                  {managers && managers.length > 0 && (
+                    <Form.Group as={Row} className="mb-1">
+                      <Form.Label column xs="auto">
+                        {translate('Managers:')}
+                      </Form.Label>
+                      <Col>
+                        <SymbolsGroup items={managers} />
+                      </Col>
+                    </Form.Group>
+                  )}
+                </div>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Card.Body>
