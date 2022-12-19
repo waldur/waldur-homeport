@@ -13,7 +13,6 @@ import {
 import { formatDate } from '@waldur/core/dateUtils';
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
 import { translate } from '@waldur/i18n';
@@ -46,9 +45,9 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
       users ? users.filter((user) => user.role === PROJECT_MEMBER_ROLE) : null,
     [users],
   );
-  const admin = useMemo(
+  const admins = useMemo(
     () =>
-      users ? users.find((user) => user.role === PROJECT_ADMIN_ROLE) : null,
+      users ? users.filter((user) => user.role === PROJECT_ADMIN_ROLE) : null,
     [users],
   );
 
@@ -81,7 +80,8 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
                     </span>
                   )}
                 </Stack>
-                <p className="text-muted">{project.description}</p>
+                <i>{project.customer_name}</i>
+                {project.description ? <p>{project.description}</p> : null}
               </Col>
               <Col xs="auto">
                 <ProjectActions project={project} />
@@ -89,45 +89,13 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
             </Row>
             <Row>
               <Col xs={12}>
-                <div className="d-flex justify-content-between align-items-xl-center flex-xl-row flex-column gap-xl-6">
-                  <Row className="align-items-center mb-1">
-                    <Form.Label column xs="auto">
-                      {translate(ENV.roles.owner)}:
-                    </Form.Label>
-                    <Col>
-                      <div className="form-control-plaintext">
-                        <Link
-                          state="organization.dashboard"
-                          params={{ uuid: project.customer_uuid }}
-                        >
-                          <u className="text-dark">{project.customer_name}</u>
-                        </Link>
-                      </div>
-                    </Col>
-                  </Row>
+                <div className="d-flex justify-content-start align-items-xl-center flex-xl-row flex-column gap-xl-6">
                   {loading ? (
                     <LoadingSpinner />
                   ) : error ? (
                     <>{translate('Unable to load users')}</>
                   ) : (
                     <>
-                      {admin && (
-                        <Form.Group as={Row} className="mb-1">
-                          <Form.Label column xs="auto">
-                            {translate(ENV.roles.admin)}:
-                          </Form.Label>
-                          <Col>
-                            <Link state="">
-                              <div className="symbol symbol-circle symbol-35px me-2">
-                                <div className="symbol-label fs-4 fw-bold bg-dark text-inverse-dark">
-                                  {admin.full_name[0]}
-                                </div>
-                              </div>
-                              <u className="text-dark">{admin.full_name}</u>
-                            </Link>
-                          </Col>
-                        </Form.Group>
-                      )}
                       {managers && managers.length > 0 && (
                         <Form.Group as={Row} className="mb-1">
                           <Form.Label column xs="auto">
@@ -135,6 +103,16 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
                           </Form.Label>
                           <Col>
                             <SymbolsGroup items={managers} max={6} />
+                          </Col>
+                        </Form.Group>
+                      )}
+                      {admins && admins.length > 0 && (
+                        <Form.Group as={Row} className="mb-1">
+                          <Form.Label column xs="auto">
+                            {translate(ENV.roles.admin)}:
+                          </Form.Label>
+                          <Col>
+                            <SymbolsGroup items={admins} max={6} />
                           </Col>
                         </Form.Group>
                       )}

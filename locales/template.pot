@@ -4500,6 +4500,10 @@ msgstr ""
 msgid "Management"
 msgstr ""
 
+#: src/customer/dashboard/CustomerProfile.tsx
+msgid "Managers:"
+msgstr ""
+
 #: src/invoices/list/MarkAsPaidButton.tsx
 msgid "Mark as paid"
 msgstr ""
@@ -4602,10 +4606,6 @@ msgstr ""
 #: src/i18n/constants.ts
 #: src/project/team/ProjectUsersList.tsx
 msgid "Member"
-msgstr ""
-
-#: src/customer/dashboard/CustomerProfile.tsx
-msgid "Members:"
 msgstr ""
 
 #: src/marketplace/resources/details/MonitoringCharts.tsx
