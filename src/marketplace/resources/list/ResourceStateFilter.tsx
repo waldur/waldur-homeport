@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Props as SelectProps } from 'react-select';
 import { Field } from 'redux-form';
 
 import { Select } from '@waldur/form/themed-select';
@@ -13,7 +14,9 @@ export const getStates = () => [
   { value: 'Terminated', label: translate('Terminated') },
 ];
 
-export const ResourceStateFilter: FunctionComponent = () => (
+export const ResourceStateFilter: FunctionComponent<{
+  reactSelectProps?: Partial<SelectProps>;
+}> = (props) => (
   <Field
     name="state"
     component={(fieldProps) => (
@@ -23,6 +26,7 @@ export const ResourceStateFilter: FunctionComponent = () => (
         value={fieldProps.input.value}
         onChange={(value) => fieldProps.input.onChange(value)}
         isClearable={true}
+        {...props.reactSelectProps}
       />
     )}
   />

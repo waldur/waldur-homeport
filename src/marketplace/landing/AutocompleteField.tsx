@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { components } from 'react-select';
+import { components, Props as SelectProps } from 'react-select';
 
 import { AsyncPaginate } from '@waldur/form/themed-select';
 
@@ -47,6 +47,7 @@ interface AutocompleteFieldProps {
   onChange: (offeringId: string) => void;
   value?: any;
   noOptionsMessage?: (message) => string;
+  reactSelectProps?: Partial<SelectProps>;
 }
 
 export const AutocompleteField: FunctionComponent<AutocompleteFieldProps> = (
@@ -66,5 +67,6 @@ export const AutocompleteField: FunctionComponent<AutocompleteFieldProps> = (
     additional={{
       page: 1,
     }}
+    {...props.reactSelectProps}
   />
 );

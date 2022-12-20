@@ -13,6 +13,13 @@ const reactSelectMenuPortaling = (): Partial<SelectProps> => ({
   menuPlacement: 'bottom',
 });
 
+export const reactSelectMenuNoPortaling = (): Partial<SelectProps> => ({
+  menuPortalTarget: undefined,
+  styles: undefined,
+  menuPosition: undefined,
+  menuPlacement: undefined,
+});
+
 const DARK_COLORS = {
   neutral0: '#1A261D',
   neutral10: '#4C6351',

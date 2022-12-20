@@ -1,11 +1,14 @@
 import React from 'react';
+import { Props as SelectProps } from 'react-select';
 import { Field } from 'redux-form';
 
 import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { categoryAutocomplete } from '@waldur/marketplace/common/autocompletes';
 
-export const CategoryFilter: React.FC = () => (
+export const CategoryFilter: React.FC<{
+  reactSelectProps?: Partial<SelectProps>;
+}> = (props) => (
   <Field
     name="category"
     component={(fieldProps) => (
@@ -22,6 +25,7 @@ export const CategoryFilter: React.FC = () => (
         additional={{
           page: 1,
         }}
+        {...props.reactSelectProps}
       />
     )}
   />
