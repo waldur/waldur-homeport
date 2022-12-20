@@ -27,6 +27,7 @@ import { MonitoringCharts } from './MonitoringCharts';
 import { NetworkingTab } from './NetworkingTab';
 import { TenantDetails } from './openstack-tenant/TenantDetails';
 import { QuickActions } from './QuickActions';
+import { ResourceAccessCard } from './ResourceAccessCard';
 import { ResourceComponents } from './ResourceComponents';
 import { ResourceDetailsHeader } from './ResourceDetailsHeader';
 import { ResourceIssues } from './ResourceIssues';
@@ -215,10 +216,15 @@ export const ResourceDetailsView: FC<any> = ({
                 )}
               </Col>
               <Col md={4} sm={12}>
+                <ResourceAccessCard resource={resource} />
                 {showExperimentalUiComponents && (
                   <Card className="mb-7">
+                    <Card.Header>
+                      <Card.Title>
+                        <h3 className="mb-5">{translate('Status page')}</h3>
+                      </Card.Title>
+                    </Card.Header>
                     <Card.Body>
-                      <h3 className="mb-5">{translate('Status page')}</h3>
                       <StatusPage />
                     </Card.Body>
                   </Card>
