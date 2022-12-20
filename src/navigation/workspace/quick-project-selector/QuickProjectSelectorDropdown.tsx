@@ -21,7 +21,12 @@ import useOnScreen from '@waldur/core/useOnScreen';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
 import { isChildOf } from '@waldur/navigation/useTabs';
-import { getCustomer, isStaffOrSupport } from '@waldur/workspace/selectors';
+import {
+  checkIsOwner,
+  getCustomer,
+  getUser,
+  isStaffOrSupport,
+} from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { getCustomersCount } from '../api';
@@ -33,6 +38,7 @@ import './QuickProjectSelectorDropdown.scss';
 
 export const QuickProjectSelectorDropdown: FunctionComponent = () => {
   const currentCustomer = useSelector(getCustomer);
+  const currentUser = useSelector(getUser);
   const canSeeAll = useSelector(isStaffOrSupport);
   const [selectedOrganization, selectOrganization] =
     useState<Customer>(currentCustomer);
@@ -76,6 +82,9 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
 
   const handleOrganizationSelect = useCallback(
     (customer) => {
+      if (!canSeeAll && !checkIsOwner(customer, currentUser)) {
+        return;
+      }
       if (isCustomerPages || isProviderPages) {
         router.stateService.go(state.name, {
           uuid: customer.uuid,
@@ -86,7 +95,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
         });
       }
     },
-    [isCustomerPages, isProviderPages, router, state],
+    [isCustomerPages, isProviderPages, router, state, canSeeAll, currentUser],
   );
 
   const handleProjectSelect = useCallback(
