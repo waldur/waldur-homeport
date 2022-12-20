@@ -111,11 +111,16 @@ msgid "Access"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewSummary.tsx
+#: src/marketplace/resources/details/ResourceAccessCard.tsx
 msgid "Access URL"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Access console link"
+msgstr ""
+
+#: src/marketplace/resources/details/ResourceAccessCard.tsx
+msgid "Access info"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
@@ -958,6 +963,10 @@ msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingFacility.tsx
 msgid "Availability:"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Available plans"
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
@@ -7161,10 +7170,6 @@ msgstr ""
 msgid "Reach a new audience"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
-msgid "Ready to sign up? (Custom title)"
-msgstr ""
-
 #: src/customer/details/CustomerRemovePanel.tsx
 #: src/user/support/actions.ts
 msgid "Reason"
@@ -9583,6 +9588,7 @@ msgstr ""
 
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
+#: src/marketplace/resources/details/ResourceAccessCard.tsx
 msgid "Text has been copied"
 msgstr ""
 
@@ -11649,6 +11655,7 @@ msgstr ""
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/UsernameGroup.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+#: src/marketplace/resources/details/ResourceAccessCard.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
