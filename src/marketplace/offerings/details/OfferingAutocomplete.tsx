@@ -1,4 +1,5 @@
 import React from 'react';
+import { Props as SelectProps } from 'react-select';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -8,6 +9,7 @@ import { AutocompleteField } from '@waldur/marketplace/landing/AutocompleteField
 interface OfferingAutocompleteProps {
   offeringFilter?: object;
   className?: string;
+  reactSelectProps?: Partial<SelectProps>;
 }
 
 export const OfferingAutocomplete: React.FC<OfferingAutocompleteProps> = (
@@ -31,6 +33,7 @@ export const OfferingAutocomplete: React.FC<OfferingAutocompleteProps> = (
         value={fieldProps.input.value}
         onChange={(value) => fieldProps.input.onChange(value)}
         noOptionsMessage={() => translate('No offerings')}
+        reactSelectProps={props.reactSelectProps}
       />
     )}
   />

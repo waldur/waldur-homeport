@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import { StringField } from '@waldur/form';
+import { reactSelectMenuNoPortaling } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { CategoryFilter } from '@waldur/marketplace/resources/list/CategoryFilter';
@@ -18,13 +19,13 @@ const PureSearchFilters: FunctionComponent<{}> = () => (
       />
     </div>
     <div className="mb-5">
-      <OfferingAutocomplete />
+      <OfferingAutocomplete reactSelectProps={reactSelectMenuNoPortaling()} />
     </div>
     <div className="mb-5">
-      <CategoryFilter />
+      <CategoryFilter reactSelectProps={reactSelectMenuNoPortaling()} />
     </div>
     <div className="mb-8">
-      <ResourceStateFilter />
+      <ResourceStateFilter reactSelectProps={reactSelectMenuNoPortaling()} />
     </div>
   </>
 );
