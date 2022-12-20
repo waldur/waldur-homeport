@@ -45,7 +45,7 @@ export const categoryRouteState = (state: RootState) => {
   if (!user) {
     return 'marketplace-category.details';
   }
-  return WORKSPACE_CATEGORY[workspace];
+  return WORKSPACE_CATEGORY[workspace] || 'marketplace-category.details';
 };
 
 export const formatAttributesFilter = (query) => {
