@@ -12745,6 +12745,10 @@ msgstr ""
 msgid "{from}-{to} of {all} items"
 msgstr ""
 
+#: src/marketplace/resources/list/CategoryColumnField.tsx
+msgid "{ip} has been copied"
+msgstr ""
+
 #: src/customer/team/CustomerUsersListExpandableRow.tsx
 msgid "{label} in:"
 msgstr ""

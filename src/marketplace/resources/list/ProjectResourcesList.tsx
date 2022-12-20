@@ -50,10 +50,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title: translate('Offering'),
       render: ({ row }: FieldProps) => row.offering_name,
     },
-    {
-      title: translate('State'),
-      render: ResourceStateField,
-    },
   ];
 
   props.columns.map((column: CategoryColumn) => {
@@ -62,11 +58,17 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => CategoryColumnField({ row, column }),
     });
   });
-  columns.push({
-    title: translate('Created at'),
-    render: ({ row }) => formatDateTime(row.created),
-    orderField: 'created',
-  });
+  columns.push(
+    {
+      title: translate('State'),
+      render: ResourceStateField,
+    },
+    {
+      title: translate('Created at'),
+      render: ({ row }) => formatDateTime(row.created),
+      orderField: 'created',
+    },
+  );
 
   const tableActions = (
     <>

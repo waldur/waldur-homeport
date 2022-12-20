@@ -1,3 +1,4 @@
+import ipRegex from 'ip-regex';
 import { getFormValues } from 'redux-form';
 
 import { formatErrorObject } from '@waldur/core/ErrorMessageFormatter';
@@ -47,3 +48,11 @@ export const handleMarketplaceErrorResponse = (
 
 export const isExperimentalUiComponentsVisible = () =>
   isFeatureVisible('marketplace.show_experimental_ui_components');
+
+const IPv4_ADDRESS_PATTERN = ipRegex.v4({ exact: true });
+const IPv6_ADDRESS_PATTERN = ipRegex.v6({ exact: true });
+
+export const validateIP = (value) => {
+  if (!value) return false;
+  return IPv4_ADDRESS_PATTERN.test(value) || IPv6_ADDRESS_PATTERN.test(value);
+};
