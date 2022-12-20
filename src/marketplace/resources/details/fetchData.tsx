@@ -1,6 +1,9 @@
 import { get } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
-import { getPublicOffering, getResource } from '@waldur/marketplace/common/api';
+import {
+  getResource,
+  getResourceOffering,
+} from '@waldur/marketplace/common/api';
 import { Tab } from '@waldur/navigation/Tab';
 import { NestedResourceTabsConfiguration } from '@waldur/resource/tabs/NestedResourceTabsConfiguration';
 import { ResourceEvents } from '@waldur/resource/tabs/ResourceEvents';
@@ -40,7 +43,7 @@ export const fetchData = async (state, params) => {
         .sort((t1, t2) => t1.title.localeCompare(t2.title)),
     );
   }
-  const offering = await getPublicOffering(resource.offering_uuid);
+  const offering = await getResourceOffering(resource.uuid);
   const components = offering.components;
 
   tabSources = tabSources.concat([

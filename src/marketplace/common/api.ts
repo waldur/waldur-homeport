@@ -144,6 +144,11 @@ export const getResourcePlanPeriods = (resourceId: string) =>
     `/marketplace-resources/${resourceId}/plan_periods/`,
   );
 
+export const getResourceOffering = (id: string, options?: AxiosRequestConfig) =>
+  get<Offering>(`/marketplace-resources/${id}/offering/`, options).then(
+    (response) => response.data,
+  );
+
 export const submitReport = (resourceId: string, payload) =>
   post(`/marketplace-resources/${resourceId}/submit_report/`, payload);
 
