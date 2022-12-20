@@ -96,7 +96,7 @@ export const ResourcesMenu = ({ anonymous }) => {
     if (Object.keys(projectCounters || {}).length > 0) {
       setPreferredCounters(projectCounters);
     } else {
-      setPreferredCounters(organizationCounters);
+      setPreferredCounters(organizationCounters || {});
     }
   }, [projectCounters, organizationCounters]);
 

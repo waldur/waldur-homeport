@@ -75,9 +75,7 @@ const TableOptions = {
     row.created_by_full_name || row.created_by_username,
     row.state,
     row.approved_at ? formatDateTime(row.approved_at) : DASH_ESCAPE_CODE,
-    row.row.approved_by_full_name ||
-      row.approved_by_username ||
-      DASH_ESCAPE_CODE,
+    row.approved_by_full_name || row.approved_by_username || DASH_ESCAPE_CODE,
     row.total_cost,
   ],
   exportFields: [
