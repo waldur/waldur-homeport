@@ -48,7 +48,12 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
       if (!expandableRow) return;
       // prevent expandable row to toggle when clicking on inner clickable elements
       const el = e.target as HTMLElement;
-      if (el.onclick || el instanceof HTMLInputElement) return;
+      if (
+        el.onclick ||
+        el instanceof HTMLInputElement ||
+        el.closest('button, a')
+      )
+        return;
       toggleRow(getId(row, index));
     },
     [toggleRow],
