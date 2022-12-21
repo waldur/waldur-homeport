@@ -6,6 +6,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
+import { NotificationResponseData } from './types';
 import { parseNotification } from './utils';
 
 const NotificationUpdateDialog = lazyComponent(
@@ -14,7 +15,7 @@ const NotificationUpdateDialog = lazyComponent(
 );
 
 export const NotificationUpdateButton: FunctionComponent<{
-  notification;
+  notification: NotificationResponseData;
   refreshList;
 }> = ({ notification, refreshList }) => {
   const dispatch = useDispatch();

@@ -10,6 +10,7 @@ import { NotificationCreateButton } from './NotificationCreateButton';
 import { NotificationExpandableRow } from './NotificationExpandableRow';
 import { NotificationSendButton } from './NotificationSendButton';
 import { NotificationUpdateButton } from './NotificationUpdateButton';
+import { NotificationResponseData } from './types';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   return (
@@ -18,17 +19,18 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={[
         {
           title: translate('Author'),
-          render: ({ row }) => row.author_full_name,
+          render: ({ row }: { row: NotificationResponseData }) =>
+            row.author_full_name,
           orderField: 'author_full_name',
         },
         {
           title: translate('Subject'),
-          render: ({ row }) => row.subject,
+          render: ({ row }: { row: NotificationResponseData }) => row.subject,
           orderField: 'subject',
         },
         {
           title: translate('State'),
-          render: ({ row }) => (
+          render: ({ row }: { row: NotificationResponseData }) => (
             <StateIndicator
               label={translate(row.state)}
               variant={

@@ -4,8 +4,9 @@ import { useAsyncFn } from 'react-use';
 import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { getNumberOfNotificationReceivers } from '@waldur/issues/notifications/api';
-import { NOTIFICATION_CREATE_FORM_ID } from '@waldur/issues/notifications/constants';
+
+import { getNumberOfNotificationReceivers } from './api';
+import { NOTIFICATION_CREATE_FORM_ID } from './constants';
 
 interface NumberIndicatorProps {
   shouldFetch;

@@ -69,7 +69,7 @@ const IssueDetailsContainer = lazyComponent(
   'IssueDetails',
 );
 const NotificationList = lazyComponent(
-  () => import('./notifications/NotificationList'),
+  () => import('../notifications/NotificationList'),
   'NotificationList',
 );
 const FeaturesList = lazyComponent(

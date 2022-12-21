@@ -4,7 +4,9 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { formatRole } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
-const OptionsList = ({ label, list }) =>
+import { IdNamePair, NotificationResponseData } from './types';
+
+const OptionsList = ({ label, list }: { label: string; list: IdNamePair[] }) =>
   list ? (
     <p>
       <b>{label}: </b>
@@ -16,9 +18,9 @@ const RolesList = ({ label, list }) => (
   <OptionsList label={label} list={list?.map(formatRole)} />
 );
 
-export const NotificationExpandableRow: FunctionComponent<{ row }> = ({
-  row,
-}) => (
+export const NotificationExpandableRow: FunctionComponent<{
+  row: NotificationResponseData;
+}> = ({ row }) => (
   <>
     <p>
       <b>{translate('Message')}: </b>
