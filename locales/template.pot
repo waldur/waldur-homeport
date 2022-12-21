@@ -922,7 +922,7 @@ msgstr ""
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr ""
 
-#: src/issues/notifications/NotificationList.tsx
+#: src/notifications/NotificationList.tsx
 msgid "Author"
 msgstr ""
 
@@ -1774,11 +1774,11 @@ msgstr ""
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
-#: src/issues/notifications/NotificationCreateButton.tsx
-#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+#: src/notifications/NotificationCreateButton.tsx
+#: src/notifications/NotificationCreateDialog.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -1809,7 +1809,7 @@ msgstr ""
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr ""
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/notifications/NotificationCreateDialog.tsx
 msgid "Create a broadcast"
 msgstr ""
 
@@ -1964,7 +1964,6 @@ msgstr ""
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
-#: src/issues/notifications/NotificationList.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/details/OfferingUsersTab.tsx
@@ -1979,6 +1978,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
+#: src/notifications/NotificationList.tsx
 #: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/team/InvitationsList.tsx
@@ -4632,8 +4632,8 @@ msgstr ""
 
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
-#: src/issues/notifications/NotificationExpandableRow.tsx
-#: src/issues/notifications/NotificationForm.tsx
+#: src/notifications/NotificationExpandableRow.tsx
+#: src/notifications/NotificationForm.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr ""
@@ -5237,16 +5237,16 @@ msgstr ""
 msgid "Notification can be sent only for created invoice."
 msgstr ""
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/notifications/NotificationCreateDialog.tsx
 #: src/user/hooks/utils.ts
 msgid "Notification has been created."
 msgstr ""
 
-#: src/issues/notifications/NotificationSendButton.tsx
+#: src/notifications/NotificationSendButton.tsx
 msgid "Notification has been sent."
 msgstr ""
 
-#: src/issues/notifications/NotificationUpdateDialog.tsx
+#: src/notifications/NotificationUpdateDialog.tsx
 #: src/user/hooks/utils.ts
 msgid "Notification has been updated."
 msgstr ""
@@ -5462,12 +5462,12 @@ msgstr ""
 msgid "Offering users synchronization has been scheduled."
 msgstr ""
 
-#: src/issues/notifications/NotificationExpandableRow.tsx
-#: src/issues/notifications/NotificationForm.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
+#: src/notifications/NotificationExpandableRow.tsx
+#: src/notifications/NotificationForm.tsx
 msgid "Offerings"
 msgstr ""
 
@@ -5826,8 +5826,8 @@ msgstr ""
 msgid "Organization role"
 msgstr ""
 
-#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/notifications/NotificationExpandableRow.tsx
 #: src/user/support/UserList.tsx
 msgid "Organization roles"
 msgstr ""
@@ -5862,10 +5862,10 @@ msgstr ""
 
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/issues/notifications/NotificationExpandableRow.tsx
-#: src/issues/notifications/NotificationForm.tsx
 #: src/issues/routes.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/notifications/NotificationExpandableRow.tsx
+#: src/notifications/NotificationForm.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
@@ -6838,8 +6838,8 @@ msgstr ""
 msgid "Project role"
 msgstr ""
 
-#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/notifications/NotificationExpandableRow.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "Project roles"
@@ -6878,8 +6878,8 @@ msgid "Project {project_name} has been deleted."
 msgstr ""
 
 #: src/customer/routes.ts
-#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/issues/routes.ts
+#: src/notifications/NotificationExpandableRow.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/user/affiliations/OrganizationsList.tsx
@@ -7193,7 +7193,7 @@ msgstr ""
 msgid "Recently added offerings"
 msgstr ""
 
-#: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/notifications/NotificationExpandableRow.tsx
 msgid "Recipients"
 msgstr ""
 
@@ -8391,7 +8391,7 @@ msgid "Select offering..."
 msgstr ""
 
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
-#: src/issues/notifications/NotificationForm.tsx
+#: src/notifications/NotificationForm.tsx
 msgid "Select offerings..."
 msgstr ""
 
@@ -8414,7 +8414,7 @@ msgstr ""
 msgid "Select organization..."
 msgstr ""
 
-#: src/issues/notifications/NotificationForm.tsx
+#: src/notifications/NotificationForm.tsx
 msgid "Select organizations..."
 msgstr ""
 
@@ -8515,6 +8515,10 @@ msgstr ""
 msgid "Select subnets to connect to..."
 msgstr ""
 
+#: src/notifications/NotificationForm.tsx
+msgid "Select template..."
+msgstr ""
+
 #: src/support/OfferingConfigurationForm.tsx
 msgid "Select tenant..."
 msgstr ""
@@ -8548,12 +8552,12 @@ msgstr ""
 msgid "Selector"
 msgstr ""
 
-#: src/issues/notifications/NotificationSendButton.tsx
+#: src/notifications/NotificationSendButton.tsx
 msgid "Send"
 msgstr ""
 
-#: src/issues/notifications/NotificationExpandableRow.tsx
-#: src/issues/notifications/NotificationForm.tsx
+#: src/notifications/NotificationExpandableRow.tsx
+#: src/notifications/NotificationForm.tsx
 msgid "Send at"
 msgstr ""
 
@@ -9056,7 +9060,6 @@ msgstr ""
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/invoices/list/InvoicesList.tsx
-#: src/issues/notifications/NotificationList.tsx
 #: src/marketplace-flows/FlowListFilter.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-flows/utils.tsx
@@ -9091,6 +9094,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/notifications/NotificationList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -9202,8 +9206,8 @@ msgstr ""
 msgid "Storage type"
 msgstr ""
 
-#: src/issues/notifications/NotificationForm.tsx
-#: src/issues/notifications/NotificationList.tsx
+#: src/notifications/NotificationForm.tsx
+#: src/notifications/NotificationList.tsx
 msgid "Subject"
 msgstr ""
 
@@ -9471,6 +9475,7 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr ""
 
 #: src/issues/create/IssueCreateForm.tsx
+#: src/notifications/NotificationForm.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -9637,7 +9642,7 @@ msgstr ""
 msgid "The name must be shorter than 15 characters."
 msgstr ""
 
-#: src/issues/notifications/NumberIndicator.tsx
+#: src/notifications/NumberIndicator.tsx
 msgid "The number of recipients who will receive the notification:"
 msgstr ""
 
@@ -10232,7 +10237,7 @@ msgstr ""
 msgid "Unable to create notification."
 msgstr ""
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/notifications/NotificationCreateDialog.tsx
 msgid "Unable to create notifications."
 msgstr ""
 
@@ -10842,7 +10847,7 @@ msgstr ""
 msgid "Unable to send feedback."
 msgstr ""
 
-#: src/issues/notifications/NotificationSendButton.tsx
+#: src/notifications/NotificationSendButton.tsx
 msgid "Unable to send notification."
 msgstr ""
 
@@ -11006,7 +11011,7 @@ msgstr ""
 msgid "Unable to update notification."
 msgstr ""
 
-#: src/issues/notifications/NotificationUpdateDialog.tsx
+#: src/notifications/NotificationUpdateDialog.tsx
 msgid "Unable to update notifications."
 msgstr ""
 
@@ -11172,8 +11177,6 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
-#: src/issues/notifications/NotificationUpdateButton.tsx
-#: src/issues/notifications/NotificationUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/details/PageAccounting.tsx
 #: src/marketplace/offerings/details/PageConfirmationMessage.tsx
@@ -11187,6 +11190,8 @@ msgstr ""
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+#: src/notifications/NotificationUpdateButton.tsx
+#: src/notifications/NotificationUpdateDialog.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -11194,7 +11199,7 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: src/issues/notifications/NotificationUpdateDialog.tsx
+#: src/notifications/NotificationUpdateDialog.tsx
 msgid "Update a notification"
 msgstr ""
 
@@ -12427,7 +12432,7 @@ msgstr ""
 msgid "networks"
 msgstr ""
 
-#: src/issues/notifications/NotificationList.tsx
+#: src/notifications/NotificationList.tsx
 msgid "notifications"
 msgstr ""
 

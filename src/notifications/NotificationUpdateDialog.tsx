@@ -1,29 +1,43 @@
 import { useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { getFormValues, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { translate } from '@waldur/i18n';
-import { NOTIFICATION_UPDATE_FORM_ID } from '@waldur/issues/notifications/constants';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { RootState } from '@waldur/store/reducers';
 
 import { updateNotification } from './api';
+import { NOTIFICATION_UPDATE_FORM_ID } from './constants';
 import { NotificationForm } from './NotificationForm';
+import { NotificationFormData } from './types';
 import { serializeNotification } from './utils';
 
-export const NotificationUpdateDialog = connect((_, ownProps: any) => ({
-  initialValues: ownProps.resolve.initialValues,
-}))(
-  reduxForm<any, any>({
+interface NotificationUpdateDialogOwnProps {
+  resolve: {
+    initialValues: NotificationFormData;
+    uuid: string;
+    refreshList(): void;
+  };
+  formValues: NotificationFormData;
+}
+
+export const NotificationUpdateDialog = connect(
+  (state: RootState, ownProps: NotificationUpdateDialogOwnProps) => ({
+    initialValues: ownProps.resolve.initialValues,
+    formValues: getFormValues(NOTIFICATION_UPDATE_FORM_ID)(state),
+  }),
+)(
+  reduxForm<NotificationFormData, NotificationUpdateDialogOwnProps>({
     form: NOTIFICATION_UPDATE_FORM_ID,
-  })(({ submitting, invalid, handleSubmit, resolve }) => {
+  })(({ submitting, invalid, handleSubmit, resolve, formValues }) => {
     const dispatch = useDispatch();
 
     const callback = useCallback(
-      async (formData) => {
+      async (formData: NotificationFormData) => {
         try {
           await updateNotification(
             resolve.uuid,
@@ -38,7 +52,7 @@ export const NotificationUpdateDialog = connect((_, ownProps: any) => ({
           );
         }
       },
-      [dispatch],
+      [dispatch, resolve],
     );
 
     return (
@@ -46,7 +60,7 @@ export const NotificationUpdateDialog = connect((_, ownProps: any) => ({
         <Modal.Header closeButton>
           <h2 className="fw-bolder">{translate('Update a notification')}</h2>
         </Modal.Header>
-        {NotificationForm(submitting)}
+        <NotificationForm submitting={submitting} formValues={formValues} />
         <Modal.Footer>
           <SubmitButton
             block={false}

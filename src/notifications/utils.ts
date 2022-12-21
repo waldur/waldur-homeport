@@ -1,4 +1,12 @@
-export const serializeNotification = (formData) => ({
+import {
+  NotificationFormData,
+  NotificationRequestData,
+  NotificationResponseData,
+} from './types';
+
+export const serializeNotification = (
+  formData: NotificationFormData,
+): NotificationRequestData => ({
   subject: formData.subject,
   body: formData.body,
   query: {
@@ -8,7 +16,9 @@ export const serializeNotification = (formData) => ({
   send_at: formData.send_at,
 });
 
-export const parseNotification = (notification) => ({
+export const parseNotification = (
+  notification: NotificationResponseData,
+): NotificationFormData => ({
   subject: notification.subject,
   body: notification.body,
   offerings: notification.query.offerings,
