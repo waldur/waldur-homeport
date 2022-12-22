@@ -27,7 +27,7 @@ export const SearchResultItem: FunctionComponent<SearchResultItemProps> = ({
       {item.offerings.map((offering: OfferingInfo, i: number) => (
         <Link
           key={i}
-          state="marketplace-public-offering.details"
+          state="public.marketplace-public-offering"
           params={{ uuid: offering.offering_uuid }}
         >
           {offering.offering_name}

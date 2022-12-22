@@ -13,7 +13,7 @@ interface OwnProps {
 
 export const offeringCategoryStateSelector = (state: RootState) => {
   const workspace = getWorkspace(state);
-  return WORKSPACE_CATEGORY[workspace] || 'marketplace-category.details';
+  return WORKSPACE_CATEGORY[workspace] || 'public.marketplace-category';
 };
 
 export const CategoryLink: React.FC<OwnProps> = (props) => {

@@ -9,6 +9,7 @@ import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
 import { router } from '@waldur/router';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
+import { loadContext } from './resolve';
 import { fetchData } from './resources/details/fetchData';
 
 const SupportOfferingsContainer = lazyComponent(
@@ -145,6 +146,16 @@ const ProviderDetails = lazyComponent(
   'ProviderDetails',
 );
 
+const getPublicRoutesParams = () => ({
+  resolve: [
+    {
+      token: 'public-context',
+      resolveFn: loadContext,
+      deps: ['$transition$'],
+    },
+  ],
+});
+
 const getResourceDetailsParams = () => ({
   component: ResourceDetailsPage,
   resolve: [
@@ -180,6 +191,14 @@ const getResourceDetailsParams = () => ({
 });
 
 export const states: StateDeclaration[] = [
+  {
+    name: 'public',
+    url: '',
+    abstract: true,
+    component: Layout,
+    ...getPublicRoutesParams(),
+  },
+
   {
     name: 'marketplace-landing-project',
     url: 'marketplace/',
@@ -260,31 +279,17 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-landing',
+    name: 'public.marketplace-landing',
     url: '/marketplace/',
-    abstract: true,
-    component: Layout,
-    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
-  },
-
-  {
-    name: 'marketplace-landing.details',
-    url: '',
     component: MarketplaceLanding,
-  },
-
-  {
-    name: 'marketplace-public-offering',
-    url: '/marketplace-public-offering/',
-    abstract: true,
-    component: Layout,
     data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
 
   {
-    name: 'marketplace-public-offering.details',
-    url: ':uuid/',
+    name: 'public.marketplace-public-offering',
+    url: '/marketplace-public-offering/:uuid/',
     component: PublicOfferingDetailsContainer,
+    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
 
   {
@@ -306,16 +311,10 @@ export const states: StateDeclaration[] = [
     parent: 'profile',
   },
   {
-    name: 'marketplace-categories',
+    name: 'public.marketplace-categories',
     url: '/marketplace/all/',
-    abstract: true,
-    component: Layout,
-    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
-  },
-  {
-    name: 'marketplace-categories.details',
-    url: '',
     component: AllCategoriesPage,
+    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
 
   {
@@ -346,18 +345,12 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'marketplace-category',
-    url: '/marketplace-category/',
-    abstract: true,
-    component: Layout,
-    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
-  },
-  {
-    name: 'marketplace-category.details',
-    url: ':category_uuid/',
+    name: 'public.marketplace-category',
+    url: '/marketplace-category/:category_uuid/',
     component: CategoryPage,
     data: {
       useExtraTabs: true,
+      ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
     },
   },
 
@@ -421,6 +414,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     component: Layout,
     data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+    ...getPublicRoutesParams(),
   },
 
   {
@@ -435,6 +429,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     component: Layout,
     data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+    ...getPublicRoutesParams(),
   },
 
   {

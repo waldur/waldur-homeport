@@ -18,7 +18,7 @@ export const ServiceProviderOfferingCardButtonsOverlay = (props: OwnProps) => {
           {translate('Deploy')}
         </Link>
         <Link
-          state="marketplace-public-offering.details"
+          state="public.marketplace-public-offering"
           params={{
             uuid: props.offering.uuid,
           }}

@@ -21,7 +21,7 @@ export const OfferingCardButtonsOverlay = (
           {translate('Deploy')}
         </OfferingLink>
         <Link
-          state="marketplace-public-offering.details"
+          state="public.marketplace-public-offering"
           params={{
             uuid: props.offering.uuid,
           }}

@@ -14,7 +14,7 @@ export const OfferingDetailsButton: FunctionComponent<OfferingDetailsButtonProps
   ({ offering }) => (
     <div className="offeringDetailsButton m-b">
       <Link
-        state="marketplace-public-offering.details"
+        state="public.marketplace-public-offering"
         params={{ uuid: offering.uuid }}
       >
         <Button className="btn-secondary btn-card">
