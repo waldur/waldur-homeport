@@ -8,7 +8,7 @@ import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { CategoryFilter } from './CategoryFilter';
-import { ResourceStateFilter } from './ResourceStateFilter';
+import { getStates, ResourceStateFilter } from './ResourceStateFilter';
 
 const PureProjectResourcesAllFilter: FunctionComponent<{}> = () => (
   <TableFilterFormContainer form={PROJECT_RESOURCES_ALL_FILTER_FORM_ID}>
@@ -39,6 +39,9 @@ const PureProjectResourcesAllFilter: FunctionComponent<{}> = () => (
 const enhance = reduxForm({
   form: PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
   destroyOnUnmount: false,
+  initialValues: {
+    state: getStates()[1],
+  },
 });
 
 export const ProjectResourcesAllFilter = enhance(PureProjectResourcesAllFilter);
