@@ -82,11 +82,9 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
 
   const roles = useMemo(() => getRoles(context), [context]);
   useEffect(() => {
+    dispatch(change(INVITATION_CREATE_FORM_ID, 'role', roles[0].value));
     if (context.project) {
-      dispatch(change(INVITATION_CREATE_FORM_ID, 'role', roles[1].value));
       dispatch(change(INVITATION_CREATE_FORM_ID, 'project', context.project));
-    } else {
-      dispatch(change(INVITATION_CREATE_FORM_ID, 'role', roles[0].value));
     }
   }, [dispatch, roles, context]);
 
