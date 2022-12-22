@@ -24,7 +24,7 @@ export const ServiceProviderOfferingDetailsCard: FunctionComponent<ServiceProvid
         (row.paused_reason ||
           translate('Requesting of new resources has been temporarily paused')),
       <Link
-        state="marketplace-public-offering.details"
+        state="public.marketplace-public-offering"
         params={{
           uuid: row.uuid,
         }}

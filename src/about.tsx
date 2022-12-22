@@ -6,6 +6,7 @@ import {
 } from '@waldur/UserAgreementComponent';
 
 import { lazyComponent } from './core/lazyComponent';
+import { loadContext } from './marketplace/resolve';
 import { useTitle } from './navigation/title';
 
 const Layout = lazyComponent(
@@ -42,6 +43,13 @@ export const states: StateDeclaration[] = [
     data: {
       title: () => translate('About'),
     },
+    resolve: [
+      {
+        token: 'public-context',
+        resolveFn: loadContext,
+        deps: ['$transition$'],
+      },
+    ],
   },
   {
     name: 'about.tos',

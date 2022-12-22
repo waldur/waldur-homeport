@@ -9,7 +9,7 @@ export const FooterLinks = () => (
   <ul className="menu menu-gray-600 menu-hover-primary fw-bold order-1">
     {!AuthService.isAuthenticated() && (
       <li className="menu-item">
-        <Link className="menu-link px-2" state="marketplace-landing">
+        <Link className="menu-link px-2" state="public.marketplace-landing">
           {translate('Explore marketplace')}
         </Link>
       </li>

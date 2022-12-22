@@ -26,7 +26,7 @@ const QuestionGroup: FunctionComponent<{
       question.category_uuid && (
         <p>
           <Link
-            state="marketplace-category"
+            state="public.marketplace-category"
             params={{ category_uuid: question.category_uuid }}
             label={translate('Find solution')}
           />

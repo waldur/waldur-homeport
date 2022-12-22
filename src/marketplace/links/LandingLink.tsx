@@ -12,7 +12,7 @@ interface OwnProps {
 
 export const LandingLink: FunctionComponent<OwnProps> = (props) => {
   const workspace = useSelector(getWorkspace);
-  const state = WORKSPACE_LANDING[workspace] || 'marketplace-landing.details';
+  const state = WORKSPACE_LANDING[workspace] || 'public.marketplace-landing';
   return (
     <Link state={state} className={props.className}>
       {props.children}
