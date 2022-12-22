@@ -21,7 +21,7 @@ export const MenuItem: React.FC<{
       className={classNames('menu-item', { here: isActive })}
     >
       <UISref to={props.state} params={props.params}>
-        <span className="menu-link">
+        <a className="menu-link">
           {props.iconPath && (
             <span className="menu-icon">
               <span className="svg-icon svg-icon-2">
@@ -36,7 +36,7 @@ export const MenuItem: React.FC<{
           )}
           <span className="menu-title">{props.title}</span>
           {props.badge && <span className="menu-badge">{props.badge}</span>}
-        </span>
+        </a>
       </UISref>
     </div>
   );
