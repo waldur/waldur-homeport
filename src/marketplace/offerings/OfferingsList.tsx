@@ -19,6 +19,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import {
   getCustomer,
   getUser,
@@ -39,12 +40,22 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const organizationColumn = props?.hasOrganizationColumn
+    ? [
+        {
+          title: translate('Organization'),
+          render: ({ row }) => renderFieldOrDash(row.customer_name),
+        },
+      ]
+    : [];
+
   const columns = [
     {
       title: translate('Name'),
       render: OfferingNameColumn,
       orderField: 'name',
     },
+    ...organizationColumn,
     {
       title: translate('Category'),
       render: ({ row }) => <>{row.category_title}</>,

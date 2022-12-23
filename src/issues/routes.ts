@@ -36,6 +36,11 @@ const SupportProjectsList = lazyComponent(
   () => import('@waldur/project/SupportProjectsList'),
   'SupportProjectsList',
 );
+const SupportOfferingsContainer = lazyComponent(
+  () =>
+    import('@waldur/marketplace/offerings/support/SupportOfferingsContainer'),
+  'SupportOfferingsContainer',
+);
 const SupportFeedback = lazyComponent(
   () => import('@waldur/issues/feedback/SupportFeedback'),
   'SupportFeedback',
@@ -196,6 +201,16 @@ export const states: StateDeclaration[] = [
     component: OrganizationUpdateContainer,
     data: {
       feature: 'support.customers_list',
+    },
+  },
+
+  {
+    name: 'marketplace-support-offerings',
+    url: 'offerings/',
+    component: SupportOfferingsContainer,
+    parent: 'support',
+    data: {
+      breadcrumb: () => translate('Offerings'),
     },
   },
 

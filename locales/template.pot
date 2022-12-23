@@ -5462,6 +5462,7 @@ msgstr ""
 msgid "Offering users synchronization has been scheduled."
 msgstr ""
 
+#: src/issues/routes.ts
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/routes.ts
@@ -5698,7 +5699,9 @@ msgstr ""
 #: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/details/CustomerCreateGroup.tsx
+#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/tabs.ts
+#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -9070,6 +9073,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
+#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
