@@ -7234,6 +7234,7 @@ msgstr ""
 #: src/issues/list/IssuesShortList.tsx
 #: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/orders/OrderDetails.tsx
+#: src/marketplace/resources/details/RefreshButton.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/resource/ResourceRefreshButton.tsx
 #: src/table/TableDropdowns.tsx

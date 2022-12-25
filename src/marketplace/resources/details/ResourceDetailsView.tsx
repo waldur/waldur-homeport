@@ -27,6 +27,7 @@ import { MonitoringCharts } from './MonitoringCharts';
 import { NetworkingTab } from './NetworkingTab';
 import { TenantDetails } from './openstack-tenant/TenantDetails';
 import { QuickActions } from './QuickActions';
+import { RefreshButton } from './RefreshButton';
 import { ResourceAccessCard } from './ResourceAccessCard';
 import { ResourceComponents } from './ResourceComponents';
 import { ResourceDetailsHeader } from './ResourceDetailsHeader';
@@ -168,11 +169,14 @@ export const ResourceDetailsView: FC<any> = ({
                         <Card.Body>
                           <ResourceAccessButton resource={resource} />
                           {scope && (
-                            <div className="d-flex justify-content-between mb-5">
-                              <QuickActions
-                                resource={scope}
-                                reInitResource={reInitResource}
-                              />
+                            <div className="d-flex mb-5 gap-2">
+                              <div className="d-flex justify-content-between flex-grow-1 gap-2">
+                                <QuickActions
+                                  resource={scope}
+                                  reInitResource={reInitResource}
+                                />
+                              </div>
+                              <RefreshButton />
                             </div>
                           )}
                           {resource.offering_type === INSTANCE_TYPE ? (
