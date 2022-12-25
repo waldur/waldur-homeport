@@ -16,7 +16,7 @@ export const OfferingCardButtonsOverlay = (
       <div className="d-grid gap-2">
         <OfferingLink
           offering_uuid={props.offering.uuid}
-          className="btn btn-sm btn-outline-primary btn-active-primary border border-primary"
+          className="btn btn-primary btn-sm border border-primary"
         >
           {translate('Deploy')}
         </OfferingLink>
@@ -25,7 +25,7 @@ export const OfferingCardButtonsOverlay = (
           params={{
             uuid: props.offering.uuid,
           }}
-          className="btn btn-primary btn-sm border border-primary"
+          className="btn btn-sm btn-outline-primary btn-active-primary border border-primary"
         >
           {translate('View item')}
         </Link>

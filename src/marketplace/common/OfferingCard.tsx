@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { wrapTooltip } from '@waldur/table/ActionButton';
 
+import { OfferingLink } from '../links/OfferingLink';
 import { Offering } from '../types';
 
 import './OfferingCard.scss';
@@ -22,12 +23,7 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) =>
     props.offering.state === 'Paused' &&
       (props.offering.paused_reason ||
         translate('Requesting of new resources has been temporarily paused')),
-    <Link
-      state="public.marketplace-public-offering"
-      params={{
-        uuid: props.offering.uuid,
-      }}
-    >
+    <OfferingLink offering_uuid={props.offering.uuid}>
       <Card
         className={classNames('offering-card card-flush shadow-sm text-dark', {
           disabled: props.offering.state !== 'Active',
@@ -51,5 +47,5 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) =>
         </Card.Body>
         <OfferingCardButtonsOverlay offering={props.offering} />
       </Card>
-    </Link>,
+    </OfferingLink>,
   );
