@@ -37,7 +37,9 @@ describe('Public marketplace pages', () => {
 
   it('Assure that public offering page is visible without auth token', () => {
     // Ensure that the offering we want to click is 'Test request-based item'
-    cy.get('.offering-card').contains('Test request-based item').click();
+    cy.get('.offering-card:contains("Test request-based item")')
+      .contains('a', 'View item')
+      .click();
 
     // Wait until page loaded
     cy.get('.publicOfferingDetails', { timeout: 5000 }).should(
@@ -78,12 +80,12 @@ describe('TOS and PP pages', () => {
       .intercept('GET', '/api/marketplace-categories/', {
         fixture: 'marketplace/categories.json',
       })
-        .intercept('GET', '/api/user-agreements/?agreement_type=TOS', {
-          fixture: 'marketplace/user-agreement-tos.json',
-        })
-        .intercept('GET', '/api/user-agreements/?agreement_type=PP', {
-          fixture: 'marketplace/user-agreement-pp.json',
-        })
+      .intercept('GET', '/api/user-agreements/?agreement_type=TOS', {
+        fixture: 'marketplace/user-agreement-tos.json',
+      })
+      .intercept('GET', '/api/user-agreements/?agreement_type=PP', {
+        fixture: 'marketplace/user-agreement-pp.json',
+      });
   });
 
   it('Assure that TOS page is visible without auth token', () => {
