@@ -45,7 +45,7 @@ export const NotificationCreateDialog = connect((state: RootState) => ({
 
     return (
       <form onSubmit={handleSubmit(callback)}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="without-border">
           <h2 className="fw-bolder">{translate('Create a broadcast')}</h2>
         </Modal.Header>
         <NotificationForm submitting={submitting} formValues={formValues} />
