@@ -1,0 +1,77 @@
+@use 'sass:math';
+
+$wizard-color-neutral: #5e6278 !default;
+$wizard-color-active: #4183d7 !default;
+$wizard-color-line: #eff2f5 !default;
+$wizard-step-width-height: 30px !default;
+$wizard-step-font-size: 12px !default;
+
+.step-indicator {
+  border-collapse: separate;
+  display: table;
+  margin-left: 0px;
+  position: relative;
+  table-layout: fixed;
+  text-align: center;
+  vertical-align: middle;
+  padding-left: 0;
+
+  li {
+    display: table-cell;
+    position: relative;
+    float: none;
+    padding: 0;
+    width: 1%;
+
+    &:after,
+    &:before {
+      background-color: $wizard-color-line;
+      content: '';
+      display: block;
+      height: 2px;
+      position: absolute;
+      width: 100%;
+      top: math.div($wizard-step-width-height, 2);
+    }
+
+    &:after {
+      left: 50%;
+    }
+
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+
+    &.active {
+      .step {
+        color: white;
+        background-color: $wizard-color-active;
+      }
+    }
+  }
+
+  .step {
+    background-color: $wizard-color-neutral;
+    border-radius: 50%;
+    color: white;
+    font-size: $wizard-step-font-size;
+    height: $wizard-step-width-height;
+    line-height: $wizard-step-width-height;
+    margin: 0 auto;
+    position: relative;
+    width: $wizard-step-width-height;
+    z-index: 1;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .caption {
+    font-weight: 600;
+    color: $wizard-color-neutral;
+    padding: 11px 16px;
+  }
+}

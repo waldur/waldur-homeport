@@ -22,12 +22,13 @@ export const NotificationUpdateButton: FunctionComponent<{
   const callback = () =>
     dispatch(
       openModalDialog(NotificationUpdateDialog, {
-        dialogClassName: 'modal-dialog-centered mw-650px',
+        dialogClassName: 'modal-dialog-centered',
         resolve: {
           initialValues: parseNotification(notification),
           uuid: notification.uuid,
           refreshList,
         },
+        size: 'xl',
       }),
     );
   return (

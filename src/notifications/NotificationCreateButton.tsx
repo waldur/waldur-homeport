@@ -18,10 +18,11 @@ export const NotificationCreateButton: FunctionComponent<{ refreshList }> = ({
   const callback = () =>
     dispatch(
       openModalDialog(NotificationCreateDialog, {
-        dialogClassName: 'modal-dialog-centered mw-650px',
+        dialogClassName: 'modal-dialog-centered',
         resolve: {
           refreshList,
         },
+        size: 'xl',
       }),
     );
   return (

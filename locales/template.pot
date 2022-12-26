@@ -1843,6 +1843,10 @@ msgstr ""
 msgid "Create horizontal pod autoscaler"
 msgstr ""
 
+#: src/notifications/NotificationForm.tsx
+msgid "Create message"
+msgstr ""
+
 #: src/openstack/openstack-tenant/actions/CreateNetworkDialog.tsx
 msgid "Create network for OpenStack tenant"
 msgstr ""
@@ -2792,6 +2796,7 @@ msgstr ""
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/EmailGroup.tsx
+#: src/notifications/RecipientsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
@@ -5469,6 +5474,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/notifications/NotificationExpandableRow.tsx
 #: src/notifications/NotificationForm.tsx
+#: src/notifications/RecipientsList.tsx
 msgid "Offerings"
 msgstr ""
 
@@ -5869,6 +5875,7 @@ msgstr ""
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/notifications/NotificationExpandableRow.tsx
 #: src/notifications/NotificationForm.tsx
+#: src/notifications/RecipientsList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
@@ -7196,6 +7203,10 @@ msgstr ""
 msgid "Recently added offerings"
 msgstr ""
 
+#: src/notifications/RecipientsList.tsx
+msgid "Recipient"
+msgstr ""
+
 #: src/notifications/NotificationExpandableRow.tsx
 msgid "Recipients"
 msgstr ""
@@ -8458,6 +8469,10 @@ msgstr ""
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Select provider..."
+msgstr ""
+
+#: src/notifications/NotificationForm.tsx
+msgid "Select recipients"
 msgstr ""
 
 #: src/issues/create/TypeField.tsx
@@ -12528,6 +12543,10 @@ msgstr ""
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 msgid "projects"
+msgstr ""
+
+#: src/notifications/RecipientsList.tsx
+msgid "recepients"
 msgstr ""
 
 #: src/invoices/list/BillingRecordsList.tsx
