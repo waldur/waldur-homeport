@@ -20,8 +20,10 @@ import {
 import { ResourceAccessButton } from '@waldur/resource/ResourceAccessButton';
 import '@waldur/marketplace/offerings/details/PublicOfferingDetailsHero.scss';
 
+import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
 import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer';
 
+import { ActionButton } from './ActionButton';
 import { InstanceComponents } from './InstanceComponents';
 import { MonitoringCharts } from './MonitoringCharts';
 import { NetworkingTab } from './NetworkingTab';
@@ -168,17 +170,25 @@ export const ResourceDetailsView: FC<any> = ({
                       <Card className="flex-grow-1">
                         <Card.Body>
                           <ResourceAccessButton resource={resource} />
-                          {scope && (
-                            <div className="d-flex mb-5 gap-2">
-                              <div className="d-flex justify-content-between flex-grow-1 gap-2">
+                          <div className="d-flex mb-5 gap-2">
+                            <div className="d-flex justify-content-between flex-grow-1 gap-2">
+                              {scope && (
                                 <QuickActions
                                   resource={scope}
                                   reInitResource={reInitResource}
                                 />
-                              </div>
-                              <RefreshButton />
+                              )}
                             </div>
-                          )}
+                            <ChangeLimitsAction
+                              resource={{
+                                ...resource,
+                                marketplace_resource_uuid: resource.uuid,
+                              }}
+                              iconClass="fa-expand"
+                              as={ActionButton}
+                            />
+                            <RefreshButton />
+                          </div>
                           {resource.offering_type === INSTANCE_TYPE ? (
                             <InstanceComponents resource={scope} />
                           ) : (
