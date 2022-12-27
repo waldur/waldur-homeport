@@ -33,7 +33,10 @@ export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps
             {resource.description ? <p>{resource.description}</p> : null}
           </div>
           <ResourceActions
-            resource={resource}
+            resource={{
+              ...resource,
+              marketplace_resource_uuid: resource.uuid,
+            }}
             scope={scope}
             reInitResource={reInitResource}
           />
