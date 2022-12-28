@@ -1,26 +1,36 @@
 import { FunctionComponent } from 'react';
-import { Form, ToggleButton } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { ToggleButtonGroupInput } from '@waldur/form/ToggleButtonGroupInput';
 import { translate } from '@waldur/i18n';
 
 export const RoleGroup: FunctionComponent<{ roles }> = ({ roles }) => (
-  <Form.Group>
+  <Form.Group className="mb-5">
     <Form.Label>{translate('Role')}</Form.Label>
-    <div>
-      <Field
-        name="role"
-        component={ToggleButtonGroupInput}
-        type="radio"
-        defaultValue={roles[0].value}
-      >
-        {roles.map((role, index) => (
-          <ToggleButton key={index} value={role.value} id={role.value}>
-            <i className={`fa ${role.icon}`} /> {translate(role.title)}
-          </ToggleButton>
-        ))}
-      </Field>
-    </div>
+
+    {roles.map((role, index) => (
+      <>
+        <div className="d-flex fv-row" key={index}>
+          <div className="form-check form-check-custom form-check-solid">
+            <Field
+              component="input"
+              name="role"
+              type="radio"
+              className="form-check-input me-3"
+              value={role.value}
+              id={role.value}
+            />
+            <label className="form-check-label" htmlFor={role.value}>
+              <div className="fw-bold text-gray-800">
+                {translate(role.title)}
+              </div>
+            </label>
+          </div>
+        </div>
+        {index != roles.length - 1 ? (
+          <div className="separator separator-dashed my-5" />
+        ) : null}
+      </>
+    ))}
   </Form.Group>
 );
