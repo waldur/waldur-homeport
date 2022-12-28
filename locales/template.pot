@@ -8894,6 +8894,10 @@ msgstr ""
 msgid "Show private"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceDetailsHeader.tsx
+msgid "Show project"
+msgstr ""
+
 #: src/marketplace/resources/report/ShowReportButton.tsx
 msgid "Show report"
 msgstr ""
