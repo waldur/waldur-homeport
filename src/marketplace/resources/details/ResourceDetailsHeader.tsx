@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 
@@ -29,7 +30,16 @@ export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps
           <div className="flex-grow-1">
             <h3>{resource.name}</h3>
             <ParentResourceLink resource={resource} />
-            <i>{`${resource.customer_name} / ${resource.project_name}`}</i>
+            <i>
+              {`${resource.customer_name} / ${resource.project_name}`}{' '}
+              <Link
+                state="project.dashboard"
+                params={{ uuid: resource.project_uuid }}
+                className="text-muted text-decoration-underline text-hover-primary"
+              >
+                [{translate('Show project')}]
+              </Link>
+            </i>
             {resource.description ? <p>{resource.description}</p> : null}
           </div>
           <ResourceActions
