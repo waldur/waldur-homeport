@@ -4527,6 +4527,7 @@ msgid "Mark invoice as paid"
 msgstr ""
 
 #: src/marketplace/landing/LandingPageContainer.tsx
+#: src/marketplace/routes.ts
 msgid "Marketplace"
 msgstr ""
 
@@ -7033,18 +7034,6 @@ msgstr ""
 
 #: src/marketplace/offerings/OfferingsList.tsx
 msgid "Public list"
-msgstr ""
-
-#: src/marketplace/routes.ts
-msgid "Public offerings"
-msgstr ""
-
-#: src/marketplace/routes.ts
-msgid "Public orders"
-msgstr ""
-
-#: src/marketplace/routes.ts
-msgid "Public resources"
 msgstr ""
 
 #: src/marketplace/offerings/actions/GoogleCalendarActions.ts

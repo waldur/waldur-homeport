@@ -399,12 +399,33 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'provider-marketplace',
+    abstract: true,
+    parent: 'marketplace-provider',
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Marketplace'),
+    },
+  },
+  {
+    name: 'provider-resources',
+    abstract: true,
+    parent: 'marketplace-provider',
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Resources'),
+    },
+  },
+
+  {
     name: 'marketplace-vendor-offerings',
     url: 'marketplace-provider-offerings/',
     component: OfferingsListContainer,
-    parent: 'marketplace-provider',
+    parent: 'provider-marketplace',
     data: {
-      breadcrumb: () => translate('Public offerings'),
+      breadcrumb: () => translate('Offerings'),
     },
   },
 
@@ -501,9 +522,9 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-order-items',
     url: 'marketplace-order-items/',
     component: OrderItemsContainer,
-    parent: 'marketplace-provider',
+    parent: 'provider-resources',
     data: {
-      breadcrumb: () => translate('Public orders'),
+      breadcrumb: () => translate('Orders'),
     },
   },
 
@@ -529,9 +550,9 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-public-resources',
     url: 'marketplace-public-resources/',
     component: PublicResourcesContainer,
-    parent: 'marketplace-provider',
+    parent: 'provider-resources',
     data: {
-      breadcrumb: () => translate('Public resources'),
+      breadcrumb: () => translate('Resources'),
     },
   },
 
