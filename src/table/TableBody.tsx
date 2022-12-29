@@ -90,11 +90,6 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
                 />
               </td>
             )}
-            {columns && columns[0] && (columns[0].visible ?? true) && (
-              <td className={columns[0].className}>
-                {React.createElement(columns[0].render, { row })}
-              </td>
-            )}
             {expandableRow && (
               <td>
                 {toggled[getId(row, rowIndex)] ? (
@@ -104,7 +99,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
                 )}
               </td>
             )}
-            <TableCells row={row} columns={columns.slice(1)} />
+            <TableCells row={row} columns={columns} />
             {hoverableRow && (
               <td className="row-actions">
                 {React.createElement(hoverableRow, { row })}

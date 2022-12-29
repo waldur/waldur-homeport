@@ -81,27 +81,18 @@ export const TableHeader: React.FC<TableHeaderProps> = ({
             />
           </th>
         )}
-        {columns && columns[0] && (columns[0].visible ?? true) && (
-          <TableTh
-            column={columns[0]}
-            onSortClick={onSortClick}
-            currentSorting={currentSorting}
-          />
-        )}
         {expandableRow && <th style={{ width: '10px' }} />}
-        {columns
-          .slice(1)
-          .map(
-            (column, index) =>
-              (column.visible ?? true) && (
-                <TableTh
-                  key={index}
-                  column={column}
-                  onSortClick={onSortClick}
-                  currentSorting={currentSorting}
-                />
-              ),
-          )}
+        {columns.map(
+          (column, index) =>
+            (column.visible ?? true) && (
+              <TableTh
+                key={index}
+                column={column}
+                onSortClick={onSortClick}
+                currentSorting={currentSorting}
+              />
+            ),
+        )}
       </tr>
     </thead>
   );
