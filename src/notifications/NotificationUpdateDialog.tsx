@@ -57,7 +57,7 @@ export const NotificationUpdateDialog = connect(
 
     return (
       <form onSubmit={handleSubmit(callback)}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="without-border">
           <h2 className="fw-bolder">{translate('Update a notification')}</h2>
         </Modal.Header>
         <NotificationForm submitting={submitting} formValues={formValues} />
