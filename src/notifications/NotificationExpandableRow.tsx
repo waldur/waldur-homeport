@@ -12,10 +12,10 @@ export const NotificationExpandableRow: FunctionComponent<{
   row: NotificationResponseData;
 }> = ({ row }) => (
   <Row>
-    <Col spans={9}>
+    <Col sm={8}>
       <p>{row.body}</p>
     </Col>
-    <Col spans={3}>
+    <Col sm={4}>
       <OptionsList
         label={translate('Organizations')}
         list={row.query.customers}
