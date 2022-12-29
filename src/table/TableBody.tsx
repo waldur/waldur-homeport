@@ -2,21 +2,23 @@ import classNames from 'classnames';
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
-import { Column } from './types';
+import { TableProps } from './Table';
 import { getId } from './utils';
 
-interface TableBodyProps {
-  rows: any[];
-  columns: Column[];
-  rowClass?: (({ row }) => string) | string;
-  expandableRow?: React.ComponentType<{ row: any }>;
-  hoverableRow?: React.ComponentType<{ row: any }>;
-  enableMultiSelect?: boolean;
-  onSelectRow?(row: any): void;
-  selectedRows?: any[];
-  toggleRow(row: any): void;
-  toggled: object;
-}
+type TableBodyProps = Pick<
+  TableProps,
+  | 'rows'
+  | 'columns'
+  | 'rowClass'
+  | 'expandableRow'
+  | 'expandableRowClassName'
+  | 'hoverableRow'
+  | 'enableMultiSelect'
+  | 'selectRow'
+  | 'selectedRows'
+  | 'toggleRow'
+  | 'toggled'
+>;
 
 const TableCells = ({ row, columns }) => (
   <>
@@ -36,9 +38,10 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   columns,
   rowClass,
   expandableRow,
+  expandableRowClassName,
   hoverableRow,
   enableMultiSelect,
-  onSelectRow,
+  selectRow,
   selectedRows,
   toggleRow,
   toggled,
@@ -83,7 +86,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
                 <FormCheck
                   className="form-check form-check-custom form-check-sm"
                   checked={isRowSelected(row)}
-                  onChange={() => onSelectRow(row)}
+                  onChange={() => selectRow(row)}
                 />
               </td>
             )}
@@ -109,7 +112,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
             )}
           </tr>
           {expandableRow && toggled[getId(row, rowIndex)] && (
-            <tr>
+            <tr className={expandableRowClassName}>
               <td colSpan={columns.length + 1}>
                 {React.createElement(expandableRow, { row })}
               </td>

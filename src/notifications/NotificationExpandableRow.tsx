@@ -1,54 +1,40 @@
 import { FunctionComponent } from 'react';
+import { Col, Row } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { formatRole } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 import { IdNamePair, NotificationResponseData } from './types';
 
 const OptionsList = ({ label, list }: { label: string; list: IdNamePair[] }) =>
   list ? (
-    <p>
-      <b>{label}: </b>
-      {list.map((c) => c.name || c).join(', ')}
-    </p>
+    <>
+      <h4 className="fw-normal">{label}</h4>
+      <p>{list.map((c) => c.name || c).join(', ')}</p>
+    </>
   ) : null;
-
-const RolesList = ({ label, list }) => (
-  <OptionsList label={label} list={list?.map(formatRole)} />
-);
 
 export const NotificationExpandableRow: FunctionComponent<{
   row: NotificationResponseData;
 }> = ({ row }) => (
-  <>
-    <p>
-      <b>{translate('Message')}: </b>
-      {row.body}
-    </p>
-    <p>
-      <b>{translate('Recipients')}: </b>
-      {row.emails.join(', ')}
-    </p>
-    <OptionsList
-      label={translate('Organizations')}
-      list={row.query.customers}
-    />
-    <RolesList
-      label={translate('Organization roles')}
-      list={row.query.customer_roles}
-    />
-    <OptionsList label={translate('Projects')} list={row.query.projects} />
-    <RolesList
-      label={translate('Project roles')}
-      list={row.query.project_roles}
-    />
-    <OptionsList label={translate('Offerings')} list={row.query.offerings} />
-    {row.send_at && (
-      <p>
-        <b>{translate('Send at')}: </b>
-        {formatDateTime(row.send_at)}
-      </p>
-    )}
-  </>
+  <Row>
+    <Col spans={9}>
+      <p>{row.body}</p>
+    </Col>
+    <Col spans={3}>
+      <OptionsList
+        label={translate('Organizations')}
+        list={row.query.customers}
+      />
+      <OptionsList label={translate('Offerings')} list={row.query.offerings} />
+      <h4 className="fw-normal">{translate('Recipients')}</h4>
+      <p>{row.emails.join(', ')}</p>
+      {row.send_at && (
+        <>
+          <h4 className="fw-normal">{translate('Send at')}</h4>
+          <p>{formatDateTime(row.send_at)}</p>
+        </>
+      )}
+    </Col>
+  </Row>
 );
