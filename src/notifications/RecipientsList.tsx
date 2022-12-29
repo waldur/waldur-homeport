@@ -54,10 +54,11 @@ const TableOptions = {
   }),
 };
 
+export const RecipientsListComponent =
+  connectTable(TableOptions)(TableComponent);
+
 const mapStateToProps = (state: RootState, ownProps: any) => ({
   query: getFormValues(ownProps.form)(state),
 });
 
-export const RecipientsList = connect(mapStateToProps)(
-  connectTable(TableOptions)(TableComponent),
-);
+export const RecipientsList = connect(mapStateToProps)(RecipientsListComponent);

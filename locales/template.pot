@@ -4638,7 +4638,6 @@ msgstr ""
 
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
-#: src/notifications/NotificationExpandableRow.tsx
 #: src/notifications/NotificationForm.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
@@ -5837,7 +5836,6 @@ msgid "Organization role"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/notifications/NotificationExpandableRow.tsx
 #: src/user/support/UserList.tsx
 msgid "Organization roles"
 msgstr ""
@@ -6850,7 +6848,6 @@ msgid "Project role"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/notifications/NotificationExpandableRow.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "Project roles"
@@ -6890,7 +6887,6 @@ msgstr ""
 
 #: src/customer/routes.ts
 #: src/issues/routes.ts
-#: src/notifications/NotificationExpandableRow.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/user/affiliations/OrganizationsList.tsx
@@ -7190,6 +7186,10 @@ msgstr ""
 #: src/marketplace/category/list/RecentlyAddedOfferings.tsx
 #: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
 msgid "Recently added offerings"
+msgstr ""
+
+#: src/notifications/RecipientsListDialog.tsx
+msgid "Recepients list"
 msgstr ""
 
 #: src/notifications/RecipientsList.tsx
@@ -8896,6 +8896,10 @@ msgstr ""
 
 #: src/marketplace/resources/details/ResourceDetailsHeader.tsx
 msgid "Show project"
+msgstr ""
+
+#: src/notifications/NotificationExpandableRow.tsx
+msgid "Show recipients"
 msgstr ""
 
 #: src/marketplace/resources/report/ShowReportButton.tsx
