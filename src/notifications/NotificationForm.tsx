@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Row, Col, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { change, FormName } from 'redux-form';
@@ -21,12 +20,16 @@ import { MessageTemplate, NotificationFormData } from './types';
 export const NotificationForm = ({
   submitting,
   formValues,
+  step,
+  setStep,
 }: {
   submitting: boolean;
   formValues: NotificationFormData;
+  step: number;
+  setStep(step: number): void;
 }) => {
   const dispatch = useDispatch();
-  const [step, setStep] = useState(0);
+
   return (
     <>
       <StepIndicator
@@ -38,7 +41,7 @@ export const NotificationForm = ({
         {({ form }) => (
           <Modal.Body className="scroll-y mx-5 mx-xl-15 my-7">
             {step === 0 ? (
-              <FormContainer submitting={submitting}>
+              <FormContainer submitting={submitting} clearOnUnmount={false}>
                 <AsyncSelectField
                   name="template"
                   label={translate('Template')}

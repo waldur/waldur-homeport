@@ -1001,6 +1001,7 @@ msgstr ""
 #: src/error/InvalidQuotaPage.tsx
 #: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
+#: src/notifications/NotificationFooter.tsx
 msgid "Back"
 msgstr ""
 
@@ -1778,7 +1779,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/notifications/NotificationCreateButton.tsx
-#: src/notifications/NotificationCreateDialog.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -5242,16 +5242,19 @@ msgstr ""
 msgid "Notification can be sent only for created invoice."
 msgstr ""
 
-#: src/notifications/NotificationCreateDialog.tsx
 #: src/user/hooks/utils.ts
 msgid "Notification has been created."
 msgstr ""
 
+#: src/notifications/NotificationFooter.tsx
+msgid "Notification has been saved as a draft."
+msgstr ""
+
+#: src/notifications/NotificationFooter.tsx
 #: src/notifications/NotificationSendButton.tsx
 msgid "Notification has been sent."
 msgstr ""
 
-#: src/notifications/NotificationUpdateDialog.tsx
 #: src/user/hooks/utils.ts
 msgid "Notification has been updated."
 msgstr ""
@@ -7196,7 +7199,7 @@ msgstr ""
 msgid "Recipient"
 msgstr ""
 
-#: src/notifications/NotificationExpandableRow.tsx
+#: src/notifications/RecipientsField.tsx
 msgid "Recipients"
 msgstr ""
 
@@ -8143,6 +8146,10 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: src/notifications/NotificationFooter.tsx
+msgid "Save as draft"
+msgstr ""
+
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/user/api-key/UserEditTokenContainer.tsx
 #: src/user/support/UserEditForm.tsx
@@ -8460,6 +8467,7 @@ msgstr ""
 msgid "Select provider..."
 msgstr ""
 
+#: src/notifications/NotificationFooter.tsx
 #: src/notifications/NotificationForm.tsx
 msgid "Select recipients"
 msgstr ""
@@ -8567,6 +8575,10 @@ msgstr ""
 #: src/notifications/NotificationExpandableRow.tsx
 #: src/notifications/NotificationForm.tsx
 msgid "Send at"
+msgstr ""
+
+#: src/notifications/NotificationFooter.tsx
+msgid "Send broadcast"
 msgstr ""
 
 #: src/invoices/list/SendNotificationButton.tsx
@@ -8898,7 +8910,7 @@ msgstr ""
 msgid "Show project"
 msgstr ""
 
-#: src/notifications/NotificationExpandableRow.tsx
+#: src/notifications/RecipientsField.tsx
 msgid "Show recipients"
 msgstr ""
 
@@ -10254,10 +10266,6 @@ msgstr ""
 msgid "Unable to create notification."
 msgstr ""
 
-#: src/notifications/NotificationCreateDialog.tsx
-msgid "Unable to create notifications."
-msgstr ""
-
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 msgid "Unable to create offering user."
 msgstr ""
@@ -10856,6 +10864,10 @@ msgstr ""
 msgid "Unable to save location."
 msgstr ""
 
+#: src/notifications/NotificationFooter.tsx
+msgid "Unable to save notification."
+msgstr ""
+
 #: src/auth/AuthInit.tsx
 msgid "Unable to save user."
 msgstr ""
@@ -10864,6 +10876,7 @@ msgstr ""
 msgid "Unable to send feedback."
 msgstr ""
 
+#: src/notifications/NotificationFooter.tsx
 #: src/notifications/NotificationSendButton.tsx
 msgid "Unable to send notification."
 msgstr ""
@@ -11026,10 +11039,6 @@ msgstr ""
 
 #: src/user/hooks/utils.ts
 msgid "Unable to update notification."
-msgstr ""
-
-#: src/notifications/NotificationUpdateDialog.tsx
-msgid "Unable to update notifications."
 msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
@@ -11208,7 +11217,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/notifications/NotificationUpdateButton.tsx
-#: src/notifications/NotificationUpdateDialog.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
