@@ -47,7 +47,7 @@ export const InvitationCancelButton: FunctionComponent<{
   const tooltip = useMemo(() => {
     if (
       !InvitationPolicyService.canManageInvitation(
-        { user, customer },
+        { user, customer, project },
         invitation,
       )
     ) {
