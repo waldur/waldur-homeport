@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { getCustomer, getUser, getProject } from '@waldur/workspace/selectors';
 
 import { InvitationService } from '../InvitationService';
 
@@ -17,6 +17,7 @@ export const InvitationCancelButton: FunctionComponent<{
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
+  const project = useSelector(getProject);
 
   const callback = async () => {
     try {
@@ -31,7 +32,7 @@ export const InvitationCancelButton: FunctionComponent<{
   const isDisabled = useMemo(() => {
     if (
       !InvitationPolicyService.canManageInvitation(
-        { user, customer },
+        { user, customer, project },
         invitation,
       )
     ) {
@@ -46,7 +47,7 @@ export const InvitationCancelButton: FunctionComponent<{
   const tooltip = useMemo(() => {
     if (
       !InvitationPolicyService.canManageInvitation(
-        { user, customer },
+        { user, customer, project },
         invitation,
       )
     ) {
