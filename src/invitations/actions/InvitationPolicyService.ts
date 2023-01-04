@@ -40,14 +40,17 @@ export const InvitationPolicyService = {
     if (context.user.is_staff) {
       return true;
     }
-    if (!checkIsOwner(context.customer, context.user)) {
-      return false;
-    }
-    if (invitation.project_role) {
-      return true;
-    }
     if (invitation.customer_role) {
-      return ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS;
+      return (
+        checkIsOwner(context.customer, context.user) &&
+        ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS
+      );
+    }
+    if (invitation.project_role && !context.project) {
+      return checkIsOwner(context.customer, context.user);
+    }
+    if (invitation.project_role && context.project) {
+      return checkRole(context.project, context.user, PROJECT_MANAGER_ROLE);
     }
   },
 
