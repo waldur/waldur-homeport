@@ -349,7 +349,7 @@ export const updateVolume = (id: string, data) =>
   put(`/openstacktenant-volumes/${id}/`, data);
 
 export const retypeVolume = (id: string, data) =>
-  put(`/openstacktenant-volumes/${id}/retype/`, data);
+  post(`/openstacktenant-volumes/${id}/retype/`, data);
 
 export const updateSnapshot = (id: string, data) =>
   put(`/openstacktenant-snapshots/${id}/`, data);
