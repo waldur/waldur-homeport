@@ -67,6 +67,10 @@ msgstr ""
 msgid "Abbreviation"
 msgstr ""
 
+#: src/about.tsx
+msgid "About"
+msgstr ""
+
 #: src/booking/AcceptAction.tsx
 msgid "Accept"
 msgstr ""
@@ -349,6 +353,10 @@ msgstr ""
 #: src/user/keys/KeyCreateButton.tsx
 #: src/user/keys/KeyCreateForm.tsx
 msgid "Add key"
+msgstr ""
+
+#: src/project/team/AddMemberButton.tsx
+msgid "Add member"
 msgstr ""
 
 #: src/navigation/workspace/CreateOrganizationButton.tsx
@@ -2504,6 +2512,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
+#: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
@@ -6242,6 +6251,7 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
+#: src/about.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
 msgid "Privacy Policy"
 msgstr ""
@@ -8926,6 +8936,7 @@ msgstr ""
 msgid "Terms Of Service"
 msgstr ""
 
+#: src/about.tsx
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -9914,6 +9925,7 @@ msgid "Unable to load organizations"
 msgstr ""
 
 #: src/TemplateComponent.tsx
+#: src/UserAgreementComponent.tsx
 #: src/issues/workspace/FeaturesList.tsx
 msgid "Unable to load page"
 msgstr ""
