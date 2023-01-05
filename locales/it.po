@@ -319,6 +319,10 @@ msgstr "Aggiungi articolo"
 msgid "Add key"
 msgstr "Aggiungi chiave"
 
+#: src/project/team/AddMemberButton.tsx
+msgid "Add member"
+msgstr "Aggiungi membro"
+
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr "Aggiungi nuovo"
@@ -2215,6 +2219,7 @@ msgstr "Ogni rapporto di utilizzo deve essere collegato a un piano di fatturazio
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
+#: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
@@ -7770,6 +7775,7 @@ msgstr "Terminato"
 msgid "Terminating"
 msgstr "Terminazione"
 
+#: src/about.tsx
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -8645,6 +8651,7 @@ msgid "Unable to load organizations"
 msgstr "Impossibile caricare le organizzazioni"
 
 #: src/TemplateComponent.tsx
+#: src/UserAgreementComponent.tsx
 #: src/issues/workspace/FeaturesList.tsx
 msgid "Unable to load page"
 msgstr "Impossibile caricare la pagina"

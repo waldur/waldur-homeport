@@ -319,6 +319,10 @@ msgstr "Legg til element"
 msgid "Add key"
 msgstr "Legg til nøkkel"
 
+#: src/project/team/AddMemberButton.tsx
+msgid "Add member"
+msgstr "Legg til medlem"
+
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr "Legg til ny"
@@ -2215,6 +2219,7 @@ msgstr "Hver bruksrapport må være koblet til en faktureringsplan for å sikre 
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
+#: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
@@ -7770,6 +7775,7 @@ msgstr "Avsluttet"
 msgid "Terminating"
 msgstr "Avslutte"
 
+#: src/about.tsx
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -8645,6 +8651,7 @@ msgid "Unable to load organizations"
 msgstr "Kan ikke laste inn organisasjoner"
 
 #: src/TemplateComponent.tsx
+#: src/UserAgreementComponent.tsx
 #: src/issues/workspace/FeaturesList.tsx
 msgid "Unable to load page"
 msgstr "Kan ikke laste inn side"

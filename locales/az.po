@@ -203,6 +203,10 @@ msgstr "Bənd əlavə edin"
 msgid "Add key"
 msgstr "Açar əlavə edin"
 
+#: src/project/team/AddMemberButton.tsx
+msgid "Add member"
+msgstr "Üzv əlavə edin"
+
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr "Yeni əlavə edin"
@@ -1082,6 +1086,7 @@ msgstr "Aİ ƏDV İdentifikasiyası "
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
+#: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
@@ -3625,6 +3630,7 @@ msgstr "İcarədar istifadəçi şifrəsi"
 msgid "Tenant user username"
 msgstr "İcarədar istifadəçi adı"
 
+#: src/about.tsx
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
