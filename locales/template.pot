@@ -1778,6 +1778,7 @@ msgstr ""
 #: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
 #: src/notifications/NotificationCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
@@ -2385,6 +2386,7 @@ msgstr ""
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -8278,6 +8280,7 @@ msgstr ""
 
 #: src/issues/list/IssuesShortList.tsx
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
 msgid "See all"
 msgstr ""
 
@@ -9908,7 +9911,7 @@ msgstr ""
 msgid "Thumbnail"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
 msgid "Tickets"
 msgstr ""
 
