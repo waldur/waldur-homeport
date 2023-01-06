@@ -5,7 +5,6 @@ import { Card, Col, Row } from 'react-bootstrap';
 
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
-import { ENV } from '@waldur/configs/default';
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
@@ -33,7 +32,7 @@ import { RefreshButton } from './RefreshButton';
 import { ResourceAccessCard } from './ResourceAccessCard';
 import { ResourceComponents } from './ResourceComponents';
 import { ResourceDetailsHeader } from './ResourceDetailsHeader';
-import { ResourceIssues } from './ResourceIssues';
+import { ResourceIssuesCard } from './ResourceIssuesCard';
 import { ResourceTimeline } from './ResourceTimeline';
 import { ShortResourceHeader } from './ShortResourceHeader';
 import { StatusPage } from './StatusPage';
@@ -258,23 +257,7 @@ export const ResourceDetailsView: FC<any> = ({
                     <ResourceTimeline resource={resource} />
                   </Card.Body>
                 </Card>
-                {ENV.plugins.WALDUR_SUPPORT && (
-                  <Card className="mb-7">
-                    <Card.Header>
-                      <Card.Title>
-                        <h3 className="mb-5">{translate('Tickets')}</h3>
-                      </Card.Title>
-                      <div className="card-toolbar">
-                        <UISref to={state.name} params={{ tab: 'issues' }}>
-                          <a className="btn btn-link">{translate('See all')}</a>
-                        </UISref>
-                      </div>
-                    </Card.Header>
-                    <Card.Body>
-                      <ResourceIssues resource={resource} />
-                    </Card.Body>
-                  </Card>
-                )}
+                <ResourceIssuesCard resource={resource} state={state} />
               </Col>
             </Row>
           </div>

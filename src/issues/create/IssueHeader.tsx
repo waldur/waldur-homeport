@@ -19,28 +19,28 @@ export const IssueHeader: FunctionComponent<{ issue }> = ({ issue }) => {
   return (
     <>
       {customerName && (
-        <FormGroup>
+        <FormGroup className="mb-5">
           <strong>{translate('Organization')}: </strong>
           {customerName}
         </FormGroup>
       )}
 
       {projectName && (
-        <FormGroup>
+        <FormGroup className="mb-5">
           <strong>{translate('Project')}: </strong>
           {projectName}
         </FormGroup>
       )}
 
       {issue.resource && (
-        <FormGroup>
+        <FormGroup className="mb-5">
           <strong>{translate('Resource')}: </strong>
           {issue.resource.name}
         </FormGroup>
       )}
 
       {issue.type && (
-        <FormGroup>
+        <FormGroup className="mb-5">
           <strong>{translate('Request type')}: </strong>
           {translate(issue.type)}
         </FormGroup>

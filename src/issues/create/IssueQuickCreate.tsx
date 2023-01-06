@@ -94,7 +94,7 @@ export const ProjectGroup = ({ disabled, customer, formId }) => {
   }, [dispatch, customer]);
 
   return (
-    <Form.Group>
+    <Form.Group className="mb-5">
       <Form.Label>
         {translate('Project')}
         {projectRequired && <span className="text-danger">*</span>}
@@ -136,7 +136,7 @@ export const ResourceGroup = ({ disabled, project, formId }) => {
   }, [dispatch, project]);
 
   return (
-    <Form.Group>
+    <Form.Group className="mb-5">
       <Form.Label>{translate('Affected resource')}</Form.Label>
       {project ? (
         <Field

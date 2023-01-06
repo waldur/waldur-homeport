@@ -87,13 +87,13 @@ export const IssueCreateForm = enhance(
           <>
             <IssueHeader issue={issue} />
             {!issue.type && (
-              <Form.Group>
+              <Form.Group className="mb-5">
                 <TypeField issueTypes={issueTypes} isDisabled={submitting} />
                 <Form.Label>{translate('Request type')}</Form.Label>
               </Form.Group>
             )}
             {filteredTemplates.length > 0 && (
-              <Form.Group>
+              <Form.Group className="mb-5">
                 <Form.Label>{translate('Template')}</Form.Label>
                 <Field
                   name="template"
@@ -108,7 +108,7 @@ export const IssueCreateForm = enhance(
               </Form.Group>
             )}
             {!options.hideTitle && (
-              <Form.Group>
+              <Form.Group className="mb-5">
                 <Form.Label>{options.summaryLabel}</Form.Label>
                 <Field
                   name="summary"
@@ -120,13 +120,13 @@ export const IssueCreateForm = enhance(
                 />
               </Form.Group>
             )}
-            <Form.Group>
+            <Form.Group className="mb-5">
               <Form.Label>{options.descriptionLabel}</Form.Label>
               <Field
                 name="description"
                 component={InputField}
                 as="textarea"
-                className="h-150"
+                className="h-150 form-control-solid"
                 placeholder={options.descriptionPlaceholder}
                 required={true}
                 disabled={submitting}
@@ -147,12 +147,12 @@ export const IssueCreateForm = enhance(
               </>
             )}
             {attachments.length > 0 && (
-              <Form.Group>
+              <Form.Group className="mb-5">
                 <Form.Label>{translate('Template files')}</Form.Label>
                 <AttachmentsList attachments={attachments} />
               </Form.Group>
             )}
-            <Form.Group>
+            <Form.Group className="mb-5">
               <Form.Label>{translate('Attachments')}</Form.Label>
               <Field name="files" component={FileField} disabled={submitting} />
             </Form.Group>
