@@ -12,7 +12,10 @@ interface ModalDialogProps {
 
 export const ModalDialog: FunctionComponent<ModalDialogProps> = (props) => (
   <div>
-    <Modal.Header closeButton={props.closeButton}>
+    <Modal.Header
+      closeButton={props.closeButton}
+      className={!props.title ? 'without-border' : undefined}
+    >
       <Modal.Title>{props.title}</Modal.Title>
     </Modal.Header>
     <div className={classNames('modal-body', props.bodyClassName)}>

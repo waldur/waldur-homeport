@@ -1,12 +1,12 @@
 import DOMPurify from 'dompurify';
-import { Fragment, FunctionComponent } from 'react';
-import Gravatar from 'react-gravatar';
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { formatMediumDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { getAbbreviation } from '@waldur/core/utils';
+import { translate } from '@waldur/i18n';
 import { getAttachments } from '@waldur/issues/attachments/selectors';
 import { Attachment } from '@waldur/issues/attachments/types';
 import { openAttachmentModal } from '@waldur/issues/attachments/utils';
@@ -15,7 +15,6 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { UserDetails } from '@waldur/workspace/types';
 
 import * as actions from './actions';
-import './IssueCommentItem.scss';
 import { IssueCommentsFormContainer } from './IssueCommentsFormContainer';
 import {
   getIsDeleting,
@@ -46,13 +45,29 @@ interface PureIssueCommentItemProps {
 
 const getFilename = (url) => url.slice(url.lastIndexOf('/') + 1);
 
+const nameToColor = (name) => {
+  const colors = ['primary', 'success', 'info', 'warning', 'danger'];
+  const hash = hashStr(name);
+  const index = hash % colors.length;
+  return colors[index] || 'primary';
+};
+
+const hashStr = (str) => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const chr = str.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0;
+  }
+  return hash;
+};
+
 export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> =
   (props) => {
     const {
       comment,
       attachments,
       user,
-      users,
       deleting,
       uiDisabled,
       formToggleDisabled,
@@ -61,12 +76,6 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
       openAttachmentPreview,
       toggleForm,
     } = props;
-    const userList =
-      users &&
-      users[comment.author_uuid] &&
-      users[comment.author_uuid].map((currentUser, index) => (
-        <Fragment key={index}>{currentUser.toUpperCase()}</Fragment>
-      ));
     const onCommentClick = (evt) => {
       const target = evt.target as HTMLElement;
       if (!target.matches('img')) {
@@ -76,54 +85,65 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
       openAttachmentPreview(url, getFilename(url));
     };
 
-    return (
-      <div className="comment-item vertical-timeline-block">
-        {deleting && <LoadingOverlay />}
-        <div className="vertical-timeline-icon">
-          <Gravatar
-            className="b-r-xl img-sm"
-            email={comment.author_email || ''}
-            size={32}
-            default="mm"
-          />
-        </div>
-        <div className="vertical-timeline-content">
-          <div className="comment-item__header mb-2">
-            <div className="comment-item__title">
-              {translate(
-                '{user} commented:',
-                { user: <a onClick={openUserDialog}>{comment.author_name}</a> },
-                formatJsxTemplate,
-              )}
+    const color = nameToColor(comment.author_name);
+
+    return deleting ? (
+      <LoadingOverlay />
+    ) : (
+      <div className="card card-bordered mb-9">
+        <div className="card-body">
+          <div className="w-100 d-flex flex-stack mb-8">
+            <div className="d-flex align-items-center f">
+              <div className="symbol symbol-50px me-5">
+                <div
+                  className={`symbol-label fs-1 fw-bold bg-light-${color} text-${color}`}
+                >
+                  {getAbbreviation(comment.author_name)}
+                </div>
+              </div>
+              <div className="d-flex flex-column fw-semibold fs-5 text-gray-600 text-dark">
+                <div className="d-flex align-items-center">
+                  <a
+                    onClick={openUserDialog}
+                    className="text-gray-800 fw-bold text-hover-primary fs-5 me-3"
+                  >
+                    {comment.author_name}
+                  </a>
+                  <span className="m-0"></span>
+                </div>
+                <span className="text-muted fw-semibold fs-6">
+                  {formatMediumDateTime(comment.created)}
+                </span>
+                {!comment.is_public && (
+                  <span className="label label-default text-uppercase">
+                    {translate('Internal')}
+                  </span>
+                )}
+              </div>
             </div>
-            <div className="comment-item__controls">
+            <div className="m-0">
               {(user.is_staff || user.uuid === comment.author_uuid) && (
                 <>
                   <button
-                    className="comment-item__edit btn btn-link"
+                    className="btn btn-color-gray-400 btn-active-color-primary p-0 fw-bold me-3"
                     disabled={uiDisabled || formToggleDisabled}
                     onClick={toggleForm}
                   >
-                    <i className="fa fa-edit" aria-hidden="true" />
+                    {translate('Edit')}
                   </button>
                   <button
-                    className="comment-item__delete btn btn-link"
+                    className="btn btn-color-gray-400 btn-active-color-primary p-0 fw-bold"
                     disabled={uiDisabled}
                     onClick={openDeleteDialog}
                   >
-                    <i className="fa fa-trash" aria-hidden="true" />
+                    {translate('Delete')}
                   </button>
                 </>
               )}
-              {!comment.is_public && (
-                <span className="label label-default text-uppercase">
-                  {translate('Internal')}
-                </span>
-              )}
             </div>
           </div>
-          <div
-            className="comment-item__content"
+          <p
+            className="fw-normal fs-5 text-gray-700 m-0"
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(
                 utils.formatJiraMarkup(comment.description, attachments),
@@ -131,10 +151,6 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
             }}
             onClick={onCommentClick}
           />
-          <div className="small text-muted mt-2">
-            <div>{userList}</div>
-            <div>{formatMediumDateTime(comment.created)}</div>
-          </div>
           <IssueCommentsFormContainer
             formId={comment.uuid}
             defaultMessage={comment.description}

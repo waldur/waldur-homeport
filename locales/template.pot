@@ -486,7 +486,7 @@ msgstr ""
 msgid "Advanced Search"
 msgstr ""
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ResourceGroup.tsx
 msgid "Affected resource"
@@ -826,7 +826,7 @@ msgstr ""
 msgid "Ask a question"
 msgstr ""
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/AssigneeGroup.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Assigned to"
@@ -1230,7 +1230,7 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/CallerGroup.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Caller"
@@ -1927,7 +1927,7 @@ msgstr ""
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
@@ -2291,6 +2291,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
+#: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace/offerings/images/ImagesActions.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -2357,7 +2358,6 @@ msgid "Desciption"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/issues/IssueDetails.tsx
 #: src/issues/create/DescriptionGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
@@ -2687,6 +2687,7 @@ msgstr ""
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeButton.tsx
 #: src/customer/team/UserEditButton.tsx
+#: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditorButton.tsx
@@ -4329,7 +4330,7 @@ msgstr ""
 msgid "Limits are invalid."
 msgstr ""
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Link"
 msgstr ""
@@ -5556,7 +5557,7 @@ msgstr ""
 msgid "Open console"
 msgstr ""
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 msgid "Open in Service Desk"
 msgstr ""
 
@@ -5697,7 +5698,7 @@ msgstr ""
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
@@ -6637,7 +6638,7 @@ msgstr ""
 msgid "Print record"
 msgstr ""
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/PriorityGroup.tsx
 msgid "Priority"
 msgstr ""
@@ -6687,7 +6688,7 @@ msgstr ""
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/ProjectGroup.tsx
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
@@ -7476,7 +7477,7 @@ msgstr ""
 msgid "Reported value is reused every month until changed."
 msgstr ""
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Reporter"
@@ -7584,7 +7585,7 @@ msgstr ""
 msgid "Request title"
 msgstr ""
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueCreateForm.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/TypeGroup.tsx
@@ -7677,7 +7678,7 @@ msgstr ""
 msgid "Resize droplet"
 msgstr ""
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 msgid "Resolution"
 msgstr ""
 
@@ -8712,7 +8713,7 @@ msgstr ""
 msgid "Service settings of this resource are in state erred."
 msgstr ""
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Service type"
@@ -9173,7 +9174,7 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/invitations/InvitationsList.tsx
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/project/team/InvitationsList.tsx
@@ -9340,6 +9341,7 @@ msgid "Sum"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
@@ -12823,7 +12825,7 @@ msgstr ""
 msgid "{relative} ago"
 msgstr ""
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 msgid "{relative} ago, {date}"
 msgstr ""
 
@@ -12950,10 +12952,6 @@ msgstr ""
 
 #: src/marketplace/resources/details/ShortResourceHeader.tsx
 msgid "{usage} out of {limit} {unit} {name}"
-msgstr ""
-
-#: src/issues/comments/IssueCommentItem.tsx
-msgid "{user} commented:"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
