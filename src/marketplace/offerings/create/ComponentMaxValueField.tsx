@@ -8,6 +8,10 @@ import { OptionalNumberField } from './OptionalNumberField';
 
 export const ComponentMaxValueField: React.FC = () => (
   <FormGroup label={translate('Maximum allowed value')}>
-    <Field component={OptionalNumberField} name="max_value" />
+    <Field
+      component={OptionalNumberField}
+      name="max_value"
+      parse={(value) => Number(value)}
+    />
   </FormGroup>
 );
