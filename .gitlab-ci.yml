@@ -147,6 +147,7 @@ Upload translatable strings:
       when: never
     - if: '$CI_COMMIT_BRANCH == "develop"'
     - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "next"'
   image:
     name: registry.hpc.ut.ee/mirror/localazy/cli:latest
   script:

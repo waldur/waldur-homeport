@@ -1,6 +1,6 @@
 {
   "upload": {
-    "deprecateMissing": true,
+    "deprecateMissing": false,
     "files": [
       {
         "type": "pot",
