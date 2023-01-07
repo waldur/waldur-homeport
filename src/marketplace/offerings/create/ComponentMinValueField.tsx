@@ -8,6 +8,10 @@ import { OptionalNumberField } from './OptionalNumberField';
 
 export const ComponentMinValueField: React.FC = () => (
   <FormGroup label={translate('Minimum allowed value')}>
-    <Field component={OptionalNumberField} name="min_value" />
+    <Field
+      component={OptionalNumberField}
+      name="min_value"
+      parse={(value) => Number(value)}
+    />
   </FormGroup>
 );
