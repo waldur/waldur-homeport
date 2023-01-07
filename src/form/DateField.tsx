@@ -13,7 +13,13 @@ export const DateField: FunctionComponent<any> = (props) => (
         ? DateTime.fromISO(props.input.value).toJSDate()
         : props.input.value
     }
-    onChange={(value) => props.input.onChange(value[0])}
+    onChange={(value) =>
+      props.input.onChange(
+        value[0] instanceof Date
+          ? DateTime.fromJSDate(value[0]).toISODate()
+          : value[0],
+      )
+    }
     className="form-control form-control-solid"
   />
 );
