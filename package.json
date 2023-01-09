@@ -60,7 +60,7 @@
     "leaflet": "^1.7.1",
     "leaflet-geosearch": "^3.7.0",
     "lodash": "^4.17.21",
-    "luxon": "^2.0.2",
+    "luxon": "^2.5.2",
     "monaco-editor": "^0.29.1",
     "monaco-editor-webpack-plugin": "^5.0.0",
     "npm-font-open-sans": "^1.0.3",
