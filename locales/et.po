@@ -20,6 +20,10 @@ msgstr "10 - Väga positiivne"
 msgid "1 - Very negative"
 msgstr "1 - Väga negatiivne"
 
+#: src/marketplace/resources/details/StatusPage.tsx
+msgid "90 days ago"
+msgstr "90 päeva tagasi"
+
 #: src/user/support/TermsOfService.tsx
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Teenuse tingimused</Link> on aktsepteeritud <Date></Date>"
