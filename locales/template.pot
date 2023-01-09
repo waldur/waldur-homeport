@@ -4839,7 +4839,9 @@ msgstr ""
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
+#: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemLimits.tsx
+#: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx

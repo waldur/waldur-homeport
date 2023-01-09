@@ -15,8 +15,14 @@ import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
+import { OrderNameColumn } from '../../OrderNameColumn';
+
 const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
+    {
+      title: translate('Name'),
+      render: OrderNameColumn,
+    },
     {
       title: translate('Created at'),
       render: ({ row }) => (
