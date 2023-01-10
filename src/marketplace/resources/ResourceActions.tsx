@@ -9,14 +9,12 @@ import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAc
 import { ActionRegistry } from '@waldur/resource/actions/registry';
 
 import { EditAction } from './actions/EditAction';
-import { ChangeLimitsAction } from './change-limits/ChangeLimitsAction';
 
 const ActionsList = [
   EditAction,
   MoveResourceAction,
   SubmitReportAction,
   ChangePlanAction,
-  ChangeLimitsAction,
   SetBackendIdAction,
   EditResourceEndDateAction,
 ];
