@@ -87,20 +87,20 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
                   <TableRefreshButton {...this.props} />
                 </Card.Title>
               </Col>
-              {this.showActionsColumn() && (
-                <Col xs md={5} xl={4} className="order-1 order-md-2 ps-5">
+              <Col xs md={4} xl={4} className="order-1 order-md-2 ps-5">
+                {this.showActionsColumn() && (
                   <div className="ms-auto">
                     <div className="d-flex justify-content-end text-nowrap">
                       <TableButtons {...this.props} />
                     </div>
                   </div>
-                </Col>
-              )}
+                )}
+              </Col>
               {this.showQueryColumn() && (
                 <Col
                   xs={12}
                   md={4}
-                  xl={5}
+                  xl={4}
                   className="order-2 order-md-1 mt-4 mt-md-0"
                 >
                   {!this.props.selectedRows?.length ? (

@@ -77,7 +77,7 @@ export const Layout: React.FC = ({ children }) => {
                 })}
               >
                 {showToolbar && <Toolbar actions={actions} />}
-                <div className="post d-flex flex-column-fluid">
+                <div className="post w-100 d-flex flex-column-fluid">
                   {children}
                   <MasterLayout />
                 </div>
