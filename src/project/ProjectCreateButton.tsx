@@ -1,23 +1,42 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n/translate';
+import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
-import { gotoProjectCreate } from './actions';
+import { createProject } from './actions';
+
+const ProjectCreateDialog = lazyComponent(
+  () => import('./ProjectCreateDialog'),
+  'ProjectCreateDialog',
+);
+
+interface ProjectCreateButtonProps {
+  title?: string;
+  icon?: string;
+  variant?: string;
+}
 
 const PureProjectCreateButton: FunctionComponent<any> = (props) => (
   <ActionButton
-    title={translate('Add project')}
-    action={props.gotoProjectCreate}
+    title={props.title}
+    action={props.openProjectCreateDialog}
     tooltip={props.tooltip}
-    icon="fa fa-plus"
-    variant="primary"
+    icon={props.icon}
+    variant={props.variant}
     disabled={props.disabled}
   />
 );
+
+PureProjectCreateButton.defaultProps = {
+  title: translate('Add project'),
+  variant: 'primary',
+  icon: 'fa fa-plus',
+};
 
 const mapStateToProps = (state: RootState) => {
   const ownerOrStaff = isOwnerOrStaff(state);
@@ -37,6 +56,26 @@ const mapStateToProps = (state: RootState) => {
   }
 };
 
-const enhance = connect(mapStateToProps, { gotoProjectCreate });
+const mapDispatchToProps = (dispatch) => ({
+  openProjectCreateDialog: () =>
+    dispatch(
+      openModalDialog(ProjectCreateDialog, {
+        size: 'lg',
+        onSubmit: (formData) => {
+          createProject(formData, dispatch).then(() => {
+            dispatch(closeModalDialog());
+          });
+        },
+        onCancel: () => {
+          dispatch(closeModalDialog());
+        },
+        initialValues: null,
+      }),
+    ),
+});
 
-export const ProjectCreateButton = enhance(PureProjectCreateButton);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
+
+export const ProjectCreateButton = enhance<
+  FunctionComponent<ProjectCreateButtonProps>
+>(PureProjectCreateButton);

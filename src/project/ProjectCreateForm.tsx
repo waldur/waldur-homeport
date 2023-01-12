@@ -120,9 +120,7 @@ export const ProjectCreateForm = reduxForm<
           minDate={DateTime.now().plus({ days: 1 }).toISO()}
         />
         <ImageField label={translate('Project image')} name="image" />
-      </FormContainer>
-      <Form.Group>
-        <div className="offset-sm-3 col-sm-5">
+        <Form.Group className="text-end">
           <FieldError error={props.error} />
           <SubmitButton
             disabled={props.invalid}
@@ -140,8 +138,8 @@ export const ProjectCreateForm = reduxForm<
           >
             {translate('Cancel')}
           </button>
-        </div>
-      </Form.Group>
+        </Form.Group>
+      </FormContainer>
     </form>
   );
 });
