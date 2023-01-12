@@ -1685,6 +1685,10 @@ msgstr ""
 msgid "Connection details"
 msgstr ""
 
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+msgid "Contact"
+msgstr ""
+
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
@@ -2144,6 +2148,10 @@ msgstr ""
 
 #: src/issues/CustomerSupportRating.tsx
 msgid "Customer support satisfaction overall rating"
+msgstr ""
+
+#: src/marketplace/routes.ts
+msgid "Customers"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
@@ -2829,6 +2837,10 @@ msgstr ""
 msgid "Email verification has been sent. Please check your inbox."
 msgstr ""
 
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+msgid "Email: {email}"
+msgstr ""
+
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
 msgid "Enable"
 msgstr ""
@@ -2955,6 +2967,7 @@ msgstr ""
 
 #: src/customer/list/CustomerList.tsx
 #: src/invoices/list/EstimatedCost.tsx
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
@@ -4626,6 +4639,10 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+msgid "Members"
+msgstr ""
+
 #: src/marketplace/resources/details/MonitoringCharts.tsx
 #: src/rancher/cluster/hpas/utils.ts
 msgid "Memory"
@@ -4849,6 +4866,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -5090,6 +5108,14 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "No access info."
+msgstr ""
+
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+msgid "No active members"
+msgstr ""
+
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+msgid "No active projects"
 msgstr ""
 
 #: src/auth/PermissionLayout.tsx
@@ -5494,6 +5520,14 @@ msgstr ""
 msgid "Old value"
 msgstr ""
 
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+msgid "One member"
+msgstr ""
+
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+msgid "One project"
+msgstr ""
+
 #: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
 msgid "One time"
 msgstr ""
@@ -5880,6 +5914,8 @@ msgstr ""
 #: src/customer/list/SupportCustomerList.tsx
 #: src/issues/routes.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/marketplace/routes.ts
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/notifications/NotificationExpandableRow.tsx
 #: src/notifications/NotificationForm.tsx
 #: src/notifications/RecipientsList.tsx
@@ -6234,6 +6270,10 @@ msgstr ""
 
 #: src/user/support/UserDetailsTable.tsx
 msgid "Phone numbers"
+msgstr ""
+
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+msgid "Phone: {phone_number}"
 msgstr ""
 
 #: src/marketplace/details/OfferingResourcesList.tsx
@@ -6895,6 +6935,7 @@ msgstr ""
 
 #: src/customer/routes.ts
 #: src/issues/routes.ts
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/user/affiliations/OrganizationsList.tsx
@@ -12765,12 +12806,20 @@ msgstr ""
 msgid "{count} items"
 msgstr ""
 
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+msgid "{count} members"
+msgstr ""
+
 #: src/user/api-key/TokenLifetimeField.tsx
 msgid "{count} minutes"
 msgstr ""
 
 #: src/user/dashboard/UserProfile.tsx
 msgid "{count} more affiliations"
+msgstr ""
+
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+msgid "{count} projects"
 msgstr ""
 
 #: src/resource/support/TreemapChart.tsx

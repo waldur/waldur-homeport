@@ -9,7 +9,7 @@ import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
 import { router } from '@waldur/router';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
-import { loadContext } from './resolve';
+import { loadContext, fetchProvider } from './resolve';
 import { fetchData } from './resources/details/fetchData';
 
 const AdminOfferingsListContainer = lazyComponent(
@@ -144,6 +144,10 @@ const SupportUsageContainer = lazyComponent(
 const ProviderDetails = lazyComponent(
   () => import('./service-providers/ProviderDetails'),
   'ProviderDetails',
+);
+const ProviderOrganizationsList = lazyComponent(
+  () => import('./service-providers/ProviderOrganizationsList'),
+  'ProviderOrganizationsList',
 );
 
 const getPublicRoutesParams = () => ({
@@ -395,6 +399,11 @@ export const states: StateDeclaration[] = [
         resolveFn: fetchCustomer,
         deps: ['$transition$'],
       },
+      {
+        token: 'provider',
+        resolveFn: fetchProvider,
+        deps: ['$transition$'],
+      },
     ],
   },
 
@@ -408,6 +417,18 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Marketplace'),
     },
   },
+
+  {
+    name: 'marketplace-provider-customers',
+    parent: 'marketplace-provider',
+    abstract: true,
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Customers'),
+    },
+  },
+
   {
     name: 'provider-resources',
     abstract: true,
@@ -426,6 +447,16 @@ export const states: StateDeclaration[] = [
     parent: 'provider-marketplace',
     data: {
       breadcrumb: () => translate('Offerings'),
+    },
+  },
+
+  {
+    name: 'marketplace-provider-organizations',
+    parent: 'marketplace-provider-customers',
+    url: 'marketplace-provider-organizations/',
+    component: ProviderOrganizationsList,
+    data: {
+      breadcrumb: () => translate('Organizations'),
     },
   },
 
