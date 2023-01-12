@@ -1,3 +1,5 @@
+import { Transition } from '@uirouter/react';
+
 import { getFirst } from '@waldur/core/api';
 import { getCustomer, getProject } from '@waldur/project/api';
 import store from '@waldur/store/store';
@@ -10,6 +12,8 @@ import {
   getCustomer as getCustomerSelector,
 } from '@waldur/workspace/selectors';
 import { Permission } from '@waldur/workspace/types';
+
+import { getServiceProviderByCustomer } from './common/api';
 
 /**
  * Use it to fetch and select organization and project by default in public routes
@@ -37,3 +41,8 @@ export function loadContext() {
   }
   return loadData();
 }
+
+export const fetchProvider = (transition: Transition) =>
+  getServiceProviderByCustomer({
+    customer_uuid: transition.params().uuid,
+  });
