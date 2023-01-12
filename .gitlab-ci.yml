@@ -147,7 +147,6 @@ Download translation:
     - apt update && apt install -y git
     - git config --global user.name "$GITLAB_USER_NAME"
     - git config --global user.email "$GITLAB_USER_EMAIL"
-    - echo "https://$GROUP_LOCALIZE_TOKEN_NAME:$GROUP_LOCALIZE_TOKEN_PASSWORD@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
     - git remote set-url origin "https://$GROUP_LOCALIZE_TOKEN_NAME:$GROUP_LOCALIZE_TOKEN_PASSWORD@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
     - git fetch
     - git branch -D new-translations  || echo "No translation branch" # cleanup
