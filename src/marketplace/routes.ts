@@ -149,6 +149,10 @@ const ProviderOrganizationsList = lazyComponent(
   () => import('./service-providers/ProviderOrganizationsList'),
   'ProviderOrganizationsList',
 );
+const ProviderUsersList = lazyComponent(
+  () => import('./service-providers/ProviderUsersList'),
+  'ProviderUsersList',
+);
 
 const getPublicRoutesParams = () => ({
   resolve: [
@@ -457,6 +461,16 @@ export const states: StateDeclaration[] = [
     component: ProviderOrganizationsList,
     data: {
       breadcrumb: () => translate('Organizations'),
+    },
+  },
+
+  {
+    name: 'marketplace-provider-users',
+    parent: 'marketplace-provider-customers',
+    url: 'marketplace-provider-users/',
+    component: ProviderUsersList,
+    data: {
+      breadcrumb: () => translate('Users'),
     },
   },
 

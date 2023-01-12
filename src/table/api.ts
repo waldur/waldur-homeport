@@ -47,6 +47,19 @@ export function createFetcher(
   };
 }
 
+export const createDynamicFetcher = (requestToEndpoint, prepareFilter) => {
+  const fetcher: Fetcher = (request: TableRequest) => {
+    const url = requestToEndpoint(request);
+    const params = {
+      page: request.currentPage,
+      page_size: request.pageSize,
+      ...prepareFilter(request.filter),
+    };
+    return parseResponse(url, params);
+  };
+  return fetcher;
+};
+
 export async function fetchAll(
   fetch: Fetcher,
   filter?: Record<string, string>,
