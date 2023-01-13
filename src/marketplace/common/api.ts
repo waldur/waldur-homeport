@@ -33,6 +33,7 @@ import {
 import { Customer, Project } from '@waldur/workspace/types';
 
 import { OfferingDocument } from '../offerings/store/types';
+import { PlanUsageRow } from '../resources/plan-usage/types';
 import { Resource } from '../resources/types';
 import { ComponentUsage, ResourcePlanPeriod } from '../resources/usage/types';
 
@@ -97,6 +98,11 @@ export const getProviderOfferings = (customerUuid: string) =>
   getAllProviderOfferings({ params: { customer_uuid: customerUuid } });
 
 export const getPlan = (id: string) => getById<any>('/marketplace-plans/', id);
+
+export const getOfferingPlansUsage = (offeringUuid: string) =>
+  getAll<PlanUsageRow>('/marketplace-plans/usage_stats/', {
+    params: { offering_uuid: offeringUuid },
+  });
 
 export const getProviderOffering = (id: string, options?: AxiosRequestConfig) =>
   getById<Offering>('/marketplace-provider-offerings/', id, options);

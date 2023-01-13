@@ -28,6 +28,7 @@ export interface TableProps<RowType = any> extends TableState {
   dropdownActions?: TableDropdownItem[];
   actions?: React.ReactNode;
   verboseName?: string;
+  className?: string;
   rowClass?: (({ row }) => string) | string;
   showPageSizeSelector?: boolean;
   updatePageSize?: (size: number) => void;
@@ -73,6 +74,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
         className={classNames(
           'card-table',
           this.props.fullWidth ? 'full-width' : '',
+          this.props.className,
         )}
       >
         {this.props.blocked && <div className="table-block" />}

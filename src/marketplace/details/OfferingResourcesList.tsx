@@ -58,22 +58,21 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title: translate('State'),
       render: ResourceStateField,
     },
-    {
-      title: translate('Actions'),
-      render: PublicResourceActions,
-    },
   ];
 
   return (
     <Table
       {...props}
+      title={translate('Resources')}
       placeholderComponent={<PublicResourcesListPlaceholder />}
       columns={columns}
       verboseName={translate('offering resources')}
       enableExport={true}
       initialSorting={{ field: 'created', mode: 'desc' }}
+      initialPageSize={5}
       hasQuery={true}
       showPageSizeSelector={true}
+      hoverableRow={PublicResourceActions}
     />
   );
 };
@@ -123,4 +122,6 @@ const enhance = compose(
   connectTable(TableOptions),
 );
 
-export const OfferingResourcesList = enhance(TableComponent);
+export const OfferingResourcesList = enhance(
+  TableComponent,
+) as React.ComponentType<any>;

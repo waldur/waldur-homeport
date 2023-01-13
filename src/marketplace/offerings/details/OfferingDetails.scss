@@ -1,0 +1,28 @@
+.provider-offering {
+  position: relative;
+
+  .provider-offering-hero__background {
+    position: absolute;
+    min-height: 320px;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: #2f4050;
+    background-image: url(../../landing/marketplace-background.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: table;
+    margin-bottom: 20px;
+  }
+
+  &-logo {
+    position: relative;
+
+    .offering-small-logo {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+    }
+  }
+}
