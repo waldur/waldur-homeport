@@ -497,6 +497,7 @@ msgid "Affiliation"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
@@ -1686,6 +1687,7 @@ msgid "Connection details"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
 msgid "Contact"
 msgstr ""
 
@@ -2837,7 +2839,7 @@ msgstr ""
 msgid "Email verification has been sent. Please check your inbox."
 msgstr ""
 
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/CustomerContactColumn.tsx
 msgid "Email: {email}"
 msgstr ""
 
@@ -5521,10 +5523,6 @@ msgid "Old value"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
-msgid "One member"
-msgstr ""
-
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 msgid "One project"
 msgstr ""
 
@@ -6272,7 +6270,7 @@ msgstr ""
 msgid "Phone numbers"
 msgstr ""
 
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/CustomerContactColumn.tsx
 msgid "Phone: {phone_number}"
 msgstr ""
 
@@ -11463,6 +11461,7 @@ msgstr ""
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/feedback/SupportFeedbackListFilter.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
@@ -11767,6 +11766,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/routes.ts
 #: src/project/routes.ts
 #: src/rancher/cluster/tabs.ts
 #: src/slurm/tabs.ts
@@ -12725,6 +12725,7 @@ msgid "user permission requests"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"
@@ -12806,10 +12807,6 @@ msgstr ""
 msgid "{count} items"
 msgstr ""
 
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
-msgid "{count} members"
-msgstr ""
-
 #: src/user/api-key/TokenLifetimeField.tsx
 msgid "{count} minutes"
 msgstr ""
@@ -12832,6 +12829,10 @@ msgstr ""
 
 #: src/user/dashboard/utils.ts
 msgid "{count} user events in {date}"
+msgstr ""
+
+#: src/marketplace/service-providers/ProviderUsersList.tsx
+msgid "{customer_count} organizations, {project_count} projects"
 msgstr ""
 
 #: src/marketplace/landing/LandingPage.tsx
