@@ -1,5 +1,13 @@
 import { FC } from 'react';
 
-export const PublicOfferingCardTitle: FC = (props) => (
-  <h3 className="mb-5">{props.children}</h3>
+interface OwnProps {
+  className?: string;
+}
+
+export const PublicOfferingCardTitle: FC<OwnProps> = (props) => (
+  <h3 className={props.className}>{props.children}</h3>
 );
+
+PublicOfferingCardTitle.defaultProps = {
+  className: 'mb-8',
+};

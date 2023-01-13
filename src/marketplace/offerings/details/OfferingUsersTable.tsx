@@ -27,9 +27,11 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
       {...props}
+      title={translate('Users')}
       columns={columns}
       verboseName={translate('offering users')}
       showPageSizeSelector={true}
+      initialPageSize={5}
       actions={
         props.offering.secret_options
           .service_provider_can_create_offering_user && (
@@ -53,4 +55,4 @@ export const TableOptions: TableOptionsType = {
 
 const enhance = connectTable(TableOptions);
 
-export const OfferingUsersTab = enhance(TableComponent);
+export const OfferingUsersTable = enhance(TableComponent);

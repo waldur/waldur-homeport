@@ -1,66 +1,67 @@
-import React, { FunctionComponent } from 'react';
-import { compose } from 'redux';
+import { FC } from 'react';
+import { Button, Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
-import { PlanUsageButton } from '@waldur/marketplace/resources/plan-usage/PlanUsageButton';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { PlanUsageRow } from '@waldur/marketplace/resources/plan-usage/types';
 
-interface PlanUsageListProps {
-  offering_uuid: string;
+import { PublicOfferingCardTitle } from './PublicOfferingCardTitle';
+
+interface OwnProps {
+  plansUsage: PlanUsageRow[];
+  className?: string;
 }
 
-export const TableComponent: FunctionComponent<any> = (props) => {
-  const columns = [
-    {
-      title: translate('Name'),
-      render: ({ row }) => row.plan_name,
-    },
-    {
-      title: translate('Active count'),
-      render: ({ row }) => row.usage,
-      orderField: 'usage',
-    },
-    {
-      title: translate('Limit'),
-      render: ({ row }) => row.limit || 'N/A',
-      orderField: 'limit',
-    },
-    {
-      title: translate('Remaining'),
-      render: PlanRemainingColumn,
-      orderField: 'remaining',
-    },
-    {
-      title: translate('Actions'),
-      render: PlanUsageButton,
-    },
-  ];
+const PlanGroup = ({ plan }: { plan: PlanUsageRow }) => (
+  <div className="plan">
+    <h4 className="fw-bold mb-4">{plan.plan_name}:</h4>
+    <table className="text-gray-600 w-100 mb-10">
+      <tbody>
+        <tr>
+          <th className="w-50 text-gray-700 fw-bold">
+            {translate('Active count')}:
+          </th>
+          <td>{plan.usage}</td>
+        </tr>
+        <tr>
+          <th className="w-50 text-gray-700 fw-bold">{translate('Limit')}:</th>
+          <td>{plan.limit || 'N/A'}</td>
+        </tr>
+        <tr>
+          <th className="w-50 text-gray-700 fw-bold">
+            {translate('Remaining')}:
+          </th>
+          <td>
+            <PlanRemainingColumn row={plan} />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+);
 
+export const PlanUsageList: FC<OwnProps> = (props) => {
   return (
-    <Table
-      {...props}
-      columns={columns}
-      verboseName={translate('plans')}
-      showPageSizeSelector={true}
-      enableExport={true}
-      initialSorting={{ field: 'usage', mode: 'desc' }}
-    />
+    <Card className={props.className}>
+      <Card.Body>
+        <div className="d-flex">
+          <div className="flex-grow-1">
+            <PublicOfferingCardTitle>
+              {translate('Plans')}
+            </PublicOfferingCardTitle>
+          </div>
+          <div>
+            <Button variant="light">{translate('New plan')}</Button>
+          </div>
+        </div>
+        {!props.plansUsage?.length && (
+          <div className="text-muted">{translate('There is no plan')}</div>
+        )}
+        {props.plansUsage &&
+          props.plansUsage.map((plan) => (
+            <PlanGroup key={plan.plan_uuid} plan={plan} />
+          ))}
+      </Card.Body>
+    </Card>
   );
 };
-
-const TableOptions = {
-  table: 'OfferingPlans',
-  fetchData: createFetcher('marketplace-plans/usage_stats'),
-  mapPropsToFilter: (props) => ({
-    offering_uuid: props.offering_uuid,
-  }),
-  exportRow: (row) => [row.plan_name, row.limit, row.usage],
-  exportFields: ['Plan', 'Limit', 'Active plan count'],
-};
-
-const connector = compose(connectTable(TableOptions));
-
-export const PlanUsageList = connector(
-  TableComponent,
-) as React.ComponentType<PlanUsageListProps>;
