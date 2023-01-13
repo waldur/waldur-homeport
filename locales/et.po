@@ -344,6 +344,10 @@ msgstr "Lisa teavitus"
 msgid "Add offering"
 msgstr "Lisa pakkumine"
 
+#: src/marketplace/offerings/OfferingsList.tsx
+msgid "Add offerings"
+msgstr "Lisa pakkumisi"
+
 #: src/customer/list/OrganizationCreateButton.tsx
 #: src/user/dashboard/CustomerCreateButton.tsx
 msgid "Add organization"
@@ -750,6 +754,10 @@ msgstr "Oled kindel et soovid peatada teenuse {resourceName}?"
 msgid "Article code"
 msgstr "Artikli kood"
 
+#: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
+msgid "Ask a question"
+msgstr "Esita küsimus"
+
 #: src/issues/IssueSummary.tsx
 #: src/issues/create/AssigneeGroup.tsx
 #: src/issues/list/IssuesList.tsx
@@ -859,6 +867,10 @@ msgstr "Automaatne kinnitamine teenusepakkuja projektides"
 msgid "Availability"
 msgstr "Kättesaadavus"
 
+#: src/marketplace/offerings/details/PublicOfferingFacility.tsx
+msgid "Availability:"
+msgstr "Saadavus"
+
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
@@ -871,6 +883,10 @@ msgstr "Kättesaadavus"
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
 msgid "Availability zone"
 msgstr "Kättesaadavuse tsoon"
+
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Available plans"
+msgstr "Saadaolevad plaanid"
 
 #: src/quotas/QuotaUsageBarChart.tsx
 msgid "Available quota usage: {usage}"
@@ -984,6 +1000,10 @@ msgstr "Pakktöötluse dokumentatsioon"
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr "Saage meie portaali kliendiks. Pakkuge turuplatsilt IT-teenuseid ja hallake oma meeskonda ühest kohast."
 
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Billed monthly"
+msgstr "Igakuine arveldamine"
+
 #: src/invoices/routes.ts
 #: src/invoices/utils.ts
 #: src/project/ProjectDashboard.tsx
@@ -1004,6 +1024,10 @@ msgstr "Arved lubatud"
 #: src/marketplace/offerings/plan/PlanForm.tsx
 msgid "Billing period"
 msgstr "Arvete periood"
+
+#: src/marketplace/offerings/PriceList.tsx
+msgid "Billing type"
+msgstr "Arvelduse tüüp"
 
 #: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricingOld.tsx
@@ -1059,6 +1083,11 @@ msgstr "Haru"
 msgid "Browse"
 msgstr "Sirvi"
 
+#: src/marketplace/landing/CategoryCardAll.tsx
+#: src/marketplace/landing/LandingPage.tsx
+msgid "Browse all categories"
+msgstr "Sirvi kõiki kategooriaid"
+
 #: src/customer/create/ImageFileField.tsx
 msgid "Browse image"
 msgstr "Sirvi image"
@@ -1092,6 +1121,10 @@ msgstr "CPU koormus"
 #: src/table/TableExportButton.tsx
 msgid "CSV"
 msgstr "CVS"
+
+#: src/marketplace/offerings/details/GoogleCalendarLink.tsx
+msgid "Calendar"
+msgstr "Kalender"
 
 #: src/issues/IssueSummary.tsx
 #: src/issues/create/CallerGroup.tsx
@@ -1408,6 +1441,10 @@ msgstr "Pädevus"
 msgid "Compliance"
 msgstr "Vastavus"
 
+#: src/marketplace/offerings/PriceList.tsx
+msgid "Component"
+msgstr "Komponent"
+
 #: src/marketplace/offerings/create/ComponentsList.tsx
 msgid "Component #{index}"
 msgstr "Komponent #{index}"
@@ -1535,6 +1572,10 @@ msgstr "Kopeeri lõikelauale"
 #: src/marketplace/orders/OrdersList.tsx
 msgid "Cost"
 msgstr "Maksumus"
+
+#: src/marketplace/landing/DeploymentIntroduction.tsx
+msgid "Cost efficiently"
+msgstr "Kulutõhusalt"
 
 #: src/customer/create/CustomerCreateDialog.tsx
 msgid "Could not create organization"
@@ -1949,6 +1990,25 @@ msgstr "Kustuta salvestusüksed"
 msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
 msgstr "PostgreSQL serveri kustutamine kustutab kõik serveris loodud andmebaasid."
 
+#: src/marketplace/common/OfferingCardButtonsOverlay.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
+msgid "Deploy"
+msgstr "Võta kasutusele"
+
+#: src/marketplace/landing/DeploymentIntroduction.tsx
+msgid "Deploy in minutes"
+msgstr "Kasutusele võtmine mõne minutiga"
+
+#: src/marketplace/landing/FooterSection.tsx
+msgid "Deploy in seconds"
+msgstr "Kasutusele võtmine sekunditega"
+
+#: src/marketplace/landing/DeploymentIntroduction.tsx
+msgid "Deployment made easy, for everyone"
+msgstr "Kasutusele võtmine on kõigile lihtne"
+
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/issues/create/DescriptionGroup.tsx
 #: src/issues/list/IssuesList.tsx
@@ -2279,9 +2339,17 @@ msgstr "Redigeeri kinnitust"
 msgid "Edit offering"
 msgstr "Muuda pakkumist"
 
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+msgid "Edit offering details"
+msgstr "Redigeeri pakkumise üksikasju"
+
 #: src/customer/team/PendingReviewDialog.tsx
 msgid "Edit permissions"
 msgstr "Redigeeri õigusi"
+
+#: src/user/dashboard/UserWelcome.tsx
+msgid "Edit profile"
+msgstr "Muuda profiili"
 
 #: src/project/team/AddProjectMemberDialog.tsx
 msgid "Edit project member"
@@ -2580,7 +2648,11 @@ msgstr "Aegub alates"
 
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Explore {deployment} Marketplace"
-msgstr "Avasta {deployment} turuplatsi"
+msgstr "Tutvu {deployment} Turuplatsil"
+
+#: src/i18n/constants.ts
+msgid "Explore {deployment} service catalog"
+msgstr "Tutvu {deployment} teenuste kataloogiga"
 
 #: src/table/TableExportButton.tsx
 msgid "Export as"
@@ -2632,9 +2704,18 @@ msgstr "Väline võrk"
 msgid "External network ID"
 msgstr "Välise võrgu mask (CIDR)"
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
+msgid "FAQ"
+msgstr "KKK"
+
 #: src/resource/state/utils.ts
 msgid "Failed to operate with backend."
 msgstr "Rakenduse tagapõhjaga pole võimalik tegutseda"
+
+#: src/marketplace/landing/LandingPage.tsx
+msgid "Featured offerings"
+msgstr "Esiletõstetud pakkumised"
 
 #: src/issues/routes.ts
 #: src/marketplace/details/OfferingTabs.tsx
@@ -2856,6 +2937,15 @@ msgstr "Loo Kubeconfig fail"
 #: src/rancher/template/PasswordField.tsx
 msgid "Generate password"
 msgstr "Genereerige parool"
+
+#: src/marketplace/offerings/details/PublicOfferingGetHelp.tsx
+msgid "Get help"
+msgstr "Küsi abi"
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingGettingStarted.tsx
+msgid "Getting started"
+msgstr "Alustamine"
 
 #: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Go to Marketplace"
@@ -3647,6 +3737,10 @@ msgstr "Logo on eemaldatud"
 msgid "Logo has been uploaded."
 msgstr "Logo on üles laetud."
 
+#: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
+msgid "Logo here"
+msgstr "Logo siia"
+
 #: src/auth/callbacks/AuthLogoutFailed.tsx
 msgid "Logout failed"
 msgstr "Välja logimine nurjus"
@@ -3991,6 +4085,10 @@ msgstr "Nimi „{label}” ei tohi alustada ega lõppeda sidekriipsuga"
 #: src/project/ProjectNameField.tsx
 msgid "Name is duplicated. Choose other name."
 msgstr "Nimi juba eksisteerib. Vali uus"
+
+#: src/marketplace/offerings/create/OverviewSummary.tsx
+msgid "Name is not valid."
+msgstr "Nimi ei kehti."
 
 #: src/project/ProjectNameField.tsx
 msgid "Name is required field."
@@ -4380,6 +4478,14 @@ msgstr "Üks kord"
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "One-time on plan switch"
 msgstr "Ühekordne plaanivahetus"
+
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
+msgid "One time"
+msgstr "Üks kord"
+
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
+msgid "One time on plan switch"
+msgstr "Üks kord plaani vahetamisel"
 
 #: src/invoices/list/MarkAsPaidButton.tsx
 msgid "Only a created invoice can be marked as paid."
@@ -5176,6 +5282,19 @@ msgstr "Hind ühiku kohta"
 msgid "Price per year"
 msgstr "HInd aasta kohta"
 
+#: src/issues/routes.ts
+msgid "Pricelist"
+msgstr "Hinnakiri"
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Pricing"
+msgstr "Hinnakujundus"
+
+#: src/marketplace/offerings/details/PublicOfferingPricingPlansContainer.tsx
+msgid "Pricing & setup"
+msgstr "Hinnakujundus ja seadistamine"
+
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Pricing tier"
 msgstr "Hinnakujunduse määramistasand"
@@ -5201,6 +5320,10 @@ msgstr "Privaatsuspoliitika"
 #: src/openstack/utils.ts
 msgid "Private clouds"
 msgstr "Privaatpilved"
+
+#: src/user/dashboard/UserWelcome.tsx
+msgid "Profile completion"
+msgstr "Profiili täitmine"
 
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
@@ -5541,6 +5664,15 @@ msgstr "Põhjus teadmata, võtke ühendust kasutajatoega."
 msgid "Recent additions"
 msgstr "Viimased täiendused"
 
+#: src/marketplace/landing/LandingPage.tsx
+msgid "Recent offerings"
+msgstr "Hiljutised pakkumised"
+
+#: src/marketplace/category/list/RecentlyAddedOfferings.tsx
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+msgid "Recently added offerings"
+msgstr "Hiljuti lisatud pakkumised"
+
 #: src/invoices/details/BillingRecordDetails.tsx
 msgid "Record no."
 msgstr "Kande number"
@@ -5557,6 +5689,10 @@ msgstr "Kirje number"
 #: src/invoices/list/BillingRecordsList.tsx
 msgid "Record period"
 msgstr "Kirje periood"
+
+#: src/rancher/cluster/WorkloadActions.tsx
+msgid "Redeploy"
+msgstr "Ümberpaigutamine"
 
 #: src/issues/list/IssuesShortList.tsx
 #: src/marketplace/offerings/details/OfferingDetails.tsx
@@ -5848,6 +5984,10 @@ msgstr "Nõutud"
 msgid "Resend"
 msgstr "Saada uuesti"
 
+#: src/marketplace/offerings/create/OptionalNumberField.tsx
+msgid "Reset value"
+msgstr "Lähtesta väärtus"
+
 #: src/digitalocean/DropletResizeDialog.tsx
 msgid "Resize droplet"
 msgstr "Muuda dropletide suurust"
@@ -6042,6 +6182,14 @@ msgstr "Säilitamise aeg päevades, kui 0 hoitakse resurssi igavesti"
 msgid "Retry"
 msgstr "Proovige uuesti"
 
+#: src/openstack/openstack-volume/actions/RetypeAction.tsx
+msgid "Retype"
+msgstr "Muuda tüüpi"
+
+#: src/openstack/openstack-volume/actions/RetypeDialog.tsx
+msgid "Retype OpenStack Volume"
+msgstr "Muuda OpenStack salvestusüksuse tüüp"
+
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/orders/OrderSteps.tsx
@@ -6225,9 +6373,21 @@ msgstr "Ajagraafik"
 msgid "Search"
 msgstr "Otsing"
 
+#: src/marketplace/offerings/service-providers/ServiceProviderOfferingsQueryFilter.tsx
+msgid "Search for offering by name"
+msgstr "Otsi pakkumist nime järgi"
+
 #: src/marketplace/category/filters/FilterBar.tsx
 msgid "Search for offerings..."
 msgstr "Otsi teenust"
+
+#: src/navigation/OfferingSearchField.tsx
+msgid "Search for offerings and providers"
+msgstr "Pakkumiste ja pakkujate otsimine"
+
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+msgid "Search offering..."
+msgstr "Otsi pakkumist..."
 
 #: src/openstack/openstack-security-groups/rule-editor/RulesList.tsx
 msgid "Security group does not contain any rule yet."
@@ -6264,6 +6424,14 @@ msgstr "Turvajuhtumi tüüp: {type}"
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
 msgid "See all"
 msgstr "Vaata kõiki"
+
+#: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
+msgid "See all offerings"
+msgstr "Vaata kõiki pakkumisi"
+
+#: src/marketplace/landing/FooterSection.tsx
+msgid "See offerings"
+msgstr "Vaata pakkumisi"
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "Seems there's nothing here"
@@ -6388,6 +6556,10 @@ msgstr "Vali päringu liik..."
 msgid "Select role"
 msgstr "Vali roll"
 
+#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
+msgid "Select root category"
+msgstr "Vali juurkategooria"
+
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsForm.tsx
@@ -6396,6 +6568,11 @@ msgstr "Vali turvagrupid..."
 
 #: src/openstack/analytics/VmOverviewFilter.tsx
 msgid "Select service provider"
+msgstr "Vali teenusepakkuja"
+
+#: src/customer/list/ServiceProviderFilter.tsx
+#: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
+msgid "Select service provider..."
 msgstr "Vali teenusepakkuja"
 
 #: src/digitalocean/DropletResizeDialog.tsx
@@ -6493,6 +6670,10 @@ msgstr "Tellimus"
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr "Tellimus – kliendi soov teenuse osalise või täieliku funktsionaalsuse, ligipääsu või komponentide muutmiseks, lisamiseks, liigutamiseks või eemaldamiseks"
 
+#: src/i18n/constants.ts
+msgid "Service catalog offerings"
+msgstr "Teenuste kataloogi pakkumised"
+
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 #: src/invoices/details/ResourceRow.tsx
@@ -6511,6 +6692,10 @@ msgstr "Tellimus – kliendi soov teenuse osalise või täieliku funktsionaalsus
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Service provider"
+msgstr "Teenusepakkuja"
+
+#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+msgid "Service provider:"
 msgstr "Teenusepakkuja"
 
 #: src/marketplace/service-providers/store/effects.ts
@@ -6534,9 +6719,25 @@ msgstr "Teenusepakkuja üksikasjad"
 msgid "Service provider has been registered."
 msgstr "Eksperdi pakkuja on registreeritud"
 
+#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
+msgid "Service provider has been updated."
+msgstr "Teenusepakkuja on uuendatud."
+
+#: src/marketplace/offerings/service-providers/ServiceProviderOfferingsGrid.tsx
+msgid "Service provider offerings"
+msgstr "Teenusepakkuja pakkumised"
+
 #: src/providers/support/FlowMapFilter.tsx
 msgid "Service provider type"
 msgstr "Vali teenusepakkuja liik..."
+
+#: src/marketplace/offerings/service-providers/ServiceProvidersGrid.tsx
+msgid "Service providers"
+msgstr "Teenusepakkujad"
+
+#: src/marketplace/offerings/create/ManagementSummary.tsx
+msgid "Service settings are invalid."
+msgstr "Teenuse sätted on kehtetud."
 
 #: src/resource/state/utils.ts
 msgid "Service settings of this resource are in state erred."
@@ -6565,9 +6766,17 @@ msgstr "Määra asukoht"
 msgid "Set rules"
 msgstr "Määra reeglid"
 
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Set to draft"
+msgstr "Määrake mustandiks"
+
 #: src/slurm/SlurmForm.tsx
 msgid "Set to true to activate privilege escalation"
 msgstr "Seadistage väärtuseks true, et aktiveerida privileegide eskalatsioon"
+
+#: src/marketplace/offerings/create/OptionalNumberField.tsx
+msgid "Set value"
+msgstr "Määrake väärtus"
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 msgid "Shared"
@@ -6684,6 +6893,11 @@ msgstr "Kasutaja üksikasjad"
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
 msgstr "Näita ainult jooksva arveldusega"
+
+#: src/marketplace/category/filters/FilteredBy.tsx
+#: src/marketplace/offerings/service-providers/FilteredBy.tsx
+msgid "Showing all"
+msgstr "Näidatakse kõiki"
 
 #: src/marketplace/offerings/service-providers/shared/grid/GridInfo.tsx
 #: src/table/TableInfo.tsx
@@ -7204,6 +7418,10 @@ msgstr "Teenustingimused"
 msgid "Text has been copied"
 msgstr "Tekst on kopeeritud"
 
+#: src/user/dashboard/UserWelcome.tsx
+msgid "Thanks for signing up. In order to help you make the most out of the platform, please complete your profile by pressing \"{link}\" and filling out the blank fields."
+msgstr "Täname registreerumise eest. Selleks, et platvormi võimalustest enim kasu saada, palun täitke oma profiil, vajutades „{link}” ja täitke tühjad väljad."
+
 #: src/invoices/store/effects.ts
 msgid "The invoice has been marked as paid."
 msgstr "Arve on märgitud tasuks."
@@ -7250,6 +7468,10 @@ msgstr "Kasutajaid ei ole."
 msgid "There are no categories in marketplace yet."
 msgstr "Turuplatsil puuduvad kategooriad"
 
+#: src/marketplace/offerings/actions/SelectCategoryTab.tsx
+msgid "There are no categories yet."
+msgstr "Kategooriaid pole veel loodud."
+
 #: src/dashboard/CategoryResources.tsx
 msgid "There are no charts yet."
 msgstr "Ostukorve pole veel"
@@ -7267,22 +7489,42 @@ msgstr "Sellele ressursile puuduvad sündmused."
 msgid "There are no invoices."
 msgstr "Arveid ei ole."
 
+#: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
+msgid "There are no offerings."
+msgstr "Pakkumisi ei ole."
+
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "There are no offerings available."
 msgstr "Pakkumisi ei ole saadaval."
+
+#: src/i18n/constants.ts
+msgid "There are no offerings in catalog yet."
+msgstr "Kataloogis pole veel pakkumisi."
 
 #: src/marketplace/common/OfferingGrid.tsx
 #: src/marketplace/landing/OfferingsGroup.tsx
 msgid "There are no offerings in marketplace yet."
 msgstr "Turuplatsil pole veel ühtegi pakkumist"
 
+#: src/marketplace/category/list/RecentlyAddedOfferings.tsx
+msgid "There are no offerings recently added in marketplace."
+msgstr "Turuplatsil puuduvad hiljuti lisatud pakkumised."
+
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 msgid "There are no offerings yet."
 msgstr "Pakkumisi veel ei ole."
 
+#: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
+msgid "There are no offerings yet for this category."
+msgstr "Selles kategoorias pole veel pakkumisi."
+
 #: src/navigation/workspace/OrganizationsPanel.tsx
 msgid "There are no organizations matching filter."
 msgstr "Filtrile vastavaid organisatsioone ei ole."
+
+#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
+msgid "There are no organizations yet."
+msgstr "Organisatsioone veel ei ole."
 
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "There are no other plans available."
@@ -7320,6 +7562,10 @@ msgstr "{verboseName} veel ei ole."
 msgid "There is no activity yet."
 msgstr "Tegevused veel puuduvad."
 
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
+msgid "There is no description"
+msgstr "Kirjeldust ei ole"
+
 #: src/core/validators.ts
 #: src/marketplace/cart/ShoppingCartItemUpdateForm.tsx
 #: src/marketplace/details/OfferingConfigurator.tsx
@@ -7337,9 +7583,25 @@ msgstr "See väli on kohustuslik"
 msgid "This name will be visible in accounting data."
 msgstr "See nimi on nähtav raamatupidamise andmetes."
 
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+msgid "This offering has been archived."
+msgstr "See pakkumine on arhiveeritud."
+
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+msgid "This offering has been paused and new resources cannot be added at the moment."
+msgstr "Pakkumine on peatatud ja uusi ressursse ei saa hetkel lisada."
+
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+msgid "This offering has not been activated by the operator yet."
+msgstr "Operaator ei ole seda pakkumist veel aktiveerinud."
+
 #: src/navigation/cookies/CookiesConsent.tsx
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr "See veebsait kasutab küpsiseid, et tagada teile parim kogemus meie veebisaidil."
+
+#: src/marketplace/offerings/images/OfferingImagesList.tsx
+msgid "Thumbnail"
+msgstr "Pisipilt"
 
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesShortList.tsx
@@ -7451,6 +7713,10 @@ msgstr "Proovi uuesti"
 msgid "Type"
 msgstr "Tüüp"
 
+#: src/marketplace/offerings/create/ManagementSummary.tsx
+msgid "Type is invalid."
+msgstr "Tüüp on kehtetu."
+
 #: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
 msgid "Type of incident"
 msgstr "Vahejuhtumi liik"
@@ -7458,6 +7724,10 @@ msgstr "Vahejuhtumi liik"
 #: src/user/support/effects.ts
 msgid "Unable to activate user."
 msgstr "Kasutajat pole võimalik aktiveerida"
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to add image."
+msgstr "Pilti ei saa lisada."
 
 #: src/marketplace/cart/store/effects.ts
 msgid "Unable to add item to shopping cart."
@@ -7822,6 +8092,10 @@ msgstr "Kutset pole võimalik uuesti saata"
 #: src/openstack/openstack-snapshot/RestoreSnapshotDialog.tsx
 msgid "Unable to restore volume snapshot."
 msgstr "Salvestusüksuse hetktõmmist ei saa taastada."
+
+#: src/openstack/openstack-volume/actions/RetypeDialog.tsx
+msgid "Unable to retype volume."
+msgstr "Salvestusüksuse tüüpi ei saa muuta."
 
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
 msgid "Unable to revoke permission."
@@ -8351,6 +8625,10 @@ msgstr "Väärtus ei tohiks olla väiksem kui {limit}"
 msgid "Value should not be negative."
 msgstr "Väärtus ei tphi olla negatiivne"
 
+#: src/marketplace/landing/DeploymentIntroduction.tsx
+msgid "Vendor Neutral"
+msgstr "Tarnija neutraalne"
+
 #: src/user/support/UserEmailChangeCallback.tsx
 msgid "Verifying email change"
 msgstr "e-posti aadressi muutmise kontrollimine "
@@ -8361,6 +8639,11 @@ msgstr "e-posti aadressi muutmise kontrollimine "
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Version"
 msgstr "Versioon"
+
+#: src/marketplace/common/OfferingCardButtonsOverlay.tsx
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
+msgid "View item"
+msgstr "Vaata üksust"
 
 #: src/openstack/utils.ts
 msgid "Virtual machines"
@@ -8385,7 +8668,7 @@ msgstr "Salvestusüksus on laiendatud."
 
 #: src/openstack/openstack-volume/actions/RetypeDialog.tsx
 msgid "Volume has been retyped."
-msgstr "Salvestusüksuse on uuesti loodud."
+msgstr "Salvestusüksuse tüüp on muudetud."
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
@@ -8427,6 +8710,14 @@ msgstr "Veebilehe URL"
 #: src/user/dashboard/UserWelcome.tsx
 msgid "Welcome, {user}!"
 msgstr "Tere tulemast {user}!"
+
+#: src/marketplace/landing/HeroSection.tsx
+msgid "Welcome to"
+msgstr "Tere tulemast"
+
+#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
+msgid "Welcome to marketplace"
+msgstr "Tere tulemast Turuplatsile"
 
 #: src/auth/AuthInit.tsx
 #: src/marketplace/offerings/service-providers/Description.tsx
@@ -8769,6 +9060,10 @@ msgstr "{category} ressursid"
 #: src/navigation/sidebar/marketplace-popup/CategoriesPanel.tsx
 msgid "{count} items"
 msgstr "{count} üksust"
+
+#: src/marketplace/landing/LandingPage.tsx
+msgid "{deployment} Marketplace"
+msgstr "{deployment} Turuplats"
 
 #: src/table/TablePagination.tsx
 msgid "{from}-{to} of {all} items"
