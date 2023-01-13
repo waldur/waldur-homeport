@@ -14,8 +14,12 @@ export function afterBootstrap() {
     ReactGA.initialize(ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID);
   }
   if (ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_DSN) {
+    const dsn = ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_DSN;
+    const sentryEnvironment =
+      ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_ENVIRONMENT || 'unknown';
     Sentry.init({
-      dsn: ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_DSN,
+      dsn: dsn,
+      environment: sentryEnvironment,
     });
   }
   initAuthToken();
