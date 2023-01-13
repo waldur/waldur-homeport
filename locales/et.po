@@ -39,7 +39,7 @@ msgstr "API URL aadress"
 msgid "API key"
 msgstr "API võti"
 
-#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+#: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
 msgid "API secret code:"
 msgstr "API salajane kood:"
 
@@ -51,7 +51,6 @@ msgstr "API token'i eluiga"
 msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
 msgstr "Minimaalne nõutud konfiguratsioon on 4 vCPU ja 4 GB RAM. "
 
-#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "A one-time fee applied on activation."
 msgstr "Aktiveerimise eest rakendatakse ühekordne tasu."
@@ -69,7 +68,6 @@ msgstr "Profiil on loodud."
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
-#: src/user/affiliations/OrganizationsList.tsx
 msgid "Abbreviation"
 msgstr "Lühend"
 
@@ -97,12 +95,10 @@ msgstr "Kinnitatud"
 
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/resource/ResourceAccessButton.tsx
 msgid "Access"
 msgstr "Ligipääs"
 
 #: src/marketplace/offerings/create/OverviewSummary.tsx
-#: src/marketplace/resources/details/ResourceAccessCard.tsx
 msgid "Access URL"
 msgstr "Juurdepääsu URL"
 
@@ -127,7 +123,6 @@ msgstr "Ligipääsetav kõigile klientidele"
 msgid "Account removal"
 msgstr "Konto eemaldamine"
 
-#: src/invoices/routes.ts
 #: src/invoices/utils.ts
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
@@ -137,8 +132,6 @@ msgid "Accounting"
 msgstr "Arveldus"
 
 #: src/customer/list/AccountingPeriodFilter.tsx
-#: src/customer/list/CustomerListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 msgid "Accounting period"
 msgstr "Arvelduse periood"
 
@@ -147,7 +140,6 @@ msgid "Accounting plans"
 msgstr "Arvelduse plaanid"
 
 #: src/invoices/details/BillingDetails.tsx
-#: src/invoices/routes.ts
 msgid "Accounting record"
 msgstr "Arvelduskirje"
 
@@ -155,7 +147,6 @@ msgstr "Arvelduskirje"
 msgid "Accounting records"
 msgstr "Arvelduskirjed"
 
-#: src/customer/list/CustomerListFilter.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 msgid "Accounting running"
 msgstr "Raamatupidamine töötab"
@@ -177,46 +168,81 @@ msgstr "Tegevus on rakendatud."
 
 #: src/azure/sql/DatabasesList.tsx
 #: src/booking/BookingsList.tsx
+#: src/customer/list/SupportCustomerList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payments/PaymentsList.tsx
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+#: src/customer/team/CustomerUsersList.tsx
+#: src/customer/team/OfferingPermissionsList.tsx
+#: src/invitations/GroupInvitationsList.tsx
+#: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/invoices/details/InvoiceItemActions.tsx
+#: src/invoices/list/BillingRecordsList.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/marketplace-flows/CustomerCreateRequestsList.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
+#: src/marketplace-flows/ResourceCreateRequestsList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourceActions.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 #: src/openstack/openstack-server-groups/ServerGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
+#: src/openstack/openstack-tenant/TenantPortsList.tsx
+#: src/openstack/openstack-tenant/TenantRoutersList.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/InvoiceActions.tsx
 #: src/paypal/PayPalInvoicesList.tsx
+#: src/project/ProjectsList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/project/team/ProjectUsersList.tsx
+#: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/node/ClusterNodesList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
+#: src/resource/support/SharedProviderResources.tsx
+#: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
+#: src/user/support/UserList.tsx
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
 msgid "Actions"
 msgstr "Toimingud"
 
@@ -313,6 +339,7 @@ msgid "Add item"
 msgstr "Lisa element"
 
 #: src/user/keys/KeyCreateButton.tsx
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Add key"
 msgstr "Lisa võti"
 
@@ -340,6 +367,7 @@ msgstr "Lisa uus projekt"
 msgid "Add notification"
 msgstr "Lisa teavitus"
 
+#: src/marketplace/offerings/actions/OfferingCreateButton.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 msgid "Add offering"
 msgstr "Lisa pakkumine"
@@ -348,7 +376,6 @@ msgstr "Lisa pakkumine"
 msgid "Add offerings"
 msgstr "Lisa pakkumisi"
 
-#: src/customer/list/OrganizationCreateButton.tsx
 #: src/user/dashboard/CustomerCreateButton.tsx
 msgid "Add organization"
 msgstr "Lisa organisatsioon"
@@ -367,8 +394,8 @@ msgstr "Lisa aadressi paar"
 msgid "Add payment"
 msgstr "Lisa makse"
 
-#: src/customer/payment-profiles/PaymentProfileCreateButton.tsx
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 msgid "Add payment profile"
 msgstr "Lisa makseprofiil"
 
@@ -376,6 +403,7 @@ msgstr "Lisa makseprofiil"
 msgid "Add plan"
 msgstr "Lisa plaan"
 
+#: src/customer/dashboard/CreateProjectAction.ts
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectCreateForm.tsx
 msgid "Add project"
@@ -388,7 +416,6 @@ msgstr "Lisa projekti liige"
 #: src/dashboard/marketplace.ts
 #: src/marketplace-flows/FlowCreateButton.tsx
 #: src/marketplace/resources/list/CreateResourceButton.tsx
-#: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
 msgid "Add resource"
 msgstr "Lisa resurss"
 
@@ -443,7 +470,6 @@ msgstr "Täiendavad andmed mida lisatakse üksuse eraldamisel."
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Täiendav salvestusruum hetktõmmiste jaoks."
 
-#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Additionally service provider can charge for usage of the following components"
 msgstr "Lisaks võib teenusepakkuja võtta tasu järgmiste komponentide kasutamise eest"
@@ -467,14 +493,13 @@ msgstr "Administraatori parool"
 msgid "Admin username"
 msgstr "Administraatori kasutajanimi"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ResourceGroup.tsx
 msgid "Affected resource"
 msgstr "Mõjutatud ressurss"
 
 #: src/customer/popover/CustomerUsersList.tsx
-#: src/user/routes.ts
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Affiliations"
@@ -492,7 +517,7 @@ msgstr "Nõustuge ToS-iga"
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
 msgid "Agreement number"
@@ -620,6 +645,7 @@ msgstr "Rakendus on loodud."
 
 #: src/rancher/cluster/tabs.ts
 #: src/rancher/template/CatalogTemplateContainer.tsx
+#: src/rancher/template/breadcrumbs.ts
 msgid "Application templates"
 msgstr "Rakenduse mallid"
 
@@ -676,7 +702,6 @@ msgstr "Arhiiv"
 
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 msgid "Archived"
 msgstr "Arhiveeritud"
 
@@ -708,7 +733,7 @@ msgstr "Kas olete kindel, et soovite pildi kustutada?"
 msgid "Are you sure you want to delete the payment?"
 msgstr "Kas olete kindel, et soovite makse kustutada?"
 
-#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 msgid "Are you sure you want to delete the payment profile?"
 msgstr "Kas olete kindel, et soovite makseprofiili kustutada?"
 
@@ -758,7 +783,7 @@ msgstr "Artikli kood"
 msgid "Ask a question"
 msgstr "Esita küsimus"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/AssigneeGroup.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Assigned to"
@@ -778,7 +803,6 @@ msgstr "Lisage OpenStack salvestusruum instantsile"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 msgid "Attached to"
 msgstr "Lisatud"
 
@@ -792,10 +816,8 @@ msgstr "Lisan"
 msgid "Attachments"
 msgstr "Lisandid"
 
-#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "Attributes"
 msgstr "Atribuudid"
 
@@ -807,20 +829,20 @@ msgstr "Atribuudid on vigased."
 msgid "Attributes filter"
 msgstr "Atribuutide filtrid"
 
-#: src/project/ProjectEventsTimeline.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
-#: src/support/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr "Auditi logi"
 
-#: src/customer/dashboard/CustomerActions.tsx
-#: src/customer/routes.ts
-#: src/project/ProjectActions.tsx
-#: src/project/routes.ts
-#: src/user/UserActions.tsx
-#: src/user/routes.ts
+#: src/customer/workspace/CustomerEventsList.tsx
+#: src/customer/workspace/utils.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/project/utils.ts
+#: src/support/SupportEventsContainer.tsx
+#: src/user/constants.ts
+#: src/user/dashboard/UserDashboard.tsx
+#: src/user/dashboard/UserEventsWrapper.tsx
 msgid "Audit logs"
 msgstr "Auditi logid"
 
@@ -829,7 +851,6 @@ msgid "Authenticate using Mobile ID"
 msgstr "Autentimine Mobile ID abil"
 
 #: src/auth/events.ts
-#: src/user/api-key/AuthenticationEvents.tsx
 msgid "Authentication events"
 msgstr "Autentimise sündmused"
 
@@ -841,7 +862,7 @@ msgstr "Autentimise žetoon"
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr "Autentimine Mobile ID abil on katkestatud või siis aegunud. Detailid:"
 
-#: src/notifications/NotificationList.tsx
+#: src/issues/notifications/BroadcastList.tsx
 msgid "Author"
 msgstr "Autor"
 
@@ -924,7 +945,7 @@ msgstr "Azure pakkuja"
 #: src/error/InvalidQuotaPage.tsx
 #: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
-#: src/notifications/NotificationFooter.tsx
+#: src/navigation/header/SiteHeader.tsx
 msgid "Back"
 msgstr "Tagasi"
 
@@ -953,8 +974,8 @@ msgid "Back to shopping"
 msgstr "Tagasi ostlema"
 
 #: src/marketplace/offerings/create/ManagementStep.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/SetBackendIdDialog.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
@@ -963,7 +984,6 @@ msgstr "Tagasi ostlema"
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportDetailsTable.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Backend ID"
 msgstr "Backendi ID"
 
@@ -1004,9 +1024,7 @@ msgstr "Saage meie portaali kliendiks. Pakkuge turuplatsilt IT-teenuseid ja hall
 msgid "Billed monthly"
 msgstr "Igakuine arveldamine"
 
-#: src/invoices/routes.ts
 #: src/invoices/utils.ts
-#: src/project/ProjectDashboard.tsx
 msgid "Billing"
 msgstr "Arved"
 
@@ -1030,7 +1048,8 @@ msgid "Billing type"
 msgstr "Arvelduse tüüp"
 
 #: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingPricingOld.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
 msgid "Book"
 msgstr "Broneeri"
 
@@ -1064,7 +1083,6 @@ msgid "Bookings"
 msgstr "Broneerimised"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 msgid "Bootable"
 msgstr "Käivitatav"
 
@@ -1079,7 +1097,6 @@ msgstr "Haru"
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
-#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Browse"
 msgstr "Sirvi"
 
@@ -1100,13 +1117,12 @@ msgstr "Tööaeg"
 msgid "By authenticating you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
 msgstr "Autentides nõustute <tos>Teenuse</tos> ja <pp>Privaatsuspoliitika</pp> tingimustega."
 
-#: src/user/api-key/TokenLifetimeField.tsx
+#: src/user/support/TokenLifetimeField.tsx
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr "Kui määrasite tähise eluea määramatuks, lubate kõigil, kellel on märk, imiteerida teie tegevust, kuni märk on muutunud."
 
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 msgid "CIDR"
 msgstr "CIDR"
 
@@ -1126,7 +1142,7 @@ msgstr "CVS"
 msgid "Calendar"
 msgstr "Kalender"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/CallerGroup.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Caller"
@@ -1141,8 +1157,8 @@ msgstr "Pöörduja"
 #: src/marketplace-flows/FlowCancelAction.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 #: src/modal/CloseDialogButton.tsx
-#: src/navigation/header/SearchToggle.tsx
 #: src/project/ProjectCreateForm.tsx
+#: src/user/keys/KeyCreateForm.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
 msgstr "Tühista"
@@ -1201,8 +1217,7 @@ msgstr "Kataloog on kustutatud."
 msgid "Catalogues"
 msgstr "Kataloogid"
 
-#: src/marketplace/category/utils.ts
-#: src/marketplace/offerings/service-providers/ServiceProviderPageBar.tsx
+#: src/marketplace/category/ShopCategories.tsx
 msgid "Categories"
 msgstr "Kategooriad"
 
@@ -1214,17 +1229,12 @@ msgstr "Kategooriad"
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/list/CategoryFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
-#: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/project/ProjectResourcesFilter.tsx
 #: src/project/ProjectResourcesList.tsx
 msgid "Category"
 msgstr "Kategooria"
@@ -1302,6 +1312,7 @@ msgstr "Kontrollnimekirja häälestamine"
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace-checklist/ComplianceChecklists.tsx
 #: src/user/UserPopover.tsx
+#: src/user/dashboard/UserDashboard.tsx
 msgid "Checklists"
 msgstr "Kontrollnimekirjad"
 
@@ -1321,18 +1332,19 @@ msgid "Client ID"
 msgstr "Kliendi ID"
 
 #: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/orders/OrganizationAutocomplete.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
-#: src/marketplace/resources/list/PublicResourcesFilter.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Client organization"
 msgstr "Kliendi organisatsioon"
 
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
@@ -1368,7 +1380,6 @@ msgstr "Cloud init mall"
 msgid "Cloud vCPU"
 msgstr "Pilve vCPU"
 
-#: src/rancher/cluster/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Cluster"
@@ -1387,6 +1398,7 @@ msgid "Cluster name"
 msgstr "Klastri nimi"
 
 #: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 msgid "Cluster roles"
 msgstr "Klastri rollid"
 
@@ -1451,16 +1463,11 @@ msgstr "Komponent #{index}"
 
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
-#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Component name"
 msgstr "Komponendi nimi"
 
-#: src/marketplace/offerings/details/PublicOfferingComponents.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Components"
 msgstr "Komponendid"
@@ -1491,7 +1498,7 @@ msgstr "Seadista"
 msgid "Confirm deletion?"
 msgstr "Kinnita kustutamine?"
 
-#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
@@ -1552,7 +1559,7 @@ msgstr "Kontakttelefon"
 msgid "Continue"
 msgstr "Jätka"
 
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 msgid "Contract sum"
 msgstr "Lepingu summa"
@@ -1560,8 +1567,6 @@ msgstr "Lepingu summa"
 #: src/core/CopyToClipboard.tsx
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
-#: src/table/ExportDropdown.tsx
-#: src/table/TableButtons.tsx
 #: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr "Kopeeri lõikelauale"
@@ -1582,7 +1587,9 @@ msgid "Could not create organization"
 msgstr "Ei saanud organisatsiooni luua"
 
 #: src/customer/create/CountryGroup.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/SelectCountryField.tsx
 msgid "Country"
 msgstr "Riik"
 
@@ -1591,11 +1598,11 @@ msgstr "Riik"
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
+#: src/issues/notifications/NotificationCreateButton.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
-#: src/marketplace/resources/details/ResourceIssuesCard.tsx
-#: src/notifications/NotificationCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -1655,7 +1662,6 @@ msgstr "Teate loomine"
 
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/customer/create/WizardForm.tsx
-#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
 msgid "Create organization"
 msgstr "Organisatsiooni loomine"
 
@@ -1670,6 +1676,7 @@ msgstr "Projekti loomine"
 
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/create/IssueQuickCreate.tsx
+#: src/issues/create/IssueRegistration.tsx
 msgid "Create request"
 msgstr "Päringu koostamine"
 
@@ -1700,7 +1707,7 @@ msgstr "Loo oma esimene projekt"
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
@@ -1709,11 +1716,10 @@ msgstr "Loo oma esimene projekt"
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
@@ -1725,8 +1731,6 @@ msgstr "Loo oma esimene projekt"
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/support/SupportDetailsTable.tsx
-#: src/user/affiliations/OrganizationsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Created"
@@ -1741,6 +1745,7 @@ msgstr "Loo uus makse kliendile {customer_name}."
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
+#: src/issues/notifications/BroadcastList.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/details/OfferingUsersTab.tsx
@@ -1751,12 +1756,8 @@ msgstr "Loo uus makse kliendile {customer_name}."
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
-#: src/notifications/NotificationList.tsx
-#: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -1771,7 +1772,6 @@ msgstr "Loodud"
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "Created by"
 msgstr "Loodud"
 
@@ -1804,7 +1804,6 @@ msgid "Creating snapshot schedule"
 msgstr "Loon tõmmiste ajakava"
 
 #: src/marketplace/offerings/actions/tabs.ts
-#: src/user/routes.ts
 msgid "Credentials"
 msgstr "Mandaadid"
 
@@ -1854,10 +1853,12 @@ msgstr "DNS-i nimeserverid"
 msgid "Daily available booking time range"
 msgstr "Igapäevane saadaval olev broneeringute ajavahemik"
 
-#: src/customer/routes.ts
-#: src/marketplace/resources/details/fetchData.tsx
-#: src/project/routes.ts
-#: src/user/routes.ts
+#: src/customer/dashboard/CustomerDashboard.tsx
+#: src/customer/workspace/utils.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/project/ProjectDashboard.tsx
+#: src/project/utils.ts
+#: src/user/constants.ts
 msgid "Dashboard"
 msgstr "Töölaud"
 
@@ -1896,7 +1897,6 @@ msgstr "Andmesalvesti"
 #: src/customer/payments/PaymentsList.tsx
 #: src/dashboard/chart.ts
 #: src/invoices/list/MarkAsPaidDialog.tsx
-#: src/issues/feedback/SupportFeedbackListFilter.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/paypal/PaymentsList.tsx
 #: src/support/SupportEventsListFilter.tsx
@@ -1960,10 +1960,9 @@ msgid "Default value"
 msgstr "Vaikeväärtus"
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
-#: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace/offerings/images/ImagesActions.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -2010,6 +2009,7 @@ msgid "Deployment made easy, for everyone"
 msgstr "Kasutusele võtmine on kõigile lihtne"
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/DescriptionGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
@@ -2026,18 +2026,14 @@ msgstr "Kasutusele võtmine on kõigile lihtne"
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/details/PageDescription.tsx
-#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
-#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/resources/details/ResourceIssuesCard.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -2046,7 +2042,6 @@ msgstr "Kasutusele võtmine on kõigile lihtne"
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
@@ -2109,8 +2104,8 @@ msgstr "Ühendan lahti"
 msgid "Detailed view"
 msgstr "Üksikasjalik vaade"
 
+#: src/customer/list/OrganizationDetailsButton.tsx
 #: src/customer/team/UserDetailsButton.tsx
-#: src/invoices/list/MonthOverview.tsx
 #: src/issues/create/CallerGroup.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -2118,16 +2113,18 @@ msgstr "Üksikasjalik vaade"
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
+#: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/team/UserDetailsButton.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
+#: src/rancher/cluster/users/UserDetailsButton.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
-#: src/slurm/tabs.ts
+#: src/slurm/DetailsAction.tsx
+#: src/user/UserDropdownMenu.tsx
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
-#: src/vmware/tabs.ts
 msgid "Details"
 msgstr "Lisainfo"
 
@@ -2157,7 +2154,6 @@ msgid "Disable gateway IP advertising via DHCP"
 msgstr "Lüüsi IP-reklaami keelamine DHCP kaudu"
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
-#: src/user/hooks/HooksList.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Disabled"
 msgstr "Keelatud"
@@ -2174,6 +2170,7 @@ msgstr "Ketas on loodud."
 msgid "Disk usage"
 msgstr "Ketta kasutus"
 
+#: src/vmware/breadcrumbs.ts
 #: src/vmware/tabs.ts
 msgid "Disks"
 msgstr "Kettad"
@@ -2182,11 +2179,8 @@ msgstr "Kettad"
 msgid "Display name"
 msgstr "Kuvatav nimi"
 
-#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectOrganizationDivisionField.tsx
-#: src/customer/list/SupportCustomerFilter.tsx
-#: src/user/affiliations/OrganizationsList.tsx
 msgid "Division"
 msgstr "Jaoskond"
 
@@ -2219,7 +2213,6 @@ msgstr "Dokumendid"
 msgid "Domain"
 msgstr "Domeen"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/marketplace.ts
 msgid "Domain name"
@@ -2252,7 +2245,6 @@ msgstr "Lae alla tellimuse PDF fail"
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
 msgstr "Mustand"
@@ -2285,11 +2277,10 @@ msgid "Each usage report must be connected with a billing plan to assure correct
 msgstr "Iga kasutusaruanne peab olema ühendatud arveldusplaaniga, et tagada raamatupidamisandmete õige arvutamine."
 
 #: src/customer/list/OrganizationEditButton.tsx
-#: src/customer/payment-profiles/PaymentProfileEditButton.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeButton.tsx
 #: src/customer/team/UserEditButton.tsx
-#: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditorButton.tsx
@@ -2309,7 +2300,6 @@ msgstr "Iga kasutusaruanne peab olema ühendatud arveldusplaaniga, et tagada raa
 #: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
-#: src/user/support/IdentityProviderIndicator.tsx
 #: src/vmware/actions/EditAction.tsx
 msgid "Edit"
 msgstr "Muuda"
@@ -2370,11 +2360,9 @@ msgstr "Egress"
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/EmailGroup.tsx
-#: src/notifications/RecipientsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
-#: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
 #: src/user/support/UserDetailsTable.tsx
@@ -2400,7 +2388,7 @@ msgstr "E-post on uuendatud."
 msgid "Email verification has been sent. Please check your inbox."
 msgstr "E-posti kinnitus on saadetud. Palun kontrollige oma postkasti."
 
-#: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 msgid "Enable"
 msgstr "Aktiveeri"
 
@@ -2416,14 +2404,13 @@ msgstr "Vaikimisi lubamine"
 msgid "Enable limit"
 msgstr "Luba limiit"
 
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 msgid "Enable profile after creation"
 msgstr "Luba profiil pärast loomist"
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/hooks/HookForm.tsx
-#: src/user/hooks/HooksList.tsx
 msgid "Enabled"
 msgstr "Lubatud"
 
@@ -2445,7 +2432,7 @@ msgstr "Ilmnes tühi komponent"
 msgid "End"
 msgstr "Lõpp"
 
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/project/ProjectCreateForm.tsx
@@ -2453,7 +2440,6 @@ msgstr "Lõpp"
 #: src/project/ProjectUpdateForm.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
 msgid "End date"
 msgstr "Lõppkuupäev"
 
@@ -2508,12 +2494,9 @@ msgid "Esimated price per month"
 msgstr "Hinnanguline kuutasu"
 
 #: src/customer/list/CustomerList.tsx
-#: src/invoices/list/EstimatedCost.tsx
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
-#: src/project/utils.ts
 msgid "Estimated cost"
 msgstr "Hinnangulised kulud"
 
@@ -2536,7 +2519,6 @@ msgstr "Etherneti tüüp"
 
 #: src/issues/feedback/SupportFeedback.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
-#: src/issues/feedback/SupportFeedbackListFilter.tsx
 msgid "Evaluation"
 msgstr "Hindamine"
 
@@ -2554,7 +2536,6 @@ msgstr "Sündmuse tüüp"
 msgid "Event types"
 msgstr "Sündmuste tüübid"
 
-#: src/marketplace/resources/details/fetchData.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
 msgstr "Sündmused"
@@ -2680,7 +2661,6 @@ msgid "External ID of the sponsor covering the costs"
 msgstr "Kulukoha väline ID"
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "External IP"
 msgstr "Väline IP"
@@ -2717,18 +2697,19 @@ msgstr "Rakenduse tagapõhjaga pole võimalik tegutseda"
 msgid "Featured offerings"
 msgstr "Esiletõstetud pakkumised"
 
-#: src/issues/routes.ts
+#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Features"
 msgstr "Omadused"
 
-#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Fee applied each time this plan is activated."
 msgstr "Tasu, mida rakendatakse iga kord, kui see plaan aktiveeritakse."
 
 #: src/issues/feedback/SupportFeedback.tsx
-#: src/issues/routes.ts
+#: src/issues/feedback/SupportFeedbackListContainer.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Feedback"
 msgstr "Tagasiside"
 
@@ -2759,10 +2740,7 @@ msgstr "Failid"
 #: src/issues/create/CallerGroup.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/issues/create/ProjectGroup.tsx
-#: src/marketplace/category/filters/FilterDropdownHeader.tsx
 #: src/marketplace/category/filters/MobileFilterActions.tsx
-#: src/support/EventFilterButton.tsx
-#: src/table/Table.tsx
 msgid "Filter"
 msgstr "Filtreeri"
 
@@ -2798,7 +2776,7 @@ msgid "Fixed IPs: {fixed_ips}"
 msgstr "Fikseeritud IP-d: {fixed_ips}"
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
-#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 msgid "Fixed price"
 msgstr "Fikseeritud hind"
 
@@ -2823,10 +2801,7 @@ msgstr "Tüübi nimi"
 msgid "Flavor name: {flavor_name}"
 msgstr "Tüübi nimi: {flavor_name}"
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-#: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
-#: src/openstack/openstack-tenant/tabs.ts
 msgid "Flavors"
 msgstr "Tüübid"
 
@@ -2850,11 +2825,12 @@ msgstr "Liikuv IP"
 msgid "Floating IP count"
 msgstr "Liikuvate IPde arv"
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/openstack-floating-ips/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Floating IPs"
 msgstr "Liikuvad IPd"
 
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/FlowMapViewContainer.tsx
 msgid "Flowmap"
 msgstr "Vooskeem"
@@ -2868,11 +2844,11 @@ msgid "For"
 msgstr "Selleks"
 
 #: src/freeipa/FreeIPAAccount.tsx
-#: src/user/routes.ts
+#: src/user/constants.ts
 msgid "FreeIPA account"
 msgstr "FreeIPA konto"
 
-#: src/slurm/details/AllocationAccessDetails.tsx
+#: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
 msgid "FreeIPA account needs to be set up."
 msgstr "FreeIPA konto vajab seadistamist."
 
@@ -2887,7 +2863,9 @@ msgstr "Täielik kirjeldus"
 
 #: src/invitations/actions/UserDetailsGroup.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Full name"
@@ -2959,7 +2937,6 @@ msgstr "Mine turuplatsile"
 msgid "Go to my profile"
 msgstr "Mine minu profiilile"
 
-#: src/auth/PermissionLayout.tsx
 #: src/invitations/GroupInvitationErrorMessage.tsx
 #: src/invitations/InvitationErrorMessage.tsx
 msgid "Go to profile"
@@ -2993,11 +2970,12 @@ msgstr "Anna luba"
 msgid "Group invitation has been cancelled."
 msgstr "Grupikutse on tühistatud."
 
-#: src/customer/routes.ts
+#: src/customer/team/CustomerTeam.tsx
 msgid "Group invitations"
 msgstr "Grupi kutsed"
 
-#: src/invoices/routes.ts
+#: src/invoices/growth/GrowthContainer.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Growth"
 msgstr "Kasv"
 
@@ -3014,6 +2992,7 @@ msgstr "Garanteeritud salvestusüksuse tõmmise säilitamise aeg. Kui null - hoi
 msgid "Guest OS"
 msgstr "Külalisoperatsioonisüsteem"
 
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/HeatMapContainer.tsx
 msgid "Heatmap"
 msgstr "Kuumkaart"
@@ -3100,7 +3079,6 @@ msgstr "ID kood"
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/TenantPortsList.tsx
-#: src/user/api-key/AuthenticationEvents.tsx
 msgid "IP address"
 msgstr "IP aadress"
 
@@ -3162,9 +3140,7 @@ msgstr "Pildi nimi"
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/offerings/details/PageImages.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
-#: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 msgid "Images"
 msgstr "Pilt"
@@ -3178,6 +3154,7 @@ msgstr "Impordi"
 msgid "Import YAML"
 msgstr "Impordi YAML"
 
+#: src/marketplace/offerings/actions/OfferingImportButton.tsx
 #: src/marketplace/offerings/actions/OfferingImportDialog.tsx
 msgid "Import offering"
 msgstr "Impordi pakkumine"
@@ -3287,13 +3264,11 @@ msgid "Internal"
 msgstr "Sisemine "
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Internal IP"
 msgstr "Sisemine IP"
 
 #: src/openstack/openstack-instance/tabs.ts
-#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 msgid "Internal IPs"
 msgstr "Sisemised IP-d"
 
@@ -3383,9 +3358,8 @@ msgstr "Kutse link"
 msgid "Invitation rejection"
 msgstr "Kutse tagasilükkamine"
 
-#: src/customer/routes.ts
-#: src/invitations/InvitationsList.tsx
-#: src/project/routes.ts
+#: src/customer/team/CustomerTeam.tsx
+#: src/project/team/ProjectTeam.tsx
 msgid "Invitations"
 msgstr "Kutsed"
 
@@ -3401,7 +3375,6 @@ msgstr "Kutsu kasutaja"
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
 #: src/invoices/details/BillingDetails.tsx
-#: src/invoices/routes.ts
 msgid "Invoice"
 msgstr "Arve"
 
@@ -3469,7 +3442,7 @@ msgstr "Arvete nimekiri"
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
-#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Is active"
 msgstr "On aktiivne"
@@ -3498,13 +3471,12 @@ msgstr "Juhtumi link"
 msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr "{Caller_full_name} on loonud juhtumi {issue_key}."
 
-#: src/customer/dashboard/CustomerActions.tsx
-#: src/customer/routes.ts
-#: src/issues/routes.ts
-#: src/marketplace/resources/details/ResourceTabs.tsx
-#: src/marketplace/resources/details/fetchData.tsx
-#: src/project/ProjectActions.tsx
-#: src/project/routes.ts
+#: src/customer/workspace/CustomerIssuesList.tsx
+#: src/customer/workspace/utils.ts
+#: src/issues/SupportIssues.tsx
+#: src/marketplace/resources/ResourceTabs.tsx
+#: src/project/ProjectIssuesList.tsx
+#: src/project/utils.ts
 #: src/resource/tabs/constants.ts
 msgid "Issues"
 msgstr "Juhtumid"
@@ -3570,7 +3542,7 @@ msgstr "Hoitud kuni"
 msgid "Key"
 msgstr "Võti"
 
-#: src/user/keys/KeyCreateDialog.tsx
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Key name"
 msgstr "Võtme nimi"
 
@@ -3631,7 +3603,7 @@ msgstr "Jätke tühjaks, kui soovite et admin kasutajanimi luuakse automaatselt.
 msgid "Legal address"
 msgstr "Juriidiline aadress"
 
-#: src/user/api-key/TokenLifetimeField.tsx
+#: src/user/support/TokenLifetimeField.tsx
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Töötamise aeg resetitakse vormi salvestamisel."
 
@@ -3651,8 +3623,6 @@ msgid "Limit period"
 msgstr "Limiidi periood"
 
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Limits"
@@ -3662,15 +3632,12 @@ msgstr "Limiidid"
 msgid "Limits are invalid."
 msgstr "Limiidid on vigased"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Link"
 msgstr "Viide"
 
 #: src/customer/list/TotalCostComponent.tsx
-#: src/marketplace/resources/details/InfiniteList.tsx
-#: src/marketplace/resources/details/ResourcesList.tsx
-#: src/project/ProjectEventsTimeline.tsx
 msgid "Loading"
 msgstr "Laadimine..."
 
@@ -3700,7 +3667,8 @@ msgid "Location of {offeringName} offering"
 msgstr "{offeringName} pakkumise asukoht"
 
 #: src/navigation/header/LogoutLink.tsx
-#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/header/SiteHeader.tsx
+#: src/user/UserDropdownMenu.tsx
 msgid "Log out"
 msgstr "Logi välja"
 
@@ -3712,7 +3680,6 @@ msgstr "Kasutaja sisselogimine"
 #: src/auth/SigninButton.tsx
 #: src/auth/SigninForm.tsx
 #: src/auth/saml2/AuthSaml2Dialog.tsx
-#: src/navigation/sidebar/UnifiedSidebar.tsx
 msgid "Login"
 msgstr "Logi sisse"
 
@@ -3721,7 +3688,7 @@ msgstr "Logi sisse"
 msgid "Login failed"
 msgstr "Tõrge sisselogimisel"
 
-#: src/slurm/details/AllocationAccessDetails.tsx
+#: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
 msgid "Login with"
 msgstr "Logi sisse"
 
@@ -3765,14 +3732,14 @@ msgstr "MAC-aadress (valikuline)"
 msgid "MTU"
 msgstr "MTU"
 
-#: src/customer/dashboard/CustomerActions.tsx
-#: src/project/ProjectActions.tsx
-#: src/user/UserActions.tsx
+#: src/customer/workspace/utils.ts
+#: src/user/UserManage.tsx
+#: src/user/constants.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Manage"
 msgstr "Haldus"
 
-#: src/openstack/openstack-instance/InstanceNetworkButton.tsx
+#: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
 msgid "Manage networks"
 msgstr "Võrkude haldamine"
 
@@ -3788,7 +3755,6 @@ msgstr "Hallatavad projektid"
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/PageManagement.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
-#: src/navigation/sidebar/ManagementMenu.tsx
 msgid "Management"
 msgstr "Haldus"
 
@@ -3800,8 +3766,10 @@ msgstr "Märgi makstuks"
 msgid "Mark invoice as paid"
 msgstr "Märgi arve tasuks"
 
+#: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
-#: src/marketplace/routes.ts
+#: src/marketplace/sidebar.ts
+#: src/user/dashboard/UserDashboard.tsx
 msgid "Marketplace"
 msgstr "Turuplats"
 
@@ -3879,7 +3847,6 @@ msgstr "Mõõdetud ühik"
 msgid "Member"
 msgstr "Liige"
 
-#: src/marketplace/resources/details/MonitoringCharts.tsx
 #: src/rancher/cluster/hpas/utils.ts
 msgid "Memory"
 msgstr "Mälu"
@@ -3894,8 +3861,8 @@ msgstr "Mälu suurus GiB"
 
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
-#: src/notifications/NotificationForm.tsx
-#: src/user/api-key/AuthenticationEvents.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/NotificationExpandableRow.tsx
 msgid "Message"
 msgstr "Teade"
 
@@ -3955,16 +3922,22 @@ msgstr "Peab olema vähemalt {min}"
 msgid "Must be at most {max}"
 msgstr "Peab olema kõige rohkem {max}"
 
-#: src/marketplace/routes.ts
+#: src/marketplace/offerings/MyOfferingsListContainer.tsx
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/images/ImagesContainer.tsx
+#: src/marketplace/sidebar.ts
 msgid "My offerings"
 msgstr "Minu pakkumised"
 
+#: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsContainer.tsx
-#: src/marketplace/routes.ts
+#: src/marketplace/sidebar.ts
 msgid "My orders"
 msgstr "Minu tellimused"
 
 #: src/marketplace/resources/list/CustomerResourcesContainer.tsx
+#: src/marketplace/sidebar.ts
 msgid "My resources"
 msgstr "MInu ressursid"
 
@@ -3984,7 +3957,7 @@ msgstr "Minu teenused"
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
@@ -4006,22 +3979,17 @@ msgstr "Minu teenused"
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/OfferingUsersTab.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemLimits.tsx
-#: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -4033,17 +4001,11 @@ msgstr "Minu teenused"
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
-#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
-#: src/openstack/openstack-tenant/TenantFlavorsList.tsx
-#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
-#: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
@@ -4067,7 +4029,6 @@ msgstr "Minu teenused"
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/OfferingConfigurationForm.tsx
 #: src/support/SupportDetailsTable.tsx
-#: src/user/affiliations/ProjectsList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -4143,7 +4104,6 @@ msgid "Negative"
 msgstr "Negatiivne"
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
 #: src/vmware/actions/CreatePortDialog.tsx
@@ -4154,6 +4114,7 @@ msgstr "Võrk"
 msgid "Network MTU has been updated."
 msgstr "Võrgu MTU on uuendatud."
 
+#: src/vmware/breadcrumbs.ts
 #: src/vmware/tabs.ts
 msgid "Network adapters"
 msgstr "Võrguseadmed"
@@ -4162,10 +4123,11 @@ msgstr "Võrguseadmed"
 msgid "Network name"
 msgstr "Võrgu nimi"
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
+#: src/openstack/openstack-network/breadcrumbs.ts
+#: src/openstack/openstack-subnet/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
@@ -4185,7 +4147,6 @@ msgstr "Uus limiit"
 
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "New plan"
 msgstr "Uus plaan"
 
@@ -4197,6 +4158,7 @@ msgstr "Uus suurus"
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
+#: src/table/TablePagination.tsx
 msgid "Next"
 msgstr "Edasi"
 
@@ -4210,19 +4172,16 @@ msgstr "Järgmine päästik"
 
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/issues/FeaturesList.tsx
+#: src/issues/workspace/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/category/filters/FilteredBy.tsx
 #: src/marketplace/offerings/attributes/utils.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
-#: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "No"
 msgstr "Ei"
 
@@ -4246,6 +4205,7 @@ msgstr "Arve andmed puuduvad."
 msgid "No items to display"
 msgstr "Kuvatavaid üksusi pole"
 
+#: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 msgid "No offerings"
 msgstr "Pakkumisi pole"
@@ -4310,8 +4270,8 @@ msgstr "Teade on värskendatud."
 msgid "Notification method"
 msgstr "Teate edastamise viis"
 
+#: src/user/constants.ts
 #: src/user/hooks/HooksList.tsx
-#: src/user/routes.ts
 msgid "Notifications"
 msgstr "Teavitused"
 
@@ -4346,24 +4306,16 @@ msgstr "Objekti ei leitud"
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/actions/tabs.ts
+#: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
-#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
+#: src/marketplace/resources/list/OfferingFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
-#: src/marketplace/resources/list/PublicResourcesFilter.tsx
-#: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/support/SupportDetailsTable.tsx
 #: src/user/UserOfferingList.tsx
@@ -4430,8 +4382,7 @@ msgid "Offering logo"
 msgstr "Pakun logo"
 
 #: src/invoices/list/InvoicesStatsList.tsx
-#: src/marketplace/resources/details/OfferingDetailsField.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 msgid "Offering name"
 msgstr "Pakkumise nimi"
 
@@ -4439,7 +4390,7 @@ msgstr "Pakkumise nimi"
 msgid "Offering order items synchronization has been scheduled."
 msgstr "Pakkumise tellimuse üksuste sünkroonimine on ajastatud."
 
-#: src/customer/routes.ts
+#: src/customer/team/CustomerTeam.tsx
 msgid "Offering permissions"
 msgstr "Pakkumise õigused"
 
@@ -4456,14 +4407,13 @@ msgstr "Pakkumise tüüp"
 msgid "Offering usage synchronization has been scheduled."
 msgstr "Pakkumise kasutuse sünkroonimine on ajastatud."
 
-#: src/issues/routes.ts
+#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/support/SupportOfferingsContainer.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
-#: src/notifications/RecipientsList.tsx
 msgid "Offerings"
 msgstr "Pakkumised"
 
@@ -4479,11 +4429,11 @@ msgstr "Üks kord"
 msgid "One-time on plan switch"
 msgstr "Ühekordne plaanivahetus"
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 msgid "One time"
 msgstr "Üks kord"
 
-#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 msgid "One time on plan switch"
 msgstr "Üks kord plaani vahetamisel"
 
@@ -4547,6 +4497,7 @@ msgid "Order Summary"
 msgstr "Tellimuse kokkuvõte"
 
 #: src/marketplace/orders/OrderDetails.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 msgid "Order details"
 msgstr "Tellimuse üksikasjad"
 
@@ -4580,8 +4531,7 @@ msgstr "Tellimuse objekti  tühistamine on planeeritud."
 
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/resources/details/ResourceTabs.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/marketplace/resources/ResourceTabs.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
 msgid "Order items"
@@ -4592,9 +4542,10 @@ msgstr "Tellimused"
 msgid "Order summary"
 msgstr "Tellimuse kokkuvõte"
 
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/SupportOrdersContainer.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/routes.ts
 msgid "Orders"
 msgstr "Tellimused"
 
@@ -4606,7 +4557,7 @@ msgstr "Tellimused"
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
@@ -4614,29 +4565,15 @@ msgstr "Tellimused"
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-flows/FlowExpandableRow.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/details/CustomerCreateGroup.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/tabs.ts
-#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
-#: src/navigation/sidebar/ManagementMenu.tsx
-#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
-#: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/SelectAffiliationDialog.tsx
 #: src/user/UserPermissionRequestsList.tsx
-#: src/user/affiliations/OrganizationsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
-#: src/user/affiliations/ProjectsListFilter.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
@@ -4661,6 +4598,7 @@ msgid "Organization creation requests"
 msgstr "Organisatsiooni loomise taotlused"
 
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetailsDialog.tsx
 msgid "Organization details"
 msgstr "Organisatsiooni andmed"
 
@@ -4694,10 +4632,11 @@ msgstr "Organisatsiooni registreerimise kood"
 msgid "Organization removal"
 msgstr "Organisatsiooni kustutamine"
 
-#: src/issues/routes.ts
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Organization requests"
 msgstr "Organisatsiooni taotlused"
 
+#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/support/UserList.tsx
 msgid "Organization roles"
@@ -4733,20 +4672,14 @@ msgid "Organization {customer_name} has been deleted."
 msgstr "Organisatsioon {customer_name} on kustutatud."
 
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationUpdateContainer.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/issues/routes.ts
+#: src/customer/list/SupportCustomersContainer.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
-#: src/marketplace/routes.ts
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
-#: src/notifications/RecipientsList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
-#: src/user/affiliations/OrganizationsList.tsx
-#: src/user/dashboard/CustomerPermissions.tsx
-#: src/user/dashboard/UserDashboard.tsx
-#: src/user/routes.ts
-#: src/user/support/UserDetailsView.tsx
 msgid "Organizations"
 msgstr "Asutused"
 
@@ -4774,6 +4707,7 @@ msgid "Owned organizations"
 msgstr "Omanduses olevad organisatsioonid"
 
 #: src/customer/team/CustomerUsersList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
 msgid "Owner"
 msgstr "Omanik"
 
@@ -4824,7 +4758,6 @@ msgstr "Peata ajutiselt pakkumine"
 
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 msgid "Paused"
 msgstr "Ajutiselt peatatud"
 
@@ -4886,7 +4819,7 @@ msgstr "Makseprofiil on eemaldatud."
 msgid "Payment profile has been updated."
 msgstr "Makseprofiili on uuendatud."
 
-#: src/customer/routes.ts
+#: src/customer/payment-profiles/PaymentProfilesPanel.tsx
 msgid "Payment profiles"
 msgstr "Makseprofiilid"
 
@@ -4951,7 +4884,6 @@ msgid "Performed by"
 msgstr "Avaldaja"
 
 #: src/booking/BookingCheckoutSummary.tsx
-#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Period"
 msgstr "Periood"
@@ -4993,11 +4925,12 @@ msgid "Permission request has been rejected."
 msgstr "Õiguste taotlus on tagasi lükatud."
 
 #: src/user/UserPermissionRequestsListContainer.tsx
-#: src/user/routes.ts
+#: src/user/constants.ts
 msgid "Permission requests"
 msgstr "Lubade taotlused"
 
-#: src/project/routes.ts
+#: src/customer/team/CustomerTeam.tsx
+#: src/project/team/ProjectTeam.tsx
 msgid "Permissions log"
 msgstr "Lubade logi"
 
@@ -5029,8 +4962,7 @@ msgstr "Telefoninumbrid"
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/details/PlanDetailsField.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
@@ -5038,8 +4970,6 @@ msgstr "Telefoninumbrid"
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
-#: src/project/ProjectOrderItemsList.tsx
 msgid "Plan"
 msgstr "Plaan"
 
@@ -5048,6 +4978,7 @@ msgid "Plan #{index}"
 msgstr "Plaani #{index}"
 
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageContainer.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 msgid "Plan capacity"
 msgstr "Plaani mahutavus"
@@ -5127,7 +5058,7 @@ msgstr "Palun sisestage salvestusüksuse suurus, et näha hinnaprognoosi."
 msgid "Please give us a moment to validate your invitation."
 msgstr "Palun anna meile hetk kutse kinnitamiseks."
 
-#: src/user/api-key/TokenLifetimeField.tsx
+#: src/user/support/TokenLifetimeField.tsx
 msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
 msgstr "Palun veenduge, et teate, mida teete, ja määrake 10 minutiks, kui te pole kindel."
 
@@ -5213,6 +5144,7 @@ msgstr "Pakkumise eelvaade"
 
 #: src/customer/create/WizardForm.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/PrevPage.tsx
+#: src/table/TablePagination.tsx
 msgid "Previous"
 msgstr "Eelmine"
 
@@ -5273,7 +5205,6 @@ msgstr "Hind kuus"
 
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
-#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Price per unit"
 msgstr "Hind ühiku kohta"
@@ -5282,7 +5213,8 @@ msgstr "Hind ühiku kohta"
 msgid "Price per year"
 msgstr "HInd aasta kohta"
 
-#: src/issues/routes.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/marketplace/offerings/PriceListContainer.tsx
 msgid "Pricelist"
 msgstr "Hinnakiri"
 
@@ -5307,12 +5239,11 @@ msgstr "Prindi arve"
 msgid "Print record"
 msgstr "Prindi kirje"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/PriorityGroup.tsx
 msgid "Priority"
 msgstr "Prioriteet"
 
-#: src/about.tsx
 #: src/navigation/FooterLinks.tsx
 msgid "Privacy policy"
 msgstr "Privaatsuspoliitika"
@@ -5332,7 +5263,7 @@ msgstr "Profiili täitmine"
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/ProjectGroup.tsx
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
@@ -5345,16 +5276,10 @@ msgstr "Profiili täitmine"
 #: src/marketplace/details/ProjectCreateGroup.tsx
 #: src/marketplace/details/ProjectField.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
-#: src/navigation/sidebar/ManagementMenu.tsx
-#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
-#: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -5375,7 +5300,8 @@ msgstr "Projekti ei saanud luua"
 msgid "Project could not be updated."
 msgstr "Projekti ei saanud muuta"
 
-#: src/customer/routes.ts
+#: src/customer/workspace/utils.ts
+#: src/marketplace-flows/ProjectCreateRequestsList.tsx
 msgid "Project creation requests"
 msgstr "Projekti loomise taotlused"
 
@@ -5437,8 +5363,10 @@ msgstr "Projekti omanik"
 msgid "Project removal"
 msgstr "Projekti eemaldamine"
 
+#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/user/support/UserList.tsx
 msgid "Project roles"
 msgstr "Projekti rollid"
@@ -5454,8 +5382,7 @@ msgstr "Projekti uuendamise taotlused"
 
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
-#: src/marketplace-remote/routes.ts
-#: src/navigation/header/confirmation-drawer/PendingProjectUpdates.tsx
+#: src/marketplace/sidebar.ts
 msgid "Project updates"
 msgstr "Projekti uuendused"
 
@@ -5483,17 +5410,12 @@ msgstr "Projekt {project_link} on muudetud."
 msgid "Project {project_name} has been deleted."
 msgstr "Projekt {project_name} on kustutatud."
 
-#: src/customer/routes.ts
-#: src/issues/routes.ts
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/customer/workspace/utils.ts
+#: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
-#: src/user/affiliations/OrganizationsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
-#: src/user/dashboard/ProjectPermissions.tsx
-#: src/user/dashboard/UserDashboard.tsx
-#: src/user/routes.ts
-#: src/user/support/UserDetailsView.tsx
 msgid "Projects"
 msgstr "Projektid"
 
@@ -5509,7 +5431,6 @@ msgstr "Projektide nimekiri"
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/navigation/sidebar/ManagementMenu.tsx
 #: src/providers/support/MapInfoPanel.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
@@ -5546,7 +5467,7 @@ msgstr "Tekita uus resurss"
 msgid "Public SSH keys will be injected into services that allow key-based access."
 msgstr "Avalikud SSH võtmed lisatakse teenustesse, mis võimaldavad võtmepõhist juurdepääsu."
 
-#: src/user/keys/KeyCreateDialog.tsx
+#: src/user/keys/KeyCreateForm.tsx
 #: src/user/keys/KeysListExpandableRow.tsx
 msgid "Public key"
 msgstr "Avalik võti"
@@ -5578,7 +5499,6 @@ msgstr "Avalikud teenused"
 msgid "Publish as Google Calendar"
 msgstr "Avalda Google'i kalendrina"
 
-#: src/UserAgreementComponent.tsx
 #: src/marketplace/referral/ReferralsList.tsx
 msgid "Published"
 msgstr "Avaldatud"
@@ -5601,7 +5521,8 @@ msgstr "Tõmban kvoote"
 
 #: src/marketplace/cart/ForwardButton.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingPricingOld.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
 msgid "Purchase"
 msgstr "Ost"
 
@@ -5633,10 +5554,10 @@ msgid "Quotas"
 msgstr "Kvoodid"
 
 #: src/digitalocean/digitalocean-droplet-config.ts
-#: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
+#: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "RAM"
 msgstr "RAM"
 
@@ -5695,16 +5616,17 @@ msgid "Redeploy"
 msgstr "Ümberpaigutamine"
 
 #: src/issues/list/IssuesShortList.tsx
+#: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/orders/OrderDetails.tsx
-#: src/marketplace/resources/details/RefreshButton.tsx
+#: src/marketplace/resources/actions/ResourceActions.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/resource/ResourceRefreshButton.tsx
-#: src/table/TableDropdowns.tsx
+#: src/table/TableRefreshButton.tsx
 msgid "Refresh"
 msgstr "Värskenda"
 
-#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+#: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
 #: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
 msgid "Regenerate"
 msgstr "Genereeri uuesti"
@@ -5718,11 +5640,11 @@ msgstr "Piirkond"
 msgid "Region name"
 msgstr "Piirkonna nimi"
 
-#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
 msgid "Register as service provider"
 msgstr "Registreeri ennast teenusepakkujaks"
 
-#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
 msgid "Registered at:"
 msgstr "Registreeritud"
 
@@ -5735,6 +5657,7 @@ msgid "Registration code"
 msgstr "Registreeringu kood"
 
 #: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserEditForm.tsx
 msgid "Registration method"
 msgstr "Registreeringu meetod"
 
@@ -5775,7 +5698,6 @@ msgid "Release floating IPs"
 msgstr "Vabasta liikuvad IPd"
 
 #: src/ErrorMessage.tsx
-#: src/core/LoadingErred.tsx
 #: src/dashboard/CategoryResourcesList.tsx
 msgid "Reload"
 msgstr "Taaslaadi"
@@ -5793,7 +5715,8 @@ msgstr "Allesjäänud"
 msgid "Remaining amount"
 msgstr "Allesjäänud maht"
 
-#: src/user/routes.ts
+#: src/user/UserOfferingListContainer.tsx
+#: src/user/constants.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Remote accounts"
 msgstr "Kaugkontod"
@@ -5875,7 +5798,7 @@ msgstr "Minu poolt raporteeritud"
 msgid "Reported value is reused every month until changed."
 msgstr "Raporteeritud väärtust kasutatakse igal kuul, kuni selle muutmiseni."
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Reporter"
@@ -5948,7 +5871,7 @@ msgstr "Päringu eemaldamine"
 msgid "Request title"
 msgstr "Päringu nimi"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueCreateForm.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/TypeGroup.tsx
@@ -5992,7 +5915,7 @@ msgstr "Lähtesta väärtus"
 msgid "Resize droplet"
 msgstr "Muuda dropletide suurust"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 msgid "Resolution"
 msgstr "Resolutsioon"
 
@@ -6004,8 +5927,7 @@ msgstr "Resolutsioon"
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 msgid "Resource"
 msgstr "Ressurss"
 
@@ -6026,7 +5948,8 @@ msgstr "Ressursside häälestamine"
 msgid "Resource configuration is invalid. Please fix errors in form."
 msgstr "Ressurssi seadistus on vigane. Palun paranda vead vormis."
 
-#: src/customer/routes.ts
+#: src/customer/workspace/utils.ts
+#: src/marketplace-flows/ResourceCreateRequestsList.tsx
 msgid "Resource creation requests"
 msgstr "Ressursi loomise taotlused"
 
@@ -6067,7 +5990,7 @@ msgstr "Ressursi importimist on alustatud"
 
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 msgid "Resource link"
 msgstr "Ressursi viide"
 
@@ -6101,19 +6024,26 @@ msgstr "Ressursi {resourceName} kasutus"
 msgid "Resource usage for {resource}"
 msgstr "Ressursi {resource} kasutus"
 
+#: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/routes.ts
-#: src/navigation/sidebar/ResourcesMenu.tsx
+#: src/marketplace/resources/list/SupportResourcesContainer.tsx
+#: src/marketplace/sidebar.ts
+#: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
+#: src/project/ProjectWorkspace.tsx
+#: src/rancher/template/CatalogTemplateContainer.tsx
+#: src/rancher/template/breadcrumbs.ts
+#: src/resource/breadcrumbs/ResourceBreadcrumbsRegistry.ts
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
-#: src/user/affiliations/ProjectsList.tsx
-#: src/user/routes.ts
+#: src/support/SupportDetailsContainer.tsx
+#: src/user/constants.ts
 msgid "Resources"
 msgstr "Ressursid"
 
@@ -6125,7 +6055,8 @@ msgstr "Ressursside import nurjus."
 msgid "Resources represent the services you are using."
 msgstr "Teenused mis on praegu kasutuses."
 
-#: src/resource/support/routes.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "Resources usage"
 msgstr "Ressursi kasutus"
 
@@ -6221,9 +6152,7 @@ msgstr "Arvustuse aeg"
 msgid "Reviewed by"
 msgstr "Arvustanud"
 
-#: src/customer/routes.ts
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
-#: src/marketplace/offerings/details/PublicOfferingReviews.tsx
+#: src/customer/team/CustomerTeam.tsx
 msgid "Reviews"
 msgstr "Arvustused"
 
@@ -6240,9 +6169,6 @@ msgstr "Tühista"
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
-#: src/user/affiliations/OrganizationsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
-#: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Role"
@@ -6261,8 +6187,8 @@ msgstr "Roll projekti juures"
 msgid "Role management events"
 msgstr "Rollide halduse sündmused"
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/openstack/router-breadcrumbs.ts
 msgid "Routers"
 msgstr "Ruuterid"
 
@@ -6300,7 +6226,6 @@ msgstr "SQL serveri nimi"
 msgid "SSH Keys"
 msgstr "SSH võtmed"
 
-#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "SSH key"
 msgstr "SSH võti"
@@ -6322,7 +6247,7 @@ msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr "SSH võti {ssh_key_name} on kustutatud kasutajale {user_link}"
 
 #: src/user/keys/KeysList.tsx
-#: src/user/routes.ts
+#: src/user/keys/KeysListContainer.tsx
 msgid "SSH keys"
 msgstr "SSH võtmed"
 
@@ -6333,6 +6258,7 @@ msgstr "SSH võtmed"
 msgid "SSH public key"
 msgstr "SSH avalik võti"
 
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/SankeyDiagramContainer.tsx
 msgid "Sankey diagram"
 msgstr "Sankey diagramm"
@@ -6342,7 +6268,7 @@ msgstr "Sankey diagramm"
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
-#: src/issues/FeaturesList.tsx
+#: src/issues/workspace/FeaturesList.tsx
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
@@ -6367,8 +6293,6 @@ msgstr "Ajagraafik"
 
 #: src/issues/create/SearchButton.tsx
 #: src/navigation/header/MainSearch.tsx
-#: src/navigation/header/SearchFilters.tsx
-#: src/navigation/header/SearchToggle.tsx
 #: src/table/TableQuery.tsx
 msgid "Search"
 msgstr "Otsing"
@@ -6378,6 +6302,7 @@ msgid "Search for offering by name"
 msgstr "Otsi pakkumist nime järgi"
 
 #: src/marketplace/category/filters/FilterBar.tsx
+#: src/marketplace/landing/LandingPage.tsx
 msgid "Search for offerings..."
 msgstr "Otsi teenust"
 
@@ -6393,14 +6318,12 @@ msgstr "Otsi pakkumist..."
 msgid "Security group does not contain any rule yet."
 msgstr "Turvagrupp ei sisalda veel ühtegi reeglit."
 
-#: src/marketplace/resources/details/NetworkingTab.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsForm.tsx
-#: src/openstack/openstack-instance/tabs.ts
+#: src/openstack/openstack-security-groups/breadcrumbs.ts
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -6420,8 +6343,7 @@ msgid "Security incident type: {type}"
 msgstr "Turvajuhtumi tüüp: {type}"
 
 #: src/issues/list/IssuesShortList.tsx
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/marketplace/resources/details/ResourceIssuesCard.tsx
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "See all"
 msgstr "Vaata kõiki"
 
@@ -6452,8 +6374,8 @@ msgstr "Segmentatsiooni ID"
 #: src/form/ListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
-#: src/user/affiliations/OrganizationHoverableRow.tsx
-#: src/user/affiliations/ProjectHoverableRow.tsx
+#: src/navigation/workspace/ProjectsPanel.tsx
+#: src/navigation/workspace/SelectOrganizationButton.tsx
 msgid "Select"
 msgstr "Vali"
 
@@ -6492,7 +6414,6 @@ msgid "Select connected subnet"
 msgstr "Valige ühendatud alamvõrgud"
 
 #: src/customer/create/CountryGroup.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "Select country..."
 msgstr "Valige riik..."
@@ -6515,7 +6436,7 @@ msgid "Select offering..."
 msgstr "Vali pakkumine..."
 
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
 msgid "Select offerings..."
 msgstr "Vali pakkumised..."
 
@@ -6531,7 +6452,6 @@ msgid "Select organization..."
 msgstr "Valige organisatsioon..."
 
 #: src/invitations/actions/ProjectGroup.tsx
-#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorToggle.tsx
 msgid "Select project"
 msgstr "Vali projekt"
 
@@ -6584,8 +6504,6 @@ msgid "Select some files"
 msgstr "Vali mõni fail"
 
 #: src/booking/BookingStateFilter.tsx
-#: src/invitations/InvitationsFilter.tsx
-#: src/invoices/list/InvoicesFilter.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
@@ -6611,9 +6529,7 @@ msgstr "Valige alamvõrgud ühendamiseks..."
 msgid "Select tenant..."
 msgstr "Vali üürnik..."
 
-#: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
-#: src/project/ProjectEventsFilter.tsx
 msgid "Select type..."
 msgstr "Vali tüüp..."
 
@@ -6632,8 +6548,6 @@ msgstr "Vali töölaud"
 
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
-#: src/user/affiliations/OrganizationHoverableRow.tsx
-#: src/user/affiliations/ProjectHoverableRow.tsx
 msgid "Selected"
 msgstr "Valitud"
 
@@ -6645,6 +6559,7 @@ msgstr "Saada teade"
 msgid "Sent"
 msgstr "Saadetud"
 
+#: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "Server group"
 msgstr "Serveri rühm"
@@ -6653,7 +6568,6 @@ msgstr "Serveri rühm"
 msgid "Server group creation has been scheduled."
 msgstr "Serveri rühma loomine on ajastatud."
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Server groups"
 msgstr "Serveri rühmad"
@@ -6675,7 +6589,7 @@ msgid "Service catalog offerings"
 msgstr "Teenuste kataloogi pakkumised"
 
 #: src/customer/details/CustomerMarketplacePanel.tsx
-#: src/customer/list/SupportCustomerFilter.tsx
+#: src/customer/list/ServiceProviderFilter.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/map/LeafletMap.tsx
@@ -6684,10 +6598,8 @@ msgstr "Teenuste kataloogi pakkumised"
 #: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
+#: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#: src/marketplace/routes.ts
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -6702,7 +6614,6 @@ msgstr "Teenusepakkuja"
 msgid "Service provider API secret code has been generated."
 msgstr "Teenusepakkuja API salajane kood on loodud."
 
-#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Service provider can charge for usage of the following components"
 msgstr "Teenusepakkuja võib küsida tasu järgmiste komponentide kasutamise eest"
@@ -6731,6 +6642,8 @@ msgstr "Teenusepakkuja pakkumised"
 msgid "Service provider type"
 msgstr "Vali teenusepakkuja liik..."
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsBreadcrumbs.tsx
+#: src/marketplace/offerings/service-providers/ServiceProviderBreadcrumbs.tsx
 #: src/marketplace/offerings/service-providers/ServiceProvidersGrid.tsx
 msgid "Service providers"
 msgstr "Teenusepakkujad"
@@ -6743,7 +6656,7 @@ msgstr "Teenuse sätted on kehtetud."
 msgid "Service settings of this resource are in state erred."
 msgstr "Teenuse seaded sellel ressursil on veastaatuses."
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Service type"
@@ -6782,7 +6695,8 @@ msgstr "Määrake väärtus"
 msgid "Shared"
 msgstr "Jagatud"
 
-#: src/resource/support/routes.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/resource/support/SharedProviderContainer.tsx
 msgid "Shared providers"
 msgstr "Jagatud teenusepakkujad"
 
@@ -6798,8 +6712,8 @@ msgstr "Ostukorvis asuv objekt on uuendatud"
 msgid "Shopping cart item update"
 msgstr "Ostukorvis asuva objekti uuendus"
 
-#: src/form/SecretField.tsx
 #: src/marketplace/details/plan/PlanDetailsLink.tsx
+#: src/table/TablePageSize.tsx
 msgid "Show"
 msgstr "Näita"
 
@@ -6894,7 +6808,6 @@ msgstr "Kasutaja üksikasjad"
 msgid "Show with running accounting"
 msgstr "Näita ainult jooksva arveldusega"
 
-#: src/marketplace/category/filters/FilteredBy.tsx
 #: src/marketplace/offerings/service-providers/FilteredBy.tsx
 msgid "Showing all"
 msgstr "Näidatakse kõiki"
@@ -6905,8 +6818,6 @@ msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
 msgstr "Näitan {sliceStart} kuni {sliceEnd} kirjet {resultCount} kandest."
 
 #: src/auth/valimo/AuthValimoDialog.tsx
-#: src/navigation/header/UserDropdown.tsx
-#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
 msgid "Sign in"
 msgstr "Logi sisse"
 
@@ -6921,12 +6832,10 @@ msgstr "{label}"
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/VMwareDiskSummary.tsx
@@ -6953,13 +6862,12 @@ msgstr "Jäta vahele liikuva IP omistamine"
 msgid "Snapshot schedule for volume has been created."
 msgstr "Salvestusüksuse hetktõmmise ajakava on loodud."
 
+#: src/openstack/openstack-snapshot-schedule/breadcrumbs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshot schedules"
 msgstr "Tõmmiste ajakavad"
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-snapshot-schedule/tabs.ts
-#: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshots"
 msgstr "Tõmmised"
@@ -7008,47 +6916,35 @@ msgstr "Käivitan"
 #: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
-#: src/invitations/InvitationsFilter.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/invoices/list/BillingRecordsList.tsx
-#: src/invoices/list/InvoicesFilter.tsx
 #: src/invoices/list/InvoicesList.tsx
-#: src/marketplace-flows/FlowListFilter.tsx
 #: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/utils.tsx
-#: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/OfferingsFilter.tsx
+#: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
-#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/details/ResourceDetailsHeader.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
-#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
-#: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
-#: src/notifications/NotificationList.tsx
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -7059,18 +6955,12 @@ msgstr "Käivitan"
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
-#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
-#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/paypal/PaymentsList.tsx
-#: src/project/ProjectOrderItemsList.tsx
-#: src/project/ProjectResourcesFilter.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -7094,7 +6984,7 @@ msgstr "Olek"
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/invitations/InvitationsList.tsx
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/project/team/InvitationsList.tsx
@@ -7123,10 +7013,7 @@ msgid "Stopping"
 msgstr "Peatan"
 
 #: src/digitalocean/digitalocean-droplet-config.ts
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/FlavorGroup.tsx
-#: src/openstack/openstack-instance/tabs.ts
-#: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/quotas/constants.ts
 msgid "Storage"
@@ -7144,7 +7031,7 @@ msgstr "Andmehoidla suurus GiB"
 msgid "Storage type"
 msgstr "Andmehoidla tüüp"
 
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
@@ -7188,11 +7075,9 @@ msgstr "Sisesta koos"
 msgid "Subnet CIDR"
 msgstr "Alamvõrgu CIDR"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-network/tabs.ts
-#: src/openstack/openstack-tenant/tabs.ts
+#: src/openstack/openstack-subnet/breadcrumbs.ts
 msgid "Subnets"
 msgstr "Alamvõrgud"
 
@@ -7205,20 +7090,14 @@ msgid "Subscription ID"
 msgstr "Registreerimise ID"
 
 #: src/invoices/details/InvoiceDetails.tsx
-#: src/invoices/list/MonthOverview.tsx
-#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Subtotal"
 msgstr "Kokku"
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/issues/IssueDetails.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/openstack/openstack-tenant/TenantFlavorsList.tsx
-#: src/openstack/openstack-tenant/TenantInstancesList.tsx
-#: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/TemplateDetail.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
@@ -7227,8 +7106,7 @@ msgstr "Kokku"
 msgid "Summary"
 msgstr "Kokkuvõte"
 
-#: src/issues/routes.ts
-#: src/navigation/sidebar/SupportMenu.tsx
+#: src/navigation/header/SupportLink.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Support"
@@ -7318,8 +7196,10 @@ msgstr "Maks"
 msgid "Tax number"
 msgstr "Maksu number"
 
-#: src/customer/routes.ts
-#: src/project/routes.ts
+#: src/customer/team/CustomerTeam.tsx
+#: src/customer/workspace/utils.ts
+#: src/project/team/ProjectTeam.tsx
+#: src/project/utils.ts
 msgid "Team"
 msgstr "Meeskond"
 
@@ -7340,7 +7220,6 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr "Integreerimiseks ja automatiseeritud aruandluseks mõeldud tehniline nimi. Palun kasutage ainult tühikuteta ladina tähti."
 
 #: src/issues/create/IssueCreateForm.tsx
-#: src/notifications/NotificationForm.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -7405,6 +7284,7 @@ msgstr "Peatan"
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
+#: src/navigation/FooterLinks.tsx
 msgid "Terms of Service"
 msgstr "Teenustingimused"
 
@@ -7414,7 +7294,6 @@ msgstr "Teenustingimused"
 
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
-#: src/marketplace/resources/details/ResourceAccessCard.tsx
 msgid "Text has been copied"
 msgstr "Tekst on kopeeritud"
 
@@ -7426,7 +7305,7 @@ msgstr "Täname registreerumise eest. Selleks, et platvormi võimalustest enim k
 msgid "The invoice has been marked as paid."
 msgstr "Arve on märgitud tasuks."
 
-#: src/user/keys/KeyCreateDialog.tsx
+#: src/user/keys/KeyCreateForm.tsx
 msgid "The key has been created."
 msgstr "Võti on loodud"
 
@@ -7462,7 +7341,6 @@ msgstr "Ühtegi kättesaadavat projekti ei ole."
 msgid "There are no available users."
 msgstr "Kasutajaid ei ole."
 
-#: src/marketplace/category/list/CategoriesList.tsx
 #: src/marketplace/landing/CategoriesList.tsx
 #: src/user/dashboard/CategoriesList.tsx
 msgid "There are no categories in marketplace yet."
@@ -7502,7 +7380,6 @@ msgid "There are no offerings in catalog yet."
 msgstr "Kataloogis pole veel pakkumisi."
 
 #: src/marketplace/common/OfferingGrid.tsx
-#: src/marketplace/landing/OfferingsGroup.tsx
 msgid "There are no offerings in marketplace yet."
 msgstr "Turuplatsil pole veel ühtegi pakkumist"
 
@@ -7534,7 +7411,7 @@ msgstr "Muid plaane pole saadaval."
 msgid "There are no other volume types available."
 msgstr "Muid salvestusüksuse tüüpe pole saadaval."
 
-#: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
+#: src/navigation/workspace/ProjectsPanel.tsx
 msgid "There are no projects yet for this organization."
 msgstr "Sellele organisatsioonil ei ole veel projekte."
 
@@ -7646,11 +7523,8 @@ msgstr "Probleemi teatamiseks saatke palun e-kiri aadressile {supportEmail}."
 #: src/invoices/growth/utils.ts
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
-#: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
-#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -7682,32 +7556,26 @@ msgstr "Jälgitakse UTC ajavööndi abil, kuvatakse koos brauseri ajavööndiga.
 msgid "Try again"
 msgstr "Proovi uuesti"
 
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
-#: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/paypal/PaymentsList.tsx
-#: src/project/ProjectEventsFilter.tsx
-#: src/project/ProjectOrderItemsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Type"
@@ -7785,7 +7653,7 @@ msgstr "Ei saa luua FreeIPA profiili."
 msgid "Unable to create application."
 msgstr "Rakendust ei saa luua"
 
-#: src/user/keys/KeyCreateDialog.tsx
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Unable to create key."
 msgstr "Võtit ei saa luua"
 
@@ -7876,8 +7744,6 @@ msgid "Unable to load booked items."
 msgstr "Broneeritud üksusi ei saanud laadida."
 
 #: src/marketplace/category/filters/AttributeFilterList.tsx
-#: src/marketplace/category/filters/FilterDropdownContent.tsx
-#: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
 #: src/marketplace/offerings/service-providers/FilterDropdownContent.tsx
 msgid "Unable to load category sections."
 msgstr "Kategooria sektsioone ei õnnestunud laadida"
@@ -7891,7 +7757,6 @@ msgstr "Ostukorve ei õnnestunud laadida"
 msgid "Unable to load comments."
 msgstr "Ei ole võimalik laadida kommentaare."
 
-#: src/core/LoadingErred.tsx
 #: src/customer/list/TotalCostComponent.tsx
 #: src/customer/popover/CustomerPopover.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
@@ -7899,13 +7764,14 @@ msgstr "Ei ole võimalik laadida kommentaare."
 #: src/invoices/details/BillingDetails.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueCreateForm.tsx
+#: src/issues/create/IssueRegistration.tsx
 #: src/issues/list/IssuesShortList.tsx
+#: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
-#: src/project/ProjectDashboardChart.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
 #: src/rancher/template/CatalogTemplateContainer.tsx
@@ -7987,7 +7853,6 @@ msgid "Unable to load plan details."
 msgstr "Ei ole võimalik laadida plaani detaile."
 
 #: src/project/ProjectExpandableRowContainer.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Unable to load project resources."
 msgstr "Ei ole võimalik laadida projekti ressurse."
 
@@ -8215,7 +8080,6 @@ msgstr "Kahjuks ei õnnestunud serveriga ühendust luua. Kontrollige, kas saate 
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
-#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 msgid "Unit"
 msgstr "Ühik"
 
@@ -8254,7 +8118,6 @@ msgstr "Tühista avaldamine Google'i kalendrina "
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
-#: src/notifications/NotificationUpdateButton.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -8332,10 +8195,12 @@ msgid "Uptime"
 msgstr "Töötatud aeg"
 
 #: src/dashboard/chart.ts
+#: src/marketplace/resources/ResourceTabs.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
-#: src/marketplace/resources/details/ResourceTabs.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/openstack/openstack-tenant/tabs.ts
 #: src/slurm/details/utils.ts
+#: src/slurm/tabs.ts
 msgid "Usage"
 msgstr "Kasutus"
 
@@ -8355,7 +8220,8 @@ msgstr "Kasutuse ülevaade"
 msgid "Usage report has been submitted."
 msgstr "Ressursi importimist on alustatud"
 
-#: src/marketplace/routes.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/marketplace/resources/usage/SupportUsageContainer.tsx
 msgid "Usage reports"
 msgstr "Kasutuse aruanne"
 
@@ -8375,7 +8241,6 @@ msgstr "Kasuda sudo"
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
-#: src/issues/feedback/SupportFeedbackListFilter.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
@@ -8499,8 +8364,7 @@ msgstr "Kasutaja {affected_user_full_name} on nõudnud endale organisatsiooni {a
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/UsernameGroup.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
-#: src/marketplace/resources/details/ResourceAccessCard.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
@@ -8508,6 +8372,7 @@ msgstr "Kasutaja {affected_user_full_name} on nõudnud endale organisatsiooni {a
 #: src/project/team/UserGroup.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/details/AllocationUsersTable.tsx
 #: src/slurm/marketplace.ts
@@ -8530,17 +8395,17 @@ msgstr "Kasutajanime eesliide"
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr "Kasutajanimed võivavad sisaldada tähti (a-z), numbreid (0-9), sidekriipse (-), alakriipse (_) ja punkte (.)."
 
-#: src/customer/routes.ts
-#: src/issues/routes.ts
+#: src/customer/team/CustomerTeam.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/project/routes.ts
+#: src/project/team/ProjectTeam.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/slurm/tabs.ts
+#: src/user/support/UserListView.tsx
 msgid "Users"
 msgstr "Kasutajad"
 
 #: src/invoices/details/CustomerDetails.tsx
-#: src/invoices/list/MonthOverview.tsx
 msgid "VAT"
 msgstr "KM"
 
@@ -8572,7 +8437,8 @@ msgstr "Käibemaksu määr (%)"
 msgid "VM name"
 msgstr "VMi nimi"
 
-#: src/openstack/analytics/routes.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/openstack/analytics/VmTypeOverviewContainer.tsx
 msgid "VM type overview"
 msgstr "VMi tüübi ülevaade"
 
@@ -8633,7 +8499,6 @@ msgstr "Tarnija neutraalne"
 msgid "Verifying email change"
 msgstr "e-posti aadressi muutmise kontrollimine "
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/navigation/AppFooter.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
@@ -8707,7 +8572,9 @@ msgstr "Valitud tüüpi salvestusüksuse limiit on ületatud"
 msgid "Website URL"
 msgstr "Veebilehe URL"
 
-#: src/user/dashboard/UserWelcome.tsx
+#: src/customer/dashboard/CustomerDashboard.tsx
+#: src/project/ProjectDashboard.tsx
+#: src/user/dashboard/UserDashboard.tsx
 msgid "Welcome, {user}!"
 msgstr "Tere tulemast {user}!"
 
@@ -8737,26 +8604,22 @@ msgid "Would you like to update your current email with the one from the invitat
 msgstr "Kas sa sooviksid uuendada oma emaili sellega mida kasutati selles kutses?"
 
 #: src/marketplace/common/ReviewButton.tsx
-#: src/marketplace/landing/ReviewButton.tsx
 msgid "Write review"
 msgstr "Kirjuta ülevaade"
 
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/issues/FeaturesList.tsx
+#: src/issues/workspace/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/category/filters/FilteredBy.tsx
 #: src/marketplace/offerings/attributes/utils.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/project/ProjectRemoveDialog.tsx
-#: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
 #: src/user/hooks/HookRemoveDialog.tsx
 #: src/user/keys/KeyRemoveDialog.tsx
 msgid "Yes"
@@ -8927,7 +8790,6 @@ msgstr "Tunnid"
 msgid "items"
 msgstr "Lisa element"
 
-#: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offering"
 msgstr "toode"
@@ -8940,7 +8802,6 @@ msgstr "pakkumise õigused"
 msgid "offering users"
 msgstr "pakkumise kasutajad"
 
-#: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offerings"
 msgstr "toodet"
@@ -8951,11 +8812,11 @@ msgstr "tellimused"
 
 #: src/invitations/GroupInvitationMessage.tsx
 #: src/invitations/InvitationMessage.tsx
+#: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "organization"
 msgstr "asutus"
 
 #: src/resource/support/SharedProviderCustomers.tsx
-#: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 msgid "organizations"
 msgstr "asutus"
@@ -8980,7 +8841,6 @@ msgstr "Plaanid"
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
-#: src/user/affiliations/ProjectsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 msgid "projects"
 msgstr "Projektid"
@@ -9010,7 +8870,6 @@ msgid "routers"
 msgstr "Ruuterid"
 
 #: src/openstack/openstack-server-groups/ServerGroupsList.tsx
-#: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
 msgid "server groups"
 msgstr "Serveri rühmad"
 
@@ -9150,6 +9009,7 @@ msgid "{resource_name} has been deleted."
 msgstr "{resource_name} on kustutatud."
 
 #: src/quotas/QuotasTable.tsx
+#: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "{usage} of {limit}"
 msgstr "{usage} limiidist {limit}"
 
@@ -9182,12 +9042,10 @@ msgid "{user} has requested termination of {resource_name} with active plan \"{p
 msgstr "{user} taotles {ressursi_nimi} lõpetamist aktiivse paketiga \"{plaan_nimi}\"."
 
 #: src/customer/dashboard/api.ts
-#: src/project/utils.ts
 msgid "{value} at {date}"
 msgstr "{value} kuupäeval {date}"
 
 #: src/customer/dashboard/api.ts
-#: src/project/utils.ts
 msgid "{value} at {date}, estimated"
 msgstr "{value} kuupäeval {date}, hinnanguliselt"
 
