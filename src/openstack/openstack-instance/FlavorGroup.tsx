@@ -30,11 +30,6 @@ export const FlavorGroup: FunctionComponent<{ flavors }> = (props) => (
               name: 'ram',
               filter: formatFilesize,
             },
-            {
-              label: translate('Storage'),
-              name: 'disk',
-              filter: formatFilesize,
-            },
           ]}
           choices={props.flavors}
           input={fieldProps.input}
