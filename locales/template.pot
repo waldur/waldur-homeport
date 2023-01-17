@@ -9298,7 +9298,6 @@ msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-#: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
