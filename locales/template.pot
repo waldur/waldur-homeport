@@ -1235,6 +1235,10 @@ msgstr ""
 msgid "Caller"
 msgstr ""
 
+#: src/marketplace/routes.ts
+msgid "Campaigns"
+msgstr ""
+
 #: src/booking/CancelAction.tsx
 #: src/form/ListDialog.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
@@ -1773,6 +1777,10 @@ msgstr ""
 #: src/customer/create/CountryGroup.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Country"
+msgstr ""
+
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+msgid "Coupon"
 msgstr ""
 
 #: src/azure/sql/CreateDatabaseAction.tsx
@@ -2895,6 +2903,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectUpdateForm.tsx
@@ -4879,6 +4888,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
@@ -9130,6 +9140,10 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+msgid "Start date"
+msgstr ""
+
 #: src/customer/list/CustomerList.tsx
 msgid "Start day of accounting"
 msgstr ""
@@ -9243,6 +9257,7 @@ msgstr ""
 #: src/invitations/InvitationsList.tsx
 #: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/user/support/UserDetailsTable.tsx
@@ -12387,6 +12402,10 @@ msgstr ""
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 msgid "browse"
+msgstr ""
+
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+msgid "campaigns"
 msgstr ""
 
 #: src/rancher/catalog/ClusterCatalogList.tsx
