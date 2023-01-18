@@ -18,6 +18,7 @@ type TableBodyProps = Pick<
   | 'selectedRows'
   | 'toggleRow'
   | 'toggled'
+  | 'fetch'
 >;
 
 const TableCells = ({ row, columns }) => (
@@ -45,6 +46,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   selectedRows,
   toggleRow,
   toggled,
+  fetch,
 }) => {
   const trClick = useCallback(
     (row, index, e) => {
@@ -102,7 +104,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
             <TableCells row={row} columns={columns} />
             {hoverableRow && (
               <td className="row-actions">
-                {React.createElement(hoverableRow, { row })}
+                {React.createElement(hoverableRow, { row, fetch })}
               </td>
             )}
           </tr>

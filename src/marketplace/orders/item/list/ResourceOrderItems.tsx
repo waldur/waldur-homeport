@@ -6,6 +6,7 @@ import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/Or
 import { IssueLinkRenderer } from '@waldur/marketplace/orders/item/list/IssueLinkRenderer';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
+import { OrderItemCancelButton } from './OrderItemCancelButton';
 import { OrderItemStateCell } from './OrderItemStateCell';
 import { OrderItemTypeCell } from './OrderItemTypeCell';
 
@@ -51,6 +52,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title={translate('Resource order items')}
       columns={columns}
       verboseName={translate('order items')}
+      hoverableRow={OrderItemCancelButton}
       fullWidth
     />
   );

@@ -234,6 +234,9 @@ export const approveOrderItem = (id) =>
 export const rejectOrderItem = (id) =>
   post(`/marketplace-order-items/${id}/reject/`);
 
+export const cancelTerminationOrderItem = (id) =>
+  post(`/marketplace-order-items/${id}/cancel_termination/`);
+
 export const approveOrder = (orderUuid: string) =>
   post(`/marketplace-orders/${orderUuid}/approve/`).then(
     (response) => response.data,

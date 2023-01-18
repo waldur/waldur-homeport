@@ -39,7 +39,7 @@ export interface TableProps<RowType = any> extends TableState {
   initialSorting?: Sorting;
   expandableRow?: React.ComponentType<{ row: any }>;
   expandableRowClassName?: string;
-  hoverableRow?: React.ComponentType<{ row: any }>;
+  hoverableRow?: React.ComponentType<{ row; fetch }>;
   toggleRow?(row: any): void;
   toggleFilter?(): void;
   toggled?: object;
@@ -227,6 +227,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
             selectedRows={this.props.selectedRows}
             toggleRow={this.props.toggleRow}
             toggled={this.props.toggled}
+            fetch={this.props.fetch}
           />
         </table>
       </>
