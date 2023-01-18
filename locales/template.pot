@@ -1247,6 +1247,7 @@ msgstr ""
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace-flows/FlowCancelAction.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
+#: src/marketplace/orders/item/list/OrderItemCancelButton.tsx
 #: src/modal/CloseDialogButton.tsx
 #: src/navigation/header/SearchToggle.tsx
 #: src/project/ProjectCreateForm.tsx
@@ -5718,6 +5719,10 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemApproveButton.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemApproveButton.tsx
 msgid "Order item has been approved."
+msgstr ""
+
+#: src/marketplace/orders/item/list/OrderItemCancelButton.tsx
+msgid "Order item has been canceled."
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemRejectButton.tsx
@@ -10288,6 +10293,7 @@ msgid "Unable to cancel invitation."
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
+#: src/marketplace/orders/item/list/OrderItemCancelButton.tsx
 msgid "Unable to cancel order item."
 msgstr ""
 
