@@ -7767,7 +7767,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 msgid "Resource"
 msgstr ""
@@ -7894,7 +7893,6 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
 msgid "Resource link"
 msgstr ""
 

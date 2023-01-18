@@ -11,8 +11,6 @@ import { KeyValueButton } from '../KeyValueButton';
 import { MarketplaceResourceStateField } from '../list/MarketplaceResourceStateField';
 import { Resource } from '../types';
 
-import { ResourceDetailsLink } from './ResourceDetailsLink';
-
 export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
   resource,
   children,
@@ -55,16 +53,6 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
         )
       }
     />
-    {resource.resource_uuid && resource.resource_type ? (
-      <Field
-        label={translate('Resource')}
-        value={
-          <ResourceDetailsLink item={resource}>
-            {translate('Resource link')}
-          </ResourceDetailsLink>
-        }
-      />
-    ) : null}
     <Field label={translate('Username')} value={resource.username} />
     {children}
   </Container>
