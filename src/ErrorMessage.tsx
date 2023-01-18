@@ -1,4 +1,4 @@
-import { FallbackRender } from '@sentry/react/dist/errorboundary';
+import { FallbackRender } from '@sentry/react';
 import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
