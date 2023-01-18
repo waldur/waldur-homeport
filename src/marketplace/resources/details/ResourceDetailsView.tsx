@@ -189,7 +189,7 @@ export const ResourceDetailsView: FC<any> = ({
                             <RefreshButton />
                           </div>
                           {resource.offering_type === INSTANCE_TYPE ? (
-                            <InstanceComponents resource={scope} />
+                            scope && <InstanceComponents resource={scope} />
                           ) : (
                             <ResourceComponents
                               resource={resource}
