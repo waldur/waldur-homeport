@@ -3,5 +3,12 @@ import { TerminateAction } from '@waldur/marketplace/resources/terminate/Termina
 const DestroyActionSubtitle = require('./DestroyActionSubtitle.md');
 
 export const TerminateTenantAction = ({ resource }) => (
-  <TerminateAction resource={resource} dialogSubtitle={DestroyActionSubtitle} />
+  <TerminateAction
+    resource={resource}
+    dialogSubtitle={
+      DestroyActionSubtitle?.default
+        ? DestroyActionSubtitle.default
+        : DestroyActionSubtitle
+    }
+  />
 );
