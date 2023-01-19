@@ -7,6 +7,10 @@ export const TerminateClusterAction = ({ resource }) =>
   !ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE ? (
     <TerminateAction
       resource={resource}
-      dialogSubtitle={DestroyActionSubtitle}
+      dialogSubtitle={
+        DestroyActionSubtitle?.default
+          ? DestroyActionSubtitle.default
+          : DestroyActionSubtitle
+      }
     />
   ) : null;
