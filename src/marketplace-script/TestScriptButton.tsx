@@ -17,8 +17,7 @@ export const TestScriptButton: FunctionComponent<{
   const { offering } = useSelector(getOffering);
 
   const [{ loading, error }, testScript] = useAsyncFn(async () => {
-    const planUrl =
-      offering.plans && offering.plans.length ? offering.plans[0].url : null;
+    const planUrl = offering?.plans?.length ? offering.plans[0].url : null;
     try {
       await runOfferingScript(offering.uuid, planUrl, type);
       dispatch(
@@ -31,7 +30,7 @@ export const TestScriptButton: FunctionComponent<{
         showErrorResponse(e, translate('{type} script got an error', { type })),
       );
     }
-  }, [offering.plans]);
+  }, [offering?.plans]);
 
   return (
     <FormGroup>
