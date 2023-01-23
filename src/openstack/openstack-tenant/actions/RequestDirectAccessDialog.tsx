@@ -29,6 +29,7 @@ export const RequestDirectAccessDialog: FunctionComponent<{
             descriptionLabel: translate('Description'),
             hideTitle: true,
           },
+          hideProjectAndResourceFields: Boolean(resource.project),
         }),
       );
     }
