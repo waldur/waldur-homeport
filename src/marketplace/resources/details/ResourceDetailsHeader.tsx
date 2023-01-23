@@ -5,7 +5,7 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 
-import { MarketplaceResourceStateField } from '../list/MarketplaceResourceStateField';
+import { ResourceStateField } from '../list/ResourceStateField';
 import { ResourceActions } from '../ResourceActions';
 import { Resource } from '../types';
 
@@ -54,7 +54,7 @@ export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps
         <div className="mt-7">
           <Field
             label={translate('State')}
-            value={<MarketplaceResourceStateField resource={resource} />}
+            value={<ResourceStateField row={resource} />}
           />
           <OfferingDetailsField resource={resource} />
           <PlanDetailsField resource={resource} />
