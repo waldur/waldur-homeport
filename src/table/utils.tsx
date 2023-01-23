@@ -104,7 +104,7 @@ export function connectTable(options: TableOptionsType) {
 }
 
 export const formatLongText = (value) =>
-  value.length > 100 ? (
+  value && value.length > 100 ? (
     <Tip label={value} id="longText">
       <span className="ellipsis" style={{ width: 150 }}>
         {value}
