@@ -170,7 +170,7 @@ export const ResourceDetailsView: FC<any> = ({
                         <Card.Body>
                           <ResourceAccessButton resource={resource} />
                           <div className="d-flex mb-5 gap-2">
-                            <div className="d-flex justify-content-between flex-grow-1 gap-2">
+                            <div className="d-flex justify-content-end flex-grow-1 gap-2">
                               {scope && (
                                 <QuickActions
                                   resource={scope}
