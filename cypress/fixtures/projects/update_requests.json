@@ -1,0 +1,22 @@
+[
+  {
+    "uuid": "6613fcb195c4418798b993bcbe2ff465",
+    "state": "pending",
+    "customer_name": "Hodge-Mcgee",
+    "offering_name": "Function-based attitude-oriented standardization",
+    "offering_uuid": "837e800de17540b788872a4fd300f05b",
+    "created": "2022-12-14T08:45:09.455287Z",
+    "reviewed_at": null,
+    "review_comment": null,
+    "old_name": "User-friendly cohesive definition",
+    "new_name": "User-friendly cohesive definition",
+    "old_description": "visualize enterprise paradigms2",
+    "new_description": "visualize enterprise paradigms23",
+    "old_end_date": "2023-01-27",
+    "new_end_date": "2023-01-27",
+    "old_oecd_fos_2007_code": null,
+    "new_oecd_fos_2007_code": null,
+    "old_is_industry": false,
+    "new_is_industry": false
+  }
+]
