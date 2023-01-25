@@ -21,6 +21,7 @@ declare global {
       openSelectDialog(selectId: string, option: string): Chainable;
       buttonShouldBeDisabled(btnClass: string): Chainable;
       waitForSpinner(): Chainable;
+      waitForPage(): Chainable;
     }
   }
 }
@@ -55,6 +56,10 @@ Cypress.Commands.add('fillAndSubmitLoginForm', (username, password) => {
 
 Cypress.Commands.add('waitForSpinner', () => {
   cy.get('.fa-spinner.fa-spin').should('not.exist');
+});
+
+Cypress.Commands.add('waitForPage', () => {
+  cy.get('#kt_content_container').should('exist').wait(600).waitForSpinner();
 });
 
 Cypress.Commands.add('openDropdownByLabel', (label) => {
