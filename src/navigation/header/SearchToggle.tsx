@@ -283,7 +283,10 @@ export const SearchToggle = () => (
     }
     rootClose={true}
   >
-    <div className="d-flex align-items-center ms-1 ms-lg-3">
+    <div
+      className="d-flex align-items-center ms-1 ms-lg-3"
+      id="searchIconContainer"
+    >
       <div className="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px">
         <span className="svg-icon svg-icon-1">
           <SearchIcon />
