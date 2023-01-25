@@ -71,6 +71,7 @@ export const ConfirmationDrawerToggle: React.FC = () => {
   return (
     <div className="d-flex align-items-center ms-1 ms-lg-3">
       <div
+        id="pending-confirmations-toggle"
         className="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary position-relative w-35px h-35px w-md-40px h-md-40px"
         onClick={openDrawer}
       >
