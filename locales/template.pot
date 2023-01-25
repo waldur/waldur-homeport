@@ -10090,7 +10090,6 @@ msgid "Today"
 msgstr ""
 
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
-#: src/navigation/header/UserToken.tsx
 msgid "Token"
 msgstr ""
 

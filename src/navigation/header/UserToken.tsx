@@ -1,6 +1,6 @@
 import copy from 'copy-to-clipboard';
 import { useCallback } from 'react';
-import { Button, FormControl, InputGroup } from 'react-bootstrap';
+import { Button, InputGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -21,14 +21,6 @@ export const UserToken = ({ token }) => {
           {translate('API token')}
         </span>
         <InputGroup>
-          <FormControl
-            value={token}
-            readOnly={true}
-            type="password"
-            className="form-control-solid"
-            size="sm"
-            placeholder={translate('Token')}
-          />
           <Button
             variant="primary"
             size="sm"
