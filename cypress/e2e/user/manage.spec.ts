@@ -21,14 +21,15 @@ describe('User manage', () => {
       // Ensure that Change email button is present
       .get('button')
       .contains('Request change')
-      .click()
+      .click();
 
       // Close dialog
-      .get('button')
-      .contains('Cancel')
-      .click()
+    cy.get('.modal-footer')
+      .should('be.visible')
+      .get('.modal-footer button:contains(Cancel)')
+      .click();
       // Ensure that organization input field is present
-      .get('input[name="organization"]')
+    cy.get('input[name="organization"]')
 
       // Ensure that job_title input field is present
       .get('input[name="job_title"]')
@@ -36,7 +37,7 @@ describe('User manage', () => {
       // Ensure that description input field is present
       .get('input[name="description"]')
 
-      // Adding text to ensure that 'discard' and 'save changes' buttons appear 
+      // Adding text to ensure that 'discard' and 'save changes' buttons appear
       .type('some text')
 
       // Ensure that phone_number input field is present
@@ -55,7 +56,7 @@ describe('User manage', () => {
       .contains('Cancel')
       .last()
       .click()
-      
+
       // Ensure that Discard button exists and works
       .get('button')
       .contains('Discard')
