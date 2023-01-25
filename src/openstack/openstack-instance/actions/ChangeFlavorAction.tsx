@@ -6,7 +6,7 @@ import {
   validateRuntimeState,
 } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
-import { ActionContext } from '@waldur/resource/actions/types';
+import { ActionContext, ActionItemType } from '@waldur/resource/actions/types';
 
 const ChangeFlavorDialog = lazyComponent(
   () => import('./ChangeFlavorDialog'),
@@ -25,11 +25,12 @@ const validators = [
   validateRuntimeState('SHUTOFF'),
 ];
 
-export const ChangeFlavorAction = ({ resource }) => (
+export const ChangeFlavorAction: ActionItemType = ({ resource, refetch }) => (
   <DialogActionItem
     title={translate('Change flavor')}
     modalComponent={ChangeFlavorDialog}
     validators={validators}
     resource={resource}
+    extraResolve={{ refetch }}
   />
 );

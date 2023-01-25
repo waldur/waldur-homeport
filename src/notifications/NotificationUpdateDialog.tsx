@@ -15,7 +15,7 @@ interface NotificationUpdateDialogOwnProps {
   resolve: {
     initialValues: NotificationFormData;
     uuid: string;
-    refreshList(): void;
+    refetch(): void;
   };
   formValues: NotificationFormData;
 }
@@ -47,7 +47,7 @@ export const NotificationUpdateDialog = connect(
           setStep={setStep}
           handleSubmit={handleSubmit}
           disabled={invalid || submitting}
-          refreshList={resolve.refreshList}
+          refetch={resolve.refetch}
           notificationId={resolve.uuid}
         />
       </form>

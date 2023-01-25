@@ -50,7 +50,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('notifications')}
-      actions={<NotificationCreateButton refreshList={props.fetch} />}
+      actions={<NotificationCreateButton refetch={props.fetch} />}
       expandableRow={NotificationExpandableRow}
       expandableRowClassName="bg-gray-200"
       hoverableRow={({ row }) =>
@@ -58,12 +58,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
           <>
             <NotificationUpdateButton
               notification={row}
-              refreshList={props.fetch}
+              refetch={props.fetch}
             />
-            <NotificationSendButton
-              notification={row}
-              refreshList={props.fetch}
-            />
+            <NotificationSendButton notification={row} refetch={props.fetch} />
           </>
         ) : null
       }

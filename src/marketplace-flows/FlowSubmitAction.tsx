@@ -3,13 +3,13 @@ import { AsyncActionButton } from '@waldur/resource/actions/AsyncActionButton';
 
 import { submitFlow } from './api';
 
-export const FlowSubmitAction = ({ flow, refreshList }) =>
+export const FlowSubmitAction = ({ flow, refetch }) =>
   flow.state === 'draft' ? (
     <AsyncActionButton
       title={translate('Submit')}
       icon="fa fa-check"
       resource={flow}
-      refreshList={refreshList}
+      refetch={refetch}
       apiMethod={submitFlow}
     />
   ) : null;

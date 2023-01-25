@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { getDefaultTimezone } from '@waldur/form/TimezoneField';
@@ -6,9 +7,12 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { createBackupSchedule } from '@waldur/openstack/api';
 import { getFields } from '@waldur/openstack/openstack-backup-schedule/actions/fields';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
-export const CreateBackupScheduleDialog = ({ resolve: { resource } }) => {
+export const CreateBackupScheduleDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   const dispatch = useDispatch();
   return (
     <ResourceActionDialog
@@ -29,6 +33,9 @@ export const CreateBackupScheduleDialog = ({ resolve: { resource } }) => {
             showSuccess(translate('VM snapshot schedule has been created.')),
           );
           dispatch(closeModalDialog());
+          if (refetch) {
+            await refetch();
+          }
         } catch (e) {
           dispatch(
             showErrorResponse(

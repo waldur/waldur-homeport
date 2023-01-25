@@ -109,7 +109,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(
       addPaymentProfile({
         formData,
-        refreshList: ownProps.resolve.refreshList,
+        refetch: ownProps.resolve.refetch,
       }),
     ),
 });

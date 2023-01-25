@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch, ownProps: any) => ({
     terminateResource(
       {
         resource: ownProps.asyncState.value,
+        refetch: ownProps.refetch,
       },
       dispatch,
     ),

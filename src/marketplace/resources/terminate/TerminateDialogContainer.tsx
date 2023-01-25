@@ -10,6 +10,7 @@ interface TerminateDialogContainerProps {
     resource: {
       marketplace_resource_uuid: string;
     };
+    refetch;
     dialogSubtitle?: string;
   };
 }
@@ -24,6 +25,7 @@ export const TerminateDialogContainer: React.FC<TerminateDialogContainerProps> =
       <TerminateContainer
         asyncState={asyncState}
         dialogSubtitle={props.resolve.dialogSubtitle}
+        refetch={props.resolve.refetch}
       />
     );
   };

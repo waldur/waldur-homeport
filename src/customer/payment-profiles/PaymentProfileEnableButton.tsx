@@ -11,7 +11,7 @@ export const PaymentProfileEnableButton = (props) => {
     dispatch(
       enablePaymentProfile({
         uuid: props.profile.uuid,
-        refreshList: props.refreshList,
+        refetch: props.refetch,
       }),
     );
   if (props.profile.is_active) {

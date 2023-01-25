@@ -3,7 +3,7 @@ import { DropdownButton, Dropdown } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-import { ActionItem } from './types';
+import { ActionItemType } from './types';
 
 interface ResourceActionComponentProps {
   onToggle?: (isOpen: boolean) => void;
@@ -11,10 +11,9 @@ interface ResourceActionComponentProps {
   open?: boolean;
   loading?: boolean;
   error?: object;
-  actions: ActionItem[];
+  actions: ActionItemType[];
   resource: any;
-  reInitResource?(): void;
-  refreshList?(): void;
+  refetch?(): void;
 }
 
 export const ResourceActionComponent: FunctionComponent<ResourceActionComponentProps> =
@@ -42,8 +41,7 @@ export const ResourceActionComponent: FunctionComponent<ResourceActionComponentP
               <ActionComponent
                 key={index}
                 resource={props.resource}
-                reInitResource={props.reInitResource}
-                refreshList={props.refreshList}
+                refetch={props.refetch}
               />
             ))}
           </>

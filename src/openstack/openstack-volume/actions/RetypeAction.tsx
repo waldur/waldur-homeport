@@ -6,6 +6,7 @@ import {
   validateRuntimeState,
 } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
+import { ActionItemType } from '@waldur/resource/actions/types';
 
 const RetypeDialog = lazyComponent(
   () => import('./RetypeDialog'),
@@ -14,12 +15,13 @@ const RetypeDialog = lazyComponent(
 
 const validators = [validateRuntimeState('available'), validateState('OK')];
 
-export const RetypeAction = ({ resource }) =>
+export const RetypeAction: ActionItemType = ({ resource, refetch }) =>
   isFeatureVisible('openstack.volume_types') ? (
     <DialogActionItem
       title={translate('Retype')}
       validators={validators}
       modalComponent={RetypeDialog}
       resource={resource}
+      extraResolve={{ refetch }}
     />
   ) : null;

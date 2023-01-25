@@ -147,7 +147,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       verboseName={translate('users')}
       enableExport={true}
-      actions={<UserTableActions refreshList={props.fetch} />}
+      actions={<UserTableActions refetch={props.fetch} />}
     />
   );
 };

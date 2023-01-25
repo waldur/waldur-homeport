@@ -19,9 +19,9 @@ const InvitationCreateDialog = lazyComponent(
 );
 
 export const InvitationCreateButton: FunctionComponent<{
-  refreshList(): void;
+  refetch(): void;
   project?: Project;
-}> = ({ refreshList, project }) => {
+}> = ({ refetch, project }) => {
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
@@ -35,7 +35,7 @@ export const InvitationCreateButton: FunctionComponent<{
           context: {
             customer,
             user,
-            refreshList,
+            refetch,
             project,
           },
         },

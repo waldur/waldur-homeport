@@ -1,7 +1,10 @@
+import { FC } from 'react';
+
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { updateInstance } from '@waldur/openstack/api';
 import { createDescriptionField } from '@waldur/resource/actions/base';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDialog';
 
 const MAX_LEN = 150;
@@ -56,7 +59,9 @@ const createInstanceNameField = () => ({
   validate: [required, validateInstanceName],
 });
 
-export const EditDialog = ({ resolve: { resource } }) => {
+export const EditDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   return (
     <UpdateResourceDialog
       fields={[createInstanceNameField(), createDescriptionField()]}
@@ -66,6 +71,7 @@ export const EditDialog = ({ resolve: { resource } }) => {
         description: resource.description,
       }}
       updateResource={updateInstance}
+      refetch={refetch}
       verboseName={translate('OpenStack instance')}
     />
   );

@@ -12,12 +12,12 @@ import { UserEditButton } from './UserEditButton';
 import { UserRemoveButton } from './UserRemoveButton';
 
 interface CustomerUserRowActionsProps {
-  refreshList;
+  refetch;
   row;
 }
 
 export const CustomerUserRowActions: FunctionComponent<CustomerUserRowActionsProps> =
-  ({ row, refreshList }) => {
+  ({ row, refetch }) => {
     const user = useSelector(getUser);
     const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
     return isOwnerOrStaff || user.is_support ? (
@@ -27,7 +27,7 @@ export const CustomerUserRowActions: FunctionComponent<CustomerUserRowActionsPro
         ) : null}
         {isOwnerOrStaff ? <UserEditButton editUser={row} /> : null}
         {isOwnerOrStaff ? (
-          <UserRemoveButton user={row} refreshList={refreshList} />
+          <UserRemoveButton user={row} refetch={refetch} />
         ) : null}
       </ButtonGroup>
     ) : null;

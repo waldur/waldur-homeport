@@ -5,10 +5,11 @@ import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { unlinkInstance } from '@waldur/rancher/api';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { ActionItemType } from '@waldur/resource/actions/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getUser } from '@waldur/workspace/selectors';
 
-export const UnlinkAction = ({ resource }) => {
+export const UnlinkAction: ActionItemType = ({ resource, refetch }) => {
   const user = useSelector(getUser);
   const dispatch = useDispatch();
   const callback = async () => {
@@ -31,6 +32,9 @@ export const UnlinkAction = ({ resource }) => {
           translate('OpenStack instance has been unlinked from Rancher node.'),
         ),
       );
+      if (refetch) {
+        await refetch();
+      }
     } catch (e) {
       dispatch(
         showErrorResponse(e, translate('Unable to unlink instance from node.')),

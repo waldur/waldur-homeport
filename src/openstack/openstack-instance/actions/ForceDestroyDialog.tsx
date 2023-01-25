@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -7,11 +8,14 @@ import {
   DestroyInstanceParams,
 } from '@waldur/openstack/api';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import { getDeleteField } from './utils';
 
-export const ForceDestroyDialog = ({ resolve: { resource } }) => {
+export const ForceDestroyDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   const dispatch = useDispatch();
   return (
     <ResourceActionDialog
@@ -29,6 +33,9 @@ export const ForceDestroyDialog = ({ resolve: { resource } }) => {
             showSuccess(translate('Instance deletion has been scheduled.')),
           );
           dispatch(closeModalDialog());
+          if (refetch) {
+            await refetch();
+          }
         } catch (e) {
           dispatch(
             showErrorResponse(e, translate('Unable to destroy instance.')),

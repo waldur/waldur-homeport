@@ -9,6 +9,7 @@ interface ChangeLimitsDialogProps {
     resource: {
       marketplace_resource_uuid: string;
     };
+    refetch;
   };
   submitting: boolean;
 }
@@ -24,6 +25,7 @@ export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
     <DialogBody
       asyncState={asyncState}
       initialValues={asyncState.value ? asyncState.value.initialValues : null}
+      refetch={props.resolve.refetch}
     />
   );
 };

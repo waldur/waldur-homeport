@@ -1,6 +1,7 @@
 import { translate } from '@waldur/i18n';
 import { activateSnapshotSchedule } from '@waldur/openstack/api';
 import { AsyncActionItem } from '@waldur/resource/actions/AsyncActionItem';
+import { ActionItemType } from '@waldur/resource/actions/types';
 
 const validators = [
   ({ resource }) => {
@@ -10,11 +11,15 @@ const validators = [
   },
 ];
 
-export const ActivateSnapshotScheduleAction = ({ resource }) => (
+export const ActivateSnapshotScheduleAction: ActionItemType = ({
+  resource,
+  refetch,
+}) => (
   <AsyncActionItem
     title={translate('Activate')}
     apiMethod={activateSnapshotSchedule}
     resource={resource}
     validators={validators}
+    refetch={refetch}
   />
 );

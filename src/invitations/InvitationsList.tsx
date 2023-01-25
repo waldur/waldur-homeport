@@ -54,7 +54,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('team invitations')}
-      actions={<InvitationCreateButton refreshList={props.fetch} />}
+      actions={<InvitationCreateButton refetch={props.fetch} />}
       hasQuery={true}
       hoverableRow={
         props.showActions ?? true
@@ -63,7 +63,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
                 <InvitationSendButton invitation={row} />
                 <InvitationCancelButton
                   invitation={row}
-                  refreshList={props.fetch}
+                  refetch={props.fetch}
                 />
               </>
             )

@@ -5,4 +5,5 @@ import { Resource } from '@waldur/marketplace/resources/types';
 export interface TerminateDialogOwnProps {
   asyncState: AsyncState<Resource>;
   dialogSubtitle?: string;
+  refetch;
 }

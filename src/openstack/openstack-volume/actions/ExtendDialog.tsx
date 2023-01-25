@@ -22,7 +22,7 @@ interface Volume extends BaseResource {
 }
 
 interface VolumeExtendDialogOwnProps {
-  resolve: { resource: Volume };
+  resolve: { resource: Volume; refetch };
 }
 
 interface VolumeExtendDialogFormData {
@@ -33,7 +33,7 @@ export const VolumeExtendDialog = reduxForm<
   VolumeExtendDialogFormData,
   VolumeExtendDialogOwnProps
 >({ form: 'VolumeExtendDialog' })(
-  ({ resolve: { resource }, submitting, handleSubmit }) => {
+  ({ resolve: { resource, refetch }, submitting, handleSubmit }) => {
     const dispatch = useDispatch();
 
     const minSize = Math.round(resource.size / 1024) + 1;
@@ -54,6 +54,9 @@ export const VolumeExtendDialog = reduxForm<
           );
           dispatch(showSuccess(translate('Volume has been extended.')));
           dispatch(closeModalDialog());
+          if (refetch) {
+            await refetch();
+          }
         } catch (e) {
           dispatch(showErrorResponse(e, translate('Unable to extend volume.')));
         }

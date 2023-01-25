@@ -19,6 +19,7 @@ interface AsyncActionItemProps<T> {
   className?: string;
   successMessage?: string;
   errorMessage?: string;
+  refetch?(): void;
 }
 
 export const AsyncActionItem: <T extends { uuid: string }>(
@@ -29,6 +30,7 @@ export const AsyncActionItem: <T extends { uuid: string }>(
   validators,
   successMessage,
   errorMessage,
+  refetch,
   ...rest
 }) => {
   const validationState = useValidators(validators, resource);
@@ -39,6 +41,9 @@ export const AsyncActionItem: <T extends { uuid: string }>(
       dispatch(
         showSuccess(successMessage || translate('Action has been applied.')),
       );
+      if (refetch) {
+        await refetch();
+      }
     } catch (e) {
       dispatch(
         showErrorResponse(

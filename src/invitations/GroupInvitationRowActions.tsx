@@ -9,12 +9,12 @@ import {
 } from '@waldur/workspace/selectors';
 
 interface GroupInvitationRowActionsProps {
-  refreshList;
+  refetch;
   row;
 }
 
 export const GroupInvitationRowActions: FunctionComponent<GroupInvitationRowActionsProps> =
-  ({ row, refreshList }) => {
+  ({ row, refetch }) => {
     const user = useSelector(getUser);
     const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
     return isOwnerOrStaff || user.is_support ? (
@@ -22,7 +22,7 @@ export const GroupInvitationRowActions: FunctionComponent<GroupInvitationRowActi
         {row.is_active && (
           <GroupInvitationCancelButton
             permissionRequest={row}
-            refreshList={refreshList}
+            refetch={refetch}
           />
         )}
       </ButtonGroup>

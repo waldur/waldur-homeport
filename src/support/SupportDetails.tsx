@@ -12,7 +12,7 @@ interface SupportSummaryProps {
   resource: Resource;
   summary?: string;
   issue?: Issue;
-  reInitResource(): void;
+  refetch(): void;
 }
 
 export const SupportDetails: React.FC<SupportSummaryProps> = (props) => (
@@ -20,10 +20,7 @@ export const SupportDetails: React.FC<SupportSummaryProps> = (props) => (
     <Card.Body>
       <Row className="mb-3">
         <Col lg={12}>
-          <ResourceActions
-            resource={props.resource}
-            reInitResource={props.reInitResource}
-          />
+          <ResourceActions resource={props.resource} refetch={props.refetch} />
         </Col>
       </Row>
       <Row>

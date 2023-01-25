@@ -20,14 +20,12 @@ const EditResourceEndDateDialog = lazyComponent(
 
 interface EditResourceEndDateByProviderActionProps {
   resource: Resource;
-  reInitResource?(): void;
-  refreshList?(): void;
+  refetch?(): void;
 }
 
 export const EditResourceEndDateByProviderAction = ({
   resource,
-  reInitResource,
-  refreshList,
+  refetch,
 }: EditResourceEndDateByProviderActionProps) => {
   const dispatch = useDispatch();
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
@@ -39,8 +37,7 @@ export const EditResourceEndDateByProviderAction = ({
       openModalDialog(EditResourceEndDateDialog, {
         resolve: {
           resource,
-          reInitResource,
-          refreshList,
+          refetch,
           updateEndDate: updateResourceEndDateByProvider,
         },
         size: 'md',

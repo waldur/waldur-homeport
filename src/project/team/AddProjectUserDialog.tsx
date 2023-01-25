@@ -27,10 +27,10 @@ interface AddProjectUserDialogFormData {
 
 export const AddProjectUserDialog = reduxForm<
   AddProjectUserDialogFormData,
-  { refreshList }
+  { refetch }
 >({
   form: FORM_ID,
-})(({ submitting, handleSubmit, refreshList }) => {
+})(({ submitting, handleSubmit, refetch }) => {
   const dispatch = useDispatch();
   const currentProject = useSelector(getProject);
 
@@ -47,7 +47,7 @@ export const AddProjectUserDialog = reduxForm<
         expiration_time: formData.expiration_time,
         role: formData.role.value,
       });
-      refreshList();
+      refetch();
       dispatch(closeModalDialog());
     } catch (error) {
       dispatch(showErrorResponse(error, translate('Unable to add user.')));

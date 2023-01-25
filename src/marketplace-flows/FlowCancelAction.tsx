@@ -3,12 +3,12 @@ import { AsyncActionButton } from '@waldur/resource/actions/AsyncActionButton';
 
 import { cancelFlow } from './api';
 
-export const FlowCancelAction = ({ flow, refreshList }) => (
+export const FlowCancelAction = ({ flow, refetch }) => (
   <AsyncActionButton
     title={translate('Cancel')}
     icon="fa fa-ban"
     resource={flow}
-    refreshList={refreshList}
+    refetch={refetch}
     apiMethod={cancelFlow}
   />
 );

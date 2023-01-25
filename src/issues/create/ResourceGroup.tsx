@@ -7,7 +7,7 @@ import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { formatResourceShort } from '@waldur/marketplace/utils';
 
-import { refreshResources } from './api';
+import { refetchs } from './api';
 import { AsyncSelectField } from './AsyncSelectField';
 import { ISSUE_REGISTRATION_FORM_ID } from './constants';
 import { projectSelector } from './selectors';
@@ -19,10 +19,7 @@ export const ResourceGroup: FunctionComponent<{ disabled }> = ({
 }) => {
   const dispatch = useDispatch();
   const project = useSelector(projectSelector);
-  const loadData = useCallback(
-    (name) => refreshResources(name, project),
-    [project],
-  );
+  const loadData = useCallback((name) => refetchs(name, project), [project]);
 
   useEffect(() => {
     dispatch(change(ISSUE_REGISTRATION_FORM_ID, 'resource', undefined));

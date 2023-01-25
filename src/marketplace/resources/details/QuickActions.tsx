@@ -2,7 +2,7 @@ import { ActionRegistry } from '@waldur/resource/actions/registry';
 
 import { ActionButton } from './ActionButton';
 
-export const QuickActions = ({ resource, reInitResource }) => {
+export const QuickActions = ({ resource, refetch }) => {
   const actions = ActionRegistry.getQuickActions(resource.resource_type);
   return (
     <>
@@ -10,7 +10,7 @@ export const QuickActions = ({ resource, reInitResource }) => {
         <ActionComponent
           key={index}
           resource={resource}
-          reInitResource={reInitResource}
+          refetch={refetch}
           as={ActionButton}
         />
       ))}

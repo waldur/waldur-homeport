@@ -44,9 +44,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('group invitations')}
-      actions={<GroupInvitationCreateButton refreshList={props.fetch} />}
+      actions={<GroupInvitationCreateButton refetch={props.fetch} />}
       hoverableRow={({ row }) => (
-        <GroupInvitationRowActions row={row} refreshList={props.fetch} />
+        <GroupInvitationRowActions row={row} refetch={props.fetch} />
       )}
       expandableRow={GroupInvitationsListExpandableRow}
     />

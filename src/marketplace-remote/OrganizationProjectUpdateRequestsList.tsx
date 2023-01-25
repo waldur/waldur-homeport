@@ -40,7 +40,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       title={translate('Project updates')}
       hoverableRow={({ row }) => (
-        <ProjectUpdateRequestActions request={row} refreshList={props.fetch} />
+        <ProjectUpdateRequestActions request={row} refetch={props.fetch} />
       )}
       expandableRow={ProjectUpdateRequestExpandable}
       verboseName={translate('requests')}

@@ -9,7 +9,7 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 interface OwnProps {
-  resolve: { refreshList(): void; apiMethod; resource };
+  resolve: { refetch(): void; apiMethod; resource };
 }
 
 const enhance = reduxForm<{}, OwnProps>({
@@ -22,7 +22,7 @@ export const ReviewDialog = enhance(
     const setRoutes = async (formData) => {
       try {
         await resolve.apiMethod(resolve.resource.uuid, formData.review_comment);
-        resolve.refreshList();
+        resolve.refetch();
         dispatch(showSuccess(translate('Review has been submitted.')));
         dispatch(closeModalDialog());
       } catch (e) {

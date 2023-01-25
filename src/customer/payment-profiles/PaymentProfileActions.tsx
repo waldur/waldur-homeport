@@ -8,17 +8,17 @@ export const PaymentProfileActions: FunctionComponent<any> = (props) => (
   <>
     <PaymentProfileEnableButton
       profile={props.profile}
-      refreshList={props.refreshList}
+      refetch={props.refetch}
       tooltipAndDisabledAttributes={props.tooltipAndDisabledAttributes}
     />
     <PaymentProfileEditButton
       profile={props.profile}
-      refreshList={props.refreshList}
+      refetch={props.refetch}
       tooltipAndDisabledAttributes={props.tooltipAndDisabledAttributes}
     />
     <PaymentProfileDeleteButton
       profile={props.profile}
-      refreshList={props.refreshList}
+      refetch={props.refetch}
       tooltipAndDisabledAttributes={props.tooltipAndDisabledAttributes}
     />
   </>

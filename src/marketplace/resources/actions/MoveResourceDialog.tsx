@@ -16,8 +16,7 @@ import { MoveToProjectAutocomplete } from './MoveToProjectAutocomplete';
 
 interface MoveResourceDialogOwnProps {
   resource: Resource;
-  reInitResource?(): void;
-  refreshList?(): void;
+  refetch?(): void;
 }
 
 interface FormData {
@@ -44,10 +43,8 @@ const PureMoveResourceDialog: FunctionComponent<any> = (props) => {
           ),
         ),
       );
-      if (props.resolve.reInitResource) {
-        await props.resolve.reInitResource();
-      } else if (props.resolve.refreshList) {
-        props.resolve.refreshList();
+      if (props.resolve.refetch) {
+        await props.resolve.refetch();
       }
       dispatch(closeModalDialog());
     } catch (error) {

@@ -11,15 +11,13 @@ const AddRemoteUserDialog = lazyComponent(
   'AddRemoteUserDialog',
 );
 
-export const UserTableActions = ({ refreshList }) => {
+export const UserTableActions = ({ refetch }) => {
   const dispatch = useDispatch();
   if (!ENV.plugins.WALDUR_AUTH_SOCIAL.REMOTE_EDUTEAMS_ENABLED) {
     return null;
   }
   const openDialog = () => {
-    dispatch(
-      openModalDialog(AddRemoteUserDialog, { resolve: { refreshList } }),
-    );
+    dispatch(openModalDialog(AddRemoteUserDialog, { resolve: { refetch } }));
   };
   return (
     <Button onClick={openDialog} className="me-3">

@@ -11,12 +11,12 @@ const AddProjectUserDialog = lazyComponent(
   'AddProjectUserDialog',
 );
 
-export const AddUserButton: React.FC<{ refreshList }> = ({ refreshList }) => {
+export const AddUserButton: React.FC<{ refetch }> = ({ refetch }) => {
   const dispatch = useDispatch();
   return (
     <ActionButton
       action={() =>
-        dispatch(openModalDialog(AddProjectUserDialog, { refreshList }))
+        dispatch(openModalDialog(AddProjectUserDialog, { refetch }))
       }
       title={translate('Add user')}
       icon="fa fa-plus"

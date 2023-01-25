@@ -16,7 +16,7 @@ export const NotificationCreateDialog = connect((state: RootState) => ({
 }))(
   reduxForm<
     NotificationFormData,
-    { resolve: { refreshList }; formValues: NotificationFormData }
+    { resolve: { refetch }; formValues: NotificationFormData }
   >({
     form: NOTIFICATION_CREATE_FORM_ID,
   })(({ submitting, invalid, handleSubmit, resolve, formValues }) => {
@@ -38,7 +38,7 @@ export const NotificationCreateDialog = connect((state: RootState) => ({
           setStep={setStep}
           handleSubmit={handleSubmit}
           disabled={invalid || submitting}
-          refreshList={resolve.refreshList}
+          refetch={resolve.refetch}
         />
       </form>
     );

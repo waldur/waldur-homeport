@@ -12,15 +12,15 @@ const CustomerUserAddDialog = lazyComponent(
 );
 
 interface CustomerUserAddButtonProps {
-  refreshList;
+  refetch;
 }
 
 export const CustomerUserAddButton: FunctionComponent<CustomerUserAddButtonProps> =
-  ({ refreshList }) => {
+  ({ refetch }) => {
     const dispatch = useDispatch();
     const callback = () =>
       dispatch(
-        openModalDialog(CustomerUserAddDialog, { resolve: { refreshList } }),
+        openModalDialog(CustomerUserAddDialog, { resolve: { refetch } }),
       );
 
     return (

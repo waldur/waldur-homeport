@@ -5,14 +5,16 @@ import {
   validateState,
   validateRuntimeState,
 } from '@waldur/resource/actions/base';
+import { ActionItemType } from '@waldur/resource/actions/types';
 
 const validators = [validateState('OK'), validateRuntimeState('stopped')];
 
-export const StartAction = ({ resource }) => (
+export const StartAction: ActionItemType = ({ resource, refetch }) => (
   <AsyncActionItem
     title={translate('Start')}
     resource={resource}
     validators={validators}
     apiMethod={startVirtualMachine}
+    refetch={refetch}
   />
 );

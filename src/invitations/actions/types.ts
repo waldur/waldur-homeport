@@ -9,6 +9,6 @@ export interface UserDetails {
 
 export interface InvitationContext {
   customer: Customer;
-  refreshList?(): void;
+  refetch?(): void;
   project?: Project;
 }

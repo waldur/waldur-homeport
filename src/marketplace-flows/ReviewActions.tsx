@@ -5,19 +5,19 @@ import { ReviewRejectAction } from './ReviewRejectAction';
 
 export const ReviewActions = ({
   request,
-  refreshList,
+  refetch,
   approveMethod,
   rejectMethod,
 }) => (
   <ButtonGroup>
     <ReviewApproveAction
       request={request}
-      refreshList={refreshList}
+      refetch={refetch}
       apiMethod={approveMethod}
     />
     <ReviewRejectAction
       request={request}
-      refreshList={refreshList}
+      refetch={refetch}
       apiMethod={rejectMethod}
     />
   </ButtonGroup>

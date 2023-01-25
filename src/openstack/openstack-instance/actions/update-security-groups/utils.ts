@@ -17,7 +17,10 @@ interface UpdateSecurityGroupsFormData {
   security_groups: { value: string; label: string }[];
 }
 
-export const useUpdateSecurityGroupsForm = (resource: OpenStackInstance) => {
+export const useUpdateSecurityGroupsForm = (
+  resource: OpenStackInstance,
+  refetch?,
+) => {
   const asyncState = useAsync(
     () =>
       loadSecurityGroups(resource.service_settings_uuid).then((groups) =>
@@ -43,6 +46,9 @@ export const useUpdateSecurityGroupsForm = (resource: OpenStackInstance) => {
           ),
         ),
       );
+      if (refetch) {
+        await refetch();
+      }
       dispatch(closeModalDialog());
     } catch (e) {
       dispatch(

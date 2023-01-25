@@ -2,7 +2,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { OpenStackInstance } from '@waldur/openstack/openstack-instance/types';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
-import { ActionContext } from '@waldur/resource/actions/types';
+import { ActionContext, ActionItemType } from '@waldur/resource/actions/types';
 
 const ForceDestroyDialog = lazyComponent(
   () => import('./ForceDestroyDialog'),
@@ -21,12 +21,13 @@ function validate(ctx: ActionContext<OpenStackInstance>): string {
 
 const validators = [validate];
 
-export const ForceDestroyAction = ({ resource }) => (
+export const ForceDestroyAction: ActionItemType = ({ resource, refetch }) => (
   <DialogActionItem
     title={translate('Force destroy')}
     validators={validators}
     modalComponent={ForceDestroyDialog}
     className="text-danger"
     resource={resource}
+    extraResolve={{ refetch }}
   />
 );

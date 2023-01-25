@@ -36,7 +36,7 @@ function* addPaymentProfile(action) {
     );
     const updatedCustomer = yield call(getCustomerApi, customer.uuid);
     yield put(setCurrentCustomer(updatedCustomer));
-    yield call(action.payload.refreshList);
+    yield call(action.payload.refetch);
     yield put(closeModalDialog());
   } catch (error) {
     yield put(
@@ -54,7 +54,7 @@ function* editPaymentProfile(action) {
     );
     yield put(showSuccess(translate('Payment profile has been updated.')));
     yield put(closeModalDialog());
-    yield call(action.payload.refreshList);
+    yield call(action.payload.refetch);
     yield put(closeModalDialog());
   } catch (error) {
     yield put(
@@ -69,7 +69,7 @@ function* removePaymentProfile(action: Action<any>) {
     yield put(showSuccess(translate('Payment profile has been removed.')));
     yield put(closeModalDialog());
     const customer = yield select(getCustomer);
-    yield call(action.payload.refreshList);
+    yield call(action.payload.refetch);
     const updatedCustomer = yield call(getCustomerApi, customer.uuid);
     yield put(setCurrentCustomer(updatedCustomer));
   } catch (error) {
@@ -84,7 +84,7 @@ function* enablePaymentProfile(action: Action<any>) {
     yield call(api.enablePaymentProfile, action.payload.uuid);
     yield put(showSuccess(translate('Payment profile has been enabled.')));
     const customer = yield select(getCustomer);
-    yield call(action.payload.refreshList);
+    yield call(action.payload.refetch);
     const updatedCustomer = yield call(getCustomerApi, customer.uuid);
     yield put(setCurrentCustomer(updatedCustomer));
   } catch (error) {

@@ -51,7 +51,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Actions'),
-      render: ({ row }) => <FlowActions flow={row} refreshList={props.fetch} />,
+      render: ({ row }) => <FlowActions flow={row} refetch={props.fetch} />,
     },
   ];
 

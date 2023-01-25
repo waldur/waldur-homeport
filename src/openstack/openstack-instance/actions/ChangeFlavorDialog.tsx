@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -9,12 +10,15 @@ import {
   loadFlavors,
 } from '@waldur/openstack/api';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { formatFlavor } from '@waldur/resource/utils';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import { OpenStackInstanceCurrentFlavor } from '../OpenStackInstanceCurrentFlavor';
 
-export const ChangeFlavorDialog = ({ resolve: { resource } }) => {
+export const ChangeFlavorDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   const dispatch = useDispatch();
 
   const asyncState = useAsync(async () => {
@@ -55,6 +59,9 @@ export const ChangeFlavorDialog = ({ resolve: { resource } }) => {
       submitForm={async (formData: ChangeFlavorRequestBody) => {
         try {
           await changeFlavor(resource.uuid, formData);
+          if (refetch) {
+            await refetch();
+          }
           dispatch(showSuccess(translate('Flavor change has been scheduled.')));
           dispatch(closeModalDialog());
         } catch (e) {

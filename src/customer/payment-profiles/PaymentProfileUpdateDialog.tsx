@@ -107,7 +107,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       editPaymentProfile({
         uuid: ownProps.resolve.profile.uuid,
         formData,
-        refreshList: ownProps.resolve.refreshList,
+        refetch: ownProps.resolve.refetch,
       }),
     ),
 });

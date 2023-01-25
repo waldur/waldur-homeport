@@ -48,9 +48,12 @@ export interface ActionContext<Resource = BaseResource> {
   user: User;
 }
 
-export type ActionItem = ComponentType<{
+export type ActionItemType = ComponentType<{
   resource;
-  reInitResource;
-  refreshList?;
-  as?;
+  refetch?(): void;
+  as?: ComponentType;
 }>;
+
+export type ActionDialogProps = {
+  resolve: { resource; refetch };
+};

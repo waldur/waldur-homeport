@@ -10,23 +10,23 @@ import {
 } from '@waldur/workspace/selectors';
 
 interface UserPermissionRequestRowActionsProps {
-  refreshList;
+  refetch;
   row;
 }
 
 export const UserPermissionRequestRowActions: FunctionComponent<UserPermissionRequestRowActionsProps> =
-  ({ row, refreshList }) => {
+  ({ row, refetch }) => {
     const user = useSelector(getUser);
     const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
     return row.state === 'pending' && (isOwnerOrStaff || user.is_support) ? (
       <ButtonGroup>
         <UserPermissionRequestApproveButton
           permissionRequest={row}
-          refreshList={refreshList}
+          refetch={refetch}
         />
         <UserPermissionRequestRejectButton
           permissionRequest={row}
-          refreshList={refreshList}
+          refetch={refetch}
         />
       </ButtonGroup>
     ) : null;

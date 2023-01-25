@@ -16,7 +16,7 @@ export const PaymentProfileCreateButton = (props) => {
     dispatch(
       openModalDialog(PaymentProfileCreateDialog, {
         resolve: {
-          refreshList: props.refreshList,
+          refetch: props.refetch,
         },
       }),
     );

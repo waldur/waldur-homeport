@@ -14,7 +14,7 @@ import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
-import { refreshProjects, refreshResources } from './api';
+import { refreshProjects, refetchs } from './api';
 import { AsyncSelectField } from './AsyncSelectField';
 import { DescriptionGroup } from './DescriptionGroup';
 import { SummaryGroup } from './SummaryGroup';
@@ -126,10 +126,7 @@ export const ProjectGroup = ({ disabled, customer, formId }) => {
 
 export const ResourceGroup = ({ disabled, project, formId }) => {
   const dispatch = useDispatch();
-  const loadData = useCallback(
-    (name) => refreshResources(name, project),
-    [project],
-  );
+  const loadData = useCallback((name) => refetchs(name, project), [project]);
 
   useEffect(() => {
     dispatch(change(formId, 'resource', undefined));

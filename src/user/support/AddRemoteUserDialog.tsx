@@ -8,7 +8,7 @@ import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import { addRemoteUser } from './api';
 
-export const AddRemoteUserDialog = ({ resolve: { refreshList } }) => {
+export const AddRemoteUserDialog = ({ resolve: { refetch } }) => {
   const dispatch = useDispatch();
   const context = {
     provider: ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_LABEL,
@@ -35,8 +35,8 @@ export const AddRemoteUserDialog = ({ resolve: { refreshList } }) => {
               ),
             ),
           );
-          if (refreshList) {
-            await refreshList();
+          if (refetch) {
+            await refetch();
           }
           dispatch(closeModalDialog());
         } catch (e) {

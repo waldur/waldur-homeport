@@ -17,6 +17,7 @@ export const formSelector = formValueSelector(FORM_ID);
 
 export interface OwnProps {
   asyncState: AsyncState<FetchedData>;
+  refetch?(): void;
 }
 
 export interface ComponentRowType {
@@ -78,6 +79,7 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
       {
         resource: ownProps.asyncState.value.resource,
         limits: ownProps.asyncState.value.limitSerializer(data.limits),
+        refetch: ownProps.refetch,
       },
       dispatch,
     ),

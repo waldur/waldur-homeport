@@ -1,9 +1,9 @@
-import { ActionItem } from './types';
+import { ActionItemType } from './types';
 import { UnlinkActionItem } from './UnlinkActionItem';
 
 class ActionConfiguration {
-  private actions: Record<string, ActionItem[]> = {};
-  private quickActions: Record<string, ActionItem[]> = {};
+  private actions: Record<string, ActionItemType[]> = {};
+  private quickActions: Record<string, ActionItemType[]> = {};
 
   register(type, config: any) {
     this.actions[type] = config;

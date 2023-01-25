@@ -82,7 +82,7 @@ export const ResourceDetailsView: FC<any> = ({
   scope,
   components,
   offering,
-  reInitResource,
+  refetch,
   state,
   tabs,
   tabSpec,
@@ -160,7 +160,7 @@ export const ResourceDetailsView: FC<any> = ({
                           <ResourceDetailsHeader
                             resource={resource}
                             scope={scope}
-                            reInitResource={reInitResource}
+                            refetch={refetch}
                           />
                         </Card>
                       </div>
@@ -174,7 +174,7 @@ export const ResourceDetailsView: FC<any> = ({
                               {scope && (
                                 <QuickActions
                                   resource={scope}
-                                  reInitResource={reInitResource}
+                                  refetch={refetch}
                                 />
                               )}
                             </div>
@@ -183,7 +183,6 @@ export const ResourceDetailsView: FC<any> = ({
                                 ...resource,
                                 marketplace_resource_uuid: resource.uuid,
                               }}
-                              iconClass="fa-expand"
                               as={ActionButton}
                             />
                             <RefreshButton />

@@ -15,7 +15,7 @@ export const PaymentProfileEditButton = (props) => {
   const callback = () =>
     dispatch(
       openModalDialog(PaymentProfileUpdateDialogContainer, {
-        resolve: { profile: props.profile, refreshList: props.refreshList },
+        resolve: { profile: props.profile, refetch: props.refetch },
       }),
     );
 

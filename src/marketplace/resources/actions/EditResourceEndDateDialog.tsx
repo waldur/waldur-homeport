@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { FormContainer, SubmitButton } from '@waldur/form';
@@ -16,18 +16,23 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { EDIT_RESOURCE_END_DATE_FORM_ID } from './constants';
 
-interface EditResourceEndDateDialogOwnProps {
-  resource: Resource;
-  reInitResource?(): void;
-  refreshList?(): void;
-  updateEndDate?(uuid: string, date: string);
-}
+type OwnProps = {
+  resolve: {
+    resource: Resource;
+    refetch?(): void;
+    updateEndDate?(uuid: string, date: string);
+  };
+};
+
+type StateProps = ReturnType<typeof mapStateToProps>;
 
 interface FormData {
   end_date: string;
 }
 
-const PureEditResourceEndDateDialog: FunctionComponent<any> = (props) => {
+const PureEditResourceEndDateDialog: FunctionComponent<
+  InjectedFormProps<{}> & OwnProps & StateProps
+> = (props) => {
   const dispatch = useDispatch();
 
   const submitRequest = async (formData: FormData) => {
@@ -43,10 +48,8 @@ const PureEditResourceEndDateDialog: FunctionComponent<any> = (props) => {
           }),
         ),
       );
-      if (props.resolve.reInitResource) {
-        await props.resolve.reInitResource();
-      } else if (props.resolve.refreshList) {
-        props.resolve.refreshList();
+      if (props.resolve.refetch) {
+        await props.resolve.refetch();
       }
       dispatch(closeModalDialog());
     } catch (error) {
@@ -94,11 +97,11 @@ const mapStateToProps = (_state, ownProps) => ({
   },
 });
 
-const connector = connect(mapStateToProps);
+const connector = connect<StateProps, {}, OwnProps>(mapStateToProps);
 
 const enhance = compose(
   connector,
-  reduxForm<FormData, EditResourceEndDateDialogOwnProps>({
+  reduxForm<FormData, OwnProps>({
     form: EDIT_RESOURCE_END_DATE_FORM_ID,
   }),
 );

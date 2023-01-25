@@ -20,7 +20,7 @@ export const PaymentProfileDeleteButton = (props) => {
     dispatch(
       removePaymentProfile({
         uuid: props.profile.uuid,
-        refreshList: props.refreshList,
+        refetch: props.refetch,
       }),
     );
   };

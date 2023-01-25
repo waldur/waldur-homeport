@@ -23,7 +23,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       hoverableRow={({ row }) => (
         <ReviewActions
           request={row}
-          refreshList={props.fetch}
+          refetch={props.fetch}
           approveMethod={approveResource}
           rejectMethod={rejectResource}
         />

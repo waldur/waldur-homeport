@@ -23,7 +23,7 @@ interface FloatingIPsFormData {
   floating_ips: FloatingIpPair[];
 }
 
-export const useFloatingIpsEditor = (resource: OpenStackInstance) => {
+export const useFloatingIpsEditor = (resource: OpenStackInstance, refetch?) => {
   const asyncState = useAsync(
     () =>
       loadFloatingIps(resource.service_settings_uuid).then((floatingIps) => [
@@ -88,6 +88,9 @@ export const useFloatingIpsEditor = (resource: OpenStackInstance) => {
       dispatch(
         showSuccess(translate('Floating IPs update has been scheduled.')),
       );
+      if (refetch) {
+        await refetch();
+      }
       dispatch(closeModalDialog());
     } catch (e) {
       dispatch(

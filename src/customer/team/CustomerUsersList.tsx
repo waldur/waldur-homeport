@@ -47,13 +47,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('team members')}
       hasQuery={true}
       hoverableRow={({ row }) => (
-        <CustomerUserRowActions row={row} refreshList={props.fetch} />
+        <CustomerUserRowActions row={row} refetch={props.fetch} />
       )}
       expandableRow={CustomerUsersListExpandableRow}
       actions={
-        props.isStaff ? (
-          <CustomerUserAddButton refreshList={props.fetch} />
-        ) : null
+        props.isStaff ? <CustomerUserAddButton refetch={props.fetch} /> : null
       }
     />
   );

@@ -8,12 +8,13 @@ import { useFloatingIpsEditor } from './utils';
 export interface UpdateFloatingIpsDialogProps {
   resolve: {
     resource: OpenStackInstance;
+    refetch?(): void;
   };
 }
 
 export const UpdateFloatingIpsDialog: FC<UpdateFloatingIpsDialogProps> = ({
-  resolve: { resource },
+  resolve: { resource, refetch },
 }) => {
-  const editorState = useFloatingIpsEditor(resource);
+  const editorState = useFloatingIpsEditor(resource, refetch);
   return <FloatingIpsForm {...editorState} />;
 };

@@ -44,7 +44,7 @@ export const refreshProjects = async (name: string, customer?: Customer) => {
   return { options: projects };
 };
 
-export const refreshResources = async (name: string, project?: Project) => {
+export const refetchs = async (name: string, project?: Project) => {
   if (!project) {
     return;
   }

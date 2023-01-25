@@ -13,7 +13,7 @@ import {
 import { acceptBooking } from './api';
 import * as constants from './constants';
 
-export const AcceptAction = ({ resource, reInitResource }) => {
+export const AcceptAction = ({ resource, refetch }) => {
   const dispatch = useDispatch();
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const isServiceManager = useSelector(isServiceManagerSelector);
@@ -38,7 +38,7 @@ export const AcceptAction = ({ resource, reInitResource }) => {
     }
     try {
       const response = await acceptBooking(resource.uuid);
-      await reInitResource(response);
+      await refetch(response);
       dispatch(showSuccess(translate('Booking has been accepted.')));
     } catch (e) {
       dispatch(showErrorResponse(e, translate('Unable to accept booking.')));
