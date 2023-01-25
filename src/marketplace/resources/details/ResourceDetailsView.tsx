@@ -61,7 +61,9 @@ const InstanceMainComponent = ({ resource, scope, state }) => {
       <Card className="mb-7">
         <Card.Body>
           <h3 className="mb-5">{translate('Networking')}</h3>
-          <NetworkingTab resource={resource} scope={scope} state={state} />
+          {scope && (
+            <NetworkingTab resource={resource} scope={scope} state={state} />
+          )}
         </Card.Body>
       </Card>
       {isExperimentalUiComponentsVisible() ? <MonitoringCharts /> : null}

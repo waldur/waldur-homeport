@@ -191,8 +191,11 @@ msgstr ""
 msgid "Accounting type"
 msgstr ""
 
-#: src/resource/actions/AsyncActionButton.tsx
 #: src/resource/actions/AsyncActionItem.tsx
+msgid "Action"
+msgstr ""
+
+#: src/resource/actions/AsyncActionButton.tsx
 msgid "Action has been applied."
 msgstr ""
 
@@ -12848,6 +12851,10 @@ msgstr ""
 
 #: src/form/CronField.tsx
 msgid "year"
+msgstr ""
+
+#: src/resource/actions/AsyncActionItem.tsx
+msgid "{action} has been scheduled for {resource}."
 msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx

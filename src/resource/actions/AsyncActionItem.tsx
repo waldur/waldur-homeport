@@ -21,7 +21,7 @@ interface AsyncActionItemProps<T> {
   errorMessage?: string;
 }
 
-export const AsyncActionItem: <T extends { uuid: string }>(
+export const AsyncActionItem: <T extends { uuid: string; name?: string }>(
   props: AsyncActionItemProps<T>,
 ) => ReactElement = ({
   resource,
@@ -37,7 +37,13 @@ export const AsyncActionItem: <T extends { uuid: string }>(
     try {
       await apiMethod(resource.uuid);
       dispatch(
-        showSuccess(successMessage || translate('Action has been applied.')),
+        showSuccess(
+          successMessage ||
+            translate('{action} has been scheduled for {resource}.', {
+              action: rest.title || translate('Action'),
+              resource: resource.name || resource.uuid,
+            }),
+        ),
       );
     } catch (e) {
       dispatch(
