@@ -21,9 +21,14 @@ export function afterBootstrap() {
       ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_ENVIRONMENT || 'unknown';
     const sentryTracesSampleRate =
       ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_TRACES_SAMPLE_RATE || 0.2;
+    const { hostname } = new URL(ENV.apiEndpoint);
     Sentry.init({
       dsn: dsn,
-      integrations: [new BrowserTracing()],
+      integrations: [
+        new BrowserTracing({
+          tracePropagationTargets: [hostname, /^\//],
+        }),
+      ],
       environment: sentryEnvironment,
       tracesSampleRate: sentryTracesSampleRate,
     });
