@@ -8,11 +8,12 @@ import { useUpdateSecurityGroupsForm } from './utils';
 export interface UpdateSecurityGroupsDialogProps {
   resolve: {
     resource: OpenStackInstance;
+    refetch?(): void;
   };
 }
 
 export const UpdateSecurityGroupsDialog: FC<UpdateSecurityGroupsDialogProps> =
-  ({ resolve: { resource } }) => {
-    const formState = useUpdateSecurityGroupsForm(resource);
+  ({ resolve: { resource, refetch } }) => {
+    const formState = useUpdateSecurityGroupsForm(resource, refetch);
     return <UpdateSecurityGroupsForm {...formState} />;
   };

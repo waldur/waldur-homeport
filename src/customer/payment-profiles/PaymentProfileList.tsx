@@ -52,14 +52,14 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       actions={
         <PaymentProfileCreateButton
-          refreshList={props.fetch}
+          refetch={props.fetch}
           {...tooltipAndDisabledAttributes}
         />
       }
       hoverableRow={({ row }) => (
         <PaymentProfileActions
           profile={row}
-          refreshList={props.fetch}
+          refetch={props.fetch}
           tooltipAndDisabledAttributes={tooltipAndDisabledAttributes}
         />
       )}

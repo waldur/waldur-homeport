@@ -3,7 +3,7 @@ import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton'
 
 import { ReviewDialog } from './ReviewDialog';
 
-export const ReviewApproveAction = ({ request, refreshList, apiMethod }) =>
+export const ReviewApproveAction = ({ request, refetch, apiMethod }) =>
   request.state === 'pending' ? (
     <DialogActionButton
       title={translate('Approve')}
@@ -11,7 +11,7 @@ export const ReviewApproveAction = ({ request, refreshList, apiMethod }) =>
       resource={request}
       modalComponent={ReviewDialog}
       extraResolve={{
-        refreshList,
+        refetch,
         apiMethod,
       }}
     />

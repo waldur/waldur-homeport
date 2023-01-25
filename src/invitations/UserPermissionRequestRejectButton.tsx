@@ -10,7 +10,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 
 interface UserPermissionRequestRejectButtonProps {
   permissionRequest: any;
-  refreshList;
+  refetch;
 }
 
 const PermissionRequestActionDialog = lazyComponent(
@@ -25,7 +25,7 @@ const openPermissionRequestActionDialog = (resolve) =>
   });
 
 export const UserPermissionRequestRejectButton: FunctionComponent<UserPermissionRequestRejectButtonProps> =
-  ({ permissionRequest, refreshList }) => {
+  ({ permissionRequest, refetch }) => {
     const dispatch = useDispatch();
 
     const submitRequest = async (comment: string) => {
@@ -35,7 +35,7 @@ export const UserPermissionRequestRejectButton: FunctionComponent<UserPermission
           showSuccess(translate('Permission request has been rejected.')),
         );
         dispatch(closeModalDialog());
-        refreshList();
+        refetch();
       } catch (e) {
         dispatch(
           showErrorResponse(

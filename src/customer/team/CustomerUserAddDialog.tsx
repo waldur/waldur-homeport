@@ -22,7 +22,7 @@ interface CustomerUserAddFormData {
 }
 
 interface CustomerUserAddProps {
-  resolve: { refreshList };
+  resolve: { refetch };
 }
 
 export const CustomerUserAddDialog = reduxForm<
@@ -30,7 +30,7 @@ export const CustomerUserAddDialog = reduxForm<
   CustomerUserAddProps
 >({
   form: 'CustomerUserAddDialog',
-})(({ resolve: { refreshList }, submitting, handleSubmit }) => {
+})(({ resolve: { refetch }, submitting, handleSubmit }) => {
   const customer = useSelector(getCustomer);
   const dispatch = useDispatch();
   const callback = async (formData: CustomerUserAddFormData) => {
@@ -40,7 +40,7 @@ export const CustomerUserAddDialog = reduxForm<
       'owner',
       formData.expiration_time,
     );
-    refreshList();
+    refetch();
     dispatch(showSuccess('User has been added to organization.'));
     dispatch(closeModalDialog());
   };

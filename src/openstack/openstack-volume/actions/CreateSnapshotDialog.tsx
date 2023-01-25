@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -8,9 +9,12 @@ import {
   createDescriptionField,
 } from '@waldur/resource/actions/base';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
-export const CreateSnapshotDialog = ({ resolve: { resource } }) => {
+export const CreateSnapshotDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   const dispatch = useDispatch();
   return (
     <ResourceActionDialog
@@ -36,6 +40,9 @@ export const CreateSnapshotDialog = ({ resolve: { resource } }) => {
           await createSnapshot(resource.uuid, formData);
           dispatch(showSuccess(translate('Volume snapshot has been created.')));
           dispatch(closeModalDialog());
+          if (refetch) {
+            await refetch();
+          }
         } catch (e) {
           dispatch(
             showErrorResponse(

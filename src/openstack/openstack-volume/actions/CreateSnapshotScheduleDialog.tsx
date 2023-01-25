@@ -8,7 +8,9 @@ import { getFields } from '@waldur/openstack/openstack-backup-schedule/actions/f
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
-export const CreateSnapshotScheduleDialog = ({ resolve: { resource } }) => {
+export const CreateSnapshotScheduleDialog = ({
+  resolve: { resource, refetch },
+}) => {
   const dispatch = useDispatch();
   return (
     <ResourceActionDialog
@@ -29,6 +31,9 @@ export const CreateSnapshotScheduleDialog = ({ resolve: { resource } }) => {
             ),
           );
           dispatch(closeModalDialog());
+          if (refetch) {
+            await refetch();
+          }
         } catch (e) {
           dispatch(
             showErrorResponse(

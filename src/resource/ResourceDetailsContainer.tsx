@@ -18,19 +18,19 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
   const { params } = useCurrentStateAndParams();
   const router = useRouter();
 
-  const [asyncResult, refreshResource] = useAsyncFn(
+  const [asyncResult, refetch] = useAsyncFn(
     () => getResource(params.resource_type, params.resource_uuid),
     [params],
   );
 
   useEffectOnce(() => {
-    refreshResource();
+    refetch();
   });
 
   const { online } = useNetwork();
 
   const pullInterval = online ? ENV.defaultPullInterval * 1000 : null;
-  useRecursiveTimeout(refreshResource, pullInterval);
+  useRecursiveTimeout(refetch, pullInterval);
 
   const [resource, setResource] = useState<BaseResource>();
 
@@ -86,7 +86,7 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
   }, [asyncResult.error, resource, router.stateService]);
 
   return resource ? (
-    <ResourceDetails resource={resource} refreshResource={refreshResource} />
+    <ResourceDetails resource={resource} refetch={refetch} />
   ) : asyncResult.loading ? (
     <LoadingSpinner />
   ) : asyncResult.error ? (

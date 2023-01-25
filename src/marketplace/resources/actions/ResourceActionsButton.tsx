@@ -27,8 +27,7 @@ const ActionsList = [
 
 interface ResourceActionsButtonProps {
   resource: Resource;
-  reInitResource?(): void;
-  refreshList?(): void;
+  refetch?(): void;
 }
 
 export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps> =
@@ -41,8 +40,7 @@ export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps
         onToggle={onToggle}
         actions={ActionsList}
         resource={props.resource}
-        reInitResource={props.reInitResource}
-        refreshList={props.refreshList}
+        refetch={props.refetch}
       />
     );
   };

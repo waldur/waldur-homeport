@@ -113,8 +113,8 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
         dispatch(closeModalDialog());
         router.stateService.go('organization-invitations');
         dispatch(showSuccess('Invitation has been created.'));
-        if (context.refreshList) {
-          context.refreshList();
+        if (context.refetch) {
+          context.refetch();
         }
       } catch (e) {
         dispatch(showErrorResponse(e, 'Unable to create invitation.'));
@@ -171,8 +171,8 @@ export const useGroupInvitationCreateDialog = (context: InvitationContext) => {
         await InvitationService.createGroupInvitation(payload);
         dispatch(closeModalDialog());
         dispatch(showSuccess('Group invitation has been created.'));
-        if (context.refreshList) {
-          context.refreshList();
+        if (context.refetch) {
+          context.refetch();
         }
       } catch (e) {
         dispatch(showErrorResponse(e, 'Unable to create group invitation.'));

@@ -7,11 +7,11 @@ import { Resource } from '../types';
 
 interface ResourceActionsButtonProps {
   row: Resource;
-  refreshList?(): void;
+  refetch?(): void;
 }
 
 export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps> =
-  ({ row, refreshList }) =>
+  ({ row, refetch }) =>
     row.scope === null || row.offering_type === 'Support.OfferingTemplate' ? (
       <BaseResourceActionsButton
         resource={
@@ -20,10 +20,10 @@ export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps
             marketplace_resource_uuid: row.uuid,
           } as any
         }
-        refreshList={refreshList}
+        refetch={refetch}
       />
     ) : (
       <>
-        <ActionButtonResource url={row.scope} refreshList={refreshList} />
+        <ActionButtonResource url={row.scope} refetch={refetch} />
       </>
     );

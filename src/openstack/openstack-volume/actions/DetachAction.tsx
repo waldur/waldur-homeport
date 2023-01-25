@@ -5,6 +5,7 @@ import {
   validateRuntimeState,
   validateState,
 } from '@waldur/resource/actions/base';
+import { ActionItemType } from '@waldur/resource/actions/types';
 
 import { isBootable } from './utils';
 
@@ -14,11 +15,12 @@ const validators = [
   validateState('OK'),
 ];
 
-export const DetachAction = ({ resource }) => (
+export const DetachAction: ActionItemType = ({ resource, refetch }) => (
   <AsyncActionItem
     title={translate('Detach')}
     apiMethod={detachVolume}
     resource={resource}
     validators={validators}
+    refetch={refetch}
   />
 );

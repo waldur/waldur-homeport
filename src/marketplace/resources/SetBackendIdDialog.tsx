@@ -1,13 +1,15 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { setBackendId } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
-export const SetBackendIdDialog = ({
-  resolve: { resource, reInitResource },
+export const SetBackendIdDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
 }) => {
   const dispatch = useDispatch();
   return (
@@ -30,8 +32,8 @@ export const SetBackendIdDialog = ({
           dispatch(
             showSuccess(translate('Backend ID has been successfully set.')),
           );
-          if (reInitResource) {
-            await reInitResource();
+          if (refetch) {
+            await refetch();
           }
           dispatch(closeModalDialog());
         } catch (e) {

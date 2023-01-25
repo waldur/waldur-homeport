@@ -16,25 +16,19 @@ interface AsyncActionButtonProps<T> {
   title: string;
   icon?: string;
   className?: string;
-  refreshList?(): void;
+  refetch?(): void;
 }
 
 export const AsyncActionButton: <T extends { uuid: string }>(
   props: AsyncActionButtonProps<T>,
-) => ReactElement = ({
-  resource,
-  apiMethod,
-  validators,
-  refreshList,
-  ...rest
-}) => {
+) => ReactElement = ({ resource, apiMethod, validators, refetch, ...rest }) => {
   const validationState = useValidators(validators, resource);
   const dispatch = useDispatch();
   const callback = async () => {
     try {
       await apiMethod(resource.uuid);
-      if (refreshList) {
-        refreshList();
+      if (refetch) {
+        refetch();
       }
       dispatch(showSuccess(translate('Action has been applied.')));
     } catch (e) {

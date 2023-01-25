@@ -15,7 +15,7 @@ const SetBackendIdDialog = lazyComponent(
   'SetBackendIdDialog',
 );
 
-export const SetBackendIdButton: FC<any> = ({ resource, reInitResource }) => {
+export const SetBackendIdButton: FC<any> = ({ resource, refetch }) => {
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const isServiceManager = useSelector(isServiceManagerSelector);
   const customer = useSelector(getCustomer);
@@ -27,7 +27,7 @@ export const SetBackendIdButton: FC<any> = ({ resource, reInitResource }) => {
     <DialogActionButton
       title={translate('Set backend ID')}
       modalComponent={SetBackendIdDialog}
-      extraResolve={{ reInitResource }}
+      extraResolve={{ refetch }}
       resource={resource}
     />
   );

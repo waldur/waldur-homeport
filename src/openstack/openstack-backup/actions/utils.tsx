@@ -140,7 +140,7 @@ const serializeBackupRestoreFormData = (
   })),
 });
 
-export const useBackupRestoreForm = (resource: OpenStackBackup) => {
+export const useBackupRestoreForm = (resource: OpenStackBackup, refetch?) => {
   const asyncState = useAsync(() => loadData(resource), [resource]);
   const dispatch = useDispatch();
 
@@ -154,6 +154,9 @@ export const useBackupRestoreForm = (resource: OpenStackBackup) => {
         showSuccess(translate('VM snapshot restoration has been scheduled.')),
       );
       dispatch(closeModalDialog());
+      if (refetch) {
+        await refetch();
+      }
     } catch (e) {
       dispatch(
         showErrorResponse(e, translate('Unable to restore VM snapshot.')),

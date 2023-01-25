@@ -4,11 +4,12 @@ import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
+import { ActionItemType } from '@waldur/resource/actions/types';
 import { getUser } from '@waldur/workspace/selectors';
 
 const LinkDialog = lazyComponent(() => import('./LinkDialog'), 'LinkDialog');
 
-export const LinkAction = ({ resource }) => {
+export const LinkAction: ActionItemType = ({ resource, refetch }) => {
   const user = useSelector(getUser);
   if (
     !resource.instance &&
@@ -20,6 +21,7 @@ export const LinkAction = ({ resource }) => {
         title={translate('Link OpenStack Instance')}
         modalComponent={LinkDialog}
         resource={resource}
+        extraResolve={{ refetch }}
       />
     );
   }

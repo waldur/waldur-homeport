@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -6,11 +7,14 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { createNameField } from '@waldur/resource/actions/base';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import { createPort } from '../api';
 
-export const CreatePortDialog = ({ resolve: { resource } }) => {
+export const CreatePortDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   const dispatch = useDispatch();
 
   const asyncState = useAsync(async () => {
@@ -52,6 +56,9 @@ export const CreatePortDialog = ({ resolve: { resource } }) => {
           });
           dispatch(showSuccess(translate('Port has been created.')));
           dispatch(closeModalDialog());
+          if (refetch) {
+            await refetch();
+          }
         } catch (e) {
           dispatch(showErrorResponse(e, translate('Unable to create port.')));
         }

@@ -12,14 +12,22 @@ interface PullActionItemProps<T> {
   resource: T;
   iconClass?: string;
   as?;
+  refetch?;
 }
 
-export const usePull = ({ resource, apiMethod }) => {
+export const usePull = ({
+  resource,
+  apiMethod,
+  refetch,
+}: Pick<PullActionItemProps<any>, 'resource' | 'apiMethod' | 'refetch'>) => {
   const dispatch = useDispatch();
   const action = async () => {
     try {
       await apiMethod(resource.uuid);
       dispatch(showSuccess(translate('Synchronisation has been scheduled.')));
+      if (refetch) {
+        await refetch();
+      }
     } catch (e) {
       dispatch(
         showErrorResponse(e, translate('Unable to synchronise resource.')),

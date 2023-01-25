@@ -11,8 +11,8 @@ const NotificationCreateDialog = lazyComponent(
   'NotificationCreateDialog',
 );
 
-export const NotificationCreateButton: FunctionComponent<{ refreshList }> = ({
-  refreshList,
+export const NotificationCreateButton: FunctionComponent<{ refetch }> = ({
+  refetch,
 }) => {
   const dispatch = useDispatch();
   const callback = () =>
@@ -20,7 +20,7 @@ export const NotificationCreateButton: FunctionComponent<{ refreshList }> = ({
       openModalDialog(NotificationCreateDialog, {
         dialogClassName: 'modal-dialog-centered',
         resolve: {
-          refreshList,
+          refetch,
         },
         size: 'xl',
       }),

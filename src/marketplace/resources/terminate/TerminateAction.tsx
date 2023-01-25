@@ -13,14 +13,17 @@ const validators = [validateState('OK', 'Erred')];
 interface TerminateActionProps {
   resource: any;
   dialogSubtitle?: string;
+  refetch?(): void;
 }
 
 export const useTerminate = ({
   resource,
   dialogSubtitle,
+  refetch,
 }: {
   resource;
   dialogSubtitle?;
+  refetch?(): void;
 }) => {
   const { tooltip, disabled } = useValidators(validators, resource);
   const action = useModalDialogCallback(
@@ -28,7 +31,7 @@ export const useTerminate = ({
     null,
     resource,
     null,
-    { dialogSubtitle },
+    { dialogSubtitle, refetch },
   );
   return {
     title: translate('Terminate'),
@@ -41,8 +44,9 @@ export const useTerminate = ({
 export const TerminateAction: FC<TerminateActionProps> = ({
   resource,
   dialogSubtitle,
+  refetch,
 }) => {
-  const props = useTerminate({ resource, dialogSubtitle });
+  const props = useTerminate({ resource, refetch, dialogSubtitle });
   return resource.marketplace_resource_uuid !== null ? (
     <ActionItem {...props} />
   ) : null;

@@ -19,7 +19,7 @@ const ActionsList = [
   EditResourceEndDateAction,
 ];
 
-export const ResourceActions = ({ resource, scope, reInitResource }) => {
+export const ResourceActions = ({ resource, scope, refetch }) => {
   const extraActions = useMemo(() => {
     const quickActions = ActionRegistry.getQuickActions(resource.resource_type);
     return ActionRegistry.getActions(resource.resource_type).filter(
@@ -38,18 +38,10 @@ export const ResourceActions = ({ resource, scope, reInitResource }) => {
       </Dropdown.Toggle>
       <Dropdown.Menu>
         {ActionsList.map((ActionComponent, index) => (
-          <ActionComponent
-            key={index}
-            resource={resource}
-            reInitResource={reInitResource}
-          />
+          <ActionComponent key={index} resource={resource} refetch={refetch} />
         ))}
         {extraActions.map((ActionComponent, index) => (
-          <ActionComponent
-            key={index}
-            resource={scope}
-            reInitResource={reInitResource}
-          />
+          <ActionComponent key={index} resource={scope} refetch={refetch} />
         ))}
       </Dropdown.Menu>
     </Dropdown>

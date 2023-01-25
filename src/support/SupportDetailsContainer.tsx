@@ -37,7 +37,7 @@ export const SupportDetailsContainer: FunctionComponent = () => {
     params: { resource_uuid },
   } = useCurrentStateAndParams();
 
-  const [{ loading, error, value }, reInitResource] = useAsyncFn(
+  const [{ loading, error, value }, refetch] = useAsyncFn(
     () => loadData(resource_uuid),
     [resource_uuid],
   );
@@ -50,9 +50,9 @@ export const SupportDetailsContainer: FunctionComponent = () => {
     if (!resource_uuid) {
       router.stateService.go('errorPage.notFound');
     } else {
-      reInitResource();
+      refetch();
     }
-  }, [resource_uuid, router.stateService, reInitResource]);
+  }, [resource_uuid, router.stateService, refetch]);
 
   useEffect(() => {
     if ((error as any)?.status === 404) {
@@ -67,7 +67,7 @@ export const SupportDetailsContainer: FunctionComponent = () => {
   ) : value ? (
     <SupportDetails
       resource={value.resource}
-      reInitResource={reInitResource}
+      refetch={refetch}
       summary={value.offering.full_description}
       issue={value.issue}
     />

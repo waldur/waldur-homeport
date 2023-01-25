@@ -1,13 +1,15 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { submitReport } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-export const SubmitReportDialog = ({
-  resolve: { resource, reInitResource },
+export const SubmitReportDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
 }) => {
   const dispatch = useDispatch();
   return (
@@ -18,8 +20,8 @@ export const SubmitReportDialog = ({
             report: formData.report ? JSON.parse(formData.report) : undefined,
           });
           dispatch(showSuccess(translate('Report has been submitted')));
-          if (reInitResource) {
-            await reInitResource();
+          if (refetch) {
+            await refetch();
           }
           dispatch(closeModalDialog());
         } catch (e) {

@@ -60,7 +60,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       placeholderComponent={<EmptyResourcesListPlaceholder />}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hoverableRow={({ row }) => (
-        <ResourceActionsButton row={row} refreshList={props.fetch} />
+        <ResourceActionsButton row={row} refetch={props.fetch} />
       )}
       hasQuery={true}
       showPageSizeSelector={true}

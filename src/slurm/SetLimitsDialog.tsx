@@ -1,4 +1,7 @@
+import { FC } from 'react';
+
 import { translate } from '@waldur/i18n';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDialog';
 
 import { setLimits } from './api';
@@ -37,14 +40,15 @@ const serializeLimits = (limits: AllocationLimits): AllocationLimits => ({
   ram_limit: limits.ram_limit * 1024 * 60,
 });
 
-export const SetLimitsDialog = ({ resolve: { resource } }) => {
-  return (
-    <UpdateResourceDialog
-      fields={getFields()}
-      resource={resource}
-      initialValues={parseLimits(resource)}
-      updateResource={(id, limits) => setLimits(id, serializeLimits(limits))}
-      verboseName={translate('SLURM allocation')}
-    />
-  );
-};
+export const SetLimitsDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
+}) => (
+  <UpdateResourceDialog
+    fields={getFields()}
+    resource={resource}
+    initialValues={parseLimits(resource)}
+    updateResource={(id, limits) => setLimits(id, serializeLimits(limits))}
+    verboseName={translate('SLURM allocation')}
+    refetch={refetch}
+  />
+);

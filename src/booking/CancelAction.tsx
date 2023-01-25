@@ -13,7 +13,7 @@ import {
 import { rejectBooking } from './api';
 import * as constants from './constants';
 
-export const CancelAction = ({ resource, reInitResource }) => {
+export const CancelAction = ({ resource, refetch }) => {
   const dispatch = useDispatch();
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const isServiceManager = useSelector(isServiceManagerSelector);
@@ -38,7 +38,7 @@ export const CancelAction = ({ resource, reInitResource }) => {
     }
     try {
       const response = await rejectBooking(resource.uuid);
-      await reInitResource(response);
+      await refetch(response);
       dispatch(showSuccess(translate('Booking has been cancelled.')));
     } catch (e) {
       dispatch(showErrorResponse(e, translate('Unable to cancel booking.')));

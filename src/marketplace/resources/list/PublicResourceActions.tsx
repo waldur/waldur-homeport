@@ -23,11 +23,11 @@ const ActionsList = [
 
 interface PublicResourceActionsProps {
   resource: Resource;
-  refreshList(): void;
+  refetch(): void;
 }
 
 export const PublicResourceActions: FunctionComponent<PublicResourceActionsProps> =
-  ({ resource, refreshList }) => {
+  ({ resource, refetch }) => {
     return (
       <DropdownButton
         title={translate('Actions')}
@@ -42,7 +42,7 @@ export const PublicResourceActions: FunctionComponent<PublicResourceActionsProps
               ...resource,
               marketplace_resource_uuid: resource.uuid,
             }}
-            refreshList={refreshList}
+            refetch={refetch}
           />
         ))}
       </DropdownButton>

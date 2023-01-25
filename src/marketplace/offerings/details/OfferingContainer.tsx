@@ -29,13 +29,13 @@ export const OfferingContainer: FunctionComponent = () => {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
 
-  const [{ loading, error, value }, reInitResource] = useAsyncFn(
+  const [{ loading, error, value }, refetch] = useAsyncFn(
     () => loadData(offering_uuid),
     [offering_uuid],
   );
 
   useEffectOnce(() => {
-    reInitResource();
+    refetch();
   });
 
   useFullPage();
@@ -58,7 +58,7 @@ export const OfferingContainer: FunctionComponent = () => {
       offering={value.offering}
       category={value.category}
       plansUsage={value.plansUsage}
-      reInitResource={reInitResource}
+      refetch={refetch}
     />
   );
 };

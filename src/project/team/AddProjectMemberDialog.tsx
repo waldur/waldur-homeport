@@ -33,7 +33,7 @@ interface AddProjectMemberDialogResolve {
   currentCustomer: any;
   currentProject: any;
   isProjectManager: boolean;
-  refreshList;
+  refetch;
 }
 
 interface AddProjectMemberDialogOwnProps {
@@ -66,7 +66,7 @@ const savePermissions = async (
       role: formData.role,
     });
   }
-  resolve.refreshList();
+  resolve.refetch();
 };
 
 const loadValidUsers = (resolve: AddProjectMemberDialogResolve) =>

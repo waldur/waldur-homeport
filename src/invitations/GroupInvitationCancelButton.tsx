@@ -9,11 +9,11 @@ import { ActionButton } from '@waldur/table/ActionButton';
 
 interface GroupInvitationCancelButtonProps {
   permissionRequest: any;
-  refreshList;
+  refetch;
 }
 
 export const GroupInvitationCancelButton: FunctionComponent<GroupInvitationCancelButtonProps> =
-  ({ permissionRequest, refreshList }) => {
+  ({ permissionRequest, refetch }) => {
     const dispatch = useDispatch();
     const callback = async () => {
       try {
@@ -29,7 +29,7 @@ export const GroupInvitationCancelButton: FunctionComponent<GroupInvitationCance
       }
       try {
         await cancelGroupInvitation(permissionRequest.uuid);
-        refreshList();
+        refetch();
         dispatch(
           showSuccess(translate('Group invitation has been cancelled.')),
         );

@@ -9,19 +9,19 @@ import { ActionButton } from '@waldur/table/ActionButton';
 interface UserRemoveButtonProps {
   permission: string;
   isDisabled: boolean;
-  refreshList(): void;
+  refetch(): void;
 }
 
 export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   permission,
   isDisabled,
-  refreshList,
+  refetch,
 }) => {
   const dispatch = useDispatch();
   const callback = async () => {
     try {
       await Axios.delete(permission);
-      refreshList();
+      refetch();
       dispatch(showSuccess(translate('Team member has been removed.')));
     } catch (e) {
       dispatch(

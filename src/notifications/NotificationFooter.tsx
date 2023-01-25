@@ -19,14 +19,14 @@ export const NotificationFooter = ({
   step,
   setStep,
   handleSubmit,
-  refreshList,
+  refetch,
   disabled,
   notificationId,
 }: {
   step;
   setStep;
   handleSubmit;
-  refreshList;
+  refetch;
   disabled;
   notificationId?;
 }) => {
@@ -42,7 +42,7 @@ export const NotificationFooter = ({
         } else {
           await createNotification(serializeNotification(formData));
         }
-        await refreshList();
+        await refetch();
         dispatch(
           showSuccess(translate('Notification has been saved as a draft.')),
         );
@@ -53,7 +53,7 @@ export const NotificationFooter = ({
         );
       }
     },
-    [dispatch, refreshList, notificationId],
+    [dispatch, refetch, notificationId],
   );
 
   const saveAndSend = useCallback(
@@ -69,7 +69,7 @@ export const NotificationFooter = ({
           response = await createNotification(serializeNotification(formData));
         }
         await sendNotification((response.data as { uuid: string }).uuid);
-        await refreshList();
+        await refetch();
         dispatch(showSuccess(translate('Notification has been sent.')));
         dispatch(closeModalDialog());
       } catch (e) {
@@ -78,7 +78,7 @@ export const NotificationFooter = ({
         );
       }
     },
-    [dispatch, refreshList, notificationId],
+    [dispatch, refetch, notificationId],
   );
 
   return (

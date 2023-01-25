@@ -7,7 +7,7 @@ import { CancelAction } from './CancelAction';
 
 const ActionsList = [AcceptAction, CancelAction];
 
-export const BookingActions = ({ resource, reInitResource }) => {
+export const BookingActions = ({ resource, refetch }) => {
   const [open, onToggle] = useBoolean(false);
 
   return (
@@ -16,7 +16,7 @@ export const BookingActions = ({ resource, reInitResource }) => {
       onToggle={onToggle}
       actions={ActionsList}
       resource={resource}
-      reInitResource={reInitResource}
+      refetch={refetch}
     />
   );
 };

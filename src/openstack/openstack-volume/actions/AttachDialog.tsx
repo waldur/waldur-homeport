@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -6,10 +7,13 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { attachVolume } from '@waldur/openstack/api';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { VirtualMachine } from '@waldur/resource/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
-export const AttachDialog = ({ resolve: { resource } }) => {
+export const AttachDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   const dispatch = useDispatch();
 
   const asyncState = useAsync(async () => {
@@ -52,6 +56,9 @@ export const AttachDialog = ({ resolve: { resource } }) => {
             showSuccess(translate('Volume has been attached to instance.')),
           );
           dispatch(closeModalDialog());
+          if (refetch) {
+            await refetch();
+          }
         } catch (e) {
           dispatch(
             showErrorResponse(

@@ -69,9 +69,9 @@ const BackupRestoreForm = connectBackupRestoreForm(
 );
 
 export const BackupRestoreDialog: FC<{
-  resolve: { resource: OpenStackBackup };
-}> = ({ resolve: { resource } }) => {
-  const formProps = useBackupRestoreForm(resource);
+  resolve: { resource: OpenStackBackup; refetch?(): void };
+}> = ({ resolve: { resource, refetch } }) => {
+  const formProps = useBackupRestoreForm(resource, refetch);
 
   return <BackupRestoreForm {...formProps} />;
 };

@@ -16,8 +16,8 @@ const NotificationUpdateDialog = lazyComponent(
 
 export const NotificationUpdateButton: FunctionComponent<{
   notification: NotificationResponseData;
-  refreshList;
-}> = ({ notification, refreshList }) => {
+  refetch;
+}> = ({ notification, refetch }) => {
   const dispatch = useDispatch();
   const callback = () =>
     dispatch(
@@ -26,7 +26,7 @@ export const NotificationUpdateButton: FunctionComponent<{
         resolve: {
           initialValues: parseNotification(notification),
           uuid: notification.uuid,
-          refreshList,
+          refetch,
         },
         size: 'xl',
       }),

@@ -1,12 +1,17 @@
+import { FC } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { updateBackup } from '@waldur/openstack/api';
 import {
   createNameField,
   createDescriptionField,
 } from '@waldur/resource/actions/base';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDialog';
 
-export const EditDialog = ({ resolve: { resource } }) => {
+export const EditDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   return (
     <UpdateResourceDialog
       fields={[
@@ -30,6 +35,7 @@ export const EditDialog = ({ resolve: { resource } }) => {
       }}
       updateResource={updateBackup}
       verboseName={translate('VM snapshot')}
+      refetch={refetch}
     />
   );
 };

@@ -39,7 +39,7 @@ const TableComponent = (props: any) => {
     {
       title: translate('Actions'),
       render: ({ row }) => (
-        <UserPermissionRequestRowActions row={row} refreshList={props.fetch} />
+        <UserPermissionRequestRowActions row={row} refetch={props.fetch} />
       ),
     },
   ];

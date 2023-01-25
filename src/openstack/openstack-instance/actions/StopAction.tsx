@@ -6,7 +6,7 @@ import {
   validateState,
   validateRuntimeState,
 } from '@waldur/resource/actions/base';
-import { ActionContext } from '@waldur/resource/actions/types';
+import { ActionContext, ActionItemType } from '@waldur/resource/actions/types';
 
 function validate(ctx: ActionContext<OpenStackInstance>): string {
   if (ctx.resource.state === 'OK' && ctx.resource.runtime_state === 'SHUTOFF') {
@@ -20,7 +20,7 @@ const validators = [
   validateRuntimeState('ACTIVE'),
 ];
 
-export const StopAction = ({ resource, ...rest }) => (
+export const StopAction: ActionItemType = ({ resource, ...rest }) => (
   <AsyncActionItem
     title={translate('Stop')}
     iconClass="fa-stop"

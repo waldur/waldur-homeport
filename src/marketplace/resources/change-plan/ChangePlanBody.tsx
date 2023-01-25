@@ -28,6 +28,7 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
       {
         resource: ownProps.asyncState.value.resource,
         plan_url: data.plan.url,
+        refetch: ownProps.refetch,
       },
       dispatch,
     ),
@@ -40,6 +41,7 @@ const connector = compose(
 
 interface OwnProps {
   asyncState: AsyncState<FetchedData>;
+  refetch;
 }
 
 interface DialogBodyProps extends OwnProps, InjectedFormProps {

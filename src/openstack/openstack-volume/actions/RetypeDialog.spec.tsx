@@ -42,7 +42,7 @@ const mountDialog = () => {
   const store = createActionStore();
   return mount(
     <Provider store={store}>
-      <RetypeDialog resolve={{ resource }} />
+      <RetypeDialog resolve={{ resource, refetch: jest.fn() }} />
     </Provider>,
   );
 };

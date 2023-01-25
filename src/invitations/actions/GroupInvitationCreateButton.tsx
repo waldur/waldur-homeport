@@ -17,8 +17,8 @@ const GroupInvitationCreateDialog = lazyComponent(
 );
 
 export const GroupInvitationCreateButton: FunctionComponent<{
-  refreshList(): void;
-}> = ({ refreshList }) => {
+  refetch(): void;
+}> = ({ refetch }) => {
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
@@ -30,7 +30,7 @@ export const GroupInvitationCreateButton: FunctionComponent<{
           context: {
             customer,
             user,
-            refreshList,
+            refetch,
           },
         },
       }),

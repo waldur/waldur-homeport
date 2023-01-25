@@ -11,9 +11,9 @@ import { ResourceRefreshButton } from './ResourceRefreshButton';
 import { ResourceSummary } from './summary/ResourceSummary';
 import { ResourceTabs } from './tabs/ResourceTabs';
 
-let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
+let ResourceDetails: FunctionComponent<{ resource; refetch }> = ({
   resource,
-  refreshResource,
+  refetch,
 }) => {
   if (!resource) {
     return null;
@@ -25,11 +25,8 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
         <div className="mb-3">
           <div className="pull-right">
             <ResourceAccessButton resource={resource} />
-            <ActionButtonResource
-              url={resource.url}
-              refreshResource={refreshResource}
-            />
-            <ResourceRefreshButton refreshResource={refreshResource} />
+            <ActionButtonResource url={resource.url} refetch={refetch} />
+            <ResourceRefreshButton refetch={refetch} />
             {resource.marketplace_offering_uuid && (
               <OfferingDetailsButton
                 offering={resource.marketplace_offering_uuid}

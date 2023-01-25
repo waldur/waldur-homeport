@@ -89,7 +89,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('Resources')}
       placeholderComponent={<EmptyResourcesListPlaceholder />}
       hoverableRow={({ row }) => (
-        <ResourceActionsButton row={row} refreshList={props.fetch} />
+        <ResourceActionsButton row={row} refetch={props.fetch} />
       )}
       actions={tableActions}
       initialSorting={{ field: 'created', mode: 'desc' }}

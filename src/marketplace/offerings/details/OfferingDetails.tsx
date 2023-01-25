@@ -27,7 +27,7 @@ interface OfferingDetailsProps {
   offering: Offering;
   category: Category;
   plansUsage: PlanUsageRow[];
-  reInitResource(): void;
+  refetch(): void;
 }
 
 export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
@@ -74,7 +74,7 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
                           variant="light"
                           size="sm"
                           className="btn-icon me-2"
-                          onClick={props.reInitResource}
+                          onClick={props.refetch}
                         >
                           <i className="fa fa-refresh" />
                         </Button>

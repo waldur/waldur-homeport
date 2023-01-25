@@ -1,10 +1,8 @@
-import { FC } from 'react';
-
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
-import { Resource } from '@waldur/resource/types';
+import { ActionItemType } from '@waldur/resource/actions/types';
 
 const ChangePlanDialog = lazyComponent(
   () => import('./ChangePlanDialog'),
@@ -13,7 +11,7 @@ const ChangePlanDialog = lazyComponent(
 
 const validators = [validateState('OK')];
 
-export const ChangePlanAction: FC<{ resource: Resource }> = ({ resource }) =>
+export const ChangePlanAction: ActionItemType = ({ resource, refetch }) =>
   resource.marketplace_resource_uuid !== null ? (
     <DialogActionItem
       validators={validators}
@@ -21,5 +19,6 @@ export const ChangePlanAction: FC<{ resource: Resource }> = ({ resource }) =>
       dialogSize="lg"
       modalComponent={ChangePlanDialog}
       resource={resource}
+      extraResolve={{ refetch }}
     />
   ) : null;

@@ -4,11 +4,11 @@ import { FlowCancelAction } from './FlowCancelAction';
 import { FlowEditAction } from './FlowEditAction';
 import { FlowSubmitAction } from './FlowSubmitAction';
 
-export const FlowActions = ({ flow, refreshList }) => {
+export const FlowActions = ({ flow, refetch }) => {
   return flow.state === 'draft' ? (
     <ButtonGroup>
-      <FlowSubmitAction flow={flow} refreshList={refreshList} />
-      <FlowCancelAction flow={flow} refreshList={refreshList} />
+      <FlowSubmitAction flow={flow} refetch={refetch} />
+      <FlowCancelAction flow={flow} refetch={refetch} />
       <FlowEditAction flow={flow} />
     </ButtonGroup>
   ) : (

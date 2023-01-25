@@ -9,6 +9,7 @@ interface ChangePlanDialogProps {
     resource: {
       marketplace_resource_uuid: string;
     };
+    refetch;
   };
   submitting: boolean;
 }
@@ -24,6 +25,7 @@ export const ChangePlanDialog: React.FC<ChangePlanDialogProps> = (props) => {
       initialValues={
         asyncState.value ? asyncState.value.initialValues : undefined
       }
+      refetch={props.resolve.refetch}
     />
   );
 };

@@ -16,6 +16,7 @@ interface DestroyActionItemProps<T> {
   resource: T;
   dialogSubtitle?: string;
   validators?: ActionValidator<T>[];
+  refetch?(): void;
 }
 
 const getConfirmationText = (resource) => {
@@ -38,7 +39,13 @@ const getConfirmationText = (resource) => {
 
 export const DestroyActionItem: <T extends { uuid: string }>(
   props: DestroyActionItemProps<T>,
-) => ReactElement = ({ resource, apiMethod, validators, dialogSubtitle }) => {
+) => ReactElement = ({
+  resource,
+  apiMethod,
+  validators,
+  dialogSubtitle,
+  refetch,
+}) => {
   const dispatch = useDispatch();
   const validationState = useValidators(validators, resource);
   const callback = async () => {
@@ -55,6 +62,9 @@ export const DestroyActionItem: <T extends { uuid: string }>(
     try {
       await apiMethod(resource.uuid);
       dispatch(showSuccess(translate('Resource deletion has been scheduled.')));
+      if (refetch) {
+        await refetch();
+      }
     } catch (e) {
       dispatch(showErrorResponse(e, translate('Unable to delete resource.')));
     }

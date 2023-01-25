@@ -1,22 +1,27 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
+import { useQuery } from 'react-query';
 
 import { usePermissionView } from '@waldur/auth/PermissionLayout';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 
+import { fetchData } from './fetchData';
 import { ResourceDetailsView } from './ResourceDetailsView';
 
-export const ResourceDetailsPage: FunctionComponent<{ result }> = ({
-  result,
-}) => {
-  const { state } = useCurrentStateAndParams();
+export const ResourceDetailsPage: FunctionComponent<{}> = () => {
+  const { state, params } = useCurrentStateAndParams();
 
-  useTitle(result.resource.category_title);
+  const { data, refetch } = useQuery(
+    ['resource-details-page', params['resource_uuid']],
+    () => fetchData(state, params),
+  );
+
+  useTitle(data.resource.category_title);
 
   usePermissionView(() => {
-    if (result.resource) {
-      switch (result.resource.state) {
+    if (data.resource) {
+      switch (data.resource.state) {
         case 'Terminated':
           return {
             permission: 'limited',
@@ -28,7 +33,7 @@ export const ResourceDetailsPage: FunctionComponent<{ result }> = ({
       }
     }
     return null;
-  }, [result]);
+  }, [data]);
 
-  return <ResourceDetailsView {...result} state={state} />;
+  return <ResourceDetailsView {...data} refetch={refetch} state={state} />;
 };

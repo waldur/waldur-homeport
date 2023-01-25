@@ -65,7 +65,7 @@ function* handleSubmitUsage(action) {
 }
 
 function* handleSwitchPlan(action) {
-  const { resource, plan_url } = action.payload;
+  const { resource, plan_url, refetch } = action.payload;
   try {
     yield call(api.switchPlan, resource.uuid, plan_url);
     yield put(
@@ -75,7 +75,11 @@ function* handleSwitchPlan(action) {
     );
     yield put(constants.switchPlan.success());
     yield put(closeModalDialog());
-    yield redirectToDetailView(resource);
+    if (refetch) {
+      yield call(refetch);
+    } else {
+      yield redirectToDetailView(resource);
+    }
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to submit plan change request.',
@@ -86,7 +90,7 @@ function* handleSwitchPlan(action) {
 }
 
 function* handleChangeLimits(action) {
-  const { resource, limits } = action.payload;
+  const { resource, limits, refetch } = action.payload;
   try {
     yield call(api.changeLimits, resource.uuid, limits);
     yield put(
@@ -96,7 +100,11 @@ function* handleChangeLimits(action) {
     );
     yield put(constants.changeLimits.success());
     yield put(closeModalDialog());
-    yield redirectToDetailView(resource);
+    if (refetch) {
+      yield call(refetch);
+    } else {
+      yield redirectToDetailView(resource);
+    }
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to submit limits change request.',

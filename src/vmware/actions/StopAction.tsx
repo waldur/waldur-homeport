@@ -4,6 +4,7 @@ import {
   validateRuntimeState,
   validateState,
 } from '@waldur/resource/actions/base';
+import { ActionItemType } from '@waldur/resource/actions/types';
 
 import { stopVirtualMachine } from '../api';
 
@@ -12,11 +13,12 @@ const validators = [
   validateRuntimeState('POWERED_ON', 'SUSPENDED'),
 ];
 
-export const StopAction = ({ resource }) => (
+export const StopAction: ActionItemType = ({ resource, refetch }) => (
   <AsyncActionItem
     title={translate('Stop')}
     resource={resource}
     validators={validators}
     apiMethod={stopVirtualMachine}
+    refetch={refetch}
   />
 );

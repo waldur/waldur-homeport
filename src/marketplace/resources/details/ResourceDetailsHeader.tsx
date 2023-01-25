@@ -18,12 +18,12 @@ import { ResourceOrderItemsLink } from './ResourceOrderItemsLink';
 
 interface ResourceDetailsHeaderProps {
   resource: Resource;
-  reInitResource?(): void;
+  refetch?(): void;
   scope;
 }
 
 export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps> =
-  ({ resource, scope, reInitResource }) => {
+  ({ resource, scope, refetch }) => {
     return (
       <Card.Body className="d-flex flex-column">
         <div className="d-flex flex-grow-1">
@@ -48,7 +48,7 @@ export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps
               marketplace_resource_uuid: resource.uuid,
             }}
             scope={scope}
-            reInitResource={reInitResource}
+            refetch={refetch}
           />
         </div>
         <div className="mt-7">

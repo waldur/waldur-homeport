@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -5,9 +6,12 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { loadVolumeTypes, retypeVolume } from '@waldur/openstack/api';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
-export const RetypeDialog = ({ resolve: { resource } }) => {
+export const RetypeDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   const dispatch = useDispatch();
 
   const asyncState = useAsync(async () => {
@@ -60,6 +64,9 @@ export const RetypeDialog = ({ resolve: { resource } }) => {
           await retypeVolume(resource.uuid, formData);
           dispatch(showSuccess(translate('Volume has been retyped.')));
           dispatch(closeModalDialog());
+          if (refetch) {
+            await refetch();
+          }
         } catch (e) {
           dispatch(showErrorResponse(e, translate('Unable to retype volume.')));
         }

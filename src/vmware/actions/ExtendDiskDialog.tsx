@@ -1,13 +1,17 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import { extendDisk } from '../api';
 
-export const ExtendDiskDialog = ({ resolve: { resource } }) => {
+export const ExtendDiskDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   const dispatch = useDispatch();
   return (
     <ResourceActionDialog
@@ -26,6 +30,9 @@ export const ExtendDiskDialog = ({ resolve: { resource } }) => {
             showSuccess(translate('Disk extension has been scheduled.')),
           );
           dispatch(closeModalDialog());
+          if (refetch) {
+            await refetch();
+          }
         } catch (e) {
           dispatch(showErrorResponse(e, translate('Unable to extend disk.')));
         }

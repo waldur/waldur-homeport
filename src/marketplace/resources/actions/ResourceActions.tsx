@@ -6,12 +6,12 @@ import { ResourceActionsButton } from './ResourceActionsButton';
 
 interface ResourceActionsProps {
   resource: Resource;
-  reInitResource?(): void;
+  refetch?(): void;
 }
 
 export const ResourceActions: FunctionComponent<ResourceActionsProps> = ({
   resource,
-  reInitResource,
+  refetch,
 }) => (
   <ResourceActionsButton
     resource={
@@ -20,6 +20,6 @@ export const ResourceActions: FunctionComponent<ResourceActionsProps> = ({
         marketplace_resource_uuid: resource.uuid,
       } as any
     }
-    reInitResource={reInitResource}
+    refetch={refetch}
   />
 );

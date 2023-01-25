@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { getAll } from '@waldur/core/api';
@@ -6,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { attachVolume } from '@waldur/openstack/api';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { Volume } from '@waldur/resource/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
@@ -26,7 +28,9 @@ const getOptionLabel = (option: Volume) =>
     option.type_name || 'default type'
   })`;
 
-export const AttachVolumeDialog = ({ resolve: { resource } }) => {
+export const AttachVolumeDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   const dispatch = useDispatch();
   return (
     <ResourceActionDialog
@@ -45,6 +49,9 @@ export const AttachVolumeDialog = ({ resolve: { resource } }) => {
           await attachVolume(formData.volume.uuid, resource.url);
           dispatch(showSuccess(translate('Attach has been scheduled.')));
           dispatch(closeModalDialog());
+          if (refetch) {
+            await refetch();
+          }
         } catch (e) {
           dispatch(showErrorResponse(e, translate('Unable to attach volume.')));
         }

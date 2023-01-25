@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -6,9 +7,12 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { getInstances } from '@waldur/openstack/api';
 import { linkInstance } from '@waldur/rancher/api';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
-export const LinkDialog = ({ resolve: { resource } }) => {
+export const LinkDialog: FC<ActionDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   const dispatch = useDispatch();
 
   const asyncState = useAsync(async () => {
@@ -46,6 +50,9 @@ export const LinkDialog = ({ resolve: { resource } }) => {
           await linkInstance(resource.uuid, formData);
           dispatch(showSuccess(translate('Instance has been linked.')));
           dispatch(closeModalDialog());
+          if (refetch) {
+            await refetch();
+          }
         } catch (e) {
           dispatch(showErrorResponse(e, translate('Unable to link instance.')));
         }

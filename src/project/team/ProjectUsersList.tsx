@@ -53,14 +53,14 @@ const TableComponent: FunctionComponent<any> = (props) => {
       hasQuery={true}
       actions={
         <ButtonGroup>
-          {props.isStaff && <AddUserButton refreshList={props.fetch} />}
+          {props.isStaff && <AddUserButton refetch={props.fetch} />}
           {props.isOwnerOrStaff ? (
             <AddMemberButton
               users={props.rows}
               project={props.project}
               customer={props.customer}
               isProjectManager={props.isProjectManager}
-              refreshList={props.fetch}
+              refetch={props.fetch}
             />
           ) : null}
         </ButtonGroup>
@@ -76,7 +76,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
               project={props.project}
               customer={props.customer}
               isProjectManager={props.isProjectManager}
-              refreshList={props.fetch}
+              refetch={props.fetch}
             />
           ) : null}
           {props.isOwnerOrStaff || props.isProjectManager ? (
@@ -88,7 +88,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
                   (row.role !== PROJECT_ADMIN_ROLE &&
                     row.role !== PROJECT_MEMBER_ROLE))
               }
-              refreshList={props.fetch}
+              refetch={props.fetch}
             />
           ) : null}
         </>

@@ -21,7 +21,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => (
         <ReviewActions
           request={row}
-          refreshList={props.fetch}
+          refetch={props.fetch}
           approveMethod={approveProject}
           rejectMethod={rejectProject}
         />
