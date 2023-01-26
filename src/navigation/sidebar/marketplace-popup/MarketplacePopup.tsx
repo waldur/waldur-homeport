@@ -13,7 +13,7 @@ import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { Category } from '@waldur/marketplace/types';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { getSidebarToggle } from '../Sidebar';
 
@@ -27,6 +27,7 @@ const RECENTLY_ADDED_OFFERINGS_UUID = 'recently_added_offerings_category';
 
 export const MarketplacePopup: FunctionComponent = () => {
   const currentCustomer = useSelector(getCustomer);
+  const currentProject = useSelector(getProject);
   const [selectedCategory, selectCategory] = useState<Category>();
   const router = useRouter();
 
@@ -62,8 +63,8 @@ export const MarketplacePopup: FunctionComponent = () => {
   }, [isVisible]);
 
   const { value: lastOfferings } = useAsync(
-    () => fetchLastNOfferings(currentCustomer),
-    [currentCustomer],
+    () => fetchLastNOfferings(currentCustomer, currentProject),
+    [currentCustomer, currentProject],
   );
 
   const [
@@ -74,13 +75,14 @@ export const MarketplacePopup: FunctionComponent = () => {
     },
     loadCategories,
   ] = useAsyncFn<Category[]>(
-    (search?: string) => fetchCategories(currentCustomer, search),
-    [currentCustomer],
+    (search?: string) =>
+      fetchCategories(currentCustomer, currentProject, search),
+    [currentCustomer, currentProject],
   );
 
   useEffect(() => {
     loadCategories();
-  }, [currentCustomer]);
+  }, [currentCustomer, currentProject]);
 
   const [
     { loading: loadingOfferings, value: offerings, error: errorOfferings },
@@ -90,9 +92,9 @@ export const MarketplacePopup: FunctionComponent = () => {
       if (category && category.uuid === RECENTLY_ADDED_OFFERINGS_UUID) {
         return Promise.resolve(lastOfferings);
       }
-      return fetchOfferings(currentCustomer, category, search);
+      return fetchOfferings(currentCustomer, currentProject, category, search);
     },
-    [currentCustomer, lastOfferings],
+    [currentCustomer, currentProject, lastOfferings],
   );
 
   const categories = useMemo(() => {
