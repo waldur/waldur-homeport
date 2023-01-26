@@ -10,30 +10,31 @@ import { initConfig } from './store/config';
 import store from './store/store';
 import { attachTransitions } from './transitions';
 
-export function afterBootstrap() {
-  document.title = ENV.plugins.WALDUR_CORE.FULL_PAGE_TITLE;
-  if (ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID) {
-    ReactGA.initialize(ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID);
-  }
+function initSentry() {
   if (ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_DSN) {
-    const dsn = ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_DSN;
-    const sentryEnvironment =
-      ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_ENVIRONMENT || 'unknown';
-    const sentryTracesSampleRate =
-      ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_TRACES_SAMPLE_RATE || 0.2;
     const { hostname } = new URL(ENV.apiEndpoint);
     Sentry.init({
-      dsn: dsn,
+      release: `waldur-homeport@${ENV.buildId}`,
+      dsn: ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_DSN,
       integrations: [
         new BrowserTracing({
           tracePropagationTargets: [hostname, /^\//],
         }),
       ],
-      environment: sentryEnvironment,
-      tracesSampleRate: sentryTracesSampleRate,
+      environment:
+        ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_ENVIRONMENT || 'unknown',
+      tracesSampleRate:
+        ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_TRACES_SAMPLE_RATE || 0.2,
     });
   }
+}
 
+export function afterBootstrap() {
+  document.title = ENV.plugins.WALDUR_CORE.FULL_PAGE_TITLE;
+  if (ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID) {
+    ReactGA.initialize(ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID);
+  }
+  initSentry();
   loadInspinia();
   initAuthToken();
   store.dispatch(initConfig(ENV));
