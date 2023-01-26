@@ -35,6 +35,7 @@ export const InfiniteList = ({
             <button
               onClick={() => context.fetchNextPage()}
               disabled={context.isFetchingNextPage}
+              className="btn btn-link"
             >
               {context.isFetchingNextPage
                 ? translate('Loading more...')

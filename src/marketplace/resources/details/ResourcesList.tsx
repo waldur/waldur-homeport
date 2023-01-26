@@ -77,7 +77,7 @@ export const ResourcesList: FC<ResourcesListProps> = ({
                   <button
                     onClick={() => fetchNextPage()}
                     disabled={isFetchingNextPage}
-                    className="btn btn-default"
+                    className="btn btn-link"
                   >
                     {isFetchingNextPage
                       ? translate('Loading more...')
