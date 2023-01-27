@@ -23,7 +23,7 @@ export const BrandName: FunctionComponent = () => {
       {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
         <img
           src={ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO}
-          className="h-25px logo"
+          className="mh-50px mw-200px logo"
         />
       ) : (
         <>
