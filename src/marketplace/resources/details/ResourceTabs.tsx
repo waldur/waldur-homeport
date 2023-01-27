@@ -1,71 +1,65 @@
-import { FC, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
+import classNames from 'classnames';
+import { Fragment, useEffect, useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
 
-import { Calendar } from '@waldur/booking/components/calendar/Calendar';
-import { ENV } from '@waldur/configs/default';
-import { translate } from '@waldur/i18n';
-import { ResourceOrderItems } from '@waldur/marketplace/orders/item/list/ResourceOrderItems';
-import { ResourceUsageTabsContainer } from '@waldur/marketplace/resources/usage/ResourceUsageTabsContainer';
-import { VerticalTabs } from '@waldur/resource/tabs/VerticalTabs';
+export const ResourceTabs = ({ tabs, resource }) => {
+  const [selectedSection, selectSection] = useState<any>();
 
-import { Resource } from '../types';
-
-import { ResourceIssuesTab } from './ResourceIssuesTab';
-
-export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => {
-  const tabs = useMemo(
-    () => [
-      {
-        key: 'orderItems',
-        title: translate('Order items'),
-        visible: true,
-        component: () => (
-          <Card.Body>
-            <ResourceOrderItems resource_uuid={resource.uuid} />
-          </Card.Body>
-        ),
-      },
-      {
-        key: 'issues',
-        title: translate('Issues'),
-        visible: ENV.plugins.WALDUR_SUPPORT && Boolean(resource.scope),
-        component: () => <ResourceIssuesTab resource={resource} />,
-      },
-      {
-        key: 'schedules',
-        title: translate('Schedules'),
-        visible: resource.offering_type === 'Marketplace.Booking',
-        component: () => (
-          <Card.Body>
-            <Calendar events={resource.attributes.schedules} />
-          </Card.Body>
-        ),
-      },
-      {
-        key: 'usage',
-        title: translate('Usage'),
-        visible: resource.is_usage_based || resource.is_limit_based,
-        component: () => (
-          <ResourceUsageTabsContainer
-            resource={{
-              ...resource,
-              offering_uuid:
-                resource.offering_uuid || resource.marketplace_offering_uuid,
-              resource_uuid:
-                resource.uuid || resource.marketplace_resource_uuid,
-            }}
-          />
-        ),
-      },
-    ],
-    [],
-  );
+  useEffect(() => {
+    Array.isArray(tabs) &&
+      tabs.length > 0 &&
+      selectSection(tabs[0].children[0]);
+  }, [tabs]);
 
   return (
-    <VerticalTabs
-      containerId="resource-details"
-      items={tabs}
-      defaultActiveKey="orderItems"
-    />
+    <Row>
+      <Col sm={4}>
+        <div
+          className="menu menu-rounded menu-column menu-active-bg menu-hover-bg menu-title-gray-700 fs-5 fw-semibold w-250px"
+          id="#kt_aside_menu"
+          data-kt-menu="true"
+        >
+          {tabs.map((tab, tabIndex) => (
+            <Fragment key={tabIndex}>
+              <div className="menu-item">
+                <div className="menu-content pb-2">
+                  <span className="menu-section text-muted text-uppercase fs-7 fw-bold">
+                    {tab.title}
+                  </span>
+                </div>
+              </div>
+              <div className="menu-sub menu-sub-accordion show">
+                {tab.children.map((section, sectionIndex) => (
+                  <div
+                    className="menu-item"
+                    data-kt-menu-trigger="click"
+                    data-kt-menu-permanent="true"
+                    key={sectionIndex}
+                  >
+                    <a
+                      className={classNames(
+                        'menu-link active border-3 border-start',
+                        selectedSection === section
+                          ? 'border-primary'
+                          : 'border-transparent',
+                      )}
+                      onClick={() => selectSection(section)}
+                    >
+                      <span className="menu-title">{section.title}</span>
+                      <span className="menu-badge fs-7 fw-normal text-muted">
+                        {section.count}
+                      </span>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </Fragment>
+          ))}
+        </div>
+      </Col>
+      <Col sm={8}>
+        {selectedSection && <selectedSection.component resource={resource} />}
+      </Col>
+    </Row>
   );
 };

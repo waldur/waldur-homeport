@@ -3954,6 +3954,7 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
 msgid "Internal IPs"
@@ -4175,7 +4176,6 @@ msgstr ""
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
 #: src/issues/routes.ts
-#: src/marketplace/resources/details/ResourceTabs.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 #: src/project/ProjectActions.tsx
 #: src/project/routes.ts
@@ -4233,6 +4233,7 @@ msgstr ""
 msgid "Jobs"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/SnapshotsSection.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/resource/utils.tsx
 msgid "Keep forever"
@@ -4240,6 +4241,10 @@ msgstr ""
 
 #: src/openstack/openstack-backup/BackupsList.tsx
 msgid "Keep until"
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-instance/SnapshotsSection.tsx
+msgid "Keep until {date}"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/EditDialog.tsx
@@ -4519,6 +4524,10 @@ msgstr ""
 
 #: src/marketplace/resources/details/openstack-tenant/PortsSection.tsx
 msgid "MAC address: {mac_address}"
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-instance/InternalIPSection.tsx
+msgid "MAC address: {mac_address}, subnet name: {subnet_name}"
 msgstr ""
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
@@ -5054,7 +5063,7 @@ msgstr ""
 msgid "Network: {network_name}, CIDR: {cidr}"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
@@ -5740,7 +5749,6 @@ msgstr ""
 #: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/resources/details/ResourceTabs.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
@@ -8129,6 +8137,10 @@ msgstr ""
 msgid "Rules"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/SecurityGroupsSection.tsx
+msgid "Rules: {rules_count}"
+msgstr ""
+
 #: src/marketplace/resources/details/openstack-tenant/SecurityGroupsSection.tsx
 msgid "Rules: {rules}"
 msgstr ""
@@ -8246,8 +8258,8 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceTabs.tsx
-msgid "Schedules"
+#: src/marketplace/resources/details/openstack-instance/SnapshotSchedulesSection.tsx
+msgid "Schedule {schedule}"
 msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
@@ -8329,6 +8341,7 @@ msgid "Security group rules update has been scheduled."
 msgstr ""
 
 #: src/marketplace/resources/details/NetworkingTab.tsx
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
@@ -9087,6 +9100,7 @@ msgstr ""
 msgid "Size: {size}"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/VolumesSection.tsx
 #: src/marketplace/resources/details/openstack-tenant/VolumesSection.tsx
 msgid "Size: {size}, attached to: {device}"
 msgstr ""
@@ -9105,6 +9119,8 @@ msgstr ""
 msgid "Snapshot schedule for volume has been created."
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
+#: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshot schedules"
 msgstr ""
@@ -9113,7 +9129,9 @@ msgstr ""
 msgid "Snapshot size limit"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-snapshot-schedule/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
@@ -9303,6 +9321,7 @@ msgid "Stopping"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
@@ -10795,6 +10814,7 @@ msgstr ""
 msgid "Unable to load questions and answers."
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 msgid "Unable to load resource details."
 msgstr ""
@@ -11467,7 +11487,6 @@ msgstr ""
 
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
-#: src/marketplace/resources/details/ResourceTabs.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/details/utils.ts
 msgid "Usage"
@@ -11889,13 +11908,11 @@ msgid "VM snapshot schedule has been created."
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
-#: src/openstack/openstack-instance/tabs.ts
 msgid "VM snapshot schedules"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/tabs.ts
 #: src/openstack/openstack-backup/BackupsList.tsx
-#: src/openstack/openstack-instance/tabs.ts
 msgid "VM snapshots"
 msgstr ""
 
@@ -12083,6 +12100,7 @@ msgstr ""
 msgid "Volume type storage limit is exceeded"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
