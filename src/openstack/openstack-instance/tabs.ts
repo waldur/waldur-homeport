@@ -32,12 +32,12 @@ NestedResourceTabsConfiguration.register(INSTANCE_TYPE, () => [
       },
       {
         key: 'backups',
-        title: translate('VM snapshots'),
+        title: translate('Snapshots'),
         component: BackupsList,
       },
       {
         key: 'backup_schedules',
-        title: translate('VM snapshot schedules'),
+        title: translate('Snapshot schedules'),
         component: BackupsSchedulesList,
       },
     ],
@@ -46,12 +46,12 @@ NestedResourceTabsConfiguration.register(INSTANCE_TYPE, () => [
     title: translate('Networking'),
     children: [
       {
-        key: 'internal_ips_set',
+        key: 'internal_ips',
         title: translate('Internal IPs'),
         component: InternalIpsList,
       },
       {
-        key: 'security_group',
+        key: 'security_groups',
         title: translate('Security groups'),
         component: InternalIpsList,
       },

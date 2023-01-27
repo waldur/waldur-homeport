@@ -25,7 +25,7 @@ import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer'
 import { ActionButton } from './ActionButton';
 import { InstanceComponents } from './InstanceComponents';
 import { MonitoringCharts } from './MonitoringCharts';
-import { NetworkingTab } from './NetworkingTab';
+import { InstanceDetails } from './openstack-instance/InstanceDetails';
 import { TenantDetails } from './openstack-tenant/TenantDetails';
 import { QuickActions } from './QuickActions';
 import { RefreshButton } from './RefreshButton';
@@ -55,17 +55,23 @@ const TenantMainComponent = ({ resource }) =>
     </div>
   ) : null;
 
-const InstanceMainComponent = ({ resource, scope, state }) => {
+const InstanceMainComponent = ({ resource }) => {
   return (
     <>
-      <Card className="mb-7">
-        <Card.Body>
-          <h3 className="mb-5">{translate('Networking')}</h3>
-          {scope && (
-            <NetworkingTab resource={resource} scope={scope} state={state} />
-          )}
-        </Card.Body>
-      </Card>
+      {resource.scope ? (
+        <div className="mb-10">
+          <Card>
+            <Card.Header>
+              <Card.Title>
+                <h3>{translate('Cloud components')}</h3>
+              </Card.Title>
+            </Card.Header>
+            <Card.Body>
+              <InstanceDetails resource={resource} />
+            </Card.Body>
+          </Card>
+        </div>
+      ) : null}
       {isExperimentalUiComponentsVisible() ? <MonitoringCharts /> : null}
     </>
   );

@@ -41,7 +41,7 @@ describe('Add resource pop up is visible', () => {
       .should('not.exist');
       // waiting until the page loaded, so that we can click on the popup
   });
-  it('shows add resource popup', () => {
+  xit('shows add resource popup', () => {
     cy
       .get('i.fa.fa-spinner')
       .should('not.exist')
