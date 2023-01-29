@@ -12055,12 +12055,12 @@ msgstr ""
 msgid "Volume"
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/AttachDialog.tsx
-msgid "Volume has been attached to instance."
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
+msgid "Volume extension has been scheduled."
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
-msgid "Volume has been extended."
+#: src/openstack/openstack-volume/actions/AttachDialog.tsx
+msgid "Volume has been attached to instance."
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/RetypeDialog.tsx
