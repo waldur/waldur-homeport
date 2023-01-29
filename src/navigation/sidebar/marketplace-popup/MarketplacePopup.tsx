@@ -1,23 +1,20 @@
-import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
-import { Button, Col, FormControl, Row } from 'react-bootstrap';
+import { Col, FormControl, Row } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import { useSelector } from 'react-redux';
 import { useAsync, useAsyncFn, useDebounce } from 'react-use';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
 import useOnScreen from '@waldur/core/useOnScreen';
-import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { Category } from '@waldur/marketplace/types';
-import { MenuComponent } from '@waldur/metronic/assets/ts/components';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { getSidebarToggle } from '../Sidebar';
 
 import { CategoriesPanel } from './CategoriesPanel';
+import { MarketplacePopupTitle } from './MarketplacePopupTitle';
 import { OfferingsPanel } from './OfferingsPanel';
 import { fetchCategories, fetchLastNOfferings, fetchOfferings } from './utils';
 import { WelcomeView } from './WelcomeView';
@@ -29,12 +26,6 @@ export const MarketplacePopup: FunctionComponent = () => {
   const currentCustomer = useSelector(getCustomer);
   const currentProject = useSelector(getProject);
   const [selectedCategory, selectCategory] = useState<Category>();
-  const router = useRouter();
-
-  const changeWorkspace = () => {
-    router.stateService.go('profile-projects');
-    MenuComponent.hideDropdowns(undefined);
-  };
 
   const [filter, setFilter] = useState('');
 
@@ -143,29 +134,10 @@ export const MarketplacePopup: FunctionComponent = () => {
       >
         <div className="marketplaces-selector-header py-8 px-12">
           <Row>
-            <Col xs={5} xl={3} className="text-white fs-7">
-              <span className="text-nowrap">
-                {translate('Showing services available for')}:{' '}
-              </span>
-              {currentCustomer && (
-                <Tip
-                  id="marketplaces-selector-customer-tip"
-                  label={currentCustomer?.name}
-                  className="d-block"
-                >
-                  <Button
-                    variant="link"
-                    className="btn-color-white btn-active-color-muted fs-7 fw-bolder text-nowrap p-0"
-                    onClick={changeWorkspace}
-                  >
-                    {currentCustomer?.name
-                      ? truncate(currentCustomer?.name, 15)
-                      : currentCustomer?.abbreviation}{' '}
-                    ({translate('change')})
-                  </Button>
-                </Tip>
-              )}
-            </Col>
+            <MarketplacePopupTitle
+              customer={currentCustomer}
+              isVisible={isVisible}
+            />
             <Col xs={7} xl={6}>
               <div className="form-group">
                 <FormControl
