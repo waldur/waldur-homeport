@@ -52,7 +52,9 @@ export const VolumeExtendDialog = reduxForm<
             `/openstacktenant-volumes/${resource.uuid}/extend/`,
             payload,
           );
-          dispatch(showSuccess(translate('Volume has been extended.')));
+          dispatch(
+            showSuccess(translate('Volume extension has been scheduled.')),
+          );
           dispatch(closeModalDialog());
           if (refetch) {
             await refetch();
