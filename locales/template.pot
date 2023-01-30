@@ -3903,6 +3903,7 @@ msgstr ""
 msgid "Instance does not have any floating IPs yet."
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenStackSecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 msgid "Instance does not have any security groups yet."
 msgstr ""
@@ -8355,6 +8356,7 @@ msgstr ""
 msgid "Security groups"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenStackSecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 msgid "Security groups details"
 msgstr ""
