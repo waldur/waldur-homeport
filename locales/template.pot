@@ -9044,7 +9044,7 @@ msgstr ""
 msgid "Showing all"
 msgstr ""
 
-#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopupTitle.tsx
 msgid "Showing services available for"
 msgstr ""
 
@@ -12436,7 +12436,7 @@ msgstr ""
 msgid "catalogues"
 msgstr ""
 
-#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopupTitle.tsx
 msgid "change"
 msgstr ""
 

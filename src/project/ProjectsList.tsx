@@ -106,6 +106,7 @@ const TableOptions = {
       'oecd_fos_2007_code',
       'is_industry',
       'marketplace_resource_count',
+      'image',
     ];
 
     return filter;
