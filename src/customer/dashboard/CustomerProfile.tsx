@@ -58,9 +58,11 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
                   <ServiceProviderIcon organization={customer} />
                 </Stack>
                 <Stack direction="horizontal" className="gap-6 text-muted">
-                  {customer.division_name && <>{customer.division_name}</>}
-                  {customer.email && <>{customer.email}</>}
-                  {customer.phone_number && <>{customer.phone_number}</>}
+                  {[
+                    customer.division_name,
+                    customer.email,
+                    customer.phone_number,
+                  ].map((item) => item && <span>{item}</span>)}
                 </Stack>
               </Col>
               <Col xs="auto">
