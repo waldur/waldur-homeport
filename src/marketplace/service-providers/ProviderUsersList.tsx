@@ -17,10 +17,7 @@ const UserNameColumn = ({ row }) => (
 );
 
 const UserAffiliations = ({ row }) =>
-  translate('{customer_count} organizations, {project_count} projects', {
-    customer_count: row.customer_permissions.length,
-    project_count: row.project_permissions.length,
-  });
+  translate('{projects_count} projects', row);
 
 const TableComponent: FunctionComponent<any> = (props) => {
   return (

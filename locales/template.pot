@@ -12917,10 +12917,6 @@ msgstr ""
 msgid "{count} user events in {date}"
 msgstr ""
 
-#: src/marketplace/service-providers/ProviderUsersList.tsx
-msgid "{customer_count} organizations, {project_count} projects"
-msgstr ""
-
 #: src/marketplace/landing/LandingPage.tsx
 msgid "{deployment} Marketplace"
 msgstr ""
@@ -12955,6 +12951,10 @@ msgstr ""
 
 #: src/project/effects.ts
 msgid "{projectName} project has been moved to {organizationName} organization."
+msgstr ""
+
+#: src/marketplace/service-providers/ProviderUsersList.tsx
+msgid "{projects_count} projects"
 msgstr ""
 
 #: src/user/support/AddRemoteUserDialog.tsx
