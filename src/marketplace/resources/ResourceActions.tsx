@@ -1,33 +1,28 @@
 import { useMemo } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
-import { EditResourceEndDateAction } from '@waldur/marketplace/resources/actions/EditResourceEndDateAction';
-import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
-import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
-import { SubmitReportAction } from '@waldur/marketplace/resources/report/SubmitReportAction';
-import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
 import { ActionRegistry } from '@waldur/resource/actions/registry';
+import { getResourceCommonActions } from '@waldur/resource/actions/utils';
 
-import { EditAction } from './actions/EditAction';
-
-const ActionsList = [
-  EditAction,
-  MoveResourceAction,
-  SubmitReportAction,
-  ChangePlanAction,
-  SetBackendIdAction,
-  EditResourceEndDateAction,
-];
+import { ChangeLimitsAction } from './change-limits/ChangeLimitsAction';
 
 export const ResourceActions = ({ resource, scope, refetch }) => {
+  const actionsList = useMemo(
+    () =>
+      getResourceCommonActions().filter(
+        (action) => action !== ChangeLimitsAction,
+      ),
+    [],
+  );
   const extraActions = useMemo(() => {
+    // Don't list ChangeLimitsAction because we already added it inside the Quick Actions.
     const quickActions = ActionRegistry.getQuickActions(resource.resource_type);
     return ActionRegistry.getActions(resource.resource_type).filter(
       (action) =>
         // @ts-ignore
-        !quickActions.includes(action) && !ActionsList.includes(action),
+        !quickActions.includes(action) && !actionsList.includes(action),
     );
-  }, [resource]);
+  }, [resource, actionsList]);
   return (
     <Dropdown>
       <Dropdown.Toggle
@@ -37,7 +32,7 @@ export const ResourceActions = ({ resource, scope, refetch }) => {
         <i className="fa fa-ellipsis-h"></i>
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        {ActionsList.map((ActionComponent, index) => (
+        {actionsList.map((ActionComponent, index) => (
           <ActionComponent key={index} resource={resource} refetch={refetch} />
         ))}
         {extraActions.map((ActionComponent, index) => (
