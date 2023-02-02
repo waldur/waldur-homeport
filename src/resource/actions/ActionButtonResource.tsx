@@ -4,6 +4,7 @@ import { useAsyncFn, useBoolean } from 'react-use';
 
 import { ActionRegistry } from './registry';
 import { ResourceActionComponent } from './ResourceActionComponent';
+import { getResourceCommonActions } from './utils';
 
 interface ActionButtonResourceProps {
   url: string;
@@ -15,7 +16,11 @@ async function loadData(url: string) {
   const response = await Axios.get(url);
   const resource = response.data;
   const actions = ActionRegistry.getActions(resource.resource_type);
-  return { resource, actions };
+  const actionsList = getResourceCommonActions();
+  const extraActions = actions.filter(
+    (action) => !actionsList.includes(action as any),
+  );
+  return { resource, actions: actionsList.concat(extraActions as any) };
 }
 
 export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
@@ -34,7 +39,7 @@ export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
     open && getActions();
   }, [open, getActions]);
 
-  React.useEffect(loadActionsIfOpen, [open]);
+  React.useEffect(loadActionsIfOpen, [open, loadActionsIfOpen]);
 
   return (
     <ResourceActionComponent
