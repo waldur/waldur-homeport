@@ -3,67 +3,14 @@ import FileSaver from 'file-saver';
 import Papa from 'papaparse';
 import { put, call, select } from 'redux-saga/effects';
 
-import { ENV } from '@waldur/configs/default';
-import { loadPdfMake } from '@waldur/shims/pdfmake';
 import { RootState } from '@waldur/store/reducers';
 import { fetchAll } from '@waldur/table/api';
 
 import { blockStart, blockStop } from './actions';
 import exportExcel from './excel';
+import { exportAsPdf } from './exportAsPdf';
 import { getTableOptions } from './registry';
 import { selectTableRows } from './selectors';
-
-function saveAsPdf(table, data) {
-  const blob = new Blob([data], { type: 'application/pdf' });
-  FileSaver.saveAs(blob, `${table}.pdf`);
-}
-
-async function exportAsPdf(table, data) {
-  const pdfmake = await loadPdfMake();
-  const header = data.fields.map((field) => ({
-    text: field + '',
-    style: 'tableHeader',
-  }));
-  const rows = data.data.map((row) =>
-    row.map((cell) => ({
-      text: cell + '',
-    })),
-  );
-  const doc: Record<string, object> = {
-    content: [
-      {
-        text: table,
-        style: 'title',
-      },
-      {
-        table: {
-          body: [header].concat(rows),
-        },
-      },
-    ],
-    styles: {
-      tableHeader: {
-        bold: true,
-        fontSize: 11,
-        color: 'white',
-        fillColor: '#2d4154',
-        alignment: 'center',
-      },
-      title: {
-        alignment: 'center',
-        fontSize: 15,
-      },
-    },
-  };
-  const defaultFont = ENV.defaultFont;
-  if (defaultFont) {
-    doc.defaultStyle = {
-      font: defaultFont,
-    };
-  }
-  const pdf = pdfmake.createPdf(doc);
-  pdf.getBuffer((buffer) => saveAsPdf(table, buffer));
-}
 
 function saveAsCsv(table, data) {
   const csv = Papa.unparse(data);

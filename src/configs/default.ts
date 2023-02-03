@@ -46,16 +46,4 @@ export const ENV: ApplicationConfigurationOptions = {
 
   // It can be either 'localStorage' or 'sessionStorage'.
   authStorage: 'localStorage',
-
-  // Default font for rendering exported table PDF
-  defaultFont: 'OpenSans',
-
-  // Font families should match default font.
-  // Both normal and bold types are required.
-  fontFamilies: {
-    OpenSans: {
-      normal: 'OpenSans-Regular.ttf',
-      bold: 'OpenSans-Bold.ttf',
-    },
-  },
 };
