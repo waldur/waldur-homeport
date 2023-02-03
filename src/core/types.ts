@@ -59,14 +59,6 @@ export interface ApplicationConfigurationOptions {
   excludedAttachmentTypes: string[];
   enforceLatinName: boolean;
   authStorage: string;
-  defaultFont: string;
-  fontFamilies: Record<
-    string,
-    {
-      normal: string;
-      bold: string;
-    }
-  >;
 }
 
 // Polyfill taken from https://stackoverflow.com/a/63984409
