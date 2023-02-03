@@ -3,7 +3,6 @@ import { ButtonGroup } from 'react-bootstrap';
 import { compose } from 'redux';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { PROJECTS_LIST } from '@waldur/project/constants';
@@ -13,23 +12,12 @@ import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { formatLongText } from '@waldur/table/utils';
 import { ProjectHoverableRow } from '@waldur/user/affiliations/ProjectHoverableRow';
 
+import { ProjectCostField } from './ProjectCostField';
 import { ProjectCreateButton } from './ProjectCreateButton';
 import { ProjectDetailsButton } from './ProjectDetailsButton';
 import { ProjectExpandableRowContainer } from './ProjectExpandableRowContainer';
+import { ProjectLink } from './ProjectLink';
 import { ProjectTablePlaceholder } from './ProjectTablePlaceholder';
-
-const ProjectLink = ({ row }) => (
-  <Link
-    state="project.dashboard"
-    params={{ uuid: row.uuid }}
-    label={row.name}
-  />
-);
-
-const ProjectCostField = ({ row }) =>
-  defaultCurrency(
-    (row.billing_price_estimate && row.billing_price_estimate.total) || 0,
-  );
 
 const OrganizationLink: FunctionComponent<{ row }> = ({ row }) => (
   <Link

@@ -2,8 +2,6 @@ import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { ProjectsListActions } from '@waldur/project/ProjectsListActions';
@@ -13,23 +11,12 @@ import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { formatLongText } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { ProjectCostField } from './ProjectCostField';
 import { ProjectCreateButton } from './ProjectCreateButton';
 import { ProjectDetailsButton } from './ProjectDetailsButton';
 import { ProjectExpandableRowContainer } from './ProjectExpandableRowContainer';
+import { ProjectLink } from './ProjectLink';
 import { ProjectTablePlaceholder } from './ProjectTablePlaceholder';
-
-const ProjectLink = ({ row }) => (
-  <Link
-    state="project.dashboard"
-    params={{ uuid: row.uuid }}
-    label={row.name}
-  />
-);
-
-const ProjectCostField = ({ row }) =>
-  defaultCurrency(
-    (row.billing_price_estimate && row.billing_price_estimate.total) || 0,
-  );
 
 export const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns } = props;

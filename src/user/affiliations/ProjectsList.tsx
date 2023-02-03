@@ -6,7 +6,7 @@ import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { CustomerLink } from '@waldur/customer/CustomerLink';
 import { translate } from '@waldur/i18n';
 import { PROJECTS_LIST } from '@waldur/project/constants';
-import { ProjectLink } from '@waldur/project/ProjectLink';
+import { ProjectAffiliationLink } from '@waldur/project/ProjectAffiliationLink';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
@@ -24,7 +24,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   const columns = filterColumns([
     {
       title: translate('Name'),
-      render: ProjectLink,
+      render: ProjectAffiliationLink,
     },
     {
       title: translate('Organization'),
