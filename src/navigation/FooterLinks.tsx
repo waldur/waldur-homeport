@@ -2,8 +2,8 @@ import { AuthService } from '@waldur/auth/AuthService';
 import { ENV } from '@waldur/configs/default';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-
 import './FooterLinks.scss';
+import { DocsLink } from '@waldur/navigation/header/DocsLink';
 
 export const FooterLinks = () => (
   <ul className="menu menu-gray-600 menu-hover-primary fw-bold order-1">
@@ -14,6 +14,9 @@ export const FooterLinks = () => (
         </Link>
       </li>
     )}
+    <li className="menu-item">
+      <DocsLink />
+    </li>
     <li className="menu-item">
       <Link className="menu-link px-2" state="about.privacy">
         {translate('Privacy policy')}
