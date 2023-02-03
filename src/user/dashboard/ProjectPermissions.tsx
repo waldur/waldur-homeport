@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 import { ENV } from '@waldur/configs/default';
 import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
-import { ProjectLink } from '@waldur/project/ProjectLink';
+import { ProjectAffiliationLink } from '@waldur/project/ProjectAffiliationLink';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { filterByUser } from '@waldur/workspace/selectors';
 
@@ -15,7 +15,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={[
         {
           title: translate('Project name'),
-          render: ProjectLink,
+          render: ProjectAffiliationLink,
         },
         {
           title: translate('Organization'),

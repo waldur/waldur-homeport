@@ -1,7 +1,9 @@
+import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
 import React from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 
+import { ErrorMessage } from '@waldur/ErrorMessage';
 import { translate } from '@waldur/i18n';
 
 import './Table.scss';
@@ -196,7 +198,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
     }
 
     return (
-      <>
+      <ErrorBoundary fallback={ErrorMessage}>
         <table
           className={classNames(
             'table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer',
@@ -230,7 +232,7 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
             fetch={this.props.fetch}
           />
         </table>
-      </>
+      </ErrorBoundary>
     );
   }
 
@@ -261,6 +263,9 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
     }
     if (this.props.initialSorting) {
       this.props.sortList(this.props.initialSorting);
+    }
+    if (this.props.loading || this.props.rows.length || this.props.error) {
+      return;
     }
     doFetch && this.props.fetch();
   }

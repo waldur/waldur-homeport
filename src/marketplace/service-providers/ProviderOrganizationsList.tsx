@@ -9,6 +9,7 @@ import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerReso
 
 import { fetchProviderCustomers } from './api';
 import { CustomerContactColumn } from './CustomerContactColumn';
+import { OrganizationProjectsExpandable } from './OrganizationProjectsExpandable';
 
 const CustomerNameColumn = ({ row }) => (
   <>
@@ -63,6 +64,12 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       columns={columns}
       verboseName={translate('Organizations')}
       showPageSizeSelector={true}
+      expandableRow={({ row }) => (
+        <OrganizationProjectsExpandable
+          row={row}
+          provider_uuid={props.provider.uuid}
+        />
+      )}
     />
   );
 };

@@ -2414,6 +2414,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
 #: src/marketplace/resources/usage/utils.ts
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -2907,6 +2908,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectDetails.tsx
@@ -2990,6 +2992,7 @@ msgstr ""
 
 #: src/customer/list/CustomerList.tsx
 #: src/invoices/list/EstimatedCost.tsx
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
@@ -4676,6 +4679,7 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 msgid "Members"
 msgstr ""
@@ -4902,6 +4906,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
@@ -5176,6 +5181,10 @@ msgstr ""
 
 #: src/customer/list/SelectOrganizationDivisionField.tsx
 msgid "No divisions"
+msgstr ""
+
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+msgid "No end date"
 msgstr ""
 
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
@@ -7959,6 +7968,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/routes.ts
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/resource/support/ResourcesTreemap.tsx
@@ -12672,6 +12682,7 @@ msgstr ""
 msgid "project"
 msgstr ""
 
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -12893,6 +12904,10 @@ msgstr ""
 msgid "{count} items"
 msgstr ""
 
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+msgid "{count} members"
+msgstr ""
+
 #: src/user/api-key/TokenLifetimeField.tsx
 msgid "{count} minutes"
 msgstr ""
@@ -12905,6 +12920,7 @@ msgstr ""
 msgid "{count} projects"
 msgstr ""
 
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/resource/support/TreemapChart.tsx
 msgid "{count} resources"
 msgstr ""
