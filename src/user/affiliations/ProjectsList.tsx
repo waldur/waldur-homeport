@@ -11,7 +11,7 @@ import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { TableOptionsType } from '@waldur/table/types';
-import { getProject, getUser } from '@waldur/workspace/selectors';
+import { getProject } from '@waldur/workspace/selectors';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 import { ProjectHoverableRow } from './ProjectHoverableRow';
@@ -81,25 +81,13 @@ export const getUserProjectsList = (
 ) => {
   const TableOptions = {
     table: PROJECTS_LIST,
-    fetchData: createFetcher('project-permissions'),
+    fetchData: createFetcher('users/projects'),
     queryField: 'project_name',
     mapPropsToFilter: (props) => {
       const filter: Record<string, string[]> = {};
       if (props.stateFilter && props.stateFilter.organization) {
         filter.customer = props.stateFilter.organization.uuid;
       }
-      // select required fields
-      filter.field = [
-        'project_uuid',
-        'project_name',
-        'project_resources_count',
-        'role',
-        'customer_uuid',
-        'customer_name',
-        'expiration_time',
-        'created',
-      ];
-      filter.user = props.user.uuid;
       return filter;
     },
     exportRow: (row) => [
@@ -128,7 +116,6 @@ const PureProjects = getUserProjectsList();
 
 const mapStateToProps = (state: RootState) => ({
   stateFilter: getFormValues('affiliationProjectsListFilter')(state),
-  user: getUser(state),
   currentProject: getProject(state),
 });
 
