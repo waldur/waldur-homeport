@@ -2,6 +2,7 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback, FunctionComponent } from 'react';
 import { Col, ListGroupItem, Stack } from 'react-bootstrap';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { isChildOf } from '@waldur/navigation/useTabs';
@@ -28,7 +29,17 @@ export const OrganizationListItem: FunctionComponent<{
   onClick;
   onMouseEnter;
   filter;
-}> = ({ data, index, style, selected, onClick, onMouseEnter, filter }) => {
+  loading;
+}> = ({
+  data,
+  index,
+  style,
+  selected,
+  onClick,
+  onMouseEnter,
+  filter,
+  loading,
+}) => {
   const item = data[index];
   if (item.isFetching) {
     return (
@@ -61,7 +72,10 @@ export const OrganizationListItem: FunctionComponent<{
             ? highlightMatch(truncate(item.name), filter)
             : truncate(item.name)}
         </span>
-        <ServiceProviderIcon organization={item} className="ms-auto" />
+        <span className="ms-auto">
+          {loading && <LoadingSpinnerIcon />}
+          <ServiceProviderIcon organization={item} className="ms-4" />
+        </span>
       </Stack>
     </ListGroupItem>
   );
@@ -71,10 +85,11 @@ const VIRTUALIZED_SELECTOR_PAGE_SIZE = 20;
 
 export const OrganizationsPanel: FunctionComponent<{
   active;
+  loadingUuid: string;
   filter;
   onClick(customer: Customer): void;
   onMouseEnter;
-}> = ({ active, filter, onClick, onMouseEnter }) => {
+}> = ({ active, loadingUuid, filter, onClick, onMouseEnter }) => {
   const { state } = useCurrentStateAndParams();
   const isServiceProvider = isChildOf('marketplace-provider', state);
   const getPage = useCallback(
@@ -112,6 +127,7 @@ export const OrganizationsPanel: FunctionComponent<{
               onClick={() => onClick(item)}
               onMouseEnter={() => onMouseEnter(item)}
               filter={filter}
+              loading={loadingUuid === item.uuid}
             />
           );
         }}
