@@ -44,6 +44,8 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
     useState<Customer>(currentCustomer);
 
   const [filter, setFilter] = useState('');
+  const [redirectingOrg, setRedirectingOrg] = useState('');
+  const [redirectingPrj, setRedirectingPrj] = useState('');
 
   const refProjectSelector = useRef<HTMLDivElement>();
   const refSearch = useRef<HTMLInputElement>();
@@ -85,32 +87,58 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
       if (!canSeeAll && !checkIsOwner(customer, currentUser)) {
         return;
       }
+      setRedirectingOrg(customer.uuid);
       if (isCustomerPages || isProviderPages) {
-        router.stateService.go(state.name, {
-          uuid: customer.uuid,
-        });
+        router.stateService
+          .go(state.name, {
+            uuid: customer.uuid,
+          })
+          .finally(() => {
+            setRedirectingOrg('');
+          });
       } else {
-        router.stateService.go('organization.dashboard', {
-          uuid: customer.uuid,
-        });
+        router.stateService
+          .go('organization.dashboard', {
+            uuid: customer.uuid,
+          })
+          .finally(() => {
+            setRedirectingOrg('');
+          });
       }
     },
-    [isCustomerPages, isProviderPages, router, state, canSeeAll, currentUser],
+    [
+      isCustomerPages,
+      isProviderPages,
+      router,
+      state,
+      canSeeAll,
+      currentUser,
+      setRedirectingOrg,
+    ],
   );
 
   const handleProjectSelect = useCallback(
     (project) => {
+      setRedirectingPrj(project.uuid);
       if (isProjectPages) {
-        router.stateService.go(state.name, {
-          uuid: project.uuid,
-        });
+        router.stateService
+          .go(state.name, {
+            uuid: project.uuid,
+          })
+          .finally(() => {
+            setRedirectingPrj('');
+          });
       } else {
-        router.stateService.go('project.dashboard', {
-          uuid: project.uuid,
-        });
+        router.stateService
+          .go('project.dashboard', {
+            uuid: project.uuid,
+          })
+          .finally(() => {
+            setRedirectingPrj('');
+          });
       }
     },
-    [isProjectPages, router, state],
+    [isProjectPages, router, state, setRedirectingPrj],
   );
 
   return (
@@ -149,6 +177,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
             <div className="d-flex border-gray-300 border-bottom">
               <OrganizationsPanel
                 active={selectedOrganization}
+                loadingUuid={redirectingOrg}
                 onClick={handleOrganizationSelect}
                 onMouseEnter={(customer) => {
                   selectOrganization(customer);
@@ -159,6 +188,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
                 projects={selectedOrganization?.projects}
                 onSelect={handleProjectSelect}
                 filter={filter}
+                loadingUuid={redirectingPrj}
               />
             </div>
             <div className="d-flex">

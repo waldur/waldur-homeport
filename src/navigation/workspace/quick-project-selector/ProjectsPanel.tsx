@@ -3,6 +3,7 @@ import { useState, useCallback, FunctionComponent } from 'react';
 import { Col, Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getProject } from '@waldur/workspace/selectors';
@@ -25,7 +26,7 @@ const EmptyProjectListPlaceholder: FunctionComponent = () => (
   </p>
 );
 
-const ProjectListItem = ({ item, filter }) => {
+const ProjectListItem = ({ item, filter, loading }) => {
   return (
     <Stack direction="horizontal" gap={4}>
       <ItemIcon item={item} />
@@ -34,6 +35,7 @@ const ProjectListItem = ({ item, filter }) => {
           ? highlightMatch(truncate(item.name, 40), filter)
           : truncate(item.name, 40)}
       </span>
+      <span className="ms-auto">{loading && <LoadingSpinnerIcon />}</span>
     </Stack>
   );
 };
@@ -43,7 +45,8 @@ export const ProjectsPanel: FunctionComponent<{
   onSelect(project: Project): void;
   isDisabled?: boolean;
   filter: string;
-}> = ({ projects, onSelect, isDisabled, filter }) => {
+  loadingUuid: string;
+}> = ({ projects, onSelect, isDisabled, filter, loadingUuid }) => {
   const currentProject = useSelector(getProject);
   const [selectedProject, selectProject] = useState<Project>(currentProject);
 
@@ -71,6 +74,7 @@ export const ProjectsPanel: FunctionComponent<{
           EmptyPlaceholder={EmptyProjectListPlaceholder}
           ItemComponent={ProjectListItem}
           filter={filter}
+          loadingUuid={loadingUuid}
         />
       ) : (
         <EmptyProjectsPlaceholder />

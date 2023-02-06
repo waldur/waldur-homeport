@@ -10,6 +10,7 @@ export const BaseList: FunctionComponent<{
   EmptyPlaceholder;
   ItemComponent;
   filter;
+  loadingUuid: string;
 }> = ({
   items,
   selectedItem,
@@ -17,6 +18,7 @@ export const BaseList: FunctionComponent<{
   EmptyPlaceholder,
   ItemComponent,
   filter,
+  loadingUuid,
 }) => {
   const scrollBarRef = useRef<Scrollbars>();
   const itemId = selectedItem?.uuid;
@@ -56,7 +58,11 @@ export const BaseList: FunctionComponent<{
               onClick={() => selectItem(item)}
               key={item.uuid}
             >
-              <ItemComponent item={item} filter={filter} />
+              <ItemComponent
+                item={item}
+                filter={filter}
+                loading={loadingUuid === item.uuid}
+              />
             </ListGroupItem>
           ))
         )}
