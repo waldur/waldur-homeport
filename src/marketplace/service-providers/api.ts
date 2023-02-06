@@ -19,3 +19,9 @@ export const fetchProviderProjects = createDynamicFetcher(
     `${ENV.apiEndpoint}api/marketplace-service-providers/${request.filter.provider_uuid}/customer_projects/`,
   (filter) => omit(filter, 'provider_uuid'),
 );
+
+export const fetchProviderUserCustomers = createDynamicFetcher(
+  (request) =>
+    `${ENV.apiEndpoint}api/marketplace-service-providers/${request.filter.provider_uuid}/user_customers/`,
+  (filter) => omit(filter, 'provider_uuid'),
+);

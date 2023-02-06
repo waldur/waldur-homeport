@@ -8,6 +8,7 @@ import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerReso
 
 import { fetchProviderUsers } from './api';
 import { CustomerContactColumn } from './CustomerContactColumn';
+import { ProviderUserCustomersList } from './ProviderUserCustomersList';
 
 const UserNameColumn = ({ row }) => (
   <>
@@ -40,7 +41,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
       hoverableRow={UserDetailsButton}
       showPageSizeSelector={true}
       verboseName={translate('users')}
-      enableExport={true}
+      expandableRow={({ row }) => (
+        <ProviderUserCustomersList user={row} provider={props.provider} />
+      )}
     />
   );
 };

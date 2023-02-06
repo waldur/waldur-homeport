@@ -1,0 +1,79 @@
+import { FunctionComponent } from 'react';
+
+import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
+import { EstimatedCostField } from '@waldur/customer/list/EstimatedCostField';
+import { translate } from '@waldur/i18n';
+import { connectTable, Table } from '@waldur/table';
+
+import { fetchProviderUserCustomers } from './api';
+import { CustomerContactColumn } from './CustomerContactColumn';
+
+const CustomerNameColumn = ({ row }) => (
+  <>
+    <b>{row.name}</b>
+    {row.abbreviation && row.abbreviation !== row.name ? (
+      <p className="text-muted">{row.abbreviation.toLocaleUpperCase()}</p>
+    ) : null}
+  </>
+);
+
+const CustomerMembersColumn = ({ row }) =>
+  row.users_count === 0 ? (
+    translate('No active members')
+  ) : (
+    <SymbolsGroup items={row.users} />
+  );
+
+const CustomerProjectsColumn = ({ row }) =>
+  row.projects_count === 0
+    ? translate('No active projects')
+    : row.projects_count === 1
+    ? translate('One project')
+    : translate('{count} projects', { count: row.projects_count });
+
+export const TableComponent: FunctionComponent<any> = (props) => {
+  const columns = [
+    {
+      title: translate('Name'),
+      render: CustomerNameColumn,
+    },
+    {
+      title: translate('Projects'),
+      render: CustomerProjectsColumn,
+    },
+    {
+      title: translate('Contact'),
+      render: CustomerContactColumn,
+    },
+    {
+      title: translate('Members'),
+      render: CustomerMembersColumn,
+    },
+    {
+      title: translate('Estimated cost'),
+      render: EstimatedCostField,
+    },
+  ];
+
+  return (
+    <Table
+      {...props}
+      columns={columns}
+      verboseName={translate('Organizations')}
+      hasActionBar={false}
+    />
+  );
+};
+
+const TableOptions = {
+  table: 'marketplace-provider-user-organizations',
+  fetchData: fetchProviderUserCustomers,
+  mapPropsToFilter: ({ provider, user }) => ({
+    provider_uuid: provider.uuid,
+    user_uuid: user.uuid,
+  }),
+};
+
+export const ProviderUserCustomersList = connectTable(TableOptions)(
+  TableComponent,
+) as React.ComponentType<any>;
