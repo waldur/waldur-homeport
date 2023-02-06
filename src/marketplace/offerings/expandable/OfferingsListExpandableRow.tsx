@@ -1,6 +1,7 @@
 import { useState, FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
+import { OfferingResourcesList } from '@waldur/marketplace/details/OfferingResourcesList';
 import { OfferingUsageChart } from '@waldur/marketplace/offerings/expandable/OfferingUsageChart';
 import { Offering } from '@waldur/marketplace/types';
 
@@ -17,6 +18,7 @@ export const OfferingsListExpandableRow: FunctionComponent<{
   );
   return (
     <>
+      <OfferingResourcesList offering={row} />
       <OfferingCustomersListFilter uniqueFormId={uniqueFormId} />
       <Card.Body>
         <OfferingCustomersList

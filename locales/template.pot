@@ -1694,6 +1694,7 @@ msgid "Connection details"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
 msgid "Contact"
 msgstr ""
@@ -2996,6 +2997,7 @@ msgstr ""
 #: src/invoices/list/EstimatedCost.tsx
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
@@ -4683,6 +4685,7 @@ msgstr ""
 
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 msgid "Members"
 msgstr ""
 
@@ -4912,6 +4915,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -5158,10 +5162,12 @@ msgid "No access info."
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 msgid "No active members"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 msgid "No active projects"
 msgstr ""
 
@@ -5573,6 +5579,7 @@ msgid "Old value"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 msgid "One project"
 msgstr ""
 
@@ -5968,6 +5975,7 @@ msgstr ""
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/notifications/NotificationExpandableRow.tsx
 #: src/notifications/NotificationForm.tsx
 #: src/notifications/RecipientsList.tsx
@@ -6993,6 +7001,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/user/affiliations/OrganizationsList.tsx
@@ -12927,6 +12936,7 @@ msgid "{count} more affiliations"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 msgid "{count} projects"
 msgstr ""
 

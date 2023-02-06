@@ -30,7 +30,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('Organizations')}
       hasQuery={true}
       showPageSizeSelector={true}
-      enableExport={true}
+      hasActionBar={false}
     />
   );
 };

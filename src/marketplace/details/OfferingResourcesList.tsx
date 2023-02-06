@@ -92,6 +92,7 @@ const exportRow = (row) => [
   row.name,
   row.uuid,
   row.customer_name,
+  row.project_name,
   row.plan_name,
   row.state,
 ];
@@ -100,6 +101,7 @@ const exportFields = [
   'Name',
   'Resource UUID',
   'Client organization',
+  'Client project',
   'Plan',
   'State',
 ];
