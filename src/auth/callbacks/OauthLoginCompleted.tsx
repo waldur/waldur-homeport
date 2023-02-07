@@ -46,7 +46,7 @@ export const OauthLoginCompleted: FunctionComponent = () => {
         });
         AuthService.redirectOnSuccess();
       } catch (e) {
-        setError(e.data.detail);
+        setError(e.data?.detail || translate('Unknown error'));
       }
     }
     fetchToken();

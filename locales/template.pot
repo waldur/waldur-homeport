@@ -11326,6 +11326,10 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
+#: src/auth/callbacks/OauthLoginCompleted.tsx
+msgid "Unknown error"
+msgstr ""
+
 #: src/resource/actions/UnlinkActionItem.tsx
 msgid "Unlink"
 msgstr ""
