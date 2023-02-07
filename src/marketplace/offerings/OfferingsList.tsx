@@ -1,21 +1,16 @@
-import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
-import { PreviewOfferingButton } from '@waldur/marketplace/offerings/PreviewOfferingButton';
 import {
   OFFERING_TABLE_NAME,
   PUBLIC_OFFERINGS_FILTER_FORM_ID,
 } from '@waldur/marketplace/offerings/store/constants';
-import { openModalDialog } from '@waldur/modal/actions';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -25,21 +20,17 @@ import {
   getUser,
   isOwnerOrStaff,
   isServiceManagerSelector,
-  isSupportOnly,
 } from '@waldur/workspace/selectors';
 
 import { Offering } from '../types';
 
-import { OfferingImportDialog } from './actions/OfferingImportDialog';
-import { OfferingItemActions } from './actions/OfferingItemActions';
+import { useOfferingDropdownActions } from './hooks';
+import { OfferingActions } from './OfferingActions';
 import { OfferingNameColumn } from './OfferingNameColumn';
 import { OfferingsListTablePlaceholder } from './OfferingsListTablePlaceholder';
 import { OfferingStateCell } from './OfferingStateCell';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  const router = useRouter();
-  const dispatch = useDispatch();
-
   const organizationColumn = props?.hasOrganizationColumn
     ? [
         {
@@ -75,31 +66,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
   ];
 
-  const dropdownActions = [
-    {
-      label: translate('Add offerings'),
-      icon: 'fa fa-plus',
-      action: () => {
-        router.stateService.go('marketplace-offering-create');
-      },
-    },
-    {
-      label: translate('Import offerings'),
-      icon: 'fa fa-plus',
-      action: () => {
-        dispatch(openModalDialog(OfferingImportDialog, { size: 'lg' }));
-      },
-    },
-    {
-      label: translate('Public list'),
-      icon: 'fa fa-external-link',
-      action: () => {
-        router.stateService.go('marketplace-service-provider.details', {
-          uuid: props.customer.uuid,
-        });
-      },
-    },
-  ];
+  const dropdownActions = useOfferingDropdownActions();
 
   return (
     <Table
@@ -107,21 +74,10 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       placeholderComponent={<OfferingsListTablePlaceholder />}
       columns={columns}
       verboseName={translate('Offerings')}
-      dropdownActions={props.showOfferingListActions && dropdownActions}
+      dropdownActions={dropdownActions}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
-      hoverableRow={
-        !props.actionsDisabled ?? true
-          ? ({ row }) => (
-              <ButtonGroup>
-                {!props.hideOfferingItemActions && (
-                  <OfferingItemActions offering={row} />
-                )}
-                <PreviewOfferingButton offering={row} />
-              </ButtonGroup>
-            )
-          : undefined
-      }
+      hoverableRow={OfferingActions}
       expandableRow={OfferingsListExpandableRow}
       hasQuery={true}
     />
@@ -166,21 +122,11 @@ export const TableOptions: TableOptionsType = {
   queryField: 'keyword',
 };
 
-const showOfferingListActions = createSelector(
-  isOwnerOrStaff,
-  getCustomer,
-  (ownerOrStaff, customer) =>
-    customer && customer.is_service_provider && ownerOrStaff,
-);
-
 const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   user: getUser(state),
   isServiceManager: isServiceManagerSelector(state),
   isOwnerOrStaff: isOwnerOrStaff(state),
-  hideOfferingItemActions: isSupportOnly(state),
-  showOfferingListActions: showOfferingListActions(state),
-  actionsDisabled: !isOwnerOrStaff(state),
   filter: getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID)(state) as FilterData,
 });
 

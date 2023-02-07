@@ -1,4 +1,4 @@
-import { useState, FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { OfferingResourcesList } from '@waldur/marketplace/details/OfferingResourcesList';
@@ -13,8 +13,9 @@ import { OfferingCustomersListFilter } from './OfferingCustomersListFilter';
 export const OfferingsListExpandableRow: FunctionComponent<{
   row: Offering;
 }> = ({ row }) => {
-  const [uniqueFormId] = useState(
-    `${OFFERING_CUSTOMERS_LIST_FILTER}-${row.uuid}`,
+  const [uniqueFormId] = useMemo(
+    () => `${OFFERING_CUSTOMERS_LIST_FILTER}-${row.uuid}`,
+    [row],
   );
   return (
     <>

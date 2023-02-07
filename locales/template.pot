@@ -350,7 +350,7 @@ msgstr ""
 msgid "Add offering"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/hooks.ts
 msgid "Add offerings"
 msgstr ""
 
@@ -2996,6 +2996,7 @@ msgstr ""
 #: src/customer/list/CustomerList.tsx
 #: src/invoices/list/EstimatedCost.tsx
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/project/ProjectCounters.tsx
@@ -3816,7 +3817,7 @@ msgstr ""
 msgid "Import offering"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/hooks.ts
 msgid "Import offerings"
 msgstr ""
 
@@ -5449,6 +5450,10 @@ msgstr ""
 msgid "Offering"
 msgstr ""
 
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
+msgid "Offering / Category"
+msgstr ""
+
 #: src/marketplace/offerings/create/OfferingLimitsTable.tsx
 msgid "Offering components"
 msgstr ""
@@ -5564,6 +5569,7 @@ msgstr ""
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/notifications/NotificationExpandableRow.tsx
 #: src/notifications/NotificationForm.tsx
 #: src/notifications/RecipientsList.tsx
@@ -7143,7 +7149,7 @@ msgstr ""
 msgid "Public key"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/hooks.ts
 msgid "Public list"
 msgstr ""
 
@@ -7982,6 +7988,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/project/ProjectResourcesList.tsx
@@ -9258,6 +9265,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/notifications/NotificationList.tsx
@@ -10233,6 +10241,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
@@ -12945,6 +12954,7 @@ msgid "{count} projects"
 msgstr ""
 
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/resource/support/TreemapChart.tsx
 msgid "{count} resources"
 msgstr ""
