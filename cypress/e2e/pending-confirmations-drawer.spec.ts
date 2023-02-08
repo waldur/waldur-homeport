@@ -1,7 +1,15 @@
 describe('Empty pending confirmations drawer', () => {
   beforeEach(() => {
-    cy.intercept('GET', '/api/marketplace-order-items/**', [])
-      .intercept('GET', '/api/marketplace-project-update-requests/**', [])
+      cy.intercept('HEAD', '/api/marketplace-order-items/**', {
+        headers: {
+          'x-result-count': '0',
+        },
+      })
+      .intercept('HEAD', '/api/marketplace-project-update-requests/**', {
+        headers: {
+          'x-result-count': '0',
+        },
+      })
       .mockUser()
       .mockChecklists()
       .mockPermissions()
@@ -31,7 +39,6 @@ describe('Pending confirmations drawer', () => {
   const successApproveAllOrderItems = 'All order items has been approved';
   const successRejectAllOrderItems = 'All order items has been rejected';
   const successApproveUpdateRequest = 'Review has been submitted';
-  const submitUpdateRequest = 'Review has been submitted';
 
   beforeEach(() => {
     cy.intercept('GET', '/api/marketplace-order-items/?**', {
@@ -45,6 +52,16 @@ describe('Pending confirmations drawer', () => {
       })
       .intercept('POST', '/api/marketplace-order-items/**/approve/', {
         body: true,
+      })
+      .intercept('HEAD', '/api/marketplace-order-items/**', {
+        headers: {
+          'x-result-count': '3',
+        },
+      })
+      .intercept('HEAD', '/api/marketplace-project-update-requests/**', {
+        headers: {
+          'x-result-count': '3',
+        },
       })
       .as('approveOrderItem')
       .intercept('POST', '/api/marketplace-order-items/**/reject/', {
