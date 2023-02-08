@@ -446,3 +446,10 @@ export const pullRemoteOfferingOrderItems = (uuid) =>
 
 export const pullRemoteOfferingInvoices = (uuid) =>
   post(`/remote-waldur-api/pull_offering_invoices/${uuid}/`);
+
+export const countOrderItems = (params) =>
+  Axios.request({
+    method: 'HEAD',
+    url: ENV.apiEndpoint + 'api/marketplace-order-items/',
+    params,
+  }).then(parseResultCount);

@@ -5,9 +5,9 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { openDrawerDialog } from '@waldur/drawer/actions';
 import { translate } from '@waldur/i18n';
-import { getProjectUpdateRequestsList } from '@waldur/marketplace-remote/api';
+import { countProjectUpdateRequestsList } from '@waldur/marketplace-remote/api';
 import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
-import { getOrderItemList } from '@waldur/marketplace/common/api';
+import { countOrderItems } from '@waldur/marketplace/common/api';
 
 import { HeaderButtonBullet } from './HeaderButtonBullet';
 
@@ -21,49 +21,37 @@ const icon = require('@waldur/images/clipboard-check.svg');
 export const ConfirmationDrawerToggle: React.FC = () => {
   const dispatch = useDispatch();
 
-  // fetch pending order items uuid, just to know if we have an item or not. we use it to show blinking dot also.
-  const { value: pendingOrderFlag } = useAsync(() =>
-    getOrderItemList({
-      page_size: 1,
+  const { value: counters } = useAsync(async () => {
+    const pendingOrdersCount = await countOrderItems({
       state: 'pending',
-      field: 'uuid',
       can_manage_as_owner: 'True',
-    }),
-  );
-  const { value: pendingProviderFlag } = useAsync(() =>
-    getOrderItemList({
-      page_size: 1,
+    });
+    const pendingProvidersCount = await countOrderItems({
       offering_type: [REMOTE_OFFERING_TYPE, 'Marketplace.Basic'],
       state: 'executing',
-      field: 'uuid',
       can_manage_as_service_provider: 'True',
-    }),
-  );
-  const { value: pendingProjectUpdatesFlag } = useAsync(() =>
-    getProjectUpdateRequestsList({
-      page_size: 1,
+    });
+    const pendingProjectUpdatesCount = await countProjectUpdateRequestsList({
       state: 'pending',
-      field: 'uuid',
-    }),
-  );
-
-  const pendingOrdersCount = pendingOrderFlag?.length || 0;
-  const pendingProvidersCount = pendingProviderFlag?.length || 0;
-  const pendingProjectUpdatesCount = pendingProjectUpdatesFlag?.length || 0;
+    });
+    return {
+      pendingOrdersCount,
+      pendingProvidersCount,
+      pendingProjectUpdatesCount,
+    };
+  });
 
   const showBullet = Boolean(
-    pendingOrdersCount || pendingProvidersCount || pendingProjectUpdatesCount,
+    counters?.pendingOrdersCount ||
+      counters?.pendingProvidersCount ||
+      counters?.pendingProjectUpdatesCount,
   );
 
   const openDrawer = () => {
     dispatch(
       openDrawerDialog(PendingConfirmationContainer, {
         title: translate('Pending confirmations'),
-        props: {
-          pendingOrdersCount,
-          pendingProvidersCount,
-          pendingProjectUpdatesCount,
-        },
+        props: counters,
       }),
     );
   };
