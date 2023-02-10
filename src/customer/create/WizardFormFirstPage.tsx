@@ -65,7 +65,6 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => {
                 floating={false}
                 component={SelectField}
                 label={translate('Division')}
-                required={true}
                 options={divisions}
                 getOptionLabel={(option) => option.name}
               />
