@@ -4,7 +4,6 @@ import { compose } from 'redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -17,7 +16,6 @@ import { RequestStateIndicator } from './RequestStateIndicator';
 import { flowFilterFormSelector } from './utils';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
-  useTitle(translate('Resource creation flows'));
   const columns = [
     {
       title: translate('Created at'),
@@ -59,6 +57,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     <Table
       {...props}
       columns={columns}
+      title={translate('Resource creation flows')}
       verboseName={translate('resource creation flows')}
       showPageSizeSelector={true}
       actions={<FlowCreateButton />}

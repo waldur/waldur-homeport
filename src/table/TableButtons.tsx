@@ -52,7 +52,7 @@ export const TableButtons: FunctionComponent<any> = (props: TableProps) => {
           : [],
       ),
     );
-  }, [props, showExportInDropdown]);
+  }, [props.dropdownActions, props.exportAs, showExportInDropdown]);
 
   if (!props.selectedRows?.length) {
     return (
