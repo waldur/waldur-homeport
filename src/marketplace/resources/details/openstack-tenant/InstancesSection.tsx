@@ -5,6 +5,7 @@ import { translate } from '@waldur/i18n';
 import { getResourceState } from '@waldur/resource/state/utils';
 import { parseResponse } from '@waldur/table/api';
 
+import { AddResourceButton } from '../../actions/AddResourceButton';
 import { ResourcesList } from '../ResourcesList';
 import { DataPage } from '../types';
 
@@ -38,5 +39,11 @@ export const InstancesSection = ({ resource }) => {
       nextPage: response.nextPage,
     };
   };
-  return <ResourcesList loadData={loadData} queryKey="instances" />;
+  return (
+    <ResourcesList
+      loadData={loadData}
+      queryKey="instances"
+      actions={<AddResourceButton resource={resource} />}
+    />
+  );
 };

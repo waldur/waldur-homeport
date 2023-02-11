@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
+import { AddResourceButton } from '@waldur/marketplace/resources/actions/AddResourceButton';
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
@@ -38,6 +39,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('instances')}
+      actions={<AddResourceButton resource={props.resource} />}
       hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       hasQuery={true}

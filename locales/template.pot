@@ -393,6 +393,7 @@ msgstr ""
 
 #: src/dashboard/marketplace.ts
 #: src/marketplace-flows/FlowCreateButton.tsx
+#: src/marketplace/resources/actions/AddResourceButton.tsx
 #: src/marketplace/resources/list/CreateResourceButton.tsx
 #: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
 msgid "Add resource"

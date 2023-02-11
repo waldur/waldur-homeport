@@ -155,6 +155,11 @@ export const getResourceOffering = (id: string, options?: AxiosRequestConfig) =>
     (response) => response.data,
   );
 
+export const getSubResourcesOfferings = (resourceId: string) =>
+  getAll<{ uuid; type }>(
+    `/marketplace-resources/${resourceId}/offering_for_subresources/`,
+  );
+
 export const submitReport = (resourceId: string, payload) =>
   post(`/marketplace-resources/${resourceId}/submit_report/`, payload);
 
