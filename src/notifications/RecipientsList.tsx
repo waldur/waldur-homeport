@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect } from 'react';
 import { Badge } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
@@ -18,6 +18,10 @@ const BadgesList = ({ items }) => (
 );
 
 const TableComponent: FunctionComponent<any> = (props) => {
+  const { fetch, filter } = props;
+  useEffect(() => {
+    fetch();
+  }, [fetch, filter]);
   return (
     <Table
       {...props}
