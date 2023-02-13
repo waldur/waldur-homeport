@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import 'world-flags-sprite/stylesheets/flags16.css';
 
 import { ENV } from '@waldur/configs/default';
+import { formatMediaURL } from '@waldur/core/utils';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getTitle } from '../title';
@@ -71,7 +72,10 @@ export const AppHeader: FunctionComponent = () => {
             <a className="d-lg-none">
               <img
                 alt="Logo"
-                src={ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE || Logo}
+                src={
+                  formatMediaURL(ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE) ||
+                  Logo
+                }
                 className="h-30px"
               />
             </a>

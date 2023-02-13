@@ -69,6 +69,7 @@ interface CoreConfiguration {
   TRANSLATION_DOMAIN: string;
   ORGANIZATION_SUBNETS_VISIBLE: boolean;
   CURRENCY_NAME: string;
+  FAVICON: string;
 }
 
 interface MarketplaceConfiguration {

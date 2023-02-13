@@ -1,6 +1,7 @@
 import { FunctionComponent, useCallback } from 'react';
 
 import { ENV } from '@waldur/configs/default';
+import { formatMediaURL } from '@waldur/core/utils';
 import { useLayout } from '@waldur/metronic/layout/core';
 
 export const BrandName: FunctionComponent = () => {
@@ -22,7 +23,7 @@ export const BrandName: FunctionComponent = () => {
     >
       {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
         <img
-          src={ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO}
+          src={formatMediaURL(ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO)}
           className="mh-50px mw-200px logo"
         />
       ) : (
