@@ -2661,13 +2661,8 @@ msgstr ""
 msgid "Download full price list"
 msgstr ""
 
-#: src/invoices/details/DownloadInvoiceButton.tsx
 #: src/paypal/InvoiceActions.tsx
 msgid "Download invoice"
-msgstr ""
-
-#: src/marketplace/cart/ShoppingCartSidebar.tsx
-msgid "Download order PDF file"
 msgstr ""
 
 #: src/marketplace-flows/RequestStateFilter.tsx

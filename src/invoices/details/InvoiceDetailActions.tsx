@@ -3,7 +3,6 @@ import { ButtonGroup } from 'react-bootstrap';
 
 import { Invoice } from '../types';
 
-import { DownloadInvoiceButton } from './DownloadInvoiceButton';
 import { InvoicePayButton } from './InvoicePayButton';
 import { PrintInvoiceButton } from './PrintInvoiceButton';
 
@@ -15,11 +14,7 @@ export const InvoiceDetailActions: FC<InvoiceDetailActionsProps> = ({
   invoice,
 }) => (
   <ButtonGroup>
-    {invoice?.pdf ? (
-      <DownloadInvoiceButton invoice={invoice} />
-    ) : (
-      <PrintInvoiceButton />
-    )}
+    <PrintInvoiceButton />
     <InvoicePayButton invoice={invoice} />
   </ButtonGroup>
 );
