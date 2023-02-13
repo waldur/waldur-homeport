@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { DownloadLink } from '@waldur/core/DownloadLink';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
@@ -53,15 +52,6 @@ export const PureShoppingCartSidebar: FunctionComponent<ShoppingCartSidebarProps
             ) : null}
           </tbody>
         </table>
-
-        {props.file && (
-          <DownloadLink
-            label={translate('Download order PDF file')}
-            url={props.file}
-            filename="marketplace-order.pdf"
-            className="btn btn-outline btn-secondary"
-          />
-        )}
       </aside>
     ) : null;
 
