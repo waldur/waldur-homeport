@@ -62,7 +62,7 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
                     customer.division_name,
                     customer.email,
                     customer.phone_number,
-                  ].map((item) => item && <span>{item}</span>)}
+                  ].map((item, i) => item && <span key={i}>{item}</span>)}
                 </Stack>
               </Col>
               <Col xs="auto">

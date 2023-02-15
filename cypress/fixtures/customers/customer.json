@@ -14,12 +14,14 @@
     {
       "url": "/api/projects/e48410f7608f4185a77902a1d0e8d75e/",
       "uuid": "e48410f7608f4185a77902a1d0e8d75e",
-      "name": "Vision-oriented bifurcated capacity"
+      "name": "Vision-oriented bifurcated capacity",
+      "resource_count": 2
     },
     {
       "url": "/api/projects/7473e687c7544560925cb88be9f42a89/",
       "uuid": "7473e687c7544560925cb88be9f42a89",
-      "name": "Mandatory web-enabled concept"
+      "name": "Mandatory web-enabled concept",
+      "resource_count": 0
     }
   ],
   "owners": [

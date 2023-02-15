@@ -1388,6 +1388,10 @@ msgstr ""
 msgid "Change of limits of SLURM allocation {name}"
 msgstr ""
 
+#: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
+msgid "Change organization"
+msgstr ""
+
 #: src/marketplace/resources/change-plan/ChangePlanAction.tsx
 msgid "Change plan"
 msgstr ""
@@ -3285,6 +3289,10 @@ msgstr ""
 msgid "Financial"
 msgstr ""
 
+#: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
+msgid "Find project"
+msgstr ""
+
 #: src/marketplace-checklist/AnswersTable.tsx
 msgid "Find solution"
 msgstr ""
@@ -3582,7 +3590,7 @@ msgstr ""
 
 #: src/i18n/constants.ts
 #: src/navigation/header/UserDropdown.tsx
-#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorToggle.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorToggle.tsx
 msgid "Guest"
 msgstr ""
 
@@ -4559,6 +4567,14 @@ msgstr ""
 msgid "Manage networks"
 msgstr ""
 
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+msgid "Manage organizations"
+msgstr ""
+
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+msgid "Manage projects"
+msgstr ""
+
 #: src/openstack/openstack-instance/InstanceNetworkButton.tsx
 msgid "Manage security groups"
 msgstr ""
@@ -4676,6 +4692,7 @@ msgstr ""
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/i18n/constants.ts
+#: src/navigation/workspace/context-selector/OrganizationSummary.tsx
 #: src/project/team/ProjectUsersList.tsx
 msgid "Member"
 msgstr ""
@@ -4683,6 +4700,7 @@ msgstr ""
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/navigation/workspace/context-selector/OrganizationSummary.tsx
 msgid "Members"
 msgstr ""
 
@@ -5112,6 +5130,10 @@ msgstr ""
 msgid "New plan"
 msgstr ""
 
+#: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
+msgid "New project"
+msgstr ""
+
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "New size"
@@ -5205,6 +5227,10 @@ msgstr ""
 msgid "No matching offerings found"
 msgstr ""
 
+#: src/navigation/workspace/context-selector/OrganizationSummary.tsx
+msgid "No member"
+msgstr ""
+
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 msgid "No offerings"
 msgstr ""
@@ -5226,6 +5252,7 @@ msgid "No pending confirmations"
 msgstr ""
 
 #: src/navigation/workspace/EmptyProjectPlaceholder.tsx
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 msgid "No project"
 msgstr ""
 
@@ -5246,6 +5273,11 @@ msgstr ""
 
 #: src/marketplace/resources/details/StatusPage.tsx
 msgid "No reported incidents in the last 24 hours"
+msgstr ""
+
+#: src/navigation/header/project-selector/ProjectsList.tsx
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
+msgid "No resource"
 msgstr ""
 
 #: src/navigation/header/SearchToggle.tsx
@@ -5295,7 +5327,7 @@ msgstr ""
 msgid "Not assigned"
 msgstr ""
 
-#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
 msgid "Not logged in"
 msgstr ""
 
@@ -5818,8 +5850,8 @@ msgstr ""
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
-#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
-#: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -6820,8 +6852,7 @@ msgstr ""
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
-#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
-#: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -6876,6 +6907,10 @@ msgstr ""
 
 #: src/customer/routes.ts
 msgid "Project creation requests"
+msgstr ""
+
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
+msgid "Project dashboard"
 msgstr ""
 
 #: src/booking/BookingsListExpandableRow.tsx
@@ -7004,6 +7039,7 @@ msgstr ""
 #: src/issues/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/user/affiliations/OrganizationsList.tsx
@@ -7804,6 +7840,8 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/navigation/header/project-selector/ProjectsList.tsx
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 msgid "Resource"
 msgstr ""
 
@@ -7986,7 +8024,9 @@ msgstr ""
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/sidebar/ResourcesMenu.tsx
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
@@ -8356,8 +8396,8 @@ msgid "Search offering..."
 msgstr ""
 
 #: src/navigation/header/SearchToggle.tsx
-#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
-#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
 msgid "Search..."
 msgstr ""
 
@@ -8417,6 +8457,10 @@ msgstr ""
 
 #: src/marketplace/landing/FooterSection.tsx
 msgid "See offerings"
+msgstr ""
+
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
+msgid "See resources"
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
@@ -8537,7 +8581,7 @@ msgstr ""
 msgid "Select offerings..."
 msgstr ""
 
-#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorToggle.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorToggle.tsx
 msgid "Select organization"
 msgstr ""
 
@@ -8577,7 +8621,8 @@ msgid "Select priority..."
 msgstr ""
 
 #: src/invitations/actions/ProjectGroup.tsx
-#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorToggle.tsx
+#: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorToggle.tsx
 msgid "Select project"
 msgstr ""
 
@@ -9097,7 +9142,7 @@ msgstr ""
 
 #: src/auth/valimo/AuthValimoDialog.tsx
 #: src/navigation/header/UserDropdown.tsx
-#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
 msgid "Sign in"
 msgstr ""
 
@@ -9533,6 +9578,10 @@ msgstr ""
 msgid "Suspend"
 msgstr ""
 
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
+msgid "Switch to {org}"
+msgstr ""
+
 #: src/freeipa/SyncProfile.tsx
 msgid "Sync profile"
 msgstr ""
@@ -9949,7 +9998,7 @@ msgstr ""
 msgid "There are no organizations yet."
 msgstr ""
 
-#: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 msgid "There are no organizations."
 msgstr ""
 
@@ -9965,11 +10014,13 @@ msgstr ""
 msgid "There are no project events."
 msgstr ""
 
-#: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
+#: src/navigation/header/project-selector/ProjectsList.tsx
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 msgid "There are no projects yet for this organization."
 msgstr ""
 
-#: src/navigation/workspace/quick-project-selector/ProjectsPanel.tsx
+#: src/navigation/header/project-selector/ProjectsList.tsx
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 msgid "There are no projects."
 msgstr ""
 
@@ -10692,7 +10743,7 @@ msgstr ""
 #: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
-#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 msgid "Unable to load data"
@@ -12065,25 +12116,17 @@ msgstr ""
 msgid "View YAML"
 msgstr ""
 
-#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 msgid "View all organizations"
 msgstr ""
 
-#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 msgid "View all projects"
 msgstr ""
 
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "View item"
-msgstr ""
-
-#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
-msgid "View my organizations"
-msgstr ""
-
-#: src/navigation/workspace/quick-project-selector/QuickProjectSelectorDropdown.tsx
-msgid "View my projects"
 msgstr ""
 
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx
@@ -12252,7 +12295,7 @@ msgstr ""
 msgid "Yes, use invitation email"
 msgstr ""
 
-#: src/navigation/workspace/quick-project-selector/GuestDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
 msgid "You are accessing as a guest user. To manage organizations or projects, please sign in."
 msgstr ""
 
@@ -12435,6 +12478,10 @@ msgstr ""
 msgid "Your request is being processed."
 msgstr ""
 
+#: src/navigation/workspace/context-selector/OrganizationSummary.tsx
+msgid "Your role:"
+msgstr ""
+
 #: src/auth/AuthHeader.tsx
 msgid "Your session has expired, please enter credentials to continue."
 msgstr ""
@@ -12537,11 +12584,11 @@ msgstr ""
 msgid "events"
 msgstr ""
 
-#: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 msgid "failed"
 msgstr ""
 
-#: src/navigation/workspace/quick-project-selector/OrganizationsPanel.tsx
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 msgid "fetching"
 msgstr ""
 

@@ -5,16 +5,15 @@ describe('User workspace', function () {
       .mockCustomers()
       .intercept('GET', '/api/marketplace-categories/**', [])
       .intercept('GET', `/api/events-stats/?scope=/api/users/bf6d515c9e6e445f9c339021b30fc96b/&page_size=12`, {})
-      .wait(3000)
       .setToken()
       .visit('/profile/')
-      .wait(2000)
+      .waitForPage()
   });
 
 
   it('Should go to "manage"', () => {
     cy
-      .get('a')
+      .get('.card-body a')
       .contains('Manage')
       .click();
     cy
@@ -24,7 +23,7 @@ describe('User workspace', function () {
 
   it('Should go to "audit log"', () => {
     cy
-      .get('a')
+      .get('.card-body a')
       .contains('Audit logs')
       .click();
     cy

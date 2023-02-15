@@ -18,7 +18,7 @@ export const InvitationPolicyService = {
 
   // Check user permissions for new invitation
   canManageRole(context, role) {
-    if (context.user.is_staff) {
+    if (context.user?.is_staff) {
       return true;
     }
     if (checkIsOwner(context.customer, context.user)) {
@@ -37,7 +37,7 @@ export const InvitationPolicyService = {
 
   // Check user permissions for existing invitation
   canManageInvitation(context, invitation) {
-    if (context.user.is_staff) {
+    if (context.user?.is_staff) {
       return true;
     }
     if (invitation.customer_role) {
@@ -56,7 +56,7 @@ export const InvitationPolicyService = {
 
   // Check user permissions to see invitations
   canAccessInvitations(context) {
-    if (context.user.is_staff) {
+    if (context.user?.is_staff) {
       return true;
     }
     if (checkIsOwner(context.customer, context.user)) {

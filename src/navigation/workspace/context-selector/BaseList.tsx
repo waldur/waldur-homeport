@@ -1,5 +1,11 @@
 import classNames from 'classnames';
-import { useRef, useCallback, useEffect, FunctionComponent } from 'react';
+import {
+  useRef,
+  useCallback,
+  useEffect,
+  FunctionComponent,
+  CSSProperties,
+} from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Scrollbars } from 'react-custom-scrollbars';
 
@@ -10,7 +16,8 @@ export const BaseList: FunctionComponent<{
   EmptyPlaceholder;
   ItemComponent;
   filter;
-  loadingUuid: string;
+  loadingUuid?: string;
+  style?: CSSProperties;
 }> = ({
   items,
   selectedItem,
@@ -19,6 +26,7 @@ export const BaseList: FunctionComponent<{
   ItemComponent,
   filter,
   loadingUuid,
+  style,
 }) => {
   const scrollBarRef = useRef<Scrollbars>();
   const itemId = selectedItem?.uuid;
@@ -38,11 +46,7 @@ export const BaseList: FunctionComponent<{
   useEffect(adjustScroll, []);
 
   return (
-    <Scrollbars
-      style={{ height: 'calc(100vh - 280px)' }}
-      ref={scrollBarRef}
-      className="bg-gray-100"
-    >
+    <Scrollbars style={style} ref={scrollBarRef}>
       <ListGroup>
         {items.length === 0 ? (
           <ListGroupItem>
@@ -61,7 +65,7 @@ export const BaseList: FunctionComponent<{
               <ItemComponent
                 item={item}
                 filter={filter}
-                loading={loadingUuid === item.uuid}
+                loading={loadingUuid === item?.uuid}
               />
             </ListGroupItem>
           ))

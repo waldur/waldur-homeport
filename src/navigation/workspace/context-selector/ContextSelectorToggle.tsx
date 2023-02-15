@@ -19,11 +19,11 @@ import {
   PROJECT_WORKSPACE,
 } from '@waldur/workspace/types';
 
+import { ContextSelectorDropdown } from './ContextSelectorDropdown';
 import { GuestDropdown } from './GuestDropdown';
-import { QuickProjectSelectorDropdown } from './QuickProjectSelectorDropdown';
 import { getItemAbbreviation } from './utils';
 
-export const QuickProjectSelectorToggle: FunctionComponent = () => {
+export const ContextSelectorToggle: FunctionComponent = () => {
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
@@ -59,8 +59,9 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
       id="kt_aside_toolbar"
     >
       <div
-        className="d-flex align-items-center justify-content-center py-5 quick-project-selector-toggle"
+        className="d-flex align-items-center justify-content-center py-5 context-selector-toggle"
         data-kt-menu-trigger="click"
+        data-kt-menu-attach=".aside-toolbar"
         data-kt-menu-placement="right-start"
         data-kt-menu-flip="bottom"
       >
@@ -77,14 +78,7 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
         </div>
         <div className="flex-row-fluid flex-wrap ms-5">
           <div className="d-flex">
-            <div
-              className="flex-grow-1 me-2"
-              style={{
-                overflowX: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-              }}
-            >
+            <div className="flex-grow-1 me-2 ellipsis">
               {user ? (
                 <span
                   className={classNames(
@@ -135,7 +129,7 @@ export const QuickProjectSelectorToggle: FunctionComponent = () => {
           </div>
         </div>
       </div>
-      {user ? <QuickProjectSelectorDropdown /> : <GuestDropdown />}
+      {user ? <ContextSelectorDropdown /> : <GuestDropdown />}
     </div>
   );
 };

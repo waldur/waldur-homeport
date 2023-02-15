@@ -1,17 +1,15 @@
 import classNames from 'classnames';
-import { useState, useCallback, FunctionComponent } from 'react';
-import { Col, Stack } from 'react-bootstrap';
+import { useState, useCallback, FunctionComponent, useEffect } from 'react';
+import { Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
-import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { BaseList } from '@waldur/navigation/workspace/context-selector/BaseList';
+import { highlightMatch } from '@waldur/navigation/workspace/highlightMatch';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
-import { highlightMatch } from '../highlightMatch';
-
-import { BaseList } from './BaseList';
 import { ItemIcon } from './ItemIcon';
 
 const EmptyProjectsPlaceholder: FunctionComponent = () => (
@@ -28,19 +26,29 @@ const EmptyProjectListPlaceholder: FunctionComponent = () => (
 
 const ProjectListItem = ({ item, filter, loading }) => {
   return (
-    <Stack direction="horizontal" gap={4}>
+    <Stack direction="horizontal" gap={5} title={item.name}>
       <ItemIcon item={item} />
-      <span className="title ellipsis">
-        {filter
-          ? highlightMatch(truncate(item.name, 40), filter)
-          : truncate(item.name, 40)}
-      </span>
+      <div className="overflow-hidden">
+        <p className="title ellipsis mb-0">
+          {filter ? highlightMatch(item.name, filter) : item.name}
+        </p>
+        {item.resource_count > 0 ? (
+          <small>
+            {item.resource_count}{' '}
+            {item.resource_count > 1
+              ? translate('Resources')
+              : translate('Resource')}
+          </small>
+        ) : (
+          <i className="text-muted">{translate('No resource')}</i>
+        )}
+      </div>
       <span className="ms-auto">{loading && <LoadingSpinnerIcon />}</span>
     </Stack>
   );
 };
 
-export const ProjectsPanel: FunctionComponent<{
+export const ProjectsList: FunctionComponent<{
   projects: Project[];
   onSelect(project: Project): void;
   isDisabled?: boolean;
@@ -58,16 +66,15 @@ export const ProjectsPanel: FunctionComponent<{
     [onSelect],
   );
 
+  useEffect(() => {
+    selectProject(currentProject);
+  }, [currentProject, selectProject]);
+
   return (
-    <Col
-      xs={7}
-      className={classNames({ disabled: isDisabled }, 'project-listing')}
-    >
-      <div className="py-1 px-4 border-gray-300 border-bottom">
-        <span className="fw-bold fs-7 text-muted">{translate('Project')}</span>
-      </div>
+    <div className={classNames({ disabled: isDisabled }, 'project-listing')}>
       {projects?.length > 0 ? (
         <BaseList
+          style={{ height: '400px', maxHeight: 'calc(100vh - 100px)' }}
           items={projects}
           selectedItem={selectedProject}
           selectItem={handleProjectClick}
@@ -79,6 +86,6 @@ export const ProjectsPanel: FunctionComponent<{
       ) : (
         <EmptyProjectsPlaceholder />
       )}
-    </Col>
+    </div>
   );
 };

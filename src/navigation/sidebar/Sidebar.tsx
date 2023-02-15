@@ -8,7 +8,7 @@ import {
 } from '@waldur/metronic/assets/ts/components';
 import { useLayout } from '@waldur/metronic/layout/core';
 
-import { QuickProjectSelectorToggle } from '../workspace/quick-project-selector/QuickProjectSelectorToggle';
+import { ContextSelectorToggle } from '../workspace/context-selector/ContextSelectorToggle';
 
 import { BrandName } from './BrandName';
 import { SidebarFooter } from './SidebarFooter';
@@ -34,7 +34,7 @@ export const Sidebar: React.FC = (props) => {
       MenuComponent.reinitialization();
 
       // Expand sidebar when project selector is shown
-      const menuElement = document.querySelector('.quick-project-selector');
+      const menuElement = document.querySelector('.context-selector');
       if (!menuElement) {
         return;
       }
@@ -68,7 +68,7 @@ export const Sidebar: React.FC = (props) => {
       data-kt-drawer-toggle="#kt_aside_mobile_toggle"
     >
       <BrandName />
-      <QuickProjectSelectorToggle />
+      <ContextSelectorToggle />
 
       <div className="aside-menu flex-column-fluid overflow-hidden">
         <div
