@@ -34,6 +34,7 @@ import { ResourceComponents } from './ResourceComponents';
 import { ResourceDetailsHeader } from './ResourceDetailsHeader';
 import { ResourceIssuesCard } from './ResourceIssuesCard';
 import { ResourceTimeline } from './ResourceTimeline';
+import { RobotAccountCard } from './RobotAccountCard';
 import { ShortResourceHeader } from './ShortResourceHeader';
 import { StatusPage } from './StatusPage';
 
@@ -265,6 +266,7 @@ export const ResourceDetailsView: FC<any> = ({
                   </Card.Body>
                 </Card>
                 <ResourceIssuesCard resource={resource} state={state} />
+                <RobotAccountCard resource={resource} />
               </Col>
             </Row>
           </div>

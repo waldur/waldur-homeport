@@ -8125,6 +8125,10 @@ msgstr ""
 msgid "Revoke"
 msgstr ""
 
+#: src/marketplace/resources/details/RobotAccountCard.tsx
+msgid "Robot accounts"
+msgstr ""
+
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -8232,6 +8236,7 @@ msgstr ""
 msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr ""
 
+#: src/marketplace/resources/details/RobotAccountExpandable.tsx
 #: src/user/keys/KeysList.tsx
 #: src/user/routes.ts
 msgid "SSH keys"
@@ -10237,6 +10242,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/resources/details/RobotAccountList.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
@@ -11851,6 +11857,7 @@ msgstr ""
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/marketplace/resources/details/ResourceAccessCard.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/details/RobotAccountList.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
@@ -11883,6 +11890,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
+#: src/marketplace/resources/details/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
 #: src/rancher/cluster/tabs.ts
@@ -12765,6 +12773,10 @@ msgstr ""
 
 #: src/issues/CustomerSupportRating.tsx
 msgid "reviews"
+msgstr ""
+
+#: src/marketplace/resources/details/RobotAccountList.tsx
+msgid "robot accounts"
 msgstr ""
 
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
