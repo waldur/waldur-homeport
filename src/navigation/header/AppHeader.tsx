@@ -11,6 +11,7 @@ import { getUser } from '@waldur/workspace/selectors';
 import { getTitle } from '../title';
 
 import { ConfirmationDrawerToggle } from './ConfirmationDrawerToggle';
+import { ProjectSelectorDropdown } from './project-selector/ProjectSelectorDropdown';
 import { SearchToggle } from './SearchToggle';
 import { UserDropdownMenu } from './UserDropdown';
 
@@ -82,14 +83,19 @@ export const AppHeader: FunctionComponent = () => {
           </div>
         </div>
         <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
-          <div className="page-title flex-wrap me-3 mb-5 mt-3 mb-lg-0">
-            <h1 className="text-dark fw-bolder fs-3 my-1">
-              {pageTitle || routerTitle}
-            </h1>
-            <div>
-              <small className="text-muted text-uppercase">
-                {breadcrumbs.join(' > ')}
-              </small>
+          <div className="d-flex align-items-stretch flex-shrink-1">
+            <div className="page-title flex-wrap me-3 mb-5 mt-3 mb-lg-0">
+              <h1 className="text-dark fw-bolder fs-3 my-1">
+                {pageTitle || routerTitle}
+              </h1>
+              <div>
+                <small className="text-muted text-uppercase">
+                  {breadcrumbs.join(' > ')}
+                </small>
+              </div>
+            </div>
+            <div className="d-flex align-items-center ms-1 ms-lg-3">
+              <ProjectSelectorDropdown />
             </div>
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">

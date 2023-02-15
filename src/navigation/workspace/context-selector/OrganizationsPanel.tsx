@@ -3,7 +3,6 @@ import { useCallback, FunctionComponent } from 'react';
 import { Col, ListGroupItem, Stack } from 'react-bootstrap';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
-import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { isChildOf } from '@waldur/navigation/useTabs';
 import { Customer } from '@waldur/workspace/types';
@@ -64,14 +63,25 @@ export const OrganizationListItem: FunctionComponent<{
       onMouseEnter={onMouseEnter}
       style={style}
       className="cursor-pointer"
+      title={item.name}
     >
       <Stack direction="horizontal" gap={4}>
         <ItemIcon item={item} />
-        <span className="title lh-1">
-          {filter
-            ? highlightMatch(truncate(item.name), filter)
-            : truncate(item.name)}
-        </span>
+        <div className="overflow-hidden">
+          <p className="title ellipsis mb-0">
+            {filter ? highlightMatch(item.name, filter) : item.name}
+          </p>
+          {item.projects?.length ? (
+            <small>
+              {item.projects.length}{' '}
+              {item.projects.length > 1
+                ? translate('Projects')
+                : translate('Project')}
+            </small>
+          ) : (
+            <i className="text-muted">{translate('No project')}</i>
+          )}
+        </div>
         <span className="ms-auto">
           {loading && <LoadingSpinnerIcon />}
           <ServiceProviderIcon organization={item} className="ms-4" />
@@ -105,14 +115,9 @@ export const OrganizationsPanel: FunctionComponent<{
 
   return (
     <Col className="organization-listing" xs={5}>
-      <div className="py-1 px-4 border-gray-300 border-bottom">
-        <span className="fw-bold fs-7 text-muted">
-          {translate('Organization')}
-        </span>
-      </div>
       <VirtualPaginatedList
         height={800}
-        itemSize={50}
+        itemSize={55}
         getPage={getPage}
         key={`${filter}-${isServiceProvider}`}
         elementsPerPage={VIRTUALIZED_SELECTOR_PAGE_SIZE}

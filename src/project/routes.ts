@@ -52,8 +52,8 @@ export const states: StateDeclaration[] = [
       workspace: PROJECT_WORKSPACE,
       title: () =>
         [
-          getCustomer(store.getState()).name,
-          getProject(store.getState()).name,
+          getCustomer(store.getState())?.name,
+          getProject(store.getState())?.name,
         ].join(' > '),
     },
     resolve: [

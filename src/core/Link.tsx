@@ -8,7 +8,7 @@ interface LinkProps {
   params?: { [key: string]: string };
   className?: string;
   target?: string;
-  onClick?: () => void;
+  onClick?: (e?) => void;
 }
 
 export const Link: FunctionComponent<LinkProps> = (props) => (

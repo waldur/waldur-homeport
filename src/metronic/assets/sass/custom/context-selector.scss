@@ -1,0 +1,185 @@
+@import '~/src/metronic/assets/sass/core/components/_variables.scss';
+
+$dark-header: #1f2e23;
+$dark-body: #2c352b;
+$dark-body-active: #1e261f;
+
+/* Organization selector */
+.context-selector {
+  background-color: $dark-body;
+  width: 100%;
+  cursor: default;
+
+  &.guest-popup {
+    height: calc(100vh - 70px);
+  }
+
+  .context-selector-header,
+  .list-header {
+    background-color: $dark-header;
+  }
+
+  .scrollbar-view {
+    height: calc(100vh - 260px) !important;
+  }
+
+  .border-bottom {
+    border-bottom: 1px solid if(isDarkMode(), $gray-300, $gray-700) !important;
+  }
+
+  .list-group {
+    border-radius: unset;
+  }
+
+  .organization-listing {
+    .list-group-item {
+      background-color: unset;
+      color: $white;
+      border: 0;
+
+      &:hover {
+        background-color: $gray-200;
+      }
+      &.active {
+        background-color: $dark-body-active;
+        z-index: unset;
+      }
+    }
+  }
+  .project-listing {
+    background-color: $dark-body-active;
+
+    &.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .list-group-item {
+      background-color: unset;
+      color: $white;
+      border-left: 0;
+      border-right: 0;
+      height: 55px;
+      min-height: 55px;
+      cursor: pointer;
+
+      &.active {
+        background-color: $dark-body;
+        border: 0;
+        cursor: default;
+
+        .actions .action-item {
+          background-color: $dark-body;
+        }
+      }
+
+      > div {
+        height: 100%;
+      }
+
+      .actions {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 1rem;
+
+        .action-item {
+          padding: 0 1rem;
+          background-color: $dark-body-active;
+        }
+      }
+      &:hover .actions {
+        display: flex;
+      }
+    }
+  }
+}
+
+@media (min-width: 1500px) {
+  .context-selector {
+    max-width: 1200px;
+  }
+  [data-kt-aside-minimize='on'] .aside {
+    .context-selector {
+      max-width: 1400px;
+    }
+  }
+}
+@media (max-width: 1500px) {
+  .context-selector {
+    max-width: calc(100% - 350px);
+  }
+  [data-kt-aside-minimize='on'] .aside {
+    .context-selector {
+      max-width: calc(100% - 100px);
+    }
+  }
+}
+
+/* Project selector */
+.project-selector-wrapper {
+  position: relative;
+
+  .project-selector-toggle {
+    position: relative;
+    margin-left: 2rem;
+
+    &:before {
+      content: '';
+      width: 1px;
+      height: 30px;
+      position: absolute;
+      top: 12px;
+      left: -1rem;
+      background-color: $gray-900;
+    }
+  }
+
+  .project-selector-dropdown {
+    position: absolute !important;
+    transform: unset !important;
+    width: 100%;
+    min-width: 350px;
+    top: 0;
+    left: 0;
+
+    // search input
+    input {
+      border-radius: 0;
+    }
+
+    .list-group {
+      border-radius: 0;
+
+      .list-group-item {
+        z-index: 0;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $hover-bg;
+        }
+        &.active {
+          background-color: if(isDarkMode(), $gray-400, $gray-700);
+          cursor: default;
+
+          a {
+            color: #fff;
+          }
+        }
+
+        a {
+          color: unset;
+        }
+      }
+    }
+
+    &.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+}

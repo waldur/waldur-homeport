@@ -53,7 +53,7 @@ describe('Workspace selector', () => {
   });
 
   it('Lists all organizations by default', () => {
-    cy.get('span[class="title lh-1"]')
+    cy.get('.organization-listing .list-group-item p.title')
       .click({
         force: true,
         multiple: true,
@@ -75,8 +75,7 @@ describe('Workspace selector', () => {
       .focus()
       .type('Bob', { force: true })
       // Get filtered organization rows
-      .get('span[class="title lh-1"]')
-      .get('span[class="highlight-color"]')
+      .get('.organization-listing .list-group-item span[class="highlight-color"]')
 
       // Only matching organizations should be present
       .should(($p) => expect(getTextList($p)).to.deep.eq(['Bob']));
@@ -92,12 +91,12 @@ describe('Workspace selector', () => {
       })
 
       // There is a bug in Cypress - it doesn't show the projects before we hover on organizations - so firstly we need to hover on organizations
-      .get('span[class="title lh-1"]')
+      .get('.organization-listing .list-group-item p.title')
       .contains('Alice')
       .click({ force: true })
 
       // And now we get filtered project rows
-      .get('span[class="title ellipsis"]')
+      .get('.project-listing .list-group-item p.title')
       .contains('OpenStack')
 
       // Only matching projects should be present
@@ -109,10 +108,10 @@ describe('Workspace selector', () => {
   it('Allows to go switch to organization dashboard', () => {
     cy.get('.organization-listing')
       // Click on first available organization
-      .get('span[class="title lh-1"]')
+      .get('.organization-listing .list-group-item p.title')
       .contains('Alice')
       .trigger('mouseover', { force: true })
-      .get('span[class="title lh-1"]')
+      .get('.organization-listing .list-group-item p.title')
       .contains('Alice')
       .click({ force: true });
 
@@ -126,12 +125,12 @@ describe('Workspace selector', () => {
   it('Allows to go switch to project dashboard', () => {
     cy.get('.organization-listing')
       // Select first available organization
-      .get('span[class="title lh-1"]')
+      .get('.organization-listing .list-group-item p.title')
       .contains('Alice')
       .trigger('mouseover', { force: true });
 
     // Click on OpenStack offering
-    cy.get('.project-listing span[class="title ellipsis"]')
+    cy.get('.project-listing .list-group-item p.title')
       .contains('OpenStack')
       .click({ force: true });
 
@@ -142,9 +141,9 @@ describe('Workspace selector', () => {
       .should('be.visible');
   });
 
-  it('Assure that View my organizations button leads to correct page', () => {
-    cy.get('.quick-project-selector')
-      .contains('a', 'View my organizations')
+  it('Assure that Manage organizations button leads to correct page', () => {
+    cy.get('.context-selector')
+      .contains('a', 'Manage organizations')
       .click();
 
     // Wait until page loaded
@@ -154,8 +153,8 @@ describe('Workspace selector', () => {
       .should('contain', 'Affiliations > Organizations');
   });
 
-  it('Assure that View my projects button leads to correct page', () => {
-    cy.get('.quick-project-selector').contains('a', 'View my projects').click();
+  it('Assure that Manage projects button leads to correct page', () => {
+    cy.get('.context-selector').contains('a', 'Manage projects').click();
 
     // Wait until page loaded
     cy.get('.header h1')
@@ -165,7 +164,7 @@ describe('Workspace selector', () => {
   });
 
   it('Assure that View all organizations button leads to correct page', () => {
-    cy.get('.quick-project-selector')
+    cy.get('.context-selector')
       .contains('a', 'View all organizations')
       .click();
 
@@ -177,7 +176,7 @@ describe('Workspace selector', () => {
   });
 
   it('Assure that View all projects button leads to correct page', () => {
-    cy.get('.quick-project-selector')
+    cy.get('.context-selector')
       .contains('a', 'View all projects')
       .click();
 

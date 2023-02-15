@@ -34,9 +34,8 @@ import { EmptyOrganizationsPlaceholder } from '../EmptyOrganizationsPlaceholder'
 
 import { OrganizationsPanel } from './OrganizationsPanel';
 import { ProjectsPanel } from './ProjectsPanel';
-import './QuickProjectSelectorDropdown.scss';
 
-export const QuickProjectSelectorDropdown: FunctionComponent = () => {
+export const ContextSelectorDropdown: FunctionComponent = () => {
   const currentCustomer = useSelector(getCustomer);
   const currentUser = useSelector(getUser);
   const canSeeAll = useSelector(isStaffOrSupport);
@@ -44,8 +43,6 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
     useState<Customer>(currentCustomer);
 
   const [filter, setFilter] = useState('');
-  const [redirectingOrg, setRedirectingOrg] = useState('');
-  const [redirectingPrj, setRedirectingPrj] = useState('');
 
   const refProjectSelector = useRef<HTMLDivElement>();
   const refSearch = useRef<HTMLInputElement>();
@@ -63,6 +60,10 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
     }
   }, [isVisible]);
 
+  useEffect(() => {
+    MenuComponent.reinitialization();
+  });
+
   const {
     loading,
     error,
@@ -71,6 +72,8 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
 
   const { state } = useCurrentStateAndParams();
   const router = useRouter();
+  const [redirectingOrg, setRedirectingOrg] = useState('');
+  const [redirectingPrj, setRedirectingPrj] = useState('');
 
   const isCustomerPages = isChildOf('organization', state);
 
@@ -150,9 +153,9 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
         )}
       <div
         ref={refProjectSelector}
-        className="quick-project-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold rounded-0 py-4 fs-6"
+        className="context-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold rounded-0 fs-6"
         data-kt-menu="true"
-        data-popper-placement="bottom-start"
+        data-popper-placement="right-start"
       >
         {loading ? (
           <LoadingSpinner />
@@ -162,7 +165,7 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
           <EmptyOrganizationsPlaceholder />
         ) : (
           <>
-            <div className="form-group pb-3 px-20 border-gray-300 border-bottom">
+            <div className="context-selector-header form-group py-4 px-20 border-bottom">
               <FormControl
                 id="quick-selector-search-box"
                 ref={refSearch}
@@ -174,35 +177,42 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
                 placeholder={translate('Search...')}
               />
             </div>
-            <div className="d-flex border-gray-300 border-bottom">
+            <div className="list-header py-1 px-4 border-bottom">
+              <span className="fw-bold fs-7 text-white">
+                {translate('Organization')}
+              </span>
+            </div>
+            <div className="d-flex border-bottom">
               <OrganizationsPanel
                 active={selectedOrganization}
-                loadingUuid={redirectingOrg}
                 onClick={handleOrganizationSelect}
+                loadingUuid={redirectingOrg}
                 onMouseEnter={(customer) => {
                   selectOrganization(customer);
                 }}
                 filter={filter}
               />
               <ProjectsPanel
+                customer={selectedOrganization}
                 projects={selectedOrganization?.projects}
                 onSelect={handleProjectSelect}
-                filter={filter}
                 loadingUuid={redirectingPrj}
+                switchOrganization={handleOrganizationSelect}
+                filter={filter}
               />
             </div>
             <div className="d-flex">
-              <Col className="organization-listing d-flex flex-column" xs={5}>
+              <Col className="d-flex flex-column" xs={5}>
                 <Link
-                  className="btn btn-sm btn-link text-dark mx-4 mt-4"
+                  className="btn btn-sm btn-link text-white mx-4 mt-4 text-decoration-underline"
                   state="profile-organizations"
                   onClick={() => MenuComponent.hideDropdowns(undefined)}
                 >
-                  {translate('View my organizations')}
+                  {translate('Manage organizations')}
                 </Link>
                 {canSeeAll && (
                   <Link
-                    className="btn btn-sm btn-link text-dark mx-4 mt-4"
+                    className="btn btn-sm btn-link text-white mx-4 mt-4"
                     state="admin.customers"
                     onClick={() => MenuComponent.hideDropdowns(undefined)}
                   >
@@ -210,17 +220,17 @@ export const QuickProjectSelectorDropdown: FunctionComponent = () => {
                   </Link>
                 )}
               </Col>
-              <Col className="organization-listing d-flex flex-column" xs={7}>
+              <Col className="d-flex flex-column" xs={7}>
                 <Link
-                  className="btn btn-sm btn-link text-dark mx-4 mt-4"
+                  className="btn btn-sm btn-link text-white mx-4 mt-4 text-decoration-underline"
                   state="profile-projects"
                   onClick={() => MenuComponent.hideDropdowns(undefined)}
                 >
-                  {translate('View my projects')}
+                  {translate('Manage projects')}
                 </Link>
                 {canSeeAll && (
                   <Link
-                    className="btn btn-sm btn-link text-dark mx-4 mt-4"
+                    className="btn btn-sm btn-link text-white mx-4 mt-4"
                     state="admin.projects"
                     onClick={() => MenuComponent.hideDropdowns(undefined)}
                   >

@@ -54,6 +54,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title={translate('Projects')}
       columns={columns}
       verboseName={translate('projects')}
+      initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
       showPageSizeSelector={true}
       placeholderComponent={<ProjectTablePlaceholder />}

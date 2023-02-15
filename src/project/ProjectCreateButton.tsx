@@ -19,6 +19,7 @@ interface ProjectCreateButtonProps {
   title?: string;
   icon?: string;
   variant?: string;
+  className?: string;
 }
 
 const PureProjectCreateButton: FunctionComponent<any> = (props) => (
@@ -29,6 +30,7 @@ const PureProjectCreateButton: FunctionComponent<any> = (props) => (
     icon={props.icon}
     variant={props.variant}
     disabled={props.disabled}
+    className={props.className}
   />
 );
 

@@ -224,7 +224,8 @@ describe('Search Popup', () => {
         ],
       )
       .setToken()
-      .visit('/profile/');
+      .visit('/profile/')
+      .waitForPage();
   });
 
   it('should open the search popup', () => {
@@ -233,19 +234,19 @@ describe('Search Popup', () => {
 
   it('should open the search popup and be writable', () => {
     cy.get('#searchIconContainer').click();
-    cy.get('input[name=search]').click().focused().type('test');
+    cy.get('#GlobalSearch input[name=search]').click().focused().type('test');
   });
   it('when searched for a keyword and matches it should come up', () => {
     cy.get('#searchIconContainer').click();
-    cy.get('input[name=search]').click().focused().type('admin'),
+    cy.get('#GlobalSearch input[name=search]').click().focused().type('admin'),
       { delay: 100 };
-    cy.get('.fs-6.fw-semibold').each(($row) => {
+    cy.get('#GlobalSearch .fs-6.fw-semibold').each(($row) => {
       cy.wrap($row).should('have.text', 'admin');
     });
   });
   it('when searched for a keyword and not matches, "No result found" message should come up', () => {
     cy.get('#searchIconContainer').debug().click();
-    cy.get('input[name=search]').click().focused().type('ccc');
-    cy.get('.text-gray-600.fs-5.mb-2').should('have.text', 'No result found');
+    cy.get('#GlobalSearch input[name=search]').click().focused().type('ccc');
+    cy.get('#GlobalSearch .text-gray-600.fs-5.mb-2').should('have.text', 'No result found');
   });
 });

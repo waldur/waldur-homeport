@@ -6,12 +6,14 @@
     {
       "url": "/api/projects/6f3ae6f43d284ca196afeb467880b3b9/",
       "uuid": "6f3ae6f43d284ca196afeb467880b3b9",
-      "name": "OpenStack Alice project"
+      "name": "OpenStack Alice project",
+      "resource_count": 2
     },
     {
       "url": "/api/projects/df4193e2bee24a4c8e339474d74c5f8c/",
       "uuid": "df4193e2bee24a4c8e339474d74c5f8c",
-      "name": "Azure Alice project"
+      "name": "Azure Alice project",
+      "resource_count": 0
     }
   ],
   "owners": [],
