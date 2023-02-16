@@ -31,7 +31,7 @@ msgstr "<Link>Smluvní podmínky</Link> byly přijaty dne <Date></Date>"
 msgid "API URL"
 msgstr "API URL"
 
-#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+#: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
 msgid "API secret code:"
 msgstr "Tajný kód pro API:"
 
@@ -43,7 +43,6 @@ msgstr "Životnost API tokenu"
 msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
 msgstr "Minimální očekávaná konfigurace pracovníka je 4 vCPU a 4 GB RAM."
 
-#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "A one-time fee applied on activation."
 msgstr "Při aktivaci je účtován jednorázový poplatek."
@@ -61,7 +60,6 @@ msgstr "Profil byl vytvořen."
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
-#: src/user/affiliations/OrganizationsList.tsx
 msgid "Abbreviation"
 msgstr "Zkratka"
 
@@ -85,7 +83,6 @@ msgstr "Přijato"
 
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/resource/ResourceAccessButton.tsx
 msgid "Access"
 msgstr "Přístup"
 
@@ -106,7 +103,6 @@ msgstr "Přístupné všem zákazníkům."
 msgid "Account removal"
 msgstr "Odstranění účtu"
 
-#: src/invoices/routes.ts
 #: src/invoices/utils.ts
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
@@ -116,8 +112,6 @@ msgid "Accounting"
 msgstr "Účetnictví"
 
 #: src/customer/list/AccountingPeriodFilter.tsx
-#: src/customer/list/CustomerListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 msgid "Accounting period"
 msgstr "Účetní období"
 
@@ -126,7 +120,6 @@ msgid "Accounting plans"
 msgstr "Účetní plány"
 
 #: src/invoices/details/BillingDetails.tsx
-#: src/invoices/routes.ts
 msgid "Accounting record"
 msgstr "Účetní záznam"
 
@@ -134,7 +127,6 @@ msgstr "Účetní záznam"
 msgid "Accounting records"
 msgstr "Účetní záznamy"
 
-#: src/customer/list/CustomerListFilter.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 msgid "Accounting running"
 msgstr "Vedení účetnictví"
@@ -150,49 +142,87 @@ msgid "Accounting type"
 msgstr "Typ účetnictví"
 
 #: src/resource/actions/AsyncActionButton.tsx
+#: src/resource/actions/AsyncActionItem.tsx
 msgid "Action has been applied."
 msgstr "Akce byla uplatněna."
 
 #: src/azure/sql/DatabasesList.tsx
 #: src/booking/BookingsList.tsx
+#: src/customer/list/SupportCustomerList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payments/PaymentsList.tsx
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+#: src/customer/team/CustomerUsersList.tsx
+#: src/customer/team/OfferingPermissionsList.tsx
+#: src/invitations/GroupInvitationsList.tsx
+#: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/invoices/details/InvoiceItemActions.tsx
+#: src/invoices/list/BillingRecordsList.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/marketplace-flows/CustomerCreateRequestsList.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
+#: src/marketplace-flows/ResourceCreateRequestsList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
+#: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
+#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourceActions.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 #: src/openstack/openstack-server-groups/ServerGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
+#: src/openstack/openstack-tenant/TenantPortsList.tsx
+#: src/openstack/openstack-tenant/TenantRoutersList.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/InvoiceActions.tsx
 #: src/paypal/PayPalInvoicesList.tsx
+#: src/project/ProjectsList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/project/team/ProjectUsersList.tsx
+#: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/node/ClusterNodesList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
+#: src/resource/support/SharedProviderResources.tsx
+#: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
+#: src/user/support/UserList.tsx
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
 msgid "Actions"
 msgstr "Akce"
 
@@ -285,6 +315,7 @@ msgid "Add item"
 msgstr "Přidat položku"
 
 #: src/user/keys/KeyCreateButton.tsx
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Add key"
 msgstr "Přidat klíč"
 
@@ -312,11 +343,11 @@ msgstr "Přidat nový projekt"
 msgid "Add notification"
 msgstr "Přidat oznámení"
 
+#: src/marketplace/offerings/actions/OfferingCreateButton.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 msgid "Add offering"
 msgstr "Přidat nabídku"
 
-#: src/customer/list/OrganizationCreateButton.tsx
 #: src/user/dashboard/CustomerCreateButton.tsx
 msgid "Add organization"
 msgstr "Přidat organizaci"
@@ -335,8 +366,8 @@ msgstr "Přidat pár"
 msgid "Add payment"
 msgstr "Přidat platbu"
 
-#: src/customer/payment-profiles/PaymentProfileCreateButton.tsx
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 msgid "Add payment profile"
 msgstr "Přidat platební profil"
 
@@ -344,6 +375,7 @@ msgstr "Přidat platební profil"
 msgid "Add plan"
 msgstr "Přidat plán"
 
+#: src/customer/dashboard/CreateProjectAction.ts
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectCreateForm.tsx
 msgid "Add project"
@@ -355,9 +387,7 @@ msgstr "Přidat člena projektu"
 
 #: src/dashboard/marketplace.ts
 #: src/marketplace-flows/FlowCreateButton.tsx
-#: src/marketplace/resources/actions/AddResourceButton.tsx
 #: src/marketplace/resources/list/CreateResourceButton.tsx
-#: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
 msgid "Add resource"
 msgstr "Přidat zdroj"
 
@@ -408,7 +438,6 @@ msgstr "Další data, která budou přidána do instance při vytváření."
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Dodatečné místo aplikované na kvótu úložiště používaného pro snímky."
 
-#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Additionally service provider can charge for usage of the following components"
 msgstr "Poskytovatel služeb může navíc účtovat poplatky za využití následujících komponent"
@@ -432,15 +461,13 @@ msgstr "Heslo správce"
 msgid "Admin username"
 msgstr "Uživatelské jméno správce"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ResourceGroup.tsx
 msgid "Affected resource"
 msgstr "Ovlivněný zdroj"
 
 #: src/customer/popover/CustomerUsersList.tsx
-#: src/marketplace/service-providers/ProviderUsersList.tsx
-#: src/user/routes.ts
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Affiliations"
@@ -458,7 +485,7 @@ msgstr "Souhlasím s SP"
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
 msgid "Agreement number"
@@ -574,6 +601,7 @@ msgstr "Aplikace byla vytvořena."
 
 #: src/rancher/cluster/tabs.ts
 #: src/rancher/template/CatalogTemplateContainer.tsx
+#: src/rancher/template/breadcrumbs.ts
 msgid "Application templates"
 msgstr "Šablony aplikací"
 
@@ -615,7 +643,6 @@ msgstr "Archivovat"
 
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 msgid "Archived"
 msgstr "Archivováno"
 
@@ -647,7 +674,7 @@ msgstr "Opravdu chcete smazat obrázek?"
 msgid "Are you sure you want to delete the payment?"
 msgstr "Opravdu chcete odstranit platbu?"
 
-#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 msgid "Are you sure you want to delete the payment profile?"
 msgstr "Opravdu chcete odstranit platební profil?"
 
@@ -693,7 +720,7 @@ msgstr "Opravdu chcete ukončit zdroj {resourceName}?"
 msgid "Article code"
 msgstr "Kód zboží"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/AssigneeGroup.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Assigned to"
@@ -722,7 +749,6 @@ msgstr "Připojit svazek"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 msgid "Attached to"
 msgstr "Připojeno k"
 
@@ -736,10 +762,8 @@ msgstr "Připojování"
 msgid "Attachments"
 msgstr "Přílohy"
 
-#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "Attributes"
 msgstr "Atributy"
 
@@ -751,20 +775,20 @@ msgstr "Atributy jsou neplatné."
 msgid "Attributes filter"
 msgstr "Filtr atributů"
 
-#: src/project/ProjectEventsTimeline.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
-#: src/support/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr "Protokol auditu"
 
-#: src/customer/dashboard/CustomerActions.tsx
-#: src/customer/routes.ts
-#: src/project/ProjectActions.tsx
-#: src/project/routes.ts
-#: src/user/UserActions.tsx
-#: src/user/routes.ts
+#: src/customer/workspace/CustomerEventsList.tsx
+#: src/customer/workspace/utils.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/project/utils.ts
+#: src/support/SupportEventsContainer.tsx
+#: src/user/constants.ts
+#: src/user/dashboard/UserDashboard.tsx
+#: src/user/dashboard/UserEventsWrapper.tsx
 msgid "Audit logs"
 msgstr "Protokoly auditu"
 
@@ -773,7 +797,6 @@ msgid "Authenticate using Mobile ID"
 msgstr "Ověření pomocí Mobile ID"
 
 #: src/auth/events.ts
-#: src/user/api-key/AuthenticationEvents.tsx
 msgid "Authentication events"
 msgstr "Události ověřování"
 
@@ -785,7 +808,7 @@ msgstr "Ověřovací token"
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr "Ověřování pomocí Mobile ID bylo zrušeno uživatelem nebo vypršel časový limit. Podrobnosti:"
 
-#: src/notifications/NotificationList.tsx
+#: src/issues/notifications/BroadcastList.tsx
 msgid "Author"
 msgstr "Autor"
 
@@ -860,7 +883,7 @@ msgstr "Poskytovatel Azure"
 #: src/error/InvalidQuotaPage.tsx
 #: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
-#: src/notifications/NotificationFooter.tsx
+#: src/navigation/header/SiteHeader.tsx
 msgid "Back"
 msgstr "Zpět"
 
@@ -889,8 +912,8 @@ msgid "Back to shopping"
 msgstr "Zpět k nakupování"
 
 #: src/marketplace/offerings/create/ManagementStep.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/SetBackendIdDialog.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
@@ -899,7 +922,6 @@ msgstr "Zpět k nakupování"
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportDetailsTable.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Backend ID"
 msgstr "Backend ID"
 
@@ -936,9 +958,7 @@ msgstr "Dokumentace pro dávkové zpracování"
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr "Staňte se zákazníkem našeho portálu. Poskytujte IT služby z Marketplace a spravujte svůj tým z jednoho místa."
 
-#: src/invoices/routes.ts
 #: src/invoices/utils.ts
-#: src/project/ProjectDashboard.tsx
 msgid "Billing"
 msgstr "Platby"
 
@@ -946,7 +966,6 @@ msgstr "Platby"
 msgid "Billing details"
 msgstr "Podrobnosti platby"
 
-#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 msgid "Billing enabled"
 msgstr "Platby povoleny"
@@ -987,11 +1006,11 @@ msgid "Booking management"
 msgstr "Správa rezervací"
 
 #: src/booking/BookingsList.tsx
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 msgid "Bookings"
 msgstr "Rezervace"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 msgid "Bootable"
 msgstr "Bootovatelné"
 
@@ -1006,7 +1025,6 @@ msgstr "Větev"
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
-#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Browse"
 msgstr "Procházet"
 
@@ -1018,19 +1036,18 @@ msgstr "Procházet obrázek"
 msgid "Business hours"
 msgstr "Pracovní doba"
 
-#: src/user/api-key/TokenLifetimeField.tsx
+#: src/user/support/TokenLifetimeField.tsx
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr "Nastavením životnosti tokenu na dobu neurčitou dovolíte každému, kdo má token, aby vydával své akce za vaše, dokud nebude token změněn."
 
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 msgid "CIDR"
 msgstr "CIDR"
 
-#: src/marketplace/resources/details/MonitoringCharts.tsx
 #: src/rancher/cluster/hpas/utils.ts
 #: src/rancher/node/RancherNodeSummary.tsx
+#: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "CPU"
 msgstr "CPU"
 
@@ -1046,7 +1063,7 @@ msgstr "Využití CPU"
 msgid "CSV"
 msgstr "CSV"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/CallerGroup.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Caller"
@@ -1060,10 +1077,9 @@ msgstr "Volající"
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace-flows/FlowCancelAction.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
-#: src/marketplace/orders/item/list/OrderItemCancelButton.tsx
 #: src/modal/CloseDialogButton.tsx
-#: src/navigation/header/SearchToggle.tsx
 #: src/project/ProjectCreateForm.tsx
+#: src/user/keys/KeyCreateForm.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
 msgstr "Zrušit"
@@ -1100,7 +1116,7 @@ msgstr "Zrušeno"
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr "Nelze vytvořit plovoucí IP, pokud není definována externí síť klienta."
 
-#: src/marketplace/routes.ts
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Capacity"
 msgstr "Kapacita"
 
@@ -1126,8 +1142,7 @@ msgstr "Katalog byl odstraněn."
 msgid "Catalogues"
 msgstr "Katalogy"
 
-#: src/marketplace/category/utils.ts
-#: src/marketplace/offerings/service-providers/ServiceProviderPageBar.tsx
+#: src/marketplace/category/ShopCategories.tsx
 msgid "Categories"
 msgstr "Kategorie"
 
@@ -1139,18 +1154,12 @@ msgstr "Kategorie"
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/list/CategoryFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
-#: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
-#: src/project/ProjectResourcesFilter.tsx
 #: src/project/ProjectResourcesList.tsx
 msgid "Category"
 msgstr "Kategorie"
@@ -1228,6 +1237,7 @@ msgstr "Nastavení kontrolního seznamu"
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace-checklist/ComplianceChecklists.tsx
 #: src/user/UserPopover.tsx
+#: src/user/dashboard/UserDashboard.tsx
 msgid "Checklists"
 msgstr "Kontrolní seznamy"
 
@@ -1247,18 +1257,19 @@ msgid "Client ID"
 msgstr "ID klienta"
 
 #: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/orders/OrganizationAutocomplete.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
-#: src/marketplace/resources/list/PublicResourcesFilter.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Client organization"
 msgstr "Organizace klienta"
 
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
@@ -1290,7 +1301,6 @@ msgstr "Cloud init šablona"
 msgid "Cloud vCPU"
 msgstr "Cloud vCPU"
 
-#: src/rancher/cluster/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Cluster"
@@ -1309,6 +1319,7 @@ msgid "Cluster name"
 msgstr "Název klastru"
 
 #: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 msgid "Cluster roles"
 msgstr "Role klastru"
 
@@ -1365,16 +1376,11 @@ msgstr "Komponenta #{index}"
 
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
-#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Component name"
 msgstr "Název komponenty"
 
-#: src/marketplace/offerings/details/PublicOfferingComponents.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Components"
 msgstr "Komponenty"
@@ -1405,7 +1411,7 @@ msgstr "Konfigurovat"
 msgid "Confirm deletion?"
 msgstr "Potvrdit odstranění?"
 
-#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
@@ -1470,7 +1476,7 @@ msgstr "Kontaktní telefon"
 msgid "Continue"
 msgstr "Pokračovat"
 
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 msgid "Contract sum"
 msgstr "Smluvní částka"
@@ -1482,15 +1488,12 @@ msgstr "Řídicí rovina"
 #: src/core/CopyToClipboard.tsx
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
-#: src/table/ExportDropdown.tsx
-#: src/table/TableButtons.tsx
 #: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr "Kopírovat do schránky"
 
 #: src/customer/list/CustomerList.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/offerings/expandable/utils.ts
 #: src/marketplace/orders/OrdersList.tsx
 msgid "Cost"
@@ -1501,7 +1504,9 @@ msgid "Could not create organization"
 msgstr "Nelze vytvořit organizaci"
 
 #: src/customer/create/CountryGroup.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/SelectCountryField.tsx
 msgid "Country"
 msgstr "Země"
 
@@ -1510,11 +1515,11 @@ msgstr "Země"
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
+#: src/issues/notifications/NotificationCreateButton.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
-#: src/marketplace/resources/details/ResourceIssuesCard.tsx
-#: src/notifications/NotificationCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -1577,7 +1582,6 @@ msgstr "Vytvořit oznámení"
 
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/customer/create/WizardForm.tsx
-#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
 msgid "Create organization"
 msgstr "Vytvořit organizaci"
 
@@ -1592,6 +1596,7 @@ msgstr "Vytvořit projekt"
 
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/create/IssueQuickCreate.tsx
+#: src/issues/create/IssueRegistration.tsx
 msgid "Create request"
 msgstr "Vytvořit požadavek"
 
@@ -1622,7 +1627,7 @@ msgstr "Vytvořte svůj první projekt"
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
@@ -1631,11 +1636,10 @@ msgstr "Vytvořte svůj první projekt"
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
@@ -1647,8 +1651,6 @@ msgstr "Vytvořte svůj první projekt"
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/support/SupportDetailsTable.tsx
-#: src/user/affiliations/OrganizationsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Created"
@@ -1663,10 +1665,10 @@ msgstr "Byla vytvořena nová platba pro {customer_link}."
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
+#: src/issues/notifications/BroadcastList.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/details/OfferingUsersTable.tsx
+#: src/marketplace/offerings/details/OfferingUsersTab.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -1674,13 +1676,8 @@ msgstr "Byla vytvořena nová platba pro {customer_link}."
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
-#: src/notifications/NotificationList.tsx
-#: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -1695,7 +1692,6 @@ msgstr "Vytvořeno v"
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "Created by"
 msgstr "Vytvořil"
 
@@ -1728,7 +1724,6 @@ msgid "Creating snapshot schedule"
 msgstr "Vytváření plánu snímků"
 
 #: src/marketplace/offerings/actions/tabs.ts
-#: src/user/routes.ts
 msgid "Credentials"
 msgstr "Přihlašovací údaje"
 
@@ -1786,10 +1781,12 @@ msgstr "Jmenné servery DNS"
 msgid "Daily available booking time range"
 msgstr "Denně dostupný časový rozsah rezervací"
 
-#: src/customer/routes.ts
-#: src/marketplace/resources/details/fetchData.tsx
-#: src/project/routes.ts
-#: src/user/routes.ts
+#: src/customer/dashboard/CustomerDashboard.tsx
+#: src/customer/workspace/utils.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/project/ProjectDashboard.tsx
+#: src/project/utils.ts
+#: src/user/constants.ts
 msgid "Dashboard"
 msgstr "Řídicí panel"
 
@@ -1829,7 +1826,6 @@ msgstr "Datové úložiště"
 #: src/customer/payments/PaymentsList.tsx
 #: src/dashboard/chart.ts
 #: src/invoices/list/MarkAsPaidDialog.tsx
-#: src/issues/feedback/SupportFeedbackListFilter.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/paypal/PaymentsList.tsx
 #: src/support/SupportEventsListFilter.tsx
@@ -1893,10 +1889,9 @@ msgid "Default value"
 msgstr "Výchozí hodnota"
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
-#: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace/offerings/images/ImagesActions.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -1928,6 +1923,7 @@ msgid "Deploy Longhorn block storage after cluster is deployed"
 msgstr "Nasazení blokového úložiště Longhorn po nasazení klastru"
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/DescriptionGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
@@ -1944,20 +1940,15 @@ msgstr "Nasazení blokového úložiště Longhorn po nasazení klastru"
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/details/PageDescription.tsx
-#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
-#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/resources/details/ResourceIssuesCard.tsx
 #: src/marketplace/resources/usage/utils.ts
-#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -1965,7 +1956,6 @@ msgstr "Nasazení blokového úložiště Longhorn po nasazení klastru"
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
@@ -2032,8 +2022,8 @@ msgstr "Odpojit"
 msgid "Detaching"
 msgstr "Odpojení"
 
+#: src/customer/list/OrganizationDetailsButton.tsx
 #: src/customer/team/UserDetailsButton.tsx
-#: src/invoices/list/MonthOverview.tsx
 #: src/issues/create/CallerGroup.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -2041,16 +2031,18 @@ msgstr "Odpojení"
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
+#: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/team/UserDetailsButton.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
+#: src/rancher/cluster/users/UserDetailsButton.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
-#: src/slurm/tabs.ts
+#: src/slurm/DetailsAction.tsx
+#: src/user/UserDropdownMenu.tsx
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
-#: src/vmware/tabs.ts
 msgid "Details"
 msgstr "Podrobnosti"
 
@@ -2076,7 +2068,6 @@ msgid "Disable gateway IP advertising via DHCP"
 msgstr "Zakázat inzerování IP adresy brány prostřednictvím DHCP"
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
-#: src/user/hooks/HooksList.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Disabled"
 msgstr "Zakázáno"
@@ -2093,6 +2084,7 @@ msgstr "Rozšíření disku bylo naplánováno."
 msgid "Disk has been created."
 msgstr "Disk byl vytvořen."
 
+#: src/vmware/breadcrumbs.ts
 #: src/vmware/tabs.ts
 msgid "Disks"
 msgstr "Disky"
@@ -2101,15 +2093,12 @@ msgstr "Disky"
 msgid "Display name"
 msgstr "Zobrazovaný název"
 
-#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectOrganizationDivisionField.tsx
-#: src/customer/list/SupportCustomerFilter.tsx
-#: src/user/affiliations/OrganizationsList.tsx
 msgid "Division"
 msgstr "Divize"
 
-#: src/customer/list/SupportCustomerFilter.tsx
+#: src/customer/list/DivisionTypeFilter.tsx
 msgid "Division type"
 msgstr "Typ divize"
 
@@ -2142,7 +2131,6 @@ msgstr "Dokumenty"
 msgid "Domain"
 msgstr "Doména"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/marketplace.ts
 msgid "Domain name"
@@ -2158,6 +2146,7 @@ msgstr "Název domény. Pokud není definována, použije se výchozí doména."
 msgid "Done"
 msgstr "Hotovo"
 
+#: src/invoices/details/DownloadInvoiceButton.tsx
 #: src/paypal/InvoiceActions.tsx
 msgid "Download invoice"
 msgstr "Stáhnout fakturu"
@@ -2170,7 +2159,6 @@ msgstr "Stáhnout PDF soubor objednávky"
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
 msgstr "Návrh"
@@ -2211,11 +2199,10 @@ msgid "Each usage report must be connected with a billing plan to assure correct
 msgstr "Každé hlášení o využití musí být spojeno s platebním plánem, aby byl zajištěn správný výpočet účetních dat."
 
 #: src/customer/list/OrganizationEditButton.tsx
-#: src/customer/payment-profiles/PaymentProfileEditButton.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeButton.tsx
 #: src/customer/team/UserEditButton.tsx
-#: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditorButton.tsx
@@ -2235,7 +2222,6 @@ msgstr "Každé hlášení o využití musí být spojeno s platebním plánem, 
 #: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
-#: src/user/support/IdentityProviderIndicator.tsx
 #: src/vmware/actions/EditAction.tsx
 msgid "Edit"
 msgstr "Upravit"
@@ -2292,11 +2278,9 @@ msgstr "Egress"
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/EmailGroup.tsx
-#: src/notifications/RecipientsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
-#: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
 #: src/user/support/UserDetailsTable.tsx
@@ -2322,7 +2306,7 @@ msgstr "E-mail byl aktualizován."
 msgid "Email verification has been sent. Please check your inbox."
 msgstr "Ověřovací e-mail byl odeslán. Zkontrolujte si prosím vaši doručenou poštu."
 
-#: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 msgid "Enable"
 msgstr "Povolit"
 
@@ -2338,14 +2322,13 @@ msgstr "Ve výchozím nastavení povolit"
 msgid "Enable limit"
 msgstr "Povolit limit"
 
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 msgid "Enable profile after creation"
 msgstr "Povolit profil po vytvoření"
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/hooks/HookForm.tsx
-#: src/user/hooks/HooksList.tsx
 msgid "Enabled"
 msgstr "Povoleno"
 
@@ -2367,17 +2350,14 @@ msgstr "Nalezena prázdná komponenta"
 msgid "End"
 msgstr "Konec"
 
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
-#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
-#: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectUpdateForm.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
 msgid "End date"
 msgstr "Datum ukončení"
 
@@ -2432,15 +2412,9 @@ msgid "Esimated price per month"
 msgstr "Odhadovaná cena za měsíc"
 
 #: src/customer/list/CustomerList.tsx
-#: src/invoices/list/EstimatedCost.tsx
-#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
-#: src/marketplace/service-providers/ProviderOfferingsList.tsx
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
-#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
-#: src/project/utils.ts
 msgid "Estimated cost"
 msgstr "Odhadované náklady"
 
@@ -2463,7 +2437,6 @@ msgstr "Typ sítě Ethernet"
 
 #: src/issues/feedback/SupportFeedback.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
-#: src/issues/feedback/SupportFeedbackListFilter.tsx
 msgid "Evaluation"
 msgstr "Hodnocení"
 
@@ -2481,7 +2454,6 @@ msgstr "Typ události"
 msgid "Event types"
 msgstr "Typy událostí"
 
-#: src/marketplace/resources/details/fetchData.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
 msgstr "Události"
@@ -2603,7 +2575,6 @@ msgid "Extending"
 msgstr "Rozšíření"
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "External IP"
 msgstr "Externí IP"
@@ -2623,18 +2594,19 @@ msgstr "ID externí sítě"
 msgid "Failed to operate with backend."
 msgstr "Nepodařilo se provést operaci na backendu."
 
-#: src/issues/routes.ts
+#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Features"
 msgstr "Funkce"
 
-#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Fee applied each time this plan is activated."
 msgstr "Poplatek se účtuje při každé aktivaci tohoto plánu."
 
 #: src/issues/feedback/SupportFeedback.tsx
-#: src/issues/routes.ts
+#: src/issues/feedback/SupportFeedbackListContainer.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Feedback"
 msgstr "Zpětná vazba"
 
@@ -2665,10 +2637,7 @@ msgstr "Soubory"
 #: src/issues/create/CallerGroup.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/issues/create/ProjectGroup.tsx
-#: src/marketplace/category/filters/FilterDropdownHeader.tsx
 #: src/marketplace/category/filters/MobileFilterActions.tsx
-#: src/support/EventFilterButton.tsx
-#: src/table/Table.tsx
 msgid "Filter"
 msgstr "Filtr"
 
@@ -2680,7 +2649,7 @@ msgstr "Filtrovat organizace"
 msgid "Filter projects"
 msgstr "Filtrovat projekty"
 
-#: src/issues/routes.ts
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Financial"
 msgstr "Finanční"
 
@@ -2703,7 +2672,7 @@ msgid "Fixed-price contract"
 msgstr "Smlouva s pevnou cenou"
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
-#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 msgid "Fixed price"
 msgstr "Pevná cena"
 
@@ -2736,10 +2705,7 @@ msgstr "Název příchuti"
 msgid "Flavor name: {flavor_name}"
 msgstr "Název příchuti: {flavor_name}"
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-#: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
-#: src/openstack/openstack-tenant/tabs.ts
 msgid "Flavors"
 msgstr "Příchutě"
 
@@ -2767,7 +2733,7 @@ msgstr "Plovoucí IP"
 msgid "Floating IP count"
 msgstr "Počet plovoucích IP"
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/openstack-floating-ips/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Floating IPs"
 msgstr "Plovoucí IP adresy"
@@ -2776,6 +2742,7 @@ msgstr "Plovoucí IP adresy"
 msgid "Floating IPs update has been scheduled."
 msgstr "Aktualizace plovoucích IP adres byla naplánována."
 
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/FlowMapViewContainer.tsx
 msgid "Flowmap"
 msgstr "Vývojový diagram"
@@ -2797,11 +2764,11 @@ msgid "Force destroy {name} instance"
 msgstr "Vynutit zničení instance {name}"
 
 #: src/freeipa/FreeIPAAccount.tsx
-#: src/user/routes.ts
+#: src/user/constants.ts
 msgid "FreeIPA account"
 msgstr "Účet FreeIPA"
 
-#: src/slurm/details/AllocationAccessDetails.tsx
+#: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
 msgid "FreeIPA account needs to be set up."
 msgstr "Je třeba nastavit účet FreeIPA."
 
@@ -2820,7 +2787,9 @@ msgstr "Úplný popis"
 
 #: src/invitations/actions/UserDetailsGroup.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Full name"
@@ -2878,7 +2847,6 @@ msgstr "Přejít do obchodu"
 msgid "Go to my profile"
 msgstr "Přejít na můj profil"
 
-#: src/auth/PermissionLayout.tsx
 #: src/invitations/GroupInvitationErrorMessage.tsx
 #: src/invitations/InvitationErrorMessage.tsx
 msgid "Go to profile"
@@ -2908,7 +2876,8 @@ msgstr "Rozumím!"
 msgid "Grant permission"
 msgstr "Udělit oprávnění"
 
-#: src/invoices/routes.ts
+#: src/invoices/growth/GrowthContainer.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Growth"
 msgstr "Růst"
 
@@ -2934,6 +2903,7 @@ msgstr "Hostovaný OS"
 msgid "HPA"
 msgstr "HPA"
 
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/HeatMapContainer.tsx
 msgid "Heatmap"
 msgstr "Heatmapa"
@@ -3028,7 +2998,6 @@ msgstr "Identifikační kód"
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/TenantPortsList.tsx
-#: src/user/api-key/AuthenticationEvents.tsx
 msgid "IP address"
 msgstr "IP adresa"
 
@@ -3094,9 +3063,7 @@ msgstr "Název obrázku"
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/offerings/details/PageImages.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
-#: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 msgid "Images"
 msgstr "Obrázky"
@@ -3110,6 +3077,7 @@ msgstr "Importovat"
 msgid "Import YAML"
 msgstr "Importovat YAML"
 
+#: src/marketplace/offerings/actions/OfferingImportButton.tsx
 #: src/marketplace/offerings/actions/OfferingImportDialog.tsx
 msgid "Import offering"
 msgstr "Importovat nabídku"
@@ -3195,7 +3163,6 @@ msgstr "Odstranění instance bylo naplánováno."
 msgid "Instance does not have any floating IPs yet."
 msgstr "Instance zatím nemá žádné plovoucí IP adresy."
 
-#: src/openstack/openstack-instance/OpenStackSecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 msgid "Instance does not have any security groups yet."
 msgstr "Instance zatím nemá žádné skupiny zabezpečení."
@@ -3237,14 +3204,11 @@ msgid "Internal"
 msgstr "Interní"
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Internal IP"
 msgstr "Interní IP adresa"
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
-#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 msgid "Internal IPs"
 msgstr "Interní IP adresy"
 
@@ -3334,9 +3298,8 @@ msgstr "Odkaz na pozvánku"
 msgid "Invitation rejection"
 msgstr "Odmítnutí pozvánky"
 
-#: src/customer/routes.ts
-#: src/invitations/InvitationsList.tsx
-#: src/project/routes.ts
+#: src/customer/team/CustomerTeam.tsx
+#: src/project/team/ProjectTeam.tsx
 msgid "Invitations"
 msgstr "Pozvánky"
 
@@ -3352,7 +3315,6 @@ msgstr "Pozvat uživatele"
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
 #: src/invoices/details/BillingDetails.tsx
-#: src/invoices/routes.ts
 msgid "Invoice"
 msgstr "Faktura"
 
@@ -3420,7 +3382,7 @@ msgstr "Seznam faktur"
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
-#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Is active"
 msgstr "Je aktivní"
@@ -3453,12 +3415,12 @@ msgstr "Odkaz na problém"
 msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr "Problém {issue_link} byl vytvořen {caller_link}."
 
-#: src/customer/dashboard/CustomerActions.tsx
-#: src/customer/routes.ts
-#: src/issues/routes.ts
-#: src/marketplace/resources/details/fetchData.tsx
-#: src/project/ProjectActions.tsx
-#: src/project/routes.ts
+#: src/customer/workspace/CustomerIssuesList.tsx
+#: src/customer/workspace/utils.ts
+#: src/issues/SupportIssues.tsx
+#: src/marketplace/resources/ResourceTabs.tsx
+#: src/project/ProjectIssuesList.tsx
+#: src/project/utils.ts
 #: src/resource/tabs/constants.ts
 msgid "Issues"
 msgstr "Problémy"
@@ -3501,7 +3463,6 @@ msgstr "Pracovní pozice"
 msgid "Job title"
 msgstr "Pracovní pozice"
 
-#: src/marketplace/resources/details/openstack-instance/SnapshotsSection.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/resource/utils.tsx
 msgid "Keep forever"
@@ -3525,7 +3486,7 @@ msgstr "Uchováno do"
 msgid "Key"
 msgstr "Klíč"
 
-#: src/user/keys/KeyCreateDialog.tsx
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Key name"
 msgstr "Název klíče"
 
@@ -3586,7 +3547,7 @@ msgstr "Pokud chcete, aby se uživatelské jméno správce generovalo automatick
 msgid "Legal address"
 msgstr "Právní adresa"
 
-#: src/user/api-key/TokenLifetimeField.tsx
+#: src/user/support/TokenLifetimeField.tsx
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Životnost bude aktualizována a obnovena po uložení formuláře."
 
@@ -3606,8 +3567,6 @@ msgid "Limit period"
 msgstr "Limitní období"
 
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Limits"
@@ -3617,7 +3576,7 @@ msgstr "Limity"
 msgid "Limits are invalid."
 msgstr "Limity jsou neplatné."
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Link"
 msgstr "Odkaz"
@@ -3632,9 +3591,6 @@ msgid "Link invoice"
 msgstr "Propojit fakturu"
 
 #: src/customer/list/TotalCostComponent.tsx
-#: src/marketplace/resources/details/InfiniteList.tsx
-#: src/marketplace/resources/details/ResourcesList.tsx
-#: src/project/ProjectEventsTimeline.tsx
 msgid "Loading"
 msgstr "Načítání"
 
@@ -3664,7 +3620,8 @@ msgid "Location of {offeringName} offering"
 msgstr "Umístění nabídky {offeringName}"
 
 #: src/navigation/header/LogoutLink.tsx
-#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/header/SiteHeader.tsx
+#: src/user/UserDropdownMenu.tsx
 msgid "Log out"
 msgstr "Odhlásit se"
 
@@ -3676,7 +3633,6 @@ msgstr "Přihlašování uživatele"
 #: src/auth/SigninButton.tsx
 #: src/auth/SigninForm.tsx
 #: src/auth/saml2/AuthSaml2Dialog.tsx
-#: src/navigation/sidebar/UnifiedSidebar.tsx
 msgid "Login"
 msgstr "Přihlášení"
 
@@ -3685,7 +3641,7 @@ msgstr "Přihlášení"
 msgid "Login failed"
 msgstr "Přihlášení se nezdařilo"
 
-#: src/slurm/details/AllocationAccessDetails.tsx
+#: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
 msgid "Login with"
 msgstr "Přihlásit se pomocí"
 
@@ -3725,18 +3681,18 @@ msgstr "MAC adresa (volitelné)"
 msgid "MTU"
 msgstr "MTU"
 
-#: src/customer/dashboard/CustomerActions.tsx
-#: src/project/ProjectActions.tsx
-#: src/user/UserActions.tsx
+#: src/customer/workspace/utils.ts
+#: src/user/UserManage.tsx
+#: src/user/constants.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Manage"
 msgstr "Spravovat"
 
-#: src/user/support/AvatarField.tsx
+#: src/user/support/UserEditContainer.tsx
 msgid "Manage avatar at {link}"
 msgstr "Spravovat avatara na {link}"
 
-#: src/openstack/openstack-instance/InstanceNetworkButton.tsx
+#: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
 msgid "Manage networks"
 msgstr "Správa sítí"
 
@@ -3744,7 +3700,7 @@ msgstr "Správa sítí"
 msgid "Manage organization"
 msgstr "Správa organizace"
 
-#: src/openstack/openstack-instance/InstanceNetworkButton.tsx
+#: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
 msgid "Manage security groups"
 msgstr "Správa skupin zabezpečení"
 
@@ -3756,7 +3712,6 @@ msgstr "Spravované projekty"
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/PageManagement.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
-#: src/navigation/sidebar/ManagementMenu.tsx
 msgid "Management"
 msgstr "Správa"
 
@@ -3768,8 +3723,10 @@ msgstr "Označit jako zaplacené"
 msgid "Mark invoice as paid"
 msgstr "Označit fakturu jako zaplacenou"
 
+#: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
-#: src/marketplace/routes.ts
+#: src/marketplace/sidebar.ts
+#: src/user/dashboard/UserDashboard.tsx
 msgid "Marketplace"
 msgstr "Marketplace"
 
@@ -3857,12 +3814,10 @@ msgstr "Měřená jednotka"
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/i18n/constants.ts
-#: src/navigation/workspace/context-selector/OrganizationSummary.tsx
 #: src/project/team/ProjectUsersList.tsx
 msgid "Member"
 msgstr "Člen"
 
-#: src/marketplace/resources/details/MonitoringCharts.tsx
 #: src/rancher/cluster/hpas/utils.ts
 msgid "Memory"
 msgstr "Paměť"
@@ -3877,8 +3832,8 @@ msgstr "Velikost paměti v GiB"
 
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
-#: src/notifications/NotificationForm.tsx
-#: src/user/api-key/AuthenticationEvents.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/NotificationExpandableRow.tsx
 msgid "Message"
 msgstr "Zpráva"
 
@@ -3993,16 +3948,22 @@ msgstr "Musí být alespoň {min}"
 msgid "Must be at most {max}"
 msgstr "Musí být nejvýše {max}"
 
-#: src/marketplace/routes.ts
+#: src/marketplace/offerings/MyOfferingsListContainer.tsx
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/images/ImagesContainer.tsx
+#: src/marketplace/sidebar.ts
 msgid "My offerings"
 msgstr "Moje nabídky"
 
+#: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsContainer.tsx
-#: src/marketplace/routes.ts
+#: src/marketplace/sidebar.ts
 msgid "My orders"
 msgstr "Moje objednávky"
 
 #: src/marketplace/resources/list/CustomerResourcesContainer.tsx
+#: src/marketplace/sidebar.ts
 msgid "My resources"
 msgstr "Moje zdroje"
 
@@ -4026,7 +3987,7 @@ msgstr "N/A"
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
@@ -4046,27 +4007,19 @@ msgstr "N/A"
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/offerings/details/OfferingUsersTable.tsx
-#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
+#: src/marketplace/offerings/details/OfferingUsersTab.tsx
+#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemLimits.tsx
-#: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
-#: src/marketplace/service-providers/ProviderCampaignsList.tsx
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
-#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
-#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -4078,17 +4031,11 @@ msgstr "N/A"
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
-#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
-#: src/openstack/openstack-tenant/TenantFlavorsList.tsx
-#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
-#: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
@@ -4112,7 +4059,6 @@ msgstr "N/A"
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/OfferingConfigurationForm.tsx
 #: src/support/SupportDetailsTable.tsx
-#: src/user/affiliations/ProjectsList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -4196,7 +4142,6 @@ msgid "Negative"
 msgstr "Záporný"
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
 #: src/vmware/actions/CreatePortDialog.tsx
@@ -4207,6 +4152,7 @@ msgstr "Síť"
 msgid "Network MTU has been updated."
 msgstr "Síťová jednotka MTU byla aktualizována."
 
+#: src/vmware/breadcrumbs.ts
 #: src/vmware/tabs.ts
 msgid "Network adapters"
 msgstr "Síťové adaptéry"
@@ -4215,10 +4161,11 @@ msgstr "Síťové adaptéry"
 msgid "Network name"
 msgstr "Název sítě"
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
+#: src/openstack/openstack-network/breadcrumbs.ts
+#: src/openstack/openstack-subnet/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
@@ -4240,10 +4187,8 @@ msgstr "Nová příchuť"
 msgid "New limit"
 msgstr "Nový limit"
 
-#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "New plan"
 msgstr "Nový plán"
 
@@ -4255,6 +4200,7 @@ msgstr "Nová velikost"
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
+#: src/table/TablePagination.tsx
 msgid "Next"
 msgstr "Další"
 
@@ -4268,20 +4214,16 @@ msgstr "Další spuštění v"
 
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/issues/FeaturesList.tsx
+#: src/issues/workspace/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/category/filters/FilteredBy.tsx
 #: src/marketplace/offerings/attributes/utils.tsx
-#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
-#: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "No"
 msgstr "Ne"
 
@@ -4297,7 +4239,6 @@ msgstr "Žádné přístupové informace."
 msgid "No categories"
 msgstr "Žádné kategorie"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "No countries"
 msgstr "Žádné země"
@@ -4318,6 +4259,7 @@ msgstr "Žádné položky k zobrazení zde"
 msgid "No invoice data available."
 msgstr "Fakturační údaje nejsou k dispozici."
 
+#: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 msgid "No offerings"
 msgstr "Žádné nabídky"
@@ -4372,6 +4314,7 @@ msgstr "Plán uzlů"
 
 #: src/rancher/cluster/create/TenantGroup.tsx
 #: src/rancher/cluster/tabs.ts
+#: src/rancher/node/breadcrumbs.ts
 msgid "Nodes"
 msgstr "Uzly"
 
@@ -4424,8 +4367,8 @@ msgstr "Oznámení bylo aktualizováno."
 msgid "Notification method"
 msgstr "Způsob oznamování"
 
+#: src/user/constants.ts
 #: src/user/hooks/HooksList.tsx
-#: src/user/routes.ts
 msgid "Notifications"
 msgstr "Oznámení"
 
@@ -4490,25 +4433,16 @@ msgstr "Objekt nebyl nalezen."
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/actions/tabs.ts
+#: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
-#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
+#: src/marketplace/resources/list/OfferingFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
-#: src/marketplace/resources/list/PublicResourcesFilter.tsx
-#: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
-#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/support/SupportDetailsTable.tsx
 #: src/user/UserOfferingList.tsx
@@ -4574,12 +4508,11 @@ msgid "Offering logo"
 msgstr "Logo nabídky"
 
 #: src/invoices/list/InvoicesStatsList.tsx
-#: src/marketplace/resources/details/OfferingDetailsField.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 msgid "Offering name"
 msgstr "Název nabídky"
 
-#: src/customer/routes.ts
+#: src/customer/team/CustomerTeam.tsx
 msgid "Offering permissions"
 msgstr "Oprávnění nabídky"
 
@@ -4592,15 +4525,13 @@ msgstr "Stav nabídky byl aktualizován."
 msgid "Offering type"
 msgstr "Typ nabídky"
 
-#: src/issues/routes.ts
+#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/support/SupportOfferingsContainer.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
-#: src/marketplace/service-providers/ProviderOfferingsList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
-#: src/notifications/RecipientsList.tsx
 msgid "Offerings"
 msgstr "Nabídky"
 
@@ -4690,7 +4621,7 @@ msgstr "OpenStack svazek"
 msgid "Open console"
 msgstr "Otevřít konzoli"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 msgid "Open in Service Desk"
 msgstr "Otevřít v Service Desk"
 
@@ -4715,6 +4646,7 @@ msgid "Order Summary"
 msgstr "Souhrn objednávky"
 
 #: src/marketplace/orders/OrderDetails.tsx
+#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 msgid "Order details"
 msgstr "Podobnosti objednávky"
 
@@ -4748,10 +4680,9 @@ msgstr "Položka objednávky byla zamítnuta."
 msgid "Order item has cancel has been scheduled."
 msgstr "Bylo naplánováno zrušení položky objednávky."
 
-#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/marketplace/resources/ResourceTabs.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
 msgid "Order items"
@@ -4762,9 +4693,10 @@ msgstr "Položky objednávky"
 msgid "Order summary"
 msgstr "Souhrn objednávky"
 
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/SupportOrdersContainer.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/routes.ts
 msgid "Orders"
 msgstr "Objednávky"
 
@@ -4776,7 +4708,7 @@ msgstr "Objednávky"
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
@@ -4784,29 +4716,15 @@ msgstr "Objednávky"
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-flows/FlowExpandableRow.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/details/CustomerCreateGroup.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/tabs.ts
-#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
-#: src/navigation/sidebar/ManagementMenu.tsx
-#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
-#: src/navigation/workspace/context-selector/GuestDropdown.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/SelectAffiliationDialog.tsx
 #: src/user/UserPermissionRequestsList.tsx
-#: src/user/affiliations/OrganizationsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
-#: src/user/affiliations/ProjectsListFilter.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
@@ -4827,6 +4745,7 @@ msgid "Organization contains projects. Please remove them first."
 msgstr "Organizace obsahuje projekty. Nejprve je prosím odstraňte."
 
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetailsDialog.tsx
 msgid "Organization details"
 msgstr "Podrobnosti organizace"
 
@@ -4868,10 +4787,11 @@ msgstr "Registrační kód organizace"
 msgid "Organization removal"
 msgstr "Odstranění organizace"
 
-#: src/customer/team/CustomerUsersListFilter.tsx
+#: src/customer/team/OrganizationRoleSelectField.tsx
 msgid "Organization role"
 msgstr "Role organizace"
 
+#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/support/UserList.tsx
 msgid "Organization roles"
@@ -4915,21 +4835,14 @@ msgid "Organization {customer_name} has been deleted."
 msgstr "Organizace {customer_name} byla odstraněna."
 
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationUpdateContainer.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/issues/routes.ts
+#: src/customer/list/SupportCustomersContainer.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
-#: src/marketplace/routes.ts
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
-#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
-#: src/notifications/RecipientsList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
-#: src/user/affiliations/OrganizationsList.tsx
-#: src/user/dashboard/CustomerPermissions.tsx
-#: src/user/dashboard/UserDashboard.tsx
-#: src/user/routes.ts
-#: src/user/support/UserDetailsView.tsx
 msgid "Organizations"
 msgstr "Organizace"
 
@@ -4973,6 +4886,7 @@ msgid "Owned organizations"
 msgstr "Vlastněné organizace"
 
 #: src/customer/team/CustomerUsersList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
 msgid "Owner"
 msgstr "Vlastník"
 
@@ -5027,7 +4941,6 @@ msgstr "Pozastavit nabídku"
 
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 msgid "Paused"
 msgstr "Pozastaveno"
 
@@ -5105,7 +5018,7 @@ msgstr "Platební profil byl odstraněn."
 msgid "Payment profile has been updated."
 msgstr "Platební profil byl aktualizován."
 
-#: src/customer/routes.ts
+#: src/customer/payment-profiles/PaymentProfilesPanel.tsx
 msgid "Payment profiles"
 msgstr "Platební profily"
 
@@ -5117,7 +5030,7 @@ msgstr "Typ platby {type}"
 msgid "Payments connected with an active payment profile."
 msgstr "Platby spojené s aktivním platebním profilem."
 
-#: src/customer/routes.ts
+#: src/customer/payments/PaymentsPanel.tsx
 msgid "Payments list"
 msgstr "Seznam plateb"
 
@@ -5178,7 +5091,6 @@ msgid "Performed by"
 msgstr "Provedl"
 
 #: src/booking/BookingCheckoutSummary.tsx
-#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Period"
 msgstr "Období"
@@ -5195,7 +5107,8 @@ msgstr "Trvalý"
 msgid "Permission has been revoked."
 msgstr "Oprávnění bylo odvoláno."
 
-#: src/project/routes.ts
+#: src/customer/team/CustomerTeam.tsx
+#: src/project/team/ProjectTeam.tsx
 msgid "Permissions log"
 msgstr "Protokol oprávnění"
 
@@ -5220,7 +5133,6 @@ msgstr "Telefonní číslo"
 msgid "Phone numbers"
 msgstr "Telefonní čísla"
 
-#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanField.tsx
 #: src/marketplace/offerings/PriceList.tsx
@@ -5228,8 +5140,7 @@ msgstr "Telefonní čísla"
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/details/PlanDetailsField.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
@@ -5237,8 +5148,6 @@ msgstr "Telefonní čísla"
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
-#: src/project/ProjectOrderItemsList.tsx
 msgid "Plan"
 msgstr "Plán"
 
@@ -5246,6 +5155,8 @@ msgstr "Plán"
 msgid "Plan #{index}"
 msgstr "Plán #{index}"
 
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageContainer.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 msgid "Plan capacity"
 msgstr "Kapacita plánu"
@@ -5337,7 +5248,7 @@ msgstr "Chcete-li zobrazit odhad ceny, zadejte prosím velikost svazku."
 msgid "Please give us a moment to validate your invitation."
 msgstr "Dejte nám prosím chvilku na ověření vaší pozvánky."
 
-#: src/user/api-key/TokenLifetimeField.tsx
+#: src/user/support/TokenLifetimeField.tsx
 msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
 msgstr "Ujistěte se, že víte, co děláte, a pokud si nejste jisti, nastavte 10 minut."
 
@@ -5435,7 +5346,6 @@ msgstr "Port byl vytvořen."
 msgid "Port range"
 msgstr "Rozsah portů"
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Ports"
 msgstr "Porty"
@@ -5473,6 +5383,7 @@ msgstr "Náhled nabídky"
 
 #: src/customer/create/WizardForm.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/PrevPage.tsx
+#: src/table/TablePagination.tsx
 msgid "Previous"
 msgstr "Předchozí"
 
@@ -5533,7 +5444,6 @@ msgstr "Cena za měsíc"
 
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
-#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Price per unit"
 msgstr "Cena za jednotku"
@@ -5554,12 +5464,11 @@ msgstr "Tisk faktury"
 msgid "Print record"
 msgstr "Tisk záznamu"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/PriorityGroup.tsx
 msgid "Priority"
 msgstr "Priorita"
 
-#: src/about.tsx
 #: src/navigation/FooterLinks.tsx
 msgid "Privacy policy"
 msgstr "Zásady ochrany osobních údajů"
@@ -5575,7 +5484,7 @@ msgstr "Soukromé cloudy"
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/ProjectGroup.tsx
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
@@ -5583,21 +5492,15 @@ msgstr "Soukromé cloudy"
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectCreateGroup.tsx
 #: src/marketplace/details/ProjectField.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
-#: src/navigation/sidebar/ManagementMenu.tsx
-#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -5693,12 +5596,14 @@ msgstr "Odstranění projektu"
 msgid "Project resources"
 msgstr "Zdroje projektu"
 
-#: src/customer/team/CustomerUsersListFilter.tsx
+#: src/customer/team/ProjectRoleSelectField.tsx
 msgid "Project role"
 msgstr "Role projektu"
 
+#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/user/support/UserList.tsx
 msgid "Project roles"
 msgstr "Role projektu"
@@ -5732,19 +5637,12 @@ msgstr "Projekt {project_link} byl aktualizován."
 msgid "Project {project_name} has been deleted."
 msgstr "Projekt {project_name} byl odstraněn."
 
-#: src/customer/routes.ts
-#: src/issues/routes.ts
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
-#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
-#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
+#: src/customer/workspace/utils.ts
+#: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
-#: src/user/affiliations/OrganizationsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
-#: src/user/dashboard/ProjectPermissions.tsx
-#: src/user/dashboard/UserDashboard.tsx
-#: src/user/routes.ts
-#: src/user/support/UserDetailsView.tsx
 msgid "Projects"
 msgstr "Projekty"
 
@@ -5771,7 +5669,6 @@ msgstr "Důkazní dokument"
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/navigation/sidebar/ManagementMenu.tsx
 #: src/providers/support/MapInfoPanel.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
@@ -5808,7 +5705,7 @@ msgstr "Zřízení nového zdroje"
 msgid "Public SSH keys will be injected into services that allow key-based access."
 msgstr "Veřejné SSH klíče budou vloženy do služeb, které umožňují přístup založený na klíči."
 
-#: src/user/keys/KeyCreateDialog.tsx
+#: src/user/keys/KeyCreateForm.tsx
 #: src/user/keys/KeysListExpandableRow.tsx
 msgid "Public key"
 msgstr "Veřejný klíč"
@@ -5840,7 +5737,6 @@ msgstr "Veřejné služby"
 msgid "Publish as Google Calendar"
 msgstr "Publikovat jako Google Kalendář"
 
-#: src/UserAgreementComponent.tsx
 #: src/marketplace/referral/ReferralsList.tsx
 msgid "Published"
 msgstr "Publikováno"
@@ -5859,7 +5755,8 @@ msgstr "Kvóty stahování"
 
 #: src/marketplace/cart/ForwardButton.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingPricingOld.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
 msgid "Purchase"
 msgstr "Nákup"
 
@@ -5900,10 +5797,10 @@ msgid "Quotas"
 msgstr "Kvóty"
 
 #: src/digitalocean/digitalocean-droplet-config.ts
-#: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
+#: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "RAM"
 msgstr "RAM"
 
@@ -5963,7 +5860,7 @@ msgstr "Restart"
 msgid "Recent additions"
 msgstr "Nedávné přírůstky"
 
-#: src/notifications/RecipientsField.tsx
+#: src/issues/notifications/NotificationExpandableRow.tsx
 msgid "Recipients"
 msgstr "Příjemci"
 
@@ -5998,15 +5895,17 @@ msgid "Referrals for {name}"
 msgstr "Doporučení pro {name}"
 
 #: src/issues/list/IssuesShortList.tsx
+#: src/issues/workspace/IssuesActivityStream.tsx
+#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/orders/OrderDetails.tsx
-#: src/marketplace/resources/details/RefreshButton.tsx
+#: src/marketplace/resources/actions/ResourceActions.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/resource/ResourceRefreshButton.tsx
-#: src/table/TableDropdowns.tsx
+#: src/table/TableRefreshButton.tsx
 msgid "Refresh"
 msgstr "Obnovit"
 
-#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+#: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
 #: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
 msgid "Regenerate"
 msgstr "Regenerovat"
@@ -6020,7 +5919,7 @@ msgstr "Region"
 msgid "Region name"
 msgstr "Název regionu"
 
-#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
 msgid "Register as service provider"
 msgstr "Zaregistrujte se jako poskytovatel služeb"
 
@@ -6028,7 +5927,7 @@ msgstr "Zaregistrujte se jako poskytovatel služeb"
 msgid "Register organization as service provider and remove organization."
 msgstr "Zaregistrujte organizaci jako poskytovatele služeb a odstraňte ji."
 
-#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
 msgid "Registered at:"
 msgstr "Registrováno na:"
 
@@ -6041,6 +5940,7 @@ msgid "Registration code"
 msgstr "Registrační kód"
 
 #: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserEditForm.tsx
 msgid "Registration method"
 msgstr "Způsob registrace"
 
@@ -6081,7 +5981,6 @@ msgid "Release floating IPs"
 msgstr "Uvolnění plovoucích IP adres"
 
 #: src/ErrorMessage.tsx
-#: src/core/LoadingErred.tsx
 #: src/dashboard/CategoryResourcesList.tsx
 msgid "Reload"
 msgstr "Znovu načíst"
@@ -6108,7 +6007,8 @@ msgstr "Vzdálený CIDR"
 msgid "Remote Waldur API URL"
 msgstr "Vzdálená adresa URL Waldur API"
 
-#: src/user/routes.ts
+#: src/user/UserOfferingListContainer.tsx
+#: src/user/constants.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Remote accounts"
 msgstr "Vzdálené účty"
@@ -6219,14 +6119,14 @@ msgstr "Nahlášeno mnou"
 msgid "Reported value is reused every month until changed."
 msgstr "Nahlášená hodnota se používá opakovaně každý měsíc, dokud se nezmění."
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Reporter"
 msgstr "Reportér"
 
-#: src/customer/routes.ts
-#: src/navigation/sidebar/ReportingMenu.tsx
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/issues/workspace/SupportWorkspace.tsx
 msgid "Reporting"
 msgstr "Nahlášení"
 
@@ -6301,7 +6201,7 @@ msgstr "Požadavek na odstranění"
 msgid "Request title"
 msgstr "Název požadavku"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueCreateForm.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/TypeGroup.tsx
@@ -6330,9 +6230,7 @@ msgstr "Požadováno"
 msgid "Requested email"
 msgstr "Požadovaný e-mail"
 
-#: src/marketplace/category/list/OfferingCard.tsx
 #: src/marketplace/common/OfferingCard.tsx
-#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
 msgid "Requesting of new resources has been temporarily paused"
 msgstr "Požadavek na nové zdroje byl dočasně pozastaven"
 
@@ -6362,7 +6260,7 @@ msgstr "Resetovat"
 msgid "Resize droplet"
 msgstr "Změna velikosti dropletu"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 msgid "Resolution"
 msgstr "Rozlišení"
 
@@ -6370,14 +6268,11 @@ msgstr "Rozlišení"
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
-#: src/navigation/header/project-selector/ProjectsList.tsx
-#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 msgid "Resource"
 msgstr "Zdroj"
 
@@ -6406,6 +6301,7 @@ msgstr "Odstranění zdrojů bylo naplánováno."
 msgid "Resource description"
 msgstr "Popis zdroje"
 
+#: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/resource/ResourceDetailsContainer.tsx
 msgid "Resource details"
 msgstr "Podrobnosti o zdroji"
@@ -6447,6 +6343,7 @@ msgstr "Požadavek na změnu omezení zdrojů byl odeslán."
 
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 msgid "Resource link"
 msgstr "Odkaz na zdroj"
 
@@ -6486,24 +6383,26 @@ msgstr "Využití zdroje pro {resourceName}"
 msgid "Resource usage for {resource}"
 msgstr "Využití zdroje pro {resource}"
 
+#: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
-#: src/marketplace/details/OfferingResourcesList.tsx
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/routes.ts
-#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
-#: src/marketplace/service-providers/ProviderOfferingsList.tsx
-#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
-#: src/navigation/header/project-selector/ProjectsList.tsx
-#: src/navigation/sidebar/ResourcesMenu.tsx
-#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
+#: src/marketplace/resources/list/SupportResourcesContainer.tsx
+#: src/marketplace/sidebar.ts
+#: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
+#: src/project/ProjectWorkspace.tsx
+#: src/rancher/template/CatalogTemplateContainer.tsx
+#: src/rancher/template/breadcrumbs.ts
+#: src/resource/breadcrumbs/ResourceBreadcrumbsRegistry.ts
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
-#: src/user/affiliations/ProjectsList.tsx
-#: src/user/routes.ts
+#: src/support/SupportDetailsContainer.tsx
+#: src/user/constants.ts
 msgid "Resources"
 msgstr "Zdroje"
 
@@ -6515,7 +6414,8 @@ msgstr "Import zdrojů se nezdařil."
 msgid "Resources represent the services you are using."
 msgstr "Zdroje představují služby, které používáte."
 
-#: src/resource/support/routes.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "Resources usage"
 msgstr "Využití zdrojů"
 
@@ -6590,9 +6490,7 @@ msgstr "Kontrola byla uzavřena."
 msgid "Review has been performed."
 msgstr "Kontrola byla provedena."
 
-#: src/customer/routes.ts
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
-#: src/marketplace/offerings/details/PublicOfferingReviews.tsx
+#: src/customer/team/CustomerTeam.tsx
 msgid "Reviews"
 msgstr "Hodnocení"
 
@@ -6609,9 +6507,6 @@ msgstr "Odvolat"
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
-#: src/user/affiliations/OrganizationsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
-#: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Role"
@@ -6635,8 +6530,8 @@ msgstr "Události správy rolí"
 msgid "Roles"
 msgstr "Role"
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/openstack/router-breadcrumbs.ts
 msgid "Routers"
 msgstr "Routery"
 
@@ -6686,7 +6581,6 @@ msgstr "Název serveru SQL"
 msgid "SSH Keys"
 msgstr "SSH klíče"
 
-#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "SSH key"
 msgstr "SSH klíč"
@@ -6707,9 +6601,8 @@ msgstr "SSH klíč {ssh_key_name} byl vytvořen pro uživatele {user_link}"
 msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr "SSH klíč {ssh_key_name} byl odstraněn pro uživatele {user_link}"
 
-#: src/marketplace/resources/details/RobotAccountExpandable.tsx
 #: src/user/keys/KeysList.tsx
-#: src/user/routes.ts
+#: src/user/keys/KeysListContainer.tsx
 msgid "SSH keys"
 msgstr "SSH klíče"
 
@@ -6720,6 +6613,7 @@ msgstr "SSH klíče"
 msgid "SSH public key"
 msgstr "Veřejný klíč SSH"
 
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/SankeyDiagramContainer.tsx
 msgid "Sankey diagram"
 msgstr "Sankey diagram"
@@ -6729,7 +6623,7 @@ msgstr "Sankey diagram"
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
-#: src/issues/FeaturesList.tsx
+#: src/issues/workspace/FeaturesList.tsx
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
@@ -6790,13 +6684,12 @@ msgstr "Jazyk skriptu"
 
 #: src/issues/create/SearchButton.tsx
 #: src/navigation/header/MainSearch.tsx
-#: src/navigation/header/SearchFilters.tsx
-#: src/navigation/header/SearchToggle.tsx
 #: src/table/TableQuery.tsx
 msgid "Search"
 msgstr "Hledat"
 
 #: src/marketplace/category/filters/FilterBar.tsx
+#: src/marketplace/landing/LandingPage.tsx
 msgid "Search for offerings..."
 msgstr "Hledat nabídky..."
 
@@ -6812,22 +6705,18 @@ msgstr "Skupina zabezpečení zatím neobsahuje žádné pravidlo."
 msgid "Security group rules update has been scheduled."
 msgstr "Aktualizace pravidel skupiny zabezpečení byla naplánována."
 
-#: src/marketplace/resources/details/NetworkingTab.tsx
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsForm.tsx
-#: src/openstack/openstack-instance/tabs.ts
+#: src/openstack/openstack-security-groups/breadcrumbs.ts
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/rancher/cluster/create/TenantGroup.tsx
 msgid "Security groups"
 msgstr "Skupiny zabezpečení"
 
-#: src/openstack/openstack-instance/OpenStackSecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 msgid "Security groups details"
 msgstr "Podrobnosti skupin zabezpečení"
@@ -6841,8 +6730,7 @@ msgid "Security incident type: {type}"
 msgstr "Typ bezpečnostního incidentu: {type}"
 
 #: src/issues/list/IssuesShortList.tsx
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/marketplace/resources/details/ResourceIssuesCard.tsx
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "See all"
 msgstr "Zobrazit vše"
 
@@ -6865,8 +6753,8 @@ msgstr "ID segmentace"
 #: src/form/ListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
-#: src/user/affiliations/OrganizationHoverableRow.tsx
-#: src/user/affiliations/ProjectHoverableRow.tsx
+#: src/navigation/workspace/ProjectsPanel.tsx
+#: src/navigation/workspace/SelectOrganizationButton.tsx
 msgid "Select"
 msgstr "Vybrat"
 
@@ -6909,7 +6797,6 @@ msgid "Select connected subnet"
 msgstr "Vybrat připojenou podsíť"
 
 #: src/customer/create/CountryGroup.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "Select country..."
 msgstr "Vyberte zemi..."
@@ -6948,7 +6835,7 @@ msgid "Select offering..."
 msgstr "Vyberte nabídku..."
 
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
 msgid "Select offerings..."
 msgstr "Vyberte nabídky..."
 
@@ -6967,7 +6854,7 @@ msgstr "Vyberte organizaci ..."
 msgid "Select organization roles"
 msgstr "Vybrat role organizace"
 
-#: src/notifications/NotificationForm.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
 msgid "Select organizations..."
 msgstr "Vyberte organizace..."
 
@@ -6984,8 +6871,6 @@ msgid "Select priority..."
 msgstr "Vyberte prioritu..."
 
 #: src/invitations/actions/ProjectGroup.tsx
-#: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
-#: src/navigation/workspace/context-selector/ContextSelectorToggle.tsx
 msgid "Select project"
 msgstr "Vybrat projekt"
 
@@ -7038,8 +6923,6 @@ msgid "Select some files"
 msgstr "Vyberte některé soubory"
 
 #: src/booking/BookingStateFilter.tsx
-#: src/invitations/InvitationsFilter.tsx
-#: src/invoices/list/InvoicesFilter.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
@@ -7069,9 +6952,7 @@ msgstr "Vyberte klienta..."
 msgid "Select tenants..."
 msgstr "Vyberte klienty..."
 
-#: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
-#: src/project/ProjectEventsFilter.tsx
 msgid "Select type..."
 msgstr "Vyberte typ..."
 
@@ -7090,8 +6971,6 @@ msgstr "Vybrat pracovní prostor"
 
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
-#: src/user/affiliations/OrganizationHoverableRow.tsx
-#: src/user/affiliations/ProjectHoverableRow.tsx
 msgid "Selected"
 msgstr "Vybráno"
 
@@ -7123,7 +7002,6 @@ msgstr "Požadavek na službu"
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr "Požadavek na službu - požadavek klienta na úpravu, přidání, změnu nebo částečné či úplné odebrání určité služby."
 
-#: src/configs/default.ts
 #: src/customer/team/utils.ts
 msgid "Service manager"
 msgstr "Správce služeb"
@@ -7133,7 +7011,7 @@ msgid "Service manager of:"
 msgstr "Správce služeb:"
 
 #: src/customer/details/CustomerMarketplacePanel.tsx
-#: src/customer/list/SupportCustomerFilter.tsx
+#: src/customer/list/ServiceProviderFilter.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/map/LeafletMap.tsx
@@ -7142,10 +7020,8 @@ msgstr "Správce služeb:"
 #: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
+#: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#: src/marketplace/routes.ts
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -7160,7 +7036,6 @@ msgstr "Poskytovatel služeb:"
 msgid "Service provider API secret code has been generated."
 msgstr "Byl vygenerován tajný kód API poskytovatele služeb."
 
-#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Service provider can charge for usage of the following components"
 msgstr "Poskytovatel služeb může účtovat poplatky za využití následujících komponent"
@@ -7189,7 +7064,7 @@ msgstr "Nastavení služby je neplatné."
 msgid "Service settings of this resource are in state erred."
 msgstr "Nastavení služby tohoto zdroje je v chybovém stavu."
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Service type"
@@ -7245,12 +7120,12 @@ msgstr "Nastavit na návrh"
 msgid "Set to true to activate privilege escalation"
 msgstr "Nastavením na hodnotu true aktivujete zvýšení oprávnění"
 
-#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 msgid "Shared"
 msgstr "Sdílené"
 
-#: src/resource/support/routes.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/resource/support/SharedProviderContainer.tsx
 msgid "Shared providers"
 msgstr "Sdílení poskytovatelé"
 
@@ -7266,8 +7141,8 @@ msgstr "Položka nákupního košíku byla aktualizována."
 msgid "Shopping cart item update"
 msgstr "Aktualizace položky nákupního košíku"
 
-#: src/form/SecretField.tsx
 #: src/marketplace/details/plan/PlanDetailsLink.tsx
+#: src/table/TablePageSize.tsx
 msgid "Show"
 msgstr "Zobrazit"
 
@@ -7348,8 +7223,6 @@ msgid "Shutdown"
 msgstr "Vypnutí"
 
 #: src/auth/valimo/AuthValimoDialog.tsx
-#: src/navigation/header/UserDropdown.tsx
-#: src/navigation/workspace/context-selector/GuestDropdown.tsx
 msgid "Sign in"
 msgstr "Přihlásit se"
 
@@ -7364,12 +7237,10 @@ msgstr "Přihlaste se pomocí {label}"
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/VMwareDiskSummary.tsx
@@ -7400,8 +7271,7 @@ msgstr "Přeskočit přiřazení plovoucí IP adresy"
 msgid "Snapshot schedule for volume has been created."
 msgstr "Byl vytvořen plán snímků pro svazek."
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/openstack/openstack-instance/tabs.ts
+#: src/openstack/openstack-snapshot-schedule/breadcrumbs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshot schedules"
 msgstr "Plány snímků"
@@ -7410,11 +7280,7 @@ msgstr "Plány snímků"
 msgid "Snapshot size limit"
 msgstr "Limit velikosti snímku"
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-#: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-snapshot-schedule/tabs.ts
-#: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshots"
 msgstr "Snímky"
@@ -7463,52 +7329,35 @@ msgstr "Začínající"
 #: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
-#: src/invitations/InvitationsFilter.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/invoices/list/BillingRecordsList.tsx
-#: src/invoices/list/InvoicesFilter.tsx
 #: src/invoices/list/InvoicesList.tsx
-#: src/marketplace-flows/FlowListFilter.tsx
 #: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/utils.tsx
-#: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
-#: src/marketplace/details/OfferingResourcesFilter.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/OfferingsFilter.tsx
+#: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
-#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
-#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/details/ResourceDetailsHeader.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
-#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
-#: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/marketplace/service-providers/ProviderOfferingsList.tsx
-#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
-#: src/notifications/NotificationList.tsx
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -7519,18 +7368,12 @@ msgstr "Začínající"
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
-#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
-#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/paypal/PaymentsList.tsx
-#: src/project/ProjectOrderItemsList.tsx
-#: src/project/ProjectResourcesFilter.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -7558,9 +7401,8 @@ msgstr "Byla naplánována aktualizace statických tras."
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/invitations/InvitationsList.tsx
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
-#: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/user/support/UserDetailsTable.tsx
@@ -7588,10 +7430,7 @@ msgid "Stopping"
 msgstr "Zastavení"
 
 #: src/digitalocean/digitalocean-droplet-config.ts
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-#: src/openstack/openstack-instance/tabs.ts
-#: src/openstack/openstack-tenant/tabs.ts
+#: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/quotas/constants.ts
 msgid "Storage"
@@ -7613,12 +7452,12 @@ msgstr "Velikost úložiště v GiB"
 msgid "Storage type"
 msgstr "Typ úložiště"
 
-#: src/notifications/NotificationForm.tsx
-#: src/notifications/NotificationList.tsx
+#: src/issues/notifications/BroadcastList.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
 msgid "Subject"
 msgstr "Předmět"
 
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
@@ -7679,11 +7518,9 @@ msgstr "Podsíť byla vytvořena."
 msgid "Subnet name"
 msgstr "Název podsítě"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-network/tabs.ts
-#: src/openstack/openstack-tenant/tabs.ts
+#: src/openstack/openstack-subnet/breadcrumbs.ts
 msgid "Subnets"
 msgstr "Podsítě"
 
@@ -7696,8 +7533,6 @@ msgid "Subscription ID"
 msgstr "ID předplatného"
 
 #: src/invoices/details/InvoiceDetails.tsx
-#: src/invoices/list/MonthOverview.tsx
-#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Subtotal"
 msgstr "Mezisoučet"
@@ -7709,13 +7544,9 @@ msgid "Sum"
 msgstr "Součet"
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/issues/IssueDetails.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/openstack/openstack-tenant/TenantFlavorsList.tsx
-#: src/openstack/openstack-tenant/TenantInstancesList.tsx
-#: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/TemplateDetail.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
@@ -7724,8 +7555,7 @@ msgstr "Součet"
 msgid "Summary"
 msgstr "Souhrn"
 
-#: src/issues/routes.ts
-#: src/navigation/sidebar/SupportMenu.tsx
+#: src/navigation/header/SupportLink.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Support"
@@ -7844,8 +7674,10 @@ msgstr "Daňové číslo"
 msgid "Tax percent"
 msgstr "Procento daně"
 
-#: src/customer/routes.ts
-#: src/project/routes.ts
+#: src/customer/team/CustomerTeam.tsx
+#: src/customer/workspace/utils.ts
+#: src/project/team/ProjectTeam.tsx
+#: src/project/utils.ts
 msgid "Team"
 msgstr "Tým"
 
@@ -7867,7 +7699,6 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr "Technický název určený pro integraci a automatizované hlášení. Používejte prosím pouze latinku bez mezer."
 
 #: src/issues/create/IssueCreateForm.tsx
-#: src/notifications/NotificationForm.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -7950,12 +7781,12 @@ msgstr "Ukončení"
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
+#: src/navigation/FooterLinks.tsx
 msgid "Terms of Service"
 msgstr "Smluvní podmínky"
 
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
-#: src/marketplace/resources/details/ResourceAccessCard.tsx
 msgid "Text has been copied"
 msgstr "Text byl zkopírován"
 
@@ -7972,7 +7803,7 @@ msgstr "Datum je uvedeno včetně. Po jeho dosažení budou všechny zdroje proj
 msgid "The invoice has been marked as paid."
 msgstr "Faktura byla označena jako zaplacená."
 
-#: src/user/keys/KeyCreateDialog.tsx
+#: src/user/keys/KeyCreateForm.tsx
 msgid "The key has been created."
 msgstr "Klíč byl vytvořen."
 
@@ -8025,11 +7856,9 @@ msgid "There are no available users."
 msgstr "Neexistují žádní uživatelé."
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/navigation/sidebar/marketplace-popup/CategoriesPanel.tsx
 msgid "There are no categories."
 msgstr "Neexistují žádné kategorie."
 
-#: src/marketplace/category/list/CategoriesList.tsx
 #: src/marketplace/landing/CategoriesList.tsx
 #: src/user/dashboard/CategoriesList.tsx
 msgid "There are no categories in marketplace yet."
@@ -8074,7 +7903,6 @@ msgid "There are no offerings available."
 msgstr "Nejsou k dispozici žádné nabídky."
 
 #: src/marketplace/common/OfferingGrid.tsx
-#: src/marketplace/landing/OfferingsGroup.tsx
 msgid "There are no offerings in marketplace yet."
 msgstr "V obchodě zatím nejsou žádné nabídky."
 
@@ -8102,8 +7930,7 @@ msgstr "Nejsou k dispozici žádné další typy svazků."
 msgid "There are no projects matching filter."
 msgstr "Neexistují žádné projekty, které by odpovídaly filtru."
 
-#: src/navigation/header/project-selector/ProjectsList.tsx
-#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
+#: src/navigation/workspace/ProjectsPanel.tsx
 msgid "There are no projects yet for this organization."
 msgstr "Pro tuto organizaci zatím neexistují žádné projekty."
 
@@ -8238,7 +8065,7 @@ msgstr "Chcete-li nahlásit bezpečnostní incident, pošlete prosím e-mail na 
 msgid "To report an issue, please send an email to {supportEmail}."
 msgstr "Chcete-li nahlásit problém, pošlete prosím e-mail na adresu {supportEmail}."
 
-#: src/marketplace/resources/details/StatusPage.tsx
+#: src/booking/components/modal/DateAndTimeSelect.tsx
 msgid "Today"
 msgstr "Dnes"
 
@@ -8246,11 +8073,8 @@ msgstr "Dnes"
 #: src/invoices/growth/utils.ts
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
-#: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
-#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -8314,36 +8138,26 @@ msgstr "Sledováno pomocí časového pásma UTC, které se zobrazuje podle čas
 msgid "Try again"
 msgstr "Zkusit znovu"
 
-#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
-#: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
-#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/details/RobotAccountList.tsx
-#: src/marketplace/service-providers/ProviderOfferingsList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/paypal/PaymentsList.tsx
-#: src/project/ProjectEventsFilter.tsx
-#: src/project/ProjectOrderItemsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Type"
@@ -8363,7 +8177,7 @@ msgstr "URL"
 
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "UUID"
@@ -8432,7 +8246,6 @@ msgid "Unable to cancel invitation."
 msgstr "Nelze zrušit pozvánku."
 
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
-#: src/marketplace/orders/item/list/OrderItemCancelButton.tsx
 msgid "Unable to cancel order item."
 msgstr "Nelze zrušit položku objednávky."
 
@@ -8492,7 +8305,7 @@ msgstr "Nelze vytvořit disk."
 msgid "Unable to create horizontal pod autoscaler."
 msgstr "Nelze vytvořit horizontální autoškálovač podů."
 
-#: src/user/keys/KeyCreateDialog.tsx
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Unable to create key."
 msgstr "Nelze vytvořit klíč."
 
@@ -8681,14 +8494,11 @@ msgid "Unable to load booking offerings."
 msgstr "Nelze načíst nabídky rezervace."
 
 #: src/marketplace/offerings/actions/SelectCategoryTab.tsx
-#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
 msgid "Unable to load categories"
 msgstr "Nelze načíst kategorie"
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/category/list/CategoriesList.tsx
 #: src/marketplace/landing/CategoriesList.tsx
-#: src/marketplace/offerings/service-providers/ServiceProvider.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderOfferingsCategoriesFilter.tsx
 #: src/user/dashboard/CategoriesList.tsx
 #: src/user/dashboard/CategoryUserList.tsx
@@ -8696,8 +8506,6 @@ msgid "Unable to load categories."
 msgstr "Nelze načíst kategorie."
 
 #: src/marketplace/category/filters/AttributeFilterList.tsx
-#: src/marketplace/category/filters/FilterDropdownContent.tsx
-#: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
 #: src/marketplace/offerings/service-providers/FilterDropdownContent.tsx
 msgid "Unable to load category sections."
 msgstr "Nelze načíst sekce kategorií."
@@ -8734,16 +8542,15 @@ msgstr "Nelze načíst celkové hodnocení spokojenosti zákaznické podpory."
 
 #: src/customer/divisions/CustomersDivisionsChart.tsx
 #: src/customer/team/OfferingNamesManagedByUser.tsx
-#: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
-#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+#: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
+#: src/slurm/details/AllocationUsageTable.tsx
 msgid "Unable to load data"
 msgstr "Nelze načíst data"
 
-#: src/core/LoadingErred.tsx
 #: src/customer/list/TotalCostComponent.tsx
 #: src/customer/popover/CustomerPopover.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
@@ -8751,13 +8558,14 @@ msgstr "Nelze načíst data"
 #: src/invoices/details/BillingDetails.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueCreateForm.tsx
+#: src/issues/create/IssueRegistration.tsx
 #: src/issues/list/IssuesShortList.tsx
+#: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
-#: src/project/ProjectDashboardChart.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
 #: src/rancher/template/CatalogTemplateContainer.tsx
@@ -8844,7 +8652,7 @@ msgstr "Nelze načíst organizace"
 
 #: src/TemplateComponent.tsx
 #: src/UserAgreementComponent.tsx
-#: src/issues/FeaturesList.tsx
+#: src/issues/workspace/FeaturesList.tsx
 msgid "Unable to load page"
 msgstr "Nelze načíst stránku"
 
@@ -8857,7 +8665,6 @@ msgid "Unable to load plan details."
 msgstr "Nelze načíst podrobnosti plánu."
 
 #: src/project/ProjectExpandableRowContainer.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Unable to load project resources."
 msgstr "Nelze načíst zdroje projektu."
 
@@ -9235,7 +9042,6 @@ msgstr "Jedinečné ID zdroje v pluginu pro správu"
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
-#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 msgid "Unit"
 msgstr "Jednotka"
 
@@ -9290,7 +9096,6 @@ msgstr "Zrušit publikování jako Google Kalendář"
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
-#: src/notifications/NotificationUpdateButton.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -9420,9 +9225,12 @@ msgid "Uptime"
 msgstr "Doba provozu"
 
 #: src/dashboard/chart.ts
+#: src/marketplace/resources/ResourceTabs.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/openstack/openstack-tenant/tabs.ts
 #: src/slurm/details/utils.ts
+#: src/slurm/tabs.ts
 msgid "Usage"
 msgstr "Využití"
 
@@ -9438,7 +9246,8 @@ msgstr "Přehled využití"
 msgid "Usage report has been submitted."
 msgstr "Hlášení o využití bylo odesláno."
 
-#: src/marketplace/routes.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/marketplace/resources/usage/SupportUsageContainer.tsx
 msgid "Usage reports"
 msgstr "Hlášení o využití"
 
@@ -9466,9 +9275,7 @@ msgstr "Používáno v období {period}:"
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
-#: src/issues/feedback/SupportFeedbackListFilter.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
-#: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
@@ -9615,9 +9422,7 @@ msgstr "Uživatel {user_link} se úspěšně odhlásil pomocí SAML2."
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/UsernameGroup.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
-#: src/marketplace/resources/details/ResourceAccessCard.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
-#: src/marketplace/resources/details/RobotAccountList.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
@@ -9625,6 +9430,7 @@ msgstr "Uživatel {user_link} se úspěšně odhlásil pomocí SAML2."
 #: src/project/team/UserGroup.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/details/AllocationUsersTable.tsx
 #: src/slurm/marketplace.ts
@@ -9647,19 +9453,17 @@ msgstr "Předpona uživatelského jména"
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr "Uživatelská jména mohou obsahovat písmena (a-z), číslice (0-9), pomlčky (-), podtržítka (_) a tečky (.)."
 
-#: src/customer/routes.ts
-#: src/issues/routes.ts
-#: src/marketplace/offerings/details/OfferingUsersTable.tsx
-#: src/marketplace/resources/details/RobotAccountExpandable.tsx
-#: src/marketplace/routes.ts
-#: src/project/routes.ts
+#: src/customer/team/CustomerTeam.tsx
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/project/team/ProjectTeam.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/slurm/tabs.ts
+#: src/user/support/UserListView.tsx
 msgid "Users"
 msgstr "Uživatelé"
 
 #: src/invoices/details/CustomerDetails.tsx
-#: src/invoices/list/MonthOverview.tsx
 msgid "VAT"
 msgstr "DPH"
 
@@ -9716,15 +9520,20 @@ msgid "VM snapshot schedule has been created."
 msgstr "Byl vytvořen plán snímků virtuálního počítače."
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup-schedule/breadcrumbs.ts
+#: src/openstack/openstack-instance/tabs.ts
 msgid "VM snapshot schedules"
 msgstr "Plány snímků virtuálního počítače"
 
 #: src/openstack/openstack-backup-schedule/tabs.ts
 #: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-backup/breadcrumbs.ts
+#: src/openstack/openstack-instance/tabs.ts
 msgid "VM snapshots"
 msgstr "Snímky virtuálního počítače"
 
-#: src/openstack/analytics/routes.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/openstack/analytics/VmTypeOverviewContainer.tsx
 msgid "VM type overview"
 msgstr "Přehled typů virtuálních počítačů"
 
@@ -9801,7 +9610,6 @@ msgstr "Ověřit e-mail"
 msgid "Verifying email change"
 msgstr "Ověření změny e-mailu"
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/navigation/AppFooter.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
@@ -9874,10 +9682,7 @@ msgstr "Typ svazku"
 msgid "Volume type storage limit is exceeded"
 msgstr "Limit úložiště typu svazku je překročen"
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
-#: src/openstack/openstack-tenant/tabs.ts
 msgid "Volumes"
 msgstr "Svazky"
 
@@ -9893,7 +9698,9 @@ msgstr "Webhook"
 msgid "Website URL"
 msgstr "URL webové stránky"
 
-#: src/user/dashboard/UserWelcome.tsx
+#: src/customer/dashboard/CustomerDashboard.tsx
+#: src/project/ProjectDashboard.tsx
+#: src/user/dashboard/UserDashboard.tsx
 msgid "Welcome, {user}!"
 msgstr "Vítejte, {user}!"
 
@@ -9928,7 +9735,6 @@ msgid "Would you like to update your current email with the one from the invitat
 msgstr "Chcete aktualizovat svůj aktuální e-mail pomocí e-mailu z pozvánky?"
 
 #: src/marketplace/common/ReviewButton.tsx
-#: src/marketplace/landing/ReviewButton.tsx
 msgid "Write review"
 msgstr "Napsat recenzi"
 
@@ -9942,21 +9748,17 @@ msgstr "YAML byl aktualizován."
 
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/issues/FeaturesList.tsx
+#: src/issues/workspace/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/category/filters/FilteredBy.tsx
 #: src/marketplace/offerings/attributes/utils.tsx
-#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/project/ProjectRemoveDialog.tsx
-#: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
 #: src/user/hooks/HookRemoveDialog.tsx
 #: src/user/keys/KeyRemoveDialog.tsx
 msgid "Yes"
@@ -10179,11 +9981,11 @@ msgstr "etcd"
 msgid "events"
 msgstr "události"
 
-#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
+#: src/navigation/workspace/OrganizationListItem.tsx
 msgid "failed"
 msgstr "selhalo"
 
-#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
+#: src/navigation/workspace/OrganizationListItem.tsx
 msgid "fetching"
 msgstr "načítání"
 
@@ -10256,7 +10058,6 @@ msgstr "oznámení"
 msgid "of"
 msgstr "z"
 
-#: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offering"
 msgstr "nabídka"
@@ -10269,11 +10070,10 @@ msgstr "oprávnění nabídky"
 msgid "offering resources"
 msgstr "zdroje nabídky"
 
-#: src/marketplace/offerings/details/OfferingUsersTable.tsx
+#: src/marketplace/offerings/details/OfferingUsersTab.tsx
 msgid "offering users"
 msgstr "uživatelé nabídky"
 
-#: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offerings"
 msgstr "nabídky"
@@ -10292,11 +10092,11 @@ msgstr "položky objednávky"
 
 #: src/invitations/GroupInvitationMessage.tsx
 #: src/invitations/InvitationMessage.tsx
+#: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "organization"
 msgstr "organizace"
 
 #: src/resource/support/SharedProviderCustomers.tsx
-#: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 msgid "organizations"
 msgstr "organizace"
@@ -10322,6 +10122,7 @@ msgstr "platby"
 msgid "permission reviews"
 msgstr "kontroly oprávnění"
 
+#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "plans"
 msgstr "plány"
@@ -10336,11 +10137,9 @@ msgstr "porty"
 msgid "project"
 msgstr "projekt"
 
-#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
-#: src/user/affiliations/ProjectsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 msgid "projects"
 msgstr "projekty"
@@ -10394,7 +10193,6 @@ msgid "snapshot schedules"
 msgstr "plány snímků"
 
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
-#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 msgid "snapshots"
 msgstr "snímky"
@@ -10404,7 +10202,6 @@ msgid "storage"
 msgstr "úložiště"
 
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
-#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 msgid "subnets"
 msgstr "podsítě"
 
@@ -10432,20 +10229,17 @@ msgstr "členové týmu"
 msgid "till"
 msgstr "do"
 
-#: src/user/api-key/TokenLifetimeField.tsx
 #: src/user/support/utils.ts
 msgid "token will not timeout"
 msgstr "token nebude mít časový limit"
 
 #: src/customer/popover/CustomerUsersList.tsx
-#: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"
 msgstr "uživatelé"
 
 #: src/digitalocean/digitalocean-droplet-config.ts
-#: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/resource/utils.tsx
 msgid "vCPU"
@@ -10484,7 +10278,6 @@ msgid "volume snapshots"
 msgstr "snímky svazků"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
-#: src/openstack/openstack-volume/TenantVolumesList.tsx
 msgid "volumes"
 msgstr "svazky"
 
@@ -10537,7 +10330,7 @@ msgstr "Projekt {projectName} byl přesunut do organizace {organizationName}."
 msgid "{relative} ago"
 msgstr "před {relative}"
 
-#: src/issues/IssueSummary.tsx
+#: src/issues/IssueDetails.tsx
 msgid "{relative} ago, {date}"
 msgstr "před {relative}, {date}"
 
@@ -10622,6 +10415,7 @@ msgid "{resource_name} has been deleted."
 msgstr "{resource_name} byl odstraněn."
 
 #: src/invitations/RoleField.tsx
+#: src/project/team/RoleField.tsx
 msgid "{role} in {project}"
 msgstr "{role} v {project}"
 
@@ -10631,6 +10425,7 @@ msgid "{sender} has invited you to join {name} {type} in {role} role."
 msgstr "{sender} vás pozval, abyste se připojili k {name} {type} v roli {role}."
 
 #: src/quotas/QuotasTable.tsx
+#: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "{usage} of {limit}"
 msgstr "{usage} z {limit}"
 
@@ -10667,12 +10462,10 @@ msgid "{user} has requested termination of {resource_name} with active plan \"{p
 msgstr "{user} požádal o ukončení {resource_name} s aktivním plánem \"{plan_name}\"."
 
 #: src/customer/dashboard/api.ts
-#: src/project/utils.ts
 msgid "{value} at {date}"
 msgstr "{value} v {date}"
 
 #: src/customer/dashboard/api.ts
-#: src/project/utils.ts
 msgid "{value} at {date}, estimated"
 msgstr "{value} v {date}, odhad"
 
