@@ -60,32 +60,32 @@
         null
       );
       @include menu-link-hover-state(
-        $white,
+        $dark,
+        $dark,
         $primary,
-        $primary,
-        $white,
-        #172219
+        $dark,
+        if(isDarkMode(), #172219, #f1f3f6)
       );
       @include menu-link-here-state(
-        $white,
+        $dark,
+        $dark,
         $primary,
-        $primary,
-        $white,
-        #172219
+        $dark,
+        if(isDarkMode(), #172219, #f1f3f6)
       );
       @include menu-link-show-state(
-        $white,
+        $dark,
+        $dark,
         $primary,
-        $primary,
-        $white,
-        #172219
+        $dark,
+        if(isDarkMode(), #172219, #f1f3f6)
       );
       @include menu-link-active-state(
-        $white,
+        $dark,
+        $dark,
         $primary,
-        $primary,
-        $white,
-        #172219
+        $dark,
+        if(isDarkMode(), #172219, #f1f3f6)
       );
     }
   }

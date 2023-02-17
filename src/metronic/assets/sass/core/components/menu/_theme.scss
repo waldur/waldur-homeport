@@ -344,6 +344,88 @@
   }
 }
 
+// Light background states
+.menu-show-bg-light {
+  .menu-item {
+    @include menu-link-show-state(
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      if(isDarkMode(), $gray-100, $light)
+    );
+  }
+}
+
+.menu-here-bg-light {
+  .menu-item {
+    @include menu-link-here-state(
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      if(isDarkMode(), $gray-100, $light)
+    );
+  }
+}
+
+.menu-hover-bg-light {
+  .menu-item {
+    @include menu-link-hover-state(
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      if(isDarkMode(), $gray-100, $light)
+    );
+  }
+}
+
+.menu-active-bg-light {
+  .menu-item {
+    @include menu-link-active-state(
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      if(isDarkMode(), $gray-100, $light)
+    );
+  }
+}
+
+.menu-state-bg-light {
+  .menu-item {
+    @include menu-link-show-state(
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      if(isDarkMode(), $gray-100, $light)
+    );
+    @include menu-link-here-state(
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      if(isDarkMode(), $gray-100, $light)
+    );
+    @include menu-link-hover-state(
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      if(isDarkMode(), $gray-100, $light)
+    );
+    @include menu-link-active-state(
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      $gray-700,
+      if(isDarkMode(), $gray-100, $light)
+    );
+  }
+}
+
 // Primary title states
 .menu-hover-title-primary {
   .menu-item {
@@ -489,5 +571,45 @@
     @include menu-link-hover-state(null, null, null, $primary, null);
     @include menu-link-show-state(null, null, null, $primary, null);
     @include menu-link-active-state(null, null, null, $primary, null);
+  }
+}
+
+// Dark title states
+.menu-state-title-dark {
+  .menu-item {
+    @include menu-link-hover-state($dark, null, null, null, null);
+    @include menu-link-here-state($dark, null, null, null, null);
+    @include menu-link-show-state($dark, null, null, null, null);
+    @include menu-link-active-state($dark, null, null, null, null);
+  }
+}
+
+// Dark icon states
+.menu-state-icon-dark {
+  .menu-item {
+    //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
+    @include menu-link-hover-state(null, $dark, null, null, null);
+    @include menu-link-show-state(null, $dark, null, null, null);
+    @include menu-link-active-state(null, $dark, null, null, null);
+  }
+}
+
+// Dark bullet states
+.menu-state-bullet-dark {
+  .menu-item {
+    //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
+    @include menu-link-hover-state(null, null, $dark, null, null);
+    @include menu-link-show-state(null, null, $dark, null, null);
+    @include menu-link-active-state(null, null, $dark, null, null);
+  }
+}
+
+// Dark arrow states
+.menu-state-arrow-dark {
+  .menu-item {
+    //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
+    @include menu-link-hover-state(null, null, null, $dark, null);
+    @include menu-link-show-state(null, null, null, $dark, null);
+    @include menu-link-active-state(null, null, null, $dark, null);
   }
 }
