@@ -35,7 +35,7 @@ export const ProjectEventsTimeline = ({ project }) => {
                 />
               }
             </p>
-          ) : result.data.length === 0 ? (
+          ) : !Array.isArray(result.data) || result.data.length === 0 ? (
             <p className="text-center">
               {translate('There are no project events.')}
             </p>

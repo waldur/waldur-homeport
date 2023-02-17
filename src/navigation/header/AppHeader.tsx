@@ -1,5 +1,5 @@
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { FunctionComponent, useEffect, useState } from 'react';
+import { useRouter } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import 'world-flags-sprite/stylesheets/flags16.css';
@@ -47,20 +47,9 @@ const AsideMobileToggle: FunctionComponent = () => (
 export const AppHeader: FunctionComponent = () => {
   const pageTitle = useSelector(getTitle);
   const router = useRouter();
-  const { state, params } = useCurrentStateAndParams();
-  const getBreadcrumbs = () =>
-    router.globals.$current.path
-      .filter((part) => part.data?.breadcrumb)
-      .map((part) => part.data.breadcrumb())
-      .flat();
-  const [breadcrumbs, setBreadcrumbs] = useState<string[]>([]);
-  useEffect(() => {
-    setBreadcrumbs(getBreadcrumbs());
-  }, [state, params]);
   const routerTitle = router.globals.$current.path
     .find((part) => part.data?.title)
     ?.data.title();
-
   const user = useSelector(getUser);
 
   return (
@@ -84,15 +73,10 @@ export const AppHeader: FunctionComponent = () => {
         </div>
         <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
           <div className="d-flex align-items-stretch flex-shrink-1">
-            <div className="page-title flex-wrap me-3 mb-5 mt-3 mb-lg-0">
-              <h1 className="text-dark fw-bolder fs-3 my-1">
+            <div className="page-title d-flex align-items-center me-3">
+              <h1 className="text-dark fw-boldest fs-2 my-1">
                 {pageTitle || routerTitle}
               </h1>
-              <div>
-                <small className="text-muted text-uppercase">
-                  {breadcrumbs.join(' > ')}
-                </small>
-              </div>
             </div>
             <div className="d-flex align-items-center ms-1 ms-lg-3">
               <ProjectSelectorDropdown />

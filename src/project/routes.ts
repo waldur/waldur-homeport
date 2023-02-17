@@ -5,8 +5,6 @@ import { StateDeclaration } from '@waldur/core/types';
 import { translate } from '@waldur/i18n';
 import { canAccessInvitations } from '@waldur/invitations/selectors';
 import { hasSupport } from '@waldur/issues/hooks';
-import store from '@waldur/store/store';
-import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
 import { loadProject } from './resolve';
@@ -50,11 +48,7 @@ export const states: StateDeclaration[] = [
     data: {
       auth: true,
       workspace: PROJECT_WORKSPACE,
-      title: () =>
-        [
-          getCustomer(store.getState())?.name,
-          getProject(store.getState())?.name,
-        ].join(' > '),
+      title: () => translate('Project'),
     },
     resolve: [
       {

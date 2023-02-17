@@ -75,7 +75,9 @@ describe('Workspace selector', () => {
       .focus()
       .type('Bob', { force: true })
       // Get filtered organization rows
-      .get('.organization-listing .list-group-item span[class="highlight-color"]')
+      .get(
+        '.organization-listing .list-group-item span[class="highlight-color"]',
+      )
 
       // Only matching organizations should be present
       .should(($p) => expect(getTextList($p)).to.deep.eq(['Bob']));
@@ -142,15 +144,13 @@ describe('Workspace selector', () => {
   });
 
   it('Assure that Manage organizations button leads to correct page', () => {
-    cy.get('.context-selector')
-      .contains('a', 'Manage organizations')
-      .click();
+    cy.get('.context-selector').contains('a', 'Manage organizations').click();
 
     // Wait until page loaded
     cy.get('.header h1')
       .should('contain', 'Alice Lebowski')
-      .get('.header small')
-      .should('contain', 'Affiliations > Organizations');
+      .url()
+      .should('include', '/profile/organizations');
   });
 
   it('Assure that Manage projects button leads to correct page', () => {
@@ -159,7 +159,7 @@ describe('Workspace selector', () => {
     // Wait until page loaded
     cy.get('.header h1')
       .should('contain', 'Alice Lebowski')
-      .get('.header small')
-      .should('contain', 'Affiliations > Projects');
+      .url()
+      .should('include', '/profile/projects');
   });
 });
