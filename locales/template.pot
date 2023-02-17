@@ -5251,6 +5251,10 @@ msgstr ""
 msgid "No pending confirmations"
 msgstr ""
 
+#: src/user/affiliations/OrganizationExpandableRow.tsx
+msgid "No permissions data."
+msgstr ""
+
 #: src/navigation/workspace/EmptyProjectPlaceholder.tsx
 #: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 msgid "No project"
@@ -8179,6 +8183,7 @@ msgstr ""
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/PermissionDetails.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
@@ -10889,6 +10894,7 @@ msgid "Unable to load plan details."
 msgstr ""
 
 #: src/project/ProjectExpandableRowContainer.tsx
+#: src/user/affiliations/OrganizationExpandableRow.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Unable to load project resources."
 msgstr ""
@@ -12113,14 +12119,6 @@ msgstr ""
 
 #: src/rancher/cluster/ViewYAMLButton.tsx
 msgid "View YAML"
-msgstr ""
-
-#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
-msgid "View all organizations"
-msgstr ""
-
-#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
-msgid "View all projects"
 msgstr ""
 
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx

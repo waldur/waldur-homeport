@@ -6,7 +6,7 @@ import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { CustomerLink } from '@waldur/customer/CustomerLink';
 import { translate } from '@waldur/i18n';
 import { PROJECTS_LIST } from '@waldur/project/constants';
-import { ProjectAffiliationLink } from '@waldur/project/ProjectAffiliationLink';
+import { ProjectLink } from '@waldur/project/ProjectLink';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
@@ -24,7 +24,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   const columns = filterColumns([
     {
       title: translate('Name'),
-      render: ProjectAffiliationLink,
+      render: ProjectLink,
     },
     {
       title: translate('Organization'),
@@ -41,19 +41,17 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Resources'),
-      render: ({ row }) => <>{row.project_resources_count || 0}</>,
+      render: ({ row }) => <>{row.resources_count || 0}</>,
     },
     {
       title: translate('End date'),
       render: ({ row }) =>
-        row.project_end_date
-          ? formatDate(row.project_end_date)
-          : DASH_ESCAPE_CODE,
+        row.end_date ? formatDate(row.end_date) : DASH_ESCAPE_CODE,
     },
     {
       title: translate('Created'),
       render: ({ row }) =>
-        row.created ? formatDate(row.project_created) : DASH_ESCAPE_CODE,
+        row.created ? formatDate(row.created) : DASH_ESCAPE_CODE,
     },
   ]);
 
@@ -67,7 +65,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       enableExport={true}
       rowClass={({ row }) =>
-        props.currentProject?.uuid === row.project_uuid ? 'bg-gray-200' : ''
+        props.currentProject?.uuid === row.uuid ? 'bg-gray-200' : ''
       }
       hoverableRow={ProjectHoverableRow}
       expandableRow={ProjectExpandableRow}
@@ -81,8 +79,8 @@ export const getUserProjectsList = (
 ) => {
   const TableOptions = {
     table: PROJECTS_LIST,
-    fetchData: createFetcher('users/projects'),
-    queryField: 'project_name',
+    fetchData: createFetcher('projects'),
+    queryField: 'name',
     mapPropsToFilter: (props) => {
       const filter: Record<string, string[]> = {};
       if (props.stateFilter && props.stateFilter.organization) {
@@ -91,9 +89,9 @@ export const getUserProjectsList = (
       return filter;
     },
     exportRow: (row) => [
-      row.project_name,
+      row.name,
       row.customer_name,
-      row.project_resources_count || 0,
+      row.resources_count || 0,
       row.expiration_time
         ? formatDateTime(row.expiration_time)
         : DASH_ESCAPE_CODE,

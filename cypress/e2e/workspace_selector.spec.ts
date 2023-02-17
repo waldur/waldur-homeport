@@ -162,28 +162,4 @@ describe('Workspace selector', () => {
       .get('.header small')
       .should('contain', 'Affiliations > Projects');
   });
-
-  it('Assure that View all organizations button leads to correct page', () => {
-    cy.get('.context-selector')
-      .contains('a', 'View all organizations')
-      .click();
-
-    // Wait until page loaded
-    cy.get('.header h1')
-      .should('contain', 'Administration')
-      .get('.header small')
-      .should('contain', 'Organizations');
-  });
-
-  it('Assure that View all projects button leads to correct page', () => {
-    cy.get('.context-selector')
-      .contains('a', 'View all projects')
-      .click();
-
-    // Wait until page loaded
-    cy.get('.header h1')
-      .should('contain', 'Administration')
-      .get('.header small')
-      .should('contain', 'Projects');
-  });
 });
