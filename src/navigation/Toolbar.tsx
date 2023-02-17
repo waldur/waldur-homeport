@@ -53,7 +53,7 @@ export const Toolbar: FunctionComponent<OwnProps> = ({ actions }) => {
         >
           <div ref={tabsWrapperRef} className="header-menu align-items-stretch">
             <div
-              className="menu menu-column menu-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch"
+              className="menu menu-column menu-row menu-rounded menu-gray-700 menu-here-bg-light menu-state-title-dark menu-state-icon-dark menu-state-bullet-dark menu-state-arrow-dark fw-bold my-5 my-lg-0 align-items-stretch"
               data-kt-menu="true"
             >
               <TabsList />
