@@ -32,7 +32,7 @@ export const useUpdateSecurityGroupsForm = (resource: OpenStackInstance) => {
   const submitRequest = async (formData: UpdateSecurityGroupsFormData) => {
     try {
       await updateSecurityGroups(resource.uuid, {
-        security_groups: formData.security_groups.map((item) => ({
+        security_groups: (formData.security_groups || []).map((item) => ({
           url: item.value,
         })),
       });
