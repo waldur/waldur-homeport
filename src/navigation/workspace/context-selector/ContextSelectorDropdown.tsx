@@ -202,41 +202,23 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
               />
             </div>
             <div className="d-flex">
-              <Col className="d-flex flex-column" xs={5}>
+              <Col className="d-flex flex-column justify-content-center" xs={5}>
                 <Link
-                  className="btn btn-sm btn-link text-white mx-4 mt-4 text-decoration-underline"
+                  className="btn btn-sm btn-link text-white text-decoration-underline my-3"
                   state="profile-organizations"
                   onClick={() => MenuComponent.hideDropdowns(undefined)}
                 >
                   {translate('Manage organizations')}
                 </Link>
-                {canSeeAll && (
-                  <Link
-                    className="btn btn-sm btn-link text-white mx-4 mt-4"
-                    state="admin.customers"
-                    onClick={() => MenuComponent.hideDropdowns(undefined)}
-                  >
-                    {translate('View all organizations')}
-                  </Link>
-                )}
               </Col>
-              <Col className="d-flex flex-column" xs={7}>
+              <Col className="d-flex flex-column justify-content-center" xs={7}>
                 <Link
-                  className="btn btn-sm btn-link text-white mx-4 mt-4 text-decoration-underline"
+                  className="btn btn-sm btn-link text-white text-decoration-underline my-3"
                   state="profile-projects"
                   onClick={() => MenuComponent.hideDropdowns(undefined)}
                 >
                   {translate('Manage projects')}
                 </Link>
-                {canSeeAll && (
-                  <Link
-                    className="btn btn-sm btn-link text-white mx-4 mt-4"
-                    state="admin.projects"
-                    onClick={() => MenuComponent.hideDropdowns(undefined)}
-                  >
-                    {translate('View all projects')}
-                  </Link>
-                )}
               </Col>
             </div>
           </>

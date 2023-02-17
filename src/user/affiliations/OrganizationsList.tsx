@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { CustomerLink } from '@waldur/customer/CustomerLink';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -24,11 +24,17 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   const columns = filterColumns([
     {
       title: translate('Organization'),
-      render: CustomerLink,
+      render: ({ row }) => (
+        <Link
+          state="organization.dashboard"
+          params={{ uuid: row.uuid }}
+          label={row.name}
+        />
+      ),
     },
     {
       title: translate('Abbreviation'),
-      render: ({ row }) => <>{row.customer_abbreviation || DASH_ESCAPE_CODE}</>,
+      render: ({ row }) => <>{row.abbreviation || DASH_ESCAPE_CODE}</>,
     },
     {
       title: translate('Role'),
@@ -36,23 +42,19 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Email'),
-      render: ({ row }) => <>{row.customer_email || DASH_ESCAPE_CODE}</>,
+      render: ({ row }) => <>{row.email || DASH_ESCAPE_CODE}</>,
     },
     {
       title: translate('Division'),
-      render: ({ row }) => (
-        <>{row.customer_division_name || DASH_ESCAPE_CODE}</>
-      ),
+      render: ({ row }) => <>{row.division_name || DASH_ESCAPE_CODE}</>,
     },
     {
       title: translate('Projects'),
-      render: ({ row }) => <>{row.customer_projects_count || 0}</>,
+      render: ({ row }) => <>{row.projects_count || 0}</>,
     },
     {
       title: translate('Created'),
-      render: ({ row }) => (
-        <>{renderFieldOrDash(formatDate(row.customer_created))}</>
-      ),
+      render: ({ row }) => <>{renderFieldOrDash(formatDate(row.created))}</>,
     },
   ]);
 
@@ -66,9 +68,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       enableExport={true}
       rowClass={({ row }) =>
-        props.currentOrganization?.uuid === row.customer_uuid
-          ? 'bg-gray-200'
-          : ''
+        props.currentOrganization?.uuid === row.uuid ? 'bg-gray-200' : ''
       }
       hoverableRow={OrganizationHoverableRow}
       expandableRow={OrganizationExpandableRow}
@@ -82,19 +82,19 @@ export const getUserOrganizationsList = (
 ) => {
   const TableOptions = {
     table: 'customerList',
-    fetchData: createFetcher('customer-permissions'),
-    queryField: 'customer_name',
+    fetchData: createFetcher('customers'),
+    queryField: 'name',
     mapPropsToFilter: (props) => {
       const filter: Record<string, string[]> = {};
       // select required fields
       filter.field = [
-        'customer_uuid',
-        'customer_name',
-        'customer_abbreviation',
+        'uuid',
+        'name',
+        'abbreviation',
         'role',
-        'customer_email',
-        'customer_division_name',
-        'customer_projects_count',
+        'email',
+        'division_name',
+        'projects_count',
         'created',
         'created_by_full_name',
         'created_by_username',
@@ -103,11 +103,11 @@ export const getUserOrganizationsList = (
       return filter;
     },
     exportRow: (row) => [
-      row.customer_name,
-      row.customer_email || DASH_ESCAPE_CODE,
-      row.customer_division_name || DASH_ESCAPE_CODE,
+      row.name,
+      row.email || DASH_ESCAPE_CODE,
+      row.division_name || DASH_ESCAPE_CODE,
       row.projects_count || 0,
-      formatDateTime(row.customer_created),
+      formatDateTime(row.created),
     ],
     exportFields: ['Name', 'Email', 'Division', 'Projects', 'Created'],
     ...extraOptions,
