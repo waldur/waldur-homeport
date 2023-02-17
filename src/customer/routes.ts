@@ -5,12 +5,7 @@ import { StateDeclaration } from '@waldur/core/types';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
-import store from '@waldur/store/store';
-import {
-  getCustomer,
-  isStaff,
-  isStaffOrSupport,
-} from '@waldur/workspace/selectors';
+import { isStaff, isStaffOrSupport } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { fetchCustomer } from './workspace/CustomerWorkspace';
@@ -90,7 +85,7 @@ export const states: StateDeclaration[] = [
     data: {
       auth: true,
       workspace: ORGANIZATION_WORKSPACE,
-      title: () => getCustomer(store.getState()).name,
+      title: () => translate('Organization'),
     },
     parent: 'layout',
     component: UIView,
