@@ -8622,7 +8622,6 @@ msgstr ""
 
 #: src/invitations/actions/ProjectGroup.tsx
 #: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
-#: src/navigation/workspace/context-selector/ContextSelectorToggle.tsx
 msgid "Select project"
 msgstr ""
 
