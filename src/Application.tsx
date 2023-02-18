@@ -4,6 +4,8 @@ import { FunctionComponent } from 'react';
 import { Provider } from 'react-redux';
 import { useAsync } from 'react-use';
 
+import { ENV } from '@waldur/configs/default';
+import { formatMediaURL } from '@waldur/core/utils';
 import { ModalRoot } from '@waldur/modal/ModalRoot';
 import store from '@waldur/store/store';
 
@@ -17,7 +19,11 @@ export const Application: FunctionComponent = () => {
   const { loading, error, value } = useAsync(loadConfig);
   if (!value) {
     return <LoadingScreen loading={loading} error={error} />;
+  } else {
+    const link = document.querySelector('link[rel="shortcut icon"]');
+    link.setAttribute('href', formatMediaURL(ENV.plugins.WALDUR_CORE.FAVICON));
   }
+
   return (
     <Provider store={store}>
       <NotificationContainer />
