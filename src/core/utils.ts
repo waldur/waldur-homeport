@@ -172,3 +172,10 @@ export const orderByFilter = (sorting: {
 
 export const formatRole = (role) =>
   ENV.roles[role] ? translate(ENV.roles[role]) : role;
+
+export const formatMediaURL = (media) => {
+  if (!media) {
+    return;
+  }
+  return ENV.apiEndpoint + 'media/files/' + media;
+};

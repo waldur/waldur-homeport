@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
+import { formatMediaURL } from '@waldur/core/utils';
 import {
   getWorkspace,
   getCustomer,
@@ -57,7 +58,7 @@ export const BrandName: FunctionComponent = () => {
       <a onClick={onLogoClick}>
         {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
           <img
-            src={ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO}
+            src={formatMediaURL(ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO)}
             style={{ maxHeight: 100, maxWidth: 175 }}
           />
         ) : (

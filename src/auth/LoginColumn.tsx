@@ -1,3 +1,5 @@
+import { ENV } from '@waldur/configs/default';
+import { formatMediaURL } from '@waldur/core/utils';
 import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
 import { FooterLinks } from '@waldur/navigation/FooterLinks';
 
@@ -17,7 +19,11 @@ export const LoginColumn = () => {
       <div className="LoginBody">
         <div className="LoginGridItemContainer">
           <div className="LoginLogo m-b-sm">
-            <img src="images/login_logo.png" />
+            <img
+              alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
+              src={formatMediaURL(ENV.plugins.WALDUR_CORE.LOGIN_LOGO)}
+              style={{ maxWidth: '100%' }}
+            />
           </div>
           <AuthHeader />
           {features.SigninForm && (
