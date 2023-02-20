@@ -26,7 +26,7 @@ export function getResourceState(resource: Resource): StateIndicatorProps {
   }
   if (state === 'ok') {
     if (runtimeShutdownStates.indexOf(runtimeState) !== -1) {
-      context.variant = 'plain';
+      context.variant = 'dark';
     }
     context.label = runtimeState || resource.state;
     if (
