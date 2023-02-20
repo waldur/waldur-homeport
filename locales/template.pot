@@ -3393,7 +3393,9 @@ msgstr ""
 msgid "Floating IP count"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Floating IPs"
 msgstr ""
@@ -3719,6 +3721,7 @@ msgstr ""
 
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
+#: src/openstack/openstack-instance/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/TenantPortsList.tsx
@@ -4524,6 +4527,7 @@ msgstr ""
 msgid "Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes."
 msgstr ""
 
+#: src/openstack/openstack-instance/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-tenant/TenantPortsList.tsx
 #: src/vmware/PortsList.tsx
@@ -4533,6 +4537,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 msgid "MAC address (optional)"
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-instance/FloatingIPSection.tsx
+msgid "MAC address: {internal_ip_mac_address}, subnet name: {subnet_name}"
 msgstr ""
 
 #: src/marketplace/resources/details/openstack-tenant/PortsSection.tsx
@@ -9496,6 +9504,7 @@ msgstr ""
 msgid "Subnet"
 msgstr ""
 
+#: src/openstack/openstack-instance/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "Subnet CIDR"
 msgstr ""
@@ -9504,6 +9513,7 @@ msgstr ""
 msgid "Subnet has been created."
 msgstr ""
 
+#: src/openstack/openstack-instance/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "Subnet name"
 msgstr ""
@@ -12596,6 +12606,7 @@ msgid "flavors"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
+#: src/openstack/openstack-instance/FloatingIpsList.tsx
 msgid "floating IPs"
 msgstr ""
 

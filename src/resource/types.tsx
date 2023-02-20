@@ -76,6 +76,7 @@ export interface InternalIP extends Partial<SubnetReference> {
 
 export interface VirtualMachine extends Resource {
   internal_ips_set?: InternalIP[];
+  floating_ips?: any[];
   cores: number;
   disk: number;
   ram: number;

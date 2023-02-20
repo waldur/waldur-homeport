@@ -20,6 +20,10 @@ const InternalIpsList = lazyComponent(
   () => import('./InternalIpsList'),
   'InternalIpsList',
 );
+const FloatingIpsList = lazyComponent(
+  () => import('./FloatingIpsList'),
+  'FloatingIpsList',
+);
 const OpenStackSecurityGroupsList = lazyComponent(
   () => import('./OpenStackSecurityGroupsList'),
   'OpenStackSecurityGroupsList',
@@ -53,6 +57,11 @@ NestedResourceTabsConfiguration.register(INSTANCE_TYPE, () => [
         key: 'internal_ips',
         title: translate('Internal IPs'),
         component: InternalIpsList,
+      },
+      {
+        key: 'floating_ips',
+        title: translate('Floating IPs'),
+        component: FloatingIpsList,
       },
       {
         key: 'security_groups',

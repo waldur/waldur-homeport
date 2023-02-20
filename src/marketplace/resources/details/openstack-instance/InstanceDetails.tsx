@@ -8,6 +8,7 @@ import { OpenStackInstance } from '@waldur/openstack/openstack-instance/types';
 
 import { ResourceTabs } from '../ResourceTabs';
 
+import { FloatingIPSection } from './FloatingIPSection';
 import { InternalIPSection } from './InternalIPSection';
 import { SecurityGroupsSection } from './SecurityGroupsSection';
 import { SnapshotSchedulesSection } from './SnapshotSchedulesSection';
@@ -20,6 +21,7 @@ interface InstanceCounters {
   backup_schedules: number;
   security_groups: number;
   internal_ips: number;
+  floating_ips: number;
 }
 
 export const InstanceDetails = ({ resource }) => {
@@ -46,6 +48,11 @@ export const InstanceDetails = ({ resource }) => {
                   title: translate('Internal IPs'),
                   count: value.counters.internal_ips,
                   component: InternalIPSection,
+                },
+                {
+                  title: translate('Floating IPs'),
+                  count: value.counters.floating_ips,
+                  component: FloatingIPSection,
                 },
               ],
             },
