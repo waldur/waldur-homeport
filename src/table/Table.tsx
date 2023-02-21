@@ -1,6 +1,6 @@
 import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 
 import { ErrorMessage } from '@waldur/ErrorMessage';
@@ -57,9 +57,10 @@ export interface TableProps<RowType = any> extends TableState {
   multiSelectActions?: React.ComponentType<{ rows: any[] }>;
   selectRow?(row: any): void;
   selectAllRows?(rows: any[]): void;
+  filter?: Record<string, any>;
 }
 
-class Table<RowType = any> extends React.Component<TableProps<RowType>> {
+class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
   static defaultProps = {
     rows: [],
     columns: [],
@@ -316,4 +317,11 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
   }
 }
 
-export default Table;
+export default function Table<RowType = any>(props: TableProps<RowType>) {
+  const { fetch, filter } = props;
+  useEffect(() => {
+    fetch();
+  }, [fetch, filter]);
+
+  return <TableClass {...props} />;
+}

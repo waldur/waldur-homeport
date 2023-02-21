@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
@@ -20,11 +20,6 @@ import { RoleField } from './RoleField';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns } = props;
-
-  const { fetch, filter } = props;
-  useEffect(() => {
-    fetch();
-  }, [fetch, filter]);
 
   const columns = filterColumns([
     {
