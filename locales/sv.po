@@ -23,7 +23,7 @@ msgstr "<Link>Användarvillkoren</Link> har godkänts på <Date></Date>"
 msgid "API URL"
 msgstr "API URL"
 
-#: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "API secret code:"
 msgstr "API-hemlig kod:"
 
@@ -35,6 +35,7 @@ msgstr "API-token livstid"
 msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
 msgstr "En minimal förväntad konfiguration av arbetaren är 4 vCPU och 4 GB RAM."
 
+#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "A one-time fee applied on activation."
 msgstr "En engångsavgift tillämpas vid aktivering."
@@ -52,6 +53,7 @@ msgstr "En profil har skapats."
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
+#: src/user/affiliations/OrganizationsList.tsx
 msgid "Abbreviation"
 msgstr "Förkortning"
 
@@ -75,6 +77,7 @@ msgstr "Accepterad"
 
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/resource/ResourceAccessButton.tsx
 msgid "Access"
 msgstr "Tillgång"
 
@@ -95,6 +98,7 @@ msgstr "Tillgänglig för alla kunder."
 msgid "Account removal"
 msgstr "Kontoborttagning"
 
+#: src/invoices/routes.ts
 #: src/invoices/utils.ts
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
@@ -104,6 +108,8 @@ msgid "Accounting"
 msgstr "Redovisning"
 
 #: src/customer/list/AccountingPeriodFilter.tsx
+#: src/customer/list/CustomerListFilter.tsx
+#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 msgid "Accounting period"
 msgstr "Redovisningsperiod"
 
@@ -112,6 +118,7 @@ msgid "Accounting plans"
 msgstr "Redovisningsplaner"
 
 #: src/invoices/details/BillingDetails.tsx
+#: src/invoices/routes.ts
 msgid "Accounting record"
 msgstr "Redovisning"
 
@@ -119,6 +126,7 @@ msgstr "Redovisning"
 msgid "Accounting records"
 msgstr "Redovisningsposter"
 
+#: src/customer/list/CustomerListFilter.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 msgid "Accounting running"
 msgstr "Redovisning körs"
@@ -134,87 +142,49 @@ msgid "Accounting type"
 msgstr "Typ av redovisning"
 
 #: src/resource/actions/AsyncActionButton.tsx
-#: src/resource/actions/AsyncActionItem.tsx
 msgid "Action has been applied."
 msgstr "Åtgärd har tillämpats."
 
 #: src/azure/sql/DatabasesList.tsx
 #: src/booking/BookingsList.tsx
-#: src/customer/list/SupportCustomerList.tsx
-#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payments/PaymentsList.tsx
-#: src/customer/team/CustomerPermissionsReviewList.tsx
-#: src/customer/team/CustomerUsersList.tsx
-#: src/customer/team/OfferingPermissionsList.tsx
-#: src/invitations/GroupInvitationsList.tsx
-#: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/invoices/details/InvoiceItemActions.tsx
-#: src/invoices/list/BillingRecordsList.tsx
-#: src/invoices/list/InvoicesList.tsx
-#: src/marketplace-flows/CustomerCreateRequestsList.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
-#: src/marketplace-flows/ResourceCreateRequestsList.tsx
-#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
-#: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
-#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourceActions.tsx
-#: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
-#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
-#: src/openstack/openstack-network/TenantNetworksList.tsx
-#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 #: src/openstack/openstack-server-groups/ServerGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
-#: src/openstack/openstack-tenant/TenantPortsList.tsx
-#: src/openstack/openstack-tenant/TenantRoutersList.tsx
-#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/InvoiceActions.tsx
 #: src/paypal/PayPalInvoicesList.tsx
-#: src/project/ProjectsList.tsx
 #: src/project/ProjectsListActions.tsx
-#: src/project/SupportProjectsList.tsx
-#: src/project/team/InvitationsList.tsx
-#: src/project/team/ProjectUsersList.tsx
-#: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
-#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
-#: src/rancher/cluster/users/ClusterUsersList.tsx
-#: src/rancher/node/ClusterNodesList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
-#: src/resource/support/SharedProviderResources.tsx
-#: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
-#: src/user/support/UserList.tsx
-#: src/vmware/DisksList.tsx
-#: src/vmware/PortsList.tsx
 msgid "Actions"
 msgstr "Åtgärder"
 
@@ -307,7 +277,6 @@ msgid "Add item"
 msgstr "Lägg till objekt"
 
 #: src/user/keys/KeyCreateButton.tsx
-#: src/user/keys/KeyCreateForm.tsx
 msgid "Add key"
 msgstr "Lägg till nyckel"
 
@@ -335,11 +304,11 @@ msgstr "Lägg till nytt projekt"
 msgid "Add notification"
 msgstr "Lägg till meddelande"
 
-#: src/marketplace/offerings/actions/OfferingCreateButton.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 msgid "Add offering"
 msgstr "Lägg till erbjudande"
 
+#: src/customer/list/OrganizationCreateButton.tsx
 #: src/user/dashboard/CustomerCreateButton.tsx
 msgid "Add organization"
 msgstr "Lägg till organisation"
@@ -353,8 +322,8 @@ msgstr "Lägg till par"
 msgid "Add payment"
 msgstr "Lägg till betalning"
 
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
-#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateButton.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 msgid "Add payment profile"
 msgstr "Lägg till betalningsprofil"
 
@@ -362,7 +331,6 @@ msgstr "Lägg till betalningsprofil"
 msgid "Add plan"
 msgstr "Lägg till plan"
 
-#: src/customer/dashboard/CreateProjectAction.ts
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectCreateForm.tsx
 msgid "Add project"
@@ -374,7 +342,9 @@ msgstr "Lägg till projektmedlem"
 
 #: src/dashboard/marketplace.ts
 #: src/marketplace-flows/FlowCreateButton.tsx
+#: src/marketplace/resources/actions/AddResourceButton.tsx
 #: src/marketplace/resources/list/CreateResourceButton.tsx
+#: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
 msgid "Add resource"
 msgstr "Lägg till resurs"
 
@@ -425,6 +395,7 @@ msgstr "Ytterligare data som kommer att läggas till instans vid etablering."
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr "Ytterligare utrymme att använda för lagringskvoten som ska användas av ögonblicksbilder."
 
+#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Additionally service provider can charge for usage of the following components"
 msgstr "Dessutom kan tjänsteleverantören debitera för användning av följande komponenter"
@@ -448,13 +419,15 @@ msgstr "Admin-lösenord"
 msgid "Admin username"
 msgstr "Admin användarnamn"
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ResourceGroup.tsx
 msgid "Affected resource"
 msgstr "Berörd resurs"
 
 #: src/customer/popover/CustomerUsersList.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/user/routes.ts
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Affiliations"
@@ -472,7 +445,7 @@ msgstr "Håller med ToS"
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
 msgid "Agreement number"
@@ -583,7 +556,6 @@ msgstr "Programmet har skapats."
 
 #: src/rancher/cluster/tabs.ts
 #: src/rancher/template/CatalogTemplateContainer.tsx
-#: src/rancher/template/breadcrumbs.ts
 msgid "Application templates"
 msgstr "Programmallar"
 
@@ -625,6 +597,7 @@ msgstr "Arkiv"
 
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 msgid "Archived"
 msgstr "Arkiverade"
 
@@ -656,7 +629,7 @@ msgstr "Är du säker på att du vill ta bort bilden?"
 msgid "Are you sure you want to delete the payment?"
 msgstr "Är du säker på att du vill ta bort betalningen?"
 
-#: src/customer/payment-profiles/PaymentProfileActions.tsx
+#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 msgid "Are you sure you want to delete the payment profile?"
 msgstr "Är du säker på att du vill ta bort betalningsprofilen?"
 
@@ -694,7 +667,7 @@ msgstr "Är du säker på att du vill avsluta resursen {resourceName}?"
 msgid "Article code"
 msgstr "Artikel kod"
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/AssigneeGroup.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Assigned to"
@@ -723,6 +696,7 @@ msgstr "Bifoga volym"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
 msgid "Attached to"
 msgstr "Bifogat till"
 
@@ -736,8 +710,10 @@ msgstr "Fästa"
 msgid "Attachments"
 msgstr "Bilagor"
 
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "Attributes"
 msgstr "Attribut"
 
@@ -749,20 +725,20 @@ msgstr "Attribut är ogiltiga."
 msgid "Attributes filter"
 msgstr "Filtrera attribut"
 
+#: src/project/ProjectEventsTimeline.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
+#: src/support/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr "Granskningslogg"
 
-#: src/customer/workspace/CustomerEventsList.tsx
-#: src/customer/workspace/utils.ts
-#: src/issues/workspace/IssueNavigationService.ts
-#: src/project/utils.ts
-#: src/support/SupportEventsContainer.tsx
-#: src/user/constants.ts
-#: src/user/dashboard/UserDashboard.tsx
-#: src/user/dashboard/UserEventsWrapper.tsx
+#: src/customer/dashboard/CustomerActions.tsx
+#: src/customer/routes.ts
+#: src/project/ProjectActions.tsx
+#: src/project/routes.ts
+#: src/user/UserActions.tsx
+#: src/user/routes.ts
 msgid "Audit logs"
 msgstr "Granskningsloggar"
 
@@ -771,6 +747,7 @@ msgid "Authenticate using Mobile ID"
 msgstr "Autentisera med mobil-ID"
 
 #: src/auth/events.ts
+#: src/user/api-key/AuthenticationEvents.tsx
 msgid "Authentication events"
 msgstr "Autentisering händelser"
 
@@ -782,7 +759,7 @@ msgstr "Autentiseringstoken"
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr "Autentisering med mobil-ID har avbrutits av användaren eller tidsgräns. Detaljer:"
 
-#: src/issues/notifications/BroadcastList.tsx
+#: src/notifications/NotificationList.tsx
 msgid "Author"
 msgstr "Författare"
 
@@ -857,7 +834,7 @@ msgstr "Azure-leverantör"
 #: src/error/InvalidQuotaPage.tsx
 #: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
-#: src/navigation/header/SiteHeader.tsx
+#: src/notifications/NotificationFooter.tsx
 msgid "Back"
 msgstr "Tillbaka"
 
@@ -886,8 +863,8 @@ msgid "Back to shopping"
 msgstr "Tillbaka till shopping"
 
 #: src/marketplace/offerings/create/ManagementStep.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/SetBackendIdDialog.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
@@ -896,6 +873,7 @@ msgstr "Tillbaka till shopping"
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/SupportDetailsTable.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Backend ID"
 msgstr "Bakdels-ID"
 
@@ -932,7 +910,9 @@ msgstr "Dokumentation för batchbearbetning"
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr "Bli kund hos vår portal. Etablera IT-tjänster från Marketplace och hantera ditt team från ett och samma ställe."
 
+#: src/invoices/routes.ts
 #: src/invoices/utils.ts
+#: src/project/ProjectDashboard.tsx
 msgid "Billing"
 msgstr "Fakturering"
 
@@ -940,6 +920,7 @@ msgstr "Fakturering"
 msgid "Billing details"
 msgstr "Faktureringsuppgifter"
 
+#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 msgid "Billing enabled"
 msgstr "Fakturering aktiverad"
@@ -976,11 +957,11 @@ msgid "Booking management"
 msgstr "Bokningshantering"
 
 #: src/booking/BookingsList.tsx
-#: src/marketplace/offerings/details/OfferingContainer.tsx
 msgid "Bookings"
 msgstr "Bokningar"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
 msgid "Bootable"
 msgstr "Startbar"
 
@@ -995,6 +976,7 @@ msgstr "Gren"
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Browse"
 msgstr "Bläddra"
 
@@ -1006,18 +988,19 @@ msgstr "Bläddra i bild"
 msgid "Business hours"
 msgstr "Öppettider"
 
-#: src/user/support/TokenLifetimeField.tsx
+#: src/user/api-key/TokenLifetimeField.tsx
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr "Genom att ställa in token livstid på obestämd tid tillåter du alla som har token att personifiera dina handlingar tills token har ändrats."
 
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 msgid "CIDR"
 msgstr "CIDR"
 
+#: src/marketplace/resources/details/MonitoringCharts.tsx
 #: src/rancher/cluster/hpas/utils.ts
 #: src/rancher/node/RancherNodeSummary.tsx
-#: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "CPU"
 msgstr "CPU"
 
@@ -1033,7 +1016,7 @@ msgstr "CPU-användning"
 msgid "CSV"
 msgstr "CSV"
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/CallerGroup.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Caller"
@@ -1047,9 +1030,10 @@ msgstr "Uppringare"
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace-flows/FlowCancelAction.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
+#: src/marketplace/orders/item/list/OrderItemCancelButton.tsx
 #: src/modal/CloseDialogButton.tsx
+#: src/navigation/header/SearchToggle.tsx
 #: src/project/ProjectCreateForm.tsx
-#: src/user/keys/KeyCreateForm.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
 msgstr "Avbryt"
@@ -1086,7 +1070,7 @@ msgstr "Avbruten"
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr "Det går inte att skapa flytande IP om klientens externa nätverk inte är definierat."
 
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/marketplace/routes.ts
 msgid "Capacity"
 msgstr "Kapacitet"
 
@@ -1112,7 +1096,8 @@ msgstr "Katalogen har tagits bort."
 msgid "Catalogues"
 msgstr "Kataloger"
 
-#: src/marketplace/category/ShopCategories.tsx
+#: src/marketplace/category/utils.ts
+#: src/marketplace/offerings/service-providers/ServiceProviderPageBar.tsx
 msgid "Categories"
 msgstr "Kategorier"
 
@@ -1124,12 +1109,18 @@ msgstr "Kategorier"
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
-#: src/marketplace/resources/list/CategoryFilter.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/project/ProjectResourcesFilter.tsx
 #: src/project/ProjectResourcesList.tsx
 msgid "Category"
 msgstr "Kategori"
@@ -1207,7 +1198,6 @@ msgstr "Inställning av checklista"
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace-checklist/ComplianceChecklists.tsx
 #: src/user/UserPopover.tsx
-#: src/user/dashboard/UserDashboard.tsx
 msgid "Checklists"
 msgstr "Checklistor"
 
@@ -1227,19 +1217,18 @@ msgid "Client ID"
 msgstr "Klient-ID"
 
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/orders/OrganizationAutocomplete.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/list/RelatedCustomerFilter.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Client organization"
 msgstr "Kundorganisation"
 
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
@@ -1271,6 +1260,7 @@ msgstr "Cloud init-mall"
 msgid "Cloud vCPU"
 msgstr "Cloud vCPU"
 
+#: src/rancher/cluster/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Cluster"
@@ -1289,7 +1279,6 @@ msgid "Cluster name"
 msgstr "Klusternamn"
 
 #: src/rancher/cluster/users/ClusterUsersList.tsx
-#: src/rancher/cluster/users/UserDetailsTable.tsx
 msgid "Cluster roles"
 msgstr "Klusterroller"
 
@@ -1346,11 +1335,16 @@ msgstr "Komponent #{index}"
 
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
+#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Component name"
 msgstr "Komponentnamn"
 
+#: src/marketplace/offerings/details/PublicOfferingComponents.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Components"
 msgstr "Komponenter"
@@ -1381,7 +1375,7 @@ msgstr "Konfigurera"
 msgid "Confirm deletion?"
 msgstr "Bekräfta radering?"
 
-#: src/customer/payment-profiles/PaymentProfileActions.tsx
+#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
@@ -1442,7 +1436,7 @@ msgstr "Kontakt telefon"
 msgid "Continue"
 msgstr "Fortsätt"
 
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 msgid "Contract sum"
 msgstr "Kontraktssumma"
@@ -1454,12 +1448,15 @@ msgstr "Kontrollplan"
 #: src/core/CopyToClipboard.tsx
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
+#: src/table/ExportDropdown.tsx
+#: src/table/TableButtons.tsx
 #: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr "Kopiera till Urklipp"
 
 #: src/customer/list/CustomerList.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
+#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/offerings/expandable/utils.ts
 #: src/marketplace/orders/OrdersList.tsx
 msgid "Cost"
@@ -1470,9 +1467,7 @@ msgid "Could not create organization"
 msgstr "Det gick inte att skapa organisation"
 
 #: src/customer/create/CountryGroup.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/SelectCountryField.tsx
 msgid "Country"
 msgstr "Land"
 
@@ -1481,11 +1476,11 @@ msgstr "Land"
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
-#: src/issues/notifications/NotificationCreateButton.tsx
-#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
+#: src/notifications/NotificationCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -1548,6 +1543,7 @@ msgstr "Skapa meddelande"
 
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/customer/create/WizardForm.tsx
+#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
 msgid "Create organization"
 msgstr "Skapa organisation"
 
@@ -1562,7 +1558,6 @@ msgstr "Skapa projekt"
 
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/create/IssueQuickCreate.tsx
-#: src/issues/create/IssueRegistration.tsx
 msgid "Create request"
 msgstr "Skapa en begäran"
 
@@ -1593,7 +1588,7 @@ msgstr "Skapa ditt första projekt"
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
@@ -1602,10 +1597,11 @@ msgstr "Skapa ditt första projekt"
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
@@ -1617,6 +1613,8 @@ msgstr "Skapa ditt första projekt"
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/support/SupportDetailsTable.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Created"
@@ -1631,10 +1629,10 @@ msgstr "Skapade en ny betalning för {customer_link}."
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
-#: src/issues/notifications/BroadcastList.tsx
 #: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/details/OfferingUsersTab.tsx
+#: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -1642,8 +1640,13 @@ msgstr "Skapade en ny betalning för {customer_link}."
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
+#: src/notifications/NotificationList.tsx
+#: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -1658,6 +1661,7 @@ msgstr "Skapad på"
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "Created by"
 msgstr "Skapad av"
 
@@ -1690,6 +1694,7 @@ msgid "Creating snapshot schedule"
 msgstr "Skapa snapshot-schema"
 
 #: src/marketplace/offerings/actions/tabs.ts
+#: src/user/routes.ts
 msgid "Credentials"
 msgstr "Autentiseringsuppgifter"
 
@@ -1743,12 +1748,10 @@ msgstr "DNS-namnservrar"
 msgid "Daily available booking time range"
 msgstr "Dagligt tillgängligt tidsintervall för bokning"
 
-#: src/customer/dashboard/CustomerDashboard.tsx
-#: src/customer/workspace/utils.ts
-#: src/issues/workspace/IssueNavigationService.ts
-#: src/project/ProjectDashboard.tsx
-#: src/project/utils.ts
-#: src/user/constants.ts
+#: src/customer/routes.ts
+#: src/marketplace/resources/details/fetchData.tsx
+#: src/project/routes.ts
+#: src/user/routes.ts
 msgid "Dashboard"
 msgstr "Instrumentpanel"
 
@@ -1788,6 +1791,7 @@ msgstr "Datalagring"
 #: src/customer/payments/PaymentsList.tsx
 #: src/dashboard/chart.ts
 #: src/invoices/list/MarkAsPaidDialog.tsx
+#: src/issues/feedback/SupportFeedbackListFilter.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/paypal/PaymentsList.tsx
 #: src/support/SupportEventsListFilter.tsx
@@ -1847,9 +1851,10 @@ msgid "Default value"
 msgstr "Standardvärde"
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/customer/payment-profiles/PaymentProfileActions.tsx
+#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
+#: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace/offerings/images/ImagesActions.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -1881,7 +1886,6 @@ msgid "Deploy Longhorn block storage after cluster is deployed"
 msgstr "Distribuera Longhorn-blocklagring efter att klustret har distribuerats"
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/issues/IssueDetails.tsx
 #: src/issues/create/DescriptionGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
@@ -1898,15 +1902,20 @@ msgstr "Distribuera Longhorn-blocklagring efter att klustret har distribuerats"
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/details/PageDescription.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
 #: src/marketplace/resources/usage/utils.ts
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -1914,6 +1923,7 @@ msgstr "Distribuera Longhorn-blocklagring efter att klustret har distribuerats"
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
@@ -1980,8 +1990,8 @@ msgstr "Lossa"
 msgid "Detaching"
 msgstr "Demontering"
 
-#: src/customer/list/OrganizationDetailsButton.tsx
 #: src/customer/team/UserDetailsButton.tsx
+#: src/invoices/list/MonthOverview.tsx
 #: src/issues/create/CallerGroup.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -1989,18 +1999,16 @@ msgstr "Demontering"
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
-#: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/team/UserDetailsButton.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
-#: src/rancher/cluster/users/UserDetailsButton.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
-#: src/slurm/DetailsAction.tsx
-#: src/user/UserDropdownMenu.tsx
+#: src/slurm/tabs.ts
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
+#: src/vmware/tabs.ts
 msgid "Details"
 msgstr "Detaljer"
 
@@ -2026,6 +2034,7 @@ msgid "Disable gateway IP advertising via DHCP"
 msgstr "Inaktivera gateway IP-annonsering via DHCP"
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/user/hooks/HooksList.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Disabled"
 msgstr "Inaktiverad"
@@ -2042,7 +2051,6 @@ msgstr "Disktillägget har schemalagts."
 msgid "Disk has been created."
 msgstr "Disken har skapats."
 
-#: src/vmware/breadcrumbs.ts
 #: src/vmware/tabs.ts
 msgid "Disks"
 msgstr "Diskar"
@@ -2051,12 +2059,15 @@ msgstr "Diskar"
 msgid "Display name"
 msgstr "Visningsnamn"
 
+#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectOrganizationDivisionField.tsx
+#: src/customer/list/SupportCustomerFilter.tsx
+#: src/user/affiliations/OrganizationsList.tsx
 msgid "Division"
 msgstr "Divisionen"
 
-#: src/customer/list/DivisionTypeFilter.tsx
+#: src/customer/list/SupportCustomerFilter.tsx
 msgid "Division type"
 msgstr "Typ av division"
 
@@ -2089,6 +2100,7 @@ msgstr "Dokument"
 msgid "Domain"
 msgstr "Domän"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/marketplace.ts
 msgid "Domain name"
@@ -2104,7 +2116,6 @@ msgstr "Domännamn. Om inte definierad kommer standarddomänen att användas."
 msgid "Done"
 msgstr "Klart"
 
-#: src/invoices/details/DownloadInvoiceButton.tsx
 #: src/paypal/InvoiceActions.tsx
 msgid "Download invoice"
 msgstr "Ladda ner faktura"
@@ -2117,6 +2128,7 @@ msgstr "Ladda ner PDF-fil för beställning"
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
 msgstr "Utkast"
@@ -2157,10 +2169,11 @@ msgid "Each usage report must be connected with a billing plan to assure correct
 msgstr "Varje användningsrapport måste vara kopplad till en faktureringsplan för att säkerställa korrekt beräkning av redovisningsuppgifter."
 
 #: src/customer/list/OrganizationEditButton.tsx
-#: src/customer/payment-profiles/PaymentProfileActions.tsx
+#: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/UpdateOfferingPermissionExpirationTimeButton.tsx
 #: src/customer/team/UserEditButton.tsx
+#: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditorButton.tsx
@@ -2180,6 +2193,7 @@ msgstr "Varje användningsrapport måste vara kopplad till en faktureringsplan f
 #: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
+#: src/user/support/IdentityProviderIndicator.tsx
 #: src/vmware/actions/EditAction.tsx
 msgid "Edit"
 msgstr "Redigera"
@@ -2227,9 +2241,11 @@ msgstr "Utgång"
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/EmailGroup.tsx
+#: src/notifications/RecipientsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
+#: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
 #: src/user/support/UserDetailsTable.tsx
@@ -2250,7 +2266,7 @@ msgstr "E-postmeddelandet har uppdaterats."
 msgid "Email verification has been sent. Please check your inbox."
 msgstr "E-postverifiering har skickats. Vänligen kolla din inkorg."
 
-#: src/customer/payment-profiles/PaymentProfileActions.tsx
+#: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
 msgid "Enable"
 msgstr "Aktivera"
 
@@ -2266,13 +2282,14 @@ msgstr "Aktivera som standard"
 msgid "Enable limit"
 msgstr "Aktivera gräns"
 
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 msgid "Enable profile after creation"
 msgstr "Aktivera profil efter att ha skapats"
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/hooks/HookForm.tsx
+#: src/user/hooks/HooksList.tsx
 msgid "Enabled"
 msgstr "Aktiverad"
 
@@ -2294,14 +2311,17 @@ msgstr "En tom komponent har påträffats"
 msgid "End"
 msgstr "Slut"
 
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectUpdateForm.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
 msgid "End date"
 msgstr "Slutdatum"
 
@@ -2356,9 +2376,15 @@ msgid "Esimated price per month"
 msgstr "Esimerat pris per månad"
 
 #: src/customer/list/CustomerList.tsx
+#: src/invoices/list/EstimatedCost.tsx
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/project/utils.ts
 msgid "Estimated cost"
 msgstr "Beräknad kostnad"
 
@@ -2381,6 +2407,7 @@ msgstr "Ethernet-typ"
 
 #: src/issues/feedback/SupportFeedback.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
+#: src/issues/feedback/SupportFeedbackListFilter.tsx
 msgid "Evaluation"
 msgstr "Utvärdering"
 
@@ -2398,6 +2425,7 @@ msgstr "Händelsetyp"
 msgid "Event types"
 msgstr "Händelsetyper"
 
+#: src/marketplace/resources/details/fetchData.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
 msgstr "Händelser"
@@ -2519,6 +2547,7 @@ msgid "Extending"
 msgstr "Utvidga"
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "External IP"
 msgstr "Extern IP"
@@ -2538,19 +2567,18 @@ msgstr "Extern nätverks-ID"
 msgid "Failed to operate with backend."
 msgstr "Det gick inte att arbeta med backend."
 
-#: src/issues/workspace/FeaturesList.tsx
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/issues/routes.ts
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Features"
 msgstr "Funktioner"
 
+#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Fee applied each time this plan is activated."
 msgstr "Avgift tillämpas varje gång denna plan aktiveras."
 
 #: src/issues/feedback/SupportFeedback.tsx
-#: src/issues/feedback/SupportFeedbackListContainer.tsx
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/issues/routes.ts
 msgid "Feedback"
 msgstr "Återkoppling"
 
@@ -2581,7 +2609,10 @@ msgstr "Filer"
 #: src/issues/create/CallerGroup.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/issues/create/ProjectGroup.tsx
+#: src/marketplace/category/filters/FilterDropdownHeader.tsx
 #: src/marketplace/category/filters/MobileFilterActions.tsx
+#: src/support/EventFilterButton.tsx
+#: src/table/Table.tsx
 msgid "Filter"
 msgstr "Filtrera"
 
@@ -2593,7 +2624,7 @@ msgstr "Filtrera organisationer"
 msgid "Filter projects"
 msgstr "Filtrera projekt"
 
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/issues/routes.ts
 msgid "Financial"
 msgstr "Finansiell"
 
@@ -2616,7 +2647,7 @@ msgid "Fixed-price contract"
 msgstr "Avtal om fast pris"
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
-#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
 msgid "Fixed price"
 msgstr "Fast pris"
 
@@ -2649,7 +2680,10 @@ msgstr "Smaknamn"
 msgid "Flavor name: {flavor_name}"
 msgstr "Smak namn: {flavor_name}"
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
+#: src/openstack/openstack-tenant/tabs.ts
 msgid "Flavors"
 msgstr "Smaker"
 
@@ -2677,7 +2711,9 @@ msgstr "Flytande IP"
 msgid "Floating IP count"
 msgstr "Flytande IP-antal"
 
-#: src/openstack/openstack-floating-ips/breadcrumbs.ts
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Floating IPs"
 msgstr "Flytande IP-adresser"
@@ -2686,7 +2722,6 @@ msgstr "Flytande IP-adresser"
 msgid "Floating IPs update has been scheduled."
 msgstr "Flytande IPS-uppdatering har schemalagts."
 
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/FlowMapViewContainer.tsx
 msgid "Flowmap"
 msgstr "Flowmap"
@@ -2708,11 +2743,11 @@ msgid "Force destroy {name} instance"
 msgstr "Tvinga förstöra {name} instans"
 
 #: src/freeipa/FreeIPAAccount.tsx
-#: src/user/constants.ts
+#: src/user/routes.ts
 msgid "FreeIPA account"
 msgstr "FreeIPA-konto"
 
-#: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
+#: src/slurm/details/AllocationAccessDetails.tsx
 msgid "FreeIPA account needs to be set up."
 msgstr "FreeIPA-konto måste ställas in."
 
@@ -2731,9 +2766,7 @@ msgstr "Fullständig beskrivning"
 
 #: src/invitations/actions/UserDetailsGroup.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
-#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/user/support/UserDetailsTable.tsx
-#: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Full name"
@@ -2791,6 +2824,7 @@ msgstr "Gå till marknadsplatsen"
 msgid "Go to my profile"
 msgstr "Gå till min profil"
 
+#: src/auth/PermissionLayout.tsx
 #: src/invitations/GroupInvitationErrorMessage.tsx
 #: src/invitations/InvitationErrorMessage.tsx
 msgid "Go to profile"
@@ -2820,8 +2854,7 @@ msgstr "Jag förstår!"
 msgid "Grant permission"
 msgstr "Bevilja tillstånd"
 
-#: src/invoices/growth/GrowthContainer.tsx
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/invoices/routes.ts
 msgid "Growth"
 msgstr "Tillväxt"
 
@@ -2847,7 +2880,6 @@ msgstr "Gäst-OS"
 msgid "HPA"
 msgstr "HPA"
 
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/HeatMapContainer.tsx
 msgid "Heatmap"
 msgstr "Värmekarta"
@@ -2935,9 +2967,11 @@ msgstr "ID-kod"
 
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
+#: src/openstack/openstack-instance/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/TenantPortsList.tsx
+#: src/user/api-key/AuthenticationEvents.tsx
 msgid "IP address"
 msgstr "IP-adress"
 
@@ -3003,7 +3037,9 @@ msgstr "Bildnamn"
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/offerings/details/PageImages.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+#: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 msgid "Images"
 msgstr "Bilder"
@@ -3017,7 +3053,6 @@ msgstr "Importera"
 msgid "Import YAML"
 msgstr "Importera YAML"
 
-#: src/marketplace/offerings/actions/OfferingImportButton.tsx
 #: src/marketplace/offerings/actions/OfferingImportDialog.tsx
 msgid "Import offering"
 msgstr "Importera erbjudande"
@@ -3103,6 +3138,7 @@ msgstr "Instansen radering har schemalagts."
 msgid "Instance does not have any floating IPs yet."
 msgstr "Instansen har inte några flytande IP-adresser ännu."
 
+#: src/openstack/openstack-instance/OpenStackSecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 msgid "Instance does not have any security groups yet."
 msgstr "Instansen har ännu inga säkerhetsgrupper."
@@ -3144,11 +3180,14 @@ msgid "Internal"
 msgstr "Internt"
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Internal IP"
 msgstr "Intern IP"
 
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 msgid "Internal IPs"
 msgstr "Interna IPs"
 
@@ -3238,8 +3277,9 @@ msgstr "Länk till inbjudan"
 msgid "Invitation rejection"
 msgstr "Avslag på inbjudan"
 
-#: src/customer/team/CustomerTeam.tsx
-#: src/project/team/ProjectTeam.tsx
+#: src/customer/routes.ts
+#: src/invitations/InvitationsList.tsx
+#: src/project/routes.ts
 msgid "Invitations"
 msgstr "Inbjudningar"
 
@@ -3255,6 +3295,7 @@ msgstr "Bjud in användare"
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
 #: src/invoices/details/BillingDetails.tsx
+#: src/invoices/routes.ts
 msgid "Invoice"
 msgstr "Faktura"
 
@@ -3322,7 +3363,7 @@ msgstr "Fakturalista"
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
-#: src/rancher/cluster/users/UserDetailsTable.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Is active"
 msgstr "Är aktiv"
@@ -3355,12 +3396,12 @@ msgstr "Länk till problemet"
 msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr "Problem {issue_link} har skapats av {caller_link}."
 
-#: src/customer/workspace/CustomerIssuesList.tsx
-#: src/customer/workspace/utils.ts
-#: src/issues/SupportIssues.tsx
-#: src/marketplace/resources/ResourceTabs.tsx
-#: src/project/ProjectIssuesList.tsx
-#: src/project/utils.ts
+#: src/customer/dashboard/CustomerActions.tsx
+#: src/customer/routes.ts
+#: src/issues/routes.ts
+#: src/marketplace/resources/details/fetchData.tsx
+#: src/project/ProjectActions.tsx
+#: src/project/routes.ts
 #: src/resource/tabs/constants.ts
 msgid "Issues"
 msgstr "Frågor"
@@ -3403,6 +3444,7 @@ msgstr "Befattning"
 msgid "Job title"
 msgstr "Jobbtitel"
 
+#: src/marketplace/resources/details/openstack-instance/SnapshotsSection.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/resource/utils.tsx
 msgid "Keep forever"
@@ -3426,7 +3468,7 @@ msgstr "Behålles till"
 msgid "Key"
 msgstr "Nyckel"
 
-#: src/user/keys/KeyCreateForm.tsx
+#: src/user/keys/KeyCreateDialog.tsx
 msgid "Key name"
 msgstr "Nyckelnamn"
 
@@ -3487,7 +3529,7 @@ msgstr "Lämna tomt om du vill att administratörens användarnamn ska genereras
 msgid "Legal address"
 msgstr "Juridisk adress"
 
-#: src/user/support/TokenLifetimeField.tsx
+#: src/user/api-key/TokenLifetimeField.tsx
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Livstids uppdateras och återställs när formuläret sparas."
 
@@ -3507,6 +3549,8 @@ msgid "Limit period"
 msgstr "Begränsningsperiod"
 
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Limits"
@@ -3516,7 +3560,7 @@ msgstr "Gränser"
 msgid "Limits are invalid."
 msgstr "Gränserna är ogiltiga."
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Link"
 msgstr "Länk"
@@ -3531,6 +3575,9 @@ msgid "Link invoice"
 msgstr "Länk faktura"
 
 #: src/customer/list/TotalCostComponent.tsx
+#: src/marketplace/resources/details/InfiniteList.tsx
+#: src/marketplace/resources/details/ResourcesList.tsx
+#: src/project/ProjectEventsTimeline.tsx
 msgid "Loading"
 msgstr "Laddar"
 
@@ -3560,8 +3607,7 @@ msgid "Location of {offeringName} offering"
 msgstr "Plats för {offeringName} erbjudande"
 
 #: src/navigation/header/LogoutLink.tsx
-#: src/navigation/header/SiteHeader.tsx
-#: src/user/UserDropdownMenu.tsx
+#: src/navigation/header/UserDropdown.tsx
 msgid "Log out"
 msgstr "Logga ut"
 
@@ -3573,6 +3619,7 @@ msgstr "Logga in användare"
 #: src/auth/SigninButton.tsx
 #: src/auth/SigninForm.tsx
 #: src/auth/saml2/AuthSaml2Dialog.tsx
+#: src/navigation/sidebar/UnifiedSidebar.tsx
 msgid "Login"
 msgstr "Logga in"
 
@@ -3581,7 +3628,7 @@ msgstr "Logga in"
 msgid "Login failed"
 msgstr "Inloggning misslyckades"
 
-#: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
+#: src/slurm/details/AllocationAccessDetails.tsx
 msgid "Login with"
 msgstr "Logga in med"
 
@@ -3605,6 +3652,7 @@ msgstr "Utloggning misslyckades"
 msgid "Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes."
 msgstr "Longhorn är ett lätt, pålitligt och kraftfullt distribuerat blocklagringssystem för Kubernetes."
 
+#: src/openstack/openstack-instance/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-tenant/TenantPortsList.tsx
 #: src/vmware/PortsList.tsx
@@ -3621,18 +3669,18 @@ msgstr "MAC-adress (valfritt)"
 msgid "MTU"
 msgstr "MTU"
 
-#: src/customer/workspace/utils.ts
-#: src/user/UserManage.tsx
-#: src/user/constants.ts
+#: src/customer/dashboard/CustomerActions.tsx
+#: src/project/ProjectActions.tsx
+#: src/user/UserActions.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Manage"
 msgstr "Hantera"
 
-#: src/user/support/UserEditContainer.tsx
+#: src/user/support/AvatarField.tsx
 msgid "Manage avatar at {link}"
 msgstr "Hantera avatar på {link}"
 
-#: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
+#: src/openstack/openstack-instance/InstanceNetworkButton.tsx
 msgid "Manage networks"
 msgstr "Hantera nätverk"
 
@@ -3640,7 +3688,7 @@ msgstr "Hantera nätverk"
 msgid "Manage organization"
 msgstr "Hantera organisation"
 
-#: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
+#: src/openstack/openstack-instance/InstanceNetworkButton.tsx
 msgid "Manage security groups"
 msgstr "Hantera säkerhetsgrupper"
 
@@ -3652,6 +3700,7 @@ msgstr "Förvaltade projekt"
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/PageManagement.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+#: src/navigation/sidebar/ManagementMenu.tsx
 msgid "Management"
 msgstr "Förvaltning"
 
@@ -3663,10 +3712,8 @@ msgstr "Markera som betald"
 msgid "Mark invoice as paid"
 msgstr "Markera fakturan som betald"
 
-#: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
-#: src/marketplace/sidebar.ts
-#: src/user/dashboard/UserDashboard.tsx
+#: src/marketplace/routes.ts
 msgid "Marketplace"
 msgstr "Marknadsplats"
 
@@ -3754,10 +3801,12 @@ msgstr "Uppmätt enhet"
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/i18n/constants.ts
+#: src/navigation/workspace/context-selector/OrganizationSummary.tsx
 #: src/project/team/ProjectUsersList.tsx
 msgid "Member"
 msgstr "Medlem"
 
+#: src/marketplace/resources/details/MonitoringCharts.tsx
 #: src/rancher/cluster/hpas/utils.ts
 msgid "Memory"
 msgstr "Minne"
@@ -3772,8 +3821,8 @@ msgstr "Minnesstorlek i GiB"
 
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
-#: src/issues/notifications/NotificationCreateDialog.tsx
-#: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/notifications/NotificationForm.tsx
+#: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr "Meddelande"
 
@@ -3860,22 +3909,16 @@ msgstr "Måste vara minst {min}"
 msgid "Must be at most {max}"
 msgstr "Måste vara som mest {max}"
 
-#: src/marketplace/offerings/MyOfferingsListContainer.tsx
-#: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/offerings/images/ImagesContainer.tsx
-#: src/marketplace/sidebar.ts
+#: src/marketplace/routes.ts
 msgid "My offerings"
 msgstr "Mina erbjudanden"
 
-#: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsContainer.tsx
-#: src/marketplace/sidebar.ts
+#: src/marketplace/routes.ts
 msgid "My orders"
 msgstr "Mina beställningar"
 
 #: src/marketplace/resources/list/CustomerResourcesContainer.tsx
-#: src/marketplace/sidebar.ts
 msgid "My resources"
 msgstr "Mina resurser"
 
@@ -3899,7 +3942,7 @@ msgstr "N/A"
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
@@ -3919,19 +3962,27 @@ msgstr "N/A"
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/offerings/details/OfferingUsersTab.tsx
-#: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/offerings/details/OfferingUsersTable.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
+#: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemLimits.tsx
+#: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -3943,11 +3994,17 @@ msgstr "N/A"
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
+#: src/openstack/openstack-tenant/TenantFlavorsList.tsx
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
+#: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
@@ -3971,6 +4028,7 @@ msgstr "N/A"
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/OfferingConfigurationForm.tsx
 #: src/support/SupportDetailsTable.tsx
+#: src/user/affiliations/ProjectsList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -4054,6 +4112,7 @@ msgid "Negative"
 msgstr "Negativ"
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
 #: src/vmware/actions/CreatePortDialog.tsx
@@ -4064,7 +4123,6 @@ msgstr "Nätverk"
 msgid "Network MTU has been updated."
 msgstr "Nätverk MTU har uppdaterats."
 
-#: src/vmware/breadcrumbs.ts
 #: src/vmware/tabs.ts
 msgid "Network adapters"
 msgstr "Nätverkskort"
@@ -4073,11 +4131,10 @@ msgstr "Nätverkskort"
 msgid "Network name"
 msgstr "Nätverksnamn"
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
-#: src/openstack/openstack-network/breadcrumbs.ts
-#: src/openstack/openstack-subnet/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
@@ -4095,8 +4152,10 @@ msgstr "Ny smak"
 msgid "New limit"
 msgstr "Ny gräns"
 
+#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "New plan"
 msgstr "Ny plan"
 
@@ -4108,7 +4167,6 @@ msgstr "Ny storlek"
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
-#: src/table/TablePagination.tsx
 msgid "Next"
 msgstr "Nästa"
 
@@ -4122,16 +4180,20 @@ msgstr "Nästa utlösare på"
 
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/category/filters/FilteredBy.tsx
 #: src/marketplace/offerings/attributes/utils.tsx
+#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "No"
 msgstr "Nej"
 
@@ -4147,6 +4209,7 @@ msgstr "Ingen åtkomstinformation."
 msgid "No categories"
 msgstr "Inga kategorier"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "No countries"
 msgstr "Inga länder"
@@ -4167,7 +4230,6 @@ msgstr "Inga poster att visa här"
 msgid "No invoice data available."
 msgstr "Inga fakturadata tillgängliga."
 
-#: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 msgid "No offerings"
 msgstr "Inga erbjudanden"
@@ -4222,7 +4284,6 @@ msgstr "Nodplan"
 
 #: src/rancher/cluster/create/TenantGroup.tsx
 #: src/rancher/cluster/tabs.ts
-#: src/rancher/node/breadcrumbs.ts
 msgid "Nodes"
 msgstr "Noder"
 
@@ -4275,8 +4336,8 @@ msgstr "Meddelandet har uppdaterats."
 msgid "Notification method"
 msgstr "Anmälningsmetod"
 
-#: src/user/constants.ts
 #: src/user/hooks/HooksList.tsx
+#: src/user/routes.ts
 msgid "Notifications"
 msgstr "Aviseringar"
 
@@ -4341,16 +4402,25 @@ msgstr "Objektet hittades inte."
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/actions/tabs.ts
-#: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/list/OfferingFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesFilter.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/support/SupportDetailsTable.tsx
 #: src/user/UserOfferingList.tsx
@@ -4416,11 +4486,12 @@ msgid "Offering logo"
 msgstr "Erbjudande logotyp"
 
 #: src/invoices/list/InvoicesStatsList.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/OfferingDetailsField.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 msgid "Offering name"
 msgstr "Erbjuder namn"
 
-#: src/customer/team/CustomerTeam.tsx
+#: src/customer/routes.ts
 msgid "Offering permissions"
 msgstr "Erbjuder behörigheter"
 
@@ -4433,13 +4504,15 @@ msgstr "Erbjudande tillstånd har uppdaterats."
 msgid "Offering type"
 msgstr "Typ av erbjudande"
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
-#: src/issues/notifications/NotificationExpandableRow.tsx
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/issues/routes.ts
 #: src/marketplace/offerings/OfferingsList.tsx
-#: src/marketplace/offerings/support/SupportOfferingsContainer.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
+#: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/notifications/NotificationExpandableRow.tsx
+#: src/notifications/NotificationForm.tsx
+#: src/notifications/RecipientsList.tsx
 msgid "Offerings"
 msgstr "Erbjudanden"
 
@@ -4529,7 +4602,7 @@ msgstr "OpenStack-volym"
 msgid "Open console"
 msgstr "Öppna konsol"
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 msgid "Open in Service Desk"
 msgstr "Öppna i Service Desk"
 
@@ -4554,7 +4627,6 @@ msgid "Order Summary"
 msgstr "Beställningsöversikt"
 
 #: src/marketplace/orders/OrderDetails.tsx
-#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 msgid "Order details"
 msgstr "Orderdetaljer"
 
@@ -4588,9 +4660,10 @@ msgstr "Orderartikeln har avvisats."
 msgid "Order item has cancel has been scheduled."
 msgstr "Orderartikeln har annullerat har schemalagts."
 
+#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/resources/ResourceTabs.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
 msgid "Order items"
@@ -4601,10 +4674,9 @@ msgstr "Beställ artiklar"
 msgid "Order summary"
 msgstr "Beställningsöversikt"
 
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/SupportOrdersContainer.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/marketplace/routes.ts
 msgid "Orders"
 msgstr "Beställningar"
 
@@ -4613,10 +4685,11 @@ msgstr "Beställningar"
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
+#: src/customer/routes.ts
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
@@ -4624,15 +4697,29 @@ msgstr "Beställningar"
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-flows/FlowExpandableRow.tsx
 #: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/details/CustomerCreateGroup.tsx
+#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/tabs.ts
+#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/navigation/sidebar/ManagementMenu.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/SelectAffiliationDialog.tsx
 #: src/user/UserPermissionRequestsList.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/affiliations/ProjectsListFilter.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
@@ -4653,7 +4740,6 @@ msgid "Organization contains projects. Please remove them first."
 msgstr "Organisationen innehåller projekt. Ta bort dem först."
 
 #: src/customer/details/CustomerDetailsPanel.tsx
-#: src/customer/list/OrganizationDetailsDialog.tsx
 msgid "Organization details"
 msgstr "Organisationsinformation"
 
@@ -4695,11 +4781,10 @@ msgstr "Organisationens registreringsnummer"
 msgid "Organization removal"
 msgstr "Organisationens borttagning"
 
-#: src/customer/team/OrganizationRoleSelectField.tsx
+#: src/customer/team/CustomerUsersListFilter.tsx
 msgid "Organization role"
 msgstr "Organisationens roll"
 
-#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/support/UserList.tsx
 msgid "Organization roles"
@@ -4743,14 +4828,21 @@ msgid "Organization {customer_name} has been deleted."
 msgstr "Organisationen {customer_name} har tagits bort."
 
 #: src/customer/list/CustomerList.tsx
-#: src/customer/list/OrganizationUpdateContainer.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/customer/list/SupportCustomersContainer.tsx
-#: src/issues/notifications/NotificationCreateDialog.tsx
-#: src/issues/notifications/NotificationExpandableRow.tsx
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/issues/routes.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/marketplace/routes.ts
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/notifications/NotificationExpandableRow.tsx
+#: src/notifications/NotificationForm.tsx
+#: src/notifications/RecipientsList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
+#: src/user/dashboard/UserDashboard.tsx
+#: src/user/routes.ts
+#: src/user/support/UserDetailsView.tsx
 msgid "Organizations"
 msgstr "Organisationer"
 
@@ -4794,7 +4886,6 @@ msgid "Owned organizations"
 msgstr "Ägda organisationer"
 
 #: src/customer/team/CustomerUsersList.tsx
-#: src/user/dashboard/CustomerPermissions.tsx
 msgid "Owner"
 msgstr "Ägare"
 
@@ -4849,6 +4940,7 @@ msgstr "Pausa erbjudandet"
 
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 msgid "Paused"
 msgstr "Pausad"
 
@@ -4926,7 +5018,7 @@ msgstr "Betalningsprofilen har tagits bort."
 msgid "Payment profile has been updated."
 msgstr "Betalningsprofilen har uppdaterats."
 
-#: src/customer/payment-profiles/PaymentProfilesPanel.tsx
+#: src/customer/routes.ts
 msgid "Payment profiles"
 msgstr "Betalningsprofiler"
 
@@ -4938,7 +5030,7 @@ msgstr "Betalningstyp {type}"
 msgid "Payments connected with an active payment profile."
 msgstr "Betalningar kopplade till en aktiv betalningsprofil."
 
-#: src/customer/payments/PaymentsPanel.tsx
+#: src/customer/routes.ts
 msgid "Payments list"
 msgstr "Betalningslista"
 
@@ -4999,6 +5091,7 @@ msgid "Performed by"
 msgstr "Utförd av"
 
 #: src/booking/BookingCheckoutSummary.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Period"
 msgstr "Period"
@@ -5015,8 +5108,7 @@ msgstr "Permanent"
 msgid "Permission has been revoked."
 msgstr "Tillståndet har återkallats."
 
-#: src/customer/team/CustomerTeam.tsx
-#: src/project/team/ProjectTeam.tsx
+#: src/project/routes.ts
 msgid "Permissions log"
 msgstr "Behörighetslogg"
 
@@ -5041,6 +5133,7 @@ msgstr "Telefonnummer"
 msgid "Phone numbers"
 msgstr "Telefonnummer"
 
+#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanField.tsx
 #: src/marketplace/offerings/PriceList.tsx
@@ -5048,7 +5141,8 @@ msgstr "Telefonnummer"
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/PlanDetailsField.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
@@ -5056,6 +5150,8 @@ msgstr "Telefonnummer"
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
+#: src/project/ProjectOrderItemsList.tsx
 msgid "Plan"
 msgstr "Planera"
 
@@ -5063,8 +5159,6 @@ msgstr "Planera"
 msgid "Plan #{index}"
 msgstr "Planera #{index}"
 
-#: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageContainer.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 msgid "Plan capacity"
 msgstr "Planera kapacitet"
@@ -5156,7 +5250,7 @@ msgstr "Ange volymstorlek för att se prisuppskattning."
 msgid "Please give us a moment to validate your invitation."
 msgstr "Vänligen ge oss en stund att validera din inbjudan."
 
-#: src/user/support/TokenLifetimeField.tsx
+#: src/user/api-key/TokenLifetimeField.tsx
 msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
 msgstr "Se till att du vet vad du gör och ställ in på 10 minuter om du är osäker."
 
@@ -5254,6 +5348,7 @@ msgstr "Port har skapats."
 msgid "Port range"
 msgstr "Portområde"
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Ports"
 msgstr "Hamnar"
@@ -5291,7 +5386,6 @@ msgstr "Förhandsgranska erbjudande"
 
 #: src/customer/create/WizardForm.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/PrevPage.tsx
-#: src/table/TablePagination.tsx
 msgid "Previous"
 msgstr "Föregående"
 
@@ -5352,6 +5446,7 @@ msgstr "Pris per månad"
 
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Price per unit"
 msgstr "Pris per enhet"
@@ -5372,11 +5467,12 @@ msgstr "Skriv ut faktura"
 msgid "Print record"
 msgstr "Skriv ut post"
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/PriorityGroup.tsx
 msgid "Priority"
 msgstr "Prioritet"
 
+#: src/about.tsx
 #: src/navigation/FooterLinks.tsx
 msgid "Privacy policy"
 msgstr "Integritetspolicy"
@@ -5392,7 +5488,7 @@ msgstr "Privata moln"
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/ProjectGroup.tsx
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
@@ -5400,17 +5496,24 @@ msgstr "Privata moln"
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectCreateGroup.tsx
 #: src/marketplace/details/ProjectField.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/navigation/sidebar/ManagementMenu.tsx
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/project/routes.ts
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
@@ -5495,14 +5598,12 @@ msgstr "Projektborttagning"
 msgid "Project resources"
 msgstr "Projektets resurser"
 
-#: src/customer/team/ProjectRoleSelectField.tsx
+#: src/customer/team/CustomerUsersListFilter.tsx
 msgid "Project role"
 msgstr "Projektroll"
 
-#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
-#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/user/support/UserList.tsx
 msgid "Project roles"
 msgstr "Projektroller"
@@ -5536,12 +5637,19 @@ msgstr "Projektet {project_link} har uppdaterats."
 msgid "Project {project_name} has been deleted."
 msgstr "Projekt {project_name} har tagits bort."
 
-#: src/customer/workspace/utils.ts
-#: src/issues/notifications/NotificationExpandableRow.tsx
-#: src/issues/workspace/IssueNavigationService.ts
+#: src/customer/routes.ts
+#: src/issues/routes.ts
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 #: src/project/ProjectsList.tsx
-#: src/project/SupportProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
+#: src/user/dashboard/UserDashboard.tsx
+#: src/user/routes.ts
+#: src/user/support/UserDetailsView.tsx
 msgid "Projects"
 msgstr "Projekt"
 
@@ -5568,6 +5676,7 @@ msgstr "Bevisdokument"
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/navigation/sidebar/ManagementMenu.tsx
 #: src/providers/support/MapInfoPanel.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
@@ -5604,7 +5713,7 @@ msgstr "Tillhandahåll ny resurs"
 msgid "Public SSH keys will be injected into services that allow key-based access."
 msgstr "Offentliga SSH-nycklar kommer att injiceras i tjänster som tillåter nyckelbaserad åtkomst."
 
-#: src/user/keys/KeyCreateForm.tsx
+#: src/user/keys/KeyCreateDialog.tsx
 #: src/user/keys/KeysListExpandableRow.tsx
 msgid "Public key"
 msgstr "Offentlig nyckel"
@@ -5636,6 +5745,7 @@ msgstr "Offentliga tjänster"
 msgid "Publish as Google Calendar"
 msgstr "Publicera som Google Kalender"
 
+#: src/UserAgreementComponent.tsx
 #: src/marketplace/referral/ReferralsList.tsx
 msgid "Published"
 msgstr "Publicerad"
@@ -5654,8 +5764,7 @@ msgstr "Dra kvoter"
 
 #: src/marketplace/cart/ForwardButton.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
-#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricingOld.tsx
 msgid "Purchase"
 msgstr "Inköp"
 
@@ -5696,10 +5805,10 @@ msgid "Quotas"
 msgstr "Kvoter"
 
 #: src/digitalocean/digitalocean-droplet-config.ts
+#: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
-#: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "RAM"
 msgstr "RAM"
 
@@ -5759,7 +5868,7 @@ msgstr "Starta om"
 msgid "Recent additions"
 msgstr "Senaste tilläggen"
 
-#: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/notifications/RecipientsField.tsx
 msgid "Recipients"
 msgstr "Mottagare"
 
@@ -5794,17 +5903,15 @@ msgid "Referrals for {name}"
 msgstr "Hänvisningar för {name}"
 
 #: src/issues/list/IssuesShortList.tsx
-#: src/issues/workspace/IssuesActivityStream.tsx
-#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/orders/OrderDetails.tsx
-#: src/marketplace/resources/actions/ResourceActions.tsx
+#: src/marketplace/resources/details/RefreshButton.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/resource/ResourceRefreshButton.tsx
-#: src/table/TableRefreshButton.tsx
+#: src/table/TableDropdowns.tsx
 msgid "Refresh"
 msgstr "Uppdatera"
 
-#: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
 #: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
 msgid "Regenerate"
 msgstr "Regenerera"
@@ -5818,7 +5925,7 @@ msgstr "Område"
 msgid "Region name"
 msgstr "Regionens namn"
 
-#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Register as service provider"
 msgstr "Registrera dig som tjänsteleverantör"
 
@@ -5826,7 +5933,7 @@ msgstr "Registrera dig som tjänsteleverantör"
 msgid "Register organization as service provider and remove organization."
 msgstr "Registrera organisationen som tjänsteleverantör och ta bort organisationen."
 
-#: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Registered at:"
 msgstr "Registrerat på:"
 
@@ -5839,7 +5946,6 @@ msgid "Registration code"
 msgstr "Registreringskod"
 
 #: src/user/support/UserDetailsTable.tsx
-#: src/user/support/UserEditForm.tsx
 msgid "Registration method"
 msgstr "Registreringsmetod"
 
@@ -5880,6 +5986,7 @@ msgid "Release floating IPs"
 msgstr "Släpp flytande IP-adresser"
 
 #: src/ErrorMessage.tsx
+#: src/core/LoadingErred.tsx
 #: src/dashboard/CategoryResourcesList.tsx
 msgid "Reload"
 msgstr "Ladda om"
@@ -5906,8 +6013,7 @@ msgstr "Fjärr CIDR"
 msgid "Remote Waldur API URL"
 msgstr "Fjärr-URL för Waldur API"
 
-#: src/user/UserOfferingListContainer.tsx
-#: src/user/constants.ts
+#: src/user/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Remote accounts"
 msgstr "Fjärrkonton"
@@ -6018,14 +6124,14 @@ msgstr "Rapporterad av mig"
 msgid "Reported value is reused every month until changed."
 msgstr "Rapporterat värde återanvänds varje månad tills det ändras."
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Reporter"
 msgstr "Reporter"
 
-#: src/issues/workspace/IssueNavigationService.ts
-#: src/issues/workspace/SupportWorkspace.tsx
+#: src/customer/routes.ts
+#: src/navigation/sidebar/ReportingMenu.tsx
 msgid "Reporting"
 msgstr "Rapportering"
 
@@ -6100,7 +6206,7 @@ msgstr "Begär borttagning"
 msgid "Request title"
 msgstr "Begär titel"
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueCreateForm.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/TypeGroup.tsx
@@ -6129,7 +6235,9 @@ msgstr "Begärd av"
 msgid "Requested email"
 msgstr "Begärd e-post"
 
+#: src/marketplace/category/list/OfferingCard.tsx
 #: src/marketplace/common/OfferingCard.tsx
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
 msgid "Requesting of new resources has been temporarily paused"
 msgstr "Begäran om nya resurser har tillfälligt pausats"
 
@@ -6159,7 +6267,7 @@ msgstr "Återställ"
 msgid "Resize droplet"
 msgstr "Ändra storlek på droplet"
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 msgid "Resolution"
 msgstr "Upplösning"
 
@@ -6167,11 +6275,14 @@ msgstr "Upplösning"
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/navigation/header/project-selector/ProjectsList.tsx
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 msgid "Resource"
 msgstr "Resurs"
 
@@ -6200,7 +6311,6 @@ msgstr "Radering av resurs har schemalagts."
 msgid "Resource description"
 msgstr "Beskrivning av resursen"
 
-#: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/resource/ResourceDetailsContainer.tsx
 msgid "Resource details"
 msgstr "Resursinformation"
@@ -6242,7 +6352,6 @@ msgstr "Begäran om ändring av resursgränser har skickats."
 
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
 msgid "Resource link"
 msgstr "Resurslänk"
 
@@ -6282,26 +6391,24 @@ msgstr "Resursanvändning för {resourceName}"
 msgid "Resource usage for {resource}"
 msgstr "Resursanvändning för {resource}"
 
-#: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
-#: src/issues/workspace/IssueNavigationService.ts
-#: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/list/SupportResourcesContainer.tsx
-#: src/marketplace/sidebar.ts
-#: src/project/ProjectDashboard.tsx
+#: src/marketplace/routes.ts
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/navigation/header/project-selector/ProjectsList.tsx
+#: src/navigation/sidebar/ResourcesMenu.tsx
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 #: src/project/ProjectResourcesList.tsx
-#: src/project/ProjectWorkspace.tsx
-#: src/rancher/template/CatalogTemplateContainer.tsx
-#: src/rancher/template/breadcrumbs.ts
-#: src/resource/breadcrumbs/ResourceBreadcrumbsRegistry.ts
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
-#: src/support/SupportDetailsContainer.tsx
-#: src/user/constants.ts
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/routes.ts
 msgid "Resources"
 msgstr "Resurser"
 
@@ -6313,8 +6420,7 @@ msgstr "Resursimporten misslyckades."
 msgid "Resources represent the services you are using."
 msgstr "Resurser representerar de tjänster du använder."
 
-#: src/issues/workspace/IssueNavigationService.ts
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/resource/support/routes.ts
 msgid "Resources usage"
 msgstr "Resursanvändning"
 
@@ -6389,7 +6495,9 @@ msgstr "Granskningen har stängts."
 msgid "Review has been performed."
 msgstr "Granskning har utförts."
 
-#: src/customer/team/CustomerTeam.tsx
+#: src/customer/routes.ts
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingReviews.tsx
 msgid "Reviews"
 msgstr "Recensioner"
 
@@ -6406,6 +6514,10 @@ msgstr "Återkalla"
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/PermissionDetails.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Role"
@@ -6429,8 +6541,8 @@ msgstr "Rollhanteringshändelser"
 msgid "Roles"
 msgstr "Roller"
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
-#: src/openstack/router-breadcrumbs.ts
 msgid "Routers"
 msgstr "Routrar"
 
@@ -6480,6 +6592,7 @@ msgstr "SQL-servernamn"
 msgid "SSH Keys"
 msgstr "SSH-nycklar"
 
+#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "SSH key"
 msgstr "SSH-nyckel"
@@ -6500,8 +6613,9 @@ msgstr "SSH-nyckel {ssh_key_name} har skapats för användaren {user_link}"
 msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr "SSH-nyckel {ssh_key_name} har tagits bort för användare {user_link}"
 
+#: src/marketplace/resources/details/RobotAccountExpandable.tsx
 #: src/user/keys/KeysList.tsx
-#: src/user/keys/KeysListContainer.tsx
+#: src/user/routes.ts
 msgid "SSH keys"
 msgstr "SSH-nycklar"
 
@@ -6512,7 +6626,6 @@ msgstr "SSH-nycklar"
 msgid "SSH public key"
 msgstr "SSH offentlig nyckel"
 
-#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/SankeyDiagramContainer.tsx
 msgid "Sankey diagram"
 msgstr "Sankey diagram"
@@ -6522,7 +6635,7 @@ msgstr "Sankey diagram"
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
-#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/FeaturesList.tsx
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
@@ -6583,12 +6696,13 @@ msgstr "Skriptspråk"
 
 #: src/issues/create/SearchButton.tsx
 #: src/navigation/header/MainSearch.tsx
+#: src/navigation/header/SearchFilters.tsx
+#: src/navigation/header/SearchToggle.tsx
 #: src/table/TableQuery.tsx
 msgid "Search"
 msgstr "Sök"
 
 #: src/marketplace/category/filters/FilterBar.tsx
-#: src/marketplace/landing/LandingPage.tsx
 msgid "Search for offerings..."
 msgstr "Sök efter erbjudanden..."
 
@@ -6604,18 +6718,22 @@ msgstr "Säkerhetsgruppen innehåller ingen regel ännu."
 msgid "Security group rules update has been scheduled."
 msgstr "Uppdatering av säkerhetsgruppsregler har schemalagts."
 
+#: src/marketplace/resources/details/NetworkingTab.tsx
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsForm.tsx
-#: src/openstack/openstack-security-groups/breadcrumbs.ts
+#: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/rancher/cluster/create/TenantGroup.tsx
 msgid "Security groups"
 msgstr "Säkerhetsgrupper"
 
+#: src/openstack/openstack-instance/OpenStackSecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 msgid "Security groups details"
 msgstr "Information om säkerhetsgrupper"
@@ -6629,7 +6747,8 @@ msgid "Security incident type: {type}"
 msgstr "Säkerhetsincident typ: {type}"
 
 #: src/issues/list/IssuesShortList.tsx
-#: src/issues/workspace/IssuesActivityStream.tsx
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
 msgid "See all"
 msgstr "Se alla"
 
@@ -6652,8 +6771,8 @@ msgstr "Segmenterings-ID"
 #: src/form/ListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
-#: src/navigation/workspace/ProjectsPanel.tsx
-#: src/navigation/workspace/SelectOrganizationButton.tsx
+#: src/user/affiliations/OrganizationHoverableRow.tsx
+#: src/user/affiliations/ProjectHoverableRow.tsx
 msgid "Select"
 msgstr "Välj"
 
@@ -6696,6 +6815,7 @@ msgid "Select connected subnet"
 msgstr "Välj anslutet undernät"
 
 #: src/customer/create/CountryGroup.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "Select country..."
 msgstr "Välj land..."
@@ -6734,7 +6854,7 @@ msgid "Select offering..."
 msgstr "Välj erbjudande..."
 
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
-#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/notifications/NotificationForm.tsx
 msgid "Select offerings..."
 msgstr "Välj erbjudanden..."
 
@@ -6753,7 +6873,7 @@ msgstr "Välj organisation..."
 msgid "Select organization roles"
 msgstr "Välj organisationsroller"
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/notifications/NotificationForm.tsx
 msgid "Select organizations..."
 msgstr "Välj organisationer..."
 
@@ -6770,6 +6890,7 @@ msgid "Select priority..."
 msgstr "Välj prioritet..."
 
 #: src/invitations/actions/ProjectGroup.tsx
+#: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
 msgid "Select project"
 msgstr "Välj projekt"
 
@@ -6822,6 +6943,8 @@ msgid "Select some files"
 msgstr "Välj några filer"
 
 #: src/booking/BookingStateFilter.tsx
+#: src/invitations/InvitationsFilter.tsx
+#: src/invoices/list/InvoicesFilter.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
@@ -6851,7 +6974,9 @@ msgstr "Välj hyresgäst..."
 msgid "Select tenants..."
 msgstr "Välj hyresgäster..."
 
+#: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+#: src/project/ProjectEventsFilter.tsx
 msgid "Select type..."
 msgstr "Välj typ..."
 
@@ -6870,6 +6995,8 @@ msgstr "Välj arbetsyta"
 
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
+#: src/user/affiliations/OrganizationHoverableRow.tsx
+#: src/user/affiliations/ProjectHoverableRow.tsx
 msgid "Selected"
 msgstr "Vald"
 
@@ -6902,7 +7029,7 @@ msgid "Service Request - client’s request to modify, add, change or remove par
 msgstr "Serviceförfrågan - kundens begäran om att ändra, lägga till, ändra eller ta bort en viss tjänst helt eller delvis."
 
 #: src/customer/details/CustomerMarketplacePanel.tsx
-#: src/customer/list/ServiceProviderFilter.tsx
+#: src/customer/list/SupportCustomerFilter.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/map/LeafletMap.tsx
@@ -6911,8 +7038,10 @@ msgstr "Serviceförfrågan - kundens begäran om att ändra, lägga till, ändra
 #: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
-#: src/marketplace/orders/ProviderAutocomplete.tsx
+#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/marketplace/routes.ts
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -6927,6 +7056,7 @@ msgstr "Tjänsteleverantör:"
 msgid "Service provider API secret code has been generated."
 msgstr "Tjänstleverantörens API-hemliga kod har genererats."
 
+#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Service provider can charge for usage of the following components"
 msgstr "Tjänsteleverantören kan ta betalt för användning av följande komponenter"
@@ -6955,7 +7085,7 @@ msgstr "Tjänsteinställningarna är ogiltiga."
 msgid "Service settings of this resource are in state erred."
 msgstr "Tjänstinställningarna för den här resursen är felaktiga."
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Service type"
@@ -7011,12 +7141,12 @@ msgstr "Ställ in till utkast"
 msgid "Set to true to activate privilege escalation"
 msgstr "Ställ in till true för att aktivera utökning av privilegier"
 
+#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 msgid "Shared"
 msgstr "Delad"
 
-#: src/issues/workspace/IssueNavigationService.ts
-#: src/resource/support/SharedProviderContainer.tsx
+#: src/resource/support/routes.ts
 msgid "Shared providers"
 msgstr "Delade leverantörer"
 
@@ -7032,8 +7162,8 @@ msgstr "Kundvagnsartikeln har uppdaterats."
 msgid "Shopping cart item update"
 msgstr "Uppdatering av kundvagnsartikel"
 
+#: src/form/SecretField.tsx
 #: src/marketplace/details/plan/PlanDetailsLink.tsx
-#: src/table/TablePageSize.tsx
 msgid "Show"
 msgstr "Visa"
 
@@ -7114,6 +7244,8 @@ msgid "Shutdown"
 msgstr "Avstängning"
 
 #: src/auth/valimo/AuthValimoDialog.tsx
+#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
 msgid "Sign in"
 msgstr "Logga in"
 
@@ -7128,10 +7260,12 @@ msgstr "Logga in med {label}"
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/VMwareDiskSummary.tsx
@@ -7162,7 +7296,8 @@ msgstr "Hoppa över flytande IP-tilldelning"
 msgid "Snapshot schedule for volume has been created."
 msgstr "Ögonblicksbildschema för volym har skapats."
 
-#: src/openstack/openstack-snapshot-schedule/breadcrumbs.ts
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
+#: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshot schedules"
 msgstr "Snapshot scheman"
@@ -7171,7 +7306,11 @@ msgstr "Snapshot scheman"
 msgid "Snapshot size limit"
 msgstr "Storleksgräns för ögonblicksbilder"
 
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-snapshot-schedule/tabs.ts
+#: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshots"
 msgstr "Ögonblicksbilder"
@@ -7220,35 +7359,52 @@ msgstr "Startar"
 #: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
+#: src/invitations/InvitationsFilter.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/invoices/list/BillingRecordsList.tsx
+#: src/invoices/list/InvoicesFilter.tsx
 #: src/invoices/list/InvoicesList.tsx
+#: src/marketplace-flows/FlowListFilter.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/utils.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
-#: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/details/OfferingOrderItemsList.tsx
+#: src/marketplace/details/OfferingResourcesFilter.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/OfferingStateFilter.tsx
+#: src/marketplace/offerings/OfferingsFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
+#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
+#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/details/ResourceDetailsHeader.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/list/ResourceStateFilter.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/notifications/NotificationList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -7259,12 +7415,18 @@ msgstr "Startar"
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/paypal/PaymentsList.tsx
+#: src/project/ProjectOrderItemsList.tsx
+#: src/project/ProjectResourcesFilter.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -7292,8 +7454,9 @@ msgstr "Uppdatering av statiska vägar var schemalagd."
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/invitations/InvitationsList.tsx
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/user/support/UserDetailsTable.tsx
@@ -7321,7 +7484,10 @@ msgid "Stopping"
 msgstr "Stoppa"
 
 #: src/digitalocean/digitalocean-droplet-config.ts
-#: src/openstack/openstack-instance/FlavorGroup.tsx
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/openstack-instance/tabs.ts
+#: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/quotas/constants.ts
 msgid "Storage"
@@ -7343,12 +7509,12 @@ msgstr "Lagringsstorlek i GiB"
 msgid "Storage type"
 msgstr "Lagringstyp"
 
-#: src/issues/notifications/BroadcastList.tsx
-#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/notifications/NotificationForm.tsx
+#: src/notifications/NotificationList.tsx
 msgid "Subject"
 msgstr "Ämne"
 
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
@@ -7397,6 +7563,7 @@ msgstr "Skicka in med"
 msgid "Subnet"
 msgstr "Undernät"
 
+#: src/openstack/openstack-instance/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "Subnet CIDR"
 msgstr "Undernät CIDR"
@@ -7405,13 +7572,16 @@ msgstr "Undernät CIDR"
 msgid "Subnet has been created."
 msgstr "Undernät har skapats."
 
+#: src/openstack/openstack-instance/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "Subnet name"
 msgstr "Undernätets namn"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-network/tabs.ts
-#: src/openstack/openstack-subnet/breadcrumbs.ts
+#: src/openstack/openstack-tenant/tabs.ts
 msgid "Subnets"
 msgstr "Undernät"
 
@@ -7424,6 +7594,8 @@ msgid "Subscription ID"
 msgstr "Prenumeration ID"
 
 #: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/list/MonthOverview.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 msgid "Subtotal"
 msgstr "Delsumma"
@@ -7435,9 +7607,13 @@ msgid "Sum"
 msgstr "Summa"
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/issues/IssueDetails.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/openstack/openstack-tenant/TenantFlavorsList.tsx
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
+#: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/TemplateDetail.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
@@ -7446,7 +7622,8 @@ msgstr "Summa"
 msgid "Summary"
 msgstr "Sammanfattning"
 
-#: src/navigation/header/SupportLink.tsx
+#: src/issues/routes.ts
+#: src/navigation/sidebar/SupportMenu.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Support"
@@ -7565,10 +7742,8 @@ msgstr "Skattenummer"
 msgid "Tax percent"
 msgstr "Skatt procent"
 
-#: src/customer/team/CustomerTeam.tsx
-#: src/customer/workspace/utils.ts
-#: src/project/team/ProjectTeam.tsx
-#: src/project/utils.ts
+#: src/customer/routes.ts
+#: src/project/routes.ts
 msgid "Team"
 msgstr "Grupp"
 
@@ -7590,6 +7765,7 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr "Tekniskt namn avsett för integration och automatiserad rapportering. Använd latinska bokstäver utan mellanslag."
 
 #: src/issues/create/IssueCreateForm.tsx
+#: src/notifications/NotificationForm.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -7672,12 +7848,12 @@ msgstr "Avsluta"
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
-#: src/navigation/FooterLinks.tsx
 msgid "Terms of Service"
 msgstr "Användarvillkoren"
 
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
+#: src/marketplace/resources/details/ResourceAccessCard.tsx
 msgid "Text has been copied"
 msgstr "Text har kopierats"
 
@@ -7694,7 +7870,7 @@ msgstr "Datumet är inkluderande. När den har nåtts kommer alla projektresurse
 msgid "The invoice has been marked as paid."
 msgstr "Fakturan har markerats som betald."
 
-#: src/user/keys/KeyCreateForm.tsx
+#: src/user/keys/KeyCreateDialog.tsx
 msgid "The key has been created."
 msgstr "Nyckeln har skapats."
 
@@ -7747,9 +7923,11 @@ msgid "There are no available users."
 msgstr "Det finns inga tillgängliga användare."
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/navigation/sidebar/marketplace-popup/CategoriesPanel.tsx
 msgid "There are no categories."
 msgstr "Det finns inga kategorier."
 
+#: src/marketplace/category/list/CategoriesList.tsx
 #: src/marketplace/landing/CategoriesList.tsx
 #: src/user/dashboard/CategoriesList.tsx
 msgid "There are no categories in marketplace yet."
@@ -7794,6 +7972,7 @@ msgid "There are no offerings available."
 msgstr "Det finns inga erbjudanden tillgängliga."
 
 #: src/marketplace/common/OfferingGrid.tsx
+#: src/marketplace/landing/OfferingsGroup.tsx
 msgid "There are no offerings in marketplace yet."
 msgstr "Det finns inga erbjudanden på Marketplace ännu."
 
@@ -7821,7 +8000,8 @@ msgstr "Det finns inga andra volymtyper tillgängliga."
 msgid "There are no projects matching filter."
 msgstr "Det finns inga projekt matchande filter."
 
-#: src/navigation/workspace/ProjectsPanel.tsx
+#: src/navigation/header/project-selector/ProjectsList.tsx
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 msgid "There are no projects yet for this organization."
 msgstr "Det finns ännu inga projekt för den här organisationen."
 
@@ -7956,7 +8136,7 @@ msgstr "Om du vill rapportera en säkerhetsincident skickar du ett e-postmeddela
 msgid "To report an issue, please send an email to {supportEmail}."
 msgstr "Om du vill rapportera ett problem skickar du ett e-postmeddelande till {supportEmail}."
 
-#: src/booking/components/modal/DateAndTimeSelect.tsx
+#: src/marketplace/resources/details/StatusPage.tsx
 msgid "Today"
 msgstr "Idag"
 
@@ -7964,8 +8144,11 @@ msgstr "Idag"
 #: src/invoices/growth/utils.ts
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
+#: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -8029,26 +8212,36 @@ msgstr "Spåras med UTC-tidszon, visas med webbläsarens tidszon."
 msgid "Try again"
 msgstr "Försök igen"
 
-#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
+#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/resources/details/RobotAccountList.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/paypal/PaymentsList.tsx
+#: src/project/ProjectEventsFilter.tsx
+#: src/project/ProjectOrderItemsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Type"
@@ -8068,7 +8261,7 @@ msgstr "URL"
 
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "UUID"
@@ -8133,6 +8326,7 @@ msgid "Unable to cancel invitation."
 msgstr "Det gick inte att avbryta inbjudan."
 
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
+#: src/marketplace/orders/item/list/OrderItemCancelButton.tsx
 msgid "Unable to cancel order item."
 msgstr "Det gick inte att avbryta orderartikeln."
 
@@ -8192,7 +8386,7 @@ msgstr "Det gick inte att skapa disk."
 msgid "Unable to create horizontal pod autoscaler."
 msgstr "Det gick inte att skapa horisontell pod-autoskalare."
 
-#: src/user/keys/KeyCreateForm.tsx
+#: src/user/keys/KeyCreateDialog.tsx
 msgid "Unable to create key."
 msgstr "Det gick inte att skapa nyckel."
 
@@ -8381,11 +8575,14 @@ msgid "Unable to load booking offerings."
 msgstr "Det gick inte att ladda bokningserbjudanden."
 
 #: src/marketplace/offerings/actions/SelectCategoryTab.tsx
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
 msgid "Unable to load categories"
 msgstr "Det gick inte att ladda kategorier"
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/category/list/CategoriesList.tsx
 #: src/marketplace/landing/CategoriesList.tsx
+#: src/marketplace/offerings/service-providers/ServiceProvider.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderOfferingsCategoriesFilter.tsx
 #: src/user/dashboard/CategoriesList.tsx
 #: src/user/dashboard/CategoryUserList.tsx
@@ -8393,6 +8590,8 @@ msgid "Unable to load categories."
 msgstr "Det gick inte att ladda kategorier."
 
 #: src/marketplace/category/filters/AttributeFilterList.tsx
+#: src/marketplace/category/filters/FilterDropdownContent.tsx
+#: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
 #: src/marketplace/offerings/service-providers/FilterDropdownContent.tsx
 msgid "Unable to load category sections."
 msgstr "Det gick inte att ladda kategorisektioner."
@@ -8429,15 +8628,16 @@ msgstr "Det går inte att läsa in kundsupportnöjdhetens övergripande betyg."
 
 #: src/customer/divisions/CustomersDivisionsChart.tsx
 #: src/customer/team/OfferingNamesManagedByUser.tsx
+#: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
-#: src/navigation/workspace/SelectWorkspaceDialog.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
-#: src/slurm/details/AllocationUsageTable.tsx
 msgid "Unable to load data"
 msgstr "Det gick inte att ladda data"
 
+#: src/core/LoadingErred.tsx
 #: src/customer/list/TotalCostComponent.tsx
 #: src/customer/popover/CustomerPopover.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
@@ -8445,14 +8645,13 @@ msgstr "Det gick inte att ladda data"
 #: src/invoices/details/BillingDetails.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueCreateForm.tsx
-#: src/issues/create/IssueRegistration.tsx
 #: src/issues/list/IssuesShortList.tsx
-#: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
+#: src/project/ProjectDashboardChart.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
 #: src/rancher/template/CatalogTemplateContainer.tsx
@@ -8539,7 +8738,7 @@ msgstr "Det gick inte att ladda organisationer"
 
 #: src/TemplateComponent.tsx
 #: src/UserAgreementComponent.tsx
-#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/FeaturesList.tsx
 msgid "Unable to load page"
 msgstr "Det gick inte att ladda sidan"
 
@@ -8552,6 +8751,8 @@ msgid "Unable to load plan details."
 msgstr "Det gick inte att läsa in detaljer om planen."
 
 #: src/project/ProjectExpandableRowContainer.tsx
+#: src/user/affiliations/OrganizationExpandableRow.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Unable to load project resources."
 msgstr "Det gick inte att ladda projektresurser."
 
@@ -8921,6 +9122,7 @@ msgstr "Unikt ID för en resurs inom hanteringsplugin"
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 msgid "Unit"
 msgstr "Enhet"
 
@@ -8975,6 +9177,7 @@ msgstr "Avpublicera som Google Kalender"
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+#: src/notifications/NotificationUpdateButton.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -9104,12 +9307,9 @@ msgid "Uptime"
 msgstr "Drifttid"
 
 #: src/dashboard/chart.ts
-#: src/marketplace/resources/ResourceTabs.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/openstack/openstack-tenant/tabs.ts
 #: src/slurm/details/utils.ts
-#: src/slurm/tabs.ts
 msgid "Usage"
 msgstr "Användning"
 
@@ -9125,8 +9325,7 @@ msgstr "Översikt över användning"
 msgid "Usage report has been submitted."
 msgstr "Användningsrapport har skickats."
 
-#: src/issues/workspace/IssueNavigationService.ts
-#: src/marketplace/resources/usage/SupportUsageContainer.tsx
+#: src/marketplace/routes.ts
 msgid "Usage reports"
 msgstr "Användningsrapporter"
 
@@ -9154,7 +9353,9 @@ msgstr "Används under perioden {period} av:"
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
+#: src/issues/feedback/SupportFeedbackListFilter.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
@@ -9301,7 +9502,9 @@ msgstr "Användaren {user_link} loggade ut med SAML2."
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/UsernameGroup.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
-#: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/details/ResourceAccessCard.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/details/RobotAccountList.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
@@ -9309,7 +9512,6 @@ msgstr "Användaren {user_link} loggade ut med SAML2."
 #: src/project/team/UserGroup.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
-#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/details/AllocationUsersTable.tsx
 #: src/slurm/marketplace.ts
@@ -9332,17 +9534,19 @@ msgstr "Användarnamn prefix"
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr "Användarnamn kan innehålla bokstäver (a-z), siffror (0-9), bindestreck (-), understreck (_) och punkter (.)."
 
-#: src/customer/team/CustomerTeam.tsx
-#: src/issues/workspace/IssueNavigationService.ts
-#: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/project/team/ProjectTeam.tsx
+#: src/customer/routes.ts
+#: src/issues/routes.ts
+#: src/marketplace/offerings/details/OfferingUsersTable.tsx
+#: src/marketplace/resources/details/RobotAccountExpandable.tsx
+#: src/marketplace/routes.ts
+#: src/project/routes.ts
 #: src/rancher/cluster/tabs.ts
 #: src/slurm/tabs.ts
-#: src/user/support/UserListView.tsx
 msgid "Users"
 msgstr "Användare"
 
 #: src/invoices/details/CustomerDetails.tsx
+#: src/invoices/list/MonthOverview.tsx
 msgid "VAT"
 msgstr "MOMS"
 
@@ -9399,20 +9603,15 @@ msgid "VM snapshot schedule has been created."
 msgstr "VM-ögonblicksbild schema har skapats."
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
-#: src/openstack/openstack-backup-schedule/breadcrumbs.ts
-#: src/openstack/openstack-instance/tabs.ts
 msgid "VM snapshot schedules"
 msgstr "VM-ögonblicksbildscheman"
 
 #: src/openstack/openstack-backup-schedule/tabs.ts
 #: src/openstack/openstack-backup/BackupsList.tsx
-#: src/openstack/openstack-backup/breadcrumbs.ts
-#: src/openstack/openstack-instance/tabs.ts
 msgid "VM snapshots"
 msgstr "VM-ögonblicksbilder"
 
-#: src/issues/workspace/IssueNavigationService.ts
-#: src/openstack/analytics/VmTypeOverviewContainer.tsx
+#: src/openstack/analytics/routes.ts
 msgid "VM type overview"
 msgstr "Översikt över VM-typ"
 
@@ -9485,6 +9684,7 @@ msgstr "Variabel #{index}"
 msgid "Verifying email change"
 msgstr "Verifiera ändring av e-post"
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/navigation/AppFooter.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
@@ -9557,7 +9757,10 @@ msgstr "Volymtyp"
 msgid "Volume type storage limit is exceeded"
 msgstr "Volymtyp lagringsgräns har överskridits"
 
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
+#: src/openstack/openstack-tenant/tabs.ts
 msgid "Volumes"
 msgstr "Volymer"
 
@@ -9573,9 +9776,7 @@ msgstr "Webhook"
 msgid "Website URL"
 msgstr "Webbplats URL"
 
-#: src/customer/dashboard/CustomerDashboard.tsx
-#: src/project/ProjectDashboard.tsx
-#: src/user/dashboard/UserDashboard.tsx
+#: src/user/dashboard/UserWelcome.tsx
 msgid "Welcome, {user}!"
 msgstr "Välkommen, {user}!"
 
@@ -9610,6 +9811,7 @@ msgid "Would you like to update your current email with the one from the invitat
 msgstr "Vill du uppdatera ditt nuvarande e-postmeddelande med det från inbjudan?"
 
 #: src/marketplace/common/ReviewButton.tsx
+#: src/marketplace/landing/ReviewButton.tsx
 msgid "Write review"
 msgstr "Skriv omdöme"
 
@@ -9623,17 +9825,21 @@ msgstr "YAML har uppdaterats."
 
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/issues/workspace/FeaturesList.tsx
+#: src/issues/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/category/filters/FilteredBy.tsx
 #: src/marketplace/offerings/attributes/utils.tsx
+#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/project/ProjectRemoveDialog.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
 #: src/user/hooks/HookRemoveDialog.tsx
 #: src/user/keys/KeyRemoveDialog.tsx
 msgid "Yes"
@@ -9856,15 +10062,16 @@ msgstr "etcd"
 msgid "events"
 msgstr "händelser"
 
-#: src/navigation/workspace/OrganizationListItem.tsx
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 msgid "failed"
 msgstr "misslyckades"
 
-#: src/navigation/workspace/OrganizationListItem.tsx
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 msgid "fetching"
 msgstr "hämta"
 
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
+#: src/openstack/openstack-instance/FloatingIpsList.tsx
 msgid "floating IPs"
 msgstr "Flytande IPs"
 
@@ -9933,6 +10140,7 @@ msgstr "aviseringar"
 msgid "of"
 msgstr "av"
 
+#: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offering"
 msgstr "erbjudande"
@@ -9945,10 +10153,11 @@ msgstr "erbjuder behörigheter"
 msgid "offering resources"
 msgstr "erbjuda resurser"
 
-#: src/marketplace/offerings/details/OfferingUsersTab.tsx
+#: src/marketplace/offerings/details/OfferingUsersTable.tsx
 msgid "offering users"
 msgstr "erbjuda användare"
 
+#: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offerings"
 msgstr "erbjudanden"
@@ -9967,11 +10176,11 @@ msgstr "beställ artiklar"
 
 #: src/invitations/GroupInvitationMessage.tsx
 #: src/invitations/InvitationMessage.tsx
-#: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "organization"
 msgstr "organisation"
 
 #: src/resource/support/SharedProviderCustomers.tsx
+#: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 msgid "organizations"
 msgstr "organisationer"
@@ -9997,7 +10206,6 @@ msgstr "betalningar"
 msgid "permission reviews"
 msgstr "behörighetsgranskningar"
 
-#: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "plans"
 msgstr "planer"
@@ -10012,9 +10220,11 @@ msgstr "hamnar"
 msgid "project"
 msgstr "projekt"
 
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
+#: src/user/affiliations/ProjectsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 msgid "projects"
 msgstr "projekt"
@@ -10068,6 +10278,7 @@ msgid "snapshot schedules"
 msgstr "Ögonblicksbildscheman"
 
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 msgid "snapshots"
 msgstr "ögonblicksbilder"
@@ -10077,6 +10288,7 @@ msgid "storage"
 msgstr "lagring"
 
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 msgid "subnets"
 msgstr "undernät"
 
@@ -10104,17 +10316,20 @@ msgstr "gruppmedlemmar"
 msgid "till"
 msgstr "tills"
 
+#: src/user/api-key/TokenLifetimeField.tsx
 #: src/user/support/utils.ts
 msgid "token will not timeout"
 msgstr "token kommer inte att ta timeout"
 
 #: src/customer/popover/CustomerUsersList.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"
 msgstr "användare"
 
 #: src/digitalocean/digitalocean-droplet-config.ts
+#: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/resource/utils.tsx
 msgid "vCPU"
@@ -10153,6 +10368,7 @@ msgid "volume snapshots"
 msgstr "volymögonblicksbilder"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
 msgid "volumes"
 msgstr "Volymer"
 
@@ -10201,7 +10417,7 @@ msgstr "{number} dagar"
 msgid "{relative} ago"
 msgstr "{relative} sedan"
 
-#: src/issues/IssueDetails.tsx
+#: src/issues/IssueSummary.tsx
 msgid "{relative} ago, {date}"
 msgstr "{relative} sedan, {date}"
 
@@ -10282,7 +10498,6 @@ msgid "{resource_name} has been deleted."
 msgstr "{resource_name} har tagits bort."
 
 #: src/invitations/RoleField.tsx
-#: src/project/team/RoleField.tsx
 msgid "{role} in {project}"
 msgstr "{role} i {project}"
 
@@ -10292,7 +10507,6 @@ msgid "{sender} has invited you to join {name} {type} in {role} role."
 msgstr "{sender} har bjudit in dig att gå med i {name} {type} i {role} roll."
 
 #: src/quotas/QuotasTable.tsx
-#: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "{usage} of {limit}"
 msgstr "{usage} av {limit}"
 
@@ -10329,10 +10543,12 @@ msgid "{user} has requested termination of {resource_name} with active plan \"{p
 msgstr "{user} har begärt uppsägning av {resource_name} med aktiv plan ”{plan_name}”."
 
 #: src/customer/dashboard/api.ts
+#: src/project/utils.ts
 msgid "{value} at {date}"
 msgstr "{value} vid {date}"
 
 #: src/customer/dashboard/api.ts
+#: src/project/utils.ts
 msgid "{value} at {date}, estimated"
 msgstr "{value} vid {date}, uppskattat"
 
