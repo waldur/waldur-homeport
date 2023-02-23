@@ -36,7 +36,7 @@ export const RancherClusterKubeconfigDialog: FunctionComponent<any> = (
   return (
     <ModalDialog
       title={translate('Kubeconfig file')}
-      footer={<CloseDialogButton />}
+      footer={<CloseDialogButton label={translate('Done')} />}
     >
       {loading ? (
         <LoadingSpinner />

@@ -1485,6 +1485,13 @@ msgstr ""
 msgid "Client secret"
 msgstr ""
 
+#: src/marketplace/offerings/images/ImageDetailsDialog.tsx
+#: src/marketplace/referral/OfferingReferralsDialog.tsx
+#: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesDialog.tsx
+#: src/notifications/RecipientsListDialog.tsx
+#: src/resource/summary/ResourceSummaryModal.tsx
+#: src/user/UserPopover.tsx
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "Close"
 msgstr ""
@@ -2656,9 +2663,15 @@ msgstr ""
 msgid "Domain name. If not defined default domain will be used."
 msgstr ""
 
+#: src/invoices/events/InvoiceEventsDialog.tsx
+#: src/marketplace/details/plan/PlanDetailsDialog.tsx
+#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
+#: src/navigation/BackendHealthStatusDialog.tsx
+#: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
+#: src/user/support/UserDetailsDialog.tsx
 msgid "Done"
 msgstr ""
 
@@ -5618,6 +5631,22 @@ msgstr ""
 
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 msgid "Offerings images"
+msgstr ""
+
+#: src/core/MessageDialog.tsx
+#: src/customer/popover/CustomerPopover.tsx
+#: src/events/EventDetailsDialog.tsx
+#: src/events/TypeListDialog.tsx
+#: src/marketplace/details/plan/PlanDescription.tsx
+#: src/marketplace/offerings/actions/RequestActionDialog.tsx
+#: src/marketplace/orders/TermsOfServiceDialog.tsx
+#: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/marketplace/resources/report/ShowReportDialog.tsx
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/slurm/RequestLimitsChangeDialog.tsx
+msgid "Ok"
 msgstr ""
 
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx

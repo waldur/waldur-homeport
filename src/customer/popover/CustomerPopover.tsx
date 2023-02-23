@@ -18,7 +18,7 @@ export const CustomerPopover: FunctionComponent<{
   return (
     <ModalDialog
       title={translate('Organization users list')}
-      footer={<CloseDialogButton />}
+      footer={<CloseDialogButton label={translate('Ok')} />}
     >
       {loading ? (
         <LoadingSpinner />

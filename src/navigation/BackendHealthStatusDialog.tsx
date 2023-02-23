@@ -19,7 +19,7 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
   return (
     <ModalDialog
       title={translate('Backend health status')}
-      footer={<CloseDialogButton />}
+      footer={<CloseDialogButton label={translate('Done')} />}
     >
       {loading ? (
         <LoadingSpinner />

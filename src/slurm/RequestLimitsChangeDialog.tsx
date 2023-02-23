@@ -59,7 +59,7 @@ export const RequestLimitsChangeDialog: FunctionComponent<{
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <CloseDialogButton />
+        <CloseDialogButton label={translate('Ok')} />
       </Modal.Footer>
     </>
   );

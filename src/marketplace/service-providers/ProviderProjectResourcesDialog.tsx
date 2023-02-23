@@ -17,7 +17,7 @@ export const ProviderProjectResourcesDialog: FunctionComponent<ProviderProjectRe
   (props) => (
     <ModalDialog
       title={translate('Resources in project and provider')}
-      footer={<CloseDialogButton />}
+      footer={<CloseDialogButton label={translate('Close')} />}
     >
       <ProviderProjectResourcesList {...props.resolve} />
     </ModalDialog>

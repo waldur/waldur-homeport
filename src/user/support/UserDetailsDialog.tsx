@@ -19,7 +19,7 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = (
       title={translate('User details of {fullName}', {
         fullName: props.resolve.user.full_name,
       })}
-      footer={<CloseDialogButton />}
+      footer={<CloseDialogButton label={translate('Done')} />}
     >
       <UserDetailsView user={props.resolve.user} />
     </ModalDialog>

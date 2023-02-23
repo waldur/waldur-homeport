@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
@@ -17,7 +18,7 @@ export const TypeListDialog: FunctionComponent<TypeListDialogProps> = (
   <ModalDialog
     title={props.dialogTitle}
     bodyClassName="types-list-dialog"
-    footer={<CloseDialogButton />}
+    footer={<CloseDialogButton label={translate('Ok')} />}
   >
     {props.types.map((type, i) => (
       <div key={i}>

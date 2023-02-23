@@ -10,7 +10,7 @@ export const MarketplaceKeyValueDialog: FunctionComponent<any> = (props) => {
   return (
     <ModalDialog
       title={translate('Request details')}
-      footer={<CloseDialogButton />}
+      footer={<CloseDialogButton label={translate('Ok')} />}
     >
       <KeyValueTable items={props.resolve.items} />
     </ModalDialog>

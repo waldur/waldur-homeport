@@ -14,7 +14,7 @@ export const ImageDetailsDialog: FunctionComponent<ImageDetailsDialogProps> = (
 ) => (
   <ModalDialog
     title={translate('Viewing image')}
-    footer={<CloseDialogButton />}
+    footer={<CloseDialogButton label={translate('Close')} />}
   >
     <div
       style={{

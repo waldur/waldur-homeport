@@ -23,7 +23,7 @@ const PureEventDetailsDialog: FunctionComponent<EventDetailsDialogProps> = (
 ) => (
   <ModalDialog
     title={translate('Event details')}
-    footer={<CloseDialogButton />}
+    footer={<CloseDialogButton label={translate('Ok')} />}
   >
     <EventDetailsTable
       event={props.resolve.event}

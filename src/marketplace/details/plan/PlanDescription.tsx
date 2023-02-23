@@ -12,7 +12,7 @@ interface PlanDescriptionProps {
 export const PlanDescription = (props: PlanDescriptionProps) => (
   <ModalDialog
     title={translate('Plan description')}
-    footer={<CloseDialogButton />}
+    footer={<CloseDialogButton label={translate('Ok')} />}
   >
     <FormattedHtml html={props.resolve.plan_description} />
   </ModalDialog>
