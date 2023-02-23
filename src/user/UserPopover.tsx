@@ -90,7 +90,7 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
         </Tabs>
       </Modal.Body>
       <Modal.Footer>
-        <CloseDialogButton />
+        <CloseDialogButton label={translate('Close')} />
       </Modal.Footer>
     </>
   ) : null;

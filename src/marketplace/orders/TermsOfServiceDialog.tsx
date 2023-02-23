@@ -15,7 +15,7 @@ export const TermsOfServiceDialog: FunctionComponent<TermsOfServiceDialogProps> 
   (props) => (
     <ModalDialog
       title={translate('Terms of Service')}
-      footer={<CloseDialogButton />}
+      footer={<CloseDialogButton label={translate('Ok')} />}
     >
       <FormattedHtml html={props.resolve.content} />
     </ModalDialog>

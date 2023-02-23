@@ -67,7 +67,7 @@ export const ApplicationDetailsDialog: FunctionComponent<{
 }> = ({ resolve: { application } }) => (
   <ModalDialog
     title={translate('Application details')}
-    footer={<CloseDialogButton />}
+    footer={<CloseDialogButton label={translate('Ok')} />}
   >
     <Accordion id="application-details" defaultActiveKey="summary">
       <Accordion.Item eventKey="summary">

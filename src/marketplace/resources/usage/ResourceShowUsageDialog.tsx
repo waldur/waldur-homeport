@@ -18,7 +18,7 @@ export const ResourceShowUsageDialog: FunctionComponent<ResourceUsageDialogProps
       title={translate('Resource usage for {resourceName}', {
         resourceName: resolve.resource.name,
       })}
-      footer={<CloseDialogButton />}
+      footer={<CloseDialogButton label={translate('Close')} />}
     >
       <ResourceUsageTabsContainer resource={resolve.resource} />
     </ModalDialog>

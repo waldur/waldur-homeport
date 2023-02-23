@@ -18,7 +18,7 @@ export const ShowReportDialog: FunctionComponent<ShowReportDialogProps> = (
 ) => (
   <ModalDialog
     title={translate('Report details')}
-    footer={<CloseDialogButton />}
+    footer={<CloseDialogButton label={translate('Ok')} />}
   >
     <ShowReportComponent report={props.resolve.report} />
   </ModalDialog>

@@ -38,7 +38,7 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
   return (
     <ModalDialog
       title={translate('Offering details')}
-      footer={<CloseDialogButton />}
+      footer={<CloseDialogButton label={translate('Done')} />}
     >
       {loading ? (
         <LoadingSpinner />

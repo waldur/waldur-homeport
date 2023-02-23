@@ -57,7 +57,7 @@ export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
   return (
     <ModalDialog
       title={translate('Plan details')}
-      footer={<CloseDialogButton />}
+      footer={<CloseDialogButton label={translate('Done')} />}
     >
       {loading ? (
         <LoadingSpinner />

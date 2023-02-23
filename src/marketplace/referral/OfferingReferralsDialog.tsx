@@ -17,7 +17,7 @@ export const OfferingReferralsDialog: FunctionComponent<OfferingReferralsDialogP
       title={translate('Referrals for {name}', {
         name: props.resolve.name,
       })}
-      footer={<CloseDialogButton />}
+      footer={<CloseDialogButton label={translate('Close')} />}
     >
       <ReferralsList offering={props.resolve} />
     </ModalDialog>

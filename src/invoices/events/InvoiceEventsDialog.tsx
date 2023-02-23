@@ -53,7 +53,7 @@ export const InvoiceEventsDialog: FunctionComponent<InvoiceEventsDialogProps> =
           )}
         </Modal.Body>
         <Modal.Footer>
-          <CloseDialogButton />
+          <CloseDialogButton label={translate('Done')} />
         </Modal.Footer>
       </>
     );

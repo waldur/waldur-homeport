@@ -42,7 +42,7 @@ const getChartData = (props: PlanUsageRowProps) => ({
 export const PlanUsageDialog = (props: { resolve: PlanUsageRowProps }) => (
   <ModalDialog
     title={translate('Plan capacity')}
-    footer={<CloseDialogButton />}
+    footer={<CloseDialogButton label={translate('Ok')} />}
   >
     <p>
       <strong>{translate('Provider')}</strong>:{' '}

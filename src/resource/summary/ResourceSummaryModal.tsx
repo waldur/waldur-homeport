@@ -28,7 +28,10 @@ export class PureResourceSummaryModal extends Component<PureResourceSummaryModal
   render() {
     const { resource, loading } = this.props;
     return (
-      <ModalDialog title={translate('Details')} footer={<CloseDialogButton />}>
+      <ModalDialog
+        title={translate('Details')}
+        footer={<CloseDialogButton label={translate('Close')} />}
+      >
         {loading ? (
           <LoadingSpinner />
         ) : (
