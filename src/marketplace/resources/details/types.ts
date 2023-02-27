@@ -3,7 +3,7 @@ import { StateIndicatorProps } from '@waldur/core/StateIndicator';
 interface DataRow {
   name: string;
   state?: StateIndicatorProps;
-  summary: string;
+  summary?: string;
   marketplace_resource_uuid?: string;
   url?: string;
   project_uuid?: string;

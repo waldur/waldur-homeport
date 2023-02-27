@@ -3816,7 +3816,9 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/marketplace/offerings/details/PublicOfferingImages.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
+#: src/openstack/openstack-tenant/tabs.ts
 msgid "Images"
 msgstr ""
 
@@ -4967,6 +4969,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 #: src/openstack/openstack-tenant/TenantFlavorsList.tsx
+#: src/openstack/openstack-tenant/TenantImagesList.tsx
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
 #: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
@@ -12665,6 +12668,10 @@ msgstr ""
 
 #: src/providers/support/MapInfoPanel.tsx
 msgid "hours"
+msgstr ""
+
+#: src/openstack/openstack-tenant/TenantImagesList.tsx
+msgid "images"
 msgstr ""
 
 #: src/rancher/cluster/ClusterIngressesList.tsx
