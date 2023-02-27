@@ -31,7 +31,7 @@ describe('Table', () => {
 
     it('renders message if loading failed', () => {
       const wrapper = shallow(<Table {...defaultProps} error="Not found" />);
-      expect(wrapper.contains('Unable to fetch data.')).toBe(true);
+      expect(wrapper.html()).toContain('Unable to fetch data.');
     });
 
     it('renders message if list is empty', () => {

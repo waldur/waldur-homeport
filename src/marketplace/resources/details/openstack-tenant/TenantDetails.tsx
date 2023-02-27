@@ -10,6 +10,7 @@ import { ResourceTabs } from '../ResourceTabs';
 
 import { FlavorsSection } from './FlavorsSection';
 import { FloatingIPsSection } from './FloatingIPsSection';
+import { ImagesSection } from './ImagesSection';
 import { InstancesSection } from './InstancesSection';
 import { NetworksSection } from './NetworksSection';
 import { PortsSection } from './PortsSection';
@@ -59,6 +60,11 @@ export const TenantDetails = ({ resource }) => {
                   title: translate('Flavors'),
                   count: value.counters.flavors,
                   component: FlavorsSection,
+                },
+                {
+                  title: translate('Images'),
+                  count: value.counters.images,
+                  component: ImagesSection,
                 },
                 {
                   title: translate('Server groups'),

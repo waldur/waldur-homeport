@@ -51,6 +51,10 @@ const TenantSnapshotsList = lazyComponent(
   () => import('../openstack-snapshot/TenantSnapshotsList'),
   'TenantSnapshotsList',
 );
+const TenantImagesList = lazyComponent(
+  () => import('./TenantImagesList'),
+  'TenantImagesList',
+);
 
 NestedResourceTabsConfiguration.register('OpenStack.Tenant', () => [
   {
@@ -65,6 +69,11 @@ NestedResourceTabsConfiguration.register('OpenStack.Tenant', () => [
         key: 'flavors',
         title: translate('Flavors'),
         component: TenantFlavorsList,
+      },
+      {
+        key: 'images',
+        title: translate('Images'),
+        component: TenantImagesList,
       },
       {
         key: 'server-groups',
