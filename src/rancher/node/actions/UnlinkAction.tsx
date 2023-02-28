@@ -47,7 +47,11 @@ export const UnlinkAction: ActionItemType = ({ resource, refetch }) => {
     !ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE
   ) {
     return (
-      <ActionItem title={translate('Unlink instance')} action={callback} />
+      <ActionItem
+        title={translate('Unlink instance')}
+        action={callback}
+        staff
+      />
     );
   }
   return null;

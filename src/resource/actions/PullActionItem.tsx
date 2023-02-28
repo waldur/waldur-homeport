@@ -10,6 +10,7 @@ import { ActionItem } from './ActionItem';
 interface PullActionItemProps<T> {
   apiMethod(id: string): Promise<AxiosResponse>;
   resource: T;
+  staff?: boolean;
   iconClass?: string;
   as?;
   refetch?;
@@ -48,5 +49,5 @@ export const PullActionItem: <T extends { uuid: string; backend_id?: string }>(
   if (!props.resource.backend_id) {
     return null;
   }
-  return <ActionItem {...buttonProps} as={props.as} />;
+  return <ActionItem {...buttonProps} as={props.as} staff={props.staff} />;
 };

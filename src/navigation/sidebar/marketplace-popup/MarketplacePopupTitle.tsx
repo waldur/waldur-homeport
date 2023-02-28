@@ -39,10 +39,10 @@ export const MarketplacePopupTitle: FunctionComponent<{
   useLayoutEffect(() => {
     function checkWidth() {
       if (!isVisible || !refTitle.current) return;
-      const wrapperWidth = refTitle.current.clientWidth;
+      const wrapperWidth = refTitle.current?.clientWidth;
       const buttonWidth = refTitle.current
         .getElementsByTagName('button')
-        .item(0).clientWidth;
+        .item(0)?.clientWidth;
       if (wrapperWidth <= buttonWidth && organizationNameLength > 0) {
         changeOrganizationNameLength(organizationNameLength - 1);
       } else if (

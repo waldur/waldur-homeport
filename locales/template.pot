@@ -8973,11 +8973,8 @@ msgstr ""
 
 #: src/marketplace/resources/actions/EditResourceEndDateAction.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateByProviderAction.tsx
-msgid "Set termination date"
-msgstr ""
-
 #: src/marketplace/resources/actions/EditResourceEndDateByStaffAction.tsx
-msgid "Set termination date (staff)"
+msgid "Set termination date"
 msgstr ""
 
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
@@ -9247,6 +9244,11 @@ msgstr ""
 #: src/user/support/UserList.tsx
 #: src/user/support/utils.ts
 msgid "Staff"
+msgstr ""
+
+#: src/marketplace/resources/details/ActionButton.tsx
+#: src/resource/actions/ActionItem.tsx
+msgid "Staff action"
 msgstr ""
 
 #: src/user/support/utils.ts

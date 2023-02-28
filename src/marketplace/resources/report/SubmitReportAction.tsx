@@ -20,5 +20,6 @@ export const SubmitReportAction: ActionItemType = ({ resource, refetch }) => (
     modalComponent={SubmitReportDialog}
     resource={resource}
     extraResolve={{ refetch }}
+    staff
   />
 );
