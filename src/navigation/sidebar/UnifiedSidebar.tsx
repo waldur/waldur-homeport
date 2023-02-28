@@ -20,7 +20,7 @@ import { SupportMenu } from './SupportMenu';
 export const UnifiedSidebar = () => {
   const user = useSelector(getUser);
   const router = useRouter();
-  const { state } = useCurrentStateAndParams();
+  const { state, params } = useCurrentStateAndParams();
   useEffect(() => {
     MenuComponent.reinitialization();
     const menuElement = document.querySelector('#kt_aside_menu');
@@ -35,7 +35,8 @@ export const UnifiedSidebar = () => {
       [
         'marketplace-project-resources-all',
         'marketplace-project-resources',
-      ].includes(state.name)
+      ].includes(state.name) ||
+      params.resource_uuid
     ) {
       const item = document.querySelector('#resources-menu');
       menu.show(item);
