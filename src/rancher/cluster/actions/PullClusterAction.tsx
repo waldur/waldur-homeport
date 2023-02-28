@@ -10,6 +10,12 @@ import { pullCluster } from '../../api';
 export const PullClusterAction: ActionItemType = ({ resource }) => {
   const user = useSelector(getUser);
   if (user.is_staff || !ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE)
-    return <PullActionItem apiMethod={pullCluster} resource={resource} />;
+    return (
+      <PullActionItem
+        apiMethod={pullCluster}
+        resource={resource}
+        staff={ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE}
+      />
+    );
   return null;
 };

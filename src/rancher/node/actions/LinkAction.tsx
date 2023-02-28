@@ -22,6 +22,7 @@ export const LinkAction: ActionItemType = ({ resource, refetch }) => {
         modalComponent={LinkDialog}
         resource={resource}
         extraResolve={{ refetch }}
+        staff
       />
     );
   }

@@ -27,6 +27,6 @@ export const MoveResourceAction: ActionItemType = ({ resource, refetch }) => {
     );
 
   return isStaff ? (
-    <ActionItem title={translate('Move')} action={callback} />
+    <ActionItem title={translate('Move')} action={callback} staff />
   ) : null;
 };

@@ -29,5 +29,5 @@ export const useSetLimits = ({ resource, refetch }) => {
 
 export const SetLimitsAction: ActionItemType = ({ resource, refetch }) => {
   const buttonProps = useSetLimits({ resource, refetch });
-  return <ActionItem {...buttonProps} />;
+  return <ActionItem {...buttonProps} staff />;
 };
