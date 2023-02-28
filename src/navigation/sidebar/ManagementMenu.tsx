@@ -9,10 +9,11 @@ import {
   isOwnerOrStaff as isOwnerOrStaffSelector,
 } from '@waldur/workspace/selectors';
 
-import { MenuAccordion } from './MenuAccordion';
 import { MenuItem } from './MenuItem';
 
-const Icon = require('./Management.svg');
+const IconOrganization = require('./Organization.svg');
+const IconProject = require('./Project.svg');
+const IconProvider = require('./Service_Provider.svg');
 
 export const ManagementMenu = () => {
   const customer = useSelector(getCustomer);
@@ -20,22 +21,22 @@ export const ManagementMenu = () => {
   const user = useSelector(getUser);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   return (
-    <MenuAccordion
-      title={translate('Management')}
-      itemId="management-menu"
-      iconPath={Icon}
-    >
+    <>
       {!isOwnerOrStaff ? null : customer ? (
         <MenuItem
           title={translate('Organization')}
           state="organization.dashboard"
           params={{ uuid: customer.uuid }}
           activeState="organization"
+          iconPath={IconOrganization}
+          child={false}
         />
       ) : (
         <MenuItem
           title={translate('Organization')}
           state="profile.no-customer"
+          iconPath={IconOrganization}
+          child={false}
         />
       )}
       {project ? (
@@ -44,9 +45,16 @@ export const ManagementMenu = () => {
           state="project.dashboard"
           activeState="project"
           params={{ uuid: project.uuid }}
+          iconPath={IconProject}
+          child={false}
         />
       ) : (
-        <MenuItem title={translate('Project')} state="profile.no-project" />
+        <MenuItem
+          title={translate('Project')}
+          state="profile.no-project"
+          iconPath={IconProject}
+          child={false}
+        />
       )}
       {customer && (checkIsServiceManager(customer, user) || user.is_staff) && (
         <MenuItem
@@ -54,8 +62,10 @@ export const ManagementMenu = () => {
           state="marketplace-vendor-offerings"
           params={{ uuid: customer.uuid }}
           activeState="marketplace-provider"
+          iconPath={IconProvider}
+          child={false}
         />
       )}
-    </MenuAccordion>
+    </>
   );
 };

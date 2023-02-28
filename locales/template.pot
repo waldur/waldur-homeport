@@ -4607,7 +4607,6 @@ msgstr ""
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/PageManagement.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
-#: src/navigation/sidebar/ManagementMenu.tsx
 msgid "Management"
 msgstr ""
 
