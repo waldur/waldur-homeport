@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: inherit;
+      }
+      .cls-2 {
+        opacity: .5;
+      }
+    </style>
+  </defs>
+  <path fill="currentColor" class="cls-1" d="m76.42,73.74h-5V21.62c0-.28-.22-.5-.5-.5H29.08c-.28,0-.5.22-.5.5v52.12h-5V21.62c0-3.03,2.47-5.5,5.5-5.5h41.84c3.03,0,5.5,2.47,5.5,5.5v52.12Z"/>
+  <rect fill="currentColor" class="cls-1" x="18.74" y="78.88" width="62.52" height="5"/>
+  <g>
+    <g>
+      <rect fill="currentColor" class="cls-2" x="38.33" y="31.13" width="7.37" height="5"/>
+      <rect fill="currentColor" class="cls-2" x="54.3" y="31.13" width="7.37" height="5"/>
+    </g>
+    <g>
+      <rect fill="currentColor" class="cls-2" x="38.33" y="46.68" width="7.37" height="5"/>
+      <rect fill="currentColor" class="cls-2" x="54.3" y="46.68" width="7.37" height="5"/>
+    </g>
+    <g>
+      <rect fill="currentColor" class="cls-2" x="38.33" y="62.23" width="7.37" height="5"/>
+      <rect fill="currentColor" class="cls-2" x="54.3" y="62.23" width="7.37" height="5"/>
+    </g>
+  </g>
+</svg>
