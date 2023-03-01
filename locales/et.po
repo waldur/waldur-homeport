@@ -522,6 +522,10 @@ msgstr "Kuuluvused"
 msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
 msgstr "Pärast salajase API-koodi taasloomist pole vana võtme kasutamine võimalik."
 
+#: src/user/support/UserEditForm.tsx
+msgid "Agree and proceed"
+msgstr "Nõustu ja jätka"
+
 #: src/marketplace/cart/ShoppingCart.tsx
 msgid "Agree with ToS"
 msgstr "Nõustuge ToS-iga"
