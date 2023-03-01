@@ -56,16 +56,18 @@ export const ManagementMenu = () => {
           child={false}
         />
       )}
-      {customer && (checkIsServiceManager(customer, user) || user.is_staff) && (
-        <MenuItem
-          title={translate('Provider')}
-          state="marketplace-vendor-offerings"
-          params={{ uuid: customer.uuid }}
-          activeState="marketplace-provider"
-          iconPath={IconProvider}
-          child={false}
-        />
-      )}
+      {customer &&
+        customer.is_service_provider &&
+        (checkIsServiceManager(customer, user) || isOwnerOrStaff) && (
+          <MenuItem
+            title={translate('Provider')}
+            state="marketplace-vendor-offerings"
+            params={{ uuid: customer.uuid }}
+            activeState="marketplace-provider"
+            iconPath={IconProvider}
+            child={false}
+          />
+        )}
     </>
   );
 };
