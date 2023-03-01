@@ -7,7 +7,7 @@ export const ENV: ApplicationConfigurationOptions = {
   apiEndpoint: 'http://localhost:8080/',
   marketplaceLandingPageTitle: '',
 
-  pageSizes: [5, 10, 20, 50],
+  pageSizes: [5, 10, 20, 50, 100],
   pageSize: 10,
   defaultErrorMessage: gettext('Reason unknown, please contact support.'),
 
