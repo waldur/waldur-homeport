@@ -22,7 +22,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
           orderField: 'name',
         },
         {
-          title: translate('Desciption'),
+          title: translate('Description'),
           render: ({ row }) => row.description,
         },
         {

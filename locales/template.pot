@@ -2396,10 +2396,6 @@ msgstr ""
 msgid "Deployment made easy, for everyone"
 msgstr ""
 
-#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
-msgid "Desciption"
-msgstr ""
-
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/issues/create/DescriptionGroup.tsx
 #: src/issues/list/IssuesList.tsx
@@ -2435,6 +2431,7 @@ msgstr ""
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
