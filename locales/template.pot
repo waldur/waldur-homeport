@@ -3317,6 +3317,10 @@ msgstr ""
 msgid "Find project"
 msgstr ""
 
+#: src/marketplace/resources/resource-selector/ResourceSelector.tsx
+msgid "Find resource"
+msgstr ""
+
 #: src/marketplace-checklist/AnswersTable.tsx
 msgid "Find solution"
 msgstr ""
@@ -5318,6 +5322,7 @@ msgstr ""
 msgid "No resource"
 msgstr ""
 
+#: src/marketplace/resources/resource-selector/ResourcesList.tsx
 #: src/navigation/header/SearchToggle.tsx
 msgid "No result found"
 msgstr ""
@@ -6650,6 +6655,7 @@ msgstr ""
 msgid "Please stop the instance before its removal."
 msgstr ""
 
+#: src/marketplace/resources/resource-selector/ResourcesList.tsx
 #: src/navigation/header/SearchToggle.tsx
 msgid "Please try again with a different query"
 msgstr ""
@@ -9086,6 +9092,10 @@ msgstr ""
 msgid "Show all ({numberOfAllCategories})"
 msgstr ""
 
+#: src/marketplace/resources/resource-selector/ResourceSelector.tsx
+msgid "Show all resources"
+msgstr ""
+
 #: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
 msgid "Show chart"
 msgstr ""
@@ -9179,6 +9189,10 @@ msgstr ""
 #: src/customer/list/AccountingRunningField.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
+msgstr ""
+
+#: src/marketplace/resources/resource-selector/ResourceSelector.tsx
+msgid "Show {category} resources"
 msgstr ""
 
 #: src/navigation/sidebar/ResourcesMenu.tsx
