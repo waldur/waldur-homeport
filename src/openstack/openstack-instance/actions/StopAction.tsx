@@ -20,13 +20,13 @@ const validators = [
   validateRuntimeState('ACTIVE'),
 ];
 
+export const getProps = () => ({
+  title: translate('Stop'),
+  iconClass: 'fa-stop',
+  validators,
+  apiMethod: stopInstance,
+});
+
 export const StopAction: ActionItemType = ({ resource, ...rest }) => (
-  <AsyncActionItem
-    title={translate('Stop')}
-    iconClass="fa-stop"
-    resource={resource}
-    validators={validators}
-    apiMethod={stopInstance}
-    {...rest}
-  />
+  <AsyncActionItem {...getProps()} resource={resource} {...rest} />
 );

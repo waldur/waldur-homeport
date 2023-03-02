@@ -779,6 +779,14 @@ msgstr ""
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr ""
 
+#: src/marketplace/resources/mass-actions/MultiDestroyAction.tsx
+msgid "Are you sure you want to destroy {count} resources?"
+msgstr ""
+
+#: src/marketplace/resources/mass-actions/MultiPullAction.tsx
+msgid "Are you sure you want to pull {count} resources?"
+msgstr ""
+
 #: src/invoices/details/InvoiceItemDelete.tsx
 msgid "Are you sure you want to remove invoice item {name}?"
 msgstr ""
@@ -797,6 +805,10 @@ msgstr ""
 
 #: src/resource/actions/UnlinkActionItem.tsx
 msgid "Are you sure you want to unlink {name} {resourceType}?"
+msgstr ""
+
+#: src/marketplace/resources/mass-actions/VirtualMachineMultiAction.tsx
+msgid "Are you sure you want to {title} {count} resources?"
 msgstr ""
 
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
@@ -2481,6 +2493,7 @@ msgstr ""
 msgid "Destination port"
 msgstr ""
 
+#: src/marketplace/resources/mass-actions/MultiDestroyAction.tsx
 #: src/openstack/openstack-instance/actions/DestroyAction.tsx
 #: src/resource/actions/DestroyActionItem.tsx
 msgid "Destroy"
@@ -6324,6 +6337,12 @@ msgstr ""
 msgid "Perform local logout"
 msgstr ""
 
+#: src/marketplace/resources/mass-actions/MultiDestroyAction.tsx
+#: src/marketplace/resources/mass-actions/MultiPullAction.tsx
+#: src/marketplace/resources/mass-actions/VirtualMachineMultiAction.tsx
+msgid "Perform mass action"
+msgstr ""
+
 #: src/customer/team/ReviewCloseButton.tsx
 msgid "Perform review"
 msgstr ""
@@ -7239,6 +7258,10 @@ msgstr ""
 
 #: src/marketplace/referral/ReferralsList.tsx
 msgid "Publisher"
+msgstr ""
+
+#: src/marketplace/resources/mass-actions/MultiPullAction.tsx
+msgid "Pull"
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
@@ -13058,6 +13081,10 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/resource/support/TreemapChart.tsx
 msgid "{count} resources"
+msgstr ""
+
+#: src/table/Table.tsx
+msgid "{count} row selected"
 msgstr ""
 
 #: src/table/Table.tsx
