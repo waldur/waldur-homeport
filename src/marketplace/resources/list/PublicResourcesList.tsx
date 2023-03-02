@@ -7,10 +7,10 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ExpandableResourceSummary } from '@waldur/marketplace/resources/list/ExpandableResourceSummary';
 import { PublicResourceActions } from '@waldur/marketplace/resources/list/PublicResourceActions';
+import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
-import { ActionButton } from '@waldur/table/ActionButton';
 import {
   getCustomer,
   getUser,
@@ -104,24 +104,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       )}
       filterVisible={true}
       enableMultiSelect={true}
-      multiSelectActions={({ rows }) => (
-        <>
-          <ActionButton
-            action={() => {
-              return true; /* for test */
-            }}
-            title="action 1"
-          />
-          <ActionButton
-            action={() => {
-              return true; /* for test */
-            }}
-            className="ms-3 btn-success"
-            icon="fa fa-check"
-            title={'approve ' + rows.length}
-          />
-        </>
-      )}
+      multiSelectActions={ResourceMultiSelectAction}
     />
   );
 };

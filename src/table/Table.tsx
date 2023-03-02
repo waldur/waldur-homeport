@@ -54,7 +54,7 @@ export interface TableProps<RowType = any> extends TableState {
   hasHeaders?: boolean;
   fullWidth?: boolean;
   enableMultiSelect?: boolean;
-  multiSelectActions?: React.ComponentType<{ rows: any[] }>;
+  multiSelectActions?: React.ComponentType<{ rows: any[]; refetch }>;
   selectRow?(row: any): void;
   selectAllRows?(rows: any[]): void;
   filter?: Record<string, any>;
@@ -117,9 +117,13 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                     )
                   ) : (
                     <span className="me-2 border-bottom-dashed border-2">
-                      {translate('{count} rows selected', {
-                        count: this.props.selectedRows?.length,
-                      })}
+                      {this.props.selectedRows?.length === 1
+                        ? translate('{count} row selected', {
+                            count: this.props.selectedRows?.length,
+                          })
+                        : translate('{count} rows selected', {
+                            count: this.props.selectedRows?.length,
+                          })}
                     </span>
                   )}
                 </Col>

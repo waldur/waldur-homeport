@@ -6,6 +6,7 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { RESOURCE_STATES } from '@waldur/marketplace/resources/list/constants';
+import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { CategoryColumn } from '@waldur/marketplace/types';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
@@ -96,6 +97,8 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       hasQuery={true}
       showPageSizeSelector={true}
       expandableRow={ExpandableResourceSummary}
+      enableMultiSelect={true}
+      multiSelectActions={ResourceMultiSelectAction}
     />
   );
 };
