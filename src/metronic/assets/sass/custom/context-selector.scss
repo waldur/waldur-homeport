@@ -162,6 +162,7 @@ $dark-body-active: #1e261f;
           background-color: $hover-bg;
         }
         &.active {
+          color: $white;
           background-color: if(isDarkMode(), $gray-400, $gray-700);
           cursor: default;
 

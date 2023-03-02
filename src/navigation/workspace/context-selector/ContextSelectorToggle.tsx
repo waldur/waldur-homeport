@@ -17,7 +17,7 @@ export const ContextSelectorToggle: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   const isOwner = customer?.owners?.find((perm) => perm.uuid === user?.uuid);
   const isServiceManager = customer?.service_managers?.find(
-    (perm) => perm.uuid === user.uuid,
+    (perm) => perm.uuid === user?.uuid,
   );
   const abbreviation = useMemo(() => getItemAbbreviation(customer), [customer]);
 

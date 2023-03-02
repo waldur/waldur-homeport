@@ -6,6 +6,7 @@ import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 
 import { ResourceStateField } from '../list/ResourceStateField';
+import { ResourceSelectorToggle } from '../resource-selector/ResourceSelector';
 import { ResourceActions } from '../ResourceActions';
 import { Resource } from '../types';
 
@@ -28,7 +29,7 @@ export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps
       <Card.Body className="d-flex flex-column">
         <div className="d-flex flex-grow-1">
           <div className="flex-grow-1">
-            <h3>{resource.name}</h3>
+            <ResourceSelectorToggle resource={resource} />
             <ParentResourceLink resource={resource} />
             <i>
               {`${resource.customer_name} / ${resource.project_name}`}{' '}
