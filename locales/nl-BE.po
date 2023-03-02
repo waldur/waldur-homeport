@@ -1,0 +1,17 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Localazy (https://localazy.com)\n"
+"Project-Id-Version: waldur-homeport\n"
+"Language: nl_BE\n"
+"Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
+
+#: src/issues/feedback/utils.ts
+msgid "10 - Very positive"
+msgstr "10 - Zeer positief"
+
+#: src/issues/feedback/utils.ts
+msgid "1 - Very negative"
+msgstr "1 - Zeer negatief"
