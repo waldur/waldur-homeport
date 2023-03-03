@@ -8,23 +8,93 @@ msgstr ""
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=(n==0) ? 0 : (n==1) ? 1 : (n==2) ? 2 : (n%100>=3 && n%100<=10) ? 3 : (n%100>=11 && n%100<=99) ? 4 : 5;\n"
 
+#: src/booking/CancelAction.tsx
+#: src/form/ListDialog.tsx
+#: src/invitations/GroupInvitationCancelButton.tsx
+#: src/invitations/GroupinvitationButtons.tsx
+#: src/invitations/actions/InvitationCancelButton.tsx
+#: src/issues/comments/IssueCommentsForm.tsx
+#: src/marketplace-flows/FlowCancelAction.tsx
+#: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
+#: src/modal/CloseDialogButton.tsx
+#: src/project/ProjectCreateForm.tsx
+#: src/user/keys/KeyCreateForm.tsx
+#: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
 msgstr "إلغاء"
 
+#: src/customer/dashboard/CustomerDashboard.tsx
+#: src/customer/workspace/utils.ts
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/project/ProjectDashboard.tsx
+#: src/project/utils.ts
+#: src/user/constants.ts
 msgid "Dashboard"
 msgstr "لوحة القيادة"
 
+#: src/customer/workspace/utils.ts
+#: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/rancher/cluster/tabs.ts
 msgid "Projects"
 msgstr "مشاريع"
 
+#: src/customer/dashboard/CustomerDashboard.tsx
+#: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/SupportResourcesContainer.tsx
+#: src/marketplace/sidebar.ts
+#: src/project/ProjectDashboard.tsx
+#: src/project/ProjectResourcesList.tsx
+#: src/project/ProjectWorkspace.tsx
+#: src/rancher/template/CatalogTemplateContainer.tsx
+#: src/rancher/template/breadcrumbs.ts
+#: src/resource/breadcrumbs/ResourceBreadcrumbsRegistry.ts
+#: src/resource/support/ResourcesTreemap.tsx
+#: src/resource/support/TreemapChartFilter.tsx
+#: src/support/SupportDetailsContainer.tsx
+#: src/user/constants.ts
 msgid "Resources"
 msgstr "موارد"
 
+#: src/booking/components/modal/BookingModal.tsx
+#: src/customer/divisions/utils.ts
+#: src/customer/team/CustomerUserAddDialog.tsx
+#: src/customer/team/EditTeamMemberDialog.tsx
+#: src/invoices/growth/utils.ts
+#: src/issues/workspace/FeaturesList.tsx
+#: src/map/SetLocationDialog.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
+#: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
+#: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
+#: src/marketplace/offerings/expandable/utils.ts
+#: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
+#: src/marketplace/resources/actions/MoveResourceDialog.tsx
+#: src/marketplace/resources/usage/utils.ts
+#: src/project/MoveProjectDialog.tsx
+#: src/project/team/AddProjectMemberDialog.tsx
+#: src/providers/ProviderUpdateForm.tsx
 msgid "Save"
 msgstr "حفظ"
 
+#: src/rancher/cluster/tabs.ts
 msgid "Services"
 msgstr "الخدمات"
 
+#: src/customer/team/CustomerTeam.tsx
+#: src/issues/workspace/IssueNavigationService.ts
+#: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/project/team/ProjectTeam.tsx
+#: src/rancher/cluster/tabs.ts
+#: src/slurm/tabs.ts
+#: src/user/support/UserListView.tsx
 msgid "Users"
 msgstr "المستخدمين"

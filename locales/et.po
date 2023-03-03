@@ -801,6 +801,10 @@ msgstr "Kas olete kindel, et soovite nõustuda {name}?"
 msgid "Are you sure you want to cancel a {name}?"
 msgstr "Kas olete kindel, et soovite tühistada {name}?"
 
+#: src/invitations/GroupInvitationCancelButton.tsx
+msgid "Are you sure you want to cancel invitation by {name}?"
+msgstr "Kas olete kindel, et soovid tühistada kutse {name} poolt?"
+
 #: src/resource/actions/DestroyActionItem.tsx
 msgid "Are you sure you want to delete a {name} {resourceType}?"
 msgstr "Kas olete kindel, et soovite kustutada {name} {resourceType}?"
@@ -893,6 +897,10 @@ msgstr "Lisatud"
 #: src/resource/state/constants.ts
 msgid "Attaching"
 msgstr "Lisan"
+
+#: src/issues/attachments/IssueAttachment.tsx
+msgid "Attachment is broken."
+msgstr "Manus on katki."
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 #: src/issues/create/IssueCreateForm.tsx
@@ -1721,6 +1729,12 @@ msgstr "Ühendatud alamvõrgud"
 msgid "Connection details"
 msgstr "Ühenduse üksikasjad"
 
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
+msgid "Contact"
+msgstr "Kontakt"
+
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
@@ -1742,6 +1756,10 @@ msgstr "Kontaktid epost"
 #: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
 msgid "Contact phone"
 msgstr "Kontakttelefon"
+
+#: src/navigation/header/SearchFilters.tsx
+msgid "Contains the word"
+msgstr "Sisaldab sõna"
 
 #: src/user/SelectAffiliationDialog.tsx
 msgid "Continue"
@@ -2684,6 +2702,10 @@ msgstr "Lõpp"
 msgid "End date"
 msgstr "Lõppkuupäev"
 
+#: src/project/ProjectProfile.tsx
+msgid "End date:"
+msgstr "Lõppkuupäev:"
+
 #: src/booking/components/modal/BookingModal.tsx
 msgid "End date must be after start date."
 msgstr "Lõppkuupäev peab olema pärast alguskuupäeva."
@@ -2766,6 +2788,10 @@ msgstr "Hindamine"
 #: src/events/EventDetailsDialog.tsx
 msgid "Event details"
 msgstr "Sündmuse andmed"
+
+#: src/support/EventGroupFilter.tsx
+msgid "Event group"
+msgstr "Sündmuse grupp"
 
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -3258,6 +3284,10 @@ msgstr "Klienditeenindus"
 msgid "Helpdesk dashboard"
 msgstr "Klienditeeninduse töölaud"
 
+#: src/form/SecretField.tsx
+msgid "Hide"
+msgstr "Peida"
+
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Hide controls"
 msgstr "Peida juhtelemendid"
@@ -3274,6 +3304,10 @@ msgstr "Asutuse domeeni nimi"
 #: src/customer/list/OrganizationUpdate.tsx
 msgid "Homepage"
 msgstr "Avaleht"
+
+#: src/marketplace-flows/CustomerCreateExpandableRow.tsx
+msgid "Homepage URL"
+msgstr "Kodulehe URL"
 
 #: src/user/hooks/HookRemoveButton.tsx
 msgid "Hook has been removed."
@@ -3313,6 +3347,10 @@ msgstr "Kuidas omandada Azurele ligipääsuks vajalikud vahendid"
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr "Kuidas omandada DigitalOceani ligipääsuks vajalikud vahendid"
 
+#: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
+msgid "Hypervisor"
+msgstr "Hüpervisor"
+
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "ID"
 msgstr "ID"
@@ -3344,9 +3382,18 @@ msgstr "IP protokoll"
 msgid "IP version"
 msgstr "IP versioon"
 
+#: src/navigation/cookies/CookiesConsent.tsx
+msgid "I agree"
+msgstr "Nõustun"
+
 #: src/rancher/template/CatalogTemplateList.tsx
 msgid "Icon"
 msgstr "Ikoon"
+
+#: src/user/support/IdentityProviderContainer.tsx
+#: src/user/support/IdentityProviderIndicator.tsx
+msgid "Identity provider"
+msgstr "Identiteedi pakkuja"
 
 #: src/marketplace/offerings/option/OfferingOptions.tsx
 msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
@@ -3403,10 +3450,18 @@ msgstr "Impordi"
 msgid "Import YAML"
 msgstr "Impordi YAML"
 
+#: src/user/keys/KeyCreateDialog.tsx
+msgid "Import key"
+msgstr "Impordi võti"
+
 #: src/marketplace/offerings/actions/OfferingImportButton.tsx
 #: src/marketplace/offerings/actions/OfferingImportDialog.tsx
 msgid "Import offering"
 msgstr "Impordi pakkumine"
+
+#: src/user/keys/KeyCreateDialog.tsx
+msgid "Import public key"
+msgstr "Impordi avalik võti"
 
 #: src/marketplace/resources/import/ResourceImportButton.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
@@ -3440,6 +3495,10 @@ msgstr "Kaasa nädalavahetused"
 #: src/customer/details/CustomerErrorDialog.tsx
 msgid "Incorrect organization details"
 msgstr "Ebakorrektsed organisatsiooni andmed"
+
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+msgid "Industry project"
+msgstr "Tööstuse projekt"
 
 #: src/issues/types/constants.ts
 msgid "Informational"
@@ -3834,6 +3893,14 @@ msgstr "Silt, mis on turuplatsi kasutajatele nähtav"
 msgid "Labels"
 msgstr "Sildid"
 
+#: src/navigation/header/LanguageSelectorDropdown.tsx
+msgid "Language"
+msgstr "Keel"
+
+#: src/user/support/UserEditForm.tsx
+msgid "Last name"
+msgstr "Perekonnanimi"
+
 #: src/auth/HeroButton.tsx
 #: src/navigation/cookies/CookiesConsent.tsx
 msgid "Learn more"
@@ -3886,6 +3953,10 @@ msgstr "Limiidid on vigased"
 msgid "Link"
 msgstr "Viide"
 
+#: src/marketplace/resources/details/ResourcesList.tsx
+msgid "List is empty."
+msgstr "Loend on tühi."
+
 #: src/customer/list/TotalCostComponent.tsx
 msgid "Loading"
 msgstr "Laadimine..."
@@ -3914,6 +3985,10 @@ msgstr "Asukoht on edukalt salvestatud."
 #: src/marketplace/offerings/details/PageLocation.tsx
 msgid "Location of {offeringName} offering"
 msgstr "{offeringName} pakkumise asukoht"
+
+#: src/navigation/AnonymousHeader.tsx
+msgid "Log in"
+msgstr "Logi sisse"
 
 #: src/navigation/header/LogoutLink.tsx
 #: src/navigation/header/SiteHeader.tsx
@@ -4000,6 +4075,14 @@ msgstr "Võrkude haldamine"
 msgid "Manage organization"
 msgstr "Halda organisatsiooni"
 
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+msgid "Manage organizations"
+msgstr "Organisatsioonide haldamine"
+
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+msgid "Manage projects"
+msgstr "Projektide haldamine"
+
 #: src/user/dashboard/UserDashboard.tsx
 msgid "Managed projects"
 msgstr "Hallatavad projektid"
@@ -4010,6 +4093,10 @@ msgstr "Hallatavad projektid"
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Management"
 msgstr "Haldus"
+
+#: src/customer/dashboard/CustomerProfile.tsx
+msgid "Managers:"
+msgstr "Haldurid:"
 
 #: src/invoices/list/MarkAsPaidButton.tsx
 msgid "Mark as paid"
@@ -4100,6 +4187,10 @@ msgstr "Mõõdetud ühik"
 msgid "Member"
 msgstr "Liige"
 
+#: src/openstack/openstack-server-groups/tabs.ts
+msgid "Members"
+msgstr "Liikmed"
+
 #: src/rancher/cluster/hpas/utils.ts
 msgid "Memory"
 msgstr "Mälu"
@@ -4167,6 +4258,18 @@ msgstr "Kuu arved"
 msgid "More info"
 msgstr "Lisainfo"
 
+#: src/marketplace/resources/actions/MoveResourceAction.tsx
+msgid "Move"
+msgstr "Liiguta"
+
+#: src/form/utils.ts
+msgid "Must be 2000 characters or less."
+msgstr "Peab olema 2000 tähemärki või vähem."
+
+#: src/project/ProjectNameField.tsx
+msgid "Must be 500 characters or less."
+msgstr "Peab olema 500 tähemärki või vähem."
+
 #: src/core/validators.ts
 msgid "Must be at least {min}"
 msgstr "Peab olema vähemalt {min}"
@@ -4199,6 +4302,10 @@ msgstr "MInu ressursid"
 #: src/marketplace/sidebar.ts
 msgid "My services"
 msgstr "Minu teenused"
+
+#: src/marketplace-checklist/AnswersTable.tsx
+msgid "N/A"
+msgstr "N/A"
 
 #: src/azure/sql/DatabasesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -4390,6 +4497,10 @@ msgstr "Võrgud"
 msgid "New email"
 msgstr "Uus e-posti aadress"
 
+#: src/user/support/EmailChangeForm.tsx
+msgid "New email address"
+msgstr "Uus e-posti aadress"
+
 #: src/openstack/openstack-instance/actions/ChangeFlavorDialog.tsx
 msgid "New flavor"
 msgstr "Muuda tüüpi"
@@ -4490,6 +4601,10 @@ msgstr "Ei õnnestunud teenusepakkujat salvestada."
 #: src/rancher/node/ClusterNodesList.tsx
 msgid "Not assigned"
 msgstr "Pole määratud"
+
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
+msgid "Not logged in"
+msgstr "Ei ole sisse logitud"
 
 #: src/customer/list/AccountingRunningField.tsx
 msgid "Not running accounting"
@@ -4677,6 +4792,22 @@ msgstr "Pakkumised"
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 msgid "Offerings images"
 msgstr "Pakkumiste pildid"
+
+#: src/core/MessageDialog.tsx
+#: src/customer/popover/CustomerPopover.tsx
+#: src/events/EventDetailsDialog.tsx
+#: src/events/TypeListDialog.tsx
+#: src/marketplace/details/plan/PlanDescription.tsx
+#: src/marketplace/offerings/actions/RequestActionDialog.tsx
+#: src/marketplace/orders/TermsOfServiceDialog.tsx
+#: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/marketplace/resources/report/ShowReportDialog.tsx
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/slurm/RequestLimitsChangeDialog.tsx
+msgid "Ok"
+msgstr "Okei"
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "One-time"
@@ -5484,6 +5615,7 @@ msgstr "Palun vali meeskond"
 msgid "Please select type in Management tab first."
 msgstr "Palun valige esmalt halduse alamjaotusest tüüp"
 
+#: src/marketplace/resources/resource-selector/ResourcesList.tsx
 #: src/navigation/header/SearchToggle.tsx
 msgid "Please try again with a different query"
 msgstr "Palun proovige uuesti teise päringuga"
@@ -5696,6 +5828,10 @@ msgstr "Projekti ei saanud muuta"
 msgid "Project creation requests"
 msgstr "Projekti loomise taotlused"
 
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
+msgid "Project dashboard"
+msgstr "Projekti juhtpaneel"
+
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
@@ -5707,6 +5843,10 @@ msgstr "Projekti kirjeldus"
 #: src/project/ProjectDetailsDialog.tsx
 msgid "Project details"
 msgstr "Projekti üksikasjad"
+
+#: src/marketplace/resources/details/EndDateField.tsx
+msgid "Project end date"
+msgstr "Projekti lõppkuupäev"
 
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/project/ProjectEventsFilter.tsx
@@ -5738,6 +5878,10 @@ msgstr "Projekti pole valitud."
 msgid "Project manager"
 msgstr "Projektihaldur"
 
+#: src/configs/default.ts
+msgid "Project member"
+msgstr "Projekti liige"
+
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
@@ -5750,9 +5894,22 @@ msgstr "Projekti nimi"
 msgid "Project owner"
 msgstr "Projekti omanik"
 
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceDetails.tsx
+msgid "Project price"
+msgstr "Projekti hind"
+
 #: src/project/ProjectRemoveDialog.tsx
 msgid "Project removal"
 msgstr "Projekti eemaldamine"
+
+#: src/marketplace/resources/list/ProjectResourcesContainer.tsx
+msgid "Project resources"
+msgstr "Projekti ressursid"
+
+#: src/customer/team/ProjectRoleSelectField.tsx
+msgid "Project role"
+msgstr "Projekti roll"
 
 #: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -6241,6 +6398,10 @@ msgstr "Küsi otseligipääsu"
 msgid "Request direct access to OpenStack Tenant"
 msgstr "Küsi otseligipääsu OpenStack rentnikule"
 
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
+msgid "Request direct access to {name}"
+msgstr "Taotle otsest juurdepääsu {name}"
+
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 msgid "Request editing"
 msgstr "Taotle muutmist"
@@ -6294,6 +6455,11 @@ msgstr "TAOTLUSE AEG"
 #: src/marketplace/orders/PendingOrderIndicator.tsx
 msgid "Requested by"
 msgstr "Taodeldud "
+
+#: src/user/support/EmailChangeForm.tsx
+#: src/user/support/RequestedEmail.tsx
+msgid "Requested email"
+msgstr "Taotletud e-post"
 
 #: src/marketplace/common/OfferingCard.tsx
 msgid "Requesting of new resources has been temporarily paused"
@@ -6591,10 +6757,23 @@ msgstr "Roll projekti juures"
 msgid "Role management events"
 msgstr "Rollide halduse sündmused"
 
+#: src/rancher/node/ClusterNodesList.tsx
+#: src/rancher/node/RancherNodeSummary.tsx
+msgid "Roles"
+msgstr "Rollid"
+
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/router-breadcrumbs.ts
 msgid "Routers"
 msgstr "Ruuterid"
+
+#: src/openstack/openstack-security-groups/tabs.ts
+msgid "Rules"
+msgstr "Reeglid"
+
+#: src/marketplace/resources/details/openstack-instance/SecurityGroupsSection.tsx
+msgid "Rules: {rules_count}"
+msgstr "Reeglid: {rules_count}"
 
 #: src/customer/list/AccountingRunningField.tsx
 msgid "Running accounting"
@@ -6695,11 +6874,21 @@ msgstr "Salvesta"
 msgid "Schedule"
 msgstr "Ajagraafik"
 
+#: src/marketplace-script/ScriptsForm.tsx
+msgid "Script language"
+msgstr "Skripti keel"
+
 #: src/issues/create/SearchButton.tsx
 #: src/navigation/header/MainSearch.tsx
 #: src/table/TableQuery.tsx
 msgid "Search"
 msgstr "Otsing"
+
+#: src/navigation/header/SearchToggle.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
+msgid "Search..."
+msgstr "Otsing..."
 
 #: src/marketplace/offerings/service-providers/ServiceProviderOfferingsQueryFilter.tsx
 msgid "Search for offering by name"
@@ -9188,6 +9377,10 @@ msgstr "Sinu kutse võeti vastu."
 msgid "Your permission request has been submitted."
 msgstr "Teie loataotlus on esitatud."
 
+#: src/navigation/workspace/context-selector/OrganizationSummary.tsx
+msgid "Your role:"
+msgstr "Teie roll:"
+
 #: src/invoices/details/BillingRecordDetails.tsx
 msgid "(VAT is not included)"
 msgstr "(ei sisalda käibemaksu)"
@@ -9365,6 +9558,10 @@ msgstr "{category} ressursid"
 #: src/navigation/sidebar/marketplace-popup/CategoriesPanel.tsx
 msgid "{count} items"
 msgstr "{count} üksust"
+
+#: src/table/Table.tsx
+msgid "{count} row selected"
+msgstr "{count} rida valitud"
 
 #: src/marketplace/landing/LandingPage.tsx
 msgid "{deployment} Marketplace"

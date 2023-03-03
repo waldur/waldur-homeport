@@ -7175,7 +7175,7 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/openstack/openstack-instance/utils.js
 msgid ""
-"You have not added any SSH keys to your <a ui-sref=\"profile-keys\">profile</"
+"You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</"
 "a>."
 msgstr ""
 
