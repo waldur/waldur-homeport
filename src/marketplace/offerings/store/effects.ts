@@ -15,7 +15,6 @@ import {
   showErrorResponse,
   showSuccess,
 } from '@waldur/store/notify';
-import { updateEntity } from '@waldur/table/actions';
 import {
   getCustomer,
   getUser,
@@ -146,25 +145,18 @@ function* updateOffering(action: Action<OfferingUpdateFormData>) {
 }
 
 function* updateOfferingState(action) {
-  const { offering, stateAction, reason, isPublic, refreshOffering } =
-    action.payload;
+  const { offering, stateAction, reason, refreshOffering } = action.payload;
   try {
-    const response = yield call(
+    yield call(
       api.updateProviderOfferingState,
       offering.uuid,
       stateAction,
       reason,
     );
-    yield put(
-      updateEntity(constants.OFFERING_TABLE_NAME, offering.uuid, {
-        ...offering,
-        state: response.state,
-      }),
-    );
-    yield put(showSuccess(translate('Offering state has been updated.')));
-    if (isPublic) {
+    if (refreshOffering) {
       refreshOffering();
     }
+    yield put(showSuccess(translate('Offering state has been updated.')));
     if (stateAction === 'pause') {
       yield put(closeModalDialog());
     }

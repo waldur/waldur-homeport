@@ -79,7 +79,10 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
                           <i className="fa fa-refresh" />
                         </Button>
                         <div className="btn btn-flush">
-                          <OfferingItemActions offering={props.offering} />
+                          <OfferingItemActions
+                            offering={props.offering}
+                            refreshOffering={props.refetch}
+                          />
                         </div>
                       </div>
                     )}

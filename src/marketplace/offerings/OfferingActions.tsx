@@ -6,7 +6,7 @@ import { isOwnerOrStaff, isSupportOnly } from '@waldur/workspace/selectors';
 import { OfferingItemActions } from './actions/OfferingItemActions';
 import { PreviewOfferingButton } from './PreviewOfferingButton';
 
-export const OfferingActions = ({ row }) => {
+export const OfferingActions = ({ row, fetch }) => {
   const actionsEnabled = useSelector(isOwnerOrStaff);
   const hideOfferingItemActions = useSelector(isSupportOnly);
   if (!actionsEnabled) {
@@ -14,7 +14,9 @@ export const OfferingActions = ({ row }) => {
   }
   return (
     <ButtonGroup>
-      {!hideOfferingItemActions && <OfferingItemActions offering={row} />}
+      {!hideOfferingItemActions && (
+        <OfferingItemActions offering={row} refreshOffering={fetch} />
+      )}
       <PreviewOfferingButton offering={row} />
     </ButtonGroup>
   );

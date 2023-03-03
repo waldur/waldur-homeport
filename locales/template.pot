@@ -4653,6 +4653,10 @@ msgstr ""
 msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
 msgstr ""
 
+#: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
+msgid "Mass move resources"
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 msgid "Max # of VM snapshots"
 msgstr ""
@@ -4853,6 +4857,7 @@ msgid "Mount point"
 msgstr ""
 
 #: src/marketplace/resources/actions/MoveResourceAction.tsx
+#: src/marketplace/resources/mass-actions/MultiMoveAction.tsx
 msgid "Move"
 msgstr ""
 
@@ -8380,6 +8385,7 @@ msgstr ""
 #: src/marketplace/offerings/expandable/utils.ts
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
+#: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
