@@ -7,6 +7,16 @@ import { useLanguageSelector } from '@waldur/i18n/useLanguageSelector';
 const LanguageCountry = {
   en: 'us',
   et: 'ee',
+  lt: 'lt',
+  lv: 'lv',
+  ru: 'ru',
+  it: 'it',
+  de: 'de',
+  da: 'dk',
+  sv: 'se',
+  es: 'es',
+  fr: 'fr',
+  nb: 'no',
 };
 
 export const LanguageSelectorDropdown: FunctionComponent = () => {
