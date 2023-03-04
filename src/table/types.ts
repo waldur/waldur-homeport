@@ -38,6 +38,7 @@ export interface TableOptionsType<RowType = any> {
   placeholderComponent?: React.ComponentType;
   pullInterval?: number | (() => number);
   filters?: React.ReactNode;
+  filter?;
 }
 
 export interface Column<RowType = any> {

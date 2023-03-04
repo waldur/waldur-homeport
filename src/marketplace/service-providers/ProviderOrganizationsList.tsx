@@ -1,40 +1,25 @@
-import { FunctionComponent } from 'react';
+import { useCallback } from 'react';
 
-import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
 import { EstimatedCostField } from '@waldur/customer/list/EstimatedCostField';
 import { translate } from '@waldur/i18n';
-import { connectTable, Table } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 
-import { fetchProviderCustomers } from './api';
 import { CustomerContactColumn } from './CustomerContactColumn';
+import { CustomerMembersColumn } from './CustomerMembersColumn';
+import { CustomerNameColumn } from './CustomerNameColumn';
 import { OrganizationProjectsExpandable } from './OrganizationProjectsExpandable';
+import { ProjectsCountColumn } from './ProjectsCountColumn';
 
-const CustomerNameColumn = ({ row }) => (
-  <>
-    <b>{row.name}</b>
-    {row.abbreviation && row.abbreviation !== row.name ? (
-      <p className="text-muted">{row.abbreviation.toLocaleUpperCase()}</p>
-    ) : null}
-  </>
-);
-
-const CustomerMembersColumn = ({ row }) =>
-  row.users_count === 0 ? (
-    translate('No active members')
-  ) : (
-    <SymbolsGroup items={row.users} />
-  );
-
-const CustomerProjectsColumn = ({ row }) =>
-  row.projects_count === 0
-    ? translate('No active projects')
-    : row.projects_count === 1
-    ? translate('One project')
-    : translate('{count} projects', { count: row.projects_count });
-
-export const TableComponent: FunctionComponent<any> = (props) => {
+const ProviderOrganizationsListComponent = ({ provider }) => {
+  const tableProps = useTable({
+    table: 'marketplace-provider-organizations',
+    fetchData: createFetcher(
+      `marketplace-service-providers/${provider.uuid}/customers`,
+    ),
+  });
   const columns = [
     {
       title: translate('Name'),
@@ -42,7 +27,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Projects'),
-      render: CustomerProjectsColumn,
+      render: ProjectsCountColumn,
     },
     {
       title: translate('Contact'),
@@ -57,32 +42,23 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: EstimatedCostField,
     },
   ];
+  const ExpandableRow = useCallback(
+    ({ row }) => (
+      <OrganizationProjectsExpandable row={row} provider_uuid={provider.uuid} />
+    ),
+    [provider],
+  );
 
   return (
     <Table
-      {...props}
+      {...tableProps}
       columns={columns}
       verboseName={translate('Organizations')}
       showPageSizeSelector={true}
-      expandableRow={({ row }) => (
-        <OrganizationProjectsExpandable
-          row={row}
-          provider_uuid={props.provider.uuid}
-        />
-      )}
+      expandableRow={ExpandableRow}
     />
   );
 };
-
-const TableOptions = {
-  table: 'marketplace-provider-organizations',
-  fetchData: fetchProviderCustomers,
-  mapPropsToFilter: ({ provider }) => ({ provider_uuid: provider.uuid }),
-};
-
-const ProviderOrganizationsListComponent = connectTable(TableOptions)(
-  TableComponent,
-) as React.ComponentType<any>;
 
 export const ProviderOrganizationsList = ({ provider }) => {
   if (!provider) {

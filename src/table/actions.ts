@@ -64,7 +64,7 @@ export const fetchListGotoPage = (table: string, page: number) => ({
   },
 });
 
-export const exportTableAs = (table: string, format: string, props: any) => ({
+export const exportTableAs = (table: string, format: string, props?) => ({
   type: EXPORT_TABLE_AS,
   payload: {
     table,

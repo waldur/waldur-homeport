@@ -1,11 +1,9 @@
-import { FunctionComponent } from 'react';
-
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
-import { Table, connectTable } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { useOfferingDropdownActions } from '../offerings/hooks';
 import { OfferingActions } from '../offerings/OfferingActions';
@@ -13,7 +11,7 @@ import { OfferingsListTablePlaceholder } from '../offerings/OfferingsListTablePl
 import { OfferingStateCell } from '../offerings/OfferingStateCell';
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 
-import { fetchProviderOfferings } from './api';
+import { ResourcesCountColumn } from './ResourcesCountColumn';
 
 const OfferingNameColumn = ({ row }) => (
   <>
@@ -22,11 +20,17 @@ const OfferingNameColumn = ({ row }) => (
   </>
 );
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const ProviderOfferingsComponent = ({ provider }) => {
+  const tableProps = useTable({
+    table: 'ProviderOfferingsList',
+    fetchData: createFetcher(
+      `marketplace-service-providers/${provider.uuid}/offerings`,
+    ),
+  });
   const dropdownActions = useOfferingDropdownActions();
   return (
     <Table
-      {...props}
+      {...tableProps}
       placeholderComponent={<OfferingsListTablePlaceholder />}
       columns={[
         {
@@ -39,8 +43,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Resources'),
-          render: ({ row }) =>
-            translate('{count} resources', { count: row.resources_count }),
+          render: ResourcesCountColumn,
         },
         {
           title: translate('Estimated cost'),
@@ -59,16 +62,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-export const TableOptions: TableOptionsType = {
-  table: 'ProviderOfferingsList',
-  fetchData: fetchProviderOfferings,
-  mapPropsToFilter: ({ provider }) => ({ provider_uuid: provider.uuid }),
-};
-
-const ProviderOfferingsComponent = connectTable(TableOptions)(
-  TableComponent,
-) as React.ComponentType<any>;
 
 export const ProviderOfferingsList = ({ provider }) => {
   if (!provider) {

@@ -1,37 +1,29 @@
-import { FunctionComponent } from 'react';
+import { useMemo } from 'react';
 
-import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
 import { EstimatedCostField } from '@waldur/customer/list/EstimatedCostField';
 import { translate } from '@waldur/i18n';
-import { connectTable, Table } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
-import { fetchProviderUserCustomers } from './api';
 import { CustomerContactColumn } from './CustomerContactColumn';
+import { CustomerMembersColumn } from './CustomerMembersColumn';
+import { CustomerNameColumn } from './CustomerNameColumn';
+import { ProjectsCountColumn } from './ProjectsCountColumn';
 
-const CustomerNameColumn = ({ row }) => (
-  <>
-    <b>{row.name}</b>
-    {row.abbreviation && row.abbreviation !== row.name ? (
-      <p className="text-muted">{row.abbreviation.toLocaleUpperCase()}</p>
-    ) : null}
-  </>
-);
-
-const CustomerMembersColumn = ({ row }) =>
-  row.users_count === 0 ? (
-    translate('No active members')
-  ) : (
-    <SymbolsGroup items={row.users} />
+export const ProviderUserCustomersList = ({ user, provider }) => {
+  const tableOptions = useMemo(
+    () => ({
+      table: 'marketplace-provider-user-organizations',
+      fetchData: createFetcher(
+        `marketplace-service-providers/${provider.uuid}/user_customers`,
+      ),
+      filter: {
+        user_uuid: user.uuid,
+      },
+    }),
+    [user, provider],
   );
-
-const CustomerProjectsColumn = ({ row }) =>
-  row.projects_count === 0
-    ? translate('No active projects')
-    : row.projects_count === 1
-    ? translate('One project')
-    : translate('{count} projects', { count: row.projects_count });
-
-export const TableComponent: FunctionComponent<any> = (props) => {
+  const tableProps = useTable(tableOptions);
   const columns = [
     {
       title: translate('Name'),
@@ -39,7 +31,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Projects'),
-      render: CustomerProjectsColumn,
+      render: ProjectsCountColumn,
     },
     {
       title: translate('Contact'),
@@ -57,23 +49,10 @@ export const TableComponent: FunctionComponent<any> = (props) => {
 
   return (
     <Table
-      {...props}
+      {...tableProps}
       columns={columns}
       verboseName={translate('Organizations')}
       hasActionBar={false}
     />
   );
 };
-
-const TableOptions = {
-  table: 'marketplace-provider-user-organizations',
-  fetchData: fetchProviderUserCustomers,
-  mapPropsToFilter: ({ provider, user }) => ({
-    provider_uuid: provider.uuid,
-    user_uuid: user.uuid,
-  }),
-};
-
-export const ProviderUserCustomersList = connectTable(TableOptions)(
-  TableComponent,
-) as React.ComponentType<any>;
