@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback } from 'react';
+import { connect, useDispatch, useSelector } from 'react-redux';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n/translate';
@@ -22,6 +22,27 @@ export const getId = (row, index) => {
     return row.pk;
   }
   return index;
+};
+
+const filterByFeature = (state: RootState) => (columns) =>
+  columns.filter(
+    (column) => !column.feature || isVisible(state, column.feature),
+  );
+
+const filterColumns = (state: RootState) => (columns) => {
+  return filterByFeature(state)(columns).filter(
+    (column) => column.visible === undefined || column.visible === true,
+  );
+};
+
+const getDefaultTitle = (state: RootState) => {
+  const pageTitle = getTitle(state);
+  const breadcrumbs = router.globals.$current.path
+    .filter((part) => part.data?.breadcrumb)
+    .map((part) => part.data.breadcrumb())
+    .flat();
+
+  return breadcrumbs.pop() || pageTitle;
 };
 
 export function connectTable(options: TableOptionsType) {
@@ -60,27 +81,6 @@ export function connectTable(options: TableOptionsType) {
         selectAllRows: (rows: any[]) =>
           dispatch(actions.selectAllRows(table, rows)),
       });
-
-      const filterByFeature = (state: RootState) => (columns) =>
-        columns.filter(
-          (column) => !column.feature || isVisible(state, column.feature),
-        );
-
-      const filterColumns = (state: RootState) => (columns) => {
-        return filterByFeature(state)(columns).filter(
-          (column) => column.visible === undefined || column.visible === true,
-        );
-      };
-
-      const getDefaultTitle = (state: RootState) => {
-        const pageTitle = getTitle(state);
-        const breadcrumbs = router.globals.$current.path
-          .filter((part) => part.data?.breadcrumb)
-          .map((part) => part.data.breadcrumb())
-          .flat();
-
-        return breadcrumbs.pop() || pageTitle;
-      };
 
       const mapStateToProps = (state: RootState) => ({
         alterTitle: getDefaultTitle(state),
@@ -137,3 +137,80 @@ export function getMessage({ query, verboseName }) {
     return translate('There are no {verboseName} yet.', context);
   }
 }
+
+export const useTable = (options: TableOptionsType) => {
+  const { table } = options;
+  registerTable({ ...options, table });
+  const dispatch = useDispatch();
+
+  const fetch = useCallback(
+    () =>
+      dispatch(
+        actions.fetchListStart(table, options.filter, options.pullInterval),
+      ),
+    [dispatch, table, options.filter, options.pullInterval],
+  );
+  const gotoPage = useCallback(
+    (page) => dispatch(actions.fetchListGotoPage(table, page)),
+    [dispatch, table],
+  );
+  const exportAs = useCallback(
+    (format) => dispatch(actions.exportTableAs(table, format)),
+    [dispatch, table],
+  );
+  const setQuery = useCallback(
+    (query) => dispatch(actions.setFilterQuery(table, query)),
+    [dispatch, table],
+  );
+  const updatePageSize = useCallback(
+    (size) => dispatch(actions.updatePageSize(table, size)),
+    [dispatch, table],
+  );
+  const resetPagination = useCallback(
+    () => dispatch(actions.resetPagination(table)),
+    [dispatch, table],
+  );
+  const sortList = useCallback(
+    (sorting: Sorting) => dispatch(actions.sortListStart(table, sorting)),
+    [dispatch, table],
+  );
+  const toggleRow = useCallback(
+    (row: any) => dispatch(actions.toggleRow(table, row)),
+    [dispatch, table],
+  );
+  const toggleFilter = useCallback(
+    () => dispatch(actions.toggleFilter(table)),
+    [dispatch, table],
+  );
+  const selectRow = useCallback(
+    (row: any) => dispatch(actions.selectRow(table, row)),
+    [dispatch, table],
+  );
+  const selectAllRows = useCallback(
+    (rows: any[]) => dispatch(actions.selectAllRows(table, rows)),
+    [dispatch, table],
+  );
+
+  const tableState = useSelector(getTableState(table));
+
+  const rows = useSelector((state: RootState) => selectTableRows(state, table));
+
+  const alterTitle = useSelector(getDefaultTitle);
+
+  return {
+    fetch,
+    gotoPage,
+    exportAs,
+    setQuery,
+    updatePageSize,
+    resetPagination,
+    sortList,
+    toggleRow,
+    toggleFilter,
+    selectRow,
+    selectAllRows,
+    ...tableState,
+    rows,
+    alterTitle,
+  };
+};

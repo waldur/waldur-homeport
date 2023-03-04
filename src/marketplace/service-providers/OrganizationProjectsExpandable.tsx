@@ -1,28 +1,30 @@
-import { FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useMemo } from 'react';
 
 import { formatDate } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
 import { ProjectCostField } from '@waldur/project/ProjectCostField';
-import { Table } from '@waldur/table';
-import { connectTable } from '@waldur/table/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { createFetcher, Table } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
-import { fetchProviderProjects } from './api';
+import { ResourcesColumn } from './ResourcesColumn';
 
-const ProviderProjectResourcesDialog = lazyComponent(
-  () => import('./ProviderProjectResourcesDialog'),
-  'ProviderProjectResourcesDialog',
-);
-
-const TableComponent: FunctionComponent<any> = (props) => {
-  const dispatch = useDispatch();
-  const customer = useSelector(getCustomer);
+export const OrganizationProjectsExpandable = ({ row, provider_uuid }) => {
+  const tableOptions = useMemo(
+    () => ({
+      table: `OrganizationProjects-${row.uuid}`,
+      fetchData: createFetcher(
+        `marketplace-service-providers/${provider_uuid}/customer_projects`,
+      ),
+      filter: {
+        project_customer_uuid: row.uuid,
+      },
+    }),
+    [row, provider_uuid],
+  );
+  const tableProps = useTable(tableOptions);
   return (
     <Table
-      {...props}
+      {...tableProps}
       columns={[
         {
           title: translate('Name'),
@@ -41,26 +43,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Resources'),
-          render: ({ row }) => (
-            <button
-              className="btn btn-link"
-              onClick={() =>
-                dispatch(
-                  openModalDialog(ProviderProjectResourcesDialog, {
-                    resolve: {
-                      project_uuid: row.uuid,
-                      provider_uuid: customer,
-                    },
-                    size: 'lg',
-                  }),
-                )
-              }
-            >
-              {translate('{count} resources', {
-                count: row.resources_count || 0,
-              })}
-            </button>
-          ),
+          render: ResourcesColumn,
         },
         {
           title: translate('Estimated cost'),
@@ -77,16 +60,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'OrganizationProjects',
-  fetchData: fetchProviderProjects,
-  mapPropsToTableId: ({ row }) => [row.uuid],
-  mapPropsToFilter: ({ row, provider_uuid }) => ({
-    customer_uuid: row.uuid,
-    provider_uuid,
-  }),
-};
-
-export const OrganizationProjectsExpandable =
-  connectTable(TableOptions)(TableComponent);

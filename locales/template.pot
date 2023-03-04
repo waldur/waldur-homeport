@@ -5223,14 +5223,16 @@ msgstr ""
 msgid "No access info."
 msgstr ""
 
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
-#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/marketplace/service-providers/CustomerMembersColumn.tsx
 msgid "No active members"
 msgstr ""
 
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
-#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/marketplace/service-providers/ProjectsCountColumn.tsx
 msgid "No active projects"
+msgstr ""
+
+#: src/marketplace/service-providers/ResourcesCountColumn.tsx
+msgid "No active resources"
 msgstr ""
 
 #: src/auth/PermissionLayout.tsx
@@ -5676,9 +5678,12 @@ msgstr ""
 msgid "Old value"
 msgstr ""
 
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
-#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/marketplace/service-providers/ProjectsCountColumn.tsx
 msgid "One project"
+msgstr ""
+
+#: src/marketplace/service-providers/ResourcesCountColumn.tsx
+msgid "One resource"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingPricingPlanItemOld.tsx
@@ -13092,13 +13097,12 @@ msgstr ""
 msgid "{count} more affiliations"
 msgstr ""
 
-#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
-#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/marketplace/service-providers/ProjectsCountColumn.tsx
 msgid "{count} projects"
 msgstr ""
 
-#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
-#: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/marketplace/service-providers/ResourcesColumn.tsx
+#: src/marketplace/service-providers/ResourcesCountColumn.tsx
 #: src/resource/support/TreemapChart.tsx
 msgid "{count} resources"
 msgstr ""
@@ -13149,10 +13153,6 @@ msgstr ""
 
 #: src/project/effects.ts
 msgid "{projectName} project has been moved to {organizationName} organization."
-msgstr ""
-
-#: src/marketplace/service-providers/ProviderUsersList.tsx
-msgid "{projects_count} projects"
 msgstr ""
 
 #: src/user/support/AddRemoteUserDialog.tsx

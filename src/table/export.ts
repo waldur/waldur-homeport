@@ -39,7 +39,7 @@ export function* exportTable(action) {
   if (exportAll) {
     yield put(blockStart(table));
     let propFilter;
-    if (mapPropsToFilter) {
+    if (props && mapPropsToFilter) {
       propFilter = mapPropsToFilter(props);
     }
     rows = yield call(fetchAll, fetchData, propFilter);
