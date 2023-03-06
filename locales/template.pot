@@ -3326,6 +3326,7 @@ msgid "Find solution"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
+#: src/marketplace/resources/details/RobotAccountExpandable.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Fingerprint"
@@ -4963,6 +4964,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
+#: src/marketplace/resources/details/RobotAccountExpandable.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
@@ -7254,6 +7256,7 @@ msgstr ""
 msgid "Public SSH keys will be injected into services that allow key-based access."
 msgstr ""
 
+#: src/marketplace/resources/details/RobotAccountExpandable.tsx
 #: src/user/keys/KeyCreateDialog.tsx
 #: src/user/keys/KeysListExpandableRow.tsx
 msgid "Public key"

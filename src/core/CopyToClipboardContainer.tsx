@@ -1,7 +1,6 @@
 import { FunctionComponent, ReactNode } from 'react';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import './CopyToClipboardContainer.scss';
 
 /**
  * @param value Which is copied to the clipboard
