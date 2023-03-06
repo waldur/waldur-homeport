@@ -1,15 +1,11 @@
 import { ErrorBoundary } from '@sentry/react';
-import { UISref } from '@uirouter/react';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { ErrorMessage } from '@waldur/ErrorMessage';
-import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { useExtraTabs, useFullPage } from '@waldur/navigation/context';
 import {
   INSTANCE_TYPE,
@@ -20,72 +16,26 @@ import { ResourceAccessButton } from '@waldur/resource/ResourceAccessButton';
 import '@waldur/marketplace/offerings/details/PublicOfferingDetailsHero.scss';
 
 import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
-import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer';
 
 import { ActionButton } from './ActionButton';
+import { ActivityCard } from './ActivityCard';
+import { BookingMainComponent } from './BookingMainComponent';
 import { InstanceComponents } from './InstanceComponents';
-import { MonitoringCharts } from './MonitoringCharts';
-import { InstanceDetails } from './openstack-instance/InstanceDetails';
-import { TenantDetails } from './openstack-tenant/TenantDetails';
+import { InstanceMainComponent } from './openstack-instance/InstanceMainComponent';
+import { TenantMainComponent } from './openstack-tenant/TenantMainComponent';
+import { VolumeMainComponent } from './openstack-volume/VolumeMainComponent';
 import { QuickActions } from './QuickActions';
 import { RefreshButton } from './RefreshButton';
 import { ResourceAccessCard } from './ResourceAccessCard';
 import { ResourceComponents } from './ResourceComponents';
 import { ResourceDetailsHeader } from './ResourceDetailsHeader';
 import { ResourceIssuesCard } from './ResourceIssuesCard';
-import { ResourceTimeline } from './ResourceTimeline';
 import { RobotAccountCard } from './RobotAccountCard';
 import { ShortResourceHeader } from './ShortResourceHeader';
-import { StatusPage } from './StatusPage';
+import { StatusCard } from './StatusCard';
 import { VolumeComponents } from './VolumeComponents';
 
 const openstackIcon = require('@waldur/images/appstore/icon-openstack.png');
-
-const TenantMainComponent = ({ resource }) =>
-  resource.scope ? (
-    <div className="mb-10">
-      <Card>
-        <Card.Header>
-          <Card.Title>
-            <h3>{translate('Cloud components')}</h3>
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <TenantDetails resource={resource} />
-        </Card.Body>
-      </Card>
-    </div>
-  ) : null;
-
-const InstanceMainComponent = ({ resource }) => {
-  return (
-    <>
-      {resource.scope ? (
-        <div className="mb-10">
-          <Card>
-            <Card.Header>
-              <Card.Title>
-                <h3>{translate('Cloud components')}</h3>
-              </Card.Title>
-            </Card.Header>
-            <Card.Body>
-              <InstanceDetails resource={resource} />
-            </Card.Body>
-          </Card>
-        </div>
-      ) : null}
-      {isExperimentalUiComponentsVisible() ? <MonitoringCharts /> : null}
-    </>
-  );
-};
-
-const OfferingMainComponent = ({ resource }) => (
-  <Card>
-    <Card.Body>
-      <Calendar events={resource.attributes.schedules} />
-    </Card.Body>
-  </Card>
-);
 
 export const ResourceDetailsView: FC<any> = ({
   resource,
@@ -105,18 +55,10 @@ export const ResourceDetailsView: FC<any> = ({
     {
       [TENANT_TYPE]: TenantMainComponent,
       [INSTANCE_TYPE]: InstanceMainComponent,
-      [OFFERING_TYPE_BOOKING]: OfferingMainComponent,
+      [VOLUME_TYPE]: VolumeMainComponent,
+      [OFFERING_TYPE_BOOKING]: BookingMainComponent,
     }[resource.offering_type] || null;
 
-  const resourceRef = useMemo(
-    () => ({
-      offering_uuid: resource.offering_uuid,
-      resource_uuid: resource.uuid,
-    }),
-    [resource],
-  );
-
-  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   return (
     <>
       {tabSpec ? (
@@ -227,48 +169,12 @@ export const ResourceDetailsView: FC<any> = ({
                     />
                   </ErrorBoundary>
                 )}
-                {(resource.is_usage_based || resource.is_limit_based) && (
-                  <Card>
-                    <Card.Body>
-                      <h3 className="mb-5">{translate('Usage history')}</h3>
-                      <ResourceUsageTabsContainer
-                        resource={resourceRef}
-                        hideHeader={true}
-                      />
-                    </Card.Body>
-                  </Card>
-                )}
                 <RobotAccountCard resource={resource} />
               </Col>
               <Col md={4} sm={12}>
                 <ResourceAccessCard resource={resource} />
-                {showExperimentalUiComponents && (
-                  <Card className="mb-7">
-                    <Card.Header>
-                      <Card.Title>
-                        <h3 className="mb-5">{translate('Status page')}</h3>
-                      </Card.Title>
-                    </Card.Header>
-                    <Card.Body>
-                      <StatusPage />
-                    </Card.Body>
-                  </Card>
-                )}
-                <Card className="mb-7">
-                  <Card.Header>
-                    <Card.Title>
-                      <h3 className="mb-5">{translate('Activity')}</h3>
-                    </Card.Title>
-                    <div className="card-toolbar">
-                      <UISref to={state.name} params={{ tab: 'events' }}>
-                        <a className="btn btn-link">{translate('See all')}</a>
-                      </UISref>
-                    </div>
-                  </Card.Header>
-                  <Card.Body>
-                    <ResourceTimeline resource={resource} />
-                  </Card.Body>
-                </Card>
+                <StatusCard />
+                <ActivityCard state={state} resource={resource} />
                 <ResourceIssuesCard resource={resource} state={state} />
               </Col>
             </Row>
