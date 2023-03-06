@@ -37,6 +37,7 @@ import { ResourceTimeline } from './ResourceTimeline';
 import { RobotAccountCard } from './RobotAccountCard';
 import { ShortResourceHeader } from './ShortResourceHeader';
 import { StatusPage } from './StatusPage';
+import { VolumeComponents } from './VolumeComponents';
 
 const openstackIcon = require('@waldur/images/appstore/icon-openstack.png');
 
@@ -198,6 +199,8 @@ export const ResourceDetailsView: FC<any> = ({
                           </div>
                           {resource.offering_type === INSTANCE_TYPE ? (
                             scope && <InstanceComponents resource={scope} />
+                          ) : resource.offering_type === VOLUME_TYPE ? (
+                            scope && <VolumeComponents resource={scope} />
                           ) : (
                             <ResourceComponents
                               resource={resource}
