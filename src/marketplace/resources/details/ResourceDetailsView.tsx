@@ -235,6 +235,7 @@ export const ResourceDetailsView: FC<any> = ({
                     </Card.Body>
                   </Card>
                 )}
+                <RobotAccountCard resource={resource} />
               </Col>
               <Col md={4} sm={12}>
                 <ResourceAccessCard resource={resource} />
@@ -266,7 +267,6 @@ export const ResourceDetailsView: FC<any> = ({
                   </Card.Body>
                 </Card>
                 <ResourceIssuesCard resource={resource} state={state} />
-                <RobotAccountCard resource={resource} />
               </Col>
             </Row>
           </div>
