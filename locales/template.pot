@@ -1518,7 +1518,6 @@ msgstr ""
 
 #: src/marketplace/resources/details/openstack-instance/InstanceMainComponent.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantMainComponent.tsx
-#: src/marketplace/resources/details/openstack-volume/VolumeMainComponent.tsx
 msgid "Cloud components"
 msgstr ""
 
@@ -1641,6 +1640,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
+#: src/marketplace/resources/details/openstack-volume/VolumeMainComponent.tsx
 msgid "Components"
 msgstr ""
 
@@ -1941,6 +1941,14 @@ msgstr ""
 
 #: src/marketplace-flows/getFlowCreateAction.tsx
 msgid "Create resource"
+msgstr ""
+
+#: src/marketplace/resources/actions/CreateRobotAccountAction.tsx
+msgid "Create robot account"
+msgstr ""
+
+#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
+msgid "Create robot account for marketplace resource"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
@@ -7932,6 +7940,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
@@ -8258,6 +8267,10 @@ msgstr ""
 msgid "Revoke"
 msgstr ""
 
+#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
+msgid "Robot account has been created."
+msgstr ""
+
 #: src/marketplace/resources/details/RobotAccountCard.tsx
 msgid "Robot accounts"
 msgstr ""
@@ -8381,6 +8394,10 @@ msgstr ""
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/rancher/cluster/create/RancherClusterForm.tsx
 msgid "SSH public key"
+msgstr ""
+
+#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
+msgid "SSH public keys"
 msgstr ""
 
 #: src/providers/support/SankeyDiagramContainer.tsx
@@ -10404,6 +10421,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
 #: src/marketplace/resources/details/RobotAccountList.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
@@ -10615,6 +10633,10 @@ msgstr ""
 
 #: src/issues/create/utils.ts
 msgid "Unable to create request."
+msgstr ""
+
+#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
+msgid "Unable to create robot account."
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/utils.ts
@@ -12019,6 +12041,7 @@ msgstr ""
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/UsernameGroup.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
 #: src/marketplace/resources/details/ResourceAccessCard.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/details/RobotAccountList.tsx
@@ -12054,6 +12077,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
+#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
 #: src/marketplace/resources/details/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
