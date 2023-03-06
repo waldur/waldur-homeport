@@ -115,6 +115,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
               return (
                 <AsyncSelectField
                   {...props}
+                  {...field.extraProps}
                   loadOptions={field.loadOptions}
                   getOptionLabel={field.getOptionLabel}
                 />

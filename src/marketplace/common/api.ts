@@ -465,3 +465,6 @@ export const countRobotAccounts = (params) =>
     url: ENV.apiEndpoint + 'api/marketplace-robot-accounts/',
     params,
   }).then(parseResultCount);
+
+export const createRobotAccount = (payload) =>
+  post(`/marketplace-robot-accounts/`, payload);
