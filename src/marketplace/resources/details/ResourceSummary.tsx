@@ -41,6 +41,7 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
     />
     <Field label={translate('Backend ID')} value={resource.backend_id} />
     <Field label={translate('Effective ID')} value={resource.effective_id} />
+    <Field label={translate('Plugin ID')} value={resource.resource_uuid} />
     <Field
       label={translate('State')}
       value={<MarketplaceResourceStateField resource={resource} />}
