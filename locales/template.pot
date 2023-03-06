@@ -278,7 +278,7 @@ msgstr ""
 msgid "Active user will be able to login into the portal."
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
+#: src/marketplace/resources/details/ActivityCard.tsx
 msgid "Activity"
 msgstr ""
 
@@ -1516,7 +1516,9 @@ msgstr ""
 msgid "Cloud block storage size"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
+#: src/marketplace/resources/details/openstack-instance/InstanceMainComponent.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantMainComponent.tsx
+#: src/marketplace/resources/details/openstack-volume/VolumeMainComponent.tsx
 msgid "Cloud components"
 msgstr ""
 
@@ -4281,6 +4283,7 @@ msgid "Jobs"
 msgstr ""
 
 #: src/marketplace/resources/details/openstack-instance/SnapshotsSection.tsx
+#: src/marketplace/resources/details/openstack-volume/SnapshotsSection.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/resource/utils.tsx
 msgid "Keep forever"
@@ -4291,6 +4294,7 @@ msgid "Keep until"
 msgstr ""
 
 #: src/marketplace/resources/details/openstack-instance/SnapshotsSection.tsx
+#: src/marketplace/resources/details/openstack-volume/SnapshotsSection.tsx
 msgid "Keep until {date}"
 msgstr ""
 
@@ -8427,6 +8431,7 @@ msgid "Schedule"
 msgstr ""
 
 #: src/marketplace/resources/details/openstack-instance/SnapshotSchedulesSection.tsx
+#: src/marketplace/resources/details/openstack-volume/SnapshotSchedulesSection.tsx
 msgid "Schedule {schedule}"
 msgstr ""
 
@@ -8537,7 +8542,7 @@ msgid "Security incident type: {type}"
 msgstr ""
 
 #: src/issues/list/IssuesShortList.tsx
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
+#: src/marketplace/resources/details/ActivityCard.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
 msgid "See all"
 msgstr ""
@@ -9298,6 +9303,7 @@ msgid "Snapshot schedule for volume has been created."
 msgstr ""
 
 #: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
+#: src/marketplace/resources/details/openstack-volume/VolumeDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshot schedules"
@@ -9309,6 +9315,7 @@ msgstr ""
 
 #: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/marketplace/resources/details/openstack-volume/VolumeDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-snapshot-schedule/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
@@ -9479,7 +9486,7 @@ msgstr ""
 msgid "Status messages"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
+#: src/marketplace/resources/details/StatusCard.tsx
 msgid "Status page"
 msgstr ""
 
@@ -9508,6 +9515,7 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/marketplace/resources/details/openstack-volume/VolumeDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -11013,6 +11021,7 @@ msgstr ""
 
 #: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/marketplace/resources/details/openstack-volume/VolumeDetails.tsx
 msgid "Unable to load resource details."
 msgstr ""
 
@@ -11697,7 +11706,7 @@ msgstr ""
 msgid "Usage based"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
+#: src/marketplace/resources/details/UsageCard.tsx
 msgid "Usage history"
 msgstr ""
 
