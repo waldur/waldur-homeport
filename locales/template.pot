@@ -13277,6 +13277,7 @@ msgid "{type} script was executed successfully"
 msgstr ""
 
 #: src/marketplace/resources/details/InstanceComponents.tsx
+#: src/marketplace/resources/details/VolumeComponents.tsx
 msgid "{type} storage"
 msgstr ""
 
