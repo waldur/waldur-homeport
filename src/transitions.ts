@@ -58,10 +58,14 @@ export function attachTransitions() {
         state.data && state.data.auth && !AuthService.isAuthenticated(),
     },
     (transition) =>
-      transition.router.stateService.target('login', {
-        toState: transition.to().name,
-        toParams: cleanObject(transition.params()),
-      }),
+      transition.router.stateService.target(
+        'login',
+        {
+          toState: transition.to().name,
+          toParams: cleanObject(transition.params()),
+        },
+        { location: 'replace' },
+      ),
   );
   // If state data has `anonymous` flag and user has authentication token,
   // he is redirected to dashboard.
