@@ -15,11 +15,11 @@ import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
   const dispatch = useDispatch();
   const loadUsers = useCallback(
-    (query, prevOptions, { page }) =>
+    (query, prevOptions, page) =>
       getUsers({
-        full_name: query,
+        name: query,
         project_uuid: resource.project_uuid,
-        field: ['full_name', 'email', 'url'],
+        field: ['full_name', 'email', 'url', 'uuid'],
         o: 'full_name',
         page,
         page_size: ENV.pageSize,
@@ -43,7 +43,6 @@ export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
           name: 'username',
           label: translate('Username'),
           maxlength: 32,
-          required: true,
           type: 'string',
           pattern: LATIN_NAME_PATTERN,
         },
@@ -53,10 +52,9 @@ export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
           type: 'async_select',
           loadOptions: loadUsers,
           getOptionLabel: ({ full_name, email }) => `${full_name} (${email})`,
+          getOptionValue: ({ uuid }) => uuid,
           required: true,
-          extraProps: {
-            isMulti: true,
-          },
+          isMulti: true,
         },
         {
           name: 'keys',
@@ -66,7 +64,6 @@ export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
       ]}
       initialValues={{
         type: 'cicd',
-        username: 'resource_id',
       }}
       submitForm={async (formData) => {
         try {

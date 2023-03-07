@@ -118,6 +118,8 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
                   {...field.extraProps}
                   loadOptions={field.loadOptions}
                   getOptionLabel={field.getOptionLabel}
+                  getOptionValue={field.getOptionValue}
+                  isMulti={field.isMulti}
                 />
               );
             }
