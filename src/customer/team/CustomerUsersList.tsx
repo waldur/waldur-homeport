@@ -15,11 +15,13 @@ import {
   getProject,
   isStaff as isStaffSelector,
   getCustomer,
+  isOwnerOrStaff as isOwnerOrStaffSelector,
 } from '@waldur/workspace/selectors';
 
 import { fetchCustomerUsers } from './api';
 import { CustomerUserAddButton } from './CustomerUserAddButton';
 import { CustomerUserRowActions } from './CustomerUserRowActions';
+import { ProjectMemberAddButton } from './ProjectMemberAddButton';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   return (
@@ -51,7 +53,14 @@ const TableComponent: FunctionComponent<any> = (props) => {
       )}
       expandableRow={CustomerUsersListExpandableRow}
       actions={
-        props.isStaff ? <CustomerUserAddButton refetch={props.fetch} /> : null
+        <>
+          {props.isStaff ? (
+            <CustomerUserAddButton refetch={props.fetch} />
+          ) : null}
+          {props.isOwnerOrStaff ? (
+            <ProjectMemberAddButton refetch={props.fetch} />
+          ) : null}
+        </>
       }
     />
   );
@@ -85,6 +94,7 @@ const TableOptions: TableOptionsType = {
 const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
   isStaff: isStaffSelector(state),
+  isOwnerOrStaff: isOwnerOrStaffSelector(state),
   customer: getCustomer(state),
   filter: getFormValues(CUSTOMER_USERS_LIST_FILTER_FORM_ID)(state),
 });

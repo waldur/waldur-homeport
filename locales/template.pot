@@ -334,6 +334,7 @@ msgstr ""
 msgid "Add key"
 msgstr ""
 
+#: src/customer/team/ProjectMemberAddButton.tsx
 #: src/project/team/AddMemberButton.tsx
 msgid "Add member"
 msgstr ""
@@ -6888,6 +6889,7 @@ msgstr ""
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/customer/team/OrganizationProjectSelectField.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/ProjectGroup.tsx

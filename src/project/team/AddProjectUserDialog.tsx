@@ -6,6 +6,7 @@ import { reduxForm } from 'redux-form';
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { ProjectPermissionsService } from '@waldur/customer/services/ProjectPermissionsService';
 import { usersAutocomplete } from '@waldur/customer/team/api';
+import { OrganizationProjectSelectField } from '@waldur/customer/team/OrganizationProjectSelectField';
 import { getRoles } from '@waldur/customer/team/utils';
 import { FormContainer, SelectField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
@@ -16,6 +17,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { UserListOptionInline } from '@waldur/project/team/UserGroup';
 import { showErrorResponse } from '@waldur/store/notify';
 import { getProject } from '@waldur/workspace/selectors';
+import { Project } from '@waldur/workspace/types';
 
 const FORM_ID = 'AddProjectUserDialog';
 
@@ -23,14 +25,21 @@ interface AddProjectUserDialogFormData {
   role: string;
   expiration_time: string;
   user: any;
+  project?: Project;
+}
+
+interface AddProjectUserDialogProps {
+  refetch;
+  level?: 'project' | 'organization';
+  title?: string;
 }
 
 export const AddProjectUserDialog = reduxForm<
   AddProjectUserDialogFormData,
-  { refetch }
+  AddProjectUserDialogProps
 >({
   form: FORM_ID,
-})(({ submitting, handleSubmit, refetch }) => {
+})(({ submitting, handleSubmit, refetch, level, title }) => {
   const dispatch = useDispatch();
   const currentProject = useSelector(getProject);
 
@@ -40,10 +49,11 @@ export const AddProjectUserDialog = reduxForm<
       : option.full_name || option.username;
 
   const saveUser = async (formData) => {
+    if (level === 'organization' && !formData.project) return;
     try {
       await ProjectPermissionsService.create({
         user: formData.user.url,
-        project: currentProject.url,
+        project: formData.project ? formData.project.url : currentProject.url,
         expiration_time: formData.expiration_time,
         role: formData.role.value,
       });
@@ -57,7 +67,7 @@ export const AddProjectUserDialog = reduxForm<
   return (
     <form onSubmit={handleSubmit(saveUser)}>
       <Modal.Header>
-        <Modal.Title>{translate('Add user')}</Modal.Title>
+        <Modal.Title>{title || translate('Add user')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <FormContainer submitting={submitting}>
@@ -73,6 +83,7 @@ export const AddProjectUserDialog = reduxForm<
             components={{ Option: UserListOptionInline }}
             required={true}
           />
+          {level === 'organization' && <OrganizationProjectSelectField />}
           <SelectField
             name="role"
             label={translate('Role')}
