@@ -16,7 +16,7 @@ export const DateField: FunctionComponent<any> = (props) => (
     onChange={(value) =>
       props.input.onChange(
         value[0] instanceof Date
-          ? DateTime.fromJSDate(value[0]).toISODate()
+          ? DateTime.fromJSDate(value[0]).toISO()
           : value[0],
       )
     }
