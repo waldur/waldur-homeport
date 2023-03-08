@@ -65,9 +65,8 @@ export const MultiPullAction = ({ rows, refetch }) => {
       disabled={validResources.length === 0}
       className="btn btn-primary me-3"
       onClick={callback}
-      title={translate('Pull')}
     >
-      <i className="fa fa-refresh" />
+      {translate('Pull')}
     </button>
   );
 };
