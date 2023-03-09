@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 import { useLanguageSelector } from '@waldur/i18n/useLanguageSelector';
 
 const LanguageCountry = {
-  en: 'us',
+  en: 'gb',
   et: 'ee',
   lt: 'lt',
   lv: 'lv',
