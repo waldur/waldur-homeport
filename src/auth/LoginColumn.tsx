@@ -1,5 +1,5 @@
 import { ENV } from '@waldur/configs/default';
-import { formatMediaURL } from '@waldur/core/utils';
+import { fixURL } from '@waldur/core/api';
 import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
 import { FooterLinks } from '@waldur/navigation/FooterLinks';
 
@@ -9,11 +9,12 @@ import { LocalLogin } from './LocalLogin';
 import { PoweredBy } from './PoweredBy';
 import { useAuthFeatures } from './useAuthFeatures';
 import { UserAuthWarning } from './UserAuthWarning';
-
 import './LoginColumn.scss';
 
 export const LoginColumn = () => {
   const features = useAuthFeatures();
+  const imageUrl = fixURL('/icons/login_logo/');
+
   return (
     <div className="LoginColumn">
       <div className="LoginBody">
@@ -21,7 +22,7 @@ export const LoginColumn = () => {
           <div className="LoginLogo mb-2">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
-              src={formatMediaURL(ENV.plugins.WALDUR_CORE.LOGIN_LOGO)}
+              src={imageUrl}
               style={{ maxWidth: '100%' }}
             />
           </div>
