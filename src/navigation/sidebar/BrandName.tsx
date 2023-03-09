@@ -1,7 +1,7 @@
 import { FunctionComponent, useCallback } from 'react';
 
 import { ENV } from '@waldur/configs/default';
-import { formatMediaURL } from '@waldur/core/utils';
+import { fixURL } from '@waldur/core/api';
 import { useLayout } from '@waldur/metronic/layout/core';
 
 export const BrandName: FunctionComponent = () => {
@@ -16,16 +16,15 @@ export const BrandName: FunctionComponent = () => {
     });
   }, [layout]);
 
+  const imageUrl = fixURL('/icons/sidebar_logo/');
+
   return (
     <div
       className="aside-logo flex-column-auto position-relative"
       id="kt_aside_logo"
     >
       {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
-        <img
-          src={formatMediaURL(ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO)}
-          className="mh-50px mw-200px logo"
-        />
+        <img src={imageUrl} className="mh-50px mw-200px logo" />
       ) : (
         <>
           <h3 className="mt-2" style={{ color: 'white' }}>

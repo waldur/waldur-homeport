@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux';
 
 import 'world-flags-sprite/stylesheets/flags16.css';
 
-import { ENV } from '@waldur/configs/default';
-import { formatMediaURL } from '@waldur/core/utils';
+import { fixURL } from '@waldur/core/api';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getTitle } from '../title';
@@ -51,6 +50,7 @@ export const AppHeader: FunctionComponent = () => {
     .find((part) => part.data?.title)
     ?.data.title();
   const user = useSelector(getUser);
+  const imageUrl = fixURL('/icons/sidebar_logo_mobile/');
 
   return (
     <div className="header align-items-stretch">
@@ -60,14 +60,9 @@ export const AppHeader: FunctionComponent = () => {
 
           <div className="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
             <a className="d-lg-none">
-              <img
-                alt="Logo"
-                src={
-                  formatMediaURL(ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE) ||
-                  Logo
-                }
-                className="h-30px"
-              />
+              {imageUrl && (
+                <img src={imageUrl || Logo} alt="Logo" className="h-30px" />
+              )}
             </a>
           </div>
         </div>
