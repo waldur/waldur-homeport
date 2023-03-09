@@ -1,8 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { AuthService } from '@waldur/auth/AuthService';
-import { ENV } from '@waldur/configs/default';
-import { formatMediaURL } from '@waldur/core/utils';
+import { fixURL } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { UsersService } from '@waldur/user/UsersService';
 
@@ -16,7 +15,7 @@ export const SiteHeader: FunctionComponent = () => {
       <nav className="navbar navbar-static-top white-bg m-b-none">
         <div className="navbar-header m-l-sm-xl">
           <a className="header-logo" onClick={goBack}>
-            <img src={formatMediaURL(ENV.plugins.WALDUR_CORE.LOGIN_LOGO)} />
+            <img src={fixURL('/icons/login_logo')} />
           </a>
         </div>
         <ul className="nav navbar-top-links pull-right">

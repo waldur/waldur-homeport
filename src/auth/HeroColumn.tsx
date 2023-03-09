@@ -1,5 +1,5 @@
 import { ENV } from '@waldur/configs/default';
-import { formatMediaURL } from '@waldur/core/utils';
+import { fixURL } from '@waldur/core/api';
 
 import { HeroButton } from './HeroButton';
 
@@ -13,7 +13,7 @@ export const HeroColumn = () => (
     className="HeroColumn"
     style={{
       backgroundImage: `url(${
-        formatMediaURL(ENV.plugins.WALDUR_CORE.HERO_IMAGE) || DefaultHeroImage
+        fixURL('/icons/hero_image/') || DefaultHeroImage
       })`,
     }}
   >
