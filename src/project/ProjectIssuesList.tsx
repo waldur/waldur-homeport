@@ -18,7 +18,7 @@ export const ProjectIssuesList: FunctionComponent = () => (
   <Row>
     <Col md={12}>
       <Panel>
-        <ProjectIssuesListComponent hiddenColumns={['customer']} />
+        <ProjectIssuesListComponent hiddenColumns={['customer', 'project']} />
       </Panel>
     </Col>
   </Row>

@@ -845,6 +845,7 @@ msgstr ""
 #: src/issues/IssueSummary.tsx
 #: src/issues/create/AssigneeGroup.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Assigned to"
 msgstr ""
 
@@ -1986,6 +1987,7 @@ msgstr ""
 #: src/issues/IssueSummary.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -4235,6 +4237,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/resources/details/fetchData.tsx
+#: src/navigation/header/QuickIssueDrawerToggle.tsx
 #: src/project/ProjectActions.tsx
 #: src/project/routes.ts
 #: src/resource/tabs/constants.ts
@@ -6931,6 +6934,7 @@ msgstr ""
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
+#: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
@@ -7942,7 +7946,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
@@ -11824,6 +11827,10 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OfferingOptions.tsx
 msgid "User input field #{index}"
+msgstr ""
+
+#: src/navigation/header/quick-issue-drawer/UserIssuesTable.tsx
+msgid "User issues"
 msgstr ""
 
 #: src/user/events.ts
