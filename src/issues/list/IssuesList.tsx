@@ -17,7 +17,13 @@ import { getUser } from '@waldur/workspace/selectors';
 import { IssueCreateButton } from './IssueCreateButton';
 
 interface OwnProps {
-  hiddenColumns?: string[];
+  hiddenColumns?: (
+    | 'customer'
+    | 'project'
+    | 'caller'
+    | 'time_in_progress'
+    | 'resource_type'
+  )[];
   scope?: Record<string, any>;
   filter?: Record<string, any>;
 }
@@ -58,25 +64,21 @@ export const TableComponent: React.FC<IssueTableProps> = (props) => {
       visible: !hiddenColumns.includes('customer'),
     },
     {
+      title: translate('Project'),
+      orderField: 'project_name',
+      render: ({ row }) => row.project_name || 'N/A',
+      visible: !hiddenColumns.includes('project'),
+    },
+    {
       title: translate('Caller'),
       orderField: 'caller_full_name',
       render: ({ row }) => row.caller_full_name || 'N/A',
-    },
-    {
-      title: translate('Assigned to'),
-      orderField: 'assignee_name',
-      render: ({ row }) => row.assignee_name || 'N/A',
-      visible: supportOrStaff,
-    },
-    {
-      title: translate('Created'),
-      orderField: 'created',
-      render: ({ row }) => <>{formatDate(row.created)}</>,
+      visible: !hiddenColumns.includes('caller'),
     },
     {
       title: translate('Time in progress'),
       render: ({ row }) => <>{formatRelative(row.created)}</>,
-      visible: supportOrStaff,
+      visible: supportOrStaff && !hiddenColumns.includes('time_in_progress'),
     },
   ]);
 
@@ -90,7 +92,9 @@ export const TableComponent: React.FC<IssueTableProps> = (props) => {
       placeholderComponent={<IssuesListPlaceholder />}
       enableExport={true}
       actions={props.scope && <IssueCreateButton scope={props.scope} />}
-      expandableRow={IssuesListExpandableRow}
+      expandableRow={({ row }) => (
+        <IssuesListExpandableRow row={row} supportOrStaff={supportOrStaff} />
+      )}
     />
   );
 };
@@ -162,4 +166,4 @@ const connector = connect(mapStateToProps);
 
 export const IssuesList = connector(
   connectTable(TableOptions)(TableComponent),
-) as React.ComponentType<OwnProps>;
+) as React.ComponentType<OwnProps & Partial<TableProps>>;
