@@ -7942,7 +7942,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
@@ -9681,6 +9680,7 @@ msgid "Summary"
 msgstr ""
 
 #: src/issues/routes.ts
+#: src/navigation/FooterLinks.tsx
 #: src/navigation/sidebar/SupportMenu.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -13305,6 +13305,10 @@ msgstr ""
 #: src/invitations/GroupInvitationMessage.tsx
 #: src/invitations/InvitationMessage.tsx
 msgid "{sender} has invited you to join {name} {type} in {role} role."
+msgstr ""
+
+#: src/navigation/FooterLinks.tsx
+msgid "{text} has been copied"
 msgstr ""
 
 #: src/marketplace-script/TestScriptButton.tsx
