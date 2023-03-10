@@ -853,6 +853,7 @@ msgstr "Esita küsimus"
 #: src/issues/IssueSummary.tsx
 #: src/issues/create/AssigneeGroup.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Assigned to"
 msgstr "Määratud"
 
@@ -1962,6 +1963,7 @@ msgstr "Loo oma esimene projekt"
 #: src/issues/IssueSummary.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -3955,6 +3957,7 @@ msgstr "{Caller_full_name} on loonud juhtumi {issue_key}."
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/resources/details/fetchData.tsx
+#: src/navigation/header/QuickIssueDrawerToggle.tsx
 #: src/project/ProjectActions.tsx
 #: src/project/routes.ts
 #: src/resource/tabs/constants.ts
@@ -6093,6 +6096,7 @@ msgstr "Profiilipilt"
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
+#: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
@@ -6826,7 +6830,6 @@ msgstr "Resolutsioon"
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
@@ -8182,6 +8185,7 @@ msgid "Summary"
 msgstr "Kokkuvõte"
 
 #: src/issues/routes.ts
+#: src/navigation/FooterLinks.tsx
 #: src/navigation/sidebar/SupportMenu.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx

@@ -671,6 +671,7 @@ msgstr "Artikel kod"
 #: src/issues/IssueSummary.tsx
 #: src/issues/create/AssigneeGroup.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Assigned to"
 msgstr "Tilldelad till"
 
@@ -1601,6 +1602,7 @@ msgstr "Skapa ditt första projekt"
 #: src/issues/IssueSummary.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -3421,6 +3423,7 @@ msgstr "Problem {issue_link} har skapats av {caller_link}."
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/resources/details/fetchData.tsx
+#: src/navigation/header/QuickIssueDrawerToggle.tsx
 #: src/project/ProjectActions.tsx
 #: src/project/routes.ts
 #: src/resource/tabs/constants.ts
@@ -5516,6 +5519,7 @@ msgstr "Privata moln"
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
+#: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
@@ -6305,7 +6309,6 @@ msgstr "Upplösning"
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
@@ -7653,6 +7656,7 @@ msgid "Summary"
 msgstr "Sammanfattning"
 
 #: src/issues/routes.ts
+#: src/navigation/FooterLinks.tsx
 #: src/navigation/sidebar/SupportMenu.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
