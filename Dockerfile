@@ -36,6 +36,8 @@ COPY --from=next /app/build/index.html /usr/share/nginx/html/next/index.orig.htm
 
 ENV API_URL="http://localhost:8080"
 ENV TITLE="Waldur | Cloud Service Management"
+ENV ACCOUNTING_MODE="billing"
+ENV AUTH_STORAGE="sessionStorage"
 
 # put config template outside the public root
 COPY docker/config.template.json /usr/share/nginx/
