@@ -1,5 +1,6 @@
 {
   "apiEndpoint": "${API_URL}",
-  "accountingMode": "billing"
+  "accountingMode": "${ACCOUNTING_MODE}",
+  "authStorage": "${AUTH_STORAGE}"
 }
 
