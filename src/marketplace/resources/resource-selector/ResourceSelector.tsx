@@ -1,7 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useQuery } from 'react-query';
 
 import { get } from '@waldur/core/api';
 import { Link } from '@waldur/core/Link';

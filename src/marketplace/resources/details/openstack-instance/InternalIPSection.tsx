@@ -1,4 +1,4 @@
-import { QueryFunction } from 'react-query';
+import { QueryFunction } from '@tanstack/react-query';
 
 import { translate } from '@waldur/i18n';
 import { formatAddressList } from '@waldur/openstack/openstack-instance/utils';

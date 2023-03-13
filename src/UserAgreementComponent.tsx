@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import Axios from 'axios';
 import { FunctionComponent } from 'react';
-import { useQuery } from 'react-query';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -33,7 +33,7 @@ export const UserAgreementComponent: FunctionComponent<TemplateComponentProps> =
       error,
       data: option,
     } = useQuery(
-      'userAgreementData',
+      ['userAgreementData'],
       async () => await getUserAgreement(props.agreement_type),
     );
     if (loading) {

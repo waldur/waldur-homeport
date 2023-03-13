@@ -1,4 +1,4 @@
-import { QueryFunction, useInfiniteQuery } from 'react-query';
+import { QueryFunction, useInfiniteQuery } from '@tanstack/react-query';
 
 import { fixURL } from '@waldur/core/api';
 import { Event } from '@waldur/events/types';
@@ -30,7 +30,7 @@ export const ResourceTimeline = ({ resource }) => {
   };
 
   const context = useInfiniteQuery<any, any, DataPage>(
-    'resource-events',
+    ['resource-events'],
     loadData,
     {
       getNextPageParam: (lastPage) => lastPage.nextPage,

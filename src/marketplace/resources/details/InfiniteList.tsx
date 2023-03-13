@@ -1,5 +1,5 @@
+import { InfiniteQueryObserverResult } from '@tanstack/react-query';
 import { Fragment } from 'react';
-import { InfiniteQueryObserverResult } from 'react-query';
 
 import { translate } from '@waldur/i18n';
 

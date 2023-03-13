@@ -1,4 +1,4 @@
-import { QueryFunction, useInfiniteQuery } from 'react-query';
+import { QueryFunction, useInfiniteQuery } from '@tanstack/react-query';
 
 import { fixURL } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
@@ -30,7 +30,7 @@ export const ResourceIssues = ({ resource }) => {
   };
 
   const context = useInfiniteQuery<any, any, DataPage>(
-    'resource-issues',
+    ['resource-issues'],
     loadData,
     {
       getNextPageParam: (lastPage) => lastPage.nextPage,

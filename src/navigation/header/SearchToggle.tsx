@@ -1,9 +1,9 @@
+import { useQuery } from '@tanstack/react-query';
 import { UISref } from '@uirouter/react';
 import classNames from 'classnames';
 import { groupBy, isEmpty } from 'lodash';
 import { Fragment, useEffect, useState, useRef } from 'react';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
-import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 

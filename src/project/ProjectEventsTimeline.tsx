@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { Card } from 'react-bootstrap';
-import { useQuery } from 'react-query';
 
 import { get } from '@waldur/core/api';
 import { Link } from '@waldur/core/Link';
@@ -8,7 +8,7 @@ import { translate } from '@waldur/i18n';
 import { EventRow } from '@waldur/marketplace/resources/details/EventRow';
 
 export const ProjectEventsTimeline = ({ project }) => {
-  const result = useQuery('project-events', ({ signal }) => {
+  const result = useQuery(['project-events'], ({ signal }) => {
     return get<any[]>('/events/', {
       signal,
       params: {
