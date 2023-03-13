@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
-import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
@@ -24,7 +24,7 @@ export const GrowthChart: FunctionComponent = () => {
     error,
     data: option,
   } = useQuery(
-    `growth-chart-${Boolean(accountRunningState?.value)}`,
+    ['growth-chart', accountRunningState?.value],
     async ({ signal }) =>
       await getGrowthChartData(accountRunningState?.value, { signal }).then(
         formatGrowthChart,

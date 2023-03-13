@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
@@ -36,7 +36,7 @@ export const CustomersDivisionsChart: FunctionComponent = () => {
     error,
     data: option,
   } = useQuery(
-    `customer-divisions-chart-${Boolean(accountRunningState?.value)}`,
+    ['customer-divisions-chart', accountRunningState?.value],
     async ({ signal }) =>
       await loadData(accountRunningState?.value, { signal }).then(
         getEChartOptions,

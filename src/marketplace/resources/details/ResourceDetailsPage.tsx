@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { useQuery } from 'react-query';
 
 import { usePermissionView } from '@waldur/auth/PermissionLayout';
 import { translate } from '@waldur/i18n';

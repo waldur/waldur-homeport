@@ -1,6 +1,6 @@
+import { QueryFunction, useInfiniteQuery } from '@tanstack/react-query';
 import { UISref, useCurrentStateAndParams } from '@uirouter/react';
 import { FC, Fragment } from 'react';
-import { QueryFunction, useInfiniteQuery } from 'react-query';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
@@ -27,7 +27,7 @@ export const ResourcesList: FC<ResourcesListProps> = ({
     isFetching,
     isFetchingNextPage,
     status,
-  } = useInfiniteQuery<any, any, DataPage>(queryKey, loadData, {
+  } = useInfiniteQuery<any, any, DataPage>([queryKey], loadData, {
     getNextPageParam: (lastPage: DataPage) => lastPage.nextPage,
   });
 

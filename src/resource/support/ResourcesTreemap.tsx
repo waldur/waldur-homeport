@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { connect, useSelector } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
@@ -100,7 +100,7 @@ const TreemapContainer = (props: StateProps) => {
     error,
     data,
   } = useQuery<any, any, ProjectQuota[]>(
-    `resources-treemap-${props.quota?.key}`,
+    ['resources-treemap', props.quota?.key],
     async ({ signal }) => await loadData(props.quota?.key, { signal }),
   );
   const chartData = data ? parseProjects(data) : [];

@@ -1,7 +1,8 @@
 import { ErrorBoundary } from '@sentry/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { UIView } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -42,6 +43,7 @@ export const Application: FunctionComponent = () => {
           <MasterInit />
         </LayoutProvider>
       </Provider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 };

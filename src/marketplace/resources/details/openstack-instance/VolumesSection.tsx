@@ -1,4 +1,4 @@
-import { QueryFunction } from 'react-query';
+import { QueryFunction } from '@tanstack/react-query';
 
 import { fixURL } from '@waldur/core/api';
 import { formatFilesize } from '@waldur/core/utils';
