@@ -7,6 +7,7 @@ import { canAccessInvitations } from '@waldur/invitations/selectors';
 import { hasSupport } from '@waldur/issues/hooks';
 import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
+import { ProjectContainer } from './ProjectContainer';
 import { loadProject } from './resolve';
 
 const ProjectDashboard = lazyComponent(
@@ -44,7 +45,7 @@ export const states: StateDeclaration[] = [
     url: '/projects/:uuid/',
     abstract: true,
     parent: 'layout',
-    component: UIView,
+    component: ProjectContainer,
     data: {
       auth: true,
       workspace: PROJECT_WORKSPACE,
