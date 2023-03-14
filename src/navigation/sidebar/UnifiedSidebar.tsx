@@ -6,8 +6,6 @@ import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
 import { getUser } from '@waldur/workspace/selectors';
 
-import { isDescendantOf } from '../useTabs';
-
 import { AdminMenu } from './AdminMenu';
 import { ManagementMenu } from './ManagementMenu';
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
@@ -40,15 +38,8 @@ export const UnifiedSidebar = () => {
     ) {
       const item = document.querySelector('#resources-menu');
       menu.show(item);
-    } else if (
-      isDescendantOf('organization', state) ||
-      isDescendantOf('project', state) ||
-      isDescendantOf('marketplace-provider', state)
-    ) {
-      const item = document.querySelector('#management-menu');
-      menu.show(item);
     }
-  }, [router, state]);
+  }, [router, state, params.resource_uuid]);
   return (
     <Sidebar>
       {user ? (

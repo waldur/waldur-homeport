@@ -20,6 +20,8 @@ export const getUser = (state: RootState): User => state.workspace.user;
 export const getCustomer = (state: RootState): Customer =>
   state.workspace.customer;
 
+export const getResource = (state: RootState) => state.workspace.resource;
+
 export const getUserCustomerPermissions = createSelector(
   getUser,
   (user: User): CustomerPermission[] => {

@@ -1,3 +1,4 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -5,7 +6,11 @@ import { useAsync, useEffectOnce } from 'react-use';
 
 import { Arr082 } from '@waldur/core/svg/Arr082';
 import { translate } from '@waldur/i18n';
-import { getCustomer, getProject } from '@waldur/workspace/selectors';
+import {
+  getCustomer,
+  getProject,
+  getResource,
+} from '@waldur/workspace/selectors';
 
 import { getOrganizationCounters, getProjectCounters } from '../workspace/api';
 
@@ -45,30 +50,39 @@ const CustomToggle = ({ onClick, itemsCount, badge, expanded }) => (
   </div>
 );
 
-const RenderMenuItems = ({ items, project, counters = {} }) => (
-  <>
-    {items.map((item) =>
-      project ? (
-        <MenuItem
-          key={item.uuid}
-          title={item.title}
-          badge={getCounterText(counters['marketplace_category_' + item.uuid])}
-          state="marketplace-project-resources"
-          params={{
-            uuid: project.uuid,
-            category_uuid: item.uuid,
-          }}
-        />
-      ) : (
-        <MenuItem
-          key={item.uuid}
-          title={item.title}
-          state="profile.no-project"
-        />
-      ),
-    )}
-  </>
-);
+const RenderMenuItems = ({ items, project, counters = {} }) => {
+  const { state } = useCurrentStateAndParams();
+  const resource = useSelector(getResource);
+  return (
+    <>
+      {items.map((item) =>
+        project ? (
+          <MenuItem
+            key={item.uuid}
+            title={item.title}
+            badge={getCounterText(
+              counters['marketplace_category_' + item.uuid],
+            )}
+            state="marketplace-project-resources"
+            params={{
+              uuid: project.uuid,
+              category_uuid: item.uuid,
+            }}
+            activeState={
+              resource?.category_uuid === item.uuid ? state.name : undefined
+            }
+          />
+        ) : (
+          <MenuItem
+            key={item.uuid}
+            title={item.title}
+            state="profile.no-project"
+          />
+        ),
+      )}
+    </>
+  );
+};
 
 export const ResourcesMenu = ({ anonymous }) => {
   const currentCustomer = useSelector(getCustomer);
