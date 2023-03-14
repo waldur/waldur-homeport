@@ -3,6 +3,7 @@ import {
   SET_CURRENT_PROJECT,
   SET_CURRENT_WORKSPACE,
   SET_CURRENT_USER,
+  SET_CURRENT_RESOURCE,
 } from './constants';
 import { WorkspaceState } from './types';
 
@@ -11,6 +12,7 @@ const INITIAL_STATE: WorkspaceState = {
   customer: undefined,
   project: undefined,
   workspace: undefined,
+  resource: undefined,
 };
 
 export const reducer = (state = INITIAL_STATE, action): WorkspaceState => {
@@ -37,6 +39,12 @@ export const reducer = (state = INITIAL_STATE, action): WorkspaceState => {
       return {
         ...state,
         user: action.payload.user,
+      };
+
+    case SET_CURRENT_RESOURCE:
+      return {
+        ...state,
+        resource: action.payload.resource,
       };
 
     default:

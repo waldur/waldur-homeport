@@ -1,3 +1,4 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -20,6 +21,7 @@ export const ManagementMenu = () => {
   const project = useSelector(getProject);
   const user = useSelector(getUser);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  const { state, params } = useCurrentStateAndParams();
   return (
     <>
       {!isOwnerOrStaff ? null : customer ? (
@@ -43,7 +45,14 @@ export const ManagementMenu = () => {
         <MenuItem
           title={translate('Project')}
           state="project.dashboard"
-          activeState="project"
+          activeState={
+            [
+              'marketplace-project-resources-all',
+              'marketplace-project-resources',
+            ].includes(state.name) || params.resource_uuid
+              ? undefined
+              : 'project'
+          }
           params={{ uuid: project.uuid }}
           iconPath={IconProject}
           child={false}

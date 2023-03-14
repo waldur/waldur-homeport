@@ -186,4 +186,5 @@ export interface WorkspaceState {
   customer?: Customer;
   project?: Project;
   workspace?: WorkspaceType;
+  resource?;
 }
