@@ -13,12 +13,17 @@ import { useTitle } from '@waldur/navigation/title';
 
 import { getResource } from './api';
 import { ResourceBreadcrumbsRegistry } from './breadcrumbs/ResourceBreadcrumbsRegistry';
+import { RESOURCE_ENDPOINTS } from './constants';
 import { ResourceDetails } from './ResourceDetails';
 import { BaseResource } from './types';
 
 export const ResourceDetailsContainer: FunctionComponent = () => {
   const { params } = useCurrentStateAndParams();
   const router = useRouter();
+
+  if (!RESOURCE_ENDPOINTS[params.resource_type]) {
+    router.stateService.go('errorPage.notFound');
+  }
 
   const [asyncResult, refreshResource] = useAsyncFn(
     () => getResource(params.resource_type, params.resource_uuid),
