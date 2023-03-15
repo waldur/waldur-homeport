@@ -4,6 +4,7 @@ import { FunctionComponent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { usePermissionView } from '@waldur/auth/PermissionLayout';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { setCurrentResource } from '@waldur/workspace/actions';
@@ -15,15 +16,15 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
   const { state, params } = useCurrentStateAndParams();
   const dispatch = useDispatch();
 
-  const { data, refetch } = useQuery(
+  const { data, refetch, isLoading } = useQuery(
     ['resource-details-page', params['resource_uuid']],
     () => fetchData(state, params),
   );
 
-  useTitle(data.resource.category_title);
+  useTitle(data?.resource.category_title);
 
   usePermissionView(() => {
-    if (data.resource) {
+    if (data?.resource) {
       switch (data.resource.state) {
         case 'Terminated':
           return {
@@ -39,11 +40,22 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
   }, [data]);
 
   useEffect(() => {
-    dispatch(setCurrentResource(data.resource));
+    dispatch(setCurrentResource(data?.resource));
     return () => {
       dispatch(setCurrentResource(undefined));
     };
-  }, [data.resource, dispatch]);
+  }, [data?.resource, dispatch]);
 
-  return <ResourceDetailsView {...data} refetch={refetch} state={state} />;
+  if (!data) {
+    return <LoadingSpinner />;
+  }
+
+  return (
+    <ResourceDetailsView
+      {...data}
+      refetch={refetch}
+      isLoading={isLoading}
+      state={state}
+    />
+  );
 };

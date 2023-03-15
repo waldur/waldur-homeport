@@ -1,21 +1,20 @@
-import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 import { getProject } from '@waldur/workspace/selectors';
-import { Project } from '@waldur/workspace/types';
 
 import { Resource } from '../types';
 
 import { EmptyResourcesListPlaceholder } from './EmptyResourcesListPlaceholder';
 import { ExpandableResourceSummary } from './ExpandableResourceSummary';
+import { ProjectResourcesAllFilter } from './ProjectResourcesAllFilter';
 import { ResourceActionsButton } from './ResourceActionsButton';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
@@ -24,15 +23,42 @@ interface FieldProps {
   row: Resource;
 }
 
-interface StateProps {
-  project: Project;
-  filter;
-}
+const mapPropsToFilter = createSelector(
+  getProject,
+  getFormValues(PROJECT_RESOURCES_ALL_FILTER_FORM_ID),
+  (project, filters: any) => {
+    const result: Record<string, any> = {};
+    if (project) {
+      result.project_uuid = project.uuid;
+    }
+    if (filters) {
+      if (filters.offering) {
+        result.offering_uuid = filters.offering.uuid;
+      }
+      if (filters.state) {
+        result.state = filters.state.value;
+      }
+      if (filters.category) {
+        result.category_uuid = filters.category.uuid;
+      }
+    }
+    return result;
+  },
+);
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+export const ProjectResourcesAllList = () => {
+  const filter = useSelector(mapPropsToFilter);
+  const project = useSelector(getProject);
+  const tableProps = useTable({
+    table: `ProjectResourcesAllList-${project.uuid}`,
+    fetchData: createFetcher('marketplace-resources'),
+    queryField: 'query',
+    filter,
+  });
   return (
     <Table
-      {...props}
+      {...tableProps}
+      filters={<ProjectResourcesAllFilter />}
       columns={[
         {
           title: translate('Name'),
@@ -41,15 +67,15 @@ export const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Category'),
-          render: ({ row }: FieldProps) => row.category_title,
+          render: ({ row }: FieldProps) => <>{row.category_title}</>,
         },
         {
           title: translate('Offering'),
-          render: ({ row }: FieldProps) => row.offering_name,
+          render: ({ row }: FieldProps) => <>{row.offering_name}</>,
         },
         {
           title: translate('Created at'),
-          render: ({ row }) => formatDateTime(row.created),
+          render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
         },
         {
@@ -61,7 +87,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       placeholderComponent={<EmptyResourcesListPlaceholder />}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hoverableRow={({ row }) => (
-        <ResourceActionsButton row={row} refetch={props.fetch} />
+        <ResourceActionsButton row={row} refetch={tableProps.fetch} />
       )}
       hasQuery={true}
       showPageSizeSelector={true}
@@ -71,44 +97,3 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const mapPropsToFilter = (props: StateProps) => {
-  const filter: Record<string, any> = {};
-  if (props.project) {
-    filter.project_uuid = props.project.uuid;
-  }
-  if (props.filter) {
-    if (props.filter.offering) {
-      filter.offering_uuid = props.filter.offering.uuid;
-    }
-    if (props.filter.state) {
-      filter.state = props.filter.state.value;
-    }
-    if (props.filter.category) {
-      filter.category_uuid = props.filter.category.uuid;
-    }
-  }
-  return filter;
-};
-
-const TableOptions = {
-  table: 'ProjectResourcesAllList',
-  mapPropsToTableId: (props) => [props.project.uuid],
-  fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter,
-  queryField: 'query',
-};
-
-const mapStateToProps = (state: RootState) => ({
-  project: getProject(state),
-  filter: getFormValues(PROJECT_RESOURCES_ALL_FILTER_FORM_ID)(state),
-});
-
-const enhance = compose(
-  connect<StateProps, {}, {}>(mapStateToProps),
-  connectTable(TableOptions),
-);
-
-export const ProjectResourcesAllList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;

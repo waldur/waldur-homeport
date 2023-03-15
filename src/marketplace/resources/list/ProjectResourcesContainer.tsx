@@ -19,10 +19,6 @@ export const ProjectResourcesContainer: React.FC = () => {
 
   const project = useSelector(getProject);
 
-  if (!project) {
-    return null;
-  }
-
   const { loading, value, error } = useAsync(
     () => loadData(category_uuid, project.uuid),
     [category_uuid],

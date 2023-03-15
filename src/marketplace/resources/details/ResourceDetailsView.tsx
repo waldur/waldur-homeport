@@ -43,6 +43,7 @@ export const ResourceDetailsView: FC<any> = ({
   components,
   offering,
   refetch,
+  isLoading,
   state,
   tabs,
   tabSpec,
@@ -137,7 +138,10 @@ export const ResourceDetailsView: FC<any> = ({
                               }}
                               as={ActionButton}
                             />
-                            <RefreshButton />
+                            <RefreshButton
+                              refetch={refetch}
+                              isLoading={isLoading}
+                            />
                           </div>
                           {resource.offering_type === INSTANCE_TYPE ? (
                             scope && <InstanceComponents resource={scope} />
