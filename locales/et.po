@@ -630,6 +630,10 @@ msgstr "Luba tegevuste ajastamine nädalavahetusteks"
 msgid "Allow to enable/disable component only"
 msgstr "Lubatud ainult lubatud / keelatud komponent"
 
+#: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+msgid "Allowed address pairs"
+msgstr "Lubatud aadressipaarid"
+
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 msgid "Allowed address pairs update was scheduled."
 msgstr "Lubatud aadressipaari värskendus on ajastatud."
@@ -808,6 +812,10 @@ msgstr "Kas olete kindel, et soovite makseprofiili kustutada?"
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr "Kas olete kindel, et soovite selle {resourceType} kustutada?"
 
+#: src/marketplace/resources/mass-actions/MultiPullAction.tsx
+msgid "Are you sure you want to pull {count} resources?"
+msgstr "Oled kindel, et soovite tõmmata {count} ressursse?"
+
 #: src/invoices/details/InvoiceItemDelete.tsx
 msgid "Are you sure you want to remove invoice item {name}?"
 msgstr "Kas olete kindel, et soovite eemaldada arve kirje {name}?"
@@ -868,6 +876,11 @@ msgstr "Lisatud"
 #: src/openstack/openstack-volume/actions/AttachDialog.tsx
 msgid "Attach OpenStack Volume to Instance"
 msgstr "Lisage OpenStack salvestusruum instantsile"
+
+#: src/openstack/openstack-instance/actions/AttachVolumeAction.tsx
+#: src/openstack/openstack-instance/actions/AttachVolumeDialog.tsx
+msgid "Attach volume"
+msgstr "Lisa kettapind"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
@@ -1933,6 +1946,10 @@ msgstr "Päringu koostamine"
 msgid "Create resource"
 msgstr "Loo ressurss"
 
+#: src/marketplace/resources/actions/CreateRobotAccountAction.tsx
+msgid "Create robot account"
+msgstr "Loo robotkonto"
+
 #: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
 msgid "Create server group for OpenStack tenant {name}"
 msgstr "Loo serverirühm OpenStack tenantile {name}"
@@ -2544,6 +2561,10 @@ msgstr "Kas soovite esitada loa taotluse?"
 msgid "Docker version"
 msgstr "Dockeri versioon"
 
+#: src/marketplace/offerings/details/PublicOfferingComponents.tsx
+msgid "Docs & resources"
+msgstr "Dokumentatsioon ja ressursid"
+
 #: src/navigation/header/DocsLink.tsx
 msgid "Documentation"
 msgstr "Dokumentatsioon"
@@ -2702,6 +2723,10 @@ msgstr "Muuda profiili"
 msgid "Edit project member"
 msgstr "Muuda projekti liiget"
 
+#: src/project/ProjectCreateForm.tsx
+msgid "Edit request"
+msgstr "Muuda taotlust"
+
 #: src/customer/team/EditTeamMemberDialog.tsx
 msgid "Edit team member"
 msgstr "Muuda meeskonna liiget"
@@ -2852,6 +2877,11 @@ msgstr "Keskkonnamuutujad"
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Erred"
+msgstr "Viga"
+
+#: src/marketplace/resources/details/InfiniteList.tsx
+#: src/marketplace/resources/details/ResourcesList.tsx
+msgid "Error"
 msgstr "Viga"
 
 #: src/events/EventDetailsTable.tsx
@@ -3116,6 +3146,11 @@ msgstr "Tasu, mida rakendatakse iga kord, kui see plaan aktiveeritakse."
 msgid "Feedback"
 msgstr "Tagasiside"
 
+#: src/marketplace/resources/details/InfiniteList.tsx
+#: src/marketplace/resources/details/ResourcesList.tsx
+msgid "Fetching..."
+msgstr "Tõmban..."
+
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 msgid "Field"
 msgstr "Väli"
@@ -3175,6 +3210,14 @@ msgstr "Rahandus"
 msgid "Financial overview"
 msgstr "Majanduslik ülevaade"
 
+#: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
+msgid "Find project"
+msgstr "Otsi projekti"
+
+#: src/marketplace/resources/resource-selector/ResourceSelector.tsx
+msgid "Find resource"
+msgstr "Otsi ressurssi"
+
 #: src/marketplace-checklist/AnswersTable.tsx
 msgid "Find solution"
 msgstr "Leidke lahendus"
@@ -3185,6 +3228,10 @@ msgstr "Leidke lahendus"
 #: src/user/keys/KeysList.tsx
 msgid "Fingerprint"
 msgstr "Sõrmejälg"
+
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+msgid "First"
+msgstr "Esimene"
 
 #: src/user/support/UserEditForm.tsx
 msgid "First name"
@@ -3215,6 +3262,14 @@ msgstr "Fikseeritud hind"
 #: src/rancher/cluster/create/NodeFlavorGroup.tsx
 msgid "Flavor"
 msgstr "Tüüp"
+
+#: src/marketplace/resources/details/InstanceComponents.tsx
+msgid "Flavor: {flavor}"
+msgstr "Tüüp: {flavor}"
+
+#: src/marketplace/resources/details/openstack-tenant/InstancesSection.tsx
+msgid "Flavor: {flavor_name}, image: {image_name}"
+msgstr "Tüüp: {flavor_name}, kettapilt: {image_name}"
 
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Flavor exclude regex"
@@ -3304,6 +3359,13 @@ msgstr "Täisnimi"
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderDetailsCard.tsx
 msgid "Full name:"
 msgstr "Täisnimi"
+
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
+#: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
+#: src/rancher/cluster/create/VolumeSizeGroup.tsx
+msgid "GB"
+msgstr "GB"
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "GPU"
@@ -3549,6 +3611,10 @@ msgstr "IP versioon"
 #: src/navigation/cookies/CookiesConsent.tsx
 msgid "I agree"
 msgstr "Nõustun"
+
+#: src/user/support/UserDeleteAccount.tsx
+msgid "I confirm my account deletion"
+msgstr "Kinnitan oma konto kustutamise"
 
 #: src/rancher/template/CatalogTemplateList.tsx
 msgid "Icon"
@@ -3946,6 +4012,10 @@ msgstr "Väline"
 msgid "Is official"
 msgstr "On ametlik"
 
+#: src/customer/list/OrganizationDetails.tsx
+msgid "Is service provider"
+msgstr "Teenusepakkuja"
+
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Issue"
@@ -4163,6 +4233,11 @@ msgstr "Tegevuste laadimine"
 msgid "Loading invoices"
 msgstr "Arvete laadimine"
 
+#: src/marketplace/resources/details/InfiniteList.tsx
+#: src/marketplace/resources/details/ResourcesList.tsx
+msgid "Loading more..."
+msgstr "Laadin veel..."
+
 #: src/azure/AzureResourceSummary.tsx
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -4241,6 +4316,10 @@ msgstr "Välja logimine nurjus"
 #: src/vmware/VMwarePortSummary.tsx
 msgid "MAC address"
 msgstr "MAC- aadress"
+
+#: src/marketplace/resources/details/openstack-instance/FloatingIPSection.tsx
+msgid "MAC address: {internal_ip_mac_address}, subnet name: {subnet_name}"
+msgstr "MAC aadress: {internal_ip_mac_address}, alamvõrgu nimi: {subnet_name}"
 
 #: src/marketplace/resources/details/openstack-tenant/PortsSection.tsx
 msgid "MAC address: {mac_address}"
@@ -4745,10 +4824,18 @@ msgstr "Uus limiit"
 msgid "New plan"
 msgstr "Uus plaan"
 
+#: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
+msgid "New project"
+msgstr "Uus projekt"
+
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "New size"
 msgstr "Uus suurus"
+
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+msgid "New value"
+msgstr "Uus väärtus"
 
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
@@ -6460,6 +6547,10 @@ msgstr "RAMi kasutus"
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Rating"
 msgstr "Hinnang"
+
+#: src/marketplace/landing/FooterSection.tsx
+msgid "Reach a new audience"
+msgstr "Uue vaatajaskonnani jõudmine"
 
 #: src/customer/details/CustomerRemovePanel.tsx
 #: src/user/support/actions.ts
