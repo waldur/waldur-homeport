@@ -63,15 +63,5 @@ export const fetchData = async (state, params) => {
     ? tabSources.find((child) => child.key === params.tab)
     : null;
 
-  const parentTab = tabs.find((tab) =>
-    tab.children?.find((child) => child.params['tab'] === params.tab),
-  )?.title;
-  const breadcrumbs = [];
-  if (parentTab) {
-    breadcrumbs.push(parentTab);
-  }
-  if (tabSpec) {
-    breadcrumbs.push(tabSpec.title);
-  }
-  return { resource, scope, components, offering, tabSpec, tabs, breadcrumbs };
+  return { resource, scope, components, offering, tabSpec, tabs };
 };

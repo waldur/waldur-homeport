@@ -1,16 +1,13 @@
-import { Transition, UIView } from '@uirouter/react';
+import { UIView } from '@uirouter/react';
 
-import { queryClient } from '@waldur/Application';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { fetchCustomer } from '@waldur/customer/workspace/CustomerWorkspace';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
-import { router } from '@waldur/router';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { loadContext, fetchProvider } from './resolve';
-import { fetchData } from './resources/details/fetchData';
 
 const AdminOfferingsListContainer = lazyComponent(
   () =>
@@ -121,9 +118,9 @@ const ProjectResourcesContainer = lazyComponent(
   () => import('./resources/list/ProjectResourcesContainer'),
   'ProjectResourcesContainer',
 );
-const ProjectResourcesAllContainer = lazyComponent(
-  () => import('./resources/list/ProjectResourcesAllContainer'),
-  'ProjectResourcesAllContainer',
+const ProjectResourcesAllList = lazyComponent(
+  () => import('./resources/list/ProjectResourcesAllList'),
+  'ProjectResourcesAllList',
 );
 const PublicResourcesContainer = lazyComponent(
   () => import('./resources/list/PublicResourcesContainer'),
@@ -168,39 +165,13 @@ const getPublicRoutesParams = () => ({
   ],
 });
 
-const getResourceDetailsParams = () => ({
+const getResourceDetailsParams = {
   component: ResourceDetailsPage,
-  resolve: [
-    {
-      token: 'result',
-      resolveFn: (transition: Transition) =>
-        queryClient.fetchQuery(
-          ['resource-details-page', transition.params()['resource_uuid']],
-          () => fetchData(transition.to(), transition.params()),
-        ),
-      deps: ['$transition$'],
-    },
-  ],
   data: {
     useExtraTabs: true,
     skipBreadcrumb: true,
-    breadcrumb: () => {
-      const params = router.globals.params;
-      const resource_uuid = params['resource_uuid'];
-      if (!resource_uuid) {
-        return '';
-      }
-      const queryData = queryClient.getQueryData([
-        'resource-details-page',
-        resource_uuid,
-      ]);
-      if (!queryData) {
-        return '';
-      }
-      return queryData['breadcrumbs'];
-    },
   },
-});
+};
 
 export const states: StateDeclaration[] = [
   {
@@ -619,21 +590,21 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-public-resource-details',
     url: 'marketplace-public-resource-details/:resource_uuid?tab',
     parent: 'organization',
-    ...getResourceDetailsParams(),
+    ...getResourceDetailsParams,
   },
 
   {
     name: 'marketplace-service-provider-public-resource-details',
     url: 'marketplace-service-provider-public-resource-details/:resource_uuid?tab',
     parent: 'organization',
-    ...getResourceDetailsParams(),
+    ...getResourceDetailsParams,
   },
 
   {
     name: 'marketplace-project-resource-details',
     url: 'marketplace-project-resource-details/:resource_uuid?tab',
     parent: 'project',
-    ...getResourceDetailsParams(),
+    ...getResourceDetailsParams,
   },
 
   {
@@ -695,8 +666,11 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-project-resources-all',
     url: 'marketplace-resources/',
-    component: ProjectResourcesAllContainer,
+    component: ProjectResourcesAllList,
     parent: 'project',
+    data: {
+      breadcrumb: () => translate('All resources'),
+    },
   },
 
   {
