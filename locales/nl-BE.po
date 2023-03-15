@@ -15,3 +15,15 @@ msgstr "10 - Zeer positief"
 #: src/issues/feedback/utils.ts
 msgid "1 - Very negative"
 msgstr "1 - Zeer negatief"
+
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+msgid "API secret code:"
+msgstr "API geheime code:"
+
+#: src/user/support/TokenLifetimeField.tsx
+msgid "API token lifetime"
+msgstr "Levensduur API token"
+
+#: src/booking/AcceptAction.tsx
+msgid "Accept"
+msgstr "Accepteren"

@@ -499,6 +499,10 @@ msgstr "Пулы распределения IP адресов"
 msgid "Allow bookings to be scheduled at weekends"
 msgstr "Разрешить бронирование по выходным"
 
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+msgid "Allowed address pairs update was scheduled."
+msgstr "Запланировано обновление разрешенных пар адресов."
+
 #: src/auth/SigninButton.tsx
 msgid "Already have an account?"
 msgstr "У вас уже есть аккаунт?"
