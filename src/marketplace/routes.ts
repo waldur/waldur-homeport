@@ -661,6 +661,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-resources/:category_uuid/',
     component: ProjectResourcesContainer,
     parent: 'project',
+    data: {
+      hideHeaderMenu: true,
+    },
   },
 
   {
@@ -670,6 +673,7 @@ export const states: StateDeclaration[] = [
     parent: 'project',
     data: {
       breadcrumb: () => translate('All resources'),
+      hideHeaderMenu: true,
     },
   },
 

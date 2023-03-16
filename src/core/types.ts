@@ -17,6 +17,7 @@ interface DataDeclaration {
   erred: boolean;
   /** Page header component is concealed as long as this parameter is set to true. */
   hideHeader: boolean;
+  hideHeaderMenu: boolean;
   /** Workspace declaration is used by workspace selector. */
   workspace: string;
   skipAuth: boolean;
