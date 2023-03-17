@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -16,7 +16,6 @@ import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { NOTIFICATION_CREATE_FORM_ID } from '@waldur/issues/notifications/constants';
-import { NumberIndicator } from '@waldur/issues/notifications/NumberIndicator';
 import {
   offeringsAutocomplete,
   organizationAutocomplete,
@@ -28,7 +27,6 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 export const NotificationCreateDialog = reduxForm({
   form: NOTIFICATION_CREATE_FORM_ID,
 })(({ submitting, invalid, handleSubmit }) => {
-  const [fetchNumber, setFetchNumber] = useState<any>();
   const dispatch = useDispatch();
 
   const createNotification = useCallback(
@@ -63,10 +61,7 @@ export const NotificationCreateDialog = reduxForm({
   );
 
   return (
-    <form
-      onSubmit={handleSubmit(createNotification)}
-      onChange={(e) => setFetchNumber(e)}
-    >
+    <form onSubmit={handleSubmit(createNotification)}>
       <ModalHeader>
         <ModalTitle>{translate('Create a broadcast')}</ModalTitle>
       </ModalHeader>
@@ -97,7 +92,6 @@ export const NotificationCreateDialog = reduxForm({
             }
             isMulti={true}
             {...reactSelectMenuPortaling()}
-            onChange={(e) => setFetchNumber(e)}
           />
           <AsyncSelectField
             name="customers"
@@ -111,10 +105,8 @@ export const NotificationCreateDialog = reduxForm({
             }
             isMulti={true}
             {...reactSelectMenuPortaling()}
-            onChange={(e) => setFetchNumber(e)}
           />
         </FormContainer>
-        <NumberIndicator shouldFetch={fetchNumber} />
       </ModalBody>
       <ModalFooter>
         <SubmitButton
