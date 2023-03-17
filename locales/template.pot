@@ -573,7 +573,7 @@ msgstr ""
 msgid "All ports"
 msgstr ""
 
-#: src/marketplace/resources/list/ProjectResourcesAllContainer.tsx
+#: src/marketplace/routes.ts
 #: src/navigation/sidebar/ResourcesMenu.tsx
 msgid "All resources"
 msgstr ""
@@ -3297,6 +3297,10 @@ msgstr ""
 
 #: src/core/DownloadLink/effects.tsx
 msgid "File has been downloaded."
+msgstr ""
+
+#: src/project/effects.ts
+msgid "File too large. Please select a smaller file."
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
