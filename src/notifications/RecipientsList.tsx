@@ -49,6 +49,7 @@ const TableOptions = {
   table: 'notification-recipients',
   fetchData: createFetcher('broadcast_messages/recipients'),
   mapPropsToFilter: (props) => ({
+    all_users: props.query?.all_users,
     customers: props.query?.customers?.map((c) => c.uuid),
     offerings: props.query?.offerings?.map((c) => c.uuid),
   }),
