@@ -38,11 +38,16 @@ export function* handleCreateProject(action) {
     yield put(fetchListStart(PROJECTS_LIST));
   } catch (error) {
     const errorData = error?.response?.data;
-    const formError = new SubmissionError({
+    let formError = new SubmissionError({
       _error: errorMessage,
       ...errorData,
     });
-
+    if (error.response && error.response.status === 413) {
+      formError = new SubmissionError({
+        _error: translate('File too large. Please select a smaller file.'),
+        ...errorData,
+      });
+    }
     yield put(createProject.failure(formError));
   }
 }
@@ -78,11 +83,16 @@ export function* handleUpdateProject(action) {
     yield put(fetchListStart(PROJECTS_LIST));
   } catch (error) {
     const errorData = error?.response?.data;
-    const formError = new SubmissionError({
+    let formError = new SubmissionError({
       _error: errorMessage,
       ...errorData,
     });
-
+    if (error.response && error.response.status === 413) {
+      formError = new SubmissionError({
+        _error: translate('File too large. Please select a smaller file.'),
+        ...errorData,
+      });
+    }
     yield put(updateProject.failure(formError));
   }
 }
