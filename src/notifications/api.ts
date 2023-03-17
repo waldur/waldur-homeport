@@ -2,9 +2,6 @@ import { getSelectData, post, put } from '@waldur/core/api';
 
 import { MessageTemplate, NotificationRequestData } from './types';
 
-export const getNumberOfNotificationReceivers = (data) =>
-  post(`/broadcast_messages/dry_run/`, data);
-
 export const sendNotification = (uuid: string) =>
   post(`/broadcast_messages/${uuid}/send/`);
 

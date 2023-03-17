@@ -12,6 +12,7 @@ export const serializeNotification = (
   query: {
     customers: formData.customers?.map((c) => c.uuid),
     offerings: formData.offerings?.map((c) => c.uuid),
+    all_users: formData.all_users,
   },
   send_at: formData.send_at,
 });
@@ -23,5 +24,6 @@ export const parseNotification = (
   body: notification.body,
   offerings: notification.query.offerings,
   customers: notification.query.customers,
+  all_users: notification.query.all_users,
   send_at: notification.send_at,
 });

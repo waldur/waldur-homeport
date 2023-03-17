@@ -18,11 +18,13 @@ interface Notification extends Message {
 export interface NotificationFormData extends Notification {
   customers: IdNamePair[];
   offerings: IdNamePair[];
+  all_users: boolean;
 }
 
 interface QueryRequest {
   customers: string[];
   offerings: string[];
+  all_users: boolean;
 }
 
 interface QueryResponse {
@@ -31,6 +33,7 @@ interface QueryResponse {
   projects: IdNamePair[];
   customer_roles: string[];
   project_roles: string[];
+  all_users: boolean;
 }
 
 export interface NotificationRequestData extends Notification {

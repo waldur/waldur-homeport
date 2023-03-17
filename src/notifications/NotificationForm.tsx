@@ -5,6 +5,7 @@ import { change, FormName } from 'redux-form';
 import { required } from '@waldur/core/validators';
 import { FormContainer, StringField, TextField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 import {
@@ -93,6 +94,11 @@ export const NotificationForm = ({
                   }}
                 >
                   <FormContainer submitting={submitting}>
+                    <AwesomeCheckboxField
+                      name="all_users"
+                      label={translate('Send message to all users')}
+                      hideLabel={true}
+                    />
                     <AsyncSelectField
                       name="offerings"
                       label={translate('Offerings')}
