@@ -7382,6 +7382,7 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-tenant/FlavorListFilter.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
 msgid "RAM"
@@ -8878,6 +8879,10 @@ msgstr ""
 msgid "Send broadcast"
 msgstr ""
 
+#: src/notifications/NotificationForm.tsx
+msgid "Send message to all users"
+msgstr ""
+
 #: src/invoices/list/SendNotificationButton.tsx
 msgid "Send notification"
 msgstr ""
@@ -10012,10 +10017,6 @@ msgstr ""
 
 #: src/azure/common/validators.ts
 msgid "The name must be shorter than 15 characters."
-msgstr ""
-
-#: src/notifications/NumberIndicator.tsx
-msgid "The number of recipients who will receive the notification:"
 msgstr ""
 
 #: src/marketplace/details/ProjectField.tsx

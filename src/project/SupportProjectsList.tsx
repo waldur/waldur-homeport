@@ -38,6 +38,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Organization'),
       render: OrganizationLink,
+      orderField: 'customer_name',
     },
     {
       title: translate('Description'),
@@ -58,6 +59,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title: translate('Estimated cost'),
       feature: 'project.estimated_cost',
       render: ProjectCostField,
+      orderField: 'estimated_cost',
     },
   ]);
 
