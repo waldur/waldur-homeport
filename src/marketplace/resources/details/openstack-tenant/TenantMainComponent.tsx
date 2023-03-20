@@ -1,13 +1,14 @@
 import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { QuotasTable } from '@waldur/quotas/QuotasTable';
 
 import { TenantDetails } from './TenantDetails';
 
-export const TenantMainComponent = ({ resource }) =>
-  resource.scope ? (
-    <div className="mb-10">
-      <Card>
+export const TenantMainComponent = ({ resource, scope }) =>
+  scope ? (
+    <>
+      <Card className="mb-10">
         <Card.Header>
           <Card.Title>
             <h3>{translate('Cloud components')}</h3>
@@ -17,5 +18,15 @@ export const TenantMainComponent = ({ resource }) =>
           <TenantDetails resource={resource} />
         </Card.Body>
       </Card>
-    </div>
+      <Card className="mb-10">
+        <Card.Header>
+          <Card.Title>
+            <h3>{translate('Quotas')}</h3>
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <QuotasTable resource={scope} />
+        </Card.Body>
+      </Card>
+    </>
   ) : null;
