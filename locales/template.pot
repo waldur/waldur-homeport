@@ -7382,7 +7382,6 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-tenant/FlavorListFilter.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
 msgid "RAM"
@@ -9834,6 +9833,7 @@ msgstr ""
 msgid "Team member has been removed."
 msgstr ""
 
+#: src/customer/team/CustomerUsersList.tsx
 #: src/project/team/ProjectUsersList.tsx
 msgid "Team members"
 msgstr ""

@@ -65,7 +65,7 @@ function* checkPendingReview(action) {
       yield put(
         openModalDialog(PendingReviewDialog, {
           resolve: { reviewId: review.uuid },
-          size: 'lg',
+          size: 'xl',
         }),
       );
     }

@@ -26,6 +26,7 @@ import { ProjectMemberAddButton } from './ProjectMemberAddButton';
 const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
+      title={translate('Team members')}
       {...props}
       columns={[
         {
