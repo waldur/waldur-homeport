@@ -13,18 +13,12 @@ interface OrganizationSummaryProps {
 
 export const OrganizationSummary = ({ customer }: OrganizationSummaryProps) => {
   const user = useSelector(getUser);
-  const isOwner = customer?.owners?.find((perm) => perm.uuid === user?.uuid);
-  const isServiceManager = customer?.service_managers?.find(
-    (perm) => perm.uuid === user.uuid,
-  );
 
   const organizationName =
     customer?.name ||
     customer?.abbreviation ||
     customer?.display_name ||
     DASH_ESCAPE_CODE;
-  const membersCount =
-    (customer?.owners?.length || 0) + (customer?.service_managers?.length || 0);
 
   return (
     <div className="flex-grow-1 me-2 ellipsis">
@@ -32,10 +26,12 @@ export const OrganizationSummary = ({ customer }: OrganizationSummaryProps) => {
         <h5 className="text-white fs-5 fw-bold text-nowrap mb-0">
           {organizationName}
         </h5>
-        {membersCount ? (
+        {customer.users_count ? (
           <h5 className="text-white fs-5 mb-0">
-            {membersCount}{' '}
-            {membersCount > 1 ? translate('Members') : translate('Member')}
+            {customer.users_count}{' '}
+            {customer.users_count > 1
+              ? translate('Members')
+              : translate('Member')}
           </h5>
         ) : (
           <h5 className="text-muted mb-0">{translate('No member')}</h5>
@@ -45,9 +41,9 @@ export const OrganizationSummary = ({ customer }: OrganizationSummaryProps) => {
         <div className="text-white fs-8">
           {translate('Your role:')}{' '}
           <span className="text-success">
-            {isOwner
+            {customer.role == 'owner'
               ? translate(ENV.roles.owner)
-              : isServiceManager
+              : customer.role == 'service_manager'
               ? translate(ENV.roles.service_manager)
               : formatUserStatus(user)}
           </span>
