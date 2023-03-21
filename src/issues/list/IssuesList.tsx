@@ -117,6 +117,9 @@ const exportRow = (row, props) => {
   if (!hiddenColumns.includes('customer')) {
     result.push(row.customer_name || 'N/A');
   }
+  if (!hiddenColumns.includes('project')) {
+    result.push(row.project_name || 'N/A');
+  }
   result.push(row.caller_full_name || 'N/A');
   if (supportOrStaff) {
     result.push(row.reporter_name || 'N/A');
@@ -140,6 +143,7 @@ const exportFields = (props) => {
       !hiddenColumns.includes('resource_type') &&
       translate('Service type'),
     !hiddenColumns.includes('customer') && translate('Organization'),
+    !hiddenColumns.includes('project') && translate('Project'),
     translate('Caller'),
     supportOrStaff && translate('Reporter'),
     supportOrStaff && translate('Assigned to'),

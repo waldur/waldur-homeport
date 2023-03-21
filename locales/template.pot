@@ -4261,6 +4261,8 @@ msgstr ""
 #: src/project/ProjectActions.tsx
 #: src/project/routes.ts
 #: src/resource/tabs/constants.ts
+#: src/user/UserActions.tsx
+#: src/user/routes.ts
 msgid "Issues"
 msgstr ""
 
