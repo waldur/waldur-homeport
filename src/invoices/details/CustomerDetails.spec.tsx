@@ -1,5 +1,7 @@
 import { render } from 'enzyme';
 
+import { Customer } from '@waldur/workspace/types';
+
 import { CustomerDetails } from './CustomerDetails';
 
 const Customer = {
@@ -15,7 +17,8 @@ const Customer = {
   bank_name: 'Estonian Bank',
   bank_account: '123456789',
   vat_code: 'EE123456789',
-};
+  role: 'owner',
+} as Customer;
 
 describe('CustomerDetails', () => {
   it('renders all rows', () => {

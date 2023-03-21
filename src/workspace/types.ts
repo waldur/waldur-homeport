@@ -1,3 +1,5 @@
+import { CustomerRole } from '@waldur/core/constants';
+
 export interface Permission {
   project_uuid?: string;
   user_uuid: string;
@@ -165,6 +167,8 @@ export interface Customer {
   support_users?: User[];
   projects?: Project[];
   payment_profiles?: PaymentProfile[];
+  users_count?: number;
+  role: CustomerRole;
 }
 
 export const ORGANIZATION_WORKSPACE = 'WORKSPACE/ORGANIZATION';
