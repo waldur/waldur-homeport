@@ -37,11 +37,13 @@ export interface Resource extends ResourceReference {
   offering_uuid: string;
   offering_name: string;
   offering_type: string;
+  offering_thumbnail?: string;
   state: ResourceState;
   scope?: string;
   created?: string;
   category_title?: string;
   category_uuid?: string;
+  category_icon?: string;
   customer_name?: string;
   project_name?: string;
   project_uuid?: string;
