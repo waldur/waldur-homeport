@@ -12,7 +12,7 @@ import { translate } from '@waldur/i18n';
 import { offeringCategoryStateSelector } from '@waldur/marketplace/links/CategoryLink';
 import { offeringDetailsSelector } from '@waldur/marketplace/links/OfferingLink';
 import { Category, Offering } from '@waldur/marketplace/types';
-import { Customer } from '@waldur/workspace/types';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { BaseList } from './BaseList';
 
@@ -82,10 +82,10 @@ const OfferingListItem = ({
 
 export const OfferingsPanel: FunctionComponent<{
   offerings: Offering[];
-  customer: Customer;
   category: Category;
-}> = ({ offerings, customer, category }) => {
+}> = ({ offerings, category }) => {
   const [selectedOffering, selectOffering] = useState<Offering>();
+  const customer = useSelector(getCustomer);
 
   const handleOfferingClick = useCallback((offering: Offering) => {
     selectOffering(offering);

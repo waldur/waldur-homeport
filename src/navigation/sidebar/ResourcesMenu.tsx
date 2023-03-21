@@ -1,11 +1,13 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
-import { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useAsync, useEffectOnce } from 'react-use';
+import { useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Arr082 } from '@waldur/core/svg/Arr082';
 import { translate } from '@waldur/i18n';
+import { getCategories } from '@waldur/marketplace/common/api';
+import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 import {
   getCustomer,
   getProject,
@@ -16,7 +18,6 @@ import { getOrganizationCounters, getProjectCounters } from '../workspace/api';
 
 import { MenuAccordion } from './MenuAccordion';
 import { MenuItem } from './MenuItem';
-import { getCategoriesSelector, sidebarInitStart } from './store';
 
 const Icon = require('./Resources.svg');
 
@@ -86,64 +87,62 @@ const RenderMenuItems = ({ items, project, counters = {} }) => {
 
 export const ResourcesMenu = ({ anonymous }) => {
   const currentCustomer = useSelector(getCustomer);
-  const categories: any[] = useSelector(getCategoriesSelector);
-  const dispatch = useDispatch();
-  useEffectOnce(() => {
-    dispatch(sidebarInitStart(anonymous));
-  });
   const project = useSelector(getProject);
 
-  const [preferredCounters, setPreferredCounters] = useState({});
+  const { data: categories } = useQuery(
+    ['ResourcesMenu', 'Categories'],
+    () =>
+      getCategories({
+        params: {
+          field: ['uuid', 'title'],
+          has_offerings: true,
+        },
+        ...(anonymous ? ANONYMOUS_CONFIG : {}),
+      }),
+    { refetchOnWindowFocus: false },
+  );
+
+  const { data: counters = {} } = useQuery(
+    ['ResourcesMenu', 'Counters', project?.uuid, currentCustomer?.uuid],
+    () => {
+      if (project) {
+        return getProjectCounters(project.uuid);
+      } else if (currentCustomer) {
+        return getOrganizationCounters(currentCustomer.uuid);
+      }
+    },
+    { refetchOnWindowFocus: false },
+  );
   const [expanded, setExpanded] = useState(false);
-
-  const { value: projectCounters } = useAsync(() => {
-    if (!project) return Promise.resolve({});
-    return getProjectCounters(project.uuid);
-  }, [project]);
-
-  const { value: organizationCounters } = useAsync(() => {
-    if (!currentCustomer) return Promise.resolve({});
-    return getOrganizationCounters(currentCustomer.uuid);
-  }, [currentCustomer]);
-
-  useEffect(() => {
-    if (Object.keys(projectCounters || {}).length > 0) {
-      setPreferredCounters(projectCounters);
-    } else {
-      setPreferredCounters(organizationCounters || {});
-    }
-  }, [projectCounters, organizationCounters]);
 
   const sortedCategories = useMemo(() => {
     if (!categories) return [];
-    if (!preferredCounters) {
+    if (!counters) {
       return categories;
     }
     return categories.sort((a, b) => {
-      const aCount = preferredCounters['marketplace_category_' + a.uuid] || 0;
-      const bCount = preferredCounters['marketplace_category_' + b.uuid] || 0;
+      const aCount = counters['marketplace_category_' + a.uuid] || 0;
+      const bCount = counters['marketplace_category_' + b.uuid] || 0;
       return bCount - aCount;
     });
-  }, [categories, preferredCounters]);
+  }, [categories, counters]);
 
   const [allResourcesCount, collapsedResourcesCount] = useMemo(() => {
-    if (!preferredCounters) return [0, 0];
+    if (!counters) return [0, 0];
     const all = sortedCategories.reduce(
       (acc, category) =>
-        (acc +=
-          preferredCounters['marketplace_category_' + category.uuid] || 0),
+        (acc += counters['marketplace_category_' + category.uuid] || 0),
       0,
     );
     const collapsed = sortedCategories
       .slice(MAX_COLLAPSE_MENU_COUNT)
       .reduce(
         (acc, category) =>
-          (acc +=
-            preferredCounters['marketplace_category_' + category.uuid] || 0),
+          (acc += counters['marketplace_category_' + category.uuid] || 0),
         0,
       );
     return [all, collapsed];
-  }, [sortedCategories, preferredCounters]);
+  }, [sortedCategories, counters]);
 
   return sortedCategories ? (
     <MenuAccordion
@@ -164,7 +163,7 @@ export const ResourcesMenu = ({ anonymous }) => {
       <RenderMenuItems
         items={sortedCategories.slice(0, MAX_COLLAPSE_MENU_COUNT)}
         project={project}
-        counters={preferredCounters}
+        counters={counters}
       />
       {sortedCategories.length > MAX_COLLAPSE_MENU_COUNT ? (
         <>
@@ -172,7 +171,7 @@ export const ResourcesMenu = ({ anonymous }) => {
             <RenderMenuItems
               items={sortedCategories.slice(MAX_COLLAPSE_MENU_COUNT)}
               project={project}
-              counters={preferredCounters}
+              counters={counters}
             />
           )}
           <CustomToggle

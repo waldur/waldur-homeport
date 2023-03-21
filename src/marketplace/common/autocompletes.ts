@@ -108,7 +108,7 @@ export const categoryAutocomplete = async (
   { page },
 ) => {
   const params = {
-    name: query,
+    title: query,
     field: ['title', 'uuid'],
     o: 'title',
     page: page,
