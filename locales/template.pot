@@ -312,6 +312,10 @@ msgstr ""
 msgid "Add component"
 msgstr ""
 
+#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
+msgid "Add current page"
+msgstr ""
+
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/rancher/cluster/create/DataVolumeAddButton.tsx
 msgid "Add data volume"
@@ -436,6 +440,10 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OfferingOptions.tsx
 msgid "Add user input field"
+msgstr ""
+
+#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
+msgid "Add your favorite pages here"
 msgstr ""
 
 #: src/user/support/AddRemoteUserDialog.tsx
@@ -3246,6 +3254,10 @@ msgstr ""
 msgid "Failed to operate with backend."
 msgstr ""
 
+#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
+msgid "Favorite pages"
+msgstr ""
+
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Featured offerings"
 msgstr ""
@@ -5312,6 +5324,10 @@ msgstr ""
 #: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
 msgid "No organizations"
+msgstr ""
+
+#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
+msgid "No page added yet"
 msgstr ""
 
 #: src/navigation/header/confirmation-drawer/PendingConfirmationContainer.tsx
@@ -8443,6 +8459,14 @@ msgstr ""
 #: src/user/api-key/UserEditTokenContainer.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Save changes"
+msgstr ""
+
+#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
+msgid "Saved"
+msgstr ""
+
+#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
+msgid "Saving"
 msgstr ""
 
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -12937,6 +12961,10 @@ msgstr ""
 
 #: src/user/UserOfferingList.tsx
 msgid "remote accounts"
+msgstr ""
+
+#: src/navigation/header/favorite-pages/FavoritePageItem.tsx
+msgid "remove"
 msgstr ""
 
 #: src/marketplace-flows/CustomerCreateRequestsList.tsx
