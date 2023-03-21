@@ -8,18 +8,19 @@ import {
   useState,
 } from 'react';
 import { Button, Col } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
-import { Customer } from '@waldur/workspace/types';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 export const MarketplacePopupTitle: FunctionComponent<{
-  customer: Customer;
   isVisible: boolean;
-}> = ({ customer, isVisible }) => {
+}> = ({ isVisible }) => {
   const router = useRouter();
+  const customer = useSelector(getCustomer);
 
   const changeWorkspace = () => {
     router.stateService.go('profile-projects');

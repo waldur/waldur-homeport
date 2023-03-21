@@ -7408,7 +7408,6 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-tenant/FlavorListFilter.tsx
 #: src/openstack/openstack-tenant/TenantFlavorsList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
@@ -7476,7 +7475,7 @@ msgid "Recent offerings"
 msgstr ""
 
 #: src/marketplace/category/list/RecentlyAddedOfferings.tsx
-#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+#: src/navigation/sidebar/marketplace-popup/DataLoader.tsx
 msgid "Recently added offerings"
 msgstr ""
 
@@ -10858,7 +10857,7 @@ msgid "Unable to load booking offerings."
 msgstr ""
 
 #: src/marketplace/offerings/actions/SelectCategoryTab.tsx
-#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+#: src/navigation/sidebar/marketplace-popup/DataLoader.tsx
 msgid "Unable to load categories"
 msgstr ""
 
