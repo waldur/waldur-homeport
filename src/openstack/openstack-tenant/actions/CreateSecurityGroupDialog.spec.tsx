@@ -32,23 +32,23 @@ describe('CreateSecurityGroupDialog', () => {
     await dialog.update();
 
     // Act
-    dialog.name = 'ICMP';
-    dialog.description = 'Security group for incoming ICMP requests';
+    dialog.name = 'TCP';
+    dialog.description = 'Security group for incoming TCP requests';
     dialog.addRule();
     dialog.submitForm();
     await dialog.update();
 
     // Assert
     expect(apiMock.createSecurityGroup).toBeCalledWith(fakeTenant.uuid, {
-      name: 'ICMP',
-      description: 'Security group for incoming ICMP requests',
+      name: 'TCP',
+      description: 'Security group for incoming TCP requests',
       rules: [
         {
           direction: 'ingress',
           ethertype: 'IPv4',
-          from_port: -1,
-          protocol: 'icmp',
-          to_port: -1,
+          from_port: 443,
+          protocol: 'tcp',
+          to_port: 443,
         },
       ],
     });

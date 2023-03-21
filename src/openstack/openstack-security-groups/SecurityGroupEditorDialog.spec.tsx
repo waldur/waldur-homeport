@@ -106,8 +106,8 @@ describe('SecurityGroupEditorDialog', () => {
 
     expect(dialog.ethertype).toBe('IPv4');
     expect(dialog.direction).toBe('ingress');
-    expect(dialog.protocol).toBe('icmp');
-    expect(dialog.portRange).toBe('');
+    expect(dialog.protocol).toBe('tcp');
+    expect(dialog.portRange).toBe('443');
     expect(dialog.cidr).toBe('');
     expect(dialog.description).toBe('');
   });

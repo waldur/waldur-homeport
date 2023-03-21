@@ -7399,6 +7399,10 @@ msgstr ""
 msgid "Quota usage exceeds available limit."
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-tenant/TenantMainComponent.tsx
+msgid "Quotas"
+msgstr ""
+
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
