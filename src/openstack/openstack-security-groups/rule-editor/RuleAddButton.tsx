@@ -12,9 +12,9 @@ interface RuleAddButtonProps {
 
 const DEFAULT_RULE = {
   ethertype: 'IPv4',
-  protocol: 'icmp',
+  protocol: 'tcp',
   direction: 'ingress',
-  port_range: { min: -1, max: -1 },
+  port_range: { min: 443, max: 443 },
 };
 
 export const RuleAddButton: FC<RuleAddButtonProps> = ({ fields }) => (
