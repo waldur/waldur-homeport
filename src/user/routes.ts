@@ -3,6 +3,7 @@ import { UIView } from '@uirouter/react';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { translate } from '@waldur/i18n';
+import { hasSupport } from '@waldur/issues/hooks';
 import { getConfig } from '@waldur/store/config';
 import { USER_WORKSPACE } from '@waldur/workspace/types';
 
@@ -54,6 +55,10 @@ const EmptyProjectPlaceholder = lazyComponent(
 const ProjectsList = lazyComponent(
   () => import('@waldur/user/affiliations/ProjectsList'),
   'ProjectsList',
+);
+const UserIssuesList = lazyComponent(
+  () => import('./UserIssuesList'),
+  'UserIssuesList',
 );
 const OrganizationsList = lazyComponent(
   () => import('@waldur/user/affiliations/OrganizationsList'),
@@ -117,6 +122,16 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Audit logs'),
       skipBreadcrumb: true,
+    },
+  },
+  {
+    name: 'profile.issues',
+    url: 'issues/',
+    component: UserIssuesList,
+    data: {
+      breadcrumb: () => translate('Issues'),
+      skipBreadcrumb: true,
+      permissions: [hasSupport],
     },
   },
   {
