@@ -1797,6 +1797,10 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
+#: src/openstack/openstack-tenant/TenantFlavorsList.tsx
+msgid "Cores"
+msgstr ""
+
 #: src/customer/list/CustomerList.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/marketplace/details/OfferingOrderItemsList.tsx
@@ -7398,6 +7402,8 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-tenant/FlavorListFilter.tsx
+#: src/openstack/openstack-tenant/TenantFlavorsList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
 msgid "RAM"
@@ -9704,7 +9710,6 @@ msgstr ""
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/openstack/openstack-tenant/TenantFlavorsList.tsx
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
