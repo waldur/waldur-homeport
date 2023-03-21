@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
+import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { formatFlavor } from '@waldur/resource/utils';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 const TableComponent: FunctionComponent<any> = (props) => {
@@ -14,8 +14,14 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => row.name,
         },
         {
-          title: translate('Summary'),
-          render: ({ row }) => formatFlavor(row),
+          title: translate('Cores'),
+          render: ({ row }) => row.cores,
+          orderField: 'cores',
+        },
+        {
+          title: translate('RAM'),
+          render: ({ row }) => formatFilesize(row.ram),
+          orderField: 'ram',
         },
       ]}
       verboseName={translate('flavors')}
