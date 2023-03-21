@@ -163,7 +163,7 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
           translate('Unable to load data')
         ) : organizationsCount === 0 ? (
           <EmptyOrganizationsPlaceholder />
-        ) : (
+        ) : isVisible ? (
           <>
             <div className="context-selector-header form-group py-4 px-20 border-bottom">
               <FormControl
@@ -222,7 +222,7 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
               </Col>
             </div>
           </>
-        )}
+        ) : null}
       </div>
     </>
   );
