@@ -66,7 +66,10 @@ export const ResourceDetailsView: FC<any> = ({
         <>
           <ShortResourceHeader resource={resource} components={components} />
           <div className="container-xxl py-10">
-            <tabSpec.component resource={scope || resource} />
+            <tabSpec.component
+              resource={scope || resource}
+              title={tabSpec.title}
+            />
           </div>
         </>
       ) : (
