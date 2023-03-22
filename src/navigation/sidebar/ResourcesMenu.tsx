@@ -103,7 +103,12 @@ export const ResourcesMenu = ({ anonymous }) => {
   );
 
   const { data: counters = {} } = useQuery(
-    ['ResourcesMenu', 'Counters', project?.uuid, currentCustomer?.uuid],
+    [
+      'ResourcesMenu',
+      'Counters',
+      project?.uuid || 'N/A',
+      currentCustomer?.uuid || 'N/A',
+    ],
     () => {
       if (project) {
         return getProjectCounters(project.uuid);
