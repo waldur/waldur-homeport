@@ -6660,6 +6660,7 @@ msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-tenant/FlavorListFilter.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
@@ -8998,10 +8999,6 @@ msgstr ""
 
 #: src/azure/common/validators.ts
 msgid "The name must be shorter than 15 characters."
-msgstr ""
-
-#: src/issues/notifications/NumberIndicator.tsx
-msgid "The number of recipients who will receive the notification:"
 msgstr ""
 
 #: src/marketplace/details/ProjectField.tsx
