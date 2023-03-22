@@ -1,53 +1,46 @@
-import { FC } from 'react';
-import { FormControl } from 'react-bootstrap';
-import Loadable, { LoadingComponentProps } from 'react-loadable';
+import { ErrorBoundary } from '@sentry/react';
+import React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { translate } from '@waldur/i18n';
 
-export type ImportStatement = () => Promise<any>;
-
-const RetryButton = ({ retry }) => (
-  <FormControl as="button" onClick={retry}>
-    Retry
-  </FormControl>
+const ErrorRetryView = ({ retry }) => (
+  <button className="btn btn-primary" onClick={retry}>
+    {translate('Module loading error. Try again.')}
+  </button>
 );
 
-const LoadingComponent: FC<LoadingComponentProps> = (props) => {
-  if (props.error) {
-    // When the loader has errored
-    return (
-      <div>
-        Error! <RetryButton retry={props.retry} />
-      </div>
-    );
-  } else if (props.timedOut) {
-    // When the loader has taken longer than the timeout
-    return (
-      <div>
-        Taking a long time... <RetryButton retry={props.retry} />
-      </div>
-    );
-  } else if (props.pastDelay) {
-    // When the loader has taken longer than the delay
-    return <LoadingSpinner />;
-  } else {
-    // When the loader has just started
-    return null;
-  }
-};
-
-export function lazyComponent<Props = any>(
-  importStatement: ImportStatement,
+// Based on https://github.com/facebook/react/issues/14254#issuecomment-538710039
+export function lazyComponent<T = any>(
+  promise: () => Promise<any>,
   componentName = 'default',
 ) {
-  return Loadable<Props, object>({
-    loader: importStatement,
-    render(loaded, props) {
-      const Component = loaded[componentName];
-      return <Component {...props} />;
-    },
-    loading: LoadingComponent,
-    delay: 300,
-    timeout: 10000,
-  });
+  function LazyLoader(props: T) {
+    const [loading, setLoading] = React.useState<boolean>(true);
+    const retry = React.useCallback(() => setLoading(true), []);
+    const Lazy = React.useMemo(
+      () =>
+        React.lazy(() =>
+          promise()
+            .then((module) => ({ default: module[componentName] }))
+            .catch(() => {
+              setLoading(false);
+              return { default: () => <ErrorRetryView retry={retry} /> };
+            }),
+        ),
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [promise, loading],
+    );
+    return (
+      <ErrorBoundary>
+        <React.Suspense fallback={<LoadingSpinner />}>
+          <Lazy {...props} />
+        </React.Suspense>
+      </ErrorBoundary>
+    );
+  }
+
+  (LazyLoader as any).displayName = `LazyLoader`;
+
+  return LazyLoader as React.ComponentType<T>;
 }
