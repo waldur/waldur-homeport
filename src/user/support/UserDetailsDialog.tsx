@@ -5,6 +5,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { UserDetails } from '@waldur/workspace/types';
 
+import { UserActivateButton } from './UserActivateButton';
 import { UserDetailsView } from './UserDetailsView';
 
 interface UserDetailsDialogProps {
@@ -19,7 +20,12 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = (
       title={translate('User details of {fullName}', {
         fullName: props.resolve.user.full_name,
       })}
-      footer={<CloseDialogButton label={translate('Done')} />}
+      footer={
+        <div className="flex-grow-1 d-flex justify-content-between">
+          <UserActivateButton row={props.resolve.user} />
+          <CloseDialogButton label={translate('Done')} />
+        </div>
+      }
     >
       <UserDetailsView user={props.resolve.user} />
     </ModalDialog>

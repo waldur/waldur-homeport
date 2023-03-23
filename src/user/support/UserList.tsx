@@ -11,16 +11,8 @@ import { BooleanField } from '@waldur/table/BooleanField';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { Table, connectTable, createFetcher } from '@waldur/table/index';
 
-import { UserActivateButton } from './UserActivateButton';
 import { UserDetailsButton } from './UserDetailsButton';
 import { UserTableActions } from './UserTableActions';
-
-const UserActionsButton: FunctionComponent<any> = (props) => (
-  <>
-    <UserDetailsButton {...props} />
-    <UserActivateButton {...props} />
-  </>
-);
 
 const renderFieldOrDash = (field) => {
   return field ? field : DASH_ESCAPE_CODE;
@@ -143,7 +135,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
           className: 'text-center',
         },
       ]}
-      hoverableRow={UserActionsButton}
+      hoverableRow={UserDetailsButton}
       showPageSizeSelector={true}
       verboseName={translate('users')}
       enableExport={true}
