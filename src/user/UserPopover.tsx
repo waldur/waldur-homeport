@@ -58,7 +58,7 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
       </Button>
     </>
   ) : value?.user ? (
-    <>
+    <Modal size="lg" show centered>
       <Modal.Header>
         <Modal.Title>
           {translate('User details for {fullName}', {
@@ -92,6 +92,6 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
       <Modal.Footer>
         <CloseDialogButton label={translate('Close')} />
       </Modal.Footer>
-    </>
+    </Modal>
   ) : null;
 };
