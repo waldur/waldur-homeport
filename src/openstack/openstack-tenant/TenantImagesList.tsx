@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
@@ -11,6 +12,14 @@ const TableComponent: FunctionComponent<any> = (props) => {
         {
           title: translate('Name'),
           render: ({ row }) => row.name,
+        },
+        {
+          title: translate('Minimal RAM'),
+          render: ({ row }) => formatFilesize(row.min_ram),
+        },
+        {
+          title: translate('Minimal disk'),
+          render: ({ row }) => formatFilesize(row.min_disk),
         },
       ]}
       verboseName={translate('images')}

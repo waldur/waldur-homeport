@@ -4839,6 +4839,18 @@ msgstr ""
 msgid "Min storage"
 msgstr ""
 
+#: src/openstack/openstack-tenant/TenantImagesList.tsx
+msgid "Minimal RAM"
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-tenant/ImagesSection.tsx
+msgid "Minimal RAM: {min_ram}, Minimal disk: {min_disk}"
+msgstr ""
+
+#: src/openstack/openstack-tenant/TenantImagesList.tsx
+msgid "Minimal disk"
+msgstr ""
+
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Minimal value"
 msgstr ""
