@@ -1,4 +1,5 @@
 import { shallow } from 'enzyme';
+import Dropzone, { DropzoneState } from 'react-dropzone';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 
@@ -29,20 +30,47 @@ describe('IssueAttachmentsContainer', () => {
 
     it('renders loading spinner on loading', () => {
       const wrapper = renderWrapper({ loading: true });
-      expect(wrapper.find(LoadingSpinner).length).toBe(1);
-      expect(wrapper.find(IssueAttachmentsList).length).toBe(0);
+      const dropzoneWrapper = wrapper.find(Dropzone).dive();
+
+      expect(dropzoneWrapper.find(LoadingSpinner).length).toBe(1);
+      expect(dropzoneWrapper.find(IssueAttachmentsList).length).toBe(0);
     });
 
     it('renders IssueAttachmentsList', () => {
       const wrapper = renderWrapper();
-      expect(wrapper.find(IssueAttachmentsList).length).toBe(1);
+      const dropzoneWrapper = wrapper.find(Dropzone).dive();
+      expect(dropzoneWrapper.find(IssueAttachmentsList).length).toBe(1);
     });
 
     it('renders dropzone overlay', () => {
       const wrapper = renderWrapper();
-      expect(wrapper.find('.dropzone__overlay').length).toBe(0);
-      wrapper.setState({ dropzoneActive: true });
-      expect(wrapper.find('.dropzone__overlay').length).toBe(1);
+      const dropzoneChildrenFunc = wrapper.find(Dropzone).prop('children');
+
+      const mockDropzoneCallbackProps: DropzoneState = {
+        isDragActive: false,
+        acceptedFiles: [],
+        open: jest.fn(),
+        fileRejections: [],
+        inputRef: null,
+        isDragAccept: true,
+        isDragReject: false,
+        isFileDialogActive: false,
+        isFocused: true,
+        rootRef: null,
+        getRootProps: (props) => props,
+        getInputProps: (props) => props,
+      };
+
+      let content = shallow(dropzoneChildrenFunc(mockDropzoneCallbackProps));
+      expect(content.find('.dropzone__overlay').length).toBe(0);
+
+      content = shallow(
+        dropzoneChildrenFunc({
+          ...mockDropzoneCallbackProps,
+          isDragActive: true,
+        }),
+      );
+      expect(content.find('.dropzone__overlay').length).toBe(1);
     });
   });
 });

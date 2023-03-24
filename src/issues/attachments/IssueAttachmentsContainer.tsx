@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Card } from 'react-bootstrap';
-import Dropzone from 'react-dropzone';
+import Dropzone, { DropzoneRef } from 'react-dropzone';
 import { connect } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -24,22 +24,13 @@ interface PureIssueAttachmentsContainerProps {
 }
 
 export class PureIssueAttachmentsContainer extends Component<PureIssueAttachmentsContainerProps> {
-  state = {
-    dropzoneActive: false,
-  };
-
-  dropzoneNode: Dropzone;
+  dropzoneNode: DropzoneRef;
 
   componentDidMount() {
     this.props.getAttachments();
   }
 
-  onDragEnter = () => this.setState({ dropzoneActive: true });
-
-  onDragLeave = () => this.setState({ dropzoneActive: false });
-
   onDrop = (files) => {
-    this.setState({ dropzoneActive: false });
     this.props.putAttachments(files);
   };
 
@@ -47,55 +38,54 @@ export class PureIssueAttachmentsContainer extends Component<PureIssueAttachment
 
   render() {
     const { attachments, loading, uploading, issue } = this.props;
-    const { dropzoneActive } = this.state;
 
     return (
       <Dropzone
-        disableClick={true}
-        style={{ position: 'relative' }}
+        noClick
         onDrop={this.onDrop}
-        onDragEnter={this.onDragEnter}
-        onDragLeave={this.onDragLeave}
         ref={(node) => (this.dropzoneNode = node)}
       >
-        {dropzoneActive && (
-          <div className="dropzone__overlay">
-            <div className="dropzone__overlay-message">
-              {translate('Drop files to attach them to the issue.')}
-            </div>
-          </div>
-        )}
-        <Card>
-          <Card.Header>
-            <Card.Title>
-              <h3>{translate('Attachments')}</h3>
-            </Card.Title>
-            <div className="card-toolbar">
-              <IssueReload issueUrl={issue.url} />
-            </div>
-          </Card.Header>
-          <Card.Body>
-            {loading ? (
-              <LoadingSpinner />
-            ) : (
-              <div className="attachments__container">
-                <div className="attachments__container-message">
-                  <i className="fa fa-cloud-upload" aria-hidden="true" />
-                  <span>
-                    {translate('Drop files to attach, or')}{' '}
-                    <a onClick={this.openDownloadModal}>
-                      {translate('browse')}.
-                    </a>
-                  </span>
+        {({ getRootProps, getInputProps, isDragActive }) => (
+          <Card {...getRootProps({ className: 'dropzone' })}>
+            {isDragActive && (
+              <div className="dropzone__overlay">
+                <div className="dropzone__overlay-message">
+                  {translate('Drop files to attach them to the issue.')}
                 </div>
-                <IssueAttachmentsList
-                  attachments={attachments}
-                  uploading={uploading}
-                />
               </div>
             )}
-          </Card.Body>
-        </Card>
+            <Card.Header>
+              <Card.Title>
+                <h3>{translate('Attachments')}</h3>
+              </Card.Title>
+              <div className="card-toolbar">
+                <IssueReload issueUrl={issue.url} />
+              </div>
+            </Card.Header>
+            <Card.Body>
+              {loading ? (
+                <LoadingSpinner />
+              ) : (
+                <div className="attachments__container">
+                  <div className="attachments__container-message">
+                    <input {...getInputProps()} />
+                    <i className="fa fa-cloud-upload" aria-hidden="true" />
+                    <span>
+                      {translate('Drop files to attach, or')}{' '}
+                      <a onClick={this.openDownloadModal}>
+                        {translate('browse')}.
+                      </a>
+                    </span>
+                  </div>
+                  <IssueAttachmentsList
+                    attachments={attachments}
+                    uploading={uploading}
+                  />
+                </div>
+              )}
+            </Card.Body>
+          </Card>
+        )}
       </Dropzone>
     );
   }

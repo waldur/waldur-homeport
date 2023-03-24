@@ -1,4 +1,5 @@
 import { shallow } from 'enzyme';
+import Dropzone, { DropzoneState } from 'react-dropzone';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { LoadingOverlay } from '@waldur/issues/comments/LoadingOverlay';
@@ -23,14 +24,38 @@ const getLoadingOverlay = (container) => container.find(LoadingOverlay);
 describe('IssueCommentsContainer', () => {
   it('renders LoadingOverlay', () => {
     const wrapper = renderWrapper();
-    expect(getLoadingOverlay(wrapper).length).toBe(0);
-    wrapper.setState({ dropzoneActive: true });
-    expect(getLoadingOverlay(wrapper).length).toBe(1);
+    const dropzoneChildrenFunc = wrapper.find(Dropzone).prop('children');
+
+    const mockDropzoneCallbackProps: DropzoneState = {
+      isDragActive: false,
+      acceptedFiles: [],
+      open: jest.fn(),
+      fileRejections: [],
+      inputRef: null,
+      isDragAccept: true,
+      isDragReject: false,
+      isFileDialogActive: false,
+      isFocused: true,
+      rootRef: null,
+      getRootProps: (props) => props,
+      getInputProps: (props) => props,
+    };
+
+    let content = shallow(dropzoneChildrenFunc(mockDropzoneCallbackProps));
+    expect(getLoadingOverlay(content).length).toBe(0);
+    content = shallow(
+      dropzoneChildrenFunc({
+        ...mockDropzoneCallbackProps,
+        isDragActive: true,
+      }),
+    );
+    expect(getLoadingOverlay(content).length).toBe(1);
   });
 
   it('renders LoadingSpinner on loading', () => {
     const wrapper = renderWrapper({ loading: true });
-    expect(getLoadingSpinner(wrapper).length).toBe(1);
-    expect(getIssueCommentsList(wrapper).length).toBe(0);
+    const dropzoneWrapper = wrapper.find(Dropzone).dive();
+    expect(getLoadingSpinner(dropzoneWrapper).length).toBe(1);
+    expect(getIssueCommentsList(dropzoneWrapper).length).toBe(0);
   });
 });
