@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Card } from 'react-bootstrap';
-import Dropzone from 'react-dropzone';
+import Dropzone, { DropzoneRef } from 'react-dropzone';
 import { connect } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -33,15 +33,11 @@ interface PureIssueCommentsContainerProps {
 }
 
 export class PureIssueCommentsContainer extends Component<PureIssueCommentsContainerProps> {
-  state = {
-    dropzoneActive: false,
-  };
-
   static defaultProps = {
     renderHeader: true,
   };
 
-  dropzoneNode: Dropzone;
+  dropzoneNode: DropzoneRef;
 
   componentDidMount() {
     const { fetchComments, setIssue, issue } = this.props;
@@ -50,12 +46,7 @@ export class PureIssueCommentsContainer extends Component<PureIssueCommentsConta
     setIssue(issue);
   }
 
-  onDragEnter = () => this.setState({ dropzoneActive: true });
-
-  onDragLeave = () => this.setState({ dropzoneActive: false });
-
   onDrop = (files) => {
-    this.setState({ dropzoneActive: false });
     this.props.putAttachments(files);
   };
 
@@ -63,7 +54,6 @@ export class PureIssueCommentsContainer extends Component<PureIssueCommentsConta
 
   render() {
     const { comments, loading, issue, erred } = this.props;
-    const { dropzoneActive } = this.state;
     const body = loading ? (
       <LoadingSpinner />
     ) : (
@@ -78,31 +68,36 @@ export class PureIssueCommentsContainer extends Component<PureIssueCommentsConta
 
     return (
       <Dropzone
-        disableClick={true}
-        style={{ position: 'relative' }}
+        noClick
         onDrop={this.onDrop}
-        onDragEnter={this.onDragEnter}
-        onDragLeave={this.onDragLeave}
         ref={(node) => (this.dropzoneNode = node)}
       >
-        {dropzoneActive && (
-          <LoadingOverlay
-            className="loading-overlay_border_dashed"
-            message={translate('Drop files to attach them to the issue.')}
-          />
-        )}
-        {this.props.renderHeader ? (
-          <Card>
-            <div className="card-header content-between-center">
-              <h4>{translate('Comments')}</h4>
-              <div>
-                <IssueReload issueUrl={issue.url} />
-              </div>
-            </div>
-            <Card.Body>{body}</Card.Body>
-          </Card>
-        ) : (
-          body
+        {({ getRootProps, getInputProps, isDragActive }) => (
+          <div
+            {...getRootProps({ className: 'dropzone' })}
+            style={{ position: 'relative' }}
+          >
+            {isDragActive && (
+              <LoadingOverlay
+                className="loading-overlay_border_dashed"
+                message={translate('Drop files to attach them to the issue.')}
+              />
+            )}
+            <input {...getInputProps()} />
+            {this.props.renderHeader ? (
+              <Card>
+                <div className="card-header content-between-center">
+                  <h4>{translate('Comments')}</h4>
+                  <div>
+                    <IssueReload issueUrl={issue.url} />
+                  </div>
+                </div>
+                <Card.Body>{body}</Card.Body>
+              </Card>
+            ) : (
+              body
+            )}
+          </div>
         )}
       </Dropzone>
     );
