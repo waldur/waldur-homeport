@@ -24,6 +24,7 @@ import {
   TABLE_PUBLIC_RESOURCE,
 } from './constants';
 import { PublicResourceLink } from './PublicResourceLink';
+import { PublicResourcesLimits } from './PublicResourcesLimits';
 import { PublicResourcesListPlaceholder } from './PublicResourcesListPlaceholder';
 import { ResourceStateField } from './ResourceStateField';
 
@@ -70,7 +71,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Limits'),
-      render: ({ row }) => JSON.stringify(row.limits, null, 4) || 'N/A',
+      render: PublicResourcesLimits,
     },
     {
       title: translate('Effective ID'),
