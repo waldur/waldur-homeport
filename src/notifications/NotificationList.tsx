@@ -71,7 +71,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
 const TableOptions: TableOptionsType = {
   table: 'broadcast',
-  fetchData: createFetcher('broadcast_messages'),
+  fetchData: createFetcher('broadcast-messages'),
   queryField: 'subject',
 };
 
