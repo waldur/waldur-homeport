@@ -3,7 +3,7 @@ describe('Broadcast', () => {
     cy.mockUser()
       .mockChecklists()
 
-      .intercept('GET', '/api/broadcast_messages/?page=1&page_size=10', {
+      .intercept('GET', '/api/broadcast-messages/?page=1&page_size=10', {
         fixture: 'support/notifications.json',
       })
       .intercept(
@@ -27,10 +27,10 @@ describe('Broadcast', () => {
           fixture: 'support/marketplace-offerings.json',
         },
       )
-      .intercept('POST', '/api/broadcast_messages/dry_run/', {
+      .intercept('POST', '/api/broadcast-messages/dry_run/', {
         statusCode: 200,
       })
-      .intercept('POST', '/api/broadcast_messages/', {
+      .intercept('POST', '/api/broadcast-messages/', {
         fixture: 'support/notifications-single.json',
       })
       .setToken()

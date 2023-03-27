@@ -33,7 +33,7 @@ export const NotificationCreateDialog = reduxForm({
     async (formData) => {
       try {
         const response = await post<{ emails: string[] }>(
-          '/broadcast_messages/',
+          '/broadcast-messages/',
           {
             subject: formData.subject,
             body: formData.body,
