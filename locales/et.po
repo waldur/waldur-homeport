@@ -1693,6 +1693,11 @@ msgstr "Komponendid"
 msgid "Components are invalid."
 msgstr "Komponendid on vigased."
 
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/openstack-tenant/tabs.ts
+msgid "Compute"
+msgstr "Arvutusressurss"
+
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Compute generation"
 msgstr "Arvuta genereerimine"
@@ -3299,6 +3304,14 @@ msgstr "Kaust"
 msgid "For"
 msgstr "Selleks"
 
+#: src/openstack/openstack-instance/actions/ForceDestroyAction.tsx
+msgid "Force destroy"
+msgstr "Jõuga hävitamine"
+
+#: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
+msgid "Force destroy {name} instance"
+msgstr "Jõuga hävitada {name} instants"
+
 #: src/freeipa/FreeIPAAccount.tsx
 #: src/user/constants.ts
 msgid "FreeIPA account"
@@ -3555,7 +3568,7 @@ msgstr "ID"
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
 msgid "ID code"
-msgstr "ID kood"
+msgstr "Isikukood"
 
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -4760,6 +4773,13 @@ msgstr "Võrguseadmed"
 #: src/openstack/openstack-tenant/TenantPortsList.tsx
 msgid "Network name"
 msgstr "Võrgu nimi"
+
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/openstack-instance/tabs.ts
+#: src/openstack/openstack-tenant/tabs.ts
+msgid "Networking"
+msgstr "Võrgundus"
 
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -6161,6 +6181,10 @@ msgstr "Profiili täitmine"
 #: src/user/support/AvatarField.tsx
 msgid "Profile picture"
 msgstr "Profiilipilt"
+
+#: src/user/support/UserEditFormContainer.tsx
+msgid "Profile settings"
+msgstr "Profiili sätted"
 
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
@@ -8946,6 +8970,10 @@ msgstr "Manust ei saa kustutada."
 msgid "Unable to delete comment."
 msgstr "Kommentaari ei saa kustutada"
 
+#: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
+msgid "Unable to destroy instance."
+msgstr "Instantsi ei saa hävitada."
+
 #: src/issues/comments/effects.ts
 msgid "Unable to edit comment."
 msgstr "Kommentaari ei saa muuta"
@@ -10034,6 +10062,10 @@ msgstr "Salvestusüksuse tüüp"
 msgid "Volume type storage limit is exceeded"
 msgstr "Valitud tüüpi salvestusüksuse limiit on ületatud"
 
+#: src/openstack/openstack-instance/tabs.ts
+msgid "Volumes"
+msgstr "Volüümid"
+
 #: src/customer/create/WizardFormFirstPage.tsx
 msgid "Website URL"
 msgstr "Veebilehe URL"
@@ -10398,6 +10430,10 @@ msgstr "Ressursside loomise vood"
 msgid "resources"
 msgstr "ressursid"
 
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+msgid "restored volumes"
+msgstr "taastatud volüümid"
+
 #: src/issues/CustomerSupportRating.tsx
 msgid "reviews"
 msgstr "arvustused"
@@ -10421,6 +10457,10 @@ msgstr "Tugi"
 #: src/issues/list/IssuesList.tsx
 msgid "support requests"
 msgstr "Kasutajatoe päringud"
+
+#: src/invitations/InvitationsList.tsx
+msgid "team invitations"
+msgstr "Meeskonna kutsed"
 
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -10456,6 +10496,10 @@ msgstr "Salvestusüksuse hetktõmmise ajastamine"
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 msgid "volume snapshots"
 msgstr "Salvestusüksuse hetktõmmised"
+
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+msgid "volumes"
+msgstr "volüümid"
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "{category} resources"
