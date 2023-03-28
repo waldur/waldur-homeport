@@ -14,6 +14,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { router } from '@waldur/router';
 import { RootState } from '@waldur/store/reducers';
 import {
+  getCustomer,
   getUser,
   isOwner,
   isServiceManagerSelector,
@@ -61,6 +62,7 @@ interface OwnProps {
 
 const mapStateToProps = (state: RootState) => ({
   user: getUser(state),
+  customer: getCustomer(state),
   isOwner: isOwner(state),
   isServiceManager: isServiceManagerSelector(state),
 });
@@ -258,7 +260,7 @@ const mergeProps = (
       handler: () =>
         router.stateService.go('marketplace-offering-update', {
           offering_uuid: ownProps.offering.uuid,
-          uuid: ownProps.offering.customer_uuid,
+          uuid: ownProps.offering.customer_uuid || stateProps.customer.uuid,
         }),
       visible:
         !ownProps.isPublic &&
@@ -277,7 +279,7 @@ const mergeProps = (
       handler: () =>
         router.stateService.go('marketplace-offering-images', {
           offering_uuid: ownProps.offering.uuid,
-          uuid: ownProps.offering.customer_uuid,
+          uuid: ownProps.offering.customer_uuid || stateProps.customer.uuid,
         }),
       visible:
         !ownProps.isPublic &&
