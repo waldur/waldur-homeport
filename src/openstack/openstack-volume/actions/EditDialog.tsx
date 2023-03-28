@@ -7,7 +7,7 @@ import {
 import { ActionField } from '@waldur/resource/actions/types';
 import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDialog';
 
-export function createBooleanField(): ActionField {
+export function createBootableField(): ActionField {
   return {
     name: 'bootable',
     label: translate('Bootable'),
@@ -22,7 +22,7 @@ export const EditDialog = ({ resolve: { resource } }) => {
       fields={[
         createLatinNameField(),
         createDescriptionField(),
-        createBooleanField(),
+        createBootableField(),
       ]}
       resource={resource}
       initialValues={{
