@@ -1137,6 +1137,7 @@ msgid "Bookings"
 msgstr ""
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/actions/EditDialog.tsx
 msgid "Bootable"
 msgstr ""
 
@@ -6660,7 +6661,6 @@ msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-tenant/FlavorListFilter.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
