@@ -36,7 +36,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => row.type,
     },
   ];
-  if (workspace === USER_WORKSPACE) {
+  if (
+    workspace === USER_WORKSPACE &&
+    props.user.registration_method !== 'eduteams'
+  ) {
     columns.push({
       title: translate('Actions'),
       render: ({ row }) =>
