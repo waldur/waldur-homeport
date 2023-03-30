@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { translate } from '@waldur/i18n';
 import { router } from '@waldur/router';
 import { RootState } from '@waldur/store/reducers';
 import { Table, createFetcher, connectTable } from '@waldur/table';
@@ -21,8 +21,6 @@ interface OwnProps {
 }
 
 const TableComponent: FunctionComponent<any> = (props) => {
-  const { translate } = props;
-
   const workspace = useSelector(getWorkspace);
   const columns: Column[] = [
     {
@@ -38,7 +36,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => row.type,
     },
   ];
-  if (workspace === USER_WORKSPACE) {
+  if (
+    workspace === USER_WORKSPACE &&
+    props.user.registration_method !== 'eduteams'
+  ) {
     columns.push({
       title: translate('Actions'),
       render: ({ row }) =>
@@ -84,15 +85,4 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-export const KeysListComponent = enhance(TableComponent);
-
-export const KeysList = (props) => {
-  const user = useSelector(getUser);
-  if (user.registration_method === 'eduteams') {
-    document.location =
-      'https://mms.myaccessid.org/fed-apps/profile/#settings_sshkeys';
-    return <LoadingSpinner />;
-  } else {
-    return <KeysListComponent {...props} />;
-  }
-};
+export const KeysList = enhance(TableComponent);
