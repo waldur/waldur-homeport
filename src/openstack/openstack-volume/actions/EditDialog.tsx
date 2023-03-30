@@ -7,7 +7,7 @@ import {
 import { ActionField } from '@waldur/resource/actions/types';
 import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDialog';
 
-export function createBootableField(): ActionField {
+function createBootableField(): ActionField {
   return {
     name: 'bootable',
     label: translate('Bootable'),
