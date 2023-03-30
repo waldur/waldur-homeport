@@ -4761,6 +4761,10 @@ msgstr "Negatiivne"
 msgid "Network"
 msgstr "Võrk"
 
+#: src/marketplace/resources/details/openstack-tenant/SubnetsSection.tsx
+msgid "Network: {network_name}, CIDR: {cidr}"
+msgstr "Võrk: {network_name}, CIDR: {cidr}"
+
 #: src/openstack/openstack-network/actions/SetMtuDialog.tsx
 msgid "Network MTU has been updated."
 msgstr "Võrgu MTU on uuendatud."
@@ -7824,6 +7828,11 @@ msgstr "Teenuse seaded sellel ressursil on veastaatuses."
 msgid "Service type"
 msgstr "Teenuse tüüp"
 
+#: src/openstack/openstack-network/actions/SetMtuAction.tsx
+#: src/openstack/openstack-network/actions/SetMtuDialog.tsx
+msgid "Set MTU"
+msgstr "Määra MTU"
+
 #: src/marketplace/resources/SetBackendIdAction.tsx
 #: src/marketplace/resources/SetBackendIdButton.tsx
 #: src/marketplace/resources/SetBackendIdDialog.tsx
@@ -8275,11 +8284,19 @@ msgstr "Sisesta koos"
 msgid "Subnet CIDR"
 msgstr "Alamvõrgu CIDR"
 
+#: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
+msgid "Subnet has been created."
+msgstr "Alamvõrk on loodud."
+
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-network/tabs.ts
 #: src/openstack/openstack-subnet/breadcrumbs.ts
 msgid "Subnets"
 msgstr "Alamvõrgud"
+
+#: src/marketplace/resources/details/openstack-tenant/NetworksSection.tsx
+msgid "Subnets: {subnets}"
+msgstr "Alamvõrgud: {subnets}"
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Subnets from where connection to self-service is allowed."
@@ -8954,6 +8971,10 @@ msgstr "Makseprofiili ei saa luua."
 msgid "Unable to create server group."
 msgstr "Serverirühma ei saa luua."
 
+#: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
+msgid "Unable to create subnet."
+msgstr "Alamvõrku ei saa luua."
+
 #: src/openstack/openstack-volume/actions/CreateSnapshotDialog.tsx
 msgid "Unable to create volume snapshot."
 msgstr "Salvestusüksuse hetktõmmist ei saa luua."
@@ -9335,6 +9356,10 @@ msgstr "Tellimuse üksusi ei saa sünkroonida."
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to unpublish Google Calendar."
 msgstr "Google'i kalendri avaldamist ei saa tühistada. "
+
+#: src/openstack/openstack-network/actions/SetMtuDialog.tsx
+msgid "Unable to update network MTU."
+msgstr "Võrgu MTU-d ei saa värskendada."
 
 #: src/marketplace/offerings/details/PageAccounting.tsx
 #: src/marketplace/offerings/details/PageConfirmationMessage.tsx
@@ -10339,6 +10364,14 @@ msgstr "arved"
 msgid "items"
 msgstr "Lisa element"
 
+#: src/openstack/openstack-network/actions/EditNetworkDialog.tsx
+msgid "network"
+msgstr "võrk"
+
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+msgid "networks"
+msgstr "võrgud"
+
 #: src/notifications/NotificationList.tsx
 msgid "notifications"
 msgstr "teated"
@@ -10449,6 +10482,10 @@ msgstr "Serveri rühmad"
 #: src/resource/utils.tsx
 msgid "storage"
 msgstr "salvestusruum"
+
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+msgid "subnets"
+msgstr "alamvõrgud"
 
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "support"
