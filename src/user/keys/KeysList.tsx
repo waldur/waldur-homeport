@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { router } from '@waldur/router';
 import { RootState } from '@waldur/store/reducers';
 import { Table, createFetcher, connectTable } from '@waldur/table';
@@ -83,4 +84,15 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-export const KeysList = enhance(TableComponent);
+export const KeysListComponent = enhance(TableComponent);
+
+export const KeysList = (props) => {
+  const user = useSelector(getUser);
+  if (user.registration_method === 'eduteams') {
+    document.location =
+      'https://mms.myaccessid.org/fed-apps/profile/#settings_sshkeys';
+    return <LoadingSpinner />;
+  } else {
+    return <KeysListComponent {...props} />;
+  }
+};

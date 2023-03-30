@@ -9,6 +9,7 @@ export interface ProjectPermission extends CustomerPermission {
 }
 
 export interface User {
+  registration_method?: string;
   is_staff: boolean;
   is_support: boolean;
   url: string;
