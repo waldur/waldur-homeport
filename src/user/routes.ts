@@ -168,7 +168,6 @@ export const states: StateDeclaration[] = [
     component: FreeIpaAccount,
     parent: 'profile-credentials',
     data: {
-      feature: 'user.freeipa',
       breadcrumb: () => translate('FreeIPA account'),
       permissions: [
         (state) => getConfig(state).plugins.WALDUR_FREEIPA?.ENABLED,
