@@ -36,6 +36,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('security groups')}
       initialSorting={{ field: 'name', mode: 'asc' }}
       showPageSizeSelector={true}
+      hasQuery={true}
       actions={
         <ButtonGroup>
           <CreateSecurityGroupAction resource={props.resource} />
@@ -52,6 +53,7 @@ const TableOptions = {
   mapPropsToFilter: (props) => ({
     tenant_uuid: props.resource.uuid,
   }),
+  queryField: 'query',
 };
 
 export const SecurityGroupsList = connectTable(TableOptions)(TableComponent);
