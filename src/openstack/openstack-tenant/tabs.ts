@@ -75,11 +75,15 @@ NestedResourceTabsConfiguration.register('OpenStack.Tenant', () => [
         title: translate('Images'),
         component: TenantImagesList,
       },
-      {
-        key: 'server-groups',
-        title: translate('Server groups'),
-        component: TenantServerGroupsList,
-      },
+      ...(isFeatureVisible('openstack.server_groups')
+        ? [
+            {
+              key: 'server-groups',
+              title: translate('Server groups'),
+              component: TenantServerGroupsList,
+            },
+          ]
+        : []),
     ],
   },
   {
