@@ -994,6 +994,7 @@ msgstr "Buchungen"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
+#: src/openstack/openstack-volume/actions/EditDialog.tsx
 msgid "Bootable"
 msgstr "Bootfähig"
 
@@ -5940,7 +5941,6 @@ msgstr "Quoten"
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-tenant/FlavorListFilter.tsx
 #: src/openstack/openstack-tenant/TenantFlavorsList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
@@ -6905,6 +6905,7 @@ msgid "Segmentation ID"
 msgstr "Segmentierungs-ID"
 
 #: src/form/ListDialog.tsx
+#: src/form/themed-select.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
 #: src/user/affiliations/OrganizationHoverableRow.tsx

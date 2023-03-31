@@ -823,6 +823,7 @@ msgstr "Бронировки"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
+#: src/openstack/openstack-volume/actions/EditDialog.tsx
 msgid "Bootable"
 msgstr "Загрузочный"
 

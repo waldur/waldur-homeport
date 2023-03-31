@@ -53,6 +53,7 @@ msgstr "API salajane kood:"
 
 #: src/navigation/header/UserToken.tsx
 #: src/user/api-key/UserEditTokenContainer.tsx
+#: src/user/routes.ts
 msgid "API token"
 msgstr "API võti"
 
@@ -1207,6 +1208,7 @@ msgstr "Broneerimised"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
+#: src/openstack/openstack-volume/actions/EditDialog.tsx
 msgid "Bootable"
 msgstr "Käivitatav"
 
@@ -1696,6 +1698,11 @@ msgstr "Komponendid"
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Components are invalid."
 msgstr "Komponendid on vigased."
+
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/openstack-tenant/tabs.ts
+msgid "Compute"
+msgstr "Arvutusressurss"
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Compute generation"
@@ -3359,6 +3366,14 @@ msgstr "Kaust"
 msgid "For"
 msgstr "Selleks"
 
+#: src/openstack/openstack-instance/actions/ForceDestroyAction.tsx
+msgid "Force destroy"
+msgstr "Jõuga hävitamine"
+
+#: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
+msgid "Force destroy {name} instance"
+msgstr "Jõuga hävitada {name} instants"
+
 #: src/freeipa/FreeIPAAccount.tsx
 #: src/user/routes.ts
 msgid "FreeIPA account"
@@ -3612,7 +3627,7 @@ msgstr "ID"
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
 msgid "ID code"
-msgstr "ID kood"
+msgstr "Isikukood"
 
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -4844,6 +4859,10 @@ msgstr "Negatiivne"
 msgid "Network"
 msgstr "Võrk"
 
+#: src/marketplace/resources/details/openstack-tenant/SubnetsSection.tsx
+msgid "Network: {network_name}, CIDR: {cidr}"
+msgstr "Võrk: {network_name}, CIDR: {cidr}"
+
 #: src/openstack/openstack-network/actions/SetMtuDialog.tsx
 msgid "Network MTU has been updated."
 msgstr "Võrgu MTU on uuendatud."
@@ -4855,6 +4874,13 @@ msgstr "Võrguseadmed"
 #: src/openstack/openstack-tenant/TenantPortsList.tsx
 msgid "Network name"
 msgstr "Võrgu nimi"
+
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/openstack-instance/tabs.ts
+#: src/openstack/openstack-tenant/tabs.ts
+msgid "Networking"
+msgstr "Võrgundus"
 
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
@@ -6294,6 +6320,10 @@ msgstr "Profiili täitmine"
 msgid "Profile picture"
 msgstr "Profiilipilt"
 
+#: src/user/support/UserEditFormContainer.tsx
+msgid "Profile settings"
+msgstr "Profiili sätted"
+
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/components/utils.tsx
@@ -6561,6 +6591,10 @@ msgstr "Avalikud SSH võtmed lisatakse teenustesse, mis võimaldavad võtmepõhi
 msgid "Public key"
 msgstr "Avalik võti"
 
+#: src/marketplace/offerings/hooks.ts
+msgid "Public list"
+msgstr "Avalik nimekiri"
+
 #: src/marketplace/offerings/OfferingsListContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/images/ImagesContainer.tsx
@@ -6645,7 +6679,6 @@ msgstr "Kvoodid"
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-tenant/FlavorListFilter.tsx
 #: src/openstack/openstack-tenant/TenantFlavorsList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
@@ -7597,6 +7630,7 @@ msgid "Segmentation ID"
 msgstr "Segmentatsiooni ID"
 
 #: src/form/ListDialog.tsx
+#: src/form/themed-select.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
 #: src/user/affiliations/OrganizationHoverableRow.tsx
@@ -7964,6 +7998,11 @@ msgstr "Teenuse seaded sellel ressursil on veastaatuses."
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Service type"
 msgstr "Teenuse tüüp"
+
+#: src/openstack/openstack-network/actions/SetMtuAction.tsx
+#: src/openstack/openstack-network/actions/SetMtuDialog.tsx
+msgid "Set MTU"
+msgstr "Määra MTU"
 
 #: src/marketplace/resources/SetBackendIdAction.tsx
 #: src/marketplace/resources/SetBackendIdButton.tsx
@@ -8458,6 +8497,10 @@ msgstr "Sisesta koos"
 msgid "Subnet CIDR"
 msgstr "Alamvõrgu CIDR"
 
+#: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
+msgid "Subnet has been created."
+msgstr "Alamvõrk on loodud."
+
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
@@ -8465,6 +8508,10 @@ msgstr "Alamvõrgu CIDR"
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Subnets"
 msgstr "Alamvõrgud"
+
+#: src/marketplace/resources/details/openstack-tenant/NetworksSection.tsx
+msgid "Subnets: {subnets}"
+msgstr "Alamvõrgud: {subnets}"
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Subnets from where connection to self-service is allowed."
@@ -9164,6 +9211,10 @@ msgstr "Makseprofiili ei saa luua."
 msgid "Unable to create server group."
 msgstr "Serverirühma ei saa luua."
 
+#: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
+msgid "Unable to create subnet."
+msgstr "Alamvõrku ei saa luua."
+
 #: src/openstack/openstack-volume/actions/CreateSnapshotDialog.tsx
 msgid "Unable to create volume snapshot."
 msgstr "Salvestusüksuse hetktõmmist ei saa luua."
@@ -9179,6 +9230,10 @@ msgstr "Manust ei saa kustutada."
 #: src/issues/comments/effects.ts
 msgid "Unable to delete comment."
 msgstr "Kommentaari ei saa kustutada"
+
+#: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
+msgid "Unable to destroy instance."
+msgstr "Instantsi ei saa hävitada."
 
 #: src/issues/comments/effects.ts
 msgid "Unable to edit comment."
@@ -9545,6 +9600,10 @@ msgstr "Tellimuse üksusi ei saa sünkroonida."
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to unpublish Google Calendar."
 msgstr "Google'i kalendri avaldamist ei saa tühistada. "
+
+#: src/openstack/openstack-network/actions/SetMtuDialog.tsx
+msgid "Unable to update network MTU."
+msgstr "Võrgu MTU-d ei saa värskendada."
 
 #: src/marketplace/offerings/details/PageAccounting.tsx
 #: src/marketplace/offerings/details/PageConfirmationMessage.tsx
@@ -10277,6 +10336,13 @@ msgstr "Salvestusüksuse tüüp"
 msgid "Volume type storage limit is exceeded"
 msgstr "Valitud tüüpi salvestusüksuse limiit on ületatud"
 
+#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
+#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/openstack/openstack-instance/tabs.ts
+#: src/openstack/openstack-tenant/tabs.ts
+msgid "Volumes"
+msgstr "Volüümid"
+
 #: src/customer/create/WizardFormFirstPage.tsx
 msgid "Website URL"
 msgstr "Veebilehe URL"
@@ -10553,6 +10619,14 @@ msgstr "arved"
 msgid "items"
 msgstr "Lisa element"
 
+#: src/openstack/openstack-network/actions/EditNetworkDialog.tsx
+msgid "network"
+msgstr "võrk"
+
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+msgid "networks"
+msgstr "võrgud"
+
 #: src/notifications/NotificationList.tsx
 msgid "notifications"
 msgstr "teated"
@@ -10647,6 +10721,10 @@ msgstr "Ressursside loomise vood"
 msgid "resources"
 msgstr "ressursid"
 
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+msgid "restored volumes"
+msgstr "taastatud volüümid"
+
 #: src/issues/CustomerSupportRating.tsx
 msgid "reviews"
 msgstr "arvustused"
@@ -10664,6 +10742,11 @@ msgstr "Serveri rühmad"
 msgid "storage"
 msgstr "salvestusruum"
 
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
+msgid "subnets"
+msgstr "alamvõrgud"
+
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "support"
 msgstr "Tugi"
@@ -10671,6 +10754,10 @@ msgstr "Tugi"
 #: src/issues/list/IssuesList.tsx
 msgid "support requests"
 msgstr "Kasutajatoe päringud"
+
+#: src/invitations/InvitationsList.tsx
+msgid "team invitations"
+msgstr "Meeskonna kutsed"
 
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -10707,6 +10794,11 @@ msgstr "Salvestusüksuse hetktõmmise ajastamine"
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 msgid "volume snapshots"
 msgstr "Salvestusüksuse hetktõmmised"
+
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
+msgid "volumes"
+msgstr "volüümid"
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "{category} resources"
