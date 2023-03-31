@@ -4,6 +4,7 @@ import { AsyncPaginate as BaseAsyncPaginate } from 'react-select-async-paginate'
 import { ThemeConfig } from 'react-select/src/theme';
 import BaseWindowedSelect from 'react-windowed-select';
 
+import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
 const reactSelectMenuPortaling = (): Partial<SelectProps> => ({
@@ -50,7 +51,12 @@ const useTheme = (): ThemeConfig => {
 export const Select = (props) => {
   const theme = useTheme();
   return (
-    <BaseSelect theme={theme} {...reactSelectMenuPortaling()} {...props} />
+    <BaseSelect
+      theme={theme}
+      placeholder={translate('Select') + '...'}
+      {...reactSelectMenuPortaling()}
+      {...props}
+    />
   );
 };
 
