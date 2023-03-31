@@ -54,7 +54,7 @@ msgstr "API salajane kood:"
 #: src/navigation/header/UserToken.tsx
 #: src/user/api-key/UserEditTokenContainer.tsx
 msgid "API token"
-msgstr "API token"
+msgstr "API võti"
 
 #: src/user/support/TokenLifetimeField.tsx
 msgid "API token lifetime"

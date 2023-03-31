@@ -56,16 +56,13 @@ msgstr ""
 msgid "API URL"
 msgstr ""
 
-#: src/user/routes.ts
-msgid "API key"
-msgstr ""
-
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "API secret code:"
 msgstr ""
 
 #: src/navigation/header/UserToken.tsx
 #: src/user/api-key/UserEditTokenContainer.tsx
+#: src/user/routes.ts
 msgid "API token"
 msgstr ""
 
@@ -8440,6 +8437,10 @@ msgstr ""
 #: src/user/keys/KeysList.tsx
 #: src/user/routes.ts
 msgid "SSH keys"
+msgstr ""
+
+#: src/user/keys/KeyCreateButton.tsx
+msgid "SSH keys are managed externally via MyAccessID."
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
