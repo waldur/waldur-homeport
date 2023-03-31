@@ -212,7 +212,7 @@ export const states: StateDeclaration[] = [
     component: UserApiKey,
     parent: 'profile-credentials',
     data: {
-      breadcrumb: () => translate('API key'),
+      breadcrumb: () => translate('API token'),
     },
   },
   {
