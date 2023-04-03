@@ -2256,7 +2256,7 @@ msgid "Dark theme"
 msgstr ""
 
 #: src/customer/routes.ts
-#: src/marketplace/resources/details/fetchData.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/project/routes.ts
 #: src/user/routes.ts
 msgid "Dashboard"
@@ -3098,7 +3098,7 @@ msgstr ""
 msgid "Event types"
 msgstr ""
 
-#: src/marketplace/resources/details/fetchData.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
 msgstr ""
@@ -4272,7 +4272,7 @@ msgstr ""
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
 #: src/issues/routes.ts
-#: src/marketplace/resources/details/fetchData.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/navigation/header/QuickIssueDrawerToggle.tsx
 #: src/project/ProjectActions.tsx
 #: src/project/routes.ts
