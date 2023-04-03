@@ -5045,7 +5045,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/TenantImagesList.tsx
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
-#: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
@@ -6758,7 +6757,6 @@ msgid "Policy"
 msgstr ""
 
 #: src/marketplace/resources/details/openstack-tenant/ServerGroupsSection.tsx
-#: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
 msgid "Policy: {policy}"
 msgstr ""
 
@@ -9739,7 +9737,6 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
-#: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/TemplateDetail.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
@@ -13049,7 +13046,6 @@ msgid "security groups"
 msgstr ""
 
 #: src/openstack/openstack-server-groups/ServerGroupsList.tsx
-#: src/openstack/openstack-tenant/TenantServerGroupsList.tsx
 msgid "server groups"
 msgstr ""
 

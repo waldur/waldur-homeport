@@ -3,7 +3,6 @@ import { useAsync } from 'react-use';
 
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { OpenStackTenant } from '@waldur/openstack/openstack-tenant/types';
 
@@ -67,16 +66,11 @@ export const TenantDetails = ({ resource }) => {
                   count: value.counters.images,
                   component: ImagesSection,
                 },
-
-                ...(isFeatureVisible('openstack.server_groups')
-                  ? [
-                      {
-                        title: translate('Server groups'),
-                        count: value.counters.server_groups,
-                        component: ServerGroupsSection,
-                      },
-                    ]
-                  : []),
+                {
+                  title: translate('Server groups'),
+                  count: value.counters.server_groups,
+                  component: ServerGroupsSection,
+                },
               ],
             },
             {

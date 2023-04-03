@@ -1,5 +1,4 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { NestedResourceTabsConfiguration } from '@waldur/resource/tabs/NestedResourceTabsConfiguration';
 
@@ -34,10 +33,6 @@ const TenantRoutersList = lazyComponent(
 const TenantFlavorsList = lazyComponent(
   () => import('./TenantFlavorsList'),
   'TenantFlavorsList',
-);
-const TenantServerGroupsList = lazyComponent(
-  () => import('./TenantServerGroupsList'),
-  'TenantServerGroupsList',
 );
 const TenantInstancesList = lazyComponent(
   () => import('./TenantInstancesList'),
@@ -75,15 +70,6 @@ NestedResourceTabsConfiguration.register('OpenStack.Tenant', () => [
         title: translate('Images'),
         component: TenantImagesList,
       },
-      ...(isFeatureVisible('openstack.server_groups')
-        ? [
-            {
-              key: 'server-groups',
-              title: translate('Server groups'),
-              component: TenantServerGroupsList,
-            },
-          ]
-        : []),
     ],
   },
   {
@@ -109,15 +95,11 @@ NestedResourceTabsConfiguration.register('OpenStack.Tenant', () => [
         title: translate('Security groups'),
         component: SecurityGroupsList,
       },
-      ...(isFeatureVisible('openstack.server_groups')
-        ? [
-            {
-              key: 'server_groups',
-              title: translate('Server groups'),
-              component: ServerGroupsList,
-            },
-          ]
-        : []),
+      {
+        key: 'server_groups',
+        title: translate('Server groups'),
+        component: ServerGroupsList,
+      },
       {
         key: 'floating_ips',
         title: translate('Floating IPs'),
