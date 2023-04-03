@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
-import { ISSUE_IDS } from '@waldur/issues/types/constants';
 
 import { ResourceIssues } from './ResourceIssues';
 
@@ -15,10 +14,7 @@ const CreateIssueButton = ({ resource }) => {
   const callback = useCallback(() => {
     dispatch(
       openIssueCreateDialog({
-        issue: {
-          type: ISSUE_IDS.CHANGE_REQUEST,
-          resource,
-        },
+        issue: { resource },
         options: {
           descriptionLabel: translate('Description'),
         },
