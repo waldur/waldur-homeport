@@ -1,5 +1,4 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
@@ -70,15 +69,11 @@ ResourceTabsConfiguration.register('OpenStack.Tenant', () => [
     title: translate('Security groups'),
     component: SecurityGroupsList,
   },
-  ...(isFeatureVisible('openstack.server_groups')
-    ? [
-        {
-          key: 'server_groups',
-          title: translate('Server groups'),
-          component: ServerGroupsList,
-        },
-      ]
-    : []),
+  {
+    key: 'server_groups',
+    title: translate('Server groups'),
+    component: ServerGroupsList,
+  },
   {
     key: 'floating_ips',
     title: translate('Floating IPs'),
