@@ -142,6 +142,7 @@ export interface Offering extends GeolocationPoint {
   googlecalendar?: OfferingGoogleCalendar;
   divisions: Division[];
   parent_description?: string;
+  parent_name?: string;
 }
 
 export interface Image {
