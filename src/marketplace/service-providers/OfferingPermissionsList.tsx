@@ -3,7 +3,6 @@ import { ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { UpdateOfferingPermissionExpirationTimeButton } from '@waldur/customer/team/UpdateOfferingPermissionExpirationTimeButton';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -12,6 +11,7 @@ import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 import { OFFERING_PERMISSIONS_LIST_ID } from './constants';
 import { OfferingPermissionCreateButton } from './OfferingPermissionCreateButton';
 import { OfferingPermissionRemoveButton } from './OfferingPermissionRemoveButton';
+import { UpdateOfferingPermissionExpirationTimeButton } from './UpdateOfferingPermissionExpirationTimeButton';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   return (

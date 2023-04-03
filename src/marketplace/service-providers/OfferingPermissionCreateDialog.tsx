@@ -15,7 +15,8 @@ import { showErrorResponse } from '@waldur/store/notify';
 import { fetchListStart } from '@waldur/table/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { grantPermission, usersAutocomplete } from './api';
+import { grantPermission, usersAutocomplete } from '../../customer/team/api';
+
 import { OFFERING_PERMISSIONS_LIST_ID } from './constants';
 
 export const OfferingPermissionCreateDialog = reduxForm({
