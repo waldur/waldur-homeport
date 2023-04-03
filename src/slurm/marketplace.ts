@@ -9,6 +9,16 @@ const AllocationForm = lazyComponent(
   'AllocationForm',
 );
 
+const SLURMPluginOptionsForm = lazyComponent(
+  () => import('./SLURMPluginOptionsForm'),
+  'SLURMPluginOptionsForm',
+);
+
+const SLURMSecretOptionsForm = lazyComponent(
+  () => import('./SLURMSecretOptionsForm'),
+  'SLURMSecretOptionsForm',
+);
+
 const ServiceSettingsAttributes = (): Attribute[] => [
   {
     key: 'hostname',
@@ -59,6 +69,8 @@ registerOfferingType({
     return translate('SLURM remote allocation');
   },
   component: AllocationForm,
+  pluginOptionsForm: SLURMPluginOptionsForm,
+  secretOptionsForm: SLURMSecretOptionsForm,
   providerType: 'SLURM remote',
   attributes: (): Attribute[] => [],
   allowToUpdateService: true,
