@@ -244,10 +244,6 @@
       {
         "key": "volume_types",
         "description": "Allow to select OpenStack volume type when instance or volume is provisioned."
-      },
-      {
-        "key": "server_groups",
-        "description": "Render server groups in OpenStack tenant details"
       }
     ]
   },

@@ -6,7 +6,6 @@ import { CreateServerGroupAction } from '@waldur/openstack/openstack-tenant/acti
 import { PullServerGroupsAction } from '@waldur/openstack/openstack-tenant/actions/PullServerGroupsAction';
 import { ServerGroupType } from '@waldur/openstack/types';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
-import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Resource } from '@waldur/resource/types';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -24,7 +23,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => <ResourceName resource={row} />,
+          render: ({ row }) => row.name,
           orderField: 'name',
         },
         {
