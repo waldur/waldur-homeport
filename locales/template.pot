@@ -648,6 +648,10 @@ msgstr ""
 msgid "Annotations"
 msgstr ""
 
+#: src/slurm/SLURMPluginOptionsForm.tsx
+msgid "Anonymized"
+msgstr ""
+
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Answer"
@@ -3492,6 +3496,7 @@ msgstr ""
 msgid "Force destroy {name} instance"
 msgstr ""
 
+#: src/slurm/SLURMPluginOptionsForm.tsx
 #: src/user/support/UserDetailsTable.tsx
 msgid "FreeIPA"
 msgstr ""
@@ -3516,6 +3521,7 @@ msgstr ""
 
 #: src/invitations/actions/UserDetailsGroup.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/slurm/SLURMPluginOptionsForm.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -3815,6 +3821,10 @@ msgstr ""
 msgid "Identity provider"
 msgstr ""
 
+#: src/slurm/SLURMSecretOptionsForm.tsx
+msgid "If defined, will be set as a password for all offering users"
+msgstr ""
+
 #: src/marketplace/offerings/option/OfferingOptions.tsx
 msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
 msgstr ""
@@ -3954,6 +3964,10 @@ msgstr ""
 msgid "Ingress"
 msgstr ""
 
+#: src/slurm/SLURMPluginOptionsForm.tsx
+msgid "Initial UID number"
+msgstr ""
+
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 msgid "Initial admin password"
@@ -3962,6 +3976,10 @@ msgstr ""
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 msgid "Initial admin username"
+msgstr ""
+
+#: src/slurm/SLURMPluginOptionsForm.tsx
+msgid "Initial primary group number"
 msgstr ""
 
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
@@ -8439,10 +8457,6 @@ msgstr ""
 msgid "SSH keys"
 msgstr ""
 
-#: src/user/keys/KeyCreateButton.tsx
-msgid "SSH keys are managed externally via MyAccessID."
-msgstr ""
-
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
@@ -9011,6 +9025,7 @@ msgstr ""
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/slurm/SLURMPluginOptionsForm.tsx
 msgid "Service provider"
 msgstr ""
 
@@ -9021,6 +9036,10 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Service provider can charge for usage of the following components"
+msgstr ""
+
+#: src/slurm/SLURMSecretOptionsForm.tsx
+msgid "Service provider can create offering user"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
@@ -9172,6 +9191,10 @@ msgstr ""
 
 #: src/resource/support/routes.ts
 msgid "Shared providers"
+msgstr ""
+
+#: src/slurm/SLURMSecretOptionsForm.tsx
+msgid "Shared user password"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCart.tsx
@@ -12130,6 +12153,14 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
+#: src/slurm/SLURMPluginOptionsForm.tsx
+msgid "Username anonymized prefix"
+msgstr ""
+
+#: src/slurm/SLURMPluginOptionsForm.tsx
+msgid "Username generation policy"
+msgstr ""
+
 #: src/freeipa/UsernameGroup.tsx
 msgid "Username is required."
 msgstr ""
@@ -12397,6 +12428,10 @@ msgstr ""
 
 #: src/quotas/constants.ts
 msgid "Volumes count"
+msgstr ""
+
+#: src/slurm/SLURMPluginOptionsForm.tsx
+msgid "Waldur username"
 msgstr ""
 
 #: src/user/hooks/HookTypeField.tsx
