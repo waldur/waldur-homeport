@@ -65,8 +65,7 @@
       "events": false
     },
     "openstack": {
-      "volume_types": true,
-      "server_groups": false
+      "volume_types": true
     },
     "rancher": {
       "volume_mount_point": false
