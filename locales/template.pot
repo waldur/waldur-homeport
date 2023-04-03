@@ -429,7 +429,7 @@ msgstr ""
 msgid "Add to comparison"
 msgstr ""
 
-#: src/customer/team/OfferingPermissionCreateButton.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/AddUserButton.tsx
 msgid "Add user"
@@ -805,7 +805,7 @@ msgstr ""
 msgid "Are you sure you want to remove {userName}?"
 msgstr ""
 
-#: src/customer/team/OfferingPermissionRemoveButton.tsx
+#: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 msgid "Are you sure you want to revoke this permission?"
 msgstr ""
 
@@ -1689,11 +1689,11 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
-#: src/customer/team/OfferingPermissionRemoveButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
 #: src/marketplace/offerings/images/ImagesActions.tsx
+#: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -2036,7 +2036,6 @@ msgid "Created a new payment for {customer_link}."
 msgstr ""
 
 #: src/customer/dashboard/CustomerResourcesList.tsx
-#: src/customer/team/OfferingPermissionsList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
@@ -2054,6 +2053,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 #: src/notifications/NotificationList.tsx
@@ -2768,7 +2768,6 @@ msgstr ""
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
-#: src/customer/team/UpdateOfferingPermissionExpirationTimeButton.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
@@ -2777,6 +2776,7 @@ msgstr ""
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
+#: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton.tsx
 #: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
 #: src/openstack/openstack-backup/actions/EditAction.tsx
 #: src/openstack/openstack-instance/actions/EditAction.tsx
@@ -3173,9 +3173,9 @@ msgstr ""
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
-#: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/customer/team/ProjectsListGroup.tsx
-#: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
+#: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
 msgid "Expiration time"
 msgstr ""
 
@@ -3183,9 +3183,9 @@ msgstr ""
 msgid "Expired"
 msgstr ""
 
-#: src/customer/team/OfferingPermissionsList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
+#: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/project/team/InvitationsList.tsx
 msgid "Expires at"
 msgstr ""
@@ -3627,7 +3627,7 @@ msgstr ""
 msgid "Google Calendar link"
 msgstr ""
 
-#: src/customer/team/OfferingPermissionCreateDialog.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 msgid "Grant permission"
 msgstr ""
 
@@ -5570,8 +5570,6 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
-#: src/customer/team/OfferingPermissionCreateDialog.tsx
-#: src/customer/team/OfferingPermissionsList.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
@@ -5592,6 +5590,8 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
+#: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -5678,6 +5678,10 @@ msgstr ""
 msgid "Offering logo"
 msgstr ""
 
+#: src/marketplace/routes.ts
+msgid "Offering managers"
+msgstr ""
+
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/marketplace/resources/details/OfferingDetailsField.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
@@ -5686,10 +5690,6 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering order items synchronization has been scheduled."
-msgstr ""
-
-#: src/customer/routes.ts
-msgid "Offering permissions"
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -6228,6 +6228,14 @@ msgstr ""
 msgid "Paid"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+msgid "Parent offering description:"
+msgstr ""
+
+#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+msgid "Parent offering:"
+msgstr ""
+
 #: src/marketplace/resources/details/ParentResourceLink.tsx
 msgid "Part of {resource}"
 msgstr ""
@@ -6471,11 +6479,11 @@ msgstr ""
 msgid "Permission granted by"
 msgstr ""
 
-#: src/customer/team/OfferingPermissionRemoveButton.tsx
+#: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 msgid "Permission has been revoked."
 msgstr ""
 
-#: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
+#: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
 msgid "Permission has been updated successfully."
 msgstr ""
 
@@ -7646,14 +7654,6 @@ msgstr ""
 msgid "Rejected"
 msgstr ""
 
-#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
-msgid "Related offering description:"
-msgstr ""
-
-#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
-msgid "Related offering:"
-msgstr ""
-
 #: src/openstack/openstack-instance/actions/utils.ts
 msgid "Release floating IPs"
 msgstr ""
@@ -8337,7 +8337,7 @@ msgstr ""
 msgid "Reviews"
 msgstr ""
 
-#: src/customer/team/OfferingPermissionRemoveButton.tsx
+#: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 msgid "Revoke"
 msgstr ""
 
@@ -8772,7 +8772,7 @@ msgstr ""
 msgid "Select offering..."
 msgstr ""
 
-#: src/customer/team/OfferingPermissionCreateDialog.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/notifications/NotificationForm.tsx
 msgid "Select offerings..."
 msgstr ""
@@ -8921,8 +8921,8 @@ msgid "Select type..."
 msgstr ""
 
 #: src/customer/team/CustomerUserAddDialog.tsx
-#: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Select user..."
@@ -9659,7 +9659,6 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
-#: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/invitations/GroupinvitationButtons.tsx
 #: src/invitations/PermissionRequestActionDialog.tsx
@@ -9676,6 +9675,7 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
@@ -10862,7 +10862,7 @@ msgstr ""
 msgid "Unable to get service provider API secret code."
 msgstr ""
 
-#: src/customer/team/OfferingPermissionCreateDialog.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 msgid "Unable to grant permission."
 msgstr ""
 
@@ -11299,7 +11299,7 @@ msgstr ""
 msgid "Unable to retype volume."
 msgstr ""
 
-#: src/customer/team/OfferingPermissionRemoveButton.tsx
+#: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 msgid "Unable to revoke permission."
 msgstr ""
 
@@ -11517,7 +11517,7 @@ msgstr ""
 msgid "Unable to update payment."
 msgstr ""
 
-#: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
+#: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
 msgid "Unable to update permission."
 msgstr ""
 
@@ -11650,7 +11650,6 @@ msgstr ""
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
-#: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/details/PageAccounting.tsx
 #: src/marketplace/offerings/details/PageConfirmationMessage.tsx
@@ -11664,6 +11663,7 @@ msgstr ""
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+#: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/notifications/NotificationUpdateButton.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
@@ -11732,7 +11732,7 @@ msgstr ""
 msgid "Update payment profile"
 msgstr ""
 
-#: src/customer/team/UpdateOfferingPermissionExpirationTimeDialog.tsx
+#: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
 msgid "Update permission of {name}"
 msgstr ""
 
@@ -11854,14 +11854,14 @@ msgid "Used in the period {period} by:"
 msgstr ""
 
 #: src/customer/team/CustomerUserAddDialog.tsx
-#: src/customer/team/OfferingPermissionCreateDialog.tsx
-#: src/customer/team/OfferingPermissionsList.tsx
 #: src/customer/team/UserGroup.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/feedback/SupportFeedbackListFilter.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
+#: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx
@@ -12936,7 +12936,7 @@ msgstr ""
 msgid "offering"
 msgstr ""
 
-#: src/customer/team/OfferingPermissionsList.tsx
+#: src/marketplace/service-providers/OfferingPermissionsList.tsx
 msgid "offering permissions"
 msgstr ""
 

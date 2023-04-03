@@ -14,7 +14,8 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { fetchListStart } from '@waldur/table/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { updatePermission } from './api';
+import { updatePermission } from '../../customer/team/api';
+
 import {
   OFFERING_PERMISSIONS_LIST_ID,
   UPDATE_OFFERING_PERMISSION_EXPIRATION_TIME_FORM_ID,

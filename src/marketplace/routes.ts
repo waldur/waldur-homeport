@@ -154,6 +154,10 @@ const ProviderCampaignsList = lazyComponent(
   () => import('./service-providers/ProviderCampaignsList'),
   'ProviderCampaignsList',
 );
+const OfferingPermissionsList = lazyComponent(
+  () => import('./service-providers/OfferingPermissionsList'),
+  'OfferingPermissionsList',
+);
 
 const getPublicRoutesParams = () => ({
   resolve: [
@@ -450,12 +454,12 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-provider-campaigns',
+    name: 'organization-offering-permissions',
+    url: 'offering-permissions/',
+    component: OfferingPermissionsList,
     parent: 'provider-marketplace',
-    url: 'marketplace-provider-campaigns/',
-    component: ProviderCampaignsList,
     data: {
-      breadcrumb: () => translate('Campaigns'),
+      breadcrumb: () => translate('Offering managers'),
     },
   },
 
@@ -623,6 +627,16 @@ export const states: StateDeclaration[] = [
     component: AdminOfferingsListContainer,
     data: {
       breadcrumb: () => translate('Offerings'),
+    },
+  },
+
+  {
+    name: 'marketplace-provider-campaigns',
+    parent: 'provider-marketplace',
+    url: 'marketplace-provider-campaigns/',
+    component: ProviderCampaignsList,
+    data: {
+      breadcrumb: () => translate('Campaigns'),
     },
   },
 

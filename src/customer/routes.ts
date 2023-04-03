@@ -63,11 +63,6 @@ const CustomerPermissionsReviewList = lazyComponent(
   'CustomerPermissionsReviewList',
 );
 
-const OfferingPermissionsList = lazyComponent(
-  () => import('./team/OfferingPermissionsList'),
-  'OfferingPermissionsList',
-);
-
 const CustomerEventsList = lazyComponent(
   () => import('./workspace/CustomerEventsList'),
   'CustomerEventsList',
@@ -251,16 +246,6 @@ export const states: StateDeclaration[] = [
     parent: 'organization-team',
     data: {
       breadcrumb: () => translate('Reviews'),
-    },
-  },
-
-  {
-    name: 'organization-offering-permissions',
-    url: 'offering-permissions/',
-    component: OfferingPermissionsList,
-    parent: 'organization-team',
-    data: {
-      breadcrumb: () => translate('Offering permissions'),
     },
   },
 
