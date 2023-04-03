@@ -7630,6 +7630,14 @@ msgstr ""
 msgid "Rejected"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+msgid "Related offering description:"
+msgstr ""
+
+#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+msgid "Related offering:"
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/utils.ts
 msgid "Release floating IPs"
 msgstr ""
@@ -8437,10 +8445,6 @@ msgstr ""
 #: src/user/keys/KeysList.tsx
 #: src/user/routes.ts
 msgid "SSH keys"
-msgstr ""
-
-#: src/user/keys/KeyCreateButton.tsx
-msgid "SSH keys are managed externally via MyAccessID."
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts

@@ -57,6 +57,27 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
               <FormattedHtml html={value.offering.description} />
             </p>
           )}
+
+          {value.offering.parent_name ? (
+            <>
+              <p>
+                <strong>{translate('Parent offering:')}</strong>{' '}
+                {value.offering.parent_name}
+              </p>
+            </>
+          ) : null}
+
+          {value.offering.parent_description ? (
+            <>
+              <p>
+                <strong>{translate('Parent offering description:')}</strong>
+              </p>
+              <p className="bs-callout bs-callout-success">
+                <FormattedHtml html={value.offering.parent_description} />
+              </p>
+            </>
+          ) : null}
+
           <OfferingTabsComponent tabs={value.tabs} />
         </>
       )}
