@@ -6,4 +6,6 @@ export interface Invitation {
   customer_role?: string;
   created_by_full_name?: string;
   created_by_username: string;
+  expires?: string;
+  created?: string;
 }

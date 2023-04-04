@@ -1217,6 +1217,10 @@ msgstr ""
 msgid "Browse image"
 msgstr ""
 
+#: src/invitations/actions/create/BulkUpload.tsx
+msgid "Bulk upload"
+msgstr ""
+
 #: src/booking/components/BusinessHoursGroup.tsx
 msgid "Business hours"
 msgstr ""
@@ -1470,6 +1474,7 @@ msgstr ""
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/invitations/InvitationExpandableRow.tsx
 #: src/invitations/actions/CivilNumberGroup.tsx
+#: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Civil number"
 msgstr ""
@@ -1509,6 +1514,7 @@ msgstr ""
 msgid "Client secret"
 msgstr ""
 
+#: src/invitations/actions/create/FormButtons.tsx
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx
 #: src/marketplace/referral/OfferingReferralsDialog.tsx
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
@@ -1625,6 +1631,10 @@ msgstr ""
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 msgid "Competence"
+msgstr ""
+
+#: src/invitations/actions/create/SendingStatus.tsx
+msgid "Completed"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistOverview.tsx
@@ -1768,6 +1778,7 @@ msgstr ""
 msgid "Contains the word"
 msgstr ""
 
+#: src/invitations/actions/create/FormButtons.tsx
 #: src/user/SelectAffiliationDialog.tsx
 msgid "Continue"
 msgstr ""
@@ -2211,6 +2222,10 @@ msgstr ""
 msgid "Current type"
 msgstr ""
 
+#: src/invitations/actions/create/CustomMessageInput.tsx
+msgid "Custom message"
+msgstr ""
+
 #: src/marketplace-script/marketplace.ts
 msgid "Custom scripts"
 msgstr ""
@@ -2301,6 +2316,7 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
 #: src/dashboard/chart.ts
+#: src/invitations/actions/create/SendingStatus.tsx
 #: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/issues/feedback/SupportFeedbackListFilter.tsx
 #: src/marketplace/resources/usage/utils.ts
@@ -2713,6 +2729,10 @@ msgstr ""
 msgid "Done"
 msgstr ""
 
+#: src/invitations/actions/create/BulkUpload.tsx
+msgid "Download"
+msgstr ""
+
 #: src/marketplace/offerings/details/ExportFullPriceList.tsx
 msgid "Download full price list"
 msgstr ""
@@ -2728,6 +2748,10 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
+msgstr ""
+
+#: src/core/DropzoneFiles.tsx
+msgid "Drop files here, or click to select files"
 msgstr ""
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
@@ -2879,7 +2903,7 @@ msgstr ""
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
-#: src/invitations/actions/EmailGroup.tsx
+#: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/notifications/RecipientsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
@@ -3007,6 +3031,10 @@ msgstr ""
 
 #: src/openstack/utils.ts
 msgid "Enter private IPv4 CIDR."
+msgstr ""
+
+#: src/invitations/actions/create/CustomMessageInput.tsx
+msgid "Enter your custom message"
 msgstr ""
 
 #: src/marketplace-script/EnvironmentVariablesList.tsx
@@ -3181,6 +3209,10 @@ msgstr ""
 
 #: src/invitations/InvitationsFilter.tsx
 msgid "Expired"
+msgstr ""
+
+#: src/invitations/actions/create/SendingStatus.tsx
+msgid "Expires"
 msgstr ""
 
 #: src/invitations/GroupInvitationsList.tsx
@@ -3591,6 +3623,10 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingGettingStarted.tsx
 msgid "Getting started"
+msgstr ""
+
+#: src/invitations/actions/create/FormButtons.tsx
+msgid "Go back"
 msgstr ""
 
 #: src/navigation/sidebar/SidebarFooter.tsx
@@ -4148,8 +4184,12 @@ msgstr ""
 msgid "Invitations"
 msgstr ""
 
-#: src/invitations/actions/InvitationCreateButton.tsx
-#: src/invitations/actions/InvitationCreateDialog.tsx
+#: src/invitations/actions/create/CustomMessageWrapper.tsx
+#: src/invitations/actions/create/EmailsListGroupWrapper.tsx
+msgid "Invite by email"
+msgstr ""
+
+#: src/invitations/actions/create/InvitationCreateButton.tsx
 msgid "Invite user"
 msgstr ""
 
@@ -4815,6 +4855,7 @@ msgstr ""
 
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
+#: src/invitations/InvitationExpandableRow.tsx
 #: src/notifications/NotificationForm.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
@@ -5789,7 +5830,7 @@ msgstr ""
 msgid "Only customer owner or staff can create group invitations."
 msgstr ""
 
-#: src/invitations/actions/InvitationCreateButton.tsx
+#: src/invitations/actions/create/InvitationCreateButton.tsx
 msgid "Only customer owner, project manager or staff can invite users."
 msgstr ""
 
@@ -8353,6 +8394,7 @@ msgstr ""
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
+#: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
@@ -8584,6 +8626,10 @@ msgstr ""
 
 #: src/marketplace/category/filters/FilterBar.tsx
 msgid "Search for offerings..."
+msgstr ""
+
+#: src/invitations/actions/create/RoleAndProjectSelectField.tsx
+msgid "Search for project"
 msgstr ""
 
 #: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
@@ -8847,6 +8893,7 @@ msgstr ""
 msgid "Select request type..."
 msgstr ""
 
+#: src/invitations/actions/create/RoleAndProjectSelectField.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Select role"
 msgstr ""
@@ -8952,12 +8999,28 @@ msgstr ""
 msgid "Send broadcast"
 msgstr ""
 
+#: src/invitations/actions/create/FormButtons.tsx
+msgid "Send invitation"
+msgstr ""
+
 #: src/notifications/NotificationForm.tsx
 msgid "Send message to all users"
 msgstr ""
 
+#: src/invitations/actions/create/FormButtons.tsx
+msgid "Send more"
+msgstr ""
+
 #: src/invoices/list/SendNotificationButton.tsx
 msgid "Send notification"
+msgstr ""
+
+#: src/invitations/actions/create/SendingStatus.tsx
+msgid "Sender"
+msgstr ""
+
+#: src/invitations/actions/create/SendingStatus.tsx
+msgid "Sending status"
 msgstr ""
 
 #: src/paypal/InvoicesFilter.tsx
@@ -9584,6 +9647,7 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/invitations/InvitationsList.tsx
+#: src/invitations/actions/create/SendingStatus.tsx
 #: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
@@ -9752,6 +9816,10 @@ msgstr ""
 msgid "Subtotal"
 msgstr ""
 
+#: src/invitations/actions/create/FinishStepWrapper.tsx
+msgid "Success"
+msgstr ""
+
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
@@ -9893,6 +9961,7 @@ msgid "Tax"
 msgstr ""
 
 #: src/invitations/actions/TaxNumberGroup.tsx
+#: src/invitations/actions/create/EmailsListGroup.tsx
 msgid "Tax number"
 msgstr ""
 
@@ -10430,6 +10499,10 @@ msgstr ""
 
 #: src/user/api-key/TokenLifetimeField.tsx
 msgid "Token lifetime"
+msgstr ""
+
+#: src/invitations/actions/create/EmailsListGroup.tsx
+msgid "Too many empty fields"
 msgstr ""
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
@@ -11797,6 +11870,10 @@ msgstr ""
 msgid "Updating security groups"
 msgstr ""
 
+#: src/invitations/actions/create/BulkUpload.tsx
+msgid "Upload a CSV file containing the columns email, role and organization in that order. If you are unsure, you can download an example file as a template"
+msgstr ""
+
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Upload images"
 msgstr ""
@@ -12544,6 +12621,10 @@ msgstr ""
 msgid "You are not part of an organisation. Create an organization or request access from your organization administrator."
 msgstr ""
 
+#: src/invitations/actions/create/CustomMessageInput.tsx
+msgid "You can add a message to be attached to the invitation email the users receives."
+msgstr ""
+
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "You can find offerings to order in the marketplace"
 msgstr ""
@@ -12693,6 +12774,10 @@ msgstr ""
 
 #: src/invitations/InvitationMessage.tsx
 msgid "Your current email is:"
+msgstr ""
+
+#: src/invitations/actions/create/CustomMessageWrapper.tsx
+msgid "Your custom message will appear here"
 msgstr ""
 
 #: src/invitations/InvitationAccept.tsx

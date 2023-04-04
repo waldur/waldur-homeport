@@ -6,10 +6,13 @@ import { translate } from '@waldur/i18n';
 
 import { InputGroup } from './InputGroup';
 
-export const TaxNumberGroup: FunctionComponent<{ disabled }> = ({ disabled }) =>
+export const TaxNumberGroup: FunctionComponent<{ name; disabled }> = ({
+  name,
+  disabled,
+}) =>
   isFeatureVisible('invitation.show_tax_number') ? (
     <InputGroup
-      name="tax_number"
+      name={name}
       label={
         ENV.plugins.WALDUR_CORE.INVITATION_TAX_NUMBER_LABEL ||
         translate('Tax number')

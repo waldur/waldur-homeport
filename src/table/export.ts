@@ -12,7 +12,7 @@ import { exportAsPdf } from './exportAsPdf';
 import { getTableOptions } from './registry';
 import { selectTableRows } from './selectors';
 
-function saveAsCsv(table, data) {
+export function saveAsCsv(table, data) {
   const csv = Papa.unparse(data);
   const blob = new Blob([csv], { type: 'text/plain;charset=utf-8' });
   FileSaver.saveAs(blob, `${table}.csv`);
