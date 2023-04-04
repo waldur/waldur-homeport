@@ -13,11 +13,17 @@ export const InvitationExpandableRow: React.FC<{
         value={`${location.origin}/invitation/${row.uuid}/`}
       />
     </p>
-    {row.civil_number ? (
+    {row.civil_number && (
       <p>
         <b>{translate('Civil number')}: </b>
         {row.civil_number}
       </p>
-    ) : null}
+    )}
+    {row.extra_invitation_text && (
+      <p>
+        <b>{translate('Message')}: </b>
+        {row.extra_invitation_text}
+      </p>
+    )}
   </>
 );

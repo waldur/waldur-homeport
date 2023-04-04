@@ -1,0 +1,14 @@
+.invitation-create-dialog {
+  .success-step {
+    font-size: 12rem;
+
+    i {
+      transition: 0.5s scale;
+      scale: 0;
+
+      &.show {
+        scale: 1;
+      }
+    }
+  }
+}

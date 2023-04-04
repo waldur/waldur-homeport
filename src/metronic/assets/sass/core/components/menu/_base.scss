@@ -41,6 +41,15 @@
     transition: none;
     outline: none !important;
 
+    &.disabled {
+      cursor: not-allowed !important;
+      color: $gray-400 !important;
+
+      .menu-title {
+        color: $gray-400 !important;
+      }
+    }
+
     // Menu Icon
     .menu-icon {
       flex-shrink: 0;

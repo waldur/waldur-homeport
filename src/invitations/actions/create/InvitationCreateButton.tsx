@@ -31,6 +31,7 @@ export const InvitationCreateButton: FunctionComponent<{
   const callback = () =>
     dispatch(
       openModalDialog(InvitationCreateDialog, {
+        size: 'xl',
         resolve: {
           context: {
             customer,

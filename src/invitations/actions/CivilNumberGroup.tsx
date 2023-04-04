@@ -6,11 +6,12 @@ import { translate } from '@waldur/i18n';
 
 import { InputGroup } from './InputGroup';
 
-export const CivilNumberGroup: FunctionComponent<{ disabled }> = ({
+export const CivilNumberGroup: FunctionComponent<{ name; disabled }> = ({
+  name,
   disabled,
 }) => (
   <InputGroup
-    name="civil_number"
+    name={name}
     label={
       ENV.plugins.WALDUR_CORE.INVITATION_CIVIL_NUMBER_LABEL ||
       translate('Civil number')

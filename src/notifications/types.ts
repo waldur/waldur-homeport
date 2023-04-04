@@ -48,3 +48,11 @@ export interface NotificationResponseData extends Notification {
   state: string;
   author_full_name: string;
 }
+
+export interface NotificationMessageTemplate {
+  uuid: string;
+  url: string;
+  path: string;
+  name: string;
+  content: string;
+}

@@ -13,8 +13,8 @@ import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { InvitationCreateButton } from './actions/create/InvitationCreateButton';
 import { InvitationCancelButton } from './actions/InvitationCancelButton';
-import { InvitationCreateButton } from './actions/InvitationCreateButton';
 import { InvitationSendButton } from './actions/InvitationSendButton';
 import { InvitationsFilter } from './InvitationsFilter';
 import { RoleField } from './RoleField';
