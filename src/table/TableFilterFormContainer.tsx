@@ -10,7 +10,12 @@ interface TableFilterFormContainerPureProps {
 
 const TableFilterFormContainerPure: React.FC<TableFilterFormContainerPureProps> =
   (props) => {
-    return React.Children.map(props.children, (filterItem: any) => {
+    const children =
+      typeof props.children === 'function'
+        ? props.children({ values: props.filterValues }).props.children
+        : props.children;
+
+    return React.Children.map(children, (filterItem: any) => {
       if (!filterItem) return;
       const { name, children } = filterItem.props;
       let input;
