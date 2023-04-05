@@ -1,4 +1,6 @@
 import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -7,12 +9,19 @@ import { useTable } from '@waldur/table/utils';
 
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 
+import { PROVIDER_OFFERING_USERS_FORM_ID } from './constants';
+import { ProviderOfferingUsersFilter } from './ProviderOfferingUsersFilter';
+
 export const ProviderOfferingUsersListComponent = ({ provider }) => {
+  const filterValues = useSelector(
+    getFormValues(PROVIDER_OFFERING_USERS_FORM_ID),
+  ) as { offering? };
   const filter = useMemo(
     () => ({
       provider_uuid: provider.customer_uuid,
+      offering_uuid: filterValues?.offering?.uuid,
     }),
-    [provider],
+    [provider, filterValues],
   );
   const tableProps = useTable({
     table: 'marketplace-offering-users',
@@ -51,6 +60,7 @@ export const ProviderOfferingUsersListComponent = ({ provider }) => {
       columns={columns}
       verboseName={translate('Offering users')}
       showPageSizeSelector={true}
+      filters={<ProviderOfferingUsersFilter />}
     />
   );
 };
