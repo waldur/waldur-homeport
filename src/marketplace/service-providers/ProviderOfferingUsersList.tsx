@@ -11,6 +11,7 @@ import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerReso
 
 import { PROVIDER_OFFERING_USERS_FORM_ID } from './constants';
 import { ProviderOfferingUsersFilter } from './ProviderOfferingUsersFilter';
+import { ProviderOfferingUserUpdateButton } from './ProviderOfferingUserUpdateButton';
 
 export const ProviderOfferingUsersListComponent = ({ provider }) => {
   const filterValues = useSelector(
@@ -51,7 +52,8 @@ export const ProviderOfferingUsersListComponent = ({ provider }) => {
     },
     {
       title: translate('Propagated'),
-      render: ({ row }) => formatDateTime(row.propagation_date),
+      render: ({ row }) =>
+        row.propagation_date ? formatDateTime(row.propagation_date) : 'N/A',
     },
   ];
   return (
@@ -61,6 +63,13 @@ export const ProviderOfferingUsersListComponent = ({ provider }) => {
       verboseName={translate('Offering users')}
       showPageSizeSelector={true}
       filters={<ProviderOfferingUsersFilter />}
+      hoverableRow={({ row }) => (
+        <ProviderOfferingUserUpdateButton
+          row={row}
+          provider={provider}
+          refetch={tableProps.fetch}
+        />
+      )}
     />
   );
 };

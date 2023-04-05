@@ -468,3 +468,9 @@ export const countRobotAccounts = (params) =>
 
 export const createRobotAccount = (payload) =>
   post(`/marketplace-robot-accounts/`, payload);
+
+export const updateOfferingUser = (provider_uuid, user_uuid, username) =>
+  post(
+    `/marketplace-service-providers/${provider_uuid}/set_offerings_username/`,
+    { user_uuid, username },
+  );
