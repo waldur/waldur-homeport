@@ -1,10 +1,11 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 import { Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { isDescendantOf } from '@waldur/navigation/useTabs';
 import { ProjectCreateButton } from '@waldur/project/ProjectCreateButton';
-import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { FormGroup } from '../offerings/FormGroup';
@@ -13,29 +14,23 @@ import { CustomerCreateGroup } from './CustomerCreateGroup';
 import { ProjectCreateGroup } from './ProjectCreateGroup';
 import { ProjectSelectField } from './ProjectSelectField';
 
-const mapStateToProps = (state: RootState) => {
-  const customer = getCustomer(state);
-  return { projects: customer?.projects };
-};
-
-const connector = connect(mapStateToProps);
-
-type StateProps = ReturnType<typeof mapStateToProps>;
-
-type OwnProps = { previewMode?: boolean };
-
-type ProjectFieldProps = StateProps & OwnProps;
-
-const PureProjectField: FC<ProjectFieldProps> = (props) =>
-  props.projects ? (
+export const ProjectField: FC<{ previewMode?: boolean }> = ({
+  previewMode,
+}) => {
+  const customer = useSelector(getCustomer);
+  const { state } = useCurrentStateAndParams();
+  if (isDescendantOf('project', state)) {
+    return null;
+  }
+  return customer?.projects ? (
     <FormGroup label={translate('Project')} required={true}>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        {props.projects.length > 0 && (
+        {customer.projects.length > 0 && (
           <div style={{ flexGrow: 1, marginRight: 10 }}>
-            <ProjectSelectField projects={props.projects} />
+            <ProjectSelectField projects={customer.projects} />
           </div>
         )}
-        {!props.previewMode && <ProjectCreateButton />}
+        {!previewMode && <ProjectCreateButton />}
       </div>
       <Form.Text className="mb-0 text-muted">
         {translate('The project will be changed for all items in cart.')}
@@ -47,5 +42,4 @@ const PureProjectField: FC<ProjectFieldProps> = (props) =>
       <ProjectCreateGroup />
     </>
   );
-
-export const ProjectField = connector(PureProjectField);
+};
