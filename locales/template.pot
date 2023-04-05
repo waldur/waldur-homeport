@@ -4530,7 +4530,6 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: src/marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx
 #: src/rancher/node/actions/LinkAction.tsx
 #: src/rancher/node/actions/LinkDialog.tsx
 msgid "Link OpenStack Instance"
@@ -9218,6 +9217,10 @@ msgstr ""
 #: src/marketplace/resources/SetBackendIdButton.tsx
 #: src/marketplace/resources/SetBackendIdDialog.tsx
 msgid "Set backend ID"
+msgstr ""
+
+#: src/marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx
+msgid "Set external username"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx

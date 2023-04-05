@@ -27,7 +27,7 @@ export const ProviderOfferingUserUpdateDialog: FC<{
 
   return (
     <ResourceActionDialog
-      dialogTitle={translate('Link OpenStack Instance')}
+      dialogTitle={translate('Set external username')}
       formFields={fields}
       initialValues={{ username: row.username }}
       submitForm={async (formData) => {
