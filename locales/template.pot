@@ -2020,6 +2020,7 @@ msgstr ""
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
@@ -3277,6 +3278,10 @@ msgstr ""
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "External network ID"
+msgstr ""
+
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+msgid "External username"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
@@ -4932,6 +4937,10 @@ msgstr ""
 msgid "Mobile phone number"
 msgstr ""
 
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+msgid "Modified"
+msgstr ""
+
 #: src/core/lazyComponent.tsx
 msgid "Module loading error. Try again."
 msgstr ""
@@ -5633,6 +5642,7 @@ msgstr ""
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -5752,6 +5762,11 @@ msgstr ""
 
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 msgid "Offering user has been created."
+msgstr ""
+
+#: src/marketplace/routes.ts
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+msgid "Offering users"
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -7271,6 +7286,10 @@ msgstr ""
 
 #: src/customer/payments/PaymentProofRenderer.tsx
 msgid "Proof document"
+msgstr ""
+
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+msgid "Propagated"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
@@ -11939,6 +11958,7 @@ msgstr ""
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/UserGroup.tsx

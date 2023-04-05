@@ -158,6 +158,10 @@ const OfferingPermissionsList = lazyComponent(
   () => import('./service-providers/OfferingPermissionsList'),
   'OfferingPermissionsList',
 );
+const ProviderOfferingUsersList = lazyComponent(
+  () => import('./service-providers/ProviderOfferingUsersList'),
+  'ProviderOfferingUsersList',
+);
 
 const getPublicRoutesParams = () => ({
   resolve: [
@@ -430,6 +434,16 @@ export const states: StateDeclaration[] = [
     parent: 'provider-marketplace',
     data: {
       breadcrumb: () => translate('Offerings'),
+    },
+  },
+
+  {
+    name: 'marketplace-vendor-offering-users',
+    url: 'marketplace-provider-offering-users/',
+    component: ProviderOfferingUsersList,
+    parent: 'provider-marketplace',
+    data: {
+      breadcrumb: () => translate('Offering users'),
     },
   },
 
