@@ -126,14 +126,18 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
                 <>
                   <button
                     className="btn btn-color-gray-400 btn-active-color-primary p-0 fw-bold me-3"
-                    disabled={uiDisabled || formToggleDisabled}
+                    disabled={
+                      uiDisabled ||
+                      formToggleDisabled ||
+                      !comment.update_is_available
+                    }
                     onClick={toggleForm}
                   >
                     {translate('Edit')}
                   </button>
                   <button
                     className="btn btn-color-gray-400 btn-active-color-primary p-0 fw-bold"
-                    disabled={uiDisabled}
+                    disabled={uiDisabled || !comment.destroy_is_available}
                     onClick={openDeleteDialog}
                   >
                     {translate('Delete')}

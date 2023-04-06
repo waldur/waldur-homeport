@@ -17,6 +17,8 @@ export interface Comment {
   issue_key: string;
   url: string;
   uuid: string;
+  update_is_available: boolean;
+  destroy_is_available: boolean;
 }
 
 export interface State {
