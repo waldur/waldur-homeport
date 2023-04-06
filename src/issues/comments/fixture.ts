@@ -13,6 +13,8 @@ export const comment: Comment = {
   issue_key: 'issue_key',
   url: 'url',
   uuid: 'uuid',
+  destroy_is_available: true,
+  update_is_available: true,
 };
 
 export const issue: Issue = {
