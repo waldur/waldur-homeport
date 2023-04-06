@@ -8,11 +8,10 @@ import {
   ResourceStateFilter,
 } from '@waldur/marketplace/resources/list/ResourceStateFilter';
 import { PROJECT_RESOURCES_FILTER_FORM_ID } from '@waldur/project/constants';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 const PureProjectResourcesFilter: FunctionComponent = () => (
-  <TableFilterFormContainer form={PROJECT_RESOURCES_FILTER_FORM_ID}>
+  <>
     <TableFilterItem title={translate('Category')} name="category">
       <CategoryFilter />
     </TableFilterItem>
@@ -23,7 +22,7 @@ const PureProjectResourcesFilter: FunctionComponent = () => (
     >
       <ResourceStateFilter />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 export const ProjectResourcesFilter = reduxForm({

@@ -5,13 +5,12 @@ import { translate } from '@waldur/i18n';
 import { UserAutocomplete } from '@waldur/issues/feedback/UserAutocomplete';
 import { EventDateFilter } from '@waldur/support/EventDateFilter';
 import { EventGroupFilter } from '@waldur/support/EventGroupFilter';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { SUPPORT_EVENTS_LIST_FILTER_FORM_ID } from './constants';
 
 const PureSupportEventsListFilter: FunctionComponent = () => (
-  <TableFilterFormContainer form={SUPPORT_EVENTS_LIST_FILTER_FORM_ID}>
+  <>
     <TableFilterItem title={translate('Event group')} name="feature">
       <EventGroupFilter />
     </TableFilterItem>
@@ -30,7 +29,7 @@ const PureSupportEventsListFilter: FunctionComponent = () => (
     >
       <UserAutocomplete />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 const enhance = reduxForm({

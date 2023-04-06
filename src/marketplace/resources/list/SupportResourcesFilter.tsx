@@ -6,14 +6,13 @@ import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { CategoryFilter } from './CategoryFilter';
 import { getStates, ResourceStateFilter } from './ResourceStateFilter';
 
 const PureSupportResourcesFilter: FunctionComponent = () => (
-  <TableFilterFormContainer form="SupportResourcesFilter">
+  <>
     <TableFilterItem
       title={translate('Offering')}
       name="offering"
@@ -46,7 +45,7 @@ const PureSupportResourcesFilter: FunctionComponent = () => (
     >
       <ResourceStateFilter />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 const enhance = reduxForm({

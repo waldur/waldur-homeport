@@ -4,7 +4,6 @@ import { Field, reduxForm } from 'redux-form';
 
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 const choices = [
@@ -23,7 +22,7 @@ const choices = [
 ];
 
 const PureCustomerEventsFilter: FunctionComponent = () => (
-  <TableFilterFormContainer form="customerEventsFilter">
+  <>
     <TableFilterItem title={translate('Type')}>
       <Field
         name="feature"
@@ -39,7 +38,7 @@ const PureCustomerEventsFilter: FunctionComponent = () => (
         )}
       />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 const enhance = compose(

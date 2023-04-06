@@ -2,13 +2,12 @@ import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { getStates, RequestStateFilter } from './RequestStateFilter';
 
 const Filter = () => (
-  <TableFilterFormContainer form="OrganizationProjectUpdateRequestListFilter">
+  <>
     <TableFilterItem
       title={translate('Organization')}
       name="organization"
@@ -20,7 +19,7 @@ const Filter = () => (
     <TableFilterItem title={translate('State')} name="state">
       <RequestStateFilter />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 const enhance = reduxForm({

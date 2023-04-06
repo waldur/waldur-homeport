@@ -4,14 +4,13 @@ import { reduxForm } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { CategoryFilter } from './CategoryFilter';
 import { getStates, ResourceStateFilter } from './ResourceStateFilter';
 
 const PureProjectResourcesAllFilter: FunctionComponent<{}> = () => (
-  <TableFilterFormContainer form={PROJECT_RESOURCES_ALL_FILTER_FORM_ID}>
+  <>
     <TableFilterItem
       title={translate('Offering')}
       name="offering"
@@ -33,7 +32,7 @@ const PureProjectResourcesAllFilter: FunctionComponent<{}> = () => (
     >
       <ResourceStateFilter />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 const enhance = reduxForm({

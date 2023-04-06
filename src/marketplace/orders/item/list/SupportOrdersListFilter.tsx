@@ -6,7 +6,6 @@ import { Option } from '@waldur/marketplace/common/registry';
 import { SUPPORT_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/orders/item/list/constants';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { OrderStateFilter } from './OrderStateFilter';
@@ -24,7 +23,7 @@ const getOrderStateFilterOptions = (): Option[] => [
 ];
 
 const PureSupportOrdersListFilter = () => (
-  <TableFilterFormContainer form={SUPPORT_ORDERS_LIST_FILTER_FORM_ID}>
+  <>
     <TableFilterItem
       title={translate('Organization')}
       name="organization"
@@ -47,7 +46,7 @@ const PureSupportOrdersListFilter = () => (
     >
       <OrderStateFilter options={getOrderStateFilterOptions} />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 export const SupportOrdersListFilter = reduxForm({

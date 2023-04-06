@@ -2,7 +2,6 @@ import { Field, reduxForm } from 'redux-form';
 
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 const choices = [
@@ -34,7 +33,7 @@ const choices = [
 
 const PureInvitationsFilter = () => {
   return (
-    <TableFilterFormContainer form="InvitationsFilter">
+    <>
       <TableFilterItem title={translate('State')} name="state">
         <Field
           name="state"
@@ -50,7 +49,7 @@ const PureInvitationsFilter = () => {
           )}
         />
       </TableFilterItem>
-    </TableFilterFormContainer>
+    </>
   );
 };
 

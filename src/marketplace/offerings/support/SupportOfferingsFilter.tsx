@@ -7,13 +7,12 @@ import {
   getStates,
 } from '@waldur/marketplace/offerings/OfferingStateFilter';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { SUPPORT_OFFERINGS_FILTER_FORM_ID } from './constants';
 
 const PureSupportOfferingsFilter: FunctionComponent = () => (
-  <TableFilterFormContainer form={SUPPORT_OFFERINGS_FILTER_FORM_ID}>
+  <>
     <TableFilterItem title={translate('State')} name="state">
       <OfferingStateFilter />
     </TableFilterItem>
@@ -28,7 +27,7 @@ const PureSupportOfferingsFilter: FunctionComponent = () => (
         isServiceProvider={true}
       />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 const enhance = reduxForm({

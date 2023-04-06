@@ -6,11 +6,10 @@ import { SUPPORT_FEEDBACK_LIST_FILTER_FORM } from '@waldur/issues/feedback/const
 import { EvaluationSelectField } from '@waldur/issues/feedback/EvaluationSelectField';
 import { PeriodFilterField } from '@waldur/issues/feedback/PeriodFilterField';
 import { UserAutocomplete } from '@waldur/issues/feedback/UserAutocomplete';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 export const PureSupportFeedbackListFilter = () => (
-  <TableFilterFormContainer form={SUPPORT_FEEDBACK_LIST_FILTER_FORM}>
+  <>
     <TableFilterItem
       title={translate('Date')}
       name="period"
@@ -33,7 +32,7 @@ export const PureSupportFeedbackListFilter = () => (
     >
       <UserAutocomplete />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 export const SupportFeedbackListFilter = reduxForm({

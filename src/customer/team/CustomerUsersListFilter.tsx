@@ -5,11 +5,10 @@ import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/consta
 import { OrganizationRoleSelectField } from '@waldur/customer/team/OrganizationRoleSelectField';
 import { ProjectRoleSelectField } from '@waldur/customer/team/ProjectRoleSelectField';
 import { translate } from '@waldur/i18n';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 const PureCustomerUsersListFilter: FunctionComponent = () => (
-  <TableFilterFormContainer form={CUSTOMER_USERS_LIST_FILTER_FORM_ID}>
+  <>
     <TableFilterItem title={translate('Project role')} name="project_role">
       <ProjectRoleSelectField />
     </TableFilterItem>
@@ -19,7 +18,7 @@ const PureCustomerUsersListFilter: FunctionComponent = () => (
     >
       <OrganizationRoleSelectField />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 const enhance = reduxForm({
