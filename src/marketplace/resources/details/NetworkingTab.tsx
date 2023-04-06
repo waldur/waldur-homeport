@@ -1,18 +1,18 @@
 import { translate } from '@waldur/i18n';
 import { InstanceNetworkButton } from '@waldur/openstack/openstack-instance/InstanceNetworkButton';
 import { OpenStackSecurityGroupsLink } from '@waldur/openstack/openstack-security-groups/OpenStackSecurityGroupsLink';
+import { IPList } from '@waldur/resource/IPList';
 import { Field } from '@waldur/resource/summary';
-import { formatIpList } from '@waldur/resource/summary/VirtualMachineSummary';
 
 export const NetworkingTab = ({ resource, scope, state }) => (
   <>
     <Field
       label={translate('Internal IP')}
-      value={formatIpList(scope.internal_ips)}
+      value={<IPList value={scope.internal_ips} />}
     />
     <Field
       label={translate('External IP')}
-      value={formatIpList(scope.external_ips)}
+      value={<IPList value={scope.external_ips} />}
     />
     <Field
       label={translate('SSH key')}
