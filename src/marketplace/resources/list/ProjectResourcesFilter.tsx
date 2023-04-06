@@ -2,7 +2,6 @@ import { reduxForm } from 'redux-form';
 
 import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { OfferingFilter } from './OfferingFilter';
@@ -18,7 +17,7 @@ interface FormData {
 }
 
 const PureProjectResourcesFilter = ({ offerings }) => (
-  <TableFilterFormContainer form="ProjectResourcesFilter">
+  <>
     <TableFilterItem
       title={translate('Offering')}
       name="offering"
@@ -33,7 +32,7 @@ const PureProjectResourcesFilter = ({ offerings }) => (
     >
       <ResourceStateFilter />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 export const ProjectResourcesFilter = reduxForm<FormData, OwnProps>({

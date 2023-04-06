@@ -3,11 +3,10 @@ import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 const PureProjectsListFilter = () => (
-  <TableFilterFormContainer form={'affiliationProjectsListFilter'}>
+  <>
     <TableFilterItem
       title={translate('Organization')}
       name="organization"
@@ -16,7 +15,7 @@ const PureProjectsListFilter = () => (
     >
       <OrganizationAutocomplete />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 export const ProjectsListFilter = reduxForm({

@@ -8,7 +8,6 @@ import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { ProviderAutocomplete } from '@waldur/marketplace/orders/ProviderAutocomplete';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
@@ -28,7 +27,7 @@ interface StateProps {
 }
 
 const PureOrderItemsFilter = (props: OwnProps & StateProps) => (
-  <TableFilterFormContainer form="OrderItemFilter">
+  <>
     {props.showOfferingFilter && (
       <TableFilterItem title={translate('Offering')} name="offering">
         <OfferingAutocomplete offeringFilter={props.offeringFilter} />
@@ -58,7 +57,7 @@ const PureOrderItemsFilter = (props: OwnProps & StateProps) => (
     >
       <OrderTypeFilter />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 const filterSelector = createSelector(

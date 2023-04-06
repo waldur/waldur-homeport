@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import React from 'react';
 import { Badge } from 'react-bootstrap';
+import { Field } from 'redux-form';
 
 interface TableFilterItem {
   title: string;
   name?: string;
-  value?: Object;
   badgeValue?(value: any): string | number;
   customValueComponent?: React.ComponentType<{ value: any }>;
   ellipsis?: boolean;
@@ -37,23 +37,28 @@ export const TableFilterItem: React.FunctionComponent<TableFilterItem> = (
       onClick={(event) => toggleClick(!open, event)}
     >
       {props.title}
-      <div className="filter-field">{props.children}</div>
-      {props.value && (
-        <div
-          className="filter-value"
-          style={!props.ellipsis ? { maxWidth: 'unset' } : undefined}
-        >
-          {props.customValueComponent ? (
-            React.createElement(props.customValueComponent, {
-              value: props.value,
-            })
-          ) : (
-            <Badge bg="secondary" className="text-dark">
-              {props.badgeValue(props.value)}
-            </Badge>
-          )}
-        </div>
-      )}
+      {open && <div className="filter-field">{props.children}</div>}
+      <Field
+        name={props.name}
+        component={({ input: { value } }) =>
+          value ? (
+            <div
+              className="filter-value"
+              style={!props.ellipsis ? { maxWidth: 'unset' } : undefined}
+            >
+              {props.customValueComponent ? (
+                React.createElement(props.customValueComponent, {
+                  value: value,
+                })
+              ) : (
+                <Badge bg="secondary" className="text-dark">
+                  {props.badgeValue(value)}
+                </Badge>
+              )}
+            </div>
+          ) : null
+        }
+      />
       <span className="svg-icon svg-icon-3 rotate-90 ms-2 lh-base">
         <i className="fa fa-chevron-down" />
       </span>

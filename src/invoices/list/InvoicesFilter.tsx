@@ -6,7 +6,6 @@ import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { getConfig } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 const PureInvoicesFilter = () => {
@@ -41,7 +40,7 @@ const PureInvoicesFilter = () => {
   }, [accountingMode]);
 
   return (
-    <TableFilterFormContainer form="InvoicesFilter">
+    <>
       <TableFilterItem title={translate('State')}>
         <Field
           name="state"
@@ -57,7 +56,7 @@ const PureInvoicesFilter = () => {
           )}
         />
       </TableFilterItem>
-    </TableFilterFormContainer>
+    </>
   );
 };
 

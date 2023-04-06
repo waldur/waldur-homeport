@@ -4,7 +4,6 @@ import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -23,7 +22,7 @@ const PureProviderOfferingUsersFilter: FunctionComponent<{}> = () => {
   );
 
   return (
-    <TableFilterFormContainer form={PROVIDER_OFFERING_USERS_FORM_ID}>
+    <>
       <TableFilterItem
         title={translate('Offering')}
         name="offering"
@@ -31,7 +30,7 @@ const PureProviderOfferingUsersFilter: FunctionComponent<{}> = () => {
       >
         <OfferingAutocomplete offeringFilter={offeringFilter} />
       </TableFilterItem>
-    </TableFilterFormContainer>
+    </>
   );
 };
 

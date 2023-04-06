@@ -8,7 +8,6 @@ import { DebouncedStringField } from '@waldur/form/DebouncedStringField';
 import { translate } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import './UserFilter.scss';
@@ -19,7 +18,7 @@ interface UserFilterProps {
 }
 
 const PureUserFilter: FunctionComponent<UserFilterProps> = (props) => (
-  <TableFilterFormContainer form="userFilter">
+  <>
     <TableFilterItem title={translate('Full name')}>
       <Field
         name="full_name"
@@ -124,7 +123,7 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = (props) => (
         )}
       ></Field>
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 const mapStateToProps = (state: RootState) => ({

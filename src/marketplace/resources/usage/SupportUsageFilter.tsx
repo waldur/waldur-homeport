@@ -12,7 +12,6 @@ import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/Offe
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
 import { RootState } from '@waldur/store/reducers';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { Customer, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
@@ -24,7 +23,7 @@ interface SupportUsageFilterProps {
 const PureSupportUsageFilter: FunctionComponent<SupportUsageFilterProps> = (
   props,
 ) => (
-  <TableFilterFormContainer form={FORM_ID}>
+  <>
     <TableFilterItem
       title={translate('Accounting period')}
       name="accounting_period"
@@ -56,7 +55,7 @@ const PureSupportUsageFilter: FunctionComponent<SupportUsageFilterProps> = (
     >
       <OfferingAutocomplete offeringFilter={{ shared: true }} />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 export const FORM_ID = 'SupportUsageFilter';

@@ -10,11 +10,10 @@ import { DivisionTypeFilter } from '@waldur/customer/list/DivisionTypeFilter';
 import { SelectOrganizationDivisionFieldPure } from '@waldur/customer/list/SelectOrganizationDivisionField';
 import { ServiceProviderFilter } from '@waldur/customer/list/ServiceProviderFilter';
 import { translate } from '@waldur/i18n';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 export const PureSupportCustomerFilter: FunctionComponent = () => (
-  <TableFilterFormContainer form={SUPPORT_CUSTOMERS_FORM_ID}>
+  <>
     <TableFilterItem
       title={translate('Accounting running')}
       name="accounting_is_running"
@@ -39,7 +38,7 @@ export const PureSupportCustomerFilter: FunctionComponent = () => (
     <TableFilterItem title={translate('Division type')} name="division_type">
       <DivisionTypeFilter />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 export const SupportCustomerFilter = reduxForm<{}, any>({

@@ -3,7 +3,6 @@ import { reduxForm } from 'redux-form';
 
 import { PeriodOption } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { AccountingPeriodField } from './AccountingPeriodField';
@@ -15,7 +14,7 @@ interface CustomerListFilterProps {
 
 export const PureCustomerListFilter: FunctionComponent<CustomerListFilterProps> =
   (props) => (
-    <TableFilterFormContainer form="customerListFilter">
+    <>
       <TableFilterItem
         title={translate('Accounting period')}
         name="accounting_period"
@@ -31,7 +30,7 @@ export const PureCustomerListFilter: FunctionComponent<CustomerListFilterProps> 
       >
         <AccountingRunningField />
       </TableFilterItem>
-    </TableFilterFormContainer>
+    </>
   );
 
 export const CustomerListFilter = reduxForm<{}, CustomerListFilterProps>({

@@ -9,7 +9,6 @@ import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { PUBLIC_RESOURCES_LIST_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { RootState } from '@waldur/store/reducers';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import {
   getCustomer,
@@ -25,7 +24,7 @@ import { getStates, ResourceStateFilter } from './ResourceStateFilter';
 type StateProps = ReturnType<typeof mapStateToProps>;
 
 const PurePublicResourcesFilter: FunctionComponent<StateProps> = (props) => (
-  <TableFilterFormContainer form={PUBLIC_RESOURCES_LIST_FILTER_FORM_ID}>
+  <>
     <TableFilterItem
       title={translate('Offering')}
       name="offering"
@@ -54,7 +53,7 @@ const PurePublicResourcesFilter: FunctionComponent<StateProps> = (props) => (
     >
       <ResourceStateFilter />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 const filterSelector = createSelector(

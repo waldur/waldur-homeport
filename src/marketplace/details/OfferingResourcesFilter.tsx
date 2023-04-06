@@ -7,11 +7,10 @@ import {
   getStates,
   ResourceStateFilter,
 } from '@waldur/marketplace/resources/list/ResourceStateFilter';
-import { TableFilterFormContainer } from '@waldur/table/TableFilterFormContainer';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 const PureOfferingResourcesFilter: FunctionComponent = () => (
-  <TableFilterFormContainer form={FILTER_OFFERING_RESOURCE}>
+  <>
     <TableFilterItem
       title={translate('State')}
       name="state"
@@ -20,7 +19,7 @@ const PureOfferingResourcesFilter: FunctionComponent = () => (
     >
       <ResourceStateFilter />
     </TableFilterItem>
-  </TableFilterFormContainer>
+  </>
 );
 
 const enhance = reduxForm({
