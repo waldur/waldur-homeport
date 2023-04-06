@@ -3,13 +3,11 @@ import { FunctionComponent } from 'react';
 import { translate } from '@waldur/i18n';
 import { AddResourceButton } from '@waldur/marketplace/resources/actions/AddResourceButton';
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
+import { IPList } from '@waldur/resource/IPList';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
-import {
-  formatIpList,
-  ResourceSummaryField,
-} from '@waldur/resource/summary/VirtualMachineSummary';
+import { ResourceSummaryField } from '@waldur/resource/summary/VirtualMachineSummary';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 const TableComponent: FunctionComponent<any> = (props) => {
@@ -22,20 +20,20 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => <ResourceName resource={row} />,
         },
         {
-          title: translate('State'),
-          render: ({ row }) => <ResourceState resource={row} />,
+          title: translate('Summary'),
+          render: ({ row }) => <ResourceSummaryField resource={row} />,
         },
         {
           title: translate('Internal IPs'),
-          render: ({ row }) => formatIpList(row.internal_ips),
+          render: ({ row }) => <IPList value={row.internal_ips} />,
         },
         {
           title: translate('External IPs'),
-          render: ({ row }) => formatIpList(row.external_ips),
+          render: ({ row }) => <IPList value={row.external_ips} />,
         },
         {
-          title: translate('Summary'),
-          render: ({ row }) => <ResourceSummaryField resource={row} />,
+          title: translate('State'),
+          render: ({ row }) => <ResourceState resource={row} />,
         },
       ]}
       verboseName={translate('instances')}

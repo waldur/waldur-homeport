@@ -13398,7 +13398,7 @@ msgstr ""
 msgid "{from}-{to} of {all} items"
 msgstr ""
 
-#: src/marketplace/resources/list/CategoryColumnField.tsx
+#: src/resource/IPList.tsx
 msgid "{ip} has been copied"
 msgstr ""
 
