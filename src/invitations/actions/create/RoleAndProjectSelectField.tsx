@@ -43,6 +43,10 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
           role,
           selectedProject || currentProject || customer.projects?.[0],
         );
+
+        if (currentProject) {
+          MenuComponent.hideDropdowns(null);
+        }
       }
       if (!isProjectRole(role)) {
         select(role, null);
@@ -97,7 +101,9 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
                   onClick={() => onClickRole(role)}
                 >
                   <span className="menu-title">{role.title}</span>
-                  {isProjectRole(role) && <span className="menu-arrow"></span>}
+                  {isProjectRole(role) && !currentProject && (
+                    <span className="menu-arrow"></span>
+                  )}
                 </a>
               </div>
             ) : (
@@ -114,7 +120,7 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
             ),
           )}
         </div>
-        {showProjects && (
+        {showProjects && !currentProject && (
           <div className="sub-select d-flex flex-column mw-300px mh-300px">
             <div className="w-100 px-2 border-bottom">
               <input
