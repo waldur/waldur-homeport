@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Badge } from 'react-bootstrap';
-import { reduxForm } from 'redux-form';
+import { useSelector } from 'react-redux';
+import { getFormValues, reduxForm } from 'redux-form';
 
 import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
@@ -9,47 +10,62 @@ import { OrganizationAutocomplete } from '@waldur/marketplace/orders/Organizatio
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { CategoryFilter } from './CategoryFilter';
+import { SUPPORT_RESOURCES_FILTER_FORM_ID } from './constants';
+import { ProjectFilter } from './ProjectFilter';
 import { getStates, ResourceStateFilter } from './ResourceStateFilter';
 
-const PureSupportResourcesFilter: FunctionComponent = () => (
-  <>
-    <TableFilterItem
-      title={translate('Offering')}
-      name="offering"
-      customValueComponent={({ value }) => (
-        <Badge bg="secondary" className="text-dark">
-          {value?.name}
-        </Badge>
-      )}
-    >
-      <OfferingAutocomplete />
-    </TableFilterItem>
-    <TableFilterItem
-      title={translate('Client organization')}
-      name="organization"
-      badgeValue={(value) => value?.name}
-    >
-      <OrganizationAutocomplete />
-    </TableFilterItem>
-    <TableFilterItem
-      title={translate('Category')}
-      name="category"
-      badgeValue={(value) => value?.title}
-    >
-      <CategoryFilter />
-    </TableFilterItem>
-    <TableFilterItem
-      title={translate('State')}
-      name="state"
-      badgeValue={(value) => value?.label}
-    >
-      <ResourceStateFilter />
-    </TableFilterItem>
-  </>
-);
+const organizationSelector = (state) =>
+  getFormValues(SUPPORT_RESOURCES_FILTER_FORM_ID)(state)['organization'];
+
+const PureSupportResourcesFilter: FunctionComponent = () => {
+  const organizationValue = useSelector(organizationSelector);
+  return (
+    <>
+      <TableFilterItem
+        title={translate('Offering')}
+        name="offering"
+        customValueComponent={({ value }) => (
+          <Badge bg="secondary" className="text-dark">
+            {value?.name}
+          </Badge>
+        )}
+      >
+        <OfferingAutocomplete />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Client organization')}
+        name="organization"
+        badgeValue={(value) => value?.name}
+      >
+        <OrganizationAutocomplete />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Project')}
+        name="project"
+        badgeValue={(value) => value?.name}
+      >
+        <ProjectFilter customer_uuid={organizationValue?.uuid} />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Category')}
+        name="category"
+        badgeValue={(value) => value?.title}
+      >
+        <CategoryFilter />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('State')}
+        name="state"
+        badgeValue={(value) => value?.label}
+      >
+        <ResourceStateFilter />
+      </TableFilterItem>
+    </>
+  );
+};
 
 const enhance = reduxForm({
-  form: 'SupportResourcesFilter',
+  form: SUPPORT_RESOURCES_FILTER_FORM_ID,
   onChange: syncFiltersToURL,
   initialValues: getInitialValues({
     state: getStates()[1],
