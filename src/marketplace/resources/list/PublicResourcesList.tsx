@@ -17,7 +17,7 @@ import {
   isOwnerOrStaff,
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+import { Customer, Project } from '@waldur/workspace/types';
 
 import {
   PUBLIC_RESOURCES_LIST_FILTER_FORM_ID,
@@ -31,6 +31,7 @@ import { ResourceStateField } from './ResourceStateField';
 interface ResourceFilter {
   state?: any;
   organization?: Customer;
+  project?: Project;
   category?: Category;
   offering?: Offering;
 }
@@ -128,6 +129,9 @@ const mapPropsToFilter = (props: StateProps) => {
     }
     if (props.filter.organization) {
       filter.customer_uuid = props.filter.organization.uuid;
+    }
+    if (props.filter.project) {
+      filter.project_uuid = props.filter.project.uuid;
     }
     if (props.filter.category) {
       filter.category_uuid = props.filter.category.uuid;
