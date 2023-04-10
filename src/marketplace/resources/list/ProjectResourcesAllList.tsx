@@ -41,6 +41,12 @@ const mapPropsToFilter = createSelector(
       if (filters.category) {
         result.category_uuid = filters.category.uuid;
       }
+      if (filters.runtime_state) {
+        result.runtime_state = filters.runtime_state.value;
+      }
+      if (filters.state) {
+        result.state = filters.state.value;
+      }
     }
     return result;
   },

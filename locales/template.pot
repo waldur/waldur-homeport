@@ -8467,6 +8467,7 @@ msgstr ""
 msgid "Running accounting"
 msgstr ""
 
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Runtime state"
 msgstr ""
@@ -8952,6 +8953,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
+#: src/marketplace/resources/list/RuntimeStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Select state..."
 msgstr ""
@@ -9364,6 +9366,14 @@ msgstr ""
 
 #: src/invitations/GroupInvitationsFilter.tsx
 msgid "Show only active group invitations"
+msgstr ""
+
+#: src/marketplace/resources/list/ShowTerminatedAndErredFilter.tsx
+msgid "Show only erred"
+msgstr ""
+
+#: src/marketplace/resources/list/ShowTerminatedAndErredFilter.tsx
+msgid "Show only terminated"
 msgstr ""
 
 #: src/resource/UserPassword.tsx

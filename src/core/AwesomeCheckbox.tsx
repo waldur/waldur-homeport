@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { Tip } from './Tooltip';
 
 interface AwesomeCheckboxProps {
-  label: React.ReactNode;
+  label?: React.ReactNode;
   value: boolean;
   onChange(value: boolean): void;
   disabled?: boolean;

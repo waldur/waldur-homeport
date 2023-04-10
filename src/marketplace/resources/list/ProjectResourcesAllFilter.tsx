@@ -7,7 +7,8 @@ import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resour
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { CategoryFilter } from './CategoryFilter';
-import { getStates, ResourceStateFilter } from './ResourceStateFilter';
+import { RuntimeStateFilter } from './RuntimeStateFilter';
+import { ShowTerminatedAndErredFilter } from './ShowTerminatedAndErredFilter';
 
 const PureProjectResourcesAllFilter: FunctionComponent<{}> = () => (
   <>
@@ -26,11 +27,18 @@ const PureProjectResourcesAllFilter: FunctionComponent<{}> = () => (
       <CategoryFilter />
     </TableFilterItem>
     <TableFilterItem
+      title={translate('Runtime state')}
+      name="runtime_state"
+      badgeValue={(value) => value?.label}
+    >
+      <RuntimeStateFilter />
+    </TableFilterItem>
+    <TableFilterItem
       title={translate('State')}
       name="state"
       badgeValue={(value) => value?.label}
     >
-      <ResourceStateFilter />
+      <ShowTerminatedAndErredFilter />
     </TableFilterItem>
   </>
 );
@@ -38,9 +46,6 @@ const PureProjectResourcesAllFilter: FunctionComponent<{}> = () => (
 const enhance = reduxForm({
   form: PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
   destroyOnUnmount: false,
-  initialValues: {
-    state: getStates()[1],
-  },
 });
 
 export const ProjectResourcesAllFilter = enhance(PureProjectResourcesAllFilter);
