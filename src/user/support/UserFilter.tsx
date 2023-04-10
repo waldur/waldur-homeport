@@ -17,53 +17,11 @@ interface UserFilterProps {
   nativeNameVisible: boolean;
 }
 
-const PureUserFilter: FunctionComponent<UserFilterProps> = (props) => (
+const PureUserFilter: FunctionComponent<UserFilterProps> = () => (
   <>
-    <TableFilterItem title={translate('Full name')}>
-      <Field
-        name="full_name"
-        component={(fieldProps) => (
-          <DebouncedStringField {...fieldProps} noUpdateOnBlur={true} />
-        )}
-      ></Field>
-    </TableFilterItem>
-    {props.nativeNameVisible && (
-      <TableFilterItem title={translate('Native name')}>
-        <Field
-          name="native_name"
-          component={(fieldProps) => (
-            <DebouncedStringField {...fieldProps} noUpdateOnBlur={true} />
-          )}
-        ></Field>
-      </TableFilterItem>
-    )}
-    <TableFilterItem title={translate('ID code')} name="civil_number">
-      <Field
-        name="civil_number"
-        component={(fieldProps) => (
-          <DebouncedStringField {...fieldProps} noUpdateOnBlur={true} />
-        )}
-      ></Field>
-    </TableFilterItem>
-    <TableFilterItem title={translate('Username')}>
-      <Field
-        name="username"
-        component={(fieldProps) => (
-          <DebouncedStringField {...fieldProps} noUpdateOnBlur={true} />
-        )}
-      ></Field>
-    </TableFilterItem>
     <TableFilterItem title={translate('Organization')}>
       <Field
         name="organization"
-        component={(fieldProps) => (
-          <DebouncedStringField {...fieldProps} noUpdateOnBlur={true} />
-        )}
-      ></Field>
-    </TableFilterItem>
-    <TableFilterItem title={translate('Email')}>
-      <Field
-        name="email"
         component={(fieldProps) => (
           <DebouncedStringField {...fieldProps} noUpdateOnBlur={true} />
         )}

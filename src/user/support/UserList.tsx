@@ -140,6 +140,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('users')}
       enableExport={true}
       actions={<UserTableActions refetch={props.fetch} />}
+      hasQuery={true}
     />
   );
 };
@@ -211,6 +212,7 @@ const TableOptions = {
     row.organization,
     getOrganizationsWhereOwner(row.customer_permissions),
   ],
+  queryField: 'query',
 };
 
 const mapStateToProps = (state: RootState) => ({
