@@ -2914,7 +2914,6 @@ msgstr ""
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
 #: src/user/support/UserDetailsTable.tsx
-#: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Email"
 msgstr ""
@@ -3562,7 +3561,6 @@ msgstr ""
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/slurm/SLURMPluginOptionsForm.tsx
 #: src/user/support/UserDetailsTable.tsx
-#: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Full name"
 msgstr ""
@@ -3824,7 +3822,6 @@ msgstr ""
 
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
-#: src/user/support/UserFilter.tsx
 msgid "ID code"
 msgstr ""
 
@@ -5225,7 +5222,6 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
-#: src/user/support/UserFilter.tsx
 msgid "Native name"
 msgstr ""
 
@@ -12262,7 +12258,6 @@ msgstr ""
 #: src/slurm/marketplace.ts
 #: src/user/UserOfferingList.tsx
 #: src/user/support/UserDetailsTable.tsx
-#: src/user/support/UserFilter.tsx
 #: src/vmware/VMwareForm.tsx
 msgid "Username"
 msgstr ""
