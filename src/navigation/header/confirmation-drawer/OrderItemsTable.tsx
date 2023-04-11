@@ -49,7 +49,9 @@ export const OrderItemsTable: FunctionComponent<any> = (props) => {
       initialSorting={{ field: 'created', mode: 'desc' }}
       initialPageSize={5}
       expandableRow={OrderItemExpandableRow}
-      hoverableRow={OrderItemActionsCell}
+      hoverableRow={({ row }) => (
+        <OrderItemActionsCell row={row} refetch={props.fetch} />
+      )}
       fullWidth={true}
     />
   );

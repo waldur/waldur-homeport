@@ -70,7 +70,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
       title={translate('Order items')}
       verboseName={translate('Order items')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      hoverableRow={OrderItemActionsCell}
+      hoverableRow={({ row }) => (
+        <OrderItemActionsCell row={row} refetch={props.fetch} />
+      )}
       fullWidth={true}
     />
   );

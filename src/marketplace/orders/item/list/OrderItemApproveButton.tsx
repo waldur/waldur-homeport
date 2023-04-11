@@ -15,6 +15,7 @@ import {
 
 interface OrderItemApproveButtonProps {
   uuid: string;
+  refetch: () => void;
 }
 
 export const OrderItemApproveButton: React.FC<OrderItemApproveButtonProps> = (
@@ -40,14 +41,16 @@ export const OrderItemApproveButton: React.FC<OrderItemApproveButtonProps> = (
           newOrderItem,
         ),
       );
+      await props.refetch();
       dispatch(showSuccess(translate('Order item has been approved.')));
     } catch (response) {
       dispatch(
         showErrorResponse(response, translate('Unable to approve order item.')),
       );
     }
+
     setLoading(false);
-  }, [setLoading, dispatch, props.uuid]);
+  }, [setLoading, dispatch, props.uuid, fetch]);
   return (
     <ActionButton
       className="btn btn-sm btn-secondary me-2"
