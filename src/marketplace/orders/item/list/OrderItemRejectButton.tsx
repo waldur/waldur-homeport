@@ -15,6 +15,7 @@ import {
 
 interface OrderItemRejectButtonProps {
   uuid: string;
+  refetch: () => void;
 }
 
 export const OrderItemRejectButton: React.FC<OrderItemRejectButtonProps> = (
@@ -40,6 +41,7 @@ export const OrderItemRejectButton: React.FC<OrderItemRejectButtonProps> = (
           newOrderItem,
         ),
       );
+      await props.refetch();
       dispatch(showSuccess(translate('Order item has been rejected.')));
     } catch (response) {
       dispatch(
@@ -47,7 +49,7 @@ export const OrderItemRejectButton: React.FC<OrderItemRejectButtonProps> = (
       );
     }
     setLoading(false);
-  }, [setLoading, dispatch, props.uuid]);
+  }, [setLoading, dispatch, props.uuid, fetch]);
   return (
     <ActionButton
       className="btn btn-sm btn-secondary"

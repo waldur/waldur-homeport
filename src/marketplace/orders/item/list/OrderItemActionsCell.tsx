@@ -4,7 +4,7 @@ import { SLURM_REMOTE_PLUGIN } from '@waldur/slurm/constants';
 import { OrderItemApproveButton } from './OrderItemApproveButton';
 import { OrderItemRejectButton } from './OrderItemRejectButton';
 
-export const OrderItemActionsCell = ({ row }) => {
+export const OrderItemActionsCell = ({ row, refetch }) => {
   if (
     (row.state === 'pending' &&
       (row.offering_type === REMOTE_OFFERING_TYPE ||
@@ -13,10 +13,10 @@ export const OrderItemActionsCell = ({ row }) => {
   ) {
     return (
       <>
-        <OrderItemApproveButton uuid={row.uuid} />
-        <OrderItemRejectButton uuid={row.uuid} />
+        <OrderItemApproveButton uuid={row.uuid} refetch={refetch} />
+        <OrderItemRejectButton uuid={row.uuid} refetch={refetch} />
       </>
     );
   }
-  return 'N/A';
+  return <>N/A</>;
 };
