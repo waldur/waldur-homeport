@@ -38,7 +38,7 @@ describe('Customer dashboard chart API', () => {
       'EUR200 at 2018-09-01',
     );
     expect(chart.data[chart.data.length - 4].label).toEqual(
-      'EUR0 at 2018-09-01',
+      'EUR0 at 2018-07-01',
     );
   });
 });

@@ -95,12 +95,13 @@ export async function loadCategories(
 export const padMissingValues = (items: DateValuePair[], count) => {
   let end = DateTime.now();
   if (items.length > 0) {
-    end = parseDate(items[items.length - 1].date);
+    end = parseDate(items[0].date);
   }
   while (items.length < count) {
+    end = end.minus({ months: 1 });
     items.unshift({
       value: 0,
-      date: end.minus({ months: 1 }),
+      date: end,
     });
   }
   return items;

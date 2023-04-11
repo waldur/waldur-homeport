@@ -25,7 +25,7 @@ describe('Dashboard chart API', () => {
     expect(result.length).toBe(30);
     expect(result[0].value).toBe(0);
     expect(result[result.length - 3].date).toEqual(
-      DateTime.fromISO('2018-09-01'),
+      DateTime.fromISO('2018-08-01'),
     );
     clear();
   });
