@@ -71,7 +71,7 @@ export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
             ...formData,
             resource: resource.url,
             users: formData.users?.map(({ url }) => url),
-            keys: formData.keys?.split(/\W+/),
+            keys: formData.keys?.split(/\r?\n/),
           });
           dispatch(showSuccess(translate('Robot account has been created.')));
           dispatch(closeModalDialog());
