@@ -4,6 +4,7 @@ import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer'
 import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
+import { RobotAccountActions } from './RobotAccountActions';
 import { RobotAccountExpandable } from './RobotAccountExpandable';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
@@ -20,6 +21,12 @@ export const TableComponent: FunctionComponent<any> = (props) => {
         ) : (
           'N/A'
         ),
+    },
+    {
+      title: translate('Actions'),
+      render: ({ row }) => (
+        <RobotAccountActions refetch={props.fetch} row={row} />
+      ),
     },
   ];
 
