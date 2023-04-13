@@ -16,7 +16,6 @@ msgstr "Konto zostało utworzone."
 msgid "Account removal"
 msgstr "Usunięcie konta"
 
-#: src/invoices/routes.ts
 #: src/invoices/utils.ts
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
@@ -37,6 +36,7 @@ msgid "Activity stream"
 msgstr "Strumień aktywności"
 
 #: src/user/keys/KeyCreateButton.tsx
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Add key"
 msgstr "Dodaj klucz"
 
@@ -52,7 +52,6 @@ msgstr "Dodaj nowy projekt"
 msgid "Add notification"
 msgstr "Dodaj powiadomienie"
 
-#: src/customer/list/OrganizationCreateButton.tsx
 #: src/user/dashboard/CustomerCreateButton.tsx
 msgid "Add organization"
 msgstr "Dodaj organizację"
@@ -74,7 +73,7 @@ msgstr "Dodaj członka zespołu"
 msgid "Add to comparison"
 msgstr "Dodaj do porównania"
 
-#: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
+#: src/customer/team/OfferingPermissionCreateButton.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/AddUserButton.tsx
 msgid "Add user"
@@ -164,10 +163,8 @@ msgstr "Czy na pewno chcesz usunąć klucz?"
 msgid "Attach"
 msgstr "Dołącz"
 
-#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "Attributes"
 msgstr "Atrybuty"
 
@@ -176,7 +173,6 @@ msgid "Attributes are invalid."
 msgstr "Atrybuty są nieprawidłowe."
 
 #: src/auth/events.ts
-#: src/user/api-key/AuthenticationEvents.tsx
 msgid "Authentication events"
 msgstr "Aktywność uwierzytelniania"
 
@@ -184,7 +180,7 @@ msgstr "Aktywność uwierzytelniania"
 msgid "Authentication token"
 msgstr "Token uwierzytelniania"
 
-#: src/notifications/NotificationList.tsx
+#: src/issues/notifications/BroadcastList.tsx
 msgid "Author"
 msgstr "Autor"
 
