@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
+import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
@@ -13,7 +14,12 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Username'),
-      render: ({ row }) => row.username,
+      render: ({ row }) =>
+        row.username ? (
+          <CopyToClipboardContainer value={row.username} />
+        ) : (
+          'N/A'
+        ),
     },
   ];
 
