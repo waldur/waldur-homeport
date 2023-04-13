@@ -70,7 +70,8 @@
       }
     }
 
-    &:hover {
+    &:hover,
+    &:has(.dropdown.show) {
       td.row-actions {
         background: $body-bg;
         opacity: 1;
