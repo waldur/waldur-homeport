@@ -33,6 +33,7 @@ import { ResourceIssuesCard } from './ResourceIssuesCard';
 import { RobotAccountCard } from './RobotAccountCard';
 import { ShortResourceHeader } from './ShortResourceHeader';
 import { StatusCard } from './StatusCard';
+import { UsageCard } from './UsageCard';
 import { VolumeComponents } from './VolumeComponents';
 
 const openstackIcon = require('@waldur/images/appstore/icon-openstack.png');
@@ -177,6 +178,7 @@ export const ResourceDetailsView: FC<any> = ({
                   </ErrorBoundary>
                 )}
                 <RobotAccountCard resource={resource} />
+                <UsageCard resource={resource} />
               </Col>
               <Col md={4} sm={12}>
                 <ResourceAccessCard resource={resource} />
