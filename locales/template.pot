@@ -209,6 +209,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/resources/details/RobotAccountList.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourceActions.tsx
@@ -785,7 +786,7 @@ msgstr ""
 msgid "Are you sure you want to delete the payment?"
 msgstr ""
 
-#: src/rancher/cluster/ResourceDeleteButton.tsx
+#: src/resource/actions/ResourceDeleteButton.tsx
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr ""
 
@@ -1705,8 +1706,8 @@ msgstr ""
 #: src/marketplace/offerings/images/ImagesActions.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
-#: src/rancher/cluster/ResourceDeleteButton.tsx
 #: src/rancher/cluster/create/TenantGroup.tsx
+#: src/resource/actions/ResourceDeleteButton.tsx
 msgid "Confirmation"
 msgstr ""
 
@@ -2399,9 +2400,9 @@ msgstr ""
 #: src/project/DeleteAction.tsx
 #: src/rancher/catalog/CatalogDeleteButton.tsx
 #: src/rancher/cluster/IngressActions.tsx
-#: src/rancher/cluster/ResourceDeleteButton.tsx
 #: src/rancher/cluster/ServiceActions.tsx
 #: src/rancher/cluster/WorkloadActions.tsx
+#: src/resource/actions/ResourceDeleteButton.tsx
 msgid "Delete"
 msgstr ""
 
@@ -10894,7 +10895,7 @@ msgstr ""
 msgid "Unable to delete team member."
 msgstr ""
 
-#: src/rancher/cluster/ResourceDeleteButton.tsx
+#: src/resource/actions/ResourceDeleteButton.tsx
 msgid "Unable to delete {resourceType}."
 msgstr ""
 
@@ -13194,6 +13195,10 @@ msgstr ""
 msgid "reviews"
 msgstr ""
 
+#: src/marketplace/resources/details/RobotAccountDeleteButton.tsx
+msgid "robot account"
+msgstr ""
+
 #: src/marketplace/resources/details/RobotAccountList.tsx
 msgid "robot accounts"
 msgstr ""
@@ -13453,7 +13458,7 @@ msgstr ""
 msgid "{resourceName} resource has been updated successfully."
 msgstr ""
 
-#: src/rancher/cluster/ResourceDeleteButton.tsx
+#: src/resource/actions/ResourceDeleteButton.tsx
 msgid "{resourceType} has been deleted."
 msgstr ""
 

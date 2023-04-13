@@ -12,8 +12,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
-export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
-  const dispatch = useDispatch();
+export const useRobotAccountFields = (resource) => {
   const loadUsers = useCallback(
     (query, prevOptions, page) =>
       getUsers({
@@ -28,40 +27,47 @@ export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
       ),
     [resource],
   );
+
+  return [
+    {
+      name: 'type',
+      label: translate('Type'),
+      maxlength: 5,
+      required: true,
+      type: 'string',
+    },
+    {
+      name: 'username',
+      label: translate('Username'),
+      maxlength: 32,
+      type: 'string',
+      pattern: LATIN_NAME_PATTERN,
+    },
+    {
+      name: 'users',
+      label: translate('Users'),
+      type: 'async_select',
+      loadOptions: loadUsers,
+      getOptionLabel: ({ full_name, email }) => `${full_name} (${email})`,
+      getOptionValue: ({ uuid }) => uuid,
+      required: true,
+      isMulti: true,
+    },
+    {
+      name: 'keys',
+      label: translate('SSH public keys'),
+      type: 'text',
+    },
+  ];
+};
+
+export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
+  const dispatch = useDispatch();
+  const fields = useRobotAccountFields(resource);
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create robot account for marketplace resource')}
-      formFields={[
-        {
-          name: 'type',
-          label: translate('Type'),
-          maxlength: 5,
-          required: true,
-          type: 'string',
-        },
-        {
-          name: 'username',
-          label: translate('Username'),
-          maxlength: 32,
-          type: 'string',
-          pattern: LATIN_NAME_PATTERN,
-        },
-        {
-          name: 'users',
-          label: translate('Users'),
-          type: 'async_select',
-          loadOptions: loadUsers,
-          getOptionLabel: ({ full_name, email }) => `${full_name} (${email})`,
-          getOptionValue: ({ uuid }) => uuid,
-          required: true,
-          isMulti: true,
-        },
-        {
-          name: 'keys',
-          label: translate('SSH public keys'),
-          type: 'text',
-        },
-      ]}
+      formFields={fields}
       initialValues={{
         type: 'cicd',
       }}
@@ -71,7 +77,7 @@ export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
             ...formData,
             resource: resource.url,
             users: formData.users?.map(({ url }) => url),
-            keys: formData.keys?.split(/\r?\n/),
+            keys: formData.keys?.strip().split(/\r?\n/),
           });
           dispatch(showSuccess(translate('Robot account has been created.')));
           dispatch(closeModalDialog());

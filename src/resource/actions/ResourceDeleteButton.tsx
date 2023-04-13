@@ -10,7 +10,8 @@ import { ActionButton } from '@waldur/table/ActionButton';
 export const ResourceDeleteButton: FunctionComponent<{
   apiFunction;
   resourceType;
-}> = ({ apiFunction, resourceType }) => {
+  refetch?;
+}> = ({ apiFunction, resourceType, refetch }) => {
   const dispatch = useDispatch();
   const deleteApp = async () => {
     try {
@@ -31,6 +32,9 @@ export const ResourceDeleteButton: FunctionComponent<{
           translate('{resourceType} has been deleted.', { resourceType }),
         ),
       );
+      if (refetch) {
+        refetch();
+      }
     } catch (response) {
       dispatch(
         showErrorResponse(
