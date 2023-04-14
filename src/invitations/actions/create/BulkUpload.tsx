@@ -62,7 +62,7 @@ export const BulkUpload: FC<OwnProps> = (props) => {
       <h2 className="mb-6">{translate('Bulk upload')}</h2>
       <p className="mb-6">
         {translate(
-          'Upload a CSV file containing the columns email, role and organization in that order. If you are unsure, you can download an example file as a template',
+          'Upload a CSV file containing the columns email, role, project and organization in that order. If you are unsure, you can download an example file as a template',
         )}
         :
       </p>
