@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { ProjectUsersBadge } from '@waldur/project/ProjectUsersBadge';
 import { Field } from '@waldur/resource/summary';
 
 import { ResourceStateField } from '../list/ResourceStateField';
@@ -41,6 +42,7 @@ export const ResourceDetailsHeader: FunctionComponent<ResourceDetailsHeaderProps
                 [{translate('Show project')}]
               </Link>
             </i>
+            <ProjectUsersBadge />
             {resource.description ? <p>{resource.description}</p> : null}
           </div>
           <ResourceActions

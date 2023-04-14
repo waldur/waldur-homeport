@@ -115,6 +115,7 @@ export interface Project {
   backend_id?: string;
   image?: string;
   oecd_fos_2007_code?: string;
+  oecd_fos_2007_label?: string;
   type?: string;
   marketplace_resource_count?: object;
   is_industry?: boolean;
