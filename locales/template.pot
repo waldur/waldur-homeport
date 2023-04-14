@@ -2802,6 +2802,7 @@ msgstr ""
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
+#: src/marketplace/resources/details/RobotAccountEditButton.tsx
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton.tsx
 #: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
@@ -11909,7 +11910,7 @@ msgid "Updating security groups"
 msgstr ""
 
 #: src/invitations/actions/create/BulkUpload.tsx
-msgid "Upload a CSV file containing the columns email, role and organization in that order. If you are unsure, you can download an example file as a template"
+msgid "Upload a CSV file containing the columns email, role, project and organization in that order. If you are unsure, you can download an example file as a template"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
@@ -13196,6 +13197,7 @@ msgid "reviews"
 msgstr ""
 
 #: src/marketplace/resources/details/RobotAccountDeleteButton.tsx
+#: src/marketplace/resources/details/RobotAccountEditDialog.tsx
 msgid "robot account"
 msgstr ""
 
