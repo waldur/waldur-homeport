@@ -2,6 +2,7 @@ import { ENV } from '@waldur/configs/default';
 import {
   deleteById,
   get,
+  getAll,
   getById,
   getList,
   post,
@@ -106,8 +107,10 @@ export const fetchLatestEvents = (project: Project, size: number) =>
   });
 
 export const fetchAllProjectUsers = (projectId: string) =>
-  getList<ProjectTeamUser>(`/projects/${projectId}/users/`, {
-    field: ['uuid', 'full_name', 'email', 'role'],
+  getAll<ProjectTeamUser>(`/projects/${projectId}/users/`, {
+    params: {
+      field: ['uuid', 'full_name', 'email', 'role'],
+    },
   });
 
 export const fetchLast12MonthProjectCosts = (projectId: string) =>
