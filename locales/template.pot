@@ -11285,7 +11285,7 @@ msgstr ""
 msgid "Unable to load user."
 msgstr ""
 
-#: src/project/ProjectProfile.tsx
+#: src/project/ProjectUsersBadge.tsx
 msgid "Unable to load users"
 msgstr ""
 
