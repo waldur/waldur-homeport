@@ -38,6 +38,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('remote accounts')}
       placeholderComponent={<UserOfferingListPlaceholder />}
       showPageSizeSelector={true}
+      hasQuery={true}
     />
   );
 };
@@ -48,6 +49,7 @@ export const TableOptions: TableOptionsType = {
   mapPropsToFilter: (props) => ({
     user_uuid: props.user?.uuid,
   }),
+  queryField: 'query',
 };
 
 const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
