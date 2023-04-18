@@ -28,21 +28,31 @@ $dark-color: #1f2e23;
       height: calc(100vh - 160px) !important;
     }
     .list-group-item {
-      background-color: $dark-light;
-      color: $white;
+      background-color: $white !important;
+      color: $black !important;
       border: 0;
-
       &:hover {
-        background-color: $dark-inverse;
+        background-color: #f6faf7 !important;
         color: unset !important;
       }
       &.active {
-        background-color: $dark-inverse;
+        background-color: #f6faf7 !important;
         color: unset !important;
         z-index: unset;
       }
+      @if isDarkMode() {
+        color: $white !important;
+        background-color: $dark-light !important;
+        &:hover {
+          background-color: $dark-inverse !important;
+        }
+        &.active {
+          background-color: $dark-inverse !important;
+        }
+      }
     }
   }
+
   .offering-listing {
     .scrollbar {
       height: calc(100vh - 225px) !important;
@@ -56,32 +66,29 @@ $dark-color: #1f2e23;
     }
 
     .list-group-item {
-      background-color: $dark-inverse;
-      color: $gray-700 !important;
+      background-color: if(isDarkMode(), $dark-inverse, $white);
+      color: if(isDarkMode(), $gray-700, $white) !important;
       border: 0;
 
       &:hover {
-        background-color: $hover-bg;
+        background-color: if(isDarkMode(), $hover-bg, #f6faf7);
       }
       &.active {
         background-color: if(isDarkMode(), $gray-400, $gray-700);
-
         .title {
-          color: $dark-inverse;
+          color: if(isDarkMode(), $dark-inverse, $white);
         }
         .description {
-          color: $gray-300;
+          color: if(isDarkMode(), $gray-300, $text-muted);
         }
       }
       &.disabled {
-        background-color: $gray-200 !important;
+        background-color: if(isDarkMode(), $gray-200, #f6f8fa) !important;
         opacity: 0.5;
-
         .title {
-          color: $light-inverse !important;
+          color: if(isDarkMode(), $light-inverse, $gray-700) !important;
         }
       }
-
       .description {
         color: $text-muted;
       }
