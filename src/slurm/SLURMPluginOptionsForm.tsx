@@ -49,18 +49,20 @@ export const SLURMPluginOptionsForm: FunctionComponent<{ container }> = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      change(
-        FORM_ID,
-        'plugin_options.username_generation_policy',
-        'service_provider',
-      ),
-    );
+    if (!pluginOptions?.username_generation_policy) {
+      dispatch(
+        change(
+          FORM_ID,
+          'plugin_options.username_generation_policy',
+          'service_provider',
+        ),
+      );
+    }
     dispatch(change(FORM_ID, 'plugin_options.initial_uidnumber', 100000));
     dispatch(
       change(FORM_ID, 'plugin_options.initial_primarygroup_number', 100000),
     );
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (pluginOptions?.username_generation_policy === 'anonymized') {
@@ -90,6 +92,14 @@ export const SLURMPluginOptionsForm: FunctionComponent<{ container }> = ({
             name="username_anonymized_prefix"
             label={translate('Username anonymized prefix')}
           />
+        )}
+      {pluginOptions &&
+        pluginOptions.username_generation_policy === 'service_provider' && (
+          <div className="alert alert-warning" role="alert">
+            {translate(
+              'Warning: Service provider option will clear all usernames of the existing offering users',
+            )}
+          </div>
         )}
       <NumberField
         name="initial_uidnumber"

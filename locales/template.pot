@@ -12559,6 +12559,10 @@ msgstr ""
 msgid "Waldur username"
 msgstr ""
 
+#: src/slurm/SLURMPluginOptionsForm.tsx
+msgid "Warning: Service provider option will clear all usernames of the existing offering users"
+msgstr ""
+
 #: src/user/hooks/HookTypeField.tsx
 msgid "Webhook"
 msgstr ""
