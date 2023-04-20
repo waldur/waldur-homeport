@@ -37,10 +37,10 @@
       }
     }
   }
-  tr {
+  tbody > tr {
     position: relative;
 
-    td.row-actions {
+    > td.row-actions {
       display: flex;
       align-items: center;
       position: absolute;
@@ -72,7 +72,7 @@
 
     &:hover,
     &:has(.dropdown.show) {
-      td.row-actions {
+      > td.row-actions {
         background: $body-bg;
         opacity: 1;
 
