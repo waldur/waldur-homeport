@@ -4,6 +4,7 @@ import { useAsync } from 'react-use';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
+import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
 import { ProviderStatistics } from '../types';
 
@@ -99,11 +100,22 @@ const WidgetItem = ({ item }: { item: ProviderWidget }) => (
 );
 
 export const ProviderWidgets = ({ provider }) => {
+  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
+
   const { loading, error, value } = useAsync<ProviderWidget[]>(() => {
     return getServiceProviderStatistics(provider.uuid).then((res) => {
-      return generateWidgetsData(res.data);
+      const widgets = generateWidgetsData(res.data);
+      if (!showExperimentalUiComponents) {
+        return widgets.filter(
+          (widget) =>
+            !['Open support tickets', 'Active notifications'].includes(
+              widget.title,
+            ),
+        );
+      }
+      return widgets;
     });
-  }, [provider]);
+  }, [provider, showExperimentalUiComponents]);
 
   return (
     <Row>
