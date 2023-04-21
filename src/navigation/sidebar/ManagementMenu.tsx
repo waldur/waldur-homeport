@@ -70,7 +70,7 @@ export const ManagementMenu = () => {
         (checkIsServiceManager(customer, user) || isOwnerOrStaff) && (
           <MenuItem
             title={translate('Provider')}
-            state="marketplace-vendor-offerings"
+            state="marketplace-provider-dashboard"
             params={{ uuid: customer.uuid }}
             activeState="marketplace-provider"
             iconPath={IconProvider}

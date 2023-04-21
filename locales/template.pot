@@ -263,13 +263,29 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
+#: src/providers/dashboard/ProviderWidgets.tsx
+msgid "Active campaigns"
+msgstr ""
+
+#: src/providers/dashboard/ProviderWidgets.tsx
+msgid "Active clients"
+msgstr ""
+
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "Active count"
 msgstr ""
 
+#: src/providers/dashboard/ProviderWidgets.tsx
+msgid "Active notifications"
+msgstr ""
+
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Active plans"
+msgstr ""
+
+#: src/providers/dashboard/ProviderWidgets.tsx
+msgid "Active resources"
 msgstr ""
 
 #: src/user/support/UserActivateButton.tsx
@@ -916,6 +932,7 @@ msgid "Attributes filter"
 msgstr ""
 
 #: src/project/ProjectEventsTimeline.tsx
+#: src/providers/dashboard/ProviderActionLogs.tsx
 #: src/resource/tabs/constants.ts
 #: src/support/SupportTabs.tsx
 #: src/support/routes.ts
@@ -2274,6 +2291,7 @@ msgstr ""
 
 #: src/customer/routes.ts
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/routes.ts
 #: src/project/routes.ts
 #: src/user/routes.ts
 msgid "Dashboard"
@@ -3051,6 +3069,10 @@ msgstr ""
 msgid "Erred"
 msgstr ""
 
+#: src/providers/dashboard/ProviderWidgets.tsx
+msgid "Erred resources"
+msgstr ""
+
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
 msgid "Error"
@@ -3094,6 +3116,10 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
+msgstr ""
+
+#: src/providers/dashboard/api.ts
+msgid "Estimated revenue"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
@@ -4555,6 +4581,7 @@ msgstr ""
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
 #: src/project/ProjectEventsTimeline.tsx
+#: src/providers/dashboard/ProviderActionLogs.tsx
 msgid "Loading"
 msgstr ""
 
@@ -4693,6 +4720,7 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/project/ProjectActions.tsx
+#: src/providers/dashboard/ProviderActions.tsx
 #: src/user/UserActions.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Manage"
@@ -5734,6 +5762,10 @@ msgstr ""
 msgid "Offering managers"
 msgstr ""
 
+#: src/providers/dashboard/ProviderProfile.tsx
+msgid "Offering managers:"
+msgstr ""
+
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/marketplace/resources/details/OfferingDetailsField.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
@@ -5783,6 +5815,7 @@ msgstr ""
 #: src/notifications/NotificationExpandableRow.tsx
 #: src/notifications/NotificationForm.tsx
 #: src/notifications/RecipientsList.tsx
+#: src/providers/dashboard/ProviderDashboard.tsx
 msgid "Offerings"
 msgstr ""
 
@@ -5891,6 +5924,10 @@ msgstr ""
 
 #: src/dashboard/SupportPortalAction.ts
 msgid "Open support portal"
+msgstr ""
+
+#: src/providers/dashboard/ProviderWidgets.tsx
+msgid "Open support tickets"
 msgstr ""
 
 #: src/openstack/analytics/ImagesList.tsx
@@ -6020,6 +6057,10 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/routes.ts
 msgid "Orders"
+msgstr ""
+
+#: src/providers/dashboard/ProviderWidgets.tsx
+msgid "Orders pending approval"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
@@ -9117,6 +9158,7 @@ msgstr ""
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/providers/dashboard/ProviderProfile.tsx
 #: src/slurm/SLURMPluginOptionsForm.tsx
 msgid "Service provider"
 msgstr ""
@@ -10348,6 +10390,10 @@ msgstr ""
 msgid "There are no projects."
 msgstr ""
 
+#: src/providers/dashboard/ProviderActionLogs.tsx
+msgid "There are no provider events."
+msgstr ""
+
 #: src/user/UserOfferingListPlaceholder.tsx
 msgid "There are no remote accounts yet."
 msgstr ""
@@ -10577,6 +10623,10 @@ msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
 msgid "Total price"
+msgstr ""
+
+#: src/providers/dashboard/ProviderWidgets.tsx
+msgid "Total published offerings"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -11079,6 +11129,7 @@ msgstr ""
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
+#: src/providers/dashboard/ProviderWidgets.tsx
 msgid "Unable to load data"
 msgstr ""
 
@@ -11286,6 +11337,7 @@ msgid "Unable to load user."
 msgstr ""
 
 #: src/project/ProjectUsersBadge.tsx
+#: src/providers/dashboard/ProviderProfile.tsx
 msgid "Unable to load users"
 msgstr ""
 
@@ -13608,11 +13660,13 @@ msgstr ""
 
 #: src/customer/dashboard/api.ts
 #: src/project/utils.ts
+#: src/providers/dashboard/api.ts
 msgid "{value} at {date}"
 msgstr ""
 
 #: src/customer/dashboard/api.ts
 #: src/project/utils.ts
+#: src/providers/dashboard/api.ts
 msgid "{value} at {date}, estimated"
 msgstr ""
 
