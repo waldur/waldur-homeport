@@ -3,15 +3,12 @@ import Gravatar from 'react-gravatar';
 
 import { Tip } from '@waldur/core/Tooltip';
 
-interface SymbolItem {
-  email?: string;
-  full_name?: string;
-  imageUrl?: string;
-}
-
 interface SymbolsGroupProps {
-  items: SymbolItem[];
+  items: Object[];
   max?: number;
+  nameKey?: string;
+  emailKey?: string;
+  imageKey?: string;
 }
 
 const colorClasses = [
@@ -29,22 +26,29 @@ const getSymbolColorClass = (index: number) => {
 export const SymbolsGroup: FunctionComponent<SymbolsGroupProps> = ({
   items,
   max,
+  nameKey,
+  emailKey,
+  imageKey,
 }) => (
   <div className="symbol-group symbol-hover">
     {items.slice(0, max).map((item, index) => (
       <div key={index} className="symbol symbol-circle symbol-35px">
-        <Tip key={index} label={item.full_name} id={`customer-${index}`}>
-          {item.imageUrl ? (
-            <img src={item.imageUrl} className="rounded-circle" />
-          ) : item.email ? (
-            <Gravatar email={item.email} size={35} className="rounded-circle" />
+        <Tip key={index} label={item[nameKey]} id={`customer-${index}`}>
+          {item[imageKey] ? (
+            <img src={item[imageKey]} className="rounded-circle" />
+          ) : item[emailKey] ? (
+            <Gravatar
+              email={item[emailKey]}
+              size={35}
+              className="rounded-circle"
+            />
           ) : (
             <div
               className={`symbol-label fs-4 fw-bold ${getSymbolColorClass(
                 index,
               )}`}
             >
-              {item.email ? item.email[0].toUpperCase() : '?'}
+              {item[emailKey] ? item[emailKey][0].toUpperCase() : '?'}
             </div>
           )}
         </Tip>
@@ -62,4 +66,7 @@ export const SymbolsGroup: FunctionComponent<SymbolsGroupProps> = ({
 
 SymbolsGroup.defaultProps = {
   max: 8,
+  nameKey: 'full_name',
+  emailKey: 'email',
+  imageKey: 'imageUrl',
 };

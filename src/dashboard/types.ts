@@ -10,6 +10,7 @@ export interface Chart {
   units?: string;
   current: number | string;
   data: ChartData;
+  changes?: number;
 }
 
 export interface Scope {

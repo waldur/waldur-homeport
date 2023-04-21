@@ -29,6 +29,7 @@ import {
   PluginMetadata,
   ImportableResource,
   Division,
+  OfferingPermission,
 } from '@waldur/marketplace/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -88,6 +89,9 @@ export const getProviderOfferingsCount = (options?: {}) =>
     `${ENV.apiEndpoint}api/marketplace-provider-offerings/`,
     options,
   ).then((response) => parseResultCount(response));
+
+export const getAllOfferingPermissions = (options?: AxiosRequestConfig) =>
+  getAll<OfferingPermission>('/marketplace-offering-permissions/', options);
 
 export const getResourcesCount = (options?: {}) =>
   Axios.head(`${ENV.apiEndpoint}api/marketplace-resources/`, options).then(

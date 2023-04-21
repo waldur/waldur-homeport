@@ -18,6 +18,10 @@ const ResourceDetailsPage = lazyComponent(
   () => import('@waldur/marketplace/resources/details/ResourceDetailsPage'),
   'ResourceDetailsPage',
 );
+const ProviderDashboard = lazyComponent(
+  () => import('@waldur/providers/dashboard/ProviderDashboard'),
+  'ProviderDashboard',
+);
 const Layout = lazyComponent(
   () => import('@waldur/navigation/Layout'),
   'Layout',
@@ -392,6 +396,17 @@ export const states: StateDeclaration[] = [
         deps: ['$transition$'],
       },
     ],
+  },
+
+  {
+    name: 'marketplace-provider-dashboard',
+    url: 'dashboard/',
+    component: ProviderDashboard,
+    parent: 'marketplace-provider',
+    data: {
+      breadcrumb: () => translate('Dashboard'),
+      priority: 100,
+    },
   },
 
   {
