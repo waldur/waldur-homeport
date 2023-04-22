@@ -16,7 +16,7 @@ msgstr "10 - Zeer positief"
 msgid "1 - Very negative"
 msgstr "1 - Zeer negatief"
 
-#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+#: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
 msgid "API secret code:"
 msgstr "API geheime code:"
 
