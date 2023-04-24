@@ -7,6 +7,7 @@ import {
   ToggleComponent,
 } from '@waldur/metronic/assets/ts/components';
 import { useLayout } from '@waldur/metronic/layout/core';
+import { WorkspaceStorage } from '@waldur/workspace/WorkspaceStorage';
 
 import { ContextSelectorToggle } from '../workspace/context-selector/ContextSelectorToggle';
 
@@ -22,6 +23,18 @@ export function getSidebarToggle() {
   return ToggleComponent.getInstance(menuElement as HTMLElement);
 }
 
+function storeMenuAccordionsStatus(menuElement, event: 'show' | 'hide') {
+  const accordions = menuElement.getElementsByClassName('menu-accordion');
+  const newStates = [];
+  for (let i = 0; i < accordions.length; i++) {
+    const txt = accordions
+      .item(i)
+      .querySelector('.menu-accordion > .menu-link > .menu-title').textContent;
+    newStates.push({ title: txt, value: event === 'show' ? 1 : 0 });
+  }
+  WorkspaceStorage.setSidebarStatus(newStates);
+}
+
 export const Sidebar: React.FC = (props) => {
   const sidebarRef = useRef<HTMLElement>(undefined);
   const layout = useLayout();
@@ -34,15 +47,18 @@ export const Sidebar: React.FC = (props) => {
       MenuComponent.reinitialization();
 
       // Expand sidebar when project selector is shown
-      const menuElement = document.querySelector('.context-selector');
-      if (!menuElement) {
+      const contextSelectorElement =
+        document.querySelector('.context-selector');
+      if (!contextSelectorElement) {
         return;
       }
-      const menu = MenuComponent.getInstance(menuElement as HTMLElement);
-      if (!menu) {
+      const contextSelector = MenuComponent.getInstance(
+        contextSelectorElement as HTMLElement,
+      );
+      if (!contextSelector) {
         return;
       }
-      menu.on('kt.menu.dropdown.shown', function () {
+      contextSelector.on('kt.menu.dropdown.shown', function () {
         if (document.body.hasAttribute('data-kt-aside-minimize')) {
           layout.setLayout({
             aside: {
@@ -52,6 +68,48 @@ export const Sidebar: React.FC = (props) => {
           });
         }
       });
+    }
+  }, [sidebarRef, layout]);
+
+  useEffect(() => {
+    if (sidebarRef?.current) {
+      // Preserve sidebar collapsed/expanded status (in local storage)
+      const menuElement = document.querySelector('#kt_aside_menu');
+      if (!menuElement) {
+        return;
+      }
+      const menu = MenuComponent.getInstance(menuElement as HTMLElement);
+      if (!menu) {
+        return;
+      }
+      menu.on('kt.menu.accordion.shown', () => {
+        storeMenuAccordionsStatus(menuElement, 'show');
+      });
+      menu.on('kt.menu.accordion.hidden', () => {
+        storeMenuAccordionsStatus(menuElement, 'hide');
+      });
+
+      // Render preserved sidebar
+      const accordionsStatus = WorkspaceStorage.getSidebarStatus();
+      if (!accordionsStatus) return;
+      accordionsStatus
+        .filter((item) => item.value === 1)
+        .forEach((item) => {
+          const accordions =
+            menuElement.getElementsByClassName('menu-accordion');
+          for (let i = 0; i < accordions.length; i++) {
+            const acc = accordions.item(i);
+            const txt = acc.querySelector(
+              '.menu-accordion > .menu-link > .menu-title',
+            ).textContent;
+            if (item.title === txt) {
+              const toggle = menu.getItemToggleElement(acc) as HTMLElement;
+              toggle.click();
+              break;
+            }
+          }
+        });
+      WorkspaceStorage.clearSidebarStatus();
     }
   }, [sidebarRef, layout]);
 

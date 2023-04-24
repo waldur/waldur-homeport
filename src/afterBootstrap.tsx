@@ -8,6 +8,7 @@ import { LanguageUtilsService } from './i18n/LanguageUtilsService';
 import { initConfig } from './store/config';
 import store from './store/store';
 import { attachTransitions } from './transitions';
+import { initWorkspace } from './workspace/WorkspaceStorage';
 
 function initSentry() {
   if (ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_DSN) {
@@ -38,4 +39,5 @@ export function afterBootstrap() {
   store.dispatch(initConfig(ENV));
   LanguageUtilsService.checkLanguage();
   attachTransitions();
+  initWorkspace();
 }
