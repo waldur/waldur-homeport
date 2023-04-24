@@ -120,6 +120,7 @@ interface FreeIPAConfiguration {
 
 interface SupportConfiguration {
   ENABLED: boolean;
+  DISPLAY_REQUEST_TYPE: boolean;
 }
 
 export interface PluginConfiguration {

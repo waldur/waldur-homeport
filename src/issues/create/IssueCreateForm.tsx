@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
@@ -86,11 +87,18 @@ export const IssueCreateForm = enhance(
         ) : (
           <>
             <IssueHeader issue={issue} />
-            {!issue.type && (
-              <Form.Group className="mb-5">
-                <Form.Label>{translate('Request type')}</Form.Label>
-                <TypeField issueTypes={issueTypes} isDisabled={submitting} />
-              </Form.Group>
+            {!ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE && (
+              <>
+                {!issue.type && (
+                  <Form.Group className="mb-5">
+                    <Form.Label>{translate('Request type')}</Form.Label>
+                    <TypeField
+                      issueTypes={issueTypes}
+                      isDisabled={submitting}
+                    />
+                  </Form.Group>
+                )}
+              </>
             )}
             {filteredTemplates.length > 0 && (
               <Form.Group className="mb-5">

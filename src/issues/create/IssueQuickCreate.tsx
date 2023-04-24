@@ -5,6 +5,7 @@ import { Field, reduxForm, formValueSelector, change } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { ENV } from '@waldur/configs/default';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { formatResourceShort } from '@waldur/marketplace/utils';
@@ -203,7 +204,9 @@ export const IssueQuickCreate = reduxForm<IssueFormData>({
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          <TypeGroup disabled={submitting} />
+          {!ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE ? (
+            <TypeGroup disabled={submitting} />
+          ) : null}
           <SummaryGroup disabled={submitting} />
           <DescriptionGroup disabled={submitting} />
           <OrganizationGroup disabled={submitting} />
