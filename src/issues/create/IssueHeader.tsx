@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { FormGroup } from 'react-bootstrap';
 
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
 export const IssueHeader: FunctionComponent<{ issue }> = ({ issue }) => {
@@ -38,8 +39,7 @@ export const IssueHeader: FunctionComponent<{ issue }> = ({ issue }) => {
           {issue.resource.name}
         </FormGroup>
       )}
-
-      {issue.type && (
+      {!ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE && issue.type && (
         <FormGroup className="mb-5">
           <strong>{translate('Request type')}: </strong>
           {translate(issue.type)}
