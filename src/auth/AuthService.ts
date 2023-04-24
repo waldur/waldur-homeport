@@ -28,6 +28,7 @@ import { showSuccess } from '@waldur/store/notify';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
+import { initWorkspace } from '@waldur/workspace/WorkspaceStorage';
 
 import {
   getAuthenticationMethod,
@@ -46,6 +47,7 @@ function loginSuccess(response) {
   setAuthenticationMethod(response.data.method);
   setAuthHeader(response.data.token);
   store.dispatch(setCurrentUser(response.data));
+  initWorkspace();
 }
 
 function isAuthenticated() {
@@ -78,7 +80,10 @@ async function signin(username, password) {
 }
 
 function storeRedirect() {
-  if (router.globals.params?.toState) {
+  if (
+    router.globals.params?.toState &&
+    router.globals.params?.toState !== 'profile.details'
+  ) {
     setRedirect({
       toState: router.globals.params.toState,
       toParams: router.globals.params.toParams,
