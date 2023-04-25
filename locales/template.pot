@@ -2672,24 +2672,6 @@ msgstr ""
 msgid "Display name"
 msgstr ""
 
-#: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/SelectOrganizationDivisionField.tsx
-#: src/customer/list/SupportCustomerFilter.tsx
-#: src/user/affiliations/OrganizationsList.tsx
-msgid "Division"
-msgstr ""
-
-#: src/customer/list/SupportCustomerFilter.tsx
-msgid "Division type"
-msgstr ""
-
-#: src/marketplace/category/filters/AttributeFilterDivision.tsx
-#: src/marketplace/category/store/selectors.ts
-#: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
-msgid "Divisions"
-msgstr ""
-
 #: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
 msgid "Do not configure a gateway for this subnet"
 msgstr ""
@@ -5397,14 +5379,6 @@ msgstr ""
 msgid "No countries"
 msgstr ""
 
-#: src/customer/list/DivisionTypeFilter.tsx
-msgid "No division types"
-msgstr ""
-
-#: src/customer/list/SelectOrganizationDivisionField.tsx
-msgid "No divisions"
-msgstr ""
-
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 msgid "No end date"
 msgstr ""
@@ -5431,6 +5405,14 @@ msgstr ""
 
 #: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
 msgid "No organization"
+msgstr ""
+
+#: src/customer/list/OrganizationGroupFilter.tsx
+msgid "No organization group types"
+msgstr ""
+
+#: src/customer/list/SelectOrganizationGroupField.tsx
+msgid "No organization groups"
 msgstr ""
 
 #: src/issues/create/CallerGroup.tsx
@@ -6163,6 +6145,24 @@ msgstr ""
 msgid "Organization events"
 msgstr ""
 
+#: src/customer/create/WizardFormFirstPage.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/SelectOrganizationGroupField.tsx
+#: src/customer/list/SupportCustomerFilter.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+msgid "Organization group"
+msgstr ""
+
+#: src/customer/list/SupportCustomerFilter.tsx
+msgid "Organization group type"
+msgstr ""
+
+#: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
+#: src/marketplace/category/store/selectors.ts
+#: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
+msgid "Organization groups"
+msgstr ""
+
 #: src/customer/create/CustomerCreateDialog.tsx
 msgid "Organization has been created."
 msgstr ""
@@ -6265,8 +6265,8 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: src/customer/divisions/CustomersDivisionsChart.tsx
-msgid "Organizations by divisions"
+#: src/customer/organization-groups/CustomersOrganizationGroupsChart.tsx
+msgid "Organizations by organization groups"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
@@ -8584,7 +8584,7 @@ msgid "Sankey diagram"
 msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/customer/divisions/utils.ts
+#: src/customer/organization-groups/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
@@ -8848,14 +8848,6 @@ msgstr ""
 msgid "Select dates"
 msgstr ""
 
-#: src/customer/list/DivisionTypeFilter.tsx
-msgid "Select division type..."
-msgstr ""
-
-#: src/customer/list/SelectOrganizationDivisionField.tsx
-msgid "Select division..."
-msgstr ""
-
 #: src/issues/feedback/EvaluationSelectField.tsx
 msgid "Select evaluation..."
 msgstr ""
@@ -8888,6 +8880,14 @@ msgstr ""
 
 #: src/navigation/workspace/context-selector/ContextSelectorToggle.tsx
 msgid "Select organization"
+msgstr ""
+
+#: src/customer/list/OrganizationGroupFilter.tsx
+msgid "Select organization group type..."
+msgstr ""
+
+#: src/customer/list/SelectOrganizationGroupField.tsx
+msgid "Select organization group..."
 msgstr ""
 
 #: src/customer/team/OrganizationRoleSelectField.tsx
@@ -11121,7 +11121,7 @@ msgstr ""
 msgid "Unable to load customer."
 msgstr ""
 
-#: src/customer/divisions/CustomersDivisionsChart.tsx
+#: src/customer/organization-groups/CustomersOrganizationGroupsChart.tsx
 #: src/customer/team/OfferingNamesManagedByUser.tsx
 #: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
@@ -11162,15 +11162,6 @@ msgstr ""
 
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 msgid "Unable to load detail."
-msgstr ""
-
-#: src/customer/create/WizardFormFirstPage.tsx
-msgid "Unable to load divisions"
-msgstr ""
-
-#: src/marketplace/offerings/actions/SetAccessPolicyDialog.tsx
-#: src/marketplace/offerings/details/PagePolicies.tsx
-msgid "Unable to load divisions."
 msgstr ""
 
 #: src/marketplace/offerings/create/WysiwygEditor.tsx
@@ -11249,6 +11240,15 @@ msgstr ""
 
 #: src/marketplace/orders/OrderDetails.tsx
 msgid "Unable to load order details."
+msgstr ""
+
+#: src/customer/create/WizardFormFirstPage.tsx
+msgid "Unable to load organization groups"
+msgstr ""
+
+#: src/marketplace/offerings/actions/SetAccessPolicyDialog.tsx
+#: src/marketplace/offerings/details/PagePolicies.tsx
+msgid "Unable to load organization groups."
 msgstr ""
 
 #: src/customer/list/CustomerExpandableRow.tsx
@@ -12352,6 +12352,7 @@ msgstr ""
 
 #: src/customer/routes.ts
 #: src/issues/routes.ts
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
 #: src/marketplace/resources/details/RobotAccountExpandable.tsx

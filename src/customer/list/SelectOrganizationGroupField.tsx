@@ -3,12 +3,12 @@ import { Form } from 'react-bootstrap';
 import { components } from 'react-select';
 import { Field } from 'redux-form';
 
-import { organizationDivisionAutocomplete } from '@waldur/customer/list/api';
+import { organizationGroupAutocomplete } from '@waldur/customer/list/api';
 import { RIGHT_ARROW_HTML } from '@waldur/customer/list/constants';
 import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
-interface SelectOrganizationDivisionFieldProps {
+interface SelectOrganizationGroupFieldProps {
   isFilterForm?: boolean;
 }
 
@@ -33,20 +33,20 @@ const SingleValue: FunctionComponent<any> = (props) => {
   );
 };
 
-export const SelectOrganizationDivisionFieldPure: FunctionComponent = () => (
+export const SelectOrganizationGroupFieldPure: FunctionComponent = () => (
   <Field
     name="division"
     component={(fieldProps) => (
       <AsyncPaginate
-        placeholder={translate('Select division...')}
-        loadOptions={organizationDivisionAutocomplete}
+        placeholder={translate('Select organization group...')}
+        loadOptions={organizationGroupAutocomplete}
         components={{ Option, SingleValue }}
         defaultOptions
         getOptionValue={(option) => option.url}
         getOptionLabel={(option) => option.name}
         value={fieldProps.input.value}
         onChange={(value) => fieldProps.input.onChange(value)}
-        noOptionsMessage={() => translate('No divisions')}
+        noOptionsMessage={() => translate('No organization groups')}
         isClearable={true}
         additional={{
           page: 1,
@@ -56,14 +56,14 @@ export const SelectOrganizationDivisionFieldPure: FunctionComponent = () => (
   />
 );
 
-export const SelectOrganizationDivisionField: FunctionComponent<SelectOrganizationDivisionFieldProps> =
+export const SelectOrganizationGroupField: FunctionComponent<SelectOrganizationGroupFieldProps> =
   (props) => (
     <Form.Group className={props.isFilterForm ? ' col-sm-3' : ''}>
       <Form.Label className={props.isFilterForm ? '' : 'd-none'}>
-        {translate('Division')}
+        {translate('Organization group')}
       </Form.Label>
       <div className={props.isFilterForm ? '' : 'mb-7'}>
-        <SelectOrganizationDivisionFieldPure />
+        <SelectOrganizationGroupFieldPure />
       </div>
     </Form.Group>
   );

@@ -5,7 +5,7 @@ xdescribe('Customers', () => {
       .setToken()
 
       .intercept('GET', '/api/divisions/?name=&page=1&page_size=10&o=name', {
-        fixture: 'support/divisions.json',
+        fixture: 'support/organization-groups.json',
       })
       .intercept(
         'GET',

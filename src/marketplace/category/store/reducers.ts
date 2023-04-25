@@ -1,4 +1,8 @@
-import { Division, Offering, Section } from '@waldur/marketplace/types';
+import {
+  OrganizationGroup,
+  Offering,
+  Section,
+} from '@waldur/marketplace/types';
 
 import * as constants from './constants';
 
@@ -110,27 +114,27 @@ export const categoryOfferingsReducer = (
   }
 };
 
-interface DivisionsState {
-  items: Division[];
+interface OrganizationGroupsState {
+  items: OrganizationGroup[];
   loading: boolean;
   loaded: boolean;
   erred: boolean;
 }
 
-const DIVISIONS_INITIAL_STATE: DivisionsState = {
+const ORGANIZATION_GROUPS_INITIAL_STATE: OrganizationGroupsState = {
   items: [],
   loading: false,
   loaded: false,
   erred: false,
 };
 
-export const divisionsReducer = (
-  state = DIVISIONS_INITIAL_STATE,
+export const organizationGroupsReducer = (
+  state = ORGANIZATION_GROUPS_INITIAL_STATE,
   action,
-): DivisionsState => {
+): OrganizationGroupsState => {
   const { type, payload } = action;
   switch (type) {
-    case constants.LOAD_DIVISIONS_START:
+    case constants.LOAD_ORGANIZATION_GROUPS_START:
       return {
         ...state,
         loading: true,
@@ -138,7 +142,7 @@ export const divisionsReducer = (
         erred: false,
       };
 
-    case constants.LOAD_DIVISIONS_SUCCESS:
+    case constants.LOAD_ORGANIZATION_GROUPS_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -147,7 +151,7 @@ export const divisionsReducer = (
         items: payload.items,
       };
 
-    case constants.LOAD_DIVISIONS_ERROR:
+    case constants.LOAD_ORGANIZATION_GROUPS_ERROR:
       return {
         ...state,
         loading: false,

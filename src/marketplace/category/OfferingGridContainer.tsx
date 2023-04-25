@@ -12,7 +12,7 @@ import * as actions from '../landing/store/actions';
 import {
   loadOfferingsStart,
   loadDataStart,
-  loadDivisionsStart,
+  loadOrganizationGroupsStart,
 } from './store/actions';
 import { MARKETPLACE_FILTER_FORM } from './store/constants';
 import {
@@ -45,8 +45,8 @@ const mapDispatchToProps = (dispatch) => ({
   loadOfferings: () => {
     dispatch(loadOfferingsStart());
   },
-  loadDivisions: () => {
-    dispatch(loadDivisionsStart());
+  loadOrganizationGroups: () => {
+    dispatch(loadOrganizationGroupsStart());
   },
 });
 
@@ -60,7 +60,7 @@ class OfferingGridWrapper extends Component<OfferingGridWrapperProps> {
   componentDidMount() {
     this.props.getCategories();
     this.props.loadCategories();
-    this.props.loadDivisions();
+    this.props.loadOrganizationGroups();
     this.loadOfferings();
   }
 

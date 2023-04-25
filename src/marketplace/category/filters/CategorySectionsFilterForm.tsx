@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 import { reduxForm, reset } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { AttributeFilterDivision } from '@waldur/marketplace/category/filters/AttributeFilterDivision';
+import { AttributeFilterOrganizationGroup } from '@waldur/marketplace/category/filters/AttributeFilterOrganizationGroup';
 import { AttributeFilterSection } from '@waldur/marketplace/category/filters/AttributeFilterSection';
 import { MARKETPLACE_FILTER_FORM } from '@waldur/marketplace/category/store/constants';
 import { prepareAttributeSections } from '@waldur/marketplace/category/utils';
-import { Division, Section } from '@waldur/marketplace/types';
+import { OrganizationGroup, Section } from '@waldur/marketplace/types';
 
 interface OwnProps {
-  divisions: Division[];
+  organizationGroups: OrganizationGroup[];
   sections: Section[];
   closeDropdown: () => void;
 }
@@ -28,8 +28,10 @@ const PureCategorySectionsFilterForm: FunctionComponent<any> = (props) => {
   return (
     <div className="categorySectionsFilterForm shadow-lg">
       <form>
-        {props.divisions?.length > 0 && (
-          <AttributeFilterDivision divisions={props.divisions} />
+        {props.organizationGroups?.length > 0 && (
+          <AttributeFilterOrganizationGroup
+            organizationGroups={props.organizationGroups}
+          />
         )}
         {prepareAttributeSections(props.sections).map(
           (section: Section, index: number) => (

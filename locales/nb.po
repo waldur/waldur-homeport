@@ -2122,14 +2122,14 @@ msgstr "Visningsnavn"
 
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/SelectOrganizationDivisionField.tsx
+#: src/customer/list/SelectOrganizationGroupField.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 #: src/user/affiliations/OrganizationsList.tsx
-msgid "Division"
+msgid "Organization group"
 msgstr "Divisjon"
 
 #: src/customer/list/SupportCustomerFilter.tsx
-msgid "Division type"
+msgid "Organization group type"
 msgstr "Divisjonstype"
 
 #: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
@@ -4340,12 +4340,12 @@ msgstr "Ingen kategorier"
 msgid "No countries"
 msgstr "Ingen land"
 
-#: src/customer/list/DivisionTypeFilter.tsx
-msgid "No division types"
+#: src/customer/list/OrganizationGroupFilter.tsx
+msgid "No organization group types"
 msgstr "Ingen divisjonstyper"
 
-#: src/customer/list/SelectOrganizationDivisionField.tsx
-msgid "No divisions"
+#: src/customer/list/SelectOrganizationGroupField.tsx
+msgid "No organization groups"
 msgstr "Ingen divisjoner"
 
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
@@ -4976,12 +4976,12 @@ msgstr "Organisasjoner"
 msgid "Organizations ({count})"
 msgstr "Organisasjoner ({count})"
 
-#: src/customer/divisions/CustomersDivisionsChart.tsx
-msgid "Organizations by divisions"
+#: src/customer/organizationGroups/CustomersOrganizationGroupsChart.tsx
+msgid "Organizations by organization groups"
 msgstr "Organisasjoner etter divisjoner"
 
-#: src/customer/divisions/CustomersDivisionsContainer.tsx
-msgid "Organizations divisions"
+#: src/customer/organizationGroups/CustomersOrganizationGroupsContainer.tsx
+msgid "Organizations organization groups"
 msgstr "Organisasjoner divisjoner"
 
 #: src/invoices/growth/utils.ts
@@ -6770,7 +6770,7 @@ msgid "Sankey diagram"
 msgstr "Sankey-diagram"
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/customer/divisions/utils.ts
+#: src/customer/organizationGroups/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
@@ -6965,12 +6965,12 @@ msgstr "Velg land..."
 msgid "Select dates"
 msgstr "Velg datoer"
 
-#: src/customer/list/SelectOrganizationDivisionField.tsx
-msgid "Select division..."
+#: src/customer/list/SelectOrganizationGroupField.tsx
+msgid "Select organization group..."
 msgstr "Velg divisjon..."
 
-#: src/customer/list/DivisionTypeFilter.tsx
-msgid "Select division type..."
+#: src/customer/list/OrganizationGroupFilter.tsx
+msgid "Select organization group type..."
 msgstr "Velg divisjonstype..."
 
 #: src/issues/feedback/EvaluationSelectField.tsx
@@ -8785,7 +8785,7 @@ msgstr "Kan ikke laste inn kunden."
 msgid "Unable to load customer support satisfaction overall rating."
 msgstr "Kan ikke laste inn generell vurdering av kundestøttetilfredshet."
 
-#: src/customer/divisions/CustomersDivisionsChart.tsx
+#: src/customer/organizationGroups/CustomersOrganizationGroupsChart.tsx
 #: src/customer/team/OfferingNamesManagedByUser.tsx
 #: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx

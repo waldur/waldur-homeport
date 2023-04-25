@@ -5,7 +5,7 @@ import { useAsync } from 'react-use';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import {
-  getAllOrganizationDivisions,
+  getAllOrganizationGroups,
   getCategory,
 } from '@waldur/marketplace/common/api';
 import { CategorySectionsFilterForm } from '@waldur/marketplace/offerings/service-providers/CategorySectionsFilterForm';
@@ -30,10 +30,10 @@ export const FilterDropdownContent: FunctionComponent<FilterDropdownContentProps
       value: filterData,
     } = useAsync(async () => {
       const sections = await getCategorySections(categoryUuid);
-      const divisions = await getAllOrganizationDivisions();
+      const organizationGroups = await getAllOrganizationGroups();
       return {
         sections,
-        divisions,
+        organizationGroups,
       };
     }, [categoryUuid]);
 
@@ -47,11 +47,12 @@ export const FilterDropdownContent: FunctionComponent<FilterDropdownContentProps
           <LoadingSpinner />
         ) : error ? (
           <p> {translate('Unable to load category sections.')}</p>
-        ) : !filterData?.sections?.length && !filterData?.divisions?.length ? (
+        ) : !filterData?.sections?.length &&
+          !filterData?.organizationGroups?.length ? (
           <p> {translate("Category doesn't contain sections.")}</p>
         ) : filterData ? (
           <CategorySectionsFilterForm
-            divisions={filterData.divisions}
+            organizationGroups={filterData.organizationGroups}
             sections={filterData.sections}
             closeDropdown={closeDropdown}
           />

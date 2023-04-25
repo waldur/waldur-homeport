@@ -9,7 +9,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { ImageField } from '@waldur/form/ImageField';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
-import { getAllOrganizationDivisions } from '@waldur/marketplace/common/api';
+import { getAllOrganizationGroups } from '@waldur/marketplace/common/api';
 
 import { DomainGroup } from './DomainGroup';
 import { InputGroup } from './InputGroup';
@@ -20,10 +20,10 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => {
   const {
     loading,
     error,
-    value: divisions,
+    value: organizationGroups,
   } = useAsync(
     () =>
-      getAllOrganizationDivisions().then((items) => {
+      getAllOrganizationGroups().then((items) => {
         return items.map((item) => ({
           name: item.name,
           value: item.url,
@@ -39,7 +39,7 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => {
           {loading ? (
             <LoadingSpinner />
           ) : error ? (
-            <>{translate('Unable to load divisions')}</>
+            <>{translate('Unable to load organization groups')}</>
           ) : (
             <>
               <InputGroup
@@ -64,8 +64,8 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => {
                 name="division"
                 floating={false}
                 component={SelectField}
-                label={translate('Division')}
-                options={divisions}
+                label={translate('Organization group')}
+                options={organizationGroups}
                 getOptionLabel={(option) => option.name}
               />
               <InputGroup

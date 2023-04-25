@@ -3,7 +3,7 @@ import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { getAllOrganizationDivisions } from '@waldur/marketplace/common/api';
+import { getAllOrganizationGroups } from '@waldur/marketplace/common/api';
 import { SetAccessPolicyDialogForm } from '@waldur/marketplace/offerings/actions/SetAccessPolicyDialogForm';
 import { Offering } from '@waldur/marketplace/types';
 
@@ -16,15 +16,15 @@ export const SetAccessPolicyDialog: FunctionComponent<SetAccessPolicyDialogProps
     const {
       loading,
       error,
-      value: divisions,
-    } = useAsync(async () => await getAllOrganizationDivisions(), [resolve]);
+      value: organizationGroups,
+    } = useAsync(async () => await getAllOrganizationGroups(), [resolve]);
     return loading ? (
       <LoadingSpinner />
     ) : error ? (
-      <>{translate('Unable to load divisions.')}</>
+      <>{translate('Unable to load organization groups.')}</>
     ) : (
       <SetAccessPolicyDialogForm
-        divisions={divisions}
+        organizationGroups={organizationGroups}
         offering={resolve.offering}
       />
     );

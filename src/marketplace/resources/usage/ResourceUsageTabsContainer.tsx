@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { generateColors } from '@waldur/customer/divisions/utils';
+import { generateColors } from '@waldur/customer/organization-groups/utils';
 import { translate } from '@waldur/i18n';
 import { ResourceMetaInfo } from '@waldur/marketplace/resources/usage/ResourceMetaInfo';
 import { ResourceUsageTabs } from '@waldur/marketplace/resources/usage/ResourceUsageTabs';

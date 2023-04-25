@@ -1,27 +1,32 @@
 import { ARCHIVED, DRAFT } from '@waldur/marketplace/offerings/store/constants';
-import { Division, Offering } from '@waldur/marketplace/types';
+import { OrganizationGroup, Offering } from '@waldur/marketplace/types';
 import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
 import { User } from '@waldur/workspace/types';
 
-export const getInitialValuesForSetAccessPolicyForm = (divisions) => {
-  const divisionsUuids = divisions.map((division) => division.uuid);
-  return divisionsUuids.reduce((acc, curr) => ((acc[curr] = true), acc), {});
+export const getInitialValuesForSetAccessPolicyForm = (organizationGroups) => {
+  const organizationGroupsUuids = organizationGroups.map(
+    (organizationGroup) => organizationGroup.uuid,
+  );
+  return organizationGroupsUuids.reduce(
+    (acc, curr) => ((acc[curr] = true), acc),
+    {},
+  );
 };
 
 export const formatRequestBodyForSetAccessPolicyForm = (
   formData,
-  divisions: Division[],
+  organizationGroups: OrganizationGroup[],
 ): string[] => {
-  const divisionsUrls: string[] = [];
+  const organizationGroupsUrls: string[] = [];
   Object.entries(formData).forEach(([key, value]) => {
     if (value) {
-      const selectedDivision = divisions.find(
-        (division) => division.uuid === key,
+      const selectedOrganizationGroups = organizationGroups.find(
+        (organizationGroup) => organizationGroup.uuid === key,
       );
-      divisionsUrls.push(selectedDivision?.url);
+      organizationGroupsUrls.push(selectedOrganizationGroups?.url);
     }
   });
-  return divisionsUrls;
+  return organizationGroupsUrls;
 };
 
 export const isVisible = (

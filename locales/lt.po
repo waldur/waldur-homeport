@@ -2118,14 +2118,14 @@ msgstr "Rodomas pavadinimas"
 
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/SelectOrganizationDivisionField.tsx
+#: src/customer/list/SelectOrganizationGroupField.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 #: src/user/affiliations/OrganizationsList.tsx
-msgid "Division"
+msgid "Organization group"
 msgstr "Skyrius"
 
 #: src/customer/list/SupportCustomerFilter.tsx
-msgid "Division type"
+msgid "Organization group type"
 msgstr "Padalinio tipas"
 
 #: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
@@ -4340,12 +4340,12 @@ msgstr "Nėra kategorijų"
 msgid "No countries"
 msgstr "Nėra šalių"
 
-#: src/customer/list/DivisionTypeFilter.tsx
-msgid "No division types"
+#: src/customer/list/OrganizationGroupFilter.tsx
+msgid "No organization group types"
 msgstr "Nėra skirstymo tipų"
 
-#: src/customer/list/SelectOrganizationDivisionField.tsx
-msgid "No divisions"
+#: src/customer/list/SelectOrganizationGroupField.tsx
+msgid "No organization groups"
 msgstr "Nėra padalinių"
 
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
@@ -4976,12 +4976,12 @@ msgstr "Organizacijos"
 msgid "Organizations ({count})"
 msgstr "Organizacijos ({count})"
 
-#: src/customer/divisions/CustomersDivisionsChart.tsx
-msgid "Organizations by divisions"
+#: src/customer/organizationGroups/CustomersOrganizationGroupsChart.tsx
+msgid "Organizations by organization groups"
 msgstr "Organizacijos pagal padalinius"
 
-#: src/customer/divisions/CustomersDivisionsContainer.tsx
-msgid "Organizations divisions"
+#: src/customer/organizationGroups/CustomersOrganizationGroupsContainer.tsx
+msgid "Organizations organization groups"
 msgstr "Organizacijų padaliniai"
 
 #: src/invoices/growth/utils.ts
@@ -6770,7 +6770,7 @@ msgid "Sankey diagram"
 msgstr "Sankey diagrama"
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/customer/divisions/utils.ts
+#: src/customer/organizationGroups/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
@@ -6965,12 +6965,12 @@ msgstr "Pasirinkite šalį..."
 msgid "Select dates"
 msgstr "Pasirinkite datas"
 
-#: src/customer/list/SelectOrganizationDivisionField.tsx
-msgid "Select division..."
+#: src/customer/list/SelectOrganizationGroupField.tsx
+msgid "Select organization group..."
 msgstr "Pasirinkti padalinį..."
 
-#: src/customer/list/DivisionTypeFilter.tsx
-msgid "Select division type..."
+#: src/customer/list/OrganizationGroupFilter.tsx
+msgid "Select organization group type..."
 msgstr "Pasirinkti padalinio tipą..."
 
 #: src/issues/feedback/EvaluationSelectField.tsx
@@ -8785,7 +8785,7 @@ msgstr "Neįmanoma įkelti kliento."
 msgid "Unable to load customer support satisfaction overall rating."
 msgstr "Neįmanoma įkelti klientų palaikymo pasitenkinimo bendro įvertinimo."
 
-#: src/customer/divisions/CustomersDivisionsChart.tsx
+#: src/customer/organizationGroups/CustomersOrganizationGroupsChart.tsx
 #: src/customer/team/OfferingNamesManagedByUser.tsx
 #: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx

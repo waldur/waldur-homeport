@@ -2118,15 +2118,15 @@ msgstr "Nom d'affichage"
 
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/SelectOrganizationDivisionField.tsx
+#: src/customer/list/SelectOrganizationGroupField.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 #: src/user/affiliations/OrganizationsList.tsx
-msgid "Division"
-msgstr "Division"
+msgid "Organization group"
+msgstr "Organization group"
 
 #: src/customer/list/SupportCustomerFilter.tsx
-msgid "Division type"
-msgstr "Type de division"
+msgid "Organization group type"
+msgstr "Type de organization group"
 
 #: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
 msgid "Do not configure a gateway for this subnet"
@@ -4336,13 +4336,13 @@ msgstr "Aucune catégorie"
 msgid "No countries"
 msgstr "Aucun pays"
 
-#: src/customer/list/DivisionTypeFilter.tsx
-msgid "No division types"
-msgstr "Aucun type de division"
+#: src/customer/list/OrganizationGroupFilter.tsx
+msgid "No organization group types"
+msgstr "Aucun type de organization group"
 
-#: src/customer/list/SelectOrganizationDivisionField.tsx
-msgid "No divisions"
-msgstr "Aucune division"
+#: src/customer/list/SelectOrganizationGroupField.tsx
+msgid "No organization groups"
+msgstr "Aucune organization group"
 
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
 msgid "No entries to show here"
@@ -4972,13 +4972,13 @@ msgstr "Organisations"
 msgid "Organizations ({count})"
 msgstr "Organisations ({count})"
 
-#: src/customer/divisions/CustomersDivisionsChart.tsx
-msgid "Organizations by divisions"
-msgstr "Organisations par divisions"
+#: src/customer/organizationGroups/CustomersOrganizationGroupsChart.tsx
+msgid "Organizations by organization groups"
+msgstr "Organisations par organization groups"
 
-#: src/customer/divisions/CustomersDivisionsContainer.tsx
-msgid "Organizations divisions"
-msgstr "Divisions des organisations"
+#: src/customer/organizationGroups/CustomersOrganizationGroupsContainer.tsx
+msgid "Organizations organization groups"
+msgstr "Organization groups des organisations"
 
 #: src/invoices/growth/utils.ts
 msgid "Others"
@@ -6766,7 +6766,7 @@ msgid "Sankey diagram"
 msgstr "Diagramme Sankey"
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/customer/divisions/utils.ts
+#: src/customer/organizationGroups/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
@@ -6961,13 +6961,13 @@ msgstr "Sélectionner le pays..."
 msgid "Select dates"
 msgstr "Sélectionner des dates"
 
-#: src/customer/list/SelectOrganizationDivisionField.tsx
-msgid "Select division..."
-msgstr "Sélectionnez la division..."
+#: src/customer/list/SelectOrganizationGroupField.tsx
+msgid "Select organization group..."
+msgstr "Sélectionnez la organization group..."
 
-#: src/customer/list/DivisionTypeFilter.tsx
-msgid "Select division type..."
-msgstr "Sélectionnez le type de division ..."
+#: src/customer/list/OrganizationGroupFilter.tsx
+msgid "Select organization group type..."
+msgstr "Sélectionnez le type de organization group ..."
 
 #: src/issues/feedback/EvaluationSelectField.tsx
 msgid "Select evaluation..."
@@ -8781,7 +8781,7 @@ msgstr "Impossible de charger le client."
 msgid "Unable to load customer support satisfaction overall rating."
 msgstr "Impossible de charger la note globale de satisfaction du support client."
 
-#: src/customer/divisions/CustomersDivisionsChart.tsx
+#: src/customer/organizationGroups/CustomersOrganizationGroupsChart.tsx
 #: src/customer/team/OfferingNamesManagedByUser.tsx
 #: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx

@@ -7,7 +7,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import {
-  getAllOrganizationDivisions,
+  getAllOrganizationGroups,
   updateProviderOfferingAccessPolicy,
 } from '@waldur/marketplace/common/api';
 import { SetAccessPolicyFormContainer } from '@waldur/marketplace/offerings/actions/SetAccessPolicyFormContainer';
@@ -20,7 +20,7 @@ import { showError, showSuccess } from '@waldur/store/notify';
 
 export const PagePolicies = connect<{}, {}, { offering }>((_, props) => ({
   initialValues: getInitialValuesForSetAccessPolicyForm(
-    props.offering.divisions,
+    props.offering.organizationGroups,
   ),
 }))(
   reduxForm<{}, any>({
@@ -38,13 +38,16 @@ export const PagePolicies = connect<{}, {}, { offering }>((_, props) => ({
       const {
         loading,
         error,
-        value: divisions,
-      } = useAsync(async () => await getAllOrganizationDivisions(), [offering]);
+        value: organizationGroups,
+      } = useAsync(async () => await getAllOrganizationGroups(), [offering]);
       const updateOfferingHandler = async (formData) => {
         try {
           await updateProviderOfferingAccessPolicy(
             offering.uuid,
-            formatRequestBodyForSetAccessPolicyForm(formData, divisions),
+            formatRequestBodyForSetAccessPolicyForm(
+              formData,
+              organizationGroups,
+            ),
           );
           await refreshOffering();
           dispatch(showSuccess(translate('Offering has been updated.')));
@@ -66,10 +69,10 @@ export const PagePolicies = connect<{}, {}, { offering }>((_, props) => ({
                 {loading ? (
                   <LoadingSpinner />
                 ) : error ? (
-                  <>{translate('Unable to load divisions.')}</>
+                  <>{translate('Unable to load organization groups.')}</>
                 ) : (
                   <SetAccessPolicyFormContainer
-                    divisions={divisions}
+                    organizationGroups={organizationGroups}
                     submitting={submitting}
                   />
                 )}

@@ -2,7 +2,7 @@ import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import {
   getCategory,
-  getAllOrganizationDivisions,
+  getAllOrganizationGroups,
   getAllPublicOfferings,
 } from '@waldur/marketplace/common/api';
 import { router } from '@waldur/router';
@@ -38,17 +38,20 @@ function* loadOfferings() {
   }
 }
 
-function* loadDivisions() {
+function* loadOrganizationGroups() {
   try {
-    const divisions = yield call(getAllOrganizationDivisions);
-    yield put(actions.loadDivisionsSuccess(divisions));
+    const organizationGroups = yield call(getAllOrganizationGroups);
+    yield put(actions.loadOrganizationGroupsSuccess(organizationGroups));
   } catch {
-    yield put(actions.loadDivisionsError());
+    yield put(actions.loadOrganizationGroupsError());
   }
 }
 
 export default function* () {
   yield takeEvery(constants.LOAD_DATA_START, loadData);
   yield takeLatest(constants.LOAD_OFFERINGS_START, loadOfferings);
-  yield takeLatest(constants.LOAD_DIVISIONS_START, loadDivisions);
+  yield takeLatest(
+    constants.LOAD_ORGANIZATION_GROUPS_START,
+    loadOrganizationGroups,
+  );
 }

@@ -6,8 +6,8 @@ import {
   getOptions as AccountingRunningFieldOptions,
 } from '@waldur/customer/list/AccountingRunningField';
 import { SUPPORT_CUSTOMERS_FORM_ID } from '@waldur/customer/list/constants';
-import { DivisionTypeFilter } from '@waldur/customer/list/DivisionTypeFilter';
-import { SelectOrganizationDivisionFieldPure } from '@waldur/customer/list/SelectOrganizationDivisionField';
+import { OrganizationGroupFilter } from '@waldur/customer/list/OrganizationGroupFilter';
+import { SelectOrganizationGroupFieldPure } from '@waldur/customer/list/SelectOrganizationGroupField';
 import { ServiceProviderFilter } from '@waldur/customer/list/ServiceProviderFilter';
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
@@ -29,14 +29,17 @@ export const PureSupportCustomerFilter: FunctionComponent = () => (
       <ServiceProviderFilter />
     </TableFilterItem>
     <TableFilterItem
-      title={translate('Division')}
+      title={translate('Organization group')}
       name="division"
       badgeValue={(value) => value?.name}
     >
-      <SelectOrganizationDivisionFieldPure />
+      <SelectOrganizationGroupFieldPure />
     </TableFilterItem>
-    <TableFilterItem title={translate('Division type')} name="division_type">
-      <DivisionTypeFilter />
+    <TableFilterItem
+      title={translate('Organization group type')}
+      name="division_type"
+    >
+      <OrganizationGroupFilter />
     </TableFilterItem>
   </>
 );

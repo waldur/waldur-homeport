@@ -28,7 +28,7 @@ import {
   CategoryComponentUsage,
   PluginMetadata,
   ImportableResource,
-  Division,
+  OrganizationGroup,
   OfferingPermission,
 } from '@waldur/marketplace/types';
 import { Customer, Project } from '@waldur/workspace/types';
@@ -262,16 +262,16 @@ export const getCustomerList = (params?: {}) =>
 export const getProjectList = (params?: {}) =>
   getSelectData<Project>('/projects/', params);
 
-export const getOrganizationDivisionList = (params?: {}) =>
+export const getOrganizationGroupList = (params?: {}) =>
   getSelectData('/divisions/', params);
 
-export const getDivisionTypesList = (params?: {}) =>
+export const getOrganizationGroupTypesList = (params?: {}) =>
   getSelectData('/division-types/', params);
 
-export const getAllOrganizationDivisions = (options?) =>
-  getAll<Division>('/divisions/', options);
+export const getAllOrganizationGroups = (options?) =>
+  getAll<OrganizationGroup>('/divisions/', options);
 
-export const getCustomersDivisionUuids = (
+export const getCustomersOrganizationGroupUuids = (
   accounting_is_running: boolean,
   options?,
 ) =>
@@ -425,10 +425,10 @@ export const runOfferingScript = (
 
 export const updateProviderOfferingAccessPolicy = (
   offeringUuid: string,
-  divisions: string[],
+  organizationGroups: string[],
 ) =>
   post(`/marketplace-provider-offerings/${offeringUuid}/update_divisions/`, {
-    divisions,
+    divisions: organizationGroups,
   });
 
 export const updateProviderOfferingLogo = (offeringUuid: string, formData) =>

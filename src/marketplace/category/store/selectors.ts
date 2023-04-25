@@ -32,12 +32,14 @@ export const isOfferingsLoading = (state: RootState) =>
 export const isOfferingsLoaded = (state: RootState) =>
   getCategoryOfferings(state).loaded;
 
-export const getDivisions = (state: RootState) => state.marketplace.divisions;
-export const isDivisionsLoading = (state: RootState) =>
-  getDivisions(state).loading;
-export const isDivisionsLoaded = (state: RootState) =>
-  getDivisions(state).loaded;
-export const isDivisionsErred = (state: RootState) => getDivisions(state).erred;
+export const getOrganizationGroups = (state: RootState) =>
+  state.marketplace.organizationGroups;
+export const isOrganizationGroupsLoading = (state: RootState) =>
+  getOrganizationGroups(state).loading;
+export const isOrganizationGroupsLoaded = (state: RootState) =>
+  getOrganizationGroups(state).loaded;
+export const isOrganizationGroupsErred = (state: RootState) =>
+  getOrganizationGroups(state).erred;
 
 export const categoryRouteState = (state: RootState) => {
   const workspace = getWorkspace(state);
@@ -98,21 +100,21 @@ export const getFiltersUserFrindly = createSelector(
 
     const formattedFilters = [];
     // Divisions
-    const selectedDivisions = [];
+    const selectedOrganizationGroups = [];
     for (const key of Object.keys(filters)) {
       if (key.startsWith('division')) {
-        selectedDivisions.push({
+        selectedOrganizationGroups.push({
           key,
           title: filters[key],
         });
       }
     }
-    if (selectedDivisions.length > 0) {
+    if (selectedOrganizationGroups.length > 0) {
       formattedFilters.push({
-        key: 'divisions',
-        title: translate('Divisions'),
+        key: 'organization-groups',
+        title: translate('Organization groups'),
         type: 'list',
-        value: selectedDivisions,
+        value: selectedOrganizationGroups,
       });
     }
     // Sections
