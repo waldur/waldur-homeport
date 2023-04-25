@@ -1,4 +1,5 @@
 import { shallow, ShallowWrapper } from 'enzyme';
+import { Button } from 'react-bootstrap';
 
 import { CancelButton } from './CancelButton';
 
@@ -6,9 +7,9 @@ const renderButton = (options = {}) =>
   shallow(<CancelButton disabled={false} label="Cancel" {...options} />);
 
 const isDisabled = (wrapper: ShallowWrapper) =>
-  wrapper.find('button').prop('disabled');
+  wrapper.find(Button).prop('disabled');
 const clickButton = (wrapper: ShallowWrapper) =>
-  wrapper.find('button').simulate('click');
+  wrapper.find(Button).simulate('click');
 
 describe('CancelButton', () => {
   it('renders enabled button', () => {
