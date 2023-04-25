@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
+import { Button, ButtonProps } from 'react-bootstrap';
 
-interface CancelButtonProps {
+interface CancelButtonProps extends ButtonProps {
   disabled?: boolean;
   label: string;
   onClick?(): void;
@@ -9,8 +10,8 @@ interface CancelButtonProps {
 export const CancelButton: FunctionComponent<CancelButtonProps> = (props) => {
   const { label, ...rest } = props;
   return (
-    <button className="btn btn-link" type="button" {...rest}>
+    <Button variant="link" type="button" {...rest}>
       {label}
-    </button>
+    </Button>
   );
 };

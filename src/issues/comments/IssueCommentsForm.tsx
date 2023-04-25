@@ -36,13 +36,18 @@ export const IssueCommentsForm: FunctionComponent<PureIssueCommentsFormProps> =
           <FormContainer submitting={submitting} clearOnUnmount={false}>
             <TextField name={constants.FORM_FIELDS.comment} />
           </FormContainer>
-          <div className="comments-form__controls mt-3">
+          <div className="comments-form__controls mt-3 text-end">
             <SubmitButton
               submitting={submitting}
               disabled={uiDisabled || pristine}
               label={translate('Add')}
+              className="btn btn-primary me-3"
             />
-            <CancelButton onClick={onCancel} label={translate('Cancel')} />
+            <CancelButton
+              onClick={onCancel}
+              label={translate('Cancel')}
+              variant="secondary"
+            />
           </div>
         </form>
       </div>
