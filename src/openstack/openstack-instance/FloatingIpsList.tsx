@@ -2,10 +2,9 @@ import { FunctionComponent } from 'react';
 
 import { getById } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
+import { UpdateFloatingIpsActionButton } from '@waldur/openstack/openstack-instance/actions/update-floating-ips/UpdateFloatingIpsActionButton';
 import { VirtualMachine } from '@waldur/resource/types';
 import { Table, connectTable } from '@waldur/table';
-
-import { UpdateFloatingIpsAction } from './actions/update-floating-ips/UpdateFloatingIpsAction';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   return (
@@ -30,7 +29,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('floating IPs')}
-      actions={<UpdateFloatingIpsAction resource={props.resource} />}
+      actions={<UpdateFloatingIpsActionButton resource={props.resource} />}
     />
   );
 };
