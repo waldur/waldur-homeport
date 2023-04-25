@@ -81,7 +81,7 @@ export const EmailsListGroup = ({
                   return (
                     <Fragment key={user}>
                       <tr>
-                        <td className="align-middle">
+                        <td>
                           <Field
                             name={`${user}.email`}
                             required={true}
