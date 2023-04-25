@@ -23,7 +23,7 @@ export const OrganizationDetails: FunctionComponent<OrganizationDetailsProps> =
             value={props.customer.abbreviation}
           />
           <Field
-            label={translate('Division')}
+            label={translate('Organization group')}
             value={
               <>
                 {props.customer.division_parent_name && (

@@ -49,17 +49,17 @@ export const loadOfferingsError = () => ({
   type: constants.LOAD_OFFERINGS_ERROR,
 });
 
-export const loadDivisionsStart = () => ({
-  type: constants.LOAD_DIVISIONS_START,
+export const loadOrganizationGroupsStart = () => ({
+  type: constants.LOAD_ORGANIZATION_GROUPS_START,
 });
 
-export const loadDivisionsSuccess = (items: Offering[]) => ({
-  type: constants.LOAD_DIVISIONS_SUCCESS,
+export const loadOrganizationGroupsSuccess = (items: Offering[]) => ({
+  type: constants.LOAD_ORGANIZATION_GROUPS_SUCCESS,
   payload: {
     items,
   },
 });
 
-export const loadDivisionsError = () => ({
-  type: constants.LOAD_DIVISIONS_ERROR,
+export const loadOrganizationGroupsError = () => ({
+  type: constants.LOAD_ORGANIZATION_GROUPS_ERROR,
 });

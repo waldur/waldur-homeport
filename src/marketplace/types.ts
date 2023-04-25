@@ -88,7 +88,7 @@ interface OfferingGoogleCalendar {
   public: boolean;
 }
 
-export interface Division {
+export interface OrganizationGroup {
   uuid: string;
   name: string;
   type: string;
@@ -140,7 +140,7 @@ export interface Offering extends GeolocationPoint {
   google_calendar_link?: string;
   image?: string;
   googlecalendar?: OfferingGoogleCalendar;
-  divisions: Division[];
+  organizationGroups: OrganizationGroup[];
   parent_description?: string;
   parent_name?: string;
 }
@@ -237,7 +237,7 @@ export interface ServiceProvider {
   customer_abbreviation?: string;
   customer_country?: string;
   country?: string;
-  division?: string;
+  organizationGroup?: string;
 }
 
 export interface OfferingConfigurationFormProps extends InjectedFormProps {

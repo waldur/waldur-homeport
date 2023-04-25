@@ -7,7 +7,7 @@ import { getFormValues, reduxForm } from 'redux-form';
 import { required } from '@waldur/core/validators';
 import { ORGANIZATION_UPDATE_FORM_ID } from '@waldur/customer/list/constants';
 import { SelectCountryField } from '@waldur/customer/list/SelectCountryField';
-import { SelectOrganizationDivisionField } from '@waldur/customer/list/SelectOrganizationDivisionField';
+import { SelectOrganizationGroupField } from '@waldur/customer/list/SelectOrganizationGroupField';
 import { updateOrganization } from '@waldur/customer/list/store/actions';
 import { getInitialValuesOfOrganizationUpdateForm } from '@waldur/customer/list/utils';
 import {
@@ -49,7 +49,7 @@ const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
         maxLength={12}
       />
 
-      <SelectOrganizationDivisionField />
+      <SelectOrganizationGroupField />
 
       <TextField
         name="contact_details"

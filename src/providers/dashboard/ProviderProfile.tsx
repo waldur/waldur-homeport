@@ -51,7 +51,7 @@ export const ProviderProfile = ({
                 </Stack>
                 <Stack direction="horizontal" className="gap-6 text-muted">
                   <span>{translate('Service provider')}</span>
-                  <span>{provider.division}</span>
+                  <span>{provider.organizationGroup}</span>
                 </Stack>
               </Col>
               <Col xs="auto">

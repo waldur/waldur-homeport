@@ -4,7 +4,7 @@ import { cartReducer } from '@waldur/marketplace/cart/store/reducer';
 import {
   categoryReducer,
   categoryOfferingsReducer,
-  divisionsReducer,
+  organizationGroupsReducer,
 } from '@waldur/marketplace/category/store/reducers';
 import { comparisonReducer } from '@waldur/marketplace/compare/store/reducers';
 import { landingReducer } from '@waldur/marketplace/landing/store/reducer';
@@ -20,6 +20,6 @@ export const reducer = combineReducers({
   orders: ordersReducer,
   category: categoryReducer,
   categoryOfferings: categoryOfferingsReducer,
-  divisions: divisionsReducer,
+  organizationGroups: organizationGroupsReducer,
   serviceProvider: serviceProviderReducer,
 });

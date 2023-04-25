@@ -2,8 +2,8 @@ import { ENV } from '@waldur/configs/default';
 import { get, sendForm } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import {
-  getDivisionTypesList,
-  getOrganizationDivisionList,
+  getOrganizationGroupTypesList,
+  getOrganizationGroupList,
 } from '@waldur/marketplace/common/api';
 
 interface TotalStats {
@@ -36,7 +36,7 @@ export const updateOrganization = (formData) => {
   );
 };
 
-export const organizationDivisionAutocomplete = async (
+export const organizationGroupAutocomplete = async (
   query: string,
   prevOptions,
   { page },
@@ -47,11 +47,11 @@ export const organizationDivisionAutocomplete = async (
     page_size: ENV.pageSize,
     o: 'name',
   };
-  const response = await getOrganizationDivisionList(params);
+  const response = await getOrganizationGroupList(params);
   return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
 };
 
-export const divisionTypeAutocomplete = async (
+export const organizationGroupTypeAutocomplete = async (
   query: string,
   prevOptions,
   { page },
@@ -62,6 +62,6 @@ export const divisionTypeAutocomplete = async (
     page_size: ENV.pageSize,
     o: 'name',
   };
-  const response = await getDivisionTypesList(params);
+  const response = await getOrganizationGroupTypesList(params);
   return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
 };

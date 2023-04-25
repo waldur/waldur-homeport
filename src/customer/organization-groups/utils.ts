@@ -30,7 +30,7 @@ const getEChartOption = (chartData) => ({
     feature: {
       saveAsImage: {
         title: translate('Save'),
-        name: `Organizations-by-divisions-chart-${DateTime.now().toISODate()}`,
+        name: `Organizations-by-organization-groups-chart-${DateTime.now().toISODate()}`,
         show: true,
       },
     },
@@ -49,7 +49,7 @@ const getEChartOption = (chartData) => ({
 export const generateColors = (amount: number, colorRangeInfo): string[] =>
   interpolateColors(amount, interpolateInferno, colorRangeInfo);
 
-const buildDivisionsHierarchy = (array) => {
+const buildOrganizationGroupsHierarchy = (array) => {
   const COLORS = generateColors(array.length, {
     colorStart: 0.2,
     colorEnd: 0.8,
@@ -90,33 +90,36 @@ const buildDivisionsHierarchy = (array) => {
   return roots;
 };
 
-const addCustomersWithoutDivision = (data, customers) => {
-  const totalNumberOfCustomersWithoutDivision = customers.reduce(
+const addCustomersWithoutOrganizationGroup = (data, customers) => {
+  const totalNumberOfCustomersWithoutOrganizationGroup = customers.reduce(
     (acc, customer) => (!customer.division_uuid ? acc + 1 : acc),
     0,
   );
   data.push({
     name: 'Uncategorized',
-    value: totalNumberOfCustomersWithoutDivision,
+    value: totalNumberOfCustomersWithoutOrganizationGroup,
     itemStyle: {
       color: '#C0C0C0',
     },
   });
 };
 
-const addValueToDivisions = (divisions, customers) =>
-  divisions.map((division) => {
+const addValueToOrganizationGroups = (organizationGroups, customers) =>
+  organizationGroups.map((organizationGroup) => {
     const countOccurrences = customers.reduce(
       (acc, customer) =>
-        customer.division_uuid === division.uuid ? acc + 1 : acc,
+        customer.division_uuid === organizationGroup.uuid ? acc + 1 : acc,
       0,
     );
-    return { ...division, value: countOccurrences };
+    return { ...organizationGroup, value: countOccurrences };
   });
 
-export const getEChartOptions = ({ divisions, customers }) => {
-  divisions = addValueToDivisions(divisions, customers);
-  const data = buildDivisionsHierarchy(divisions);
-  addCustomersWithoutDivision(data, customers);
+export const getEChartOptions = ({ organizationGroups, customers }) => {
+  organizationGroups = addValueToOrganizationGroups(
+    organizationGroups,
+    customers,
+  );
+  const data = buildOrganizationGroupsHierarchy(organizationGroups);
+  addCustomersWithoutOrganizationGroup(data, customers);
   return getEChartOption(data);
 };

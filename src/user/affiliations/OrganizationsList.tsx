@@ -45,7 +45,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => <>{row.email || DASH_ESCAPE_CODE}</>,
     },
     {
-      title: translate('Division'),
+      title: translate('Organization group'),
       render: ({ row }) => <>{row.division_name || DASH_ESCAPE_CODE}</>,
     },
     {
@@ -109,7 +109,13 @@ export const getUserOrganizationsList = (
       row.projects_count || 0,
       formatDateTime(row.created),
     ],
-    exportFields: ['Name', 'Email', 'Division', 'Projects', 'Created'],
+    exportFields: [
+      'Name',
+      'Email',
+      'Organization group',
+      'Projects',
+      'Created',
+    ],
     ...extraOptions,
   };
 

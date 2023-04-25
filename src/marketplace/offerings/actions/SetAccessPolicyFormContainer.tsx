@@ -3,22 +3,22 @@ import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { FormContainer } from '@waldur/form';
-import { Division } from '@waldur/marketplace/types';
+import { OrganizationGroup } from '@waldur/marketplace/types';
 
 interface SetAccessPolicyFormContainerProps {
-  divisions: Division[];
+  organizationGroups: OrganizationGroup[];
   submitting: boolean;
 }
 
 export const SetAccessPolicyFormContainer: FunctionComponent<SetAccessPolicyFormContainerProps> =
-  ({ divisions, submitting }) => (
+  ({ organizationGroups, submitting }) => (
     <FormContainer submitting={submitting}>
-      {divisions.map((division) => (
+      {organizationGroups.map((organizationGroup) => (
         <Field
-          key={division.uuid}
-          name={division.uuid}
+          key={organizationGroup.uuid}
+          name={organizationGroup.uuid}
           component={(prop) => (
-            <AwesomeCheckbox label={division.name} {...prop.input} />
+            <AwesomeCheckbox label={organizationGroup.name} {...prop.input} />
           )}
         />
       ))}

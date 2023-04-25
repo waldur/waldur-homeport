@@ -8,9 +8,12 @@ import { SUPPORT_WORKSPACE } from '@waldur/workspace/types';
 
 import { hasSupport } from './hooks';
 
-const CustomersDivisionsContainer = lazyComponent(
-  () => import('@waldur/customer/divisions/CustomersDivisionsContainer'),
-  'CustomersDivisionsContainer',
+const CustomersOrganizationGroupsContainer = lazyComponent(
+  () =>
+    import(
+      '@waldur/customer/organization-groups/CustomersOrganizationGroupsContainer'
+    ),
+  'CustomersOrganizationGroupsContainer',
 );
 const CustomerListContainer = lazyComponent(
   () => import('@waldur/customer/list/CustomerListContainer'),
@@ -168,7 +171,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'reporting.organizations-divisions',
     url: 'organizations-divisions/',
-    component: CustomersDivisionsContainer,
+    component: CustomersOrganizationGroupsContainer,
     data: {
       feature: 'support.customers_list',
       breadcrumb: () => translate('Organizations'),

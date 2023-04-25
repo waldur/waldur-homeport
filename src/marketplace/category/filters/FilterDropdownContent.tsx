@@ -18,7 +18,9 @@ export const FilterDropdownContent: FunctionComponent<FilterDropdownContentProps
     const loading = useSelector(selectors.isLoading);
     const error = useSelector(selectors.isErred);
     const sections = useSelector(selectors.getSections);
-    const divisions = useSelector(selectors.getDivisions).items;
+    const organizationGroups = useSelector(
+      selectors.getOrganizationGroups,
+    ).items;
 
     return (
       <div
@@ -32,13 +34,13 @@ export const FilterDropdownContent: FunctionComponent<FilterDropdownContentProps
           <p className="text-gray-600 fs-4 fw-bold p-8 shadow-sm text-center">
             {translate('Unable to load category sections.')}
           </p>
-        ) : !sections?.length && !divisions?.length ? (
+        ) : !sections?.length && !organizationGroups?.length ? (
           <p className="text-gray-600 fs-4 fw-bold p-8 shadow-sm text-center">
             {translate("Category doesn't contain sections.")}
           </p>
         ) : (
           <CategorySectionsFilterForm
-            divisions={divisions}
+            organizationGroups={organizationGroups}
             sections={sections}
             closeDropdown={closeDropdown}
           />

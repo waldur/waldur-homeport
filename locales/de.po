@@ -2118,14 +2118,14 @@ msgstr "Anzeigename"
 
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/SelectOrganizationDivisionField.tsx
+#: src/customer/list/SelectOrganizationGroupField.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 #: src/user/affiliations/OrganizationsList.tsx
-msgid "Division"
+msgid "Organization group"
 msgstr "Abteilung"
 
 #: src/customer/list/SupportCustomerFilter.tsx
-msgid "Division type"
+msgid "Organization group type"
 msgstr "Abteilungsart"
 
 #: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
@@ -4336,12 +4336,12 @@ msgstr "Keine Kategorien"
 msgid "No countries"
 msgstr "Keine Länder"
 
-#: src/customer/list/DivisionTypeFilter.tsx
-msgid "No division types"
+#: src/customer/list/OrganizationGroupFilter.tsx
+msgid "No organization group types"
 msgstr "Keine Teilungstypen"
 
-#: src/customer/list/SelectOrganizationDivisionField.tsx
-msgid "No divisions"
+#: src/customer/list/SelectOrganizationGroupField.tsx
+msgid "No organization groups"
 msgstr "Keine Spaltungen"
 
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
@@ -4972,12 +4972,12 @@ msgstr "Organisationen"
 msgid "Organizations ({count})"
 msgstr "Organisationen ({count})"
 
-#: src/customer/divisions/CustomersDivisionsChart.tsx
-msgid "Organizations by divisions"
+#: src/customer/organizationGroups/CustomersOrganizationGroupsChart.tsx
+msgid "Organizations by organization groups"
 msgstr "Organisationen nach Abteilungen"
 
-#: src/customer/divisions/CustomersDivisionsContainer.tsx
-msgid "Organizations divisions"
+#: src/customer/organizationGroups/CustomersOrganizationGroupsContainer.tsx
+msgid "Organizations organization groups"
 msgstr "Organisationsabteilungen"
 
 #: src/invoices/growth/utils.ts
@@ -6766,7 +6766,7 @@ msgid "Sankey diagram"
 msgstr "Sankey-Diagramm"
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/customer/divisions/utils.ts
+#: src/customer/organizationGroups/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
@@ -6961,12 +6961,12 @@ msgstr "Land auswählen..."
 msgid "Select dates"
 msgstr "Datum auswählen"
 
-#: src/customer/list/SelectOrganizationDivisionField.tsx
-msgid "Select division..."
-msgstr "Division auswählen..."
+#: src/customer/list/SelectOrganizationGroupField.tsx
+msgid "Select organization group..."
+msgstr "Organization group auswählen..."
 
-#: src/customer/list/DivisionTypeFilter.tsx
-msgid "Select division type..."
+#: src/customer/list/OrganizationGroupFilter.tsx
+msgid "Select organization group type..."
 msgstr "Abteilungstyp auswählen..."
 
 #: src/issues/feedback/EvaluationSelectField.tsx
@@ -8781,7 +8781,7 @@ msgstr "Kunde kann nicht geladen werden."
 msgid "Unable to load customer support satisfaction overall rating."
 msgstr "Gesamtbewertung der Kundenzufriedenheit konnte nicht geladen werden."
 
-#: src/customer/divisions/CustomersDivisionsChart.tsx
+#: src/customer/organizationGroups/CustomersOrganizationGroupsChart.tsx
 #: src/customer/team/OfferingNamesManagedByUser.tsx
 #: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx

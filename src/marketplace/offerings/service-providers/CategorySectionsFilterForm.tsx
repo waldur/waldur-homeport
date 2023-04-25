@@ -1,16 +1,16 @@
 import { FunctionComponent } from 'react';
 import { reduxForm } from 'redux-form';
 
-import { AttributeFilterDivision } from '@waldur/marketplace/category/filters/AttributeFilterDivision';
+import { AttributeFilterOrganizationGroup } from '@waldur/marketplace/category/filters/AttributeFilterOrganizationGroup';
 import { AttributeFilterSection } from '@waldur/marketplace/category/filters/AttributeFilterSection';
 import { prepareAttributeSections } from '@waldur/marketplace/category/utils';
 import { CategorySectionsFilterFormActions } from '@waldur/marketplace/offerings/service-providers/CategorySectionsFilterFormActions';
 import { OFFERING_CATEGORY_SECTION_FORM_ID } from '@waldur/marketplace/offerings/service-providers/constants';
-import { Division, Section } from '@waldur/marketplace/types';
+import { OrganizationGroup, Section } from '@waldur/marketplace/types';
 import './CategorySectionsFilterForm.scss';
 
 interface OwnProps {
-  divisions: Division[];
+  organizationGroups: OrganizationGroup[];
   sections: Section[];
   closeDropdown: () => void;
 }
@@ -18,8 +18,10 @@ interface OwnProps {
 const PureCategorySectionsFilterForm: FunctionComponent<any> = (props) => (
   <div className="categorySectionsFilterForm">
     <form>
-      {props.divisions?.length > 0 && (
-        <AttributeFilterDivision divisions={props.divisions} />
+      {props.organizationGroups?.length > 0 && (
+        <AttributeFilterOrganizationGroup
+          organizationGroups={props.organizationGroups}
+        />
       )}
       {prepareAttributeSections(props.sections).map(
         (section: Section, index: number) => (

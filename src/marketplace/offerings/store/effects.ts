@@ -444,9 +444,13 @@ function* updateConfirmationMessage(action: Action<any>) {
 }
 
 function* updateAccessPolicy(action: Action<any>) {
-  const { offeringUuid, divisions } = action.payload;
+  const { offeringUuid, organizationGroups } = action.payload;
   try {
-    yield call(api.updateProviderOfferingAccessPolicy, offeringUuid, divisions);
+    yield call(
+      api.updateProviderOfferingAccessPolicy,
+      offeringUuid,
+      organizationGroups,
+    );
     const customer = yield select(getCustomer);
     const isServiceManager = yield select(isServiceManagerSelector);
     const isOwnerOrStaff = yield select(isOwnerOrStaffSelector);

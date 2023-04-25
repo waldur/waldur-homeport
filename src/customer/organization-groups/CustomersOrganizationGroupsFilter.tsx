@@ -2,13 +2,13 @@ import { FunctionComponent } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
-import { CUSTOMERS_DIVISIONS_FORM_ID } from '@waldur/customer/divisions/constants';
 import {
   AccountingRunningField,
   getOptions,
 } from '@waldur/customer/list/AccountingRunningField';
+import { CUSTOMERS_ORGANIZATION_GROUPS_FORM_ID } from '@waldur/customer/organization-groups/constants';
 
-export const PureCustomersDivisionsFilter: FunctionComponent = () => (
+export const PureCustomersOrganizationGroupsFilter: FunctionComponent = () => (
   <Card>
     <Card.Body className="border-bottom mt-3">
       <form className="form-inline">
@@ -22,9 +22,9 @@ export const PureCustomersDivisionsFilter: FunctionComponent = () => (
   </Card>
 );
 
-export const CustomersDivisionsFilter = reduxForm<{}, any>({
-  form: CUSTOMERS_DIVISIONS_FORM_ID,
+export const CustomersOrganizationGroupsFilter = reduxForm<{}, any>({
+  form: CUSTOMERS_ORGANIZATION_GROUPS_FORM_ID,
   initialValues: {
     accounting_is_running: getOptions()[0],
   },
-})(PureCustomersDivisionsFilter);
+})(PureCustomersOrganizationGroupsFilter);

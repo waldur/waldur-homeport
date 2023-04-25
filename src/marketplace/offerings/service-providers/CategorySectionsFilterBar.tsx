@@ -4,11 +4,11 @@ import { reduxForm } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { AttributeFilterDivision } from '@waldur/marketplace/category/filters/AttributeFilterDivision';
+import { AttributeFilterOrganizationGroup } from '@waldur/marketplace/category/filters/AttributeFilterOrganizationGroup';
 import { AttributeFilterSection } from '@waldur/marketplace/category/filters/AttributeFilterSection';
 import { prepareAttributeSections } from '@waldur/marketplace/category/utils';
 import {
-  getAllOrganizationDivisions,
+  getAllOrganizationGroups,
   getCategory,
 } from '@waldur/marketplace/common/api';
 import { OFFERING_CATEGORY_SECTION_FORM_ID } from '@waldur/marketplace/offerings/service-providers/constants';
@@ -37,15 +37,15 @@ const PureCategorySectionsFilterBar: FunctionComponent<any> = ({
     value: filterData,
   } = useAsync(async () => {
     const sections = await getCategorySections(categoryUuid);
-    const divisions = await getAllOrganizationDivisions();
+    const organizationGroups = await getAllOrganizationGroups();
     return {
       sections,
-      divisions,
+      organizationGroups,
     };
   }, [categoryUuid]);
 
   useEffect(() => {
-    if (filterData?.sections.length || filterData?.divisions.length) {
+    if (filterData?.sections.length || filterData?.organizationGroups.length) {
       MenuComponent.reinitialization();
     }
   }, [filterData]);
@@ -62,15 +62,17 @@ const PureCategorySectionsFilterBar: FunctionComponent<any> = ({
     );
   }
 
-  if (!filterData.sections.length && !filterData.divisions.length) {
+  if (!filterData.sections.length && !filterData.organizationGroups.length) {
     return null;
   }
 
   return (
     <form className="d-flex align-items-center align-items-stretch">
-      {filterData.divisions?.length > 0 && (
-        <CategorySectionsFilterBarItem text={translate('Divisions')}>
-          <AttributeFilterDivision divisions={filterData.divisions} />
+      {filterData.organizationGroups?.length > 0 && (
+        <CategorySectionsFilterBarItem text={translate('Organization groups')}>
+          <AttributeFilterOrganizationGroup
+            organizationGroups={filterData.organizationGroups}
+          />
         </CategorySectionsFilterBarItem>
       )}
       {prepareAttributeSections(filterData.sections).map(

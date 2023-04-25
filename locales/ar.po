@@ -69,7 +69,7 @@ msgid "Resources"
 msgstr "موارد"
 
 #: src/booking/components/modal/BookingModal.tsx
-#: src/customer/divisions/utils.ts
+#: src/customer/organizationGroups/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts

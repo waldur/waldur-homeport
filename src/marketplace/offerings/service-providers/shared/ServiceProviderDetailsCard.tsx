@@ -4,8 +4,8 @@ import './ServiceProviderDetailsCard.scss';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/offerings/service-providers/shared/CountryFlag';
-import { Division } from '@waldur/marketplace/offerings/service-providers/shared/Division';
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
+import { OrganizationGroup } from '@waldur/marketplace/offerings/service-providers/shared/OrganizationGroup';
 import { ShowOfferingsButton } from '@waldur/marketplace/offerings/service-providers/shared/ShowOfferingsButton';
 import { ServiceProvider } from '@waldur/marketplace/types';
 
@@ -51,7 +51,7 @@ export const ServiceProviderDetailsCard: FunctionComponent<ServiceProviderDetail
           {descriptionText(row.description)}
         </p>
       )}
-      <Division division={row.division} />
+      <OrganizationGroup organizationGroup={row.organizationGroup} />
       <ShowOfferingsButton serviceProvider={row} />
     </div>
   );

@@ -11,7 +11,7 @@ import {
   getInitialValuesForSetAccessPolicyForm,
 } from '@waldur/marketplace/offerings/actions/utils';
 import { setAccessPolicy } from '@waldur/marketplace/offerings/store/constants';
-import { Division, Offering } from '@waldur/marketplace/types';
+import { OrganizationGroup, Offering } from '@waldur/marketplace/types';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
@@ -19,7 +19,7 @@ import { SetAccessPolicyFormContainer } from './SetAccessPolicyFormContainer';
 
 interface SetAccessPolicyDialogFormOwnProps {
   offering: Offering;
-  divisions: Division[];
+  organizationGroups: OrganizationGroup[];
 }
 
 const PureSetAccessPolicyDialogForm: FunctionComponent<any> = (props) => (
@@ -39,7 +39,7 @@ const PureSetAccessPolicyDialogForm: FunctionComponent<any> = (props) => (
       }
     >
       <SetAccessPolicyFormContainer
-        divisions={props.divisions}
+        organizationGroups={props.organizationGroups}
         submitting={props.submitting}
       />
     </ModalDialog>
@@ -51,7 +51,7 @@ const mapStateToProps = (
   ownProps: SetAccessPolicyDialogFormOwnProps,
 ) => ({
   initialValues: getInitialValuesForSetAccessPolicyForm(
-    ownProps.offering.divisions,
+    ownProps.offering.organizationGroups,
   ),
 });
 
@@ -60,9 +60,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     setAccessPolicy(
       {
         offeringUuid: ownProps.offering.uuid,
-        divisions: formatRequestBodyForSetAccessPolicyForm(
+        organizationGroups: formatRequestBodyForSetAccessPolicyForm(
           formData,
-          ownProps.divisions,
+          ownProps.organizationGroups,
         ),
       },
       dispatch,
