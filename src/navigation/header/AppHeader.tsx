@@ -11,6 +11,7 @@ import { getTitle } from '../title';
 
 import { ConfirmationDrawerToggle } from './ConfirmationDrawerToggle';
 import { FavoritePagesDropdown } from './FavoritePagesDropdown';
+import { LegacyBranchLink } from './LegacyBranchLink';
 import { ProjectSelectorDropdown } from './project-selector/ProjectSelectorDropdown';
 import { QuickIssueDrawerToggle } from './QuickIssueDrawerToggle';
 import { SearchToggle } from './SearchToggle';
@@ -80,6 +81,7 @@ export const AppHeader: FunctionComponent = () => {
             </div>
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
+            {user && <LegacyBranchLink />}
             {user && <QuickIssueDrawerToggle />}
             {user && <FavoritePagesDropdown />}
             {user && <ConfirmationDrawerToggle />}
