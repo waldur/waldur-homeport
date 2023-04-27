@@ -12353,7 +12353,6 @@ msgstr ""
 
 #: src/customer/routes.ts
 #: src/issues/routes.ts
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
 #: src/marketplace/resources/details/RobotAccountExpandable.tsx
