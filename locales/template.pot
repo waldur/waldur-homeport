@@ -3652,6 +3652,10 @@ msgstr ""
 msgid "Go to marketplace"
 msgstr ""
 
+#: src/navigation/header/LegacyBranchLink.tsx
+msgid "Go to old interface"
+msgstr ""
+
 #: src/auth/PermissionLayout.tsx
 #: src/invitations/GroupInvitationErrorMessage.tsx
 #: src/invitations/InvitationErrorMessage.tsx
