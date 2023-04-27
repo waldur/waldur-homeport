@@ -16,7 +16,7 @@ export const useRobotAccountFields = (resource) => {
   const loadUsers = useCallback(
     (query, prevOptions, page) =>
       getUsers({
-        name: query,
+        full_name: query,
         project_uuid: resource.project_uuid,
         field: ['full_name', 'email', 'url', 'uuid'],
         o: 'full_name',
