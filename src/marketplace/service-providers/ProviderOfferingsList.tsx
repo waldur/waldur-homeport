@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
@@ -19,7 +20,13 @@ import { ResourcesCountColumn } from './ResourcesCountColumn';
 
 const OfferingNameColumn = ({ row }) => (
   <>
-    <b>{row.name}</b>
+    <Link
+      state="public.marketplace-public-offering"
+      params={{ uuid: row.uuid }}
+      className="fw-bolder"
+    >
+      {row.name}
+    </Link>
     <div className="text-gray">{row.category_title}</div>
   </>
 );
