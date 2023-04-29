@@ -9,6 +9,7 @@ interface SymbolsGroupProps {
   nameKey?: string;
   emailKey?: string;
   imageKey?: string;
+  onClick?(): void;
 }
 
 const colorClasses = [
@@ -29,8 +30,9 @@ export const SymbolsGroup: FunctionComponent<SymbolsGroupProps> = ({
   nameKey,
   emailKey,
   imageKey,
+  onClick,
 }) => (
-  <div className="symbol-group symbol-hover">
+  <div className="symbol-group symbol-hover" onClick={onClick}>
     {items.slice(0, max).map((item, index) => (
       <div key={index} className="symbol symbol-circle symbol-35px">
         <Tip key={index} label={item[nameKey]} id={`customer-${index}`}>
