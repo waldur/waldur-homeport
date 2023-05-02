@@ -48,6 +48,6 @@ export function lazyComponent<Props = any>(
     },
     loading: LoadingComponent,
     delay: 300,
-    timeout: 10000,
+    timeout: 20000,
   });
 }
