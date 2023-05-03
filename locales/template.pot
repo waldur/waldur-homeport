@@ -141,6 +141,10 @@ msgstr ""
 msgid "Access token"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+msgid "Access:"
+msgstr ""
+
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 msgid "Accessible to all customers."
 msgstr ""
@@ -1405,6 +1409,10 @@ msgstr ""
 msgid "Category name"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+msgid "Category:"
+msgstr ""
+
 #: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Challenge code"
 msgstr ""
@@ -1678,7 +1686,6 @@ msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingComponents.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/resources/details/openstack-volume/VolumeMainComponent.tsx
 msgid "Components"
@@ -2743,6 +2750,7 @@ msgstr ""
 msgid "Download invoice"
 msgstr ""
 
+#: src/dashboard/hero/PublicDashboardHero.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace/offerings/OfferingStateCell.tsx
@@ -5634,6 +5642,7 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/dashboard/hero/PublicDashboardHero.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
@@ -5744,12 +5753,20 @@ msgstr ""
 msgid "Offering logo"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+msgid "Offering manager:"
+msgstr ""
+
 #: src/marketplace/routes.ts
 msgid "Offering managers"
 msgstr ""
 
 #: src/providers/dashboard/ProviderProfile.tsx
 msgid "Offering managers:"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingMetadataDialog.tsx
+msgid "Offering metadata"
 msgstr ""
 
 #: src/invoices/list/InvoicesStatsList.tsx
@@ -9400,6 +9417,7 @@ msgstr ""
 msgid "Show less"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingMetadataLink.tsx
 #: src/marketplace/resources/details/ResourceMetadataLink.tsx
 msgid "Show metadata"
 msgstr ""
@@ -11225,6 +11243,10 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 msgid "Unable to load offering details."
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+msgid "Unable to load offering manager"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartItemUpdate.tsx

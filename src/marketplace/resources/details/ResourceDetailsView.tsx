@@ -12,7 +12,6 @@ import {
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
 import { ResourceAccessButton } from '@waldur/resource/ResourceAccessButton';
-import '@waldur/marketplace/offerings/details/PublicOfferingDetailsHero.scss';
 
 import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
 import { ResourceActions } from '../ResourceActions';
@@ -62,6 +61,12 @@ export const ResourceDetailsView: FC<any> = ({
       [OFFERING_TYPE_BOOKING]: BookingMainComponent,
     }[resource.offering_type] || null;
 
+  const logo = [INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE].includes(
+    resource.offering_type,
+  )
+    ? openstackIcon
+    : resource.category_icon;
+
   return (
     <>
       {tabSpec ? (
@@ -77,13 +82,7 @@ export const ResourceDetailsView: FC<any> = ({
       ) : (
         <>
           <PublicDashboardHero
-            logo={
-              [INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE].includes(
-                resource.offering_type,
-              )
-                ? openstackIcon
-                : resource.category_icon
-            }
+            logo={logo}
             logoAlt={resource.category_title}
             smallLogo={resource.offering_thumbnail}
             backgroundImage={offering.image}

@@ -9,12 +9,13 @@ export interface FieldProps {
   value?: React.ReactNode;
   children?: React.ReactNode;
   valueClass?: string;
+  spaceless?: Boolean;
 }
 
 export const Field: FunctionComponent<FieldProps> = (props) =>
   props.value || props.children ? (
     <Row className="mb-1">
-      <Col sm={3} className="text-gray-700 fw-bold">
+      <Col sm={props.spaceless ? 'auto' : 3} className="text-gray-700 fw-bold">
         {props.label.length > 20 ? (
           <Tip label={props.label} id="fieldLabel">
             {props.label}:
@@ -23,7 +24,7 @@ export const Field: FunctionComponent<FieldProps> = (props) =>
           props.label
         )}
       </Col>
-      <Col sm={9} className={props.valueClass}>
+      <Col sm={props.spaceless ? true : 9} className={props.valueClass}>
         {props.value || props.children}
         {props.helpText && (
           <Tip label={props.helpText} id="fieldHelpText">

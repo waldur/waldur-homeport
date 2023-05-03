@@ -12,6 +12,12 @@
 .public-dashboard-hero__table {
   display: table-cell;
   vertical-align: bottom;
+
+  .dashboard-small-label {
+    position: absolute;
+    padding: 2px 18px;
+    font-weight: 500;
+  }
 }
 
 .public-dashboard-logo {
@@ -21,5 +27,18 @@
     position: absolute;
     top: -15px;
     right: -15px;
+  }
+
+  .dashboard-small-label {
+    &.top-label {
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &.bottom-label {
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 50%);
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
+import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
 
@@ -12,7 +13,7 @@ interface PublicDashboardHeroProps {
   logoAlt?: string;
   smallLogo?: string;
   title: ReactNode;
-  actions: ReactNode;
+  actions?: ReactNode;
   quickActions?: ReactNode;
   quickBody?: ReactNode;
   quickFooter?: ReactNode;
@@ -32,13 +33,13 @@ export const PublicDashboardHero: FC<PublicDashboardHeroProps> = (props) => {
         <div className="public-dashboard-hero__cell">
           <div className="container-xxl py-16">
             <Row>
-              <Col md={8} sm={12} className="d-flex">
-                <div className="d-flex gap-10 flex-grow-1">
-                  <Card
-                    className="public-dashboard-logo"
-                    style={{ width: 255 }}
-                  >
-                    <Card.Body className="d-flex align-items-center justify-content-center">
+              <Col md={8} sm={12}>
+                <Card className="w-100">
+                  <Card.Body className="d-flex gap-10 flex-grow-1">
+                    <div
+                      className="public-dashboard-logo d-flex align-items-center justify-content-center"
+                      style={{ width: 150 }}
+                    >
                       <OfferingLogo
                         src={props.smallLogo}
                         size={50}
@@ -50,23 +51,27 @@ export const PublicDashboardHero: FC<PublicDashboardHeroProps> = (props) => {
                         height={100}
                         width={100}
                       />
-                    </Card.Body>
-                  </Card>
-                  <Card className="flex-grow-1">
-                    <Card.Body className="d-flex flex-column">
+                      <span className="dashboard-small-label top-label bg-secondary">
+                        {translate('Draft')}
+                      </span>
+                      <span className="dashboard-small-label bottom-label bg-secondary">
+                        {translate('Offering')}
+                      </span>
+                    </div>
+                    <div className="d-flex flex-column flex-grow-1">
                       <div className="d-flex flex-grow-1">
                         {/* Title */}
                         <div className="flex-grow-1">{props.title}</div>
                         {/* Actions */}
                         {props.actions}
                       </div>
-                      <div className="mt-7">
+                      <div className="mt-6">
                         {/* Details */}
                         {props.children}
                       </div>
-                    </Card.Body>
-                  </Card>
-                </div>
+                    </div>
+                  </Card.Body>
+                </Card>
               </Col>
               {/* Quick view */}
               <Col md={4} sm={12} className="d-flex">

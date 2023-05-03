@@ -56,6 +56,7 @@ const UpdateOfferingLogoDialog = lazyComponent(
 
 interface OwnProps {
   offering: Offering;
+  dotted?: boolean;
   isPublic?: boolean;
   refreshOffering?: () => void;
 }
@@ -190,6 +191,7 @@ const mergeProps = (
   dispatchProps: ReturnType<typeof mapDispatchToProps>,
   ownProps: OwnProps,
 ) => ({
+  dotted: ownProps.dotted,
   actions: [
     {
       label: translate('Activate'),
