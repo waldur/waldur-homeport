@@ -4732,6 +4732,10 @@ msgstr ""
 msgid "Manage security groups"
 msgstr ""
 
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Manage users"
+msgstr ""
+
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/PageManagement.tsx
