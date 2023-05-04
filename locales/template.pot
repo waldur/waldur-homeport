@@ -11935,6 +11935,10 @@ msgid "Update static routes"
 msgstr ""
 
 #: src/resource/actions/UpdateResourceDialog.tsx
+msgid "Update {resourceType}"
+msgstr ""
+
+#: src/resource/actions/UpdateResourceDialog.tsx
 msgid "Update {resourceType} {resourceName}"
 msgstr ""
 

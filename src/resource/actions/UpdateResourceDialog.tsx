@@ -54,10 +54,16 @@ export const UpdateResourceDialog: FC<UpdateResourceDialogProps> = ({
           );
         }
       }}
-      dialogTitle={translate('Update {resourceType} {resourceName}', {
-        resourceType: verboseName,
-        resourceName: resource.name,
-      })}
+      dialogTitle={
+        resource.name
+          ? translate('Update {resourceType} {resourceName}', {
+              resourceType: verboseName,
+              resourceName: resource.name,
+            })
+          : translate('Update {resourceType}', {
+              resourceType: verboseName,
+            })
+      }
       formFields={fields}
       initialValues={initialValues}
     />
