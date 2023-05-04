@@ -1,7 +1,6 @@
 import { Field } from 'redux-form';
 
 import { TextField } from '@waldur/form';
-import { validateMaxLength } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 
 export const CustomMessageInput = () => {
@@ -16,7 +15,6 @@ export const CustomMessageInput = () => {
       <Field
         name="extra_invitation_text"
         component={TextField}
-        validate={[validateMaxLength]}
         placeholder={translate('Enter your custom message')}
       />
     </>
