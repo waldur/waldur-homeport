@@ -14,7 +14,7 @@
   vertical-align: bottom;
 
   .dashboard-small-label {
-    position: absolute;
+    display: block;
     padding: 2px 18px;
     font-weight: 500;
   }
@@ -31,11 +31,13 @@
 
   .dashboard-small-label {
     &.top-label {
+      position: absolute;
       top: 0;
       left: 50%;
       transform: translate(-50%, -50%);
     }
     &.bottom-label {
+      position: absolute;
       bottom: 0;
       left: 50%;
       transform: translate(-50%, 50%);

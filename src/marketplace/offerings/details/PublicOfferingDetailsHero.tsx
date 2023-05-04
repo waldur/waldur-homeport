@@ -15,6 +15,7 @@ import { Field } from '@waldur/resource/summary';
 import { OfferingItemActions } from '../actions/OfferingItemActions';
 
 import { PublicOfferingMetadataLink } from './PublicOfferingMetadataLink';
+import { PublicOfferingQuickActions } from './PublicOfferingQuickActions';
 
 interface OwnProps {
   offering: Offering;
@@ -40,11 +41,19 @@ export const PublicOfferingDetailsHero: FunctionComponent<OwnProps> = (
     [props.offering],
   );
 
+  const offeringInfoItems = [
+    { t: translate('Resources'), v: '223' },
+    { t: translate('Clients'), v: '30' },
+    { t: translate('Support Tickets'), v: '4349' },
+  ];
+
   return (
     <>
       <PublicDashboardHero
         logo={props.category.icon}
         logoAlt={props.category.title}
+        logoTopLabel={props.offering.state}
+        logoBottomLabel={translate('Offering')}
         backgroundImage={props.offering.image}
         actions={<OfferingItemActions offering={props.offering} dotted />}
         title={
@@ -65,22 +74,21 @@ export const PublicOfferingDetailsHero: FunctionComponent<OwnProps> = (
             </i>
           </>
         }
-        quickBody={
-          <div className="bg-gray-200 h-100 p-4">
-            <table className="text-gray-600 w-100 fs-8">
-              <tbody>
-                <tr>
-                  <th className="text-end p-1">{translate('Category')}</th>
-                  <td className="p-1">{props.category.title}</td>
-                </tr>
-                {showExperimentalUiComponents && (
-                  <tr>
-                    <th className="text-end p-1">{translate('Version')}</th>
-                    <td className="p-1">5.2.1</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+        quickActions={<PublicOfferingQuickActions />}
+        quickFooter={
+          <div className="d-flex justify-content-between align-items-end flex-wrap gap-2 w-100">
+            {offeringInfoItems.map((item) => (
+              <div key={item.t} className="text-center">
+                <h1 className="mb-0">{item.v}</h1>
+                <span>{item.t}</span>
+              </div>
+            ))}
+            <div className="text-center">
+              <span className="dashboard-small-label bg-secondary">
+                {props.offering.state}
+              </span>
+              <span>{translate('State')}</span>
+            </div>
           </div>
         }
       >

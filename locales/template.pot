@@ -1380,7 +1380,6 @@ msgstr ""
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
@@ -1538,6 +1537,10 @@ msgstr ""
 
 #: src/azure/provider/AzureForm.tsx
 msgid "Client secret"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+msgid "Clients"
 msgstr ""
 
 #: src/invitations/actions/create/FormButtons.tsx
@@ -2750,7 +2753,6 @@ msgstr ""
 msgid "Download invoice"
 msgstr ""
 
-#: src/dashboard/hero/PublicDashboardHero.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace/offerings/OfferingStateCell.tsx
@@ -5642,13 +5644,13 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
-#: src/dashboard/hero/PublicDashboardHero.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/actions/tabs.ts
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -7476,6 +7478,10 @@ msgstr ""
 msgid "Public list"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingQuickActions.tsx
+msgid "Publish"
+msgstr ""
+
 #: src/marketplace/offerings/actions/GoogleCalendarActions.ts
 msgid "Publish as Google Calendar"
 msgstr ""
@@ -8316,6 +8322,7 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -9671,6 +9678,7 @@ msgstr ""
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/orders/Order.tsx
@@ -9945,6 +9953,10 @@ msgstr ""
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Support"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+msgid "Support Tickets"
 msgstr ""
 
 #: src/issues/events.tsx
@@ -12545,7 +12557,6 @@ msgstr ""
 msgid "Verifying email change"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/navigation/AppFooter.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx

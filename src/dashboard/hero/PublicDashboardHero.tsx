@@ -1,7 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { Logo } from '@waldur/marketplace/offerings/service-providers/shared/Logo';
 
@@ -11,6 +10,8 @@ interface PublicDashboardHeroProps {
   backgroundImage?: string;
   logo: string;
   logoAlt?: string;
+  logoTopLabel?: string;
+  logoBottomLabel?: string;
   smallLogo?: string;
   title: ReactNode;
   actions?: ReactNode;
@@ -40,23 +41,29 @@ export const PublicDashboardHero: FC<PublicDashboardHeroProps> = (props) => {
                       className="public-dashboard-logo d-flex align-items-center justify-content-center"
                       style={{ width: 150 }}
                     >
-                      <OfferingLogo
-                        src={props.smallLogo}
-                        size={50}
-                        className="dashboard-small-logo"
-                      />
+                      {props.smallLogo && (
+                        <OfferingLogo
+                          src={props.smallLogo}
+                          size={50}
+                          className="dashboard-small-logo"
+                        />
+                      )}
                       <Logo
                         image={props.logo}
                         placeholder={props.logoAlt[0]}
                         height={100}
                         width={100}
                       />
-                      <span className="dashboard-small-label top-label bg-secondary">
-                        {translate('Draft')}
-                      </span>
-                      <span className="dashboard-small-label bottom-label bg-secondary">
-                        {translate('Offering')}
-                      </span>
+                      {props.logoTopLabel && (
+                        <span className="dashboard-small-label top-label bg-secondary">
+                          {props.logoTopLabel}
+                        </span>
+                      )}
+                      {props.logoBottomLabel && (
+                        <span className="dashboard-small-label bottom-label bg-secondary">
+                          {props.logoBottomLabel}
+                        </span>
+                      )}
                     </div>
                     <div className="d-flex flex-column flex-grow-1">
                       <div className="d-flex flex-grow-1">
@@ -84,7 +91,9 @@ export const PublicDashboardHero: FC<PublicDashboardHeroProps> = (props) => {
                       <div className="mb-5">{props.quickBody}</div>
                     )}
                     {props.quickFooter && (
-                      <div className="flex-grow-1">{props.quickFooter}</div>
+                      <div className="flex-grow-1 d-flex align-items-end">
+                        {props.quickFooter}
+                      </div>
                     )}
                   </Card.Body>
                 </Card>
