@@ -8,6 +8,7 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
 import { DocsLink } from '@waldur/navigation/header/DocsLink';
+import { IssuesLink } from '@waldur/navigation/IssuesLink';
 import { showSuccess } from '@waldur/store/notify';
 import './FooterLinks.scss';
 
@@ -76,6 +77,7 @@ export const FooterLinks = () => {
             <span className="menu-arrow"></span>
           </a>
           <div className="menu-sub menu-sub-dropdown p-2">
+            <IssuesLink />
             <DocsLink />
             <SupportSubMenuItem
               title={ENV.plugins.WALDUR_CORE.SITE_EMAIL}
