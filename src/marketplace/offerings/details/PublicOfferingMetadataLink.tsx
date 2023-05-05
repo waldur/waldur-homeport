@@ -19,10 +19,7 @@ export const PublicOfferingMetadataLink = () => {
   const dispatch = useDispatch();
 
   return (
-    <a
-      className="cursor-pointer text-dark text-decoration-underline text-hover-primary"
-      onClick={() => dispatch(showMetadata())}
-    >
+    <a className="text-link" onClick={() => dispatch(showMetadata())}>
       {translate('Show metadata')}
     </a>
   );

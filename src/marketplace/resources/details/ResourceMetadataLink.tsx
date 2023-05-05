@@ -20,7 +20,7 @@ export const ResourceMetadataLink = ({ resource, scope }) => {
 
   return (
     <a
-      className="cursor-pointer text-dark text-decoration-underline text-hover-primary"
+      className="text-link"
       onClick={() => dispatch(showMetadata(resource, scope))}
     >
       {translate('Show metadata')}

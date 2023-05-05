@@ -158,6 +158,7 @@ msgstr ""
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/PageAccounting.tsx
+#: src/marketplace/offerings/details/PublicOfferingAccounting.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Accounting"
 msgstr ""
@@ -190,6 +191,10 @@ msgstr ""
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Accounting type"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingWelcome.tsx
+msgid "Accounting, integration and support"
 msgstr ""
 
 #: src/resource/actions/AsyncActionItem.tsx
@@ -1662,6 +1667,10 @@ msgstr ""
 msgid "Competence"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingWelcome.tsx
+msgid "Complete the steps “{link}” in order to fully complete your marketplace offering. The more information gathered in the marketplace page, the higher are the chances of users provisioning your services."
+msgstr ""
+
 #: src/invitations/actions/create/SendingStatus.tsx
 msgid "Completed"
 msgstr ""
@@ -1688,7 +1697,6 @@ msgid "Component name"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingComponents.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/resources/details/openstack-volume/VolumeMainComponent.tsx
 msgid "Components"
@@ -2459,7 +2467,6 @@ msgid "Deletion"
 msgstr ""
 
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "Deploy"
@@ -2500,7 +2507,6 @@ msgstr ""
 #: src/marketplace/offerings/details/PageDescription.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/marketplace/offerings/details/PublicOfferingInfo.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
@@ -2706,6 +2712,7 @@ msgstr ""
 msgid "Docs & resources"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDocumentation.tsx
 #: src/navigation/header/DocsLink.tsx
 msgid "Documentation"
 msgstr ""
@@ -3305,7 +3312,6 @@ msgstr ""
 msgid "External username"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
 msgid "FAQ"
 msgstr ""
@@ -3625,10 +3631,6 @@ msgstr ""
 msgid "Gateway IP of this subnet"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
-msgid "General"
-msgstr ""
-
 #: src/customer/create/CustomerCreateForm.tsx
 msgid "General information"
 msgstr ""
@@ -3645,7 +3647,6 @@ msgstr ""
 msgid "Get help"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingGettingStarted.tsx
 msgid "Getting started"
 msgstr ""
@@ -3901,6 +3902,10 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingImageGallery.tsx
+msgid "Image gallery"
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Image has been added."
 msgstr ""
@@ -3934,7 +3939,6 @@ msgstr ""
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/offerings/details/PageImages.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
@@ -4102,6 +4106,10 @@ msgstr ""
 
 #: src/quotas/constants.ts
 msgid "Instances count"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingIntegration.tsx
+msgid "Integration"
 msgstr ""
 
 #: src/issues/comments/IssueCommentItem.tsx
@@ -4889,6 +4897,10 @@ msgstr ""
 #: src/notifications/NotificationForm.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingMetadata.tsx
+msgid "Metadata"
 msgstr ""
 
 #: src/user/hooks/HooksList.tsx
@@ -5779,6 +5791,10 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering order items synchronization has been scheduled."
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingWelcome.tsx
+msgid "Offering progress"
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -7043,7 +7059,6 @@ msgstr ""
 msgid "Pricelist"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
 msgid "Pricing"
 msgstr ""
@@ -7087,6 +7102,7 @@ msgstr ""
 msgid "Private clouds"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingWelcome.tsx
 #: src/user/dashboard/UserWelcome.tsx
 msgid "Profile completion"
 msgstr ""
@@ -7105,6 +7121,10 @@ msgstr ""
 
 #: src/user/support/UserEditFormContainer.tsx
 msgid "Profile settings"
+msgstr ""
+
+#: src/marketplace/offerings/details/CircleProgressStatus.tsx
+msgid "Progress"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
@@ -8463,7 +8483,6 @@ msgid "Reviewed by"
 msgstr ""
 
 #: src/customer/routes.ts
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
 msgid "Reviews"
 msgstr ""
@@ -9948,6 +9967,7 @@ msgid "Summary"
 msgstr ""
 
 #: src/issues/routes.ts
+#: src/marketplace/offerings/details/PublicOfferingSupport.tsx
 #: src/navigation/FooterLinks.tsx
 #: src/navigation/sidebar/SupportMenu.tsx
 #: src/user/support/UserFilter.tsx

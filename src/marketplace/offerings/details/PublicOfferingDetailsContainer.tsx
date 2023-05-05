@@ -15,14 +15,12 @@ import {
 import { PublicOfferingDetails } from '@waldur/marketplace/offerings/details/PublicOfferingDetails';
 import * as actions from '@waldur/marketplace/offerings/store/actions';
 import { filterPluginsData } from '@waldur/marketplace/offerings/store/utils';
-import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 import { getCurrentUser } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
 
 export const PublicOfferingDetailsContainer: FunctionComponent = () => {
-  useFullPage();
   const dispatch = useDispatch();
 
   const {
@@ -78,13 +76,11 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
   ) : error ? (
     <h3>{translate('Unable to load offering details.')}</h3>
   ) : value ? (
-    <>
-      <PublicOfferingDetails
-        offering={value.offering}
-        refreshOffering={refreshOffering}
-        category={value.category}
-      />
-    </>
+    <PublicOfferingDetails
+      offering={value.offering}
+      refreshOffering={refreshOffering}
+      category={value.category}
+    />
   ) : (
     <InvalidRoutePage />
   );

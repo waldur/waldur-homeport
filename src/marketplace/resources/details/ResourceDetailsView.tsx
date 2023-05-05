@@ -86,6 +86,7 @@ export const ResourceDetailsView: FC<any> = ({
             logoAlt={resource.category_title}
             smallLogo={resource.offering_thumbnail}
             backgroundImage={offering.image}
+            asHero
             title={<ResourceDetailsHeaderTitle resource={resource} />}
             actions={
               <ResourceActions

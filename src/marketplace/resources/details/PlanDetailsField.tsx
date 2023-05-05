@@ -13,7 +13,7 @@ export const PlanDetailsField = ({ resource }) => {
         <>
           {resource.plan_name}{' '}
           <a
-            className="cursor-pointer text-dark text-decoration-underline text-hover-primary"
+            className="text-link"
             onClick={() => dispatch(showPlanDetailsDialog(resource.uuid))}
           >
             [{translate('Show plan')}]

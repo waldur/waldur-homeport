@@ -54,12 +54,12 @@ export const PublicOfferingDetailsHero: FunctionComponent<OwnProps> = (
         logoAlt={props.category.title}
         logoTopLabel={props.offering.state}
         logoBottomLabel={translate('Offering')}
-        backgroundImage={props.offering.image}
+        className="mb-6"
         actions={<OfferingItemActions offering={props.offering} dotted />}
         title={
           <>
             <div
-              id="resource-selector-wrapper"
+              id="offering-selector-wrapper"
               className="offering-selector-wrapper d-flex align-items-center"
             >
               <div className="offering-selector-toggle btn btn-flush d-flex align-items-center mb-1">
