@@ -1,10 +1,14 @@
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
+import { useDestroyFilterOnLeave } from '@waldur/core/filters';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
-import { Table, createFetcher } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { useTable } from '@waldur/table/utils';
 
@@ -15,6 +19,8 @@ import { OfferingStateCell } from '../offerings/OfferingStateCell';
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 import { ServiceProvider } from '../types';
 
+import { PROVIDER_OFFERINGS_FORM_ID } from './constants';
+import { ProviderOfferingsFilter } from './ProviderOfferingsFilter';
 import { ResourcesCountColumn } from './ResourcesCountColumn';
 
 const OfferingNameColumn = ({ row }) => (
@@ -29,15 +35,30 @@ interface ProviderOfferingsComponentProps {
   extraTableProps?: Partial<TableProps>;
 }
 
+const mapPropsToFilter = createSelector(
+  getFormValues(PROVIDER_OFFERINGS_FORM_ID),
+  (filters: any) => {
+    const result: Record<string, any> = {};
+    if (filters?.state) {
+      result.state = filters.state.map((option) => option.value);
+    }
+    return result;
+  },
+);
+
 export const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> =
   ({ provider, extraTableProps = {} }) => {
+    const filter = useSelector(mapPropsToFilter);
+
     const tableProps = useTable({
       table: 'ProviderOfferingsList',
       fetchData: createFetcher(
         `marketplace-service-providers/${provider.uuid}/offerings`,
       ),
+      filter,
     });
     const dropdownActions = useOfferingDropdownActions();
+
     return (
       <Table
         {...tableProps}
@@ -75,8 +96,17 @@ export const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> =
   };
 
 export const ProviderOfferingsList = ({ provider }) => {
+  useDestroyFilterOnLeave(PROVIDER_OFFERINGS_FORM_ID);
+
   if (!provider) {
     return <CustomerResourcesListPlaceholder />;
   }
-  return <ProviderOfferingsComponent provider={provider} />;
+  return (
+    <ProviderOfferingsComponent
+      provider={provider}
+      extraTableProps={{
+        filters: <ProviderOfferingsFilter />,
+      }}
+    />
+  );
 };

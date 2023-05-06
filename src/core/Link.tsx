@@ -5,7 +5,7 @@ interface LinkProps {
   label?: React.ReactNode;
   children?: React.ReactNode;
   state: string;
-  params?: { [key: string]: string };
+  params?: { [key: string]: string | string[] };
   className?: string;
   target?: string;
   onClick?: (e?) => void;

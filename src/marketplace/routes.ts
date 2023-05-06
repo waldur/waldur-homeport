@@ -444,7 +444,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-vendor-offerings',
-    url: 'marketplace-provider-offerings/',
+    url: 'marketplace-provider-offerings/?{state}',
     component: ProviderOfferingsList,
     parent: 'provider-marketplace',
     data: {
@@ -583,7 +583,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-order-items',
-    url: 'marketplace-order-items/',
+    url: 'marketplace-order-items/?{state}',
     component: OrderItemsContainer,
     parent: 'provider-resources',
     data: {
@@ -611,7 +611,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-public-resources',
-    url: 'marketplace-public-resources/',
+    url: 'marketplace-public-resources/?{state}',
     component: PublicResourcesContainer,
     parent: 'provider-resources',
     data: {

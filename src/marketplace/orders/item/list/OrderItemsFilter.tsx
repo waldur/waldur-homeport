@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { getInitialValues } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
@@ -12,8 +13,21 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
-import { OrderStateFilter } from './OrderStateFilter';
+import {
+  OrderStateFilter,
+  getOrderStateFilterOption,
+} from './OrderStateFilter';
 import { OrderTypeFilter } from './OrderTypeFilter';
+
+const getFiltersFromParams = (params) => {
+  if (!params?.state) return params;
+  return {
+    ...params,
+    state: getOrderStateFilterOption().find(
+      (state) => params.state === state.value,
+    ),
+  };
+};
 
 interface OwnProps {
   showOfferingFilter?: boolean;
@@ -72,11 +86,12 @@ const filterSelector = createSelector(
 
 const mapStateToProps = (state, ownProps) => ({
   offeringFilter: { ...ownProps.offeringFilter, ...filterSelector(state) },
+  initialValues: getFiltersFromParams(getInitialValues()),
 });
 
 const enhance = compose(
-  reduxForm<{}, OwnProps>({ form: 'OrderItemFilter', destroyOnUnmount: false }),
   connect<StateProps, {}, OwnProps>(mapStateToProps),
+  reduxForm<{}, OwnProps>({ form: 'OrderItemFilter', destroyOnUnmount: false }),
 );
 
 export const OrderItemsFilter = enhance(
