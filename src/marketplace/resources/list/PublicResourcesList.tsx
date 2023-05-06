@@ -125,7 +125,7 @@ const mapPropsToFilter = (props: StateProps) => {
       filter.offering_uuid = props.filter.offering.uuid;
     }
     if (props.filter.state) {
-      filter.state = props.filter.state.value;
+      filter.state = props.filter.state.map((option) => option.value);
     }
     if (props.filter.organization) {
       filter.customer_uuid = props.filter.organization.uuid;
