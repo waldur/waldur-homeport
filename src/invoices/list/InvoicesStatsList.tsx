@@ -1,3 +1,5 @@
+import { ENV } from '@waldur/configs/default';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { fetchInvoicesStats } from '@waldur/invoices/api';
 import { INVOICES_STATS_TABLE } from '@waldur/invoices/constants';
@@ -8,7 +10,9 @@ import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 const CostField = ({ invoiceStats, organization }) =>
   getActiveFixedPricePaymentProfile(organization.payment_profiles)
     ? DASH_ESCAPE_CODE
-    : invoiceStats.aggregated_cost;
+    : ENV.accountingMode === 'accounting'
+    ? defaultCurrency(invoiceStats.aggregated_price)
+    : defaultCurrency(invoiceStats.aggregated_total);
 
 const TableComponent = (props: any) => {
   const columns = [
