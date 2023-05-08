@@ -22,6 +22,22 @@ interface OwnProps {
   category: Category;
 }
 
+const getStateBgClass = (state: Offering['state']) => {
+  switch (state) {
+    case 'Active':
+      return 'bg-success';
+    case 'Archived':
+      return 'bg-info text-white';
+    case 'Draft':
+      return 'bg-secondary';
+    case 'Paused':
+      return 'bg-warning';
+
+    default:
+      return 'bg-secondary';
+  }
+};
+
 export const PublicOfferingDetailsHero: FunctionComponent<OwnProps> = (
   props,
 ) => {
@@ -54,6 +70,8 @@ export const PublicOfferingDetailsHero: FunctionComponent<OwnProps> = (
         logoAlt={props.category.title}
         logoTopLabel={props.offering.state}
         logoBottomLabel={translate('Offering')}
+        logoTopClass={getStateBgClass(props.offering.state)}
+        logoBottomClass="bg-secondary"
         className="mb-6"
         actions={<OfferingItemActions offering={props.offering} dotted />}
         title={
@@ -84,7 +102,12 @@ export const PublicOfferingDetailsHero: FunctionComponent<OwnProps> = (
               </div>
             ))}
             <div className="text-center">
-              <span className="dashboard-small-label bg-secondary">
+              <span
+                className={
+                  'dashboard-small-label ' +
+                  getStateBgClass(props.offering.state)
+                }
+              >
                 {props.offering.state}
               </span>
               <span>{translate('State')}</span>

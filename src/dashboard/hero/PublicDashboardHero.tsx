@@ -14,6 +14,8 @@ interface PublicDashboardHeroProps {
   logoAlt?: string;
   logoTopLabel?: string;
   logoBottomLabel?: string;
+  logoTopClass?: string;
+  logoBottomClass?: string;
   smallLogo?: string;
   title: ReactNode;
   actions?: ReactNode;
@@ -47,12 +49,22 @@ export const PublicDashboardHero: FC<PublicDashboardHeroProps> = (props) => {
                 width={100}
               />
               {props.logoTopLabel && (
-                <span className="dashboard-small-label top-label bg-secondary">
+                <span
+                  className={classNames(
+                    'dashboard-small-label top-label',
+                    props.logoTopClass,
+                  )}
+                >
                   {props.logoTopLabel}
                 </span>
               )}
               {props.logoBottomLabel && (
-                <span className="dashboard-small-label bottom-label bg-secondary">
+                <span
+                  className={classNames(
+                    'dashboard-small-label bottom-label',
+                    props.logoBottomClass,
+                  )}
+                >
                   {props.logoBottomLabel}
                 </span>
               )}

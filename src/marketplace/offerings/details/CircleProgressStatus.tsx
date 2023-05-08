@@ -56,10 +56,10 @@ export const CircleProgressStatus = (props: CircleProgressStatusProps) => {
           <span className="text-danger text-nowrap fst-italic me-4">
             {props.message}
           </span>
-          <i className="fa fa-exclamation-circle display-5 text-danger"></i>
+          <i className="fa fa-exclamation-circle display-6 text-danger"></i>
         </>
       ) : props.status === 'complete' ? (
-        <i className="fa fa-check-circle display-5 text-success"></i>
+        <i className="fa fa-check-circle display-6 text-success"></i>
       ) : (
         <EChart
           options={getChartData(props.progress)}
