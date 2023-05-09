@@ -6,23 +6,23 @@ import { Offering } from '@waldur/marketplace/types';
 import { Field } from '@waldur/resource/summary';
 
 import { CircleProgressStatus } from './CircleProgressStatus';
-import { PublicOfferingDataCard } from './PublicOfferingDataCard';
+import { ProviderOfferingDataCard } from './ProviderOfferingDataCard';
 
-interface PublicOfferingSupportProps {
+interface ProviderOfferingSupportProps {
   offering: Offering;
 }
 
-export const PublicOfferingSupport: FunctionComponent<PublicOfferingSupportProps> =
+export const ProviderOfferingSupport: FunctionComponent<ProviderOfferingSupportProps> =
   ({ offering }) => {
     if (!offering) return null;
 
     return (
-      <PublicOfferingDataCard
+      <ProviderOfferingDataCard
         title={translate('Support')}
         icon="fa fa-life-ring"
         actions={
           <Button variant="light" className="mw-100px w-100">
-            Edit
+            {translate('Edit')}
           </Button>
         }
         footer={
@@ -32,24 +32,24 @@ export const PublicOfferingSupport: FunctionComponent<PublicOfferingSupportProps
         }
       >
         <div className="mb-6">
-          <Field label="Support Portal:" spaceless>
+          <Field label={translate('Support portal:')} spaceless>
             <span></span>
           </Field>
-          <Field label="Email:" spaceless>
+          <Field label={translate('Email:')} spaceless>
             <span></span>
           </Field>
-          <Field label="Phone:" spaceless>
+          <Field label={translate('Phone:')} spaceless>
             <span></span>
           </Field>
         </div>
         <div>
-          <Field label="Terms of Service:" spaceless>
+          <Field label={translate('Terms of service:')} spaceless>
             <span></span>
           </Field>
-          <Field label="Privacy Policy:" spaceless>
+          <Field label={translate('Privacy policy:')} spaceless>
             <span></span>
           </Field>
         </div>
-      </PublicOfferingDataCard>
+      </ProviderOfferingDataCard>
     );
   };

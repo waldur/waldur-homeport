@@ -6,23 +6,23 @@ import { Offering } from '@waldur/marketplace/types';
 import { Field } from '@waldur/resource/summary';
 
 import { CircleProgressStatus } from './CircleProgressStatus';
-import { PublicOfferingDataCard } from './PublicOfferingDataCard';
+import { ProviderOfferingDataCard } from './ProviderOfferingDataCard';
 
-interface PublicOfferingAccountingProps {
+interface ProviderOfferingAccountingProps {
   offering: Offering;
 }
 
-export const PublicOfferingAccounting: FunctionComponent<PublicOfferingAccountingProps> =
+export const ProviderOfferingAccounting: FunctionComponent<ProviderOfferingAccountingProps> =
   ({ offering }) => {
     if (!offering) return null;
 
     return (
-      <PublicOfferingDataCard
+      <ProviderOfferingDataCard
         title={translate('Accounting')}
         icon="fa fa-usd"
         actions={
           <Button variant="light" className="mw-100px w-100">
-            Edit
+            {translate('Edit')}
           </Button>
         }
         footer={
@@ -32,12 +32,12 @@ export const PublicOfferingAccounting: FunctionComponent<PublicOfferingAccountin
         }
       >
         <div className="mb-6">
-          <Field label="Billing type:" spaceless>
+          <Field label={translate('Billing type:')} spaceless>
             Fixed per month
           </Field>
         </div>
         <div className="mb-6">
-          <strong>Components:</strong>
+          <strong>{translate('Components')}:</strong>
           <Field label="Cores (limit based):" spaceless>
             0-100
           </Field>
@@ -49,12 +49,12 @@ export const PublicOfferingAccounting: FunctionComponent<PublicOfferingAccountin
           </Field>
         </div>
         <div>
-          <strong>Accounting plans:</strong>
+          <strong>{translate('Accounting plans')}:</strong>
           <p>
             - My first plan (per month)
             <br />- Plan 2 (per week)
           </p>
         </div>
-      </PublicOfferingDataCard>
+      </ProviderOfferingDataCard>
     );
   };

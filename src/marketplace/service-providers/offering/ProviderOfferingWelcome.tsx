@@ -4,7 +4,11 @@ import { Link } from '@waldur/core/Link';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 
-export const PublicOfferingWelcome = ({ offering }: { offering: Offering }) => {
+export const ProviderOfferingWelcome = ({
+  offering,
+}: {
+  offering: Offering;
+}) => {
   // TODO: use real data
   const OfferingCompletionPercentage = offering ? 50 : 0;
 

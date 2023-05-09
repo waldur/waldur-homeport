@@ -5,25 +5,25 @@ import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 
 import { CircleProgressStatus } from './CircleProgressStatus';
-import { PublicOfferingDataCard } from './PublicOfferingDataCard';
+import { ProviderOfferingDataCard } from './ProviderOfferingDataCard';
 
-interface PublicOfferingImageGalleryProps {
+interface ProviderOfferingImageGalleryProps {
   offering: Offering;
 }
 
-export const PublicOfferingImageGallery: FunctionComponent<PublicOfferingImageGalleryProps> =
+export const ProviderOfferingImageGallery: FunctionComponent<ProviderOfferingImageGalleryProps> =
   ({ offering }) => {
     const [image, setImage] = useState(1);
 
     if (!offering) return null;
 
     return (
-      <PublicOfferingDataCard
+      <ProviderOfferingDataCard
         title={translate('Image gallery')}
         icon="fa fa-picture-o"
         actions={
           <Button variant="light" className="mw-100px w-100">
-            Edit
+            {translate('Edit')}
           </Button>
         }
         footer={
@@ -57,6 +57,6 @@ export const PublicOfferingImageGallery: FunctionComponent<PublicOfferingImageGa
             </div>
           </div>
         </div>
-      </PublicOfferingDataCard>
+      </ProviderOfferingDataCard>
     );
   };

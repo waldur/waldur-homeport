@@ -6,23 +6,23 @@ import { Offering } from '@waldur/marketplace/types';
 import { Field } from '@waldur/resource/summary';
 
 import { CircleProgressStatus } from './CircleProgressStatus';
-import { PublicOfferingDataCard } from './PublicOfferingDataCard';
+import { ProviderOfferingDataCard } from './ProviderOfferingDataCard';
 
-interface PublicOfferingMetadataProps {
+interface ProviderOfferingMetadataProps {
   offering: Offering;
 }
 
-export const PublicOfferingMetadata: FunctionComponent<PublicOfferingMetadataProps> =
+export const ProviderOfferingMetadata: FunctionComponent<ProviderOfferingMetadataProps> =
   ({ offering }) => {
     if (!offering) return null;
 
     return (
-      <PublicOfferingDataCard
+      <ProviderOfferingDataCard
         title={translate('Metadata')}
         icon="fa fa-file-code-o"
         actions={
           <Button variant="light" className="mw-100px w-100">
-            Edit
+            {translate('Edit')}
           </Button>
         }
         footer={
@@ -32,39 +32,39 @@ export const PublicOfferingMetadata: FunctionComponent<PublicOfferingMetadataPro
         }
       >
         <div className="mb-6">
-          <Field label="Location:" spaceless>
+          <Field label={translate('Location:')} spaceless>
             Tartu
           </Field>
         </div>
         <div className="mb-6">
-          <Field label="Certifications:" spaceless>
+          <Field label={translate('Certifications:')} spaceless>
             <span></span>
           </Field>
         </div>
         <div className="mb-6">
-          <Field label="Virtualisation:" spaceless>
+          <Field label={translate('Virtualisation:')} spaceless>
             <span></span>
           </Field>
-          <Field label="Network:" spaceless>
+          <Field label={translate('Network:')} spaceless>
             <span></span>
           </Field>
         </div>
         <div className="mb-6">
-          <Field label="High Availability:" spaceless>
+          <Field label={translate('High availability:')} spaceless>
             <span></span>
           </Field>
-          <Field label="Availability Monitoring:" spaceless>
+          <Field label={translate('Availability monitoring:')} spaceless>
             <span></span>
           </Field>
         </div>
         <div>
-          <Field label="Operating System:" spaceless>
+          <Field label={translate('Operating system:')} spaceless>
             <span></span>
           </Field>
-          <Field label="Application:" spaceless>
+          <Field label={translate('Application:')} spaceless>
             <span></span>
           </Field>
         </div>
-      </PublicOfferingDataCard>
+      </ProviderOfferingDataCard>
     );
   };

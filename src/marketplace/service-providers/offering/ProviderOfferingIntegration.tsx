@@ -6,23 +6,23 @@ import { Offering } from '@waldur/marketplace/types';
 import { Field } from '@waldur/resource/summary';
 
 import { CircleProgressStatus } from './CircleProgressStatus';
-import { PublicOfferingDataCard } from './PublicOfferingDataCard';
+import { ProviderOfferingDataCard } from './ProviderOfferingDataCard';
 
-interface PublicOfferingIntegrationProps {
+interface ProviderOfferingIntegrationProps {
   offering: Offering;
 }
 
-export const PublicOfferingIntegration: FunctionComponent<PublicOfferingIntegrationProps> =
+export const ProviderOfferingIntegration: FunctionComponent<ProviderOfferingIntegrationProps> =
   ({ offering }) => {
     if (!offering) return null;
 
     return (
-      <PublicOfferingDataCard
+      <ProviderOfferingDataCard
         title={translate('Integration')}
         icon="fa fa-cog"
         actions={
           <Button variant="light" className="mw-100px w-100">
-            Edit
+            {translate('Edit')}
           </Button>
         }
         footer={
@@ -35,42 +35,42 @@ export const PublicOfferingIntegration: FunctionComponent<PublicOfferingIntegrat
         }
       >
         <div className="mb-6">
-          <Field label="Integration type:" spaceless>
+          <Field label={translate('Integration type:')} spaceless>
             OpenStack admin
           </Field>
         </div>
         <div className="mb-6">
-          <Field label="API URL:" spaceless>
+          <Field label={translate('API URL:')} spaceless>
             http://keystone.example.com:5000/v3
           </Field>
         </div>
         <div className="mb-6">
-          <Field label="Domain name:" spaceless>
+          <Field label={translate('Domain name:')} spaceless>
             default
           </Field>
-          <Field label="Username:" spaceless>
+          <Field label={translate('Username:')} spaceless>
             admin
           </Field>
-          <Field label="Password:" spaceless>
+          <Field label={translate('Password:')} spaceless>
             **********
           </Field>
         </div>
         <div className="mb-6">
-          <Field label="Tenant name:" spaceless>
+          <Field label={translate('Tenant name:')} spaceless>
             default
           </Field>
-          <Field label="External network ID:" spaceless>
+          <Field label={translate('External network ID:')} spaceless>
             93298438943843
           </Field>
-          <Field label="Availability zone:" spaceless>
+          <Field label={translate('Availability zone:')} spaceless>
             OSLO1
           </Field>
         </div>
         <div>
-          <Field label="Storage mode:" spaceless>
+          <Field label={translate('Storage mode:')} spaceless>
             Fixed
           </Field>
         </div>
-      </PublicOfferingDataCard>
+      </ProviderOfferingDataCard>
     );
   };

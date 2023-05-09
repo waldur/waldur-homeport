@@ -2,7 +2,7 @@ import { Modal } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-export const PublicOfferingMetadataDialog = ({ resolve }) => {
+export const ProviderOfferingMetadataDialog = ({ resolve }) => {
   return (
     <>
       <Modal.Header>

@@ -74,6 +74,10 @@ const ProviderOfferingsList = lazyComponent(
   () => import('./service-providers/ProviderOfferingsList'),
   'ProviderOfferingsList',
 );
+const ProviderOfferingDetailsContainer = lazyComponent(
+  () => import('./service-providers/offering/ProviderOfferingDetailsContainer'),
+  'ProviderOfferingDetailsContainer',
+);
 const PublicServiceProviderDetails = lazyComponent(
   () => import('./offerings/service-providers/PublicServiceProviderDetails'),
   'PublicServiceProviderDetails',
@@ -450,6 +454,13 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Offerings'),
     },
+  },
+
+  {
+    name: 'marketplace-vendor-offering-details',
+    url: 'marketplace-provider-offerings/:offering_uuid/',
+    component: ProviderOfferingDetailsContainer,
+    parent: 'provider-marketplace',
   },
 
   {

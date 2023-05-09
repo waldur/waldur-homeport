@@ -5,23 +5,23 @@ import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 
 import { CircleProgressStatus } from './CircleProgressStatus';
-import { PublicOfferingDataCard } from './PublicOfferingDataCard';
+import { ProviderOfferingDataCard } from './ProviderOfferingDataCard';
 
-interface PublicOfferingDocumentationProps {
+interface ProviderOfferingDocumentationProps {
   offering: Offering;
 }
 
-export const PublicOfferingDocumentation: FunctionComponent<PublicOfferingDocumentationProps> =
+export const ProviderOfferingDocumentation: FunctionComponent<ProviderOfferingDocumentationProps> =
   ({ offering }) => {
     if (!offering) return null;
 
     return (
-      <PublicOfferingDataCard
+      <ProviderOfferingDataCard
         title={translate('Documentation')}
         icon="fa fa-book"
         actions={
           <Button variant="light" className="mw-100px w-100">
-            Edit
+            {translate('Edit')}
           </Button>
         }
         footer={
@@ -31,14 +31,14 @@ export const PublicOfferingDocumentation: FunctionComponent<PublicOfferingDocume
         }
       >
         <div className="mb-6">
-          <strong>Documentation links:</strong>
+          <strong>{translate('Documentation links')}:</strong>
           <a className="d-block text-link">- How to measure systems</a>
           <a className="d-block text-link">- Deploy hardware on Waldur</a>
           <a className="d-block text-link">- Login to chromatography UI</a>
           <a className="d-block text-link">- Booking time slots with Waldur</a>
         </div>
         <div>
-          <strong>Getting Started Guide:</strong>
+          <strong>{translate('Getting Started Guide')}:</strong>
           <p>
             In addition to the package installation, this One-Click also:
             <br />
@@ -52,6 +52,6 @@ export const PublicOfferingDocumentation: FunctionComponent<PublicOfferingDocume
             Droplet’s public IPv4 address.
           </p>
         </div>
-      </PublicOfferingDataCard>
+      </ProviderOfferingDataCard>
     );
   };

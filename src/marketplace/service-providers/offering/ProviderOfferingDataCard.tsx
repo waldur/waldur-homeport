@@ -1,14 +1,14 @@
 import { FC, ReactNode } from 'react';
 import { Card } from 'react-bootstrap';
 
-interface PublicOfferingDataCardProps {
+interface ProviderOfferingDataCardProps {
   title: string;
   icon?: string | ReactNode;
   actions?: ReactNode;
   footer?: ReactNode;
 }
 
-export const PublicOfferingDataCard: FC<PublicOfferingDataCardProps> = (
+export const ProviderOfferingDataCard: FC<ProviderOfferingDataCardProps> = (
   props,
 ) => {
   return (

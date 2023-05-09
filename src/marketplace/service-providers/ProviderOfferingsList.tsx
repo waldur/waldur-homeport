@@ -21,8 +21,8 @@ import { ResourcesCountColumn } from './ResourcesCountColumn';
 const OfferingNameColumn = ({ row }) => (
   <>
     <Link
-      state="public.marketplace-public-offering"
-      params={{ uuid: row.uuid }}
+      state="marketplace-vendor-offering-details"
+      params={{ offering_uuid: row.uuid }}
       className="fw-bolder"
     >
       {row.name}

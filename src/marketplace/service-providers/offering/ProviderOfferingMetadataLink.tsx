@@ -4,18 +4,18 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
-const PublicOfferingMetadataDialog = lazyComponent(
-  () => import('./PublicOfferingMetadataDialog'),
-  'PublicOfferingMetadataDialog',
+const ProviderOfferingMetadataDialog = lazyComponent(
+  () => import('./ProviderOfferingMetadataDialog'),
+  'ProviderOfferingMetadataDialog',
 );
 
 const showMetadata = () =>
-  openModalDialog(PublicOfferingMetadataDialog, {
+  openModalDialog(ProviderOfferingMetadataDialog, {
     resolve: 'Offering metadata details',
     size: 'lg',
   });
 
-export const PublicOfferingMetadataLink = () => {
+export const ProviderOfferingMetadataLink = () => {
   const dispatch = useDispatch();
 
   return (

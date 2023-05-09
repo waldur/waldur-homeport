@@ -56,6 +56,10 @@ msgstr ""
 msgid "API URL"
 msgstr ""
 
+#: src/marketplace/service-providers/offering/ProviderOfferingIntegration.tsx
+msgid "API URL:"
+msgstr ""
+
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "API secret code:"
 msgstr ""
@@ -141,7 +145,7 @@ msgstr ""
 msgid "Access token"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetailsHero.tsx
 msgid "Access:"
 msgstr ""
 
@@ -158,8 +162,8 @@ msgstr ""
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/PageAccounting.tsx
-#: src/marketplace/offerings/details/PublicOfferingAccounting.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingAccounting.tsx
 msgid "Accounting"
 msgstr ""
 
@@ -170,6 +174,7 @@ msgid "Accounting period"
 msgstr ""
 
 #: src/marketplace/offerings/plan/PlansList.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingAccounting.tsx
 msgid "Accounting plans"
 msgstr ""
 
@@ -193,7 +198,7 @@ msgstr ""
 msgid "Accounting type"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingWelcome.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingWelcome.tsx
 msgid "Accounting, integration and support"
 msgstr ""
 
@@ -714,6 +719,10 @@ msgstr ""
 msgid "Application templates"
 msgstr ""
 
+#: src/marketplace/service-providers/offering/ProviderOfferingMetadata.tsx
+msgid "Application:"
+msgstr ""
+
 #: src/rancher/cluster/tabs.ts
 msgid "Applications"
 msgstr ""
@@ -772,6 +781,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetails.tsx
 msgid "Archived"
 msgstr ""
 
@@ -874,6 +884,7 @@ msgid "Article code"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingFAQ.tsx
 msgid "Ask a question"
 msgstr ""
 
@@ -1001,6 +1012,10 @@ msgstr ""
 msgid "Availability"
 msgstr ""
 
+#: src/marketplace/service-providers/offering/ProviderOfferingMetadata.tsx
+msgid "Availability monitoring:"
+msgstr ""
+
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
@@ -1012,6 +1027,10 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
 msgid "Availability zone"
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingIntegration.tsx
+msgid "Availability zone:"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingFacility.tsx
@@ -1175,6 +1194,10 @@ msgstr ""
 
 #: src/marketplace/offerings/PriceList.tsx
 msgid "Billing type"
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingAccounting.tsx
+msgid "Billing type:"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
@@ -1385,6 +1408,7 @@ msgstr ""
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
@@ -1413,8 +1437,12 @@ msgstr ""
 msgid "Category name"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetailsHero.tsx
 msgid "Category:"
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingMetadata.tsx
+msgid "Certifications:"
 msgstr ""
 
 #: src/auth/valimo/AuthValimoDialog.tsx
@@ -1544,7 +1572,7 @@ msgstr ""
 msgid "Client secret"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetailsHero.tsx
 msgid "Clients"
 msgstr ""
 
@@ -1667,7 +1695,7 @@ msgstr ""
 msgid "Competence"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingWelcome.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingWelcome.tsx
 msgid "Complete the steps “{link}” in order to fully complete your marketplace offering. The more information gathered in the marketplace page, the higher are the chances of users provisioning your services."
 msgstr ""
 
@@ -1697,8 +1725,11 @@ msgid "Component name"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingComponents.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/resources/details/openstack-volume/VolumeMainComponent.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingAccounting.tsx
 msgid "Components"
 msgstr ""
 
@@ -2467,6 +2498,7 @@ msgid "Deletion"
 msgstr ""
 
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "Deploy"
@@ -2507,6 +2539,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PageDescription.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/marketplace/offerings/details/PublicOfferingInfo.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
@@ -2712,9 +2745,13 @@ msgstr ""
 msgid "Docs & resources"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDocumentation.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDocumentation.tsx
 #: src/navigation/header/DocsLink.tsx
 msgid "Documentation"
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingDocumentation.tsx
+msgid "Documentation links"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
@@ -2734,6 +2771,10 @@ msgstr ""
 
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Domain name. If not defined default domain will be used."
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingIntegration.tsx
+msgid "Domain name:"
 msgstr ""
 
 #: src/invoices/events/InvoiceEventsDialog.tsx
@@ -2765,6 +2806,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetails.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
 msgstr ""
@@ -2822,6 +2864,14 @@ msgstr ""
 #: src/marketplace/resources/details/RobotAccountEditButton.tsx
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingAccounting.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDocumentation.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingFAQ.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingImageGallery.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingIntegration.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingMetadata.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingReviews.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingSupport.tsx
 #: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
 #: src/openstack/openstack-backup/actions/EditAction.tsx
 #: src/openstack/openstack-instance/actions/EditAction.tsx
@@ -2952,6 +3002,10 @@ msgstr ""
 
 #: src/user/support/useEmailChange.ts
 msgid "Email verification has been sent. Please check your inbox."
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingSupport.tsx
+msgid "Email:"
 msgstr ""
 
 #: src/marketplace/service-providers/CustomerContactColumn.tsx
@@ -3307,12 +3361,18 @@ msgstr ""
 msgid "External network ID"
 msgstr ""
 
+#: src/marketplace/service-providers/offering/ProviderOfferingIntegration.tsx
+msgid "External network ID:"
+msgstr ""
+
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 msgid "External username"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingFAQ.tsx
 msgid "FAQ"
 msgstr ""
 
@@ -3631,6 +3691,10 @@ msgstr ""
 msgid "Gateway IP of this subnet"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+msgid "General"
+msgstr ""
+
 #: src/customer/create/CustomerCreateForm.tsx
 msgid "General information"
 msgstr ""
@@ -3647,6 +3711,11 @@ msgstr ""
 msgid "Get help"
 msgstr ""
 
+#: src/marketplace/service-providers/offering/ProviderOfferingDocumentation.tsx
+msgid "Getting Started Guide"
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingGettingStarted.tsx
 msgid "Getting started"
 msgstr ""
@@ -3764,6 +3833,10 @@ msgstr ""
 
 #: src/rancher/cluster/ViewYAMLDialog.tsx
 msgid "Hide diff"
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingMetadata.tsx
+msgid "High availability:"
 msgstr ""
 
 #: src/customer/create/DomainGroup.tsx
@@ -3902,7 +3975,7 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingImageGallery.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingImageGallery.tsx
 msgid "Image gallery"
 msgstr ""
 
@@ -3939,6 +4012,7 @@ msgstr ""
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/offerings/details/PageImages.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
@@ -4108,8 +4182,12 @@ msgstr ""
 msgid "Instances count"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingIntegration.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingIntegration.tsx
 msgid "Integration"
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingIntegration.tsx
+msgid "Integration type:"
 msgstr ""
 
 #: src/issues/comments/IssueCommentItem.tsx
@@ -4631,6 +4709,10 @@ msgstr ""
 msgid "Location of {offeringName} offering"
 msgstr ""
 
+#: src/marketplace/service-providers/offering/ProviderOfferingMetadata.tsx
+msgid "Location:"
+msgstr ""
+
 #: src/navigation/AnonymousHeader.tsx
 msgid "Log in"
 msgstr ""
@@ -4899,7 +4981,7 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingMetadata.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingMetadata.tsx
 msgid "Metadata"
 msgstr ""
 
@@ -5287,6 +5369,10 @@ msgstr ""
 msgid "Network name"
 msgstr ""
 
+#: src/marketplace/service-providers/offering/ProviderOfferingMetadata.tsx
+msgid "Network:"
+msgstr ""
+
 #: src/marketplace/resources/details/openstack-tenant/SubnetsSection.tsx
 msgid "Network: {network_name}, CIDR: {cidr}"
 msgstr ""
@@ -5662,7 +5748,6 @@ msgstr ""
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/actions/tabs.ts
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -5682,6 +5767,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOfferingUsersFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetailsHero.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -5710,6 +5796,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingDetailsButton.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsContainer.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetailsContainer.tsx
 msgid "Offering details"
 msgstr ""
 
@@ -5767,7 +5854,7 @@ msgstr ""
 msgid "Offering logo"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetailsHero.tsx
 msgid "Offering manager:"
 msgstr ""
 
@@ -5779,7 +5866,7 @@ msgstr ""
 msgid "Offering managers:"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingMetadataDialog.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingMetadataDialog.tsx
 msgid "Offering metadata"
 msgstr ""
 
@@ -5793,7 +5880,7 @@ msgstr ""
 msgid "Offering order items synchronization has been scheduled."
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingWelcome.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingWelcome.tsx
 msgid "Offering progress"
 msgstr ""
 
@@ -6000,6 +6087,10 @@ msgstr ""
 
 #: src/issues/list/IssueSubtitle.tsx
 msgid "Opened by {user} from {organization} at {date}"
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingMetadata.tsx
+msgid "Operating system:"
 msgstr ""
 
 #: src/marketplace/resources/details/StatusPage.tsx
@@ -6392,6 +6483,10 @@ msgstr ""
 msgid "Password has been changed for user {affected_user_link}."
 msgstr ""
 
+#: src/marketplace/service-providers/offering/ProviderOfferingIntegration.tsx
+msgid "Password:"
+msgstr ""
+
 #: src/booking/components/calendar/LazyCalendarComponent.tsx
 msgid "Past time slots are not allowed."
 msgstr ""
@@ -6407,6 +6502,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetails.tsx
 msgid "Paused"
 msgstr ""
 
@@ -6660,6 +6756,10 @@ msgstr ""
 
 #: src/user/support/UserDetailsTable.tsx
 msgid "Phone numbers"
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingSupport.tsx
+msgid "Phone:"
 msgstr ""
 
 #: src/marketplace/service-providers/CustomerContactColumn.tsx
@@ -7059,6 +7159,7 @@ msgstr ""
 msgid "Pricelist"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
 msgid "Pricing"
 msgstr ""
@@ -7098,11 +7199,15 @@ msgstr ""
 msgid "Privacy policy link"
 msgstr ""
 
+#: src/marketplace/service-providers/offering/ProviderOfferingSupport.tsx
+msgid "Privacy policy:"
+msgstr ""
+
 #: src/openstack/utils.ts
 msgid "Private clouds"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingWelcome.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingWelcome.tsx
 #: src/user/dashboard/UserWelcome.tsx
 msgid "Profile completion"
 msgstr ""
@@ -7123,7 +7228,7 @@ msgstr ""
 msgid "Profile settings"
 msgstr ""
 
-#: src/marketplace/offerings/details/CircleProgressStatus.tsx
+#: src/marketplace/service-providers/offering/CircleProgressStatus.tsx
 msgid "Progress"
 msgstr ""
 
@@ -7498,7 +7603,7 @@ msgstr ""
 msgid "Public list"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingQuickActions.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingQuickActions.tsx
 msgid "Publish"
 msgstr ""
 
@@ -8342,7 +8447,6 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -8351,6 +8455,7 @@ msgstr ""
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetailsHero.tsx
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
@@ -8483,7 +8588,9 @@ msgid "Reviewed by"
 msgstr ""
 
 #: src/customer/routes.ts
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingReviews.tsx
 msgid "Reviews"
 msgstr ""
 
@@ -9443,8 +9550,8 @@ msgstr ""
 msgid "Show less"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingMetadataLink.tsx
 #: src/marketplace/resources/details/ResourceMetadataLink.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingMetadataLink.tsx
 msgid "Show metadata"
 msgstr ""
 
@@ -9697,7 +9804,6 @@ msgstr ""
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/orders/Order.tsx
@@ -9722,6 +9828,7 @@ msgstr ""
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetailsHero.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/notifications/NotificationList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
@@ -9802,6 +9909,7 @@ msgid "Step 2. Select resources"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingFAQ.tsx
 msgid "Still unsure? Ask a question"
 msgstr ""
 
@@ -9828,6 +9936,10 @@ msgstr ""
 
 #: src/openstack/OpenStackPluginOptionsForm.tsx
 msgid "Storage mode"
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingIntegration.tsx
+msgid "Storage mode:"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
@@ -9967,7 +10079,7 @@ msgid "Summary"
 msgstr ""
 
 #: src/issues/routes.ts
-#: src/marketplace/offerings/details/PublicOfferingSupport.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingSupport.tsx
 #: src/navigation/FooterLinks.tsx
 #: src/navigation/sidebar/SupportMenu.tsx
 #: src/user/support/UserFilter.tsx
@@ -9975,8 +10087,12 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetailsHero.tsx
 msgid "Support Tickets"
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingSupport.tsx
+msgid "Support portal:"
 msgstr ""
 
 #: src/issues/events.tsx
@@ -10173,6 +10289,10 @@ msgstr ""
 msgid "Tenant name"
 msgstr ""
 
+#: src/marketplace/service-providers/offering/ProviderOfferingIntegration.tsx
+msgid "Tenant name:"
+msgstr ""
+
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Tenant user password"
@@ -10242,6 +10362,10 @@ msgstr ""
 
 #: src/navigation/FooterLinks.tsx
 msgid "Terms of service"
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingSupport.tsx
+msgid "Terms of service:"
 msgstr ""
 
 #: src/marketplace-script/TestScriptButton.tsx
@@ -10518,14 +10642,17 @@ msgid "This name will be visible in accounting data."
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetails.tsx
 msgid "This offering has been archived."
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetails.tsx
 msgid "This offering has been paused and new resources cannot be added at the moment."
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetails.tsx
 msgid "This offering has not been activated by the operator yet."
 msgstr ""
 
@@ -11272,12 +11399,13 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsContainer.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderOfferingsListExpandableRow.tsx
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetailsContainer.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 msgid "Unable to load offering details."
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingDetailsHero.tsx
 msgid "Unable to load offering manager"
 msgstr ""
 
@@ -12405,6 +12533,10 @@ msgstr ""
 msgid "Username prefix"
 msgstr ""
 
+#: src/marketplace/service-providers/offering/ProviderOfferingIntegration.tsx
+msgid "Username:"
+msgstr ""
+
 #: src/freeipa/UsernameGroup.tsx
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
@@ -12577,6 +12709,7 @@ msgstr ""
 msgid "Verifying email change"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/navigation/AppFooter.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
@@ -12602,6 +12735,10 @@ msgstr ""
 
 #: src/quotas/constants.ts
 msgid "Virtual machines count"
+msgstr ""
+
+#: src/marketplace/service-providers/offering/ProviderOfferingMetadata.tsx
+msgid "Virtualisation:"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/AttachVolumeDialog.tsx
@@ -12724,6 +12861,7 @@ msgid "Would you like to update your current email with the one from the invitat
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
+#: src/marketplace/service-providers/offering/ProviderOfferingReviews.tsx
 msgid "Write a review"
 msgstr ""
 

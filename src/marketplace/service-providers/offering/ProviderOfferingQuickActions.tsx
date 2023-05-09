@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/marketplace/resources/details/ActionButton';
 
-export const PublicOfferingQuickActions = () => {
+export const ProviderOfferingQuickActions = () => {
   return (
     <div className="d-flex justify-content-between flex-wrap gap-2">
       <div className="d-flex gap-2">
