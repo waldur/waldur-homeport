@@ -11,6 +11,7 @@ import { closeModalDialog } from './modal/actions';
 import { setPrevParams, setPrevState } from './navigation/utils';
 import { router } from './router';
 import { UsersService } from './user/UsersService';
+import { initWorkspace } from './workspace/WorkspaceStorage';
 
 export function attachTransitions() {
   router.transitionService.onSuccess({}, function () {
@@ -34,6 +35,10 @@ export function attachTransitions() {
       try {
         const result = await UsersService.isCurrentUserValid();
         if (result) {
+          // restore workspace for the first load (user should be exist)
+          if (!transition.from().name) {
+            initWorkspace();
+          }
           if (transition.to().name == 'initialdata') {
             return transition.router.stateService.target('profile.details');
           }
