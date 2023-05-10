@@ -35,6 +35,7 @@ export interface ExternalLink {
 interface CoreConfiguration {
   MASTERMIND_URL: string;
   BRAND_COLOR: string;
+  BRAND_LABEL_COLOR: string;
   HERO_LINK_URL: string;
   HERO_LINK_LABEL: string;
   HERO_IMAGE: string;
