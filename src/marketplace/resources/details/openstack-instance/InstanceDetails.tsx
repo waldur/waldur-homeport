@@ -40,9 +40,9 @@ export const InstanceDetails = ({ resource }) => {
               title: translate('Networking'),
               children: [
                 {
-                  title: translate('Security groups'),
-                  count: value.counters.security_groups,
-                  component: SecurityGroupsSection,
+                  title: translate('Floating IPs'),
+                  count: value.counters.floating_ips,
+                  component: FloatingIPSection,
                 },
                 {
                   title: translate('Internal IPs'),
@@ -50,9 +50,9 @@ export const InstanceDetails = ({ resource }) => {
                   component: InternalIPSection,
                 },
                 {
-                  title: translate('Floating IPs'),
-                  count: value.counters.floating_ips,
-                  component: FloatingIPSection,
+                  title: translate('Security groups'),
+                  count: value.counters.security_groups,
+                  component: SecurityGroupsSection,
                 },
               ],
             },
@@ -60,9 +60,9 @@ export const InstanceDetails = ({ resource }) => {
               title: translate('Storage'),
               children: [
                 {
-                  title: translate('Volumes'),
-                  count: value.counters.volumes,
-                  component: VolumesSection,
+                  title: translate('Snapshot schedules'),
+                  count: value.counters.backup_schedules,
+                  component: SnapshotSchedulesSection,
                 },
                 {
                   title: translate('Snapshots'),
@@ -70,9 +70,9 @@ export const InstanceDetails = ({ resource }) => {
                   component: SnapshotsSection,
                 },
                 {
-                  title: translate('Snapshot schedules'),
-                  count: value.counters.backup_schedules,
-                  component: SnapshotSchedulesSection,
+                  title: translate('Volumes'),
+                  count: value.counters.volumes,
+                  component: VolumesSection,
                 },
               ],
             },
