@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import 'world-flags-sprite/stylesheets/flags16.css';
 
 import { fixURL } from '@waldur/core/api';
+import { hasSupport } from '@waldur/issues/hooks';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getTitle } from '../title';
@@ -82,7 +83,7 @@ export const AppHeader: FunctionComponent = () => {
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
             {user && <LegacyBranchLink />}
-            {user && <QuickIssueDrawerToggle />}
+            {user && hasSupport && <QuickIssueDrawerToggle />}
             {user && <FavoritePagesDropdown />}
             {user && <ConfirmationDrawerToggle />}
             {user && <SearchToggle />}

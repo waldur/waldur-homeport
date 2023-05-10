@@ -2,7 +2,10 @@ import { translate } from '@waldur/i18n';
 import { updateRobotAccount } from '@waldur/marketplace/common/api';
 import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDialog';
 
-import { useRobotAccountFields } from '../actions/CreateRobotAccountDialog';
+import {
+  RobotAccountFormData,
+  useRobotAccountFields,
+} from '../actions/CreateRobotAccountDialog';
 
 export const RobotAccountEditDialog = ({ resolve: { resource, refetch } }) => {
   const fields = useRobotAccountFields(resource);
@@ -16,10 +19,10 @@ export const RobotAccountEditDialog = ({ resolve: { resource, refetch } }) => {
         users: resource.users,
         keys: resource.keys.join('\n'),
       }}
-      updateResource={(id, formData) =>
+      updateResource={(id, formData: RobotAccountFormData) =>
         updateRobotAccount(id, {
           ...formData,
-          keys: formData.keys?.strip().split(/\r?\n/),
+          keys: formData.keys?.trim().split(/\r?\n/),
           users: formData.users?.map(({ url }) => url),
         })
       }

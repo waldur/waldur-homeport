@@ -1,3 +1,4 @@
+import { useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -23,6 +24,9 @@ export const ProjectUsersBadge = () => {
     error,
     value: users,
   } = useAsync(async () => await fetchAllProjectUsers(project.uuid), [project]);
+
+  const router = useRouter();
+  const goToUsers = () => router.stateService.go('project-users');
 
   const managers = useMemo(
     () =>
@@ -54,7 +58,7 @@ export const ProjectUsersBadge = () => {
                 {translate(ENV.roles.manager)}:
               </Form.Label>
               <Col>
-                <SymbolsGroup items={managers} max={6} />
+                <SymbolsGroup items={managers} max={6} onClick={goToUsers} />
               </Col>
             </Form.Group>
           )}
@@ -64,7 +68,7 @@ export const ProjectUsersBadge = () => {
                 {translate(ENV.roles.admin)}:
               </Form.Label>
               <Col>
-                <SymbolsGroup items={admins} max={6} />
+                <SymbolsGroup items={admins} max={6} onClick={goToUsers} />
               </Col>
             </Form.Group>
           )}
@@ -74,7 +78,7 @@ export const ProjectUsersBadge = () => {
                 {translate(ENV.roles.member)}:
               </Form.Label>
               <Col>
-                <SymbolsGroup items={members} max={6} />
+                <SymbolsGroup items={members} max={6} onClick={goToUsers} />
               </Col>
             </Form.Group>
           )}

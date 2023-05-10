@@ -1,3 +1,7 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { destroy } from 'redux-form';
+
 import { router } from '@waldur/router';
 
 import { isEmpty } from './utils';
@@ -7,7 +11,7 @@ const formatParam = (param: string) => {
   try {
     return JSON.parse(decoded);
   } catch {
-    return null;
+    return decoded;
   }
 };
 
@@ -17,7 +21,9 @@ const getQueryParams = () => {
   for (const [key, value] of Object.entries(search)) {
     urlParams = {
       ...urlParams,
-      [key]: formatParam(value),
+      [key]: Array.isArray(value)
+        ? value.map((v) => formatParam(v)).filter(Boolean)
+        : formatParam(value),
     };
   }
   return urlParams;
@@ -51,7 +57,7 @@ export const getInitialValues = (initialValues?) => {
   }
   let queryParamValues = {};
   for (const [key, value] of Object.entries(queryParams)) {
-    if (key && value) {
+    if (key && (Array.isArray(value) ? value.length : value)) {
       queryParamValues = {
         ...queryParamValues,
         [key]: value,
@@ -59,4 +65,13 @@ export const getInitialValues = (initialValues?) => {
     }
   }
   return queryParamValues;
+};
+
+export const useDestroyFilterOnLeave = (form: string) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    return () => {
+      dispatch(destroy(form));
+    };
+  });
 };

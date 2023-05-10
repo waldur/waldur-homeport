@@ -12,6 +12,13 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
+export interface RobotAccountFormData {
+  type: string;
+  username: string;
+  users: Array<{ url: string; full_name: string; email: string }>;
+  keys: string;
+}
+
 export const useRobotAccountFields = (resource) => {
   const loadUsers = useCallback(
     (query, prevOptions, page) =>
@@ -71,13 +78,13 @@ export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
       initialValues={{
         type: 'cicd',
       }}
-      submitForm={async (formData) => {
+      submitForm={async (formData: RobotAccountFormData) => {
         try {
           await createRobotAccount({
             ...formData,
             resource: resource.url,
             users: formData.users?.map(({ url }) => url),
-            keys: formData.keys?.strip().split(/\r?\n/),
+            keys: formData.keys?.trim().split(/\r?\n/),
           });
           dispatch(showSuccess(translate('Robot account has been created.')));
           dispatch(closeModalDialog());

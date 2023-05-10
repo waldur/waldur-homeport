@@ -65,7 +65,10 @@ export const SLURMPluginOptionsForm: FunctionComponent<{ container }> = ({
   }, []);
 
   useEffect(() => {
-    if (pluginOptions?.username_generation_policy === 'anonymized') {
+    if (
+      pluginOptions?.username_generation_policy === 'anonymized' &&
+      !pluginOptions?.username_anonymized_prefix
+    ) {
       dispatch(
         change(
           FORM_ID,
@@ -74,7 +77,11 @@ export const SLURMPluginOptionsForm: FunctionComponent<{ container }> = ({
         ),
       );
     }
-  }, [dispatch, pluginOptions?.username_generation_policy]);
+  }, [
+    dispatch,
+    pluginOptions?.username_generation_policy,
+    pluginOptions?.username_anonymized_prefix,
+  ]);
 
   return (
     <FormContainer {...container}>

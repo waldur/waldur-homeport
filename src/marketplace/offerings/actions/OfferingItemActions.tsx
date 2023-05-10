@@ -288,6 +288,20 @@ const mergeProps = (
         isVisible(ownProps.offering.state, stateProps.user?.is_staff),
     },
     {
+      label: translate('Manage users'),
+      handler: () =>
+        router.stateService.go('marketplace-vendor-offering-users', {
+          offering_uuid: ownProps.offering.uuid,
+        }),
+      visible:
+        !ownProps.isPublic &&
+        ownProps.offering.secret_options
+          ?.service_provider_can_create_offering_user &&
+        (stateProps.user?.is_staff ||
+          stateProps.isOwner ||
+          stateProps.isServiceManager),
+    },
+    {
       label: translate('Request publishing'),
       handler: () => dispatchProps.requestPublishing(ownProps.offering),
       visible:
