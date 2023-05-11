@@ -1,3 +1,4 @@
+import { useRouter } from '@uirouter/react';
 import React from 'react';
 import { Card, Col, Form, Row, Stack } from 'react-bootstrap';
 
@@ -13,6 +14,9 @@ import { CustomerActions } from './CustomerActions';
 import { SymbolsGroup } from './SymbolsGroup';
 
 export const CustomerProfile = ({ customer }: { customer: Customer }) => {
+  const router = useRouter();
+  const goToUsers = () => router.stateService.go('organization-users');
+
   const owners = React.useMemo(
     () =>
       customer.owners.map((owner) => ({
@@ -78,7 +82,11 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
                         {translate('Owners:')}
                       </Form.Label>
                       <Col>
-                        <SymbolsGroup items={owners} max={6} />
+                        <SymbolsGroup
+                          items={owners}
+                          max={6}
+                          onClick={goToUsers}
+                        />
                       </Col>
                     </Form.Group>
                   )}
@@ -88,7 +96,7 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
                         {translate('Managers:')}
                       </Form.Label>
                       <Col>
-                        <SymbolsGroup items={managers} />
+                        <SymbolsGroup items={managers} onClick={goToUsers} />
                       </Col>
                     </Form.Group>
                   )}

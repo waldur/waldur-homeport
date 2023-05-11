@@ -21,6 +21,14 @@ import { CategoryFilter } from './CategoryFilter';
 import { RelatedCustomerFilter } from './RelatedCustomerFilter';
 import { getStates, ResourceStateFilter } from './ResourceStateFilter';
 
+const getFiltersFromParams = (params) => {
+  if (!params?.state) return params;
+  return {
+    ...params,
+    state: getStates().filter((state) => params.state.includes(state.value)),
+  };
+};
+
 type StateProps = ReturnType<typeof mapStateToProps>;
 
 const PurePublicResourcesFilter: FunctionComponent<StateProps> = (props) => (
@@ -46,12 +54,8 @@ const PurePublicResourcesFilter: FunctionComponent<StateProps> = (props) => (
     >
       <CategoryFilter />
     </TableFilterItem>
-    <TableFilterItem
-      title={translate('State')}
-      name="state"
-      badgeValue={(value) => value?.label}
-    >
-      <ResourceStateFilter />
+    <TableFilterItem title={translate('State')} name="state">
+      <ResourceStateFilter reactSelectProps={{ isMulti: true }} />
     </TableFilterItem>
   </>
 );
@@ -71,9 +75,11 @@ const filterSelector = createSelector(
 
 const mapStateToProps = (state: RootState) => ({
   offeringFilter: filterSelector(state),
-  initialValues: getInitialValues({
-    state: getStates()[1],
-  }),
+  initialValues: getFiltersFromParams(
+    getInitialValues({
+      state: [getStates()[1]],
+    }),
+  ),
 });
 
 const enhance = compose(

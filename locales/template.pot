@@ -4427,6 +4427,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/navigation/IssuesLink.tsx
 #: src/navigation/header/QuickIssueDrawerToggle.tsx
 #: src/project/ProjectActions.tsx
 #: src/project/routes.ts
@@ -4830,6 +4831,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/InstanceNetworkButton.tsx
 msgid "Manage security groups"
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Manage users"
 msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
@@ -9826,6 +9831,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/service-providers/ProviderOfferingsFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/marketplace/service-providers/offering/ProviderOfferingDetailsHero.tsx
@@ -12109,6 +12115,10 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 msgid "Update static routes"
+msgstr ""
+
+#: src/resource/actions/UpdateResourceDialog.tsx
+msgid "Update {resourceType}"
 msgstr ""
 
 #: src/resource/actions/UpdateResourceDialog.tsx

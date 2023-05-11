@@ -40,10 +40,15 @@ export const WorkspaceStorage = new WorkspaceStorageClass();
 
 export const initWorkspace = () => {
   if (AuthService.isAuthenticated()) {
-    const customer = WorkspaceStorage.getCustomer();
-    if (customer) store.dispatch(setCurrentCustomer(customer));
+    const currentCustomer = store.getState().workspace.customer;
+    const currentProject = store.getState().workspace.project;
 
-    const project = WorkspaceStorage.getProject();
-    if (project) store.dispatch(setCurrentProject(project));
+    if (!currentCustomer && !currentProject) {
+      const customer = WorkspaceStorage.getCustomer();
+      if (customer) store.dispatch(setCurrentCustomer(customer));
+
+      const project = WorkspaceStorage.getProject();
+      if (project) store.dispatch(setCurrentProject(project));
+    }
   }
 };

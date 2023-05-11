@@ -1,6 +1,7 @@
 import { Card, Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
+import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
@@ -26,6 +27,7 @@ interface ProviderWidget {
   title: string;
   changes: number;
   active?: boolean;
+  to: { state; params? };
 }
 
 const generateWidgetsData = (statistics: ProviderStatistics) => [
@@ -34,24 +36,34 @@ const generateWidgetsData = (statistics: ProviderStatistics) => [
     value: statistics.active_campaigns,
     title: translate('Active campaigns'),
     changes: 0,
+    to: { state: 'marketplace-provider-campaigns' },
   },
   {
     icon: IconUser,
     value: statistics.current_customers,
     title: translate('Active clients'),
     changes: statistics.customers_number_change,
+    to: { state: 'marketplace-provider-organizations' },
   },
   {
     icon: IconResource,
     value: statistics.active_resources,
     title: translate('Active resources'),
     changes: statistics.resources_number_change,
+    to: {
+      state: 'marketplace-public-resources',
+      params: { state: ['OK', 'Creating', 'Terminating', 'Erred'] },
+    },
   },
   {
     icon: IconOffering,
     value: statistics.active_and_paused_offerings,
     title: translate('Total published offerings'),
     changes: 0,
+    to: {
+      state: 'marketplace-vendor-offerings',
+      params: { state: ['Active', 'Paused'] },
+    },
   },
   {
     icon: IconSupport,
@@ -59,6 +71,7 @@ const generateWidgetsData = (statistics: ProviderStatistics) => [
     title: translate('Open support tickets'),
     changes: 0,
     active: true,
+    to: { state: '#' },
   },
   {
     icon: IconPendingApproval,
@@ -66,12 +79,17 @@ const generateWidgetsData = (statistics: ProviderStatistics) => [
     title: translate('Orders pending approval'),
     changes: 0,
     active: true,
+    to: {
+      state: 'marketplace-order-items',
+      params: { state: 'pending' },
+    },
   },
   {
     icon: IconNotification,
     value: 0,
     title: translate('Active notifications'),
     changes: 0,
+    to: { state: '#' },
   },
   {
     icon: IconAttentionTriangle,
@@ -79,11 +97,20 @@ const generateWidgetsData = (statistics: ProviderStatistics) => [
     title: translate('Erred resources'),
     changes: 0,
     active: true,
+    to: {
+      state: 'marketplace-public-resources',
+      params: { state: ['Erred'] },
+    },
   },
 ];
 
 const WidgetItem = ({ item }: { item: ProviderWidget }) => (
-  <Card className="flex-grow-1 min-h-225px">
+  <Card
+    as={Link}
+    state={item.to.state}
+    params={item.to.params}
+    className="flex-grow-1 min-h-225px border border-secondary border-hover"
+  >
     <Card.Body className="py-10 px-6">
       <InlineSVG
         path={item.icon}
@@ -93,7 +120,7 @@ const WidgetItem = ({ item }: { item: ProviderWidget }) => (
         }
       />
       <h1 className="display-6 text-nowrap mb-0 mt-2">{item.value}</h1>
-      <p className="fs-7 fw-bolder mb-5 h-40px">{item.title}</p>
+      <p className="fs-7 fw-bolder mb-5 h-40px text-dark">{item.title}</p>
       <ChangesAmountBadge changes={item.changes} />
     </Card.Body>
   </Card>
