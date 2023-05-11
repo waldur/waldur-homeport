@@ -68,30 +68,30 @@ export const ProviderOfferingDetails: FunctionComponent<ProviderOfferingDetailsP
         <ProviderOfferingWelcome offering={offering} />
         <ProviderOfferingDetailsHero offering={offering} category={category} />
         <Row>
-          <Col sm={12} md={6} className="mb-6">
+          <Col xs={12} className="mb-6">
             <ProviderOfferingAccounting offering={offering} />
           </Col>
-          <Col sm={12} md={6} className="mb-6">
+          <Col xs={12} className="mb-6">
             <ProviderOfferingIntegration offering={offering} />
           </Col>
-          <Col sm={12} md={6} className="mb-6">
+          <Col xs={12} className="mb-6">
             <ProviderOfferingSupport offering={offering} />
           </Col>
-          <Col sm={12} md={6} className="mb-6">
+          <Col xs={12} className="mb-6">
             <ProviderOfferingMetadata offering={offering} />
           </Col>
-          <Col sm={12} md={6} className="mb-6">
+          <Col xs={12} className="mb-6">
             <ProviderOfferingDocumentation offering={offering} />
           </Col>
-          <Col sm={12} md={6} className="mb-6">
+          <Col xs={12} className="mb-6">
             {showExperimentalUiComponents && <ProviderOfferingFAQ />}
           </Col>
-          <Col sm={12} md={6} className="mb-6">
+          <Col xs={12} className="mb-6">
             {showExperimentalUiComponents && (
               <ProviderOfferingImageGallery offering={offering} />
             )}
           </Col>
-          <Col sm={12} md={6} className="mb-6">
+          <Col xs={12} className="mb-6">
             {showExperimentalUiComponents && <ProviderOfferingReviews />}
           </Col>
         </Row>
