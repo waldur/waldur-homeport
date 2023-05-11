@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDate } from '@waldur/core/dateUtils';
+import { FinancialReportSendButton } from '@waldur/customer/list/FinancialReportSendButton';
 import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { RootState } from '@waldur/store/reducers';
@@ -103,6 +104,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       enableExport={true}
       expandableRow={CustomerExpandableRow}
+      hoverableRow={() => <FinancialReportSendButton />}
     />
   );
 };
