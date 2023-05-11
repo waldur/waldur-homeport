@@ -5,8 +5,7 @@ if [ -z "$1" ]
 then
   export VERSION='latest'
 else
-  # Strip prefix from tag name so that v3.7.5 becomes 3.7.5
-  export VERSION=${1#v}
+  export VERSION=$1
 fi
 
 DOCKER_PASSWORD=${DOCKER_PASSWORD:-$WALDUR_DOCKER_HUB_PASSWORD}
