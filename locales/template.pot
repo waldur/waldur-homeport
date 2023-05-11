@@ -335,6 +335,10 @@ msgstr ""
 msgid "Add data volume"
 msgstr ""
 
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Add email"
+msgstr ""
+
 #: src/marketplace-script/EnvironmentVariableAddButton.tsx
 msgid "Add environment variable"
 msgstr ""
@@ -2902,6 +2906,7 @@ msgstr ""
 msgid "Egress"
 msgstr ""
 
+#: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/popover/CustomerUsersList.tsx
@@ -2939,6 +2944,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/CustomerContactColumn.tsx
 msgid "Email: {email}"
+msgstr ""
+
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Emails"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
@@ -7884,6 +7893,10 @@ msgstr ""
 msgid "Report details"
 msgstr ""
 
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Report has been sent"
+msgstr ""
+
 #: src/marketplace/resources/report/SubmitReportDialog.tsx
 msgid "Report has been submitted"
 msgstr ""
@@ -9059,6 +9072,7 @@ msgstr ""
 msgid "Selector"
 msgstr ""
 
+#: src/customer/list/FinancialReportSendButton.tsx
 #: src/notifications/NotificationSendButton.tsx
 msgid "Send"
 msgstr ""
@@ -9086,6 +9100,10 @@ msgstr ""
 
 #: src/invoices/list/SendNotificationButton.tsx
 msgid "Send notification"
+msgstr ""
+
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Send report"
 msgstr ""
 
 #: src/invitations/actions/create/SendingStatus.tsx
@@ -9587,6 +9605,10 @@ msgstr ""
 
 #: src/quotas/constants.ts
 msgid "Snapshots count"
+msgstr ""
+
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Something went wrong"
 msgstr ""
 
 #: src/customer/list/OrganizationUpdate.tsx
@@ -11191,6 +11213,7 @@ msgid "Unable to load file."
 msgstr ""
 
 #: src/customer/list/CustomerListContainer.tsx
+#: src/customer/list/ExportAsEmailDialog.tsx
 msgid "Unable to load financial overview."
 msgstr ""
 
