@@ -17,13 +17,23 @@ export const BrandName: FunctionComponent = () => {
   }, [layout]);
 
   const imageUrl = fixURL('/icons/sidebar_logo/');
+  const sidebarLogoMobileUrl = fixURL('/icons/sidebar_logo_mobile/');
 
   return (
     <div
       className="aside-logo flex-column-auto position-relative"
       id="kt_aside_logo"
     >
-      {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
+      {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE &&
+      ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
+        <>
+          <img
+            src={sidebarLogoMobileUrl}
+            className="mh-50px mw-200px logo_mobile"
+          />
+          <img src={imageUrl} className="mh-50px mw-200px logo" />
+        </>
+      ) : ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
         <img src={imageUrl} className="mh-50px mw-200px logo" />
       ) : (
         <>
