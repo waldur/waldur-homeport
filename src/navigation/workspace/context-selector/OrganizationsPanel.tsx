@@ -1,12 +1,10 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { useCallback, FunctionComponent, useMemo, useEffect } from 'react';
+import { useCallback, FunctionComponent } from 'react';
 import { Col, ListGroupItem, Stack } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { isChildOf } from '@waldur/navigation/useTabs';
-import { getProject } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { getCustomersPage } from '../api';
@@ -103,7 +101,6 @@ export const OrganizationsPanel: FunctionComponent<{
   onMouseEnter(customer: Customer): void;
 }> = ({ active, loadingUuid, filter, onClick, onMouseEnter }) => {
   const { state } = useCurrentStateAndParams();
-  const project = useSelector(getProject);
   const isServiceProvider = isChildOf('marketplace-provider', state);
   const getPage = useCallback(
     (page) =>
@@ -116,30 +113,13 @@ export const OrganizationsPanel: FunctionComponent<{
     [filter, isServiceProvider],
   );
 
-  // Update ui trigger for new project creation
-  const newProjectFlag = useMemo(() => {
-    if (!project || !active || project?.customer_uuid !== active?.uuid)
-      return false;
-    const found = active.projects.some((item) => item.uuid === project.uuid);
-    return !found;
-  }, [project, active]);
-
-  useEffect(() => {
-    // If a new project is created, update the selected organization
-    if (newProjectFlag)
-      onMouseEnter({
-        ...active,
-        projects: active.projects.concat(project),
-      });
-  }, [newProjectFlag, project]);
-
   return (
     <Col className="organization-listing" xs={5}>
       <VirtualPaginatedList
         height={800}
         itemSize={55}
         getPage={getPage}
-        key={`${filter}-${isServiceProvider}-${newProjectFlag}`}
+        key={`${filter}-${isServiceProvider}`}
         elementsPerPage={VIRTUALIZED_SELECTOR_PAGE_SIZE}
         noResultsRenderer={EmptyOrganizationListPlaceholder}
       >
