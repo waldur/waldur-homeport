@@ -7709,6 +7709,7 @@ msgstr "Vali töölaud"
 msgid "Selected"
 msgstr "Valitud"
 
+#: src/customer/list/FinancialReportSendButton.tsx
 #: src/notifications/NotificationSendButton.tsx
 msgid "Send"
 msgstr "Saada"
