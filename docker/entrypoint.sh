@@ -10,6 +10,6 @@ mkdir -p /usr/share/nginx/html/next/scripts/configs/ && envsubst < /usr/share/ng
 cp /usr/share/nginx/html/next/index.orig.html /usr/share/nginx/html/next/index.html
 [[ ! -z "${TITLE}" ]] && sed -i "s/<title>Waldur | Cloud Service Management<\/title>/<title>${TITLE}<\/title>/" /usr/share/nginx/html/next/index.html
 
-[[ -n "${API_URL}" ]] && sed -i "s#href=\".*favicon.ico.*\" type=\"image/x-icon\"#href=\"${API_URL}api/icons/favicon/\" type=\"image/x-icon\"#" /usr/share/nginx/html/index.html
+[[ -n "${API_URL}" ]] && sed -i "s#href=\"images/favicon.ico.*\" type=\"image/x-icon\"#href=\"${API_URL}api/icons/favicon/\" type=\"image/x-icon\"#" /usr/share/nginx/html/index.html
 
 nginx -g 'daemon off;'
