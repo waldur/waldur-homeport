@@ -6126,6 +6126,10 @@ msgstr ""
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
+#: src/workspace/effects.ts
+msgid "Organization could not be refreshed."
+msgstr ""
+
 #: src/marketplace-flows/FlowExpandableRow.tsx
 msgid "Organization creation request has been approved by {user} at {date}."
 msgstr ""

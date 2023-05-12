@@ -8,7 +8,10 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { showSuccess, showError } from '@waldur/store/notify';
 import { deleteEntity, fetchListStart } from '@waldur/table/actions';
-import { setCurrentProject } from '@waldur/workspace/actions';
+import {
+  refreshCurrentCustomer,
+  setCurrentProject,
+} from '@waldur/workspace/actions';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import {
@@ -36,6 +39,8 @@ export function* handleCreateProject(action) {
     yield put(createProject.success());
     yield put(showSuccess(successMessage));
     yield put(fetchListStart(PROJECTS_LIST));
+    // Refresh the current customer to update ui for other modules
+    yield put(refreshCurrentCustomer());
   } catch (error) {
     const errorData = error?.response?.data;
     let formError = new SubmissionError({
@@ -133,10 +138,18 @@ function* handleProjectDelete(action) {
   const projectId = action.payload.project.uuid;
 
   try {
+    const currentProject = yield select(getProject);
+    const isCurrentProject = projectId === currentProject.uuid;
+
     yield call(api.deleteProject, projectId);
     yield put(deleteEntity(PROJECTS_LIST, projectId));
     yield put(showSuccess(successMessage));
     yield put(fetchListStart(PROJECTS_LIST));
+    // Refresh the current customer to update ui for other modules
+    yield put(refreshCurrentCustomer());
+    if (isCurrentProject) {
+      yield put(setCurrentProject(undefined));
+    }
   } catch (error) {
     yield put(showError(`${errorMessage} ${format(error)}`));
   }

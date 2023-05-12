@@ -49,6 +49,13 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
 
   const isVisible = useOnScreen(refProjectSelector);
 
+  // Update the selected org if it is the same currentCustomer and the currentCustomer just updated
+  useEffect(() => {
+    if (selectedOrganization?.uuid === currentCustomer?.uuid) {
+      selectOrganization(currentCustomer);
+    }
+  }, [currentCustomer, selectedOrganization, selectOrganization]);
+
   // Search input autofocus
   useEffect(() => {
     if (isVisible && refSearch.current) refSearch.current.focus();
