@@ -102,7 +102,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'support.detail',
-    url: 'issue/:uuid/',
+    url: 'issue/:issue_uuid/',
     component: IssueDetailsContainer,
     data: {
       permissions: [isStaffOrSupport, hasSupport],

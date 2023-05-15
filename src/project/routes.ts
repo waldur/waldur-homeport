@@ -39,6 +39,11 @@ const ProjectPermissionsLogList = lazyComponent(
   'ProjectPermissionsLogList',
 );
 
+const IssueDetailsContainer = lazyComponent(
+  () => import('../issues/IssueDetails'),
+  'IssueDetails',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'project',
@@ -98,6 +103,14 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Issues'),
       skipBreadcrumb: true,
+      permissions: [hasSupport],
+    },
+  },
+  {
+    name: 'project.issue-details',
+    url: 'issue/:issue_uuid/',
+    component: IssueDetailsContainer,
+    data: {
       permissions: [hasSupport],
     },
   },
