@@ -1,9 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 import { formatDate, formatRelative } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { IssueLinkField } from '@waldur/issues/list/IssueLinkField';
 import { IssuesListExpandableRow } from '@waldur/issues/list/IssuesListExpandableRow';
 import { IssuesListPlaceholder } from '@waldur/issues/list/IssuesListPlaceholder';
 import { StatusColumn } from '@waldur/issues/list/StatusColumn';
@@ -12,7 +12,7 @@ import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
-import { getUser } from '@waldur/workspace/selectors';
+import { getUser, getWorkspace } from '@waldur/workspace/selectors';
 
 import { IssueCreateButton } from './IssueCreateButton';
 
@@ -35,17 +35,18 @@ interface IssueTableProps extends TableProps, OwnProps {
 
 export const TableComponent: React.FC<IssueTableProps> = (props) => {
   const { filterColumns, supportOrStaff, hiddenColumns, ...rest } = props;
+  const workspace = useSelector(getWorkspace);
   const columns = filterColumns([
     {
       title: translate('Key'),
+      orderField: 'key',
       render: ({ row }) => (
-        <Link
-          state="support.detail"
-          params={{ uuid: row.uuid }}
+        <IssueLinkField
           label={row.key || 'N/A'}
+          workspace={workspace}
+          row={row}
         />
       ),
-      orderField: 'key',
     },
     {
       title: translate('Status'),
@@ -163,7 +164,8 @@ const TableOptions = {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  supportOrStaff: getUser(state)?.is_staff || getUser(state)?.is_support,
+  supportOrStaff:
+    getUser(state)?.is_staff || getUser(state)?.is_support || false,
 });
 
 const connector = connect(mapStateToProps);

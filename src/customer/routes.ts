@@ -72,6 +72,11 @@ const CustomerIssuesList = lazyComponent(
   'CustomerIssuesList',
 );
 
+const IssueDetailsContainer = lazyComponent(
+  () => import('../issues/IssueDetails'),
+  'IssueDetails',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'organization',
@@ -165,6 +170,15 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Issues'),
       skipBreadcrumb: true,
+      permissions: [hasSupport],
+    },
+  },
+
+  {
+    name: 'organization.issue-details',
+    url: 'issue/:issue_uuid/',
+    component: IssueDetailsContainer,
+    data: {
       permissions: [hasSupport],
     },
   },

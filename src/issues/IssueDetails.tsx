@@ -25,15 +25,19 @@ export const IssueDetails: FunctionComponent = () => {
   useTitle(translate('Request detail'));
 
   const {
-    params: { uuid },
+    params: { issue_uuid },
   } = useCurrentStateAndParams();
   const router = useRouter();
 
-  if (!uuid) {
+  if (!issue_uuid) {
     router.stateService.go('errorPage.notFound');
   }
 
-  const { loading, error, value: issue } = useAsync(() => loadIssue(uuid));
+  const {
+    loading,
+    error,
+    value: issue,
+  } = useAsync(() => loadIssue(issue_uuid));
 
   if (loading) {
     return <LoadingSpinner />;
