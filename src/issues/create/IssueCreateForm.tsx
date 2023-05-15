@@ -87,7 +87,7 @@ export const IssueCreateForm = enhance(
         ) : (
           <>
             <IssueHeader issue={issue} />
-            {!ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE && (
+            {ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE && (
               <>
                 {!issue.type && (
                   <Form.Group className="mb-5">
