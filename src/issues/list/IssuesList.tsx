@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { formatDate, formatRelative } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -12,7 +12,7 @@ import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
-import { getUser, getWorkspace } from '@waldur/workspace/selectors';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { IssueCreateButton } from './IssueCreateButton';
 
@@ -35,17 +35,12 @@ interface IssueTableProps extends TableProps, OwnProps {
 
 export const TableComponent: React.FC<IssueTableProps> = (props) => {
   const { filterColumns, supportOrStaff, hiddenColumns, ...rest } = props;
-  const workspace = useSelector(getWorkspace);
   const columns = filterColumns([
     {
       title: translate('Key'),
       orderField: 'key',
       render: ({ row }) => (
-        <IssueLinkField
-          label={row.key || 'N/A'}
-          workspace={workspace}
-          row={row}
-        />
+        <IssueLinkField label={row.key || 'N/A'} row={row} />
       ),
     },
     {
