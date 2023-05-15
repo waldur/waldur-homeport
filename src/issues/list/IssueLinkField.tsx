@@ -9,7 +9,6 @@ interface IssueLinkProps {
   className?: string;
   target?: string;
   onClick?: (e?) => void;
-  workspace?: string;
   row?: any;
 }
 
