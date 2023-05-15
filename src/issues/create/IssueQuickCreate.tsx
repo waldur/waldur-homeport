@@ -204,7 +204,7 @@ export const IssueQuickCreate = reduxForm<IssueFormData>({
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          {!ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE ? (
+          {ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE ? (
             <TypeGroup disabled={submitting} />
           ) : null}
           <SummaryGroup disabled={submitting} />
