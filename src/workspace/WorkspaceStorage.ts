@@ -1,11 +1,3 @@
-import { AuthService } from '@waldur/auth/AuthService';
-import store from '@waldur/store/store';
-import {
-  setCurrentCustomer,
-  setCurrentProject,
-} from '@waldur/workspace/actions';
-import { Customer, Project } from '@waldur/workspace/types';
-
 const getParsed = (key: string) => {
   const item = localStorage.getItem(key);
   if (item) {
@@ -18,37 +10,36 @@ const getParsed = (key: string) => {
   return null;
 };
 
+const CUSTOMER_KEY = 'waldur/workspace/customer';
+
+const PROJECT_KEY = 'waldur/workspace/project';
+
+const SIDEBAR_KEY = 'waldur/workspace/sidebar';
+
 class WorkspaceStorageClass {
-  setCustomer = (customer: Customer) => {
-    localStorage.setItem('nav.customer', JSON.stringify(customer));
-  };
-  setProject = (project: Project) => {
-    localStorage.setItem('nav.project', JSON.stringify(project));
+  setCustomerId = (customerId: string) => {
+    localStorage.setItem(CUSTOMER_KEY, customerId);
   };
 
-  getCustomer = (): Customer => getParsed('nav.customer');
-  getProject = (): Project => getParsed('nav.project');
+  setProjectId = (projectId: string) => {
+    localStorage.setItem(PROJECT_KEY, projectId);
+  };
+
+  getCustomerId = (): string => localStorage.getItem(CUSTOMER_KEY);
+
+  getProjectId = (): string => localStorage.getItem(PROJECT_KEY);
+
+  clearCustomerId = () => localStorage.removeItem(CUSTOMER_KEY);
+
+  clearProjectId = () => localStorage.removeItem(PROJECT_KEY);
 
   setSidebarStatus = (state: { title; value }[]) => {
-    localStorage.setItem('nav.sidebar', JSON.stringify(state));
+    localStorage.setItem(SIDEBAR_KEY, JSON.stringify(state));
   };
-  getSidebarStatus = (): { title; value }[] => getParsed('nav.sidebar');
-  clearSidebarStatus = () => localStorage.removeItem('nav.sidebar');
+
+  getSidebarStatus = (): { title; value }[] => getParsed(SIDEBAR_KEY);
+
+  clearSidebarStatus = () => localStorage.removeItem(SIDEBAR_KEY);
 }
 
 export const WorkspaceStorage = new WorkspaceStorageClass();
-
-export const initWorkspace = () => {
-  if (AuthService.isAuthenticated()) {
-    const currentCustomer = store.getState().workspace.customer;
-    const currentProject = store.getState().workspace.project;
-
-    if (!currentCustomer && !currentProject) {
-      const customer = WorkspaceStorage.getCustomer();
-      if (customer) store.dispatch(setCurrentCustomer(customer));
-
-      const project = WorkspaceStorage.getProject();
-      if (project) store.dispatch(setCurrentProject(project));
-    }
-  }
-};
