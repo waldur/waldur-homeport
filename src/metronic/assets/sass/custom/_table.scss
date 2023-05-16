@@ -70,7 +70,9 @@
       }
     }
 
-    &:hover {
+    &:hover,
+    &:focus,
+    &:focus-within {
       > td.row-actions {
         background: $body-bg;
         opacity: 1;
