@@ -1225,7 +1225,6 @@ msgstr ""
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
-#: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Browse"
 msgstr ""
@@ -3894,6 +3893,7 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/digitalocean/digitalocean-droplet-config.ts
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/openstack/openstack-instance/ImageGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
@@ -3922,7 +3922,6 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
-#: src/marketplace/offerings/images/CreateImageDialog.tsx
 msgid "Image:"
 msgstr ""
 
