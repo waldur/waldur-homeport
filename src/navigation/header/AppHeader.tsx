@@ -47,7 +47,13 @@ const AsideMobileToggle: FunctionComponent = () => (
   </div>
 );
 
-export const AppHeader: FunctionComponent = () => {
+interface AppHeaderProps {
+  hideProjectSelector?: boolean;
+}
+
+export const AppHeader: FunctionComponent<AppHeaderProps> = ({
+  hideProjectSelector = false,
+}) => {
   const pageTitle = useSelector(getTitle);
   const router = useRouter();
   const routerTitle = router.globals.$current.path
@@ -78,7 +84,7 @@ export const AppHeader: FunctionComponent = () => {
               </h1>
             </div>
             <div className="d-flex align-items-center ms-1 ms-lg-3">
-              <ProjectSelectorDropdown />
+              {!hideProjectSelector && <ProjectSelectorDropdown />}
             </div>
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">

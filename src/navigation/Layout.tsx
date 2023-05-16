@@ -69,7 +69,11 @@ export const Layout: React.FC = ({ children }) => {
             <UnifiedSidebar />
             <div className="wrapper d-flex flex-column flex-row-fluid">
               <CookiesConsent />
-              {!state?.data?.hideHeader && <AppHeader />}
+              {!state?.data?.hideHeader && (
+                <AppHeader
+                  hideProjectSelector={state?.data?.hideProjectSelector}
+                />
+              )}
               <WarningBar />
               <div
                 className={classNames('content d-flex flex-column-fluid', {

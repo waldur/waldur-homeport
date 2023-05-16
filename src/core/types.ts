@@ -18,6 +18,8 @@ interface DataDeclaration {
   /** Page header component is concealed as long as this parameter is set to true. */
   hideHeader: boolean;
   hideHeaderMenu: boolean;
+  /** Project selector is hidden if this parameter is set to true */
+  hideProjectSelector: boolean;
   /** Workspace declaration is used by workspace selector. */
   workspace: string;
   skipAuth: boolean;

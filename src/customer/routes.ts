@@ -86,6 +86,7 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: ORGANIZATION_WORKSPACE,
       title: () => translate('Organization'),
+      hideProjectSelector: true,
     },
     parent: 'layout',
     component: UIView,
@@ -107,6 +108,7 @@ export const states: StateDeclaration[] = [
     data: {
       title: () => translate('Reporting'),
       permissions: [isStaffOrSupport],
+      hideProjectSelector: true,
     },
   },
 
@@ -119,6 +121,7 @@ export const states: StateDeclaration[] = [
     data: {
       title: () => translate('Administration'),
       permissions: [isStaffOrSupport],
+      hideProjectSelector: true,
     },
   },
 

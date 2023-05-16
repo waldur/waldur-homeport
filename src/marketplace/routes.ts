@@ -383,6 +383,7 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: ORGANIZATION_WORKSPACE,
       title: () => translate('Service provider'),
+      hideProjectSelector: true,
     },
     resolve: [
       {
