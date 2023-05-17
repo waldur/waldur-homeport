@@ -6,6 +6,7 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { Action } from '@waldur/core/reducerActions';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
+import { UPDATE_OFFERING_LOGO_FORM_ID } from '@waldur/marketplace/offerings/actions/constants';
 import { Category } from '@waldur/marketplace/types';
 import { handleMarketplaceErrorResponse } from '@waldur/marketplace/utils';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -491,14 +492,14 @@ function* updateOfferingLogo(action: Action<any>) {
     const isOwnerOrStaff = yield select(isOwnerOrStaffSelector);
     const user = yield select(getUser);
     const filterFormData = yield select(
-      getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID),
+      getFormValues(UPDATE_OFFERING_LOGO_FORM_ID),
     );
     yield put(
       updatePublicOfferingsList(
         customer,
         isServiceManager && !isOwnerOrStaff,
         user,
-        filterFormData.state,
+        filterFormData?.state || [],
       ),
     );
     yield put(showSuccess(translate('Logo has been updated successfully.')));
