@@ -57,7 +57,7 @@ export const useRobotAccountFields = (resource) => {
       loadOptions: loadUsers,
       getOptionLabel: ({ full_name, email }) => `${full_name} (${email})`,
       getOptionValue: ({ uuid }) => uuid,
-      required: true,
+      required: false,
       isMulti: true,
     },
     {
