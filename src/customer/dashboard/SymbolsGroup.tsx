@@ -9,6 +9,7 @@ interface SymbolsGroupProps {
   nameKey?: string;
   emailKey?: string;
   imageKey?: string;
+  length?: number;
   onClick?(): void;
 }
 
@@ -30,6 +31,7 @@ export const SymbolsGroup: FunctionComponent<SymbolsGroupProps> = ({
   nameKey,
   emailKey,
   imageKey,
+  length,
   onClick,
 }) => (
   <div className="symbol-group symbol-hover" onClick={onClick}>
@@ -56,10 +58,10 @@ export const SymbolsGroup: FunctionComponent<SymbolsGroupProps> = ({
         </Tip>
       </div>
     ))}
-    {items.length > max && (
+    {(length ?? items.length) > max && (
       <div className="symbol symbol-circle symbol-35px">
         <div className="symbol-label fs-6 fw-bold bg-dark text-inverse-dark">
-          +{items.slice(max).length}
+          +{length ? Math.max(length - max, 0) : items.slice(max).length}
         </div>
       </div>
     )}

@@ -506,7 +506,7 @@ msgstr ""
 msgid "Admin username"
 msgstr ""
 
-#: src/customer/routes.ts
+#: src/administration/routes.ts
 #: src/navigation/sidebar/AdminMenu.tsx
 msgid "Administration"
 msgstr ""
@@ -1368,6 +1368,7 @@ msgstr ""
 
 #: src/marketplace/category/utils.ts
 #: src/marketplace/offerings/service-providers/ServiceProviderPageBar.tsx
+#: src/marketplace/routes.ts
 msgid "Categories"
 msgstr ""
 
@@ -2292,6 +2293,7 @@ msgstr ""
 msgid "Dark theme"
 msgstr ""
 
+#: src/administration/routes.ts
 #: src/customer/routes.ts
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
@@ -3063,6 +3065,7 @@ msgstr ""
 msgid "Erred resources"
 msgstr ""
 
+#: src/administration/dashboard/AdministrationProfile.tsx
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
 msgid "Error"
@@ -3732,6 +3735,14 @@ msgstr ""
 
 #: src/rancher/cluster/tabs.ts
 msgid "HPA"
+msgstr ""
+
+#: src/administration/dashboard/HealthChecks.tsx
+msgid "Health checks"
+msgstr ""
+
+#: src/administration/dashboard/AdministrationProfile.tsx
+msgid "Healthy"
 msgstr ""
 
 #: src/providers/support/HeatMapContainer.tsx
@@ -9623,6 +9634,7 @@ msgstr ""
 msgid "Sponsor number"
 msgstr ""
 
+#: src/administration/dashboard/AdministrationProfile.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 #: src/user/support/utils.ts
@@ -9957,6 +9969,7 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
+#: src/administration/dashboard/AdministrationProfile.tsx
 #: src/issues/routes.ts
 #: src/navigation/FooterLinks.tsx
 #: src/navigation/sidebar/SupportMenu.tsx
@@ -11241,6 +11254,10 @@ msgstr ""
 msgid "Unable to load growth chart."
 msgstr ""
 
+#: src/administration/dashboard/AdministrationDashboard.tsx
+msgid "Unable to load health information"
+msgstr ""
+
 #: src/customer/payments/InvoicesDropdown.tsx
 msgid "Unable to load invoices"
 msgstr ""
@@ -11354,6 +11371,10 @@ msgstr ""
 
 #: src/openstack/analytics/VmOverviewFilterContainer.tsx
 msgid "Unable to load service providers."
+msgstr ""
+
+#: src/administration/dashboard/StatisticsCards.tsx
+msgid "Unable to load statistics data"
 msgstr ""
 
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -12568,6 +12589,7 @@ msgstr ""
 msgid "Verifying email change"
 msgstr ""
 
+#: src/administration/dashboard/AdministrationProfile.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/navigation/AppFooter.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
@@ -12577,6 +12599,10 @@ msgstr ""
 
 #: src/rancher/cluster/ViewYAMLButton.tsx
 msgid "View YAML"
+msgstr ""
+
+#: src/administration/dashboard/StatisticsCards.tsx
+msgid "View all"
 msgstr ""
 
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
