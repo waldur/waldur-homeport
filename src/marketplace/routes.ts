@@ -9,6 +9,10 @@ import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { loadContext, fetchProvider } from './resolve';
 
+const AdminCategoriesPage = lazyComponent(
+  () => import('@waldur/marketplace/category/admin/AdminCategoriesPage'),
+  'AdminCategoriesPage',
+);
 const AdminOfferingsListContainer = lazyComponent(
   () =>
     import('@waldur/marketplace/offerings/admin/AdminOfferingsListContainer'),
@@ -663,6 +667,25 @@ export const states: StateDeclaration[] = [
     parent: 'support',
     data: {
       breadcrumb: () => translate('Resources'),
+    },
+  },
+
+  {
+    name: 'marketplace-admin-resources',
+    url: 'marketplace-admin-resources/',
+    component: SupportResourcesContainer,
+    parent: 'admin',
+    data: {
+      breadcrumb: () => translate('Resources'),
+    },
+  },
+
+  {
+    name: 'admin.marketplace-categories',
+    url: 'categories/',
+    component: AdminCategoriesPage,
+    data: {
+      breadcrumb: () => translate('Categories'),
     },
   },
 

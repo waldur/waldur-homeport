@@ -113,19 +113,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin',
-    url: '/administration/',
-    abstract: true,
-    parent: 'layout',
-    component: UIView,
-    data: {
-      title: () => translate('Administration'),
-      permissions: [isStaffOrSupport],
-      hideProjectSelector: true,
-    },
-  },
-
-  {
     name: 'organization-requests',
     abstract: true,
     parent: 'organization',

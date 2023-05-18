@@ -1,3 +1,4 @@
+import { states as administrationRoutes } from '@waldur/administration/routes';
 import { states as authCallbackRoutes } from '@waldur/auth/callbacks/routes';
 import { states as authRoutes } from '@waldur/auth/routes';
 import { states as customerRoutes } from '@waldur/customer/routes';
@@ -34,6 +35,7 @@ export const states: StateDeclaration[] = [
   ...marketplaceRoutes,
   ...marketplaceChecklistRoutes,
   ...marketplaceRemoteRoutes,
+  ...administrationRoutes,
   ...supportRoutes,
   ...openstackAnalyticsRoutes,
   ...paypalRoutes,

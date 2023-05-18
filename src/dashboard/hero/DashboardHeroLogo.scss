@@ -1,0 +1,30 @@
+.dashboard-small-label {
+  display: block;
+  padding: 2px 18px;
+  font-weight: 500;
+}
+
+.dashboard-hero-logo {
+  position: relative;
+
+  .dashboard-small-logo {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+  }
+
+  .dashboard-small-label {
+    &.top-label {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &.bottom-label {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 50%);
+    }
+  }
+}

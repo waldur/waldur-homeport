@@ -46,6 +46,7 @@ interface CoreConfiguration {
   HOMEPORT_SENTRY_DSN: string;
   HOMEPORT_SENTRY_ENVIRONMENT: string;
   HOMEPORT_SENTRY_TRACES_SAMPLE_RATE: number;
+  HOMEPORT_URL: string;
   INVITATION_CIVIL_NUMBER_LABEL: string;
   INVITATION_CIVIL_NUMBER_HELP_TEXT: string;
   INVITATION_TAX_NUMBER_LABEL: string;
@@ -68,6 +69,7 @@ interface CoreConfiguration {
   SITE_DESCRIPTION: string;
   SITE_PHONE: string;
   SITE_EMAIL: string;
+  SITE_NAME: string;
   TRANSLATION_DOMAIN: string;
   ORGANIZATION_SUBNETS_VISIBLE: boolean;
   CURRENCY_NAME: string;

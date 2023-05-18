@@ -15,7 +15,7 @@ export const AdminMenu = () => {
   return (
     <MenuItem
       title={translate('Administration')}
-      state="admin.users"
+      state="admin.dashboard"
       activeState="admin"
       child={false}
       iconPath={Icon}
