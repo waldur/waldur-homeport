@@ -9475,6 +9475,7 @@ msgstr ""
 msgid "Show recipients"
 msgstr ""
 
+#: src/marketplace/resources/report/ShowReportAction.tsx
 #: src/marketplace/resources/report/ShowReportButton.tsx
 msgid "Show report"
 msgstr ""
