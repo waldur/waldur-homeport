@@ -16,6 +16,7 @@ import { ResourceAccessButton } from '@waldur/resource/ResourceAccessButton';
 import '@waldur/marketplace/offerings/details/PublicOfferingDetailsHero.scss';
 
 import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
+import { ShowReportAction } from '../report/ShowReportAction';
 
 import { ActionButton } from './ActionButton';
 import { ActivityCard } from './ActivityCard';
@@ -140,6 +141,10 @@ export const ResourceDetailsView: FC<any> = ({
                                 ...resource,
                                 marketplace_resource_uuid: resource.uuid,
                               }}
+                              as={ActionButton}
+                            />
+                            <ShowReportAction
+                              resource={resource}
                               as={ActionButton}
                             />
                             <RefreshButton
