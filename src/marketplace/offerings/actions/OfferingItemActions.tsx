@@ -174,6 +174,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
   pullRemoteOfferingInvoices: (offering: Offering) =>
     dispatch(actions.pullRemoteOfferingInvoices(offering.uuid)),
+
+  pullRemoteOfferingRobotAccounts: (offering: Offering) =>
+    dispatch(actions.pullRemoteOfferingRobotAccounts(offering.uuid)),
 });
 
 const remoteOfferingActionVisible = (

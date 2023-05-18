@@ -166,3 +166,8 @@ export const pullRemoteOfferingInvoices = (uuid: string) => ({
   type: constants.PULL_REMOTE_OFFERING_INVOICES,
   payload: { uuid },
 });
+
+export const pullRemoteOfferingRobotAccounts = (uuid: string) => ({
+  type: constants.PULL_REMOTE_OFFERING_ROBOT_ACCOUNTS,
+  payload: { uuid },
+});

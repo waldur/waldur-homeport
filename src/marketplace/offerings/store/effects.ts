@@ -418,6 +418,25 @@ function* pullRemoteOfferingInvoices(action: Action<any>) {
   }
 }
 
+function* pullRemoteOfferingRobotAccounts(action: Action<any>) {
+  const { uuid } = action.payload;
+  try {
+    yield call(api.pullRemoteOfferingRobotAccounts, uuid);
+    yield put(
+      showSuccess(
+        translate('Robot accounts synchronization has been scheduled.'),
+      ),
+    );
+  } catch (error) {
+    yield put(
+      showErrorResponse(
+        error,
+        translate('Unable to synchronize robot accounts.'),
+      ),
+    );
+  }
+}
+
 function* updateConfirmationMessage(action: Action<any>) {
   const { offeringUuid, templateConfirmationMessage, secretOptions } =
     action.payload;
@@ -554,6 +573,11 @@ export default function* () {
     constants.PULL_REMOTE_OFFERING_INVOICES,
     pullRemoteOfferingInvoices,
   );
+  yield takeEvery(
+    constants.PULL_REMOTE_OFFERING_ROBOT_ACCOUNTS,
+    pullRemoteOfferingRobotAccounts,
+  );
+
   yield takeEvery(
     constants.updateConfirmationMessage.REQUEST,
     updateConfirmationMessage,

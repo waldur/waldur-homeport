@@ -75,6 +75,9 @@ export const PULL_REMOTE_OFFERING_ORDER_ITEMS =
 export const PULL_REMOTE_OFFERING_INVOICES =
   'waldur/marketplace/offering/PULL_REMOTE_OFFERING_INVOICES';
 
+export const PULL_REMOTE_OFFERING_ROBOT_ACCOUNTS =
+  'waldur/marketplace/offering/PULL_REMOTE_OFFERING_ROBOT_ACCOUNTS';
+
 export const updateConfirmationMessage = createFormAction(
   'waldur/marketplace/offering/UPDATE_CONFIRMATION_MESSAGE',
 );
