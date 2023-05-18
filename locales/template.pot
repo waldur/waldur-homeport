@@ -7323,6 +7323,7 @@ msgstr ""
 
 #: src/customer/routes.ts
 #: src/issues/routes.ts
+#: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
@@ -8475,6 +8476,10 @@ msgstr ""
 
 #: src/marketplace/resources/details/RobotAccountCard.tsx
 msgid "Robot accounts"
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Robot accounts synchronization has been scheduled."
 msgstr ""
 
 #: src/customer/team/ProjectsListGroup.tsx
@@ -11611,6 +11616,10 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to synchronize offering users."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to synchronize robot accounts."
 msgstr ""
 
 #: src/rancher/node/actions/UnlinkAction.tsx

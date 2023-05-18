@@ -167,6 +167,11 @@ const ProviderOfferingUsersList = lazyComponent(
   'ProviderOfferingUsersList',
 );
 
+const ProjectsListContainer = lazyComponent(
+  () => import('@waldur/project/ProjectsListContainer'),
+  'ProjectsListContainer',
+);
+
 const getPublicRoutesParams = () => ({
   resolve: [
     {
@@ -530,6 +535,16 @@ export const states: StateDeclaration[] = [
     parent: 'organization',
     data: {
       breadcrumb: () => translate('My offerings'),
+    },
+  },
+
+  {
+    name: 'marketplace-projects',
+    url: 'marketplace-projects/',
+    component: ProjectsListContainer,
+    parent: 'organization',
+    data: {
+      breadcrumb: () => translate('Projects'),
     },
   },
 
