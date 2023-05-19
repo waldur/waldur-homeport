@@ -9340,7 +9340,7 @@ msgid "Try again"
 msgstr ""
 
 #: src/navigation/header/NextBranchLink.tsx
-msgid "Try out new version"
+msgid "Try out new interface"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx

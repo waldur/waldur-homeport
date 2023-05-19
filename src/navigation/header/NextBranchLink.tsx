@@ -10,7 +10,7 @@ export const NextBranchLink = () => {
     <li>
       <Link state="next">
         <i className="fa fa-question-circle"></i>{' '}
-        {translate('Try out new version')}
+        {translate('Try out new interface')}
       </Link>
     </li>
   );
