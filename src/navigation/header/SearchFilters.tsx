@@ -5,6 +5,7 @@ import { StringField } from '@waldur/form';
 import { reactSelectMenuNoPortaling } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
+import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/OfferingTypeAutocomplete';
 import { CategoryFilter } from '@waldur/marketplace/resources/list/CategoryFilter';
 import { ResourceStateFilter } from '@waldur/marketplace/resources/list/ResourceStateFilter';
 
@@ -23,6 +24,11 @@ const PureSearchFilters: FunctionComponent<{}> = () => (
     </div>
     <div className="mb-5">
       <CategoryFilter reactSelectProps={reactSelectMenuNoPortaling()} />
+    </div>
+    <div className="mb-5">
+      <OfferingTypeAutocomplete
+        reactSelectProps={reactSelectMenuNoPortaling()}
+      />
     </div>
     <div className="mb-8">
       <ResourceStateFilter reactSelectProps={reactSelectMenuNoPortaling()} />
