@@ -49,7 +49,6 @@ const CloseIcon = () => (
 const useSearch = () => {
   const [query, setQuery] = useState('');
   const form: any = useSelector(getFormValues('globalSearchFilters'));
-
   const params = {
     query: query || form?.query,
     offering_uuid: form?.offering?.uuid,
@@ -61,6 +60,7 @@ const useSearch = () => {
       'Updating',
       'Terminating',
     ],
+    offering_type: form?.offering_type?.value,
   };
 
   const result = useQuery(

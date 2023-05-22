@@ -8905,6 +8905,10 @@ msgstr ""
 msgid "Select instance..."
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingTypeAutocomplete.tsx
+msgid "Select integration type..."
+msgstr ""
+
 #: src/issues/create/IssueCreateForm.tsx
 msgid "Select issue template..."
 msgstr ""
