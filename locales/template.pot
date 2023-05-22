@@ -4113,6 +4113,10 @@ msgstr ""
 msgid "Instances count"
 msgstr ""
 
+#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
+msgid "Integration type"
+msgstr ""
+
 #: src/issues/comments/IssueCommentItem.tsx
 msgid "Internal"
 msgstr ""

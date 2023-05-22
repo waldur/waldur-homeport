@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/OfferingTypeAutocomplete';
 import {
   OfferingStateFilter,
   getStates,
@@ -22,6 +23,9 @@ const PureAdminOfferingsFilter: FunctionComponent = () => (
       badgeValue={(value) => value?.name}
     >
       <OrganizationAutocomplete />
+    </TableFilterItem>
+    <TableFilterItem title={translate('Integration type')} name="type">
+      <OfferingTypeAutocomplete />
     </TableFilterItem>
   </>
 );
