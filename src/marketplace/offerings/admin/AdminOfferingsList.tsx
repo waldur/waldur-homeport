@@ -31,6 +31,9 @@ const mapPropsToFilter = (props) => {
   if (props.filter?.state) {
     filter.state = props.filter.state.map((option) => option.value);
   }
+  if (props.filter?.offering_type) {
+    filter.type = props.filter.offering_type.value;
+  }
   return filter;
 };
 
