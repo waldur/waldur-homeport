@@ -60,11 +60,12 @@ const PureSupportResourcesFilter: FunctionComponent = () => {
   );
 };
 
+const states = getStates().filter((state) => state.value !== 'Terminated');
 const enhance = reduxForm({
   form: SUPPORT_RESOURCES_FILTER_FORM_ID,
   onChange: syncFiltersToURL,
   initialValues: getInitialValues({
-    state: [getStates()[1]],
+    state: [...states],
   }),
   destroyOnUnmount: false,
 });
