@@ -546,7 +546,7 @@ msgid "Agree and proceed"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCart.tsx
-msgid "Agree with ToS"
+msgid "Agree with terms"
 msgstr ""
 
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
