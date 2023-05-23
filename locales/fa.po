@@ -2247,6 +2247,7 @@ msgid "Generate password"
 msgstr "رمز تولید کنید"
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
+#: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Go to marketplace"
 msgstr "به marketplace بروید"
 

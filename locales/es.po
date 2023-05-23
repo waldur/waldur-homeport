@@ -2907,6 +2907,7 @@ msgid "Generate password"
 msgstr "Generar contraseña"
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
+#: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Go to marketplace"
 msgstr "Ir al mercado"
 
@@ -3812,6 +3813,7 @@ msgstr "Marcar como pagado"
 msgid "Mark invoice as paid"
 msgstr "Marcar la factura como pagada"
 
+#: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/routes.ts
 msgid "Marketplace"

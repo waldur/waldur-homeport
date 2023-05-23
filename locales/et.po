@@ -3489,12 +3489,17 @@ msgid "Go to Marketplace"
 msgstr "Mine Turuplatsile"
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
+#: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Go to marketplace"
 msgstr "Mine turuplatsile"
 
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
 msgid "Go to my profile"
 msgstr "Mine minu profiilile"
+
+#: src/navigation/header/LegacyBranchLink.tsx
+msgid "Go to old interface"
+msgstr "Vali varasem kasutajaliides"
 
 #: src/auth/PermissionLayout.tsx
 #: src/invitations/GroupInvitationErrorMessage.tsx
@@ -4472,6 +4477,7 @@ msgstr "Märgi makstuks"
 msgid "Mark invoice as paid"
 msgstr "Märgi arve tasuks"
 
+#: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/routes.ts
 msgid "Marketplace"
@@ -7963,6 +7969,10 @@ msgid "Service Request - client’s request to modify, add, change or remove par
 msgstr "Tellimus – kliendi soov teenuse osalise või täieliku funktsionaalsuse, ligipääsu või komponentide muutmiseks, lisamiseks, liigutamiseks või eemaldamiseks"
 
 #: src/i18n/constants.ts
+msgid "Service catalog"
+msgstr "Teenuse kataloog"
+
+#: src/i18n/constants.ts
 msgid "Service catalog offerings"
 msgstr "Teenuste kataloogi pakkumised"
 
@@ -10418,7 +10428,7 @@ msgstr "Tere tulemast"
 
 #: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Welcome to marketplace"
-msgstr "Tere tulemast Turuplatsile"
+msgstr "Tere tulemast turuplatsile"
 
 #: src/auth/AuthInit.tsx
 #: src/marketplace/offerings/service-providers/Description.tsx
