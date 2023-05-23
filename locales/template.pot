@@ -4776,6 +4776,7 @@ msgstr ""
 msgid "Mark invoice as paid"
 msgstr ""
 
+#: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/routes.ts
 msgid "Marketplace"
@@ -12709,10 +12710,6 @@ msgstr ""
 msgid "Website URL"
 msgstr ""
 
-#: src/marketplace/landing/HeroSection.tsx
-msgid "Welcome to"
-msgstr ""
-
 #: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Welcome to marketplace"
 msgstr ""
@@ -13543,10 +13540,6 @@ msgstr ""
 
 #: src/user/dashboard/utils.ts
 msgid "{count} user events in {date}"
-msgstr ""
-
-#: src/marketplace/landing/LandingPage.tsx
-msgid "{deployment} Marketplace"
 msgstr ""
 
 #: src/table/TablePagination.tsx
