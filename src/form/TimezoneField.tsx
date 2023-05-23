@@ -31,8 +31,8 @@ export const TimezoneField: FunctionComponent<any> = (props) => {
       options={options}
       value={options.find((option) => option.value === input.value)}
       onChange={(option: any) => input.onChange(option.value)}
-      onBlur={(event) => event.preventDefault()}
       {...rest}
+      onBlur={(event) => event.preventDefault()}
     />
   );
 };

@@ -39,7 +39,7 @@ export const IssueHeader: FunctionComponent<{ issue }> = ({ issue }) => {
           {issue.resource.name}
         </FormGroup>
       )}
-      {!ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE && issue.type && (
+      {ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE && issue.type && (
         <FormGroup className="mb-5">
           <strong>{translate('Request type')}: </strong>
           {translate(issue.type)}

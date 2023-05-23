@@ -34,12 +34,8 @@ export const LandingPage = (props: LandingPageProps) => {
   return (
     <div className="marketplace-landing-page">
       <HeroSection
-        title={
-          ENV.marketplaceLandingPageTitle ||
-          translate('{deployment} Marketplace', {
-            deployment: ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE,
-          })
-        }
+        header={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
+        title={ENV.marketplaceLandingPageTitle || translate('Marketplace')}
       >
         <AllCategoriesLink className="btn text-black btn-bg-white btn-hover-rise">
           {translate('Browse all categories')}

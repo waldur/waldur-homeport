@@ -97,6 +97,10 @@
       padding: 0 get($aside-config, padding-x);
     }
 
+    .logo_mobile {
+      display: none;
+    }
+
     // Aside menu
     .aside-menu .hover-scroll-overlay-y {
       width: get($aside-config, width);
@@ -138,6 +142,10 @@
         transition: width get($aside-config, transition-speed) ease;
         width: get($aside-config, width);
         box-shadow: get($aside-config, minimized-hover-box-shadow);
+
+        .logo_mobile {
+          display: none;
+        }
       }
 
       // Not hovered mode
@@ -149,6 +157,10 @@
 
           .logo {
             display: none;
+          }
+
+          .logo_mobile {
+            display: block;
           }
 
           .logo-default {

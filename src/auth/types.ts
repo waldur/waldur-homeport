@@ -35,6 +35,7 @@ export interface ExternalLink {
 interface CoreConfiguration {
   MASTERMIND_URL: string;
   BRAND_COLOR: string;
+  BRAND_LABEL_COLOR: string;
   HERO_LINK_URL: string;
   HERO_LINK_LABEL: string;
   HERO_IMAGE: string;
@@ -45,8 +46,8 @@ interface CoreConfiguration {
   HOMEPORT_SENTRY_DSN: string;
   HOMEPORT_SENTRY_ENVIRONMENT: string;
   HOMEPORT_SENTRY_TRACES_SAMPLE_RATE: number;
+  HOMEPORT_URL: string;
   INVITATION_CIVIL_NUMBER_LABEL: string;
-  INVITATION_CIVIL_NUMBER_HELP_TEXT: string;
   INVITATION_TAX_NUMBER_LABEL: string;
   SHORT_PAGE_TITLE: string;
   FULL_PAGE_TITLE: string;
@@ -67,6 +68,7 @@ interface CoreConfiguration {
   SITE_DESCRIPTION: string;
   SITE_PHONE: string;
   SITE_EMAIL: string;
+  SITE_NAME: string;
   TRANSLATION_DOMAIN: string;
   ORGANIZATION_SUBNETS_VISIBLE: boolean;
   CURRENCY_NAME: string;

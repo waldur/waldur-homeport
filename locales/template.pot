@@ -341,6 +341,10 @@ msgstr ""
 msgid "Add data volume"
 msgstr ""
 
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Add email"
+msgstr ""
+
 #: src/marketplace-script/EnvironmentVariableAddButton.tsx
 msgid "Add environment variable"
 msgstr ""
@@ -508,7 +512,7 @@ msgstr ""
 msgid "Admin username"
 msgstr ""
 
-#: src/customer/routes.ts
+#: src/administration/routes.ts
 #: src/navigation/sidebar/AdminMenu.tsx
 msgid "Administration"
 msgstr ""
@@ -548,7 +552,7 @@ msgid "Agree and proceed"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCart.tsx
-msgid "Agree with ToS"
+msgid "Agree with terms"
 msgstr ""
 
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
@@ -1237,7 +1241,6 @@ msgstr ""
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
-#: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Browse"
 msgstr ""
@@ -1382,6 +1385,7 @@ msgstr ""
 
 #: src/marketplace/category/utils.ts
 #: src/marketplace/offerings/service-providers/ServiceProviderPageBar.tsx
+#: src/marketplace/routes.ts
 msgid "Categories"
 msgstr ""
 
@@ -2322,6 +2326,7 @@ msgstr ""
 msgid "Dark theme"
 msgstr ""
 
+#: src/administration/routes.ts
 #: src/customer/routes.ts
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
@@ -2949,6 +2954,7 @@ msgstr ""
 msgid "Egress"
 msgstr ""
 
+#: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/popover/CustomerUsersList.tsx
@@ -2990,6 +2996,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/CustomerContactColumn.tsx
 msgid "Email: {email}"
+msgstr ""
+
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Emails"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
@@ -3106,6 +3116,7 @@ msgstr ""
 msgid "Erred resources"
 msgstr ""
 
+#: src/administration/dashboard/AdministrationProfile.tsx
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
 msgid "Error"
@@ -3700,11 +3711,8 @@ msgstr ""
 msgid "Go back"
 msgstr ""
 
-#: src/navigation/sidebar/SidebarFooter.tsx
-msgid "Go to Marketplace"
-msgstr ""
-
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
+#: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Go to marketplace"
 msgstr ""
 
@@ -3780,6 +3788,14 @@ msgstr ""
 
 #: src/rancher/cluster/tabs.ts
 msgid "HPA"
+msgstr ""
+
+#: src/administration/dashboard/HealthChecks.tsx
+msgid "Health checks"
+msgstr ""
+
+#: src/administration/dashboard/AdministrationProfile.tsx
+msgid "Healthy"
 msgstr ""
 
 #: src/providers/support/HeatMapContainer.tsx
@@ -3945,6 +3961,7 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/digitalocean/digitalocean-droplet-config.ts
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/openstack/openstack-instance/ImageGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
@@ -3977,7 +3994,6 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/details/PageHeroImage.tsx
-#: src/marketplace/offerings/images/CreateImageDialog.tsx
 msgid "Image:"
 msgstr ""
 
@@ -4160,6 +4176,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/offering/ProviderOfferingIntegration.tsx
 msgid "Integration"
+msgstr ""
+
+#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
+msgid "Integration type"
 msgstr ""
 
 #: src/issues/comments/IssueCommentItem.tsx
@@ -4829,6 +4849,7 @@ msgstr ""
 msgid "Mark invoice as paid"
 msgstr ""
 
+#: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/routes.ts
 msgid "Marketplace"
@@ -5121,6 +5142,10 @@ msgstr ""
 
 #: src/core/validators.ts
 msgid "Must be at most {max}"
+msgstr ""
+
+#: src/invitations/actions/CivilNumberGroup.tsx
+msgid "Must start with a country prefix ie EE34501234215"
 msgstr ""
 
 #: src/marketplace/routes.ts
@@ -6223,6 +6248,10 @@ msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
 msgid "Organization contains projects. Please remove them first."
+msgstr ""
+
+#: src/workspace/effects.ts
+msgid "Organization could not be refreshed."
 msgstr ""
 
 #: src/marketplace-flows/FlowExpandableRow.tsx
@@ -7433,6 +7462,7 @@ msgstr ""
 
 #: src/customer/routes.ts
 #: src/issues/routes.ts
+#: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
@@ -8012,6 +8042,10 @@ msgstr ""
 
 #: src/marketplace/resources/report/ShowReportDialog.tsx
 msgid "Report details"
+msgstr ""
+
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Report has been sent"
 msgstr ""
 
 #: src/marketplace/resources/report/SubmitReportDialog.tsx
@@ -8597,6 +8631,10 @@ msgstr ""
 msgid "Robot accounts"
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Robot accounts synchronization has been scheduled."
+msgstr ""
+
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -9009,6 +9047,10 @@ msgstr ""
 msgid "Select instance..."
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingTypeAutocomplete.tsx
+msgid "Select integration type..."
+msgstr ""
+
 #: src/issues/create/IssueCreateForm.tsx
 msgid "Select issue template..."
 msgstr ""
@@ -9195,6 +9237,7 @@ msgstr ""
 msgid "Selector"
 msgstr ""
 
+#: src/customer/list/FinancialReportSendButton.tsx
 #: src/notifications/NotificationSendButton.tsx
 msgid "Send"
 msgstr ""
@@ -9222,6 +9265,10 @@ msgstr ""
 
 #: src/invoices/list/SendNotificationButton.tsx
 msgid "Send notification"
+msgstr ""
+
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Send report"
 msgstr ""
 
 #: src/invitations/actions/create/SendingStatus.tsx
@@ -9586,6 +9633,7 @@ msgstr ""
 msgid "Show recipients"
 msgstr ""
 
+#: src/marketplace/resources/report/ShowReportAction.tsx
 #: src/marketplace/resources/report/ShowReportButton.tsx
 msgid "Show report"
 msgstr ""
@@ -9726,10 +9774,15 @@ msgstr ""
 msgid "Snapshots count"
 msgstr ""
 
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Something went wrong"
+msgstr ""
+
 #: src/customer/list/OrganizationUpdate.tsx
 msgid "Sponsor number"
 msgstr ""
 
+#: src/administration/dashboard/AdministrationProfile.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 #: src/user/support/utils.ts
@@ -10066,6 +10119,7 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
+#: src/administration/dashboard/AdministrationProfile.tsx
 #: src/issues/routes.ts
 #: src/marketplace/service-providers/offering/ProviderOfferingSupport.tsx
 #: src/navigation/FooterLinks.tsx
@@ -11347,6 +11401,7 @@ msgid "Unable to load file."
 msgstr ""
 
 #: src/customer/list/CustomerListContainer.tsx
+#: src/customer/list/ExportAsEmailDialog.tsx
 msgid "Unable to load financial overview."
 msgstr ""
 
@@ -11364,6 +11419,10 @@ msgstr ""
 
 #: src/invoices/growth/GrowthChart.tsx
 msgid "Unable to load growth chart."
+msgstr ""
+
+#: src/administration/dashboard/AdministrationDashboard.tsx
+msgid "Unable to load health information"
 msgstr ""
 
 #: src/customer/payments/InvoicesDropdown.tsx
@@ -11484,6 +11543,10 @@ msgstr ""
 
 #: src/openstack/analytics/VmOverviewFilterContainer.tsx
 msgid "Unable to load service providers."
+msgstr ""
+
+#: src/administration/dashboard/StatisticsCards.tsx
+msgid "Unable to load statistics data"
 msgstr ""
 
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -11746,6 +11809,10 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to synchronize offering users."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to synchronize robot accounts."
 msgstr ""
 
 #: src/rancher/node/actions/UnlinkAction.tsx
@@ -12694,6 +12761,7 @@ msgstr ""
 msgid "Verifying email change"
 msgstr ""
 
+#: src/administration/dashboard/AdministrationProfile.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/navigation/AppFooter.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
@@ -12703,6 +12771,10 @@ msgstr ""
 
 #: src/rancher/cluster/ViewYAMLButton.tsx
 msgid "View YAML"
+msgstr ""
+
+#: src/administration/dashboard/StatisticsCards.tsx
+msgid "View all"
 msgstr ""
 
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
@@ -12803,12 +12875,12 @@ msgstr ""
 msgid "Website URL"
 msgstr ""
 
-#: src/marketplace/landing/HeroSection.tsx
-msgid "Welcome to"
-msgstr ""
-
 #: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Welcome to marketplace"
+msgstr ""
+
+#: src/i18n/constants.ts
+msgid "Welcome to service catalog"
 msgstr ""
 
 #: src/auth/AuthInit.tsx
@@ -13638,10 +13710,6 @@ msgstr ""
 
 #: src/user/dashboard/utils.ts
 msgid "{count} user events in {date}"
-msgstr ""
-
-#: src/marketplace/landing/LandingPage.tsx
-msgid "{deployment} Marketplace"
 msgstr ""
 
 #: src/table/TablePagination.tsx

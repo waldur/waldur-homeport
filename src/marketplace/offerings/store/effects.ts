@@ -6,6 +6,7 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { Action } from '@waldur/core/reducerActions';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
+import { UPDATE_OFFERING_LOGO_FORM_ID } from '@waldur/marketplace/offerings/actions/constants';
 import { Category } from '@waldur/marketplace/types';
 import { handleMarketplaceErrorResponse } from '@waldur/marketplace/utils';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -417,6 +418,25 @@ function* pullRemoteOfferingInvoices(action: Action<any>) {
   }
 }
 
+function* pullRemoteOfferingRobotAccounts(action: Action<any>) {
+  const { uuid } = action.payload;
+  try {
+    yield call(api.pullRemoteOfferingRobotAccounts, uuid);
+    yield put(
+      showSuccess(
+        translate('Robot accounts synchronization has been scheduled.'),
+      ),
+    );
+  } catch (error) {
+    yield put(
+      showErrorResponse(
+        error,
+        translate('Unable to synchronize robot accounts.'),
+      ),
+    );
+  }
+}
+
 function* updateConfirmationMessage(action: Action<any>) {
   const { offeringUuid, templateConfirmationMessage, secretOptions } =
     action.payload;
@@ -491,14 +511,14 @@ function* updateOfferingLogo(action: Action<any>) {
     const isOwnerOrStaff = yield select(isOwnerOrStaffSelector);
     const user = yield select(getUser);
     const filterFormData = yield select(
-      getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID),
+      getFormValues(UPDATE_OFFERING_LOGO_FORM_ID),
     );
     yield put(
       updatePublicOfferingsList(
         customer,
         isServiceManager && !isOwnerOrStaff,
         user,
-        filterFormData.state,
+        filterFormData?.state || [],
       ),
     );
     yield put(showSuccess(translate('Logo has been updated successfully.')));
@@ -553,6 +573,11 @@ export default function* () {
     constants.PULL_REMOTE_OFFERING_INVOICES,
     pullRemoteOfferingInvoices,
   );
+  yield takeEvery(
+    constants.PULL_REMOTE_OFFERING_ROBOT_ACCOUNTS,
+    pullRemoteOfferingRobotAccounts,
+  );
+
   yield takeEvery(
     constants.updateConfirmationMessage.REQUEST,
     updateConfirmationMessage,

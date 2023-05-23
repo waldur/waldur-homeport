@@ -97,12 +97,13 @@ export const states: StateDeclaration[] = [
       workspace: SUPPORT_WORKSPACE,
       title: () => translate('Support'),
       permissions: [isStaffOrSupport],
+      hideProjectSelector: true,
     },
   },
 
   {
     name: 'support.detail',
-    url: 'issue/:uuid/',
+    url: 'issue/:issue_uuid/',
     component: IssueDetailsContainer,
     data: {
       permissions: [isStaffOrSupport, hasSupport],

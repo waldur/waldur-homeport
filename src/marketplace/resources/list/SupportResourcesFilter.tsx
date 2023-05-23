@@ -53,22 +53,19 @@ const PureSupportResourcesFilter: FunctionComponent = () => {
       >
         <CategoryFilter />
       </TableFilterItem>
-      <TableFilterItem
-        title={translate('State')}
-        name="state"
-        badgeValue={(value) => value?.label}
-      >
-        <ResourceStateFilter />
+      <TableFilterItem title={translate('State')} name="state">
+        <ResourceStateFilter reactSelectProps={{ isMulti: true }} />
       </TableFilterItem>
     </>
   );
 };
 
+const states = getStates().filter((state) => state.value !== 'Terminated');
 const enhance = reduxForm({
   form: SUPPORT_RESOURCES_FILTER_FORM_ID,
   onChange: syncFiltersToURL,
   initialValues: getInitialValues({
-    state: getStates()[1],
+    state: [...states],
   }),
   destroyOnUnmount: false,
 });

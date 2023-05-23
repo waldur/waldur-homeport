@@ -2,11 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5px;
+  margin: 5px auto 0;
   max-width: 140px;
 
   div {
     flex: 1;
     margin-top: 10px;
+
+    img {
+      width: 100px;
+    }
   }
 }

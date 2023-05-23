@@ -7,6 +7,7 @@ import { Field, formValueSelector, reduxForm } from 'redux-form';
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { InputGroup } from '@waldur/customer/create/InputGroup';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import {
@@ -87,7 +88,7 @@ export const IssueCreateForm = enhance(
         ) : (
           <>
             <IssueHeader issue={issue} />
-            {!ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE && (
+            {ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE && (
               <>
                 {!issue.type && (
                   <Form.Group className="mb-5">
@@ -117,26 +118,24 @@ export const IssueCreateForm = enhance(
             )}
             {!options.hideTitle && (
               <Form.Group className="mb-5">
-                <Form.Label>{options.summaryLabel}</Form.Label>
-                <Field
+                <InputGroup
                   name="summary"
-                  component={InputField}
                   type="text"
-                  placeholder={options.summaryPlaceholder}
+                  component={InputField}
                   required={true}
+                  label={options.summaryLabel}
                   disabled={submitting}
                 />
               </Form.Group>
             )}
             <Form.Group className="mb-5">
-              <Form.Label>{options.descriptionLabel}</Form.Label>
-              <Field
+              <InputGroup
                 name="description"
-                component={InputField}
                 as="textarea"
                 className="h-150 form-control-solid"
-                placeholder={options.descriptionPlaceholder}
+                component={InputField}
                 required={true}
+                label={options.descriptionLabel}
                 disabled={submitting}
               />
             </Form.Group>

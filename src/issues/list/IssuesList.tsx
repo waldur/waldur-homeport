@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { formatDate, formatRelative } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { IssueLinkField } from '@waldur/issues/list/IssueLinkField';
 import { IssuesListExpandableRow } from '@waldur/issues/list/IssuesListExpandableRow';
 import { IssuesListPlaceholder } from '@waldur/issues/list/IssuesListPlaceholder';
 import { StatusColumn } from '@waldur/issues/list/StatusColumn';
@@ -38,14 +38,10 @@ export const TableComponent: React.FC<IssueTableProps> = (props) => {
   const columns = filterColumns([
     {
       title: translate('Key'),
-      render: ({ row }) => (
-        <Link
-          state="support.detail"
-          params={{ uuid: row.uuid }}
-          label={row.key || 'N/A'}
-        />
-      ),
       orderField: 'key',
+      render: ({ row }) => (
+        <IssueLinkField label={row.key || 'N/A'} row={row} />
+      ),
     },
     {
       title: translate('Status'),
@@ -163,7 +159,8 @@ const TableOptions = {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  supportOrStaff: getUser(state)?.is_staff || getUser(state)?.is_support,
+  supportOrStaff:
+    getUser(state)?.is_staff || getUser(state)?.is_support || false,
 });
 
 const connector = connect(mapStateToProps);

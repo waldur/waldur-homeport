@@ -69,6 +69,11 @@ const UserEmailChangeCallback = lazyComponent(
   () => import('./support/UserEmailChangeCallback'),
   'UserEmailChangeCallback',
 );
+const IssueDetailsContainer = lazyComponent(
+  () => import('../issues/IssueDetails'),
+  'IssueDetails',
+);
+
 const UserDetails = lazyComponent(() => import('./UserDetails'), 'UserDetails');
 
 export const states: StateDeclaration[] = [
@@ -80,6 +85,7 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: USER_WORKSPACE,
       title: () => UsersService.getCachedUser()?.full_name,
+      hideProjectSelector: true,
     },
     component: UserDetails,
   },
@@ -134,6 +140,15 @@ export const states: StateDeclaration[] = [
       permissions: [hasSupport],
     },
   },
+  {
+    name: 'profile.issue-details',
+    url: 'issues/:issue_uuid',
+    component: IssueDetailsContainer,
+    data: {
+      permissions: [hasSupport],
+    },
+  },
+
   {
     name: 'profile-keys',
     url: 'keys/',

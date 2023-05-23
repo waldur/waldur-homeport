@@ -1,5 +1,5 @@
 import { ENV } from '@waldur/configs/default';
-import { get, sendForm } from '@waldur/core/api';
+import { get, post, sendForm } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import {
   getOrganizationGroupTypesList,
@@ -64,4 +64,8 @@ export const organizationGroupTypeAutocomplete = async (
   };
   const response = await getOrganizationGroupTypesList(params);
   return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
+};
+
+export const sendFinancialReport = (payload) => {
+  return post('/invoice/send-financial-report-by-mail/', payload);
 };

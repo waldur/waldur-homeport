@@ -35,7 +35,7 @@ const mapStateToProps = (state: RootState) => {
   if (type) {
     props.showOptions = showOfferingOptions(type);
     props.showBackendId = showBackendId(type);
-    props.allowToUpdateService = offering.scope && allowToUpdateService(type);
+    props.allowToUpdateService = offering?.scope && allowToUpdateService(type);
     props.schedulable = isOfferingTypeSchedulable(type);
     props.pluginOptionsForm = getPluginOptionsForm(type);
     props.secretOptionsForm = getSecretOptionsForm(type);

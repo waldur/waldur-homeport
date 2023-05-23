@@ -3,6 +3,7 @@ import { EditResourceEndDateAction } from '@waldur/marketplace/resources/actions
 import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
 import { ChangeLimitsAction } from '@waldur/marketplace/resources/change-limits/ChangeLimitsAction';
 import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
+import { ShowReportAction } from '@waldur/marketplace/resources/report/ShowReportAction';
 import { SubmitReportAction } from '@waldur/marketplace/resources/report/SubmitReportAction';
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
 
@@ -22,6 +23,7 @@ export const getResourceCommonActions = () => {
   return [
     EditAction,
     MoveResourceAction,
+    ShowReportAction,
     SubmitReportAction,
     ChangePlanAction,
     ChangeLimitsAction,

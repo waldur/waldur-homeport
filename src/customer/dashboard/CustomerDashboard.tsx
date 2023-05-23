@@ -24,6 +24,8 @@ export const CustomerDashboard: FunctionComponent = () => {
     [customer, user],
   );
 
+  if (!customer) return null;
+
   return (
     <>
       {isServiceManager ? (

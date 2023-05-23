@@ -71,6 +71,15 @@
     }
   }
 
+  // Background contain
+  &.symbol-contain {
+    &,
+    > img,
+    .symbol-label {
+      background-size: contain;
+    }
+  }
+
   // Sizes
   @include symbol-size(get($symbol-sizes, default));
 

@@ -30,6 +30,11 @@ export const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (
             <img
               src={getImageUrl(props.input.value)}
               alt={translate('Image here')}
+              style={{
+                maxHeight: '100%',
+                maxWidth: '100%',
+                objectFit: 'contain',
+              }}
             />
           </div>
         </Col>

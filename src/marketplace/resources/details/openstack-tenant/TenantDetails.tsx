@@ -4,6 +4,7 @@ import { useAsync } from 'react-use';
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { getResourceDetails } from '@waldur/marketplace/common/api';
 import { OpenStackTenant } from '@waldur/openstack/openstack-tenant/types';
 
 import { ResourceTabs } from '../ResourceTabs';
@@ -38,7 +39,7 @@ interface TenantCounters {
 
 export const TenantDetails = ({ resource }) => {
   const { loading, error, value } = useAsync(async () => {
-    const tenant = (await get<OpenStackTenant>(resource.scope)).data;
+    const tenant = (await getResourceDetails(resource.uuid)) as OpenStackTenant;
     const counters = (await get<TenantCounters>(resource.scope + 'counters/'))
       .data;
     return { tenant, counters };

@@ -51,7 +51,7 @@ const mapStateToProps = (
   ownProps: SetAccessPolicyDialogFormOwnProps,
 ) => ({
   initialValues: getInitialValuesForSetAccessPolicyForm(
-    ownProps.offering.organizationGroups,
+    ownProps.offering.divisions,
   ),
 });
 

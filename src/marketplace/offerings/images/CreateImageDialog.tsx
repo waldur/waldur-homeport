@@ -10,8 +10,8 @@ import {
   SubmitButton,
   TextField,
 } from '@waldur/form';
+import { ImageField } from '@waldur/form/ImageField';
 import { translate } from '@waldur/i18n';
-import { ImageUploadField } from '@waldur/marketplace/offerings/create/ImageUploadField';
 import {
   addOfferingImage,
   isAddingOfferingImage,
@@ -38,14 +38,7 @@ const AddOfferingImageDialog: FunctionComponent<any> = (props) => (
       }
     >
       <FormContainer submitting={false} clearOnUnmount={false}>
-        <ImageUploadField
-          name="images"
-          label={translate('Image: ')}
-          accept={'image/*'}
-          buttonLabel={translate('Browse')}
-          className="btn btn-secondary"
-          required={true}
-        />
+        <ImageField label={translate('Image')} name="images" required />
         <StringField
           name="name"
           label={translate('Name')}

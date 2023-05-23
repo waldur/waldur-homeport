@@ -14,7 +14,7 @@ export const SidebarFooter = () => {
       >
         <InlineSVG path={marketplaceIcon} svgClassName="btn-icon svg-icon-2" />
         <span className="btn-label">
-          {translate('Go to Marketplace')}
+          {translate('Go to marketplace')}
           <i className="fa fa-angle-right angle" />
         </span>
       </LandingLink>

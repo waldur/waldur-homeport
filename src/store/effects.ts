@@ -18,6 +18,7 @@ import serviceUsageSaga from '@waldur/providers/support/effects';
 import resourceSummarySaga from '@waldur/resource/summary/effects';
 import tableSaga from '@waldur/table/effects';
 import userSaga from '@waldur/user/support/effects';
+import workspaceSaga from '@waldur/workspace/effects';
 
 export default [
   authSaga,
@@ -39,4 +40,5 @@ export default [
   invoicesSaga,
   paymentsSaga,
   titleEffects,
+  workspaceSaga,
 ];

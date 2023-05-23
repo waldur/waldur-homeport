@@ -9,6 +9,10 @@ import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { loadContext, fetchProvider } from './resolve';
 
+const AdminCategoriesPage = lazyComponent(
+  () => import('@waldur/marketplace/category/admin/AdminCategoriesPage'),
+  'AdminCategoriesPage',
+);
 const AdminOfferingsListContainer = lazyComponent(
   () =>
     import('@waldur/marketplace/offerings/admin/AdminOfferingsListContainer'),
@@ -169,6 +173,11 @@ const OfferingPermissionsList = lazyComponent(
 const ProviderOfferingUsersList = lazyComponent(
   () => import('./service-providers/ProviderOfferingUsersList'),
   'ProviderOfferingUsersList',
+);
+
+const ProjectsListContainer = lazyComponent(
+  () => import('@waldur/project/ProjectsListContainer'),
+  'ProjectsListContainer',
 );
 
 const getPublicRoutesParams = () => ({
@@ -387,6 +396,7 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: ORGANIZATION_WORKSPACE,
       title: () => translate('Service provider'),
+      hideProjectSelector: true,
     },
     resolve: [
       {
@@ -544,6 +554,16 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'marketplace-projects',
+    url: 'marketplace-projects/',
+    component: ProjectsListContainer,
+    parent: 'organization',
+    data: {
+      breadcrumb: () => translate('Projects'),
+    },
+  },
+
+  {
     name: 'marketplace-offering-create',
     url: 'marketplace-provider-offering-create/',
     component: OfferingCreateContainer,
@@ -622,7 +642,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-public-resources',
-    url: 'marketplace-public-resources/?{state}',
+    url: 'resources-list/?{state}',
     component: PublicResourcesContainer,
     parent: 'provider-resources',
     data: {
@@ -639,8 +659,8 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-service-provider-public-resource-details',
-    url: 'marketplace-service-provider-public-resource-details/:resource_uuid?tab',
-    parent: 'organization',
+    url: 'resources/:resource_uuid?tab',
+    parent: 'provider-resources',
     ...getResourceDetailsParams,
   },
 
@@ -662,12 +682,37 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'marketplace-admin-resources',
+    url: 'marketplace-admin-resources/',
+    component: SupportResourcesContainer,
+    parent: 'admin',
+    data: {
+      breadcrumb: () => translate('Resources'),
+    },
+  },
+
+  {
+    name: 'admin.marketplace-categories',
+    url: 'categories/',
+    component: AdminCategoriesPage,
+    data: {
+      breadcrumb: () => translate('Categories'),
+    },
+  },
+
+  {
     name: 'admin.marketplace-offerings',
     url: 'offerings/',
     component: AdminOfferingsListContainer,
     data: {
       breadcrumb: () => translate('Offerings'),
     },
+  },
+
+  {
+    name: 'admin.marketplace-offering-details',
+    url: 'offerings/:offering_uuid',
+    component: OfferingContainer,
   },
 
   {

@@ -4,6 +4,7 @@ import { useAsync } from 'react-use';
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { getResourceDetails } from '@waldur/marketplace/common/api';
 import { OpenStackInstance } from '@waldur/openstack/openstack-instance/types';
 
 import { ResourceTabs } from '../ResourceTabs';
@@ -26,7 +27,9 @@ interface InstanceCounters {
 
 export const InstanceDetails = ({ resource }) => {
   const { loading, error, value } = useAsync(async () => {
-    const instance = (await get<OpenStackInstance>(resource.scope)).data;
+    const instance = (await getResourceDetails(
+      resource.uuid,
+    )) as OpenStackInstance;
     const counters = (await get<InstanceCounters>(resource.scope + 'counters/'))
       .data;
     return { instance, counters };

@@ -4,7 +4,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { getById } from '@waldur/core/api';
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
+import { FormattedJira } from '@waldur/core/FormattedJira';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
@@ -25,15 +25,19 @@ export const IssueDetails: FunctionComponent = () => {
   useTitle(translate('Request detail'));
 
   const {
-    params: { uuid },
+    params: { issue_uuid },
   } = useCurrentStateAndParams();
   const router = useRouter();
 
-  if (!uuid) {
+  if (!issue_uuid) {
     router.stateService.go('errorPage.notFound');
   }
 
-  const { loading, error, value: issue } = useAsync(() => loadIssue(uuid));
+  const {
+    loading,
+    error,
+    value: issue,
+  } = useAsync(() => loadIssue(issue_uuid));
 
   if (loading) {
     return <LoadingSpinner />;
@@ -53,7 +57,7 @@ export const IssueDetails: FunctionComponent = () => {
               </Card.Title>
             </Card.Header>
             <Card.Body>
-              <FormattedHtml html={linkify(issue.description)} />
+              <FormattedJira text={linkify(issue?.description)} />
             </Card.Body>
           </Card>
           <IssueCommentsContainer issue={issue} />

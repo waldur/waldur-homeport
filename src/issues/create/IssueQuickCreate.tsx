@@ -1,3 +1,4 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback, useEffect } from 'react';
 import { Card, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,6 +10,7 @@ import { ENV } from '@waldur/configs/default';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { formatResourceShort } from '@waldur/marketplace/utils';
+import { isDescendantOf } from '@waldur/navigation/useTabs';
 import { getCustomersList } from '@waldur/project/api';
 import { BaseResource } from '@waldur/resource/types';
 import { RootState } from '@waldur/store/reducers';
@@ -82,6 +84,7 @@ const projectRequiredSelector = createSelector(
 );
 
 export const ProjectGroup = ({ disabled, customer, formId }) => {
+  const { state } = useCurrentStateAndParams();
   const dispatch = useDispatch();
   const projectRequired = useSelector(projectRequiredSelector);
 
@@ -111,7 +114,7 @@ export const ProjectGroup = ({ disabled, customer, formId }) => {
           getOptionValue={(option) => option.name}
           getOptionLabel={(option) => option.name}
           filterOption={filterOption}
-          isDisabled={disabled}
+          isDisabled={disabled || isDescendantOf('project', state)}
           required={projectRequired}
         />
       ) : (
@@ -204,7 +207,7 @@ export const IssueQuickCreate = reduxForm<IssueFormData>({
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          {!ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE ? (
+          {ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE ? (
             <TypeGroup disabled={submitting} />
           ) : null}
           <SummaryGroup disabled={submitting} />

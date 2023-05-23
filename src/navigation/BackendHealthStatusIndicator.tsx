@@ -26,7 +26,8 @@ export const getBackendHealthStatus = async () => {
   return response.data;
 };
 
-const isWorking = (data): boolean => {
+export const isWorking = (data): boolean => {
+  if (!data) return false;
   for (const item of Object.values(data)) {
     if (item !== 'working') {
       return false;

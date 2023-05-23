@@ -72,6 +72,11 @@ const CustomerIssuesList = lazyComponent(
   'CustomerIssuesList',
 );
 
+const IssueDetailsContainer = lazyComponent(
+  () => import('../issues/IssueDetails'),
+  'IssueDetails',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'organization',
@@ -81,6 +86,7 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: ORGANIZATION_WORKSPACE,
       title: () => translate('Organization'),
+      hideProjectSelector: true,
     },
     parent: 'layout',
     component: UIView,
@@ -102,18 +108,7 @@ export const states: StateDeclaration[] = [
     data: {
       title: () => translate('Reporting'),
       permissions: [isStaffOrSupport],
-    },
-  },
-
-  {
-    name: 'admin',
-    url: '/administration/',
-    abstract: true,
-    parent: 'layout',
-    component: UIView,
-    data: {
-      title: () => translate('Administration'),
-      permissions: [isStaffOrSupport],
+      hideProjectSelector: true,
     },
   },
 
@@ -165,6 +160,15 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Issues'),
       skipBreadcrumb: true,
+      permissions: [hasSupport],
+    },
+  },
+
+  {
+    name: 'organization.issue-details',
+    url: 'issue/:issue_uuid/',
+    component: IssueDetailsContainer,
+    data: {
       permissions: [hasSupport],
     },
   },
