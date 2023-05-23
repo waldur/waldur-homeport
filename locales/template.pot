@@ -3655,11 +3655,8 @@ msgstr ""
 msgid "Go back"
 msgstr ""
 
-#: src/navigation/sidebar/SidebarFooter.tsx
-msgid "Go to Marketplace"
-msgstr ""
-
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
+#: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Go to marketplace"
 msgstr ""
 
