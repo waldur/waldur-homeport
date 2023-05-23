@@ -3,7 +3,9 @@ import { OrganizationGroup, Offering } from '@waldur/marketplace/types';
 import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
 import { User } from '@waldur/workspace/types';
 
-export const getInitialValuesForSetAccessPolicyForm = (organizationGroups) => {
+export const getInitialValuesForSetAccessPolicyForm = (
+  organizationGroups = [],
+) => {
   const organizationGroupsUuids = organizationGroups.map(
     (organizationGroup) => organizationGroup.uuid,
   );

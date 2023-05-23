@@ -115,6 +115,7 @@ export interface Offering extends GeolocationPoint {
   vendor_details?: string;
   screenshots?: Image[];
   description?: string;
+  divisions?: OrganizationGroup[];
   full_description: string;
   customer_uuid?: string;
   customer_name?: string;
@@ -146,6 +147,7 @@ export interface Offering extends GeolocationPoint {
 }
 
 export interface Image {
+  uuid: string;
   image: string;
   thumbnail: string;
   name: string;

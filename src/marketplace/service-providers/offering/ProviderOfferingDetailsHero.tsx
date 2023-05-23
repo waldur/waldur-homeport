@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { Col, Form, Row, Stack } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
@@ -7,12 +7,16 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
-import { getAllOfferingPermissions } from '@waldur/marketplace/common/api';
+import {
+  getAllOfferingPermissions,
+  getProviderOfferingStats,
+} from '@waldur/marketplace/common/api';
 import { OfferingItemActions } from '@waldur/marketplace/offerings/actions/OfferingItemActions';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { Field } from '@waldur/resource/summary';
 
+import { ProviderOfferingAccessField } from './ProviderOfferingAccessField';
 import { ProviderOfferingMetadataLink } from './ProviderOfferingMetadataLink';
 import { ProviderOfferingQuickActions } from './ProviderOfferingQuickActions';
 
@@ -56,11 +60,28 @@ export const ProviderOfferingDetailsHero: FunctionComponent<OwnProps> = (
     [props.offering],
   );
 
-  const offeringInfoItems = [
-    { t: translate('Resources'), v: '223' },
-    { t: translate('Clients'), v: '30' },
-    { t: translate('Support Tickets'), v: '4349' },
-  ];
+  const { loading: loadingStats, value: stats } = useAsync(
+    () => getProviderOfferingStats(props.offering.uuid),
+    [props.offering],
+  );
+
+  const offeringInfoItems = useMemo(
+    () =>
+      [
+        {
+          title: translate('Resources'),
+          value: stats ? stats.resources_count : '0',
+          visible: true,
+        },
+        {
+          title: translate('Clients'),
+          value: stats ? stats.customers_count : '0',
+          visible: true,
+        },
+        { title: translate('Support Tickets'), value: 'N/A', visible: false },
+      ].filter((item) => item.visible),
+    [stats],
+  );
 
   return (
     <>
@@ -94,12 +115,16 @@ export const ProviderOfferingDetailsHero: FunctionComponent<OwnProps> = (
         quickActions={<ProviderOfferingQuickActions />}
         quickFooter={
           <div className="d-flex justify-content-between align-items-end flex-wrap gap-2 w-100">
-            {offeringInfoItems.map((item) => (
-              <div key={item.t} className="text-center">
-                <h1 className="mb-0">{item.v}</h1>
-                <span>{item.t}</span>
-              </div>
-            ))}
+            {loadingStats ? (
+              <LoadingSpinner />
+            ) : (
+              offeringInfoItems.map((item) => (
+                <div key={item.title} className="text-center">
+                  <h1 className="mb-0">{item.value}</h1>
+                  <span>{item.title}</span>
+                </div>
+              ))
+            )}
             <div className="text-center">
               <span
                 className={
@@ -141,11 +166,7 @@ export const ProviderOfferingDetailsHero: FunctionComponent<OwnProps> = (
           value={props.category.title}
           spaceless
         />
-        <Field
-          label={translate('Access:')}
-          value="Public | Restricted (link to org groups)"
-          spaceless
-        />
+        <ProviderOfferingAccessField offering={props.offering} />
         <div className="d-flex justify-content-between align-items-end mt-6">
           <div>
             {showExperimentalUiComponents && (

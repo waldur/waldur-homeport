@@ -1,12 +1,47 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { Button } from 'react-bootstrap';
 
+import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { Field } from '@waldur/resource/summary';
+import {
+  getAttributes,
+  isOfferingTypeSchedulable,
+  getOfferingTypes,
+} from '@waldur/marketplace/common/registry';
+import { AttributesTable } from '@waldur/marketplace/details/attributes/AttributesTable';
+import { PageManagement } from '@waldur/marketplace/offerings/details/PageManagement';
+import { Offering, Section } from '@waldur/marketplace/types';
 
 import { CircleProgressStatus } from './CircleProgressStatus';
 import { ProviderOfferingDataCard } from './ProviderOfferingDataCard';
+
+const ManagementSummary = ({ offering }: { offering: Offering }) => {
+  const section: Section = {
+    key: 'management',
+    title: translate('Management'),
+    attributes: getAttributes(offering.type),
+  };
+
+  const attributes = offering.attributes;
+  const schedules = offering.attributes?.schedules;
+  const isSchedulable = isOfferingTypeSchedulable(offering.type);
+  const typeLabel = getOfferingTypes().find(
+    (option) => option.value === offering.type,
+  ).label;
+
+  return (
+    <>
+      <p>
+        <strong>{translate('Type')}</strong>: {typeLabel}
+      </p>
+      {attributes && (
+        <AttributesTable attributes={attributes} sections={[section]} />
+      )}
+      {/* Full calendar component is rendered as collapsed */}
+      {schedules && isSchedulable && <Calendar events={schedules} />}
+    </>
+  );
+};
 
 interface ProviderOfferingIntegrationProps {
   offering: Offering;
@@ -14,6 +49,7 @@ interface ProviderOfferingIntegrationProps {
 
 export const ProviderOfferingIntegration: FunctionComponent<ProviderOfferingIntegrationProps> =
   ({ offering }) => {
+    const [editMode, setEditMode] = useState(false);
     if (!offering) return null;
 
     return (
@@ -21,8 +57,12 @@ export const ProviderOfferingIntegration: FunctionComponent<ProviderOfferingInte
         title={translate('Integration')}
         icon="fa fa-cog"
         actions={
-          <Button variant="light" className="mw-100px w-100">
-            {translate('Edit')}
+          <Button
+            variant={editMode ? 'light-danger' : 'light'}
+            className="mw-100px w-100"
+            onClick={() => setEditMode((prev) => !prev)}
+          >
+            {editMode ? translate('Cancel') : translate('Edit')}
           </Button>
         }
         footer={
@@ -34,43 +74,11 @@ export const ProviderOfferingIntegration: FunctionComponent<ProviderOfferingInte
           </div>
         }
       >
-        <div className="mb-6">
-          <Field label={translate('Integration type:')} spaceless>
-            OpenStack admin
-          </Field>
-        </div>
-        <div className="mb-6">
-          <Field label={translate('API URL:')} spaceless>
-            http://keystone.example.com:5000/v3
-          </Field>
-        </div>
-        <div className="mb-6">
-          <Field label={translate('Domain name:')} spaceless>
-            default
-          </Field>
-          <Field label={translate('Username:')} spaceless>
-            admin
-          </Field>
-          <Field label={translate('Password:')} spaceless>
-            **********
-          </Field>
-        </div>
-        <div className="mb-6">
-          <Field label={translate('Tenant name:')} spaceless>
-            default
-          </Field>
-          <Field label={translate('External network ID:')} spaceless>
-            93298438943843
-          </Field>
-          <Field label={translate('Availability zone:')} spaceless>
-            OSLO1
-          </Field>
-        </div>
-        <div>
-          <Field label={translate('Storage mode:')} spaceless>
-            Fixed
-          </Field>
-        </div>
+        {editMode ? (
+          <PageManagement offering={offering} hideHeader={true} />
+        ) : (
+          <ManagementSummary offering={offering} />
+        )}
       </ProviderOfferingDataCard>
     );
   };

@@ -75,13 +75,17 @@ export const ProviderOfferingDetails: FunctionComponent<ProviderOfferingDetailsP
             <ProviderOfferingIntegration offering={offering} />
           </Col>
           <Col xs={12} className="mb-6">
-            <ProviderOfferingSupport offering={offering} />
+            {showExperimentalUiComponents && (
+              <ProviderOfferingSupport offering={offering} />
+            )}
           </Col>
           <Col xs={12} className="mb-6">
             <ProviderOfferingMetadata offering={offering} />
           </Col>
           <Col xs={12} className="mb-6">
-            <ProviderOfferingDocumentation offering={offering} />
+            {showExperimentalUiComponents && (
+              <ProviderOfferingDocumentation offering={offering} />
+            )}
           </Col>
           <Col xs={12} className="mb-6">
             {showExperimentalUiComponents && <ProviderOfferingFAQ />}

@@ -30,6 +30,7 @@ import {
   ImportableResource,
   OrganizationGroup,
   OfferingPermission,
+  Image,
 } from '@waldur/marketplace/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -110,6 +111,11 @@ export const getOfferingPlansUsage = (offeringUuid: string) =>
 
 export const getProviderOffering = (id: string, options?: AxiosRequestConfig) =>
   getById<Offering>('/marketplace-provider-offerings/', id, options);
+
+export const getProviderOfferingStats = (uuid: string) =>
+  get<{ resources_count; customers_count }>(
+    `/marketplace-provider-offerings/${uuid}/stats`,
+  ).then((response) => response.data);
 
 export const getPublicOffering = (id: string, options?: AxiosRequestConfig) =>
   getById<Offering>('/marketplace-public-offerings/', id, options);
@@ -285,6 +291,9 @@ export const updateProviderOfferingState = (offeringUuid, action, reason) =>
     `/marketplace-provider-offerings/${offeringUuid}/${action}/`,
     reason && { paused_reason: reason },
   ).then((response) => response.data);
+
+export const getOfferingImages = (uuid: string) =>
+  getAll<Image>(`/marketplace-screenshots/?offering_uuid=${uuid}`);
 
 export const uploadOfferingImage = (formData, offering) => {
   const reqData = {

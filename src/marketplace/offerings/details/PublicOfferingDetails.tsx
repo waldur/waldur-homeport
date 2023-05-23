@@ -14,7 +14,7 @@ import { PublicOfferingGetHelp } from './PublicOfferingGetHelp';
 import { PublicOfferingGettingStarted } from './PublicOfferingGettingStarted';
 import { PublicOfferingImages } from './PublicOfferingImages';
 import { PublicOfferingInfo } from './PublicOfferingInfo';
-import { PublicOfferingPricing } from './PublicOfferingPricing';
+import { PublicOfferingPricingCard } from './PublicOfferingPricing';
 import { PublicOfferingReviews } from './PublicOfferingReviews';
 import './PublicOfferingDetails.scss';
 
@@ -80,7 +80,10 @@ export const PublicOfferingDetails: FunctionComponent<PublicOfferingDetailsProps
           )}
           {showExperimentalUiComponents && <PublicOfferingFAQ />}
           {showExperimentalUiComponents && <PublicOfferingReviews />}
-          <PublicOfferingPricing offering={offering} canDeploy={canDeploy} />
+          <PublicOfferingPricingCard
+            offering={offering}
+            canDeploy={canDeploy}
+          />
           {showExperimentalUiComponents && (
             <PublicOfferingFacility offering={offering} />
           )}

@@ -1,8 +1,13 @@
 import { FunctionComponent, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { useAsyncFn, useEffectOnce } from 'react-use';
 
+import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
+import { Link } from '@waldur/core/Link';
+import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
+import { getOfferingImages } from '@waldur/marketplace/common/api';
+import { Image, Offering } from '@waldur/marketplace/types';
 
 import { CircleProgressStatus } from './CircleProgressStatus';
 import { ProviderOfferingDataCard } from './ProviderOfferingDataCard';
@@ -13,18 +18,31 @@ interface ProviderOfferingImageGalleryProps {
 
 export const ProviderOfferingImageGallery: FunctionComponent<ProviderOfferingImageGalleryProps> =
   ({ offering }) => {
-    const [image, setImage] = useState(1);
+    const [image, setImage] = useState<Image>(null);
 
     if (!offering) return null;
+
+    const [{ loading, error, value: images }, refetch] = useAsyncFn(
+      () => getOfferingImages(offering.uuid),
+      [offering],
+    );
+
+    useEffectOnce(() => {
+      refetch();
+    });
 
     return (
       <ProviderOfferingDataCard
         title={translate('Image gallery')}
         icon="fa fa-picture-o"
         actions={
-          <Button variant="light" className="mw-100px w-100">
+          <Link
+            state="marketplace-offering-images"
+            params={{ offering_uuid: offering.uuid }}
+            className="btn btn-light mw-100px w-100"
+          >
             {translate('Edit')}
-          </Button>
+          </Link>
         }
         footer={
           <div className="d-flex justify-content-end">
@@ -32,31 +50,47 @@ export const ProviderOfferingImageGallery: FunctionComponent<ProviderOfferingIma
           </div>
         }
       >
-        <div className="text-center px-5 py-5">
-          <img
-            src={offering.image}
-            className="card-rounded mw-100 mh-500px"
-            alt=""
-          />
-        </div>
-
-        <div className="d-flex scroll-x pt-2 pb-1">
-          <div className="d-flex align-items-stretch w-100">
-            <div className="d-flex align-items-center">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-                <button
-                  className={`symbol symbol-100px btn border p-4 mx-1 ${
-                    image === i ? 'border-primary' : ''
-                  }`}
-                  key={i}
-                  onClick={() => setImage(i)}
-                >
-                  <img src={offering.image} />
-                </button>
-              ))}
+        {loading ? (
+          <LoadingSpinner />
+        ) : error ? (
+          <LoadingErred loadData={refetch} />
+        ) : images?.length ? (
+          <>
+            <div className="text-center px-5 py-5">
+              {image ? (
+                <img
+                  src={image?.image}
+                  className="card-rounded mh-500px mw-800px"
+                  alt=""
+                />
+              ) : (
+                <ImagePlaceholder height="400px" width="500px" />
+              )}
             </div>
-          </div>
-        </div>
+
+            <div className="d-flex scroll-x pt-2 pb-1">
+              <div className="d-flex align-items-stretch w-100">
+                <div className="d-flex align-items-center">
+                  {images.map((img) => (
+                    <button
+                      className={`symbol symbol-100px btn border p-4 mx-1 ${
+                        image?.uuid === img.uuid ? 'border-primary' : ''
+                      }`}
+                      key={img.uuid}
+                      onClick={() => setImage(img)}
+                    >
+                      <img src={img.thumbnail} />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <h1 className="text-muted display-6 text-center py-4">
+            {translate('No image')}
+          </h1>
+        )}
       </ProviderOfferingDataCard>
     );
   };

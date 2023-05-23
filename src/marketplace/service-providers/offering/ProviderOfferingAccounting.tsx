@@ -1,9 +1,9 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { PublicOfferingPricing } from '@waldur/marketplace/offerings/details/PublicOfferingPricing';
 import { Offering } from '@waldur/marketplace/types';
-import { Field } from '@waldur/resource/summary';
 
 import { CircleProgressStatus } from './CircleProgressStatus';
 import { ProviderOfferingDataCard } from './ProviderOfferingDataCard';
@@ -15,6 +15,7 @@ interface ProviderOfferingAccountingProps {
 export const ProviderOfferingAccounting: FunctionComponent<ProviderOfferingAccountingProps> =
   ({ offering }) => {
     if (!offering) return null;
+    const canDeploy = useMemo(() => offering.state === 'Active', [offering]);
 
     return (
       <ProviderOfferingDataCard
@@ -31,30 +32,7 @@ export const ProviderOfferingAccounting: FunctionComponent<ProviderOfferingAccou
           </div>
         }
       >
-        <div className="mb-6">
-          <Field label={translate('Billing type:')} spaceless>
-            Fixed per month
-          </Field>
-        </div>
-        <div className="mb-6">
-          <strong>{translate('Components')}:</strong>
-          <Field label="Cores (limit based):" spaceless>
-            0-100
-          </Field>
-          <Field label="RAM (limit based):" spaceless>
-            0-100
-          </Field>
-          <Field label="Storage (limit based):" spaceless>
-            0-100
-          </Field>
-        </div>
-        <div>
-          <strong>{translate('Accounting plans')}:</strong>
-          <p>
-            - My first plan (per month)
-            <br />- Plan 2 (per week)
-          </p>
-        </div>
+        <PublicOfferingPricing offering={offering} canDeploy={canDeploy} />
       </ProviderOfferingDataCard>
     );
   };

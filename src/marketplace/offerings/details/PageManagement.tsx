@@ -27,6 +27,7 @@ export const PageManagement = connect((state: RootState) => ({
       onReturn,
       refreshOffering,
       offering,
+      hideHeader,
     }) => {
       const dispatch = useDispatch();
 
@@ -44,11 +45,13 @@ export const PageManagement = connect((state: RootState) => ({
 
       return (
         <form onSubmit={handleSubmit(updateOfferingHandler)}>
-          <Modal.Header onClick={onReturn} style={{ cursor: 'pointer' }}>
-            <Modal.Title>
-              <i className="fa fa-arrow-left"></i> {translate('Management')}
-            </Modal.Title>
-          </Modal.Header>
+          {!hideHeader && (
+            <Modal.Header onClick={onReturn} style={{ cursor: 'pointer' }}>
+              <Modal.Title>
+                <i className="fa fa-arrow-left"></i> {translate('Management')}
+              </Modal.Title>
+            </Modal.Header>
+          )}
           <Modal.Body>
             <ManagementStepContainer />
           </Modal.Body>
