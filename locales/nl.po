@@ -2903,6 +2903,7 @@ msgid "Generate password"
 msgstr "Genereer wachtwoord"
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
+#: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Go to marketplace"
 msgstr "Ga naar marktplaats"
 
@@ -3808,6 +3809,7 @@ msgstr "Markeer als betaald"
 msgid "Mark invoice as paid"
 msgstr "Markeer factuur als betaald"
 
+#: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/routes.ts
 msgid "Marketplace"

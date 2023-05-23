@@ -2903,6 +2903,7 @@ msgid "Generate password"
 msgstr "Generovat heslo"
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
+#: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Go to marketplace"
 msgstr "Přejít do obchodu"
 
@@ -3808,6 +3809,7 @@ msgstr "Označit jako zaplacené"
 msgid "Mark invoice as paid"
 msgstr "Označit fakturu jako zaplacenou"
 
+#: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/routes.ts
 msgid "Marketplace"
