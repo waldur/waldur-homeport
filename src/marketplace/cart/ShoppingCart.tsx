@@ -49,7 +49,7 @@ const PureShoppingCart = (props: ShoppingCartProps) => {
             )}
             <th className="text-center">{translate('Actions')}</th>
             {props.termsOfServiceIsVisible && (
-              <th className="text-center">{translate('Agree with ToS')}</th>
+              <th className="text-center">{translate('Agree with terms')}</th>
             )}
           </tr>
         </thead>
