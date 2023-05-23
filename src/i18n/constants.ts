@@ -11,6 +11,7 @@ export const DOMAIN_MESSAGES = {
     ),
     Marketplace: gettext('Service catalog'),
     'Marketplace offerings': gettext('Service catalog offerings'),
+    'Welcome to marketplace': gettext('Welcome to service catalog'),
     'Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account.':
       gettext(
         'Services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account.',
@@ -49,6 +50,7 @@ export const DOMAIN_MESSAGES = {
     ),
     Marketplace: gettext('Service catalog'),
     'Marketplace offerings': gettext('Service catalog offerings'),
+    'Welcome to marketplace': gettext('Welcome to service catalog'),
     'Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account.':
       gettext(
         'Services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account.',
@@ -166,6 +168,7 @@ export const DOMAIN_MESSAGES = {
     ),
     Marketplace: gettext('Service catalog'),
     'Marketplace offerings': gettext('Service catalog offerings'),
+    'Welcome to marketplace': gettext('Welcome to service catalog'),
     'Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account.':
       gettext(
         'Services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account.',

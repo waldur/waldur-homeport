@@ -12714,6 +12714,10 @@ msgstr ""
 msgid "Welcome to marketplace"
 msgstr ""
 
+#: src/i18n/constants.ts
+msgid "Welcome to service catalog"
+msgstr ""
+
 #: src/auth/AuthInit.tsx
 #: src/marketplace/offerings/service-providers/Description.tsx
 msgid "Welcome to {pageTitle}!"
