@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import { Card, Col, Form, Row, Stack } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
@@ -21,7 +22,9 @@ export const AdministrationProfile = ({
   const image = fixURL('/icons/login_logo/');
   const website = ENV.plugins.WALDUR_CORE.HOMEPORT_URL;
 
-  const { value: version } = useAsync(() => getVersion(), []);
+  const { data: version } = useQuery(['version'], () => getVersion(), {
+    staleTime: Infinity,
+  });
 
   const { value, loading } = useAsync(() => {
     const promises = [

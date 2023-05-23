@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -14,30 +14,27 @@ import { HealthChecks } from './HealthChecks';
 import { StatisticsCards } from './StatisticsCards';
 
 export const AdministrationDashboard: FC = () => {
-  const [{ loading, error, value }, reFetch] = useAsyncFn(
-    getBackendHealthStatus,
-    [],
+  const { data, isLoading, error, refetch } = useQuery(
+    ['HealthStatus'],
+    () => getBackendHealthStatus(),
+    { staleTime: 5 * 60 * 1000 },
   );
 
-  useEffectOnce(() => {
-    reFetch();
-  });
-
-  const healthy = isWorking(value);
+  const healthy = isWorking(data);
 
   return (
     <>
-      {loading ? (
+      {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
         <LoadingErred
           message={translate('Unable to load health information')}
-          loadData={reFetch}
+          loadData={refetch}
         />
-      ) : value ? (
+      ) : data ? (
         <>
           <AdministrationProfile healthy={healthy} />
-          <HealthChecks healthInfoItems={value} />
+          <HealthChecks healthInfoItems={data} />
         </>
       ) : null}
       <StatisticsCards />

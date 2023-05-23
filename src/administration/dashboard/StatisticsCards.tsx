@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
-import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { Link } from '@waldur/core/Link';
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -10,46 +10,48 @@ import { translate } from '@waldur/i18n';
 import * as api from '../api';
 
 export const StatisticsCards = () => {
-  const [{ value, loading, error }, reFetch] = useAsyncFn(async () => {
-    // Order is important
-    const promises = [
-      api.getCustomersCount(),
-      api.getProjectsCount(),
-      api.getUsersCount(),
-      api.getCategoriesCount(),
-      api.getProviderOfferingsCount({
-        params: { shared: 'True' },
-      }),
-      api.getResourcesCount({
-        params: {
-          state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
-        },
-      }),
-    ];
-    const [
-      organizations,
-      projects,
-      users,
-      categories,
-      providerOfferings,
-      resources,
-    ] = await Promise.all(promises);
-    return {
-      organizations,
-      projects,
-      users,
-      categories,
-      providerOfferings,
-      resources,
-    };
-  });
-
-  useEffectOnce(() => {
-    reFetch();
-  });
+  const { data, isLoading, error, refetch } = useQuery(
+    ['statistics'],
+    async () => {
+      // Order is important
+      const promises = [
+        api.getCustomersCount(),
+        api.getProjectsCount(),
+        api.getUsersCount(),
+        api.getCategoriesCount(),
+        api.getProviderOfferingsCount({
+          params: { shared: 'True' },
+        }),
+        api.getResourcesCount({
+          params: {
+            state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
+          },
+        }),
+      ];
+      const [
+        organizations,
+        projects,
+        users,
+        categories,
+        providerOfferings,
+        resources,
+      ] = await Promise.all(promises);
+      return {
+        organizations,
+        projects,
+        users,
+        categories,
+        providerOfferings,
+        resources,
+      };
+    },
+    {
+      staleTime: 5 * 60 * 1000,
+    },
+  );
 
   const statisticsData = useMemo(() => {
-    const counts: Partial<typeof value> = value || {};
+    const counts: Partial<typeof data> = data || {};
     return [
       {
         title: 'Organizations',
@@ -78,14 +80,14 @@ export const StatisticsCards = () => {
         viewLinkState: 'marketplace-admin-resources',
       },
     ];
-  }, [value]);
+  }, [data]);
 
   return (
     <Row>
       {error && (
         <LoadingErred
           message={translate('Unable to load statistics data')}
-          loadData={reFetch}
+          loadData={refetch}
           className="mb-4"
         />
       )}
@@ -99,7 +101,7 @@ export const StatisticsCards = () => {
                 </Link>
               </div>
               <div className="mb-4">
-                {loading ? (
+                {isLoading ? (
                   <LoadingSpinner />
                 ) : (
                   <strong className={'d-block display-4 text-success'}>
