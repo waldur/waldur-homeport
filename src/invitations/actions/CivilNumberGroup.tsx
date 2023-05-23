@@ -18,6 +18,6 @@ export const CivilNumberGroup: FunctionComponent<{ name; disabled }> = ({
     }
     required={isFeatureVisible('invitation.civil_number_required')}
     disabled={disabled}
-    helpText={ENV.plugins.WALDUR_CORE.INVITATION_CIVIL_NUMBER_HELP_TEXT}
+    helpText={translate('Must start with a country prefix ie EE34501234215')}
   />
 );

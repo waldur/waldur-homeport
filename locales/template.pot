@@ -5069,6 +5069,10 @@ msgstr ""
 msgid "Must be at most {max}"
 msgstr ""
 
+#: src/invitations/actions/CivilNumberGroup.tsx
+msgid "Must start with a country prefix ie EE34501234215"
+msgstr ""
+
 #: src/marketplace/routes.ts
 msgid "My offerings"
 msgstr ""
