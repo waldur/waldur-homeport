@@ -13,6 +13,7 @@ interface MonacoFieldProps {
   diff?: boolean;
   mode?: string;
   height?: number;
+  width?: number;
   original?: string;
   options?: any;
 }
@@ -35,10 +36,12 @@ export const MonacoField: React.FC<MonacoFieldProps> = (props) => (
         onChange={props.input.onChange}
         original={props.original}
         options={props.options}
+        width={props.width}
       />
     ) : (
       <ReactMonacoEditor
         height={props.height}
+        width={props.width}
         language={props.mode}
         value={props.input.value}
         onChange={props.input.onChange}

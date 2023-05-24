@@ -18,6 +18,7 @@ export const SubmitReportAction: ActionItemType = ({ resource, refetch }) => (
     validators={validators}
     title={translate('Submit report')}
     modalComponent={SubmitReportDialog}
+    dialogSize="xl"
     resource={resource}
     extraResolve={{ refetch }}
     staff
