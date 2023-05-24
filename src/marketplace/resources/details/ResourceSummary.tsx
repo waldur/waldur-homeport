@@ -15,7 +15,7 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
   resource,
   children,
 }) => (
-  <Container>
+  <Container className="container-metadata">
     <Field label={translate('Offering name')} value={resource.offering_name} />
     <Field
       label={translate('Client organization')}

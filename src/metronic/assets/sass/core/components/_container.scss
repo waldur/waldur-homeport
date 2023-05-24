@@ -19,3 +19,8 @@
     padding-right: get($container, padding, default) !important;
   }
 }
+
+.container-metadata > div {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
