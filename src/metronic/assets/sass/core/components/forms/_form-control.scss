@@ -73,8 +73,24 @@
   resize: none;
 }
 
-.size-sm {
+@mixin container-size($max-width) {
   width: 100%;
-  max-width: 545px;
+  max-width: $max-width;
   margin-inline: auto;
+}
+
+.size-sm {
+  @include container-size(545px);
+}
+
+.size-md {
+  @include container-size(768px);
+}
+
+.size-lg {
+  @include container-size(1024px);
+}
+
+.size-xl {
+  @include container-size(1440px);
 }
