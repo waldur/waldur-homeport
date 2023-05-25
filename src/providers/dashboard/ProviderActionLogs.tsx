@@ -12,8 +12,8 @@ export const ProviderActionLogs = ({ provider }) => {
     return get<any[]>('/events/', {
       signal,
       params: {
-        scope: provider ? provider.customer : undefined,
-        feature: ['customers'],
+        scope: provider ? provider : undefined,
+        feature: ['providers'],
         page_size: 2,
         field: ['created', 'event_type', 'message', 'uuid', 'context'],
       },
