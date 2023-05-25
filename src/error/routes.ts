@@ -33,7 +33,7 @@ export const states: StateDeclaration[] = [
     name: 'legacy',
     component: UIView,
     onEnter: () => {
-      window.location.pathname = '/legacy/';
+      window.location.pathname = '/';
     },
   },
 ];
