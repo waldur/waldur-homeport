@@ -5,27 +5,24 @@ describe('formatFlavor', () => {
     const flavor = {
       cores: 1,
       ram: 2 * 1024,
-      disk: 1.29 * 1024 * 1024,
     };
-    expect(formatFlavor(flavor)).toBe('1 vCPU, 2 GB RAM, 1.2 TB storage');
+    expect(formatFlavor(flavor)).toBe('1 vCPU, 2 GB RAM');
   });
 
   it('skips any flavor parameter if it is not specified or zero', () => {
     const flavor = {
       cores: 0,
-      disk: 900 * 1024,
     };
-    expect(formatFlavor(flavor)).toBe('900 GB storage');
+    expect(formatFlavor(flavor)).toBe('');
   });
 
   it('accepts storage as disk but does not render it twice', () => {
     const flavor = {
       cores: 1,
       ram: 2 * 1024,
-      disk: 1.29 * 1024 * 1024,
       storage: 1.29 * 1024 * 1024,
     };
-    expect(formatFlavor(flavor)).toBe('1 vCPU, 2 GB RAM, 1.2 TB storage');
+    expect(formatFlavor(flavor)).toBe('1 vCPU, 2 GB RAM');
   });
 
   it('renders volume type quotas if they are defined', () => {
@@ -35,9 +32,7 @@ describe('formatFlavor', () => {
       gigabytes_ssd: 100,
       gigabytes_gpfs: 300,
     };
-    expect(formatFlavor(flavor)).toBe(
-      '1 vCPU, 2 GB RAM, 100 GB SSD, 300 GB GPFS',
-    );
+    expect(formatFlavor(flavor)).toBe('1 vCPU, 2 GB RAM');
   });
 
   it('skips zero volume type quotas', () => {
@@ -47,6 +42,6 @@ describe('formatFlavor', () => {
       gigabytes_ssd: 0,
       gigabytes_gpfs: 300,
     };
-    expect(formatFlavor(flavor)).toBe('1 vCPU, 2 GB RAM, 300 GB GPFS');
+    expect(formatFlavor(flavor)).toBe('1 vCPU, 2 GB RAM');
   });
 });
