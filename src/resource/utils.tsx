@@ -24,30 +24,6 @@ export const formatResourceType = (resource) => {
   return service + ' ' + parts[1];
 };
 
-const formatStorage = (limits) => {
-  const parts = [];
-  const volumeTypes = Object.keys(limits).filter(
-    (key) => key.startsWith('gigabytes_') && limits[key] > 0,
-  );
-  const hasVolumeTypes = volumeTypes.length > 0;
-  if (hasVolumeTypes) {
-    volumeTypes.forEach((key) => {
-      const label = key.split('gigabytes_', 2)[1].toLocaleUpperCase();
-      parts.push({
-        label,
-        value: `${limits[key]} GB`,
-      });
-    });
-  } else {
-    const storage = limits.disk || limits.storage;
-    parts.push({
-      label: translate('storage'),
-      value: storage && formatFilesize(storage),
-    });
-  }
-  return parts;
-};
-
 export const formatFlavor = (limits) => {
   const parts = [
     {
@@ -58,7 +34,6 @@ export const formatFlavor = (limits) => {
       label: translate('RAM'),
       value: limits.ram && formatFilesize(limits.ram),
     },
-    ...formatStorage(limits),
   ];
 
   return parts

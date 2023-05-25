@@ -13378,10 +13378,6 @@ msgstr ""
 msgid "snapshots"
 msgstr ""
 
-#: src/resource/utils.tsx
-msgid "storage"
-msgstr ""
-
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 msgid "subnets"

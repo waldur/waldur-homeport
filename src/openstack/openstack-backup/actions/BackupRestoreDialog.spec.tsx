@@ -254,11 +254,11 @@ describe('BackupRestoreDialog', () => {
     await dialog.update();
     expect(dialog.flavorSelector.prop('options')).toEqual([
       {
-        label: 'm1.xsmall (1 vCPU, 1 GB RAM, 10 GB storage)',
+        label: 'm1.xsmall (1 vCPU, 1 GB RAM)',
         value: '/api/openstacktenant-flavors/7e9a8c7f17f34706bf755abdae41fe3a/',
       },
       {
-        label: 'm1.small (1 vCPU, 2 GB RAM, 20 GB storage)',
+        label: 'm1.small (1 vCPU, 2 GB RAM)',
         value: '/api/openstacktenant-flavors/7a8c733bd6bf4560ae8b2d08129e1840/',
       },
     ]);
