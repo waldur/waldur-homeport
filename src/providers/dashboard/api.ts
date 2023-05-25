@@ -41,7 +41,6 @@ export const formatCostChart = (
     date: DateTime.fromObject({ year: record.year, month: record.month }),
   }));
 
-  items.reverse();
   items = padMissingValues(items, count);
   const data = items.map((item, index) => {
     const isEstimate = index === items.length - 1;
