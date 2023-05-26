@@ -58,7 +58,7 @@ export const TabsList: FunctionComponent = () => {
                 <span className="menu-arrow d-lg-none"></span>
               </a>
             </MenuLink>
-            <div className="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
+            <div className="menu-sub menu-sub-down-accordion menu-sub-dropdown px-2 py-4 w-200px">
               {parentTab.children.map((childTab, childIndex) => (
                 <UISrefActive class="showing" key={childIndex}>
                   <UISref to={childTab.to} params={childTab.params}>
