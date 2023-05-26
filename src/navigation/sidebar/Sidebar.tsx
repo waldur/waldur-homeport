@@ -102,7 +102,7 @@ export const Sidebar: React.FC = (props) => {
             const txt = acc.querySelector(
               '.menu-accordion > .menu-link > .menu-title',
             ).textContent;
-            if (item.title === txt) {
+            if (item.title !== txt) {
               const toggle = menu.getItemToggleElement(acc) as HTMLElement;
               toggle.click();
               break;
