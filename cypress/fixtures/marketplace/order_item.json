@@ -14,7 +14,7 @@
   "category_title": "AKKI",
   "category_uuid": "4d3a131dc20347e4abd1bdd3a16e73d1",
   "category_icon": "/media/files/marketplace_category_icons/measurement_devices.svg",
-  "plan": "/api/marketplace-public-plans/4eb4b971fefc49ef9503eaa326cd9a0a/",
+  "plan": "/api/marketplace-public-offerings/03d4e15d9263469db1e4426a97c2494f/plans/4eb4b971fefc49ef9503eaa326cd9a0a/",
   "plan_unit": "day",
   "plan_name": "a",
   "plan_uuid": "4eb4b971fefc49ef9503eaa326cd9a0a",
