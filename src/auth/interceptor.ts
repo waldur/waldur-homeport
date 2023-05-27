@@ -3,7 +3,7 @@ import Axios from 'axios';
 import Qs from 'qs';
 
 import { ENV } from '@waldur/configs/default';
-import { cleanObject } from '@waldur/core/utils';
+import { cleanObject, wait } from '@waldur/core/utils';
 import { router } from '@waldur/router';
 
 import { AuthService } from './AuthService';
@@ -50,6 +50,19 @@ Axios.interceptors.response.use(
         };
       }
       AuthService.localLogout(params);
+    }
+    return Promise.reject(error);
+  },
+);
+
+Axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response.status === 429) {
+      // If the error has status code 429, retry the request
+      return wait(1000).then(() => Axios.request(error.config));
     }
     return Promise.reject(error);
   },
