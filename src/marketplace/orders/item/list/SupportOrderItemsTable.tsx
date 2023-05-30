@@ -9,6 +9,7 @@ import { RowNameField } from '@waldur/marketplace/orders/item/list/RowNameField'
 import { SupportOrderItemApproveButton } from '@waldur/marketplace/orders/item/list/SupportOrderItemApproveButton';
 import { SupportOrderItemRejectButton } from '@waldur/marketplace/orders/item/list/SupportOrderItemRejectButton';
 import { Field } from '@waldur/resource/summary';
+import { BASIC_OFFERING_TYPE } from '@waldur/support/constants';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const SupportOrderItemsTable: FunctionComponent<{ order }> = ({
@@ -44,14 +45,16 @@ export const SupportOrderItemsTable: FunctionComponent<{ order }> = ({
               <td>
                 {item.state === 'done' ? null : (
                   <>
-                    {item.state === 'executing' && (
-                      <SupportOrderItemApproveButton
-                        itemUuid={item.uuid}
-                        orderUuid={order.uuid}
-                      />
-                    )}
+                    {item.state === 'executing' &&
+                      item.offering_type !== BASIC_OFFERING_TYPE && (
+                        <SupportOrderItemApproveButton
+                          itemUuid={item.uuid}
+                          orderUuid={order.uuid}
+                        />
+                      )}
                     {item.state !== 'terminated' &&
-                      item.state !== 'terminating' && (
+                      item.state !== 'terminating' &&
+                      item.offering_type !== BASIC_OFFERING_TYPE && (
                         <SupportOrderItemRejectButton
                           itemUuid={item.uuid}
                           orderUuid={order.uuid}
