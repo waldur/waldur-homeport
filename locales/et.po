@@ -640,6 +640,11 @@ msgstr "Jaotise tsoonid"
 msgid "Allow bookings to be scheduled at weekends"
 msgstr "Luba tegevuste ajastamine nädalavahetusteks"
 
+#: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
+#: src/support/OfferingPluginSecretOptionsForm.tsx
+msgid "Allow service provider to create offering users."
+msgstr "Luba teenusepakkujal luua teenuse kasutajaid."
+
 #: src/marketplace/offerings/create/ComponentBooleanLimitField.tsx
 msgid "Allow to enable/disable component only"
 msgstr "Lubatud ainult lubatud / keelatud komponent"
@@ -1951,6 +1956,10 @@ msgstr "Loo sõlm"
 msgid "Create notification"
 msgstr "Teate loomine"
 
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+msgid "Create offering user"
+msgstr "Loo teenuse kasutaja"
+
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/customer/create/WizardForm.tsx
 #: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
@@ -2171,6 +2180,10 @@ msgstr "Praegune suurus"
 #: src/openstack/openstack-volume/actions/RetypeDialog.tsx
 msgid "Current type"
 msgstr "Praegune tüüp"
+
+#: src/invitations/actions/create/CustomMessageInput.tsx
+msgid "Custom message"
+msgstr "Kohandatud sõnum"
 
 #: src/customer/team/utils.ts
 msgid "Customer support"
@@ -2918,6 +2931,10 @@ msgstr "Sisestage aadress..."
 msgid "Enter private IPv4 CIDR."
 msgstr "Sisestage privaatne IPv4 CIDR."
 
+#: src/invitations/actions/create/CustomMessageInput.tsx
+msgid "Enter your custom message"
+msgstr "Sisestage oma kohandatud sõnum"
+
 #: src/marketplace-script/EnvironmentVariablesList.tsx
 msgid "Environment variables"
 msgstr "Keskkonnamuutujad"
@@ -3168,6 +3185,11 @@ msgstr "Väline võrk"
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "External network ID"
 msgstr "Välise võrgu mask (CIDR)"
+
+#: src/marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+msgid "External username"
+msgstr "Väline kasutajanimi"
 
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
@@ -3483,6 +3505,10 @@ msgstr "Küsi abi"
 #: src/marketplace/offerings/details/PublicOfferingGettingStarted.tsx
 msgid "Getting started"
 msgstr "Alustamine"
+
+#: src/invitations/actions/create/FormButtons.tsx
+msgid "Go back"
+msgstr "Mine tagasi"
 
 #: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Go to Marketplace"
@@ -3876,6 +3902,10 @@ msgstr "Instantsid"
 #: src/quotas/constants.ts
 msgid "Instances count"
 msgstr "Eksemplaride hulk"
+
+#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
+msgid "Integration type"
+msgstr "Integratsiooni tüüp"
 
 #: src/issues/comments/IssueCommentItem.tsx
 msgid "Internal"
@@ -4454,6 +4484,10 @@ msgstr "Organisatsioonide haldamine"
 msgid "Manage projects"
 msgstr "Projektide haldamine"
 
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Manage users"
+msgstr "Halda kasutajaid"
+
 #: src/user/dashboard/UserDashboard.tsx
 msgid "Managed projects"
 msgstr "Hallatavad projektid"
@@ -4633,6 +4667,10 @@ msgstr "Minimaalne kasutajanimi pikkus on 3 tähemärki."
 #: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Mobile phone number"
 msgstr "Telefoninumber"
+
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+msgid "Modified"
+msgstr "Muudetud"
 
 #: src/providers/support/FlowMapFilter.tsx
 msgid "Month"
@@ -5085,6 +5123,10 @@ msgstr "Tulemust ei leitud"
 msgid "No results found"
 msgstr "Tulemusi ei leitud"
 
+#: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
+msgid "No service providers"
+msgstr "Teenusepakkujaid pole"
+
 #: src/openstack/openstack-security-groups/rule-editor/RemoteGroupField.tsx
 msgid "None"
 msgstr "Puudub"
@@ -5273,6 +5315,14 @@ msgstr "Pakkumist poel veel seadistatud"
 msgid "Offering logo"
 msgstr "Pakun logo"
 
+#: src/marketplace/routes.ts
+msgid "Offering managers"
+msgstr "Teenuse haldurid"
+
+#: src/providers/dashboard/ProviderProfile.tsx
+msgid "Offering managers:"
+msgstr "Teenuse haldurid:"
+
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/marketplace/resources/details/OfferingDetailsField.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
@@ -5299,6 +5349,19 @@ msgstr "Pakkumise tüüp"
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering usage synchronization has been scheduled."
 msgstr "Pakkumise kasutuse sünkroonimine on ajastatud."
+
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+msgid "Offering user has been created."
+msgstr "Teenuse kasutaja on loodud."
+
+#: src/marketplace/routes.ts
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+msgid "Offering users"
+msgstr "Teenuse kasutajad"
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Offering users synchronization has been scheduled."
+msgstr "Teenuse kasutajate sünkroonimine on ajastatud."
 
 #: src/issues/routes.ts
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -6675,6 +6738,10 @@ msgid "Publisher"
 msgstr "Avaldaja"
 
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Pull offering users"
+msgstr "Tõmba teenuse kasutajad"
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
 msgid "Pull order items"
 msgstr "Tõmmake tellitud üksused"
 
@@ -7931,6 +7998,10 @@ msgstr "Valitud"
 msgid "Send"
 msgstr "Saada"
 
+#: src/invitations/actions/create/FormButtons.tsx
+msgid "Send invitation"
+msgstr "Saada kutse"
+
 #: src/notifications/NotificationForm.tsx
 msgid "Send message to all users"
 msgstr "Saada sõnum kõigile kasutajatele"
@@ -8010,6 +8081,10 @@ msgstr "Teenusepakkuja API salajane kood on loodud."
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Service provider can charge for usage of the following components"
 msgstr "Teenusepakkuja võib küsida tasu järgmiste komponentide kasutamise eest"
+
+#: src/slurm/SLURMSecretOptionsForm.tsx
+msgid "Service provider can create offering user"
+msgstr "Teenusepakkuja saab luua teenuse kasutaja"
 
 #: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
 msgid "Service provider can report up to the requested amount over the whole active state of resource."
@@ -8718,6 +8793,11 @@ msgstr "Meeskonna kutsed"
 msgid "Team member has been removed."
 msgstr "Meeskonna liige on eemaldatud."
 
+#: src/customer/team/CustomerUsersList.tsx
+#: src/project/team/ProjectUsersList.tsx
+msgid "Team members"
+msgstr "Meeskonna liikmed"
+
 #: src/customer/dashboard/api.ts
 msgid "Team size"
 msgstr "Meeskonna suurus"
@@ -9262,6 +9342,10 @@ msgstr "Võtit ei saa luua"
 msgid "Unable to create offering."
 msgstr "Pakkumist ei saa luua"
 
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+msgid "Unable to create offering user."
+msgstr "Teenuse kasutajat ei saa luua."
+
 #: src/customer/payment-profiles/store/effects.ts
 msgid "Unable to create payment profile."
 msgstr "Makseprofiili ei saa luua."
@@ -9659,6 +9743,10 @@ msgid "Unable to synchronize offering order items."
 msgstr "Tellimuse üksusi ei saa sünkroonida."
 
 #: src/marketplace/offerings/store/effects.ts
+msgid "Unable to synchronize offering users."
+msgstr "Teenuse kasutajaid ei saa sünkroonida."
+
+#: src/marketplace/offerings/store/effects.ts
 msgid "Unable to unpublish Google Calendar."
 msgstr "Google'i kalendri avaldamist ei saa tühistada. "
 
@@ -9838,11 +9926,11 @@ msgstr "Uuendan turvagruppe"
 
 #: src/invitations/actions/create/BulkUpload.tsx
 msgid "Upload a CSV file containing the columns email, role, project and organization in that order. If you are unsure, you can download an example file as a template"
-msgstr "Laadige üles CSV-fail, mis sisaldab kutsutavate kasutajate e-posti aadresse, rolle, projekte ja organisatsioone. Vajadusel saate ka näidisfaili alla laadida."
+msgstr "Laadige üles CSV-fail, mis sisaldab kutsutavate kasutajate e-posti aadresse, rolle, projekte ja organisatsioone. Vajadusel saate ka näidisfaili alla laadida"
 
 #: src/invitations/actions/create/BulkUpload.tsx
 msgid "Upload a CSV file containing the columns email, role and organization in that order. If you are unsure, you can download an example file as a template"
-msgstr "Laadige üles CSV-fail, mis sisaldab kutsutavate kasutajate e-posti aadresse, rolle, projekte ja organisatsioone. Vajadusel saate ka näidisfaili alla laadida."
+msgstr "Laadige üles CSV-fail, mis sisaldab kutsutavate kasutajate e-posti aadresse, rolle, projekte ja organisatsioone. Vajadusel saate ka näidisfaili alla laadida"
 
 #: src/customer/details/CustomerLogoUpdate.tsx
 msgid "Upload new"
@@ -10500,6 +10588,10 @@ msgstr "Sa ei kuulu projekti. Looge projekt või taotlege juurdepääsu oma orga
 msgid "You are not part of an organisation. Create an organization or request access from your organization administrator."
 msgstr "Te ei kuulu organisatsiooni. Looge organisatsioon või taotlege juurdepääsu oma organisatsiooni administraatorilt."
 
+#: src/invitations/actions/create/CustomMessageInput.tsx
+msgid "You can add a message to be attached to the invitation email the users receives."
+msgstr "Siia saate lisada täiendava sõnumi, mis lisatakse kasutajatele saadetavale kutsele."
+
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "You can find offerings to order in the marketplace"
 msgstr "Sa leiad pakkumisi, mida tellida turuplatsilt"
@@ -10605,6 +10697,10 @@ msgstr "Teie konto ei kuulu ühegi organisatsiooni koosseisu. Teie vaade on piir
 msgid "Your current email is:"
 msgstr "Sinu kehtiv e-posti aadress on:"
 
+#: src/invitations/actions/create/CustomMessageWrapper.tsx
+msgid "Your custom message will appear here"
+msgstr "Teie kohandatud sõnum ilmub siin"
+
 #: src/invitations/InvitationAccept.tsx
 msgid "Your invitation is being processed."
 msgstr "Sinu kutse on töötlemisel."
@@ -10648,6 +10744,10 @@ msgstr "Sirvi"
 #: src/navigation/sidebar/marketplace-popup/MarketplacePopupTitle.tsx
 msgid "change"
 msgstr "muuda"
+
+#: src/marketplace/offerings/PriceList.tsx
+msgid "components"
+msgstr "komponendid"
 
 #: src/resource/state/utils.ts
 msgid "current state on backend: {resourceState}."
@@ -10717,7 +10817,7 @@ msgstr "pakkumise õigused"
 
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 msgid "offering users"
-msgstr "pakkumise kasutajad"
+msgstr "teenuse kasutajad"
 
 #: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
@@ -10832,6 +10932,10 @@ msgstr "Kasutajatoe päringud"
 #: src/invitations/InvitationsList.tsx
 msgid "team invitations"
 msgstr "Meeskonna kutsed"
+
+#: src/customer/team/CustomerUsersList.tsx
+msgid "team members"
+msgstr "meeskonna liikmed"
 
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -10986,6 +11090,11 @@ msgstr "{resource_link} peatamine on nurjunud."
 #: src/resource/events.tsx
 msgid "{resource_name} has been deleted."
 msgstr "{resource_name} on kustutatud."
+
+#: src/invitations/GroupInvitationMessage.tsx
+#: src/invitations/InvitationMessage.tsx
+msgid "{sender} has invited you to join {name} {type} in {role} role."
+msgstr "{sender} on kutsunud teid liituma {name} organisatsiooniga {type} projektis {role} rollis."
 
 #: src/marketplace-script/TestScriptButton.tsx
 msgid "{type} script got an error"
