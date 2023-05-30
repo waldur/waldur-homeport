@@ -664,6 +664,11 @@ msgstr "Jaotise tsoonid"
 msgid "Allow bookings to be scheduled at weekends"
 msgstr "Luba tegevuste ajastamine nädalavahetusteks"
 
+#: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
+#: src/support/OfferingPluginSecretOptionsForm.tsx
+msgid "Allow service provider to create offering users."
+msgstr "Luba teenusepakkujal luua teenuse kasutajaid."
+
 #: src/marketplace/offerings/create/ComponentBooleanLimitField.tsx
 msgid "Allow to enable/disable component only"
 msgstr "Lubatud ainult lubatud / keelatud komponent"
@@ -1939,6 +1944,10 @@ msgstr "Loo sõlm"
 msgid "Create notification"
 msgstr "Teate loomine"
 
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+msgid "Create offering user"
+msgstr "Loo teenuse kasutaja"
+
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/customer/create/WizardForm.tsx
 msgid "Create organization"
@@ -3110,6 +3119,11 @@ msgstr "Väline võrk"
 msgid "External network ID"
 msgstr "Välise võrgu mask (CIDR)"
 
+#: src/marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+msgid "External username"
+msgstr "Väline kasutajanimi"
+
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
 msgid "FAQ"
@@ -3806,6 +3820,10 @@ msgstr "Instantsid"
 msgid "Instances count"
 msgstr "Eksemplaride hulk"
 
+#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
+msgid "Integration type"
+msgstr "Integratsiooni tüüp"
+
 #: src/issues/comments/IssueCommentItem.tsx
 msgid "Internal"
 msgstr "Sisemine "
@@ -4365,6 +4383,10 @@ msgstr "Organisatsioonide haldamine"
 msgid "Manage projects"
 msgstr "Projektide haldamine"
 
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Manage users"
+msgstr "Halda kasutajaid"
+
 #: src/user/dashboard/UserDashboard.tsx
 msgid "Managed projects"
 msgstr "Hallatavad projektid"
@@ -4539,6 +4561,10 @@ msgstr "Minimaalne kasutajanimi pikkus on 3 tähemärki."
 #: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Mobile phone number"
 msgstr "Telefoninumber"
+
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+msgid "Modified"
+msgstr "Muudetud"
 
 #: src/providers/support/FlowMapFilter.tsx
 msgid "Month"
@@ -4977,6 +5003,10 @@ msgstr "Tulemust ei leitud"
 msgid "No results found"
 msgstr "Tulemusi ei leitud"
 
+#: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
+msgid "No service providers"
+msgstr "Teenusepakkujaid pole"
+
 #: src/openstack/openstack-security-groups/rule-editor/RemoteGroupField.tsx
 msgid "None"
 msgstr "Puudub"
@@ -5154,6 +5184,14 @@ msgstr "Pakkumist poel veel seadistatud"
 msgid "Offering logo"
 msgstr "Pakun logo"
 
+#: src/marketplace/routes.ts
+msgid "Offering managers"
+msgstr "Teenuse haldurid"
+
+#: src/providers/dashboard/ProviderProfile.tsx
+msgid "Offering managers:"
+msgstr "Teenuse haldurid:"
+
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 msgid "Offering name"
@@ -5179,6 +5217,19 @@ msgstr "Pakkumise tüüp"
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering usage synchronization has been scheduled."
 msgstr "Pakkumise kasutuse sünkroonimine on ajastatud."
+
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+msgid "Offering user has been created."
+msgstr "Teenuse kasutaja on loodud."
+
+#: src/marketplace/routes.ts
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+msgid "Offering users"
+msgstr "Teenuse kasutajad"
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Offering users synchronization has been scheduled."
+msgstr "Teenuse kasutajate sünkroonimine on ajastatud."
 
 #: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
@@ -6512,6 +6563,10 @@ msgid "Publisher"
 msgstr "Avaldaja"
 
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Pull offering users"
+msgstr "Tõmba teenuse kasutajad"
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
 msgid "Pull order items"
 msgstr "Tõmmake tellitud üksused"
 
@@ -7819,6 +7874,10 @@ msgstr "Teenusepakkuja API salajane kood on loodud."
 msgid "Service provider can charge for usage of the following components"
 msgstr "Teenusepakkuja võib küsida tasu järgmiste komponentide kasutamise eest"
 
+#: src/slurm/SLURMSecretOptionsForm.tsx
+msgid "Service provider can create offering user"
+msgstr "Teenusepakkuja saab luua teenuse kasutaja"
+
 #: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
 msgid "Service provider can report up to the requested amount over the whole active state of resource."
 msgstr "Teenusepakkuja saab kogu aktiivse ressursi oleku ajal esitada taotletud summa."
@@ -8998,6 +9057,10 @@ msgstr "Võtit ei saa luua"
 msgid "Unable to create offering."
 msgstr "Pakkumist ei saa luua"
 
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+msgid "Unable to create offering user."
+msgstr "Teenuse kasutajat ei saa luua."
+
 #: src/customer/payment-profiles/store/effects.ts
 msgid "Unable to create payment profile."
 msgstr "Makseprofiili ei saa luua."
@@ -9387,6 +9450,10 @@ msgstr "Ressursi ei saa sünkroonida."
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to synchronize offering order items."
 msgstr "Tellimuse üksusi ei saa sünkroonida."
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to synchronize offering users."
+msgstr "Teenuse kasutajaid ei saa sünkroonida."
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to unpublish Google Calendar."
@@ -10366,6 +10433,10 @@ msgstr "Sirvi"
 msgid "change"
 msgstr "muuda"
 
+#: src/marketplace/offerings/PriceList.tsx
+msgid "components"
+msgstr "komponendid"
+
 #: src/resource/state/utils.ts
 msgid "current state on backend: {resourceState}."
 msgstr "praegune staatus tagatoas: {resourceState}."
@@ -10433,7 +10504,7 @@ msgstr "pakkumise õigused"
 
 #: src/marketplace/offerings/details/OfferingUsersTab.tsx
 msgid "offering users"
-msgstr "pakkumise kasutajad"
+msgstr "teenuse kasutajad"
 
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offerings"
