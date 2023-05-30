@@ -75,7 +75,10 @@ export const TableButtons: FunctionComponent<any> = (props: TableProps) => {
       props.multiSelectActions &&
       React.createElement(props.multiSelectActions, {
         rows: props.selectedRows,
-        refetch: props.fetch,
+        refetch: () => {
+          props.fetch();
+          props.resetSelection();
+        },
       })
     );
   }

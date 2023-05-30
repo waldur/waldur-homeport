@@ -26,7 +26,7 @@ export const MultiDestroyAction = ({ rows, refetch }) => {
     }
 
     Promise.all(
-      validResources.forEach((resource) => terminateResource(resource.uuid)),
+      validResources.map((resource) => terminateResource(resource.uuid)),
     ).then(() => {
       refetch();
     });

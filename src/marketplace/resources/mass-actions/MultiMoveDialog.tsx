@@ -25,11 +25,11 @@ const PureMultiMoveDialog: FunctionComponent<any> = (props) => {
   const dispatch = useDispatch();
   const submitRequest = (formData: FormData) => {
     Promise.all(
-      props.resolve.rows.forEach((row) =>
+      props.resolve.rows.map((row) =>
         moveResource(row.uuid, formData.project.url),
       ),
     ).then(() => {
-      props.refetch();
+      props.resolve.refetch();
       dispatch(closeModalDialog());
     });
   };
