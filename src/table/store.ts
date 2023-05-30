@@ -203,6 +203,13 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
       }
     }
 
+    case actions.RESET_SELECTION: {
+      return {
+        ...state,
+        selectedRows: [],
+      };
+    }
+
     default:
       return state;
   }

@@ -49,11 +49,9 @@ export const VirtualMachineMultiAction = ({
       return;
     }
 
-    Promise.all(validVms.forEach((vm) => apiMethod(vm.resource_uuid))).then(
-      () => {
-        refetch();
-      },
-    );
+    Promise.all(validVms.map((vm) => apiMethod(vm.resource_uuid))).then(() => {
+      refetch();
+    });
   }, [dispatch, validVms, apiMethod, title, refetch]);
 
   if (vms.length === 0) {

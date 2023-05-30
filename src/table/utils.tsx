@@ -80,6 +80,7 @@ export function connectTable(options: TableOptionsType) {
         selectRow: (row: any) => dispatch(actions.selectRow(table, row)),
         selectAllRows: (rows: any[]) =>
           dispatch(actions.selectAllRows(table, rows)),
+        resetSelection: () => dispatch(actions.resetSelection(table)),
       });
 
       const mapStateToProps = (state: RootState) => ({
@@ -190,6 +191,10 @@ export const useTable = (options: TableOptionsType) => {
     (rows: any[]) => dispatch(actions.selectAllRows(table, rows)),
     [dispatch, table],
   );
+  const resetSelection = useCallback(
+    () => dispatch(actions.resetSelection(table)),
+    [dispatch, table],
+  );
 
   const tableState = useSelector(getTableState(table));
 
@@ -209,6 +214,7 @@ export const useTable = (options: TableOptionsType) => {
     toggleFilter,
     selectRow,
     selectAllRows,
+    resetSelection,
     ...tableState,
     rows,
     alterTitle,

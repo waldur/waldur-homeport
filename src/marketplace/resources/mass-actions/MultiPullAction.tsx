@@ -49,7 +49,7 @@ export const MultiPullAction = ({ rows, refetch }) => {
     }
 
     Promise.all(
-      validResources.forEach((resource) => {
+      validResources.map((resource) => {
         apiMethods[resource.resource_type](resource.resource_uuid);
       }),
     ).then(() => {

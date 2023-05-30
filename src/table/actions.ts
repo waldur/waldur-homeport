@@ -19,6 +19,7 @@ export const TOGGLE_ROW = 'waldur/table/TOGGLE_ROW';
 export const TOGGLE_FILTER = 'waldur/table/TOGGLE_FILTER';
 export const SELECT_ROW = 'waldur/table/SELECT_ROW';
 export const SELECT_ALL_ROWS = 'waldur/table/SELECT_ALL_ROWS';
+export const RESET_SELECTION = 'waldur/table/RESET_SELECTION';
 
 export const fetchListStart = (
   table: string,
@@ -179,5 +180,12 @@ export const selectAllRows = (table: string, rows: any[]) => ({
   payload: {
     table,
     rows,
+  },
+});
+
+export const resetSelection = (table: string) => ({
+  type: RESET_SELECTION,
+  payload: {
+    table,
   },
 });

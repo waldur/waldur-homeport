@@ -57,6 +57,7 @@ export interface TableProps<RowType = any> extends TableState {
   multiSelectActions?: React.ComponentType<{ rows: any[]; refetch }>;
   selectRow?(row: any): void;
   selectAllRows?(rows: any[]): void;
+  resetSelection?: () => void;
   filter?: Record<string, any>;
 }
 
@@ -116,15 +117,25 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                       />
                     )
                   ) : (
-                    <span className="me-2 border-bottom-dashed border-2">
-                      {this.props.selectedRows?.length === 1
-                        ? translate('{count} row selected', {
-                            count: this.props.selectedRows?.length,
-                          })
-                        : translate('{count} rows selected', {
-                            count: this.props.selectedRows?.length,
-                          })}
-                    </span>
+                    <>
+                      <Button
+                        variant="light"
+                        className="btn-icon me-2"
+                        size="sm"
+                        onClick={this.props.resetSelection}
+                      >
+                        <i className="fa fa-times fs-5"></i>
+                      </Button>
+                      <span className="me-2 border-bottom-dashed border-2">
+                        {this.props.selectedRows?.length === 1
+                          ? translate('{count} row selected', {
+                              count: this.props.selectedRows?.length,
+                            })
+                          : translate('{count} rows selected', {
+                              count: this.props.selectedRows?.length,
+                            })}
+                      </span>
+                    </>
                   )}
                 </Col>
               )}
@@ -299,6 +310,10 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
     ) {
       this.props.fetch();
     }
+  }
+
+  componentWillUnmount() {
+    this.props.resetSelection();
   }
 
   hasRows() {
