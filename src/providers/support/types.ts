@@ -1,12 +1,3 @@
-export interface ProviderInterface {
-  name: string;
-  country: string;
-  latitude: string;
-  longitude: string;
-  description: string;
-  logo: string;
-}
-
 export interface Organization {
   name: string;
   country: string;

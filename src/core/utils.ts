@@ -57,8 +57,6 @@ export const getAbbreviation = (text: string, length = 0) => {
   return length > 0 ? abbr.substring(0, length) : abbr;
 };
 
-export const flatten = (lists) => Array.prototype.concat.apply([], lists);
-
 export const listToDict = (key, value) => (list) => {
   const dict = {};
   list.forEach((item) => {
@@ -68,19 +66,6 @@ export const listToDict = (key, value) => (list) => {
 };
 
 export const getUUID = (url) => url.split('/').splice(-2)[0];
-
-export const minutesToHours = (input) => {
-  if (isNaN(parseInt(input, 10)) || !isFinite(input)) {
-    return '?';
-  }
-
-  if (input === -1) {
-    return '∞';
-  }
-
-  const hours = input / 60;
-  return hours.toFixed(2) + 'h';
-};
 
 export const pick = (fields) => (source) =>
   fields.reduce((target, field) => ({ ...target, [field]: source[field] }), {});

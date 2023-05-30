@@ -20,18 +20,3 @@ export const comment: Comment = {
 export const issue: Issue = {
   url: 'https://example.com/en-US/docs/Web/CSS/pointer-events',
 };
-
-export const users = {
-  staff: {
-    uuid: 'author_uuid_staff',
-    is_staff: true,
-  },
-  same: {
-    uuid: comment.author_uuid,
-    is_staff: false,
-  },
-  different: {
-    uuid: 'author_uuid_different',
-    is_staff: false,
-  },
-};

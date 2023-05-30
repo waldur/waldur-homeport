@@ -1,16 +1,6 @@
-import { lazyComponent } from '@waldur/core/lazyComponent';
 import type { Section, Offering } from '@waldur/marketplace/types';
-import { openModalDialog } from '@waldur/modal/actions';
-
-const AttributeFilterListDialog = lazyComponent(
-  () => import('../filters/AttributeFilterListDialog'),
-  'AttributeFilterListDialog',
-);
 
 import * as constants from './constants';
-
-export const showAttributeFilter = () =>
-  openModalDialog(AttributeFilterListDialog, { size: 'sm' });
 
 export const setFilterQuery = (filterQuery: string) => ({
   type: constants.SET_FILTER_QUERY,

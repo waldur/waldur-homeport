@@ -22,7 +22,3 @@ export interface ProjectQuota {
   customer_abbreviation: string;
   value: number;
 }
-
-export interface QuotasMap {
-  [key: string]: TreemapData;
-}

@@ -2,15 +2,9 @@ import type { EventInput, EventApi } from '@fullcalendar/core';
 import { uniqueId } from 'lodash';
 import { DateTime, Duration } from 'luxon';
 
-import {
-  BOOKING_RESOURCES_TABLE,
-  CURSOR_NOT_ALLOWED_CLASSNAME,
-  OFFERING_TYPE_BOOKING,
-} from '@waldur/booking/constants';
+import { CURSOR_NOT_ALLOWED_CLASSNAME } from '@waldur/booking/constants';
 import { parseDate } from '@waldur/core/dateUtils';
-import { orderByFilter } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { fetchListStart } from '@waldur/table/actions';
 
 import { BookedItem, BookingProps } from './types';
 
@@ -89,18 +83,6 @@ export const handleTime = ({ event, el }) => {
     return (content.innerHTML =
       '<i class="fa fa-clock-o"> All-day </i>' + content.innerHTML);
   }
-};
-
-interface Updater {
-  event: BookingProps | EventInput | EventApi | any;
-  oldEvent?: BookingProps | EventApi;
-  prevEvent?: EventApi;
-}
-
-export const handleEventUpdate = ({ event, oldEvent, prevEvent }: Updater) => {
-  const oldID: BookingProps['id'] =
-    (prevEvent && prevEvent.id) || (oldEvent && oldEvent.id);
-  return { oldID, event };
 };
 
 export function keysOf<T>(o: T) {
@@ -296,31 +278,6 @@ export const createAvailabilitySlots = (
   return slots;
 };
 
-export const bookingMapper = (events, showAvailability = false) =>
-  events.map((event) => {
-    if (event.extendedProps && event.extendedProps.type === 'Availability') {
-      event.rendering = showAvailability ? undefined : 'background';
-      event.classNames = showAvailability ? 'booking booking-Availability' : '';
-      event.overlap = true;
-      event.groupId = 'Availability';
-    } else if (
-      (event.extendedProps &&
-        event.extendedProps.type === 'availableForBooking') ||
-      event.id === 'availableForBooking'
-    ) {
-      event.groupId = 'availableForBooking';
-      event.rendering = 'background';
-      event.overlap = true;
-      event.allDay = false;
-    } else {
-      event.classNames = event.state!
-        ? 'booking booking-' + event.state
-        : 'booking booking-Schedule';
-    }
-
-    return event;
-  });
-
 export const handleWeekDays = (weekdayNumbers, dayNumber): number[] => {
   const intVal = parseInt(dayNumber);
   if (weekdayNumbers.includes(intVal)) {
@@ -335,20 +292,6 @@ export const getDurationOptions = () =>
     value: Duration.fromObject({ hours }).toFormat('hh:mm:ss'),
     label: `${hours} hours`,
   }));
-
-export const updateBookingsList = (
-  filterState,
-  offering_uuid,
-  provider_uuid,
-  sorting,
-) =>
-  fetchListStart(BOOKING_RESOURCES_TABLE, {
-    offering_type: OFFERING_TYPE_BOOKING,
-    o: orderByFilter(sorting),
-    state: filterState.map(({ value }) => value),
-    offering_uuid,
-    provider_uuid,
-  });
 
 export const getBookedSlots = (bookedItems: BookedItem[]) =>
   bookedItems.map((item) => ({

@@ -22,8 +22,6 @@ const getDailyQuotas = (params) =>
     (response) => response.data,
   );
 
-export type ChartLoader = (scope: Scope) => Promise<Chart[]>;
-
 export const getFormatterUnits = (
   chartType: 'filesize' | 'hours',
   value: number,

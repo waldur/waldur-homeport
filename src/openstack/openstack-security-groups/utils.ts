@@ -20,9 +20,6 @@ const COMMON_PORTS = {
   5432: 'POSTGRESQL',
 };
 
-export const formatSecurityGroupCIDR = (rule: SecurityGroupRule) =>
-  !rule.cidr ? translate('Any') : rule.cidr;
-
 export const formatSecurityGroupProtocol = (rule: SecurityGroupRule) =>
   !rule.protocol ? translate('Any') : rule.protocol.toUpperCase();
 

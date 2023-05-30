@@ -42,9 +42,3 @@ export const hideInfoPanel = () => {
     type: INFO_PANEL_HIDE,
   };
 };
-
-export const cleanUsageData = () => {
-  return {
-    type: USAGE_DATA_CLEAN,
-  };
-};

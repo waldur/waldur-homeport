@@ -46,10 +46,6 @@ const CategoryPage = lazyComponent(
   () => import('./category/CategoryPage'),
   'CategoryPage',
 );
-const ComparisonTable = lazyComponent(
-  () => import('./compare/ComparisonTable'),
-  'ComparisonTable',
-);
 const OfferingDetailsPage = lazyComponent(
   () => import('./details/DetailsPage'),
   'OfferingDetailsPage',
@@ -231,20 +227,6 @@ export const states: StateDeclaration[] = [
     data: {
       useExtraTabs: true,
     },
-  },
-
-  {
-    name: 'marketplace-compare',
-    url: 'marketplace-compare/',
-    component: ComparisonTable,
-    parent: 'project',
-  },
-
-  {
-    name: 'marketplace-compare-customer',
-    url: 'marketplace-compare/',
-    component: ComparisonTable,
-    parent: 'organization',
   },
 
   {

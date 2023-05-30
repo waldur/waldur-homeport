@@ -6,14 +6,6 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { RootState } from '@waldur/store/reducers';
 
-export const getCategoryLink = (projectId, categoryId) => ({
-  state: 'marketplace-project-resources',
-  params: {
-    uuid: projectId,
-    category_uuid: categoryId,
-  },
-});
-
 export const formDataSelector = (state: RootState) =>
   (getFormValues(FORM_ID)(state) || {}) as any;
 

@@ -1,9 +1,5 @@
 import { Customer, Project } from '@waldur/workspace/types';
 
-export interface Priority {
-  name: string;
-}
-
 export interface IssueOptions {
   title: string;
   hideTitle: boolean;

@@ -1,6 +1,4 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -12,7 +10,7 @@ import {
   PUBLIC_OFFERINGS_FILTER_FORM_ID,
 } from '@waldur/marketplace/offerings/store/constants';
 import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import {
@@ -129,9 +127,3 @@ const mapStateToProps = (state: RootState) => ({
   isOwnerOrStaff: isOwnerOrStaff(state),
   filter: getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID)(state) as FilterData,
 });
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const OfferingsList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;

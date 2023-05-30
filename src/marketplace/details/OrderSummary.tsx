@@ -10,7 +10,6 @@ import { ShoppingCartUpdateButtonContainer } from '@waldur/marketplace/cart/Shop
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
-import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Offering } from '@waldur/marketplace/types';
@@ -102,10 +101,6 @@ const PureOrderSummary: FunctionComponent<OrderSummaryProps> = (props) => (
           disabled={!props.formValid}
         />
       )}
-      <OfferingCompareButtonContainer
-        offering={props.offering}
-        flavor="secondary"
-      />
     </div>
   </>
 );

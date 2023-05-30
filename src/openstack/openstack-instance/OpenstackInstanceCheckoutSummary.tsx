@@ -10,7 +10,6 @@ import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
-import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { OfferingDetailsProps } from '@waldur/marketplace/details/OfferingDetails';
 import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
@@ -317,10 +316,6 @@ export const OpenstackInstanceCheckoutSummary: React.FC<OfferingDetailsProps> =
             item={orderItem}
             flavor="primary"
             disabled={!formIsValid}
-          />
-          <OfferingCompareButtonContainer
-            offering={offering}
-            flavor="secondary"
           />
         </div>
       </>

@@ -1,11 +1,6 @@
-import { get, getAll } from '@waldur/core/api';
+import { get } from '@waldur/core/api';
 
-import { Event, EventStat } from './types';
-
-export const getEvents = (params) =>
-  getAll<Event>('/events/', {
-    params,
-  });
+import { EventStat } from './types';
 
 export const getEventStats = (params) =>
   get<EventStat[]>('/events-stats/', { params }).then(

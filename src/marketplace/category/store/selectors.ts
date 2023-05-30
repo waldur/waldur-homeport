@@ -34,12 +34,6 @@ export const isOfferingsLoaded = (state: RootState) =>
 
 export const getOrganizationGroups = (state: RootState) =>
   state.marketplace.organizationGroups;
-export const isOrganizationGroupsLoading = (state: RootState) =>
-  getOrganizationGroups(state).loading;
-export const isOrganizationGroupsLoaded = (state: RootState) =>
-  getOrganizationGroups(state).loaded;
-export const isOrganizationGroupsErred = (state: RootState) =>
-  getOrganizationGroups(state).erred;
 
 export const categoryRouteState = (state: RootState) => {
   const workspace = getWorkspace(state);

@@ -14,8 +14,6 @@ export const ISSUE_COMMENTS_DELETE_ERROR = 'waldur/issue/comments/DELETE_ERROR';
 export const ISSUE_COMMENTS_FORM_TOGGLE = 'waldur/issue/comments/FORM_TOGGLE';
 export const ISSUE_COMMENTS_ISSUE_SET = 'waldur/issue/comments/ISSUE_SET';
 export const ISSUE_COMMENTS_FORM_SUBMIT = 'waldur/issue/comments/FORM_SUBMIT';
-export const ISSUE_COMMENTS_FORM_SUBMIT_SUCCESS =
-  'waldur/issue/comments/FORM_SUBMIT_SUCCESS';
 export const ISSUE_COMMENTS_FORM_SUBMIT_REJECT =
   'waldur/issue/comments/FORM_SUBMIT_REJECT';
 export const ISSUE_COMMENTS_FORM_SUBMIT_CANCEL =

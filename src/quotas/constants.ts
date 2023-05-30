@@ -1,11 +1,5 @@
 import { translate } from '@waldur/i18n';
 
-export const QUOTA_NAMES_MAPPING = {
-  vcpu: 'cores',
-  storage: 'disk',
-  ram: 'ram',
-};
-
 export const QUOTA_NAMES = {
   floating_ip_count: translate('Floating IP count'),
   vcpu: translate('vCPU count'),

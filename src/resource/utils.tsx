@@ -57,9 +57,6 @@ export const formatSummary = (resource) => {
 
 export const formatDefault = (value) => value || <>&mdash;</>;
 
-export const formatCommaList = (items: string[]) =>
-  items.length === 0 ? <>&ndash;</> : items.join(', ');
-
 export const formatSchedule = ({ resource }) => (
   <Tip label={resource.schedule} id="scheduleTooltip">
     {formatCrontab(resource.schedule)}

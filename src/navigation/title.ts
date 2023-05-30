@@ -42,8 +42,6 @@ export function* effects() {
 
 export const getTitle = (state: RootState) => state.title.title;
 
-export const getSubtitle = (state: RootState) => state.title.subtitle;
-
 export const useTitle = (title: string, subtitle?: string) => {
   const dispatch = useDispatch();
   useEffect(() => {

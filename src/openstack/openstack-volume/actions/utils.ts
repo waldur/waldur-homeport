@@ -7,9 +7,3 @@ export function isBootable(ctx: ActionContext<Volume>): string {
     return translate(`System volume couldn't be detached.`);
   }
 }
-
-export function hasBackendId(ctx: ActionContext<Volume>): string {
-  if (!ctx.resource.backend_id) {
-    return translate('Resource does not have backend ID.');
-  }
-}

@@ -15,13 +15,6 @@ export const getIssueTypeLabel = (issueType) =>
     INFORMATIONAL: translate('Informational'),
   }[issueType]);
 
-export const ISSUE_CLASSES = {
-  INCIDENT: 'label-danger',
-  INFORMATIONAL: 'label-warning',
-  CHANGE_REQUEST: 'label-success',
-  SERVICE_REQUEST: 'label-info',
-};
-
 export const ISSUE_ICONS = {
   INCIDENT: 'fa-exclamation-triangle',
   CHANGE_REQUEST: 'fa-check-square',
@@ -51,8 +44,6 @@ const getIssueDescription = (issueType) =>
       'Change request - client’s request to perform a generic modification of data or service.',
     ),
   }[issueType]);
-
-export const ISSUE_STATUSES = ['Resolved', 'Unresolved', "Won't fix"];
 
 export const getIssueTypeChoices = () =>
   Object.keys(ISSUE_IDS).map((item) => ({
