@@ -3323,6 +3323,10 @@ msgstr ""
 msgid "Favorite pages"
 msgstr ""
 
+#: src/navigation/header/FavoritePagesDropdown.tsx
+msgid "Favourites"
+msgstr ""
+
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Featured offerings"
 msgstr ""
@@ -6545,6 +6549,10 @@ msgstr ""
 
 #: src/navigation/header/confirmation-drawer/PendingConfirmationContainer.tsx
 msgid "Pending provider confirmation"
+msgstr ""
+
+#: src/navigation/header/ConfirmationDrawerToggle.tsx
+msgid "Pending tasks"
 msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
