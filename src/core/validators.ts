@@ -45,13 +45,3 @@ export const getLatinNameValidators = () => {
   }
   return validators;
 };
-
-export const minValue = (min: number) => (value: number) =>
-  value && value < min
-    ? translate('Must be at least {min}', { min })
-    : undefined;
-
-export const maxValue = (max: number) => (value: number) =>
-  value && value > max
-    ? translate('Must be at most {max}', { max })
-    : undefined;

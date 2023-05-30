@@ -32,11 +32,6 @@ export const getTotal = createSelector(getItems, (items) => {
   return items.reduce((total, item) => total + item.estimate, 0);
 });
 
-export const getItemSelectorFactory = (orderItemUuid) =>
-  createSelector(getItems, (items) =>
-    items.find((item) => item.uuid === orderItemUuid),
-  );
-
 const getFormState = (state: RootState) => state.form;
 const getNamedFormState = (formName) =>
   createSelector(getFormState, (formState = {}) => formState[formName]);

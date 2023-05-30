@@ -1,4 +1,4 @@
-import { getAll, getById, getList } from '@waldur/core/api';
+import { getAll, getById } from '@waldur/core/api';
 
 import { Issue } from './list/types';
 
@@ -15,8 +15,6 @@ export interface IssueTemplate {
 }
 
 export const getTemplates = () => getAll<IssueTemplate>('/support-templates/');
-
-export const getIssues = (params) => getList<Issue>('/support-issues/', params);
 
 export const getIssue = (issueId: string) =>
   getById<Issue>('/support-issues/', issueId);

@@ -17,10 +17,6 @@ export const gotoProjectList = createFormAction('waldur/project/GOTO_LIST');
 export const GOTO_PROJECT_CREATE = 'waldur/project/GOTO_CREATE';
 export const DELETE_PROJECT = 'waldur/project/DELETE';
 
-export const gotoProjectCreate = () => ({
-  type: GOTO_PROJECT_CREATE,
-});
-
 export const deleteProject = (project: Project) => ({
   type: DELETE_PROJECT,
   payload: { project },

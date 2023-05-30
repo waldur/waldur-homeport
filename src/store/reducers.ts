@@ -4,7 +4,6 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
 import { reducer as bookings } from '@waldur/booking/store/reducer';
-import { reducer as downloadLink } from '@waldur/core/DownloadLink/reducers';
 import { reducer as drawer } from '@waldur/drawer/reducer';
 import { reducer as issues } from '@waldur/issues/reducers';
 import { reducer as marketplace } from '@waldur/marketplace/store/reducers';
@@ -17,7 +16,6 @@ import { reducer as tables } from '@waldur/table/store';
 import { reducer as workspace } from '@waldur/workspace/reducers';
 
 import { reducer as config } from './config';
-import { reducer as locale } from './locale';
 
 export const rootReducer = combineReducers({
   form: formReducer,
@@ -29,8 +27,6 @@ export const rootReducer = combineReducers({
   tables,
   issues,
   workspace,
-  locale,
-  downloadLink,
   resource,
   serviceUsage,
   marketplace,

@@ -6,14 +6,12 @@ import {
   categoryOfferingsReducer,
   organizationGroupsReducer,
 } from '@waldur/marketplace/category/store/reducers';
-import { comparisonReducer } from '@waldur/marketplace/compare/store/reducers';
 import { landingReducer } from '@waldur/marketplace/landing/store/reducer';
 import { offeringReducer } from '@waldur/marketplace/offerings/store/reducer';
 import { ordersReducer } from '@waldur/marketplace/orders/store/reducer';
 import { serviceProviderReducer } from '@waldur/marketplace/service-providers/store/reducer';
 
 export const reducer = combineReducers({
-  comparison: comparisonReducer,
   cart: cartReducer,
   offering: offeringReducer,
   landing: landingReducer,

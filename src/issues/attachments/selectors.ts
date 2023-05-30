@@ -2,7 +2,6 @@ import { RootState } from '@waldur/store/reducers';
 
 export const getAttachments = (state: RootState) =>
   state.issues.attachments.items;
-export const getFilter = (state: RootState) => state.issues.attachments.filter;
 export const getDeleting = (state: RootState) =>
   state.issues.attachments.deleting;
 export const getIsDeleting = (state, { attachment }) =>

@@ -24,12 +24,6 @@ export interface ProviderCreateFormData {
   options: Record<string, any>;
 }
 
-export interface ProviderUpdateFormData {
-  loaded: boolean;
-  erred: boolean;
-  provider?: any;
-}
-
 export interface ProviderStatistics {
   active_campaigns: number;
   current_customers: number;

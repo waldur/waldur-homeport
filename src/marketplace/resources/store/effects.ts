@@ -1,4 +1,3 @@
-import { triggerTransition } from '@uirouter/redux';
 import { SubmissionError, change } from 'redux-form';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
@@ -6,36 +5,9 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { router } from '@waldur/router';
 import { showError, showSuccess } from '@waldur/store/notify';
-import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
-
-import { Resource } from '../types';
 
 import * as constants from './constants';
-
-function* redirectToDetailView(resource: Resource) {
-  const state =
-    resource.offering_type === SUPPORT_OFFERING_TYPE
-      ? 'project.support-details'
-      : 'resource-details';
-  if (router.globals.current.name !== state) {
-    return;
-  }
-  const params =
-    resource.offering_type === SUPPORT_OFFERING_TYPE
-      ? {
-          resource_uuid: resource.uuid,
-          uuid: resource.project_uuid,
-          tab: 'orderItems',
-        }
-      : {
-          resource_uuid: resource.resource_uuid || resource.uuid,
-          resource_type: resource.resource_type,
-          tab: 'orderItems',
-        };
-  yield put(triggerTransition(state, params));
-}
 
 function* handleSubmitUsage(action) {
   const { period, components } = action.payload;
@@ -77,8 +49,6 @@ function* handleSwitchPlan(action) {
     yield put(closeModalDialog());
     if (refetch) {
       yield call(refetch);
-    } else {
-      yield redirectToDetailView(resource);
     }
   } catch (error) {
     const errorMessage = `${translate(
@@ -102,8 +72,6 @@ function* handleChangeLimits(action) {
     yield put(closeModalDialog());
     if (refetch) {
       yield call(refetch);
-    } else {
-      yield redirectToDetailView(resource);
     }
   } catch (error) {
     const errorMessage = `${translate(
@@ -125,7 +93,6 @@ function* handleTerminateResource(action) {
     );
     yield put(constants.terminateResource.success());
     yield put(closeModalDialog());
-    yield redirectToDetailView(resource);
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to submit resource termination request.',

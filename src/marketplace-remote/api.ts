@@ -1,10 +1,7 @@
 import Axios from 'axios';
 
 import { ENV } from '@waldur/configs/default';
-import { getList, parseResultCount, post } from '@waldur/core/api';
-
-export const getProjectUpdateRequestsList = (params?: {}) =>
-  getList('/marketplace-project-update-requests/', params);
+import { parseResultCount, post } from '@waldur/core/api';
 
 export const countProjectUpdateRequestsList = (params) =>
   Axios.request({

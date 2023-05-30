@@ -1,9 +1,6 @@
 import { BookedItem } from '@waldur/booking/types';
-import { get, getAll, getById, getList, post } from '@waldur/core/api';
+import { getAll, getById, getList, post } from '@waldur/core/api';
 import { Offering } from '@waldur/marketplace/types';
-
-export const getAllBookings = () =>
-  get(`/booking-resources/`).then((response) => response.data);
 
 export const getBookingsList = (params?: {}) =>
   getList(`/booking-resources/`, params);

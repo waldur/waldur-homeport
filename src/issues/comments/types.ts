@@ -46,7 +46,3 @@ export interface Payload {
   resolve(): void;
   reject(): void;
 }
-
-export interface User {
-  [key: string]: string | boolean;
-}

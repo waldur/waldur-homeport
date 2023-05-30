@@ -1,8 +1,5 @@
 import React from 'react';
 
-export const OPEN = 'waldur/drawer/OPEN';
-export const CLOSE = 'waldur/drawer/CLOSE';
-
 export type DialogSizeType = 'lg' | 'xl';
 
 export const openDrawerDialog = <P = any>(

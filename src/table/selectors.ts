@@ -16,11 +16,6 @@ const selectTableEntitiesOrder = (state: RootState, table: string) => {
   return [];
 };
 
-export const getTableEntityCount = createSelector(
-  selectTableEntities,
-  (entities) => Object.keys(entities).length,
-);
-
 export const selectTableRows = createSelector(
   selectTableEntities,
   selectTableEntitiesOrder,
@@ -44,17 +39,4 @@ export const selectTableSorting = (state: RootState, table: string) => {
   if (state.tables && state.tables[table]) {
     return state.tables[table].sorting;
   }
-};
-
-export const selectFilterVisible = (state: RootState, table: string) => {
-  if (state.tables && state.tables[table]) {
-    return state.tables[table].filterVisible;
-  }
-};
-
-export const selectSelectedRows = (state: RootState, table: string) => {
-  if (state.tables && state.tables[table]) {
-    return state.tables[table].selectedRows;
-  }
-  return [];
 };

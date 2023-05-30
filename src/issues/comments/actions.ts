@@ -83,13 +83,6 @@ export const issueCommentsFormSubmit = (message: string, formId: string) => ({
   },
 });
 
-export const issueCommentsFormSubmitSuccess = (formId: string) => ({
-  type: constants.ISSUE_COMMENTS_FORM_SUBMIT_SUCCESS,
-  payload: {
-    formId,
-  },
-});
-
 export const issueCommentsFormSubmitReject = (formId: string) => ({
   type: constants.ISSUE_COMMENTS_FORM_SUBMIT_REJECT,
   payload: {

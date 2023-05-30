@@ -1,29 +1,19 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback, useEffect } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { Field, reduxForm, formValueSelector, change } from 'redux-form';
+import { Field, formValueSelector, change } from 'redux-form';
 import { createSelector } from 'reselect';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { ENV } from '@waldur/configs/default';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { formatResourceShort } from '@waldur/marketplace/utils';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
-import { getCustomersList } from '@waldur/project/api';
-import { BaseResource } from '@waldur/resource/types';
 import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
-import { Customer, Project } from '@waldur/workspace/types';
 
 import { refreshProjects, refetchs } from './api';
 import { AsyncSelectField } from './AsyncSelectField';
-import { DescriptionGroup } from './DescriptionGroup';
-import { SummaryGroup } from './SummaryGroup';
-import { TypeGroup } from './TypeGroup';
-import { IssueRequestPayload, IssueTypeOption } from './types';
-import { sendIssueCreateRequest } from './utils';
 
 const filterOption = (options) => options;
 
@@ -31,36 +21,7 @@ export const ISSUE_QUICK_CREATE_FORM_ID = 'IssueQuickCreate';
 
 const formSelector = formValueSelector(ISSUE_QUICK_CREATE_FORM_ID);
 
-const projectSelector = (state: RootState) => formSelector(state, 'project');
-
 const customerSelector = (state: RootState) => formSelector(state, 'customer');
-
-const refreshCustomers = async (name: string) => {
-  const params: Record<string, string> = {};
-  if (name) {
-    params.name = name;
-  }
-  const customers = await getCustomersList(params);
-  return { options: customers };
-};
-
-const OrganizationGroup = ({ disabled }) => (
-  <Form.Group>
-    <Form.Label>{translate('Organization')}</Form.Label>
-    <Field
-      name="customer"
-      component={AsyncSelectField}
-      placeholder={translate('Select organization...')}
-      isClearable={true}
-      defaultOptions
-      loadOptions={refreshCustomers}
-      getOptionValue={(option) => option.name}
-      getOptionLabel={(option) => option.name}
-      filterOption={filterOption}
-      isDisabled={disabled}
-    />
-  </Form.Group>
-);
 
 const projectRequiredSelector = createSelector(
   /* Project should be specified only if user has selected customer
@@ -162,74 +123,3 @@ export const ResourceGroup = ({ disabled, project, formId }) => {
     </Form.Group>
   );
 };
-
-interface IssueFormData {
-  type: IssueTypeOption;
-  summary: string;
-  description: string;
-  customer: Customer;
-  project: Project;
-  resource?: BaseResource;
-}
-
-export const IssueQuickCreate = reduxForm<IssueFormData>({
-  form: ISSUE_QUICK_CREATE_FORM_ID,
-})(({ handleSubmit, submitting }) => {
-  const dispatch = useDispatch();
-
-  const createIssue = useCallback(
-    async (formData: IssueFormData) => {
-      const payload: IssueRequestPayload = {
-        type: formData.type.id,
-        summary: formData.summary,
-        description: formData.description,
-        is_reported_manually: true,
-      };
-
-      if (formData.resource) {
-        payload.resource = formData.resource.url;
-      } else if (formData.project) {
-        payload.project = formData.project.url;
-      } else if (formData.customer) {
-        payload.customer = formData.customer.url;
-      }
-      await sendIssueCreateRequest(payload, dispatch);
-    },
-    [dispatch],
-  );
-
-  return (
-    <Card>
-      <form onSubmit={handleSubmit(createIssue)}>
-        <Card.Header>
-          <Card.Title>
-            <h3>{translate('Create request')}</h3>
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
-          {ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE ? (
-            <TypeGroup disabled={submitting} />
-          ) : null}
-          <SummaryGroup disabled={submitting} />
-          <DescriptionGroup disabled={submitting} />
-          <OrganizationGroup disabled={submitting} />
-          <ProjectGroup
-            disabled={submitting}
-            customer={useSelector(customerSelector)}
-            formId={ISSUE_QUICK_CREATE_FORM_ID}
-          />
-          <ResourceGroup
-            disabled={submitting}
-            project={useSelector(projectSelector)}
-            formId={ISSUE_QUICK_CREATE_FORM_ID}
-          />
-          <div className="text-right">
-            <SubmitButton submitting={submitting} block={false}>
-              {translate('Create request')}
-            </SubmitButton>
-          </div>
-        </Card.Body>
-      </form>
-    </Card>
-  );
-});

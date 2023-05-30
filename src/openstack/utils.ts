@@ -80,26 +80,6 @@ export const validatePrivateCIDR = (value) => {
   }
 };
 
-export const getTenantListState = (projectId) => ({
-  label: translate('Private clouds'),
-  state: 'marketplace-project-resources',
-  params: {
-    category_uuid:
-      ENV.plugins.WALDUR_MARKETPLACE_OPENSTACK.TENANT_CATEGORY_UUID,
-    uuid: projectId,
-  },
-});
-
-export const getInstanceListState = (projectId) => ({
-  label: translate('Virtual machines'),
-  state: 'marketplace-project-resources',
-  params: {
-    category_uuid:
-      ENV.plugins.WALDUR_MARKETPLACE_OPENSTACK.INSTANCE_CATEGORY_UUID,
-    uuid: projectId,
-  },
-});
-
 const getConsoleURL = (moduleName: string, id: string) =>
   get<ConsoleResponse>(`/${moduleName}/${id}/console/`);
 

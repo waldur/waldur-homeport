@@ -77,16 +77,6 @@ export const checkIsServiceManager = (
   customer?.service_managers?.find((manager) => manager.uuid === user.uuid) !==
     undefined;
 
-export const checkIsCustomerSupport = (
-  customer: Customer,
-  user: User,
-): boolean =>
-  customer &&
-  user &&
-  customer.support_users &&
-  customer.support_users.find((support) => support.uuid === user.uuid) !==
-    undefined;
-
 export const checkCustomerUser = (customer: Customer, user: User): boolean => {
   if (user && user.is_staff) {
     return true;

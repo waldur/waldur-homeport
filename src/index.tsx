@@ -6,7 +6,6 @@ import ReactDOM from 'react-dom';
 import { Application } from './Application';
 
 import './auth/module';
-import './digitalocean/module';
 import './issues/module';
 import './customer/module';
 import './invoices/module';

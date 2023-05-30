@@ -26,11 +26,6 @@ export const ordersReducer = (state = INITIAL_STATE, action): OrderState => {
           ...payload.status,
         },
       };
-    case constants.PENDING_ORDERS_FETCH_SUCCESS:
-      return {
-        ...state,
-        pendingOrders: payload.orders,
-      };
     default:
       return state;
   }

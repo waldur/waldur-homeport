@@ -23,7 +23,3 @@ export const ordinaryUser = {
   agreement_date: '2021-10-18',
   full_name: 'Andy Lebowski',
 };
-
-export const userWithTARA = {
-  registration_method: 'tara',
-};

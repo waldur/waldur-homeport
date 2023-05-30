@@ -62,12 +62,6 @@ export interface Image extends ServiceComponent {
   name: string;
 }
 
-export interface LimitsType {
-  cores: string;
-  storage: string;
-  ram: string;
-}
-
 export interface SshKey {
   url: string;
   uuid: string;

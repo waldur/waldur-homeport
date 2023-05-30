@@ -1,7 +1,6 @@
 import { Fragment, ReactNode } from 'react';
 
 import { ENV } from '@waldur/configs/default';
-import { RootState } from '@waldur/store/reducers';
 
 import { DOMAIN_MESSAGES } from './constants';
 import { LanguageUtilsService } from './LanguageUtilsService';
@@ -69,8 +68,3 @@ export const translate: Translate = (
   context,
   interpolator = formatTemplate,
 ) => interpolator(translateTemplate(getDomainMessage(template)), context);
-
-export const getLocale = (state: RootState) => ({
-  locale: state.locale,
-  translate,
-});

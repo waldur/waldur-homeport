@@ -1,3 +1,2 @@
-export * from './translate';
-export * from './types';
-export * from './utils';
+export { translate, formatJsx, formatJsxTemplate } from './translate';
+export { gettext } from './utils';

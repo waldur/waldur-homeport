@@ -15,7 +15,3 @@ export interface MenuItemType {
   icon?: string;
   visible?: boolean;
 }
-
-export interface SidebarMenuProps {
-  items: MenuItemType[];
-}

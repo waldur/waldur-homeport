@@ -11,12 +11,3 @@ export interface MenuItemType {
   children?: MenuItemType[];
   action?(): void;
 }
-
-export interface SidebarSection {
-  label: string;
-  items: MenuItemType[];
-}
-
-export interface SidebarMenuProps {
-  sections: SidebarSection[];
-}
