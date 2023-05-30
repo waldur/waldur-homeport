@@ -89,8 +89,8 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
             {user && <LegacyBranchLink />}
-            {user && hasSupport && <QuickIssueDrawerToggle />}
             {user && <FavoritePagesDropdown />}
+            {user && hasSupport && <QuickIssueDrawerToggle />}
             {user && <ConfirmationDrawerToggle />}
             {user && <SearchToggle />}
             <div className="d-flex align-items-center ms-1 ms-lg-3">

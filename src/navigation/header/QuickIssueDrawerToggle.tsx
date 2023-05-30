@@ -30,7 +30,11 @@ export const QuickIssueDrawerToggle: React.FC = () => {
         className="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary position-relative w-35px h-35px w-md-40px h-md-40px"
         onClick={openDrawer}
       >
-        <InlineSVG path={icon} className="svg-icon-1" />
+        <InlineSVG
+          path={icon}
+          className="svg-icon-1"
+          tooltipText={translate('Issues')}
+        />
       </div>
     </div>
   );
