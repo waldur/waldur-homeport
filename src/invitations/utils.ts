@@ -6,6 +6,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { router } from '@waldur/router';
 import { showError, showSuccess } from '@waldur/store/notify';
 import store from '@waldur/store/store';
+import { UsersService } from '@waldur/user/UsersService';
 
 import { InvitationService } from './InvitationService';
 import { clearInvitationToken, setInvitationToken } from './InvitationStorage';
@@ -28,9 +29,22 @@ export function checkAndAccept(token) {
      */
   if (AuthService.isAuthenticated()) {
     return confirmInvitation(token)
-      .then((replaceEmail) => {
+      .then(({ replaceEmail, invitation }) => {
         acceptInvitation(token, replaceEmail).then(() => {
-          router.stateService.go('profile.details');
+          // Refetch the user data to update the permissions for the new org or project
+          UsersService.getCurrentUser(true).then(() => {
+            if (invitation?.project_uuid) {
+              router.stateService.go('project.dashboard', {
+                uuid: invitation.project_uuid,
+              });
+            } else if (invitation?.customer_uuid) {
+              router.stateService.go('organization.dashboard', {
+                uuid: invitation.customer_uuid,
+              });
+            } else {
+              router.stateService.go('profile.details');
+            }
+          });
         });
       })
       .catch(() => {

@@ -18,6 +18,12 @@ export const InvitationConfirmDialog: FunctionComponent<{
 }> = ({ resolve: { token, deferred } }) => {
   const dispatch = useDispatch();
 
+  const user = useSelector(getUser);
+  const asyncResult = useAsync(() =>
+    InvitationService.details(token).then((response) => response.data),
+  );
+  const invitation = asyncResult.value;
+
   const close = useCallback(() => dispatch(closeModalDialog()), [dispatch]);
 
   const dismiss = useCallback(() => {
@@ -27,19 +33,13 @@ export const InvitationConfirmDialog: FunctionComponent<{
 
   const closeAcceptingNewEmail = useCallback(() => {
     close();
-    deferred.resolve(true);
-  }, [close, deferred]);
+    deferred.resolve({ replaceEmail: true, invitation });
+  }, [close, deferred, invitation]);
 
   const closeDecliningNewEmail = useCallback(() => {
     close();
-    deferred.resolve(false);
-  }, [close, deferred]);
-
-  const user = useSelector(getUser);
-  const asyncResult = useAsync(() =>
-    InvitationService.details(token).then((response) => response.data),
-  );
-  const invitation = asyncResult.value;
+    deferred.resolve({ replaceEmail: false, invitation });
+  }, [close, deferred, invitation]);
 
   return (
     <>
@@ -63,7 +63,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
         ) : null}
       </Modal.Body>
       <Modal.Footer>
-        {asyncResult.value ? (
+        {!user ? null : asyncResult.value ? (
           <InvitationButtons
             user={user}
             invitation={invitation}
