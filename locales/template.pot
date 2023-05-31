@@ -3241,6 +3241,10 @@ msgstr ""
 msgid "Go to my profile"
 msgstr ""
 
+#: src/navigation/header/NextBranchLink.tsx
+msgid "Go to new interface"
+msgstr ""
+
 #: src/invitations/GroupInvitationErrorMessage.tsx
 #: src/invitations/InvitationErrorMessage.tsx
 msgid "Go to profile"
@@ -9337,10 +9341,6 @@ msgstr ""
 
 #: src/user/UserPopover.tsx
 msgid "Try again"
-msgstr ""
-
-#: src/navigation/header/NextBranchLink.tsx
-msgid "Try out new interface"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx

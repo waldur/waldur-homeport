@@ -10,7 +10,7 @@ RUN apk add --no-cache git && yarn install --frozen-lockfile
 COPY . /app
 ARG VERSION=latest
 RUN sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" src/configs/default.ts
-RUN yarn build
+RUN ASSET_PATH=/legacy/ yarn build
 
 # build environment
 FROM node:lts-alpine as next
@@ -24,15 +24,15 @@ RUN apk add --no-cache git && yarn install --frozen-lockfile
 COPY next /app
 ARG VERSION=latest
 RUN sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" src/configs/default.ts
-RUN ASSET_PATH=/next/ yarn build
+RUN yarn build
 
 # production environment
 FROM nginx:stable-alpine
-COPY --from=build /app/build /usr/share/nginx/html
-COPY --from=build /app/build/index.html /usr/share/nginx/html/index.orig.html
+COPY --from=build /app/build /usr/share/nginx/html/legacy
+COPY --from=build /app/build/index.html /usr/share/nginx/html/legacy/index.orig.html
 
-COPY --from=next /app/build /usr/share/nginx/html/next
-COPY --from=next /app/build/index.html /usr/share/nginx/html/next/index.orig.html
+COPY --from=next /app/build /usr/share/nginx/html/
+COPY --from=next /app/build/index.html /usr/share/nginx/html/index.orig.html
 
 ENV API_URL="http://localhost:8080"
 ENV TITLE="Waldur | Cloud Service Management"
