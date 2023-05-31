@@ -17,9 +17,9 @@ class UsersServiceClass {
     return patch(`/users/${user.uuid}/`, user);
   }
 
-  getCurrentUser() {
+  getCurrentUser(refetch = false) {
     const cached = this.getCachedUser();
-    if (cached) {
+    if (!refetch && cached) {
       return Promise.resolve(cached);
     }
     return getCurrentUser().then((user) => {
