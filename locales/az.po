@@ -54,15 +54,11 @@ msgid "Account removal"
 msgstr "Hesabın silinməsi"
 
 #: src/invoices/routes.ts
-#: src/invoices/utils.ts
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
-#: src/marketplace/offerings/details/PageAccounting.tsx
-#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Accounting"
 msgstr "Uçot"
 
-#: src/customer/list/AccountingPeriodFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 msgid "Accounting period"
@@ -217,7 +213,6 @@ msgstr "Qayda əlavə edin"
 msgid "Add user"
 msgstr "İstifadəçi əlavə edin"
 
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Tələbə əsasən nümunəyə əlavə olunacaq əlavə data."
@@ -231,7 +226,6 @@ msgstr "Ünvan"
 
 #: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueQuickCreate.tsx
-#: src/issues/create/ResourceGroup.tsx
 msgid "Affected resource"
 msgstr "Cəlb edilmiş resurs"
 
@@ -261,7 +255,6 @@ msgstr "Hesabınız artıq varmı?"
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/paypal/PaymentsList.tsx
 msgid "Amount"
 msgstr "Məbləğ"
 
@@ -288,7 +281,6 @@ msgid "Approve payment"
 msgstr "Ödənişi təsdiq edin"
 
 #: src/issues/IssueSummary.tsx
-#: src/issues/create/AssigneeGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Assigned to"
@@ -369,7 +361,6 @@ msgid "Azure provider"
 msgstr "Azure provayderi"
 
 #: src/error/InvalidObjectPage.tsx
-#: src/error/InvalidQuotaPage.tsx
 #: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
 #: src/notifications/NotificationFooter.tsx
@@ -417,7 +408,6 @@ msgid "Batch processing documentation"
 msgstr "Qrup emalı sənədləşməsi "
 
 #: src/invoices/routes.ts
-#: src/invoices/utils.ts
 #: src/project/ProjectDashboard.tsx
 msgid "Billing"
 msgstr "Billinq"
@@ -437,7 +427,6 @@ msgstr "Özü yüklənə bilən"
 #: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
-#: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Browse"
 msgstr "Baxış keçirin"
@@ -447,7 +436,6 @@ msgid "CPU usage"
 msgstr "CPU istifadəsi"
 
 #: src/issues/IssueSummary.tsx
-#: src/issues/create/CallerGroup.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Caller"
 msgstr "Zəng edən"
@@ -499,7 +487,6 @@ msgstr "Ləğv edildi"
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
@@ -638,7 +625,6 @@ msgstr "Əlaqə telefonu"
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
-#: src/table/ExportDropdown.tsx
 #: src/table/TableButtons.tsx
 #: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
@@ -705,7 +691,6 @@ msgid "Create project"
 msgstr "Layihə yaratmaq"
 
 #: src/issues/create/IssueCreateDialog.tsx
-#: src/issues/create/IssueQuickCreate.tsx
 msgid "Create request"
 msgstr "Sorğu yaratmaq"
 
@@ -833,7 +818,6 @@ msgstr "Cari variant "
 msgid "Current price per month"
 msgstr "Aylıq cari qiymət "
 
-#: src/digitalocean/DropletResizeDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "Current size"
 msgstr "Cari həcm "
@@ -859,7 +843,6 @@ msgstr "Verilənlərin həcm ölçüsü"
 #: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/issues/feedback/SupportFeedbackListFilter.tsx
 #: src/marketplace/resources/usage/utils.ts
-#: src/paypal/PaymentsList.tsx
 #: src/support/SupportEventsListFilter.tsx
 msgid "Date"
 msgstr "Tarix"
@@ -914,10 +897,8 @@ msgid "Delete volumes"
 msgstr "Həcmləri silmək "
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/issues/create/DescriptionGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
-#: src/issues/list/IssuesShortList.tsx
 #: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
@@ -929,11 +910,8 @@ msgstr "Həcmləri silmək "
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
-#: src/marketplace/offerings/details/PageDescription.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
-#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
-#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/marketplace/offerings/details/PublicOfferingInfo.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
@@ -1002,10 +980,7 @@ msgstr "Ayırma "
 
 #: src/customer/team/UserDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
-#: src/issues/create/CallerGroup.tsx
-#: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
-#: src/marketplace/offerings/service-providers/shared/OfferingDetailsButton.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
@@ -1090,7 +1065,6 @@ msgstr "Aİ ƏDV İdentifikasiyası "
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
-#: src/marketplace/offerings/details/PublicOfferingEditorButton.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
@@ -1174,7 +1148,6 @@ msgstr "Aylıq təqribi xərc  "
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
-#: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/project/utils.ts
@@ -1282,7 +1255,6 @@ msgid "Extending"
 msgstr "Genişləndirmə"
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "External IP"
 msgstr "Kənar IP"
@@ -1314,12 +1286,7 @@ msgstr "Fayl yüklənib"
 msgid "Files"
 msgstr "Fayllar "
 
-#: src/issues/create/CallerGroup.tsx
-#: src/issues/create/OrganizationGroup.tsx
-#: src/issues/create/ProjectGroup.tsx
 #: src/marketplace/category/filters/FilterDropdownHeader.tsx
-#: src/marketplace/category/filters/MobileFilterActions.tsx
-#: src/support/EventFilterButton.tsx
 #: src/table/Table.tsx
 msgid "Filter"
 msgstr "Filtr "
@@ -1336,7 +1303,6 @@ msgstr "Filtrləmə layihələri"
 msgid "Financial overview"
 msgstr "Maliyyə icmalı "
 
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/resources/details/RobotAccountExpandable.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/user/keys/KeysList.tsx
@@ -1520,7 +1486,6 @@ msgid "IP version"
 msgstr "IP versiyası"
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/openstack/openstack-instance/ImageGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -1528,7 +1493,6 @@ msgstr "IP versiyası"
 msgid "Image"
 msgstr "Təsvir"
 
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/analytics/ImagesList.tsx
 #: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Image name"
@@ -1626,7 +1590,6 @@ msgid "Instances count"
 msgstr "Nümunələr sayılır"
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Internal IP"
 msgstr "Daxili IP(İnternet protokollar)"
@@ -1822,7 +1785,6 @@ msgid "Kept until"
 msgstr "---- qədər saxlanılıb"
 
 #: src/issues/list/IssuesList.tsx
-#: src/issues/list/IssuesShortList.tsx
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Key"
@@ -1833,7 +1795,6 @@ msgid "Key name"
 msgstr "Açar adı"
 
 #: src/user/UserPopover.tsx
-#: src/user/keys/help.js
 #: src/user/support/UserDetailsView.tsx
 msgid "Keys"
 msgstr "Açarlar"
@@ -1867,12 +1828,9 @@ msgstr "Yükləmə tədbirləri "
 #: src/azure/AzureResourceSummary.tsx
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/marketplace/offerings/details/PageLocation.tsx
-#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Location"
 msgstr "Yerləşmə"
 
-#: src/navigation/header/LogoutLink.tsx
 #: src/navigation/header/UserDropdown.tsx
 msgid "Log out"
 msgstr "Çıxış"
@@ -1882,7 +1840,6 @@ msgstr "Çıxış"
 msgid "Logging user in"
 msgstr "Daxil olan istifadəçi girişi"
 
-#: src/auth/SigninButton.tsx
 #: src/auth/SigninForm.tsx
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/navigation/sidebar/UnifiedSidebar.tsx
@@ -2000,7 +1957,6 @@ msgstr "Yoxdur "
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/invoices/details/InvoiceItemCompensationDialog.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
@@ -2143,7 +2099,6 @@ msgstr "Yeni cəhət"
 msgid "New plan"
 msgstr "Yeni plan"
 
-#: src/digitalocean/DropletResizeDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "New size"
 msgstr "Yeni ölçü"
@@ -2241,8 +2196,6 @@ msgstr "Xidmət Masasında açın"
 #: src/invitations/actions/UserDetailsGroup.tsx
 #: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueHeader.tsx
-#: src/issues/create/IssueQuickCreate.tsx
-#: src/issues/create/OrganizationGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-flows/FlowExpandableRow.tsx
@@ -2265,7 +2218,6 @@ msgstr "Xidmət Masasında açın"
 #: src/project/SupportProjectsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
-#: src/user/SelectAffiliationDialog.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/affiliations/ProjectsList.tsx
@@ -2578,7 +2530,6 @@ msgid "Print record"
 msgstr "Qeydi çap edin"
 
 #: src/issues/IssueSummary.tsx
-#: src/issues/create/PriorityGroup.tsx
 msgid "Priority"
 msgstr "Prioritet"
 
@@ -2602,7 +2553,6 @@ msgstr "Özəl buludlar"
 #: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
-#: src/issues/create/ProjectGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 #: src/marketplace-flows/FlowsList.tsx
@@ -2632,7 +2582,6 @@ msgstr "Özəl buludlar"
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
-#: src/user/SelectAffiliationDialog.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Project"
 msgstr "Layihə"
@@ -2785,8 +2734,6 @@ msgid "Pulling quotas"
 msgstr "Çəkmə kvotaları"
 
 #: src/marketplace/cart/ForwardButton.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingPricingOld.tsx
 msgid "Purchase"
 msgstr "Alış"
 
@@ -2809,7 +2756,6 @@ msgstr "Kvotaya çatdırılıb."
 msgid "Quotas"
 msgstr "Kvotalar"
 
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-tenant/TenantFlavorsList.tsx
@@ -2849,12 +2795,10 @@ msgstr "Qeyd nömrəsi"
 msgid "Record period"
 msgstr "Qeyd dövrü"
 
-#: src/issues/list/IssuesShortList.tsx
 #: src/marketplace/orders/OrderDetails.tsx
 #: src/marketplace/resources/details/RefreshButton.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/resource/ResourceRefreshButton.tsx
-#: src/table/TableDropdowns.tsx
 msgid "Refresh"
 msgstr "Təzələmək"
 
@@ -2973,7 +2917,6 @@ msgstr "Başlıq sorğusu"
 #: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueCreateForm.tsx
 #: src/issues/create/IssueHeader.tsx
-#: src/issues/create/TypeGroup.tsx
 msgid "Request type"
 msgstr "Sorğu növü"
 
@@ -3087,7 +3030,6 @@ msgid "Retention time in days, if 0 - resource will be kept forever"
 msgstr "Gündə saxlama müddəti, əgər 0 - resurs sonsuza qədər saxlanılacaq"
 
 #: src/LoadingScreen.tsx
-#: src/invoices/events/InvoiceEventsDialog.tsx
 #: src/navigation/SearchResultsDropdown.tsx
 msgid "Retry"
 msgstr "Yenidən cəhd edin"
@@ -3147,7 +3089,6 @@ msgstr "SLURM ayırma istifadəsi"
 msgid "SSH Keys"
 msgstr "SSH (təhlükəsizlik örtükləri) açarları"
 
-#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "SSH key"
 msgstr "SSH (təhlükəsizlik örtükləri) açarı"
@@ -3158,7 +3099,6 @@ msgstr "SSH (təhlükəsizlik örtükləri) açarı"
 msgid "SSH keys"
 msgstr "SSH (təhlükəsizlik örtükləri) açarları"
 
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/rancher/cluster/create/RancherClusterForm.tsx
@@ -3198,8 +3138,6 @@ msgstr "Yaddaşda saxlamaq"
 msgid "Schedule"
 msgstr "Cədvəl"
 
-#: src/issues/create/SearchButton.tsx
-#: src/navigation/header/MainSearch.tsx
 #: src/navigation/header/SearchFilters.tsx
 #: src/navigation/header/SearchToggle.tsx
 #: src/table/TableQuery.tsx
@@ -3210,7 +3148,6 @@ msgstr "Axtarış"
 msgid "Security group does not contain any rule yet."
 msgstr "Təhlükəsizlik qrupunda hələ heç bir qayda yoxdur."
 
-#: src/marketplace/resources/details/NetworkingTab.tsx
 #: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
@@ -3230,7 +3167,6 @@ msgstr "Təhlükəsizlik qrupları"
 msgid "Security groups details"
 msgstr "Təhlükəsizlik qruplarının təfsilatları"
 
-#: src/issues/list/IssuesShortList.tsx
 #: src/marketplace/resources/details/ActivityCard.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
 msgid "See all"
@@ -3250,7 +3186,6 @@ msgid "Select"
 msgstr "Seçin"
 
 #: src/issues/create/IssueQuickCreate.tsx
-#: src/issues/create/ResourceGroup.tsx
 msgid "Select affected resource..."
 msgstr "Təsirə məruz qalan resursu seçin ..."
 
@@ -3274,13 +3209,10 @@ msgid "Select country..."
 msgstr "Ölkəni seç..."
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
-#: src/issues/create/IssueQuickCreate.tsx
-#: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
-#: src/user/SelectAffiliationDialog.tsx
 msgid "Select organization..."
 msgstr "Təşkilat seçin ..."
 
@@ -3290,10 +3222,8 @@ msgid "Select project"
 msgstr "Layihəni seçin"
 
 #: src/issues/create/IssueQuickCreate.tsx
-#: src/issues/create/ProjectGroup.tsx
 #: src/marketplace/resources/actions/MoveToProjectAutocomplete.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
-#: src/user/SelectAffiliationDialog.tsx
 msgid "Select project..."
 msgstr "Layihəni seçin ..."
 
@@ -3425,7 +3355,6 @@ msgstr "{label} ilə daxil ol"
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
@@ -3577,7 +3506,6 @@ msgstr "Başlanğıc"
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
-#: src/paypal/PaymentsList.tsx
 #: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesFilter.tsx
 #: src/project/ProjectResourcesList.tsx
@@ -3615,7 +3543,6 @@ msgstr "Dur"
 msgid "Stopping"
 msgstr "Durdurma"
 
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/marketplace/resources/details/openstack-volume/VolumeDetails.tsx
@@ -3628,7 +3555,6 @@ msgstr "Saxlama"
 
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
-#: src/digitalocean/DropletResizeDialog.tsx
 #: src/invitations/GroupinvitationButtons.tsx
 #: src/invitations/PermissionRequestActionDialog.tsx
 #: src/invitations/actions/GroupInvitationCreateDialog.tsx
@@ -3891,7 +3817,6 @@ msgid "This website uses cookies to ensure you get the best experience on our we
 msgstr "Bu vebsayt sizin ən yaxşı təcrübəni əldə etməyiniz üçün cookies istifadə edir."
 
 #: src/issues/list/IssuesList.tsx
-#: src/issues/list/IssuesShortList.tsx
 msgid "Time in progress"
 msgstr "Vaxt gedir"
 
@@ -3901,7 +3826,6 @@ msgid "Timestamp"
 msgstr "Zaman qeydi"
 
 #: src/issues/create/IssueCreateDialog.tsx
-#: src/issues/create/SummaryGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
 #: src/marketplace/referral/ReferralsList.tsx
@@ -3985,7 +3909,6 @@ msgstr "Yenidən cəhd et"
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
-#: src/paypal/PaymentsList.tsx
 #: src/project/ProjectEventsFilter.tsx
 #: src/project/ProjectOrderItemsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -4118,14 +4041,6 @@ msgstr "Ödənilməmiş"
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
-#: src/marketplace/offerings/details/PageAccounting.tsx
-#: src/marketplace/offerings/details/PageConfirmationMessage.tsx
-#: src/marketplace/offerings/details/PageDescription.tsx
-#: src/marketplace/offerings/details/PageHeroImage.tsx
-#: src/marketplace/offerings/details/PageLocation.tsx
-#: src/marketplace/offerings/details/PageManagement.tsx
-#: src/marketplace/offerings/details/PageOverview.tsx
-#: src/marketplace/offerings/details/PagePolicies.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
@@ -4229,7 +4144,6 @@ msgstr "İstifadəçi yenilənə bilmədi"
 msgid "User dashboard"
 msgstr "İstifadəçi paneli"
 
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 msgid "User data"
@@ -4398,7 +4312,6 @@ msgstr "ƏDV daxil deyildir."
 msgid "VAT rate"
 msgstr "ƏDV dərəcəsi"
 
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "VM name"
@@ -4650,7 +4563,6 @@ msgstr "işarə zamandan çıxmayacaq"
 msgid "users"
 msgstr "istifadəçilər"
 
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/resource/utils.tsx
