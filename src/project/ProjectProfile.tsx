@@ -46,7 +46,7 @@ export const ProjectProfile = ({ project }: { project: Project }) => (
           </Row>
           <Row>
             <Col xs={12}>
-              <ProjectUsersBadge />
+              <ProjectUsersBadge isHorizontal />
             </Col>
           </Row>
         </Col>

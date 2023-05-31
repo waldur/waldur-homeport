@@ -9121,7 +9121,7 @@ msgstr ""
 msgid "Show private"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsHeader.tsx
+#: src/marketplace/resources/details/ResourceDetailsHeaderTitle.tsx
 msgid "Show project"
 msgstr ""
 
@@ -9350,7 +9350,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/details/ResourceDetailsHeader.tsx
+#: src/marketplace/resources/details/ResourceDetailsHeaderBody.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx

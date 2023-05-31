@@ -22,9 +22,7 @@ export const ParentResourceLink = ({ resource }: { resource: Resource }) =>
                   resource_uuid: resource.parent_uuid,
                 }}
               >
-                <a className="cursor-pointer text-dark text-decoration-underline text-hover-primary">
-                  {resource.parent_name}
-                </a>
+                <a className="text-link">{resource.parent_name}</a>
               </UISref>
             ),
           },

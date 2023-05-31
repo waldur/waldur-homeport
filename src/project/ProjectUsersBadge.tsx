@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -17,7 +17,22 @@ import { getProject } from '@waldur/workspace/selectors';
 
 import { fetchAllProjectUsers } from './api';
 
-export const ProjectUsersBadge = () => {
+interface OwnProps {
+  isHorizontal?: boolean;
+}
+
+const LayoutWrapper: FC<OwnProps> = (props) =>
+  props.isHorizontal ? (
+    <div className="d-flex justify-content-start align-items-xl-center flex-xl-row flex-column gap-xl-6">
+      {props.children}
+    </div>
+  ) : (
+    <Row>
+      <Col xs={12}>{props.children}</Col>
+    </Row>
+  );
+
+export const ProjectUsersBadge = (props: OwnProps) => {
   const project = useSelector(getProject);
   const {
     loading,
@@ -44,46 +59,42 @@ export const ProjectUsersBadge = () => {
     [users],
   );
 
-  return (
-    <div className="d-flex justify-content-start align-items-xl-center flex-xl-row flex-column gap-xl-6">
-      {loading ? (
-        <LoadingSpinner />
-      ) : error ? (
-        <>{translate('Unable to load users')}</>
-      ) : (
-        <>
-          {managers && managers.length > 0 && (
-            <Form.Group as={Row} className="mb-1">
-              <Form.Label column xs="auto">
-                {translate(ENV.roles.manager)}:
-              </Form.Label>
-              <Col>
-                <SymbolsGroup items={managers} max={6} onClick={goToUsers} />
-              </Col>
-            </Form.Group>
-          )}
-          {admins && admins.length > 0 && (
-            <Form.Group as={Row} className="mb-1">
-              <Form.Label column xs="auto">
-                {translate(ENV.roles.admin)}:
-              </Form.Label>
-              <Col>
-                <SymbolsGroup items={admins} max={6} onClick={goToUsers} />
-              </Col>
-            </Form.Group>
-          )}
-          {members && members.length > 0 && (
-            <Form.Group as={Row} className="mb-1">
-              <Form.Label column xs="auto">
-                {translate(ENV.roles.member)}:
-              </Form.Label>
-              <Col>
-                <SymbolsGroup items={members} max={6} onClick={goToUsers} />
-              </Col>
-            </Form.Group>
-          )}
-        </>
+  return loading ? (
+    <LoadingSpinner />
+  ) : error ? (
+    <>{translate('Unable to load users')}</>
+  ) : (
+    <LayoutWrapper isHorizontal={props.isHorizontal}>
+      {managers && managers.length > 0 && (
+        <Form.Group as={Row} className="mb-1">
+          <Form.Label column xs="auto">
+            {translate(ENV.roles.manager)}:
+          </Form.Label>
+          <Col>
+            <SymbolsGroup items={managers} max={6} onClick={goToUsers} />
+          </Col>
+        </Form.Group>
       )}
-    </div>
+      {admins && admins.length > 0 && (
+        <Form.Group as={Row} className="mb-1">
+          <Form.Label column xs="auto">
+            {translate(ENV.roles.admin)}:
+          </Form.Label>
+          <Col>
+            <SymbolsGroup items={admins} max={6} onClick={goToUsers} />
+          </Col>
+        </Form.Group>
+      )}
+      {members && members.length > 0 && (
+        <Form.Group as={Row} className="mb-1">
+          <Form.Label column xs="auto">
+            {translate(ENV.roles.member)}:
+          </Form.Label>
+          <Col>
+            <SymbolsGroup items={members} max={6} onClick={goToUsers} />
+          </Col>
+        </Form.Group>
+      )}
+    </LayoutWrapper>
   );
 };

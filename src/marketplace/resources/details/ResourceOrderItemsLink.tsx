@@ -19,10 +19,7 @@ export const ResourceOrderItemsLink = ({ resource }) => {
   const dispatch = useDispatch();
 
   return (
-    <a
-      className="cursor-pointer text-dark text-decoration-underline text-hover-primary"
-      onClick={() => dispatch(showOrderItems(resource))}
-    >
+    <a className="text-link" onClick={() => dispatch(showOrderItems(resource))}>
       {translate('Order history')}
     </a>
   );
