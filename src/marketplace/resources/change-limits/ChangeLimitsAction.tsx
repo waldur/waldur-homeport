@@ -37,7 +37,8 @@ export const ChangeLimitsAction: ActionItemType = ({
   ...rest
 }) => {
   const buttonProps = useChangeLimits({ resource, refetch });
-  return resource.plan_uuid && resource.is_limit_based ? (
+  return (resource.plan_uuid || resource.marketplace_plan_uuid) &&
+    resource.is_limit_based ? (
     <ActionItem {...buttonProps} {...rest} />
   ) : null;
 };
