@@ -51,7 +51,7 @@ export const states: StateDeclaration[] = [
     name: 'next',
     component: UIView,
     onEnter: () => {
-      window.location.pathname = '/next/';
+      window.location.pathname = '/';
     },
   },
 ];
