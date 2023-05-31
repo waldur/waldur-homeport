@@ -178,3 +178,14 @@
   line-height: 1.5;
   padding: calc(0.75rem + 1px) calc(1.5rem + 1px);
 }
+
+.text-link {
+  cursor: pointer;
+  color: $dark;
+  text-decoration: underline;
+
+  &:hover {
+    color: $primary;
+    text-decoration: none;
+  }
+}

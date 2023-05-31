@@ -11,7 +11,6 @@ interface DashboardHeroLogoProps {
   logoBottomLabel?: string;
   logoTopClass?: string;
   logoBottomClass?: string;
-  smallLogo?: string;
 }
 
 export const DashboardHeroLogo = (props: DashboardHeroLogoProps) => {
@@ -20,14 +19,6 @@ export const DashboardHeroLogo = (props: DashboardHeroLogoProps) => {
       className="dashboard-hero-logo d-flex align-items-center justify-content-center"
       style={{ width: 150 }}
     >
-      {props.smallLogo && (
-        <div className={'symbol symbol-50px dashboard-small-logo'}>
-          <div
-            className="symbol-label image"
-            style={{ backgroundImage: `url(${props.smallLogo})` }}
-          ></div>
-        </div>
-      )}
       {props.logo ? (
         <Image src={props.logo} size={100} isContain />
       ) : (
