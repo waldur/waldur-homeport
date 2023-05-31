@@ -34,7 +34,7 @@ export const PublicOfferingFacility: FunctionComponent<OwnProps> = ({
                 />
               ) : (
                 <div className="d-flex align-items-center justify-content-center h-100 display-5 text-muted">
-                  No location available
+                  {translate('No location available')}
                 </div>
               )}
             </div>

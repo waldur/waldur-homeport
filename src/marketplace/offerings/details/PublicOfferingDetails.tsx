@@ -72,18 +72,14 @@ export const PublicOfferingDetails: FunctionComponent<PublicOfferingDetailsProps
         <div className="container-xxl py-10">
           <PublicOfferingInfo offering={offering} category={category} />
           <PublicOfferingComponents offering={offering} />
-          {showExperimentalUiComponents && (
-            <PublicOfferingImages offering={offering} />
-          )}
+          <PublicOfferingImages offering={offering} />
           {showExperimentalUiComponents && (
             <PublicOfferingGettingStarted offering={offering} />
           )}
           {showExperimentalUiComponents && <PublicOfferingFAQ />}
           {showExperimentalUiComponents && <PublicOfferingReviews />}
           <PublicOfferingPricing offering={offering} canDeploy={canDeploy} />
-          {showExperimentalUiComponents && (
-            <PublicOfferingFacility offering={offering} />
-          )}
+          <PublicOfferingFacility offering={offering} />
           {showExperimentalUiComponents && <PublicOfferingGetHelp />}
         </div>
       </div>

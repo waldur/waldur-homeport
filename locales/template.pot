@@ -884,7 +884,7 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
+#: src/marketplace/offerings/details/PublicOfferingAttributesCard.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
@@ -5202,6 +5202,10 @@ msgstr ""
 
 #: src/customer/list/CustomerExpandableRow.tsx
 msgid "No invoice data available."
+msgstr ""
+
+#: src/marketplace/offerings/details/PublicOfferingFacility.tsx
+msgid "No location available"
 msgstr ""
 
 #: src/navigation/SearchResultsDropdown.tsx
