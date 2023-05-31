@@ -13,10 +13,10 @@ export const ImageThumbnail: FunctionComponent<ImageThumbnailProps> = (
 ) => {
   return (
     <img
-      src={props.image.thumbnail}
+      src={props.image.thumbnail || props.image.image}
       alt={translate('Image here')}
       onClick={props.onClick}
-      style={{ cursor: 'pointer' }}
+      style={{ cursor: 'pointer', maxWidth: 100 }}
     />
   );
 };

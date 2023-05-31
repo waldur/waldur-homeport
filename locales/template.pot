@@ -920,7 +920,7 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
+#: src/marketplace/offerings/details/PublicOfferingAttributesCard.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
@@ -1379,7 +1379,6 @@ msgstr ""
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
@@ -2494,7 +2493,6 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/details/PageDescription.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
-#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 #: src/marketplace/offerings/details/PublicOfferingInfo.tsx
@@ -5429,6 +5427,10 @@ msgstr ""
 msgid "No invoice data available."
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingFacility.tsx
+msgid "No location available"
+msgstr ""
+
 #: src/navigation/SearchResultsDropdown.tsx
 msgid "No matching offerings found"
 msgstr ""
@@ -7093,7 +7095,6 @@ msgid "Priority"
 msgstr ""
 
 #: src/about.tsx
-#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
 msgid "Privacy Policy"
 msgstr ""
 
@@ -10239,10 +10240,6 @@ msgstr ""
 
 #: src/marketplace/resources/list/EndDateTooltip.tsx
 msgid "Termination date: {date}"
-msgstr ""
-
-#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
-msgid "Terms Of Service"
 msgstr ""
 
 #: src/about.tsx
