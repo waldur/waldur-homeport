@@ -57,11 +57,11 @@ export const SLURMPluginOptionsForm: FunctionComponent<{ container }> = ({
           'service_provider',
         ),
       );
+      dispatch(change(FORM_ID, 'plugin_options.initial_uidnumber', 100000));
+      dispatch(
+        change(FORM_ID, 'plugin_options.initial_primarygroup_number', 100000),
+      );
     }
-    dispatch(change(FORM_ID, 'plugin_options.initial_uidnumber', 100000));
-    dispatch(
-      change(FORM_ID, 'plugin_options.initial_primarygroup_number', 100000),
-    );
   }, []);
 
   useEffect(() => {
