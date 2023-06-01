@@ -20,6 +20,7 @@ import {
 } from '@waldur/marketplace/common/api';
 import { getTitle } from '@waldur/navigation/title';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
+import store from '@waldur/store/store';
 import { getCustomer, getProject, getUser } from '@waldur/workspace/selectors';
 import { UserDetails } from '@waldur/workspace/types';
 
@@ -88,8 +89,13 @@ const getDataForFavoritePage = async (
     title = context.customer?.name || context.customer?.display_name;
     image = context.customer?.image;
   } else if (isDescendantOf('project', state)) {
+    const titleFromState = store
+      .getState()
+      .title.title.replace('resources', '')
+      .trim();
     title = context.project?.name;
     image = context.project?.image;
+    subtitle = titleFromState;
   } else {
     image = '';
   }
