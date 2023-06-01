@@ -1,6 +1,6 @@
 import { getItem, removeItem, setItem } from './AuthStorage';
 
-const key = 'redirectState';
+const key = 'waldur/auth/redirect';
 
 export const setRedirect = (value) => setItem(key, JSON.stringify(value));
 

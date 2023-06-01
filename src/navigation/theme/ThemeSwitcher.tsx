@@ -6,13 +6,14 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
 import { updateThemeMode } from './store';
+import { setTheme } from './ThemeStorage';
 
 export const ThemeSwitcher: FunctionComponent = () => {
   const { theme } = useSelector((state: RootState) => state.theme);
   const dispatch = useDispatch();
   const handleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('themeMode', newTheme);
+    setTheme(newTheme);
     dispatch(updateThemeMode(newTheme));
   };
 

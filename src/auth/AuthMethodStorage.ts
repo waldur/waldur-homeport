@@ -1,6 +1,6 @@
 import { getItem, removeItem, setItem } from './AuthStorage';
 
-const key = 'authenticationMethod';
+const key = 'waldur/auth/method';
 
 export const setAuthenticationMethod = (value: string) => setItem(key, value);
 

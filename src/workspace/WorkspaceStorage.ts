@@ -1,10 +1,12 @@
+import { getItem, removeItem, setItem } from '@waldur/auth/AuthStorage';
+
 const getParsed = (key: string) => {
-  const item = localStorage.getItem(key);
+  const item = getItem(key);
   if (item) {
     try {
       return JSON.parse(item);
     } catch (error) {
-      localStorage.removeItem(key);
+      removeItem(key);
     }
   }
   return null;
@@ -18,28 +20,28 @@ const SIDEBAR_KEY = 'waldur/workspace/sidebar';
 
 class WorkspaceStorageClass {
   setCustomerId = (customerId: string) => {
-    localStorage.setItem(CUSTOMER_KEY, customerId);
+    setItem(CUSTOMER_KEY, customerId);
   };
 
   setProjectId = (projectId: string) => {
-    localStorage.setItem(PROJECT_KEY, projectId);
+    setItem(PROJECT_KEY, projectId);
   };
 
-  getCustomerId = (): string => localStorage.getItem(CUSTOMER_KEY);
+  getCustomerId = (): string => getItem(CUSTOMER_KEY);
 
-  getProjectId = (): string => localStorage.getItem(PROJECT_KEY);
+  getProjectId = (): string => getItem(PROJECT_KEY);
 
-  clearCustomerId = () => localStorage.removeItem(CUSTOMER_KEY);
+  clearCustomerId = () => removeItem(CUSTOMER_KEY);
 
-  clearProjectId = () => localStorage.removeItem(PROJECT_KEY);
+  clearProjectId = () => removeItem(PROJECT_KEY);
 
   setSidebarStatus = (state: { title; value }[]) => {
-    localStorage.setItem(SIDEBAR_KEY, JSON.stringify(state));
+    setItem(SIDEBAR_KEY, JSON.stringify(state));
   };
 
   getSidebarStatus = (): { title; value }[] => getParsed(SIDEBAR_KEY);
 
-  clearSidebarStatus = () => localStorage.removeItem(SIDEBAR_KEY);
+  clearSidebarStatus = () => removeItem(SIDEBAR_KEY);
 }
 
 export const WorkspaceStorage = new WorkspaceStorageClass();

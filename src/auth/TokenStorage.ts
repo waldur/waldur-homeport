@@ -1,6 +1,6 @@
 import { getItem, removeItem, setItem } from './AuthStorage';
 
-const key = 'AUTH_TOKEN';
+const key = 'waldur/auth/token';
 
 export const removeToken = () => removeItem(key);
 
