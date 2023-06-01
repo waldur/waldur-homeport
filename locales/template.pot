@@ -2200,7 +2200,7 @@ msgstr ""
 msgid "Daily available booking time range"
 msgstr ""
 
-#: src/navigation/header/ThemeSwitcher.tsx
+#: src/navigation/theme/ThemeSwitcher.tsx
 msgid "Dark theme"
 msgstr ""
 

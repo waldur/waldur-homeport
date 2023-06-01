@@ -1,8 +1,11 @@
 import { AnyAction } from 'redux';
 
+import { getTheme, setTheme } from './ThemeStorage';
+import { ThemeName } from './types';
+
 export interface Theme {
-  theme: 'dark' | 'light';
-  themes: Record<'dark' | 'light', string> | {};
+  theme: ThemeName;
+  themes: Record<ThemeName, string> | {};
 }
 
 export const ThemeAction = {
@@ -11,14 +14,14 @@ export const ThemeAction = {
 };
 
 const getInitialTheme: any = () => {
-  let currentTheme = localStorage.getItem('themeMode');
+  let currentTheme = getTheme();
   if (!currentTheme) {
     const isDarkPrefers = window.matchMedia(
       '(prefers-color-scheme:dark)',
     ).matches;
     currentTheme = isDarkPrefers ? 'dark' : 'light';
   }
-  localStorage.setItem('themeMode', currentTheme);
+  setTheme(currentTheme);
   return currentTheme;
 };
 
@@ -27,7 +30,7 @@ const INITIAL_STATE: Theme = {
   themes: {},
 };
 
-export const updateThemeMode = (payload) => {
+export const updateThemeMode = (payload: ThemeName) => {
   return { type: ThemeAction.UPDATE_THEME, payload };
 };
 export const addTheme = (payload: Pick<Theme, 'themes'>) => {

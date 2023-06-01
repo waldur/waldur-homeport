@@ -1,6 +1,6 @@
 import { getItem, removeItem, setItem } from '@waldur/auth/AuthStorage';
 
-const key = 'ncInvitationToken';
+const key = 'waldur/invitation/token';
 
 export const setInvitationToken = (value: string) => setItem(key, value);
 

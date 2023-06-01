@@ -29,7 +29,7 @@ declare global {
 import '../e2e/openstack/instance/commands';
 
 Cypress.Commands.add('setToken', () => {
-  window.localStorage.setItem('AUTH_TOKEN', 'valid');
+  window.localStorage.setItem('waldur/auth/token', 'valid');
 });
 
 // Fill and sumbit login form

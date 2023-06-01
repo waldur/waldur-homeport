@@ -9,8 +9,9 @@ import { translate } from '@waldur/i18n';
 import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails } from '@waldur/workspace/types';
 
+import { ThemeSwitcher } from '../theme/ThemeSwitcher';
+
 import { LanguageSelectorDropdown } from './LanguageSelectorDropdown';
-import { ThemeSwitcher } from './ThemeSwitcher';
 import { UserDropdownMenuItems } from './UserDropdownMenuItems';
 import { UserToken } from './UserToken';
 

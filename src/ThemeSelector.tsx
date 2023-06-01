@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '@waldur/store/reducers';
 
-import { addTheme } from './navigation/header/store';
+import { addTheme } from './navigation/theme/store';
 
 function getThemeLinkTag(dark = false) {
   const matchRegex = dark ? /dark-bundle/ : /light-bundle/;

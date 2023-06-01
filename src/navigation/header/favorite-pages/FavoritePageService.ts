@@ -1,8 +1,9 @@
 import { uniqueId } from 'lodash';
 
+import { getItem, removeItem, setItem } from '@waldur/auth/AuthStorage';
 import { Customer, Project, UserDetails } from '@waldur/workspace/types';
 
-const FAVORITE_PAGES_KEY = 'favorites';
+const FAVORITE_PAGES_KEY = 'waldur/favorite/pages';
 
 export interface FavoritePage {
   id: string;
@@ -28,14 +29,11 @@ class FavoritePageServiceClass {
       id = uniqueId();
     }
     const newPage = { ...page, id };
-    localStorage.setItem(
-      FAVORITE_PAGES_KEY,
-      JSON.stringify(prevList.concat(newPage)),
-    );
+    setItem(FAVORITE_PAGES_KEY, JSON.stringify(prevList.concat(newPage)));
   };
 
   list = (): FavoritePage[] => {
-    const prevList = localStorage.getItem(FAVORITE_PAGES_KEY);
+    const prevList = getItem(FAVORITE_PAGES_KEY);
     if (prevList) {
       try {
         const jsonList = JSON.parse(prevList);
@@ -43,7 +41,7 @@ class FavoritePageServiceClass {
           return jsonList;
         }
       } catch (error) {
-        localStorage.removeItem(FAVORITE_PAGES_KEY);
+        removeItem(FAVORITE_PAGES_KEY);
       }
     }
     return [];
@@ -52,7 +50,7 @@ class FavoritePageServiceClass {
   remove = (page: FavoritePage) => {
     const prevList = this.list();
     const newList = prevList.filter((p) => p.id !== page.id);
-    localStorage.setItem(FAVORITE_PAGES_KEY, JSON.stringify(newList));
+    setItem(FAVORITE_PAGES_KEY, JSON.stringify(newList));
   };
 }
 
