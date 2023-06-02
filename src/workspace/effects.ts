@@ -34,7 +34,10 @@ export function* refreshCurrentCustomer() {
   }
 }
 
-function* initWorkspace() {
+function* initWorkspace(action) {
+  if (!action.payload.user) {
+    return;
+  }
   const currentCustomer = yield select(getCustomerSelector);
   const currentProject = yield select(getProjectSelector);
 
