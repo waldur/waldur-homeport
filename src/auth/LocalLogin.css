@@ -26,6 +26,15 @@
   margin: 0 18px;
 }
 
+.LoginWithLocalAccountText {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  text-decoration: underline;
+  color: #4e8223;
+  cursor: pointer;
+}
+
 .LoginSubmitButton {
   background: #3a8500;
   color: white;

@@ -27,10 +27,10 @@ export const LoginColumn = () => {
             />
           </div>
           <AuthHeader />
+          <IdentityProviderSelector features={features} />
           {features.SigninForm && (
             <LocalLogin enableSeperator={features.enableSeperator} />
           )}
-          <IdentityProviderSelector features={features} />
           <UserAuthWarning />
           <PoweredBy />
         </div>
