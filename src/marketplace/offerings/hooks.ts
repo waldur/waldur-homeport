@@ -24,7 +24,9 @@ export const useOfferingDropdownActions = () => {
       label: translate('Add offerings'),
       icon: 'fa fa-plus',
       action: () => {
-        router.stateService.go('marketplace-offering-create');
+        router.stateService.go('marketplace-offering-create', {
+          uuid: customer.uuid,
+        });
       },
     },
     {
