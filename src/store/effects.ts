@@ -8,7 +8,6 @@ import paymentsSaga from '@waldur/customer/payments/store/effects';
 import invoicesSaga from '@waldur/invoices/store/effects';
 import issueAttachmentsSaga from '@waldur/issues/attachments/effects';
 import issueCommentsSaga from '@waldur/issues/comments/effects';
-import securityIncidentSaga from '@waldur/issues/security-incident/store/effects';
 import marketplaceSaga from '@waldur/marketplace/store/effects';
 import { effects as titleEffects } from '@waldur/navigation/title';
 import projectSaga from '@waldur/project/effects';
@@ -28,7 +27,6 @@ export default [
   customerDetailsSaga,
   issueAttachmentsSaga,
   issueCommentsSaga,
-  securityIncidentSaga,
   tableSaga,
   serviceUsageSaga,
   resourceSummarySaga,

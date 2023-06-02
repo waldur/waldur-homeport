@@ -4,9 +4,6 @@ import { createDeferred } from '@waldur/core/utils';
 
 import { ConfirmationDialog } from './ConfirmationDialog';
 
-export const OPEN = 'waldur/modal/OPEN';
-export const CLOSE = 'waldur/modal/CLOSE';
-
 export type DialogSizeType = 'lg' | 'xl';
 
 export const openModalDialog = <P = any>(
