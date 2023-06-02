@@ -72,11 +72,6 @@ export const getNodeConsoleUrl = (id) =>
     (response) => response.data.url,
   );
 
-export const getNodeConsoleLog = (id) =>
-  get<string>(`/rancher-nodes/${id}/console_log/`).then(
-    (response) => response.data,
-  );
-
 export const listWorkloads = (params) =>
   getAll<Workload>('/rancher-workloads/', params);
 

@@ -60,11 +60,6 @@ export interface OfferingOptions {
   options: { [key: string]: OptionField };
 }
 
-export interface ComparedOffering {
-  name: string;
-  attributes: AttributesType;
-}
-
 interface Quota {
   name: string;
   limit: number;

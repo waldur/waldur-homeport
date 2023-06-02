@@ -13,24 +13,6 @@ export interface AvailabilitySlot {
   end: Date | string;
 }
 
-export const createCalendarBookingEvent = ({
-  type,
-  allDay,
-  constraint,
-  start,
-  end,
-  id,
-  title,
-}: EventInput) => ({
-  id: id || uniqueId('booking'),
-  type,
-  allDay,
-  constraint,
-  start,
-  end,
-  title,
-});
-
 export const deleteCalendarBooking = (events, booking) => {
   let removedEvent = null;
   events.getAll().map((field, index) => {

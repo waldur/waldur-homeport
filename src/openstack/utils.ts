@@ -1,6 +1,4 @@
 import { ENV } from '@waldur/configs/default';
-import { get } from '@waldur/core/api';
-import { format } from '@waldur/core/ErrorMessageFormatter';
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { ActionContext } from '@waldur/resource/actions/types';
@@ -8,10 +6,6 @@ import { ActionContext } from '@waldur/resource/actions/types';
 import { listToDict } from '../core/utils';
 
 const ipRegex = require('ip-regex');
-
-interface ConsoleResponse {
-  url: string;
-}
 
 const quotaNames = {
   storage: 'disk',
@@ -78,24 +72,6 @@ export const validatePrivateCIDR = (value) => {
   if (!value.match(PRIVATE_CIDR_PATTERN)) {
     return translate('Enter private IPv4 CIDR.');
   }
-};
-
-const getConsoleURL = (moduleName: string, id: string) =>
-  get<ConsoleResponse>(`/${moduleName}/${id}/console/`);
-
-export const executeConsoleAction = (resource, moduleName: string) => {
-  getConsoleURL(moduleName, resource.uuid)
-    .then((response) => {
-      window.open(response.data.url);
-    })
-    .catch((error) => {
-      const ctx = { message: format(error) };
-      const message = translate(
-        'Unable to open console. Error message: {message}',
-        ctx,
-      );
-      alert(message);
-    });
 };
 
 export const validatePermissionsForConsoleAction = (ctx: ActionContext) => {

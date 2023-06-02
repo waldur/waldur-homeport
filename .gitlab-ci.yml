@@ -66,6 +66,19 @@ Run jest tests:
         coverage_format: cobertura
         path: coverage/cobertura-coverage.xml
 
+Check dead code:
+  stage: test
+  interruptible: true
+  rules:
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
+    # If event is related to a created merge request
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  script:
+    - yarn run --silent ts-prune | grep -v "used in module" | grep -v "src/metronic/" || true
+
 Run E2E tests:
   image:
     name: registry.hpc.ut.ee/mirror/cypress/included:10.7.0

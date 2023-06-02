@@ -12,8 +12,6 @@ const getCart = (state: RootState) => state.marketplace.cart;
 
 export const getItems = (state: RootState) => getCart(state).items;
 
-export const getCount = (state: RootState) => getItems(state).length;
-
 export const isAddingItem = (state: RootState) => getCart(state).addingItem;
 
 export const isRemovingItem = (state: RootState) => getCart(state).removingItem;

@@ -19,7 +19,6 @@ const getCategory = (state: RootState) => state.marketplace.category;
 export const getFilterName = (state: RootState) =>
   getCategory(state).filterQuery;
 export const isLoading = (state: RootState) => getCategory(state).loading;
-export const isLoaded = (state: RootState) => getCategory(state).loaded;
 export const isErred = (state: RootState) => getCategory(state).erred;
 export const getSections = (state: RootState) => getCategory(state).sections;
 
