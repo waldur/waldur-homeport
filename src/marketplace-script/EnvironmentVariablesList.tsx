@@ -1,29 +1,36 @@
 import { FunctionComponent } from 'react';
-import { Col, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-import { EnvironmentVariableAddButton } from './EnvironmentVariableAddButton';
 import { EnvironmentVariablePanel } from './EnvironmentVariablePanel';
+import { ScriptEditorAddButton } from './ScriptEditorAddButton';
 
 export const EnvironmentVariablesList: FunctionComponent<any> = (props) => (
   <Form.Group>
-    <Col sm={{ span: 8, offset: 2 }} className="mb-2">
-      <p>
-        <strong>{translate('Environment variables')}</strong>
-      </p>
-    </Col>
-
-    <Col smOffset={2} sm={8}>
-      {props.fields.map((variable, index) => (
-        <EnvironmentVariablePanel
-          key={index}
-          variable={variable}
-          index={index}
-          onRemove={props.fields.remove}
-        />
-      ))}
-      <EnvironmentVariableAddButton onClick={() => props.fields.push({})} />
-    </Col>
+    <div className="d-flex justify-content-between align-items-center border-bottom border-top p-2">
+      <strong>{translate('Environment variables')}</strong>
+      <ScriptEditorAddButton onClick={() => props.fields.push({})} />
+    </div>
+    <table className="table table-sm table-hover">
+      <tbody>
+        {props.fields.length ? (
+          props.fields.map((variable, index) => (
+            <EnvironmentVariablePanel
+              key={index}
+              variable={variable}
+              index={index}
+              onRemove={props.fields.remove}
+            />
+          ))
+        ) : (
+          <tr>
+            <td className="text-center text-muted">
+              {translate('No variable defined')}
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
   </Form.Group>
 );

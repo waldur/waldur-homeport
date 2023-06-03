@@ -3,6 +3,8 @@ import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { serializer } from '@waldur/support/serializer';
 
+import { OFFERING_TYPE_CUSTOM_SCRIPTS } from './constants';
+
 const OfferingConfigurationDetails = lazyComponent(
   () => import('@waldur/support/OfferingConfigurationDetails'),
   'OfferingConfigurationDetails',
@@ -14,7 +16,7 @@ const OfferingConfigurationForm = lazyComponent(
 const ScriptsForm = lazyComponent(() => import('./ScriptsForm'), 'ScriptsForm');
 
 registerOfferingType({
-  type: 'Marketplace.Script',
+  type: OFFERING_TYPE_CUSTOM_SCRIPTS,
   get label() {
     return translate('Custom scripts');
   },

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Button, FormGroup } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 
@@ -9,14 +9,13 @@ import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 export const TestScriptButton: FunctionComponent<{
-  container;
   type: string;
   disabled?: boolean;
-}> = ({ container, type, disabled = false }) => {
+}> = ({ type, disabled = false }) => {
   const dispatch = useDispatch();
   const { offering } = useSelector(getOffering);
 
-  const [{ loading, error }, testScript] = useAsyncFn(async () => {
+  const [{ loading }, testScript] = useAsyncFn(async () => {
     const planUrl = offering?.plans?.length ? offering.plans[0].url : null;
     try {
       await runOfferingScript(offering.uuid, planUrl, type);
@@ -33,27 +32,14 @@ export const TestScriptButton: FunctionComponent<{
   }, [offering?.plans]);
 
   return (
-    <FormGroup>
-      <div className={container.labelClass} />
-      <div className={container.controlClass}>
-        <Button
-          variant="success"
-          onClick={() => testScript()}
-          disabled={disabled || loading}
-        >
-          {loading ? (
-            <>
-              <i className="fa fa-spinner fa-spin" />{' '}
-            </>
-          ) : (
-            <>
-              <i className="fa fa-terminal" />{' '}
-            </>
-          )}
-          {translate('Test {type}', { type })}
-        </Button>
-        {error && <span className="text-danger">{error.message}</span>}
-      </div>
-    </FormGroup>
+    <Button
+      variant="light"
+      className="btn-color-dark btn-active-color-dark me-2"
+      onClick={() => testScript()}
+      disabled={disabled || loading}
+    >
+      {loading ? <i className="fa fa-pause" /> : <i className="fa fa-play" />}{' '}
+      {translate('Dry run script')}
+    </Button>
   );
 };

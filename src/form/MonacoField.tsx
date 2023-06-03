@@ -1,7 +1,9 @@
 import React, { lazy, Suspense } from 'react';
+import { useSelector } from 'react-redux';
 import { Validator } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { RootState } from '@waldur/store/reducers';
 
 interface MonacoFieldProps {
   name?: string;
@@ -26,6 +28,11 @@ const ReactMonacoDiff = lazy(() =>
   loader().then((module) => ({ default: module.MonacoDiffEditor })),
 );
 
+const getTheme = (): string => {
+  const theme = useSelector((state: RootState) => state.theme?.theme);
+  return theme === 'dark' ? 'vs-dark' : 'vs-light';
+};
+
 export const MonacoField: React.FC<MonacoFieldProps> = (props) => (
   <Suspense fallback={<LoadingSpinner />}>
     {props.diff ? (
@@ -37,6 +44,7 @@ export const MonacoField: React.FC<MonacoFieldProps> = (props) => (
         original={props.original}
         options={props.options}
         width={props.width}
+        theme={getTheme()}
       />
     ) : (
       <ReactMonacoEditor
@@ -46,6 +54,7 @@ export const MonacoField: React.FC<MonacoFieldProps> = (props) => (
         value={props.input.value}
         onChange={props.input.onChange}
         options={props.options}
+        theme={getTheme()}
       />
     )}
   </Suspense>

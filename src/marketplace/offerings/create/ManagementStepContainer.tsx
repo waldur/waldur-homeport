@@ -44,6 +44,7 @@ const mapStateToProps = (state: RootState) => {
       const providerConfig = findProvider(providerType);
       props.serviceSettingsForm = providerConfig.component;
     }
+    props.type = type;
   }
   return props;
 };

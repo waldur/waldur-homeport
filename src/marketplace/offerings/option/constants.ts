@@ -1,5 +1,7 @@
 import { FieldType } from './types';
 
+export const OPTION_FORM_ID = 'offeringOptionForm';
+
 export const FIELD_TYPES: Array<{ value: FieldType; label: string }> = [
   {
     value: 'boolean',

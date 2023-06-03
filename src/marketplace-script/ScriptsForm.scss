@@ -1,0 +1,13 @@
+.marketplace-script-form {
+  position: relative;
+
+  .script-editor-drawer {
+    position: absolute;
+    width: 400px;
+    z-index: 90;
+  }
+  .drawer-overlay {
+    position: absolute;
+    z-index: 89;
+  }
+}
