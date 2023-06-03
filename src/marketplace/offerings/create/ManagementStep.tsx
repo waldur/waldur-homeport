@@ -7,6 +7,7 @@ import { FormContainer, SelectField, StringField } from '@waldur/form';
 import { FormFieldsContext } from '@waldur/form/context';
 import { StaticField } from '@waldur/form/StaticField';
 import { translate } from '@waldur/i18n';
+import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 import { Option } from '@waldur/marketplace/common/registry';
 import { ProviderFormProps } from '@waldur/providers/types';
 
@@ -21,6 +22,7 @@ export interface ManagementStepProps {
   serviceSettingsForm?: React.ComponentType<ProviderFormProps>;
   offeringTypes: Option[];
   editable: boolean;
+  type?: string;
   typeLabel?: string;
   showBackendId?: boolean;
   allowToUpdateService?: boolean;
@@ -74,20 +76,29 @@ export const ManagementStep: FunctionComponent<ManagementStepProps> = (
       {props.schedulable && (
         <FieldArray name="schedules" component={OfferingScheduler} />
       )}
-      {props.showOptions && (
-        <FieldArray
-          name="options"
-          component={OfferingOptions}
-          readOnly={readOnlyFields.includes('options')}
-        />
-      )}
-      {props.secretOptionsForm && (
-        <FormSection name="secret_options">
-          {React.createElement(props.secretOptionsForm, {
-            container: ContainerProps,
-            dryRunOfferingScript: props.dryRunOfferingScript,
-          })}
-        </FormSection>
+      {props.type === OFFERING_TYPE_CUSTOM_SCRIPTS ? (
+        // NOTE: In custom scripts offering types the options (User input fields) are wrapped in the secretOptionsForm component
+        props.secretOptionsForm &&
+        React.createElement(props.secretOptionsForm, {
+          dryRunOfferingScript: props.dryRunOfferingScript,
+        })
+      ) : (
+        <>
+          {props.showOptions && (
+            <FieldArray
+              name="options"
+              component={OfferingOptions}
+              readOnly={readOnlyFields.includes('options')}
+            />
+          )}
+          {props.secretOptionsForm && (
+            <FormSection name="secret_options">
+              {React.createElement(props.secretOptionsForm, {
+                container: ContainerProps,
+              })}
+            </FormSection>
+          )}
+        </>
       )}
       {props.showBackendId && (
         <FormContainer {...ContainerProps}>

@@ -323,10 +323,6 @@ msgstr ""
 msgid "Add email"
 msgstr ""
 
-#: src/marketplace-script/EnvironmentVariableAddButton.tsx
-msgid "Add environment variable"
-msgstr ""
-
 #: src/marketplace/offerings/images/CreateImageButton.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 msgid "Add image"
@@ -1434,7 +1430,12 @@ msgstr ""
 msgid "Checkout"
 msgstr ""
 
+#: src/marketplace/offerings/option/OfferingOptionsScriptEditor.tsx
+msgid "Choices"
+msgstr ""
+
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/offerings/option/OptionFormDialog.tsx
 msgid "Choices as comma-separated list"
 msgstr ""
 
@@ -1803,7 +1804,9 @@ msgstr ""
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
+#: src/marketplace-script/ScriptsForm.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
+#: src/marketplace/offerings/option/OptionFormDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
@@ -2294,6 +2297,10 @@ msgstr ""
 msgid "Deactivating"
 msgstr ""
 
+#: src/marketplace/offerings/option/OfferingOptionsScriptEditor.tsx
+msgid "Default"
+msgstr ""
+
 #: src/slurm/SlurmForm.tsx
 msgid "Default SLURM account for user"
 msgstr ""
@@ -2317,6 +2324,7 @@ msgid "Default tax percent"
 msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/offerings/option/OptionFormDialog.tsx
 msgid "Default value"
 msgstr ""
 
@@ -2325,7 +2333,9 @@ msgstr ""
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/issues/comments/IssueCommentItem.tsx
+#: src/marketplace-script/ScriptsForm.tsx
 #: src/marketplace/offerings/images/ImagesActions.tsx
+#: src/marketplace/offerings/option/OptionFormDialog.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
@@ -2406,6 +2416,7 @@ msgstr ""
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/offerings/option/OptionFormDialog.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
@@ -2667,6 +2678,10 @@ msgstr ""
 msgid "Drop files to attach, or"
 msgstr ""
 
+#: src/marketplace-script/TestScriptButton.tsx
+msgid "Dry run script"
+msgstr ""
+
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -2696,6 +2711,7 @@ msgstr ""
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/option/OfferingOptionsScriptEditor.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
@@ -3743,6 +3759,7 @@ msgid "If defined, will be set as a password for all offering users"
 msgstr ""
 
 #: src/marketplace/offerings/option/OfferingOptions.tsx
+#: src/marketplace/offerings/option/OfferingOptionsScriptEditor.tsx
 msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
 msgstr ""
 
@@ -4260,6 +4277,7 @@ msgid "Kept until"
 msgstr ""
 
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Key"
@@ -4614,11 +4632,16 @@ msgstr ""
 msgid "Max replicas"
 msgstr ""
 
+#: src/marketplace/offerings/option/OfferingOptionsScriptEditor.tsx
+msgid "Max value"
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/actions/fields.ts
 msgid "Maximal number of resources"
 msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/offerings/option/OptionFormDialog.tsx
 msgid "Maximal value"
 msgstr ""
 
@@ -4735,6 +4758,10 @@ msgstr ""
 msgid "Min storage"
 msgstr ""
 
+#: src/marketplace/offerings/option/OfferingOptionsScriptEditor.tsx
+msgid "Min value"
+msgstr ""
+
 #: src/openstack/openstack-tenant/TenantImagesList.tsx
 msgid "Minimal RAM"
 msgstr ""
@@ -4748,6 +4775,7 @@ msgid "Minimal disk"
 msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/offerings/option/OptionFormDialog.tsx
 msgid "Minimal value"
 msgstr ""
 
@@ -4887,7 +4915,6 @@ msgstr ""
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
-#: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -5295,6 +5322,11 @@ msgstr ""
 
 #: src/issues/feedback/UserAutocomplete.tsx
 msgid "No users"
+msgstr ""
+
+#: src/marketplace-script/EnvironmentVariablesList.tsx
+#: src/marketplace/offerings/option/OfferingOptionsScriptEditor.tsx
+msgid "No variable defined"
 msgstr ""
 
 #: src/invitations/InvitationButtons.tsx
@@ -7227,6 +7259,7 @@ msgstr ""
 msgid "Publisher"
 msgstr ""
 
+#: src/marketplace-script/ScriptsForm.tsx
 #: src/marketplace/resources/mass-actions/MultiPullAction.tsx
 msgid "Pull"
 msgstr ""
@@ -7803,6 +7836,7 @@ msgid "Requests"
 msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/offerings/option/OptionFormDialog.tsx
 msgid "Required"
 msgstr ""
 
@@ -8319,6 +8353,7 @@ msgstr ""
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/expandable/utils.ts
+#: src/marketplace/offerings/option/OptionFormDialog.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
@@ -9866,10 +9901,6 @@ msgstr ""
 msgid "Terms of service"
 msgstr ""
 
-#: src/marketplace-script/TestScriptButton.tsx
-msgid "Test {type}"
-msgstr ""
-
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
 #: src/marketplace/resources/details/ResourceAccessCard.tsx
@@ -10322,6 +10353,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
+#: src/marketplace/offerings/option/OptionFormDialog.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsFilter.tsx
@@ -11447,6 +11479,7 @@ msgstr ""
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/marketplace-script/ScriptsForm.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
@@ -11704,6 +11737,14 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OfferingOptions.tsx
 msgid "User input field #{index}"
+msgstr ""
+
+#: src/marketplace/offerings/option/OptionFormDialog.tsx
+msgid "User input variable"
+msgstr ""
+
+#: src/marketplace/offerings/option/OfferingOptionsScriptEditor.tsx
+msgid "User input variables"
 msgstr ""
 
 #: src/navigation/header/quick-issue-drawer/UserIssuesTable.tsx
@@ -12111,10 +12152,6 @@ msgstr ""
 
 #: src/marketplace/common/utils.ts
 msgid "Value should not be negative."
-msgstr ""
-
-#: src/marketplace-script/EnvironmentVariablePanel.tsx
-msgid "Variable #{index}"
 msgstr ""
 
 #: src/marketplace/landing/DeploymentIntroduction.tsx

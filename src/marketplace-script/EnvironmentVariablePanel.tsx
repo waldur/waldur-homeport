@@ -1,11 +1,9 @@
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Field, FormSection } from 'redux-form';
 
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { RemoveButton } from '@waldur/marketplace/offerings/RemoveButton';
 
 interface OwnProps {
   index: number;
@@ -15,23 +13,37 @@ interface OwnProps {
 
 export const EnvironmentVariablePanel: FunctionComponent<OwnProps> = (
   props,
-) => (
-  <Card>
-    <Card.Header>
-      <Card.Title>
-        <h3>{translate('Variable #{index}', { index: props.index + 1 })}</h3>
-      </Card.Title>
-      <RemoveButton onClick={() => props.onRemove(props.index)} />
-    </Card.Header>
-    <Card.Body>
-      <FormSection name={props.variable}>
-        <FormGroup label={translate('Name')} required={true}>
-          <Field name="name" component={InputField} />
-        </FormGroup>
-        <FormGroup label={translate('Value')} required={true}>
-          <Field name="value" component={InputField} />
-        </FormGroup>
-      </FormSection>
-    </Card.Body>
-  </Card>
-);
+) => {
+  return (
+    <FormSection name={props.variable}>
+      <tr className="border-bottom">
+        <td>
+          <Field
+            name="name"
+            component={InputField}
+            placeholder={translate('Key')}
+            className=""
+          />
+        </td>
+        <td>
+          <Field
+            name="value"
+            component={InputField}
+            placeholder={translate('Value')}
+            className=""
+          />
+        </td>
+        <td>
+          <Button
+            variant="icon"
+            size="sm"
+            className="btn-active-color-danger"
+            onClick={() => props.onRemove(props.index)}
+          >
+            <i className="fa fa-times fs-6" />
+          </Button>
+        </td>
+      </tr>
+    </FormSection>
+  );
+};

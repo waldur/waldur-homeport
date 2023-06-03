@@ -21,7 +21,7 @@ const selector = formValueSelector(FORM_ID);
 const connector = connect<{ type?: string }, {}, { option: string }>(
   (state, ownProps) => {
     const option = selector(state, ownProps.option);
-    if (option.type) {
+    if (option?.type) {
       return { type: option.type.value };
     } else {
       return {};
