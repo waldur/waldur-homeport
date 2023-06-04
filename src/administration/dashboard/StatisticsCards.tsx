@@ -54,28 +54,32 @@ export const StatisticsCards = () => {
     const counts: Partial<typeof data> = data || {};
     return [
       {
-        title: 'Organizations',
+        title: translate('Organizations'),
         count: counts.organizations,
         viewLinkState: 'admin.customers',
       },
       {
-        title: 'Projects',
+        title: translate('Projects'),
         count: counts.projects,
         viewLinkState: 'admin.projects',
       },
-      { title: 'Users', count: counts.users, viewLinkState: 'admin.users' },
       {
-        title: 'Categories',
+        title: translate('Users'),
+        count: counts.users,
+        viewLinkState: 'admin.users',
+      },
+      {
+        title: translate('Categories'),
         count: counts.categories,
         viewLinkState: 'admin.marketplace-categories',
       },
       {
-        title: 'Offerings',
+        title: translate('Offerings'),
         count: counts.providerOfferings,
         viewLinkState: 'admin.marketplace-offerings',
       },
       {
-        title: 'Resources',
+        title: translate('Resources'),
         count: counts.resources,
         viewLinkState: 'marketplace-admin-resources',
       },
