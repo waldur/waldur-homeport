@@ -61,6 +61,7 @@ export class OpenStackPackageForm extends Component<OfferingConfigurationFormPro
           <TextField
             label={translate('Tenant description')}
             name="attributes.description"
+            rows={1}
           />
           {ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE && (
             <LabelField label={translate('Access')} />

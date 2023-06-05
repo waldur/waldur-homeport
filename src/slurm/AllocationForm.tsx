@@ -41,6 +41,7 @@ export class AllocationForm extends Component<OfferingConfigurationFormProps> {
           <TextField
             label={translate('Allocation description')}
             name="attributes.description"
+            rows={1}
           />
         </FormContainer>
       </form>

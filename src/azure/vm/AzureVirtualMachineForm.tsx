@@ -116,6 +116,7 @@ export const AzureVirtualMachineForm: React.FC<OfferingConfigurationFormProps> =
           <TextField
             label={translate('Description')}
             name="attributes.description"
+            rows={1}
           />
         </FormContainer>
       </form>

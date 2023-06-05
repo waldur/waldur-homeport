@@ -42,6 +42,7 @@ export const AzureSQLServerForm: React.FC<OfferingConfigurationFormProps> = (
         <TextField
           label={translate('SQL server description')}
           name="attributes.description"
+          rows={1}
         />
       </FormContainer>
     </form>

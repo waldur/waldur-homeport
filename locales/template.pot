@@ -1291,6 +1291,7 @@ msgstr ""
 msgid "Catalogues"
 msgstr ""
 
+#: src/administration/dashboard/StatisticsCards.tsx
 #: src/marketplace/category/utils.ts
 #: src/marketplace/offerings/service-providers/ServiceProviderPageBar.tsx
 #: src/marketplace/routes.ts
@@ -5465,6 +5466,10 @@ msgstr ""
 msgid "Offering configuration"
 msgstr ""
 
+#: src/marketplace/details/OfferingDetails.tsx
+msgid "Offering description"
+msgstr ""
+
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/details/OverviewTab.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
@@ -5568,6 +5573,7 @@ msgstr ""
 msgid "Offering users synchronization has been scheduled."
 msgstr ""
 
+#: src/administration/dashboard/StatisticsCards.tsx
 #: src/issues/routes.ts
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
@@ -5997,6 +6003,7 @@ msgstr ""
 msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
+#: src/administration/dashboard/StatisticsCards.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/issues/routes.ts
@@ -6997,6 +7004,7 @@ msgstr ""
 msgid "Project {project_name} has been deleted."
 msgstr ""
 
+#: src/administration/dashboard/StatisticsCards.tsx
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/routes.ts
@@ -7939,6 +7947,7 @@ msgstr ""
 msgid "Resource usage for {resource}"
 msgstr ""
 
+#: src/administration/dashboard/StatisticsCards.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
@@ -11856,6 +11865,7 @@ msgstr ""
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
 
+#: src/administration/dashboard/StatisticsCards.tsx
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
