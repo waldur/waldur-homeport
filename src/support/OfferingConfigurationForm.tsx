@@ -79,6 +79,7 @@ export class PureOfferingConfigurationForm extends Component<OfferingConfigurati
           <TextField
             name="attributes.description"
             label={translate('Description')}
+            rows={1}
           />
           {props.offering.options.order &&
             props.offering.options.order.map((key) => {

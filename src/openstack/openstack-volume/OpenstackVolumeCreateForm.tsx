@@ -134,6 +134,7 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
             label={translate('Description')}
             name="attributes.description"
             maxLength={2000}
+            rows={1}
           />
         </FormContainer>
       </form>

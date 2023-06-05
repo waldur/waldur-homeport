@@ -261,6 +261,7 @@ const FormComponent = (props: any) => {
         <TextField
           label={translate('Description')}
           name="attributes.description"
+          rows={1}
         />
       </FormContainer>
     </form>

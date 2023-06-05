@@ -25,11 +25,6 @@ export const OfferingDetails: FunctionComponent<OfferingDetailsProps> = (
   );
   return (
     <>
-      {props.offering.description && (
-        <div className="bs-callout bs-callout-success">
-          <FormattedHtml html={props.offering.description} />
-        </div>
-      )}
       <Row>
         <Col md={9}>
           <Card>
@@ -45,6 +40,18 @@ export const OfferingDetails: FunctionComponent<OfferingDetailsProps> = (
           </Card>
         </Col>
         <Col md={3}>
+          {props.offering.description && (
+            <Card className="mb-6">
+              <Card.Body>
+                <h3 className="header-bottom-border">
+                  {translate('Offering description')}
+                </h3>
+                <div className="bs-callout bs-callout-success">
+                  <FormattedHtml html={props.offering.description} />
+                </div>
+              </Card.Body>
+            </Card>
+          )}
           <Card>
             <Card.Body>
               <h3 className="header-bottom-border">

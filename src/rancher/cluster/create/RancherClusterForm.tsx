@@ -69,6 +69,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
         <TextField
           label={translate('Cluster description')}
           name="attributes.description"
+          rows={1}
         />
         {!ENV.plugins.WALDUR_RANCHER.DISABLE_SSH_KEY_INJECTION && (
           <AsyncSelectField
