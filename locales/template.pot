@@ -9137,8 +9137,11 @@ msgid "Size: {size}"
 msgstr ""
 
 #: src/marketplace/resources/details/openstack-instance/VolumesSection.tsx
-#: src/marketplace/resources/details/openstack-tenant/VolumesSection.tsx
 msgid "Size: {size}, attached to: {device}"
+msgstr ""
+
+#: src/marketplace/resources/details/openstack-tenant/VolumesSection.tsx
+msgid "Size: {size}, attached to: {device}, volume type: {type}"
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
