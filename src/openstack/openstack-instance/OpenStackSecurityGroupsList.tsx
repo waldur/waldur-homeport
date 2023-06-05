@@ -6,6 +6,8 @@ import { translate } from '@waldur/i18n';
 import { OpenStackSecurityGroupsTable } from '../openstack-security-groups/OpenStackSecurityGroupsDialog';
 import { SecurityGroup } from '../openstack-security-groups/types';
 
+import { UpdateSecurityGroupsButton } from './actions/update-security-groups/UpdateSecurityGroupsButton';
+
 interface OwnProps {
   resource: {
     security_groups: SecurityGroup[];
@@ -19,6 +21,9 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
     <Card>
       <Card.Header>
         <Card.Title>{translate('Security groups details')}</Card.Title>
+        <div className="card-toolbar">
+          <UpdateSecurityGroupsButton resource={props.resource} />
+        </div>
       </Card.Header>
       <Card.Body>
         {props.resource.security_groups.length === 0 &&
