@@ -1,6 +1,6 @@
 import { getItem, setItem, removeItem } from '@waldur/auth/AuthStorage';
 
-const key = 'NG_TRANSLATE_LANG_KEY';
+const key = 'waldur/i18n/lang';
 
 export const resetLanguageKey = () => removeItem(key);
 
