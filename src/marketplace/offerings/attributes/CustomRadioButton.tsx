@@ -13,7 +13,7 @@ export const CustomRadioButton: FunctionComponent<CustomRadioButtonProps> = (
 ) => (
   <div className="custom-radio-button">
     {props.choices.map((choice, index) => (
-      <label key={index}>
+      <label key={index} className="d-flex align-items-center mb-3">
         <input
           {...props.input}
           type="radio"
