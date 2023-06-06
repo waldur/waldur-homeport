@@ -4520,6 +4520,10 @@ msgstr ""
 msgid "Manage projects"
 msgstr ""
 
+#: src/openstack/openstack-instance/ManageSecurityGroupsButton.tsx
+msgid "Manage security groups"
+msgstr ""
+
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 msgid "Manage users"
 msgstr ""
