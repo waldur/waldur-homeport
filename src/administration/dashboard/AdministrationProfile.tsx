@@ -40,7 +40,7 @@ export const AdministrationProfile = ({
     <Card className="mb-6">
       <Card.Body>
         <Row>
-          <Col xs="auto">
+          <Col xs="auto" className="mb-4">
             <DashboardHeroLogo
               logo={image}
               logoAlt={ENV.plugins.WALDUR_CORE.SITE_NAME}
@@ -51,7 +51,7 @@ export const AdministrationProfile = ({
             />
           </Col>
           <Col>
-            <Row className="mb-6">
+            <Row className="my-6 mt-md-0">
               <Col>
                 <h2>{ENV.plugins.WALDUR_CORE.SITE_NAME}</h2>
                 <Stack direction="horizontal" className="gap-6 text-muted">

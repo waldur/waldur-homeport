@@ -1,3 +1,5 @@
+@import '../../sass/mixins/mediaqueries.scss';
+
 .dashboard-small-label {
   display: block;
   padding: 2px 18px;
@@ -6,6 +8,11 @@
 
 .dashboard-hero-logo {
   position: relative;
+  width: 150px;
+
+  @include bp(xs) {
+    width: 95px;
+  }
 
   .dashboard-small-label {
     &.top-label {
@@ -20,5 +27,13 @@
       left: 50%;
       transform: translate(-50%, 50%);
     }
+  }
+}
+
+.health-title {
+  font-size: 12px;
+
+  @include bp(xs) {
+    font-size: 11px;
   }
 }

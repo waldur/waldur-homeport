@@ -98,13 +98,13 @@ export const StatisticsCards = () => {
       {statisticsData.map((item) => (
         <Col key={item.title} md={6} lg={4}>
           <Card className="mb-6">
-            <Card.Body>
-              <div className="buttons text-end">
+            <Card.Body className="d-flex d-md-block justify-content-between align-items-center">
+              <div className="buttons text-end order-2">
                 <Link state={item.viewLinkState} className="btn btn-light">
                   {translate('View all')}
                 </Link>
               </div>
-              <div className="mb-4">
+              <div className="mb-4 order-1">
                 {isLoading ? (
                   <LoadingSpinner />
                 ) : (

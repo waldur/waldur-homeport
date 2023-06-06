@@ -15,10 +15,7 @@ interface DashboardHeroLogoProps {
 
 export const DashboardHeroLogo = (props: DashboardHeroLogoProps) => {
   return (
-    <div
-      className="dashboard-hero-logo d-flex align-items-center justify-content-center"
-      style={{ width: 150 }}
-    >
+    <div className="dashboard-hero-logo d-flex align-items-center justify-content-center">
       {props.logo ? (
         <Image src={props.logo} size={100} isContain />
       ) : (
