@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import 'world-flags-sprite/stylesheets/flags16.css';
 
 import { fixURL } from '@waldur/core/api';
-import { hasSupport } from '@waldur/issues/hooks';
+import { hasSupport as hasSupportSelector } from '@waldur/issues/hooks';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getTitle } from '../title';
@@ -61,6 +61,8 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
     ?.data.title();
   const user = useSelector(getUser);
   const imageUrl = fixURL('/icons/sidebar_logo_mobile/');
+
+  const hasSupport = useSelector(hasSupportSelector);
 
   return (
     <div className="header align-items-stretch">
