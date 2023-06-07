@@ -308,10 +308,10 @@ export const getServiceProviderList = (params?: {}) =>
 
 export const getUsers = (params?: {}) => getSelectData('/users/', params);
 
-export const getRuntimeStates = (projectUuid) =>
-  get(`/marketplace-runtime-states/${projectUuid}/`).then(
-    (response) => response.data,
-  );
+export const getRuntimeStates = (projectUuid, categoryUuid?) =>
+  get(`/marketplace-runtime-states/${projectUuid}/`, {
+    params: { category_uuid: categoryUuid },
+  }).then((response) => response.data);
 
 export const createServiceProvider = (params) =>
   post<ServiceProvider>('/marketplace-service-providers/', params).then(

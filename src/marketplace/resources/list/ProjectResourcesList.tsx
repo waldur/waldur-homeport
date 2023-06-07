@@ -5,7 +5,6 @@ import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { RESOURCE_STATES } from '@waldur/marketplace/resources/list/constants';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { CategoryColumn } from '@waldur/marketplace/types';
 import { isVisible } from '@waldur/store/config';
@@ -104,9 +103,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
 };
 
 const mapPropsToFilter = (props: StateProps & OwnProps) => {
-  const filter: Record<string, any> = {
-    state: RESOURCE_STATES,
-  };
+  const filter: Record<string, any> = {};
   if (props.project) {
     filter.project_uuid = props.project.uuid;
   }
@@ -116,8 +113,11 @@ const mapPropsToFilter = (props: StateProps & OwnProps) => {
   if (props.filter?.offering) {
     filter.offering_uuid = props.filter.offering.uuid;
   }
+  if (props.filter?.runtime_state) {
+    filter.runtime_state = props.filter.runtime_state.value;
+  }
   if (props.filter?.state) {
-    filter.state = props.filter.state.value;
+    filter.state = props.filter.state.map((option) => option.value);
   }
   return filter;
 };

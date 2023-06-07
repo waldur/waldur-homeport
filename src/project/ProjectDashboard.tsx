@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { Link } from '@waldur/core/Link';
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { translate } from '@waldur/i18n';
-import { ProjectResourcesFilter } from '@waldur/project/ProjectResourcesFilter';
+import { ProjectResourcesAllList } from '@waldur/marketplace/resources/list/ProjectResourcesAllList';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { getProject, getUser } from '@waldur/workspace/selectors';
@@ -15,7 +15,6 @@ import { ProjectDashboardChart } from './ProjectDashboardChart';
 import { ProjectEventsTimeline } from './ProjectEventsTimeline';
 import { ProjectOrderItemsList } from './ProjectOrderItemsList';
 import { ProjectProfile } from './ProjectProfile';
-import { ProjectResourcesList } from './ProjectResourcesList';
 
 export const ProjectDashboard: FunctionComponent<{}> = () => {
   const shouldConcealPrices = useSelector((state: RootState) =>
@@ -68,7 +67,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           </Col>
         </Row>
       )}
-      <ProjectResourcesList filters={<ProjectResourcesFilter />} />
+      <ProjectResourcesAllList />
     </>
   );
 };

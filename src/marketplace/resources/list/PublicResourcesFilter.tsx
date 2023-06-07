@@ -19,15 +19,8 @@ import {
 
 import { CategoryFilter } from './CategoryFilter';
 import { RelatedCustomerFilter } from './RelatedCustomerFilter';
-import { getStates, ResourceStateFilter } from './ResourceStateFilter';
-
-const getFiltersFromParams = (params) => {
-  if (!params?.state) return params;
-  return {
-    ...params,
-    state: getStates().filter((state) => params.state.includes(state.value)),
-  };
-};
+import { ResourceStateFilter } from './ResourceStateFilter';
+import { NON_TERMINATED_STATES } from './SupportResourcesFilter';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 
@@ -75,11 +68,10 @@ const filterSelector = createSelector(
 
 const mapStateToProps = (state: RootState) => ({
   offeringFilter: filterSelector(state),
-  initialValues: getFiltersFromParams(
-    getInitialValues({
-      state: [getStates()[1]],
-    }),
-  ),
+  onChange: syncFiltersToURL,
+  initialValues: getInitialValues({
+    state: NON_TERMINATED_STATES,
+  }),
 });
 
 const enhance = compose(

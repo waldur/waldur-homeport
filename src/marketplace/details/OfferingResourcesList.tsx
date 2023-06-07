@@ -79,8 +79,8 @@ export const TableComponent: FunctionComponent<any> = (props) => {
 
 const mapPropsToFilter = (props) => {
   const filter: Record<string, string> = {};
-  if (props.filter && props.filter.state) {
-    filter.state = props.filter.state.value;
+  if (props.filter?.state) {
+    filter.state = props.filter.state.map((option) => option.value);
   }
   return {
     offering_uuid: props.offering.uuid,

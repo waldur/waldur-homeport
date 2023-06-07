@@ -1,14 +1,16 @@
 import { FunctionComponent } from 'react';
 import { reduxForm } from 'redux-form';
 
+import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { CategoryFilter } from './CategoryFilter';
+import { ResourceStateFilter } from './ResourceStateFilter';
 import { RuntimeStateFilter } from './RuntimeStateFilter';
-import { ShowTerminatedAndErredFilter } from './ShowTerminatedAndErredFilter';
+import { NON_TERMINATED_STATES } from './SupportResourcesFilter';
 
 const PureProjectResourcesAllFilter: FunctionComponent<{}> = () => (
   <>
@@ -33,12 +35,8 @@ const PureProjectResourcesAllFilter: FunctionComponent<{}> = () => (
     >
       <RuntimeStateFilter />
     </TableFilterItem>
-    <TableFilterItem
-      title={translate('State')}
-      name="state"
-      badgeValue={(value) => value?.label}
-    >
-      <ShowTerminatedAndErredFilter />
+    <TableFilterItem title={translate('State')} name="state">
+      <ResourceStateFilter reactSelectProps={{ isMulti: true }} />
     </TableFilterItem>
   </>
 );
@@ -46,6 +44,10 @@ const PureProjectResourcesAllFilter: FunctionComponent<{}> = () => (
 const enhance = reduxForm({
   form: PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
   destroyOnUnmount: false,
+  onChange: syncFiltersToURL,
+  initialValues: getInitialValues({
+    state: NON_TERMINATED_STATES,
+  }),
 });
 
 export const ProjectResourcesAllFilter = enhance(PureProjectResourcesAllFilter);

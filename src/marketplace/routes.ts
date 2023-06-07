@@ -114,10 +114,6 @@ const OrdersList = lazyComponent(
   () => import('./orders/OrdersList'),
   'OrdersList',
 );
-const CustomerResourcesContainer = lazyComponent(
-  () => import('./resources/list/CustomerResourcesContainer'),
-  'CustomerResourcesContainer',
-);
 const ProjectResourcesContainer = lazyComponent(
   () => import('./resources/list/ProjectResourcesContainer'),
   'ProjectResourcesContainer',
@@ -598,17 +594,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-my-order-items/?filterState',
     component: MyOrderItemsContainer,
     parent: 'organization',
-  },
-
-  {
-    name: 'marketplace-customer-resources',
-    url: 'marketplace-customer-resources/',
-    component: CustomerResourcesContainer,
-    parent: 'organization-resources',
-    data: {
-      breadcrumb: () => translate('Resources'),
-      skipBreadcrumb: true,
-    },
   },
 
   {

@@ -5,7 +5,9 @@ import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { OfferingFilter } from './OfferingFilter';
-import { ShowTerminatedAndErredFilter } from './ShowTerminatedAndErredFilter';
+import { ResourceStateFilter } from './ResourceStateFilter';
+import { RuntimeStateFilter } from './RuntimeStateFilter';
+import { NON_TERMINATED_STATES } from './SupportResourcesFilter';
 import { OfferingChoice } from './types';
 
 interface OwnProps {
@@ -26,11 +28,14 @@ const PureProjectResourcesFilter = ({ offerings }) => (
       <OfferingFilter options={offerings} />
     </TableFilterItem>
     <TableFilterItem
-      title={translate('State')}
-      name="state"
+      title={translate('Runtime state')}
+      name="runtime_state"
       badgeValue={(value) => value?.label}
     >
-      <ShowTerminatedAndErredFilter />
+      <RuntimeStateFilter />
+    </TableFilterItem>
+    <TableFilterItem title={translate('State')} name="state">
+      <ResourceStateFilter reactSelectProps={{ isMulti: true }} />
     </TableFilterItem>
   </>
 );
@@ -38,6 +43,8 @@ const PureProjectResourcesFilter = ({ offerings }) => (
 export const ProjectResourcesFilter = reduxForm<FormData, OwnProps>({
   form: 'ProjectResourcesFilter',
   onChange: syncFiltersToURL,
-  initialValues: getInitialValues(),
+  initialValues: getInitialValues({
+    state: NON_TERMINATED_STATES,
+  }),
   destroyOnUnmount: false,
 })(PureProjectResourcesFilter);
