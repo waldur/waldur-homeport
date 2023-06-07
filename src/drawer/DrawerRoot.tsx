@@ -43,12 +43,12 @@ export const DrawerRoot: FunctionComponent = () => {
   return (
     <div
       id="kt_drawer"
-      className="bg-body"
+      className="bg-body z-drawer"
       data-kt-drawer="true"
       data-kt-drawer-name="drawer"
       data-kt-drawer-activate="true"
       data-kt-drawer-overlay="true"
-      data-kt-drawer-width="{default:'600px', 'lg': '900px'}"
+      data-kt-drawer-width="{default:'100%', 'lg': '900px'}"
       data-kt-drawer-direction="end"
       data-kt-drawer-toggle="#kt_drawer_toggle"
       data-kt-drawer-close="#kt_drawer_close"
@@ -72,7 +72,7 @@ export const DrawerRoot: FunctionComponent = () => {
         <div className="card-body position-relative p-0" id="kt_drawer_body">
           <div
             id="kt_drawer_scroll"
-            className="position-relative scroll-y me-n5 pe-5"
+            className="position-relative scroll-y pe-5"
             data-kt-scroll="true"
             data-kt-scroll-height="auto"
             data-kt-scroll-wrappers="#kt_drawer_body"
