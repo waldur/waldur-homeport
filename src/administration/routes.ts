@@ -10,6 +10,11 @@ const AdministrationDashboard = lazyComponent(
   'AdministrationDashboard',
 );
 
+const AdministrationBranding = lazyComponent(
+  () => import('./branding/AdministrationBranding'),
+  'AdministrationBranding',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'admin',
@@ -31,6 +36,15 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Dashboard'),
       priority: 100,
+    },
+  },
+
+  {
+    name: 'admin.branding',
+    url: 'branding/',
+    component: AdministrationBranding,
+    data: {
+      breadcrumb: () => translate('Branding'),
     },
   },
 ];
