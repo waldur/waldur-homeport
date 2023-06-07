@@ -4,7 +4,10 @@ import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
+import {
+  PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
+  RESOURCE_STATES,
+} from '@waldur/marketplace/resources/list/constants';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
@@ -27,7 +30,9 @@ const mapPropsToFilter = createSelector(
   getProject,
   getFormValues(PROJECT_RESOURCES_ALL_FILTER_FORM_ID),
   (project, filters: any) => {
-    const result: Record<string, any> = {};
+    const result: Record<string, any> = {
+      state: RESOURCE_STATES,
+    };
     if (project) {
       result.project_uuid = project.uuid;
     }

@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { OfferingFilter } from './OfferingFilter';
-import { ResourceStateFilter } from './ResourceStateFilter';
+import { ShowTerminatedAndErredFilter } from './ShowTerminatedAndErredFilter';
 import { OfferingChoice } from './types';
 
 interface OwnProps {
@@ -30,7 +30,7 @@ const PureProjectResourcesFilter = ({ offerings }) => (
       name="state"
       badgeValue={(value) => value?.label}
     >
-      <ResourceStateFilter />
+      <ShowTerminatedAndErredFilter />
     </TableFilterItem>
   </>
 );
