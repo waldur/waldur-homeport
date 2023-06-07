@@ -506,6 +506,7 @@ msgstr ""
 msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
 msgstr ""
 
+#: src/administration/branding/BrandingForm.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Agree and proceed"
 msgstr ""
@@ -1146,6 +1147,10 @@ msgstr ""
 msgid "Branch"
 msgstr ""
 
+#: src/administration/routes.ts
+msgid "Branding"
+msgstr ""
+
 #: src/issues/routes.ts
 msgid "Broadcast"
 msgstr ""
@@ -1620,6 +1625,10 @@ msgstr ""
 
 #: src/rancher/template/TemplateDetail.tsx
 msgid "Configuration"
+msgstr ""
+
+#: src/administration/branding/AdministrationBranding.tsx
+msgid "Configuration has been updated."
 msgstr ""
 
 #: src/rancher/template/QuestionGroup.tsx
@@ -2523,6 +2532,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
+#: src/administration/branding/BrandingForm.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Discard"
@@ -3588,6 +3598,14 @@ msgstr ""
 msgid "Hello"
 msgstr ""
 
+#: src/administration/branding/BrandingForm.tsx
+msgid "Hex color definition is used in HomePort landing page for font color of login button."
+msgstr ""
+
+#: src/administration/branding/BrandingForm.tsx
+msgid "Hex color definition is used in landing page for login button."
+msgstr ""
+
 #: src/form/SecretField.tsx
 msgid "Hide"
 msgstr ""
@@ -4276,6 +4294,10 @@ msgstr ""
 msgid "Kubernetes version"
 msgstr ""
 
+#: src/administration/branding/BrandingForm.tsx
+msgid "Label for link in hero section of HomePort landing page."
+msgstr ""
+
 #: src/marketplace/offerings/DisplayNameField.tsx
 msgid "Label that is visible to users in Marketplace."
 msgstr ""
@@ -4356,6 +4378,10 @@ msgstr ""
 #: src/rancher/node/actions/LinkAction.tsx
 #: src/rancher/node/actions/LinkDialog.tsx
 msgid "Link OpenStack Instance"
+msgstr ""
+
+#: src/administration/branding/BrandingForm.tsx
+msgid "Link URL in hero section of HomePort landing page."
 msgstr ""
 
 #: src/customer/payments/InvoicesDropdown.tsx
@@ -5014,6 +5040,10 @@ msgstr ""
 
 #: src/rancher/template/NamespaceField.tsx
 msgid "Namespace should be unique."
+msgstr ""
+
+#: src/administration/branding/AdministrationBranding.tsx
+msgid "Naming"
 msgstr ""
 
 #: src/customer/create/WizardFormFirstPage.tsx
@@ -8270,6 +8300,7 @@ msgstr ""
 msgid "Save as draft"
 msgstr ""
 
+#: src/administration/branding/BrandingForm.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/user/api-key/UserEditTokenContainer.tsx
 #: src/user/support/UserEditForm.tsx
@@ -9112,6 +9143,14 @@ msgstr ""
 
 #: src/auth/LoginButton.tsx
 msgid "Sign in with {label}"
+msgstr ""
+
+#: src/administration/branding/BrandingForm.tsx
+msgid "Site description"
+msgstr ""
+
+#: src/administration/branding/BrandingForm.tsx
+msgid "Site name"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -11143,6 +11182,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 msgid "Unable to update allowed address pairs."
+msgstr ""
+
+#: src/administration/branding/AdministrationBranding.tsx
+msgid "Unable to update configuration."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
