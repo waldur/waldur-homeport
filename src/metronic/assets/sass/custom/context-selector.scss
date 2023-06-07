@@ -169,10 +169,39 @@ $dark-body-active: #1e261f;
           a {
             color: #fff;
           }
+
+          .actions .action-item {
+            background-color: if(isDarkMode(), $gray-400, $gray-700);
+          }
         }
 
         a {
           color: unset;
+        }
+
+        .actions {
+          display: none;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          text-align: center;
+          padding: 0.5rem 1rem;
+
+          .action-item {
+            padding-right: 1rem;
+
+            &:first-child {
+              padding-left: 1rem;
+            }
+          }
+        }
+        &:hover {
+          .actions {
+            display: flex;
+          }
+          .subtitle {
+            opacity: 0;
+          }
         }
       }
     }

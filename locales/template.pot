@@ -6882,6 +6882,7 @@ msgstr ""
 msgid "Project creation requests"
 msgstr ""
 
+#: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 msgid "Project dashboard"
 msgstr ""
@@ -8407,6 +8408,7 @@ msgstr ""
 msgid "See offerings"
 msgstr ""
 
+#: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 msgid "See resources"
 msgstr ""
