@@ -28,3 +28,12 @@ $huge-font: 20;
 // Various colors
 $text-color: #676a6c; // Body text
 $gray: #f3f3f4; // Background wrapper color
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);

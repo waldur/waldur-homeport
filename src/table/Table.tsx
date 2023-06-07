@@ -154,7 +154,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
             <div className="table-container">{this.renderBody()}</div>
           </div>
           {this.props.hasPagination && (
-            <Row className="table-pagination">
+            <Row className="table-pagination px-0">
               <Col
                 sm={'auto'}
                 md={2}
