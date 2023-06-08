@@ -15,7 +15,7 @@ export const RecipientsField: FunctionComponent<{
     dispatch(
       openModalDialog(RecipientsListDialog, {
         resolve: { query: row.query },
-        size: 'lg',
+        size: 'xl',
       }),
     );
   return (

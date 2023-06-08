@@ -7354,16 +7354,16 @@ msgstr ""
 msgid "Recently added offerings"
 msgstr ""
 
-#: src/notifications/RecipientsListDialog.tsx
-msgid "Recepients list"
-msgstr ""
-
 #: src/notifications/RecipientsList.tsx
 msgid "Recipient"
 msgstr ""
 
 #: src/notifications/RecipientsField.tsx
 msgid "Recipients"
+msgstr ""
+
+#: src/notifications/RecipientsListDialog.tsx
+msgid "Recipients list"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx

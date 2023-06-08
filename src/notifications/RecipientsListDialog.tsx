@@ -6,7 +6,7 @@ import { RecipientsListComponent } from './RecipientsList';
 
 export const RecipientsListDialog = (props) => (
   <ModalDialog
-    title={translate('Recepients list')}
+    title={translate('Recipients list')}
     footer={<CloseDialogButton label={translate('Close')} />}
   >
     <RecipientsListComponent query={props.resolve.query} />
