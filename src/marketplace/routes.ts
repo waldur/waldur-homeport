@@ -676,7 +676,7 @@ export const states: StateDeclaration[] = [
     url: 'offerings/',
     component: AdminOfferingsListContainer,
     data: {
-      breadcrumb: () => translate('Offerings'),
+      breadcrumb: () => translate('Available offerings'),
     },
   },
 

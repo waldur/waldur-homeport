@@ -960,6 +960,10 @@ msgstr ""
 msgid "Availability:"
 msgstr ""
 
+#: src/marketplace/routes.ts
+msgid "Available offerings"
+msgstr ""
+
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
 msgid "Available plans"
 msgstr ""
