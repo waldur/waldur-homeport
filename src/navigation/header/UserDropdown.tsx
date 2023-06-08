@@ -23,7 +23,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
         className="btn btn-active-light d-flex align-items-center bg-hover-light py-2 px-2 px-md-3"
         data-kt-menu-trigger="click"
         data-kt-menu-attach="parent"
-        data-kt-menu-placement="bottom-end"
+        data-kt-menu-placement="bottom"
         data-kt-menu-flip="bottom"
       >
         <div className="d-none d-md-flex flex-column align-items-end justify-content-center me-2">

@@ -87,6 +87,11 @@
       z-index: get($header-config, fixed, z-index) - 1;
     }
 
+    .project-selector-toggle {
+      margin: 0 12px;
+      gap: 1rem;
+    }
+
     // Page title
     .page-title {
       display: none !important;

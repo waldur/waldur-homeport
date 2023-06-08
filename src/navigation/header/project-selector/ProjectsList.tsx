@@ -106,7 +106,10 @@ export const ProjectsList: FunctionComponent<{
     <div className={classNames({ disabled: isDisabled }, 'project-listing')}>
       {projects?.length > 0 ? (
         <BaseList
-          style={{ height: '400px', maxHeight: 'calc(100vh - 100px)' }}
+          style={{
+            height: projects.length * 75 + 'px',
+            maxHeight: 'calc(100vh - 100px)',
+          }}
           items={projects}
           selectedItem={selectedProject}
           selectItem={handleProjectClick}
