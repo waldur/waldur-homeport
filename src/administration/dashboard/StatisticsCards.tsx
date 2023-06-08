@@ -20,7 +20,7 @@ export const StatisticsCards = () => {
         api.getUsersCount(),
         api.getCategoriesCount(),
         api.getProviderOfferingsCount({
-          params: { shared: 'True' },
+          params: { shared: 'True', state: ['Active', 'Paused'] },
         }),
         api.getResourcesCount({
           params: {

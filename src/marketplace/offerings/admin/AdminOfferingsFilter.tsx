@@ -33,7 +33,7 @@ const PureAdminOfferingsFilter: FunctionComponent = () => (
 const enhance = reduxForm({
   form: ADMIN_OFFERINGS_FILTER_FORM_ID,
   initialValues: {
-    state: [getStates()[0], getStates()[1]],
+    state: [getStates()[1], getStates()[2]],
   },
   destroyOnUnmount: false,
 });
