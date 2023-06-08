@@ -146,6 +146,10 @@ $dark-body-active: #1e261f;
     top: 0;
     left: 0;
 
+    @media (max-width: 767px) {
+      min-width: 280px;
+    }
+
     // search input
     input {
       border-radius: 0;

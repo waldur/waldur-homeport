@@ -16,7 +16,7 @@ export const ProvidersBrands = () => {
     <Stack
       gap={5}
       direction="horizontal"
-      className="providers-brands justify-content-between px-md-10 mb-10"
+      className="providers-brands mw-100 overflow-auto justify-content-between px-md-10 mb-10"
     >
       <Image src={lumi} size={75} classes="symbol-2by3" />
       <Image src={uniOfTartu} size={100} classes="symbol-2by3" />

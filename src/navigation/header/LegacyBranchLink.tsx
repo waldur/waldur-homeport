@@ -7,7 +7,7 @@ export const LegacyBranchLink = () => {
     return null;
   }
   return (
-    <div className="d-flex align-items-center ms-1 ms-lg-3">
+    <div className="d-none d-sm-flex align-items-center ms-1 ms-lg-3">
       <Link state="legacy" className="btn btn-light btn-active-color-primary">
         {translate('Go to old interface')}
       </Link>

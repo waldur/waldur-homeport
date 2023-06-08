@@ -97,7 +97,7 @@ export const ProjectSelectorDropdown: FunctionComponent = () => {
             </ImagePlaceholder>
           )}
         </div>
-        <span className="text-dark fs-base fw-bold lh-1 mx-3">
+        <span className="text-dark d-none d-sm-block fs-base fw-bold lh-1 mx-3">
           {project ? project.name : translate('Select project')}
         </span>
         <i className="fa fa-caret-down fs-4 text-dark"></i>
@@ -135,17 +135,17 @@ export const ProjectSelectorDropdown: FunctionComponent = () => {
           loadingUuid={redirecting}
         />
         <Row className="bg-light border g-0">
-          <Col xs={6}>
+          <Col xs={5}>
             <ProjectCreateButton
               title={translate('New project')}
               variant="link"
-              className="btn-lg text-dark w-100 text-decoration-underline"
+              className="btn-lg text-dark pl-2 text-left w-100 text-decoration-underline"
               icon={null}
             />
           </Col>
-          <Col xs={6}>
+          <Col xs={7}>
             <Link
-              className="btn btn-lg btn-link text-dark w-100 text-decoration-underline"
+              className="btn btn-lg text-right pr-2 btn-link text-dark w-100 text-decoration-underline"
               state="profile-organizations"
               onClick={() => MenuComponent.hideDropdowns(undefined)}
             >

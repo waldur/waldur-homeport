@@ -61,9 +61,14 @@
 
   .footer-section {
     display: table;
-    width: 100%;
+    max-width: 100%;
     min-height: 300px;
-
+    .left-side {
+      text-align: left;
+    }
+    .right-side {
+      text-align: right;
+    }
     .left-side,
     .right-side {
       display: table-cell;
@@ -72,12 +77,17 @@
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover;
+      @media (max-width: 767px) {
+        width: 100%;
+        height: auto;
+        display: block;
+        text-align: left;
+      }
     }
-    .left-side {
-      text-align: left;
-    }
-    .right-side {
-      text-align: right;
+  }
+  @media (max-width: 767px) {
+    .footer-section {
+      display: block;
     }
   }
 }
