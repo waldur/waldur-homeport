@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 
+import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { translate } from '@waldur/i18n';
 import { router } from '@waldur/router';
 import { RootState } from '@waldur/store/reducers';
@@ -29,7 +30,15 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Fingerprint'),
-      render: ({ row }) => row.fingerprint,
+      render: ({ row }) => (
+        <>
+          {row.fingerprint}
+          <CopyToClipboardButton
+            value={row.fingerprint}
+            className="ms-1 text-hover-primary cursor-pointer d-inline-block"
+          />
+        </>
+      ),
     },
     {
       title: translate('Type'),
