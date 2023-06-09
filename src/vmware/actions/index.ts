@@ -2,7 +2,6 @@ import { ActionRegistry } from '@waldur/resource/actions/registry';
 
 import { ConsoleAction } from './ConsoleAction';
 import { DestroyVirtualMachineAction } from './DestroyVirtualMachineAction';
-import { EditAction } from './EditAction';
 import { ExtendDiskAction } from './ExtendDiskAction';
 import { PullDiskAction } from './PullDiskAction';
 import { PullPortAction } from './PullPortAction';
@@ -17,7 +16,6 @@ import { SuspendAction } from './SuspendAction';
 ActionRegistry.register('VMware.VirtualMachine', [
   PullVirtualMachineAction,
   ConsoleAction,
-  EditAction,
   StartAction,
   StopAction,
   ResetAction,
