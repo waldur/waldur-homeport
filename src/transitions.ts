@@ -2,6 +2,7 @@ import ReactGA from 'react-ga';
 
 import store from '@waldur/store/store';
 
+import { setRedirect } from './auth/AuthRedirectStorage';
 import { AuthService } from './auth/AuthService';
 import { ENV } from './configs/default';
 import { cleanObject } from './core/utils';
@@ -144,6 +145,18 @@ export function attachTransitions() {
   router.transitionService.onSuccess({}, () => {
     if (ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID) {
       ReactGA.pageview(location.pathname);
+    }
+  });
+
+  router.transitionService.onSuccess({}, (transition) => {
+    if (
+      transition.to().data.auth &&
+      !transition.params().hasOwnProperty('toState')
+    ) {
+      setRedirect({
+        toState: transition.to().name,
+        toParams: transition.params(),
+      });
     }
   });
 }
