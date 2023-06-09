@@ -3,28 +3,22 @@ import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { FILTER_OFFERING_RESOURCE } from '@waldur/marketplace/details/constants';
-import {
-  getStates,
-  ResourceStateFilter,
-} from '@waldur/marketplace/resources/list/ResourceStateFilter';
+import { ResourceStateFilter } from '@waldur/marketplace/resources/list/ResourceStateFilter';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
+
+import { NON_TERMINATED_STATES } from '../resources/list/SupportResourcesFilter';
 
 const PureOfferingResourcesFilter: FunctionComponent = () => (
   <>
-    <TableFilterItem
-      title={translate('State')}
-      name="state"
-      badgeValue={(value) => value?.label}
-      ellipsis={false}
-    >
-      <ResourceStateFilter />
+    <TableFilterItem title={translate('State')} name="state" ellipsis={false}>
+      <ResourceStateFilter reactSelectProps={{ isMulti: true }} />
     </TableFilterItem>
   </>
 );
 
 const enhance = reduxForm({
   form: FILTER_OFFERING_RESOURCE,
-  initialValues: { state: getStates()[1] },
+  initialValues: { state: NON_TERMINATED_STATES },
   destroyOnUnmount: false,
 });
 
