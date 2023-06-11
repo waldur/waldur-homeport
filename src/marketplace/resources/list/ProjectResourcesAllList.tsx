@@ -18,6 +18,7 @@ import { ProjectResourcesAllFilter } from './ProjectResourcesAllFilter';
 import { ResourceActionsButton } from './ResourceActionsButton';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
+import { resourcesListRequiredFields } from './utils';
 
 interface FieldProps {
   row: Resource;
@@ -48,6 +49,7 @@ const mapPropsToFilter = createSelector(
         result.state = filters.state.map((option) => option.value);
       }
     }
+    result.field = resourcesListRequiredFields();
     return result;
   },
 );

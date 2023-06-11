@@ -23,6 +23,7 @@ import { ExpandableResourceSummary } from './ExpandableResourceSummary';
 import { ResourceActionsButton } from './ResourceActionsButton';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
+import { resourcesListRequiredFields } from './utils';
 
 interface FieldProps {
   row: Resource;
@@ -119,6 +120,7 @@ const mapPropsToFilter = (props: StateProps & OwnProps) => {
   if (props.filter?.state) {
     filter.state = props.filter.state.map((option) => option.value);
   }
+  filter.field = resourcesListRequiredFields();
   return filter;
 };
 
