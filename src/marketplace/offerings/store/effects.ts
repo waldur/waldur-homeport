@@ -342,6 +342,25 @@ function* pullRemoteOfferingUsers(action: Action<any>) {
   }
 }
 
+function* pushRemoteOfferingProjectData(action: Action<any>) {
+  const { uuid } = action.payload;
+  try {
+    yield call(api.pushRemoteOfferingProjectData, uuid);
+    yield put(
+      showSuccess(
+        translate('Offering project data synchronization has been scheduled.'),
+      ),
+    );
+  } catch (error) {
+    yield put(
+      showErrorResponse(
+        error,
+        translate('Unable to synchronize offering project data.'),
+      ),
+    );
+  }
+}
+
 function* pullRemoteOfferingUsage(action: Action<any>) {
   const { uuid } = action.payload;
   try {
@@ -556,6 +575,10 @@ export default function* () {
   yield takeEvery(
     constants.PULL_REMOTE_OFFERING_USERS,
     pullRemoteOfferingUsers,
+  );
+  yield takeEvery(
+    constants.PUSH_REMOTE_OFFERING_PROJECT_DATA,
+    pushRemoteOfferingProjectData,
   );
   yield takeEvery(
     constants.PULL_REMOTE_OFFERING_USAGE,

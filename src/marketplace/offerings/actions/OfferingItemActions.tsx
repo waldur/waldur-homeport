@@ -163,6 +163,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   pullRemoteOfferingUsers: (offering: Offering) =>
     dispatch(actions.pullRemoteOfferingUsers(offering.uuid)),
 
+  pushRemoteOfferingProjectData: (offering: Offering) =>
+    dispatch(actions.pushRemoteOfferingProjectData(offering.uuid)),
+
   pullRemoteOfferingUsage: (offering: Offering) =>
     dispatch(actions.pullRemoteOfferingUsage(offering.uuid)),
 
@@ -382,6 +385,13 @@ const mergeProps = (
       label: translate('Pull order items'),
       handler: () =>
         dispatchProps.pullRemoteOfferingOrderItems(ownProps.offering),
+      visible:
+        !ownProps.isPublic && remoteOfferingActionVisible(ownProps, stateProps),
+    },
+    {
+      label: translate('Push project data'),
+      handler: () =>
+        dispatchProps.pushRemoteOfferingProjectData(ownProps.offering),
       visible:
         !ownProps.isPublic && remoteOfferingActionVisible(ownProps, stateProps),
     },
