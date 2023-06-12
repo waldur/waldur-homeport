@@ -1,37 +1,13 @@
-import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { formatAllocationPool } from '@waldur/openstack/openstack-network/utils';
-import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { formatDefault } from '@waldur/resource/utils';
-
-const formatNetwork = (props) => (
-  <ResourceLink
-    type="OpenStack.Network"
-    uuid={getUUID(props.network)}
-    project={props.project_uuid}
-    label={props.network_name}
-  />
-);
-
-const formatTenant = (props) => (
-  <ResourceLink
-    type="OpenStack.Tenant"
-    uuid={getUUID(props.tenant)}
-    project={props.project_uuid}
-    label={props.tenant_name}
-  />
-);
 
 export const OpenStackSubNetSummary = (props: ResourceSummaryProps) => {
   const { resource } = props;
   return (
     <>
-      <Field label={translate('Tenant')} value={formatTenant(props.resource)} />
-      <Field
-        label={translate('Network')}
-        value={formatNetwork(props.resource)}
-      />
+      <Field label={translate('Network')} value={resource.network_name} />
       <Field
         label={translate('CIDR')}
         value={formatDefault(resource.cidr)}

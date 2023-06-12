@@ -11,7 +11,6 @@ import { useTitle } from '@waldur/navigation/title';
 
 import { getResource } from './api';
 import { RESOURCE_ENDPOINTS } from './constants';
-import { ResourceDetails } from './ResourceDetails';
 import { BaseResource } from './types';
 import { formatResourceType } from './utils';
 
@@ -90,9 +89,7 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
     }
   }, [asyncResult.error, resource, router.stateService]);
 
-  return resource ? (
-    <ResourceDetails resource={resource} refetch={refetch} />
-  ) : asyncResult.loading ? (
+  return asyncResult.loading ? (
     <LoadingSpinner />
   ) : asyncResult.error ? (
     <>{translate('Unable to load resource.')}</>
