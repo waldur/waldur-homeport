@@ -8,12 +8,13 @@ const EditDialog = lazyComponent(() => import('./EditDialog'), 'EditDialog');
 
 const validators = [validateState('OK')];
 
-export const EditAction: ActionItemType = ({ resource, refetch }) => (
-  <DialogActionItem
-    validators={validators}
-    title={translate('Edit')}
-    modalComponent={EditDialog}
-    resource={resource}
-    extraResolve={{ refetch }}
-  />
-);
+export const EditAction: ActionItemType = ({ resource, refetch }) =>
+  resource.scope ? (
+    <DialogActionItem
+      validators={validators}
+      title={translate('Edit')}
+      modalComponent={EditDialog}
+      resource={resource}
+      extraResolve={{ refetch }}
+    />
+  ) : null;

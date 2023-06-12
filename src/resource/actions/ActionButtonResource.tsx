@@ -15,12 +15,15 @@ interface ActionButtonResourceProps {
 async function loadData(url: string) {
   const response = await Axios.get(url);
   const resource = response.data;
-  const actions = ActionRegistry.getActions(resource.resource_type);
-  const actionsList = getResourceCommonActions();
-  const extraActions = actions.filter(
-    (action) => !actionsList.includes(action as any),
-  );
-  return { resource, actions: actionsList.concat(extraActions as any) };
+  let actions = ActionRegistry.getActions(resource.resource_type);
+  if (resource.marketplace_resource_uuid) {
+    const actionsList = getResourceCommonActions();
+    const extraActions = actions.filter(
+      (action) => !actionsList.includes(action as any),
+    );
+    actions = actionsList.concat(extraActions as any);
+  }
+  return { resource, actions };
 }
 
 export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
