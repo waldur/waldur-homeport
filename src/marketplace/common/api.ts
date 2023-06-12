@@ -464,6 +464,9 @@ export const pullRemoteOfferingInvoices = (uuid) =>
 export const pullRemoteOfferingRobotAccounts = (uuid) =>
   post(`/remote-waldur-api/pull_offering_robot_accounts/${uuid}/`);
 
+export const pushRemoteOfferingProjectData = (uuid) =>
+  post(`/remote-waldur-api/push_project_data/${uuid}/`);
+
 export const countOrderItems = (params) =>
   Axios.request({
     method: 'HEAD',

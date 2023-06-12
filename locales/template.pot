@@ -5565,6 +5565,10 @@ msgid "Offering order items synchronization has been scheduled."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
+msgid "Offering project data synchronization has been scheduled."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
 msgid "Offering resources synchronization has been scheduled."
 msgstr ""
 
@@ -7236,6 +7240,10 @@ msgstr ""
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 msgid "Purchase and usage is invoiced."
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Push project data"
 msgstr ""
 
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
@@ -11110,6 +11118,10 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to synchronize offering order items."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to synchronize offering project data."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts

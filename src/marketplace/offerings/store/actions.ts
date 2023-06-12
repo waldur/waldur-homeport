@@ -147,6 +147,11 @@ export const pullRemoteOfferingUsers = (uuid: string) => ({
   payload: { uuid },
 });
 
+export const pushRemoteOfferingProjectData = (uuid: string) => ({
+  type: constants.PUSH_REMOTE_OFFERING_PROJECT_DATA,
+  payload: { uuid },
+});
+
 export const pullRemoteOfferingUsage = (uuid: string) => ({
   type: constants.PULL_REMOTE_OFFERING_USAGE,
   payload: { uuid },
