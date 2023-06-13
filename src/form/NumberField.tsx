@@ -26,8 +26,10 @@ export const NumberField: FunctionComponent<NumberFieldProps> = (props) => {
   if (props.unit) {
     return (
       <>
-        {control}{' '}
-        <InputGroup.Text className="border-0">{props.unit}</InputGroup.Text>
+        {control}
+        <InputGroup.Text className="border-0 unit">
+          {props.unit}
+        </InputGroup.Text>
       </>
     );
   } else {

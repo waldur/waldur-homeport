@@ -109,3 +109,12 @@ $utilities: map-merge(
     ),
   )
 );
+.form-floating {
+  display: flex;
+  align-items: center;
+}
+.unit {
+  position: absolute;
+  right: 0;
+  background: transparent;
+}
