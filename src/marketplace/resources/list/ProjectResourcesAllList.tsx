@@ -1,9 +1,11 @@
+import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { LandingLink } from '@waldur/marketplace/links/LandingLink';
 import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Table, createFetcher } from '@waldur/table';
@@ -63,6 +65,16 @@ export const ProjectResourcesAllList = () => {
     queryField: 'query',
     filter,
   });
+
+  const tableActions = (
+    <>
+      <LandingLink>
+        <Button variant="primary">
+          <i className="fa fa-plus" /> {translate('Add resource')}
+        </Button>
+      </LandingLink>
+    </>
+  );
   return (
     <Table
       {...tableProps}
@@ -102,6 +114,7 @@ export const ProjectResourcesAllList = () => {
       expandableRow={ExpandableResourceSummary}
       enableMultiSelect={true}
       multiSelectActions={ResourceMultiSelectAction}
+      actions={tableActions}
     />
   );
 };
