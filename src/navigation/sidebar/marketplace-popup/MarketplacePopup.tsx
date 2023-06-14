@@ -10,7 +10,6 @@ import { getSidebarToggle } from '../Sidebar';
 import { DataLoader } from './DataLoader';
 import { MarketplacePopupTitle } from './MarketplacePopupTitle';
 
-import './MarketplacePopup.scss';
 export const RECENTLY_ADDED_OFFERINGS_UUID =
   'recently_added_offerings_category';
 
@@ -55,10 +54,10 @@ export const MarketplacePopup: FunctionComponent = () => {
         data-kt-menu="true"
         data-popper-placement="end"
       >
-        <div className="marketplaces-selector-header py-8 px-12">
+        <div className="marketplaces-selector-header">
           <Row>
             <MarketplacePopupTitle isVisible={isVisible} />
-            <Col xs={7} xl={6}>
+            <Col xs={12} sm={7} xl={6}>
               <div className="form-group">
                 <FormControl
                   id="marketplaces-selector-search-box"
@@ -74,7 +73,7 @@ export const MarketplacePopup: FunctionComponent = () => {
             </Col>
           </Row>
         </div>
-        <div className="d-flex h-100">
+        <div className="d-flex flex-column flex-md-row h-100">
           {isVisible && <DataLoader filter={filter} />}
         </div>
       </div>

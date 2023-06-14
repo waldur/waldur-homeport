@@ -172,7 +172,15 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
           <EmptyOrganizationsPlaceholder />
         ) : isVisible ? (
           <>
-            <div className="context-selector-header form-group py-4 px-20 border-bottom">
+            <div className="context-selector-header form-group border-bottom">
+              <button
+                className="button-close btn btn-icon btn-icon-white p-2 me-2"
+                onClick={() => {
+                  MenuComponent.hideDropdowns(undefined);
+                }}
+              >
+                <i className="fa fa-arrow-left fs-4"></i>
+              </button>
               <FormControl
                 id="quick-selector-search-box"
                 ref={refSearch}

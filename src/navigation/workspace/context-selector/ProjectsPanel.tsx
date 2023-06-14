@@ -123,6 +123,7 @@ export const ProjectsPanel: FunctionComponent<{
       {projects?.length > 0 ? (
         <BaseList
           style={{ height: 'calc(100vh - 395px)' }}
+          className="projects-scrollbar"
           items={projects}
           selectedItem={selectedProject}
           selectItem={handleProjectClick}

@@ -18,6 +18,7 @@ export const BaseList: FunctionComponent<{
   filter;
   loadingUuid?: string;
   style?: CSSProperties;
+  className?: string;
 }> = ({
   items,
   selectedItem,
@@ -27,6 +28,7 @@ export const BaseList: FunctionComponent<{
   filter,
   loadingUuid,
   style,
+  className,
 }) => {
   const scrollBarRef = useRef<Scrollbars>();
   const itemId = selectedItem?.uuid;
@@ -46,7 +48,7 @@ export const BaseList: FunctionComponent<{
   useEffect(adjustScroll, []);
 
   return (
-    <Scrollbars style={style} ref={scrollBarRef}>
+    <Scrollbars style={style} ref={scrollBarRef} className={className}>
       <ListGroup>
         {items.length === 0 ? (
           <ListGroupItem>

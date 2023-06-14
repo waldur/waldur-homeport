@@ -14,6 +14,16 @@ $dark-body-active: #1e261f;
     height: calc(100vh - 70px);
   }
 
+  .context-selector-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 5rem;
+
+    .button-close {
+      display: none;
+    }
+  }
+
   .context-selector-header,
   .list-header {
     background-color: $dark-header;
@@ -115,6 +125,29 @@ $dark-body-active: #1e261f;
   [data-kt-aside-minimize='on'] .aside {
     .context-selector {
       max-width: calc(100% - 100px);
+    }
+  }
+}
+
+// Mobile screens
+@media (max-width: 768px) {
+  .context-selector {
+    transform: translate(10px, 10px) !important;
+    max-width: calc(100% - 20px);
+
+    .context-selector-header {
+      padding: 1rem;
+
+      .button-close {
+        display: block;
+      }
+    }
+
+    .scrollbar-view {
+      height: calc(100vh - 170px) !important;
+    }
+    .project-listing .projects-scrollbar {
+      height: calc(100vh - 300px) !important;
     }
   }
 }

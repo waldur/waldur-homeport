@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync, useAsyncFn, useDebounce } from 'react-use';
 
@@ -88,15 +87,15 @@ export const DataLoader = ({ filter }) => {
   return (
     <>
       {loadingCategories ? (
-        <Col className="message-wrapper p-4">
+        <div className="message-wrapper p-4">
           <LoadingSpinner />
-        </Col>
+        </div>
       ) : errorCategories ? (
-        <Col className="message-wrapper">
+        <div className="message-wrapper">
           <p className="text-center text-danger my-10 mx-4">
             {translate('Unable to load categories')}
           </p>
-        </Col>
+        </div>
       ) : (
         <CategoriesPanel
           categories={categories}
@@ -109,17 +108,17 @@ export const DataLoader = ({ filter }) => {
       {!selectedCategory ? (
         <WelcomeView customer={currentCustomer} />
       ) : loadingOfferings ? (
-        <Col className="message-wrapper p-4">
+        <div className="message-wrapper p-4">
           <LoadingSpinner />
-        </Col>
+        </div>
       ) : errorOfferings ? (
-        <Col className="message-wrapper">
+        <div className="message-wrapper">
           <p className="text-center my-10 mx-4">
             <LoadingErred
               loadData={() => selectCategoryAndLoadData(selectedCategory)}
             />
           </p>
-        </Col>
+        </div>
       ) : (
         <OfferingsPanel offerings={offerings} category={selectedCategory} />
       )}
