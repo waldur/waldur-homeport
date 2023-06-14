@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
-import { Col, ListGroupItem, Stack } from 'react-bootstrap';
+import { ListGroupItem, Stack } from 'react-bootstrap';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { truncate } from '@waldur/core/utils';
@@ -58,7 +58,7 @@ export const CategoriesPanel: FunctionComponent<{
   filter;
 }> = ({ categories, selectedCategory, selectCategory }) => {
   return (
-    <Col className="category-listing" xs={6}>
+    <div className="category-listing border-bottom">
       {categories?.length > 0 ? (
         <BaseList
           items={categories}
@@ -70,6 +70,6 @@ export const CategoriesPanel: FunctionComponent<{
       ) : (
         <EmptyCategoryListPlaceholder />
       )}
-    </Col>
+    </div>
   );
 };

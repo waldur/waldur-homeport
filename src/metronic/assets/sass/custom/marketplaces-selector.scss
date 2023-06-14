@@ -6,9 +6,22 @@ $dark-color: #1f2e23;
   .marketplaces-selector-header {
     background-color: $dark-color;
     border-bottom: 1px solid lighten($dark-color, 5%);
+    padding: 2rem 3rem;
+
+    .button-close {
+      display: none;
+    }
   }
-  .welcome-view {
-    background-image: linear-gradient($dark-color, $primary-active);
+  .welcome-view-container {
+    width: 50%;
+    flex-basis: 50%;
+
+    .welcome-view {
+      background-image: linear-gradient($dark-color, $primary-active);
+      height: 50%;
+      min-height: 150px;
+      max-height: 500px;
+    }
   }
 
   .list-group {
@@ -24,6 +37,9 @@ $dark-color: #1f2e23;
   }
 
   .category-listing {
+    width: 50%;
+    flex-basis: 50%;
+
     .scrollbar {
       height: calc(100vh - 160px) !important;
     }
@@ -54,6 +70,9 @@ $dark-color: #1f2e23;
   }
 
   .offering-listing {
+    width: 50%;
+    flex-basis: 50%;
+
     .scrollbar {
       height: calc(100vh - 225px) !important;
     }
@@ -100,6 +119,84 @@ $dark-color: #1f2e23;
     align-items: center;
     justify-content: center;
     height: 100%;
-    width: 100%;
+    width: 50%;
+    flex-basis: 50%;
+  }
+}
+
+.marketplaces-selector {
+  width: 100%;
+}
+
+@media (min-width: 1500px) {
+  .marketplaces-selector {
+    max-width: 1200px;
+  }
+  [data-kt-aside-minimize='on'] .aside {
+    .marketplaces-selector {
+      max-width: 1400px;
+    }
+  }
+}
+@media (max-width: 1500px) {
+  .marketplaces-selector {
+    max-width: calc(100% - 300px);
+  }
+  [data-kt-aside-minimize='on'] .aside {
+    .marketplaces-selector {
+      max-width: calc(100% - 100px);
+    }
+  }
+}
+
+// Mobile screens
+@media (max-width: 768px) {
+  #marketplaces-selector {
+    transform: translate(10px, 10px) !important;
+    max-width: calc(100% - 20px);
+
+    .marketplaces-selector-header {
+      padding: 1.5rem;
+
+      .button-close {
+        display: block;
+      }
+    }
+
+    .list-group-item {
+      padding: 0.75rem;
+    }
+
+    .category-listing {
+      width: 100%;
+      height: 50%;
+
+      .scrollbar {
+        height: calc((100vh - 90px) / 2) !important;
+      }
+    }
+    .offering-listing {
+      width: 100%;
+      height: 50%;
+
+      .scrollbar {
+        height: calc((100vh - 185px) / 2) !important;
+      }
+    }
+
+    .welcome-view-container {
+      width: 100%;
+      height: 50%;
+
+      .welcome-view {
+        height: 100%;
+        min-height: 100px;
+      }
+    }
+
+    .message-wrapper {
+      width: 100%;
+      height: 50%;
+    }
   }
 }

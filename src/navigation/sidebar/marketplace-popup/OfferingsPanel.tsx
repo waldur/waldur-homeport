@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useState, useCallback, FunctionComponent } from 'react';
-import { Col, ListGroupItem, Stack } from 'react-bootstrap';
+import { ListGroupItem, Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
@@ -95,7 +95,7 @@ export const OfferingsPanel: FunctionComponent<{
   const offeringCategoryState = useSelector(offeringCategoryStateSelector);
 
   return (
-    <Col xs={6} className="offering-listing">
+    <div className="offering-listing">
       {offerings?.length > 0 ? (
         <>
           <BaseList
@@ -126,6 +126,6 @@ export const OfferingsPanel: FunctionComponent<{
       ) : (
         <EmptyOfferingsPlaceholder />
       )}
-    </Col>
+    </div>
   );
 };
