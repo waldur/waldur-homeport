@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
-import { useAsync } from 'react-use';
 
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -15,17 +15,19 @@ interface CustomerDashboardProps {
 
 export const CustomerDashboardChart: FunctionComponent<CustomerDashboardProps> =
   ({ customer }) => {
-    const { loading, value } = useAsync(
+    const { data, isLoading } = useQuery(
+      ['customerDashboardCharts'],
       () => loadSummary(customer),
-      [customer],
+      { staleTime: 5 * 60 * 1000 },
     );
-    if (loading) {
+
+    if (isLoading) {
       return <LoadingSpinner />;
     }
-    if (Array.isArray(value)) {
+    if (Array.isArray(data)) {
       return (
         <Row className="mb-6">
-          {value.map((item, index) => (
+          {data.map((item, index) => (
             <Col key={index} md={6} sm={12} className="mb-md-0 mb-sm-6">
               <Card>
                 <Card.Body>
