@@ -43,7 +43,7 @@ export const DrawerRoot: FunctionComponent = () => {
   return (
     <div
       id="kt_drawer"
-      className="bg-body z-drawer"
+      className="bg-body"
       data-kt-drawer="true"
       data-kt-drawer-name="drawer"
       data-kt-drawer-activate="true"

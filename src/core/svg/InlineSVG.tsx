@@ -7,6 +7,7 @@ type Props = {
   path: string;
   svgClassName?: string;
   tooltipText?: string;
+  tooltipClassName?: string;
 };
 
 const InlineSVG: React.FC<Props> = ({
@@ -14,9 +15,10 @@ const InlineSVG: React.FC<Props> = ({
   path,
   svgClassName = 'mh-50px',
   tooltipText = '',
+  tooltipClassName = '',
 }) => {
   const tooltip = (
-    <Tooltip id="tooltip">
+    <Tooltip id="tooltip" className={tooltipClassName}>
       <strong>{tooltipText}</strong>
     </Tooltip>
   );

@@ -34,6 +34,7 @@ export const QuickIssueDrawerToggle: React.FC = () => {
           path={icon}
           className="svg-icon-1"
           tooltipText={translate('Issues')}
+          tooltipClassName="z-index-100"
         />
       </div>
     </div>
