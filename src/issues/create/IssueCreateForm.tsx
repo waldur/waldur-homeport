@@ -8,6 +8,7 @@ import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InputGroup } from '@waldur/customer/create/InputGroup';
+import { TextField } from '@waldur/form';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import {
@@ -131,11 +132,10 @@ export const IssueCreateForm = enhance(
             <Form.Group className="mb-5">
               <InputGroup
                 name="description"
-                as="textarea"
-                className="h-150 form-control-solid"
-                component={InputField}
+                component={TextField}
                 required={true}
                 label={options.descriptionLabel}
+                rows={3}
                 disabled={submitting}
               />
             </Form.Group>

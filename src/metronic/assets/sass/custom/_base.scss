@@ -149,6 +149,17 @@
     }
   }
 }
+.form-floating {
+  > textarea {
+    &.form-control {
+      height: unset;
+    }
+    // Hide label of floating textarea when scroll not on top
+    &[data-scroll]:not([data-scroll='0']) + label.form-label {
+      opacity: 0;
+    }
+  }
+}
 
 /* CHECKBOX */
 .form-check {
