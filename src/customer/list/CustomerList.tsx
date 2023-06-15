@@ -104,7 +104,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       enableExport={true}
       expandableRow={CustomerExpandableRow}
-      hoverableRow={() => <FinancialReportSendButton />}
+      actions={<FinancialReportSendButton />}
     />
   );
 };
