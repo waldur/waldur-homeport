@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useState, useCallback, FunctionComponent } from 'react';
+import { useState, useCallback, FunctionComponent, useMemo } from 'react';
 import { ListGroupItem, Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -12,6 +12,7 @@ import { translate } from '@waldur/i18n';
 import { offeringCategoryStateSelector } from '@waldur/marketplace/links/CategoryLink';
 import { offeringDetailsSelector } from '@waldur/marketplace/links/OfferingLink';
 import { Category, Offering } from '@waldur/marketplace/types';
+import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { BaseList } from './BaseList';
@@ -28,57 +29,64 @@ const EmptyOfferingListPlaceholder: FunctionComponent = () => (
   </div>
 );
 
-const OfferingListItem = ({
-  item,
-  onClick,
-  selectedItem,
-  linkState,
-}: {
+const OfferingListItem: FunctionComponent<{
   item: Offering;
   onClick;
   selectedItem: Offering;
   linkState: string;
-}) => (
-  <Tip
-    label={
-      item.state === 'Paused' ? item.paused_reason || item.state : undefined
-    }
-    id={`tip-${item.uuid}`}
-    data-kt-menu-dismiss="true"
-  >
-    <ListGroupItem
-      as={Link}
-      data-uuid={item.uuid}
-      className={classNames({
-        active: selectedItem && item.uuid === selectedItem.uuid,
-      })}
-      onClick={() => onClick(item)}
-      disabled={item.state === 'Paused'}
-      state={linkState}
-      params={{ offering_uuid: item.uuid }}
+}> = ({ item, onClick, selectedItem, linkState }) => {
+  const abbreviation = useMemo(() => getItemAbbreviation(item), [item]);
+
+  return (
+    <Tip
+      label={
+        item.state === 'Paused' ? item.paused_reason || item.state : undefined
+      }
+      id={`tip-${item.uuid}`}
+      data-kt-menu-dismiss="true"
     >
-      <Stack direction="horizontal" gap={4}>
-        {item.image ? (
-          <div className="symbol symbol-40px">
-            <img src={item.image} />
+      <ListGroupItem
+        as={Link}
+        data-uuid={item.uuid}
+        className={classNames({
+          active: selectedItem && item.uuid === selectedItem.uuid,
+        })}
+        onClick={() => onClick(item)}
+        disabled={item.state === 'Paused'}
+        state={linkState}
+        params={{ offering_uuid: item.uuid }}
+      >
+        <Stack direction="horizontal" gap={4}>
+          {item.image ? (
+            <div className="symbol symbol-40px">
+              <img src={item.image} />
+            </div>
+          ) : (
+            <div className="symbol">
+              <ImagePlaceholder
+                width="50px"
+                height="50px"
+                backgroundColor="#e2e2e2"
+              >
+                {abbreviation && (
+                  <div className="symbol-label fs-6 fw-bold">
+                    {abbreviation}
+                  </div>
+                )}
+              </ImagePlaceholder>
+            </div>
+          )}
+          <div>
+            <h6 className="title ellipsis mb-0">{truncate(item.name, 40)}</h6>
+            <p className="description ellipsis fs-7 mb-0">
+              <TextWithoutFormatting html={truncate(item.description, 120)} />
+            </p>
           </div>
-        ) : (
-          <ImagePlaceholder
-            width="40px"
-            height="40px"
-            backgroundColor="#e2e2e2"
-          />
-        )}
-        <div>
-          <h6 className="title ellipsis mb-0">{truncate(item.name, 40)}</h6>
-          <p className="description ellipsis fs-7 mb-0">
-            <TextWithoutFormatting html={truncate(item.description, 120)} />
-          </p>
-        </div>
-      </Stack>
-    </ListGroupItem>
-  </Tip>
-);
+        </Stack>
+      </ListGroupItem>
+    </Tip>
+  );
+};
 
 export const OfferingsPanel: FunctionComponent<{
   offerings: Offering[];
