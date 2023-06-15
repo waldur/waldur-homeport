@@ -16,7 +16,7 @@ interface CustomerDashboardProps {
 export const CustomerDashboardChart: FunctionComponent<CustomerDashboardProps> =
   ({ customer }) => {
     const { data, isLoading } = useQuery(
-      ['customerDashboardCharts'],
+      ['customerDashboardCharts', customer.uuid],
       () => loadSummary(customer),
       { staleTime: 5 * 60 * 1000 },
     );
