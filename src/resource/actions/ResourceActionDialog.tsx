@@ -5,7 +5,7 @@ import { StringField, TextField, SelectField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { CronField } from '@waldur/form/CronField';
-import { DateField } from '@waldur/form/DateField';
+import { DateTimeField } from '@waldur/form/DateTimeField';
 import { MonacoField } from '@waldur/form/MonacoField';
 import { NumberField } from '@waldur/form/NumberField';
 import { TimezoneField } from '@waldur/form/TimezoneField';
@@ -88,7 +88,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
                 />
               );
             } else if (field.type === 'datetime') {
-              return <DateField {...props} />;
+              return <DateTimeField {...props} />;
             } else if (field.type === 'timezone') {
               return <TimezoneField {...props} />;
             } else if (field.type === 'crontab') {
