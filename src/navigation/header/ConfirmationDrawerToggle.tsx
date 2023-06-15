@@ -67,6 +67,7 @@ export const ConfirmationDrawerToggle: React.FC = () => {
           path={icon}
           className="svg-icon-1"
           tooltipText={translate('Pending tasks')}
+          tooltipClassName="z-index-100"
         />
         {showBullet && <HeaderButtonBullet />}
       </div>

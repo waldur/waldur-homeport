@@ -36,6 +36,7 @@ export const FavoritePagesDropdown: React.FC = () => {
             path={icon}
             className="svg-icon-1"
             tooltipText={translate('Favourites')}
+            tooltipClassName="z-index-100"
           />
         </div>
       </div>
