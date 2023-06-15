@@ -11,8 +11,6 @@ import { translate } from '@waldur/i18n';
 import { getAllOfferingPermissions } from '@waldur/marketplace/common/api';
 import { ServiceProvider } from '@waldur/marketplace/types';
 
-import { ProviderActions } from './ProviderActions';
-
 export const ProviderProfile = ({
   provider,
 }: {
@@ -53,9 +51,6 @@ export const ProviderProfile = ({
                   <span>{translate('Service provider')}</span>
                   <span>{provider.organizationGroup}</span>
                 </Stack>
-              </Col>
-              <Col xs="auto">
-                <ProviderActions />
               </Col>
             </Row>
             <Row>
