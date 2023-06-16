@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Card, Col, Row, Stack } from 'react-bootstrap';
 import 'world-flags-sprite/stylesheets/flags32.css';
 import { useSelector } from 'react-redux';
@@ -7,6 +8,7 @@ import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
@@ -15,6 +17,7 @@ import { ProjectUsersBadge } from './ProjectUsersBadge';
 
 export const ProjectProfile = ({ project }: { project: Project }) => {
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  const abbreviation = useMemo(() => getItemAbbreviation(project), [project]);
 
   return (
     <Card className="mb-6">
@@ -24,7 +27,17 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
             {project.image ? (
               <Image src={project.image} size={100} />
             ) : (
-              <ImagePlaceholder width="100px" height="100px" />
+              <div className="symbol">
+                <ImagePlaceholder
+                  width="100px"
+                  height="100px"
+                  backgroundColor="#e2e2e2"
+                >
+                  <div className="symbol-label fs-2 fw-bold w-100 h-100">
+                    {abbreviation}
+                  </div>
+                </ImagePlaceholder>
+              </div>
             )}
           </Col>
           <Col className="d-flex flex-column justify-content-between">

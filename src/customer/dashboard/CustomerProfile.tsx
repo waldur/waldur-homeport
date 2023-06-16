@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Card, Col, Form, Row, Stack } from 'react-bootstrap';
 
 import 'world-flags-sprite/stylesheets/flags32.css';
@@ -7,6 +7,7 @@ import 'world-flags-sprite/stylesheets/flags32.css';
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { translate } from '@waldur/i18n';
+import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { ServiceProviderIcon } from '@waldur/navigation/workspace/ServiceProviderIcon';
 import { Customer } from '@waldur/workspace/types';
 
@@ -16,6 +17,7 @@ import { SymbolsGroup } from './SymbolsGroup';
 export const CustomerProfile = ({ customer }: { customer: Customer }) => {
   const router = useRouter();
   const goToUsers = () => router.stateService.go('organization-users');
+  const abbreviation = useMemo(() => getItemAbbreviation(customer), [customer]);
 
   const owners = React.useMemo(
     () =>
@@ -42,7 +44,17 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
             {customer.image ? (
               <Image src={customer.image} size={100} />
             ) : (
-              <ImagePlaceholder width="100px" height="100px" />
+              <div className="symbol">
+                <ImagePlaceholder
+                  width="100px"
+                  height="100px"
+                  backgroundColor="#e2e2e2"
+                >
+                  <div className="symbol-label fs-2 fw-bold w-100 h-100">
+                    {abbreviation}
+                  </div>
+                </ImagePlaceholder>
+              </div>
             )}
           </Col>
           <Col>
