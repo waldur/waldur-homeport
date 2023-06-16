@@ -6,8 +6,8 @@ import { EditResourceEndDateByProviderAction } from '@waldur/marketplace/resourc
 import { EditResourceEndDateByStaffAction } from '@waldur/marketplace/resources/actions/EditResourceEndDateByStaffAction';
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
 import { Resource } from '@waldur/marketplace/resources/types';
+import { CreateRobotAccountAction } from '@waldur/marketplace/robot-accounts/CreateRobotAccountAction';
 
-import { CreateRobotAccountAction } from '../actions/CreateRobotAccountAction';
 import { MoveResourceAction } from '../actions/MoveResourceAction';
 
 import { ReportUsageAction } from './ReportUsageAction';

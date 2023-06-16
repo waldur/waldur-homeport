@@ -5,6 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { ErrorMessage } from '@waldur/ErrorMessage';
+import { RobotAccountCard } from '@waldur/marketplace/robot-accounts/RobotAccountCard';
 import { useExtraTabs, useFullPage } from '@waldur/navigation/context';
 import {
   INSTANCE_TYPE,
@@ -31,7 +32,6 @@ import { ResourceComponents } from './ResourceComponents';
 import { ResourceDetailsHeaderBody } from './ResourceDetailsHeaderBody';
 import { ResourceDetailsHeaderTitle } from './ResourceDetailsHeaderTitle';
 import { ResourceIssuesCard } from './ResourceIssuesCard';
-import { RobotAccountCard } from './RobotAccountCard';
 import { ShortResourceHeader } from './ShortResourceHeader';
 import { StatusCard } from './StatusCard';
 import { UsageCard } from './UsageCard';
