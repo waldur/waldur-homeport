@@ -5,7 +5,7 @@ import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDia
 import {
   RobotAccountFormData,
   useRobotAccountFields,
-} from '../actions/CreateRobotAccountDialog';
+} from './CreateRobotAccountDialog';
 
 export const RobotAccountEditDialog = ({ resolve: { resource, refetch } }) => {
   const fields = useRobotAccountFields(resource);

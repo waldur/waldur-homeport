@@ -193,9 +193,10 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/details/RobotAccountList.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourceActions.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/marketplace/robot-accounts/RobotAccountList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -1905,11 +1906,11 @@ msgstr ""
 msgid "Create request"
 msgstr ""
 
-#: src/marketplace/resources/actions/CreateRobotAccountAction.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountAction.tsx
 msgid "Create robot account"
 msgstr ""
 
-#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 msgid "Create robot account for marketplace resource"
 msgstr ""
 
@@ -2690,7 +2691,7 @@ msgstr ""
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
-#: src/marketplace/resources/details/RobotAccountEditButton.tsx
+#: src/marketplace/robot-accounts/RobotAccountEditButton.tsx
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton.tsx
 #: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
@@ -3276,7 +3277,7 @@ msgstr ""
 msgid "Find solution"
 msgstr ""
 
-#: src/marketplace/resources/details/RobotAccountExpandable.tsx
+#: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Fingerprint"
@@ -4904,11 +4905,11 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
-#: src/marketplace/resources/details/RobotAccountExpandable.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
@@ -5861,6 +5862,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
@@ -6846,6 +6848,8 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
@@ -7178,7 +7182,7 @@ msgstr ""
 msgid "Public SSH keys will be injected into services that allow key-based access."
 msgstr ""
 
-#: src/marketplace/resources/details/RobotAccountExpandable.tsx
+#: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/user/keys/KeyCreateDialog.tsx
 #: src/user/keys/KeysListExpandableRow.tsx
 msgid "Public key"
@@ -7808,6 +7812,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
@@ -8126,11 +8131,12 @@ msgstr ""
 msgid "Revoke"
 msgstr ""
 
-#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 msgid "Robot account has been created."
 msgstr ""
 
-#: src/marketplace/resources/details/RobotAccountCard.tsx
+#: src/marketplace/robot-accounts/RobotAccountCard.tsx
+#: src/marketplace/routes.ts
 msgid "Robot accounts"
 msgstr ""
 
@@ -8248,7 +8254,7 @@ msgstr ""
 msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr ""
 
-#: src/marketplace/resources/details/RobotAccountExpandable.tsx
+#: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/user/keys/KeysList.tsx
 #: src/user/routes.ts
 msgid "SSH keys"
@@ -8260,7 +8266,7 @@ msgstr ""
 msgid "SSH public key"
 msgstr ""
 
-#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 msgid "SSH public keys"
 msgstr ""
 
@@ -10261,8 +10267,9 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
-#: src/marketplace/resources/details/RobotAccountList.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/marketplace/robot-accounts/RobotAccountList.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
@@ -10470,7 +10477,7 @@ msgstr ""
 msgid "Unable to create request."
 msgstr ""
 
-#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 msgid "Unable to create robot account."
 msgstr ""
 
@@ -11857,10 +11864,11 @@ msgstr ""
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/UsernameGroup.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
-#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
 #: src/marketplace/resources/details/ResourceAccessCard.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
-#: src/marketplace/resources/details/RobotAccountList.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/marketplace/robot-accounts/RobotAccountList.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
@@ -11905,8 +11913,8 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
-#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
-#: src/marketplace/resources/details/RobotAccountExpandable.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
 #: src/rancher/cluster/tabs.ts
@@ -12782,12 +12790,13 @@ msgstr ""
 msgid "reviews"
 msgstr ""
 
-#: src/marketplace/resources/details/RobotAccountDeleteButton.tsx
-#: src/marketplace/resources/details/RobotAccountEditDialog.tsx
+#: src/marketplace/robot-accounts/RobotAccountDeleteButton.tsx
+#: src/marketplace/robot-accounts/RobotAccountEditDialog.tsx
 msgid "robot account"
 msgstr ""
 
-#: src/marketplace/resources/details/RobotAccountList.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/marketplace/robot-accounts/RobotAccountList.tsx
 msgid "robot accounts"
 msgstr ""
 
