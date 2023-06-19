@@ -48,7 +48,7 @@ export const updateProject = (project) => {
   const data = {
     name: project.name,
     description: project.description,
-    end_date: project.end_date ? formatDate(project.end_date) : undefined,
+    end_date: project.end_date ? formatDate(project.end_date) : null,
     backend_id: project.backend_id,
     oecd_fos_2007_code: project.oecd_fos_2007_code?.value,
     is_industry: project.is_industry,
