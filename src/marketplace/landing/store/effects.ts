@@ -22,6 +22,7 @@ function* getCategories() {
       allowed_customer_uuid: customer?.uuid,
       project_uuid: project?.uuid,
       has_offerings: true,
+      field: ['uuid', 'icon', 'title', 'offering_count'],
     },
   };
   try {
