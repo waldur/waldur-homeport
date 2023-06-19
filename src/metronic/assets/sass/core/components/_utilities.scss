@@ -109,12 +109,31 @@ $utilities: map-merge(
     ),
   )
 );
-.form-floating {
-  display: flex;
-  align-items: center;
+
+.end-button {
+  position: absolute;
+  right: 5px;
+  top: 12px;
+
+  & span i {
+    margin-left: 1px !important;
+    margin-bottom: 1px !important;
+  }
 }
+
 .unit {
   position: absolute;
+  top: 5px;
   right: 0;
   background: transparent;
+}
+.end-button {
+  position: absolute;
+  right: 5px;
+  top: 12px;
+
+  & span i {
+    margin-left: 1px !important;
+    margin-bottom: 1px !important;
+  }
 }

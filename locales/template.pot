@@ -7534,6 +7534,7 @@ msgid "Remote user ID"
 msgstr ""
 
 #: src/customer/team/UserRemoveButton.tsx
+#: src/form/DateField.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
