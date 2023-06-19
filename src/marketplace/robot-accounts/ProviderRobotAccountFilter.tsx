@@ -4,23 +4,33 @@ import { reduxForm } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-import { ProjectFilter } from '../resources/list/ProjectFilter';
+import { ProviderCustomerFilter } from './ProviderCustomerFilter';
+import { ProviderProjectFilter } from './ProviderProjectFilter';
 
-const PureProviderRobotAccountFilter: FunctionComponent = () => {
+const PureProviderRobotAccountFilter: FunctionComponent<{ provider }> = ({
+  provider,
+}) => {
   return (
     <>
+      <TableFilterItem
+        title={translate('Organization')}
+        name="customer"
+        badgeValue={(value) => value?.name}
+      >
+        <ProviderCustomerFilter provider_uuid={provider.uuid} />
+      </TableFilterItem>
       <TableFilterItem
         title={translate('Project')}
         name="project"
         badgeValue={(value) => value?.name}
       >
-        <ProjectFilter />
+        <ProviderProjectFilter provider_uuid={provider.uuid} />
       </TableFilterItem>
     </>
   );
 };
 
-const enhance = reduxForm({
+const enhance = reduxForm<{}, { provider }>({
   form: 'ProviderRobotAccountFilter',
 });
 

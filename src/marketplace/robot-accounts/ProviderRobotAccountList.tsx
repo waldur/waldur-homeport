@@ -12,15 +12,18 @@ import { ProviderRobotAccountFilter } from './ProviderRobotAccountFilter';
 import { RobotAccountActions } from './RobotAccountActions';
 import { RobotAccountExpandable } from './RobotAccountExpandable';
 
-export const ProviderRobotAccountList: FunctionComponent = () => {
+export const ProviderRobotAccountList: FunctionComponent<{ provider }> = ({
+  provider,
+}) => {
   const filterValues = useSelector(
     getFormValues('ProviderRobotAccountFilter'),
-  ) as { project?: { uuid } };
+  ) as { project?: { uuid }; customer?: { uuid } };
   const customer = useSelector(getCustomer);
   const filter = useMemo(
     () => ({
       provider_uuid: customer?.uuid,
       project_uuid: filterValues?.project?.uuid,
+      customer_uuid: filterValues?.customer?.uuid,
     }),
     [filterValues, customer],
   );
@@ -66,7 +69,7 @@ export const ProviderRobotAccountList: FunctionComponent = () => {
   return (
     <Table
       {...tableProps}
-      filters={<ProviderRobotAccountFilter />}
+      filters={<ProviderRobotAccountFilter provider={provider} />}
       columns={columns}
       verboseName={translate('robot accounts')}
       hasActionBar={false}

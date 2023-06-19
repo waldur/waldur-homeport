@@ -5233,6 +5233,7 @@ msgstr ""
 #: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/resources/list/RelatedCustomerFilter.tsx
+#: src/marketplace/robot-accounts/ProviderCustomerFilter.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
 msgid "No organizations"
 msgstr ""
@@ -5256,6 +5257,7 @@ msgstr ""
 
 #: src/marketplace/resources/actions/MoveToProjectAutocomplete.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
+#: src/marketplace/robot-accounts/ProviderProjectFilter.tsx
 msgid "No projects"
 msgstr ""
 
@@ -5862,6 +5864,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
@@ -8564,6 +8567,7 @@ msgstr ""
 #: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/resources/list/RelatedCustomerFilter.tsx
+#: src/marketplace/robot-accounts/ProviderCustomerFilter.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
 msgid "Select organization..."
 msgstr ""
@@ -8596,6 +8600,7 @@ msgstr ""
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/marketplace/resources/actions/MoveToProjectAutocomplete.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
+#: src/marketplace/robot-accounts/ProviderProjectFilter.tsx
 msgid "Select project..."
 msgstr ""
 
