@@ -32,10 +32,19 @@ const TableComponent: FunctionComponent<any> = (props) => {
         {
           title: translate('Member'),
           render: ({ row }) => (
-            <>
-              <Gravatar email={row.email} size={25} />{' '}
-              {row.full_name || row.username}
-            </>
+            <div className="content-wrapper gap-2">
+              {row.image ? (
+                <img
+                  src={row.image}
+                  alt={row.username}
+                  width={25}
+                  height={25}
+                />
+              ) : (
+                <Gravatar email={row.email} size={25} />
+              )}
+              <p className="mb-0">{row.full_name || row.username}</p>
+            </div>
           ),
         },
         {
