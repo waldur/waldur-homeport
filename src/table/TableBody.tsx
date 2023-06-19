@@ -104,7 +104,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
             <TableCells row={row} columns={columns} />
             {hoverableRow && (
               <td className="row-actions">
-                {React.createElement(hoverableRow, { row, fetch })}
+                <div>{React.createElement(hoverableRow, { row, fetch })}</div>
               </td>
             )}
           </tr>

@@ -41,39 +41,51 @@
     position: relative;
 
     > td.row-actions {
-      display: flex;
-      align-items: center;
-      position: absolute;
-      background: $body-bg;
-      transition: all 0.1s;
-      right: 0;
-      height: 100%;
-      padding-left: 6px;
-      border: 0;
-      opacity: 0;
+      position: relative;
+      padding-left: 0;
+      padding-right: 0;
+      width: 0;
 
-      &::before {
-        width: 144px;
-        transition: all 0.1s;
-        content: '';
-        height: 100%;
-        margin-left: -144px;
+      > div {
+        display: flex;
+        align-items: center;
         position: absolute;
+        background: $body-bg;
+        transition: all 0.1s;
         top: 0;
-        left: 0;
-        background-image: linear-gradient(
-          90deg,
-          rgba($body-bg, 0) 0%,
-          $body-bg 100%
-        );
+        right: 0;
+        height: 100%;
+        padding-left: 6px;
+        border: 0;
         opacity: 0;
+
+        &::before {
+          width: 144px;
+          transition: all 0.1s;
+          content: '';
+          height: 100%;
+          margin-left: -144px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-image: linear-gradient(
+            90deg,
+            rgba($body-bg, 0) 0%,
+            $body-bg 100%
+          );
+          opacity: 0;
+        }
+
+        .btn {
+          white-space: nowrap;
+        }
       }
     }
 
     &:hover,
     &:focus,
     &:focus-within {
-      > td.row-actions {
+      > td.row-actions > div {
         background: $body-bg;
         opacity: 1;
 
