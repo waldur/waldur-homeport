@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import Gravatar from 'react-gravatar';
 
 import { Tip } from '@waldur/core/Tooltip';
+import { User } from '@waldur/workspace/types';
 
 interface SymbolsGroupProps {
   items: Object[];
@@ -30,16 +31,19 @@ export const SymbolsGroup: FunctionComponent<SymbolsGroupProps> = ({
   max,
   nameKey,
   emailKey,
-  imageKey,
   length,
   onClick,
 }) => (
   <div className="symbol-group symbol-hover" onClick={onClick}>
-    {items.slice(0, max).map((item, index) => (
+    {items.slice(0, max).map((item: User, index: number) => (
       <div key={index} className="symbol symbol-circle symbol-35px">
         <Tip key={index} label={item[nameKey]} id={`customer-${index}`}>
-          {item[imageKey] ? (
-            <img src={item[imageKey]} className="rounded-circle" />
+          {item.image ? (
+            <img
+              src={item.image}
+              alt={item.image}
+              className="rounded-circle w-35px h-35px"
+            />
           ) : item[emailKey] ? (
             <Gravatar
               email={item[emailKey]}

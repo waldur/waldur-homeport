@@ -9,7 +9,7 @@ import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { translate } from '@waldur/i18n';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { ServiceProviderIcon } from '@waldur/navigation/workspace/ServiceProviderIcon';
-import { Customer } from '@waldur/workspace/types';
+import { Customer, User } from '@waldur/workspace/types';
 
 import { CustomerActions } from './CustomerActions';
 import { SymbolsGroup } from './SymbolsGroup';
@@ -21,17 +21,19 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
 
   const owners = React.useMemo(
     () =>
-      customer.owners.map((owner) => ({
+      customer.owners.map((owner: User) => ({
         email: owner.email,
         full_name: owner.full_name,
+        image: owner.image,
       })),
     [customer],
   );
   const managers = React.useMemo(
     () =>
-      customer.service_managers.map((member) => ({
+      customer.service_managers.map((member: User) => ({
         email: member.email,
         full_name: member.full_name,
+        image: member.image,
       })),
     [customer],
   );
