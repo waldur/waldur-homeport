@@ -621,13 +621,27 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-public-resource-details',
-    url: 'marketplace-public-resource-details/:resource_uuid?tab',
+    url: 'resource-details/:resource_uuid?tab',
     parent: 'organization',
     ...getResourceDetailsParams,
   },
 
   {
-    name: 'marketplace-service-provider-public-resource-details',
+    name: 'marketplace-support-resource-details',
+    url: 'resource-details/:resource_uuid?tab',
+    parent: 'support',
+    ...getResourceDetailsParams,
+  },
+
+  {
+    name: 'marketplace-admin-resource-details',
+    url: 'resource-details/:resource_uuid?tab',
+    parent: 'admin',
+    ...getResourceDetailsParams,
+  },
+
+  {
+    name: 'marketplace-provider-resource-details',
     url: 'resources/:resource_uuid?tab',
     parent: 'provider-resources',
     ...getResourceDetailsParams,
@@ -635,14 +649,14 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-project-resource-details',
-    url: 'marketplace-project-resource-details/:resource_uuid?tab',
+    url: 'resource-details/:resource_uuid?tab',
     parent: 'project',
     ...getResourceDetailsParams,
   },
 
   {
     name: 'marketplace-support-resources',
-    url: 'marketplace-support-resources/',
+    url: 'resources/',
     component: SupportResourcesContainer,
     parent: 'support',
     data: {
@@ -652,7 +666,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-admin-resources',
-    url: 'marketplace-admin-resources/',
+    url: 'resources/',
     component: SupportResourcesContainer,
     parent: 'admin',
     data: {
