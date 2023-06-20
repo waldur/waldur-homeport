@@ -1,4 +1,4 @@
-xdescribe('Link persistance after login', () => {
+describe('Link persistance after login', () => {
   beforeEach(() => {
     cy.mockUser()
       .intercept('GET', '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/', {
@@ -14,6 +14,8 @@ xdescribe('Link persistance after login', () => {
 
   it('should redirect to attempted url after login', () => {
     cy.visit('/profile/keys/')
+      .get('.LoginWithLocalAccountText')
+      .click()
       .fillAndSubmitLoginForm()
       .location('pathname')
       .should('match', /profile\/keys\//);
@@ -21,13 +23,15 @@ xdescribe('Link persistance after login', () => {
 
   it('should redirect to attempted url with params after login', () => {
     cy.visit('/projects/df4193e2bee24a4c8e339474d74c5f8c/')
+      .get('.LoginWithLocalAccountText')
+      .click()
       .fillAndSubmitLoginForm()
       .location('pathname')
       .should('match', /projects\/df4193e2bee24a4c8e339474d74c5f8c\//);
   });
 });
 
-xdescribe('Expired token redirect', () => {
+describe('Expired token redirect', () => {
   // See also: https://github.com/cypress-io/cypress/issues/9302
   it('should redirect to attempted url with params after login', () => {
     cy.server()
@@ -56,6 +60,8 @@ xdescribe('Expired token redirect', () => {
 
     cy.visit('/projects/df4193e2bee24a4c8e339474d74c5f8c/')
       .route('/api/users/me/', 'fixture:users/alice.json')
+      .get('.LoginWithLocalAccountText')
+      .click()
       .fillAndSubmitLoginForm()
       .location('pathname')
       .should('match', /projects\/df4193e2bee24a4c8e339474d74c5f8c\//);
@@ -79,11 +85,13 @@ xdescribe('Expired token redirect', () => {
       response: [],
     }).as('error');
 
-    cy.get('.btn')
-      .contains('Refresh')
+    cy.get('button:has(i.fa.fa-refresh)')
       .click()
       .wait(['@error'])
       .route({ method: 'GET', url: '/api/events/**', response: [] });
+
+    cy.get('.LoginWithLocalAccountText')
+      .click()
 
     cy.fillAndSubmitLoginForm()
       .location('pathname')
