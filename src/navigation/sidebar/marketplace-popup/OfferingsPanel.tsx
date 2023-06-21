@@ -1,3 +1,4 @@
+import { useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import { useState, useCallback, FunctionComponent, useMemo } from 'react';
 import { ListGroupItem, Stack } from 'react-bootstrap';
@@ -10,7 +11,7 @@ import { Tip } from '@waldur/core/Tooltip';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { offeringCategoryStateSelector } from '@waldur/marketplace/links/CategoryLink';
-import { offeringDetailsSelector } from '@waldur/marketplace/links/OfferingLink';
+import { useOfferingDetailsLink } from '@waldur/marketplace/links/OfferingLink';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -33,8 +34,7 @@ const OfferingListItem: FunctionComponent<{
   item: Offering;
   onClick;
   selectedItem: Offering;
-  linkState: string;
-}> = ({ item, onClick, selectedItem, linkState }) => {
+}> = ({ item, onClick, selectedItem }) => {
   const abbreviation = useMemo(() => getItemAbbreviation(item), [item]);
 
   return (
@@ -46,15 +46,12 @@ const OfferingListItem: FunctionComponent<{
       data-kt-menu-dismiss="true"
     >
       <ListGroupItem
-        as={Link}
         data-uuid={item.uuid}
         className={classNames({
           active: selectedItem && item.uuid === selectedItem.uuid,
         })}
         onClick={() => onClick(item)}
         disabled={item.state === 'Paused'}
-        state={linkState}
-        params={{ offering_uuid: item.uuid }}
       >
         <Stack direction="horizontal" gap={4}>
           {item.image ? (
@@ -95,12 +92,20 @@ export const OfferingsPanel: FunctionComponent<{
   const [selectedOffering, selectOffering] = useState<Offering>();
   const customer = useSelector(getCustomer);
 
-  const handleOfferingClick = useCallback((offering: Offering) => {
-    selectOffering(offering);
-  }, []);
-
-  const offeringDetailsState = useSelector(offeringDetailsSelector);
   const offeringCategoryState = useSelector(offeringCategoryStateSelector);
+  const { state, stateParams } = useOfferingDetailsLink();
+  const router = useRouter();
+
+  const handleOfferingClick = useCallback(
+    (offering: Offering) => {
+      selectOffering(offering);
+      router.stateService.go(state, {
+        ...stateParams,
+        offering_uuid: offering.uuid,
+      });
+    },
+    [router, state, stateParams, selectOffering],
+  );
 
   return (
     <div className="offering-listing">
@@ -112,7 +117,6 @@ export const OfferingsPanel: FunctionComponent<{
             selectItem={handleOfferingClick}
             EmptyPlaceholder={EmptyOfferingListPlaceholder}
             ItemComponent={OfferingListItem}
-            linkState={offeringDetailsState}
           />
           <div className="offerings-footer">
             <div className="text-center">

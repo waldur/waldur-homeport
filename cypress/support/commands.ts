@@ -20,6 +20,7 @@ declare global {
       selectDate(): Chainable;
       openSelectDialog(selectId: string, option: string): Chainable;
       buttonShouldBeDisabled(btnClass: string): Chainable;
+      clickSidebarMenuItem(menu: string, submenu?: string): Chainable;
       waitForSpinner(): Chainable;
       waitForPage(): Chainable;
     }
@@ -79,7 +80,7 @@ Cypress.Commands.add('selectTheFirstOptionOfDropdown', () => {
 });
 
 Cypress.Commands.add('selectDate', () => {
-  cy.get(".react-datepicker-wrapper input")
+  cy.get('.react-datepicker-wrapper input')
     .click()
     .get(
       '.react-datepicker__week:last-child .react-datepicker__day:first-child',
@@ -104,6 +105,32 @@ Cypress.Commands.add('openWorkspaceSelector', () => {
     .waitForSpinner();
 });
 
+Cypress.Commands.add('clickSidebarMenuItem', (menu, submenu) => {
+  cy.get(`.aside-menu .menu-item:contains(${menu})`).click();
+
+  if (submenu) {
+    cy.get(`.aside-menu .menu-item:contains(${menu})`).then(($menuItem) => {
+      if (!$menuItem.hasClass('show')) {
+        $menuItem.trigger('click');
+      }
+    });
+    cy.wait(500)
+      .get(
+        `.aside-menu .menu-item:contains(${menu}) .menu-item:contains(${submenu})`,
+      )
+      .click()
+      .waitForSpinner()
+      .get(
+        `.aside-menu .menu-item:contains(${menu}) .menu-item:contains(${submenu})`,
+      )
+      .should('have.class', 'here');
+  } else {
+    cy.waitForSpinner()
+      .get(`.aside-menu .menu-item:contains(${menu})`)
+      .should('have.class', 'here');
+  }
+});
+
 Cypress.Commands.add('mockConfigs', () => {
   cy.intercept('GET', '/api/configuration/', {
     fixture: 'configuration.json',
@@ -125,16 +152,15 @@ Cypress.Commands.add('mockUser', (userName) => {
     .intercept('POST', '/api-auth/password/', { token: 'valid' })
     .intercept('GET', '/api/users/me/', {
       fixture: `users/${userData}`,
-    })
+    });
 });
 
 Cypress.Commands.add('mockCustomer', () => {
-  cy
-    .intercept(
-      'GET',
-      '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/counters/',
-      {},
-    )
+  cy.intercept(
+    'GET',
+    '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/counters/',
+    {},
+  )
     .intercept('GET', '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/', {
       fixture: 'customers/alice.json',
     })
@@ -153,37 +179,21 @@ Cypress.Commands.add('mockChecklists', () => {
   });
 });
 
-Cypress.Commands.add('mockEvents', ()=> {
-  cy
-  .intercept('GET', '/api/events-stats/**', [])
-})
+Cypress.Commands.add('mockEvents', () => {
+  cy.intercept('GET', '/api/events-stats/**', []);
+});
 
-Cypress.Commands.add('mockCustomers', ()=> {
-  cy
-    .intercept('HEAD', '/api/customers/', [])
-    .intercept('GET', '/api/customers/**', [])
-})
+Cypress.Commands.add('mockCustomers', () => {
+  cy.intercept('HEAD', '/api/customers/', []).intercept(
+    'GET',
+    '/api/customers/**',
+    [],
+  );
+});
 
-Cypress.Commands.add('mockPermissions', ()=> {
-  cy
-    .intercept(
-      'GET',
-      '/api/customer-permissions/',
-      {},
-    )
-    .intercept(
-      'GET',
-      '/api/customer-permissions/**',
-      {},
-    )
-    .intercept(
-      'GET',
-      '/api/project-permissions/',
-      [],
-    )
-    .intercept(
-      'GET',
-      '/api/project-permissions/**',
-      [],
-    );
-})
+Cypress.Commands.add('mockPermissions', () => {
+  cy.intercept('GET', '/api/customer-permissions/', {})
+    .intercept('GET', '/api/customer-permissions/**', {})
+    .intercept('GET', '/api/project-permissions/', [])
+    .intercept('GET', '/api/project-permissions/**', []);
+});
