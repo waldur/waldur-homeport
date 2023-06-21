@@ -18,11 +18,15 @@ import './AllCategoriesPage.scss';
 export const AllCategoriesPage: FunctionComponent = () => {
   useFullPage();
   useTitle(translate('All categories'));
-
+  const options = {
+    params: {
+      field: ['uuid', 'icon', 'title', 'offering_count'],
+    },
+  };
   const [
     { loading: loadingCategories, error: errorCategories, value: categories },
     loadCategories,
-  ] = useAsyncFn<Category[]>(() => getCategories(), []);
+  ] = useAsyncFn<Category[]>(() => getCategories(options), []);
   const [
     { loading: loadingOfferings, error: errorOfferings, value: offerings },
     loadOfferings,
