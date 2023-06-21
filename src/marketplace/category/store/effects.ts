@@ -30,6 +30,17 @@ function* loadOfferings() {
       params: {
         ...params,
         category_uuid: categoryId,
+        field: [
+          'uuid',
+          'state',
+          'paused_reason',
+          'thumbnail',
+          'name',
+          'customer_uuid',
+          'customer_name',
+          'description',
+          'parent_description',
+        ],
       },
     });
     yield put(actions.loadOfferingsSuccess(offerings));
