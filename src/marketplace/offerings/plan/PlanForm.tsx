@@ -5,7 +5,7 @@ import { Field, FormSection } from 'redux-form';
 import { required } from '@waldur/core/validators';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
-import { WysiwygEditor } from '@waldur/marketplace/offerings/create/WysiwygEditor';
+import { WysiwygEditor } from '@waldur/marketplace/offerings/steps/WysiwygEditor';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { ArticleCodeField } from '../ArticleCodeField';

@@ -8,9 +8,30 @@ import { FormFieldsContext } from '@waldur/form/context';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 
-import { getTabLabel, TABS } from '../create/OfferingCreateDialog';
-import { Wizard } from '../create/Wizard';
+import { AccountingStepContainer } from '../steps/AccountingStepContainer';
+import { DescriptionStepContainer } from '../steps/DescriptionStepContainer';
+import { ManagementStepContainer } from '../steps/ManagementStepContainer';
+import { OverviewStep } from '../steps/OverviewStep';
+import { ReviewStep } from '../steps/ReviewStep';
+import { Wizard } from '../steps/Wizard';
 import { STEPS, OfferingStep } from '../types';
+
+export const TABS = {
+  Overview: OverviewStep,
+  Description: DescriptionStepContainer,
+  Management: ManagementStepContainer,
+  Accounting: AccountingStepContainer,
+  Review: ReviewStep,
+};
+
+export const getTabLabel = (tab: string) =>
+  ({
+    Overview: translate('Overview'),
+    Description: translate('Description'),
+    Management: translate('Management'),
+    Accounting: translate('Accounting'),
+    Review: translate('Review'),
+  }[tab] || tab);
 
 interface OfferingUpdateDialogProps
   extends InjectedFormProps<{ name: string }> {

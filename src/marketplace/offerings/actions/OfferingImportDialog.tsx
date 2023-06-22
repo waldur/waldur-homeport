@@ -9,8 +9,8 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { WizardButtons } from '../create/WizardButtons';
-import { WizardTabs } from '../create/WizardTabs';
+import { WizardButtons } from '../steps/WizardButtons';
+import { WizardTabs } from '../steps/WizardTabs';
 
 import { importOffering } from './api';
 import { OFFERING_IMPORT_FORM_ID } from './constants';

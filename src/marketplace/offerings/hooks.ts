@@ -1,11 +1,15 @@
 import { useRouter } from '@uirouter/react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
-import { OfferingImportDialog } from './actions/OfferingImportDialog';
+const OfferingImportDialog = lazyComponent(
+  () => import('./actions/OfferingImportDialog'),
+  'OfferingImportDialog',
+);
 
 export const useOfferingDropdownActions = () => {
   const router = useRouter();
@@ -20,15 +24,6 @@ export const useOfferingDropdownActions = () => {
   }
 
   return [
-    {
-      label: translate('Add offerings'),
-      icon: 'fa fa-plus',
-      action: () => {
-        router.stateService.go('marketplace-offering-create', {
-          uuid: customer.uuid,
-        });
-      },
-    },
     {
       label: translate('Import offerings'),
       icon: 'fa fa-plus',

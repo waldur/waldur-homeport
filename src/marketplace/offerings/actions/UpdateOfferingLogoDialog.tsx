@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 import { FormContainer, SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { UPDATE_OFFERING_LOGO_FORM_ID } from '@waldur/marketplace/offerings/actions/constants';
-import { ImageUploadField } from '@waldur/marketplace/offerings/create/ImageUploadField';
+import { ImageUploadField } from '@waldur/marketplace/offerings/steps/ImageUploadField';
 import { updateOfferingLogo } from '@waldur/marketplace/offerings/store/constants';
 import { Offering } from '@waldur/marketplace/types';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';

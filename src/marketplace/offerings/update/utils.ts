@@ -2,10 +2,10 @@ import { getOfferingTypes } from '@waldur/marketplace/common/registry';
 import { Offering, Category, OfferingOptions } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
 
-import { getAccountingTypeOptions } from '../create/ComponentAccountingTypeField';
-import { getLimitPeriods } from '../create/ComponentLimitPeriodField';
 import { FIELD_TYPES } from '../option/constants';
 import { getBillingPeriods } from '../plan/constants';
+import { getAccountingTypeOptions } from '../steps/ComponentAccountingTypeField';
+import { getLimitPeriods } from '../steps/ComponentLimitPeriodField';
 import { parseOfferingLimits } from '../store/limits';
 import { getOffering, getCategories } from '../store/selectors';
 
