@@ -1,5 +1,6 @@
 import { FunctionComponent, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 
 import { translate } from '@waldur/i18n';
@@ -7,6 +8,7 @@ import { getCategories } from '@waldur/marketplace/common/api';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
+import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { fetchLastNOfferings } from '../api';
 
@@ -18,6 +20,9 @@ import './AllCategoriesPage.scss';
 export const AllCategoriesPage: FunctionComponent = () => {
   useFullPage();
   useTitle(translate('All categories'));
+  const customer = useSelector(getCustomer);
+  const project = useSelector(getProject);
+
   const options = {
     params: {
       field: ['uuid', 'icon', 'title', 'offering_count'],
@@ -30,7 +35,10 @@ export const AllCategoriesPage: FunctionComponent = () => {
   const [
     { loading: loadingOfferings, error: errorOfferings, value: offerings },
     loadOfferings,
-  ] = useAsyncFn<Offering[]>(() => fetchLastNOfferings(), []);
+  ] = useAsyncFn<Offering[]>(
+    () => fetchLastNOfferings({ customer, project }),
+    [],
+  );
 
   useEffect(() => {
     loadCategories();
