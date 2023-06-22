@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import { Fragment, useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
+import './ResourceTabs.scss';
+
 export const ResourceTabs = ({ tabs, resource }) => {
   const [selectedSection, selectSection] = useState<any>();
 
@@ -13,9 +15,9 @@ export const ResourceTabs = ({ tabs, resource }) => {
 
   return (
     <Row>
-      <Col sm={4}>
+      <Col xs={6} xl={4} className="z-index-1">
         <div
-          className="menu menu-rounded menu-column menu-active-bg menu-hover-bg menu-title-gray-700 fs-5 fw-semibold w-250px"
+          className="resource-tabs menu menu-rounded menu-column menu-active-bg menu-hover-bg menu-title-gray-700 fs-5 fw-semibold"
           id="#kt_aside_menu"
           data-kt-menu="true"
         >
@@ -23,7 +25,7 @@ export const ResourceTabs = ({ tabs, resource }) => {
             <Fragment key={tabIndex}>
               <div className="menu-item">
                 <div className="menu-content pb-2">
-                  <span className="menu-section text-muted text-uppercase fs-7 fw-bold">
+                  <span className="menu-section text-muted text-uppercase fw-bold">
                     {tab.title}
                   </span>
                 </div>
@@ -46,7 +48,7 @@ export const ResourceTabs = ({ tabs, resource }) => {
                       onClick={() => selectSection(section)}
                     >
                       <span className="menu-title">{section.title}</span>
-                      <span className="menu-badge fs-7 fw-normal text-muted">
+                      <span className="menu-badge fw-normal text-muted">
                         {section.count}
                       </span>
                     </a>
@@ -57,7 +59,7 @@ export const ResourceTabs = ({ tabs, resource }) => {
           ))}
         </div>
       </Col>
-      <Col sm={8}>
+      <Col xs={6} xl={8}>
         {selectedSection && <selectedSection.component resource={resource} />}
       </Col>
     </Row>

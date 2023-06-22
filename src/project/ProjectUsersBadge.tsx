@@ -70,7 +70,7 @@ export const ProjectUsersBadge = (props: OwnProps) => {
           <Form.Label column xs="auto">
             {translate(ENV.roles.manager)}:
           </Form.Label>
-          <Col>
+          <Col xs={12} sm>
             <SymbolsGroup items={managers} max={6} onClick={goToUsers} />
           </Col>
         </Form.Group>
@@ -80,7 +80,7 @@ export const ProjectUsersBadge = (props: OwnProps) => {
           <Form.Label column xs="auto">
             {translate(ENV.roles.admin)}:
           </Form.Label>
-          <Col>
+          <Col xs={12} sm>
             <SymbolsGroup items={admins} max={6} onClick={goToUsers} />
           </Col>
         </Form.Group>
@@ -90,7 +90,7 @@ export const ProjectUsersBadge = (props: OwnProps) => {
           <Form.Label column xs="auto">
             {translate(ENV.roles.member)}:
           </Form.Label>
-          <Col>
+          <Col xs={12} sm>
             <SymbolsGroup items={members} max={6} onClick={goToUsers} />
           </Col>
         </Form.Group>

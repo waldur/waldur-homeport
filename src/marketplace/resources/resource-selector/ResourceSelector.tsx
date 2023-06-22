@@ -178,7 +178,7 @@ export const ResourceSelectorToggle: FunctionComponent<ResourceSelectorTogglePro
             data-kt-menu-placement="bottom"
             onClick={scroll}
           >
-            <h3 className="text-decoration-underline mb-0 me-2">
+            <h3 className="text-start text-decoration-underline mb-0 me-2">
               {props.resource.name}
             </h3>
             <i className="fa fa-caret-down fs-4 text-dark"></i>

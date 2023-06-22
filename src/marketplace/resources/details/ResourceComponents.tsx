@@ -1,4 +1,5 @@
 import { Table } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 
 import { Limits } from '@waldur/marketplace/common/registry';
 import { OfferingComponent } from '@waldur/marketplace/types';
@@ -14,6 +15,10 @@ export const ResourceComponents = ({
 }) => {
   const normalize = (value: number, factor: number) =>
     ((value || 0) / (factor || 1)).toFixed();
+
+  const isMediumScreen = useMediaQuery({ minWidth: 768, maxWidth: 1270 });
+  const isSmallScreen = useMediaQuery({ maxWidth: 320 });
+
   return (
     <Table className="gs-0 gy-1 gx-3">
       <tbody>
@@ -35,6 +40,7 @@ export const ResourceComponents = ({
             units={component.measured_unit}
             title={component.name}
             description={component.description}
+            compact={isMediumScreen || isSmallScreen}
           />
         ))}
       </tbody>
