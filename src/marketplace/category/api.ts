@@ -1,6 +1,10 @@
 import { getPublicOfferingsList } from '../common/api';
 
-export const fetchLastNOfferings = async (page_size = 5) => {
+export const fetchLastNOfferings = async ({
+  page_size = 5,
+  customer = null,
+  project = null,
+} = {}) => {
   const offerings = await getPublicOfferingsList({
     page: 1,
     page_size,
@@ -17,6 +21,8 @@ export const fetchLastNOfferings = async (page_size = 5) => {
     ],
     state: ['Active', 'Paused'],
     o: '-created',
+    allowed_customer_uuid: customer?.uuid,
+    project_uuid: project?.uuid,
   });
   return offerings;
 };
