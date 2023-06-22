@@ -1,13 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { Card } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
 import { post } from '@waldur/core/api';
 import { pick } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { isSupport as isSupportSelector } from '@waldur/workspace/selectors';
 
 import { BrandingForm } from './BrandingForm';
 
@@ -15,6 +16,8 @@ const saveConfig = (values) => post('/branding/', values);
 
 export const AdministrationBranding = () => {
   const dispatch = useDispatch();
+  const isSupport = useSelector(isSupportSelector);
+
   const callback = async (values) => {
     try {
       await saveConfig(values);
@@ -44,7 +47,11 @@ export const AdministrationBranding = () => {
     <Card>
       <Card.Header>{translate('Naming')}</Card.Header>
       <Card.Body>
-        <BrandingForm saveConfig={mutate} initialValues={initialValues} />
+        <BrandingForm
+          saveConfig={mutate}
+          initialValues={initialValues}
+          disabled={isSupport}
+        />
       </Card.Body>
     </Card>
   );

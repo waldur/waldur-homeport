@@ -13,32 +13,41 @@ import { translate } from '@waldur/i18n';
 export const PureBrandingForm: FunctionComponent<any> = (props) => (
   <form onSubmit={props.handleSubmit(props.saveConfig)}>
     <FormContainer submitting={props.submitting} floating={true}>
-      <StringField name="SHORT_PAGE_TITLE" label={translate('Site name')} />
+      <StringField
+        name="SHORT_PAGE_TITLE"
+        label={translate('Site name')}
+        disabled={props.disabled}
+      />
       <StringField
         name="SITE_DESCRIPTION"
         label={translate('Site description')}
+        disabled={props.disabled}
       />
       <StringField
         name="BRAND_COLOR"
         label={translate(
           'Hex color definition is used in landing page for login button.',
         )}
+        disabled={props.disabled}
       />
       <StringField
         name="BRAND_LABEL_COLOR"
         label={translate(
           'Hex color definition is used in HomePort landing page for font color of login button.',
         )}
+        disabled={props.disabled}
       />
       <StringField
         name="HERO_LINK_LABEL"
         label={translate(
           'Label for link in hero section of HomePort landing page.',
         )}
+        disabled={props.disabled}
       />
       <StringField
         name="HERO_LINK_URL"
         label={translate('Link URL in hero section of HomePort landing page.')}
+        disabled={props.disabled}
       />
     </FormContainer>
     <Form.Group>
@@ -73,7 +82,10 @@ export const PureBrandingForm: FunctionComponent<any> = (props) => (
   </form>
 );
 
-const enhance = reduxForm<{}, { saveConfig }>({
+const enhance = reduxForm<
+  any,
+  { saveConfig: any; initialValues: any; disabled: boolean }
+>({
   form: 'BrandingForm',
 });
 
