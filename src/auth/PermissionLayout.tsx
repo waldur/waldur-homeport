@@ -12,7 +12,7 @@ import {
   getProject,
   getUserCustomerPermissions,
   getUserProjectPermissions,
-  isStaff,
+  isStaffOrSupport,
 } from '@waldur/workspace/selectors';
 
 type Permission = 'allowed' | 'limited' | 'restricted';
@@ -103,7 +103,7 @@ const PermissionLayout: React.FC = ({ children }) => {
     clearPermissionView,
   } = useContext(PermissionContext);
 
-  const hasAllAccess = useSelector(isStaff);
+  const hasAllAccess = useSelector(isStaffOrSupport);
   const projectPermissions = useSelector(getUserProjectPermissions);
   const customerPermissions = useSelector(getUserCustomerPermissions);
   const project = useSelector(getProject);
