@@ -26,8 +26,8 @@ export const PublicDashboardHero: FC<PublicDashboardHeroProps> = (props) => {
   const body = (
     <Row className={classNames('public-dashboard-hero-body', props.className)}>
       <Col md={8} sm={12}>
-        <Card className="w-100">
-          <Card.Body className="d-flex gap-10 flex-grow-1">
+        <Card className="w-100 mb-md-0 mb-4">
+          <Card.Body className="d-flex flex-column flex-sm-row align-items-center gap-10 flex-grow-1">
             <DashboardHeroLogo
               logo={props.logo}
               logoAlt={props.logoAlt}
@@ -37,11 +37,13 @@ export const PublicDashboardHero: FC<PublicDashboardHeroProps> = (props) => {
               logoBottomClass={props.logoBottomClass}
             />
             <div className="d-flex flex-column flex-grow-1">
-              <div className="d-flex flex-grow-1">
+              <div className="d-flex flex-grow-1 flex-sm-row flex-column-reverse">
                 {/* Title */}
                 <div className="flex-grow-1">{props.title}</div>
                 {/* Actions */}
-                {props.actions}
+                <div className="d-flex align-self-end align-self-sm-start">
+                  {props.actions}
+                </div>
               </div>
               <div className="mt-6">
                 {/* Details */}
