@@ -54,10 +54,6 @@ const MarketplaceLanding = lazyComponent(
   () => import('./landing/LandingPageContainer'),
   'MarketplaceLanding',
 );
-const OfferingCreateContainer = lazyComponent(
-  () => import('./offerings/create/OfferingCreateContainer'),
-  'OfferingCreateContainer',
-);
 const OfferingContainer = lazyComponent(
   () => import('./offerings/details/OfferingContainer'),
   'OfferingContainer',
@@ -531,13 +527,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Projects'),
     },
-  },
-
-  {
-    name: 'marketplace-offering-create',
-    url: 'marketplace-provider-offering-create/',
-    component: OfferingCreateContainer,
-    parent: 'marketplace-provider',
   },
 
   {

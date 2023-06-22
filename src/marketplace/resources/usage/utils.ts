@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 
 import { parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { getAccountingTypeOptions } from '@waldur/marketplace/offerings/create/ComponentAccountingTypeField';
+import { getAccountingTypeOptions } from '@waldur/marketplace/offerings/steps/ComponentAccountingTypeField';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { ComponentUsage } from './types';

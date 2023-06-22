@@ -73,10 +73,6 @@ export const isUpdatingOffering = (isUpdating: boolean) => {
   };
 };
 
-export const loadDataStart = () => ({
-  type: constants.LOAD_DATA_START,
-});
-
 export const loadDataSuccess = (data) => ({
   type: constants.LOAD_DATA_SUCCESS,
   payload: {

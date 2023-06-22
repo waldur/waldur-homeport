@@ -6,7 +6,6 @@ import * as actions from '@waldur/marketplace/offerings/store/actions';
 import { router } from '@waldur/router';
 import { RootState } from '@waldur/store/reducers';
 
-import { mergeProps } from '../create/OfferingCreateContainer';
 import { updateOffering, FORM_ID } from '../store/constants';
 import {
   getStep,
@@ -16,10 +15,27 @@ import {
   isLoaded,
   isErred,
 } from '../store/selectors';
-import { OfferingStep } from '../types';
+import { OfferingStep, STEPS } from '../types';
 
 import { OfferingUpdateDialog } from './OfferingUpdateDialog';
 import { getInitialValues } from './utils';
+
+export const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps,
+  goBack() {
+    if (stateProps.step === STEPS[0]) {
+      router.stateService.go('marketplace-vendor-offerings');
+    } else {
+      dispatchProps.setStep(STEPS[STEPS.indexOf(stateProps.step) - 1]);
+    }
+  },
+  goNext() {
+    dispatchProps.setStep(STEPS[STEPS.indexOf(stateProps.step) + 1]);
+  },
+  isLastStep: stateProps.step === STEPS[STEPS.length - 1],
+});
 
 const mapStateToProps = (state: RootState) => ({
   step: getStep(state),
