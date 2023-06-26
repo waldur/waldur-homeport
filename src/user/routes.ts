@@ -56,6 +56,10 @@ const ProjectsList = lazyComponent(
   () => import('@waldur/user/affiliations/ProjectsList'),
   'ProjectsList',
 );
+const ResourcesListContainer = lazyComponent(
+  () => import('@waldur/user/resources/ResourcesListContainer'),
+  'ResourcesListContainer',
+);
 const UserIssuesList = lazyComponent(
   () => import('./UserIssuesList'),
   'UserIssuesList',
@@ -109,6 +113,7 @@ export const states: StateDeclaration[] = [
     url: '',
     data: {
       breadcrumb: () => translate('Affiliations'),
+      priority: 105,
     },
   },
 
@@ -247,6 +252,15 @@ export const states: StateDeclaration[] = [
     parent: 'profile-affiliations',
     data: {
       breadcrumb: () => translate('Projects'),
+    },
+  },
+  {
+    name: 'profile.resources',
+    url: 'user-resources/',
+    component: ResourcesListContainer,
+    data: {
+      breadcrumb: () => translate('Resources'),
+      priority: 110,
     },
   },
   {

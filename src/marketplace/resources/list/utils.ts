@@ -38,6 +38,8 @@ export const resourcesListRequiredFields = () => [
   'provider_uuid',
   'project_uuid',
   'customer_uuid',
+  'customer_name',
+  'project_name',
   'category_title',
   'description',
   'can_terminate',

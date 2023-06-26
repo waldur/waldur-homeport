@@ -13,3 +13,5 @@ export const USER_PERMISSION_REQUESTS_TABLE_ID =
   'user-permission-requests-table';
 export const USER_PERMISSION_REQUESTS_FILTER_FORM_ID =
   'user-permission-requests-table-filter-form';
+
+export const USER_RESOURCES_FILTER_FORM_ID = 'UserResourcesFilter';
