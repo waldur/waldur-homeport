@@ -31,8 +31,6 @@ export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
     state = 'marketplace-public-resource-details';
   } else if (isDescendantOf('admin', currentState)) {
     state = 'marketplace-admin-resource-details';
-  } else if (isDescendantOf('support', currentState)) {
-    state = 'marketplace-support-resource-details';
   }
   const label = row.name || row.offering_name;
   return (

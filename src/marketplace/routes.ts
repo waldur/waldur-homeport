@@ -616,13 +616,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-support-resource-details',
-    url: 'resource-details/:resource_uuid?tab',
-    parent: 'support',
-    ...getResourceDetailsParams,
-  },
-
-  {
     name: 'marketplace-admin-resource-details',
     url: 'resource-details/:resource_uuid?tab',
     parent: 'admin',
@@ -641,16 +634,6 @@ export const states: StateDeclaration[] = [
     url: 'resource-details/:resource_uuid?tab',
     parent: 'project',
     ...getResourceDetailsParams,
-  },
-
-  {
-    name: 'marketplace-support-resources',
-    url: 'resources/',
-    component: SupportResourcesContainer,
-    parent: 'support',
-    data: {
-      breadcrumb: () => translate('Resources'),
-    },
   },
 
   {
