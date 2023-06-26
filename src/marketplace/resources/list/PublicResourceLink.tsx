@@ -20,9 +20,11 @@ export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
   customer,
 }) => {
   const { state: currentState } = useCurrentStateAndParams();
+  let uuid = customer ? customer.uuid : row.customer_uuid;
   let state;
   if (isDescendantOf('project', currentState)) {
     state = 'marketplace-project-resource-details';
+    uuid = row.project_uuid;
   } else if (isDescendantOf('marketplace-provider', currentState)) {
     state = 'marketplace-provider-resource-details';
   } else if (isDescendantOf('organization', currentState)) {
@@ -32,7 +34,6 @@ export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
   } else if (isDescendantOf('support', currentState)) {
     state = 'marketplace-support-resource-details';
   }
-  const uuid = customer ? customer.uuid : row.customer_uuid;
   const label = row.name || row.offering_name;
   return (
     <>
