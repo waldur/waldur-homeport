@@ -150,7 +150,7 @@ export function attachTransitions() {
 
   router.transitionService.onSuccess({}, (transition) => {
     if (
-      transition.to().data.auth &&
+      transition.to().data?.auth &&
       !transition.params().hasOwnProperty('toState')
     ) {
       setRedirect({

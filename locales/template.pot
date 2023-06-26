@@ -388,6 +388,7 @@ msgstr ""
 #: src/marketplace/resources/list/CreateResourceButton.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
+#: src/user/resources/ResourcesList.tsx
 msgid "Add resource"
 msgstr ""
 
@@ -1313,6 +1314,8 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/user/resources/ResourcesFilter.tsx
+#: src/user/resources/ResourcesList.tsx
 msgid "Category"
 msgstr ""
 
@@ -1998,6 +2001,7 @@ msgstr ""
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/UserPermissionRequestsList.tsx
+#: src/user/resources/ResourcesList.tsx
 msgid "Created at"
 msgstr ""
 
@@ -4950,6 +4954,7 @@ msgstr ""
 #: src/support/OfferingConfigurationForm.tsx
 #: src/support/SupportDetailsTable.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -5474,6 +5479,8 @@ msgstr ""
 #: src/project/ProjectOrderItemsList.tsx
 #: src/support/SupportDetailsTable.tsx
 #: src/user/UserOfferingList.tsx
+#: src/user/resources/ResourcesFilter.tsx
+#: src/user/resources/ResourcesList.tsx
 msgid "Offering"
 msgstr ""
 
@@ -5873,6 +5880,8 @@ msgstr ""
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/affiliations/ProjectsListFilter.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
+#: src/user/resources/ResourcesFilter.tsx
+#: src/user/resources/ResourcesList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -6860,6 +6869,8 @@ msgstr ""
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/user/UserPermissionRequestsList.tsx
+#: src/user/resources/ResourcesFilter.tsx
+#: src/user/resources/ResourcesList.tsx
 msgid "Project"
 msgstr ""
 
@@ -7997,6 +8008,7 @@ msgstr ""
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/resources/ResourcesList.tsx
 #: src/user/routes.ts
 msgid "Resources"
 msgstr ""
@@ -8204,6 +8216,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
+#: src/user/resources/ResourcesFilter.tsx
 msgid "Runtime state"
 msgstr ""
 
@@ -9356,6 +9369,8 @@ msgstr ""
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/hooks/HooksList.tsx
+#: src/user/resources/ResourcesFilter.tsx
+#: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "State"
@@ -12439,6 +12454,10 @@ msgstr ""
 
 #: src/invitations/UserGroupInvitation.tsx
 msgid "Your request is being processed."
+msgstr ""
+
+#: src/user/resources/ResourcesListContainer.tsx
+msgid "Your role allows to see all existing resources"
 msgstr ""
 
 #: src/navigation/workspace/context-selector/OrganizationSummary.tsx
