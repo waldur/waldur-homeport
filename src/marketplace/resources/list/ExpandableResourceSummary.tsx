@@ -27,6 +27,7 @@ const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => (
     <Field
       label={translate('Attributes')}
       value={
+        row.attributes &&
         Object.keys(row.attributes).length > 0 && (
           <KeyValueButton items={row.attributes} />
         )
