@@ -21,7 +21,7 @@ export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
 }) => {
   const { state: currentState } = useCurrentStateAndParams();
   let uuid = customer ? customer.uuid : row.customer_uuid;
-  let state;
+  let state = 'marketplace-public-resource-details';
   if (isDescendantOf('project', currentState)) {
     state = 'marketplace-project-resource-details';
     uuid = row.project_uuid;
