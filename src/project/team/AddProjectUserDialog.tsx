@@ -10,7 +10,7 @@ import { OrganizationProjectSelectField } from '@waldur/customer/team/Organizati
 import { getRoles } from '@waldur/customer/team/utils';
 import { FormContainer, SelectField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { DateField } from '@waldur/form/DateField';
+import { DateTimeField } from '@waldur/form/DateTimeField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -90,7 +90,7 @@ export const AddProjectUserDialog = reduxForm<
             options={getRoles()}
             required={true}
           />
-          <DateField
+          <DateTimeField
             name="expiration_time"
             label={translate('Role expires on')}
             minDate={DateTime.now().plus({ days: 1 }).toISO()}
