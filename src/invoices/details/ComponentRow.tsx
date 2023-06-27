@@ -29,20 +29,24 @@ export const ComponentRow = ({
       )}
     </td>
     <td>{item.measured_unit}</td>
-    <OverlayTrigger
-      trigger={['hover', 'focus']}
-      placement="top"
-      overlay={
-        <Popover id="InvoiceItem">
-          <ResourceLimitPeriodsTable
-            periods={item.details.resource_limit_periods}
-            unit={item.unit}
-          />
-        </Popover>
-      }
-    >
+    {item.details.resource_limit_periods ? (
+      <OverlayTrigger
+        trigger={['hover', 'focus']}
+        placement="top"
+        overlay={
+          <Popover id="InvoiceItem">
+            <ResourceLimitPeriodsTable
+              periods={item.details.resource_limit_periods}
+              unit={item.unit}
+            />
+          </Popover>
+        }
+      >
+        <td>{item.factor || item.quantity}</td>
+      </OverlayTrigger>
+    ) : (
       <td>{item.factor || item.quantity}</td>
-    </OverlayTrigger>
+    )}
     {showPrice && (
       <>
         <td>{defaultCurrency(item.unit_price)}</td>
