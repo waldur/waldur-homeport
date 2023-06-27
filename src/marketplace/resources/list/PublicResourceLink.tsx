@@ -31,8 +31,18 @@ export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
     state = 'marketplace-public-resource-details';
   } else if (isDescendantOf('admin', currentState)) {
     state = 'marketplace-admin-resource-details';
+  } else if (isDescendantOf('profile', currentState)) {
+    state = 'marketplace-profile-resource-details';
   }
   const label = row.name || row.offering_name;
+  if (!state) {
+    return (
+      <>
+        {label} <BackendIdTip backendId={row.backend_id} />
+        <EndDateTooltip end_date={row.end_date} />
+      </>
+    );
+  }
   return (
     <>
       <Link

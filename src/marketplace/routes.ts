@@ -623,6 +623,13 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'marketplace-profile-resource-details',
+    url: 'resource-details/:resource_uuid?tab',
+    parent: 'profile',
+    ...getResourceDetailsParams,
+  },
+
+  {
     name: 'marketplace-provider-resource-details',
     url: 'resources/:resource_uuid?tab',
     parent: 'provider-resources',
