@@ -10,6 +10,7 @@ import { AdminMenu } from './AdminMenu';
 import { ManagementMenu } from './ManagementMenu';
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
 import { MenuItem } from './MenuItem';
+import { ProviderMenu } from './ProviderMenu';
 import { ReportingMenu } from './ReportingMenu';
 import { ResourcesMenu } from './ResourcesMenu';
 import { Sidebar } from './Sidebar';
@@ -45,8 +46,9 @@ export const UnifiedSidebar = () => {
       {user ? (
         <>
           <MarketplaceTrigger />
-          <ResourcesMenu />
           <ManagementMenu />
+          <ResourcesMenu />
+          <ProviderMenu />
           <ReportingMenu />
           <SupportMenu />
           <AdminMenu />

@@ -3,10 +3,8 @@ import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import {
-  checkIsServiceManager,
   getCustomer,
   getProject,
-  getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
 } from '@waldur/workspace/selectors';
 
@@ -14,12 +12,10 @@ import { MenuItem } from './MenuItem';
 
 const IconOrganization = require('./Organization.svg');
 const IconProject = require('./Project.svg');
-const IconProvider = require('./Service_Provider.svg');
 
 export const ManagementMenu = () => {
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
-  const user = useSelector(getUser);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const { state, params } = useCurrentStateAndParams();
   return (
@@ -65,18 +61,6 @@ export const ManagementMenu = () => {
           child={false}
         />
       )}
-      {customer &&
-        customer.is_service_provider &&
-        (checkIsServiceManager(customer, user) || isOwnerOrStaff) && (
-          <MenuItem
-            title={translate('Provider')}
-            state="marketplace-provider-dashboard"
-            params={{ uuid: customer.uuid }}
-            activeState="marketplace-provider"
-            iconPath={IconProvider}
-            child={false}
-          />
-        )}
     </>
   );
 };
