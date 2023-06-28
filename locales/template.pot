@@ -3193,6 +3193,7 @@ msgstr ""
 msgid "Featured offerings"
 msgstr ""
 
+#: src/issues/FeaturesList.tsx
 #: src/issues/routes.ts
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Features"
