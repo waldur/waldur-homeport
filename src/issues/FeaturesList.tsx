@@ -84,7 +84,7 @@ export const FeaturesList = reduxForm({
   };
 
   return (
-    <Panel>
+    <Panel title={translate('Features')}>
       <form onSubmit={handleSubmit(saveFeaturesCallback)}>
         <Table
           responsive={true}
