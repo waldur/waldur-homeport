@@ -1,2 +1,1 @@
 import './actions';
-import './tabs';

@@ -8,7 +8,6 @@ const OpenStackBackupSummary = lazyComponent(
   'OpenStackBackupSummary',
 );
 
-import './tabs';
 
 ResourceSummary.register('OpenStackTenant.Backup', OpenStackBackupSummary);
 ActionRegistry.register('OpenStackTenant.Backup', actions);

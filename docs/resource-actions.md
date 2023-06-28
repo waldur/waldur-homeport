@@ -94,42 +94,6 @@ export default function createAction(): ResourceAction {
 }
 ```
 
-### Actions for related resources
-
-By default, actions list is rendered as dropdown menu only when user clicks at `Actions` button in resource list or resource details view. However, if action is about managing related resource, it makes more sense to render resource action in the toolbar of related resources list. In this case you shall specify following options:
-
-* `tab` is a string, it should match tab name for related resource specified in resource tab configuration.
-
-```javascript
-// waldur-homeport/src/openstack/openstack-tenant/tabs.js
-  ResourceTabsConfigurationProvider.register('OpenStack.Tenant', {
-    order: [
-      'networks',
-    ],
-    options: {
-      networks: {
-        heading: gettext('Networks'),
-        component: 'openstackTenantNetworks'
-      },
-    }
-  });
-
-  // waldur-homeport/src/openstack/openstack-tenant/actions/CreateNetworkAction.ts
-  export default function createAction(): ResourceAction {
-    return {
-      name: 'create_network',
-      type: 'form',
-      method: 'POST',
-      tab: 'networks',
-      title: translate('Create'),
-      dialogTitle: translate('Create network for OpenStack tenant'),
-      iconClass: 'fa fa-plus',
-    };
-  }
-```
-
-* `iconClass` is an optional string, which should specify font icon, usually FontAwesome icon, it is rendered in the button for that action.
-
 ### Rendering resource action dialog
 
 If action's `type` is 'form', modal dialog is rendered. By default, it's assumed that input data is collected via form rendered from `fields` parameter. You may control modal dialog contents and appearance:

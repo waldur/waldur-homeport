@@ -3,7 +3,6 @@ import './marketplace';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import './actions';
-import './tabs';
 
 const AzureSQLDatabaseSummary = lazyComponent(
   () => import('./AzureSQLDatabaseSummary'),

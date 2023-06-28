@@ -7,7 +7,6 @@ const OpenStackSnapshotSummary = lazyComponent(
   'OpenStackSnapshotSummary',
 );
 import './actions';
-import './tabs';
 
 ResourceSummary.register('OpenStackTenant.Snapshot', OpenStackSnapshotSummary);
 ResourceStateConfigurationProvider.register('OpenStackTenant.Snapshot', {
