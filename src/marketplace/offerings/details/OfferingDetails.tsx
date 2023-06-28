@@ -22,6 +22,7 @@ import { OfferingBookingTab } from './OfferingBookingTab';
 import { OfferingDetailsHeader } from './OfferingDetailsHeader';
 import { OfferingKeyFiguresSection } from './OfferingKeyFiguresSection';
 import { OfferingUsersTable } from './OfferingUsersTable';
+import { OfferingPermissionsList } from './permissions/OfferingPermissionsList';
 import { PlanUsageList } from './PlanUsageList';
 
 import './OfferingDetails.scss';
@@ -65,25 +66,33 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
             </MediaQuery>
 
             {/* TABLES */}
-            <OfferingOrderItemsList
-              offering={props.offering}
-              filters={<OrderItemsFilter />}
-              className="mb-10"
-            />
-            <OfferingResourcesList
-              offering={props.offering}
-              filters={<OfferingResourcesFilter />}
-              className="mb-10"
-            />
-            <OfferingUsersTable offering={props.offering} className="mb-10" />
-
-            <OfferingCustomersListFilter uniqueFormId={uniqueFormId} />
-
-            <OfferingCustomersList
-              offeringUuid={props.offering.uuid}
-              uniqueFormId={uniqueFormId}
-              className="mb-10"
-            />
+            <div className="mb-10">
+              <OfferingOrderItemsList
+                offering={props.offering}
+                filters={<OrderItemsFilter />}
+              />
+            </div>
+            <div className="mb-10">
+              <OfferingResourcesList
+                offering={props.offering}
+                filters={<OfferingResourcesFilter />}
+              />
+            </div>
+            <div className="mb-10">
+              <OfferingUsersTable offering={props.offering} />
+            </div>
+            <div className="mb-10">
+              <OfferingPermissionsList offering={props.offering} />
+            </div>
+            <div className="mb-10">
+              <OfferingCustomersListFilter uniqueFormId={uniqueFormId} />
+            </div>
+            <div className="mb-10">
+              <OfferingCustomersList
+                offeringUuid={props.offering.uuid}
+                uniqueFormId={uniqueFormId}
+              />
+            </div>
             <Card className="mb-10">
               <div className="border-2 border-bottom card-header">
                 <div className="card-toolbar">

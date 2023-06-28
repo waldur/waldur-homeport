@@ -1,50 +1,42 @@
 import { useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { grantPermission, usersAutocomplete } from '@waldur/customer/team/api';
 import { FormContainer } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { DateTimeField } from '@waldur/form/DateTimeField';
 import { translate } from '@waldur/i18n';
-import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse } from '@waldur/store/notify';
-import { fetchListStart } from '@waldur/table/actions';
-import { getCustomer } from '@waldur/workspace/selectors';
 
-import { grantPermission, usersAutocomplete } from '../../customer/team/api';
-
-import { OFFERING_PERMISSIONS_LIST_ID } from './constants';
-
-export const OfferingPermissionCreateDialog = reduxForm({
+export const OfferingPermissionCreateDialog = reduxForm<
+  {},
+  { resolve: { refetch; offering } }
+>({
   form: 'OfferingPermissionCreateDialog',
-})(({ submitting, handleSubmit }) => {
+})(({ submitting, handleSubmit, resolve: { refetch, offering } }) => {
   const dispatch = useDispatch();
-  const customer = useSelector(getCustomer);
   const saveUser = useCallback(
     async (formData) => {
       try {
         await grantPermission({
-          offering: formData.offering.url,
+          offering: offering.url,
           user: formData.user.url,
           expiration_time: formData.expiration_time,
         });
         dispatch(closeModalDialog());
-        dispatch(
-          fetchListStart(OFFERING_PERMISSIONS_LIST_ID, {
-            customer_uuid: customer.uuid,
-          }),
-        );
+        await refetch();
       } catch (error) {
         dispatch(
           showErrorResponse(error, translate('Unable to grant permission.')),
         );
       }
     },
-    [dispatch, customer],
+    [dispatch, offering, refetch],
   );
   return (
     <form onSubmit={handleSubmit(saveUser)}>
@@ -61,20 +53,6 @@ export const OfferingPermissionCreateDialog = reduxForm({
               usersAutocomplete({ full_name: query }, prevOptions, page)
             }
             getOptionLabel={({ full_name, email }) => full_name || email}
-            required={true}
-          />
-          <AsyncSelectField
-            name="offering"
-            label={translate('Offering')}
-            placeholder={translate('Select offerings...')}
-            loadOptions={(query, prevOptions, page) =>
-              offeringsAutocomplete(
-                { name: query, shared: true, customer: customer.url },
-                prevOptions,
-                page,
-              )
-            }
-            getOptionLabel={({ name }) => name}
             required={true}
           />
           <Field
