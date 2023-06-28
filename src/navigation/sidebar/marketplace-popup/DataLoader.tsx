@@ -55,6 +55,11 @@ export const DataLoader = ({ filter }) => {
   );
 
   const categories = useMemo(() => {
+    if (!Array.isArray(mainCategories)) return [];
+    const nonZeroCategories = mainCategories.filter(
+      (category) => category.offering_count > 0,
+    );
+
     if (lastOfferings && lastOfferings.length > 0) {
       const recentlyAddedOfferingsCategory: Category = {
         icon: undefined,
@@ -63,9 +68,9 @@ export const DataLoader = ({ filter }) => {
         uuid: RECENTLY_ADDED_OFFERINGS_UUID,
         url: undefined,
       };
-      return [recentlyAddedOfferingsCategory].concat(mainCategories);
+      return [recentlyAddedOfferingsCategory].concat(nonZeroCategories);
     }
-    return mainCategories;
+    return nonZeroCategories;
   }, [mainCategories, lastOfferings]);
 
   // search with delay
