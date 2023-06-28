@@ -431,7 +431,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-vendor-offerings',
-    url: 'marketplace-provider-offerings/?{state}',
+    url: 'offerings/?{state}',
     component: ProviderOfferingsList,
     parent: 'provider-marketplace',
     data: {
@@ -440,8 +440,15 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'marketplace-vendor-offering-details',
+    url: 'offering-details/:offering_uuid',
+    component: OfferingContainer,
+    parent: 'provider-marketplace',
+  },
+
+  {
     name: 'marketplace-vendor-offering-users',
-    url: 'marketplace-provider-offering-users/',
+    url: 'offering-users/',
     component: ProviderOfferingUsersList,
     parent: 'provider-marketplace',
     data: {
@@ -452,7 +459,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-provider-organizations',
     parent: 'marketplace-provider-customers',
-    url: 'marketplace-provider-organizations/',
+    url: 'organizations/',
     component: ProviderOrganizationsList,
     data: {
       breadcrumb: () => translate('Organizations'),
@@ -462,7 +469,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-provider-users',
     parent: 'marketplace-provider-customers',
-    url: 'marketplace-provider-users/',
+    url: 'users/',
     component: ProviderUsersList,
     data: {
       breadcrumb: () => translate('Users'),

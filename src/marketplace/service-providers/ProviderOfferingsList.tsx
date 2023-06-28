@@ -7,7 +7,6 @@ import { useDestroyFilterOnLeave } from '@waldur/core/filters';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
-import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
 import { createFetcher, Table } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { useTable } from '@waldur/table/utils';
@@ -21,15 +20,9 @@ import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerReso
 import { ServiceProvider } from '../types';
 
 import { PROVIDER_OFFERINGS_FORM_ID } from './constants';
+import { OfferingNameColumn } from './OfferingNameColumn';
 import { ProviderOfferingsFilter } from './ProviderOfferingsFilter';
 import { ResourcesCountColumn } from './ResourcesCountColumn';
-
-const OfferingNameColumn = ({ row }) => (
-  <>
-    <b>{row.name}</b>
-    <div className="text-gray">{row.category_title}</div>
-  </>
-);
 
 interface ProviderOfferingsComponentProps {
   provider: ServiceProvider;
@@ -88,7 +81,6 @@ export const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> =
           },
         ]}
         verboseName={translate('Offerings')}
-        expandableRow={OfferingsListExpandableRow}
         dropdownActions={dropdownActions}
         actions={<CreateOfferingButton fetch={tableProps.fetch} />}
         hoverableRow={OfferingActions}
