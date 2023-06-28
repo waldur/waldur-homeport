@@ -4,7 +4,6 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
-import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
 import {
   OFFERING_TABLE_NAME,
   PUBLIC_OFFERINGS_FILTER_FORM_ID,
@@ -76,7 +75,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
       hoverableRow={OfferingActions}
-      expandableRow={OfferingsListExpandableRow}
       hasQuery={true}
     />
   );

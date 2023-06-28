@@ -1,10 +1,9 @@
-import React from 'react';
-import { Button, Card, Col, Row } from 'react-bootstrap';
+import React, { useMemo } from 'react';
+import { Card, Col, Row } from 'react-bootstrap';
 import MediaQuery from 'react-responsive';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
-import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { OfferingOrderItemsList } from '@waldur/marketplace/details/OfferingOrderItemsList';
 import { OfferingResourcesFilter } from '@waldur/marketplace/details/OfferingResourcesFilter';
 import { OfferingResourcesList } from '@waldur/marketplace/details/OfferingResourcesList';
@@ -12,18 +11,22 @@ import { OrderItemsFilter } from '@waldur/marketplace/orders/item/list/OrderItem
 import { PlanUsageRow } from '@waldur/marketplace/resources/plan-usage/types';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { Field } from '@waldur/resource/summary';
 
-import { OfferingItemActions } from '../actions/OfferingItemActions';
-import { Logo } from '../service-providers/shared/Logo';
+import { OFFERING_CUSTOMERS_LIST_FILTER } from '../expandable/constants';
+import { OfferingCostsChart } from '../expandable/OfferingCostsChart';
+import { OfferingCustomersList } from '../expandable/OfferingCustomersList';
+import { OfferingCustomersListFilter } from '../expandable/OfferingCustomersListFilter';
+import { OfferingUsageChart } from '../expandable/OfferingUsageChart';
 
 import { OfferingBookingTab } from './OfferingBookingTab';
+import { OfferingDetailsHeader } from './OfferingDetailsHeader';
 import { OfferingKeyFiguresSection } from './OfferingKeyFiguresSection';
 import { OfferingUsersTable } from './OfferingUsersTable';
 import { PlanUsageList } from './PlanUsageList';
+
 import './OfferingDetails.scss';
 
-interface OfferingDetailsProps {
+export interface OfferingDetailsProps {
   offering: Offering;
   category: Category;
   plansUsage: PlanUsageRow[];
@@ -32,6 +35,10 @@ interface OfferingDetailsProps {
 
 export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
+  const [uniqueFormId] = useMemo(
+    () => `${OFFERING_CUSTOMERS_LIST_FILTER}-${props.offering.uuid}`,
+    [props.offering],
+  );
 
   return (
     <div className="provider-offering">
@@ -39,83 +46,7 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
       <div className="container-xxl position-relative py-16">
         <Row>
           <Col lg={8} md={12}>
-            {/* HEADER SECTION */}
-            <div className="d-flex gap-10 flex-grow-1 mb-10">
-              {/* LOGO CARD */}
-              <Card className="provider-offering-logo">
-                <Card.Body>
-                  <OfferingLogo
-                    src={props.offering.thumbnail}
-                    size={50}
-                    className="offering-small-logo"
-                  />
-                  <Logo
-                    image={props.category.icon}
-                    placeholder={props.category.title[0]}
-                    height={100}
-                    width={100}
-                  />
-                </Card.Body>
-              </Card>
-
-              {/* INFO CARD */}
-              <Card className="flex-grow-1">
-                <Card.Body className="d-flex flex-column">
-                  <div className="d-flex flex-grow-1">
-                    <div className="flex-grow-1">
-                      <h3>{props.offering.name}</h3>
-                      <i className="text-dark">
-                        {props.offering.customer_name}
-                      </i>
-                    </div>
-                    {props.offering.shared && (
-                      <div className="is-flex">
-                        <Button
-                          variant="light"
-                          size="sm"
-                          className="btn-icon me-2"
-                          onClick={props.refetch}
-                        >
-                          <i className="fa fa-refresh" />
-                        </Button>
-                        <div className="btn btn-flush">
-                          <OfferingItemActions
-                            offering={props.offering}
-                            refreshOffering={props.refetch}
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  <div className="mt-4">
-                    <Field
-                      label={translate('State')}
-                      value={props.offering.state}
-                    />
-                    <Field
-                      label={translate('Type')}
-                      value={props.offering.type}
-                    />
-                    <Field
-                      label={translate('Shared')}
-                      value={
-                        props.offering.shared
-                          ? translate('Yes')
-                          : translate('No')
-                      }
-                    />
-                    <Field
-                      label={translate('Billing enabled')}
-                      value={
-                        props.offering.billable
-                          ? translate('Yes')
-                          : translate('No')
-                      }
-                    />
-                  </div>
-                </Card.Body>
-              </Card>
-            </div>
+            <OfferingDetailsHeader {...props} />
 
             {/* Show Key Figures and Plans in a row under header section, when width <= lg */}
             <MediaQuery maxWidth={991}>
@@ -145,6 +76,42 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
               className="mb-10"
             />
             <OfferingUsersTable offering={props.offering} className="mb-10" />
+
+            <OfferingCustomersListFilter uniqueFormId={uniqueFormId} />
+
+            <OfferingCustomersList
+              offeringUuid={props.offering.uuid}
+              uniqueFormId={uniqueFormId}
+              className="mb-10"
+            />
+            <Card className="mb-10">
+              <div className="border-2 border-bottom card-header">
+                <div className="card-toolbar">
+                  <div className="card-title h5">
+                    {translate('Offering cost chart')}
+                  </div>
+                </div>
+              </div>
+              <OfferingCostsChart
+                offeringUuid={props.offering.uuid}
+                uniqueFormId={uniqueFormId}
+              />
+            </Card>
+            {props.offering.components.length > 0 ? (
+              <Card className="mb-10">
+                <div className="border-2 border-bottom card-header">
+                  <div className="card-toolbar">
+                    <div className="card-title h5">
+                      {translate('Component usage chart')}
+                    </div>
+                  </div>
+                </div>
+                <OfferingUsageChart
+                  offeringUuid={props.offering.uuid}
+                  components={props.offering.components}
+                />
+              </Card>
+            ) : null}
             {props.offering.type === OFFERING_TYPE_BOOKING && (
               <OfferingBookingTab offeringUuid={props.offering.uuid} />
             )}
