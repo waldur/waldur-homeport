@@ -41,7 +41,7 @@ export const CategoryListItem: FunctionComponent<{
           />
         )}
         <span className="title lh-1">{truncate(item.title)}</span>
-        {item.offering_count && (
+        {item.offering_count > 0 && (
           <span className="lh-1 text-muted ms-auto">
             {translate('{count} items', { count: item.offering_count || 0 })}
           </span>
