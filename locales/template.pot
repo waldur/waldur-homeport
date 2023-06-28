@@ -2662,6 +2662,7 @@ msgstr ""
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 #: src/marketplace/offerings/option/OfferingOptionsScriptEditor.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx

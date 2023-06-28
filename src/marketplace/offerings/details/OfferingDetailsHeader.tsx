@@ -1,5 +1,6 @@
 import { Button, Card } from 'react-bootstrap';
 
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { Field } from '@waldur/resource/summary';
@@ -36,24 +37,29 @@ export const OfferingDetailsHeader = (props: OfferingDetailsProps) => (
             <h3>{props.offering.name}</h3>
             <i className="text-dark">{props.offering.customer_name}</i>
           </div>
-          {props.offering.shared && (
-            <div className="is-flex">
-              <Button
-                variant="light"
-                size="sm"
-                className="btn-icon me-2"
-                onClick={props.refetch}
-              >
-                <i className="fa fa-refresh" />
-              </Button>
-              <div className="btn btn-flush">
-                <OfferingItemActions
-                  offering={props.offering}
-                  refreshOffering={props.refetch}
-                />
-              </div>
+          <div className="is-flex">
+            <Button
+              variant="light"
+              size="sm"
+              className="btn-icon me-2"
+              onClick={props.refetch}
+            >
+              <i className="fa fa-refresh" />
+            </Button>
+            <Link
+              className="btn btn-sm btn-primary me-2"
+              state="marketplace-offering-update"
+              params={{ offering_uuid: props.offering.uuid }}
+            >
+              {translate('Edit')}
+            </Link>
+            <div className="btn btn-flush">
+              <OfferingItemActions
+                offering={props.offering}
+                refreshOffering={props.refetch}
+              />
             </div>
-          )}
+          </div>
         </div>
         <div className="mt-4">
           <Field label={translate('State')} value={props.offering.state} />
