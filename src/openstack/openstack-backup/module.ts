@@ -8,6 +8,5 @@ const OpenStackBackupSummary = lazyComponent(
   'OpenStackBackupSummary',
 );
 
-
 ResourceSummary.register('OpenStackTenant.Backup', OpenStackBackupSummary);
 ActionRegistry.register('OpenStackTenant.Backup', actions);
