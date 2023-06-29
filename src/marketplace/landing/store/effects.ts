@@ -1,6 +1,7 @@
 import { triggerTransition } from '@uirouter/redux';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
+import { queryClient } from '@waldur/Application';
 import * as api from '@waldur/marketplace/common/api';
 import { WORKSPACE_OFFERING_DETAILS } from '@waldur/marketplace/constants';
 import { Category } from '@waldur/marketplace/types';
@@ -26,7 +27,12 @@ function* getCategories() {
     },
   };
   try {
-    const categories: Category[] = yield call(api.getCategories, options);
+    const data = queryClient.fetchQuery({
+      queryKey: ['landing-categories', customer?.uuid, project?.uuid],
+      queryFn: () => api.getCategories(options),
+      staleTime: 5 * 60 * 1000,
+    });
+    const categories: Category[] = yield call(() => data);
     yield put(actions.categoriesFetchSuccess(categories));
   } catch {
     yield put(actions.categoriesFetchError());
@@ -63,7 +69,12 @@ function* getOfferings() {
     params.shared = true;
   }
   try {
-    const offerings = yield call(api.getPublicOfferingsList, params);
+    const data = queryClient.fetchQuery({
+      queryKey: ['landing-offerings', customer?.uuid, project?.uuid],
+      queryFn: () => api.getPublicOfferingsList(params),
+      staleTime: 5 * 60 * 1000,
+    });
+    const offerings = yield call(() => data);
     yield put(actions.offeringsFetchSuccess(offerings));
   } catch {
     yield put(actions.offeringsFetchError());
