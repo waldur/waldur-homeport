@@ -22,10 +22,14 @@ export const VolumesSection = ({ resource }) => {
     return {
       data: response.rows.map((volume) => ({
         name: volume.name,
-        summary: translate('Size: {size}, attached to: {device}', {
-          size: formatFilesize(volume.size),
-          device: volume.device || 'N/A',
-        }),
+        summary: translate(
+          'Size: {size}, attached to: {device} , volume type: {type}',
+          {
+            size: formatFilesize(volume.size),
+            device: volume.device || 'N/A',
+            type: volume.type_name || 'N/A',
+          },
+        ),
         state: getResourceState(volume),
         marketplace_resource_uuid: volume.marketplace_resource_uuid,
         project_uuid: volume.project_uuid,
