@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 import { compose } from 'redux';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
@@ -73,13 +72,13 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       placeholderComponent={<ProjectTablePlaceholder />}
       actions={<ProjectCreateButton />}
       hoverableRow={({ row }) => (
-        <ButtonGroup>
+        <>
           <ProjectHoverableRow
             row={{ project_uuid: row.uuid, customer_uuid: row.customer_uuid }}
           />
           <ProjectsListActions project={row} />
           <ProjectDetailsButton project={row} />
-        </ButtonGroup>
+        </>
       )}
       expandableRow={ProjectExpandableRowContainer}
       enableExport={true}

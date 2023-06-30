@@ -9,23 +9,16 @@ import { getCustomer as getCustomerSelector } from '@waldur/workspace/selectors'
 export const OrganizationHoverableRow: FC<{ row }> = ({ row }) => {
   const currentOrganization = useSelector(getCustomerSelector);
 
-  return currentOrganization?.uuid !== row.uuid ? (
-    <Link state="organization.dashboard" params={{ uuid: row.uuid }}>
-      <Button
-        variant="light"
-        className="btn-active-primary min-w-90px pull-right"
-        size="sm"
-      >
-        {translate('Select')}
-      </Button>
+  return currentOrganization?.uuid !== row.customer_uuid ? (
+    <Link
+      className="btn btn-light btn-active-primary min-w-90px pull-right"
+      state="organization.dashboard"
+      params={{ uuid: row.customer_uuid }}
+    >
+      {translate('Select')}
     </Link>
   ) : (
-    <Button
-      variant="secondary"
-      size="sm"
-      disabled={true}
-      className="pull-right"
-    >
+    <Button variant="secondary" disabled={true} className="pull-right">
       {translate('Selected')}
     </Button>
   );
