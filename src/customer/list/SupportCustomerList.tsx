@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -51,10 +50,10 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       enableExport={true}
       showPageSizeSelector={true}
       hoverableRow={({ row }) => (
-        <ButtonGroup>
+        <>
           <OrganizationHoverableRow row={{ customer_uuid: row.uuid }} />
           {props.isStaff && <OrganizationEditButton customer={row} />}
-        </ButtonGroup>
+        </>
       )}
       expandableRow={({ row }) => <OrganizationDetails customer={row} />}
     />

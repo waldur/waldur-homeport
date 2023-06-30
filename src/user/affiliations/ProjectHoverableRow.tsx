@@ -8,23 +8,16 @@ import { getProject as getProjectSelector } from '@waldur/workspace/selectors';
 export const ProjectHoverableRow = ({ row }) => {
   const currentProject = useSelector(getProjectSelector);
 
-  return currentProject?.uuid !== row.uuid ? (
-    <Link state="project.dashboard" params={{ uuid: row.uuid }}>
-      <Button
-        variant="light"
-        className="btn-active-primary min-w-90px pull-right"
-        size="sm"
-      >
-        {translate('Select')}
-      </Button>
+  return currentProject?.uuid !== row.project_uuid ? (
+    <Link
+      className="btn btn-light btn-active-primary min-w-90px pull-right me-3"
+      state="project.dashboard"
+      params={{ uuid: row.project_uuid }}
+    >
+      {translate('Select')}
     </Link>
   ) : (
-    <Button
-      variant="secondary"
-      size="sm"
-      disabled={true}
-      className="pull-right"
-    >
+    <Button variant="secondary" disabled={true} className="pull-right me-3">
       {translate('Selected')}
     </Button>
   );
