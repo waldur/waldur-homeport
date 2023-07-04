@@ -15,7 +15,6 @@ import { states as projectRoutes } from '@waldur/project/routes';
 import { states as rancherRoutes } from '@waldur/rancher/routes';
 import { states as resourceRoutes } from '@waldur/resource/routes';
 import { states as resourceSupportRoutes } from '@waldur/resource/support/routes';
-import { states as supportRoutes } from '@waldur/support/routes';
 import { states as userRoutes } from '@waldur/user/routes';
 
 import { states as aboutRoutes } from './about';
@@ -36,7 +35,6 @@ export const states: StateDeclaration[] = [
   ...marketplaceChecklistRoutes,
   ...marketplaceRemoteRoutes,
   ...administrationRoutes,
-  ...supportRoutes,
   ...openstackAnalyticsRoutes,
   ...paypalRoutes,
   ...rancherRoutes,
