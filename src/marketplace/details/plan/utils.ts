@@ -54,15 +54,6 @@ export const combinePrices = (
         max_value: offeringLimits[component.type].max,
       };
     });
-
-    const usageComponents = components.filter(
-      (component) => component.billing_type === 'usage',
-    );
-    const usageSubTotal = usageComponents.reduce(
-      (result, item) => result + item.subTotal,
-      0,
-    );
-
     const fixedComponents = components.filter(
       (component) => component.billing_type === 'fixed',
     );
@@ -79,7 +70,7 @@ export const combinePrices = (
       0,
     );
 
-    const subscriptionSubTotal = usageSubTotal + fixedSubTotal + limitSubTotal;
+    const subscriptionSubTotal = fixedSubTotal + limitSubTotal;
     const totalPeriods = multipliers.map(
       (mult) => mult * subscriptionSubTotal || 0,
     );
