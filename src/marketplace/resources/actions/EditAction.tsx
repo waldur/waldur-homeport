@@ -8,8 +8,16 @@ const EditDialog = lazyComponent(() => import('./EditDialog'), 'EditDialog');
 
 const validators = [validateState('OK')];
 
+const CUSTOM_EDIT_ACTION_RESOURCE_TYPES = [
+  'OpenStackTenant.Instance',
+  'OpenStack.Tenant',
+  'OpenStackTenant.Volume',
+  'SLURM.Allocation',
+  'VMware.VirtualMachine',
+];
+
 export const EditAction: ActionItemType = ({ resource, refetch }) =>
-  resource.scope ? (
+  CUSTOM_EDIT_ACTION_RESOURCE_TYPES.includes(resource.resource_type) ? null : (
     <DialogActionItem
       validators={validators}
       title={translate('Edit')}
@@ -17,4 +25,4 @@ export const EditAction: ActionItemType = ({ resource, refetch }) =>
       resource={resource}
       extraResolve={{ refetch }}
     />
-  ) : null;
+  );
