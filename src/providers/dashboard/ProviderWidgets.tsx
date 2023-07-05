@@ -5,6 +5,7 @@ import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
+import { getStates as getResourceStates } from '@waldur/marketplace/resources/list/ResourceStateFilter';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
 import { ProviderStatistics } from '../types';
@@ -52,7 +53,13 @@ const generateWidgetsData = (statistics: ProviderStatistics) => [
     changes: statistics.resources_number_change,
     to: {
       state: 'marketplace-public-resources',
-      params: { state: ['OK', 'Creating', 'Terminating', 'Erred'] },
+      params: {
+        state: JSON.stringify(
+          getResourceStates().filter((state) =>
+            ['OK', 'Creating', 'Terminating', 'Erred'].includes(state.value),
+          ),
+        ),
+      },
     },
   },
   {
@@ -99,7 +106,11 @@ const generateWidgetsData = (statistics: ProviderStatistics) => [
     active: true,
     to: {
       state: 'marketplace-public-resources',
-      params: { state: ['Erred'] },
+      params: {
+        state: JSON.stringify([
+          getResourceStates().find((state) => state.value === 'Erred'),
+        ]),
+      },
     },
   },
 ];

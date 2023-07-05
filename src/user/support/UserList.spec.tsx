@@ -5,6 +5,10 @@ import {
 
 import { formatRoleFilter, getOrganizationsWhereOwner } from './UserList';
 
+jest.mock('@waldur/core/filters', () => ({
+  getInitialValues: jest.fn().mockImplementation((arg) => arg),
+}));
+
 const filterMock = {
   role: [
     {

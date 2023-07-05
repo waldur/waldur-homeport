@@ -69,7 +69,7 @@ const enhance = reduxForm({
   initialValues: getInitialValues({
     state: NON_TERMINATED_STATES,
   }),
-  destroyOnUnmount: false,
+  destroyOnUnmount: true,
 });
 
 export const SupportResourcesFilter = enhance(PureSupportResourcesFilter);

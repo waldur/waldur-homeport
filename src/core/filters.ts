@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { destroy } from 'redux-form';
+import { useEffectOnce } from 'react-use';
+import { destroy, initialize } from 'redux-form';
 
 import { router } from '@waldur/router';
 
@@ -65,6 +66,18 @@ export const getInitialValues = (initialValues?) => {
     }
   }
   return queryParamValues;
+};
+
+export const useReinitializeFilterFromUrl = (
+  form: string,
+  initialValues?: any,
+  initializeFn: (urlInitialValues: any) => any = (v) => v,
+) => {
+  const dispatch = useDispatch();
+  useEffectOnce(() => {
+    const values = initializeFn(getInitialValues(initialValues));
+    dispatch(initialize(form, values));
+  });
 };
 
 export const useDestroyFilterOnLeave = (form: string) => {

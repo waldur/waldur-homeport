@@ -30,3 +30,14 @@ export const formatLifetime = (input: number) => {
     return extraMinutes > 0 ? `${hours} h ${extraMinutes} min` : `${hours} h`;
   }
 };
+
+export const getRoleFilterOptions = () => [
+  {
+    label: translate('Staff'),
+    value: 'is_staff',
+  },
+  {
+    label: translate('Support'),
+    value: 'is_support',
+  },
+];

@@ -63,9 +63,9 @@ const SankeyDiagramContainer = lazyComponent(
   () => import('@waldur/providers/support/SankeyDiagramContainer'),
   'SankeyDiagramContainer',
 );
-const UserListView = lazyComponent(
-  () => import('@waldur/user/support/UserListView'),
-  'UserListView',
+const UserList = lazyComponent(
+  () => import('@waldur/user/support/UserList'),
+  'UserList',
 );
 const IssueDetailsContainer = lazyComponent(
   () => import('./IssueDetails'),
@@ -176,8 +176,8 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'admin.users',
-    url: 'users/',
-    component: UserListView,
+    url: 'users/?role',
+    component: UserList,
     data: {
       feature: 'support.users',
       breadcrumb: () => translate('Users'),
