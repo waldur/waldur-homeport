@@ -82,26 +82,6 @@ function* handleChangeLimits(action) {
   }
 }
 
-function* handleTerminateResource(action) {
-  const { resource } = action.payload;
-  try {
-    yield call(api.terminateResource, resource.uuid);
-    yield put(
-      showSuccess(
-        translate('Resource termination request has been submitted.'),
-      ),
-    );
-    yield put(constants.terminateResource.success());
-    yield put(closeModalDialog());
-  } catch (error) {
-    const errorMessage = `${translate(
-      'Unable to submit resource termination request.',
-    )} ${format(error)}`;
-    yield put(showError(errorMessage));
-    yield put(constants.terminateResource.success());
-  }
-}
-
 function* handlePeriodChange(action) {
   const { period } = action.payload;
   for (const component of period.components) {
@@ -126,6 +106,5 @@ export default function* () {
   yield takeEvery(constants.submitUsage.REQUEST, handleSubmitUsage);
   yield takeEvery(constants.switchPlan.REQUEST, handleSwitchPlan);
   yield takeEvery(constants.changeLimits.REQUEST, handleChangeLimits);
-  yield takeEvery(constants.terminateResource.REQUEST, handleTerminateResource);
   yield takeEvery(constants.PERIOD_CHANGED, handlePeriodChange);
 }

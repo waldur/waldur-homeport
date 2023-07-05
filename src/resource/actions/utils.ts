@@ -6,6 +6,7 @@ import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/Chan
 import { ShowReportAction } from '@waldur/marketplace/resources/report/ShowReportAction';
 import { SubmitReportAction } from '@waldur/marketplace/resources/report/SubmitReportAction';
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
+import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
 
 export const parseValidators = (validators, context) => {
   let reason = '';
@@ -29,5 +30,6 @@ export const getResourceCommonActions = () => {
     ChangeLimitsAction,
     SetBackendIdAction,
     EditResourceEndDateAction,
+    TerminateAction,
   ];
 };

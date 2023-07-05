@@ -1,57 +1,84 @@
-import { FunctionComponent } from 'react';
-import { InjectedFormProps } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { reduxForm } from 'redux-form';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { terminateResource } from '@waldur/marketplace/common/api';
+import { orderCanBeApproved as orderCanBeApprovedSelector } from '@waldur/marketplace/orders/store/selectors';
+import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+// @ts-ignore
+import TenantSubtitle from '@waldur/openstack/openstack-tenant/actions/DestroyActionSubtitle.md';
+// @ts-ignore
+import ClusterSubtitle from '@waldur/rancher/cluster/actions/DestroyActionSubtitle.md';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { TerminateDialogOwnProps } from './types';
+export const TerminateDialog = reduxForm<
+  {},
+  { resolve: { resource; refetch } }
+>({
+  form: 'TerminateResourceDialog',
+})((props) => {
+  const orderCanBeApproved = useSelector(orderCanBeApprovedSelector);
+  const resource = props.resolve.resource;
+  const dialogSubtitle =
+    resource.resource_type === 'OpenStack.Tenant'
+      ? TenantSubtitle
+      : resource.resource_type === 'Rancher.Cluster'
+      ? ClusterSubtitle
+      : null;
 
-interface DispatchProps {
-  submitRequest(): void;
-}
+  const dispatch = useDispatch();
+  const callback = async () => {
+    try {
+      await terminateResource(resource.uuid);
+      dispatch(
+        showSuccess(
+          translate('Resource termination request has been submitted.'),
+        ),
+      );
+      dispatch(closeModalDialog());
+    } catch (error) {
+      dispatch(
+        showErrorResponse(
+          error,
+          translate('Unable to submit resource termination request.'),
+        ),
+      );
+    }
+  };
 
-interface StateProps {
-  orderCanBeApproved: boolean;
-}
-
-type TerminateDialogProps = TerminateDialogOwnProps &
-  DispatchProps &
-  StateProps &
-  InjectedFormProps;
-
-export const TerminateDialog: FunctionComponent<TerminateDialogProps> = (
-  props,
-) => (
-  <form onSubmit={props.handleSubmit(props.submitRequest)}>
-    <ModalDialog
-      title={translate('Terminate resource {resourceName}', {
-        resourceName: props.asyncState?.value?.name,
-      })}
-      footer={
-        <>
-          <CloseDialogButton />
-          <SubmitButton
-            submitting={props.submitting}
-            label={
-              props.orderCanBeApproved
-                ? translate('Submit')
-                : translate('Request for a termination')
-            }
-            className="btn btn-danger"
-          />
-        </>
-      }
-    >
-      {translate(
-        'Are you sure you would like to terminate resource {resourceName}?',
-        {
-          resourceName: props.asyncState?.value?.name,
-        },
-      )}
-      {props.dialogSubtitle && <FormattedHtml html={props.dialogSubtitle} />}
-    </ModalDialog>
-  </form>
-);
+  return (
+    <form onSubmit={props.handleSubmit(callback)}>
+      <ModalDialog
+        title={translate('Terminate resource {resourceName}', {
+          resourceName: resource.name,
+        })}
+        footer={
+          <>
+            <CloseDialogButton />
+            <SubmitButton
+              submitting={props.submitting}
+              label={
+                orderCanBeApproved
+                  ? translate('Submit')
+                  : translate('Request for a termination')
+              }
+              className="btn btn-danger"
+            />
+          </>
+        }
+      >
+        {translate(
+          'Are you sure you would like to terminate resource {resourceName}?',
+          {
+            resourceName: resource.name,
+          },
+        )}
+        {dialogSubtitle && <FormattedHtml html={dialogSubtitle} />}
+      </ModalDialog>
+    </form>
+  );
+});

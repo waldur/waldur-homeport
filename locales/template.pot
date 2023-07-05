@@ -7937,7 +7937,7 @@ msgstr ""
 msgid "Resource schedule is already deactivated."
 msgstr ""
 
-#: src/marketplace/resources/store/effects.ts
+#: src/marketplace/resources/terminate/TerminateDialog.tsx
 msgid "Resource termination request has been submitted."
 msgstr ""
 
@@ -11025,7 +11025,7 @@ msgstr ""
 msgid "Unable to submit report."
 msgstr ""
 
-#: src/marketplace/resources/store/effects.ts
+#: src/marketplace/resources/terminate/TerminateDialog.tsx
 msgid "Unable to submit resource termination request."
 msgstr ""
 

@@ -6,9 +6,6 @@ export const submitUsage = createFormAction(
 export const switchPlan = createFormAction(
   'waldur/marketplace/resources/SWITCH_PLAN',
 );
-export const terminateResource = createFormAction(
-  'waldur/marketplace/resources/TERMINATE_RESOURCE',
-);
 export const changeLimits = createFormAction(
   'waldur/marketplace/resources/CHANGE_LIMITS',
 );

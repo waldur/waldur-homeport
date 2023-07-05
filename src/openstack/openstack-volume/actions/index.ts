@@ -1,5 +1,3 @@
-import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
-
 import { AttachAction } from './AttachAction';
 import { DetachAction } from './DetachAction';
 import { EditAction } from './EditAction';
@@ -14,5 +12,4 @@ export default [
   DetachAction,
   ExtendAction,
   RetypeAction,
-  TerminateAction,
 ];
