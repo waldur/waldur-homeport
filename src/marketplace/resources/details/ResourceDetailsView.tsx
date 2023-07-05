@@ -13,6 +13,8 @@ import {
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
 import { ResourceAccessButton } from '@waldur/resource/ResourceAccessButton';
+import { SLURM_PLUGIN } from '@waldur/slurm/constants';
+import { AllocationMainComponent } from '@waldur/slurm/details/AllocationMainComponent';
 
 import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
 import { ShowReportAction } from '../report/ShowReportAction';
@@ -60,6 +62,7 @@ export const ResourceDetailsView: FC<any> = ({
       [INSTANCE_TYPE]: InstanceMainComponent,
       [VOLUME_TYPE]: VolumeMainComponent,
       [OFFERING_TYPE_BOOKING]: BookingMainComponent,
+      [SLURM_PLUGIN]: AllocationMainComponent,
     }[resource.offering_type] || null;
 
   const logo = [INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE].includes(

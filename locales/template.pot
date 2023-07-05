@@ -576,6 +576,10 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
+#: src/slurm/details/AllocationUsersTable.tsx
+msgid "Allocation users"
+msgstr ""
+
 #: src/booking/components/WeekendsGroup.tsx
 msgid "Allow bookings to be scheduled at weekends"
 msgstr ""
@@ -2463,7 +2467,6 @@ msgstr ""
 #: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
-#: src/slurm/tabs.ts
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -4189,7 +4192,7 @@ msgstr ""
 msgid "Job title"
 msgstr ""
 
-#: src/slurm/tabs.ts
+#: src/slurm/details/AllocationJobsTable.tsx
 msgid "Jobs"
 msgstr ""
 
@@ -11884,7 +11887,6 @@ msgstr ""
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
 #: src/rancher/cluster/tabs.ts
-#: src/slurm/tabs.ts
 msgid "Users"
 msgstr ""
 

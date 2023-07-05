@@ -1,18 +1,16 @@
-import { FunctionComponent, ComponentType } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { Resource } from '@waldur/resource/types';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { SubmitJobAction } from './SubmitJobAction';
 
-interface AllocationJobsTableProps {
-  resource: Resource;
-}
-
-export const TableComponent: FunctionComponent<any> = (props) => {
+export const AllocationJobsTable: FunctionComponent<{ scope }> = ({
+  scope,
+}) => {
   const columns = [
     {
       title: translate('Name'),
@@ -31,26 +29,25 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => <ResourceState resource={row} />,
     },
   ];
+  const filter = useMemo(
+    () => ({
+      allocation_uuid: scope.uuid,
+    }),
+    [scope],
+  );
+  const tableProps = useTable({
+    table: 'AllocationJobsTable',
+    fetchData: createFetcher('slurm-jobs'),
+    filter,
+  });
+
   return (
     <Table
-      {...props}
+      {...tableProps}
+      title={translate('Jobs')}
       columns={columns}
       verboseName={translate('jobs')}
-      actions={<SubmitJobAction resource={props.resource} />}
+      actions={<SubmitJobAction resource={scope} />}
     />
   );
 };
-
-const mapPropsToFilter = ({ resource }: AllocationJobsTableProps) => ({
-  allocation_uuid: resource.uuid,
-});
-
-const TableOptions = {
-  table: 'AllocationJobsTable',
-  fetchData: createFetcher('slurm-jobs'),
-  mapPropsToFilter,
-};
-
-export const AllocationJobsTable = connectTable(TableOptions)(
-  TableComponent,
-) as ComponentType<AllocationJobsTableProps>;

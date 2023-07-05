@@ -1,39 +1,34 @@
-import { FunctionComponent, ComponentType } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { Resource } from '@waldur/resource/types';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
-interface AllocationUsersTableProps {
-  resource: Resource;
-}
-
-export const TableComponent: FunctionComponent<any> = (props) => {
-  const columns = [
-    {
-      title: translate('Username'),
-      render: ({ row }) => row.username,
-    },
-  ];
+export const AllocationUsersTable: FunctionComponent<{ scope }> = ({
+  scope,
+}) => {
+  const filter = useMemo(
+    () => ({
+      allocation_uuid: scope.uuid,
+    }),
+    [scope],
+  );
+  const tableProps = useTable({
+    table: 'AllocationUsersTable',
+    fetchData: createFetcher('slurm-associations'),
+    filter,
+  });
   return (
     <Table
-      {...props}
-      columns={columns}
+      {...tableProps}
+      title={translate('Allocation users')}
+      columns={[
+        {
+          title: translate('Username'),
+          render: ({ row }) => row.username,
+        },
+      ]}
       verboseName={translate('allocation users')}
     />
   );
 };
-
-const mapPropsToFilter = ({ resource }: AllocationUsersTableProps) => ({
-  allocation_uuid: resource.uuid,
-});
-
-const TableOptions = {
-  table: 'AllocationUsersTable',
-  fetchData: createFetcher('slurm-associations'),
-  mapPropsToFilter,
-};
-
-export const AllocationUsersTable = connectTable(TableOptions)(
-  TableComponent,
-) as ComponentType<AllocationUsersTableProps>;
