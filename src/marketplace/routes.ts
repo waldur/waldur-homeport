@@ -118,13 +118,13 @@ const ProjectResourcesAllList = lazyComponent(
   () => import('./resources/list/ProjectResourcesAllList'),
   'ProjectResourcesAllList',
 );
-const PublicResourcesContainer = lazyComponent(
-  () => import('./resources/list/PublicResourcesContainer'),
-  'PublicResourcesContainer',
+const PublicResourcesList = lazyComponent(
+  () => import('./resources/list/PublicResourcesList'),
+  'PublicResourcesList',
 );
-const SupportResourcesContainer = lazyComponent(
-  () => import('./resources/list/SupportResourcesContainer'),
-  'SupportResourcesContainer',
+const SupportResourcesList = lazyComponent(
+  () => import('./resources/list/SupportResourcesList'),
+  'SupportResourcesList',
 );
 const PlanUsageContainer = lazyComponent(
   () => import('./resources/plan-usage/PlanUsageContainer'),
@@ -598,7 +598,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-public-resources',
     url: 'resources-list/?{state}',
-    component: PublicResourcesContainer,
+    component: PublicResourcesList,
     parent: 'provider-resources',
     data: {
       breadcrumb: () => translate('Resources'),
@@ -653,7 +653,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-admin-resources',
     url: 'resources/',
-    component: SupportResourcesContainer,
+    component: SupportResourcesList,
     parent: 'admin',
     data: {
       breadcrumb: () => translate('Resources'),

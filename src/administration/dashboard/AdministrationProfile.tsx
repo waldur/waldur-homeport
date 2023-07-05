@@ -1,4 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from '@uirouter/react';
+import { useCallback } from 'react';
 import { Card, Col, Form, Row, Stack } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
@@ -9,6 +11,7 @@ import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
 import { DashboardHeroLogo } from '@waldur/dashboard/hero/DashboardHeroLogo';
 import { translate } from '@waldur/i18n';
 import { getUsers } from '@waldur/marketplace/common/api';
+import { getRoleFilterOptions } from '@waldur/user/support/utils';
 
 import { getVersion } from '../api';
 
@@ -19,6 +22,8 @@ interface AdministrationProfileProps {
 export const AdministrationProfile = ({
   healthy,
 }: AdministrationProfileProps) => {
+  const router = useRouter();
+
   const image = fixURL('/icons/login_logo/');
   const website = ENV.plugins.WALDUR_CORE.HOMEPORT_URL;
 
@@ -35,6 +40,27 @@ export const AdministrationProfile = ({
   });
 
   const [staff, supports] = value || [];
+
+  const goToUsers = useCallback(
+    (isStaff = false, isSupport = false) => {
+      const filter = {};
+      const role = [];
+      if (isStaff)
+        role.push(
+          getRoleFilterOptions().find((option) => option.value === 'is_staff'),
+        );
+      if (isSupport)
+        role.push(
+          getRoleFilterOptions().find(
+            (option) => option.value === 'is_support',
+          ),
+        );
+      if (role.length > 0)
+        Object.assign(filter, { role: JSON.stringify(role) });
+      router.stateService.go('admin.users', filter);
+    },
+    [router],
+  );
 
   return (
     <Card className="mb-6">
@@ -80,6 +106,7 @@ export const AdministrationProfile = ({
                           items={staff.options}
                           max={6}
                           length={staff.totalItems}
+                          onClick={() => goToUsers(true)}
                         />
                       </Col>
                     </Form.Group>
@@ -94,6 +121,7 @@ export const AdministrationProfile = ({
                           items={supports.options}
                           max={6}
                           length={supports.totalItems}
+                          onClick={() => goToUsers(false, true)}
                         />
                       </Col>
                     </Form.Group>

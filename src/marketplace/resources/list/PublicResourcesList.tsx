@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -9,8 +9,8 @@ import { ExpandableResourceSummary } from '@waldur/marketplace/resources/list/Ex
 import { PublicResourceActions } from '@waldur/marketplace/resources/list/PublicResourceActions';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Category, Offering } from '@waldur/marketplace/types';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 import {
   getCustomer,
   getUser,
@@ -24,6 +24,7 @@ import {
   TABLE_PUBLIC_RESOURCE,
 } from './constants';
 import { PublicResourceLink } from './PublicResourceLink';
+import { PublicResourcesFilter } from './PublicResourcesFilter';
 import { PublicResourcesLimits } from './PublicResourcesLimits';
 import { PublicResourcesListPlaceholder } from './PublicResourcesListPlaceholder';
 import { ResourceStateField } from './ResourceStateField';
@@ -35,8 +36,6 @@ interface ResourceFilter {
   category?: Category;
   offering?: Offering;
 }
-
-type StateProps = Readonly<ReturnType<typeof mapStateToProps>>;
 
 export const TableComponent: FunctionComponent<any> = (props) => {
   React.useEffect(() => {
@@ -111,38 +110,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   );
 };
 
-const mapPropsToFilter = (props: StateProps) => {
-  const filter: Record<string, string | boolean> = {};
-
-  // Public resources should only contain resources from billable offerings.
-  filter.billable = true;
-
-  if (props.customer) {
-    filter.provider_uuid = props.customer.uuid;
-  }
-  if (props.filter) {
-    if (props.filter.offering) {
-      filter.offering_uuid = props.filter.offering.uuid;
-    }
-    if (props.filter.state) {
-      filter.state = props.filter.state.map((option) => option.value);
-    }
-    if (props.filter.organization) {
-      filter.customer_uuid = props.filter.organization.uuid;
-    }
-    if (props.filter.project) {
-      filter.project_uuid = props.filter.project.uuid;
-    }
-    if (props.filter.category) {
-      filter.category_uuid = props.filter.category.uuid;
-    }
-  }
-  if (props.isServiceManager && !props.isOwnerOrStaff) {
-    filter.service_manager_uuid = props.user.uuid;
-  }
-  return filter;
-};
-
 const exportRow = (row) => [
   row.name,
   row.uuid,
@@ -174,27 +141,57 @@ const exportFields = [
 export const TableOptions = {
   table: TABLE_PUBLIC_RESOURCE,
   fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter,
   exportRow,
   exportFields,
   queryField: 'query',
 };
 
-const mapStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-  filter: getFormValues(PUBLIC_RESOURCES_LIST_FILTER_FORM_ID)(
-    state,
-  ) as ResourceFilter,
-  user: getUser(state),
-  isServiceManager: isServiceManagerSelector(state),
-  isOwnerOrStaff: isOwnerOrStaff(state),
-});
+export const mapPropsToFilter = createSelector(
+  getCustomer,
+  getUser,
+  isServiceManagerSelector,
+  isOwnerOrStaff,
+  (state, formId) => getFormValues(formId)(state),
+  (customer, user, isServiceManager, ownerOrStaff, filters: ResourceFilter) => {
+    const filter: Record<string, string | boolean> = {};
 
-const enhance = compose(
-  connect<StateProps>(mapStateToProps),
-  connectTable(TableOptions),
+    // Public resources should only contain resources from billable offerings.
+    filter.billable = true;
+
+    if (customer) {
+      filter.provider_uuid = customer.uuid;
+    }
+    if (filters) {
+      if (filters.offering) {
+        filter.offering_uuid = filters.offering.uuid;
+      }
+      if (filters.state) {
+        filter.state = filters.state.map((option) => option.value);
+      }
+      if (filters.organization) {
+        filter.customer_uuid = filters.organization.uuid;
+      }
+      if (filters.project) {
+        filter.project_uuid = filters.project.uuid;
+      }
+      if (filters.category) {
+        filter.category_uuid = filters.category.uuid;
+      }
+    }
+    if (isServiceManager && !ownerOrStaff) {
+      filter.service_manager_uuid = user.uuid;
+    }
+    return filter;
+  },
 );
 
-export const PublicResourcesList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;
+export const PublicResourcesList: React.ComponentType<any> = () => {
+  const filter = useSelector((state) =>
+    mapPropsToFilter(state, PUBLIC_RESOURCES_LIST_FILTER_FORM_ID),
+  );
+  const tableProps = useTable({
+    ...TableOptions,
+    filter,
+  });
+  return <TableComponent {...tableProps} filters={<PublicResourcesFilter />} />;
+};

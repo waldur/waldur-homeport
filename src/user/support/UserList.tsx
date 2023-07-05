@@ -1,17 +1,18 @@
-import { FunctionComponent, ComponentType } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
 import { BooleanField } from '@waldur/table/BooleanField';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { Table, connectTable, createFetcher } from '@waldur/table/index';
+import { Table, createFetcher } from '@waldur/table/index';
+import { useTable } from '@waldur/table/utils';
 
 import { UserDetailsButton } from './UserDetailsButton';
+import { UserFilter } from './UserFilter';
 import { UserTableActions } from './UserTableActions';
 
 const renderFieldOrDash = (field) => {
@@ -87,10 +88,43 @@ const SupportStatusField = ({ row }) => {
   return <BooleanField value={row.is_support} />;
 };
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const mapPropsToFilter = createSelector(
+  getFormValues('userFilter'),
+  (filters: any) => {
+    return formatRoleFilter(formatStatusFilter(filters));
+  },
+);
+
+export const UserList: FunctionComponent<any> = (props) => {
+  const filter = useSelector(mapPropsToFilter);
+  const tableProps = useTable({
+    table: `userList`,
+    fetchData: createFetcher('users'),
+    queryField: 'query',
+    filter,
+    exportFields: [
+      'Full name',
+      'Username',
+      'Email',
+      'Phone number',
+      'Organization',
+      'Organizations owner',
+    ],
+    exportAll: true,
+    exportRow: (row) => [
+      row.full_name,
+      row.username,
+      row.email,
+      row.phone_number,
+      row.organization,
+      getOrganizationsWhereOwner(row.customer_permissions),
+    ],
+  });
+
   return (
     <Table
-      {...props}
+      {...tableProps}
+      filters={<UserFilter />}
       columns={[
         {
           title: translate('Full name'),
@@ -179,8 +213,6 @@ export const formatStatusFilter = (filter) => {
   return filter;
 };
 
-const formatFilter = compose(formatStatusFilter, formatRoleFilter);
-
 export const getOrganizationsWhereOwner = (permissions) => {
   const customerNames = [];
   permissions.map((perm) => {
@@ -190,35 +222,3 @@ export const getOrganizationsWhereOwner = (permissions) => {
   });
   return customerNames.join(', ');
 };
-
-const TableOptions = {
-  table: 'userList',
-  fetchData: createFetcher('users'),
-  mapPropsToFilter: (props) => formatFilter(props.userFilter),
-  exportFields: [
-    'Full name',
-    'Username',
-    'Email',
-    'Phone number',
-    'Organization',
-    'Organizations owner',
-  ],
-  exportAll: true,
-  exportRow: (row) => [
-    row.full_name,
-    row.username,
-    row.email,
-    row.phone_number,
-    row.organization,
-    getOrganizationsWhereOwner(row.customer_permissions),
-  ],
-  queryField: 'query',
-};
-
-const mapStateToProps = (state: RootState) => ({
-  userFilter: getFormValues('userFilter')(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const UserList = enhance(TableComponent) as ComponentType<any>;

@@ -1,24 +1,24 @@
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { getFormValues } from 'redux-form';
+import { useSelector } from 'react-redux';
 
-import { RootState } from '@waldur/store/reducers';
-import { connectTable } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
-import { TableOptions, TableComponent } from './PublicResourcesList';
+import {
+  TableOptions,
+  TableComponent,
+  mapPropsToFilter,
+} from './PublicResourcesList';
+import { SupportResourcesFilter } from './SupportResourcesFilter';
 
-const mapStateToProps = (state: RootState) => ({
-  filter: getFormValues('SupportResourcesFilter')(state),
-});
-
-const enhance = compose(
-  connect(mapStateToProps),
-  connectTable({
+export const SupportResourcesList: React.ComponentType<any> = () => {
+  const filter = useSelector((state) =>
+    mapPropsToFilter(state, 'SupportResourcesFilter'),
+  );
+  const tableProps = useTable({
     ...TableOptions,
     table: 'SupportResourcesList',
-  }),
-);
-
-export const SupportResourcesList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;
+    filter,
+  });
+  return (
+    <TableComponent {...tableProps} filters={<SupportResourcesFilter />} />
+  );
+};

@@ -9209,7 +9209,6 @@ msgid "Sponsor number"
 msgstr ""
 
 #: src/administration/dashboard/AdministrationProfile.tsx
-#: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 #: src/user/support/utils.ts
 msgid "Staff"
@@ -9529,8 +9528,8 @@ msgstr ""
 #: src/issues/routes.ts
 #: src/navigation/FooterLinks.tsx
 #: src/navigation/sidebar/SupportMenu.tsx
-#: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
+#: src/user/support/utils.ts
 msgid "Support"
 msgstr ""
 

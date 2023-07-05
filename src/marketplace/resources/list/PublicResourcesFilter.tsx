@@ -1,10 +1,14 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
-import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
+import {
+  getInitialValues,
+  syncFiltersToURL,
+  useReinitializeFilterFromUrl,
+} from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { PUBLIC_RESOURCES_LIST_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
@@ -22,36 +26,39 @@ import { RelatedCustomerFilter } from './RelatedCustomerFilter';
 import { ResourceStateFilter } from './ResourceStateFilter';
 import { NON_TERMINATED_STATES } from './SupportResourcesFilter';
 
-type StateProps = ReturnType<typeof mapStateToProps>;
+type StateProps = ReturnType<typeof mapStateToProps> & InjectedFormProps;
 
-const PurePublicResourcesFilter: FunctionComponent<StateProps> = (props) => (
-  <>
-    <TableFilterItem
-      title={translate('Offering')}
-      name="offering"
-      badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
-    >
-      <OfferingAutocomplete offeringFilter={props.offeringFilter} />
-    </TableFilterItem>
-    <TableFilterItem
-      title={translate('Client organization')}
-      name="organization"
-      badgeValue={(value) => value?.name}
-    >
-      <RelatedCustomerFilter />
-    </TableFilterItem>
-    <TableFilterItem
-      title={translate('Category')}
-      name="category"
-      badgeValue={(value) => value?.title}
-    >
-      <CategoryFilter />
-    </TableFilterItem>
-    <TableFilterItem title={translate('State')} name="state">
-      <ResourceStateFilter reactSelectProps={{ isMulti: true }} />
-    </TableFilterItem>
-  </>
-);
+const PurePublicResourcesFilter: FunctionComponent<StateProps> = (props) => {
+  useReinitializeFilterFromUrl(props.form, { state: NON_TERMINATED_STATES });
+  return (
+    <>
+      <TableFilterItem
+        title={translate('Offering')}
+        name="offering"
+        badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
+      >
+        <OfferingAutocomplete offeringFilter={props.offeringFilter} />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Client organization')}
+        name="organization"
+        badgeValue={(value) => value?.name}
+      >
+        <RelatedCustomerFilter />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Category')}
+        name="category"
+        badgeValue={(value) => value?.title}
+      >
+        <CategoryFilter />
+      </TableFilterItem>
+      <TableFilterItem title={translate('State')} name="state">
+        <ResourceStateFilter reactSelectProps={{ isMulti: true }} />
+      </TableFilterItem>
+    </>
+  );
+};
 
 const filterSelector = createSelector(
   getCustomer,
@@ -79,7 +86,7 @@ const enhance = compose(
   reduxForm({
     form: PUBLIC_RESOURCES_LIST_FILTER_FORM_ID,
     onChange: syncFiltersToURL,
-    destroyOnUnmount: false,
+    enableReinitialize: true,
   }),
 );
 
