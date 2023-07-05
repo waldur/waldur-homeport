@@ -1256,6 +1256,7 @@ msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
 #: src/marketplace/routes.ts
+#: src/reporting/dashboard/ReportingWidgets.tsx
 msgid "Capacity"
 msgstr ""
 
@@ -2169,6 +2170,7 @@ msgstr ""
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
+#: src/reporting/routes.ts
 #: src/user/routes.ts
 msgid "Dashboard"
 msgstr ""
@@ -3229,10 +3231,6 @@ msgstr ""
 msgid "Filtered by"
 msgstr ""
 
-#: src/issues/routes.ts
-msgid "Financial"
-msgstr ""
-
 #: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
 msgid "Find project"
 msgstr ""
@@ -3520,6 +3518,7 @@ msgid "Group invitations"
 msgstr ""
 
 #: src/invoices/routes.ts
+#: src/reporting/dashboard/ReportingWidgets.tsx
 msgid "Growth"
 msgstr ""
 
@@ -4764,6 +4763,11 @@ msgstr ""
 msgid "Monthly invoices"
 msgstr ""
 
+#: src/issues/routes.ts
+#: src/reporting/dashboard/ReportingWidgets.tsx
+msgid "Monthly revenue"
+msgstr ""
+
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "Months"
 msgstr ""
@@ -5923,9 +5927,11 @@ msgstr ""
 msgid "Organization group type"
 msgstr ""
 
+#: src/issues/routes.ts
 #: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
 #: src/marketplace/category/store/selectors.ts
 #: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
+#: src/reporting/dashboard/ReportingWidgets.tsx
 msgid "Organization groups"
 msgstr ""
 
@@ -6742,6 +6748,7 @@ msgid "Price per year"
 msgstr ""
 
 #: src/issues/routes.ts
+#: src/reporting/dashboard/ReportingWidgets.tsx
 msgid "Pricelist"
 msgstr ""
 
@@ -7586,8 +7593,8 @@ msgstr ""
 msgid "Reporter"
 msgstr ""
 
-#: src/customer/routes.ts
 #: src/navigation/sidebar/ReportingMenu.tsx
+#: src/reporting/routes.ts
 msgid "Reporting"
 msgstr ""
 
@@ -9070,6 +9077,30 @@ msgstr ""
 #: src/marketplace/offerings/service-providers/shared/grid/GridInfo.tsx
 #: src/table/TableInfo.tsx
 msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
+msgstr ""
+
+#: src/reporting/dashboard/ReportingWidgets.tsx
+msgid "Shows a common pricelist for all offerings in the marketplace."
+msgstr ""
+
+#: src/reporting/dashboard/ReportingWidgets.tsx
+msgid "Shows available capacity of offering plans."
+msgstr ""
+
+#: src/reporting/dashboard/ReportingWidgets.tsx
+msgid "Shows change in aggregated monthly revenues over time."
+msgstr ""
+
+#: src/reporting/dashboard/ReportingWidgets.tsx
+msgid "Shows distributions of organizations into groups."
+msgstr ""
+
+#: src/reporting/dashboard/ReportingWidgets.tsx
+msgid "Shows monthly revenue split by organization."
+msgstr ""
+
+#: src/reporting/dashboard/ReportingWidgets.tsx
+msgid "Shows usage of resources reported by service providers by month."
 msgstr ""
 
 #: src/vmware/actions/ShutdownAction.tsx
@@ -11483,6 +11514,7 @@ msgid "Usage report has been submitted."
 msgstr ""
 
 #: src/marketplace/routes.ts
+#: src/reporting/dashboard/ReportingWidgets.tsx
 msgid "Usage reports"
 msgstr ""
 

@@ -140,7 +140,7 @@ export const states: StateDeclaration[] = [
     component: CustomerListContainer,
     data: {
       feature: 'support.customers_list',
-      breadcrumb: () => translate('Financial'),
+      breadcrumb: () => translate('Monthly revenue'),
     },
   },
 
@@ -170,7 +170,7 @@ export const states: StateDeclaration[] = [
     component: CustomersOrganizationGroupsContainer,
     data: {
       feature: 'support.customers_list',
-      breadcrumb: () => translate('Organizations'),
+      breadcrumb: () => translate('Organization groups'),
     },
   },
 
