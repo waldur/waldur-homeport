@@ -1,0 +1,12 @@
+.reporting-widget-card {
+  &:hover {
+    .icon-arrow {
+      opacity: 1;
+      transform: translateX(5px);
+    }
+  }
+  .icon-arrow {
+    opacity: 0.5;
+    transition: all 0.3s;
+  }
+}

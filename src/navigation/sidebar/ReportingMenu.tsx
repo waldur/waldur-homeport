@@ -15,7 +15,7 @@ export const ReportingMenu = () => {
   return (
     <MenuItem
       title={translate('Reporting')}
-      state="marketplace-support-plan-usages"
+      state="reporting-dashboard"
       activeState="reporting"
       child={false}
       iconPath={Icon}

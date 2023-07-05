@@ -5,7 +5,7 @@ import { StateDeclaration } from '@waldur/core/types';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
-import { isStaff, isStaffOrSupport } from '@waldur/workspace/selectors';
+import { isStaff } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { fetchCustomer } from './workspace/CustomerWorkspace';
@@ -97,19 +97,6 @@ export const states: StateDeclaration[] = [
         deps: ['$transition$'],
       },
     ],
-  },
-
-  {
-    name: 'reporting',
-    url: '/reporting/',
-    abstract: true,
-    parent: 'layout',
-    component: UIView,
-    data: {
-      title: () => translate('Reporting'),
-      permissions: [isStaffOrSupport],
-      hideProjectSelector: true,
-    },
   },
 
   {

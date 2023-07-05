@@ -13,6 +13,7 @@ import { states as openstackAnalyticsRoutes } from '@waldur/openstack/analytics/
 import { states as paypalRoutes } from '@waldur/paypal/routes';
 import { states as projectRoutes } from '@waldur/project/routes';
 import { states as rancherRoutes } from '@waldur/rancher/routes';
+import { states as reportingRoutes } from '@waldur/reporting/routes';
 import { states as resourceRoutes } from '@waldur/resource/routes';
 import { states as resourceSupportRoutes } from '@waldur/resource/support/routes';
 import { states as userRoutes } from '@waldur/user/routes';
@@ -38,6 +39,7 @@ export const states: StateDeclaration[] = [
   ...openstackAnalyticsRoutes,
   ...paypalRoutes,
   ...rancherRoutes,
+  ...reportingRoutes,
   ...resourceRoutes,
   ...resourceSupportRoutes,
   ...aboutRoutes,
