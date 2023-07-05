@@ -1,17 +1,17 @@
-xdescribe('Customers', () => {
+describe('Customers', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()
       .setToken()
 
       .intercept('GET', '/api/divisions/?name=&page=1&page_size=10&o=name', {
-        fixture: 'support/organization-groups.json',
+        fixture: 'administration/organization-groups.json',
       })
       .intercept(
         'GET',
         '/api/division-types/?name=&page=1&page_size=10&o=name',
         {
-          fixture: 'support/division-types.json',
+          fixture: 'administration/division-types.json',
         },
       )
       .intercept('PUT', '/api/customers/895e38d197e748459189f19285119edf/', {
@@ -23,7 +23,7 @@ xdescribe('Customers', () => {
           req.reply((res) => {
             res.send({
               statusCode: 200,
-              fixture: 'support/search_customers.json',
+              fixture: 'administration/search_customers.json',
             });
           });
         } else {
@@ -36,7 +36,7 @@ xdescribe('Customers', () => {
         }
       })
 
-      .visit('/support/customers/')
+      .visit('/administration/customers/')
 
       .waitForSpinner();
   });
@@ -46,7 +46,7 @@ xdescribe('Customers', () => {
   });
 
   it('Search should works correctly', () => {
-    cy.get('.form-control')
+    cy.get('.form-control.ps-10')
       .type('test')
 
       .get('table tbody tr')
@@ -54,41 +54,36 @@ xdescribe('Customers', () => {
   });
 
   it('Select options select works correctly', () => {
-    cy.openDropdownByLabel('Service provider').selectTheFirstOptionOfDropdown();
-    cy.openDropdownByLabel('Division').selectTheFirstOptionOfDropdown();
-    cy.openDropdownByLabel('Division type').selectTheFirstOptionOfDropdown();
-  });
-
-  it('Show details modal when click details button', () => {
-    cy.contains('button', 'Details')
-      .click()
-      .get('.modal-title')
-      .should('be.visible')
-      .get('.modal-footer > .btn')
+    cy.contains('button.filter-toggle', 'Service provider')
+      .should('exist')
       .click();
-  });
-
-  it('Show Set location modal when click Set location button', () => {
-    cy.contains('button', 'Set location')
+    cy.get('.filter-toggle:nth-child(2)')
       .click()
-      .get('.modal-title')
-      .should('be.visible')
-      .get('.modal-footer > .btn-default')
+      .type('{enter}');
+
+    cy.contains('button.filter-toggle', 'Organization group')
+      .should('exist')
       .click();
+    cy.get('.filter-toggle:nth-child(2)')
+      .click()
+      .type('{enter}');
+
+    cy.contains('button.filter-toggle', 'Organization group type')
+      .should('exist')
+      .click();
+    cy.get('.filter-toggle:nth-child(2)')
+      .click()
+      .type('{enter}');
   });
 
-  it('Location set works correctly', () => {
-    cy.contains('button', 'Set location')
+  it('Show details modal when click on the row', () => {
+    cy.get('div.table-container')
+      .find('tbody tr')
+      .first()
       .click()
-      .get('.modal-title')
-      .should('be.visible')
-      .get('.glass')
-      .type('Hulu')
-      .get('[data-key="0"]')
-      .click()
-      .get('.modal-footer > .btn-primary')
-      .click()
-      .get('.reapop__notification-meta')
+
+    cy.get('.col-sm-12')
+      .contains('Name')
       .should('be.visible');
   });
 });

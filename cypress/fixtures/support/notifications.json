@@ -12,7 +12,8 @@
       "customer_roles": []
     },
     "author_full_name": "Admin",
-    "emails": []
+    "emails": [],
+    "state": "DRAFT"
   },
   {
     "uuid": "7a2d4ea901c042fbb9c64a9514e2f4ef",
@@ -45,7 +46,8 @@
       "ShirleyPennington@example.com",
       "AdrianNolan@example.com",
       "DavidGross@example.com"
-    ]
+    ],
+    "state": "DRAFT"
   },
   {
     "uuid": "09532dc781a84dfea90f5e50a3f13a86",
@@ -78,7 +80,8 @@
       "ShirleyPennington@example.com",
       "AdrianNolan@example.com",
       "DavidGross@example.com"
-    ]
+    ],
+    "state": "DRAFT"
   },
   {
     "uuid": "ba5b238393544ef8935f2fd68f970765",
@@ -111,7 +114,8 @@
       "ShirleyPennington@example.com",
       "AdrianNolan@example.com",
       "DavidGross@example.com"
-    ]
+    ],
+    "state": "DRAFT"
   },
   {
     "uuid": "5857cf1819a747dbaf520766f0ddc9f1",
@@ -147,7 +151,8 @@
     "author_full_name": "Admin",
     "emails": [
       "DavidJenkins@example.com"
-    ]
+    ],
+    "state": "DRAFT"
   },
   {
     "uuid": "fecd24c60260467f9855826ea89e5c55",
@@ -176,7 +181,8 @@
     "author_full_name": "Brandon Hogan",
     "emails": [
       "john.doe@gmail.com"
-    ]
+    ],
+    "state": "DRAFT"
   },
   {
     "uuid": "af47a5f39f3049d5b84ca46b6166e6ed",
@@ -205,7 +211,8 @@
     "author_full_name": "Brandon Hogan",
     "emails": [
       "john.doe@gmail.com"
-    ]
+    ],
+    "state": "DRAFT"
   },
   {
     "uuid": "c1a8893e2aec4fbe9b620b1e65c8b53d",
@@ -226,7 +233,8 @@
     "author_full_name": "Brandon Hogan",
     "emails": [
       "john.doe@gmail.com"
-    ]
+    ],
+    "state": "DRAFT"
   },
   {
     "uuid": "f9e115b768794dc898d8cc8dfc01252c",
@@ -248,7 +256,8 @@
     "author_full_name": "Brandon Hogan",
     "emails": [
       "john.doe@gmail.com"
-    ]
+    ],
+    "state": "DRAFT"
   },
   {
     "uuid": "b7607119fda842dfb6792b423fc1439b",
@@ -277,6 +286,7 @@
     "author_full_name": "Brandon Hogan",
     "emails": [
       "john.doe@gmail.com"
-    ]
+    ],
+    "state": "DRAFT"
   }
 ]

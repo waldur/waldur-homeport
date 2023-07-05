@@ -1,4 +1,4 @@
-xdescribe('Users', () => {
+describe('Users', () => {
   beforeEach(() => {
     cy.mockChecklists()
 
@@ -15,7 +15,7 @@ xdescribe('Users', () => {
 
       .intercept(
         'GET',
-        '/api/users/?page=1&page_size=10&full_name=Tara%20Pierce',
+        '/api/users/?page=1&page_size=10&query=Tara%20Pierce',
         {
           fixture: 'support/user-search-by-name.json',
         },
@@ -23,7 +23,7 @@ xdescribe('Users', () => {
 
       .intercept(
         'GET',
-        '/api/users/?page=1&page_size=10&username=0024c6a7885940bbb156e82073bc0244',
+        '/api/users/?page=1&page_size=10&query=0024c6a7885940bbb156e82073bc0244',
         {
           fixture: 'support/user-search-by-name.json',
         },
@@ -47,7 +47,7 @@ xdescribe('Users', () => {
 
       .intercept(
         'GET',
-        '/api/users/?page=1&page_size=10&email=TaraPierce%40example.com',
+        '/api/users/?page=1&page_size=10&query=TaraPierce%40example.com',
         {
           fixture: 'support/user-search-by-name.json',
         },
@@ -60,12 +60,12 @@ xdescribe('Users', () => {
 
       .setToken()
 
-      .visit('/support/users/')
+      .visit('/administration/users/')
       .waitForSpinner();
   });
 
   it('renders title', () => {
-    cy.get('.page-title h1').contains('Users').should('exist');
+    cy.get('.card-title.h5').contains('Users').should('exist');
   });
 
   it('renders user items', () => {
@@ -74,12 +74,8 @@ xdescribe('Users', () => {
 
   it('should full name search works correctly', () => {
     cy.wait('@getUsers').then(() => {
-      cy.get('button')
-        .contains('Filter')
-        .click()
-        .get('input[name=full_name]')
+      cy.get('.form-control-solid.ps-10.form-control[placeholder="Search ..."]')
         .type('Tara Pierce')
-        .get('.spinner-container > .fa')
         .get('table tbody tr')
         .should('have.length', 1);
     });
@@ -87,12 +83,8 @@ xdescribe('Users', () => {
 
   it('should username search works correctly', () => {
     cy.wait('@getUsers').then(() => {
-      cy.get('button')
-        .contains('Filter')
-        .click()
-        .get('input[name=username]')
+      cy.get('.form-control-solid.ps-10.form-control[placeholder="Search ..."]')
         .type('0024c6a7885940bbb156e82073bc0244')
-        .get('.spinner-container > .fa')
         .get('table tbody tr')
         .should('have.length', 1);
     });
@@ -100,12 +92,13 @@ xdescribe('Users', () => {
 
   it('should organization search works correctly', () => {
     cy.wait('@getUsers').then(() => {
-      cy.get('button')
-        .contains('Filter')
+      cy.contains('button.filter-toggle', 'Organization')
+        .should('be.visible')
+      cy.get('.filter-toggle:nth-child(1)')
         .click()
-        .get('input[name=organization]')
+        .get('.filter-field > .form-control')
+        .click()
         .type('Howard-Martin')
-        .get('.spinner-container > .fa')
         .get('table tbody tr')
         .should('have.length', 1);
     });
@@ -113,12 +106,8 @@ xdescribe('Users', () => {
 
   it('should email search works correctly', () => {
     cy.wait('@getUsers').then(() => {
-      cy.get('button')
-        .contains('Filter')
-        .click()
-        .get('input[name=email]')
+      cy.get('.form-control-solid.ps-10.form-control[placeholder="Search ..."]')
         .type('TaraPierce@example.com')
-        .get('.spinner-container > .fa')
         .get('table tbody tr')
         .should('have.length', 1);
     });
@@ -126,11 +115,14 @@ xdescribe('Users', () => {
 
   it('should search works correctly using account role', () => {
     cy.wait('@getUsers').then(() => {
-      cy.get('button')
-        .contains('Filter')
+      cy.contains('button.filter-toggle', 'Role')
         .click()
-        .openDropdownByLabel('Role')
-        .selectTheFirstOptionOfDropdown()
+      cy.contains('div.filter-field', 'Select role')
+        .should('be.visible')
+        .click()
+      cy.get('.filter-toggle:nth-child(2)')
+        .click()
+        .type('{enter}')
         .get('table tbody tr')
         .should('have.length', 10);
     });
@@ -138,25 +130,28 @@ xdescribe('Users', () => {
 
   it('should search works correctly using account status', () => {
     cy.wait('@getUsers').then(() => {
-      cy.get('button')
-        .contains('Filter')
+      cy.contains('button.filter-toggle', 'Status')
         .click()
-        .openDropdownByLabel('Status')
-        .get('*div[id^="react-select"]')
-        .eq(1)
-        .click({ force: true })
+      cy.contains('div.filter-field', 'Select status')
+        .should('be.visible')
+        .click()
+      cy.get('.filter-toggle:nth-child(2)')
+        .click()
+        .type('{enter}')
         .get('table tbody tr')
         .should('have.length', 10);
     });
   });
 
   it('should open details modal when click details button', () => {
-    cy.contains('button', 'Details')
-      .click()
+    cy.get('tr:nth-child(1) .ms-3')
+      .click({force: true})
       .get('.modal-title')
       .contains('User details of Tara Pierce')
       .should('be.visible', true)
-      .get('.modal-footer > .btn')
+      .get('.modal-footer')
+      .contains('button', 'Done')
+      .should('be.visible', true)
       .click();
   });
 });

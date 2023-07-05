@@ -1,0 +1,18 @@
+[
+  {
+    "uuid": "bf6d515c9e6e445f9c339021b30fc96b",
+    "name": "Alice Lebowski",
+    "abbreviation": "",
+    "created": "2017-07-12T08:51:28.495703Z",
+    "accounting_start_date": "2018-02-11T22:52:29.951974Z",
+    "registration_code": "689-40-3444",
+    "agreement_number": "4003",
+    "payment_profiles": [],
+    "billing_price_estimate": {
+      "total": 138.0,
+      "current": 138.0,
+      "tax": 0,
+      "tax_current": 0
+    }
+  }
+]
