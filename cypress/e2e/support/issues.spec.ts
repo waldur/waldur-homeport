@@ -1,46 +1,38 @@
-xdescribe('Issue details view', () => {
+describe('Issue details view', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()
+      .setToken()
 
       .intercept('GET', '/api/marketplace-provider-offerings/', {
         fixture: 'marketplace/offerings.json',
       })
-
-      .intercept('GET', '/api/support-issues/', {
+      .intercept('GET', '/api/support-issues/c675f0e7738249f5a859037da28fbd2e/', {
         fixture: 'support/issue.json',
       })
-      .as('getIssue')
-
-      .intercept('GET', '/api/support-attachments/', [])
+      .intercept('GET', '/api/support-attachments/?issue=https%3A%2F%2Fexample.com%2Fapi%2Fsupport-issues%2Fc675f0e7738249f5a859037da28fbd2e%2F', [])
       .as('getAttachments')
-
-      .intercept('GET', '/api/support-comments/', {
+      .intercept('GET', '/api/support-comments/?issue=https%3A%2F%2Fexample.com%2Fapi%2Fsupport-issues%2Fc675f0e7738249f5a859037da28fbd2e%2F', {
         fixture: 'support/comments.json',
       })
       .as('getComments')
 
-      .setToken()
-
-      .visit('/support/issue/c675f0e7738249f5a859037da28fbd2e/')
-      .waitForSpinner()
-      .wait('@getIssue');
   });
 
   it('renders attachments section', () => {
-    cy.get('h3')
+    cy.visit('/support/issue/c675f0e7738249f5a859037da28fbd2e/')
+    cy.get('.card-title.h5')
       .contains('Attachments')
       .should('exist')
       .wait('@getAttachments');
   });
 
   it('renders list of comments', () => {
-    cy.get('h4').contains('Comments').should('exist').wait('@getComments');
-    cy.get('.comment-item').should('have.length', 1);
+    cy.get('h4').contains('Comments').should('exist');
+    cy.get('.fw-normal').should('exist').should('have.length', 1);
   });
 
   it('submits new comment', () => {
-    cy.wait('@getComments').then(() => {
       cy.intercept(
         'POST',
         '/api/support-issues/c675f0e7738249f5a859037da28fbd2e/comment/',
@@ -61,6 +53,5 @@ xdescribe('Issue details view', () => {
             .click()
             .wait('@createComment');
         });
-    });
   });
 });

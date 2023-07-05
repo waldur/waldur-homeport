@@ -1,0 +1,50 @@
+[
+  {
+    "uuid": "83f8bf94e7b148d9bce03755ab692e1f",
+    "url": "http://localhost:8080/api/divisions/83f8bf94e7b148d9bce03755ab692e1f/",
+    "name": "Citizen-scientists",
+    "type": "Researcher",
+    "parent": null
+  },
+  {
+    "uuid": "d7f4b9d471c54817a792d78c3a280c4d",
+    "url": "http://localhost:8080/api/divisions/d7f4b9d471c54817a792d78c3a280c4d/",
+    "name": "FIE",
+    "type": "Researcher",
+    "parent_uuid": "83ff0d812c444d4f92dbf647cca01aeb",
+    "parent_name": "Department",
+    "parent": "http://localhost:8080/api/divisions/83ff0d812c444d4f92dbf647cca01aeb/"
+  },
+  {
+    "uuid": "5a9e75a5a5ef473eb61a44e920a1130f",
+    "url": "http://localhost:8080/api/divisions/5a9e75a5a5ef473eb61a44e920a1130f/",
+    "name": "Group of citizen-scientists",
+    "type": "Department",
+    "parent_uuid": "83f8bf94e7b148d9bce03755ab692e1f",
+    "parent_name": "Researcher",
+    "parent": "http://localhost:8080/api/divisions/83f8bf94e7b148d9bce03755ab692e1f/"
+  },
+  {
+    "uuid": "81e881b35b8c4f62b68759cd01a65a3a",
+    "url": "http://localhost:8080/api/divisions/81e881b35b8c4f62b68759cd01a65a3a/",
+    "name": "Non-profit",
+    "type": "Department",
+    "parent_uuid": "83ff0d812c444d4f92dbf647cca01aeb",
+    "parent_name": "Department",
+    "parent": "http://localhost:8080/api/divisions/83ff0d812c444d4f92dbf647cca01aeb/"
+  },
+  {
+    "uuid": "83ff0d812c444d4f92dbf647cca01aeb",
+    "url": "http://localhost:8080/api/divisions/83ff0d812c444d4f92dbf647cca01aeb/",
+    "name": "Private sector",
+    "type": "Department",
+    "parent": null
+  },
+  {
+    "uuid": "fa6e9b6148454a04b16f783f348ef589",
+    "url": "http://localhost:8080/api/divisions/fa6e9b6148454a04b16f783f348ef589/",
+    "name": "Public sector",
+    "type": "Department",
+    "parent": null
+  }
+]

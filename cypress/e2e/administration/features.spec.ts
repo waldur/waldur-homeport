@@ -1,10 +1,10 @@
-xdescribe('Features', () => {
+describe('Features', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()
 
       .intercept('GET', '/api/features-description/', {
-        fixture: 'support/features-description.json',
+        fixture: 'administration/features-description.json',
       })
       .intercept('POST', '/api/feature-values/', {
         statusCode: 200,
@@ -13,12 +13,12 @@ xdescribe('Features', () => {
 
       .setToken()
 
-      .visit('/support/features/')
+      .visit('/administration/features/')
       .waitForSpinner();
   });
 
   it('renders title', () => {
-    cy.get('.page-title h1').contains('Features').should('be.visible');
+    cy.get('.card-title.h5').contains('Features').should('be.visible');
   });
 
   it('should yes & no radio button select works correctly', () => {

@@ -1,4 +1,4 @@
-xdescribe('Financial overview', () => {
+describe('Financial overview', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()
@@ -6,13 +6,16 @@ xdescribe('Financial overview', () => {
       .intercept('GET', '/api/customers/', {
         fixture: 'customers/alice_bob_web.json',
       })
-      .intercept('GET', '/api/billing-total-cost/', {
+      .intercept('GET', /\/api\/billing-total-cost\/\?.*/, {
         fixture: 'customers/billing_total_cost.json',
       })
-      .intercept('GET', '/api/invoices/', {
+      .intercept('GET', /\/api\/invoices\/\?.*/, {
         fixture: 'customers/invoices.json',
       })
-      .visit('/support/organizations/', { log: false });
+      .intercept('GET', /\/api\/financial-reports\/\?.*/, {
+        fixture: 'reporting/financial-reports.json'
+      })
+      .visit('/reporting/organizations/', { log: false });
   });
 
   it('should render estimated cost columns if current month is selected', () => {
@@ -24,12 +27,16 @@ xdescribe('Financial overview', () => {
   });
 
   it('should render cost column if previous month is selected', () => {
-    cy.get('div[class$="singleValue"]')
-      .first()
-      .click({ force: true })
-      .get('*div[id^="react-select"]')
-      .last()
-      .click()
+
+    cy.contains('button.filter-toggle', 'Accounting period')
+      .should('exist')
+      .click();
+    cy.get('.filter-toggle:nth-child(1)')
+       .click();
+    cy.get('.accounting-period-selector')
+      .find('input[type="text"]')
+      .type('January, 2023')
+      .type('{enter}')
       .get('table th')
       .contains('Estimated cost')
       .should('not.exist')
@@ -38,6 +45,6 @@ xdescribe('Financial overview', () => {
   });
 
   it('should render total cost of €138.00', () => {
-    cy.get('.text-right').should('contain', '138.00');
+    cy.get('.text-right').should('be.visible').should('contain', '138.00');
   });
 });

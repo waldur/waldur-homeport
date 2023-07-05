@@ -1,4 +1,4 @@
-xdescribe('Broadcast', () => {
+describe('Broadcast', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()
@@ -41,36 +41,49 @@ xdescribe('Broadcast', () => {
   });
 
   it('renders title', () => {
-    cy.get('.page-title h1').contains('Broadcast').should('exist');
+    cy.get('div.card-title.h5')
+      .should('exist')
+      .within(() => {
+        cy.get('span.me-2')
+          .should('exist')
+          .should('contain', 'Broadcast');
+      });
   });
 
   it('Create a broadcast', () => {
     cy.wait('@getNotifications').then(() => {
-      cy.get('button')
+      cy.get('.ms-3:nth-child(1)')
         .contains('Create')
         .click()
         .get('input[name="subject"]')
         .type('Test')
         .get('textarea[name="body"]')
         .type('Test')
-        .get('.modal-footer > .btn-primary')
+        .get('.modal-footer > .ms-3.btn.btn-primary')
         .click()
-        .get('tbody > :nth-child(1) > :nth-child(3)')
+        .get('.modal-footer > .ms-3.btn.btn-primary')
+        .contains('Send broadcast')
+        .click()
+        cy.get('tbody')
+        .find('tr')
+        .eq(0)
+        .should('exist')
         .contains('Test')
-        .should('exist');
     });
   });
 
   it('should expand items when click on arrow icon', () => {
-    cy.get('tbody > :nth-child(1) > :nth-child(1)')
+    cy.get('.fa.fa-chevron-right')
+      .eq(0)
       .click()
-      .get(':nth-child(2) > td > :nth-child(1)')
-      .contains('Test');
+    cy.get('.col-sm-8')
+      .contains('Test')
+      .should('be.visible');
   });
 
   it('should refresh button work correctly', () => {
     cy.wait('@getNotifications').then(() => {
-      cy.get('a').contains('Refresh').click().get('.spinner-container > .fa');
+      cy.get('.fa.fa-refresh.fs-4').click()
     })
   });
 });
