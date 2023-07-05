@@ -51,7 +51,7 @@ describe('Add resource pop up is visible', () => {
       .intercept('GET', '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/', {
         fixture: 'customers/alice.json',
       })
-      .mockUser()
+      .mockUser('admin')
       .mockChecklists()
       .mockEvents()
       .mockPermissions()

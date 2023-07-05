@@ -45,7 +45,7 @@ export const UnifiedSidebar = () => {
     <Sidebar>
       {user ? (
         <>
-          <MarketplaceTrigger />
+          {user.organization ? <MarketplaceTrigger /> : null}
           <ManagementMenu />
           <ResourcesMenu />
           <ProviderMenu />
