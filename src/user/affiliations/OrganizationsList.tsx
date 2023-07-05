@@ -99,7 +99,7 @@ export const getUserOrganizationsList = (
         'created_by_full_name',
         'created_by_username',
       ];
-      filter.user = props.user.uuid;
+      filter.user_uuid = props.user.uuid;
       return filter;
     },
     exportRow: (row) => [

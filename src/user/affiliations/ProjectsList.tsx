@@ -86,6 +86,7 @@ export const getUserProjectsList = (
       if (props.stateFilter && props.stateFilter.organization) {
         filter.customer = props.stateFilter.organization.uuid;
       }
+      filter.user_uuid = props.user.uuid;
       return filter;
     },
     exportRow: (row) => [
