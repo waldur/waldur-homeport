@@ -1,4 +1,3 @@
-import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
 import { ActionRegistry } from '@waldur/resource/actions/registry';
 
 import { EditAction } from './EditAction';
@@ -10,6 +9,5 @@ ActionRegistry.register('SLURM.Allocation', [
   PullAllocationAction,
   EditAction,
   SetLimitsAction,
-  TerminateAction,
   RequestLimitsChangeAction,
 ]);

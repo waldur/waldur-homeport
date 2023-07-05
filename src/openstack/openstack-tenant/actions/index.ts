@@ -4,7 +4,6 @@ import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/Chan
 import { EditAction } from './EditAction';
 import { PullTenantAction } from './PullTenantAction';
 import { RequestDirectAccessAction } from './RequestDirectAccessAction';
-import { TerminateTenantAction } from './TerminateTenantAction';
 
 export default [
   EditAction,
@@ -12,5 +11,4 @@ export default [
   PullTenantAction,
   ChangePlanAction,
   ChangeLimitsAction,
-  TerminateTenantAction,
 ];

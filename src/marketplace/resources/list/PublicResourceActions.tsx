@@ -9,6 +9,7 @@ import { Resource } from '@waldur/marketplace/resources/types';
 import { CreateRobotAccountAction } from '@waldur/marketplace/robot-accounts/CreateRobotAccountAction';
 
 import { MoveResourceAction } from '../actions/MoveResourceAction';
+import { TerminateAction } from '../terminate/TerminateAction';
 
 import { ReportUsageAction } from './ReportUsageAction';
 import { ShowUsageAction } from './ShowUsageAction';
@@ -21,6 +22,7 @@ const ActionsList = [
   EditResourceEndDateByProviderAction,
   EditResourceEndDateByStaffAction,
   CreateRobotAccountAction,
+  TerminateAction,
 ];
 
 interface PublicResourceActionsProps {
