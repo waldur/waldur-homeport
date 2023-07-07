@@ -1,4 +1,4 @@
-xdescribe('Team', () => {
+describe('Team', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()
@@ -17,7 +17,7 @@ xdescribe('Team', () => {
       .intercept('GET', '/api/marketplace-orders/', [])
       .intercept(
         'GET',
-        '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/users/',
+        '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/users/?page=1&page_size=10&o=concatenated_name',
         {
           fixture: 'customers/customer_users.json',
         },
@@ -25,7 +25,7 @@ xdescribe('Team', () => {
       .intercept('DELETE', '/api/project-permissions/', {})
       .as('deleteProjectPermission')
 
-      .intercept('DELETE', '/api/customer-permissions/', {})
+      .intercept('DELETE', '/api/customer-permissions/*/', {})
       .as('deleteCustomerPermission')
 
       .intercept('POST', '/api/project-permissions/', {})
@@ -36,14 +36,14 @@ xdescribe('Team', () => {
       })
       .as('getUserDetails')
 
-      .visit('/organizations/6983ac22f2bb469189311ab21e493359/team/')
+      .visit('/organizations/6983ac22f2bb469189311ab21e493359/users/')
       .get('.loading-title')
       .should('not.exist')
       .waitForSpinner();
   });
 
   it('Allows to view permission details', () => {
-    cy.get('tbody tr button').contains('Details').click({ force: true });
+    cy.get('.btn-group button').contains('Details').click({ force: true });
     cy.get('.modal-title').contains('User details');
     cy.get('.modal-content').within(() => {
       cy.waitForSpinner().get('table').should('be.visible');
@@ -52,7 +52,7 @@ xdescribe('Team', () => {
   });
 
   it('Allows to remove team member', () => {
-    cy.get('tbody tr button')
+    cy.get('.btn-group button')
       .contains('Remove')
       .click({ force: true })
       .get('button')
@@ -62,11 +62,11 @@ xdescribe('Team', () => {
     // Notification should be shown
     cy.get('p', { withinSubject: null })
       .contains('Team member has been removed.')
-      .wait('@deleteProjectPermission');
+      .wait('@deleteCustomerPermission');
   });
 
   it('Allows to edit permission', () => {
-    cy.get('tbody tr button').contains('Edit').click({ force: true });
+    cy.get('.btn-group button').contains('Edit').click({ force: true });
     cy.get('.modal-title')
       .contains('Edit team member')
       .get('.modal-content')
@@ -75,10 +75,10 @@ xdescribe('Team', () => {
       .click()
 
       // Open Role dropdown
-      .get('div[class$="placeholder"]')
+      .get('td.role-column input')
       .first()
       .click({ force: true })
-      .selectTheFirstOptionOfDropdown()
+      .type('{enter}', {force: true})
 
       .get('button')
       .contains('Save')
