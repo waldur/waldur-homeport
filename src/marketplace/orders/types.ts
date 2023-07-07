@@ -9,11 +9,6 @@ export type OrderState =
   | 'terminated'
   | 'erred';
 
-export interface StatusChange {
-  approving: boolean;
-  rejecting: boolean;
-}
-
 export type OrderItemType = 'Create' | 'Update' | 'Terminate';
 
 interface IssueReference {

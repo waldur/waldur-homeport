@@ -1,7 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useAsyncFn, useInterval, useNetwork } from 'react-use';
 
 import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -10,18 +10,11 @@ import { getOrderDetails } from '@waldur/marketplace/common/api';
 import { OrderSummary } from '@waldur/marketplace/orders/OrderSummary';
 import { useTitle } from '@waldur/navigation/title';
 
-import { ApproveButton } from './ApproveButton';
+import { OrderActions } from './actions/OrderActions';
+import { OrderRefreshButton } from './actions/OrderRefreshButton';
 import { Order } from './Order';
 import { OrderSteps } from './OrderSteps';
-import { RejectButton } from './RejectButton';
-import { StatusChange, OrderStep } from './types';
-
-interface OrderDetailsProps {
-  approveOrder: (orderUuid: string) => void;
-  rejectOrder: (orderUuid: string) => void;
-  stateChangeStatus: StatusChange;
-  orderCanBeApproved?: boolean;
-}
+import { OrderStep } from './types';
 
 async function loadOrder(order_uuid) {
   const order = await getOrderDetails(order_uuid);
@@ -36,49 +29,21 @@ async function loadOrder(order_uuid) {
   };
 }
 
-const OrderRefreshButton: FunctionComponent<any> = (props) => (
-  <button
-    type="button"
-    className="btn btn-secondary btn-sm me-2"
-    onClick={props.loadData}
-  >
-    <i className="fa fa-refresh" /> {translate('Refresh')}
-  </button>
-);
-
-export const OrderDetails: React.FC<OrderDetailsProps> = (props) => {
+export const OrderDetails: React.FC<{}> = () => {
   useTitle(translate('Order details'));
   const {
     params: { order_uuid },
   } = useCurrentStateAndParams();
 
-  const [{ loading, error, value }, loadData] = useAsyncFn(
+  const { isLoading, error, data, refetch } = useQuery(
+    ['QueryDetails', order_uuid],
     () => loadOrder(order_uuid),
-    [props.stateChangeStatus, order_uuid],
+    {
+      refetchInterval: ENV.defaultPullInterval * 1000,
+    },
   );
 
-  const oldValue = React.useRef<any>();
-
-  React.useEffect(() => {
-    loadData();
-  }, [loadData]);
-
-  React.useEffect(() => {
-    oldValue.current = value;
-  }, [value]);
-
-  const { online } = useNetwork();
-
-  const pullInterval =
-    online && value?.order?.state === 'executing'
-      ? ENV.defaultPullInterval * 1000
-      : null;
-  // Refresh order details until it is switched from pending state to terminal state
-  useInterval(loadData, pullInterval);
-
-  // Don't render loading indicator if order item is refreshing
-  // since if it is in pending state it is refreshed via periodic polling
-  if (loading && !oldValue.current) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
@@ -90,7 +55,6 @@ export const OrderDetails: React.FC<OrderDetailsProps> = (props) => {
     );
   }
 
-  const data = value || oldValue.current;
   if (data) {
     return (
       <Row>
@@ -103,23 +67,8 @@ export const OrderDetails: React.FC<OrderDetailsProps> = (props) => {
             editable={false}
           />
           <div className="text-right">
-            <OrderRefreshButton loadData={loadData} />
-            {props.orderCanBeApproved && data.step === 'Approve' && (
-              <>
-                <ApproveButton
-                  submitting={props.stateChangeStatus.approving}
-                  onClick={() => props.approveOrder(order_uuid)}
-                  tooltip={translate(
-                    'You need approval to finish purchasing of services.',
-                  )}
-                  className="btn btn-primary btn-sm me-1"
-                />
-                <RejectButton
-                  submitting={props.stateChangeStatus.rejecting}
-                  onClick={() => props.rejectOrder(order_uuid)}
-                />
-              </>
-            )}
+            <OrderRefreshButton loadData={refetch} />
+            {data.step === 'Approve' && <OrderActions orderId={order_uuid} />}
           </div>
         </Col>
         <Col lg={4}>

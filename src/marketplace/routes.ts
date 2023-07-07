@@ -102,9 +102,9 @@ const SupportOrdersContainer = lazyComponent(
   () => import('./orders/SupportOrdersContainer'),
   'SupportOrdersContainer',
 );
-const OrderDetailsContainer = lazyComponent(
-  () => import('./orders/OrderDetailsContainer'),
-  'OrderDetailsContainer',
+const OrderDetails = lazyComponent(
+  () => import('./orders/OrderDetails'),
+  'OrderDetails',
 );
 const OrdersList = lazyComponent(
   () => import('./orders/OrdersList'),
@@ -553,7 +553,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-order-details',
     url: 'marketplace-order-details/:order_uuid/',
-    component: OrderDetailsContainer,
+    component: OrderDetails,
     parent: 'project',
   },
 
@@ -574,7 +574,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-order-details-customer',
     url: 'marketplace-order-details/:order_uuid/',
-    component: OrderDetailsContainer,
+    component: OrderDetails,
     parent: 'organization',
   },
 

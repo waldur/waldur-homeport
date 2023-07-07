@@ -39,7 +39,7 @@ export const ApproveAllButton: React.FC<ApproveAllButtonProps> = (props) => {
       dispatch(resetPagination(TABLE_PENDING_PROVIDER_PUBLIC_ORDERS));
       dispatch(fetchListStart(TABLE_PENDING_PROVIDER_PUBLIC_ORDERS));
 
-      dispatch(showSuccess(translate('All order items has been approved.')));
+      dispatch(showSuccess(translate('All order items have been approved.')));
     } catch (response) {
       dispatch(
         showErrorResponse(

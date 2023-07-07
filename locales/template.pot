@@ -540,11 +540,13 @@ msgid "All day"
 msgstr ""
 
 #: src/navigation/header/confirmation-drawer/ApproveAllButton.tsx
-msgid "All order items has been approved."
+#: src/navigation/header/confirmation-drawer/ConsumerApproveAll.tsx
+msgid "All order items have been approved."
 msgstr ""
 
+#: src/navigation/header/confirmation-drawer/ConsumerRejectAll.tsx
 #: src/navigation/header/confirmation-drawer/RejectAllButton.tsx
-msgid "All order items has been rejected."
+msgid "All order items have been rejected."
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
@@ -671,14 +673,15 @@ msgstr ""
 #: src/invitations/UserPermissionRequestApproveButton.tsx
 #: src/marketplace-flows/ReviewApproveAction.tsx
 #: src/marketplace/cart/ShoppingCartSteps.tsx
-#: src/marketplace/orders/ApproveButton.tsx
 #: src/marketplace/orders/OrderSteps.tsx
+#: src/marketplace/orders/actions/ApproveButton.tsx
 #: src/marketplace/orders/item/list/OrderItemApproveButton.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemApproveButton.tsx
 msgid "Approve"
 msgstr ""
 
 #: src/navigation/header/confirmation-drawer/ApproveAllButton.tsx
+#: src/navigation/header/confirmation-drawer/ConsumerApproveAll.tsx
 msgid "Approve all"
 msgstr ""
 
@@ -5443,7 +5446,8 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOfferingUsersFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/project/ProjectOrderItemsList.tsx
@@ -5755,11 +5759,11 @@ msgstr ""
 msgid "Order doesn't have items"
 msgstr ""
 
-#: src/marketplace/orders/store/effects.ts
+#: src/marketplace/orders/actions/ApproveButton.tsx
 msgid "Order has been approved."
 msgstr ""
 
-#: src/marketplace/orders/store/effects.ts
+#: src/marketplace/orders/actions/RejectButton.tsx
 msgid "Order has been rejected."
 msgstr ""
 
@@ -5796,7 +5800,8 @@ msgstr ""
 #: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 msgid "Order items"
 msgstr ""
 
@@ -5841,7 +5846,8 @@ msgstr ""
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/navigation/workspace/context-selector/GuestDropdown.tsx
@@ -6252,11 +6258,11 @@ msgid "Pending confirmations"
 msgstr ""
 
 #: src/navigation/header/confirmation-drawer/PendingConfirmationContainer.tsx
-msgid "Pending order confirmation"
+msgid "Pending consumer orders"
 msgstr ""
 
 #: src/navigation/header/confirmation-drawer/PendingConfirmationContainer.tsx
-msgid "Pending provider confirmation"
+msgid "Pending provider orders"
 msgstr ""
 
 #: src/navigation/header/ConfirmationDrawerToggle.tsx
@@ -6833,7 +6839,8 @@ msgstr ""
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -7385,7 +7392,7 @@ msgstr ""
 msgid "Referrals for {name}"
 msgstr ""
 
-#: src/marketplace/orders/OrderDetails.tsx
+#: src/marketplace/orders/actions/OrderRefreshButton.tsx
 #: src/marketplace/resources/details/RefreshButton.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 msgid "Refresh"
@@ -7434,12 +7441,13 @@ msgstr ""
 #: src/booking/CancelAction.tsx
 #: src/invitations/UserPermissionRequestRejectButton.tsx
 #: src/marketplace-flows/ReviewRejectAction.tsx
-#: src/marketplace/orders/RejectButton.tsx
+#: src/marketplace/orders/actions/RejectButton.tsx
 #: src/marketplace/orders/item/list/OrderItemRejectButton.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemRejectButton.tsx
 msgid "Reject"
 msgstr ""
 
+#: src/navigation/header/confirmation-drawer/ConsumerRejectAll.tsx
 #: src/navigation/header/confirmation-drawer/RejectAllButton.tsx
 msgid "Reject all"
 msgstr ""
@@ -7797,7 +7805,8 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 msgid "Resource"
@@ -9296,7 +9305,8 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOfferingsFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 #: src/notifications/NotificationList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -10246,7 +10256,8 @@ msgstr ""
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/marketplace/robot-accounts/RobotAccountList.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
@@ -10303,6 +10314,7 @@ msgid "Unable to apply action."
 msgstr ""
 
 #: src/navigation/header/confirmation-drawer/ApproveAllButton.tsx
+#: src/navigation/header/confirmation-drawer/ConsumerApproveAll.tsx
 msgid "Unable to approve all order items."
 msgstr ""
 
@@ -10315,7 +10327,7 @@ msgstr ""
 msgid "Unable to approve order item."
 msgstr ""
 
-#: src/marketplace/orders/store/effects.ts
+#: src/marketplace/orders/actions/ApproveButton.tsx
 msgid "Unable to approve order."
 msgstr ""
 
@@ -10927,6 +10939,7 @@ msgstr ""
 msgid "Unable to register service provider."
 msgstr ""
 
+#: src/navigation/header/confirmation-drawer/ConsumerRejectAll.tsx
 #: src/navigation/header/confirmation-drawer/RejectAllButton.tsx
 msgid "Unable to reject all order items."
 msgstr ""
@@ -10940,7 +10953,7 @@ msgstr ""
 msgid "Unable to reject order item."
 msgstr ""
 
-#: src/marketplace/orders/store/effects.ts
+#: src/marketplace/orders/actions/RejectButton.tsx
 msgid "Unable to reject order."
 msgstr ""
 
@@ -12346,7 +12359,7 @@ msgstr ""
 msgid "You must be staff to modify payments"
 msgstr ""
 
-#: src/marketplace/orders/OrderDetails.tsx
+#: src/marketplace/orders/actions/ApproveButton.tsx
 msgid "You need approval to finish purchasing of services."
 msgstr ""
 

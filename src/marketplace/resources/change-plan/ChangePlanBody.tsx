@@ -6,7 +6,7 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { orderCanBeApproved } from '@waldur/marketplace/orders/store/selectors';
+import { orderCanBeApproved } from '@waldur/marketplace/orders/actions/selectors';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { RootState } from '@waldur/store/reducers';
