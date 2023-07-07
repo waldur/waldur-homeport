@@ -2,9 +2,9 @@ import React from 'react';
 
 import { translate } from '@waldur/i18n';
 
-import { PendingOrderConfirmation } from './PendingOrderConfirmation';
+import { PendingConsumerOrders } from './PendingConsumerOrders';
 import { PendingProjectUpdates } from './PendingProjectUpdates';
-import { PendingProviderConfirmation } from './PendingProviderConfirmation';
+import { PendingProviderOrders } from './PendingProviderOrders';
 
 interface OwnProps {
   pendingOrdersCount: number;
@@ -31,14 +31,14 @@ export const PendingConfirmationContainer: React.FC<OwnProps> = (props) => {
     <div>
       {props.pendingOrdersCount > 0 && (
         <div className="border-bottom pb-5 mb-5">
-          <h4 className="mb-3">{translate('Pending order confirmation')}</h4>
-          <PendingOrderConfirmation />
+          <h4 className="mb-3">{translate('Pending consumer orders')}</h4>
+          <PendingConsumerOrders />
         </div>
       )}
       {props.pendingProvidersCount > 0 && (
         <div className="border-bottom pb-5 mb-5">
-          <h4 className="mb-3">{translate('Pending provider confirmation')}</h4>
-          <PendingProviderConfirmation />
+          <h4 className="mb-3">{translate('Pending provider orders')}</h4>
+          <PendingProviderOrders />
         </div>
       )}
       {props.pendingProjectUpdatesCount > 0 && (

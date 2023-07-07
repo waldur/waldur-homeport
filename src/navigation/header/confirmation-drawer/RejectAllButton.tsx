@@ -39,7 +39,7 @@ export const RejectAllButton: React.FC<RejectAllButtonProps> = (props) => {
       dispatch(resetPagination(TABLE_PENDING_PROVIDER_PUBLIC_ORDERS));
       dispatch(fetchListStart(TABLE_PENDING_PROVIDER_PUBLIC_ORDERS));
 
-      dispatch(showSuccess(translate('All order items has been rejected.')));
+      dispatch(showSuccess(translate('All order items have been rejected.')));
     } catch (response) {
       dispatch(
         showErrorResponse(

@@ -5,7 +5,7 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { terminateResource } from '@waldur/marketplace/common/api';
-import { orderCanBeApproved as orderCanBeApprovedSelector } from '@waldur/marketplace/orders/store/selectors';
+import { orderCanBeApproved as orderCanBeApprovedSelector } from '@waldur/marketplace/orders/actions/selectors';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';

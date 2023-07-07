@@ -6,9 +6,12 @@ import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { openDrawerDialog } from '@waldur/drawer/actions';
 import { translate } from '@waldur/i18n';
 import { countProjectUpdateRequestsList } from '@waldur/marketplace-remote/api';
-import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
-import { countOrderItems } from '@waldur/marketplace/common/api';
+import { countOrderItems, countOrders } from '@waldur/marketplace/common/api';
 
+import {
+  PENDING_CONSUMER_ORDERS_FILTER,
+  PENDING_PROVIDER_ORDERS_FILTER,
+} from './confirmation-drawer/constants';
 import { HeaderButtonBullet } from './HeaderButtonBullet';
 
 const PendingConfirmationContainer = lazyComponent(
@@ -22,15 +25,12 @@ export const ConfirmationDrawerToggle: React.FC = () => {
   const dispatch = useDispatch();
 
   const { value: counters } = useAsync(async () => {
-    const pendingOrdersCount = await countOrderItems({
-      state: 'pending',
-      can_manage_as_owner: 'True',
-    });
-    const pendingProvidersCount = await countOrderItems({
-      offering_type: [REMOTE_OFFERING_TYPE, 'Marketplace.Basic'],
-      state: 'executing',
-      can_manage_as_service_provider: 'True',
-    });
+    const pendingOrdersCount = await countOrders(
+      PENDING_CONSUMER_ORDERS_FILTER,
+    );
+    const pendingProvidersCount = await countOrderItems(
+      PENDING_PROVIDER_ORDERS_FILTER,
+    );
     const pendingProjectUpdatesCount = await countProjectUpdateRequestsList({
       state: 'pending',
     });

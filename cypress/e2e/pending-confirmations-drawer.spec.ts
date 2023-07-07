@@ -36,8 +36,8 @@ describe('Empty pending confirmations drawer', () => {
 describe('Pending confirmations drawer', () => {
   const successApproveOrderItem = 'Order item has been approved';
   const successRejectOrderItem = 'Order item has been rejected';
-  const successApproveAllOrderItems = 'All order items has been approved';
-  const successRejectAllOrderItems = 'All order items has been rejected';
+  const successApproveAllOrderItems = 'All order items have been approved';
+  const successRejectAllOrderItems = 'All order items have been rejected';
   const successApproveUpdateRequest = 'Review has been submitted';
 
   beforeEach(() => {
@@ -47,11 +47,19 @@ describe('Pending confirmations drawer', () => {
       .intercept('GET', '/api/marketplace-order-items/**/', {
         fixture: 'marketplace/order_item.json',
       })
+      .intercept('GET', '/api/marketplace-orders/?**', {
+        fixture: 'marketplace/orders.json',
+      })
       .intercept('GET', '/api/marketplace-project-update-requests/?**', {
         fixture: 'projects/update_requests.json',
       })
       .intercept('POST', '/api/marketplace-order-items/**/approve/', {
         body: true,
+      })
+      .intercept('HEAD', '/api/marketplace-orders/**', {
+        headers: {
+          'x-result-count': '2',
+        },
       })
       .intercept('HEAD', '/api/marketplace-order-items/**', {
         headers: {
@@ -87,17 +95,17 @@ describe('Pending confirmations drawer', () => {
       .get('#kt_drawer')
       .contains('h3.card-title', 'Pending confirmations');
 
-    // Pending order confirmation
+    // Pending consumer orders
     cy.get('#kt_drawer')
-      .contains('h4', 'Pending order confirmation')
+      .contains('h4', 'Pending consumer orders')
       .parent()
       .within(() => {
         cy.get('.table-container tbody tr').should('have.length', 2);
       });
 
-    // Pending provider confirmation
+    // Pending provider orders
     cy.get('#kt_drawer')
-      .contains('h4', 'Pending provider confirmation')
+      .contains('h4', 'Pending provider orders')
       .parent()
       .within(() => {
         cy.get('.table-container tbody tr').should('have.length', 2);
@@ -118,9 +126,9 @@ describe('Pending confirmations drawer', () => {
       .get('#kt_drawer')
       .contains('h3.card-title', 'Pending confirmations');
 
-    // Pending order confirmation
+    // Pending consumer orders
     cy.get('#kt_drawer')
-      .contains('h4', 'Pending order confirmation')
+      .contains('h4', 'Pending consumer orders')
       .parent()
       .within(() => {
         // Approve
@@ -164,9 +172,9 @@ describe('Pending confirmations drawer', () => {
       .parents('[data-testid="notification"]')
       .invoke('remove');
 
-    // Pending provider confirmation
+    // Pending provider orders
     cy.get('#kt_drawer')
-      .contains('h4', 'Pending provider confirmation')
+      .contains('h4', 'Pending provider orders')
       .parent()
       .within(() => {
         // Approve

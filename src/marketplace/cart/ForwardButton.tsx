@@ -9,7 +9,7 @@ import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { isStaff } from '@waldur/workspace/selectors';
 
-import { orderCanBeApproved } from '../orders/store/selectors';
+import { orderCanBeApproved } from '../orders/actions/selectors';
 import { OrderItemResponse } from '../orders/types';
 
 import { createOrderRequest } from './store/actions';

@@ -7,7 +7,7 @@ interface OwnProps {
   orders: OrderItemResponse[];
 }
 
-export const BulkActionButtons = ({ orders }: OwnProps) => {
+export const BulkProviderActions = ({ orders }: OwnProps) => {
   const hasActions = orders && orders.length;
 
   if (hasActions) {

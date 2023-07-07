@@ -474,6 +474,13 @@ export const countOrderItems = (params) =>
     params,
   }).then(parseResultCount);
 
+export const countOrders = (params) =>
+  Axios.request({
+    method: 'HEAD',
+    url: ENV.apiEndpoint + 'api/marketplace-orders/',
+    params,
+  }).then(parseResultCount);
+
 export const countRobotAccounts = (params) =>
   Axios.request({
     method: 'HEAD',

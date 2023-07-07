@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { formValueSelector, reduxForm } from 'redux-form';
 
 import { Limits } from '@waldur/marketplace/common/registry';
-import { orderCanBeApproved as getOrderCanBeApproved } from '@waldur/marketplace/orders/store/selectors';
+import { orderCanBeApproved as getOrderCanBeApproved } from '@waldur/marketplace/orders/actions/selectors';
 import { isVisible } from '@waldur/store/config';
 
 import { changeLimits } from '../store/constants';
