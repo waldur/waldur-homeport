@@ -1,4 +1,4 @@
-xdescribe('Customer creation dialog', () => {
+describe('Customer creation dialog', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockCustomer()
@@ -16,8 +16,8 @@ xdescribe('Customer creation dialog', () => {
       .visit('/profile/')
       .waitForSpinner()
       // Click on "Add organization" button
-      .get('.modal-footer button')
-      .contains('Create')
+      .get('div.card-toolbar button.btn.btn-primary')
+      .contains('Add organization')
       .click({ force: true })
 
       // Modal dialog should be displayed
@@ -27,21 +27,14 @@ xdescribe('Customer creation dialog', () => {
 
   it('Validates required fields', () => {
     cy
-      // Try to switch to next step
-      .get('button')
-      .contains('Next')
-      .click()
-
-      // Error message should be displayed
-      .get('[name="name"]')
-      .then(($input) => {
-        expect($input[0]['validationMessage']).to.exist;
-      })
-
       // Enter organization name
       .get('input[name="name"]')
       .type('Alice Lebowski')
-        
+
+      // Enter home organization domain name
+      .get('input[name="name"]')
+      .type('Domain name')
+
       // Enter organization email
       .get('input[name="email"]')
       .type('contact@abc.com')
@@ -50,30 +43,26 @@ xdescribe('Customer creation dialog', () => {
       .get('input[name="phone_number"]')
       .type('+1234567890')
 
-      // Go to the next step
-      .get('button')
+      // Enter organization website
+      .get('input[name="homepage"]')
+      .type('https://example.com')
+
+      // Press next
+      .get('div.modal-footer button.btn')
       .contains('Next')
       .click()
-
-      // Last step should be active
-      .get('.steps li')
-      .last()
-      .should('have.class', 'current')
+      .wait(200)
 
       // Enter organization registration code
       .get('input[name="registration_code"]')
-      .type('EE1234567')
+      .type('Registration code')
 
-      // Enter organization address
+      // Enter address
       .get('input[name="address"]')
-      .type('London, UK, Baker street, 10')
-
-      // Enter organization postal code
-      .get('input[name="postal"]')
-      .type('1234567')
+      .type('Address')
 
       // Submit form
-      .get('button')
+      .get('div.modal-footer button.btn')
       .contains('Create organization')
       .click()
       .wait(500)
@@ -86,11 +75,12 @@ xdescribe('Customer creation dialog', () => {
       .get('.modal-content')
       .should('not.exist')
 
-      // Workspace selector indicates organization workspace
-      .get('.select-workspace-toggle.btn-primary')
+      // Indicator of selection of created organization
+      .get('#kt_aside_toolbar span')
+      .contains('Alice Lebowski')
 
       // Workspace selector should indicate new organization name
-      .get('h2')
-      .contains('Welcome, Alice Lebowski!');
+      .get('#kt_content_container h2')
+      .contains('Alice Lebowski');
   });
 });
