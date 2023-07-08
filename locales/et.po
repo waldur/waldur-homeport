@@ -774,6 +774,7 @@ msgid "Approve"
 msgstr "Kinnita"
 
 #: src/navigation/header/confirmation-drawer/ApproveAllButton.tsx
+#: src/navigation/header/confirmation-drawer/ConsumerApproveAll.tsx
 msgid "Approve all"
 msgstr "Kinnita kõik"
 
@@ -9026,6 +9027,7 @@ msgid "Unable to add item to shopping cart."
 msgstr "Kaupa ei saa ostukorvi lisada."
 
 #: src/navigation/header/confirmation-drawer/ApproveAllButton.tsx
+#: src/navigation/header/confirmation-drawer/ConsumerApproveAll.tsx
 msgid "Unable to approve all order items."
 msgstr "Kõigi tellimuse üksusi ei saa kinnitada."
 
@@ -9370,6 +9372,7 @@ msgstr "Google kalendrit ei saa avaldada."
 msgid "Unable to register service provider."
 msgstr "Teenusepakkuajt ei õnnestunud registreerida"
 
+#: src/navigation/header/confirmation-drawer/ConsumerRejectAll.tsx
 #: src/navigation/header/confirmation-drawer/RejectAllButton.tsx
 msgid "Unable to reject all order items."
 msgstr "Kõiki tellimuse üksusi ei saa tagasi lükata."
