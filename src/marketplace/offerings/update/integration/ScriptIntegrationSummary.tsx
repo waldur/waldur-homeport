@@ -71,7 +71,7 @@ export const ScriptIntegrationSummary = ({ offering, refetch }) => (
                 <div>
                   <EditScriptButton
                     type={type}
-                    dryRun={dry_run}
+                    dry_run={dry_run}
                     label={label}
                     offering={offering}
                     refetch={refetch}
