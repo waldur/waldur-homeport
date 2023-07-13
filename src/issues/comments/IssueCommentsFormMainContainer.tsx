@@ -21,7 +21,7 @@ export const PureIssueCommentsFormMainContainer: FunctionComponent<PureIssueComm
 
     return (
       <div>
-        <div className="m-t-lg">
+        <div className="m-t-lg mb-2">
           {opened ? (
             <span className="text-muted">{translate('Comment')}</span>
           ) : (
