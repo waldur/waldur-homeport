@@ -58,11 +58,11 @@ export class PureIssueCommentsContainer extends Component<PureIssueCommentsConta
       <LoadingSpinner />
     ) : (
       <>
-        <IssueCommentsList comments={comments} />
         <IssueCommentsFormMainContainer
           formId={constants.MAIN_FORM_ID}
           erred={erred}
         />
+        <IssueCommentsList comments={comments} />
       </>
     );
 
