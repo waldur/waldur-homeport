@@ -18,6 +18,7 @@ declare global {
       openWorkspaceSelector(): Chainable;
       selectTheFirstOptionOfDropdown(): Chainable;
       selectDate(): Chainable;
+      selectFlatpickrDate(inputQueryPath: string, date?: string): Chainable;
       openSelectDialog(selectId: string, option: string): Chainable;
       buttonShouldBeDisabled(btnClass: string): Chainable;
       clickSidebarMenuItem(menu: string, submenu?: string): Chainable;
@@ -86,6 +87,35 @@ Cypress.Commands.add('selectDate', () => {
       '.react-datepicker__week:last-child .react-datepicker__day:first-child',
     )
     .click();
+});
+
+Cypress.Commands.add('selectFlatpickrDate', (inputQueryPath, date) => {
+  if (date) {
+    const d = new Date(date);
+    cy.get(inputQueryPath)
+      .click({ force: true })
+      .get('.flatpickr-calendar')
+      .should('be.visible')
+      .within(() => {
+        // Year
+        cy.get('.flatpickr-months .flatpickr-current-month input.numInput')
+          .clear()
+          .type(d.getFullYear().toString());
+        // Month
+        cy.get(
+          '.flatpickr-months .flatpickr-current-month select.flatpickr-monthDropdown-months',
+        ).select(d.getMonth());
+        // Day
+        cy.get('.flatpickr-innerContainer .dayContainer')
+          .contains('span.flatpickr-day', d.getDate().toString())
+          .click();
+      });
+  } else {
+    cy.get(inputQueryPath)
+      .next()
+      .should('have.class', 'btn-circle')
+      .click({ force: true });
+  }
 });
 
 Cypress.Commands.add('openWorkspaceSelector', () => {

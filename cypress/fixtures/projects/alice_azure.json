@@ -8,6 +8,8 @@
   "customer_native_name": "",
   "customer_abbreviation": "",
   "description": "",
+  "is_industry": false,
+  "backend_id": "123",
   "quotas": [
     {
       "url": "/api/quotas/8c8293ce6ad745098ce79eeb48eadc66/",
@@ -187,6 +189,7 @@
   ],
   "services": [],
   "created": "2016-03-14T19:36:00Z",
+  "end_date": null,
   "type": null,
   "type_name": null,
   "billing_price_estimate": {
