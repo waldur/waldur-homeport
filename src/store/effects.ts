@@ -11,7 +11,6 @@ import issueCommentsSaga from '@waldur/issues/comments/effects';
 import marketplaceSaga from '@waldur/marketplace/store/effects';
 import { effects as titleEffects } from '@waldur/navigation/title';
 import projectSaga from '@waldur/project/effects';
-import providerSaga from '@waldur/providers/effects';
 import serviceUsageSaga from '@waldur/providers/support/effects';
 import resourceSummarySaga from '@waldur/resource/summary/effects';
 import tableSaga from '@waldur/table/effects';
@@ -23,7 +22,6 @@ export default [
   formActionSaga,
   projectSaga,
   userSaga,
-  providerSaga,
   customerDetailsSaga,
   issueAttachmentsSaga,
   issueCommentsSaga,

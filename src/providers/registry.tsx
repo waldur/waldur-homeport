@@ -1,3 +1,5 @@
+import { getProviderType } from '@waldur/marketplace/common/registry';
+
 import { ProviderConfig } from './types';
 
 const providers: { [key: string]: ProviderConfig } = {};
@@ -17,4 +19,12 @@ export const getServiceIcon = (type) =>
 export const getSerializer = (type) => {
   const conf = findProvider(type);
   return (conf && conf.serializer) || ((x) => x);
+};
+
+export const getServiceSettingsForm = (type) => {
+  const providerType = getProviderType(type);
+  if (providerType) {
+    const providerConfig = findProvider(providerType);
+    return providerConfig.component;
+  }
 };

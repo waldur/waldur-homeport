@@ -13,7 +13,6 @@ const OfferingConfigurationForm = lazyComponent(
   () => import('@waldur/support/OfferingConfigurationForm'),
   'OfferingConfigurationForm',
 );
-const ScriptsForm = lazyComponent(() => import('./ScriptsForm'), 'ScriptsForm');
 
 registerOfferingType({
   type: OFFERING_TYPE_CUSTOM_SCRIPTS,
@@ -22,7 +21,6 @@ registerOfferingType({
   },
   component: OfferingConfigurationForm,
   detailsComponent: OfferingConfigurationDetails,
-  secretOptionsForm: ScriptsForm,
   serializer,
   showOptions: true,
   showComponents: true,

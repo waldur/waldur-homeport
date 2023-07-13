@@ -103,6 +103,11 @@ export const getProviderOfferings = (customerUuid: string) =>
 
 export const getPlan = (id: string) => getById<any>('/marketplace-plans/', id);
 
+export const createPlan = (payload) => post(`/marketplace-plans/`, payload);
+
+export const archivePlan = (planId) =>
+  post(`/marketplace-plans/${planId}/archive/`);
+
 export const getOfferingPlansUsage = (offeringUuid: string) =>
   getAll<PlanUsageRow>('/marketplace-plans/usage_stats/', {
     params: { offering_uuid: offeringUuid },
@@ -187,6 +192,21 @@ export const uploadProviderOfferingHeroImage = (offeringId, image) =>
 export const updateProviderOfferingAttributes = (offeringId, data) =>
   post(
     `/marketplace-provider-offerings/${offeringId}/update_attributes/`,
+    data,
+  );
+
+export const updateProviderOfferingOptions = (offeringId, data) =>
+  post(`/marketplace-provider-offerings/${offeringId}/update_options/`, data);
+
+export const updateProviderOfferingComponents = (offeringId, data) =>
+  post(
+    `/marketplace-provider-offerings/${offeringId}/update_components/`,
+    data,
+  );
+
+export const updateProviderOfferingSecretOptions = (offeringId, data) =>
+  post(
+    `/marketplace-provider-offerings/${offeringId}/update_secret_options/`,
     data,
   );
 
@@ -288,7 +308,7 @@ export const updateProviderOfferingState = (offeringUuid, action, reason) =>
 
 export const uploadOfferingImage = (formData, offering) => {
   const reqData = {
-    image: formData.images,
+    image: formData.image,
     name: formData.name,
     description: formData.description,
     offering: offering.url,

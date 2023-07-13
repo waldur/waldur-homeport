@@ -6,10 +6,10 @@ import { Field, initialize, reduxForm } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
 import { get, post } from '@waldur/core/api';
+import { CustomRadioButton } from '@waldur/core/CustomRadioButton';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
-import { CustomRadioButton } from '@waldur/marketplace/offerings/attributes/CustomRadioButton';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 interface FeatureItem {

@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -13,17 +13,18 @@ const CreateImageDialog = lazyComponent(
 
 interface CreateImageButtonProps {
   offering: Offering;
-  openDialog(): void;
 }
 
-const openImageDialog = (props: CreateImageButtonProps) => {
-  return openModalDialog(CreateImageDialog, {
-    resolve: props,
-    size: 'lg',
-  });
-};
+export const CreateImageButton = (props: CreateImageButtonProps) => {
+  const dispatch = useDispatch();
+  const callback = () =>
+    dispatch(
+      openModalDialog(CreateImageDialog, {
+        resolve: props,
+        size: 'lg',
+      }),
+    );
 
-const PureCreateImageButton = (props: CreateImageButtonProps) => {
   return (
     <div
       style={{
@@ -35,17 +36,8 @@ const PureCreateImageButton = (props: CreateImageButtonProps) => {
       <ActionButton
         title={translate('Add image')}
         icon="fa fa-plus"
-        action={props.openDialog}
+        action={callback}
       />
     </div>
   );
 };
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  openDialog: () => dispatch(openImageDialog(ownProps)),
-});
-
-export const CreateImageButton = connect(
-  null,
-  mapDispatchToProps,
-)(PureCreateImageButton);

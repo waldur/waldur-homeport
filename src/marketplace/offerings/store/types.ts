@@ -60,10 +60,6 @@ export interface OfferingFormData {
   limits?: OfferingLimits;
 }
 
-export interface OfferingUpdateFormData extends OfferingFormData {
-  offeringUuid: string;
-}
-
 export interface PlanRequest {
   name: string;
   unit: string;

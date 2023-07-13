@@ -1,4 +1,4 @@
-import { useMemo, FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
@@ -10,25 +10,22 @@ import { RootState } from '@waldur/store/reducers';
 const pluginOptionsSelector = (state: RootState) =>
   formValueSelector(FORM_ID)(state, 'plugin_options');
 
+export const STORAGE_MODE_OPTIONS = [
+  {
+    label: translate('Fixed — use common storage quota'),
+    value: 'fixed',
+  },
+  {
+    label: translate(
+      'Dynamic — use separate volume types for tracking pricing',
+    ),
+    value: 'dynamic',
+  },
+];
+
 export const OpenStackPluginOptionsForm: FunctionComponent<{ container }> = ({
   container,
 }) => {
-  const STORAGE_MODE_OPTIONS = useMemo(
-    () => [
-      {
-        label: translate('Fixed — use common storage quota'),
-        value: 'fixed',
-      },
-      {
-        label: translate(
-          'Dynamic — use separate volume types for tracking pricing',
-        ),
-        value: 'dynamic',
-      },
-    ],
-    [],
-  );
-
   const pluginOptions = useSelector(pluginOptionsSelector);
 
   return (

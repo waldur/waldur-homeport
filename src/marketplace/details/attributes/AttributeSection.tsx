@@ -20,14 +20,12 @@ export const AttributeSection: FunctionComponent<AttributeSectionProps> = (
         <th />
       </tr>
     )}
-    {props.section.attributes
-      .filter((attr) => props.attributes.hasOwnProperty(attr.key))
-      .map((attr, index) => (
-        <AttributeRow
-          key={index}
-          value={props.attributes[attr.key]}
-          attribute={attr}
-        />
-      ))}
+    {props.section.attributes.map((attr, index) => (
+      <AttributeRow
+        key={index}
+        value={props.attributes[attr.key] || 'N/A'}
+        attribute={attr}
+      />
+    ))}
   </>
 );

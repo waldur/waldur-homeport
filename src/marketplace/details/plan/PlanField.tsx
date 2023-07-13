@@ -12,7 +12,7 @@ interface PlanFieldProps {
 
 export const PlanField: FunctionComponent<PlanFieldProps> = (props) =>
   props.offering.plans.length > 0 ? (
-    <Form.Group>
+    <Form.Group className="mb-7">
       <Form.Label>
         {translate('Plan')}
         <span className="text-danger"> *</span>
