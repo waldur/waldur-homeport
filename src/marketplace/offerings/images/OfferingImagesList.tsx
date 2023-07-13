@@ -1,41 +1,21 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { IMAGES_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
-import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
-import { Offering, Image } from '@waldur/marketplace/types';
-import { openModalDialog } from '@waldur/modal/actions';
-import { RootState } from '@waldur/store/reducers';
+import { Offering } from '@waldur/marketplace/types';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 
-import { ImagesActions } from './ImagesActions';
+import { CreateImageButton } from './CreateImageButton';
+import { DeleteImageButton } from './DeleteImageButton';
 import { ImagesListPlaceholder } from './ImagesListPlaceholder';
 import { ImageThumbnail } from './ImageThumbnail';
 
-const ImageDetailsDialog = lazyComponent(
-  () => import('./ImageDetailsDialog'),
-  'ImageDetailsDialog',
-);
-
-const openImageDetailsDialog = (image: Image) =>
-  openModalDialog(ImageDetailsDialog, {
-    resolve: image,
-  });
-
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Thumbnail'),
-      render: ({ row }) => (
-        <ImageThumbnail
-          image={row}
-          onClick={() => props.openViewImageDialog(row)}
-        />
-      ),
+      render: ({ row }) => <ImageThumbnail image={row} />,
     },
     {
       title: translate('Name'),
@@ -51,22 +31,18 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => formatDateTime(row.created),
       orderField: 'created',
     },
-    {
-      title: translate('Actions'),
-      render: ({ row }) => {
-        return <ImagesActions row={row} />;
-      },
-    },
   ];
 
   return (
     <Table
       {...props}
+      title={translate('Images')}
       columns={columns}
       placeholderComponent={<ImagesListPlaceholder />}
       verboseName={translate('Offerings images')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      enableExport={true}
+      actions={<CreateImageButton offering={props.offering} />}
+      hoverableRow={DeleteImageButton}
     />
   );
 };
@@ -91,17 +67,6 @@ const TableOptions = {
   exportFields: ['Name', 'Description', 'Created'],
 };
 
-const mapStateToProps = (state: RootState) => ({
-  offering: getOffering(state).offering,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  openViewImageDialog: (image) => dispatch(openImageDetailsDialog(image)),
-});
-
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  connectTable(TableOptions),
-);
-
-export const OfferingImagesList = enhance(TableComponent);
+export const OfferingImagesList = connectTable(TableOptions)(
+  TableComponent,
+) as React.ComponentType<any>;

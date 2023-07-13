@@ -34,10 +34,10 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   label: string;
   showOptions?: boolean;
   showComponents?: boolean;
-  showOfferingLimits?: boolean;
   onlyOnePlan?: boolean;
   providerType?: string;
   attributes?(): Attribute[];
+  optionsSummary?(): Attribute[];
   disableOfferingCreation?: boolean;
   schedulable?: boolean;
   showBackendId?: boolean;
@@ -141,13 +141,6 @@ export function allowToUpdateService(offeringType: string) {
   );
 }
 
-export function showOfferingLimits(offeringType: string) {
-  return (
-    REGISTRY.hasOwnProperty(offeringType) &&
-    REGISTRY[offeringType].showOfferingLimits
-  );
-}
-
 export function hidePlanAddButton(offeringType: string, fields: Array<any>) {
   return (
     REGISTRY.hasOwnProperty(offeringType) &&
@@ -199,6 +192,13 @@ export function getLabel(offeringType: string) {
 export function getAttributes(offeringType: string) {
   const func =
     REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].attributes;
+  return func ? func() : [];
+}
+
+export function getOptionsSummary(offeringType: string) {
+  const func =
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].optionsSummary;
   return func ? func() : [];
 }
 

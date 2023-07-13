@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, getFormValues } from 'redux-form';
 
 import { InputField } from '@waldur/form/InputField';
-import { configAttrField } from '@waldur/marketplace/offerings/attributes/utils';
+import { configAttrField } from '@waldur/marketplace/offerings/update/attributes/utils';
 import { Section } from '@waldur/marketplace/types';
 
 import { MARKETPLACE_FILTER_FORM } from '../store/constants';

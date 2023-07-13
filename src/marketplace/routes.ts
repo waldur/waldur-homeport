@@ -78,10 +78,6 @@ const ServiceProvidersContainer = lazyComponent(
   () => import('./offerings/service-providers/ServiceProvidersContainer'),
   'ServiceProvidersContainer',
 );
-const ImagesContainer = lazyComponent(
-  () => import('./offerings/images/ImagesContainer'),
-  'ImagesContainer',
-);
 const OfferingUpdateContainer = lazyComponent(
   () => import('./offerings/update/OfferingUpdateContainer'),
   'OfferingUpdateContainer',
@@ -544,13 +540,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-offering-images',
-    url: 'marketplace-provider-offering-images/:offering_uuid/',
-    component: ImagesContainer,
-    parent: 'marketplace-provider',
-  },
-
-  {
     name: 'marketplace-order-details',
     url: 'marketplace-order-details/:order_uuid/',
     component: OrderDetails,
@@ -682,6 +671,12 @@ export const states: StateDeclaration[] = [
     name: 'admin.marketplace-offering-details',
     url: 'offerings/:offering_uuid',
     component: OfferingContainer,
+  },
+
+  {
+    name: 'admin.marketplace-offering-update',
+    url: 'offerings/:offering_uuid/update',
+    component: OfferingUpdateContainer,
   },
 
   {

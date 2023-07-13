@@ -11,6 +11,7 @@ export const openModalDialog = <P = any>(
   modalProps?: P & {
     size?: DialogSizeType;
     backdrop?: 'static' | true | false;
+    formId?: string;
   },
 ) => ({
   type: 'SHOW_MODAL',

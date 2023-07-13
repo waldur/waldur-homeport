@@ -1,13 +1,9 @@
 import React from 'react';
 
-export interface ProviderFormProps {
-  container: {};
-}
-
 export interface ProviderConfig {
   name: string;
   type: string;
-  component: React.ComponentType<ProviderFormProps>;
+  component: React.ComponentType;
   endpoint: string;
   icon: string;
   serializer: (details: any) => any;

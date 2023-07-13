@@ -4,6 +4,7 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 
 import { TENANT_TYPE } from './constants';
+import { STORAGE_MODE_OPTIONS } from './OpenStackPluginOptionsForm';
 
 const OpenStackPackageDetails = lazyComponent(
   () => import('./OpenStackPackageDetails'),
@@ -53,6 +54,23 @@ const ServiceSettingsAttributes = (): Attribute[] => [
     key: 'availability_zone',
     title: translate('Availability zone'),
     type: 'string',
+  },
+];
+
+const OpenStackOptionsSummary = (): Attribute[] => [
+  {
+    key: 'storage_mode',
+    title: translate('Storage mode'),
+    type: 'choice',
+    options: STORAGE_MODE_OPTIONS.map(({ label, value }) => ({
+      key: value,
+      title: label,
+    })),
+  },
+  {
+    key: 'snapshot_size_limit_gb',
+    title: translate('Snapshot size limit'),
+    type: 'integer',
   },
 ];
 
@@ -106,6 +124,7 @@ registerOfferingType({
   limitParser,
   providerType: 'OpenStack',
   attributes: ServiceSettingsAttributes,
+  optionsSummary: OpenStackOptionsSummary,
   onlyOnePlan: true,
   showComponents: true,
   offeringComponentsFilter,

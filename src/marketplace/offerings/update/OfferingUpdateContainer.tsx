@@ -1,76 +1,117 @@
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { useQuery } from '@tanstack/react-query';
+import { useCurrentStateAndParams } from '@uirouter/react';
+import Axios from 'axios';
+import { Col, Row } from 'react-bootstrap';
 
-import * as actions from '@waldur/marketplace/offerings/store/actions';
-import { router } from '@waldur/router';
-import { RootState } from '@waldur/store/reducers';
-
-import { updateOffering, FORM_ID } from '../store/constants';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { translate } from '@waldur/i18n';
 import {
-  getStep,
-  isOfferingManagementDisabled,
-  getReadOnlyFields,
-  isLoading,
-  isLoaded,
-  isErred,
-} from '../store/selectors';
-import { OfferingStep, STEPS } from '../types';
+  getCategory,
+  getPlugins,
+  getProviderOffering,
+} from '@waldur/marketplace/common/api';
+import { useFullPage } from '@waldur/navigation/context';
+import { useTitle } from '@waldur/navigation/title';
 
-import { OfferingUpdateDialog } from './OfferingUpdateDialog';
-import { getInitialValues } from './utils';
+import { OfferingDetailsHeader } from '../details/OfferingDetailsHeader';
+import { OfferingImagesList } from '../images/OfferingImagesList';
 
-export const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  ...ownProps,
-  goBack() {
-    if (stateProps.step === STEPS[0]) {
-      router.stateService.go('marketplace-vendor-offerings');
-    } else {
-      dispatchProps.setStep(STEPS[STEPS.indexOf(stateProps.step) - 1]);
-    }
-  },
-  goNext() {
-    dispatchProps.setStep(STEPS[STEPS.indexOf(stateProps.step) + 1]);
-  },
-  isLastStep: stateProps.step === STEPS[STEPS.length - 1],
-});
+import { AttributesSection } from './attributes/AttributesSection';
+import { ComponentsSection } from './components/ComponentsSection';
+import { IntegrationSection } from './integration/IntegrationSection';
+import { OfferingOptionsSection } from './options/OfferingOptionsSection';
+import { OverviewSection } from './overview/OverviewSection';
+import { PlansSection } from './plans/PlansSection';
 
-const mapStateToProps = (state: RootState) => ({
-  step: getStep(state),
-  disabled: isOfferingManagementDisabled(state),
-  readOnlyFields: getReadOnlyFields(state),
-  initialValues: getInitialValues(state),
-  loading: isLoading(state),
-  loaded: isLoaded(state),
-  erred: isErred(state),
-});
+import '../details/OfferingDetails.scss';
 
-const mapDispatchToProps = (dispatch) => ({
-  updateOffering: (data) =>
-    updateOffering(
-      {
-        ...data,
-        offeringUuid: router.globals.params.offering_uuid,
-      },
-      dispatch,
-    ),
-  loadOffering: (offeringUuid) =>
-    dispatch(actions.loadOfferingStart(offeringUuid)),
-  setStep: (step: OfferingStep) => dispatch(actions.setStep(step)),
-  setIsUpdatingOffering: (state: boolean) =>
-    dispatch(actions.isUpdatingOffering(state)),
-});
+const getOfferingData = async (offering_uuid) => {
+  const offering = await getProviderOffering(offering_uuid);
+  const plugins = await getPlugins();
+  const components = plugins.find(
+    (plugin) => plugin.offering_type === offering.type,
+  ).components;
+  const category = await getCategory(offering.category_uuid);
+  const offeringScope = offering.scope;
+  let provider;
+  if (offeringScope) {
+    provider = (await Axios.get(offeringScope)).data;
+  }
+  return { offering, category, provider, components };
+};
 
-const connector = connect(mapStateToProps, mapDispatchToProps, mergeProps);
+type Awaited<T> = T extends PromiseLike<infer U> ? U : T;
 
-const enhance = compose(
-  connector,
-  reduxForm({
-    form: FORM_ID,
-    enableReinitialize: true,
-  }),
-);
+export type OfferingData = Awaited<ReturnType<typeof getOfferingData>>;
 
-export const OfferingUpdateContainer = enhance(OfferingUpdateDialog);
+export const OfferingUpdateContainer = () => {
+  const {
+    params: { offering_uuid },
+  } = useCurrentStateAndParams();
+
+  const { data, isLoading, error, refetch } = useQuery(
+    ['OfferingUpdateContainer', offering_uuid],
+    () => getOfferingData(offering_uuid),
+  );
+
+  useFullPage();
+  useTitle(data ? data.offering.name : translate('Offering details'));
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <h3>{translate('Unable to load offering details.')}</h3>;
+  }
+
+  if (!data) {
+    return null;
+  }
+
+  return (
+    <div className="provider-offering">
+      <div className="provider-offering-hero__background"></div>
+      <div className="container-xxl position-relative py-16">
+        <Row>
+          <Col md={12}>
+            <OfferingDetailsHeader
+              offering={data.offering}
+              category={data.category}
+              refetch={refetch}
+            />
+
+            <OverviewSection offering={data.offering} refetch={refetch} />
+
+            <IntegrationSection
+              offering={data.offering}
+              provider={data.provider}
+              refetch={refetch}
+            />
+
+            <OfferingOptionsSection
+              offering={data.offering}
+              refetch={refetch}
+            />
+
+            <AttributesSection
+              offering={data.offering}
+              category={data.category}
+              refetch={refetch}
+            />
+
+            <ComponentsSection
+              offering={data.offering}
+              components={data.components}
+              refetch={refetch}
+            />
+
+            <PlansSection offering={data.offering} refetch={refetch} />
+
+            <OfferingImagesList offering={data.offering} />
+          </Col>
+        </Row>
+      </div>
+    </div>
+  );
+};
