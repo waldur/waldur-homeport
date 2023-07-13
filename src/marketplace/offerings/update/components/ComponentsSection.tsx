@@ -30,7 +30,7 @@ export const ComponentsSection = (props) => {
         )}
       </div>
       <Card.Body>
-        {props.offering.options.order.length === 0 ? (
+        {props.offering.components.length === 0 ? (
           <div className="justify-content-center row">
             <div className="col-sm-4">
               <p className="text-center">
