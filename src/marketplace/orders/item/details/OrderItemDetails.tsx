@@ -137,7 +137,7 @@ let OrderItemDetails = (
               )}
               {props.orderItem.output && (
                 <OrderItemDetailsField label={translate('Output')}>
-                  {props.orderItem.output}
+                  <pre>{props.orderItem.output}</pre>
                 </OrderItemDetailsField>
               )}
             </Accordion.Body>
