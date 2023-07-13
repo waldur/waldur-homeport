@@ -12,8 +12,9 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { EDIT_SCRIPT_FORM_ID } from './constants';
 import { TestScriptButton } from './TestScriptButton';
+import { ScriptEditorProps } from './types';
 
-type OwnProps = { resolve: { offering; type; refetch; label } };
+type OwnProps = { resolve: ScriptEditorProps };
 
 const PROGRAMMING_LANGUAGE_CHOICES = [
   {
@@ -97,7 +98,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
                   component={MonacoField}
                 />
                 <TestScriptButton
-                  type={props.resolve.type}
+                  type={props.resolve.dry_run}
                   disabled={!value}
                   offering={props.resolve.offering}
                 />

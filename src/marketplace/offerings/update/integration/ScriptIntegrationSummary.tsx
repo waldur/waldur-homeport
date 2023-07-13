@@ -7,20 +7,27 @@ import { EditVarsButton } from './EditVarsButton';
 
 const SCRIPT_ROWS = [
   { label: translate('Script language'), type: 'language' },
-  { label: translate('Script for creation of a resource'), type: 'Create' },
+  {
+    label: translate('Script for creation of a resource'),
+    type: 'create',
+    dry_run: 'Create',
+  },
   {
     label: translate('Script for termination of a resource'),
-    type: 'Terminate',
+    type: 'delete',
+    dry_run: 'Terminate',
   },
   {
     label: translate('Script for updating a resource on plan change'),
-    type: 'Update',
+    type: 'update',
+    dry_run: 'Update',
   },
   {
     label: translate(
       'Script for regular update of resource and its accounting',
     ),
-    type: 'Pull',
+    type: 'pull',
+    dry_run: 'Pull',
   },
 ];
 
@@ -42,7 +49,7 @@ export const ScriptIntegrationSummary = ({ offering, refetch }) => (
     <Card.Body>
       <Table bordered={true} hover={true} responsive={true}>
         <tbody>
-          {SCRIPT_ROWS.map(({ label, type }) => (
+          {SCRIPT_ROWS.map(({ label, type, dry_run }) => (
             <tr key={type}>
               <td className="col-md-1">
                 <i
@@ -64,6 +71,7 @@ export const ScriptIntegrationSummary = ({ offering, refetch }) => (
                 <div>
                   <EditScriptButton
                     type={type}
+                    dryRun={dry_run}
                     label={label}
                     offering={offering}
                     refetch={refetch}

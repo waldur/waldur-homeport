@@ -7,18 +7,16 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import { EDIT_SCRIPT_FORM_ID } from './constants';
+import { ScriptEditorProps } from './types';
 
 const EditScriptDialog = lazyComponent(
   () => import('./EditScriptDialog'),
   'EditScriptDialog',
 );
 
-export const EditScriptButton: FunctionComponent<{
-  offering;
-  type;
-  label;
-  refetch;
-}> = (props) => {
+export const EditScriptButton: FunctionComponent<ScriptEditorProps> = (
+  props,
+) => {
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
