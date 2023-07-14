@@ -49,6 +49,7 @@ export const projectAutocomplete = async (
   query: string,
   prevOptions,
   currentPage: number,
+  extraParams: {} = {},
 ) => {
   const params = {
     name: query,
@@ -57,6 +58,7 @@ export const projectAutocomplete = async (
     o: 'name',
     page: currentPage,
     page_size: ENV.pageSize,
+    ...extraParams,
   };
   const response = await getProjectList(params);
   return returnReactSelectAsyncPaginateObject(

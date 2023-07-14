@@ -10,11 +10,10 @@ describe('Add resource button', () => {
       .intercept('GET', '/api/events/', [])
 
       .intercept('GET', '/api/users/me/', {
-        fixture: 'users/alice.json',
+        fixture: 'users/nonstaff.json',
       })
 
       .setToken()
-      .mockUser()
       .visit('/profile/')
       .waitForSpinner();
   });
