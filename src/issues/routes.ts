@@ -51,18 +51,6 @@ const SupportIssues = lazyComponent(
   () => import('@waldur/issues/SupportIssues'),
   'SupportIssues',
 );
-const FlowMapViewContainer = lazyComponent(
-  () => import('@waldur/providers/support/FlowMapViewContainer'),
-  'FlowMapViewContainer',
-);
-const HeatMapContainer = lazyComponent(
-  () => import('@waldur/providers/support/HeatMapContainer'),
-  'HeatMapContainer',
-);
-const SankeyDiagramContainer = lazyComponent(
-  () => import('@waldur/providers/support/SankeyDiagramContainer'),
-  'SankeyDiagramContainer',
-);
 const UserList = lazyComponent(
   () => import('@waldur/user/support/UserList'),
   'UserList',
@@ -209,33 +197,6 @@ export const states: StateDeclaration[] = [
     component: SupportProjectsList,
     data: {
       breadcrumb: () => translate('Projects'),
-    },
-  },
-
-  {
-    name: 'support.flowmap',
-    url: 'flowmap/',
-    component: FlowMapViewContainer,
-    data: {
-      feature: 'support.flowmap',
-    },
-  },
-
-  {
-    name: 'support.heatmap',
-    url: 'heatmap/',
-    component: HeatMapContainer,
-    data: {
-      feature: 'support.heatmap',
-    },
-  },
-
-  {
-    name: 'support.sankey-diagram',
-    url: 'sankey-diagram/',
-    component: SankeyDiagramContainer,
-    data: {
-      feature: 'support.sankey_diagram',
     },
   },
 

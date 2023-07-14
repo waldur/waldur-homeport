@@ -10,7 +10,6 @@ import { reducer as marketplace } from '@waldur/marketplace/store/reducers';
 import { reducer as modal } from '@waldur/modal/reducer';
 import { reducer as theme } from '@waldur/navigation/theme/store';
 import { reducer as title } from '@waldur/navigation/title';
-import { reducer as serviceUsage } from '@waldur/providers/support/reducers';
 import { reducer as resource } from '@waldur/resource/reducers';
 import { reducer as tables } from '@waldur/table/store';
 import { reducer as workspace } from '@waldur/workspace/reducers';
@@ -28,7 +27,6 @@ export const rootReducer = combineReducers({
   issues,
   workspace,
   resource,
-  serviceUsage,
   marketplace,
   bookings,
   title,
