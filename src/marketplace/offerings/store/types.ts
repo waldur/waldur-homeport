@@ -1,11 +1,4 @@
 import { Option } from '@waldur/marketplace/common/registry';
-import {
-  AttributesType,
-  Category,
-  OfferingComponent,
-  OfferingOptions,
-} from '@waldur/marketplace/types';
-
 export interface PlanFormData {
   archived: boolean;
   name: string;
@@ -37,29 +30,6 @@ export interface ScheduleFormData {
 
 export type OfferingLimits = Record<string, { min: number; max: number }>;
 
-export interface OfferingFormData {
-  name: string;
-  description?: string;
-  full_description?: string;
-  terms_of_service?: string;
-  access_url?: string;
-  category: Category;
-  type: Option;
-  attributes?: AttributesType;
-  components?: OfferingComponent[];
-  plans?: PlanFormData[];
-  options?: OptionFormData[];
-  schedules?: ScheduleFormData[];
-  plugin_options?: Record<string, any>;
-  secret_options?: Record<string, any>;
-  service_settings?: any;
-  thumbnail?: File;
-  scope?: string;
-  backend_id?: string;
-  document?: OfferingDocument;
-  limits?: OfferingLimits;
-}
-
 export interface PlanRequest {
   name: string;
   unit: string;
@@ -69,29 +39,6 @@ export interface PlanRequest {
   description?: string;
   article_code?: string;
   uuid?: string;
-}
-
-export interface OfferingRequest {
-  name: string;
-  description?: string;
-  full_description?: string;
-  terms_of_service?: string;
-  access_url?: string;
-  type: string;
-  customer: string;
-  category: string;
-  attributes?: AttributesType;
-  components?: OfferingComponent[];
-  plans?: PlanRequest[];
-  options?: OfferingOptions;
-  plugin_options?: Record<string, any>;
-  secret_options?: Record<string, any>;
-  schedules?: ScheduleFormData[];
-  scope?: string;
-  backend_id?: string;
-  service_attributes?: any;
-  shared: boolean;
-  limits?: OfferingLimits;
 }
 
 export interface OfferingDocument {

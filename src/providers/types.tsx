@@ -9,17 +9,6 @@ export interface ProviderConfig {
   serializer: (details: any) => any;
 }
 
-interface Customer {
-  url: string;
-}
-
-export interface ProviderCreateFormData {
-  customer: Customer;
-  name: string;
-  type: ProviderConfig;
-  options: Record<string, any>;
-}
-
 export interface ProviderStatistics {
   active_campaigns: number;
   current_customers: number;
