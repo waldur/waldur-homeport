@@ -77,6 +77,11 @@ const IssueDetailsContainer = lazyComponent(
   'IssueDetails',
 );
 
+const CostPoliciesList = lazyComponent(
+  () => import('./cost-policies/CostPoliciesList'),
+  'CostPoliciesList',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'organization',
@@ -293,5 +298,14 @@ export const states: StateDeclaration[] = [
     name: 'organization.createProject',
     url: 'createProject/',
     component: ProjectCreateContainer,
+  },
+
+  {
+    name: 'organization.cost-policies',
+    url: 'cost-policies/',
+    component: CostPoliciesList,
+    data: {
+      breadcrumb: () => translate('Cost policies'),
+    },
   },
 ];

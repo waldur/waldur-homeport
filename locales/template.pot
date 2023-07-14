@@ -171,6 +171,7 @@ msgstr ""
 msgid "Accounting type"
 msgstr ""
 
+#: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/resource/actions/AsyncActionItem.tsx
 msgid "Action"
 msgstr ""
@@ -760,6 +761,10 @@ msgstr ""
 msgid "Are you sure you want to delete option {name}?"
 msgstr ""
 
+#: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+msgid "Are you sure you want to delete the cost policy?"
+msgstr ""
+
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
 msgid "Are you sure you want to delete the image?"
 msgstr ""
@@ -1125,6 +1130,14 @@ msgstr ""
 msgid "Billing type"
 msgstr ""
 
+#: src/customer/cost-policies/utils.ts
+msgid "Block creation of new resources"
+msgstr ""
+
+#: src/customer/cost-policies/utils.ts
+msgid "Block modification of existing resources"
+msgstr ""
+
 #: src/booking/marketplace.ts
 msgid "Booking"
 msgstr ""
@@ -1237,6 +1250,7 @@ msgid "Campaigns"
 msgstr ""
 
 #: src/booking/CancelAction.tsx
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/form/ListDialog.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invitations/GroupinvitationButtons.tsx
@@ -1650,6 +1664,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
+#: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/UserRemoveButton.tsx
@@ -1778,6 +1793,15 @@ msgstr ""
 msgid "Cost estimation"
 msgstr ""
 
+#: src/customer/cost-policies/CostPoliciesList.tsx
+#: src/customer/routes.ts
+msgid "Cost policies"
+msgstr ""
+
+#: src/customer/cost-policies/CostPoliciesList.tsx
+msgid "Cost threshold"
+msgstr ""
+
 #: src/customer/create/CustomerCreateDialog.tsx
 msgid "Could not create organization"
 msgstr ""
@@ -1791,6 +1815,7 @@ msgstr ""
 msgid "Coupon"
 msgstr ""
 
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
@@ -2990,6 +3015,10 @@ msgstr ""
 msgid "Estimated cost"
 msgstr ""
 
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
+msgid "Estimated cost reaches"
+msgstr ""
+
 #: src/customer/dashboard/api.ts
 msgid "Estimated monthly cost"
 msgstr ""
@@ -3585,6 +3614,10 @@ msgstr ""
 
 #: src/rancher/cluster/tabs.ts
 msgid "HPA"
+msgstr ""
+
+#: src/customer/cost-policies/CostPoliciesList.tsx
+msgid "Has fired"
 msgstr ""
 
 #: src/administration/dashboard/HealthChecks.tsx
@@ -5094,6 +5127,11 @@ msgstr ""
 msgid "New plan"
 msgstr ""
 
+#: src/customer/cost-policies/CostPolicyCreateButton.tsx
+#: src/customer/cost-policies/CostPolicyCreateDialog.tsx
+msgid "New policy"
+msgstr ""
+
 #: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
 msgid "New project"
 msgstr ""
@@ -5233,6 +5271,7 @@ msgstr ""
 msgid "No project"
 msgstr ""
 
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/marketplace/resources/actions/MoveToProjectAutocomplete.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/marketplace/robot-accounts/ProviderProjectFilter.tsx
@@ -5365,6 +5404,14 @@ msgstr ""
 
 #: src/user/hooks/HookListTablePlaceholder.tsx
 msgid "Notifications allow to be informed when a certain event has occurred."
+msgstr ""
+
+#: src/customer/cost-policies/utils.ts
+msgid "Notify organization owners"
+msgstr ""
+
+#: src/customer/cost-policies/utils.ts
+msgid "Notify project team"
 msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -6804,6 +6851,7 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/components/utils.tsx
+#: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/customer/team/OrganizationProjectSelectField.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/ProjectGroup.tsx
@@ -7505,6 +7553,7 @@ msgstr ""
 msgid "Remote user ID"
 msgstr ""
 
+#: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
@@ -8552,6 +8601,7 @@ msgstr ""
 msgid "Select policy..."
 msgstr ""
 
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/invitations/actions/ProjectGroup.tsx
 #: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
 msgid "Select project"
@@ -8561,6 +8611,7 @@ msgstr ""
 msgid "Select project roles"
 msgstr ""
 
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/marketplace/resources/actions/MoveToProjectAutocomplete.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
@@ -9856,6 +9907,10 @@ msgstr ""
 
 #: src/rancher/cluster/create/LonghornWorkerWarning.tsx
 msgid "The worker node is expected to have at least 4 vCPU and 4 GB RAM to run Longhorn."
+msgstr ""
+
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
+msgid "Then"
 msgstr ""
 
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
@@ -12209,6 +12264,10 @@ msgstr ""
 msgid "Welcome, {user}!"
 msgstr ""
 
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
+msgid "When"
+msgstr ""
+
 #: src/customer/details/CustomerRemovePanel.tsx
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
@@ -12860,6 +12919,10 @@ msgstr ""
 
 #: src/customer/team/CustomerUsersList.tsx
 msgid "team members"
+msgstr ""
+
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
+msgid "this month"
 msgstr ""
 
 #: src/booking/components/BusinessHoursGroup.tsx
