@@ -1,8 +1,9 @@
 @import '~/src/metronic/assets/sass/core/components/_variables.scss';
 
-$dark-header: #1f2e23;
-$dark-body: #2c352b;
+$dark-header: #131a14;
+$dark-body: #2e352c;
 $dark-body-active: #1e261f;
+$dark-border: #65765f;
 
 /* Organization selector */
 .context-selector {
@@ -34,7 +35,7 @@ $dark-body-active: #1e261f;
   }
 
   .border-bottom {
-    border-bottom: 1px solid if(isDarkMode(), $gray-300, $gray-700) !important;
+    border-bottom: 1px solid $dark-border !important;
   }
 
   .list-group {
@@ -46,40 +47,114 @@ $dark-body-active: #1e261f;
       background-color: unset;
       color: $white;
       border: 0;
+      margin-top: 0;
+      padding: 0;
+
+      > div {
+        align-items: stretch;
+      }
+
+      .item-content {
+        padding: 0.5rem 1rem;
+        padding-right: 0.5rem;
+        flex-grow: 1;
+      }
 
       &:hover {
-        background-color: $gray-200;
+        .item-info {
+          display: none;
+        }
+        .item-link {
+          display: block;
+        }
+        .actions {
+          background-color: $white;
+        }
       }
       &.active {
         background-color: $dark-body-active;
         z-index: unset;
       }
+      &.selected {
+        background-color: $white;
+        color: $dark-body;
+        z-index: unset;
+
+        .item-link a {
+          color: $dark-body;
+        }
+      }
+
+      .item-link {
+        display: none;
+
+        a {
+          color: $white;
+        }
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+
+        .action-item {
+          display: flex;
+          align-items: center;
+          padding: 1rem;
+          height: 100%;
+        }
+      }
     }
   }
   .project-listing {
-    background-color: $dark-body-active;
+    border-left: 1px solid $dark-border;
 
     &.disabled {
       opacity: 0.3;
       cursor: not-allowed;
       pointer-events: none;
     }
+    &-header {
+      background-color: $dark-header;
+    }
     .list-group-item {
       background-color: unset;
       color: $white;
       border-left: 0;
       border-right: 0;
+      border-top: 0;
+      border-color: $dark-border;
       height: 55px;
       min-height: 55px;
       cursor: pointer;
 
+      &:hover {
+        .item-info {
+          display: none;
+        }
+        .item-link {
+          display: block;
+        }
+        .actions {
+          display: flex;
+        }
+      }
       &.active {
-        background-color: $dark-body;
+        background-color: $white;
+        color: $dark-body;
+        z-index: unset;
         border: 0;
         cursor: default;
 
-        .actions .action-item {
-          background-color: $dark-body;
+        .item-link a {
+          color: $dark-body;
+        }
+      }
+      .item-link {
+        display: none;
+
+        a {
+          color: $white;
         }
       }
 
@@ -91,18 +166,21 @@ $dark-body-active: #1e261f;
         display: none;
         position: absolute;
         top: 0;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        padding: 0.5rem 1rem;
+        right: 0;
+        align-items: center;
+        background-color: $white;
 
         .action-item {
-          padding: 0 1rem;
-          background-color: $dark-body-active;
+          display: flex;
+          align-items: center;
+          padding: 0.5rem 1.5rem;
+          height: 100%;
+          color: $dark-body;
+
+          &:hover {
+            text-decoration: underline !important;
+          }
         }
-      }
-      &:hover .actions {
-        display: flex;
       }
     }
   }
@@ -172,12 +250,9 @@ $dark-body-active: #1e261f;
   }
 
   .project-selector-dropdown {
-    position: absolute !important;
-    transform: unset !important;
-    width: 100%;
+    margin-top: 8px !important;
     min-width: 350px;
-    top: 0;
-    left: 0;
+    max-width: 600px;
 
     @media (max-width: 767px) {
       min-width: 280px;
@@ -192,43 +267,59 @@ $dark-body-active: #1e261f;
       border-radius: 0;
 
       .list-group-item {
+        background-color: unset;
         z-index: 0;
         cursor: pointer;
 
         &:hover {
-          background-color: $hover-bg;
+          .item-info {
+            display: none;
+          }
+          .item-link {
+            display: block;
+          }
+          .actions {
+            display: flex;
+          }
         }
         &.active {
           color: $white;
-          background-color: if(isDarkMode(), $gray-400, $gray-700);
+          background-color: if(isDarkMode(), $gray-400, $dark-header);
           cursor: default;
 
-          a {
-            color: #fff;
+          .item-link a {
+            color: $white;
           }
-
           .actions .action-item {
-            background-color: if(isDarkMode(), $gray-400, $gray-700);
+            background-color: if(isDarkMode(), $gray-400, $dark-header);
           }
         }
+        .item-link {
+          display: none;
 
-        a {
-          color: unset;
+          a {
+            color: if(isDarkMode(), $white, $dark-header);
+          }
         }
 
         .actions {
+          height: 100%;
           display: none;
           position: absolute;
-          bottom: 0;
+          top: 0;
           right: 0;
-          text-align: center;
-          padding: 0.5rem 1rem;
+          align-items: center;
+          background-color: $dark-header;
 
           .action-item {
-            padding-right: 1rem;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1.5rem;
+            height: 100%;
+            color: $white;
 
-            &:first-child {
-              padding-left: 1rem;
+            &:hover {
+              text-decoration: underline !important;
             }
           }
         }

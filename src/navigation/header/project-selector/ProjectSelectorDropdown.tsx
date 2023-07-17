@@ -85,6 +85,7 @@ export const ProjectSelectorDropdown: FunctionComponent = () => {
         className="project-selector-toggle btn btn-active-light d-flex align-items-center bg-hover-light py-2 px-2 px-md-3"
         data-kt-menu-trigger="click"
         data-kt-menu-attach="parent"
+        data-kt-menu-placement="bottom"
       >
         <div className="cursor-pointer symbol symbol-30px symbol-md-40px">
           {project?.image ? (

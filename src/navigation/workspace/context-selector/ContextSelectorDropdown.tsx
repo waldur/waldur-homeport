@@ -200,6 +200,7 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
             <div className="d-flex border-bottom">
               <OrganizationsPanel
                 active={selectedOrganization}
+                selected={currentCustomer}
                 onClick={handleOrganizationSelect}
                 loadingUuid={redirectingOrg}
                 onMouseEnter={(customer) => {

@@ -3544,10 +3544,24 @@ msgstr ""
 msgid "Go to old interface"
 msgstr ""
 
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
+msgid "Go to organization dashboard"
+msgstr ""
+
 #: src/auth/PermissionLayout.tsx
 #: src/invitations/GroupInvitationErrorMessage.tsx
 #: src/invitations/InvitationErrorMessage.tsx
 msgid "Go to profile"
+msgstr ""
+
+#: src/navigation/header/project-selector/ProjectsList.tsx
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
+msgid "Go to project dashboard"
+msgstr ""
+
+#: src/navigation/header/project-selector/ProjectsList.tsx
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
+msgid "Go to resources"
 msgstr ""
 
 #: src/i18n/constants.ts
@@ -6939,11 +6953,6 @@ msgstr ""
 msgid "Project creation requests"
 msgstr ""
 
-#: src/navigation/header/project-selector/ProjectsList.tsx
-#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
-msgid "Project dashboard"
-msgstr ""
-
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
@@ -8463,11 +8472,6 @@ msgstr ""
 
 #: src/marketplace/landing/FooterSection.tsx
 msgid "See offerings"
-msgstr ""
-
-#: src/navigation/header/project-selector/ProjectsList.tsx
-#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
-msgid "See resources"
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx

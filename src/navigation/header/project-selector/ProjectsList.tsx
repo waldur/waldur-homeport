@@ -29,42 +29,36 @@ const EmptyProjectListPlaceholder: FunctionComponent = () => (
 const ProjectListItem = ({ item, filter, loading }) => {
   return (
     <>
-      <Stack direction="horizontal" gap={5} title={item.name}>
+      <Stack direction="horizontal" gap={4} title={item.name}>
         <ItemIcon item={item} />
         <div className="overflow-hidden">
           <p className="title ellipsis mb-0">
             {filter ? highlightMatch(item.name, filter) : item.name}
           </p>
-          {item.resource_count > 0 ? (
-            <small className="subtitle">
-              {item.resource_count}{' '}
-              {item.resource_count > 1
-                ? translate('Resources')
-                : translate('Resource')}
-            </small>
-          ) : (
-            <i className="text-muted subtitle">{translate('No resource')}</i>
-          )}
+          <div className="item-info">
+            {item.resource_count > 0 ? (
+              <span className="text-muted">
+                {item.resource_count}{' '}
+                {item.resource_count > 1
+                  ? translate('Resources')
+                  : translate('Resource')}
+              </span>
+            ) : (
+              <i className="text-muted">{translate('No resource')}</i>
+            )}
+          </div>
+          <div className="item-link">
+            <Link state="project.dashboard" params={{ uuid: item.uuid }}>
+              {translate('Go to project dashboard')}
+            </Link>
+          </div>
         </div>
-        <span className="ms-auto">{loading && <LoadingSpinnerIcon />}</span>
+        <div className="ms-auto">{loading && <LoadingSpinnerIcon />}</div>
       </Stack>
-      <div className="actions">
-        <div className="action-item">
+      {!loading && (
+        <div className="actions">
           <Link
-            className="text-decoration-underline"
-            state="project.dashboard"
-            params={{ uuid: item.uuid }}
-            onClick={(e) => {
-              e.stopPropagation();
-              MenuComponent.hideDropdowns(undefined);
-            }}
-          >
-            {translate('Project dashboard')}
-          </Link>
-        </div>
-        <div className="action-item">
-          <Link
-            className="text-decoration-underline"
+            className="action-item"
             state="marketplace-project-resources-all"
             params={{ uuid: item.uuid }}
             onClick={(e) => {
@@ -72,10 +66,10 @@ const ProjectListItem = ({ item, filter, loading }) => {
               MenuComponent.hideDropdowns(undefined);
             }}
           >
-            {translate('See resources')}
+            {translate('Go to resources')}
           </Link>
         </div>
-      </div>
+      )}
     </>
   );
 };
@@ -108,7 +102,7 @@ export const ProjectsList: FunctionComponent<{
         <BaseList
           style={{
             height: projects.length * 75 + 'px',
-            maxHeight: 'calc(100vh - 100px)',
+            maxHeight: 'calc(100vh - 160px)',
           }}
           items={projects}
           selectedItem={selectedProject}
