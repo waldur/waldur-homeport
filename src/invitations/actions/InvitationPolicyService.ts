@@ -37,7 +37,10 @@ export const InvitationPolicyService = {
 
   // Check user permissions for existing invitation
   canManageInvitation(context, invitation) {
-    if (context.user?.is_staff) {
+    if (
+      context.user?.is_staff ||
+      checkIsOwner(context.customer, context.user)
+    ) {
       return true;
     }
     if (invitation.customer_role) {
