@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateProviderOffering } from '@waldur/marketplace/common/api';
+import { updatePlan } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -37,14 +37,10 @@ export const EditPlanDialog = connect<{}, {}, { resolve: { plan } }>(
           const validComponents = props.resolve.offering.components.map(
             (c) => c.type,
           );
-          await updateProviderOffering(props.resolve.offering.uuid, {
-            plans: [
-              ...props.resolve.offering.plans.filter(
-                (item) => item.uuid !== props.resolve.plan.uuid,
-              ),
-              formatPlan(formData, fixedComponents, validComponents),
-            ],
-          });
+          await updatePlan(
+            props.resolve.plan.uuid,
+            formatPlan(formData, fixedComponents, validComponents),
+          );
           dispatch(
             showSuccess(translate('Plan has been updated successfully.')),
           );

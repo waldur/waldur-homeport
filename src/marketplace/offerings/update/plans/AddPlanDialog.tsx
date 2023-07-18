@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateProviderOffering } from '@waldur/marketplace/common/api';
+import { createPlan } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -27,11 +27,9 @@ export const AddPlanDialog = reduxForm<{}, { resolve: { offering; refetch } }>({
         const validComponents = props.resolve.offering.components.map(
           (c) => c.type,
         );
-        await updateProviderOffering(props.resolve.offering.uuid, {
-          plans: [
-            ...props.resolve.offering.plans,
-            formatPlan(formData, fixedComponents, validComponents),
-          ],
+        await createPlan({
+          offering: props.resolve.offering.url,
+          ...formatPlan(formData, fixedComponents, validComponents),
         });
         dispatch(showSuccess(translate('Plan has been created successfully.')));
         await props.resolve.refetch();
