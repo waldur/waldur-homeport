@@ -24,6 +24,7 @@ export const EditPlanButton: FunctionComponent<{
       openModalDialog(EditPlanDialog, {
         resolve: { offering, plan, refetch },
         formId: EDIT_PLAN_FORM_ID,
+        size: 'lg',
       }),
     );
   };

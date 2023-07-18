@@ -3414,10 +3414,6 @@ msgstr ""
 msgid "Flow update"
 msgstr ""
 
-#: src/providers/support/FlowMapViewContainer.tsx
-msgid "Flowmap"
-msgstr ""
-
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Folder"
 msgstr ""
@@ -3626,10 +3622,6 @@ msgstr ""
 
 #: src/administration/dashboard/AdministrationProfile.tsx
 msgid "Healthy"
-msgstr ""
-
-#: src/providers/support/HeatMapContainer.tsx
-msgid "Heatmap"
 msgstr ""
 
 #: src/navigation/header/UserDropdown.tsx
@@ -4727,10 +4719,6 @@ msgstr ""
 msgid "Method"
 msgstr ""
 
-#: src/providers/support/FlowMapFilter.tsx
-msgid "Metric"
-msgstr ""
-
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Metric name"
@@ -4796,10 +4784,6 @@ msgstr ""
 
 #: src/marketplace/resources/details/MonitoringCharts.tsx
 msgid "Monitoring"
-msgstr ""
-
-#: src/providers/support/FlowMapFilter.tsx
-msgid "Month"
 msgstr ""
 
 #: src/quotas/constants.ts
@@ -7176,7 +7160,6 @@ msgstr ""
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/navigation/sidebar/ProviderMenu.tsx
-#: src/providers/support/MapInfoPanel.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Provider"
@@ -8276,10 +8259,6 @@ msgstr ""
 msgid "SSH public keys"
 msgstr ""
 
-#: src/providers/support/SankeyDiagramContainer.tsx
-msgid "Sankey diagram"
-msgstr ""
-
 #: src/booking/components/modal/BookingModal.tsx
 #: src/customer/organization-groups/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
@@ -8868,10 +8847,6 @@ msgstr ""
 msgid "Service provider offerings"
 msgstr ""
 
-#: src/providers/support/FlowMapFilter.tsx
-msgid "Service provider type"
-msgstr ""
-
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 msgid "Service provider:"
 msgstr ""
@@ -9073,10 +9048,6 @@ msgstr ""
 msgid "Show plan"
 msgstr ""
 
-#: src/providers/support/FlowMapFilter.tsx
-msgid "Show private"
-msgstr ""
-
 #: src/marketplace/resources/details/ResourceDetailsHeaderTitle.tsx
 msgid "Show project"
 msgstr ""
@@ -9095,7 +9066,6 @@ msgid "Show request"
 msgstr ""
 
 #: src/openstack/analytics/VmOverviewFilter.tsx
-#: src/providers/support/FlowMapFilter.tsx
 msgid "Show shared"
 msgstr ""
 
@@ -11641,10 +11611,6 @@ msgstr ""
 msgid "Use sudo"
 msgstr ""
 
-#: src/providers/support/MapInfoPanel.tsx
-msgid "Used in the period {period} by:"
-msgstr ""
-
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/UserGroup.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -12655,10 +12621,6 @@ msgstr ""
 
 #: src/form/CronField.tsx
 msgid "hour"
-msgstr ""
-
-#: src/providers/support/MapInfoPanel.tsx
-msgid "hours"
 msgstr ""
 
 #: src/openstack/openstack-tenant/TenantImagesList.tsx
