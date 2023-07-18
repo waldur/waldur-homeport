@@ -253,6 +253,7 @@ $dark-border: #65765f;
     margin-top: 8px !important;
     min-width: 350px;
     max-width: 600px;
+    background-color: if(isDarkMode(), $gray-100, $white) !important;
 
     @media (max-width: 767px) {
       min-width: 280px;
@@ -283,15 +284,18 @@ $dark-border: #65765f;
           }
         }
         &.active {
-          color: $white;
-          background-color: if(isDarkMode(), $gray-400, $dark-header);
+          color: $dark-inverse;
+          background-color: if(isDarkMode(), $white, $dark-header);
           cursor: default;
 
           .item-link a {
-            color: $white;
+            color: $dark-inverse;
+          }
+          .item-info > * {
+            color: if(isDarkMode(), $gray-400, $text-muted);
           }
           .actions .action-item {
-            background-color: if(isDarkMode(), $gray-400, $dark-header);
+            background-color: if(isDarkMode(), $white, $dark-header);
           }
         }
         .item-link {
@@ -301,6 +305,9 @@ $dark-border: #65765f;
             color: if(isDarkMode(), $white, $dark-header);
           }
         }
+        .item-info > * {
+          color: $text-muted;
+        }
 
         .actions {
           height: 100%;
@@ -309,14 +316,14 @@ $dark-border: #65765f;
           top: 0;
           right: 0;
           align-items: center;
-          background-color: $dark-header;
+          background-color: if(isDarkMode(), $white, $dark-header);
 
           .action-item {
             display: flex;
             align-items: center;
             padding: 0.5rem 1.5rem;
             height: 100%;
-            color: $white;
+            color: $dark-inverse;
 
             &:hover {
               text-decoration: underline !important;

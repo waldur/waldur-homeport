@@ -37,14 +37,14 @@ const ProjectListItem = ({ item, filter, loading }) => {
           </p>
           <div className="item-info">
             {item.resource_count > 0 ? (
-              <span className="text-muted">
+              <span>
                 {item.resource_count}{' '}
                 {item.resource_count > 1
                   ? translate('Resources')
                   : translate('Resource')}
               </span>
             ) : (
-              <i className="text-muted">{translate('No resource')}</i>
+              <i>{translate('No resource')}</i>
             )}
           </div>
           <div className="item-link">

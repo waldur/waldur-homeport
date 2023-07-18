@@ -135,7 +135,7 @@ export const ProjectSelectorDropdown: FunctionComponent = () => {
           filter={filter}
           loadingUuid={redirecting}
         />
-        <Row className="bg-light border g-0">
+        <Row className="bg-gray-200 border g-0">
           <Col xs={5}>
             <ProjectCreateButton
               title={translate('New project')}
