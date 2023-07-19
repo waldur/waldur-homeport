@@ -68,6 +68,7 @@ export const BaseList: FunctionComponent<{
                 item={item}
                 filter={filter}
                 loading={loadingUuid === item?.uuid}
+                selected={selectedItem && item.uuid == selectedItem.uuid}
               />
             </ListGroupItem>
           ))

@@ -2144,6 +2144,10 @@ msgstr ""
 msgid "Current native name: {value}."
 msgstr ""
 
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
+msgid "Current organization"
+msgstr ""
+
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "Current plan"
@@ -2155,6 +2159,11 @@ msgstr ""
 
 #: src/resource/support/ResourcesTreemap.tsx
 msgid "Current price per month"
+msgstr ""
+
+#: src/navigation/header/project-selector/ProjectsList.tsx
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
+msgid "Current project"
 msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
