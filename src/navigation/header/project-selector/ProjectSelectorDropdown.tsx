@@ -17,7 +17,6 @@ import { SearchIcon } from '@waldur/core/svg/SearchIcon';
 import useOnScreen from '@waldur/core/useOnScreen';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
-import { isChildOf } from '@waldur/navigation/useTabs';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { ProjectCreateButton } from '@waldur/project/ProjectCreateButton';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
@@ -55,27 +54,18 @@ export const ProjectSelectorDropdown: FunctionComponent = () => {
 
   const { state } = useCurrentStateAndParams();
   const router = useRouter();
-  const isProjectPages = isChildOf('project', state);
   const [redirecting, setRedirecting] = useState('');
 
   const handleProjectSelect = useCallback(
     (project) => {
       setRedirecting(project.uuid);
-      if (isProjectPages) {
-        router.stateService
-          .go(state.name, {
-            uuid: project.uuid,
-          })
-          .finally(() => setRedirecting(''));
-      } else {
-        router.stateService
-          .go('project.dashboard', {
-            uuid: project.uuid,
-          })
-          .finally(() => setRedirecting(''));
-      }
+      router.stateService
+        .go('project.dashboard', {
+          uuid: project.uuid,
+        })
+        .finally(() => setRedirecting(''));
     },
-    [isProjectPages, router, state, setRedirecting],
+    [router, state, setRedirecting],
   );
 
   return (
@@ -85,7 +75,7 @@ export const ProjectSelectorDropdown: FunctionComponent = () => {
         className="project-selector-toggle btn btn-active-light d-flex align-items-center bg-hover-light py-2 px-2 px-md-3"
         data-kt-menu-trigger="click"
         data-kt-menu-attach="parent"
-        data-kt-menu-placement="bottom"
+        data-kt-menu-placement="bottom-start"
       >
         <div className="cursor-pointer symbol symbol-30px symbol-md-40px">
           {project?.image ? (
