@@ -61,12 +61,10 @@ export const PendingConsumerOrders: React.FC<{}> = () => {
           <OrderActions orderId={row.uuid} refetch={tableProps.fetch} />
         )}
       />
-      <div className="is-flex">
-        <BulkConsumerActions
-          orders={tableProps.rows}
-          refetch={tableProps.fetch}
-        />
-      </div>
+      <BulkConsumerActions
+        orders={tableProps.rows}
+        refetch={tableProps.fetch}
+      />
     </>
   );
 };
