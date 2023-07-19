@@ -1,8 +1,4 @@
-import {
-  useCurrentStateAndParams,
-  useOnStateChanged,
-  useRouter,
-} from '@uirouter/react';
+import { useOnStateChanged, useRouter } from '@uirouter/react';
 import {
   useState,
   FunctionComponent,
@@ -20,7 +16,6 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import useOnScreen from '@waldur/core/useOnScreen';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
-import { isChildOf } from '@waldur/navigation/useTabs';
 import {
   checkIsOwner,
   getCustomer,
@@ -77,16 +72,9 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
     value: organizationsCount,
   } = useAsync(getCustomersCount);
 
-  const { state } = useCurrentStateAndParams();
   const router = useRouter();
   const [redirectingOrg, setRedirectingOrg] = useState('');
   const [redirectingPrj, setRedirectingPrj] = useState('');
-
-  const isCustomerPages = isChildOf('organization', state);
-
-  const isProjectPages = isChildOf('project', state);
-
-  const isProviderPages = isChildOf('marketplace-provider', state);
 
   useOnStateChanged(() => {
     MenuComponent.hideDropdowns(undefined);
@@ -98,57 +86,29 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
         return;
       }
       setRedirectingOrg(customer.uuid);
-      if (isCustomerPages || isProviderPages) {
-        router.stateService
-          .go(state.name, {
-            uuid: customer.uuid,
-          })
-          .finally(() => {
-            setRedirectingOrg('');
-          });
-      } else {
-        router.stateService
-          .go('organization.dashboard', {
-            uuid: customer.uuid,
-          })
-          .finally(() => {
-            setRedirectingOrg('');
-          });
-      }
+      router.stateService
+        .go('organization.dashboard', {
+          uuid: customer.uuid,
+        })
+        .finally(() => {
+          setRedirectingOrg('');
+        });
     },
-    [
-      isCustomerPages,
-      isProviderPages,
-      router,
-      state,
-      canSeeAll,
-      currentUser,
-      setRedirectingOrg,
-    ],
+    [router, canSeeAll, currentUser, setRedirectingOrg],
   );
 
   const handleProjectSelect = useCallback(
     (project) => {
       setRedirectingPrj(project.uuid);
-      if (isProjectPages) {
-        router.stateService
-          .go(state.name, {
-            uuid: project.uuid,
-          })
-          .finally(() => {
-            setRedirectingPrj('');
-          });
-      } else {
-        router.stateService
-          .go('project.dashboard', {
-            uuid: project.uuid,
-          })
-          .finally(() => {
-            setRedirectingPrj('');
-          });
-      }
+      router.stateService
+        .go('project.dashboard', {
+          uuid: project.uuid,
+        })
+        .finally(() => {
+          setRedirectingPrj('');
+        });
     },
-    [isProjectPages, router, state, setRedirectingPrj],
+    [router, setRedirectingPrj],
   );
 
   return (
