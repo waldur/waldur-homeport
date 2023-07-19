@@ -2,8 +2,10 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback, FunctionComponent } from 'react';
 import { Col, ListGroupItem, Stack } from 'react-bootstrap';
 
+import { Link } from '@waldur/core/Link';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { MenuComponent } from '@waldur/metronic/assets/ts/components';
 import { isChildOf } from '@waldur/navigation/useTabs';
 import { Customer } from '@waldur/workspace/types';
 
@@ -24,6 +26,7 @@ export const OrganizationListItem: FunctionComponent<{
   data;
   index;
   style;
+  active;
   selected;
   onClick;
   onMouseEnter;
@@ -33,6 +36,7 @@ export const OrganizationListItem: FunctionComponent<{
   data,
   index,
   style,
+  active,
   selected,
   onClick,
   onMouseEnter,
@@ -58,34 +62,55 @@ export const OrganizationListItem: FunctionComponent<{
 
   return (
     <ListGroupItem
-      active={selected}
+      active={active}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       style={style}
-      className="cursor-pointer"
+      className={'cursor-pointer' + (selected ? ' selected' : '')}
       title={item.name}
     >
-      <Stack direction="horizontal" gap={4}>
-        <ItemIcon item={item} />
-        <div className="overflow-hidden">
-          <p className="title ellipsis mb-0">
-            {filter ? highlightMatch(item.name, filter) : item.name}
-          </p>
-          {item.projects?.length ? (
-            <small>
-              {item.projects.length}{' '}
-              {item.projects.length > 1
-                ? translate('Projects')
-                : translate('Project')}
-            </small>
-          ) : (
-            <i className="text-muted">{translate('No project')}</i>
-          )}
-        </div>
-        <span className="ms-auto">
-          {loading && <LoadingSpinnerIcon />}
-          <ServiceProviderIcon organization={item} className="ms-4" />
-        </span>
+      <Stack direction="horizontal">
+        <Stack direction="horizontal" gap={4} className="item-content">
+          <ItemIcon item={item} />
+          <div className="overflow-hidden">
+            <p className="title ellipsis mb-0">
+              {filter ? highlightMatch(item.name, filter) : item.name}
+            </p>
+            <div className="item-info">
+              {item.projects?.length ? (
+                <small>
+                  {item.projects.length}{' '}
+                  {item.projects.length > 1
+                    ? translate('Projects')
+                    : translate('Project')}
+                </small>
+              ) : (
+                <i className="text-muted">{translate('No project')}</i>
+              )}
+            </div>
+            <div className="item-link">
+              <Link state="organization.dashboard" params={{ uuid: item.uuid }}>
+                {translate('Go to organization dashboard')}
+              </Link>
+            </div>
+          </div>
+          <div className="ms-auto">{loading && <LoadingSpinnerIcon />}</div>
+        </Stack>
+        {item?.is_service_provider && (
+          <div className="actions ms-auto">
+            <Link
+              className="action-item"
+              state="marketplace-provider-dashboard"
+              params={{ uuid: item.uuid }}
+              onClick={(e) => {
+                e.stopPropagation();
+                MenuComponent.hideDropdowns(undefined);
+              }}
+            >
+              <ServiceProviderIcon organization={item} />
+            </Link>
+          </div>
+        )}
       </Stack>
     </ListGroupItem>
   );
@@ -94,12 +119,15 @@ export const OrganizationListItem: FunctionComponent<{
 const VIRTUALIZED_SELECTOR_PAGE_SIZE = 20;
 
 export const OrganizationsPanel: FunctionComponent<{
+  /** The customer we hovered - means we want to see the projects of this customer */
   active: Customer;
+  /** The current selected customer */
+  selected: Customer;
   loadingUuid: string;
   filter;
   onClick(customer: Customer): void;
   onMouseEnter(customer: Customer): void;
-}> = ({ active, loadingUuid, filter, onClick, onMouseEnter }) => {
+}> = ({ active, selected, loadingUuid, filter, onClick, onMouseEnter }) => {
   const { state } = useCurrentStateAndParams();
   const isServiceProvider = isChildOf('marketplace-provider', state);
   const getPage = useCallback(
@@ -128,7 +156,8 @@ export const OrganizationsPanel: FunctionComponent<{
           return (
             <OrganizationListItem
               {...listItemProps}
-              selected={active?.uuid === item.uuid}
+              active={active?.uuid === item.uuid}
+              selected={selected?.uuid === item.uuid}
               onClick={() => onClick(item)}
               onMouseEnter={() => onMouseEnter(item)}
               filter={filter}

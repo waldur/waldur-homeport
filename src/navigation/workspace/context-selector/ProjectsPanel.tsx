@@ -31,38 +31,34 @@ const ProjectListItem = ({ item, filter, loading }) => {
   return (
     <>
       <Stack direction="horizontal" gap={4}>
-        <p className="title ellipsis mb-0">
-          {filter ? highlightMatch(item.name, filter) : item.name}
-        </p>
-        <div className="ms-auto">
-          {loading && <LoadingSpinnerIcon />}
-          {item.resource_count > 0 ? (
-            <span className="ms-4 text-muted">
-              {item.resource_count}{' '}
-              {item.resource_count > 1
-                ? translate('Resources')
-                : translate('Resource')}
-            </span>
-          ) : (
-            <i className="ms-4 text-muted">{translate('No resource')}</i>
-          )}
+        <div className="overflow-hidden">
+          <p className="title ellipsis mb-0">
+            {filter ? highlightMatch(item.name, filter) : item.name}
+          </p>
+          <div className="item-info">
+            {item.resource_count > 0 ? (
+              <span className="text-muted">
+                {item.resource_count}{' '}
+                {item.resource_count > 1
+                  ? translate('Resources')
+                  : translate('Resource')}
+              </span>
+            ) : (
+              <i className="text-muted">{translate('No resource')}</i>
+            )}
+          </div>
+          <div className="item-link">
+            <Link state="project.dashboard" params={{ uuid: item.uuid }}>
+              {translate('Go to project dashboard')}
+            </Link>
+          </div>
         </div>
+        <div className="ms-auto">{loading && <LoadingSpinnerIcon />}</div>
       </Stack>
-      <div className="actions">
-        <div className="action-item text-start mx-auto">
+      {!loading && (
+        <div className="actions">
           <Link
-            className="d-block text-white text-decoration-underline"
-            state="project.dashboard"
-            params={{ uuid: item.uuid }}
-            onClick={(e) => {
-              e.stopPropagation();
-              MenuComponent.hideDropdowns(undefined);
-            }}
-          >
-            {translate('Project dashboard')}
-          </Link>
-          <Link
-            className="d-block text-white text-decoration-underline"
+            className="action-item"
             state="marketplace-project-resources-all"
             params={{ uuid: item.uuid }}
             onClick={(e) => {
@@ -70,10 +66,10 @@ const ProjectListItem = ({ item, filter, loading }) => {
               MenuComponent.hideDropdowns(undefined);
             }}
           >
-            {translate('See resources')}
+            {translate('Go to resources')}
           </Link>
         </div>
-      </div>
+      )}
     </>
   );
 };
@@ -116,7 +112,7 @@ export const ProjectsPanel: FunctionComponent<{
       className={classNames({ disabled: isDisabled }, 'project-listing')}
     >
       {customer && (
-        <div className="py-3 px-4">
+        <div className="project-listing-header border-bottom py-3 px-4">
           <OrganizationSummary customer={customer} />
         </div>
       )}
