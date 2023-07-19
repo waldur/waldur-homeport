@@ -65,9 +65,7 @@ export const PendingProviderOrders: React.FC<{}> = () => {
         )}
         fullWidth={true}
       />
-      <div className="is-flex">
-        <BulkProviderActions orders={tableProps.rows} />
-      </div>
+      <BulkProviderActions orders={tableProps.rows} />
     </div>
   );
 };

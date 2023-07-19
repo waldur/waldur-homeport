@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import Axios from 'axios';
-import { Col, Row } from 'react-bootstrap';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -73,44 +72,37 @@ export const OfferingUpdateContainer = () => {
     <div className="provider-offering">
       <div className="provider-offering-hero__background"></div>
       <div className="container-xxl position-relative py-16">
-        <Row>
-          <Col md={12}>
-            <OfferingDetailsHeader
-              offering={data.offering}
-              category={data.category}
-              refetch={refetch}
-            />
+        <OfferingDetailsHeader
+          offering={data.offering}
+          category={data.category}
+          refetch={refetch}
+        />
 
-            <OverviewSection offering={data.offering} refetch={refetch} />
+        <OverviewSection offering={data.offering} refetch={refetch} />
 
-            <IntegrationSection
-              offering={data.offering}
-              provider={data.provider}
-              refetch={refetch}
-            />
+        <IntegrationSection
+          offering={data.offering}
+          provider={data.provider}
+          refetch={refetch}
+        />
 
-            <OfferingOptionsSection
-              offering={data.offering}
-              refetch={refetch}
-            />
+        <OfferingOptionsSection offering={data.offering} refetch={refetch} />
 
-            <AttributesSection
-              offering={data.offering}
-              category={data.category}
-              refetch={refetch}
-            />
+        <AttributesSection
+          offering={data.offering}
+          category={data.category}
+          refetch={refetch}
+        />
 
-            <ComponentsSection
-              offering={data.offering}
-              components={data.components}
-              refetch={refetch}
-            />
+        <ComponentsSection
+          offering={data.offering}
+          components={data.components}
+          refetch={refetch}
+        />
 
-            <PlansSection offering={data.offering} refetch={refetch} />
+        <PlansSection offering={data.offering} refetch={refetch} />
 
-            <OfferingImagesList offering={data.offering} />
-          </Col>
-        </Row>
+        <OfferingImagesList offering={data.offering} />
       </div>
     </div>
   );

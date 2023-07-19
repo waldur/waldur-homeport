@@ -1621,7 +1621,7 @@ msgstr ""
 msgid "Component name"
 msgstr ""
 
-#: src/marketplace/offerings/details/OfferingDetails.tsx
+#: src/marketplace/offerings/details/OfferingTables.tsx
 msgid "Component usage chart"
 msgstr ""
 
@@ -5497,7 +5497,7 @@ msgstr ""
 msgid "Offering configuration"
 msgstr ""
 
-#: src/marketplace/offerings/details/OfferingDetails.tsx
+#: src/marketplace/offerings/details/OfferingTables.tsx
 msgid "Offering cost chart"
 msgstr ""
 
