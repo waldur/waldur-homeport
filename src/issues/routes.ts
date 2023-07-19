@@ -31,6 +31,10 @@ const OrganizationUpdateContainer = lazyComponent(
   () => import('@waldur/customer/list/OrganizationUpdateContainer'),
   'OrganizationUpdateContainer',
 );
+const SupportDashboard = lazyComponent(
+  () => import('@waldur/support/dashboard/SupportDashboard'),
+  'SupportDashboard',
+);
 const SupportCustomersContainer = lazyComponent(
   () => import('@waldur/customer/list/SupportCustomersContainer'),
   'SupportCustomersContainer',
@@ -85,6 +89,17 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'support-dashboard',
+    url: '',
+    parent: 'support',
+    component: SupportDashboard,
+    data: {
+      breadcrumb: () => translate('Dashboard'),
+      priority: 100,
+    },
+  },
+
+  {
     name: 'support.detail',
     url: 'issue/:issue_uuid/',
     component: IssueDetailsContainer,
@@ -95,7 +110,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'support.list',
-    url: 'list/',
+    url: 'list/?{status}',
     component: SupportIssues,
     data: {
       breadcrumb: () => translate('Issues'),

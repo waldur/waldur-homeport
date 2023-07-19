@@ -29,7 +29,7 @@ const filterByFeature = (state: RootState) => (columns) =>
     (column) => !column.feature || isVisible(state, column.feature),
   );
 
-const filterColumns = (state: RootState) => (columns) => {
+export const filterColumns = (state: RootState) => (columns) => {
   return filterByFeature(state)(columns).filter(
     (column) => column.visible === undefined || column.visible === true,
   );

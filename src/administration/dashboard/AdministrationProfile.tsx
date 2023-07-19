@@ -17,15 +17,19 @@ import { getVersion } from '../api';
 
 interface AdministrationProfileProps {
   healthy: boolean;
+  supportOnly?: boolean;
 }
 
 export const AdministrationProfile = ({
   healthy,
+  supportOnly,
 }: AdministrationProfileProps) => {
   const router = useRouter();
 
   const image = fixURL('/icons/login_logo/');
   const website = ENV.plugins.WALDUR_CORE.HOMEPORT_URL;
+  const email = ENV.plugins.WALDUR_CORE.SITE_EMAIL;
+  const phone = ENV.plugins.WALDUR_CORE.SITE_PHONE;
 
   const { data: version } = useQuery(['version'], () => getVersion(), {
     staleTime: Infinity,
@@ -33,7 +37,7 @@ export const AdministrationProfile = ({
 
   const { value, loading } = useAsync(() => {
     const promises = [
-      getUsers({ page: 1, page_size: 6, is_staff: true }),
+      !supportOnly && getUsers({ page: 1, page_size: 6, is_staff: true }),
       getUsers({ page: 1, page_size: 6, is_support: true }),
     ];
     return Promise.all(promises);
@@ -86,7 +90,9 @@ export const AdministrationProfile = ({
                       {translate('Version')}&nbsp;{version.version}
                     </span>
                   )}
-                  {website && <span>{website}</span>}
+                  {!supportOnly && website && <span>{website}</span>}
+                  {supportOnly && email && <span>{email}</span>}
+                  {supportOnly && phone && <span>{phone}</span>}
                 </Stack>
               </Col>
               <Col xs="auto"></Col>
@@ -96,7 +102,7 @@ export const AdministrationProfile = ({
                 <LoadingSpinner />
               ) : (
                 <Col xs={12}>
-                  {staff.options.length && (
+                  {!supportOnly && staff.options.length && (
                     <Form.Group as={Row} className="mb-1">
                       <Form.Label column xs="auto">
                         {translate('Staff')}:

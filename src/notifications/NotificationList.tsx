@@ -4,6 +4,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableProps } from '@waldur/table/Table';
 import { TableOptionsType } from '@waldur/table/types';
 
 import { NotificationCreateButton } from './NotificationCreateButton';
@@ -75,4 +76,6 @@ const TableOptions: TableOptionsType = {
   queryField: 'subject',
 };
 
-export const NotificationList = connectTable(TableOptions)(TableComponent);
+export const NotificationList = connectTable(TableOptions)(
+  TableComponent,
+) as React.ComponentType<Partial<TableProps>>;

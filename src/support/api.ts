@@ -1,6 +1,8 @@
 import { ENV } from '@waldur/configs/default';
-import { getSelectData } from '@waldur/core/api';
+import { get, getSelectData } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
+
+import { SupportStatistics } from './types';
 
 const tenantSerializer = ({ name, backend_id, project_name }) => ({
   name: `${project_name} / ${name}`,
@@ -61,3 +63,8 @@ export const fetchInstanceOptions = async (
     currentPage,
   );
 };
+
+export const getServiceProviderStatistics = () =>
+  get<SupportStatistics>(`/support-statistics/`).then(
+    (response) => response.data,
+  );
