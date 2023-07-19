@@ -27,24 +27,31 @@ const EmptyProjectListPlaceholder: FunctionComponent = () => (
   </p>
 );
 
-const ProjectListItem = ({ item, filter, loading }) => {
+const ProjectListItem = ({ item, filter, loading, selected }) => {
   return (
     <>
       <Stack direction="horizontal" gap={4}>
         <div className="overflow-hidden">
-          <p className="title ellipsis mb-0">
-            {filter ? highlightMatch(item.name, filter) : item.name}
+          <p
+            className={'title ellipsis mb-0' + (selected ? ' fw-boldest' : '')}
+          >
+            {filter ? highlightMatch(item.name, filter) : item.name}{' '}
+            {selected && (
+              <span className="fw-normal">
+                ({translate('Current project')})
+              </span>
+            )}
           </p>
           <div className="item-info">
             {item.resource_count > 0 ? (
-              <span className="text-muted">
+              <span>
                 {item.resource_count}{' '}
                 {item.resource_count > 1
                   ? translate('Resources')
                   : translate('Resource')}
               </span>
             ) : (
-              <i className="text-muted">{translate('No resource')}</i>
+              <i>{translate('No resource')}</i>
             )}
           </div>
           <div className="item-link">
