@@ -15,6 +15,14 @@ describe('Users', () => {
 
       .intercept(
         'GET',
+        '/api/customers/**',
+        {
+          fixture: 'support/customers.json',
+        },
+      )
+
+      .intercept(
+        'GET',
         '/api/users/?page=1&page_size=10&query=Tara%20Pierce',
         {
           fixture: 'support/user-search-by-name.json',
@@ -31,7 +39,7 @@ describe('Users', () => {
 
       .intercept(
         'GET',
-        '/api/users/?page=1&page_size=10&organization=Howard-Martin',
+        '/api/users/?page=1&page_size=10&customer_uuid=895e38d197e748459189f19285119edf',
         {
           fixture: 'support/user-search-by-name.json',
         },
@@ -96,9 +104,10 @@ describe('Users', () => {
         .should('be.visible')
       cy.get('.filter-toggle:nth-child(1)')
         .click()
-        .get('.filter-field > .form-control')
+        .get('.filter-toggle:nth-child(1) .filter-field')
         .click()
-        .type('Howard-Martin')
+        .type('Allen-Rodriguez')
+        .selectTheFirstOptionOfDropdown()
         .get('table tbody tr')
         .should('have.length', 1);
     });

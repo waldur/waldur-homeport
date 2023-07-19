@@ -9,8 +9,8 @@ import {
   useReinitializeFilterFromUrl,
 } from '@waldur/core/filters';
 import { SelectField } from '@waldur/form';
-import { DebouncedStringField } from '@waldur/form/DebouncedStringField';
 import { translate } from '@waldur/i18n';
+import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
@@ -29,13 +29,12 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = ({ form }) => {
 
   return (
     <>
-      <TableFilterItem name="organization" title={translate('Organization')}>
-        <Field
-          name="organization"
-          component={(fieldProps) => (
-            <DebouncedStringField {...fieldProps} noUpdateOnBlur={true} />
-          )}
-        ></Field>
+      <TableFilterItem
+        title={translate('Organization')}
+        name="organization"
+        badgeValue={(value) => value?.name}
+      >
+        <OrganizationAutocomplete />
       </TableFilterItem>
       <TableFilterItem name="role" title={translate('Role')}>
         <Field

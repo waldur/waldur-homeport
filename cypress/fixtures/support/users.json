@@ -19,7 +19,17 @@
     "agreement_date": "2019-08-14T12:24:08.443489Z",
     "preferred_language": "et",
     "competence": "",
-    "customer_permissions": [],
+    "customer_permissions": [
+      {
+        "url": "/api/customer-permissions/242/",
+        "pk": 242,
+        "role": "owner",
+        "customer_uuid": "895e38d197e748459189f19285119edf",
+        "customer_name": "Allen-Rodriguez",
+        "customer_native_name": "",
+        "customer_abbreviation": "All"
+      }
+    ],
     "project_permissions": [
       {
         "url": "/api/project-permissions/544/",
@@ -28,6 +38,14 @@
         "project_uuid": "fc161955cc1f430fa0903a9b9f526f3b",
         "project_name": "Reduced national moratorium",
         "customer_name": "Padilla-Brown"
+      },
+      {
+        "url": "/api/project-permissions/902/",
+        "pk": 903,
+        "role": "admin",
+        "project_uuid": "b1540368a3904f8cb451da4a2568fd09",
+        "project_name": "Test project",
+        "customer_name": "Allen-Rodriguez"
       }
     ],
     "requested_email": null,

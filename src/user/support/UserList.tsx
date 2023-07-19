@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
@@ -91,7 +92,14 @@ const SupportStatusField = ({ row }) => {
 const mapPropsToFilter = createSelector(
   getFormValues('userFilter'),
   (filters: any) => {
-    return formatRoleFilter(formatStatusFilter(filters));
+    const params = cloneDeep(formatRoleFilter(formatStatusFilter(filters)));
+    if (filters?.organization?.uuid) {
+      params.customer_uuid = filters.organization.uuid;
+    }
+    if (params?.organization) {
+      delete params.organization;
+    }
+    return params;
   },
 );
 
