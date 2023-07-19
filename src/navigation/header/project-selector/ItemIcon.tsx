@@ -4,10 +4,10 @@ import { getItemAbbreviation } from '@waldur/navigation/workspace/context-select
 
 export const ItemIcon = ({ item }) =>
   item.image ? (
-    <Image src={item.image} size={60} />
+    <Image src={item.image} size={55} />
   ) : (
-    <div className="symbol symbol-60px">
-      <ImagePlaceholder width="60px" height="60px" backgroundColor="#e2e2e2">
+    <div className="symbol symbol-55px">
+      <ImagePlaceholder width="55px" height="55px" backgroundColor="#e2e2e2">
         <div className="symbol-label fs-6 fw-bold">
           {getItemAbbreviation(item)}
         </div>
