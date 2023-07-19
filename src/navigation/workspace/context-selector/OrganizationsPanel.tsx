@@ -73,8 +73,17 @@ export const OrganizationListItem: FunctionComponent<{
         <Stack direction="horizontal" gap={4} className="item-content">
           <ItemIcon item={item} />
           <div className="overflow-hidden">
-            <p className="title ellipsis mb-0">
-              {filter ? highlightMatch(item.name, filter) : item.name}
+            <p
+              className={
+                'title ellipsis mb-0' + (selected ? ' fw-boldest' : '')
+              }
+            >
+              {filter ? highlightMatch(item.name, filter) : item.name}{' '}
+              {selected && (
+                <span className="fw-normal">
+                  ({translate('Current organization')})
+                </span>
+              )}
             </p>
             <div className="item-info">
               {item.projects?.length ? (
@@ -85,7 +94,7 @@ export const OrganizationListItem: FunctionComponent<{
                     : translate('Project')}
                 </small>
               ) : (
-                <i className="text-muted">{translate('No project')}</i>
+                <i>{translate('No project')}</i>
               )}
             </div>
             <div className="item-link">

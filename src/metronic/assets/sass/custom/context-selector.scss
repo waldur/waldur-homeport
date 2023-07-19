@@ -31,7 +31,7 @@ $dark-border: #65765f;
   }
 
   .scrollbar-view {
-    height: calc(100vh - 260px) !important;
+    height: calc(100vh - 250px) !important;
   }
 
   .border-bottom {
@@ -80,6 +80,7 @@ $dark-border: #65765f;
         color: $dark-body;
         z-index: unset;
 
+        .item-info > *,
         .item-link a {
           color: $dark-body;
         }
@@ -91,6 +92,9 @@ $dark-border: #65765f;
         a {
           color: $white;
         }
+      }
+      .item-info > * {
+        color: $text-muted;
       }
 
       .actions {
@@ -146,6 +150,7 @@ $dark-border: #65765f;
         border: 0;
         cursor: default;
 
+        .item-info > *,
         .item-link a {
           color: $dark-body;
         }
@@ -156,6 +161,9 @@ $dark-border: #65765f;
         a {
           color: $white;
         }
+      }
+      .item-info > * {
+        color: $text-muted;
       }
 
       > div {
@@ -292,7 +300,7 @@ $dark-border: #65765f;
             color: $dark-inverse;
           }
           .item-info > * {
-            color: if(isDarkMode(), $gray-400, $text-muted);
+            color: $dark-inverse;
           }
           .actions .action-item {
             background-color: if(isDarkMode(), $white, $dark-header);
