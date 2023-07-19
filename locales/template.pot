@@ -1184,6 +1184,10 @@ msgstr ""
 msgid "Broadcast"
 msgstr ""
 
+#: src/support/dashboard/SupportDashboard.tsx
+msgid "Broadcasts"
+msgstr ""
+
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/invoices/list/MarkAsPaidDialog.tsx
@@ -1497,6 +1501,14 @@ msgstr ""
 #: src/user/UserPopover.tsx
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "Close"
+msgstr ""
+
+#: src/issues/list/IssuesFilter.tsx
+msgid "Closed"
+msgstr ""
+
+#: src/support/dashboard/StatisticsCards.tsx
+msgid "Closed issues (this month)"
 msgstr ""
 
 #: src/resource/support/ResourcesTreemap.tsx
@@ -2224,6 +2236,7 @@ msgstr ""
 
 #: src/administration/routes.ts
 #: src/customer/routes.ts
+#: src/issues/routes.ts
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
@@ -5726,6 +5739,7 @@ msgid "Only staff users are allowed to perform this action."
 msgstr ""
 
 #: src/events/ExpandableEventDetailsTable.tsx
+#: src/issues/list/IssuesFilter.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Open"
@@ -5737,6 +5751,11 @@ msgstr ""
 
 #: src/issues/IssueSummary.tsx
 msgid "Open in Service Desk"
+msgstr ""
+
+#: src/support/dashboard/StatisticsCards.tsx
+#: src/support/dashboard/SupportDashboard.tsx
+msgid "Open issues"
 msgstr ""
 
 #: src/providers/dashboard/ProviderWidgets.tsx
@@ -7366,6 +7385,10 @@ msgstr ""
 msgid "Reboot"
 msgstr ""
 
+#: src/support/dashboard/StatisticsCards.tsx
+msgid "Recent broadcasts (this month)"
+msgstr ""
+
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Recent offerings"
 msgstr ""
@@ -7823,6 +7846,10 @@ msgstr ""
 
 #: src/issues/IssueSummary.tsx
 msgid "Resolution"
+msgstr ""
+
+#: src/issues/list/IssuesFilter.tsx
+msgid "Resolved"
 msgstr ""
 
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -8669,6 +8696,10 @@ msgstr ""
 msgid "Select status"
 msgstr ""
 
+#: src/issues/list/IssuesFilter.tsx
+msgid "Select status..."
+msgstr ""
+
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 msgid "Select subnet"
 msgstr ""
@@ -9379,6 +9410,7 @@ msgstr ""
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/create/SendingStatus.tsx
 #: src/issues/IssueSummary.tsx
+#: src/issues/list/IssuesFilter.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
@@ -10798,6 +10830,7 @@ msgid "Unable to load growth chart."
 msgstr ""
 
 #: src/administration/dashboard/AdministrationDashboard.tsx
+#: src/support/dashboard/SupportDashboard.tsx
 msgid "Unable to load health information"
 msgstr ""
 
@@ -10903,6 +10936,7 @@ msgid "Unable to load service providers."
 msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/support/dashboard/StatisticsCards.tsx
 msgid "Unable to load statistics data"
 msgstr ""
 
@@ -12137,6 +12171,7 @@ msgid "View YAML"
 msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/support/dashboard/StatisticsCards.tsx
 msgid "View all"
 msgstr ""
 
@@ -12208,6 +12243,10 @@ msgstr ""
 
 #: src/quotas/constants.ts
 msgid "Volumes count"
+msgstr ""
+
+#: src/issues/list/IssuesFilter.tsx
+msgid "Waiting for support"
 msgstr ""
 
 #: src/slurm/SLURMPluginOptionsForm.tsx

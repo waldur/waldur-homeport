@@ -15,7 +15,7 @@ export const SupportMenu = () => {
   return (
     <MenuItem
       title={translate('Support')}
-      state="support.broadcast"
+      state="support-dashboard"
       activeState="support"
       child={false}
       iconPath={Icon}
