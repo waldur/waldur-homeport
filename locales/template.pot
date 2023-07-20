@@ -8363,6 +8363,10 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
+#: src/customer/cost-policies/utils.ts
+msgid "Schedule termination of existing resources"
+msgstr ""
+
 #: src/marketplace/resources/details/openstack-instance/SnapshotSchedulesSection.tsx
 #: src/marketplace/resources/details/openstack-volume/SnapshotSchedulesSection.tsx
 msgid "Schedule {schedule}"

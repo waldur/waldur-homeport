@@ -14,4 +14,8 @@ export const getCostPolicyActionOptions = () => [
     label: translate('Notify organization owners'),
   },
   { value: 'notify_project_team', label: translate('Notify project team') },
+  {
+    value: 'terminate_resources',
+    label: translate('Schedule termination of existing resources'),
+  },
 ];
