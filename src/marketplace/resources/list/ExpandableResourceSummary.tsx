@@ -58,6 +58,8 @@ const DynamicResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
       resource={{
         ...value,
         end_date: row.end_date,
+        parent_uuid: row.parent_uuid,
+        parent_name: row.parent_name,
       }}
     />
   );

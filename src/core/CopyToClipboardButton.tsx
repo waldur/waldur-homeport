@@ -7,26 +7,44 @@ import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/notify';
 
-export const CopyToClipboardButton: FunctionComponent<{ value; className? }> =
-  ({ value, className }) => {
-    const dispatch = useDispatch();
+interface OwnProps {
+  value;
+  size?: 'sm' | 'lg' | '2x' | '3x' | '4x' | '5x';
+  className?;
+}
 
-    const onClick = useCallback(
-      (event) => {
-        event.stopPropagation();
-        copy(value);
-        dispatch(showSuccess(translate('Text has been copied')));
-      },
-      [dispatch, value],
-    );
+export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
+  value,
+  size,
+  className,
+}) => {
+  const dispatch = useDispatch();
 
-    return (
-      <p className={classNames('my-2', className)}>
-        <a onClick={(e) => onClick(e)}>
-          <Tip label={translate('Copy to clipboard')} id="copyToClipboard">
-            <i className="fa fa-copy fa-lg" />
-          </Tip>
-        </a>
-      </p>
-    );
-  };
+  const onClick = useCallback(
+    (event) => {
+      event.stopPropagation();
+      copy(value);
+      dispatch(showSuccess(translate('Text has been copied')));
+    },
+    [dispatch, value],
+  );
+
+  return (
+    <p className={classNames('my-1', className)}>
+      <a onClick={(e) => onClick(e)}>
+        <Tip label={translate('Copy to clipboard')} id="copyToClipboard">
+          <i
+            className={classNames(
+              'fa fa-copy',
+              size !== 'sm' ? `fa-${size}` : undefined,
+            )}
+          />
+        </Tip>
+      </a>
+    </p>
+  );
+};
+
+CopyToClipboardButton.defaultProps = {
+  size: 'lg',
+};

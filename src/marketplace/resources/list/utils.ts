@@ -35,6 +35,8 @@ export const resourcesListRequiredFields = () => [
   'plan_name',
   'marketplace_plan_uuid',
   'is_limit_based',
+  'parent_uuid',
+  'parent_name',
   'provider_uuid',
   'project_uuid',
   'customer_uuid',

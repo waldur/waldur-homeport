@@ -50,6 +50,6 @@ describe('OpenStackTenantSummary', () => {
       resource: { ...resource, access_url: undefined },
       tenantCredentialsVisible: true,
     });
-    expect(getField(wrapper, 'Access').text()).toBe('No access info.');
+    expect(getField(wrapper, 'Access:').text()).toBe('No access info.');
   });
 });

@@ -63,16 +63,16 @@ export const getField = (
 };
 
 export const hasUsername = (wrapper: ReactWrapper): boolean =>
-  !!getField(wrapper, 'Username');
+  !!getField(wrapper, 'Username:');
 
 export const hasPassword = (wrapper: ReactWrapper): boolean =>
-  !!getField(wrapper, 'Password');
+  !!getField(wrapper, 'Password:');
 
 export const hasAccess = (wrapper: ReactWrapper): boolean =>
-  !!getField(wrapper, 'Access');
+  !!getField(wrapper, 'Access:');
 
 export const hasExternalLink = (wrapper: ReactWrapper): boolean =>
   !!wrapper.find(ExternalLink);
 
 export const getSummary = (wrapper: ReactWrapper): string =>
-  getField(wrapper, 'Summary').text();
+  getField(wrapper, 'Summary:').text();

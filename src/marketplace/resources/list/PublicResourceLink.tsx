@@ -10,21 +10,13 @@ import { Resource } from '../types';
 
 import { EndDateTooltip } from './EndDateTooltip';
 
-interface PublicResourceLinkProps {
-  row: Resource;
-  customer?: Customer;
-}
-
-export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
-  row,
-  customer,
-}) => {
-  const { state: currentState } = useCurrentStateAndParams();
-  let uuid = customer ? customer.uuid : row.customer_uuid;
+export const usePublicResourceState = (resource: any, customer: Customer) => {
+  const { state: currentState, params } = useCurrentStateAndParams();
+  let uuid = customer ? customer.uuid : resource.customer_uuid;
   let state;
   if (isDescendantOf('project', currentState)) {
     state = 'marketplace-project-resource-details';
-    uuid = row.project_uuid;
+    uuid = resource.project_uuid || params?.uuid;
   } else if (isDescendantOf('marketplace-provider', currentState)) {
     state = 'marketplace-provider-resource-details';
   } else if (isDescendantOf('organization', currentState)) {
@@ -34,8 +26,27 @@ export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
   } else if (isDescendantOf('profile', currentState)) {
     state = 'marketplace-profile-resource-details';
   }
+  return {
+    state,
+    params: {
+      uuid,
+      resource_uuid: resource.uuid,
+    },
+  };
+};
+
+interface PublicResourceLinkProps {
+  row: Resource;
+  customer?: Customer;
+}
+
+export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
+  row,
+  customer,
+}) => {
+  const stateAndParams = usePublicResourceState(row, customer);
   const label = row.name || row.offering_name;
-  if (!state) {
+  if (!stateAndParams.state) {
     return (
       <>
         {label} <BackendIdTip backendId={row.backend_id} />
@@ -46,11 +57,8 @@ export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
   return (
     <>
       <Link
-        state={state}
-        params={{
-          uuid,
-          resource_uuid: row.uuid,
-        }}
+        state={stateAndParams.state}
+        params={stateAndParams.params}
         label={label}
       />
       <BackendIdTip backendId={row.backend_id} />

@@ -866,6 +866,11 @@ msgstr ""
 msgid "Attach volume"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
+msgid "Attached"
+msgstr ""
+
+#: src/openstack/openstack-instance/OpenStackInstanceVolumeBadge.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
@@ -1032,7 +1037,7 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/project/ProjectExpandableRowContainer.tsx
 #: src/project/ProjectUpdateForm.tsx
-#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/summary/ResourceMetadataDialog.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Backend ID"
@@ -1497,6 +1502,7 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesDialog.tsx
 #: src/notifications/RecipientsListDialog.tsx
+#: src/resource/summary/ResourceMetadataDialog.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
 #: src/user/UserPopover.tsx
 #: src/user/support/UserRemovalMessageDialog.tsx
@@ -3553,6 +3559,10 @@ msgstr ""
 msgid "Go back"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenStackInstanceVolumeBadge.tsx
+msgid "Go to detail view"
+msgstr ""
+
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 #: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Go to marketplace"
@@ -4636,7 +4646,7 @@ msgstr ""
 msgid "Marketplace"
 msgstr ""
 
-#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/summary/ResourceMetadataDialog.tsx
 msgid "Marketplace UUID"
 msgstr ""
 
@@ -4751,6 +4761,10 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
+#: src/resource/summary/ResourceSummaryBase.tsx
+msgid "Metadata"
+msgstr ""
+
 #: src/user/hooks/HooksList.tsx
 msgid "Method"
 msgstr ""
@@ -4841,6 +4855,10 @@ msgstr ""
 
 #: src/table/TableMoreActions.tsx
 msgid "More actions"
+msgstr ""
+
+#: src/openstack/openstack-instance/OpenStackInstanceVolumeBadge.tsx
+msgid "Mount"
 msgstr ""
 
 #: src/rancher/cluster/create/VolumeMountPointGroup.tsx
@@ -9033,6 +9051,7 @@ msgstr ""
 
 #: src/form/SecretField.tsx
 #: src/marketplace/details/plan/PlanDetailsLink.tsx
+#: src/resource/summary/ResourceMetadataLink.tsx
 msgid "Show"
 msgstr ""
 
@@ -9204,6 +9223,7 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/openstack/openstack-instance/OpenStackInstanceVolumeBadge.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
@@ -10343,7 +10363,7 @@ msgstr ""
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
-#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/summary/ResourceMetadataDialog.tsx
 msgid "UUID"
 msgstr ""
 
@@ -11394,7 +11414,7 @@ msgstr ""
 msgid "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues."
 msgstr ""
 
-#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/summary/ResourceMetadataDialog.tsx
 msgid "Unique ID of a resource created via Marketplace"
 msgstr ""
 
@@ -11402,11 +11422,13 @@ msgstr ""
 msgid "Unique ID of a resource created via service catalog"
 msgstr ""
 
+#: src/resource/summary/ResourceMetadataDialog.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
+#: src/support/SupportDetailsTable.tsx
 msgid "Unique ID of a resource in a backend system"
 msgstr ""
 
-#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/summary/ResourceMetadataDialog.tsx
 msgid "Unique ID of a resource within management plugin"
 msgstr ""
 
@@ -12226,6 +12248,7 @@ msgstr ""
 msgid "Volume snapshot has been restored."
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenStackInstanceVolumeBadge.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
@@ -13078,10 +13101,6 @@ msgstr ""
 
 #: src/table/TablePagination.tsx
 msgid "{from}-{to} of {all} items"
-msgstr ""
-
-#: src/resource/IPList.tsx
-msgid "{ip} has been copied"
 msgstr ""
 
 #: src/customer/team/CustomerUsersListExpandableRow.tsx
