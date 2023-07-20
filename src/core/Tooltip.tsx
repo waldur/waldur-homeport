@@ -5,6 +5,8 @@ interface TipProps {
   label: React.ReactNode;
   id: string;
   placement?: OverlayTriggerProps['placement'];
+  trigger?: OverlayTriggerProps['trigger'];
+  rootClose?: OverlayTriggerProps['rootClose'];
   autoWidth?: boolean;
   className?: string;
   onClick?(): void;
@@ -15,6 +17,7 @@ export const Tip: React.FC<TipProps> = ({
   children,
   id,
   placement,
+  trigger,
   autoWidth,
   className,
   onClick,
@@ -23,6 +26,7 @@ export const Tip: React.FC<TipProps> = ({
   label ? (
     <OverlayTrigger
       placement={placement}
+      trigger={trigger}
       overlay={
         <Tooltip id={id} className={autoWidth && 'tooltip-auto-width'}>
           {label}

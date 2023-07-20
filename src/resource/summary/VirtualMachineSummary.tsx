@@ -47,6 +47,7 @@ export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
         label={translate('SSH key')}
         value={props.resource.key_name}
         helpText={props.resource.key_fingerprint}
+        hasCopy
       />
       <Field label={translate('Uptime')} value={formatUptime(props)} />
     </>

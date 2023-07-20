@@ -53,6 +53,7 @@ export interface Volume extends Resource {
   instance?: string;
   source_snapshot?: string;
   service_uuid?: string;
+  device?: string;
 }
 
 export interface FixedIP {
