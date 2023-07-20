@@ -1,20 +1,36 @@
 import { ENV } from '@waldur/configs/default';
 
-const getStorage = (): Storage => {
-  if (ENV.authStorage === 'localStorage') {
+type CustomStorage = 'localStorage' | 'sessionStorage';
+
+const getStorage = (customStorage?: CustomStorage): Storage => {
+  const selectedStorage = customStorage || ENV.authStorage;
+
+  if (selectedStorage === 'localStorage') {
     return localStorage;
-  } else if (ENV.authStorage === 'sessionStorage') {
+  } else if (selectedStorage === 'sessionStorage') {
     return sessionStorage;
   } else {
     throw new Error(
-      `Invalid authStorage value: ${ENV.authStorage}. Either localStorage or sessionStorage is expected.`,
+      `Invalid authStorage value: ${selectedStorage}. Either localStorage or sessionStorage is expected.`,
     );
   }
 };
 
-export const removeItem = (key: string): void => getStorage().removeItem(key);
+export const removeItem = (
+  key: string,
+  customStorage?: CustomStorage,
+): void => {
+  getStorage(customStorage).removeItem(key);
+};
 
-export const getItem = (key: string): string => getStorage().getItem(key);
+export const getItem = (key: string, customStorage?: CustomStorage): string => {
+  return getStorage(customStorage).getItem(key);
+};
 
-export const setItem = (key: string, value: string) =>
-  getStorage().setItem(key, value);
+export const setItem = (
+  key: string,
+  value: string,
+  customStorage?: CustomStorage,
+) => {
+  getStorage(customStorage).setItem(key, value);
+};
