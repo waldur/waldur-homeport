@@ -72,8 +72,8 @@ msgstr ""
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -929,7 +929,7 @@ msgstr ""
 msgid "Authentication events"
 msgstr ""
 
-#: src/marketplace/offerings/actions/CredentialsTab.tsx
+#: src/marketplace/offerings/import/CredentialsTab.tsx
 msgid "Authentication token"
 msgstr ""
 
@@ -1015,7 +1015,7 @@ msgstr ""
 
 #: src/error/InvalidObjectPage.tsx
 #: src/error/InvalidRoutePage.tsx
-#: src/marketplace/offerings/actions/WizardButtons.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/notifications/NotificationFooter.tsx
 msgid "Back"
 msgstr ""
@@ -1344,8 +1344,8 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
-#: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/offerings/import/tabs.ts
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/update/attributes/AttributesSection.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
@@ -1741,14 +1741,14 @@ msgstr ""
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact email"
 msgstr ""
 
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact phone"
 msgstr ""
 
@@ -2093,7 +2093,7 @@ msgstr ""
 msgid "Creating snapshot schedule"
 msgstr ""
 
-#: src/marketplace/offerings/actions/tabs.ts
+#: src/marketplace/offerings/import/tabs.ts
 #: src/user/routes.ts
 msgid "Credentials"
 msgstr ""
@@ -3871,7 +3871,7 @@ msgstr ""
 msgid "Import key"
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingImportDialog.tsx
+#: src/marketplace/offerings/import/OfferingImportDialog.tsx
 msgid "Import offering"
 msgstr ""
 
@@ -4943,13 +4943,13 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
-#: src/marketplace/offerings/actions/SelectCategoryTab.tsx
-#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
+#: src/marketplace/offerings/import/SelectCategoryTab.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 #: src/marketplace/offerings/update/overview/OverviewDialog.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/marketplace/offerings/update/plans/PlanForm.tsx
@@ -5183,7 +5183,7 @@ msgid "New value"
 msgstr ""
 
 #: src/customer/create/CustomerCreateForm.tsx
-#: src/marketplace/offerings/actions/WizardButtons.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
 msgid "Next"
 msgstr ""
@@ -5512,7 +5512,7 @@ msgstr ""
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/PriceList.tsx
-#: src/marketplace/offerings/actions/tabs.ts
+#: src/marketplace/offerings/import/tabs.ts
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -5598,7 +5598,7 @@ msgstr ""
 msgid "Offering has been created."
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingImportDialog.tsx
+#: src/marketplace/offerings/import/OfferingImportDialog.tsx
 msgid "Offering has been imported."
 msgstr ""
 
@@ -5929,9 +5929,9 @@ msgstr ""
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
-#: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/marketplace/offerings/import/tabs.ts
 #: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
@@ -6555,8 +6555,8 @@ msgstr ""
 msgid "Please add resource name before editing a schedule."
 msgstr ""
 
-#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Please check the credentials again."
 msgstr ""
 
@@ -7565,7 +7565,7 @@ msgstr ""
 msgid "Remote CIDR"
 msgstr ""
 
-#: src/marketplace/offerings/actions/CredentialsTab.tsx
+#: src/marketplace/offerings/import/CredentialsTab.tsx
 msgid "Remote Waldur API URL"
 msgstr ""
 
@@ -7578,7 +7578,7 @@ msgstr ""
 msgid "Remote accounts are used for accessing external services you have access to."
 msgstr ""
 
-#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
 msgid "Remote category"
 msgstr ""
 
@@ -9361,9 +9361,9 @@ msgstr ""
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/OfferingsFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
-#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
@@ -9518,9 +9518,9 @@ msgstr ""
 #: src/marketplace-flows/FlowSubmitAction.tsx
 #: src/marketplace-flows/ReviewDialog.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
-#: src/marketplace/offerings/actions/WizardButtons.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
@@ -9981,7 +9981,7 @@ msgstr ""
 msgid "There are no categories in marketplace yet."
 msgstr ""
 
-#: src/marketplace/offerings/actions/SelectCategoryTab.tsx
+#: src/marketplace/offerings/import/SelectCategoryTab.tsx
 msgid "There are no categories yet."
 msgstr ""
 
@@ -10037,7 +10037,7 @@ msgstr ""
 msgid "There are no offerings yet for this category."
 msgstr ""
 
-#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
 msgid "There are no offerings yet."
 msgstr ""
 
@@ -10045,7 +10045,7 @@ msgstr ""
 msgid "There are no offerings."
 msgstr ""
 
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "There are no organizations yet."
 msgstr ""
 
@@ -10325,9 +10325,9 @@ msgstr ""
 #: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
-#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
 #: src/marketplace/offerings/update/options/OptionForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -10703,7 +10703,7 @@ msgstr ""
 msgid "Unable to import YAML."
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingImportDialog.tsx
+#: src/marketplace/offerings/import/OfferingImportDialog.tsx
 msgid "Unable to import remote offering."
 msgstr ""
 
@@ -10736,7 +10736,7 @@ msgstr ""
 msgid "Unable to load booking offerings."
 msgstr ""
 
-#: src/marketplace/offerings/actions/SelectCategoryTab.tsx
+#: src/marketplace/offerings/import/SelectCategoryTab.tsx
 #: src/navigation/sidebar/marketplace-popup/DataLoader.tsx
 msgid "Unable to load categories"
 msgstr ""
@@ -10886,7 +10886,7 @@ msgstr ""
 msgid "Unable to load offering."
 msgstr ""
 
-#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
 msgid "Unable to load offerings"
 msgstr ""
 
@@ -10912,7 +10912,7 @@ msgstr ""
 msgid "Unable to load organization resources."
 msgstr ""
 
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Unable to load organizations"
 msgstr ""
 
@@ -11423,8 +11423,6 @@ msgid "Unique ID of a resource created via service catalog"
 msgstr ""
 
 #: src/resource/summary/ResourceMetadataDialog.tsx
-#: src/resource/summary/ResourceSummaryBase.tsx
-#: src/support/SupportDetailsTable.tsx
 msgid "Unique ID of a resource in a backend system"
 msgstr ""
 

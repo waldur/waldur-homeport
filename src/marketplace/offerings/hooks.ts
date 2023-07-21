@@ -7,7 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 const OfferingImportDialog = lazyComponent(
-  () => import('./actions/OfferingImportDialog'),
+  () => import('./import/OfferingImportDialog'),
   'OfferingImportDialog',
 );
 
