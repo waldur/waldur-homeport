@@ -5,9 +5,8 @@ import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { Field } from '@waldur/resource/summary';
 
-import { OfferingItemActions } from '../actions/OfferingItemActions';
-import { OfferingEditButton } from '../OfferingEditButton';
-import { PreviewOfferingButton } from '../PreviewOfferingButton';
+import { OfferingEditActions } from '../actions/OfferingEditActions';
+import { OfferingViews } from '../OfferingViews';
 import { Logo } from '../service-providers/shared/Logo';
 
 export const OfferingDetailsHeader = ({ offering, category, refetch }) => (
@@ -56,7 +55,7 @@ export const OfferingDetailsHeader = ({ offering, category, refetch }) => (
     </Col>
 
     <Col lg={4} className="d-flex">
-      <Card>
+      <Card className="flex-grow-1">
         <Card.Body>
           <Button
             variant="light"
@@ -66,14 +65,13 @@ export const OfferingDetailsHeader = ({ offering, category, refetch }) => (
           >
             <i className="fa fa-refresh" />
           </Button>
-          <OfferingEditButton offeringId={offering.uuid} />
           <div className="btn btn-flush">
-            <OfferingItemActions
+            <OfferingEditActions
               offering={offering}
               refreshOffering={refetch}
             />
           </div>
-          <PreviewOfferingButton offering={offering} />
+          <OfferingViews row={offering} />
         </Card.Body>
       </Card>
     </Col>
