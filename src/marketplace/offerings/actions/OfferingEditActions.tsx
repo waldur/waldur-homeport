@@ -262,4 +262,4 @@ const mergeProps = (
 
 const enhance = connect(mapStateToProps, mapDispatchToProps, mergeProps);
 
-export const OfferingItemActions = enhance(ActionsDropdown);
+export const OfferingEditActions = enhance(ActionsDropdown);

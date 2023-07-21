@@ -218,7 +218,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingEditActions.tsx
 #: src/openstack/openstack-backup-schedule/actions/ActivateAction.tsx
 #: src/openstack/openstack-snapshot-schedule/actions/ActivateSnapshotScheduleAction.tsx
 #: src/user/support/UserActivateButton.tsx
@@ -717,7 +717,7 @@ msgstr ""
 msgid "Apps"
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingEditActions.tsx
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
 msgid "Archive"
 msgstr ""
@@ -2522,6 +2522,7 @@ msgstr ""
 #: src/customer/team/UserDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
+#: src/marketplace/offerings/OfferingViews.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
@@ -2719,6 +2720,7 @@ msgstr ""
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
 #: src/marketplace/offerings/OfferingEditButton.tsx
+#: src/marketplace/offerings/OfferingViews.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
 #: src/marketplace/offerings/update/attributes/EditAttributeButton.tsx
 #: src/marketplace/offerings/update/components/EditComponentButton.tsx
@@ -2775,7 +2777,7 @@ msgstr ""
 msgid "Edit component"
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingEditActions.tsx
 msgid "Edit confirmation message"
 msgstr ""
 
@@ -4512,7 +4514,7 @@ msgstr ""
 msgid "Location has been saved successfully."
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingEditActions.tsx
 msgid "Location of {name} offering"
 msgstr ""
 
@@ -6225,7 +6227,7 @@ msgstr ""
 msgid "Past time slots are not allowed."
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingEditActions.tsx
 msgid "Pause"
 msgstr ""
 
@@ -6754,10 +6756,6 @@ msgstr ""
 
 #: src/user/support/UserDetailsTable.tsx
 msgid "Preferred language"
-msgstr ""
-
-#: src/marketplace/offerings/PreviewOfferingButton.tsx
-msgid "Preview"
 msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
@@ -7733,7 +7731,7 @@ msgstr ""
 msgid "Request direct access to {name}"
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingEditActions.tsx
 msgid "Request editing"
 msgstr ""
 
@@ -7763,7 +7761,7 @@ msgstr ""
 msgid "Request project deletion"
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingEditActions.tsx
 msgid "Request publishing"
 msgstr ""
 
@@ -8948,7 +8946,7 @@ msgstr ""
 msgid "Set MTU"
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingEditActions.tsx
 msgid "Set access policy"
 msgstr ""
 
@@ -8980,7 +8978,7 @@ msgstr ""
 
 #: src/customer/list/SetLocationButton.tsx
 #: src/map/SetLocationDialog.tsx
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingEditActions.tsx
 msgid "Set location"
 msgstr ""
 
@@ -9006,7 +9004,7 @@ msgstr ""
 msgid "Set termination date of {resourceName}"
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingEditActions.tsx
 msgid "Set to draft"
 msgstr ""
 
@@ -11476,7 +11474,7 @@ msgstr ""
 msgid "Unpaid"
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingEditActions.tsx
 msgid "Unpause"
 msgstr ""
 
@@ -11543,7 +11541,7 @@ msgstr ""
 msgid "Update location"
 msgstr ""
 
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingEditActions.tsx
 msgid "Update logo"
 msgstr ""
 
@@ -12202,6 +12200,10 @@ msgstr ""
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "View item"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingViews.tsx
+msgid "View ordering form"
 msgstr ""
 
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx

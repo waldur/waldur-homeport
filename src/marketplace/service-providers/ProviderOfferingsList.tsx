@@ -13,9 +13,9 @@ import { useTable } from '@waldur/table/utils';
 
 import { CreateOfferingButton } from '../offerings/CreateOfferingButton';
 import { useOfferingDropdownActions } from '../offerings/hooks';
-import { OfferingActions } from '../offerings/OfferingActions';
 import { OfferingsListTablePlaceholder } from '../offerings/OfferingsListTablePlaceholder';
 import { OfferingStateCell } from '../offerings/OfferingStateCell';
+import { OfferingViews } from '../offerings/OfferingViews';
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 import { ServiceProvider } from '../types';
 
@@ -83,7 +83,7 @@ export const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> =
         verboseName={translate('Offerings')}
         dropdownActions={dropdownActions}
         actions={<CreateOfferingButton fetch={tableProps.fetch} />}
-        hoverableRow={OfferingActions}
+        hoverableRow={OfferingViews}
         {...extraTableProps}
       />
     );

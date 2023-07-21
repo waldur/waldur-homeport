@@ -22,10 +22,10 @@ import {
 import { Offering } from '../types';
 
 import { useOfferingDropdownActions } from './hooks';
-import { OfferingActions } from './OfferingActions';
 import { OfferingNameColumn } from './OfferingNameColumn';
 import { OfferingsListTablePlaceholder } from './OfferingsListTablePlaceholder';
 import { OfferingStateCell } from './OfferingStateCell';
+import { OfferingViews } from './OfferingViews';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
   const organizationColumn = props?.hasOrganizationColumn
@@ -74,7 +74,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       dropdownActions={dropdownActions}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
-      hoverableRow={OfferingActions}
+      hoverableRow={OfferingViews}
       hasQuery={true}
     />
   );
