@@ -1,4 +1,5 @@
-import { FunctionComponent } from 'react';
+import { useRouter } from '@uirouter/react';
+import { FunctionComponent, useEffect } from 'react';
 import Gravatar from 'react-gravatar';
 import { connect, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -10,6 +11,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { InvitationCreateButton } from '@waldur/invitations/actions/create/InvitationCreateButton';
 import { InvitationCancelButton } from '@waldur/invitations/actions/InvitationCancelButton';
+import { InvitationPolicyService } from '@waldur/invitations/actions/InvitationPolicyService';
 import { InvitationSendButton } from '@waldur/invitations/actions/InvitationSendButton';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { InvitationsFilter } from '@waldur/invitations/InvitationsFilter';
@@ -17,6 +19,7 @@ import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 import {
+  getCustomer,
   getProject,
   getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
@@ -109,6 +112,19 @@ const InvitationsListComponent = enhance(
 export const InvitationsList: FunctionComponent = () => {
   const user = useSelector(getUser);
   const project = useSelector(getProject);
+  const customer = useSelector(getCustomer);
+  const router = useRouter();
+  useEffect(() => {
+    if (
+      !InvitationPolicyService.canAccessInvitations({
+        user,
+        customer,
+        project,
+      })
+    ) {
+      router.stateService.target('errorPage.notFound');
+    }
+  }, [user, project, customer, router]);
   const { loading, error, value } = useAsync(
     async () => await fetchProjectManagers(user, project),
     [user, project],
