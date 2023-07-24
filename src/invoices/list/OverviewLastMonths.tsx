@@ -41,16 +41,20 @@ export const OverviewLastMonths: FunctionComponent = () => {
 
   return (
     <Row className="mb-6">
-      <Col sm={12} md={6} className="mb-sm-6 mb-md-0">
-        <MonthOverview
-          invoice={value[0]}
-          customer={customer}
-          costTrend={lastMonthTotalCompare}
-        />
-      </Col>
-      <Col sm={12} md={6}>
-        <MonthOverview invoice={value[1]} customer={customer} />
-      </Col>
+      {value[0] && (
+        <Col sm={12} md={6} className="mb-sm-6 mb-md-0">
+          <MonthOverview
+            invoice={value[0]}
+            customer={customer}
+            costTrend={lastMonthTotalCompare}
+          />
+        </Col>
+      )}
+      {value[1] && (
+        <Col sm={12} md={6}>
+          <MonthOverview invoice={value[1]} customer={customer} />
+        </Col>
+      )}
     </Row>
   );
 };

@@ -1,0 +1,13 @@
+[
+  {
+    "uuid": "0d79232c9ea2477aa46a6abb14f2f47e",
+    "price": "0.0000000",
+    "tax": "0.0000000",
+    "total": "0.0000000",
+    "state": "pending",
+    "year": 2023,
+    "month": 7,
+    "invoice_date": null,
+    "items": []
+  }
+]
