@@ -1,30 +1,4 @@
-import { Offering } from '@waldur/marketplace/types';
-
 import * as constants from './constants';
-
-export const updateOfferingState = (
-  offering: Offering,
-  stateAction: string,
-  reason?: string,
-  isPublic?: boolean,
-  refreshOffering?: () => void,
-) => ({
-  type: constants.UPDATE_OFFERING_STATE,
-  payload: {
-    offering,
-    stateAction,
-    reason,
-    isPublic,
-    refreshOffering,
-  },
-});
-
-export const addOfferingLocation = (offering: Offering) => ({
-  type: constants.ADD_OFFERING_LOCATION,
-  payload: {
-    offering,
-  },
-});
 
 export const loadDataSuccess = (data) => ({
   type: constants.LOAD_DATA_SUCCESS,

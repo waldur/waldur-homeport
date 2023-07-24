@@ -10,7 +10,6 @@ import {
   TABLE_OFFERING_RESOURCE,
 } from '@waldur/marketplace/details/constants';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
-import { PublicResourcesListPlaceholder } from '@waldur/marketplace/resources/list/PublicResourcesListPlaceholder';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 import { ResourceState } from '@waldur/marketplace/resources/types';
 import { PublicResourceActions } from '@waldur/marketplace/resources/usage/PublicResourceActions';
@@ -64,7 +63,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     <Table
       {...props}
       title={translate('Resources')}
-      placeholderComponent={<PublicResourcesListPlaceholder />}
       columns={columns}
       verboseName={translate('offering resources')}
       enableExport={true}

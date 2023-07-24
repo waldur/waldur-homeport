@@ -1,8 +1,5 @@
 import { pick } from '@waldur/core/utils';
-import { OFFERING_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { OptionField } from '@waldur/marketplace/types';
-import { fetchListStart } from '@waldur/table/actions';
-import { Customer, User } from '@waldur/workspace/types';
 
 import { PlanRequest, PlanFormData, OptionFormData } from './types';
 
@@ -93,22 +90,6 @@ export const formatSchedules = (schedules) =>
   schedules.map(
     pick(['start', 'end', 'title', 'allDay', 'extendedProps', 'id']),
   );
-
-export const updatePublicOfferingsList = (
-  customer: Customer,
-  shouldFilterByServiceManagerUuid: boolean,
-  user: User,
-  state: { value: string }[],
-) =>
-  fetchListStart(OFFERING_TABLE_NAME, {
-    billable: true,
-    shared: true,
-    customer_uuid: customer.uuid,
-    state: state.map((option) => option.value),
-    service_manager_uuid: shouldFilterByServiceManagerUuid
-      ? user.uuid
-      : undefined,
-  });
 
 export const filterPluginsData = (pluginsData) =>
   pluginsData.reduce(
