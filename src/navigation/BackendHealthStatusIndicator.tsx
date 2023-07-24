@@ -37,7 +37,7 @@ export const isWorking = (data): boolean => {
 };
 
 const openBackendHealthStatusDialog = () =>
-  openModalDialog(BackendHealthStatusDialog);
+  openModalDialog(BackendHealthStatusDialog, { size: 'lg' });
 
 export const PureBackendHealthStatusIndicator: FunctionComponent<any> = (
   props,
