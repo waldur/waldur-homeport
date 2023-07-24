@@ -1,40 +1,39 @@
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { InjectedFormProps, reduxForm, Field } from 'redux-form';
+import { useDispatch } from 'react-redux';
+import { reduxForm, Field } from 'redux-form';
 
 import { SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { updateProviderOfferingState } from '@waldur/marketplace/common/api';
+import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { updateOfferingState } from '../store/actions';
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  submitRequest: (formData) => {
-    dispatch(
-      updateOfferingState(
-        ownProps.resolve.offering,
+export const PauseOfferingDialog = reduxForm<
+  { reason },
+  { resolve: { offering; refreshOffering } }
+>({ form: 'marketplacePauseOffering' })((props) => {
+  const dispatch = useDispatch();
+  const callback = async (formData) => {
+    try {
+      await updateProviderOfferingState(
+        props.resolve.offering.uuid,
         'pause',
         formData.reason,
-        ownProps.resolve.isPublic,
-        ownProps.resolve.refreshOffering,
-      ),
-    );
-  },
-});
-
-const connector = compose(
-  reduxForm({ form: 'marketplacePauseOffering' }),
-  connect(null, mapDispatchToProps),
-);
-
-interface PauseOfferingDialogProps extends InjectedFormProps {
-  submitRequest(formData: any): void;
-}
-
-export const PauseOfferingDialog = connector(
-  (props: PauseOfferingDialogProps) => (
-    <form onSubmit={props.handleSubmit(props.submitRequest)}>
+      );
+      if (props.resolve.refreshOffering) {
+        props.resolve.refreshOffering();
+      }
+      dispatch(showSuccess(translate('Offering has been paused.')));
+      dispatch(closeModalDialog());
+    } catch (error) {
+      dispatch(
+        showErrorResponse(error, translate('Unable to pause offering.')),
+      );
+    }
+  };
+  return (
+    <form onSubmit={props.handleSubmit(callback)}>
       <ModalDialog
         title={translate('Pause offering')}
         footer={
@@ -58,5 +57,5 @@ export const PauseOfferingDialog = connector(
         />
       </ModalDialog>
     </form>
-  ),
-);
+  );
+});

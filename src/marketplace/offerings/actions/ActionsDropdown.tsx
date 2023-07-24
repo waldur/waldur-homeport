@@ -12,7 +12,7 @@ interface ActionsDropdownProps {
 export const ActionsDropdown: FunctionComponent<ActionsDropdownProps> = ({
   actions,
 }) => (
-  <Dropdown id="offering-actions">
+  <Dropdown id="offering-actions" className="d-inline">
     <Dropdown.Toggle disabled={actions.length === 0} variant="light" size="sm">
       {translate('Actions')}
     </Dropdown.Toggle>

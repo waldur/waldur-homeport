@@ -1,10 +1,3 @@
-import { createFormAction } from 'redux-form-saga';
-
-export const UPDATE_OFFERING_STATE =
-  'waldur/marketplace/offering/UPDATE_OFFERING_STATE';
-export const ADD_OFFERING_LOCATION =
-  'waldur/marketplace/offering/ADD_OFFERING_LOCATION';
-
 export const LOAD_DATA_SUCCESS =
   'waldur/marketplace/offering/LOAD_DATA_SUCCESS';
 
@@ -52,15 +45,3 @@ export const PULL_REMOTE_OFFERING_ROBOT_ACCOUNTS =
 
 export const PUSH_REMOTE_OFFERING_PROJECT_DATA =
   'waldur/marketplace/offering/PUSH_REMOTE_OFFERING_PROJECT_DATA';
-
-export const updateConfirmationMessage = createFormAction(
-  'waldur/marketplace/offering/UPDATE_CONFIRMATION_MESSAGE',
-);
-
-export const setAccessPolicy = createFormAction(
-  'waldur/marketplace/offering/SET_ACCESS_POLICY',
-);
-
-export const updateOfferingLogo = createFormAction(
-  'waldur/marketplace/offering/UPDATE_OFFERING_LOGO',
-);

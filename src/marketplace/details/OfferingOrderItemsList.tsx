@@ -7,7 +7,6 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { OrderItemActionsCell } from '@waldur/marketplace/orders/item/list/OrderItemActionsCell';
-import { OrderItemslistTablePlaceholder } from '@waldur/marketplace/orders/item/list/OrderItemsListPlaceholder';
 import { OrderItemStateCell } from '@waldur/marketplace/orders/item/list/OrderItemStateCell';
 import { OrderItemTypeCell } from '@waldur/marketplace/orders/item/list/OrderItemTypeCell';
 import { ResourceNameField } from '@waldur/marketplace/orders/item/list/ResourceNameField';
@@ -65,7 +64,6 @@ const OrderItemsTable: FunctionComponent<any> = (props) => {
   return (
     <Table
       {...props}
-      placeholderComponent={<OrderItemslistTablePlaceholder />}
       columns={columns}
       title={translate('Order items')}
       verboseName={translate('Order items')}

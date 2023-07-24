@@ -1,11 +1,8 @@
 import { FC } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
 import { PlanUsageRow } from '@waldur/marketplace/resources/plan-usage/types';
-
-import { PublicOfferingCardTitle } from './PublicOfferingCardTitle';
 
 interface OwnProps {
   plansUsage: PlanUsageRow[];
@@ -31,9 +28,7 @@ const PlanGroup = ({ plan }: { plan: PlanUsageRow }) => (
           <th className="w-50 text-gray-700 fw-bold">
             {translate('Remaining')}:
           </th>
-          <td>
-            <PlanRemainingColumn row={plan} />
-          </td>
+          <td>{plan.remaining === null ? 'N/A' : plan.remaining}</td>
         </tr>
       </tbody>
     </table>
@@ -46,12 +41,7 @@ export const PlanUsageList: FC<OwnProps> = (props) => {
       <Card.Body>
         <div className="d-flex">
           <div className="flex-grow-1">
-            <PublicOfferingCardTitle>
-              {translate('Plans')}
-            </PublicOfferingCardTitle>
-          </div>
-          <div>
-            <Button variant="light">{translate('New plan')}</Button>
+            <h3>{translate('Plans')}</h3>
           </div>
         </div>
         {!props.plansUsage?.length && (
