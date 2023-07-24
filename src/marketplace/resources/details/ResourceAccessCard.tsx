@@ -21,7 +21,7 @@ export const ResourceAccessCard = ({ resource }) => {
     <Card className="mb-7">
       <Card.Header>
         <Card.Title>
-          <h3 className="mb-5">{translate('Access info')}</h3>
+          <h3>{translate('Access info')}</h3>
         </Card.Title>
       </Card.Header>
       <Card.Body>
