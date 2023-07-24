@@ -11,7 +11,7 @@ export const StatusCard = () => {
     <Card className="mb-7">
       <Card.Header>
         <Card.Title>
-          <h3 className="mb-5">{translate('Status page')}</h3>
+          <h3>{translate('Status page')}</h3>
         </Card.Title>
       </Card.Header>
       <Card.Body>

@@ -9,7 +9,7 @@ export const ActivityCard = ({ state, resource }) => (
   <Card className="mb-7">
     <Card.Header>
       <Card.Title>
-        <h3 className="mb-5">{translate('Activity')}</h3>
+        <h3>{translate('Activity')}</h3>
       </Card.Title>
       <div className="card-toolbar">
         <UISref to={state.name} params={{ tab: 'events' }}>
