@@ -36,6 +36,9 @@ const mapPropsToFilter = createSelector(
     if (filters?.state) {
       result.state = filters.state.map((option) => option.value);
     }
+    if (filters?.offering_type) {
+      result.type = filters.offering_type.value;
+    }
     return result;
   },
 );
@@ -50,6 +53,7 @@ export const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> =
         `marketplace-service-providers/${provider.uuid}/offerings`,
       ),
       filter,
+      queryField: 'name',
     });
     const dropdownActions = useOfferingDropdownActions();
 
@@ -85,6 +89,8 @@ export const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> =
         actions={<CreateOfferingButton fetch={tableProps.fetch} />}
         hoverableRow={OfferingViews}
         {...extraTableProps}
+        filters={<ProviderOfferingsFilter />}
+        hasQuery={true}
       />
     );
   };

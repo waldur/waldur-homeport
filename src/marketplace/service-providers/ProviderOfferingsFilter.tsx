@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form';
 
 import { getInitialValues } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
+import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/OfferingTypeAutocomplete';
 import {
   OfferingStateFilter,
   getStates,
@@ -20,9 +21,15 @@ const getFiltersFromParams = (params) => {
 };
 
 const PureProviderOfferingsFilter: FunctionComponent = () => (
-  <TableFilterItem title={translate('State')} name="state">
-    <OfferingStateFilter />
-  </TableFilterItem>
+  <>
+    <TableFilterItem title={translate('State')} name="state">
+      <OfferingStateFilter />
+    </TableFilterItem>
+
+    <TableFilterItem title={translate('Integration type')} name="type">
+      <OfferingTypeAutocomplete />
+    </TableFilterItem>
+  </>
 );
 
 const enhance = reduxForm({
