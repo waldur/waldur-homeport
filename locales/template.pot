@@ -2684,6 +2684,7 @@ msgstr ""
 msgid "Drop files to attach, or"
 msgstr ""
 
+#: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
 #: src/marketplace/offerings/update/integration/TestScriptButton.tsx
 msgid "Dry run script"
 msgstr ""
@@ -8402,6 +8403,10 @@ msgstr ""
 msgid "Score"
 msgstr ""
 
+#: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
+msgid "Script execution result"
+msgstr ""
+
 #: src/marketplace/offerings/update/integration/ScriptIntegrationSummary.tsx
 msgid "Script for creation of a resource"
 msgstr ""
@@ -13215,10 +13220,12 @@ msgstr ""
 msgid "{text} has been copied"
 msgstr ""
 
+#: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
 #: src/marketplace/offerings/update/integration/TestScriptButton.tsx
 msgid "{type} script got an error"
 msgstr ""
 
+#: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
 #: src/marketplace/offerings/update/integration/TestScriptButton.tsx
 msgid "{type} script was executed successfully"
 msgstr ""
