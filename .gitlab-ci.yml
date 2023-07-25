@@ -137,6 +137,7 @@ Publish docker image for next branch:
     - sh docker_push.sh next
 
 Trigger docker image building for develop branch:
+  image: "registry.hpc.ut.ee/mirror/alpine/curl:8.2.0"
   stage: release
   rules:
     - if: '$CI_COMMIT_BRANCH == "next"'
