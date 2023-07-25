@@ -14,7 +14,7 @@ const SCRIPT_ROWS = [
   },
   {
     label: translate('Script for termination of a resource'),
-    type: 'delete',
+    type: 'terminate',
     dry_run: 'Terminate',
   },
   {
