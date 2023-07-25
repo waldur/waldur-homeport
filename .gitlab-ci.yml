@@ -140,9 +140,9 @@ Trigger docker image building for develop branch:
   stage: release
   rules:
     - if: '$CI_COMMIT_BRANCH == "next"'
-  trigger:
-    project: waldur/waldur-homeport
-    branch: develop
+  script:
+    - echo "Project ID ${CI_PROJECT_ID}"
+    - curl -v -X POST -F "token=$CI_JOB_TOKEN" -F "ref=develop" https://code.opennodecloud.com/api/v4/projects/${CI_PROJECT_ID}/trigger/pipeline
 
 Lint docker image:
   extends: .Lint docker image template
