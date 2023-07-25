@@ -136,6 +136,14 @@ Publish docker image for next branch:
   script:
     - sh docker_push.sh next
 
+Trigger docker image building for develop branch:
+  stage: release
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "next"'
+  trigger:
+    project: waldur/waldur-homeport
+    branch: develop
+
 Lint docker image:
   extends: .Lint docker image template
   variables:
