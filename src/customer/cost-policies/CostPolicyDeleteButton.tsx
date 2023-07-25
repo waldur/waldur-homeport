@@ -13,7 +13,13 @@ export const CostPolicyDeleteButton = ({ row, refetch }) => {
       await waitForConfirmation(
         dispatch,
         translate('Confirmation'),
-        translate('Are you sure you want to delete the cost policy?'),
+        <>
+          {translate(
+            'Are you sure you want to delete the cost policy for project ',
+          )}
+          <strong>{row.project_name}</strong>
+          {'?'}
+        </>,
       );
     } catch {
       return;
