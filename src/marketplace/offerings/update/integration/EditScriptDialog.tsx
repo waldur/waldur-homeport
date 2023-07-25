@@ -76,6 +76,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
         ? props.resolve.offering.plans[0].url
         : null;
       await props.handleSubmit(update)();
+      props.reset(); // "Clean" the form after saving new changes
       try {
         const response: any = await runOfferingScript(
           props.resolve.offering.uuid,
