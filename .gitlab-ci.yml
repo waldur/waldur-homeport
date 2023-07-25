@@ -144,6 +144,7 @@ Trigger docker image building for develop branch:
   script:
     - echo "Project ID ${CI_PROJECT_ID}"
     - curl -v -X POST -F "token=$CI_JOB_TOKEN" -F "ref=develop" https://code.opennodecloud.com/api/v4/projects/${CI_PROJECT_ID}/trigger/pipeline
+  before_script: []
 
 Lint docker image:
   extends: .Lint docker image template
