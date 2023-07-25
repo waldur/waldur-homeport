@@ -112,7 +112,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
             className="btn btn-secondary"
             onClick={handleSaveAndRunScriptButtonClick}
           >
-            {translate('Dry run script')}
+            {translate('Save & dry run script')}
           </button>
         </Modal.Header>
         <Modal.Body>
