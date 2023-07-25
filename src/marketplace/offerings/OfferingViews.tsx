@@ -1,11 +1,12 @@
 import { UISref, useCurrentStateAndParams } from '@uirouter/react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ACTIVE, PAUSED } from './store/constants';
 
@@ -17,6 +18,7 @@ const PreviewOfferingDialog = lazyComponent(
 export const OfferingViews = ({ row }) => {
   const dispatch = useDispatch();
   const { state } = useCurrentStateAndParams();
+  const customer = useSelector(getCustomer);
   return (
     <DropdownButton title={translate('Actions')} className="me-3">
       <UISref
@@ -25,7 +27,10 @@ export const OfferingViews = ({ row }) => {
             ? 'admin.marketplace-offering-update'
             : 'marketplace-offering-update'
         }
-        params={{ offering_uuid: row.uuid, uuid: row.customer_uuid }}
+        params={{
+          offering_uuid: row.uuid,
+          uuid: row.customer_uuid || customer.uuid,
+        }}
       >
         <Dropdown.Item>{translate('Edit')}</Dropdown.Item>
       </UISref>
