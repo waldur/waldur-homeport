@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
@@ -13,13 +13,11 @@ export const CostPolicyDeleteButton = ({ row, refetch }) => {
       await waitForConfirmation(
         dispatch,
         translate('Confirmation'),
-        <>
-          {translate(
-            'Are you sure you want to delete the cost policy for project ',
-          )}
-          <strong>{row.project_name}</strong>
-          {'?'}
-        </>,
+        translate(
+          'Are you sure you want to delete the cost policy for project {name}?',
+          { name: <strong>{row.project_name}</strong> },
+          formatJsxTemplate,
+        ),
       );
     } catch {
       return;
