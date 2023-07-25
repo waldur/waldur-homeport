@@ -1,17 +1,19 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { Col, Modal, Row } from 'react-bootstrap';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { Field, formValueSelector, reduxForm } from 'redux-form';
+import { connect, useDispatch } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 
 import { SubmitButton, SelectField } from '@waldur/form';
 import { MonacoField } from '@waldur/form/MonacoField';
 import { translate } from '@waldur/i18n';
-import { updateProviderOfferingSecretOptions } from '@waldur/marketplace/common/api';
+import {
+  runOfferingScript,
+  updateProviderOfferingSecretOptions,
+} from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { EDIT_SCRIPT_FORM_ID } from './constants';
-import { TestScriptButton } from './TestScriptButton';
 import { ScriptEditorProps } from './types';
 
 type OwnProps = { resolve: ScriptEditorProps };
@@ -27,9 +29,6 @@ const PROGRAMMING_LANGUAGE_CHOICES = [
   },
 ];
 
-const scriptSelector = (state) =>
-  formValueSelector(EDIT_SCRIPT_FORM_ID)(state, 'script');
-
 export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
   initialValues: {
     script: ownProps.resolve.offering.secret_options[ownProps.resolve.type],
@@ -39,6 +38,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
     form: EDIT_SCRIPT_FORM_ID,
   })((props) => {
     const dispatch = useDispatch();
+    const [scriptExecutionResult, setScriptExecutionResult] = useState('');
     const update = useCallback(
       async (formData) => {
         try {
@@ -57,7 +57,6 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
           if (props.resolve.refetch) {
             await props.resolve.refetch();
           }
-          dispatch(closeModalDialog());
         } catch (error) {
           dispatch(
             showErrorResponse(error, translate('Unable to update script.')),
@@ -66,11 +65,55 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
       },
       [dispatch],
     );
-    const value = useSelector(scriptSelector);
+
+    const handleSaveButtonClick = () => {
+      props.handleSubmit(update)();
+      dispatch(closeModalDialog());
+    };
+
+    const handleSaveAndRunScriptButtonClick = async () => {
+      const planUrl = props.resolve.offering?.plans?.length
+        ? props.resolve.offering.plans[0].url
+        : null;
+      await props.handleSubmit(update)();
+      try {
+        const response: any = await runOfferingScript(
+          props.resolve.offering.uuid,
+          planUrl,
+          props.resolve.dry_run,
+        );
+
+        setScriptExecutionResult(response.data.output);
+        dispatch(
+          showSuccess(
+            translate('{type} script was executed successfully', {
+              type: props.resolve.dry_run,
+            }),
+          ),
+        );
+      } catch (e) {
+        dispatch(
+          showErrorResponse(
+            e,
+            translate('{type} script got an error', {
+              type: props.resolve.dry_run,
+            }),
+          ),
+        );
+      }
+    };
+
     return (
-      <form onSubmit={props.handleSubmit(update)}>
+      <form>
         <Modal.Header>
           <Modal.Title>{props.resolve.label}</Modal.Title>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={handleSaveAndRunScriptButtonClick}
+          >
+            {translate('Dry run script')}
+          </button>
         </Modal.Header>
         <Modal.Body>
           {props.resolve.type === 'language' ? (
@@ -97,11 +140,15 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
                   mode={props.resolve.offering.secret_options.language}
                   component={MonacoField}
                 />
-                <TestScriptButton
-                  type={props.resolve.dry_run}
-                  disabled={!value}
-                  offering={props.resolve.offering}
-                />
+
+                {scriptExecutionResult && (
+                  <div className="mt-4">
+                    <h4>{translate('Script execution result')}</h4>
+                    <hr />
+                    <pre>{scriptExecutionResult}</pre>
+                    <hr />
+                  </div>
+                )}
               </Col>
             </Row>
           )}
@@ -111,6 +158,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
             disabled={props.invalid}
             submitting={props.submitting}
             label={translate('Save')}
+            onClick={handleSaveButtonClick}
           />
         </Modal.Footer>
       </form>
