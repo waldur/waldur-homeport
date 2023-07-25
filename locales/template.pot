@@ -2684,11 +2684,6 @@ msgstr ""
 msgid "Drop files to attach, or"
 msgstr ""
 
-#: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
-#: src/marketplace/offerings/update/integration/TestScriptButton.tsx
-msgid "Dry run script"
-msgstr ""
-
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -8356,6 +8351,10 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
+msgid "Save & dry run script"
+msgstr ""
+
 #: src/notifications/NotificationFooter.tsx
 msgid "Save as draft"
 msgstr ""
@@ -8420,7 +8419,7 @@ msgid "Script for termination of a resource"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/ScriptIntegrationSummary.tsx
-msgid "Script for updating a resource on plan change"
+msgid "Script for updating a resource on plan or limit change"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
@@ -13221,12 +13220,10 @@ msgid "{text} has been copied"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
-#: src/marketplace/offerings/update/integration/TestScriptButton.tsx
 msgid "{type} script got an error"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
-#: src/marketplace/offerings/update/integration/TestScriptButton.tsx
 msgid "{type} script was executed successfully"
 msgstr ""
 

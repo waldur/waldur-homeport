@@ -18,7 +18,7 @@ const SCRIPT_ROWS = [
     dry_run: 'Terminate',
   },
   {
-    label: translate('Script for updating a resource on plan change'),
+    label: translate('Script for updating a resource on plan or limit change'),
     type: 'update',
     dry_run: 'Update',
   },
