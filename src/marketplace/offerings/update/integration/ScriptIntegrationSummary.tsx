@@ -2,6 +2,7 @@ import { Card, Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
+import { EditIntegrationButton } from './EditIntegrationButton';
 import { EditScriptButton } from './EditScriptButton';
 import { EditVarsButton } from './EditVarsButton';
 
@@ -44,6 +45,7 @@ export const ScriptIntegrationSummary = ({ offering, refetch }) => (
       </div>
       <div className="card-toolbar">
         <EditVarsButton offering={offering} refetch={refetch} />
+        <EditIntegrationButton offering={offering} refetch={refetch} />
       </div>
     </div>
     <Card.Body>

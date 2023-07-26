@@ -3,22 +3,15 @@ import { Card } from 'react-bootstrap';
 import { translate } from '@waldur/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 import {
-  getAttributes,
-  getOptionsSummary,
   getPluginOptionsForm,
-  getProviderType,
   getSecretOptionsForm,
 } from '@waldur/marketplace/common/registry';
-import { AttributesTable } from '@waldur/marketplace/details/attributes/AttributesTable';
-import { Section } from '@waldur/marketplace/types';
-import {
-  getSerializer,
-  getServiceSettingsForm,
-} from '@waldur/providers/registry';
+import { getServiceSettingsForm } from '@waldur/providers/registry';
 
 import { EditIntegrationButton } from './EditIntegrationButton';
 import { EditSchedulesButton } from './EditSchedulesButton';
 import { GoogleCalendarActions } from './GoogleCalendarActions';
+import { OfferingAttributes } from './OfferingAttributes';
 import { RemoteActions } from './RemoteActions';
 import { ScriptIntegrationSummary } from './ScriptIntegrationSummary';
 
@@ -31,16 +24,6 @@ export const IntegrationSection = (props) => {
       />
     );
   }
-  const OptionsSummary = getOptionsSummary(props.offering.type);
-
-  const section: Section = {
-    key: 'management',
-    title: translate('Management'),
-    attributes: [...getAttributes(props.offering.type), ...OptionsSummary],
-  };
-  const providerType = getProviderType(props.offering.type);
-  const serializer = getSerializer(providerType);
-  const attributes = props.provider ? serializer(props.provider.options) : {};
 
   const ServiceSettingsForm = getServiceSettingsForm(props.offering.type);
   const SecretOptionsForm = getSecretOptionsForm(props.offering.type);
@@ -66,16 +49,10 @@ export const IntegrationSection = (props) => {
         </div>
       </div>
       <Card.Body>
-        {attributes && (
-          <AttributesTable
-            attributes={{
-              ...attributes,
-              ...props.offering.plugin_options,
-              ...props.offering.secret_options,
-            }}
-            sections={[section]}
-          />
-        )}
+        <OfferingAttributes
+          offering={props.offering}
+          provider={props.provider}
+        />
       </Card.Body>
     </Card>
   );

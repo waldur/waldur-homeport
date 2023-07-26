@@ -15,14 +15,14 @@ const EditIntegrationDialog = lazyComponent(
 
 export const EditIntegrationButton: FunctionComponent<{
   offering;
-  provider;
+  provider?;
   refetch;
-}> = ({ offering, provider, refetch }) => {
+}> = (props) => {
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
       openModalDialog(EditIntegrationDialog, {
-        resolve: { offering, provider, refetch },
+        resolve: props,
         size: 'lg',
         formId: EDIT_INTEGRATION_FORM_ID,
       }),
@@ -30,7 +30,7 @@ export const EditIntegrationButton: FunctionComponent<{
   };
   return (
     <Button onClick={callback} size="sm" variant="light" className="me-3">
-      <i className="fa fa-pencil"></i> {translate('Edit')}
+      <i className="fa fa-pencil"></i> {translate('Edit integration options')}
     </Button>
   );
 };

@@ -14,8 +14,6 @@ export const PUBLIC_OFFERINGS_FILTER_FORM_ID = 'OfferingsFilter';
 
 export const IMAGES_TABLE_NAME = 'marketplace-offering-images';
 
-export const FORM_ID = 'marketplaceOfferingCreate';
-
 export const OFFERING_IMAGES_FORM_ID = 'marketplaceOfferingImages';
 
 export const GOOGLE_CALENDAR_SYNC = 'GoogleCalendarSync';
