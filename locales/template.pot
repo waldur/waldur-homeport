@@ -175,6 +175,7 @@ msgid "Accounting type"
 msgstr ""
 
 #: src/customer/cost-policies/CostPoliciesList.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
 #: src/resource/actions/AsyncActionItem.tsx
 msgid "Action"
 msgstr ""
@@ -766,7 +767,7 @@ msgid "Are you sure you want to delete option {name}?"
 msgstr ""
 
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
-msgid "Are you sure you want to delete the cost policy?"
+msgid "Are you sure you want to delete the cost policy for project {name}?"
 msgstr ""
 
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
@@ -1105,7 +1106,6 @@ msgid "Billed yearly (20% discount)"
 msgstr ""
 
 #: src/invoices/routes.ts
-#: src/project/ProjectDashboard.tsx
 msgid "Billing"
 msgstr ""
 
@@ -2045,7 +2045,6 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 #: src/notifications/NotificationList.tsx
-#: src/project/ProjectOrderItemsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
@@ -3000,6 +2999,7 @@ msgstr ""
 #: src/administration/dashboard/AdministrationProfile.tsx
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Error"
 msgstr ""
 
@@ -3282,6 +3282,7 @@ msgstr ""
 
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Fetching..."
 msgstr ""
 
@@ -3648,6 +3649,7 @@ msgid "HPA"
 msgstr ""
 
 #: src/customer/cost-policies/CostPoliciesList.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Has fired"
 msgstr ""
 
@@ -4006,6 +4008,7 @@ msgid "Integration"
 msgstr ""
 
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
+#: src/marketplace/service-providers/ProviderOfferingsFilter.tsx
 msgid "Integration type"
 msgstr ""
 
@@ -4462,12 +4465,14 @@ msgstr ""
 
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Load more"
 msgstr ""
 
 #: src/customer/list/TotalCostComponent.tsx
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
 #: src/project/ProjectEventsTimeline.tsx
 #: src/providers/dashboard/ProviderActionLogs.tsx
 msgid "Loading"
@@ -4487,6 +4492,7 @@ msgstr ""
 
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/marketplace/resources/details/ResourcesList.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Loading more..."
 msgstr ""
 
@@ -4606,6 +4612,10 @@ msgstr ""
 
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 msgid "Manage organizations"
+msgstr ""
+
+#: src/project/ProjectDashboardCostLimits.tsx
+msgid "Manage policies"
 msgstr ""
 
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
@@ -5199,6 +5209,7 @@ msgstr ""
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
@@ -5527,7 +5538,6 @@ msgstr ""
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/project/ProjectOrderItemsList.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -6483,7 +6493,6 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
-#: src/project/ProjectOrderItemsList.tsx
 msgid "Plan"
 msgstr ""
 
@@ -6697,6 +6706,8 @@ msgstr ""
 
 #: src/openstack/openstack-server-groups/ServerGroupsList.tsx
 #: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
+#: src/project/utils.ts
 msgid "Policy"
 msgstr ""
 
@@ -6942,6 +6953,10 @@ msgstr ""
 
 #: src/project/ProjectTablePlaceholder.tsx
 msgid "Project aggregates and isolates teams and resources."
+msgstr ""
+
+#: src/project/ProjectDashboardCostLimits.tsx
+msgid "Project cost"
 msgstr ""
 
 #: src/project/effects.ts
@@ -9407,7 +9422,6 @@ msgstr ""
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
-#: src/project/ProjectOrderItemsList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
@@ -10162,6 +10176,10 @@ msgstr ""
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
+#: src/project/ProjectDashboardCostPolicies.tsx
+msgid "Threshold"
+msgstr ""
+
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 msgid "Thumbnail"
 msgstr ""
@@ -10347,7 +10365,6 @@ msgstr ""
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/project/ProjectEventsFilter.tsx
-#: src/project/ProjectOrderItemsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Type"
@@ -12350,6 +12367,7 @@ msgstr ""
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
 #: src/project/ProjectRemoveDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx

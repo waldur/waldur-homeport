@@ -4,6 +4,7 @@ import { useAsync } from 'react-use';
 
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { CostPolicy } from '@waldur/customer/cost-policies/types';
 import { translate } from '@waldur/i18n';
 import { Project } from '@waldur/workspace/types';
 
@@ -11,13 +12,14 @@ import { loadChart } from './utils';
 
 interface ProjectDashboardProps {
   project: Project;
+  costPolicies: CostPolicy[];
 }
 
 export const ProjectDashboardChart: FunctionComponent<ProjectDashboardProps> =
-  ({ project }) => {
+  ({ project, costPolicies }) => {
     const { loading, error, value } = useAsync(
-      () => loadChart(project),
-      [project],
+      () => loadChart(project, costPolicies),
+      [project, costPolicies],
     );
     if (loading) {
       return <LoadingSpinner />;

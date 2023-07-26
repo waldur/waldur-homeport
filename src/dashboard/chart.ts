@@ -1,8 +1,16 @@
 import { translate } from '@waldur/i18n';
 
 type Value = string | number;
+interface HLine {
+  label: string;
+  value: number;
+}
 
-export const getScopeChartOptions = (dates: string[], values: Value[]) => ({
+export const getScopeChartOptions = (
+  dates: string[],
+  values: Value[],
+  hLines?: HLine[],
+) => ({
   tooltip: {
     trigger: 'axis',
     formatter: '{b}',
@@ -25,6 +33,31 @@ export const getScopeChartOptions = (dates: string[], values: Value[]) => ({
     {
       type: 'line',
       data: values,
+      markLine: !hLines?.length
+        ? undefined
+        : {
+            data: hLines.map((line) => [
+              {
+                label: {
+                  normal: {
+                    show: false,
+                    position: 'middle',
+                    formatter: line.label,
+                  },
+                  emphasis: { show: true },
+                },
+                lineStyle: { normal: { type: 'solid', color: '#0072ff' } },
+                yAxis: line.value,
+                x: '0%',
+                symbol: 'none',
+              },
+              {
+                yAxis: line.value,
+                x: '100%',
+                symbol: 'none',
+              },
+            ]),
+          },
     },
   ],
 });
