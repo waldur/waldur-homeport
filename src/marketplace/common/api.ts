@@ -513,3 +513,11 @@ export const updateOfferingUser = (provider_uuid, user_uuid, username) =>
     `/marketplace-service-providers/${provider_uuid}/set_offerings_username/`,
     { user_uuid, username },
   );
+
+export const createOfferingEndpoint = (offeringId, endpoint) =>
+  post(`/marketplace-provider-offerings/${offeringId}/add_endpoint/`, endpoint);
+
+export const deleteOfferingEndpoint = (offeringId, endpointId) =>
+  post(`/marketplace-provider-offerings/${offeringId}/delete_endpoint/`, {
+    uuid: endpointId,
+  });

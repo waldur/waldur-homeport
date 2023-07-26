@@ -45,12 +45,6 @@ const attributes: Attribute[] = [
     type: 'string',
     maxLength: 200,
   },
-  {
-    key: 'access_url',
-    title: translate('Access console link'),
-    type: 'string',
-    maxLength: 200,
-  },
 ];
 
 export const OverviewSection = (props) => {
