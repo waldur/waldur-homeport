@@ -424,18 +424,6 @@ export const updateProviderOfferingDescription = (offeringId, category) =>
     category,
   });
 
-export const updateProviderOfferingConfirmationMessage = (
-  offeringUuid,
-  template_confirmation_comment,
-  secretOptions,
-) =>
-  patch(`/marketplace-provider-offerings/${offeringUuid}/`, {
-    secret_options: {
-      ...secretOptions,
-      template_confirmation_comment,
-    },
-  });
-
 export const runOfferingScript = (
   offeringUuid: string,
   plan: string,

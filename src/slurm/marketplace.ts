@@ -9,14 +9,14 @@ const AllocationForm = lazyComponent(
   'AllocationForm',
 );
 
-const SLURMPluginOptionsForm = lazyComponent(
-  () => import('./SLURMPluginOptionsForm'),
-  'SLURMPluginOptionsForm',
+const UserPluginOptionsForm = lazyComponent(
+  () => import('@waldur/marketplace/UserPluginOptionsForm'),
+  'UserPluginOptionsForm',
 );
 
-const SLURMSecretOptionsForm = lazyComponent(
-  () => import('./SLURMSecretOptionsForm'),
-  'SLURMSecretOptionsForm',
+const UserSecretOptionsForm = lazyComponent(
+  () => import('@waldur/marketplace/UserSecretOptionsForm'),
+  'UserSecretOptionsForm',
 );
 
 const ServiceSettingsAttributes = (): Attribute[] => [
@@ -69,8 +69,8 @@ registerOfferingType({
     return translate('SLURM remote allocation');
   },
   component: AllocationForm,
-  pluginOptionsForm: SLURMPluginOptionsForm,
-  secretOptionsForm: SLURMSecretOptionsForm,
+  pluginOptionsForm: UserPluginOptionsForm,
+  secretOptionsForm: UserSecretOptionsForm,
   providerType: 'SLURM remote',
   attributes: (): Attribute[] => [],
   allowToUpdateService: true,

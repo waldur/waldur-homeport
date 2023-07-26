@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
-import { FormSection, reduxForm } from 'redux-form';
+import { FormSection, reduxForm, Field } from 'redux-form';
 
 import { patch } from '@waldur/core/api';
 import { FormContainer, StringField, SubmitButton } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { updateProviderOffering } from '@waldur/marketplace/common/api';
 import {
@@ -77,19 +78,29 @@ export const EditIntegrationDialog = connect(
                 <ServiceSettingsForm />
               </FormSection>
             ) : null}
-            {SecretOptionsForm ? (
+            {SecretOptionsForm && (
               <FormSection name="secret_options">
                 <SecretOptionsForm offering={props.resolve.offering} />
               </FormSection>
-            ) : null}
+            )}
             {showBackendId(props.resolve.offering.type) && (
               <StringField name="backend_id" label={translate('Backend ID')} />
             )}
-            {PluginOptionsForm && (
-              <FormSection name="plugin_options">
-                <PluginOptionsForm />
-              </FormSection>
-            )}
+            <FormSection name="plugin_options">
+              {PluginOptionsForm && (
+                <>
+                  <Field
+                    name="auto_approve_in_service_provider_projects"
+                    component={AwesomeCheckboxField}
+                    className="mt-3"
+                    label={translate(
+                      'Auto approve in service provider projects',
+                    )}
+                  />
+                  <PluginOptionsForm />
+                </>
+              )}
+            </FormSection>
           </FormContainer>
         </Modal.Body>
         <Modal.Footer>

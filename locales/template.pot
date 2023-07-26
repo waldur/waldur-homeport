@@ -590,14 +590,8 @@ msgstr ""
 msgid "Allow bookings to be scheduled at weekends"
 msgstr ""
 
-#: src/support/marketplace.ts
+#: src/marketplace/offerings/update/integration/OfferingAttributes.tsx
 msgid "Allow service provider to create offering users"
-msgstr ""
-
-#: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
-#: src/marketplace-remote/marketplace.ts
-#: src/support/OfferingPluginSecretOptionsForm.tsx
-msgid "Allow service provider to create offering users."
 msgstr ""
 
 #: src/marketplace/offerings/update/components/ComponentBooleanLimitField.tsx
@@ -634,7 +628,7 @@ msgstr ""
 msgid "Annotations"
 msgstr ""
 
-#: src/slurm/SLURMPluginOptionsForm.tsx
+#: src/marketplace/UserPluginOptionsForm.tsx
 msgid "Anonymized"
 msgstr ""
 
@@ -946,8 +940,8 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: src/support/OfferingPluginOptionsForm.tsx
-#: src/support/marketplace.ts
+#: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
+#: src/marketplace/offerings/update/integration/OfferingAttributes.tsx
 msgid "Auto approve in service provider projects"
 msgstr ""
 
@@ -1702,8 +1696,6 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
-#: src/marketplace-remote/marketplace.ts
 #: src/support/OfferingPluginSecretOptionsForm.tsx
 #: src/support/marketplace.ts
 msgid "Confirmation notification template"
@@ -2716,7 +2708,6 @@ msgstr ""
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
 #: src/marketplace/offerings/update/attributes/EditAttributeButton.tsx
 #: src/marketplace/offerings/update/components/EditComponentButton.tsx
-#: src/marketplace/offerings/update/integration/EditIntegrationButton.tsx
 #: src/marketplace/offerings/update/integration/EditScriptButton.tsx
 #: src/marketplace/offerings/update/options/EditOptionButton.tsx
 #: src/marketplace/offerings/update/overview/EditOverviewButton.tsx
@@ -2775,6 +2766,10 @@ msgstr ""
 #: src/marketplace/offerings/update/integration/EditVarsButton.tsx
 #: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
 msgid "Edit environment variables"
+msgstr ""
+
+#: src/marketplace/offerings/update/integration/EditIntegrationButton.tsx
+msgid "Edit integration options"
 msgstr ""
 
 #: src/invoices/details/InvoiceItemUpdate.tsx
@@ -3453,7 +3448,7 @@ msgstr ""
 msgid "Force destroy {name} instance"
 msgstr ""
 
-#: src/slurm/SLURMPluginOptionsForm.tsx
+#: src/marketplace/UserPluginOptionsForm.tsx
 #: src/user/support/UserDetailsTable.tsx
 msgid "FreeIPA"
 msgstr ""
@@ -3472,8 +3467,8 @@ msgid "Full description"
 msgstr ""
 
 #: src/invitations/actions/UserDetailsGroup.tsx
+#: src/marketplace/UserPluginOptionsForm.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
-#: src/slurm/SLURMPluginOptionsForm.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserList.tsx
 msgid "Full name"
@@ -3796,7 +3791,7 @@ msgstr ""
 msgid "Identity provider"
 msgstr ""
 
-#: src/slurm/SLURMSecretOptionsForm.tsx
+#: src/marketplace/UserSecretOptionsForm.tsx
 msgid "If defined, will be set as a password for all offering users"
 msgstr ""
 
@@ -3926,7 +3921,7 @@ msgstr ""
 msgid "Ingress"
 msgstr ""
 
-#: src/slurm/SLURMPluginOptionsForm.tsx
+#: src/marketplace/UserPluginOptionsForm.tsx
 msgid "Initial UID number"
 msgstr ""
 
@@ -3940,7 +3935,7 @@ msgstr ""
 msgid "Initial admin username"
 msgstr ""
 
-#: src/slurm/SLURMPluginOptionsForm.tsx
+#: src/marketplace/UserPluginOptionsForm.tsx
 msgid "Initial primary group number"
 msgstr ""
 
@@ -4626,7 +4621,7 @@ msgstr ""
 msgid "Manage security groups"
 msgstr ""
 
-#: src/marketplace/offerings/update/integration/IntegrationSection.tsx
+#: src/marketplace/offerings/update/integration/OfferingAttributes.tsx
 msgid "Management"
 msgstr ""
 
@@ -8889,6 +8884,7 @@ msgstr ""
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/map/LeafletMap.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
+#: src/marketplace/UserPluginOptionsForm.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/orders/item/list/OrderItemsFilter.tsx
@@ -8899,7 +8895,6 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/providers/dashboard/ProviderProfile.tsx
-#: src/slurm/SLURMPluginOptionsForm.tsx
 msgid "Service provider"
 msgstr ""
 
@@ -8912,7 +8907,7 @@ msgstr ""
 msgid "Service provider can charge for usage of the following components"
 msgstr ""
 
-#: src/slurm/SLURMSecretOptionsForm.tsx
+#: src/marketplace/UserSecretOptionsForm.tsx
 msgid "Service provider can create offering user"
 msgstr ""
 
@@ -9051,7 +9046,7 @@ msgstr ""
 msgid "Shared providers"
 msgstr ""
 
-#: src/slurm/SLURMSecretOptionsForm.tsx
+#: src/marketplace/UserSecretOptionsForm.tsx
 msgid "Shared user password"
 msgstr ""
 
@@ -11998,11 +11993,11 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: src/slurm/SLURMPluginOptionsForm.tsx
+#: src/marketplace/UserPluginOptionsForm.tsx
 msgid "Username anonymized prefix"
 msgstr ""
 
-#: src/slurm/SLURMPluginOptionsForm.tsx
+#: src/marketplace/UserPluginOptionsForm.tsx
 msgid "Username generation policy"
 msgstr ""
 
@@ -12280,11 +12275,11 @@ msgstr ""
 msgid "Waiting for support"
 msgstr ""
 
-#: src/slurm/SLURMPluginOptionsForm.tsx
+#: src/marketplace/UserPluginOptionsForm.tsx
 msgid "Waldur username"
 msgstr ""
 
-#: src/slurm/SLURMPluginOptionsForm.tsx
+#: src/marketplace/UserPluginOptionsForm.tsx
 msgid "Warning: Service provider option will clear all usernames of the existing offering users"
 msgstr ""
 

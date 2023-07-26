@@ -13,16 +13,6 @@ const RemoteOfferingSecretOptions = lazyComponent(
 
 const RemoteOfferingOptionsSummary = (): Attribute[] => [
   {
-    key: 'template_confirmation_comment',
-    title: translate('Confirmation notification template'),
-    type: 'string',
-  },
-  {
-    key: 'service_provider_can_create_offering_user',
-    title: translate('Allow service provider to create offering users.'),
-    type: 'boolean',
-  },
-  {
     key: 'api_url',
     title: translate('API URL'),
     type: 'string',

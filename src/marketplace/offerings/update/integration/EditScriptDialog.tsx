@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Col, Modal, Row } from 'react-bootstrap';
+import { Button, Col, Modal, Row } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
@@ -108,13 +108,14 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
       <form>
         <Modal.Header>
           <Modal.Title>{props.resolve.label}</Modal.Title>
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={handleSaveAndRunScriptButtonClick}
-          >
-            {translate('Save & dry run script')}
-          </button>
+          {props.resolve.type !== 'language' && (
+            <Button
+              variant="secondary"
+              onClick={handleSaveAndRunScriptButtonClick}
+            >
+              {translate('Save & dry run script')}
+            </Button>
+          )}
         </Modal.Header>
         <Modal.Body>
           {props.resolve.type === 'language' ? (
