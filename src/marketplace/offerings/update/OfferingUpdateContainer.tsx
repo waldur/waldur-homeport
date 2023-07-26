@@ -21,6 +21,7 @@ import { PreviewButton } from '../PreviewButton';
 
 import { AttributesSection } from './attributes/AttributesSection';
 import { ComponentsSection } from './components/ComponentsSection';
+import { OfferingEndpointsSection } from './endpoints/OfferingEndpointsSection';
 import { IntegrationSection } from './integration/IntegrationSection';
 import { OfferingOptionsSection } from './options/OfferingOptionsSection';
 import { OverviewSection } from './overview/OverviewSection';
@@ -133,6 +134,8 @@ export const OfferingUpdateContainer = () => {
           provider={data.provider}
           refetch={refetch}
         />
+
+        <OfferingEndpointsSection offering={data.offering} refetch={refetch} />
 
         <OfferingOptionsSection offering={data.offering} refetch={refetch} />
 
