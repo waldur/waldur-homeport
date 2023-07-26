@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 
 import { parseDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { CostPolicy } from '@waldur/customer/cost-policies/types';
 import { DateValuePair, padMissingValues } from '@waldur/dashboard/api';
 import { getScopeChartOptions } from '@waldur/dashboard/chart';
 import { Chart } from '@waldur/dashboard/types';
@@ -56,7 +57,7 @@ export const formatCostChart = (
   };
 };
 
-export async function loadChart(project: Project) {
+export async function loadChart(project: Project, costPolicies: CostPolicy[]) {
   const invoices = await fetchLast12MonthProjectCosts(project.uuid);
   const chart = formatCostChart(invoices, 12);
   return {
@@ -64,6 +65,12 @@ export async function loadChart(project: Project) {
     options: getScopeChartOptions(
       chart.data.map((item) => item.label),
       chart.data.map((item) => item.value),
+      costPolicies.map((item, i) => ({
+        label: `${translate('Policy')}  #${i + 1} (${defaultCurrency(
+          item.limit_cost,
+        )})`,
+        value: item.limit_cost,
+      })),
     ),
   };
 }
