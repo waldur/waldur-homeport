@@ -1,30 +1,60 @@
-import { FC } from 'react';
+import copy from 'copy-to-clipboard';
+import { FC, useCallback } from 'react';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { showSuccess } from '@waldur/store/notify';
 
+interface Endpoint {
+  name: string;
+  url: string;
+}
 interface ResourceAccessButtonProps {
   resource: {
-    access_url?: string;
+    endpoints?: Endpoint[];
+  };
+  offering: {
+    endpoints?: Endpoint[];
   };
 }
 
 export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
   resource,
+  offering,
 }) => {
-  if (
-    typeof resource.access_url === 'string' &&
-    resource.access_url.startsWith('http')
-  ) {
-    return (
-      <a
-        className="btn btn-success"
-        href={resource.access_url}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {translate('Access')}
-      </a>
-    );
+  const dispatch = useDispatch();
+
+  const copyText = useCallback(
+    (value) => {
+      copy(value);
+      dispatch(showSuccess(translate('Text has been copied')));
+    },
+    [dispatch],
+  );
+
+  const endpoints = [...resource.endpoints, ...offering.endpoints];
+  if (endpoints.length === 0) {
+    return null;
   }
-  return null;
+  return (
+    <DropdownButton
+      title={translate('Access resource')}
+      className="me-3"
+      variant="primary"
+    >
+      {endpoints.map((endpoint, index) => (
+        <Dropdown.Item
+          key={index}
+          className="d-flex"
+          onClick={() => copyText(endpoint.url)}
+        >
+          <div className="flex-grow-1">{endpoint.name || endpoint.url}</div>
+          <div>
+            <i className="fa fa-copy fa-lg" />
+          </div>
+        </Dropdown.Item>
+      ))}
+    </DropdownButton>
+  );
 };

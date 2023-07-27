@@ -29,7 +29,6 @@ import { TenantMainComponent } from './openstack-tenant/TenantMainComponent';
 import { VolumeMainComponent } from './openstack-volume/VolumeMainComponent';
 import { QuickActions } from './QuickActions';
 import { RefreshButton } from './RefreshButton';
-import { ResourceAccessCard } from './ResourceAccessCard';
 import { ResourceComponents } from './ResourceComponents';
 import { ResourceDetailsHeaderBody } from './ResourceDetailsHeaderBody';
 import { ResourceDetailsHeaderTitle } from './ResourceDetailsHeaderTitle';
@@ -103,8 +102,13 @@ export const ResourceDetailsView: FC<any> = ({
               />
             }
             quickActions={
-              <>
-                <ResourceAccessButton resource={resource} />
+              <div className="d-flex">
+                <div className="flex-grow-1">
+                  <ResourceAccessButton
+                    resource={resource}
+                    offering={offering}
+                  />
+                </div>
                 <div className="d-flex gap-2">
                   <div className="d-flex justify-content-end flex-grow-1 gap-2">
                     {scope && (
@@ -121,7 +125,7 @@ export const ResourceDetailsView: FC<any> = ({
                   <ShowReportAction resource={resource} as={ActionButton} />
                   <RefreshButton refetch={refetch} isLoading={isLoading} />
                 </div>
-              </>
+              </div>
             }
             quickBody={
               resource.offering_type === INSTANCE_TYPE ? (
@@ -155,7 +159,6 @@ export const ResourceDetailsView: FC<any> = ({
                 <UsageCard resource={resource} />
               </Col>
               <Col md={4} sm={12}>
-                <ResourceAccessCard resource={resource} />
                 <StatusCard />
                 <ActivityCard state={state} resource={resource} />
                 <ResourceIssuesCard resource={resource} state={state} />
