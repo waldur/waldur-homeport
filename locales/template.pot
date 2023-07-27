@@ -104,20 +104,7 @@ msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/resource/ResourceAccessButton.tsx
 msgid "Access"
-msgstr ""
-
-#: src/marketplace/resources/details/ResourceAccessCard.tsx
-msgid "Access URL"
-msgstr ""
-
-#: src/marketplace/offerings/update/overview/OverviewSection.tsx
-msgid "Access console link"
-msgstr ""
-
-#: src/marketplace/resources/details/ResourceAccessCard.tsx
-msgid "Access info"
 msgstr ""
 
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
@@ -126,6 +113,10 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
 msgid "Access policy has been updated successfully."
+msgstr ""
+
+#: src/resource/ResourceAccessButton.tsx
+msgid "Access resource"
 msgstr ""
 
 #: src/customer/list/OrganizationDetails.tsx
@@ -318,6 +309,11 @@ msgstr ""
 
 #: src/customer/list/ExportAsEmailDialog.tsx
 msgid "Add email"
+msgstr ""
+
+#: src/marketplace/offerings/update/endpoints/AddEndpointButton.tsx
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
+msgid "Add endpoint"
 msgstr ""
 
 #: src/marketplace/offerings/images/CreateImageButton.tsx
@@ -754,6 +750,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
 msgid "Are you sure you want to delete component {name}?"
+msgstr ""
+
+#: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
+msgid "Are you sure you want to delete endpoint {name}?"
 msgstr ""
 
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
@@ -1688,6 +1688,7 @@ msgstr ""
 #: src/invoices/details/InvoiceItemDelete.tsx
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
+#: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
@@ -1831,6 +1832,7 @@ msgstr ""
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
 #: src/marketplace/offerings/update/components/AddComponentDialog.tsx
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 #: src/marketplace/offerings/update/options/AddOptionDialog.tsx
 #: src/marketplace/offerings/update/plans/AddPlanDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
@@ -2345,6 +2347,7 @@ msgstr ""
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
+#: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -2946,6 +2949,18 @@ msgstr ""
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "End time"
+msgstr ""
+
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
+msgid "Endpoint has been added successfully."
+msgstr ""
+
+#: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
+msgid "Endpoint has been removed."
+msgstr ""
+
+#: src/marketplace/offerings/update/endpoints/OfferingEndpointsSection.tsx
+msgid "Endpoints"
 msgstr ""
 
 #: src/marketplace/offerings/update/components/ComponentMeasuredUnitField.tsx
@@ -4947,6 +4962,7 @@ msgstr ""
 #: src/marketplace/offerings/import/SelectCategoryTab.tsx
 #: src/marketplace/offerings/import/SelectOfferingTab.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/marketplace/offerings/update/plans/PlanForm.tsx
 #: src/marketplace/orders/OrdersList.tsx
@@ -5576,6 +5592,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/components/ComponentsSection.tsx
 msgid "Offering doesn't have components."
+msgstr ""
+
+#: src/marketplace/offerings/update/endpoints/OfferingEndpointsSection.tsx
+msgid "Offering doesn't have endpoints."
 msgstr ""
 
 #: src/marketplace/offerings/images/ImagesListPlaceholder.tsx
@@ -9893,8 +9913,8 @@ msgstr ""
 
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
-#: src/marketplace/resources/details/ResourceAccessCard.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
+#: src/resource/ResourceAccessButton.tsx
 msgid "Text has been copied"
 msgstr ""
 
@@ -10369,6 +10389,7 @@ msgstr ""
 msgid "Type: {type}"
 msgstr ""
 
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 msgid "URL"
 msgstr ""
@@ -10387,6 +10408,10 @@ msgstr ""
 
 #: src/user/support/effects.ts
 msgid "Unable to activate user."
+msgstr ""
+
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
+msgid "Unable to add endpoint."
 msgstr ""
 
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
@@ -11080,6 +11105,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
 msgid "Unable to remove component."
+msgstr ""
+
+#: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
+msgid "Unable to remove endpoint."
 msgstr ""
 
 #: src/user/hooks/HookRemoveButton.tsx
@@ -11972,7 +12001,6 @@ msgstr ""
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/UsernameGroup.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
-#: src/marketplace/resources/details/ResourceAccessCard.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
