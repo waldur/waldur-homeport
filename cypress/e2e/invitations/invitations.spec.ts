@@ -1,12 +1,116 @@
-xdescribe('Invitations', () => {
+interface UserRowFields {
+  index: number;
+  email: string;
+  civilNumber: string;
+  role: [string] | [string, string];
+}
+
+const invitationRequestBodies = {
+  'owner@test.com': {
+    email: 'owner@test.com',
+    extra_invitation_text: 'Testing invite users',
+    customer_role: 'owner',
+  },
+  'manager@test.com': {
+    email: 'manager@test.com',
+    extra_invitation_text: 'Testing invite users',
+    project_role: 'manager',
+    project: '/api/projects/6f3ae6f43d284ca196afeb467880b3b9/',
+  },
+  'administrator@test.com': {
+    email: 'administrator@test.com',
+    extra_invitation_text: 'Testing invite users',
+    project_role: 'admin',
+    project: '/api/projects/df4193e2bee24a4c8e339474d74c5f8c/',
+  },
+};
+
+const fillUserRowFields = ({
+  index,
+  email,
+  civilNumber,
+  role,
+}: UserRowFields) => {
+  cy.get('#emails-list-group table td')
+    .find(`input[name="users[${index}].email"]`)
+    .type(email, { delay: 0, force: true })
+
+    .get('#emails-list-group table td')
+    .find(`input[name="users[${index}].civil_number"]`)
+    .type(civilNumber, { delay: 0, force: true })
+
+    .get('#emails-list-group table td .role-project-select')
+    .eq(index)
+    .scrollIntoView()
+    .should('be.visible')
+    .find('input')
+    .click({ force: true })
+    .get('#emails-list-group table td .menu.role-project-select-popup')
+    .eq(index)
+    .contains(role[0])
+    .click();
+
+  if (role.length === 2) {
+    cy.get('#emails-list-group table td .menu.role-project-select-popup')
+      .eq(index)
+      .find('.sub-select input[name="search"]')
+      .type(role[1], { force: true })
+      .get('#emails-list-group table td .menu.role-project-select-popup')
+      .eq(index)
+      .find('.sub-select .menu-item')
+      .first()
+      .click();
+  }
+};
+
+describe('Invitations', () => {
+  before(() => cy.setToken());
   beforeEach(() => {
-    cy.mockUser()
+    cy.mockCustomers()
+      .mockUser()
       .mockChecklists()
-      .setToken()
+
+      .intercept('HEAD', '/api/customers/?archived=false', { statusCode: 200 })
+      .intercept(
+        'HEAD',
+        '/api/marketplace-orders/?state=requested%20for%20approval&can_approve_as_consumer=True',
+        { statusCode: 200 },
+      )
+
+      .intercept(
+        'HEAD',
+        '/api/marketplace-order-items/?offering_type=Waldur.RemoteOffering&offering_type=Marketplace.Basic&state=executing&can_approve_as_service_provider=True',
+        { statusCode: 200 },
+      )
+
+      .intercept(
+        'HEAD',
+        '/api/marketplace-project-update-requests/?state=pending',
+        { statusCode: 200 },
+      )
 
       .intercept('GET', '/api/customers/6983ac22f2bb469189311ab21e493359/', {
         fixture: 'customers/alice.json',
       })
+      .intercept(
+        'GET',
+        '/api/projects/?customer=6983ac22f2bb469189311ab21e493359',
+        {
+          statusCode: 200,
+        },
+      )
+      .intercept(
+        'GET',
+        '/api/notification-messages-templates/?name=invitation_created',
+        { statusCode: 200 },
+      )
+
+      .intercept(
+        'GET',
+        '/api/marketplace-categories/?field=uuid&field=title&has_offerings=true',
+        { fixture: 'marketplace/categories.json' },
+      )
+
       .intercept('GET', '/api/marketplace-orders/', [])
       .intercept(
         'GET',
@@ -24,14 +128,18 @@ xdescribe('Invitations', () => {
       )
       .intercept(
         'GET',
-        'api/user-invitations/?page=1&page_size=10&state=pending&customer=bf6d515c9e6e445f9c339021b30fc96b',
-        {
-          fixture: 'invitations/pending-customer.json',
-        },
+        '/api/user-invitations/?page=1&page_size=10&state=pending&customer=bf6d515c9e6e445f9c339021b30fc96b',
+        { fixture: 'invitations/pending-customer.json' },
       )
-      .intercept('POST', 'api/user-invitations/', {
+      .intercept(
+        'GET',
+        '/api/user-invitations/?page=1&page_size=10&customer=bf6d515c9e6e445f9c339021b30fc96b',
+        { fixture: 'invitations/pending-customer.json' },
+      )
+      .intercept('POST', '/api/user-invitations/', {
         fixture: 'invitations/user-invitation.json',
       })
+      .as('createInvitation')
       .intercept(
         'GET',
         '/api/user-invitations/?page=1&page_size=10&state=pending&state=rejected&customer=bf6d515c9e6e445f9c339021b30fc96b',
@@ -40,91 +148,127 @@ xdescribe('Invitations', () => {
         },
       )
       .as('pendingRejected')
-      .visit('/organizations/6983ac22f2bb469189311ab21e493359/team/')
-      .get('.loading-title')
-      .should('not.exist')
-      .waitForSpinner()
 
-      .get('#customer-team-tab-invitations')
-      .contains('Invitations')
+      .intercept(
+        'POST',
+        '/api/user-invitations/bf6d515c9e6e445f9c339021b30fc96b/send/',
+        { statusCode: 200 },
+      )
+
+      .intercept(
+        'POST',
+        '/api/user-invitations/bf6d515c9e6e445f9c339021b30fc96b/cancel/',
+        { statusCode: 200 },
+      );
+
+    cy.visit('/organizations/6983ac22f2bb469189311ab21e493359/invitations/', {
+      onBeforeLoad(win) {
+        win.localStorage.setItem('waldur/auth/token', 'valid');
+      },
+    }).waitForPage();
+  });
+
+  it('Allows to invite to users with different roles', () => {
+    cy.get('.card-table button')
+      .contains('Invite user')
+      .click()
+      .get('.invitation-create-dialog')
+      .contains('Invite by email')
+      .should('be.visible');
+
+    // Testing "add" and "remove" user row buttons
+    // Adding 3 more rows
+    cy.get('#emails-list-group')
+      .next()
+      .find('button.btn-icon')
+      .click()
+      .click()
       .click();
-  });
+    // Removing one of them
+    cy.get('#emails-list-group table td')
+      .find('button.btn-icon')
+      .last()
+      .click();
 
-  it('Allows to invite to users as owner', () => {
-    cy.get('button')
-      .contains('Invite user')
-      .click()
-      .get('input[name="email"]')
-      .type('test@test.com');
+    // Filling the fields
+    fillUserRowFields({
+      index: 0,
+      email: invitationRequestBodies['owner@test.com'].email,
+      civilNumber: 'EE34501234215',
+      role: ['Organization owner'],
+    });
+    fillUserRowFields({
+      index: 1,
+      email: invitationRequestBodies['manager@test.com'].email,
+      civilNumber: 'EE35501234215',
+      role: ['Project manager', 'OpenStack'],
+    });
+    fillUserRowFields({
+      index: 2,
+      email: invitationRequestBodies['administrator@test.com'].email,
+      civilNumber: 'EE36501234215',
+      role: ['System administrator', 'Azure'],
+    });
 
-    cy
-      //send invitation step
-      .get('button[type="submit"]')
-      .contains('Invite user')
-      .click()
-
-      //check successful
-      .get('p')
-      .contains('Invitation has been created.');
-  });
-
-  it('Allows to invite to users as Project Manager', () => {
-    cy.get('button')
-      .contains('Invite user')
-      .click()
-      .get('input[name="email"]')
-      .type('test@test.com');
-
-    cy
-      //role selection
-      .get('.fa-users')
-      .click({ force: true })
-      .get('.modal-body div')
-      .contains('Select project')
-      .type('OpenStack Alice project{enter}')
-
-      //send invitation step
-      .get('button[type="submit"]')
-      .contains('Invite user')
+    cy.get('.invitation-create-dialog')
+      // Go to message step
+      .contains('button', 'Continue')
       .click()
 
-      //check successful
-      .get('p')
-      .contains('Invitation has been created.');
-  });
+      .get('.invitation-create-dialog textarea[name="extra_invitation_text"]')
+      .type('Testing invite users')
 
-  it('Allows to invite to users as System administrator', () => {
-    cy.get('button')
-      .contains('Invite user')
+      .get('.invitation-create-dialog')
+      .contains('button', 'Send invitation')
       .click()
-      .get('input[name="email"]')
-      .type('test@test.com');
+      .wait('@createInvitation')
 
-    cy
-      //role selection
-      .get('.fa-server')
-      .click({ force: true })
-      .get('.modal-body div')
-      .contains('Select project')
-      .type('OpenStack Alice project{enter}')
+      .get('.invitation-create-dialog')
+      .contains('Success')
+      .should('be.visible')
 
-      //send invitation step
-      .get('button[type="submit"]')
-      .contains('Invite user')
+      // Check the requests
+      .get('@createInvitation.all')
+      .then((xhrs: any) => {
+        xhrs.forEach((xhr) => {
+          const requestBody = invitationRequestBodies[xhr.request.body.email];
+          cy.wrap(requestBody).should('not.be.empty');
+          cy.wrap(xhr.request.body).should('deep.equal', requestBody);
+        });
+      });
+
+    // Check status
+    cy.get('.invitation-create-dialog')
+      .contains('Sending status')
+      .should('be.visible')
+      .next()
+      .should('include.text', 'Completed')
+      .next()
+      .should('include.text', 'Admin')
+      .next()
+      .should('include.text', '2021-11-12')
+      .next()
+      .should('include.text', '2021-11-19');
+
+    // Allows to send more invitations
+    cy.get('.invitation-create-dialog')
+      .contains('button', 'Send more')
       .click()
+      .get('.invitation-create-dialog')
+      .contains('Invite by email')
+      .should('be.visible')
 
-      //check successful
-      .get('p')
-      .contains('Invitation has been created.');
+      // Close the dialog
+      .get('.invitation-create-dialog')
+      .contains('button', 'Cancel')
+      .click()
+      .get('.invitation-create-dialog')
+      .should('not.exist');
   });
 
   it(`Can select all the toggle buttons in Invitations component`, () => {
-    cy
-      //select rejection toggle button
-      .get('label')
-      .contains('Rejected')
-      .click()
-      .wait('@pendingRejected');
+    //select rejection toggle button
+    cy.selectTableFilter('State', 'Rejected').wait('@pendingRejected');
   });
 
   it(`Resend invitation`, () => {
