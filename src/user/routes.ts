@@ -24,9 +24,9 @@ const UserEventsWrapper = lazyComponent(
   'UserEventsWrapper',
 );
 const UserManage = lazyComponent(() => import('./UserManage'), 'UserManage');
-const UserOfferingListContainer = lazyComponent(
-  () => import('./UserOfferingListContainer'),
-  'UserOfferingListContainer',
+const UserOfferingList = lazyComponent(
+  () => import('./UserOfferingList'),
+  'UserOfferingList',
 );
 const FlowListContainer = lazyComponent(
   () => import('@waldur/marketplace-flows/FlowListContainer'),
@@ -197,7 +197,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'profile-remote-accounts',
     url: 'remote-accounts/',
-    component: UserOfferingListContainer,
+    component: UserOfferingList,
     parent: 'profile-credentials',
     data: {
       breadcrumb: () => translate('Remote accounts'),
