@@ -16,6 +16,7 @@ import { KeysList } from '@waldur/user/keys/KeysList';
 import { isSupport, isStaff, isOwner } from '@waldur/workspace/selectors';
 
 import { UserDetailsTable } from './support/UserDetailsTable';
+import { UserOfferingList } from './UserOfferingList';
 
 const getUser = (userId) => getById('/users/', userId);
 
@@ -85,6 +86,12 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
           <Tab eventKey={3} title={translate('Keys')}>
             <Card>
               <KeysList user={value.user} />
+            </Card>
+          </Tab>
+
+          <Tab eventKey={4} title={translate('Remote accounts')}>
+            <Card>
+              <UserOfferingList user={value.user} />
             </Card>
           </Tab>
         </Tabs>

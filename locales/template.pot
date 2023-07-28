@@ -7600,6 +7600,7 @@ msgstr ""
 msgid "Remote Waldur API URL"
 msgstr ""
 
+#: src/user/UserPopover.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Remote accounts"
