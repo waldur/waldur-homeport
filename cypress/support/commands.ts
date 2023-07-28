@@ -17,6 +17,7 @@ declare global {
       openDropdownByLabelForce(value: string): Chainable;
       openWorkspaceSelector(): Chainable;
       selectTheFirstOptionOfDropdown(): Chainable;
+      selectTableFilter(label: string, value: string): Chainable;
       selectDate(): Chainable;
       selectFlatpickrDate(inputQueryPath: string, date?: string): Chainable;
       openSelectDialog(selectId: string, option: string): Chainable;
@@ -78,6 +79,30 @@ Cypress.Commands.add('openDropdownByLabelForce', (label) => {
 
 Cypress.Commands.add('selectTheFirstOptionOfDropdown', () => {
   cy.get('*div[id^="react-select"]').first().click({ force: true }); // get ids which start with "react-select"
+});
+
+Cypress.Commands.add('selectTableFilter', (label, value) => {
+  cy.get('.table-filter')
+    .within(() => {
+      cy.contains('button', label)
+        .click()
+        .get(
+          `button:contains(${label}) .filter-field div[class$="indicatorContainer"]`,
+        )
+        .last()
+        .click({ force: true });
+    })
+    .get('*div[id^="react-select"]')
+    .contains(value)
+    .click({ force: true })
+    .get('.card-toolbar .card-title button i.fa-refresh')
+    .first()
+    .should(($el) => {
+      const className = $el[0].className;
+      if (className.indexOf('fa-spin') < 0) {
+        cy.get('.card-toolbar .card-title button i.fa-refresh').first().click();
+      }
+    });
 });
 
 Cypress.Commands.add('selectDate', () => {

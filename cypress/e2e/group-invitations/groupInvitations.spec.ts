@@ -1,4 +1,4 @@
-xdescribe('Group invitations', () => {
+describe('Group invitations', () => {
   beforeEach(() => {
     cy.mockChecklists()
       .mockUser('admin')
@@ -41,13 +41,12 @@ xdescribe('Group invitations', () => {
           fixture: 'group-invitations/user-group-invitations-cancel.json',
         },
       )
-
-      .visit('/organizations/895e38d197e748459189f19285119edf/team/')
-
-      .waitForSpinner()
-
-      .contains('Group invitations')
-      .click();
+      .visit(
+        '/organizations/895e38d197e748459189f19285119edf/group-invitations/',
+      )
+      .waitForPage()
+      .get('.card-title')
+      .contains('Group invitations');
   });
 
   it('Should render items correctly', () => {
@@ -55,8 +54,10 @@ xdescribe('Group invitations', () => {
   });
 
   it('When click Show only active group invitations check box then show only active invitations items', () => {
-    cy.get('label')
+    cy.get('.table-filter')
       .contains('Show only active group invitations')
+      .parent()
+      .find('input[type="checkbox"]')
       .click()
       .get('table tbody tr')
       .should('have.length', 1);
@@ -72,7 +73,8 @@ xdescribe('Group invitations', () => {
   it('Should close modal when cancel button is clicked', () => {
     cy.contains('button', 'Create group invitation')
       .click()
-      .get('.modal-footer > .btn-default')
+      .get('.modal-footer')
+      .contains('button', 'Cancel')
       .click()
       .get('.modal-title')
       .should('not.exist');
@@ -81,7 +83,7 @@ xdescribe('Group invitations', () => {
   it('Should invitation works correctly using role (Organization owner)', () => {
     cy.contains('button', 'Create group invitation')
       .click()
-      .get('.btn-group label')
+      .get('.modal-body .form-check.form-check-custom input')
       .eq(0)
       .click({ multiple: true, force: true })
       .get('.modal-footer > .btn-primary')
@@ -93,7 +95,7 @@ xdescribe('Group invitations', () => {
   it('Should invitation works correctly using role (Project manager)', () => {
     cy.contains('button', 'Create group invitation')
       .click()
-      .get('.btn-group label')
+      .get('.modal-body .form-check.form-check-custom input')
       .eq(1)
       .click({ multiple: true, force: true })
       .openDropdownByLabel('Project*')
@@ -107,7 +109,7 @@ xdescribe('Group invitations', () => {
   it('Should invitation works correctly using role (System administrator)', () => {
     cy.contains('button', 'Create group invitation')
       .click()
-      .get('.btn-group label')
+      .get('.modal-body .form-check.form-check-custom input')
       .eq(2)
       .click({ multiple: true, force: true })
       .openDropdownByLabel('Project*')
@@ -121,7 +123,7 @@ xdescribe('Group invitations', () => {
   it('Should invitation works correctly using role (Project member)', () => {
     cy.contains('button', 'Create group invitation')
       .click()
-      .get('.btn-group label')
+      .get('.modal-body .form-check.form-check-custom input')
       .eq(3)
       .click({ multiple: true, force: true })
       .openDropdownByLabel('Project*')
