@@ -28,6 +28,7 @@ export const ProviderOfferingUsersListComponent = ({ provider }) => {
     table: 'marketplace-offering-users',
     fetchData: createFetcher(`marketplace-offering-users`),
     filter,
+    queryField: 'query',
   });
   const columns = [
     {
@@ -41,19 +42,23 @@ export const ProviderOfferingUsersListComponent = ({ provider }) => {
     {
       title: translate('External username'),
       render: ({ row }) => row.username || 'N/A',
+      orderField: 'username',
     },
     {
       title: translate('Created'),
       render: ({ row }) => formatDateTime(row.created),
+      orderField: 'created',
     },
     {
       title: translate('Modified'),
       render: ({ row }) => formatDateTime(row.modified),
+      orderField: 'modified',
     },
     {
       title: translate('Propagated'),
       render: ({ row }) =>
         row.propagation_date ? formatDateTime(row.propagation_date) : 'N/A',
+      orderField: 'propagation_date',
     },
   ];
   return (
@@ -70,6 +75,7 @@ export const ProviderOfferingUsersListComponent = ({ provider }) => {
           refetch={tableProps.fetch}
         />
       )}
+      hasQuery={true}
     />
   );
 };
