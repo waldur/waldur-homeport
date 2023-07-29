@@ -1,7 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useAsync, useAsyncFn, useDebounce } from 'react-use';
+import { useDebounce } from 'react-use';
 
+import { queryClient } from '@waldur/Application';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -19,40 +21,63 @@ export const DataLoader = ({ filter }) => {
   const currentProject = useSelector(getProject);
   const [selectedCategory, selectCategory] = useState<Category>();
 
-  const { value: lastOfferings } = useAsync(
+  const { data: lastOfferings } = useQuery(
+    ['MarketplacePopupNOfferings', currentCustomer.uuid, currentProject.uuid],
     () => fetchLastNOfferings(currentCustomer, currentProject),
-    [currentCustomer, currentProject],
+    { staleTime: 1 * 60 * 1000 },
   );
 
-  const [
-    {
-      loading: loadingCategories,
-      error: errorCategories,
-      value: mainCategories,
-    },
-    loadCategories,
-  ] = useAsyncFn<Category[]>(
-    (search?: string) =>
-      fetchCategories(currentCustomer, currentProject, search),
-    [currentCustomer, currentProject],
-  );
+  const {
+    data: mainCategories,
+    isLoading: loadingCategories,
+    error: errorCategories,
+    refetch: loadCategories,
+  } = useQuery(['MarketplacePopupCategories'], () => {
+    const data = queryClient.fetchQuery({
+      queryKey: [
+        'MarketplacePopupCategories-' + filter,
+        currentCustomer.uuid,
+        currentProject.uuid,
+      ],
+      queryFn: () => fetchCategories(currentCustomer, currentProject, filter),
+      staleTime: 1 * 60 * 1000,
+    });
+    return data;
+  });
 
-  useEffect(() => {
-    loadCategories();
-  }, [currentCustomer, currentProject]);
+  const {
+    data: offerings,
+    isLoading: loadingOfferings,
+    error: errorOfferings,
+    refetch: loadOfferings,
+  } = useQuery(['MarketplacePopupOfferings', selectedCategory?.uuid], () => {
+    if (
+      selectedCategory &&
+      selectedCategory.uuid === RECENTLY_ADDED_OFFERINGS_UUID
+    ) {
+      return Promise.resolve(lastOfferings);
+    } else if (!selectedCategory) {
+      return Promise.resolve([]);
+    }
 
-  const [
-    { loading: loadingOfferings, value: offerings, error: errorOfferings },
-    loadOfferings,
-  ] = useAsyncFn(
-    (category: Category, search: string) => {
-      if (category && category.uuid === RECENTLY_ADDED_OFFERINGS_UUID) {
-        return Promise.resolve(lastOfferings);
-      }
-      return fetchOfferings(currentCustomer, currentProject, category, search);
-    },
-    [currentCustomer, currentProject, lastOfferings],
-  );
+    const data = queryClient.fetchQuery({
+      queryKey: [
+        'MarketplacePopupOfferings-' + filter,
+        currentCustomer.uuid,
+        currentProject.uuid,
+        selectedCategory?.uuid,
+      ],
+      queryFn: () =>
+        fetchOfferings(
+          currentCustomer,
+          currentProject,
+          selectedCategory,
+          filter,
+        ),
+      staleTime: 1 * 60 * 1000,
+    });
+    return data;
+  });
 
   const categories = useMemo(() => {
     if (!Array.isArray(mainCategories)) return [];
@@ -76,8 +101,10 @@ export const DataLoader = ({ filter }) => {
   // search with delay
   useDebounce(
     () => {
-      loadCategories(filter);
-      loadOfferings(selectedCategory, filter);
+      loadCategories();
+      if (selectedCategory) {
+        loadOfferings();
+      }
     },
     500,
     [filter],
@@ -86,7 +113,7 @@ export const DataLoader = ({ filter }) => {
   const selectCategoryAndLoadData = (category: Category) => {
     if (!category) return;
     selectCategory(category);
-    loadOfferings(category, filter);
+    loadOfferings();
   };
 
   return (
