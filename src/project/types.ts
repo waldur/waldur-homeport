@@ -18,12 +18,6 @@ export interface ProjectTeamUser {
   expiration_time?: any;
 }
 
-export interface InvoiceCostSummary {
-  year: number;
-  month: number;
-  price: number;
-}
-
 export interface ProjectCounterResourceItem {
   label: string;
   value: number | string;

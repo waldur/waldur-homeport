@@ -9,10 +9,11 @@ import {
   sendForm,
 } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
+import { InvoiceSummary } from '@waldur/dashboard/types';
 import { Event } from '@waldur/events/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
-import { InvoiceCostSummary, OecdCode, ProjectTeamUser } from './types';
+import { OecdCode, ProjectTeamUser } from './types';
 
 export const getProject = (projectId: string) =>
   getById<Project>('/projects/', projectId);
@@ -114,7 +115,7 @@ export const fetchAllProjectUsers = (projectId: string) =>
   });
 
 export const fetchLast12MonthProjectCosts = (projectId: string) =>
-  getList<InvoiceCostSummary>('/invoice-items/costs/', {
+  getList<InvoiceSummary>('/invoice-items/costs/', {
     project_uuid: projectId,
     page: 1,
     page_size: 12,

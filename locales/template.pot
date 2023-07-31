@@ -3032,6 +3032,7 @@ msgid "Est revenue"
 msgstr ""
 
 #: src/customer/list/CustomerList.tsx
+#: src/dashboard/api.ts
 #: src/invoices/list/EstimatedCost.tsx
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
@@ -3039,16 +3040,11 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
-#: src/project/utils.ts
 msgid "Estimated cost"
 msgstr ""
 
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
 msgid "Estimated cost reaches"
-msgstr ""
-
-#: src/customer/dashboard/api.ts
-msgid "Estimated monthly cost"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
@@ -13310,15 +13306,11 @@ msgstr ""
 msgid "{user} has requested termination of {resource_name} with active plan \"{plan_name}\"."
 msgstr ""
 
-#: src/customer/dashboard/api.ts
-#: src/project/utils.ts
-#: src/providers/dashboard/api.ts
+#: src/dashboard/api.ts
 msgid "{value} at {date}"
 msgstr ""
 
-#: src/customer/dashboard/api.ts
-#: src/project/utils.ts
-#: src/providers/dashboard/api.ts
+#: src/dashboard/api.ts
 msgid "{value} at {date}, estimated"
 msgstr ""
 

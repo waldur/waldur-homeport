@@ -1,6 +1,6 @@
 import { advanceTo, clear } from 'jest-date-mock';
 
-import { formatCostChart } from './api';
+import { formatCostChart } from '@waldur/dashboard/api';
 
 jest.mock('@waldur/core/formatCurrency', () => ({
   defaultCurrency: (val) => `EUR${val}`,
@@ -26,7 +26,7 @@ describe('Customer dashboard chart API', () => {
       },
     ];
     advanceTo(new Date(2018, 9, 16));
-    const chart = formatCostChart(invoices, 12);
+    const chart = formatCostChart(invoices);
     clear();
 
     expect(chart.current).toEqual('EUR300');

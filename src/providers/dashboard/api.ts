@@ -3,7 +3,11 @@ import { DateTime } from 'luxon';
 import { get, getList } from '@waldur/core/api';
 import { parseDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { padMissingValues, DateValuePair } from '@waldur/dashboard/api';
+import {
+  padMissingValues,
+  DateValuePair,
+  formatCostChartLabel,
+} from '@waldur/dashboard/api';
 import { getScopeChartOptions } from '@waldur/dashboard/chart';
 import { Chart } from '@waldur/dashboard/types';
 import { translate } from '@waldur/i18n';
@@ -17,31 +21,13 @@ interface EstimatedRevenueSummary {
   total: number;
 }
 
-const formatCostChartLabel = (
-  value: number,
-  date: DateTime,
-  isEstimate: boolean,
-): string => {
-  let template = translate('{value} at {date}');
-  if (isEstimate) {
-    template = translate('{value} at {date}, estimated');
-  }
-  return translate(template, {
-    value: defaultCurrency(value),
-    date: date.toISODate(),
-  });
-};
-
-export const formatCostChart = (
-  records: EstimatedRevenueSummary[],
-  count,
-): Chart => {
+export const formatCostChart = (records: EstimatedRevenueSummary[]): Chart => {
   let items: DateValuePair[] = records.map((record) => ({
     value: record.total,
     date: DateTime.fromObject({ year: record.year, month: record.month }),
   }));
 
-  items = padMissingValues(items, count);
+  items = padMissingValues(items);
   const data = items.map((item, index) => {
     const isEstimate = index === items.length - 1;
     const date = isEstimate
@@ -82,7 +68,7 @@ const getEstimatedRevenueSummary = (providerUuid: string) =>
 async function getProviderCharts(provider: ServiceProvider): Promise<Chart[]> {
   const charts: Chart[] = [];
   const estimatedRevenue = await getEstimatedRevenueSummary(provider.uuid);
-  const costChart = formatCostChart(estimatedRevenue, 12);
+  const costChart = formatCostChart(estimatedRevenue);
   charts.push(costChart);
 
   return charts;
