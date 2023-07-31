@@ -3,11 +3,11 @@ import { Button } from 'react-bootstrap';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { loadCategories } from '@waldur/dashboard/api';
 import { translate } from '@waldur/i18n';
 import { WorkspaceType } from '@waldur/workspace/types';
 
 import { CategoryResources } from './CategoryResources';
+import { loadMarketplaceCategories } from './marketplace';
 import { Scope } from './types';
 
 interface CategoryResourcesListProps<ScopeType = Scope> {
@@ -27,7 +27,7 @@ const LoadingErred = ({ loadData }) => (
 export const CategoryResourcesList: FunctionComponent<CategoryResourcesListProps> =
   (props) => {
     const [{ loading, error, value }, callback] = useAsyncFn(
-      () => loadCategories(props.scopeType, props.scope),
+      () => loadMarketplaceCategories(props.scopeType, props.scope),
       [props.scope],
     );
     useEffectOnce(() => {

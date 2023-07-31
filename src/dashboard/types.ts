@@ -29,3 +29,9 @@ export interface Action {
   title: string;
   onClick(): void;
 }
+
+export interface InvoiceSummary {
+  year: number;
+  month: number;
+  price: number;
+}
