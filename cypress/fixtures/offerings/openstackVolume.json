@@ -1,0 +1,233 @@
+{
+  "url": "https://rest-test.nodeconductor.com/api/marketplace-public-offerings/5be09436ad454b9ab6932812b2ebbde8/",
+  "uuid": "5be09436ad454b9ab6932812b2ebbde8",
+  "created": "2019-05-03T12:03:58.408056Z",
+  "name": "Adaptive 24hour contingency",
+  "description": "Pass as include against up.",
+  "full_description": "Rich late enter catch break must. Especially clear power popular.\nTalk former tax however friend wife.\nPut guess fall candidate. Let recently include bag.",
+  "terms_of_service": "Financial growth smile somebody wait.",
+  "terms_of_service_link": "",
+  "privacy_policy_link": "",
+  "access_url": "",
+  "endpoints": [],
+  "customer": "https://rest-test.nodeconductor.com/api/customers/8a0517819d7a408a9664b30eb71591d2/",
+  "customer_uuid": "8a0517819d7a408a9664b30eb71591d2",
+  "customer_name": "Hughes-Valenzuela",
+  "category": "https://rest-test.nodeconductor.com/api/marketplace-categories/6dfcdbe3c18241dc87526ef411bf6064/",
+  "category_uuid": "6dfcdbe3c18241dc87526ef411bf6064",
+  "category_title": "Storage",
+  "rating": null,
+  "attributes": {},
+  "options": {},
+  "components": [
+    {
+      "billing_type": "limit",
+      "type": "cores",
+      "name": "Cores",
+      "description": "",
+      "measured_unit": "cores",
+      "limit_period": null,
+      "limit_amount": null,
+      "article_code": "",
+      "max_value": 500,
+      "min_value": 1,
+      "max_available_limit": null,
+      "is_boolean": false,
+      "default_limit": null,
+      "factor": 1,
+      "is_builtin": true
+    },
+    {
+      "billing_type": "limit",
+      "type": "ram",
+      "name": "RAM",
+      "description": "",
+      "measured_unit": "GB",
+      "limit_period": null,
+      "limit_amount": null,
+      "article_code": "",
+      "max_value": 20480000,
+      "min_value": 1024,
+      "max_available_limit": null,
+      "is_boolean": false,
+      "default_limit": null,
+      "factor": 1024,
+      "is_builtin": true
+    },
+    {
+      "billing_type": "limit",
+      "type": "storage",
+      "name": "Storage",
+      "description": "",
+      "measured_unit": "GB",
+      "limit_period": null,
+      "limit_amount": null,
+      "article_code": "",
+      "max_value": 102400000,
+      "min_value": 10240,
+      "max_available_limit": null,
+      "is_boolean": false,
+      "default_limit": null,
+      "factor": 1024,
+      "is_builtin": true
+    }
+  ],
+  "plugin_options": {},
+  "state": "Active",
+  "native_name": "",
+  "native_description": "",
+  "vendor_details": "",
+  "thumbnail": "https://rest-test.nodeconductor.com/media/files/marketplace_service_offering_thumbnails/icon-openstack.png",
+  "order_item_count": 7.0,
+  "plans": [
+    {
+      "url": "https://rest-test.nodeconductor.com/api/marketplace-public-plans/30107c930449426388aa7d07b1c0602d/",
+      "uuid": "30107c930449426388aa7d07b1c0602d",
+      "name": "Default",
+      "description": "",
+      "article_code": "",
+      "prices": {
+        "cores": 0.048,
+        "ram": 0.0166666,
+        "storage": 0.0016667
+      },
+      "quotas": {
+        "cores": 0,
+        "ram": 0,
+        "storage": 0
+      },
+      "max_amount": null,
+      "archived": false,
+      "is_active": true,
+      "unit_price": "0.0000000",
+      "unit": "day",
+      "init_price": 0,
+      "switch_price": 0,
+      "backend_id": "",
+      "divisions": [],
+      "plan_type": "limit",
+      "minimal_price": 0.0663333
+    }
+  ],
+  "screenshots": [],
+  "type": "OpenStackTenant.Volume",
+  "shared": false,
+  "billable": false,
+  "scope": "https://rest-test.nodeconductor.com/api/service-settings/03532f2636b942bfb21eb75c4f31d722/",
+  "scope_uuid": "03532f2636b942bfb21eb75c4f31d722",
+  "files": [],
+  "quotas": [
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/bdac384c35f240f2ab4a66fb8f3ab0be/",
+      "uuid": "bdac384c35f240f2ab4a66fb8f3ab0be",
+      "name": "snapshots",
+      "limit": 50.0,
+      "usage": 0.0
+    },
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/bc4d81e84e124b6f9639e49155989f01/",
+      "uuid": "bc4d81e84e124b6f9639e49155989f01",
+      "name": "snapshots_size",
+      "limit": -1.0,
+      "usage": 0.0
+    },
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/99aa13c4c31c45188bc9d383ed21d084/",
+      "uuid": "99aa13c4c31c45188bc9d383ed21d084",
+      "name": "network_count",
+      "limit": 100.0,
+      "usage": 1.0
+    },
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/759285d9709b4a89aa492d6eaffee56b/",
+      "uuid": "759285d9709b4a89aa492d6eaffee56b",
+      "name": "subnet_count",
+      "limit": 100.0,
+      "usage": 1.0
+    },
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/dcb0739b034a4a30be4e5a6189c97d01/",
+      "uuid": "dcb0739b034a4a30be4e5a6189c97d01",
+      "name": "security_group_count",
+      "limit": 100.0,
+      "usage": 6.0
+    },
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/85c3db10b0ed49388af6dd2adc50510e/",
+      "uuid": "85c3db10b0ed49388af6dd2adc50510e",
+      "name": "security_group_rule_count",
+      "limit": 100.0,
+      "usage": 11.0
+    },
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/c898ceed25e14a208fbbf4e37d9aa417/",
+      "uuid": "c898ceed25e14a208fbbf4e37d9aa417",
+      "name": "floating_ip_count",
+      "limit": 50.0,
+      "usage": 3.0
+    },
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/66b2396e740d4789912708f7f6cb1a15/",
+      "uuid": "66b2396e740d4789912708f7f6cb1a15",
+      "name": "port_count",
+      "limit": 500.0,
+      "usage": 10.0
+    },
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/da2a82983779477ebf781405de33fc9f/",
+      "uuid": "da2a82983779477ebf781405de33fc9f",
+      "name": "volumes_size",
+      "limit": -1.0,
+      "usage": 6111232.0
+    },
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/08b0809e275147b48e1b0f4522b55a9d/",
+      "uuid": "08b0809e275147b48e1b0f4522b55a9d",
+      "name": "vcpu",
+      "limit": 64.0,
+      "usage": 40.0
+    },
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/851d9b3c214841c6a8e17c19092e55a0/",
+      "uuid": "851d9b3c214841c6a8e17c19092e55a0",
+      "name": "volumes",
+      "limit": 50.0,
+      "usage": 7.0
+    },
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/c700078335fc4597b2e44ad05d94ece1/",
+      "uuid": "c700078335fc4597b2e44ad05d94ece1",
+      "name": "instances",
+      "limit": 30.0,
+      "usage": 3.0
+    },
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/8cf6a8ca51bb499b8a17fecda8b471b0/",
+      "uuid": "8cf6a8ca51bb499b8a17fecda8b471b0",
+      "name": "ram",
+      "limit": 163840.0,
+      "usage": 81920.0
+    },
+    {
+      "url": "https://rest-test.nodeconductor.com/api/quotas/a6e57edeb98046959818894bfb3fed08/",
+      "uuid": "a6e57edeb98046959818894bfb3fed08",
+      "name": "storage",
+      "limit": 6144000.0,
+      "usage": 6111232.0
+    }
+  ],
+  "paused_reason": "",
+  "datacite_doi": "",
+  "citation_count": -1,
+  "latitude": null,
+  "longitude": null,
+  "country": "",
+  "backend_id": "",
+  "divisions": [],
+  "image": null,
+  "parent_description": "Soon rich work leave let heart western.",
+  "parent_uuid": "c183adfc4d7a422badcc84e0b198bfff",
+  "google_calendar_is_public": null,
+  "google_calendar_link": null,
+  "promotion_campaigns": []
+}

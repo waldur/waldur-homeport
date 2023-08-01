@@ -1,0 +1,78 @@
+{
+  "offering": "https://rest-test.nodeconductor.com/api/marketplace-public-offerings/923b075b21e04dc78c2a971f5088ba68/",
+  "offering_name": "Devolved clear-thinking initiative",
+  "offering_uuid": "923b075b21e04dc78c2a971f5088ba68",
+  "offering_description": "Watch anyone dog member quite.",
+  "offering_image": null,
+  "offering_thumbnail": "https://rest-test.nodeconductor.com/media/files/marketplace_service_offering_thumbnails/icon-openstack.png",
+  "offering_type": "OpenStackTenant.Volume",
+  "offering_terms_of_service": "Age third last stock material chance American.",
+  "offering_shared": false,
+  "offering_billable": false,
+  "provider_name": "Ashley and Sons",
+  "provider_uuid": "bad9fcc9071e49a0aeb919c1523e7def",
+  "category_title": "Storage",
+  "category_uuid": "6dfcdbe3c18241dc87526ef411bf6064",
+  "category_icon": "https://rest-test.nodeconductor.com/media/files/marketplace_category_icons/vm.svg",
+  "plan": null,
+  "attributes": {
+    "name": "teenus1",
+    "image": "https://api.etais.ee/api/openstacktenant-images/35f2a96d1a404c2f8e225242a51219d8/",
+    "flavor": "https://api.etais.ee/api/openstacktenant-flavors/8d997de73f904b3a9006817404644888/",
+    "floating_ips": [],
+    "ssh_public_key": "https://api.etais.ee/api/keys/ccff63750da546e2af82ab2a1fc6eddd/",
+    "security_groups": [
+      {
+        "url": "https://api.etais.ee/api/openstacktenant-security-groups/e5e964c9f7d042a794c3888318b8f74d/"
+      }
+    ],
+    "data_volume_type": "https://api.etais.ee/api/openstacktenant-volume-types/7cb497fe76af4b34adbffad15fee2f34/",
+    "internal_ips_set": [
+      {
+        "subnet": "https://api.etais.ee/api/openstacktenant-subnets/0ce526a515cf4ffc9b53d0b0952153c5/"
+      }
+    ],
+    "system_volume_size": 28672,
+    "system_volume_type": "https://api.etais.ee/api/openstacktenant-volume-types/7cb497fe76af4b34adbffad15fee2f34/"
+  },
+  "limits": {},
+  "uuid": "53b9bda915ab4dc0aac93a8f4fe83d30",
+  "created": "2022-05-08T18:31:38.671333Z",
+  "modified": "2022-10-24T15:55:41.171864Z",
+  "url": "https://rest-test.nodeconductor.com/api/marketplace-resources/53b9bda915ab4dc0aac93a8f4fe83d30/",
+  "scope": "https://rest-test.nodeconductor.com/api/openstacktenant-volumes/df15b1f2dc7c445cadb2996594b0a6c3/",
+  "description": "",
+  "state": "OK",
+  "resource_uuid": "df15b1f2dc7c445cadb2996594b0a6c3",
+  "backend_id": "f66f5ad0-69ac-4b8c-af4f-5d06760b49cc",
+  "effective_id": "",
+  "access_url": "",
+  "endpoints": [],
+  "resource_type": "OpenStackTenant.Volume",
+  "project": "https://rest-test.nodeconductor.com/api/projects/5d3016240ccf4181b4cdc0baa0e41d5c/",
+  "project_uuid": "5d3016240ccf4181b4cdc0baa0e41d5c",
+  "project_name": "Object-based dedicated software",
+  "project_description": "benchmark customized metrics",
+  "project_end_date": null,
+  "customer_uuid": "bad9fcc9071e49a0aeb919c1523e7def",
+  "customer_name": "Singh-Harris",
+  "parent_uuid": "d7c6f4e0064b4935b6dc1a9e4b949dcb",
+  "parent_name": "incentivizeglobalsystems",
+  "backend_metadata": {
+    "state": "OK",
+    "action": "",
+    "external_ips": ["193.40.33.44"],
+    "internal_ips": ["192.168.42.120"],
+    "runtime_state": "available",
+    "action_details": {}
+  },
+  "is_usage_based": false,
+  "is_limit_based": false,
+  "name": "matrixbest-of-breedcommunities",
+  "current_usages": {},
+  "can_terminate": true,
+  "report": null,
+  "end_date": null,
+  "username": null,
+  "limit_usage": null
+}
