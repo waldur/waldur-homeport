@@ -40,6 +40,7 @@ interface CoreConfiguration {
   HERO_LINK_LABEL: string;
   HERO_IMAGE: string;
   LOGIN_LOGO: string;
+  SITE_LOGO: string;
   POWERED_BY_LOGO: string;
   SIDEBAR_LOGO: string;
   SIDEBAR_LOGO_MOBILE: string;

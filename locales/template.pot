@@ -2200,6 +2200,10 @@ msgstr ""
 msgid "Current type"
 msgstr ""
 
+#: src/administration/branding/BrandingForm.tsx
+msgid "Custom favicon .png image file"
+msgstr ""
+
 #: src/invitations/actions/create/CustomMessageInput.tsx
 msgid "Custom message"
 msgstr ""
@@ -3300,6 +3304,10 @@ msgstr ""
 msgid "File"
 msgstr ""
 
+#: src/administration/branding/BrandingForm.tsx
+msgid "File for login page."
+msgstr ""
+
 #: src/core/CopyToClipboard.tsx
 msgid "File has been copied"
 msgstr ""
@@ -3672,7 +3680,7 @@ msgid "Hello"
 msgstr ""
 
 #: src/administration/branding/BrandingForm.tsx
-msgid "Hex color definition is used in HomePort landing page for font color of login button."
+msgid "Hex color definition is used in landing page for font color of login button."
 msgstr ""
 
 #: src/administration/branding/BrandingForm.tsx
@@ -3835,6 +3843,26 @@ msgstr ""
 #: src/openstack/analytics/ImagesList.tsx
 #: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Image name"
+msgstr ""
+
+#: src/administration/branding/BrandingForm.tsx
+msgid "Image rendered at hero section of landing page."
+msgstr ""
+
+#: src/administration/branding/BrandingForm.tsx
+msgid "Image rendered at the bottom of login menu."
+msgstr ""
+
+#: src/administration/branding/BrandingForm.tsx
+msgid "Image rendered at the top of mobile sidebar menu."
+msgstr ""
+
+#: src/administration/branding/BrandingForm.tsx
+msgid "Image rendered at the top of sidebar menu."
+msgstr ""
+
+#: src/administration/branding/BrandingForm.tsx
+msgid "Image used in marketplace order header."
 msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
@@ -4372,7 +4400,7 @@ msgid "Kubernetes version"
 msgstr ""
 
 #: src/administration/branding/BrandingForm.tsx
-msgid "Label for link in hero section of HomePort landing page."
+msgid "Label for link in hero section of landing page."
 msgstr ""
 
 #: src/marketplace/offerings/DisplayNameField.tsx
@@ -4454,7 +4482,7 @@ msgid "Link OpenStack Instance"
 msgstr ""
 
 #: src/administration/branding/BrandingForm.tsx
-msgid "Link URL in hero section of HomePort landing page."
+msgid "Link URL in hero section of landing page."
 msgstr ""
 
 #: src/customer/payments/InvoicesDropdown.tsx
