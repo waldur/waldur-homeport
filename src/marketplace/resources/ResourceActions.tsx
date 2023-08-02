@@ -2,18 +2,15 @@ import { useMemo } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
 import { ActionRegistry } from '@waldur/resource/actions/registry';
-import { getResourceCommonActions } from '@waldur/resource/actions/utils';
 
+import { ActionsList } from './actions/ActionsList';
 import { ChangeLimitsAction } from './change-limits/ChangeLimitsAction';
 
+const actionsList = ActionsList.filter(
+  (action) => action !== ChangeLimitsAction,
+);
+
 export const ResourceActions = ({ resource, scope, refetch }) => {
-  const actionsList = useMemo(
-    () =>
-      getResourceCommonActions().filter(
-        (action) => action !== ChangeLimitsAction,
-      ),
-    [],
-  );
   const extraActions = useMemo(() => {
     // Don't list ChangeLimitsAction because we already added it inside the Quick Actions.
     const quickActions = ActionRegistry.getQuickActions(resource.resource_type);
@@ -22,7 +19,7 @@ export const ResourceActions = ({ resource, scope, refetch }) => {
         // @ts-ignore
         !quickActions.includes(action) && !actionsList.includes(action),
     );
-  }, [resource, actionsList]);
+  }, [resource]);
   return (
     <Dropdown>
       <Dropdown.Toggle

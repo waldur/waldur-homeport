@@ -2,9 +2,10 @@ import Axios from 'axios';
 import React from 'react';
 import { useAsyncFn, useBoolean } from 'react-use';
 
+import { ActionsList } from '@waldur/marketplace/resources/actions/ActionsList';
+
 import { ActionRegistry } from './registry';
 import { ResourceActionComponent } from './ResourceActionComponent';
-import { getResourceCommonActions } from './utils';
 
 interface ActionButtonResourceProps {
   url: string;
@@ -17,11 +18,10 @@ async function loadData(url: string) {
   const resource = response.data;
   let actions = ActionRegistry.getActions(resource.resource_type);
   if (resource.marketplace_resource_uuid) {
-    const actionsList = getResourceCommonActions();
     const extraActions = actions.filter(
-      (action) => !actionsList.includes(action as any),
+      (action) => !ActionsList.includes(action as any),
     );
-    actions = actionsList.concat(extraActions as any);
+    actions = ActionsList.concat(extraActions as any);
   }
   return { resource, actions };
 }
