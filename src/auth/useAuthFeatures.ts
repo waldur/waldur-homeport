@@ -16,9 +16,6 @@ export const useAuthFeatures = () => {
 
   const showSocialSignup = methods.SOCIAL_SIGNUP;
 
-  const showSmartId =
-    showSocialSignup && !!ENV.plugins.WALDUR_AUTH_SOCIAL.SMARTIDEE_CLIENT_ID;
-
   const showTARA =
     showSocialSignup && !!ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_CLIENT_ID;
 
@@ -44,8 +41,7 @@ export const useAuthFeatures = () => {
 
   const enableSeparator = !!(
     showSigninForm &&
-    (showSmartId ||
-      showTARA ||
+    (showTARA ||
       showValimo ||
       showSaml2 ||
       showSaml2Providers ||
@@ -56,7 +52,6 @@ export const useAuthFeatures = () => {
 
   return {
     SigninForm: showSigninForm,
-    smartid: showSmartId,
     tara: showTARA,
     valimo: showValimo,
     saml2: showSaml2,

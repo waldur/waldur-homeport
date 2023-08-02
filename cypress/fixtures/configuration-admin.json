@@ -133,7 +133,6 @@
     "HERO_LINK_URL": null
   },
   "WALDUR_AUTH_SOCIAL": {
-    "SMARTIDEE_CLIENT_ID": "",
     "TARA_CLIENT_ID": "",
     "TARA_SANDBOX": true,
     "TARA_LABEL": "Riigi Autentimisteenus",
