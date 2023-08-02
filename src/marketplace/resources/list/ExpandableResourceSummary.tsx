@@ -29,7 +29,10 @@ const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => (
       value={
         row.attributes &&
         Object.keys(row.attributes).length > 0 && (
-          <KeyValueButton items={row.attributes} />
+          <KeyValueButton
+            items={row.attributes}
+            title={translate('Attributes')}
+          />
         )
       }
     />

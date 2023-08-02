@@ -10,13 +10,14 @@ export const KeyValueButton: FunctionComponent<any> = (props) => {
   const dispatch = useDispatch();
 
   const showDetails = useCallback(() => {
-    const resolve = { items: props.items };
+    const resolve = { items: props.items, title: props.title };
     dispatch(openModalDialog(MarketplaceKeyValueDialog, { resolve }));
-  }, [dispatch, props.items]);
+  }, [dispatch, props.items, props.title]);
 
   return (
     <a onClick={showDetails}>
-      {translate('Show details')} <i className="fa fa-external-link" />
+      {translate('Show details')}{' '}
+      <i className="fa fa-external-link cursor-pointer" />
     </a>
   );
 };

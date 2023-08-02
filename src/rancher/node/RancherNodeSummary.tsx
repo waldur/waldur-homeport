@@ -58,7 +58,10 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
         label={translate('Labels')}
         value={
           Object.keys(props.resource.labels).length > 0 && (
-            <KeyValueButton items={props.resource.labels} />
+            <KeyValueButton
+              items={props.resource.labels}
+              title={translate('Labels')}
+            />
           )
         }
       />
@@ -66,7 +69,10 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
         label={translate('Annotations')}
         value={
           Object.keys(props.resource.annotations).length > 0 && (
-            <KeyValueButton items={props.resource.annotations} />
+            <KeyValueButton
+              items={props.resource.annotations}
+              title={translate('Annotations')}
+            />
           )
         }
       />

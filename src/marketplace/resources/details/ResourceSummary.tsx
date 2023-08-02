@@ -46,14 +46,34 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
       label={translate('State')}
       value={<MarketplaceResourceStateField resource={resource} />}
     />
-    <Field
-      label={translate('Attributes')}
-      value={
-        Object.keys(resource.attributes).length > 0 && (
-          <KeyValueButton items={resource.attributes} />
-        )
-      }
-    />
+    {resource.attributes ? (
+      <Field
+        label={translate('Attributes')}
+        value={
+          Object.keys(resource.attributes).length > 0 && (
+            <KeyValueButton
+              items={resource.attributes}
+              title={translate('Attributes')}
+            />
+          )
+        }
+      />
+    ) : null}
+
+    {resource.backend_metadata ? (
+      <Field
+        label={translate('Backend metadata')}
+        value={
+          Object.keys(resource.backend_metadata).length > 0 && (
+            <KeyValueButton
+              items={resource.backend_metadata}
+              title={translate('Backend metadata')}
+            />
+          )
+        }
+      />
+    ) : null}
+
     <Field label={translate('Username')} value={resource.username} />
     {children}
   </Container>

@@ -9,7 +9,7 @@ import { KeyValueTable } from './KeyValueTable';
 export const MarketplaceKeyValueDialog: FunctionComponent<any> = (props) => {
   return (
     <ModalDialog
-      title={translate('Request details')}
+      title={props.resolve.title}
       footer={<CloseDialogButton label={translate('Ok')} />}
     >
       <KeyValueTable items={props.resolve.items} />
