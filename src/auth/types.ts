@@ -8,7 +8,6 @@ interface SAML2AuthConfiguration {
 }
 
 interface SocialAuthConfiguration {
-  SMARTIDEE_CLIENT_ID: string;
   TARA_CLIENT_ID: string;
   TARA_SANDBOX: string;
   TARA_LABEL: string;

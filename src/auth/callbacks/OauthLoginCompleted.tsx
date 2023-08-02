@@ -16,7 +16,6 @@ import { getRedirectUri } from '../utils';
 const getClientId = (provider) =>
   ({
     keycloak: ENV.plugins.WALDUR_AUTH_SOCIAL.KEYCLOAK_CLIENT_ID,
-    smartidee: ENV.plugins.WALDUR_AUTH_SOCIAL.SMARTIDEE_CLIENT_ID,
     tara: ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_CLIENT_ID,
     eduteams: ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_CLIENT_ID,
   }[provider]);

@@ -21,9 +21,7 @@
     ],
     "USER_MANDATORY_FIELDS": ["full_name", "email"]
   },
-  "WALDUR_AUTH_SOCIAL": {
-    "SMARTIDEE_CLIENT_ID": "SMARTIDEE_CLIENT_ID"
-  },
+  "WALDUR_AUTH_SOCIAL": {},
   "WALDUR_OPENSTACK": {
     "TENANT_CREDENTIALS_VISIBLE": true
   },
