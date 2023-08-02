@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
-import { post } from '@waldur/core/api';
+import { sendForm } from '@waldur/core/api';
 import { pick } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -12,15 +12,31 @@ import { isSupport as isSupportSelector } from '@waldur/workspace/selectors';
 
 import { BrandingForm } from './BrandingForm';
 
-const saveConfig = (values) => post('/branding/', values);
+const saveConfig = (values) =>
+  sendForm('POST', `${ENV.apiEndpoint}api/branding/`, values);
+
+const LOGOS = [
+  'LOGIN_LOGO',
+  'SITE_LOGO',
+  'POWERED_BY_LOGO',
+  'HERO_IMAGE',
+  'SIDEBAR_LOGO',
+  'SIDEBAR_LOGO_MOBILE',
+  'FAVICON',
+];
 
 export const AdministrationBranding = () => {
   const dispatch = useDispatch();
   const isSupport = useSelector(isSupportSelector);
 
-  const callback = async (values) => {
+  const callback = async (formData) => {
     try {
-      await saveConfig(values);
+      for (const key of Object.keys(formData)) {
+        if (LOGOS.includes(key) && typeof formData[key] === 'string') {
+          delete formData[key];
+        }
+      }
+      await saveConfig(formData);
       dispatch(showSuccess(translate('Configuration has been updated.')));
       location.reload();
     } catch (e) {
@@ -40,6 +56,7 @@ export const AdministrationBranding = () => {
         'BRAND_LABEL_COLOR',
         'HERO_LINK_LABEL',
         'HERO_LINK_URL',
+        ...LOGOS,
       ])(ENV.plugins.WALDUR_CORE),
     [],
   );
