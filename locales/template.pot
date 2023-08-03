@@ -1050,6 +1050,10 @@ msgstr ""
 msgid "Backend health status"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceSummary.tsx
+msgid "Backend metadata"
+msgstr ""
+
 #: src/resource/state/constants.ts
 msgid "Backing up"
 msgstr ""
@@ -7773,10 +7777,6 @@ msgstr ""
 msgid "Request detail"
 msgstr ""
 
-#: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
-msgid "Request details"
-msgstr ""
-
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessAction.tsx
 msgid "Request direct access"
 msgstr ""
@@ -13026,10 +13026,6 @@ msgstr ""
 #: src/user/api-key/TokenLifetimeField.tsx
 #: src/user/support/utils.ts
 msgid "token will not timeout"
-msgstr ""
-
-#: src/auth/SmartidButton.tsx
-msgid "trusted identity"
 msgstr ""
 
 #: src/invitations/UserPermissionRequestsList.tsx
