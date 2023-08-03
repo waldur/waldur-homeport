@@ -3,6 +3,7 @@ import { FC, useCallback } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/notify';
 
@@ -13,6 +14,7 @@ interface Endpoint {
 interface ResourceAccessButtonProps {
   resource: {
     endpoints?: Endpoint[];
+    username: string;
   };
   offering: {
     endpoints?: Endpoint[];
@@ -25,12 +27,37 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
 }) => {
   const dispatch = useDispatch();
 
+  const isSshFormat = (url) => {
+    try {
+      const parsedUrl = new URL(url);
+      return parsedUrl.protocol === 'ssh:';
+    } catch (error) {
+      return false;
+    }
+  };
+
+  const formatUrlForTooltip = (url) => {
+    const [protocol, restUrl] = url.split('://');
+    const [hostname, port] = restUrl.split(':');
+    return `${protocol}://${resource.username}${
+      resource.username ? '@' : ''
+    }${hostname}${port ? `:${port}` : ''}`;
+  };
+
   const copyText = useCallback(
     (value) => {
-      copy(value);
+      if (isSshFormat(value) && resource.username) {
+        const [hostname, port] = value.split('://')[1].split(':');
+        const valueToCopy = `ssh ${resource.username}@${hostname}${
+          port ? ` -p ${port}` : ''
+        }`;
+        copy(valueToCopy);
+      } else {
+        copy(value);
+      }
       dispatch(showSuccess(translate('Text has been copied')));
     },
-    [dispatch],
+    [dispatch, resource.username],
   );
 
   const endpoints = [...resource.endpoints, ...offering.endpoints];
@@ -49,10 +76,18 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
           className="d-flex"
           onClick={() => copyText(endpoint.url)}
         >
-          <div className="flex-grow-1">{endpoint.name || endpoint.url}</div>
-          <div>
-            <i className="fa fa-copy fa-lg" />
-          </div>
+          <Tip
+            id="resource-endpoint-tooltip"
+            className="flex-grow-1"
+            label={
+              isSshFormat(endpoint.url) && resource.username
+                ? formatUrlForTooltip(endpoint.url)
+                : endpoint.url
+            }
+          >
+            {endpoint.name}
+            <i className="fa fa-copy fa-lg float-end" />
+          </Tip>
         </Dropdown.Item>
       ))}
     </DropdownButton>
