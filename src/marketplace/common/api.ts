@@ -521,3 +521,6 @@ export const deleteOfferingEndpoint = (offeringId, endpointId) =>
   post(`/marketplace-provider-offerings/${offeringId}/delete_endpoint/`, {
     uuid: endpointId,
   });
+
+export const syncCustomScriptResource = (payload) =>
+  post(`/marketplace-script-sync-resource/`, payload);
