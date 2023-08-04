@@ -1,6 +1,6 @@
 import copy from 'copy-to-clipboard';
 import { FC, useCallback } from 'react';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { Button, OverlayTrigger, Popover, Table } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -65,31 +65,55 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
     return null;
   }
   return (
-    <DropdownButton
-      title={translate('Access resource')}
-      className="me-3"
-      variant="primary"
+    <OverlayTrigger
+      trigger="click"
+      placement="bottom-start"
+      overlay={
+        <Popover className="w-350px">
+          <Table bordered>
+            <tbody>
+              {endpoints.map((endpoint, index) => (
+                <tr key={index} style={{ borderBottom: '1px solid #e5e5e5' }}>
+                  <td>
+                    <a
+                      href={endpoint.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {endpoint.name}
+                    </a>
+                  </td>
+                  <td className="col-sm-1">
+                    <Tip
+                      id="resource-endpoint-tooltip"
+                      label={
+                        isSshFormat(endpoint.url) && resource.username
+                          ? formatUrlForTooltip(endpoint.url)
+                          : endpoint.url
+                      }
+                    >
+                      <Button variant="link" className="p-0">
+                        <i
+                          className="fa fa-copy fa-lg"
+                          onClick={() => copyText(endpoint.url)}
+                        />
+                      </Button>
+                    </Tip>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Popover>
+      }
+      rootClose={true}
     >
-      {endpoints.map((endpoint, index) => (
-        <Dropdown.Item
-          key={index}
-          className="d-flex"
-          onClick={() => copyText(endpoint.url)}
-        >
-          <Tip
-            id="resource-endpoint-tooltip"
-            className="flex-grow-1"
-            label={
-              isSshFormat(endpoint.url) && resource.username
-                ? formatUrlForTooltip(endpoint.url)
-                : endpoint.url
-            }
-          >
-            {endpoint.name}
-            <i className="fa fa-copy fa-lg float-end" />
-          </Tip>
-        </Dropdown.Item>
-      ))}
-    </DropdownButton>
+      <Button className="me-3 d-flex" variant="success">
+        <div className="me-3">{translate('Access resource')}</div>
+        <div>
+          <i className="fa fa-angle-down fa-lg"></i>
+        </div>
+      </Button>
+    </OverlayTrigger>
   );
 };
