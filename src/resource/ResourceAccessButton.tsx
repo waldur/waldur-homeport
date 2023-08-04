@@ -36,7 +36,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
     }
   };
 
-  const formatUrlForTooltip = (url) => {
+  const extendURLWithUsername = (url) => {
     const [protocol, restUrl] = url.split('://');
     const [hostname, port] = restUrl.split(':');
     return `${protocol}://${resource.username}${
@@ -76,7 +76,11 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
                 <tr key={index} style={{ borderBottom: '1px solid #e5e5e5' }}>
                   <td>
                     <a
-                      href={endpoint.url}
+                      href={
+                        isSshFormat(endpoint.url) && resource.username
+                          ? extendURLWithUsername(endpoint.url)
+                          : endpoint.url
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -88,7 +92,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
                       id="resource-endpoint-tooltip"
                       label={
                         isSshFormat(endpoint.url) && resource.username
-                          ? formatUrlForTooltip(endpoint.url)
+                          ? extendURLWithUsername(endpoint.url)
                           : endpoint.url
                       }
                     >
