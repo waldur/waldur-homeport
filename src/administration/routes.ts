@@ -15,6 +15,25 @@ const AdministrationBranding = lazyComponent(
   'AdministrationBranding',
 );
 
+const FeaturesList = lazyComponent(
+  () => import('./FeaturesList'),
+  'FeaturesList',
+);
+
+const SupportCustomersContainer = lazyComponent(
+  () => import('@waldur/customer/list/SupportCustomersContainer'),
+  'SupportCustomersContainer',
+);
+const SupportProjectsList = lazyComponent(
+  () => import('@waldur/project/SupportProjectsList'),
+  'SupportProjectsList',
+);
+
+const UserList = lazyComponent(
+  () => import('@waldur/user/support/UserList'),
+  'UserList',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'admin',
@@ -45,6 +64,44 @@ export const states: StateDeclaration[] = [
     component: AdministrationBranding,
     data: {
       breadcrumb: () => translate('Branding'),
+    },
+  },
+
+  {
+    name: 'admin.features',
+    url: 'features/',
+    component: FeaturesList,
+    data: {
+      breadcrumb: () => translate('Features'),
+    },
+  },
+
+  {
+    name: 'admin.users',
+    url: 'users/?role',
+    component: UserList,
+    data: {
+      feature: 'support.users',
+      breadcrumb: () => translate('Users'),
+    },
+  },
+
+  {
+    name: 'admin.customers',
+    url: 'customers/',
+    component: SupportCustomersContainer,
+    data: {
+      feature: 'support.customers_list',
+      breadcrumb: () => translate('Organizations'),
+    },
+  },
+
+  {
+    name: 'admin.projects',
+    url: 'projects/',
+    component: SupportProjectsList,
+    data: {
+      breadcrumb: () => translate('Projects'),
     },
   },
 ];

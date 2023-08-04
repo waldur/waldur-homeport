@@ -3269,13 +3269,13 @@ msgstr ""
 msgid "Featured offerings"
 msgstr ""
 
-#: src/issues/FeaturesList.tsx
-#: src/issues/routes.ts
+#: src/administration/FeaturesList.tsx
+#: src/administration/routes.ts
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Features"
 msgstr ""
 
-#: src/issues/FeaturesList.tsx
+#: src/administration/FeaturesList.tsx
 msgid "Features have been updated."
 msgstr ""
 
@@ -5235,9 +5235,9 @@ msgstr ""
 msgid "Next trigger at"
 msgstr ""
 
+#: src/administration/FeaturesList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/issues/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -6170,9 +6170,9 @@ msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/issues/routes.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
@@ -7165,8 +7165,8 @@ msgid "Project {project_name} has been deleted."
 msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
 #: src/customer/routes.ts
-#: src/issues/routes.ts
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
@@ -8378,12 +8378,12 @@ msgstr ""
 msgid "SSH public keys"
 msgstr ""
 
+#: src/administration/FeaturesList.tsx
 #: src/booking/components/modal/BookingModal.tsx
 #: src/customer/organization-groups/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
-#: src/issues/FeaturesList.tsx
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
@@ -9717,6 +9717,7 @@ msgstr ""
 msgid "Synchronisation has been scheduled."
 msgstr ""
 
+#: src/marketplace/resources/actions/SyncResourceAction.tsx
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.tsx
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.tsx
 #: src/openstack/openstack-tenant/actions/PullServerGroupsAction.tsx
@@ -10980,7 +10981,7 @@ msgid "Unable to load organizations"
 msgstr ""
 
 #: src/UserAgreementComponent.tsx
-#: src/issues/FeaturesList.tsx
+#: src/administration/FeaturesList.tsx
 msgid "Unable to load page"
 msgstr ""
 
@@ -11270,6 +11271,10 @@ msgstr ""
 msgid "Unable to synchronise resource."
 msgstr ""
 
+#: src/marketplace/resources/actions/SyncResourceAction.tsx
+msgid "Unable to synchronise."
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to synchronize offering details."
 msgstr ""
@@ -11358,7 +11363,7 @@ msgstr ""
 msgid "Unable to update environment variables."
 msgstr ""
 
-#: src/issues/FeaturesList.tsx
+#: src/administration/FeaturesList.tsx
 msgid "Unable to update features."
 msgstr ""
 
@@ -12071,8 +12076,8 @@ msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscor
 msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
 #: src/customer/routes.ts
-#: src/issues/routes.ts
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
@@ -12402,9 +12407,9 @@ msgstr ""
 msgid "YAML has been updated."
 msgstr ""
 
+#: src/administration/FeaturesList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/issues/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx

@@ -35,14 +35,6 @@ const SupportDashboard = lazyComponent(
   () => import('@waldur/support/dashboard/SupportDashboard'),
   'SupportDashboard',
 );
-const SupportCustomersContainer = lazyComponent(
-  () => import('@waldur/customer/list/SupportCustomersContainer'),
-  'SupportCustomersContainer',
-);
-const SupportProjectsList = lazyComponent(
-  () => import('@waldur/project/SupportProjectsList'),
-  'SupportProjectsList',
-);
 const SupportFeedback = lazyComponent(
   () => import('@waldur/issues/feedback/SupportFeedback'),
   'SupportFeedback',
@@ -55,10 +47,6 @@ const SupportIssues = lazyComponent(
   () => import('@waldur/issues/SupportIssues'),
   'SupportIssues',
 );
-const UserList = lazyComponent(
-  () => import('@waldur/user/support/UserList'),
-  'UserList',
-);
 const IssueDetailsContainer = lazyComponent(
   () => import('./IssueDetails'),
   'IssueDetails',
@@ -66,10 +54,6 @@ const IssueDetailsContainer = lazyComponent(
 const NotificationList = lazyComponent(
   () => import('../notifications/NotificationList'),
   'NotificationList',
-);
-const FeaturesList = lazyComponent(
-  () => import('./FeaturesList'),
-  'FeaturesList',
 );
 
 export const states: StateDeclaration[] = [
@@ -178,26 +162,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin.users',
-    url: 'users/?role',
-    component: UserList,
-    data: {
-      feature: 'support.users',
-      breadcrumb: () => translate('Users'),
-    },
-  },
-
-  {
-    name: 'admin.customers',
-    url: 'customers/',
-    component: SupportCustomersContainer,
-    data: {
-      feature: 'support.customers_list',
-      breadcrumb: () => translate('Organizations'),
-    },
-  },
-
-  {
     name: 'support.customer-update',
     url: 'customer-update/:customer_uuid/',
     component: OrganizationUpdateContainer,
@@ -207,29 +171,11 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin.projects',
-    url: 'projects/',
-    component: SupportProjectsList,
-    data: {
-      breadcrumb: () => translate('Projects'),
-    },
-  },
-
-  {
     name: 'support.broadcast',
     url: 'broadcast/',
     component: NotificationList,
     data: {
       breadcrumb: () => translate('Broadcast'),
-    },
-  },
-
-  {
-    name: 'admin.features',
-    url: 'features/',
-    component: FeaturesList,
-    data: {
-      breadcrumb: () => translate('Features'),
     },
   },
 ];
