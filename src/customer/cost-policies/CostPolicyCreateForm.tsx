@@ -11,6 +11,7 @@ import {
   NumberField,
 } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { projectAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { ProjectCostField } from '@waldur/project/ProjectCostField';
@@ -18,7 +19,6 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CostPolicyFormData } from './types';
 import { getCostPolicyActionOptions } from './utils';
-import { Select } from '@waldur/form/themed-select';
 
 export const CostPolicyCreateForm = reduxForm<
   CostPolicyFormData,
