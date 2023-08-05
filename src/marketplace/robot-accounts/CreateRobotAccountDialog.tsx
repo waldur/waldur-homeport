@@ -79,12 +79,13 @@ export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
         type: 'cicd',
       }}
       submitForm={async (formData: RobotAccountFormData) => {
+        const keys = formData.keys?.trim();
         try {
           await createRobotAccount({
             ...formData,
             resource: resource.url,
             users: formData.users?.map(({ url }) => url),
-            keys: formData.keys?.trim().split(/\r?\n/),
+            keys: keys ? keys.split(/\r?\n/) : [],
           });
           dispatch(showSuccess(translate('Robot account has been created.')));
           dispatch(closeModalDialog());
