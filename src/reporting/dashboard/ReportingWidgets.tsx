@@ -69,7 +69,7 @@ const WidgetItem = ({ item }: { item: ReportingWidget }) => (
           <div>
             <h1 className="fs-2 text-nowrap fw-boldest">{item.title}</h1>
             {item.description && (
-              <p className="fs-6 fw-bold text-dark mb-0">{item.description}</p>
+              <p className="fs-6 text-dark mb-0">{item.description}</p>
             )}
           </div>
           {item.data?.length && (
