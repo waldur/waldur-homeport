@@ -1,11 +1,11 @@
 import { UISref } from '@uirouter/react';
 import { useCallback } from 'react';
 import { Card } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
+import { hasSupport } from '@waldur/issues/hooks';
 
 import { ResourceIssues } from './ResourceIssues';
 
@@ -30,7 +30,8 @@ const CreateIssueButton = ({ resource }) => {
 };
 
 export const ResourceIssuesCard = ({ resource, state }) => {
-  return ENV.plugins.WALDUR_SUPPORT ? (
+  const showIssues = useSelector(hasSupport);
+  return showIssues ? (
     <Card className="mb-7">
       <Card.Header>
         <Card.Title>
