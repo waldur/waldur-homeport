@@ -52,8 +52,8 @@ export const UnifiedSidebar = () => {
       {user ? (
         <>
           {user.is_staff ||
-          (customerPermissions.length !== 0 &&
-            projectPermissions.length !== 0) ? (
+          customerPermissions.length !== 0 ||
+          projectPermissions.length !== 0 ? (
             <MarketplaceTrigger />
           ) : null}
           <ManagementMenu />
