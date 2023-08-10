@@ -1,6 +1,5 @@
+import { IdentityProviderLogo } from '@waldur/auth/providers/IdentityProviderLogo';
 import { translate } from '@waldur/i18n';
-
-import { IdentityProviderLogo } from './IdentityProviderLogo';
 
 export const IdentityProviderIndicator = ({ user }) => (
   <div className="d-flex justify-content-between align-items-center">

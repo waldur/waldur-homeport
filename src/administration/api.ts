@@ -1,7 +1,7 @@
 import Axios, { AxiosRequestConfig } from 'axios';
 
 import { ENV } from '@waldur/configs/default';
-import { get, parseResultCount } from '@waldur/core/api';
+import { get, getAll, parseResultCount, post, put } from '@waldur/core/api';
 
 export const getCustomersCount = () =>
   Axios.head(`${ENV.apiEndpoint}api/customers/`).then((response) =>
@@ -38,3 +38,17 @@ export const getVersion = () =>
   get<{ version: string | number }>('/version/').then(
     (response) => response.data,
   );
+
+export const getIdentityProviders = () =>
+  getAll<{ provider }>('/identity-providers/');
+
+export const getIdentityProvider = (type) =>
+  get<{ client_id }>(`/identity-providers/${type}/`).then(
+    (response) => response.data,
+  );
+
+export const createIdentityProvider = (formData) =>
+  post('/identity-providers/', formData);
+
+export const updateIdentityProvider = (provider, formData) =>
+  put(`/identity-providers/${provider}/`, formData);

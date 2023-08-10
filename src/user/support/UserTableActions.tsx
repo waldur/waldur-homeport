@@ -21,10 +21,7 @@ export const UserTableActions = ({ refetch }) => {
   };
   return (
     <Button onClick={openDialog} className="me-3">
-      <i className="fa fa-plus" />{' '}
-      {translate('Add {provider} user', {
-        provider: ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_LABEL,
-      })}
+      <i className="fa fa-plus" /> {translate('Add user')}
     </Button>
   );
 };

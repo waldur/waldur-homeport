@@ -3,6 +3,7 @@ import Axios from 'axios';
 import Qs from 'qs';
 import { useState, useEffect, FunctionComponent } from 'react';
 
+import { getIdentityProvider } from '@waldur/administration/api';
 import { ENV } from '@waldur/configs/default';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -12,13 +13,6 @@ import { UsersService } from '@waldur/user/UsersService';
 
 import { AuthService } from '../AuthService';
 import { getRedirectUri } from '../utils';
-
-const getClientId = (provider) =>
-  ({
-    keycloak: ENV.plugins.WALDUR_AUTH_SOCIAL.KEYCLOAK_CLIENT_ID,
-    tara: ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_CLIENT_ID,
-    eduteams: ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_CLIENT_ID,
-  }[provider]);
 
 export const OauthLoginCompleted: FunctionComponent = () => {
   const router = useRouter();
@@ -32,8 +26,9 @@ export const OauthLoginCompleted: FunctionComponent = () => {
       const qs = Qs.parse(getQueryString());
       const url = `${ENV.apiEndpoint}api-auth/${provider}/`;
       try {
+        const { client_id } = await getIdentityProvider(provider);
         const response = await Axios.post(url, {
-          clientId: getClientId(provider),
+          clientId: client_id,
           code: qs.code,
           state: qs.state,
           redirectUri: getRedirectUri(provider),

@@ -267,6 +267,7 @@ msgstr ""
 msgid "Activity"
 msgstr ""
 
+#: src/administration/providers/CreateProviderDialog.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -314,6 +315,11 @@ msgstr ""
 #: src/marketplace/offerings/update/endpoints/AddEndpointButton.tsx
 #: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 msgid "Add endpoint"
+msgstr ""
+
+#: src/administration/providers/CreateProviderDialog.tsx
+#: src/administration/providers/ProviderCard.tsx
+msgid "Add identity provider"
 msgstr ""
 
 #: src/marketplace/offerings/images/CreateImageButton.tsx
@@ -415,16 +421,13 @@ msgstr ""
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/AddUserButton.tsx
+#: src/user/support/AddRemoteUserDialog.tsx
+#: src/user/support/UserTableActions.tsx
 msgid "Add user"
 msgstr ""
 
 #: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
 msgid "Add your favorite pages here"
-msgstr ""
-
-#: src/user/support/AddRemoteUserDialog.tsx
-#: src/user/support/UserTableActions.tsx
-msgid "Add {provider} user"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -657,6 +660,10 @@ msgstr ""
 
 #: src/rancher/template/TemplateDetail.tsx
 msgid "Application has been created."
+msgstr ""
+
+#: src/administration/providers/ProviderForm.tsx
+msgid "Application secret key."
 msgstr ""
 
 #: src/rancher/cluster/tabs.ts
@@ -1471,6 +1478,7 @@ msgstr ""
 msgid "Click to see Google Calendar"
 msgstr ""
 
+#: src/administration/providers/ProviderForm.tsx
 #: src/azure/provider/AzureForm.tsx
 msgid "Client ID"
 msgstr ""
@@ -1494,6 +1502,7 @@ msgstr ""
 msgid "Client project"
 msgstr ""
 
+#: src/administration/providers/ProviderForm.tsx
 #: src/azure/provider/AzureForm.tsx
 msgid "Client secret"
 msgstr ""
@@ -2549,6 +2558,10 @@ msgstr ""
 msgid "Device owner"
 msgstr ""
 
+#: src/administration/providers/IdentityProvidersList.tsx
+msgid "Digital identity is managed by Waldur itself."
+msgstr ""
+
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 msgid "Direction"
@@ -2562,6 +2575,7 @@ msgstr ""
 msgid "Disable gateway IP advertising via DHCP"
 msgstr ""
 
+#: src/administration/providers/ProviderCard.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/hooks/HooksList.tsx
 #: src/user/support/UserFilter.tsx
@@ -2576,6 +2590,10 @@ msgstr ""
 
 #: src/openstack/openstack-subnet/DisconnectSubnetAction.tsx
 msgid "Disconnect subnet"
+msgstr ""
+
+#: src/administration/providers/ProviderForm.tsx
+msgid "Discovery URL"
 msgstr ""
 
 #: src/vmware/actions/ExtendDiskDialog.tsx
@@ -2708,6 +2726,7 @@ msgstr ""
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr ""
 
+#: src/administration/providers/ProviderCard.tsx
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
@@ -2841,6 +2860,7 @@ msgstr ""
 msgid "Egress"
 msgstr ""
 
+#: src/administration/providers/ProviderUsersDialog.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
@@ -2904,6 +2924,8 @@ msgstr ""
 msgid "Enable profile after creation"
 msgstr ""
 
+#: src/administration/providers/ProviderCard.tsx
+#: src/administration/providers/ProviderForm.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/hooks/HookForm.tsx
@@ -3489,6 +3511,7 @@ msgstr ""
 msgid "Full description"
 msgstr ""
 
+#: src/administration/providers/ProviderUsersDialog.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
 #: src/marketplace/UserPluginOptionsForm.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
@@ -3561,6 +3584,10 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingGettingStarted.tsx
 msgid "Getting started"
+msgstr ""
+
+#: src/administration/providers/IdentityProvidersList.tsx
+msgid "Global federation of identity providers for researchers."
 msgstr ""
 
 #: src/invitations/actions/create/FormButtons.tsx
@@ -3779,6 +3806,10 @@ msgstr ""
 msgid "ID code"
 msgstr ""
 
+#: src/administration/providers/ProviderForm.tsx
+msgid "ID of application used for OAuth authentication."
+msgstr ""
+
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/openstack/openstack-instance/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
@@ -3812,6 +3843,22 @@ msgstr ""
 #: src/user/support/IdentityProviderContainer.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
 msgid "Identity provider"
+msgstr ""
+
+#: src/administration/providers/CreateProviderDialog.tsx
+msgid "Identity provider has been added successfully."
+msgstr ""
+
+#: src/administration/providers/UpdateProviderDialog.tsx
+msgid "Identity provider has been updated successfully."
+msgstr ""
+
+#: src/administration/routes.ts
+msgid "Identity providers"
+msgstr ""
+
+#: src/administration/providers/IdentityProvidersList.tsx
+msgid "Identity service of the Republic of Estonia"
 msgstr ""
 
 #: src/marketplace/UserSecretOptionsForm.tsx
@@ -4401,6 +4448,10 @@ msgstr ""
 
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Kubernetes version"
+msgstr ""
+
+#: src/administration/providers/ProviderForm.tsx
+msgid "Label"
 msgstr ""
 
 #: src/administration/branding/BrandingForm.tsx
@@ -5422,6 +5473,10 @@ msgstr ""
 msgid "Not assigned"
 msgstr ""
 
+#: src/administration/providers/ProviderCard.tsx
+msgid "Not configured"
+msgstr ""
+
 #: src/navigation/workspace/context-selector/GuestDropdown.tsx
 msgid "Not logged in"
 msgstr ""
@@ -5533,6 +5588,7 @@ msgstr ""
 msgid "OECD FoS code"
 msgstr ""
 
+#: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "OK"
 msgstr ""
@@ -5827,6 +5883,10 @@ msgstr ""
 #: src/marketplace/offerings/OfferingViews.tsx
 #: src/marketplace/offerings/PreviewButton.tsx
 msgid "Open public page"
+msgstr ""
+
+#: src/administration/providers/IdentityProvidersList.tsx
+msgid "Open source identity and access management solution."
 msgstr ""
 
 #: src/providers/dashboard/ProviderWidgets.tsx
@@ -6941,6 +7001,10 @@ msgstr ""
 
 #: src/freeipa/FreeIPAAccountEdit.tsx
 msgid "Profile is enabled."
+msgstr ""
+
+#: src/administration/providers/ProviderForm.tsx
+msgid "Profile management URL"
 msgstr ""
 
 #: src/user/support/UserEditFormContainer.tsx
@@ -8379,6 +8443,7 @@ msgid "SSH public keys"
 msgstr ""
 
 #: src/administration/FeaturesList.tsx
+#: src/administration/providers/UpdateProviderDialog.tsx
 #: src/booking/components/modal/BookingModal.tsx
 #: src/customer/organization-groups/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
@@ -9271,6 +9336,10 @@ msgstr ""
 msgid "Sign in with {label}"
 msgstr ""
 
+#: src/administration/providers/IdentityProvidersList.tsx
+msgid "Single sign-on using SAML2-based identity federation."
+msgstr ""
+
 #: src/administration/branding/BrandingForm.tsx
 msgid "Site description"
 msgstr ""
@@ -9487,6 +9556,7 @@ msgstr ""
 msgid "Static routes update was scheduled."
 msgstr ""
 
+#: src/administration/providers/ProviderUsersDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/create/SendingStatus.tsx
@@ -9959,6 +10029,14 @@ msgstr ""
 
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 msgid "The date is inclusive. Once reached, resource will be scheduled for termination."
+msgstr ""
+
+#: src/administration/providers/ProviderForm.tsx
+msgid "The endpoint for endpoint discovery."
+msgstr ""
+
+#: src/administration/providers/ProviderForm.tsx
+msgid "The endpoint for user details management."
 msgstr ""
 
 #: src/invoices/store/effects.ts
@@ -10440,6 +10518,10 @@ msgstr ""
 msgid "Unable to add endpoint."
 msgstr ""
 
+#: src/administration/providers/CreateProviderDialog.tsx
+msgid "Unable to add identity provider."
+msgstr ""
+
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 msgid "Unable to add image."
 msgstr ""
@@ -10453,11 +10535,8 @@ msgid "Unable to add option."
 msgstr ""
 
 #: src/project/team/AddProjectUserDialog.tsx
-msgid "Unable to add user."
-msgstr ""
-
 #: src/user/support/AddRemoteUserDialog.tsx
-msgid "Unable to add {provider} user."
+msgid "Unable to add user."
 msgstr ""
 
 #: src/resource/actions/AsyncActionButton.tsx
@@ -10923,6 +11002,11 @@ msgstr ""
 msgid "Unable to load health information"
 msgstr ""
 
+#: src/administration/providers/IdentityProvidersList.tsx
+#: src/auth/LoginColumn.tsx
+msgid "Unable to load identity providers."
+msgstr ""
+
 #: src/customer/payments/InvoicesDropdown.tsx
 msgid "Unable to load invoices"
 msgstr ""
@@ -11375,6 +11459,10 @@ msgstr ""
 msgid "Unable to update horizontal pod autoscaler."
 msgstr ""
 
+#: src/administration/providers/UpdateProviderDialog.tsx
+msgid "Unable to update identity provider."
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/update-internal-ips/utils.ts
 msgid "Unable to update internal IPs of OpenStack instance."
 msgstr ""
@@ -11591,6 +11679,10 @@ msgstr ""
 msgid "Update horizontal pod autoscaler"
 msgstr ""
 
+#: src/administration/providers/UpdateProviderDialog.tsx
+msgid "Update identity provider"
+msgstr ""
+
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 msgid "Update image"
 msgstr ""
@@ -11795,6 +11887,10 @@ msgstr ""
 
 #: src/auth/callbacks/AuthLogoutCompleted.tsx
 msgid "User has been logged out. You will be redirected to the login page soon."
+msgstr ""
+
+#: src/user/support/AddRemoteUserDialog.tsx
+msgid "User has been successfully added."
 msgstr ""
 
 #: src/user/support/effects.ts
@@ -12076,6 +12172,7 @@ msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscor
 msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/providers/ProviderCard.tsx
 #: src/administration/routes.ts
 #: src/customer/routes.ts
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
@@ -12085,6 +12182,10 @@ msgstr ""
 #: src/project/routes.ts
 #: src/rancher/cluster/tabs.ts
 msgid "Users"
+msgstr ""
+
+#: src/administration/providers/ProviderUsersDialog.tsx
+msgid "Users from {provider}"
 msgstr ""
 
 #: src/invoices/details/CustomerDetails.tsx
@@ -12226,6 +12327,10 @@ msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingGetHelp.tsx
 msgid "Vendor support pages"
+msgstr ""
+
+#: src/administration/providers/ProviderForm.tsx
+msgid "Verify SSL"
 msgstr ""
 
 #: src/user/support/EmailChangeForm.tsx
@@ -13038,6 +13143,7 @@ msgstr ""
 msgid "user permission requests"
 msgstr ""
 
+#: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
@@ -13175,10 +13281,6 @@ msgstr ""
 
 #: src/project/effects.ts
 msgid "{projectName} project has been moved to {organizationName} organization."
-msgstr ""
-
-#: src/user/support/AddRemoteUserDialog.tsx
-msgid "{provider} user has been successfully added."
 msgstr ""
 
 #: src/issues/IssueSummary.tsx

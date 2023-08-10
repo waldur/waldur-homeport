@@ -8,14 +8,14 @@ export const LoginButton = ({
   label,
   onClick,
 }: {
-  image?: string;
+  image?: React.ReactNode;
   iconClass?: string;
   label: string;
   onClick?(): void;
 }) => (
   <button className="LoginButton" onClick={onClick}>
     <div className="LoginButtonIcon">
-      {image ? <img src={image} /> : null}
+      {image}
       {iconClass ? (
         <i
           className={`fa ${iconClass}`}
