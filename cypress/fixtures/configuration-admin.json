@@ -133,15 +133,6 @@
     "HERO_LINK_URL": null
   },
   "WALDUR_AUTH_SOCIAL": {
-    "TARA_CLIENT_ID": "",
-    "TARA_SANDBOX": true,
-    "TARA_LABEL": "Riigi Autentimisteenus",
-    "KEYCLOAK_CLIENT_ID": "waldur",
-    "KEYCLOAK_LABEL": "Keycloak",
-    "KEYCLOAK_AUTH_URL": "/auth/realms/Waldur/protocol/openid-connect/auth",
-    "EDUTEAMS_CLIENT_ID": "",
-    "EDUTEAMS_LABEL": "eduTEAMS",
-    "EDUTEAMS_AUTH_URL": "/saml2sp/OIDC/authorization",
     "REMOTE_EDUTEAMS_ENABLED": false,
     "ENABLE_EDUTEAMS_SYNC": false
   },

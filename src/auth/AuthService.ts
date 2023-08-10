@@ -35,6 +35,7 @@ import {
   setAuthenticationMethod,
 } from './AuthMethodStorage';
 import { getRedirect, resetRedirect, setRedirect } from './AuthRedirectStorage';
+import { SAML2_IDP } from './providers/constants';
 import { getToken, removeToken, setToken } from './TokenStorage';
 
 function setAuthHeader(token) {
@@ -131,7 +132,7 @@ function localLogout(params?) {
 function logout() {
   const authenticationMethod = getAuthenticationMethod();
   if (
-    authenticationMethod === 'saml2' &&
+    authenticationMethod === SAML2_IDP &&
     ENV.plugins.WALDUR_AUTH_SAML2.ENABLE_SINGLE_LOGOUT
   ) {
     store.dispatch(

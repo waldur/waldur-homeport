@@ -14,17 +14,6 @@ export const useAuthFeatures = () => {
 
   const showSigninForm = methods.LOCAL_SIGNIN;
 
-  const showSocialSignup = methods.SOCIAL_SIGNUP;
-
-  const showTARA =
-    showSocialSignup && !!ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_CLIENT_ID;
-
-  const showKeycloak =
-    showSocialSignup && !!ENV.plugins.WALDUR_AUTH_SOCIAL.KEYCLOAK_CLIENT_ID;
-
-  const showEduteams =
-    showSocialSignup && !!ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_CLIENT_ID;
-
   const showValimo = methods.VALIMO;
 
   const showSaml2 =
@@ -41,24 +30,15 @@ export const useAuthFeatures = () => {
 
   const enableSeparator = !!(
     showSigninForm &&
-    (showTARA ||
-      showValimo ||
-      showSaml2 ||
-      showSaml2Providers ||
-      showSaml2Discovery ||
-      showKeycloak ||
-      showEduteams)
+    (showValimo || showSaml2 || showSaml2Providers || showSaml2Discovery)
   );
 
   return {
     SigninForm: showSigninForm,
-    tara: showTARA,
     valimo: showValimo,
     saml2: showSaml2,
     saml2providers: showSaml2Providers,
     saml2discovery: showSaml2Discovery,
-    keycloak: showKeycloak,
-    eduteams: showEduteams,
     enableSeperator: enableSeparator,
   };
 };

@@ -8,15 +8,6 @@ interface SAML2AuthConfiguration {
 }
 
 interface SocialAuthConfiguration {
-  TARA_CLIENT_ID: string;
-  TARA_SANDBOX: string;
-  TARA_LABEL: string;
-  KEYCLOAK_CLIENT_ID: string;
-  KEYCLOAK_LABEL: string;
-  KEYCLOAK_AUTH_URL: string;
-  EDUTEAMS_CLIENT_ID: string;
-  EDUTEAMS_LABEL: string;
-  EDUTEAMS_AUTH_URL: string;
   REMOTE_EDUTEAMS_ENABLED: boolean;
   ENABLE_EDUTEAMS_SYNC: boolean;
 }
