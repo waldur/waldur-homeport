@@ -23,7 +23,12 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
   const { data, refetch, isLoading } = useQuery(
     ['resource-details-page', params['resource_uuid']],
     () => fetchData(params.resource_uuid),
+    { enabled: false },
   );
+
+  useEffect(() => {
+    refetch();
+  }, ['resource-details-page', params['resource_uuid']]);
 
   useTitle(data?.resource.category_title);
 
