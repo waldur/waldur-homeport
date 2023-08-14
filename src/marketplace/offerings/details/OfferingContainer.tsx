@@ -1,6 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { useAsyncFn, useEffectOnce } from 'react-use';
+import { useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -29,9 +30,10 @@ export const OfferingContainer: FunctionComponent = () => {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
 
-  const [{ loading, error, value }, refetch] = useAsyncFn(
+  const { isLoading, error, data, refetch } = useQuery(
+    ['providerOfferingDetail', offering_uuid],
     () => loadData(offering_uuid),
-    [offering_uuid],
+    { enabled: false },
   );
 
   useEffectOnce(() => {
@@ -39,9 +41,9 @@ export const OfferingContainer: FunctionComponent = () => {
   });
 
   useFullPage();
-  useTitle(value ? value.offering.name : translate('Offering details'));
+  useTitle(data ? data.offering.name : translate('Offering details'));
 
-  if (loading) {
+  if (isLoading && !data) {
     return <LoadingSpinner />;
   }
 
@@ -49,15 +51,15 @@ export const OfferingContainer: FunctionComponent = () => {
     return <h3>{translate('Unable to load offering details.')}</h3>;
   }
 
-  if (!value) {
+  if (!data) {
     return null;
   }
 
   return (
     <OfferingDetails
-      offering={value.offering}
-      category={value.category}
-      plansUsage={value.plansUsage}
+      offering={data.offering}
+      category={data.category}
+      plansUsage={data.plansUsage}
       refetch={refetch}
     />
   );
