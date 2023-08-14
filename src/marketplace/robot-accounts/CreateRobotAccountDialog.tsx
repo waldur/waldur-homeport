@@ -49,6 +49,13 @@ export const useRobotAccountFields = (resource) => {
       maxlength: 32,
       type: 'string',
       pattern: LATIN_NAME_PATTERN,
+      disabled:
+        resource.offering_plugin_options &&
+        resource.offering_plugin_options['username_generation_policy'] ===
+          'service_provider',
+      disabled_tooltip: translate(
+        'Username will be provided by service provider after processing the request',
+      ),
     },
     {
       name: 'users',
