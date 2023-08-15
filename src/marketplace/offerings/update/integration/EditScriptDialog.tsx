@@ -3,6 +3,7 @@ import { Button, Col, Modal, Row } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
+import { Tip } from '@waldur/core/Tooltip';
 import { SubmitButton, SelectField } from '@waldur/form';
 import { MonacoField } from '@waldur/form/MonacoField';
 import { translate } from '@waldur/i18n';
@@ -63,7 +64,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
           );
         }
       },
-      [dispatch],
+      [dispatch, props.resolve],
     );
 
     const handleSaveButtonClick = () => {
@@ -108,14 +109,27 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
       <form>
         <Modal.Header>
           <Modal.Title>{props.resolve.label}</Modal.Title>
-          {props.resolve.type !== 'language' && (
-            <Button
-              variant="secondary"
-              onClick={handleSaveAndRunScriptButtonClick}
-            >
-              {translate('Save & dry run script')}
-            </Button>
-          )}
+          {props.resolve.type !== 'language' ? (
+            props.resolve.offering.secret_options.language ? (
+              <Button
+                variant="secondary"
+                onClick={handleSaveAndRunScriptButtonClick}
+              >
+                {translate('Save & dry run script')}
+              </Button>
+            ) : (
+              <Tip
+                label={translate(
+                  'Please select a script language to use dry-run',
+                )}
+                id="resource-action-dialog-disabled-tooltip"
+              >
+                <Button variant="secondary" disabled>
+                  {translate('Save & dry run script')}
+                </Button>
+              </Tip>
+            )
+          ) : null}
         </Modal.Header>
         <Modal.Body>
           {props.resolve.type === 'language' ? (
