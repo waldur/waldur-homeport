@@ -121,7 +121,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
               disabled: field.disabled,
               disabled_tooltip: field.disabled_tooltip,
             };
-            return field.disabled ? (
+            return field.disabled && props.disabled_tooltip ? (
               <Tip
                 label={props.disabled_tooltip}
                 id="resource-action-dialog-disabled-tooltip"
