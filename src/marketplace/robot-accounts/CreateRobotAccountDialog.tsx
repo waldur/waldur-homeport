@@ -53,9 +53,7 @@ export const useRobotAccountFields = (resource) => {
         resource.offering_plugin_options &&
         resource.offering_plugin_options['username_generation_policy'] ===
           'service_provider',
-      disabled_tooltip: translate(
-        'Username will be provided by service provider after processing the request',
-      ),
+      disabled_tooltip: translate('Username is managed by service provider.'),
     },
     {
       name: 'users',
