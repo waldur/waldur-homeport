@@ -11,7 +11,7 @@ import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { TableOptionsType } from '@waldur/table/types';
-import { getProject } from '@waldur/workspace/selectors';
+import { getProject, getUser } from '@waldur/workspace/selectors';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 import { ProjectHoverableRow } from './ProjectHoverableRow';
@@ -116,6 +116,7 @@ const PureProjects = getUserProjectsList();
 const mapStateToProps = (state: RootState) => ({
   stateFilter: getFormValues('affiliationProjectsListFilter')(state),
   currentProject: getProject(state),
+  user: getUser(state),
 });
 
 const Projects = connect(mapStateToProps)(PureProjects);
