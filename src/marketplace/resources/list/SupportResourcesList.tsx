@@ -13,6 +13,7 @@ export const SupportResourcesList: React.ComponentType<any> = () => {
   const filter = useSelector((state) =>
     mapPropsToFilter(state, 'SupportResourcesFilter'),
   );
+  delete filter.provider_uuid;
   const tableProps = useTable({
     ...TableOptions,
     table: 'SupportResourcesList',
