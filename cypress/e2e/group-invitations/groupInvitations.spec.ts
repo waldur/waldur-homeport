@@ -137,7 +137,7 @@ describe('Group invitations', () => {
   it('Should cancel invitation works properly', () => {
     cy.contains('button', 'Cancel')
       .click()
-      .get('.btn-danger')
+      .get('.modal-footer .btn-primary:contains("Yes")')
       .click()
       .get('.reapop__notification-meta')
       .should('be.visible');
