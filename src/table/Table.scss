@@ -33,10 +33,8 @@
 
 // Prevent vertical scroll of dropdown inside of table-responsive
 // https://stackoverflow.com/a/26021872/6917997
-@media (max-width: 991px) {
-  .table-container {
-    overflow-x: auto;
-  }
+.table-container {
+  overflow-x: auto;
 }
 
 @media (max-width: 767px) {
@@ -58,11 +56,5 @@
 
   .dataTables_info {
     padding-top: 0;
-  }
-}
-
-@media (min-width: 768px) {
-  .table-responsive {
-    overflow: inherit;
   }
 }

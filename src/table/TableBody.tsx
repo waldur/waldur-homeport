@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
 import { TableProps } from './Table';
@@ -67,6 +67,75 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   const isRowSelected = (row: any) => {
     return selectedRows.some((item) => item.uuid === row.uuid);
   };
+
+  /**
+   * We have an issue in displaying the dropdown actions inside the responsive table.
+   * The dropdown goes under the edges of the table, because the responsive table has auto overflow.
+   * The following approach fixes this issue by detaching the dropdown from the table and append it to the <body>.
+   */
+  useEffect(() => {
+    async function clickListener(e) {
+      // if the button is inside a modal
+      if (document.body.className.includes('modal-open')) {
+        // This solution is not working inside a responsive table inside a modal,
+        // you need to find out a way to calculate the modal Z-index and add it to the element
+        return true;
+      }
+      if (e.target.className.includes('dropdown-toggle')) {
+        const dropdownToggle: HTMLButtonElement = e.target;
+        const buttonGroup = dropdownToggle.parentElement;
+        let dropdownMenu: HTMLElement;
+        let shouldAttach;
+        if (!buttonGroup.hasAttribute('data-attached')) {
+          const ts = +new Date();
+          dropdownMenu = dropdownToggle.nextSibling as HTMLElement;
+          let retryCount = 0;
+          while (!dropdownMenu && retryCount < 10) {
+            retryCount++;
+            await new Promise((resolve) =>
+              setTimeout(() => resolve(true), 100),
+            );
+            dropdownMenu = dropdownToggle.nextSibling as HTMLElement;
+          }
+          if (!dropdownMenu) return;
+          buttonGroup.setAttribute('data-attached', String(ts));
+          dropdownMenu.setAttribute('data-parent', String(ts));
+          shouldAttach = true;
+        } else {
+          dropdownMenu = document.querySelector(
+            '[data-parent="' + buttonGroup.getAttribute('data-attached') + '"]',
+          );
+          shouldAttach = false;
+        }
+        if (!buttonGroup.className.includes('show')) {
+          dropdownMenu.style.display = 'none';
+          return;
+        }
+
+        // Fix dropdown position
+        dropdownMenu.style.position = 'absolute';
+        dropdownMenu.style.display = 'block';
+
+        if (shouldAttach) document.body.append(dropdownMenu);
+      }
+    }
+
+    function hideAllDropdownMenus() {
+      // hide all dropdowns attached to body
+      document
+        .querySelectorAll('.dropdown-menu[data-parent]')
+        .forEach((itemMenu: HTMLElement) => {
+          itemMenu.style.display = 'none';
+        });
+    }
+    document.addEventListener('click', hideAllDropdownMenus);
+    document.addEventListener('click', clickListener);
+
+    return () => {
+      document.removeEventListener('click', hideAllDropdownMenus);
+      document.removeEventListener('click', clickListener);
+    };
+  }, []);
 
   return (
     <tbody>
