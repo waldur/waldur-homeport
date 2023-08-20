@@ -38,10 +38,10 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       title={title}
       footer={
         <>
-          <Button variant="danger" onClick={handleSubmit}>
-            {translate('Yes')}
+          <Button onClick={handleSubmit}>{translate('Yes')}</Button>
+          <Button variant="danger" onClick={handleCancel}>
+            {translate('No')}
           </Button>
-          <Button onClick={handleCancel}>{translate('No')}</Button>
         </>
       }
     >
