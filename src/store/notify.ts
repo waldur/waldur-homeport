@@ -9,6 +9,8 @@ export const showSuccess = (message) =>
     message,
     position: 'top-right',
     dismissAfter: 7000,
+    showDismissButton: true,
+    dismissible: true,
   });
 
 export const showError = (message) =>
@@ -17,6 +19,8 @@ export const showError = (message) =>
     message,
     position: 'top-right',
     dismissAfter: 7000,
+    showDismissButton: true,
+    dismissible: true,
   });
 
 export const showErrorResponse = (
