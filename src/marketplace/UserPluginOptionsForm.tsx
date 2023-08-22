@@ -69,6 +69,13 @@ export const UserPluginOptionsForm: FunctionComponent<{}> = () => {
           100000,
         ),
       );
+      dispatch(
+        change(
+          EDIT_INTEGRATION_FORM_ID,
+          'plugin_options.homedir_prefix',
+          '/home/',
+        ),
+      );
     }
   }, [dispatch, pluginOptions?.username_generation_policy]);
 
@@ -133,6 +140,11 @@ export const UserPluginOptionsForm: FunctionComponent<{}> = () => {
         {translate('Initial primary group number')}
       </Form.Label>
       <Field name="initial_primarygroup_number" component={NumberField} />
+
+      <Form.Label className="mt-3">
+        {translate('Home directory prefix')}
+      </Form.Label>
+      <Field name="homedir_prefix" component={StringField} />
     </>
   ) : null;
 };
