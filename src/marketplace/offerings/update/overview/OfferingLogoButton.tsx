@@ -3,13 +3,10 @@ import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { PermissionEnum, hasPermission } from '@waldur/core/permissions';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import {
-  getUser,
-  isOwner as isOwnerSelector,
-  isServiceManagerSelector,
-} from '@waldur/workspace/selectors';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 import { ACTIVE, DRAFT, PAUSED } from '../../store/constants';
 
@@ -20,8 +17,7 @@ const UpdateOfferingLogoDialog = lazyComponent(
 
 export const OfferingLogoButton: FC<{ offering; refetch }> = (props) => {
   const user = useSelector(getUser);
-  const isServiceManager = useSelector(isServiceManagerSelector);
-  const isOwner = useSelector(isOwnerSelector);
+  const customer = useSelector(getCustomer);
 
   const dispatch = useDispatch();
   const callback = () =>
@@ -33,7 +29,10 @@ export const OfferingLogoButton: FC<{ offering; refetch }> = (props) => {
   if (
     user.is_staff ||
     ([DRAFT, ACTIVE, PAUSED].includes(props.offering.state) &&
-      (isOwner || isServiceManager))
+      hasPermission(user, {
+        permission: PermissionEnum.UPDATE_OFFERING_THUMBNAIL,
+        customerId: customer.uuid,
+      }))
   )
     return (
       <Button onClick={callback} size="sm" className="me-3">

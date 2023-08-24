@@ -68,7 +68,13 @@ export const OrderDetails: React.FC<{}> = () => {
           />
           <div className="text-right">
             <OrderRefreshButton loadData={refetch} />
-            {data.step === 'Approve' && <OrderActions orderId={order_uuid} />}
+            {data.step === 'Approve' && (
+              <OrderActions
+                orderId={order_uuid}
+                customerId={data.customer_uuid}
+                projectId={data.project_uuid}
+              />
+            )}
           </div>
         </Col>
         <Col lg={4}>

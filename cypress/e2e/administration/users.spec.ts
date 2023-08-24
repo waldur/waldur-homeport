@@ -8,6 +8,7 @@ describe('Users', () => {
       .intercept('GET', '/api/customer-permissions/', [])
       .intercept('GET', '/api/project-permissions/', [])
       .intercept('GET', '/api/events/', [])
+      .intercept('GET', '/api/roles/', [])
 
       .intercept('GET', '/api/users/me/', {
         fixture: 'support/me.json',

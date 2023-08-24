@@ -1,26 +1,28 @@
-import { RootState } from '@waldur/store/reducers';
-import {
-  isOwner,
-  isAdmin,
-  isManager,
-  isStaff,
-} from '@waldur/workspace/selectors';
+import { createSelector } from 'reselect';
 
-export const orderCanBeApproved = (state: RootState) => {
-  if (isStaff(state)) {
-    return true;
-  }
-  if (state.config.plugins.WALDUR_MARKETPLACE) {
-    const marketplace = state.config.plugins.WALDUR_MARKETPLACE;
-    if (marketplace.OWNER_CAN_APPROVE_ORDER && isOwner(state)) {
-      return true;
-    }
-    if (marketplace.ADMIN_CAN_APPROVE_ORDER && isAdmin(state)) {
-      return true;
-    }
-    if (marketplace.MANAGER_CAN_APPROVE_ORDER && isManager(state)) {
-      return true;
-    }
-  }
-  return false;
-};
+import { PermissionEnum, hasPermission } from '@waldur/core/permissions';
+import { getCustomer, getProject, getUser } from '@waldur/workspace/selectors';
+
+export const orderCanBeApproved = createSelector(
+  getUser,
+  getCustomer,
+  getProject,
+  (user, customer, project) =>
+    hasPermission(user, {
+      permission: PermissionEnum.APPROVE_ORDER,
+      customerId: customer?.uuid,
+      projectId: project?.uuid,
+    }),
+);
+
+export const orderCanBeRejected = createSelector(
+  getUser,
+  getCustomer,
+  getProject,
+  (user, customer, project) =>
+    hasPermission(user, {
+      permission: PermissionEnum.REJECT_ORDER,
+      customerId: customer?.uuid,
+      projectId: project?.uuid,
+    }),
+);

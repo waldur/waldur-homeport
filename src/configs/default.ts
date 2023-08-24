@@ -46,4 +46,5 @@ export const ENV: ApplicationConfigurationOptions = {
 
   // It can be either 'localStorage' or 'sessionStorage'.
   authStorage: 'localStorage',
+  permissions: {},
 };

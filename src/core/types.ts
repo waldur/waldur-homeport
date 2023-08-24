@@ -43,6 +43,7 @@ export interface LanguageOption {
 }
 
 export interface ApplicationConfigurationOptions {
+  permissions: Record<string, string[]>;
   apiEndpoint: string;
   plugins?: PluginConfiguration;
   // Language choices and default language are fetched from MasterMind

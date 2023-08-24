@@ -67,16 +67,11 @@ interface CoreConfiguration {
 }
 
 interface MarketplaceConfiguration {
-  OWNER_CAN_APPROVE_ORDER: boolean;
-  MANAGER_CAN_APPROVE_ORDER: boolean;
-  ADMIN_CAN_APPROVE_ORDER: boolean;
-  OWNER_CAN_REGISTER_SERVICE_PROVIDER: boolean;
   ANONYMOUS_USER_CAN_VIEW_OFFERINGS: boolean;
   ENABLE_RESOURCE_END_DATE: boolean;
 }
 
 interface OpenStackConfiguration {
-  MANAGER_CAN_MANAGE_TENANTS: boolean;
   TENANT_CREDENTIALS_VISIBLE: boolean;
 }
 

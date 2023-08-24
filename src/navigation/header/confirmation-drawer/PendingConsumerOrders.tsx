@@ -58,7 +58,12 @@ export const PendingConsumerOrders: React.FC<{}> = () => {
         initialPageSize={5}
         fullWidth={true}
         hoverableRow={({ row }) => (
-          <OrderActions orderId={row.uuid} refetch={tableProps.fetch} />
+          <OrderActions
+            orderId={row.uuid}
+            customerId={row.customer_uuid}
+            projectId={row.project_uuid}
+            refetch={tableProps.fetch}
+          />
         )}
       />
       <BulkConsumerActions

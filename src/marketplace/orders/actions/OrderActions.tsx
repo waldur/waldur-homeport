@@ -1,24 +1,27 @@
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
+
+import { PermissionEnum, hasPermission } from '@waldur/core/permissions';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { ApproveButton } from './ApproveButton';
 import { RejectButton } from './RejectButton';
-import { orderCanBeApproved as orderCanBeApprovedSelector } from './selectors';
+import { OrderActionProps } from './types';
 
-export const OrderActions = ({
-  orderId,
-  refetch,
-}: {
-  orderId: string;
-  refetch?;
-}) => {
-  const orderCanBeApproved = useSelector(orderCanBeApprovedSelector);
-  if (!orderCanBeApproved) {
-    return null;
-  }
+export const OrderActions: FC<OrderActionProps> = (props) => {
+  const user = useSelector(getUser);
   return (
     <>
-      <ApproveButton orderId={orderId} refetch={refetch} />
-      <RejectButton orderId={orderId} refetch={refetch} />
+      {hasPermission(user, {
+        permission: PermissionEnum.APPROVE_ORDER,
+        customerId: props.customerId,
+        projectId: props.projectId,
+      }) && <ApproveButton {...props} />}
+      {hasPermission(user, {
+        permission: PermissionEnum.REJECT_ORDER,
+        customerId: props.customerId,
+        projectId: props.projectId,
+      }) && <RejectButton {...props} />}
     </>
   );
 };

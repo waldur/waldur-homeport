@@ -34,32 +34,33 @@ describe('Link persistance after login', () => {
 describe('Expired token redirect', () => {
   // See also: https://github.com/cypress-io/cypress/issues/9302
   it('should redirect to attempted url with params after login', () => {
-    cy.server()
-      .route('GET', '/api/configuration/', 'fixture:configuration.json')
-      .route('POST', '/api-auth/password/', { token: 'valid' })
-      .route('GET', '/api/customer-permissions/', [])
-      .route('GET', '/api/project-permissions/', [])
-      .route(
+    cy
+      .intercept('GET', '/api/configuration/', {fixture:'configuration.json'})
+      .intercept('POST', '/api-auth/password/', { token: 'valid' })
+      .intercept('GET', '/api/customer-permissions/', [])
+      .intercept('GET', '/api/project-permissions/', [])
+      .intercept(
         'GET',
         '/api/project-permissions/?user=3a836bc76e1b40349ec1a0d8220f374f&project=df4193e2bee24a4c8e339474d74c5f8c',
         [],
       )
-      .route('GET', '/api/events/', [])
-      .route(
+      .intercept('GET', '/api/roles/', [])
+      .intercept('GET', '/api/events/', [])
+      .intercept(
         'GET',
         '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/',
-        'fixture:customers/alice.json',
+        {fixture:'customers/alice.json'},
       )
-      .route('GET', '/api/customers/', 'fixture:customers/alice_bob_web.json')
-      .route(
+      .intercept('GET', '/api/customers/', {fixture:'customers/alice_bob_web.json'})
+      .intercept(
         'GET',
         '/api/projects/df4193e2bee24a4c8e339474d74c5f8c/',
-        'fixture:projects/alice_azure.json',
+        {fixture:'projects/alice_azure.json'},
       )
-      .route('/api/users/me/', { status: 401 });
+      .intercept('/api/users/me/', { status: 401 });
 
     cy.visit('/projects/df4193e2bee24a4c8e339474d74c5f8c/')
-      .route('/api/users/me/', 'fixture:users/alice.json')
+      .intercept('/api/users/me/', {fixture:'users/alice.json'})
       .get('.LoginWithLocalAccountText')
       .click()
       .fillAndSubmitLoginForm()
@@ -68,27 +69,26 @@ describe('Expired token redirect', () => {
   });
 
   it('should redirect to attempted url with params after login even if 401 error is not raised during transition', () => {
-    cy.server()
-      .route('GET', '/api/configuration/', 'fixture:configuration.json')
-      .route('GET', '/api/users/me/', 'fixture:users/alice.json')
-      .route('POST', '/api-auth/password/', { token: 'valid' })
-      .route({ method: 'GET', url: '/api/events/**', response: [] })
+    cy
+      .intercept('GET', '/api/configuration/', {fixture:'configuration.json'})
+      .intercept('GET', '/api/roles/', [])
+      .intercept('GET', '/api/users/me/', {fixture:'users/alice.json'})
+      .intercept('POST', '/api-auth/password/', { token: 'valid' })
+      .intercept('GET', '/api/events/**', [] )
       .as('success')
       .setToken()
       .visit('/profile/events/')
       .wait(['@success']);
 
-    cy.route({
-      method: 'GET',
-      url: '/api/events/**',
-      status: 401,
-      response: [],
+    cy.intercept('GET', '/api/events/**',
+      {statusCode: 401,
+      body: [],
     }).as('error');
 
     cy.get('button:has(i.fa.fa-refresh)')
       .click()
       .wait(['@error'])
-      .route({ method: 'GET', url: '/api/events/**', response: [] });
+      .intercept('GET', '/api/events/**', []);
 
     cy.get('.LoginWithLocalAccountText')
       .click()
