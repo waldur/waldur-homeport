@@ -1,22 +1,18 @@
 import { useSelector, useDispatch } from 'react-redux';
 
+import { PermissionEnum, hasPermission } from '@waldur/core/permissions';
 import { translate, formatJsxTemplate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import {
-  getCustomer,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-  isServiceManagerSelector,
-} from '@waldur/workspace/selectors';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 import { rejectBooking } from './api';
 import * as constants from './constants';
 
 export const CancelAction = ({ resource, refetch }) => {
   const dispatch = useDispatch();
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-  const isServiceManager = useSelector(isServiceManagerSelector);
+  const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
   const isServiceProviderContext = resource.provider_uuid === customer.uuid;
 
@@ -45,7 +41,10 @@ export const CancelAction = ({ resource, refetch }) => {
     }
   };
 
-  return isServiceManager || isOwnerOrStaff ? (
+  return hasPermission(user, {
+    permission: PermissionEnum.REJECT_BOOKING_REQUEST,
+    customerId: customer.uuid,
+  }) ? (
     <ActionItem
       title={
         isServiceProviderContext ? translate('Reject') : translate('Cancel')

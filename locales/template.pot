@@ -6762,6 +6762,10 @@ msgstr ""
 msgid "Please select OECD code corresponding to field of science and technology"
 msgstr ""
 
+#: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
+msgid "Please select a script language to use dry-run"
+msgstr ""
+
 #: src/freeipa/UsernameGroup.tsx
 msgid "Please select a username that you will use for login into the Linux systems."
 msgstr ""
@@ -12157,6 +12161,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx
 msgid "Username has been updated."
+msgstr ""
+
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
+msgid "Username is managed by service provider."
 msgstr ""
 
 #: src/freeipa/UsernameGroup.tsx

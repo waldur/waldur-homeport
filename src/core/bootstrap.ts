@@ -6,7 +6,7 @@ import { ENV } from '@waldur/configs/default';
 const CONFIG_FILE = 'scripts/configs/config.json';
 
 export async function loadConfig() {
-  let frontendSettings, backendSettings;
+  let frontendSettings, backendSettings, roles;
   try {
     const frontendResponse = await Axios.get(CONFIG_FILE);
     frontendSettings = frontendResponse.data;
@@ -35,6 +35,11 @@ export async function loadConfig() {
       `${frontendSettings.apiEndpoint}api/configuration/`,
     );
     backendSettings = backendResponse.data;
+
+    const rolesResponse = await Axios.get(
+      `${frontendSettings.apiEndpoint}api/roles/`,
+    );
+    roles = rolesResponse.data;
   } catch (error) {
     if (!error) {
       throw new Error(
@@ -58,6 +63,10 @@ export async function loadConfig() {
     })),
     defaultLanguage: backendSettings.LANGUAGE_CODE,
     FEATURES: backendSettings.FEATURES,
+    permissions: roles.reduce(
+      (result, item) => ({ ...result, [item.name]: item.permissions }),
+      {},
+    ),
   };
   Object.assign(ENV, config);
   afterBootstrap();

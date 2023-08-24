@@ -2,13 +2,10 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { PermissionEnum, hasPermission } from '@waldur/core/permissions';
 import { translate } from '@waldur/i18n';
 import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
-import {
-  getCustomer,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-  isServiceManagerSelector,
-} from '@waldur/workspace/selectors';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 const SetBackendIdDialog = lazyComponent(
   () => import('./SetBackendIdDialog'),
@@ -16,11 +13,16 @@ const SetBackendIdDialog = lazyComponent(
 );
 
 export const SetBackendIdButton: FC<any> = ({ resource, refetch }) => {
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-  const isServiceManager = useSelector(isServiceManagerSelector);
+  const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
   const isServiceProviderContext = resource.provider_uuid === customer.uuid;
-  if (!isOwnerOrStaff && !isServiceManager && !isServiceProviderContext) {
+  if (
+    !hasPermission(user, {
+      permission: PermissionEnum.SET_RESOURCE_BACKEND_ID,
+      customerId: customer.uuid,
+    }) &&
+    !isServiceProviderContext
+  ) {
     return null;
   }
   return (
