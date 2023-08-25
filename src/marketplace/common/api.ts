@@ -424,15 +424,18 @@ export const updateProviderOfferingDescription = (offeringId, category) =>
     category,
   });
 
-export const runOfferingScript = (
+export const asyncRunOfferingScript = (
   offeringUuid: string,
   plan: string,
   type: string,
 ) =>
-  post(`/marketplace-script-dry-run/${offeringUuid}/run/`, {
+  post(`/marketplace-script-dry-run/${offeringUuid}/async_run/`, {
     plan,
     type,
   });
+
+export const getAsyncDryRun = (uuid) =>
+  get(`/marketplace-script-async-dry-run/${uuid}/`);
 
 export const updateProviderOfferingAccessPolicy = (
   offeringUuid: string,
