@@ -3730,6 +3730,10 @@ msgstr ""
 msgid "Hide diff"
 msgstr ""
 
+#: src/marketplace/UserPluginOptionsForm.tsx
+msgid "Home directory prefix"
+msgstr ""
+
 #: src/customer/create/DomainGroup.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Home organization domain name"

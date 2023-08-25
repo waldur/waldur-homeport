@@ -194,7 +194,7 @@ export const OpenstackInstanceCheckoutSummary: React.FC<OfferingDetailsProps> =
               translate('Please select flavor to see price estimate.')}
           </p>
         )}
-        {!offering.shared && !offering.billable && (
+        {customer && !offering.shared && !offering.billable && (
           <p>
             {translate(
               'Note that this virtual machine will not be charged separately for {organization}.',

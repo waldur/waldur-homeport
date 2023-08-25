@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
 
 import { queryClient } from '@waldur/Application';
@@ -8,7 +7,6 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { Category } from '@waldur/marketplace/types';
-import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { CategoriesPanel } from './CategoriesPanel';
 import { RECENTLY_ADDED_OFFERINGS_UUID } from './MarketplacePopup';
@@ -16,9 +14,7 @@ import { OfferingsPanel } from './OfferingsPanel';
 import { fetchCategories, fetchLastNOfferings, fetchOfferings } from './utils';
 import { WelcomeView } from './WelcomeView';
 
-export const DataLoader = ({ filter }) => {
-  const currentCustomer = useSelector(getCustomer);
-  const currentProject = useSelector(getProject);
+export const DataLoader = ({ filter, currentCustomer, currentProject }) => {
   const [selectedCategory, selectCategory] = useState<Category>();
 
   const { data: lastOfferings } = useQuery(

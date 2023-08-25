@@ -1,9 +1,11 @@
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Col, FormControl, Row } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
+import { useSelector } from 'react-redux';
 
 import useOnScreen from '@waldur/core/useOnScreen';
 import { translate } from '@waldur/i18n';
+import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { getSidebarToggle } from '../Sidebar';
 
@@ -14,6 +16,8 @@ export const RECENTLY_ADDED_OFFERINGS_UUID =
   'recently_added_offerings_category';
 
 export const MarketplacePopup: FunctionComponent = () => {
+  const currentCustomer = useSelector(getCustomer);
+  const currentProject = useSelector(getProject);
   const [filter, setFilter] = useState('');
 
   const refPopup = useRef<HTMLDivElement>();
@@ -74,7 +78,13 @@ export const MarketplacePopup: FunctionComponent = () => {
           </Row>
         </div>
         <div className="d-flex flex-column flex-md-row h-100">
-          {isVisible && <DataLoader filter={filter} />}
+          {isVisible && currentCustomer && currentProject && (
+            <DataLoader
+              filter={filter}
+              currentCustomer={currentCustomer}
+              currentProject={currentProject}
+            />
+          )}
         </div>
       </div>
     </>
