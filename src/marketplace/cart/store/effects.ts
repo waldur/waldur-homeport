@@ -72,7 +72,10 @@ function* initCart() {
     const items = yield call(api.getCartItems, project.url);
     yield put(actions.setItems(items));
   } catch (error) {
-    if (error.status === -1 || error.status === 401) {
+    if (
+      error.isAxiosError &&
+      (error.response.status === -1 || error.response.status === 401)
+    ) {
       return;
     }
     yield put(
