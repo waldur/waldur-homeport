@@ -436,13 +436,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-vendor-offering-details',
-    url: 'offering-details/:offering_uuid',
-    component: OfferingContainer,
-    parent: 'provider-marketplace',
-  },
-
-  {
     name: 'marketplace-vendor-offering-users',
     url: 'offering-users/',
     component: ProviderOfferingUsersList,
