@@ -25,6 +25,7 @@ export interface OfferingComponent extends BaseComponent {
   is_boolean?: boolean;
   default_limit?: number;
   article_code?: string;
+  uuid: string;
 }
 
 export interface Plan {

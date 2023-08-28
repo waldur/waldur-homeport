@@ -3,7 +3,8 @@ import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { updateProviderOfferingComponents } from '@waldur/marketplace/common/api';
+import { removeProviderOfferingComponent } from '@waldur/marketplace/common/api';
+import { formatComponent } from '@waldur/marketplace/offerings/store/utils';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -32,7 +33,8 @@ export const DeleteComponentButton = ({ offering, component }) => {
       (item) => item.type !== component.type,
     );
     try {
-      await updateProviderOfferingComponents(offering.uuid, newComponents);
+      const data = formatComponent(component);
+      await removeProviderOfferingComponent(offering.uuid, data);
       queryClient.setQueryData<OfferingData>(
         ['OfferingUpdateContainer', offering.uuid],
         (oldData) => ({

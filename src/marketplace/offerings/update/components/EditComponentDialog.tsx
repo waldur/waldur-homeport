@@ -5,11 +5,11 @@ import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateProviderOfferingComponents } from '@waldur/marketplace/common/api';
+import { updateOfferingComponent } from '@waldur/marketplace/common/api';
+import { formatComponent } from '@waldur/marketplace/offerings/store/utils';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { formatComponent } from '../../store/utils';
 import { parseComponent } from '../utils';
 
 import { ComponentForm } from './ComponentForm';
@@ -26,17 +26,9 @@ export const EditComponentDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
     const dispatch = useDispatch();
     const update = useCallback(
       async (formData) => {
-        const newComponents = [
-          ...props.resolve.offering.components.filter(
-            (item) => item.uuid !== props.resolve.component.uuid,
-          ),
-          formatComponent(formData),
-        ];
         try {
-          await updateProviderOfferingComponents(
-            props.resolve.offering.uuid,
-            newComponents,
-          );
+          const data = formatComponent(formData);
+          await updateOfferingComponent(props.resolve.offering.uuid, data);
           dispatch(
             showSuccess(
               translate('Billing component has been updated successfully.'),
