@@ -207,6 +207,24 @@ export const updateProviderOfferingComponents = (offeringId, data) =>
     data,
   );
 
+export const removeProviderOfferingComponent = (offeringId, data) =>
+  post(
+    `/marketplace-provider-offerings/${offeringId}/remove_offering_component/`,
+    data,
+  );
+
+export const createProviderOfferingComponent = (offeringId, data) =>
+  post(
+    `/marketplace-provider-offerings/${offeringId}/create_offering_component/`,
+    data,
+  );
+
+export const updateOfferingComponent = (offeringId, data) =>
+  post(
+    `/marketplace-provider-offerings/${offeringId}/update_offering_component/`,
+    data,
+  );
+
 export const updateProviderOfferingSecretOptions = (offeringId, data) =>
   post(
     `/marketplace-provider-offerings/${offeringId}/update_secret_options/`,

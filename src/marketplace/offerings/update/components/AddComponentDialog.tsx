@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateProviderOfferingComponents } from '@waldur/marketplace/common/api';
+import { createProviderOfferingComponent } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -31,9 +31,9 @@ export const AddComponentDialog = reduxForm<
         formatComponent(formData),
       ];
       try {
-        await updateProviderOfferingComponents(
+        await createProviderOfferingComponent(
           props.resolve.offering.uuid,
-          newComponents,
+          formatComponent(formData),
         );
         dispatch(
           showSuccess(

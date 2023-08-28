@@ -19,6 +19,7 @@ const COMPONENTS = [
     max_value: null,
     min_value: null,
     factor: null,
+    uuid: '10ff42e159d7472fb35d4db517e6c16e',
   },
   {
     billing_type: 'usage' as BillingType,
@@ -32,6 +33,7 @@ const COMPONENTS = [
     max_value: null,
     min_value: null,
     factor: null,
+    uuid: '36d5008a3b6611eebe560242ac120002',
   },
   {
     billing_type: 'fixed' as BillingType,
@@ -45,6 +47,7 @@ const COMPONENTS = [
     max_value: 500,
     min_value: 1,
     factor: 1,
+    uuid: '36d506483b6611eebe560242ac120002',
   },
   {
     billing_type: 'fixed' as BillingType,
@@ -58,6 +61,7 @@ const COMPONENTS = [
     max_value: 20480000,
     min_value: 1024,
     factor: 1024,
+    uuid: '36d508503b6611eebe560242ac120002',
   },
   {
     billing_type: 'fixed' as BillingType,
@@ -71,6 +75,7 @@ const COMPONENTS = [
     max_value: 102400000,
     min_value: 10240,
     factor: 1024,
+    uuid: '36d50a8a3b6611eebe560242ac120002',
   },
 ];
 

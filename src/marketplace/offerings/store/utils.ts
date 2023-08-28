@@ -84,6 +84,7 @@ export const formatComponent = (component) => ({
   ...component,
   billing_type: getBillingTypeValue(component.billing_type),
   limit_period: component.limit_period ? component.limit_period.value : null,
+  uuid: component.uuid,
 });
 
 export const formatSchedules = (schedules) =>
