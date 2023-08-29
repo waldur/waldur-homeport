@@ -69,6 +69,18 @@ export const CostPoliciesList = () => {
             />
           ),
         },
+        {
+          title: translate('Project estimated current cost'),
+          render: ({ row }) => (
+            <>
+              {defaultCurrency(
+                (row.billing_price_estimate &&
+                  row.billing_price_estimate.current) ||
+                  0,
+              )}
+            </>
+          ),
+        },
       ]}
       verboseName={translate('Cost policies')}
       initialSorting={{ field: 'created', mode: 'desc' }}
