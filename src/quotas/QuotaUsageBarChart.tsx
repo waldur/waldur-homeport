@@ -1,4 +1,4 @@
-import { FunctionComponent, Fragment } from 'react';
+import { FunctionComponent } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -8,6 +8,7 @@ import { formatQuotaName, formatQuotaValue } from '@waldur/quotas/utils';
 
 interface QuotaUsageBarChartProps {
   quotas: Quota[];
+  className?: string;
 }
 
 export const exceeds = (quota) => quota.usage + quota.required > quota.limit;
@@ -49,19 +50,21 @@ export const ProgressTooltipMessage = ({ quota }) => (
 );
 
 export const QuotaUsageBarChartDescription = ({ quota }) => (
-  <>
-    <strong>{formatQuotaName(quota.name)}</strong>
-    {exceeds(quota) && (
-      <Tip
-        id={quota.name}
-        label={translate('Quota usage exceeds available limit.')}
-      >
-        {' '}
-        <i className="fa fa-exclamation-triangle" />
-      </Tip>
-    )}
-    <span className="pull-right text-muted">{getSummary(quota)}</span>
-  </>
+  <div className="quota-info d-flex justify-content-between gap-3 mb-2">
+    <p className="mb-0">
+      <strong className="text-dark">{formatQuotaName(quota.name)}</strong>
+      {exceeds(quota) && (
+        <Tip
+          id={quota.name}
+          label={translate('Quota usage exceeds available limit.')}
+        >
+          {' '}
+          <i className="fa fa-exclamation-triangle" />
+        </Tip>
+      )}
+    </p>
+    <span className="text-muted fw-normal">{getSummary(quota)}</span>
+  </div>
 );
 
 export const QuotaUsageBarChart: FunctionComponent<QuotaUsageBarChartProps> = (
@@ -71,13 +74,12 @@ export const QuotaUsageBarChart: FunctionComponent<QuotaUsageBarChartProps> = (
     {props.quotas.map((quota, index) => {
       if (quota.limit !== -1) {
         return (
-          <Fragment key={index}>
-            <div className="mb-2 mt-5">
-              <QuotaUsageBarChartDescription quota={quota} />
-            </div>
+          <div key={index} className={props.className}>
+            <QuotaUsageBarChartDescription quota={quota} />
             <Tip
               id="quota-usage"
               label={<ProgressTooltipMessage quota={quota} />}
+              className="quota-progress"
             >
               <ProgressBar>
                 <ProgressBar
@@ -92,7 +94,7 @@ export const QuotaUsageBarChart: FunctionComponent<QuotaUsageBarChartProps> = (
                 />
               </ProgressBar>
             </Tip>
-          </Fragment>
+          </div>
         );
       }
     })}

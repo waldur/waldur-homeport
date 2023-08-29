@@ -13,6 +13,7 @@ interface ShoppingCartButtonProps {
   title?: string;
   icon?: string;
   isAddingItem?: boolean;
+  className?: string;
 }
 
 export const ShoppingCartButton: FunctionComponent<ShoppingCartButtonProps> = (
@@ -26,5 +27,6 @@ export const ShoppingCartButton: FunctionComponent<ShoppingCartButtonProps> = (
     flavor={props.flavor}
     disabled={props.disabled}
     isAddingItem={props.isAddingItem}
+    className={props.className}
   />
 );

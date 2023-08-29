@@ -146,20 +146,13 @@
       position: absolute;
       z-index: 0;
       left: 0;
-      top: 0;
+      top: 50%;
       bottom: 0;
       width: $pills-size;
       transform: translate(50%);
       border-left-width: 1px;
       border-left-style: dashed;
       border-left-color: $gray-300;
-    }
-
-    // First item
-    .stepper-item:first-child {
-      .stepper-line {
-        top: 50%;
-      }
     }
 
     // Last item

@@ -14,6 +14,7 @@ interface OfferingButtonProps {
   flavor?: 'primary' | 'secondary' | 'ternary';
   disabled?: boolean;
   isAddingItem?: boolean;
+  className?: string;
 }
 
 export const OfferingButton: FunctionComponent<OfferingButtonProps> = (
@@ -26,6 +27,7 @@ export const OfferingButton: FunctionComponent<OfferingButtonProps> = (
         variant="primary"
         disabled={props.disabled}
         onClick={props.onClick}
+        className={props.className}
       >
         {props.isAddingItem && <i className="fa fa-spinner fa-spin me-1" />}
         <i className={props.icon} /> {props.title}

@@ -232,6 +232,10 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-provider-offering/:offering_uuid/',
     component: OfferingDetailsPage,
     parent: 'project',
+    data: {
+      hideHeaderMenu: true,
+      hideProjectSelector: true,
+    },
   },
 
   {
@@ -239,6 +243,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-provider-offering/:offering_uuid/',
     component: OfferingDetailsPage,
     parent: 'organization',
+    data: {
+      hideHeaderMenu: true,
+    },
   },
 
   {
@@ -246,6 +253,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-provider-offering/:offering_uuid/',
     component: OfferingDetailsPage,
     parent: 'profile',
+    data: {
+      hideHeaderMenu: true,
+    },
   },
 
   {

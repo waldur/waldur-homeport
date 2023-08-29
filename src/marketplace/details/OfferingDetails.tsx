@@ -6,6 +6,12 @@ import { translate } from '@waldur/i18n';
 import { getCheckoutSummaryComponent } from '@waldur/marketplace/common/registry';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 import { Offering } from '@waldur/marketplace/types';
+import {
+  INSTANCE_TYPE,
+  SHARED_INSTANCE_TYPE,
+} from '@waldur/openstack/constants';
+
+import { DeployPage } from '../deploy/DeployPage';
 
 import { OfferingConfigurator } from './OfferingConfigurator';
 import './OfferingDetails.scss';
@@ -23,7 +29,9 @@ export const OfferingDetails: FunctionComponent<OfferingDetailsProps> = (
   const CheckoutSummaryComponent = getCheckoutSummaryComponent(
     props.offering.type,
   );
-  return (
+  return [INSTANCE_TYPE, SHARED_INSTANCE_TYPE].includes(props.offering.type) ? (
+    <DeployPage offering={props.offering} />
+  ) : (
     <>
       <Row>
         <Col md={9}>

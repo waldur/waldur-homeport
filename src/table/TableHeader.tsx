@@ -4,6 +4,7 @@ import { FormCheck } from 'react-bootstrap';
 
 import './TableHeader.scss';
 
+import { TableProps } from './Table';
 import { Column, Sorting } from './types';
 
 interface TableHeaderProps {
@@ -15,6 +16,7 @@ interface TableHeaderProps {
   enableMultiSelect?: boolean;
   onSelectAllRows?(rows: any[]): void;
   selectedRows?: any[];
+  fieldType?: TableProps['fieldType'];
 }
 
 function handleOrdering(currentSorting: Sorting, field: string): Sorting {
@@ -66,13 +68,16 @@ export const TableHeader: React.FC<TableHeaderProps> = ({
   enableMultiSelect,
   onSelectAllRows,
   selectedRows,
+  fieldType,
 }) => {
   const isAllSelected = selectedRows?.length >= rows?.length;
 
   return (
     <thead>
       <tr className="text-start text-muted bg-light fw-bolder fs-7 text-uppercase gs-0">
-        {enableMultiSelect && (
+        {fieldType ? (
+          <th style={{ width: '10px' }}></th>
+        ) : enableMultiSelect ? (
           <th style={{ width: '10px' }}>
             <FormCheck
               className="form-check form-check-custom form-check-sm"
@@ -80,7 +85,7 @@ export const TableHeader: React.FC<TableHeaderProps> = ({
               onChange={() => onSelectAllRows(rows)}
             />
           </th>
-        )}
+        ) : null}
         {expandableRow && <th style={{ width: '10px' }} />}
         {columns.map(
           (column, index) =>

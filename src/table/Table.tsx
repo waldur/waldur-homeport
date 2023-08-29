@@ -32,6 +32,7 @@ export interface TableProps<RowType = any> extends TableState {
   verboseName?: string;
   className?: string;
   rowClass?: (({ row }) => string) | string;
+  hoverable?: boolean;
   showPageSizeSelector?: boolean;
   updatePageSize?: (size: number) => void;
   initialPageSize?: number;
@@ -59,6 +60,9 @@ export interface TableProps<RowType = any> extends TableState {
   selectAllRows?(rows: any[]): void;
   resetSelection?: () => void;
   filter?: Record<string, any>;
+  fieldType?: 'checkbox' | 'radio';
+  fieldName?: string;
+  required?: boolean;
 }
 
 class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
@@ -78,6 +82,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
         className={classNames(
           'card-table',
           this.props.fullWidth ? 'full-width' : '',
+          this.props.fieldName ? 'field-table' : '',
           this.props.className,
         )}
       >
@@ -218,7 +223,10 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
         <table
           className={classNames(
             'table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer',
-            this.props.expandableRow ? 'table-expandable' : '',
+            {
+              'table-expandable': Boolean(this.props.expandableRow),
+              'table-hover': this.props.hoverable,
+            },
           )}
         >
           {this.props.hasHeaders && (
@@ -231,6 +239,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
               enableMultiSelect={this.props.enableMultiSelect}
               onSelectAllRows={this.props.selectAllRows}
               selectedRows={this.props.selectedRows}
+              fieldType={this.props.fieldType}
             />
           )}
           <TableBody
@@ -246,6 +255,9 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
             toggleRow={this.props.toggleRow}
             toggled={this.props.toggled}
             fetch={this.props.fetch}
+            fieldType={this.props.fieldType}
+            fieldName={this.props.fieldName}
+            required={this.props.required}
           />
         </table>
       </ErrorBoundary>
