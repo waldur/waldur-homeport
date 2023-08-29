@@ -13,4 +13,5 @@ export interface CostPolicy extends CostPolicyFormData {
   created_by_full_name: string;
   created_by_username: string;
   has_fired: boolean;
+  billing_price_estimate: number;
 }
