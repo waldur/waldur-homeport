@@ -35,7 +35,7 @@ export const OfferingDetailsPage: React.FC = () => {
     [offering_uuid],
   );
 
-  useTitle(value ? value.offering.name : translate('Offering details'));
+  useTitle(translate('Add resource'));
 
   if (loading) {
     return <LoadingSpinner />;

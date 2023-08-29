@@ -25,7 +25,12 @@ export const ManagementMenu = () => {
           title={translate('Organization')}
           state="organization.dashboard"
           params={{ uuid: customer.uuid }}
-          activeState="organization"
+          activeState={
+            // The following state will highlight the "Add resource" menu item
+            ['marketplace-offering-customer'].includes(state.name)
+              ? undefined
+              : 'organization'
+          }
           iconPath={IconOrganization}
           child={false}
         />
@@ -45,6 +50,8 @@ export const ManagementMenu = () => {
             [
               'marketplace-project-resources-all',
               'marketplace-project-resources',
+              // The following state highlights the "Add resource" menu item
+              'marketplace-offering-project',
             ].includes(state.name) || params.resource_uuid
               ? undefined
               : 'project'

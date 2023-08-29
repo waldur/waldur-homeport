@@ -1,6 +1,9 @@
 import classNames from 'classnames';
 import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import { FormCheck } from 'react-bootstrap';
+import { Field } from 'redux-form';
+
+import { required as fieldRequired } from '@waldur/core/validators';
 
 import { TableProps } from './Table';
 import { getId } from './utils';
@@ -19,6 +22,9 @@ type TableBodyProps = Pick<
   | 'toggleRow'
   | 'toggled'
   | 'fetch'
+  | 'fieldType'
+  | 'fieldName'
+  | 'required'
 >;
 
 const TableCells = ({ row, columns }) => (
@@ -47,6 +53,9 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   toggleRow,
   toggled,
   fetch,
+  fieldType,
+  fieldName,
+  required,
 }) => {
   const trClick = useCallback(
     (row, index, e) => {
@@ -67,6 +76,80 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   const isRowSelected = (row: any) => {
     return selectedRows.some((item) => item.uuid === row.uuid);
   };
+
+  const onChangeField = useCallback(
+    (row, input) => {
+      if (fieldType === 'checkbox') {
+        if (isRowSelected(row)) {
+          input.onChange(selectedRows.filter((item) => item.uuid !== row.uuid));
+        } else {
+          input.onChange(selectedRows.concat(row));
+        }
+        selectRow(row);
+      } else if (fieldType === 'radio') {
+        input.onChange(row);
+        selectedRows.forEach((item) => selectRow(item));
+        selectRow(row);
+      }
+    },
+    [fieldType, isRowSelected, selectedRows, selectRow],
+  );
+
+  const TR = (row, rowIndex, fieldProps = null) => (
+    <tr
+      className={
+        classNames(
+          typeof rowClass === 'function' ? rowClass({ row }) : rowClass,
+          {
+            expanded: expandableRow && toggled[getId(row, rowIndex)],
+            checked: fieldType && isRowSelected(row),
+          },
+        ) || undefined
+      }
+      onClick={(event) => {
+        trClick(row, rowIndex, event);
+        if (fieldProps) {
+          onChangeField(row, fieldProps.input);
+        }
+      }}
+    >
+      {(enableMultiSelect || fieldType) && (
+        <td>
+          {fieldType && fieldProps ? (
+            <FormCheck
+              name={fieldProps.input.name}
+              type={fieldType}
+              className="form-check form-check-custom form-check-sm"
+              checked={isRowSelected(row)}
+              onChange={() => onChangeField(row, fieldProps.input)}
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <FormCheck
+              className="form-check form-check-custom form-check-sm"
+              checked={isRowSelected(row)}
+              onChange={() => selectRow(row)}
+            />
+          )}
+        </td>
+      )}
+      {expandableRow && (
+        <td>
+          {toggled[getId(row, rowIndex)] ? (
+            <i className="fa fa-chevron-down" />
+          ) : (
+            <i className="fa fa-chevron-right" />
+          )}
+        </td>
+      )}
+      <TableCells row={row} columns={columns} />
+      {hoverableRow && (
+        <td className="row-actions">
+          <div>{React.createElement(hoverableRow, { row, fetch })}</div>
+        </td>
+      )}
+    </tr>
+  );
 
   /**
    * We have an issue in displaying the dropdown actions inside the responsive table.
@@ -141,42 +224,15 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
     <tbody>
       {rows.map((row, rowIndex) => (
         <React.Fragment key={rowIndex}>
-          <tr
-            className={
-              classNames(
-                expandableRow && toggled[getId(row, rowIndex)]
-                  ? 'expanded'
-                  : undefined,
-                typeof rowClass === 'function' ? rowClass({ row }) : rowClass,
-              ) || undefined
-            }
-            onClick={(event) => trClick(row, rowIndex, event)}
-          >
-            {enableMultiSelect && (
-              <td>
-                <FormCheck
-                  className="form-check form-check-custom form-check-sm"
-                  checked={isRowSelected(row)}
-                  onChange={() => selectRow(row)}
-                />
-              </td>
-            )}
-            {expandableRow && (
-              <td>
-                {toggled[getId(row, rowIndex)] ? (
-                  <i className="fa fa-chevron-down" />
-                ) : (
-                  <i className="fa fa-chevron-right" />
-                )}
-              </td>
-            )}
-            <TableCells row={row} columns={columns} />
-            {hoverableRow && (
-              <td className="row-actions">
-                <div>{React.createElement(hoverableRow, { row, fetch })}</div>
-              </td>
-            )}
-          </tr>
+          {fieldType ? (
+            <Field
+              name={fieldName}
+              component={(fieldProps) => TR(row, rowIndex, fieldProps)}
+              validate={required ? [fieldRequired] : undefined}
+            />
+          ) : (
+            TR(row, rowIndex)
+          )}
           {expandableRow && toggled[getId(row, rowIndex)] && (
             <tr className={expandableRowClassName}>
               <td colSpan={columns.length + 1}>

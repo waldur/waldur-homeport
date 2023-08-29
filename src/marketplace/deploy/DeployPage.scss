@@ -1,0 +1,70 @@
+.deploy-view-steps {
+  padding-right: 300px;
+}
+
+.deploy-view-sidebar {
+  top: calc(65px + var(--kt-toolbar-height));
+  z-index: 95 !important;
+
+  .stepper {
+    &.stepper-pills {
+      &.stepper-column {
+        .stepper-item {
+          padding: 0;
+
+          &:last-child .stepper-line {
+            display: none;
+          }
+        }
+        .stepper-line {
+          width: 19px;
+        }
+      }
+      .stepper-item {
+        &.completed .stepper-label .stepper-title {
+          color: var(--bs-primary);
+        }
+        .stepper-label .stepper-title {
+          font-weight: 500;
+          font-size: 0.85rem;
+          margin-bottom: 0;
+        }
+        a.stepper-label {
+          cursor: pointer;
+
+          &:hover .stepper-title {
+            text-decoration: underline;
+          }
+        }
+        .stepper-icon {
+          width: unset;
+          height: 30px;
+          background-color: transparent !important;
+        }
+      }
+    }
+  }
+
+  .order-summary {
+    margin: 0 -2.25rem;
+    padding: 1.25rem 2.25rem;
+  }
+}
+
+body:not(.toolbar-fixed) .deploy-view-sidebar {
+  top: 65px;
+}
+
+.capacity-bar {
+  .progress {
+    width: 150px;
+  }
+  .quota-info {
+    margin-bottom: 0;
+    margin-top: 0.4rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+  }
+}

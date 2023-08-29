@@ -1,10 +1,8 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 import { Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { isDescendantOf } from '@waldur/navigation/useTabs';
 import { ProjectCreateButton } from '@waldur/project/ProjectCreateButton';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -18,10 +16,6 @@ export const ProjectField: FC<{ previewMode?: boolean }> = ({
   previewMode,
 }) => {
   const customer = useSelector(getCustomer);
-  const { state } = useCurrentStateAndParams();
-  if (isDescendantOf('project', state)) {
-    return null;
-  }
   return customer?.projects ? (
     <FormGroup label={translate('Project')} required={true}>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>

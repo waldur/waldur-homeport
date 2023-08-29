@@ -23,19 +23,11 @@ import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
-import { Flavor } from './types';
+import { OpenStackInstanceFormData } from './types';
 import { getVolumeTypeRequirements } from './utils';
 
-interface FormData {
-  name?: string;
-  service?: { name: string };
-  image?: { name: string };
-  flavor?: Flavor;
-  attributes?: Record<string, any>;
-}
-
 const getTotalStorage = (formData) =>
-  formData.system_volume_size + (formData.data_volume_size || 0);
+  (formData.system_volume_size || 0) + (formData.data_volume_size || 0);
 
 const getStoragePrice = (formData, components) => {
   const systemVolumeComponent = formData.system_volume_type
@@ -90,7 +82,7 @@ function extendVolumeTypeQuotas(formData, usages, limits) {
   return quotas;
 }
 
-const getQuotas = ({ formData, usages, limits }) => {
+export const getQuotas = ({ formData, usages, limits }) => {
   const quotas: Quota[] = [
     {
       name: 'vcpu',
@@ -116,7 +108,7 @@ const getQuotas = ({ formData, usages, limits }) => {
 };
 
 const formDataSelector = (state: RootState) =>
-  (getFormValues(FORM_ID)(state) || {}) as FormData;
+  (getFormValues(FORM_ID)(state) || {}) as OpenStackInstanceFormData;
 
 const formHasFlavorSelector = (state: RootState) =>
   Boolean(formDataSelector(state).flavor);

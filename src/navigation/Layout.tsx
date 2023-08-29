@@ -42,7 +42,7 @@ export const Layout: React.FC = ({ children }) => {
   const layout = useLayout();
   const tabs = useTabs();
 
-  const showToolbar = actions || tabs || extraTabs;
+  const showToolbar = Boolean(actions || tabs?.length || extraTabs?.length);
 
   useEffect(() => {
     layout.setLayout({

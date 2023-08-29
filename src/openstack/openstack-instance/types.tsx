@@ -1,4 +1,6 @@
+import { Offering } from '@waldur/marketplace/types';
 import { VirtualMachine, Volume } from '@waldur/resource/types';
+import { Project } from '@waldur/workspace/types';
 
 import { SecurityGroup } from '../openstack-security-groups/types';
 
@@ -71,4 +73,14 @@ export interface SshKey {
   fingerprint: string;
   user_uuid: string;
   is_shared: boolean;
+}
+
+export interface OpenStackInstanceFormData {
+  name?: string;
+  service?: { name: string };
+  image?: { name: string };
+  flavor?: Flavor;
+  attributes?: Record<string, any>;
+  project?: Project;
+  offering?: Offering;
 }

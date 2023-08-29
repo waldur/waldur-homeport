@@ -6,18 +6,16 @@ import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 
 import { INSTANCE_TYPE, SHARED_INSTANCE_TYPE } from '../constants';
 
+import { deployOfferingSteps } from './deploy/steps';
 import { getVolumeTypeRequirements } from './utils';
 
 const OpenstackInstanceDetails = lazyComponent(
   () => import('@waldur/openstack/openstack-instance/OpenstackInstanceDetails'),
   'OpenstackInstanceDetails',
 );
-const OpenstackInstanceCheckoutSummary = lazyComponent(
-  () =>
-    import(
-      '@waldur/openstack/openstack-instance/OpenstackInstanceCheckoutSummary'
-    ),
-  'OpenstackInstanceCheckoutSummary',
+const CheckoutSummary = lazyComponent(
+  () => import('@waldur/openstack/openstack-instance/deploy/CheckoutSummary'),
+  'CheckoutSummary',
 );
 const OpenstackInstanceCreateForm = lazyComponent(
   () => import('./OpenstackInstanceCreateForm'),
@@ -25,7 +23,7 @@ const OpenstackInstanceCreateForm = lazyComponent(
 );
 
 const serializeFloatingIPs = (networks) => {
-  if (!networks) {
+  if (!networks?.length || !networks[0]?.floatingIp) {
     return undefined;
   }
   return networks
@@ -46,7 +44,7 @@ const serializeFloatingIPs = (networks) => {
 };
 
 const serializeInternalIps = (networks) => {
-  if (!networks) {
+  if (!networks?.length || !networks[0]?.subnet) {
     return undefined;
   }
   return networks.map((network) => ({
@@ -158,9 +156,10 @@ registerOfferingType({
   get label() {
     return translate('OpenStack instance');
   },
-  component: OpenstackInstanceCreateForm,
+  formSteps: deployOfferingSteps,
+  component: OpenstackInstanceCreateForm, // We can remove this line later. formSteps replaced
   detailsComponent: OpenstackInstanceDetails,
-  checkoutSummaryComponent: OpenstackInstanceCheckoutSummary,
+  checkoutSummaryComponent: CheckoutSummary,
   serializer,
   formValidator,
   disableOfferingCreation: true,
@@ -172,9 +171,10 @@ registerOfferingType({
   get label() {
     return translate('OpenStack shared instance');
   },
-  component: OpenstackInstanceCreateForm,
+  formSteps: deployOfferingSteps,
+  component: OpenstackInstanceCreateForm, // We can remove this line later. formSteps replaced
   detailsComponent: OpenstackInstanceDetails,
-  checkoutSummaryComponent: OpenstackInstanceCheckoutSummary,
+  checkoutSummaryComponent: CheckoutSummary,
   serializer,
   formValidator,
   allowToUpdateService: true,
