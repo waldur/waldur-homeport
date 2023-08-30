@@ -10066,6 +10066,10 @@ msgstr ""
 msgid "System administrator"
 msgstr ""
 
+#: src/administration/roles/RolesList.tsx
+msgid "System role"
+msgstr ""
+
 #: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
 #: src/openstack/openstack-instance/deploy/steps.ts
 msgid "System volume"
