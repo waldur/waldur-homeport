@@ -92,6 +92,10 @@ msgstr ""
 msgid "Accept booking"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Accept booking request"
+msgstr ""
+
 #: src/invitations/InvitationButtons.tsx
 msgid "Accept invitation"
 msgstr ""
@@ -344,6 +348,10 @@ msgstr ""
 
 #: src/user/hooks/HookCreateButton.tsx
 msgid "Add notification"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Add offering endpoint"
 msgstr ""
 
 #: src/marketplace/offerings/update/options/AddOptionButton.tsx
@@ -693,12 +701,24 @@ msgstr ""
 msgid "Approve all"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Approve order"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Approve order item"
+msgstr ""
+
 #: src/paypal/PaymentApprove.tsx
 msgid "Approve payment"
 msgstr ""
 
 #: src/invitations/UserPermissionRequestApproveButton.tsx
 msgid "Approve permission request by {name}"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Approve private order"
 msgstr ""
 
 #: src/marketplace-flows/RequestStateFilter.tsx
@@ -726,6 +746,10 @@ msgstr ""
 #: src/marketplace/offerings/actions/OfferingStateActions.tsx
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
 msgid "Archive"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Archive offering"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingStateCell.tsx
@@ -785,6 +809,10 @@ msgstr ""
 
 #: src/customer/payments/PaymentActions.tsx
 msgid "Are you sure you want to delete the payment?"
+msgstr ""
+
+#: src/administration/roles/RoleDeleteButton.tsx
+msgid "Are you sure you want to delete the role {name}?"
 msgstr ""
 
 #: src/resource/actions/ResourceDeleteButton.tsx
@@ -1275,6 +1303,7 @@ msgstr ""
 msgid "Campaigns"
 msgstr ""
 
+#: src/administration/roles/RoleForm.tsx
 #: src/booking/CancelAction.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/form/ListDialog.tsx
@@ -1641,6 +1670,10 @@ msgstr ""
 msgid "Competence"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Complete resource downscaling"
+msgstr ""
+
 #: src/invitations/actions/create/SendingStatus.tsx
 msgid "Completed"
 msgstr ""
@@ -1709,6 +1742,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
+#: src/administration/roles/RoleDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
@@ -2413,6 +2447,10 @@ msgstr ""
 msgid "Delete catalog"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Delete offering endpoint"
+msgstr ""
+
 #: src/project/ProjectDelete.tsx
 msgid "Delete project"
 msgstr ""
@@ -2452,6 +2490,8 @@ msgstr ""
 msgid "Deployment made easy, for everyone"
 msgstr ""
 
+#: src/administration/roles/RoleForm.tsx
+#: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
@@ -2530,6 +2570,10 @@ msgstr ""
 #: src/openstack/openstack-instance/actions/DestroyAction.tsx
 #: src/resource/actions/DestroyActionItem.tsx
 msgid "Destroy"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Destroy order item"
 msgstr ""
 
 #: src/resource/actions/DestroyActionItem.tsx
@@ -2732,6 +2776,10 @@ msgstr ""
 msgid "Drop files to attach, or"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Dry run offering script"
+msgstr ""
+
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -2868,6 +2916,11 @@ msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
 msgid "Edit request"
+msgstr ""
+
+#: src/administration/roles/RoleEditButton.tsx
+#: src/administration/roles/RoleEditDialog.tsx
+msgid "Edit role"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditSchedulesButton.tsx
@@ -4603,12 +4656,20 @@ msgstr ""
 msgid "Link invoice"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "List importable resources"
+msgstr ""
+
 #: src/marketplace/resources/details/ResourcesList.tsx
 msgid "List is empty."
 msgstr ""
 
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "List of IPv4 or IPv6 CIDR addresses from where connection to self-service is allowed"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "List resource users"
 msgstr ""
 
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
@@ -4760,6 +4821,14 @@ msgstr ""
 #: src/user/UserActions.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Manage"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Manage campaign"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Manage offering user group"
 msgstr ""
 
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
@@ -5077,6 +5146,8 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
+#: src/administration/roles/RoleForm.tsx
+#: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
@@ -5339,6 +5410,11 @@ msgstr ""
 
 #: src/openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx
 msgid "New public key"
+msgstr ""
+
+#: src/administration/roles/RoleCreateButton.tsx
+#: src/administration/roles/RoleCreateDialog.tsx
+msgid "New role"
 msgstr ""
 
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
@@ -5814,6 +5890,7 @@ msgstr ""
 msgid "Offering order items synchronization has been scheduled."
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
 msgid "Offering permissions"
 msgstr ""
@@ -6089,6 +6166,10 @@ msgstr ""
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 msgid "Order items"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Order permissions"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartItemUpdate.tsx
@@ -6423,6 +6504,7 @@ msgstr ""
 msgid "Pause"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 msgid "Pause offering"
 msgstr ""
@@ -6638,6 +6720,10 @@ msgstr ""
 #: src/user/UserPermissionRequestsListContainer.tsx
 #: src/user/routes.ts
 msgid "Permission requests"
+msgstr ""
+
+#: src/administration/roles/RoleForm.tsx
+msgid "Permissions"
 msgstr ""
 
 #: src/project/routes.ts
@@ -7761,6 +7847,18 @@ msgstr ""
 msgid "Reject all"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Reject booking request"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Reject order"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Reject order item"
+msgstr ""
+
 #: src/invitations/UserPermissionRequestRejectButton.tsx
 msgid "Reject permission request by {name}"
 msgstr ""
@@ -7835,6 +7933,7 @@ msgstr ""
 msgid "Remote user ID"
 msgstr ""
 
+#: src/administration/roles/RoleDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
@@ -8252,6 +8351,10 @@ msgstr ""
 msgid "Resource order items"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Resource permissions"
+msgstr ""
+
 #: src/marketplace/resources/store/effects.ts
 msgid "Resource plan change request has been submitted."
 msgstr ""
@@ -8563,6 +8666,7 @@ msgstr ""
 
 #: src/administration/FeaturesList.tsx
 #: src/administration/providers/UpdateProviderDialog.tsx
+#: src/administration/roles/RoleForm.tsx
 #: src/booking/components/modal/BookingModal.tsx
 #: src/customer/organization-groups/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
@@ -9235,6 +9339,18 @@ msgstr ""
 msgid "Set location"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Set resource backend id"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Set resource end date"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Set resource usage"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/SetRulesAction.tsx
 msgid "Set rules"
 msgstr ""
@@ -9813,6 +9929,10 @@ msgstr ""
 msgid "Submit report"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Submit resource report"
+msgstr ""
+
 #: src/marketplace/resources/usage/ResourceUsageSubmitButton.tsx
 msgid "Submit usage report"
 msgstr ""
@@ -9907,6 +10027,10 @@ msgstr ""
 
 #: src/vmware/actions/SuspendAction.tsx
 msgid "Suspend"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Switch resource plan"
 msgstr ""
 
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
@@ -10103,6 +10227,14 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Terminate an existing resource"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Terminate order item"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Terminate resource"
 msgstr ""
 
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
@@ -11796,6 +11928,10 @@ msgstr ""
 msgid "Unpause"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Unpause offering"
+msgstr ""
+
 #: src/marketplace/offerings/update/integration/GoogleCalendarActions.tsx
 msgid "Unpublish as Google Calendar"
 msgstr ""
@@ -11875,6 +12011,42 @@ msgstr ""
 msgid "Update of OpenStack instance security groups has been scheduled."
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update offering"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update offering attributes"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update offering components"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update offering description"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update offering location"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update offering options"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update offering overview"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update offering secret options"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update offering thumbnail"
+msgstr ""
+
 #: src/customer/payments/PaymentUpdateDialog.tsx
 msgid "Update payment"
 msgstr ""
@@ -11893,6 +12065,10 @@ msgstr ""
 
 #: src/project/ProjectUpdateForm.tsx
 msgid "Update project details"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update resource limits"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditSchedulesDialog.tsx
@@ -12068,6 +12244,10 @@ msgstr ""
 
 #: src/user/events.ts
 msgid "User management events"
+msgstr ""
+
+#: src/administration/routes.ts
+msgid "User roles"
 msgstr ""
 
 #: src/user/support/UserEditForm.tsx
@@ -13233,6 +13413,10 @@ msgstr ""
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/marketplace/robot-accounts/RobotAccountList.tsx
 msgid "robot accounts"
+msgstr ""
+
+#: src/administration/roles/RolesList.tsx
+msgid "roles"
 msgstr ""
 
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
