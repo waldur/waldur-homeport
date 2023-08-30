@@ -9,7 +9,7 @@ export const OfferingNameColumn = ({ row }) => {
   return (
     <>
       <Link
-        state="marketplace-vendor-offering-details"
+        state="marketplace-offering-details"
         params={{ offering_uuid: row.uuid, uuid: customer.uuid }}
       >
         {row.name}
