@@ -3607,6 +3607,10 @@ msgstr ""
 msgid "FreeIPA extension is disabled."
 msgstr ""
 
+#: src/administration/roles/PermissionField.tsx
+msgid "Full access"
+msgstr ""
+
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 msgid "Full description"
 msgstr ""
@@ -5467,6 +5471,10 @@ msgstr ""
 msgid "No"
 msgstr ""
 
+#: src/administration/roles/PermissionField.tsx
+msgid "No access"
+msgstr ""
+
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "No access info."
 msgstr ""
@@ -6483,6 +6491,10 @@ msgstr ""
 
 #: src/marketplace/resources/details/ParentResourceLink.tsx
 msgid "Part of {resource}"
+msgstr ""
+
+#: src/administration/roles/PermissionField.tsx
+msgid "Partial access"
 msgstr ""
 
 #: src/auth/SigninForm.tsx
