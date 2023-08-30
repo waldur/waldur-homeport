@@ -1,11 +1,11 @@
 import { reduxForm } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
-import { FormContainer, SelectField, SubmitButton } from '@waldur/form';
+import { FormContainer, SubmitButton } from '@waldur/form';
 import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
 
-import { PermissionOptions } from './PermissionOptions';
+import { PermissionField } from './PermissionField';
 
 export const RoleForm = reduxForm<any, { onSubmit; onCancel; role? }>({
   form: 'RoleForm',
@@ -26,12 +26,10 @@ export const RoleForm = reduxForm<any, { onSubmit; onCancel; role? }>({
           validate={required}
           required
         />
-        <SelectField
+        <PermissionField
           name="permissions"
           label={translate('Permissions')}
           validate={required}
-          options={PermissionOptions}
-          isMulti
           required
         />
         <SubmitButton

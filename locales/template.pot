@@ -5762,6 +5762,7 @@ msgstr ""
 msgid "Object is not found."
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
@@ -5894,7 +5895,6 @@ msgstr ""
 msgid "Offering order items synchronization has been scheduled."
 msgstr ""
 
-#: src/administration/roles/PermissionOptions.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
 msgid "Offering permissions"
 msgstr ""
@@ -6114,6 +6114,10 @@ msgstr ""
 msgid "Option has been updated successfully."
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Order"
+msgstr ""
+
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 msgid "Order Summary"
 msgstr ""
@@ -6170,10 +6174,6 @@ msgstr ""
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 msgid "Order items"
-msgstr ""
-
-#: src/administration/roles/PermissionOptions.tsx
-msgid "Order permissions"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartItemUpdate.tsx
@@ -8209,6 +8209,7 @@ msgstr ""
 msgid "Resolved"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/marketplace-flows/FlowsList.tsx
@@ -8353,10 +8354,6 @@ msgstr ""
 
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "Resource order items"
-msgstr ""
-
-#: src/administration/roles/PermissionOptions.tsx
-msgid "Resource permissions"
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts

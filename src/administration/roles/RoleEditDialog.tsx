@@ -1,9 +1,8 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { Modal } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-import { PermissionOptions } from './PermissionOptions';
 import { RoleForm } from './RoleForm';
 
 interface RoleEditDialogProps {
@@ -12,21 +11,7 @@ interface RoleEditDialogProps {
   resolve: { row };
 }
 
-const FlatPermissionOptions = PermissionOptions.flatMap(
-  ({ options }) => options,
-);
-
 export const RoleEditDialog: FC<RoleEditDialogProps> = (props) => {
-  const initialValues = useMemo(
-    () => ({
-      name: props.resolve.row.name,
-      description: props.resolve.row.description,
-      permissions: props.resolve.row.permissions
-        .map((id) => FlatPermissionOptions.find(({ value }) => value === id))
-        .filter((option) => option),
-    }),
-    [props.resolve.row],
-  );
   return (
     <>
       <Modal.Header>
@@ -35,7 +20,7 @@ export const RoleEditDialog: FC<RoleEditDialogProps> = (props) => {
       <Modal.Body>
         <RoleForm
           {...props}
-          initialValues={initialValues}
+          initialValues={props.resolve.row}
           role={props.resolve.row}
         />
       </Modal.Body>

@@ -23,11 +23,7 @@ export const RoleEditButton = ({ row, refetch }) => {
             row,
           },
           onSubmit: (formData) => {
-            return editRole(row.uuid, {
-              name: formData.name,
-              description: formData.description,
-              permissions: formData.permissions.map((option) => option.value),
-            }).then(() => {
+            return editRole(row.uuid, formData).then(() => {
               dispatch(closeModalDialog());
               refetch();
             });

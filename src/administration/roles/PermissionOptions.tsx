@@ -2,7 +2,7 @@ import { translate } from '@waldur/i18n';
 
 export const PermissionOptions = [
   {
-    label: translate('Offering permissions'),
+    label: translate('Offering'),
     options: [
       {
         label: translate('Update offering thumbnail'),
@@ -75,7 +75,7 @@ export const PermissionOptions = [
     ],
   },
   {
-    label: translate('Order permissions'),
+    label: translate('Order'),
     options: [
       { label: translate('Approve order'), value: 'ORDER.APPROVE' },
       {
@@ -94,7 +94,7 @@ export const PermissionOptions = [
     ],
   },
   {
-    label: translate('Resource permissions'),
+    label: translate('Resource'),
     options: [
       { label: translate('Terminate resource'), value: 'RESOURCE.TERMINATE' },
       {

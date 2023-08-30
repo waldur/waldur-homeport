@@ -20,11 +20,7 @@ export const RoleCreateButton = ({ refetch }) => {
       dispatch(
         openModalDialog(RoleCreateDialog, {
           onSubmit: (formData) => {
-            return createRole({
-              name: formData.name,
-              description: formData.description,
-              permissions: formData.permissions.map(({ value }) => value),
-            }).then(() => {
+            return createRole(formData).then(() => {
               dispatch(closeModalDialog());
               refetch();
             });
