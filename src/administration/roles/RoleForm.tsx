@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 
 import { PermissionOptions } from './PermissionOptions';
 
-export const RoleForm = reduxForm<any, { onSubmit; onCancel }>({
+export const RoleForm = reduxForm<any, { onSubmit; onCancel; role? }>({
   form: 'RoleForm',
 })((props) => {
   return (
@@ -18,6 +18,7 @@ export const RoleForm = reduxForm<any, { onSubmit; onCancel }>({
           label={translate('Name')}
           validate={required}
           required
+          disabled={props.role?.is_system_role}
         />
         <StringField
           name="description"

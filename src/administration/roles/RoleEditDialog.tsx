@@ -33,7 +33,11 @@ export const RoleEditDialog: FC<RoleEditDialogProps> = (props) => {
         <Modal.Title>{translate('Edit role')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <RoleForm {...props} initialValues={initialValues} />
+        <RoleForm
+          {...props}
+          initialValues={initialValues}
+          role={props.resolve.row}
+        />
       </Modal.Body>
     </>
   );

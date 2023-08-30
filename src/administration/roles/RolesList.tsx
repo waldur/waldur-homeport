@@ -1,3 +1,5 @@
+import { Badge } from 'react-bootstrap';
+
 import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
@@ -18,7 +20,16 @@ export const RolesList = () => {
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => row.name,
+          render: ({ row }) => (
+            <>
+              {row.name}{' '}
+              {row.is_system_role && (
+                <Badge bg="primary" className="ms-2">
+                  {translate('System role')}
+                </Badge>
+              )}
+            </>
+          ),
         },
         {
           title: translate('Description'),
