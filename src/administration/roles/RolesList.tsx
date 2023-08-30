@@ -35,6 +35,10 @@ export const RolesList = () => {
           title: translate('Description'),
           render: ({ row }) => row.description,
         },
+        {
+          title: translate('Assigned users count'),
+          render: ({ row }) => row.users_count,
+        },
       ]}
       verboseName={translate('roles')}
       hoverableRow={({ row }) => (
