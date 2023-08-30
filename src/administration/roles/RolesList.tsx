@@ -44,7 +44,9 @@ export const RolesList = () => {
       hoverableRow={({ row }) => (
         <>
           <RoleEditButton row={row} refetch={tableProps.fetch} />
-          <RoleDeleteButton row={row} refetch={tableProps.fetch} />
+          {!row.is_system_role && (
+            <RoleDeleteButton row={row} refetch={tableProps.fetch} />
+          )}
         </>
       )}
       showPageSizeSelector={true}
