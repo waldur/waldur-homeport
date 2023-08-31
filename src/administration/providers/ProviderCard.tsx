@@ -22,6 +22,11 @@ const ProviderUsersDialog = lazyComponent(
   'ProviderUsersDialog',
 );
 
+const ProviderDetailsDialog = lazyComponent(
+  () => import('./ProviderDetailsDialog'),
+  'ProviderDetailsDialog',
+);
+
 interface ProviderCardProps {
   title: string;
   description: string;
@@ -66,6 +71,18 @@ export const ProviderCard: FC<ProviderCardProps> = ({
     );
   };
 
+  const showDetails = () => {
+    dispatch(
+      openModalDialog(ProviderDetailsDialog, {
+        resolve: { type, refetch },
+        size: 'lg',
+        provider: provider,
+      }),
+    );
+  };
+
+  const OIDC_TYPES = ['tara', 'eduteams', 'keycloak'];
+
   return (
     <Card className="bg-light min-h-150px border border-secondary border-hover">
       <Card.Body className="pe-5">
@@ -108,6 +125,12 @@ export const ProviderCard: FC<ProviderCardProps> = ({
                     <Dropdown.Item onClick={showUsers}>
                       {translate('Users')}
                     </Dropdown.Item>
+                    {provider.is_active &&
+                      OIDC_TYPES.includes(provider.provider) && (
+                        <Dropdown.Item onClick={showDetails}>
+                          {translate('Details')}
+                        </Dropdown.Item>
+                      )}
                   </>
                 ) : (
                   <Dropdown.Item onClick={createProvider}>
