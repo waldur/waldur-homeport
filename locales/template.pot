@@ -10315,6 +10315,14 @@ msgstr ""
 msgid "Thanks for signing up. In order to help you make the most out of the platform, please complete your profile by pressing \"{link}\" and filling out the blank fields."
 msgstr ""
 
+#: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
+msgid "The CPU quota is over the limit"
+msgstr ""
+
+#: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
+msgid "The RAM quota is over the limit"
+msgstr ""
+
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
 msgid "The date is inclusive. Once reached, all project resource will be scheduled for termination."

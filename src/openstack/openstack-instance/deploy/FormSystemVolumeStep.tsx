@@ -12,7 +12,7 @@ import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
 
 import {
   formVolumesSelector,
-  getStorageLimit,
+  getOfferingLimit,
   useQuotasData,
   useVolumeDataLoader,
 } from './utils';
@@ -30,7 +30,7 @@ export const FormSystemVolumeStep = (props: FormStepProps) => {
   const { data_volume_size } = useSelector(formVolumesSelector);
 
   const limit = useMemo(
-    () => getStorageLimit(props.offering),
+    () => getOfferingLimit(props.offering, 'storage', 10240 * 1024),
     [props?.offering],
   );
 

@@ -15,7 +15,7 @@ import {
 import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 import { RootState } from '@waldur/store/reducers';
 
-import { OpenStackInstanceFormData } from '../types';
+import { Flavor, OpenStackInstanceFormData } from '../types';
 
 export const formDataSelector = (state: RootState) =>
   (getFormValues(FORM_ID)(state) || {}) as OpenStackInstanceFormData;
@@ -27,7 +27,7 @@ export const formAttributesSelector = (state: RootState) => {
 
 export const formFlavorSelector = (state: RootState) => {
   const formAttrs = formAttributesSelector(state);
-  return formAttrs.flavor;
+  return formAttrs.flavor as Flavor;
 };
 
 export const formVolumesSelector = (state: RootState) => {
@@ -38,10 +38,14 @@ export const formVolumesSelector = (state: RootState) => {
   };
 };
 
-export const getStorageLimit = (offering: Offering) => {
+export const getOfferingLimit = (
+  offering: Offering,
+  quotaName: string,
+  defaultLimit = Infinity,
+) => {
   if (!offering?.quotas?.length) return 0;
-  const quota = offering.quotas.find((qouta) => qouta.name === 'storage');
-  if (!quota) return 10240 * 1024;
+  const quota = offering.quotas.find((qouta) => qouta.name === quotaName);
+  if (!quota) return defaultLimit;
   return quota.limit - quota.usage;
 };
 
