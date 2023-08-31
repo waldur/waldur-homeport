@@ -2,6 +2,7 @@ import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
+import { BaseFieldProps } from 'redux-form';
 
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { translate } from '@waldur/i18n';
@@ -62,7 +63,7 @@ export interface TableProps<RowType = any> extends TableState {
   filter?: Record<string, any>;
   fieldType?: 'checkbox' | 'radio';
   fieldName?: string;
-  required?: boolean;
+  validate?: BaseFieldProps['validate'];
 }
 
 class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
@@ -257,7 +258,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
             fetch={this.props.fetch}
             fieldType={this.props.fieldType}
             fieldName={this.props.fieldName}
-            required={this.props.required}
+            validate={this.props.validate}
           />
         </table>
       </ErrorBoundary>

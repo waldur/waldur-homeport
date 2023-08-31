@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
+import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { StepCardTabs } from '@waldur/marketplace/deploy/steps/StepCardTabs';
@@ -10,7 +11,9 @@ import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-import { useQuotasData } from './utils';
+import { Flavor } from '../types';
+
+import { getOfferingLimit, useQuotasData } from './utils';
 
 const tabs = [
   { label: translate('Shared'), value: 'shared' },
@@ -34,6 +37,38 @@ export const FormFlavorStep = (props: FormStepProps) => {
   });
 
   const { vcpuQuota, ramQuota } = useQuotasData(props.offering);
+
+  const limit = useMemo(
+    () => ({
+      ram: getOfferingLimit(props.offering, 'ram'),
+      vcpu: getOfferingLimit(props.offering, 'vcpu'),
+    }),
+    [props?.offering],
+  );
+
+  const exceeds = useCallback(
+    (value: Flavor) => {
+      if (!value || !limit) return undefined;
+      const error = [];
+      if ((value.cores || 0) + (value.cores || 0) > limit.vcpu) {
+        error.push(translate('The CPU quota is over the limit'));
+      }
+      if ((value.ram || 0) + (value.ram || 0) > limit.ram) {
+        error.push(translate('The RAM quota is over the limit'));
+      }
+
+      return error.length > 1 ? (
+        <ul>
+          {error.map((err, i) => (
+            <li key={i}>{err}</li>
+          ))}
+        </ul>
+      ) : error.length === 1 ? (
+        error[0]
+      ) : undefined;
+    },
+    [limit],
+  );
 
   return (
     <StepCard
@@ -81,7 +116,7 @@ export const FormFlavorStep = (props: FormStepProps) => {
         hoverable
         fieldType="radio"
         fieldName="attributes.flavor"
-        required
+        validate={[required, exceeds]}
       />
     </StepCard>
   );

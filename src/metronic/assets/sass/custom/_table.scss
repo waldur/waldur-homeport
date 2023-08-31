@@ -94,6 +94,23 @@
         }
       }
     }
+
+    > td.row-control {
+      display: flex;
+      align-items: center;
+
+      .error-mark {
+        position: absolute;
+        left: 0.7rem;
+        margin-top: 1px;
+        line-height: 1;
+
+        i {
+          color: if(isDarkMode(), $danger, $warning);
+          font-size: 1.5rem;
+        }
+      }
+    }
   }
 }
 
