@@ -2494,7 +2494,6 @@ msgstr ""
 msgid "Deployment made easy, for everyone"
 msgstr ""
 
-#: src/administration/roles/RoleForm.tsx
 #: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/issues/list/IssuesList.tsx
@@ -2548,6 +2547,10 @@ msgstr ""
 #: src/user/support/UserEditForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Description"
+msgstr ""
+
+#: src/administration/roles/RoleForm.tsx
+msgid "Description ({language})"
 msgstr ""
 
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -2604,6 +2607,7 @@ msgstr ""
 msgid "Detailed view"
 msgstr ""
 
+#: src/administration/providers/ProviderCard.tsx
 #: src/customer/team/UserDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -2620,6 +2624,10 @@ msgstr ""
 #: src/user/support/UserDetailsView.tsx
 #: src/vmware/tabs.ts
 msgid "Details"
+msgstr ""
+
+#: src/administration/providers/ProviderDetailsDialog.tsx
+msgid "Details for {provider}"
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
@@ -5757,6 +5765,7 @@ msgstr ""
 msgid "OECD FoS code"
 msgstr ""
 
+#: src/administration/providers/ProviderDetailsDialog.tsx
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "OK"
@@ -11313,6 +11322,10 @@ msgstr ""
 #: src/administration/dashboard/AdministrationDashboard.tsx
 #: src/support/dashboard/SupportDashboard.tsx
 msgid "Unable to load health information"
+msgstr ""
+
+#: src/administration/providers/ProviderDetailsDialog.tsx
+msgid "Unable to load identity provider details"
 msgstr ""
 
 #: src/administration/providers/IdentityProvidersList.tsx
