@@ -44,6 +44,9 @@
     "ENABLED": true
   },
   "LANGUAGES": [["en", "English"]],
+  "LANGUAGE_CHOICES": [
+    "en"
+  ],
   "FEATURES": {
     "support": {
       "customers_list": true

@@ -84,6 +84,10 @@
       "Eesti"
     ]
   ],
+  "LANGUAGE_CHOICES": [
+    "en",
+    "et"
+  ],
   "LANGUAGE_CODE": "en",
   "WALDUR_CORE": {
     "CURRENCY_NAME": "EUR",

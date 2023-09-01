@@ -54,12 +54,20 @@ export async function loadConfig() {
     }
   }
 
+  const languageLabels = backendSettings.LANGUAGES.reduce(
+    (result, [code, label]) => ({
+      ...result,
+      [code]: label,
+    }),
+    {},
+  );
+
   const config = {
     ...frontendSettings,
     plugins: backendSettings,
-    languageChoices: backendSettings.LANGUAGES.map(([code, label]) => ({
+    languageChoices: backendSettings.LANGUAGE_CHOICES.map((code) => ({
       code,
-      label,
+      label: languageLabels[code],
     })),
     defaultLanguage: backendSettings.LANGUAGE_CODE,
     FEATURES: backendSettings.FEATURES,
