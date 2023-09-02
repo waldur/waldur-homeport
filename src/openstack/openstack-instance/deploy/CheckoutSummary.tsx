@@ -2,13 +2,16 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
+import { FieldError } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
 import { CheckoutPricingRow } from '@waldur/marketplace/deploy/CheckoutPricingRow';
 import {
   concealPricesSelector,
+  formErrorsSelector,
   formIsValidSelector,
 } from '@waldur/marketplace/deploy/utils';
 import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
@@ -66,6 +69,7 @@ interface CheckoutSummaryProps {
 export const CheckoutSummary = ({ offering }: CheckoutSummaryProps) => {
   const formIsValid = useSelector(formIsValidSelector);
   const formAttributesData = useSelector(formAttributesSelector);
+  const errors = useSelector(formErrorsSelector);
   const flavor = useSelector(formFlavorSelector);
 
   const customer = useSelector(getCustomer);
@@ -181,12 +185,18 @@ export const CheckoutSummary = ({ offering }: CheckoutSummaryProps) => {
         </div>
       )}
 
-      <ShoppingCartButtonContainer
-        item={orderItem}
-        flavor="primary"
-        disabled={!formIsValid}
-        className="w-100"
-      />
+      <Tip
+        label={<FieldError error={errors?.attributes} />}
+        id="offering-button-errors"
+        autoWidth
+      >
+        <ShoppingCartButtonContainer
+          item={orderItem}
+          flavor="primary"
+          disabled={!formIsValid}
+          className="w-100"
+        />
+      </Tip>
     </>
   );
 };

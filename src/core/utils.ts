@@ -162,3 +162,27 @@ export const orderByFilter = (sorting: {
 
 export const formatRole = (role) =>
   ENV.roles[role] ? translate(ENV.roles[role]) : role;
+
+/**
+ *
+ * @param obj
+ * @returns flatten object
+ * @example
+ * const x = {a: {z: "z1", x: "x1"}, b: "b1"};
+ * flattenObject(x) === {'a.z': "z1", 'a.x': "x1", b: "b1"}
+ */
+export const flattenObject = (obj) => {
+  const result = {};
+
+  for (const i in obj) {
+    if (typeof obj[i] === 'object' && !Array.isArray(obj[i])) {
+      const temp = flattenObject(obj[i]);
+      for (const j in temp) {
+        result[i + '.' + j] = temp[j];
+      }
+    } else {
+      result[i] = obj[i];
+    }
+  }
+  return result;
+};
