@@ -40,6 +40,13 @@
           width: unset;
           height: 30px;
           background-color: transparent !important;
+
+          &.error {
+            i {
+              font-size: 22.7px;
+              color: var(--bs-active-warning);
+            }
+          }
         }
       }
     }

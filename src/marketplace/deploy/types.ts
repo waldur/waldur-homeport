@@ -11,6 +11,7 @@ export interface FormStepProps {
 export interface OfferingConfigurationFormStep {
   label: string;
   id: string;
+  fields?: Array<string>;
   required?: boolean;
   requiredFields?: Array<string>;
   component: React.ComponentType<FormStepProps>;

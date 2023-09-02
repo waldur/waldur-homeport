@@ -1,6 +1,11 @@
+import { useMemo } from 'react';
 import { Card, FormCheck } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
+import { Tip } from '@waldur/core/Tooltip';
+import { flattenObject } from '@waldur/core/utils';
+import { FieldError } from '@waldur/form';
 import { formatJsx, translate } from '@waldur/i18n';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 import { Offering } from '@waldur/marketplace/types';
@@ -8,7 +13,7 @@ import { Offering } from '@waldur/marketplace/types';
 import { getCheckoutSummaryComponent } from '../common/registry';
 
 import { OfferingConfigurationFormStep } from './types';
-import { scrollToView } from './utils';
+import { formErrorsSelector, scrollToView } from './utils';
 
 interface DeployPageSidebarProps {
   offering: Offering;
@@ -22,6 +27,30 @@ export const DeployPageSidebar = ({
   completedSteps,
 }: DeployPageSidebarProps) => {
   const CheckoutSummaryComponent = getCheckoutSummaryComponent(offering.type);
+
+  const errors = useSelector(formErrorsSelector);
+
+  const nonRequiredErrors = useMemo(() => {
+    const errorsFlatten = flattenObject(errors);
+    const result = {};
+    for (const key in errorsFlatten) {
+      if (!errorsFlatten[key]) continue;
+      if (Array.isArray(errorsFlatten[key])) {
+        errorsFlatten[key].forEach((err: any) => {
+          if (typeof err === 'string' && !err.includes('required')) {
+            if (!(key in result)) Object.assign(result, { [key]: [] });
+            result[key].push(err);
+          }
+        });
+      } else if (
+        typeof errorsFlatten[key] === 'string' &&
+        !errorsFlatten[key].includes('required')
+      ) {
+        Object.assign(result, { [key]: errorsFlatten[key] });
+      }
+    }
+    return result;
+  }, [errors]);
 
   return (
     <div className="deploy-view-sidebar drawer drawer-end drawer-on w-350px">
@@ -41,14 +70,34 @@ export const DeployPageSidebar = ({
                     }
                   >
                     <div className="stepper-wrapper d-flex align-items-center">
-                      <FormCheck className="stepper-icon form-check form-check-custom form-check-sm">
-                        <FormCheck.Input
-                          type="checkbox"
-                          checked={completedSteps[i]}
-                          className="rounded-circle"
-                          readOnly
-                        />
-                      </FormCheck>
+                      {step.fields &&
+                      step.fields.some((key) => nonRequiredErrors[key]) ? (
+                        <Tip
+                          label={
+                            <FieldError
+                              error={step.fields
+                                .map((key) => nonRequiredErrors[key])
+                                .flat()
+                                .filter(Boolean)}
+                            />
+                          }
+                          className="stepper-icon error"
+                          id={`stepperErrorTip-${i}`}
+                          placement="left"
+                          autoWidth
+                        >
+                          <i className="fa fa-exclamation-circle" />
+                        </Tip>
+                      ) : (
+                        <FormCheck className="stepper-icon form-check form-check-custom form-check-sm">
+                          <FormCheck.Input
+                            type="checkbox"
+                            checked={completedSteps[i]}
+                            className="rounded-circle"
+                            readOnly
+                          />
+                        </FormCheck>
+                      )}
 
                       <a
                         className="stepper-label"

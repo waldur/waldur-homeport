@@ -17,6 +17,7 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   {
     label: translate('Project'),
     id: 'step-project',
+    fields: ['project'],
     required: true,
     requiredFields: ['project'],
     component: FormProjectStep,
@@ -24,6 +25,7 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   {
     label: translate('Cloud region'),
     id: 'step-cloud-region',
+    fields: ['offering'],
     required: true,
     requiredFields: ['offering'],
     component: FormCloudStep,
@@ -31,6 +33,7 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   {
     label: translate('Image'),
     id: 'step-image',
+    fields: ['attributes.image'],
     required: true,
     requiredFields: ['attributes.image'],
     component: FormImageStep,
@@ -38,6 +41,7 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   {
     label: translate('Flavor'),
     id: 'step-flavor',
+    fields: ['attributes.flavor'],
     required: true,
     requiredFields: ['attributes.flavor'],
     component: FormFlavorStep,
@@ -45,6 +49,7 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   {
     label: translate('System volume'),
     id: 'step-system-volume',
+    fields: ['attributes.system_volume_type', 'attributes.system_volume_size'],
     required: true,
     requiredFields: [
       'attributes.system_volume_type',
@@ -55,36 +60,42 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   {
     label: translate('Data volume'),
     id: 'step-data-volume',
+    fields: ['attributes.data_volume_type', 'attributes.data_volume_size'],
     required: false,
     component: FormDataVolumeStep,
   },
   {
     label: translate('SSH public key'),
     id: 'step-ssh-public-key',
+    fields: ['attributes.ssh_public_key'],
     required: false,
     component: FormSSHPublicKeysStep,
   },
   {
     label: translate('Network'),
     id: 'step-network',
+    fields: ['attributes.networks'],
     required: false,
     component: FormNetworkStep,
   },
   {
     label: translate('Security groups'),
     id: 'step-security-groups',
+    fields: ['attributes.security_groups'],
     required: false,
     component: FormSecurityGroupsStep,
   },
   {
     label: translate('Startup script'),
     id: 'step-startup-script',
+    fields: ['startup_script'],
     required: false,
     component: FormStartupScriptStep,
   },
   {
     label: translate('Final configuration'),
     id: 'step-final-configuration',
+    fields: ['attributes.name', 'attributes.description'],
     required: true,
     requiredFields: ['attributes.name'],
     component: FormFinalConfigurationStep,
