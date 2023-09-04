@@ -39,7 +39,7 @@ export const OfferingOptionsSection = (props) => {
         ) : null}
       </div>
       <Card.Body>
-        {props.offering.options.order.length === 0 ? (
+        {props.offering.options?.order?.length === 0 ? (
           <div className="justify-content-center row">
             <div className="col-sm-4">
               <p className="text-center">
@@ -50,17 +50,17 @@ export const OfferingOptionsSection = (props) => {
         ) : (
           <Table bordered={true} hover={true} responsive={true}>
             <tbody>
-              {props.offering.options.order.map((key) => (
+              {props.offering.options?.order?.map((key) => (
                 <tr key={key}>
                   <td className="col-md-3">
-                    {props.offering.options.options[key].label}
+                    {props.offering.options.options[key]?.label}
                   </td>
                   <td className="col-md-9">
                     {
                       FIELD_TYPES.find(
                         (fieldType) =>
                           fieldType.value ===
-                          props.offering.options.options[key].type,
+                          props.offering.options?.options[key]?.type,
                       ).label
                     }
                   </td>
@@ -69,14 +69,16 @@ export const OfferingOptionsSection = (props) => {
                       <EditOptionButton
                         {...props}
                         option={{
-                          ...props.offering.options.options[key],
+                          ...props.offering.options?.options[key],
                           name: key,
                         }}
                       />
                       <DeleteOptionButton
                         offering={props.offering}
                         optionKey={key}
-                        optionLabel={props.offering.options.options[key].label}
+                        optionLabel={
+                          props.offering.options?.options[key]?.label
+                        }
                       />
                     </div>
                   </td>
