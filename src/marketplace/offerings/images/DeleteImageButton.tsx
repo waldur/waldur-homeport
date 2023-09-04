@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import { PermissionEnum, hasPermission } from '@waldur/core/permissions';
 import { translate } from '@waldur/i18n';
 import { deleteOfferingImage } from '@waldur/marketplace/common/api';
 import { waitForConfirmation } from '@waldur/modal/actions';
@@ -27,7 +28,12 @@ export const DeleteImageButton = ({ row }) => {
       dispatch(showErrorResponse(error, translate('Unable to remove image.')));
     }
   };
-  if (!user.is_staff) {
+  if (
+    !hasPermission(user, {
+      permission: PermissionEnum.DELETE_OFFERING_SCREENSHOT,
+      customerId: row.customer_uuid,
+    })
+  ) {
     return null;
   }
   return <ActionButton title={translate('Delete')} action={handler} />;

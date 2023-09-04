@@ -5,6 +5,14 @@ export const PermissionOptions = [
     label: translate('Offering'),
     options: [
       {
+        label: translate('Create offering'),
+        value: 'OFFERING.CREATE',
+      },
+      {
+        label: translate('Delete offering'),
+        value: 'OFFERING.DELETE',
+      },
+      {
         label: translate('Update offering thumbnail'),
         value: 'OFFERING.UPDATE_THUMBNAIL',
       },
@@ -72,6 +80,34 @@ export const PermissionOptions = [
         label: translate('Manage offering user group'),
         value: 'OFFERING.MANAGE_USER_GROUP',
       },
+      {
+        label: translate('Create offering plan'),
+        value: 'OFFERING.CREATE_PLAN',
+      },
+      {
+        label: translate('Update offering plan'),
+        value: 'OFFERING.UPDATE_PLAN',
+      },
+      {
+        label: translate('Archive offering plan'),
+        value: 'OFFERING.ARCHIVE_PLAN',
+      },
+      {
+        label: translate('Create offering screenshot'),
+        value: 'OFFERING.CREATE_SCREENSHOT',
+      },
+      {
+        label: translate('Update offering screenshot'),
+        value: 'OFFERING.UPDATE_SCREENSHOT',
+      },
+      {
+        label: translate('Delete offering screenshot'),
+        value: 'OFFERING.DELETE_SCREENSHOT',
+      },
+      {
+        label: translate('Create offering user'),
+        value: 'OFFERING.CREATE_USER',
+      },
     ],
   },
   {
@@ -131,6 +167,18 @@ export const PermissionOptions = [
       {
         label: translate('Reject booking request'),
         value: 'RESOURCE.REJECT_BOOKING_REQUEST',
+      },
+      {
+        label: translate('Create robot account'),
+        value: 'RESOURCE.CREATE_ROBOT_ACCOUNT',
+      },
+      {
+        label: translate('Update robot account'),
+        value: 'RESOURCE.UPDATE_ROBOT_ACCOUNT',
+      },
+      {
+        label: translate('Delete robot account'),
+        value: 'RESOURCE.DELETE_ROBOT_ACCOUNT',
       },
     ],
   },
