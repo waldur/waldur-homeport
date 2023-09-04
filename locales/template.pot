@@ -752,6 +752,10 @@ msgstr ""
 msgid "Archive offering"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Archive offering plan"
+msgstr ""
+
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
@@ -1983,6 +1987,19 @@ msgstr ""
 msgid "Create notification"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Create offering"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Create offering plan"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Create offering screenshot"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 msgid "Create offering user"
 msgstr ""
@@ -2014,6 +2031,7 @@ msgstr ""
 msgid "Create request"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/marketplace/robot-accounts/CreateRobotAccountAction.tsx
 msgid "Create robot account"
 msgstr ""
@@ -2452,11 +2470,23 @@ msgid "Delete catalog"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
+msgid "Delete offering"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
 msgid "Delete offering endpoint"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Delete offering screenshot"
 msgstr ""
 
 #: src/project/ProjectDelete.tsx
 msgid "Delete project"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Delete robot account"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/utils.ts
@@ -12078,6 +12108,14 @@ msgid "Update offering overview"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
+msgid "Update offering plan"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update offering screenshot"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
 msgid "Update offering secret options"
 msgstr ""
 
@@ -12107,6 +12145,10 @@ msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
 msgid "Update resource limits"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update robot account"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditSchedulesDialog.tsx
