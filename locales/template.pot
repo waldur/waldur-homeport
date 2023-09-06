@@ -13838,6 +13838,10 @@ msgstr ""
 msgid "{usage} of {limit} used"
 msgstr ""
 
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+msgid "{usage} of {limit} {name}"
+msgstr ""
+
 #: src/marketplace/resources/details/QuotaCell.tsx
 msgid "{usage} out of {limit} {units}"
 msgstr ""

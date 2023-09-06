@@ -1,4 +1,5 @@
 import { CustomerRole } from '@waldur/core/constants';
+import { Quota } from '@waldur/quotas/types';
 
 export interface Permission {
   project_uuid?: string;
@@ -86,11 +87,6 @@ export interface Payment {
   invoice_uuid?: string;
   invoice_period?: string;
   customer_uuid?: string;
-}
-
-export interface Quota {
-  name: string;
-  usage: number;
 }
 
 interface BillingPriceEstimate {

@@ -20,7 +20,9 @@ jest.mock('@waldur/configs/default', () => ({
 describe('OpenStackTenantSummary', () => {
   it('renders resource summary', () => {
     const wrapper = renderSummary({ resource });
-    expect(getSummary(wrapper)).toBe('Trial package (10 vCPU, 10 GB RAM)');
+    expect(getSummary(wrapper)).toBe(
+      'Trial package (5 of 10 vCPU, 2 GB of 10 GB RAM, 10 GB of 50 GB storage)',
+    );
   });
 
   it('renders credentials if they are not concealed', () => {
