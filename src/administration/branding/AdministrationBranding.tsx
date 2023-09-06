@@ -32,7 +32,11 @@ export const AdministrationBranding = () => {
   const callback = async (formData) => {
     try {
       for (const key of Object.keys(formData)) {
-        if (LOGOS.includes(key) && typeof formData[key] === 'string') {
+        if (
+          LOGOS.includes(key) &&
+          typeof formData[key] === 'string' &&
+          formData[key] !== ''
+        ) {
           delete formData[key];
         }
       }
