@@ -2,13 +2,8 @@ import { Col, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
+import { Quota } from './types';
 import { formatQuotaValue, formatQuotaName } from './utils';
-
-interface Quota {
-  name: string;
-  usage: number;
-  limit: number;
-}
 
 interface Resource {
   quotas: Quota[];

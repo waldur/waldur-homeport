@@ -1,4 +1,4 @@
-import { Quota } from '@waldur/workspace/types';
+import { Quota } from '@waldur/quotas/types';
 
 export type ResourceState =
   | 'OK'

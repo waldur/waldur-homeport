@@ -2,6 +2,7 @@ import { InjectedFormProps } from 'redux-form';
 
 import { GeolocationPoint } from '@waldur/map/types';
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
+import { Quota } from '@waldur/quotas/types';
 import { Project, Customer } from '@waldur/workspace/types';
 
 export type BillingPeriod = 'hour' | 'day' | 'half_month' | 'month';
@@ -59,12 +60,6 @@ export interface OptionField {
 export interface OfferingOptions {
   order: string[];
   options: { [key: string]: OptionField };
-}
-
-interface Quota {
-  name: string;
-  limit: number;
-  usage: number;
 }
 
 interface ReferredPids {

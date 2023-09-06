@@ -17,6 +17,7 @@ export const renderSummary = (props) => {
           TENANT_CREDENTIALS_VISIBLE: tenantCredentialsVisible,
         },
       },
+      FEATURES: {},
     },
   });
   return mount(
@@ -36,14 +37,17 @@ export const resource = {
     {
       name: 'vcpu',
       limit: 10.0,
+      usage: 5.0,
     },
     {
       name: 'ram',
       limit: 10240.0,
+      usage: 2048.0,
     },
     {
       name: 'storage',
       limit: 51200.0,
+      usage: 10240.0,
     },
   ],
   access_url: 'http://example.com/dashboard',
