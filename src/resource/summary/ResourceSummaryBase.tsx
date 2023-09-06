@@ -1,5 +1,3 @@
-import { Col, Row } from 'react-bootstrap';
-
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { ParentResourceLink } from '@waldur/marketplace/resources/details/ParentResourceLink';
@@ -24,42 +22,27 @@ export function ResourceSummaryBase<T extends Resource = any>(
         <ParentResourceLink resource={resource as any} />
       </div>
 
-      <Row>
-        <Col xs={12} xl={6}>
-          <Field
-            label={translate('State')}
-            value={<ResourceState {...props} />}
-          />
-          <ErrorMessageField {...props} />
-          {!props.resource.marketplace_offering_uuid && (
-            <Field
-              label={translate('Provider')}
-              value={resource.service_name}
-            />
-          )}
-          <Field
-            label={translate('Description')}
-            value={resource.description}
-          />
-          <Field
-            label={translate('Created')}
-            value={<CreatedField resource={props.resource} />}
-          />
-          {ENV.plugins.WALDUR_MARKETPLACE.ENABLE_RESOURCE_END_DATE ? (
-            <Field
-              label={translate('Termination date')}
-              value={resource.end_date}
-            />
-          ) : null}
-        </Col>
-        <Col xs={12} xl={6}>
-          <Field
-            label={translate('Metadata')}
-            value={ResourceMetadataLink(props)}
-            valueClass="text-decoration-underline"
-          />
-        </Col>
-      </Row>
+      <Field label={translate('State')} value={<ResourceState {...props} />} />
+      <ErrorMessageField {...props} />
+      {!props.resource.marketplace_offering_uuid && (
+        <Field label={translate('Provider')} value={resource.service_name} />
+      )}
+      <Field label={translate('Description')} value={resource.description} />
+      <Field
+        label={translate('Created')}
+        value={<CreatedField resource={props.resource} />}
+      />
+      {ENV.plugins.WALDUR_MARKETPLACE.ENABLE_RESOURCE_END_DATE ? (
+        <Field
+          label={translate('Termination date')}
+          value={resource.end_date}
+        />
+      ) : null}
+      <Field
+        label={translate('Metadata')}
+        value={ResourceMetadataLink(props)}
+        valueClass="text-decoration-underline"
+      />
     </>
   );
 }
