@@ -4,6 +4,7 @@ import { Field, FieldArray } from 'redux-form';
 import { getLatinNameValidators } from '@waldur/core/validators';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
+import { FormField } from '@waldur/openstack/openstack-security-groups/rule-editor/FormField';
 import { RulesList } from '@waldur/openstack/openstack-security-groups/rule-editor/RulesList';
 import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
 
@@ -33,7 +34,7 @@ export const CreateSecurityGroupForm = connectForm(
             <Form.Group>
               <Form.Label>{translate('Name')}</Form.Label>
               <Field
-                component={InputField}
+                component={FormField}
                 name="name"
                 validate={getLatinNameValidators()}
                 maxLength={150}
