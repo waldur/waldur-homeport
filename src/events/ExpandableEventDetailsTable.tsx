@@ -88,5 +88,16 @@ export const ExpandableEventDetailsTable: FunctionComponent<ExpandableEventDetai
           )
         }
       />
+
+      {event.context.order_items &&
+        event.context.order_items.map((orderItem) => (
+          <ExpandableEventField
+            key={orderItem.uuid}
+            label={translate('Order item')}
+            value={orderItem.uuid}
+            state="marketplace-order-item-details"
+            params={{ order_item_uuid: orderItem.uuid }}
+          />
+        ))}
     </Container>
   );

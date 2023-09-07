@@ -17,7 +17,7 @@ export interface Event {
   event_type: string;
   message: string;
   created: string;
-  context: Record<string, string>;
+  context: Record<string, any>;
 }
 
 export interface EventStat {
