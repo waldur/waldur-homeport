@@ -11,6 +11,7 @@ import { OrderItemStateCell } from '@waldur/marketplace/orders/item/list/OrderIt
 import { OrderItemTypeCell } from '@waldur/marketplace/orders/item/list/OrderItemTypeCell';
 import { ResourceNameField } from '@waldur/marketplace/orders/item/list/ResourceNameField';
 import { Offering } from '@waldur/marketplace/types';
+import { OrderItemExpandableRow } from '@waldur/navigation/header/confirmation-drawer/OrderItemExpandableRow';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
@@ -70,6 +71,7 @@ const OrderItemsTable: FunctionComponent<any> = (props) => {
       initialSorting={{ field: 'created', mode: 'desc' }}
       initialPageSize={5}
       hoverableRow={OrderItemActionsCell}
+      expandableRow={OrderItemExpandableRow}
     />
   );
 };
