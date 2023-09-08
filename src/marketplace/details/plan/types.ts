@@ -20,3 +20,5 @@ export interface PlanDetailsTableProps extends PricesData {
   formGroupClassName?: string;
   columnClassName?: string;
 }
+
+export type PlanPeriod = 'month' | 'annual';

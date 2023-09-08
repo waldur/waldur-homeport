@@ -21,7 +21,7 @@ export const combinePrices = (
     const offeringLimits = parseOfferingLimits(offering);
     const offeringComponents = filterOfferingComponents(offering);
     const components: Component[] = offeringComponents.map((component) => {
-      let amount = 1;
+      let amount = 0;
       if (
         component.billing_type === 'limit' &&
         limits &&
@@ -40,6 +40,11 @@ export const combinePrices = (
         plan.quotas[component.type]
       ) {
         amount = plan.quotas[component.type] || 0;
+      } else if (
+        component.billing_type === 'one' ||
+        component.billing_type === 'few'
+      ) {
+        amount = 1;
       }
       const price = plan.prices[component.type] || 0;
       const subTotal = price * amount;
@@ -90,6 +95,16 @@ export const combinePrices = (
       totalPeriods: [],
     };
   }
+};
+
+export const calculateTotalPeriods = (components: Component[]) => {
+  return components.reduce((totalPeriods, component) => {
+    component.prices.forEach((price, i) => {
+      if (!totalPeriods[i]) totalPeriods[i] = 0;
+      totalPeriods[i] += price;
+    });
+    return totalPeriods;
+  }, []);
 };
 
 const getPlan = (state, props) => {

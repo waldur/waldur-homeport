@@ -2,15 +2,19 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
-import { formatCurrency } from '@waldur/core/formatCurrency';
+import { defaultCurrency, formatCurrency } from '@waldur/core/formatCurrency';
 import { Tip } from '@waldur/core/Tooltip';
+import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { Component } from './types';
+import { Component, PlanPeriod } from './types';
 
 interface ComponentRowProps {
   offeringComponent: Component;
+  period?: PlanPeriod;
+  hidePrices?: boolean;
+  hasX?: boolean;
   className?: string;
 }
 
@@ -47,6 +51,62 @@ export const ComponentRow: React.FC<ComponentRowProps> = (props) => {
             </td>
           ))
         : null}
+    </tr>
+  );
+};
+
+export const ComponentRow2: React.FC<ComponentRowProps> = (props) => {
+  const componentTotalPrice =
+    props.period === 'annual'
+      ? props.offeringComponent.prices[
+          props.offeringComponent.prices.length - 1
+        ]
+      : props.offeringComponent.prices[0];
+
+  const perPeriod = !props.period
+    ? ''
+    : props.period === 'annual'
+    ? ' /year'
+    : ' /mo';
+
+  return (
+    <tr>
+      <th>
+        {props.offeringComponent.name}
+        <Tip
+          label={props.offeringComponent.type}
+          id={`componentTypeTooltip-${props.offeringComponent.type}`}
+          className="mx-1"
+        >
+          {' '}
+          <i className="fa fa-question-circle" />
+        </Tip>
+        <span className="fw-normal fst-italic">
+          (
+          {props.offeringComponent.measured_unit
+            ? translate('{price} per {unit}', {
+                price: defaultCurrency(props.offeringComponent.price),
+                unit: props.offeringComponent.measured_unit,
+              })
+            : defaultCurrency(props.offeringComponent.price)}
+          )
+        </span>
+      </th>
+      <td>{props.hasX ? 'X' : ''}</td>
+      <td className={props.className}>{props.children}</td>
+      <td className="text-center" width="20px">
+        =
+      </td>
+      {!props.hidePrices ? (
+        <td className="estimate">
+          {formatCurrency(
+            componentTotalPrice,
+            ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+            4,
+          )}
+          {perPeriod}
+        </td>
+      ) : null}
     </tr>
   );
 };

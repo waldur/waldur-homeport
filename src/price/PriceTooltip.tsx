@@ -10,6 +10,7 @@ type AccountingMode = 'billing' | 'accounting';
 interface PriceTooltipProps {
   estimated?: boolean;
   accountingMode: AccountingMode;
+  iconClassName?: string;
 }
 
 class PurePriceTooltip extends PureComponent<PriceTooltipProps> {
@@ -41,7 +42,12 @@ class PurePriceTooltip extends PureComponent<PriceTooltipProps> {
 
     return (
       <Tip label={message} id="price-tooltip">
-        <i className="fa fa-exclamation-circle ms-1 hidden-print" />
+        <i
+          className={
+            'fa fa-exclamation-circle ms-1 hidden-print ' +
+            this.props.iconClassName
+          }
+        />
       </Tip>
     );
   }

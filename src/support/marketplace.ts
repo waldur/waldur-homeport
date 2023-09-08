@@ -4,6 +4,7 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 
 import { BASIC_OFFERING_TYPE, SUPPORT_OFFERING_TYPE } from './constants';
+import { deployOfferingSteps } from './deploy-steps';
 import { serializer } from './serializer';
 
 const OfferingConfigurationDetails = lazyComponent(
@@ -32,6 +33,7 @@ const OfferingOptionsSummary = (): Attribute[] => [
 ];
 
 export const COMMON_OPTIONS = {
+  formSteps: deployOfferingSteps,
   component: OfferingConfigurationForm,
   detailsComponent: OfferingConfigurationDetails,
   pluginOptionsForm: UserPluginOptionsForm,
