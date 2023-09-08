@@ -638,6 +638,10 @@ msgstr ""
 msgid "Annotations"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "Annual cost"
+msgstr ""
+
 #: src/marketplace/UserPluginOptionsForm.tsx
 msgid "Anonymized"
 msgstr ""
@@ -1553,6 +1557,7 @@ msgid "Client secret"
 msgstr ""
 
 #: src/invitations/actions/create/FormButtons.tsx
+#: src/marketplace/details/plan/EstimateUsageComponentDialog.tsx
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx
 #: src/marketplace/referral/OfferingReferralsDialog.tsx
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
@@ -3189,6 +3194,14 @@ msgstr ""
 msgid "Est revenue"
 msgstr ""
 
+#: src/marketplace/details/plan/UsageComponentRow.tsx
+msgid "Estimate"
+msgstr ""
+
+#: src/marketplace/details/plan/EstimateUsageComponentDialog.tsx
+msgid "Estimate usage of {component}"
+msgstr ""
+
 #: src/customer/list/CustomerList.tsx
 #: src/dashboard/api.ts
 #: src/invoices/list/EstimatedCost.tsx
@@ -3486,6 +3499,7 @@ msgstr ""
 
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/openstack/openstack-instance/deploy/steps.ts
+#: src/support/deploy-steps.ts
 msgid "Final configuration"
 msgstr ""
 
@@ -3643,6 +3657,10 @@ msgstr ""
 
 #: src/freeipa/FreeIPAAccount.tsx
 msgid "FreeIPA extension is disabled."
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "From"
 msgstr ""
 
 #: src/administration/roles/PermissionField.tsx
@@ -5105,6 +5123,7 @@ msgstr ""
 msgid "Monitoring"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
 #: src/quotas/constants.ts
 msgid "Monthly cost"
 msgstr ""
@@ -6021,6 +6040,10 @@ msgstr ""
 msgid "One resource"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "One time cost"
+msgstr ""
+
 #: src/marketplace/offerings/update/components/ComponentAccountingTypeField.tsx
 msgid "One-time"
 msgstr ""
@@ -6805,6 +6828,7 @@ msgstr ""
 msgid "Phone: {phone_number}"
 msgstr ""
 
+#: src/marketplace/deploy/steps/FormPlanStep.tsx
 #: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanField.tsx
@@ -6822,6 +6846,7 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
+#: src/support/deploy-steps.ts
 msgid "Plan"
 msgstr ""
 
@@ -7296,6 +7321,7 @@ msgstr ""
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
+#: src/support/deploy-steps.ts
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -9515,6 +9541,10 @@ msgstr ""
 msgid "Show metadata"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "Show monthly estimates"
+msgstr ""
+
 #: src/marketplace/resources/details/OfferingDetailsField.tsx
 msgid "Show offering"
 msgstr ""
@@ -9572,6 +9602,10 @@ msgstr ""
 #: src/customer/list/AccountingRunningField.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "Show yearly estimates"
 msgstr ""
 
 #: src/marketplace/resources/resource-selector/ResourceSelector.tsx
@@ -10748,6 +10782,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
@@ -12218,6 +12253,10 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/details/utils.ts
 msgid "Usage"
+msgstr ""
+
+#: src/marketplace/details/plan/UsageComponentRow.tsx
+msgid "Usage based"
 msgstr ""
 
 #: src/marketplace/resources/details/UsageCard.tsx
@@ -13706,6 +13745,12 @@ msgstr ""
 
 #: src/resource/utils.tsx
 msgid "{number} days"
+msgstr ""
+
+#: src/marketplace/details/plan/ComponentRow.tsx
+#: src/marketplace/details/plan/EstimateUsageComponentDialog.tsx
+#: src/marketplace/details/plan/UsageComponentRow.tsx
+msgid "{price} per {unit}"
 msgstr ""
 
 #: src/project/effects.ts

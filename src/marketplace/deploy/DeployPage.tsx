@@ -16,6 +16,7 @@ import { Offering } from '@waldur/marketplace/types';
 import { calculateSystemVolumeSize } from '@waldur/openstack/openstack-instance/utils';
 
 import { FORM_ID } from '../details/constants';
+import { getDefaultLimits } from '../offerings/utils';
 import { formDataSelector, isExperimentalUiComponentsVisible } from '../utils';
 
 import { DeployPageActions } from './DeployPageActions';
@@ -25,10 +26,12 @@ import './DeployPage.scss';
 
 export interface DeployPageProps {
   offering: Offering;
+  limits?: string[];
 }
 
 export const DeployPage = reduxForm<{}, DeployPageProps>({
   form: FORM_ID,
+  touchOnChange: true,
 })((props) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
@@ -37,7 +40,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
   const selectedOffering = formData?.offering || props?.offering;
 
   const formSteps = useMemo(
-    () => getOrderFormSteps(selectedOffering?.type),
+    () => getOrderFormSteps(selectedOffering?.type) || [],
     [selectedOffering],
   );
 
@@ -45,6 +48,15 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
   stepRefs.current = formSteps.map(
     (_, i) => stepRefs.current[i] ?? createRef(),
   );
+
+  // Initialize limits
+  useEffect(() => {
+    if (selectedOffering) {
+      props.initialize({
+        limits: { ...getDefaultLimits(selectedOffering), ...props.limits },
+      });
+    }
+  }, [selectedOffering]);
 
   const [lastY, setLastY] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<boolean[]>(

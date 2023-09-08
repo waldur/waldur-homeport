@@ -1,0 +1,43 @@
+.plan-details-container {
+  table.table-details {
+    th,
+    td {
+      padding-top: 2px;
+    }
+    th {
+      font-weight: 500;
+    }
+    td {
+      padding-left: 0.6rem;
+
+      &.estimate {
+        min-width: 130px;
+        width: 20%;
+      }
+      &.control {
+        padding-left: 0;
+      }
+    }
+
+    tr.separator-space {
+      td {
+        padding-bottom: 3rem;
+      }
+    }
+
+    tr.total {
+      th,
+      td {
+        font-weight: 600;
+        padding-top: 1rem;
+      }
+
+      &.total-final {
+        th,
+        td {
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+}

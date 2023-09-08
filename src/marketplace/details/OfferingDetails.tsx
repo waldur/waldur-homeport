@@ -3,6 +3,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
+import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 import { getCheckoutSummaryComponent } from '@waldur/marketplace/common/registry';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 import { Offering } from '@waldur/marketplace/types';
@@ -10,12 +11,14 @@ import {
   INSTANCE_TYPE,
   SHARED_INSTANCE_TYPE,
 } from '@waldur/openstack/constants';
+import { BASIC_OFFERING_TYPE } from '@waldur/support/constants';
 
 import { DeployPage } from '../deploy/DeployPage';
 
 import { OfferingConfigurator } from './OfferingConfigurator';
-import './OfferingDetails.scss';
 import { OfferingTab, OfferingTabsComponent } from './OfferingTabsComponent';
+
+import './OfferingDetails.scss';
 
 export interface OfferingDetailsProps {
   offering: Offering;
@@ -29,8 +32,13 @@ export const OfferingDetails: FunctionComponent<OfferingDetailsProps> = (
   const CheckoutSummaryComponent = getCheckoutSummaryComponent(
     props.offering.type,
   );
-  return [INSTANCE_TYPE, SHARED_INSTANCE_TYPE].includes(props.offering.type) ? (
-    <DeployPage offering={props.offering} />
+  return [
+    INSTANCE_TYPE,
+    SHARED_INSTANCE_TYPE,
+    OFFERING_TYPE_CUSTOM_SCRIPTS,
+    BASIC_OFFERING_TYPE,
+  ].includes(props.offering.type) ? (
+    <DeployPage offering={props.offering} limits={props.limits} />
   ) : (
     <>
       <Row>
