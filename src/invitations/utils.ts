@@ -4,7 +4,11 @@ import { createDeferred } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { router } from '@waldur/router';
-import { showError, showSuccess } from '@waldur/store/notify';
+import {
+  showError,
+  showRedirectMessage,
+  showSuccess,
+} from '@waldur/store/notify';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 
@@ -57,6 +61,12 @@ export function checkAndAccept(token) {
   } else {
     setInvitationToken(token);
     router.stateService.go('login');
+    store.dispatch(
+      showRedirectMessage(
+        translate('Authentication required.'),
+        translate('To accept the invitation, please sign in to your account.'),
+      ),
+    );
   }
 }
 
