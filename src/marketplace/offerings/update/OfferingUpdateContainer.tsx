@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { UISref, useCurrentStateAndParams } from '@uirouter/react';
 import Axios from 'axios';
-import { Button, Card, Col, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -23,11 +23,10 @@ import { AttributesSection } from './attributes/AttributesSection';
 import { ComponentsSection } from './components/ComponentsSection';
 import { OfferingEndpointsSection } from './endpoints/OfferingEndpointsSection';
 import { IntegrationSection } from './integration/IntegrationSection';
+import { OfferingUpdateBar } from './OfferingUpdateBar';
 import { OfferingOptionsSection } from './options/OfferingOptionsSection';
 import { OverviewSection } from './overview/OverviewSection';
 import { PlansSection } from './plans/PlansSection';
-
-import '../details/OfferingDetails.scss';
 
 const getOfferingData = async (offering_uuid) => {
   const offering = await getProviderOffering(offering_uuid);
@@ -76,57 +75,48 @@ export const OfferingUpdateContainer = () => {
 
   return (
     <div className="provider-offering">
-      <div className="provider-offering-hero__background"></div>
-      <div className="container-xxl position-relative py-16">
-        <Row className="mb-10">
-          <Col lg={8}>
-            <OfferingDetailsHeader
-              offering={data.offering}
-              category={data.category}
-            />
-          </Col>
-
-          <Col lg={4} className="d-flex">
-            <Card className="flex-grow-1">
-              <Card.Body>
-                <div className="d-flex">
-                  <div className="flex-grow-1">
-                    <UISref
-                      to={
-                        isDescendantOf('admin', state)
-                          ? 'admin.marketplace-offering-details'
-                          : 'marketplace-offering-details'
-                      }
-                      params={{
-                        offering_uuid: data.offering.uuid,
-                        uuid: data.offering.customer_uuid,
-                      }}
-                    >
-                      <a className="btn btn-sm me-2 btn-light">
-                        {translate('Manage')}
-                      </a>
-                    </UISref>
-                    <PreviewButton offering={data.offering} />
-                  </div>
-                  <div>
-                    <OfferingStateActions
-                      offering={data.offering}
-                      refreshOffering={refetch}
-                    />
-                    <Button
-                      variant="light"
-                      size="sm"
-                      className="btn-icon me-2"
-                      onClick={() => refetch()}
-                    >
-                      <i className="fa fa-refresh" />
-                    </Button>
-                  </div>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+      <OfferingDetailsHeader
+        offering={data.offering}
+        category={data.category}
+        secondaryActions={
+          <div className="d-flex">
+            <div className="flex-grow-1">
+              <UISref
+                to={
+                  isDescendantOf('admin', state)
+                    ? 'admin.marketplace-offering-details'
+                    : 'marketplace-offering-details'
+                }
+                params={{
+                  offering_uuid: data.offering.uuid,
+                  uuid: data.offering.customer_uuid,
+                }}
+              >
+                <a className="btn btn-sm me-2 btn-light">
+                  {translate('Manage')}
+                </a>
+              </UISref>
+              <PreviewButton offering={data.offering} />
+            </div>
+            <div>
+              <OfferingStateActions
+                offering={data.offering}
+                refreshOffering={refetch}
+              />
+              <Button
+                variant="light"
+                size="sm"
+                className="btn-icon me-2"
+                onClick={() => refetch()}
+              >
+                <i className="fa fa-refresh" />
+              </Button>
+            </div>
+          </div>
+        }
+      />
+      <OfferingUpdateBar offering={data.offering} />
+      <div className="container-xxl py-10">
         <OverviewSection offering={data.offering} refetch={refetch} />
 
         <IntegrationSection

@@ -7,6 +7,10 @@ import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
+import { scrollToSectionById } from '../utils';
+
+import './OfferingPageBar.scss';
+
 interface OwnProps {
   offering: Offering;
   canDeploy?: boolean;
@@ -19,17 +23,8 @@ export const PublicOfferingDetailsBar: FunctionComponent<OwnProps> = ({
   const { state } = useCurrentStateAndParams();
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
-  const goSection = (section: string) => {
-    const el = document.getElementById(section);
-    window.scroll({
-      behavior: 'smooth',
-      left: 0,
-      top: el.offsetTop - 180,
-    });
-  };
-
   return (
-    <div className="public-offering-page-bar bg-body shadow-sm">
+    <div className="offering-page-bar bg-body shadow-sm">
       <div className="container-xxl">
         <div className="d-flex scroll-x pt-2 pb-1">
           <div className="d-flex align-items-stretch justify-content-between w-100">
@@ -38,7 +33,7 @@ export const PublicOfferingDetailsBar: FunctionComponent<OwnProps> = ({
                 state={state.name}
                 params={{ '#': 'general' }}
                 className="btn btn-active-color-primary"
-                onClick={() => goSection('general')}
+                onClick={() => scrollToSectionById('general')}
               >
                 {translate('General')}
               </Link>
@@ -46,7 +41,7 @@ export const PublicOfferingDetailsBar: FunctionComponent<OwnProps> = ({
                 state={state.name}
                 params={{ '#': 'description' }}
                 className="btn btn-active-color-primary"
-                onClick={() => goSection('description')}
+                onClick={() => scrollToSectionById('description')}
               >
                 {translate('Description')}
               </Link>
@@ -54,7 +49,7 @@ export const PublicOfferingDetailsBar: FunctionComponent<OwnProps> = ({
                 state={state.name}
                 params={{ '#': 'components' }}
                 className="btn btn-active-color-primary"
-                onClick={() => goSection('components')}
+                onClick={() => scrollToSectionById('components')}
               >
                 {translate('Components')}
               </Link>
@@ -63,7 +58,7 @@ export const PublicOfferingDetailsBar: FunctionComponent<OwnProps> = ({
                   state={state.name}
                   params={{ '#': 'images' }}
                   className="btn btn-active-color-primary"
-                  onClick={() => goSection('images')}
+                  onClick={() => scrollToSectionById('images')}
                 >
                   {translate('Images')}
                 </Link>
@@ -73,7 +68,7 @@ export const PublicOfferingDetailsBar: FunctionComponent<OwnProps> = ({
                   state={state.name}
                   params={{ '#': 'getting-started' }}
                   className="btn btn-active-color-primary"
-                  onClick={() => goSection('getting-started')}
+                  onClick={() => scrollToSectionById('getting-started')}
                 >
                   {translate('Getting started')}
                 </Link>
@@ -83,7 +78,7 @@ export const PublicOfferingDetailsBar: FunctionComponent<OwnProps> = ({
                   state={state.name}
                   params={{ '#': 'faq' }}
                   className="btn btn-active-color-primary"
-                  onClick={() => goSection('faq')}
+                  onClick={() => scrollToSectionById('faq')}
                 >
                   {translate('FAQ')}
                 </Link>
@@ -93,7 +88,7 @@ export const PublicOfferingDetailsBar: FunctionComponent<OwnProps> = ({
                   state={state.name}
                   params={{ '#': 'reviews' }}
                   className="btn btn-active-color-primary"
-                  onClick={() => goSection('reviews')}
+                  onClick={() => scrollToSectionById('reviews')}
                 >
                   {translate('Reviews')}
                 </Link>
@@ -102,7 +97,7 @@ export const PublicOfferingDetailsBar: FunctionComponent<OwnProps> = ({
                 state={state.name}
                 params={{ '#': 'pricing' }}
                 className="btn btn-active-color-primary"
-                onClick={() => goSection('pricing')}
+                onClick={() => scrollToSectionById('pricing')}
               >
                 {translate('Pricing')}
               </Link>

@@ -17,7 +17,7 @@ export const OfferingOptionsSection = (props) => {
     return null;
   }
   return (
-    <Card className="mb-10">
+    <Card className="mb-10" id="options">
       <div className="border-2 border-bottom card-header">
         <div className="card-title h5">
           {translate('User input variables')}

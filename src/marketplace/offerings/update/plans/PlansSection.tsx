@@ -13,7 +13,7 @@ import { EditPlanButton } from './EditPlanButton';
 export const PlansSection = (props) => {
   const user = useSelector(getUser);
   return (
-    <Card className="mb-10">
+    <Card className="mb-10" id="plans">
       <div className="border-2 border-bottom card-header">
         <div className="card-title h5">
           {props.offering.plans.length === 0 ? (

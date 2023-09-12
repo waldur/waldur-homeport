@@ -136,6 +136,7 @@ msgstr ""
 msgid "Accounting"
 msgstr ""
 
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/components/ComponentsSection.tsx
 msgid "Accounting components"
 msgstr ""
@@ -145,6 +146,7 @@ msgstr ""
 msgid "Accounting period"
 msgstr ""
 
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/plans/PlansSection.tsx
 msgid "Accounting plans"
 msgstr ""
@@ -1405,6 +1407,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/offerings/import/tabs.ts
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/attributes/AttributesSection.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
@@ -2272,10 +2275,6 @@ msgstr ""
 
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 msgid "Current replicas"
-msgstr ""
-
-#: src/marketplace/offerings/details/OfferingKeyFiguresSection.tsx
-msgid "Current revenue"
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
@@ -3190,10 +3189,6 @@ msgstr ""
 msgid "Esimated price per month"
 msgstr ""
 
-#: src/marketplace/offerings/details/OfferingKeyFiguresSection.tsx
-msgid "Est revenue"
-msgstr ""
-
 #: src/marketplace/details/plan/UsageComponentRow.tsx
 msgid "Estimate"
 msgstr ""
@@ -3723,6 +3718,7 @@ msgid "Gateway IP of this subnet"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 msgid "General"
 msgstr ""
@@ -4097,6 +4093,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
@@ -4261,6 +4258,7 @@ msgstr ""
 msgid "Instances count"
 msgstr ""
 
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/integration/IntegrationSection.tsx
 #: src/marketplace/offerings/update/integration/ScriptIntegrationSummary.tsx
 msgid "Integration"
@@ -4585,10 +4583,6 @@ msgstr ""
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Key"
-msgstr ""
-
-#: src/marketplace/offerings/details/OfferingKeyFiguresSection.tsx
-msgid "Key figures"
 msgstr ""
 
 #: src/openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx
@@ -6216,6 +6210,10 @@ msgstr ""
 msgid "Order history"
 msgstr ""
 
+#: src/events/ExpandableEventDetailsTable.tsx
+msgid "Order item"
+msgstr ""
+
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 msgid "Order item details"
 msgstr ""
@@ -6239,6 +6237,7 @@ msgid "Order item has cancel has been scheduled."
 msgstr ""
 
 #: src/marketplace/details/OfferingOrderItemsList.tsx
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -8465,6 +8464,7 @@ msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -8827,19 +8827,19 @@ msgstr ""
 msgid "Script execution result"
 msgstr ""
 
-#: src/marketplace/offerings/update/integration/ScriptIntegrationSummary.tsx
+#: src/marketplace/offerings/update/integration/utils.ts
 msgid "Script for creation of a resource"
 msgstr ""
 
-#: src/marketplace/offerings/update/integration/ScriptIntegrationSummary.tsx
+#: src/marketplace/offerings/update/integration/utils.ts
 msgid "Script for regular update of resource and its accounting"
 msgstr ""
 
-#: src/marketplace/offerings/update/integration/ScriptIntegrationSummary.tsx
+#: src/marketplace/offerings/update/integration/utils.ts
 msgid "Script for termination of a resource"
 msgstr ""
 
-#: src/marketplace/offerings/update/integration/ScriptIntegrationSummary.tsx
+#: src/marketplace/offerings/update/integration/utils.ts
 msgid "Script for updating a resource on plan or limit change"
 msgstr ""
 
@@ -8847,7 +8847,7 @@ msgstr ""
 msgid "Script has been updated successfully."
 msgstr ""
 
-#: src/marketplace/offerings/update/integration/ScriptIntegrationSummary.tsx
+#: src/marketplace/offerings/update/integration/utils.ts
 msgid "Script language"
 msgstr ""
 
@@ -9912,10 +9912,6 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: src/marketplace/offerings/details/OfferingKeyFiguresSection.tsx
-msgid "Status messages"
-msgstr ""
-
 #: src/marketplace/resources/details/StatusCard.tsx
 msgid "Status page"
 msgstr ""
@@ -10101,10 +10097,6 @@ msgstr ""
 
 #: src/issues/events.tsx
 msgid "Support request events"
-msgstr ""
-
-#: src/marketplace/offerings/details/OfferingKeyFiguresSection.tsx
-msgid "Support tickets"
 msgstr ""
 
 #: src/user/support/utils.ts
@@ -12352,6 +12344,7 @@ msgstr ""
 msgid "User has been updated."
 msgstr ""
 
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/integration/VariablesList.tsx
 #: src/marketplace/offerings/update/options/OfferingOptionsSection.tsx
 msgid "User input variables"
@@ -12634,6 +12627,7 @@ msgstr ""
 #: src/administration/providers/ProviderCard.tsx
 #: src/administration/routes.ts
 #: src/customer/routes.ts
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx

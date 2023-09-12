@@ -8,7 +8,7 @@ import { EditAttributeButton } from './EditAttributeButton';
 import { EditCategoryButton } from './EditCategoryButton';
 
 export const AttributesSection = (props) => (
-  <Card className="mb-10">
+  <Card className="mb-10" id="category">
     <div className="border-2 border-bottom card-header">
       <div className="card-title h5">{translate('Category')}</div>
       <div className="card-toolbar">

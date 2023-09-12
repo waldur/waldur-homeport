@@ -34,7 +34,7 @@ export const IntegrationSection = (props) => {
   }
 
   return (
-    <Card className="mb-10">
+    <Card className="mb-10" id="integration">
       <div className="border-2 border-bottom card-header">
         <div className="card-title h5">{translate('Integration')}</div>
         <div className="card-toolbar">

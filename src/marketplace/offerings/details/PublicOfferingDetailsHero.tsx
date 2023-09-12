@@ -10,7 +10,8 @@ import { Category, Offering } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
 import { Logo } from '../service-providers/shared/Logo';
-import './PublicOfferingDetailsHero.scss';
+
+import './OfferingPageHero.scss';
 
 interface OwnProps {
   offering: Offering;
@@ -27,18 +28,18 @@ export const PublicOfferingDetailsHero: FunctionComponent<OwnProps> = (
 
   return (
     <div
-      className="public-offering-hero__background"
+      className="offering-page-hero__background"
       style={
         props.offering.image
           ? { backgroundImage: `url(${props.offering.image})` }
           : {}
       }
     >
-      <div className="public-offering-hero__table">
-        <div className="public-offering-hero__cell">
+      <div className="offering-page-hero__table">
+        <div className="offering-page-hero__cell">
           <div className="container-xxl pb-16">
             <div className="d-flex gap-20">
-              <Card className="public-offering-logo">
+              <Card className="offering-page-logo">
                 <Card.Body>
                   <OfferingLogo
                     src={props.offering.thumbnail}

@@ -30,3 +30,12 @@ export const getDefaultLimits = (offering: Offering): Record<string, number> =>
         : acc,
     {},
   );
+
+export const scrollToSectionById = (section: string) => {
+  const el = document.getElementById(section);
+  window.scroll({
+    behavior: 'smooth',
+    left: 0,
+    top: el.offsetTop - 180,
+  });
+};

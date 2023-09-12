@@ -13,7 +13,7 @@ export const ComponentsSection = (props) => {
     return null;
   }
   return (
-    <Card className="mb-10">
+    <Card className="mb-10" id="components">
       <div className="border-2 border-bottom card-header">
         <div className="card-title h5">
           {props.offering.components.length === 0 ? (
