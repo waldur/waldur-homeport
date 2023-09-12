@@ -3,6 +3,7 @@ import { ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { ActionItem } from './ActionItem';
@@ -37,6 +38,13 @@ export const AsyncActionItem: <T extends { uuid: string; name?: string }>(
   const dispatch = useDispatch();
   const callback = async () => {
     try {
+      await waitForConfirmation(
+        dispatch,
+        translate('Confirmation'),
+        translate('Are you sure you want to {action} the VM?', {
+          action: rest.title.toLowerCase(),
+        }),
+      );
       await apiMethod(resource.uuid);
       dispatch(
         showSuccess(
