@@ -16,7 +16,6 @@ import { PublicOfferingImages } from './PublicOfferingImages';
 import { PublicOfferingInfo } from './PublicOfferingInfo';
 import { PublicOfferingPricing } from './PublicOfferingPricing';
 import { PublicOfferingReviews } from './PublicOfferingReviews';
-import './PublicOfferingDetails.scss';
 
 interface PublicOfferingDetailsProps {
   offering: Offering;

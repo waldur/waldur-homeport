@@ -49,7 +49,7 @@ const attributes: Attribute[] = [
 
 export const OverviewSection = (props) => {
   return (
-    <Card className="mb-10">
+    <Card className="mb-10" id="general">
       <div className="border-2 border-bottom card-header">
         <div className="card-title h5">{translate('General')}</div>
       </div>

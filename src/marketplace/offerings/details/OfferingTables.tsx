@@ -25,19 +25,19 @@ export const OfferingTables = ({ offering }) => {
   );
   return (
     <>
-      <div className="mb-10">
+      <div className="mb-10" id="order-items">
         <OfferingOrderItemsList
           offering={offering}
           filters={<OrderItemsFilter />}
         />
       </div>
-      <div className="mb-10">
+      <div className="mb-10" id="resources">
         <OfferingResourcesList
           offering={offering}
           filters={<OfferingResourcesFilter />}
         />
       </div>
-      <div className="mb-10">
+      <div className="mb-10" id="users">
         <OfferingUsersTable offering={offering} />
       </div>
       <div className="mb-10">

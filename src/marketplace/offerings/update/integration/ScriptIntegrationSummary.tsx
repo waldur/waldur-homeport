@@ -5,35 +5,10 @@ import { translate } from '@waldur/i18n';
 import { EditIntegrationButton } from './EditIntegrationButton';
 import { EditScriptButton } from './EditScriptButton';
 import { EditVarsButton } from './EditVarsButton';
-
-const SCRIPT_ROWS = [
-  { label: translate('Script language'), type: 'language' },
-  {
-    label: translate('Script for creation of a resource'),
-    type: 'create',
-    dry_run: 'Create',
-  },
-  {
-    label: translate('Script for termination of a resource'),
-    type: 'terminate',
-    dry_run: 'Terminate',
-  },
-  {
-    label: translate('Script for updating a resource on plan or limit change'),
-    type: 'update',
-    dry_run: 'Update',
-  },
-  {
-    label: translate(
-      'Script for regular update of resource and its accounting',
-    ),
-    type: 'pull',
-    dry_run: 'Pull',
-  },
-];
+import { SCRIPT_ROWS } from './utils';
 
 export const ScriptIntegrationSummary = ({ offering, refetch }) => (
-  <Card className="mb-10">
+  <Card className="mb-10" id="integration">
     <div className="border-2 border-bottom card-header">
       <div className="card-title h5">
         {SCRIPT_ROWS.every((option) => offering.secret_options[option.type]) ? (

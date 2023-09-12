@@ -37,6 +37,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     <Table
       {...props}
       title={translate('Images')}
+      id="images"
       columns={columns}
       placeholderComponent={<ImagesListPlaceholder />}
       verboseName={translate('Offerings images')}

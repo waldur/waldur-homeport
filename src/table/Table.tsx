@@ -32,6 +32,7 @@ export interface TableProps<RowType = any> extends TableState {
   actions?: React.ReactNode;
   verboseName?: string;
   className?: string;
+  id?: string;
   rowClass?: (({ row }) => string) | string;
   hoverable?: boolean;
   showPageSizeSelector?: boolean;
@@ -86,6 +87,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
           this.props.fieldName ? 'field-table' : '',
           this.props.className,
         )}
+        id={this.props.id}
       >
         {this.props.blocked && <div className="table-block" />}
         {this.props.hasActionBar && (

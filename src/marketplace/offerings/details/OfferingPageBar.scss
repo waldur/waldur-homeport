@@ -1,0 +1,14 @@
+.offering-page-bar {
+  position: sticky;
+  top: calc(65px + var(--kt-toolbar-height)); /* header and toolbar height */
+  z-index: 10;
+
+  a.btn:hover:not(.btn-primary) {
+    text-decoration: underline !important;
+  }
+}
+body:not(.toolbar-fixed) {
+  .offering-page-bar {
+    top: 65px; /* header height */
+  }
+}
