@@ -23,6 +23,16 @@ export const showError = (message) =>
     dismissible: true,
   });
 
+export const showRedirectMessage = (title, message) =>
+  notify({
+    title,
+    status: 'warning',
+    message,
+    position: 'top-right',
+    showDismissButton: true,
+    dismissible: true,
+  });
+
 export const showErrorResponse = (
   response: AxiosResponse,
   message?: string,
