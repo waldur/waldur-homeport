@@ -49,7 +49,22 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
 const TableOptions = {
   table: 'openstack-security-groups',
-  fetchData: createFetcher('openstack-security-groups'),
+  fetchData: createFetcher('openstack-security-groups', {
+    params: {
+      field: [
+        'name',
+        'description',
+        'state',
+        'url',
+        'marketplace_offering_uuid',
+        'service_name',
+        'end_date',
+        'backend_id',
+        'rules',
+        'resource_type',
+      ],
+    },
+  }),
   mapPropsToFilter: (props) => ({
     tenant_uuid: props.resource.uuid,
   }),
