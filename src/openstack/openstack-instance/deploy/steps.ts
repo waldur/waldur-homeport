@@ -3,6 +3,7 @@ import { FormCloudStep } from '@waldur/marketplace/deploy/steps/FormCloudStep';
 import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
 import { FormProjectStep } from '@waldur/marketplace/deploy/steps/FormProjectStep';
 import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
+import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 
 import { FormDataVolumeStep } from './FormDataVolumeStep';
 import { FormFlavorStep } from './FormFlavorStep';
@@ -29,6 +30,7 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     required: true,
     requiredFields: ['offering'],
     component: FormCloudStep,
+    params: { type: INSTANCE_TYPE },
   },
   {
     label: translate('Image'),
@@ -99,5 +101,6 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     required: true,
     requiredFields: ['attributes.name'],
     component: FormFinalConfigurationStep,
+    params: { nameLabel: translate('VM name') },
   },
 ];

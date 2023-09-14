@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useEffectOnce } from 'react-use';
 
 import { translate } from '@waldur/i18n';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
@@ -16,14 +15,7 @@ export const FormPlanStep = (props: FormStepProps) => {
     [props.offering],
   );
 
-  // Initialize plan if we have only one choice
-  useEffectOnce(() => {
-    if (plans && plans.length === 1) {
-      props.change('plan', plans[0]);
-    }
-  });
-
-  if (props.offering.plans.length === 0) {
+  if (plans.length === 0) {
     return null;
   }
   return (

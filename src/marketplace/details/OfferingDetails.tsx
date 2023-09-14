@@ -10,6 +10,7 @@ import { Offering } from '@waldur/marketplace/types';
 import {
   INSTANCE_TYPE,
   SHARED_INSTANCE_TYPE,
+  VOLUME_TYPE,
 } from '@waldur/openstack/constants';
 import { BASIC_OFFERING_TYPE } from '@waldur/support/constants';
 
@@ -37,6 +38,7 @@ export const OfferingDetails: FunctionComponent<OfferingDetailsProps> = (
     SHARED_INSTANCE_TYPE,
     OFFERING_TYPE_CUSTOM_SCRIPTS,
     BASIC_OFFERING_TYPE,
+    VOLUME_TYPE,
   ].includes(props.offering.type) ? (
     <DeployPage offering={props.offering} limits={props.limits} />
   ) : (

@@ -41,7 +41,7 @@ const getDailyPrice = (formData, components) => {
   return size * (components[component] || 0);
 };
 
-const getQuotas = ({ formData, usages, limits }) => {
+export const getQuotas = ({ formData, usages, limits }) => {
   const quotas: Quota[] = [
     {
       name: 'storage',

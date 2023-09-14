@@ -1,9 +1,12 @@
-import { getFormValues, isValid, getFormSyncErrors } from 'redux-form';
+import { isValid, getFormSyncErrors } from 'redux-form';
 
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 
 import { FORM_ID } from '../details/constants';
+import { formDataSelector } from '../utils';
+
+import { OfferingConfigurationFormStep } from './types';
 
 export const scrollToView = (viewId: string) => {
   const el = document.getElementById(viewId);
@@ -14,11 +17,15 @@ export const scrollToView = (viewId: string) => {
   });
 };
 
+export const hasStepWithField = (
+  steps: OfferingConfigurationFormStep[],
+  field: string,
+) =>
+  steps &&
+  steps.some((step) => step.fields && step.fields.some((key) => key === field));
+
 export const concealPricesSelector = (state: RootState) =>
   isVisible(state, 'marketplace.conceal_prices');
-
-export const formDataSelector = (state: RootState) =>
-  (getFormValues(FORM_ID)(state) || {}) as any;
 
 export const formProjectSelector = (state: RootState) => {
   const formData = formDataSelector(state);

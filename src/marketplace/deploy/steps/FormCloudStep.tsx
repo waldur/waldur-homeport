@@ -10,7 +10,6 @@ import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 import { parseResponse } from '@waldur/table/api';
 import { getProject } from '@waldur/workspace/selectors';
 
@@ -36,7 +35,7 @@ const loadData: QueryFunction<DataPage> = async (context) => {
       page: context.pageParam,
       page_size: 5,
       project_uuid: context.meta.project_uuid,
-      type: INSTANCE_TYPE,
+      type: context.meta.type,
     },
     { signal: context.signal },
   );
@@ -62,12 +61,15 @@ export const FormCloudStep = (props: FormStepProps) => {
   const project = useSelector(formProjectSelector);
 
   const context = useInfiniteQuery<any, any, DataPage>(
-    ['deploy-offerings', project?.uuid],
+    ['deploy-offerings', project?.uuid, props.params?.type],
     loadData,
     {
       getNextPageParam: (lastPage) => lastPage.nextPage,
       staleTime: 3 * 60 * 1000,
-      meta: { project_uuid: project?.uuid },
+      meta: {
+        project_uuid: project?.uuid,
+        type: props.params?.type,
+      },
     },
   );
 

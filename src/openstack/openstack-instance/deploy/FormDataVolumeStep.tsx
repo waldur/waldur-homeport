@@ -80,6 +80,7 @@ export const FormDataVolumeStep = (props: FormStepProps) => {
         name="attributes.data_volume_size"
         component={FormGroup}
         validate={[exceeds]}
+        label={translate('Volume size')}
         disabled={!fieldsEnabled}
         format={(v) => (v ? v / 1024 : '')}
         normalize={(v) => Number(v) * 1024}
