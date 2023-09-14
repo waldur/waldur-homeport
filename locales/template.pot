@@ -857,6 +857,10 @@ msgstr ""
 msgid "Are you sure you want to unlink {name} {resourceType}?"
 msgstr ""
 
+#: src/resource/actions/AsyncActionItem.tsx
+msgid "Are you sure you want to {action} the VM?"
+msgstr ""
+
 #: src/marketplace/resources/mass-actions/VirtualMachineMultiAction.tsx
 msgid "Are you sure you want to {title} {count} resources?"
 msgstr ""
@@ -979,6 +983,10 @@ msgstr ""
 #: src/auth/events.ts
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Authentication events"
+msgstr ""
+
+#: src/invitations/utils.ts
+msgid "Authentication required."
 msgstr ""
 
 #: src/marketplace/offerings/import/CredentialsTab.tsx
@@ -1604,6 +1612,7 @@ msgid "Cloud init template"
 msgstr ""
 
 #: src/openstack/openstack-instance/deploy/steps.ts
+#: src/openstack/openstack-volume/deploy/steps.ts
 msgid "Cloud region"
 msgstr ""
 
@@ -1772,6 +1781,7 @@ msgstr ""
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/rancher/cluster/create/TenantGroup.tsx
+#: src/resource/actions/AsyncActionItem.tsx
 #: src/resource/actions/ResourceDeleteButton.tsx
 msgid "Confirmation"
 msgstr ""
@@ -3494,6 +3504,7 @@ msgstr ""
 
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/openstack/openstack-instance/deploy/steps.ts
+#: src/openstack/openstack-volume/deploy/steps.ts
 #: src/support/deploy-steps.ts
 msgid "Final configuration"
 msgstr ""
@@ -3687,6 +3698,7 @@ msgstr ""
 #: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
+#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 msgid "GB"
@@ -4460,6 +4472,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 msgid "Invoiced to"
 msgstr ""
 
@@ -5223,6 +5236,7 @@ msgstr ""
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -5271,6 +5285,7 @@ msgstr ""
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
@@ -5856,6 +5871,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -7165,6 +7181,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 msgid "Price per 30 days"
 msgstr ""
 
@@ -7177,6 +7194,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 msgid "Price per day"
 msgstr ""
 
@@ -7314,6 +7332,8 @@ msgstr ""
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/steps.ts
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/steps.ts
 #: src/project/routes.ts
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -7733,6 +7753,7 @@ msgstr ""
 
 #: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
 #: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
+#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/quotas/QuotaUsageBarChart.tsx
 msgid "Quota usage exceeds available limit."
 msgstr ""
@@ -7787,6 +7808,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 msgid "Rating"
 msgstr ""
 
@@ -9314,6 +9336,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/providers/dashboard/ProviderProfile.tsx
 msgid "Service provider"
 msgstr ""
@@ -9944,6 +9967,7 @@ msgstr ""
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/quotas/constants.ts
 msgid "Storage"
 msgstr ""
@@ -10720,6 +10744,10 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+#: src/invitations/utils.ts
+msgid "To accept the invitation, please sign in to your account."
+msgstr ""
+
 #: src/slurm/RequestLimitsChangeDialog.tsx
 msgid "To change allocation limits, please send a request to {supportEmail}."
 msgstr ""
@@ -10779,6 +10807,7 @@ msgstr ""
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 msgid "Total"
 msgstr ""
@@ -12668,10 +12697,10 @@ msgstr ""
 msgid "VAT rate"
 msgstr ""
 
-#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
 msgid "VM name"
 msgstr ""
 
@@ -12833,6 +12862,8 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/AttachVolumeDialog.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
+#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
+#: src/openstack/openstack-volume/deploy/steps.ts
 msgid "Volume"
 msgstr ""
 
@@ -12850,9 +12881,13 @@ msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
+#: src/openstack/openstack-volume/deploy/steps.ts
 msgid "Volume name"
 msgstr ""
 
+#: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
+#: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
+#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 msgid "Volume size"
 msgstr ""
@@ -12870,6 +12905,7 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
 #: src/openstack/openstack-volume/actions/RetypeDialog.tsx
+#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/rancher/cluster/create/VolumeTypeGroup.tsx
 msgid "Volume type"
 msgstr ""

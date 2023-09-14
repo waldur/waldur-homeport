@@ -8,12 +8,14 @@ import {
   useState,
 } from 'react';
 import { useSelector } from 'react-redux';
+import { useEffectOnce } from 'react-use';
 import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { getOrderFormSteps } from '@waldur/marketplace/common/registry';
 import { Offering } from '@waldur/marketplace/types';
 import { calculateSystemVolumeSize } from '@waldur/openstack/openstack-instance/utils';
+import { getProject } from '@waldur/workspace/selectors';
 
 import { FORM_ID } from '../details/constants';
 import { getDefaultLimits } from '../offerings/utils';
@@ -21,6 +23,7 @@ import { formDataSelector, isExperimentalUiComponentsVisible } from '../utils';
 
 import { DeployPageActions } from './DeployPageActions';
 import { DeployPageSidebar } from './DeployPageSidebar';
+import { hasStepWithField } from './utils';
 
 import './DeployPage.scss';
 
@@ -35,9 +38,15 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
 })((props) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
+  const project = useSelector(getProject);
   const formData = useSelector(formDataSelector);
 
   const selectedOffering = formData?.offering || props?.offering;
+
+  const plans = useMemo(
+    () => selectedOffering.plans.filter((plan) => plan.archived === false),
+    [selectedOffering],
+  );
 
   const formSteps = useMemo(
     () => getOrderFormSteps(selectedOffering?.type) || [],
@@ -49,14 +58,33 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
     (_, i) => stepRefs.current[i] ?? createRef(),
   );
 
-  // Initialize limits
+  // Initialize project and cloud
+  useEffectOnce(() => {
+    const initialData = {};
+    if (hasStepWithField(formSteps, 'project') && project) {
+      Object.assign(initialData, { project });
+    }
+    if (hasStepWithField(formSteps, 'offering') && selectedOffering) {
+      Object.assign(initialData, { offering: selectedOffering });
+    }
+
+    if (Object.keys(initialData).length > 0) {
+      props.initialize(initialData);
+    }
+  });
+
+  // Initialize limits and plan when the offering changes
   useEffect(() => {
     if (selectedOffering) {
-      props.initialize({
-        limits: { ...getDefaultLimits(selectedOffering), ...props.limits },
+      props.change('limits', {
+        ...getDefaultLimits(selectedOffering),
+        ...props.limits,
       });
     }
-  }, [selectedOffering]);
+    if (hasStepWithField(formSteps, 'plan') && plans && plans.length === 1) {
+      props.change('plan', plans[0]);
+    }
+  }, [selectedOffering, plans]);
 
   const [lastY, setLastY] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<boolean[]>(
@@ -141,6 +169,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
               offering={selectedOffering}
               observed={completedSteps[i]}
               change={props.change}
+              params={step.params}
             />
           </div>
         ))}

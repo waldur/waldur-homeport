@@ -22,28 +22,7 @@ import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
-import { formAttributesSelector, formFlavorSelector } from './utils';
-
-const getTotalStorage = (attributesData) =>
-  attributesData.system_volume_size + (attributesData.data_volume_size || 0);
-
-const getStoragePrice = (attributesData, components) => {
-  const systemVolumeComponent = attributesData.system_volume_type
-    ? `gigabytes_${attributesData.system_volume_type.name}`
-    : 'storage';
-  const systemVolumePrice =
-    (attributesData.system_volume_size / 1024.0) *
-    (components[systemVolumeComponent] || 0);
-
-  const dataVolumeComponent = attributesData.data_volume_type
-    ? `gigabytes_${attributesData.data_volume_type.name}`
-    : 'storage';
-  const dataVolumePrice =
-    ((attributesData.data_volume_size || 0) / 1024.0) *
-    (components[dataVolumeComponent] || 0);
-
-  return systemVolumePrice + dataVolumePrice;
-};
+import { formAttributesSelector } from './utils';
 
 const getDailyPrice = (attributesData, components) => {
   /**
@@ -51,15 +30,15 @@ const getDailyPrice = (attributesData, components) => {
    * But in UI storage is storead in MB.
    * Therefore we should convert storage from GB to MB for price estimatation.
    */
-  if (components && attributesData.flavor) {
-    const cpu = attributesData.flavor.cores * components.cores;
-    const ram = (attributesData.flavor.ram * components.ram) / 1024.0;
-    const storagePrice = getStoragePrice(attributesData, components);
 
-    return cpu + ram + storagePrice;
-  } else {
+  if (!components || !attributesData.size) {
     return 0;
   }
+  const size = attributesData.size / 1024.0;
+  const component = attributesData.type
+    ? `gigabytes_${attributesData.type.name}`
+    : 'storage';
+  return size * (components[component] || 0);
 };
 
 interface CheckoutSummaryProps {
@@ -70,7 +49,6 @@ export const CheckoutSummary = ({ offering }: CheckoutSummaryProps) => {
   const formIsValid = useSelector(formIsValidSelector);
   const formAttributesData = useSelector(formAttributesSelector);
   const errors = useSelector(formErrorsSelector);
-  const flavor = useSelector(formFlavorSelector);
 
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
@@ -102,33 +80,17 @@ export const CheckoutSummary = ({ offering }: CheckoutSummaryProps) => {
 
   return (
     <>
-      {formIsValid && (
+      {!!formAttributesData.size && (
         <div className="order-summary bg-gray-100 mb-10 fs-8 fw-bold">
           {formAttributesData.name && (
             <CheckoutPricingRow
-              label={translate('VM name')}
+              label={translate('Name')}
               value={formAttributesData.name}
             />
           )}
           <CheckoutPricingRow
-            label={translate('Image')}
-            value={formAttributesData.image && formAttributesData.image.name}
-          />
-          <CheckoutPricingRow
-            label={translate('Flavor')}
-            value={flavor?.name}
-          />
-          <CheckoutPricingRow
-            label={translate('vCPU')}
-            value={`${flavor?.cores || '-'} cores`}
-          />
-          <CheckoutPricingRow
-            label={translate('RAM')}
-            value={formatFilesize(flavor?.ram)}
-          />
-          <CheckoutPricingRow
-            label={translate('Total storage')}
-            value={formatFilesize(getTotalStorage(formAttributesData))}
+            label={translate('Storage')}
+            value={formatFilesize(formAttributesData.size)}
           />
           {!shouldConcealPrices && (
             <CheckoutPricingRow

@@ -22,7 +22,7 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
       <Field
         name="attributes.name"
         component={StringField}
-        placeholder={translate('VM name')}
+        placeholder={props.params?.nameLabel || translate('Name')}
         className="form-control-solid mb-7"
         validate={nameValidators}
       />
