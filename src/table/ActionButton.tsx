@@ -7,7 +7,7 @@ import { Tip } from '@waldur/core/Tooltip';
 
 export interface ActionButtonProps {
   title: string;
-  action: () => void;
+  action: (event?: any) => void;
   icon?: string;
   className?: string;
   disabled?: boolean;

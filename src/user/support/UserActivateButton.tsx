@@ -1,3 +1,4 @@
+import { useState, MouseEvent } from 'react';
 import { connect } from 'react-redux';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -12,15 +13,22 @@ import * as actions from './actions';
 interface UserActivateButtonProps {
   user: User;
   row: UserDetails;
-  onClick: () => void;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-const PureUserActivateButton = (props: UserActivateButtonProps) =>
-  props.user.is_staff ? (
+const PureUserActivateButton = (props: UserActivateButtonProps) => {
+  const [isActive, setIsActive] = useState(props.row.is_active);
+
+  const toggleUserStatus = (event: MouseEvent<HTMLButtonElement>) => {
+    setIsActive(!isActive);
+    props.onClick(event);
+  };
+
+  return props.user.is_staff ? (
     <Tip
       id="user-activate"
       label={
-        props.row.is_active
+        isActive
           ? translate(
               'Inactive user will not be able to login into the portal.',
             )
@@ -28,13 +36,12 @@ const PureUserActivateButton = (props: UserActivateButtonProps) =>
       }
     >
       <ActionButton
-        title={
-          props.row.is_active ? translate('Deactivate') : translate('Activate')
-        }
-        action={props.onClick}
+        title={isActive ? translate('Deactivate') : translate('Activate')}
+        action={toggleUserStatus}
       />
     </Tip>
   ) : null;
+};
 
 const mapStatToProps = (state: RootState) => ({
   user: getUser(state),
