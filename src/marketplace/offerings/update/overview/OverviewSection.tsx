@@ -40,7 +40,7 @@ const attributes: Attribute[] = [
     maxLength: 200,
   },
   {
-    key: 'terms_of_service',
+    key: 'terms_of_service_link',
     title: translate('Terms of service link'),
     type: 'string',
     maxLength: 200,
