@@ -587,6 +587,7 @@ msgid "Allocation description"
 msgstr ""
 
 #: src/slurm/AllocationForm.tsx
+#: src/slurm/deploy/steps.ts
 msgid "Allocation name"
 msgstr ""
 
@@ -3505,6 +3506,7 @@ msgstr ""
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/openstack/openstack-instance/deploy/steps.ts
 #: src/openstack/openstack-volume/deploy/steps.ts
+#: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
 msgid "Final configuration"
 msgstr ""
@@ -6861,6 +6863,7 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
+#: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
 msgid "Plan"
 msgstr ""
@@ -7340,6 +7343,7 @@ msgstr ""
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
+#: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/resources/ResourcesFilter.tsx
@@ -10665,6 +10669,7 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/project/ProjectNameField.tsx
 #: src/rancher/cluster/create/RancherClusterForm.tsx

@@ -12,6 +12,7 @@ import {
   SHARED_INSTANCE_TYPE,
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
+import { SLURM_PLUGIN, SLURM_REMOTE_PLUGIN } from '@waldur/slurm/constants';
 import { BASIC_OFFERING_TYPE } from '@waldur/support/constants';
 
 import { DeployPage } from '../deploy/DeployPage';
@@ -38,6 +39,8 @@ export const OfferingDetails: FunctionComponent<OfferingDetailsProps> = (
     SHARED_INSTANCE_TYPE,
     OFFERING_TYPE_CUSTOM_SCRIPTS,
     BASIC_OFFERING_TYPE,
+    SLURM_PLUGIN,
+    SLURM_REMOTE_PLUGIN,
     VOLUME_TYPE,
   ].includes(props.offering.type) ? (
     <DeployPage offering={props.offering} limits={props.limits} />

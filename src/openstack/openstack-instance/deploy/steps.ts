@@ -1,9 +1,12 @@
+import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormCloudStep } from '@waldur/marketplace/deploy/steps/FormCloudStep';
 import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
 import { FormProjectStep } from '@waldur/marketplace/deploy/steps/FormProjectStep';
 import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
 import { INSTANCE_TYPE } from '@waldur/openstack/constants';
+
+import { validateOpenstackInstanceName } from '../utils';
 
 import { FormDataVolumeStep } from './FormDataVolumeStep';
 import { FormFlavorStep } from './FormFlavorStep';
@@ -101,6 +104,9 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     required: true,
     requiredFields: ['attributes.name'],
     component: FormFinalConfigurationStep,
-    params: { nameLabel: translate('VM name') },
+    params: {
+      nameLabel: translate('VM name'),
+      nameValidate: [required, validateOpenstackInstanceName],
+    },
   },
 ];

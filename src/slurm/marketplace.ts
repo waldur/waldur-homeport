@@ -4,6 +4,8 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 import { SLURM_PLUGIN, SLURM_REMOTE_PLUGIN } from '@waldur/slurm/constants';
 
+import { deployOfferingSteps } from './deploy/steps';
+
 const AllocationForm = lazyComponent(
   () => import('@waldur/slurm/AllocationForm'),
   'AllocationForm',
@@ -57,7 +59,8 @@ registerOfferingType({
   get label() {
     return translate('SLURM allocation');
   },
-  component: AllocationForm,
+  formSteps: deployOfferingSteps,
+  component: AllocationForm, // We can remove this line later. formSteps replaced
   providerType: 'SLURM',
   attributes: ServiceSettingsAttributes,
   allowToUpdateService: true,
@@ -68,7 +71,8 @@ registerOfferingType({
   get label() {
     return translate('SLURM remote allocation');
   },
-  component: AllocationForm,
+  formSteps: deployOfferingSteps,
+  component: AllocationForm, // We can remove this line later. formSteps replaced
   pluginOptionsForm: UserPluginOptionsForm,
   secretOptionsForm: UserSecretOptionsForm,
   providerType: 'SLURM remote',

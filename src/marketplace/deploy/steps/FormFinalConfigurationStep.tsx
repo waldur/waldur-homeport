@@ -1,15 +1,12 @@
 import { Field } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { StringField, TextField } from '@waldur/form';
+import { getNameFieldValidators } from '@waldur/core/validators';
+import { FormGroup, StringField, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { validateOpenstackInstanceName } from '@waldur/openstack/openstack-instance/utils';
 
 import { FormStepProps } from '../types';
 
 import { StepCard } from './StepCard';
-
-const nameValidators = [required, validateOpenstackInstanceName];
 
 export const FormFinalConfigurationStep = (props: FormStepProps) => {
   return (
@@ -21,11 +18,13 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
     >
       <Field
         name="attributes.name"
-        component={StringField}
+        component={FormGroup}
         placeholder={props.params?.nameLabel || translate('Name')}
-        className="form-control-solid mb-7"
-        validate={nameValidators}
-      />
+        description={translate('This name will be visible in accounting data.')}
+        validate={props.params?.nameValidate || getNameFieldValidators()}
+      >
+        <StringField />
+      </Field>
       <Field
         name="attributes.description"
         component={TextField}
