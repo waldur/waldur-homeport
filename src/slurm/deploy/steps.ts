@@ -1,12 +1,9 @@
+import { getLatinNameValidators } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
-import { FormCloudStep } from '@waldur/marketplace/deploy/steps/FormCloudStep';
 import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
+import { FormPlanStep } from '@waldur/marketplace/deploy/steps/FormPlanStep';
 import { FormProjectStep } from '@waldur/marketplace/deploy/steps/FormProjectStep';
 import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
-import { VOLUME_TYPE } from '@waldur/openstack/constants';
-import { getVolumeNameValidators } from '@waldur/openstack/utils';
-
-import { FormVolumeStep } from './FormVolumeStep';
 
 export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   {
@@ -18,21 +15,12 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     component: FormProjectStep,
   },
   {
-    label: translate('Cloud region'),
-    id: 'step-cloud-region',
-    fields: ['offering'],
+    label: translate('Plan'),
+    id: 'step-plan',
+    fields: ['plan'],
     required: true,
-    requiredFields: ['offering'],
-    component: FormCloudStep,
-    params: { type: VOLUME_TYPE },
-  },
-  {
-    label: translate('Volume'),
-    id: 'step-volume',
-    fields: ['attributes.type', 'attributes.size'],
-    required: true,
-    requiredFields: ['attributes.type', 'attributes.size'],
-    component: FormVolumeStep,
+    requiredFields: ['plan'],
+    component: FormPlanStep,
   },
   {
     label: translate('Final configuration'),
@@ -42,8 +30,8 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     requiredFields: ['attributes.name'],
     component: FormFinalConfigurationStep,
     params: {
-      nameLabel: translate('Volume name'),
-      nameValidate: getVolumeNameValidators(),
+      nameLabel: translate('Allocation name'),
+      nameValidate: getLatinNameValidators(),
     },
   },
 ];

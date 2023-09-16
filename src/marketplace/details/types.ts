@@ -22,6 +22,7 @@ export interface OrderSummaryProps {
   total?: number;
   formData: OfferingFormData;
   formValid?: boolean;
+  errors?: any;
   updateMode?: boolean;
   extraComponent?: React.ComponentType<any>;
   shouldConcealPrices?: boolean;
