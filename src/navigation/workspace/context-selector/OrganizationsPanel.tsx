@@ -139,6 +139,11 @@ export const OrganizationsPanel: FunctionComponent<{
 }> = ({ active, selected, loadingUuid, filter, onClick, onMouseEnter }) => {
   const { state } = useCurrentStateAndParams();
   const isServiceProvider = isChildOf('marketplace-provider', state);
+  const calculateInitialPageSize = () => {
+    const screenHeight = window.innerHeight;
+    return screenHeight * 0.85;
+  };
+
   const getPage = useCallback(
     (page) =>
       getCustomersPage(
@@ -153,7 +158,7 @@ export const OrganizationsPanel: FunctionComponent<{
   return (
     <Col className="organization-listing" xs={5}>
       <VirtualPaginatedList
-        height={800}
+        height={calculateInitialPageSize()}
         itemSize={55}
         getPage={getPage}
         key={`${filter}-${isServiceProvider}`}
