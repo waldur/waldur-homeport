@@ -4,6 +4,7 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 
 import { TENANT_TYPE } from './constants';
+import { deployOfferingSteps } from './deploy/steps';
 import { STORAGE_MODE_OPTIONS } from './OpenStackPluginOptionsForm';
 
 const OpenStackPackageDetails = lazyComponent(
@@ -117,7 +118,8 @@ registerOfferingType({
   get label() {
     return translate('OpenStack admin');
   },
-  component: OpenStackPackageForm,
+  formSteps: deployOfferingSteps,
+  component: OpenStackPackageForm, // We can remove this line later. formSteps replaced
   detailsComponent: OpenStackPackageDetails,
   pluginOptionsForm: OpenStackPluginOptionsForm,
   limitSerializer,
