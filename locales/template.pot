@@ -3504,6 +3504,7 @@ msgid "Filtered by"
 msgstr ""
 
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
+#: src/openstack/deploy/steps.ts
 #: src/openstack/openstack-instance/deploy/steps.ts
 #: src/openstack/openstack-volume/deploy/steps.ts
 #: src/slurm/deploy/steps.ts
@@ -4302,17 +4303,24 @@ msgstr ""
 msgid "Internal name"
 msgstr ""
 
+#: src/openstack/deploy/FormInternalNetworkStep.tsx
+#: src/openstack/deploy/steps.ts
+msgid "Internal network"
+msgstr ""
+
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "Internal network ID"
 msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
+#: src/openstack/deploy/FormInternalNetworkStep.tsx
 #: src/openstack/openstack-network/InternalNetworkAllocationPool.tsx
 msgid "Internal network allocation pool"
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
+#: src/openstack/deploy/FormInternalNetworkStep.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
 msgid "Internal network mask (CIDR)"
@@ -5193,6 +5201,10 @@ msgstr ""
 
 #: src/marketplace/resources/actions/MoveToProjectAutocomplete.tsx
 msgid "Move to project"
+msgstr ""
+
+#: src/core/validators.ts
+msgid "Must be  characters or less."
 msgstr ""
 
 #: src/form/utils.ts
@@ -6863,6 +6875,7 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
+#: src/openstack/deploy/steps.ts
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
 msgid "Plan"
@@ -7331,6 +7344,7 @@ msgstr ""
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
+#: src/openstack/deploy/steps.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/steps.ts
@@ -10315,6 +10329,7 @@ msgstr ""
 
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackPackageForm.tsx
+#: src/openstack/deploy/steps.ts
 #: src/openstack/marketplace.ts
 msgid "Tenant name"
 msgstr ""

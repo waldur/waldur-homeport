@@ -76,6 +76,9 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
   // Initialize limits and plan when the offering changes
   useEffect(() => {
     if (selectedOffering) {
+      if (hasStepWithField(formSteps, 'attributes.subnet_cidr')) {
+        props.change('attributes.subnet_cidr', '192.168.42.0/24');
+      }
       props.change('limits', {
         ...getDefaultLimits(selectedOffering),
         ...props.limits,
