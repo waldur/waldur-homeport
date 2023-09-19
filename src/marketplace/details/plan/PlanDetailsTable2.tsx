@@ -181,9 +181,22 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
     [initialTotalPeriods, switchTotalPeriods, totalLimitTotalPeriods],
   );
 
+  const hasPeriodicCost =
+    fixedRows.length > 0 ||
+    usageRows.length > 0 ||
+    periodicLimitedRows.length > 0;
+  const hasOneTimeCost =
+    initialRows.length > 0 ||
+    switchRows.length > 0 ||
+    totalLimitedRows.length > 0;
+
+  if (!hasPeriodicCost && !hasOneTimeCost) {
+    return null;
+  }
+
   return (
-    <div>
-      <div className="plan-details-container">
+    <div className="plan-details-container">
+      {hasPeriodicCost && (
         <section className="plan-details-section bg-light rounded p-6 mb-10">
           <div className="d-flex justify-content-between">
             <h5 className="mb-6">
@@ -291,7 +304,9 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
             </tbody>
           </table>
         </section>
+      )}
 
+      {hasOneTimeCost && (
         <section className="plan-details-section bg-light rounded p-6">
           <h5 className="mb-6">
             {translate('One time cost')}
@@ -347,7 +362,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
             </tbody>
           </table>
         </section>
-      </div>
+      )}
     </div>
   );
 };
