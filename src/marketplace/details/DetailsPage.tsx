@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { startCase } from 'lodash';
 import React from 'react';
 import { useAsync } from 'react-use';
 
@@ -35,7 +36,13 @@ export const OfferingDetailsPage: React.FC = () => {
     [offering_uuid],
   );
 
-  useTitle(translate('Add resource'));
+  useTitle(
+    value?.offering?.category_title
+      ? translate('Add {category}', {
+          category: startCase(value.offering.category_title.toLowerCase()),
+        })
+      : translate('Add resource'),
+  );
 
   if (loading) {
     return <LoadingSpinner />;
