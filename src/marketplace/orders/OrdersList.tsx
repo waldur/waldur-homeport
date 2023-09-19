@@ -9,7 +9,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { getProject } from '@waldur/workspace/selectors';
+import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { OrderNameColumn } from './OrderNameColumn';
 
@@ -58,6 +58,13 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
   ];
 
+  if (props.$state$.parent !== 'project') {
+    columns.splice(3, 0, {
+      title: translate('Project'),
+      render: ({ row }) => row.project_name,
+    });
+  }
+
   return (
     <Table
       {...props}
@@ -75,7 +82,9 @@ const TableOptions = {
   table: 'ordersList',
   fetchData: createFetcher('marketplace-orders'),
   mapPropsToFilter: (props) =>
-    props.project ? { project_uuid: props.project.uuid } : {},
+    props.project && props.$state$.parent === 'project'
+      ? { project_uuid: props.project.uuid }
+      : { customer_uuid: props.customer.uuid },
   exportRow: (row) => [
     formatDateTime(row.created),
     row.created_by_full_name || row.created_by_username,
@@ -96,6 +105,7 @@ const TableOptions = {
 
 const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
+  customer: getCustomer(state),
 });
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
