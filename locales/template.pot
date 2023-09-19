@@ -443,6 +443,10 @@ msgstr ""
 msgid "Add your favorite pages here"
 msgstr ""
 
+#: src/marketplace/details/DetailsPage.tsx
+msgid "Add {category}"
+msgstr ""
+
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
