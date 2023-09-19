@@ -342,8 +342,8 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-order-list',
-    url: 'marketplace-order-list/',
+    name: 'marketplace-project-order-list',
+    url: 'marketplace-project-order-list/',
     component: OrdersList,
     parent: 'project',
     data: {
@@ -363,6 +363,16 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-provider-details/:customer_uuid/',
     component: ProviderDetails,
     parent: 'organization',
+  },
+
+  {
+    name: 'marketplace-organization-order-list',
+    url: 'marketplace-organization-order-list/',
+    component: OrdersList,
+    parent: 'organization',
+    data: {
+      breadcrumb: () => translate('My orders'),
+    },
   },
 
   {
