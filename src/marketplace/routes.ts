@@ -663,8 +663,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin.marketplace-categories',
+    name: 'admin-marketplace-categories',
     url: 'categories/',
+    parent: 'admin-marketplace',
     component: AdminCategoriesPage,
     data: {
       breadcrumb: () => translate('Categories'),
@@ -672,7 +673,8 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin.marketplace-offerings',
+    name: 'admin-marketplace-offerings',
+    parent: 'admin-marketplace',
     url: 'offerings/',
     component: AdminOfferingsListContainer,
     data: {
@@ -705,8 +707,8 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-support-orders',
     url: 'orders/',
+    parent: 'admin-marketplace',
     component: SupportOrdersContainer,
-    parent: 'admin',
     data: {
       breadcrumb: () => translate('Orders'),
     },

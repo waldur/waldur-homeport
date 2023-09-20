@@ -64,10 +64,43 @@ export const states: StateDeclaration[] = [
       priority: 100,
     },
   },
+  {
+    name: 'admin-marketplace',
+    parent: 'admin',
+    abstract: true,
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Marketplace'),
+    },
+  },
 
   {
-    name: 'admin.branding',
+    name: 'admin-settings',
+    parent: 'admin',
+    abstract: true,
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Settings'),
+    },
+  },
+
+  {
+    name: 'admin-users',
+    parent: 'admin',
+    abstract: true,
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Users'),
+    },
+  },
+
+  {
+    name: 'admin-branding',
     url: 'branding/',
+    parent: 'admin-settings',
     component: AdministrationBranding,
     data: {
       breadcrumb: () => translate('Branding'),
@@ -75,8 +108,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin.features',
+    name: 'admin-features',
     url: 'features/',
+    parent: 'admin-settings',
     component: FeaturesList,
     data: {
       breadcrumb: () => translate('Features'),
@@ -84,8 +118,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin.users',
+    name: 'admin-user-users',
     url: 'users/?role',
+    parent: 'admin-users',
     component: UserList,
     data: {
       feature: 'support.users',
@@ -113,8 +148,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin.identity',
+    name: 'admin-identity',
     url: 'identity/',
+    parent: 'admin-settings',
     component: IdentityProvidersList,
     data: {
       breadcrumb: () => translate('Identity providers'),
@@ -122,8 +158,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin.roles',
+    name: 'admin-roles',
     url: 'roles/',
+    parent: 'admin-settings',
     component: RolesList,
     data: {
       breadcrumb: () => translate('User roles'),
