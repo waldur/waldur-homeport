@@ -21,35 +21,42 @@ export const hasPermission = (user: User, request: PermissionRequest) => {
   if (user.is_staff) {
     return true;
   }
-  let permissions = [];
+  let projectPermissions = [];
+  let customerPermissions = [];
   if (request.projectId) {
-    const projectPermission = user.project_permissions.find(
+    const userProjectPermission = user.project_permissions.find(
       ({ project_uuid }) => project_uuid === request.projectId,
     );
-    if (projectPermission) {
-      if (projectPermission.role === PROJECT_ADMIN_ROLE) {
-        permissions = ENV.permissions[RoleEnum.PROJECT_ADMIN];
-      } else if (projectPermission.role === PROJECT_MANAGER_ROLE) {
-        permissions = ENV.permissions[RoleEnum.PROJECT_MANAGER];
-      } else if (projectPermission.role === PROJECT_MEMBER_ROLE) {
-        permissions = ENV.permissions[RoleEnum.PROJECT_MEMBER];
-      }
-    }
-  } else if (request.customerId) {
-    const customerPermission = user.customer_permissions.find(
-      ({ customer_uuid }) => customer_uuid === request.customerId,
-    );
-    if (customerPermission) {
-      if (customerPermission.role === CUSTOMER_OWNER_ROLE) {
-        permissions = ENV.permissions[RoleEnum.CUSTOMER_OWNER];
-      } else if (customerPermission.role === CUSTOMER_SERVICE_MANAGER_ROLE) {
-        permissions = ENV.permissions[RoleEnum.CUSTOMER_MANAGER];
-      } else if (customerPermission.role === CUSTOMER_SUPPORT_ROLE) {
-        permissions = ENV.permissions[RoleEnum.CUSTOMER_SUPPORT];
+    if (userProjectPermission) {
+      if (userProjectPermission.role === PROJECT_ADMIN_ROLE) {
+        projectPermissions = ENV.permissions[RoleEnum.PROJECT_ADMIN];
+      } else if (userProjectPermission.role === PROJECT_MANAGER_ROLE) {
+        projectPermissions = ENV.permissions[RoleEnum.PROJECT_MANAGER];
+      } else if (userProjectPermission.role === PROJECT_MEMBER_ROLE) {
+        projectPermissions = ENV.permissions[RoleEnum.PROJECT_MEMBER];
       }
     }
   }
-  return permissions.includes(request.permission);
+  if (request.customerId) {
+    const userCustomerPermission = user.customer_permissions.find(
+      ({ customer_uuid }) => customer_uuid === request.customerId,
+    );
+    if (userCustomerPermission) {
+      if (userCustomerPermission.role === CUSTOMER_OWNER_ROLE) {
+        customerPermissions = ENV.permissions[RoleEnum.CUSTOMER_OWNER];
+      } else if (
+        userCustomerPermission.role === CUSTOMER_SERVICE_MANAGER_ROLE
+      ) {
+        customerPermissions = ENV.permissions[RoleEnum.CUSTOMER_MANAGER];
+      } else if (userCustomerPermission.role === CUSTOMER_SUPPORT_ROLE) {
+        customerPermissions = ENV.permissions[RoleEnum.CUSTOMER_SUPPORT];
+      }
+    }
+  }
+  return (
+    projectPermissions.includes(request.permission) ||
+    customerPermissions.includes(request.permission)
+  );
 };
 
 export const RoleEnum = {
