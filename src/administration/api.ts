@@ -52,3 +52,5 @@ export const createIdentityProvider = (formData) =>
 
 export const updateIdentityProvider = (provider, formData) =>
   put(`/identity-providers/${provider}/`, formData);
+
+export const deleteToken = (tokenURL: string) => Axios.delete(tokenURL);

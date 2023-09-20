@@ -40,6 +40,7 @@ const IdentityProvidersList = lazyComponent(
 );
 
 const RolesList = lazyComponent(() => import('./roles/RolesList'), 'RolesList');
+const TokensList = lazyComponent(() => import('./TokensList'), 'TokensList');
 
 export const states: StateDeclaration[] = [
   {
@@ -127,7 +128,15 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Users'),
     },
   },
-
+  {
+    name: 'admin-user-active-sessions',
+    url: 'users/active-sessions/',
+    parent: 'admin-users',
+    component: TokensList,
+    data: {
+      breadcrumb: () => translate('Active sessions'),
+    },
+  },
   {
     name: 'admin.customers',
     url: 'customers/',
