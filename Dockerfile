@@ -24,6 +24,7 @@ RUN git clone -b next --single-branch "https://github.com/waldur/waldur-homeport
     cp /app/next/yarn.lock /app/
 RUN yarn install --frozen-lockfile
 ARG VERSION=latest
+WORKDIR /app/next
 RUN sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" src/configs/default.ts
 RUN yarn build
 
