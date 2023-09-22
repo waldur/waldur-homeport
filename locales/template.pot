@@ -265,6 +265,10 @@ msgstr ""
 msgid "Active resources"
 msgstr ""
 
+#: src/administration/routes.ts
+msgid "Active sessions"
+msgstr ""
+
 #: src/user/support/UserActivateButton.tsx
 msgid "Active user will be able to login into the portal."
 msgstr ""
@@ -828,6 +832,10 @@ msgstr ""
 
 #: src/administration/roles/RoleDeleteButton.tsx
 msgid "Are you sure you want to delete the role {name}?"
+msgstr ""
+
+#: src/administration/TokenDeleteButton.tsx
+msgid "Are you sure you want to delete the token of {firstname} {lastname}?"
 msgstr ""
 
 #: src/resource/actions/ResourceDeleteButton.tsx
@@ -1772,6 +1780,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
+#: src/administration/TokenDeleteButton.tsx
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
@@ -3539,6 +3548,7 @@ msgstr ""
 msgid "First"
 msgstr ""
 
+#: src/administration/TokensList.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "First name"
 msgstr ""
@@ -4671,6 +4681,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+#: src/administration/TokensList.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Last name"
 msgstr ""
@@ -4948,6 +4959,7 @@ msgstr ""
 msgid "Mark invoice as paid"
 msgstr ""
 
+#: src/administration/routes.ts
 #: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/routes.ts
@@ -7335,6 +7347,7 @@ msgstr ""
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectCreateGroup.tsx
 #: src/marketplace/details/ProjectField.tsx
+#: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
@@ -8057,6 +8070,7 @@ msgstr ""
 msgid "Remote user ID"
 msgstr ""
 
+#: src/administration/TokenDeleteButton.tsx
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
@@ -9508,6 +9522,7 @@ msgstr ""
 msgid "Set value"
 msgstr ""
 
+#: src/administration/routes.ts
 #: src/customer/routes.ts
 #: src/project/routes.ts
 #: src/user/UserManage.tsx
@@ -12403,6 +12418,10 @@ msgstr ""
 msgid "User input variables"
 msgstr ""
 
+#: src/administration/TokensList.tsx
+msgid "User is active"
+msgstr ""
+
 #: src/navigation/header/quick-issue-drawer/UserIssuesTable.tsx
 msgid "User issues"
 msgstr ""
@@ -12624,6 +12643,7 @@ msgstr ""
 msgid "User {user_link} logged out successfully with SAML2."
 msgstr ""
 
+#: src/administration/TokensList.tsx
 #: src/auth/SigninForm.tsx
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/UsernameGroup.tsx
@@ -13656,6 +13676,10 @@ msgstr ""
 #: src/user/api-key/TokenLifetimeField.tsx
 #: src/user/support/utils.ts
 msgid "token will not timeout"
+msgstr ""
+
+#: src/administration/TokensList.tsx
+msgid "tokens"
 msgstr ""
 
 #: src/invitations/UserPermissionRequestsList.tsx

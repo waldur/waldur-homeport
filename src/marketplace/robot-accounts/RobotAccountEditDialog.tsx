@@ -17,12 +17,12 @@ export const RobotAccountEditDialog = ({ resolve: { resource, refetch } }) => {
         type: resource.type,
         username: resource.username,
         users: resource.users,
-        keys: resource.keys.join('\n'),
+        keys: resource.keys ? resource.keys.join('\n') : [],
       }}
       updateResource={(id, formData: RobotAccountFormData) =>
         updateRobotAccount(id, {
           ...formData,
-          keys: formData.keys?.trim().split(/\r?\n/),
+          keys: formData.keys ? formData.keys.trim().split(/\r?\n/) : [],
           users: formData.users?.map(({ url }) => url),
         })
       }
