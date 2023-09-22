@@ -167,6 +167,7 @@ Download translation:
 
 # TODO: remove before merging
 Test image building with kaniko:
+  stage: .pre
   extends:
     - Publish latest docker image
   rules:
