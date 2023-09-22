@@ -187,8 +187,8 @@ Test image building with kaniko:
     - echo $CI_COMMIT_SHA > COMMIT
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
-      --single-snapshot
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY
+      --compressed-caching=false
       --no-push
       --destination "opennode/$CI_PROJECT_NAME:latest"
