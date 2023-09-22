@@ -88,6 +88,7 @@ export const FormSecurityGroupsStep = (props: FormStepProps) => {
     table: 'deploy-security-groups',
     fetchData: createFetcher('openstacktenant-security-groups'),
     filter,
+    staleTime: 3 * 60 * 1000,
   });
 
   const search = useCallback(

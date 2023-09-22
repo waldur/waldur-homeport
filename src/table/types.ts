@@ -1,6 +1,10 @@
 import { AxiosRequestConfig } from 'axios';
 import React from 'react';
 
+interface RequestConfigExtended extends AxiosRequestConfig {
+  staleTime?: number;
+}
+
 export interface TableRequest {
   pageSize: number;
   currentPage: number;
@@ -8,7 +12,7 @@ export interface TableRequest {
   query?: string;
   sortField?: string;
   sortOrder?: boolean;
-  options?: AxiosRequestConfig;
+  options?: RequestConfigExtended;
 }
 
 export interface StateTables {
@@ -29,6 +33,7 @@ export interface TableOptionsType<RowType = any> {
   mapPropsToTableId?(props: any): string[];
   table: string;
   fetchData: any;
+  staleTime?: number;
   queryField?: string;
   exportFields?: string[] | ((props: any) => string[]);
   exportRow?: (row: RowType, props: any) => string[];
