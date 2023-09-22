@@ -44,6 +44,9 @@ export function* fetchList(action) {
       request.filter.o = orderByFilter(state.sorting);
     }
     request.options = { signal: controller.signal };
+    if (options.staleTime) {
+      request.options.staleTime = options.staleTime;
+    }
 
     // Debounce
     yield delay(100);

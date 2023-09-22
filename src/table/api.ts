@@ -1,6 +1,7 @@
 import Axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import Qs from 'qs';
 
+import { queryClient } from '@waldur/Application';
 import { ENV } from '@waldur/configs/default';
 import { getNextPageUrl, parseResultCount } from '@waldur/core/api';
 
@@ -43,7 +44,12 @@ export function createFetcher(
       page_size: request.pageSize,
       ...request.filter,
     };
-    return parseResponse(url, params, { ...options, ...request.options });
+    return queryClient.fetchQuery({
+      queryKey: ['table', url, params],
+      queryFn: () =>
+        parseResponse(url, params, { ...options, ...request.options }),
+      staleTime: request.options.staleTime,
+    });
   };
 }
 

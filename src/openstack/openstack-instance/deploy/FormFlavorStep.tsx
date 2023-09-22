@@ -34,6 +34,7 @@ export const FormFlavorStep = (props: FormStepProps) => {
     fetchData: createFetcher('openstacktenant-flavors'),
     filter,
     queryField: 'name',
+    staleTime: 3 * 60 * 1000,
   });
 
   const { vcpuQuota, ramQuota } = useQuotasData(props.offering);
