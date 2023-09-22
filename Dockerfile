@@ -18,11 +18,11 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 # Git is needed to refer with yarn to unrealised versions of libraries from github
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards
-RUN apk add --no-cache git && yarn install --frozen-lockfile
-
+RUN apk add --no-cache git
 RUN git clone -b next --single-branch "https://github.com/waldur/waldur-homeport.git" /app/next && \
-    cp next/package.json /app/ && \
-    cp next/yarn.lock /app/
+    cp /app/next/package.json /app/ && \
+    cp /app/next/yarn.lock /app/
+RUN yarn install --frozen-lockfile
 ARG VERSION=latest
 RUN sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" src/configs/default.ts
 RUN yarn build
