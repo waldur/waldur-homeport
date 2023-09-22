@@ -164,3 +164,29 @@ Download translation:
     - git branch new-translations
     - git push --set-upstream origin new-translations:develop
   before_script: []
+
+# TODO: remove before merging
+Test image building with kaniko:
+  extends:
+    - Publish latest docker image
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  script:
+    - AUTH=$(echo -n "${WALDUR_DOCKER_HUB_USER}:${WALDUR_DOCKER_HUB_PASSWORD}" | base64)
+    - |
+      cat << EOF > /kaniko/.docker/config.json
+      {
+        "auths": {
+          "https://index.docker.io/v1/": {
+            "auth": "${AUTH}"
+          }
+        }
+      }
+      EOF
+    - echo $CI_COMMIT_SHA > COMMIT
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY
+      --no-push
+      --destination "opennode/$CI_PROJECT_NAME:latest"
