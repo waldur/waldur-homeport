@@ -15,7 +15,7 @@ export const fetchCategories = async (
     params: {
       allowed_customer_uuid: customer.uuid,
       ...(project ? { project_uuid: project.uuid } : {}),
-      field: ['uuid', 'title', 'offering_count', 'icon'],
+      field: ['uuid', 'title', 'offering_count', 'icon', 'group'],
       has_offerings: true,
       offering_name,
     },
