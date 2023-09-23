@@ -123,12 +123,12 @@ Build artifact:
     expire_in: 1 week
 
 Publish docker image for next branch:
-  image: "registry.hpc.ut.ee/mirror/library/docker:19.03.12"
+  image: "registry.hpc.ut.ee/mirror/library/docker:20.10.24"
   stage: release
   rules:
     - if: '$CI_COMMIT_BRANCH == "next"'
   services:
-    - name: "registry.hpc.ut.ee/mirror/library/docker:19.03.12-dind"
+    - name: "registry.hpc.ut.ee/mirror/library/docker:20.10.24-dind"
       alias: docker
       command: ["--mtu=1400"]
   before_script:
