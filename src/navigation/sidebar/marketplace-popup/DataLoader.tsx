@@ -6,6 +6,7 @@ import { queryClient } from '@waldur/Application';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { getCategoryGroups } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
 
 import { CategoriesPanel } from './CategoriesPanel';
@@ -22,6 +23,14 @@ export const DataLoader = ({ filter, currentCustomer, currentProject }) => {
     () => fetchLastNOfferings(currentCustomer, currentProject),
     { staleTime: 1 * 60 * 1000 },
   );
+
+  const {
+    data: categoryGroups,
+    isLoading: loadingGroups,
+    error: errorGroups,
+  } = useQuery(['MarketplacePopupCategoryGroups'], () => getCategoryGroups(), {
+    staleTime: 1 * 60 * 1000,
+  });
 
   const {
     data: mainCategories,
@@ -89,9 +98,30 @@ export const DataLoader = ({ filter, currentCustomer, currentProject }) => {
         uuid: RECENTLY_ADDED_OFFERINGS_UUID,
         url: undefined,
       };
-      return [recentlyAddedOfferingsCategory].concat(nonZeroCategories);
+      nonZeroCategories.unshift(recentlyAddedOfferingsCategory);
     }
-    return nonZeroCategories;
+    // Group categories
+    return nonZeroCategories.reduce((acc, category) => {
+      const categoryGroup = categoryGroups.find(
+        (group) => category.group === group.url,
+      );
+      if (categoryGroup) {
+        const existGroup = acc.find((item) => item.uuid === categoryGroup.uuid);
+        if (existGroup) {
+          existGroup.categories.push(category);
+          existGroup.offering_count += category.offering_count;
+        } else {
+          Object.assign(categoryGroup, { categories: [category] });
+          Object.assign(categoryGroup, {
+            offering_count: category.offering_count,
+          });
+          acc.push(categoryGroup);
+        }
+      } else {
+        acc.push(category);
+      }
+      return acc;
+    }, []);
   }, [mainCategories, lastOfferings]);
 
   // search with delay
@@ -114,11 +144,11 @@ export const DataLoader = ({ filter, currentCustomer, currentProject }) => {
 
   return (
     <>
-      {loadingCategories ? (
+      {loadingCategories || loadingGroups ? (
         <div className="message-wrapper p-4">
           <LoadingSpinner />
         </div>
-      ) : errorCategories ? (
+      ) : errorCategories || errorGroups ? (
         <div className="message-wrapper">
           <p className="text-center text-danger my-10 mx-4">
             {translate('Unable to load categories')}

@@ -30,6 +30,7 @@ import {
   ImportableResource,
   OrganizationGroup,
   OfferingPermission,
+  CategoryGroup,
 } from '@waldur/marketplace/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -42,6 +43,9 @@ export const getPlugins = () =>
   get<PluginMetadata[]>('/marketplace-plugins/').then(
     (response) => response.data,
   );
+
+export const getCategoryGroups = (options?: AxiosRequestConfig) =>
+  getAll<CategoryGroup>('/marketplace-category-groups/', options);
 
 export const getCategories = (options?: AxiosRequestConfig) =>
   getAll<Category>('/marketplace-categories/', options);

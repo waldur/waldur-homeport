@@ -180,6 +180,17 @@ export interface CategoryColumn {
   widget?: 'csv' | 'filesize' | 'attached_instance';
 }
 
+export interface CategoryGroup {
+  url: string;
+  uuid: string;
+  title: string;
+  description: string;
+  icon: string;
+  /** generated on frontend side */
+  categories?: Category[];
+  offering_count: number;
+}
+
 export interface Category {
   url: string;
   uuid?: string;
@@ -190,6 +201,7 @@ export interface Category {
   columns?: CategoryColumn[];
   components?: BaseComponent[];
   description?: string;
+  group?: string;
 }
 
 export interface CategoryComponentUsage {
