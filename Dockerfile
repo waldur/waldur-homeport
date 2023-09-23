@@ -16,13 +16,12 @@ RUN ASSET_PATH=/legacy/ yarn build
 FROM node:lts-alpine as next
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
+COPY next/package.json next/yarn.lock /app/
 # Git is needed to refer with yarn to unrealised versions of libraries from github
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards
 RUN apk add --no-cache git && yarn install --frozen-lockfile
 
-RUN git clone -b next --single-branch "https://github.com/waldur/waldur-homeport.git" /app/next && \
-    cp next/package.json /app/ && \
-    cp next/yarn.lock /app/
+COPY next /app
 ARG VERSION=latest
 RUN sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" src/configs/default.ts
 RUN yarn build
