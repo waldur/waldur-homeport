@@ -191,8 +191,5 @@ Test image building with kaniko:
       --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY
       --compressed-caching=false
       --no-push
-      --cache=true
-      --cache-copy-layers=true
-      --cache-ttl=24h
       --snapshot-mode=redo
       --destination "opennode/$CI_PROJECT_NAME:latest"
