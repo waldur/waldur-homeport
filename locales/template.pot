@@ -2069,7 +2069,7 @@ msgid "Create robot account"
 msgstr ""
 
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
-msgid "Create robot account for marketplace resource"
+msgid "Create robot account for {resource_name}"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
