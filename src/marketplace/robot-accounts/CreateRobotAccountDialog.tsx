@@ -78,7 +78,9 @@ export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
   const fields = useRobotAccountFields(resource);
   return (
     <ResourceActionDialog
-      dialogTitle={translate('Create robot account for marketplace resource')}
+      dialogTitle={translate('Create robot account for {resource_name}', {
+        resource_name: resource.name,
+      })}
       formFields={fields}
       initialValues={{
         type: 'cicd',
