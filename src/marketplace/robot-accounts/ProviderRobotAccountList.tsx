@@ -72,7 +72,6 @@ export const ProviderRobotAccountList: FunctionComponent<{ provider }> = ({
       filters={<ProviderRobotAccountFilter provider={provider} />}
       columns={columns}
       verboseName={translate('robot accounts')}
-      hasActionBar={false}
       expandableRow={RobotAccountExpandable}
     />
   );
