@@ -12,6 +12,7 @@ export interface PricesData {
   periods: string[];
   total: number;
   totalPeriods: number[];
+  periodKeys: string[];
 }
 
 export interface PlanDetailsTableProps extends PricesData {
@@ -21,4 +22,4 @@ export interface PlanDetailsTableProps extends PricesData {
   columnClassName?: string;
 }
 
-export type PlanPeriod = 'month' | 'annual';
+export type PlanPeriod = 'monthly' | 'annual';

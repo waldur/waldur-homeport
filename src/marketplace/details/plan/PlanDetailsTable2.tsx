@@ -20,6 +20,7 @@ const FixedRows = (props: {
   components: Component[];
   hidePrices?: boolean;
   period?: PlanPeriod;
+  activePriceIndex?: number;
 }) => (
   <>
     {props.components.map((component, index) => (
@@ -28,6 +29,7 @@ const FixedRows = (props: {
         offeringComponent={component}
         hidePrices={props.hidePrices}
         period={props.period}
+        activePriceIndex={props.activePriceIndex}
       >
         {component.amount}x
       </ComponentRow2>
@@ -57,12 +59,14 @@ const ControlRows = (props: {
   hidePrices?: boolean;
   viewMode: boolean;
   period?: PlanPeriod;
+  activePriceIndex?: number;
 }) =>
   props.viewMode ? (
     <FixedRows
       components={props.components}
       hidePrices={props.hidePrices}
       period={props.period}
+      activePriceIndex={props.activePriceIndex}
     />
   ) : (
     <>
@@ -72,6 +76,7 @@ const ControlRows = (props: {
           component={component}
           hidePrices={props.hidePrices}
           period={props.period}
+          activePriceIndex={props.activePriceIndex}
         />
       ))}
     </>
@@ -113,13 +118,18 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
     return null;
   }
 
-  const [selectedPeriod, setSelectedPeriod] = useState<PlanPeriod>('month');
+  const [selectedPeriod, setSelectedPeriod] = useState<PlanPeriod>('monthly');
 
   const customer = useSelector(getCustomer);
   const activeFixedPriceProfile =
     customer && getActiveFixedPricePaymentProfile(customer.payment_profiles);
 
   const shouldConcealPrices = useSelector(concealPricesSelector);
+
+  const activePriceIndex = useMemo(
+    () => props.periodKeys.indexOf(selectedPeriod) ?? 0,
+    [props.periodKeys, selectedPeriod],
+  );
 
   const fixedRows = props.components.filter(
     (component) => component.billing_type === 'fixed',
@@ -166,10 +176,11 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
   );
 
   const periodicTotal = useMemo(
-    () => [
-      (fixedTotalPeriods[0] || 0) + (periodicLimitedTotalPeriods[0] || 0),
-      (fixedTotalPeriods[1] || 0) + (periodicLimitedTotalPeriods[1] || 0),
-    ],
+    () =>
+      props.periods.map(
+        (_, i) =>
+          (fixedTotalPeriods[i] || 0) + (periodicLimitedTotalPeriods[i] || 0),
+      ),
     [fixedTotalPeriods, periodicLimitedTotalPeriods],
   );
 
@@ -200,7 +211,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
         <section className="plan-details-section bg-light rounded p-6 mb-10">
           <div className="d-flex justify-content-between">
             <h5 className="mb-6">
-              {selectedPeriod === 'month'
+              {selectedPeriod === 'monthly'
                 ? translate('Monthly cost')
                 : translate('Annual cost')}
               <PriceTooltip iconClassName="text-dark" />
@@ -210,11 +221,11 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                 className="text-link"
                 onClick={() => {
                   setSelectedPeriod((prev) =>
-                    prev === 'month' ? 'annual' : 'month',
+                    prev === 'monthly' ? 'annual' : 'monthly',
                   );
                 }}
               >
-                {selectedPeriod === 'month'
+                {selectedPeriod === 'monthly'
                   ? translate('Show yearly estimates')
                   : translate('Show monthly estimates')}
                 *
@@ -234,11 +245,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                   />
                   {!activeFixedPriceProfile ? (
                     <ComponentRowTotal
-                      amount={
-                        selectedPeriod === 'annual'
-                          ? fixedTotalPeriods[fixedTotalPeriods.length - 1]
-                          : fixedTotalPeriods[0]
-                      }
+                      amount={fixedTotalPeriods[activePriceIndex]}
                       period={selectedPeriod}
                     />
                   ) : null}
@@ -273,16 +280,11 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                     hidePrices={Boolean(shouldConcealPrices)}
                     viewMode={props.viewMode}
                     period={selectedPeriod}
+                    activePriceIndex={activePriceIndex}
                   />
                   {!shouldConcealPrices ? (
                     <ComponentRowTotal
-                      amount={
-                        selectedPeriod === 'annual'
-                          ? periodicLimitedTotalPeriods[
-                              periodicLimitedTotalPeriods.length - 1
-                            ]
-                          : periodicLimitedTotalPeriods[0]
-                      }
+                      amount={periodicLimitedTotalPeriods[activePriceIndex]}
                       period={selectedPeriod}
                     />
                   ) : null}
@@ -292,11 +294,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
 
               {!activeFixedPriceProfile ? (
                 <ComponentRowTotal
-                  amount={
-                    selectedPeriod === 'annual'
-                      ? periodicTotal[periodicTotal.length - 1]
-                      : periodicTotal[0]
-                  }
+                  amount={periodicTotal[activePriceIndex]}
                   period={selectedPeriod}
                   final
                 />
