@@ -13,6 +13,7 @@ import { Component, PlanPeriod } from './types';
 interface ComponentRowProps {
   offeringComponent: Component;
   period?: PlanPeriod;
+  activePriceIndex?: number;
   hidePrices?: boolean;
   hasX?: boolean;
   className?: string;
@@ -57,11 +58,7 @@ export const ComponentRow: React.FC<ComponentRowProps> = (props) => {
 
 export const ComponentRow2: React.FC<ComponentRowProps> = (props) => {
   const componentTotalPrice =
-    props.period === 'annual'
-      ? props.offeringComponent.prices[
-          props.offeringComponent.prices.length - 1
-        ]
-      : props.offeringComponent.prices[0];
+    props.offeringComponent.prices[props.activePriceIndex];
 
   const perPeriod = !props.period
     ? ''

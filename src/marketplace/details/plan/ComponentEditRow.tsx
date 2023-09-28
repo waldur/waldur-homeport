@@ -16,6 +16,7 @@ interface ComponentEditRowProps {
   component: Component;
   hidePrices?: boolean;
   period?: PlanPeriod;
+  activePriceIndex?: number;
 }
 
 const RowWrapper = (
@@ -55,12 +56,14 @@ const RowWrapper2 = (
     offeringComponent: Component;
     hidePrices?: boolean;
     period?: PlanPeriod;
+    activePriceIndex?: number;
   },
 ) => (
   <ComponentRow2
     offeringComponent={props.offeringComponent}
     hidePrices={props.hidePrices}
     period={props.period}
+    activePriceIndex={props.activePriceIndex}
     hasX={!props.offeringComponent.is_boolean}
     className="control"
   >
@@ -102,5 +105,6 @@ export const ComponentEditRow2: React.FC<ComponentEditRowProps> = (props) => (
     offeringComponent={props.component}
     hidePrices={props.hidePrices}
     period={props.period}
+    activePriceIndex={props.activePriceIndex}
   />
 );

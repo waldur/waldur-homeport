@@ -22,6 +22,7 @@ export const minAmount = (limit) => (value) =>
 interface BillingPeriodDescription {
   periods: string[];
   multipliers: number[];
+  periodKeys: string[];
 }
 
 export function getBillingPeriods(unit: string): BillingPeriodDescription {
@@ -35,6 +36,7 @@ export function getBillingPeriods(unit: string): BillingPeriodDescription {
           translate('Price per 365 days'),
         ],
         multipliers: [1, 24, 24 * 30, 24 * 365],
+        periodKeys: ['hourly', 'daily', 'monthly', 'annual'],
       };
 
     case 'day':
@@ -45,6 +47,7 @@ export function getBillingPeriods(unit: string): BillingPeriodDescription {
           translate('Price per 365 days'),
         ],
         multipliers: [1, 30, 365],
+        periodKeys: ['daily', 'monthly', 'annual'],
       };
 
     case 'half_month':
@@ -55,18 +58,21 @@ export function getBillingPeriods(unit: string): BillingPeriodDescription {
           translate('Price per year'),
         ],
         multipliers: [1, 2, 24],
+        periodKeys: ['half_month', 'monthly', 'annual'],
       };
 
     case 'month':
       return {
         periods: [translate('Price per month'), translate('Price per year')],
         multipliers: [1, 12],
+        periodKeys: ['monthly', 'annual'],
       };
 
     default:
       return {
         periods: [translate('Price for consumption')],
         multipliers: [1],
+        periodKeys: ['consumption'],
       };
   }
 }

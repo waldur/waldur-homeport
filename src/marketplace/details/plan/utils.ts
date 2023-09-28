@@ -17,7 +17,7 @@ export const combinePrices = (
   offering: Offering,
 ): PricesData => {
   if (plan && offering) {
-    const { periods, multipliers } = getBillingPeriods(plan.unit);
+    const { periods, multipliers, periodKeys } = getBillingPeriods(plan.unit);
     const offeringLimits = parseOfferingLimits(offering);
     const offeringComponents = filterOfferingComponents(offering);
     const components: Component[] = offeringComponents.map((component) => {
@@ -86,13 +86,14 @@ export const combinePrices = (
         : plan.init_price;
     const total = subscriptionSubTotal + initPrice;
 
-    return { components, periods, total, totalPeriods };
+    return { components, periods, total, totalPeriods, periodKeys };
   } else {
     return {
       components: [],
       periods: [],
       total: 0,
       totalPeriods: [],
+      periodKeys: [],
     };
   }
 };
