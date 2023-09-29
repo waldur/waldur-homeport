@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { CampaignCreateButton } from '@waldur/marketplace/service-providers/CampaignCreateButton';
 import { Table, connectTable, createFetcher } from '@waldur/table/index';
 
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
@@ -36,6 +37,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       showPageSizeSelector={true}
       verboseName={translate('campaigns')}
+      actions={<CampaignCreateButton refetch={props.fetch} />}
     />
   );
 };

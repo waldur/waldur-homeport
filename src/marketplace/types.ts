@@ -241,6 +241,7 @@ export interface ServiceProvider {
   customer_country?: string;
   country?: string;
   organizationGroup?: string;
+  url?: string;
 }
 
 export interface OfferingConfigurationFormProps extends InjectedFormProps {
