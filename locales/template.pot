@@ -555,7 +555,6 @@ msgid "All"
 msgstr ""
 
 #: src/marketplace/category/list/AllCategoriesPage.tsx
-#: src/marketplace/category/list/CategoriesList.tsx
 msgid "All categories"
 msgstr ""
 
@@ -1416,6 +1415,7 @@ msgid "Catalogues"
 msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/marketplace/category/list/AllCategoriesPage.tsx
 #: src/marketplace/category/utils.ts
 #: src/marketplace/offerings/service-providers/ServiceProviderPageBar.tsx
 #: src/marketplace/routes.ts
@@ -3778,6 +3778,7 @@ msgid "Global federation of identity providers for researchers."
 msgstr ""
 
 #: src/invitations/actions/create/FormButtons.tsx
+#: src/marketplace/category/list/HeroSection.tsx
 msgid "Go back"
 msgstr ""
 
@@ -5174,6 +5175,10 @@ msgstr ""
 msgid "Months"
 msgstr ""
 
+#: src/marketplace/category/list/CategoriesBar.tsx
+msgid "More"
+msgstr ""
+
 #: src/table/TableMoreActions.tsx
 msgid "More actions"
 msgstr ""
@@ -6536,6 +6541,10 @@ msgstr ""
 
 #: src/customer/organization-groups/CustomersOrganizationGroupsChart.tsx
 msgid "Organizations by organization groups"
+msgstr ""
+
+#: src/marketplace/category/list/AllCategoriesPage.tsx
+msgid "Other categories"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
@@ -10539,9 +10548,13 @@ msgstr ""
 msgid "There are no categories in catalog yet."
 msgstr ""
 
-#: src/marketplace/category/list/CategoriesList.tsx
+#: src/marketplace/category/list/CategoryGroupsList.tsx
 #: src/marketplace/landing/CategoriesList.tsx
 msgid "There are no categories in marketplace yet."
+msgstr ""
+
+#: src/marketplace/category/list/CategoryGroupsList.tsx
+msgid "There are no categories in this group."
 msgstr ""
 
 #: src/marketplace/offerings/import/SelectCategoryTab.tsx
@@ -11333,7 +11346,8 @@ msgid "Unable to load categories"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/category/list/CategoriesList.tsx
+#: src/marketplace/category/list/CategoriesBar.tsx
+#: src/marketplace/category/list/CategoryGroupsList.tsx
 #: src/marketplace/landing/CategoriesList.tsx
 #: src/marketplace/offerings/service-providers/ServiceProvider.tsx
 msgid "Unable to load categories."
@@ -12887,6 +12901,7 @@ msgid "View YAML"
 msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/marketplace/category/list/CategoryGroupsList.tsx
 #: src/support/dashboard/StatisticsCards.tsx
 msgid "View all"
 msgstr ""

@@ -17,12 +17,12 @@
 
   .all-categories__table {
     display: table;
-    height: 200px;
+    height: 120px;
     width: 100%;
 
     .all-categories__cell {
       display: table-cell;
-      vertical-align: middle;
+      vertical-align: bottom;
     }
     .all-categories__main {
       margin-right: auto;

@@ -221,6 +221,13 @@ export interface CategoriesListType {
   loading: boolean;
 }
 
+export interface CategoryGroupsListType {
+  items: CategoryGroup[];
+  loaded: boolean;
+  loading: boolean;
+  maxShow?: number;
+}
+
 export interface OfferingsListType {
   items: Offering[];
   loaded: boolean;
