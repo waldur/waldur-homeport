@@ -1,5 +1,5 @@
 import { translate } from '@waldur/i18n';
-import { Category, Section } from '@waldur/marketplace/types';
+import { Category, CategoryGroup, Section } from '@waldur/marketplace/types';
 
 export const countSelectedFilters = (filterValues) => {
   const selectedFilters = [];
@@ -45,6 +45,33 @@ export const getCategoryItems = (
       children,
     },
   ];
+};
+
+export const getGroupedCategories = (
+  categories: Category[],
+  categoryGroups: CategoryGroup[],
+): CategoryGroup[] => {
+  return categories.reduce((acc, category) => {
+    const categoryGroup = categoryGroups.find(
+      (group) => category.group === group.url,
+    );
+    if (categoryGroup) {
+      const existGroup = acc.find((item) => item.uuid === categoryGroup.uuid);
+      if (existGroup) {
+        existGroup.categories.push(category);
+        existGroup.offering_count += category.offering_count;
+      } else {
+        Object.assign(categoryGroup, { categories: [category] });
+        Object.assign(categoryGroup, {
+          offering_count: category.offering_count,
+        });
+        acc.push(categoryGroup);
+      }
+    } else {
+      acc.push(category);
+    }
+    return acc;
+  }, []);
 };
 
 const SUPPORTED_TYPES = ['choice', 'list', 'boolean'];

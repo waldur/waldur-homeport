@@ -281,25 +281,25 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-categories-project',
-    url: 'marketplace/all/',
+    url: 'marketplace/all/?group',
     component: AllCategoriesPage,
     parent: 'project',
   },
   {
     name: 'marketplace-categories-customer',
-    url: 'marketplace/all/',
+    url: 'marketplace/all/?group',
     component: AllCategoriesPage,
     parent: 'organization',
   },
   {
     name: 'marketplace-categories-user',
-    url: 'marketplace/all/',
+    url: 'marketplace/all/?group',
     component: AllCategoriesPage,
     parent: 'profile',
   },
   {
     name: 'public.marketplace-categories',
-    url: '/marketplace/all/',
+    url: '/marketplace/all/?group',
     component: AllCategoriesPage,
     data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
@@ -664,7 +664,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'admin-marketplace-categories',
-    url: 'categories/',
+    url: 'categories/?group',
     parent: 'admin-marketplace',
     component: AdminCategoriesPage,
     data: {

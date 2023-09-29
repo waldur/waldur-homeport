@@ -6,6 +6,7 @@ import { queryClient } from '@waldur/Application';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { getGroupedCategories } from '@waldur/marketplace/category/utils';
 import { getCategoryGroups } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
 
@@ -28,7 +29,7 @@ export const DataLoader = ({ filter, currentCustomer, currentProject }) => {
     data: categoryGroups,
     isLoading: loadingGroups,
     error: errorGroups,
-  } = useQuery(['MarketplacePopupCategoryGroups'], () => getCategoryGroups(), {
+  } = useQuery(['MarketplaceCategoryGroups'], () => getCategoryGroups(), {
     staleTime: 1 * 60 * 1000,
   });
 
@@ -101,28 +102,8 @@ export const DataLoader = ({ filter, currentCustomer, currentProject }) => {
       nonZeroCategories.unshift(recentlyAddedOfferingsCategory);
     }
     // Group categories
-    return nonZeroCategories.reduce((acc, category) => {
-      const categoryGroup = categoryGroups.find(
-        (group) => category.group === group.url,
-      );
-      if (categoryGroup) {
-        const existGroup = acc.find((item) => item.uuid === categoryGroup.uuid);
-        if (existGroup) {
-          existGroup.categories.push(category);
-          existGroup.offering_count += category.offering_count;
-        } else {
-          Object.assign(categoryGroup, { categories: [category] });
-          Object.assign(categoryGroup, {
-            offering_count: category.offering_count,
-          });
-          acc.push(categoryGroup);
-        }
-      } else {
-        acc.push(category);
-      }
-      return acc;
-    }, []);
-  }, [mainCategories, lastOfferings]);
+    return getGroupedCategories(nonZeroCategories, categoryGroups);
+  }, [mainCategories, categoryGroups, lastOfferings]);
 
   // search with delay
   useDebounce(
