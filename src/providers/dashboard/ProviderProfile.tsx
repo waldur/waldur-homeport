@@ -26,7 +26,7 @@ export const ProviderProfile = ({
     () =>
       getAllOfferingPermissions({
         params: {
-          customer_uuid: provider.customer_uuid,
+          customer: provider.customer_uuid,
         },
       }),
     [provider],

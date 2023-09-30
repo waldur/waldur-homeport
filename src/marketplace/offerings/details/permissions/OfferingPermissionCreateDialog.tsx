@@ -4,13 +4,15 @@ import { useDispatch } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { grantPermission, usersAutocomplete } from '@waldur/customer/team/api';
+import { usersAutocomplete } from '@waldur/customer/team/api';
 import { FormContainer } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { DateTimeField } from '@waldur/form/DateTimeField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { addOfferingPermission } from '@waldur/permissions/api';
+import { RoleEnum } from '@waldur/permissions/enums';
 import { showErrorResponse } from '@waldur/store/notify';
 
 export const OfferingPermissionCreateDialog = reduxForm<
@@ -23,9 +25,10 @@ export const OfferingPermissionCreateDialog = reduxForm<
   const saveUser = useCallback(
     async (formData) => {
       try {
-        await grantPermission({
-          offering: offering.url,
-          user: formData.user.url,
+        await addOfferingPermission({
+          role: RoleEnum.OFFERING_MANAGER,
+          offering: offering.uuid,
+          user: formData.user.uuid,
           expiration_time: formData.expiration_time,
         });
         dispatch(closeModalDialog());

@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { PermissionEnum, hasPermission } from '@waldur/core/permissions';
 import { translate } from '@waldur/i18n';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { ActionItemType } from '@waldur/resource/actions/types';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';

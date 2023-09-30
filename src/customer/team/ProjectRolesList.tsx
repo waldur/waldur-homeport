@@ -8,7 +8,7 @@ export const ProjectRolesList: FunctionComponent<{ roleName; row }> = ({
   row,
 }) => {
   const filteredProjects = row.projects.filter(
-    (item) => item.role === roleName,
+    (item) => item.role_name === roleName,
   );
   if (filteredProjects.length === 0) {
     return <>{translate('No projects are assigned to this user.')}</>;

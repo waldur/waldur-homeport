@@ -13,12 +13,13 @@ const UpdateOfferingPermissionExpirationTimeDialog = lazyComponent(
 
 export const UpdateOfferingPermissionExpirationTimeButton: FunctionComponent<{
   permission;
-}> = ({ permission }) => {
+  fetch;
+}> = ({ permission, fetch }) => {
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
       openModalDialog(UpdateOfferingPermissionExpirationTimeDialog, {
-        resolve: { permission },
+        resolve: { permission, fetch },
       }),
     );
   };

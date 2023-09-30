@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { useEffectOnce } from 'react-use';
 
-import { getFirst } from '@waldur/core/api';
 import { Layout } from '@waldur/navigation/Layout';
+import { getProjectPermission } from '@waldur/permissions/utils';
 import { getProject, getCustomer } from '@waldur/project/api';
 import { router } from '@waldur/router';
 import store from '@waldur/store/store';
@@ -16,7 +16,7 @@ import {
   getProject as getProjectSelector,
   getUser as getUserSelector,
 } from '@waldur/workspace/selectors';
-import { Permission, USER_WORKSPACE } from '@waldur/workspace/types';
+import { USER_WORKSPACE } from '@waldur/workspace/types';
 
 import { UsersService } from './UsersService';
 
@@ -43,11 +43,9 @@ export async function loadUser() {
     router.stateService.go('errorPage.notFound');
   }
   if (!currentProject) {
-    const projectPermission = await getFirst<Permission>(
-      '/project-permissions/',
-    );
+    const projectPermission = getProjectPermission(currentUser);
     if (projectPermission) {
-      const newProject = await getProject(projectPermission.project_uuid);
+      const newProject = await getProject(projectPermission.scope_uuid);
       store.dispatch(setCurrentProject(newProject));
       const newCustomer = await getCustomer(newProject.customer_uuid);
       store.dispatch(setCurrentCustomer(newCustomer));

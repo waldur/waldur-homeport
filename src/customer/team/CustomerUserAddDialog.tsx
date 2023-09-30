@@ -8,12 +8,15 @@ import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { addCustomerUser } from '@waldur/permissions/api';
+import { RoleEnum } from '@waldur/permissions/enums';
+import { formatRole } from '@waldur/permissions/utils';
 import { UserListOption } from '@waldur/project/team/UserGroup';
 import { showSuccess } from '@waldur/store/notify';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { User } from '@waldur/workspace/types';
 
-import { addCustomerUser, usersAutocomplete } from './api';
+import { usersAutocomplete } from './api';
 import { OwnerExpirationTimeGroup } from './OwnerExpirationTimeGroup';
 
 interface CustomerUserAddFormData {
@@ -34,12 +37,12 @@ export const CustomerUserAddDialog = reduxForm<
   const customer = useSelector(getCustomer);
   const dispatch = useDispatch();
   const callback = async (formData: CustomerUserAddFormData) => {
-    await addCustomerUser(
-      customer.url,
-      formData.user.url,
-      'owner',
-      formData.expiration_time,
-    );
+    await addCustomerUser({
+      customer: customer.uuid,
+      user: formData.user.uuid,
+      role: RoleEnum.CUSTOMER_OWNER,
+      expiration_time: formData.expiration_time,
+    });
     refetch();
     dispatch(showSuccess('User has been added to organization.'));
     dispatch(closeModalDialog());
@@ -47,7 +50,11 @@ export const CustomerUserAddDialog = reduxForm<
   return (
     <form onSubmit={handleSubmit(callback)}>
       <Modal.Header>
-        <Modal.Title>{translate('Add owner')}</Modal.Title>
+        <Modal.Title>
+          {translate('Add {role}', {
+            role: formatRole(RoleEnum.CUSTOMER_OWNER),
+          })}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <FormContainer submitting={submitting}>

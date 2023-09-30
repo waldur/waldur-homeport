@@ -1,46 +1,38 @@
 import { FunctionComponent } from 'react';
 
-import { ENV } from '@waldur/configs/default';
-import { CustomerLink } from '@waldur/customer/CustomerLink';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { filterByUser } from '@waldur/workspace/selectors';
+import { GenericPermission } from '@waldur/permissions/types';
+import { Table } from '@waldur/table';
 
-import CustomerCreateButton from './CustomerCreateButton';
+import { CustomerCreateButton } from './CustomerCreateButton';
+import { usePermissionsTable } from './usePermissionsTable';
 
-const TableComponent: FunctionComponent<any> = (props) => {
-  const { filterColumns } = props;
+export const CustomerPermissions: FunctionComponent = () => {
+  const tableProps = usePermissionsTable('customer');
   return (
-    <Table
-      {...props}
+    <Table<GenericPermission>
+      {...tableProps}
       title={translate('Organizations')}
-      columns={filterColumns([
+      columns={[
         {
           title: translate('Organization name'),
-          render: CustomerLink,
+          render: ({ row }) => (
+            <Link
+              state="organization.dashboard"
+              params={{ uuid: row.scope_uuid }}
+              label={row.scope_name}
+            />
+          ),
         },
         {
           title: translate('Role'),
-          render: ({ row }) => (
-            <>
-              {ENV.roles[row.role] ? translate(ENV.roles[row.role]) : row.role}
-            </>
-          ),
+          render: ({ row }) => <>{row.role_description}</>,
           className: 'text-center col-md-1',
         },
-      ])}
+      ]}
       verboseName={translate('organizations')}
       actions={<CustomerCreateButton />}
     />
   );
 };
-
-const TableOptions = {
-  table: 'customers',
-  fetchData: createFetcher('customer-permissions'),
-  getDefaultFilter: filterByUser,
-  exportFields: ['customer', 'role'],
-  exportRow: (row) => [row.customer_name, row.role],
-};
-
-export const CustomerPermissions = connectTable(TableOptions)(TableComponent);

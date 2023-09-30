@@ -4,11 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
-import {
-  getUser,
-  getUserCustomerPermissions,
-  getUserProjectPermissions,
-} from '@waldur/workspace/selectors';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { AdminMenu } from './AdminMenu';
 import { ManagementMenu } from './ManagementMenu';
@@ -23,8 +19,6 @@ import { SupportMenu } from './SupportMenu';
 export const UnifiedSidebar = () => {
   const user = useSelector(getUser);
   const router = useRouter();
-  const projectPermissions = useSelector(getUserProjectPermissions);
-  const customerPermissions = useSelector(getUserCustomerPermissions);
   const { state, params } = useCurrentStateAndParams();
   useEffect(() => {
     MenuComponent.reinitialization();
@@ -51,9 +45,7 @@ export const UnifiedSidebar = () => {
     <Sidebar>
       {user ? (
         <>
-          {user.is_staff ||
-          customerPermissions.length !== 0 ||
-          projectPermissions.length !== 0 ? (
+          {user.is_staff || user.permissions?.length !== 0 ? (
             <MarketplaceTrigger />
           ) : null}
           <ManagementMenu />

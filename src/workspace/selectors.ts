@@ -66,8 +66,7 @@ export const isStaffOrSupport = (state: RootState): boolean =>
 export const checkIsOwner = (customer: Customer, user: User): boolean =>
   customer &&
   user &&
-  customer.owners &&
-  customer.owners.find((owner) => owner.uuid === user.uuid) !== undefined;
+  customer.owners?.find((owner) => owner.uuid === user.uuid) !== undefined;
 
 export const checkIsServiceManager = (
   customer: Customer,
@@ -92,7 +91,7 @@ export const getOwner = createSelector(
       return undefined;
     }
     if (customer) {
-      return customer.owners.find((owner) => owner.uuid === user.uuid);
+      return customer.owners?.find((owner) => owner.uuid === user.uuid);
     }
   },
 );

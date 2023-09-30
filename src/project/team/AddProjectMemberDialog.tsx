@@ -5,14 +5,18 @@ import { useAsyncFn } from 'react-use';
 import { reduxForm, change } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { PROJECT_ADMIN_ROLE } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { CustomersService } from '@waldur/customer/services/CustomersService';
-import { ProjectPermissionsService } from '@waldur/customer/services/ProjectPermissionsService';
 import { FormContainer } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import {
+  addProjectUser,
+  deleteProjectUser,
+  updateProjectUser,
+} from '@waldur/permissions/api';
+import { RoleEnum } from '@waldur/permissions/enums';
 import { showErrorResponse } from '@waldur/store/notify';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
@@ -32,7 +36,6 @@ interface AddProjectMemberDialogResolve {
   editUser: any;
   currentCustomer: any;
   currentProject: any;
-  isProjectManager: boolean;
   refetch;
 }
 
@@ -45,25 +48,32 @@ const savePermissions = async (
   resolve: AddProjectMemberDialogResolve,
 ) => {
   if (resolve.editUser) {
-    if (resolve.editUser.role === formData.role) {
-      await ProjectPermissionsService.update(resolve.editUser.permission, {
+    if (resolve.editUser.role_name === formData.role) {
+      await updateProjectUser({
+        project: resolve.currentProject.uuid,
+        user: resolve.editUser.user_uuid,
+        role: formData.role,
         expiration_time: formData.expiration_time,
       });
     } else {
-      await ProjectPermissionsService.delete(resolve.editUser.permission);
-      await ProjectPermissionsService.create({
-        user: formData.user.url,
-        project: resolve.currentProject.url,
-        expiration_time: formData.expiration_time,
+      await deleteProjectUser({
+        project: resolve.currentProject.uuid,
+        user: resolve.editUser.user_uuid,
+        role: resolve.editUser.role_name,
+      });
+      await addProjectUser({
+        project: resolve.currentProject.uuid,
+        user: resolve.editUser.user_uuid,
         role: formData.role,
+        expiration_time: formData.expiration_time,
       });
     }
   } else if (formData.user) {
-    await ProjectPermissionsService.create({
-      user: formData.user.url,
-      project: resolve.currentProject.url,
-      expiration_time: formData.expiration_time,
+    await addProjectUser({
+      project: resolve.currentProject.uuid,
+      user: formData.user.uuid,
       role: formData.role,
+      expiration_time: formData.expiration_time,
     });
   }
   resolve.refetch();
@@ -104,7 +114,7 @@ export const AddProjectMemberDialog = reduxForm<
   useEffect(() => {
     if (resolve.editUser) {
       dispatch(change(FORM_ID, 'user', resolve.editUser));
-      dispatch(change(FORM_ID, 'role', resolve.editUser.role));
+      dispatch(change(FORM_ID, 'role', resolve.editUser.role_name));
       dispatch(
         change(FORM_ID, 'expiration_time', resolve.editUser.expiration_time),
       );
@@ -115,7 +125,7 @@ export const AddProjectMemberDialog = reduxForm<
 
   useEffect(() => {
     if (users) {
-      dispatch(change(FORM_ID, 'role', PROJECT_ADMIN_ROLE));
+      dispatch(change(FORM_ID, 'role', RoleEnum.PROJECT_ADMIN));
     }
   }, [dispatch, users]);
 
@@ -139,7 +149,7 @@ export const AddProjectMemberDialog = reduxForm<
               users={users}
               disabled={submitting}
             />
-            <RoleGroup isProjectManager={resolve.isProjectManager} />
+            <RoleGroup />
             <ExpirationTimeGroup disabled={submitting} />
           </FormContainer>
         )}

@@ -13,7 +13,6 @@
       "hide_organization_billing_step": true
     },
     "project": {
-      "member_role": true,
       "team": true,
       "estimated_cost": true,
       "events": true,
@@ -105,7 +104,6 @@
     "INVITATIONS_ENABLED": true,
     "VALIDATE_INVITATION_EMAIL": false,
     "OWNER_CAN_MANAGE_CUSTOMER": false,
-    "OWNERS_CAN_MANAGE_OWNERS": false,
     "NATIVE_NAME_ENABLED": false,
     "ONLY_STAFF_MANAGES_SERVICES": false,
     "PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS": [],

@@ -1,10 +1,11 @@
 import { useDispatch } from 'react-redux';
 
+import { ENV } from '@waldur/configs/default';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { deleteRole } from './api';
+import { deleteRole, getRoles } from './api';
 
 export const RoleDeleteButton = ({ row, refetch }) => {
   const dispatch = useDispatch();
@@ -22,9 +23,9 @@ export const RoleDeleteButton = ({ row, refetch }) => {
     } catch {
       return;
     }
-    deleteRole(row.uuid).then(() => {
-      refetch();
-    });
+    await deleteRole(row.uuid);
+    ENV.roles = await getRoles();
+    refetch();
   };
   return (
     <ActionButton

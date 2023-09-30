@@ -49,12 +49,7 @@ export const InvitationCreateButton: FunctionComponent<{
       icon="fa fa-plus"
       variant="primary"
       disabled={!isAllowed}
-      tooltip={
-        !isAllowed &&
-        translate(
-          'Only customer owner, project manager or staff can invite users.',
-        )
-      }
+      tooltip={!isAllowed && translate('You can not invite users.')}
     />
   );
 };

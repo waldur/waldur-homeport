@@ -2,7 +2,6 @@ import { ENV } from '@waldur/configs/default';
 import {
   deleteById,
   get,
-  getAll,
   getById,
   getList,
   post,
@@ -13,7 +12,7 @@ import { InvoiceSummary } from '@waldur/dashboard/types';
 import { Event } from '@waldur/events/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
-import { OecdCode, ProjectTeamUser } from './types';
+import { OecdCode } from './types';
 
 export const getProject = (projectId: string) =>
   getById<Project>('/projects/', projectId);
@@ -105,13 +104,6 @@ export const fetchLatestEvents = (project: Project, size: number) =>
     page_size: size,
     scope: project.url,
     field: ['uuid', 'created', 'event_type', 'message'],
-  });
-
-export const fetchAllProjectUsers = (projectId: string) =>
-  getAll<ProjectTeamUser>(`/projects/${projectId}/users/`, {
-    params: {
-      field: ['uuid', 'full_name', 'email', 'role'],
-    },
   });
 
 export const fetchLast12MonthProjectCosts = (projectId: string) =>

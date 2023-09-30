@@ -5,6 +5,8 @@ import { Field } from 'redux-form';
 
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
+import { RoleEnum } from '@waldur/permissions/enums';
+import { formatRole } from '@waldur/permissions/utils';
 
 interface OwnerExpirationTimeGroupProps {
   disabled?: boolean;
@@ -13,7 +15,11 @@ interface OwnerExpirationTimeGroupProps {
 export const OwnerExpirationTimeGroup: FunctionComponent<OwnerExpirationTimeGroupProps> =
   ({ disabled }) => (
     <Form.Group>
-      <Form.Label>{translate('Organization owner role expires on')}</Form.Label>
+      <Form.Label>
+        {translate('{role} role expires on', {
+          role: formatRole(RoleEnum.CUSTOMER_OWNER),
+        })}
+      </Form.Label>
       <Field
         name="expiration_time"
         component={DateField}

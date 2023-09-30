@@ -71,10 +71,7 @@ export async function loadConfig() {
     })),
     defaultLanguage: backendSettings.LANGUAGE_CODE,
     FEATURES: backendSettings.FEATURES,
-    permissions: roles.reduce(
-      (result, item) => ({ ...result, [item.name]: item.permissions }),
-      {},
-    ),
+    roles,
   };
   Object.assign(ENV, config);
   afterBootstrap();

@@ -9,7 +9,10 @@ import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
 const ProviderUsersList = (props) => {
   const filter = useMemo(
-    () => ({ registration_method: props.resolve.type }),
+    () => ({
+      registration_method: props.resolve.type,
+      field: ['full_name', 'email', 'is_active'],
+    }),
     [props],
   );
   const tableProps = useTable({

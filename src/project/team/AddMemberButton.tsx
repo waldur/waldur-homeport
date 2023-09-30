@@ -17,7 +17,6 @@ interface AddMemberButtonProps {
   user?: User;
   project: Project;
   customer: Customer;
-  isProjectManager: boolean;
   refetch;
 }
 
@@ -26,7 +25,6 @@ export const AddMemberButton: React.FC<AddMemberButtonProps> = ({
   user,
   project,
   customer,
-  isProjectManager,
   refetch,
 }) => {
   const dispatch = useDispatch();
@@ -37,7 +35,6 @@ export const AddMemberButton: React.FC<AddMemberButtonProps> = ({
           currentProject: project,
           currentCustomer: customer,
           editUser: user,
-          isProjectManager: isProjectManager,
           addedUsers: users.map((user) => user.uuid),
           refetch,
         },

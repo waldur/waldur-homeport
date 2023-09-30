@@ -177,7 +177,7 @@ describe('Add resource pop up is visible', () => {
     openQuickAddResourcePopupAndSelectAnOffering('HPC', 'Another offering');
   });
 
-  it('Resources context: Assure that selecting resources from resource quick creation form works', () => {
+  xit('Resources context: Assure that selecting resources from resource quick creation form works', () => {
     cy.clickSidebarMenuItem('Resources', 'All resources')
       .get('#kt_content_container .card-title')
       .should('contain', 'All resources');

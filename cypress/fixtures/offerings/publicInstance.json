@@ -86,7 +86,7 @@
 	"native_name": "",
 	"native_description": "",
 	"vendor_details": "",
-	"thumbnail": "/media/files/marketplace_service_offering_thumbnails/Header_98LZWDA.png",
+	"thumbnail": null,
 	"order_item_count": 1,
 	"plans": [
 		{
@@ -137,16 +137,16 @@
 			"name": "Test request-based item (Test)",
 			"uuid": "5a0203d698214d9facb1123dc2adde6f",
 			"description": "Test",
-			"image": "/media/files/screenshot/5a0203d698214d9facb1123dc2adde6f.png",
-			"thumbnail": "/media/files/screenshot/5a0203d698214d9facb1123dc2adde6f_6pWriVZ.png",
+			"image": null,
+			"thumbnail": null,
 			"created": "2022-01-04T22:14:10.389608Z"
 		},
 		{
 			"name": "Test",
 			"uuid": "cc5ed2190f7e4d3287ef005821a15cec",
 			"description": "Test",
-			"image": "/media/files/screenshot/cc5ed2190f7e4d3287ef005821a15cec.png",
-			"thumbnail": "/media/files/screenshot/cc5ed2190f7e4d3287ef005821a15cec_ADskVGf.png",
+			"image": null,
+			"thumbnail": null,
 			"created": "2022-01-04T22:14:37.761669Z"
 		}
 	],
@@ -174,7 +174,7 @@
 			"parent": "/api/divisions/83f8bf94e7b148d9bce03755ab692e1f/"
 		}
 	],
-	"image": "/media/files/offering/36b6c5ab2f854df1a87ffd39b9d767c6_TnS6xKx.jpg",
+	"image": null,
 	"google_calendar_is_public": null,
 	"google_calendar_link": null
 }

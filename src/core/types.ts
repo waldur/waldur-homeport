@@ -2,6 +2,7 @@ import { StateDeclaration as BaseStateDeclaration } from '@uirouter/core';
 import { ComponentType } from 'react';
 
 import { PluginConfiguration } from '@waldur/auth/types';
+import { Role } from '@waldur/permissions/types';
 
 interface DataDeclaration {
   /** State is disabled as long as its feature is disabled */
@@ -43,7 +44,6 @@ export interface LanguageOption {
 }
 
 export interface ApplicationConfigurationOptions {
-  permissions: Record<string, string[]>;
   apiEndpoint: string;
   plugins?: PluginConfiguration;
   // Language choices and default language are fetched from MasterMind
@@ -58,7 +58,7 @@ export interface ApplicationConfigurationOptions {
   accountingMode: string;
   defaultPullInterval: number;
   countersTimerInterval: number;
-  roles: Record<string, string>;
+  roles: Role[];
   invitationRedirectTime: number;
   excludedAttachmentTypes: string[];
   enforceLatinName: boolean;

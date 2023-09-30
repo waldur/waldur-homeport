@@ -7,6 +7,8 @@ import { getFormValues } from 'redux-form';
 import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/constants';
 import { CustomerUsersListExpandableRow } from '@waldur/customer/team/CustomerUsersListExpandableRow';
 import { translate } from '@waldur/i18n';
+import { RoleEnum } from '@waldur/permissions/enums';
+import { formatRole } from '@waldur/permissions/utils';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -52,7 +54,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => row.email || 'N/A',
         },
         {
-          title: translate('Owner'),
+          title: formatRole(RoleEnum.CUSTOMER_OWNER),
           render: CustomerRole,
         },
       ]}

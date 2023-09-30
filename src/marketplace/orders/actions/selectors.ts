@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
-import { PermissionEnum, hasPermission } from '@waldur/core/permissions';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { getCustomer, getProject, getUser } from '@waldur/workspace/selectors';
 
 export const orderCanBeApproved = createSelector(

@@ -24,6 +24,7 @@
   "competence": "",
   "customer_permissions": [],
   "project_permissions": [],
+  "permissions": [],
   "identity_provider_fields": [],
   "identity_provider_label": "Local DB",
   "identity_provider_management_url": "",

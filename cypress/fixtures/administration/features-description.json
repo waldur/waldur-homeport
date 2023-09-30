@@ -46,10 +46,6 @@
     "description": "Project workspace",
     "items": [
       {
-        "key": "member_role",
-        "description": "Allow to grant user a project member role."
-      },
-      {
         "key": "team",
         "description": "Enable team management in project workspace."
       },

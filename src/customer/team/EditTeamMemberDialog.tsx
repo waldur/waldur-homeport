@@ -4,16 +4,23 @@ import { useDispatch } from 'react-redux';
 import { reduxForm, change, arrayPush } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { ENV } from '@waldur/configs/default';
-import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
-import { CustomerPermissionsService } from '@waldur/customer/services/CustomerPermissionsService';
-import { ProjectPermissionsService } from '@waldur/customer/services/ProjectPermissionsService';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import {
+  addProjectUser,
+  deleteProjectUser,
+  updateProjectUser,
+  addCustomerUser,
+  deleteCustomerUser,
+  updateCustomerUser,
+} from '@waldur/permissions/api';
+import { PermissionEnum, RoleEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { showErrorResponse } from '@waldur/store/notify';
 import { fetchListStart } from '@waldur/table/actions';
 import { checkCustomerUser, checkIsOwner } from '@waldur/workspace/selectors';
+import { Customer, User } from '@waldur/workspace/types';
 
 import { OwnerExpirationTimeGroup } from './OwnerExpirationTimeGroup';
 import { OwnerGroup } from './OwnerGroup';
@@ -24,25 +31,27 @@ import './EditTeamMemberDialog.scss';
 
 const FORM_ID = 'EditTeamMemberDialog';
 
-interface Project {
-  role: string;
-  permission: string;
+interface PermissionData {
+  role_name: string;
   expiration_time: string;
   uuid: string;
   name: string;
-  url: string;
 }
 
 interface EditTeamMemberDialogFormData {
   is_owner: boolean;
-  expiration_time: Date;
-  projects: Project[];
+  expiration_time: string;
+  projects: PermissionData[];
+}
+
+interface EditUser extends User, PermissionData {
+  projects: PermissionData[];
 }
 
 interface EditTeamMemberDialogResolve {
-  editUser: any;
-  currentCustomer: any;
-  currentUser: any;
+  editUser: EditUser;
+  currentCustomer: Customer;
+  currentUser: User;
 }
 
 interface EditTeamMemberDialogOwnProps {
@@ -53,20 +62,21 @@ const savePermissions = async (
   formData: EditTeamMemberDialogFormData,
   resolve: EditTeamMemberDialogResolve,
 ) => {
-  if (resolve.editUser.role && !formData.is_owner) {
-    await CustomerPermissionsService.delete(resolve.editUser.permission);
-  } else if (!resolve.editUser.role && formData.is_owner) {
-    await CustomerPermissionsService.create({
-      user: resolve.editUser.url,
-      role: CUSTOMER_OWNER_ROLE,
-      customer: resolve.currentCustomer.url,
+  const permission = {
+    customer: resolve.currentCustomer.uuid,
+    user: resolve.editUser.uuid,
+    role: RoleEnum.CUSTOMER_OWNER,
+  };
+  if (resolve.editUser.role_name && !formData.is_owner) {
+    await deleteCustomerUser(permission);
+  } else if (!resolve.editUser.role_name && formData.is_owner) {
+    await addCustomerUser({
+      ...permission,
       expiration_time: formData.expiration_time,
     });
-  } else if (
-    formData.expiration_time !== resolve.editUser.expiration_time &&
-    resolve.editUser.permission
-  ) {
-    await CustomerPermissionsService.update(resolve.editUser.permission, {
+  } else if (formData.expiration_time !== resolve.editUser.expiration_time) {
+    await updateCustomerUser({
+      ...permission,
       expiration_time: formData.expiration_time,
     });
   }
@@ -77,52 +87,58 @@ const savePermissions = async (
 
   (formData.projects || []).forEach((project) => {
     const existingPermission = resolve.editUser.projects.find(
-      (p) => p.permission === project.permission,
+      (p) => p.uuid === project.uuid,
     );
 
     if (!existingPermission) {
-      if (project.role) {
+      if (project.role_name) {
         createdPermissions.push(project);
       }
     } else if (
-      project.role === existingPermission.role &&
+      project.role_name === existingPermission.role_name &&
       project.expiration_time !== existingPermission.expiration_time
     ) {
       updatePermissions.push(project);
     } else if (
-      (!project.role && existingPermission.role) ||
-      (project.role &&
-        existingPermission.role &&
-        project.role !== existingPermission.role)
+      (!project.role_name && existingPermission.role_name) ||
+      (project.role_name &&
+        existingPermission.role_name &&
+        project.role_name !== existingPermission.role_name)
     ) {
-      permissionsToDelete.push(existingPermission.permission);
+      permissionsToDelete.push(existingPermission);
     }
 
     if (
       existingPermission &&
-      project.role &&
-      project.role !== existingPermission.role
+      project.role_name &&
+      project.role_name !== existingPermission.role_name
     ) {
       createdPermissions.push(project);
     }
   });
 
   for (const permission of permissionsToDelete) {
-    await ProjectPermissionsService.delete(permission);
+    await deleteProjectUser({
+      project: permission.uuid,
+      user: resolve.editUser.uuid,
+      role: permission.role_name,
+    });
   }
 
   for (const permission of updatePermissions) {
-    await ProjectPermissionsService.update(permission.permission, {
-      role: permission.role,
+    await updateProjectUser({
+      project: permission.uuid,
+      user: resolve.editUser.uuid,
+      role: permission.role_name,
       expiration_time: permission.expiration_time,
     });
   }
 
   for (const project of createdPermissions) {
-    await ProjectPermissionsService.create({
-      user: resolve.editUser.url,
-      role: project.role,
-      project: project.url,
+    await addProjectUser({
+      project: project.uuid,
+      user: resolve.editUser.uuid,
+      role: project.role_name,
       expiration_time: project.expiration_time,
     });
   }
@@ -141,7 +157,7 @@ export const EditTeamMemberDialog = reduxForm<
       change(
         FORM_ID,
         'is_owner',
-        resolve.editUser.role === CUSTOMER_OWNER_ROLE,
+        resolve.editUser.role_name === RoleEnum.CUSTOMER_OWNER,
       ),
     );
     dispatch(
@@ -153,9 +169,8 @@ export const EditTeamMemberDialog = reduxForm<
       );
       dispatch(
         arrayPush(FORM_ID, 'projects', {
-          url: project.url,
-          permission: permissionProject ? permissionProject.permission : null,
-          role: permissionProject ? permissionProject.role : null,
+          uuid: project.uuid,
+          role_name: permissionProject ? permissionProject.role_name : null,
           expiration_time: permissionProject
             ? permissionProject.expiration_time
             : null,
@@ -190,8 +205,10 @@ export const EditTeamMemberDialog = reduxForm<
   const canManageOwner =
     resolve.currentUser.is_staff ||
     (checkIsOwner(resolve.currentCustomer, resolve.editUser) &&
-      checkIsOwner(resolve.currentCustomer, resolve.currentUser) &&
-      ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS);
+      hasPermission(resolve.currentUser, {
+        permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
+        customerId: resolve.currentCustomer.uuid,
+      }));
 
   const projects = useMemo(
     () =>
@@ -200,14 +217,12 @@ export const EditTeamMemberDialog = reduxForm<
           (permissionProject) => permissionProject.uuid === project.uuid,
         );
         return {
-          role: permissionProject ? permissionProject.role : null,
-          permission: permissionProject ? permissionProject.permission : null,
+          role_name: permissionProject ? permissionProject.role_name : null,
           expiration_time: permissionProject
             ? permissionProject.expiration_time
             : null,
           uuid: project.uuid,
           name: project.name,
-          url: project.url,
         };
       }),
     [resolve.currentCustomer.projects, resolve.editUser.projects],

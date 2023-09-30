@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
+import { formatRole } from '@waldur/permissions/utils';
 
 import { Invitation } from './types';
 
@@ -19,9 +19,7 @@ export const GroupInvitationMessage: FunctionComponent<{
           type: invitation.project_name
             ? translate('project')
             : translate('organization'),
-          role: translate(
-            ENV.roles[invitation.project_role || invitation.customer_role],
-          ),
+          role: formatRole(invitation.project_role || invitation.customer_role),
         },
       )}
     </p>

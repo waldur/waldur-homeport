@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { CustomerLink } from '@waldur/customer/CustomerLink';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { ProjectLink } from '@waldur/project/ProjectLink';
@@ -30,7 +30,11 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title: translate('Organization'),
       render: ({ row }) =>
         row.customer_uuid ? (
-          <CustomerLink row={row} />
+          <Link
+            state="organization.dashboard"
+            params={{ uuid: row.customer_uuid }}
+            label={row.customer_name}
+          />
         ) : (
           <>{row.customer_name}</>
         ),

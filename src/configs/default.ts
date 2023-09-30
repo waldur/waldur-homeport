@@ -19,14 +19,8 @@ export const ENV: ApplicationConfigurationOptions = {
 
   defaultPullInterval: 5, // seconds
   countersTimerInterval: 30, // seconds
+  roles: [],
 
-  roles: {
-    owner: gettext('Organization owner'),
-    manager: gettext('Project manager'),
-    admin: gettext('System administrator'),
-    member: gettext('Project member'),
-    service_manager: gettext('Service manager'),
-  },
   invitationRedirectTime: 5000,
 
   // Provide exclude file types for issue attachments uploading
@@ -46,5 +40,4 @@ export const ENV: ApplicationConfigurationOptions = {
 
   // It can be either 'localStorage' or 'sessionStorage'.
   authStorage: 'localStorage',
-  permissions: {},
 };

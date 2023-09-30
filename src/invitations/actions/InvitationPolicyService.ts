@@ -1,4 +1,3 @@
-import { ENV } from '@waldur/configs/default';
 import {
   CUSTOMER_OWNER_ROLE,
   PROJECT_ADMIN_ROLE,
@@ -6,6 +5,8 @@ import {
   PROJECT_MEMBER_ROLE,
   PROJECT_ROLES,
 } from '@waldur/core/constants';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { checkIsOwner, checkRole } from '@waldur/workspace/selectors';
 
 export const InvitationPolicyService = {
@@ -13,7 +14,7 @@ export const InvitationPolicyService = {
   // 1) Staff can manage any invitation.
   // 2) Non-owner (namely customer support or system admin) can not manage invitations.
   // 3) Owner can manage any project invitation.
-  // 4) Owner can manage customer invitation only if OWNERS_CAN_MANAGE_OWNERS is true.
+  // 4) Owner can manage customer invitation only if he has permission.
   // 5) Project manager can manage project admin and member invitations.
 
   // Check user permissions for new invitation
@@ -26,7 +27,10 @@ export const InvitationPolicyService = {
         return true;
       }
       if (role.value === CUSTOMER_OWNER_ROLE) {
-        return ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS;
+        return hasPermission(context.user, {
+          permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
+          customerId: context.customer.uuid,
+        });
       }
     }
     if (checkRole(context.project, context.user, PROJECT_MANAGER_ROLE)) {
@@ -44,10 +48,10 @@ export const InvitationPolicyService = {
       return true;
     }
     if (invitation.customer_role) {
-      return (
-        checkIsOwner(context.customer, context.user) &&
-        ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS
-      );
+      return hasPermission(context.user, {
+        permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
+        customerId: context.customer.uuid,
+      });
     }
     if (invitation.project_role && !context.project) {
       return checkIsOwner(context.customer, context.user);

@@ -11,10 +11,14 @@ const OfferingPermissionCreateDialog = lazyComponent(
   'OfferingPermissionCreateDialog',
 );
 
-export const OfferingPermissionCreateButton: React.FC = () => {
+export const OfferingPermissionCreateButton: React.FC<{ fetch }> = ({
+  fetch,
+}) => {
   const dispatch = useDispatch();
   const callback = () => {
-    dispatch(openModalDialog(OfferingPermissionCreateDialog));
+    dispatch(
+      openModalDialog(OfferingPermissionCreateDialog, { resolve: { fetch } }),
+    );
   };
   return (
     <ActionButton

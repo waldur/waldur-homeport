@@ -1,4 +1,5 @@
 import { CustomerRole } from '@waldur/core/constants';
+import { GenericPermission } from '@waldur/permissions/types';
 import { Quota } from '@waldur/quotas/types';
 
 export interface Permission {
@@ -22,6 +23,7 @@ export interface ProjectPermission extends CustomerPermission {
 }
 
 export interface User {
+  permissions?: GenericPermission[];
   image?: string;
   is_staff: boolean;
   is_support: boolean;

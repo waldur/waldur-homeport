@@ -1,10 +1,10 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/configs/default';
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { translate } from '@waldur/i18n';
+import { getCustomerPermission } from '@waldur/permissions/utils';
 import { formatUserStatus } from '@waldur/user/support/utils';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
@@ -15,10 +15,8 @@ import { getItemAbbreviation } from './utils';
 export const ContextSelectorToggle: FunctionComponent = () => {
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
-  const isOwner = customer?.owners?.find((perm) => perm.uuid === user?.uuid);
-  const isServiceManager = customer?.service_managers?.find(
-    (perm) => perm.uuid === user?.uuid,
-  );
+  const permission = getCustomerPermission(user, customer);
+
   const abbreviation = useMemo(() => getItemAbbreviation(customer), [customer]);
 
   return (
@@ -48,29 +46,27 @@ export const ContextSelectorToggle: FunctionComponent = () => {
           <div className="d-flex">
             <div className="flex-grow-1 me-2 ellipsis">
               {user ? (
-                <span className="text-white fs-6 fw-bold text-nowrap">
-                  {customer
-                    ? customer.name || customer.display_name
-                    : translate('Select organization')}
-                </span>
+                <>
+                  <span className="text-white fs-6 fw-bold text-nowrap">
+                    {customer
+                      ? customer.name || customer.display_name
+                      : translate('Select organization')}
+                  </span>
+                  {customer?.abbreviation && (
+                    <span className="text-gray-600 fw-semibold d-block fs-7 mb-1">
+                      {customer.abbreviation}
+                    </span>
+                  )}
+                  <div className="d-flex align-items-center text-success fs-8">
+                    {permission
+                      ? permission.role_description
+                      : formatUserStatus(user)}
+                  </div>
+                </>
               ) : (
                 <span className="text-gray-600 fs-6 fw-bold">
                   {translate('Guest')}
                 </span>
-              )}
-              {user && customer?.abbreviation && (
-                <span className="text-gray-600 fw-semibold d-block fs-7 mb-1">
-                  {customer.abbreviation}
-                </span>
-              )}
-              {user && (
-                <div className="d-flex align-items-center text-success fs-8">
-                  {isOwner
-                    ? translate(ENV.roles.owner)
-                    : isServiceManager
-                    ? translate(ENV.roles.service_manager)
-                    : formatUserStatus(user)}
-                </div>
               )}
             </div>
             <div className="d-flex align-items-center">

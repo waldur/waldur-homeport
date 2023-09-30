@@ -8,8 +8,8 @@ import { ProviderDashboardChart } from './ProviderDashboardChart';
 import { ProviderProfile } from './ProviderProfile';
 import { ProviderWidgets } from './ProviderWidgets';
 
-export const ProviderDashboard = ({ provider }) => {
-  return (
+export const ProviderDashboard = ({ provider }) =>
+  provider ? (
     <>
       <ProviderProfile provider={provider} />
       <Row>
@@ -29,5 +29,4 @@ export const ProviderDashboard = ({ provider }) => {
         }}
       />
     </>
-  );
-};
+  ) : null;

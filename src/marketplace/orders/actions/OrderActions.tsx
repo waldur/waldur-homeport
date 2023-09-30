@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
-import { PermissionEnum, hasPermission } from '@waldur/core/permissions';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { ApproveButton } from './ApproveButton';

@@ -1,5 +1,5 @@
 {
-  "url": "https://rest-test.nodeconductor.com/api/marketplace-public-offerings/5be09436ad454b9ab6932812b2ebbde8/",
+  "url": "/api/marketplace-public-offerings/5be09436ad454b9ab6932812b2ebbde8/",
   "uuid": "5be09436ad454b9ab6932812b2ebbde8",
   "created": "2019-05-03T12:03:58.408056Z",
   "name": "Adaptive 24hour contingency",
@@ -10,10 +10,10 @@
   "privacy_policy_link": "",
   "access_url": "",
   "endpoints": [],
-  "customer": "https://rest-test.nodeconductor.com/api/customers/8a0517819d7a408a9664b30eb71591d2/",
+  "customer": "/api/customers/8a0517819d7a408a9664b30eb71591d2/",
   "customer_uuid": "8a0517819d7a408a9664b30eb71591d2",
   "customer_name": "Hughes-Valenzuela",
-  "category": "https://rest-test.nodeconductor.com/api/marketplace-categories/6dfcdbe3c18241dc87526ef411bf6064/",
+  "category": "/api/marketplace-categories/6dfcdbe3c18241dc87526ef411bf6064/",
   "category_uuid": "6dfcdbe3c18241dc87526ef411bf6064",
   "category_title": "Storage",
   "rating": null,
@@ -77,11 +77,11 @@
   "native_name": "",
   "native_description": "",
   "vendor_details": "",
-  "thumbnail": "https://rest-test.nodeconductor.com/media/files/marketplace_service_offering_thumbnails/icon-openstack.png",
+  "thumbnail": null,
   "order_item_count": 7.0,
   "plans": [
     {
-      "url": "https://rest-test.nodeconductor.com/api/marketplace-public-plans/30107c930449426388aa7d07b1c0602d/",
+      "url": "/api/marketplace-public-plans/30107c930449426388aa7d07b1c0602d/",
       "uuid": "30107c930449426388aa7d07b1c0602d",
       "name": "Default",
       "description": "",
@@ -113,103 +113,103 @@
   "type": "OpenStackTenant.Volume",
   "shared": false,
   "billable": false,
-  "scope": "https://rest-test.nodeconductor.com/api/service-settings/03532f2636b942bfb21eb75c4f31d722/",
+  "scope": "/api/service-settings/03532f2636b942bfb21eb75c4f31d722/",
   "scope_uuid": "03532f2636b942bfb21eb75c4f31d722",
   "files": [],
   "quotas": [
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/bdac384c35f240f2ab4a66fb8f3ab0be/",
+      "url": "/api/quotas/bdac384c35f240f2ab4a66fb8f3ab0be/",
       "uuid": "bdac384c35f240f2ab4a66fb8f3ab0be",
       "name": "snapshots",
       "limit": 50.0,
       "usage": 0.0
     },
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/bc4d81e84e124b6f9639e49155989f01/",
+      "url": "/api/quotas/bc4d81e84e124b6f9639e49155989f01/",
       "uuid": "bc4d81e84e124b6f9639e49155989f01",
       "name": "snapshots_size",
       "limit": -1.0,
       "usage": 0.0
     },
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/99aa13c4c31c45188bc9d383ed21d084/",
+      "url": "/api/quotas/99aa13c4c31c45188bc9d383ed21d084/",
       "uuid": "99aa13c4c31c45188bc9d383ed21d084",
       "name": "network_count",
       "limit": 100.0,
       "usage": 1.0
     },
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/759285d9709b4a89aa492d6eaffee56b/",
+      "url": "/api/quotas/759285d9709b4a89aa492d6eaffee56b/",
       "uuid": "759285d9709b4a89aa492d6eaffee56b",
       "name": "subnet_count",
       "limit": 100.0,
       "usage": 1.0
     },
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/dcb0739b034a4a30be4e5a6189c97d01/",
+      "url": "/api/quotas/dcb0739b034a4a30be4e5a6189c97d01/",
       "uuid": "dcb0739b034a4a30be4e5a6189c97d01",
       "name": "security_group_count",
       "limit": 100.0,
       "usage": 6.0
     },
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/85c3db10b0ed49388af6dd2adc50510e/",
+      "url": "/api/quotas/85c3db10b0ed49388af6dd2adc50510e/",
       "uuid": "85c3db10b0ed49388af6dd2adc50510e",
       "name": "security_group_rule_count",
       "limit": 100.0,
       "usage": 11.0
     },
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/c898ceed25e14a208fbbf4e37d9aa417/",
+      "url": "/api/quotas/c898ceed25e14a208fbbf4e37d9aa417/",
       "uuid": "c898ceed25e14a208fbbf4e37d9aa417",
       "name": "floating_ip_count",
       "limit": 50.0,
       "usage": 3.0
     },
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/66b2396e740d4789912708f7f6cb1a15/",
+      "url": "/api/quotas/66b2396e740d4789912708f7f6cb1a15/",
       "uuid": "66b2396e740d4789912708f7f6cb1a15",
       "name": "port_count",
       "limit": 500.0,
       "usage": 10.0
     },
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/da2a82983779477ebf781405de33fc9f/",
+      "url": "/api/quotas/da2a82983779477ebf781405de33fc9f/",
       "uuid": "da2a82983779477ebf781405de33fc9f",
       "name": "volumes_size",
       "limit": -1.0,
       "usage": 6111232.0
     },
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/08b0809e275147b48e1b0f4522b55a9d/",
+      "url": "/api/quotas/08b0809e275147b48e1b0f4522b55a9d/",
       "uuid": "08b0809e275147b48e1b0f4522b55a9d",
       "name": "vcpu",
       "limit": 64.0,
       "usage": 40.0
     },
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/851d9b3c214841c6a8e17c19092e55a0/",
+      "url": "/api/quotas/851d9b3c214841c6a8e17c19092e55a0/",
       "uuid": "851d9b3c214841c6a8e17c19092e55a0",
       "name": "volumes",
       "limit": 50.0,
       "usage": 7.0
     },
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/c700078335fc4597b2e44ad05d94ece1/",
+      "url": "/api/quotas/c700078335fc4597b2e44ad05d94ece1/",
       "uuid": "c700078335fc4597b2e44ad05d94ece1",
       "name": "instances",
       "limit": 30.0,
       "usage": 3.0
     },
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/8cf6a8ca51bb499b8a17fecda8b471b0/",
+      "url": "/api/quotas/8cf6a8ca51bb499b8a17fecda8b471b0/",
       "uuid": "8cf6a8ca51bb499b8a17fecda8b471b0",
       "name": "ram",
       "limit": 163840.0,
       "usage": 81920.0
     },
     {
-      "url": "https://rest-test.nodeconductor.com/api/quotas/a6e57edeb98046959818894bfb3fed08/",
+      "url": "/api/quotas/a6e57edeb98046959818894bfb3fed08/",
       "uuid": "a6e57edeb98046959818894bfb3fed08",
       "name": "storage",
       "limit": 6144000.0,

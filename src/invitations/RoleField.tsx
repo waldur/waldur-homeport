@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { formatRole, getUUID } from '@waldur/core/utils';
+import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { formatRole } from '@waldur/permissions/utils';
 
 export const RoleField: FunctionComponent<{ invitation }> = ({
   invitation,

@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { PermissionEnum, hasPermission } from '@waldur/core/permissions';
 import { translate, formatJsxTemplate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';

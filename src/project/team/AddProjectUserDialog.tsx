@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { ProjectPermissionsService } from '@waldur/customer/services/ProjectPermissionsService';
 import { usersAutocomplete } from '@waldur/customer/team/api';
 import { OrganizationProjectSelectField } from '@waldur/customer/team/OrganizationProjectSelectField';
-import { getRoles } from '@waldur/customer/team/utils';
 import { FormContainer, SelectField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { DateTimeField } from '@waldur/form/DateTimeField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { addProjectUser } from '@waldur/permissions/api';
+import { getProjectRoles } from '@waldur/permissions/utils';
 import { UserListOptionInline } from '@waldur/project/team/UserGroup';
 import { showErrorResponse } from '@waldur/store/notify';
 import { getProject } from '@waldur/workspace/selectors';
@@ -51,9 +51,9 @@ export const AddProjectUserDialog = reduxForm<
   const saveUser = async (formData) => {
     if (level === 'organization' && !formData.project) return;
     try {
-      await ProjectPermissionsService.create({
-        user: formData.user.url,
-        project: formData.project ? formData.project.url : currentProject.url,
+      await addProjectUser({
+        user: formData.user.uuid,
+        project: formData.project ? formData.project.uuid : currentProject.uuid,
         expiration_time: formData.expiration_time,
         role: formData.role.value,
       });
@@ -78,7 +78,7 @@ export const AddProjectUserDialog = reduxForm<
             loadOptions={(query, prevOptions, page) =>
               usersAutocomplete({ full_name: query }, prevOptions, page)
             }
-            getOptionValue={(option) => option.full_name || option.username}
+            getOptionValue={(option) => option.uuid}
             getOptionLabel={getOptionLabel}
             components={{ Option: UserListOptionInline }}
             required={true}
@@ -87,7 +87,7 @@ export const AddProjectUserDialog = reduxForm<
           <SelectField
             name="role"
             label={translate('Role')}
-            options={getRoles()}
+            options={getProjectRoles()}
             required={true}
           />
           <DateTimeField

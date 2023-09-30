@@ -1,9 +1,10 @@
 import { Card, Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { PermissionEnum, hasPermission } from '@waldur/core/permissions';
 import { translate } from '@waldur/i18n';
 import { hidePlanAddButton } from '@waldur/marketplace/common/registry';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { AddPlanButton } from './AddPlanButton';
