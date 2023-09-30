@@ -23,6 +23,7 @@ const UserPluginOptionsForm = lazyComponent(
 );
 
 import { OFFERING_TYPE_BOOKING } from './constants';
+import { deployOfferingSteps } from './deploy/steps';
 
 /* Since back-end doesn't allow slots in the past,
  * this function detects slots that are in the past and
@@ -68,8 +69,9 @@ registerOfferingType({
   get label() {
     return translate('Booking');
   },
+  formSteps: deployOfferingSteps,
   checkoutSummaryComponent: BookingCheckoutSummary,
-  component: OfferingConfigurationForm,
+  component: OfferingConfigurationForm, // We can remove this line later. formSteps replaced
   pluginOptionsForm: UserPluginOptionsForm,
   detailsComponent: BookingDetails,
   showOptions: true,

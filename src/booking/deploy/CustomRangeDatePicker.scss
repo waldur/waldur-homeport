@@ -1,0 +1,75 @@
+.flatpickr-range-custom {
+  display: flex;
+  border-top: 2px solid var(--bs-border-color);
+  border-bottom: 2px solid var(--bs-border-color);
+
+  .flatpickr-calendar {
+    box-shadow: unset;
+    border-radius: 0;
+
+    .flatpickr-month {
+      border-radius: 0;
+    }
+  }
+
+  .flatpickr-range-date-1,
+  .flatpickr-range-date-2 {
+    position: relative;
+
+    // Hide the default input
+    .flatpickr-input {
+      display: none;
+    }
+
+    .flatpickr-range-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+
+      label {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .flatpickr-range-time {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 360px;
+    overflow: hidden;
+    padding-left: 0.75rem;
+
+    &-1,
+    &-2 {
+      flex-basis: 50%;
+      flex-grow: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h6 {
+          line-height: 3;
+          margin: 0;
+        }
+      }
+    }
+
+    .list-group {
+      flex-grow: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      .list-group-item {
+        border: unset;
+        border-radius: unset;
+      }
+    }
+  }
+}

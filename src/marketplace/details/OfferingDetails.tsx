@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
+import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
@@ -40,6 +41,7 @@ export const OfferingDetails: FunctionComponent<OfferingDetailsProps> = (
     SHARED_INSTANCE_TYPE,
     OFFERING_TYPE_CUSTOM_SCRIPTS,
     BASIC_OFFERING_TYPE,
+    OFFERING_TYPE_BOOKING,
     SLURM_PLUGIN,
     SLURM_REMOTE_PLUGIN,
     VOLUME_TYPE,

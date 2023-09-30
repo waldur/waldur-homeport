@@ -23,7 +23,7 @@ export const WeekdaysGroup: FunctionComponent<WeekdaysGroupProps> = ({
     valueClassName={'col-sm-8'}
   >
     <div className="weekDays-selector">
-      {range(7).map((day, index) => (
+      {[6].concat(range(6)).map((day, index) => (
         <Tip
           key={index}
           label={Info.weekdays('long')[day]}

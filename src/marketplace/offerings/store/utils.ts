@@ -87,7 +87,7 @@ export const formatComponent = (component) => ({
   uuid: component.uuid,
 });
 
-export const formatSchedules = (schedules) =>
+export const formatSchedules = (schedules: any[]) =>
   schedules.map(
     pick(['start', 'end', 'title', 'allDay', 'extendedProps', 'id']),
   );

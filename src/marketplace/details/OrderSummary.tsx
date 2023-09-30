@@ -96,11 +96,19 @@ const PureOrderSummary: FunctionComponent<OrderSummaryProps> = (props) => (
           />
         </Tip>
       ) : (
-        <ShoppingCartUpdateButtonContainer
-          item={formatOrderItemForUpdate(props)}
-          flavor="primary"
-          disabled={!props.formValid}
-        />
+        <Tip
+          label={<FieldError error={props.errors?.attributes} />}
+          id="offering-button-errors"
+          autoWidth
+          className="w-100"
+        >
+          <ShoppingCartUpdateButtonContainer
+            item={formatOrderItemForUpdate(props)}
+            flavor="primary"
+            disabled={!props.formValid}
+            className="w-100"
+          />
+        </Tip>
       )}
     </div>
   </>

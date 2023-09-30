@@ -1,6 +1,6 @@
 export const CheckoutPricingRow = ({ label, value }) => (
-  <div className="d-flex justify-content-between">
-    <p>{label}</p>
-    <p className="text-end">{value || '-'}</p>
+  <div className="d-flex justify-content-between mb-3">
+    <div>{label}</div>
+    <div className="text-end">{value || '-'}</div>
   </div>
 );

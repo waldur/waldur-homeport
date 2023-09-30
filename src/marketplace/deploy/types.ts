@@ -21,4 +21,5 @@ export interface FormStepProps {
 
 export interface CheckoutSummaryProps {
   offering: Offering;
+  updateMode?: boolean;
 }

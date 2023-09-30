@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
+import { CheckoutPricingRow } from '@waldur/marketplace/deploy/CheckoutPricingRow';
 import { OfferingDetailsProps } from '@waldur/marketplace/details/OfferingDetails';
 import { OfferingPeriodsRenderer } from '@waldur/marketplace/details/OfferingPeriodsRenderer';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
@@ -11,20 +12,18 @@ export const BookingExtraComponent: FunctionComponent<any> = (props) => (
     props.formData.attributes &&
     Array.isArray(props.formData.attributes.schedules) &&
     props.formData.attributes.schedules.length ? (
-      <tr>
-        <td>
-          {props.formData.attributes.schedules.length === 1 ? (
-            <strong>{translate('Period')}</strong>
-          ) : (
-            <strong>{translate('Periods')}</strong>
-          )}
-        </td>
-        <td>
+      <CheckoutPricingRow
+        label={
+          props.formData.attributes.schedules.length === 1
+            ? translate('Period')
+            : translate('Periods')
+        }
+        value={
           <OfferingPeriodsRenderer
             schedules={props.formData.attributes.schedules}
           />
-        </td>
-      </tr>
+        }
+      />
     ) : null}
   </>
 );

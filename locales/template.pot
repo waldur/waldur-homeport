@@ -426,6 +426,10 @@ msgstr ""
 msgid "Add rule"
 msgstr ""
 
+#: src/booking/deploy/FormPeriodsStep.tsx
+msgid "Add time period"
+msgstr ""
+
 #: src/rancher/template/NamespaceField.tsx
 msgid "Add to a new namespace"
 msgstr ""
@@ -3106,6 +3110,7 @@ msgstr ""
 msgid "End"
 msgstr ""
 
+#: src/booking/deploy/CustomRangeDatePicker.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
@@ -3132,6 +3137,7 @@ msgstr ""
 msgid "End date:"
 msgstr ""
 
+#: src/booking/deploy/CustomRangeDatePicker.tsx
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "End time"
 msgstr ""
@@ -3516,6 +3522,7 @@ msgstr ""
 msgid "Filtered by"
 msgstr ""
 
+#: src/booking/deploy/steps.ts
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/openstack/deploy/steps.ts
 #: src/openstack/openstack-instance/deploy/steps.ts
@@ -3684,6 +3691,10 @@ msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsTable2.tsx
 msgid "From"
+msgstr ""
+
+#: src/booking/deploy/CustomRangeDatePicker.tsx
+msgid "From date"
 msgstr ""
 
 #: src/administration/roles/PermissionField.tsx
@@ -6813,7 +6824,13 @@ msgstr ""
 msgid "Period"
 msgstr ""
 
+#: src/booking/deploy/FormPeriodsStep.tsx
+msgid "Period {i}"
+msgstr ""
+
 #: src/booking/BookingCheckoutSummary.tsx
+#: src/booking/deploy/FormPeriodsStep.tsx
+#: src/booking/deploy/steps.ts
 msgid "Periods"
 msgstr ""
 
@@ -6882,6 +6899,7 @@ msgstr ""
 msgid "Phone: {phone_number}"
 msgstr ""
 
+#: src/booking/deploy/steps.ts
 #: src/marketplace/deploy/steps/FormPlanStep.tsx
 #: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
@@ -7338,6 +7356,7 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/components/utils.tsx
+#: src/booking/deploy/steps.ts
 #: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/customer/team/OrganizationProjectSelectField.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -9864,6 +9883,7 @@ msgstr ""
 msgid "Start day of accounting"
 msgstr ""
 
+#: src/booking/deploy/CustomRangeDatePicker.tsx
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "Start time"
 msgstr ""
@@ -10794,6 +10814,10 @@ msgstr ""
 #: src/marketplace/referral/ReferralsList.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Title"
+msgstr ""
+
+#: src/booking/deploy/FormPeriodsStep.tsx
+msgid "To"
 msgstr ""
 
 #: src/invitations/utils.ts
