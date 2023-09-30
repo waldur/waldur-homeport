@@ -1,24 +1,20 @@
-import Axios from 'axios';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { deleteOfferingPermission } from '@waldur/permissions/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
-import { fetchListStart } from '@waldur/table/actions';
-import { getCustomer } from '@waldur/workspace/selectors';
-
-import { OFFERING_PERMISSIONS_LIST_ID } from './constants';
 
 interface OfferingPermissionRemoveButtonProps {
   permission: any;
+  fetch;
 }
 
 export const OfferingPermissionRemoveButton: React.FC<OfferingPermissionRemoveButtonProps> =
-  ({ permission }) => {
+  (props) => {
     const dispatch = useDispatch();
-    const customer = useSelector(getCustomer);
     const callback = async () => {
       try {
         await waitForConfirmation(
@@ -30,13 +26,13 @@ export const OfferingPermissionRemoveButton: React.FC<OfferingPermissionRemoveBu
         return;
       }
       try {
-        await Axios.delete(permission.url);
+        await deleteOfferingPermission({
+          offering: props.permission.offering_uuid,
+          user: props.permission.user_uuid,
+          role: props.permission.role_name,
+        });
         dispatch(showSuccess(translate('Permission has been revoked.')));
-        dispatch(
-          fetchListStart(OFFERING_PERMISSIONS_LIST_ID, {
-            customer_uuid: customer.uuid,
-          }),
-        );
+        await props.fetch();
       } catch (e) {
         dispatch(
           showErrorResponse(e, translate('Unable to revoke permission.')),

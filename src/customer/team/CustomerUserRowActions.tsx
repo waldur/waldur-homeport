@@ -2,12 +2,12 @@ import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { UserDetailsButton } from '@waldur/user/UserDetailsButton';
 import {
   getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
 } from '@waldur/workspace/selectors';
 
-import { UserDetailsButton } from './UserDetailsButton';
 import { UserEditButton } from './UserEditButton';
 import { UserRemoveButton } from './UserRemoveButton';
 
@@ -23,7 +23,7 @@ export const CustomerUserRowActions: FunctionComponent<CustomerUserRowActionsPro
     return isOwnerOrStaff || user.is_support ? (
       <ButtonGroup>
         {isOwnerOrStaff || user.is_support ? (
-          <UserDetailsButton user={row} />
+          <UserDetailsButton userId={row.uuid} />
         ) : null}
         {isOwnerOrStaff ? <UserEditButton editUser={row} /> : null}
         {isOwnerOrStaff ? (

@@ -65,6 +65,48 @@
       "customer_name": "Allen-Rodriguez"
     }
   ],
+  "permissions": [
+    {
+      "role_name": "CUSTOMER.OWNER",
+      "scope_type": "customer",
+      "customer_uuid": "895e38d197e748459189f19285119edf",
+      "customer_name": "Allen-Rodriguez",
+      "scope_uuid": "895e38d197e748459189f19285119edf",
+      "scope_name": "Allen-Rodriguez"
+    },
+    {
+      "role_name": "PROJECT.MANAGER",
+      "scope_type": "project",
+      "scope_uuid": "5f05090ac8f94ad6a4bd2f5b750d64ae",
+      "scope_name": "demo project",
+      "customer_name": "Allen-Rodriguez",
+      "customer_uuid": "895e38d197e748459189f19285119edf"
+    },
+    {
+      "role_name": "PROJECT.ADMIN",
+      "scope_type": "project",
+      "scope_uuid": "cf36932ef7c947fd8e8056e51564b0fe",
+      "scope_name": "Up-sized maximized approach",
+      "customer_name": "Lopez, Jensen and Ortiz",
+      "customer_uuid": "cf36932ef7c947fd8e8056e51564b0fe"
+    },
+    {
+      "role_name": "PROJECT.ADMIN",
+      "scope_type": "project",
+      "scope_uuid": "64b13eac19d44f8aa3a573582df3a4b5",
+      "scope_name": "Self-enabling fresh-thinking secured line",
+      "customer_name": "Bright PLC",
+      "customer_uuid": "64b13eac19d44f8aa3a573582df3a4b5"
+    },
+    {
+      "role_name": "PROJECT.MANAGER",
+      "scope_type": "project",
+      "scope_uuid": "e48410f7608f4185a77902a1d0e8d75e",
+      "scope_name": "Vision-oriented bifurcated capacity",
+      "customer_name": "Allen-Rodriguez",
+      "customer_uuid": "895e38d197e748459189f19285119edf"
+    }
+  ],
   "requested_email": null,
   "affiliations": [],
   "first_name": "Admin",

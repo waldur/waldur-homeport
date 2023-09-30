@@ -1,12 +1,13 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n/translate';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { editRole } from './api';
+import { editRole, getRoles } from './api';
 
 const RoleEditDialog = lazyComponent(
   () => import('./RoleEditDialog'),
@@ -22,11 +23,11 @@ export const RoleEditButton = ({ row, refetch }) => {
           resolve: {
             row,
           },
-          onSubmit: (formData) => {
-            return editRole(row.uuid, formData).then(() => {
-              dispatch(closeModalDialog());
-              refetch();
-            });
+          onSubmit: async (formData) => {
+            await editRole(row.uuid, formData);
+            ENV.roles = await getRoles();
+            dispatch(closeModalDialog());
+            refetch();
           },
           onCancel: () => {
             dispatch(closeModalDialog());

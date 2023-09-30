@@ -4,20 +4,19 @@ import { useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { openUserPopover } from '@waldur/user/actions';
-import { User } from '@waldur/workspace/types';
 
 interface UserDetailsButtonProps {
-  user: User;
+  userId: string;
 }
 
 export const UserDetailsButton: React.FC<UserDetailsButtonProps> = ({
-  user,
+  userId,
 }) => {
   const dispatch = useDispatch();
   const callback = () =>
     dispatch(
       openUserPopover({
-        user_uuid: user.uuid,
+        user_uuid: userId,
       }),
     );
   return (

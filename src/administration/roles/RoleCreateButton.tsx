@@ -1,12 +1,13 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n/translate';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { createRole } from './api';
+import { createRole, getRoles } from './api';
 
 const RoleCreateDialog = lazyComponent(
   () => import('./RoleCreateDialog'),
@@ -19,11 +20,11 @@ export const RoleCreateButton = ({ refetch }) => {
     () =>
       dispatch(
         openModalDialog(RoleCreateDialog, {
-          onSubmit: (formData) => {
-            return createRole(formData).then(() => {
-              dispatch(closeModalDialog());
-              refetch();
-            });
+          onSubmit: async (formData) => {
+            await createRole(formData);
+            ENV.roles = await getRoles();
+            dispatch(closeModalDialog());
+            refetch();
           },
           onCancel: () => {
             dispatch(closeModalDialog());

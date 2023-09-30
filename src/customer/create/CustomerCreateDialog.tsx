@@ -5,15 +5,14 @@ import { reset, SubmissionError } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
 import { sendForm } from '@waldur/core/api';
-import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
+import { addCustomerUser } from '@waldur/permissions/api';
+import { RoleEnum } from '@waldur/permissions/enums';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { getCurrentUser } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
-
-import { CustomerPermissionsService } from '../services/CustomerPermissionsService';
 
 import * as constants from './constants';
 import { CustomerCreateForm } from './CustomerCreateForm';
@@ -70,11 +69,10 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
         );
         const customer = response.data;
         if (resolve.role === constants.ROLES.provider) {
-          await CustomerPermissionsService.create({
-            role: CUSTOMER_OWNER_ROLE,
-            customer: customer.url,
-            user: user.url,
-            enable_notifications: false,
+          await addCustomerUser({
+            customer: customer.uuid,
+            role: RoleEnum.CUSTOMER_OWNER,
+            user: user.uuid,
           });
         }
         dispatch(showSuccess(translate('Organization has been created.')));

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
+import { getCustomerPermission } from '@waldur/permissions/utils';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { formatUserStatus } from '@waldur/user/support/utils';
 import { getUser } from '@waldur/workspace/selectors';
@@ -13,6 +13,7 @@ interface OrganizationSummaryProps {
 
 export const OrganizationSummary = ({ customer }: OrganizationSummaryProps) => {
   const user = useSelector(getUser);
+  const permission = getCustomerPermission(user, customer);
 
   const organizationName =
     customer?.name ||
@@ -41,11 +42,7 @@ export const OrganizationSummary = ({ customer }: OrganizationSummaryProps) => {
         <div className="text-white fs-8">
           {translate('Your role:')}{' '}
           <span className="text-success">
-            {customer.role == 'owner'
-              ? translate(ENV.roles.owner)
-              : customer.role == 'service_manager'
-              ? translate(ENV.roles.service_manager)
-              : formatUserStatus(user)}
+            {permission ? permission.role_description : formatUserStatus(user)}
           </span>
         </div>
       )}

@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 
@@ -10,43 +10,34 @@ import { DateTimeField } from '@waldur/form/DateTimeField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { updateOfferingPermission } from '@waldur/permissions/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { fetchListStart } from '@waldur/table/actions';
-import { getCustomer } from '@waldur/workspace/selectors';
 
-import { updatePermission } from '../../customer/team/api';
-
-import {
-  OFFERING_PERMISSIONS_LIST_ID,
-  UPDATE_OFFERING_PERMISSION_EXPIRATION_TIME_FORM_ID,
-} from './constants';
+import { UPDATE_OFFERING_PERMISSION_EXPIRATION_TIME_FORM_ID } from './constants';
 
 const PureUpdateOfferingPermissionExpirationTimeDialog = (props) => {
   const dispatch = useDispatch();
-  const customer = useSelector(getCustomer);
   const update = useCallback(
     async (formData) => {
       try {
-        await updatePermission(
-          props.resolve.permission.pk,
-          formData.expiration_time,
-        );
+        await updateOfferingPermission({
+          offering: props.resolve.permission.offering_uuid,
+          user: props.resolve.permission.user_uuid,
+          role: props.resolve.permission.role_name,
+          expiration_time: formData.expiration_time,
+        });
         dispatch(
           showSuccess(translate('Permission has been updated successfully.')),
         );
         dispatch(closeModalDialog());
-        dispatch(
-          fetchListStart(OFFERING_PERMISSIONS_LIST_ID, {
-            customer_uuid: customer.uuid,
-          }),
-        );
+        await props.resolve.fetch();
       } catch (error) {
         dispatch(
           showErrorResponse(error, translate('Unable to update permission.')),
         );
       }
     },
-    [dispatch, customer],
+    [dispatch],
   );
   return (
     <form onSubmit={props.handleSubmit(update)}>

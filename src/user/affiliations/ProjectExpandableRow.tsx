@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
-import { getList } from '@waldur/core/api';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -16,20 +15,15 @@ import {
 } from '@waldur/project/utils';
 import { Field } from '@waldur/resource/summary';
 import { getUser } from '@waldur/workspace/selectors';
-import { Project, User } from '@waldur/workspace/types';
+import { Project } from '@waldur/workspace/types';
 
 import { PermissionDetails } from './PermissionDetails';
 
-async function loadData(project: Project, user: User) {
+async function loadData(project: Project) {
   const categories = await getCategories({
     params: { field: ['uuid', 'title'], page_size: 100 },
   });
   const oecdCodes = await loadOecdCodes();
-  const permissions = await getList('/project-permissions/', {
-    user: user.uuid,
-    project: project.uuid,
-  });
-
   const oecdCode = oecdCodes.find(
     (item) => item.value === project.oecd_fos_2007_code,
   );
@@ -40,7 +34,6 @@ async function loadData(project: Project, user: User) {
     project,
     oecdCode,
     resourceCounters: combineProjectCounterRows(counterRows),
-    permissions,
   };
 }
 
@@ -48,10 +41,7 @@ export const ProjectExpandableRow: React.FC<{
   row: Project;
 }> = ({ row }) => {
   const user = useSelector(getUser);
-  const { loading, error, value } = useAsync(
-    () => loadData(row, user),
-    [row, user],
-  );
+  const { loading, error, value } = useAsync(() => loadData(row), [row, user]);
   if (loading) {
     return <LoadingSpinner />;
   } else if (error) {
@@ -59,9 +49,14 @@ export const ProjectExpandableRow: React.FC<{
   } else {
     return (
       <Container>
-        {value.permissions.map((permission, index) => (
-          <PermissionDetails key={index} permission={permission} />
-        ))}
+        {user.permissions
+          .filter(
+            (perm) =>
+              perm.scope_type === 'project' && perm.scope_uuid === row.uuid,
+          )
+          .map((permission, index) => (
+            <PermissionDetails key={index} permission={permission} />
+          ))}
         {value.resourceCounters.map((row, index) => (
           <Field key={index} label={row.label} value={row.value} />
         ))}

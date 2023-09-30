@@ -19,6 +19,7 @@
     "agreement_date": "2019-08-14T12:24:08.443489Z",
     "preferred_language": "et",
     "competence": "",
+    "permissions": [],
     "customer_permissions": [
       {
         "url": "/api/customer-permissions/242/",
@@ -73,6 +74,7 @@
     "agreement_date": "2020-03-04T12:27:59.535534Z",
     "preferred_language": "et",
     "competence": "",
+    "permissions": [],
     "customer_permissions": [],
     "project_permissions": [],
     "requested_email": null,
@@ -100,6 +102,7 @@
     "agreement_date": "2020-12-03T10:09:18.922685Z",
     "preferred_language": "",
     "competence": "",
+    "permissions": [],
     "customer_permissions": [
       {
         "url": "/api/customer-permissions/241/",
@@ -146,6 +149,7 @@
     "agreement_date": "2021-02-16T09:50:52.871726Z",
     "preferred_language": "",
     "competence": "",
+    "permissions": [],
     "customer_permissions": [],
     "project_permissions": [
       {
@@ -182,6 +186,7 @@
     "agreement_date": "2019-03-01T12:08:13.353039Z",
     "preferred_language": "et",
     "competence": "",
+    "permissions": [],
     "customer_permissions": [],
     "project_permissions": [],
     "requested_email": null,
@@ -209,6 +214,7 @@
     "agreement_date": "2017-10-31T11:45:33.594178Z",
     "preferred_language": "et",
     "competence": "",
+    "permissions": [],
     "customer_permissions": [
       {
         "url": "/api/customer-permissions/57/",
@@ -246,6 +252,7 @@
     "agreement_date": "2017-10-05T14:30:51.307194Z",
     "preferred_language": "",
     "competence": "",
+    "permissions": [],
     "customer_permissions": [],
     "project_permissions": [],
     "requested_email": null,
@@ -273,6 +280,7 @@
     "agreement_date": "2019-11-14T16:32:39.750697Z",
     "preferred_language": "",
     "competence": "",
+    "permissions": [],
     "customer_permissions": [],
     "project_permissions": [],
     "requested_email": null,
@@ -300,6 +308,7 @@
     "agreement_date": "2021-02-16T09:52:44.172147Z",
     "preferred_language": "et",
     "competence": "",
+    "permissions": [],
     "customer_permissions": [],
     "project_permissions": [
       {
@@ -336,6 +345,7 @@
     "agreement_date": "2018-05-03T12:17:51.502396Z",
     "preferred_language": "et",
     "competence": "",
+    "permissions": [],
     "customer_permissions": [],
     "project_permissions": [],
     "requested_email": null,

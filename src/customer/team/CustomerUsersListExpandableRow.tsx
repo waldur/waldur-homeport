@@ -1,14 +1,13 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import { OfferingNamesManagedByUser } from '@waldur/customer/team/OfferingNamesManagedByUser';
 import { ProjectRolesList } from '@waldur/customer/team/ProjectRolesList';
-import { getRoles } from '@waldur/customer/team/utils';
 import { translate } from '@waldur/i18n';
+import { getProjectRoles } from '@waldur/permissions/utils';
 
 export const CustomerUsersListExpandableRow: FunctionComponent<any> = ({
   row,
 }) => {
-  const roles = useMemo(getRoles, []);
+  const roles = useMemo(getProjectRoles, []);
   return (
     <>
       {roles.map((role) => (
@@ -17,12 +16,6 @@ export const CustomerUsersListExpandableRow: FunctionComponent<any> = ({
           <ProjectRolesList roleName={role.value} row={row} />
         </p>
       ))}
-      {row.is_service_manager && (
-        <p>
-          <b>{translate('Service manager of:')}</b>{' '}
-          <OfferingNamesManagedByUser userUuid={row.uuid} />
-        </p>
-      )}
     </>
   );
 };

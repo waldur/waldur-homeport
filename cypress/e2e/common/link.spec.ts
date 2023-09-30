@@ -44,7 +44,7 @@ describe('Expired token redirect', () => {
         '/api/project-permissions/?user=3a836bc76e1b40349ec1a0d8220f374f&project=df4193e2bee24a4c8e339474d74c5f8c',
         [],
       )
-      .intercept('GET', '/api/roles/', [])
+      .intercept('GET', '/api/roles/', {fixture: 'roles.json'})
       .intercept('GET', '/api/events/', [])
       .intercept(
         'GET',
@@ -71,7 +71,7 @@ describe('Expired token redirect', () => {
   it('should redirect to attempted url with params after login even if 401 error is not raised during transition', () => {
     cy
       .intercept('GET', '/api/configuration/', {fixture:'configuration.json'})
-      .intercept('GET', '/api/roles/', [])
+      .intercept('GET', '/api/roles/', {fixture: 'roles.json'})
       .intercept('GET', '/api/users/me/', {fixture:'users/alice.json'})
       .intercept('POST', '/api-auth/password/', { token: 'valid' })
       .intercept('GET', '/api/events/**', [] )

@@ -31,10 +31,10 @@ export const UserDashboard: React.FC = () => {
       <UserDashboardChart user={user} hasChecklists={asyncState.value > 0} />
       <Row>
         <Col md={12} lg={6}>
-          <CustomerPermissions title={translate('Organizations')} />
+          <CustomerPermissions />
         </Col>
         <Col md={12} lg={6}>
-          <ProjectPermissions title={translate('Projects')} />
+          <ProjectPermissions />
         </Col>
       </Row>
     </>

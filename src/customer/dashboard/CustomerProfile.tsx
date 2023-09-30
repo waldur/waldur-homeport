@@ -1,42 +1,19 @@
-import { useRouter } from '@uirouter/react';
-import React, { useMemo } from 'react';
-import { Card, Col, Form, Row, Stack } from 'react-bootstrap';
+import { useMemo } from 'react';
+import { Card, Col, Row, Stack } from 'react-bootstrap';
 
 import 'world-flags-sprite/stylesheets/flags32.css';
 
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { translate } from '@waldur/i18n';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { ServiceProviderIcon } from '@waldur/navigation/workspace/ServiceProviderIcon';
-import { Customer, User } from '@waldur/workspace/types';
+import { Customer } from '@waldur/workspace/types';
 
 import { CustomerActions } from './CustomerActions';
-import { SymbolsGroup } from './SymbolsGroup';
+import { CustomerUsersBadge } from './CustomerUsersBadge';
 
 export const CustomerProfile = ({ customer }: { customer: Customer }) => {
-  const router = useRouter();
-  const goToUsers = () => router.stateService.go('organization-users');
   const abbreviation = useMemo(() => getItemAbbreviation(customer), [customer]);
-
-  const owners = React.useMemo(
-    () =>
-      customer.owners.map((owner: User) => ({
-        email: owner.email,
-        full_name: owner.full_name,
-        image: owner.image,
-      })),
-    [customer],
-  );
-  const managers = React.useMemo(
-    () =>
-      customer.service_managers.map((member: User) => ({
-        email: member.email,
-        full_name: member.full_name,
-        image: member.image,
-      })),
-    [customer],
-  );
 
   return (
     <Card className="mb-6">
@@ -89,32 +66,7 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
             </Row>
             <Row>
               <Col xs={12}>
-                <div className="d-flex justify-content-start align-items-xl-center flex-xl-row flex-column gap-xl-6">
-                  {owners && owners.length > 0 && (
-                    <Form.Group as={Row} className="mb-1">
-                      <Form.Label column xs="auto">
-                        {translate('Owners:')}
-                      </Form.Label>
-                      <Col>
-                        <SymbolsGroup
-                          items={owners}
-                          max={6}
-                          onClick={goToUsers}
-                        />
-                      </Col>
-                    </Form.Group>
-                  )}
-                  {managers && managers.length > 0 && (
-                    <Form.Group as={Row} className="mb-1">
-                      <Form.Label column xs="auto">
-                        {translate('Managers:')}
-                      </Form.Label>
-                      <Col>
-                        <SymbolsGroup items={managers} onClick={goToUsers} />
-                      </Col>
-                    </Form.Group>
-                  )}
-                </div>
+                <CustomerUsersBadge />
               </Col>
             </Row>
           </Col>

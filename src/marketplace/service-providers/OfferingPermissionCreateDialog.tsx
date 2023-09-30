@@ -11,33 +11,32 @@ import { translate } from '@waldur/i18n';
 import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { addOfferingPermission } from '@waldur/permissions/api';
+import { RoleEnum } from '@waldur/permissions/enums';
 import { showErrorResponse } from '@waldur/store/notify';
-import { fetchListStart } from '@waldur/table/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { grantPermission, usersAutocomplete } from '../../customer/team/api';
+import { usersAutocomplete } from '../../customer/team/api';
 
-import { OFFERING_PERMISSIONS_LIST_ID } from './constants';
-
-export const OfferingPermissionCreateDialog = reduxForm({
+export const OfferingPermissionCreateDialog = reduxForm<
+  {},
+  { resolve: { fetch } }
+>({
   form: 'OfferingPermissionCreateDialog',
-})(({ submitting, handleSubmit }) => {
+})(({ submitting, handleSubmit, resolve: { fetch } }) => {
   const dispatch = useDispatch();
   const customer = useSelector(getCustomer);
   const saveUser = useCallback(
     async (formData) => {
       try {
-        await grantPermission({
-          offering: formData.offering.url,
-          user: formData.user.url,
+        await addOfferingPermission({
+          role: RoleEnum.OFFERING_MANAGER,
+          offering: formData.offering.uuid,
+          user: formData.user.uuid,
           expiration_time: formData.expiration_time,
         });
         dispatch(closeModalDialog());
-        dispatch(
-          fetchListStart(OFFERING_PERMISSIONS_LIST_ID, {
-            customer_uuid: customer.uuid,
-          }),
-        );
+        await fetch();
       } catch (error) {
         dispatch(
           showErrorResponse(error, translate('Unable to grant permission.')),
@@ -66,7 +65,7 @@ export const OfferingPermissionCreateDialog = reduxForm({
           <AsyncSelectField
             name="offering"
             label={translate('Offering')}
-            placeholder={translate('Select offerings...')}
+            placeholder={translate('Select offering...')}
             loadOptions={(query, prevOptions, page) =>
               offeringsAutocomplete(
                 { name: query, shared: true, customer: customer.url },

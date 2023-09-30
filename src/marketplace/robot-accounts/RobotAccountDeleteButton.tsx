@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
 
-import { PermissionEnum, hasPermission } from '@waldur/core/permissions';
 import { translate } from '@waldur/i18n';
 import { deleteRobotAccount } from '@waldur/marketplace/common/api';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ResourceDeleteButton } from '@waldur/resource/actions/ResourceDeleteButton';
 import { getUser } from '@waldur/workspace/selectors';
 

@@ -1,11 +1,12 @@
-import Axios from 'axios';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { deleteCustomerUser, deleteProjectUser } from '@waldur/permissions/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 interface UserRemoveButtonProps {
   user: any;
@@ -16,6 +17,7 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   user,
   refetch,
 }) => {
+  const customer = useSelector(getCustomer);
   const dispatch = useDispatch();
   const callback = async () => {
     try {
@@ -31,10 +33,20 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
     }
     try {
       await Promise.all(
-        user.projects.map((project) => Axios.delete(project.permission)),
+        user.projects.map((project) =>
+          deleteProjectUser({
+            project: project.uuid,
+            user: user.uuid,
+            role: project.role_name,
+          }),
+        ),
       );
       if (user.permission) {
-        await Axios.delete(user.permission);
+        await deleteCustomerUser({
+          customer: customer.uuid,
+          user: user.uuid,
+          role: user.role_name,
+        });
       }
       refetch();
       dispatch(showSuccess(translate('Team member has been removed.')));

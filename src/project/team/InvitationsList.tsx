@@ -2,12 +2,10 @@ import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect } from 'react';
 import Gravatar from 'react-gravatar';
 import { connect, useSelector } from 'react-redux';
-import { useAsync } from 'react-use';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDate } from '@waldur/core/dateUtils';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { InvitationCreateButton } from '@waldur/invitations/actions/create/InvitationCreateButton';
 import { InvitationCancelButton } from '@waldur/invitations/actions/InvitationCancelButton';
@@ -15,6 +13,7 @@ import { InvitationPolicyService } from '@waldur/invitations/actions/InvitationP
 import { InvitationSendButton } from '@waldur/invitations/actions/InvitationSendButton';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { InvitationsFilter } from '@waldur/invitations/InvitationsFilter';
+import { RoleEnum } from '@waldur/permissions/enums';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -25,7 +24,6 @@ import {
   isOwnerOrStaff as isOwnerOrStaffSelector,
 } from '@waldur/workspace/selectors';
 
-import { fetchProjectManagers } from './api';
 import { RoleField } from './RoleField';
 
 const TableComponent: FunctionComponent<any> = (props) => {
@@ -125,19 +123,14 @@ export const InvitationsList: FunctionComponent = () => {
       router.stateService.target('errorPage.notFound');
     }
   }, [user, project, customer, router]);
-  const { loading, error, value } = useAsync(
-    async () => await fetchProjectManagers(user, project),
-    [user, project],
-  );
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-  const isProjectManager = value && value.length > 0;
+  const isProjectManager = user.permissions?.find(
+    (permission) =>
+      permission.scope_type === 'project' &&
+      permission.scope_uuid === project.uuid &&
+      permission.role_name === RoleEnum.PROJECT_MANAGER,
+  );
 
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-  if (error) {
-    return <>{translate('Unable to load data')}</>;
-  }
   return (
     <InvitationsListComponent
       filters={<InvitationsFilter />}

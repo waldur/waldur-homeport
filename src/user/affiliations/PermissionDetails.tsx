@@ -1,10 +1,15 @@
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { GenericPermission } from '@waldur/permissions/types';
 import { Field } from '@waldur/resource/summary';
 
-export const PermissionDetails = ({ permission }) => (
+export const PermissionDetails = ({
+  permission,
+}: {
+  permission: GenericPermission;
+}) => (
   <>
-    <Field label={translate('Role')} value={permission.role} />
+    <Field label={translate('Role')} value={permission.role_description} />
     <Field
       label={translate('Permission granted by')}
       value={permission.created_by_full_name || permission.created_by_username}

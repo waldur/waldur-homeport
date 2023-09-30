@@ -6,6 +6,7 @@
     "full_name": "John Doe",
     "email": "johndoe@example.com",
     "role": "owner",
+    "role_name": "CUSTOMER.OWNER",
     "permission": "/api/customer-permissions/200/",
     "projects": [
       {

@@ -14,11 +14,16 @@ interface AffectedUserContext {
   affected_user_username: string;
 }
 
-type UserEvent = Partial<UserContext> & Partial<AffectedUserContext>;
-
-type ProjectRole = 'Administrator' | 'Manager' | 'Member';
-
-type CustomerRole = 'Owner' | 'Support';
+export interface RoleEvent extends UserContext, AffectedUserContext {
+  customer_uuid: any;
+  customer_name: string;
+  project_uuid: any;
+  project_name: string;
+  scope_uuid: string;
+  scope_name: string;
+  role_name: string;
+  structure_type: string;
+}
 
 interface CustomerContext {
   customer_uuid: string;
@@ -29,18 +34,6 @@ interface ProjectContext {
   project_uuid: string;
   project_name: string;
 }
-
-export interface ProjectRoleEvent extends UserEvent, ProjectContext {
-  structure_type: 'project';
-  role_name: ProjectRole;
-}
-
-export interface CustomerRoleEvent extends UserEvent, CustomerContext {
-  structure_type: 'customer';
-  role_name: CustomerRole;
-}
-
-export type RoleEvent = ProjectRoleEvent | CustomerRoleEvent;
 
 export const getUserContext = (event: UserContext) => ({
   user_link: (

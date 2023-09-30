@@ -22,14 +22,12 @@ describe('Team', () => {
           fixture: 'customers/customer_users.json',
         },
       )
-      .intercept('DELETE', '/api/project-permissions/', {})
-      .as('deleteProjectPermission')
+      .intercept('POST', '/api/projects/*/delete_user/', {})
 
-      .intercept('DELETE', '/api/customer-permissions/*/', {})
+      .intercept('POST', `/api/customers/bf6d515c9e6e445f9c339021b30fc96b/delete_user/`, {})
       .as('deleteCustomerPermission')
 
-      .intercept('POST', '/api/project-permissions/', {})
-      .as('createProjectPermission')
+      .intercept('POST', '/api/projects/*/add_user/', {})
 
       .intercept('GET', '/api/users/a37feb500aa0445b8dd45ae43a48b6e5/', {
         fixture: 'users/alice.json',
@@ -60,7 +58,7 @@ describe('Team', () => {
       .click();
 
     // Notification should be shown
-    cy.get('p', { withinSubject: null })
+    cy.get("[data-testid='notification']")
       .contains('Team member has been removed.')
       .wait('@deleteCustomerPermission');
   });

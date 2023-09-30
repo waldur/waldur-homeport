@@ -193,7 +193,9 @@ Cypress.Commands.add('mockConfigs', () => {
     .intercept('GET', '/api/customer-permissions/', [])
     .intercept('GET', '/api/project-permissions/', [])
     .intercept('GET', '/api/events/', [])
-    .intercept('GET', '/api/roles/', []);
+    .intercept('GET', '/api/roles/', {
+      fixture: 'roles.json'
+    });
 });
 
 Cypress.Commands.add('mockUser', (userName) => {
@@ -209,7 +211,7 @@ Cypress.Commands.add('mockUser', (userName) => {
     .intercept('GET', '/api/users/me/', {
       fixture: `users/${userData}`,
     }).
-    intercept('GET', '/api/roles/', []);
+    intercept('GET', '/api/roles/', {fixture: 'roles.json'});
 });
 
 Cypress.Commands.add('mockCustomer', () => {

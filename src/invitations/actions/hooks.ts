@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 import { change } from 'redux-form';
 
-import { ENV } from '@waldur/configs/default';
 import {
   CUSTOMER_OWNER_ROLE,
   PROJECT_ADMIN_ROLE,
@@ -13,9 +12,10 @@ import {
   PROJECT_ROLES,
 } from '@waldur/core/constants';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { translate } from '@waldur/i18n';
 import { GROUP_INVITATION_CREATE_FORM_ID } from '@waldur/invitations/actions/constants';
 import { closeModalDialog } from '@waldur/modal/actions';
+import { RoleEnum } from '@waldur/permissions/enums';
+import { formatRole } from '@waldur/permissions/utils';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
 
@@ -35,28 +35,26 @@ import {
 const getRoles = (context) => {
   const roles = [
     {
-      title: translate(ENV.roles.owner),
+      title: formatRole(RoleEnum.CUSTOMER_OWNER),
       value: CUSTOMER_OWNER_ROLE,
       icon: 'fa-sitemap',
     },
     {
-      title: translate(ENV.roles.manager),
+      title: formatRole(RoleEnum.PROJECT_MANAGER),
       value: PROJECT_MANAGER_ROLE,
       icon: 'fa-users',
     },
     {
-      title: translate(ENV.roles.admin),
+      title: formatRole(RoleEnum.PROJECT_ADMIN),
       value: PROJECT_ADMIN_ROLE,
       icon: 'fa-server',
     },
   ];
-  if (isFeatureVisible('project.member_role')) {
-    roles.push({
-      title: translate(ENV.roles.member),
-      value: PROJECT_MEMBER_ROLE,
-      icon: 'fa-user-o',
-    });
-  }
+  roles.push({
+    title: formatRole(RoleEnum.PROJECT_MEMBER),
+    value: PROJECT_MEMBER_ROLE,
+    icon: 'fa-user-o',
+  });
   return roles.filter((role) =>
     InvitationPolicyService.canManageRole(context, role),
   );

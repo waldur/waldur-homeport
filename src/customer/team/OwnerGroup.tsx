@@ -2,9 +2,10 @@ import { FunctionComponent } from 'react';
 import { FormGroup } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { ENV } from '@waldur/configs/default';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { RoleEnum } from '@waldur/permissions/enums';
+import { formatRole } from '@waldur/permissions/utils';
 
 export const OwnerGroup: FunctionComponent<{
   disabled;
@@ -20,7 +21,7 @@ export const OwnerGroup: FunctionComponent<{
           type="checkbox"
           disabled={disabled || !canChangeRole || !canManageOwner}
         />
-        {translate(ENV.roles.owner)}{' '}
+        {formatRole(RoleEnum.CUSTOMER_OWNER)}{' '}
         {(!canChangeRole || !canManageOwner) && (
           <Tip
             id="form-field-tooltip"
@@ -28,7 +29,9 @@ export const OwnerGroup: FunctionComponent<{
               !canChangeRole
                 ? translate('You cannot change your own role.')
                 : !canManageOwner
-                ? translate('You cannot manage other organization owner.')
+                ? translate('You cannot manage other {role}.', {
+                    role: formatRole(RoleEnum.CUSTOMER_OWNER),
+                  })
                 : ''
             }
           >

@@ -1,64 +1,3 @@
-import { ENV } from '@waldur/configs/default';
-import { User } from '@waldur/workspace/types';
-
-import {
-  CUSTOMER_OWNER_ROLE,
-  CUSTOMER_SERVICE_MANAGER_ROLE,
-  CUSTOMER_SUPPORT_ROLE,
-  PROJECT_ADMIN_ROLE,
-  PROJECT_MANAGER_ROLE,
-  PROJECT_MEMBER_ROLE,
-} from './constants';
-
-export interface PermissionRequest {
-  permission: string;
-  projectId?: string;
-  customerId?: string;
-  offeringId?: string;
-}
-
-export const hasPermission = (user: User, request: PermissionRequest) => {
-  if (user.is_staff) {
-    return true;
-  }
-  let projectPermissions = [];
-  let customerPermissions = [];
-  if (request.projectId) {
-    const userProjectPermission = user.project_permissions.find(
-      ({ project_uuid }) => project_uuid === request.projectId,
-    );
-    if (userProjectPermission) {
-      if (userProjectPermission.role === PROJECT_ADMIN_ROLE) {
-        projectPermissions = ENV.permissions[RoleEnum.PROJECT_ADMIN];
-      } else if (userProjectPermission.role === PROJECT_MANAGER_ROLE) {
-        projectPermissions = ENV.permissions[RoleEnum.PROJECT_MANAGER];
-      } else if (userProjectPermission.role === PROJECT_MEMBER_ROLE) {
-        projectPermissions = ENV.permissions[RoleEnum.PROJECT_MEMBER];
-      }
-    }
-  }
-  if (request.customerId) {
-    const userCustomerPermission = user.customer_permissions.find(
-      ({ customer_uuid }) => customer_uuid === request.customerId,
-    );
-    if (userCustomerPermission) {
-      if (userCustomerPermission.role === CUSTOMER_OWNER_ROLE) {
-        customerPermissions = ENV.permissions[RoleEnum.CUSTOMER_OWNER];
-      } else if (
-        userCustomerPermission.role === CUSTOMER_SERVICE_MANAGER_ROLE
-      ) {
-        customerPermissions = ENV.permissions[RoleEnum.CUSTOMER_MANAGER];
-      } else if (userCustomerPermission.role === CUSTOMER_SUPPORT_ROLE) {
-        customerPermissions = ENV.permissions[RoleEnum.CUSTOMER_SUPPORT];
-      }
-    }
-  }
-  return (
-    projectPermissions.includes(request.permission) ||
-    customerPermissions.includes(request.permission)
-  );
-};
-
 export const RoleEnum = {
   CUSTOMER_OWNER: 'CUSTOMER.OWNER',
   CUSTOMER_SUPPORT: 'CUSTOMER.SUPPORT',
@@ -123,4 +62,16 @@ export const PermissionEnum = {
   COMPLETE_RESOURCE_DOWNSCALING: 'RESOURCE.COMPLETE_DOWNSCALING',
   ACCEPT_BOOKING_REQUEST: 'RESOURCE.ACCEPT_BOOKING_REQUEST',
   REJECT_BOOKING_REQUEST: 'RESOURCE.REJECT_BOOKING_REQUEST',
+
+  CREATE_PROJECT_PERMISSION: 'PROJECT.CREATE_PERMISSION',
+  CREATE_CUSTOMER_PERMISSION: 'CUSTOMER.CREATE_PERMISSION',
+  CREATE_OFFERING_PERMISSION: 'OFFERING.CREATE_PERMISSION',
+
+  UPDATE_PROJECT_PERMISSION: 'PROJECT.UPDATE_PERMISSION',
+  UPDATE_CUSTOMER_PERMISSION: 'CUSTOMER.UPDATE_PERMISSION',
+  UPDATE_OFFERING_PERMISSION: 'OFFERING.UPDATE_PERMISSION',
+
+  DELETE_PROJECT_PERMISSION: 'PROJECT.DELETE_PERMISSION',
+  DELETE_CUSTOMER_PERMISSION: 'CUSTOMER.DELETE_PERMISSION',
+  DELETE_OFFERING_PERMISSION: 'OFFERING.DELETE_PERMISSION',
 };

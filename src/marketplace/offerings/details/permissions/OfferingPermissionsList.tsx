@@ -9,12 +9,7 @@ import { OfferingPermissionActions } from './OfferingPermissionActions';
 import { OfferingPermissionCreateButton } from './OfferingPermissionCreateButton';
 
 export const OfferingPermissionsList = ({ offering }) => {
-  const filter = useMemo(
-    () => ({
-      offering_uuid: offering.uuid,
-    }),
-    [offering],
-  );
+  const filter = useMemo(() => ({ offering: offering.uuid }), [offering]);
   const tableProps = useTable({
     table: 'marketplace-offering-permissions',
     fetchData: createFetcher(`marketplace-offering-permissions`),

@@ -5,13 +5,16 @@ import { OfferingPermissionRemoveButton } from '@waldur/marketplace/service-prov
 import { UpdateOfferingPermissionExpirationTimeButton } from '@waldur/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton';
 import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@waldur/workspace/selectors';
 
-export const OfferingPermissionActions = ({ row }) => {
+export const OfferingPermissionActions = ({ row, fetch }) => {
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   if (isOwnerOrStaff) {
     return (
       <ButtonGroup>
-        <OfferingPermissionRemoveButton permission={row} />
-        <UpdateOfferingPermissionExpirationTimeButton permission={row} />
+        <OfferingPermissionRemoveButton permission={row} fetch={fetch} />
+        <UpdateOfferingPermissionExpirationTimeButton
+          permission={row}
+          fetch={fetch}
+        />
       </ButtonGroup>
     );
   } else {

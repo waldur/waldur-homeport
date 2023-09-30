@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useAsync, useAsyncFn } from 'react-use';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { formatRole } from '@waldur/permissions/utils';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -21,9 +21,7 @@ import {
 import { Category, Checklist } from './types';
 
 const formatRolesList = (roles) =>
-  roles.length === 0
-    ? 'N/A'
-    : roles.map((role) => translate(ENV.roles[role])).join(', ');
+  roles.length === 0 ? 'N/A' : roles.map((role) => formatRole(role)).join(', ');
 
 export const ChecklistCustomer: FunctionComponent = () => {
   useTitle(translate('Checklists'));

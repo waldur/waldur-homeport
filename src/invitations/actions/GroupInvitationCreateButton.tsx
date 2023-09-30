@@ -43,8 +43,7 @@ export const GroupInvitationCreateButton: FunctionComponent<{
       variant="primary"
       disabled={!isOwnerOrStaff}
       tooltip={
-        !isOwnerOrStaff &&
-        translate('Only customer owner or staff can create group invitations.')
+        !isOwnerOrStaff && translate('You can not create group invitations.')
       }
     />
   );

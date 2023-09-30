@@ -197,6 +197,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourceActions.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/marketplace/robot-accounts/RobotAccountList.tsx
+#: src/marketplace/service-providers/CampaignForm.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
@@ -289,10 +290,6 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "Add PI"
-msgstr ""
-
 #: src/freeipa/SyncProfile.tsx
 msgid "Add Waldur user SSH keys to the FreeIPA profile"
 msgstr ""
@@ -370,11 +367,6 @@ msgstr ""
 msgid "Add organization"
 msgstr ""
 
-#: src/customer/team/CustomerUserAddButton.tsx
-#: src/customer/team/CustomerUserAddDialog.tsx
-msgid "Add owner"
-msgstr ""
-
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 msgid "Add pair"
 msgstr ""
@@ -414,10 +406,6 @@ msgstr ""
 msgid "Add resource"
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "Add resource allocator"
-msgstr ""
-
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 msgid "Add route"
 msgstr ""
@@ -449,6 +437,11 @@ msgstr ""
 
 #: src/marketplace/details/DetailsPage.tsx
 msgid "Add {category}"
+msgstr ""
+
+#: src/customer/team/CustomerUserAddButton.tsx
+#: src/customer/team/CustomerUserAddDialog.tsx
+msgid "Add {role}"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -1013,6 +1006,10 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
+#: src/marketplace/service-providers/CampaignForm.tsx
+msgid "Auto apply"
+msgstr ""
+
 #: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
 #: src/marketplace/offerings/update/integration/OfferingAttributes.tsx
 msgid "Auto approve in service provider projects"
@@ -1331,6 +1328,22 @@ msgstr ""
 #: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Caller"
+msgstr ""
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+msgid "Campaign end date"
+msgstr ""
+
+#: src/marketplace/service-providers/CampaignFooter.tsx
+msgid "Campaign has been created."
+msgstr ""
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+msgid "Campaign name"
+msgstr ""
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+msgid "Campaign start date"
 msgstr ""
 
 #: src/marketplace/routes.ts
@@ -1655,14 +1668,6 @@ msgstr ""
 msgid "Cluster roles"
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "Co-PI"
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "Co-PI cannot edit users with same role"
-msgstr ""
-
 #: src/marketplace/offerings/utils.ts
 msgid "Code is too short."
 msgstr ""
@@ -1857,6 +1862,7 @@ msgid "Contains the word"
 msgstr ""
 
 #: src/invitations/actions/create/FormButtons.tsx
+#: src/marketplace/service-providers/CampaignFooter.tsx
 msgid "Continue"
 msgstr ""
 
@@ -1941,6 +1947,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
+#: src/marketplace/service-providers/CampaignCreateButton.tsx
 #: src/notifications/NotificationCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
@@ -1970,6 +1977,11 @@ msgstr ""
 
 #: src/notifications/NotificationCreateDialog.tsx
 msgid "Create a broadcast"
+msgstr ""
+
+#: src/marketplace/service-providers/CampaignCreateDialog.tsx
+#: src/marketplace/service-providers/CampaignFooter.tsx
+msgid "Create a campaign"
 msgstr ""
 
 #: src/rancher/template/TemplateQuestions.tsx
@@ -2325,8 +2337,8 @@ msgstr ""
 msgid "Custom scripts"
 msgstr ""
 
-#: src/customer/team/utils.ts
-msgid "Customer support"
+#: src/administration/roles/RoleForm.tsx
+msgid "Customer"
 msgstr ""
 
 #: src/issues/CustomerSupportRating.tsx
@@ -2666,17 +2678,16 @@ msgid "Detailed view"
 msgstr ""
 
 #: src/administration/providers/ProviderCard.tsx
-#: src/customer/team/UserDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/project/ProjectDetailsButton.tsx
-#: src/project/team/UserDetailsButton.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
+#: src/user/UserDetailsButton.tsx
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -2732,6 +2743,14 @@ msgstr ""
 
 #: src/openstack/openstack-subnet/DisconnectSubnetAction.tsx
 msgid "Disconnect subnet"
+msgstr ""
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+msgid "Discount"
+msgstr ""
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+msgid "Discount type"
 msgstr ""
 
 #: src/administration/providers/ProviderForm.tsx
@@ -3866,7 +3885,6 @@ msgstr ""
 msgid "Guaranteed time of volume snapshot retention. If null - keep forever."
 msgstr ""
 
-#: src/i18n/constants.ts
 #: src/navigation/header/UserDropdown.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorToggle.tsx
 msgid "Guest"
@@ -4948,10 +4966,6 @@ msgstr ""
 msgid "Management"
 msgstr ""
 
-#: src/customer/dashboard/CustomerProfile.tsx
-msgid "Managers:"
-msgstr ""
-
 #: src/invoices/list/MarkAsPaidButton.tsx
 msgid "Mark as paid"
 msgstr ""
@@ -5049,7 +5063,6 @@ msgid "Measured unit"
 msgstr ""
 
 #: src/customer/team/CustomerUsersList.tsx
-#: src/i18n/constants.ts
 #: src/navigation/workspace/context-selector/OrganizationSummary.tsx
 #: src/project/team/ProjectUsersList.tsx
 msgid "Member"
@@ -5682,6 +5695,7 @@ msgid "No projects are assigned to this user."
 msgstr ""
 
 #: src/marketplace/orders/ProviderAutocomplete.tsx
+#: src/marketplace/service-providers/CampaignForm.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "No providers"
 msgstr ""
@@ -5873,6 +5887,7 @@ msgid "Object is not found."
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
+#: src/administration/roles/RoleForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
@@ -6047,6 +6062,7 @@ msgstr ""
 #: src/administration/dashboard/StatisticsCards.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/routes.ts
+#: src/marketplace/service-providers/CampaignForm.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/notifications/NotificationExpandableRow.tsx
@@ -6097,20 +6113,8 @@ msgstr ""
 msgid "One-time on plan switch"
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "Only PI, Co-PI or staff can invite users."
-msgstr ""
-
 #: src/invoices/list/MarkAsPaidButton.tsx
 msgid "Only a created invoice can be marked as paid."
-msgstr ""
-
-#: src/invitations/actions/GroupInvitationCreateButton.tsx
-msgid "Only customer owner or staff can create group invitations."
-msgstr ""
-
-#: src/invitations/actions/create/InvitationCreateButton.tsx
-msgid "Only customer owner, project manager or staff can invite users."
 msgstr ""
 
 #: src/invitations/actions/InvitationSendButton.tsx
@@ -6119,10 +6123,6 @@ msgstr ""
 
 #: src/invitations/actions/InvitationCancelButton.tsx
 msgid "Only pending invitation can be canceled."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "Only resource allocator, PI or staff can invite users."
 msgstr ""
 
 #: src/openstack/utils.ts
@@ -6466,14 +6466,6 @@ msgstr ""
 msgid "Organization native name"
 msgstr ""
 
-#: src/configs/default.ts
-msgid "Organization owner"
-msgstr ""
-
-#: src/customer/team/OwnerExpirationTimeGroup.tsx
-msgid "Organization owner role expires on"
-msgstr ""
-
 #: src/customer/create/WizardFormSecondPage.tsx
 msgid "Organization registration code"
 msgstr ""
@@ -6533,7 +6525,6 @@ msgstr ""
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
-#: src/user/dashboard/UserDashboard.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Organizations"
@@ -6557,26 +6548,6 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 msgid "Output"
-msgstr ""
-
-#: src/customer/team/CustomerUsersList.tsx
-msgid "Owner"
-msgstr ""
-
-#: src/customer/dashboard/CustomerProfile.tsx
-msgid "Owners:"
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "PI"
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "PI cannot edit users with same role"
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "PI role expires on"
 msgstr ""
 
 #: src/marketplace/referral/ReferralsList.tsx
@@ -7335,6 +7306,7 @@ msgstr ""
 msgid "Progress"
 msgstr ""
 
+#: src/administration/roles/RoleForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/components/utils.tsx
@@ -7386,6 +7358,7 @@ msgstr ""
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
 #: src/user/UserPermissionRequestsList.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 msgid "Project"
@@ -7490,19 +7463,10 @@ msgstr ""
 msgid "Project is not selected."
 msgstr ""
 
-#: src/configs/default.ts
-msgid "Project manager"
-msgstr ""
-
-#: src/configs/default.ts
-msgid "Project member"
-msgstr ""
-
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/project/ProjectNameField.tsx
-#: src/user/dashboard/ProjectPermissions.tsx
 msgid "Project name"
 msgstr ""
 
@@ -7577,7 +7541,6 @@ msgstr ""
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
-#: src/user/dashboard/UserDashboard.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Projects"
@@ -8373,14 +8336,6 @@ msgstr ""
 msgid "Resource UUID"
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "Resource allocator"
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "Resource allocator role expires on"
-msgstr ""
-
 #: src/marketplace/resources/change-plan/utils.tsx
 msgid "Resource already has this plan."
 msgstr ""
@@ -8694,7 +8649,6 @@ msgstr ""
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
-#: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -8715,7 +8669,7 @@ msgstr ""
 msgid "Role in project"
 msgstr ""
 
-#: src/project/team/events.ts
+#: src/project/team/events.tsx
 msgid "Role management events"
 msgstr ""
 
@@ -9096,10 +9050,11 @@ msgstr ""
 
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 #: src/marketplace/resources/list/OfferingFilter.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 msgid "Select offering..."
 msgstr ""
 
-#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
+#: src/marketplace/service-providers/CampaignForm.tsx
 #: src/notifications/NotificationForm.tsx
 msgid "Select offerings..."
 msgstr ""
@@ -9164,6 +9119,7 @@ msgid "Select project..."
 msgstr ""
 
 #: src/marketplace/orders/ProviderAutocomplete.tsx
+#: src/marketplace/service-providers/CampaignForm.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Select provider..."
 msgstr ""
@@ -9244,6 +9200,10 @@ msgstr ""
 
 #: src/support/OfferingConfigurationForm.tsx
 msgid "Select tenants..."
+msgstr ""
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+msgid "Select type"
 msgstr ""
 
 #: src/customer/workspace/CustomerEventsFilter.tsx
@@ -9355,15 +9315,6 @@ msgstr ""
 msgid "Service discovery"
 msgstr ""
 
-#: src/configs/default.ts
-#: src/customer/team/utils.ts
-msgid "Service manager"
-msgstr ""
-
-#: src/customer/team/CustomerUsersListExpandableRow.tsx
-msgid "Service manager of:"
-msgstr ""
-
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 #: src/invoices/details/ResourceRow.tsx
@@ -9377,6 +9328,7 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/routes.ts
+#: src/marketplace/service-providers/CampaignForm.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
@@ -9829,6 +9781,10 @@ msgstr ""
 msgid "Something went wrong"
 msgstr ""
 
+#: src/marketplace/service-providers/CampaignForm.tsx
+msgid "Special price"
+msgstr ""
+
 #: src/customer/list/OrganizationUpdate.tsx
 msgid "Sponsor number"
 msgstr ""
@@ -9995,6 +9951,10 @@ msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
 msgid "Still unsure? Ask a question"
+msgstr ""
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+msgid "Stock"
 msgstr ""
 
 #: src/azure/vm/actions/StopAction.tsx
@@ -10208,10 +10168,6 @@ msgstr ""
 #: src/user/support/EmailField.tsx
 #: src/user/support/StaticField.tsx
 msgid "Synchronized from identity provider"
-msgstr ""
-
-#: src/configs/default.ts
-msgid "System administrator"
 msgstr ""
 
 #: src/administration/roles/RolesList.tsx
@@ -10914,6 +10870,7 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
+#: src/administration/roles/RoleForm.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -11097,6 +11054,10 @@ msgstr ""
 
 #: src/freeipa/FreeIPAAccountCreate.tsx
 msgid "Unable to create a FreeIPA profile."
+msgstr ""
+
+#: src/marketplace/service-providers/CampaignFooter.tsx
+msgid "Unable to create a campaign."
 msgstr ""
 
 #: src/rancher/template/TemplateDetail.tsx
@@ -11396,14 +11357,11 @@ msgid "Unable to load customer."
 msgstr ""
 
 #: src/customer/organization-groups/CustomersOrganizationGroupsChart.tsx
-#: src/customer/team/OfferingNamesManagedByUser.tsx
 #: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
-#: src/project/team/InvitationsList.tsx
-#: src/project/team/ProjectUsersList.tsx
 #: src/providers/dashboard/ProviderWidgets.tsx
 msgid "Unable to load data"
 msgstr ""
@@ -11539,7 +11497,6 @@ msgid "Unable to load plan details."
 msgstr ""
 
 #: src/project/ProjectExpandableRowContainer.tsx
-#: src/user/affiliations/OrganizationExpandableRow.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Unable to load project resources."
 msgstr ""
@@ -11598,6 +11555,7 @@ msgstr ""
 msgid "Unable to load user."
 msgstr ""
 
+#: src/customer/dashboard/CustomerUsersBadge.tsx
 #: src/project/ProjectUsersBadge.tsx
 #: src/providers/dashboard/ProviderProfile.tsx
 msgid "Unable to load users"
@@ -12468,81 +12426,12 @@ msgstr ""
 msgid "User {affected_user_link} has been updated."
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "User {affected_user_link} has got Co-PI role in project {project_link}."
+#: src/project/team/events.tsx
+msgid "User {affected_user_link} has got {role_name} role in {scope_link}."
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "User {affected_user_link} has got PI role in project {project_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {affected_user_link} has got guest role in project {project_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {affected_user_link} has got member role in project {project_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {affected_user_link} has got project administrator role in project {project_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {affected_user_link} has got project manager role in project {project_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {affected_user_link} has got project member role in project {project_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {affected_user_link} has lost Co-PI role in {project_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {affected_user_link} has lost PI role in {customer_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {affected_user_link} has lost PI role in {project_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {affected_user_link} has lost co-PI role in {project_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {affected_user_link} has lost guest role in {project_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {affected_user_link} has lost member role in {project_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {affected_user_link} has lost organization owner role in {customer_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-#: src/project/team/events.ts
-msgid "User {affected_user_link} has lost organization support role in {customer_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {affected_user_link} has lost project administrator role in {project_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {affected_user_link} has lost project manager role in {project_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {affected_user_link} has lost project member role in {project_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {affected_user_link} has lost resource allocator role in {customer_link}."
+#: src/project/team/events.tsx
+msgid "User {affected_user_link} has lost {role_name} role in {scope_link}."
 msgstr ""
 
 #: src/user/events.ts
@@ -12561,96 +12450,20 @@ msgstr ""
 msgid "User {user_link} authenticated successfully with username and password."
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "User {user_link} has granted Co-PI role in project {project_link} to {affected_user_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {user_link} has granted PI role in project {project_link} to {affected_user_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {user_link} has granted PI role in {customer_link} to {affected_user_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {user_link} has granted member role in project {project_link} to {affected_user_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {user_link} has granted organization support role in {customer_link} to {affected_user_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {user_link} has granted project administrator role in project {project_link} to {affected_user_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {user_link} has granted project member role in project {project_link} to {affected_user_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
-msgstr ""
-
-#: src/project/team/events.ts
+#: src/project/team/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "User {user_link} has revoked Co-PI  {affected_user_link} from project {project_link}."
+#: src/project/team/events.tsx
+msgid "User {user_link} has granted {role_name} role in {scope_link} to {affected_user_link}."
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "User {user_link} has revoked Co-PI {affected_user_link} from project {project_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {user_link} has revoked PI {affected_user_link} from project {project_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {user_link} has revoked PI {affected_user_link} from {customer_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {user_link} has revoked member {affected_user_link} from project {project_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {user_link} has revoked organization owner {affected_user_link} from {customer_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {user_link} has revoked organization support {affected_user_link} from {customer_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {user_link} has revoked project administrator {affected_user_link} from project {project_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
-msgstr ""
-
-#: src/project/team/events.ts
-msgid "User {user_link} has revoked project member {affected_user_link} from project {project_link}."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "User {user_link} has revoked resource allocator {affected_user_link} from {customer_link}."
-msgstr ""
-
-#: src/project/team/events.ts
+#: src/project/team/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
+msgstr ""
+
+#: src/project/team/events.tsx
+msgid "User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}."
 msgstr ""
 
 #: src/auth/events.ts
@@ -13113,6 +12926,14 @@ msgstr ""
 msgid "You can find offerings to order in the service catalog"
 msgstr ""
 
+#: src/invitations/actions/GroupInvitationCreateButton.tsx
+msgid "You can not create group invitations."
+msgstr ""
+
+#: src/invitations/actions/create/InvitationCreateButton.tsx
+msgid "You can not invite users."
+msgstr ""
+
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "You can register organization as a service provider by pressing the button"
 msgstr ""
@@ -13129,16 +12950,8 @@ msgstr ""
 msgid "You cannot change your own role."
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "You cannot manage other PI"
-msgstr ""
-
 #: src/customer/team/OwnerGroup.tsx
-msgid "You cannot manage other organization owner."
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "You cannot manage other resource allocator"
+msgid "You cannot manage other {role}."
 msgstr ""
 
 #: src/marketplace/resources/list/EmptyResourcesListPlaceholder.tsx
@@ -13329,10 +13142,6 @@ msgstr ""
 msgid "change"
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "co-PI"
-msgstr ""
-
 #: src/marketplace/offerings/PriceList.tsx
 msgid "components"
 msgstr ""
@@ -13400,10 +13209,6 @@ msgstr ""
 msgid "group invitations"
 msgstr ""
 
-#: src/i18n/constants.ts
-msgid "guest"
-msgstr ""
-
 #: src/rancher/cluster/hpas/HPADeleteButton.tsx
 msgid "horizontal pod autoscaler"
 msgstr ""
@@ -13447,10 +13252,6 @@ msgstr ""
 
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "jobs"
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "member"
 msgstr ""
 
 #: src/rancher/cluster/hpas/utils.ts
@@ -13595,10 +13396,6 @@ msgstr ""
 
 #: src/marketplace/resources/actions/EditDialog.tsx
 msgid "resource"
-msgstr ""
-
-#: src/i18n/constants.ts
-msgid "resource allocator"
 msgstr ""
 
 #: src/marketplace-flows/FlowsList.tsx
@@ -13944,6 +13741,10 @@ msgstr ""
 
 #: src/invitations/RoleField.tsx
 msgid "{role} in {project}"
+msgstr ""
+
+#: src/customer/team/OwnerExpirationTimeGroup.tsx
+msgid "{role} role expires on"
 msgstr ""
 
 #: src/invitations/GroupInvitationMessage.tsx

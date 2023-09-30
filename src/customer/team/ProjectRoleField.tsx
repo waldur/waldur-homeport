@@ -3,16 +3,16 @@ import { Field } from 'redux-form';
 
 import { SelectField } from '@waldur/form';
 
-import { getRoles } from './utils';
+import { getProjectRoles } from '../../permissions/utils';
 
 export const ProjectRoleField: React.FC<{
   index: number;
   canChangeRole: boolean;
 }> = ({ index, canChangeRole }) => {
-  const options = React.useMemo(getRoles, []);
+  const options = React.useMemo(getProjectRoles, []);
   return (
     <Field
-      name={`projects[${index}].role`}
+      name={`projects[${index}].role_name`}
       component={SelectField}
       isDisabled={!canChangeRole}
       simpleValue={true}

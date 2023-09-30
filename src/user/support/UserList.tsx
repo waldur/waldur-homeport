@@ -7,6 +7,7 @@ import { createSelector } from 'reselect';
 import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { formatRole } from '@waldur/permissions/utils';
 import { BooleanField } from '@waldur/table/BooleanField';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { Table, createFetcher } from '@waldur/table/index';
@@ -41,45 +42,47 @@ const UserStatusField = ({ row }) => {
 };
 
 const OrganizationRolesField = ({ row }) => {
-  if (row.customer_permissions && row.customer_permissions.length > 0) {
-    return row.customer_permissions.map((permission, index) => {
-      return (
-        <span key={index}>
-          <Tip
-            key={index}
-            label={translate(permission.role)}
-            id="customer-role"
-          >
-            {permission.customer_name} <i className="fa fa-question-circle" />
-          </Tip>
-          <br />
-        </span>
-      );
-    });
+  const permissions = row.permissions?.filter(
+    ({ scope_type }) => scope_type === 'customer',
+  );
+  if (permissions.length > 0) {
+    return permissions.map((permission, index) => (
+      <span key={index}>
+        <Tip
+          key={index}
+          label={formatRole(permission.role_name)}
+          id="customer-role"
+        >
+          {permission.scope_name} <i className="fa fa-question-circle" />
+        </Tip>
+        <br />
+      </span>
+    ));
   } else {
     return DASH_ESCAPE_CODE;
   }
 };
 
 const ProjectRolesField = ({ row }) => {
-  if (row.project_permissions && row.project_permissions.length > 0) {
-    return row.project_permissions.map((permission, index) => {
-      return (
-        <span key={index}>
-          <Tip
-            key={index}
-            label={translate('{role} ({name})', {
-              role: permission.role,
-              name: permission.customer_name,
-            })}
-            id="project-role"
-          >
-            {permission.project_name} <i className="fa fa-question-circle" />
-          </Tip>
-          <br />
-        </span>
-      );
-    });
+  const permissions = row.permissions?.filter(
+    ({ scope_type }) => scope_type === 'project',
+  );
+  if (permissions.length > 0) {
+    return permissions.map((permission, index) => (
+      <span key={index}>
+        <Tip
+          key={index}
+          label={translate('{role} ({name})', {
+            role: formatRole(permission.role_name),
+            name: permission.customer_name,
+          })}
+          id="project-role"
+        >
+          {permission.scope_name} <i className="fa fa-question-circle" />
+        </Tip>
+        <br />
+      </span>
+    ));
   } else {
     return DASH_ESCAPE_CODE;
   }
