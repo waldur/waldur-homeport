@@ -32,7 +32,7 @@ export const EditSchedulesDialog = connect(
           await updateProviderOffering(props.resolve.offering.uuid, {
             attributes: {
               ...props.resolve.offering.attributes,
-              ...formatSchedules(formData),
+              schedules: formatSchedules(formData.schedules),
             },
           });
           dispatch(

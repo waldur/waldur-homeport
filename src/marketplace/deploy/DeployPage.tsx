@@ -11,14 +11,16 @@ import { useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 import { reduxForm } from 'redux-form';
 
+import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
 import { getOrderFormSteps } from '@waldur/marketplace/common/registry';
-import { Offering } from '@waldur/marketplace/types';
+import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
 import { calculateSystemVolumeSize } from '@waldur/openstack/openstack-instance/utils';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { FORM_ID } from '../details/constants';
 import { getDefaultLimits } from '../offerings/utils';
+import { OrderItemResponse } from '../orders/types';
 import { formDataSelector, isExperimentalUiComponentsVisible } from '../utils';
 
 import { DeployPageActions } from './DeployPageActions';
@@ -30,6 +32,11 @@ import './DeployPage.scss';
 export interface DeployPageProps {
   offering: Offering;
   limits?: string[];
+  updateMode?: boolean;
+  cartItem?: OrderItemResponse;
+  plan?: Plan;
+  initialLimits?: AttributesType;
+  initialAttributes?: AttributesType;
 }
 
 export const DeployPage = reduxForm<{}, DeployPageProps>({
@@ -58,7 +65,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
     (_, i) => stepRefs.current[i] ?? createRef(),
   );
 
-  // Initialize project and cloud
+  // Initialize project and cloud and initial attributes
   useEffectOnce(() => {
     const initialData = {};
     if (hasStepWithField(formSteps, 'project') && project) {
@@ -67,6 +74,35 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
     if (hasStepWithField(formSteps, 'offering') && selectedOffering) {
       Object.assign(initialData, { offering: selectedOffering });
     }
+
+    // initial attributes
+    const attributes: AttributesType = {};
+    if (props.initialAttributes) {
+      Object.assign(attributes, props.initialAttributes);
+      if (props.offering.options.order) {
+        props.offering.options.order.forEach((key) => {
+          const options = props.offering.options.options[key];
+          if (options && options.default !== undefined) {
+            attributes[key] = options.default;
+          }
+        });
+      }
+    }
+    if (props.offering.type === OFFERING_TYPE_BOOKING) {
+      // initial attributes.schedules
+      if (attributes.schedules) {
+        Object.assign(attributes, {
+          schedules: attributes.schedules.map((schedule) => ({
+            ...schedule,
+            start: new Date(schedule.start),
+            end: new Date(schedule.end),
+          })),
+        });
+      } else {
+        Object.assign(attributes, { schedules: [] });
+      }
+    }
+    Object.assign(initialData, { attributes });
 
     if (Object.keys(initialData).length > 0) {
       props.initialize(initialData);
@@ -84,8 +120,12 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
         ...props.limits,
       });
     }
-    if (hasStepWithField(formSteps, 'plan') && plans && plans.length === 1) {
-      props.change('plan', plans[0]);
+    if (hasStepWithField(formSteps, 'plan') && plans) {
+      if (props.plan) {
+        props.change('plan', props.plan);
+      } else if (plans.length === 1) {
+        props.change('plan', plans[0]);
+      }
     }
   }, [selectedOffering, plans]);
 
@@ -183,6 +223,8 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
         offering={selectedOffering}
         steps={formSteps}
         completedSteps={completedSteps}
+        updateMode={props.updateMode}
+        cartItem={props.cartItem}
       />
     </form>
   );

@@ -240,19 +240,23 @@ export const createAvailabilitySlots = (
   const slots = [];
 
   events.forEach((event) => {
+    const eventEnd = parseDate(event.end);
     let cursor = parseDate(event.start);
 
-    while (cursor < parseDate(event.end)) {
+    while (cursor < eventEnd) {
       const end = cursor.plus(slotDuration);
-      const slot: EventInput = {
-        start: cursor.toISO(),
-        end: end.toISO(),
-        id: 'availableForBooking',
-        groupId: 'availableForBooking',
-        editable: false,
-        rendering: 'background',
-      };
-      slots.push(slot);
+      // Don't push duplicate slots
+      if (!slots.some((sl) => parseDate(sl.start).equals(cursor))) {
+        const slot: EventInput = {
+          start: cursor.toISO(),
+          end: end.toISO(),
+          id: 'availableForBooking',
+          groupId: 'availableForBooking',
+          editable: false,
+          rendering: 'background',
+        };
+        slots.push(slot);
+      }
       cursor = end;
     }
   });

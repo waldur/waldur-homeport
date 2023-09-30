@@ -9,6 +9,7 @@ interface ShoppingCartUpdateButtonProps {
   disabled?: boolean;
   title?: string;
   icon?: string;
+  className?: string;
 }
 
 export const ShoppingCartUpdateButton: FunctionComponent<ShoppingCartUpdateButtonProps> =
@@ -20,5 +21,6 @@ export const ShoppingCartUpdateButton: FunctionComponent<ShoppingCartUpdateButto
       onClick={() => props.updateItem()}
       flavor={props.flavor}
       disabled={props.disabled}
+      className={props.className}
     />
   );

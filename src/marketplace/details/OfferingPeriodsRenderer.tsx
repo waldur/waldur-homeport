@@ -6,12 +6,14 @@ export const OfferingPeriodsRenderer: FunctionComponent<{ schedules }> = ({
   schedules,
 }) => (
   <>
-    {schedules.map((schedule, index) => (
-      <span key={schedule.id}>
-        {formatShortDateTime(schedule.start)} -{' '}
-        {formatShortDateTime(schedule.end)}
-        {index + 1 !== schedule.length ? '; ' : null}
-      </span>
-    ))}
+    {schedules
+      .filter((s) => s.start)
+      .map((schedule, index) => (
+        <p key={schedule.id + index} className="m-0">
+          {formatShortDateTime(schedule.start)} -{' '}
+          {formatShortDateTime(schedule.end)}
+          {index + 1 !== schedule.length ? '; ' : null}
+        </p>
+      ))}
   </>
 );

@@ -11,6 +11,7 @@ import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 import { Offering } from '@waldur/marketplace/types';
 
 import { getCheckoutSummaryComponent } from '../common/registry';
+import { OrderItemResponse } from '../orders/types';
 
 import { OfferingConfigurationFormStep } from './types';
 import { formErrorsSelector, scrollToView } from './utils';
@@ -19,14 +20,14 @@ interface DeployPageSidebarProps {
   offering: Offering;
   steps: OfferingConfigurationFormStep[];
   completedSteps: boolean[];
+  updateMode?: boolean;
+  cartItem?: OrderItemResponse;
 }
 
-export const DeployPageSidebar = ({
-  offering,
-  steps,
-  completedSteps,
-}: DeployPageSidebarProps) => {
-  const CheckoutSummaryComponent = getCheckoutSummaryComponent(offering.type);
+export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
+  const CheckoutSummaryComponent = getCheckoutSummaryComponent(
+    props.offering.type,
+  );
 
   const errors = useSelector(formErrorsSelector);
 
@@ -61,12 +62,12 @@ export const DeployPageSidebar = ({
           <div className="stepper stepper-pills stepper-column d-flex flex-column mb-10">
             <div className="d-flex flex-row-auto w-100 w-lg-300px">
               <div className="stepper-nav">
-                {steps.map((step, i) => (
+                {props.steps.map((step, i) => (
                   <div
                     key={i}
                     className={
                       'stepper-item me-5' +
-                      (completedSteps[i] ? ' completed' : '')
+                      (props.completedSteps[i] ? ' completed' : '')
                     }
                   >
                     <div className="stepper-wrapper d-flex align-items-center">
@@ -92,7 +93,7 @@ export const DeployPageSidebar = ({
                         <FormCheck className="stepper-icon form-check form-check-custom form-check-sm">
                           <FormCheck.Input
                             type="checkbox"
-                            checked={completedSteps[i]}
+                            checked={props.completedSteps[i]}
                             className="rounded-circle"
                             readOnly
                           />
@@ -117,9 +118,23 @@ export const DeployPageSidebar = ({
           </div>
 
           {CheckoutSummaryComponent ? (
-            <CheckoutSummaryComponent offering={offering} />
+            <CheckoutSummaryComponent
+              offering={
+                props.updateMode
+                  ? { ...props.offering, uuid: props.cartItem.uuid }
+                  : props.offering
+              }
+              updateMode={props.updateMode}
+            />
           ) : (
-            <OrderSummary offering={offering} />
+            <OrderSummary
+              offering={
+                props.updateMode
+                  ? { ...props.offering, uuid: props.cartItem.uuid }
+                  : props.offering
+              }
+              updateMode={props.updateMode}
+            />
           )}
 
           <p className="text-center fs-9 mt-2">
