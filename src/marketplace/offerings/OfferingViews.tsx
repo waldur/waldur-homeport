@@ -1,4 +1,4 @@
-import { UISref, useCurrentStateAndParams } from '@uirouter/react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -17,25 +17,37 @@ const PreviewOfferingDialog = lazyComponent(
 
 export const OfferingViews = ({ row }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { state } = useCurrentStateAndParams();
   const customer = useSelector(getCustomer);
+
+  const redirect = (state, params) => {
+    setTimeout(() => {
+      router.stateService.go(state, params);
+    }, 100);
+  };
+
   return (
     <DropdownButton title={translate('Actions')} className="me-3">
-      <UISref
-        to={
-          isDescendantOf('admin', state)
-            ? 'admin.marketplace-offering-update'
-            : 'marketplace-offering-update'
-        }
-        params={{
-          offering_uuid: row.uuid,
-          uuid: row.customer_uuid || customer.uuid,
+      <Dropdown.Item
+        as="button"
+        onClick={() => {
+          redirect(
+            isDescendantOf('admin', state)
+              ? 'admin.marketplace-offering-update'
+              : 'marketplace-offering-update',
+            {
+              offering_uuid: row.uuid,
+              uuid: row.customer_uuid || customer.uuid,
+            },
+          );
         }}
       >
-        <Dropdown.Item>{translate('Edit')}</Dropdown.Item>
-      </UISref>
+        {translate('Edit')}
+      </Dropdown.Item>
       {[ACTIVE, PAUSED].includes(row.state) && (
         <Dropdown.Item
+          as="button"
           onClick={() => {
             dispatch(
               openModalDialog(PreviewOfferingDialog, {
@@ -48,12 +60,14 @@ export const OfferingViews = ({ row }) => {
           {translate('Preview order form')}
         </Dropdown.Item>
       )}
-      <UISref
-        to="public.marketplace-public-offering"
-        params={{ uuid: row.uuid }}
+      <Dropdown.Item
+        as="button"
+        onClick={() => {
+          redirect('public.marketplace-public-offering', { uuid: row.uuid });
+        }}
       >
-        <Dropdown.Item>{translate('Open public page')}</Dropdown.Item>
-      </UISref>
+        {translate('Open public page')}
+      </Dropdown.Item>
     </DropdownButton>
   );
 };
