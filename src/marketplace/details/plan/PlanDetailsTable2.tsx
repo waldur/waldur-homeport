@@ -236,7 +236,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
           <table className="table-details w-100 mb-12">
             <tbody>
               {/* Fixed */}
-              {fixedRows && (
+              {fixedRows.length > 0 && (
                 <>
                   <FixedRows
                     components={fixedRows}

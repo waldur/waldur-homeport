@@ -18,6 +18,7 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   {
     label: translate('Plan'),
     id: 'step-plan',
+    fields: ['plan'],
     required: true,
     requiredFields: ['plan'],
     component: FormPlanStep,
