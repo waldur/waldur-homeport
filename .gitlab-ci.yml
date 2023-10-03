@@ -81,7 +81,7 @@ Check dead code:
 
 Run E2E tests:
   image:
-    name: registry.hpc.ut.ee/mirror/cypress/included:10.7.0
+    name: registry.hpc.ut.ee/mirror/cypress/included:13.2.0
     entrypoint: [""]
   stage: test
   interruptible: true
@@ -93,9 +93,6 @@ Run E2E tests:
     # If event is related to a created merge request
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
-    - npm install -g yarn
-    - yarn config set cache-folder .yarn
-    - yarn install --frozen-lockfile
     - NO_COLOR=1 yarn ci:test
   artifacts:
     expire_in: 1 week

@@ -21,7 +21,7 @@ const openQuickAddResourcePopupAndSelectAnOffering = (
     .should('be.visible');
 };
 
-describe('Add resource pop up is visible', () => {
+describe('Add resource pop up is visible', { testIsolation: false }, () => {
   beforeEach(() => {
     cy.intercept('HEAD', '/api/customers/**', {
       headers: {

@@ -43,9 +43,7 @@ describe('Team', () => {
   it('Allows to view permission details', () => {
     cy.get('.btn-group button').contains('Details').click({ force: true });
     cy.get('.modal-title').contains('User details');
-    cy.get('.modal-content').within(() => {
-      cy.waitForSpinner().get('table').should('be.visible');
-    });
+    cy.get('.modal-content').get('table').should('be.visible');
     cy.wait('@getUserDetails');
   });
 
