@@ -161,7 +161,7 @@ Cypress.Commands.add('openWorkspaceSelector', () => {
 });
 
 Cypress.Commands.add('clickSidebarMenuItem', (menu, submenu) => {
-  cy.get(`.aside-menu .menu-item:contains(${menu})`).click();
+  cy.get(`.aside-menu .menu-item:contains(${menu})`).click().wait(500);
 
   if (submenu) {
     cy.get(`.aside-menu .menu-item:contains(${menu})`).then(($menuItem) => {

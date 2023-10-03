@@ -1,4 +1,4 @@
-describe('Issue details view', () => {
+describe('Issue details view', { testIsolation: false }, () => {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()

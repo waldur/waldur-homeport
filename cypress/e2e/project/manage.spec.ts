@@ -11,7 +11,7 @@ const editedProject = {
   end_date: nextYear.toISOString().split('T')[0],
 };
 
-describe('Project manage', () => {
+describe('Project manage', { testIsolation: false }, () => {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()
