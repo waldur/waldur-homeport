@@ -93,6 +93,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
             getOptionLabel={field.getOptionLabel}
             getOptionValue={field.getOptionValue}
             isMulti={field.isMulti}
+            isClearable={field.isClearable}
           />
         );
       }

@@ -17,6 +17,7 @@ export interface RobotAccountFormData {
   username: string;
   users: Array<{ url: string; full_name: string; email: string }>;
   keys: string;
+  responsible_user: { url: string; full_name: string; email: string };
 }
 
 export const useRobotAccountFields = (resource) => {
@@ -66,6 +67,17 @@ export const useRobotAccountFields = (resource) => {
       isMulti: true,
     },
     {
+      name: 'responsible_user',
+      label: translate('Responsible user'),
+      type: 'async_select',
+      loadOptions: loadUsers,
+      getOptionLabel: ({ full_name, email }) => `${full_name} (${email})`,
+      getOptionValue: ({ uuid }) => uuid,
+      required: false,
+      isMulti: false,
+      isClearable: true,
+    },
+    {
       name: 'keys',
       label: translate('SSH public keys'),
       type: 'text',
@@ -92,6 +104,7 @@ export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
             ...formData,
             resource: resource.url,
             users: formData.users?.map(({ url }) => url),
+            responsible_user: formData.responsible_user.url,
             keys: keys ? keys.split(/\r?\n/) : [],
           });
           dispatch(showSuccess(translate('Robot account has been created.')));
