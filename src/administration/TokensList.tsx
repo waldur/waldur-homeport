@@ -27,6 +27,15 @@ export const TokensList = () => {
           render: ({ row }) => row.user_username,
         },
         {
+          title: translate('Created'),
+          render: ({ row }) => row.created,
+        },
+        {
+          title: translate('Token lifetime (s)'),
+          render: ({ row }) =>
+            row.user_token_lifetime || translate('Unlimited'),
+        },
+        {
           title: translate('User is active'),
           render: ({ row }) => <BooleanField value={row.user_is_active} />,
         },

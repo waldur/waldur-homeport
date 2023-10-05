@@ -2113,6 +2113,7 @@ msgstr ""
 msgid "Create your first project"
 msgstr ""
 
+#: src/administration/TokensList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/list/CustomerList.tsx
@@ -10826,6 +10827,10 @@ msgstr ""
 msgid "Token lifetime"
 msgstr ""
 
+#: src/administration/TokensList.tsx
+msgid "Token lifetime (s)"
+msgstr ""
+
 #: src/invitations/actions/create/EmailsListGroup.tsx
 msgid "Too many empty fields"
 msgstr ""
@@ -12065,6 +12070,10 @@ msgstr ""
 
 #: src/auth/callbacks/OauthLoginCompleted.tsx
 msgid "Unknown error"
+msgstr ""
+
+#: src/administration/TokensList.tsx
+msgid "Unlimited"
 msgstr ""
 
 #: src/resource/actions/UnlinkActionItem.tsx
