@@ -21,7 +21,8 @@
     "bank_name": "",
     "bank_account": "",
     "country": "EE",
-    "is_service_provider": true
+    "is_service_provider": true,
+    "projects_count": 0
   },
   {
     "uuid": "1f13cbdf1878479ebcb0b218be3cd87d",
@@ -43,7 +44,8 @@
     "bank_name": "",
     "bank_account": "",
     "country": "TL",
-    "is_service_provider": true
+    "is_service_provider": true,
+    "projects_count": 0
   },
   {
     "uuid": "0b5e658068664999ba7f1de44e20766c",
@@ -65,7 +67,8 @@
     "bank_name": "",
     "bank_account": "",
     "country": "RU",
-    "is_service_provider": true
+    "is_service_provider": true,
+    "projects_count": 0
   },
   {
     "uuid": "1554f6bf2591460f8a315fb72247127a",
@@ -87,7 +90,8 @@
     "bank_name": "",
     "bank_account": "",
     "country": "ER",
-    "is_service_provider": false
+    "is_service_provider": false,
+    "projects_count": 0
   },
   {
     "uuid": "33a27283ea4f44f2a823d778e2bd6122",
@@ -109,7 +113,8 @@
     "bank_name": "",
     "bank_account": "",
     "country": "VC",
-    "is_service_provider": false
+    "is_service_provider": false,
+    "projects_count": 0
   },
   {
     "uuid": "6983ac22f2bb469189311ab21e493359",
@@ -131,7 +136,8 @@
     "bank_name": "",
     "bank_account": "",
     "country": "KH",
-    "is_service_provider": true
+    "is_service_provider": true,
+    "projects_count": 0
   },
   {
     "uuid": "309a4e35167841969d4ff613224fa0dd",
@@ -153,7 +159,8 @@
     "bank_name": "",
     "bank_account": "",
     "country": "AD",
-    "is_service_provider": false
+    "is_service_provider": false,
+    "projects_count": 0
   },
   {
     "uuid": "545d8c8d3eeb4dffa8d944117953b41b",
@@ -175,7 +182,8 @@
     "bank_name": "",
     "bank_account": "",
     "country": "SA",
-    "is_service_provider": false
+    "is_service_provider": false,
+    "projects_count": 0
   },
   {
     "uuid": "5dfa1caf932f49f1a039836e77707366",
@@ -197,7 +205,8 @@
     "bank_name": "",
     "bank_account": "",
     "country": "GN",
-    "is_service_provider": false
+    "is_service_provider": false,
+    "projects_count": 0
   },
   {
     "uuid": "6387d2bac92746bc9466a332651bed2e",
@@ -219,6 +228,7 @@
     "bank_name": "",
     "bank_account": "",
     "country": "ER",
-    "is_service_provider": false
+    "is_service_provider": false,
+    "projects_count": 0
   }
 ]

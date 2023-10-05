@@ -42,7 +42,7 @@ export const ManagementMenu = () => {
           child={false}
         />
       )}
-      {project ? (
+      {customer?.projects_count && project ? (
         <MenuItem
           title={translate('Project')}
           state="project.dashboard"
@@ -60,14 +60,7 @@ export const ManagementMenu = () => {
           iconPath={IconProject}
           child={false}
         />
-      ) : (
-        <MenuItem
-          title={translate('Project')}
-          state="profile.no-project"
-          iconPath={IconProject}
-          child={false}
-        />
-      )}
+      ) : null}
     </>
   );
 };
