@@ -654,11 +654,30 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-admin-resources',
-    url: 'resources/',
-    component: SupportResourcesList,
+    url: '',
+    component: UIView,
+    abstract: true,
     parent: 'admin',
     data: {
       breadcrumb: () => translate('Resources'),
+    },
+  },
+  {
+    name: 'marketplace-admin-resources-list',
+    url: 'resources/',
+    component: SupportResourcesList,
+    parent: 'marketplace-admin-resources',
+    data: {
+      breadcrumb: () => translate('Resources'),
+    },
+  },
+  {
+    name: 'marketplace-admin-robot-accounts',
+    url: 'robot-accounts/',
+    component: ProviderRobotAccountList,
+    parent: 'marketplace-admin-resources',
+    data: {
+      breadcrumb: () => translate('Robot accounts'),
     },
   },
 

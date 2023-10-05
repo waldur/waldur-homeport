@@ -8540,6 +8540,10 @@ msgstr ""
 msgid "Resources usage"
 msgstr ""
 
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
+msgid "Responsible user"
+msgstr ""
+
 #: src/azure/vm/actions/RestartAction.tsx
 #: src/openstack/openstack-instance/actions/RestartAction.tsx
 msgid "Restart"
