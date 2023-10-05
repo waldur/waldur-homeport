@@ -129,6 +129,7 @@ export type PhoneNumber =
 
 // Customer has only two mandatory fields: name and email, rest are optional.
 export interface Customer {
+  projects_count?: number;
   url?: string;
   uuid?: string;
   email: string;
