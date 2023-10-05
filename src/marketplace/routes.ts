@@ -726,7 +726,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-support-orders',
     url: 'orders/',
-    parent: 'admin-marketplace',
+    parent: 'marketplace-admin-resources',
     component: SupportOrdersContainer,
     data: {
       breadcrumb: () => translate('Orders'),
