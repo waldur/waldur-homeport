@@ -17,14 +17,14 @@ const PureProviderRobotAccountFilter: FunctionComponent<{ provider }> = ({
         name="customer"
         badgeValue={(value) => value?.name}
       >
-        <ProviderCustomerFilter provider_uuid={provider.uuid} />
+        <ProviderCustomerFilter provider_uuid={provider?.uuid} />
       </TableFilterItem>
       <TableFilterItem
         title={translate('Project')}
         name="project"
         badgeValue={(value) => value?.name}
       >
-        <ProviderProjectFilter provider_uuid={provider.uuid} />
+        <ProviderProjectFilter provider_uuid={provider?.uuid} />
       </TableFilterItem>
     </>
   );

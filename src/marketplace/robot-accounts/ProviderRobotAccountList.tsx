@@ -19,14 +19,22 @@ export const ProviderRobotAccountList: FunctionComponent<{ provider }> = ({
     getFormValues('ProviderRobotAccountFilter'),
   ) as { project?: { uuid }; customer?: { uuid } };
   const customer = useSelector(getCustomer);
-  const filter = useMemo(
-    () => ({
-      provider_uuid: customer?.uuid,
+  const filter = useMemo(() => {
+    const baseFilter: {
+      project_uuid?: string;
+      customer_uuid?: string;
+      provider_uuid?: string;
+    } = {
       project_uuid: filterValues?.project?.uuid,
       customer_uuid: filterValues?.customer?.uuid,
-    }),
-    [filterValues, customer],
-  );
+    };
+
+    if (provider) {
+      baseFilter.provider_uuid = customer?.uuid;
+    }
+
+    return baseFilter;
+  }, [filterValues, customer]);
   const tableProps = useTable({
     table: 'provider-robot-accounts',
     fetchData: createFetcher('marketplace-robot-accounts'),
