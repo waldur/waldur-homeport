@@ -21,6 +21,7 @@ export const EditOverviewButton: FC<EditOfferingProps> = (props) => {
       openModalDialog(EditOverviewDialog, {
         resolve: props,
         formId: OVERVIEW_FORM_ID,
+        size: 'lg',
       }),
     );
   };

@@ -3521,10 +3521,6 @@ msgstr ""
 msgid "File for login page."
 msgstr ""
 
-#: src/core/CopyToClipboard.tsx
-msgid "File has been copied"
-msgstr ""
-
 #: src/project/effects.ts
 msgid "File too large. Please select a smaller file."
 msgstr ""
@@ -3801,7 +3797,12 @@ msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingGettingStarted.tsx
+#: src/marketplace/resources/details/GettingStartedCard.tsx
 msgid "Getting started"
+msgstr ""
+
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+msgid "Getting started instructions"
 msgstr ""
 
 #: src/administration/providers/IdentityProvidersList.tsx
@@ -12691,6 +12692,10 @@ msgstr ""
 #: src/marketplace/resources/usage/utils.ts
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Value"
+msgstr ""
+
+#: src/core/CopyToClipboard.tsx
+msgid "Value has been copied"
 msgstr ""
 
 #: src/marketplace/offerings/update/attributes/utils.tsx

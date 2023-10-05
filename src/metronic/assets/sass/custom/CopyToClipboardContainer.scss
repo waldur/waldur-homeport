@@ -4,7 +4,7 @@
   pre {
     display: flex;
     align-items: center;
-    background-color: if(isDarkMode(), #1a261d, white);
+    background-color: $gray-100;
     padding: 0;
     margin-bottom: 0;
 
@@ -12,6 +12,8 @@
       max-width: 280px;
       padding: 12px 10px;
       overflow-x: scroll;
+      font-size: 13px;
+      margin-top: 3px;
     }
 
     .copy-to-clipboard-container {

@@ -10,7 +10,7 @@ export const CopyToClipboard: FunctionComponent<{ value }> = ({ value }) => {
 
   const onClick = useCallback(() => {
     copy(value);
-    dispatch(showSuccess(translate('File has been copied')));
+    dispatch(showSuccess(translate('Value has been copied')));
   }, [dispatch, value]);
 
   return (

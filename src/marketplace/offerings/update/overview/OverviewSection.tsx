@@ -45,6 +45,11 @@ const attributes: Attribute[] = [
     type: 'string',
     maxLength: 200,
   },
+  {
+    key: 'getting_started',
+    title: translate('Getting started instructions'),
+    type: 'text',
+  },
 ];
 
 export const OverviewSection = (props) => {
