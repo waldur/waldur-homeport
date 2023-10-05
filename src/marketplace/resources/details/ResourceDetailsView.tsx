@@ -23,6 +23,7 @@ import { ResourceActions } from '../ResourceActions';
 import { ActionButton } from './ActionButton';
 import { ActivityCard } from './ActivityCard';
 import { BookingMainComponent } from './BookingMainComponent';
+import { GettingStartedCard } from './GettingStartedCard';
 import { InstanceComponents } from './InstanceComponents';
 import { InstanceMainComponent } from './openstack-instance/InstanceMainComponent';
 import { TenantMainComponent } from './openstack-tenant/TenantMainComponent';
@@ -155,6 +156,7 @@ export const ResourceDetailsView: FC<any> = ({
                     />
                   </ErrorBoundary>
                 )}
+                <GettingStartedCard resource={resource} offering={offering} />
                 <RobotAccountCard resource={resource} />
                 <UsageCard resource={resource} />
               </Col>

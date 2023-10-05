@@ -4,7 +4,12 @@ import { connect, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { WysiwygEditor } from '@waldur/core/WysiwygEditor';
-import { StringField, FormContainer, SubmitButton } from '@waldur/form';
+import {
+  StringField,
+  FormContainer,
+  SubmitButton,
+  TextField,
+} from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { updateProviderOfferingOverview } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -36,6 +41,7 @@ export const EditOverviewDialog = connect(
             terms_of_service: props.resolve.offering.terms_of_service,
             terms_of_service_link: props.resolve.offering.terms_of_service_link,
             access_url: props.resolve.offering.access_url,
+            getting_started: props.resolve.offering.getting_started,
             [props.resolve.attribute.key]: formData.value,
           });
           dispatch(
@@ -60,6 +66,8 @@ export const EditOverviewDialog = connect(
           <FormContainer {...props}>
             {props.resolve.attribute.type === 'html' ? (
               <WysiwygEditor name="value" />
+            ) : props.resolve.attribute.type === 'text' ? (
+              <TextField name="value" />
             ) : (
               <StringField
                 name="value"
