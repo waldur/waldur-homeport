@@ -33,6 +33,7 @@ export interface TableOptionsType<RowType = any> {
   mapPropsToTableId?(props: any): string[];
   table: string;
   fetchData: any;
+  onFetch?: (rows: RowType[], totalCount: number, firstFetch: boolean) => void;
   staleTime?: number;
   queryField?: string;
   exportFields?: string[] | ((props: any) => string[]);
