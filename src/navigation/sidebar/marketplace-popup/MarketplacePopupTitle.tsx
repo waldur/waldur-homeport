@@ -48,6 +48,7 @@ export const MarketplacePopupTitle: FunctionComponent<{
         changeOrganizationNameLength(organizationNameLength - 1);
       } else if (
         wrapperWidth > buttonWidth + 20 &&
+        customer &&
         organizationNameLength < customer.name.length
       ) {
         changeOrganizationNameLength(organizationNameLength + 1);
@@ -56,7 +57,7 @@ export const MarketplacePopupTitle: FunctionComponent<{
     window.addEventListener('resize', checkWidth);
     checkWidth();
     return () => window.removeEventListener('resize', checkWidth);
-  }, [refTitle.current, isVisible, organizationNameLength]);
+  }, [refTitle.current, isVisible, organizationNameLength, customer]);
 
   return (
     <Col
