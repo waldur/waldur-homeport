@@ -147,6 +147,7 @@ export const ResourceDetailsView: FC<any> = ({
           <div className="container-xxl py-10">
             <Row className="mb-10">
               <Col md={8} sm={12}>
+                <GettingStartedCard resource={resource} offering={offering} />
                 {MainComponent && (
                   <ErrorBoundary fallback={ErrorMessage}>
                     <MainComponent
@@ -156,7 +157,6 @@ export const ResourceDetailsView: FC<any> = ({
                     />
                   </ErrorBoundary>
                 )}
-                <GettingStartedCard resource={resource} offering={offering} />
                 <RobotAccountCard resource={resource} />
                 <UsageCard resource={resource} />
               </Col>
