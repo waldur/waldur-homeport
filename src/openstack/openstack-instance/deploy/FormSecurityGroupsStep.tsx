@@ -87,6 +87,13 @@ export const FormSecurityGroupsStep = (props: FormStepProps) => {
   const tableProps = useTable({
     table: 'deploy-security-groups',
     fetchData: createFetcher('openstacktenant-security-groups'),
+    onFetch: (rows, _, firstFetch) => {
+      if (!firstFetch || !rows?.length) return;
+      const defaultItem = rows.find((row) => row?.name === 'default');
+      if (defaultItem) {
+        props.change('attributes.security_groups', [defaultItem]);
+      }
+    },
     filter,
     staleTime: 3 * 60 * 1000,
   });

@@ -25,6 +25,11 @@ export const FormSSHPublicKeysStep = (props: FormStepProps) => {
   const tableProps = useTable({
     table: keysListTable,
     fetchData: createFetcher('keys'),
+    onFetch: (rows, totalCount, firstFetch) => {
+      if (firstFetch && totalCount === 1 && rows.length === 1) {
+        props.change('attributes.ssh_public_key', rows[0]);
+      }
+    },
     filter,
   });
 
