@@ -5,7 +5,12 @@ import { Form } from 'react-bootstrap';
 const formatKey = (key: string) => capitalize(words(key).join(' '));
 
 const getKeyValueElement = (error) => {
-  if (typeof error !== 'object') return error;
+  if (
+    !error ||
+    typeof error !== 'object' ||
+    typeof error?.$$typeof === 'symbol'
+  )
+    return error;
   return Object.entries(error).map(([key, value], i) =>
     isNaN(key as any) ? (
       <div key={key + i}>
