@@ -1,0 +1,32 @@
+.code-block {
+  display: block;
+
+  pre {
+    display: flex;
+    align-items: center;
+    background-color: $gray-100;
+    padding: 0;
+    margin-bottom: 0;
+    font-size: 13px;
+
+    .code-block-content {
+      padding: 12px 10px;
+      overflow-x: scroll;
+      margin-top: 3px;
+      flex-grow: 1;
+    }
+
+    .code-block-pre {
+      border-right: 1px solid #ccc;
+      padding: 0 10px;
+      margin-right: 10px;
+      pointer-events: none;
+    }
+
+    .code-block-post {
+      border-left: 1px solid #ccc;
+      padding: 0 10px;
+      margin-left: 10px;
+    }
+  }
+}
