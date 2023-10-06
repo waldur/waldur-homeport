@@ -18,6 +18,7 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { OVERVIEW_FORM_ID } from './constants';
 import { EditOfferingProps } from './types';
+import { pickOverview } from './utils';
 
 export const EditOverviewDialog = connect(
   (_, ownProps: { resolve: EditOfferingProps }) => ({
@@ -34,14 +35,7 @@ export const EditOverviewDialog = connect(
       async (formData) => {
         try {
           await updateProviderOfferingOverview(props.resolve.offering.uuid, {
-            name: props.resolve.offering.name,
-            description: props.resolve.offering.description,
-            full_description: props.resolve.offering.full_description,
-            privacy_policy_link: props.resolve.offering.privacy_policy_link,
-            terms_of_service: props.resolve.offering.terms_of_service,
-            terms_of_service_link: props.resolve.offering.terms_of_service_link,
-            access_url: props.resolve.offering.access_url,
-            getting_started: props.resolve.offering.getting_started,
+            ...pickOverview(props.resolve.offering),
             [props.resolve.attribute.key]: formData.value,
           });
           dispatch(

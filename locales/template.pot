@@ -2910,6 +2910,7 @@ msgstr ""
 #: src/marketplace/offerings/update/components/EditComponentButton.tsx
 #: src/marketplace/offerings/update/integration/EditScriptButton.tsx
 #: src/marketplace/offerings/update/options/EditOptionButton.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedButton.tsx
 #: src/marketplace/offerings/update/overview/EditOverviewButton.tsx
 #: src/marketplace/offerings/update/overview/OfferingLocationButton.tsx
 #: src/marketplace/offerings/update/overview/OfferingLogoButton.tsx
@@ -3801,6 +3802,7 @@ msgstr ""
 msgid "Getting started"
 msgstr ""
 
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 msgid "Getting started instructions"
 msgstr ""
@@ -6008,6 +6010,7 @@ msgid "Offering has been paused."
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
 #: src/marketplace/offerings/update/overview/EditOverviewDialog.tsx
 msgid "Offering has been updated successfully."
 msgstr ""
@@ -10307,6 +10310,7 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr ""
 
 #: src/issues/create/IssueCreateForm.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
 #: src/notifications/NotificationForm.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
@@ -10456,6 +10460,10 @@ msgstr ""
 
 #: src/administration/providers/ProviderForm.tsx
 msgid "The endpoint for user details management."
+msgstr ""
+
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
+msgid "The following substitution variables are available: resource_name, resource_username, backend_id"
 msgstr ""
 
 #: src/invoices/store/effects.ts
@@ -11945,6 +11953,7 @@ msgid "Unable to update offering state."
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
 #: src/marketplace/offerings/update/overview/EditOverviewDialog.tsx
 msgid "Unable to update offering."
 msgstr ""
@@ -12115,6 +12124,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/integration/EditSchedulesDialog.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
 #: src/marketplace/offerings/update/overview/EditOverviewDialog.tsx
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx

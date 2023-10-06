@@ -4,6 +4,7 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
 import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 
+import { EditGettingStartedButton } from './EditGettingStartedButton';
 import { EditOverviewButton } from './EditOverviewButton';
 import { OfferingLocationButton } from './OfferingLocationButton';
 import { OfferingLogoButton } from './OfferingLogoButton';
@@ -31,7 +32,7 @@ const attributes: Attribute[] = [
   {
     key: 'terms_of_service',
     title: translate('Terms of service'),
-    type: 'string',
+    type: 'html',
   },
   {
     key: 'privacy_policy_link',
@@ -44,11 +45,6 @@ const attributes: Attribute[] = [
     title: translate('Terms of service link'),
     type: 'string',
     maxLength: 200,
-  },
-  {
-    key: 'getting_started',
-    title: translate('Getting started instructions'),
-    type: 'text',
   },
 ];
 
@@ -134,6 +130,28 @@ export const OverviewSection = (props) => {
               <td className="row-actions">
                 <div>
                   <OfferingLogoButton
+                    offering={props.offering}
+                    refetch={props.refetch}
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td className="col-md-3">
+                {translate('Getting started instructions')}
+              </td>
+              <td className="col-md-9">
+                <i
+                  className={
+                    props.offering.getting_started
+                      ? 'fa fa-check text-info'
+                      : 'fa fa-times text-danger'
+                  }
+                />
+              </td>
+              <td className="row-actions">
+                <div>
+                  <EditGettingStartedButton
                     offering={props.offering}
                     refetch={props.refetch}
                   />
