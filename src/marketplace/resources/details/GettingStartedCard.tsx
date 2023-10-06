@@ -25,7 +25,8 @@ export const GettingStartedCard = ({ resource, offering }) =>
               'backend_id',
               resource.effective_id || resource.backend_id,
             )
-            .replaceAll('resource_name', resource.name)}
+            .replaceAll('resource_name', resource.name)
+            .replaceAll('resource_username', resource.username)}
         </Markdown>
       </Card.Body>
     </Card>
