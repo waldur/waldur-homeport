@@ -23,3 +23,30 @@
     }
   }
 }
+
+
+.pre-block {
+  display: block;
+
+  pre {
+    display: flex;
+    align-items: center;
+    background-color: $gray-100;
+    padding: 0;
+    margin-bottom: 0;
+
+    .copyable-content {
+      padding: 12px 10px;
+      overflow-x: scroll;
+      font-size: 13px;
+      margin-top: 3px;
+      flex-grow: 1;
+    }
+
+    .copy-to-clipboard-block {
+      border-left: 1px solid #ccc;
+      padding: 0 10px;
+      margin-left: 10px;
+    }
+  }
+}

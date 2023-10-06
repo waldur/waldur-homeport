@@ -1,7 +1,7 @@
 import Markdown from 'markdown-to-jsx';
 import { Card } from 'react-bootstrap';
 
-import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
+import { CopyToClipboardBlock } from '@waldur/core/CopyToClipboardBlock';
 import { translate } from '@waldur/i18n';
 
 export const GettingStartedCard = ({ resource, offering }) =>
@@ -16,7 +16,7 @@ export const GettingStartedCard = ({ resource, offering }) =>
         <Markdown
           options={{
             overrides: {
-              CopyToClipboard: { component: CopyToClipboardContainer },
+              CopyToClipboard: { component: CopyToClipboardBlock },
             },
           }}
         >
