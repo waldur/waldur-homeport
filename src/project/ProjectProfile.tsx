@@ -7,6 +7,7 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@waldur/workspace/selectors';
@@ -43,7 +44,19 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
           <Col className="d-flex flex-column justify-content-between">
             <Row className="mb-6">
               <Col>
-                <h2 className="mb-0">{project.name}</h2>
+                <h2 className="mb-0">
+                  {project.name}
+                  {isFeatureVisible('project.show_industry_flag') &&
+                    project.is_industry && (
+                      <span>
+                        <i
+                          className="fa fa-industry fa-lg"
+                          style={{ marginLeft: '5px' }}
+                        ></i>
+                      </span>
+                    )}
+                </h2>
+
                 <Stack direction="horizontal" className="gap-6">
                   {project.oecd_fos_2007_code && (
                     <span>{`${project.oecd_fos_2007_code}. ${project.oecd_fos_2007_label}`}</span>
