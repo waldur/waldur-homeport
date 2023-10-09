@@ -13,6 +13,7 @@ interface ResourceActionComponentProps {
   error?: object;
   actions: ActionItemType[];
   resource: any;
+  marketplaceResource?: any;
   refetch?(): void;
 }
 
@@ -41,6 +42,7 @@ export const ResourceActionComponent: FunctionComponent<ResourceActionComponentP
               <ActionComponent
                 key={index}
                 resource={props.resource}
+                marketplaceResource={props.marketplaceResource}
                 refetch={props.refetch}
               />
             ))}

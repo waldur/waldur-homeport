@@ -234,16 +234,6 @@
     ]
   },
   {
-    "key": "openstack",
-    "description": "OpenStack resources provisioning",
-    "items": [
-      {
-        "key": "volume_types",
-        "description": "Allow to select OpenStack volume type when instance or volume is provisioned."
-      }
-    ]
-  },
-  {
     "key": "rancher",
     "description": "Rancher resources provisioning",
     "items": [

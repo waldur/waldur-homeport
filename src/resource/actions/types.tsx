@@ -50,6 +50,7 @@ export interface ActionContext<Resource = BaseResource> {
 
 export type ActionItemType = ComponentType<{
   resource;
+  marketplaceResource?;
   refetch?(): void;
   as?: ComponentType;
 }>;

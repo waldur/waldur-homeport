@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React from 'react';
 import { useAsyncFn, useBoolean } from 'react-use';
 
+import { getResource } from '@waldur/marketplace/common/api';
 import { ActionsList } from '@waldur/marketplace/resources/actions/ActionsList';
 
 import { ActionRegistry } from './registry';
@@ -17,13 +18,15 @@ async function loadData(url: string) {
   const response = await Axios.get(url);
   const resource = response.data;
   let actions = ActionRegistry.getActions(resource.resource_type);
+  let marketplaceResource;
   if (resource.marketplace_resource_uuid) {
     const extraActions = actions.filter(
       (action) => !ActionsList.includes(action as any),
     );
     actions = ActionsList.concat(extraActions as any);
+    marketplaceResource = await getResource(resource.marketplace_resource_uuid);
   }
-  return { resource, actions };
+  return { resource, marketplaceResource, actions };
 }
 
 export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
@@ -46,13 +49,12 @@ export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
 
   return (
     <ResourceActionComponent
+      {...value}
       open={open}
       disabled={props.disabled}
       loading={loading}
       error={error}
-      actions={value?.actions}
       onToggle={onToggle}
-      resource={value?.resource}
       refetch={props.refetch}
     />
   );

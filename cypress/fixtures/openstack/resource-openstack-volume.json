@@ -35,6 +35,9 @@
     "system_volume_size": 28672,
     "system_volume_type": "/api/openstacktenant-volume-types/7cb497fe76af4b34adbffad15fee2f34/"
   },
+  "offering_plugin_options": {
+    "storage_mode": "dynamic"
+  },
   "limits": {},
   "uuid": "53b9bda915ab4dc0aac93a8f4fe83d30",
   "created": "2022-05-08T18:31:38.671333Z",
