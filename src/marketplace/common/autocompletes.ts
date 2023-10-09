@@ -54,7 +54,7 @@ export const projectAutocomplete = async (
   const params = {
     name: query,
     customer,
-    field: ['name', 'uuid'],
+    field: ['name', 'uuid', 'is_industry'],
     o: 'name',
     page: currentPage,
     page_size: ENV.pageSize,

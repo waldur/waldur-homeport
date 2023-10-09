@@ -7172,6 +7172,7 @@ msgid "Preferred language"
 msgstr ""
 
 #: src/marketplace/offerings/PreviewButton.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
 msgid "Preview"
 msgstr ""
@@ -10463,7 +10464,7 @@ msgid "The endpoint for user details management."
 msgstr ""
 
 #: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
-msgid "The following substitution variables are available: resource_name, resource_username, backend_id"
+msgid "The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}"
 msgstr ""
 
 #: src/invoices/store/effects.ts
