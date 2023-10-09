@@ -14,6 +14,7 @@ import {
   VOLUME_TYPE,
   TENANT_TYPE,
 } from '@waldur/openstack/constants';
+import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
 import { SLURM_PLUGIN, SLURM_REMOTE_PLUGIN } from '@waldur/slurm/constants';
 import { BASIC_OFFERING_TYPE } from '@waldur/support/constants';
 
@@ -46,6 +47,7 @@ export const OfferingDetails: FunctionComponent<OfferingDetailsProps> = (
     SLURM_REMOTE_PLUGIN,
     VOLUME_TYPE,
     TENANT_TYPE,
+    MARKETPLACE_RANCHER,
   ].includes(props.offering.type) ? (
     <DeployPage offering={props.offering} limits={props.limits} />
   ) : (

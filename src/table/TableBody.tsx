@@ -81,26 +81,34 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   const onChangeField = useCallback(
     (row, input) => {
       if (fieldType === 'checkbox') {
-        if (isRowSelected(row)) {
-          input.onChange(selectedRows.filter((item) => item.uuid !== row.uuid));
+        const newValues: any[] = input.value || [];
+        const index = newValues.findIndex((v) => v.uuid === row.uuid);
+        // Is field checked
+        if (index > -1) {
+          newValues.splice(index, 1);
         } else {
-          input.onChange(selectedRows.concat(row));
+          newValues.push(row);
         }
-        input.onBlur();
-        selectRow(row);
+        input.onChange(newValues);
       } else if (fieldType === 'radio') {
         input.onChange(row);
-        input.onBlur();
-        selectedRows.forEach((item) => selectRow(item));
-        selectRow(row);
       }
+      input.onBlur();
     },
-    [fieldType, isRowSelected, selectedRows, selectRow],
+    [fieldType],
   );
 
   const TR = (row, rowIndex, fieldProps = null) => {
-    const isChecked = isRowSelected(row);
-
+    let isChecked = false;
+    if (fieldProps) {
+      if (Array.isArray(fieldProps.input.value)) {
+        isChecked = fieldProps.input.value.some((v) => v.uuid === row.uuid);
+      } else {
+        isChecked = fieldProps.input.value?.uuid === row.uuid;
+      }
+    } else {
+      isChecked = isRowSelected(row);
+    }
     return (
       <tr
         className={
@@ -123,17 +131,15 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
           <td className="row-control">
             {fieldType && fieldProps ? (
               <>
-                {isChecked &&
-                  fieldProps.meta.touched &&
-                  fieldProps.meta.touched && (
-                    <Tip
-                      label={fieldProps.meta.error}
-                      id={`tableErrorTip-${rowIndex}`}
-                      className="error-mark"
-                    >
-                      <i className="fa fa-exclamation-circle" />
-                    </Tip>
-                  )}
+                {isChecked && fieldProps.meta.touched && fieldProps.meta.error && (
+                  <Tip
+                    label={fieldProps.meta.error}
+                    id={`tableErrorTip-${rowIndex}`}
+                    className="error-mark"
+                  >
+                    <i className="fa fa-exclamation-circle" />
+                  </Tip>
+                )}
                 <FormCheck
                   name={fieldProps.input.name}
                   type={fieldType}
@@ -184,7 +190,10 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
         // you need to find out a way to calculate the modal Z-index and add it to the element
         return true;
       }
-      if (e.target.className.includes('dropdown-toggle')) {
+      if (
+        e.target.className &&
+        e.target.className.includes('dropdown-toggle')
+      ) {
         const dropdownToggle: HTMLButtonElement = e.target;
         const buttonGroup = dropdownToggle.parentElement;
         let dropdownMenu: HTMLElement;

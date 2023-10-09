@@ -64,7 +64,7 @@ export const listToDict = (key, value) => (list) => {
   return dict;
 };
 
-export const getUUID = (url) => url.split('/').splice(-2)[0];
+export const getUUID = (url) => url && url.split('/').splice(-2)[0];
 
 export const pick = (fields) => (source) =>
   fields.reduce((target, field) => ({ ...target, [field]: source[field] }), {});

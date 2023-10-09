@@ -16,6 +16,7 @@ import { translate } from '@waldur/i18n';
 import { getOrderFormSteps } from '@waldur/marketplace/common/registry';
 import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
 import { calculateSystemVolumeSize } from '@waldur/openstack/openstack-instance/utils';
+import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { FORM_ID } from '../details/constants';
@@ -48,7 +49,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
   const project = useSelector(getProject);
   const formData = useSelector(formDataSelector);
 
-  const selectedOffering = formData?.offering || props?.offering;
+  const selectedOffering: Offering = formData?.offering || props?.offering;
 
   const plans = useMemo(
     () => selectedOffering.plans.filter((plan) => plan.archived === false),
@@ -56,7 +57,10 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
   );
 
   const formSteps = useMemo(
-    () => getOrderFormSteps(selectedOffering?.type) || [],
+    () =>
+      (getOrderFormSteps(selectedOffering?.type) || []).filter(
+        (step) => (step.isActive && step.isActive()) ?? true,
+      ),
     [selectedOffering],
   );
 
@@ -115,6 +119,10 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
       if (hasStepWithField(formSteps, 'attributes.subnet_cidr')) {
         props.change('attributes.subnet_cidr', '192.168.42.0/24');
       }
+      if (selectedOffering.type === MARKETPLACE_RANCHER) {
+        props.change('attributes.install_longhorn', false);
+        props.change('attributes.nodes', []);
+      }
       props.change('limits', {
         ...getDefaultLimits(selectedOffering),
         ...props.limits,
@@ -153,7 +161,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
     stepRefs.current.forEach((el, i) => {
       if (completedSteps[i] && !formSteps[i].required) return;
       let completed = false;
-      if (formSteps[i].required) {
+      if (formSteps[i].required && formSteps[i].requiredFields?.length) {
         completed = formSteps[i].requiredFields.every((fieldName) =>
           Boolean(get(formData, fieldName)),
         );
@@ -209,6 +217,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
             <step.component
               step={i + 1}
               id={step.id}
+              title={step.label}
               offering={selectedOffering}
               observed={completedSteps[i]}
               change={props.change}

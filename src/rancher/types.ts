@@ -1,3 +1,5 @@
+import { Flavor } from '@waldur/openstack/openstack-instance/types';
+
 export interface Namespace {
   url: string;
   name: string;
@@ -127,4 +129,11 @@ export type NodeRole = 'worker' | 'etcd' | 'controlplane';
 
 export interface Workload {
   namespace_uuid: string;
+}
+
+export interface NodeField {
+  flavor: Flavor;
+  name: string;
+  roles: string[];
+  units: number;
 }

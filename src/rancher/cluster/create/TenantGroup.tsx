@@ -20,14 +20,13 @@ import { waitForConfirmation } from '@waldur/modal/actions';
 import { ClusterTemplate } from '@waldur/rancher/types';
 import { RootState } from '@waldur/store/reducers';
 
+import { NODES_FIELD_ARRAY } from './constants';
 import { NodeList } from './NodeList';
 import { SubnetGroup } from './SubnetGroup';
 import { loadData } from './utils';
 
 const getTemplate = (state: RootState) =>
   formValueSelector(FORM_ID)(state, 'attributes.template');
-
-const NODES_FIELD_ARRAY = 'attributes.nodes';
 
 const SECURITY_GROUPS_FIELD = 'attributes.security_groups';
 

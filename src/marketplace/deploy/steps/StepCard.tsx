@@ -13,11 +13,15 @@ interface StepCardProps {
   id?: string;
   completed?: boolean;
   loading?: boolean;
+  className?: string;
 }
 
 export const StepCard: FC<StepCardProps> = (props) => {
   return (
-    <Card className="deploy-step-card card-flush" id={props.id}>
+    <Card
+      className={'deploy-step-card card-flush ' + props.className}
+      id={props.id}
+    >
       <Card.Header className="ps-5">
         <div className="d-flex align-items-center me-2">
           <FormCheck className="form-check form-check-custom form-check-sm me-6">

@@ -4,6 +4,7 @@ import { getFormValues } from 'redux-form';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { CheckoutPricingRow } from '@waldur/marketplace/deploy/CheckoutPricingRow';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { OfferingDetailsProps } from '@waldur/marketplace/details/OfferingDetails';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
@@ -62,48 +63,34 @@ const connector = connect(getStats);
 const PureRancherExtraComponent = (props) =>
   props.nodeCount ? (
     <>
-      <tr>
-        <td>
-          <strong>{translate('Total number of nodes')}</strong>
-        </td>
-        <td>{props.nodeCount}</td>
-      </tr>
-      <tr>
-        <td>
-          <strong>{translate('Number of etcd nodes')}</strong>
-        </td>
-        <td>{props.etcdCount}</td>
-      </tr>
-      <tr>
-        <td>
-          <strong>{translate('Number of worker nodes')}</strong>
-        </td>
-        <td>{props.workerCount}</td>
-      </tr>
-      <tr>
-        <td>
-          <strong>{translate('Number of control plane nodes')}</strong>
-        </td>
-        <td>{props.controlCount}</td>
-      </tr>
-      <tr>
-        <td>
-          <strong>{translate('Total CPU')}</strong>
-        </td>
-        <td>{props.totalCores}</td>
-      </tr>
-      <tr>
-        <td>
-          <strong>{translate('Total storage')}</strong>
-        </td>
-        <td>{props.totalStorage}</td>
-      </tr>
-      <tr>
-        <td>
-          <strong>{translate('Total memory')}</strong>
-        </td>
-        <td>{props.totalRam}</td>
-      </tr>
+      <CheckoutPricingRow
+        label={translate('Total number of nodes')}
+        value={props.nodeCount}
+      />
+      <CheckoutPricingRow
+        label={translate('Number of etcd nodes')}
+        value={props.etcdCount}
+      />
+      <CheckoutPricingRow
+        label={translate('Number of worker nodes')}
+        value={props.workerCount}
+      />
+      <CheckoutPricingRow
+        label={translate('Number of control plane nodes')}
+        value={props.controlCount}
+      />
+      <CheckoutPricingRow
+        label={translate('Total CPU')}
+        value={props.totalCores}
+      />
+      <CheckoutPricingRow
+        label={translate('Total storage')}
+        value={props.totalStorage}
+      />
+      <CheckoutPricingRow
+        label={translate('Total memory')}
+        value={props.totalRam}
+      />
     </>
   ) : null;
 

@@ -4,18 +4,19 @@ import { Select } from '@waldur/form/themed-select';
 
 export const SelectField: FunctionComponent<any> = (props) => {
   const { input, simpleValue, options, ...rest } = props;
+  const getOptionValue = props.getOptionValue || ((option) => option.value);
   return (
     <Select
       {...rest}
       name={input.name}
       value={
         (simpleValue || typeof input.value !== 'object') && options
-          ? options.filter((option) => option.value === input.value)
+          ? options.filter((option) => getOptionValue(option) === input.value)
           : input.value
       }
       onChange={(newValue: any) =>
         simpleValue
-          ? input.onChange(newValue ? newValue.value : null)
+          ? input.onChange(newValue ? getOptionValue(newValue) : null)
           : input.onChange(newValue)
       }
       options={options}
