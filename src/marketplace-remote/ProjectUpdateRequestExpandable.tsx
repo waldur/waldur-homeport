@@ -44,8 +44,12 @@ export const ProjectUpdateRequestExpandable = ({ row }) => (
       {row.old_oecd_fos_2007_code != row.new_oecd_fos_2007_code ? (
         <tr>
           <td>{translate('OECD FoS code')}</td>
-          <td>{row.old_oecd_fos_2007_code}</td>
-          <td>{row.new_oecd_fos_2007_code}</td>
+          <td>
+            {row.old_oecd_fos_2007_code}: {row.old_oecd_fos_2007_label}
+          </td>
+          <td>
+            {row.new_oecd_fos_2007_code}: {row.new_oecd_fos_2007_label}
+          </td>
         </tr>
       ) : null}
       {row.old_is_industry != row.new_is_industry ? (
