@@ -3,6 +3,9 @@ import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 
+import { MARKETPLACE_RANCHER } from './constants';
+import { deployOfferingSteps } from './steps';
+
 const RancherClusterCheckoutSummary = lazyComponent(
   () => import('./RancherClusterCheckoutSummary'),
   'RancherClusterCheckoutSummary',
@@ -75,11 +78,12 @@ const serializer = ({
 });
 
 registerOfferingType({
-  type: 'Marketplace.Rancher',
+  type: MARKETPLACE_RANCHER,
   get label() {
     return translate('Rancher cluster');
   },
-  component: RancherClusterForm,
+  formSteps: deployOfferingSteps,
+  component: RancherClusterForm, // We can remove this line later. formSteps replaced
   checkoutSummaryComponent: RancherClusterCheckoutSummary,
   pluginOptionsForm: RancherPluginOptionsForm,
   providerType: 'Rancher',

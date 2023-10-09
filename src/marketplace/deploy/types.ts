@@ -8,12 +8,14 @@ export interface OfferingConfigurationFormStep {
   requiredFields?: Array<string>;
   component: React.ComponentType<FormStepProps>;
   params?: Record<string, any>;
+  isActive?: () => boolean;
 }
 
 export interface FormStepProps {
   step: number;
   id: string;
   offering: Offering;
+  title?: string;
   observed?: boolean;
   change?(field: string, value: any): void;
   params?: OfferingConfigurationFormStep['params'];

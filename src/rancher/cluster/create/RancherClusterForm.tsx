@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { formValueSelector } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
 import { ExternalLink } from '@waldur/core/ExternalLink';
@@ -9,21 +8,16 @@ import { FormContainer, StringField, TextField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
-import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
 import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import { loadSshKeysOptions } from '@waldur/openstack/api';
-import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { TenantGroup } from './TenantGroup';
 import { TenantSelector } from './TenantSelector';
-import { rancherClusterName } from './utils';
-
-const getTenant = (state: RootState) =>
-  formValueSelector(FORM_ID)(state, 'attributes.tenant_settings');
+import { formTenantSelector, rancherClusterName } from './utils';
 
 export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
   props,
@@ -41,7 +35,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
     props.initialize(initialData);
   }, []);
 
-  const tenant = useSelector(getTenant);
+  const tenant = useSelector(formTenantSelector);
 
   const user = useSelector(getUser);
 

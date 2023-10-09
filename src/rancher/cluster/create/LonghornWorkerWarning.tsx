@@ -12,8 +12,12 @@ import { RootState } from '@waldur/store/reducers';
 export const LonghornWorkerWarning: FunctionComponent<{ nodeIndex }> = ({
   nodeIndex,
 }) => {
-  const roles: Array<NodeRole> = useSelector((state: RootState) =>
-    formValueSelector(FORM_ID)(state, `attributes.nodes[${nodeIndex}].roles`),
+  const roles: Array<NodeRole> = useSelector(
+    (state: RootState) =>
+      formValueSelector(FORM_ID)(
+        state,
+        `attributes.nodes[${nodeIndex}].roles`,
+      ) || [],
   );
   const longhornSelected = useSelector((state: RootState) =>
     formValueSelector(FORM_ID)(state, `attributes.install_longhorn`),

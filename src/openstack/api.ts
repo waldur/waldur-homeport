@@ -162,9 +162,9 @@ export const loadFlavors = (settings_uuid: string) =>
 export const loadImages = (settings_uuid: string) =>
   getAll<Image>('/openstacktenant-images/', { params: { settings_uuid } });
 
-export const loadSecurityGroups = (settings_uuid: string) =>
+export const loadSecurityGroups = (settings_uuid: string, name?: string) =>
   getAll<SecurityGroup>('/openstacktenant-security-groups/', {
-    params: { settings_uuid },
+    params: { settings_uuid, name },
   });
 
 export const loadServerGroups = (settings_uuid: string) =>

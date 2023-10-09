@@ -146,7 +146,7 @@ export const FormCloudStep = (props: FormStepProps) => {
 
   return (
     <StepCard
-      title={translate('Cloud')}
+      title={props.title || translate('Cloud')}
       step={props.step}
       id={props.id}
       completed={props.observed}

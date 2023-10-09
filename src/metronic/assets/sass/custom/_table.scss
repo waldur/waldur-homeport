@@ -228,6 +228,7 @@
 
       > * {
         color: $dark-inverse !important;
+        border: unset;
         --bs-table-accent-bg: $primary;
       }
     }
