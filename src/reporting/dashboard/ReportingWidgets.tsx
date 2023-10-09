@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
-
 import './ReportingWidgets.scss';
 
 interface ReportingWidget {
@@ -15,6 +15,7 @@ interface ReportingWidget {
     type: 'Number' | 'String' | 'Date';
   }>;
   to: { state; params? };
+  feature?: string;
 }
 
 const generateWidgetsData = (): ReportingWidget[] => [
@@ -34,6 +35,7 @@ const generateWidgetsData = (): ReportingWidget[] => [
     title: translate('Monthly revenue'),
     description: translate('Shows monthly revenue split by organization.'),
     to: { state: 'reporting.organizations' },
+    feature: 'support.customers_list',
   },
   {
     title: translate('Organization groups'),
@@ -46,6 +48,7 @@ const generateWidgetsData = (): ReportingWidget[] => [
       'Shows a common pricelist for all offerings in the marketplace.',
     ),
     to: { state: 'reporting.pricelist' },
+    feature: 'support.pricelist',
   },
   {
     title: translate('Usage reports'),
@@ -98,9 +101,13 @@ const WidgetItem = ({ item }: { item: ReportingWidget }) => (
 export const ReportingWidgets = () => {
   const widgets = useMemo(() => generateWidgetsData(), []);
 
+  const filteredWidgets = widgets.filter((item) => {
+    return (item.feature && isFeatureVisible(item.feature)) || !item.feature;
+  });
+
   return (
     <Row>
-      {widgets.map((item, i) => (
+      {filteredWidgets.map((item, i) => (
         <Col key={i} xs={12} md={6} xl={4} className="mb-6">
           <WidgetItem item={item} />
         </Col>
