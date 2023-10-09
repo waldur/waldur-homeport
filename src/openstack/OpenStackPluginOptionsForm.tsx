@@ -5,16 +5,18 @@ import { FormContainer, SelectField, NumberField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { pluginOptionsSelector } from '@waldur/marketplace/UserPluginOptionsForm';
 
+import { DYNAMIC_STORAGE_MODE, FIXED_STORAGE_MODE } from './constants';
+
 export const STORAGE_MODE_OPTIONS = [
   {
     label: translate('Fixed — use common storage quota'),
-    value: 'fixed',
+    value: FIXED_STORAGE_MODE,
   },
   {
     label: translate(
       'Dynamic — use separate volume types for tracking pricing',
     ),
-    value: 'dynamic',
+    value: DYNAMIC_STORAGE_MODE,
   },
 ];
 

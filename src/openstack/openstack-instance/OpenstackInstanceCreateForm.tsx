@@ -5,7 +5,6 @@ import { Field } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { TextField, StringField } from '@waldur/form';
 import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
 import { translate } from '@waldur/i18n';
@@ -42,6 +41,7 @@ import { ServerGroup } from '@waldur/openstack/openstack-server-groups/types';
 import { RootState } from '@waldur/store/reducers';
 import { User } from '@waldur/workspace/types';
 
+import { DYNAMIC_STORAGE_MODE } from '../constants';
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 import { AvailabilityZone } from '../types';
 
@@ -115,8 +115,11 @@ export class OpenstackInstanceCreateFormComponent extends Component<
 
       let volumeTypeChoices = [];
       let defaultVolumeType;
+      const volumeTypesEnabled =
+        this.props.offering.plugin_options.storage_mode ===
+        DYNAMIC_STORAGE_MODE;
 
-      if (isFeatureVisible('openstack.volume_types')) {
+      if (volumeTypesEnabled) {
         const volumeTypes = await api.loadVolumeTypes(scopeUuid);
         volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
         defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
@@ -171,7 +174,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
         });
         let system_volume_type = defaultVolumeType;
         let data_volume_type = defaultVolumeType;
-        if (isFeatureVisible('openstack.volume_types')) {
+        if (volumeTypesEnabled) {
           system_volume_type = volumeTypeChoices.find(
             (volumeType) => volumeType.value === initial.system_volume_type,
           );

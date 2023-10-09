@@ -4,7 +4,6 @@ import { useAsync } from 'react-use';
 import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
-import { isFeatureVisible } from '@waldur/features/connect';
 import {
   NumberField,
   TextField,
@@ -19,6 +18,7 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import { getVolumeNameValidators } from '@waldur/openstack/utils';
 
 import { loadVolumeAvailabilityZones, loadVolumeTypes } from '../api';
+import { DYNAMIC_STORAGE_MODE } from '../constants';
 import {
   formatVolumeTypeChoices,
   getDefaultVolumeType,
@@ -29,9 +29,9 @@ const validateSize = (value: number) =>
     ? translate('Size should be between 1 and 10240 GB.')
     : undefined;
 
-const loadData = async (settings) => {
+const loadData = async (settings, storage_mode) => {
   const zones = await loadVolumeAvailabilityZones(settings);
-  if (isFeatureVisible('openstack.volume_types')) {
+  if (storage_mode === DYNAMIC_STORAGE_MODE) {
     const volumeTypes = await loadVolumeTypes(settings);
     return {
       zones,
@@ -52,7 +52,11 @@ const loadData = async (settings) => {
 export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps> =
   (props) => {
     const state = useAsync(
-      () => loadData(props.offering.scope_uuid),
+      () =>
+        loadData(
+          props.offering.scope_uuid,
+          props.offering.plugin_options.storage_mode,
+        ),
       [props.offering.scope_uuid],
     );
 

@@ -5,7 +5,6 @@ import { isValid } from 'redux-form';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { formatFilesize } from '@waldur/core/utils';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
@@ -24,6 +23,8 @@ import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
+import { DYNAMIC_STORAGE_MODE } from '../constants';
+
 const getDailyPrice = (formData, components) => {
   /**
    * In Marketplace OpenStack plugin storage prices are stored per GB.
@@ -41,7 +42,7 @@ const getDailyPrice = (formData, components) => {
   return size * (components[component] || 0);
 };
 
-export const getQuotas = ({ formData, usages, limits }) => {
+export const getQuotas = ({ formData, usages, limits, storage_mode }) => {
   const quotas: Quota[] = [
     {
       name: 'storage',
@@ -50,7 +51,7 @@ export const getQuotas = ({ formData, usages, limits }) => {
       required: formData.size || 0,
     },
   ];
-  if (isFeatureVisible('openstack.volume_types')) {
+  if (storage_mode === DYNAMIC_STORAGE_MODE) {
     const required = {};
     if (formData.type) {
       const key = `gigabytes_${formData.type.name}`;
@@ -107,9 +108,17 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OfferingDetailsProps> = ({
     [formData, components],
   );
 
+  const storage_mode = offering.plugin_options.storage_mode;
+
   const quotas = React.useMemo(
-    () => getQuotas({ formData, usages, limits }),
-    [formData, usages, limits],
+    () =>
+      getQuotas({
+        formData,
+        usages,
+        limits,
+        storage_mode,
+      }),
+    [formData, usages, limits, storage_mode],
   );
 
   const orderItem = React.useMemo(

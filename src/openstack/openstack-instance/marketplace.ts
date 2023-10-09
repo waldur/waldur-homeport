@@ -1,10 +1,13 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 
-import { INSTANCE_TYPE, SHARED_INSTANCE_TYPE } from '../constants';
+import {
+  DYNAMIC_STORAGE_MODE,
+  INSTANCE_TYPE,
+  SHARED_INSTANCE_TYPE,
+} from '../constants';
 
 import { deployOfferingSteps } from './deploy/steps';
 import { getVolumeTypeRequirements } from './utils';
@@ -138,7 +141,8 @@ const formValidator = (props) => {
       'Total storage limit is exceeded',
     );
   }
-  if (isFeatureVisible('openstack.volume_types')) {
+  const storage_mode = offering.plugin_options.storage_mode;
+  if (storage_mode === DYNAMIC_STORAGE_MODE) {
     const required = getVolumeTypeRequirements(attributes);
     for (const name in required) {
       if (limits[name] !== -1 && required[name] + usages[name] > limits[name]) {
