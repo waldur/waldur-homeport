@@ -853,6 +853,7 @@ msgid "Are you sure you want to remove invoice item {name}?"
 msgstr ""
 
 #: src/customer/team/UserRemoveButton.tsx
+#: src/project/team/UserRemoveButton.tsx
 msgid "Are you sure you want to remove {userName}?"
 msgstr ""
 
@@ -1807,6 +1808,7 @@ msgstr ""
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
+#: src/project/team/UserRemoveButton.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 #: src/rancher/cluster/create/TenantGroup.tsx
 #: src/resource/actions/AsyncActionItem.tsx

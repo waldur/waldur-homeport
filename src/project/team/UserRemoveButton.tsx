@@ -1,13 +1,15 @@
-import Axios from 'axios';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { waitForConfirmation } from '@waldur/modal/actions';
+import { deleteProjectUser } from '@waldur/permissions/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { getProject } from '@waldur/workspace/selectors';
 
 interface UserRemoveButtonProps {
-  permission: string;
+  permission;
   isDisabled: boolean;
   refetch(): void;
 }
@@ -18,9 +20,26 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   refetch,
 }) => {
   const dispatch = useDispatch();
+  const project = useSelector(getProject);
   const callback = async () => {
     try {
-      await Axios.delete(permission);
+      await waitForConfirmation(
+        dispatch,
+        translate('Confirmation'),
+        translate('Are you sure you want to remove {userName}?', {
+          userName: permission.user_full_name || permission.user_username,
+        }),
+      );
+    } catch {
+      return;
+    }
+
+    try {
+      await deleteProjectUser({
+        project: project.uuid,
+        user: permission.user_uuid,
+        role: permission.role_name,
+      });
       refetch();
       dispatch(showSuccess(translate('Team member has been removed.')));
     } catch (e) {
