@@ -2,8 +2,8 @@ import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 
-import { CreateUserAgreementsForm } from '@waldur/administration/CreateUserAgreementsForm';
-import { UserAgreementsFormData } from '@waldur/administration/UserAgreementsForm';
+import { CreateUserAgreementsForm } from '@waldur/administration/agreements/CreateUserAgreementsForm';
+import { UserAgreementsFormData } from '@waldur/administration/agreements/UserAgreementsForm';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 

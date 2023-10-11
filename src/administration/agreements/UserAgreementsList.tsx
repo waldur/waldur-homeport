@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 
-import { UserAgreementCreateButton } from '@waldur/administration/UserAgreementCreateButton';
-import { UserAgreementDeleteButton } from '@waldur/administration/UserAgreementDeleteButton';
-import { UserAgreementsEditButton } from '@waldur/administration/UserAgreementsEditButton';
-import { UserAgreementsExpandableRow } from '@waldur/administration/UserAgreementsExpandableRow';
+import { UserAgreementCreateButton } from '@waldur/administration/agreements/UserAgreementCreateButton';
+import { UserAgreementDeleteButton } from '@waldur/administration/agreements/UserAgreementDeleteButton';
+import { UserAgreementsEditButton } from '@waldur/administration/agreements/UserAgreementsEditButton';
+import { UserAgreementsExpandableRow } from '@waldur/administration/agreements/UserAgreementsExpandableRow';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table';

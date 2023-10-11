@@ -21,7 +21,7 @@ const FeaturesList = lazyComponent(
 );
 
 const UserAgreementsList = lazyComponent(
-  () => import('./UserAgreementsList'),
+  () => import('./agreements/UserAgreementsList'),
   'UserAgreementsList',
 );
 

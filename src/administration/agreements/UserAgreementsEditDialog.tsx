@@ -5,7 +5,7 @@ import { getFormValues, reduxForm } from 'redux-form';
 import {
   UserAgreementsForm,
   UserAgreementsFormData,
-} from '@waldur/administration/UserAgreementsForm';
+} from '@waldur/administration/agreements/UserAgreementsForm';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 

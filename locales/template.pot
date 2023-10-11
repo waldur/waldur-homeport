@@ -542,7 +542,7 @@ msgstr ""
 msgid "Agreement number"
 msgstr ""
 
-#: src/administration/CreateUserAgreementsForm.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
 msgid "Agreement type"
 msgstr ""
 
@@ -898,7 +898,7 @@ msgstr ""
 msgid "Are you sure you would like to delete the key?"
 msgstr ""
 
-#: src/administration/UserAgreementDeleteDialog.tsx
+#: src/administration/agreements/UserAgreementDeleteDialog.tsx
 msgid "Are you sure you would like to delete the user agreement?"
 msgstr ""
 
@@ -1880,7 +1880,7 @@ msgstr ""
 msgid "Contains the word"
 msgstr ""
 
-#: src/administration/CreateUserAgreementsForm.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
 msgid "Content"
 msgstr ""
 
@@ -1958,7 +1958,7 @@ msgstr ""
 msgid "Coupon"
 msgstr ""
 
-#: src/administration/UserAgreementCreateButton.tsx
+#: src/administration/agreements/UserAgreementCreateButton.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
@@ -2009,7 +2009,7 @@ msgstr ""
 msgid "Create a campaign"
 msgstr ""
 
-#: src/administration/UserAgreementCreateDialog.tsx
+#: src/administration/agreements/UserAgreementCreateDialog.tsx
 msgid "Create a user agreements"
 msgstr ""
 
@@ -2177,7 +2177,7 @@ msgstr ""
 msgid "Created a new payment for {customer_link}."
 msgstr ""
 
-#: src/administration/UserAgreementsList.tsx
+#: src/administration/agreements/UserAgreementsList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
@@ -2515,7 +2515,7 @@ msgstr ""
 msgid "Default value"
 msgstr ""
 
-#: src/administration/UserAgreementDeleteButton.tsx
+#: src/administration/agreements/UserAgreementDeleteButton.tsx
 #: src/booking/components/modal/BookingModal.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
@@ -2566,7 +2566,7 @@ msgstr ""
 msgid "Delete robot account"
 msgstr ""
 
-#: src/administration/UserAgreementDeleteDialog.tsx
+#: src/administration/agreements/UserAgreementDeleteDialog.tsx
 msgid "Delete user agreement"
 msgstr ""
 
@@ -2937,7 +2937,7 @@ msgstr ""
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr ""
 
-#: src/administration/UserAgreementsEditButton.tsx
+#: src/administration/agreements/UserAgreementsEditButton.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
@@ -3072,7 +3072,7 @@ msgstr ""
 msgid "Edit team member"
 msgstr ""
 
-#: src/administration/UserAgreementsEditDialog.tsx
+#: src/administration/agreements/UserAgreementsEditDialog.tsx
 msgid "Edit user agreements"
 msgstr ""
 
@@ -7377,7 +7377,7 @@ msgid "Privacy Policy"
 msgstr ""
 
 #: src/about.tsx
-#: src/administration/CreateUserAgreementsForm.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
 #: src/navigation/FooterLinks.tsx
 msgid "Privacy policy"
 msgstr ""
@@ -8888,9 +8888,9 @@ msgstr ""
 msgid "SSH public keys"
 msgstr ""
 
-#: src/administration/CreateUserAgreementsForm.tsx
 #: src/administration/FeaturesList.tsx
-#: src/administration/UserAgreementsForm.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
+#: src/administration/agreements/UserAgreementsForm.tsx
 #: src/administration/providers/UpdateProviderDialog.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/booking/components/modal/BookingModal.tsx
@@ -10139,7 +10139,7 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-#: src/administration/UserAgreementDeleteDialog.tsx
+#: src/administration/agreements/UserAgreementDeleteDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/invitations/GroupinvitationButtons.tsx
@@ -10533,7 +10533,7 @@ msgstr ""
 msgid "Terms of Service"
 msgstr ""
 
-#: src/administration/CreateUserAgreementsForm.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/navigation/FooterLinks.tsx
 msgid "Terms of service"
@@ -11033,7 +11033,7 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
-#: src/administration/UserAgreementsList.tsx
+#: src/administration/agreements/UserAgreementsList.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
@@ -11224,7 +11224,7 @@ msgstr ""
 msgid "Unable to create a campaign."
 msgstr ""
 
-#: src/administration/CreateUserAgreementsForm.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
 msgid "Unable to create a user agreement."
 msgstr ""
 
@@ -11353,7 +11353,7 @@ msgstr ""
 msgid "Unable to delete team member."
 msgstr ""
 
-#: src/administration/UserAgreementDeleteDialog.tsx
+#: src/administration/agreements/UserAgreementDeleteDialog.tsx
 msgid "Unable to delete the user agreement."
 msgstr ""
 
@@ -12517,15 +12517,15 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: src/administration/CreateUserAgreementsForm.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
 msgid "User agreement has been created"
 msgstr ""
 
-#: src/administration/UserAgreementDeleteDialog.tsx
+#: src/administration/agreements/UserAgreementDeleteDialog.tsx
 msgid "User agreement has been deleted."
 msgstr ""
 
-#: src/administration/UserAgreementsForm.tsx
+#: src/administration/agreements/UserAgreementsForm.tsx
 msgid "User agreement was updated"
 msgstr ""
 
@@ -13694,7 +13694,7 @@ msgstr ""
 msgid "tokens"
 msgstr ""
 
-#: src/administration/UserAgreementsList.tsx
+#: src/administration/agreements/UserAgreementsList.tsx
 msgid "user agreements"
 msgstr ""
 
