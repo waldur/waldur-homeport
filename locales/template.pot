@@ -2029,6 +2029,10 @@ msgstr ""
 msgid "Create compensation for invoice item {name}"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Create customer permission"
+msgstr ""
+
 #: src/vmware/actions/CreateDiskAction.tsx
 #: src/vmware/actions/CreateDiskDialog.tsx
 msgid "Create disk"
@@ -2065,6 +2069,10 @@ msgid "Create offering"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
+msgid "Create offering permission"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
 msgid "Create offering plan"
 msgstr ""
 
@@ -2094,6 +2102,10 @@ msgstr ""
 #: src/project/ProjectCreateContainer.tsx
 #: src/project/ProjectCreateDialog.tsx
 msgid "Create project"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Create project permission"
 msgstr ""
 
 #: src/marketplace/details/ProjectCreateGroup.tsx
@@ -2547,6 +2559,10 @@ msgid "Delete catalog"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
+msgid "Delete customer permission"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
 msgid "Delete offering"
 msgstr ""
 
@@ -2555,11 +2571,19 @@ msgid "Delete offering endpoint"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
+msgid "Delete offering permission"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
 msgid "Delete offering screenshot"
 msgstr ""
 
 #: src/project/ProjectDelete.tsx
 msgid "Delete project"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Delete project permission"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
@@ -6918,6 +6942,7 @@ msgstr ""
 msgid "Permission requests"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/administration/roles/RoleForm.tsx
 msgid "Permissions"
 msgstr ""
@@ -12271,6 +12296,10 @@ msgstr ""
 msgid "Update a notification"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update customer permission"
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/update-floating-ips/UpdateFloatingIpsAction.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/UpdateFloatingIpsActionButton.tsx
 msgid "Update floating IPs"
@@ -12353,6 +12382,10 @@ msgid "Update offering overview"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
+msgid "Update offering permission"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
 msgid "Update offering plan"
 msgstr ""
 
@@ -12386,6 +12419,10 @@ msgstr ""
 
 #: src/project/ProjectUpdateForm.tsx
 msgid "Update project details"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update project permission"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx

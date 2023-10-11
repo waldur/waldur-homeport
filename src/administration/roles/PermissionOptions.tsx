@@ -182,4 +182,47 @@ export const PermissionOptions = [
       },
     ],
   },
+  {
+    label: translate('Permissions'),
+    options: [
+      {
+        label: translate('Create project permission'),
+        value: 'PROJECT.CREATE_PERMISSION',
+      },
+      {
+        label: translate('Create customer permission'),
+        value: 'CUSTOMER.CREATE_PERMISSION',
+      },
+      {
+        label: translate('Create offering permission'),
+        value: 'OFFERING.CREATE_PERMISSION',
+      },
+
+      {
+        label: translate('Update project permission'),
+        value: 'PROJECT.UPDATE_PERMISSION',
+      },
+      {
+        label: translate('Update customer permission'),
+        value: 'CUSTOMER.UPDATE_PERMISSION',
+      },
+      {
+        label: translate('Update offering permission'),
+        value: 'OFFERING.UPDATE_PERMISSION',
+      },
+
+      {
+        label: translate('Delete project permission'),
+        value: 'PROJECT.DELETE_PERMISSION',
+      },
+      {
+        label: translate('Delete customer permission'),
+        value: 'CUSTOMER.DELETE_PERMISSION',
+      },
+      {
+        label: translate('Delete offering permission'),
+        value: 'OFFERING.DELETE_PERMISSION',
+      },
+    ],
+  },
 ];
