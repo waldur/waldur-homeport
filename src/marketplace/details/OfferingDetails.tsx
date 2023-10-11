@@ -4,6 +4,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
+import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 import { getCheckoutSummaryComponent } from '@waldur/marketplace/common/registry';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
@@ -48,6 +49,7 @@ export const OfferingDetails: FunctionComponent<OfferingDetailsProps> = (
     VOLUME_TYPE,
     TENANT_TYPE,
     MARKETPLACE_RANCHER,
+    REMOTE_OFFERING_TYPE,
   ].includes(props.offering.type) ? (
     <DeployPage offering={props.offering} limits={props.limits} />
   ) : (
