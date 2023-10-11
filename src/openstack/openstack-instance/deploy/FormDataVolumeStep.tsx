@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
@@ -10,12 +9,7 @@ import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
 
-import {
-  formVolumesSelector,
-  getOfferingLimit,
-  useQuotasData,
-  useVolumeDataLoader,
-} from './utils';
+import { getOfferingLimit, useQuotasData, useVolumeDataLoader } from './utils';
 
 export const FormDataVolumeStep = (props: FormStepProps) => {
   const [fieldsEnabled, setFieldsEnabled] = useState(false);
@@ -28,8 +22,6 @@ export const FormDataVolumeStep = (props: FormStepProps) => {
     }
   }, [data?.defaultVolumeType, props.change]);
 
-  const { system_volume_size } = useSelector(formVolumesSelector);
-
   const limit = useMemo(
     () => getOfferingLimit(props.offering, 'storage', 10240 * 1024),
     [props?.offering],
@@ -38,11 +30,11 @@ export const FormDataVolumeStep = (props: FormStepProps) => {
   const exceeds = useCallback(
     (value: number) => {
       if (!fieldsEnabled) return undefined;
-      return (value || 0) + (system_volume_size || 0) <= limit
+      return (value || 0) + (storageQuota.usage || 0) <= limit
         ? undefined
         : translate('Quota usage exceeds available limit.');
     },
-    [limit, system_volume_size, fieldsEnabled],
+    [limit, fieldsEnabled],
   );
 
   return (
@@ -89,7 +81,7 @@ export const FormDataVolumeStep = (props: FormStepProps) => {
           unit={translate('GB')}
           required={true}
           min={1}
-          max={1 * 10240}
+          max={1 * 5120}
         />
       </Field>
     </StepCard>
