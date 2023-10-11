@@ -49,7 +49,7 @@ export const FormSystemVolumeStep = (props: FormStepProps) => {
       step={props.step}
       id={props.id}
       completed={props.observed}
-      helpText="test description for system volume"
+      helpText={translate('Non-detachable and non-resizable boot disk')}
       actions={
         <div className="d-flex justify-content-end flex-grow-1">
           <QuotaUsageBarChart

@@ -51,7 +51,7 @@ export const FormDataVolumeStep = (props: FormStepProps) => {
       step={props.step}
       id={props.id}
       completed={props.observed}
-      helpText="test description for data volume"
+      helpText={translate('Detachable and resizable data disk')}
       actions={
         <div className="d-flex justify-content-between flex-grow-1">
           <AwesomeCheckbox value={fieldsEnabled} onChange={setFieldsEnabled} />
