@@ -12,6 +12,16 @@ jest.mock('./api');
 
 const apiMock = api as jest.Mocked<typeof api>;
 
+jest.mock('@waldur/configs/default', () => ({
+  ENV: {
+    plugins: {
+      WALDUR_CORE: {
+        OECD_FOS_2007_CODE_MANDATORY: false,
+      },
+    },
+  },
+}));
+
 jest.mock('@waldur/i18n', () => ({
   translate: jest.fn().mockImplementation((arg) => arg),
 }));

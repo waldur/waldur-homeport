@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { required } from '@waldur/core/validators';
 import {
   TextField,
   SelectField,
@@ -56,6 +58,7 @@ export const ProjectCreateForm = reduxForm<
   const showIndustry = useSelector((state: RootState) =>
     isVisible(state, 'project.show_industry_flag'),
   );
+  const isCodeRequired = ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
 
   if (loading) {
     return <LoadingSpinner />;
@@ -90,6 +93,8 @@ export const ProjectCreateForm = reduxForm<
             getOptionValue={(option) => option.value}
             getOptionLabel={(option) => `${option.value}. ${option.label}`}
             isClearable={true}
+            validate={isCodeRequired ? required : undefined}
+            required={isCodeRequired}
           />
         ) : null}
         {showIndustry && (
