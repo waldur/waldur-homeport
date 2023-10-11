@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import Axios from 'axios';
+import Markdown from 'markdown-to-jsx';
 import { FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
 
 import { LoadingSpinner } from './core/LoadingSpinner';
 import { translate } from './i18n';
@@ -62,7 +62,7 @@ export const UserAgreementComponent: FunctionComponent<TemplateComponentProps> =
             </p>
 
             <h2 className="fw-bold">{props.title}</h2>
-            <FormattedHtml html={option.content} />
+            <Markdown>{option.content}</Markdown>
           </div>
         </div>
       </div>

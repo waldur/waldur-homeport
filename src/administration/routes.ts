@@ -20,6 +20,11 @@ const FeaturesList = lazyComponent(
   'FeaturesList',
 );
 
+const UserAgreementsList = lazyComponent(
+  () => import('./UserAgreementsList'),
+  'UserAgreementsList',
+);
+
 const SupportCustomersContainer = lazyComponent(
   () => import('@waldur/customer/list/SupportCustomersContainer'),
   'SupportCustomersContainer',
@@ -115,6 +120,16 @@ export const states: StateDeclaration[] = [
     component: FeaturesList,
     data: {
       breadcrumb: () => translate('Features'),
+    },
+  },
+
+  {
+    name: 'admin-user-agreements',
+    url: 'user-agreements/',
+    parent: 'admin-settings',
+    component: UserAgreementsList,
+    data: {
+      breadcrumb: () => translate('User agreements'),
     },
   },
 
