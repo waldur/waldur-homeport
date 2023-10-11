@@ -51,10 +51,10 @@ export const FormFlavorStep = (props: FormStepProps) => {
     (value: Flavor) => {
       if (!value || !limit) return undefined;
       const error = [];
-      if ((value.cores || 0) + (value.cores || 0) > limit.vcpu) {
+      if ((value.cores || 0) + (vcpuQuota.usage || 0) > limit.vcpu) {
         error.push(translate('The CPU quota is over the limit'));
       }
-      if ((value.ram || 0) + (value.ram || 0) > limit.ram) {
+      if ((value.ram || 0) + (ramQuota.usage || 0) > limit.ram) {
         error.push(translate('The RAM quota is over the limit'));
       }
 

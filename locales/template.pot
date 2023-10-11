@@ -542,6 +542,10 @@ msgstr ""
 msgid "Agreement number"
 msgstr ""
 
+#: src/administration/CreateUserAgreementsForm.tsx
+msgid "Agreement type"
+msgstr ""
+
 #: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
 msgid "Alert"
 msgstr ""
@@ -892,6 +896,10 @@ msgstr ""
 
 #: src/user/keys/KeyRemoveDialog.tsx
 msgid "Are you sure you would like to delete the key?"
+msgstr ""
+
+#: src/administration/UserAgreementDeleteDialog.tsx
+msgid "Are you sure you would like to delete the user agreement?"
 msgstr ""
 
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
@@ -1872,6 +1880,10 @@ msgstr ""
 msgid "Contains the word"
 msgstr ""
 
+#: src/administration/CreateUserAgreementsForm.tsx
+msgid "Content"
+msgstr ""
+
 #: src/invitations/actions/create/FormButtons.tsx
 #: src/marketplace/service-providers/CampaignFooter.tsx
 msgid "Continue"
@@ -1946,6 +1958,7 @@ msgstr ""
 msgid "Coupon"
 msgstr ""
 
+#: src/administration/UserAgreementCreateButton.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
@@ -1994,6 +2007,10 @@ msgstr ""
 #: src/marketplace/service-providers/CampaignCreateDialog.tsx
 #: src/marketplace/service-providers/CampaignFooter.tsx
 msgid "Create a campaign"
+msgstr ""
+
+#: src/administration/UserAgreementCreateDialog.tsx
+msgid "Create a user agreements"
 msgstr ""
 
 #: src/rancher/template/TemplateQuestions.tsx
@@ -2160,6 +2177,7 @@ msgstr ""
 msgid "Created a new payment for {customer_link}."
 msgstr ""
 
+#: src/administration/UserAgreementsList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
@@ -2497,6 +2515,7 @@ msgstr ""
 msgid "Default value"
 msgstr ""
 
+#: src/administration/UserAgreementDeleteButton.tsx
 #: src/booking/components/modal/BookingModal.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
@@ -2545,6 +2564,10 @@ msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
 msgid "Delete robot account"
+msgstr ""
+
+#: src/administration/UserAgreementDeleteDialog.tsx
+msgid "Delete user agreement"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/utils.ts
@@ -2686,6 +2709,10 @@ msgstr ""
 
 #: src/openstack/openstack-volume/actions/DetachAction.tsx
 msgid "Detach"
+msgstr ""
+
+#: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
+msgid "Detachable and resizable data disk"
 msgstr ""
 
 #: src/resource/state/constants.ts
@@ -2910,6 +2937,7 @@ msgstr ""
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr ""
 
+#: src/administration/UserAgreementsEditButton.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
@@ -3042,6 +3070,10 @@ msgstr ""
 
 #: src/customer/team/EditTeamMemberDialog.tsx
 msgid "Edit team member"
+msgstr ""
+
+#: src/administration/UserAgreementsEditDialog.tsx
+msgid "Edit user agreements"
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceSummary.tsx
@@ -5793,6 +5825,10 @@ msgstr ""
 msgid "Nodes"
 msgstr ""
 
+#: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
+msgid "Non-detachable and non-resizable boot disk"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/rule-editor/RemoteGroupField.tsx
 msgid "None"
 msgstr ""
@@ -7341,6 +7377,7 @@ msgid "Privacy Policy"
 msgstr ""
 
 #: src/about.tsx
+#: src/administration/CreateUserAgreementsForm.tsx
 #: src/navigation/FooterLinks.tsx
 msgid "Privacy policy"
 msgstr ""
@@ -8851,7 +8888,9 @@ msgstr ""
 msgid "SSH public keys"
 msgstr ""
 
+#: src/administration/CreateUserAgreementsForm.tsx
 #: src/administration/FeaturesList.tsx
+#: src/administration/UserAgreementsForm.tsx
 #: src/administration/providers/UpdateProviderDialog.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/booking/components/modal/BookingModal.tsx
@@ -10100,6 +10139,7 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
+#: src/administration/UserAgreementDeleteDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/invitations/GroupinvitationButtons.tsx
@@ -10493,6 +10533,7 @@ msgstr ""
 msgid "Terms of Service"
 msgstr ""
 
+#: src/administration/CreateUserAgreementsForm.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/navigation/FooterLinks.tsx
 msgid "Terms of service"
@@ -10992,6 +11033,7 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
+#: src/administration/UserAgreementsList.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
@@ -11182,6 +11224,10 @@ msgstr ""
 msgid "Unable to create a campaign."
 msgstr ""
 
+#: src/administration/CreateUserAgreementsForm.tsx
+msgid "Unable to create a user agreement."
+msgstr ""
+
 #: src/rancher/template/TemplateDetail.tsx
 msgid "Unable to create application."
 msgstr ""
@@ -11305,6 +11351,10 @@ msgstr ""
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 msgid "Unable to delete team member."
+msgstr ""
+
+#: src/administration/UserAgreementDeleteDialog.tsx
+msgid "Unable to delete the user agreement."
 msgstr ""
 
 #: src/resource/actions/ResourceDeleteButton.tsx
@@ -12467,6 +12517,22 @@ msgstr ""
 msgid "User"
 msgstr ""
 
+#: src/administration/CreateUserAgreementsForm.tsx
+msgid "User agreement has been created"
+msgstr ""
+
+#: src/administration/UserAgreementDeleteDialog.tsx
+msgid "User agreement has been deleted."
+msgstr ""
+
+#: src/administration/UserAgreementsForm.tsx
+msgid "User agreement was updated"
+msgstr ""
+
+#: src/administration/routes.ts
+msgid "User agreements"
+msgstr ""
+
 #: src/user/support/effects.ts
 msgid "User could not been updated"
 msgstr ""
@@ -13626,6 +13692,10 @@ msgstr ""
 
 #: src/administration/TokensList.tsx
 msgid "tokens"
+msgstr ""
+
+#: src/administration/UserAgreementsList.tsx
+msgid "user agreements"
 msgstr ""
 
 #: src/invitations/UserPermissionRequestsList.tsx
