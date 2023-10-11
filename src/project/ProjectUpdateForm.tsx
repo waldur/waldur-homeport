@@ -3,6 +3,8 @@ import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
+import { required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import {
   FieldError,
@@ -41,6 +43,8 @@ interface ProjectUpdateFormProps extends InjectedFormProps {
   isModal?: boolean;
 }
 
+const isCodeRequired = ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
+
 export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
   (props) => (
     <form onSubmit={props.handleSubmit(props.updateProject)}>
@@ -69,6 +73,8 @@ export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> =
             getOptionValue={(option) => option.value}
             getOptionLabel={(option) => `${option.value}. ${option.label}`}
             isClearable={true}
+            validate={isCodeRequired ? required : undefined}
+            required={isCodeRequired}
           />
         ) : null}
         {isFeatureVisible('project.show_industry_flag') && (
