@@ -34,35 +34,35 @@ export const RemoteActions = ({ offering }) => {
   const actions = [
     {
       label: translate('Pull offering details'),
-      handler: () => dispatch(pullRemoteOfferingDetails(offering)),
+      handler: () => dispatch(pullRemoteOfferingDetails(offering.uuid)),
     },
     {
       label: translate('Pull offering users'),
-      handler: () => dispatch(pullRemoteOfferingUsers(offering)),
+      handler: () => dispatch(pullRemoteOfferingUsers(offering.uuid)),
     },
     {
       label: translate('Pull usage'),
-      handler: () => dispatch(pullRemoteOfferingUsage(offering)),
+      handler: () => dispatch(pullRemoteOfferingUsage(offering.uuid)),
     },
     {
       label: translate('Pull resources'),
-      handler: () => dispatch(pullRemoteOfferingResources(offering)),
+      handler: () => dispatch(pullRemoteOfferingResources(offering.uuid)),
     },
     {
       label: translate('Pull order items'),
-      handler: () => dispatch(pullRemoteOfferingOrderItems(offering)),
+      handler: () => dispatch(pullRemoteOfferingOrderItems(offering.uuid)),
     },
     {
       label: translate('Push project data'),
-      handler: () => dispatch(pushRemoteOfferingProjectData(offering)),
+      handler: () => dispatch(pushRemoteOfferingProjectData(offering.uuid)),
     },
     {
       label: translate('Pull resources invoices'),
-      handler: () => dispatch(pullRemoteOfferingInvoices(offering)),
+      handler: () => dispatch(pullRemoteOfferingInvoices(offering.uuid)),
     },
     {
       label: translate('Pull robot accounts'),
-      handler: () => dispatch(pullRemoteOfferingRobotAccounts(offering)),
+      handler: () => dispatch(pullRemoteOfferingRobotAccounts(offering.uuid)),
     },
   ];
   return <ActionsDropdown actions={actions} />;
