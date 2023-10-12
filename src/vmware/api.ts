@@ -1,49 +1,74 @@
 import { ENV } from '@waldur/configs/default';
 import { deleteById, get, getAll, getById, post, put } from '@waldur/core/api';
 
-const getLimits = (settingsId) => getById('/vmware-limits/', settingsId);
+import { VMwareTemplate } from './types';
 
-export const loadFormOptions = async (props: {
+export const getVMwareLimits = (settingsId) =>
+  getById<Record<string, number>>('/vmware-limits/', settingsId);
+
+export const getVMwareTemplates = (
+  settings_uuid: string,
+  customer_uuid: string,
+) =>
+  getAll<VMwareTemplate>('/vmware-templates/', {
+    params: { settings_uuid, customer_uuid },
+  });
+
+export const loadVMwareTemplatesAndLimits = async (props: {
   settings_uuid: string;
   customer_uuid: string;
 }) => {
-  const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
+  const [templates, limits] = await Promise.all([
+    getVMwareTemplates(props.settings_uuid, props.customer_uuid),
+    getVMwareLimits(props.settings_uuid),
+  ]);
+  return { templates, limits };
+};
 
+export const getVMwareNetworks = (
+  settings_uuid: string,
+  customer_uuid: string,
+) =>
+  getAll('/vmware-networks/', {
+    params: { settings_uuid, customer_uuid },
+  });
+
+export const loadVMwareAdvancedOptions = async (props: {
+  settings_uuid: string;
+  customer_uuid: string;
+}) => {
   const options = {
     params: {
       settings_uuid: props.settings_uuid,
       customer_uuid: props.customer_uuid,
     },
   };
+  const [clusters, datastores, folders] = await Promise.all([
+    getAll('/vmware-clusters/', options),
+    getAll('/vmware-datastores/', options),
+    getAll('/vmware-folders/', options),
+  ]);
+  return {
+    clusters,
+    datastores,
+    folders,
+  };
+};
 
+export const loadFormOptions = async (props: {
+  settings_uuid: string;
+  customer_uuid: string;
+}) => {
+  const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
   if (advancedMode) {
-    const [templates, clusters, datastores, networks, folders, limits] =
-      await Promise.all([
-        getAll('/vmware-templates/', options),
-        getAll('/vmware-clusters/', options),
-        getAll('/vmware-datastores/', options),
-        getAll('/vmware-networks/', options),
-        getAll('/vmware-folders/', options),
-        getLimits(props.settings_uuid),
-      ]);
-
-    return {
-      templates,
-      clusters,
-      datastores,
-      networks,
-      folders,
-      limits,
-    };
-  } else {
-    const [templates, limits] = await Promise.all([
-      getAll('/vmware-templates/', options),
-      getLimits(props.settings_uuid),
+    const [templatesAndLimits, networks, advancedOptions] = await Promise.all([
+      loadVMwareTemplatesAndLimits(props),
+      getVMwareNetworks(props.settings_uuid, props.customer_uuid),
+      loadVMwareAdvancedOptions(props),
     ]);
-    return {
-      templates,
-      limits,
-    };
+    return { ...templatesAndLimits, ...advancedOptions, networks };
+  } else {
+    return await loadVMwareTemplatesAndLimits(props);
   }
 };
 

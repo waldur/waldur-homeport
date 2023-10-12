@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useCallback, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Field } from 'redux-form';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -12,25 +11,27 @@ import { StepCardTabs } from '@waldur/marketplace/deploy/steps/StepCardTabs';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { generateSystemImageChoices } from '@waldur/marketplace/deploy/utils';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { loadImages } from '@waldur/openstack/api';
-import { flavorValidator } from '@waldur/openstack/openstack-instance/utils';
 
-import { formFlavorSelector } from './utils';
+import { getVMwareTemplates } from '../api';
+import { VMwareTemplate } from '../types';
 
 const tabs = [
   { label: translate('Images'), value: 'images' },
   { label: translate('Apps'), value: 'apps' },
 ];
 
-export const FormImageStep = (props: FormStepProps) => {
+export const FormTemplateStep = (props: FormStepProps) => {
   const [tab, setTab] = useState<'images' | 'apps'>('images');
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   const { data, isLoading, error, refetch } = useQuery(
-    ['deployImages', props.offering?.scope_uuid],
+    ['VMwareImages', props.offering?.scope_uuid, props.offering?.customer_uuid],
     () =>
-      props.offering.scope_uuid
-        ? loadImages(props.offering.scope_uuid)
+      props.offering.scope_uuid && props.offering.customer_uuid
+        ? getVMwareTemplates(
+            props.offering.scope_uuid,
+            props.offering.customer_uuid,
+          )
         : Promise.resolve([]),
     { staleTime: 3 * 60 * 1000 },
   );
@@ -46,19 +47,27 @@ export const FormImageStep = (props: FormStepProps) => {
     return _choices;
   }, [data]);
 
-  const flavor = useSelector(formFlavorSelector);
   const onChangeImage = useCallback(
-    (value) => {
-      if (flavor && flavorValidator({ image: value }, flavor)) {
-        props.change('attributes.flavor', undefined);
-      }
+    (value: VMwareTemplate) => {
+      props.change('limits.cpu', value.cores);
+      props.change('limits.ram', value.ram / 1024);
+      props.change('limits.disk', value.disk / 1024);
+      props.change('attributes.cores_per_socket', value.cores_per_socket);
     },
-    [flavor, props.change],
+    [props.change],
   );
+
+  // Initialize template
+  useEffect(() => {
+    if (data?.length > 0) {
+      const template = data[0];
+      onChangeImage(template);
+    }
+  }, [props.offering, data, onChangeImage]);
 
   return (
     <StepCard
-      title={translate('Image')}
+      title={translate('Template')}
       step={props.step}
       id={props.id}
       completed={props.observed}
@@ -78,12 +87,12 @@ export const FormImageStep = (props: FormStepProps) => {
         </p>
       ) : (
         <Field
-          name="attributes.image"
+          name="attributes.template"
           validate={[required]}
           component={BoxRadioField}
           choices={choices}
           required
-          onChange={onChangeImage}
+          onChange={onChangeImage as any}
         />
       )}
     </StepCard>
