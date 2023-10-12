@@ -18,6 +18,7 @@ import {
 import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
 import { SLURM_PLUGIN, SLURM_REMOTE_PLUGIN } from '@waldur/slurm/constants';
 import { BASIC_OFFERING_TYPE } from '@waldur/support/constants';
+import { VMWARE_VM } from '@waldur/vmware/constants';
 
 import { DeployPage } from '../deploy/DeployPage';
 
@@ -50,6 +51,7 @@ export const OfferingDetails: FunctionComponent<OfferingDetailsProps> = (
     TENANT_TYPE,
     MARKETPLACE_RANCHER,
     REMOTE_OFFERING_TYPE,
+    VMWARE_VM,
   ].includes(props.offering.type) ? (
     <DeployPage offering={props.offering} limits={props.limits} />
   ) : (

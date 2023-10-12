@@ -2,6 +2,9 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 
+import { VMWARE_VM } from './constants';
+import { deployOfferingSteps } from './deploy/steps';
+
 const VMwareVirtualMachineForm = lazyComponent(
   () => import('./VMwareVirtualMachineForm'),
   'VMwareVirtualMachineForm',
@@ -39,11 +42,12 @@ const limitParser = (limits) =>
   };
 
 registerOfferingType({
-  type: 'VMware.VirtualMachine',
+  type: VMWARE_VM,
   get label() {
     return translate('vSphere Virtual Machine');
   },
-  component: VMwareVirtualMachineForm,
+  formSteps: deployOfferingSteps,
+  component: VMwareVirtualMachineForm, // We can remove this line later. formSteps replaced
   providerType: 'VMware',
   serializer,
   limitSerializer,

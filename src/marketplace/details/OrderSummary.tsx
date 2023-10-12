@@ -83,7 +83,11 @@ const PureOrderSummary: FunctionComponent<OrderSummaryProps> = (props) => (
     <div className="d-flex justify-content-between mt-5">
       {!props.updateMode ? (
         <Tip
-          label={<FieldError error={props.errors?.attributes} />}
+          label={
+            <FieldError
+              error={{ ...props.errors?.attributes, ...props.errors?.limits }}
+            />
+          }
           id="offering-button-errors"
           autoWidth
           className="w-100"
@@ -97,7 +101,11 @@ const PureOrderSummary: FunctionComponent<OrderSummaryProps> = (props) => (
         </Tip>
       ) : (
         <Tip
-          label={<FieldError error={props.errors?.attributes} />}
+          label={
+            <FieldError
+              error={{ ...props.errors?.attributes, ...props.errors?.limits }}
+            />
+          }
           id="offering-button-errors"
           autoWidth
           className="w-100"

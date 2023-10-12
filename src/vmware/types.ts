@@ -8,3 +8,10 @@ export interface VMwareVirtualMachine extends Resource {
   cluster_name?: string;
   datastore_name?: string;
 }
+
+export interface VMwareTemplate {
+  cores: number;
+  cores_per_socket: number;
+  ram: number;
+  disk: number;
+}

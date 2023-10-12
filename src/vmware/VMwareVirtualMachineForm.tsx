@@ -27,13 +27,7 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { loadFormOptions } from './api';
 import { connector } from './connector';
-
-interface Template {
-  cores: number;
-  cores_per_socket: number;
-  ram: number;
-  disk: number;
-}
+import { VMwareTemplate } from './types';
 
 const GuestOSField = formValues<any>({
   template: 'attributes.template',
@@ -180,7 +174,7 @@ const FormComponent = (props: any) => {
             options={props.data.templates}
             getOptionValue={(option) => option.url}
             getOptionLabel={(option) => option.name}
-            onChange={(value: Template) => {
+            onChange={(value: VMwareTemplate) => {
               props.change('limits.cpu', value.cores);
               props.change('limits.ram', value.ram / 1024);
               props.change('limits.disk', value.disk / 1024);
