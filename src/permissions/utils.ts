@@ -21,7 +21,7 @@ const ROLE_MAP = {
   // these are used in event context
   Owner: RoleEnum.CUSTOMER_OWNER,
   Manager: RoleEnum.PROJECT_MANAGER,
-  Admin: RoleEnum.PROJECT_ADMIN,
+  Administrator: RoleEnum.PROJECT_ADMIN,
   Member: RoleEnum.PROJECT_MEMBER,
 };
 
