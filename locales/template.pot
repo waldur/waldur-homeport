@@ -1313,7 +1313,7 @@ msgid "By authenticating you are agreeing to the <tos>Terms of Service</tos> and
 msgstr ""
 
 #: src/marketplace/deploy/DeployPageSidebar.tsx
-msgid "By ordering, you agree to the <tos>terms of service</tos> and <pp>privacy policy</pp>."
+msgid "By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>."
 msgstr ""
 
 #: src/user/api-key/TokenLifetimeField.tsx
@@ -4611,7 +4611,6 @@ msgid "Invoice to"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
-#: src/marketplace/details/OrderSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -5279,6 +5278,7 @@ msgstr ""
 msgid "Monitoring"
 msgstr ""
 
+#: src/marketplace/details/plan/OrderSummaryPlanRows.tsx
 #: src/marketplace/details/plan/PlanDetailsTable2.tsx
 #: src/quotas/constants.ts
 msgid "Monthly cost"
@@ -6029,7 +6029,6 @@ msgstr ""
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
-#: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 #: src/marketplace/offerings/import/tabs.ts
@@ -6238,6 +6237,7 @@ msgstr ""
 msgid "One resource"
 msgstr ""
 
+#: src/marketplace/details/plan/OrderSummaryPlanRows.tsx
 #: src/marketplace/details/plan/PlanDetailsTable2.tsx
 msgid "One time cost"
 msgstr ""
@@ -7495,7 +7495,6 @@ msgstr ""
 #: src/marketplace/deploy/steps/FormProjectStep.tsx
 #: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectCreateGroup.tsx
 #: src/marketplace/details/ProjectField.tsx
 #: src/marketplace/orders/OrdersList.tsx
@@ -7989,7 +7988,6 @@ msgstr ""
 msgid "Rancher server URL"
 msgstr ""
 
-#: src/marketplace/details/OrderSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -9522,7 +9520,6 @@ msgstr ""
 #: src/map/LeafletMap.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace/UserPluginOptionsForm.tsx
-#: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
@@ -11039,6 +11036,7 @@ msgstr ""
 #: src/invoices/list/InvoicesList.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/details/plan/OrderSummaryPlanRows.tsx
 #: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable2.tsx
@@ -13181,6 +13179,18 @@ msgstr ""
 
 #: src/invitations/InvitationButtons.tsx
 msgid "Yes, use invitation email"
+msgstr ""
+
+#: src/marketplace/deploy/DeployPageSidebar.tsx
+msgid "You also agree to the service provider’s <pp>privacy policy</pp>."
+msgstr ""
+
+#: src/marketplace/deploy/DeployPageSidebar.tsx
+msgid "You also agree to the service provider’s <tos>terms of service</tos> and provider’s <pp>privacy policy</pp>."
+msgstr ""
+
+#: src/marketplace/deploy/DeployPageSidebar.tsx
+msgid "You also agree to the service provider’s <tos>terms of service</tos>."
 msgstr ""
 
 #: src/navigation/workspace/context-selector/GuestDropdown.tsx

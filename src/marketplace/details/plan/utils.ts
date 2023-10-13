@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import {
   getFormLimitParser,
   filterOfferingComponents,
@@ -106,6 +108,100 @@ export const calculateTotalPeriods = (components: Component[]) => {
     });
     return totalPeriods;
   }, []);
+};
+
+export const useComponentsDetailPrices = (prices: PricesData) => {
+  const fixedRows = prices.components.filter(
+    (component) => component.billing_type === 'fixed',
+  );
+  const usageRows = prices.components.filter(
+    (component) => component.billing_type === 'usage',
+  );
+  const initialRows = prices.components.filter(
+    (component) => component.billing_type === 'one',
+  );
+  const switchRows = prices.components.filter(
+    (component) => component.billing_type === 'few',
+  );
+  const limitedRows = prices.components.filter(
+    (component) => component.billing_type === 'limit',
+  );
+  const totalLimitedRows = limitedRows.filter(
+    (component) =>
+      !component.limit_period || component.limit_period === 'total',
+  );
+  const periodicLimitedRows = limitedRows.filter(
+    (component) => component.limit_period && component.limit_period !== 'total',
+  );
+
+  const fixedTotalPeriods = useMemo(
+    () => calculateTotalPeriods(fixedRows),
+    [fixedRows],
+  );
+  const periodicLimitedTotalPeriods = useMemo(
+    () => calculateTotalPeriods(periodicLimitedRows),
+    [periodicLimitedRows],
+  );
+  const initialTotalPeriods = useMemo(
+    () => calculateTotalPeriods(initialRows),
+    [initialRows],
+  );
+  const switchTotalPeriods = useMemo(
+    () => calculateTotalPeriods(switchRows),
+    [switchRows],
+  );
+  const totalLimitTotalPeriods = useMemo(
+    () => calculateTotalPeriods(totalLimitedRows),
+    [totalLimitedRows],
+  );
+
+  const periodicTotal: number[] = useMemo(
+    () =>
+      prices.periods.map(
+        (_, i) =>
+          (fixedTotalPeriods[i] || 0) + (periodicLimitedTotalPeriods[i] || 0),
+      ),
+    [fixedTotalPeriods, periodicLimitedTotalPeriods],
+  );
+
+  const oneTimeTotal: number = useMemo(
+    () =>
+      (initialTotalPeriods[0] || 0) +
+      (switchTotalPeriods[0] || 0) +
+      (totalLimitTotalPeriods[0] || 0),
+    [initialTotalPeriods, switchTotalPeriods, totalLimitTotalPeriods],
+  );
+
+  const hasPeriodicCost =
+    fixedRows.length > 0 ||
+    usageRows.length > 0 ||
+    periodicLimitedRows.length > 0;
+  const hasOneTimeCost =
+    initialRows.length > 0 ||
+    switchRows.length > 0 ||
+    totalLimitedRows.length > 0;
+
+  return {
+    periodic: {
+      hasPeriodicCost,
+      fixedRows,
+      fixedTotalPeriods,
+      usageRows,
+      periodicLimitedRows,
+      periodicLimitedTotalPeriods,
+      periodicTotal,
+    },
+    oneTime: {
+      hasOneTimeCost,
+      initialRows,
+      switchRows,
+      totalLimitedRows,
+      initialTotalPeriods,
+      switchTotalPeriods,
+      totalLimitTotalPeriods,
+      oneTimeTotal,
+    },
+  };
 };
 
 const getPlan = (state, props) => {

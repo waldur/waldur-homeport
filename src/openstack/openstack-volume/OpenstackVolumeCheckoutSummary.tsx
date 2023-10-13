@@ -88,9 +88,9 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OfferingDetailsProps> = ({
   );
   const formData = useSelector(formAttributesSelector);
   const formIsValid = useSelector(formIsValidSelector);
-  const total = useSelector((state: RootState) =>
+  const prices = useSelector((state: RootState) =>
     pricesSelector(state, { offering }),
-  ).total;
+  );
   const components = React.useMemo(
     () => (offering.plans.length > 0 ? offering.plans[0].prices : {}),
     [offering],
@@ -128,10 +128,10 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OfferingDetailsProps> = ({
         offering,
         customer,
         project,
-        total,
+        prices,
         formValid: formIsValid,
       }),
-    [formData, offering, customer, project, total, formIsValid],
+    [formData, offering, customer, project, prices, formIsValid],
   );
 
   return (
