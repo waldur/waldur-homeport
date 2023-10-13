@@ -137,9 +137,9 @@ export const OpenstackInstanceCheckoutSummary: React.FC<OfferingDetailsProps> =
     const formHasFlavor = useSelector(formHasFlavorSelector);
     const formData = useSelector(formAttributesSelector);
     const flavor = useSelector(flavorSelector);
-    const total = useSelector((state: RootState) =>
+    const prices = useSelector((state: RootState) =>
       pricesSelector(state, { offering }),
-    ).total;
+    );
     const components = React.useMemo(
       () => (offering.plans.length > 0 ? offering.plans[0].prices : {}),
       [offering],
@@ -171,10 +171,10 @@ export const OpenstackInstanceCheckoutSummary: React.FC<OfferingDetailsProps> =
           offering,
           customer,
           project,
-          total,
+          prices,
           formValid: formIsValid,
         }),
-      [formData, offering, customer, project, total, formIsValid],
+      [formData, offering, customer, project, prices, formIsValid],
     );
 
     return (

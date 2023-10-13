@@ -12,7 +12,7 @@ import { ComponentEditRow2 } from './ComponentEditRow';
 import { ComponentRow2 } from './ComponentRow';
 import { Component, PlanDetailsTableProps, PlanPeriod } from './types';
 import { UsageComponentRow } from './UsageComponentRow';
-import { calculateTotalPeriods, pricesSelector } from './utils';
+import { pricesSelector, useComponentsDetailPrices } from './utils';
 
 import './PlanDetailTable2.scss';
 
@@ -118,6 +118,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
     return null;
   }
 
+  const { periodic, oneTime } = useComponentsDetailPrices(props);
   const [selectedPeriod, setSelectedPeriod] = useState<PlanPeriod>('monthly');
 
   const customer = useSelector(getCustomer);
@@ -131,83 +132,13 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
     [props.periodKeys, selectedPeriod],
   );
 
-  const fixedRows = props.components.filter(
-    (component) => component.billing_type === 'fixed',
-  );
-  const usageRows = props.components.filter(
-    (component) => component.billing_type === 'usage',
-  );
-  const initialRows = props.components.filter(
-    (component) => component.billing_type === 'one',
-  );
-  const switchRows = props.components.filter(
-    (component) => component.billing_type === 'few',
-  );
-  const limitedRows = props.components.filter(
-    (component) => component.billing_type === 'limit',
-  );
-  const totalLimitedRows = limitedRows.filter(
-    (component) =>
-      !component.limit_period || component.limit_period === 'total',
-  );
-  const periodicLimitedRows = limitedRows.filter(
-    (component) => component.limit_period && component.limit_period !== 'total',
-  );
-
-  const fixedTotalPeriods = useMemo(
-    () => calculateTotalPeriods(fixedRows),
-    [fixedRows],
-  );
-  const periodicLimitedTotalPeriods = useMemo(
-    () => calculateTotalPeriods(periodicLimitedRows),
-    [periodicLimitedRows],
-  );
-  const initialTotalPeriods = useMemo(
-    () => calculateTotalPeriods(initialRows),
-    [initialRows],
-  );
-  const switchTotalPeriods = useMemo(
-    () => calculateTotalPeriods(switchRows),
-    [switchRows],
-  );
-  const totalLimitTotalPeriods = useMemo(
-    () => calculateTotalPeriods(totalLimitedRows),
-    [totalLimitedRows],
-  );
-
-  const periodicTotal = useMemo(
-    () =>
-      props.periods.map(
-        (_, i) =>
-          (fixedTotalPeriods[i] || 0) + (periodicLimitedTotalPeriods[i] || 0),
-      ),
-    [fixedTotalPeriods, periodicLimitedTotalPeriods],
-  );
-
-  const oneTimeTotal = useMemo(
-    () =>
-      (initialTotalPeriods[0] || 0) +
-      (switchTotalPeriods[0] || 0) +
-      (totalLimitTotalPeriods[0] || 0),
-    [initialTotalPeriods, switchTotalPeriods, totalLimitTotalPeriods],
-  );
-
-  const hasPeriodicCost =
-    fixedRows.length > 0 ||
-    usageRows.length > 0 ||
-    periodicLimitedRows.length > 0;
-  const hasOneTimeCost =
-    initialRows.length > 0 ||
-    switchRows.length > 0 ||
-    totalLimitedRows.length > 0;
-
-  if (!hasPeriodicCost && !hasOneTimeCost) {
+  if (!periodic.hasPeriodicCost && !oneTime.hasOneTimeCost) {
     return null;
   }
 
   return (
     <div className="plan-details-container">
-      {hasPeriodicCost && (
+      {periodic.hasPeriodicCost && (
         <section className="plan-details-section bg-light rounded p-6 mb-10">
           <div className="d-flex justify-content-between">
             <h5 className="mb-6">
@@ -236,16 +167,17 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
           <table className="table-details w-100 mb-12">
             <tbody>
               {/* Fixed */}
-              {fixedRows.length > 0 && (
+              {periodic.fixedRows.length > 0 && (
                 <>
                   <FixedRows
-                    components={fixedRows}
+                    components={periodic.fixedRows}
                     hidePrices={Boolean(activeFixedPriceProfile)}
                     period={selectedPeriod}
+                    activePriceIndex={activePriceIndex}
                   />
                   {!activeFixedPriceProfile ? (
                     <ComponentRowTotal
-                      amount={fixedTotalPeriods[activePriceIndex]}
+                      amount={periodic.fixedTotalPeriods[activePriceIndex]}
                       period={selectedPeriod}
                     />
                   ) : null}
@@ -254,10 +186,10 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               )}
 
               {/* Usage */}
-              {usageRows.length > 0 && (
+              {periodic.usageRows.length > 0 && (
                 <>
                   <UsageRows
-                    components={usageRows}
+                    components={periodic.usageRows}
                     hidePrices={shouldConcealPrices}
                     period={selectedPeriod}
                   />
@@ -273,10 +205,10 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               )}
 
               {/* Limit */}
-              {periodicLimitedRows.length > 0 && (
+              {periodic.periodicLimitedRows.length > 0 && (
                 <>
                   <ControlRows
-                    components={periodicLimitedRows}
+                    components={periodic.periodicLimitedRows}
                     hidePrices={Boolean(shouldConcealPrices)}
                     viewMode={props.viewMode}
                     period={selectedPeriod}
@@ -284,7 +216,9 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                   />
                   {!shouldConcealPrices ? (
                     <ComponentRowTotal
-                      amount={periodicLimitedTotalPeriods[activePriceIndex]}
+                      amount={
+                        periodic.periodicLimitedTotalPeriods[activePriceIndex]
+                      }
                       period={selectedPeriod}
                     />
                   ) : null}
@@ -294,7 +228,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
 
               {!activeFixedPriceProfile ? (
                 <ComponentRowTotal
-                  amount={periodicTotal[activePriceIndex]}
+                  amount={periodic.periodicTotal[activePriceIndex]}
                   period={selectedPeriod}
                   final
                 />
@@ -304,7 +238,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
         </section>
       )}
 
-      {hasOneTimeCost && (
+      {oneTime.hasOneTimeCost && (
         <section className="plan-details-section bg-light rounded p-6">
           <h5 className="mb-6">
             {translate('One time cost')}
@@ -314,49 +248,56 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
           <table className="table-details table-details-limit w-100">
             <tbody>
               {/* One */}
-              {initialRows.length > 0 && (
+              {oneTime.initialRows.length > 0 && (
                 <>
                   <FixedRows
-                    components={initialRows}
+                    components={oneTime.initialRows}
                     hidePrices={shouldConcealPrices}
+                    activePriceIndex={0}
                   />
                   {!shouldConcealPrices ? (
-                    <ComponentRowTotal amount={initialTotalPeriods[0]} />
+                    <ComponentRowTotal
+                      amount={oneTime.initialTotalPeriods[0]}
+                    />
                   ) : null}
                   <SeparatorRow />
                 </>
               )}
 
               {/* Few */}
-              {switchRows.length > 0 && (
+              {oneTime.switchRows.length > 0 && (
                 <>
                   <FixedRows
-                    components={switchRows}
+                    components={oneTime.switchRows}
                     hidePrices={shouldConcealPrices}
+                    activePriceIndex={0}
                   />
                   {!shouldConcealPrices ? (
-                    <ComponentRowTotal amount={switchTotalPeriods[0]} />
+                    <ComponentRowTotal amount={oneTime.switchTotalPeriods[0]} />
                   ) : null}
                   <SeparatorRow />
                 </>
               )}
 
               {/* Limit */}
-              {totalLimitedRows.length > 0 && (
+              {oneTime.totalLimitedRows.length > 0 && (
                 <>
                   <ControlRows
-                    components={totalLimitedRows}
+                    components={oneTime.totalLimitedRows}
                     hidePrices={Boolean(shouldConcealPrices)}
                     viewMode={props.viewMode}
+                    activePriceIndex={0}
                   />
                   {!shouldConcealPrices ? (
-                    <ComponentRowTotal amount={totalLimitTotalPeriods[0]} />
+                    <ComponentRowTotal
+                      amount={oneTime.totalLimitTotalPeriods[0]}
+                    />
                   ) : null}
                   <SeparatorRow />
                 </>
               )}
 
-              <ComponentRowTotal amount={oneTimeTotal} final />
+              <ComponentRowTotal amount={oneTime.oneTimeTotal} final />
             </tbody>
           </table>
         </section>

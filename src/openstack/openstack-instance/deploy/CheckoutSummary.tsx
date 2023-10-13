@@ -75,9 +75,9 @@ export const CheckoutSummary = ({ offering }: CheckoutSummaryProps) => {
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
   const shouldConcealPrices = useSelector(concealPricesSelector);
-  const total = useSelector((state: RootState) =>
+  const prices = useSelector((state: RootState) =>
     pricesSelector(state, { offering }),
-  ).total;
+  );
   const components = useMemo(
     () => (offering.plans.length > 0 ? offering.plans[0].prices : {}),
     [offering],
@@ -94,10 +94,10 @@ export const CheckoutSummary = ({ offering }: CheckoutSummaryProps) => {
         offering,
         customer,
         project,
-        total,
+        prices,
         formValid: formIsValid,
       }),
-    [formAttributesData, offering, customer, project, total, formIsValid],
+    [formAttributesData, offering, customer, project, prices, formIsValid],
   );
 
   return (
@@ -180,7 +180,7 @@ export const CheckoutSummary = ({ offering }: CheckoutSummaryProps) => {
           )}
           <div className="d-flex justify-content-between fs-4">
             <p className="mb-0">{translate('Total')}</p>
-            <p className="mb-0">{defaultCurrency(total)}</p>
+            <p className="mb-0">{defaultCurrency(prices.total)}</p>
           </div>
         </div>
       )}

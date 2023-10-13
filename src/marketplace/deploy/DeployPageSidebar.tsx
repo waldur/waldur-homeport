@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Card, FormCheck } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { ExternalLink } from '@waldur/core/ExternalLink';
 import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
 import { flattenObject } from '@waldur/core/utils';
@@ -13,6 +14,7 @@ import { Offering } from '@waldur/marketplace/types';
 import { getCheckoutSummaryComponent } from '../common/registry';
 import { OrderItemResponse } from '../orders/types';
 
+import { ProviderTermsOfService } from './ProviderTermsOfService';
 import { OfferingConfigurationFormStep } from './types';
 import { formErrorsSelector, scrollToView } from './utils';
 
@@ -137,9 +139,9 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
             />
           )}
 
-          <p className="text-center fs-9 mt-2">
+          <p className="text-center fs-9 mt-2 mb-0">
             {translate(
-              'By ordering, you agree to the <tos>terms of service</tos> and <pp>privacy policy</pp>.',
+              'By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>.',
               {
                 tos: (s: string) => <Link state="about.tos" label={s} />,
                 pp: (s: string) => <Link state="about.privacy" label={s} />,
@@ -147,6 +149,65 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
               formatJsx,
             )}
           </p>
+          {(props.offering.terms_of_service ||
+            props.offering.terms_of_service_link) &&
+          props.offering.privacy_policy_link ? (
+            <p className="text-center fs-9 mb-0">
+              {translate(
+                'You also agree to the service provider’s <tos>terms of service</tos> and provider’s <pp>privacy policy</pp>.',
+                {
+                  tos: (s: string) => (
+                    <ProviderTermsOfService
+                      termsOfService={props.offering.terms_of_service}
+                      termsOfServiceLink={props.offering.terms_of_service_link}
+                      label={s}
+                    />
+                  ),
+                  pp: (s: string) => (
+                    <ExternalLink
+                      url={props.offering.privacy_policy_link}
+                      label={s}
+                      iconless
+                    />
+                  ),
+                },
+                formatJsx,
+              )}
+            </p>
+          ) : props.offering.terms_of_service ||
+            props.offering.terms_of_service_link ? (
+            <p className="text-center fs-9 mb-0">
+              {translate(
+                'You also agree to the service provider’s <tos>terms of service</tos>.',
+                {
+                  tos: (s: string) => (
+                    <ProviderTermsOfService
+                      termsOfService={props.offering.terms_of_service}
+                      termsOfServiceLink={props.offering.terms_of_service_link}
+                      label={s}
+                    />
+                  ),
+                },
+                formatJsx,
+              )}
+            </p>
+          ) : props.offering.privacy_policy_link ? (
+            <p className="text-center fs-9 mb-0">
+              {translate(
+                'You also agree to the service provider’s <pp>privacy policy</pp>.',
+                {
+                  pp: (s: string) => (
+                    <ExternalLink
+                      url={props.offering.privacy_policy_link}
+                      label={s}
+                      iconless
+                    />
+                  ),
+                },
+                formatJsx,
+              )}
+            </p>
+          ) : null}
         </Card.Body>
       </Card>
     </div>
