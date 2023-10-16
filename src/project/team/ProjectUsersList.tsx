@@ -1,7 +1,7 @@
 import { ButtonGroup } from 'react-bootstrap';
-import Gravatar from 'react-gravatar';
 import { useSelector } from 'react-redux';
 
+import Avatar from '@waldur/core/Avatar';
 import {
   PROJECT_ADMIN_ROLE,
   PROJECT_MEMBER_ROLE,
@@ -49,10 +49,14 @@ export const ProjectUsersList = () => {
         {
           title: translate('Member'),
           render: ({ row }) => (
-            <>
-              <Gravatar email={row.user_email} size={25} />{' '}
+            <div className="d-flex align-items-center gap-1">
+              <Avatar
+                className="symbol symbol-25px"
+                name={row.user_full_name || row.user_username}
+                size={25}
+              />
               {row.user_full_name || row.user_username}
-            </>
+            </div>
           ),
         },
         {

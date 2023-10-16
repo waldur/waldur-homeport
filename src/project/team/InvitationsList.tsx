@@ -1,10 +1,10 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect } from 'react';
-import Gravatar from 'react-gravatar';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import Avatar from '@waldur/core/Avatar';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { InvitationCreateButton } from '@waldur/invitations/actions/create/InvitationCreateButton';
@@ -34,9 +34,14 @@ const TableComponent: FunctionComponent<any> = (props) => {
         {
           title: translate('Email'),
           render: ({ row }) => (
-            <>
-              <Gravatar email={row.email} size={25} /> {row.email}
-            </>
+            <div className="d-flex align-items-center gap-1">
+              <Avatar
+                className="symbol symbol-25px"
+                name={row?.email}
+                size={25}
+              />
+              {row.email}
+            </div>
           ),
           orderField: 'email',
         },

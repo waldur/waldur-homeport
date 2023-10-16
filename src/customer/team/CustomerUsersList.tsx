@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
-import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import Avatar from '@waldur/core/Avatar';
 import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/constants';
 import { CustomerUsersListExpandableRow } from '@waldur/customer/team/CustomerUsersListExpandableRow';
 import { translate } from '@waldur/i18n';
@@ -43,7 +43,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
                   height={25}
                 />
               ) : (
-                <Gravatar email={row.email} size={25} />
+                <Avatar
+                  className="symbol symbol-25px"
+                  name={row.full_name}
+                  size={25}
+                />
               )}
               <p className="mb-0">{row.full_name || row.username}</p>
             </div>

@@ -1,6 +1,6 @@
 import { Card, Col, Row, Stack } from 'react-bootstrap';
-import Gravatar from 'react-gravatar';
 
+import Avatar from '@waldur/core/Avatar';
 import { Image } from '@waldur/core/Image';
 import { translate } from '@waldur/i18n';
 import { UserDetails } from '@waldur/workspace/types';
@@ -16,7 +16,11 @@ export const UserProfile = ({ user }: { user: UserDetails }) => {
             {user.image ? (
               <Image src={user.image} size={100} />
             ) : (
-              <Gravatar email={user.email} size={100} className="rounded" />
+              <Avatar
+                className="symbol symbol-circle symbol-100px"
+                name={user.full_name}
+                size={100}
+              />
             )}
           </Col>
           <Col>
