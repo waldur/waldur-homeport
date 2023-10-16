@@ -52,7 +52,7 @@ export const getGroupedCategories = (
   categoryGroups: CategoryGroup[],
 ): CategoryGroup[] => {
   return categories.reduce((acc, category) => {
-    const categoryGroup = categoryGroups.find(
+    const categoryGroup = categoryGroups?.find(
       (group) => category.group === group.url,
     );
     if (categoryGroup) {
