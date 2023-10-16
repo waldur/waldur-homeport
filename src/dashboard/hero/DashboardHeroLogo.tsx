@@ -22,7 +22,7 @@ export const DashboardHeroLogo = (props: DashboardHeroLogoProps) => {
         <PlaceholderImage
           width={100}
           height={100}
-          text={props.logoAlt ? props.logoAlt[0] : 'D'}
+          text={props.logoAlt ? props.logoAlt[0] : ''}
           fontSize={60}
         />
       )}

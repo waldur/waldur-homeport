@@ -32,6 +32,7 @@ export const OfferingDetailsHeader = ({
                 <Card.Body className="d-flex flex-row gap-10">
                   <DashboardHeroLogo
                     logo={offering.thumbnail || category.icon}
+                    logoAlt={offering.name}
                     logoTopLabel={offering.state}
                     logoBottomLabel={translate('Offering')}
                     logoTopClass={
