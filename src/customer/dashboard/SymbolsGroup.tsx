@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
-import Gravatar from 'react-gravatar';
 
+import Avatar from '@waldur/core/Avatar';
 import { Tip } from '@waldur/core/Tooltip';
 import { User } from '@waldur/workspace/types';
 
@@ -45,11 +45,7 @@ export const SymbolsGroup: FunctionComponent<SymbolsGroupProps> = ({
               className="rounded-circle w-35px h-35px"
             />
           ) : item[emailKey] ? (
-            <Gravatar
-              email={item[emailKey]}
-              size={35}
-              className="rounded-circle"
-            />
+            <Avatar className="rounded-circle" name={item[nameKey]} />
           ) : (
             <div
               className={`symbol-label fs-4 fw-bold ${getSymbolColorClass(

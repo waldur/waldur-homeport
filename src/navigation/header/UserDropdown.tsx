@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
-import Gravatar from 'react-gravatar';
 import { useSelector } from 'react-redux';
 
 import { AuthService } from '@waldur/auth/AuthService';
+import Avatar from '@waldur/core/Avatar';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -44,7 +44,11 @@ export const UserDropdownMenu: FunctionComponent = () => {
               style={{ backgroundImage: `url(${user.image})` }}
             />
           ) : (
-            <Gravatar email={user.email} size={40} />
+            <Avatar
+              className="symbol symbol-40px"
+              name={user.full_name}
+              size={40}
+            />
           )}
         </div>
       </div>
@@ -65,7 +69,11 @@ export const UserDropdownMenu: FunctionComponent = () => {
                   style={{ backgroundImage: `url(${user.image})` }}
                 />
               ) : (
-                <Gravatar email={user.email} size={40} />
+                <Avatar
+                  className="symbol symbol-40px"
+                  name={user.full_name}
+                  size={40}
+                />
               )}
             </div>
 
