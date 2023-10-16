@@ -46,7 +46,7 @@ export const getOfferingLimit = (
   if (!offering?.quotas?.length) return 0;
   const quota = offering.quotas.find((qouta) => qouta.name === quotaName);
   if (!quota) return defaultLimit;
-  return quota.limit - quota.usage;
+  return quota.limit;
 };
 
 export const useQuotasData = (offering: Offering) => {
