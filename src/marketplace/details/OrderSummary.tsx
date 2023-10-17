@@ -4,7 +4,6 @@ import { getFormValues, isValid } from 'redux-form';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { FieldError } from '@waldur/form';
-import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { ShoppingCartUpdateButtonContainer } from '@waldur/marketplace/cart/ShoppingCartUpdateButtonContainer';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
@@ -25,13 +24,12 @@ export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => {
   return (
     <div className="order-summary bg-gray-100 mb-10 fs-8 fw-bold">
       {props.extraComponent ? createElement(props.extraComponent, props) : null}
-      {props.customer &&
-        !getActiveFixedPricePaymentProfile(props.customer.payment_profiles) &&
-        props.formData &&
-        props.formData.plan &&
-        !props.shouldConcealPrices && (
-          <OrderSummaryPlanRows priceData={props.prices} />
-        )}
+      {props.formData && props.formData.plan && (
+        <OrderSummaryPlanRows
+          priceData={props.prices}
+          customer={props.customer}
+        />
+      )}
     </div>
   );
 };

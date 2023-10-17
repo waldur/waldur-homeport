@@ -143,9 +143,15 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
           <div className="d-flex justify-content-between">
             <h5 className="mb-6">
               {selectedPeriod === 'monthly'
-                ? translate('Monthly cost')
+                ? shouldConcealPrices
+                  ? translate('Monthly')
+                  : translate('Monthly cost')
+                : shouldConcealPrices
+                ? translate('Annual')
                 : translate('Annual cost')}
-              <PriceTooltip iconClassName="text-dark" />
+              {!shouldConcealPrices && (
+                <PriceTooltip iconClassName="text-dark" />
+              )}
             </h5>
             {props.periods.length > 1 && (
               <a
@@ -164,18 +170,20 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
             )}
           </div>
 
-          <table className="table-details w-100 mb-12">
+          <table className="table-details w-100">
             <tbody>
               {/* Fixed */}
               {periodic.fixedRows.length > 0 && (
                 <>
                   <FixedRows
                     components={periodic.fixedRows}
-                    hidePrices={Boolean(activeFixedPriceProfile)}
+                    hidePrices={Boolean(
+                      activeFixedPriceProfile && !shouldConcealPrices,
+                    )}
                     period={selectedPeriod}
                     activePriceIndex={activePriceIndex}
                   />
-                  {!activeFixedPriceProfile ? (
+                  {!activeFixedPriceProfile && !shouldConcealPrices ? (
                     <ComponentRowTotal
                       amount={periodic.fixedTotalPeriods[activePriceIndex]}
                       period={selectedPeriod}
@@ -226,7 +234,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                 </>
               )}
 
-              {!activeFixedPriceProfile ? (
+              {!activeFixedPriceProfile && !shouldConcealPrices ? (
                 <ComponentRowTotal
                   amount={periodic.periodicTotal[activePriceIndex]}
                   period={selectedPeriod}
@@ -241,8 +249,14 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
       {oneTime.hasOneTimeCost && (
         <section className="plan-details-section bg-light rounded p-6">
           <h5 className="mb-6">
-            {translate('One time cost')}
-            <PriceTooltip iconClassName="text-dark" />
+            {shouldConcealPrices ? (
+              translate('One time')
+            ) : (
+              <>
+                {translate('One time cost')}
+                <PriceTooltip iconClassName="text-dark" />
+              </>
+            )}
           </h5>
 
           <table className="table-details table-details-limit w-100">
@@ -297,7 +311,9 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                 </>
               )}
 
-              <ComponentRowTotal amount={oneTime.oneTimeTotal} final />
+              {!shouldConcealPrices && (
+                <ComponentRowTotal amount={oneTime.oneTimeTotal} final />
+              )}
             </tbody>
           </table>
         </section>

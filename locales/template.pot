@@ -657,6 +657,10 @@ msgid "Annotations"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "Annual"
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
 msgid "Annual cost"
 msgstr ""
 
@@ -5278,6 +5282,10 @@ msgstr ""
 msgid "Monitoring"
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "Monthly"
+msgstr ""
+
 #: src/marketplace/details/plan/OrderSummaryPlanRows.tsx
 #: src/marketplace/details/plan/PlanDetailsTable2.tsx
 #: src/quotas/constants.ts
@@ -6235,6 +6243,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/ResourcesCountColumn.tsx
 msgid "One resource"
+msgstr ""
+
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "One time"
 msgstr ""
 
 #: src/marketplace/details/plan/OrderSummaryPlanRows.tsx

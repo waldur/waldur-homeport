@@ -91,18 +91,20 @@ export const ComponentRow2: React.FC<ComponentRowProps> = (props) => {
       </th>
       <td>{props.hasX ? 'X' : ''}</td>
       <td className={props.className}>{props.children}</td>
-      <td className="text-center" width="20px">
-        =
-      </td>
       {!props.hidePrices ? (
-        <td className="estimate">
-          {formatCurrency(
-            componentTotalPrice,
-            ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-            4,
-          )}
-          {perPeriod}
-        </td>
+        <>
+          <td className="text-center" width="20px">
+            =
+          </td>
+          <td className="estimate">
+            {formatCurrency(
+              componentTotalPrice,
+              ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+              4,
+            )}
+            {perPeriod}
+          </td>
+        </>
       ) : null}
     </tr>
   );

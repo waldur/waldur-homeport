@@ -62,15 +62,17 @@ export const UsageComponentRow: React.FC<UsageComponentRowProps> = (props) => {
       </th>
       <td></td>
       <td>{translate('Usage based')}</td>
-      <td className="text-center" width="20px">
-        =
-      </td>
       {!props.hidePrices ? (
-        <td className="estimate">
-          <a className="text-link fst-italic" onClick={onClick}>
-            {translate('Estimate')}
-          </a>
-        </td>
+        <>
+          <td className="text-center" width="20px">
+            =
+          </td>
+          <td className="estimate">
+            <a className="text-link fst-italic" onClick={onClick}>
+              {translate('Estimate')}
+            </a>
+          </td>
+        </>
       ) : null}
     </tr>
   );
