@@ -16,12 +16,20 @@ interface UserActivateButtonProps {
   onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
+const getConfirmationText = (isActive, name) => {
+  return isActive
+    ? translate(`Are you sure you want to deactivate ${name}? `)
+    : translate(`Are you sure you want to activate ${name}? `);
+};
+
 const PureUserActivateButton = (props: UserActivateButtonProps) => {
   const [isActive, setIsActive] = useState(props.row.is_active);
 
   const toggleUserStatus = (event: MouseEvent<HTMLButtonElement>) => {
-    setIsActive(!isActive);
-    props.onClick(event);
+    if (confirm(getConfirmationText(isActive, props.row.full_name))) {
+      setIsActive(!isActive);
+      props.onClick(event);
+    }
   };
 
   return props.user.is_staff ? (
@@ -38,6 +46,7 @@ const PureUserActivateButton = (props: UserActivateButtonProps) => {
       <ActionButton
         title={isActive ? translate('Deactivate') : translate('Activate')}
         action={toggleUserStatus}
+        className="btn btn-danger btn-sm"
       />
     </Tip>
   ) : null;

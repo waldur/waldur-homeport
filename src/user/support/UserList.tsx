@@ -13,9 +13,9 @@ import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { Table, createFetcher } from '@waldur/table/index';
 import { useTable } from '@waldur/table/utils';
 
-import { UserDetailsButton } from './UserDetailsButton';
 import { UserFilter } from './UserFilter';
 import { UserTableActions } from './UserTableActions';
+import UserActionsDropdown from './UserTableDropDownActions';
 
 const renderFieldOrDash = (field) => {
   return field ? field : DASH_ESCAPE_CODE;
@@ -180,7 +180,7 @@ export const UserList: FunctionComponent<any> = (props) => {
           className: 'text-center',
         },
       ]}
-      hoverableRow={UserDetailsButton}
+      hoverableRow={UserActionsDropdown}
       showPageSizeSelector={true}
       verboseName={translate('users')}
       enableExport={true}
