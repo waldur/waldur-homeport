@@ -154,8 +154,13 @@ describe('Users', () => {
   });
 
   it('should open details modal when click details button', () => {
-    cy.get('tr:nth-child(1) .ms-3')
-      .click({force: true})
+    cy.get('td .dropdown')
+      .first()
+      .contains('Actions')
+      .click({ force: true })
+      .get('.dropdown-item')
+      .contains('Details')
+      .click({ force: true })
       .get('.modal-title')
       .contains('User details of Tara Pierce')
       .should('be.visible', true)

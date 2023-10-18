@@ -218,6 +218,7 @@ msgstr ""
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/user/keys/KeysList.tsx
+#: src/user/support/UserTableDropDownActions.tsx
 msgid "Actions"
 msgstr ""
 
@@ -794,6 +795,10 @@ msgstr ""
 msgid "Are you sure you want to accept a {name}?"
 msgstr ""
 
+#: src/user/support/UserActivateButton.tsx
+msgid "Are you sure you want to activate ?"
+msgstr ""
+
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
 msgid "Are you sure you want to archive plan {name}?"
 msgstr ""
@@ -804,6 +809,10 @@ msgstr ""
 
 #: src/invitations/GroupInvitationCancelButton.tsx
 msgid "Are you sure you want to cancel invitation by {name}?"
+msgstr ""
+
+#: src/user/support/UserActivateButton.tsx
+msgid "Are you sure you want to deactivate ?"
 msgstr ""
 
 #: src/resource/actions/DestroyActionItem.tsx
