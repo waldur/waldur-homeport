@@ -9,6 +9,7 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { AddPlanButton } from './AddPlanButton';
 import { ArchivePlanButton } from './ArchivePlanButton';
+import { ClonePlanButton } from './ClonePlanButton';
 import { EditPlanButton } from './EditPlanButton';
 
 export const PlansSection = (props) => {
@@ -60,6 +61,14 @@ export const PlansSection = (props) => {
                         permission: PermissionEnum.UPDATE_OFFERING_PLAN,
                         customerId: props.offering.customer_uuid,
                       }) && <EditPlanButton {...props} plan={plan} />}
+                      {!hidePlanAddButton(
+                        props.offering.type,
+                        props.offering.plans,
+                      ) &&
+                        hasPermission(user, {
+                          permission: PermissionEnum.CREATE_OFFERING_PLAN,
+                          customerId: props.offering.customer_uuid,
+                        }) && <ClonePlanButton {...props} plan={plan} />}
                       {hasPermission(user, {
                         permission: PermissionEnum.ARCHIVE_OFFERING_PLAN,
                         customerId: props.offering.customer_uuid,
