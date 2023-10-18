@@ -1628,6 +1628,14 @@ msgstr ""
 msgid "Client secret"
 msgstr ""
 
+#: src/marketplace/offerings/update/plans/ClonePlanButton.tsx
+msgid "Clone"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/AddPlanDialog.tsx
+msgid "Clone of"
+msgstr ""
+
 #: src/invitations/actions/create/FormButtons.tsx
 #: src/marketplace/details/plan/EstimateUsageComponentDialog.tsx
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx
