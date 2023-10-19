@@ -24,7 +24,14 @@ export const usersAutocomplete = async (
   currentPage: number,
 ) => {
   const params = {
-    field: ['full_name', 'url', 'email', 'uuid', 'username'],
+    field: [
+      'full_name',
+      'url',
+      'email',
+      'uuid',
+      'username',
+      'registration_method',
+    ],
     o: 'full_name',
     ...query,
     page: currentPage,
