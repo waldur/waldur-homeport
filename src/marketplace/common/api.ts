@@ -531,6 +531,13 @@ export const countRobotAccounts = (params) =>
     params,
   }).then(parseResultCount);
 
+export const countLexisLinks = (params?) =>
+  Axios.request({
+    method: 'HEAD',
+    url: ENV.apiEndpoint + 'api/lexis-links/',
+    params,
+  }).then(parseResultCount);
+
 export const createRobotAccount = (payload) =>
   post(`/marketplace-robot-accounts/`, payload);
 
@@ -556,3 +563,6 @@ export const deleteOfferingEndpoint = (offeringId, endpointId) =>
 
 export const syncCustomScriptResource = (payload) =>
   post(`/marketplace-script-sync-resource/`, payload);
+
+export const createLexisLink = (data) =>
+  post(`/lexis-links/`, data).then((response) => response.data);

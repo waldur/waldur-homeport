@@ -162,7 +162,10 @@ const ProjectsListContainer = lazyComponent(
   () => import('@waldur/project/ProjectsListContainer'),
   'ProjectsListContainer',
 );
-
+const SupportLexisLinksList = lazyComponent(
+  () => import('./resources/lexis/SupportLexisLinksList'),
+  'SupportLexisLinksList',
+);
 const getPublicRoutesParams = () => ({
   resolve: [
     {
@@ -669,6 +672,15 @@ export const states: StateDeclaration[] = [
     parent: 'marketplace-admin-resources',
     data: {
       breadcrumb: () => translate('Resources'),
+    },
+  },
+  {
+    name: 'marketplace-admin-lexis-links-list',
+    url: 'lexis-links/',
+    component: SupportLexisLinksList,
+    parent: 'marketplace-admin-resources',
+    data: {
+      breadcrumb: () => translate('LEXIS links'),
     },
   },
   {
