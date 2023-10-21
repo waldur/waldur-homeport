@@ -5,6 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { ErrorMessage } from '@waldur/ErrorMessage';
+import { LexisLinkCard } from '@waldur/marketplace/resources/lexis/LexisLinkCard';
 import { RobotAccountCard } from '@waldur/marketplace/robot-accounts/RobotAccountCard';
 import { useExtraTabs, useFullPage } from '@waldur/navigation/context';
 import {
@@ -157,6 +158,7 @@ export const ResourceDetailsView: FC<any> = ({
                     />
                   </ErrorBoundary>
                 )}
+                <LexisLinkCard resource={resource} />
                 <RobotAccountCard resource={resource} />
                 <UsageCard resource={resource} />
               </Col>

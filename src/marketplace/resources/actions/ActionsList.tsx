@@ -2,6 +2,7 @@ import { EditResourceEndDateAction } from '@waldur/marketplace/resources/actions
 import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
 import { SyncResourceAction } from '@waldur/marketplace/resources/actions/SyncResourceAction';
 import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
+import { CreateLexisLinkAction } from '@waldur/marketplace/resources/lexis/CreateLexisLinkAction';
 import { ShowReportAction } from '@waldur/marketplace/resources/report/ShowReportAction';
 import { SubmitReportAction } from '@waldur/marketplace/resources/report/SubmitReportAction';
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
@@ -22,4 +23,5 @@ export const ActionsList = [
   TerminateAction,
   EditResourceEndDateAction,
   SyncResourceAction,
+  CreateLexisLinkAction,
 ];
