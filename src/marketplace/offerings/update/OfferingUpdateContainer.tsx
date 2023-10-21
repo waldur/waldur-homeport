@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { UISref, useCurrentStateAndParams } from '@uirouter/react';
-import Axios from 'axios';
 import { Button } from 'react-bootstrap';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -35,12 +34,7 @@ const getOfferingData = async (offering_uuid) => {
     (plugin) => plugin.offering_type === offering.type,
   ).components;
   const category = await getCategory(offering.category_uuid);
-  const offeringScope = offering.scope;
-  let provider;
-  if (offeringScope) {
-    provider = (await Axios.get(offeringScope)).data;
-  }
-  return { offering, category, provider, components };
+  return { offering, category, components };
 };
 
 type Awaited<T> = T extends PromiseLike<infer U> ? U : T;
@@ -119,11 +113,7 @@ export const OfferingUpdateContainer = () => {
       <div className="container-xxl py-10">
         <OverviewSection offering={data.offering} refetch={refetch} />
 
-        <IntegrationSection
-          offering={data.offering}
-          provider={data.provider}
-          refetch={refetch}
-        />
+        <IntegrationSection offering={data.offering} refetch={refetch} />
 
         <OfferingEndpointsSection offering={data.offering} refetch={refetch} />
 

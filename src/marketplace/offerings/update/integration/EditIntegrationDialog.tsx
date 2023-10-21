@@ -3,7 +3,6 @@ import { Modal } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { FormSection, reduxForm, Field } from 'redux-form';
 
-import { patch } from '@waldur/core/api';
 import { FormContainer, StringField, SubmitButton } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
@@ -22,9 +21,9 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { EDIT_INTEGRATION_FORM_ID } from './constants';
 
 export const EditIntegrationDialog = connect(
-  (_, ownProps: { resolve: { offering; provider } }) => ({
+  (_, ownProps: { resolve: { offering } }) => ({
     initialValues: {
-      service_settings: ownProps.resolve.provider?.options,
+      service_attributes: ownProps.resolve.offering.service_attributes,
       secret_options: ownProps.resolve.offering.secret_options,
       plugin_options: ownProps.resolve.offering.plugin_options,
       backend_id: ownProps.resolve.offering.backend_id,
@@ -38,11 +37,6 @@ export const EditIntegrationDialog = connect(
     const update = useCallback(
       async (formData) => {
         try {
-          if (props.resolve.provider?.options !== formData.service_settings) {
-            await patch(props.resolve.offering.scope, {
-              options: formData.service_settings,
-            });
-          }
           await updateProviderOffering(props.resolve.offering.uuid, formData);
           dispatch(
             showSuccess(translate('Offering has been updated successfully.')),
@@ -72,9 +66,8 @@ export const EditIntegrationDialog = connect(
         <Modal.Body>
           <FormContainer {...props}>
             {allowToUpdateService(props.resolve.offering.type) &&
-            props.resolve.provider &&
             ServiceSettingsForm ? (
-              <FormSection name="service_settings">
+              <FormSection name="service_attributes">
                 <ServiceSettingsForm />
               </FormSection>
             ) : null}

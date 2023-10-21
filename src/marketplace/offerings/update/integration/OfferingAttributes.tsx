@@ -8,13 +8,7 @@ import { AttributesTable } from '@waldur/marketplace/details/attributes/Attribut
 import { Section } from '@waldur/marketplace/types';
 import { getSerializer } from '@waldur/providers/registry';
 
-export const OfferingAttributes = ({
-  offering,
-  provider,
-}: {
-  offering;
-  provider?;
-}) => {
+export const OfferingAttributes = ({ offering }) => {
   const OptionsSummary = getOptionsSummary(offering.type);
 
   const section: Section = {
@@ -37,7 +31,9 @@ export const OfferingAttributes = ({
   };
   const providerType = getProviderType(offering.type);
   const serializer = getSerializer(providerType);
-  const attributes = provider ? serializer(provider.options) : {};
+  const attributes = offering.service_attributes
+    ? serializer(offering.service_attributes)
+    : {};
 
   return attributes ? (
     <AttributesTable

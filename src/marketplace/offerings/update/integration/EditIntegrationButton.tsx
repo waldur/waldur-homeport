@@ -15,7 +15,6 @@ const EditIntegrationDialog = lazyComponent(
 
 export const EditIntegrationButton: FunctionComponent<{
   offering;
-  provider?;
   refetch;
 }> = (props) => {
   const dispatch = useDispatch();
