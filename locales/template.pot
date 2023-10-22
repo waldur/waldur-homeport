@@ -901,6 +901,10 @@ msgstr ""
 msgid "Are you sure you want to {title} {count} resources?"
 msgstr ""
 
+#: src/marketplace/resources/lexis/CreateLexisLinkDialog.tsx
+msgid "Are you sure you would like to create a LEXIS link for the resource {resourceName}?"
+msgstr ""
+
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
 msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
 msgstr ""
@@ -2015,6 +2019,14 @@ msgstr ""
 #: src/rancher/cluster/hpas/HPACreateButton.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
 msgid "Create"
+msgstr ""
+
+#: src/marketplace/resources/lexis/CreateLexisLinkDialog.tsx
+msgid "Create LEXIS Link for the resource {resourceName}"
+msgstr ""
+
+#: src/marketplace/resources/lexis/CreateLexisLinkAction.tsx
+msgid "Create LEXIS link"
 msgstr ""
 
 #: src/vmware/actions/CreatePortAction.tsx
@@ -4796,6 +4808,16 @@ msgstr ""
 msgid "Kubernetes version"
 msgstr ""
 
+#: src/marketplace/resources/lexis/CreateLexisLinkDialog.tsx
+msgid "LEXIS link creation request has been submitted."
+msgstr ""
+
+#: src/marketplace/resources/lexis/LexisLinkCard.tsx
+#: src/marketplace/resources/lexis/LexisLinkList.tsx
+#: src/marketplace/routes.ts
+msgid "LEXIS links"
+msgstr ""
+
 #: src/administration/providers/ProviderForm.tsx
 msgid "Label"
 msgstr ""
@@ -6120,6 +6142,22 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 msgid "Offering does not have any usage-based components."
+msgstr ""
+
+#: src/marketplace/resources/lexis/CreateLexisLinkAction.tsx
+msgid "Offering does not include heappe_cluster_id option"
+msgstr ""
+
+#: src/marketplace/resources/lexis/CreateLexisLinkAction.tsx
+msgid "Offering does not include heappe_local_base_path option"
+msgstr ""
+
+#: src/marketplace/resources/lexis/CreateLexisLinkAction.tsx
+msgid "Offering does not include heappe_url option"
+msgstr ""
+
+#: src/marketplace/resources/lexis/CreateLexisLinkAction.tsx
+msgid "Offering does not include heappe_username option"
 msgstr ""
 
 #: src/marketplace/offerings/update/components/ComponentsSection.tsx
@@ -8533,6 +8571,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
@@ -8842,8 +8881,16 @@ msgstr ""
 msgid "Revoke"
 msgstr ""
 
+#: src/marketplace/resources/lexis/LexisLinkList.tsx
+msgid "Robot account"
+msgstr ""
+
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 msgid "Robot account has been created."
+msgstr ""
+
+#: src/marketplace/resources/lexis/LexisLinkList.tsx
+msgid "Robot account type"
 msgstr ""
 
 #: src/marketplace/robot-accounts/RobotAccountCard.tsx
@@ -10095,6 +10142,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/details/ResourceDetailsHeaderBody.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
@@ -10247,6 +10295,7 @@ msgstr ""
 #: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
+#: src/marketplace/resources/lexis/CreateLexisLinkDialog.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
@@ -11988,6 +12037,10 @@ msgstr ""
 
 #: src/resource/actions/OpenConsoleLogActionItem.tsx
 msgid "Unable to show console log."
+msgstr ""
+
+#: src/marketplace/resources/lexis/CreateLexisLinkDialog.tsx
+msgid "Unable to submit LEXIS link creation request."
 msgstr ""
 
 #: src/marketplace-checklist/useChecklist.tsx
