@@ -40,7 +40,6 @@ export const IntegrationSection = (props) => {
         <div className="card-toolbar">
           <EditIntegrationButton
             offering={props.offering}
-            provider={props.provider}
             refetch={props.refetch}
           />
           <EditSchedulesButton {...props} />
@@ -49,10 +48,7 @@ export const IntegrationSection = (props) => {
         </div>
       </div>
       <Card.Body>
-        <OfferingAttributes
-          offering={props.offering}
-          provider={props.provider}
-        />
+        <OfferingAttributes offering={props.offering} />
       </Card.Body>
     </Card>
   );
