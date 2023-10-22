@@ -14,6 +14,7 @@ import { GoogleCalendarActions } from './GoogleCalendarActions';
 import { OfferingAttributes } from './OfferingAttributes';
 import { RemoteActions } from './RemoteActions';
 import { ScriptIntegrationSummary } from './ScriptIntegrationSummary';
+import { SyncButton } from './SyncButton';
 
 export const IntegrationSection = (props) => {
   if (props.offering.type === OFFERING_TYPE_CUSTOM_SCRIPTS) {
@@ -45,6 +46,7 @@ export const IntegrationSection = (props) => {
           <EditSchedulesButton {...props} />
           <RemoteActions offering={props.offering} />
           <GoogleCalendarActions offering={props.offering} />
+          <SyncButton offering={props.offering} refetch={props.refetch} />
         </div>
       </div>
       <Card.Body>

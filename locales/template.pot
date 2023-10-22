@@ -9660,6 +9660,10 @@ msgstr ""
 msgid "Service settings of this resource are in state erred."
 msgstr ""
 
+#: src/marketplace/offerings/update/integration/SyncButton.tsx
+msgid "Service synchronization has been scheduled."
+msgstr ""
+
 #: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
@@ -10444,6 +10448,10 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/PullServerGroupsAction.tsx
 #: src/resource/actions/PullActionItem.tsx
 msgid "Synchronise"
+msgstr ""
+
+#: src/marketplace/offerings/update/integration/SyncButton.tsx
+msgid "Synchronize"
 msgstr ""
 
 #: src/user/support/EmailField.tsx
@@ -12016,6 +12024,10 @@ msgstr ""
 
 #: src/auth/AuthInit.tsx
 msgid "Unable to save user."
+msgstr ""
+
+#: src/marketplace/offerings/update/integration/SyncButton.tsx
+msgid "Unable to schedule service synchronization."
 msgstr ""
 
 #: src/issues/feedback/SupportFeedback.tsx
