@@ -39,7 +39,7 @@ export const ProjectUsersList = () => {
   const tableProps = useTable({
     table: 'project-users',
     fetchData: createFetcher(`projects/${project.uuid}/list_users`),
-    queryField: 'user_full_name',
+    queryField: 'search_string',
   });
 
   return (
