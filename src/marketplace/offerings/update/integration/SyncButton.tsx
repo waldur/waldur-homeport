@@ -37,7 +37,7 @@ export const SyncButton = ({ offering, refetch }) => {
       {enabled ? (
         <i className="fa fa-refresh"></i>
       ) : (
-        <i className="fa-spinner fa-spin"></i>
+        <i className="fa fa-spinner fa-spin"></i>
       )}{' '}
       {translate('Synchronize')}
     </Button>
