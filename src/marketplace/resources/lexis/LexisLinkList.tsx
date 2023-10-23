@@ -3,6 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
+import { LexisLinkDeleteButton } from '@waldur/marketplace/resources/lexis/LexisLinkDeleteButton';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
@@ -60,6 +61,9 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       columns={columns}
       verboseName={translate('LEXIS links')}
       hasActionBar={false}
+      hoverableRow={({ row }) => (
+        <LexisLinkDeleteButton row={row} refetch={props.fetch} />
+      )}
     />
   );
 };
