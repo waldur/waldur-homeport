@@ -451,6 +451,10 @@ msgstr ""
 msgid "Add {role}"
 msgstr ""
 
+#: src/support/deploy-steps.ts
+msgid "Additional configuration"
+msgstr ""
+
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
@@ -9305,6 +9309,7 @@ msgstr ""
 msgid "Select flavor"
 msgstr ""
 
+#: src/marketplace/deploy/steps/FormAdditionalConfigurationStep.tsx
 #: src/support/OfferingConfigurationForm.tsx
 msgid "Select instance..."
 msgstr ""
@@ -9464,10 +9469,12 @@ msgstr ""
 msgid "Select template..."
 msgstr ""
 
+#: src/marketplace/deploy/steps/FormAdditionalConfigurationStep.tsx
 #: src/support/OfferingConfigurationForm.tsx
 msgid "Select tenant..."
 msgstr ""
 
+#: src/marketplace/deploy/steps/FormAdditionalConfigurationStep.tsx
 #: src/support/OfferingConfigurationForm.tsx
 msgid "Select tenants..."
 msgstr ""

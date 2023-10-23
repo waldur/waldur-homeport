@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { FormAdditionalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormAdditionalConfigurationStep';
 import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
 import { FormPlanStep } from '@waldur/marketplace/deploy/steps/FormPlanStep';
 import { FormProjectStep } from '@waldur/marketplace/deploy/steps/FormProjectStep';
@@ -20,6 +21,12 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     required: true,
     requiredFields: ['plan'],
     component: FormPlanStep,
+  },
+  {
+    label: translate('Additional configuration'),
+    id: 'step-additional-configuration',
+    required: false,
+    component: FormAdditionalConfigurationStep,
   },
   {
     label: translate('Final configuration'),
