@@ -24,9 +24,22 @@ export const SyncButton = ({ offering, refetch }) => {
     }
   };
 
+  const enabled = ['OK', 'Erred'].includes(offering.state);
+
   return (
-    <Button onClick={callback} size="sm" variant="light" className="me-3">
-      <i className="fa fa-refresh"></i> {translate('Synchronize')}
+    <Button
+      onClick={callback}
+      size="sm"
+      variant="light"
+      className="me-3"
+      disabled={!enabled}
+    >
+      {enabled ? (
+        <i className="fa fa-refresh"></i>
+      ) : (
+        <i className="fa-spinner fa-spin"></i>
+      )}{' '}
+      {translate('Synchronize')}
     </Button>
   );
 };
