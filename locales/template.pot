@@ -839,10 +839,6 @@ msgstr ""
 msgid "Are you sure you want to delete option {name}?"
 msgstr ""
 
-#: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
-msgid "Are you sure you want to delete the LEXIS link of {resource_name}?"
-msgstr ""
-
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 msgid "Are you sure you want to delete the cost policy for project {name}?"
 msgstr ""
@@ -1855,7 +1851,6 @@ msgstr ""
 #: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
-#: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
@@ -8303,7 +8298,6 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/update/ImageUploadField.tsx
-#: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
