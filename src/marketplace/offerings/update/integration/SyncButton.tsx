@@ -24,7 +24,7 @@ export const SyncButton = ({ offering, refetch }) => {
     }
   };
 
-  const enabled = ['OK', 'Erred'].includes(offering.state);
+  const enabled = ['OK', 'Erred'].includes(offering.scope_state);
 
   return (
     <Button
