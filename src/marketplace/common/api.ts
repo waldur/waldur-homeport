@@ -566,3 +566,6 @@ export const syncCustomScriptResource = (payload) =>
 
 export const createLexisLink = (data) =>
   post(`/lexis-links/`, data).then((response) => response.data);
+
+export const deleteLexisLink = (lexisLinkURL: string) =>
+  Axios.delete(lexisLinkURL);
