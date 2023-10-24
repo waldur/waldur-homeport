@@ -25,7 +25,7 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) =>
         disabled: props.offering.state !== 'Active',
       })}
     >
-      <OfferingLogo src={props.offering.thumbnail} />
+      <OfferingLogo src={props.offering.thumbnail} name={props.offering.name} />
       <div className="ms-6">
         <h3 className="offering-title text-dark fw-bold text-hover-primary fs-6 mt-4">
           {props.offering.name}
