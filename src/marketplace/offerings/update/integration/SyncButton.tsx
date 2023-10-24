@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { post } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
+import { SLURM_REMOTE_PLUGIN } from '@waldur/slurm/constants';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 export const SyncButton = ({ offering, refetch }) => {
@@ -25,6 +26,11 @@ export const SyncButton = ({ offering, refetch }) => {
   };
 
   const enabled = ['OK', 'Erred'].includes(offering.scope_state);
+
+  if (offering.type === SLURM_REMOTE_PLUGIN) {
+    // Plugin does not support this operation
+    return null;
+  }
 
   return (
     <Button
