@@ -25,12 +25,17 @@ export const SyncButton = ({ offering, refetch }) => {
     }
   };
 
-  const enabled = ['OK', 'Erred'].includes(offering.scope_state);
+  if (!offering.scope) {
+    // Offering does not have service settings
+    return null;
+  }
 
   if (offering.type === SLURM_REMOTE_PLUGIN) {
     // Plugin does not support this operation
     return null;
   }
+
+  const enabled = ['OK', 'Erred'].includes(offering.scope_state);
 
   return (
     <Button
