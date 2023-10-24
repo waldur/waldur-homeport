@@ -25,6 +25,10 @@ const UserAgreementsList = lazyComponent(
   'UserAgreementsList',
 );
 
+const CategoryGroupsList = lazyComponent(
+  () => import('@waldur/marketplace/category/admin/CategoryGroupsList'),
+  'CategoryGroupsList',
+);
 const SupportCustomersContainer = lazyComponent(
   () => import('@waldur/customer/list/SupportCustomersContainer'),
   'SupportCustomersContainer',
@@ -152,6 +156,17 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Active sessions'),
     },
   },
+
+  {
+    name: 'admin-marketplace-category-groups',
+    url: 'category-groups',
+    parent: 'admin-marketplace',
+    component: CategoryGroupsList,
+    data: {
+      breadcrumb: () => translate('Category groups'),
+    },
+  },
+
   {
     name: 'admin.customers',
     url: 'customers/',
