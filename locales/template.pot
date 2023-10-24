@@ -329,6 +329,10 @@ msgstr ""
 msgid "Add endpoint"
 msgstr ""
 
+#: src/marketplace/category/admin/GroupCreateButton.tsx
+msgid "Add group"
+msgstr ""
+
 #: src/administration/providers/CreateProviderDialog.tsx
 #: src/administration/providers/ProviderCard.tsx
 msgid "Add identity provider"
@@ -861,6 +865,10 @@ msgstr ""
 
 #: src/administration/TokenDeleteButton.tsx
 msgid "Are you sure you want to delete the token of {firstname} {lastname}?"
+msgstr ""
+
+#: src/marketplace/category/admin/GroupDeleteButton.tsx
+msgid "Are you sure you want to delete the {title} category group?"
 msgstr ""
 
 #: src/resource/actions/ResourceDeleteButton.tsx
@@ -1502,6 +1510,11 @@ msgstr ""
 msgid "Category doesn't contain sections."
 msgstr ""
 
+#: src/administration/routes.ts
+#: src/marketplace/category/admin/CategoryGroupsList.tsx
+msgid "Category groups"
+msgstr ""
+
 #: src/marketplace/offerings/update/attributes/EditCategoryDialog.tsx
 msgid "Category has been updated."
 msgstr ""
@@ -1846,6 +1859,7 @@ msgstr ""
 #: src/customer/team/UserRemoveButton.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
+#: src/marketplace/category/admin/GroupDeleteButton.tsx
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
 #: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
@@ -2000,6 +2014,7 @@ msgstr ""
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
 #: src/marketplace/offerings/update/components/AddComponentDialog.tsx
@@ -2064,6 +2079,10 @@ msgstr ""
 
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 msgid "Create catalog"
+msgstr ""
+
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+msgid "Create category group"
 msgstr ""
 
 #: src/invoices/details/InvoiceItemCompensation.tsx
@@ -2683,6 +2702,8 @@ msgstr ""
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/category/admin/CategoryGroupsList.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
@@ -3015,6 +3036,8 @@ msgstr ""
 #: src/customer/team/UserEditButton.tsx
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
+#: src/marketplace/category/admin/GroupEditButton.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/offerings/OfferingViews.tsx
 #: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
@@ -3144,6 +3167,10 @@ msgstr ""
 
 #: src/administration/agreements/UserAgreementsEditDialog.tsx
 msgid "Edit user agreements"
+msgstr ""
+
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+msgid "Edit {title}"
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceSummary.tsx
@@ -4178,6 +4205,7 @@ msgstr ""
 msgid "IP version"
 msgstr ""
 
+#: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 msgid "Icon"
 msgstr ""
@@ -8296,6 +8324,7 @@ msgstr ""
 #: src/form/DateField.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
 #: src/marketplace/cart/ShoppingCartItem.tsx
+#: src/marketplace/category/admin/GroupDeleteButton.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/update/ImageUploadField.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
@@ -10723,6 +10752,14 @@ msgstr ""
 msgid "The RAM quota is over the limit"
 msgstr ""
 
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+msgid "The category group has been created."
+msgstr ""
+
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+msgid "The category group has been updated."
+msgstr ""
+
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
 msgid "The date is inclusive. Once reached, all project resource will be scheduled for termination."
@@ -10832,6 +10869,10 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/navigation/sidebar/marketplace-popup/CategoriesPanel.tsx
 msgid "There are no categories."
+msgstr ""
+
+#: src/marketplace/category/admin/GroupsListTablePlaceholder.tsx
+msgid "There are no category groups yet."
 msgstr ""
 
 #: src/dashboard/CategoryResources.tsx
@@ -11060,6 +11101,8 @@ msgstr ""
 
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace/category/admin/CategoryGroupsList.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/referral/ReferralsList.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Title"
@@ -11398,6 +11441,10 @@ msgstr ""
 
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 msgid "Unable to create catalog."
+msgstr ""
+
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+msgid "Unable to create category group."
 msgstr ""
 
 #: src/invoices/details/InvoiceItemCompensationDialog.tsx
@@ -11968,6 +12015,10 @@ msgstr ""
 msgid "Unable to remove SSH key."
 msgstr ""
 
+#: src/marketplace/category/admin/GroupDeleteButton.tsx
+msgid "Unable to remove category group."
+msgstr ""
+
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
 msgid "Unable to remove component."
 msgstr ""
@@ -12196,6 +12247,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/attributes/EditCategoryDialog.tsx
 msgid "Unable to update category"
+msgstr ""
+
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+msgid "Unable to update category group."
 msgstr ""
 
 #: src/administration/branding/AdministrationBranding.tsx

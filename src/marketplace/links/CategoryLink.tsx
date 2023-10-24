@@ -13,6 +13,9 @@ interface OwnProps {
 
 export const offeringCategoryStateSelector = (state: RootState) => {
   const workspace = getWorkspace(state);
+  if (!workspace) {
+    return 'public.marketplace-category';
+  }
   return WORKSPACE_CATEGORY[workspace] || 'public.marketplace-category';
 };
 
