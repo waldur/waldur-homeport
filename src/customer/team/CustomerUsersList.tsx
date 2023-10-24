@@ -103,7 +103,7 @@ const mapPropsToFilter = (props) => {
 const TableOptions: TableOptionsType = {
   table: 'customer-users',
   fetchData: fetchCustomerUsers,
-  queryField: 'full_name',
+  queryField: 'full_name_and_email',
   mapPropsToFilter,
 };
 
