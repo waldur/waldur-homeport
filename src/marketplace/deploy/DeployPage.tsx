@@ -59,7 +59,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
   const formSteps = useMemo(
     () =>
       (getOrderFormSteps(selectedOffering?.type) || []).filter(
-        (step) => (step.isActive && step.isActive()) ?? true,
+        (step) => (step.isActive && step.isActive(selectedOffering)) ?? true,
       ),
     [selectedOffering],
   );

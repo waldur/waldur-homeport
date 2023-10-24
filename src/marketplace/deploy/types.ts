@@ -8,7 +8,7 @@ export interface OfferingConfigurationFormStep {
   requiredFields?: Array<string>;
   component: React.ComponentType<FormStepProps>;
   params?: Record<string, any>;
-  isActive?: () => boolean;
+  isActive?: (offering: Offering) => boolean;
 }
 
 export interface FormStepProps {

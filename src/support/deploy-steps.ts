@@ -27,6 +27,9 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     id: 'step-additional-configuration',
     required: false,
     component: FormAdditionalConfigurationStep,
+    isActive: (offering) => {
+      return offering.options.order?.length > 0;
+    },
   },
   {
     label: translate('Final configuration'),
