@@ -44,6 +44,7 @@ export const PublicOfferingDetailsHero: FunctionComponent<OwnProps> = (
                   <OfferingLogo
                     src={props.offering.thumbnail}
                     size={50}
+                    name={props.offering.name}
                     className="offering-small-logo"
                   />
                   <Logo

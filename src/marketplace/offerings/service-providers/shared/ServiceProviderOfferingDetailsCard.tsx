@@ -40,7 +40,7 @@ export const ServiceProviderOfferingDetailsCard: FunctionComponent<ServiceProvid
         >
           <Card.Body>
             <div className="offering-card-body">
-              <OfferingLogo src={row.thumbnail} />
+              <OfferingLogo src={row.thumbnail} name={row.name} />
               <h3 className="offering-title text-dark fw-bold text-hover-primary fs-6 mt-4">
                 {row.name}
               </h3>
