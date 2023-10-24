@@ -1,9 +1,10 @@
 import copy from 'copy-to-clipboard';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { Button, OverlayTrigger, Popover, Table } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { Tip } from '@waldur/core/Tooltip';
+import { detectOS } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/notify';
 
@@ -60,7 +61,12 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
     [dispatch, resource.username],
   );
 
-  const endpoints = [...resource.endpoints, ...offering.endpoints];
+  const os = useMemo(() => detectOS(), []);
+
+  let endpoints = [...resource.endpoints, ...offering.endpoints];
+  if (os === 'Windows') {
+    endpoints = endpoints.filter((endpoint) => !isSshFormat(endpoint.url));
+  }
   if (endpoints.length === 0) {
     return null;
   }

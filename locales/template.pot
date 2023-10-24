@@ -242,6 +242,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansSection.tsx
+#: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Active"
 msgstr ""
@@ -2888,10 +2889,12 @@ msgid "Disconnect subnet"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/ProviderCampaignTypeFilter.tsx
 msgid "Discount"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 msgid "Discount type"
 msgstr ""
 
@@ -2990,6 +2993,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
 msgstr ""
@@ -5902,6 +5906,7 @@ msgstr ""
 
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/ProviderCampaignServiceProviderFilter.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "No providers"
 msgstr ""
@@ -9429,6 +9434,7 @@ msgstr ""
 
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/ProviderCampaignServiceProviderFilter.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Select provider..."
 msgstr ""
@@ -9478,6 +9484,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/marketplace/resources/list/RuntimeStateFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Select state..."
 msgstr ""
@@ -9520,6 +9527,7 @@ msgstr ""
 
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignTypeFilter.tsx
 #: src/project/ProjectEventsFilter.tsx
 msgid "Select type..."
 msgstr ""
@@ -9644,6 +9652,8 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/ProviderCampaignFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignServiceProviderFilter.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
@@ -10101,6 +10111,7 @@ msgid "Something went wrong"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/ProviderCampaignTypeFilter.tsx
 msgid "Special price"
 msgstr ""
 
@@ -10196,6 +10207,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
@@ -10696,6 +10708,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 msgid "Terminated"
 msgstr ""
 

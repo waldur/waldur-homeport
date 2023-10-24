@@ -182,3 +182,12 @@ export const flattenObject = (obj) => {
   }
   return result;
 };
+
+export const detectOS = () => {
+  const nAgt = window.navigator.userAgent;
+  let os = 'Unknown';
+  if (/(Windows|Win)/.test(nAgt)) {
+    os = 'Windows';
+  }
+  return os;
+};
