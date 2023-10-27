@@ -12,6 +12,6 @@ const mapStateToProps = createSelector(getCustomer, (customer) => ({
 
 const CustomerIssuesListComponent = connect(mapStateToProps)(IssuesList);
 
-export const CustomerIssuesList: FunctionComponent = () => {
-  return <CustomerIssuesListComponent hiddenColumns={['customer']} />;
-};
+export const CustomerIssuesList: FunctionComponent = () => (
+  <CustomerIssuesListComponent hiddenColumns={['customer']} />
+);
