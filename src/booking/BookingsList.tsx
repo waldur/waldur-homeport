@@ -14,11 +14,7 @@ import { translate } from '@waldur/i18n';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
-import {
-  getCustomer,
-  isOwnerOrStaff,
-  isServiceManagerSelector,
-} from '@waldur/workspace/selectors';
+import { getCustomer } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { bookingFormSelector } from './store/selectors';
@@ -57,6 +53,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
       render: BookingTimeSlotsField,
       orderField: 'schedules',
     },
+    {
+      title: translate('Actions'),
+      render: ({ row }) => (
+        <BookingActions resource={row} refetch={() => props.fetch()} />
+      ),
+    },
   ];
 
   if (props.customer.is_service_provider) {
@@ -71,14 +73,6 @@ const TableComponent: FunctionComponent<any> = (props) => {
     });
   }
 
-  if (!props.actionsDisabled) {
-    columns.push({
-      title: translate('Actions'),
-      render: ({ row }) => (
-        <BookingActions resource={row} refetch={() => props.fetch()} />
-      ),
-    });
-  }
   return (
     <Table
       {...props}
@@ -125,7 +119,6 @@ const TableOptions = {
 
 const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
-  actionsDisabled: !isOwnerOrStaff(state) && !isServiceManagerSelector(state),
   filter: bookingFormSelector(state),
 });
 
