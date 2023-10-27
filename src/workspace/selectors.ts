@@ -1,9 +1,6 @@
 import { createSelector } from 'reselect';
 
-import {
-  PROJECT_ADMIN_ROLE,
-  PROJECT_MANAGER_ROLE,
-} from '@waldur/core/constants';
+import { RoleEnum } from '@waldur/permissions/enums';
 import { RootState } from '@waldur/store/reducers';
 
 import {
@@ -120,37 +117,14 @@ export const isOwnerOrStaff = createSelector(
   },
 );
 
-export const checkRole = (project: Project, user: User, role: string) => {
-  if (!project || !user) {
-    return false;
-  }
-  if (!project.permissions) {
-    return false;
-  }
-  const projectUser = project.permissions.find(
-    (perm) => perm.user_uuid === user.uuid,
-  );
-  if (projectUser) {
-    return projectUser.role === role;
-  }
-};
-
-export const isManager = createSelector(
-  getUser,
-  getProject,
-  (user: User, project: Project): boolean => {
-    return project && checkRole(project, user, PROJECT_MANAGER_ROLE);
-  },
-);
-
-export const isAdmin = createSelector(
-  getUser,
-  getProject,
-  (user: User, project: Project): boolean => {
-    return checkRole(project, user, PROJECT_ADMIN_ROLE);
-  },
-);
-
 export const filterByUser = (state: RootState) => ({
   user_url: getUser(state)?.url,
 });
+
+export const isProjectManagerSelector = (user, project) =>
+  user.permissions?.find(
+    (permission) =>
+      permission.scope_type === 'project' &&
+      permission.scope_uuid === project.uuid &&
+      permission.role_name === RoleEnum.PROJECT_MANAGER,
+  );

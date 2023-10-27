@@ -1,13 +1,15 @@
 import {
   CUSTOMER_OWNER_ROLE,
   PROJECT_ADMIN_ROLE,
-  PROJECT_MANAGER_ROLE,
   PROJECT_MEMBER_ROLE,
   PROJECT_ROLES,
 } from '@waldur/core/constants';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
-import { checkIsOwner, checkRole } from '@waldur/workspace/selectors';
+import {
+  checkIsOwner,
+  isProjectManagerSelector,
+} from '@waldur/workspace/selectors';
 
 export const InvitationPolicyService = {
   // This service provides business logic for invitation permissions:
@@ -33,7 +35,7 @@ export const InvitationPolicyService = {
         });
       }
     }
-    if (checkRole(context.project, context.user, PROJECT_MANAGER_ROLE)) {
+    if (isProjectManagerSelector(context.user, context.project)) {
       return [PROJECT_ADMIN_ROLE, PROJECT_MEMBER_ROLE].includes(role.value);
     }
     return false;
@@ -57,7 +59,7 @@ export const InvitationPolicyService = {
       return checkIsOwner(context.customer, context.user);
     }
     if (invitation.project_role && context.project) {
-      return checkRole(context.project, context.user, PROJECT_MANAGER_ROLE);
+      return isProjectManagerSelector(context.user, context.project);
     }
   },
 
@@ -69,9 +71,6 @@ export const InvitationPolicyService = {
     if (checkIsOwner(context.customer, context.user)) {
       return true;
     }
-    if (checkRole(context.project, context.user, PROJECT_MANAGER_ROLE)) {
-      return true;
-    }
-    return false;
+    return isProjectManagerSelector(context.user, context.project);
   },
 };

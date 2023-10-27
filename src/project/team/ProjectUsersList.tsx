@@ -7,7 +7,6 @@ import {
   PROJECT_MEMBER_ROLE,
 } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
-import { RoleEnum } from '@waldur/permissions/enums';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
@@ -18,6 +17,7 @@ import {
   isOwnerOrStaff as isOwnerOrStaffSelector,
   isStaff as isStaffSelector,
   getCustomer,
+  isProjectManagerSelector,
 } from '@waldur/workspace/selectors';
 
 import { AddMemberButton } from './AddMemberButton';
@@ -30,12 +30,7 @@ export const ProjectUsersList = () => {
   const isStaff = useSelector(isStaffSelector);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const customer = useSelector(getCustomer);
-  const isProjectManager = user.permissions?.find(
-    (permission) =>
-      permission.scope_type === 'project' &&
-      permission.scope_uuid === project.uuid &&
-      permission.role_name === RoleEnum.PROJECT_MANAGER,
-  );
+  const isProjectManager = isProjectManagerSelector(user, project);
   const tableProps = useTable({
     table: 'project-users',
     fetchData: createFetcher(`projects/${project.uuid}/list_users`),

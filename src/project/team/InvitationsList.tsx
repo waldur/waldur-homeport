@@ -13,7 +13,6 @@ import { InvitationPolicyService } from '@waldur/invitations/actions/InvitationP
 import { InvitationSendButton } from '@waldur/invitations/actions/InvitationSendButton';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { InvitationsFilter } from '@waldur/invitations/InvitationsFilter';
-import { RoleEnum } from '@waldur/permissions/enums';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -22,6 +21,7 @@ import {
   getProject,
   getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
+  isProjectManagerSelector,
 } from '@waldur/workspace/selectors';
 
 import { RoleField } from './RoleField';
@@ -129,12 +129,7 @@ export const InvitationsList: FunctionComponent = () => {
     }
   }, [user, project, customer, router]);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-  const isProjectManager = user.permissions?.find(
-    (permission) =>
-      permission.scope_type === 'project' &&
-      permission.scope_uuid === project.uuid &&
-      permission.role_name === RoleEnum.PROJECT_MANAGER,
-  );
+  const isProjectManager = isProjectManagerSelector(user, project);
 
   return (
     <InvitationsListComponent
