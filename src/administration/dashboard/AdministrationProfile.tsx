@@ -61,7 +61,7 @@ export const AdministrationProfile = ({
         );
       if (role.length > 0)
         Object.assign(filter, { role: JSON.stringify(role) });
-      router.stateService.go('admin.users', filter);
+      router.stateService.go('admin-user-users', filter);
     },
     [router],
   );

@@ -66,22 +66,22 @@ export const StatisticsCards = () => {
       {
         title: translate('Users'),
         count: counts.users,
-        viewLinkState: 'admin.users',
+        viewLinkState: 'admin-user-users',
       },
       {
         title: translate('Categories'),
         count: counts.categories,
-        viewLinkState: 'admin.marketplace-categories',
+        viewLinkState: 'admin-marketplace-categories',
       },
       {
         title: translate('Offerings'),
         count: counts.providerOfferings,
-        viewLinkState: 'admin.marketplace-offerings',
+        viewLinkState: 'admin-marketplace-offerings',
       },
       {
         title: translate('Resources'),
         count: counts.resources,
-        viewLinkState: 'marketplace-admin-resources',
+        viewLinkState: 'marketplace-admin-resources-list',
       },
     ];
   }, [data]);
