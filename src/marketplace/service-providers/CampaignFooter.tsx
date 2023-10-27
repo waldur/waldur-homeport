@@ -7,7 +7,7 @@ import { serializeCampaign } from '@waldur/marketplace/service-providers/utils';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { createCampaign } from './api';
+import { createCampaign, updateCampaign } from './api';
 import { CampaignFormData } from './types';
 
 export const CampaignFooter = ({
@@ -16,12 +16,14 @@ export const CampaignFooter = ({
   handleSubmit,
   disabled,
   refetch,
+  isUpdate,
 }: {
   step;
   setStep;
   handleSubmit;
   disabled;
   refetch;
+  isUpdate?;
 }) => {
   const dispatch = useDispatch();
   const saveAndSend = useCallback(
@@ -40,6 +42,22 @@ export const CampaignFooter = ({
     [dispatch],
   );
 
+  const saveAndUpdate = useCallback(
+    async (formData: CampaignFormData) => {
+      try {
+        await updateCampaign(formData.uuid, serializeCampaign(formData));
+        refetch();
+        dispatch(showSuccess(translate('Campaign has been updated.')));
+        dispatch(closeModalDialog());
+      } catch (e) {
+        dispatch(
+          showErrorResponse(e, translate('Unable to update a campaign.')),
+        );
+      }
+    },
+    [dispatch],
+  );
+
   return (
     <Modal.Footer>
       {step === 0 ? (
@@ -48,13 +66,23 @@ export const CampaignFooter = ({
         </Button>
       ) : (
         <>
-          <Button
-            disabled={disabled}
-            className="ms-3"
-            onClick={handleSubmit(saveAndSend)}
-          >
-            <i className="fa fa-send" /> {translate('Create a campaign')}
-          </Button>
+          {!isUpdate ? (
+            <Button
+              disabled={disabled}
+              className="ms-3"
+              onClick={handleSubmit(saveAndSend)}
+            >
+              <i className="fa fa-send" /> {translate('Create a campaign')}
+            </Button>
+          ) : (
+            <Button
+              disabled={disabled}
+              className="ms-3"
+              onClick={handleSubmit(saveAndUpdate)}
+            >
+              <i className="fa fa-send" /> {translate('Update a campaign')}
+            </Button>
+          )}
         </>
       )}
     </Modal.Footer>
