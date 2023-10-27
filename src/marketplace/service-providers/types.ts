@@ -7,6 +7,7 @@ export interface OfferingUser {
 }
 
 export interface Campaign {
+  uuid?: string;
   name: string;
   description: string;
   start_date: string;

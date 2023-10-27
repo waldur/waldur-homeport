@@ -6,6 +6,7 @@ import { getFormValues } from 'redux-form';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { CampaignCreateButton } from '@waldur/marketplace/service-providers/CampaignCreateButton';
+import { ProviderCampaignActions } from '@waldur/marketplace/service-providers/ProviderCampaignActions';
 import { ProviderCampaignFilter } from '@waldur/marketplace/service-providers/ProviderCampaignFilter';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table/index';
@@ -46,6 +47,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('campaigns')}
       actions={<CampaignCreateButton refetch={props.fetch} />}
       hasQuery={true}
+      hoverableRow={ProviderCampaignActions}
     />
   );
 };
