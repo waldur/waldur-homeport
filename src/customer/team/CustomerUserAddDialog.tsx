@@ -13,7 +13,9 @@ import { RoleEnum } from '@waldur/permissions/enums';
 import { formatRole } from '@waldur/permissions/utils';
 import { UserListOption } from '@waldur/project/team/UserGroup';
 import { showSuccess } from '@waldur/store/notify';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCurrentUser } from '@waldur/user/UsersService';
+import { setCurrentUser } from '@waldur/workspace/actions';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 import { User } from '@waldur/workspace/types';
 
 import { usersAutocomplete } from './api';
@@ -35,6 +37,7 @@ export const CustomerUserAddDialog = reduxForm<
   form: 'CustomerUserAddDialog',
 })(({ resolve: { refetch }, submitting, handleSubmit }) => {
   const customer = useSelector(getCustomer);
+  const currentUser = useSelector(getUser);
   const dispatch = useDispatch();
   const callback = async (formData: CustomerUserAddFormData) => {
     await addCustomerUser({
@@ -43,6 +46,10 @@ export const CustomerUserAddDialog = reduxForm<
       role: RoleEnum.CUSTOMER_OWNER,
       expiration_time: formData.expiration_time,
     });
+    if (currentUser.uuid === formData.user.uuid) {
+      const newUser = await getCurrentUser();
+      dispatch(setCurrentUser(newUser));
+    }
     refetch();
     dispatch(showSuccess('User has been added to organization.'));
     dispatch(closeModalDialog());
