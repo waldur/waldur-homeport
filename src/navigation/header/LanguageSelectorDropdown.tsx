@@ -5,6 +5,7 @@ import { translate } from '@waldur/i18n';
 import { useLanguageSelector } from '@waldur/i18n/useLanguageSelector';
 
 const LanguageCountry = {
+  ar: '_Arab_League',
   en: 'gb',
   et: 'ee',
   lt: 'lt',
