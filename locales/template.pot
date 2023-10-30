@@ -198,6 +198,7 @@ msgstr ""
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/marketplace/robot-accounts/RobotAccountList.tsx
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
@@ -1063,6 +1064,7 @@ msgid "Author"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 msgid "Auto apply"
 msgstr ""
 
@@ -1387,6 +1389,7 @@ msgid "Caller"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 msgid "Campaign end date"
 msgstr ""
 
@@ -1394,11 +1397,17 @@ msgstr ""
 msgid "Campaign has been created."
 msgstr ""
 
+#: src/marketplace/service-providers/CampaignFooter.tsx
+msgid "Campaign has been updated."
+msgstr ""
+
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 msgid "Campaign name"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 msgid "Campaign start date"
 msgstr ""
 
@@ -2889,11 +2898,13 @@ msgid "Disconnect subnet"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderCampaignTypeFilter.tsx
 msgid "Discount"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 msgid "Discount type"
 msgstr ""
@@ -3063,6 +3074,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
 #: src/marketplace/robot-accounts/RobotAccountEditButton.tsx
+#: src/marketplace/service-providers/ProviderCampaignUpdateButton.tsx
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton.tsx
 #: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
@@ -5906,6 +5918,7 @@ msgstr ""
 
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderCampaignServiceProviderFilter.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "No providers"
@@ -6304,6 +6317,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/notifications/NotificationExpandableRow.tsx
@@ -9369,6 +9383,7 @@ msgid "Select offering..."
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/notifications/NotificationForm.tsx
 msgid "Select offerings..."
 msgstr ""
@@ -9434,6 +9449,7 @@ msgstr ""
 
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderCampaignServiceProviderFilter.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Select provider..."
@@ -9522,6 +9538,7 @@ msgid "Select tenants..."
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 msgid "Select type"
 msgstr ""
 
@@ -9652,6 +9669,7 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignServiceProviderFilter.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx
@@ -10111,6 +10129,7 @@ msgid "Something went wrong"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderCampaignTypeFilter.tsx
 msgid "Special price"
 msgstr ""
@@ -10287,6 +10306,7 @@ msgid "Still unsure? Ask a question"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 msgid "Stock"
 msgstr ""
 
@@ -12244,6 +12264,10 @@ msgstr ""
 msgid "Unable to update YAML."
 msgstr ""
 
+#: src/marketplace/service-providers/CampaignFooter.tsx
+msgid "Unable to update a campaign."
+msgstr ""
+
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
 msgid "Unable to update access policy."
 msgstr ""
@@ -12507,6 +12531,11 @@ msgstr ""
 #: src/user/hooks/HookDetailsDialog.tsx
 #: src/user/hooks/HookUpdateButton.tsx
 msgid "Update"
+msgstr ""
+
+#: src/marketplace/service-providers/CampaignFooter.tsx
+#: src/marketplace/service-providers/CampaignUpdateDialog.tsx
+msgid "Update a campaign"
 msgstr ""
 
 #: src/notifications/NotificationUpdateDialog.tsx
