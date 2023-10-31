@@ -4,6 +4,8 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
 import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 
+import { RefreshButton } from '../components/RefreshButton';
+
 import { EditGettingStartedButton } from './EditGettingStartedButton';
 import { EditOverviewButton } from './EditOverviewButton';
 import { OfferingLocationButton } from './OfferingLocationButton';
@@ -52,7 +54,10 @@ export const OverviewSection = (props) => {
   return (
     <Card className="mb-10" id="general">
       <div className="border-2 border-bottom card-header">
-        <div className="card-title h5">{translate('General')}</div>
+        <div className="card-title h5">
+          <span className="me-2">{translate('General')}</span>
+          <RefreshButton refetch={props.refetch} loading={props.loading} />
+        </div>
       </div>
       <Card.Body>
         <Table bordered={true} hover={true} responsive={true}>

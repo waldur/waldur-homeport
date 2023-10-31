@@ -31,6 +31,7 @@ import {
   OrganizationGroup,
   OfferingPermission,
   CategoryGroup,
+  Plan,
 } from '@waldur/marketplace/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -114,6 +115,11 @@ export const archivePlan = (planId) =>
 
 export const updatePlan = (planId, data) =>
   put(`/marketplace-plans/${planId}/`, data);
+
+export const getOfferingPlans = (offeringUuid: string) =>
+  getAll<Plan>('/marketplace-plans/', {
+    params: { offering_uuid: offeringUuid },
+  });
 
 export const getOfferingPlansUsage = (offeringUuid: string) =>
   getAll<PlanUsageRow>('/marketplace-plans/usage_stats/', {

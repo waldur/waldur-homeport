@@ -6,6 +6,8 @@ import { FormFieldsContext } from '@waldur/form/context';
 import { translate } from '@waldur/i18n';
 import { showOfferingOptions } from '@waldur/marketplace/common/registry';
 
+import { RefreshButton } from '../components/RefreshButton';
+
 import { AddOptionButton } from './AddOptionButton';
 import { FIELD_TYPES } from './constants';
 import { DeleteOptionButton } from './DeleteOptionButton';
@@ -27,10 +29,11 @@ export const OfferingOptionsSection = (props) => {
             label={translate(
               'If you want user to provide additional details when ordering, please configure input form for the user below',
             )}
-            className="ms-2"
+            className="mx-2"
           >
             <i className="fa fa-question-circle" />
           </Tip>
+          <RefreshButton refetch={props.refetch} loading={props.loading} />
         </div>
         {!readOnlyFields.includes('options') ? (
           <div className="card-toolbar">

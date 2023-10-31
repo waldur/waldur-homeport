@@ -39,18 +39,10 @@ export const CreateImageButton = (props: CreateImageButtonProps) => {
   }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'flex-end',
-        marginBottom: '16px',
-      }}
-    >
-      <ActionButton
-        title={translate('Add image')}
-        icon="fa fa-plus"
-        action={callback}
-      />
-    </div>
+    <ActionButton
+      title={translate('Add image')}
+      icon="fa fa-plus"
+      action={callback}
+    />
   );
 };

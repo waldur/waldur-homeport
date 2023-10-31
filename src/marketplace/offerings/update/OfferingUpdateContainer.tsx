@@ -47,9 +47,12 @@ export const OfferingUpdateContainer = () => {
     state,
   } = useCurrentStateAndParams();
 
-  const { data, isLoading, error, refetch } = useQuery(
+  const { data, isLoading, error, refetch, isRefetching } = useQuery(
     ['OfferingUpdateContainer', offering_uuid],
     () => getOfferingData(offering_uuid),
+    {
+      refetchOnWindowFocus: false,
+    },
   );
 
   useFullPage();
@@ -111,27 +114,49 @@ export const OfferingUpdateContainer = () => {
       />
       <OfferingUpdateBar offering={data.offering} />
       <div className="container-xxl py-10">
-        <OverviewSection offering={data.offering} refetch={refetch} />
+        <OverviewSection
+          offering={data.offering}
+          refetch={refetch}
+          loading={isRefetching}
+        />
 
-        <IntegrationSection offering={data.offering} refetch={refetch} />
+        <IntegrationSection
+          offering={data.offering}
+          refetch={refetch}
+          loading={isRefetching}
+        />
 
-        <OfferingEndpointsSection offering={data.offering} refetch={refetch} />
+        <OfferingEndpointsSection
+          offering={data.offering}
+          refetch={refetch}
+          loading={isRefetching}
+        />
 
-        <OfferingOptionsSection offering={data.offering} refetch={refetch} />
+        <OfferingOptionsSection
+          offering={data.offering}
+          refetch={refetch}
+          loading={isRefetching}
+        />
 
         <AttributesSection
           offering={data.offering}
           category={data.category}
           refetch={refetch}
+          loading={isRefetching}
         />
 
         <ComponentsSection
           offering={data.offering}
           components={data.components}
           refetch={refetch}
+          loading={isRefetching}
         />
 
-        <PlansSection offering={data.offering} refetch={refetch} />
+        <PlansSection
+          offering={data.offering}
+          refetch={refetch}
+          loading={isRefetching}
+        />
 
         <OfferingImagesList offering={data.offering} />
       </div>
