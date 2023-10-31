@@ -235,3 +235,24 @@ Download translation:
     - git branch new-translations
     - git push --set-upstream origin new-translations:develop
   before_script: []
+
+Update UI developer docs:
+  stage: build
+  interruptible: true
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "next"'
+  image: registry.hpc.ut.ee/mirror/alpine/git:latest
+  script:
+    - cd /tmp/
+    - git clone "https://gitlab-ci-token:$GITLAB_TOKEN@$CI_SERVER_HOST/waldur/waldur-docs.git"
+    - git config --global user.name "$GITLAB_USER_NAME"
+    - git config --global user.email "$GITLAB_USER_EMAIL"
+    - cd waldur-docs
+    - cp -rv $CI_PROJECT_DIR/docs/* docs/developer-guide/ui
+    - git add docs/developer-guide/ui
+    - git commit -m "Update UI developer docs" || exit 0
+    - git branch new-ui-guide
+    - git push --set-upstream origin new-ui-guide:master
+  before_script: []
