@@ -56,6 +56,10 @@ const IdentityProvidersList = lazyComponent(
 
 const RolesList = lazyComponent(() => import('./roles/RolesList'), 'RolesList');
 const TokensList = lazyComponent(() => import('./TokensList'), 'TokensList');
+const HooksList = lazyComponent(
+  () => import('./notifications/HooksList'),
+  'HooksList',
+);
 
 export const states: StateDeclaration[] = [
   {
@@ -151,6 +155,15 @@ export const states: StateDeclaration[] = [
     data: {
       feature: 'support.users',
       breadcrumb: () => translate('Users'),
+    },
+  },
+  {
+    name: 'admin-user-notifications',
+    url: 'users/notifications/',
+    parent: 'admin-users',
+    component: HooksList,
+    data: {
+      breadcrumb: () => translate('Notifications'),
     },
   },
   {
