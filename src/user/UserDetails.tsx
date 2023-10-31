@@ -42,7 +42,7 @@ export async function loadUser() {
   } else {
     router.stateService.go('errorPage.notFound');
   }
-  if (!currentProject) {
+  if (currentUser && !currentProject) {
     const projectPermission = getProjectPermission(currentUser);
     if (projectPermission) {
       const newProject = await getProject(projectPermission.scope_uuid);
