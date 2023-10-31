@@ -41,6 +41,16 @@ Run linters:
     - if: '$CI_COMMIT_BRANCH == "master"'
     # If event is related to a created merge request
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - src/**/*
+        - package.json
+        - yarn.lock
+        - tsconfig.json
+        - typings.d.ts
+        - webpack.*
+        - .eslintrc.js
+        - .eslintignore
+        - .prettierrc.js
   script:
     - yarn format:check
     - yarn lint:check
@@ -55,6 +65,15 @@ Run jest tests:
     - if: '$CI_COMMIT_BRANCH == "master"'
     # If event is related to a created merge request
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - src/**/*
+        - package.json
+        - yarn.lock
+        - tsconfig.json
+        - typings.d.ts
+        - webpack.*
+        - test/*
+        - jest.config.js
   script:
     - yarn jest --verbose --runInBand --coverage --reporters=jest-junit
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
@@ -76,6 +95,13 @@ Check dead code:
     - if: '$CI_COMMIT_BRANCH == "master"'
     # If event is related to a created merge request
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - src/**/*
+        - package.json
+        - yarn.lock
+        - tsconfig.json
+        - typings.d.ts
+        - webpack.*
   script:
     - yarn run --silent ts-prune | grep -v "used in module" | grep -v "src/metronic/" || true
 
@@ -92,6 +118,15 @@ Run E2E tests:
     - if: '$CI_COMMIT_BRANCH == "master"'
     # If event is related to a created merge request
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - src/**/*
+        - package.json
+        - yarn.lock
+        - tsconfig.json
+        - typings.d.ts
+        - webpack.*
+        - cypress/**/*
+        - cypress.config.ts
   script:
     - NO_COLOR=1 yarn ci:test
   artifacts:
