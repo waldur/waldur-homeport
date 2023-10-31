@@ -302,6 +302,10 @@ msgstr ""
 msgid "Add address"
 msgstr ""
 
+#: src/marketplace/category/admin/CategoryCreateButton.tsx
+msgid "Add category"
+msgstr ""
+
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
 #: src/issues/comments/IssueCommentsFormMainContainer.tsx
 msgid "Add comment"
@@ -875,6 +879,10 @@ msgstr ""
 
 #: src/marketplace/category/admin/GroupDeleteButton.tsx
 msgid "Are you sure you want to delete the {title} category group?"
+msgstr ""
+
+#: src/marketplace/category/admin/CategoryDeleteButton.tsx
+msgid "Are you sure you want to delete the {title} category?"
 msgstr ""
 
 #: src/resource/actions/ResourceDeleteButton.tsx
@@ -1493,10 +1501,11 @@ msgid "Catalogues"
 msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
 #: src/marketplace/category/list/AllCategoriesPage.tsx
 #: src/marketplace/category/utils.ts
 #: src/marketplace/offerings/service-providers/ServiceProviderPageBar.tsx
-#: src/marketplace/routes.ts
 msgid "Categories"
 msgstr ""
 
@@ -1873,6 +1882,7 @@ msgstr ""
 #: src/customer/team/UserRemoveButton.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
+#: src/marketplace/category/admin/CategoryDeleteButton.tsx
 #: src/marketplace/category/admin/GroupDeleteButton.tsx
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
@@ -2029,6 +2039,7 @@ msgstr ""
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
@@ -2094,6 +2105,10 @@ msgstr ""
 
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 msgid "Create catalog"
+msgstr ""
+
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "Create category"
 msgstr ""
 
 #: src/marketplace/category/admin/GroupFromDialog.tsx
@@ -2717,6 +2732,8 @@ msgstr ""
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
 #: src/marketplace/category/admin/CategoryGroupsList.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
@@ -3056,6 +3073,8 @@ msgstr ""
 #: src/customer/team/UserEditButton.tsx
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
+#: src/marketplace/category/admin/CategoryEditButton.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
 #: src/marketplace/category/admin/GroupEditButton.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/offerings/OfferingViews.tsx
@@ -3190,6 +3209,7 @@ msgstr ""
 msgid "Edit user agreements"
 msgstr ""
 
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 msgid "Edit {title}"
 msgstr ""
@@ -3388,6 +3408,10 @@ msgstr ""
 #: src/marketplace/resources/details/ResourcesList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Error"
+msgstr ""
+
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+msgid "Error in fetching groups"
 msgstr ""
 
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -4042,6 +4066,11 @@ msgstr ""
 msgid "Grant permission"
 msgstr ""
 
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "Group"
+msgstr ""
+
 #: src/invitations/GroupInvitationCancelButton.tsx
 msgid "Group invitation has been cancelled."
 msgstr ""
@@ -4226,6 +4255,7 @@ msgstr ""
 msgid "IP version"
 msgstr ""
 
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 msgid "Icon"
@@ -5848,6 +5878,10 @@ msgstr ""
 msgid "No entries to show here"
 msgstr ""
 
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+msgid "No group"
+msgstr ""
+
 #: src/customer/list/CustomerExpandableRow.tsx
 msgid "No invoice data available."
 msgstr ""
@@ -6325,6 +6359,10 @@ msgstr ""
 #: src/notifications/RecipientsList.tsx
 #: src/providers/dashboard/ProviderDashboard.tsx
 msgid "Offerings"
+msgstr ""
+
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+msgid "Offerings count"
 msgstr ""
 
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
@@ -8348,6 +8386,7 @@ msgstr ""
 #: src/form/DateField.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
 #: src/marketplace/cart/ShoppingCartItem.tsx
+#: src/marketplace/category/admin/CategoryDeleteButton.tsx
 #: src/marketplace/category/admin/GroupDeleteButton.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/update/ImageUploadField.tsx
@@ -10799,6 +10838,14 @@ msgstr ""
 msgid "The category group has been updated."
 msgstr ""
 
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "The category has been created."
+msgstr ""
+
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "The category has been updated."
+msgstr ""
+
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
 msgid "The date is inclusive. Once reached, all project resource will be scheduled for termination."
@@ -10901,6 +10948,7 @@ msgstr ""
 msgid "There are no categories in this group."
 msgstr ""
 
+#: src/marketplace/category/admin/CategoriesListTablePlaceholder.tsx
 #: src/marketplace/offerings/import/SelectCategoryTab.tsx
 msgid "There are no categories yet."
 msgstr ""
@@ -11140,6 +11188,8 @@ msgstr ""
 
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
 #: src/marketplace/category/admin/CategoryGroupsList.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/referral/ReferralsList.tsx
@@ -11486,6 +11536,10 @@ msgstr ""
 msgid "Unable to create category group."
 msgstr ""
 
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "Unable to create category."
+msgstr ""
+
 #: src/invoices/details/InvoiceItemCompensationDialog.tsx
 msgid "Unable to create compensation."
 msgstr ""
@@ -11738,6 +11792,10 @@ msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "Unable to load category details"
+msgstr ""
+
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "Unable to load category groups."
 msgstr ""
 
 #: src/marketplace/category/filters/FilterDropdownContent.tsx
@@ -12058,6 +12116,10 @@ msgstr ""
 msgid "Unable to remove category group."
 msgstr ""
 
+#: src/marketplace/category/admin/CategoryDeleteButton.tsx
+msgid "Unable to remove category."
+msgstr ""
+
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
 msgid "Unable to remove component."
 msgstr ""
@@ -12296,6 +12358,10 @@ msgstr ""
 msgid "Unable to update category group."
 msgstr ""
 
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "Unable to update category."
+msgstr ""
+
 #: src/administration/branding/AdministrationBranding.tsx
 msgid "Unable to update configuration."
 msgstr ""
@@ -12476,6 +12542,10 @@ msgstr ""
 
 #: src/auth/callbacks/OauthLoginCompleted.tsx
 msgid "Unknown error"
+msgstr ""
+
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+msgid "Unknown group"
 msgstr ""
 
 #: src/administration/TokensList.tsx

@@ -29,6 +29,12 @@ const CategoryGroupsList = lazyComponent(
   () => import('@waldur/marketplace/category/admin/CategoryGroupsList'),
   'CategoryGroupsList',
 );
+
+const AdminCategoriesPage = lazyComponent(
+  () => import('@waldur/marketplace/category/admin/AdminCategoriesPage'),
+  'AdminCategoriesPage',
+);
+
 const SupportCustomersContainer = lazyComponent(
   () => import('@waldur/customer/list/SupportCustomersContainer'),
   'SupportCustomersContainer',
@@ -164,6 +170,16 @@ export const states: StateDeclaration[] = [
     component: CategoryGroupsList,
     data: {
       breadcrumb: () => translate('Category groups'),
+    },
+  },
+
+  {
+    name: 'admin-marketplace-categories',
+    url: 'categories/',
+    parent: 'admin-marketplace',
+    component: AdminCategoriesPage,
+    data: {
+      breadcrumb: () => translate('Categories'),
     },
   },
 
