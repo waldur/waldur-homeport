@@ -15,17 +15,19 @@ import { loadEventGroupsOptions, getInitialValue, useHookForm } from './utils';
 
 interface OwnProps {
   hook: HookResponse;
+  listId: string;
   eventGroupsState: AsyncState<EventGroupOption[]>;
 }
 
 const HookDetailsComponent = ({
   hook,
+  listId,
   eventGroupsState,
   handleSubmit,
   submitting,
   invalid,
 }) => {
-  const saveHook = useHookForm(hook);
+  const saveHook = useHookForm(hook, listId);
   return (
     <form onSubmit={handleSubmit(saveHook)}>
       <Modal.Header>
@@ -67,9 +69,9 @@ const HookDetails = reduxForm<HookFormData, OwnProps>({ form: 'HookForm' })(
   HookDetailsComponent,
 );
 
-export const HookDetailsDialog: FunctionComponent<{ resolve: { hook } }> = ({
-  resolve: { hook },
-}) => {
+export const HookDetailsDialog: FunctionComponent<{
+  resolve: { hook; listId };
+}> = ({ resolve: { hook, listId } }) => {
   const state = useAsync(loadEventGroupsOptions);
   const initialValues = useMemo(() => getInitialValue(hook), [hook]);
   return (
@@ -77,6 +79,7 @@ export const HookDetailsDialog: FunctionComponent<{ resolve: { hook } }> = ({
       hook={hook}
       eventGroupsState={state}
       initialValues={initialValues}
+      listId={listId}
     />
   );
 };

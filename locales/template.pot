@@ -2230,6 +2230,7 @@ msgid "Create your first project"
 msgstr ""
 
 #: src/administration/TokensList.tsx
+#: src/administration/notifications/HooksList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/list/CustomerList.tsx
@@ -2775,6 +2776,7 @@ msgstr ""
 msgid "Desired replicas"
 msgstr ""
 
+#: src/administration/notifications/HooksList.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Destination"
 msgstr ""
@@ -2880,6 +2882,7 @@ msgstr ""
 msgid "Disable gateway IP advertising via DHCP"
 msgstr ""
 
+#: src/administration/notifications/HooksList.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/hooks/HooksList.tsx
@@ -3204,6 +3207,7 @@ msgstr ""
 msgid "Egress"
 msgstr ""
 
+#: src/administration/notifications/HooksList.tsx
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -3268,6 +3272,7 @@ msgstr ""
 msgid "Enable profile after creation"
 msgstr ""
 
+#: src/administration/notifications/HooksList.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/administration/providers/ProviderForm.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -3460,6 +3465,7 @@ msgstr ""
 msgid "Event types"
 msgstr ""
 
+#: src/administration/notifications/HooksList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
@@ -4137,6 +4143,7 @@ msgstr ""
 msgid "Homepage URL"
 msgstr ""
 
+#: src/administration/notifications/HookRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 msgid "Hook has been removed."
 msgstr ""
@@ -5303,6 +5310,7 @@ msgstr ""
 msgid "Metadata"
 msgstr ""
 
+#: src/administration/notifications/HooksList.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Method"
 msgstr ""
@@ -6049,6 +6057,8 @@ msgstr ""
 msgid "Notification method"
 msgstr ""
 
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/routes.ts
 #: src/user/hooks/HooksList.tsx
 #: src/user/routes.ts
 msgid "Notifications"
@@ -7103,6 +7113,10 @@ msgstr ""
 
 #: src/project/routes.ts
 msgid "Permissions log"
+msgstr ""
+
+#: src/administration/notifications/HooksList.tsx
+msgid "Person"
 msgstr ""
 
 #: src/invoices/details/CustomerDetails.tsx
@@ -8342,6 +8356,7 @@ msgid "Remote user ID"
 msgstr ""
 
 #: src/administration/TokenDeleteButton.tsx
+#: src/administration/notifications/HookRemoveButton.tsx
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
@@ -10183,6 +10198,7 @@ msgstr ""
 msgid "Startup script"
 msgstr ""
 
+#: src/administration/notifications/HooksList.tsx
 #: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
@@ -12066,6 +12082,7 @@ msgstr ""
 msgid "Unable to remove endpoint."
 msgstr ""
 
+#: src/administration/notifications/HookRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 msgid "Unable to remove hook."
 msgstr ""
@@ -12514,6 +12531,7 @@ msgstr ""
 msgid "Unpublish as Google Calendar"
 msgstr ""
 
+#: src/administration/notifications/HookUpdateButton.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx

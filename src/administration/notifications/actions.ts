@@ -1,25 +1,25 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { HOOK_LIST_ID } from './constants';
+import { ADMIN_HOOK_LIST_ID } from './constants';
 
 const HookDetailsDialog = lazyComponent(
-  () => import('./HookDetailsDialog'),
+  () => import('@waldur/user/hooks/HookDetailsDialog'),
   'HookDetailsDialog',
 );
 const HookRemoveDialog = lazyComponent(
-  () => import('./HookRemoveDialog'),
+  () => import('@waldur/user/hooks/HookRemoveDialog'),
   'HookRemoveDialog',
 );
 
 export const showHookRemoveConfirmation = (action: () => void) =>
   openModalDialog(HookRemoveDialog, {
-    resolve: { action, listId: HOOK_LIST_ID },
+    resolve: { action, listId: ADMIN_HOOK_LIST_ID },
     size: 'md',
   });
 
 export const showHookUpdateDialog = (row?) =>
   openModalDialog(HookDetailsDialog, {
-    resolve: { hook: row, listId: HOOK_LIST_ID },
+    resolve: { hook: row, listId: ADMIN_HOOK_LIST_ID },
     size: 'md',
   });

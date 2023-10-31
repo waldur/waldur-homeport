@@ -201,6 +201,7 @@
           padding-left: 2.5rem;
         }
         td:last-child,
+        td.row-actions > div,
         th:last-child,
         tr:last-child {
           padding-right: 2.5rem;
@@ -214,7 +215,7 @@
     }
 
     .table-pagination {
-      padding: 0 2.5rem;
+      padding: 0 2.5rem !important;
     }
   }
 

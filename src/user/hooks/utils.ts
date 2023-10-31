@@ -8,7 +8,6 @@ import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { updateEntity, createEntity } from '@waldur/table/actions';
 
 import { getEventGroups, updateHook, createHook } from './api';
-import { HOOK_LIST_ID } from './constants';
 import {
   EventGroupOption,
   HookType,
@@ -75,7 +74,7 @@ const serializeHook = (hookType: HookType, formData: HookFormData) => {
   return payload;
 };
 
-export const useHookForm = (hook?: HookResponse) => {
+export const useHookForm = (hook?: HookResponse, listId?: string) => {
   const dispatch = useDispatch();
   return useCallback(
     async (formData: HookFormData) => {
@@ -87,7 +86,7 @@ export const useHookForm = (hook?: HookResponse) => {
             hook.hook_type,
             serializeHook(hookType, formData),
           );
-          dispatch(updateEntity(HOOK_LIST_ID, hook.uuid, response.data));
+          dispatch(updateEntity(listId, hook.uuid, response.data));
           dispatch(showSuccess(translate('Notification has been updated.')));
           dispatch(closeModalDialog());
         } catch (e) {
@@ -101,9 +100,7 @@ export const useHookForm = (hook?: HookResponse) => {
             hookType,
             serializeHook(hookType, formData),
           );
-          dispatch(
-            createEntity(HOOK_LIST_ID, response.data.uuid, response.data),
-          );
+          dispatch(createEntity(listId, response.data.uuid, response.data));
           dispatch(showSuccess(translate('Notification has been created.')));
           dispatch(closeModalDialog());
         } catch (e) {
