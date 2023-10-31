@@ -7,6 +7,7 @@ import { getBillingTypeLabel } from '@waldur/marketplace/resources/usage/utils';
 import { AddComponentButton } from './AddComponentButton';
 import { DeleteComponentButton } from './DeleteComponentButton';
 import { EditComponentButton } from './EditComponentButton';
+import { RefreshButton } from './RefreshButton';
 
 export const ComponentsSection = (props) => {
   if (!showComponentsList(props.offering.type)) {
@@ -21,7 +22,8 @@ export const ComponentsSection = (props) => {
           ) : (
             <i className="fa fa-check text-success me-3" />
           )}
-          {translate('Accounting components')}
+          <span className="me-2">{translate('Accounting components')}</span>
+          <RefreshButton refetch={props.refetch} loading={props.loading} />
         </div>
         {!props.components.length && (
           <div className="card-toolbar">

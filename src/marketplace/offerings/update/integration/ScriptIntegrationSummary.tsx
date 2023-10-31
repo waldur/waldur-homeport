@@ -2,12 +2,14 @@ import { Card, Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
+import { RefreshButton } from '../components/RefreshButton';
+
 import { EditIntegrationButton } from './EditIntegrationButton';
 import { EditScriptButton } from './EditScriptButton';
 import { EditVarsButton } from './EditVarsButton';
 import { SCRIPT_ROWS } from './utils';
 
-export const ScriptIntegrationSummary = ({ offering, refetch }) => (
+export const ScriptIntegrationSummary = ({ offering, refetch, loading }) => (
   <Card className="mb-10" id="integration">
     <div className="border-2 border-bottom card-header">
       <div className="card-title h5">
@@ -16,7 +18,8 @@ export const ScriptIntegrationSummary = ({ offering, refetch }) => (
         ) : (
           <i className="fa fa-warning text-danger me-3" />
         )}
-        {translate('Integration')}
+        <span className="me-2">{translate('Integration')}</span>
+        <RefreshButton refetch={refetch} loading={loading} />
       </div>
       <div className="card-toolbar">
         <EditVarsButton offering={offering} refetch={refetch} />

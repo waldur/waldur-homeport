@@ -2,6 +2,8 @@ import { Card, Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
+import { RefreshButton } from '../components/RefreshButton';
+
 import { AddEndpointButton } from './AddEndpointButton';
 import { DeleteEndpointButton } from './DeleteEndpointButton';
 
@@ -9,7 +11,10 @@ export const OfferingEndpointsSection = (props) => {
   return (
     <Card className="mb-10">
       <div className="border-2 border-bottom card-header">
-        <div className="card-title h5">{translate('Endpoints')}</div>
+        <div className="card-title h5">
+          <span className="me-2">{translate('Endpoints')}</span>
+          <RefreshButton refetch={props.refetch} loading={props.loading} />
+        </div>
         <div className="card-toolbar">
           <AddEndpointButton {...props} />
         </div>

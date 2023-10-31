@@ -8,6 +8,8 @@ import {
 } from '@waldur/marketplace/common/registry';
 import { getServiceSettingsForm } from '@waldur/providers/registry';
 
+import { RefreshButton } from '../components/RefreshButton';
+
 import { EditIntegrationButton } from './EditIntegrationButton';
 import { EditSchedulesButton } from './EditSchedulesButton';
 import { GoogleCalendarActions } from './GoogleCalendarActions';
@@ -22,6 +24,7 @@ export const IntegrationSection = (props) => {
       <ScriptIntegrationSummary
         offering={props.offering}
         refetch={props.refetch}
+        loading={props.loading}
       />
     );
   }
@@ -37,7 +40,10 @@ export const IntegrationSection = (props) => {
   return (
     <Card className="mb-10" id="integration">
       <div className="border-2 border-bottom card-header">
-        <div className="card-title h5">{translate('Integration')}</div>
+        <div className="card-title h5">
+          <span className="me-2">{translate('Integration')}</span>
+          <RefreshButton refetch={props.refetch} loading={props.loading} />
+        </div>
         <div className="card-toolbar">
           <EditIntegrationButton
             offering={props.offering}

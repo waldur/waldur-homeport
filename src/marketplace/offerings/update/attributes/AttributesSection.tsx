@@ -4,13 +4,18 @@ import { Card, Table } from 'react-bootstrap';
 import { translate } from '@waldur/i18n';
 import { AttributeCell } from '@waldur/marketplace/common/AttributeCell';
 
+import { RefreshButton } from '../components/RefreshButton';
+
 import { EditAttributeButton } from './EditAttributeButton';
 import { EditCategoryButton } from './EditCategoryButton';
 
 export const AttributesSection = (props) => (
   <Card className="mb-10" id="category">
     <div className="border-2 border-bottom card-header">
-      <div className="card-title h5">{translate('Category')}</div>
+      <div className="card-title h5">
+        <span className="me-2">{translate('Category')}</span>
+        <RefreshButton refetch={props.refetch} loading={props.loading} />
+      </div>
       <div className="card-toolbar">
         <EditCategoryButton {...props} />
       </div>
