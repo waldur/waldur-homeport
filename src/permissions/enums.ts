@@ -1,6 +1,5 @@
 /* eslint-disable */
 // WARNING: This file is auto-generated from src/waldur_core/permissions/enums.py
-/* eslint-disable */
 // Do not edit it manually. All manual changes would be overridden.
 
 export const RoleEnum = {

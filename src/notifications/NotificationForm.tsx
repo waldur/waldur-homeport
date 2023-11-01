@@ -1,4 +1,4 @@
-import { Col, Modal, Row } from 'react-bootstrap';
+import { Row, Col, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { change, FormName } from 'redux-form';
 
@@ -68,14 +68,6 @@ export const NotificationForm = ({
                     }
                   }}
                   isClearable={true}
-                />
-                <StringField
-                  name="name"
-                  label={translate('Template name')}
-                  maxLength={150}
-                  description={translate(
-                    'Required if you want to save this broadcast as template',
-                  )}
                 />
                 <StringField
                   name="subject"
