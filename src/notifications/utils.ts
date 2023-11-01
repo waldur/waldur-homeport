@@ -2,6 +2,7 @@ import {
   NotificationFormData,
   NotificationRequestData,
   NotificationResponseData,
+  NotificationTemplateFormData,
 } from './types';
 
 export const serializeNotification = (
@@ -15,6 +16,14 @@ export const serializeNotification = (
     all_users: formData.all_users,
   },
   send_at: formData.send_at,
+});
+
+export const serializeNotificationTemplate = (
+  formData: NotificationTemplateFormData,
+): NotificationTemplateFormData => ({
+  subject: formData.subject,
+  body: formData.body,
+  name: formData.name,
 });
 
 export const parseNotification = (

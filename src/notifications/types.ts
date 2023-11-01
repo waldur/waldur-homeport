@@ -15,6 +15,16 @@ export interface IdNamePair {
 interface Notification extends Message {
   send_at: string;
 }
+
+interface NotificationTemplate extends Message {
+  uuid?: string;
+  name: string;
+}
+
+export type NotificationTemplateFormData = NotificationTemplate;
+
+export type NotificationTemplateRequestData = NotificationTemplate;
+
 export interface NotificationFormData extends Notification {
   customers: IdNamePair[];
   offerings: IdNamePair[];
