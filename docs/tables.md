@@ -20,8 +20,7 @@ export const RolesList = () => {
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => row.name
-          ),
+          render: ({ row }) => row.name,
         },
         {
           title: translate('Description'),
@@ -54,8 +53,7 @@ const PureRolesList = (tableProps) => {
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => row.name
-          ),
+          render: ({ row }) => row.name,
         },
         {
           title: translate('Description'),
