@@ -1,4 +1,4 @@
-import { Row, Col, Modal } from 'react-bootstrap';
+import { Col, Modal, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { change, FormName } from 'redux-form';
 

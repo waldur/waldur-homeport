@@ -55,6 +55,10 @@ const NotificationList = lazyComponent(
   () => import('../notifications/NotificationList'),
   'NotificationList',
 );
+const NotificationTemplateList = lazyComponent(
+  () => import('../notifications/NotificationTemplateList'),
+  'NotificationTemplateList',
+);
 
 export const states: StateDeclaration[] = [
   {
@@ -176,6 +180,15 @@ export const states: StateDeclaration[] = [
     component: NotificationList,
     data: {
       breadcrumb: () => translate('Broadcast'),
+    },
+  },
+
+  {
+    name: 'support.broadcast-templates',
+    url: 'broadcast-templates/',
+    component: NotificationTemplateList,
+    data: {
+      breadcrumb: () => translate('Broadcast templates'),
     },
   },
 ];
