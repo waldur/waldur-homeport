@@ -1,9 +1,10 @@
-import { getList, getSelectData, post, put } from '@waldur/core/api';
+import { getList, getSelectData, post, put, remove } from '@waldur/core/api';
 
 import {
   MessageTemplate,
   NotificationMessageTemplate,
   NotificationRequestData,
+  NotificationTemplateRequestData,
 } from './types';
 
 export const sendNotification = (uuid: string) =>
@@ -24,3 +25,13 @@ export const getNotificationMessagesTemplates = (params?: {}) => {
     params,
   );
 };
+
+export const createNotificationTemplate = (
+  payload: NotificationTemplateRequestData,
+) => post('/broadcast-message-templates/', payload);
+
+export const deleteNotificationTemplate = (uuid) =>
+  remove(`/broadcast-message-templates/${uuid}/`);
+
+export const updateNotificationTemplate = (uuid, payload) =>
+  put(`/broadcast-message-templates/${uuid}/`, payload);
