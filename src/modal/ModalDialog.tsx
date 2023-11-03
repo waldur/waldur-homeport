@@ -7,6 +7,7 @@ interface ModalDialogProps {
   footer?: React.ReactNode;
   closeButton?: boolean;
   bodyClassName?: string;
+  footerClassName?: string;
   children?: React.ReactNode;
 }
 
@@ -21,7 +22,11 @@ export const ModalDialog: FunctionComponent<ModalDialogProps> = (props) => (
     <div className={classNames('modal-body', props.bodyClassName)}>
       {props.children}
     </div>
-    {props.footer && <div className="modal-footer">{props.footer}</div>}
+    {props.footer && (
+      <div className={classNames('modal-footer', props.footerClassName)}>
+        {props.footer}
+      </div>
+    )}
   </div>
 );
 

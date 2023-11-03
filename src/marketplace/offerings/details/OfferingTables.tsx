@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
+import { BookingResourcesCalendar } from '@waldur/booking/offering/BookingResourcesCalendar';
 import { translate } from '@waldur/i18n';
 import { OfferingOrderItemsList } from '@waldur/marketplace/details/OfferingOrderItemsList';
 import { OfferingResourcesFilter } from '@waldur/marketplace/details/OfferingResourcesFilter';
@@ -14,7 +15,6 @@ import { OfferingCustomersList } from '../expandable/OfferingCustomersList';
 import { OfferingCustomersListFilter } from '../expandable/OfferingCustomersListFilter';
 import { OfferingUsageChart } from '../expandable/OfferingUsageChart';
 
-import { OfferingBookingTab } from './OfferingBookingTab';
 import { OfferingUsersTable } from './OfferingUsersTable';
 import { OfferingPermissionsList } from './permissions/OfferingPermissionsList';
 
@@ -25,6 +25,11 @@ export const OfferingTables = ({ offering }) => {
   );
   return (
     <>
+      {offering.type === OFFERING_TYPE_BOOKING && (
+        <div className="mb-10">
+          <BookingResourcesCalendar offeringUuid={offering.uuid} />
+        </div>
+      )}
       <div className="mb-10" id="order-items">
         <OfferingOrderItemsList
           offering={offering}
@@ -80,9 +85,6 @@ export const OfferingTables = ({ offering }) => {
           />
         </Card>
       ) : null}
-      {offering.type === OFFERING_TYPE_BOOKING && (
-        <OfferingBookingTab offeringUuid={offering.uuid} />
-      )}
     </>
   );
 };

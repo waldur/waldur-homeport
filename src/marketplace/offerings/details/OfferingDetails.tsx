@@ -2,15 +2,18 @@ import { UISref, useCurrentStateAndParams } from '@uirouter/react';
 import React from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 
+import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
 import { PlanUsageRow } from '@waldur/marketplace/resources/plan-usage/types';
 import { Category, Offering } from '@waldur/marketplace/types';
+import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
 
 import { PreviewButton } from '../PreviewButton';
 
 import { OfferingDetailsBar } from './OfferingDetailsBar';
 import { OfferingDetailsHeader } from './OfferingDetailsHeader';
+import { OfferingDetailsStatistics } from './OfferingDetailsStatistics';
 import { OfferingTables } from './OfferingTables';
 import { PlanUsageList } from './PlanUsageList';
 
@@ -23,6 +26,7 @@ export interface OfferingDetailsProps {
 
 export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
   const { state } = useCurrentStateAndParams();
+  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   return (
     <div className="provider-offering">
@@ -62,18 +66,26 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
         }
       />
       <OfferingDetailsBar />
+      {showExperimentalUiComponents && <OfferingDetailsStatistics />}
       <div className="container-xxl py-10">
-        <Row>
-          <Col lg={props.offering.billable ? 8 : 12}>
-            <OfferingTables offering={props.offering} />
-          </Col>
-
-          {props.offering.billable && (
-            <Col lg={4}>
-              <PlanUsageList plansUsage={props.plansUsage} className="mb-10" />
+        {props.offering.type === OFFERING_TYPE_BOOKING ? (
+          <OfferingTables offering={props.offering} />
+        ) : (
+          <Row>
+            <Col lg={props.offering.billable ? 8 : 12}>
+              <OfferingTables offering={props.offering} />
             </Col>
-          )}
-        </Row>
+
+            {props.offering.billable && (
+              <Col lg={4}>
+                <PlanUsageList
+                  plansUsage={props.plansUsage}
+                  className="mb-10"
+                />
+              </Col>
+            )}
+          </Row>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,74 @@
+.offering-bookings {
+  .flatpickr-calendar {
+    box-shadow: unset;
+    border-radius: 0;
+
+    .flatpickr-month {
+      border-radius: 0;
+    }
+  }
+
+  // Hide the default input
+  .flatpickr-input {
+    display: none;
+  }
+
+  .timeline-list {
+    ul {
+      list-style: none;
+      padding: 0 0.5rem 1rem 0;
+
+      li {
+        line-height: 40px;
+      }
+    }
+
+    .timeline-list-times {
+      width: 45px;
+    }
+
+    .timeline-list-lines {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      hr {
+        margin-top: 0;
+        margin-bottom: 39px;
+        background-color: var(--bs-gray-400);
+      }
+    }
+
+    .timeline-list-items > div {
+      position: absolute;
+      width: calc(100% - 45px);
+      right: 0;
+
+      &::before,
+      &::after {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        background-color: transparent;
+        border-width: 10px;
+        border-style: solid;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        position: absolute;
+        left: -7px;
+      }
+      &::before {
+        top: 0;
+        border-top-color: var(--bs-dark);
+        border-bottom-color: transparent;
+      }
+      &::after {
+        bottom: 0;
+        border-top-color: transparent;
+        border-bottom-color: var(--bs-dark);
+      }
+    }
+  }
+}

@@ -12,14 +12,14 @@ export const OfferingDetailsBar: FunctionComponent = () => {
   const { state } = useCurrentStateAndParams();
 
   return (
-    <div className="offering-page-bar bg-body shadow-sm">
+    <div className="offering-page-bar bg-light-dark shadow-sm">
       <div className="container-xxl">
         <div className="d-flex scroll-x pt-2 pb-1">
           <div className="d-flex align-items-center w-100">
             <Link
               state={state.name}
               params={{ '#': 'order-items' }}
-              className="btn btn-active-color-primary"
+              className="btn text-white"
               onClick={() => scrollToSectionById('order-items')}
             >
               {translate('Order items')}
@@ -27,7 +27,7 @@ export const OfferingDetailsBar: FunctionComponent = () => {
             <Link
               state={state.name}
               params={{ '#': 'resources' }}
-              className="btn btn-active-color-primary"
+              className="btn text-white"
               onClick={() => scrollToSectionById('resources')}
             >
               {translate('Resources')}
@@ -35,7 +35,7 @@ export const OfferingDetailsBar: FunctionComponent = () => {
             <Link
               state={state.name}
               params={{ '#': 'users' }}
-              className="btn btn-active-color-primary"
+              className="btn text-white"
               onClick={() => scrollToSectionById('users')}
             >
               {translate('Users')}

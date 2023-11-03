@@ -72,6 +72,7 @@ const OrderItemsTable: FunctionComponent<any> = (props) => {
       initialPageSize={5}
       hoverableRow={OrderItemActionsCell}
       expandableRow={OrderItemExpandableRow}
+      hasPagination={true}
     />
   );
 };

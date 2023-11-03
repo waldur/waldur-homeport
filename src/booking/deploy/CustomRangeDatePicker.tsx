@@ -8,6 +8,8 @@ import { parseDate } from '@waldur/core/dateUtils';
 import { FormField } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
 
+import { getTimeOptions } from '../utils';
+
 import './CustomRangeDatePicker.scss';
 
 interface Time {
@@ -20,24 +22,6 @@ const isSameMonth = (date1: Date, date2: Date) =>
   date1.getMonth() === date2.getMonth();
 
 const pad2 = (value: string | number) => padStart(String(value), 2, '0');
-
-const getTimeOptions = (timeStep = 30): Time[] => {
-  const dayMinutes = 60 * 24;
-  const count = dayMinutes / timeStep + 1;
-
-  return Array.from(new Array(count)).map((_, i) => {
-    const allMinutes = i * timeStep;
-    const minutes = allMinutes % 60;
-    const hour = Math.floor(allMinutes / 60);
-    if (hour === 24) {
-      return { h: '23', m: '59' };
-    }
-    return {
-      h: pad2(hour),
-      m: pad2(minutes),
-    };
-  });
-};
 
 interface CustomRangeDatePickerProps extends FormField {
   options?: {
