@@ -1,5 +1,5 @@
 import type { EventInput, EventApi } from '@fullcalendar/core';
-import { uniqueId } from 'lodash';
+import { padStart, uniqueId } from 'lodash';
 import { DateTime, Duration } from 'luxon';
 
 import { CURSOR_NOT_ALLOWED_CLASSNAME } from '@waldur/booking/constants';
@@ -278,6 +278,29 @@ export const getDurationOptions = () =>
     value: Duration.fromObject({ hours }).toFormat('hh:mm:ss'),
     label: `${hours} hours`,
   }));
+
+const pad2 = (value: string | number) => padStart(String(value), 2, '0');
+
+export const getTimeOptions = (
+  timeStep = 30,
+  include24 = false,
+): Array<{ h; m }> => {
+  const dayMinutes = 60 * 24;
+  const count = dayMinutes / timeStep + 1;
+
+  return Array.from(new Array(count)).map((_, i) => {
+    const allMinutes = i * timeStep;
+    const minutes = allMinutes % 60;
+    const hour = Math.floor(allMinutes / 60);
+    if (hour === 24 && !include24) {
+      return { h: '23', m: '59' };
+    }
+    return {
+      h: pad2(hour),
+      m: pad2(minutes),
+    };
+  });
+};
 
 export const getBookedSlots = (bookedItems: BookedItem[]) =>
   bookedItems.map((item) => ({

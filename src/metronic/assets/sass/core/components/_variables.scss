@@ -71,6 +71,7 @@ $dark-active: if(
 ) !default;
 $dark-light: #253629 !default; // Custom variable
 $dark-inverse: if(isDarkMode(), $gray-100, $white) !default; // Custom variable
+$dark-always: #181c32 !default; // Custom variable
 
 // Primary colors
 $primary: if(isDarkMode(), #78bf69, #3699ff) !default; // Bootstrap variable
@@ -147,6 +148,7 @@ $theme-colors: (
   'warning': $warning,
   'danger': $danger,
   'dark': $dark,
+  'dark-always': $dark-always,
 ) !default;
 
 // Hover colors
@@ -197,6 +199,7 @@ $theme-text-colors: (
   'warning': $warning,
   'danger': $danger,
   'dark': $dark,
+  'dark-always': $dark-always,
   'muted': $text-muted,
   'gray-100': $gray-100,
   'gray-200': $gray-200,

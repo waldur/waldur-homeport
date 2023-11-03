@@ -61,7 +61,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
   ];
 
-  if (props.customer.is_service_provider) {
+  if (props.customer?.is_service_provider) {
     columns.splice(2, 0, {
       title: translate('Organization'),
       render: ({ row }) => row.customer_name,
@@ -83,7 +83,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       expandableRow={({ row }) => (
         <BookingsListExpandableRow
           row={row}
-          isServiceProvider={props.customer.is_service_provider}
+          isServiceProvider={props.customer?.is_service_provider}
         />
       )}
     />

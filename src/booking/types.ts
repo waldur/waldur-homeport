@@ -29,16 +29,21 @@ export interface BookingProps extends EventInput {
 
 export interface BookingResource {
   uuid: string;
+  name: string;
   state: string;
   attributes: {
     schedules: EventInput[];
   };
+  customer_name: string;
+  customer_uuid: string;
   project_name: string;
   project_description: string;
+  provider_uuid: string;
   description: string;
   created: string;
   approved_by_full_name: string;
   created_by_full_name: string;
+  created_by_username: string;
 }
 
 export interface BookedItem {
