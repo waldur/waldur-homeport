@@ -1,11 +1,13 @@
 import { useCallback } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import * as api from '@waldur/marketplace/common/api';
 import { serializeCampaign } from '@waldur/marketplace/service-providers/utils';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { createCampaign, updateCampaign } from './api';
 import { CampaignFormData } from './types';
@@ -26,9 +28,23 @@ export const CampaignFooter = ({
   isUpdate?;
 }) => {
   const dispatch = useDispatch();
+  const customer = useSelector(getCustomer);
+  async function getServiceProvider() {
+    try {
+      return await api.getServiceProviderByCustomer({
+        customer_uuid: customer.uuid,
+      });
+    } catch (e) {
+      dispatch(
+        showErrorResponse(e, translate('Unable to load service provider.')),
+      );
+    }
+  }
+
   const saveAndSend = useCallback(
     async (formData: CampaignFormData) => {
       try {
+        formData.service_provider = await getServiceProvider();
         await createCampaign(serializeCampaign(formData));
         refetch();
         dispatch(showSuccess(translate('Campaign has been created.')));
@@ -45,6 +61,7 @@ export const CampaignFooter = ({
   const saveAndUpdate = useCallback(
     async (formData: CampaignFormData) => {
       try {
+        formData.service_provider = await getServiceProvider();
         await updateCampaign(formData.uuid, serializeCampaign(formData));
         refetch();
         dispatch(showSuccess(translate('Campaign has been updated.')));

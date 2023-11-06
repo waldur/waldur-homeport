@@ -1,5 +1,6 @@
 import { Modal } from 'react-bootstrap';
-import { Field, FormName } from 'redux-form';
+import { useSelector } from 'react-redux';
+import { FormName } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import {
@@ -11,14 +12,11 @@ import {
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
-import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
-import {
-  offeringsAutocomplete,
-  providerAutocomplete,
-} from '@waldur/marketplace/common/autocompletes';
+import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { CampaignFormData } from '@waldur/marketplace/service-providers/types';
 import { StepIndicator } from '@waldur/notifications/StepIndicator';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 export const CampaignForm = ({
   submitting,
@@ -30,6 +28,7 @@ export const CampaignForm = ({
   step: number;
   setStep(step: number): void;
 }) => {
+  const customer = useSelector(getCustomer);
   return (
     <>
       <StepIndicator
@@ -77,7 +76,7 @@ export const CampaignForm = ({
                   placeholder={translate('Select offerings...')}
                   loadOptions={(query, prevOptions, page) =>
                     offeringsAutocomplete(
-                      { name: query, shared: true },
+                      { name: query, shared: true, customer: customer.url },
                       prevOptions,
                       page,
                     )
@@ -87,27 +86,6 @@ export const CampaignForm = ({
                   isMulti={true}
                   required={true}
                 />
-                <Field
-                  name="service_provider"
-                  label={translate('Service provider')}
-                  component={(fieldProps) => (
-                    <AsyncPaginate
-                      placeholder={translate('Select provider...')}
-                      loadOptions={providerAutocomplete}
-                      defaultOptions
-                      getOptionValue={(option) => option.customer_uuid}
-                      getOptionLabel={(option) => option.customer_name}
-                      value={fieldProps.input.value}
-                      onChange={(value) => fieldProps.input.onChange(value)}
-                      noOptionsMessage={() => translate('No providers')}
-                      isClearable={true}
-                      additional={{
-                        page: 1,
-                      }}
-                      required={true}
-                    />
-                  )}
-                />{' '}
               </FormContainer>
             ) : (
               <FormContainer submitting={submitting} clearOnUnmount={false}>
