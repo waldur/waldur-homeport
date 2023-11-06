@@ -1,4 +1,8 @@
-import { useOnStateChanged, useRouter } from '@uirouter/react';
+import {
+  useCurrentStateAndParams,
+  useOnStateChanged,
+  useRouter,
+} from '@uirouter/react';
 import {
   useState,
   FunctionComponent,
@@ -16,6 +20,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import useOnScreen from '@waldur/core/useOnScreen';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { isChildOf } from '@waldur/navigation/useTabs';
 import {
   checkIsOwner,
   getCustomer,
@@ -31,6 +36,7 @@ import { OrganizationsPanel } from './OrganizationsPanel';
 import { ProjectsPanel } from './ProjectsPanel';
 
 export const ContextSelectorDropdown: FunctionComponent = () => {
+  const { state } = useCurrentStateAndParams();
   const currentCustomer = useSelector(getCustomer);
   const currentUser = useSelector(getUser);
   const canSeeAll = useSelector(isStaffOrSupport);
@@ -38,6 +44,9 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
     useState<Customer>(currentCustomer);
 
   const [filter, setFilter] = useState('');
+  const [onlyServiceProviders, setOnlyServiceProviders] = useState(() =>
+    isChildOf('marketplace-provider', state),
+  );
 
   const refProjectSelector = useRef<HTMLDivElement>();
   const refSearch = useRef<HTMLInputElement>();
@@ -61,6 +70,12 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
       refProjectSelector.current.style.zIndex = '1055';
     }
   }, [isVisible]);
+
+  useEffect(() => {
+    if (isVisible) {
+      setOnlyServiceProviders(isChildOf('marketplace-provider', state));
+    }
+  }, [isVisible, state, setOnlyServiceProviders]);
 
   useEffect(() => {
     MenuComponent.reinitialization();
@@ -153,9 +168,29 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
               />
             </div>
             <div className="list-header py-1 px-4 border-bottom">
-              <span className="fw-bold fs-7 text-white">
-                {translate('Organization')}
-              </span>
+              <Col md={12} lg={5} className="d-flex justify-content-between">
+                <span className="fw-bold fs-7 text-white">
+                  {translate('Organization')}
+                </span>
+                <div className="form-check form-switch form-check-custom form-check-solid">
+                  <input
+                    className="form-check-input h-20px w-30px"
+                    type="checkbox"
+                    value=""
+                    id="contextSelectorOnlySP"
+                    checked={onlyServiceProviders}
+                    onChange={() => {
+                      setOnlyServiceProviders((prev) => !prev);
+                    }}
+                  />
+                  <label
+                    className="form-check-label text-white"
+                    htmlFor="contextSelectorOnlySP"
+                  >
+                    {translate('Only service providers')}
+                  </label>
+                </div>
+              </Col>
             </div>
             <div className="d-flex border-bottom">
               <OrganizationsPanel
@@ -167,6 +202,7 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
                   selectOrganization(customer);
                 }}
                 filter={filter}
+                isServiceProvider={onlyServiceProviders}
               />
               <ProjectsPanel
                 customer={selectedOrganization}

@@ -6489,6 +6489,10 @@ msgstr ""
 msgid "Only pending invitation can be canceled."
 msgstr ""
 
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+msgid "Only service providers"
+msgstr ""
+
 #: src/openstack/utils.ts
 msgid "Only staff and organization users are allowed to open console."
 msgstr ""
