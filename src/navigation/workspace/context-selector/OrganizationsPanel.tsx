@@ -1,4 +1,3 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback, FunctionComponent } from 'react';
 import { Col, ListGroupItem, Stack } from 'react-bootstrap';
 
@@ -6,7 +5,6 @@ import { Link } from '@waldur/core/Link';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
-import { isChildOf } from '@waldur/navigation/useTabs';
 import { Customer } from '@waldur/workspace/types';
 
 import { getCustomersPage } from '../api';
@@ -134,11 +132,18 @@ export const OrganizationsPanel: FunctionComponent<{
   selected: Customer;
   loadingUuid: string;
   filter;
+  isServiceProvider: boolean;
   onClick(customer: Customer): void;
   onMouseEnter(customer: Customer): void;
-}> = ({ active, selected, loadingUuid, filter, onClick, onMouseEnter }) => {
-  const { state } = useCurrentStateAndParams();
-  const isServiceProvider = isChildOf('marketplace-provider', state);
+}> = ({
+  active,
+  selected,
+  loadingUuid,
+  filter,
+  isServiceProvider,
+  onClick,
+  onMouseEnter,
+}) => {
   const calculateInitialPageSize = () => {
     const screenHeight = window.innerHeight;
     return screenHeight * 0.85;
