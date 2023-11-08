@@ -34,6 +34,7 @@ export interface DeployPageProps {
   offering: Offering;
   limits?: string[];
   updateMode?: boolean;
+  previewMode?: boolean;
   cartItem?: OrderItemResponse;
   plan?: Plan;
   initialLimits?: AttributesType;
@@ -45,6 +46,8 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
   touchOnChange: true,
 })((props) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
+
+  const isEdit = useMemo(() => Boolean(props.cartItem), [props]);
 
   const project = useSelector(getProject);
   const formData = useSelector(formDataSelector);
@@ -108,6 +111,15 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
     }
     Object.assign(initialData, { attributes });
 
+    if (props.initialLimits || props.limits) {
+      Object.assign(initialData, {
+        limits: props.initialLimits || props.limits,
+      });
+    }
+    if (props.plan) {
+      Object.assign(initialData, { plan: props.plan });
+    }
+
     if (Object.keys(initialData).length > 0) {
       props.initialize(initialData);
     }
@@ -115,6 +127,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
 
   // Initialize limits and plan when the offering changes
   useEffect(() => {
+    if (isEdit) return;
     if (selectedOffering) {
       if (hasStepWithField(formSteps, 'attributes.subnet_cidr')) {
         props.change('attributes.subnet_cidr', '192.168.42.0/24');
@@ -201,13 +214,36 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
     }
   }, [formData?.attributes?.flavor, formData?.attributes?.image, props.change]);
 
+  if (props.previewMode) {
+    return (
+      <form className="form">
+        <div className="deploy-preview-steps d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
+          {formSteps.map((step, i) => (
+            <div ref={stepRefs.current[i]} key={step.id}>
+              <step.component
+                step={i + 1}
+                id={step.id}
+                title={step.label}
+                offering={selectedOffering}
+                observed={completedSteps[i]}
+                change={props.change}
+                params={step.params}
+              />
+            </div>
+          ))}
+        </div>
+      </form>
+    );
+  }
+
   return (
     <form className="form d-flex flex-column flex-lg-row gap-5 gap-lg-7 pb-10">
       {/* Steps */}
       <div className="deploy-view-steps d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
         <div className="d-flex justify-content-between align-items-center">
           <h1 className="mb-0">
-            {translate('Add')} {selectedOffering.name}
+            {isEdit ? translate('Edit') : translate('Add')}{' '}
+            {selectedOffering.name}
           </h1>
           {showExperimentalUiComponents && <DeployPageActions />}
         </div>

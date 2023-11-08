@@ -8,6 +8,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { Plan, Offering } from '@waldur/marketplace/types';
 import { useTitle } from '@waldur/navigation/title';
+import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
 import { router } from '@waldur/router';
 
 import * as api from '../common/api';
@@ -31,7 +32,9 @@ interface PureShoppingCartItemUpdateProps {
 
 const PureShoppingCartItemUpdate: FunctionComponent<PureShoppingCartItemUpdateProps> =
   (props) =>
-    [OFFERING_TYPE_BOOKING].includes(props.offering.type) ? (
+    [OFFERING_TYPE_BOOKING, MARKETPLACE_RANCHER].includes(
+      props.offering.type,
+    ) ? (
       <DeployPage
         offering={props.offering}
         limits={props.limits}

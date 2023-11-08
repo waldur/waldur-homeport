@@ -10,10 +10,6 @@ const RancherClusterCheckoutSummary = lazyComponent(
   () => import('./RancherClusterCheckoutSummary'),
   'RancherClusterCheckoutSummary',
 );
-const RancherClusterForm = lazyComponent(
-  () => import('./RancherClusterForm'),
-  'RancherClusterForm',
-);
 const RancherPluginOptionsForm = lazyComponent(
   () => import('./RancherPluginOptionsForm'),
   'RancherPluginOptionsForm',
@@ -83,7 +79,6 @@ registerOfferingType({
     return translate('Rancher cluster');
   },
   formSteps: deployOfferingSteps,
-  component: RancherClusterForm, // We can remove this line later. formSteps replaced
   checkoutSummaryComponent: RancherClusterCheckoutSummary,
   pluginOptionsForm: RancherPluginOptionsForm,
   providerType: 'Rancher',

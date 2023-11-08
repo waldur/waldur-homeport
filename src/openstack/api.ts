@@ -1,15 +1,6 @@
 import Axios from 'axios';
 
-import { ENV } from '@waldur/configs/default';
-import {
-  getAll,
-  put,
-  post,
-  getSelectData,
-  deleteById,
-  get,
-} from '@waldur/core/api';
-import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
+import { getAll, put, post, deleteById, get } from '@waldur/core/api';
 import { terminateResource } from '@waldur/marketplace/common/api';
 import {
   Flavor,
@@ -244,25 +235,6 @@ export const updateServerGroups = (
 
 export const loadSshKeys = (user_uuid: string) =>
   getAll<SshKey>('/keys/', { params: { user_uuid } });
-
-export const loadSshKeysOptions = async (
-  user_uuid: string,
-  query: string,
-  prevOptions,
-  currentPage: number,
-) => {
-  const response = await getSelectData<SshKey>('/keys/', {
-    user_uuid,
-    name: query,
-    page: currentPage,
-    page_size: ENV.pageSize,
-  });
-  return returnReactSelectAsyncPaginateObject(
-    response,
-    prevOptions,
-    currentPage,
-  );
-};
 
 export const loadServiceSettings = (scope: string) =>
   Axios.get(scope).then((response) => response.data);
