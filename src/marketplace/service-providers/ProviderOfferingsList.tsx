@@ -87,7 +87,9 @@ export const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> =
         verboseName={translate('Offerings')}
         dropdownActions={dropdownActions}
         actions={<CreateOfferingButton fetch={tableProps.fetch} />}
-        hoverableRow={OfferingViews}
+        hoverableRow={(row) => (
+          <OfferingViews row={row.row} refetch={tableProps.fetch} />
+        )}
         {...extraTableProps}
         filters={<ProviderOfferingsFilter />}
         hasQuery={true}

@@ -894,6 +894,10 @@ msgstr ""
 msgid "Are you sure you want to delete the {title} category?"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingViews.tsx
+msgid "Are you sure you want to delete this offering?"
+msgstr ""
+
 #: src/resource/actions/ResourceDeleteButton.tsx
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr ""
@@ -2664,6 +2668,7 @@ msgstr ""
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/issues/comments/IssueCommentItem.tsx
+#: src/marketplace/offerings/OfferingViews.tsx
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
 #: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
@@ -2687,6 +2692,10 @@ msgstr ""
 
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
 msgid "Delete catalog"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingViews.tsx
+msgid "Delete confirmation"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
@@ -3467,6 +3476,10 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 msgid "Error traceback"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingViews.tsx
+msgid "Error while deleting offering."
 msgstr ""
 
 #: src/resource/support/ResourcesTreemap.tsx
@@ -6007,8 +6020,6 @@ msgid "No projects are assigned to this user."
 msgstr ""
 
 #: src/marketplace/orders/ProviderAutocomplete.tsx
-#: src/marketplace/service-providers/CampaignForm.tsx
-#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderCampaignServiceProviderFilter.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "No providers"
@@ -6275,6 +6286,10 @@ msgstr ""
 
 #: src/marketplace/offerings/details/OfferingTables.tsx
 msgid "Offering cost chart"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingViews.tsx
+msgid "Offering deleted successfully."
 msgstr ""
 
 #: src/marketplace/details/OfferingDetails.tsx
@@ -9572,8 +9587,6 @@ msgid "Select project..."
 msgstr ""
 
 #: src/marketplace/orders/ProviderAutocomplete.tsx
-#: src/marketplace/service-providers/CampaignForm.tsx
-#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderCampaignServiceProviderFilter.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Select provider..."
@@ -9792,8 +9805,6 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/routes.ts
-#: src/marketplace/service-providers/CampaignForm.tsx
-#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignServiceProviderFilter.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx
@@ -12095,6 +12106,7 @@ msgstr ""
 msgid "Unable to load resource."
 msgstr ""
 
+#: src/marketplace/service-providers/CampaignFooter.tsx
 #: src/marketplace/service-providers/ProviderDetails.tsx
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Unable to load service provider."
