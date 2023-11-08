@@ -368,7 +368,7 @@ msgid "Add new offering"
 msgstr ""
 
 #: src/user/hooks/HookCreateButton.tsx
-msgid "Add broadcast"
+msgid "Add notification"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
@@ -878,7 +878,7 @@ msgstr ""
 msgid "Are you sure you want to delete the role {name}?"
 msgstr ""
 
-#: src/notifications/BroadcastTemplateDeleteButton.tsx
+#: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 msgid "Are you sure you want to delete the template {template_name}?"
 msgstr ""
 
@@ -1079,7 +1079,7 @@ msgstr ""
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr ""
 
-#: src/notifications/BroadcastList.tsx
+#: src/broadcasts/BroadcastList.tsx
 msgid "Author"
 msgstr ""
 
@@ -1160,10 +1160,11 @@ msgstr ""
 msgid "Azure provider"
 msgstr ""
 
+#: src/broadcasts/BroadcastFooter.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/error/InvalidObjectPage.tsx
 #: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/import/WizardButtons.tsx
-#: src/notifications/BroadcastFooter.tsx
 msgid "Back"
 msgstr ""
 
@@ -1344,6 +1345,27 @@ msgstr ""
 
 #: src/issues/routes.ts
 msgid "Broadcast"
+msgstr ""
+
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+msgid "Broadcast has been save as a template."
+msgstr ""
+
+#: src/broadcasts/BroadcastFooter.tsx
+msgid "Broadcast has been saved as a draft."
+msgstr ""
+
+#: src/broadcasts/BroadcastFooter.tsx
+#: src/broadcasts/BroadcastSendButton.tsx
+msgid "Broadcast has been sent."
+msgstr ""
+
+#: src/broadcasts/BroadcastTemplateCreateDialog.tsx
+msgid "Broadcast template has been created."
+msgstr ""
+
+#: src/broadcasts/BroadcastTemplateUpdateDialog.tsx
+msgid "Broadcast template has been updated."
 msgstr ""
 
 #: src/issues/routes.ts
@@ -1708,13 +1730,13 @@ msgid "Clone of"
 msgstr ""
 
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+#: src/broadcasts/RecipientsListDialog.tsx
 #: src/invitations/actions/create/FormButtons.tsx
 #: src/marketplace/details/plan/EstimateUsageComponentDialog.tsx
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx
 #: src/marketplace/referral/OfferingReferralsDialog.tsx
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesDialog.tsx
-#: src/notifications/RecipientsListDialog.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
 #: src/user/UserPopover.tsx
@@ -1899,6 +1921,7 @@ msgstr ""
 
 #: src/administration/TokenDeleteButton.tsx
 #: src/administration/roles/RoleDeleteButton.tsx
+#: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
@@ -1914,7 +1937,6 @@ msgstr ""
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
 #: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
-#: src/notifications/BroadcastTemplateDeleteButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 #: src/resource/actions/AsyncActionItem.tsx
@@ -1924,7 +1946,7 @@ msgstr ""
 
 #: src/support/OfferingPluginSecretOptionsForm.tsx
 #: src/support/marketplace.ts
-msgid "Confirmation broadcast template"
+msgid "Confirmation notification template"
 msgstr ""
 
 #: src/customer/team/PendingReviewDialog.tsx
@@ -2058,6 +2080,8 @@ msgid "Coupon"
 msgstr ""
 
 #: src/administration/agreements/UserAgreementCreateButton.tsx
+#: src/broadcasts/BroadcastCreateButton.tsx
+#: src/broadcasts/BroadcastTemplateCreateButton.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
@@ -2074,8 +2098,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
 #: src/marketplace/service-providers/CampaignCreateButton.tsx
-#: src/notifications/BroadcastCreateButton.tsx
-#: src/notifications/BroadcastTemplateCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -2110,17 +2132,18 @@ msgstr ""
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr ""
 
-#: src/notifications/BroadcastCreateDialog.tsx
+#: src/broadcasts/BroadcastCreateDialog.tsx
 msgid "Create a broadcast"
+msgstr ""
+
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+#: src/broadcasts/BroadcastTemplateCreateDialog.tsx
+msgid "Create a broadcast template"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignCreateDialog.tsx
 #: src/marketplace/service-providers/CampaignFooter.tsx
 msgid "Create a campaign"
-msgstr ""
-
-#: src/notifications/BroadcastTemplateCreateDialog.tsx
-msgid "Create a broadcast template"
 msgstr ""
 
 #: src/administration/agreements/UserAgreementCreateDialog.tsx
@@ -2169,7 +2192,7 @@ msgstr ""
 msgid "Create horizontal pod autoscaler"
 msgstr ""
 
-#: src/notifications/BroadcastForm.tsx
+#: src/broadcasts/BroadcastForm.tsx
 msgid "Create message"
 msgstr ""
 
@@ -2183,7 +2206,7 @@ msgid "Create node"
 msgstr ""
 
 #: src/user/hooks/HookDetailsDialog.tsx
-msgid "Create broadcast"
+msgid "Create notification"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
@@ -2313,6 +2336,7 @@ msgid "Created a new payment for {customer_link}."
 msgstr ""
 
 #: src/administration/agreements/UserAgreementsList.tsx
+#: src/broadcasts/BroadcastList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
@@ -2333,7 +2357,6 @@ msgstr ""
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
-#: src/notifications/BroadcastList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
@@ -3110,6 +3133,7 @@ msgstr ""
 
 #: src/administration/agreements/UserAgreementsEditButton.tsx
 #: src/administration/providers/ProviderCard.tsx
+#: src/broadcasts/BroadcastTemplateUpdateButton.tsx
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
@@ -3140,7 +3164,6 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderCampaignUpdateButton.tsx
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton.tsx
-#: src/notifications/BroadcastTemplateUpdateButton.tsx
 #: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
 #: src/openstack/openstack-backup/actions/EditAction.tsx
 #: src/openstack/openstack-instance/actions/EditAction.tsx
@@ -3271,13 +3294,13 @@ msgstr ""
 
 #: src/administration/notifications/HooksList.tsx
 #: src/administration/providers/ProviderUsersDialog.tsx
+#: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
-#: src/notifications/RecipientsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
@@ -5324,6 +5347,21 @@ msgstr ""
 msgid "Maximum monthly"
 msgstr ""
 
+#: src/openstack/OpenStackForm.tsx
+#: src/openstack/marketplace.ts
+msgid "Maximum parallel executions of provisioning operations for instances."
+msgstr ""
+
+#: src/openstack/OpenStackForm.tsx
+#: src/openstack/marketplace.ts
+msgid "Maximum parallel executions of provisioning operations for snapshots."
+msgstr ""
+
+#: src/openstack/OpenStackForm.tsx
+#: src/openstack/marketplace.ts
+msgid "Maximum parallel executions of provisioning operations for volumes."
+msgstr ""
+
 #: src/marketplace/offerings/update/components/ComponentLimitPeriodField.tsx
 msgid "Maximum total"
 msgstr ""
@@ -5375,10 +5413,10 @@ msgstr ""
 msgid "Memory size in GiB"
 msgstr ""
 
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationExpandableRow.tsx
-#: src/notifications/BroadcastForm.tsx
-#: src/notifications/BroadcastTemplateForm.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr ""
@@ -5565,6 +5603,9 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
+#: src/broadcasts/BroadcastTemplateList.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -5608,8 +5649,6 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
-#: src/notifications/BroadcastTemplateForm.tsx
-#: src/notifications/BroadcastTemplateList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
@@ -6116,29 +6155,12 @@ msgstr ""
 msgid "Notification has been created."
 msgstr ""
 
-#: src/notifications/BroadcastFooter.tsx
-msgid "Notification has been saved as a draft."
-msgstr ""
-
-#: src/notifications/BroadcastFooter.tsx
-#: src/notifications/BroadcastSendButton.tsx
-msgid "Notification has been sent."
-msgstr ""
-
 #: src/user/hooks/utils.ts
 msgid "Notification has been updated."
 msgstr ""
 
 #: src/user/hooks/HookForm.tsx
 msgid "Notification method"
-msgstr ""
-
-#: src/notifications/BroadcastTemplateCreateDialog.tsx
-msgid "Notification template has been created."
-msgstr ""
-
-#: src/notifications/BroadcastTemplateUpdateDialog.tsx
-msgid "Notification template has been updated."
 msgstr ""
 
 #: src/administration/notifications/HooksList.tsx
@@ -6412,15 +6434,15 @@ msgid "Offering users synchronization has been scheduled."
 msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/broadcasts/BroadcastExpandableRow.tsx
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/RecipientsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/CampaignForm.tsx
 #: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
-#: src/notifications/BroadcastExpandableRow.tsx
-#: src/notifications/BroadcastForm.tsx
-#: src/notifications/RecipientsList.tsx
 #: src/providers/dashboard/ProviderDashboard.tsx
 msgid "Offerings"
 msgstr ""
@@ -6884,15 +6906,15 @@ msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
 #: src/administration/routes.ts
+#: src/broadcasts/BroadcastExpandableRow.tsx
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
-#: src/notifications/BroadcastExpandableRow.tsx
-#: src/notifications/BroadcastForm.tsx
-#: src/notifications/RecipientsList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
@@ -8259,15 +8281,15 @@ msgstr ""
 msgid "Recently added offerings"
 msgstr ""
 
-#: src/notifications/RecipientsList.tsx
+#: src/broadcasts/RecipientsList.tsx
 msgid "Recipient"
 msgstr ""
 
-#: src/notifications/RecipientsField.tsx
+#: src/broadcasts/RecipientsField.tsx
 msgid "Recipients"
 msgstr ""
 
-#: src/notifications/RecipientsListDialog.tsx
+#: src/broadcasts/RecipientsListDialog.tsx
 msgid "Recipients list"
 msgstr ""
 
@@ -8280,7 +8302,7 @@ msgid "Record no."
 msgstr ""
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Record broadcast has been sent to organization owners."
+msgid "Record notification has been sent to organization owners."
 msgstr ""
 
 #: src/invoices/list/BillingRecordsList.tsx
@@ -8454,6 +8476,7 @@ msgstr ""
 #: src/administration/TokenDeleteButton.tsx
 #: src/administration/notifications/HookRemoveButton.tsx
 #: src/administration/roles/RoleDeleteButton.tsx
+#: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
@@ -8464,7 +8487,6 @@ msgstr ""
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/update/ImageUploadField.tsx
 #: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
-#: src/notifications/BroadcastTemplateDeleteButton.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
@@ -9199,6 +9221,8 @@ msgstr ""
 #: src/administration/providers/UpdateProviderDialog.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/booking/components/modal/BookingModal.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/customer/organization-groups/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
@@ -9220,7 +9244,6 @@ msgstr ""
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
-#: src/notifications/BroadcastTemplateForm.tsx
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
 msgid "Save"
@@ -9230,7 +9253,11 @@ msgstr ""
 msgid "Save & dry run script"
 msgstr ""
 
-#: src/notifications/BroadcastFooter.tsx
+#: src/broadcasts/BroadcastFooter.tsx
+msgid "Save as a template"
+msgstr ""
+
+#: src/broadcasts/BroadcastFooter.tsx
 msgid "Save as draft"
 msgstr ""
 
@@ -9501,9 +9528,9 @@ msgstr ""
 msgid "Select offering..."
 msgstr ""
 
+#: src/broadcasts/BroadcastForm.tsx
 #: src/marketplace/service-providers/CampaignForm.tsx
 #: src/marketplace/service-providers/CampaignUpdateForm.tsx
-#: src/notifications/BroadcastForm.tsx
 msgid "Select offerings..."
 msgstr ""
 
@@ -9532,7 +9559,7 @@ msgstr ""
 msgid "Select organization..."
 msgstr ""
 
-#: src/notifications/BroadcastForm.tsx
+#: src/broadcasts/BroadcastForm.tsx
 msgid "Select organizations..."
 msgstr ""
 
@@ -9572,8 +9599,8 @@ msgstr ""
 msgid "Select provider..."
 msgstr ""
 
-#: src/notifications/BroadcastFooter.tsx
-#: src/notifications/BroadcastForm.tsx
+#: src/broadcasts/BroadcastFooter.tsx
+#: src/broadcasts/BroadcastForm.tsx
 msgid "Select recipients"
 msgstr ""
 
@@ -9640,7 +9667,7 @@ msgstr ""
 msgid "Select subnets to connect to..."
 msgstr ""
 
-#: src/notifications/BroadcastForm.tsx
+#: src/broadcasts/BroadcastForm.tsx
 msgid "Select template..."
 msgstr ""
 
@@ -9690,17 +9717,17 @@ msgstr ""
 msgid "Selector"
 msgstr ""
 
+#: src/broadcasts/BroadcastSendButton.tsx
 #: src/customer/list/FinancialReportSendButton.tsx
-#: src/notifications/BroadcastSendButton.tsx
 msgid "Send"
 msgstr ""
 
-#: src/notifications/BroadcastExpandableRow.tsx
-#: src/notifications/BroadcastForm.tsx
+#: src/broadcasts/BroadcastExpandableRow.tsx
+#: src/broadcasts/BroadcastForm.tsx
 msgid "Send at"
 msgstr ""
 
-#: src/notifications/BroadcastFooter.tsx
+#: src/broadcasts/BroadcastFooter.tsx
 msgid "Send broadcast"
 msgstr ""
 
@@ -9708,7 +9735,7 @@ msgstr ""
 msgid "Send invitation"
 msgstr ""
 
-#: src/notifications/BroadcastForm.tsx
+#: src/broadcasts/BroadcastForm.tsx
 msgid "Send message to all users"
 msgstr ""
 
@@ -9717,7 +9744,7 @@ msgid "Send more"
 msgstr ""
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Send broadcast"
+msgid "Send notification"
 msgstr ""
 
 #: src/customer/list/ExportAsEmailDialog.tsx
@@ -10052,7 +10079,7 @@ msgstr ""
 msgid "Show project"
 msgstr ""
 
-#: src/notifications/RecipientsField.tsx
+#: src/broadcasts/RecipientsField.tsx
 msgid "Show recipients"
 msgstr ""
 
@@ -10302,6 +10329,7 @@ msgstr ""
 #: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
+#: src/broadcasts/BroadcastList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invitations/InvitationsFilter.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
@@ -10348,7 +10376,6 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
-#: src/notifications/BroadcastList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
@@ -10467,10 +10494,10 @@ msgstr ""
 msgid "Storage type"
 msgstr ""
 
-#: src/notifications/BroadcastForm.tsx
-#: src/notifications/BroadcastList.tsx
-#: src/notifications/BroadcastTemplateForm.tsx
-#: src/notifications/BroadcastTemplateList.tsx
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/BroadcastList.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
+#: src/broadcasts/BroadcastTemplateList.tsx
 msgid "Subject"
 msgstr ""
 
@@ -10766,9 +10793,9 @@ msgstr ""
 msgid "Technical name intended for integration and automated reporting. Please use Latin letters without spaces only."
 msgstr ""
 
+#: src/broadcasts/BroadcastForm.tsx
 #: src/issues/create/IssueCreateForm.tsx
 #: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
-#: src/notifications/BroadcastForm.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
@@ -11594,12 +11621,12 @@ msgstr ""
 msgid "Unable to create a FreeIPA profile."
 msgstr ""
 
-#: src/marketplace/service-providers/CampaignFooter.tsx
-msgid "Unable to create a campaign."
+#: src/broadcasts/BroadcastTemplateCreateDialog.tsx
+msgid "Unable to create a broadcast template."
 msgstr ""
 
-#: src/notifications/BroadcastTemplateCreateDialog.tsx
-msgid "Unable to create a broadcast template."
+#: src/marketplace/service-providers/CampaignFooter.tsx
+msgid "Unable to create a campaign."
 msgstr ""
 
 #: src/administration/agreements/CreateUserAgreementsForm.tsx
@@ -11647,7 +11674,7 @@ msgid "Unable to create node."
 msgstr ""
 
 #: src/user/hooks/utils.ts
-msgid "Unable to create broadcast."
+msgid "Unable to create notification."
 msgstr ""
 
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
@@ -12253,13 +12280,17 @@ msgstr ""
 msgid "Unable to revoke permission."
 msgstr ""
 
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+msgid "Unable to save a broadcast as a template."
+msgstr ""
+
+#: src/broadcasts/BroadcastFooter.tsx
+msgid "Unable to save broadcast."
+msgstr ""
+
 #: src/customer/list/store/effects.ts
 #: src/marketplace/offerings/update/overview/OfferingLocationButton.tsx
 msgid "Unable to save location."
-msgstr ""
-
-#: src/notifications/BroadcastFooter.tsx
-msgid "Unable to save broadcast."
 msgstr ""
 
 #: src/auth/AuthInit.tsx
@@ -12270,17 +12301,17 @@ msgstr ""
 msgid "Unable to schedule service synchronization."
 msgstr ""
 
+#: src/broadcasts/BroadcastFooter.tsx
+#: src/broadcasts/BroadcastSendButton.tsx
+msgid "Unable to send broadcast."
+msgstr ""
+
 #: src/issues/feedback/SupportFeedback.tsx
 msgid "Unable to send feedback."
 msgstr ""
 
-#: src/notifications/BroadcastFooter.tsx
-#: src/notifications/BroadcastSendButton.tsx
-msgid "Unable to send broadcast."
-msgstr ""
-
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Unable to send record broadcast."
+msgid "Unable to send record notification."
 msgstr ""
 
 #: src/marketplace/resources/SetBackendIdDialog.tsx
@@ -12407,12 +12438,12 @@ msgstr ""
 msgid "Unable to update YAML."
 msgstr ""
 
-#: src/marketplace/service-providers/CampaignFooter.tsx
-msgid "Unable to update a campaign."
+#: src/broadcasts/BroadcastTemplateUpdateDialog.tsx
+msgid "Unable to update a broadcast template."
 msgstr ""
 
-#: src/notifications/BroadcastTemplateUpdateDialog.tsx
-msgid "Unable to update a broadcast template."
+#: src/marketplace/service-providers/CampaignFooter.tsx
+msgid "Unable to update a campaign."
 msgstr ""
 
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
@@ -12492,7 +12523,7 @@ msgid "Unable to update network MTU."
 msgstr ""
 
 #: src/user/hooks/utils.ts
-msgid "Unable to update broadcast."
+msgid "Unable to update notification."
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingStateActions.tsx
@@ -12670,6 +12701,7 @@ msgid "Unpublish as Google Calendar"
 msgstr ""
 
 #: src/administration/notifications/HookUpdateButton.tsx
+#: src/broadcasts/BroadcastUpdateButton.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
@@ -12681,7 +12713,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
-#: src/notifications/BroadcastUpdateButton.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -12689,17 +12720,17 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: src/marketplace/service-providers/CampaignFooter.tsx
-#: src/marketplace/service-providers/CampaignUpdateDialog.tsx
-msgid "Update a campaign"
-msgstr ""
-
-#: src/notifications/BroadcastUpdateDialog.tsx
+#: src/broadcasts/BroadcastUpdateDialog.tsx
 msgid "Update a broadcast"
 msgstr ""
 
-#: src/notifications/BroadcastTemplateUpdateDialog.tsx
+#: src/broadcasts/BroadcastTemplateUpdateDialog.tsx
 msgid "Update a broadcast template"
+msgstr ""
+
+#: src/marketplace/service-providers/CampaignFooter.tsx
+#: src/marketplace/service-providers/CampaignUpdateDialog.tsx
+msgid "Update a campaign"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
@@ -12748,7 +12779,7 @@ msgid "Update location"
 msgstr ""
 
 #: src/user/hooks/HookDetailsDialog.tsx
-msgid "Update broadcast"
+msgid "Update notification"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/update-internal-ips/utils.ts
@@ -13781,6 +13812,14 @@ msgstr ""
 msgid "bootable"
 msgstr ""
 
+#: src/broadcasts/BroadcastTemplateList.tsx
+msgid "broadcast templates"
+msgstr ""
+
+#: src/broadcasts/BroadcastList.tsx
+msgid "broadcasts"
+msgstr ""
+
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 msgid "browse"
 msgstr ""
@@ -13930,14 +13969,6 @@ msgstr ""
 msgid "networks"
 msgstr ""
 
-#: src/notifications/BroadcastTemplateList.tsx
-msgid "broadcast templates"
-msgstr ""
-
-#: src/notifications/BroadcastList.tsx
-msgid "notifications"
-msgstr ""
-
 #: src/form/CronField.tsx
 msgid "of"
 msgstr ""
@@ -14026,7 +14057,7 @@ msgstr ""
 msgid "projects"
 msgstr ""
 
-#: src/notifications/RecipientsList.tsx
+#: src/broadcasts/RecipientsList.tsx
 msgid "recepients"
 msgstr ""
 

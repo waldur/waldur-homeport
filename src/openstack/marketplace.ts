@@ -56,6 +56,27 @@ const ServiceSettingsAttributes = (): Attribute[] => [
     title: translate('Availability zone'),
     type: 'string',
   },
+  {
+    key: 'max_concurrent_provision_instance',
+    title: translate(
+      'Maximum parallel executions of provisioning operations for instances.',
+    ),
+    type: 'string',
+  },
+  {
+    key: 'max_concurrent_provision_volume',
+    title: translate(
+      'Maximum parallel executions of provisioning operations for volumes.',
+    ),
+    type: 'string',
+  },
+  {
+    key: 'max_concurrent_provision_snapshot',
+    title: translate(
+      'Maximum parallel executions of provisioning operations for snapshots.',
+    ),
+    type: 'string',
+  },
 ];
 
 const OpenStackOptionsSummary = (): Attribute[] => [
