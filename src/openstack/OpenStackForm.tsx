@@ -1,7 +1,12 @@
 import { FunctionComponent } from 'react';
 
 import { required } from '@waldur/core/validators';
-import { StringField, SecretField, FormContainer } from '@waldur/form';
+import {
+  StringField,
+  SecretField,
+  FormContainer,
+  NumberField,
+} from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 
@@ -59,6 +64,24 @@ export const OpenStackForm: FunctionComponent<{ container }> = ({
       hideLabel={true}
       label={translate('Verify server certificate')}
       name="verify_ssl"
+    />
+    <NumberField
+      label={translate(
+        'Maximum parallel executions of provisioning operations for instances.',
+      )}
+      name="max_concurrent_provision_instance"
+    />
+    <NumberField
+      label={translate(
+        'Maximum parallel executions of provisioning operations for volumes.',
+      )}
+      name="max_concurrent_provision_volume"
+    />
+    <NumberField
+      label={translate(
+        'Maximum parallel executions of provisioning operations for snapshots.',
+      )}
+      name="max_concurrent_provision_snapshot"
     />
   </FormContainer>
 );
