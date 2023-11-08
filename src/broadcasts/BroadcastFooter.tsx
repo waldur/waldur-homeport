@@ -2,14 +2,20 @@ import { useCallback } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { createBroadcast, sendBroadcast, updateBroadcast } from './api';
 import { BroadcastFormData } from './types';
 import { serializeBroadcast } from './utils';
+
+const BroadcastSaveAsTemplateDialog = lazyComponent(
+  () => import('./BroadcastSaveAsTemplateDialog'),
+  'BroadcastSaveAsTemplateDialog',
+);
 
 export const BroadcastFooter = ({
   step,
@@ -27,6 +33,17 @@ export const BroadcastFooter = ({
   broadcastId?;
 }) => {
   const dispatch = useDispatch();
+  const saveAsTemplate = (broadcastData) =>
+    dispatch(
+      openModalDialog(BroadcastSaveAsTemplateDialog, {
+        dialogClassName: 'modal-dialog-centered',
+        resolve: {
+          refetch,
+          broadcastData,
+        },
+        size: 'lg',
+      }),
+    );
   const saveAsDraft = useCallback(
     async (formData: BroadcastFormData) => {
       try {
@@ -82,6 +99,14 @@ export const BroadcastFooter = ({
             disabled={disabled}
           >
             <i className="fa fa-file-text" /> {translate('Save as draft')}
+          </Button>
+          <Button
+            onClick={handleSubmit(saveAsTemplate)}
+            className="ms-3"
+            variant="secondary"
+            disabled={disabled}
+          >
+            <i className="fa fa-file-text" /> {translate('Save as a template')}
           </Button>
           <Button onClick={() => setStep(1)} className="ms-3">
             <i className="fa fa-long-arrow-right" />{' '}
