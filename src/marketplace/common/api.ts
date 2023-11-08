@@ -138,6 +138,9 @@ export const createProviderOffering = (data) =>
 export const updateProviderOffering = (offeringId, data) =>
   patch<Offering>(`/marketplace-provider-offerings/${offeringId}/`, data);
 
+export const deleteProviderOffering = (offeringId) =>
+  deleteById<Offering>(`/marketplace-provider-offerings/`, offeringId);
+
 export const updateResource = (resourceId: string, data) =>
   put<Resource>(`/marketplace-resources/${resourceId}/`, data);
 
