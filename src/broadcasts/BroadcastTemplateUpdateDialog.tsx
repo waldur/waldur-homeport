@@ -2,13 +2,13 @@ import { useCallback } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
+import { updateBroadcastTemplate } from '@waldur/broadcasts/api';
+import { BroadcastTemplateForm } from '@waldur/broadcasts/BroadcastTemplateForm';
+import { BROADCAST_TEMPLATE_CREATE_FORM_ID } from '@waldur/broadcasts/constants';
+import { BroadcastTemplateFormData } from '@waldur/broadcasts/types';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { updateNotificationTemplate } from '@waldur/notifications/api';
-import { NOTIFICATION_TEMPLATE_CREATE_FORM_ID } from '@waldur/notifications/constants';
-import { NotificationTemplateForm } from '@waldur/notifications/NotificationTemplateForm';
-import { NotificationTemplateFormData } from '@waldur/notifications/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 interface OwnProps {
@@ -18,11 +18,11 @@ interface OwnProps {
   resolve;
 }
 
-const enhance = reduxForm<NotificationTemplateFormData, OwnProps>({
-  form: NOTIFICATION_TEMPLATE_CREATE_FORM_ID,
+const enhance = reduxForm<BroadcastTemplateFormData, OwnProps>({
+  form: BROADCAST_TEMPLATE_CREATE_FORM_ID,
 });
 
-export const NotificationTemplateUpdateDialog = connect(
+export const BroadcastTemplateUpdateDialog = connect(
   (_, ownProps: OwnProps) => ({
     initialValues: ownProps.resolve.template,
   }),
@@ -31,19 +31,19 @@ export const NotificationTemplateUpdateDialog = connect(
     const dispatch = useDispatch();
 
     const callback = useCallback(
-      async (formData: NotificationTemplateFormData) => {
+      async (formData: BroadcastTemplateFormData) => {
         try {
-          await updateNotificationTemplate(formData.uuid, formData);
+          await updateBroadcastTemplate(formData.uuid, formData);
           await resolve.refetch();
           dispatch(
-            showSuccess(translate('Notification template has been updated.')),
+            showSuccess(translate('Broadcast template has been updated.')),
           );
           dispatch(closeModalDialog());
         } catch (e) {
           dispatch(
             showErrorResponse(
               e,
-              translate('Unable to update a notification template.'),
+              translate('Unable to update a broadcast template.'),
             ),
           );
         }
@@ -52,9 +52,9 @@ export const NotificationTemplateUpdateDialog = connect(
     );
 
     return (
-      <ModalDialog title={translate('Update a notification template')}>
+      <ModalDialog title={translate('Update a broadcast template')}>
         <form onSubmit={handleSubmit(callback)}>
-          <NotificationTemplateForm submitting={submitting} />
+          <BroadcastTemplateForm submitting={submitting} />
         </form>
       </ModalDialog>
     );

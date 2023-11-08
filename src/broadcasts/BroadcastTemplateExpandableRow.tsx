@@ -2,10 +2,10 @@ import Markdown from 'markdown-to-jsx';
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { NotificationResponseData } from './types';
+import { BroadcastResponseData } from './types';
 
-export const NotificationTemplateExpandableRow: FunctionComponent<{
-  row: NotificationResponseData;
+export const BroadcastTemplateExpandableRow: FunctionComponent<{
+  row: BroadcastResponseData;
 }> = ({ row }) => (
   <Row>
     <Col sm={8}>

@@ -190,7 +190,7 @@ msgid "Add new project"
 msgstr "Yeni layihə əlavə edin"
 
 #: src/user/hooks/HookCreateButton.tsx
-msgid "Add notification"
+msgid "Add broadcast"
 msgstr "Bildiriş əlavə edin"
 
 #: src/customer/list/OrganizationCreateButton.tsx
@@ -372,7 +372,7 @@ msgstr "Azure provayderi"
 #: src/error/InvalidQuotaPage.tsx
 #: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
-#: src/notifications/NotificationFooter.tsx
+#: src/notifications/BroadcastFooter.tsx
 msgid "Back"
 msgstr "Geriyə"
 
@@ -670,7 +670,7 @@ msgstr "Ölkə "
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
-#: src/notifications/NotificationCreateButton.tsx
+#: src/notifications/BroadcastCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -690,7 +690,7 @@ msgid "Create application"
 msgstr "Proqram tətbiqi yaratmaq "
 
 #: src/user/hooks/HookDetailsDialog.tsx
-msgid "Create notification"
+msgid "Create broadcast"
 msgstr "Bildiriş yaratmaq"
 
 #: src/customer/create/CustomerCreateForm.tsx
@@ -787,7 +787,7 @@ msgstr "{customer_link} üçün yeni ödəniş yaradıldı."
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 #: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/team/InvitationsList.tsx
@@ -1945,7 +1945,7 @@ msgstr "Üzv "
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/InvitationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr "Mesaj"
@@ -2355,8 +2355,8 @@ msgstr "Təşkilat {customer_name} silindi."
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastExpandableRow.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/notifications/RecipientsList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -2837,7 +2837,7 @@ msgid "Record no."
 msgstr "Qeyd Nömrəsi"
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Record notification has been sent to organization owners."
+msgid "Record broadcast has been sent to organization owners."
 msgstr "Qeyd bildirişi təşkilat sahiblərinə göndərilib."
 
 #: src/invoices/list/BillingRecordsList.tsx
@@ -3341,7 +3341,7 @@ msgid "Selected"
 msgstr "Seçilmiş"
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Send notification"
+msgid "Send broadcast"
 msgstr "Bildiriş göndər"
 
 #: src/paypal/InvoicesFilter.tsx
@@ -3557,7 +3557,7 @@ msgstr "Başlanğıc"
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -4082,7 +4082,7 @@ msgid "Unable to save user."
 msgstr "İstifadəçi yaddaşda saxlanıla bilmir."
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Unable to send record notification."
+msgid "Unable to send record broadcast."
 msgstr "Qeyd bildirişini göndərmək mümkün deyil."
 
 #: src/issues/comments/effects.ts
@@ -4131,7 +4131,7 @@ msgstr "Ödənilməmiş"
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
-#: src/notifications/NotificationUpdateButton.tsx
+#: src/notifications/BroadcastUpdateButton.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -4145,7 +4145,7 @@ msgid "Update floating IPs"
 msgstr "Dəyişən IP-leri yeniləyin"
 
 #: src/user/hooks/HookDetailsDialog.tsx
-msgid "Update notification"
+msgid "Update broadcast"
 msgstr "Bildirişi yeniləyin"
 
 #: src/user/support/UserEditForm.tsx

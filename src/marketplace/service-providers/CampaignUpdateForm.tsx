@@ -1,6 +1,7 @@
 import { Modal } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
+import { StepIndicator } from '@waldur/broadcasts/StepIndicator';
 import { required } from '@waldur/core/validators';
 import {
   FormContainer,
@@ -15,7 +16,6 @@ import { translate } from '@waldur/i18n';
 import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { CAMPAIGN_CREATE_FORM_ID } from '@waldur/marketplace/service-providers/constants';
 import { CampaignFormData } from '@waldur/marketplace/service-providers/types';
-import { StepIndicator } from '@waldur/notifications/StepIndicator';
 
 interface OwnProps {
   submitting: boolean;

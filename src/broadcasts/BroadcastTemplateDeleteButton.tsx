@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
 
+import { deleteBroadcastTemplate } from '@waldur/broadcasts/api';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
-import { deleteNotificationTemplate } from '@waldur/notifications/api';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-export const NotificationTemplateDeleteButton = ({ row, refetch }) => {
+export const BroadcastTemplateDeleteButton = ({ template, refetch }) => {
   const dispatch = useDispatch();
   const openDialog = async () => {
     try {
@@ -15,7 +15,7 @@ export const NotificationTemplateDeleteButton = ({ row, refetch }) => {
         translate(
           'Are you sure you want to delete the template {template_name}?',
           {
-            template_name: <strong>{row.name}</strong>,
+            template_name: <strong>{template.name}</strong>,
           },
           formatJsxTemplate,
         ),
@@ -23,7 +23,7 @@ export const NotificationTemplateDeleteButton = ({ row, refetch }) => {
     } catch {
       return;
     }
-    await deleteNotificationTemplate(row.uuid);
+    await deleteBroadcastTemplate(template.uuid);
     await refetch();
   };
   return (

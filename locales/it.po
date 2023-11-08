@@ -311,7 +311,7 @@ msgid "Add new project"
 msgstr "Aggiungi nuovo progetto"
 
 #: src/user/hooks/HookCreateButton.tsx
-msgid "Add notification"
+msgid "Add broadcast"
 msgstr "Aggiungi notifica"
 
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
@@ -789,7 +789,7 @@ msgstr "Token di autenticazione"
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr "L'autenticazione con Mobile ID è stata annullata dall'utente o scaduta. Dettagli:"
 
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 msgid "Author"
 msgstr "Autore"
 
@@ -864,7 +864,7 @@ msgstr "Provider di Azure"
 #: src/error/InvalidQuotaPage.tsx
 #: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
-#: src/notifications/NotificationFooter.tsx
+#: src/notifications/BroadcastFooter.tsx
 msgid "Back"
 msgstr "Indietro"
 
@@ -1440,7 +1440,7 @@ msgstr "Il messaggio di conferma è stato aggiornato correttamente."
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageFormContainer.tsx
 #: src/support/OfferingPluginSecretOptionsForm.tsx
-msgid "Confirmation notification template"
+msgid "Confirmation broadcast template"
 msgstr "Modello di notifica di conferma"
 
 #: src/customer/team/PendingReviewDialog.tsx
@@ -1531,7 +1531,7 @@ msgstr "Paese"
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
-#: src/notifications/NotificationCreateButton.tsx
+#: src/notifications/BroadcastCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -1589,7 +1589,7 @@ msgid "Create node"
 msgstr "Crea nodo"
 
 #: src/user/hooks/HookDetailsDialog.tsx
-msgid "Create notification"
+msgid "Create broadcast"
 msgstr "Crea notifica"
 
 #: src/customer/create/CustomerCreateForm.tsx
@@ -1698,7 +1698,7 @@ msgstr "Creato un nuovo pagamento per {customer_link}."
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 #: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/team/InvitationsList.tsx
@@ -3920,7 +3920,7 @@ msgstr "Dimensione della memoria in GIB"
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/InvitationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr "Messaggio"
@@ -4481,7 +4481,7 @@ msgstr "Notifiche"
 msgid "Notifications allow to be informed when a certain event has occurred."
 msgstr "Le notifiche consentono di essere informate quando si è verificato un determinato evento."
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/BroadcastCreateDialog.tsx
 msgid "Notifications has been sent to {count} users."
 msgstr "Le notifiche sono state inviate a {count} utenti."
 
@@ -4648,8 +4648,8 @@ msgstr "Tipo di offerta"
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastExpandableRow.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/notifications/RecipientsList.tsx
 #: src/providers/dashboard/ProviderDashboard.tsx
 msgid "Offerings"
@@ -4973,8 +4973,8 @@ msgstr "L'organizzazione {customer_name} è stata eliminata."
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastExpandableRow.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/notifications/RecipientsList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -6031,7 +6031,7 @@ msgid "Record no."
 msgstr "Registra no."
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Record notification has been sent to organization owners."
+msgid "Record broadcast has been sent to organization owners."
 msgstr "La notifica dei record è stata inviata ai proprietari dell'organizzazione."
 
 #: src/invoices/list/BillingRecordsList.tsx
@@ -7012,7 +7012,7 @@ msgid "Select offering..."
 msgstr "Seleziona offerta..."
 
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 msgid "Select offerings..."
 msgstr "Seleziona le offerte..."
 
@@ -7031,7 +7031,7 @@ msgstr "Selezionare l'organizzazione..."
 msgid "Select organization roles"
 msgstr "Selezionare i ruoli dell'organizzazione"
 
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 msgid "Select organizations..."
 msgstr "Seleziona organizzazioni..."
 
@@ -7165,7 +7165,7 @@ msgid "Selector"
 msgstr "Selettore"
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Send notification"
+msgid "Send broadcast"
 msgstr "Invia notifica"
 
 #: src/paypal/InvoicesFilter.tsx
@@ -7580,7 +7580,7 @@ msgstr "Avvio"
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -7687,8 +7687,8 @@ msgstr "Dimensioni di archiviazione in GiB"
 msgid "Storage type"
 msgstr "Tipo di archiviazione"
 
-#: src/notifications/NotificationForm.tsx
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastForm.tsx
+#: src/notifications/BroadcastList.tsx
 msgid "Subject"
 msgstr "Oggetto"
 
@@ -7944,7 +7944,7 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr "Nome tecnico destinato all'integrazione e alla creazione di report automatizzati. Si prega di utilizzare solo lettere latine senza spazi."
 
 #: src/issues/create/IssueCreateForm.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -8580,10 +8580,10 @@ msgid "Unable to create node."
 msgstr "Impossibile creare il nodo."
 
 #: src/user/hooks/utils.ts
-msgid "Unable to create notification."
+msgid "Unable to create broadcast."
 msgstr "Impossibile creare una notifica."
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/BroadcastCreateDialog.tsx
 msgid "Unable to create notifications."
 msgstr "Impossibile creare notifiche."
 
@@ -9114,7 +9114,7 @@ msgid "Unable to send feedback."
 msgstr "Impossibile inviare un feedback."
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Unable to send record notification."
+msgid "Unable to send record broadcast."
 msgstr "Impossibile inviare una notifica di record."
 
 #: src/marketplace/resources/SetBackendIdDialog.tsx
@@ -9214,7 +9214,7 @@ msgid "Unable to update network MTU."
 msgstr "Impossibile aggiornare MTU di rete."
 
 #: src/user/hooks/utils.ts
-msgid "Unable to update notification."
+msgid "Unable to update broadcast."
 msgstr "Impossibile aggiornare la notifica."
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
@@ -9372,7 +9372,7 @@ msgstr "Annulla pubblicazione come Google Calendar"
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
-#: src/notifications/NotificationUpdateButton.tsx
+#: src/notifications/BroadcastUpdateButton.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -9406,7 +9406,7 @@ msgid "Update location"
 msgstr "Aggiorna posizione"
 
 #: src/user/hooks/HookDetailsDialog.tsx
-msgid "Update notification"
+msgid "Update broadcast"
 msgstr "Notifica di aggiornamento"
 
 #: src/openstack/openstack-instance/actions/update-internal-ips/utils.ts
@@ -10335,7 +10335,7 @@ msgstr "rete"
 msgid "networks"
 msgstr "reti"
 
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 msgid "notifications"
 msgstr "notifiche"
 

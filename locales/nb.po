@@ -315,7 +315,7 @@ msgid "Add new project"
 msgstr "Legg til nytt prosjekt"
 
 #: src/user/hooks/HookCreateButton.tsx
-msgid "Add notification"
+msgid "Add broadcast"
 msgstr "Legg til varsling"
 
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
@@ -793,7 +793,7 @@ msgstr "Autentiseringstoken"
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr "Godkjenning med mobil-ID har blitt avbrutt av brukeren eller tidsavbrutt. Detaljer:"
 
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 msgid "Author"
 msgstr "Forfatter"
 
@@ -868,7 +868,7 @@ msgstr "Azure-leverandør"
 #: src/error/InvalidQuotaPage.tsx
 #: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
-#: src/notifications/NotificationFooter.tsx
+#: src/notifications/BroadcastFooter.tsx
 msgid "Back"
 msgstr "Tilbake"
 
@@ -1444,7 +1444,7 @@ msgstr "Bekreftelsesmelding har blitt oppdatert."
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageFormContainer.tsx
 #: src/support/OfferingPluginSecretOptionsForm.tsx
-msgid "Confirmation notification template"
+msgid "Confirmation broadcast template"
 msgstr "Bekreftelsesvarselmal"
 
 #: src/customer/team/PendingReviewDialog.tsx
@@ -1535,7 +1535,7 @@ msgstr "Land"
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
-#: src/notifications/NotificationCreateButton.tsx
+#: src/notifications/BroadcastCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -1593,7 +1593,7 @@ msgid "Create node"
 msgstr "Opprett node"
 
 #: src/user/hooks/HookDetailsDialog.tsx
-msgid "Create notification"
+msgid "Create broadcast"
 msgstr "Opprett varsel"
 
 #: src/customer/create/CustomerCreateForm.tsx
@@ -1702,7 +1702,7 @@ msgstr "Opprettet en ny betaling for {customer_link}."
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 #: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/team/InvitationsList.tsx
@@ -3924,7 +3924,7 @@ msgstr "Minnestørrelse i GiB"
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/InvitationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr "Melding"
@@ -4485,7 +4485,7 @@ msgstr "Varslinger"
 msgid "Notifications allow to be informed when a certain event has occurred."
 msgstr "Varsler tillater å bli informert når en bestemt hendelse har oppstått."
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/BroadcastCreateDialog.tsx
 msgid "Notifications has been sent to {count} users."
 msgstr "Varslinger er sendt til {count} brukere."
 
@@ -4652,8 +4652,8 @@ msgstr "Tilbudstype"
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastExpandableRow.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/notifications/RecipientsList.tsx
 #: src/providers/dashboard/ProviderDashboard.tsx
 msgid "Offerings"
@@ -4977,8 +4977,8 @@ msgstr "Organisasjonen {customer_name} har blitt slettet."
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastExpandableRow.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/notifications/RecipientsList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -6035,7 +6035,7 @@ msgid "Record no."
 msgstr "Ta opp nr."
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Record notification has been sent to organization owners."
+msgid "Record broadcast has been sent to organization owners."
 msgstr "Registreringsvarsling er sendt til organisasjonseiere."
 
 #: src/invoices/list/BillingRecordsList.tsx
@@ -7016,7 +7016,7 @@ msgid "Select offering..."
 msgstr "Velg tilbud..."
 
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 msgid "Select offerings..."
 msgstr "Velg tilbud..."
 
@@ -7035,7 +7035,7 @@ msgstr "Velg organisasjon..."
 msgid "Select organization roles"
 msgstr "Velg organisasjonsroller"
 
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 msgid "Select organizations..."
 msgstr "Velg organisasjoner..."
 
@@ -7169,7 +7169,7 @@ msgid "Selector"
 msgstr "Velger"
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Send notification"
+msgid "Send broadcast"
 msgstr "Send varsel"
 
 #: src/paypal/InvoicesFilter.tsx
@@ -7584,7 +7584,7 @@ msgstr "Starter"
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -7691,8 +7691,8 @@ msgstr "Lagringsstørrelse i GiB"
 msgid "Storage type"
 msgstr "Lagringstype"
 
-#: src/notifications/NotificationForm.tsx
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastForm.tsx
+#: src/notifications/BroadcastList.tsx
 msgid "Subject"
 msgstr "Emne"
 
@@ -7948,7 +7948,7 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr "Teknisk navn beregnet til integration og automatiseret rapportering. Vennligst bruk latinske bokstaver uten mellomrom."
 
 #: src/issues/create/IssueCreateForm.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -8584,10 +8584,10 @@ msgid "Unable to create node."
 msgstr "Kan ikke opprette node."
 
 #: src/user/hooks/utils.ts
-msgid "Unable to create notification."
+msgid "Unable to create broadcast."
 msgstr "Kan ikke opprette varsling."
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/BroadcastCreateDialog.tsx
 msgid "Unable to create notifications."
 msgstr "Kan ikke opprette varslinger."
 
@@ -9118,7 +9118,7 @@ msgid "Unable to send feedback."
 msgstr "Kan ikke sende tilbakemelding."
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Unable to send record notification."
+msgid "Unable to send record broadcast."
 msgstr "Kan ikke sende postvarsling."
 
 #: src/marketplace/resources/SetBackendIdDialog.tsx
@@ -9218,7 +9218,7 @@ msgid "Unable to update network MTU."
 msgstr "Kan ikke oppdatere nettverket MTU."
 
 #: src/user/hooks/utils.ts
-msgid "Unable to update notification."
+msgid "Unable to update broadcast."
 msgstr "Kan ikke oppdatere varsling."
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
@@ -9376,7 +9376,7 @@ msgstr "Fjern publiseringen som Google Kalender"
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
-#: src/notifications/NotificationUpdateButton.tsx
+#: src/notifications/BroadcastUpdateButton.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -9410,7 +9410,7 @@ msgid "Update location"
 msgstr "Oppdater plassering"
 
 #: src/user/hooks/HookDetailsDialog.tsx
-msgid "Update notification"
+msgid "Update broadcast"
 msgstr "Varsel om oppdatering"
 
 #: src/openstack/openstack-instance/actions/update-internal-ips/utils.ts
@@ -10339,7 +10339,7 @@ msgstr "nettverk"
 msgid "networks"
 msgstr "nettverk"
 
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 msgid "notifications"
 msgstr "Varslinger"
 

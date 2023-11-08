@@ -4,18 +4,18 @@ import { useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { sendNotification } from './api';
+import { sendBroadcast } from './api';
 
-export const NotificationSendButton = ({ notification, refetch }) => {
+export const BroadcastSendButton = ({ broadcast, refetch }) => {
   const dispatch = useDispatch();
 
   const callback = async () => {
     try {
-      await sendNotification(notification.uuid);
+      await sendBroadcast(broadcast.uuid);
       await refetch();
-      dispatch(showSuccess(translate('Notification has been sent.')));
+      dispatch(showSuccess(translate('Broadcast has been sent.')));
     } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to send notification.')));
+      dispatch(showErrorResponse(e, translate('Unable to send broadcast.')));
     }
   };
   return (

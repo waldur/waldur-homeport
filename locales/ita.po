@@ -208,7 +208,7 @@ msgid "Add new project"
 msgstr ""
 
 #: src/user/hooks/hook-list.js
-msgid "Add notification"
+msgid "Add broadcast"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingCreateButton.tsx
@@ -1186,7 +1186,7 @@ msgid "Create network for OpenStack tenant"
 msgstr ""
 
 #: src/user/hooks/hook-details.html
-msgid "Create notification"
+msgid "Create broadcast"
 msgstr ""
 
 #: src/customer/create/customer-create-dialog.html
@@ -4662,7 +4662,7 @@ msgid "Record no."
 msgstr ""
 
 #: src/billing/billing-utils.js
-msgid "Record notification has been sent to organization owners."
+msgid "Record broadcast has been sent to organization owners."
 msgstr ""
 
 #: src/billing/billing-records-list.js
@@ -5401,7 +5401,7 @@ msgid "Selected"
 msgstr ""
 
 #: src/billing/billing-utils.js
-msgid "Send notification"
+msgid "Send broadcast"
 msgstr ""
 
 #: src/intro/expert-manager-intro.js
@@ -6455,7 +6455,7 @@ msgid "Unable to save user."
 msgstr ""
 
 #: src/billing/billing-utils.js
-msgid "Unable to send record notification."
+msgid "Unable to send record broadcast."
 msgstr ""
 
 #: src/providers/details/provider-project-link-quotas.js
@@ -6517,7 +6517,7 @@ msgid "Update floating IPs"
 msgstr ""
 
 #: src/user/hooks/hook-details.html
-msgid "Update notification"
+msgid "Update broadcast"
 msgstr ""
 
 #: src/project/project-policies.html

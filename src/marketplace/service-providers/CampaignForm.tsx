@@ -2,6 +2,7 @@ import { Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { FormName } from 'redux-form';
 
+import { StepIndicator } from '@waldur/broadcasts/StepIndicator';
 import { required } from '@waldur/core/validators';
 import {
   FormContainer,
@@ -15,7 +16,6 @@ import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { CampaignFormData } from '@waldur/marketplace/service-providers/types';
-import { StepIndicator } from '@waldur/notifications/StepIndicator';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 export const CampaignForm = ({

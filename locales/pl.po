@@ -49,7 +49,7 @@ msgid "Add new project"
 msgstr "Dodaj nowy projekt"
 
 #: src/user/hooks/HookCreateButton.tsx
-msgid "Add notification"
+msgid "Add broadcast"
 msgstr "Dodaj powiadomienie"
 
 #: src/customer/list/OrganizationCreateButton.tsx
@@ -184,7 +184,7 @@ msgstr "Aktywność uwierzytelniania"
 msgid "Authentication token"
 msgstr "Token uwierzytelniania"
 
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 msgid "Author"
 msgstr "Autor"
 

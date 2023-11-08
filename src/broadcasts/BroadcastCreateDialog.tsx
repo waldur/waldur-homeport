@@ -6,19 +6,19 @@ import { getFormValues, reduxForm } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
-import { NOTIFICATION_CREATE_FORM_ID } from './constants';
-import { NotificationFooter } from './NotificationFooter';
-import { NotificationForm } from './NotificationForm';
-import { NotificationFormData } from './types';
+import { BroadcastFooter } from './BroadcastFooter';
+import { BroadcastForm } from './BroadcastForm';
+import { BROADCAST_CREATE_FORM_ID } from './constants';
+import { BroadcastFormData } from './types';
 
-export const NotificationCreateDialog = connect((state: RootState) => ({
-  formValues: getFormValues(NOTIFICATION_CREATE_FORM_ID)(state),
+export const BroadcastCreateDialog = connect((state: RootState) => ({
+  formValues: getFormValues(BROADCAST_CREATE_FORM_ID)(state),
 }))(
   reduxForm<
-    NotificationFormData,
-    { resolve: { refetch }; formValues: NotificationFormData }
+    BroadcastFormData,
+    { resolve: { refetch }; formValues: BroadcastFormData }
   >({
-    form: NOTIFICATION_CREATE_FORM_ID,
+    form: BROADCAST_CREATE_FORM_ID,
   })(({ submitting, invalid, handleSubmit, resolve, formValues }) => {
     const [step, setStep] = useState(0);
 
@@ -27,13 +27,13 @@ export const NotificationCreateDialog = connect((state: RootState) => ({
         <Modal.Header closeButton className="without-border">
           <h2 className="fw-bolder">{translate('Create a broadcast')}</h2>
         </Modal.Header>
-        <NotificationForm
+        <BroadcastForm
           submitting={submitting}
           formValues={formValues}
           step={step}
           setStep={setStep}
         />
-        <NotificationFooter
+        <BroadcastFooter
           step={step}
           setStep={setStep}
           handleSubmit={handleSubmit}
