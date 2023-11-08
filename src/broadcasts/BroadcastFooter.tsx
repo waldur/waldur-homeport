@@ -7,78 +7,67 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import {
-  createNotification,
-  sendNotification,
-  updateNotification,
-} from './api';
-import { NotificationFormData } from './types';
-import { serializeNotification } from './utils';
+import { createBroadcast, sendBroadcast, updateBroadcast } from './api';
+import { BroadcastFormData } from './types';
+import { serializeBroadcast } from './utils';
 
-export const NotificationFooter = ({
+export const BroadcastFooter = ({
   step,
   setStep,
   handleSubmit,
   refetch,
   disabled,
-  notificationId,
+  broadcastId,
 }: {
   step;
   setStep;
   handleSubmit;
   refetch;
   disabled;
-  notificationId?;
+  broadcastId?;
 }) => {
   const dispatch = useDispatch();
   const saveAsDraft = useCallback(
-    async (formData: NotificationFormData) => {
+    async (formData: BroadcastFormData) => {
       try {
-        if (notificationId) {
-          await updateNotification(
-            notificationId,
-            serializeNotification(formData),
-          );
+        if (broadcastId) {
+          await updateBroadcast(broadcastId, serializeBroadcast(formData));
         } else {
-          await createNotification(serializeNotification(formData));
+          await createBroadcast(serializeBroadcast(formData));
         }
         await refetch();
         dispatch(
-          showSuccess(translate('Notification has been saved as a draft.')),
+          showSuccess(translate('Broadcast has been saved as a draft.')),
         );
         dispatch(closeModalDialog());
       } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to save notification.')),
-        );
+        dispatch(showErrorResponse(e, translate('Unable to save broadcast.')));
       }
     },
-    [dispatch, refetch, notificationId],
+    [dispatch, refetch, broadcastId],
   );
 
   const saveAndSend = useCallback(
-    async (formData: NotificationFormData) => {
+    async (formData: BroadcastFormData) => {
       try {
         let response;
-        if (notificationId) {
-          response = await updateNotification(
-            notificationId,
-            serializeNotification(formData),
+        if (broadcastId) {
+          response = await updateBroadcast(
+            broadcastId,
+            serializeBroadcast(formData),
           );
         } else {
-          response = await createNotification(serializeNotification(formData));
+          response = await createBroadcast(serializeBroadcast(formData));
         }
-        await sendNotification((response.data as { uuid: string }).uuid);
+        await sendBroadcast((response.data as { uuid: string }).uuid);
         await refetch();
-        dispatch(showSuccess(translate('Notification has been sent.')));
+        dispatch(showSuccess(translate('Broadcast has been sent.')));
         dispatch(closeModalDialog());
       } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to send notification.')),
-        );
+        dispatch(showErrorResponse(e, translate('Unable to send broadcast.')));
       }
     },
-    [dispatch, refetch, notificationId],
+    [dispatch, refetch, broadcastId],
   );
 
   return (

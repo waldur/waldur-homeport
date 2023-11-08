@@ -6,26 +6,26 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { NotificationResponseData } from './types';
-import { parseNotification } from './utils';
+import { BroadcastResponseData } from './types';
+import { parseBroadcast } from './utils';
 
-const NotificationUpdateDialog = lazyComponent(
-  () => import('./NotificationUpdateDialog'),
-  'NotificationUpdateDialog',
+const BroadcastUpdateDialog = lazyComponent(
+  () => import('./BroadcastUpdateDialog'),
+  'BroadcastUpdateDialog',
 );
 
-export const NotificationUpdateButton: FunctionComponent<{
-  notification: NotificationResponseData;
+export const BroadcastUpdateButton: FunctionComponent<{
+  broadcast: BroadcastResponseData;
   refetch;
-}> = ({ notification, refetch }) => {
+}> = ({ broadcast, refetch }) => {
   const dispatch = useDispatch();
   const callback = () =>
     dispatch(
-      openModalDialog(NotificationUpdateDialog, {
+      openModalDialog(BroadcastUpdateDialog, {
         dialogClassName: 'modal-dialog-centered',
         resolve: {
-          initialValues: parseNotification(notification),
-          uuid: notification.uuid,
+          initialValues: parseBroadcast(broadcast),
+          uuid: broadcast.uuid,
           refetch,
         },
         size: 'xl',

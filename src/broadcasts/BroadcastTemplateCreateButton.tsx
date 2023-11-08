@@ -6,23 +6,23 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-const NotificationCreateDialog = lazyComponent(
-  () => import('./NotificationCreateDialog'),
-  'NotificationCreateDialog',
+const BroadcastTemplateCreateDialog = lazyComponent(
+  () => import('./BroadcastTemplateCreateDialog'),
+  'BroadcastTemplateCreateDialog',
 );
 
-export const NotificationCreateButton: FunctionComponent<{ refetch }> = ({
+export const BroadcastTemplateCreateButton: FunctionComponent<{ refetch }> = ({
   refetch,
 }) => {
   const dispatch = useDispatch();
   const callback = () =>
     dispatch(
-      openModalDialog(NotificationCreateDialog, {
+      openModalDialog(BroadcastTemplateCreateDialog, {
         dialogClassName: 'modal-dialog-centered',
         resolve: {
           refetch,
         },
-        size: 'xl',
+        size: 'lg',
       }),
     );
   return (

@@ -1,11 +1,11 @@
+import { BroadcastTemplateActions } from '@waldur/broadcasts/BroadcastTemplateActions';
+import { BroadcastTemplateCreateButton } from '@waldur/broadcasts/BroadcastTemplateCreateButton';
+import { BroadcastTemplateExpandableRow } from '@waldur/broadcasts/BroadcastTemplateExpandableRow';
 import { translate } from '@waldur/i18n';
-import { NotificationTemplateActions } from '@waldur/notifications/NotificationTemplateActions';
-import { NotificationTemplateCreateButton } from '@waldur/notifications/NotificationTemplateCreateButton';
-import { NotificationTemplateExpandableRow } from '@waldur/notifications/NotificationTemplateExpandableRow';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-export const NotificationTemplateList = () => {
+export const BroadcastTemplateList = () => {
   const tableProps = useTable({
     table: 'broadcast-templates',
     fetchData: createFetcher('broadcast-message-templates'),
@@ -23,14 +23,14 @@ export const NotificationTemplateList = () => {
           render: ({ row }) => row.subject,
         },
       ]}
-      verboseName={translate('notification templates')}
-      actions={<NotificationTemplateCreateButton refetch={tableProps.fetch} />}
-      expandableRow={NotificationTemplateExpandableRow}
+      verboseName={translate('broadcast templates')}
+      actions={<BroadcastTemplateCreateButton refetch={tableProps.fetch} />}
+      expandableRow={BroadcastTemplateExpandableRow}
       initialPageSize={10}
       showPageSizeSelector={true}
       expandableRowClassName="bg-gray-200"
       hoverableRow={({ row }) => (
-        <NotificationTemplateActions row={row} refetch={tableProps.fetch} />
+        <BroadcastTemplateActions row={row} refetch={tableProps.fetch} />
       )}
       hasQuery={true}
     />

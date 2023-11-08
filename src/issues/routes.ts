@@ -51,13 +51,13 @@ const IssueDetailsContainer = lazyComponent(
   () => import('./IssueDetails'),
   'IssueDetails',
 );
-const NotificationList = lazyComponent(
-  () => import('../notifications/NotificationList'),
-  'NotificationList',
+const BroadcastList = lazyComponent(
+  () => import('../broadcasts/BroadcastList'),
+  'BroadcastList',
 );
-const NotificationTemplateList = lazyComponent(
-  () => import('../notifications/NotificationTemplateList'),
-  'NotificationTemplateList',
+const BroadcastTemplateList = lazyComponent(
+  () => import('../broadcasts/BroadcastTemplateList'),
+  'BroadcastTemplateList',
 );
 
 export const states: StateDeclaration[] = [
@@ -177,7 +177,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.broadcast',
     url: 'broadcast/',
-    component: NotificationList,
+    component: BroadcastList,
     data: {
       breadcrumb: () => translate('Broadcast'),
     },
@@ -186,7 +186,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.broadcast-templates',
     url: 'broadcast-templates/',
-    component: NotificationTemplateList,
+    component: BroadcastTemplateList,
     data: {
       breadcrumb: () => translate('Broadcast templates'),
     },

@@ -6,49 +6,49 @@ import { getFormValues, reduxForm } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
-import { NOTIFICATION_UPDATE_FORM_ID } from './constants';
-import { NotificationFooter } from './NotificationFooter';
-import { NotificationForm } from './NotificationForm';
-import { NotificationFormData } from './types';
+import { BroadcastFooter } from './BroadcastFooter';
+import { BroadcastForm } from './BroadcastForm';
+import { BROADCAST_UPDATE_FORM_ID } from './constants';
+import { BroadcastFormData } from './types';
 
-interface NotificationUpdateDialogOwnProps {
+interface BroadcastUpdateDialogOwnProps {
   resolve: {
-    initialValues: NotificationFormData;
+    initialValues: BroadcastFormData;
     uuid: string;
     refetch(): void;
   };
-  formValues: NotificationFormData;
+  formValues: BroadcastFormData;
 }
 
-export const NotificationUpdateDialog = connect(
-  (state: RootState, ownProps: NotificationUpdateDialogOwnProps) => ({
+export const BroadcastUpdateDialog = connect(
+  (state: RootState, ownProps: BroadcastUpdateDialogOwnProps) => ({
     initialValues: ownProps.resolve.initialValues,
-    formValues: getFormValues(NOTIFICATION_UPDATE_FORM_ID)(state),
+    formValues: getFormValues(BROADCAST_UPDATE_FORM_ID)(state),
   }),
 )(
-  reduxForm<NotificationFormData, NotificationUpdateDialogOwnProps>({
-    form: NOTIFICATION_UPDATE_FORM_ID,
+  reduxForm<BroadcastFormData, BroadcastUpdateDialogOwnProps>({
+    form: BROADCAST_UPDATE_FORM_ID,
   })(({ submitting, invalid, handleSubmit, resolve, formValues }) => {
     const [step, setStep] = useState(0);
 
     return (
       <form>
         <Modal.Header closeButton className="without-border">
-          <h2 className="fw-bolder">{translate('Update a notification')}</h2>
+          <h2 className="fw-bolder">{translate('Update a broadcast')}</h2>
         </Modal.Header>
-        <NotificationForm
+        <BroadcastForm
           submitting={submitting}
           formValues={formValues}
           step={step}
           setStep={setStep}
         />
-        <NotificationFooter
+        <BroadcastFooter
           step={step}
           setStep={setStep}
           handleSubmit={handleSubmit}
           disabled={invalid || submitting}
           refetch={resolve.refetch}
-          notificationId={resolve.uuid}
+          broadcastId={resolve.uuid}
         />
       </form>
     );

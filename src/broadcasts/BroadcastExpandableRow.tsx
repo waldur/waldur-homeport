@@ -6,10 +6,10 @@ import { translate } from '@waldur/i18n';
 
 import { OptionsList } from './OptionsList';
 import { RecipientsField } from './RecipientsField';
-import { NotificationResponseData } from './types';
+import { BroadcastResponseData } from './types';
 
-export const NotificationExpandableRow: FunctionComponent<{
-  row: NotificationResponseData;
+export const BroadcastExpandableRow: FunctionComponent<{
+  row: BroadcastResponseData;
 }> = ({ row }) => (
   <Row>
     <Col sm={8}>

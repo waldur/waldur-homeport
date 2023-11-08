@@ -3,6 +3,7 @@ import { FC } from 'react';
 
 import { AdministrationProfile } from '@waldur/administration/dashboard/AdministrationProfile';
 import { HealthChecks } from '@waldur/administration/dashboard/HealthChecks';
+import { BroadcastList } from '@waldur/broadcasts/BroadcastList';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -11,7 +12,6 @@ import {
   getBackendHealthStatus,
   isWorking,
 } from '@waldur/navigation/BackendHealthStatusIndicator';
-import { NotificationList } from '@waldur/notifications/NotificationList';
 
 import { StatisticsCards } from './StatisticsCards';
 
@@ -45,7 +45,7 @@ export const SupportDashboard: FC = () => {
         initialPageSize={5}
         showPageSizeSelector={false}
       />
-      <NotificationList title={translate('Broadcasts')} initialPageSize={5} />
+      <BroadcastList title={translate('Broadcasts')} initialPageSize={5} />
     </>
   );
 };

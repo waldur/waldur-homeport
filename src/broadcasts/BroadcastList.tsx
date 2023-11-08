@@ -3,15 +3,15 @@ import { FunctionComponent } from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { connectTable, createFetcher, Table } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { TableOptionsType } from '@waldur/table/types';
 
-import { NotificationCreateButton } from './NotificationCreateButton';
-import { NotificationExpandableRow } from './NotificationExpandableRow';
-import { NotificationSendButton } from './NotificationSendButton';
-import { NotificationUpdateButton } from './NotificationUpdateButton';
-import { NotificationResponseData } from './types';
+import { BroadcastCreateButton } from './BroadcastCreateButton';
+import { BroadcastExpandableRow } from './BroadcastExpandableRow';
+import { BroadcastSendButton } from './BroadcastSendButton';
+import { BroadcastUpdateButton } from './BroadcastUpdateButton';
+import { BroadcastResponseData } from './types';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   return (
@@ -20,18 +20,18 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={[
         {
           title: translate('Author'),
-          render: ({ row }: { row: NotificationResponseData }) =>
+          render: ({ row }: { row: BroadcastResponseData }) =>
             row.author_full_name,
           orderField: 'author_full_name',
         },
         {
           title: translate('Subject'),
-          render: ({ row }: { row: NotificationResponseData }) => row.subject,
+          render: ({ row }: { row: BroadcastResponseData }) => row.subject,
           orderField: 'subject',
         },
         {
           title: translate('State'),
-          render: ({ row }: { row: NotificationResponseData }) => (
+          render: ({ row }: { row: BroadcastResponseData }) => (
             <StateIndicator
               label={translate(row.state)}
               variant={
@@ -50,20 +50,17 @@ const TableComponent: FunctionComponent<any> = (props) => {
           orderField: 'created',
         },
       ]}
-      verboseName={translate('notifications')}
-      actions={<NotificationCreateButton refetch={props.fetch} />}
-      expandableRow={NotificationExpandableRow}
+      verboseName={translate('broadcasts')}
+      actions={<BroadcastCreateButton refetch={props.fetch} />}
+      expandableRow={BroadcastExpandableRow}
       initialPageSize={10}
       showPageSizeSelector={true}
       expandableRowClassName="bg-gray-200"
       hoverableRow={({ row }) =>
         row.state === 'DRAFT' ? (
           <>
-            <NotificationUpdateButton
-              notification={row}
-              refetch={props.fetch}
-            />
-            <NotificationSendButton notification={row} refetch={props.fetch} />
+            <BroadcastUpdateButton broadcast={row} refetch={props.fetch} />
+            <BroadcastSendButton broadcast={row} refetch={props.fetch} />
           </>
         ) : null
       }
@@ -78,6 +75,6 @@ const TableOptions: TableOptionsType = {
   queryField: 'subject',
 };
 
-export const NotificationList = connectTable(TableOptions)(
+export const BroadcastList = connectTable(TableOptions)(
   TableComponent,
 ) as React.ComponentType<Partial<TableProps>>;

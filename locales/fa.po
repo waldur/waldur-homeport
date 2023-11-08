@@ -243,7 +243,7 @@ msgid "Add new project"
 msgstr "پروژه جدید ایجاد کنید"
 
 #: src/user/hooks/HookCreateButton.tsx
-msgid "Add notification"
+msgid "Add broadcast"
 msgstr "اعلان را اضافه کنید"
 
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
@@ -670,7 +670,7 @@ msgstr "ارائه دهنده Azure"
 #: src/error/InvalidQuotaPage.tsx
 #: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
-#: src/notifications/NotificationFooter.tsx
+#: src/notifications/BroadcastFooter.tsx
 msgid "Back"
 msgstr "بازگشت"
 
@@ -1167,7 +1167,7 @@ msgstr "کشور"
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
-#: src/notifications/NotificationCreateButton.tsx
+#: src/notifications/BroadcastCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -1221,7 +1221,7 @@ msgid "Create node"
 msgstr "ایجاد node"
 
 #: src/user/hooks/HookDetailsDialog.tsx
-msgid "Create notification"
+msgid "Create broadcast"
 msgstr "ایجاد اعلان"
 
 #: src/customer/create/CustomerCreateForm.tsx
@@ -1322,7 +1322,7 @@ msgstr "ایجاد پرداخت جدید برای {customer_link}"
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 #: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/team/InvitationsList.tsx
@@ -2912,7 +2912,7 @@ msgstr "اندازه حافظه در GiB"
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/InvitationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr "پیغام"
@@ -3401,8 +3401,8 @@ msgstr "نوع پیشنهاد"
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastExpandableRow.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/notifications/RecipientsList.tsx
 #: src/providers/dashboard/ProviderDashboard.tsx
 msgid "Offerings"
@@ -3637,8 +3637,8 @@ msgstr "سازمان {customer_name} حذف شده است."
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastExpandableRow.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/notifications/RecipientsList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/OrganizationsList.tsx

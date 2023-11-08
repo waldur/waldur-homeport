@@ -6,30 +6,31 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-const NotificationTemplateUpdateDialog = lazyComponent(
-  () => import('./NotificationTemplateUpdateDialog'),
-  'NotificationTemplateUpdateDialog',
+const BroadcastCreateDialog = lazyComponent(
+  () => import('./BroadcastCreateDialog'),
+  'BroadcastCreateDialog',
 );
 
-export const NotificationTemplateUpdateButton: FunctionComponent<{
-  template;
-  refetch;
-}> = ({ template, refetch }) => {
+export const BroadcastCreateButton: FunctionComponent<{ refetch }> = ({
+  refetch,
+}) => {
   const dispatch = useDispatch();
-  const callback = () => {
+  const callback = () =>
     dispatch(
-      openModalDialog(NotificationTemplateUpdateDialog, {
+      openModalDialog(BroadcastCreateDialog, {
         dialogClassName: 'modal-dialog-centered',
-        resolve: { template, refetch },
-        size: 'lg',
+        resolve: {
+          refetch,
+        },
+        size: 'xl',
       }),
     );
-  };
   return (
     <ActionButton
       action={callback}
-      title={translate('Edit')}
-      icon="fa fa-pencil"
+      title={translate('Create')}
+      icon="fa fa-plus"
+      variant="primary"
     />
   );
 };

@@ -382,7 +382,7 @@ msgid "Add new project"
 msgstr "Lisa uus projekt"
 
 #: src/user/hooks/HookCreateButton.tsx
-msgid "Add notification"
+msgid "Add broadcast"
 msgstr "Lisa teavitus"
 
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
@@ -971,7 +971,7 @@ msgstr "Autentimise žetoon"
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr "Autentimine Mobile ID abil on katkestatud või siis aegunud. Detailid:"
 
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 msgid "Author"
 msgstr "Autor"
 
@@ -1054,7 +1054,7 @@ msgstr "Azure pakkuja"
 #: src/error/InvalidQuotaPage.tsx
 #: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/WizardButtons.tsx
-#: src/notifications/NotificationFooter.tsx
+#: src/notifications/BroadcastFooter.tsx
 msgid "Back"
 msgstr "Tagasi"
 
@@ -1768,7 +1768,7 @@ msgstr "Kinnitusteade on edukalt uuendatud."
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
 #: src/marketplace/offerings/actions/EditConfirmationMessageFormContainer.tsx
 #: src/support/OfferingPluginSecretOptionsForm.tsx
-msgid "Confirmation notification template"
+msgid "Confirmation broadcast template"
 msgstr "Kinnituse teatise mall"
 
 #: src/customer/team/PendingReviewDialog.tsx
@@ -1890,7 +1890,7 @@ msgstr "Riik"
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
-#: src/notifications/NotificationCreateButton.tsx
+#: src/notifications/BroadcastCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -1913,7 +1913,7 @@ msgstr "Loo võrguadapter"
 msgid "Create SQL database in PostgreSQL server"
 msgstr "Loo SQL andmebaas PostgreSQL serverisse"
 
-#: src/notifications/NotificationCreateDialog.tsx
+#: src/notifications/BroadcastCreateDialog.tsx
 msgid "Create a broadcast"
 msgstr "Loo teade"
 
@@ -1939,7 +1939,7 @@ msgstr "Loo ketas"
 msgid "Create group invitation"
 msgstr "Rühma kutse loomine"
 
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 msgid "Create message"
 msgstr "Loo sõnum"
 
@@ -1953,7 +1953,7 @@ msgid "Create node"
 msgstr "Loo sõlm"
 
 #: src/user/hooks/HookDetailsDialog.tsx
-msgid "Create notification"
+msgid "Create broadcast"
 msgstr "Teate loomine"
 
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
@@ -2082,7 +2082,7 @@ msgstr "Loo uus makse kliendile {customer_name}."
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 #: src/project/ProjectOrderItemsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/team/InvitationsList.tsx
@@ -4615,7 +4615,7 @@ msgstr "Mälu suurus GiB"
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/InvitationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr "Teade"
@@ -5172,8 +5172,8 @@ msgstr "Siin pole midagi näidata"
 msgid "Notification has been created."
 msgstr "Teade on loodud."
 
-#: src/notifications/NotificationFooter.tsx
-#: src/notifications/NotificationSendButton.tsx
+#: src/notifications/BroadcastFooter.tsx
+#: src/notifications/BroadcastSendButton.tsx
 msgid "Notification has been sent."
 msgstr "Teade on saadetud."
 
@@ -5369,8 +5369,8 @@ msgstr "Teenuse kasutajate sünkroonimine on ajastatud."
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastExpandableRow.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/notifications/RecipientsList.tsx
 #: src/providers/dashboard/ProviderDashboard.tsx
 msgid "Offerings"
@@ -5715,8 +5715,8 @@ msgstr "Organisatsioon {customer_name} on kustutatud."
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastExpandableRow.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/notifications/RecipientsList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -6837,7 +6837,7 @@ msgid "Record no."
 msgstr "Kande number"
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Record notification has been sent to organization owners."
+msgid "Record broadcast has been sent to organization owners."
 msgstr "Teade kirje kohta on saadetud organisatsiooni omanikele."
 
 #: src/invoices/list/BillingRecordsList.tsx
@@ -7832,7 +7832,7 @@ msgid "Select offering..."
 msgstr "Vali pakkumine..."
 
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 msgid "Select offerings..."
 msgstr "Vali pakkumised..."
 
@@ -7855,7 +7855,7 @@ msgstr "Valige organisatsioon..."
 msgid "Select organization roles"
 msgstr "Organisatsiooni rollide valimine"
 
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 msgid "Select organizations..."
 msgstr "Valige organisatsioonid..."
 
@@ -7893,8 +7893,8 @@ msgstr "Valige projekti rollid"
 msgid "Select provider..."
 msgstr "Vali teenusepakkuja"
 
-#: src/notifications/NotificationFooter.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastFooter.tsx
+#: src/notifications/BroadcastForm.tsx
 msgid "Select recipients"
 msgstr "Vali adressaadid"
 
@@ -7959,7 +7959,7 @@ msgstr "Valige alamvõrk"
 msgid "Select subnets to connect to..."
 msgstr "Valige alamvõrgud ühendamiseks..."
 
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 msgid "Select template..."
 msgstr "Valige mall"
 
@@ -7994,7 +7994,7 @@ msgid "Selected"
 msgstr "Valitud"
 
 #: src/customer/list/FinancialReportSendButton.tsx
-#: src/notifications/NotificationSendButton.tsx
+#: src/notifications/BroadcastSendButton.tsx
 msgid "Send"
 msgstr "Saada"
 
@@ -8002,12 +8002,12 @@ msgstr "Saada"
 msgid "Send invitation"
 msgstr "Saada kutse"
 
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 msgid "Send message to all users"
 msgstr "Saada sõnum kõigile kasutajatele"
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Send notification"
+msgid "Send broadcast"
 msgstr "Saada teade"
 
 #: src/paypal/InvoicesFilter.tsx
@@ -8481,7 +8481,7 @@ msgstr "Käivitan"
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemsTable.tsx
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -8811,7 +8811,7 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr "Integreerimiseks ja automatiseeritud aruandluseks mõeldud tehniline nimi. Palun kasutage ainult tühikuteta ladina tähti."
 
 #: src/issues/create/IssueCreateForm.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/notifications/BroadcastForm.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -9695,7 +9695,7 @@ msgid "Unable to save user."
 msgstr "Kasutajat ei ole võimalik salvestada"
 
 #: src/invoices/list/SendNotificationButton.tsx
-msgid "Unable to send record notification."
+msgid "Unable to send record broadcast."
 msgstr "Ei ole võimalik saata sissekande teadet."
 
 #: src/marketplace/resources/SetBackendIdDialog.tsx
@@ -9846,7 +9846,7 @@ msgstr "Tühista avaldamine Google'i kalendrina "
 #: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
-#: src/notifications/NotificationUpdateButton.tsx
+#: src/notifications/BroadcastUpdateButton.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -9868,7 +9868,7 @@ msgid "Update logo"
 msgstr "Uuenda logo"
 
 #: src/user/hooks/HookDetailsDialog.tsx
-msgid "Update notification"
+msgid "Update broadcast"
 msgstr "Uuenda teated"
 
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
@@ -10802,7 +10802,7 @@ msgstr "võrk"
 msgid "networks"
 msgstr "võrgud"
 
-#: src/notifications/NotificationList.tsx
+#: src/notifications/BroadcastList.tsx
 msgid "notifications"
 msgstr "teated"
 

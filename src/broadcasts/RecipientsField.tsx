@@ -5,10 +5,10 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import { RecipientsListDialog } from './RecipientsListDialog';
-import { NotificationResponseData } from './types';
+import { BroadcastResponseData } from './types';
 
 export const RecipientsField: FunctionComponent<{
-  row: NotificationResponseData;
+  row: BroadcastResponseData;
 }> = ({ row }) => {
   const dispatch = useDispatch();
   const openRecipientsList = () =>

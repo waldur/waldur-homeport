@@ -5,7 +5,7 @@ import { required } from '@waldur/core/validators';
 import { FormContainer, StringField, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 
-export const NotificationTemplateForm = ({
+export const BroadcastTemplateForm = ({
   submitting,
 }: {
   submitting: boolean;

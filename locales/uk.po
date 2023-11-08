@@ -306,7 +306,7 @@ msgid "Add new project"
 msgstr "Додати новий проект"
 
 #: src/user/hooks/HookCreateButton.tsx
-msgid "Add notification"
+msgid "Add broadcast"
 msgstr "Додати сповіщення"
 
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx

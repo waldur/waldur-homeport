@@ -12,20 +12,20 @@ export interface IdNamePair {
   uuid: string;
 }
 
-interface Notification extends Message {
+interface Broadcast extends Message {
   send_at: string;
 }
 
-interface NotificationTemplate extends Message {
+interface BroadcastTemplate extends Message {
   uuid?: string;
   name: string;
 }
 
-export type NotificationTemplateFormData = NotificationTemplate;
+export type BroadcastTemplateFormData = BroadcastTemplate;
 
-export type NotificationTemplateRequestData = NotificationTemplate;
+export type BroadcastTemplateRequestData = BroadcastTemplate;
 
-export interface NotificationFormData extends Notification {
+export interface BroadcastFormData extends Broadcast {
   customers: IdNamePair[];
   offerings: IdNamePair[];
   all_users: boolean;
@@ -46,11 +46,11 @@ interface QueryResponse {
   all_users: boolean;
 }
 
-export interface NotificationRequestData extends Notification {
+export interface BroadcastRequestData extends Broadcast {
   query: QueryRequest;
 }
 
-export interface NotificationResponseData extends Notification {
+export interface BroadcastResponseData extends Broadcast {
   uuid: string;
   query: QueryResponse;
   emails: string[];

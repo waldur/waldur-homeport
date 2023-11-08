@@ -46,7 +46,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 };
 
 const TableOptions = {
-  table: 'notification-recipients',
+  table: 'broadcast-recipients',
   fetchData: createFetcher('broadcast-messages/recipients'),
   mapPropsToFilter: (props) => ({
     all_users: props.query?.all_users,

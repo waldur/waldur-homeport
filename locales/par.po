@@ -173,7 +173,7 @@ msgstr "Select department"
 msgid "Select project..."
 msgstr "Select department..."
 
-#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/BroadcastCreateDialog.tsx
 msgid "Select projects..."
 msgstr "Select departments..."
 

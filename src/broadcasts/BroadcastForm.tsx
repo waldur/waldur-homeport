@@ -16,16 +16,16 @@ import {
 import { templateAutocomplete } from './autocomplete';
 import { RecipientsList } from './RecipientsList';
 import { StepIndicator } from './StepIndicator';
-import { MessageTemplate, NotificationFormData } from './types';
+import { MessageTemplate, BroadcastFormData } from './types';
 
-export const NotificationForm = ({
+export const BroadcastForm = ({
   submitting,
   formValues,
   step,
   setStep,
 }: {
   submitting: boolean;
-  formValues: NotificationFormData;
+  formValues: BroadcastFormData;
   step: number;
   setStep(step: number): void;
 }) => {
