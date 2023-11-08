@@ -57,7 +57,7 @@ export const FormNodeStorageRow = (props: FormNodeStorageRowProps) => {
     if (props?.defaultVolumeType) {
       props.change(
         `${props.parentName}.${props.typeName}`,
-        props.defaultVolumeType,
+        props.defaultVolumeType.value,
       );
     }
     if (props.sizeName === 'system_volume_size') {
@@ -106,6 +106,8 @@ export const FormNodeStorageRow = (props: FormNodeStorageRowProps) => {
             validate={props.typeValidate}
             placeholder={translate('Select volume type') + '...'}
             options={props.volumeTypeChoices}
+            getOptionValue={(option) => option.value}
+            simpleValue
           />
         </td>
       )}

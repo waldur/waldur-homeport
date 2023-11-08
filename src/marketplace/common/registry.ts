@@ -23,7 +23,7 @@ export type LimitParser = (limits: Limits) => Limits;
 interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   type: string;
   formSteps?: OfferingConfigurationFormStep[];
-  component: React.ComponentType<OfferingConfigurationFormProps>;
+  component?: React.ComponentType<OfferingConfigurationFormProps>;
   pluginOptionsForm?: React.ComponentType<any>;
   secretOptionsForm?: React.ComponentType<any>;
   detailsComponent?: React.ComponentType<OrderItemDetailsProps>;

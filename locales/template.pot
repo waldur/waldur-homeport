@@ -924,7 +924,6 @@ msgid "Are you sure you want to revoke this permission?"
 msgstr ""
 
 #: src/rancher/cluster/create/FormNodesStep.tsx
-#: src/rancher/cluster/create/TenantGroup.tsx
 msgid "Are you sure you want to select template? Note this will reset the node plan."
 msgstr ""
 
@@ -1773,11 +1772,6 @@ msgstr ""
 msgid "Cluster IP"
 msgstr ""
 
-#: src/rancher/cluster/create/RancherClusterForm.tsx
-msgid "Cluster description"
-msgstr ""
-
-#: src/rancher/cluster/create/RancherClusterForm.tsx
 #: src/rancher/cluster/create/steps.ts
 msgid "Cluster name"
 msgstr ""
@@ -1923,7 +1917,6 @@ msgstr ""
 #: src/notifications/NotificationTemplateDeleteButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
-#: src/rancher/cluster/create/TenantGroup.tsx
 #: src/resource/actions/AsyncActionItem.tsx
 #: src/resource/actions/ResourceDeleteButton.tsx
 msgid "Confirmation"
@@ -2758,7 +2751,6 @@ msgid "Deploy"
 msgstr ""
 
 #: src/rancher/cluster/create/FormOptionalServicesStep.tsx
-#: src/rancher/cluster/create/RancherClusterForm.tsx
 msgid "Deploy Longhorn block storage after cluster is deployed"
 msgstr ""
 
@@ -3128,6 +3120,7 @@ msgstr ""
 #: src/marketplace/category/admin/CategoryFromDialog.tsx
 #: src/marketplace/category/admin/GroupEditButton.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/marketplace/deploy/DeployPage.tsx
 #: src/marketplace/offerings/OfferingViews.tsx
 #: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
@@ -4944,10 +4937,6 @@ msgstr ""
 msgid "Kubeconfig file"
 msgstr ""
 
-#: src/rancher/cluster/create/NodePanel.tsx
-msgid "Kubernetes node #{index}"
-msgstr ""
-
 #: src/rancher/node/ClusterNodesList.tsx
 msgid "Kubernetes nodes"
 msgstr ""
@@ -5185,7 +5174,6 @@ msgid "Logout failed"
 msgstr ""
 
 #: src/rancher/cluster/create/FormOptionalServicesStep.tsx
-#: src/rancher/cluster/create/RancherClusterForm.tsx
 msgid "Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes."
 msgstr ""
 
@@ -6069,12 +6057,7 @@ msgstr ""
 msgid "Node name"
 msgstr ""
 
-#: src/rancher/cluster/create/NodeAddButton.tsx
-msgid "Node plan"
-msgstr ""
-
 #: src/rancher/cluster/create/FormNodesStep.tsx
-#: src/rancher/cluster/create/TenantGroup.tsx
 #: src/rancher/cluster/create/steps.ts
 #: src/rancher/cluster/tabs.ts
 msgid "Nodes"
@@ -8486,7 +8469,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
-#: src/rancher/cluster/create/NodeRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -9202,7 +9184,6 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/openstack/openstack-instance/deploy/steps.ts
-#: src/rancher/cluster/create/RancherClusterForm.tsx
 #: src/rancher/cluster/create/steps.ts
 msgid "SSH public key"
 msgstr ""
@@ -9399,7 +9380,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/rancher/cluster/create/FormRancherSecurityGroupsStep.tsx
-#: src/rancher/cluster/create/TenantGroup.tsx
 #: src/rancher/cluster/create/steps.ts
 msgid "Security groups"
 msgstr ""
@@ -10792,7 +10772,6 @@ msgstr ""
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
-#: src/rancher/cluster/create/TenantGroup.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
@@ -10809,7 +10788,6 @@ msgid "Template files"
 msgstr ""
 
 #: src/rancher/cluster/create/FormTenantStep.tsx
-#: src/rancher/cluster/create/TenantSelector.tsx
 #: src/rancher/cluster/create/steps.ts
 msgid "Tenant"
 msgstr ""
@@ -11215,7 +11193,6 @@ msgstr ""
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/project/ProjectNameField.tsx
-#: src/rancher/cluster/create/RancherClusterForm.tsx
 #: src/slurm/AllocationForm.tsx
 #: src/support/OfferingConfigurationForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -12119,14 +12096,6 @@ msgstr ""
 #: src/administration/dashboard/StatisticsCards.tsx
 #: src/support/dashboard/StatisticsCards.tsx
 msgid "Unable to load statistics data"
-msgstr ""
-
-#: src/rancher/cluster/create/TenantGroup.tsx
-msgid "Unable to load tenant data."
-msgstr ""
-
-#: src/rancher/cluster/create/TenantSelector.tsx
-msgid "Unable to load tenant."
 msgstr ""
 
 #: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx

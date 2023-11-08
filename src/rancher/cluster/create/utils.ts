@@ -44,7 +44,7 @@ export const loadFlavors = (settings: string, offering: Offering) => {
   const params = { settings };
   return getFlavors({
     ...params,
-    name_iregex: offering.plugin_options.flavors_regex,
+    name_iregex: offering.plugin_options?.flavors_regex,
   }).then((data) => data.map(formatFlavorOption));
 };
 
