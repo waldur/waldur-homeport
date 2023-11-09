@@ -32,6 +32,7 @@ const previewImage = (imageFile: ImageType, element: HTMLElement) => {
     };
     fileReader.readAsDataURL(imageFile);
   }
+  element.style.backgroundSize = '100%';
 };
 
 export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
@@ -77,7 +78,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
       >
         <div
           ref={previewRef}
-          className={`image-input-wrapper w-${size}px h-${size}px`}
+          className={`image-input-wrapper w-${size}px h-70px`}
         ></div>
 
         {/* Pick image */}
