@@ -4,8 +4,8 @@
 
 // Base
 .image-input {
-  position: relative;
-  display: inline-block;
+  position: sticky;
+  display: grid;
   @include border-radius($border-radius);
   background-repeat: no-repeat;
   background-size: cover;
@@ -27,15 +27,14 @@
   // Actions
   [data-kt-image-input-action] {
     cursor: pointer;
-    position: absolute;
+    position: relative;
     transform: translate(-50%, -50%);
   }
 
   // Change Button
   [data-kt-image-input-action='change'] {
-    left: 100%;
-    top: 0;
-
+    left: 23%;
+    top: -20%;
     input {
       width: 0 !important;
       height: 0 !important;
@@ -48,8 +47,8 @@
   [data-kt-image-input-action='cancel'],
   [data-kt-image-input-action='remove'] {
     position: absolute;
-    left: 100%;
-    top: 100%;
+    left: 23%;
+    top: 0%;
   }
 
   [data-kt-image-input-action='cancel'] {
