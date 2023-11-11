@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Card, FormCheck } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { Link } from '@waldur/core/Link';
@@ -55,8 +56,16 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
     return result;
   }, [errors]);
 
+  const isVerticalMode = useMediaQuery({ maxWidth: 1200 });
+
   return (
-    <div className="deploy-view-sidebar drawer drawer-end drawer-on w-350px">
+    <div
+      className={
+        isVerticalMode
+          ? 'deploy-view-sidebar'
+          : 'deploy-view-sidebar drawer drawer-end drawer-on'
+      }
+    >
       <Card className="card-flush border-0">
         <Card.Body>
           <h6 className="fs-7 ms-12">{translate('Progress')}</h6>

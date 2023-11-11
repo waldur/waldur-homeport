@@ -2,11 +2,8 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
-import { FieldError } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
 import { CheckoutPricingRow } from '@waldur/marketplace/deploy/CheckoutPricingRow';
 import {
@@ -14,8 +11,8 @@ import {
   formErrorsSelector,
   formIsValidSelector,
 } from '@waldur/marketplace/deploy/utils';
+import { OrderOfferingSubmitButton } from '@waldur/marketplace/details/OrderSummary';
 import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
-import { formatOrderItemForCreate } from '@waldur/marketplace/details/utils';
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Offering } from '@waldur/marketplace/types';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
@@ -43,9 +40,13 @@ const getDailyPrice = (attributesData, components) => {
 
 interface CheckoutSummaryProps {
   offering: Offering;
+  updateMode?: boolean;
 }
 
-export const CheckoutSummary = ({ offering }: CheckoutSummaryProps) => {
+export const CheckoutSummary = ({
+  offering,
+  updateMode,
+}: CheckoutSummaryProps) => {
   const formIsValid = useSelector(formIsValidSelector);
   const formAttributesData = useSelector(formAttributesSelector);
   const errors = useSelector(formErrorsSelector);
@@ -63,19 +64,6 @@ export const CheckoutSummary = ({ offering }: CheckoutSummaryProps) => {
   const dailyPrice = useMemo(
     () => getDailyPrice(formAttributesData, components),
     [formAttributesData, components],
-  );
-
-  const orderItem = useMemo(
-    () =>
-      formatOrderItemForCreate({
-        formData: { attributes: formAttributesData },
-        offering,
-        customer,
-        project,
-        prices,
-        formValid: formIsValid,
-      }),
-    [formAttributesData, offering, customer, project, prices, formIsValid],
   );
 
   return (
@@ -147,22 +135,15 @@ export const CheckoutSummary = ({ offering }: CheckoutSummaryProps) => {
         </div>
       )}
 
-      <Tip
-        label={
-          Boolean(errors?.attributes) && (
-            <FieldError error={errors?.attributes} />
-          )
-        }
-        id="offering-button-errors"
-        autoWidth
-      >
-        <ShoppingCartButtonContainer
-          item={orderItem}
-          flavor="primary"
-          disabled={!formIsValid}
-          className="w-100"
-        />
-      </Tip>
+      <OrderOfferingSubmitButton
+        formData={{ attributes: formAttributesData }}
+        updateMode={updateMode}
+        offering={offering}
+        customer={customer}
+        errors={errors}
+        formValid={formIsValid}
+        project={project}
+      />
     </>
   );
 };
