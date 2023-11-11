@@ -1,8 +1,9 @@
-import { createElement, FunctionComponent } from 'react';
+import { createElement, FunctionComponent, useRef } from 'react';
 import { connect } from 'react-redux';
 import { getFormValues, isValid } from 'redux-form';
 
 import { Tip } from '@waldur/core/Tooltip';
+import useOnScreen from '@waldur/core/useOnScreen';
 import { FieldError } from '@waldur/form';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { ShoppingCartUpdateButtonContainer } from '@waldur/marketplace/cart/ShoppingCartUpdateButtonContainer';
@@ -34,48 +35,69 @@ export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => {
   );
 };
 
+export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
+  const mainButtonRef = useRef(null);
+  const isOnScreen = useOnScreen(mainButtonRef);
+
+  const buttonsJsx = !props.updateMode ? (
+    <Tip
+      label={
+        <FieldError
+          error={{ ...props.errors?.attributes, ...props.errors?.limits }}
+        />
+      }
+      id="offering-button-errors"
+      autoWidth
+      className="w-100"
+    >
+      <ShoppingCartButtonContainer
+        item={formatOrderItemForCreate(props)}
+        flavor="primary"
+        disabled={!props.formValid}
+        className="w-100"
+      />
+    </Tip>
+  ) : (
+    <Tip
+      label={
+        <FieldError
+          error={{ ...props.errors?.attributes, ...props.errors?.limits }}
+        />
+      }
+      id="offering-button-errors"
+      autoWidth
+      className="w-100"
+    >
+      <ShoppingCartUpdateButtonContainer
+        item={formatOrderItemForUpdate(props)}
+        flavor="primary"
+        disabled={!props.formValid}
+        className="w-100"
+      />
+    </Tip>
+  );
+
+  return (
+    <>
+      <div ref={mainButtonRef} className="d-flex justify-content-between mt-5">
+        {buttonsJsx}
+      </div>
+      <div
+        className={
+          'floating-submit-button d-xl-none' +
+          (!isOnScreen ? ' active' : undefined)
+        }
+      >
+        {buttonsJsx}
+      </div>
+    </>
+  );
+};
+
 const PureOrderSummary: FunctionComponent<OrderSummaryProps> = (props) => (
   <>
     <SummaryTable {...props} />
-    <div className="d-flex justify-content-between mt-5">
-      {!props.updateMode ? (
-        <Tip
-          label={
-            <FieldError
-              error={{ ...props.errors?.attributes, ...props.errors?.limits }}
-            />
-          }
-          id="offering-button-errors"
-          autoWidth
-          className="w-100"
-        >
-          <ShoppingCartButtonContainer
-            item={formatOrderItemForCreate(props)}
-            flavor="primary"
-            disabled={!props.formValid}
-            className="w-100"
-          />
-        </Tip>
-      ) : (
-        <Tip
-          label={
-            <FieldError
-              error={{ ...props.errors?.attributes, ...props.errors?.limits }}
-            />
-          }
-          id="offering-button-errors"
-          autoWidth
-          className="w-100"
-        >
-          <ShoppingCartUpdateButtonContainer
-            item={formatOrderItemForUpdate(props)}
-            flavor="primary"
-            disabled={!props.formValid}
-            className="w-100"
-          />
-        </Tip>
-      )}
-    </div>
+    <OrderOfferingSubmitButton {...props} />
   </>
 );
 

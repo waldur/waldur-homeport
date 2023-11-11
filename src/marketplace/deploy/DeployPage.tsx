@@ -237,7 +237,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
   }
 
   return (
-    <form className="form d-flex flex-column flex-lg-row gap-5 gap-lg-7 pb-10">
+    <form className="form d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10">
       {/* Steps */}
       <div className="deploy-view-steps d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
         <div className="d-flex justify-content-between align-items-center">
