@@ -61,6 +61,11 @@ const HooksList = lazyComponent(
   'HooksList',
 );
 
+const NotificationList = lazyComponent(
+  () => import('@waldur/notifications/NotificationList'),
+  'NotificationList',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'admin',
@@ -232,6 +237,16 @@ export const states: StateDeclaration[] = [
     component: RolesList,
     data: {
       breadcrumb: () => translate('User roles'),
+    },
+  },
+
+  {
+    name: 'admin-notification-messages',
+    url: 'notification-messages/',
+    parent: 'admin-settings',
+    component: NotificationList,
+    data: {
+      breadcrumb: () => translate('Notifications'),
     },
   },
 ];

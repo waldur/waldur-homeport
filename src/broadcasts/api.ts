@@ -1,10 +1,9 @@
-import { getList, getSelectData, post, put, remove } from '@waldur/core/api';
+import { getSelectData, post, put, remove } from '@waldur/core/api';
 
 import {
-  MessageTemplate,
-  NotificationMessageTemplate,
   BroadcastRequestData,
   BroadcastTemplateRequestData,
+  MessageTemplate,
 } from './types';
 
 export const sendBroadcast = (uuid: string) =>
@@ -18,13 +17,6 @@ export const updateBroadcast = (uuid, payload: BroadcastRequestData) =>
 
 export const getTemplateList = (params?: {}) =>
   getSelectData<MessageTemplate>('/broadcast-message-templates/', params);
-
-export const getNotificationMessagesTemplates = (params?: {}) => {
-  return getList<NotificationMessageTemplate>(
-    '/notification-messages-templates/',
-    params,
-  );
-};
 
 export const createBroadcastTemplate = (
   payload: BroadcastTemplateRequestData,
