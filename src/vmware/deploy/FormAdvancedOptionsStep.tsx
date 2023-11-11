@@ -41,6 +41,7 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
               getOptionValue={(option) => option.url}
               getOptionLabel={(option) => option.name}
               isClearable={true}
+              noUpdateOnBlur
             />
           )}
           {advancedMode && data.datastores.length > 0 && (
@@ -51,6 +52,7 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
               getOptionValue={(option) => option.url}
               getOptionLabel={(option) => option.name}
               isClearable={true}
+              noUpdateOnBlur
             />
           )}
           {advancedMode && data.folders.length > 0 && (
@@ -61,6 +63,7 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
               getOptionValue={(option) => option.url}
               getOptionLabel={(option) => option.name}
               isClearable={true}
+              noUpdateOnBlur
             />
           )}
         </FormContainer>

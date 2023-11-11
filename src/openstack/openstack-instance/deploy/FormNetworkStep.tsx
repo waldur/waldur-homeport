@@ -84,6 +84,7 @@ const renderNetworkRows = ({ fields, subnets, floatingIps }: any) => {
               placeholder={translate('Select subnet')}
               getOptionValue={(option) => option.url}
               getOptionLabel={(option) => option.name}
+              noUpdateOnBlur
             />
           </Col>
           <Col sm>
@@ -96,6 +97,7 @@ const renderNetworkRows = ({ fields, subnets, floatingIps }: any) => {
               isDisabled={!fields.get(index)?.subnet?.uuid}
               getOptionValue={(option) => option.url}
               getOptionLabel={(option) => option.address}
+              noUpdateOnBlur
             />
           </Col>
           <Col xs="auto">
