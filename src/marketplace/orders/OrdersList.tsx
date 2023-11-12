@@ -43,6 +43,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title: translate('Approved at'),
       render: ({ row }) =>
         row.approved_at ? formatDateTime(row.approved_at) : DASH_ESCAPE_CODE,
+      orderField: 'approved_at',
     },
     {
       title: translate('Approved by'),
