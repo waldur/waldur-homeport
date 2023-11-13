@@ -2357,6 +2357,7 @@ msgstr ""
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
+#: src/notifications/NotificationList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
@@ -2817,6 +2818,7 @@ msgstr ""
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/notifications/NotificationList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
@@ -6150,6 +6152,10 @@ msgstr ""
 
 #: src/invoices/list/SendNotificationButton.tsx
 msgid "Notification can be sent only for created invoice."
+msgstr ""
+
+#: src/notifications/NotificationList.tsx
+msgid "Notification code"
 msgstr ""
 
 #: src/user/hooks/utils.ts
@@ -13968,6 +13974,10 @@ msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 msgid "networks"
+msgstr ""
+
+#: src/notifications/NotificationList.tsx
+msgid "notifications"
 msgstr ""
 
 #: src/form/CronField.tsx

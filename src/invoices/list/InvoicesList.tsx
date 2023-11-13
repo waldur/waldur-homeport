@@ -70,6 +70,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       {...props}
       columns={columns}
       verboseName={translate('invoices')}
+      enableExport={true}
       hoverableRow={({ row }) => (
         <ButtonGroup>
           <SendNotificationButton row={row} />
@@ -80,6 +81,26 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
+
+const exportRow = (row) => [
+  row.number,
+  row.state,
+  row.invoice_date,
+  row.due_date,
+  defaultCurrency(row.price),
+  defaultCurrency(row.tax),
+  defaultCurrency(row.total),
+];
+
+const exportFields = [
+  'Invoice number',
+  'State',
+  'Invoice date',
+  'Due date',
+  'Price',
+  'Tax',
+  'Total',
+];
 
 const mapPropsToFilter = (props) => ({
   ...props.stateFilter,
@@ -103,6 +124,8 @@ const mapPropsToFilter = (props) => ({
 const TableOptions: TableOptionsType = {
   table: INVOICES_TABLE,
   fetchData: createFetcher('invoices'),
+  exportRow,
+  exportFields,
   mapPropsToFilter,
   queryField: 'number',
   mapPropsToTableId: (props) => [props.customer.uuid],
