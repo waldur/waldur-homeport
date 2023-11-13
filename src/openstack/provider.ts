@@ -44,5 +44,8 @@ ProvidersRegistry.register({
     'external_network_id',
     'availability_zone',
     'verify_ssl',
+    'max_concurrent_provision_instance',
+    'max_concurrent_provision_volume',
+    'max_concurrent_provision_snapshot',
   ]),
 });
