@@ -54,9 +54,19 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       hoverableRow={SendNotificationButton}
       verboseName={translate('records')}
+      enableExport={true}
     />
   );
 };
+
+const exportRow = (row) => [
+  row.number,
+  row.state,
+  formatPeriod(row),
+  defaultCurrency(row.price),
+];
+
+const exportFields = ['Record number', 'State', 'Record period', 'Total'];
 
 const mapPropsToFilter = (props) => ({
   ...props.stateFilter,
@@ -69,6 +79,8 @@ const TableOptions: TableOptionsType = {
   table: 'invoices',
   fetchData: createFetcher('invoices'),
   mapPropsToFilter,
+  exportRow,
+  exportFields,
   queryField: 'number',
   mapPropsToTableId: (props) => [props.customer.uuid],
 };
