@@ -4847,6 +4847,7 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
+#: src/issues/list/IssuesList.tsx
 #: src/issues/routes.ts
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/navigation/IssuesLink.tsx
