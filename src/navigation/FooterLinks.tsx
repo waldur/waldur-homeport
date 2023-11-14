@@ -50,18 +50,18 @@ export const FooterLinks = () => {
       data-kt-menu="true"
     >
       {!AuthService.isAuthenticated() && (
-        <li className="menu-item">
+        <li className="menu-item" data-kt-menu-trigger="click">
           <Link className="menu-link px-2" state="public.marketplace-landing">
             {translate('Explore marketplace')}
           </Link>
         </li>
       )}
-      <li className="menu-item">
+      <li className="menu-item" data-kt-menu-trigger="click">
         <Link className="menu-link px-2" state="about.privacy">
           {translate('Privacy policy')}
         </Link>
       </li>
-      <li className="menu-item">
+      <li className="menu-item" data-kt-menu-trigger="click">
         <Link className="menu-link px-2" state="about.tos">
           {translate('Terms of service')}
         </Link>
