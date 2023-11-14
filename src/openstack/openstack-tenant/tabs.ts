@@ -54,6 +54,7 @@ const TenantImagesList = lazyComponent(
 NestedResourceTabsConfiguration.register('OpenStack.Tenant', () => [
   {
     title: translate('Compute'),
+    key: 'compute',
     children: [
       {
         key: 'instances',
@@ -70,10 +71,16 @@ NestedResourceTabsConfiguration.register('OpenStack.Tenant', () => [
         title: translate('Images'),
         component: TenantImagesList,
       },
+      {
+        key: 'server_groups',
+        title: translate('Server groups'),
+        component: ServerGroupsList,
+      },
     ],
   },
   {
     title: translate('Networking'),
+    key: 'networking',
     children: [
       {
         key: 'routers',
@@ -96,11 +103,6 @@ NestedResourceTabsConfiguration.register('OpenStack.Tenant', () => [
         component: SecurityGroupsList,
       },
       {
-        key: 'server_groups',
-        title: translate('Server groups'),
-        component: ServerGroupsList,
-      },
-      {
         key: 'floating_ips',
         title: translate('Floating IPs'),
         component: FloatingIpsList,
@@ -114,6 +116,7 @@ NestedResourceTabsConfiguration.register('OpenStack.Tenant', () => [
   },
   {
     title: translate('Storage'),
+    key: 'storage',
     children: [
       {
         key: 'volumes',

@@ -28,14 +28,6 @@ msgstr ""
 msgid "10 - Very positive"
 msgstr ""
 
-#: src/marketplace/resources/details/StatusPage.tsx
-msgid "90 days ago"
-msgstr ""
-
-#: src/marketplace/resources/details/StatusPage.tsx
-msgid "99.98% uptime"
-msgstr ""
-
 #: src/user/support/TermsOfService.tsx
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr ""
@@ -283,6 +275,7 @@ msgid "Active user will be able to login into the portal."
 msgstr ""
 
 #: src/marketplace/resources/details/ActivityCard.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
 msgid "Activity"
 msgstr ""
 
@@ -490,10 +483,6 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/FloatingIPsSection.tsx
-msgid "Address: {address}, instance: {instance}"
-msgstr ""
-
 #: src/azure/sql/AzureSQLServerDetails.tsx
 #: src/azure/vm/AzureVirtualMachineDetails.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
@@ -630,6 +619,7 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
+#: src/slurm/details/AllocationMainComponent.tsx
 #: src/slurm/details/AllocationUsersTable.tsx
 msgid "Allocation users"
 msgstr ""
@@ -1299,6 +1289,7 @@ msgid "Booked by"
 msgstr ""
 
 #: src/booking/marketplace.ts
+#: src/marketplace/resources/details/BookingMainComponent.tsx
 msgid "Booking"
 msgstr ""
 
@@ -1764,11 +1755,6 @@ msgstr ""
 msgid "Cloud block storage size"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/InstanceMainComponent.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantMainComponent.tsx
-msgid "Cloud components"
-msgstr ""
-
 #: src/rancher/RancherProviderForm.tsx
 #: src/rancher/cluster/create/marketplace.ts
 msgid "Cloud init template"
@@ -1884,11 +1870,9 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
-#: src/marketplace/resources/details/openstack-volume/VolumeMainComponent.tsx
 msgid "Components"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Compute"
 msgstr ""
@@ -3854,10 +3838,6 @@ msgstr ""
 msgid "Fixed IPs"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/RoutersSection.tsx
-msgid "Fixed IPs: {fixed_ips}"
-msgstr ""
-
 #: src/marketplace/offerings/update/components/ComponentAccountingTypeField.tsx
 msgid "Fixed price"
 msgstr ""
@@ -3898,15 +3878,10 @@ msgstr ""
 msgid "Flavor name: {flavor_name}"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/InstancesSection.tsx
-msgid "Flavor: {flavor_name}, image: {image_name}"
-msgstr ""
-
 #: src/marketplace/resources/details/InstanceComponents.tsx
 msgid "Flavor: {flavor}"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-tenant/tabs.ts
@@ -3929,8 +3904,6 @@ msgstr ""
 msgid "Floating IP count"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Floating IPs"
@@ -4073,6 +4046,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingGettingStarted.tsx
 #: src/marketplace/resources/details/GettingStartedCard.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
 msgid "Getting started"
 msgstr ""
 
@@ -4440,7 +4414,6 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/openstack/openstack-tenant/tabs.ts
@@ -4596,7 +4569,6 @@ msgstr ""
 msgid "Instance should be shutoff and OK or erred. Please contact support."
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Instances"
 msgstr ""
@@ -4625,7 +4597,6 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
 msgid "Internal IPs"
@@ -4911,11 +4882,10 @@ msgid "Job title"
 msgstr ""
 
 #: src/slurm/details/AllocationJobsTable.tsx
+#: src/slurm/details/AllocationMainComponent.tsx
 msgid "Jobs"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/SnapshotsSection.tsx
-#: src/marketplace/resources/details/openstack-volume/SnapshotsSection.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/resource/utils.tsx
 msgid "Keep forever"
@@ -4923,11 +4893,6 @@ msgstr ""
 
 #: src/openstack/openstack-backup/BackupsList.tsx
 msgid "Keep until"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-instance/SnapshotsSection.tsx
-#: src/marketplace/resources/details/openstack-volume/SnapshotsSection.tsx
-msgid "Keep until {date}"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/EditDialog.tsx
@@ -4979,6 +4944,7 @@ msgstr ""
 msgid "LEXIS link creation request has been submitted."
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
 #: src/marketplace/resources/lexis/LexisLinkCard.tsx
 #: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/routes.ts
@@ -5219,18 +5185,6 @@ msgstr ""
 msgid "MAC address (optional)"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/FloatingIPSection.tsx
-msgid "MAC address: {internal_ip_mac_address}, subnet name: {subnet_name}"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/PortsSection.tsx
-msgid "MAC address: {mac_address}"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-instance/InternalIPSection.tsx
-msgid "MAC address: {mac_address}, subnet name: {subnet_name}"
-msgstr ""
-
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-network/actions/SetMtuDialog.tsx
 msgid "MTU"
@@ -5464,10 +5418,6 @@ msgstr ""
 msgid "Minimal RAM"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/ImagesSection.tsx
-msgid "Minimal RAM: {min_ram}, Minimal disk: {min_disk}"
-msgstr ""
-
 #: src/openstack/openstack-tenant/TenantImagesList.tsx
 msgid "Minimal disk"
 msgstr ""
@@ -5500,6 +5450,7 @@ msgstr ""
 msgid "Module loading error. Try again."
 msgstr ""
 
+#: src/marketplace/resources/details/InstanceMainComponent.tsx
 #: src/marketplace/resources/details/MonitoringCharts.tsx
 msgid "Monitoring"
 msgstr ""
@@ -5817,18 +5768,11 @@ msgstr ""
 msgid "Network name"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/SubnetsSection.tsx
-msgid "Network: {network_name}, CIDR: {cidr}"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Networking"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
@@ -6057,10 +6001,6 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderCampaignServiceProviderFilter.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "No providers"
-msgstr ""
-
-#: src/marketplace/resources/details/StatusPage.tsx
-msgid "No reported incidents in the last 24 hours"
 msgstr ""
 
 #: src/navigation/header/project-selector/ProjectsList.tsx
@@ -6610,10 +6550,6 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/EditDialog.tsx
 #: src/openstack/openstack-volume/marketplace.ts
 msgid "OpenStack volume"
-msgstr ""
-
-#: src/marketplace/resources/details/StatusPage.tsx
-msgid "Operational"
 msgstr ""
 
 #: src/marketplace/offerings/update/options/AddOptionDialog.tsx
@@ -7524,10 +7460,6 @@ msgstr ""
 msgid "Policy"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/ServerGroupsSection.tsx
-msgid "Policy: {policy}"
-msgstr ""
-
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 msgid "Port"
@@ -7549,7 +7481,6 @@ msgstr ""
 msgid "Port security enabled"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Ports"
 msgstr ""
@@ -8204,7 +8135,7 @@ msgstr ""
 msgid "Quota usage exceeds available limit."
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/TenantMainComponent.tsx
+#: src/marketplace/resources/details/TenantMainComponent.tsx
 msgid "Quotas"
 msgstr ""
 
@@ -8554,10 +8485,6 @@ msgstr ""
 #: src/marketplace/resources/list/ReportUsageAction.tsx
 #: src/marketplace/resources/usage/ResourceCreateUsageButton.tsx
 msgid "Report usage"
-msgstr ""
-
-#: src/marketplace/resources/details/StatusPage.tsx
-msgid "Reported incidents"
 msgstr ""
 
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
@@ -9096,6 +9023,7 @@ msgstr ""
 msgid "Robot account type"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
 #: src/marketplace/robot-accounts/RobotAccountCard.tsx
 #: src/marketplace/routes.ts
 msgid "Robot accounts"
@@ -9141,17 +9069,8 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Routers"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-instance/SecurityGroupsSection.tsx
-msgid "Rules: {rules_count}"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/SecurityGroupsSection.tsx
-msgid "Rules: {rules}"
 msgstr ""
 
 #: src/customer/list/AccountingRunningField.tsx
@@ -9302,11 +9221,6 @@ msgstr ""
 msgid "Schedule termination of existing resources"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/SnapshotSchedulesSection.tsx
-#: src/marketplace/resources/details/openstack-volume/SnapshotSchedulesSection.tsx
-msgid "Schedule {schedule}"
-msgstr ""
-
 #: src/marketplace/offerings/update/integration/EditSchedulesDialog.tsx
 msgid "Schedules have been updated successfully."
 msgstr ""
@@ -9405,8 +9319,6 @@ msgstr ""
 msgid "Security group rules update has been scheduled."
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -9786,7 +9698,6 @@ msgstr ""
 msgid "Server group creation has been scheduled."
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Server groups"
 msgstr ""
@@ -10226,18 +10137,6 @@ msgstr ""
 msgid "Size should be between 1 and 10240 GB."
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-tenant/SnapshotsSection.tsx
-msgid "Size: {size}"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-instance/VolumesSection.tsx
-msgid "Size: {size}, attached to: {device} , volume type: {type}"
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/VolumesSection.tsx
-msgid "Size: {size}, attached to: {device}, volume type: {type}"
-msgstr ""
-
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 msgid "Skip connection to external network"
@@ -10252,8 +10151,6 @@ msgstr ""
 msgid "Snapshot schedule for volume has been created."
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-volume/VolumeDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshot schedules"
@@ -10264,9 +10161,6 @@ msgstr ""
 msgid "Snapshot size limit"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-#: src/marketplace/resources/details/openstack-volume/VolumeDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
@@ -10434,6 +10328,7 @@ msgstr ""
 #: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesFilter.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/project/team/InvitationsList.tsx
@@ -10441,10 +10336,6 @@ msgstr ""
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Status"
-msgstr ""
-
-#: src/marketplace/resources/details/StatusCard.tsx
-msgid "Status page"
 msgstr ""
 
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
@@ -10474,9 +10365,6 @@ msgstr ""
 msgid "Stopping"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-#: src/marketplace/resources/details/openstack-volume/VolumeDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -10583,7 +10471,6 @@ msgid "Subnet name"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Subnets"
@@ -10591,10 +10478,6 @@ msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Subnets from where connection to self-service is allowed."
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-tenant/NetworksSection.tsx
-msgid "Subnets: {subnets}"
 msgstr ""
 
 #: src/azure/provider/AzureForm.tsx
@@ -10774,6 +10657,7 @@ msgid "Tax percent"
 msgstr ""
 
 #: src/customer/routes.ts
+#: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
 msgid "Team"
 msgstr ""
@@ -11265,6 +11149,7 @@ msgstr ""
 msgid "Thumbnail"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
 msgid "Tickets"
 msgstr ""
@@ -11341,10 +11226,6 @@ msgstr ""
 
 #: src/customer/details/OrganizationRemovalErrorDialog.tsx
 msgid "To remove your organization, please send an email to {supportEmail}. Thank you!"
-msgstr ""
-
-#: src/marketplace/resources/details/StatusPage.tsx
-msgid "Today"
 msgstr ""
 
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
@@ -12109,12 +11990,6 @@ msgstr ""
 #: src/marketplace-checklist/UserChecklist.tsx
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "Unable to load questions and answers."
-msgstr ""
-
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-#: src/marketplace/resources/details/openstack-volume/VolumeDetails.tsx
-msgid "Unable to load resource details."
 msgstr ""
 
 #: src/resource/ResourceDetailsContainer.tsx
@@ -12945,6 +12820,7 @@ msgstr ""
 
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/details/utils.ts
 msgid "Usage"
@@ -13470,8 +13346,6 @@ msgstr ""
 msgid "Volume type storage limit is exceeded"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Volumes"

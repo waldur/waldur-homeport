@@ -1,8 +1,10 @@
+import { useQuery } from '@tanstack/react-query';
+import classNames from 'classnames';
 import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { useAsync } from 'react-use';
 
+import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { fetchAllProjectUsers } from '@waldur/permissions/api';
@@ -13,15 +15,24 @@ import { UserRoleGroup } from './UserRoleGroup';
 
 interface OwnProps {
   isHorizontal?: boolean;
+  compact?: boolean;
+  max?: number;
+  className?: string;
+  onClick?(): any;
 }
 
 const LayoutWrapper: FC<OwnProps> = (props) =>
   props.isHorizontal ? (
-    <div className="d-flex justify-content-start align-items-xl-center flex-xl-row flex-column gap-xl-6">
+    <div
+      className={classNames(
+        'd-flex justify-content-start align-items-xl-center flex-xl-row flex-column gap-xl-6',
+        props.className,
+      )}
+    >
       {props.children}
     </div>
   ) : (
-    <Row>
+    <Row className={props.className}>
       <Col xs={12}>{props.children}</Col>
     </Row>
   );
@@ -29,19 +40,45 @@ const LayoutWrapper: FC<OwnProps> = (props) =>
 export const ProjectUsersBadge = (props: OwnProps) => {
   const project = useSelector(getProject);
   const {
-    loading,
+    data: users,
+    isLoading,
     error,
-    value: users,
-  } = useAsync(async () => await fetchAllProjectUsers(project.uuid), [project]);
+    refetch,
+  } = useQuery(
+    ['ProjectTeam', project?.uuid],
+    () => (project?.uuid ? fetchAllProjectUsers(project.uuid) : []),
+    { staleTime: 3 * 60 * 1000 },
+  );
 
-  return loading ? (
+  return isLoading ? (
     <LoadingSpinner />
   ) : error ? (
-    <>{translate('Unable to load users')}</>
+    <LoadingErred
+      loadData={refetch}
+      message={translate('Unable to load users')}
+    />
+  ) : props.compact ? (
+    <UserRoleGroup
+      altLabel={translate('Team')}
+      users={users}
+      max={props.max}
+      className={props.className}
+      onClick={props.onClick}
+    />
   ) : (
-    <LayoutWrapper isHorizontal={props.isHorizontal}>
+    <LayoutWrapper
+      isHorizontal={props.isHorizontal}
+      className={props.className}
+    >
       {getProjectRoles().map((role) => (
-        <UserRoleGroup key={role.value} role={role} users={users} />
+        <UserRoleGroup
+          key={role.value}
+          role={role}
+          users={users}
+          max={props.max}
+          className="align-items-center mb-1"
+          onClick={props.onClick}
+        />
       ))}
     </LayoutWrapper>
   );

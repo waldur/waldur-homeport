@@ -46,6 +46,7 @@ const ClusterHPAList = lazyComponent(
 NestedResourceTabsConfiguration.register('Rancher.Cluster', () => [
   {
     title: translate('Cluster'),
+    key: 'cluster',
     children: [
       {
         key: 'nodes',
@@ -66,6 +67,7 @@ NestedResourceTabsConfiguration.register('Rancher.Cluster', () => [
   },
   {
     title: translate('Apps'),
+    key: 'apps',
     children: [
       {
         key: 'templates',
@@ -91,6 +93,7 @@ NestedResourceTabsConfiguration.register('Rancher.Cluster', () => [
   },
   {
     title: translate('Service discovery'),
+    key: 'service-discovery',
     children: [
       {
         key: 'hpas',

@@ -77,6 +77,7 @@ export const ProjectUsersList = () => {
           ) : null}
         </ButtonGroup>
       }
+      title={translate('Team members')}
       verboseName={translate('Team members')}
       hoverableRow={({ row }) => (
         <>

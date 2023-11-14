@@ -33,6 +33,7 @@ export const getDefaultLimits = (offering: Offering): Record<string, number> =>
 
 export const scrollToSectionById = (section: string) => {
   const el = document.getElementById(section);
+  if (!el) return;
   window.scroll({
     behavior: 'smooth',
     left: 0,

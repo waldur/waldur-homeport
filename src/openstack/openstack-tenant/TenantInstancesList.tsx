@@ -41,6 +41,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       hasQuery={true}
+      showPageSizeSelector={true}
     />
   );
 };

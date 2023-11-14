@@ -63,7 +63,7 @@ const ResourceChart = ({ title, color }) => {
 
 export const MonitoringCharts = () => (
   <div className="mb-10">
-    <Card>
+    <Card id="monitoring">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Monitoring')}</h3>

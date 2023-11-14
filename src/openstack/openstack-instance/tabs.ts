@@ -31,27 +31,8 @@ const OpenStackSecurityGroupsList = lazyComponent(
 
 NestedResourceTabsConfiguration.register(INSTANCE_TYPE, () => [
   {
-    title: translate('Storage'),
-    children: [
-      {
-        key: 'volumes',
-        title: translate('Volumes'),
-        component: InstanceVolumesList,
-      },
-      {
-        key: 'backups',
-        title: translate('Snapshots'),
-        component: BackupsList,
-      },
-      {
-        key: 'backup_schedules',
-        title: translate('Snapshot schedules'),
-        component: BackupsSchedulesList,
-      },
-    ],
-  },
-  {
     title: translate('Networking'),
+    key: 'networking',
     children: [
       {
         key: 'internal_ips',
@@ -67,6 +48,27 @@ NestedResourceTabsConfiguration.register(INSTANCE_TYPE, () => [
         key: 'security_groups',
         title: translate('Security groups'),
         component: OpenStackSecurityGroupsList,
+      },
+    ],
+  },
+  {
+    title: translate('Storage'),
+    key: 'storage',
+    children: [
+      {
+        key: 'volumes',
+        title: translate('Volumes'),
+        component: InstanceVolumesList,
+      },
+      {
+        key: 'backups',
+        title: translate('Snapshots'),
+        component: BackupsList,
+      },
+      {
+        key: 'backup_schedules',
+        title: translate('Snapshot schedules'),
+        component: BackupsSchedulesList,
       },
     ],
   },

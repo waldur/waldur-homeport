@@ -15,7 +15,7 @@ export const UsageCard = ({ resource }) => {
   );
 
   return resource.is_usage_based || resource.is_limit_based ? (
-    <Card>
+    <Card id="usage-history">
       <Card.Body>
         <h3>{translate('Usage history')}</h3>
         <ResourceUsageTabsContainer resource={resourceRef} hideHeader={true} />

@@ -8,6 +8,7 @@ const PortsList = lazyComponent(() => import('./PortsList'), 'PortsList');
 NestedResourceTabsConfiguration.register('VMware.VirtualMachine', () => [
   {
     title: translate('Details'),
+    key: 'details',
     children: [
       {
         key: 'disks',

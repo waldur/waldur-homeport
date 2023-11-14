@@ -67,11 +67,15 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     ];
 
     let tabSources = [];
+    let specViews = [];
 
     if (data?.scope) {
       const spec = NestedResourceTabsConfiguration.get(
         data.scope.resource_type,
       );
+      if (spec) {
+        specViews = spec;
+      }
       tabSources = spec.map((conf) => conf.children).flat();
       tabs = tabs.concat(
         spec
@@ -106,7 +110,7 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     const tabSpec = params.tab
       ? tabSources.find((child) => child.key === params.tab)
       : null;
-    return { tabSpec, tabs };
+    return { tabSpec, tabs, specViews };
   }, [data, params.tab, state.name]);
 
   if (!data) {
