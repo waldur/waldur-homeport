@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { useEffect, FunctionComponent, useContext } from 'react';
+import { FunctionComponent, useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 
