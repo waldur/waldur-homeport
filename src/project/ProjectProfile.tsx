@@ -1,3 +1,4 @@
+import { useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 import { Card, Col, Row, Stack } from 'react-bootstrap';
 import 'world-flags-sprite/stylesheets/flags32.css';
@@ -19,6 +20,9 @@ import { ProjectUsersBadge } from './ProjectUsersBadge';
 export const ProjectProfile = ({ project }: { project: Project }) => {
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const abbreviation = useMemo(() => getItemAbbreviation(project), [project]);
+
+  const router = useRouter();
+  const goToUsers = () => router.stateService.go('project-users');
 
   return (
     <Card className="mb-6">
@@ -85,7 +89,7 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
             </Row>
             <Row>
               <Col xs={12}>
-                <ProjectUsersBadge isHorizontal />
+                <ProjectUsersBadge isHorizontal onClick={goToUsers} />
               </Col>
             </Row>
           </Col>

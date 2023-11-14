@@ -1,4 +1,4 @@
-import { useRouter } from '@uirouter/react';
+import { useMemo } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 
 import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
@@ -7,31 +7,43 @@ import { GenericPermission } from '@waldur/permissions/types';
 export const UserRoleGroup = ({
   role,
   users,
+  altLabel,
+  max,
+  className,
+  onClick,
 }: {
-  role: { label; value };
+  role?: { label; value };
   users: GenericPermission[];
+  altLabel?: string;
+  max?: number;
+  className?: string;
+  onClick?(): any;
 }) => {
-  const router = useRouter();
-  const goToUsers = () => router.stateService.go('project-users');
-  const items = users
-    .filter((user) => user.role_name === role.value)
-    .map((perm) => ({
+  const items = useMemo(() => {
+    let _items;
+    if (role) {
+      _items = users.filter((user) => user.role_name === role.value);
+    } else {
+      _items = users;
+    }
+    return _items.map((perm) => ({
       full_name: perm.user_full_name,
       username: perm.user_username,
       email: perm.user_email,
     }));
+  }, [users, role]);
 
-  if (items.length === 0) {
+  if (!items || items.length === 0) {
     return null;
   }
 
   return (
-    <Form.Group as={Row} className="mb-1">
+    <Form.Group as={Row} className={className}>
       <Form.Label column xs="auto">
-        {role.label}:
+        {altLabel || role?.label}:
       </Form.Label>
       <Col xs={12} sm>
-        <SymbolsGroup items={items} max={6} onClick={goToUsers} />
+        <SymbolsGroup items={items} max={max || 6} onClick={onClick} />
       </Col>
     </Form.Group>
   );

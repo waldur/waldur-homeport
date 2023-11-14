@@ -134,6 +134,7 @@ export interface Offering extends GeolocationPoint {
   divisions: OrganizationGroup[];
   parent_description?: string;
   parent_name?: string;
+  getting_started?: any;
 }
 
 export interface Image {

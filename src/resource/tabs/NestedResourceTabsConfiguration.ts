@@ -1,18 +1,13 @@
-import { ResourceTab } from './types';
-
-interface ParentTab {
-  title: string;
-  children: ResourceTab[];
-}
+import { ResourceParentTab } from './types';
 
 class Store {
-  private tabs: Record<string, () => ParentTab[]>;
+  private tabs: Record<string, () => ResourceParentTab[]>;
 
   constructor() {
     this.tabs = {};
   }
 
-  register(type: string, tabs: () => ParentTab[]) {
+  register(type: string, tabs: () => ResourceParentTab[]) {
     this.tabs[type] = tabs;
   }
 

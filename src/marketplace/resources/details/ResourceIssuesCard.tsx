@@ -32,7 +32,7 @@ const CreateIssueButton = ({ resource }) => {
 export const ResourceIssuesCard = ({ resource, state }) => {
   const showIssues = useSelector(hasSupport);
   return showIssues ? (
-    <Card className="mb-7">
+    <Card className="mb-10" id="tickets">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Tickets')}</h3>

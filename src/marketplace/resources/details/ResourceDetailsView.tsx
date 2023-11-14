@@ -1,10 +1,10 @@
 import { ErrorBoundary } from '@sentry/react';
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { ErrorMessage } from '@waldur/ErrorMessage';
+import { PageBarProvider } from '@waldur/marketplace/context';
 import { LexisLinkCard } from '@waldur/marketplace/resources/lexis/LexisLinkCard';
 import { RobotAccountCard } from '@waldur/marketplace/robot-accounts/RobotAccountCard';
 import { useExtraTabs, useFullPage } from '@waldur/navigation/context';
@@ -14,6 +14,7 @@ import {
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
 import { ResourceAccessButton } from '@waldur/resource/ResourceAccessButton';
+import { ResourceParentTab } from '@waldur/resource/tabs/types';
 import { SLURM_PLUGIN } from '@waldur/slurm/constants';
 import { AllocationMainComponent } from '@waldur/slurm/details/AllocationMainComponent';
 
@@ -26,23 +27,36 @@ import { ActivityCard } from './ActivityCard';
 import { BookingMainComponent } from './BookingMainComponent';
 import { GettingStartedCard } from './GettingStartedCard';
 import { InstanceComponents } from './InstanceComponents';
-import { InstanceMainComponent } from './openstack-instance/InstanceMainComponent';
-import { TenantMainComponent } from './openstack-tenant/TenantMainComponent';
-import { VolumeMainComponent } from './openstack-volume/VolumeMainComponent';
+import { InstanceMainComponent } from './InstanceMainComponent';
 import { QuickActions } from './QuickActions';
 import { RefreshButton } from './RefreshButton';
 import { ResourceComponents } from './ResourceComponents';
+import { ResourceDetailsBar } from './ResourceDetailsBar';
 import { ResourceDetailsHeaderBody } from './ResourceDetailsHeaderBody';
 import { ResourceDetailsHeaderTitle } from './ResourceDetailsHeaderTitle';
 import { ResourceIssuesCard } from './ResourceIssuesCard';
+import { ResourceSpecGroupCard } from './ResourceSpecGroupCard';
 import { ShortResourceHeader } from './ShortResourceHeader';
-import { StatusCard } from './StatusCard';
+import { TenantMainComponent } from './TenantMainComponent';
 import { UsageCard } from './UsageCard';
 import { VolumeComponents } from './VolumeComponents';
 
 const openstackIcon = require('@waldur/images/appstore/icon-openstack.png');
 
-export const ResourceDetailsView: FC<any> = ({
+interface ResourceDetailsViewProps {
+  resource;
+  scope;
+  components;
+  offering;
+  refetch;
+  isLoading;
+  state;
+  tabs;
+  tabSpec?;
+  specViews?: ResourceParentTab[];
+}
+
+export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
   resource,
   scope,
   components,
@@ -52,6 +66,7 @@ export const ResourceDetailsView: FC<any> = ({
   state,
   tabs,
   tabSpec,
+  specViews,
 }) => {
   useFullPage();
 
@@ -61,7 +76,6 @@ export const ResourceDetailsView: FC<any> = ({
     {
       [TENANT_TYPE]: TenantMainComponent,
       [INSTANCE_TYPE]: InstanceMainComponent,
-      [VOLUME_TYPE]: VolumeMainComponent,
       [OFFERING_TYPE_BOOKING]: BookingMainComponent,
       [SLURM_PLUGIN]: AllocationMainComponent,
     }[resource.offering_type] || null;
@@ -86,7 +100,7 @@ export const ResourceDetailsView: FC<any> = ({
           </div>
         </>
       ) : (
-        <>
+        <PageBarProvider>
           <PublicDashboardHero
             logo={logo}
             logoAlt={resource.category_title}
@@ -145,31 +159,36 @@ export const ResourceDetailsView: FC<any> = ({
             <ResourceDetailsHeaderBody resource={resource} scope={scope} />
           </PublicDashboardHero>
 
+          <ResourceDetailsBar />
+
           <div className="container-xxl py-10">
-            <Row className="mb-10">
-              <Col md={8} sm={12}>
-                <GettingStartedCard resource={resource} offering={offering} />
-                {MainComponent && (
-                  <ErrorBoundary fallback={ErrorMessage}>
-                    <MainComponent
-                      resource={resource}
-                      scope={scope}
-                      state={state}
-                    />
-                  </ErrorBoundary>
-                )}
-                <LexisLinkCard resource={resource} />
-                <RobotAccountCard resource={resource} />
-                <UsageCard resource={resource} />
-              </Col>
-              <Col md={4} sm={12}>
-                <StatusCard />
-                <ActivityCard state={state} resource={resource} />
-                <ResourceIssuesCard resource={resource} state={state} />
-              </Col>
-            </Row>
+            <GettingStartedCard resource={resource} offering={offering} />
+            {specViews.map((specView, index) => (
+              <ResourceSpecGroupCard
+                key={specView.key}
+                index={index}
+                specView={specView}
+                scope={scope}
+                resource={resource}
+              />
+            ))}
+            {MainComponent && (
+              <ErrorBoundary fallback={ErrorMessage}>
+                <MainComponent
+                  resource={resource}
+                  scope={scope}
+                  state={state}
+                />
+              </ErrorBoundary>
+            )}
+            <LexisLinkCard resource={resource} />
+            <RobotAccountCard resource={resource} />
+            <UsageCard resource={resource} />
+
+            <ActivityCard state={state} resource={resource} />
+            <ResourceIssuesCard resource={resource} state={state} />
           </div>
-        </>
+        </PageBarProvider>
       )}
     </>
   );

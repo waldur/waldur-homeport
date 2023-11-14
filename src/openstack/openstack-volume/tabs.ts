@@ -16,6 +16,7 @@ const VolumeSnapshotsList = lazyComponent(
 NestedResourceTabsConfiguration.register(VOLUME_TYPE, () => [
   {
     title: translate('Snapshots'),
+    key: 'snapshots',
     children: [
       {
         key: 'snapshots',

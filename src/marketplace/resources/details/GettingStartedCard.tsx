@@ -4,9 +4,9 @@ import { translate } from '@waldur/i18n';
 
 import { GettingStartedMessage } from './GettingStartedMessage';
 
-export const GettingStartedCard = ({ resource, offering }) =>
-  offering.getting_started ? (
-    <Card className="mb-7">
+export const GettingStartedCard = ({ resource, offering }) => {
+  return offering.getting_started ? (
+    <Card className="mb-7" id="getting-started">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Getting started')}</h3>
@@ -17,3 +17,4 @@ export const GettingStartedCard = ({ resource, offering }) =>
       </Card.Body>
     </Card>
   ) : null;
+};

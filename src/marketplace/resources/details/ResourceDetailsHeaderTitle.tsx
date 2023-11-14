@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { ProjectUsersBadge } from '@waldur/project/ProjectUsersBadge';
 
 import { ResourceSelectorToggle } from '../resource-selector/ResourceSelector';
 import { Resource } from '../types';
@@ -29,7 +28,6 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<ResourceDetailsHeader
             [{translate('Show project')}]
           </Link>
         </i>
-        <ProjectUsersBadge />
         {resource.description ? <p>{resource.description}</p> : null}
       </>
     );

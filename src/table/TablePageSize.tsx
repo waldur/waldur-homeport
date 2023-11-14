@@ -3,14 +3,14 @@ import { FunctionComponent } from 'react';
 import { Pagination } from '@waldur/table/types';
 import './TablePageSize.scss';
 
-const PAGE_SIZES = [10, 25, 50, 100];
+const PAGE_SIZES = [5, 10, 25, 50, 100];
 
 interface TablePageSizeProps extends Pagination {
   updatePageSize: (value: number) => void;
 }
 
 export const TablePageSize: FunctionComponent<TablePageSizeProps> = (props) => {
-  if (props.resultCount <= 10) {
+  if (props.resultCount <= 5) {
     return null;
   }
   return (
