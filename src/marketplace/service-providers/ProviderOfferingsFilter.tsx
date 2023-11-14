@@ -7,7 +7,7 @@ import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/
 import {
   OfferingStateFilter,
   getStates,
-} from '@waldur/marketplace/offerings/OfferingStateFilter';
+} from '@waldur/marketplace/offerings/list/OfferingStateFilter';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { PROVIDER_OFFERINGS_FORM_ID } from './constants';

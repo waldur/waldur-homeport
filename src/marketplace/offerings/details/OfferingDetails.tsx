@@ -9,7 +9,7 @@ import { Category, Offering } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
 
-import { PreviewButton } from '../PreviewButton';
+import { PreviewButton } from '../list/PreviewButton';
 
 import { OfferingDetailsBar } from './OfferingDetailsBar';
 import { OfferingDetailsHeader } from './OfferingDetailsHeader';

@@ -16,7 +16,7 @@ import { isDescendantOf } from '@waldur/navigation/useTabs';
 import { OfferingStateActions } from '../actions/OfferingStateActions';
 import { OfferingDetailsHeader } from '../details/OfferingDetailsHeader';
 import { OfferingImagesList } from '../images/OfferingImagesList';
-import { PreviewButton } from '../PreviewButton';
+import { PreviewButton } from '../list/PreviewButton';
 
 import { AttributesSection } from './attributes/AttributesSection';
 import { ComponentsSection } from './components/ComponentsSection';

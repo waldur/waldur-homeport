@@ -59,7 +59,7 @@ const PublicOfferingDetailsContainer = lazyComponent(
   'PublicOfferingDetailsContainer',
 );
 const MyOfferingsListContainer = lazyComponent(
-  () => import('./offerings/MyOfferingsListContainer'),
+  () => import('./offerings/list/MyOfferingsListContainer'),
   'MyOfferingsListContainer',
 );
 const ProviderOfferingsList = lazyComponent(

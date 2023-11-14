@@ -9,7 +9,7 @@ import { hasPermission } from '@waldur/permissions/hasPermission';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 const OfferingCreateDialog = lazyComponent(
-  () => import('./actions/OfferingCreateDialog'),
+  () => import('../actions/OfferingCreateDialog'),
   'OfferingCreateDialog',
 );
 

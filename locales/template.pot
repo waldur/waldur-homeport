@@ -193,8 +193,8 @@ msgstr ""
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
-#: src/marketplace/offerings/OfferingViews.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
+#: src/marketplace/offerings/list/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
@@ -245,8 +245,8 @@ msgid "Activation price"
 msgstr ""
 
 #: src/invitations/GroupInvitationsList.tsx
-#: src/marketplace/offerings/OfferingStateCell.tsx
-#: src/marketplace/offerings/OfferingStateFilter.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansSection.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/user/support/UserFilter.tsx
@@ -363,7 +363,7 @@ msgstr ""
 msgid "Add member"
 msgstr ""
 
-#: src/marketplace/offerings/CreateOfferingButton.tsx
+#: src/marketplace/offerings/list/CreateOfferingButton.tsx
 msgid "Add new offering"
 msgstr ""
 
@@ -803,9 +803,9 @@ msgstr ""
 msgid "Archive offering plan"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingStateCell.tsx
-#: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansSection.tsx
 msgid "Archived"
 msgstr ""
@@ -894,7 +894,7 @@ msgstr ""
 msgid "Are you sure you want to delete the {title} category?"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingViews.tsx
+#: src/marketplace/offerings/list/DeleteOfferingButton.tsx
 msgid "Are you sure you want to delete this offering?"
 msgstr ""
 
@@ -1559,10 +1559,10 @@ msgid "Categories"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/offerings/import/tabs.ts
+#: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/attributes/AttributesSection.tsx
@@ -2309,8 +2309,8 @@ msgstr ""
 #: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
@@ -2685,8 +2685,8 @@ msgstr ""
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/issues/comments/IssueCommentItem.tsx
-#: src/marketplace/offerings/OfferingViews.tsx
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
+#: src/marketplace/offerings/list/DeleteOfferingButton.tsx
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
 #: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
@@ -2711,7 +2711,7 @@ msgstr ""
 msgid "Delete catalog"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingViews.tsx
+#: src/marketplace/offerings/list/DeleteOfferingButton.tsx
 msgid "Delete confirmation"
 msgstr ""
 
@@ -3086,9 +3086,9 @@ msgstr ""
 
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
-#: src/marketplace/offerings/OfferingStateCell.tsx
-#: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
@@ -3147,8 +3147,8 @@ msgstr ""
 #: src/marketplace/category/admin/GroupEditButton.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/deploy/DeployPage.tsx
-#: src/marketplace/offerings/OfferingViews.tsx
 #: src/marketplace/offerings/details/OfferingDetails.tsx
+#: src/marketplace/offerings/list/EditOfferingButton.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
 #: src/marketplace/offerings/update/attributes/EditAttributeButton.tsx
 #: src/marketplace/offerings/update/components/EditComponentButton.tsx
@@ -3496,7 +3496,7 @@ msgstr ""
 msgid "Error traceback"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingViews.tsx
+#: src/marketplace/offerings/list/DeleteOfferingButton.tsx
 msgid "Error while deleting offering."
 msgstr ""
 
@@ -4801,6 +4801,10 @@ msgstr ""
 msgid "Invoice number"
 msgstr ""
 
+#: src/invoices/details/InvoiceDetails.tsx
+msgid "Invoice period"
+msgstr ""
+
 #: src/invoices/list/InvoicesStatsList.tsx
 msgid "Invoice statistics"
 msgstr ""
@@ -5625,7 +5629,6 @@ msgstr ""
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
@@ -5634,6 +5637,7 @@ msgstr ""
 #: src/marketplace/offerings/import/SelectCategoryTab.tsx
 #: src/marketplace/offerings/import/SelectOfferingTab.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/marketplace/offerings/update/plans/PlanForm.tsx
@@ -6142,7 +6146,7 @@ msgstr ""
 msgid "Note that this volume will not be charged separately for {organization}."
 msgstr ""
 
-#: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
+#: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 msgid "Nothing to see here"
 msgstr ""
 
@@ -6300,7 +6304,7 @@ msgstr ""
 msgid "Offering cost chart"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingViews.tsx
+#: src/marketplace/offerings/list/DeleteOfferingButton.tsx
 msgid "Offering deleted successfully."
 msgstr ""
 
@@ -6444,7 +6448,7 @@ msgstr ""
 #: src/broadcasts/BroadcastExpandableRow.tsx
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/CampaignForm.tsx
 #: src/marketplace/service-providers/CampaignUpdateForm.tsx
@@ -6552,8 +6556,8 @@ msgstr ""
 msgid "Open issues"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingViews.tsx
-#: src/marketplace/offerings/PreviewButton.tsx
+#: src/marketplace/offerings/list/OpenPublicOffering.tsx
+#: src/marketplace/offerings/list/PreviewButton.tsx
 msgid "Open public page"
 msgstr ""
 
@@ -6731,10 +6735,10 @@ msgstr ""
 #: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/details/CustomerCreateGroup.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/tabs.ts
+#: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsFilter.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
@@ -7012,9 +7016,9 @@ msgstr ""
 msgid "Pause offering"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingStateCell.tsx
-#: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
 msgid "Paused"
 msgstr ""
 
@@ -7572,7 +7576,7 @@ msgstr ""
 msgid "Preferred language"
 msgstr ""
 
-#: src/marketplace/offerings/PreviewButton.tsx
+#: src/marketplace/offerings/list/PreviewButton.tsx
 #: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
 msgid "Preview"
@@ -7582,12 +7586,12 @@ msgstr ""
 msgid "Preview changes"
 msgstr ""
 
-#: src/marketplace/offerings/PreviewOfferingDialog.tsx
+#: src/marketplace/offerings/list/PreviewOfferingDialog.tsx
 msgid "Preview offering"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingViews.tsx
-#: src/marketplace/offerings/PreviewButton.tsx
+#: src/marketplace/offerings/list/PreviewButton.tsx
+#: src/marketplace/offerings/list/PreviewOfferingButton.tsx
 msgid "Preview order form"
 msgstr ""
 
@@ -9647,7 +9651,7 @@ msgstr ""
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
-#: src/marketplace/offerings/OfferingStateFilter.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/marketplace/resources/list/RuntimeStateFilter.tsx
@@ -10352,11 +10356,11 @@ msgstr ""
 #: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/details/OfferingResourcesFilter.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/OfferingsFilter.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 #: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/list/OfferingsFilter.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
@@ -11447,11 +11451,11 @@ msgstr ""
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/marketplace/details/OfferingOrderItemsList.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/offerings/update/options/OptionForm.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -13635,7 +13639,7 @@ msgstr ""
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
+#: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 msgid "You can start filling this table by creating your first offering."
 msgstr ""
 
