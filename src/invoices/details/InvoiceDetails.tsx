@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
+import { formatPeriod } from '@waldur/invoices/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { Invoice } from '../types';
@@ -43,6 +44,9 @@ export const InvoiceDetails = ({
                     </>
                   )}
                   <div>
+                    <strong>{translate('Invoice period')}: </strong>
+                    {formatPeriod(invoice) || '-'}
+                    <br />
                     <strong>{translate('Invoice date')}: </strong>
                     {invoice.invoice_date || '-'}
                     <br />
@@ -53,6 +57,15 @@ export const InvoiceDetails = ({
               </div>
             </div>
 
+            <div className="fs-5 mb-3 text-uppercase">
+              {translate('Invoice to')}
+            </div>
+            <CustomerDetails customer={invoice.customer_details} />
+
+            <div className="fs-5 mb-3 text-uppercase">
+              {translate('Invoice from')}
+            </div>
+            <CustomerDetails customer={invoice.issuer_details} />
             <div className="table-responsive m-t">
               <table className="table invoice-table">
                 <thead>
@@ -120,16 +133,6 @@ export const InvoiceDetails = ({
                 </tbody>
               </table>
             )}
-
-            <div className="fs-5 mb-3 text-uppercase">
-              {translate('Invoice to')}
-            </div>
-            <CustomerDetails customer={invoice.customer_details} />
-
-            <div className="fs-5 mb-3 text-uppercase">
-              {translate('Invoice from')}
-            </div>
-            <CustomerDetails customer={invoice.issuer_details} />
           </div>
         </div>
       </div>

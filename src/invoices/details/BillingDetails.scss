@@ -9,3 +9,15 @@
     width: 100%;
   }
 }
+
+@media print {
+  body {
+    visibility: hidden;
+  }
+  #kt_content_container {
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
