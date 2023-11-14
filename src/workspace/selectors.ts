@@ -125,6 +125,6 @@ export const isProjectManagerSelector = (user, project) =>
   user.permissions?.find(
     (permission) =>
       permission.scope_type === 'project' &&
-      permission.scope_uuid === project.uuid &&
+      permission.scope_uuid === project?.uuid &&
       permission.role_name === RoleEnum.PROJECT_MANAGER,
   );
