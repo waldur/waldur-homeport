@@ -6,7 +6,7 @@ import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/
 import {
   OfferingStateFilter,
   getStates,
-} from '@waldur/marketplace/offerings/OfferingStateFilter';
+} from '@waldur/marketplace/offerings/list/OfferingStateFilter';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 

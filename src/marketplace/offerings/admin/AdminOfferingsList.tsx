@@ -13,7 +13,7 @@ import {
   isSupportOnly,
 } from '@waldur/workspace/selectors';
 
-import { TableComponent, TableOptions } from '../OfferingsList';
+import { TableComponent, TableOptions } from '../list/OfferingsList';
 
 import {
   ADMIN_OFFERINGS_FILTER_FORM_ID,

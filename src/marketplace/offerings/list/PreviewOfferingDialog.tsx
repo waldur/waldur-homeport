@@ -14,9 +14,8 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { RootState } from '@waldur/store/reducers';
 
-import { DeployPage } from '../deploy/DeployPage';
-
-import { getDefaultLimits } from './utils';
+import { DeployPage } from '../../deploy/DeployPage';
+import { getDefaultLimits } from '../utils';
 
 interface PreviewOfferingOwnProps {
   resolve: {

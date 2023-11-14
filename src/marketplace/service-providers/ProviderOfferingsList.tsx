@@ -11,11 +11,11 @@ import { createFetcher, Table } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { useTable } from '@waldur/table/utils';
 
-import { CreateOfferingButton } from '../offerings/CreateOfferingButton';
 import { useOfferingDropdownActions } from '../offerings/hooks';
-import { OfferingsListTablePlaceholder } from '../offerings/OfferingsListTablePlaceholder';
-import { OfferingStateCell } from '../offerings/OfferingStateCell';
-import { OfferingViews } from '../offerings/OfferingViews';
+import { CreateOfferingButton } from '../offerings/list/CreateOfferingButton';
+import { OfferingActions } from '../offerings/list/OfferingActions';
+import { OfferingsListTablePlaceholder } from '../offerings/list/OfferingsListTablePlaceholder';
+import { OfferingStateCell } from '../offerings/list/OfferingStateCell';
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 import { ServiceProvider } from '../types';
 
@@ -88,7 +88,7 @@ export const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> =
         dropdownActions={dropdownActions}
         actions={<CreateOfferingButton fetch={tableProps.fetch} />}
         hoverableRow={(row) => (
-          <OfferingViews row={row.row} refetch={tableProps.fetch} />
+          <OfferingActions row={row.row} refetch={tableProps.fetch} />
         )}
         {...extraTableProps}
         filters={<ProviderOfferingsFilter />}
