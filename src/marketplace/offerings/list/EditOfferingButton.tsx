@@ -1,4 +1,4 @@
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { Dropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -6,8 +6,9 @@ import { translate } from '@waldur/i18n';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { DropdownLink } from './DropdownLink';
+
 export const EditOfferingButton = ({ row }) => {
-  const router = useRouter();
   const customer = useSelector(getCustomer);
 
   const { state } = useCurrentStateAndParams();
@@ -17,12 +18,11 @@ export const EditOfferingButton = ({ row }) => {
 
   return (
     <Dropdown.Item
-      as="button"
-      onClick={() => {
-        router.stateService.go(targetState, {
-          offering_uuid: row.uuid,
-          uuid: row.customer_uuid || customer.uuid,
-        });
+      as={DropdownLink}
+      state={targetState}
+      params={{
+        offering_uuid: row.uuid,
+        uuid: row.customer_uuid || customer.uuid,
       }}
     >
       {translate('Edit')}

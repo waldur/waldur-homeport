@@ -1,21 +1,17 @@
-import { useRouter } from '@uirouter/react';
 import { Dropdown } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-export const OpenPublicOffering = ({ row }) => {
-  const router = useRouter();
+import { DropdownLink } from './DropdownLink';
 
-  return (
-    <Dropdown.Item
-      as="button"
-      onClick={() => {
-        router.stateService.go('public.marketplace-public-offering', {
-          uuid: row.uuid,
-        });
-      }}
-    >
-      {translate('Open public page')}
-    </Dropdown.Item>
-  );
-};
+export const OpenPublicOffering = ({ row }) => (
+  <Dropdown.Item
+    as={DropdownLink}
+    state="public.marketplace-public-offering"
+    params={{
+      uuid: row.uuid,
+    }}
+  >
+    {translate('Open public page')}
+  </Dropdown.Item>
+);
