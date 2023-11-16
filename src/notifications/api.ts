@@ -1,4 +1,4 @@
-import { getList } from '@waldur/core/api';
+import { getList, post } from '@waldur/core/api';
 import { NotificationMessageTemplate } from '@waldur/notifications/types';
 
 export const getNotificationMessagesTemplates = (params?: {}) => {
@@ -6,4 +6,8 @@ export const getNotificationMessagesTemplates = (params?: {}) => {
     '/notification-messages-templates/',
     params,
   );
+};
+
+export const overrideNotificationTemplate = (url, content) => {
+  return post(`${url}override/`, content);
 };
