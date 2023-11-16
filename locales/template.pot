@@ -1311,10 +1311,6 @@ msgstr ""
 msgid "Booking is not allowed to overlap other bookings."
 msgstr ""
 
-#: src/customer/dashboard/CustomerBookingManagement.tsx
-msgid "Booking management"
-msgstr ""
-
 #: src/booking/BookingsList.tsx
 #: src/booking/offering/BookingResourcesCalendar.tsx
 msgid "Bookings"
@@ -11775,7 +11771,6 @@ msgstr ""
 
 #: src/booking/offering/BookingResourcesCalendar.tsx
 #: src/customer/dashboard/BookingsCalendar.tsx
-#: src/customer/dashboard/CustomerBookingManagement.tsx
 msgid "Unable to load booking offerings."
 msgstr ""
 

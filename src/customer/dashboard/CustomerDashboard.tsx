@@ -1,7 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { CustomerBookingManagement } from '@waldur/customer/dashboard/CustomerBookingManagement';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { CustomerChecklistOverview } from '@waldur/marketplace-checklist/CustomerChecklistOverview';
@@ -29,13 +28,12 @@ export const CustomerDashboard: FunctionComponent = () => {
   return (
     <>
       {isServiceManager ? (
-        <CustomerBookingManagement />
+        <CustomerProfile customer={customer} />
       ) : (
         <>
           <CustomerProfile customer={customer} />
           <CustomerDashboardChart customer={customer} user={user} />
           <CustomerChecklistOverview customer={customer} />
-          <CustomerBookingManagement />
           <div className="mb-6">
             <ProjectsList />
           </div>
