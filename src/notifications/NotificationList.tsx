@@ -1,5 +1,6 @@
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { NotificationActions } from '@waldur/notifications/NotificationActions';
 import { NotificationExpandableRow } from '@waldur/notifications/NotificationExpandableRow';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
@@ -29,6 +30,9 @@ export const NotificationList = () => {
       ]}
       verboseName={translate('notifications')}
       expandableRow={NotificationExpandableRow}
+      hoverableRow={({ row }) => (
+        <NotificationActions row={row} refetch={tableProps.fetch} />
+      )}
       initialPageSize={10}
       showPageSizeSelector={true}
       expandableRowClassName="bg-gray-200"
