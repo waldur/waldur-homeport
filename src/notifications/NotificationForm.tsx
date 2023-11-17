@@ -1,5 +1,6 @@
-import { Modal, Tab, Tabs } from 'react-bootstrap';
-import { Field, FieldArray } from 'redux-form';
+import { Button, Modal, Tab, Tabs } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { change, Field, FieldArray } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { required } from '@waldur/core/validators';
@@ -8,6 +9,11 @@ import { translate } from '@waldur/i18n';
 
 const renderFields = ({ fields, submitting, meta: { pristine } }: any) => {
   const allFields = fields.getAll();
+  const dispatch = useDispatch();
+  const handleReset = (name, index) => {
+    const originalContent = allFields[index].original_content;
+    dispatch(change('NotificationUpdateForm', name, originalContent));
+  };
   return (
     <>
       <Tabs defaultActiveKey="tab-0" id="notification-templates-tabs">
@@ -24,9 +30,22 @@ const renderFields = ({ fields, submitting, meta: { pristine } }: any) => {
                 component={TextField}
                 type="text"
                 label={translate('Content')}
+                placeholder={allFields[index].original_content}
                 validate={required}
                 required={true}
               />
+              <div className="mt-1 text-end">
+                <Button
+                  onClick={() => handleReset(`${template}.content`, index)}
+                  variant="warning"
+                  size="sm"
+                >
+                  <>
+                    <i className="fa fa-undo" />
+                    {translate('Reset')}
+                  </>
+                </Button>
+              </div>
             </Tab>
           );
         })}
