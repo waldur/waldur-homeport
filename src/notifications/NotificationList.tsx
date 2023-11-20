@@ -9,6 +9,7 @@ export const NotificationList = () => {
   const tableProps = useTable({
     table: 'notification',
     fetchData: createFetcher('notification-messages'),
+    queryField: 'query',
   });
   return (
     <Table
