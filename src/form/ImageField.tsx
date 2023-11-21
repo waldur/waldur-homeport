@@ -101,10 +101,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
           backgroundSize: `${size}px ${size}px`,
         }}
       >
-        <div
-          ref={previewRef}
-          // className={`image-input-wrapper w-${size}px h-75px`}
-        ></div>
+        <div ref={previewRef}></div>
 
         {/* Pick image */}
         <label
