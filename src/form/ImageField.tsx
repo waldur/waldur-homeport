@@ -66,6 +66,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
       previewImage(imageFile, previewRef.current, size);
       if (!imageFile && inputRef.current) {
         inputRef.current.value = null;
+        previewRef.current.className = `image-input-wrapper w-${size}px h-${size}px`;
       }
     },
     [previewRef, input, size],
