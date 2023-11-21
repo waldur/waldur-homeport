@@ -33,8 +33,8 @@
 
   // Change Button
   [data-kt-image-input-action='change'] {
-    left: 23%;
-    top: -20%;
+    left: 100%;
+    top: 0%;
     input {
       width: 0 !important;
       height: 0 !important;
@@ -47,7 +47,7 @@
   [data-kt-image-input-action='cancel'],
   [data-kt-image-input-action='remove'] {
     position: absolute;
-    left: 23%;
+    left: 100%;
     top: 0%;
   }
 

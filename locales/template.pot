@@ -8671,6 +8671,7 @@ msgid "Reserved slot by {name}"
 msgstr ""
 
 #: src/form/ListDialog.tsx
+#: src/notifications/NotificationForm.tsx
 #: src/vmware/actions/ResetAction.tsx
 msgid "Reset"
 msgstr ""

@@ -18,21 +18,41 @@ interface ImageFieldProps extends FormField {
   initialValue?: ImageType;
 }
 
-const previewImage = (imageFile: ImageType, element: HTMLElement) => {
+const previewImage = (
+  imageFile: ImageType,
+  element: HTMLElement,
+  size: number,
+) => {
   if (!imageFile) {
     element.style.backgroundImage = 'none';
     return;
   }
+
+  const imageElement = new Image();
+
   if (typeof imageFile === 'string') {
-    element.style.backgroundImage = `url(${imageFile})`;
+    imageElement.src = imageFile;
   } else if (imageFile instanceof File) {
     const fileReader = new FileReader();
+
     fileReader.onload = () => {
-      element.style.backgroundImage = `url(${fileReader.result})`;
+      imageElement.src = fileReader.result as string;
     };
+
     fileReader.readAsDataURL(imageFile);
   }
-  element.style.backgroundSize = '100%';
+
+  imageElement.onload = () => {
+    const aspectRatio = imageElement.width / size;
+
+    const calculatedHeight = imageElement.height / aspectRatio;
+    const roundedHeight = Math.ceil(calculatedHeight / 10) * 10;
+
+    element.style.backgroundImage = `url(${imageElement.src})`;
+    element.style.backgroundSize = `100%`;
+
+    element.className = `image-input-wrapper w-${size}px h-${roundedHeight}px`;
+  };
 };
 
 export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
@@ -43,17 +63,17 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
   const changeImage = useCallback(
     (imageFile: ImageType) => {
       input.onChange && input.onChange(imageFile);
-      previewImage(imageFile, previewRef.current);
+      previewImage(imageFile, previewRef.current, size);
       if (!imageFile && inputRef.current) {
         inputRef.current.value = null;
       }
     },
-    [previewRef, input],
+    [previewRef, input, size],
   );
 
   useEffect(() => {
-    previewImage(input.value, previewRef.current);
-  }, [input.value, previewRef]);
+    previewImage(input.value, previewRef.current, size);
+  }, [input.value, previewRef, size]);
 
   // Reset input on changing initial value
   useEffect(() => {
@@ -74,11 +94,16 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
           'image-input-changed': isChanged,
         })}
         data-kt-image-input="true"
-        style={{ backgroundImage: `url(${avatarBlank})` }}
+        style={{
+          backgroundImage: `url(${avatarBlank})`,
+          width: size,
+          height: size,
+          backgroundSize: `${size}px ${size}px`,
+        }}
       >
         <div
           ref={previewRef}
-          className={`image-input-wrapper w-${size}px h-70px`}
+          // className={`image-input-wrapper w-${size}px h-75px`}
         ></div>
 
         {/* Pick image */}
