@@ -24,6 +24,7 @@ const INITIAL_STATE: TableState = {
   toggled: {},
   filterVisible: true,
   selectedRows: [],
+  firstFetch: true,
 };
 
 const deleteEntity = (state, action) => {
@@ -55,6 +56,7 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         },
         loading: false,
         error: null,
+        firstFetch: false,
       };
 
     case actions.FETCH_LIST_ERROR:

@@ -24,6 +24,7 @@ describe('Table reducer', () => {
       toggled: {},
       filterVisible: true,
       selectedRows: [],
+      firstFetch: true,
     });
   });
 
