@@ -73,6 +73,7 @@ export interface TableState {
   toggled?: object;
   filterVisible?: boolean;
   selectedRows?: any[];
+  firstFetch?: boolean;
 }
 
 export interface Sorting {
