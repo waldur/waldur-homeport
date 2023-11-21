@@ -4,10 +4,9 @@ import { Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { PageBarTab } from '@waldur/marketplace/common/PageBarTab';
 import { PageBarContext } from '@waldur/marketplace/context';
-import { scrollToSectionById } from '@waldur/marketplace/offerings/utils';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ProjectUsersBadge } from '@waldur/project/ProjectUsersBadge';
 
@@ -20,7 +19,7 @@ const ProjectUsersList = lazyComponent(
 
 export const ResourceDetailsBar: FunctionComponent = () => {
   const { state } = useCurrentStateAndParams();
-  const { tabs, addTabs } = useContext(PageBarContext);
+  const { tabs, addTabs, visibleSectionId } = useContext(PageBarContext);
 
   const dispatch = useDispatch();
   const openTeamModal = useCallback(() => {
@@ -63,15 +62,14 @@ export const ResourceDetailsBar: FunctionComponent = () => {
           <Col className="scroll-x pt-2 pb-1">
             <div className="d-flex align-items-center w-100">
               {tabs.map((tab) => (
-                <Link
+                <PageBarTab
                   key={tab.key}
+                  title={tab.title}
+                  name={tab.key}
                   state={state.name}
                   params={{ '#': tab.key }}
-                  className="btn btn-active-color-primary"
-                  onClick={() => scrollToSectionById(tab.key)}
-                >
-                  {tab.title}
-                </Link>
+                  active={visibleSectionId === tab.key}
+                />
               ))}
             </div>
           </Col>
