@@ -1,4 +1,6 @@
-import { FC, createContext, useState } from 'react';
+import { FC, createContext, useMemo, useState } from 'react';
+
+import useScrollTracker from '@waldur/core/useScrollTracker';
 
 interface Tab {
   key: string;
@@ -10,6 +12,7 @@ interface PageBarContextModel {
   tabs: Array<Tab>;
   addTabs(tabs: Tab[]): void;
   clearTabs(): void;
+  visibleSectionId?: string;
 }
 
 export const PageBarContext = createContext<PageBarContextModel>({
@@ -43,10 +46,19 @@ export const PageBarProvider: FC = ({ children }) => {
 
   const clearTabs = () => setTabs([]);
 
+  const tabKeys = useMemo(() => tabs.map((tab) => tab.key), [tabs]);
+
+  const visibleSectionId = useScrollTracker({
+    sectionIds: tabKeys,
+    trackSide: 'bottom',
+    offset: 100,
+  });
+
   const value: PageBarContextModel = {
     tabs,
     addTabs,
     clearTabs,
+    visibleSectionId,
   };
 
   return (

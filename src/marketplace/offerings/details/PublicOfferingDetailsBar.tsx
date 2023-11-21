@@ -1,13 +1,13 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
+import useScrollTracker from '@waldur/core/useScrollTracker';
 import { translate } from '@waldur/i18n';
+import { PageBarTab } from '@waldur/marketplace/common/PageBarTab';
 import { Offering } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-
-import { scrollToSectionById } from '../utils';
 
 import './OfferingPageBar.scss';
 
@@ -23,84 +23,57 @@ export const PublicOfferingDetailsBar: FunctionComponent<OwnProps> = ({
   const { state } = useCurrentStateAndParams();
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
+  const tabs = useMemo(() => {
+    return [
+      { key: 'general', title: translate('General'), visible: true },
+      { key: 'description', title: translate('Description'), visible: true },
+      { key: 'components', title: translate('Components'), visible: true },
+      {
+        key: 'images',
+        title: translate('Images'),
+        visible: showExperimentalUiComponents,
+      },
+      {
+        key: 'getting-started',
+        title: translate('Getting started'),
+        visible: showExperimentalUiComponents,
+      },
+      {
+        key: 'faq',
+        title: translate('FAQ'),
+        visible: showExperimentalUiComponents,
+      },
+      {
+        key: 'reviews',
+        title: translate('Reviews'),
+        visible: showExperimentalUiComponents,
+      },
+      { key: 'pricing', title: translate('Pricing'), visible: true },
+    ].filter((tab) => tab.visible);
+  }, []);
+
+  const activeSectionId = useScrollTracker({
+    sectionIds: tabs.map((tab) => tab.key),
+    trackSide: 'bottom',
+    offset: 100,
+  });
+
   return (
     <div className="offering-page-bar bg-body shadow-sm">
       <div className="container-xxl">
         <div className="d-flex scroll-x pt-2 pb-1">
           <div className="d-flex align-items-stretch justify-content-between w-100">
             <div className="d-flex align-items-center">
-              <Link
-                state={state.name}
-                params={{ '#': 'general' }}
-                className="btn btn-active-color-primary"
-                onClick={() => scrollToSectionById('general')}
-              >
-                {translate('General')}
-              </Link>
-              <Link
-                state={state.name}
-                params={{ '#': 'description' }}
-                className="btn btn-active-color-primary"
-                onClick={() => scrollToSectionById('description')}
-              >
-                {translate('Description')}
-              </Link>
-              <Link
-                state={state.name}
-                params={{ '#': 'components' }}
-                className="btn btn-active-color-primary"
-                onClick={() => scrollToSectionById('components')}
-              >
-                {translate('Components')}
-              </Link>
-              {showExperimentalUiComponents && (
-                <Link
+              {tabs.map((tab) => (
+                <PageBarTab
+                  key={tab.key}
+                  title={tab.title}
+                  name={tab.key}
                   state={state.name}
-                  params={{ '#': 'images' }}
-                  className="btn btn-active-color-primary"
-                  onClick={() => scrollToSectionById('images')}
-                >
-                  {translate('Images')}
-                </Link>
-              )}
-              {showExperimentalUiComponents && (
-                <Link
-                  state={state.name}
-                  params={{ '#': 'getting-started' }}
-                  className="btn btn-active-color-primary"
-                  onClick={() => scrollToSectionById('getting-started')}
-                >
-                  {translate('Getting started')}
-                </Link>
-              )}
-              {showExperimentalUiComponents && (
-                <Link
-                  state={state.name}
-                  params={{ '#': 'faq' }}
-                  className="btn btn-active-color-primary"
-                  onClick={() => scrollToSectionById('faq')}
-                >
-                  {translate('FAQ')}
-                </Link>
-              )}
-              {showExperimentalUiComponents && (
-                <Link
-                  state={state.name}
-                  params={{ '#': 'reviews' }}
-                  className="btn btn-active-color-primary"
-                  onClick={() => scrollToSectionById('reviews')}
-                >
-                  {translate('Reviews')}
-                </Link>
-              )}
-              <Link
-                state={state.name}
-                params={{ '#': 'pricing' }}
-                className="btn btn-active-color-primary"
-                onClick={() => scrollToSectionById('pricing')}
-              >
-                {translate('Pricing')}
-              </Link>
+                  params={{ '#': tab.key }}
+                  active={activeSectionId === tab.key}
+                />
+              ))}
             </div>
             <Tip
               id="tip-deploy"

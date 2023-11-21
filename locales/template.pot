@@ -1981,6 +1981,7 @@ msgid "Contains the word"
 msgstr ""
 
 #: src/administration/agreements/CreateUserAgreementsForm.tsx
+#: src/notifications/NotificationForm.tsx
 msgid "Content"
 msgstr ""
 
@@ -3146,6 +3147,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderCampaignUpdateButton.tsx
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton.tsx
+#: src/notifications/NotificationUpdateButton.tsx
 #: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
 #: src/openstack/openstack-backup/actions/EditAction.tsx
 #: src/openstack/openstack-instance/actions/EditAction.tsx
@@ -6102,6 +6104,7 @@ msgstr ""
 msgid "Notification has been created."
 msgstr ""
 
+#: src/notifications/NotificationUpdateDialog.tsx
 #: src/user/hooks/utils.ts
 msgid "Notification has been updated."
 msgstr ""
@@ -9170,6 +9173,7 @@ msgstr ""
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
+#: src/notifications/NotificationForm.tsx
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
 msgid "Save"
@@ -10324,7 +10328,6 @@ msgstr ""
 #: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesFilter.tsx
 #: src/issues/list/IssuesList.tsx
-#: src/marketplace/resources/details/ResourceDetailsBar.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/project/team/InvitationsList.tsx
@@ -12327,6 +12330,10 @@ msgstr ""
 msgid "Unable to update a campaign."
 msgstr ""
 
+#: src/notifications/NotificationUpdateDialog.tsx
+msgid "Unable to update a notification."
+msgstr ""
+
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
 msgid "Unable to update access policy."
 msgstr ""
@@ -12612,6 +12619,10 @@ msgstr ""
 #: src/marketplace/service-providers/CampaignFooter.tsx
 #: src/marketplace/service-providers/CampaignUpdateDialog.tsx
 msgid "Update a campaign"
+msgstr ""
+
+#: src/notifications/NotificationUpdateDialog.tsx
+msgid "Update a notification"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
