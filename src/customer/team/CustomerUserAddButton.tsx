@@ -1,12 +1,14 @@
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { RoleEnum } from '@waldur/permissions/enums';
+import { PermissionEnum, RoleEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { formatRole } from '@waldur/permissions/utils';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 const CustomerUserAddDialog = lazyComponent(
   () => import('./CustomerUserAddDialog'),
@@ -24,6 +26,18 @@ export const CustomerUserAddButton: FunctionComponent<CustomerUserAddButtonProps
       dispatch(
         openModalDialog(CustomerUserAddDialog, { resolve: { refetch } }),
       );
+
+    const user = useSelector(getUser);
+    const customer = useSelector(getCustomer);
+
+    if (
+      !hasPermission(user, {
+        permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
+        customerId: customer.uuid,
+      })
+    ) {
+      return null;
+    }
 
     return (
       <ActionButton
