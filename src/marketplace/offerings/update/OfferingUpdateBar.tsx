@@ -61,6 +61,11 @@ export const OfferingUpdateBar: FunctionComponent<OwnProps> = ({
         visible: showIntegration,
       },
       {
+        key: 'endpoints',
+        title: translate('Endpoints'),
+        visible: true,
+      },
+      {
         key: 'options',
         title: translate('User input variables'),
         visible: showOfferingOptions(offering.type),
