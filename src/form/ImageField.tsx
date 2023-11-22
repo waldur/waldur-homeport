@@ -45,13 +45,11 @@ const previewImage = (
   imageElement.onload = () => {
     const aspectRatio = imageElement.width / size;
 
-    const calculatedHeight = imageElement.height / aspectRatio;
-    const roundedHeight = Math.ceil(calculatedHeight / 10) * 10;
+    const height = imageElement.height / aspectRatio;
 
     element.style.backgroundImage = `url(${imageElement.src})`;
     element.style.backgroundSize = `100%`;
-
-    element.className = `image-input-wrapper w-${size}px h-${roundedHeight}px`;
+    element.style.height = `${height}px`;
   };
 };
 
@@ -102,7 +100,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
           backgroundSize: `${size}px ${size}px`,
         }}
       >
-        <div ref={previewRef}></div>
+        <div ref={previewRef} className="image-input-wrapper"></div>
 
         {/* Pick image */}
         <label
