@@ -85,9 +85,11 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
                 {pageTitle || routerTitle}
               </h1>
             </div>
-            <div className="d-flex align-items-center ms-1 ms-lg-3">
-              {!hideProjectSelector && <ProjectSelectorDropdown />}
-            </div>
+            {user && (
+              <div className="d-flex align-items-center ms-1 ms-lg-3">
+                {!hideProjectSelector && <ProjectSelectorDropdown />}
+              </div>
+            )}
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
             {user && <LegacyBranchLink />}
