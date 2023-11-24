@@ -467,6 +467,10 @@ msgstr ""
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
+#: src/quotas/QuotasTable.tsx
+msgid "Additional quotas"
+msgstr ""
+
 #: src/openstack/OpenStackPluginOptionsForm.tsx
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr ""
@@ -1870,6 +1874,7 @@ msgid "Components"
 msgstr ""
 
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/quotas/constants.ts
 msgid "Compute"
 msgstr ""
 
@@ -3937,6 +3942,10 @@ msgstr ""
 msgid "Force destroy {name} instance"
 msgstr ""
 
+#: src/quotas/QuotasTable.tsx
+msgid "Free"
+msgstr ""
+
 #: src/marketplace/UserPluginOptionsForm.tsx
 #: src/user/support/UserDetailsTable.tsx
 msgid "FreeIPA"
@@ -5741,6 +5750,7 @@ msgstr ""
 #: src/openstack/openstack-instance/deploy/steps.ts
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-subnet/TenantSubnetsList.tsx
+#: src/quotas/constants.ts
 #: src/rancher/cluster/create/FormNetworkStep.tsx
 #: src/rancher/cluster/create/steps.ts
 #: src/vmware/PortsList.tsx
@@ -12866,6 +12876,10 @@ msgstr ""
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 msgid "Use sudo"
+msgstr ""
+
+#: src/quotas/QuotasTable.tsx
+msgid "Used"
 msgstr ""
 
 #: src/customer/team/CustomerUserAddDialog.tsx
