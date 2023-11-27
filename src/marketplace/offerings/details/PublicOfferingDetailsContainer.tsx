@@ -47,7 +47,7 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
       );
       return { offering, category };
     } catch (e) {
-      if (e.response.status == 401) {
+      if (e.response?.status == 401) {
         const offering = await getPublicOffering(uuid, ANONYMOUS_CONFIG);
         const category = await getCategory(
           offering.category_uuid,

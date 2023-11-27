@@ -52,6 +52,9 @@ export function* fetchList(action) {
     yield delay(100);
     const { rows, resultCount } = yield call(options.fetchData, request);
     const { entities, order } = transformRows(rows);
+    if (options.onFetch) {
+      options.onFetch(rows, resultCount, state.firstFetch);
+    }
     yield put(actions.fetchListDone(table, entities, order, resultCount));
     if (state.sorting && state.sorting.loading) {
       yield put(actions.sortListDone(table));

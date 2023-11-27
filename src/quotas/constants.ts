@@ -20,3 +20,35 @@ export const QUOTA_FILTERS = {
   backup_storage: 'filesize',
   cost: 'defaultCurrency',
 };
+
+export const QUOTA_CATEGORIES: Record<
+  string,
+  { label: string; names: (string | RegExp)[] }
+> = {
+  compute: {
+    label: translate('Compute'),
+    names: ['instances', 'ram', 'vcpu'],
+  },
+  network: {
+    label: translate('Network'),
+    names: [
+      'floating_ip_count',
+      'network_count',
+      'port_count',
+      'security_group_count',
+      'security_group_rule_count',
+      'subnet_count',
+    ],
+  },
+  storage: {
+    label: translate('Storage'),
+    names: [
+      'snapshots',
+      'snapshots_size',
+      'storage',
+      'volumes',
+      'volumes_size',
+      /^gigabytes/,
+    ],
+  },
+};
