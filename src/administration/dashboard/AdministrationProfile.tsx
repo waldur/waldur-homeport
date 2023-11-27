@@ -102,7 +102,7 @@ export const AdministrationProfile = ({
                 <LoadingSpinner />
               ) : (
                 <Col xs={12}>
-                  {!supportOnly && staff.options.length && (
+                  {!supportOnly && staff.options.length ? (
                     <Form.Group as={Row} className="mb-1">
                       <Form.Label column xs="auto">
                         {translate('Staff')}:
@@ -116,8 +116,8 @@ export const AdministrationProfile = ({
                         />
                       </Col>
                     </Form.Group>
-                  )}
-                  {supports.options.length && (
+                  ) : null}
+                  {supports.options.length ? (
                     <Form.Group as={Row} className="mb-1">
                       <Form.Label column xs="auto">
                         {translate('Support')}:
@@ -131,7 +131,7 @@ export const AdministrationProfile = ({
                         />
                       </Col>
                     </Form.Group>
-                  )}
+                  ) : null}
                 </Col>
               )}
             </Row>
