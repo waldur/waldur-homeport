@@ -18,27 +18,27 @@ interface ImageFieldProps extends FormField {
   initialValue?: ImageType;
 }
 
-const previewImage = (imageFile: ImageType, element: HTMLElement) => {
+const previewImage = (imageFile: ImageType, element: HTMLImageElement) => {
   if (!imageFile) {
-    element.style.backgroundImage = 'none';
+    element.src = avatarBlank;
     return;
   }
   if (typeof imageFile === 'string') {
-    element.style.backgroundImage = `url(${imageFile})`;
+    element.src = imageFile;
   } else if (imageFile instanceof File) {
     const fileReader = new FileReader();
     fileReader.onload = () => {
-      element.style.backgroundImage = `url(${fileReader.result})`;
+      // @ts-ignore
+      element.src = fileReader.result;
     };
     fileReader.readAsDataURL(imageFile);
   }
-  element.style.backgroundSize = '100%';
 };
 
 export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
-  const { input, size, initialValue } = props;
+  const { input, initialValue } = props;
   const inputRef = useRef<HTMLInputElement>();
-  const previewRef = useRef<HTMLDivElement>();
+  const previewRef = useRef<HTMLImageElement>();
 
   const changeImage = useCallback(
     (imageFile: ImageType) => {
@@ -74,12 +74,18 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
           'image-input-changed': isChanged,
         })}
         data-kt-image-input="true"
-        style={{ backgroundImage: `url(${avatarBlank})` }}
       >
-        <div
-          ref={previewRef}
-          className={`image-input-wrapper w-${size}px h-70px`}
-        ></div>
+        <div className="w-100px h-100px d-flex align-items-center justify-content-center">
+          <img
+            style={{
+              height: 'auto',
+              width: '100%',
+              maxHeight: '100%',
+              maxWidth: '100%',
+            }}
+            ref={previewRef}
+          />
+        </div>
 
         {/* Pick image */}
         <label
@@ -144,8 +150,4 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
       </div>
     </>
   );
-};
-
-ImageField.defaultProps = {
-  size: 125,
 };
