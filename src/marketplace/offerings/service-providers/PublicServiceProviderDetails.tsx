@@ -29,7 +29,7 @@ export const PublicServiceProviderDetails: FunctionComponent = () => {
         const user = await getCurrentUser({ __skipLogout__: true });
         dispatch(setCurrentUser(user));
       } catch (e) {
-        if (e.response.status == 401) {
+        if (e.response?.status == 401) {
           removeToken();
           clearTokenHeader();
         }

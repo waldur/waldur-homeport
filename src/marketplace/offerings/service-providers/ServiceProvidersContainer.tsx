@@ -22,7 +22,7 @@ export const ServiceProvidersContainer: FunctionComponent = () => {
     try {
       await getCurrentUser({ __skipLogout__: true });
     } catch (e) {
-      if (e.response.status == 401) {
+      if (e.response?.status == 401) {
         removeToken();
         clearTokenHeader();
       }

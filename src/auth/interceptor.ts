@@ -27,8 +27,7 @@ Axios.interceptors.response.use(
   },
   function invalidTokenInterceptor(error) {
     if (
-      error.response &&
-      error.response?.status === 401 &&
+      (error.message === 'Network Error' || error.response?.status === 401) &&
       error.config.url !== ENV.apiEndpoint + 'api-auth/password/' &&
       !error.config.hasOwnProperty('__skipLogout__')
     ) {
@@ -60,7 +59,7 @@ Axios.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === 429) {
+    if (error.response?.status === 429) {
       // If the error has status code 429, retry the request
       return wait(1000).then(() => Axios.request(error.config));
     }
