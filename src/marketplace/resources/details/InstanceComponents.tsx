@@ -1,7 +1,18 @@
 import { useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 
 import { translate } from '@waldur/i18n';
+
+import { QuotaCell } from './QuotaCell';
+
+const ResourceComponentItem = ({ title, usage, units, isSmallScreen }) => {
+  return (
+    <Col xs={isSmallScreen ? 12 : 6} sm={6} md={12} xl={6}>
+      <QuotaCell usage={usage} title={title} units={units} />
+    </Col>
+  );
+};
 
 export const InstanceComponents = ({ resource }) => {
   const { volumes } = resource;
@@ -16,42 +27,33 @@ export const InstanceComponents = ({ resource }) => {
       ),
     [volumes],
   );
+  const isSmallScreen = useMediaQuery({ maxWidth: 320 });
+
   return (
-    <>
-      <Row>
-        <Col className="text-center">
-          <div className="fs-1">{resource.cores}</div>
-          <p className="text-muted">{translate('vCPU')}</p>
-        </Col>
-        <Col className="text-center">
-          <div className="fs-1">{(resource.ram / 1024).toFixed()} GB</div>
-          <p className="text-muted">{translate('RAM')}</p>
-        </Col>
-      </Row>
-      <Row>
-        {Object.entries(volumeTypes)
-          .sort(([aType], [bType]) => aType.localeCompare(bType))
-          .map(([volumeType, usage]) => (
-            <Col key={volumeType} className="text-center">
-              <div className="fs-1">{(usage / 1024).toFixed()} GB</div>
-              <p className="text-muted">
-                {translate('{type} storage', { type: volumeType })}
-              </p>
-            </Col>
-          ))}
-      </Row>
-      <Row>
-        <Col>
-          <p className="text-muted text-center">
-            {translate('Flavor: {flavor}', { flavor: resource.flavor_name })}
-          </p>
-        </Col>
-        <Col>
-          <p className="text-muted text-center">
-            {translate('Image: {image}', { image: resource.image_name })}
-          </p>
-        </Col>
-      </Row>
-    </>
+    <Row>
+      <ResourceComponentItem
+        title={translate('vCPU')}
+        usage={resource.cores}
+        units={null}
+        isSmallScreen={isSmallScreen}
+      />
+      <ResourceComponentItem
+        title={translate('RAM')}
+        usage={(resource.ram / 1024).toFixed()}
+        units="GB"
+        isSmallScreen={isSmallScreen}
+      />
+      {Object.entries(volumeTypes)
+        .sort(([aType], [bType]) => aType.localeCompare(bType))
+        .map(([volumeType, usage]) => (
+          <ResourceComponentItem
+            key={volumeType}
+            title={translate('{type} storage', { type: volumeType })}
+            usage={(usage / 1024).toFixed()}
+            units="GB"
+            isSmallScreen={isSmallScreen}
+          />
+        ))}
+    </Row>
   );
 };

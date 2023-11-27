@@ -1,12 +1,19 @@
+import { Col, Row } from 'react-bootstrap';
+
 import { translate } from '@waldur/i18n';
+
+import { QuotaCell } from './QuotaCell';
 
 export const VolumeComponents = ({ resource }) => {
   return (
-    <div className="d-flex flex-column align-items-center justify-content-center">
-      <div className="fs-1">{(resource.size / 1024).toFixed()} GB</div>
-      <p className="text-muted">
-        {translate('{type} storage', { type: resource.type_name })}
-      </p>{' '}
-    </div>
+    <Row>
+      <Col xs={12}>
+        <QuotaCell
+          title={translate('{type} storage', { type: resource.type_name })}
+          usage={(resource.size / 1024).toFixed()}
+          units="GB"
+        />
+      </Col>
+    </Row>
   );
 };
