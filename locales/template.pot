@@ -1870,6 +1870,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
+#: src/marketplace/resources/details/ResourceComponentsDialog.tsx
 msgid "Components"
 msgstr ""
 
@@ -3052,6 +3053,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/details/ResourceComponentsDialog.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/user/support/UserDetailsDialog.tsx
@@ -3882,10 +3884,6 @@ msgstr ""
 msgid "Flavor name: {flavor_name}"
 msgstr ""
 
-#: src/marketplace/resources/details/InstanceComponents.tsx
-msgid "Flavor: {flavor}"
-msgstr ""
-
 #: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-tenant/tabs.ts
@@ -4411,10 +4409,6 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 msgid "Image:"
-msgstr ""
-
-#: src/marketplace/resources/details/InstanceComponents.tsx
-msgid "Image: {image}"
 msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
@@ -9989,6 +9983,10 @@ msgstr ""
 msgid "Show monthly estimates"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceShowMoreComponents.tsx
+msgid "Show more"
+msgstr ""
+
 #: src/marketplace/resources/details/OfferingDetailsField.tsx
 msgid "Show offering"
 msgstr ""
@@ -14385,10 +14383,6 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "{usage} of {limit} {name}"
-msgstr ""
-
-#: src/marketplace/resources/details/QuotaCell.tsx
-msgid "{usage} out of {limit} {units}"
 msgstr ""
 
 #: src/marketplace/resources/details/ShortResourceHeader.tsx

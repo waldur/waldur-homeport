@@ -1,17 +1,33 @@
 import { ProgressBar } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
 
-const CellDescription = ({ usage, limit, units, description }) => (
-  <td>
-    {translate('{usage} out of {limit} {units}', { usage, limit, units })}{' '}
+interface QuotaCellProps {
+  usage: number | string;
+  limit?: number | string;
+  units?: string;
+  title: any;
+  description?: string;
+}
+
+const CellDescription = ({
+  usage,
+  limit,
+  units,
+  description,
+}: Omit<QuotaCellProps, 'title'>) => (
+  <span className="fw-bold text-nowrap">
+    {limit ? `${usage}/${limit}` : usage}
+    {units && ` ${units}`}
     {description && (
-      <Tip id="quota" label={description}>
-        <i className="fa fa-question-circle" />
-      </Tip>
+      <>
+        {' '}
+        <Tip id="quota" label={description}>
+          <i className="fa fa-question-circle" />
+        </Tip>
+      </>
     )}
-  </td>
+  </span>
 );
 
 export const QuotaCell = ({
@@ -20,43 +36,22 @@ export const QuotaCell = ({
   units,
   title,
   description,
-  compact,
-}) => {
-  const percent = Math.round((usage / limit) * 100);
+}: QuotaCellProps) => {
+  const percent = Math.round((Number(usage) / Number(limit || Infinity)) * 100);
   return (
-    <>
-      <tr>
-        <td>{title}</td>
-        <td>
-          <ProgressBar
-            variant={
-              percent < 33 ? 'success' : percent < 66 ? 'warning' : 'danger'
-            }
-            now={percent}
-            style={{ width: 100 }}
-            className="h-6px mt-2"
-          />
-        </td>
-        {!compact && (
-          <CellDescription
-            usage={usage}
-            limit={limit}
-            units={units}
-            description={description}
-          />
-        )}
-      </tr>
-      {compact && (
-        <tr>
-          <td></td>
-          <CellDescription
-            usage={usage}
-            limit={limit}
-            units={units}
-            description={description}
-          />
-        </tr>
-      )}
-    </>
+    <div className="d-flex flex-column align-items-center mb-4">
+      <CellDescription
+        usage={usage}
+        limit={limit}
+        description={description}
+        units={units}
+      />
+      <ProgressBar
+        variant={percent < 33 ? 'success' : percent < 66 ? 'warning' : 'danger'}
+        now={percent}
+        className="h-6px w-100 mw-125px my-2"
+      />
+      <p className="text-muted fw-bold mb-0">{title}</p>
+    </div>
   );
 };

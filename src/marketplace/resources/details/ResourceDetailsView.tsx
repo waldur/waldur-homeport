@@ -35,6 +35,7 @@ import { ResourceDetailsBar } from './ResourceDetailsBar';
 import { ResourceDetailsHeaderBody } from './ResourceDetailsHeaderBody';
 import { ResourceDetailsHeaderTitle } from './ResourceDetailsHeaderTitle';
 import { ResourceIssuesCard } from './ResourceIssuesCard';
+import { ResourceShowMoreComponents } from './ResourceShowMoreComponents';
 import { ResourceSpecGroupCard } from './ResourceSpecGroupCard';
 import { ShortResourceHeader } from './ShortResourceHeader';
 import { TenantMainComponent } from './TenantMainComponent';
@@ -155,6 +156,13 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
                 />
               )
             }
+            quickFooter={
+              <ResourceShowMoreComponents
+                resource={resource}
+                components={components}
+              />
+            }
+            quickFooterClassName="justify-content-center"
           >
             <ResourceDetailsHeaderBody resource={resource} scope={scope} />
           </PublicDashboardHero>
