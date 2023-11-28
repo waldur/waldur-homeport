@@ -17,7 +17,11 @@ export const ResourceComponentItem = ({ component, resource }) => {
           ? normalize(resource.limit_usage[component.type], component.factor)
           : normalize(resource.current_usages[component.type], component.factor)
       }
-      limit={normalize(resource.limits[component.type], component.factor)}
+      limit={
+        component.billing_type !== 'usage'
+          ? normalize(resource.limits[component.type], component.factor)
+          : null
+      }
       title={component.name}
       description={component.description}
     />
