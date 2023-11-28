@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { ErrorMessage } from '@waldur/ErrorMessage';
+import { translate } from '@waldur/i18n';
 import { PageBarProvider } from '@waldur/marketplace/context';
 import { LexisLinkCard } from '@waldur/marketplace/resources/lexis/LexisLinkCard';
 import { RobotAccountCard } from '@waldur/marketplace/robot-accounts/RobotAccountCard';
@@ -19,6 +20,7 @@ import { SLURM_PLUGIN } from '@waldur/slurm/constants';
 import { AllocationMainComponent } from '@waldur/slurm/details/AllocationMainComponent';
 
 import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
+import { ResourceStateField } from '../list/ResourceStateField';
 import { ShowReportAction } from '../report/ShowReportAction';
 import { ResourceActions } from '../ResourceActions';
 
@@ -35,6 +37,7 @@ import { ResourceDetailsBar } from './ResourceDetailsBar';
 import { ResourceDetailsHeaderBody } from './ResourceDetailsHeaderBody';
 import { ResourceDetailsHeaderTitle } from './ResourceDetailsHeaderTitle';
 import { ResourceIssuesCard } from './ResourceIssuesCard';
+import { ResourceShowMoreComponents } from './ResourceShowMoreComponents';
 import { ResourceSpecGroupCard } from './ResourceSpecGroupCard';
 import { ShortResourceHeader } from './ShortResourceHeader';
 import { TenantMainComponent } from './TenantMainComponent';
@@ -104,6 +107,9 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
           <PublicDashboardHero
             logo={logo}
             logoAlt={resource.category_title}
+            logoBottomLabel={translate('Resource')}
+            logoBottomClass="bg-secondary"
+            logoTopLabel={<ResourceStateField row={resource} roundless />}
             backgroundImage={offering.image}
             asHero
             title={<ResourceDetailsHeaderTitle resource={resource} />}
@@ -155,6 +161,13 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
                 />
               )
             }
+            quickFooter={
+              <ResourceShowMoreComponents
+                resource={resource}
+                components={components}
+              />
+            }
+            quickFooterClassName="justify-content-center"
           >
             <ResourceDetailsHeaderBody resource={resource} scope={scope} />
           </PublicDashboardHero>

@@ -37,7 +37,7 @@ const getEventContext = (event: RoleEvent) => ({
   ...getUserContext(event),
   ...getAffectedUserContext(event),
   ...getScopeLink(event),
-  role_name: formatRole(event.role_name),
+  role_name: formatRole(event.role_name) || 'N/A',
 });
 
 const formatRoleGrantedEvent = (event: RoleEvent) => {

@@ -1,16 +1,17 @@
 import { FunctionComponent } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
+import { Link } from '@waldur/core/Link';
+import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 
-import { ResourceStateField } from '../list/ResourceStateField';
 import { Resource } from '../types';
 
 import { EndDateField, ProjectEndDateField } from './EndDateField';
 import { OfferingDetailsField } from './OfferingDetailsField';
+import { ResourceOpenStackInstanceSummary } from './openstack-instance/ResourceOpenStackInstanceSummary';
 import { PlanDetailsField } from './PlanDetailsField';
 import { ResourceMetadataLink } from './ResourceMetadataLink';
 import { ResourceOrderItemsLink } from './ResourceOrderItemsLink';
+import { ResourceTypeField } from './ResourceTypeField';
 
 interface ResourceDetailsHeaderBodyProps {
   resource: Resource;
@@ -21,18 +22,37 @@ export const ResourceDetailsHeaderBody: FunctionComponent<ResourceDetailsHeaderB
   ({ resource, scope }) => {
     return (
       <>
-        <Field
-          label={translate('State')}
-          value={<ResourceStateField row={resource} />}
-        />
-        <OfferingDetailsField resource={resource} />
-        <PlanDetailsField resource={resource} />
-        <EndDateField resource={resource} />
-        <ProjectEndDateField resource={resource} />
+        {resource.description ? <p>{resource.description}</p> : null}
+        {resource.resource_type === INSTANCE_TYPE ? (
+          <ResourceOpenStackInstanceSummary scope={scope} />
+        ) : (
+          <>
+            <ResourceTypeField resource={resource} />
+            <OfferingDetailsField resource={resource} />
+            <PlanDetailsField resource={resource} />
+            <EndDateField resource={resource} />
+            <ProjectEndDateField resource={resource} />
+          </>
+        )}
 
-        <div className="d-flex justify-content-between mt-3">
-          <ResourceMetadataLink resource={resource} scope={scope} />
-          <ResourceOrderItemsLink resource={resource} />
+        <div className="d-flex justify-content-between flex-wrap mt-4">
+          <div className="mt-3">
+            <i>
+              {resource.customer_name}
+              {' / '}
+              <Link
+                state="project.dashboard"
+                params={{ uuid: resource.project_uuid }}
+                className="text-muted text-decoration-underline text-hover-primary"
+              >
+                {resource.project_name}
+              </Link>
+            </i>
+          </div>
+          <div className="d-flex gap-4 mt-3">
+            <ResourceMetadataLink resource={resource} scope={scope} />
+            <ResourceOrderItemsLink resource={resource} />
+          </div>
         </div>
       </>
     );

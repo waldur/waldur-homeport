@@ -1870,6 +1870,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
+#: src/marketplace/resources/details/ResourceComponentsDialog.tsx
 msgid "Components"
 msgstr ""
 
@@ -3052,6 +3053,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/details/ResourceComponentsDialog.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/user/support/UserDetailsDialog.tsx
@@ -3854,6 +3856,7 @@ msgstr ""
 msgid "Fixed-price contract"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/ResourceFlavorField.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -3882,10 +3885,6 @@ msgstr ""
 msgid "Flavor name: {flavor_name}"
 msgstr ""
 
-#: src/marketplace/resources/details/InstanceComponents.tsx
-msgid "Flavor: {flavor}"
-msgstr ""
-
 #: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-tenant/tabs.ts
@@ -3900,6 +3899,7 @@ msgstr ""
 msgid "Flavors regex"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/ResourceFloatingIpField.tsx
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 msgid "Floating IP"
 msgstr ""
@@ -4361,6 +4361,7 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/resources/details/openstack-instance/ResourceImageField.tsx
 #: src/openstack/openstack-instance/ImageGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
@@ -4411,10 +4412,6 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 msgid "Image:"
-msgstr ""
-
-#: src/marketplace/resources/details/InstanceComponents.tsx
-msgid "Image: {image}"
 msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
@@ -4605,6 +4602,7 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/ResourceInternalIpsField.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
 msgid "Internal IPs"
@@ -8712,6 +8710,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -8859,6 +8858,10 @@ msgstr ""
 
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 msgid "Resource termination request has been submitted."
+msgstr ""
+
+#: src/marketplace/resources/details/ResourceTypeField.tsx
+msgid "Resource type"
 msgstr ""
 
 #: src/resource/support/ResourcesTreemap.tsx
@@ -9989,6 +9992,10 @@ msgstr ""
 msgid "Show monthly estimates"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceShowMoreComponents.tsx
+msgid "Show more"
+msgstr ""
+
 #: src/marketplace/resources/details/OfferingDetailsField.tsx
 msgid "Show offering"
 msgstr ""
@@ -10007,10 +10014,6 @@ msgstr ""
 
 #: src/marketplace/resources/details/PlanDetailsField.tsx
 msgid "Show plan"
-msgstr ""
-
-#: src/marketplace/resources/details/ResourceDetailsHeaderTitle.tsx
-msgid "Show project"
 msgstr ""
 
 #: src/broadcasts/RecipientsField.tsx
@@ -10277,7 +10280,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/details/ResourceDetailsHeaderBody.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
@@ -14385,10 +14387,6 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "{usage} of {limit} {name}"
-msgstr ""
-
-#: src/marketplace/resources/details/QuotaCell.tsx
-msgid "{usage} out of {limit} {units}"
 msgstr ""
 
 #: src/marketplace/resources/details/ShortResourceHeader.tsx

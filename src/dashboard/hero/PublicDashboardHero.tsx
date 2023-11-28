@@ -10,8 +10,8 @@ interface PublicDashboardHeroProps {
   backgroundImage?: string;
   logo: string;
   logoAlt?: string;
-  logoTopLabel?: string;
-  logoBottomLabel?: string;
+  logoTopLabel?: string | ReactNode;
+  logoBottomLabel?: string | ReactNode;
   logoTopClass?: string;
   logoBottomClass?: string;
   title: ReactNode;
@@ -19,15 +19,16 @@ interface PublicDashboardHeroProps {
   quickActions?: ReactNode;
   quickBody?: ReactNode;
   quickFooter?: ReactNode;
+  quickFooterClassName?: string;
   className?: string;
 }
 
 export const PublicDashboardHero: FC<PublicDashboardHeroProps> = (props) => {
   const body = (
     <Row className={classNames('public-dashboard-hero-body', props.className)}>
-      <Col md={8} sm={12}>
+      <Col md={8} sm={12} className="d-flex">
         <Card className="w-100 mb-md-0 mb-4">
-          <Card.Body className="d-flex flex-column flex-sm-row align-items-center gap-10 flex-grow-1">
+          <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch gap-10 flex-grow-1">
             <DashboardHeroLogo
               logo={props.logo}
               logoAlt={props.logoAlt}
@@ -56,13 +57,18 @@ export const PublicDashboardHero: FC<PublicDashboardHeroProps> = (props) => {
       {/* Quick view */}
       <Col md={4} sm={12} className="d-flex">
         <Card className="flex-grow-1">
-          <Card.Body className="d-flex flex-column">
+          <Card.Body className="d-flex flex-column pb-4">
             {props.quickActions && (
               <div className="mb-5">{props.quickActions}</div>
             )}
-            {props.quickBody && <div className="mb-5">{props.quickBody}</div>}
+            {props.quickBody && <div>{props.quickBody}</div>}
             {props.quickFooter && (
-              <div className="flex-grow-1 d-flex align-items-end">
+              <div
+                className={classNames(
+                  'flex-grow-1 d-flex align-items-end',
+                  props.quickFooterClassName,
+                )}
+              >
                 {props.quickFooter}
               </div>
             )}

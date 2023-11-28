@@ -16,6 +16,7 @@ export function registerResourceTypeLabel(resourceType: string, label: string) {
 }
 
 export const formatResourceType = (resource) => {
+  if (!resource.resource_type) return '';
   if (RESOURCE_TYPE_LABELS[resource.resource_type]) {
     return RESOURCE_TYPE_LABELS[resource.resource_type];
   }

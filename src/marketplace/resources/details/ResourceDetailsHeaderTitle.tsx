@@ -1,8 +1,5 @@
 import { FunctionComponent } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-
 import { ResourceSelectorToggle } from '../resource-selector/ResourceSelector';
 import { Resource } from '../types';
 
@@ -18,17 +15,6 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<ResourceDetailsHeader
       <>
         <ResourceSelectorToggle resource={resource} />
         <ParentResourceLink resource={resource} />
-        <i>
-          {`${resource.customer_name} / ${resource.project_name}`}{' '}
-          <Link
-            state="project.dashboard"
-            params={{ uuid: resource.project_uuid }}
-            className="text-muted text-decoration-underline text-hover-primary"
-          >
-            [{translate('Show project')}]
-          </Link>
-        </i>
-        {resource.description ? <p>{resource.description}</p> : null}
       </>
     );
   };
