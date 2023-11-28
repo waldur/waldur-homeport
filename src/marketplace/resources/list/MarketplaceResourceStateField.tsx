@@ -4,8 +4,10 @@ import { Resource } from '../types';
 
 export const MarketplaceResourceStateField = ({
   resource,
+  roundless,
 }: {
   resource: Resource;
+  roundless?: boolean;
 }) => (
   <StateIndicator
     label={resource.state}
@@ -17,5 +19,6 @@ export const MarketplaceResourceStateField = ({
         : 'primary'
     }
     active={['Creating', 'Updating', 'Terminating'].includes(resource.state)}
+    roundless={roundless}
   />
 );

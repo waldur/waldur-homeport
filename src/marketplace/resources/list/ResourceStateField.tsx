@@ -15,7 +15,13 @@ const OPENSTACK_OFFERINGS = [
   'OpenStackTenant.Volume',
 ];
 
-export const ResourceStateField = ({ row }: { row: Resource }) => {
+export const ResourceStateField = ({
+  row,
+  roundless,
+}: {
+  row: Resource;
+  roundless?: boolean;
+}) => {
   if (OPENSTACK_OFFERINGS.includes(row.offering_type)) {
     const resource = {
       resource_type: row.offering_type,
@@ -23,8 +29,10 @@ export const ResourceStateField = ({ row }: { row: Resource }) => {
       state: row.backend_metadata.state || 'Erred',
       ...pickResource(row.backend_metadata),
     } as ResourceType;
-    return <ResourceState resource={resource} />;
+    return <ResourceState resource={resource} roundless={roundless} />;
   } else {
-    return <MarketplaceResourceStateField resource={row} />;
+    return (
+      <MarketplaceResourceStateField resource={row} roundless={roundless} />
+    );
   }
 };
