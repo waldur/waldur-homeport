@@ -42,6 +42,7 @@ export const OrganizationListItem: FunctionComponent<{
   loading,
 }) => {
   const item = data[index];
+  const orgCompactName = item.abbreviation ? item.abbreviation : item.name;
   if (item.isFetching) {
     return (
       <ListGroupItem className="text-center" style={style}>
@@ -65,7 +66,7 @@ export const OrganizationListItem: FunctionComponent<{
       onMouseEnter={onMouseEnter}
       style={style}
       className={'cursor-pointer' + (selected ? ' selected' : '')}
-      title={item.name}
+      title={item.abbreviation ? item.name : null}
     >
       <Stack direction="horizontal">
         <Stack direction="horizontal" gap={4} className="item-content">
@@ -76,7 +77,7 @@ export const OrganizationListItem: FunctionComponent<{
                 'title ellipsis mb-0' + (selected ? ' fw-boldest' : '')
               }
             >
-              {filter ? highlightMatch(item.name, filter) : item.name}{' '}
+              {filter ? highlightMatch(orgCompactName, filter) : orgCompactName}{' '}
               {selected && (
                 <span className="fw-normal">
                   ({translate('Current organization')})
