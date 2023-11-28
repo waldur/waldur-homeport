@@ -3856,6 +3856,7 @@ msgstr ""
 msgid "Fixed-price contract"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/ResourceFlavorField.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -3898,6 +3899,7 @@ msgstr ""
 msgid "Flavors regex"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/ResourceFloatingIpField.tsx
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 msgid "Floating IP"
 msgstr ""
@@ -4359,6 +4361,7 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/resources/details/openstack-instance/ResourceImageField.tsx
 #: src/openstack/openstack-instance/ImageGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
@@ -4599,6 +4602,7 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/ResourceInternalIpsField.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
 msgid "Internal IPs"
@@ -8706,6 +8710,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -8853,6 +8858,10 @@ msgstr ""
 
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 msgid "Resource termination request has been submitted."
+msgstr ""
+
+#: src/marketplace/resources/details/ResourceTypeField.tsx
+msgid "Resource type"
 msgstr ""
 
 #: src/resource/support/ResourcesTreemap.tsx
@@ -10007,10 +10016,6 @@ msgstr ""
 msgid "Show plan"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsHeaderTitle.tsx
-msgid "Show project"
-msgstr ""
-
 #: src/broadcasts/RecipientsField.tsx
 msgid "Show recipients"
 msgstr ""
@@ -10275,7 +10280,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/details/ResourceDetailsHeaderBody.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx

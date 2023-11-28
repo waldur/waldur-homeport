@@ -10,8 +10,8 @@ interface PublicDashboardHeroProps {
   backgroundImage?: string;
   logo: string;
   logoAlt?: string;
-  logoTopLabel?: string;
-  logoBottomLabel?: string;
+  logoTopLabel?: string | ReactNode;
+  logoBottomLabel?: string | ReactNode;
   logoTopClass?: string;
   logoBottomClass?: string;
   title: ReactNode;
@@ -28,7 +28,7 @@ export const PublicDashboardHero: FC<PublicDashboardHeroProps> = (props) => {
     <Row className={classNames('public-dashboard-hero-body', props.className)}>
       <Col md={8} sm={12} className="d-flex">
         <Card className="w-100 mb-md-0 mb-4">
-          <Card.Body className="d-flex flex-column flex-sm-row gap-10 flex-grow-1">
+          <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch gap-10 flex-grow-1">
             <DashboardHeroLogo
               logo={props.logo}
               logoAlt={props.logoAlt}

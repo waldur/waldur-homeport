@@ -9,6 +9,7 @@
 .dashboard-hero-logo {
   position: relative;
   width: 150px;
+  padding: 2rem 0;
 
   @include bp(xs) {
     width: 95px;
@@ -19,13 +20,13 @@
       position: absolute;
       top: 0;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, 0);
     }
     &.bottom-label {
       position: absolute;
       bottom: 0;
       left: 50%;
-      transform: translate(-50%, 50%);
+      transform: translate(-50%, 0);
     }
   }
 }

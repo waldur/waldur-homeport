@@ -10,6 +10,7 @@ export interface StateIndicatorProps {
   variant: Variant;
   striped?: boolean;
   active?: boolean;
+  roundless?: boolean;
 }
 
 const wrapTooltip = (label, children) =>
@@ -24,7 +25,10 @@ const wrapTooltip = (label, children) =>
 export const StateIndicator: FunctionComponent<StateIndicatorProps> = (props) =>
   wrapTooltip(
     props.tooltip,
-    <Badge bg={props.variant} className="fs-8 fw-bolder">
+    <Badge
+      bg={props.variant}
+      className={'fs-8 fw-bolder' + (props.roundless ? ' rounded-0' : '')}
+    >
       {props.label.toUpperCase()}
     </Badge>,
   );
