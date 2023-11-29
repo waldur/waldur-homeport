@@ -9,6 +9,8 @@ import {
 import { translate, gettext, formatJsxTemplate } from '@waldur/i18n';
 import { formatRole } from '@waldur/permissions/utils';
 
+import { CustomersEnum } from '../../EventsEnums';
+
 const getScopeLink = (event: RoleEvent) => ({
   scope_link: (
     <UISref
@@ -78,14 +80,14 @@ eventsRegistry.registerGroup({
   title: gettext('Role management events'),
   events: [
     {
-      key: 'role_granted',
+      key: CustomersEnum.role_granted,
       title: gettext(
         'User {user_link} has granted role to {affected_user_link}.',
       ),
       formatter: formatRoleGrantedEvent,
     },
     {
-      key: 'role_revoked',
+      key: CustomersEnum.role_revoked,
       title: gettext('User {user_link} has revoked {affected_user_link}.'),
       formatter: formatRoleRevokedEvent,
     },
