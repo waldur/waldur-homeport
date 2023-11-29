@@ -7823,10 +7823,6 @@ msgstr ""
 msgid "Project has been removed successfully."
 msgstr ""
 
-#: src/project/events.ts
-msgid "Project has been renamed from {project_previous_name} to {project_link}."
-msgstr ""
-
 #: src/project/effects.ts
 msgid "Project has been updated."
 msgstr ""
@@ -13020,10 +13016,6 @@ msgstr ""
 
 #: src/auth/events.ts
 msgid "User {user_link} authenticated successfully with SAML2."
-msgstr ""
-
-#: src/auth/events.ts
-msgid "User {user_link} authenticated successfully with Smart ID EE."
 msgstr ""
 
 #: src/auth/events.ts
