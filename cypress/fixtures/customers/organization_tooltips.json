@@ -1,0 +1,38 @@
+[
+    {
+        "uuid": "9f66682d98e54f9e82a6f14a4db875a0",
+        "name": "NordiQuEst-demo",
+        "abbreviation": "NQD",
+        "projects": [
+            {
+                "url": "/api/projects/1932127a0217468db35e0b2109ee5dce/",
+                "uuid": "1932127a0217468db35e0b2109ee5dce",
+                "name": "Nordiquest-playground",
+                "resource_count": 0
+            }
+        ],
+        "owners": [],
+        "service_managers": [],
+        "is_expert_provider": false,
+        "quotas": [],
+        "archived": false
+    },
+    {
+        "uuid": "5effffa061ab4e958afe0243922cc0f7",
+        "name": "organisation",
+        "abbreviation": "",
+        "projects": [
+            {
+                "url": "/api/projects/08c86e4a683741908b541f771f93c525/",
+                "uuid": "08c86e4a683741908b541f771f93c525",
+                "name": "Project 1",
+                "resource_count": 0
+            }
+        ],
+        "owners": [],
+        "service_managers": [],
+        "is_expert_provider": false,
+        "quotas": [],
+        "archived": false
+      }
+  ]
