@@ -191,6 +191,7 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
                   resource={resource}
                   scope={scope}
                   state={state}
+                  refetch={refetch}
                 />
               </ErrorBoundary>
             )}

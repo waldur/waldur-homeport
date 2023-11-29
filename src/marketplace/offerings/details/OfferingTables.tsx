@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
-import { BookingResourcesCalendar } from '@waldur/booking/offering/BookingResourcesCalendar';
+import { OfferingBookingResourcesCalendarContainer } from '@waldur/booking/offering/OfferingBookingResourcesCalendarContainer';
 import { translate } from '@waldur/i18n';
 import { OfferingOrderItemsList } from '@waldur/marketplace/details/OfferingOrderItemsList';
 import { OfferingResourcesFilter } from '@waldur/marketplace/details/OfferingResourcesFilter';
@@ -27,7 +27,9 @@ export const OfferingTables = ({ offering }) => {
     <>
       {offering.type === OFFERING_TYPE_BOOKING && (
         <div className="mb-10">
-          <BookingResourcesCalendar offeringUuid={offering.uuid} />
+          <OfferingBookingResourcesCalendarContainer
+            offeringUuid={offering.uuid}
+          />
         </div>
       )}
       <div className="mb-10" id="order-items">

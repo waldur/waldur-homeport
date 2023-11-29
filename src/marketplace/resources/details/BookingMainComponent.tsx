@@ -1,11 +1,11 @@
 import { useContext, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Calendar } from '@waldur/booking/components/calendar/Calendar';
+import { BookingResourcesCalendar } from '@waldur/booking/offering/BookingResourcesCalendar';
 import { translate } from '@waldur/i18n';
 import { PageBarContext } from '@waldur/marketplace/context';
 
-export const BookingMainComponent = ({ resource }) => {
+export const BookingMainComponent = ({ resource, refetch }) => {
   const { addTabs } = useContext(PageBarContext);
   useEffect(() => {
     addTabs([
@@ -16,9 +16,15 @@ export const BookingMainComponent = ({ resource }) => {
     ]);
   });
   return (
-    <Card id="booking">
+    <Card className="resource-bookings" id="booking">
+      <Card.Header>
+        <Card.Title>{translate('Bookings')}</Card.Title>
+      </Card.Header>
       <Card.Body>
-        <Calendar events={resource.attributes.schedules} />
+        <BookingResourcesCalendar
+          bookingResources={[resource]}
+          refetch={refetch}
+        />
       </Card.Body>
     </Card>
   );
