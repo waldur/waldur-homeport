@@ -17,7 +17,7 @@ const openQuickAddResourcePopupAndSelectAnOffering = (
     .click({ force: true })
     .waitForSpinner()
     .get('#kt_content_container')
-    .contains('h3', 'Offering configuration')
+    .contains('h1', 'Add ' + offering)
     .should('be.visible');
 };
 
