@@ -1316,7 +1316,8 @@ msgid "Booking is not allowed to overlap other bookings."
 msgstr ""
 
 #: src/booking/BookingsList.tsx
-#: src/booking/offering/BookingResourcesCalendar.tsx
+#: src/booking/offering/OfferingBookingResourcesCalendarContainer.tsx
+#: src/marketplace/resources/details/BookingMainComponent.tsx
 msgid "Bookings"
 msgstr ""
 
@@ -2231,6 +2232,7 @@ msgstr ""
 msgid "Create port"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/project/ProjectCreateContainer.tsx
 #: src/project/ProjectCreateDialog.tsx
 msgid "Create project"
@@ -2722,6 +2724,7 @@ msgstr ""
 msgid "Delete offering screenshot"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/project/ProjectDelete.tsx
 msgid "Delete project"
 msgstr ""
@@ -7179,7 +7182,6 @@ msgstr ""
 msgid "Permission requests"
 msgstr ""
 
-#: src/administration/roles/PermissionOptions.tsx
 #: src/administration/roles/RoleForm.tsx
 msgid "Permissions"
 msgstr ""
@@ -7680,6 +7682,7 @@ msgstr ""
 msgid "Progress"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
@@ -7820,10 +7823,6 @@ msgstr ""
 
 #: src/project/effects.ts
 msgid "Project has been removed successfully."
-msgstr ""
-
-#: src/project/events.ts
-msgid "Project has been renamed from {project_previous_name} to {project_link}."
 msgstr ""
 
 #: src/project/effects.ts
@@ -10684,6 +10683,7 @@ msgstr ""
 msgid "Team member has been removed."
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/project/team/ProjectUsersList.tsx
 msgid "Team members"
@@ -11786,7 +11786,7 @@ msgstr ""
 msgid "Unable to load booked items."
 msgstr ""
 
-#: src/booking/offering/BookingResourcesCalendar.tsx
+#: src/booking/offering/OfferingBookingResourcesCalendarContainer.tsx
 #: src/customer/dashboard/BookingsCalendar.tsx
 msgid "Unable to load booking offerings."
 msgstr ""
@@ -12760,6 +12760,10 @@ msgstr ""
 msgid "Update plan for an existing resource"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update project"
+msgstr ""
+
 #: src/project/ProjectUpdateForm.tsx
 msgid "Update project details"
 msgstr ""
@@ -13019,10 +13023,6 @@ msgstr ""
 
 #: src/auth/events.ts
 msgid "User {user_link} authenticated successfully with SAML2."
-msgstr ""
-
-#: src/auth/events.ts
-msgid "User {user_link} authenticated successfully with Smart ID EE."
 msgstr ""
 
 #: src/auth/events.ts
