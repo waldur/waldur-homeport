@@ -36,8 +36,6 @@ interface ProjectUpdateFormProps extends InjectedFormProps {
   updateProject(data: ProjectUpdateFormData): Promise<void>;
   initialValues: Partial<Project>;
   project_type?: string;
-  isStaff: boolean;
-  isOwner: boolean;
   isDisabled: boolean;
   oecdCodes;
   isModal?: boolean;
