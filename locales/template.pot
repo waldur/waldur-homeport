@@ -426,6 +426,7 @@ msgid "Add rule"
 msgstr ""
 
 #: src/booking/deploy/FormPeriodsStep.tsx
+#: src/marketplace/offerings/update/integration/OfferingScheduler.tsx
 msgid "Add time period"
 msgstr ""
 
@@ -7134,6 +7135,7 @@ msgid "Period"
 msgstr ""
 
 #: src/booking/deploy/FormPeriodsStep.tsx
+#: src/marketplace/offerings/update/integration/OfferingScheduler.tsx
 msgid "Period {i}"
 msgstr ""
 
@@ -11211,6 +11213,7 @@ msgid "Title"
 msgstr ""
 
 #: src/booking/deploy/FormPeriodsStep.tsx
+#: src/marketplace/offerings/update/integration/OfferingScheduler.tsx
 msgid "To"
 msgstr ""
 

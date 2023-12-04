@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 
 import { parseDate } from '@waldur/core/dateUtils';
 
-const isWeekend = (day: DateTime): boolean => [6, 7].includes(day.weekday);
+const isWeekend = (day: DateTime): boolean => [0, 6].includes(day.weekday);
 
 const isMonday = (day: DateTime): boolean => day.weekday === 1;
 

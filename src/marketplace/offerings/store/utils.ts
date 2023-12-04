@@ -88,9 +88,9 @@ export const formatComponent = (component) => ({
 });
 
 export const formatSchedules = (schedules: any[]) =>
-  schedules.map(
-    pick(['start', 'end', 'title', 'allDay', 'extendedProps', 'id']),
-  );
+  schedules
+    .filter((item) => Object.keys(item).length > 0)
+    .map(pick(['start', 'end', 'title', 'allDay', 'extendedProps', 'id']));
 
 export const filterPluginsData = (pluginsData) =>
   pluginsData.reduce(

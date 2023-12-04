@@ -286,13 +286,13 @@ export const getTimeOptions = (
   include24 = false,
 ): Array<{ h; m }> => {
   const dayMinutes = 60 * 24;
-  const count = dayMinutes / timeStep + 1;
+  const count = Math.ceil(dayMinutes / timeStep) + 1;
 
   return Array.from(new Array(count)).map((_, i) => {
     const allMinutes = i * timeStep;
     const minutes = allMinutes % 60;
     const hour = Math.floor(allMinutes / 60);
-    if (hour === 24 && !include24) {
+    if (hour >= 24 && !include24) {
       return { h: '23', m: '59' };
     }
     return {

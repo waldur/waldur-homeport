@@ -136,6 +136,7 @@ const renderScheduleRows = ({
                 ...getBookedSlots(bookedItems),
               ]),
               timeStep: durationSlot ? durationSlot.as('minutes') : 60,
+              hasTimePicker: true,
             }}
             parse={(v: [Date, Date]) =>
               v
