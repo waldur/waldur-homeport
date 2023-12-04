@@ -183,7 +183,7 @@ export const PermissionOptions = [
     ],
   },
   {
-    label: translate('Permissions'),
+    label: translate('Team members'),
     options: [
       {
         label: translate('Create project permission'),
@@ -222,6 +222,23 @@ export const PermissionOptions = [
       {
         label: translate('Delete offering permission'),
         value: 'OFFERING.DELETE_PERMISSION',
+      },
+    ],
+  },
+  {
+    label: translate('Project'),
+    options: [
+      {
+        label: translate('Create project'),
+        value: 'PROJECT.CREATE',
+      },
+      {
+        label: translate('Update project'),
+        value: 'PROJECT.UPDATE',
+      },
+      {
+        label: translate('Delete project'),
+        value: 'PROJECT.DELETE',
       },
     ],
   },

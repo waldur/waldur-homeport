@@ -2232,6 +2232,7 @@ msgstr ""
 msgid "Create port"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/project/ProjectCreateContainer.tsx
 #: src/project/ProjectCreateDialog.tsx
 msgid "Create project"
@@ -2723,6 +2724,7 @@ msgstr ""
 msgid "Delete offering screenshot"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/project/ProjectDelete.tsx
 msgid "Delete project"
 msgstr ""
@@ -7180,7 +7182,6 @@ msgstr ""
 msgid "Permission requests"
 msgstr ""
 
-#: src/administration/roles/PermissionOptions.tsx
 #: src/administration/roles/RoleForm.tsx
 msgid "Permissions"
 msgstr ""
@@ -7681,6 +7682,7 @@ msgstr ""
 msgid "Progress"
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
@@ -10681,6 +10683,7 @@ msgstr ""
 msgid "Team member has been removed."
 msgstr ""
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/project/team/ProjectUsersList.tsx
 msgid "Team members"
@@ -12755,6 +12758,10 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Update plan for an existing resource"
+msgstr ""
+
+#: src/administration/roles/PermissionOptions.tsx
+msgid "Update project"
 msgstr ""
 
 #: src/project/ProjectUpdateForm.tsx
