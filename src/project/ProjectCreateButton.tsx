@@ -47,6 +47,7 @@ const mapStateToProps = (state: RootState) => {
   const user = getUser(state);
 
   if (
+    !customer ||
     !hasPermission(user, {
       permission: PermissionEnum.CREATE_PROJECT,
       customerId: customer.uuid,
