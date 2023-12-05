@@ -1,6 +1,6 @@
 import { getFormValues } from 'redux-form';
 
-import { BookingFilterStateOption } from '@waldur/booking/BookingStateFilter';
+import { BookingFilterStateOption } from '@waldur/booking/utils';
 import { RootState } from '@waldur/store/reducers';
 
 import { BOOKINGS_FILTER_FORM_ID } from './constants';
