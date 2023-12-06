@@ -3,10 +3,10 @@ import { FunctionComponent } from 'react';
 import { translate } from '@waldur/i18n';
 import { OfferingButton } from '@waldur/marketplace/common/OfferingButton';
 
-import { OrderItemRequest } from './types';
+import { OrderRequest } from './types';
 
 interface ShoppingCartButtonProps {
-  item: OrderItemRequest;
+  item: OrderRequest;
   onBtnClick(): void;
   flavor?: 'primary' | 'secondary' | 'ternary';
   disabled?: boolean;

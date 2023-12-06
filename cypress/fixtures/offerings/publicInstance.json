@@ -87,7 +87,7 @@
 	"native_description": "",
 	"vendor_details": "",
 	"thumbnail": null,
-	"order_item_count": 1,
+	"order_count": 1,
 	"plans": [
 		{
 			"url": "/api/marketplace-plans/8a2a01cf51a04ee9a4904dffd1316387/",

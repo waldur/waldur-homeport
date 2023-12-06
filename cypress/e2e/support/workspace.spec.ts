@@ -29,8 +29,8 @@ xdescribe('Financial overview', () => {
       .intercept('GET', '/api/invoices/growth/', {
         fixture: 'customers/invoices_growth.json',
       })
-      .intercept('GET', '/api/marketplace-order-items/', {
-        fixture: 'marketplace/order_items.json',
+      .intercept('GET', '/api/marketplace-orders/', {
+        fixture: 'marketplace/orders.json',
       })
       .intercept('GET', '/api/marketplace-component-usages/', {
         fixture: 'marketplace/component_usages.json',

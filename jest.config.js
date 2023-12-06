@@ -12,6 +12,7 @@ module.exports = {
   },
   setupFiles: [
     '<rootDir>/test/enzyme-setup.js',
+    '<rootDir>/test/react-setup.js',
     'jest-date-mock',
     'mock-match-media/jest-setup.cjs',
   ],
@@ -24,6 +25,6 @@ module.exports = {
     },
   },
   snapshotSerializers: ['enzyme-to-json/serializer'],
-  coverageReporters: ['text', 'cobertura'],
+  coverageReporters: ['cobertura'],
   testEnvironment: 'jsdom',
 };

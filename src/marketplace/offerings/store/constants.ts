@@ -32,8 +32,8 @@ export const PULL_REMOTE_OFFERING_USAGE =
 export const PULL_REMOTE_OFFERING_RESOURCES =
   'waldur/marketplace/offering/PULL_REMOTE_OFFERING_RESOURCES';
 
-export const PULL_REMOTE_OFFERING_ORDER_ITEMS =
-  'waldur/marketplace/offering/PULL_REMOTE_OFFERING_ORDER_ITEMS';
+export const PULL_REMOTE_OFFERING_ORDERS =
+  'waldur/marketplace/offering/PULL_REMOTE_OFFERING_ORDERS';
 
 export const PULL_REMOTE_OFFERING_INVOICES =
   'waldur/marketplace/offering/PULL_REMOTE_OFFERING_INVOICES';

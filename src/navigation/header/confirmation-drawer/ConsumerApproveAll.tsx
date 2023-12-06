@@ -4,22 +4,21 @@ import { useDispatch } from 'react-redux';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { approveOrder } from '@waldur/marketplace/common/api';
+import { approveOrderByConsumer } from '@waldur/marketplace/common/api';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 export const ConsumerApproveAll = ({ orders, refetch }) => {
   const dispatch = useDispatch();
   const { mutate, isLoading } = useMutation(async () => {
     try {
-      await Promise.all(orders.map((order) => approveOrder(order.uuid)));
+      await Promise.all(
+        orders.map((order) => approveOrderByConsumer(order.uuid)),
+      );
       await refetch();
-      dispatch(showSuccess(translate('All order items have been approved.')));
+      dispatch(showSuccess(translate('All orders have been approved.')));
     } catch (response) {
       dispatch(
-        showErrorResponse(
-          response,
-          translate('Unable to approve all order items.'),
-        ),
+        showErrorResponse(response, translate('Unable to approve all orders.')),
       );
     }
   });

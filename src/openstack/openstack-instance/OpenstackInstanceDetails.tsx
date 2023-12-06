@@ -3,8 +3,8 @@ import { useAsync } from 'react-use';
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { OrderItemDetailsField } from '@waldur/marketplace/orders/item/details/OrderItemDetailsField';
-import { OrderItemDetailsProps } from '@waldur/marketplace/types';
+import { DetailsField } from '@waldur/marketplace/common/DetailsField';
+import { OrderDetailsProps } from '@waldur/marketplace/types';
 import { getDefaultFloatingIps } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
 import { FloatingIp } from '@waldur/openstack/openstack-instance/types';
 import {
@@ -13,9 +13,9 @@ import {
 } from '@waldur/openstack/openstack-instance/utils';
 import { formatFlavor, getData } from '@waldur/resource/utils';
 
-export const OpenstackInstanceDetails = (props: OrderItemDetailsProps) => {
+export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
   const {
-    orderItem: { attributes: attributes },
+    order: { attributes: attributes },
   } = props;
 
   if (!attributes) return null;
@@ -116,54 +116,54 @@ export const OpenstackInstanceDetails = (props: OrderItemDetailsProps) => {
   return (
     <>
       {attributesData?.image && (
-        <OrderItemDetailsField label={translate('Image')}>
+        <DetailsField label={translate('Image')}>
           {attributesData.image.name}
-        </OrderItemDetailsField>
+        </DetailsField>
       )}
       {attributesData?.flavor && (
-        <OrderItemDetailsField label={translate('Flavor')}>
+        <DetailsField label={translate('Flavor')}>
           {formatFlavor(attributesData.flavor)}
-        </OrderItemDetailsField>
+        </DetailsField>
       )}
       {attributesData?.availabilityZone && (
-        <OrderItemDetailsField label={translate('Availability zone')}>
+        <DetailsField label={translate('Availability zone')}>
           {attributesData.availabilityZone.name}
-        </OrderItemDetailsField>
+        </DetailsField>
       )}
       {attributes.system_volume_size && (
-        <OrderItemDetailsField label={translate('System volume size')}>
+        <DetailsField label={translate('System volume size')}>
           {attributes.system_volume_size / 1024} GB
-        </OrderItemDetailsField>
+        </DetailsField>
       )}
       {attributesData?.systemVolumeType && (
-        <OrderItemDetailsField label={translate('System volume type')}>
+        <DetailsField label={translate('System volume type')}>
           {formatVolumeTypeLabel(attributesData.systemVolumeType)}
-        </OrderItemDetailsField>
+        </DetailsField>
       )}
       {attributes.data_volume_size && (
-        <OrderItemDetailsField label={translate('Data volume size')}>
+        <DetailsField label={translate('Data volume size')}>
           {attributes.data_volume_size / 1024} GB
-        </OrderItemDetailsField>
+        </DetailsField>
       )}
       {attributesData?.dataVolumeType && (
-        <OrderItemDetailsField label={translate('Data volume type')}>
+        <DetailsField label={translate('Data volume type')}>
           {formatVolumeTypeLabel(attributesData.dataVolumeType)}
-        </OrderItemDetailsField>
+        </DetailsField>
       )}
       {attributesData?.publicKey && (
-        <OrderItemDetailsField label={translate('SSH public key')}>
+        <DetailsField label={translate('SSH public key')}>
           {attributesData.publicKey.name}
-        </OrderItemDetailsField>
+        </DetailsField>
       )}
       {attributesData?.securityGroups && (
-        <OrderItemDetailsField label={translate('Security groups')}>
+        <DetailsField label={translate('Security groups')}>
           {attributesData.securityGroups.map((securityGroup, index) => (
             <p key={index}>{securityGroup.name}</p>
           ))}
-        </OrderItemDetailsField>
+        </DetailsField>
       )}
       {attributesData?.networks && (
-        <OrderItemDetailsField label={translate('Networks')}>
+        <DetailsField label={translate('Networks')}>
           {attributesData.networks.map((network, index) => (
             <p key={index}>
               {network.subnet.label}
@@ -171,12 +171,12 @@ export const OpenstackInstanceDetails = (props: OrderItemDetailsProps) => {
               {network.floatingIp.address}
             </p>
           ))}
-        </OrderItemDetailsField>
+        </DetailsField>
       )}
       {attributes.user_data && (
-        <OrderItemDetailsField label={translate('User data')}>
+        <DetailsField label={translate('User data')}>
           <pre>{attributes.user_data}</pre>
-        </OrderItemDetailsField>
+        </DetailsField>
       )}
     </>
   );

@@ -1,7 +1,7 @@
 import { InjectedFormProps } from 'redux-form';
 
 import { GeolocationPoint } from '@waldur/map/types';
-import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
+import { OrderDetailsType } from '@waldur/marketplace/orders/types';
 import { Quota } from '@waldur/quotas/types';
 import { Project, Customer } from '@waldur/workspace/types';
 
@@ -98,7 +98,7 @@ export interface Offering extends GeolocationPoint {
   privacy_policy_link?: string;
   access_url?: string;
   rating: number;
-  order_item_count: number;
+  order_count: number;
   reviews: number;
   category?: string;
   category_title?: string;
@@ -263,8 +263,8 @@ export interface OfferingConfigurationFormProps extends InjectedFormProps {
   previewMode?: boolean;
 }
 
-export interface OrderItemDetailsProps {
-  orderItem: OrderItemDetailsType;
+export interface OrderDetailsProps {
+  order: OrderDetailsType;
   offering: Offering;
   limits?: string[];
 }

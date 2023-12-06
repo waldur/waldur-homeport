@@ -78,29 +78,21 @@ const OfferingUpdateContainer = lazyComponent(
   () => import('./offerings/update/OfferingUpdateContainer'),
   'OfferingUpdateContainer',
 );
-const OrderItemDetailsContainer = lazyComponent(
-  () => import('./orders/item/details/OrderItemDetailsContainer'),
-  'OrderItemDetailsContainer',
-);
-const MyOrderItemsContainer = lazyComponent(
-  () => import('./orders/item/list/MyOrderItemsContainer'),
-  'MyOrderItemsContainer',
-);
-const OrderItemsContainer = lazyComponent(
-  () => import('./orders/item/list/OrderItemsContainer'),
-  'OrderItemsContainer',
+const ProviderOrdersList = lazyComponent(
+  () => import('./orders/list/ProviderOrdersList'),
+  'ProviderOrdersList',
 );
 const SupportOrdersContainer = lazyComponent(
   () => import('./orders/SupportOrdersContainer'),
   'SupportOrdersContainer',
 );
 const OrderDetails = lazyComponent(
-  () => import('./orders/OrderDetails'),
+  () => import('./orders/details/OrderDetails'),
   'OrderDetails',
 );
-const OrdersList = lazyComponent(
-  () => import('./orders/OrdersList'),
-  'OrdersList',
+const CustomerOrdersList = lazyComponent(
+  () => import('./orders/list/CustomerOrdersList'),
+  'CustomerOrdersList',
 );
 const ProjectResourcesContainer = lazyComponent(
   () => import('./resources/list/ProjectResourcesContainer'),
@@ -343,7 +335,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-project-order-list',
     url: 'marketplace-project-order-list/',
-    component: OrdersList,
+    component: CustomerOrdersList,
     parent: 'project',
     data: {
       breadcrumb: () => translate('My orders'),
@@ -367,7 +359,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-organization-order-list',
     url: 'marketplace-organization-order-list/',
-    component: OrdersList,
+    component: CustomerOrdersList,
     parent: 'organization',
     data: {
       breadcrumb: () => translate('My orders'),
@@ -552,24 +544,10 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-order-details',
+    name: 'marketplace-order-details-project',
     url: 'marketplace-order-details/:order_uuid/',
     component: OrderDetails,
     parent: 'project',
-  },
-
-  {
-    name: 'marketplace-order-item-details',
-    url: 'marketplace-order-item-details/:order_item_uuid/',
-    component: OrderItemDetailsContainer,
-    parent: 'project',
-  },
-
-  {
-    name: 'marketplace-order-item-details-customer',
-    url: 'marketplace-order-item-details/:order_item_uuid/',
-    component: OrderItemDetailsContainer,
-    parent: 'organization',
   },
 
   {
@@ -580,20 +558,13 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-order-items',
-    url: 'marketplace-order-items/?{state}',
-    component: OrderItemsContainer,
+    name: 'marketplace-orders',
+    url: 'marketplace-orders/?{state}',
+    component: ProviderOrdersList,
     parent: 'provider-resources',
     data: {
       breadcrumb: () => translate('Orders'),
     },
-  },
-
-  {
-    name: 'marketplace-my-order-items',
-    url: 'marketplace-my-order-items/?filterState',
-    component: MyOrderItemsContainer,
-    parent: 'organization',
   },
 
   {
@@ -774,14 +745,14 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-shopping-cart-item-update',
-    url: 'marketplace-shopping-cart-item-update/:order_item_uuid/',
+    url: 'marketplace-shopping-cart-item-update/:order_uuid/',
     component: ShoppingCartItemUpdate,
     parent: 'project',
   },
 
   {
     name: 'marketplace-shopping-cart-item-update-customer',
-    url: 'marketplace-shopping-cart-item-update/:order_item_uuid/',
+    url: 'marketplace-shopping-cart-item-update/:order_uuid/',
     component: ShoppingCartItemUpdate,
     parent: 'organization',
   },

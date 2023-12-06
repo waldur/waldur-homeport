@@ -119,13 +119,10 @@ export const PermissionOptions = [
         value: 'ORDER.APPROVE_PRIVATE',
       },
       { label: translate('Reject order'), value: 'ORDER.REJECT' },
-
-      { label: translate('Approve order item'), value: 'ORDER_ITEM.APPROVE' },
-      { label: translate('Reject order item'), value: 'ORDER_ITEM.REJECT' },
-      { label: translate('Destroy order item'), value: 'ORDER_ITEM.DESTROY' },
+      { label: translate('Destroy order'), value: 'ORDER.DESTROY' },
       {
-        label: translate('Terminate order item'),
-        value: 'ORDER_ITEM.TERMINATE',
+        label: translate('Cancel order'),
+        value: 'ORDER.CANCEL',
       },
     ],
   },

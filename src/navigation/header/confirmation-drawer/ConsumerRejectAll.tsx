@@ -4,22 +4,21 @@ import { useDispatch } from 'react-redux';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { rejectOrder } from '@waldur/marketplace/common/api';
+import { rejectOrderByConsumer } from '@waldur/marketplace/common/api';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 export const ConsumerRejectAll = ({ orders, refetch }) => {
   const dispatch = useDispatch();
   const { mutate, isLoading } = useMutation(async () => {
     try {
-      await Promise.all(orders.map((order) => rejectOrder(order.uuid)));
+      await Promise.all(
+        orders.map((order) => rejectOrderByConsumer(order.uuid)),
+      );
       await refetch();
-      dispatch(showSuccess(translate('All order items have been rejected.')));
+      dispatch(showSuccess(translate('All orders have been rejected.')));
     } catch (response) {
       dispatch(
-        showErrorResponse(
-          response,
-          translate('Unable to reject all order items.'),
-        ),
+        showErrorResponse(response, translate('Unable to reject all orders.')),
       );
     }
   });

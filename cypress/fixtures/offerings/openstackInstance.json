@@ -47,7 +47,7 @@
   "state": "Active",
   "vendor_details": "",
   "thumbnail": null,
-  "order_item_count": 0.0,
+  "order_count": 0.0,
   "plans": [
     {
       "url": "/api/marketplace-plans/c132b398b7da45ba9a7d21c821180ff2/",

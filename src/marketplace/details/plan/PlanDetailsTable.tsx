@@ -59,11 +59,12 @@ const UsageRows = (props: { components: Component[]; viewMode: boolean }) =>
 export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
   props,
 ) => {
+  const customer = useSelector(getCustomer);
+
   if (props.components.length === 0) {
     return null;
   }
 
-  const customer = useSelector(getCustomer);
   const activeFixedPriceProfile =
     customer && getActiveFixedPricePaymentProfile(customer.payment_profiles);
 

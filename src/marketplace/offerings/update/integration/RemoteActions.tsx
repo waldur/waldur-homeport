@@ -12,7 +12,7 @@ import { ActionsDropdown } from '../../actions/ActionsDropdown';
 import {
   pullRemoteOfferingDetails,
   pullRemoteOfferingInvoices,
-  pullRemoteOfferingOrderItems,
+  pullRemoteOfferingOrders,
   pullRemoteOfferingResources,
   pullRemoteOfferingRobotAccounts,
   pullRemoteOfferingUsage,
@@ -49,8 +49,8 @@ export const RemoteActions = ({ offering }) => {
       handler: () => dispatch(pullRemoteOfferingResources(offering.uuid)),
     },
     {
-      label: translate('Pull order items'),
-      handler: () => dispatch(pullRemoteOfferingOrderItems(offering.uuid)),
+      label: translate('Pull orders'),
+      handler: () => dispatch(pullRemoteOfferingOrders(offering.uuid)),
     },
     {
       label: translate('Push project data'),

@@ -3,43 +3,39 @@ import { useAsync } from 'react-use';
 import { get } from '@waldur/core/api';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { OrderItemDetailsField } from '@waldur/marketplace/orders/item/details/OrderItemDetailsField';
-import { OrderItemResponse } from '@waldur/marketplace/orders/types';
+import { DetailsField } from '@waldur/marketplace/common/DetailsField';
+import { OrderResponse } from '@waldur/marketplace/orders/types';
 
 import { formatVolumeTypeLabel } from '../openstack-instance/utils';
 import { VolumeType } from '../types';
 
 const formatSize = (props) => {
-  return formatFilesize(props.orderItem.attributes.size);
+  return formatFilesize(props.order.attributes.size);
 };
 
 export interface OpenstackVolumeDetailsProps {
-  orderItem: OrderItemResponse;
+  order: OrderResponse;
 }
 
 export const OpenstackVolumeDetails = (props: OpenstackVolumeDetailsProps) => {
-  const { orderItem } = props;
+  const { order } = props;
   const { value: volumeType } = useAsync(() =>
-    orderItem.attributes.type
-      ? get<VolumeType>(orderItem.attributes.type).then(
-          (response) => response.data,
-        )
+    order.attributes.type
+      ? get<VolumeType>(order.attributes.type).then((response) => response.data)
       : Promise.resolve(null),
   );
   return (
     <>
-      <OrderItemDetailsField label={translate('Size')}>
-        {formatSize(props)}
-      </OrderItemDetailsField>
-      {orderItem.attributes.availability_zone_name && (
-        <OrderItemDetailsField label={translate('Availability zone')}>
-          {orderItem.attributes.availability_zone_name}
-        </OrderItemDetailsField>
+      <DetailsField label={translate('Size')}>{formatSize(props)}</DetailsField>
+      {order.attributes.availability_zone_name && (
+        <DetailsField label={translate('Availability zone')}>
+          {order.attributes.availability_zone_name}
+        </DetailsField>
       )}
       {volumeType && (
-        <OrderItemDetailsField label={translate('Volume type')}>
+        <DetailsField label={translate('Volume type')}>
           {formatVolumeTypeLabel(volumeType)}
-        </OrderItemDetailsField>
+        </DetailsField>
       )}
     </>
   );

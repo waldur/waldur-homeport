@@ -22,7 +22,7 @@ export const OfferingDetailsBar: FunctionComponent = () => {
 
   const tabs = useMemo(() => {
     return [
-      { key: 'order-items', title: translate('Order items') },
+      { key: 'orders', title: translate('Orders') },
       { key: 'resources', title: translate('Resources') },
       { key: 'users', title: translate('Users') },
     ];

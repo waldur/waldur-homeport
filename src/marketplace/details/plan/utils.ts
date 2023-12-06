@@ -205,10 +205,10 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
 };
 
 const getPlan = (state, props) => {
-  if (props.viewMode && props.orderItem) {
-    if (props.orderItem.plan_uuid) {
+  if (props.viewMode && props.order) {
+    if (props.order.plan_uuid) {
       return props.offering.plans.find(
-        (plan) => plan.uuid === props.orderItem.plan_uuid,
+        (plan) => plan.uuid === props.order.plan_uuid,
       );
     } else {
       return props.offering.plans[0];
@@ -220,8 +220,8 @@ const getPlan = (state, props) => {
 
 const getLimits = (state, props) => {
   const limitParser = getFormLimitParser(props.offering.type);
-  if (props.viewMode && props.orderItem) {
-    return limitParser(props.orderItem.limits);
+  if (props.viewMode && props.order) {
+    return limitParser(props.order.limits);
   } else {
     return offeringSelector(state, 'limits');
   }

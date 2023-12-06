@@ -1,9 +1,9 @@
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
-import { OrderItemDetailsProps } from '@waldur/marketplace/types';
+import { OrderDetailsProps } from '@waldur/marketplace/types';
 import { OfferingConfigurationDetails } from '@waldur/support/OfferingConfigurationDetails';
 
-export const BookingDetails = (props: OrderItemDetailsProps) => {
-  const schedules = props.orderItem.attributes.schedules;
+export const BookingDetails = (props: OrderDetailsProps) => {
+  const schedules = props.order.attributes.schedules;
   return (
     <>
       <OfferingConfigurationDetails {...props} />
