@@ -4,13 +4,13 @@ import { Dispatch } from 'redux';
 import { isUpdatingItem } from '@waldur/marketplace/cart/store/selectors';
 import { RootState } from '@waldur/store/reducers';
 
-import { OrderItemResponse } from '../orders/types';
+import { OrderResponse } from '../orders/types';
 
 import { ShoppingCartUpdateButton } from './ShoppingCartUpdateButton';
 import { updateItemRequest } from './store/actions';
 
 interface OwnProps {
-  item: OrderItemResponse;
+  item: OrderResponse;
   flavor?: string;
   disabled?: boolean;
 }

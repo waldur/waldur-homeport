@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { showPriceSelector } from '@waldur/invoices/details/utils';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
-import { OrderItemResponse } from '@waldur/marketplace/orders/types';
+import { OrderResponse } from '@waldur/marketplace/orders/types';
 import { RootState } from '@waldur/store/reducers';
 
 import { BillingPeriod as BillingPeriodType } from '../types';
@@ -22,7 +22,7 @@ import {
 } from './store/selectors';
 
 interface ShoppingCartProps {
-  items: OrderItemResponse[];
+  items: OrderResponse[];
   maxUnit: BillingPeriodType;
   removeItem(uuid: string, project: string): void;
   isRemovingItem: boolean;

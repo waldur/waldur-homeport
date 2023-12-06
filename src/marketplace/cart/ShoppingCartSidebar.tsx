@@ -1,27 +1,30 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
-import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
-import { Customer, Project } from '@waldur/workspace/types';
 
 import './ShoppingCartSidebar.scss';
 import { getTotal } from './store/selectors';
 
 interface ShoppingCartSidebarProps {
-  total: number;
+  cost?: number;
   file?: string;
-  customer: Customer;
-  project: Project;
 }
 
-export const PureShoppingCartSidebar: FunctionComponent<ShoppingCartSidebarProps> =
-  (props) =>
-    props.customer ? (
+export const ShoppingCartSidebar: FunctionComponent<ShoppingCartSidebarProps> =
+  (props) => {
+    const project = useSelector(getProject);
+    const customer = useSelector(getCustomer);
+    const computedTotal = useSelector(getTotal);
+    const total = props.cost || computedTotal;
+    if (!customer) {
+      return null;
+    }
+    return (
       <aside className="shopping-cart-sidebar">
         <div className="shopping-cart-sidebar-title">
           {translate('Order Summary')}
@@ -32,35 +35,25 @@ export const PureShoppingCartSidebar: FunctionComponent<ShoppingCartSidebarProps
               <td>
                 <strong>{translate('Invoiced to')}</strong>
               </td>
-              <td>{props.customer.name}</td>
+              <td>{customer.name}</td>
             </tr>
-            {props.project && (
+            {project && (
               <tr>
                 <td>
                   <strong>{translate('Project')}</strong>
                 </td>
-                <td>{props.project.name}</td>
+                <td>{project.name}</td>
               </tr>
             )}
-            {!getActiveFixedPricePaymentProfile(
-              props.customer.payment_profiles,
-            ) && !isFeatureVisible('marketplace.conceal_prices') ? (
+            {!getActiveFixedPricePaymentProfile(customer.payment_profiles) &&
+            !isFeatureVisible('marketplace.conceal_prices') ? (
               <tr>
                 <td className="text-lg">{translate('Total')}</td>
-                <td className="text-lg">{defaultCurrency(props.total)}</td>
+                <td className="text-lg">{defaultCurrency(total)}</td>
               </tr>
             ) : null}
           </tbody>
         </table>
       </aside>
-    ) : null;
-
-const mapStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-  project: getProject(state),
-  total: getTotal(state),
-});
-
-export const ShoppingCartSidebar = connect(mapStateToProps)(
-  PureShoppingCartSidebar,
-);
+    );
+  };

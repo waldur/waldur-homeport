@@ -1,10 +1,10 @@
-import { OrderItemResponse } from '@waldur/marketplace/orders/types';
+import { OrderResponse } from '@waldur/marketplace/orders/types';
 
 import { ApproveAllButton } from './ApproveAllButton';
 import { RejectAllButton } from './RejectAllButton';
 
 interface OwnProps {
-  orders: OrderItemResponse[];
+  orders: OrderResponse[];
 }
 
 export const BulkProviderActions = ({ orders }: OwnProps) => {

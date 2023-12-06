@@ -217,7 +217,7 @@ function* createOrder() {
       );
     } else {
       yield put(
-        triggerTransition('marketplace-order-details', {
+        triggerTransition('marketplace-order-details-project', {
           order_uuid: order.uuid,
         }),
       );

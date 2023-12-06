@@ -18,7 +18,7 @@ import {
   PureOfferingConfigurator,
   PureOfferingConfiguratorProps,
 } from '@waldur/marketplace/details/OfferingConfigurator';
-import { formatOrderItemForUpdate } from '@waldur/marketplace/details/utils';
+import { formatOrderForUpdate } from '@waldur/marketplace/details/utils';
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Plan } from '@waldur/marketplace/types';
 import { useTitle } from '@waldur/navigation/title';
@@ -68,7 +68,7 @@ export const FlowEditForm = () => {
       customer,
       customer_create_request,
       project_create_request,
-    } = formatOrderItemForUpdate({ offering, formData });
+    } = formatOrderForUpdate({ offering, formData });
     try {
       await updateFlow(router.globals.params.flow_uuid, {
         customer: customer?.url,

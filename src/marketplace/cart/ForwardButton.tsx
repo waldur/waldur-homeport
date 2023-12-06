@@ -10,7 +10,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 import { isStaff } from '@waldur/workspace/selectors';
 
 import { orderCanBeApproved } from '../orders/actions/selectors';
-import { OrderItemResponse } from '../orders/types';
+import { OrderResponse } from '../orders/types';
 
 import { createOrderRequest } from './store/actions';
 import {
@@ -22,7 +22,7 @@ import {
 
 interface ForwardButtonComponentProps {
   createOrder(): void;
-  items: OrderItemResponse[];
+  items: OrderResponse[];
   disabled: boolean;
   orderCanBeApproved: boolean;
   shouldConcealPrices: boolean;

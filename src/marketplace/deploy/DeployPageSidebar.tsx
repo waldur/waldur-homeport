@@ -13,7 +13,7 @@ import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 import { Offering } from '@waldur/marketplace/types';
 
 import { getCheckoutSummaryComponent } from '../common/registry';
-import { OrderItemResponse } from '../orders/types';
+import { OrderResponse } from '../orders/types';
 
 import { ProviderTermsOfService } from './ProviderTermsOfService';
 import { OfferingConfigurationFormStep } from './types';
@@ -24,7 +24,7 @@ interface DeployPageSidebarProps {
   steps: OfferingConfigurationFormStep[];
   completedSteps: boolean[];
   updateMode?: boolean;
-  cartItem?: OrderItemResponse;
+  cartItem?: OrderResponse;
 }
 
 export const DeployPageSidebar = (props: DeployPageSidebarProps) => {

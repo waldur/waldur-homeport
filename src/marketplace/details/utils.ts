@@ -1,6 +1,6 @@
 import { formValueSelector } from 'redux-form';
 
-import { OrderItemRequest } from '@waldur/marketplace/cart/types';
+import { OrderRequest } from '@waldur/marketplace/cart/types';
 import {
   getFormSerializer,
   getFormLimitSerializer,
@@ -9,7 +9,7 @@ import {
 import { FORM_ID } from './constants';
 import { OrderSummaryProps } from './types';
 
-export const formatOrderItem = (props: OrderSummaryProps, request) => {
+export const formatOrder = (props: OrderSummaryProps, request) => {
   const serializer = getFormSerializer(props.offering.type);
   const limitSerializer = getFormLimitSerializer(props.offering.type);
   if (props.formData) {
@@ -59,14 +59,14 @@ export const formatOrderItem = (props: OrderSummaryProps, request) => {
   return request;
 };
 
-export const formatOrderItemForCreate = (props: OrderSummaryProps) => {
-  const request: OrderItemRequest = { offering: props.offering };
-  return formatOrderItem(props, request);
+export const formatOrderForCreate = (props: OrderSummaryProps) => {
+  const request: OrderRequest = { offering: props.offering };
+  return formatOrder(props, request);
 };
 
-export const formatOrderItemForUpdate = (props: OrderSummaryProps) => {
+export const formatOrderForUpdate = (props: OrderSummaryProps) => {
   const request = { uuid: props.offering.uuid };
-  return formatOrderItem(props, request);
+  return formatOrder(props, request);
 };
 
 export const formSelector = formValueSelector(FORM_ID);
