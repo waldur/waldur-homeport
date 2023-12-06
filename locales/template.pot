@@ -900,6 +900,14 @@ msgstr ""
 msgid "Are you sure you want to destroy {count} resources?"
 msgstr ""
 
+#: src/customer/details/CustomerCallManagerPanel.tsx
+msgid "Are you sure you want to disable call manger?"
+msgstr ""
+
+#: src/customer/details/CustomerCallManagerPanel.tsx
+msgid "Are you sure you want to enable call manger?"
+msgstr ""
+
 #: src/marketplace/resources/mass-actions/MultiPullAction.tsx
 msgid "Are you sure you want to pull {count} resources?"
 msgstr ""
@@ -1428,6 +1436,14 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
+#: src/navigation/sidebar/CallManagementMenu.tsx
+msgid "Call management"
+msgstr ""
+
+#: src/customer/details/CustomerCallManagerPanel.tsx
+msgid "Call manager"
+msgstr ""
+
 #: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Caller"
@@ -1910,6 +1926,7 @@ msgstr ""
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/details/CustomerCallManagerPanel.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/UserRemoveButton.tsx
@@ -3339,6 +3356,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/components/ComponentBooleanDefaultLimitField.tsx
 msgid "Enable by default"
+msgstr ""
+
+#: src/customer/details/CustomerCallManagerPanel.tsx
+msgid "Enable call manager"
 msgstr ""
 
 #: src/marketplace/offerings/update/components/ComponentLimitEnableField.tsx
