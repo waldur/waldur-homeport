@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum, RoleEnum } from '@waldur/permissions/enums';
+import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
-import { formatRole } from '@waldur/permissions/utils';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
@@ -42,9 +41,7 @@ export const CustomerUserAddButton: FunctionComponent<CustomerUserAddButtonProps
     return (
       <ActionButton
         action={callback}
-        title={translate('Add {role}', {
-          role: formatRole(RoleEnum.CUSTOMER_OWNER),
-        })}
+        title={translate('Add organization member')}
         icon="fa fa-plus"
         variant="primary"
       />
