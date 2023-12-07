@@ -66,7 +66,7 @@
     "native_description": "",
     "vendor_details": "",
     "thumbnail": null,
-    "order_item_count": 6,
+    "order_count": 6,
     "plans": [
       {
         "url": "/api/marketplace-plans/99da3a09dfdd47eca920f7eb59519e2e/",
@@ -187,7 +187,7 @@
     "native_description": "",
     "vendor_details": "",
     "thumbnail": null,
-    "order_item_count": 11,
+    "order_count": 11,
     "plans": [
       {
         "url": "/api/marketplace-plans/b71dfde05b53428c9a51cc60a1052735/",

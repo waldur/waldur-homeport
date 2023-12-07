@@ -39,6 +39,7 @@ export const states: StateDeclaration[] = [
     component: AuthInit,
     data: {
       auth: true,
+      hideProjectSelector: true,
     },
   },
 

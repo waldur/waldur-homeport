@@ -4,10 +4,10 @@ import { Card } from 'react-bootstrap';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { OfferingBookingResourcesCalendarContainer } from '@waldur/booking/offering/OfferingBookingResourcesCalendarContainer';
 import { translate } from '@waldur/i18n';
-import { OfferingOrderItemsList } from '@waldur/marketplace/details/OfferingOrderItemsList';
+import { OfferingOrdersList } from '@waldur/marketplace/details/OfferingOrdersList';
 import { OfferingResourcesFilter } from '@waldur/marketplace/details/OfferingResourcesFilter';
 import { OfferingResourcesList } from '@waldur/marketplace/details/OfferingResourcesList';
-import { OrderItemsFilter } from '@waldur/marketplace/orders/item/list/OrderItemsFilter';
+import { OrdersFilter } from '@waldur/marketplace/orders/list/OrdersFilter';
 
 import { OFFERING_CUSTOMERS_LIST_FILTER } from '../expandable/constants';
 import { OfferingCostsChart } from '../expandable/OfferingCostsChart';
@@ -32,11 +32,8 @@ export const OfferingTables = ({ offering }) => {
           />
         </div>
       )}
-      <div className="mb-10" id="order-items">
-        <OfferingOrderItemsList
-          offering={offering}
-          filters={<OrderItemsFilter />}
-        />
+      <div className="mb-10" id="orders">
+        <OfferingOrdersList offering={offering} filters={<OrdersFilter />} />
       </div>
       <div className="mb-10" id="resources">
         <OfferingResourcesList

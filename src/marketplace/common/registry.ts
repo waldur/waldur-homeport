@@ -4,7 +4,7 @@ import { Omit } from 'react-redux';
 import {
   Offering,
   Attribute,
-  OrderItemDetailsProps,
+  OrderDetailsProps,
   OfferingConfigurationFormProps,
   OfferingComponent,
 } from '@waldur/marketplace/types';
@@ -26,7 +26,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   component?: React.ComponentType<OfferingConfigurationFormProps>;
   pluginOptionsForm?: React.ComponentType<any>;
   secretOptionsForm?: React.ComponentType<any>;
-  detailsComponent?: React.ComponentType<OrderItemDetailsProps>;
+  detailsComponent?: React.ComponentType<OrderDetailsProps>;
   checkoutSummaryComponent?: React.ComponentType<CheckoutSummaryProps>;
   serializer?: (
     attributes: AttributesType,

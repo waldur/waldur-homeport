@@ -1,16 +1,16 @@
-import { OrderItemRequest } from '@waldur/marketplace/cart/types';
-import { OrderItemResponse } from '@waldur/marketplace/orders/types';
+import { OrderRequest } from '@waldur/marketplace/cart/types';
+import { OrderResponse } from '@waldur/marketplace/orders/types';
 
 import * as constants from './constants';
 
-export const addItemRequest = (item: OrderItemRequest) => ({
+export const addItemRequest = (item: OrderRequest) => ({
   type: constants.ADD_ITEM_REQUEST,
   payload: {
     item,
   },
 });
 
-export const addItemSuccess = (item: OrderItemResponse) => ({
+export const addItemSuccess = (item: OrderResponse) => ({
   type: constants.ADD_ITEM_SUCCESS,
   payload: {
     item,
@@ -40,14 +40,14 @@ export const removeItemError = () => ({
   type: constants.REMOVE_ITEM_ERROR,
 });
 
-export const updateItemRequest = (item: OrderItemResponse) => ({
+export const updateItemRequest = (item: OrderResponse) => ({
   type: constants.UPDATE_ITEM_REQUEST,
   payload: {
     item,
   },
 });
 
-export const updateItemSuccess = (item: OrderItemResponse) => ({
+export const updateItemSuccess = (item: OrderResponse) => ({
   type: constants.UPDATE_ITEM_SUCCESS,
   payload: {
     item,
@@ -58,7 +58,7 @@ export const updateItemError = () => ({
   type: constants.UPDATE_ITEM_ERROR,
 });
 
-export const setItems = (items: OrderItemResponse[]) => ({
+export const setItems = (items: OrderResponse[]) => ({
   type: constants.SET_ITEMS,
   payload: {
     items,

@@ -9,7 +9,7 @@ import { translate } from '@waldur/i18n';
 import { showPriceSelector } from '@waldur/invoices/details/utils';
 import { ShoppingCartTimeSlots } from '@waldur/marketplace/cart/ShoppingCartTimeSlots';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
-import { OrderItemResponse } from '@waldur/marketplace/orders/types';
+import { OrderResponse } from '@waldur/marketplace/orders/types';
 
 import { TermsOfService } from '../orders/TermsOfService';
 import { BillingPeriod } from '../types';
@@ -18,7 +18,7 @@ import './ShoppingCartItem.scss';
 import { ShoppingCartItemUpdateLink } from './ShoppingCartItemUpdateLink';
 
 interface ShoppingCartItemProps {
-  item: OrderItemResponse;
+  item: OrderResponse;
   onRemove(): void;
   isRemovingItem: boolean;
   termsOfServiceIsVisible?: boolean;
@@ -50,14 +50,14 @@ export const ShoppingCartItem: FunctionComponent<ShoppingCartItemProps> = (
         <div className="offering-item">
           <div className="offering-thumb">
             <Tip id="offering-tooltip" label={props.item.offering_name}>
-              <ShoppingCartItemUpdateLink order_item_uuid={props.item.uuid}>
+              <ShoppingCartItemUpdateLink order_uuid={props.item.uuid}>
                 <OfferingLogo src={props.item.offering_thumbnail} />
               </ShoppingCartItemUpdateLink>
             </Tip>
           </div>
           <div className="offering-info">
             <h5 className="offering-title">
-              <ShoppingCartItemUpdateLink order_item_uuid={props.item.uuid}>
+              <ShoppingCartItemUpdateLink order_uuid={props.item.uuid}>
                 {props.item.attributes.name ||
                   props.item.resource_name ||
                   props.item.offering_name}

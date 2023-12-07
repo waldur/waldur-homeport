@@ -17,9 +17,8 @@ import {
 } from '@waldur/core/api';
 import { SubmitCartRequest } from '@waldur/marketplace/cart/types';
 import {
-  Order,
-  OrderItemResponse,
-  OrderItemDetailsType,
+  OrderResponse,
+  OrderDetailsType,
 } from '@waldur/marketplace/orders/types';
 import {
   Category,
@@ -258,7 +257,7 @@ export const getCartItems = (projectUrl: string) =>
   getAll('/marketplace-cart-items/', { params: { project: projectUrl } });
 
 export const getCartItem = (id: string) =>
-  getById<OrderItemResponse>('/marketplace-cart-items/', id);
+  getById<OrderResponse>('/marketplace-cart-items/', id);
 
 export const addCartItem = (data: object) =>
   post('/marketplace-cart-items/', data).then((response) => response.data);
@@ -277,38 +276,31 @@ export const submitCart = (data: object) =>
   );
 
 export const getOrdersList = (params?: {}) =>
-  getList<OrderItemResponse>('/marketplace-orders/', params);
+  getList<OrderResponse>('/marketplace-orders/', params);
 
-export const getOrderItemList = (params?: {}) =>
-  getList<OrderItemResponse>('/marketplace-order-items/', params);
+export const getOrder = (id) =>
+  getById<OrderDetailsType>('/marketplace-orders/', id);
 
-export const getOrderDetails = (id: string) =>
-  getById<Order>('/marketplace-orders/', id);
+export const cancelOrder = (id) => post(`/marketplace-orders/${id}/cancel/`);
 
-export const getOrderItem = (id) =>
-  getById<OrderItemDetailsType>('/marketplace-order-items/', id);
-
-export const terminateOrderItem = (id) =>
-  post(`/marketplace-order-items/${id}/terminate/`);
-
-export const approveOrderItem = (id) =>
-  post(`/marketplace-order-items/${id}/approve/`);
-
-export const rejectOrderItem = (id) =>
-  post(`/marketplace-order-items/${id}/reject/`);
-
-export const cancelTerminationOrderItem = (id) =>
-  post(`/marketplace-order-items/${id}/cancel_termination/`);
-
-export const approveOrder = (orderUuid: string) =>
-  post(`/marketplace-orders/${orderUuid}/approve/`).then(
+export const approveOrderByConsumer = (orderUuid: string) =>
+  post(`/marketplace-orders/${orderUuid}/approve_by_consumer/`).then(
     (response) => response.data,
   );
 
-export const rejectOrder = (orderUuid: string) =>
-  post(`/marketplace-orders/${orderUuid}/reject/`).then(
+export const approveOrderByProvider = (id) =>
+  post(`/marketplace-orders/${id}/approve_by_provider/`);
+
+export const rejectOrderByConsumer = (orderUuid: string) =>
+  post(`/marketplace-orders/${orderUuid}/reject_by_consumer/`).then(
     (response) => response.data,
   );
+
+export const rejectOrderByProvider = (id) =>
+  post(`/marketplace-orders/${id}/reject_by_provider/`);
+
+export const cancelTerminationOrder = (id) =>
+  post(`/remote-waldur-api/cancel_termination/${id}/`);
 
 export const getCustomerList = (params?: {}) =>
   getSelectData<Customer>('/customers/', params);
@@ -507,8 +499,8 @@ export const pullRemoteOfferingUsage = (uuid) =>
 export const pullRemoteOfferingResources = (uuid) =>
   post(`/remote-waldur-api/pull_offering_resources/${uuid}/`);
 
-export const pullRemoteOfferingOrderItems = (uuid) =>
-  post(`/remote-waldur-api/pull_offering_order_items/${uuid}/`);
+export const pullRemoteOfferingOrders = (uuid) =>
+  post(`/remote-waldur-api/pull_offering_orders/${uuid}/`);
 
 export const pullRemoteOfferingInvoices = (uuid) =>
   post(`/remote-waldur-api/pull_offering_invoices/${uuid}/`);
@@ -518,13 +510,6 @@ export const pullRemoteOfferingRobotAccounts = (uuid) =>
 
 export const pushRemoteOfferingProjectData = (uuid) =>
   post(`/remote-waldur-api/push_project_data/${uuid}/`);
-
-export const countOrderItems = (params) =>
-  Axios.request({
-    method: 'HEAD',
-    url: ENV.apiEndpoint + 'api/marketplace-order-items/',
-    params,
-  }).then(parseResultCount);
 
 export const countOrders = (params) =>
   Axios.request({

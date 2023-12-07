@@ -155,20 +155,20 @@ function* pullRemoteOfferingResources(action: Action<any>) {
   }
 }
 
-function* pullRemoteOfferingOrderItems(action: Action<any>) {
+function* pullRemoteOfferingOrder(action: Action<any>) {
   const { uuid } = action.payload;
   try {
-    yield call(api.pullRemoteOfferingOrderItems, uuid);
+    yield call(api.pullRemoteOfferingOrders, uuid);
     yield put(
       showSuccess(
-        translate('Offering order items synchronization has been scheduled.'),
+        translate('Offering orders synchronization has been scheduled.'),
       ),
     );
   } catch (error) {
     yield put(
       showErrorResponse(
         error,
-        translate('Unable to synchronize offering order items.'),
+        translate('Unable to synchronize offering orders.'),
       ),
     );
   }
@@ -237,8 +237,8 @@ export default function* () {
     pullRemoteOfferingResources,
   );
   yield takeEvery(
-    constants.PULL_REMOTE_OFFERING_ORDER_ITEMS,
-    pullRemoteOfferingOrderItems,
+    constants.PULL_REMOTE_OFFERING_ORDERS,
+    pullRemoteOfferingOrder,
   );
   yield takeEvery(
     constants.PULL_REMOTE_OFFERING_INVOICES,

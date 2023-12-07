@@ -1,6 +1,5 @@
 import { ErrorBoundary } from '@sentry/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { UIView } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Provider } from 'react-redux';
@@ -28,22 +27,21 @@ export const Application: FunctionComponent = () => {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <LayoutProvider>
-          <ThemeSelector />
-          <NotificationContainer />
-          <UIRouter>
-            <ErrorBoundary fallback={ErrorMessage}>
+    <ErrorBoundary fallback={ErrorMessage}>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <LayoutProvider>
+            <ThemeSelector />
+            <NotificationContainer />
+            <UIRouter>
               <ModalRoot />
               <DrawerRoot />
               <UIView />
-            </ErrorBoundary>
-          </UIRouter>
-          <MasterInit />
-        </LayoutProvider>
-      </Provider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+            </UIRouter>
+            <MasterInit />
+          </LayoutProvider>
+        </Provider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 };

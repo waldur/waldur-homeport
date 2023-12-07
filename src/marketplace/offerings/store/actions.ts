@@ -53,8 +53,8 @@ export const pullRemoteOfferingResources = (uuid: string) => ({
   payload: { uuid },
 });
 
-export const pullRemoteOfferingOrderItems = (uuid: string) => ({
-  type: constants.PULL_REMOTE_OFFERING_ORDER_ITEMS,
+export const pullRemoteOfferingOrders = (uuid: string) => ({
+  type: constants.PULL_REMOTE_OFFERING_ORDERS,
   payload: { uuid },
 });
 

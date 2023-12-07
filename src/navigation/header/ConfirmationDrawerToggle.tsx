@@ -6,7 +6,7 @@ import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { openDrawerDialog } from '@waldur/drawer/actions';
 import { translate } from '@waldur/i18n';
 import { countProjectUpdateRequestsList } from '@waldur/marketplace-remote/api';
-import { countOrderItems, countOrders } from '@waldur/marketplace/common/api';
+import { countOrders } from '@waldur/marketplace/common/api';
 
 import {
   PENDING_CONSUMER_ORDERS_FILTER,
@@ -28,7 +28,7 @@ export const ConfirmationDrawerToggle: React.FC = () => {
     const pendingOrdersCount = await countOrders(
       PENDING_CONSUMER_ORDERS_FILTER,
     );
-    const pendingProvidersCount = await countOrderItems(
+    const pendingProvidersCount = await countOrders(
       PENDING_PROVIDER_ORDERS_FILTER,
     );
     const pendingProjectUpdatesCount = await countProjectUpdateRequestsList({

@@ -4,18 +4,18 @@ import { useDispatch } from 'react-redux';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { approveOrderItem } from '@waldur/marketplace/common/api';
+import { approveOrderByProvider } from '@waldur/marketplace/common/api';
 import {
   TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
   TABLE_PENDING_PUBLIC_ORDERS,
   TABLE_PUBLIC_ORDERS,
-} from '@waldur/marketplace/orders/item/list/constants';
-import { OrderItemResponse } from '@waldur/marketplace/orders/types';
+} from '@waldur/marketplace/orders/list/constants';
+import { OrderResponse } from '@waldur/marketplace/orders/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { fetchListStart, resetPagination } from '@waldur/table/actions';
 
 interface ApproveAllButtonProps {
-  orders: OrderItemResponse[];
+  orders: OrderResponse[];
 }
 
 export const ApproveAllButton: React.FC<ApproveAllButtonProps> = (props) => {
@@ -26,7 +26,7 @@ export const ApproveAllButton: React.FC<ApproveAllButtonProps> = (props) => {
     try {
       const promises = [];
       props.orders.forEach((order) => {
-        promises.push(approveOrderItem(order.uuid));
+        promises.push(approveOrderByProvider(order.uuid));
       });
       await Promise.all(promises);
       // refresh tables
@@ -39,13 +39,10 @@ export const ApproveAllButton: React.FC<ApproveAllButtonProps> = (props) => {
       dispatch(resetPagination(TABLE_PENDING_PROVIDER_PUBLIC_ORDERS));
       dispatch(fetchListStart(TABLE_PENDING_PROVIDER_PUBLIC_ORDERS));
 
-      dispatch(showSuccess(translate('All order items have been approved.')));
+      dispatch(showSuccess(translate('All orders have been approved.')));
     } catch (response) {
       dispatch(
-        showErrorResponse(
-          response,
-          translate('Unable to approve all order items.'),
-        ),
+        showErrorResponse(response, translate('Unable to approve all orders.')),
       );
     }
     setLoading(false);

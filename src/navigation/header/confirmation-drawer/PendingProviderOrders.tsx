@@ -1,31 +1,31 @@
 import React from 'react';
 
 import { translate } from '@waldur/i18n';
-import { TABLE_PENDING_PROVIDER_PUBLIC_ORDERS } from '@waldur/marketplace/orders/item/list/constants';
-import { OrderItemActionsCell } from '@waldur/marketplace/orders/item/list/OrderItemActionsCell';
-import { OrderItemslistTablePlaceholder } from '@waldur/marketplace/orders/item/list/OrderItemsListPlaceholder';
-import { OrderItemStateCell } from '@waldur/marketplace/orders/item/list/OrderItemStateCell';
-import { OrderItemTypeCell } from '@waldur/marketplace/orders/item/list/OrderItemTypeCell';
-import { ResourceNameField } from '@waldur/marketplace/orders/item/list/ResourceNameField';
-import { RowNameField } from '@waldur/marketplace/orders/item/list/RowNameField';
+import { OrderProviderActions } from '@waldur/marketplace/orders/actions/OrderProviderActions';
+import { TABLE_PENDING_PROVIDER_PUBLIC_ORDERS } from '@waldur/marketplace/orders/list/constants';
+import { OrderNameField } from '@waldur/marketplace/orders/list/OrderNameField';
+import { OrderStateCell } from '@waldur/marketplace/orders/list/OrderStateCell';
+import { OrderTablePlaceholder } from '@waldur/marketplace/orders/list/OrderTablePlaceholder';
+import { OrderTypeCell } from '@waldur/marketplace/orders/list/OrderTypeCell';
+import { ResourceNameField } from '@waldur/marketplace/orders/list/ResourceNameField';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
 import { BulkProviderActions } from './BulkProviderActions';
 import { PENDING_PROVIDER_ORDERS_FILTER } from './constants';
-import { OrderItemExpandableRow } from './OrderItemExpandableRow';
+import { OrderExpandableRow } from './OrderExpandableRow';
 
 export const PendingProviderOrders: React.FC<{}> = () => {
   const tableProps = useTable({
     table: TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
-    fetchData: createFetcher('marketplace-order-items'),
+    fetchData: createFetcher('marketplace-orders'),
     filter: PENDING_PROVIDER_ORDERS_FILTER,
   });
 
   const columns = [
     {
       title: translate('Offering'),
-      render: RowNameField,
+      render: OrderNameField,
     },
     {
       title: translate('Resource'),
@@ -33,19 +33,19 @@ export const PendingProviderOrders: React.FC<{}> = () => {
     },
     {
       title: translate('Organization'),
-      render: ({ row }) => row.customer_name,
+      render: ({ row }) => <>{row.customer_name}</>,
     },
     {
       title: translate('Project'),
-      render: ({ row }) => row.project_name,
+      render: ({ row }) => <>{row.project_name}</>,
     },
     {
       title: translate('Type'),
-      render: OrderItemTypeCell,
+      render: OrderTypeCell,
     },
     {
       title: translate('State'),
-      render: OrderItemStateCell,
+      render: OrderStateCell,
     },
   ];
 
@@ -53,15 +53,15 @@ export const PendingProviderOrders: React.FC<{}> = () => {
     <div>
       <Table
         {...tableProps}
-        placeholderComponent={<OrderItemslistTablePlaceholder />}
+        placeholderComponent={<OrderTablePlaceholder />}
         columns={columns}
-        title={translate('Order items')}
-        verboseName={translate('Order items')}
+        title={translate('Orders')}
+        verboseName={translate('Orders')}
         initialSorting={{ field: 'created', mode: 'desc' }}
         initialPageSize={5}
-        expandableRow={OrderItemExpandableRow}
+        expandableRow={OrderExpandableRow}
         hoverableRow={({ row }) => (
-          <OrderItemActionsCell row={row} refetch={tableProps.fetch} />
+          <OrderProviderActions row={row} refetch={tableProps.fetch} />
         )}
         fullWidth={true}
       />
