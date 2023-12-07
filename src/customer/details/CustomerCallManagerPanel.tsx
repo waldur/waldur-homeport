@@ -61,8 +61,12 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
         dispatch,
         translate('Confirmation'),
         value
-          ? translate('Are you sure you want to enable call manger?')
-          : translate('Are you sure you want to disable call manger?'),
+          ? translate(
+              'Are you sure you want to allow this organization to manage calls?',
+            )
+          : translate(
+              'Are you sure you want to prohibit this organization from managing calls?',
+            ),
       );
     } catch {
       return;

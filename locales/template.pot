@@ -812,6 +812,10 @@ msgstr ""
 msgid "Are you sure you want to activate ?"
 msgstr ""
 
+#: src/customer/details/CustomerCallManagerPanel.tsx
+msgid "Are you sure you want to allow this organization to manage calls?"
+msgstr ""
+
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
 msgid "Are you sure you want to archive plan {name}?"
 msgstr ""
@@ -901,11 +905,7 @@ msgid "Are you sure you want to destroy {count} resources?"
 msgstr ""
 
 #: src/customer/details/CustomerCallManagerPanel.tsx
-msgid "Are you sure you want to disable call manger?"
-msgstr ""
-
-#: src/customer/details/CustomerCallManagerPanel.tsx
-msgid "Are you sure you want to enable call manger?"
+msgid "Are you sure you want to prohibit this organization from managing calls?"
 msgstr ""
 
 #: src/marketplace/resources/mass-actions/MultiPullAction.tsx
