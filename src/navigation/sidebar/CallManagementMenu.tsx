@@ -10,7 +10,7 @@ const Icon = require('./CallManagement.svg');
 
 export const CallManagementMenu = () => {
   const customer = useSelector(getCustomer);
-  const visible = !isFeatureVisible(
+  const visible = isFeatureVisible(
     'marketplace.show_call_management_functionality',
   );
   if (!visible || !customer.is_call_managing_organization) {
