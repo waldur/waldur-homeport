@@ -4,12 +4,13 @@ import { compose } from 'redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
+
+import { OrderDetailsLink } from '../details/OrderDetailsLink';
 
 import { OrderStateCell } from './OrderStateCell';
 
@@ -18,11 +19,13 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Name'),
       render: ({ row }) => (
-        <Link
-          state="marketplace-order-details-project"
-          params={{ order_uuid: row.uuid }}
-          label={row.attributes.name}
-        />
+        <OrderDetailsLink
+          order_uuid={row.uuid}
+          customer_uuid={row.customer_uuid}
+          project_uuid={row.project_uuid}
+        >
+          {row.attributes.name}
+        </OrderDetailsLink>
       ),
     },
     {
