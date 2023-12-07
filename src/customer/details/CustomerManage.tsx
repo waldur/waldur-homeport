@@ -11,7 +11,7 @@ export const CustomerManage: FunctionComponent = () => (
   <>
     <CustomerDetailsPanel />
     <CustomerMarketplacePanel />
-    {isFeatureVisible('marketplace.show_call_management_functionality') && (
+    {!isFeatureVisible('marketplace.show_call_management_functionality') && (
       <CustomerCallManagerPanel />
     )}
     <CustomerRemovePanel />

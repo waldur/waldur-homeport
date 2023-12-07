@@ -155,6 +155,7 @@ export interface Customer {
   homepage?: string;
   vat_code?: string;
   image?: string;
+  is_call_managing_organization?: boolean;
   is_service_provider?: boolean;
   created?: string;
   division?: string;
@@ -170,6 +171,12 @@ export interface Customer {
   payment_profiles?: PaymentProfile[];
   users_count?: number;
   role: CustomerRole;
+}
+
+export interface CallManagingOrganizationInfo {
+  uuid: string;
+  description?: string;
+  image?: string;
 }
 
 export const ORGANIZATION_WORKSPACE = 'WORKSPACE/ORGANIZATION';
