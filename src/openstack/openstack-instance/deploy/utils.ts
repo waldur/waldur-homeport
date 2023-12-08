@@ -7,10 +7,10 @@ import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { Offering } from '@waldur/marketplace/types';
 import { loadVolumeTypes } from '@waldur/openstack/api';
 import { DYNAMIC_STORAGE_MODE } from '@waldur/openstack/constants';
-import { getQuotas } from '@waldur/openstack/openstack-instance/OpenstackInstanceCheckoutSummary';
 import {
   formatVolumeTypeChoices,
   getDefaultVolumeType,
+  getQuotas,
 } from '@waldur/openstack/openstack-instance/utils';
 import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 import { RootState } from '@waldur/store/reducers';
@@ -28,14 +28,6 @@ export const formAttributesSelector = (state: RootState) => {
 export const formFlavorSelector = (state: RootState) => {
   const formAttrs = formAttributesSelector(state);
   return formAttrs.flavor as Flavor;
-};
-
-export const formVolumesSelector = (state: RootState) => {
-  const formAttrs = formAttributesSelector(state);
-  return {
-    system_volume_size: formAttrs.system_volume_size,
-    data_volume_size: formAttrs.data_volume_size,
-  };
 };
 
 export const getOfferingLimit = (

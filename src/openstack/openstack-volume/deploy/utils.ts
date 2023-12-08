@@ -3,10 +3,9 @@ import { useSelector } from 'react-redux';
 
 import { Offering } from '@waldur/marketplace/types';
 import { formDataSelector } from '@waldur/marketplace/utils';
+import { getQuotas } from '@waldur/openstack/openstack-instance/utils';
 import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 import { RootState } from '@waldur/store/reducers';
-
-import { getQuotas } from '../OpenstackVolumeCheckoutSummary';
 
 export const formAttributesSelector = (state: RootState) => {
   const formData = formDataSelector(state);

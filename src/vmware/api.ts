@@ -1,4 +1,3 @@
-import { ENV } from '@waldur/configs/default';
 import { deleteById, get, getAll, getById, post, put } from '@waldur/core/api';
 
 import { VMwareTemplate } from './types';
@@ -11,25 +10,6 @@ export const getVMwareTemplates = (
   customer_uuid: string,
 ) =>
   getAll<VMwareTemplate>('/vmware-templates/', {
-    params: { settings_uuid, customer_uuid },
-  });
-
-export const loadVMwareTemplatesAndLimits = async (props: {
-  settings_uuid: string;
-  customer_uuid: string;
-}) => {
-  const [templates, limits] = await Promise.all([
-    getVMwareTemplates(props.settings_uuid, props.customer_uuid),
-    getVMwareLimits(props.settings_uuid),
-  ]);
-  return { templates, limits };
-};
-
-export const getVMwareNetworks = (
-  settings_uuid: string,
-  customer_uuid: string,
-) =>
-  getAll('/vmware-networks/', {
     params: { settings_uuid, customer_uuid },
   });
 
@@ -53,23 +33,6 @@ export const loadVMwareAdvancedOptions = async (props: {
     datastores,
     folders,
   };
-};
-
-export const loadFormOptions = async (props: {
-  settings_uuid: string;
-  customer_uuid: string;
-}) => {
-  const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
-  if (advancedMode) {
-    const [templatesAndLimits, networks, advancedOptions] = await Promise.all([
-      loadVMwareTemplatesAndLimits(props),
-      getVMwareNetworks(props.settings_uuid, props.customer_uuid),
-      loadVMwareAdvancedOptions(props),
-    ]);
-    return { ...templatesAndLimits, ...advancedOptions, networks };
-  } else {
-    return await loadVMwareTemplatesAndLimits(props);
-  }
 };
 
 export interface CreatePortRequestBody {

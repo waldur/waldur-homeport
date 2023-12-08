@@ -1,4 +1,3 @@
-export const TABLE_MY_ORDERS = 'MyOrderList';
 export const TABLE_PUBLIC_ORDERS = 'OrderList';
 export const TABLE_PENDING_PUBLIC_ORDERS = 'PendingOrderList';
 export const TABLE_PENDING_PROVIDER_PUBLIC_ORDERS = 'PendingProviderOrderList';

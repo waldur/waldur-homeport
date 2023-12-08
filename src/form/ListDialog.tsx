@@ -5,10 +5,8 @@ import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 import { ChoicesTable } from './ChoicesTable';
-import {
-  SelectDialogFieldColumn,
-  SelectDialogFieldChoice,
-} from './SelectDialogField';
+import { SelectDialogFieldColumn } from './types';
+import { SelectDialogFieldChoice } from './types';
 
 interface ListDialogProps {
   title: string;

@@ -11,10 +11,6 @@ const OpenStackPackageDetails = lazyComponent(
   () => import('./OpenStackPackageDetails'),
   'OpenStackPackageDetails',
 );
-const OpenStackPackageForm = lazyComponent(
-  () => import('./OpenStackPackageForm'),
-  'OpenStackPackageForm',
-);
 const OpenStackPluginOptionsForm = lazyComponent(
   () => import('./OpenStackPluginOptionsForm'),
   'OpenStackPluginOptionsForm',
@@ -140,7 +136,6 @@ registerOfferingType({
     return translate('OpenStack admin');
   },
   formSteps: deployOfferingSteps,
-  component: OpenStackPackageForm, // We can remove this line later. formSteps replaced
   detailsComponent: OpenStackPackageDetails,
   pluginOptionsForm: OpenStackPluginOptionsForm,
   limitSerializer,

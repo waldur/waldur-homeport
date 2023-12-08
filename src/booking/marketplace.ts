@@ -13,10 +13,6 @@ const BookingCheckoutSummary = lazyComponent(
   () => import('@waldur/booking/BookingCheckoutSummary'),
   'BookingCheckoutSummary',
 );
-const OfferingConfigurationForm = lazyComponent(
-  () => import('@waldur/support/OfferingConfigurationForm'),
-  'OfferingConfigurationForm',
-);
 const UserPluginOptionsForm = lazyComponent(
   () => import('@waldur/marketplace/UserPluginOptionsForm'),
   'UserPluginOptionsForm',
@@ -71,7 +67,6 @@ registerOfferingType({
   },
   formSteps: deployOfferingSteps,
   checkoutSummaryComponent: BookingCheckoutSummary,
-  component: OfferingConfigurationForm, // We can remove this line later. formSteps replaced
   pluginOptionsForm: UserPluginOptionsForm,
   detailsComponent: BookingDetails,
   showOptions: true,

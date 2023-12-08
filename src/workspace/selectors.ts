@@ -117,10 +117,6 @@ export const isOwnerOrStaff = createSelector(
   },
 );
 
-export const filterByUser = (state: RootState) => ({
-  user_url: getUser(state)?.url,
-});
-
 export const isProjectManagerSelector = (user, project) =>
   user.permissions?.find(
     (permission) =>

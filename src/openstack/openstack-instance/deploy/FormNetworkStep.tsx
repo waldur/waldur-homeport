@@ -11,8 +11,7 @@ import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { loadFloatingIps, loadSubnets } from '@waldur/openstack/api';
 
-import { getDefaultFloatingIps } from '../OpenstackInstanceNetworks';
-import { formatSubnet } from '../utils';
+import { getDefaultFloatingIps, formatSubnet } from '../utils';
 
 const renderNetworkRows = ({ fields, subnets, floatingIps }: any) => {
   const availableNetworkItemsFilter = useCallback(

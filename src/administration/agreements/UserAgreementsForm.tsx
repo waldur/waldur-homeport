@@ -1,16 +1,11 @@
 import { useDispatch } from 'react-redux';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { get, patch } from '@waldur/core/api';
+import { patch } from '@waldur/core/api';
 import { FormContainer, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showSuccess } from '@waldur/store/notify';
-
-export const loadUserAgreements = async () => {
-  const response = await get('user-agreements/');
-  return response.data;
-};
 
 export interface UserAgreementsFormData {
   url: string;

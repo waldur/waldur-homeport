@@ -18,16 +18,6 @@ export interface OptionFormData {
   choices: string;
 }
 
-export interface ScheduleFormData {
-  start_date: string;
-  start_time: string;
-  end_date: string;
-  end_time: string;
-  type: string;
-  title: string;
-  id: string;
-}
-
 export type OfferingLimits = Record<string, { min: number; max: number }>;
 
 export interface PlanRequest {

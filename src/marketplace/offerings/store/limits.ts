@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 
 import {
-  getFormLimitSerializer,
   getFormLimitParser,
   Limits,
   filterOfferingComponents,
@@ -44,14 +43,6 @@ const transformLimits = (func, limits: OfferingLimits): OfferingLimits => {
   );
 };
 
-export const serializeLimitValues = (
-  type: string,
-  limits: OfferingLimits,
-): OfferingLimits => {
-  const limitSerializer = getFormLimitSerializer(type);
-  return transformLimits(limitSerializer, limits);
-};
-
 const parseLimitValues = (
   type: string,
   limits: OfferingLimits,
@@ -76,19 +67,6 @@ export const parseOfferingLimits = (offering: Offering): OfferingLimits => {
   const components = filterOfferingComponents(offering);
   const rawLimits = parseComponentLimits(components);
   return parseLimitValues(offering.type, rawLimits);
-};
-
-export const getDefaults = (offering: Offering) => {
-  const limits = parseOfferingLimits(offering);
-  return Object.keys(limits)
-    .filter((key) => limits[key].min !== null)
-    .reduce(
-      (rv, key) => ({
-        ...rv,
-        [key]: limits[key].min,
-      }),
-      {},
-    );
 };
 
 export const getOfferingComponentValidator = (component: OfferingComponent) =>

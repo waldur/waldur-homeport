@@ -2,17 +2,29 @@ import { translate } from '@waldur/i18n';
 import { InternalIP } from '@waldur/resource/types';
 import { formatFlavor } from '@waldur/resource/utils';
 
-import { VolumeType } from '../types';
+import { DYNAMIC_STORAGE_MODE } from '../constants';
+import { Quota, VolumeType } from '../types';
 
-import { Flavor } from './types';
+const getTotalStorage = (formData) =>
+  (formData.system_volume_size || 0) + (formData.data_volume_size || 0);
 
-export const validateAndSort = (formData, choices, validator, comparator) =>
-  choices
-    .map((choice) => ({
-      ...choice,
-      disabled: validator(formData, choice),
-    }))
-    .sort(comparator);
+function extendVolumeTypeQuotas(formData, usages, limits, storage_mode) {
+  const quotas = [];
+  if (storage_mode === DYNAMIC_STORAGE_MODE) {
+    const required = getVolumeTypeRequirements(formData);
+    Object.keys(limits)
+      .filter((key) => key.startsWith('gigabytes_'))
+      .forEach((key) => {
+        quotas.push({
+          name: key,
+          usage: usages[key] || 0,
+          limit: limits[key],
+          required: required[key] || 0,
+        });
+      });
+  }
+  return quotas;
+}
 
 export const formatFlavorTitle = (flavor) => {
   const props = formatFlavor(flavor);
@@ -115,21 +127,6 @@ export function formatSubnet(subnet) {
   return `${subnet.name} (${subnet.cidr})`;
 }
 
-export function flavorComparator(a: Flavor, b: Flavor) {
-  if (a.disabled < b.disabled) return -1;
-  if (a.disabled > b.disabled) return 1;
-
-  if (a.cores > b.cores) return 1;
-  if (a.cores < b.cores) return -1;
-
-  if (a.ram > b.ram) return 1;
-  if (a.ram < b.ram) return -1;
-
-  if (a.disk > b.disk) return 1;
-  if (a.disk < b.disk) return -1;
-  return 0;
-}
-
 export function flavorValidator(model, choice) {
   if (!model.image) {
     return true;
@@ -142,3 +139,39 @@ export function flavorValidator(model, choice) {
 
 export const formatAddressList = (row: InternalIP) =>
   row.fixed_ips.map((fip) => fip.ip_address).join(', ') || 'N/A';
+
+export const getQuotas = ({ formData, usages, limits, storage_mode }) => {
+  const quotas: Quota[] = [
+    {
+      name: 'vcpu',
+      usage: usages.cores,
+      limit: limits.cores,
+      required: formData.flavor ? formData.flavor.cores : 0,
+    },
+    {
+      name: 'ram',
+      usage: usages.ram,
+      limit: limits.ram,
+      required: formData.flavor ? formData.flavor.ram : 0,
+    },
+    {
+      name: 'storage',
+      usage: usages.disk,
+      limit: limits.disk,
+      required: getTotalStorage(formData) || 0,
+    },
+    ...extendVolumeTypeQuotas(formData, usages, limits, storage_mode),
+  ];
+  return quotas;
+};
+
+export const getDefaultFloatingIps = () => [
+  {
+    address: translate('Skip floating IP assignment'),
+    url: 'false',
+  },
+  {
+    address: translate('Auto-assign floating IP'),
+    url: 'true',
+  },
+];
