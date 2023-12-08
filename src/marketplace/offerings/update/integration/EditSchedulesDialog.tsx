@@ -18,7 +18,12 @@ import { OfferingScheduler } from './OfferingScheduler';
 export const EditSchedulesDialog = connect(
   (_, ownProps: { resolve: { offering } }) => ({
     initialValues: {
-      schedules: ownProps.resolve.offering.attributes?.schedules,
+      schedules: ownProps.resolve.offering.attributes?.schedules.map((sch) => {
+        // Convert string dates to JS Dates
+        if (typeof sch.start === 'string') sch.start = new Date(sch.start);
+        if (typeof sch.end === 'string') sch.end = new Date(sch.end);
+        return sch;
+      }),
     },
   }),
 )(
@@ -55,8 +60,12 @@ export const EditSchedulesDialog = connect(
           <Modal.Title>{translate('Update schedule')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FormContainer {...props}>
-            <FieldArray name="schedules" component={OfferingScheduler} />
+          <FormContainer {...props} className="size-xl">
+            <FieldArray
+              name="schedules"
+              rerenderOnEveryChange
+              component={OfferingScheduler}
+            />
           </FormContainer>
         </Modal.Body>
         <Modal.Footer>

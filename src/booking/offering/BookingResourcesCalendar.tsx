@@ -14,7 +14,7 @@ import './BookingResourcesCalendar.scss';
 
 interface BookingResourcesCalendarProps {
   bookingResources: BookingResource[];
-  refetch(): void;
+  refetch?(): void;
 }
 
 export const BookingResourcesCalendar: FunctionComponent<BookingResourcesCalendarProps> =

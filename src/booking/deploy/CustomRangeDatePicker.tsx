@@ -28,8 +28,10 @@ interface CustomRangeDatePickerProps extends FormField {
     minDate?: DateTimePickerProps['options']['minDate'];
     maxDate?: DateTimePickerProps['options']['maxDate'];
     enable?: Array<{ from: string; to: string }>;
+    disable?: Array<{ from: string; to: string } | ((date: Date) => boolean)>;
     /** In minutes */
     timeStep?: number;
+    hasTimePicker?: boolean;
   };
 }
 
@@ -251,8 +253,8 @@ export const CustomRangeDatePicker = (props: CustomRangeDatePickerProps) => {
       const dates: Date[] = input.value;
       const c1 = refDate1?.current?.flatpickr;
       const c2 = refDate2?.current?.flatpickr;
-      if (c2) c2.setDate(input.value);
-      if (c1) c1.setDate(input.value);
+      if (c2) c2.setDate(dates);
+      if (c1) c1.setDate(dates);
       // first, align the 2nd calendar (important)
       if (c2) {
         c2.changeYear(dates[1].getFullYear());
@@ -289,9 +291,10 @@ export const CustomRangeDatePicker = (props: CustomRangeDatePickerProps) => {
             dateFormat: 'Y-m-d',
             inline: true,
             mode: 'range',
-            minDate: props.options.minDate,
-            maxDate: props.options.maxDate,
-            enable: props.options.enable,
+            locale: {
+              firstDayOfWeek: 0, // start week on Sunday
+            },
+            ...props.options,
           }}
           value={null}
           className="form-control"
@@ -343,10 +346,11 @@ export const CustomRangeDatePicker = (props: CustomRangeDatePickerProps) => {
             dateFormat: 'Y-m-d',
             inline: true,
             mode: 'range',
-            minDate: props.options.minDate,
-            maxDate: props.options.maxDate,
             defaultDate: nextMonthDate,
-            enable: props.options.enable,
+            locale: {
+              firstDayOfWeek: 0, // start week on Sunday
+            },
+            ...props.options,
           }}
           value={null}
           className="form-control"
@@ -383,62 +387,64 @@ export const CustomRangeDatePicker = (props: CustomRangeDatePickerProps) => {
       </div>
 
       {/* Time */}
-      <div className="flatpickr-range-time">
-        <div className="flatpickr-range-time-1">
-          <div className="title">
-            <h6>{translate('Start time')}</h6>
-            {startTime && (
-              <span>
-                {startTime.h}:{startTime.m}
-              </span>
-            )}
+      {props.options.hasTimePicker && (
+        <div className="flatpickr-range-time">
+          <div className="flatpickr-range-time-1">
+            <div className="title">
+              <h6>{translate('Start time')}</h6>
+              {startTime && (
+                <span>
+                  {startTime.h}:{startTime.m}
+                </span>
+              )}
+            </div>
+            <ListGroup>
+              {getTimeOptions(props.options.timeStep)
+                .slice(0, -1)
+                .map((time, i) => (
+                  <ListGroup.Item
+                    key={i}
+                    type="button"
+                    action
+                    variant=""
+                    active={startTime.h === time.h && startTime.m === time.m}
+                    disabled={isTimeOfStartDisabled(time)}
+                    onClick={() => onChange(null, null, time, null)}
+                  >
+                    {time.h}:{time.m}
+                  </ListGroup.Item>
+                ))}
+            </ListGroup>
           </div>
-          <ListGroup>
-            {getTimeOptions(props.options.timeStep)
-              .slice(0, -1)
-              .map((time, i) => (
-                <ListGroup.Item
-                  key={i}
-                  type="button"
-                  action
-                  variant=""
-                  active={startTime.h === time.h && startTime.m === time.m}
-                  disabled={isTimeOfStartDisabled(time)}
-                  onClick={() => onChange(null, null, time, null)}
-                >
-                  {time.h}:{time.m}
-                </ListGroup.Item>
-              ))}
-          </ListGroup>
-        </div>
-        <div className="flatpickr-range-time-2">
-          <div className="title">
-            <h6>{translate('End time')}</h6>
-            {endTime && (
-              <span>
-                {endTime.h}:{endTime.m}
-              </span>
-            )}
+          <div className="flatpickr-range-time-2">
+            <div className="title">
+              <h6>{translate('End time')}</h6>
+              {endTime && (
+                <span>
+                  {endTime.h}:{endTime.m}
+                </span>
+              )}
+            </div>
+            <ListGroup>
+              {getTimeOptions(props.options.timeStep)
+                .slice(1)
+                .map((time, i) => (
+                  <ListGroup.Item
+                    key={i}
+                    type="button"
+                    action
+                    variant=""
+                    active={endTime.h === time.h && endTime.m === time.m}
+                    disabled={isTimeOfEndDisabled(time)}
+                    onClick={() => onChange(null, null, null, time)}
+                  >
+                    {time.h}:{time.m}
+                  </ListGroup.Item>
+                ))}
+            </ListGroup>
           </div>
-          <ListGroup>
-            {getTimeOptions(props.options.timeStep)
-              .slice(1)
-              .map((time, i) => (
-                <ListGroup.Item
-                  key={i}
-                  type="button"
-                  action
-                  variant=""
-                  active={endTime.h === time.h && endTime.m === time.m}
-                  disabled={isTimeOfEndDisabled(time)}
-                  onClick={() => onChange(null, null, null, time)}
-                >
-                  {time.h}:{time.m}
-                </ListGroup.Item>
-              ))}
-          </ListGroup>
         </div>
-      </div>
+      )}
     </div>
   );
 };

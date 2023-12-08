@@ -98,7 +98,7 @@ msgid "Accept invitation"
 msgstr ""
 
 #: src/booking/BookingStateField.tsx
-#: src/booking/BookingStateFilter.tsx
+#: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
 msgid "Accepted"
 msgstr ""
@@ -424,6 +424,7 @@ msgid "Add rule"
 msgstr ""
 
 #: src/booking/deploy/FormPeriodsStep.tsx
+#: src/marketplace/offerings/update/integration/OfferingScheduler.tsx
 msgid "Add time period"
 msgstr ""
 
@@ -575,10 +576,6 @@ msgstr ""
 
 #: src/marketplace/category/list/AllCategoriesPage.tsx
 msgid "All categories"
-msgstr ""
-
-#: src/booking/components/modal/BookingModal.tsx
-msgid "All day"
 msgstr ""
 
 #: src/navigation/header/confirmation-drawer/ApproveAllButton.tsx
@@ -1301,10 +1298,6 @@ msgstr ""
 #: src/booking/CancelAction.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
 msgid "Booking has been cancelled."
-msgstr ""
-
-#: src/booking/components/calendar/LazyCalendarComponent.tsx
-msgid "Booking is not allowed to overlap other bookings."
 msgstr ""
 
 #: src/booking/BookingsList.tsx
@@ -2281,7 +2274,6 @@ msgstr ""
 #: src/administration/TokensList.tsx
 #: src/administration/notifications/HooksList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
-#: src/booking/components/utils.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
@@ -2349,7 +2341,6 @@ msgid "Created at"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
-#: src/booking/components/utils.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/marketplace/orders/list/CustomerOrdersList.tsx
@@ -2662,7 +2653,6 @@ msgid "Default value"
 msgstr ""
 
 #: src/administration/agreements/UserAgreementDeleteButton.tsx
-#: src/booking/components/modal/BookingModal.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
@@ -3172,20 +3162,12 @@ msgstr ""
 msgid "Edit YAML"
 msgstr ""
 
-#: src/booking/components/modal/BookingModal.tsx
-msgid "Edit an availability"
-msgstr ""
-
 #: src/marketplace/deploy/DeployPageActions.tsx
 msgid "Edit as YAML"
 msgstr ""
 
 #: src/marketplace/offerings/update/attributes/EditAttributeDialog.tsx
 msgid "Edit attribute"
-msgstr ""
-
-#: src/booking/components/modal/BookingModal.tsx
-msgid "Edit booking event"
 msgstr ""
 
 #: src/marketplace/offerings/update/attributes/EditCategoryButton.tsx
@@ -3366,11 +3348,6 @@ msgstr ""
 msgid "Encountered an empty component"
 msgstr ""
 
-#: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/utils.tsx
-msgid "End"
-msgstr ""
-
 #: src/booking/deploy/CustomRangeDatePicker.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
@@ -3384,10 +3361,6 @@ msgstr ""
 #: src/project/SupportProjectsList.tsx
 #: src/user/affiliations/ProjectsList.tsx
 msgid "End date"
-msgstr ""
-
-#: src/booking/components/modal/BookingModal.tsx
-msgid "End date must be after start date."
 msgstr ""
 
 #: src/invoices/list/AgreementInfo.tsx
@@ -5551,7 +5524,6 @@ msgstr ""
 #: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/booking/BookingsList.tsx
-#: src/booking/components/utils.tsx
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/broadcasts/BroadcastTemplateList.tsx
@@ -6187,7 +6159,6 @@ msgstr ""
 #: src/administration/roles/PermissionOptions.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/booking/BookingsList.tsx
-#: src/booking/components/utils.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
@@ -6622,7 +6593,6 @@ msgid "Orders pending approval"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
-#: src/booking/components/utils.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/routes.ts
@@ -6905,10 +6875,6 @@ msgstr ""
 msgid "Password has been changed for user {affected_user_link}."
 msgstr ""
 
-#: src/booking/components/calendar/LazyCalendarComponent.tsx
-msgid "Past time slots are not allowed."
-msgstr ""
-
 #: src/marketplace/offerings/actions/OfferingStateActions.tsx
 msgid "Pause"
 msgstr ""
@@ -7091,6 +7057,7 @@ msgid "Period"
 msgstr ""
 
 #: src/booking/deploy/FormPeriodsStep.tsx
+#: src/marketplace/offerings/update/integration/OfferingScheduler.tsx
 msgid "Period {i}"
 msgstr ""
 
@@ -7257,10 +7224,6 @@ msgstr ""
 #: src/rancher/cluster/create/FormDataStorageStep.tsx
 #: src/rancher/cluster/create/FormSystemStorageStep.tsx
 msgid "Please add a node"
-msgstr ""
-
-#: src/booking/components/modal/BookingModal.tsx
-msgid "Please add resource name before editing a schedule."
 msgstr ""
 
 #: src/marketplace/offerings/import/SelectOfferingTab.tsx
@@ -7640,7 +7603,6 @@ msgstr ""
 #: src/administration/roles/RoleForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
-#: src/booking/components/utils.tsx
 #: src/booking/deploy/steps.ts
 #: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/customer/team/OrganizationProjectSelectField.tsx
@@ -8301,7 +8263,7 @@ msgid "Reject permission request by {name}"
 msgstr ""
 
 #: src/booking/BookingStateField.tsx
-#: src/booking/BookingStateFilter.tsx
+#: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
@@ -9105,7 +9067,6 @@ msgstr ""
 #: src/administration/agreements/UserAgreementsForm.tsx
 #: src/administration/providers/UpdateProviderDialog.tsx
 #: src/administration/roles/RoleForm.tsx
-#: src/booking/components/modal/BookingModal.tsx
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/customer/organization-groups/utils.ts
@@ -9376,10 +9337,6 @@ msgstr ""
 msgid "Select country..."
 msgstr ""
 
-#: src/support/OfferingConfigurationForm.tsx
-msgid "Select dates"
-msgstr ""
-
 #: src/issues/feedback/EvaluationSelectField.tsx
 msgid "Select evaluation..."
 msgstr ""
@@ -9514,7 +9471,6 @@ msgstr ""
 msgid "Select some files"
 msgstr ""
 
-#: src/booking/BookingStateFilter.tsx
 #: src/invitations/InvitationsFilter.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/marketplace-flows/RequestStateFilter.tsx
@@ -10157,8 +10113,6 @@ msgid "Staff and Support user"
 msgstr ""
 
 #: src/azure/vm/actions/StartAction.tsx
-#: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/utils.tsx
 #: src/openstack/openstack-instance/actions/StartAction.tsx
 #: src/vmware/actions/StartAction.tsx
 msgid "Start"
@@ -10187,9 +10141,7 @@ msgid "Startup script"
 msgstr ""
 
 #: src/administration/notifications/HooksList.tsx
-#: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
-#: src/booking/components/utils.tsx
 #: src/broadcasts/BroadcastList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invitations/InvitationsFilter.tsx
@@ -11112,10 +11064,6 @@ msgstr ""
 msgid "Time slot"
 msgstr ""
 
-#: src/booking/components/calendar/LazyCalendarComponent.tsx
-msgid "Time slot has been added."
-msgstr ""
-
 #: src/booking/BookingsList.tsx
 #: src/marketplace/cart/ShoppingCartTimeSlots.tsx
 msgid "Time slots"
@@ -11143,6 +11091,7 @@ msgid "Title"
 msgstr ""
 
 #: src/booking/deploy/FormPeriodsStep.tsx
+#: src/marketplace/offerings/update/integration/OfferingScheduler.tsx
 msgid "To"
 msgstr ""
 
@@ -11706,12 +11655,7 @@ msgstr ""
 msgid "Unable to load application template details."
 msgstr ""
 
-#: src/form/CalendarField.tsx
-msgid "Unable to load booked items."
-msgstr ""
-
 #: src/booking/offering/OfferingBookingResourcesCalendarContainer.tsx
-#: src/customer/dashboard/BookingsCalendar.tsx
 msgid "Unable to load booking offerings."
 msgstr ""
 
@@ -12428,7 +12372,7 @@ msgid "Unable to upload logo."
 msgstr ""
 
 #: src/booking/BookingStateField.tsx
-#: src/booking/BookingStateFilter.tsx
+#: src/booking/utils.ts
 msgid "Unconfirmed"
 msgstr ""
 
