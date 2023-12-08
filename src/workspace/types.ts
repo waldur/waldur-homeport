@@ -173,12 +173,6 @@ export interface Customer {
   role: CustomerRole;
 }
 
-export interface CallManagingOrganizationInfo {
-  uuid: string;
-  description?: string;
-  image?: string;
-}
-
 export const ORGANIZATION_WORKSPACE = 'WORKSPACE/ORGANIZATION';
 
 export const SUPPORT_WORKSPACE = 'WORKSPACE/SUPPORT';

@@ -34,58 +34,55 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
       }),
   );
 
-  const [{ loading: loadingEnable }, enableFn] = useAsyncFn(() => {
-    const payload = {
-      customer: customer.url,
-      description: '',
-      image: null,
-    };
-    return enableCallManagingOrganization(payload).then((res) => {
-      CustomersService.refreshCurrentCustomer(customer.uuid);
-      setInfoUuid(res.uuid);
-      return res;
-    });
-  }, [customer]);
-  const [{ loading: loadingDisable }, disableFn] = useAsyncFn(() => {
-    return !infoUuid
-      ? null
-      : disableCallManagingOrganization(infoUuid).then((res) => {
+  const [{ loading: loadingToggle }, toggleCallManager] = useAsyncFn<
+    any,
+    boolean[]
+  >(
+    async (value: boolean) => {
+      try {
+        await waitForConfirmation(
+          dispatch,
+          translate('Confirmation'),
+          value
+            ? translate(
+                'Are you sure you want to allow this organization to manage calls?',
+              )
+            : translate(
+                'Are you sure you want to prohibit this organization from managing calls?',
+              ),
+        );
+      } catch {
+        return;
+      }
+      if (value) {
+        const payload = {
+          customer: customer.url,
+          description: '',
+          image: null,
+        };
+        return enableCallManagingOrganization(payload).then((res) => {
           CustomersService.refreshCurrentCustomer(customer.uuid);
+          setInfoUuid(res.uuid);
           return res;
         });
-  }, [infoUuid, customer]);
-
-  const toggleCallManager = async (value: boolean) => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        value
-          ? translate(
-              'Are you sure you want to allow this organization to manage calls?',
-            )
-          : translate(
-              'Are you sure you want to prohibit this organization from managing calls?',
-            ),
-      );
-    } catch {
-      return;
-    }
-    if (value) {
-      enableFn();
-    } else {
-      disableFn();
-    }
-  };
-
-  const loading = loadingEnable || loadingDisable;
+      } else {
+        return !infoUuid
+          ? null
+          : disableCallManagingOrganization(infoUuid).then((res) => {
+              CustomersService.refreshCurrentCustomer(customer.uuid);
+              return res;
+            });
+      }
+    },
+    [infoUuid, customer],
+  );
 
   return (
     <Card className="mt-5">
       <Card.Header>
         <Card.Title>
           <h3 className="me-2">{translate('Call manager')}</h3>
-          {loading && <LoadingSpinner />}
+          {loadingToggle && <LoadingSpinner />}
         </Card.Title>
       </Card.Header>
       <Card.Body>
@@ -95,7 +92,8 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
           value={customer.is_call_managing_organization}
           onChange={toggleCallManager}
           disabled={
-            (!infoUuid && customer.is_call_managing_organization) || loading
+            (!infoUuid && customer.is_call_managing_organization) ||
+            loadingToggle
           }
         />
       </Card.Body>
