@@ -6,7 +6,8 @@ import { translate } from '@waldur/i18n';
 import { Option } from '@waldur/marketplace/common/registry';
 
 export const getOrderStateFilterOption = (): Option[] => [
-  { value: 'pending', label: translate('Pending') },
+  { value: 'pending-consumer', label: translate('Pending consumer review') },
+  { value: 'pending-provider', label: translate('Pending provider review') },
   { value: 'executing', label: translate('Executing') },
   { value: 'done', label: translate('Done') },
   { value: 'erred', label: translate('Erred') },

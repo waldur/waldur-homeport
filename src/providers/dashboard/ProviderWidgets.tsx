@@ -88,7 +88,7 @@ const generateWidgetsData = (statistics: ProviderStatistics) => [
     active: true,
     to: {
       state: 'marketplace-orders',
-      params: { state: 'pending' },
+      params: { state: 'pending-provider' },
     },
   },
   {

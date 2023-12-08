@@ -1,7 +1,8 @@
 import { AttributesType, BillingPeriod } from '@waldur/marketplace/types';
 
 export type OrderState =
-  | 'pending'
+  | 'pending-consumer'
+  | 'pending-provider'
   | 'executing'
   | 'done'
   | 'canceled'
