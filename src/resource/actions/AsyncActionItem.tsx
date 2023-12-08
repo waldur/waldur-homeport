@@ -45,6 +45,10 @@ export const AsyncActionItem: <T extends { uuid: string; name?: string }>(
           action: rest.title.toLowerCase(),
         }),
       );
+    } catch {
+      return;
+    }
+    try {
       await apiMethod(resource.uuid);
       dispatch(
         showSuccess(
