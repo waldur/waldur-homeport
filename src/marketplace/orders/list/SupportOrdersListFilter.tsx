@@ -17,8 +17,12 @@ const getOrderStateFilterOptions = (): {
 }[] => [
   { value: 'executing', label: translate('Executing') },
   {
-    value: 'pending',
-    label: translate('pending'),
+    value: 'pending-consumer',
+    label: translate('Pending consumer review'),
+  },
+  {
+    value: 'pending-provider',
+    label: translate('Pending provider review'),
   },
   { value: 'done', label: translate('Done') },
   { value: 'erred', label: translate('Erred') },

@@ -1,6 +1,6 @@
+import { OrderResponse } from '../types';
+
 export interface OrderActionProps {
-  orderId: string;
-  customerId?: string;
-  projectId?: string;
+  order: OrderResponse;
   refetch?(): void;
 }

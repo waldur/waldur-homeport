@@ -7045,8 +7045,6 @@ msgstr ""
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
-#: src/marketplace/orders/list/OrderStateCell.tsx
-#: src/marketplace/orders/list/OrderStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Pending"
 msgstr ""
@@ -7059,8 +7057,20 @@ msgstr ""
 msgid "Pending consumer orders"
 msgstr ""
 
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/OrderStateFilter.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+msgid "Pending consumer review"
+msgstr ""
+
 #: src/navigation/header/confirmation-drawer/PendingConfirmationContainer.tsx
 msgid "Pending provider orders"
+msgstr ""
+
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/OrderStateFilter.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+msgid "Pending provider review"
 msgstr ""
 
 #: src/navigation/header/ConfirmationDrawerToggle.tsx
@@ -13886,10 +13896,6 @@ msgstr ""
 
 #: src/customer/payments/PaymentsList.tsx
 msgid "payments"
-msgstr ""
-
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-msgid "pending"
 msgstr ""
 
 #: src/customer/team/CustomerPermissionsReviewList.tsx

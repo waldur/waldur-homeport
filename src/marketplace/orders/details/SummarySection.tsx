@@ -60,13 +60,7 @@ export const SummarySection = ({
         {order.can_terminate && (
           <CancelOrderButton uuid={order.uuid} loadData={loadData} />
         )}
-        {order.state === 'pending' && (
-          <OrderConsumerActions
-            orderId={order.uuid}
-            customerId={order.customer_uuid}
-            projectId={order.project_uuid}
-          />
-        )}
+        <OrderConsumerActions order={order} />
       </DetailsField>
       {order.provider_reviewed_by && (
         <DetailsField label={translate('Reviewed by')}>

@@ -7,7 +7,8 @@ export const OrderStateCell = ({ row }: { row: OrderDetailsType }) => (
     {
       (
         {
-          pending: translate('Pending'),
+          'pending-consumer': translate('Pending consumer review'),
+          'pending-provider': translate('Pending provider review'),
           executing: translate('Executing'),
           done: translate('Done'),
           erred: translate('Erred'),

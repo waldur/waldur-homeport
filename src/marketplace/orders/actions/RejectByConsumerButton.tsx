@@ -12,16 +12,14 @@ import { getUser } from '@waldur/workspace/selectors';
 import { OrderActionProps } from './types';
 
 export const RejectByConsumerButton: FC<OrderActionProps> = ({
-  orderId,
-  customerId,
-  projectId,
+  order,
   refetch,
 }) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   const { mutate, isLoading } = useMutation(async () => {
     try {
-      await rejectOrderByConsumer(orderId);
+      await rejectOrderByConsumer(order.uuid);
       if (refetch) {
         await refetch();
       }
@@ -33,8 +31,8 @@ export const RejectByConsumerButton: FC<OrderActionProps> = ({
   if (
     !hasPermission(user, {
       permission: PermissionEnum.REJECT_ORDER,
-      customerId: customerId,
-      projectId: projectId,
+      customerId: order.customer_uuid,
+      projectId: order.project_uuid,
     })
   ) {
     return null;
