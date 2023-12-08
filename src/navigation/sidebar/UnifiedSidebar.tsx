@@ -7,6 +7,7 @@ import { MenuComponent } from '@waldur/metronic/assets/ts/components';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { AdminMenu } from './AdminMenu';
+import { CallManagementMenu } from './CallManagementMenu';
 import { ManagementMenu } from './ManagementMenu';
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
 import { MenuItem } from './MenuItem';
@@ -54,6 +55,7 @@ export const UnifiedSidebar = () => {
           <ReportingMenu />
           <SupportMenu />
           <AdminMenu />
+          <CallManagementMenu />
         </>
       ) : (
         <MenuItem title={translate('Login')} state="login" />
