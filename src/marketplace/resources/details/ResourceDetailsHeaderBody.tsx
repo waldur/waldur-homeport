@@ -10,7 +10,7 @@ import { OfferingDetailsField } from './OfferingDetailsField';
 import { ResourceOpenStackInstanceSummary } from './openstack-instance/ResourceOpenStackInstanceSummary';
 import { PlanDetailsField } from './PlanDetailsField';
 import { ResourceMetadataLink } from './ResourceMetadataLink';
-import { ResourceOrderItemsLink } from './ResourceOrderItemsLink';
+import { ResourceOrdersLink } from './ResourceOrdersLink';
 import { ResourceTypeField } from './ResourceTypeField';
 
 interface ResourceDetailsHeaderBodyProps {
@@ -51,7 +51,7 @@ export const ResourceDetailsHeaderBody: FunctionComponent<ResourceDetailsHeaderB
           </div>
           <div className="d-flex gap-4 mt-3">
             <ResourceMetadataLink resource={resource} scope={scope} />
-            <ResourceOrderItemsLink resource={resource} />
+            <ResourceOrdersLink resource={resource} />
           </div>
         </div>
       </>

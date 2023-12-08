@@ -15,7 +15,7 @@ import * as api from '../common/api';
 import { getFormLimitParser, Limits } from '../common/registry';
 import { DeployPage } from '../deploy/DeployPage';
 import { OrderSummary } from '../details/OrderSummary';
-import { OrderItemResponse } from '../orders/types';
+import { OrderResponse } from '../orders/types';
 
 import { ShoppingCartItemUpdateExtraComponent } from './ShoppingCartItemUpdateExtraComponent';
 import { ShoppingCartItemUpdateForm } from './ShoppingCartItemUpdateForm';
@@ -25,7 +25,7 @@ import '../details/OfferingDetails.scss';
 interface PureShoppingCartItemUpdateProps {
   offering: Offering;
   plan?: Plan;
-  cartItem: OrderItemResponse;
+  cartItem: OrderResponse;
   limits: string[];
   initialLimits: Limits;
 }
@@ -98,8 +98,8 @@ async function loadData(itemId) {
 
 export const ShoppingCartItemUpdate: FunctionComponent = () => {
   const state = useAsync(
-    () => loadData(router.globals.params.order_item_uuid),
-    [router.globals.params.order_item_uuid],
+    () => loadData(router.globals.params.order_uuid),
+    [router.globals.params.order_uuid],
   );
   useTitle(translate('Shopping cart item update'));
 

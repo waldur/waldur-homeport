@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { isOwnerOrStaff } from '@waldur/workspace/selectors';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
 import * as actions from './actions';
@@ -13,60 +14,54 @@ interface DispatchProps {
   project: Project;
 }
 
-interface ProjectDeleteProps extends DispatchProps {
-  canDelete: boolean;
-  showProjectRemoval: () => void;
-}
-
-const PureProjectDelete: React.FC<ProjectDeleteProps> = (props) => {
+const PureProjectDelete: React.FC<DispatchProps> = (props) => {
   const [confirm, setConfirm] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector(getUser);
+  const customer = useSelector(getCustomer);
+  const canDelete =
+    hasPermission(user, {
+      permission: PermissionEnum.DELETE_PROJECT,
+      customerId: customer.uuid,
+    }) ||
+    hasPermission(user, {
+      permission: PermissionEnum.DELETE_PROJECT,
+      projectId: props.project.uuid,
+    });
 
-  return (
-    props.canDelete && (
-      <Card>
-        <Card.Header className="text-danger">
-          {translate('Delete project')}
-        </Card.Header>
-        <Card.Body className="d-flex justify-content-between">
-          <Form.Check
-            id="chk-confirm-delete-project"
-            type="checkbox"
-            checked={confirm}
-            onChange={(value) => setConfirm(value.target.checked)}
-            label={translate('Request project deletion')}
-            className="form-check-custom form-check-solid form-check-danger"
-          />
-          <Button
-            id="remove-btn"
-            variant="danger"
-            size="sm"
-            onClick={props.showProjectRemoval}
-            disabled={!confirm}
-          >
-            {translate('Deletion')}
-          </Button>
-        </Card.Body>
-      </Card>
-    )
-  );
+  return canDelete ? (
+    <Card>
+      <Card.Header className="text-danger">
+        {translate('Delete project')}
+      </Card.Header>
+      <Card.Body className="d-flex justify-content-between">
+        <Form.Check
+          id="chk-confirm-delete-project"
+          type="checkbox"
+          checked={confirm}
+          onChange={(value) => setConfirm(value.target.checked)}
+          label={translate('Request project deletion')}
+          className="form-check-custom form-check-solid form-check-danger"
+        />
+        <Button
+          id="remove-btn"
+          variant="danger"
+          size="sm"
+          onClick={() =>
+            dispatch(
+              actions.showProjectRemoveDialog(
+                () => dispatch(actions.deleteProject(props.project)),
+                props.project.name,
+              ),
+            )
+          }
+          disabled={!confirm}
+        >
+          {translate('Deletion')}
+        </Button>
+      </Card.Body>
+    </Card>
+  ) : null;
 };
 
-const mapStateToProps = (state) => ({
-  canDelete: isOwnerOrStaff(state),
-});
-
-const mapDispatchToProps = (dispatch, props: DispatchProps) => {
-  return {
-    showProjectRemoval: () =>
-      dispatch(
-        actions.showProjectRemoveDialog(
-          () => dispatch(actions.deleteProject(props.project)),
-          props.project.name,
-        ),
-      ),
-  };
-};
-
-const enhance = compose(connect(mapStateToProps, mapDispatchToProps));
-
-export const ProjectDelete = enhance(PureProjectDelete);
+export const ProjectDelete = PureProjectDelete;

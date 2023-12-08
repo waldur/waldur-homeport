@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n/translate';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
-import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 import { createProject } from './actions';
 
@@ -41,10 +43,16 @@ PureProjectCreateButton.defaultProps = {
 };
 
 const mapStateToProps = (state: RootState) => {
-  const ownerOrStaff = isOwnerOrStaff(state);
   const customer = getCustomer(state);
+  const user = getUser(state);
 
-  if (!ownerOrStaff || !customer) {
+  if (
+    !customer ||
+    !hasPermission(user, {
+      permission: PermissionEnum.CREATE_PROJECT,
+      customerId: customer.uuid,
+    })
+  ) {
     return {
       disabled: true,
       tooltip: translate(

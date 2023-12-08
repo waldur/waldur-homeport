@@ -1,21 +1,21 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { OrderItemDetailsField } from '@waldur/marketplace/orders/item/details/OrderItemDetailsField';
+import { DetailsField } from '@waldur/marketplace/common/DetailsField';
 import { SecretValueField } from '@waldur/marketplace/SecretValueField';
-import { OrderItemDetailsProps } from '@waldur/marketplace/types';
+import { OrderDetailsProps } from '@waldur/marketplace/types';
 
-export const AzureVirtualMachineDetails: FunctionComponent<OrderItemDetailsProps> =
+export const AzureVirtualMachineDetails: FunctionComponent<OrderDetailsProps> =
   (props) => {
-    const { attributes } = props.orderItem;
+    const { attributes } = props.order;
     return (
       <>
-        <OrderItemDetailsField label={translate('Admin username')}>
+        <DetailsField label={translate('Admin username')}>
           {attributes.username}
-        </OrderItemDetailsField>
-        <OrderItemDetailsField label={translate('Admin password')}>
+        </DetailsField>
+        <DetailsField label={translate('Admin password')}>
           <SecretValueField className="max-w-300" value={attributes.password} />
-        </OrderItemDetailsField>
+        </DetailsField>
       </>
     );
   };

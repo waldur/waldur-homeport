@@ -79,7 +79,7 @@ describe('Invitations', () => {
 
       .intercept(
         'HEAD',
-        '/api/marketplace-order-items/?offering_type=Waldur.RemoteOffering&offering_type=Marketplace.Basic&state=executing&can_approve_as_service_provider=True',
+        '/api/marketplace-orders/?offering_type=Waldur.RemoteOffering&offering_type=Marketplace.Basic&state=executing&can_approve_as_provider=True',
         { statusCode: 200 },
       )
 

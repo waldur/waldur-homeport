@@ -2,11 +2,10 @@ import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { UserDetailsButton } from '@waldur/user/UserDetailsButton';
-import {
-  getUser,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-} from '@waldur/workspace/selectors';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 import { UserEditButton } from './UserEditButton';
 import { UserRemoveButton } from './UserRemoveButton';
@@ -19,14 +18,28 @@ interface CustomerUserRowActionsProps {
 export const CustomerUserRowActions: FunctionComponent<CustomerUserRowActionsProps> =
   ({ row, refetch }) => {
     const user = useSelector(getUser);
-    const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-    return isOwnerOrStaff || user.is_support ? (
+    const customer = useSelector(getCustomer);
+    const canSeeUserDetail =
+      hasPermission(user, {
+        permission: PermissionEnum.UPDATE_CUSTOMER_PERMISSION,
+        customerId: customer.uuid,
+      }) || user.is_support;
+
+    const canManageUser = hasPermission(user, {
+      permission: PermissionEnum.UPDATE_CUSTOMER_PERMISSION,
+      customerId: customer.uuid,
+    });
+
+    const canRemoveUser = hasPermission(user, {
+      permission: PermissionEnum.DELETE_CUSTOMER_PERMISSION,
+      customerId: customer.uuid,
+    });
+
+    return canSeeUserDetail ? (
       <ButtonGroup>
-        {isOwnerOrStaff || user.is_support ? (
-          <UserDetailsButton userId={row.uuid} />
-        ) : null}
-        {isOwnerOrStaff ? <UserEditButton editUser={row} /> : null}
-        {isOwnerOrStaff ? (
+        {canSeeUserDetail ? <UserDetailsButton userId={row.uuid} /> : null}
+        {canManageUser ? <UserEditButton editUser={row} /> : null}
+        {canRemoveUser ? (
           <UserRemoveButton user={row} refetch={refetch} />
         ) : null}
       </ButtonGroup>

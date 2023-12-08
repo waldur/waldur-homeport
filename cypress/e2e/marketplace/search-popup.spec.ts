@@ -46,7 +46,7 @@ describe('Search Popup', () => {
       .intercept('GET', '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/', {
         fixture: 'customers/alice.json',
       })
-      .intercept('GET', '/api/marketplace-order-items/**', [
+      .intercept('GET', '/api/marketplace-orders/**', [
         {
           offering_name: 'Demo Private Cloud',
           uuid: '7bd0ba5c612e465fbe792795412e2a7b',

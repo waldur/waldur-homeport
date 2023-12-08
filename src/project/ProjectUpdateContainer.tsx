@@ -1,19 +1,27 @@
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { getConfig } from '@waldur/store/config';
-import {
-  getCustomer,
-  isOwner,
-  isOwnerOrStaff,
-  isStaff,
-} from '@waldur/workspace/selectors';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 import * as actions from './actions';
 import { ProjectDetails } from './ProjectDetails';
 import { ProjectUpdateForm } from './ProjectUpdateForm';
 
-const ProjectUpdateComponent = (props) =>
-  props.canManage ? (
+const ProjectUpdateComponent = (props) => {
+  const user = useSelector(getUser);
+  const canUpdate =
+    hasPermission(user, {
+      permission: PermissionEnum.UPDATE_PROJECT,
+      customerId: props.customer.uuid,
+    }) ||
+    hasPermission(user, {
+      permission: PermissionEnum.UPDATE_PROJECT,
+      projectId: props.project.uuid,
+    });
+
+  return canUpdate ? (
     <ProjectUpdateForm {...props} />
   ) : (
     <ProjectDetails
@@ -22,6 +30,7 @@ const ProjectUpdateComponent = (props) =>
       end_date={props.project.end_date}
     />
   );
+};
 
 const mapStateToProps = (state, ownProps) => ({
   customer: getCustomer(state),
@@ -37,13 +46,10 @@ const mapStateToProps = (state, ownProps) => ({
     is_industry: ownProps.project.is_industry,
     image: ownProps.project.image,
     customer_name: ownProps.project.customer_name,
+    isDisabled: !ownProps.canUpdate,
   },
   project_type: ownProps.project.type_name,
-  canManage: isOwnerOrStaff(state),
-  isStaff: isStaff(state),
-  isOwner: isOwner(state),
   enforceLatinName: getConfig(state).enforceLatinName,
-  isDisabled: !isStaff(state) && !isOwner(state),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

@@ -12,7 +12,7 @@ import { RatingStars } from '@waldur/marketplace/common/RatingStars';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { OfferingDetailsProps } from '@waldur/marketplace/details/OfferingDetails';
 import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
-import { formatOrderItemForCreate } from '@waldur/marketplace/details/utils';
+import { formatOrderForCreate } from '@waldur/marketplace/details/utils';
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Quota } from '@waldur/openstack/types';
 import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
@@ -164,9 +164,9 @@ export const OpenstackInstanceCheckoutSummary: React.FC<OfferingDetailsProps> =
       [formData, usages, limits, storage_mode],
     );
 
-    const orderItem = React.useMemo(
+    const order = React.useMemo(
       () =>
-        formatOrderItemForCreate({
+        formatOrderForCreate({
           formData: { attributes: formData },
           offering,
           customer,
@@ -308,7 +308,7 @@ export const OpenstackInstanceCheckoutSummary: React.FC<OfferingDetailsProps> =
         )}
         <div className="d-flex justify-content-between mt-5">
           <ShoppingCartButtonContainer
-            item={orderItem}
+            item={order}
             flavor="primary"
             disabled={!formIsValid}
           />

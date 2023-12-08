@@ -21,7 +21,7 @@ import { getProject } from '@waldur/workspace/selectors';
 
 import { FORM_ID } from '../details/constants';
 import { getDefaultLimits } from '../offerings/utils';
-import { OrderItemResponse } from '../orders/types';
+import { OrderResponse } from '../orders/types';
 import { formDataSelector, isExperimentalUiComponentsVisible } from '../utils';
 
 import { DeployPageActions } from './DeployPageActions';
@@ -35,7 +35,7 @@ export interface DeployPageProps {
   limits?: string[];
   updateMode?: boolean;
   previewMode?: boolean;
-  cartItem?: OrderItemResponse;
+  cartItem?: OrderResponse;
   plan?: Plan;
   initialLimits?: AttributesType;
   initialAttributes?: AttributesType;

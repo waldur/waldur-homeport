@@ -19,7 +19,7 @@ import { OrderSummaryPlanRows } from './plan/OrderSummaryPlanRows';
 import { PricesData } from './plan/types';
 import { pricesSelector } from './plan/utils';
 import { OfferingFormData, OrderSummaryProps } from './types';
-import { formatOrderItemForCreate, formatOrderItemForUpdate } from './utils';
+import { formatOrderForCreate, formatOrderForUpdate } from './utils';
 
 export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => {
   return (
@@ -51,7 +51,7 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
       className="w-100"
     >
       <ShoppingCartButtonContainer
-        item={formatOrderItemForCreate(props)}
+        item={formatOrderForCreate(props)}
         flavor="primary"
         disabled={!props.formValid}
         className="w-100"
@@ -69,7 +69,7 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
       className="w-100"
     >
       <ShoppingCartUpdateButtonContainer
-        item={formatOrderItemForUpdate(props)}
+        item={formatOrderForUpdate(props)}
         flavor="primary"
         disabled={!props.formValid}
         className="w-100"

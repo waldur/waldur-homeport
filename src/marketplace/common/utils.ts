@@ -1,6 +1,6 @@
 import { translate } from '@waldur/i18n';
 
-import { OrderItemResponse } from '../orders/types';
+import { OrderResponse } from '../orders/types';
 import { BillingPeriod } from '../types';
 
 // See also: https://github.com/erikras/redux-form/issues/1852
@@ -77,7 +77,7 @@ export function getBillingPeriods(unit: string): BillingPeriodDescription {
   }
 }
 
-export const getMaxUnit = (items: OrderItemResponse[]): BillingPeriod => {
+export const getMaxUnit = (items: OrderResponse[]): BillingPeriod => {
   const units: string[] = items
     .filter((item) => item.plan)
     .map((item) => item.plan_unit);

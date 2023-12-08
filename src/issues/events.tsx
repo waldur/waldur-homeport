@@ -4,6 +4,8 @@ import eventsRegistry from '@waldur/events/registry';
 import { getCallerContext } from '@waldur/events/utils';
 import { gettext } from '@waldur/i18n';
 
+import { SupportEnum } from '../EventsEnums';
+
 const getIssueContext = (event) => ({
   ...getCallerContext(event),
   issue_link: (
@@ -18,7 +20,7 @@ eventsRegistry.registerGroup({
   context: getIssueContext,
   events: [
     {
-      key: 'issue_creation_succeeded',
+      key: SupportEnum.issue_creation_succeeded,
       title: gettext('Issue {issue_link} has been created by {caller_link}.'),
     },
   ],

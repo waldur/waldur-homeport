@@ -114,12 +114,15 @@ export const ResourcesEnum = {
     'marketplace_resource_create_succeeded',
   marketplace_resource_downscaled: 'marketplace_resource_downscaled',
   marketplace_resource_renamed: 'marketplace_resource_renamed',
+  marketplace_resource_terminate_canceled:
+    'marketplace_resource_terminate_canceled',
   marketplace_resource_terminate_failed:
     'marketplace_resource_terminate_failed',
   marketplace_resource_terminate_requested:
     'marketplace_resource_terminate_requested',
   marketplace_resource_terminate_succeeded:
     'marketplace_resource_terminate_succeeded',
+  marketplace_resource_update_canceled: 'marketplace_resource_update_canceled',
   marketplace_resource_update_end_date_succeeded:
     'marketplace_resource_update_end_date_succeeded',
   marketplace_resource_update_failed: 'marketplace_resource_update_failed',

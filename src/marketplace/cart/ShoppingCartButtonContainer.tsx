@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { OrderItemRequest } from '@waldur/marketplace/cart/types';
+import { OrderRequest } from '@waldur/marketplace/cart/types';
 import { RootState } from '@waldur/store/reducers';
 
 import { ShoppingCartButton } from './ShoppingCartButton';
@@ -9,7 +9,7 @@ import { addItemRequest } from './store/actions';
 import { isAddingItem } from './store/selectors';
 
 interface OwnProps {
-  item: OrderItemRequest;
+  item: OrderRequest;
   flavor?: string;
   disabled?: boolean;
 }

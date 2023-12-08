@@ -40,7 +40,7 @@
     "native_name": "",
     "native_description": "",
     "vendor_details": "",
-    "order_item_count": 0,
+    "order_count": 0,
     "plans": [
       {
         "url": "/api/marketplace-plans/2415bf0d974f4d908b6fc8fb1aabd2d9/",
@@ -115,7 +115,7 @@
     "native_description": "",
     "vendor_details": "",
     "thumbnail": null,
-    "order_item_count": 1,
+    "order_count": 1,
     "screenshots": [],
     "type": "Marketplace.Basic",
     "shared": true,

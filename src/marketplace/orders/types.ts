@@ -1,27 +1,27 @@
 import { AttributesType, BillingPeriod } from '@waldur/marketplace/types';
 
-export type OrderStep = 'Configure' | 'Approve' | 'Review';
-
 export type OrderState =
-  | 'requested for approval'
+  | 'pending'
   | 'executing'
   | 'done'
-  | 'terminated'
-  | 'erred';
+  | 'canceled'
+  | 'erred'
+  | 'rejected';
 
-export type OrderItemType = 'Create' | 'Update' | 'Terminate';
+export type OrderType = 'Create' | 'Update' | 'Terminate';
 
 interface IssueReference {
   key: string;
   uuid: string;
 }
 
-export interface OrderItemResponse {
+export interface OrderResponse {
+  file?: string;
   fixed_price?: number;
   activation_price?: number;
   name?: string;
   uuid: string;
-  type: OrderItemType;
+  type: OrderType;
   offering: string;
   offering_uuid: string;
   offering_name: string;
@@ -36,10 +36,10 @@ export interface OrderItemResponse {
   resource_name?: string;
   resource_uuid?: string;
   resource_type?: string;
-  cost: string;
+  cost: number;
   estimate?: number;
   unit: string;
-  state: string;
+  state: OrderState;
   attributes: AttributesType;
   plan_uuid?: string;
   plan?: string;
@@ -47,6 +47,7 @@ export interface OrderItemResponse {
   plan_description?: string;
   plan_unit?: BillingPeriod;
   project: string;
+  project_uuid?: string;
   project_name: string;
   project_description?: string;
   customer_name?: string;
@@ -63,10 +64,13 @@ export interface OrderItemResponse {
   issue?: IssueReference;
 }
 
-export interface OrderItemDetailsType extends OrderItemResponse {
-  order_uuid: string;
-  order_approved_at?: string;
-  order_approved_by?: string;
+export interface OrderDetailsType extends OrderResponse {
+  consumer_reviewed_at?: string;
+  consumer_reviewed_by?: string;
+  consumer_reviewed_by_full_name?: string;
+  provider_reviewed_at?: string;
+  provider_reviewed_by?: string;
+  provider_reviewed_by_full_name?: string;
   created_by_full_name: string;
   created_by_civil_number: string;
   customer_name: string;
@@ -78,17 +82,4 @@ export interface OrderItemDetailsType extends OrderItemResponse {
   old_cost_estimate: string;
   new_cost_estimate: string;
   can_terminate: boolean;
-  reviewed_at: string;
-  reviewed_by: string;
-  reviewed_by_full_name?: string;
-}
-
-export interface Order {
-  items: OrderItemResponse[];
-  state: OrderState;
-  total_cost?: number;
-  file?: string;
-  project?: string;
-  project_uuid?: string;
-  customer_uuid?: string;
 }

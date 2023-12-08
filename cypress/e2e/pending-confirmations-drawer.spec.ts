@@ -1,6 +1,6 @@
 describe('Empty pending confirmations drawer', () => {
   beforeEach(() => {
-      cy.intercept('HEAD', '/api/marketplace-order-items/**', {
+      cy.intercept('HEAD', '/api/marketplace-orders/**', {
         headers: {
           'x-result-count': '0',
         },
@@ -34,18 +34,15 @@ describe('Empty pending confirmations drawer', () => {
 });
 
 describe('Pending confirmations drawer', () => {
-  const successApproveOrderItem = 'Order item has been approved';
-  const successRejectOrderItem = 'Order item has been rejected';
-  const successApproveAllOrderItems = 'All order items have been approved';
-  const successRejectAllOrderItems = 'All order items have been rejected';
+  const successApproveOrder = 'Order has been approved';
+  const successRejectOrder = 'Order has been rejected';
+  const successApproveAllOrders = 'All orders have been approved';
+  const successRejectAllOrders = 'All orders have been rejected';
   const successApproveUpdateRequest = 'Review has been submitted';
 
   beforeEach(() => {
-    cy.intercept('GET', '/api/marketplace-order-items/?**', {
-      fixture: 'marketplace/order_items.json',
-    })
-      .intercept('GET', '/api/marketplace-order-items/**/', {
-        fixture: 'marketplace/order_item.json',
+      cy.intercept('GET', '/api/marketplace-orders/**/', {
+        fixture: 'marketplace/order.json',
       })
       .intercept('GET', '/api/marketplace-orders/?**', {
         fixture: 'marketplace/orders.json',
@@ -53,7 +50,7 @@ describe('Pending confirmations drawer', () => {
       .intercept('GET', '/api/marketplace-project-update-requests/?**', {
         fixture: 'projects/update_requests.json',
       })
-      .intercept('POST', '/api/marketplace-order-items/**/approve/', {
+      .intercept('POST', '/api/marketplace-orders/**/approve_by_provider/', {
         body: true,
       })
       .intercept('HEAD', '/api/marketplace-orders/**', {
@@ -61,21 +58,16 @@ describe('Pending confirmations drawer', () => {
           'x-result-count': '2',
         },
       })
-      .intercept('HEAD', '/api/marketplace-order-items/**', {
-        headers: {
-          'x-result-count': '3',
-        },
-      })
       .intercept('HEAD', '/api/marketplace-project-update-requests/**', {
         headers: {
           'x-result-count': '3',
         },
       })
-      .as('approveOrderItem')
-      .intercept('POST', '/api/marketplace-order-items/**/reject/', {
+      .as('approveOrder')
+      .intercept('POST', '/api/marketplace-orders/**/reject_by_provider/', {
         body: true,
       })
-      .as('rejectOrderItem')
+      .as('rejectOrder')
       .mockUser()
       .mockChecklists()
       .mockPermissions()
@@ -136,39 +128,39 @@ describe('Pending confirmations drawer', () => {
           .first()
           .contains('button', 'Approve')
           .click()
-          .wait('@approveOrderItem')
+          .wait('@approveOrder')
           // Reject
           .get('.table-container tbody tr')
           .eq(1)
           .contains('button', 'Reject')
           .click()
-          .wait('@rejectOrderItem');
+          .wait('@rejectOrder');
 
         // Approve all
         cy.get('div[class="is-flex"]')
           .contains('button', 'Approve all')
           .click()
-          .wait('@approveOrderItem')
+          .wait('@approveOrder')
           // Reject all
           .get('div[class="is-flex"]')
           .contains('button', 'Reject all')
           .click()
-          .wait('@rejectOrderItem');
+          .wait('@rejectOrder');
       })
       .get("[data-testid='notification']")
-      .contains(successApproveOrderItem)
+      .contains(successApproveOrder)
       .parents('[data-testid="notification"]')
       .invoke('remove')
       .get("[data-testid='notification']")
-      .contains(successRejectOrderItem)
+      .contains(successRejectOrder)
       .parents('[data-testid="notification"]')
       .invoke('remove')
       .get("[data-testid='notification']")
-      .contains(successApproveAllOrderItems)
+      .contains(successApproveAllOrders)
       .parents('[data-testid="notification"]')
       .invoke('remove')
       .get("[data-testid='notification']")
-      .contains(successRejectAllOrderItems)
+      .contains(successRejectAllOrders)
       .parents('[data-testid="notification"]')
       .invoke('remove');
 
@@ -182,39 +174,39 @@ describe('Pending confirmations drawer', () => {
           .first()
           .contains('button', 'Approve')
           .click()
-          .wait('@approveOrderItem')
+          .wait('@approveOrder')
           // Reject
           .get('.table-container tbody tr')
           .eq(1)
           .contains('button', 'Reject')
           .click()
-          .wait('@rejectOrderItem');
+          .wait('@rejectOrder');
 
         // Approve all
         cy.get('div[class="is-flex"]')
           .contains('button', 'Approve all')
           .click()
-          .wait('@approveOrderItem')
+          .wait('@approveOrder')
           // Reject all
           .get('div[class="is-flex"]')
           .contains('button', 'Reject all')
           .click()
-          .wait('@rejectOrderItem');
+          .wait('@rejectOrder');
       })
       .get("[data-testid='notification']")
-      .contains(successApproveOrderItem)
+      .contains(successApproveOrder)
       .parents('[data-testid="notification"]')
       .invoke('remove')
       .get("[data-testid='notification']")
-      .contains(successRejectOrderItem)
+      .contains(successRejectOrder)
       .parents('[data-testid="notification"]')
       .invoke('remove')
       .get("[data-testid='notification']")
-      .contains(successApproveAllOrderItems)
+      .contains(successApproveAllOrders)
       .parents('[data-testid="notification"]')
       .invoke('remove')
       .get("[data-testid='notification']")
-      .contains(successRejectAllOrderItems)
+      .contains(successRejectAllOrders)
       .parents('[data-testid="notification"]')
       .invoke('remove');
 

@@ -49,7 +49,7 @@ function* getOfferings() {
     'description',
     'thumbnail',
     'rating',
-    'order_item_count',
+    'order_count',
     'category_uuid',
     'attributes',
     'customer_name',

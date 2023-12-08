@@ -7,7 +7,7 @@ import { getWorkspace } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 interface OwnProps {
-  order_item_uuid: string;
+  order_uuid: string;
   className?: string;
 }
 
@@ -25,7 +25,7 @@ export const ShoppingCartItemUpdateLink: React.FC<OwnProps> = (props) => {
   return (
     <Link
       state={state}
-      params={{ order_item_uuid: props.order_item_uuid }}
+      params={{ order_uuid: props.order_uuid }}
       className={props.className}
     >
       {props.children}
