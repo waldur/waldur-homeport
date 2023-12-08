@@ -29,11 +29,4 @@ export const states: StateDeclaration[] = [
     url: '*path',
     component: InvalidRoutePage,
   },
-  {
-    name: 'legacy',
-    component: UIView,
-    onEnter: () => {
-      window.location.pathname = '/legacy/';
-    },
-  },
 ];

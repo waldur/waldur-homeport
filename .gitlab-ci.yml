@@ -154,25 +154,25 @@ Build artifact:
       - build/
     expire_in: 1 week
 
-Publish docker image for next branch:
+Publish docker image for develop branch:
   image: "registry.hpc.ut.ee/mirror/library/docker:20.10.24"
   stage: release
   rules:
-    - if: '$CI_COMMIT_BRANCH == "next"'
+    - if: '$CI_COMMIT_BRANCH == "develop"'
   services:
     - name: "registry.hpc.ut.ee/mirror/library/docker:20.10.24-dind"
       alias: docker
       command: ["--mtu=1400"]
   before_script:
-    - echo "[+] Build and publish docker image for next branch"
+    - echo "[+] Build and publish docker image for develop branch"
   script:
-    - sh docker_push.sh next
+    - sh docker_push.sh develop
 
 Trigger docker image building for develop branch:
   image: "registry.hpc.ut.ee/mirror/alpine/curl:8.2.0"
   stage: release
   rules:
-    - if: '$CI_COMMIT_BRANCH == "next"'
+    - if: '$CI_COMMIT_BRANCH == "develop"'
   script:
     - echo "Project ID ${CI_PROJECT_ID}"
     - curl -v -X POST -F "token=$CI_JOB_TOKEN" -F "ref=develop" https://code.opennodecloud.com/api/v4/projects/${CI_PROJECT_ID}/trigger/pipeline
@@ -202,7 +202,6 @@ Upload translatable strings:
       when: never
     - if: '$CI_COMMIT_BRANCH == "develop"'
     - if: '$CI_COMMIT_BRANCH == "master"'
-    - if: '$CI_COMMIT_BRANCH == "next"'
   image:
     name: registry.hpc.ut.ee/mirror/localazy/cli:latest
   script:
@@ -242,7 +241,6 @@ Update UI developer docs:
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
     - if: '$CI_COMMIT_BRANCH == "master"'
-    - if: '$CI_COMMIT_BRANCH == "next"'
   image:
     name: registry.hpc.ut.ee/mirror/alpine/git:latest
     entrypoint: [""]

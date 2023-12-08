@@ -4076,10 +4076,6 @@ msgstr ""
 msgid "Go to marketplace"
 msgstr ""
 
-#: src/navigation/header/LegacyBranchLink.tsx
-msgid "Go to old interface"
-msgstr ""
-
 #: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 msgid "Go to organization dashboard"
 msgstr ""
