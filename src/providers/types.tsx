@@ -17,6 +17,6 @@ export interface ProviderStatistics {
   resources_number_change: number;
   active_and_paused_offerings: number;
   unresolved_tickets: number;
-  pended_orders: number;
+  pending_orders: number;
   erred_resources: number;
 }

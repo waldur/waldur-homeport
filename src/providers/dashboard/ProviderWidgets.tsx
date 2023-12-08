@@ -82,7 +82,7 @@ const generateWidgetsData = (statistics: ProviderStatistics) => [
   },
   {
     icon: IconPendingApproval,
-    value: statistics.pended_orders,
+    value: statistics.pending_orders,
     title: translate('Orders pending approval'),
     changes: 0,
     active: true,
