@@ -114,6 +114,8 @@ export const ResourcesMenu = ({ anonymous }) => {
         return getProjectCounters(project.uuid);
       } else if (currentCustomer) {
         return getOrganizationCounters(currentCustomer.uuid);
+      } else {
+        return {};
       }
     },
     { refetchOnWindowFocus: false },
