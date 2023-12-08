@@ -38,6 +38,7 @@ ProvidersRegistry.register({
   component: OpenStackForm,
   serializer: pick([
     'backend_url',
+    'domain',
     'username',
     'password',
     'tenant_name',
