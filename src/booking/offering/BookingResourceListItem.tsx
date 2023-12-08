@@ -114,7 +114,7 @@ export const BookingResourceListItem = ({
 }: {
   item: BookingResource;
   date: Date;
-  refetch;
+  refetch?;
 }) => {
   const state = bookingStateAliases(item.state);
   const dispatch = useDispatch();

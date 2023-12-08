@@ -20,7 +20,7 @@ interface OwnProps {
   resolve: {
     bookingResource: BookingResource;
     fromServiceProvider: boolean;
-    refetch;
+    refetch?;
   };
 }
 
@@ -44,7 +44,7 @@ export const BookingResourceDetailsDialog: FC<OwnProps> = (props) => {
     return acceptBooking(resource.uuid)
       .then(() => {
         setSubmitting({ accept: false, reject: false });
-        props.resolve.refetch();
+        if (props.resolve.refetch) props.resolve.refetch();
         dispatch(showSuccess(translate('Booking has been accepted.')));
         dispatch(closeModalDialog());
       })
@@ -58,7 +58,7 @@ export const BookingResourceDetailsDialog: FC<OwnProps> = (props) => {
     return rejectBooking(resource.uuid)
       .then(() => {
         setSubmitting({ accept: false, reject: false });
-        props.resolve.refetch();
+        if (props.resolve.refetch) props.resolve.refetch();
         dispatch(showSuccess(translate('Booking has been cancelled.')));
         dispatch(closeModalDialog());
       })

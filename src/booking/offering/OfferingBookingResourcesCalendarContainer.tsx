@@ -3,8 +3,8 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { getBookingsList } from '@waldur/booking/api';
-import { getStates } from '@waldur/booking/BookingStateFilter';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
+import { getBookingFilterOptionStates } from '@waldur/booking/utils';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { orderByFilter } from '@waldur/core/utils';
@@ -16,7 +16,10 @@ async function loadBookingOfferings(offeringUuid: string) {
   return await getBookingsList({
     offering_uuid: offeringUuid,
     offering_type: OFFERING_TYPE_BOOKING,
-    state: [getStates()[0], getStates()[1]].map(({ value }) => value),
+    state: [
+      getBookingFilterOptionStates()[0],
+      getBookingFilterOptionStates()[1],
+    ].map(({ value }) => value),
     o: orderByFilter({ field: 'created', mode: 'desc' }),
   });
 }

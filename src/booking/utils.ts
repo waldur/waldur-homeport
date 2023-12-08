@@ -1,87 +1,22 @@
 import type { EventInput, EventApi } from '@fullcalendar/core';
 import { padStart, uniqueId } from 'lodash';
-import { DateTime, Duration } from 'luxon';
+import { Duration } from 'luxon';
 
-import { CURSOR_NOT_ALLOWED_CLASSNAME } from '@waldur/booking/constants';
 import { parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 
 import { BookedItem, BookingProps } from './types';
 
-export interface AvailabilitySlot {
-  start: Date | string;
-  end: Date | string;
+export interface BookingFilterStateOption {
+  value: string;
+  label: string;
 }
 
-export const deleteCalendarBooking = (events, booking) => {
-  let removedEvent = null;
-  events.getAll().map((field, index) => {
-    if (field.id === booking.id) {
-      removedEvent = events.get(index);
-      events.remove(index);
-    }
-  });
-  return removedEvent;
-};
-
-export const eventsMapper = (events) =>
-  events.map((event) => {
-    if (event.type === 'Availability') {
-      event.rendering = 'inverse-background';
-      event.groupId = 'availableForBooking';
-      event.backgroundColor = 'pink';
-    } else {
-      event.rendering = undefined;
-      event.constraint = 'availableForBooking';
-    }
-    return event;
-  });
-
-export const timelineLabels = (interval: number) => {
-  const periodsInADay = Duration.fromObject({ days: 1 }).as('minutes');
-  let startClock = DateTime.now().startOf('day');
-  const timeLabels = [];
-  for (let i = 0; i <= periodsInADay; i += interval) {
-    startClock = startClock.plus({ minutes: i === 0 ? 0 : interval });
-    timeLabels.push({
-      label: startClock.toFormat('T'),
-      value: startClock.toFormat('T'),
-      hour: startClock.hour,
-      minute: startClock.minute,
-    });
-  }
-  return timeLabels;
-};
-
-export const handleTitle = ({ event, el }) => {
-  if (!event.title) {
-    return el.querySelector('.fc-title').prepend(event.extendedProps.type);
-  }
-};
-
-export const handleTime = ({ event, el }) => {
-  if (event.allDay) {
-    const content = el.querySelector('.fc-content');
-    return (content.innerHTML =
-      '<i class="fa fa-clock-o"> All-day </i>' + content.innerHTML);
-  }
-};
-
-export function keysOf<T>(o: T) {
-  return Object.keys(o) as (keyof T)[];
-}
-
-export function filterObject<T>(
-  option: T,
-  predicate: (propName: keyof T) => boolean,
-) {
-  return keysOf(option).reduce((acc, propName) => {
-    if (predicate(propName)) {
-      acc[propName] = option[propName];
-    }
-    return acc;
-  }, {} as Partial<T>);
-}
+export const getBookingFilterOptionStates = (): BookingFilterStateOption[] => [
+  { value: 'Creating', label: translate('Unconfirmed') },
+  { value: 'OK', label: translate('Accepted') },
+  { value: 'Terminated', label: translate('Rejected') },
+];
 
 export const createBooking = (
   {
@@ -101,137 +36,6 @@ export const createBooking = (
   title,
   extendedProps,
 });
-
-export const transformBookingEvent = (event, showAvailability = false) => {
-  if (event === undefined) {
-    return false;
-  }
-
-  if (event.extendedProps && event.extendedProps.type === 'Availability') {
-    event.rendering = showAvailability ? undefined : 'background';
-    event.classNames = showAvailability ? 'booking booking-Availability' : '';
-    event.overlap = true;
-    if (!showAvailability) {
-      event.groupId = 'Availability';
-    }
-  } else if (
-    (event.extendedProps &&
-      event.extendedProps.type === 'availableForBooking') ||
-    event.id === 'availableForBooking'
-  ) {
-    event.groupId = 'availableForBooking';
-    event.rendering = 'background';
-    event.overlap = true;
-    event.allDay = false;
-  } else {
-    event.classNames = event.state!
-      ? 'booking booking-' + event.state
-      : 'booking booking-Schedule';
-  }
-
-  return event;
-};
-
-export const eventRender = (arg, focused?) => {
-  if (arg.el && arg.el.classList.contains('fc-event')) {
-    if (focused === arg.event.id) {
-      arg.el.classList.add('isHovered');
-    }
-    if (arg.view.type === 'dayGridMonth') {
-      handleTime(arg);
-      handleTitle(arg);
-    }
-    return arg.el;
-  }
-};
-
-const getNextSlot = (slots: AvailabilitySlot[], selectedValue) =>
-  slots
-    .map((slot) => parseDate(slot.start))
-    .sort((a, b) => a.valueOf() - b.valueOf())
-    .find((next) => next > parseDate(selectedValue));
-
-const getSlotEnd = (slots: AvailabilitySlot[], selectedValue) =>
-  slots
-    .map((slot) => parseDate(slot.end))
-    .sort((a, b) => a.valueOf() - b.valueOf())
-    .find((next) => parseDate(selectedValue) <= next);
-
-export const handleSchedule = (
-  { start, end, view, jsEvent },
-  availabilitySlotsList: AvailabilitySlot[],
-  slotDuration?,
-) => {
-  const diff = parseDate(end).diff(parseDate(start)).as('milliseconds');
-
-  const eventData = createBooking(
-    {
-      start: '',
-      end: '',
-      allDay: false,
-      extendedProps: {
-        type: 'Schedule',
-      },
-    },
-    jsEvent.timeStamp,
-  );
-
-  if (view.type === 'dayGridMonth') {
-    if (diff > 86400000 /* one day in milliseconds */) {
-      eventData.start = getNextSlot(availabilitySlotsList, start).toISO();
-      eventData.end = getSlotEnd(
-        availabilitySlotsList,
-        parseDate(end).minus({ days: 1 }),
-      ).toISO();
-    } else {
-      const nextStart = getNextSlot(availabilitySlotsList, start);
-      eventData.start = nextStart.toISO();
-      eventData.end = nextStart
-        .plus(Duration.fromISOTime(slotDuration, {}))
-        .toISO();
-    }
-
-    return eventData;
-  } else {
-    return {
-      ...eventData,
-      start: start,
-      end: end,
-    };
-  }
-};
-
-export const createAvailabilityDates = (event: BookingProps) => {
-  const dates: EventInput[] = [];
-
-  let start = parseDate(event.start);
-  const end = parseDate(event.end);
-  const { config } = event.extendedProps;
-
-  while (start.diff(end).as('days')) {
-    const curDay = start.weekday === 7 ? start.weekday - 1 : start.weekday;
-    const startTime = Duration.fromISOTime(config.businessHours.startTime, {});
-    const endTime = Duration.fromISOTime(config.businessHours.endTime, {});
-    const event: BookingProps = {
-      start: start
-        .set({ hour: startTime.hours, minute: startTime.minutes })
-        .toISO(),
-      end: end.set({ hour: endTime.hours, minute: endTime.minutes }).toISO(),
-      allDay: true,
-      extendedProps: {
-        type: 'Availability',
-        config,
-      },
-    };
-
-    if (config.businessHours.daysOfWeek.includes(curDay)) {
-      dates.push(event);
-    }
-
-    start = start.plus({ days: 1 });
-  }
-  return dates;
-};
 
 export const createAvailabilitySlots = (
   events: BookingProps[],
@@ -286,13 +90,13 @@ export const getTimeOptions = (
   include24 = false,
 ): Array<{ h; m }> => {
   const dayMinutes = 60 * 24;
-  const count = dayMinutes / timeStep + 1;
+  const count = Math.ceil(dayMinutes / timeStep) + 1;
 
   return Array.from(new Array(count)).map((_, i) => {
     const allMinutes = i * timeStep;
     const minutes = allMinutes % 60;
     const hour = Math.floor(allMinutes / 60);
-    if (hour === 24 && !include24) {
+    if (hour >= 24 && !include24) {
       return { h: '23', m: '59' };
     }
     return {
@@ -319,6 +123,5 @@ export const getBookedSlots = (bookedItems: BookedItem[]) =>
     backgroundColor: '#333',
     borderColor: '#333',
     textColor: '#c6c7cb',
-    className: CURSOR_NOT_ALLOWED_CLASSNAME,
     classNames: 'booking booking-Schedule',
   }));

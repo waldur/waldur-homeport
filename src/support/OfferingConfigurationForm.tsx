@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { required, getNameFieldValidators } from '@waldur/core/validators';
 import {
   FormContainer,
@@ -12,7 +11,6 @@ import {
 } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { CalendarField } from '@waldur/form/CalendarField';
 import { DateField } from '@waldur/form/DateField';
 import { SelectMultiCheckboxGroup } from '@waldur/form/SelectMultiCheckboxGroup';
 import { TimeSelectField } from '@waldur/form/TimeSelectField';
@@ -197,14 +195,6 @@ export class PureOfferingConfigurationForm extends Component<OfferingConfigurati
                 />
               );
             })}
-          {props.offering.type === OFFERING_TYPE_BOOKING && (
-            <CalendarField
-              name="attributes.schedules"
-              excludedEvents={this.props.offering.attributes.schedules || []}
-              label={translate('Select dates')}
-              offeringUuid={props.offering.uuid}
-            />
-          )}
         </FormContainer>
       </form>
     );

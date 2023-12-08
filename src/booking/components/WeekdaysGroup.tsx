@@ -23,26 +23,31 @@ export const WeekdaysGroup: FunctionComponent<WeekdaysGroupProps> = ({
     valueClassName={'col-sm-8'}
   >
     <div className="weekDays-selector">
-      {[6].concat(range(6)).map((day, index) => (
-        <Tip
-          key={index}
-          label={Info.weekdays('long')[day]}
-          id={`weekday-${day}`}
-        >
-          <input
-            type="checkbox"
-            id={`weekday-${day}`}
-            value={day}
-            checked={daysOfWeek.includes(day)}
-            onChange={(e) =>
-              setDaysOfWeek(handleWeekDays(daysOfWeek, e.target.value))
-            }
-          />
-          <label htmlFor={`weekday-${day}`}>
-            {Info.weekdays('narrow')[day]}
-          </label>
-        </Tip>
-      ))}
+      {[6].concat(range(6)).map((day, index) => {
+        // luxon day indexes are Monday: 0 -> Sunday: 6
+        // but we are assuming in waldur Sunday: 0 -> Monday: 1 (js date rule)
+        const jsDateDay = (day + 1) % 7;
+        return (
+          <Tip
+            key={index}
+            label={Info.weekdays('long')[day]}
+            id={`weekday-${jsDateDay}`}
+          >
+            <input
+              type="checkbox"
+              id={`weekday-${jsDateDay}`}
+              value={jsDateDay}
+              checked={daysOfWeek.includes(jsDateDay)}
+              onChange={(e) =>
+                setDaysOfWeek(handleWeekDays(daysOfWeek, e.target.value))
+              }
+            />
+            <label htmlFor={`weekday-${jsDateDay}`}>
+              {Info.weekdays('narrow')[day]}
+            </label>
+          </Tip>
+        );
+      })}
     </div>
   </FormGroup>
 );

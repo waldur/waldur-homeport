@@ -50,12 +50,12 @@ export const useCalendarSettings = () => {
       return;
     }
     if (weekends) {
-      if (!daysOfWeek.includes(5) || !daysOfWeek.includes(6)) {
-        setDaysOfWeek(daysOfWeek.concat([5, 6]));
+      if (!daysOfWeek.includes(0) || !daysOfWeek.includes(6)) {
+        setDaysOfWeek(daysOfWeek.concat([0, 6]));
       }
     } else {
-      if (daysOfWeek.includes(5) || daysOfWeek.includes(6)) {
-        setDaysOfWeek(daysOfWeek.filter((day) => !(day === 5 || day === 6)));
+      if (daysOfWeek.includes(0) || daysOfWeek.includes(6)) {
+        setDaysOfWeek(daysOfWeek.filter((day) => !(day === 0 || day === 6)));
       }
     }
   }, [weekends, daysOfWeek, setDaysOfWeek, prevWeekends]);
