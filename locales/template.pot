@@ -804,6 +804,10 @@ msgstr ""
 msgid "Are you sure you want to activate ?"
 msgstr ""
 
+#: src/customer/details/CustomerCallManagerPanel.tsx
+msgid "Are you sure you want to allow this organization to manage calls?"
+msgstr ""
+
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
 msgid "Are you sure you want to archive plan {name}?"
 msgstr ""
@@ -890,6 +894,10 @@ msgstr ""
 
 #: src/marketplace/resources/mass-actions/MultiDestroyAction.tsx
 msgid "Are you sure you want to destroy {count} resources?"
+msgstr ""
+
+#: src/customer/details/CustomerCallManagerPanel.tsx
+msgid "Are you sure you want to prohibit this organization from managing calls?"
 msgstr ""
 
 #: src/marketplace/resources/mass-actions/MultiPullAction.tsx
@@ -1420,6 +1428,14 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
+#: src/navigation/sidebar/CallManagementMenu.tsx
+msgid "Call management"
+msgstr ""
+
+#: src/customer/details/CustomerCallManagerPanel.tsx
+msgid "Call manager"
+msgstr ""
+
 #: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Caller"
@@ -1904,6 +1920,7 @@ msgstr ""
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/details/CustomerCallManagerPanel.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/UserRemoveButton.tsx
@@ -3333,6 +3350,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/components/ComponentBooleanDefaultLimitField.tsx
 msgid "Enable by default"
+msgstr ""
+
+#: src/customer/details/CustomerCallManagerPanel.tsx
+msgid "Enable call manager"
 msgstr ""
 
 #: src/marketplace/offerings/update/components/ComponentLimitEnableField.tsx
@@ -11992,6 +12013,10 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 msgid "Unable to pause offering."
+msgstr ""
+
+#: src/customer/details/CustomerCallManagerPanel.tsx
+msgid "Unable to perform operation."
 msgstr ""
 
 #: src/customer/team/ReviewCloseButton.tsx

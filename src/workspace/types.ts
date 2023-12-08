@@ -155,6 +155,7 @@ export interface Customer {
   homepage?: string;
   vat_code?: string;
   image?: string;
+  is_call_managing_organization?: boolean;
   is_service_provider?: boolean;
   created?: string;
   division?: string;
