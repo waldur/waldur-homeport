@@ -28,15 +28,3 @@ export const selectTableRows = createSelector(
     return rows;
   },
 );
-
-export const selectTablePagination = (state: RootState, table: string) => {
-  if (state.tables && state.tables[table]) {
-    return state.tables[table].pagination;
-  }
-};
-
-export const selectTableSorting = (state: RootState, table: string) => {
-  if (state.tables && state.tables[table]) {
-    return state.tables[table].sorting;
-  }
-};

@@ -11,13 +11,13 @@ import {
   OpenStackInstance,
 } from '@waldur/openstack/openstack-instance/types';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
-import { ServerGroup } from '@waldur/openstack/openstack-server-groups/types';
 
 import {
   AvailabilityZone,
   EthernetType,
   SecurityGroupDirection,
   SecurityGroupProtocol,
+  ServerGroupType,
   VolumeType,
 } from './types';
 
@@ -159,7 +159,7 @@ export const loadSecurityGroups = (settings_uuid: string, name?: string) =>
   });
 
 export const loadServerGroups = (settings_uuid: string) =>
-  getAll<ServerGroup>('/openstacktenant-server-groups/', {
+  getAll<ServerGroupType>('/openstacktenant-server-groups/', {
     params: { settings_uuid },
   });
 
@@ -167,7 +167,7 @@ export const loadSecurityGroupsResources = (params?) =>
   getAll<SecurityGroup>('/openstack-security-groups/', { params });
 
 export const loadServerGroupsResources = (params?) =>
-  getAll<ServerGroup>('/openstack-server-groups/', { params });
+  getAll<ServerGroupType>('/openstack-server-groups/', { params });
 
 export const updateSecurityGroup = (id: string, data) =>
   put(`/openstack-security-groups/${id}/`, data);

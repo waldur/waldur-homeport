@@ -20,10 +20,6 @@ const CheckoutSummary = lazyComponent(
   () => import('@waldur/openstack/openstack-instance/deploy/CheckoutSummary'),
   'CheckoutSummary',
 );
-const OpenstackInstanceCreateForm = lazyComponent(
-  () => import('./OpenstackInstanceCreateForm'),
-  'OpenstackInstanceCreateForm',
-);
 
 const serializeFloatingIPs = (networks) => {
   if (!networks?.length || !networks[0]?.floatingIp) {
@@ -161,7 +157,6 @@ registerOfferingType({
     return translate('OpenStack instance');
   },
   formSteps: deployOfferingSteps,
-  component: OpenstackInstanceCreateForm, // We can remove this line later. formSteps replaced
   detailsComponent: OpenstackInstanceDetails,
   checkoutSummaryComponent: CheckoutSummary,
   serializer,
@@ -176,7 +171,6 @@ registerOfferingType({
     return translate('OpenStack shared instance');
   },
   formSteps: deployOfferingSteps,
-  component: OpenstackInstanceCreateForm, // We can remove this line later. formSteps replaced
   detailsComponent: OpenstackInstanceDetails,
   checkoutSummaryComponent: CheckoutSummary,
   serializer,

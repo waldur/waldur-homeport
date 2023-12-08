@@ -11,10 +11,6 @@ const OfferingConfigurationDetails = lazyComponent(
   () => import('@waldur/support/OfferingConfigurationDetails'),
   'OfferingConfigurationDetails',
 );
-const OfferingConfigurationForm = lazyComponent(
-  () => import('@waldur/support/OfferingConfigurationForm'),
-  'OfferingConfigurationForm',
-);
 const UserPluginOptionsForm = lazyComponent(
   () => import('@waldur/marketplace/UserPluginOptionsForm'),
   'UserPluginOptionsForm',
@@ -34,7 +30,6 @@ const OfferingOptionsSummary = (): Attribute[] => [
 
 export const COMMON_OPTIONS = {
   formSteps: deployOfferingSteps,
-  component: OfferingConfigurationForm,
   detailsComponent: OfferingConfigurationDetails,
   pluginOptionsForm: UserPluginOptionsForm,
   optionsSummary: OfferingOptionsSummary,

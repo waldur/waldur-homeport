@@ -103,7 +103,6 @@ msgstr ""
 msgid "Accepted"
 msgstr ""
 
-#: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "Access"
 msgstr ""
@@ -281,7 +280,6 @@ msgstr ""
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/deploy/DeployPage.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
@@ -316,7 +314,6 @@ msgstr ""
 msgid "Add current page"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/rancher/cluster/create/DataVolumeAddButton.tsx
 #: src/rancher/cluster/create/FormDataStorageStep.tsx
 msgid "Add data volume"
@@ -462,10 +459,6 @@ msgstr ""
 msgid "Additional configuration"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-msgid "Additional data that will be added to instance on provisioning."
-msgstr ""
-
 #: src/quotas/QuotasTable.tsx
 msgid "Additional quotas"
 msgstr ""
@@ -605,11 +598,6 @@ msgstr ""
 msgid "All resources have been imported."
 msgstr ""
 
-#: src/slurm/AllocationForm.tsx
-msgid "Allocation description"
-msgstr ""
-
-#: src/slurm/AllocationForm.tsx
 #: src/slurm/deploy/steps.ts
 msgid "Allocation name"
 msgstr ""
@@ -1085,8 +1073,8 @@ msgid "Auto approve in service provider projects"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/utils.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/utils.tsx
+#: src/openstack/openstack-instance/utils.ts
 msgid "Auto-assign floating IP"
 msgstr ""
 
@@ -1102,11 +1090,9 @@ msgstr ""
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
-#: src/openstack/openstack-instance/AvailabilityZoneGroup.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
 msgid "Availability zone"
 msgstr ""
@@ -1775,7 +1761,6 @@ msgid "Cloud vCPU"
 msgstr ""
 
 #: src/rancher/cluster/tabs.ts
-#: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 #: src/vmware/deploy/FormAdvancedOptionsStep.tsx
 msgid "Cluster"
@@ -2578,11 +2563,6 @@ msgstr ""
 msgid "Data volume size"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
-msgid "Data volume size:"
-msgstr ""
-
-#: src/openstack/openstack-instance/DataVolumeTypeGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
 msgid "Data volume type"
@@ -2592,7 +2572,6 @@ msgstr ""
 msgid "Datacite DOI"
 msgstr ""
 
-#: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 #: src/vmware/deploy/FormAdvancedOptionsStep.tsx
 msgid "Datastore"
@@ -2680,7 +2659,6 @@ msgstr ""
 #: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
 #: src/openstack/openstack-security-groups/rule-editor/ActionsField.tsx
 #: src/project/DeleteAction.tsx
@@ -2810,7 +2788,6 @@ msgstr ""
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/notifications/NotificationList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
@@ -2818,7 +2795,6 @@ msgstr ""
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
@@ -2834,9 +2810,7 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/RequestLimitsChangeDialog.tsx
-#: src/support/OfferingConfigurationForm.tsx
 #: src/user/support/UserEditForm.tsx
-#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Description"
 msgstr ""
 
@@ -2899,16 +2873,11 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourcesList.tsx
-msgid "Detailed view"
-msgstr ""
-
 #: src/administration/providers/ProviderCard.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/project/ProjectDetailsButton.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
@@ -2944,10 +2913,6 @@ msgstr ""
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 msgid "Direction"
-msgstr ""
-
-#: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
-msgid "Disable data volume"
 msgstr ""
 
 #: src/openstack/openstack-subnet/fields.tsx
@@ -3434,10 +3399,6 @@ msgstr ""
 msgid "Enter your custom message"
 msgstr ""
 
-#: src/marketplace/offerings/update/integration/VariablesList.tsx
-msgid "Environment variables"
-msgstr ""
-
 #: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
 msgid "Environment variables have been updated successfully."
 msgstr ""
@@ -3456,7 +3417,6 @@ msgstr ""
 #: src/administration/dashboard/AdministrationProfile.tsx
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
 #: src/marketplace/resources/details/InfiniteList.tsx
-#: src/marketplace/resources/details/ResourcesList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Error"
 msgstr ""
@@ -3754,7 +3714,6 @@ msgstr ""
 
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
 #: src/marketplace/resources/details/InfiniteList.tsx
-#: src/marketplace/resources/details/ResourcesList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Fetching..."
 msgstr ""
@@ -3813,7 +3772,6 @@ msgid "Find solution"
 msgstr ""
 
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
-#: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Fingerprint"
@@ -3847,8 +3805,6 @@ msgstr ""
 
 #: src/marketplace/resources/details/openstack-instance/ResourceFlavorField.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
-#: src/openstack/openstack-instance/FlavorGroup.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
@@ -3866,7 +3822,6 @@ msgid "Flavor exclude regex"
 msgstr ""
 
 #: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/openstack-instance/FlavorGroup.tsx
 msgid "Flavor name"
 msgstr ""
 
@@ -3910,7 +3865,6 @@ msgstr ""
 msgid "Flow update"
 msgstr ""
 
-#: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/deploy/FormAdvancedOptionsStep.tsx
 msgid "Folder"
 msgstr ""
@@ -3984,7 +3938,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
 #: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 #: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
@@ -4151,7 +4104,6 @@ msgstr ""
 msgid "Guest"
 msgstr ""
 
-#: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 #: src/vmware/deploy/FormStorageStep.tsx
 msgid "Guest OS"
@@ -4347,8 +4299,6 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/resources/details/openstack-instance/ResourceImageField.tsx
-#: src/openstack/openstack-instance/ImageGroup.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
@@ -4371,7 +4321,6 @@ msgid "Image here"
 msgstr ""
 
 #: src/openstack/analytics/ImagesList.tsx
-#: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Image name"
 msgstr ""
 
@@ -4497,12 +4446,10 @@ msgid "Initial UID number"
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
-#: src/openstack/OpenStackPackageForm.tsx
 msgid "Initial admin password"
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
-#: src/openstack/OpenStackPackageForm.tsx
 msgid "Initial admin username"
 msgstr ""
 
@@ -4606,14 +4553,12 @@ msgstr ""
 msgid "Internal network ID"
 msgstr ""
 
-#: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/deploy/FormInternalNetworkStep.tsx
 #: src/openstack/openstack-network/InternalNetworkAllocationPool.tsx
 msgid "Internal network allocation pool"
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
-#: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/deploy/FormInternalNetworkStep.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
@@ -4776,9 +4721,7 @@ msgid "Invoice to"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 msgid "Invoiced to"
 msgstr ""
@@ -4971,14 +4914,6 @@ msgstr ""
 msgid "Learn more"
 msgstr ""
 
-#: src/openstack/OpenStackPackageForm.tsx
-msgid "Leave blank if you want admin password to be auto-generated."
-msgstr ""
-
-#: src/openstack/OpenStackPackageForm.tsx
-msgid "Leave blank if you want admin username to be auto-generated."
-msgstr ""
-
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Legal address"
 msgstr ""
@@ -5009,8 +4944,6 @@ msgstr ""
 #: src/marketplace/orders/details/LimitsSection.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Limits"
 msgstr ""
 
@@ -5036,10 +4969,6 @@ msgstr ""
 msgid "List importable resources"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourcesList.tsx
-msgid "List is empty."
-msgstr ""
-
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "List of IPv4 or IPv6 CIDR addresses from where connection to self-service is allowed"
 msgstr ""
@@ -5050,7 +4979,6 @@ msgstr ""
 
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
 #: src/marketplace/resources/details/InfiniteList.tsx
-#: src/marketplace/resources/details/ResourcesList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Load more"
 msgstr ""
@@ -5058,7 +4986,6 @@ msgstr ""
 #: src/customer/list/TotalCostComponent.tsx
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
 #: src/marketplace/resources/details/InfiniteList.tsx
-#: src/marketplace/resources/details/ResourcesList.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 #: src/project/ProjectEventsTimeline.tsx
@@ -5081,7 +5008,6 @@ msgstr ""
 
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
 #: src/marketplace/resources/details/InfiniteList.tsx
-#: src/marketplace/resources/details/ResourcesList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Loading more..."
 msgstr ""
@@ -5355,7 +5281,6 @@ msgstr ""
 msgid "Memory per vCore"
 msgstr ""
 
-#: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/deploy/FormMemoryStep.tsx
 msgid "Memory size in GiB"
 msgstr ""
@@ -5386,18 +5311,10 @@ msgstr ""
 msgid "MiB"
 msgstr ""
 
-#: src/openstack/openstack-instance/ImageGroup.tsx
-msgid "Min RAM"
-msgstr ""
-
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Min replicas"
-msgstr ""
-
-#: src/openstack/openstack-instance/ImageGroup.tsx
-msgid "Min storage"
 msgstr ""
 
 #: src/openstack/openstack-tenant/TenantImagesList.tsx
@@ -5593,7 +5510,6 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
-#: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/openstack/openstack-instance/actions/EditDialog.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
@@ -5630,12 +5546,10 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
-#: src/support/OfferingConfigurationForm.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
-#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Name"
 msgstr ""
 
@@ -5759,10 +5673,8 @@ msgid "Networking"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
-#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
 msgstr ""
 
@@ -5983,7 +5895,6 @@ msgid "No projects are assigned to this user."
 msgstr ""
 
 #: src/marketplace/orders/ProviderAutocomplete.tsx
-#: src/marketplace/service-providers/ProviderCampaignServiceProviderFilter.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "No providers"
 msgstr ""
@@ -6063,14 +5974,6 @@ msgstr ""
 msgid "Not signed in"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-msgid "Note that this virtual machine will not be charged separately for {organization}."
-msgstr ""
-
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-msgid "Note that this volume will not be charged separately for {organization}."
-msgstr ""
-
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 msgid "Nothing to see here"
 msgstr ""
@@ -6119,12 +6022,10 @@ msgstr ""
 msgid "Notify project team"
 msgstr ""
 
-#: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/deploy/FormProcessorStep.tsx
 msgid "Number of CPU cores per socket"
 msgstr ""
 
-#: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/deploy/FormProcessorStep.tsx
 msgid "Number of CPU cores should be multiple of cores per socket."
 msgstr ""
@@ -6133,7 +6034,6 @@ msgstr ""
 msgid "Number of control plane nodes"
 msgstr ""
 
-#: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/deploy/FormProcessorStep.tsx
 msgid "Number of cores in a VM"
 msgstr ""
@@ -6206,9 +6106,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
@@ -7171,7 +7069,6 @@ msgstr ""
 #: src/marketplace/deploy/steps/FormPlanStep.tsx
 #: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/details/plan/PlanField.tsx
 #: src/marketplace/details/plan/PlanSection.tsx
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
@@ -7274,10 +7171,6 @@ msgstr ""
 msgid "Please enter username and password."
 msgstr ""
 
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-msgid "Please enter volume size to see price estimate."
-msgstr ""
-
 #: src/invitations/GroupInvitationConfirmDialog.tsx
 #: src/invitations/InvitationConfirmDialog.tsx
 msgid "Please give us a moment to validate your invitation."
@@ -7368,10 +7261,6 @@ msgstr ""
 
 #: src/freeipa/UsernameGroup.tsx
 msgid "Please select a username that you will use for login into the Linux systems."
-msgstr ""
-
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-msgid "Please select flavor to see price estimate."
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/RestartAction.tsx
@@ -7508,9 +7397,7 @@ msgid "Price is estimated."
 msgstr ""
 
 #: src/marketplace/common/utils.ts
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 msgid "Price per 30 days"
 msgstr ""
@@ -7521,9 +7408,7 @@ msgstr ""
 
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/common/utils.ts
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 msgid "Price per day"
 msgstr ""
@@ -7666,10 +7551,8 @@ msgstr ""
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 #: src/openstack/deploy/steps.ts
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/steps.ts
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/steps.ts
 #: src/project/routes.ts
@@ -8093,7 +7976,6 @@ msgid "Quotas"
 msgstr ""
 
 #: src/marketplace/resources/details/InstanceComponents.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
 #: src/openstack/openstack-tenant/TenantFlavorsList.tsx
@@ -8138,9 +8020,7 @@ msgstr ""
 msgid "Rancher server URL"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 msgid "Rating"
 msgstr ""
@@ -8668,10 +8548,6 @@ msgstr ""
 msgid "Resource configuration"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-msgid "Resource configuration is invalid. Please fix errors in form."
-msgstr ""
-
 #: src/marketplace/cart/store/effects.ts
 msgid "Resource creation flow has been created."
 msgstr ""
@@ -9082,7 +8958,6 @@ msgid "SSH keys"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
-#: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/openstack/openstack-instance/deploy/steps.ts
 #: src/rancher/cluster/create/steps.ts
 msgid "SSH public key"
@@ -9269,7 +9144,6 @@ msgstr ""
 
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsForm.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
@@ -9333,10 +9207,6 @@ msgstr ""
 msgid "Select a date"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceServerGroups.tsx
-msgid "Select a server group..."
-msgstr ""
-
 #: src/customer/list/AccountingPeriodField.tsx
 msgid "Select accounting period"
 msgstr ""
@@ -9377,7 +9247,6 @@ msgid "Select flavor"
 msgstr ""
 
 #: src/marketplace/deploy/steps/FormAdditionalConfigurationStep.tsx
-#: src/support/OfferingConfigurationForm.tsx
 msgid "Select instance..."
 msgstr ""
 
@@ -9461,7 +9330,6 @@ msgid "Select project..."
 msgstr ""
 
 #: src/marketplace/orders/ProviderAutocomplete.tsx
-#: src/marketplace/service-providers/ProviderCampaignServiceProviderFilter.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Select provider..."
 msgstr ""
@@ -9485,7 +9353,6 @@ msgid "Select root category"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsForm.tsx
 msgid "Select security groups..."
 msgstr ""
@@ -9523,7 +9390,6 @@ msgstr ""
 msgid "Select status..."
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
 #: src/rancher/cluster/create/FormNetworkStep.tsx
 msgid "Select subnet"
@@ -9538,12 +9404,10 @@ msgid "Select template..."
 msgstr ""
 
 #: src/marketplace/deploy/steps/FormAdditionalConfigurationStep.tsx
-#: src/support/OfferingConfigurationForm.tsx
 msgid "Select tenant..."
 msgstr ""
 
 #: src/marketplace/deploy/steps/FormAdditionalConfigurationStep.tsx
-#: src/support/OfferingConfigurationForm.tsx
 msgid "Select tenants..."
 msgstr ""
 
@@ -9633,10 +9497,6 @@ msgstr ""
 msgid "Server"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-msgid "Server group"
-msgstr ""
-
 #: src/openstack/openstack-tenant/actions/utils.ts
 msgid "Server group creation has been scheduled."
 msgstr ""
@@ -9678,11 +9538,8 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
-#: src/marketplace/service-providers/ProviderCampaignServiceProviderFilter.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/providers/dashboard/ProviderProfile.tsx
 msgid "Service provider"
@@ -9888,10 +9745,6 @@ msgstr ""
 msgid "Show chart"
 msgstr ""
 
-#: src/form/SelectDialogField.tsx
-msgid "Show choices"
-msgstr ""
-
 #: src/resource/actions/OpenConsoleLogActionItem.tsx
 msgid "Show console log"
 msgstr ""
@@ -9951,10 +9804,6 @@ msgstr ""
 #: src/marketplace/resources/report/ShowReportAction.tsx
 #: src/marketplace/resources/report/ShowReportButton.tsx
 msgid "Show report"
-msgstr ""
-
-#: src/marketplace/orders/list/ShowRequestButton.tsx
-msgid "Show request"
 msgstr ""
 
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
@@ -10065,7 +9914,6 @@ msgstr ""
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
@@ -10076,17 +9924,12 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-msgid "Size should be between 1 and 10240 GB."
-msgstr ""
-
 #: src/openstack/OpenStackPackageDetails.tsx
-#: src/openstack/OpenStackPackageForm.tsx
 msgid "Skip connection to external network"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/utils.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
+#: src/openstack/openstack-instance/utils.ts
 msgid "Skip floating IP assignment"
 msgstr ""
 
@@ -10302,7 +10145,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/quotas/constants.ts
 #: src/vmware/deploy/FormStorageStep.tsx
@@ -10319,7 +10161,6 @@ msgstr ""
 msgid "Storage size"
 msgstr ""
 
-#: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/deploy/FormStorageStep.tsx
 msgid "Storage size in GiB"
 msgstr ""
@@ -10526,13 +10367,11 @@ msgid "System volume couldn't be detached."
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
-#: src/openstack/openstack-instance/SystemVolumeSizeGroup.tsx
 #: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
 msgid "System volume size"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
-#: src/openstack/openstack-instance/SystemVolumeTypeGroup.tsx
 #: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
 #: src/rancher/cluster/create/SystemVolumeTypeGroup.tsx
 msgid "System volume type"
@@ -10630,7 +10469,6 @@ msgstr ""
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
-#: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 #: src/vmware/deploy/steps.ts
@@ -10655,12 +10493,7 @@ msgstr ""
 msgid "Tenant ID"
 msgstr ""
 
-#: src/openstack/OpenStackPackageForm.tsx
-msgid "Tenant description"
-msgstr ""
-
 #: src/openstack/OpenStackForm.tsx
-#: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/deploy/steps.ts
 #: src/openstack/marketplace.ts
 msgid "Tenant name"
@@ -11042,11 +10875,7 @@ msgstr ""
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
-#: src/openstack/OpenStackPackageForm.tsx
 #: src/project/ProjectNameField.tsx
-#: src/slurm/AllocationForm.tsx
-#: src/support/OfferingConfigurationForm.tsx
-#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "This name will be visible in accounting data."
 msgstr ""
 
@@ -11227,7 +11056,6 @@ msgstr ""
 msgid "Total resources"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
 msgid "Total storage"
@@ -11284,10 +11112,6 @@ msgstr ""
 #: src/user/keys/KeysList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
-msgstr ""
-
-#: src/marketplace/offerings/update/integration/VariablesList.tsx
-msgid "Type: {type}"
 msgstr ""
 
 #: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
@@ -11645,10 +11469,6 @@ msgstr ""
 msgid "Unable to generate service provider API secret code."
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-msgid "Unable to get form's data."
-msgstr ""
-
 #: src/marketplace/service-providers/store/effects.ts
 msgid "Unable to get service provider API secret code."
 msgstr ""
@@ -11797,10 +11617,6 @@ msgstr ""
 msgid "Unable to load flow."
 msgstr ""
 
-#: src/vmware/VMwareVirtualMachineForm.tsx
-msgid "Unable to load form options."
-msgstr ""
-
 #: src/marketplace/offerings/details/ExportFullPriceList.tsx
 msgid "Unable to load full price list"
 msgstr ""
@@ -11842,7 +11658,6 @@ msgstr ""
 #: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 msgid "Unable to load offering details."
 msgstr ""
 
@@ -12825,7 +12640,6 @@ msgstr ""
 msgid "User could not been updated"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 msgid "User data"
 msgstr ""
@@ -12867,7 +12681,6 @@ msgid "User has been updated."
 msgstr ""
 
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
-#: src/marketplace/offerings/update/integration/VariablesList.tsx
 #: src/marketplace/offerings/update/options/OfferingOptionsSection.tsx
 msgid "User input variables"
 msgstr ""
@@ -13046,8 +12859,6 @@ msgstr ""
 msgid "VAT rate"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/steps.ts
 #: src/vmware/deploy/steps.ts
@@ -13155,10 +12966,6 @@ msgstr ""
 msgid "Value should not be negative."
 msgstr ""
 
-#: src/marketplace/offerings/update/integration/VariablesList.tsx
-msgid "Value: {value}"
-msgstr ""
-
 #: src/marketplace/landing/DeploymentIntroduction.tsx
 msgid "Vendor Neutral"
 msgstr ""
@@ -13234,7 +13041,6 @@ msgstr ""
 msgid "Volume has been retyped."
 msgstr ""
 
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 #: src/openstack/openstack-volume/deploy/steps.ts
 msgid "Volume name"
@@ -13257,7 +13063,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/OpenStackInstanceVolumeBadge.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
 #: src/openstack/openstack-volume/actions/RetypeDialog.tsx
 #: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
@@ -13496,10 +13301,6 @@ msgstr ""
 msgid "You have no quotas yet."
 msgstr ""
 
-#: src/openstack/openstack-instance/PublicKeyGroup.tsx
-msgid "You have not added any SSH keys to your <Link>profile</Link>."
-msgstr ""
-
 #: src/marketplace/cart/ForwardButton.tsx
 msgid "You have the right to purchase service without additional approval."
 msgstr ""
@@ -13702,10 +13503,6 @@ msgstr ""
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/FloatingIpsList.tsx
 msgid "floating IPs"
-msgstr ""
-
-#: src/openstack/OpenStackPackageForm.tsx
-msgid "generate automatically"
 msgstr ""
 
 #: src/invitations/GroupInvitationsList.tsx
@@ -14014,7 +13811,6 @@ msgid "users"
 msgstr ""
 
 #: src/marketplace/resources/details/InstanceComponents.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
 #: src/resource/utils.tsx

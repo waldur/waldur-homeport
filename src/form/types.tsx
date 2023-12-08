@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import {
   WrappedFieldInputProps,
   Validator,
@@ -44,3 +44,17 @@ export type PeriodOption = {
   month: number;
   current: boolean;
 };
+export interface SelectDialogFieldChoice extends Record<string, any> {
+  url: string;
+  uuid: string;
+  name: string;
+  disabled?: boolean;
+  disabledReason?: string;
+}
+
+export interface SelectDialogFieldColumn {
+  name: string;
+  label: React.ReactNode;
+  headerClass?: string;
+  filter?(input: string): string;
+}

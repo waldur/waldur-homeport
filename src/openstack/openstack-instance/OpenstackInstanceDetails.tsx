@@ -5,11 +5,11 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { DetailsField } from '@waldur/marketplace/common/DetailsField';
 import { OrderDetailsProps } from '@waldur/marketplace/types';
-import { getDefaultFloatingIps } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
 import { FloatingIp } from '@waldur/openstack/openstack-instance/types';
 import {
   formatSubnet,
   formatVolumeTypeLabel,
+  getDefaultFloatingIps,
 } from '@waldur/openstack/openstack-instance/utils';
 import { formatFlavor, getData } from '@waldur/resource/utils';
 

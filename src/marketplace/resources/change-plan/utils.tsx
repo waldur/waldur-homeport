@@ -2,7 +2,7 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import {
   SelectDialogFieldColumn,
   SelectDialogFieldChoice,
-} from '@waldur/form/SelectDialogField';
+} from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
 import { getPublicOffering, getResource } from '@waldur/marketplace/common/api';
 import { filterOfferingComponents } from '@waldur/marketplace/common/registry';

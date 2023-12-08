@@ -10,7 +10,3 @@ export interface SecurityGroup {
   resource_type?: string;
   tenant?: string;
 }
-
-export interface SecurityGroupOption extends SecurityGroup {
-  clearableValue?: boolean;
-}

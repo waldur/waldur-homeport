@@ -1,7 +1,6 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
-import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { VOLUME_TYPE } from '../constants';
 
@@ -11,10 +10,6 @@ import { deployOfferingSteps } from './deploy/steps';
 const OpenstackVolumeDetails = lazyComponent(
   () => import('@waldur/openstack/openstack-volume/OpenstackVolumeDetails'),
   'OpenstackVolumeDetails',
-);
-const OpenstackVolumeCreateForm = lazyComponent<OfferingConfigurationFormProps>(
-  () => import('./OpenstackVolumeCreateForm'),
-  'OpenstackVolumeCreateForm',
 );
 
 const serializer = (attrs) => ({
@@ -28,7 +23,6 @@ registerOfferingType({
     return translate('OpenStack volume');
   },
   formSteps: deployOfferingSteps,
-  component: OpenstackVolumeCreateForm, // We can remove this line later. formSteps replaced
   detailsComponent: OpenstackVolumeDetails,
   checkoutSummaryComponent: CheckoutSummary,
   serializer,
