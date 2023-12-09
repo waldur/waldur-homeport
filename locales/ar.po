@@ -29,10 +29,12 @@ msgstr "إلغاء"
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
+#: src/reporting/routes.ts
 #: src/user/routes.ts
 msgid "Dashboard"
 msgstr "لوحة القيادة"
 
+#: src/administration/dashboard/StatisticsCards.tsx
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/routes.ts
@@ -50,9 +52,8 @@ msgstr "لوحة القيادة"
 msgid "Projects"
 msgstr "مشاريع"
 
-#: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/administration/dashboard/StatisticsCards.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -63,10 +64,10 @@ msgstr "مشاريع"
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
-#: src/project/ProjectResourcesList.tsx
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/resources/ResourcesList.tsx
 #: src/user/routes.ts
 msgid "Resources"
 msgstr "موارد"
@@ -83,13 +84,20 @@ msgstr "موارد"
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/expandable/utils.ts
+#: src/marketplace/offerings/update/attributes/EditAttributeDialog.tsx
+#: src/marketplace/offerings/update/attributes/EditCategoryDialog.tsx
+#: src/marketplace/offerings/update/components/EditComponentDialog.tsx
+#: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
+#: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
+#: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
+#: src/marketplace/offerings/update/options/EditOptionDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDialog.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
-#: src/providers/ProviderUpdateForm.tsx
 msgid "Save"
 msgstr "حفظ"
 
@@ -97,14 +105,14 @@ msgstr "حفظ"
 msgid "Services"
 msgstr "الخدمات"
 
+#: src/administration/dashboard/StatisticsCards.tsx
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
-#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
-#: src/marketplace/resources/details/RobotAccountExpandable.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
 #: src/rancher/cluster/tabs.ts
-#: src/slurm/tabs.ts
 msgid "Users"
 msgstr "المستخدمين"

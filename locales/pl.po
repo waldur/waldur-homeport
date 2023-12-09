@@ -17,17 +17,13 @@ msgid "Account removal"
 msgstr "Usunięcie konta"
 
 #: src/invoices/routes.ts
-#: src/invoices/utils.ts
-#: src/marketplace/offerings/create/AccountingSummary.tsx
-#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
-#: src/marketplace/offerings/details/PageAccounting.tsx
-#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Accounting"
 msgstr "Księgowość"
 
 #: src/invitations/GroupInvitationsList.tsx
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
+#: src/marketplace/offerings/update/plans/PlansSection.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Active"
 msgstr "Aktywny"
@@ -49,7 +45,7 @@ msgid "Add new project"
 msgstr "Dodaj nowy projekt"
 
 #: src/user/hooks/HookCreateButton.tsx
-msgid "Add broadcast"
+msgid "Add notification"
 msgstr "Dodaj powiadomienie"
 
 #: src/customer/list/OrganizationCreateButton.tsx
@@ -74,6 +70,7 @@ msgstr "Dodaj członka zespołu"
 msgid "Add to comparison"
 msgstr "Dodaj do porównania"
 
+#: src/marketplace/offerings/details/permissions/OfferingPermissionCreateButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/AddUserButton.tsx
@@ -104,10 +101,8 @@ msgid "Allocation name"
 msgstr "Nazwa alokacji"
 
 #: src/marketplace/offerings/PriceList.tsx
-#: src/marketplace/offerings/create/PlanSummary.tsx
-#: src/marketplace/offerings/plan/PlanComponents.tsx
+#: src/marketplace/offerings/update/plans/PlanComponents.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/paypal/PaymentsList.tsx
 msgid "Amount"
 msgstr "Kwota"
 
@@ -136,7 +131,7 @@ msgstr "Zastosuj"
 msgid "Are you sure you want to delete a {name} {resourceType}?"
 msgstr "Czy na pewno chcesz usunąć {name} {resourceType}?"
 
-#: src/marketplace/offerings/images/ImagesActions.tsx
+#: src/marketplace/offerings/images/DeleteImageButton.tsx
 msgid "Are you sure you want to delete the image?"
 msgstr "Czy na pewno chcesz usunąć ten obraz?"
 
@@ -164,14 +159,14 @@ msgstr "Czy na pewno chcesz usunąć klucz?"
 msgid "Attach"
 msgstr "Dołącz"
 
-#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
+#: src/marketplace/offerings/details/PublicOfferingAttributesCard.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
 msgid "Attributes"
 msgstr "Atrybuty"
 
-#: src/marketplace/offerings/create/DescriptionSummary.tsx
+#: src/marketplace/offerings/steps/DescriptionSummary.tsx
 msgid "Attributes are invalid."
 msgstr "Atrybuty są nieprawidłowe."
 
@@ -184,11 +179,11 @@ msgstr "Aktywność uwierzytelniania"
 msgid "Authentication token"
 msgstr "Token uwierzytelniania"
 
-#: src/notifications/BroadcastList.tsx
+#: src/notifications/NotificationList.tsx
 msgid "Author"
 msgstr "Autor"
 
-#: src/marketplace/offerings/option/OfferingScheduler.tsx
+#: src/marketplace/offerings/update/integration/OfferingScheduler.tsx
 msgid "Availability"
 msgstr "Dostępność"
 

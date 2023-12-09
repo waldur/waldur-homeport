@@ -25,6 +25,7 @@ msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Умови надання послуг</Link> були прийняті <Date></Date>"
 
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
+#: src/marketplace-remote/marketplace.ts
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
@@ -107,21 +108,15 @@ msgid "Account removal"
 msgstr "Видалення облікового запису"
 
 #: src/invoices/routes.ts
-#: src/invoices/utils.ts
-#: src/marketplace/offerings/create/AccountingSummary.tsx
-#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
-#: src/marketplace/offerings/details/PageAccounting.tsx
-#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Accounting"
 msgstr "Бухгалтерія"
 
-#: src/customer/list/AccountingPeriodFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 msgid "Accounting period"
 msgstr "Обліковий період"
 
-#: src/marketplace/offerings/plan/PlansList.tsx
+#: src/marketplace/offerings/update/plans/PlansSection.tsx
 msgid "Accounting plans"
 msgstr "Тарифні плани"
 
@@ -144,7 +139,7 @@ msgstr "Облік запущений"
 msgid "Accounting start date"
 msgstr "Дата початку бухгалтерського обліку"
 
-#: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
+#: src/marketplace/offerings/update/components/ComponentAccountingTypeField.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Accounting type"
 msgstr "Тип бухгалтерського обліку"
@@ -153,7 +148,6 @@ msgstr "Тип бухгалтерського обліку"
 msgid "Action has been applied."
 msgstr "Дію було застосовано."
 
-#: src/azure/sql/DatabasesList.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/payments/PaymentsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
@@ -162,26 +156,21 @@ msgstr "Дію було застосовано."
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
-#: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/resources/details/RobotAccountList.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
-#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourceActions.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/marketplace/robot-accounts/RobotAccountList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
-#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 #: src/openstack/openstack-server-groups/ServerGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
-#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
-#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
-#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
@@ -216,11 +205,12 @@ msgstr "Ціна активації"
 #: src/invitations/GroupInvitationsList.tsx
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
+#: src/marketplace/offerings/update/plans/PlansSection.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Active"
 msgstr "Активний"
 
-#: src/marketplace/offerings/create/AccountingSummary.tsx
+#: src/marketplace/offerings/steps/AccountingSummary.tsx
 msgid "Active plans"
 msgstr "Активні плани"
 
@@ -258,7 +248,8 @@ msgstr "Додати адресу"
 msgid "Add comment"
 msgstr "Додати коментар"
 
-#: src/marketplace/offerings/create/ComponentAddButton.tsx
+#: src/marketplace/offerings/update/components/AddComponentButton.tsx
+#: src/marketplace/offerings/update/components/AddComponentDialog.tsx
 msgid "Add component"
 msgstr "Додати компонент"
 
@@ -293,7 +284,7 @@ msgstr "Додати учасника"
 msgid "Add new"
 msgstr "Створити організацію"
 
-#: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
+#: src/marketplace/offerings/CreateOfferingButton.tsx
 msgid "Add new offering"
 msgstr "Додати нову пропозицію"
 
@@ -306,9 +297,10 @@ msgid "Add new project"
 msgstr "Додати новий проект"
 
 #: src/user/hooks/HookCreateButton.tsx
-msgid "Add broadcast"
+msgid "Add notification"
 msgstr "Додати сповіщення"
 
+#: src/marketplace/offerings/actions/OfferingCreateButton.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 msgid "Add offering"
 msgstr "Додати пропозицію"
@@ -332,7 +324,8 @@ msgstr "Додати платіж"
 msgid "Add payment profile"
 msgstr "Додати платіжний профіль"
 
-#: src/marketplace/offerings/plan/PlanAddButton.tsx
+#: src/marketplace/offerings/update/plans/AddPlanButton.tsx
+#: src/marketplace/offerings/update/plans/AddPlanDialog.tsx
 msgid "Add plan"
 msgstr "Додати план"
 
@@ -349,7 +342,9 @@ msgstr "Додати учасника проекту"
 #: src/marketplace-flows/FlowCreateButton.tsx
 #: src/marketplace/resources/actions/AddResourceButton.tsx
 #: src/marketplace/resources/list/CreateResourceButton.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
+#: src/user/resources/ResourcesList.tsx
 msgid "Add resource"
 msgstr "Додати ресурс"
 
@@ -381,6 +376,7 @@ msgstr "Додати до кошика"
 msgid "Add to comparison"
 msgstr "Додати до порівняння"
 
+#: src/marketplace/offerings/details/permissions/OfferingPermissionCreateButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/AddUserButton.tsx
@@ -391,7 +387,6 @@ msgstr "Додати користувача"
 msgid "Add user input field"
 msgstr "Додати користувацьке поле"
 
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Додаткові дані, які будуть додані до віртуальної машини під час створення."
@@ -426,11 +421,9 @@ msgstr "Ім'я користувача адміністратора"
 
 #: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueQuickCreate.tsx
-#: src/issues/create/ResourceGroup.tsx
 msgid "Affected resource"
 msgstr "Задіяний ресурс"
 
-#: src/customer/popover/CustomerUsersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsTable.tsx
@@ -462,7 +455,7 @@ msgstr "Сповіщення"
 
 #: src/customer/list/AccountingRunningField.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/marketplace/offerings/attributes/utils.tsx
+#: src/marketplace/offerings/update/attributes/utils.tsx
 #: src/rancher/node/NodeRoleField.tsx
 msgid "All"
 msgstr "Всі"
@@ -492,11 +485,12 @@ msgid "Allow bookings to be scheduled at weekends"
 msgstr "Дозволити планувати бронювання у вихідні дні"
 
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
+#: src/marketplace-remote/marketplace.ts
 #: src/support/OfferingPluginSecretOptionsForm.tsx
 msgid "Allow service provider to create offering users."
 msgstr "Дозволити постачальнику послуг додавати користувачів."
 
-#: src/marketplace/offerings/create/ComponentBooleanLimitField.tsx
+#: src/marketplace/offerings/update/components/ComponentBooleanLimitField.tsx
 msgid "Allow to enable/disable component only"
 msgstr "Дозволити включення/вимикання лише компонента"
 
@@ -505,10 +499,8 @@ msgid "Already have an account?"
 msgstr "Вже маєте обліковий запис?"
 
 #: src/marketplace/offerings/PriceList.tsx
-#: src/marketplace/offerings/create/PlanSummary.tsx
-#: src/marketplace/offerings/plan/PlanComponents.tsx
+#: src/marketplace/offerings/update/plans/PlanComponents.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/paypal/PaymentsList.tsx
 msgid "Amount"
 msgstr "Кількість"
 
@@ -572,8 +564,8 @@ msgstr "Застосувати"
 #: src/invitations/UserPermissionRequestApproveButton.tsx
 #: src/marketplace-flows/ReviewApproveAction.tsx
 #: src/marketplace/cart/ShoppingCartSteps.tsx
-#: src/marketplace/orders/ApproveButton.tsx
 #: src/marketplace/orders/OrderSteps.tsx
+#: src/marketplace/orders/actions/ApproveButton.tsx
 #: src/marketplace/orders/item/list/OrderItemApproveButton.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemApproveButton.tsx
 msgid "Approve"
@@ -594,16 +586,18 @@ msgid "Approved by"
 msgstr "Затверджено"
 
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
 msgid "Archive"
 msgstr "Архівувати"
 
 #: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/offerings/update/plans/PlansSection.tsx
 msgid "Archived"
 msgstr "Заархівовано"
 
-#: src/marketplace/offerings/create/AccountingSummary.tsx
+#: src/marketplace/offerings/steps/AccountingSummary.tsx
 msgid "Archived plans"
 msgstr "Архівні плани"
 
@@ -634,15 +628,13 @@ msgstr "Приєднано до"
 msgid "Azure Active Directory Application Secret"
 msgstr "Секретний ключ застосунку Azure Active Directory"
 
-#: src/marketplace/offerings/details/OfferingDetails.tsx
-#: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 msgid "Billing enabled"
 msgstr "Виставлення рахунків увімкнено"
 
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/PriceList.tsx
-#: src/marketplace/offerings/create/PlanSummary.tsx
-#: src/marketplace/offerings/plan/PlanForm.tsx
+#: src/marketplace/offerings/update/plans/PlanForm.tsx
 msgid "Billing period"
 msgstr "Рахунковий період"
 
@@ -672,8 +664,6 @@ msgstr "Гілка"
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
-#: src/marketplace/offerings/create/OverviewStep.tsx
-#: src/marketplace/offerings/details/PageHeroImage.tsx
 #: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Browse"
 msgstr "Вибрати"
@@ -719,6 +709,7 @@ msgstr "Створити застосунок"
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
+#: src/reporting/routes.ts
 #: src/user/routes.ts
 msgid "Dashboard"
 msgstr "Огляд"
@@ -741,6 +732,7 @@ msgid "My orders"
 msgstr "Мої замовлення"
 
 #: src/marketplace/resources/list/CustomerResourcesContainer.tsx
+#: src/marketplace/sidebar.ts
 msgid "My resources"
 msgstr "Мої ресурси"
 
@@ -750,12 +742,10 @@ msgstr "Мої ресурси"
 msgid "My services"
 msgstr "Мої послуги"
 
-#: src/azure/sql/DatabasesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
@@ -764,46 +754,40 @@ msgstr "Мої послуги"
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
-#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/invoices/details/InvoiceItemCompensationDialog.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
-#: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/actions/SelectCategoryTab.tsx
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
-#: src/marketplace/offerings/create/OfferingLimitsTable.tsx
-#: src/marketplace/offerings/create/OverviewStep.tsx
-#: src/marketplace/offerings/create/OverviewSummary.tsx
-#: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
-#: src/marketplace/offerings/plan/PlanForm.tsx
-#: src/marketplace/offerings/support/SupportOfferingsList.tsx
+#: src/marketplace/offerings/update/overview/OverviewDialog.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/marketplace/offerings/update/plans/PlanForm.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemLimits.tsx
 #: src/marketplace/orders/item/list/SupportOrdersList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
-#: src/marketplace/resources/details/RobotAccountExpandable.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
-#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
-#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/openstack/openstack-instance/actions/EditDialog.tsx
@@ -811,10 +795,7 @@ msgstr "Мої послуги"
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-server-groups/ServerGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
-#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
-#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
-#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 #: src/openstack/openstack-tenant/TenantFlavorsList.tsx
 #: src/openstack/openstack-tenant/TenantImagesList.tsx
@@ -826,7 +807,6 @@ msgstr "Мої послуги"
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
-#: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -846,8 +826,8 @@ msgstr "Мої послуги"
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/support/OfferingConfigurationForm.tsx
-#: src/support/SupportDetailsTable.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -858,7 +838,7 @@ msgstr "Назва"
 msgid "Name is duplicated. Choose other name."
 msgstr "Ця назва вже використовується. Будь ласка, оберіть іншу назву."
 
-#: src/marketplace/offerings/create/OverviewSummary.tsx
+#: src/marketplace/offerings/steps/OverviewSummary.tsx
 msgid "Name is not valid."
 msgstr "Назва некоректна"
 
@@ -870,6 +850,7 @@ msgstr "Назва — обов'язкове поле."
 msgid "Name of your organization."
 msgstr "Назва вашої організації."
 
+#: src/administration/dashboard/StatisticsCards.tsx
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/routes.ts
@@ -887,9 +868,8 @@ msgstr "Назва вашої організації."
 msgid "Projects"
 msgstr "Проекти"
 
-#: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/administration/dashboard/StatisticsCards.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -900,10 +880,10 @@ msgstr "Проекти"
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
-#: src/project/ProjectResourcesList.tsx
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/resources/ResourcesList.tsx
 #: src/user/routes.ts
 msgid "Resources"
 msgstr "Ресурси"
@@ -926,13 +906,20 @@ msgstr "SLURM алокація"
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/expandable/utils.ts
+#: src/marketplace/offerings/update/attributes/EditAttributeDialog.tsx
+#: src/marketplace/offerings/update/attributes/EditCategoryDialog.tsx
+#: src/marketplace/offerings/update/components/EditComponentDialog.tsx
+#: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
+#: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
+#: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
+#: src/marketplace/offerings/update/options/EditOptionDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDialog.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
-#: src/providers/ProviderUpdateForm.tsx
 msgid "Save"
 msgstr "Зберегти"
 
@@ -956,15 +943,15 @@ msgstr "Не вдалося завантажити відомості про ш�
 msgid "Unable to resend invitation."
 msgstr "Неможливо повторно надіслати запрошення."
 
+#: src/administration/dashboard/StatisticsCards.tsx
 #: src/customer/routes.ts
 #: src/issues/routes.ts
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
-#: src/marketplace/resources/actions/CreateRobotAccountDialog.tsx
-#: src/marketplace/resources/details/RobotAccountExpandable.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
 #: src/rancher/cluster/tabs.ts
-#: src/slurm/tabs.ts
 msgid "Users"
 msgstr "Користувач"
 
