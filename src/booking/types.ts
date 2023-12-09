@@ -1,4 +1,18 @@
-import type { EventInput } from '@fullcalendar/core';
+type DateInput = Date | string | number | number[];
+
+export interface EventInput {
+  start?: DateInput;
+  end?: DateInput;
+  date?: DateInput;
+  allDay?: boolean;
+  id?: string | number;
+  groupId?: string | number;
+  title?: string;
+  url?: string;
+  editable?: boolean;
+  rendering?: string;
+  extendedProps?: any;
+}
 
 export interface BookingState {
   schedules: BookingProps[];

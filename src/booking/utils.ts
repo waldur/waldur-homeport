@@ -1,11 +1,10 @@
-import type { EventInput, EventApi } from '@fullcalendar/core';
 import { padStart, uniqueId } from 'lodash';
 import { Duration } from 'luxon';
 
 import { parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 
-import { BookedItem, BookingProps } from './types';
+import { BookedItem, BookingProps, EventInput } from './types';
 
 export interface BookingFilterStateOption {
   value: string;
@@ -26,7 +25,7 @@ export const createBooking = (
     allDay,
     title = '',
     extendedProps,
-  }: EventApi | EventInput | BookingProps,
+  }: EventInput | BookingProps,
   timeStamp?: string,
 ): BookingProps => ({
   id: id || `${uniqueId('booking')}-${timeStamp!}`,

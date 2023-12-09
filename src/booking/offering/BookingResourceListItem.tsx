@@ -1,4 +1,3 @@
-import { EventInput } from '@fullcalendar/core';
 import classNames from 'classnames';
 import { cloneDeep } from 'lodash';
 import { DateTime } from 'luxon';
@@ -7,7 +6,7 @@ import { Badge, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { bookingStateAliases } from '@waldur/booking/BookingStateField';
-import { BookingResource } from '@waldur/booking/types';
+import { BookingResource, EventInput } from '@waldur/booking/types';
 import { parseDate } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';

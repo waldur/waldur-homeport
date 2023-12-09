@@ -1,7 +1,7 @@
-import { formatDate } from '@fullcalendar/core';
 import { FunctionComponent } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
+import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 
 interface ProjectDetailsProps {
