@@ -168,16 +168,6 @@ Publish docker image for develop branch:
   script:
     - sh docker_push.sh develop
 
-Trigger docker image building for develop branch:
-  image: "registry.hpc.ut.ee/mirror/alpine/curl:8.2.0"
-  stage: release
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
-  script:
-    - echo "Project ID ${CI_PROJECT_ID}"
-    - curl -v -X POST -F "token=$CI_JOB_TOKEN" -F "ref=develop" https://code.opennodecloud.com/api/v4/projects/${CI_PROJECT_ID}/trigger/pipeline
-  before_script: []
-
 Lint docker image:
   extends: .Lint docker image template
   variables:
