@@ -13,7 +13,7 @@ export const CallManagementMenu = () => {
   const visible = isFeatureVisible(
     'marketplace.show_call_management_functionality',
   );
-  if (!visible || !customer.is_call_managing_organization) {
+  if (!visible || !customer || !customer.is_call_managing_organization) {
     return null;
   }
   return (
