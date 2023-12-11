@@ -120,6 +120,15 @@ export function getCheckoutSummaryComponent(offeringType: string) {
 }
 
 export function getOfferingTypes(): Option[] {
+  return Object.keys(REGISTRY)
+    .map((key) => ({
+      value: key,
+      label: REGISTRY[key].label,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+}
+
+export function getCreatableOfferings(): Option[] {
   const keys = Object.keys(REGISTRY).filter(
     (key) => !REGISTRY[key].disableOfferingCreation,
   );

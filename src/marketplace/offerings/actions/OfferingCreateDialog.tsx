@@ -16,7 +16,7 @@ import {
   createProviderOffering,
   getCategories,
 } from '@waldur/marketplace/common/api';
-import { getOfferingTypes } from '@waldur/marketplace/common/registry';
+import { getCreatableOfferings } from '@waldur/marketplace/common/registry';
 import { Category } from '@waldur/marketplace/types';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -36,7 +36,7 @@ export const OfferingCreateDialog = reduxForm<
     ['OfferingCreateDialog'],
     async () => {
       const categories: Category[] = await getCategories();
-      const offeringTypes = getOfferingTypes();
+      const offeringTypes = getCreatableOfferings();
       return { categories, offeringTypes };
     },
   );
