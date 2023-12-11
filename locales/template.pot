@@ -3386,10 +3386,6 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: src/customer/call-management/CallManagementPage.tsx
-msgid "Ended"
-msgstr ""
-
 #: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 msgid "Endpoint has been added successfully."
 msgstr ""

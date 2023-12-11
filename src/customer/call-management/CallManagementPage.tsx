@@ -1,7 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { parseDate } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
@@ -14,15 +13,6 @@ import { CallExpandableRow } from './CallExpandableRow';
 import { CallManagementTablePlaceholder } from './CallManagementTablePlaceholder';
 import { ProposalCallCreateButton } from './ProposalCallCreateButton';
 import { ProposalCallEditButton } from './ProposalCallEditButton';
-
-const getCutoff = (row: ProposalProtectedCall) => {
-  const endDate = parseDate(row.end_time);
-  if (endDate.diffNow().as('days') > 0) {
-    return endDate.toRelative() + ` (${endDate.toISODate()})`;
-  } else {
-    return translate('Ended') + ` (${endDate.toISODate()})`;
-  }
-};
 
 export const CallManagementPage: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
@@ -46,7 +36,7 @@ export const CallManagementPage: FunctionComponent = () => {
         {
           title: translate('Cutoff'),
           orderField: 'end_time',
-          render: ({ row }) => <>{getCutoff(row)}</>,
+          render: ({ row }) => <>{row.end_time}</>,
         },
         {
           title: translate('State'),
