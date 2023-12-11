@@ -16,7 +16,6 @@ import {
   getCategory,
   getProviderOffering,
   getPublicOffering,
-  getResource,
 } from '@waldur/marketplace/common/api';
 import { getTitle } from '@waldur/navigation/title';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
@@ -65,15 +64,6 @@ const getDataForFavoritePage = async (
     });
     subtitle = category.title;
     image = category.icon;
-  } else if (state.name.endsWith('resource-details') && params.resource_uuid) {
-    const resource = await getResource(params.resource_uuid, {
-      params: {
-        field: ['name', 'project_name', 'category_icon', 'offering_thumbnail'],
-      },
-    });
-    title = resource.project_name;
-    subtitle = resource.name;
-    image = resource.offering_thumbnail || resource.category_icon;
   } else if (isDescendantOf('profile', state)) {
     image = context.user?.image;
   } else if (isDescendantOf('admin', state)) {

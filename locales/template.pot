@@ -8634,10 +8634,6 @@ msgstr ""
 msgid "Resource description"
 msgstr ""
 
-#: src/resource/ResourceDetailsContainer.tsx
-msgid "Resource details"
-msgstr ""
-
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "Resource does not have any plan."
@@ -11794,10 +11790,6 @@ msgstr ""
 #: src/marketplace-checklist/UserChecklist.tsx
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "Unable to load questions and answers."
-msgstr ""
-
-#: src/resource/ResourceDetailsContainer.tsx
-msgid "Unable to load resource."
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignFooter.tsx
