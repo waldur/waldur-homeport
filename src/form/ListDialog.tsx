@@ -1,12 +1,15 @@
 import { Modal } from 'react-bootstrap';
 
-import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';
+import {
+  CustomComponentInputProps,
+  FilterOptions,
+  SelectDialogFieldColumn,
+  SelectDialogFieldChoice,
+} from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 import { ChoicesTable } from './ChoicesTable';
-import { SelectDialogFieldColumn } from './types';
-import { SelectDialogFieldChoice } from './types';
 
 interface ListDialogProps {
   title: string;

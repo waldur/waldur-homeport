@@ -13,14 +13,15 @@ export const CallManagementMenu = () => {
   const visible = isFeatureVisible(
     'marketplace.show_call_management_functionality',
   );
-  if (!visible || !customer || !customer.is_call_managing_organization) {
+  if (!visible || !customer?.is_call_managing_organization) {
     return null;
   }
   return (
     <MenuItem
       title={translate('Call management')}
-      state="#"
-      activeState="call"
+      state="organization.call-management"
+      activeState="organization.call-management"
+      params={{ uuid: customer.uuid }}
       child={false}
       iconPath={Icon}
     />

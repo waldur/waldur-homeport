@@ -27,7 +27,10 @@ export const ManagementMenu = () => {
           params={{ uuid: customer.uuid }}
           activeState={
             // The following state will highlight the "Add resource" menu item
-            ['marketplace-offering-customer'].includes(state.name)
+            [
+              'marketplace-offering-customer',
+              'organization.call-management',
+            ].includes(state.name)
               ? undefined
               : 'organization'
           }
