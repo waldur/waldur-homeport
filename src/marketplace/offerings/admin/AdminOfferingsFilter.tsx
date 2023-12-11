@@ -24,7 +24,11 @@ const PureAdminOfferingsFilter: FunctionComponent = () => (
     >
       <OrganizationAutocomplete />
     </TableFilterItem>
-    <TableFilterItem title={translate('Integration type')} name="type">
+    <TableFilterItem
+      title={translate('Integration type')}
+      name="offering_type"
+      badgeValue={(value) => value?.label}
+    >
       <OfferingTypeAutocomplete />
     </TableFilterItem>
   </>
