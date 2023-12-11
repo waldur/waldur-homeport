@@ -67,11 +67,6 @@ export const TemplateDetail: FunctionComponent = () => {
             visibleQuestions,
           ),
         );
-        router.stateService.go('resource-details', {
-          uuid: clusterUuid,
-          resource_type: 'Rancher.Cluster',
-          tab: 'applications',
-        });
       } catch (response) {
         dispatch(
           showErrorResponse(
