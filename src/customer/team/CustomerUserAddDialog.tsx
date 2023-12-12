@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { CustomerRoleGroup } from '@waldur/customer/team/CustomerRoleGroup';
 import { FormContainer } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { addCustomerUser } from '@waldur/permissions/api';
-import { RoleEnum } from '@waldur/permissions/enums';
-import { formatRole } from '@waldur/permissions/utils';
 import { UserListOption } from '@waldur/project/team/UserGroup';
 import { showSuccess } from '@waldur/store/notify';
 import { getCurrentUser } from '@waldur/user/UsersService';
@@ -23,6 +22,7 @@ import { OwnerExpirationTimeGroup } from './OwnerExpirationTimeGroup';
 
 interface CustomerUserAddFormData {
   user: User;
+  role: string;
   expiration_time: Date;
 }
 
@@ -43,7 +43,7 @@ export const CustomerUserAddDialog = reduxForm<
     await addCustomerUser({
       customer: customer.uuid,
       user: formData.user.uuid,
-      role: RoleEnum.CUSTOMER_OWNER,
+      role: formData.role,
       expiration_time: formData.expiration_time,
     });
     if (currentUser.uuid === formData.user.uuid) {
@@ -57,11 +57,7 @@ export const CustomerUserAddDialog = reduxForm<
   return (
     <form onSubmit={handleSubmit(callback)}>
       <Modal.Header>
-        <Modal.Title>
-          {translate('Add {role}', {
-            role: formatRole(RoleEnum.CUSTOMER_OWNER),
-          })}
-        </Modal.Title>
+        <Modal.Title>{translate('Add organization role')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <FormContainer submitting={submitting}>
@@ -77,6 +73,7 @@ export const CustomerUserAddDialog = reduxForm<
             components={{ Option: UserListOption }}
             required={true}
           />
+          <CustomerRoleGroup />
           <OwnerExpirationTimeGroup />
         </FormContainer>
       </Modal.Body>
