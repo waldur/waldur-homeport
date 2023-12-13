@@ -1,4 +1,4 @@
-import { post, deleteById, getFirst, getList, put } from '@waldur/core/api';
+import { post, deleteById, getFirst, put } from '@waldur/core/api';
 
 import { CallManagingOrganizationInfo, ProposalProtectedCall } from './types';
 
