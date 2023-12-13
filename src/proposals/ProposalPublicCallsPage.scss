@@ -1,0 +1,46 @@
+.public-calls-page {
+  position: relative;
+
+  .public-calls-hero__background {
+    position: absolute;
+    height: 500px;
+    width: 100%;
+    background-color: #2f4050;
+    background-image: url(./proposal-calls.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    margin-bottom: 20px;
+  }
+
+  .public-calls-hero__table {
+    display: table;
+    height: 350px;
+    width: 100%;
+
+    .public-calls-hero__cell {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .public-calls-hero__main {
+      max-width: 800px;
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+
+      > * {
+        position: relative;
+      }
+
+      h1 {
+        color: #fff;
+        font-weight: 500;
+        font-size: 38px;
+        margin-bottom: 20px;
+        text-transform: capitalize;
+      }
+    }
+  }
+}

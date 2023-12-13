@@ -5,10 +5,9 @@ import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 
 const Illustration = require('@waldur/images/table-placeholders/undraw_empty_xct9.svg');
 
-export const CallManagementTablePlaceholder: FunctionComponent = () => (
+export const PublicCallsTablePlaceholder: FunctionComponent = () => (
   <ImageTablePlaceholder
     illustration={Illustration}
     title={translate(`There are no proposal calls yet.`)}
-    description=""
   />
 );

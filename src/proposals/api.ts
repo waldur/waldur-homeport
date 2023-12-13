@@ -1,6 +1,6 @@
 import { post, deleteById, getFirst, put } from '@waldur/core/api';
 
-import { CallManagingOrganizationInfo, ProposalProtectedCall } from './types';
+import { CallManagingOrganizationInfo, ProposalCall } from './types';
 
 export const organizationCallManagingInfo = (customerUuid) =>
   getFirst<CallManagingOrganizationInfo>('/call-managing-organisations/', {
@@ -22,9 +22,9 @@ export const disableCallManagingOrganization = (uuid) =>
   deleteById('/call-managing-organisations/', uuid);
 
 export const createCall = (data) => {
-  return post<ProposalProtectedCall>('/proposal-protected-calls/', data);
+  return post<ProposalCall>('/proposal-protected-calls/', data);
 };
 
 export const updateCall = (data, uuid) => {
-  return put<ProposalProtectedCall>(`/proposal-protected-calls/${uuid}/`, data);
+  return put<ProposalCall>(`/proposal-protected-calls/${uuid}/`, data);
 };

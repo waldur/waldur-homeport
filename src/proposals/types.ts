@@ -9,7 +9,7 @@ export interface CallManagingOrganizationInfo {
   image?: string;
 }
 
-export interface ProposalProtectedCall {
+export interface ProposalCall {
   url: string;
   uuid: string;
   created: string;
@@ -25,4 +25,5 @@ export interface ProposalProtectedCall {
   customer_name: string;
   created_by: string;
   offerings: Offering[];
+  rounds: Array<{ uuid; start_time; end_time }>;
 }

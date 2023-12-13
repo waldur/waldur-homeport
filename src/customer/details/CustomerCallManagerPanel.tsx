@@ -9,14 +9,14 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse } from '@waldur/store/notify';
-import { getCustomer } from '@waldur/workspace/selectors';
-
 import {
   disableCallManagingOrganization,
   enableCallManagingOrganization,
   organizationCallManagingInfo,
-} from '../api';
+} from '@waldur/proposals/api';
+import { showErrorResponse } from '@waldur/store/notify';
+import { getCustomer } from '@waldur/workspace/selectors';
+
 import { CustomersService } from '../services/CustomersService';
 
 export const CustomerCallManagerPanel: FunctionComponent = () => {
