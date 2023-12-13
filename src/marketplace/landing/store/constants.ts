@@ -10,4 +10,3 @@ export const OFFERINGS_FETCH_SUCCESS =
   'waldur/marketplace/landing/OFFERINGS_FETCH_SUCCESS';
 export const OFFERINGS_FETCH_ERROR =
   'waldur/marketplace/landing/OFFERINGS_FETCH_ERROR';
-export const GOTO_OFFERING = 'waldur/marketplace/landing/GOTO_OFFERING';

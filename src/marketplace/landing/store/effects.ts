@@ -1,9 +1,7 @@
-import { triggerTransition } from '@uirouter/redux';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { queryClient } from '@waldur/Application';
 import * as api from '@waldur/marketplace/common/api';
-import { WORKSPACE_OFFERING_DETAILS } from '@waldur/marketplace/constants';
 import { Category } from '@waldur/marketplace/types';
 import {
   getWorkspace,
@@ -81,16 +79,7 @@ function* getOfferings() {
   }
 }
 
-function* gotoOffering(action) {
-  const offeringId = action.payload.offeringId;
-  const params = { offering_uuid: offeringId };
-  const workspace: WorkspaceType = yield select(getWorkspace);
-  const state = WORKSPACE_OFFERING_DETAILS[workspace];
-  yield put(triggerTransition(state, params));
-}
-
 export default function* () {
   yield takeEvery(constants.CATEGORIES_FETCH_START, getCategories);
   yield takeEvery(constants.OFFERINGS_FETCH_START, getOfferings);
-  yield takeEvery(constants.GOTO_OFFERING, gotoOffering);
 }

@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import {
   CategoriesListType,
   OfferingsListType,
@@ -21,7 +20,6 @@ import * as selectors from './store/selectors';
 interface LandingPageContainerProps {
   getCategories: () => void;
   getOfferings: () => void;
-  gotoOffering(offeringId: string): void;
   categories: CategoriesListType;
   offerings: OfferingsListType;
   customer: Customer;
@@ -43,27 +41,12 @@ export const LandingPageContainer: React.FC<LandingPageContainerProps> = (
     getOfferings();
   }, [getCategories, getOfferings]);
 
-  return (
-    <LandingPage
-      {...props}
-      loadOfferings={(query, prevOptions, { page }) =>
-        offeringsAutocomplete(
-          {
-            name: query,
-            allowed_customer_uuid: props.customer?.uuid,
-          },
-          prevOptions,
-          page,
-        )
-      }
-    />
-  );
+  return <LandingPage {...props} />;
 };
 
 const mapDispatchToProps = {
   getCategories: actions.categoriesFetchStart,
   getOfferings: actions.offeringsFetchStart,
-  gotoOffering: actions.gotoOffering,
 };
 
 const mapStateToProps = (state: RootState) => ({

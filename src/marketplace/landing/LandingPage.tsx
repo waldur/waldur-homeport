@@ -20,12 +20,6 @@ import './LandingPage.scss';
 interface LandingPageProps {
   categories: CategoriesListType;
   offerings: OfferingsListType;
-  loadOfferings: (
-    query: string,
-    prevOptions,
-    additional: { page: number },
-  ) => any;
-  gotoOffering: (offeringId: string) => void;
 }
 
 export const LandingPage = (props: LandingPageProps) => {
