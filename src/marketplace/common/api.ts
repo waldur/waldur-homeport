@@ -213,12 +213,6 @@ export const updateProviderOfferingAttributes = (offeringId, data) =>
 export const updateProviderOfferingOptions = (offeringId, data) =>
   post(`/marketplace-provider-offerings/${offeringId}/update_options/`, data);
 
-export const updateProviderOfferingComponents = (offeringId, data) =>
-  post(
-    `/marketplace-provider-offerings/${offeringId}/update_components/`,
-    data,
-  );
-
 export const removeProviderOfferingComponent = (offeringId, data) =>
   post(
     `/marketplace-provider-offerings/${offeringId}/remove_offering_component/`,

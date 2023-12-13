@@ -1472,7 +1472,6 @@ msgstr ""
 #: src/administration/roles/RoleForm.tsx
 #: src/booking/CancelAction.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
-#: src/form/ListDialog.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invitations/GroupinvitationButtons.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
@@ -8558,7 +8557,6 @@ msgstr ""
 msgid "Reserved slot by {name}"
 msgstr ""
 
-#: src/form/ListDialog.tsx
 #: src/notifications/NotificationForm.tsx
 #: src/vmware/actions/ResetAction.tsx
 msgid "Reset"
@@ -9268,7 +9266,6 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
-#: src/form/ListDialog.tsx
 #: src/form/themed-select.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
