@@ -12,9 +12,6 @@ export const getCallManagingOrganization = (customerUuid) =>
     customer_uuid: customerUuid,
   });
 
-export const getCallManagingOrganizations = () =>
-  getList<CallManagingOrganizationInfo>('/call-managing-organisations/');
-
 export const enableCallManagingOrganization = (payload) =>
   post<CallManagingOrganizationInfo>(
     '/call-managing-organisations/',
@@ -23,9 +20,6 @@ export const enableCallManagingOrganization = (payload) =>
 
 export const disableCallManagingOrganization = (uuid) =>
   deleteById('/call-managing-organisations/', uuid);
-
-export const removeCall = (uuid: string) =>
-  deleteById('/marketplace-categories/', uuid);
 
 export const createCall = (data) => {
   return post<ProposalProtectedCall>('/proposal-protected-calls/', data);
