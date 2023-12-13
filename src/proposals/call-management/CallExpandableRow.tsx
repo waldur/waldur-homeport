@@ -3,13 +3,12 @@ import { Col, Row } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { ProposalCall } from '@waldur/proposals/types';
 import { Field } from '@waldur/resource/summary';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
-import { ProposalProtectedCall } from '../types';
-
 export const CallExpandableRow: FunctionComponent<{
-  row: ProposalProtectedCall;
+  row: ProposalCall;
 }> = ({ row }) => (
   <Row>
     <Col sm={12} md={6}>

@@ -1,4 +1,4 @@
-import { ProposalProtectedCall } from './types';
+import { ProposalCall } from '@waldur/proposals/types';
 
 export const getCallRoundStrategyOptions = () => [
   { value: 1, label: 'One-time' },
@@ -15,7 +15,7 @@ export const getCallAllocationStrategyOptions = () => [
   { value: 2, label: 'Automatic based on review scoring' },
 ];
 
-export const getProposalCallInitialValues = (call: ProposalProtectedCall) => {
+export const getProposalCallInitialValues = (call: ProposalCall) => {
   return {
     ...call,
     round_strategy: getCallRoundStrategyOptions().find(

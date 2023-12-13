@@ -3,11 +3,10 @@ import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { ProposalCall } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
-
-import { ProposalProtectedCall } from '../types';
 
 import { CallExpandableRow } from './CallExpandableRow';
 import { CallManagementTablePlaceholder } from './CallManagementTablePlaceholder';
@@ -25,7 +24,7 @@ export const CallManagementPage: FunctionComponent = () => {
   });
 
   return (
-    <Table<ProposalProtectedCall>
+    <Table<ProposalCall>
       {...tableProps}
       columns={[
         {

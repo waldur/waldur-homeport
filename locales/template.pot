@@ -107,6 +107,10 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
+#: src/proposals/ProposalPublicCallsPage.tsx
+msgid "Access calls"
+msgstr ""
+
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 msgid "Access policies"
 msgstr ""
@@ -296,7 +300,7 @@ msgstr ""
 msgid "Add address"
 msgstr ""
 
-#: src/customer/call-management/ProposalCallCreateButton.tsx
+#: src/proposals/call-management/ProposalCallCreateButton.tsx
 msgid "Add call"
 msgstr ""
 
@@ -613,7 +617,8 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
-#: src/customer/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/PublicCallExpandableRow.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "Allocation strategy"
 msgstr ""
 
@@ -1418,9 +1423,9 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
-#: src/customer/call-management/CallManagementPage.tsx
-#: src/customer/routes.ts
 #: src/navigation/sidebar/CallManagementMenu.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/routes.ts
 msgid "Call management"
 msgstr ""
 
@@ -1431,6 +1436,10 @@ msgstr ""
 #: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Caller"
+msgstr ""
+
+#: src/proposals/ProposalPublicCallsPage.tsx
+msgid "Calls"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
@@ -2072,7 +2081,6 @@ msgstr ""
 #: src/administration/agreements/UserAgreementCreateButton.tsx
 #: src/broadcasts/BroadcastCreateButton.tsx
 #: src/broadcasts/BroadcastTemplateCreateButton.tsx
-#: src/customer/call-management/ProposalCallFormDialog.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
@@ -2097,6 +2105,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/CreateServerGroupAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 #: src/rancher/catalog/CatalogCreateButton.tsx
 #: src/rancher/cluster/hpas/HPACreateButton.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -2145,7 +2154,7 @@ msgstr ""
 msgid "Create application"
 msgstr ""
 
-#: src/customer/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "Create call"
 msgstr ""
 
@@ -2536,7 +2545,7 @@ msgstr ""
 msgid "Customers"
 msgstr ""
 
-#: src/customer/call-management/CallManagementPage.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
 msgid "Cutoff"
 msgstr ""
 
@@ -2782,7 +2791,6 @@ msgstr ""
 
 #: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/customer/call-management/ProposalCallFormDialog.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
@@ -2822,6 +2830,7 @@ msgstr ""
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -3115,8 +3124,6 @@ msgstr ""
 #: src/administration/agreements/UserAgreementsEditButton.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/broadcasts/BroadcastTemplateUpdateButton.tsx
-#: src/customer/call-management/ProposalCallEditButton.tsx
-#: src/customer/call-management/ProposalCallFormDialog.tsx
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
@@ -3158,6 +3165,8 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
 #: src/project/team/AddMemberButton.tsx
+#: src/proposals/call-management/ProposalCallEditButton.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -3252,9 +3261,9 @@ msgstr ""
 msgid "Edit user agreements"
 msgstr ""
 
-#: src/customer/call-management/ProposalCallFormDialog.tsx
 #: src/marketplace/category/admin/CategoryFromDialog.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "Edit {title}"
 msgstr ""
 
@@ -3360,6 +3369,10 @@ msgstr ""
 msgid "Encountered an empty component"
 msgstr ""
 
+#: src/proposals/ProposalPublicCallsPage.tsx
+msgid "End"
+msgstr ""
+
 #: src/booking/deploy/CustomRangeDatePicker.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
@@ -3384,8 +3397,8 @@ msgid "End date:"
 msgstr ""
 
 #: src/booking/deploy/CustomRangeDatePicker.tsx
-#: src/customer/call-management/ProposalCallFormDialog.tsx
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "End time"
 msgstr ""
 
@@ -5173,7 +5186,7 @@ msgstr ""
 msgid "Management offering"
 msgstr ""
 
-#: src/customer/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "Manager"
 msgstr ""
 
@@ -5189,6 +5202,7 @@ msgstr ""
 #: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/routes.ts
+#: src/proposals/ProposalPublicCallsPage.tsx
 msgid "Marketplace"
 msgstr ""
 
@@ -5496,8 +5510,6 @@ msgstr ""
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/broadcasts/BroadcastTemplateList.tsx
-#: src/customer/call-management/CallManagementPage.tsx
-#: src/customer/call-management/ProposalCallFormDialog.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -5563,6 +5575,9 @@ msgstr ""
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/ProposalPublicCallsPage.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -5786,7 +5801,8 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/customer/call-management/CallExpandableRow.tsx
+#: src/proposals/PublicCallExpandableRow.tsx
+#: src/proposals/call-management/CallExpandableRow.tsx
 msgid "Next cutoff"
 msgstr ""
 
@@ -6579,6 +6595,7 @@ msgstr ""
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/navigation/workspace/context-selector/GuestDropdown.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/ProposalPublicCallsPage.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -6974,7 +6991,7 @@ msgstr ""
 msgid "Pending provider review"
 msgstr ""
 
-#: src/customer/call-management/CallExpandableRow.tsx
+#: src/proposals/call-management/CallExpandableRow.tsx
 msgid "Pending review"
 msgstr ""
 
@@ -7908,6 +7925,10 @@ msgstr ""
 msgid "Public SSH keys will be injected into services that allow key-based access."
 msgstr ""
 
+#: src/proposals/ProposalPublicCallsPage.tsx
+msgid "Public calls"
+msgstr ""
+
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
 msgid "Public cloud"
 msgstr ""
@@ -8585,7 +8606,7 @@ msgstr ""
 msgid "Resource already has this plan."
 msgstr ""
 
-#: src/customer/call-management/CallExpandableRow.tsx
+#: src/proposals/call-management/CallExpandableRow.tsx
 msgid "Resource availability"
 msgstr ""
 
@@ -8849,8 +8870,9 @@ msgstr ""
 msgid "Review request"
 msgstr ""
 
-#: src/customer/call-management/CallExpandableRow.tsx
-#: src/customer/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/PublicCallExpandableRow.tsx
+#: src/proposals/call-management/CallExpandableRow.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "Review strategy"
 msgstr ""
 
@@ -8939,8 +8961,9 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
-#: src/customer/call-management/CallExpandableRow.tsx
-#: src/customer/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/PublicCallExpandableRow.tsx
+#: src/proposals/call-management/CallExpandableRow.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "Round strategy"
 msgstr ""
 
@@ -10039,6 +10062,7 @@ msgstr ""
 
 #: src/azure/vm/actions/StartAction.tsx
 #: src/openstack/openstack-instance/actions/StartAction.tsx
+#: src/proposals/ProposalPublicCallsPage.tsx
 #: src/vmware/actions/StartAction.tsx
 msgid "Start"
 msgstr ""
@@ -10052,8 +10076,8 @@ msgid "Start day of accounting"
 msgstr ""
 
 #: src/booking/deploy/CustomRangeDatePicker.tsx
-#: src/customer/call-management/ProposalCallFormDialog.tsx
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "Start time"
 msgstr ""
 
@@ -10069,7 +10093,6 @@ msgstr ""
 #: src/administration/notifications/HooksList.tsx
 #: src/booking/BookingsList.tsx
 #: src/broadcasts/BroadcastList.tsx
-#: src/customer/call-management/CallManagementPage.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invitations/InvitationsFilter.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
@@ -10128,6 +10151,8 @@ msgstr ""
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
+#: src/proposals/ProposalPublicCallsPage.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
@@ -10229,7 +10254,7 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-#: src/customer/call-management/CallExpandableRow.tsx
+#: src/proposals/call-management/CallExpandableRow.tsx
 msgid "Submissions"
 msgstr ""
 
@@ -10648,11 +10673,11 @@ msgstr ""
 msgid "The RAM quota is over the limit"
 msgstr ""
 
-#: src/customer/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "The call has been created."
 msgstr ""
 
-#: src/customer/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "The call has been updated."
 msgstr ""
 
@@ -10879,7 +10904,8 @@ msgstr ""
 msgid "There are no projects."
 msgstr ""
 
-#: src/customer/call-management/CallManagementTablePlaceholder.tsx
+#: src/proposals/PublicCallsTablePlaceholder.tsx
+#: src/proposals/call-management/CallManagementTablePlaceholder.tsx
 msgid "There are no proposal calls yet."
 msgstr ""
 
@@ -11347,7 +11373,7 @@ msgstr ""
 msgid "Unable to create billing component."
 msgstr ""
 
-#: src/customer/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "Unable to create call."
 msgstr ""
 
@@ -11720,7 +11746,7 @@ msgstr ""
 msgid "Unable to load locations."
 msgstr ""
 
-#: src/customer/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "Unable to load manager."
 msgstr ""
 
@@ -12155,7 +12181,7 @@ msgstr ""
 msgid "Unable to update billing component."
 msgstr ""
 
-#: src/customer/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "Unable to update call."
 msgstr ""
 
@@ -13100,7 +13126,7 @@ msgstr ""
 msgid "Virtual machines count"
 msgstr ""
 
-#: src/customer/call-management/CallManagementPage.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
 msgid "Visit"
 msgstr ""
 

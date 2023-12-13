@@ -13,16 +13,16 @@ import { TextField } from '@waldur/form/TextField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { getCustomer } from '@waldur/workspace/selectors';
-
-import { createCall, getCallManagingOrganization, updateCall } from '../api';
 import {
   getCallAllocationStrategyOptions,
   getCallReviewStrategyOptions,
   getCallRoundStrategyOptions,
   getProposalCallInitialValues,
-} from '../utils';
+} from '@waldur/proposals/utils';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { getCustomer } from '@waldur/workspace/selectors';
+
+import { createCall, getCallManagingOrganization, updateCall } from '../api';
 
 interface FormData {
   title: string;
