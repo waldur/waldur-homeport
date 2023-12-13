@@ -46,9 +46,9 @@ const OfferingDetailsPage = lazyComponent(
   () => import('./details/DetailsPage'),
   'OfferingDetailsPage',
 );
-const MarketplaceLanding = lazyComponent(
-  () => import('./landing/LandingPageContainer'),
-  'MarketplaceLanding',
+const LandingPage = lazyComponent(
+  () => import('./landing/LandingPage'),
+  'LandingPage',
 );
 const OfferingContainer = lazyComponent(
   () => import('./offerings/details/OfferingContainer'),
@@ -184,7 +184,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-landing-project',
     url: 'marketplace/',
-    component: MarketplaceLanding,
+    component: LandingPage,
     parent: 'project',
     data: {
       useExtraTabs: true,
@@ -194,7 +194,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-landing-customer',
     url: 'marketplace/',
-    component: MarketplaceLanding,
+    component: LandingPage,
     parent: 'organization',
     data: {
       useExtraTabs: true,
@@ -204,7 +204,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-landing-user',
     url: 'marketplace/',
-    component: MarketplaceLanding,
+    component: LandingPage,
     parent: 'profile',
     data: {
       useExtraTabs: true,
@@ -259,7 +259,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'public.marketplace-landing',
     url: '/marketplace/',
-    component: MarketplaceLanding,
+    component: LandingPage,
     data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
 

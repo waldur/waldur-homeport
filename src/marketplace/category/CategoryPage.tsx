@@ -2,9 +2,10 @@ import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { getCategories } from '@waldur/marketplace/landing/store/selectors';
 import { useExtraTabs, useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
+
+import { useLandingCategories } from '../landing/hooks';
 
 import { CategoryPageBar } from './CategoryPageBar';
 import { FilterBarContainer } from './filters/FilterBarContainer';
@@ -19,10 +20,14 @@ export const CategoryPage: FunctionComponent = () => {
   useFullPage();
   useTitle(translate('Marketplace offerings'));
 
-  const categories = useSelector(getCategories).items;
+  const categories = useLandingCategories();
   const categoryState = useSelector(categoryRouteState);
   const categoryTabs = useMemo(
-    () => getCategoryItems(categories, categoryState),
+    () =>
+      getCategoryItems(
+        categories.isFetched ? categories.data : [],
+        categoryState,
+      ),
     [categories, categoryState],
   );
   useExtraTabs(categoryTabs);
