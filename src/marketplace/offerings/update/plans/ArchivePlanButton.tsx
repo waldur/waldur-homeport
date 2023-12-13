@@ -2,11 +2,11 @@ import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { updateProviderOffering } from '@waldur/marketplace/common/api';
+import { archivePlan } from '@waldur/marketplace/common/api';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-export const ArchivePlanButton = ({ offering, plan, refetch }) => {
+export const ArchivePlanButton = ({ plan, refetch }) => {
   const dispatch = useDispatch();
   const handler = async () => {
     try {
@@ -24,9 +24,8 @@ export const ArchivePlanButton = ({ offering, plan, refetch }) => {
     } catch {
       return;
     }
-    const newPlans = offering.plans.filter((item) => item.uuid !== plan.uuid);
     try {
-      await updateProviderOffering(offering.uuid, { plans: newPlans });
+      await archivePlan(plan.uuid);
       await refetch();
       dispatch(showSuccess(translate('Plan has been archived.')));
     } catch (error) {
