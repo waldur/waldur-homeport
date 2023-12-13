@@ -5199,7 +5199,6 @@ msgstr ""
 
 #: src/administration/routes.ts
 #: src/marketplace/landing/LandingPage.tsx
-#: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/routes.ts
 #: src/proposals/ProposalPublicCallsPage.tsx
 msgid "Marketplace"

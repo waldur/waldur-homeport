@@ -1,10 +1,11 @@
+import { FC, useMemo } from 'react';
+
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
-import {
-  CategoriesListType,
-  OfferingsListType,
-} from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
+import { useExtraTabs, useFullPage } from '@waldur/navigation/context';
+import { useTitle } from '@waldur/navigation/title';
+import { useTabs } from '@waldur/navigation/useTabs';
 
 import { AllCategoriesLink } from '../links/AllCategoriesLink';
 
@@ -12,17 +13,22 @@ import { CategoriesList } from './CategoriesList';
 import { DeploymentIntroduction } from './DeploymentIntroduction';
 import { FooterSection } from './FooterSection';
 import { HeroSection } from './HeroSection';
+import { useLandingCategories, useLandingOfferings } from './hooks';
 import { OfferingsGroup } from './OfferingsGroup';
 import { ProvidersBrands } from './ProvidersBrands';
 
 import './LandingPage.scss';
 
-interface LandingPageProps {
-  categories: CategoriesListType;
-  offerings: OfferingsListType;
-}
+export const LandingPage: FC<{}> = () => {
+  useFullPage();
+  useTitle(translate('Marketplace'));
 
-export const LandingPage = (props: LandingPageProps) => {
+  const tabs = useTabs();
+  const extraTabs = useMemo(() => tabs.slice(0, 1), [tabs]);
+  useExtraTabs(extraTabs);
+  const categories = useLandingCategories();
+  const offerings = useLandingOfferings();
+
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   return (
@@ -36,15 +42,15 @@ export const LandingPage = (props: LandingPageProps) => {
         </AllCategoriesLink>
       </HeroSection>
       <div className="container-xxl mb-20">
-        <CategoriesList {...props.categories} />
+        <CategoriesList {...categories} />
         <ProvidersBrands />
         <h2 className="mb-10 text-center">{translate('Featured offerings')}</h2>
-        <OfferingsGroup {...props.offerings} />
+        <OfferingsGroup {...offerings} />
       </div>
       {showExperimentalUiComponents && <DeploymentIntroduction />}
       <div className="container-xxl mb-20">
         <h2 className="mb-10 text-center">{translate('Recent offerings')}</h2>
-        <OfferingsGroup {...props.offerings} />
+        <OfferingsGroup {...offerings} />
       </div>
       {showExperimentalUiComponents && <FooterSection />}
     </div>

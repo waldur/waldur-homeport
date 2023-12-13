@@ -1,23 +1,23 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { Stack } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { router } from '@waldur/router';
 
-import { getCategories } from '../landing/store/selectors';
+import { useLandingCategories } from '../landing/hooks';
 import { isExperimentalUiComponentsVisible } from '../utils';
 
 import './HeroSection.scss';
 
 export const HeroSection: FunctionComponent = () => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
-  const categories = useSelector(getCategories);
-  const currentCategoryUuid = router.globals.params.category_uuid;
+  const categories = useLandingCategories();
+  const { params } = useCurrentStateAndParams();
+  const currentCategoryUuid = params.category_uuid;
   const currentCategory = useMemo(
-    () => categories.items.find((item) => item.uuid === currentCategoryUuid),
-    [categories],
+    () => categories.data?.find((item) => item.uuid === currentCategoryUuid),
+    [categories, currentCategoryUuid],
   );
 
   return (
@@ -25,9 +25,9 @@ export const HeroSection: FunctionComponent = () => {
       <div className="category-hero__background-left">
         <div className="category-hero__table">
           <div className="category-hero__main">
-            {categories.loading ? (
+            {categories.isLoading ? (
               <LoadingSpinner />
-            ) : !categories.loaded || !currentCategory ? (
+            ) : categories.isError || !currentCategory ? (
               <h3>{translate('Unable to load category')}</h3>
             ) : (
               <>
