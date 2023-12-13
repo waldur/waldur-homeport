@@ -5541,7 +5541,6 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
-#: src/notifications/NotificationTemplateList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/actions/EditDialog.tsx
@@ -6830,10 +6829,6 @@ msgstr ""
 
 #: src/user/events.ts
 msgid "Password has been changed for user {affected_user_link}."
-msgstr ""
-
-#: src/notifications/NotificationTemplateList.tsx
-msgid "Path"
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingStateActions.tsx
@@ -12354,6 +12349,7 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
+#: src/auth/SigninForm.tsx
 #: src/auth/callbacks/OauthLoginCompleted.tsx
 msgid "Unknown error"
 msgstr ""
@@ -13658,10 +13654,6 @@ msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 msgid "networks"
-msgstr ""
-
-#: src/notifications/NotificationTemplateList.tsx
-msgid "notification templates"
 msgstr ""
 
 #: src/notifications/NotificationList.tsx

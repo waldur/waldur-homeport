@@ -23,7 +23,15 @@ const signin = async (values: FormData) => {
     await AuthService.signin(values.username, values.password);
     await AuthService.redirectOnSuccess();
   } catch (error) {
-    throw new SubmissionError({ _error: format(error) });
+    let renderedError;
+    try {
+      renderedError = JSON.stringify(format(error));
+    } catch {
+      renderedError = translate('Unknown error');
+    }
+    throw new SubmissionError({
+      _error: renderedError,
+    });
   }
 };
 
@@ -58,7 +66,7 @@ export const SigninForm = reduxForm<FormData>({ form: FORM_ID })(
         )}
         {translate('Login')}
       </button>
-      {error && <p className="text-danger">{JSON.stringify(error)}</p>}
+      {error && <p className="text-danger">{error}</p>}
     </form>
   ),
 );
