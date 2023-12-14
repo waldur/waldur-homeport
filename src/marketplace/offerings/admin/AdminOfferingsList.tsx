@@ -1,17 +1,10 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 
 import { RootState } from '@waldur/store/reducers';
 import { connectTable } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
-import {
-  getCustomer,
-  getUser,
-  isOwnerOrStaff,
-  isSupportOnly,
-} from '@waldur/workspace/selectors';
 
 import { TableComponent, TableOptions } from '../list/OfferingsList';
 
@@ -43,20 +36,7 @@ export const Options: TableOptionsType = {
   mapPropsToFilter,
 };
 
-const showOfferingListActions = createSelector(
-  isOwnerOrStaff,
-  getCustomer,
-  (ownerOrStaff, customer) =>
-    customer && customer.is_service_provider && ownerOrStaff,
-);
-
 const mapStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-  user: getUser(state),
-  isOwnerOrStaff: isOwnerOrStaff(state),
-  hideOfferingItemActions: isSupportOnly(state),
-  showOfferingListActions: showOfferingListActions(state),
-  actionsDisabled: !isOwnerOrStaff(state),
   filter: getFormValues(ADMIN_OFFERINGS_FILTER_FORM_ID)(state),
   hasOrganizationColumn: true,
 });
