@@ -222,7 +222,6 @@ export const states: StateDeclaration[] = [
     url: 'permission-requests/',
     component: UserPermissionRequestsListContainer,
     data: {
-      feature: 'invitations.show_group_invitations',
       breadcrumb: () => translate('Permission requests'),
     },
   },

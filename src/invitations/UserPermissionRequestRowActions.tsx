@@ -4,10 +4,9 @@ import { useSelector } from 'react-redux';
 
 import { UserPermissionRequestApproveButton } from '@waldur/invitations/UserPermissionRequestApproveButton';
 import { UserPermissionRequestRejectButton } from '@waldur/invitations/UserPermissionRequestRejectButton';
-import {
-  getUser,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-} from '@waldur/workspace/selectors';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
+import { getUser } from '@waldur/workspace/selectors';
 
 interface UserPermissionRequestRowActionsProps {
   refetch;
@@ -17,8 +16,14 @@ interface UserPermissionRequestRowActionsProps {
 export const UserPermissionRequestRowActions: FunctionComponent<UserPermissionRequestRowActionsProps> =
   ({ row, refetch }) => {
     const user = useSelector(getUser);
-    const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-    return row.state === 'pending' && (isOwnerOrStaff || user.is_support) ? (
+    const canManageRequest =
+      hasPermission(user, {
+        permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
+        customerId: row.customer_uuid,
+        projectId: row.project_uuid,
+      }) || user.is_support;
+
+    return row.state === 'pending' && canManageRequest ? (
       <ButtonGroup>
         <UserPermissionRequestApproveButton
           permissionRequest={row}
