@@ -48,7 +48,7 @@ export function createFetcher(
       queryKey: ['table', url, params],
       queryFn: () =>
         parseResponse(url, params, { ...options, ...request.options }),
-      staleTime: request.options.staleTime,
+      staleTime: request.options?.staleTime,
     });
   };
 }
