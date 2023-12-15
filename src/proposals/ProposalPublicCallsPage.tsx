@@ -4,6 +4,7 @@ import { useTitle } from 'react-use';
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { useMarketplacePublicTabs } from '@waldur/marketplace/utils';
 import { useFullPage } from '@waldur/navigation/context';
 import { ProposalCall } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
@@ -18,6 +19,8 @@ import './ProposalPublicCallsPage.scss';
 export const ProposalPublicCallsPage: FunctionComponent = () => {
   useFullPage();
   useTitle(translate('Marketplace'));
+
+  useMarketplacePublicTabs();
 
   const tableProps = useTable({
     table: 'PublicCallsList',

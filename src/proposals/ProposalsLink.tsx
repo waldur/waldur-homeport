@@ -1,47 +1,29 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Link } from '@waldur/core/Link';
-import { WORKSPACE_CATEGORY } from '@waldur/marketplace/constants';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
-interface OwnProps {
-  category_uuid: string;
-  className?: string;
-}
+import { WORKSPACE_STATE_PROPOSALS } from './constants';
 
-export const useCategoryLink = () => {
+export const useProposalsLink = () => {
   const { state: currentState, params } = useCurrentStateAndParams();
   const workspace = useSelector(getWorkspace);
   return useMemo(() => {
-    let state = 'public.marketplace-category';
+    let state = 'public.public-proposals';
     let stateParams;
     if (
       !['reporting', 'admin', 'support', 'public'].some((parent) =>
         isDescendantOf(parent, currentState),
       )
     ) {
-      state = WORKSPACE_CATEGORY[workspace] || 'public.marketplace-category';
+      state = WORKSPACE_STATE_PROPOSALS[workspace] || 'public.public-proposals';
       if (workspace === ORGANIZATION_WORKSPACE && params.uuid) {
         stateParams = { uuid: params.uuid };
       }
     }
     return { state, stateParams };
   }, [workspace, currentState, params]);
-};
-
-export const CategoryLink: React.FC<OwnProps> = (props) => {
-  const { state, stateParams } = useCategoryLink();
-  return (
-    <Link
-      state={state}
-      params={{ ...stateParams, category_uuid: props.category_uuid }}
-      className={props.className}
-    >
-      {props.children}
-    </Link>
-  );
 };
