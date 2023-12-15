@@ -1,11 +1,13 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { useExtraTabs, useFullPage } from '@waldur/navigation/context';
+import {
+  isExperimentalUiComponentsVisible,
+  useMarketplacePublicTabs,
+} from '@waldur/marketplace/utils';
+import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
-import { useTabs } from '@waldur/navigation/useTabs';
 
 import { AllCategoriesLink } from '../links/AllCategoriesLink';
 
@@ -23,9 +25,8 @@ export const LandingPage: FC<{}> = () => {
   useFullPage();
   useTitle(translate('Marketplace'));
 
-  const tabs = useTabs();
-  const extraTabs = useMemo(() => tabs.slice(0, 1), [tabs]);
-  useExtraTabs(extraTabs);
+  useMarketplacePublicTabs();
+
   const categories = useLandingCategories();
   const offerings = useLandingOfferings();
 

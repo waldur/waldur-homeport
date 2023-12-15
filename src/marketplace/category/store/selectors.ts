@@ -2,14 +2,8 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { translate } from '@waldur/i18n';
-import { WORKSPACE_CATEGORY } from '@waldur/marketplace/constants';
 import { RootState } from '@waldur/store/reducers';
-import {
-  getCustomer,
-  getProject,
-  getUser,
-  getWorkspace,
-} from '@waldur/workspace/selectors';
+import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { prepareAttributeSections } from '../utils';
 
@@ -33,15 +27,6 @@ export const isOfferingsLoaded = (state: RootState) =>
 
 export const getOrganizationGroups = (state: RootState) =>
   state.marketplace.organizationGroups;
-
-export const categoryRouteState = (state: RootState) => {
-  const workspace = getWorkspace(state);
-  const user = getUser(state);
-  if (!user) {
-    return 'public.marketplace-category';
-  }
-  return WORKSPACE_CATEGORY[workspace] || 'public.marketplace-category';
-};
 
 export const formatAttributesFilter = (query) => {
   if (query) {

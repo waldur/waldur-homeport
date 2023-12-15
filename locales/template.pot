@@ -2565,6 +2565,7 @@ msgstr ""
 #: src/issues/routes.ts
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
+#: src/marketplace/utils.ts
 #: src/project/routes.ts
 #: src/reporting/routes.ts
 #: src/user/routes.ts
@@ -7823,6 +7824,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 msgid "Propagated"
+msgstr ""
+
+#: src/marketplace/utils.ts
+msgid "Proposals"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx

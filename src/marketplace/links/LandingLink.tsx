@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
@@ -13,23 +13,28 @@ interface OwnProps {
   className?: string;
 }
 
-export const LandingLink: FunctionComponent<OwnProps> = (props) => {
+export const useMarketplaceLandingLink = () => {
   const { state: currentState, params } = useCurrentStateAndParams();
   const workspace = useSelector(getWorkspace);
-  let state = WORKSPACE_LANDING[workspace] || 'public.marketplace-landing';
-  let stateParams;
-  if (workspace === ORGANIZATION_WORKSPACE && params.uuid) {
-    stateParams = { uuid: params.uuid };
-  }
-  if (!state || !stateParams) {
+  return useMemo(() => {
+    let state = 'public.marketplace-landing';
+    let stateParams;
     if (
-      isDescendantOf('reporting', currentState) ||
-      isDescendantOf('admin', currentState) ||
-      isDescendantOf('support', currentState)
+      !['reporting', 'admin', 'support', 'public'].some((parent) =>
+        isDescendantOf(parent, currentState),
+      )
     ) {
-      state = 'public.marketplace-landing';
+      state = WORKSPACE_LANDING[workspace] || 'public.marketplace-landing';
+      if (workspace === ORGANIZATION_WORKSPACE && params.uuid) {
+        stateParams = { uuid: params.uuid };
+      }
     }
-  }
+    return { state, stateParams };
+  }, [workspace, currentState, params]);
+};
+
+export const LandingLink: FunctionComponent<OwnProps> = (props) => {
+  const { state, stateParams } = useMarketplaceLandingLink();
   return (
     <Link state={state} className={props.className} params={stateParams}>
       {props.children}

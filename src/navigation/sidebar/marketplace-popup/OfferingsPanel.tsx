@@ -10,7 +10,7 @@ import { TextWithoutFormatting } from '@waldur/core/TextWithoutFormatting';
 import { Tip } from '@waldur/core/Tooltip';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { offeringCategoryStateSelector } from '@waldur/marketplace/links/CategoryLink';
+import { useCategoryLink } from '@waldur/marketplace/links/CategoryLink';
 import { useOfferingDetailsLink } from '@waldur/marketplace/links/OfferingLink';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
@@ -92,7 +92,7 @@ export const OfferingsPanel: FunctionComponent<{
   const [selectedOffering, selectOffering] = useState<Offering>();
   const customer = useSelector(getCustomer);
 
-  const offeringCategoryState = useSelector(offeringCategoryStateSelector);
+  const { state: categoryState } = useCategoryLink();
   const { state, stateParams } = useOfferingDetailsLink();
   const router = useRouter();
 
@@ -122,7 +122,7 @@ export const OfferingsPanel: FunctionComponent<{
             <div className="text-center">
               <span data-kt-menu-dismiss="true">
                 <Link
-                  state={offeringCategoryState}
+                  state={categoryState}
                   params={{
                     uuid: customer.uuid,
                     category_uuid: category?.uuid,
