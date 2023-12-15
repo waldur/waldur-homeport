@@ -52,10 +52,10 @@ export const UnifiedSidebar = () => {
           <ManagementMenu />
           <ResourcesMenu />
           <ProviderMenu />
+          <CallManagementMenu />
           <ReportingMenu />
           <SupportMenu />
           <AdminMenu />
-          <CallManagementMenu />
         </>
       ) : (
         <MenuItem title={translate('Login')} state="login" />
