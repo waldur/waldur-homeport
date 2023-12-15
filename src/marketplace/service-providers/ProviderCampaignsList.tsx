@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -8,14 +8,19 @@ import { translate } from '@waldur/i18n';
 import { CampaignCreateButton } from '@waldur/marketplace/service-providers/CampaignCreateButton';
 import { ProviderCampaignActions } from '@waldur/marketplace/service-providers/ProviderCampaignActions';
 import { ProviderCampaignFilter } from '@waldur/marketplace/service-providers/ProviderCampaignFilter';
+import { ProviderCampaignResourceExpandable } from '@waldur/marketplace/service-providers/ProviderCampaignResourceExpandable';
 import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table/index';
+import { connectTable, createFetcher, Table } from '@waldur/table/index';
 
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 
 import { CampaignStateIndicator } from './CampaignStateIndicator';
 
 const TableComponent: FunctionComponent<any> = (props) => {
+  const ExpandableRow = useCallback(
+    ({ row }) => <ProviderCampaignResourceExpandable campaign={row} />,
+    [],
+  );
   return (
     <Table
       {...props}
@@ -48,6 +53,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       actions={<CampaignCreateButton refetch={props.fetch} />}
       hasQuery={true}
       hoverableRow={ProviderCampaignActions}
+      expandableRow={ExpandableRow}
     />
   );
 };
