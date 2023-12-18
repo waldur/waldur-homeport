@@ -13212,10 +13212,6 @@ msgstr ""
 msgid "Virtual machines count"
 msgstr ""
 
-#: src/proposals/call-management/CallManagementPage.tsx
-msgid "Visit"
-msgstr ""
-
 #: src/openstack/openstack-instance/actions/AttachVolumeDialog.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 #: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
