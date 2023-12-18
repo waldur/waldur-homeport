@@ -13,6 +13,11 @@ const ProposalPublicCallsPage = lazyComponent(
   'ProposalPublicCallsPage',
 );
 
+const PublicCallDetailsContainer = lazyComponent(
+  () => import('./details/PublicCallDetailsContainer'),
+  'PublicCallDetailsContainer',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'organization.call-management',
@@ -24,27 +29,34 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'public-proposals-project',
-    url: 'proposals/',
+    name: 'public-calls-project',
+    url: 'calls/',
     component: ProposalPublicCallsPage,
     parent: 'project',
   },
   {
-    name: 'public-proposals-customer',
-    url: 'proposals/',
+    name: 'public-calls-customer',
+    url: 'calls/',
     component: ProposalPublicCallsPage,
     parent: 'organization',
   },
   {
-    name: 'public-proposals-user',
-    url: 'proposals/',
+    name: 'public-calls-user',
+    url: 'calls/',
     component: ProposalPublicCallsPage,
     parent: 'profile',
   },
   {
-    name: 'public.public-proposals',
-    url: '/proposals/',
+    name: 'public.public-calls',
+    url: '/calls/',
     component: ProposalPublicCallsPage,
+    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+  },
+
+  {
+    name: 'public.proposal-public-call',
+    url: '/proposal-public-call/:uuid/',
+    component: PublicCallDetailsContainer,
     data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
   },
 ];

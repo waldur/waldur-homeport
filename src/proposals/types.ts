@@ -9,6 +9,12 @@ export interface CallManagingOrganizationInfo {
   image?: string;
 }
 
+export interface ProposalCallRound {
+  uuid: string;
+  start_time: string;
+  end_time: string;
+}
+
 export interface ProposalCall {
   url: string;
   uuid: string;
@@ -25,5 +31,5 @@ export interface ProposalCall {
   customer_name: string;
   created_by: string;
   offerings: Offering[];
-  rounds: Array<{ uuid; start_time; end_time }>;
+  rounds: ProposalCallRound[];
 }

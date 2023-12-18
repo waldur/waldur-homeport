@@ -1,4 +1,8 @@
-import { ProposalCall } from '@waldur/proposals/types';
+import { DateTime } from 'luxon';
+
+import { parseDate } from '@waldur/core/dateUtils';
+import { translate } from '@waldur/i18n';
+import { ProposalCall, ProposalCallRound } from '@waldur/proposals/types';
 
 export const getCallRoundStrategyOptions = () => [
   { value: 1, label: 'One-time' },
@@ -28,4 +32,15 @@ export const getProposalCallInitialValues = (call: ProposalCall) => {
       (op) => op.label === call.allocation_strategy,
     ).value,
   };
+};
+
+export const checkRoundDate = (round: ProposalCallRound) => {
+  const now = DateTime.now();
+  const start = parseDate(round.start_time);
+  if (start > now) return { label: translate('Scheduled'), code: 1 };
+  else {
+    const end = parseDate(round.end_time);
+    if (end < now) return { label: translate('Ended'), code: -1 };
+    else return { label: translate('Open'), code: 0 };
+  }
 };
