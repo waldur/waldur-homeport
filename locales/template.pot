@@ -619,6 +619,7 @@ msgstr ""
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/details/CallDetailsCard.tsx
 msgid "Allocation strategy"
 msgstr ""
 
@@ -723,6 +724,10 @@ msgstr ""
 
 #: src/rancher/cluster/tabs.ts
 msgid "Applications"
+msgstr ""
+
+#: src/proposals/details/PublicCallDetailsHero.tsx
+msgid "Apply to round"
 msgstr ""
 
 #: src/invitations/UserPermissionRequestApproveButton.tsx
@@ -1423,6 +1428,14 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
+#: src/proposals/details/PublicCallDetailsHero.tsx
+msgid "Call"
+msgstr ""
+
+#: src/proposals/details/PublicCallDetailsContainer.tsx
+msgid "Call details"
+msgstr ""
+
 #: src/navigation/sidebar/CallManagementMenu.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/routes.ts
@@ -1431,6 +1444,10 @@ msgstr ""
 
 #: src/customer/details/CustomerCallManagerPanel.tsx
 msgid "Call manager"
+msgstr ""
+
+#: src/proposals/details/CallRoundsDialog.tsx
+msgid "Call rounds"
 msgstr ""
 
 #: src/issues/IssueSummary.tsx
@@ -2649,6 +2666,10 @@ msgstr ""
 msgid "Deactivating"
 msgstr ""
 
+#: src/proposals/details/CallDetailsCard.tsx
+msgid "Deadline"
+msgstr ""
+
 #: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
 msgid "Dedicated"
 msgstr ""
@@ -2831,6 +2852,8 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/details/CallDescriptionCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -2911,6 +2934,8 @@ msgstr ""
 #: src/marketplace/orders/details/DetailsSection.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
 #: src/project/ProjectDetailsButton.tsx
+#: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
@@ -3033,6 +3058,11 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
+#: src/proposals/details/CallDocumentsCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
+msgid "Documents"
+msgstr ""
+
 #: src/customer/list/OrganizationDetails.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Domain"
@@ -3055,6 +3085,7 @@ msgstr ""
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/details/ResourceComponentsDialog.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
+#: src/proposals/details/CallRoundsDialog.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/user/support/UserDetailsDialog.tsx
 msgid "Done"
@@ -3400,6 +3431,10 @@ msgstr ""
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "End time"
+msgstr ""
+
+#: src/proposals/utils.ts
+msgid "Ended"
 msgstr ""
 
 #: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
@@ -5225,6 +5260,10 @@ msgstr ""
 msgid "Max # of snapshots"
 msgstr ""
 
+#: src/proposals/details/CallOfferingsCard.tsx
+msgid "Max allocation"
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 msgid "Max number of VM snapshots"
@@ -5353,6 +5392,10 @@ msgstr ""
 
 #: src/rancher/cluster/hpas/utils.ts
 msgid "MiB"
+msgstr ""
+
+#: src/proposals/details/CallOfferingsCard.tsx
+msgid "Min allocation"
 msgstr ""
 
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -5809,6 +5852,10 @@ msgstr ""
 msgid "Next hop (IP)"
 msgstr ""
 
+#: src/proposals/details/CallDetailsHeaderBody.tsx
+msgid "Next round ends in"
+msgstr ""
+
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Next trigger at"
 msgstr ""
@@ -5964,6 +6011,10 @@ msgstr ""
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/form/AsyncSelectField.tsx
 msgid "No results found"
+msgstr ""
+
+#: src/proposals/details/CallRoundsList.tsx
+msgid "No rounds"
 msgstr ""
 
 #: src/issues/feedback/UserAutocomplete.tsx
@@ -6273,6 +6324,7 @@ msgstr ""
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/marketplace/resources/details/OfferingDetailsField.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/proposals/details/CallOfferingsCard.tsx
 msgid "Offering name"
 msgstr ""
 
@@ -6328,6 +6380,8 @@ msgstr ""
 #: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
 #: src/providers/dashboard/ProviderDashboard.tsx
 msgid "Offerings"
 msgstr ""
@@ -6413,6 +6467,7 @@ msgstr ""
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/list/IssuesFilter.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/proposals/utils.ts
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Open"
 msgstr ""
@@ -6484,6 +6539,10 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/EditDialog.tsx
 #: src/openstack/openstack-volume/marketplace.ts
 msgid "OpenStack volume"
+msgstr ""
+
+#: src/proposals/details/CallDetailsCard.tsx
+msgid "Opening date"
 msgstr ""
 
 #: src/marketplace/offerings/update/options/AddOptionDialog.tsx
@@ -7903,6 +7962,7 @@ msgstr ""
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/navigation/sidebar/ProviderMenu.tsx
+#: src/proposals/details/CallOfferingsCard.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Provider"
@@ -7944,6 +8004,10 @@ msgstr ""
 
 #: src/marketplace/offerings/hooks.ts
 msgid "Public list"
+msgstr ""
+
+#: src/proposals/details/CallDetailsCard.tsx
+msgid "Publication date"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/GoogleCalendarActions.tsx
@@ -8156,6 +8220,10 @@ msgstr ""
 
 #: src/rancher/cluster/WorkloadActions.tsx
 msgid "Redeploy"
+msgstr ""
+
+#: src/proposals/details/CallDetailsCard.tsx
+msgid "Reference"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingAttributesSection.tsx
@@ -8875,6 +8943,7 @@ msgstr ""
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/details/CallDetailsCard.tsx
 msgid "Review strategy"
 msgstr ""
 
@@ -8966,6 +9035,7 @@ msgstr ""
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/details/CallDetailsCard.tsx
 msgid "Round strategy"
 msgstr ""
 
@@ -9120,6 +9190,10 @@ msgstr ""
 msgid "Schedule termination of existing resources"
 msgstr ""
 
+#: src/proposals/utils.ts
+msgid "Scheduled"
+msgstr ""
+
 #: src/marketplace/offerings/update/integration/EditSchedulesDialog.tsx
 msgid "Schedules have been updated successfully."
 msgstr ""
@@ -9246,11 +9320,16 @@ msgstr ""
 msgid "See all offerings"
 msgstr ""
 
+#: src/proposals/details/CallShowAllRounds.tsx
+msgid "See all rounds"
+msgstr ""
+
 #: src/booking/offering/BookingResourceListItem.tsx
 msgid "See more"
 msgstr ""
 
 #: src/marketplace/landing/FooterSection.tsx
+#: src/proposals/details/PublicCallDetailsHero.tsx
 msgid "See offerings"
 msgstr ""
 
@@ -10154,6 +10233,7 @@ msgstr ""
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/proposals/ProposalPublicCallsPage.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/details/CallOfferingsCard.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
@@ -10189,6 +10269,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/proposals/details/CallDetailsCard.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -11608,6 +11689,10 @@ msgstr ""
 
 #: src/booking/offering/OfferingBookingResourcesCalendarContainer.tsx
 msgid "Unable to load booking offerings."
+msgstr ""
+
+#: src/proposals/details/PublicCallDetailsContainer.tsx
+msgid "Unable to load call details."
 msgstr ""
 
 #: src/marketplace/offerings/import/SelectCategoryTab.tsx
