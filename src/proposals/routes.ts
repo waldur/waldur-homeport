@@ -24,6 +24,7 @@ export const states: StateDeclaration[] = [
     url: 'call-management/',
     component: CallManagementPage,
     data: {
+      feature: 'marketplace.show_call_management_functionality',
       breadcrumb: () => translate('Call management'),
     },
   },
