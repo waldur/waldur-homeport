@@ -1,7 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ProposalCall } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
@@ -46,12 +45,7 @@ export const CallManagementPage: FunctionComponent = () => {
       verboseName={translate('Call management')}
       initialSorting={{ field: 'end_time', mode: 'desc' }}
       hoverableRow={({ row }) => (
-        <>
-          <ProposalCallEditButton row={row} refetch={tableProps.fetch} />
-          <Link state="#" className="btn btn-dark ms-3">
-            {translate('Visit')}
-          </Link>
-        </>
+        <ProposalCallEditButton row={row} refetch={tableProps.fetch} />
       )}
       hasQuery={true}
       actions={<ProposalCallCreateButton refetch={tableProps.fetch} />}
