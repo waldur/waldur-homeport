@@ -15,6 +15,7 @@ import {
   parseResultCount,
   put,
 } from '@waldur/core/api';
+import { GeolocationPoint } from '@waldur/map/types';
 import { SubmitCartRequest } from '@waldur/marketplace/cart/types';
 import {
   OrderResponse,
@@ -189,6 +190,12 @@ export const submitReport = (resourceId: string, payload) =>
 
 export const setBackendId = (resourceId: string, payload) =>
   post(`/marketplace-resources/${resourceId}/set_backend_id/`, payload);
+
+export const updateOfferingLocation = (offeringId, data) =>
+  post<GeolocationPoint>(
+    `/marketplace-provider-offerings/${offeringId}/update_location/`,
+    data,
+  );
 
 export const uploadProviderOfferingHeroImage = (offeringId, image) =>
   sendForm<Offering>(

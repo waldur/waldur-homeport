@@ -11,15 +11,10 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import './SetLocationDialog.scss';
 import { GeolocationPoint } from './types';
 
-interface LocationData extends GeolocationPoint {
-  uuid: string;
-  name: string;
-}
-
 interface SetLocationDialogProps {
   resolve: {
-    data: LocationData;
-    setLocationFn: (data: LocationData) => void;
+    location: GeolocationPoint;
+    setLocationFn(formData: GeolocationPoint): void;
     label: string;
   };
 }
@@ -27,27 +22,20 @@ interface SetLocationDialogProps {
 export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> =
   connect<{}, {}, { resolve }>((_, props) => ({
     initialValues: {
-      location: {
-        latitude: props.resolve.data.latitude,
-        longitude: props.resolve.data.longitude,
-      },
+      location: props.resolve.location,
     },
   }))(
-    reduxForm<{}, any>({
+    reduxForm<{ location: GeolocationPoint }, SetLocationDialogProps>({
       form: 'LocationEditor',
     })(({ submitting, handleSubmit, invalid, resolve }) => {
       const updateLocationHandler = ({ location }) => {
-        resolve.setLocationFn({
-          uuid: resolve.data.uuid,
-          name: resolve.data.name,
-          ...location,
-        });
+        resolve.setLocationFn(location);
       };
       return (
         <form onSubmit={handleSubmit(updateLocationHandler)}>
           <ModalDialog
             title={
-              resolve.data.latitude && resolve.data.longitude
+              resolve.location
                 ? translate('Update location')
                 : translate('Set location')
             }
