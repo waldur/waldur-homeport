@@ -4986,6 +4986,10 @@ msgstr ""
 msgid "Last name"
 msgstr ""
 
+#: src/UserAgreementComponent.tsx
+msgid "Last update"
+msgstr ""
+
 #: src/auth/HeroButton.tsx
 #: src/navigation/cookies/CookiesConsent.tsx
 msgid "Learn more"
@@ -8018,7 +8022,6 @@ msgstr ""
 msgid "Publish as Google Calendar"
 msgstr ""
 
-#: src/UserAgreementComponent.tsx
 #: src/marketplace/referral/ReferralsList.tsx
 msgid "Published"
 msgstr ""

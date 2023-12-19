@@ -57,7 +57,7 @@ export const UserAgreementComponent: FunctionComponent<TemplateComponentProps> =
           <div className="card-body">
             <p className="mb-10">
               <em className="fw-light ms-4">
-                {translate('Published')}: {formatDateTime(option.created)}
+                {translate('Last update')}: {formatDateTime(option.modified)}
               </em>
             </p>
 
