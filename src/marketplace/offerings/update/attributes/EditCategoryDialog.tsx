@@ -8,7 +8,10 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
 import { SelectField, SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { getCategories, updateOffering } from '@waldur/marketplace/common/api';
+import {
+  getCategories,
+  updateOfferingDescription as updateOfferingCategory,
+} from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -30,7 +33,7 @@ export const EditCategoryDialog = reduxForm<FormData, OwnProps>({
 
   const submitRequest = async (formData: FormData) => {
     try {
-      await updateOffering(resolve.offering.uuid, {
+      await updateOfferingCategory(resolve.offering.uuid, {
         category: formData.category.url,
       });
       dispatch(showSuccess(translate('Category has been updated.')));
