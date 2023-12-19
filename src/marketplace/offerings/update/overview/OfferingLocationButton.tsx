@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { updateProviderOffering } from '@waldur/marketplace/common/api';
+import { GeolocationPoint } from '@waldur/map/types';
+import { updateOfferingLocation } from '@waldur/marketplace/common/api';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getUser } from '@waldur/workspace/selectors';
@@ -22,10 +23,13 @@ export const OfferingLocationButton = ({ offering, refetch }) => {
     dispatch(
       openModalDialog(SetLocationDialog, {
         resolve: {
-          data: offering,
-          setLocationFn: async (formData) => {
+          location: {
+            latitude: offering.latitude,
+            longitude: offering.longitude,
+          },
+          setLocationFn: async (formData: GeolocationPoint) => {
             try {
-              await updateProviderOffering(offering.uuid, formData);
+              await updateOfferingLocation(offering.uuid, formData);
               dispatch(
                 showSuccess(translate('Location has been saved successfully.')),
               );
