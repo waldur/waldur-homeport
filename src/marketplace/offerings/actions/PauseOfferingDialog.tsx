@@ -3,7 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 
 import { SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateProviderOfferingState } from '@waldur/marketplace/common/api';
+import { updateOfferingState } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -16,7 +16,7 @@ export const PauseOfferingDialog = reduxForm<
   const dispatch = useDispatch();
   const callback = async (formData) => {
     try {
-      await updateProviderOfferingState(
+      await updateOfferingState(
         props.resolve.offering.uuid,
         'pause',
         formData.reason,

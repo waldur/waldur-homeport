@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { updateProviderOfferingOptions } from '@waldur/marketplace/common/api';
+import { updateOfferingOptions } from '@waldur/marketplace/common/api';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -34,7 +34,7 @@ export const DeleteOptionButton = ({ optionKey, optionLabel, offering }) => {
       options: remaining,
     };
     try {
-      await updateProviderOfferingOptions(offering.uuid, {
+      await updateOfferingOptions(offering.uuid, {
         options: newOptions,
       });
       queryClient.setQueryData<OfferingData>(

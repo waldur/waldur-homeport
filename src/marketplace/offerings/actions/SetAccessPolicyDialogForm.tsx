@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateProviderOfferingAccessPolicy } from '@waldur/marketplace/common/api';
+import { updateOfferingAccessPolicy } from '@waldur/marketplace/common/api';
 import { SET_ACCESS_POLICY_FORM_ID } from '@waldur/marketplace/offerings/actions/constants';
 import {
   formatRequestBodyForSetAccessPolicyForm,
@@ -28,7 +28,7 @@ const PureSetAccessPolicyDialogForm: FunctionComponent<any> = (props) => {
   const dispatch = useDispatch();
   const submitRequest = async (formData) => {
     try {
-      await updateProviderOfferingAccessPolicy(
+      await updateOfferingAccessPolicy(
         props.offering.uuid,
         formatRequestBodyForSetAccessPolicyForm(
           formData,

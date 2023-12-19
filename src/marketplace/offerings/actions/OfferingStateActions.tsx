@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { updateProviderOfferingState } from '@waldur/marketplace/common/api';
+import { updateOfferingState as updateOfferingStateApi } from '@waldur/marketplace/common/api';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getUser } from '@waldur/workspace/selectors';
@@ -25,7 +25,7 @@ export const OfferingStateActions = ({ offering, refreshOffering }) => {
   const user = useSelector(getUser);
   const updateOfferingState = async (target, reason = null) => {
     try {
-      await updateProviderOfferingState(offering.uuid, target, reason);
+      await updateOfferingStateApi(offering.uuid, target, reason);
       if (refreshOffering) {
         refreshOffering();
       }

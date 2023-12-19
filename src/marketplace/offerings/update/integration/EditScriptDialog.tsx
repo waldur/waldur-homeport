@@ -11,7 +11,7 @@ import { translate } from '@waldur/i18n';
 import {
   asyncRunOfferingScript,
   getAsyncDryRun,
-  updateProviderOfferingSecretOptions,
+  updateOfferingSecretOptions,
 } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import {
@@ -51,15 +51,12 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
     const update = useCallback(
       async (formData) => {
         try {
-          await updateProviderOfferingSecretOptions(
-            props.resolve.offering.uuid,
-            {
-              secret_options: {
-                ...props.resolve.offering.secret_options,
-                [props.resolve.type]: formData.script,
-              },
+          await updateOfferingSecretOptions(props.resolve.offering.uuid, {
+            secret_options: {
+              ...props.resolve.offering.secret_options,
+              [props.resolve.type]: formData.script,
             },
-          );
+          });
           dispatch(
             showSuccess(translate('Script has been updated successfully.')),
           );

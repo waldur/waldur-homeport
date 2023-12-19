@@ -9,7 +9,7 @@ import { Tip } from '@waldur/core/Tooltip';
 import { FormContainer, SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { formatTemplate } from '@waldur/i18n/translate';
-import { updateProviderOfferingOverview } from '@waldur/marketplace/common/api';
+import { updateOfferingOverview } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -34,7 +34,7 @@ export const EditGettingStartedDialog = connect(
     const update = useCallback(
       async (formData) => {
         try {
-          await updateProviderOfferingOverview(props.resolve.offering.uuid, {
+          await updateOfferingOverview(props.resolve.offering.uuid, {
             ...pickOverview(props.resolve.offering),
             getting_started: formData.template,
           });

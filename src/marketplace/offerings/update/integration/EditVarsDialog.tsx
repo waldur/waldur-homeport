@@ -5,7 +5,7 @@ import { FieldArray, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateProviderOfferingSecretOptions } from '@waldur/marketplace/common/api';
+import { updateOfferingSecretOptions } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -26,15 +26,12 @@ export const EditVarsDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
     const update = useCallback(
       async (formData) => {
         try {
-          await updateProviderOfferingSecretOptions(
-            props.resolve.offering.uuid,
-            {
-              secret_options: {
-                ...props.resolve.offering.secret_options,
-                environ: formData.environ,
-              },
+          await updateOfferingSecretOptions(props.resolve.offering.uuid, {
+            secret_options: {
+              ...props.resolve.offering.secret_options,
+              environ: formData.environ,
             },
-          );
+          });
           dispatch(
             showSuccess(
               translate(

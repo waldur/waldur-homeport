@@ -135,7 +135,7 @@ export const getPublicOffering = (id: string, options?: AxiosRequestConfig) =>
 export const createProviderOffering = (data) =>
   post<Offering>('/marketplace-provider-offerings/', data);
 
-export const updateProviderOffering = (offeringId, data) =>
+export const updateOffering = (offeringId, data) =>
   patch<Offering>(`/marketplace-provider-offerings/${offeringId}/`, data);
 
 export const deleteProviderOffering = (offeringId) =>
@@ -210,7 +210,7 @@ export const updateOfferingAttributes = (offeringId, data) =>
     data,
   );
 
-export const updateProviderOfferingOptions = (offeringId, data) =>
+export const updateOfferingOptions = (offeringId, data) =>
   post(`/marketplace-provider-offerings/${offeringId}/update_options/`, data);
 
 export const removeProviderOfferingComponent = (offeringId, data) =>
@@ -231,7 +231,7 @@ export const updateOfferingComponent = (offeringId, data) =>
     data,
   );
 
-export const updateProviderOfferingSecretOptions = (offeringId, data) =>
+export const updateOfferingSecretOptions = (offeringId, data) =>
   post(
     `/marketplace-provider-offerings/${offeringId}/update_secret_options/`,
     data,
@@ -320,7 +320,7 @@ export const getCustomersOrganizationGroupUuids = (
     ...options,
   });
 
-export const updateProviderOfferingState = (offeringUuid, action, reason) =>
+export const updateOfferingState = (offeringUuid, action, reason) =>
   post(
     `/marketplace-provider-offerings/${offeringUuid}/${action}/`,
     reason && { paused_reason: reason },
@@ -440,10 +440,10 @@ export const unpublishGoogleCalendar = (uuid: string) =>
     (response) => response.data,
   );
 
-export const updateProviderOfferingOverview = (offeringId, data) =>
+export const updateOfferingOverview = (offeringId, data) =>
   post(`/marketplace-provider-offerings/${offeringId}/update_overview/`, data);
 
-export const updateProviderOfferingDescription = (offeringId, category) =>
+export const updateOfferingDescription = (offeringId, category) =>
   post(`/marketplace-provider-offerings/${offeringId}/update_description/`, {
     category,
   });
@@ -461,7 +461,7 @@ export const asyncRunOfferingScript = (
 export const getAsyncDryRun = (uuid) =>
   get(`/marketplace-script-async-dry-run/${uuid}/`);
 
-export const updateProviderOfferingAccessPolicy = (
+export const updateOfferingAccessPolicy = (
   offeringUuid: string,
   organizationGroups: string[],
 ) =>
@@ -469,7 +469,7 @@ export const updateProviderOfferingAccessPolicy = (
     divisions: organizationGroups,
   });
 
-export const updateProviderOfferingLogo = (offeringUuid: string, formData) =>
+export const updateOfferingLogo = (offeringUuid: string, formData) =>
   sendForm(
     'POST',
     `${ENV.apiEndpoint}api/marketplace-provider-offerings/${offeringUuid}/update_thumbnail/`,

@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 
 import { FormContainer, SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateProviderOfferingLogo } from '@waldur/marketplace/common/api';
+import { updateOfferingLogo } from '@waldur/marketplace/common/api';
 import { UPDATE_OFFERING_LOGO_FORM_ID } from '@waldur/marketplace/offerings/actions/constants';
 import { ImageUploadField } from '@waldur/marketplace/offerings/update/ImageUploadField';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -16,7 +16,7 @@ export const PureUpdateOfferingLogoDialog: FunctionComponent<any> = (props) => {
   const dispatch = useDispatch();
   const submitRequest = async (formData) => {
     try {
-      await updateProviderOfferingLogo(props.resolve.offering.uuid, formData);
+      await updateOfferingLogo(props.resolve.offering.uuid, formData);
       dispatch(showSuccess(translate('Logo has been updated successfully.')));
       props.resolve.refetch();
       dispatch(closeModalDialog());

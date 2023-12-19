@@ -11,7 +11,7 @@ import {
   TextField,
 } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateProviderOfferingOverview } from '@waldur/marketplace/common/api';
+import { updateOfferingOverview } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -34,7 +34,7 @@ export const EditOverviewDialog = connect(
     const update = useCallback(
       async (formData) => {
         try {
-          await updateProviderOfferingOverview(props.resolve.offering.uuid, {
+          await updateOfferingOverview(props.resolve.offering.uuid, {
             ...pickOverview(props.resolve.offering),
             [props.resolve.attribute.key]: formData.value,
           });

@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateProviderOfferingOptions } from '@waldur/marketplace/common/api';
+import { updateOfferingOptions } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -34,7 +34,7 @@ export const AddOptionDialog = reduxForm<
         },
       };
       try {
-        await updateProviderOfferingOptions(props.resolve.offering.uuid, {
+        await updateOfferingOptions(props.resolve.offering.uuid, {
           options: newOptions,
         });
         dispatch(showSuccess(translate('Option has been added successfully.')));
