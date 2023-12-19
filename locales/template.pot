@@ -12566,7 +12566,7 @@ msgid "Update horizontal pod autoscaler"
 msgstr ""
 
 #: src/administration/providers/UpdateProviderDialog.tsx
-msgid "Update identity provider"
+msgid "Update identity provider: {provider}"
 msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
