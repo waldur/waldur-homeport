@@ -197,7 +197,7 @@ export const uploadProviderOfferingHeroImage = (offeringId, image) =>
     { image },
   );
 
-export const updateProviderOfferingAttributes = (offeringId, data) =>
+export const updateOfferingAttributes = (offeringId, data) =>
   post(
     `/marketplace-provider-offerings/${offeringId}/update_attributes/`,
     data,

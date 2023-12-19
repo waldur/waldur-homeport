@@ -5,7 +5,7 @@ import { FieldArray, reduxForm } from 'redux-form';
 
 import { FormContainer, SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateProviderOffering } from '@waldur/marketplace/common/api';
+import { updateOfferingAttributes } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -34,11 +34,9 @@ export const EditSchedulesDialog = connect(
     const update = useCallback(
       async (formData) => {
         try {
-          await updateProviderOffering(props.resolve.offering.uuid, {
-            attributes: {
-              ...props.resolve.offering.attributes,
-              schedules: formatSchedules(formData.schedules),
-            },
+          await updateOfferingAttributes(props.resolve.offering.uuid, {
+            ...props.resolve.offering.attributes,
+            schedules: formatSchedules(formData.schedules),
           });
           dispatch(
             showSuccess(translate('Schedules have been updated successfully.')),
