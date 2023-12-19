@@ -1455,6 +1455,7 @@ msgstr ""
 msgid "Caller"
 msgstr ""
 
+#: src/marketplace/utils.ts
 #: src/proposals/ProposalPublicCallsPage.tsx
 msgid "Calls"
 msgstr ""
@@ -7891,10 +7892,6 @@ msgstr ""
 
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 msgid "Propagated"
-msgstr ""
-
-#: src/marketplace/utils.ts
-msgid "Proposals"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx

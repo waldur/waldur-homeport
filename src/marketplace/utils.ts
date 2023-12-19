@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { useExtraTabs } from '@waldur/navigation/context';
 import { Tab } from '@waldur/navigation/Tab';
-import { useProposalsLink } from '@waldur/proposals/ProposalsLink';
+import { useProposalCallsLink } from '@waldur/proposals/ProposalsLink';
 import { RootState } from '@waldur/store/reducers';
 
 import { getCategoryItems } from './category/utils';
@@ -43,8 +43,7 @@ export const useMarketplacePublicTabs = () => {
 
   const { state: landingState, stateParams: landingStateParams } =
     useMarketplaceLandingLink();
-  const { state: proposalsState, stateParams: proposalsStateParams } =
-    useProposalsLink();
+  const callsState = useProposalCallsLink();
   const { state: categoryState } = useCategoryLink();
 
   const tabs = useMemo(() => {
@@ -57,9 +56,8 @@ export const useMarketplacePublicTabs = () => {
     ];
     if (isFeatureVisible('marketplace.show_call_management_functionality')) {
       _tabs.push({
-        title: translate('Proposals'),
-        to: proposalsState,
-        params: proposalsStateParams,
+        title: translate('Calls'),
+        to: callsState,
       });
     }
     return _tabs.concat(
@@ -74,8 +72,7 @@ export const useMarketplacePublicTabs = () => {
     categoryState,
     landingState,
     landingStateParams,
-    proposalsState,
-    proposalsStateParams,
+    callsState,
   ]);
   useExtraTabs(tabs);
 };
