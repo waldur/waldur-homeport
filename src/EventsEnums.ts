@@ -1,5 +1,5 @@
 /* eslint-disable */
-// WARNING: This file is auto-generated from src/waldur_core/core/management/commands/print_events_typescript.py
+// WARNING: This file is auto-generated from src/waldur_core/core/management/commands/print_events_enums.py
 // Do not edit it manually. All manual changes would be overridden.
 
 export const AuthEnum = {
