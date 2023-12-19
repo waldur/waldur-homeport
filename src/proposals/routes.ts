@@ -30,28 +30,22 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'public-calls-project',
-    url: 'calls/',
-    component: ProposalPublicCallsPage,
-    parent: 'project',
-  },
-  {
-    name: 'public-calls-customer',
-    url: 'calls/',
-    component: ProposalPublicCallsPage,
-    parent: 'organization',
-  },
-  {
     name: 'public-calls-user',
     url: 'calls/',
     component: ProposalPublicCallsPage,
     parent: 'profile',
+    data: {
+      hideProjectSelector: true,
+    },
   },
   {
     name: 'public.public-calls',
     url: '/calls/',
     component: ProposalPublicCallsPage,
-    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+    data: {
+      hideProjectSelector: true,
+      ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+    },
   },
 
   {

@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
-import { useTitle } from 'react-use';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { useMarketplacePublicTabs } from '@waldur/marketplace/utils';
 import { useFullPage } from '@waldur/navigation/context';
+import { useTitle } from '@waldur/navigation/title';
 import { ProposalCall } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
