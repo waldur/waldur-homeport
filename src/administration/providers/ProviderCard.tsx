@@ -57,7 +57,7 @@ export const ProviderCard: FC<ProviderCardProps> = ({
   const updateProvider = () => {
     dispatch(
       openModalDialog(UpdateProviderDialog, {
-        resolve: { provider, refetch },
+        resolve: { provider, type, refetch },
       }),
     );
   };

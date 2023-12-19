@@ -19,7 +19,7 @@ export const UpdateProviderDialog = connect<
 >((_, ownProps) => ({
   initialValues: ownProps.resolve.provider,
 }))(
-  reduxForm<{}, { resolve: { provider; refetch } }>({
+  reduxForm<{}, { resolve: { provider; type; refetch } }>({
     form: 'UpdateProviderDialog',
   })((props) => {
     const dispatch = useDispatch();
@@ -52,7 +52,11 @@ export const UpdateProviderDialog = connect<
     return (
       <form onSubmit={props.handleSubmit(update)}>
         <Modal.Header>
-          <Modal.Title>{translate('Update identity provider')}</Modal.Title>
+          <Modal.Title>
+            {translate('Update identity provider: {provider}', {
+              provider: props.resolve.type,
+            })}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ProviderForm />
