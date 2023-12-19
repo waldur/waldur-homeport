@@ -190,13 +190,6 @@ export const submitReport = (resourceId: string, payload) =>
 export const setBackendId = (resourceId: string, payload) =>
   post(`/marketplace-resources/${resourceId}/set_backend_id/`, payload);
 
-export const uploadProviderOfferingThumbnail = (offeringId, thumbnail) =>
-  sendForm<Offering>(
-    'PATCH',
-    `${ENV.apiEndpoint}api/marketplace-provider-offerings/${offeringId}/`,
-    { thumbnail },
-  );
-
 export const uploadProviderOfferingHeroImage = (offeringId, image) =>
   sendForm<Offering>(
     'PATCH',
