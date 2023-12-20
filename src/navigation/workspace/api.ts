@@ -8,7 +8,13 @@ export const getCustomersCount = () =>
     params: { archived: false },
   }).then((response) => parseResultCount(response));
 
-export const getCustomersPage = (query, page, pageSize, isServiceProvider?) =>
+export const getCustomersPage = (
+  query,
+  page,
+  pageSize,
+  isServiceProvider?,
+  showAllProjects?,
+) =>
   Axios.get(`${ENV.apiEndpoint}api/customers/`, {
     params: {
       archived: false,
@@ -23,10 +29,12 @@ export const getCustomersPage = (query, page, pageSize, isServiceProvider?) =>
         'abbreviation',
         'is_service_provider',
         'image',
+        'projects_count',
       ],
       o: 'name',
       query,
       is_service_provider: isServiceProvider,
+      show_all_projects: showAllProjects,
     },
   }).then((response) => ({
     pageElements: response.data,
