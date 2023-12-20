@@ -9896,6 +9896,10 @@ msgstr ""
 msgid "Show all ({numberOfAllCategories})"
 msgstr ""
 
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+msgid "Show all projects of organization"
+msgstr ""
+
 #: src/marketplace/resources/resource-selector/ResourceSelector.tsx
 msgid "Show all resources"
 msgstr ""
@@ -13937,6 +13941,10 @@ msgstr ""
 
 #: src/rancher/cluster/ClusterServicesList.tsx
 msgid "services"
+msgstr ""
+
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
+msgid "shown"
 msgstr ""
 
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx

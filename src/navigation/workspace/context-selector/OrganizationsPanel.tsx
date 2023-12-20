@@ -1,10 +1,12 @@
 import { useCallback, FunctionComponent } from 'react';
 import { Col, ListGroupItem, Stack } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { getCustomersPage } from '../api';
@@ -59,6 +61,8 @@ export const OrganizationListItem: FunctionComponent<{
     );
   }
 
+  const customer = useSelector(getCustomer);
+
   return (
     <ListGroupItem
       active={active}
@@ -85,13 +89,31 @@ export const OrganizationListItem: FunctionComponent<{
               )}
             </p>
             <div className="item-info">
-              {item.projects?.length ? (
-                <small>
-                  {item.projects.length}{' '}
-                  {item.projects.length > 1
-                    ? translate('Projects')
-                    : translate('Project')}
-                </small>
+              {item.projects_count ? (
+                customer.uuid !== item.uuid && filter !== '' ? (
+                  <small>
+                    {item.projects_count}{' '}
+                    {item.projects_count > 1
+                      ? translate('Projects')
+                      : translate('Project')}
+                    {', '}
+                    {translate('shown')} {item.projects.length}
+                  </small>
+                ) : customer.uuid === item.uuid ? (
+                  <small>
+                    {item.projects_count}{' '}
+                    {item.projects_count > 1
+                      ? translate('Projects')
+                      : translate('Project')}
+                  </small>
+                ) : filter === '' ? (
+                  <small>
+                    {item.projects_count}{' '}
+                    {item.projects_count > 1
+                      ? translate('Projects')
+                      : translate('Project')}
+                  </small>
+                ) : null
               ) : (
                 <i>{translate('No project')}</i>
               )}
@@ -134,6 +156,7 @@ export const OrganizationsPanel: FunctionComponent<{
   loadingUuid: string;
   filter;
   isServiceProvider: boolean;
+  showAllProjects: boolean;
   onClick(customer: Customer): void;
   onMouseEnter(customer: Customer): void;
 }> = ({
@@ -142,6 +165,7 @@ export const OrganizationsPanel: FunctionComponent<{
   loadingUuid,
   filter,
   isServiceProvider,
+  showAllProjects,
   onClick,
   onMouseEnter,
 }) => {
@@ -157,8 +181,9 @@ export const OrganizationsPanel: FunctionComponent<{
         page,
         VIRTUALIZED_SELECTOR_PAGE_SIZE,
         isServiceProvider,
+        showAllProjects,
       ),
-    [filter, isServiceProvider],
+    [filter, isServiceProvider, showAllProjects],
   );
 
   return (
@@ -167,7 +192,7 @@ export const OrganizationsPanel: FunctionComponent<{
         height={calculateInitialPageSize()}
         itemSize={55}
         getPage={getPage}
-        key={`${filter}-${isServiceProvider}`}
+        key={`${filter}-${isServiceProvider}-${showAllProjects}`}
         elementsPerPage={VIRTUALIZED_SELECTOR_PAGE_SIZE}
         noResultsRenderer={EmptyOrganizationListPlaceholder}
       >

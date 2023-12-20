@@ -47,6 +47,8 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
   const [onlyServiceProviders, setOnlyServiceProviders] = useState(() =>
     isChildOf('marketplace-provider', state),
   );
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [showAllIsVisible, setShowAllIsVisible] = useState(false);
 
   const refProjectSelector = useRef<HTMLDivElement>();
   const refSearch = useRef<HTMLInputElement>();
@@ -163,34 +165,61 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
                 className="form-control-solid text-center bg-light"
                 autoFocus
                 value={filter}
-                onChange={(event) => setFilter(event.target.value)}
+                onChange={(event) => {
+                  setFilter(event.target.value);
+                  setShowAllIsVisible(event.target.value !== '');
+                }}
                 placeholder={translate('Search...')}
               />
             </div>
             <div className="list-header py-1 px-4 border-bottom">
-              <Col md={12} lg={5} className="d-flex justify-content-between">
-                <span className="fw-bold fs-7 text-white">
-                  {translate('Organization')}
-                </span>
-                <div className="form-check form-switch form-check-custom form-check-solid">
-                  <input
-                    className="form-check-input h-20px w-30px"
-                    type="checkbox"
-                    value=""
-                    id="contextSelectorOnlySP"
-                    checked={onlyServiceProviders}
-                    onChange={() => {
-                      setOnlyServiceProviders((prev) => !prev);
-                    }}
-                  />
-                  <label
-                    className="form-check-label text-white"
-                    htmlFor="contextSelectorOnlySP"
-                  >
-                    {translate('Only service providers')}
-                  </label>
-                </div>
-              </Col>
+              <div className="row">
+                <Col md={12} lg={5} className="d-flex justify-content-between">
+                  <span className="fw-bold fs-7 text-white">
+                    {translate('Organization')}
+                  </span>
+                  <div className="form-check form-switch form-check-custom form-check-solid">
+                    <input
+                      className="form-check-input h-20px w-30px"
+                      type="checkbox"
+                      value=""
+                      id="contextSelectorOnlySP"
+                      checked={onlyServiceProviders}
+                      onChange={() => {
+                        setOnlyServiceProviders((prev) => !prev);
+                      }}
+                    />
+                    <label
+                      className="form-check-label text-white"
+                      htmlFor="contextSelectorOnlySP"
+                    >
+                      {translate('Only service providers')}
+                    </label>
+                  </div>
+                </Col>
+                {showAllIsVisible && (
+                  <Col md={12} lg={5} className="d-flex justify-content-end">
+                    <div className="form-check form-switch form-check-custom form-check-solid">
+                      <input
+                        className="form-check-input h-20px w-30px"
+                        type="checkbox"
+                        value=""
+                        id="contextSelectorAllProjects"
+                        checked={showAllProjects}
+                        onChange={() => {
+                          setShowAllProjects((prev) => !prev);
+                        }}
+                      />
+                      <label
+                        className="form-check-label text-white"
+                        htmlFor="contextSelectorAllProjects"
+                      >
+                        {translate('Show all projects of organization')}
+                      </label>
+                    </div>
+                  </Col>
+                )}
+              </div>
             </div>
             <div className="d-flex border-bottom">
               <OrganizationsPanel
@@ -203,6 +232,7 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
                 }}
                 filter={filter}
                 isServiceProvider={onlyServiceProviders}
+                showAllProjects={showAllProjects}
               />
               <ProjectsPanel
                 customer={selectedOrganization}
