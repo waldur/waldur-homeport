@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { useMarketplacePublicTabs } from '@waldur/marketplace/utils';
 import { useFullPage } from '@waldur/navigation/context';
@@ -45,7 +46,13 @@ export const ProposalPublicCallsPage: FunctionComponent = () => {
             {
               title: translate('Name'),
               orderField: 'name',
-              render: ({ row }) => <>{row.name}</>,
+              render: ({ row }) => (
+                <Link
+                  state="public.proposal-public-call"
+                  params={{ uuid: row.uuid }}
+                  label={row.name}
+                />
+              ),
             },
             {
               title: translate('Organization'),
