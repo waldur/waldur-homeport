@@ -7057,6 +7057,12 @@ msgstr ""
 msgid "Pending confirmations"
 msgstr ""
 
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/OrderStateFilter.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+msgid "Pending consumer approval"
+msgstr ""
+
 #: src/navigation/header/confirmation-drawer/PendingConfirmationContainer.tsx
 msgid "Pending consumer orders"
 msgstr ""
@@ -7064,17 +7070,11 @@ msgstr ""
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/OrderStateFilter.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-msgid "Pending consumer review"
+msgid "Pending provider approval"
 msgstr ""
 
 #: src/navigation/header/confirmation-drawer/PendingConfirmationContainer.tsx
 msgid "Pending provider orders"
-msgstr ""
-
-#: src/marketplace/orders/list/OrderStateCell.tsx
-#: src/marketplace/orders/list/OrderStateFilter.tsx
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-msgid "Pending provider review"
 msgstr ""
 
 #: src/proposals/call-management/CallExpandableRow.tsx
