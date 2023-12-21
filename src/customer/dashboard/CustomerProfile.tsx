@@ -5,6 +5,7 @@ import 'world-flags-sprite/stylesheets/flags32.css';
 
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
+import { CallManagerIcon } from '@waldur/navigation/workspace/CallManagerIcon';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { ServiceProviderIcon } from '@waldur/navigation/workspace/ServiceProviderIcon';
 import { Customer } from '@waldur/workspace/types';
@@ -51,6 +52,7 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
                     <h2 className="mb-0">{customer.name}</h2>
                   </div>
                   <ServiceProviderIcon organization={customer} />
+                  <CallManagerIcon organization={customer} />
                 </Stack>
                 <Stack direction="horizontal" className="gap-6 text-muted">
                   {[
