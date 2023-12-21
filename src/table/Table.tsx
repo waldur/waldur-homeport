@@ -18,7 +18,13 @@ import { TablePagination } from './TablePagination';
 import { TablePlaceholder } from './TablePlaceholder';
 import { TableQuery } from './TableQuery';
 import { TableRefreshButton } from './TableRefreshButton';
-import { Column, TableState, Sorting, TableDropdownItem } from './types';
+import {
+  Column,
+  TableState,
+  Sorting,
+  TableDropdownItem,
+  ExportConfig,
+} from './types';
 
 export interface TableProps<RowType = any> extends TableState {
   rows: any[];
@@ -27,7 +33,7 @@ export interface TableProps<RowType = any> extends TableState {
   hasQuery?: boolean;
   setQuery?: (query: string) => void;
   columns?: Array<Column<RowType>>;
-  exportAs?: (format: string) => void;
+  openExportDialog?: (format: ExportConfig['format']) => void;
   dropdownActions?: TableDropdownItem[];
   actions?: React.ReactNode;
   verboseName?: string;

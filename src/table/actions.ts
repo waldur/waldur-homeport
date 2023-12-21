@@ -1,4 +1,4 @@
-import { Sorting } from './types';
+import { ExportConfig, Sorting } from './types';
 
 export const FETCH_LIST_START = 'waldur/table/FETCH_START';
 export const FETCH_LIST_DONE = 'waldur/table/FETCH_DONE';
@@ -65,11 +65,11 @@ export const fetchListGotoPage = (table: string, page: number) => ({
   },
 });
 
-export const exportTableAs = (table: string, format: string, props?) => ({
+export const exportTableAs = (table: string, config: ExportConfig, props?) => ({
   type: EXPORT_TABLE_AS,
   payload: {
     table,
-    format,
+    config,
     props,
   },
 });

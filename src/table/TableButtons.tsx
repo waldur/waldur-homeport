@@ -32,19 +32,19 @@ export const TableButtons: FunctionComponent<any> = (props: TableProps) => {
                 children: [
                   {
                     label: translate('Copy to clipboard'),
-                    action: () => props.exportAs('clipboard'),
+                    action: () => props.openExportDialog('clipboard'),
                   },
                   {
                     label: 'CSV',
-                    action: () => props.exportAs('csv'),
+                    action: () => props.openExportDialog('csv'),
                   },
                   {
                     label: 'PDF',
-                    action: () => props.exportAs('pdf'),
+                    action: () => props.openExportDialog('pdf'),
                   },
                   {
                     label: 'Excel',
-                    action: () => props.exportAs('excel'),
+                    action: () => props.openExportDialog('excel'),
                   },
                 ],
               },
@@ -52,7 +52,7 @@ export const TableButtons: FunctionComponent<any> = (props: TableProps) => {
           : [],
       ),
     );
-  }, [props.dropdownActions, props.exportAs, showExportInDropdown]);
+  }, [props.dropdownActions, props.openExportDialog, showExportInDropdown]);
 
   if (!props.selectedRows?.length) {
     return (

@@ -726,6 +726,10 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
+#: src/table/ExportDialog.tsx
+msgid "Apply table filters"
+msgstr ""
+
 #: src/proposals/details/PublicCallDetailsHero.tsx
 msgid "Apply to round"
 msgstr ""
@@ -2048,6 +2052,7 @@ msgstr ""
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
+#: src/table/ExportDialog.tsx
 #: src/table/TableButtons.tsx
 #: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
@@ -3689,9 +3694,18 @@ msgstr ""
 msgid "Explore {deployment} service catalog"
 msgstr ""
 
+#: src/table/ExportDialog.tsx
 #: src/table/TableButtons.tsx
 #: src/table/TableExportButton.tsx
 msgid "Export"
+msgstr ""
+
+#: src/table/ExportDialog.tsx
+msgid "Export as"
+msgstr ""
+
+#: src/table/ExportDialog.tsx
+msgid "Exporting..."
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/ExtendAction.tsx
@@ -3961,6 +3975,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
 msgid "Force destroy {name} instance"
+msgstr ""
+
+#: src/table/ExportDialog.tsx
+msgid "Format"
 msgstr ""
 
 #: src/quotas/QuotasTable.tsx

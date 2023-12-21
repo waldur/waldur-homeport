@@ -37,6 +37,7 @@ export interface TableOptionsType<RowType = any> {
   staleTime?: number;
   queryField?: string;
   exportFields?: string[] | ((props: any) => string[]);
+  exportKeys?: string[];
   exportRow?: (row: RowType, props: any) => string[];
   exportAll?: boolean;
   getDefaultFilter?: (state: any) => any;
@@ -94,4 +95,9 @@ export interface TableDropdownItem {
     icon?: string;
     action: () => void;
   }>;
+}
+
+export interface ExportConfig {
+  format: 'clipboard' | 'pdf' | 'excel' | 'csv';
+  withFilters?: boolean;
 }

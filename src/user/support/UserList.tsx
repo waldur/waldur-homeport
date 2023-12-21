@@ -130,6 +130,14 @@ export const UserList: FunctionComponent<any> = (props) => {
       row.organization,
       getOrganizationsWhereOwner(row.customer_permissions),
     ],
+    exportKeys: [
+      'full_name',
+      'username',
+      'email',
+      'phone_number',
+      'organization',
+      'customer_permissions',
+    ],
   });
 
   return (
