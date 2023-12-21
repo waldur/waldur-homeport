@@ -4,12 +4,14 @@ import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { getCustomersPage } from '../api';
+import { CallManagerIcon } from '../CallManagerIcon';
 import { highlightMatch } from '../highlightMatch';
 import { ServiceProviderIcon } from '../ServiceProviderIcon';
 import { VirtualPaginatedList } from '../VirtualPaginatedList';
@@ -141,6 +143,24 @@ export const OrganizationListItem: FunctionComponent<{
             </Link>
           </div>
         )}
+        {item?.is_call_managing_organization &&
+          isFeatureVisible(
+            'marketplace.show_call_management_functionality',
+          ) && (
+            <div className="actions ms-auto">
+              <Link
+                className="action-item"
+                state="organization.call-management"
+                params={{ uuid: item.uuid }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  MenuComponent.hideDropdowns(undefined);
+                }}
+              >
+                <CallManagerIcon organization={item} />
+              </Link>
+            </div>
+          )}
       </Stack>
     </ListGroupItem>
   );

@@ -1447,6 +1447,7 @@ msgid "Call management"
 msgstr ""
 
 #: src/customer/details/CustomerCallManagerPanel.tsx
+#: src/navigation/workspace/CallManagerIcon.tsx
 msgid "Call manager"
 msgstr ""
 
