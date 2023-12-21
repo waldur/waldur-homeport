@@ -121,10 +121,24 @@ const SearchPopover = () => {
     result.refetch();
   };
 
+  const hiddenStyle = {
+    display: 'none',
+  };
+
   return (
     <div className="menu menu-sub menu-sub-dropdown p-7 show">
       <div className={`${menuState === 'main' ? '' : 'd-none'}`}>
         <form className="w-100 position-relative mb-3" auto-complete="off">
+          <input
+            style={hiddenStyle}
+            type="text"
+            name="fakeusernameremembered"
+          />
+          <input
+            style={hiddenStyle}
+            type="password"
+            name="fakepasswordremembered"
+          />
           <span className="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 translate-middle-y ms-0">
             <SearchIcon />
           </span>
