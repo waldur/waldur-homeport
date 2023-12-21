@@ -53,16 +53,7 @@ export function createFetcher(
   };
 }
 
-export async function fetchAll(
-  fetch: Fetcher,
-  filter?: Record<string, string>,
-) {
-  const request: TableRequest = {
-    pageSize: 50,
-    currentPage: 1,
-    filter,
-  };
-
+export async function fetchAll(fetch: Fetcher, request: TableRequest) {
   let response = await fetch(request);
   let result = [];
 

@@ -3,14 +3,17 @@ import FileSaver from 'file-saver';
 import Papa from 'papaparse';
 import { put, call, select } from 'redux-saga/effects';
 
+import { orderByFilter } from '@waldur/core/utils';
 import { RootState } from '@waldur/store/reducers';
 import { fetchAll } from '@waldur/table/api';
 
-import { blockStart, blockStop } from './actions';
+import { blockStart, blockStop, exportTableAs } from './actions';
 import exportExcel from './excel';
 import { exportAsPdf } from './exportAsPdf';
 import { getTableOptions } from './registry';
 import { selectTableRows } from './selectors';
+import { getTableState } from './store';
+import { TableRequest } from './types';
 
 export function saveAsCsv(table, data) {
   const csv = Papa.unparse(data);
@@ -30,19 +33,45 @@ const exporters = {
   excel: exportExcel,
 };
 
-export function* exportTable(action) {
-  const { table, format, props } = action.payload;
+export function* exportTable(action: ReturnType<typeof exportTableAs>) {
+  const { table, config, props } = action.payload;
   let rows = yield select((state: RootState) => selectTableRows(state, table));
-  const { exportFields, exportRow, fetchData, exportAll, mapPropsToFilter } =
+  const { exportFields, exportKeys, exportRow, fetchData, ...options } =
     getTableOptions(table);
 
-  if (exportAll) {
+  if (options.exportAll) {
+    const state = yield select(getTableState(table));
     yield put(blockStart(table));
-    let propFilter;
-    if (props && mapPropsToFilter) {
-      propFilter = mapPropsToFilter(props);
+    let defaultFilter;
+    if (options.getDefaultFilter) {
+      defaultFilter = yield select(options.getDefaultFilter);
     }
-    rows = yield call(fetchAll, fetchData, propFilter);
+    let propFilter;
+    if (props && options.mapPropsToFilter) {
+      propFilter = options.mapPropsToFilter(props);
+    }
+    const request: TableRequest = {
+      pageSize: Math.max(state.pagination.resultCount, 200),
+      currentPage: 1,
+      filter: config.withFilters
+        ? {
+            ...defaultFilter,
+            ...propFilter,
+            ...options.filter,
+          }
+        : { ...propFilter },
+    };
+    if (config.withFilters && options.queryField && state.query) {
+      request.filter[options.queryField] = state.query;
+    }
+    if (state.sorting && state.sorting.field) {
+      request.filter.o = orderByFilter(state.sorting);
+    }
+    if (exportKeys && exportKeys.length > 0) {
+      request.filter.field = exportKeys;
+    }
+
+    rows = yield call(fetchAll, fetchData, request);
     yield put(blockStop(table));
   }
 
@@ -53,5 +82,5 @@ export function* exportTable(action) {
     fields,
     data: rows.map((row) => exportRow(row, props)),
   };
-  exporters[format](table, data);
+  exporters[config.format](table, data);
 }

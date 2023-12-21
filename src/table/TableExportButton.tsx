@@ -3,12 +3,14 @@ import { Dropdown } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
+import { TableProps } from './Table';
+
 interface TableExportButtonProps {
-  exportAs?: (format: string) => void;
+  openExportDialog?: TableProps['openExportDialog'];
 }
 
 export const TableExportButton: FunctionComponent<TableExportButtonProps> = ({
-  exportAs,
+  openExportDialog,
 }) => {
   return (
     <Dropdown>
@@ -17,12 +19,18 @@ export const TableExportButton: FunctionComponent<TableExportButtonProps> = ({
         {translate('Export')}
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item onClick={() => exportAs('clipboard')}>
+        <Dropdown.Item onClick={() => openExportDialog('clipboard')}>
           {translate('Copy to clipboard')}
         </Dropdown.Item>
-        <Dropdown.Item onClick={() => exportAs('csv')}>CSV</Dropdown.Item>
-        <Dropdown.Item onClick={() => exportAs('pdf')}>PDF</Dropdown.Item>
-        <Dropdown.Item onClick={() => exportAs('excel')}>Excel</Dropdown.Item>
+        <Dropdown.Item onClick={() => openExportDialog('csv')}>
+          CSV
+        </Dropdown.Item>
+        <Dropdown.Item onClick={() => openExportDialog('pdf')}>
+          PDF
+        </Dropdown.Item>
+        <Dropdown.Item onClick={() => openExportDialog('excel')}>
+          Excel
+        </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );

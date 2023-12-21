@@ -1,8 +1,10 @@
 import React, { useCallback } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n/translate';
+import { openModalDialog } from '@waldur/modal/actions';
 import { getTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
 import { isVisible } from '@waldur/store/config';
@@ -13,7 +15,12 @@ import { selectTableRows } from '@waldur/table/selectors';
 import * as actions from './actions';
 import { registerTable } from './registry';
 import { getTableState } from './store';
-import { TableOptionsType, Sorting } from './types';
+import { TableOptionsType, Sorting, ExportConfig } from './types';
+
+const ExportDialog = lazyComponent(
+  () => import('./ExportDialog'),
+  'ExportDialog',
+);
 
 export const getId = (row, index) => {
   if (row.uuid) {
@@ -68,8 +75,15 @@ export function connectTable(options: TableOptionsType) {
           );
         },
         gotoPage: (page) => dispatch(actions.fetchListGotoPage(table, page)),
-        exportAs: (format) =>
-          dispatch(actions.exportTableAs(table, format, props)),
+        openExportDialog: (format: ExportConfig['format']) =>
+          dispatch(
+            openModalDialog(ExportDialog, {
+              resolve: {
+                table,
+                format,
+              },
+            }),
+          ),
         setQuery: (query) => dispatch(actions.setFilterQuery(table, query)),
         updatePageSize: (size) => dispatch(actions.updatePageSize(table, size)),
         resetPagination: () => dispatch(actions.resetPagination(table)),
@@ -155,8 +169,16 @@ export const useTable = (options: TableOptionsType) => {
     (page) => dispatch(actions.fetchListGotoPage(table, page)),
     [dispatch, table],
   );
-  const exportAs = useCallback(
-    (format) => dispatch(actions.exportTableAs(table, format)),
+  const openExportDialog = useCallback(
+    (format: ExportConfig['format']) =>
+      dispatch(
+        openModalDialog(ExportDialog, {
+          resolve: {
+            table,
+            format,
+          },
+        }),
+      ),
     [dispatch, table],
   );
   const setQuery = useCallback(
@@ -205,7 +227,7 @@ export const useTable = (options: TableOptionsType) => {
   return {
     fetch,
     gotoPage,
-    exportAs,
+    openExportDialog,
     setQuery,
     updatePageSize,
     resetPagination,
