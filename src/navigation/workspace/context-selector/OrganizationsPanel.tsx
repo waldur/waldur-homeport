@@ -45,6 +45,7 @@ export const OrganizationListItem: FunctionComponent<{
   filter,
   loading,
 }) => {
+  const customer = useSelector(getCustomer);
   const item = data[index];
   const orgCompactName = item.abbreviation ? item.abbreviation : item.name;
   if (item.isFetching) {
@@ -62,8 +63,6 @@ export const OrganizationListItem: FunctionComponent<{
       </ListGroupItem>
     );
   }
-
-  const customer = useSelector(getCustomer);
 
   return (
     <ListGroupItem
@@ -92,7 +91,7 @@ export const OrganizationListItem: FunctionComponent<{
             </p>
             <div className="item-info">
               {item.projects_count ? (
-                customer.uuid !== item.uuid && filter !== '' ? (
+                customer?.uuid !== item.uuid && filter !== '' ? (
                   <small>
                     {item.projects_count}{' '}
                     {item.projects_count > 1
@@ -101,7 +100,7 @@ export const OrganizationListItem: FunctionComponent<{
                     {', '}
                     {translate('shown')} {item.projects.length}
                   </small>
-                ) : customer.uuid === item.uuid ? (
+                ) : customer?.uuid === item.uuid ? (
                   <small>
                     {item.projects_count}{' '}
                     {item.projects_count > 1
