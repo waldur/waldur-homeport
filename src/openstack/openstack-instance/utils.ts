@@ -2,27 +2,24 @@ import { translate } from '@waldur/i18n';
 import { InternalIP } from '@waldur/resource/types';
 import { formatFlavor } from '@waldur/resource/utils';
 
-import { DYNAMIC_STORAGE_MODE } from '../constants';
 import { Quota, VolumeType } from '../types';
 
 const getTotalStorage = (formData) =>
   (formData.system_volume_size || 0) + (formData.data_volume_size || 0);
 
-function extendVolumeTypeQuotas(formData, usages, limits, storage_mode) {
+function extendVolumeTypeQuotas(formData, usages, limits) {
   const quotas = [];
-  if (storage_mode === DYNAMIC_STORAGE_MODE) {
-    const required = getVolumeTypeRequirements(formData);
-    Object.keys(limits)
-      .filter((key) => key.startsWith('gigabytes_'))
-      .forEach((key) => {
-        quotas.push({
-          name: key,
-          usage: usages[key] || 0,
-          limit: limits[key],
-          required: required[key] || 0,
-        });
+  const required = getVolumeTypeRequirements(formData);
+  Object.keys(limits)
+    .filter((key) => key.startsWith('gigabytes_'))
+    .forEach((key) => {
+      quotas.push({
+        name: key,
+        usage: usages[key] || 0,
+        limit: limits[key],
+        required: required[key] || 0,
       });
-  }
+    });
   return quotas;
 }
 
@@ -140,7 +137,7 @@ export function flavorValidator(model, choice) {
 export const formatAddressList = (row: InternalIP) =>
   row.fixed_ips.map((fip) => fip.ip_address).join(', ') || 'N/A';
 
-export const getQuotas = ({ formData, usages, limits, storage_mode }) => {
+export const getQuotas = ({ formData, usages, limits }) => {
   const quotas: Quota[] = [
     {
       name: 'vcpu',
@@ -160,7 +157,7 @@ export const getQuotas = ({ formData, usages, limits, storage_mode }) => {
       limit: limits.disk,
       required: getTotalStorage(formData) || 0,
     },
-    ...extendVolumeTypeQuotas(formData, usages, limits, storage_mode),
+    ...extendVolumeTypeQuotas(formData, usages, limits),
   ];
   return quotas;
 };

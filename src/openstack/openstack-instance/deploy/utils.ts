@@ -6,7 +6,6 @@ import { getFormValues } from 'redux-form';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { Offering } from '@waldur/marketplace/types';
 import { loadVolumeTypes } from '@waldur/openstack/api';
-import { DYNAMIC_STORAGE_MODE } from '@waldur/openstack/constants';
 import {
   formatVolumeTypeChoices,
   getDefaultVolumeType,
@@ -48,9 +47,8 @@ export const useQuotasData = (offering: Offering) => {
     [offering],
   );
   const limits = useMemo(() => parseQuotas(offering.quotas || []), [offering]);
-  const storage_mode = offering.plugin_options.storage_mode;
   return useMemo(() => {
-    const quotas = getQuotas({ formData, usages, limits, storage_mode });
+    const quotas = getQuotas({ formData, usages, limits });
     return {
       vcpuQuota: quotas.find((q) => q.name === 'vcpu'),
       ramQuota: quotas.find((q) => q.name === 'ram'),
@@ -59,23 +57,18 @@ export const useQuotasData = (offering: Offering) => {
         (q) => !['vcpu', 'ram', 'storage'].includes(q.name),
       ),
     };
-  }, [formData, usages, limits, storage_mode]);
+  }, [formData, usages, limits]);
 };
 
 export const useVolumeDataLoader = (offering: Offering) => {
   return useQuery(
     ['volumeTypes', offering.uuid],
     async () => {
-      let volumeTypeChoices = [];
-      let defaultVolumeType;
-      const storage_mode = offering.plugin_options.storage_mode;
-      if (storage_mode === DYNAMIC_STORAGE_MODE) {
-        const volumeTypes = offering.scope_uuid
-          ? await loadVolumeTypes(offering.scope_uuid)
-          : [];
-        volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
-        defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
-      }
+      const volumeTypes = offering.scope_uuid
+        ? await loadVolumeTypes(offering.scope_uuid)
+        : [];
+      const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
+      const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
       return {
         volumeTypeChoices,
         defaultVolumeType,
