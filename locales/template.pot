@@ -5247,10 +5247,6 @@ msgstr ""
 msgid "Management offering"
 msgstr ""
 
-#: src/proposals/call-management/ProposalCallFormDialog.tsx
-msgid "Manager"
-msgstr ""
-
 #: src/invoices/list/MarkAsPaidButton.tsx
 msgid "Mark as paid"
 msgstr ""
@@ -11860,10 +11856,6 @@ msgstr ""
 msgid "Unable to load locations."
 msgstr ""
 
-#: src/proposals/call-management/ProposalCallFormDialog.tsx
-msgid "Unable to load manager."
-msgstr ""
-
 #: src/marketplace/offerings/expandable/OfferingCostsChart.tsx
 msgid "Unable to load offering cost chart."
 msgstr ""
@@ -12007,6 +11999,10 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to post comment."
+msgstr ""
+
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
+msgid "Unable to prepare the form."
 msgstr ""
 
 #: src/paypal/PaymentApprove.tsx

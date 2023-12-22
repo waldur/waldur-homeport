@@ -4,6 +4,7 @@ import { connect, useSelector } from 'react-redux';
 import { SubmissionError, reduxForm } from 'redux-form';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
 import { SelectField, SubmitButton } from '@waldur/form';
 import { DateTimeField } from '@waldur/form/DateTimeField';
@@ -101,6 +102,16 @@ export const ProposalCallFormDialog = connect<
       [props.resolve],
     );
 
+    if (loadingManager) {
+      return <LoadingSpinner />;
+    } else if (errorManager) {
+      return (
+        <LoadingErred
+          message={translate('Unable to prepare the form.')}
+          loadData={refetch}
+        />
+      );
+    }
     return (
       <form onSubmit={props.handleSubmit(processRequest)}>
         <ModalDialog
@@ -167,24 +178,6 @@ export const ProposalCallFormDialog = connect<
               required={true}
               isClearable={false}
             />
-            {errorManager ? (
-              <LoadingErred
-                message={translate('Unable to load manager.')}
-                loadData={refetch}
-              />
-            ) : (
-              <SelectField
-                name="manager"
-                label={translate('Manager')}
-                getOptionLabel={(option) => option.customer_name}
-                getOptionValue={(option) => option.url}
-                simpleValue={true}
-                options={manager ? [manager] : []}
-                isLoading={loadingManager}
-                required={true}
-                isClearable={false}
-              />
-            )}
           </FormContainer>
         </ModalDialog>
       </form>
