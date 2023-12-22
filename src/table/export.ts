@@ -36,8 +36,14 @@ const exporters = {
 export function* exportTable(action: ReturnType<typeof exportTableAs>) {
   const { table, config, props } = action.payload;
   let rows = yield select((state: RootState) => selectTableRows(state, table));
-  const { exportFields, exportKeys, exportRow, fetchData, ...options } =
-    getTableOptions(table);
+  const {
+    exportFields,
+    exportKeys,
+    exportRow,
+    exportData,
+    fetchData,
+    ...options
+  } = getTableOptions(table);
 
   if (options.exportAll) {
     const state = yield select(getTableState(table));
@@ -80,7 +86,9 @@ export function* exportTable(action: ReturnType<typeof exportTableAs>) {
 
   const data = {
     fields,
-    data: rows.map((row) => exportRow(row, props)),
+    data: exportData
+      ? exportData(rows, props)
+      : rows.map((row) => exportRow(row, props)),
   };
   exporters[config.format](table, data);
 }

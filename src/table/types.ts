@@ -38,6 +38,7 @@ export interface TableOptionsType<RowType = any> {
   queryField?: string;
   exportFields?: string[] | ((props: any) => string[]);
   exportKeys?: string[];
+  exportData?: (rows: RowType[], props: any) => string[][];
   exportRow?: (row: RowType, props: any) => string[];
   exportAll?: boolean;
   getDefaultFilter?: (state: any) => any;
