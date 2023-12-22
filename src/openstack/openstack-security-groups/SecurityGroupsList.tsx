@@ -32,6 +32,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       expandableRow={SecurityGroupExpandableRow}
+      enableExport={true}
       hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
       verboseName={translate('security groups')}
       initialSorting={{ field: 'name', mode: 'asc' }}
@@ -46,6 +47,13 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
+
+const exportRow = (row) => [
+  row.name,
+  row.rules.map((rule) => {
+    return JSON.stringify(rule).replaceAll(/"/g, "'");
+  }),
+];
 
 const TableOptions = {
   table: 'openstack-security-groups',
@@ -66,6 +74,8 @@ const TableOptions = {
     ],
   }),
   queryField: 'query',
+  exportRow,
+  exportFields: ['Name', 'Security groups'],
 };
 
 export const SecurityGroupsList = connectTable(TableOptions)(TableComponent);
