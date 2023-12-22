@@ -3,11 +3,7 @@ import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 
-import {
-  DYNAMIC_STORAGE_MODE,
-  INSTANCE_TYPE,
-  SHARED_INSTANCE_TYPE,
-} from '../constants';
+import { INSTANCE_TYPE, SHARED_INSTANCE_TYPE } from '../constants';
 
 import { deployOfferingSteps } from './deploy/steps';
 import { getVolumeTypeRequirements } from './utils';
@@ -137,15 +133,15 @@ const formValidator = (props) => {
       'Total storage limit is exceeded',
     );
   }
-  const storage_mode = offering.plugin_options.storage_mode;
-  if (storage_mode === DYNAMIC_STORAGE_MODE) {
-    const required = getVolumeTypeRequirements(attributes);
-    for (const name in required) {
-      if (limits[name] !== -1 && required[name] + usages[name] > limits[name]) {
-        errors.system_volume_size = errors.data_volume_size = translate(
-          'Volume type storage limit is exceeded',
-        );
-      }
+  const volumeTypes = getVolumeTypeRequirements(attributes);
+  for (const name in volumeTypes) {
+    if (
+      limits[name] !== -1 &&
+      volumeTypes[name] + usages[name] > limits[name]
+    ) {
+      errors.system_volume_size = errors.data_volume_size = translate(
+        'Volume type storage limit is exceeded',
+      );
     }
   }
   return { attributes: errors };

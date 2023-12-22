@@ -19,14 +19,13 @@ export const useQuotasData = (offering: Offering) => {
     [offering],
   );
   const limits = useMemo(() => parseQuotas(offering.quotas || []), [offering]);
-  const storage_mode = offering.plugin_options.storage_mode;
   return useMemo(() => {
-    const quotas = getQuotas({ formData, usages, limits, storage_mode });
+    const quotas = getQuotas({ formData, usages, limits });
     return {
       storageQuota: quotas.find((q) => q.name === 'storage'),
       volumeTypeQuotas: quotas.filter(
         (q) => !['vcpu', 'ram', 'storage'].includes(q.name),
       ),
     };
-  }, [formData, usages, limits, storage_mode]);
+  }, [formData, usages, limits]);
 };
