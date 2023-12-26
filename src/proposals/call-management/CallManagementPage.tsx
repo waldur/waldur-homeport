@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ProposalCall } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
@@ -29,7 +30,13 @@ export const CallManagementPage: FunctionComponent = () => {
         {
           title: translate('Name'),
           orderField: 'name',
-          render: ({ row }) => <>{row.name}</>,
+          render: ({ row }) => (
+            <Link
+              state="protected-call-update"
+              params={{ call_uuid: row.uuid }}
+              label={row.name}
+            />
+          ),
         },
         {
           title: translate('Cutoff'),

@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 
-import { post, deleteById, getFirst, put, getById } from '@waldur/core/api';
+import { getById, post, deleteById, getFirst, put } from '@waldur/core/api';
 
 import { CallManagingOrganizationInfo, ProposalCall } from './types';
 
@@ -22,6 +22,9 @@ export const enableCallManagingOrganization = (payload) =>
 
 export const disableCallManagingOrganization = (uuid) =>
   deleteById('/call-managing-organisations/', uuid);
+
+export const getProtectedCall = (id: string, options?: AxiosRequestConfig) =>
+  getById<ProposalCall>('/proposal-protected-calls/', id, options);
 
 export const createCall = (data) => {
   return post<ProposalCall>('/proposal-protected-calls/', data);
