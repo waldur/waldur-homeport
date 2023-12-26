@@ -1,3 +1,4 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { useSelector } from 'react-redux';
 
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -10,6 +11,7 @@ const Icon = require('./CallManagement.svg');
 
 export const CallManagementMenu = () => {
   const customer = useSelector(getCustomer);
+  const { state } = useCurrentStateAndParams();
   const visible = isFeatureVisible(
     'marketplace.show_call_management_functionality',
   );
@@ -20,7 +22,13 @@ export const CallManagementMenu = () => {
     <MenuItem
       title={translate('Call management')}
       state="organization.call-management"
-      activeState="organization.call-management"
+      activeState={
+        ['organization.call-management', 'protected-call-update'].includes(
+          state.name,
+        )
+          ? state.name
+          : undefined
+      }
       params={{ uuid: customer.uuid }}
       child={false}
       iconPath={Icon}

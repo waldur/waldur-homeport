@@ -18,6 +18,11 @@ const PublicCallDetailsContainer = lazyComponent(
   'PublicCallDetailsContainer',
 );
 
+const CallUpdateContainer = lazyComponent(
+  () => import('./update/CallUpdateContainer'),
+  'CallUpdateContainer',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'organization.call-management',
@@ -28,7 +33,12 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Call management'),
     },
   },
-
+  {
+    name: 'protected-call-update',
+    url: 'call-management/:call_uuid/',
+    component: CallUpdateContainer,
+    parent: 'organization',
+  },
   {
     name: 'public-calls-user',
     url: 'calls/',
@@ -47,11 +57,13 @@ export const states: StateDeclaration[] = [
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
     },
   },
-
   {
     name: 'public.proposal-public-call',
-    url: '/proposal-public-call/:uuid/',
+    url: '/calls/:uuid/',
     component: PublicCallDetailsContainer,
-    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+    data: {
+      hideProjectSelector: true,
+      ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+    },
   },
 ];

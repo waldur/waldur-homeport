@@ -1,10 +1,10 @@
-import { FC, createContext, useMemo, useState } from 'react';
+import { FC, ReactNode, createContext, useMemo, useState } from 'react';
 
 import useScrollTracker from '@waldur/core/useScrollTracker';
 
 interface Tab {
   key: string;
-  title: string;
+  title: ReactNode;
   priority?: number;
 }
 

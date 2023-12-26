@@ -609,6 +609,10 @@ msgstr ""
 msgid "All resources have been imported."
 msgstr ""
 
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+msgid "Allocated"
+msgstr ""
+
 #: src/slurm/deploy/steps.ts
 msgid "Allocation name"
 msgstr ""
@@ -620,6 +624,7 @@ msgstr ""
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/update/review/CallReviewSection.tsx
 msgid "Allocation strategy"
 msgstr ""
 
@@ -732,6 +737,10 @@ msgstr ""
 
 #: src/proposals/details/PublicCallDetailsHero.tsx
 msgid "Apply to round"
+msgstr ""
+
+#: src/proposals/update/review/CallReviewSection.tsx
+msgid "Approval threshold score"
 msgstr ""
 
 #: src/invitations/UserPermissionRequestApproveButton.tsx
@@ -1126,6 +1135,10 @@ msgstr ""
 msgid "Availability:"
 msgstr ""
 
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+msgid "Available"
+msgstr ""
+
 #: src/marketplace/routes.ts
 msgid "Available offerings"
 msgstr ""
@@ -1433,6 +1446,7 @@ msgid "Calendar"
 msgstr ""
 
 #: src/proposals/details/PublicCallDetailsHero.tsx
+#: src/proposals/update/CallUpdateHero.tsx
 msgid "Call"
 msgstr ""
 
@@ -1453,6 +1467,10 @@ msgstr ""
 
 #: src/proposals/details/CallRoundsDialog.tsx
 msgid "Call rounds"
+msgstr ""
+
+#: src/proposals/update/CallUpdateContainer.tsx
+msgid "Call update"
 msgstr ""
 
 #: src/issues/IssueSummary.tsx
@@ -1924,6 +1942,11 @@ msgstr ""
 
 #: src/administration/branding/AdministrationBranding.tsx
 msgid "Configuration has been updated."
+msgstr ""
+
+#: src/proposals/update/general/CallGeneralDataTable.tsx
+#: src/proposals/update/review/CallReviewSection.tsx
+msgid "Configuration key"
 msgstr ""
 
 #: src/rancher/template/QuestionGroup.tsx
@@ -2570,6 +2593,10 @@ msgstr ""
 msgid "Customers"
 msgstr ""
 
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+msgid "Cut-of date"
+msgstr ""
+
 #: src/proposals/call-management/CallManagementPage.tsx
 msgid "Cutoff"
 msgstr ""
@@ -3069,6 +3096,8 @@ msgstr ""
 
 #: src/proposals/details/CallDocumentsCard.tsx
 #: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/documents/CallDocumentsSection.tsx
 msgid "Documents"
 msgstr ""
 
@@ -3207,6 +3236,10 @@ msgstr ""
 #: src/project/team/AddMemberButton.tsx
 #: src/proposals/call-management/ProposalCallEditButton.tsx
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/update/documents/EditDocumentsButton.tsx
+#: src/proposals/update/general/EditGeneralInfoButton.tsx
+#: src/proposals/update/review/EditReviewInfoButton.tsx
+#: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -4071,6 +4104,8 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
 msgid "General"
 msgstr ""
 
@@ -5283,7 +5318,12 @@ msgid "Max # of snapshots"
 msgstr ""
 
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Max allocation"
+msgstr ""
+
+#: src/proposals/update/ProposalCallQuotas.tsx
+msgid "Max applicants"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
@@ -5417,6 +5457,7 @@ msgid "MiB"
 msgstr ""
 
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Min allocation"
 msgstr ""
 
@@ -5848,6 +5889,10 @@ msgstr ""
 msgid "New role"
 msgstr ""
 
+#: src/proposals/update/rounds/RoundCreateButton.tsx
+msgid "New round"
+msgstr ""
+
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
 msgid "New security group"
 msgstr ""
@@ -5876,6 +5921,7 @@ msgid "Next hop (IP)"
 msgstr ""
 
 #: src/proposals/details/CallDetailsHeaderBody.tsx
+#: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "Next round ends in"
 msgstr ""
 
@@ -6101,7 +6147,14 @@ msgid "Not signed in"
 msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "Nothing to see here"
+msgstr ""
+
+#: src/proposals/update/general/CallGeneralDataTable.tsx
+#: src/proposals/update/review/CallReviewSection.tsx
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+msgid "Nothing to see here."
 msgstr ""
 
 #: src/marketplace/resources/list/CustomerResourcesListPlaceholder.tsx
@@ -6349,6 +6402,7 @@ msgstr ""
 #: src/marketplace/resources/details/OfferingDetailsField.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Offering name"
 msgstr ""
 
@@ -6406,6 +6460,8 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/providers/dashboard/ProviderDashboard.tsx
 msgid "Offerings"
 msgstr ""
@@ -7909,6 +7965,10 @@ msgstr ""
 msgid "Propagated"
 msgstr ""
 
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+msgid "Proposal"
+msgstr ""
+
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/details/CustomerErrorDialog.tsx
 msgid "Propose changes"
@@ -7983,6 +8043,7 @@ msgstr ""
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/navigation/sidebar/ProviderMenu.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Provider"
@@ -8696,6 +8757,7 @@ msgid "Resource already has this plan."
 msgstr ""
 
 #: src/proposals/call-management/CallExpandableRow.tsx
+#: src/proposals/update/ProposalCallQuotas.tsx
 msgid "Resource availability"
 msgstr ""
 
@@ -8941,6 +9003,8 @@ msgid "Retype OpenStack Volume"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/review/CallReviewSection.tsx
 msgid "Review"
 msgstr ""
 
@@ -8964,7 +9028,12 @@ msgstr ""
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/update/review/CallReviewSection.tsx
 msgid "Review strategy"
+msgstr ""
+
+#: src/proposals/update/ProposalCallQuotas.tsx
+msgid "Reviewed"
 msgstr ""
 
 #: src/invitations/UserPermissionRequestsList.tsx
@@ -8982,6 +9051,15 @@ msgstr ""
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Reviewed by"
+msgstr ""
+
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+msgid "Reviewer"
+msgstr ""
+
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+msgid "Reviewers"
 msgstr ""
 
 #: src/customer/routes.ts
@@ -9052,11 +9130,20 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+msgid "Round name"
+msgstr ""
+
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 msgid "Round strategy"
+msgstr ""
+
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+msgid "Rounds"
 msgstr ""
 
 #: src/openstack/openstack-tenant/tabs.ts
@@ -9342,6 +9429,10 @@ msgstr ""
 
 #: src/proposals/details/CallShowAllRounds.tsx
 msgid "See all rounds"
+msgstr ""
+
+#: src/proposals/update/CallUpdateHero.tsx
+msgid "See call"
 msgstr ""
 
 #: src/booking/offering/BookingResourceListItem.tsx
@@ -10172,6 +10263,7 @@ msgid "Start"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/proposals/update/rounds/CallRoundsSection.tsx
 msgid "Start date"
 msgstr ""
 
@@ -10258,6 +10350,8 @@ msgstr ""
 #: src/proposals/ProposalPublicCallsPage.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
+#: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
@@ -10361,6 +10455,7 @@ msgid "Subject"
 msgstr ""
 
 #: src/proposals/call-management/CallExpandableRow.tsx
+#: src/proposals/update/rounds/CallRoundsSection.tsx
 msgid "Submissions"
 msgstr ""
 
@@ -10395,6 +10490,10 @@ msgstr ""
 #: src/resource/actions/ResourceActionDialog.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
+msgstr ""
+
+#: src/proposals/update/CallUpdateHero.tsx
+msgid "Submit changes"
 msgstr ""
 
 #: src/slurm/details/SubmitJobAction.tsx
@@ -11309,6 +11408,7 @@ msgstr ""
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/project/ProjectEventsFilter.tsx
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
@@ -11716,6 +11816,7 @@ msgid "Unable to load booking offerings."
 msgstr ""
 
 #: src/proposals/details/PublicCallDetailsContainer.tsx
+#: src/proposals/update/CallUpdateContainer.tsx
 msgid "Unable to load call details."
 msgstr ""
 
@@ -12834,6 +12935,18 @@ msgstr ""
 msgid "User"
 msgstr ""
 
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+msgid "User 1"
+msgstr ""
+
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+msgid "User 2"
+msgstr ""
+
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+msgid "User 3"
+msgstr ""
+
 #: src/administration/agreements/CreateUserAgreementsForm.tsx
 msgid "User agreement has been created"
 msgstr ""
@@ -13156,6 +13269,8 @@ msgstr ""
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 #: src/marketplace/resources/usage/utils.ts
+#: src/proposals/update/general/CallGeneralDataTable.tsx
+#: src/proposals/update/review/CallReviewSection.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Value"
 msgstr ""
@@ -13453,6 +13568,10 @@ msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
 msgid "You can remove this organization by pressing the button"
+msgstr ""
+
+#: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
+msgid "You can set the first round for this call."
 msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
