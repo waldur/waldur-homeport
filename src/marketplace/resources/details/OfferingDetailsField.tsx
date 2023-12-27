@@ -5,19 +5,17 @@ import { Field } from '@waldur/resource/summary';
 
 import { openOfferingDetailsDialog } from '../../offerings/details/OfferingDetailsButton';
 
-export const OfferingDetailsField = ({ resource }) => {
+export const OfferingDetailsField = ({ offering }) => {
   const dispatch = useDispatch();
   return (
     <Field
       label={translate('Offering name')}
       value={
         <>
-          {resource.offering_name}{' '}
+          {offering.name}{' '}
           <a
             className="text-link"
-            onClick={() =>
-              dispatch(openOfferingDetailsDialog(resource.offering_uuid))
-            }
+            onClick={() => dispatch(openOfferingDetailsDialog(offering))}
           >
             [{translate('Show offering')}]
           </a>

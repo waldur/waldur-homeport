@@ -169,7 +169,11 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
             }
             quickFooterClassName="justify-content-center"
           >
-            <ResourceDetailsHeaderBody resource={resource} scope={scope} />
+            <ResourceDetailsHeaderBody
+              resource={resource}
+              scope={scope}
+              offering={offering}
+            />
           </PublicDashboardHero>
 
           <ResourceDetailsBar />

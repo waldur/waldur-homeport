@@ -4,21 +4,17 @@ import { useAsync } from 'react-use';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import {
-  getProviderOffering,
-  getCategory,
-} from '@waldur/marketplace/common/api';
+import { getCategory } from '@waldur/marketplace/common/api';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 interface OfferingDetailsDialogProps {
-  resolve: { offeringUuid: string };
+  resolve: { offering: any };
 }
 
-async function loadData(offering_uuid: string) {
-  const offering = await getProviderOffering(offering_uuid);
+async function loadData(offering: any) {
   const category = await getCategory(offering.category_uuid);
   const sections = category.sections;
   const tabs = getTabs({ offering, sections });
@@ -32,8 +28,8 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
   props,
 ) => {
   const { loading, error, value } = useAsync(
-    () => loadData(props.resolve.offeringUuid),
-    [props.resolve.offeringUuid],
+    () => loadData(props.resolve.offering),
+    [props.resolve.offering],
   );
   return (
     <ModalDialog
