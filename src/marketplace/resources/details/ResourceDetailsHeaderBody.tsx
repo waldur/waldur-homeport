@@ -15,11 +15,12 @@ import { ResourceTypeField } from './ResourceTypeField';
 
 interface ResourceDetailsHeaderBodyProps {
   resource: Resource;
+  offering;
   scope;
 }
 
 export const ResourceDetailsHeaderBody: FunctionComponent<ResourceDetailsHeaderBodyProps> =
-  ({ resource, scope }) => {
+  ({ resource, offering, scope }) => {
     return (
       <>
         {resource.description ? <p>{resource.description}</p> : null}
@@ -28,7 +29,7 @@ export const ResourceDetailsHeaderBody: FunctionComponent<ResourceDetailsHeaderB
         ) : (
           <>
             <ResourceTypeField resource={resource} />
-            <OfferingDetailsField resource={resource} />
+            <OfferingDetailsField offering={offering} />
             <PlanDetailsField resource={resource} />
             <EndDateField resource={resource} />
             <ProjectEndDateField resource={resource} />
