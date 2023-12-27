@@ -119,6 +119,7 @@ const TableOptions = {
     'Approved at',
     'Approved by',
   ],
+  queryField: 'query',
 };
 
 const mapStateToProps = (state: RootState) => ({
