@@ -93,6 +93,9 @@ const mapPropsToFilter = (props) => {
     if (props.filter.state) {
       filter.state = props.filter.state.value;
     }
+    if (props.filter.type) {
+      filter.type = props.filter.type.value;
+    }
   }
   return filter;
 };

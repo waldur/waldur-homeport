@@ -10,6 +10,7 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { OrderState } from '../types';
 
 import { OrderStateFilter } from './OrderStateFilter';
+import { OrderTypeFilter } from './OrderTypeFilter';
 
 const getOrderStateFilterOptions = (): {
   value: OrderState;
@@ -53,6 +54,14 @@ const PureSupportOrdersListFilter = () => (
       ellipsis={false}
     >
       <OrderStateFilter options={getOrderStateFilterOptions} />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Type')}
+      name="type"
+      badgeValue={(value) => value?.label}
+      ellipsis={true}
+    >
+      <OrderTypeFilter />
     </TableFilterItem>
   </>
 );

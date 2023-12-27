@@ -11397,6 +11397,7 @@ msgstr ""
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/orders/list/ResourceOrders.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/marketplace/robot-accounts/RobotAccountList.tsx
