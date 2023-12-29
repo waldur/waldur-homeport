@@ -41,6 +41,14 @@ export const ProviderForm = () => (
     >
       <Field name="management_url" component={StringField} />
     </FormGroup>
+    <FormGroup
+      label={translate('Protected fields')}
+      description={translate(
+        'Enter a comma separated list of fields of the user profile that would be protected from editing in Waldur.',
+      )}
+    >
+      <Field name="protected_fields" component={StringField} />
+    </FormGroup>
     <Form.Group className="mb-7">
       <Field
         name="is_active"

@@ -3500,6 +3500,10 @@ msgstr ""
 msgid "Enter IPv4 address."
 msgstr ""
 
+#: src/administration/providers/ProviderForm.tsx
+msgid "Enter a comma separated list of fields of the user profile that would be protected from editing in Waldur."
+msgstr ""
+
 #: src/openstack/openstack-security-groups/rule-editor/PortRangeField.tsx
 msgid "Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports."
 msgstr ""
@@ -8036,6 +8040,10 @@ msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
 msgid "Proposed subnets: {value}."
+msgstr ""
+
+#: src/administration/providers/ProviderForm.tsx
+msgid "Protected fields"
 msgstr ""
 
 #: src/events/ExpandableEventDetailsTable.tsx
