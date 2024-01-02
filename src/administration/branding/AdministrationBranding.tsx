@@ -13,7 +13,7 @@ import { isSupport as isSupportSelector } from '@waldur/workspace/selectors';
 import { BrandingForm } from './BrandingForm';
 
 const saveConfig = (values) =>
-  sendForm('POST', `${ENV.apiEndpoint}api/branding/`, values);
+  sendForm('POST', `${ENV.apiEndpoint}api/override-settings/`, values);
 
 const LOGOS = [
   'LOGIN_LOGO',
