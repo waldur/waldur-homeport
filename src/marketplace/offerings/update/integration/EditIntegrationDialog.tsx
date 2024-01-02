@@ -6,7 +6,7 @@ import { FormSection, reduxForm, Field } from 'redux-form';
 import { FormContainer, StringField, SubmitButton } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
-import { updateOffering } from '@waldur/marketplace/common/api';
+import { updateOfferingIntegration } from '@waldur/marketplace/common/api';
 import {
   allowToUpdateService,
   getPluginOptionsForm,
@@ -37,7 +37,10 @@ export const EditIntegrationDialog = connect(
     const update = useCallback(
       async (formData) => {
         try {
-          await updateOffering(props.resolve.offering.uuid, formData);
+          await updateOfferingIntegration(
+            props.resolve.offering.uuid,
+            formData,
+          );
           dispatch(
             showSuccess(translate('Offering has been updated successfully.')),
           );

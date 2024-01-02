@@ -135,8 +135,11 @@ export const getPublicOffering = (id: string, options?: AxiosRequestConfig) =>
 export const createProviderOffering = (data) =>
   post<Offering>('/marketplace-provider-offerings/', data);
 
-export const updateOffering = (offeringId, data) =>
-  patch<Offering>(`/marketplace-provider-offerings/${offeringId}/`, data);
+export const updateOfferingIntegration = (offeringId, data) =>
+  post<Offering>(
+    `/marketplace-provider-offerings/${offeringId}/update_integration/`,
+    data,
+  );
 
 export const deleteProviderOffering = (offeringId) =>
   deleteById<Offering>(`/marketplace-provider-offerings/`, offeringId);
