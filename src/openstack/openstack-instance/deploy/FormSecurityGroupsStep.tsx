@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
@@ -137,7 +138,24 @@ export const FormSecurityGroupsStep = (props: FormStepProps) => {
         columns={[
           {
             title: translate('Security group name'),
-            render: ({ row }) => row.name,
+            render: ({ row }) => (
+              <>
+                {row.name}{' '}
+                {row.name === 'default' && (
+                  <Tip
+                    label={translate(
+                      'Removing default security group can remove egress access from the VM and block communication with Openstack metadata service.',
+                    )}
+                    id="default_security_group_tooltip"
+                  >
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      style={{ color: 'red' }}
+                    ></i>
+                  </Tip>
+                )}
+              </>
+            ),
           },
           {
             title: translate('Description'),

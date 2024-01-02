@@ -8504,6 +8504,10 @@ msgstr ""
 msgid "Removed organizations cannot be restored!"
 msgstr ""
 
+#: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
+msgid "Removing default security group can remove egress access from the VM and block communication with Openstack metadata service."
+msgstr ""
+
 #: src/customer/details/OrganizationRemovalErrorDialog.tsx
 msgid "Removing organization {organizationName}"
 msgstr ""
