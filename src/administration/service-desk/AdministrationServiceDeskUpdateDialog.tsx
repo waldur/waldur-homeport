@@ -1,13 +1,11 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
 import {
   FormContainer,
   NumberField,
-  SelectField,
   StringField,
   SubmitButton,
   TextField,
@@ -29,7 +27,6 @@ const saveConfig = (values) =>
 const AdministrationServiceDeskUpdateDialog: FunctionComponent<any> = (
   props,
 ) => {
-  const [serviceDeskBackend, setServiceDeskBackend] = useState();
   const dispatch = useDispatch();
   const callback = async (formData) => {
     try {
@@ -63,21 +60,7 @@ const AdministrationServiceDeskUpdateDialog: FunctionComponent<any> = (
           clearOnUnmount={false}
           floating={true}
         >
-          <SelectField
-            name="WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE"
-            label={translate('Backend type')}
-            required={true}
-            options={[
-              { label: translate('Atlassian'), value: 'atlassian' },
-              { label: translate('Zammad'), value: 'zammad' },
-            ]}
-            isClearable={false}
-            validate={required}
-            onChange={(value: any) => setServiceDeskBackend(value)}
-            simpleValue={true}
-          />
-
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <div className="mb-2">
               <Field
                 name="ATLASSIAN_USE_OLD_API"
@@ -120,21 +103,21 @@ const AdministrationServiceDeskUpdateDialog: FunctionComponent<any> = (
               />
             </div>
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_API_URL"
               label={translate('API URL')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_USERNAME"
               label={translate('Username')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <Field
               name="ATLASSIAN_PASSWORD"
               type="password"
@@ -143,14 +126,14 @@ const AdministrationServiceDeskUpdateDialog: FunctionComponent<any> = (
               component={StringField}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <EmailField
               name="ATLASSIAN_EMAIL"
               label={translate('Email')}
               maxLength={75}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <Field
               name="ATLASSIAN_TOKEN"
               type="password"
@@ -159,28 +142,28 @@ const AdministrationServiceDeskUpdateDialog: FunctionComponent<any> = (
               component={StringField}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_PROJECT_ID"
               label={translate('Project ID')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_DEFAULT_OFFERING_ISSUE_TYPE"
               label={translate('Default offering issue type')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_EXCLUDED_ATTACHMENT_TYPES"
               label={translate('List of attachment types')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <TextField
               name="ATLASSIAN_ISSUE_TYPES"
               label={translate('Issue types')}
@@ -189,98 +172,98 @@ const AdministrationServiceDeskUpdateDialog: FunctionComponent<any> = (
               style={{ height: '120px' }}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_AFFECTED_RESOURCE_FIELD"
               label={translate('Affected resource')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_DESCRIPTION_TEMPLATE"
               label={translate('Description template')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_SUMMARY_TEMPLATE"
               label={translate('Summary template')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_IMPACT_FIELD"
               label={translate('Impact')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_ORGANISATION_FIELD"
               label={translate('Organisation')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_RESOLUTION_SLA_FIELD"
               label={translate('Resolution SLA')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_PROJECT_FIELD"
               label={translate('Project')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_REPORTER_FIELD"
               label={translate('Reporter')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_CALLER_FIELD"
               label={translate('Caller')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_SLA_FIELD"
               label={translate('SLA')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_LINKED_ISSUE_TYPE"
               label={translate('Type of linked issue')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_SATISFACTION_FIELD"
               label={translate('Satisfaction')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_REQUEST_FEEDBACK_FIELD"
               label={translate('Issue request feedback')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'atlassian' && (
+          {props.serviceDeskProvider === 'atlassian' && (
             <StringField
               name="ATLASSIAN_TEMPLATE_FIELD"
               label={translate('Template field')}
@@ -288,14 +271,14 @@ const AdministrationServiceDeskUpdateDialog: FunctionComponent<any> = (
             />
           )}
 
-          {serviceDeskBackend === 'zammad' && (
+          {props.serviceDeskProvider === 'zammad' && (
             <StringField
               name="ZAMMAD_API_URL"
               label={translate('API URL')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'zammad' && (
+          {props.serviceDeskProvider === 'zammad' && (
             <Field
               name="ZAMMAD_TOKEN"
               type="password"
@@ -304,7 +287,7 @@ const AdministrationServiceDeskUpdateDialog: FunctionComponent<any> = (
               component={StringField}
             />
           )}
-          {serviceDeskBackend === 'zammad' && (
+          {props.serviceDeskProvider === 'zammad' && (
             <StringField
               name="ZAMMAD_GROUP"
               label={translate('Zammad group')}
@@ -314,32 +297,53 @@ const AdministrationServiceDeskUpdateDialog: FunctionComponent<any> = (
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'zammad' && (
+          {props.serviceDeskProvider === 'zammad' && (
             <StringField
               name="ZAMMAD_ARTICLE_TYPE"
               label={translate('Type of a comment.')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'zammad' && (
+          {props.serviceDeskProvider === 'zammad' && (
             <StringField
               name="ZAMMAD_COMMENT_MARKER"
               label={translate('Marker for comment')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'zammad' && (
+          {props.serviceDeskProvider === 'zammad' && (
             <StringField
               name="ZAMMAD_COMMENT_PREFIX"
               label={translate('Comment prefix')}
               maxLength={150}
             />
           )}
-          {serviceDeskBackend === 'zammad' && (
+          {props.serviceDeskProvider === 'zammad' && (
             <NumberField
               name="ZAMMAD_COMMENT_COOLDOWN_DURATION"
               label={translate('Comment cooldown duration')}
               min={1}
+            />
+          )}
+          {props.serviceDeskProvider === 'smax' && (
+            <StringField
+              name="SMAX_API_URL"
+              label={translate('API URL')}
+              maxLength={150}
+            />
+          )}
+          {props.serviceDeskProvider === 'smax' && (
+            <StringField
+              name="SMAX_TENANT_ID"
+              label={translate('Tenant ID')}
+              maxLength={150}
+            />
+          )}
+          {props.serviceDeskProvider === 'smax' && (
+            <StringField
+              name="SMAX_LOGIN"
+              label={translate('Login')}
+              maxLength={150}
             />
           )}
         </FormContainer>
@@ -350,7 +354,7 @@ const AdministrationServiceDeskUpdateDialog: FunctionComponent<any> = (
 
 const enhance = compose(
   reduxForm({
-    form: 'EditServiceDeskBackend',
+    form: 'Editprops.serviceDeskProvider',
   }),
 );
 
