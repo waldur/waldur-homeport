@@ -289,6 +289,7 @@ const AdministrationServiceDeskUpdateDialog: FunctionComponent<any> = (
           )}
           {props.serviceDeskProvider === 'zammad' && (
             <StringField
+              floating={false}
               name="ZAMMAD_GROUP"
               label={translate('Zammad group')}
               placeholder={translate(
