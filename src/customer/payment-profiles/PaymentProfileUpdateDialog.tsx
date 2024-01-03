@@ -62,6 +62,7 @@ const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
           />
 
           <SelectField
+            floating={false}
             name="payment_type"
             label={translate('Type')}
             required={true}
