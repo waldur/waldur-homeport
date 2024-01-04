@@ -11,6 +11,7 @@ import './SecretField.scss';
 
 interface SecretFieldProps extends FormField {
   placeholder?: string;
+  maxLength?: number;
 }
 
 export const SecretField: React.FC<SecretFieldProps> = (props) => {

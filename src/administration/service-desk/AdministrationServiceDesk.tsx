@@ -4,21 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { ServiceDeskProviderLogo } from '@waldur/administration/service-desk/ServiceDeskProviderLogo';
 import { ENV } from '@waldur/configs/default';
-import { get, sendForm } from '@waldur/core/api';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { isStaffOrSupport as isStaffOrSupportSelector } from '@waldur/workspace/selectors';
 
-const AdministrationServiceDeskUpdateDialogContainer = lazyComponent(
-  () => import('./AdministrationServiceDeskUpdateDialog'),
-  'AdministrationServiceDeskUpdateDialogContainer',
-);
+import { getDBSettings, saveConfig } from './api';
 
-const getDBSettings = () => get('/override-settings/');
-const saveConfig = (values) =>
-  sendForm('POST', `${ENV.apiEndpoint}api/override-settings/`, values);
+const AdministrationServiceDeskUpdateDialog = lazyComponent(
+  () => import('./AdministrationServiceDeskUpdateDialog'),
+  'AdministrationServiceDeskUpdateDialog',
+);
 
 export const AdministrationServiceDesk = () => {
   const isStaffOrSupport = useSelector(isStaffOrSupportSelector);
@@ -29,10 +26,10 @@ export const AdministrationServiceDesk = () => {
     try {
       const initialPluginValues = await getDBSettings();
       dispatch(
-        openModalDialog(AdministrationServiceDeskUpdateDialogContainer, {
+        openModalDialog(AdministrationServiceDeskUpdateDialog, {
           size: 'lg',
           initialValues: initialPluginValues.data,
-          serviceDeskProvider: serviceDeskProvider,
+          name: serviceDeskProvider,
         }),
       );
     } catch (e) {
@@ -80,7 +77,7 @@ export const AdministrationServiceDesk = () => {
                     </div>
                     <div className="flex-grow-1">
                       <h1 className="fs-2 text-nowrap fw-boldest">
-                        {translate(serviceDeskProvider.toUpperCase())}
+                        {translate(capitalize(serviceDeskProvider))}
                       </h1>
                       <p className="fs-6 text-dark">
                         {translate(
