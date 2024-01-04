@@ -45,6 +45,9 @@ msgstr ""
 msgid "A profile has been created."
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+#: src/administration/service-desk/SmaxSettings.tsx
+#: src/administration/service-desk/ZammadSettings.tsx
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
 #: src/marketplace-remote/marketplace.ts
 #: src/openstack/OpenStackForm.tsx
@@ -519,6 +522,10 @@ msgstr ""
 #: src/issues/IssueSummary.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 msgid "Affected resource"
+msgstr ""
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Affected resource field name"
 msgstr ""
 
 #: src/user/dashboard/UserProfile.tsx
@@ -1478,6 +1485,10 @@ msgstr ""
 msgid "Caller"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Caller field name"
+msgstr ""
+
 #: src/marketplace/utils.ts
 #: src/proposals/ProposalPublicCallsPage.tsx
 msgid "Calls"
@@ -1857,6 +1868,10 @@ msgstr ""
 msgid "Collation"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Comma seperated issue types"
+msgstr ""
+
 #: src/invitations/PermissionRequestActionDialog.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
@@ -1868,6 +1883,14 @@ msgstr ""
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Comment"
+msgstr ""
+
+#: src/administration/service-desk/ZammadSettings.tsx
+msgid "Comment cooldown duration"
+msgstr ""
+
+#: src/administration/service-desk/ZammadSettings.tsx
+msgid "Comment prefix"
 msgstr ""
 
 #: src/issues/comments/IssueCommentsContainer.tsx
@@ -1953,6 +1976,7 @@ msgstr ""
 msgid "Configuration options"
 msgstr ""
 
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/openstack/openstack-instance/actions/update-internal-ips/UpdateInternalIpsSetAction.tsx
 msgid "Configure"
@@ -2728,6 +2752,10 @@ msgstr ""
 msgid "Default cluster label"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Default offering issue type"
+msgstr ""
+
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Default tax percent"
 msgstr ""
@@ -2909,6 +2937,10 @@ msgstr ""
 msgid "Description ({language})"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Description template"
+msgstr ""
+
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 msgid "Desired replicas"
 msgstr ""
@@ -3008,12 +3040,17 @@ msgstr ""
 msgid "Direction"
 msgstr ""
 
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+msgid "Disable"
+msgstr ""
+
 #: src/openstack/openstack-subnet/fields.tsx
 msgid "Disable gateway IP advertising via DHCP"
 msgstr ""
 
 #: src/administration/notifications/HooksList.tsx
 #: src/administration/providers/ProviderCard.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/hooks/HooksList.tsx
 #: src/user/support/UserFilter.tsx
@@ -3352,6 +3389,7 @@ msgstr ""
 
 #: src/administration/notifications/HooksList.tsx
 #: src/administration/providers/ProviderUsersDialog.tsx
+#: src/administration/service-desk/AtlassianSettings.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -3395,6 +3433,7 @@ msgstr ""
 msgid "Emails"
 msgstr ""
 
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
 msgid "Enable"
 msgstr ""
@@ -3422,6 +3461,7 @@ msgstr ""
 #: src/administration/notifications/HooksList.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/administration/providers/ProviderForm.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/hooks/HookForm.tsx
@@ -4496,6 +4536,10 @@ msgstr ""
 msgid "Images"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Impact field name"
+msgstr ""
+
 #: src/marketplace/resources/import/ImportButton.tsx
 msgid "Import"
 msgstr ""
@@ -4888,6 +4932,14 @@ msgstr ""
 msgid "Issue link"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Issue request feedback field name"
+msgstr ""
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Issue types"
+msgstr ""
+
 #: src/issues/events.tsx
 msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr ""
@@ -5113,6 +5165,10 @@ msgstr ""
 msgid "List of IPv4 or IPv6 CIDR addresses from where connection to self-service is allowed"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "List of excluded attachment types"
+msgstr ""
+
 #: src/administration/roles/PermissionOptions.tsx
 msgid "List resource users"
 msgstr ""
@@ -5185,6 +5241,7 @@ msgstr ""
 msgid "Logging user in"
 msgstr ""
 
+#: src/administration/service-desk/SmaxSettings.tsx
 #: src/auth/SigninForm.tsx
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/navigation/sidebar/UnifiedSidebar.tsx
@@ -5286,12 +5343,20 @@ msgstr ""
 msgid "Management offering"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Map waldur users to service desk agents"
+msgstr ""
+
 #: src/invoices/list/MarkAsPaidButton.tsx
 msgid "Mark as paid"
 msgstr ""
 
 #: src/invoices/list/MarkAsPaidDialog.tsx
 msgid "Mark invoice as paid"
+msgstr ""
+
+#: src/administration/service-desk/ZammadSettings.tsx
+msgid "Marker for comment"
 msgstr ""
 
 #: src/administration/routes.ts
@@ -6706,6 +6771,10 @@ msgstr ""
 msgid "Orders pending approval"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Organisation field name"
+msgstr ""
+
 #: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
@@ -6975,6 +7044,7 @@ msgstr ""
 msgid "Partial access"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
 #: src/auth/SigninForm.tsx
 #: src/azure/sql/AzureSQLServerSummary.tsx
 #: src/openstack/OpenStackForm.tsx
@@ -7772,6 +7842,10 @@ msgstr ""
 msgid "Project"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Project ID"
+msgstr ""
+
 #: src/project/ProjectTablePlaceholder.tsx
 msgid "Project aggregates and isolates teams and resources."
 msgstr ""
@@ -7844,6 +7918,10 @@ msgstr ""
 #: src/project/ProjectEventsFilter.tsx
 #: src/project/events.ts
 msgid "Project events"
+msgstr ""
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Project field name"
 msgstr ""
 
 #: src/project/effects.ts
@@ -8125,6 +8203,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/integration/RemoteActions.tsx
 msgid "Pull orders"
+msgstr ""
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Pull priorities"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/RemoteActions.tsx
@@ -8551,6 +8633,10 @@ msgstr ""
 msgid "Reporter"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Reporter field name"
+msgstr ""
+
 #: src/navigation/sidebar/ReportingMenu.tsx
 #: src/reporting/routes.ts
 msgid "Reporting"
@@ -8736,6 +8822,10 @@ msgstr ""
 
 #: src/issues/IssueSummary.tsx
 msgid "Resolution"
+msgstr ""
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Resolution SLA field name"
 msgstr ""
 
 #: src/issues/list/IssuesFilter.tsx
@@ -9191,6 +9281,10 @@ msgstr ""
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "SLA field name"
+msgstr ""
+
 #: src/slurm/EditDialog.tsx
 #: src/slurm/SetLimitsDialog.tsx
 #: src/slurm/marketplace.ts
@@ -9245,6 +9339,10 @@ msgstr ""
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 #: src/openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx
 msgid "SSH public keys"
+msgstr ""
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Satisfaction field name"
 msgstr ""
 
 #: src/administration/FeaturesList.tsx
@@ -9810,6 +9908,10 @@ msgstr ""
 
 #: src/i18n/constants.ts
 msgid "Service catalog offerings"
+msgstr ""
+
+#: src/administration/routes.ts
+msgid "Service desk"
 msgstr ""
 
 #: src/rancher/cluster/tabs.ts
@@ -10603,6 +10705,10 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Summary template"
+msgstr ""
+
 #: src/administration/dashboard/AdministrationProfile.tsx
 #: src/issues/routes.ts
 #: src/navigation/FooterLinks.tsx
@@ -10792,6 +10898,10 @@ msgstr ""
 msgid "Template details"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Template field name"
+msgstr ""
+
 #: src/issues/create/IssueCreateForm.tsx
 msgid "Template files"
 msgstr ""
@@ -10801,6 +10911,7 @@ msgstr ""
 msgid "Tenant"
 msgstr ""
 
+#: src/administration/service-desk/SmaxSettings.tsx
 #: src/azure/provider/AzureForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Tenant ID"
@@ -10975,6 +11086,10 @@ msgstr ""
 
 #: src/azure/common/validators.ts
 msgid "The name must be shorter than 15 characters."
+msgstr ""
+
+#: src/administration/service-desk/ZammadSettings.tsx
+msgid "The name of the group to which the ticket will be added"
 msgstr ""
 
 #: src/marketplace/details/ProjectField.tsx
@@ -11309,6 +11424,8 @@ msgstr ""
 msgid "To remove your organization, please send an email to {supportEmail}. Thank you!"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+#: src/administration/service-desk/ZammadSettings.tsx
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
 #: src/marketplace-remote/marketplace.ts
 #: src/navigation/header/UserToken.tsx
@@ -11440,6 +11557,14 @@ msgstr ""
 #: src/user/keys/KeysList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
+msgstr ""
+
+#: src/administration/service-desk/ZammadSettings.tsx
+msgid "Type of a comment"
+msgstr ""
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Type of linked issue"
 msgstr ""
 
 #: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
@@ -12541,6 +12666,11 @@ msgstr ""
 msgid "Unable to update static routes."
 msgstr ""
 
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
+msgid "Unable to update the configurations."
+msgstr ""
+
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
 msgid "Unable to update user."
@@ -12659,6 +12789,7 @@ msgid "Unpublish as Google Calendar"
 msgstr ""
 
 #: src/administration/notifications/HookUpdateButton.tsx
+#: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
 #: src/broadcasts/BroadcastUpdateButton.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
@@ -12853,6 +12984,10 @@ msgstr ""
 msgid "Update static routes"
 msgstr ""
 
+#: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
+msgid "Update {name} settings"
+msgstr ""
+
 #: src/resource/actions/UpdateResourceDialog.tsx
 msgid "Update {resourceType}"
 msgstr ""
@@ -12935,9 +13070,21 @@ msgstr ""
 msgid "Use an existing namespace"
 msgstr ""
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Use automatic request mapping"
+msgstr ""
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Use old API"
+msgstr ""
+
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 msgid "Use sudo"
+msgstr ""
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Use teenage API"
 msgstr ""
 
 #: src/quotas/QuotasTable.tsx
@@ -13116,6 +13263,7 @@ msgid "User {user_link} logged out successfully with SAML2."
 msgstr ""
 
 #: src/administration/TokensList.tsx
+#: src/administration/service-desk/AtlassianSettings.tsx
 #: src/auth/SigninForm.tsx
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/UsernameGroup.tsx
@@ -13331,6 +13479,7 @@ msgid "Vendor support pages"
 msgstr ""
 
 #: src/administration/providers/ProviderForm.tsx
+#: src/administration/service-desk/AtlassianSettings.tsx
 msgid "Verify SSL"
 msgstr ""
 
@@ -13750,6 +13899,10 @@ msgstr ""
 
 #: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Your source for everything as a service."
+msgstr ""
+
+#: src/administration/service-desk/ZammadSettings.tsx
+msgid "Zammad group"
 msgstr ""
 
 #: src/slurm/details/AllocationUsersTable.tsx
@@ -14417,6 +14570,10 @@ msgstr ""
 #: src/invitations/GroupInvitationMessage.tsx
 #: src/invitations/InvitationMessage.tsx
 msgid "{sender} has invited you to join {name} {type} in {role} role."
+msgstr ""
+
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+msgid "{supportServiceProvider} service desk."
 msgstr ""
 
 #: src/navigation/FooterLinks.tsx

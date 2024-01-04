@@ -15,6 +15,11 @@ const AdministrationBranding = lazyComponent(
   'AdministrationBranding',
 );
 
+const AdministrationServiceDesk = lazyComponent(
+  () => import('./service-desk/AdministrationServiceDesk'),
+  'AdministrationServiceDesk',
+);
+
 const FeaturesList = lazyComponent(
   () => import('./FeaturesList'),
   'FeaturesList',
@@ -129,6 +134,16 @@ export const states: StateDeclaration[] = [
     component: AdministrationBranding,
     data: {
       breadcrumb: () => translate('Branding'),
+    },
+  },
+
+  {
+    name: 'admin-service-desk',
+    url: 'service-desk/',
+    parent: 'admin-settings',
+    component: AdministrationServiceDesk,
+    data: {
+      breadcrumb: () => translate('Service desk'),
     },
   },
 
