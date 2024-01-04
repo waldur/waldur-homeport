@@ -84,7 +84,7 @@ export const AdministrationServiceDesk = () => {
                       </h1>
                       <p className="fs-6 text-dark">
                         {translate(
-                          '{supportServiceProvider} service provider for service desk.',
+                          '{supportServiceProvider} service desk.',
                           {
                             supportServiceProvider:
                               capitalize(serviceDeskProvider),
