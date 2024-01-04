@@ -9052,7 +9052,6 @@ msgstr ""
 #: src/marketplace-flows/utils.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
-#: src/marketplace/orders/details/SummarySection.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Reviewed at"
 msgstr ""
@@ -9060,9 +9059,24 @@ msgstr ""
 #: src/marketplace-flows/utils.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
-#: src/marketplace/orders/details/SummarySection.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Reviewed by"
+msgstr ""
+
+#: src/marketplace/orders/details/SummarySection.tsx
+msgid "Reviewed by consumer"
+msgstr ""
+
+#: src/marketplace/orders/details/SummarySection.tsx
+msgid "Reviewed by consumer at"
+msgstr ""
+
+#: src/marketplace/orders/details/SummarySection.tsx
+msgid "Reviewed by provider"
+msgstr ""
+
+#: src/marketplace/orders/details/SummarySection.tsx
+msgid "Reviewed by provider at"
 msgstr ""
 
 #: src/proposals/update/reviewers/CallReviewersSection.tsx

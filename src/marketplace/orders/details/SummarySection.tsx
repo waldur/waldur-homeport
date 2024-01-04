@@ -62,13 +62,23 @@ export const SummarySection = ({
         )}
         <OrderConsumerActions order={order} />
       </DetailsField>
+      {order.consumer_reviewed_by && (
+        <DetailsField label={translate('Reviewed by consumer')}>
+          {order.consumer_reviewed_by_full_name || order.consumer_reviewed_by}
+        </DetailsField>
+      )}
+      {order.consumer_reviewed_at && (
+        <DetailsField label={translate('Reviewed by consumer at')}>
+          {formatDate(order.consumer_reviewed_at)}
+        </DetailsField>
+      )}
       {order.provider_reviewed_by && (
-        <DetailsField label={translate('Reviewed by')}>
+        <DetailsField label={translate('Reviewed by provider')}>
           {order.provider_reviewed_by_full_name || order.provider_reviewed_by}
         </DetailsField>
       )}
       {order.provider_reviewed_at && (
-        <DetailsField label={translate('Reviewed at')}>
+        <DetailsField label={translate('Reviewed by provider at')}>
           {formatDate(order.provider_reviewed_at)}
         </DetailsField>
       )}
