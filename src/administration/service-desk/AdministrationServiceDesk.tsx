@@ -6,7 +6,7 @@ import { ServiceDeskProviderLogo } from '@waldur/administration/service-desk/Ser
 import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
+import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { isStaffOrSupport as isStaffOrSupportSelector } from '@waldur/workspace/selectors';
 
@@ -38,10 +38,29 @@ export const AdministrationServiceDesk = () => {
   };
 
   const toggleServiceDeskBackend = async (serviceDeskProvider) => {
+    let isEnableAction = false;
     if (
       serviceDeskProvider === ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE
     ) {
       serviceDeskProvider = '';
+    } else {
+      isEnableAction = true;
+    }
+    if (isEnableAction) {
+      try {
+        await waitForConfirmation(
+          dispatch,
+          translate('Confirmation'),
+          translate(
+            'Are you sure you want to enable {serviceDesk}? This will disable all the other service desks.',
+            {
+              serviceDesk: serviceDeskProvider,
+            },
+          ),
+        );
+      } catch {
+        return;
+      }
     }
     try {
       await saveConfig({
