@@ -24,6 +24,7 @@ export const AtlassianSettings = () => (
       name="ATLASSIAN_PASSWORD"
       label={translate('Password')}
       maxLength={150}
+      floating={false}
     />
     <EmailField
       name="ATLASSIAN_EMAIL"
@@ -34,6 +35,7 @@ export const AtlassianSettings = () => (
       name="ATLASSIAN_TOKEN"
       label={translate('Token')}
       maxLength={150}
+      floating={false}
     />
     <StringField
       name="ATLASSIAN_PROJECT_ID"

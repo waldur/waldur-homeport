@@ -1,5 +1,3 @@
-import { Field } from 'redux-form';
-
 import {
   FormContainer,
   NumberField,
@@ -15,12 +13,11 @@ export const ZammadSettings = () => (
       label={translate('API URL')}
       maxLength={150}
     />
-    <Field
+    <SecretField
       name="ZAMMAD_TOKEN"
-      type="password"
       label={translate('Token')}
       maxLength={150}
-      component={SecretField}
+      floating={false}
     />
     <StringField
       floating={false}
