@@ -16,7 +16,7 @@ export const BookingMainComponent = ({ resource, refetch }) => {
     ]);
   });
   return (
-    <Card className="resource-bookings" id="booking">
+    <Card className="resource-bookings mb-10" id="booking">
       <Card.Header>
         <Card.Title>{translate('Bookings')}</Card.Title>
       </Card.Header>
