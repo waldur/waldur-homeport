@@ -33,7 +33,7 @@ export const TerminateDialog = reduxForm<
   const dispatch = useDispatch();
   const callback = async () => {
     try {
-      await terminateResource(resource.uuid);
+      await terminateResource(resource.marketplace_resource_uuid);
       dispatch(
         showSuccess(
           translate('Resource termination request has been submitted.'),
