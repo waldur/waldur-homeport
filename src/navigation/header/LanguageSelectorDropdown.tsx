@@ -18,6 +18,7 @@ const LanguageCountry = {
   es: 'es',
   fr: 'fr',
   nb: 'no',
+  cs: 'cz',
 };
 
 export const LanguageSelectorDropdown: FunctionComponent = () => {
