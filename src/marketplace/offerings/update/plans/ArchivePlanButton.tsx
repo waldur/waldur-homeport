@@ -1,4 +1,4 @@
-import { Button } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
@@ -33,8 +33,8 @@ export const ArchivePlanButton = ({ plan, refetch }) => {
     }
   };
   return (
-    <Button className="btn-sm btn-danger" onClick={handler}>
-      {translate('Archive')}
-    </Button>
+    <Dropdown.Item variant="danger" onClick={handler}>
+      <i className="fa fa-trash" /> {translate('Archive')}
+    </Dropdown.Item>
   );
 };
