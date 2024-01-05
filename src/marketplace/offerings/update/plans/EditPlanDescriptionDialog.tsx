@@ -14,7 +14,7 @@ import { formatPlan } from '../../store/utils';
 import { EDIT_PLAN_FORM_ID, getBillingPeriods } from './constants';
 import { PlanForm } from './PlanForm';
 
-export const EditPlanDialog = connect<{}, {}, { resolve: { plan } }>(
+export const EditPlanDescriptionDialog = connect<{}, {}, { resolve: { plan } }>(
   (_, ownProps) => ({
     initialValues: {
       ...ownProps.resolve.plan,
@@ -31,16 +31,7 @@ export const EditPlanDialog = connect<{}, {}, { resolve: { plan } }>(
     const update = useCallback(
       async (formData) => {
         try {
-          const fixedComponents = props.resolve.offering.components
-            .filter((c) => c.billing_type === 'fixed')
-            .map((c) => c.type);
-          const validComponents = props.resolve.offering.components.map(
-            (c) => c.type,
-          );
-          await updatePlan(
-            props.resolve.plan.uuid,
-            formatPlan(formData, fixedComponents, validComponents),
-          );
+          await updatePlan(props.resolve.plan.uuid, formatPlan(formData));
           dispatch(
             showSuccess(translate('Plan has been updated successfully.')),
           );
@@ -61,7 +52,7 @@ export const EditPlanDialog = connect<{}, {}, { resolve: { plan } }>(
           <Modal.Title>{translate('Edit plan')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <PlanForm offering={props.resolve.offering} />
+          <PlanForm />
         </Modal.Body>
         <Modal.Footer>
           <SubmitButton

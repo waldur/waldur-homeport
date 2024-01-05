@@ -8,21 +8,27 @@ import { openModalDialog } from '@waldur/modal/actions';
 
 import { EDIT_PLAN_FORM_ID } from './constants';
 
-const EditPlanDialog = lazyComponent(
-  () => import('./EditPlanDialog'),
-  'EditPlanDialog',
+const EditPlanQuotasDialog = lazyComponent(
+  () => import('./EditPlanQuotasDialog'),
+  'EditPlanQuotasDialog',
 );
 
-export const EditPlanButton: FunctionComponent<{
+export const EditPlanQuotasButton: FunctionComponent<{
   offering;
   plan;
   refetch;
 }> = ({ offering, plan, refetch }) => {
   const dispatch = useDispatch();
+  const components = offering.components.filter(
+    (c) => c.billing_type === 'fixed',
+  );
+  if (components.length === 0) {
+    return null;
+  }
   const callback = () => {
     dispatch(
-      openModalDialog(EditPlanDialog, {
-        resolve: { offering, plan, refetch },
+      openModalDialog(EditPlanQuotasDialog, {
+        resolve: { offering, plan, refetch, components },
         formId: EDIT_PLAN_FORM_ID,
         size: 'lg',
       }),
@@ -30,7 +36,7 @@ export const EditPlanButton: FunctionComponent<{
   };
   return (
     <Button onClick={callback} size="sm" className="me-3">
-      <i className="fa fa-pencil" /> {translate('Edit')}
+      <i className="fa fa-pencil" /> {translate('Edit quotas')}
     </Button>
   );
 };

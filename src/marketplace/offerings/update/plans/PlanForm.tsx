@@ -9,9 +9,8 @@ import { ArticleCodeField } from '../../ArticleCodeField';
 import { FormGroup } from '../../FormGroup';
 
 import { PlanBillingPeriodField } from './PlanBillingPeriodField';
-import { PlanComponents } from './PlanComponents';
 
-export const PlanForm = ({ offering }) => (
+export const PlanForm = () => (
   <>
     <FormGroup label={translate('Name')} required={true}>
       <Field
@@ -28,12 +27,5 @@ export const PlanForm = ({ offering }) => (
       <Field name="description" component={WysiwygEditor} />
     </FormGroup>
     <ArticleCodeField />
-    {offering.components.length > 0 && (
-      <PlanComponents
-        components={offering.components.filter((component) => component.type)}
-        limits={offering.limits}
-        archived={offering.archived}
-      />
-    )}
   </>
 );

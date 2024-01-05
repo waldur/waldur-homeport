@@ -12,9 +12,7 @@ import { getUser } from '@waldur/workspace/selectors';
 import { RefreshButton } from '../components/RefreshButton';
 
 import { AddPlanButton } from './AddPlanButton';
-import { ArchivePlanButton } from './ArchivePlanButton';
-import { ClonePlanButton } from './ClonePlanButton';
-import { EditPlanButton } from './EditPlanButton';
+import { PlanActions } from './PlanActions';
 
 export const PlansSection = (props) => {
   const user = useSelector(getUser);
@@ -78,24 +76,12 @@ export const PlansSection = (props) => {
                       : translate('Active')}
                   </td>
                   <td className="row-actions">
-                    <div>
-                      {hasPermission(user, {
-                        permission: PermissionEnum.UPDATE_OFFERING_PLAN,
-                        customerId: props.offering.customer_uuid,
-                      }) && <EditPlanButton {...props} plan={plan} />}
-                      {!hidePlanAddButton(
-                        props.offering.type,
-                        props.offering.plans,
-                      ) &&
-                        hasPermission(user, {
-                          permission: PermissionEnum.CREATE_OFFERING_PLAN,
-                          customerId: props.offering.customer_uuid,
-                        }) && <ClonePlanButton {...props} plan={plan} />}
-                      {hasPermission(user, {
-                        permission: PermissionEnum.ARCHIVE_OFFERING_PLAN,
-                        customerId: props.offering.customer_uuid,
-                      }) && <ArchivePlanButton {...props} plan={plan} />}
-                    </div>
+                    <PlanActions
+                      offering={props.offering}
+                      plan={plan}
+                      refetch={refetch}
+                      user={user}
+                    />
                   </td>
                 </tr>
               ))}
