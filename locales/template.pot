@@ -193,6 +193,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/list/OfferingActions.tsx
+#: src/marketplace/offerings/update/plans/PlanActions.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
@@ -243,7 +244,7 @@ msgstr ""
 #: src/invitations/GroupInvitationsList.tsx
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
-#: src/marketplace/offerings/update/plans/PlansSection.tsx
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Active"
@@ -819,7 +820,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
-#: src/marketplace/offerings/update/plans/PlansSection.tsx
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
 msgid "Archived"
 msgstr ""
 
@@ -2545,10 +2546,6 @@ msgstr ""
 msgid "Current limit"
 msgstr ""
 
-#: src/marketplace/offerings/update/plans/PricesTable.tsx
-msgid "Current month price"
-msgstr ""
-
 #: src/customer/details/CustomerErrorDialog.tsx
 msgid "Current name: {value}."
 msgstr ""
@@ -2568,6 +2565,10 @@ msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
 msgid "Current postal code: {value}."
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+msgid "Current price"
 msgstr ""
 
 #: src/resource/support/ResourcesTreemap.tsx
@@ -3345,8 +3346,15 @@ msgid "Edit plan"
 msgstr ""
 
 #: src/marketplace/offerings/update/plans/EditPlanPricesButton.tsx
-#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
 msgid "Edit prices"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+msgid "Edit prices for current month"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+msgid "Edit prices for next month"
 msgstr ""
 
 #: src/user/dashboard/UserWelcome.tsx
@@ -6015,10 +6023,6 @@ msgstr ""
 msgid "Next hop (IP)"
 msgstr ""
 
-#: src/marketplace/offerings/update/plans/PricesTable.tsx
-msgid "Next month price"
-msgstr ""
-
 #: src/proposals/details/CallDetailsHeaderBody.tsx
 #: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "Next round ends in"
@@ -6243,6 +6247,10 @@ msgstr ""
 
 #: src/navigation/header/UserDropdown.tsx
 msgid "Not signed in"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
+msgid "Not used"
 msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
@@ -13139,6 +13147,14 @@ msgstr ""
 
 #: src/quotas/QuotasTable.tsx
 msgid "Used"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
+msgid "Used by one resource"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
+msgid "Used by {count} resources"
 msgstr ""
 
 #: src/customer/team/CustomerUserAddDialog.tsx

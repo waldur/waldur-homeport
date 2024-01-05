@@ -1,3 +1,6 @@
+import { DropdownButton } from 'react-bootstrap';
+
+import { translate } from '@waldur/i18n';
 import { hidePlanAddButton } from '@waldur/marketplace/common/registry';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
@@ -9,7 +12,7 @@ import { EditPlanPricesButton } from './EditPlanPricesButton';
 import { EditPlanQuotasButton } from './EditPlanQuotasButton';
 
 export const PlanActions = ({ offering, plan, refetch, user }) => (
-  <div>
+  <DropdownButton variant="primary" title={translate('Actions')} size="sm">
     {hasPermission(user, {
       permission: PermissionEnum.UPDATE_OFFERING_PLAN,
       customerId: offering.customer_uuid,
@@ -43,5 +46,5 @@ export const PlanActions = ({ offering, plan, refetch, user }) => (
       permission: PermissionEnum.ARCHIVE_OFFERING_PLAN,
       customerId: offering.customer_uuid,
     }) && <ArchivePlanButton refetch={refetch} plan={plan} />}
-  </div>
+  </DropdownButton>
 );

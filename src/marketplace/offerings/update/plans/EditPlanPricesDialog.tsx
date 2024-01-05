@@ -6,23 +6,32 @@ import { reduxForm } from 'redux-form';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { updatePlanPrices } from '@waldur/marketplace/common/api';
+import { Plan } from '@waldur/marketplace/types';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { EDIT_PLAN_FORM_ID } from './constants';
 import { PricesTable } from './PricesTable';
 
-export const EditPlanPricesDialog = connect<{}, {}, { resolve: { plan } }>(
-  (_, ownProps) => ({
-    initialValues: {
-      prices: ownProps.resolve.plan.prices,
-      future_prices: ownProps.resolve.plan.future_prices,
-      new_prices: ownProps.resolve.plan.has_resources
-        ? ownProps.resolve.plan.future_prices
-        : ownProps.resolve.plan.prices,
-    },
-  }),
-)(
+const getInitialValues = (plan: Plan) => ({
+  prices: plan.prices,
+  future_prices: plan.future_prices,
+  new_prices:
+    plan.resources_count > 0
+      ? {
+          ...plan.prices,
+          ...plan.future_prices,
+        }
+      : plan.prices,
+});
+
+export const EditPlanPricesDialog = connect<
+  {},
+  {},
+  { resolve: { plan: Plan } }
+>((_, ownProps) => ({
+  initialValues: getInitialValues(ownProps.resolve.plan),
+}))(
   reduxForm<{}, { resolve: { offering; plan; refetch } }>({
     form: EDIT_PLAN_FORM_ID,
   })((props) => {
@@ -50,7 +59,11 @@ export const EditPlanPricesDialog = connect<{}, {}, { resolve: { plan } }>(
     return (
       <form onSubmit={props.handleSubmit(update)}>
         <Modal.Header>
-          <Modal.Title>{translate('Edit prices')}</Modal.Title>
+          <Modal.Title>
+            {props.resolve.plan.resources_count > 0
+              ? translate('Edit prices for next month')
+              : translate('Edit prices for current month')}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <PricesTable

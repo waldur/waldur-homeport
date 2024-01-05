@@ -15,8 +15,7 @@ export const PricesTable: FC<PricesTableProps> = (props) => (
     <thead>
       <tr>
         <th>{translate('Name')}</th>
-        <th>{translate('Current month price')}</th>
-        <th>{translate('Next month price')}</th>
+        <th>{translate('Current price')}</th>
         <th>{translate('New price')}</th>
         <th>{translate('Units')}</th>
       </tr>
@@ -28,7 +27,6 @@ export const PricesTable: FC<PricesTableProps> = (props) => (
             <div className="form-control-static">{component.name}</div>
           </td>
           <td>{props.plan.prices[component.type]}</td>
-          <td>{props.plan.future_prices[component.type]}</td>
           <td>
             <Field
               component="input"

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -29,8 +29,8 @@ export const EditPlanPricesButton: FunctionComponent<{
     );
   };
   return (
-    <Button onClick={callback} size="sm" className="me-3">
+    <Dropdown.Item onClick={callback}>
       <i className="fa fa-money" /> {translate('Edit prices')}
-    </Button>
+    </Dropdown.Item>
   );
 };
