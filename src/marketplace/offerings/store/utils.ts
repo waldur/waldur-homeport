@@ -3,45 +3,14 @@ import { OptionField } from '@waldur/marketplace/types';
 
 import { PlanRequest, PlanFormData, OptionFormData } from './types';
 
-export const formatPlan = (
-  plan: PlanFormData,
-  fixedComponents: string[],
-  validComponents: string[],
-): PlanRequest => {
-  const result: PlanRequest = {
-    name: plan.name,
-    unit: plan.unit.value,
-    unit_price: plan.unit_price,
-    article_code: plan.article_code,
-  };
-  if (plan.prices) {
-    // Skip prices for invalid components
-    result.prices = Object.keys(plan.prices).reduce(
-      (acc, key) =>
-        validComponents.includes(key)
-          ? { ...acc, [key]: plan.prices[key] }
-          : acc,
-      {},
-    );
-  }
-  if (plan.quotas) {
-    // Skip quotas for usage-based components
-    result.quotas = Object.keys(plan.quotas).reduce(
-      (acc, key) =>
-        fixedComponents.includes(key)
-          ? { ...acc, [key]: plan.quotas[key] }
-          : acc,
-      {},
-    );
-  }
-  if (plan.description) {
-    result.description = plan.description;
-  }
-  if (plan.uuid) {
-    result.uuid = plan.uuid;
-  }
-  return result;
-};
+export const formatPlan = (plan: PlanFormData): PlanRequest => ({
+  name: plan.name,
+  unit: plan.unit.value,
+  unit_price: plan.unit_price,
+  article_code: plan.article_code,
+  description: plan.description,
+  uuid: plan.uuid,
+});
 
 export const formatOption = (option: OptionFormData) => {
   const { type, choices, ...rest } = option;

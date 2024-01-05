@@ -5,47 +5,42 @@ import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { createPlan } from '@waldur/marketplace/common/api';
+import { updatePlanPrices } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { formatPlan } from '../../store/utils';
+import { EDIT_PLAN_FORM_ID } from './constants';
+import { PricesTable } from './PricesTable';
 
-import { ADD_PLAN_FORM_ID, getBillingPeriods } from './constants';
-import { PlanForm } from './PlanForm';
-
-export const AddPlanDialog = connect<{}, {}, { resolve: { plan? } }>(
+export const EditPlanPricesDialog = connect<{}, {}, { resolve: { plan } }>(
   (_, ownProps) => ({
-    initialValues: ownProps.resolve.plan
-      ? {
-          ...ownProps.resolve.plan,
-          name: translate('Clone of') + ' ' + ownProps.resolve.plan.name,
-          unit: getBillingPeriods().find(
-            ({ value }) => value === ownProps.resolve.plan.unit,
-          ),
-        }
-      : undefined,
+    initialValues: {
+      prices: ownProps.resolve.plan.prices,
+      future_prices: ownProps.resolve.plan.future_prices,
+      new_prices: ownProps.resolve.plan.has_resources
+        ? ownProps.resolve.plan.future_prices
+        : ownProps.resolve.plan.prices,
+    },
   }),
 )(
-  reduxForm<{}, { resolve: { offering; refetch } }>({
-    form: ADD_PLAN_FORM_ID,
+  reduxForm<{}, { resolve: { offering; plan; refetch } }>({
+    form: EDIT_PLAN_FORM_ID,
   })((props) => {
     const dispatch = useDispatch();
     const update = useCallback(
       async (formData) => {
         try {
-          await createPlan({
-            offering: props.resolve.offering.url,
-            ...formatPlan(formData),
+          await updatePlanPrices(props.resolve.plan.uuid, {
+            prices: formData.new_prices,
           });
           dispatch(
-            showSuccess(translate('Plan has been created successfully.')),
+            showSuccess(translate('Prices have been updated successfully.')),
           );
           await props.resolve.refetch();
           dispatch(closeModalDialog());
         } catch (error) {
           dispatch(
-            showErrorResponse(error, translate('Unable to create plan.')),
+            showErrorResponse(error, translate('Unable to update prices.')),
           );
         }
       },
@@ -55,16 +50,19 @@ export const AddPlanDialog = connect<{}, {}, { resolve: { plan? } }>(
     return (
       <form onSubmit={props.handleSubmit(update)}>
         <Modal.Header>
-          <Modal.Title>{translate('Add plan')}</Modal.Title>
+          <Modal.Title>{translate('Edit prices')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <PlanForm />
+          <PricesTable
+            components={props.resolve.offering.components}
+            plan={props.resolve.plan}
+          />
         </Modal.Body>
         <Modal.Footer>
           <SubmitButton
             disabled={props.invalid}
             submitting={props.submitting}
-            label={translate('Create')}
+            label={translate('Save')}
           />
         </Modal.Footer>
       </form>

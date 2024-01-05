@@ -666,6 +666,7 @@ msgstr ""
 
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/update/plans/PlanComponents.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Amount"
 msgstr ""
@@ -920,6 +921,10 @@ msgstr ""
 
 #: src/marketplace/resources/mass-actions/MultiDestroyAction.tsx
 msgid "Are you sure you want to destroy {count} resources?"
+msgstr ""
+
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+msgid "Are you sure you want to enable {serviceDesk}? This will disable all the other service desks."
 msgstr ""
 
 #: src/customer/details/CustomerCallManagerPanel.tsx
@@ -1988,6 +1993,7 @@ msgstr ""
 
 #: src/administration/TokenDeleteButton.tsx
 #: src/administration/roles/RoleDeleteButton.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/details/CustomerCallManagerPanel.tsx
@@ -2537,6 +2543,10 @@ msgstr ""
 
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 msgid "Current limit"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+msgid "Current month price"
 msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
@@ -3253,7 +3263,7 @@ msgstr ""
 #: src/marketplace/offerings/update/overview/OfferingLocationButton.tsx
 #: src/marketplace/offerings/update/overview/OfferingLogoButton.tsx
 #: src/marketplace/offerings/update/overview/SetAccessPolicyButton.tsx
-#: src/marketplace/offerings/update/plans/EditPlanButton.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
 #: src/marketplace/robot-accounts/RobotAccountEditButton.tsx
 #: src/marketplace/service-providers/ProviderCampaignUpdateButton.tsx
@@ -3330,8 +3340,13 @@ msgstr ""
 msgid "Edit permissions"
 msgstr ""
 
-#: src/marketplace/offerings/update/plans/EditPlanDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx
 msgid "Edit plan"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanPricesButton.tsx
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+msgid "Edit prices"
 msgstr ""
 
 #: src/user/dashboard/UserWelcome.tsx
@@ -3344,6 +3359,11 @@ msgstr ""
 
 #: src/marketplace/details/ProjectCreateGroup.tsx
 msgid "Edit project request ({name})"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanQuotasButton.tsx
+#: src/marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx
+msgid "Edit quotas"
 msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
@@ -5712,6 +5732,8 @@ msgstr ""
 #: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/marketplace/offerings/update/plans/PlanForm.tsx
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
 #: src/marketplace/orders/details/LimitsSection.tsx
 #: src/marketplace/orders/list/CustomerOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
@@ -5945,6 +5967,10 @@ msgstr ""
 msgid "New policy"
 msgstr ""
 
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+msgid "New price"
+msgstr ""
+
 #: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
 msgid "New project"
 msgstr ""
@@ -5987,6 +6013,10 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 msgid "Next hop (IP)"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+msgid "Next month price"
 msgstr ""
 
 #: src/proposals/details/CallDetailsHeaderBody.tsx
@@ -7394,7 +7424,7 @@ msgstr ""
 msgid "Plan has been created successfully."
 msgstr ""
 
-#: src/marketplace/offerings/update/plans/EditPlanDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx
 msgid "Plan has been updated successfully."
 msgstr ""
 
@@ -7715,6 +7745,10 @@ msgstr ""
 #: src/issues/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
 msgid "Pricelist"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+msgid "Prices have been updated successfully."
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
@@ -8272,6 +8306,10 @@ msgstr ""
 
 #: src/marketplace/resources/details/TenantMainComponent.tsx
 msgid "Quotas"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx
+msgid "Quotas have been updated successfully."
 msgstr ""
 
 #: src/marketplace/resources/details/InstanceComponents.tsx
@@ -9368,7 +9406,9 @@ msgstr ""
 #: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
 #: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
 #: src/marketplace/offerings/update/options/EditOptionDialog.tsx
-#: src/marketplace/offerings/update/plans/EditPlanDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
@@ -12634,8 +12674,16 @@ msgstr ""
 msgid "Unable to update permission."
 msgstr ""
 
-#: src/marketplace/offerings/update/plans/EditPlanDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx
 msgid "Unable to update plan."
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+msgid "Unable to update prices."
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx
+msgid "Unable to update quotas."
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditSchedulesDialog.tsx
@@ -12736,6 +12784,8 @@ msgid "Unit price"
 msgstr ""
 
 #: src/marketplace/offerings/update/plans/PlanComponents.tsx
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
 msgid "Units"
 msgstr ""
 
