@@ -41,7 +41,7 @@ export const CallRoundsSection: FC<CallRoundsSectionProps> = (props) => {
           render: ({ row }) => <>{formatDateTime(row.start_time)}</>,
         },
         {
-          title: translate('Cut-of date'),
+          title: translate('Cutoff date'),
           render: ({ row }) => <>{formatDateTime(row.end_time)}</>,
         },
         {

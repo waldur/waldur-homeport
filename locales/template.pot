@@ -922,6 +922,10 @@ msgstr ""
 msgid "Are you sure you want to destroy {count} resources?"
 msgstr ""
 
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+msgid "Are you sure you want to enable {serviceDesk}? This will disable all the other service desks."
+msgstr ""
+
 #: src/customer/details/CustomerCallManagerPanel.tsx
 msgid "Are you sure you want to prohibit this organization from managing calls?"
 msgstr ""
@@ -1988,6 +1992,7 @@ msgstr ""
 
 #: src/administration/TokenDeleteButton.tsx
 #: src/administration/roles/RoleDeleteButton.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/details/CustomerCallManagerPanel.tsx
@@ -2617,12 +2622,12 @@ msgstr ""
 msgid "Customers"
 msgstr ""
 
-#: src/proposals/update/rounds/CallRoundsSection.tsx
-msgid "Cut-of date"
-msgstr ""
-
 #: src/proposals/call-management/CallManagementPage.tsx
 msgid "Cutoff"
+msgstr ""
+
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+msgid "Cutoff date"
 msgstr ""
 
 #: src/openstack/openstack-subnet/fields.tsx
