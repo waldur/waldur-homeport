@@ -748,6 +748,10 @@ msgstr ""
 msgid "Apply to round"
 msgstr ""
 
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Approval"
+msgstr ""
+
 #: src/proposals/update/review/CallReviewSection.tsx
 msgid "Approval threshold score"
 msgstr ""
@@ -784,6 +788,7 @@ msgstr ""
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Approved"
 msgstr ""
@@ -1572,6 +1577,7 @@ msgstr ""
 #: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Canceled"
 msgstr ""
 
@@ -1662,6 +1668,7 @@ msgid "Challenge code"
 msgstr ""
 
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Change"
 msgstr ""
 
@@ -1920,6 +1927,7 @@ msgid "Complete resource downscaling"
 msgstr ""
 
 #: src/invitations/actions/create/SendingStatus.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Completed"
 msgstr ""
 
@@ -2394,6 +2402,7 @@ msgstr ""
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
@@ -2483,6 +2492,10 @@ msgstr ""
 
 #: src/resource/state/constants.ts
 msgid "Creating snapshot schedule"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Creation"
 msgstr ""
 
 #: src/marketplace/offerings/import/tabs.ts
@@ -3170,6 +3183,7 @@ msgstr ""
 #: src/marketplace/orders/list/OrderStateFilter.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/details/ResourceComponentsDialog.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/proposals/details/CallRoundsDialog.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
@@ -3596,6 +3610,7 @@ msgstr ""
 #: src/marketplace/orders/list/OrderStateFilter.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Erred"
 msgstr ""
 
@@ -4999,10 +5014,6 @@ msgstr ""
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 msgid "Item"
-msgstr ""
-
-#: src/marketplace/cart/store/effects.ts
-msgid "Item has been added to shopping cart."
 msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
@@ -7213,8 +7224,17 @@ msgstr ""
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Pending"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Pending approval"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Pending approval by requesting organization"
 msgstr ""
 
 #: src/navigation/header/ConfirmationDrawerToggle.tsx
@@ -8530,6 +8550,7 @@ msgstr ""
 #: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Rejected"
 msgstr ""
@@ -9046,6 +9067,10 @@ msgstr ""
 
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 msgid "Resource usage for {resource}"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Resource {type} {activeStep}"
 msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
@@ -11007,6 +11032,10 @@ msgstr ""
 
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Terminating"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Termination"
 msgstr ""
 
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
@@ -13583,6 +13612,10 @@ msgstr ""
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "View item"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "View order"
 msgstr ""
 
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx

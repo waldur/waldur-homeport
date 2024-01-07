@@ -22,6 +22,7 @@ import { AllocationMainComponent } from '@waldur/slurm/details/AllocationMainCom
 import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
 import { ResourceStateField } from '../list/ResourceStateField';
 import { ShowReportAction } from '../report/ShowReportAction';
+import { OrderInProgressView } from '../resource-pending/OrderInProgressView';
 import { ResourceActions } from '../ResourceActions';
 
 import { ActionButton } from './ActionButton';
@@ -104,6 +105,9 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
         </>
       ) : (
         <PageBarProvider>
+          {resource.order_in_progress && (
+            <OrderInProgressView resource={resource} />
+          )}
           <PublicDashboardHero
             logo={logo}
             logoAlt={resource.category_title}
