@@ -6,14 +6,14 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { ADD_PLAN_FORM_ID } from './constants';
+import { EDIT_PLAN_FORM_ID } from './constants';
 
-const ClonePlanDialog = lazyComponent(
-  () => import('./AddPlanDialog'),
-  'AddPlanDialog',
+const EditPlanPricesDialog = lazyComponent(
+  () => import('./EditPlanPricesDialog'),
+  'EditPlanPricesDialog',
 );
 
-export const ClonePlanButton: FunctionComponent<{
+export const EditPlanPricesButton: FunctionComponent<{
   offering;
   plan;
   refetch;
@@ -21,16 +21,16 @@ export const ClonePlanButton: FunctionComponent<{
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
-      openModalDialog(ClonePlanDialog, {
+      openModalDialog(EditPlanPricesDialog, {
         resolve: { offering, plan, refetch },
-        formId: ADD_PLAN_FORM_ID,
+        formId: EDIT_PLAN_FORM_ID,
         size: 'lg',
       }),
     );
   };
   return (
     <Dropdown.Item onClick={callback}>
-      <i className="fa fa-clone" /> {translate('Clone')}
+      <i className="fa fa-money" /> {translate('Edit prices')}
     </Dropdown.Item>
   );
 };

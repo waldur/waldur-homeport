@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { Card, Table } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { getOfferingPlans } from '@waldur/marketplace/common/api';
 import { hidePlanAddButton } from '@waldur/marketplace/common/registry';
+import { Plan } from '@waldur/marketplace/types';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { getUser } from '@waldur/workspace/selectors';
@@ -12,9 +13,7 @@ import { getUser } from '@waldur/workspace/selectors';
 import { RefreshButton } from '../components/RefreshButton';
 
 import { AddPlanButton } from './AddPlanButton';
-import { ArchivePlanButton } from './ArchivePlanButton';
-import { ClonePlanButton } from './ClonePlanButton';
-import { EditPlanButton } from './EditPlanButton';
+import { PlansTable } from './PlansTable';
 
 export const PlansSection = (props) => {
   const user = useSelector(getUser);
@@ -22,7 +21,7 @@ export const PlansSection = (props) => {
     data: plans,
     refetch,
     isRefetching,
-  } = useQuery(
+  } = useQuery<{}, {}, Plan[]>(
     ['OfferingPlans', props.offering.uuid],
     () => (props.offering ? getOfferingPlans(props.offering.uuid) : []),
     {
@@ -53,7 +52,7 @@ export const PlansSection = (props) => {
             customerId: props.offering.customer_uuid,
           }) && (
             <div className="card-toolbar">
-              <AddPlanButton {...props} />
+              <AddPlanButton refetch={refetch} offering={props.offering} />
             </div>
           )}
       </div>
@@ -67,40 +66,12 @@ export const PlansSection = (props) => {
             </div>
           </div>
         ) : (
-          <Table bordered={true} hover={true} responsive={true}>
-            <tbody>
-              {plans.map((plan, planIndex) => (
-                <tr key={planIndex}>
-                  <td className="col-md-3">{plan.name}</td>
-                  <td className="col-md-3">
-                    {plan.archived
-                      ? translate('Archived')
-                      : translate('Active')}
-                  </td>
-                  <td className="row-actions">
-                    <div>
-                      {hasPermission(user, {
-                        permission: PermissionEnum.UPDATE_OFFERING_PLAN,
-                        customerId: props.offering.customer_uuid,
-                      }) && <EditPlanButton {...props} plan={plan} />}
-                      {!hidePlanAddButton(
-                        props.offering.type,
-                        props.offering.plans,
-                      ) &&
-                        hasPermission(user, {
-                          permission: PermissionEnum.CREATE_OFFERING_PLAN,
-                          customerId: props.offering.customer_uuid,
-                        }) && <ClonePlanButton {...props} plan={plan} />}
-                      {hasPermission(user, {
-                        permission: PermissionEnum.ARCHIVE_OFFERING_PLAN,
-                        customerId: props.offering.customer_uuid,
-                      }) && <ArchivePlanButton {...props} plan={plan} />}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <PlansTable
+            plans={plans}
+            offering={props.offering}
+            refetch={refetch}
+            user={user}
+          />
         )}
       </Card.Body>
     </Card>

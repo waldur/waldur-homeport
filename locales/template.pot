@@ -193,6 +193,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/list/OfferingActions.tsx
+#: src/marketplace/offerings/update/plans/PlanActions.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
@@ -243,7 +244,7 @@ msgstr ""
 #: src/invitations/GroupInvitationsList.tsx
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
-#: src/marketplace/offerings/update/plans/PlansSection.tsx
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Active"
@@ -666,6 +667,7 @@ msgstr ""
 
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/update/plans/PlanComponents.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Amount"
 msgstr ""
@@ -746,6 +748,10 @@ msgstr ""
 msgid "Apply to round"
 msgstr ""
 
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Approval"
+msgstr ""
+
 #: src/proposals/update/review/CallReviewSection.tsx
 msgid "Approval threshold score"
 msgstr ""
@@ -782,6 +788,7 @@ msgstr ""
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Approved"
 msgstr ""
@@ -818,7 +825,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
-#: src/marketplace/offerings/update/plans/PlansSection.tsx
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
 msgid "Archived"
 msgstr ""
 
@@ -1570,6 +1577,7 @@ msgstr ""
 #: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Canceled"
 msgstr ""
 
@@ -1660,6 +1668,7 @@ msgid "Challenge code"
 msgstr ""
 
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Change"
 msgstr ""
 
@@ -1918,6 +1927,7 @@ msgid "Complete resource downscaling"
 msgstr ""
 
 #: src/invitations/actions/create/SendingStatus.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Completed"
 msgstr ""
 
@@ -2392,6 +2402,7 @@ msgstr ""
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
@@ -2483,6 +2494,10 @@ msgstr ""
 msgid "Creating snapshot schedule"
 msgstr ""
 
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Creation"
+msgstr ""
+
 #: src/marketplace/offerings/import/tabs.ts
 #: src/user/routes.ts
 msgid "Credentials"
@@ -2563,6 +2578,10 @@ msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
 msgid "Current postal code: {value}."
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+msgid "Current price"
 msgstr ""
 
 #: src/resource/support/ResourcesTreemap.tsx
@@ -3164,6 +3183,7 @@ msgstr ""
 #: src/marketplace/orders/list/OrderStateFilter.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/details/ResourceComponentsDialog.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/proposals/details/CallRoundsDialog.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
@@ -3258,7 +3278,7 @@ msgstr ""
 #: src/marketplace/offerings/update/overview/OfferingLocationButton.tsx
 #: src/marketplace/offerings/update/overview/OfferingLogoButton.tsx
 #: src/marketplace/offerings/update/overview/SetAccessPolicyButton.tsx
-#: src/marketplace/offerings/update/plans/EditPlanButton.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
 #: src/marketplace/robot-accounts/RobotAccountEditButton.tsx
 #: src/marketplace/service-providers/ProviderCampaignUpdateButton.tsx
@@ -3335,8 +3355,20 @@ msgstr ""
 msgid "Edit permissions"
 msgstr ""
 
-#: src/marketplace/offerings/update/plans/EditPlanDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx
 msgid "Edit plan"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanPricesButton.tsx
+msgid "Edit prices"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+msgid "Edit prices for current month"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+msgid "Edit prices for next month"
 msgstr ""
 
 #: src/user/dashboard/UserWelcome.tsx
@@ -3349,6 +3381,11 @@ msgstr ""
 
 #: src/marketplace/details/ProjectCreateGroup.tsx
 msgid "Edit project request ({name})"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanQuotasButton.tsx
+#: src/marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx
+msgid "Edit quotas"
 msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
@@ -3573,6 +3610,7 @@ msgstr ""
 #: src/marketplace/orders/list/OrderStateFilter.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Erred"
 msgstr ""
 
@@ -4979,10 +5017,6 @@ msgid "Item"
 msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
-msgid "Item has been added to shopping cart."
-msgstr ""
-
-#: src/marketplace/cart/store/effects.ts
 msgid "Item has been removed from shopping cart."
 msgstr ""
 
@@ -5717,6 +5751,8 @@ msgstr ""
 #: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/marketplace/offerings/update/plans/PlanForm.tsx
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
 #: src/marketplace/orders/details/LimitsSection.tsx
 #: src/marketplace/orders/list/CustomerOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
@@ -5948,6 +5984,10 @@ msgstr ""
 #: src/customer/cost-policies/CostPolicyCreateButton.tsx
 #: src/customer/cost-policies/CostPolicyCreateDialog.tsx
 msgid "New policy"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+msgid "New price"
 msgstr ""
 
 #: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
@@ -6218,6 +6258,10 @@ msgstr ""
 
 #: src/navigation/header/UserDropdown.tsx
 msgid "Not signed in"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
+msgid "Not used"
 msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
@@ -7180,8 +7224,17 @@ msgstr ""
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Pending"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Pending approval"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Pending approval by requesting organization"
 msgstr ""
 
 #: src/navigation/header/ConfirmationDrawerToggle.tsx
@@ -7399,7 +7452,7 @@ msgstr ""
 msgid "Plan has been created successfully."
 msgstr ""
 
-#: src/marketplace/offerings/update/plans/EditPlanDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx
 msgid "Plan has been updated successfully."
 msgstr ""
 
@@ -7720,6 +7773,10 @@ msgstr ""
 #: src/issues/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
 msgid "Pricelist"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+msgid "Prices have been updated successfully."
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
@@ -8279,6 +8336,10 @@ msgstr ""
 msgid "Quotas"
 msgstr ""
 
+#: src/marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx
+msgid "Quotas have been updated successfully."
+msgstr ""
+
 #: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
@@ -8489,6 +8550,7 @@ msgstr ""
 #: src/marketplace-remote/RequestStateFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Rejected"
 msgstr ""
@@ -9007,6 +9069,10 @@ msgstr ""
 msgid "Resource usage for {resource}"
 msgstr ""
 
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Resource {type} {activeStep}"
+msgstr ""
+
 #: src/administration/dashboard/StatisticsCards.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
@@ -9373,7 +9439,9 @@ msgstr ""
 #: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
 #: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
 #: src/marketplace/offerings/update/options/EditOptionDialog.tsx
-#: src/marketplace/offerings/update/plans/EditPlanDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
@@ -10964,6 +11032,10 @@ msgstr ""
 
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Terminating"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Termination"
 msgstr ""
 
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
@@ -12639,8 +12711,16 @@ msgstr ""
 msgid "Unable to update permission."
 msgstr ""
 
-#: src/marketplace/offerings/update/plans/EditPlanDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx
 msgid "Unable to update plan."
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+msgid "Unable to update prices."
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx
+msgid "Unable to update quotas."
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditSchedulesDialog.tsx
@@ -12741,6 +12821,8 @@ msgid "Unit price"
 msgstr ""
 
 #: src/marketplace/offerings/update/plans/PlanComponents.tsx
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
 msgid "Units"
 msgstr ""
 
@@ -13094,6 +13176,14 @@ msgstr ""
 
 #: src/quotas/QuotasTable.tsx
 msgid "Used"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
+msgid "Used by one resource"
+msgstr ""
+
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
+msgid "Used by {count} resources"
 msgstr ""
 
 #: src/customer/team/CustomerUserAddDialog.tsx
@@ -13522,6 +13612,10 @@ msgstr ""
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "View item"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "View order"
 msgstr ""
 
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx

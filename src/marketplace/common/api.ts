@@ -116,6 +116,12 @@ export const archivePlan = (planId) =>
 export const updatePlan = (planId, data) =>
   put(`/marketplace-plans/${planId}/`, data);
 
+export const updatePlanQuotas = (planId, data) =>
+  post(`/marketplace-plans/${planId}/update_quotas/`, data);
+
+export const updatePlanPrices = (planId, data) =>
+  post(`/marketplace-plans/${planId}/update_prices/`, data);
+
 export const getOfferingPlans = (offeringUuid: string) =>
   getAll<Plan>('/marketplace-plans/', {
     params: { offering_uuid: offeringUuid },

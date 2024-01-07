@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -8,12 +8,12 @@ import { openModalDialog } from '@waldur/modal/actions';
 
 import { EDIT_PLAN_FORM_ID } from './constants';
 
-const EditPlanDialog = lazyComponent(
-  () => import('./EditPlanDialog'),
-  'EditPlanDialog',
+const EditPlanDescriptionDialog = lazyComponent(
+  () => import('./EditPlanDescriptionDialog'),
+  'EditPlanDescriptionDialog',
 );
 
-export const EditPlanButton: FunctionComponent<{
+export const EditPlanDescriptionButton: FunctionComponent<{
   offering;
   plan;
   refetch;
@@ -21,7 +21,7 @@ export const EditPlanButton: FunctionComponent<{
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
-      openModalDialog(EditPlanDialog, {
+      openModalDialog(EditPlanDescriptionDialog, {
         resolve: { offering, plan, refetch },
         formId: EDIT_PLAN_FORM_ID,
         size: 'lg',
@@ -29,8 +29,8 @@ export const EditPlanButton: FunctionComponent<{
     );
   };
   return (
-    <Button onClick={callback} size="sm" className="me-3">
+    <Dropdown.Item onClick={callback}>
       <i className="fa fa-pencil" /> {translate('Edit')}
-    </Button>
+    </Dropdown.Item>
   );
 };

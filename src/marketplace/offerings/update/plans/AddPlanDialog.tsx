@@ -34,15 +34,9 @@ export const AddPlanDialog = connect<{}, {}, { resolve: { plan? } }>(
     const update = useCallback(
       async (formData) => {
         try {
-          const fixedComponents = props.resolve.offering.components
-            .filter((c) => c.billing_type === 'fixed')
-            .map((c) => c.type);
-          const validComponents = props.resolve.offering.components.map(
-            (c) => c.type,
-          );
           await createPlan({
             offering: props.resolve.offering.url,
-            ...formatPlan(formData, fixedComponents, validComponents),
+            ...formatPlan(formData),
           });
           dispatch(
             showSuccess(translate('Plan has been created successfully.')),
@@ -64,7 +58,7 @@ export const AddPlanDialog = connect<{}, {}, { resolve: { plan? } }>(
           <Modal.Title>{translate('Add plan')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <PlanForm offering={props.resolve.offering} />
+          <PlanForm />
         </Modal.Body>
         <Modal.Footer>
           <SubmitButton

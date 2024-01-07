@@ -40,6 +40,8 @@ export interface Plan {
   unit: BillingPeriod;
   quotas: { [key: string]: number };
   prices: { [key: string]: number };
+  future_prices?: { [key: string]: number };
+  resources_count?: number;
   is_active: boolean;
   archived: boolean;
   price: number;

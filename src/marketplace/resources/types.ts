@@ -1,3 +1,4 @@
+import { OrderDetailsType } from '../orders/types';
 import { AttributesType } from '../types';
 
 export interface ResourceReference {
@@ -66,4 +67,5 @@ export interface Resource extends ResourceReference {
   marketplace_resource_uuid?: string;
   end_date?: string;
   username?: string;
+  order_in_progress?: OrderDetailsType;
 }
