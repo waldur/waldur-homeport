@@ -32,7 +32,11 @@ interface OwnProps {
 const connector = connect<StateProps, {}, OwnProps, RootState>(
   (state, ownProps) => {
     const workspace = getWorkspace(state);
-    if (workspace === PROJECT_WORKSPACE) {
+    const forceProjectLevel = ownProps.project_uuid && !ownProps.customer_uuid;
+    if (
+      forceProjectLevel ||
+      (workspace === PROJECT_WORKSPACE && ownProps.project_uuid)
+    ) {
       return {
         state: 'marketplace-order-details-project',
         params: {

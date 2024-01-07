@@ -13,6 +13,7 @@ import { CustomerCreateFormData } from '@waldur/customer/create/types';
 import { translate } from '@waldur/i18n';
 import { createFlow } from '@waldur/marketplace-flows/api';
 import * as api from '@waldur/marketplace/common/api';
+import { OrderResponse } from '@waldur/marketplace/orders/types';
 import { ProjectCreateFormData } from '@waldur/project/ProjectCreateForm';
 import {
   showError,
@@ -123,20 +124,13 @@ function* addItem(action) {
     }
     return;
   }
+  let cartItem: OrderResponse;
   try {
-    const item = yield call(
+    cartItem = yield call(
       api.addCartItem,
       formatItemToCreate(action.payload.item),
     );
-    yield put(actions.addItemSuccess(item));
-
-    const items = yield call(api.getCartItems, item.project);
-    yield put(actions.setItems(items));
-
-    yield put(showSuccess(translate('Item has been added to shopping cart.')));
-    yield put(
-      triggerTransition('marketplace-checkout', { uuid: item.project_uuid }),
-    );
+    yield put(actions.addItemSuccess(cartItem));
   } catch (error) {
     yield put(
       showErrorResponse(
@@ -145,6 +139,35 @@ function* addItem(action) {
       ),
     );
     yield put(actions.addItemError());
+  }
+
+  if (cartItem && cartItem.type === 'Create') {
+    try {
+      const order: OrderResponse = yield call(api.submitCart, {
+        project: cartItem.project,
+      });
+      yield put(showSuccess(translate('Order has been submitted.')));
+      yield put(actions.createOrderSuccess());
+      const workspace: WorkspaceType = yield select(getWorkspace);
+      let resourceDetailsLinkState;
+      let parentUuid;
+      if (workspace === ORGANIZATION_WORKSPACE) {
+        resourceDetailsLinkState = 'marketplace-provider-resource-details';
+        parentUuid = order.customer_uuid;
+      } else {
+        resourceDetailsLinkState = 'marketplace-project-resource-details';
+        parentUuid = order.project_uuid;
+      }
+      yield put(
+        triggerTransition(resourceDetailsLinkState, {
+          uuid: parentUuid,
+          resource_uuid: order.marketplace_resource_uuid,
+        }),
+      );
+    } catch (error) {
+      yield put(showErrorResponse(error, translate('Unable to submit order.')));
+      yield put(actions.createOrderError());
+    }
   }
 }
 
