@@ -33,6 +33,9 @@ export const UpdateResourceDialog: FC<UpdateResourceDialogProps> = ({
     <ResourceActionDialog
       submitForm={async (formData) => {
         try {
+          if (formData.disable_gateway) {
+            delete formData.gateway_ip;
+          }
           await updateResource(resource.uuid, formData);
           dispatch(
             showSuccess(
