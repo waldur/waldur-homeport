@@ -64,6 +64,8 @@ const exportFields = () => [
   translate('VMs'),
 ];
 
+const exportKeys = ['name', 'abbreviation', 'created', 'vm_count'];
+
 const mapPropsToFilter = (props) => ({
   service_settings_uuid: props.provider_uuid,
 });
@@ -73,6 +75,7 @@ const TableOptions: TableOptionsType = {
   fetchData: createFetcher('openstack-shared-settings-customers'),
   exportRow,
   exportFields,
+  exportKeys,
   mapPropsToFilter,
   exportAll: true,
 };

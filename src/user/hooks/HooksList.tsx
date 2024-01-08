@@ -83,6 +83,7 @@ const TableOptions = {
   ],
   exportAll: true,
   exportFields: ['Method', 'Destination', 'Events'],
+  exportKeys: ['hook_type', 'destination_url', 'email', 'event_groups'],
 };
 
 const mapStateToProps = (state: RootState) => ({

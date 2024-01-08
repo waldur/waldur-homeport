@@ -41,6 +41,7 @@ export const HooksList: FunctionComponent<any> = () => {
     ],
     exportAll: true,
     exportFields: ['Method', 'Destination', 'Events'],
+    exportKeys: ['hook_type', 'destination_url', 'email', 'event_groups'],
   });
 
   return (

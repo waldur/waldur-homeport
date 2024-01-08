@@ -75,12 +75,13 @@ export function connectTable(options: TableOptionsType) {
           );
         },
         gotoPage: (page) => dispatch(actions.fetchListGotoPage(table, page)),
-        openExportDialog: (format: ExportConfig['format']) =>
+        openExportDialog: (format: ExportConfig['format'], ownProps?) =>
           dispatch(
             openModalDialog(ExportDialog, {
               resolve: {
                 table,
                 format,
+                ownProps,
               },
             }),
           ),
@@ -170,12 +171,13 @@ export const useTable = (options: TableOptionsType) => {
     [dispatch, table],
   );
   const openExportDialog = useCallback(
-    (format: ExportConfig['format']) =>
+    (format: ExportConfig['format'], ownProps?) =>
       dispatch(
         openModalDialog(ExportDialog, {
           resolve: {
             table,
             format,
+            ownProps,
           },
         }),
       ),

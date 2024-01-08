@@ -119,6 +119,7 @@ const TableOptions = {
   ],
   exportAll: true,
   exportRow: (row) => [row.name, row.abbreviation, row.email, row.phone_number],
+  exportKeys: ['name', 'abbreviation', 'email', 'phone_number'],
 };
 
 const mapStateToProps = (state: RootState) => ({

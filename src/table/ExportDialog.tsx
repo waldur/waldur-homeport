@@ -25,6 +25,7 @@ interface ExportDialogProps {
   resolve: {
     table: string;
     format: ExportConfig['format'];
+    ownProps?: any;
   };
 }
 
@@ -42,7 +43,9 @@ export const ExportDialog = connect<{}, {}, ExportDialogProps>(
   })((props) => {
     const callback = useCallback(
       (formData: ExportConfig, dispatch: Dispatch<any>) => {
-        dispatch(exportTableAs(props.resolve.table, formData));
+        dispatch(
+          exportTableAs(props.resolve.table, formData, props.resolve.ownProps),
+        );
       },
       [props.resolve.table],
     );

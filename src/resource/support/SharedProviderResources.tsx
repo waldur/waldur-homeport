@@ -71,6 +71,14 @@ const exportFields = () => [
   translate('State'),
 ];
 
+const exportKeys = [
+  'name',
+  'customer_name',
+  'created',
+  'resource_type',
+  'state',
+];
+
 const mapPropsToFilter = (props) => ({
   service_settings_uuid: props.provider_uuid,
 });
@@ -80,6 +88,7 @@ const TableOptions: TableOptionsType = {
   fetchData: createFetcher('openstack-shared-settings-instances'),
   exportRow,
   exportFields,
+  exportKeys,
   mapPropsToFilter,
   exportAll: true,
 };
