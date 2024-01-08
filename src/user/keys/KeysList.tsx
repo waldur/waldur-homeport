@@ -81,6 +81,7 @@ const TableOptions = {
   exportRow: (row) => [row.name, row.fingerprint],
   exportAll: true,
   exportFields: ['Title', 'Fingerprint'],
+  exportKeys: ['name', 'fingerprint'],
   queryField: 'name',
 };
 

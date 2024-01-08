@@ -43,6 +43,7 @@ export const getEventsList = (extraOptions?: Partial<TableOptionsType>) => {
     queryField: 'message',
     exportFields: ['message', 'created'],
     exportRow: (row) => [row.message, row.created],
+    exportKeys: ['message', 'created'],
     ...extraOptions,
     pullInterval: () => ENV.countersTimerInterval * 1000,
   };
