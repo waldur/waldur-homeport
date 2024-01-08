@@ -22,6 +22,7 @@ import { AttributesSection } from './attributes/AttributesSection';
 import { ComponentsSection } from './components/ComponentsSection';
 import { OfferingEndpointsSection } from './endpoints/OfferingEndpointsSection';
 import { IntegrationSection } from './integration/IntegrationSection';
+import { OfferingEventsList } from './OfferingEventsList';
 import { OfferingUpdateBar } from './OfferingUpdateBar';
 import { OfferingOptionsSection } from './options/OfferingOptionsSection';
 import { OverviewSection } from './overview/OverviewSection';
@@ -159,6 +160,8 @@ export const OfferingUpdateContainer = () => {
         />
 
         <OfferingImagesList offering={data.offering} />
+
+        <OfferingEventsList offering={data.offering} />
       </div>
     </div>
   );
