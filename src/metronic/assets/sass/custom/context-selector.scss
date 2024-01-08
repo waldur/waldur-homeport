@@ -61,7 +61,7 @@ $dark-border: #65765f;
       }
 
       &:hover {
-        .item-info {
+        .item-link ~ .item-info {
           display: none;
         }
         .item-link {
