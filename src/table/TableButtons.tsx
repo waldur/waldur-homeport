@@ -32,19 +32,19 @@ export const TableButtons: FunctionComponent<any> = (props: TableProps) => {
                 children: [
                   {
                     label: translate('Copy to clipboard'),
-                    action: () => props.openExportDialog('clipboard'),
+                    action: () => props.openExportDialog('clipboard', props),
                   },
                   {
                     label: 'CSV',
-                    action: () => props.openExportDialog('csv'),
+                    action: () => props.openExportDialog('csv', props),
                   },
                   {
                     label: 'PDF',
-                    action: () => props.openExportDialog('pdf'),
+                    action: () => props.openExportDialog('pdf', props),
                   },
                   {
                     label: 'Excel',
-                    action: () => props.openExportDialog('excel'),
+                    action: () => props.openExportDialog('excel', props),
                   },
                 ],
               },

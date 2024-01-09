@@ -7,7 +7,8 @@ import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomerPermission } from '@waldur/permissions/utils';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { getCustomersPage } from '../api';
@@ -34,6 +35,7 @@ export const OrganizationListItem: FunctionComponent<{
   onMouseEnter;
   filter;
   loading;
+  hasOrganizationPermission;
 }> = ({
   data,
   index,
@@ -44,10 +46,12 @@ export const OrganizationListItem: FunctionComponent<{
   onMouseEnter,
   filter,
   loading,
+  hasOrganizationPermission,
 }) => {
   const customer = useSelector(getCustomer);
   const item = data[index];
   const orgCompactName = item.abbreviation ? item.abbreviation : item.name;
+
   if (item.isFetching) {
     return (
       <ListGroupItem className="text-center" style={style}>
@@ -89,6 +93,16 @@ export const OrganizationListItem: FunctionComponent<{
                 </span>
               )}
             </p>
+            {hasOrganizationPermission && (
+              <div className="item-link">
+                <Link
+                  state="organization.dashboard"
+                  params={{ uuid: item.uuid }}
+                >
+                  {translate('Go to organization dashboard')}
+                </Link>
+              </div>
+            )}
             <div className="item-info">
               {item.projects_count ? (
                 customer?.uuid !== item.uuid && filter !== '' ? (
@@ -119,27 +133,28 @@ export const OrganizationListItem: FunctionComponent<{
                 <i>{translate('No project')}</i>
               )}
             </div>
-            <div className="item-link">
-              <Link state="organization.dashboard" params={{ uuid: item.uuid }}>
-                {translate('Go to organization dashboard')}
-              </Link>
-            </div>
           </div>
           <div className="ms-auto">{loading && <LoadingSpinnerIcon />}</div>
         </Stack>
         {item?.is_service_provider && (
           <div className="actions ms-auto">
-            <Link
-              className="action-item"
-              state="marketplace-provider-dashboard"
-              params={{ uuid: item.uuid }}
-              onClick={(e) => {
-                e.stopPropagation();
-                MenuComponent.hideDropdowns(undefined);
-              }}
-            >
-              <ServiceProviderIcon organization={item} />
-            </Link>
+            {hasOrganizationPermission ? (
+              <Link
+                className="action-item"
+                state="marketplace-provider-dashboard"
+                params={{ uuid: item.uuid }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  MenuComponent.hideDropdowns(undefined);
+                }}
+              >
+                <ServiceProviderIcon organization={item} />
+              </Link>
+            ) : (
+              <div className="action-item">
+                <ServiceProviderIcon organization={item} />
+              </div>
+            )}
           </div>
         )}
         {item?.is_call_managing_organization &&
@@ -147,17 +162,23 @@ export const OrganizationListItem: FunctionComponent<{
             'marketplace.show_call_management_functionality',
           ) && (
             <div className="actions ms-auto">
-              <Link
-                className="action-item"
-                state="organization.call-management"
-                params={{ uuid: item.uuid }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  MenuComponent.hideDropdowns(undefined);
-                }}
-              >
-                <CallManagerIcon organization={item} />
-              </Link>
+              {hasOrganizationPermission ? (
+                <Link
+                  className="action-item"
+                  state="organization.call-management"
+                  params={{ uuid: item.uuid }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    MenuComponent.hideDropdowns(undefined);
+                  }}
+                >
+                  <CallManagerIcon organization={item} />
+                </Link>
+              ) : (
+                <div className="action-item">
+                  <CallManagerIcon organization={item} />
+                </div>
+              )}
             </div>
           )}
       </Stack>
@@ -188,6 +209,7 @@ export const OrganizationsPanel: FunctionComponent<{
   onClick,
   onMouseEnter,
 }) => {
+  const user = useSelector(getUser);
   const calculateInitialPageSize = () => {
     const screenHeight = window.innerHeight;
     return screenHeight * 0.85;
@@ -226,6 +248,7 @@ export const OrganizationsPanel: FunctionComponent<{
               onMouseEnter={() => onMouseEnter(item)}
               filter={filter}
               loading={loadingUuid === item.uuid}
+              hasOrganizationPermission={getCustomerPermission(user, item)}
             />
           );
         }}

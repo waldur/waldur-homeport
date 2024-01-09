@@ -98,5 +98,19 @@ export const ExpandableEventDetailsTable: FunctionComponent<ExpandableEventDetai
           params={{ order_uuid: event.context.order.uuid }}
         />
       )}
+
+      {event.context.old_value && (
+        <ExpandableEventField
+          label={translate('Old value')}
+          value={event.context.old_value}
+        />
+      )}
+
+      {event.context.new_value && (
+        <ExpandableEventField
+          label={translate('New value')}
+          value={event.context.new_value}
+        />
+      )}
     </Container>
   );

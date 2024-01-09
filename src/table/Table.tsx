@@ -33,7 +33,7 @@ export interface TableProps<RowType = any> extends TableState {
   hasQuery?: boolean;
   setQuery?: (query: string) => void;
   columns?: Array<Column<RowType>>;
-  openExportDialog?: (format: ExportConfig['format']) => void;
+  openExportDialog?: (format: ExportConfig['format'], props?) => void;
   dropdownActions?: TableDropdownItem[];
   actions?: React.ReactNode;
   verboseName?: string;
