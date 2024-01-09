@@ -33,7 +33,11 @@ export const ResourceActions = ({ resource, scope, refetch }) => {
           <ActionComponent key={index} resource={resource} refetch={refetch} />
         ))}
         {extraActions.map((ActionComponent, index) => (
-          <ActionComponent key={index} resource={scope} refetch={refetch} />
+          <ActionComponent
+            key={index}
+            resource={scope || resource}
+            refetch={refetch}
+          />
         ))}
       </Dropdown.Menu>
     </Dropdown>
