@@ -26,7 +26,7 @@
   {
     "uuid": "8f2f80601d82422ea4124559da92dddb",
     "name": "Bob Lebowski",
-    "abbreviation": "",
+    "abbreviation": "Bob",
     "projects": [],
     "owners": [
       {
@@ -45,7 +45,7 @@
   {
     "uuid": "bbf6d302440644f0ba5d21a7d7b244fa",
     "name": "Web Services",
-    "abbreviation": "",
+    "abbreviation": "Web",
     "projects": [
       {
         "url": "/api/projects/50ae63d0d1284c3c9e1331e746efe8bf/",

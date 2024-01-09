@@ -62,8 +62,8 @@ describe('Workspace selector', () => {
       .should(($p) =>
         expect(getTextList($p)).to.deep.eq([
           'Alice Lebowski',
-          'Bob Lebowski',
-          'Web Services',
+          'Bob',
+          'Web',
         ]),
       );
   });
