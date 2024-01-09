@@ -22,7 +22,7 @@ export const ShoppingCartButton: FunctionComponent<ShoppingCartButtonProps> = (
   <OfferingButton
     icon={props.icon || 'fa fa-shopping-cart'}
     isActive={true}
-    title={props.title || translate('Add to cart')}
+    title={props.title || translate('Create')}
     onClick={() => props.onBtnClick()}
     flavor={props.flavor}
     disabled={props.disabled}
