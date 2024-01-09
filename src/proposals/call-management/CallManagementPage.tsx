@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ProposalCall } from '@waldur/proposals/types';
@@ -39,9 +40,9 @@ export const CallManagementPage: FunctionComponent = () => {
           ),
         },
         {
-          title: translate('Cutoff'),
-          orderField: 'end_time',
-          render: ({ row }) => <>{row.end_time}</>,
+          title: translate('Created'),
+          orderField: 'created',
+          render: ({ row }) => <>{formatDateTime(row.created)}</>,
         },
         {
           title: translate('State'),
@@ -50,7 +51,7 @@ export const CallManagementPage: FunctionComponent = () => {
         },
       ]}
       verboseName={translate('Call management')}
-      initialSorting={{ field: 'end_time', mode: 'desc' }}
+      initialSorting={{ field: 'name', mode: 'desc' }}
       hoverableRow={({ row }) => (
         <ProposalCallEditButton row={row} refetch={tableProps.fetch} />
       )}
