@@ -40,7 +40,9 @@ export const UnlinkActionItem: FC<{ resource }> = ({ resource }) => {
     }
 
     try {
-      await post(`${resource.url}unlink/`);
+      await post(
+        `/marketplace-resources/${resource.marketplace_resource_uuid}/unlink/`,
+      );
       dispatch(showSuccess(translate('Resource has been unlinked.')));
     } catch (e) {
       dispatch(showErrorResponse(e, translate('Unable to unlink resource.')));
