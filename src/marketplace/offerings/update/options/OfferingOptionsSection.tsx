@@ -1,48 +1,41 @@
-import { useContext } from 'react';
+import { FC, useContext } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
-import { Tip } from '@waldur/core/Tooltip';
 import { FormFieldsContext } from '@waldur/form/context';
 import { translate } from '@waldur/i18n';
 import { showOfferingOptions } from '@waldur/marketplace/common/registry';
 
 import { RefreshButton } from '../components/RefreshButton';
+import { OfferingSectionProps } from '../types';
 
 import { AddOptionButton } from './AddOptionButton';
 import { FIELD_TYPES } from './constants';
 import { DeleteOptionButton } from './DeleteOptionButton';
 import { EditOptionButton } from './EditOptionButton';
 
-export const OfferingOptionsSection = (props) => {
+export const OfferingOptionsSection: FC<
+  OfferingSectionProps & { title; type }
+> = (props) => {
   const { readOnlyFields } = useContext(FormFieldsContext);
   if (!showOfferingOptions(props.offering.type)) {
     return null;
   }
+  const data = props.offering[props.type];
   return (
-    <Card className="mb-10" id="options">
+    <Card className="mb-10" id={props.type}>
       <div className="border-2 border-bottom card-header">
         <div className="card-title h5">
-          {translate('User input variables')}
-
-          <Tip
-            id="form-field-tooltip"
-            label={translate(
-              'If you want user to provide additional details when ordering, please configure input form for the user below',
-            )}
-            className="mx-2"
-          >
-            <i className="fa fa-question-circle" />
-          </Tip>
+          {props.title}
           <RefreshButton refetch={props.refetch} loading={props.loading} />
         </div>
-        {!readOnlyFields.includes('options') ? (
+        {!readOnlyFields.includes(props.type) ? (
           <div className="card-toolbar">
             <AddOptionButton {...props} />
           </div>
         ) : null}
       </div>
       <Card.Body>
-        {props.offering.options?.order?.length === 0 ? (
+        {data?.order?.length === 0 ? (
           <div className="justify-content-center row">
             <div className="col-sm-4">
               <p className="text-center">
@@ -53,17 +46,14 @@ export const OfferingOptionsSection = (props) => {
         ) : (
           <Table bordered={true} hover={true} responsive={true}>
             <tbody>
-              {props.offering.options?.order?.map((key) => (
+              {data?.order?.map((key) => (
                 <tr key={key}>
-                  <td className="col-md-3">
-                    {props.offering.options.options[key]?.label}
-                  </td>
+                  <td className="col-md-3">{data.options[key]?.label}</td>
                   <td className="col-md-9">
                     {
                       FIELD_TYPES.find(
                         (fieldType) =>
-                          fieldType.value ===
-                          props.offering.options?.options[key]?.type,
+                          fieldType.value === data?.options[key]?.type,
                       ).label
                     }
                   </td>
@@ -72,16 +62,14 @@ export const OfferingOptionsSection = (props) => {
                       <EditOptionButton
                         {...props}
                         option={{
-                          ...props.offering.options?.options[key],
+                          ...data?.options[key],
                           name: key,
                         }}
                       />
                       <DeleteOptionButton
-                        offering={props.offering}
+                        {...props}
                         optionKey={key}
-                        optionLabel={
-                          props.offering.options?.options[key]?.label
-                        }
+                        optionLabel={data?.options[key]?.label}
                       />
                     </div>
                   </td>

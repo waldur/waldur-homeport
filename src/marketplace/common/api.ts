@@ -197,6 +197,9 @@ export const getSubResourcesOfferings = (resourceId: string) =>
 export const submitReport = (resourceId: string, payload) =>
   post(`/marketplace-resources/${resourceId}/submit_report/`, payload);
 
+export const submitResourceOptions = (resourceId: string, payload) =>
+  post(`/marketplace-resources/${resourceId}/update_options/`, payload);
+
 export const setBackendId = (resourceId: string, payload) =>
   post(`/marketplace-resources/${resourceId}/set_backend_id/`, payload);
 
@@ -221,6 +224,12 @@ export const updateOfferingAttributes = (offeringId, data) =>
 
 export const updateOfferingOptions = (offeringId, data) =>
   post(`/marketplace-provider-offerings/${offeringId}/update_options/`, data);
+
+export const updateOfferingResourceOptions = (offeringId, data) =>
+  post(
+    `/marketplace-provider-offerings/${offeringId}/update_resource_options/`,
+    data,
+  );
 
 export const removeProviderOfferingComponent = (offeringId, data) =>
   post(

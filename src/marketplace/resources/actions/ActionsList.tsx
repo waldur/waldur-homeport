@@ -1,6 +1,7 @@
 import { EditResourceEndDateAction } from '@waldur/marketplace/resources/actions/EditResourceEndDateAction';
 import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
 import { SyncResourceAction } from '@waldur/marketplace/resources/actions/SyncResourceAction';
+import { UpdateResourceOptionsAction } from '@waldur/marketplace/resources/actions/UpdateResourceOptionsAction';
 import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
 import { CreateLexisLinkAction } from '@waldur/marketplace/resources/lexis/CreateLexisLinkAction';
 import { ShowReportAction } from '@waldur/marketplace/resources/report/ShowReportAction';
@@ -17,6 +18,7 @@ export const ActionsList = [
   MoveResourceAction,
   ShowReportAction,
   SubmitReportAction,
+  UpdateResourceOptionsAction,
   ChangePlanAction,
   ChangeLimitsAction,
   SetBackendIdAction,

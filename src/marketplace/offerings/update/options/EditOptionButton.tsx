@@ -6,6 +6,8 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
+import { OfferingSectionProps } from '../types';
+
 import { OPTION_FORM_ID } from './constants';
 
 const EditOptionDialog = lazyComponent(
@@ -13,16 +15,17 @@ const EditOptionDialog = lazyComponent(
   'EditOptionDialog',
 );
 
-export const EditOptionButton: FunctionComponent<{
-  offering;
-  option;
-  refetch;
-}> = ({ offering, option, refetch }) => {
+export const EditOptionButton: FunctionComponent<
+  OfferingSectionProps & {
+    option;
+    type;
+  }
+> = ({ offering, option, refetch, type }) => {
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
       openModalDialog(EditOptionDialog, {
-        resolve: { offering, option, refetch },
+        resolve: { offering, option, refetch, type },
         formId: OPTION_FORM_ID,
       }),
     );

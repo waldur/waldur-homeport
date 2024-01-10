@@ -70,6 +70,11 @@ export const OfferingUpdateBar: FunctionComponent<OwnProps> = ({
         title: translate('User input variables'),
         visible: showOfferingOptions(offering.type),
       },
+      {
+        key: 'resource_options',
+        title: translate('Resource report variables'),
+        visible: showOfferingOptions(offering.type),
+      },
       { key: 'category', title: translate('Category'), visible: true },
       {
         key: 'components',

@@ -3,6 +3,7 @@ import { UISref, useCurrentStateAndParams } from '@uirouter/react';
 import { Button } from 'react-bootstrap';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import {
   getCategory,
@@ -134,6 +135,29 @@ export const OfferingUpdateContainer = () => {
         />
 
         <OfferingOptionsSection
+          type="options"
+          title={
+            <>
+              {translate('User input variables')}{' '}
+              <Tip
+                id="form-field-tooltip"
+                label={translate(
+                  'If you want user to provide additional details when ordering, please configure input form for the user below',
+                )}
+                className="mx-2"
+              >
+                <i className="fa fa-question-circle" />
+              </Tip>
+            </>
+          }
+          offering={data.offering}
+          refetch={refetch}
+          loading={isRefetching}
+        />
+
+        <OfferingOptionsSection
+          type="resource_options"
+          title={translate('Resource report variables')}
           offering={data.offering}
           refetch={refetch}
           loading={isRefetching}
