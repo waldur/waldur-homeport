@@ -89,10 +89,12 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
         <div className="fw-bolder mb-5">
           <span>
             {translate('Resource {type} {activeStep}', {
-              type: getTranslatedOrderType(resource.order_in_progress.type),
+              type: getTranslatedOrderType(
+                resource.order_in_progress.type,
+              ).toLowerCase(),
               activeStep: !steps[1].completed
-                ? translate('Approval')
-                : translate('Pending'),
+                ? translate('approval')
+                : translate('pending'),
             })}
             ...{' '}
           </span>
@@ -101,7 +103,7 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
             project_uuid={resource.order_in_progress.project_uuid}
             className="text-link"
           >
-            ({translate('View order')})
+            ({translate('view order')})
           </OrderDetailsLink>
         </div>
         <div className="stepper stepper-pills d-flex flex-column w-100">

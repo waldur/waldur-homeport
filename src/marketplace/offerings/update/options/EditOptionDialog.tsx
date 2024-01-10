@@ -5,7 +5,10 @@ import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { updateOfferingOptions } from '@waldur/marketplace/common/api';
+import {
+  updateOfferingOptions,
+  updateOfferingResourceOptions,
+} from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -27,23 +30,30 @@ export const EditOptionDialog = connect<{}, {}, { resolve: { option } }>(
     },
   }),
 )(
-  reduxForm<{}, { resolve: { offering; option; refetch } }>({
+  reduxForm<{}, { resolve: { offering; option; type; refetch } }>({
     form: OPTION_FORM_ID,
   })((props) => {
     const dispatch = useDispatch();
     const update = useCallback(
       async (formData) => {
+        const oldOptions = props.resolve.offering[props.resolve.type];
         const newOptions = {
-          order: props.resolve.offering.options.order,
+          order: oldOptions.order,
           options: {
-            ...props.resolve.offering.options.options,
+            ...oldOptions.options,
             [props.resolve.option.name]: formatOption(formData),
           },
         };
         try {
-          await updateOfferingOptions(props.resolve.offering.uuid, {
-            options: newOptions,
-          });
+          if (props.resolve.type === 'options') {
+            await updateOfferingOptions(props.resolve.offering.uuid, {
+              options: newOptions,
+            });
+          } else if (props.resolve.type === 'resource_options') {
+            await updateOfferingResourceOptions(props.resolve.offering.uuid, {
+              resource_options: newOptions,
+            });
+          }
           dispatch(
             showSuccess(translate('Option has been updated successfully.')),
           );

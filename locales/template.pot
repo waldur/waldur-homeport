@@ -744,10 +744,6 @@ msgstr ""
 msgid "Apply to round"
 msgstr ""
 
-#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
-msgid "Approval"
-msgstr ""
-
 #: src/proposals/update/review/CallReviewSection.tsx
 msgid "Approval threshold score"
 msgstr ""
@@ -4510,7 +4506,7 @@ msgstr ""
 msgid "If defined, will be set as a password for all offering users"
 msgstr ""
 
-#: src/marketplace/offerings/update/options/OfferingOptionsSection.tsx
+#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
 msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
 msgstr ""
 
@@ -6761,6 +6757,10 @@ msgstr ""
 msgid "Optional"
 msgstr ""
 
+#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+msgid "Options have been updated"
+msgstr ""
+
 #: src/administration/roles/PermissionOptions.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 msgid "Order"
@@ -7225,7 +7225,6 @@ msgstr ""
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
-#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Pending"
 msgstr ""
@@ -9040,6 +9039,11 @@ msgstr ""
 msgid "Resource plan change request has been submitted."
 msgstr ""
 
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
+msgid "Resource report variables"
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/actions/ActivateAction.tsx
 #: src/openstack/openstack-snapshot-schedule/actions/ActivateSnapshotScheduleAction.tsx
 msgid "Resource schedule is already activated."
@@ -9709,7 +9713,7 @@ msgstr ""
 msgid "Select flavor"
 msgstr ""
 
-#: src/marketplace/deploy/steps/FormAdditionalConfigurationStep.tsx
+#: src/marketplace/common/OptionsForm.tsx
 msgid "Select instance..."
 msgstr ""
 
@@ -9866,11 +9870,11 @@ msgstr ""
 msgid "Select template..."
 msgstr ""
 
-#: src/marketplace/deploy/steps/FormAdditionalConfigurationStep.tsx
+#: src/marketplace/common/OptionsForm.tsx
 msgid "Select tenant..."
 msgstr ""
 
-#: src/marketplace/deploy/steps/FormAdditionalConfigurationStep.tsx
+#: src/marketplace/common/OptionsForm.tsx
 msgid "Select tenants..."
 msgstr ""
 
@@ -11341,6 +11345,10 @@ msgstr ""
 msgid "There are no remote accounts yet."
 msgstr ""
 
+#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+msgid "There are no report fields defined in the offering."
+msgstr ""
+
 #: src/marketplace/resources/details/ResourceTimeline.tsx
 msgid "There are no resource events."
 msgstr ""
@@ -12191,6 +12199,10 @@ msgstr ""
 msgid "Unable to load offering cost chart."
 msgstr ""
 
+#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+msgid "Unable to load offering details"
+msgstr ""
+
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
@@ -12696,6 +12708,10 @@ msgstr ""
 msgid "Unable to update offering."
 msgstr ""
 
+#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+msgid "Unable to update options."
+msgstr ""
+
 #: src/customer/list/store/effects.ts
 msgid "Unable to update organization."
 msgstr ""
@@ -12889,6 +12905,7 @@ msgstr ""
 #: src/marketplace/offerings/update/overview/EditOverviewDialog.tsx
 #: src/marketplace/orders/list/OrderTypeCell.tsx
 #: src/marketplace/orders/list/OrderTypeFilter.tsx
+#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
@@ -13017,6 +13034,11 @@ msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
 msgid "Update offering thumbnail"
+msgstr ""
+
+#: src/marketplace/resources/actions/UpdateResourceOptionsAction.tsx
+#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+msgid "Update options"
 msgstr ""
 
 #: src/customer/payments/PaymentUpdateDialog.tsx
@@ -13278,7 +13300,7 @@ msgid "User has been updated."
 msgstr ""
 
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
-#: src/marketplace/offerings/update/options/OfferingOptionsSection.tsx
+#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
 msgid "User input variables"
 msgstr ""
 
@@ -13613,10 +13635,6 @@ msgstr ""
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "View item"
-msgstr ""
-
-#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
-msgid "View order"
 msgstr ""
 
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx
@@ -14026,6 +14044,10 @@ msgstr ""
 msgid "applications"
 msgstr ""
 
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "approval"
+msgstr ""
+
 #: src/form/CronField.tsx
 msgid "at"
 msgstr ""
@@ -14252,6 +14274,10 @@ msgstr ""
 msgid "payments"
 msgstr ""
 
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "pending"
+msgstr ""
+
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 msgid "permission reviews"
 msgstr ""
@@ -14448,6 +14474,10 @@ msgstr ""
 
 #: src/vmware/marketplace.ts
 msgid "vSphere Virtual Machine"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "view order"
 msgstr ""
 
 #: src/vmware/actions/EditDialog.tsx

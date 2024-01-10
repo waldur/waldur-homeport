@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
@@ -5,6 +6,7 @@ import { translate } from '@waldur/i18n';
 import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 
 import { RefreshButton } from '../components/RefreshButton';
+import { OfferingSectionProps } from '../types';
 
 import { EditGettingStartedButton } from './EditGettingStartedButton';
 import { EditOverviewButton } from './EditOverviewButton';
@@ -50,7 +52,7 @@ const attributes: Attribute[] = [
   },
 ];
 
-export const OverviewSection = (props) => {
+export const OverviewSection: FC<OfferingSectionProps> = (props) => {
   return (
     <Card className="mb-10" id="general">
       <div className="border-2 border-bottom card-header">

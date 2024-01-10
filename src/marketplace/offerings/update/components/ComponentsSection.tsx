@@ -1,15 +1,20 @@
+import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { showComponentsList } from '@waldur/marketplace/common/registry';
 import { getBillingTypeLabel } from '@waldur/marketplace/resources/usage/utils';
 
+import { OfferingSectionProps } from '../types';
+
 import { AddComponentButton } from './AddComponentButton';
 import { DeleteComponentButton } from './DeleteComponentButton';
 import { EditComponentButton } from './EditComponentButton';
 import { RefreshButton } from './RefreshButton';
 
-export const ComponentsSection = (props) => {
+export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
+  props,
+) => {
   if (!showComponentsList(props.offering.type)) {
     return null;
   }

@@ -1,15 +1,18 @@
-import { Fragment } from 'react';
+import { FC, Fragment } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { AttributeCell } from '@waldur/marketplace/common/AttributeCell';
 
 import { RefreshButton } from '../components/RefreshButton';
+import { OfferingSectionProps } from '../types';
 
 import { EditAttributeButton } from './EditAttributeButton';
 import { EditCategoryButton } from './EditCategoryButton';
 
-export const AttributesSection = (props) => (
+export const AttributesSection: FC<OfferingSectionProps & { category }> = (
+  props,
+) => (
   <Card className="mb-10" id="category">
     <div className="border-2 border-bottom card-header">
       <div className="card-title h5">

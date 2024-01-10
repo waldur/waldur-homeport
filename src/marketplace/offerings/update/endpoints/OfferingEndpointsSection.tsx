@@ -1,13 +1,15 @@
+import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
 import { RefreshButton } from '../components/RefreshButton';
+import { OfferingSectionProps } from '../types';
 
 import { AddEndpointButton } from './AddEndpointButton';
 import { DeleteEndpointButton } from './DeleteEndpointButton';
 
-export const OfferingEndpointsSection = (props) => {
+export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
   return (
     <Card className="mb-10" id="endpoints">
       <div className="border-2 border-bottom card-header">

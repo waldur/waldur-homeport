@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -11,11 +12,12 @@ import { hasPermission } from '@waldur/permissions/hasPermission';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { RefreshButton } from '../components/RefreshButton';
+import { OfferingSectionProps } from '../types';
 
 import { AddPlanButton } from './AddPlanButton';
 import { PlansTable } from './PlansTable';
 
-export const PlansSection = (props) => {
+export const PlansSection: FC<OfferingSectionProps> = (props) => {
   const user = useSelector(getUser);
   const {
     data: plans,

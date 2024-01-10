@@ -16,12 +16,13 @@ const AddOptionDialog = lazyComponent(
 export const AddOptionButton: FunctionComponent<{
   offering;
   refetch;
-}> = ({ offering, refetch }) => {
+  type;
+}> = ({ offering, refetch, type }) => {
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
       openModalDialog(AddOptionDialog, {
-        resolve: { offering, refetch },
+        resolve: { offering, refetch, type },
         formId: OPTION_FORM_ID,
       }),
     );

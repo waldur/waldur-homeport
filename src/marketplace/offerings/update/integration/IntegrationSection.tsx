@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -9,6 +10,7 @@ import {
 import { getServiceSettingsForm } from '@waldur/providers/registry';
 
 import { RefreshButton } from '../components/RefreshButton';
+import { OfferingSectionProps } from '../types';
 
 import { EditIntegrationButton } from './EditIntegrationButton';
 import { EditSchedulesButton } from './EditSchedulesButton';
@@ -18,7 +20,7 @@ import { RemoteActions } from './RemoteActions';
 import { ScriptIntegrationSummary } from './ScriptIntegrationSummary';
 import { SyncButton } from './SyncButton';
 
-export const IntegrationSection = (props) => {
+export const IntegrationSection: FC<OfferingSectionProps> = (props) => {
   if (props.offering.type === OFFERING_TYPE_CUSTOM_SCRIPTS) {
     return (
       <ScriptIntegrationSummary
