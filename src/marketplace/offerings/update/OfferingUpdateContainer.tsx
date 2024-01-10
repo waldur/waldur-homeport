@@ -157,7 +157,7 @@ export const OfferingUpdateContainer = () => {
 
         <OfferingOptionsSection
           type="resource_options"
-          title={translate('Resource report variables')}
+          title={translate('Resource options variables')}
           offering={data.offering}
           refetch={refetch}
           loading={isRefetching}

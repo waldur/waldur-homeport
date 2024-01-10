@@ -2401,6 +2401,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -2632,10 +2633,6 @@ msgstr ""
 
 #: src/marketplace/routes.ts
 msgid "Customers"
-msgstr ""
-
-#: src/proposals/call-management/CallManagementPage.tsx
-msgid "Cutoff"
 msgstr ""
 
 #: src/proposals/update/rounds/CallRoundsSection.tsx
@@ -9031,17 +9028,17 @@ msgstr ""
 msgid "Resource name"
 msgstr ""
 
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
+msgid "Resource options variables"
+msgstr ""
+
 #: src/marketplace/orders/list/ResourceOrders.tsx
 msgid "Resource orders"
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
 msgid "Resource plan change request has been submitted."
-msgstr ""
-
-#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
-#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
-msgid "Resource report variables"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/actions/ActivateAction.tsx
