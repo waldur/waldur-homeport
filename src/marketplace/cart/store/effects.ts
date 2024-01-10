@@ -29,6 +29,7 @@ import { WorkspaceType, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import * as actions from './actions';
 import * as constants from './constants';
+import { getItems } from './selectors';
 
 export const flattenAttributes = (attributes) => {
   let newAttributes = {};
@@ -123,6 +124,16 @@ function* addItem(action) {
       yield put(actions.addItemError());
     }
     return;
+  }
+  // Clear cart so that there's only one item per project
+  const cartItems: OrderResponse[] = yield select(getItems);
+  if (cartItems) {
+    for (const item of cartItems) {
+      if (item.uuid && item.project === action.payload.item.project) {
+        yield call(api.removeCartItem, item.uuid);
+        yield put(actions.removeItemSuccess(item.uuid));
+      }
+    }
   }
   let cartItem: OrderResponse;
   try {
