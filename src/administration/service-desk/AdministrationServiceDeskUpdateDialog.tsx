@@ -20,8 +20,14 @@ export const AdministrationServiceDeskUpdateDialog = reduxForm<
 })((props) => {
   const dispatch = useDispatch();
   const callback = async (formData) => {
+    const relevantFormData = {};
+    Object.keys(formData).forEach((fieldName) => {
+      if (fieldName.startsWith(props.name.toUpperCase())) {
+        relevantFormData[fieldName] = formData[fieldName];
+      }
+    });
     try {
-      await saveConfig(formData);
+      await saveConfig(relevantFormData);
       dispatch(showSuccess('Configurations have been updated'));
       dispatch(closeModalDialog());
     } catch (e) {
