@@ -43,6 +43,14 @@ export function ResourceSummaryBase<T extends Resource = any>(
         value={ResourceMetadataLink(props)}
         valueClass="text-decoration-underline"
       />
+      <Field
+        label={translate('Backend ID')}
+        value={props.resource.backend_id}
+      />
+      <Field
+        label={translate('Effective ID')}
+        value={props.resource.effective_id}
+      />
     </>
   );
 }
