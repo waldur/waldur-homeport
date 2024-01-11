@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { OrderConsumerActions } from '@waldur/marketplace/orders/actions/OrderConsumerActions';
 import { OrderDetailsLink } from '@waldur/marketplace/orders/details/OrderDetailsLink';
 
 import { Resource } from '../types';
@@ -105,6 +106,11 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
           >
             ({translate('view order')})
           </OrderDetailsLink>
+          {resource.order_in_progress.state === 'pending-consumer' && (
+            <div className="ms-6 d-inline-block">
+              <OrderConsumerActions order={resource.order_in_progress} />
+            </div>
+          )}
         </div>
         <div className="stepper stepper-pills d-flex flex-column w-100">
           <div className="stepper-nav flex-wrap align-items-start justify-content-around w-100">
