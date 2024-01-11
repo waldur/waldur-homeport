@@ -36,7 +36,6 @@ export interface BaseResource {
 }
 
 export interface Resource extends BaseResource {
-  effective_id?: string;
   resource_type: string;
   service_settings_state: string;
   service_settings_error_message?: string;
