@@ -19,6 +19,11 @@ export const DetailsSection = ({ order, offering }: OrderDetailsProps) => {
             {order.marketplace_resource_uuid}
           </DetailsField>
         )}
+        {order.backend_id && (
+          <DetailsField label={translate('Backend ID')}>
+            {order.backend_id}
+          </DetailsField>
+        )}
         <DetailsField label={translate('Created at')}>
           {formatDateTime(order.created)}
         </DetailsField>

@@ -950,6 +950,10 @@ msgstr ""
 msgid "Are you sure you want to select template? Note this will reset the node plan."
 msgstr ""
 
+#: src/marketplace/cart/ShoppingCartButtonContainer.tsx
+msgid "Are you sure you want to submit the order?"
+msgstr ""
+
 #: src/resource/actions/UnlinkActionItem.tsx
 msgid "Are you sure you want to unlink {name} {resourceType}?"
 msgstr ""
@@ -1211,6 +1215,7 @@ msgstr ""
 #: src/project/ProjectExpandableRowContainer.tsx
 #: src/project/ProjectUpdateForm.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
+#: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Backend ID"
@@ -2003,6 +2008,7 @@ msgstr ""
 #: src/customer/team/UserRemoveButton.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
+#: src/marketplace/cart/ShoppingCartButtonContainer.tsx
 #: src/marketplace/category/admin/CategoryDeleteButton.tsx
 #: src/marketplace/category/admin/GroupDeleteButton.tsx
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
@@ -3411,6 +3417,7 @@ msgstr ""
 
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Effective ID"
 msgstr ""
 

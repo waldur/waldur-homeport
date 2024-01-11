@@ -83,4 +83,5 @@ export interface OrderDetailsType extends OrderResponse {
   old_cost_estimate: string;
   new_cost_estimate: string;
   can_terminate: boolean;
+  backend_id?: string;
 }
