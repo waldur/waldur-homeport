@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
+import { translate } from '@waldur/i18n';
 import { OrderRequest } from '@waldur/marketplace/cart/types';
+import { waitForConfirmation } from '@waldur/modal/actions';
 import { RootState } from '@waldur/store/reducers';
 
 import { ShoppingCartButton } from './ShoppingCartButton';
@@ -24,7 +26,15 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => ({
-  onBtnClick: () => dispatch(addItemRequest(ownProps.item)),
+  onBtnClick: () => {
+    waitForConfirmation(
+      dispatch,
+      translate('Confirmation'),
+      translate('Are you sure you want to submit the order?'),
+    ).then(() => {
+      dispatch(addItemRequest(ownProps.item));
+    });
+  },
 });
 
 const enhance = connect<{}, DispatchProps, OwnProps>(
