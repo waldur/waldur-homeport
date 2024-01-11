@@ -1,4 +1,4 @@
-import { FormContainer, StringField } from '@waldur/form';
+import { FormContainer, SecretField, StringField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 
 export const SmaxSettings = () => (
@@ -14,5 +14,11 @@ export const SmaxSettings = () => (
       maxLength={150}
     />
     <StringField name="SMAX_LOGIN" label={translate('Login')} maxLength={150} />
+    <SecretField
+      name="SMAX_PASSWORD"
+      label={translate('Password')}
+      maxLength={150}
+      floating={false}
+    />
   </FormContainer>
 );
