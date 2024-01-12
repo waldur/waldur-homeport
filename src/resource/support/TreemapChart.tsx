@@ -1,7 +1,6 @@
 import { Component } from 'react';
 
 import { translate } from '@waldur/i18n';
-import loadEcharts from '@waldur/shims/load-echarts';
 
 import { levelOptions } from './styles';
 import { TreemapData } from './types';
@@ -41,7 +40,7 @@ export class TreemapChart extends Component<TreemapChartProps> {
   }
 
   drawChart() {
-    loadEcharts().then((module) => {
+    import('@waldur/echarts').then((module) => {
       const echarts = module.default;
       const chart = echarts.getInstanceByDom(this.container);
       if (!chart) {

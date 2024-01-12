@@ -1216,7 +1216,6 @@ msgstr ""
 #: src/project/ProjectExpandableRowContainer.tsx
 #: src/project/ProjectUpdateForm.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
-#: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Backend ID"
@@ -3418,7 +3417,6 @@ msgstr ""
 
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Effective ID"
 msgstr ""
 

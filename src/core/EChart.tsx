@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import ResizeObserver from 'resize-observer-polyfill';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import loadEcharts from '@waldur/shims/load-echarts';
 import { RootState } from '@waldur/store/reducers';
 
 interface ChartProps {
@@ -59,7 +58,7 @@ export class EChartComponent extends Component<ChartProps> {
     this.setState({
       loading: true,
     });
-    loadEcharts().then((module) => {
+    import('@waldur/echarts').then((module) => {
       this.setState({
         loading: false,
       });
