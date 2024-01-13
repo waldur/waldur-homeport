@@ -251,7 +251,7 @@ export const updateOfferingComponent = (offeringId, data) =>
 
 export const updateOfferingSecretOptions = (offeringId, data) =>
   post(
-    `/marketplace-provider-offerings/${offeringId}/update_secret_options/`,
+    `/marketplace-provider-offerings/${offeringId}/update_integration/`,
     data,
   );
 
