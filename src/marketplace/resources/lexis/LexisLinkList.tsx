@@ -29,7 +29,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title: translate('Robot account'),
       render: ({ row }) =>
         row.robot_account_username ? (
-          <CopyToClipboardContainer value={row.username} />
+          <CopyToClipboardContainer value={row.robot_account_username} />
         ) : (
           'N/A'
         ),
