@@ -1,10 +1,10 @@
-export interface KeyPair {
-  fingerprint: string;
-  is_shared: boolean;
+export interface SshKey {
+  url: string;
+  uuid: string;
   name: string;
   public_key: string;
-  type: string;
-  url: string;
+  fingerprint: string;
   user_uuid: string;
-  uuid: string;
+  is_shared: boolean;
+  type: string;
 }

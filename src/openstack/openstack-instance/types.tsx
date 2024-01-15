@@ -65,16 +65,6 @@ export interface Image extends ServiceComponent {
   name: string;
 }
 
-export interface SshKey {
-  url: string;
-  uuid: string;
-  name: string;
-  public_key: string;
-  fingerprint: string;
-  user_uuid: string;
-  is_shared: boolean;
-}
-
 export interface OpenStackInstanceFormData {
   name?: string;
   service?: { name: string };

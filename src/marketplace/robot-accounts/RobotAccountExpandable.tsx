@@ -1,10 +1,13 @@
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
+import { SshKey } from '@waldur/user/types';
 
-export const RobotAccountExpandable = ({ row }) => {
-  const groupedKeys = useMemo(
+import { RobotAccount } from './types';
+
+export const RobotAccountExpandable: FC<{ row: RobotAccount }> = ({ row }) => {
+  const groupedKeys = useMemo<Record<string, SshKey[]>>(
     () =>
       row.user_keys.reduce((result, item) => {
         if (!result[item.user_uuid]) {
@@ -51,15 +54,15 @@ export const RobotAccountExpandable = ({ row }) => {
           </ul>
         </>
       ) : null}
-      {row.keys.length > 0 ? (
+      {row.fingerprints.length > 0 ? (
         <>
           <strong>{translate('SSH keys')}</strong>
           <ul>
-            {row.keys.map((key, index) => (
+            {row.fingerprints.map((value, index) => (
               <li key={index}>
                 <p>
                   {translate('Fingerprint')}:{' '}
-                  <CopyToClipboardContainer value={key.fingerprint} />
+                  <CopyToClipboardContainer value={value} />
                 </p>
               </li>
             ))}

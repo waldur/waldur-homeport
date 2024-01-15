@@ -7,10 +7,10 @@ import {
   FloatingIp,
   Subnet,
   Image,
-  SshKey,
   OpenStackInstance,
 } from '@waldur/openstack/openstack-instance/types';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
+import { SshKey } from '@waldur/user/types';
 
 import {
   AvailabilityZone,
