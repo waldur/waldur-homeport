@@ -7098,6 +7098,7 @@ msgid "Partial access"
 msgstr ""
 
 #: src/administration/service-desk/AtlassianSettings.tsx
+#: src/administration/service-desk/SmaxSettings.tsx
 #: src/auth/SigninForm.tsx
 #: src/azure/sql/AzureSQLServerSummary.tsx
 #: src/openstack/OpenStackForm.tsx

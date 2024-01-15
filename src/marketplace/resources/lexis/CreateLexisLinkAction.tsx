@@ -13,18 +13,16 @@ const CreateLexisLinkDialog = lazyComponent(
 );
 
 export const validateOfferingPluginOptions = (ctx: any) => {
-  if (!ctx.resource.marketplace_offering_plugin_options?.heappe_url) {
+  if (!ctx.resource.offering_plugin_options?.heappe_url) {
     return translate('Offering does not include heappe_url option');
   }
-  if (!ctx.resource.marketplace_offering_plugin_options?.heappe_username) {
+  if (!ctx.resource.offering_plugin_options?.heappe_username) {
     return translate('Offering does not include heappe_username option');
   }
-  if (!ctx.resource.marketplace_offering_plugin_options?.heappe_cluster_id) {
+  if (!ctx.resource.offering_plugin_options?.heappe_cluster_id) {
     return translate('Offering does not include heappe_cluster_id option');
   }
-  if (
-    !ctx.resource.marketplace_offering_plugin_options?.heappe_local_base_path
-  ) {
+  if (!ctx.resource.offering_plugin_options?.heappe_local_base_path) {
     return translate('Offering does not include heappe_local_base_path option');
   }
   return;
