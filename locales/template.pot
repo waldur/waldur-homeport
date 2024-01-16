@@ -6493,22 +6493,6 @@ msgstr ""
 msgid "Offering does not have any usage-based components."
 msgstr ""
 
-#: src/marketplace/resources/lexis/CreateLexisLinkAction.tsx
-msgid "Offering does not include heappe_cluster_id option"
-msgstr ""
-
-#: src/marketplace/resources/lexis/CreateLexisLinkAction.tsx
-msgid "Offering does not include heappe_local_base_path option"
-msgstr ""
-
-#: src/marketplace/resources/lexis/CreateLexisLinkAction.tsx
-msgid "Offering does not include heappe_url option"
-msgstr ""
-
-#: src/marketplace/resources/lexis/CreateLexisLinkAction.tsx
-msgid "Offering does not include heappe_username option"
-msgstr ""
-
 #: src/marketplace/offerings/update/components/ComponentsSection.tsx
 msgid "Offering doesn't have components."
 msgstr ""

@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { PermissionEnum } from '@waldur/permissions/enums';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { validateState } from '@waldur/resource/actions/base';
 import { useModalDialogCallback } from '@waldur/resource/actions/useModalDialogCallback';
@@ -12,26 +13,7 @@ const CreateLexisLinkDialog = lazyComponent(
   'CreateLexisLinkDialog',
 );
 
-export const validateOfferingPluginOptions = (ctx: any) => {
-  if (!ctx.resource.offering_plugin_options?.heappe_url) {
-    return translate('Offering does not include heappe_url option');
-  }
-  if (!ctx.resource.offering_plugin_options?.heappe_username) {
-    return translate('Offering does not include heappe_username option');
-  }
-  if (!ctx.resource.offering_plugin_options?.heappe_cluster_id) {
-    return translate('Offering does not include heappe_cluster_id option');
-  }
-  if (!ctx.resource.offering_plugin_options?.heappe_local_base_path) {
-    return translate('Offering does not include heappe_local_base_path option');
-  }
-  return;
-};
-
-const validators = [
-  validateState('OK', 'Erred'),
-  validateOfferingPluginOptions,
-];
+const validators = [validateState('OK', 'Erred')];
 
 interface CreateLexisLinkActionProps {
   resource: any;
@@ -58,9 +40,12 @@ export const CreateLexisLinkAction: FC<CreateLexisLinkActionProps> = ({
     tooltip,
     disabled,
   };
-  if (!disabled) {
-    return <ActionItem {...props} />;
-  } else {
+  if (
+    disabled ||
+    !resource.available_actions?.includes(PermissionEnum.CREATE_LEXIS_LINK)
+  ) {
     return null;
+  } else {
+    return <ActionItem {...props} />;
   }
 };
