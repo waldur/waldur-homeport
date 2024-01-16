@@ -6,10 +6,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
-import {
-  getCustomer,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-} from '@waldur/workspace/selectors';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { OfferingPermissionActions } from '../offerings/details/permissions/OfferingPermissionActions';
 
@@ -22,7 +19,6 @@ const getFilter = createSelector(getCustomer, (customer) => ({
 
 export const OfferingPermissionsList: FunctionComponent = () => {
   const filter = useSelector(getFilter);
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
 
   const tableProps = useTable({
     table: OFFERING_PERMISSIONS_LIST_ID,
@@ -54,11 +50,7 @@ export const OfferingPermissionsList: FunctionComponent = () => {
       ]}
       hoverableRow={OfferingPermissionActions}
       verboseName={translate('offering permissions')}
-      actions={
-        isOwnerOrStaff ? (
-          <OfferingPermissionCreateButton fetch={tableProps.fetch} />
-        ) : null
-      }
+      actions={<OfferingPermissionCreateButton fetch={tableProps.fetch} />}
     />
   );
 };
