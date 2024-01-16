@@ -8,7 +8,7 @@ import { StepCardTabs } from '@waldur/marketplace/deploy/steps/StepCardTabs';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
-import { Table, createFetcher } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
 import { Flavor } from '../types';
@@ -50,25 +50,17 @@ export const FormFlavorStep = (props: FormStepProps) => {
   const exceeds = useCallback(
     (value: Flavor) => {
       if (!value || !limit) return undefined;
-      const error = [];
+      const errors = [];
+
       if ((value.cores || 0) + (vcpuQuota.usage || 0) > limit.vcpu) {
-        error.push(translate('The CPU quota is over the limit'));
+        errors.push(translate('The CPU quota is over the limit'));
       }
       if ((value.ram || 0) + (ramQuota.usage || 0) > limit.ram) {
-        error.push(translate('The RAM quota is over the limit'));
+        errors.push(translate('The RAM quota is over the limit'));
       }
-
-      return error.length > 1 ? (
-        <ul>
-          {error.map((err, i) => (
-            <li key={i}>{err}</li>
-          ))}
-        </ul>
-      ) : error.length === 1 ? (
-        error[0]
-      ) : undefined;
+      return errors.length > 0 ? errors : undefined;
     },
-    [limit],
+    [limit, vcpuQuota.usage, ramQuota.usage],
   );
 
   return (
