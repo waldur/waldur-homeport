@@ -151,7 +151,7 @@ export const OrganizationListItem: FunctionComponent<{
                 <ServiceProviderIcon organization={item} />
               </Link>
             ) : (
-              <div className="action-item">
+              <div className="action-item" onClick={(e) => e.stopPropagation()}>
                 <ServiceProviderIcon organization={item} />
               </div>
             )}
@@ -175,7 +175,10 @@ export const OrganizationListItem: FunctionComponent<{
                   <CallManagerIcon organization={item} />
                 </Link>
               ) : (
-                <div className="action-item">
+                <div
+                  className="action-item"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <CallManagerIcon organization={item} />
                 </div>
               )}
@@ -248,7 +251,9 @@ export const OrganizationsPanel: FunctionComponent<{
               onMouseEnter={() => onMouseEnter(item)}
               filter={filter}
               loading={loadingUuid === item.uuid}
-              hasOrganizationPermission={getCustomerPermission(user, item)}
+              hasOrganizationPermission={
+                user.is_staff || getCustomerPermission(user, item)
+              }
             />
           );
         }}

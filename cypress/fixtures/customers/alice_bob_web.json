@@ -21,7 +21,8 @@
     "service_managers": [],
     "is_expert_provider": false,
     "quotas": [],
-    "archived": false
+    "archived": false,
+    "is_service_provider": true
   },
   {
     "uuid": "8f2f80601d82422ea4124559da92dddb",
@@ -58,6 +59,5 @@
     "is_expert_provider": false,
     "quotas": [],
     "archived": false
-
   }
 ]

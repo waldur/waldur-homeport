@@ -36,6 +36,9 @@ describe('Workspace selector', () => {
       .intercept('GET', '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/', {
         fixture: 'customers/alice.json',
       })
+      .intercept('GET', '/api/marketplace-service-providers/?customer_uuid=bf6d515c9e6e445f9c339021b30fc96b', {
+        fixture: 'marketplace/service_providers.json',
+      })
       .setToken()
       .visit('/profile/')
       // waiting until the page loaded, so that we can click on the popup
@@ -60,11 +63,7 @@ describe('Workspace selector', () => {
       })
       // Only matching organizations should be present
       .should(($p) =>
-        expect(getTextList($p)).to.deep.eq([
-          'Alice Lebowski',
-          'Bob',
-          'Web',
-        ]),
+        expect(getTextList($p)).to.deep.eq(['Alice Lebowski', 'Bob', 'Web']),
       );
   });
 
@@ -121,6 +120,25 @@ describe('Workspace selector', () => {
     cy.get('.aside-menu .menu-item:contains(Organization)')
       .should('have.class', 'here')
       .get('h2:contains(Alice Lebowski)')
+      .should('be.visible');
+  });
+
+  it('Allows to go switch to service provider dashboard', () => {
+    cy.get('.organization-listing')
+      // Click on first available service-provider link
+      .get('.organization-listing .list-group-item p.title')
+      .contains('Alice')
+      .parents('.list-group-item')
+      .within(() => {
+        cy.get('.actions .action-item')
+          .contains('SP')
+          .click({ force: true });
+      });
+
+    // wait for the provider menu and dashboard
+    cy.get('.aside-menu .menu-item:contains(Provider)')
+      .should('have.class', 'here')
+      .get('.page-title:contains(Service provider)')
       .should('be.visible');
   });
 
