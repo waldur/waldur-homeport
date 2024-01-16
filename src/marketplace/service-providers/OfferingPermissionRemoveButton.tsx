@@ -1,11 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { deleteOfferingPermission } from '@waldur/permissions/api';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 interface OfferingPermissionRemoveButtonProps {
   permission: any;
@@ -14,6 +17,13 @@ interface OfferingPermissionRemoveButtonProps {
 
 export const OfferingPermissionRemoveButton: React.FC<OfferingPermissionRemoveButtonProps> =
   (props) => {
+    const user = useSelector(getUser);
+    const customer = useSelector(getCustomer);
+    const canDeletePermission = hasPermission(user, {
+      permission: PermissionEnum.DELETE_OFFERING_PERMISSION,
+      customerId: customer.uuid,
+    });
+
     const dispatch = useDispatch();
     const callback = async () => {
       try {
@@ -39,11 +49,11 @@ export const OfferingPermissionRemoveButton: React.FC<OfferingPermissionRemoveBu
         );
       }
     };
-    return (
+    return canDeletePermission ? (
       <ActionButton
         action={callback}
         title={translate('Revoke')}
         icon="fa fa-trash"
       />
-    );
+    ) : null;
   };
