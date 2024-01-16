@@ -39,42 +39,68 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
   const mainButtonRef = useRef(null);
   const isOnScreen = useOnScreen(mainButtonRef);
 
+  const errorsExist = props.errors?.attributes || props.errors?.limits;
+
   const buttonsJsx = !props.updateMode ? (
-    <Tip
-      label={
-        <FieldError
-          error={{ ...props.errors?.attributes, ...props.errors?.limits }}
+    <>
+      {errorsExist && (
+        <Tip
+          label={
+            <FieldError
+              error={{ ...props.errors?.attributes, ...props.errors?.limits }}
+            />
+          }
+          id="offering-button-errors"
+          autoWidth
+          className="w-100"
+        >
+          <ShoppingCartButtonContainer
+            item={formatOrderForCreate(props)}
+            flavor="primary"
+            disabled={!props.formValid}
+            className="w-100"
+          />
+        </Tip>
+      )}
+      {!errorsExist && (
+        <ShoppingCartButtonContainer
+          item={formatOrderForCreate(props)}
+          flavor="primary"
+          disabled={!props.formValid}
+          className="w-100"
         />
-      }
-      id="offering-button-errors"
-      autoWidth
-      className="w-100"
-    >
-      <ShoppingCartButtonContainer
-        item={formatOrderForCreate(props)}
-        flavor="primary"
-        disabled={!props.formValid}
-        className="w-100"
-      />
-    </Tip>
+      )}
+    </>
   ) : (
-    <Tip
-      label={
-        <FieldError
-          error={{ ...props.errors?.attributes, ...props.errors?.limits }}
+    <>
+      {errorsExist && (
+        <Tip
+          label={
+            <FieldError
+              error={{ ...props.errors?.attributes, ...props.errors?.limits }}
+            />
+          }
+          id="offering-button-errors"
+          autoWidth
+          className="w-100"
+        >
+          <ShoppingCartUpdateButtonContainer
+            item={formatOrderForUpdate(props)}
+            flavor="primary"
+            disabled={!props.formValid}
+            className="w-100"
+          />
+        </Tip>
+      )}
+      {!errorsExist && (
+        <ShoppingCartUpdateButtonContainer
+          item={formatOrderForUpdate(props)}
+          flavor="primary"
+          disabled={!props.formValid}
+          className="w-100"
         />
-      }
-      id="offering-button-errors"
-      autoWidth
-      className="w-100"
-    >
-      <ShoppingCartUpdateButtonContainer
-        item={formatOrderForUpdate(props)}
-        flavor="primary"
-        disabled={!props.formValid}
-        className="w-100"
-      />
-    </Tip>
+      )}
+    </>
   );
 
   return (
