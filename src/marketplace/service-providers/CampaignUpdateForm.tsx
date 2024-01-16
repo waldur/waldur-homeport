@@ -1,7 +1,6 @@
 import { Modal } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
-import { StepIndicator } from '@waldur/broadcasts/StepIndicator';
 import { required } from '@waldur/core/validators';
 import {
   FormContainer,
@@ -12,6 +11,7 @@ import {
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
+import { WizardStepIndicator } from '@waldur/form/WizardStepIndicator';
 import { translate } from '@waldur/i18n';
 import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { CAMPAIGN_CREATE_FORM_ID } from '@waldur/marketplace/service-providers/constants';
@@ -31,7 +31,7 @@ const enhance = reduxForm<CampaignFormData, OwnProps>({
 
 export const CampaignUpdateForm = enhance(({ submitting, step, setStep }) => (
   <>
-    <StepIndicator
+    <WizardStepIndicator
       steps={[translate('Select type'), translate('Actions')]}
       activeStep={step}
       onSelect={setStep}

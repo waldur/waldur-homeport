@@ -1,7 +1,7 @@
-import './StepIndicator.scss';
+import './WizardStepIndicator.scss';
 
-export const StepIndicator = ({ steps, activeStep, onSelect }) => (
-  <ol className="step-indicator">
+export const WizardStepIndicator = ({ steps, activeStep, onSelect }) => (
+  <ol className="wizard-step-indicator">
     {steps.map((step, stepIndex) => (
       <li
         key={stepIndex}

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ProposalCall, ProposalCallRound } from '@waldur/proposals/types';
-import { Table } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
 import { CallRoundsTablePlaceholder } from './CallRoundsTablePlaceholder';
@@ -14,14 +14,11 @@ interface CallRoundsSectionProps {
 }
 
 export const CallRoundsSection: FC<CallRoundsSectionProps> = (props) => {
-  const rounds = props.call?.rounds || [];
   const tableProps = useTable({
     table: 'CallRoundsList',
-    fetchData: () =>
-      Promise.resolve({
-        rows: rounds,
-        resultCount: rounds.length,
-      }),
+    fetchData: createFetcher(
+      `proposal-protected-calls/${props.call.uuid}/rounds`,
+    ),
     queryField: 'name',
   });
 
@@ -30,7 +27,12 @@ export const CallRoundsSection: FC<CallRoundsSectionProps> = (props) => {
       {...tableProps}
       id="rounds"
       className="mb-7"
-      placeholderComponent={<CallRoundsTablePlaceholder />}
+      placeholderComponent={
+        <CallRoundsTablePlaceholder
+          call={props.call}
+          refetch={tableProps.fetch}
+        />
+      }
       columns={[
         {
           title: translate('Round name'),
@@ -69,7 +71,9 @@ export const CallRoundsSection: FC<CallRoundsSectionProps> = (props) => {
       }
       verboseName={translate('Rounds')}
       hasQuery={true}
-      actions={<RoundCreateButton />}
+      actions={
+        <RoundCreateButton call={props.call} refetch={tableProps.fetch} />
+      }
     />
   );
 };

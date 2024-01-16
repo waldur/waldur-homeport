@@ -2,7 +2,6 @@ import { Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { FormName } from 'redux-form';
 
-import { StepIndicator } from '@waldur/broadcasts/StepIndicator';
 import { required } from '@waldur/core/validators';
 import {
   FormContainer,
@@ -13,6 +12,7 @@ import {
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
+import { WizardStepIndicator } from '@waldur/form/WizardStepIndicator';
 import { translate } from '@waldur/i18n';
 import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { CampaignFormData } from '@waldur/marketplace/service-providers/types';
@@ -31,7 +31,7 @@ export const CampaignForm = ({
   const customer = useSelector(getCustomer);
   return (
     <>
-      <StepIndicator
+      <WizardStepIndicator
         steps={[translate('Select type'), translate('Actions')]}
         activeStep={step}
         onSelect={setStep}

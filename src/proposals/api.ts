@@ -2,7 +2,11 @@ import { AxiosRequestConfig } from 'axios';
 
 import { getById, post, deleteById, getFirst, put } from '@waldur/core/api';
 
-import { CallManagingOrganizationInfo, ProposalCall } from './types';
+import {
+  CallManagingOrganizationInfo,
+  ProposalCall,
+  ProposalCallRound,
+} from './types';
 
 export const organizationCallManagingInfo = (customerUuid) =>
   getFirst<CallManagingOrganizationInfo>('/call-managing-organisations/', {
@@ -36,3 +40,10 @@ export const updateCall = (data, uuid) => {
 
 export const getPublicCall = (uuid: string, options?: AxiosRequestConfig) =>
   getById<ProposalCall>('/proposal-public-calls/', uuid, options);
+
+export const createCallRound = (callUuid, data) => {
+  return post<ProposalCallRound>(
+    `/proposal-protected-calls/${callUuid}/rounds/`,
+    data,
+  );
+};

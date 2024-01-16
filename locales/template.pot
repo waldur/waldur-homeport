@@ -617,6 +617,14 @@ msgstr ""
 msgid "Allocated"
 msgstr ""
 
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
+msgid "Allocation"
+msgstr ""
+
+#: src/proposals/update/rounds/WizardFormThirdPage.tsx
+msgid "Allocation date"
+msgstr ""
+
 #: src/slurm/deploy/steps.ts
 msgid "Allocation name"
 msgstr ""
@@ -630,6 +638,10 @@ msgstr ""
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
 msgid "Allocation strategy"
+msgstr ""
+
+#: src/proposals/update/rounds/WizardFormThirdPage.tsx
+msgid "Allocation time"
 msgstr ""
 
 #: src/slurm/details/AllocationMainComponent.tsx
@@ -2191,6 +2203,7 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateButton.tsx
 #: src/rancher/cluster/hpas/HPACreateButton.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -2642,7 +2655,12 @@ msgid "Customers"
 msgstr ""
 
 #: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Cutoff date"
+msgstr ""
+
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
+msgid "Cutoff date must be after start date"
 msgstr ""
 
 #: src/openstack/openstack-subnet/fields.tsx
@@ -2748,6 +2766,10 @@ msgstr ""
 
 #: src/proposals/details/CallDetailsCard.tsx
 msgid "Deadline"
+msgstr ""
+
+#: src/proposals/update/rounds/WizardFormThirdPage.tsx
+msgid "Deciding entity"
 msgstr ""
 
 #: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
@@ -3230,6 +3252,10 @@ msgstr ""
 #: src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 msgid "Due date"
+msgstr ""
+
+#: src/proposals/update/rounds/WizardFormFirstPage.tsx
+msgid "Duration"
 msgstr ""
 
 #: src/openstack/OpenStackPluginOptionsForm.tsx
@@ -5138,6 +5164,10 @@ msgstr ""
 msgid "Last update"
 msgstr ""
 
+#: src/proposals/update/rounds/WizardFormSecondPage.tsx
+msgid "Latest review completion date"
+msgstr ""
+
 #: src/auth/HeroButton.tsx
 #: src/navigation/cookies/CookiesConsent.tsx
 msgid "Learn more"
@@ -5455,6 +5485,10 @@ msgstr ""
 msgid "Maximum RAM for each VM"
 msgstr ""
 
+#: src/proposals/update/rounds/WizardFormThirdPage.tsx
+msgid "Maximum accepted proposals"
+msgstr ""
+
 #: src/marketplace/offerings/update/components/ComponentMaxValueField.tsx
 msgid "Maximum allowed value"
 msgstr ""
@@ -5589,8 +5623,16 @@ msgstr ""
 msgid "Minimum allowed value"
 msgstr ""
 
+#: src/proposals/update/rounds/WizardFormThirdPage.tsx
+msgid "Minimum average scoring for allocation"
+msgstr ""
+
 #: src/booking/components/SlotDurationGroup.tsx
 msgid "Minimum booking time slot duration."
+msgstr ""
+
+#: src/proposals/update/rounds/WizardFormSecondPage.tsx
+msgid "Minimum number of reviewers"
 msgstr ""
 
 #: src/freeipa/UsernameGroup.tsx
@@ -6001,6 +6043,7 @@ msgstr ""
 msgid "New role"
 msgstr ""
 
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
 #: src/proposals/update/rounds/RoundCreateButton.tsx
 msgid "New round"
 msgstr ""
@@ -6021,6 +6064,7 @@ msgstr ""
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Next"
 msgstr ""
 
@@ -7706,6 +7750,7 @@ msgid "Preview order form"
 msgstr ""
 
 #: src/customer/create/WizardForm.tsx
+#: src/form/WizardForm.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/PrevPage.tsx
 msgid "Previous"
 msgstr ""
@@ -9187,7 +9232,12 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/proposals/update/CallUpdateBar.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Review"
+msgstr ""
+
+#: src/proposals/update/rounds/WizardFormSecondPage.tsx
+msgid "Review duration (days)"
 msgstr ""
 
 #: src/customer/team/PendingReviewDialog.tsx
@@ -9211,6 +9261,7 @@ msgstr ""
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
+#: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Review strategy"
 msgstr ""
 
@@ -10474,6 +10525,7 @@ msgstr ""
 
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Start date"
 msgstr ""
 
@@ -10662,6 +10714,10 @@ msgstr ""
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/broadcasts/BroadcastTemplateList.tsx
 msgid "Subject"
+msgstr ""
+
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
+msgid "Submission"
 msgstr ""
 
 #: src/proposals/call-management/CallExpandableRow.tsx
@@ -11462,6 +11518,7 @@ msgstr ""
 
 #: src/booking/components/TimeZoneGroup.tsx
 #: src/openstack/openstack-backup-schedule/actions/fields.ts
+#: src/proposals/update/rounds/WizardFormFirstPage.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Time zone"
 msgstr ""

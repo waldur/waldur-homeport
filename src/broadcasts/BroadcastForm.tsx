@@ -7,6 +7,7 @@ import { FormContainer, StringField, TextField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
+import { WizardStepIndicator } from '@waldur/form/WizardStepIndicator';
 import { translate } from '@waldur/i18n';
 import {
   offeringsAutocomplete,
@@ -15,7 +16,6 @@ import {
 
 import { templateAutocomplete } from './autocomplete';
 import { RecipientsList } from './RecipientsList';
-import { StepIndicator } from './StepIndicator';
 import { MessageTemplate, BroadcastFormData } from './types';
 
 export const BroadcastForm = ({
@@ -33,7 +33,7 @@ export const BroadcastForm = ({
 
   return (
     <>
-      <StepIndicator
+      <WizardStepIndicator
         steps={[translate('Create message'), translate('Select recipients')]}
         activeStep={step}
         onSelect={setStep}
