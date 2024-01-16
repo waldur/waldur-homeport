@@ -1,0 +1,28 @@
+.wizard {
+  .modal-body {
+    padding: 0;
+  }
+
+  .wizard-body {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+
+    & > .content {
+      display: block;
+      min-height: 120px;
+      overflow: hidden;
+      position: relative;
+      width: auto;
+      padding: 1.75rem;
+    }
+  }
+
+  &.wizard-big {
+    &.wizard-body {
+      & > .content {
+        min-height: 320px;
+      }
+    }
+  }
+}

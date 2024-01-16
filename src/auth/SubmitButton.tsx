@@ -7,6 +7,7 @@ interface SubmitButtonProps {
   label?: string;
   variant?: string;
   block?: boolean;
+  className?: string;
 }
 
 export const SubmitButton: React.FC<SubmitButtonProps> = ({
@@ -15,8 +16,14 @@ export const SubmitButton: React.FC<SubmitButtonProps> = ({
   label,
   children,
   variant,
+  className,
 }) => (
-  <Button type="submit" variant={variant} disabled={submitting || invalid}>
+  <Button
+    type="submit"
+    variant={variant}
+    disabled={submitting || invalid}
+    className={className}
+  >
     {submitting && (
       <>
         <i className="fa fa-spinner fa-spin me-1" />{' '}

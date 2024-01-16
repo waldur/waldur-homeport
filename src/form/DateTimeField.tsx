@@ -1,12 +1,16 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
-import Flatpickr from 'react-flatpickr';
+import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
 
-export const DateTimeField: FunctionComponent<any> = (props) => (
+import { FormField } from './types';
+
+type DateTimeFieldProps = FormField & DateTimePickerProps['options'];
+
+export const DateTimeField: FunctionComponent<DateTimeFieldProps> = (props) => (
   <Flatpickr
     options={{
       enableTime: true,
-      dateFormat: 'Z',
+      dateFormat: props.dateFormat || 'Z',
       minDate: props.minDate,
     }}
     value={

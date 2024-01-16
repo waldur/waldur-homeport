@@ -33,3 +33,17 @@ export interface ProposalCall {
   offerings: Offering[];
   rounds: ProposalCallRound[];
 }
+
+export interface CallRoundFormData {
+  start_time: string;
+  timezone: string;
+  cutoff_time: string;
+  review_strategy: string;
+  review_duration_in_days: number;
+  minimum_number_of_reviewers: number;
+  deciding_entity: string;
+  max_allocations: number;
+  minimal_average_scoring: number;
+  allocation_time: string;
+  allocation_date: string;
+}

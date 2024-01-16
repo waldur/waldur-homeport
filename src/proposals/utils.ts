@@ -11,12 +11,17 @@ export const getCallRoundStrategyOptions = () => [
 
 export const getCallReviewStrategyOptions = () => [
   { value: 1, label: 'After round is closed' },
-  { value: 2, label: 'After application submission' },
+  { value: 2, label: 'After proposal submission' },
 ];
 
 export const getCallAllocationStrategyOptions = () => [
   { value: 1, label: 'By call manager' },
   { value: 2, label: 'Automatic based on review scoring' },
+];
+
+export const getCallAllocationTimesOptions = () => [
+  { value: 1, label: 'On decision' },
+  { value: 2, label: 'Fixed date' },
 ];
 
 export const getProposalCallInitialValues = (call: ProposalCall) => {
