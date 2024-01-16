@@ -33,12 +33,12 @@ const validators = [
   validateOfferingPluginOptions,
 ];
 
-interface TerminateActionProps {
+interface CreateLexisLinkActionProps {
   resource: any;
   refetch?(): void;
 }
 
-export const CreateLexisLinkAction: FC<TerminateActionProps> = ({
+export const CreateLexisLinkAction: FC<CreateLexisLinkActionProps> = ({
   resource,
   refetch,
 }) => {
