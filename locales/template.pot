@@ -3464,6 +3464,7 @@ msgstr ""
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
@@ -6308,13 +6309,13 @@ msgid "Not used"
 msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "Nothing to see here"
 msgstr ""
 
 #: src/proposals/update/general/CallGeneralDataTable.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Nothing to see here."
 msgstr ""
 
@@ -8140,10 +8141,6 @@ msgstr ""
 
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 msgid "Propagated"
-msgstr ""
-
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
-msgid "Proposal"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
@@ -11683,7 +11680,6 @@ msgstr ""
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/project/ProjectEventsFilter.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
@@ -13272,18 +13268,6 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
-msgid "User 1"
-msgstr ""
-
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
-msgid "User 2"
-msgstr ""
-
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
-msgid "User 3"
-msgstr ""
-
 #: src/administration/agreements/CreateUserAgreementsForm.tsx
 msgid "User agreement has been created"
 msgstr ""
@@ -13883,6 +13867,10 @@ msgstr ""
 
 #: src/invitations/actions/create/CustomMessageInput.tsx
 msgid "You can add a message to be attached to the invitation email the users receives."
+msgstr ""
+
+#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+msgid "You can edit reviewers for this call."
 msgstr ""
 
 #: src/marketplace/orders/list/OrderTablePlaceholder.tsx
