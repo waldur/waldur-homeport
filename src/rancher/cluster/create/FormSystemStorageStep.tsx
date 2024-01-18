@@ -41,6 +41,7 @@ export const FormSystemStorageStep = (props: FormStepProps) => {
       id={props.id}
       completed={props.observed}
       loading={isLoading}
+      disabled={props.disabled}
     >
       {nodes?.length ? (
         <FormNodeStorageTable volumeTypeChoices={data?.volumeTypeChoices}>

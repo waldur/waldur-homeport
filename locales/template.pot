@@ -613,6 +613,10 @@ msgstr ""
 msgid "All resources have been imported."
 msgstr ""
 
+#: src/marketplace/details/DetailsPage.tsx
+msgid "All resources will be scheduled for termination once the date is reached."
+msgstr ""
+
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 msgid "Allocated"
 msgstr ""
@@ -6039,6 +6043,10 @@ msgstr ""
 msgid "New public key"
 msgstr ""
 
+#: src/marketplace/details/DetailsPage.tsx
+msgid "New resources cannot be scheduled for creation."
+msgstr ""
+
 #: src/administration/roles/RoleCreateButton.tsx
 #: src/administration/roles/RoleCreateDialog.tsx
 msgid "New role"
@@ -8006,6 +8014,10 @@ msgstr ""
 msgid "Project end date"
 msgstr ""
 
+#: src/marketplace/details/DetailsPage.tsx
+msgid "Project end date is {date}"
+msgstr ""
+
 #: src/customer/cost-policies/CostPoliciesList.tsx
 msgid "Project estimated current cost"
 msgstr ""
@@ -8030,6 +8042,14 @@ msgstr ""
 
 #: src/project/effects.ts
 msgid "Project has been updated."
+msgstr ""
+
+#: src/marketplace/details/DetailsPage.tsx
+msgid "Project has reached its end date {date}"
+msgstr ""
+
+#: src/marketplace/details/OrderSummary.tsx
+msgid "Project has reached its end date."
 msgstr ""
 
 #: src/project/ProjectCreateForm.tsx

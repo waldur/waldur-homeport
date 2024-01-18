@@ -71,6 +71,7 @@ export const FormTemplateStep = (props: FormStepProps) => {
       step={props.step}
       id={props.id}
       completed={props.observed}
+      disabled={props.disabled}
       actions={
         showExperimentalUiComponents ? (
           <StepCardTabs tabs={tabs} tab={tab} setTab={setTab} />

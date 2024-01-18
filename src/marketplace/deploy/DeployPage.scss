@@ -89,9 +89,16 @@ body:not(.toolbar-fixed) .deploy-view-sidebar {
   }
 }
 
+.deploy-page-banner {
+  padding-right: 350px;
+}
+
 @media (max-width: 1650px) {
   .deploy-view-sidebar {
     width: 300px;
+  }
+  .deploy-page-banner {
+    padding-right: 300px;
   }
 }
 
@@ -102,6 +109,9 @@ body:not(.toolbar-fixed) .deploy-view-sidebar {
   }
   .deploy-view-sidebar {
     width: 100%;
+  }
+  .deploy-page-banner {
+    padding-right: 0;
   }
 
   .floating-submit-button {

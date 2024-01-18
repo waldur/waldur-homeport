@@ -16,6 +16,7 @@ export const FormInternalNetworkStep = (props: FormStepProps) => {
       step={props.step}
       id={props.id}
       completed={props.observed}
+      disabled={props.disabled}
     >
       <Field
         name="attributes.subnet_cidr"

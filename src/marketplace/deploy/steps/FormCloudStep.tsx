@@ -150,6 +150,7 @@ export const FormCloudStep = (props: FormStepProps) => {
       step={props.step}
       id={props.id}
       completed={props.observed}
+      disabled={props.disabled}
       actions={
         showExperimentalUiComponents ? (
           <div className="d-flex justify-content-between flex-grow-1 align-items-center">

@@ -12,6 +12,7 @@ export const FormProjectStep = (props: FormStepProps) => {
       step={props.step}
       id={props.id}
       completed={props.observed}
+      disabled={props.disabled}
     >
       <ProjectField />
     </StepCard>

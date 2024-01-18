@@ -69,6 +69,7 @@ export const FormFlavorStep = (props: FormStepProps) => {
       step={props.step}
       id={props.id}
       completed={props.observed}
+      disabled={props.disabled}
       actions={
         <div className="d-flex justify-content-between flex-grow-1 align-items-center">
           <div>

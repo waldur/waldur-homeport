@@ -10,6 +10,7 @@ export const FormAdditionalConfigurationStep = (props: FormStepProps) => (
     step={props.step}
     id={props.id}
     completed={props.observed}
+    disabled={props.disabled}
   >
     <OptionsForm options={props.offering.options} />
   </StepCard>
