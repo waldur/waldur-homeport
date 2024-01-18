@@ -9,10 +9,25 @@ export interface CallManagingOrganizationInfo {
   image?: string;
 }
 
+type CallReviewStrategy = 'After round is closed' | 'After proposal submission';
+type CallAllocationStrategy =
+  | 'By call manager'
+  | 'Automatic based on review scoring';
+type CallAllocationTime = 'On decision' | 'Fixed date';
+
 export interface ProposalCallRound {
   uuid: string;
   start_time: string;
-  end_time: string;
+  cutoff_time: string;
+  review_strategy: CallReviewStrategy;
+  deciding_entity: CallAllocationStrategy;
+  allocation_time: CallAllocationTime;
+  max_allocations: number;
+  allocation_date: string;
+  minimal_average_scoring: string;
+  review_duration_in_days: number;
+  minimum_number_of_reviewers: number;
+  url: string;
 }
 
 export interface ProposalCallReviewer {
