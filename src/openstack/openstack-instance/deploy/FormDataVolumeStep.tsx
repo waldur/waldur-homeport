@@ -43,6 +43,7 @@ export const FormDataVolumeStep = (props: FormStepProps) => {
       step={props.step}
       id={props.id}
       completed={props.observed}
+      disabled={props.disabled}
       helpText={translate('Detachable and resizable data disk')}
       actions={
         <div className="d-flex justify-content-between flex-grow-1">

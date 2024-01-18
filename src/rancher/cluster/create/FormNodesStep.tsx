@@ -239,6 +239,7 @@ export const FormNodesStep = (props: FormStepProps) => {
       id={props.id}
       completed={props.observed}
       loading={isLoading || templateLoading}
+      disabled={props.disabled}
       className="step-nodes"
     >
       {flavors && flavors.length > 0 ? (

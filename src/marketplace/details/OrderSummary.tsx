@@ -1,10 +1,12 @@
-import { createElement, FunctionComponent, useRef } from 'react';
+import { createElement, FunctionComponent, useMemo, useRef } from 'react';
 import { connect } from 'react-redux';
 import { getFormValues, isValid } from 'redux-form';
 
+import { parseDate } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
 import useOnScreen from '@waldur/core/useOnScreen';
 import { FieldError } from '@waldur/form';
+import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { ShoppingCartUpdateButtonContainer } from '@waldur/marketplace/cart/ShoppingCartUpdateButtonContainer';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
@@ -39,7 +41,19 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
   const mainButtonRef = useRef(null);
   const isOnScreen = useOnScreen(mainButtonRef);
 
-  const errorsExist = props.errors?.attributes || props.errors?.limits;
+  const projectError = useMemo(() => {
+    if (props.formData?.project?.end_date) {
+      const endDate = parseDate(props.formData.project.end_date);
+      const now = parseDate(null);
+      if (endDate.hasSame(now, 'day') || endDate < now) {
+        return translate('Project has reached its end date.');
+      }
+    }
+    return null;
+  }, [props.formData?.project]);
+
+  const errorsExist =
+    projectError || props.errors?.attributes || props.errors?.limits;
 
   const buttonsJsx = !props.updateMode ? (
     <>
@@ -47,7 +61,12 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
         <Tip
           label={
             <FieldError
-              error={{ ...props.errors?.attributes, ...props.errors?.limits }}
+              error={
+                projectError || {
+                  ...props.errors?.attributes,
+                  ...props.errors?.limits,
+                }
+              }
             />
           }
           id="offering-button-errors"
@@ -57,7 +76,7 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
           <ShoppingCartButtonContainer
             item={formatOrderForCreate(props)}
             flavor="primary"
-            disabled={!props.formValid}
+            disabled={Boolean(errorsExist) || !props.formValid}
             className="w-100"
           />
         </Tip>
@@ -87,7 +106,7 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
           <ShoppingCartUpdateButtonContainer
             item={formatOrderForUpdate(props)}
             flavor="primary"
-            disabled={!props.formValid}
+            disabled={Boolean(errorsExist) || !props.formValid}
             className="w-100"
           />
         </Tip>

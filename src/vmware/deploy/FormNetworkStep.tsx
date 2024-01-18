@@ -34,6 +34,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
       step={props.step}
       id={props.id}
       completed={props.observed}
+      disabled={props.disabled}
       actions={
         showExperimentalUiComponents ? (
           <div className="d-flex justify-content-end flex-grow-1">

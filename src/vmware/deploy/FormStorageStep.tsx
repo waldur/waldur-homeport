@@ -66,6 +66,7 @@ export const FormStorageStep = (props: FormStepProps) => {
       id={props.id}
       completed={props.observed}
       loading={isLoading}
+      disabled={props.disabled}
     >
       <StaticDiskField limits={limits} />
       <GuestOSField />

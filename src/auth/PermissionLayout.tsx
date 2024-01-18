@@ -19,6 +19,11 @@ type Permission = 'allowed' | 'limited' | 'restricted';
 interface PermissionMessage {
   title: string;
   message: string;
+  options?: PermissionOptions;
+}
+
+interface PermissionOptions {
+  className?: string;
 }
 
 export interface PermissionContextInterface {
@@ -99,6 +104,7 @@ const PermissionLayout: React.FC = ({ children }) => {
     permission,
     setPermission,
     setBanner,
+    pageMessage,
     setPageMessage,
     clearPermissionView,
   } = useContext(PermissionContext);
@@ -190,7 +196,11 @@ const PermissionLayout: React.FC = ({ children }) => {
     customer,
   ]);
 
-  return permission === 'restricted' ? <RestrictedView /> : <>{children}</>;
+  return permission === 'restricted' && pageMessage ? (
+    <RestrictedView />
+  ) : (
+    <>{children}</>
+  );
 };
 
 const usePermissionView = (

@@ -49,6 +49,7 @@ export const FormProcessorStep = (props: FormStepProps) => {
       id={props.id}
       completed={props.observed}
       loading={isLoading}
+      disabled={props.disabled}
     >
       <Field
         name="limits.cpu"

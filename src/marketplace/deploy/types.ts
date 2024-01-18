@@ -17,6 +17,7 @@ export interface FormStepProps {
   offering: Offering;
   title?: string;
   observed?: boolean;
+  disabled?: boolean;
   change?(field: string, value: any): void;
   params?: OfferingConfigurationFormStep['params'];
 }

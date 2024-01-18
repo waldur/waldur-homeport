@@ -1,10 +1,14 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { startCase } from 'lodash';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
+import { usePermissionView } from '@waldur/auth/PermissionLayout';
+import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { formProjectSelector } from '@waldur/marketplace/deploy/utils';
 import { useTitle } from '@waldur/navigation/title';
 
 import { getPublicOffering, getCategory, getPlugins } from '../common/api';
@@ -43,6 +47,44 @@ export const OfferingDetailsPage: React.FC = () => {
         })
       : translate('Add resource'),
   );
+
+  const project = useSelector(formProjectSelector);
+  usePermissionView(() => {
+    if (project?.end_date) {
+      const endDate = parseDate(project.end_date);
+      const now = parseDate(null);
+      const options =
+        !loading && !error ? { className: 'deploy-page-banner' } : undefined;
+      if (endDate.hasSame(now, 'day') || endDate < now) {
+        return {
+          permission: 'restricted',
+          banner: {
+            title: translate('Project has reached its end date {date}', {
+              date: formatDate(endDate),
+            }),
+            message: translate(
+              'New resources cannot be scheduled for creation.',
+            ),
+            options,
+          },
+        };
+      } else {
+        return {
+          permission: 'limited',
+          banner: {
+            title: translate('Project end date is {date}', {
+              date: formatDate(endDate),
+            }),
+            message: translate(
+              'All resources will be scheduled for termination once the date is reached.',
+            ),
+            options,
+          },
+        };
+      }
+    }
+    return null;
+  }, [project, loading, error]);
 
   if (loading) {
     return <LoadingSpinner />;

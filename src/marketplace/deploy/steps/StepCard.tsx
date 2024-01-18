@@ -14,6 +14,7 @@ interface StepCardProps {
   completed?: boolean;
   loading?: boolean;
   className?: string;
+  disabled?: boolean;
 }
 
 export const StepCard: FC<StepCardProps> = (props) => {
@@ -49,7 +50,10 @@ export const StepCard: FC<StepCardProps> = (props) => {
           <div className="d-flex flex-grow-1">{props.actions}</div>
         )}
       </Card.Header>
-      <Card.Body className="pt-0 ps-16">
+      <Card.Body className="pt-0 ps-16 position-relative">
+        {props.disabled && (
+          <div className="blocker position-absolute z-index-1 w-100 h-100 cursor-not-allowed"></div>
+        )}
         {props.loading ? <LoadingSpinner /> : props.children}
       </Card.Body>
     </Card>

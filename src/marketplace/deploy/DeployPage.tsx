@@ -12,6 +12,7 @@ import { useEffectOnce } from 'react-use';
 import { reduxForm } from 'redux-form';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
+import { parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { getOrderFormSteps } from '@waldur/marketplace/common/registry';
 import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
@@ -51,6 +52,15 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
 
   const project = useSelector(getProject);
   const formData = useSelector(formDataSelector);
+
+  const isProjectInactive = useMemo(() => {
+    if (formData?.project?.end_date) {
+      const endDate = parseDate(formData?.project?.end_date);
+      const now = parseDate(null);
+      return endDate.hasSame(now, 'day') || endDate < now;
+    }
+    return false;
+  }, [formData?.project]);
 
   const selectedOffering: Offering = formData?.offering || props?.offering;
 
@@ -228,6 +238,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
                 observed={completedSteps[i]}
                 change={props.change}
                 params={step.params}
+                disabled={step.id !== 'step-project' && isProjectInactive}
               />
             </div>
           ))}
@@ -258,6 +269,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
               observed={completedSteps[i]}
               change={props.change}
               params={step.params}
+              disabled={step.id !== 'step-project' && isProjectInactive}
             />
           </div>
         ))}

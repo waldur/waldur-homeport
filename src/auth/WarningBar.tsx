@@ -13,10 +13,12 @@ export default function WarningBar() {
         permission === 'restricted' ? 'bar bar-danger' : 'bar bar-warning'
       }
     >
-      <p>
-        <strong>{banner.title}</strong>
-        {Boolean(banner.title && banner.message) && ':'} {banner.message}
-      </p>
+      <div className={banner?.options?.className ?? ''}>
+        <p>
+          <strong>{banner.title}</strong>
+          {Boolean(banner.title && banner.message) && ':'} {banner.message}
+        </p>
+      </div>
     </div>
   ) : null;
 }
