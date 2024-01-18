@@ -13,6 +13,7 @@ import { OFFERING_CUSTOMERS_LIST_FILTER } from '../expandable/constants';
 import { OfferingCostsChart } from '../expandable/OfferingCostsChart';
 import { OfferingCustomersList } from '../expandable/OfferingCustomersList';
 import { OfferingCustomersListFilter } from '../expandable/OfferingCustomersListFilter';
+import { OfferingEventsList } from '../expandable/OfferingEventsList';
 import { OfferingUsageChart } from '../expandable/OfferingUsageChart';
 
 import { OfferingUsersTable } from './OfferingUsersTable';
@@ -84,6 +85,7 @@ export const OfferingTables = ({ offering }) => {
           />
         </Card>
       ) : null}
+      <OfferingEventsList offering={offering} />
     </>
   );
 };

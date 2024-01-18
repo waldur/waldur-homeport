@@ -9,10 +9,5 @@ const List = getEventsList({
 });
 
 export const OfferingEventsList = ({ offering }) => (
-  <List
-    offering={offering}
-    title={translate('Events')}
-    className="mt-10"
-    id="events"
-  />
+  <List offering={offering} title={translate('Events')} id="events" />
 );
