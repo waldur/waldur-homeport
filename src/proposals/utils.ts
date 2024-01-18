@@ -44,7 +44,7 @@ export const checkRoundDate = (round: ProposalCallRound) => {
   const start = parseDate(round.start_time);
   if (start > now) return { label: translate('Scheduled'), code: 1 };
   else {
-    const end = parseDate(round.end_time);
+    const end = parseDate(round.cutoff_time);
     if (end < now) return { label: translate('Ended'), code: -1 };
     else return { label: translate('Open'), code: 0 };
   }

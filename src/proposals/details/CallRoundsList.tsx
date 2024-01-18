@@ -41,7 +41,7 @@ export const CallRoundsList = ({ call, max }: CallRoundsListProps) => {
           }
         >
           <span>
-            {formatDate(round.start_time)} - {formatDate(round.end_time)}
+            {formatDate(round.start_time)} - {formatDate(round.cutoff_time)}
           </span>
           <span className={round.state.code === -1 ? 'text-muted' : ''}>
             {round.state.label}

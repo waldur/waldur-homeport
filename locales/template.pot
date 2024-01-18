@@ -625,6 +625,7 @@ msgstr ""
 msgid "Allocation"
 msgstr ""
 
+#: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Allocation date"
 msgstr ""
@@ -644,6 +645,7 @@ msgstr ""
 msgid "Allocation strategy"
 msgstr ""
 
+#: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Allocation time"
 msgstr ""
@@ -2772,6 +2774,7 @@ msgstr ""
 msgid "Deadline"
 msgstr ""
 
+#: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Deciding entity"
 msgstr ""
@@ -5494,6 +5497,10 @@ msgstr ""
 msgid "Maximum accepted proposals"
 msgstr ""
 
+#: src/proposals/update/rounds/RoundExpandableRow.tsx
+msgid "Maximum allocations"
+msgstr ""
+
 #: src/marketplace/offerings/update/components/ComponentMaxValueField.tsx
 msgid "Maximum allowed value"
 msgstr ""
@@ -5616,6 +5623,10 @@ msgstr ""
 msgid "Minimal RAM"
 msgstr ""
 
+#: src/proposals/update/rounds/RoundExpandableRow.tsx
+msgid "Minimal average scoring"
+msgstr ""
+
 #: src/openstack/openstack-tenant/TenantImagesList.tsx
 msgid "Minimal disk"
 msgstr ""
@@ -5636,6 +5647,7 @@ msgstr ""
 msgid "Minimum booking time slot duration."
 msgstr ""
 
+#: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Minimum number of reviewers"
 msgstr ""
@@ -9241,6 +9253,10 @@ msgstr ""
 msgid "Review duration (days)"
 msgstr ""
 
+#: src/proposals/update/rounds/RoundExpandableRow.tsx
+msgid "Review duration in days"
+msgstr ""
+
 #: src/customer/team/PendingReviewDialog.tsx
 msgid "Review has been closed."
 msgstr ""
@@ -9262,6 +9278,7 @@ msgstr ""
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
+#: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Review strategy"
 msgstr ""

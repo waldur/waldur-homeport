@@ -9,7 +9,7 @@ interface CallUpdateHeaderBodyProps {
 
 export const CallUpdateHeaderBody = (props: CallUpdateHeaderBodyProps) => {
   const nextRoundDate = props.call.rounds?.length
-    ? props.call.rounds[0].end_time
+    ? props.call.rounds[0].cutoff_time
     : props.call.end_time;
   return (
     <p className="fw-bold">

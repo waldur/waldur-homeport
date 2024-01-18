@@ -8,6 +8,7 @@ import { useTable } from '@waldur/table/utils';
 
 import { CallRoundsTablePlaceholder } from './CallRoundsTablePlaceholder';
 import { RoundCreateButton } from './RoundCreateButton';
+import { RoundExpandableRow } from './RoundExpandableRow';
 
 interface CallRoundsSectionProps {
   call: ProposalCall;
@@ -44,7 +45,7 @@ export const CallRoundsSection: FC<CallRoundsSectionProps> = (props) => {
         },
         {
           title: translate('Cutoff date'),
-          render: ({ row }) => <>{formatDateTime(row.end_time)}</>,
+          render: ({ row }) => <>{formatDateTime(row.cutoff_time)}</>,
         },
         {
           title: translate('Submissions'),
@@ -74,6 +75,7 @@ export const CallRoundsSection: FC<CallRoundsSectionProps> = (props) => {
       actions={
         <RoundCreateButton call={props.call} refetch={tableProps.fetch} />
       }
+      expandableRow={RoundExpandableRow}
     />
   );
 };

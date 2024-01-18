@@ -39,7 +39,7 @@ export const CallDetailsCard = ({ call }: CallDetailsCardProps) => {
           value={
             call.rounds?.length
               ? call.rounds
-                  .map((round) => formatDateTime(round.end_time))
+                  .map((round) => formatDateTime(round.cutoff_time))
                   .join(' / ')
               : renderFieldOrDash(formatDateTime(call.end_time))
           }
