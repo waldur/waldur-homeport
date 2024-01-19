@@ -11423,16 +11423,16 @@ msgstr ""
 msgid "There are no remote accounts yet."
 msgstr ""
 
-#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
-msgid "There are no report fields defined in the offering."
-msgstr ""
-
 #: src/marketplace/resources/details/ResourceTimeline.tsx
 msgid "There are no resource events."
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceIssues.tsx
 msgid "There are no resource issues."
+msgstr ""
+
+#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+msgid "There are no resource options defined in the offering."
 msgstr ""
 
 #: src/project/ProjectExpandableRowContainer.tsx

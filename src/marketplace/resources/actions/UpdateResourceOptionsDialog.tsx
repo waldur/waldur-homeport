@@ -58,7 +58,7 @@ export const UpdateResourceOptionsDialog = connect(
         ) : data.resource_options?.order ? (
           <OptionsForm options={data.resource_options} />
         ) : (
-          translate('There are no report fields defined in the offering.')
+          translate('There are no resource options defined in the offering.')
         )}
       </ActionDialog>
     );
