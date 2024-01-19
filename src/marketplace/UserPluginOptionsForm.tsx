@@ -66,7 +66,7 @@ export const UserPluginOptionsForm: FunctionComponent<{}> = () => {
         change(
           EDIT_INTEGRATION_FORM_ID,
           'plugin_options.initial_primarygroup_number',
-          100000,
+          10000,
         ),
       );
       dispatch(
