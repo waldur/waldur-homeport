@@ -24,7 +24,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
           customer_uuid={row.customer_uuid}
           project_uuid={row.project_uuid}
         >
-          {row.attributes.name}
+          {row.attributes.name || 'N/A'}
         </OrderDetailsLink>
       ),
     },
