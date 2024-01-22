@@ -11,6 +11,7 @@ import './OrderInProgressView.scss';
 
 interface OrderInProgressViewProps {
   resource: Resource;
+  refetch(): void;
 }
 
 const getTranslatedOrderType = (type) =>
@@ -79,6 +80,7 @@ const getSteps = (resource: Resource) => {
 
 export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
   resource,
+  refetch,
 }) => {
   if (!resource.order_in_progress) {
     return null;
@@ -108,7 +110,10 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
           </OrderDetailsLink>
           {resource.order_in_progress.state === 'pending-consumer' && (
             <div className="ms-6 d-inline-block">
-              <OrderConsumerActions order={resource.order_in_progress} />
+              <OrderConsumerActions
+                order={resource.order_in_progress}
+                refetch={refetch}
+              />
             </div>
           )}
         </div>
