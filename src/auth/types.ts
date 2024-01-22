@@ -63,6 +63,8 @@ interface CoreConfiguration {
   ORGANIZATION_SUBNETS_VISIBLE: boolean;
   CURRENCY_NAME: string;
   FAVICON: string;
+  COMMON_FOOTER_HTML: string;
+  COMMON_FOOTER_TEXT: string;
   OECD_FOS_2007_CODE_MANDATORY: boolean;
 }
 

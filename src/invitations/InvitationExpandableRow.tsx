@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { ENV } from '@waldur/configs/default';
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
 
@@ -20,9 +21,11 @@ export const InvitationExpandableRow: React.FC<{
       </p>
     )}
     {row.extra_invitation_text && (
-      <p>
+      <p style={{ whiteSpace: 'pre-line' }}>
         <b>{translate('Message')}: </b>
         {row.extra_invitation_text}
+        {'\n\n'}
+        {ENV.plugins.WALDUR_CORE.COMMON_FOOTER_TEXT}
       </p>
     )}
   </>
