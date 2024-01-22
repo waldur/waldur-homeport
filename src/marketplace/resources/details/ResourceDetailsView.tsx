@@ -106,7 +106,7 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
       ) : (
         <PageBarProvider>
           {resource.order_in_progress && (
-            <OrderInProgressView resource={resource} />
+            <OrderInProgressView resource={resource} refetch={refetch} />
           )}
           <PublicDashboardHero
             logo={logo}
