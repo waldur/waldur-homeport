@@ -52,9 +52,7 @@ export const CallManagementPage: FunctionComponent = () => {
       ]}
       verboseName={translate('Call management')}
       initialSorting={{ field: 'name', mode: 'desc' }}
-      hoverableRow={({ row }) => (
-        <ProposalCallEditButton row={row} refetch={tableProps.fetch} />
-      )}
+      hoverableRow={({ row }) => <ProposalCallEditButton row={row} />}
       hasQuery={true}
       actions={<ProposalCallCreateButton refetch={tableProps.fetch} />}
       placeholderComponent={<CallManagementTablePlaceholder />}

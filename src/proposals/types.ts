@@ -81,3 +81,9 @@ export interface CallRoundFormData {
   allocation_time: string;
   allocation_date: string;
 }
+
+export interface EditCallProps {
+  call: ProposalCall;
+  fields: string[];
+  refetch(): void;
+}
