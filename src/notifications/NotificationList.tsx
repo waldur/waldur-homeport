@@ -5,6 +5,8 @@ import { NotificationExpandableRow } from '@waldur/notifications/NotificationExp
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
+import { ManageCommonFooterButton } from './ManageCommonFooterButton';
+
 export const NotificationList = () => {
   const tableProps = useTable({
     table: 'notification',
@@ -38,6 +40,7 @@ export const NotificationList = () => {
       showPageSizeSelector={true}
       expandableRowClassName="bg-gray-200"
       hasQuery={true}
+      actions={<ManageCommonFooterButton refetch={tableProps.fetch} />}
     />
   );
 };

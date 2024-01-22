@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
+import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 
@@ -12,8 +13,9 @@ export const BroadcastExpandableRow: FunctionComponent<{
   row: BroadcastResponseData;
 }> = ({ row }) => (
   <Row>
-    <Col sm={8}>
+    <Col sm={8} style={{ whiteSpace: 'pre-line' }}>
       <p>{row.body}</p>
+      <p>{ENV.plugins.WALDUR_CORE.COMMON_FOOTER_TEXT}</p>
     </Col>
     <Col sm={4}>
       <OptionsList

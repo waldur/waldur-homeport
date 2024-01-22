@@ -340,6 +340,10 @@ msgstr ""
 msgid "Add endpoint"
 msgstr ""
 
+#: src/notifications/ManageCommonFooterButton.tsx
+msgid "Add footer"
+msgstr ""
+
 #: src/marketplace/category/admin/GroupCreateButton.tsx
 msgid "Add group"
 msgstr ""
@@ -1925,6 +1929,14 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
+#: src/notifications/ManageCommonFooterDialog.tsx
+msgid "Common footer has been deleted"
+msgstr ""
+
+#: src/notifications/ManageCommonFooterDialog.tsx
+msgid "Common footer has been updated"
+msgstr ""
+
 #: src/invoices/details/InvoiceItemCompensationDialog.tsx
 msgid "Compensation for {name}"
 msgstr ""
@@ -2823,6 +2835,7 @@ msgstr ""
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
 #: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
+#: src/notifications/ManageCommonFooterDialog.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
 #: src/openstack/openstack-security-groups/rule-editor/ActionsField.tsx
@@ -3362,6 +3375,10 @@ msgstr ""
 #: src/marketplace/offerings/update/integration/EditVarsButton.tsx
 #: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
 msgid "Edit environment variables"
+msgstr ""
+
+#: src/notifications/ManageCommonFooterButton.tsx
+msgid "Edit footer"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditIntegrationButton.tsx
@@ -4362,6 +4379,10 @@ msgstr ""
 
 #: src/rancher/cluster/tabs.ts
 msgid "HPA"
+msgstr ""
+
+#: src/notifications/ManageCommonFooterDialog.tsx
+msgid "HTML content"
 msgstr ""
 
 #: src/customer/cost-policies/CostPoliciesList.tsx
@@ -9524,6 +9545,7 @@ msgstr ""
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
+#: src/notifications/ManageCommonFooterDialog.tsx
 #: src/notifications/NotificationForm.tsx
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
@@ -11152,6 +11174,10 @@ msgstr ""
 msgid "Terms of service link"
 msgstr ""
 
+#: src/notifications/ManageCommonFooterDialog.tsx
+msgid "Text content"
+msgstr ""
+
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
@@ -12003,6 +12029,10 @@ msgstr ""
 msgid "Unable to delete comment."
 msgstr ""
 
+#: src/notifications/ManageCommonFooterDialog.tsx
+msgid "Unable to delete common footer."
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/DestroyDialog.tsx
 msgid "Unable to delete instance."
 msgstr ""
@@ -12728,6 +12758,10 @@ msgstr ""
 msgid "Unable to update category."
 msgstr ""
 
+#: src/notifications/ManageCommonFooterDialog.tsx
+msgid "Unable to update common footer."
+msgstr ""
+
 #: src/administration/branding/AdministrationBranding.tsx
 msgid "Unable to update configuration."
 msgstr ""
@@ -13170,6 +13204,10 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 msgid "Update static routes"
+msgstr ""
+
+#: src/notifications/ManageCommonFooterDialog.tsx
+msgid "Update the common footer"
 msgstr ""
 
 #: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
