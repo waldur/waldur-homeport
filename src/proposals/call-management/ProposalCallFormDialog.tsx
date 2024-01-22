@@ -7,10 +7,9 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
 import { SelectField, SubmitButton } from '@waldur/form';
-import { DateTimeField } from '@waldur/form/DateTimeField';
 import { FormContainer } from '@waldur/form/FormContainer';
+import { MarkdownField } from '@waldur/form/MarkdownField';
 import { StringField } from '@waldur/form/StringField';
-import { TextField } from '@waldur/form/TextField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -26,9 +25,8 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { createCall, getCallManagingOrganization, updateCall } from '../api';
 
 interface FormData {
-  title: string;
+  name: string;
   description: string;
-  icon: any;
 }
 
 export const ProposalCallFormDialog = connect<
@@ -139,45 +137,43 @@ export const ProposalCallFormDialog = connect<
               validate={required}
             />
             {isEdit && (
-              <TextField
+              <MarkdownField
                 label={translate('Description')}
                 name="description"
                 required={false}
+                verticalLayout
               />
             )}
-            {isEdit && (
-              <DateTimeField
-                name="start_time"
-                label={translate('Start time')}
+            {!isEdit && (
+              <SelectField
+                name="round_strategy"
+                label={translate('Round strategy')}
+                simpleValue={true}
+                options={getCallRoundStrategyOptions()}
+                required={true}
+                isClearable={false}
               />
             )}
-            {isEdit && (
-              <DateTimeField name="end_time" label={translate('End time')} />
+            {!isEdit && (
+              <SelectField
+                name="review_strategy"
+                label={translate('Review strategy')}
+                simpleValue={true}
+                options={getCallReviewStrategyOptions()}
+                required={true}
+                isClearable={false}
+              />
             )}
-            <SelectField
-              name="round_strategy"
-              label={translate('Round strategy')}
-              simpleValue={true}
-              options={getCallRoundStrategyOptions()}
-              required={true}
-              isClearable={false}
-            />
-            <SelectField
-              name="review_strategy"
-              label={translate('Review strategy')}
-              simpleValue={true}
-              options={getCallReviewStrategyOptions()}
-              required={true}
-              isClearable={false}
-            />
-            <SelectField
-              name="allocation_strategy"
-              label={translate('Allocation strategy')}
-              simpleValue={true}
-              options={getCallAllocationStrategyOptions()}
-              required={true}
-              isClearable={false}
-            />
+            {!isEdit && (
+              <SelectField
+                name="allocation_strategy"
+                label={translate('Allocation strategy')}
+                simpleValue={true}
+                options={getCallAllocationStrategyOptions()}
+                required={true}
+                isClearable={false}
+              />
+            )}
           </FormContainer>
         </ModalDialog>
       </form>

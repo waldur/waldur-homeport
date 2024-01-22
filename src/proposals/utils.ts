@@ -29,13 +29,13 @@ export const getProposalCallInitialValues = (call: ProposalCall) => {
     ...call,
     round_strategy: getCallRoundStrategyOptions().find(
       (op) => op.label === call.round_strategy,
-    ).value,
+    )?.value,
     review_strategy: getCallReviewStrategyOptions().find(
       (op) => op.label === call.review_strategy,
-    ).value,
+    )?.value,
     allocation_strategy: getCallAllocationStrategyOptions().find(
       (op) => op.label === call.allocation_strategy,
-    ).value,
+    )?.value,
   };
 };
 

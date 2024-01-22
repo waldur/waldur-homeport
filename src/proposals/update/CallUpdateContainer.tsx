@@ -27,7 +27,7 @@ export const CallUpdateContainer: FunctionComponent = () => {
     params: { call_uuid },
   } = useCurrentStateAndParams();
 
-  const { data, isLoading, error } = useQuery(
+  const { data, isLoading, error, refetch, isRefetching } = useQuery(
     ['CallUpdateContainer', call_uuid],
     () => getProtectedCall(call_uuid),
     {
@@ -48,7 +48,11 @@ export const CallUpdateContainer: FunctionComponent = () => {
         <CallUpdateBar call={data} />
         <div className="container-xxl py-10">
           <CallRoundsSection call={data} />
-          <CallGeneralSection call={data} />
+          <CallGeneralSection
+            call={data}
+            refetch={refetch}
+            loading={isRefetching}
+          />
           <CallDocumentsSection />
           <CallReviewSection call={data} />
           <CallReviewersSection call={data} />

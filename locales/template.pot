@@ -2008,7 +2008,6 @@ msgstr ""
 msgid "Configuration has been updated."
 msgstr ""
 
-#: src/proposals/update/general/CallGeneralDataTable.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
 msgid "Configuration key"
 msgstr ""
@@ -2980,6 +2979,8 @@ msgstr ""
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
 #: src/proposals/details/CallDescriptionCard.tsx
 #: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -3342,6 +3343,7 @@ msgstr ""
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/proposals/update/review/EditReviewInfoButton.tsx
 #: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
@@ -3462,6 +3464,7 @@ msgstr ""
 #: src/marketplace/category/admin/CategoryFromDialog.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 msgid "Edit {title}"
 msgstr ""
 
@@ -3600,7 +3603,6 @@ msgstr ""
 
 #: src/booking/deploy/CustomRangeDatePicker.tsx
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
-#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "End time"
 msgstr ""
 
@@ -5872,6 +5874,8 @@ msgstr ""
 #: src/proposals/ProposalPublicCallsPage.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -6355,7 +6359,6 @@ msgstr ""
 msgid "Nothing to see here"
 msgstr ""
 
-#: src/proposals/update/general/CallGeneralDataTable.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
 msgid "Nothing to see here."
 msgstr ""
@@ -7756,6 +7759,7 @@ msgstr ""
 msgid "Preferred language"
 msgstr ""
 
+#: src/form/MarkdownField.tsx
 #: src/marketplace/offerings/list/PreviewButton.tsx
 #: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
@@ -10575,7 +10579,6 @@ msgstr ""
 
 #: src/booking/deploy/CustomRangeDatePicker.tsx
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
-#: src/proposals/call-management/ProposalCallFormDialog.tsx
 msgid "Start time"
 msgstr ""
 
@@ -11206,6 +11209,7 @@ msgid "The call has been created."
 msgstr ""
 
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 msgid "The call has been updated."
 msgstr ""
 
@@ -12743,6 +12747,7 @@ msgid "Unable to update billing component."
 msgstr ""
 
 #: src/proposals/call-management/ProposalCallFormDialog.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 msgid "Unable to update call."
 msgstr ""
 
@@ -13666,7 +13671,6 @@ msgstr ""
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 #: src/marketplace/resources/usage/utils.ts
-#: src/proposals/update/general/CallGeneralDataTable.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Value"
