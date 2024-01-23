@@ -3,6 +3,7 @@ import { takeEvery, put, call, select } from 'redux-saga/effects';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { getCustomer, getProject } from '@waldur/project/api';
+import { router } from '@waldur/router';
 import { showError } from '@waldur/store/notify';
 import {
   setCurrentCustomer,
@@ -36,6 +37,9 @@ export function* refreshCurrentCustomer() {
 
 function* initWorkspace(action) {
   if (!action.payload.user) {
+    return;
+  }
+  if (router.globals.current.data?.skipInitWorkspace) {
     return;
   }
   const currentCustomer = yield select(getCustomerSelector);

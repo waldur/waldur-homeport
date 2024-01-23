@@ -54,6 +54,7 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: PROJECT_WORKSPACE,
       title: () => translate('Project'),
+      skipInitWorkspace: true,
     },
     resolve: [
       {
@@ -72,6 +73,7 @@ export const states: StateDeclaration[] = [
     url: '',
     data: {
       breadcrumb: () => translate('Team'),
+      skipInitWorkspace: true,
     },
   },
 
@@ -130,6 +132,7 @@ export const states: StateDeclaration[] = [
     parent: 'project-team',
     data: {
       breadcrumb: () => translate('Users'),
+      skipInitWorkspace: true,
     },
   },
   {
@@ -139,6 +142,7 @@ export const states: StateDeclaration[] = [
     parent: 'project-team',
     data: {
       breadcrumb: () => translate('Invitations'),
+      skipInitWorkspace: true,
     },
   },
   {
@@ -148,6 +152,7 @@ export const states: StateDeclaration[] = [
     parent: 'project-team',
     data: {
       breadcrumb: () => translate('Permissions log'),
+      skipInitWorkspace: true,
     },
   },
 ];
