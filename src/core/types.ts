@@ -30,6 +30,7 @@ interface DataDeclaration {
   priority?: number;
   permissions: Array<(state) => boolean>;
   useExtraTabs?: boolean;
+  skipInitWorkspace?: boolean;
 }
 
 export interface StateDeclaration extends BaseStateDeclaration {

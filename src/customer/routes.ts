@@ -92,6 +92,7 @@ export const states: StateDeclaration[] = [
       workspace: ORGANIZATION_WORKSPACE,
       title: () => translate('Organization'),
       hideProjectSelector: true,
+      skipInitWorkspace: true,
     },
     parent: 'layout',
     component: UIView,
