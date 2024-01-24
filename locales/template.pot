@@ -11427,6 +11427,10 @@ msgstr ""
 msgid "There are no other volume types available."
 msgstr ""
 
+#: src/marketplace/offerings/details/PlanUsageList.tsx
+msgid "There are no plans"
+msgstr ""
+
 #: src/project/ProjectEventsTimeline.tsx
 msgid "There are no project events."
 msgstr ""
@@ -11488,10 +11492,6 @@ msgstr ""
 
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
 msgid "There is no description"
-msgstr ""
-
-#: src/marketplace/offerings/details/PlanUsageList.tsx
-msgid "There is no plan"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
