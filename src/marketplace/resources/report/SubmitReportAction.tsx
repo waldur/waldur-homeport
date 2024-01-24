@@ -13,13 +13,17 @@ const SubmitReportDialog = lazyComponent(
 
 const validators = [validateState('OK', 'Erred'), validateStaffAction];
 
-export const SubmitReportAction: ActionItemType = ({ resource, refetch }) => (
+export const SubmitReportAction: ActionItemType = ({
+  resource,
+  refetch,
+  marketplaceResource,
+}) => (
   <DialogActionItem
     validators={validators}
     title={translate('Submit report')}
     modalComponent={SubmitReportDialog}
     dialogSize="xl"
-    resource={resource}
+    resource={marketplaceResource || resource}
     extraResolve={{ refetch }}
     staff
   />
