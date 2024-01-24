@@ -1,8 +1,7 @@
 import { UISref, useCurrentStateAndParams } from '@uirouter/react';
 import React from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
-import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
 import { PlanUsageRow } from '@waldur/marketplace/resources/plan-usage/types';
 import { Category, Offering } from '@waldur/marketplace/types';
@@ -15,7 +14,6 @@ import { OfferingDetailsBar } from './OfferingDetailsBar';
 import { OfferingDetailsHeader } from './OfferingDetailsHeader';
 import { OfferingDetailsStatistics } from './OfferingDetailsStatistics';
 import { OfferingTables } from './OfferingTables';
-import { PlanUsageList } from './PlanUsageList';
 
 export interface OfferingDetailsProps {
   offering: Offering;
@@ -68,24 +66,10 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
       <OfferingDetailsBar />
       {showExperimentalUiComponents && <OfferingDetailsStatistics />}
       <div className="container-xxl py-10">
-        {props.offering.type === OFFERING_TYPE_BOOKING ? (
-          <OfferingTables offering={props.offering} />
-        ) : (
-          <Row>
-            <Col lg={props.offering.billable ? 8 : 12}>
-              <OfferingTables offering={props.offering} />
-            </Col>
-
-            {props.offering.billable && (
-              <Col lg={4}>
-                <PlanUsageList
-                  plansUsage={props.plansUsage}
-                  className="mb-10"
-                />
-              </Col>
-            )}
-          </Row>
-        )}
+        <OfferingTables
+          offering={props.offering}
+          plansUsage={props.plansUsage}
+        />
       </div>
     </div>
   );

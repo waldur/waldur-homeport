@@ -24,6 +24,7 @@ export const OfferingDetailsBar: FunctionComponent = () => {
     return [
       { key: 'orders', title: translate('Orders') },
       { key: 'resources', title: translate('Resources') },
+      { key: 'plans', title: translate('Plans') },
       { key: 'users', title: translate('Users') },
       { key: 'events', title: translate('Events') },
     ];

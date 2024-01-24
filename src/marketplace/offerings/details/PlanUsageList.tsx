@@ -7,6 +7,7 @@ import { PlanUsageRow } from '@waldur/marketplace/resources/plan-usage/types';
 interface OwnProps {
   plansUsage: PlanUsageRow[];
   className?: string;
+  id?: string;
 }
 
 const PlanGroup = ({ plan }: { plan: PlanUsageRow }) => (
@@ -37,15 +38,13 @@ const PlanGroup = ({ plan }: { plan: PlanUsageRow }) => (
 
 export const PlanUsageList: FC<OwnProps> = (props) => {
   return (
-    <Card className={props.className}>
+    <Card className={props.className} id={props.id}>
+      <Card.Header className="border-2 border-bottom">
+        <Card.Title>{translate('Plans')}</Card.Title>
+      </Card.Header>
       <Card.Body>
-        <div className="d-flex">
-          <div className="flex-grow-1">
-            <h3>{translate('Plans')}</h3>
-          </div>
-        </div>
         {!props.plansUsage?.length && (
-          <div className="text-muted">{translate('There is no plan')}</div>
+          <div className="text-muted">{translate('There are no plans')}</div>
         )}
         {props.plansUsage &&
           props.plansUsage.map((plan) => (

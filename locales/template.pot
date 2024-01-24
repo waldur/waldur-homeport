@@ -7550,6 +7550,7 @@ msgstr ""
 msgid "Planned quota usage: {usage}"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 msgid "Plans"
 msgstr ""

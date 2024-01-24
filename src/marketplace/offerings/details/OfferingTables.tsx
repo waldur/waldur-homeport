@@ -8,6 +8,8 @@ import { OfferingOrdersList } from '@waldur/marketplace/details/OfferingOrdersLi
 import { OfferingResourcesFilter } from '@waldur/marketplace/details/OfferingResourcesFilter';
 import { OfferingResourcesList } from '@waldur/marketplace/details/OfferingResourcesList';
 import { OrdersFilter } from '@waldur/marketplace/orders/list/OrdersFilter';
+import { PlanUsageRow } from '@waldur/marketplace/resources/plan-usage/types';
+import { Offering } from '@waldur/marketplace/types';
 
 import { OFFERING_CUSTOMERS_LIST_FILTER } from '../expandable/constants';
 import { OfferingCostsChart } from '../expandable/OfferingCostsChart';
@@ -18,8 +20,17 @@ import { OfferingUsageChart } from '../expandable/OfferingUsageChart';
 
 import { OfferingUsersTable } from './OfferingUsersTable';
 import { OfferingPermissionsList } from './permissions/OfferingPermissionsList';
+import { PlanUsageList } from './PlanUsageList';
 
-export const OfferingTables = ({ offering }) => {
+export interface OfferingTablesProps {
+  offering: Offering;
+  plansUsage: PlanUsageRow[];
+}
+
+export const OfferingTables = ({
+  offering,
+  plansUsage,
+}: OfferingTablesProps) => {
   const [uniqueFormId] = useMemo(
     () => `${OFFERING_CUSTOMERS_LIST_FILTER}-${offering.uuid}`,
     [offering],
@@ -42,6 +53,9 @@ export const OfferingTables = ({ offering }) => {
           filters={<OfferingResourcesFilter />}
         />
       </div>
+      {offering.type !== OFFERING_TYPE_BOOKING && offering.billable && (
+        <PlanUsageList plansUsage={plansUsage} className="mb-10" id="plans" />
+      )}
       <div className="mb-10" id="users">
         <OfferingUsersTable offering={offering} />
       </div>
