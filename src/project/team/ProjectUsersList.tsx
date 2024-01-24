@@ -81,7 +81,9 @@ export const ProjectUsersList = () => {
       verboseName={translate('Team members')}
       hoverableRow={({ row }) => (
         <>
-          <UserDetailsButton userId={row.user_uuid} />
+          {user.is_staff || user.is_support ? (
+            <UserDetailsButton userId={row.user_uuid} />
+          ) : null}
           {isOwnerOrStaff ? (
             <AddMemberButton
               user={row}
