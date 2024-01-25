@@ -1776,7 +1776,7 @@ msgstr "Детали звонка"
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/routes.ts
 msgid "Call management"
-msgstr "Управление звонками"
+msgstr "Управление конкурсами"
 
 #: src/customer/details/CustomerCallManagerPanel.tsx
 #: src/navigation/workspace/CallManagerIcon.tsx
@@ -2135,7 +2135,7 @@ msgstr "Закрытый"
 
 #: src/support/dashboard/StatisticsCards.tsx
 msgid "Closed issues (this month)"
-msgstr "Закрытые выпуски (в этом месяце)"
+msgstr "Закрытые обращения (в этом месяце)"
 
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
 msgid "Cloud"
@@ -3110,7 +3110,7 @@ msgstr "Темная тема"
 #: src/reporting/routes.ts
 #: src/user/routes.ts
 msgid "Dashboard"
-msgstr "Щиток"
+msgstr "Панель управления"
 
 #: src/rancher/cluster/create/FormDataStorageStep.tsx
 #: src/rancher/cluster/create/steps.ts
@@ -4168,7 +4168,7 @@ msgstr "Переменные среды успешно обновлены."
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Erred"
-msgstr "Ошибся"
+msgstr "Ошибка"
 
 #: src/providers/dashboard/ProviderWidgets.tsx
 msgid "Erred resources"
@@ -7765,7 +7765,7 @@ msgstr "Удалить организацию могут только сотру
 
 #: src/marketplace/resources/actions/utils.ts
 msgid "Only staff users are allowed to perform this action."
-msgstr "Это действие разрешено выполнять только штатным пользователям."
+msgstr "Это действие разрешено выполнять только привилегированным пользователям."
 
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/list/IssuesFilter.tsx
@@ -9142,7 +9142,7 @@ msgstr "Цена за год"
 #: src/issues/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
 msgid "Pricelist"
-msgstr "прейскурант"
+msgstr "Прейскурант"
 
 #: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
 msgid "Prices have been updated successfully."
@@ -9327,7 +9327,7 @@ msgstr "Запрос на создание проекта еще не отпра
 
 #: src/marketplace-flows/FlowExpandableRow.tsx
 msgid "Project creation request is waiting for approval by staff user."
-msgstr "Запрос на создание проекта ожидает одобрения штатного пользователя."
+msgstr "Запрос на создание проекта ожидает одобрения привилегированным пользователем."
 
 #: src/marketplace-flows/FlowExpandableRow.tsx
 msgid "Project creation request review"
@@ -9684,13 +9684,13 @@ msgstr "Публичные предложения"
 #: src/marketplace/orders/item/list/OrderItemsContainer.tsx
 #: src/marketplace/sidebar.ts
 msgid "Public orders"
-msgstr "Государственные заказы"
+msgstr "Открытые заказы"
 
 #: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/resources/list/PublicResourcesContainer.tsx
 #: src/marketplace/sidebar.ts
 msgid "Public resources"
-msgstr "Государственные ресурсы"
+msgstr "Открытые ресурсы"
 
 #: src/marketplace/sidebar.ts
 msgid "Public services"
@@ -11583,7 +11583,7 @@ msgstr "Выберите несколько файлов"
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Select state..."
-msgstr "Выберите штат..."
+msgstr "Выберите состояние"
 
 #: src/user/support/UserFilter.tsx
 msgid "Select status"
@@ -12411,7 +12411,7 @@ msgstr "Скрипт запуска"
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "State"
-msgstr "Государство"
+msgstr "Состояние"
 
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 msgid "Static routes update was scheduled."

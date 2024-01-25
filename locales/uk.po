@@ -1006,6 +1006,10 @@ msgstr "Ваше запрошення обробляється."
 msgid "Your invitation was accepted."
 msgstr "Ваше запрошення було прийнято."
 
+#: src/invoices/details/BillingRecordDetails.tsx
+msgid "(VAT is not included)"
+msgstr "(ПДВ не включено)"
+
 #: src/slurm/details/AllocationUsersTable.tsx
 msgid "allocation users"
 msgstr "користувачі алокації"

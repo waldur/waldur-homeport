@@ -1549,7 +1549,7 @@ msgstr "Staňte se zákazníkem našeho portálu. Poskytujte IT služby z Market
 
 #: src/i18n/constants.ts
 msgid "Become a customer of our portal. Provision IT services from the catalog and manage your team from one place."
-msgstr "Staňte se zákazníkem našeho portálu. Poskytujte IT služby z katalogu a spravujte svůj tým z jednoho místa."
+msgstr "Staňte se zákazníkem našeho portálu. Poskytování IT služeb z katalogu a spravovat svůj tým z jednoho místa."
 
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
 msgid "Billed monthly"
@@ -4403,7 +4403,7 @@ msgstr "Prozkoumejte {deployment} Marketplace"
 
 #: src/i18n/constants.ts
 msgid "Explore {deployment} service catalog"
-msgstr "Prozkoumat{deployment} katalog služeb"
+msgstr "Prozkoumat {deployment} katalog služeb"
 
 #: src/table/ExportDialog.tsx
 #: src/table/TableButtons.tsx
@@ -8666,7 +8666,7 @@ msgstr "Oprávnění bylo odvoláno."
 
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
 msgid "Permission has been updated successfully."
-msgstr "Oprávnění bylo úspěšně aktualizováno."
+msgstr "Nastavení práv proběhlo úspěšně"
 
 #: src/customer/routes.ts
 msgid "Permission log"
@@ -10258,7 +10258,7 @@ msgstr "Nahlášení"
 #: src/i18n/constants.ts
 #: src/marketplace/cart/ForwardButton.tsx
 msgid "Request"
-msgstr "Prosba"
+msgstr "Požadavek"
 
 #: src/support/marketplace.ts
 msgid "Request-based item"
@@ -10440,7 +10440,7 @@ msgstr "Obnovit avatar"
 
 #: src/marketplace/offerings/update/components/OptionalNumberField.tsx
 msgid "Reset value"
-msgstr "Resetovat hodnotu"
+msgstr "Obnovit hodnotu"
 
 #: src/digitalocean/DropletResizeDialog.tsx
 msgid "Resize droplet"
@@ -12964,7 +12964,7 @@ msgstr "Odkaz na podmínky služby"
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/navigation/FooterLinks.tsx
 msgid "Terms of service"
-msgstr "Podmínky služby"
+msgstr "Smluvní podmínky"
 
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 msgid "Terms of service link"
@@ -13332,7 +13332,7 @@ msgstr "Neexistuje žádný plán"
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 msgid "Third"
-msgstr "třetí"
+msgstr "Třetí"
 
 #: src/openstack/openstack-instance/deploy/FormStartupScriptStep.tsx
 msgid "This field is only editable when startup script is enabled."
@@ -14888,7 +14888,7 @@ msgstr "Nelze aktualizovat platební profil."
 
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
 msgid "Unable to update permission."
-msgstr "Oprávnění nelze aktualizovat."
+msgstr "Práva nelze nastavit."
 
 #: src/marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx
 msgid "Unable to update plan."
@@ -15241,7 +15241,7 @@ msgstr "Aktualizovat platební profil"
 
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
 msgid "Update permission of {name}"
-msgstr "Aktualizovat oprávnění pro{name}"
+msgstr "Aktualizovat oprávnění pro {name}"
 
 #: src/marketplace/orders/details/OrderTypeIndicator.tsx
 msgid "Update plan for an existing resource"
@@ -17238,7 +17238,7 @@ msgstr "Zdroj {resourceName} byl přesunut do projektu {projectName}."
 
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 msgid "{resourceName} resource has been updated successfully."
-msgstr "{resourceName}zdroj byl úspěšně aktualizován."
+msgstr "{resourceName} zdroj byl úspěšně aktualizován."
 
 #: src/resource/actions/ResourceDeleteButton.tsx
 msgid "{resourceType} has been deleted."

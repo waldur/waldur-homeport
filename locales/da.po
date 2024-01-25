@@ -2955,6 +2955,14 @@ msgstr "Gateway IP"
 msgid "Gateway IP of this subnet"
 msgstr "Gateway IP for dette undernet"
 
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
+msgid "General"
+msgstr "Generel"
+
 #: src/customer/create/CustomerCreateForm.tsx
 msgid "General information"
 msgstr "Generelle oplysninger"
