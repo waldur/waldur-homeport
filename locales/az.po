@@ -8,6 +8,10 @@ msgstr ""
 "Language: az\n"
 "Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
 
+#: src/marketplace/resources/details/StatusPage.tsx
+msgid "90 days ago"
+msgstr "90 günlər əvvəl"
+
 #: src/user/support/TokenLifetimeField.tsx
 msgid "API token lifetime"
 msgstr "API kodunun istifadə müddəti"
@@ -21,8 +25,8 @@ msgstr "Profil yaradıldı."
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -30,18 +34,17 @@ msgid "Abbreviation"
 msgstr "Abbreviatur"
 
 #: src/booking/AcceptAction.tsx
+#: src/booking/components/modal/BookingResourceDetailsDialog.tsx
 msgid "Accept"
 msgstr "Qəbul edin"
 
 #: src/booking/BookingStateField.tsx
-#: src/booking/BookingStateFilter.tsx
+#: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
 msgid "Accepted"
 msgstr "Qəbul edildi"
 
-#: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/resource/ResourceAccessButton.tsx
 msgid "Access"
 msgstr "Giriş"
 
@@ -84,13 +87,16 @@ msgstr "Uçotun başlama tarixi "
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/offerings/list/OfferingActions.tsx
+#: src/marketplace/offerings/update/plans/PlanActions.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourceActions.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/marketplace/robot-accounts/RobotAccountList.tsx
+#: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
@@ -111,6 +117,7 @@ msgstr "Uçotun başlama tarixi "
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/user/keys/KeysList.tsx
+#: src/user/support/UserTableDropDownActions.tsx
 msgid "Actions"
 msgstr "Əməliyyatlar"
 
@@ -119,9 +126,10 @@ msgid "Activating"
 msgstr "Aktiv olunur"
 
 #: src/invitations/GroupInvitationsList.tsx
-#: src/marketplace/offerings/OfferingStateCell.tsx
-#: src/marketplace/offerings/OfferingStateFilter.tsx
-#: src/marketplace/offerings/update/plans/PlansSection.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
+#: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Active"
 msgstr "Aktiv"
@@ -130,12 +138,15 @@ msgstr "Aktiv"
 msgid "Activity stream"
 msgstr "Aktivlik lenti"
 
+#: src/administration/providers/CreateProviderDialog.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
+#: src/marketplace/deploy/DeployPage.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
+#: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/rancher/cluster/create/FormNodesStep.tsx
 msgid "Add"
 msgstr "Əlavə edin"
 
@@ -148,8 +159,8 @@ msgstr "SSH açarını əlavə edin"
 msgid "Add comment"
 msgstr "Şərh əlavə edin"
 
-#: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/rancher/cluster/create/DataVolumeAddButton.tsx
+#: src/rancher/cluster/create/FormDataStorageStep.tsx
 msgid "Add data volume"
 msgstr "Data həcmini əlavə edin"
 
@@ -204,6 +215,8 @@ msgstr "Qayda əlavə edin"
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/AddUserButton.tsx
+#: src/user/support/AddRemoteUserDialog.tsx
+#: src/user/support/UserTableActions.tsx
 msgid "Add user"
 msgstr "İstifadəçi əlavə edin"
 
@@ -233,7 +246,7 @@ msgstr "Cəlb edilmiş resurs"
 msgid "Agreement number"
 msgstr "Müqavilə nömrəsi"
 
-#: src/slurm/AllocationForm.tsx
+#: src/slurm/deploy/steps.ts
 msgid "Allocation name"
 msgstr "Paylaşdırma adı"
 
@@ -247,6 +260,7 @@ msgstr "Hesabınız artıq varmı?"
 
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/update/plans/PlanComponents.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Amount"
 msgstr "Məbləğ"
@@ -279,6 +293,7 @@ msgstr "Ödənişi təsdiq edin"
 msgid "Assigned to"
 msgstr "Təyin olunub"
 
+#: src/openstack/openstack-instance/OpenStackInstanceVolumeBadge.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
@@ -323,8 +338,8 @@ msgid "Authentication with Mobile ID has been canceled by user or timed out. Det
 msgstr "Mobil İD-dən istifadə etməklə autentifikasiya istifadəçi tərəfindən silinmiş və ya vaxtı bitmişdir. Ətraflı:"
 
 #: src/openstack/openstack-backup/actions/utils.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/utils.tsx
+#: src/openstack/openstack-instance/utils.ts
 msgid "Auto-assign floating IP"
 msgstr "Avtomatik təyin olunan IP"
 
@@ -332,11 +347,9 @@ msgstr "Avtomatik təyin olunan IP"
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
-#: src/openstack/openstack-instance/AvailabilityZoneGroup.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
 msgid "Availability zone"
 msgstr "Əlçatanlıq zonası"
@@ -349,10 +362,11 @@ msgstr "Mövcud kvota: {usage}"
 msgid "Azure provider"
 msgstr "Azure provayderi"
 
+#: src/broadcasts/BroadcastFooter.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/error/InvalidObjectPage.tsx
 #: src/error/InvalidRoutePage.tsx
-#: src/marketplace/offerings/actions/WizardButtons.tsx
-#: src/notifications/NotificationFooter.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
 msgid "Back"
 msgstr "Geriyə"
 
@@ -397,7 +411,6 @@ msgid "Batch processing documentation"
 msgstr "Qrup emalı sənədləşməsi "
 
 #: src/invoices/routes.ts
-#: src/project/ProjectDashboard.tsx
 msgid "Billing"
 msgstr "Billinq"
 
@@ -428,15 +441,16 @@ msgstr "CPU istifadəsi"
 msgid "Caller"
 msgstr "Zəng edən"
 
+#: src/administration/roles/RoleForm.tsx
 #: src/booking/CancelAction.tsx
-#: src/form/ListDialog.tsx
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invitations/GroupinvitationButtons.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace-flows/FlowCancelAction.tsx
-#: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
-#: src/marketplace/orders/item/list/OrderItemCancelButton.tsx
+#: src/marketplace/orders/actions/CancelTerminationOrderButton.tsx
+#: src/marketplace/orders/details/CancelOrderButton.tsx
 #: src/modal/CloseDialogButton.tsx
 #: src/navigation/header/SearchToggle.tsx
 #: src/project/ProjectCreateForm.tsx
@@ -461,6 +475,9 @@ msgstr "Sorğunu  ləğv edin"
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Canceled"
 msgstr "Ləğv edildi"
 
@@ -469,11 +486,12 @@ msgid "Cancelled"
 msgstr "Ləğv edildi"
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
-#: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/offerings/import/tabs.ts
+#: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/attributes/AttributesSection.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
@@ -481,6 +499,7 @@ msgstr "Ləğv edildi"
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -515,16 +534,20 @@ msgstr "Şifrəni dəyişin"
 msgid "Civil number"
 msgstr "Mülki nömrə "
 
+#: src/administration/providers/ProviderForm.tsx
 #: src/azure/provider/AzureForm.tsx
 msgid "Client ID"
 msgstr "Müştəri İdentifikasiyası "
 
+#: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+#: src/broadcasts/RecipientsListDialog.tsx
 #: src/invitations/actions/create/FormButtons.tsx
+#: src/marketplace/details/plan/EstimateUsageComponentDialog.tsx
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx
 #: src/marketplace/referral/OfferingReferralsDialog.tsx
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesDialog.tsx
-#: src/notifications/RecipientsListDialog.tsx
+#: src/resource/summary/ResourceMetadataDialog.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
 #: src/user/UserPopover.tsx
 #: src/user/support/UserRemovalMessageDialog.tsx
@@ -567,13 +590,13 @@ msgstr "Səriştə"
 #: src/marketplace/offerings/details/PublicOfferingComponents.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
-#: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
-#: src/marketplace/resources/details/openstack-volume/VolumeMainComponent.tsx
+#: src/marketplace/orders/details/DetailsSection.tsx
+#: src/marketplace/resources/details/ResourceComponentsDialog.tsx
 msgid "Components"
 msgstr "Tərkib hissələri"
 
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/marketplace/cart/ShoppingCartSteps.tsx
-#: src/marketplace/orders/OrderSteps.tsx
 #: src/openstack/openstack-instance/actions/update-internal-ips/UpdateInternalIpsSetAction.tsx
 msgid "Configure"
 msgstr "Konfiqurasiya etmək"
@@ -589,14 +612,14 @@ msgstr "Birləşdirilmiş alt-şəbəkələr"
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact email"
 msgstr "Əlaqə e-poçtu"
 
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact phone"
 msgstr "Əlaqə telefonu"
 
@@ -604,6 +627,7 @@ msgstr "Əlaqə telefonu"
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
+#: src/table/ExportDialog.tsx
 #: src/table/TableButtons.tsx
 #: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
@@ -611,9 +635,9 @@ msgstr "Mübadilə buferinə nüsxələmək"
 
 #: src/customer/list/CustomerList.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/offerings/expandable/utils.ts
-#: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
 msgid "Cost"
 msgstr "Xərc "
 
@@ -626,18 +650,26 @@ msgstr "Təşkilat yarada bilməmişdir"
 msgid "Country"
 msgstr "Ölkə "
 
+#: src/administration/agreements/UserAgreementCreateButton.tsx
+#: src/broadcasts/BroadcastCreateButton.tsx
+#: src/broadcasts/BroadcastTemplateCreateButton.tsx
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
+#: src/marketplace/cart/ShoppingCartButton.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
 #: src/marketplace/offerings/update/components/AddComponentDialog.tsx
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 #: src/marketplace/offerings/update/options/AddOptionDialog.tsx
 #: src/marketplace/offerings/update/plans/AddPlanDialog.tsx
-#: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
-#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+#: src/marketplace/orders/list/OrderTypeCell.tsx
+#: src/marketplace/orders/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
-#: src/notifications/NotificationCreateButton.tsx
+#: src/marketplace/service-providers/CampaignCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -646,6 +678,8 @@ msgstr "Ölkə "
 #: src/openstack/openstack-tenant/actions/CreateServerGroupAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateButton.tsx
 #: src/rancher/cluster/hpas/HPACreateButton.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -666,6 +700,7 @@ msgstr "Bildiriş yaratmaq"
 msgid "Create organization"
 msgstr "Təşkilat yaratmaq "
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/project/ProjectCreateContainer.tsx
 #: src/project/ProjectCreateDialog.tsx
 msgid "Create project"
@@ -688,8 +723,9 @@ msgstr "OpenStack (bulud əməliyyat sistemi) həcmi üçün ani təsvir qrafiki
 msgid "Create subnet"
 msgstr "Alt-şəbəkə yaratmaq "
 
+#: src/administration/TokensList.tsx
+#: src/administration/notifications/HooksList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
-#: src/booking/components/utils.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
@@ -700,14 +736,16 @@ msgstr "Alt-şəbəkə yaratmaq "
 #: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -726,28 +764,29 @@ msgstr "Yaradıldı"
 msgid "Created a new payment for {customer_link}."
 msgstr "{customer_link} üçün yeni ödəniş yaradıldı."
 
+#: src/administration/agreements/UserAgreementsList.tsx
+#: src/broadcasts/BroadcastList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
-#: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
-#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/ResourceOrderItems.tsx
-#: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/marketplace/orders/details/DetailsSection.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/ResourceOrders.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
+#: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/notifications/NotificationList.tsx
-#: src/project/ProjectOrderItemsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
@@ -798,8 +837,10 @@ msgstr "Cari həcm "
 
 #: src/administration/routes.ts
 #: src/customer/routes.ts
+#: src/issues/routes.ts
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
+#: src/marketplace/utils.ts
 #: src/project/routes.ts
 #: src/reporting/routes.ts
 #: src/user/routes.ts
@@ -829,7 +870,7 @@ msgstr "Qoşulma tarixi  "
 msgid "Deactivating"
 msgstr "İşin dayandırılması "
 
-#: src/marketplace/offerings/option/OfferingOptionsScriptEditor.tsx
+#: src/user/support/utils.ts
 msgid "Default"
 msgstr "Standart  "
 
@@ -847,16 +888,18 @@ msgstr "Standart hesabı "
 msgid "Default availability zone for provisioned instances."
 msgstr "Təchiz edilmiş nümunələr üçün standart  mövcudluq zonası"
 
-#: src/booking/components/modal/BookingModal.tsx
+#: src/administration/agreements/UserAgreementDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
+#: src/marketplace/offerings/list/DeleteOfferingButton.tsx
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
+#: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
+#: src/notifications/ManageCommonFooterDialog.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
 #: src/openstack/openstack-security-groups/rule-editor/ActionsField.tsx
 #: src/project/DeleteAction.tsx
@@ -872,14 +915,20 @@ msgstr "Silmək "
 msgid "Delete volumes"
 msgstr "Həcmləri silmək "
 
+#: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryGroupsList.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/details/OfferingTabs.tsx
-#: src/marketplace/details/plan/PlanDetails.tsx
+#: src/marketplace/details/plan/PlanSection.tsx
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
@@ -888,26 +937,30 @@ msgstr "Həcmləri silmək "
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/options/OptionForm.tsx
-#: src/marketplace/offerings/update/overview/OverviewDialog.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/marketplace/offerings/update/plans/PlanForm.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/notifications/NotificationList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/details/CallDescriptionCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -919,12 +972,11 @@ msgstr "Həcmləri silmək "
 #: src/resource/actions/base.ts
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/RequestLimitsChangeDialog.tsx
-#: src/support/OfferingConfigurationForm.tsx
 #: src/user/support/UserEditForm.tsx
-#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Description"
 msgstr "Təsvir"
 
+#: src/administration/notifications/HooksList.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Destination"
 msgstr "Təyinat yeri "
@@ -947,17 +999,18 @@ msgstr "Ləğv"
 msgid "Detaching"
 msgstr "Ayırma "
 
-#: src/customer/team/UserDetailsButton.tsx
+#: src/administration/providers/ProviderCard.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/details/DetailsSection.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/project/ProjectDetailsButton.tsx
-#: src/project/team/UserDetailsButton.tsx
+#: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
+#: src/user/UserDetailsButton.tsx
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -1000,9 +1053,10 @@ msgstr "İnvoys yükləyin"
 
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
-#: src/marketplace/offerings/OfferingStateCell.tsx
-#: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
 msgstr "Layihə "
@@ -1026,26 +1080,39 @@ msgstr "Təyin edilmiş müddət "
 msgid "EU VAT ID"
 msgstr "Aİ ƏDV İdentifikasiyası "
 
+#: src/administration/agreements/UserAgreementsEditButton.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/broadcasts/BroadcastTemplateUpdateButton.tsx
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
-#: src/marketplace/offerings/OfferingEditButton.tsx
+#: src/marketplace/category/admin/CategoryEditButton.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/GroupEditButton.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/marketplace/deploy/DeployPage.tsx
+#: src/marketplace/offerings/details/OfferingDetails.tsx
+#: src/marketplace/offerings/list/EditOfferingButton.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
 #: src/marketplace/offerings/update/attributes/EditAttributeButton.tsx
 #: src/marketplace/offerings/update/components/EditComponentButton.tsx
-#: src/marketplace/offerings/update/integration/EditIntegrationButton.tsx
 #: src/marketplace/offerings/update/integration/EditScriptButton.tsx
 #: src/marketplace/offerings/update/options/EditOptionButton.tsx
-#: src/marketplace/offerings/update/overview/OverviewButton.tsx
-#: src/marketplace/offerings/update/plans/EditPlanButton.tsx
-#: src/marketplace/orders/item/details/OrderItem.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedButton.tsx
+#: src/marketplace/offerings/update/overview/EditOverviewButton.tsx
+#: src/marketplace/offerings/update/overview/OfferingLocationButton.tsx
+#: src/marketplace/offerings/update/overview/OfferingLogoButton.tsx
+#: src/marketplace/offerings/update/overview/SetAccessPolicyButton.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
 #: src/marketplace/robot-accounts/RobotAccountEditButton.tsx
+#: src/marketplace/service-providers/ProviderCampaignUpdateButton.tsx
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton.tsx
+#: src/notifications/NotificationUpdateButton.tsx
 #: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
 #: src/openstack/openstack-backup/actions/EditAction.tsx
 #: src/openstack/openstack-instance/actions/EditAction.tsx
@@ -1057,6 +1124,13 @@ msgstr "Aİ ƏDV İdentifikasiyası "
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
 #: src/project/team/AddMemberButton.tsx
+#: src/proposals/call-management/CallEditButton.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/documents/EditDocumentsButton.tsx
+#: src/proposals/update/general/EditGeneralInfoButton.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
+#: src/proposals/update/review/EditReviewInfoButton.tsx
+#: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -1072,16 +1146,20 @@ msgstr "Layihə üzvünü redaktə etmək"
 msgid "Edit team member"
 msgstr "Heyət üzvünü redaktə etmək"
 
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/providers/ProviderUsersDialog.tsx
+#: src/administration/service-desk/AtlassianSettings.tsx
+#: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
-#: src/notifications/RecipientsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
@@ -1094,6 +1172,10 @@ msgstr "e-poçt"
 msgid "Enable DHCP"
 msgstr "DHCP (əsas hissənin dinamik konfiqurasiya edilmə protokolu) işə salmaq"
 
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/administration/providers/ProviderForm.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/hooks/HookForm.tsx
@@ -1101,12 +1183,13 @@ msgstr "DHCP (əsas hissənin dinamik konfiqurasiya edilmə protokolu) işə sal
 msgid "Enabled"
 msgstr "İşə salındı"
 
+#: src/booking/deploy/CustomRangeDatePicker.tsx
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "End time"
 msgstr "Bitmə vaxtı "
 
 #: src/events/ExpandableEventDetailsTable.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
 #: src/resource/summary/ErrorMessageField.tsx
 msgid "Error message"
 msgstr "Xəta mesajı "
@@ -1116,6 +1199,7 @@ msgid "Esimated price per month"
 msgstr "Aylıq təqribi xərc  "
 
 #: src/customer/list/CustomerList.tsx
+#: src/dashboard/api.ts
 #: src/invoices/list/EstimatedCost.tsx
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
@@ -1123,7 +1207,6 @@ msgstr "Aylıq təqribi xərc  "
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
-#: src/project/utils.ts
 msgid "Estimated cost"
 msgstr "Təqribi xərc"
 
@@ -1140,6 +1223,9 @@ msgstr "Hadisə növü"
 msgid "Event types"
 msgstr "Hadisə növləri "
 
+#: src/administration/notifications/HooksList.tsx
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
@@ -1216,7 +1302,7 @@ msgstr "Vaxtı bitmiş"
 msgid "Expires at"
 msgstr "---- da vaxtı bitir"
 
-#: src/table/TableExportButton.tsx
+#: src/table/ExportDialog.tsx
 msgid "Export as"
 msgstr "---- kimi ixrac etmək"
 
@@ -1278,15 +1364,17 @@ msgid "Financial overview"
 msgstr "Maliyyə icmalı "
 
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
-#: src/openstack/openstack-instance/PublicKeyGroup.tsx
+#: src/openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Fingerprint"
 msgstr "Barmaq izi "
 
+#: src/marketplace/resources/details/openstack-instance/ResourceFlavorField.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
-#: src/openstack/openstack-instance/FlavorGroup.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
 #: src/rancher/cluster/create/NodeFlavorGroup.tsx
 msgid "Flavor"
 msgstr "Variant "
@@ -1296,7 +1384,6 @@ msgid "Flavor exclude regex"
 msgstr "Variantlar daimi ifadələri istisna edir "
 
 #: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/openstack-instance/FlavorGroup.tsx
 msgid "Flavor name"
 msgstr "Variantların adı "
 
@@ -1312,6 +1399,7 @@ msgstr "Bu daimi ifadəyə uyğun gələn variantlar sever hissəsindən çıxar
 msgid "Flexible"
 msgstr "Çevik "
 
+#: src/marketplace/resources/details/openstack-instance/ResourceFloatingIpField.tsx
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 msgid "Floating IP"
 msgstr "Üzən IP"
@@ -1320,13 +1408,12 @@ msgstr "Üzən IP"
 msgid "Floating IP count"
 msgstr "Üzən IP sayı"
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Floating IPs"
 msgstr "Üzən IP-lər "
 
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/FlowMapViewContainer.tsx
 msgid "Flowmap"
 msgstr "İnteraktiv xəritəçəkmə proqramı "
@@ -1344,13 +1431,14 @@ msgstr "FreeIPA hesabı"
 msgid "FreeIPA account needs to be set up."
 msgstr "FreeIPA hesabı qurulmalıdır"
 
-#: src/invoices/details/InvoiceDetails.tsx
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
 msgid "From"
 msgstr "Kimdən"
 
+#: src/administration/providers/ProviderUsersDialog.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
+#: src/marketplace/UserPluginOptionsForm.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
-#: src/slurm/SLURMPluginOptionsForm.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserList.tsx
 msgid "Full name"
@@ -1374,7 +1462,10 @@ msgid "Gateway IP"
 msgstr "Giriş IP-si "
 
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
 msgid "General"
 msgstr "Ümumi "
 
@@ -1394,6 +1485,7 @@ msgstr "Alındı!"
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr "Anlık təsvirin saxlanmasının zəmanətli vaxtı. Əgər yoxdursa - sonsuza qədər saxlayın."
 
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/HeatMapContainer.tsx
 msgid "Heatmap"
 msgstr "Istilik xəritəsi "
@@ -1461,14 +1553,15 @@ msgstr "IP versiyası"
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
-#: src/openstack/openstack-instance/ImageGroup.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/marketplace/resources/details/openstack-instance/ResourceImageField.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/FormImageStep.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
 msgid "Image"
 msgstr "Təsvir"
 
 #: src/openstack/analytics/ImagesList.tsx
-#: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Image name"
 msgstr "Təsvir adı"
 
@@ -1518,12 +1611,10 @@ msgid "Informational - client’s request to get or provide additional informati
 msgstr "Müştərinin xidmət ilə bağlı əlavə məlumat almaq və ya vermək üçün informasiya xarakterli xahişi."
 
 #: src/openstack/OpenStackPackageDetails.tsx
-#: src/openstack/OpenStackPackageForm.tsx
 msgid "Initial admin password"
 msgstr "İlkin administrator şifrəsi"
 
 #: src/openstack/OpenStackPackageDetails.tsx
-#: src/openstack/OpenStackPackageForm.tsx
 msgid "Initial admin username"
 msgstr "İlk admin istifadəçi adı"
 
@@ -1568,19 +1659,19 @@ msgstr "Nümunələr sayılır"
 msgid "Internal IP"
 msgstr "Daxili IP(İnternet protokollar)"
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
+#: src/marketplace/resources/details/openstack-instance/ResourceInternalIpsField.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
 msgid "Internal IPs"
 msgstr "Daxili IP-lər"
 
-#: src/openstack/OpenStackPackageForm.tsx
+#: src/openstack/deploy/FormInternalNetworkStep.tsx
 #: src/openstack/openstack-network/InternalNetworkAllocationPool.tsx
 msgid "Internal network allocation pool"
 msgstr "Daxili şəbəkə paylaşdırma qrupu"
 
 #: src/openstack/OpenStackPackageDetails.tsx
-#: src/openstack/OpenStackPackageForm.tsx
+#: src/openstack/deploy/FormInternalNetworkStep.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
 msgid "Internal network mask (CIDR)"
@@ -1680,9 +1771,8 @@ msgid "Invoice number"
 msgstr "Faktura nömrəsi"
 
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
-#: src/marketplace/details/OrderSummary.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 msgid "Invoiced to"
 msgstr "Faktura _______göndərilib"
 
@@ -1702,7 +1792,7 @@ msgid "Is official"
 msgstr "Rəsmidir"
 
 #: src/events/ExpandableEventDetailsTable.tsx
-#: src/marketplace/orders/item/list/ResourceOrderItems.tsx
+#: src/marketplace/orders/list/ResourceOrders.tsx
 msgid "Issue link"
 msgstr "Məsələ linki"
 
@@ -1712,6 +1802,7 @@ msgstr "{issue_link} məsələsi {caller_link} tərəfindən yaradılmışdır"
 
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
+#: src/issues/list/IssuesList.tsx
 #: src/issues/routes.ts
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/navigation/IssuesLink.tsx
@@ -1731,7 +1822,6 @@ msgstr "Avtomatik olaraq virtual maşınınıza üzən IP təyin etmək üçün 
 #: src/invoices/details/BillingRecordDetails.tsx
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
-#: src/marketplace/orders/Order.tsx
 msgid "Item"
 msgstr "Maddə"
 
@@ -1762,6 +1852,7 @@ msgstr "---- qədər saxlanılıb"
 msgid "Key"
 msgstr "Açar"
 
+#: src/openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx
 #: src/user/keys/KeyCreateDialog.tsx
 msgid "Key name"
 msgstr "Açar adı"
@@ -1799,6 +1890,7 @@ msgstr "Yükləmə tədbirləri "
 #: src/azure/AzureResourceSummary.tsx
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
 msgid "Location"
 msgstr "Yerləşmə"
 
@@ -1811,6 +1903,7 @@ msgstr "Çıxış"
 msgid "Logging user in"
 msgstr "Daxil olan istifadəçi girişi"
 
+#: src/administration/service-desk/SmaxSettings.tsx
 #: src/auth/SigninForm.tsx
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/navigation/sidebar/UnifiedSidebar.tsx
@@ -1835,6 +1928,7 @@ msgid "MAC address"
 msgstr "MAC (vasitəyə giriş nəzarəti ünvanı) ünvanı"
 
 #: src/customer/dashboard/CustomerActions.tsx
+#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
 #: src/project/ProjectActions.tsx
 #: src/user/UserActions.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -1862,19 +1956,20 @@ msgid "Maximum username length with mandatory username prefix is 32 characters."
 msgstr "Zəruri istifadəçi adı prefiksi ilə maksimal istifadəçi adının uzunluğu 32 simvoldur."
 
 #: src/customer/team/CustomerUsersList.tsx
-#: src/i18n/constants.ts
 #: src/navigation/workspace/context-selector/OrganizationSummary.tsx
 #: src/project/team/ProjectUsersList.tsx
 msgid "Member"
 msgstr "Üzv "
 
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr "Mesaj"
 
+#: src/administration/notifications/HooksList.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Method"
 msgstr "Metod"
@@ -1899,6 +1994,8 @@ msgstr "Mobil telefon nömrəsi"
 msgid "Month"
 msgstr "Ay"
 
+#: src/marketplace/details/plan/OrderSummaryPlanRows.tsx
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
 #: src/quotas/constants.ts
 msgid "Monthly cost"
 msgstr "Aylıq qiymət  "
@@ -1911,9 +2008,13 @@ msgstr "Daha çox məlumat"
 msgid "N/A"
 msgstr "Yoxdur "
 
+#: src/administration/roles/RoleForm.tsx
+#: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/booking/BookingsList.tsx
-#: src/booking/components/utils.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
+#: src/broadcasts/BroadcastTemplateList.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -1927,23 +2028,26 @@ msgstr "Yoxdur "
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/details/plan/PlanDetails.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/details/plan/PlanSection.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
-#: src/marketplace/offerings/actions/SelectCategoryTab.tsx
-#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
-#: src/marketplace/offerings/update/overview/OverviewDialog.tsx
+#: src/marketplace/offerings/import/SelectCategoryTab.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/marketplace/offerings/update/plans/PlanForm.tsx
-#: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/item/details/OrderItemLimits.tsx
-#: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
+#: src/marketplace/orders/details/LimitsSection.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
@@ -1952,13 +2056,13 @@ msgstr "Yoxdur "
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
-#: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/openstack/openstack-instance/actions/EditDialog.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
@@ -1975,9 +2079,15 @@ msgstr "Yoxdur "
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -1994,12 +2104,10 @@ msgstr "Yoxdur "
 #: src/resource/actions/base.ts
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
-#: src/support/OfferingConfigurationForm.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
-#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Name"
 msgstr "Adı"
 
@@ -2028,20 +2136,22 @@ msgstr "Adda ən azı 3 simvol olmalıdır."
 msgid "Native name"
 msgstr "Əsl adı"
 
+#: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-subnet/TenantSubnetsList.tsx
+#: src/quotas/constants.ts
+#: src/rancher/cluster/create/FormNetworkStep.tsx
+#: src/rancher/cluster/create/steps.ts
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
 #: src/vmware/actions/CreatePortDialog.tsx
 msgid "Network"
 msgstr "Şəbəkə"
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
-#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
 msgstr "Şəbəkələr"
 
@@ -2049,10 +2159,9 @@ msgstr "Şəbəkələr"
 msgid "New flavor"
 msgstr "Yeni cəhət"
 
-#: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/details/plan/PlanSection.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
+#: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 msgid "New plan"
 msgstr "Yeni plan"
 
@@ -2061,14 +2170,15 @@ msgid "New size"
 msgstr "Yeni ölçü"
 
 #: src/customer/create/CustomerCreateForm.tsx
-#: src/marketplace/offerings/actions/WizardButtons.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Next"
 msgstr "Sonrakı "
 
+#: src/administration/FeaturesList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/issues/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -2079,6 +2189,7 @@ msgstr "Sonrakı "
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
@@ -2102,6 +2213,7 @@ msgstr "Təyin edilməyib"
 msgid "Notification has been created."
 msgstr "Bildiriş yaradılıb."
 
+#: src/notifications/NotificationUpdateDialog.tsx
 #: src/user/hooks/utils.ts
 msgid "Notification has been updated."
 msgstr "Bildiriş yenilənib."
@@ -2110,11 +2222,15 @@ msgstr "Bildiriş yenilənib."
 msgid "Notification method"
 msgstr "Bildiriş metodu"
 
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/routes.ts
 #: src/user/hooks/HooksList.tsx
 #: src/user/routes.ts
 msgid "Notifications"
 msgstr "Bildirişlər"
 
+#: src/administration/providers/ProviderDetailsDialog.tsx
+#: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "OK"
 msgstr "Ok"
@@ -2132,7 +2248,9 @@ msgid "Only staff can remove organization."
 msgstr "Yalnız işçi heyət təşkilatı çıxara bilər."
 
 #: src/events/ExpandableEventDetailsTable.tsx
+#: src/issues/list/IssuesFilter.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/proposals/utils.ts
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Open"
 msgstr "Açıq"
@@ -2142,7 +2260,6 @@ msgid "Open in Service Desk"
 msgstr "Xidmət Masasında açın"
 
 #: src/booking/BookingsList.tsx
-#: src/booking/components/utils.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/routes.ts
@@ -2157,13 +2274,13 @@ msgstr "Xidmət Masasında açın"
 #: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/details/CustomerCreateGroup.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
-#: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
+#: src/marketplace/offerings/import/tabs.ts
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/orders/list/OrdersFilter.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
@@ -2173,6 +2290,7 @@ msgstr "Xidmət Masasında açın"
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/navigation/workspace/context-selector/GuestDropdown.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/PublicCallsPage.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -2260,20 +2378,19 @@ msgid "Organization {customer_name} has been deleted."
 msgstr "Təşkilat {customer_name} silindi."
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
+#: src/broadcasts/BroadcastExpandableRow.tsx
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/issues/routes.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
-#: src/notifications/RecipientsList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
-#: src/user/dashboard/UserDashboard.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Organizations"
@@ -2284,6 +2401,7 @@ msgid "Owned organizations"
 msgstr "Məxsus olan təşkilatlar"
 
 #: src/customer/team/CustomerUsersList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
 msgid "Owner"
 msgstr "Sahib"
 
@@ -2301,6 +2419,8 @@ msgstr "Səhifə tapılmadı. Siz ya yalnış URL daxil etdiniz və ya işləmə
 msgid "Paid"
 msgstr "Ödənilib"
 
+#: src/administration/service-desk/AtlassianSettings.tsx
+#: src/administration/service-desk/SmaxSettings.tsx
 #: src/auth/SigninForm.tsx
 #: src/azure/sql/AzureSQLServerSummary.tsx
 #: src/openstack/OpenStackForm.tsx
@@ -2352,8 +2472,6 @@ msgstr "Ödəniş natamamdır"
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
-#: src/marketplace/orders/item/list/OrderItemStateCell.tsx
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Pending"
 msgstr "Natamam"
@@ -2447,6 +2565,7 @@ msgid "Preferred language"
 msgstr "Üstünlük verilən dil"
 
 #: src/customer/create/WizardForm.tsx
+#: src/form/WizardForm.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/PrevPage.tsx
 msgid "Previous"
 msgstr "Əvvəlki"
@@ -2467,8 +2586,8 @@ msgstr "Qiyməti təxminidir."
 
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/common/utils.ts
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 msgid "Price per day"
 msgstr "Gündəlik qiymət"
 
@@ -2490,6 +2609,7 @@ msgid "Priority"
 msgstr "Prioritet"
 
 #: src/about.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
 #: src/navigation/FooterLinks.tsx
 msgid "Privacy policy"
 msgstr "Məxfilik siyasəti"
@@ -2498,9 +2618,12 @@ msgstr "Məxfilik siyasəti"
 msgid "Private clouds"
 msgstr "Özəl buludlar"
 
+#: src/administration/roles/PermissionOptions.tsx
+#: src/administration/roles/RoleForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
-#: src/booking/components/utils.tsx
+#: src/booking/deploy/steps.ts
+#: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/customer/team/OrganizationProjectSelectField.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/ProjectGroup.tsx
@@ -2512,15 +2635,15 @@ msgstr "Özəl buludlar"
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
+#: src/marketplace/deploy/steps/FormProjectStep.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectCreateGroup.tsx
 #: src/marketplace/details/ProjectField.tsx
-#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
@@ -2530,17 +2653,25 @@ msgstr "Özəl buludlar"
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/deploy/steps.ts
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/steps.ts
 #: src/project/routes.ts
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/create/steps.ts
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
+#: src/slurm/deploy/steps.ts
+#: src/support/deploy-steps.ts
 #: src/user/UserPermissionRequestsList.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
+#: src/vmware/deploy/steps.ts
 msgid "Project"
 msgstr "Layihə"
 
@@ -2553,8 +2684,8 @@ msgid "Project could not be updated."
 msgstr "Layihə yenilənə bilmədi."
 
 #: src/booking/BookingsListExpandableRow.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
 msgid "Project description"
@@ -2592,9 +2723,8 @@ msgstr "Layihə meneceri"
 
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
 #: src/project/ProjectNameField.tsx
-#: src/user/dashboard/ProjectPermissions.tsx
 msgid "Project name"
 msgstr "Layihənin adı"
 
@@ -2628,8 +2758,8 @@ msgid "Project {project_name} has been deleted."
 msgstr "{project_name} layihəsi silindi.\t"
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
 #: src/customer/routes.ts
-#: src/issues/routes.ts
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
@@ -2639,7 +2769,6 @@ msgstr "{project_name} layihəsi silindi.\t"
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
-#: src/user/dashboard/UserDashboard.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Projects"
@@ -2653,7 +2782,8 @@ msgstr "Layihələr siyahısı"
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/navigation/sidebar/ProviderMenu.tsx
-#: src/providers/support/MapInfoPanel.tsx
+#: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Provider"
@@ -2708,12 +2838,13 @@ msgstr "Miqdarı"
 msgid "Quota has been reached."
 msgstr "Kvotaya çatdırılıb."
 
-#: src/marketplace/resources/details/openstack-tenant/TenantMainComponent.tsx
+#: src/marketplace/resources/details/TenantMainComponent.tsx
 msgid "Quotas"
 msgstr "Kvotalar"
 
 #: src/marketplace/resources/details/InstanceComponents.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
 #: src/openstack/openstack-tenant/TenantFlavorsList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
@@ -2793,17 +2924,24 @@ msgstr "Verilmə məlumatları yenidən yükləyin"
 msgid "Remote CIDR"
 msgstr "Uzaq CIDR (sinifsiz domenlərarası marşrutlama)"
 
+#: src/administration/TokenDeleteButton.tsx
+#: src/administration/notifications/HookRemoveButton.tsx
+#: src/administration/roles/RoleDeleteButton.tsx
+#: src/broadcasts/BroadcastTemplateDeleteButton.tsx
+#: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
 #: src/marketplace/cart/ShoppingCartItem.tsx
+#: src/marketplace/category/admin/CategoryDeleteButton.tsx
+#: src/marketplace/category/admin/GroupDeleteButton.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/update/ImageUploadField.tsx
+#: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
-#: src/rancher/cluster/create/NodeRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -2848,6 +2986,7 @@ msgid "Request detail"
 msgstr "Təfsilat üçün sorğu"
 
 #: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
+#: src/support/SupportDetailsContainer.tsx
 msgid "Request details"
 msgstr "Təfsilatlar üçün sorğu"
 
@@ -2890,14 +3029,16 @@ msgstr "Damlacığın ölçüsünü dəyişmək"
 msgid "Resolution"
 msgstr "Buraxılış"
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
+#: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
@@ -2930,11 +3071,13 @@ msgstr "Resurs istifadəsi"
 
 #: src/administration/dashboard/StatisticsCards.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/project-selector/ProjectsList.tsx
@@ -2994,7 +3137,6 @@ msgstr "Yenidən cəhd edin"
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
-#: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -3015,7 +3157,7 @@ msgstr "Vəzifə ______başa çatır"
 msgid "Role in project"
 msgstr "Layihədə vəzifəsi"
 
-#: src/project/team/events.ts
+#: src/project/team/events.tsx
 msgid "Role management events"
 msgstr "Vəzifə idarəçiliyi hadisələri"
 
@@ -3049,30 +3191,36 @@ msgid "SSH key"
 msgstr "SSH (təhlükəsizlik örtükləri) açarı"
 
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
+#: src/openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx
 #: src/user/keys/KeysList.tsx
 #: src/user/routes.ts
 msgid "SSH keys"
 msgstr "SSH (təhlükəsizlik örtükləri) açarları"
 
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
-#: src/openstack/openstack-instance/PublicKeyGroup.tsx
-#: src/rancher/cluster/create/RancherClusterForm.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
+#: src/rancher/cluster/create/steps.ts
 msgid "SSH public key"
 msgstr "SSH (təhlükəsizlik örtükləri) ictimai açarı"
 
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/SankeyDiagramContainer.tsx
 msgid "Sankey diagram"
 msgstr "“Sankey” diaqramı"
 
-#: src/booking/components/modal/BookingModal.tsx
+#: src/administration/FeaturesList.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
+#: src/administration/agreements/UserAgreementsForm.tsx
+#: src/administration/providers/UpdateProviderDialog.tsx
+#: src/administration/roles/RoleForm.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/customer/organization-groups/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
-#: src/issues/FeaturesList.tsx
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/expandable/utils.ts
@@ -3083,11 +3231,15 @@ msgstr "“Sankey” diaqramı"
 #: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
 #: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
 #: src/marketplace/offerings/update/options/EditOptionDialog.tsx
-#: src/marketplace/offerings/update/plans/EditPlanDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
+#: src/notifications/ManageCommonFooterDialog.tsx
+#: src/notifications/NotificationForm.tsx
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
 msgid "Save"
@@ -3102,6 +3254,7 @@ msgstr "Cədvəl"
 
 #: src/navigation/header/SearchFilters.tsx
 #: src/navigation/header/SearchToggle.tsx
+#: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
 #: src/table/TableQuery.tsx
 msgid "Search"
 msgstr "Axtarış"
@@ -3110,17 +3263,17 @@ msgstr "Axtarış"
 msgid "Security group does not contain any rule yet."
 msgstr "Təhlükəsizlik qrupunda hələ heç bir qayda yoxdur."
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsForm.tsx
+#: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/openstack/openstack-tenant/tabs.ts
-#: src/rancher/cluster/create/TenantGroup.tsx
+#: src/rancher/cluster/create/FormRancherSecurityGroupsStep.tsx
+#: src/rancher/cluster/create/steps.ts
 msgid "Security groups"
 msgstr "Təhlükəsizlik qrupları"
 
@@ -3138,7 +3291,6 @@ msgstr "Hamısını gör"
 msgid "Segmentation ID"
 msgstr "Segmentasiya ID-si"
 
-#: src/form/ListDialog.tsx
 #: src/form/themed-select.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
@@ -3179,11 +3331,13 @@ msgstr "Ölkəni seç..."
 msgid "Select organization..."
 msgstr "Təşkilat seçin ..."
 
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/invitations/actions/ProjectGroup.tsx
 #: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
 msgid "Select project"
 msgstr "Layihəni seçin"
 
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/marketplace/resources/actions/MoveToProjectAutocomplete.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
@@ -3197,7 +3351,6 @@ msgid "Select role"
 msgstr "Vəzifəni seçin"
 
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsForm.tsx
 msgid "Select security groups..."
 msgstr "Təhlükəsizlik qruplarını seçin ..."
@@ -3206,7 +3359,8 @@ msgstr "Təhlükəsizlik qruplarını seçin ..."
 msgid "Select size..."
 msgstr "Ölçünü seçin ..."
 
-#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
+#: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
+#: src/rancher/cluster/create/FormNetworkStep.tsx
 msgid "Select subnet"
 msgstr "Alt şəbəkəni seçin"
 
@@ -3299,7 +3453,6 @@ msgid "Show report"
 msgstr "Hesabatı göstər"
 
 #: src/openstack/analytics/VmOverviewFilter.tsx
-#: src/providers/support/FlowMapFilter.tsx
 msgid "Show shared"
 msgstr "Paylaşılanları göstərin"
 
@@ -3320,11 +3473,11 @@ msgstr "{label} ilə daxil ol"
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/openstack/openstack-instance/OpenStackInstanceVolumeBadge.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
@@ -3340,20 +3493,15 @@ msgid "Size name"
 msgstr "Ölçü adı"
 
 #: src/openstack/openstack-backup/actions/utils.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
+#: src/openstack/openstack-instance/utils.ts
 msgid "Skip floating IP assignment"
 msgstr "Üzən IP təyinatını üstündən adlayıb keçin"
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-volume/VolumeDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshot schedules"
 msgstr "Ani təsvir qrafikləri"
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-#: src/marketplace/resources/details/openstack-volume/VolumeDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
@@ -3375,9 +3523,8 @@ msgid "Staff and Support user"
 msgstr "Personal və Dəstək istifadəçisi"
 
 #: src/azure/vm/actions/StartAction.tsx
-#: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/utils.tsx
 #: src/openstack/openstack-instance/actions/StartAction.tsx
+#: src/proposals/PublicCallsPage.tsx
 #: src/vmware/actions/StartAction.tsx
 msgid "Start"
 msgstr "Başlama"
@@ -3386,6 +3533,7 @@ msgstr "Başlama"
 msgid "Start day of accounting"
 msgstr "Uçotun  başlama günü"
 
+#: src/booking/deploy/CustomRangeDatePicker.tsx
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "Start time"
 msgstr "Başlama vaxtı"
@@ -3394,9 +3542,9 @@ msgstr "Başlama vaxtı"
 msgid "Starting"
 msgstr "Başlanğıc"
 
-#: src/booking/BookingStateFilter.tsx
+#: src/administration/notifications/HooksList.tsx
 #: src/booking/BookingsList.tsx
-#: src/booking/components/utils.tsx
+#: src/broadcasts/BroadcastList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invitations/InvitationsFilter.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
@@ -3409,26 +3557,24 @@ msgstr "Başlanğıc"
 #: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/details/OfferingResourcesFilter.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/OfferingsFilter.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
-#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
-#: src/marketplace/orders/Order.tsx
-#: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/ResourceOrderItems.tsx
-#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
-#: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/details/ResourceDetailsHeaderBody.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/list/OfferingsFilter.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/OrdersFilter.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/orders/list/ResourceOrders.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
@@ -3436,12 +3582,12 @@ msgstr "Başlanğıc"
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
-#: src/notifications/NotificationList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
@@ -3457,7 +3603,11 @@ msgstr "Başlanğıc"
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
-#: src/project/ProjectOrderItemsList.tsx
+#: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
+#: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
@@ -3493,16 +3643,16 @@ msgstr "Dur"
 msgid "Stopping"
 msgstr "Durdurma"
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
-#: src/marketplace/resources/details/openstack-volume/VolumeDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/quotas/constants.ts
+#: src/vmware/deploy/FormStorageStep.tsx
+#: src/vmware/deploy/steps.ts
 msgid "Storage"
 msgstr "Saxlama"
 
+#: src/administration/agreements/UserAgreementDeleteDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/invitations/GroupinvitationButtons.tsx
@@ -3514,11 +3664,12 @@ msgstr "Saxlama"
 #: src/marketplace-flows/FlowSubmitAction.tsx
 #: src/marketplace-flows/ReviewDialog.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
-#: src/marketplace/offerings/actions/WizardButtons.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
+#: src/marketplace/resources/lexis/CreateLexisLinkDialog.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
@@ -3544,7 +3695,6 @@ msgid "Subnet CIDR"
 msgstr "CIDR (sinifsiz domenlərarası marşrutlama) alt-şəbəkəsi"
 
 #: src/customer/details/CustomerDetailsPanel.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Subnets"
@@ -3568,7 +3718,7 @@ msgstr "Cəmi"
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/issues/IssueDetails.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
@@ -3609,6 +3759,7 @@ msgstr "Dəstək istifadəçisi"
 msgid "Sync profile"
 msgstr "Sinxronizasiya profili"
 
+#: src/marketplace/resources/actions/SyncResourceAction.tsx
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.tsx
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.tsx
 #: src/openstack/openstack-tenant/actions/PullServerGroupsAction.tsx
@@ -3621,7 +3772,6 @@ msgid "System administrator"
 msgstr "Sistem administratoru"
 
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
-#: src/openstack/openstack-instance/SystemVolumeSizeGroup.tsx
 #: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
 msgid "System volume size"
 msgstr "Sistemin həcmi ölçüsü"
@@ -3646,6 +3796,7 @@ msgid "Tax"
 msgstr "Vergi"
 
 #: src/customer/routes.ts
+#: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
 msgid "Team"
 msgstr "Heyət "
@@ -3654,17 +3805,19 @@ msgstr "Heyət "
 msgid "Team size"
 msgstr "Heyət ölçüsü"
 
-#: src/rancher/cluster/create/TenantSelector.tsx
+#: src/rancher/cluster/create/FormTenantStep.tsx
+#: src/rancher/cluster/create/steps.ts
 msgid "Tenant"
 msgstr "İcarədar"
 
+#: src/administration/service-desk/SmaxSettings.tsx
 #: src/azure/provider/AzureForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Tenant ID"
 msgstr "İcarədar ID-si"
 
 #: src/openstack/OpenStackForm.tsx
-#: src/openstack/OpenStackPackageForm.tsx
+#: src/openstack/deploy/steps.ts
 #: src/openstack/marketplace.ts
 msgid "Tenant name"
 msgstr "İcarədar adı"
@@ -3686,7 +3839,7 @@ msgstr "İcarədar istifadəçi adı"
 msgid "Terms of Service"
 msgstr "Xidmət Şərtləri"
 
-#: src/marketplace/offerings/update/overview/OverviewDialog.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/navigation/FooterLinks.tsx
 msgid "Terms of service"
@@ -3746,12 +3899,8 @@ msgstr "Bu xananın doldurulması məcburidir."
 
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/openstack/OpenStackPackageForm.tsx
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/project/ProjectNameField.tsx
-#: src/rancher/cluster/create/RancherClusterForm.tsx
-#: src/slurm/AllocationForm.tsx
-#: src/support/OfferingConfigurationForm.tsx
-#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "This name will be visible in accounting data."
 msgstr "Bu ad uçot məlumatlarında görünəcək."
 
@@ -3769,12 +3918,17 @@ msgstr "Zaman qeydi"
 
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryGroupsList.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/referral/ReferralsList.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Title"
 msgstr "Başlıq"
 
-#: src/invoices/details/InvoiceDetails.tsx
+#: src/booking/deploy/FormPeriodsStep.tsx
+#: src/marketplace/offerings/update/integration/OfferingScheduler.tsx
 msgid "To"
 msgstr "Kimə"
 
@@ -3792,11 +3946,15 @@ msgstr "Hesabı silmək üçün, {support} üçün sorğu göndərin."
 #: src/invoices/list/InvoicesList.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/details/plan/OrderSummaryPlanRows.tsx
 #: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsList.tsx
 #: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 msgid "Total"
 msgstr "Ümumi"
@@ -3809,7 +3967,7 @@ msgstr "Ümumi dəyəri:"
 msgid "Total price"
 msgstr "Ümumi qiymət"
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
 msgid "Total storage"
 msgstr "Ümumi saxlama"
@@ -3822,41 +3980,45 @@ msgstr "UTC vaxt zonasından istifadə etməklə izlənilir, sizin brauzerinizin
 msgid "Try again"
 msgstr "Yenidən cəhd et"
 
+#: src/administration/agreements/UserAgreementsList.tsx
+#: src/administration/roles/RoleForm.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
-#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/offerings/update/options/OptionForm.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/ResourceOrderItems.tsx
-#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/OrdersFilter.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/orders/list/ResourceOrders.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/marketplace/robot-accounts/RobotAccountList.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
+#: src/openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/project/ProjectEventsFilter.tsx
-#: src/project/ProjectOrderItemsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
+#: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
 msgstr "Tipi"
 
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 msgid "URL"
 msgstr "URL (resursun vahid göstərici)"
@@ -3865,7 +4027,7 @@ msgstr "URL (resursun vahid göstərici)"
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
-#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/summary/ResourceMetadataDialog.tsx
 msgid "UUID"
 msgstr "UUID (universal unikal idenifikator)"
 
@@ -3978,17 +4140,21 @@ msgstr "Vahidin qiyməti"
 msgid "Unpaid"
 msgstr "Ödənilməmiş"
 
+#: src/administration/notifications/HookUpdateButton.tsx
+#: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
+#: src/broadcasts/BroadcastUpdateButton.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/integration/EditSchedulesDialog.tsx
-#: src/marketplace/offerings/update/overview/OverviewDialog.tsx
-#: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
-#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
+#: src/marketplace/offerings/update/overview/EditOverviewDialog.tsx
+#: src/marketplace/orders/list/OrderTypeCell.tsx
+#: src/marketplace/orders/list/OrderTypeFilter.tsx
+#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
-#: src/notifications/NotificationUpdateButton.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -4087,7 +4253,6 @@ msgstr "İstifadəçi yenilənə bilmədi"
 msgid "User dashboard"
 msgstr "İstifadəçi paneli"
 
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 msgid "User data"
 msgstr "İstifadəçi məlumatları"
@@ -4164,7 +4329,7 @@ msgstr "{user_link} istifadəçi layihə administratoru vəzifəsini {project_li
 msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
 msgstr "{user_link} istifadəçi layihə meneceri vəzifəsini {project_link} ünvanındakı {affected_user_link}-ə vermişdir."
 
-#: src/project/team/events.ts
+#: src/project/team/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "{user_link} istifadəçi vəzifəni {affected_user_link}-ə vermişdir."
 
@@ -4184,15 +4349,16 @@ msgstr "{user_link} istifadəçi {affected_user_link} layihə administratorunu {
 msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
 msgstr "{user_link} istifadəçi {affected_user_link} layihə menecerini {project_link}-ndən ləğv etmşdir."
 
-#: src/project/team/events.ts
+#: src/project/team/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "{user_link} istifadəçi {affected_user_link} ləğv etmşdir."
 
+#: src/administration/TokensList.tsx
+#: src/administration/service-desk/AtlassianSettings.tsx
 #: src/auth/SigninForm.tsx
 #: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/UsernameGroup.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
-#: src/marketplace/resources/details/ResourceAccessCard.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
@@ -4226,8 +4392,10 @@ msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscor
 msgstr "İstifadəçi adlarında(a-z) hərfləri, (0-9), rəqəmlər, (-) tirelər,  (_) alt xətt və (.) dövrlər ola bilər."
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/administration/routes.ts
 #: src/customer/routes.ts
-#: src/issues/routes.ts
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
@@ -4256,8 +4424,9 @@ msgstr "ƏDV daxil deyildir."
 msgid "VAT rate"
 msgstr "ƏDV dərəcəsi"
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
+#: src/vmware/deploy/steps.ts
 msgid "VM name"
 msgstr "VM (virtual maşın) adı"
 
@@ -4300,20 +4469,23 @@ msgstr "Virtual maşınlar sayı"
 
 #: src/openstack/openstack-instance/actions/AttachVolumeDialog.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
+#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
+#: src/openstack/openstack-volume/deploy/steps.ts
 msgid "Volume"
 msgstr "Həcm"
 
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
+#: src/openstack/openstack-volume/deploy/steps.ts
 msgid "Volume name"
 msgstr "Həcmin adı"
 
+#: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
+#: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
+#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 msgid "Volume size"
 msgstr "Həcmin ölçüsü"
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Volumes"
@@ -4340,9 +4512,9 @@ msgstr "Siz nəyə görə getmək istəyirsiniz? Bizə daha yaxşı olmağımız
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr "Mövcud e-poçtunuzu dəvətdən olan birisilə yeniləmək istərdinizmi?"
 
+#: src/administration/FeaturesList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/issues/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -4353,6 +4525,7 @@ msgstr "Mövcud e-poçtunuzu dəvətdən olan birisilə yeniləmək istərdinizm
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
 #: src/project/ProjectRemoveDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
@@ -4463,8 +4636,7 @@ msgstr "maddələr"
 msgid "of"
 msgstr "nin/nun"
 
-#: src/invitations/GroupInvitationMessage.tsx
-#: src/invitations/InvitationMessage.tsx
+#: src/invitations/formatInvitation.ts
 msgid "organization"
 msgstr "təşkilat"
 
@@ -4500,6 +4672,7 @@ msgstr "dəstək"
 msgid "token will not timeout"
 msgstr "işarə zamandan çıxmayacaq"
 
+#: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
@@ -4507,7 +4680,8 @@ msgid "users"
 msgstr "istifadəçilər"
 
 #: src/marketplace/resources/details/InstanceComponents.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
 #: src/resource/utils.tsx
 msgid "vCPU"
 msgstr "vCPU (virtual mərkəzi əməliyyat prosessoru)"
@@ -4596,14 +4770,10 @@ msgstr "{limit}-in {usage} istifadəsi"
 msgid "{usage} of {limit} used"
 msgstr "istifadə edilmiş{limit}-in {usage} istifadəsi"
 
-#: src/customer/dashboard/api.ts
-#: src/project/utils.ts
-#: src/providers/dashboard/api.ts
+#: src/dashboard/api.ts
 msgid "{value} at {date}"
 msgstr "{date} tarixdə {value} dəyəri"
 
-#: src/customer/dashboard/api.ts
-#: src/project/utils.ts
-#: src/providers/dashboard/api.ts
+#: src/dashboard/api.ts
 msgid "{value} at {date}, estimated"
 msgstr "{date} tarixdə {value} dəyəri, təxmin edilən"

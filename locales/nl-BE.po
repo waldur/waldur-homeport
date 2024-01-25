@@ -16,14 +16,3531 @@ msgstr "10 - Zeer positief"
 msgid "1 - Very negative"
 msgstr "1 - Zeer negatief"
 
+#: src/user/routes.ts
+msgid "API key"
+msgstr "API-sleutel"
+
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "API secret code:"
 msgstr "API geheime code:"
+
+#: src/navigation/header/UserToken.tsx
+#: src/user/api-key/UserEditTokenContainer.tsx
+#: src/user/routes.ts
+msgid "API token"
+msgstr "API-token"
 
 #: src/user/support/TokenLifetimeField.tsx
 msgid "API token lifetime"
 msgstr "Levensduur API token"
 
+#: src/about.tsx
+msgid "About"
+msgstr "Over"
+
 #: src/booking/AcceptAction.tsx
+#: src/booking/components/modal/BookingResourceDetailsDialog.tsx
 msgid "Accept"
 msgstr "Accepteren"
+
+#: src/invitations/InvitationButtons.tsx
+msgid "Accept invitation"
+msgstr "Uitnodiging accepteren"
+
+#: src/booking/BookingStateField.tsx
+#: src/booking/utils.ts
+#: src/invitations/InvitationsFilter.tsx
+msgid "Accepted"
+msgstr "Geaccepteerd"
+
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+msgid "Access"
+msgstr "Toegang"
+
+#: src/customer/cost-policies/CostPoliciesList.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
+#: src/resource/actions/AsyncActionItem.tsx
+msgid "Action"
+msgstr "Actie"
+
+#: src/booking/BookingsList.tsx
+#: src/customer/payments/PaymentsList.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
+#: src/invoices/details/InvoiceItemActions.tsx
+#: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-flows/ProjectCreateRequestsList.tsx
+#: src/marketplace/cart/ShoppingCart.tsx
+#: src/marketplace/offerings/actions/ActionsDropdown.tsx
+#: src/marketplace/offerings/list/OfferingActions.tsx
+#: src/marketplace/offerings/update/plans/PlanActions.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourceActions.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/marketplace/robot-accounts/RobotAccountList.tsx
+#: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-instance/InternalIpsList.tsx
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+#: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
+#: src/openstack/openstack-server-groups/ServerGroupsList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
+#: src/openstack/openstack-tenant/IpAddressList.tsx
+#: src/openstack/openstack-tenant/StaticRoutesTable.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/paypal/InvoiceActions.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+#: src/project/ProjectsListActions.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/resource/actions/ResourceActionComponent.tsx
+#: src/user/keys/KeysList.tsx
+#: src/user/support/UserTableDropDownActions.tsx
+msgid "Actions"
+msgstr "Acties"
+
+#: src/marketplace/offerings/actions/OfferingStateActions.tsx
+#: src/openstack/openstack-backup-schedule/actions/ActivateAction.tsx
+#: src/openstack/openstack-snapshot-schedule/actions/ActivateSnapshotScheduleAction.tsx
+#: src/user/support/UserActivateButton.tsx
+msgid "Activate"
+msgstr "Activeer"
+
+#: src/invitations/GroupInvitationsList.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
+#: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/user/support/UserFilter.tsx
+msgid "Active"
+msgstr "Actief"
+
+#: src/providers/dashboard/ProviderWidgets.tsx
+msgid "Active clients"
+msgstr "Actieve klanten"
+
+#: src/marketplace/resources/details/ActivityCard.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+msgid "Activity"
+msgstr "Activiteit"
+
+#: src/administration/providers/CreateProviderDialog.tsx
+#: src/issues/comments/IssueCommentsForm.tsx
+#: src/marketplace/deploy/DeployPage.tsx
+#: src/openstack/openstack-backup/actions/NetworksList.tsx
+#: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
+#: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
+#: src/project/team/AddProjectMemberDialog.tsx
+#: src/project/team/AddProjectUserDialog.tsx
+#: src/rancher/cluster/create/FormNodesStep.tsx
+msgid "Add"
+msgstr "Toevoegen"
+
+#: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
+#: src/issues/comments/IssueCommentsFormMainContainer.tsx
+msgid "Add comment"
+msgstr "Reactie toevoegen"
+
+#: src/marketplace/category/admin/GroupCreateButton.tsx
+msgid "Add group"
+msgstr "Groep toevoegen"
+
+#: src/marketplace/offerings/images/CreateImageButton.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+msgid "Add image"
+msgstr "Afbeelding toevoegen"
+
+#: src/marketplace/compare/ComparisonItemPlaceholder.tsx
+msgid "Add item"
+msgstr "Artikel toevoegen"
+
+#: src/openstack/openstack-tenant/StaticRoutesTable.tsx
+msgid "Add route"
+msgstr "Voeg route toe"
+
+#: src/marketplace/cart/ShoppingCartButton.tsx
+msgid "Add to cart"
+msgstr "In winkelwagen"
+
+#: src/marketplace/offerings/details/permissions/OfferingPermissionCreateButton.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
+#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/AddUserButton.tsx
+#: src/user/support/AddRemoteUserDialog.tsx
+#: src/user/support/UserTableActions.tsx
+msgid "Add user"
+msgstr "Gebruiker toevoegen"
+
+#: src/marketplace/details/DetailsPage.tsx
+msgid "Add {category}"
+msgstr "Voeg {category} toe"
+
+#: src/customer/team/CustomerUserAddButton.tsx
+#: src/customer/team/CustomerUserAddDialog.tsx
+msgid "Add {role}"
+msgstr "Voeg {role} toe"
+
+#: src/customer/create/WizardFormSecondPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
+msgid "Address"
+msgstr "Adres"
+
+#: src/administration/routes.ts
+#: src/navigation/sidebar/AdminMenu.tsx
+msgid "Administration"
+msgstr "Administratie"
+
+#: src/vmware/deploy/FormAdvancedOptionsStep.tsx
+#: src/vmware/deploy/steps.ts
+msgid "Advanced options"
+msgstr "Geavanceerde opties"
+
+#: src/customer/list/AccountingRunningField.tsx
+#: src/customer/list/ServiceProviderFilter.tsx
+#: src/marketplace/offerings/update/attributes/utils.tsx
+#: src/rancher/node/NodeRoleField.tsx
+msgid "All"
+msgstr "allemaal"
+
+#: src/marketplace/category/list/AllCategoriesPage.tsx
+msgid "All categories"
+msgstr "Alle categorieën"
+
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+msgid "Allocated"
+msgstr "Toegewezen"
+
+#: src/marketplace/offerings/PriceList.tsx
+#: src/marketplace/offerings/update/plans/PlanComponents.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
+msgid "Amount"
+msgstr "Aantal"
+
+#: src/marketplace/UserPluginOptionsForm.tsx
+msgid "Anonymized"
+msgstr "Geanonimiseerd"
+
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+msgid "Answers"
+msgstr "Antwoorden"
+
+#: src/openstack/openstack-security-groups/rule-editor/ProtocolField.tsx
+#: src/openstack/openstack-security-groups/utils.ts
+#: src/user/support/UserFilter.tsx
+msgid "Any"
+msgstr "Enig"
+
+#: src/rancher/cluster/tabs.ts
+msgid "Applications"
+msgstr "Applications"
+
+#: src/marketplace/category/filters/AttributeFilterListDialog.tsx
+msgid "Apply"
+msgstr "Toepassen"
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Approval"
+msgstr "Goedkeuring"
+
+#: src/invitations/UserPermissionRequestApproveButton.tsx
+#: src/marketplace-flows/ReviewApproveAction.tsx
+#: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/marketplace/orders/actions/ApproveByConsumerButton.tsx
+#: src/marketplace/orders/actions/ApproveByProviderButton.tsx
+msgid "Approve"
+msgstr "Fiatteren"
+
+#: src/marketplace-flows/RequestStateFilter.tsx
+#: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/user/UserPermissionRequestsStateFilter.tsx
+msgid "Approved"
+msgstr "Goedgekeurd"
+
+#: src/marketplace/offerings/actions/OfferingStateActions.tsx
+#: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
+msgid "Archive"
+msgstr "Archief"
+
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
+msgid "Archived"
+msgstr "Gearchiveerde"
+
+#: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
+msgid "Ask a question"
+msgstr "Stel een vraag"
+
+#: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
+msgid "Attached"
+msgstr "Gehecht"
+
+#: src/issues/attachments/IssueAttachmentsContainer.tsx
+#: src/issues/create/IssueCreateForm.tsx
+msgid "Attachments"
+msgstr "Bijlagen"
+
+#: src/marketplace/offerings/update/attributes/EditAttributeDialog.tsx
+msgid "Attribute"
+msgstr "Kenmerk"
+
+#: src/marketplace/offerings/import/CredentialsTab.tsx
+msgid "Authentication token"
+msgstr "Authenticatie token"
+
+#: src/broadcasts/BroadcastList.tsx
+msgid "Author"
+msgstr "Auteur"
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
+msgid "Auto apply"
+msgstr "Automatisch toepassen"
+
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+msgid "Available"
+msgstr "Beschikbaar"
+
+#: src/broadcasts/BroadcastFooter.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+#: src/error/InvalidObjectPage.tsx
+#: src/error/InvalidRoutePage.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
+msgid "Back"
+msgstr "Terug"
+
+#: src/auth/callbacks/AuthLoginFailed.tsx
+#: src/auth/callbacks/OauthLoginCompleted.tsx
+msgid "Back to login"
+msgstr "Terug naar inloggen"
+
+#: src/marketplace-flows/CustomerCreateExpandableRow.tsx
+msgid "Bank account number"
+msgstr "Bankrekeningnummer"
+
+#: src/invoices/routes.ts
+msgid "Billing"
+msgstr "Facturering"
+
+#: src/customer/create/CustomerCreateForm.tsx
+msgid "Billing details"
+msgstr "Factureringsgegevens"
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
+msgid "Book"
+msgstr "Reserveer"
+
+#: src/booking/marketplace.ts
+#: src/marketplace/resources/details/BookingMainComponent.tsx
+msgid "Booking"
+msgstr "Boeking"
+
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/invoices/list/MarkAsPaidDialog.tsx
+#: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
+#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
+msgid "Browse"
+msgstr "Bladeren"
+
+#: src/invitations/actions/create/BulkUpload.tsx
+msgid "Bulk upload"
+msgstr "Bulksgewijs uploaden"
+
+#: src/table/TableExportButton.tsx
+msgid "CSV"
+msgstr ".CSV"
+
+#: src/marketplace/offerings/details/GoogleCalendarLink.tsx
+msgid "Calendar"
+msgstr "Kalender"
+
+#: src/proposals/details/PublicCallDetailsHero.tsx
+#: src/proposals/update/CallUpdateHero.tsx
+msgid "Call"
+msgstr "Roepen"
+
+#: src/marketplace/utils.ts
+#: src/proposals/PublicCallsPage.tsx
+msgid "Calls"
+msgstr "Oproepen"
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
+msgid "Campaign name"
+msgstr "Naam campagne"
+
+#: src/marketplace/routes.ts
+msgid "Campaigns"
+msgstr "Campagnes"
+
+#: src/administration/roles/RoleForm.tsx
+#: src/booking/CancelAction.tsx
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
+#: src/invitations/GroupInvitationCancelButton.tsx
+#: src/invitations/GroupinvitationButtons.tsx
+#: src/invitations/actions/InvitationCancelButton.tsx
+#: src/issues/comments/IssueCommentsForm.tsx
+#: src/marketplace-flows/FlowCancelAction.tsx
+#: src/marketplace/orders/actions/CancelTerminationOrderButton.tsx
+#: src/marketplace/orders/details/CancelOrderButton.tsx
+#: src/modal/CloseDialogButton.tsx
+#: src/navigation/header/SearchToggle.tsx
+#: src/project/ProjectCreateForm.tsx
+#: src/user/support/UserEmailChangeDialog.tsx
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: src/administration/roles/PermissionOptions.tsx
+#: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+msgid "Cancel order"
+msgstr "Bestelling annuleren"
+
+#: src/invitations/InvitationsFilter.tsx
+#: src/invoices/list/InvoicesFilter.tsx
+#: src/marketplace-flows/RequestStateFilter.tsx
+#: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Canceled"
+msgstr "Geannuleerd"
+
+#: src/paypal/InvoicesFilter.tsx
+msgid "Cancelled"
+msgstr "Geannuleerd"
+
+#: src/marketplace/routes.ts
+#: src/reporting/dashboard/ReportingWidgets.tsx
+msgid "Capacity"
+msgstr "Capaciteit"
+
+#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/list/AllCategoriesPage.tsx
+#: src/marketplace/category/utils.ts
+#: src/marketplace/offerings/service-providers/ServiceProviderPageBar.tsx
+msgid "Categories"
+msgstr "Categorieën"
+
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/offerings/import/tabs.ts
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/update/attributes/AttributesSection.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/PublicResourcesFilter.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/user/resources/ResourcesFilter.tsx
+#: src/user/resources/ResourcesList.tsx
+msgid "Category"
+msgstr "categorie"
+
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Change"
+msgstr "Wijzig"
+
+#: src/user/support/EmailField.tsx
+msgid "Change email"
+msgstr "E-mailadres wijzigen"
+
+#: src/marketplace/resources/change-plan/ChangePlanAction.tsx
+msgid "Change plan"
+msgstr "Plan wijzigen"
+
+#: src/resource/state/constants.ts
+msgid "Changing password"
+msgstr "Wachtwoord wijzigen"
+
+#: src/marketplace/cart/CheckoutPage.tsx
+msgid "Checkout"
+msgstr "Kassa"
+
+#: src/marketplace/offerings/option/OfferingOptionsScriptEditor.tsx
+msgid "Choices"
+msgstr "Keuzes"
+
+#: src/marketplace/category/filters/CategorySectionsFilterForm.tsx
+msgid "Clear all"
+msgstr "Alles wissen"
+
+#: src/administration/providers/ProviderForm.tsx
+#: src/azure/provider/AzureForm.tsx
+msgid "Client ID"
+msgstr "Client id"
+
+#: src/administration/providers/ProviderForm.tsx
+#: src/azure/provider/AzureForm.tsx
+msgid "Client secret"
+msgstr "Client secret"
+
+#: src/marketplace/offerings/update/plans/ClonePlanButton.tsx
+msgid "Clone"
+msgstr "Kloon"
+
+#: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+#: src/broadcasts/RecipientsListDialog.tsx
+#: src/invitations/actions/create/FormButtons.tsx
+#: src/marketplace/details/plan/EstimateUsageComponentDialog.tsx
+#: src/marketplace/offerings/images/ImageDetailsDialog.tsx
+#: src/marketplace/referral/OfferingReferralsDialog.tsx
+#: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesDialog.tsx
+#: src/resource/summary/ResourceMetadataDialog.tsx
+#: src/resource/summary/ResourceSummaryModal.tsx
+#: src/user/UserPopover.tsx
+#: src/user/support/UserRemovalMessageDialog.tsx
+msgid "Close"
+msgstr "Sluit"
+
+#: src/issues/list/IssuesFilter.tsx
+msgid "Closed"
+msgstr "Gesloten"
+
+#: src/marketplace/deploy/steps/FormCloudStep.tsx
+msgid "Cloud"
+msgstr "WOLK"
+
+#: src/invitations/PermissionRequestActionDialog.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
+#: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
+#: src/issues/comments/IssueCommentsFormMainContainer.tsx
+#: src/issues/feedback/SupportFeedback.tsx
+#: src/issues/feedback/SupportFeedbackListExpandableRow.tsx
+#: src/marketplace-flows/ReviewDialog.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
+#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/user/UserPermissionRequestsList.tsx
+msgid "Comment"
+msgstr "Commentaar"
+
+#: src/issues/comments/IssueCommentsContainer.tsx
+msgid "Comments"
+msgstr "Opmerkingen"
+
+#: src/invitations/actions/create/SendingStatus.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Completed"
+msgstr "Volbracht"
+
+#: src/marketplace-checklist/ChecklistOverview.tsx
+msgid "Compliance"
+msgstr "Naleving"
+
+#: src/marketplace/offerings/PriceList.tsx
+msgid "Component"
+msgstr "Bestanddeel"
+
+#: src/openstack/openstack-tenant/tabs.ts
+#: src/quotas/constants.ts
+msgid "Compute"
+msgstr "Berekenen"
+
+#: src/rancher/template/TemplateDetail.tsx
+msgid "Configuration"
+msgstr "Configuratie"
+
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/openstack/openstack-instance/actions/update-internal-ips/UpdateInternalIpsSetAction.tsx
+msgid "Configure"
+msgstr "Configureren"
+
+#: src/administration/TokenDeleteButton.tsx
+#: src/administration/roles/RoleDeleteButton.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/broadcasts/BroadcastTemplateDeleteButton.tsx
+#: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/details/CustomerCallManagerPanel.tsx
+#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
+#: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/UserRemoveButton.tsx
+#: src/invitations/GroupInvitationCancelButton.tsx
+#: src/invoices/details/InvoiceItemDelete.tsx
+#: src/marketplace/cart/ShoppingCartButtonContainer.tsx
+#: src/marketplace/category/admin/CategoryDeleteButton.tsx
+#: src/marketplace/category/admin/GroupDeleteButton.tsx
+#: src/marketplace/offerings/images/DeleteImageButton.tsx
+#: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
+#: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
+#: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
+#: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
+#: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
+#: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
+#: src/project/team/UserRemoveButton.tsx
+#: src/rancher/cluster/create/FormNodesStep.tsx
+#: src/resource/actions/AsyncActionItem.tsx
+#: src/resource/actions/ResourceDeleteButton.tsx
+msgid "Confirmation"
+msgstr "Bevestiging"
+
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
+msgid "Contact"
+msgstr "Contact"
+
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
+#: src/notifications/NotificationForm.tsx
+msgid "Content"
+msgstr "Tevreden"
+
+#: src/invitations/actions/create/FormButtons.tsx
+#: src/marketplace/service-providers/CampaignFooter.tsx
+msgid "Continue"
+msgstr "Ga verder"
+
+#: src/navigation/header/UserToken.tsx
+msgid "Copy"
+msgstr "Kopieer"
+
+#: src/core/CopyToClipboard.tsx
+#: src/core/CopyToClipboardButton.tsx
+#: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
+#: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
+#: src/table/ExportDialog.tsx
+#: src/table/TableButtons.tsx
+#: src/table/TableExportButton.tsx
+msgid "Copy to clipboard"
+msgstr "Naar klembord kopiëren"
+
+#: src/customer/list/CustomerList.tsx
+#: src/invoices/list/InvoicesStatsList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/offerings/expandable/utils.ts
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+msgid "Cost"
+msgstr "Gebruikskosten"
+
+#: src/customer/create/CountryGroup.tsx
+#: src/customer/list/OrganizationDetails.tsx
+msgid "Country"
+msgstr "Land"
+
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+msgid "Coupon"
+msgstr "Coupon"
+
+#: src/administration/agreements/UserAgreementCreateButton.tsx
+#: src/broadcasts/BroadcastCreateButton.tsx
+#: src/broadcasts/BroadcastTemplateCreateButton.tsx
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
+#: src/freeipa/FreeIPAAccountCreate.tsx
+#: src/issues/create/IssueCreateDialog.tsx
+#: src/issues/list/IssueCreateButton.tsx
+#: src/marketplace/cart/ShoppingCartButton.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
+#: src/marketplace/offerings/update/components/AddComponentDialog.tsx
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
+#: src/marketplace/offerings/update/options/AddOptionDialog.tsx
+#: src/marketplace/offerings/update/plans/AddPlanDialog.tsx
+#: src/marketplace/orders/list/OrderTypeCell.tsx
+#: src/marketplace/orders/list/OrderTypeFilter.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
+#: src/marketplace/service-providers/CampaignCreateButton.tsx
+#: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
+#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
+#: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
+#: src/openstack/openstack-tenant/actions/CreateNetworkAction.tsx
+#: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.tsx
+#: src/openstack/openstack-tenant/actions/CreateServerGroupAction.tsx
+#: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
+#: src/rancher/catalog/CatalogCreateButton.tsx
+#: src/rancher/cluster/hpas/HPACreateButton.tsx
+#: src/user/hooks/HookDetailsDialog.tsx
+msgid "Create"
+msgstr "Scheppen"
+
+#: src/rancher/template/TemplateQuestions.tsx
+msgid "Create application"
+msgstr "Toepassing maken"
+
+#: src/broadcasts/BroadcastForm.tsx
+msgid "Create message"
+msgstr "Bericht aanmaken"
+
+#: src/administration/TokensList.tsx
+#: src/administration/notifications/HooksList.tsx
+#: src/booking/BookingsListExpandableRow.tsx
+#: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+#: src/invoices/list/InvoicesFilter.tsx
+#: src/issues/IssueSummary.tsx
+#: src/issues/feedback/SupportFeedbackList.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
+#: src/marketplace/offerings/images/OfferingImagesList.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/support/SharedProviderCustomers.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
+msgid "Created"
+msgstr "Geschapen"
+
+#: src/administration/agreements/UserAgreementsList.tsx
+#: src/broadcasts/BroadcastList.tsx
+#: src/invitations/GroupInvitationsList.tsx
+#: src/invitations/InvitationsList.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
+#: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/offerings/details/OfferingUsersTable.tsx
+#: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
+#: src/marketplace/orders/details/DetailsSection.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/ResourceOrders.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/service-providers/OfferingPermissionsList.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
+#: src/notifications/NotificationList.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/resource/support/SharedProviderResources.tsx
+#: src/user/UserOfferingList.tsx
+#: src/user/UserPermissionRequestsList.tsx
+#: src/user/resources/ResourcesList.tsx
+msgid "Created at"
+msgstr "Gemaakt op"
+
+#: src/booking/BookingsList.tsx
+#: src/invitations/GroupInvitationsList.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
+msgid "Created by"
+msgstr "Gemaakt door"
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Creation"
+msgstr "Creatie"
+
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
+msgid "Current plan"
+msgstr "Huidig plan"
+
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+msgid "Current price"
+msgstr "Huidige prijs"
+
+#: src/administration/roles/RoleForm.tsx
+msgid "Customer"
+msgstr "Klant"
+
+#: src/customer/team/utils.ts
+msgid "Customer support"
+msgstr "Klantenondersteuning"
+
+#: src/marketplace/routes.ts
+msgid "Customers"
+msgstr "Klanten"
+
+#: src/navigation/theme/ThemeSwitcher.tsx
+msgid "Dark theme"
+msgstr "Donker thema"
+
+#: src/administration/routes.ts
+#: src/customer/routes.ts
+#: src/issues/routes.ts
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/routes.ts
+#: src/marketplace/utils.ts
+#: src/project/routes.ts
+#: src/reporting/routes.ts
+#: src/user/routes.ts
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/customer/payments/PaymentsList.tsx
+#: src/dashboard/chart.ts
+#: src/invitations/actions/create/SendingStatus.tsx
+#: src/invoices/list/MarkAsPaidDialog.tsx
+#: src/issues/feedback/SupportFeedbackListFilter.tsx
+#: src/marketplace/resources/usage/utils.ts
+msgid "Date"
+msgstr "Datum"
+
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "Days"
+msgstr "Dagen"
+
+#: src/proposals/details/CallDetailsCard.tsx
+msgid "Deadline"
+msgstr "Termijn"
+
+#: src/user/support/utils.ts
+msgid "Default"
+msgstr "Verstek"
+
+#: src/administration/agreements/UserAgreementDeleteButton.tsx
+#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
+#: src/customer/payments/PaymentActions.tsx
+#: src/issues/comments/IssueCommentDeleteDialog.tsx
+#: src/issues/comments/IssueCommentItem.tsx
+#: src/marketplace/offerings/images/DeleteImageButton.tsx
+#: src/marketplace/offerings/list/DeleteOfferingButton.tsx
+#: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
+#: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
+#: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
+#: src/notifications/ManageCommonFooterDialog.tsx
+#: src/openstack/openstack-backup/actions/NetworksList.tsx
+#: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
+#: src/openstack/openstack-security-groups/rule-editor/ActionsField.tsx
+#: src/project/DeleteAction.tsx
+#: src/rancher/catalog/CatalogDeleteButton.tsx
+#: src/rancher/cluster/IngressActions.tsx
+#: src/rancher/cluster/ServiceActions.tsx
+#: src/rancher/cluster/WorkloadActions.tsx
+#: src/resource/actions/ResourceDeleteButton.tsx
+msgid "Delete"
+msgstr "verwijderen"
+
+#: src/user/support/UserDeleteAccount.tsx
+msgid "Delete account"
+msgstr "Account verwijderen"
+
+#: src/administration/roles/PermissionOptions.tsx
+#: src/project/ProjectDelete.tsx
+msgid "Delete project"
+msgstr "Project verwijderen"
+
+#: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+msgid "Deny"
+msgstr "Ontkennen"
+
+#: src/administration/roles/RolesList.tsx
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
+#: src/marketplace-flows/ProjectCreateExpandableRow.tsx
+#: src/marketplace-flows/ResourceCreateExpandableRow.tsx
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryGroupsList.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
+#: src/marketplace/details/OfferingTabs.tsx
+#: src/marketplace/details/plan/PlanSection.tsx
+#: src/marketplace/offerings/actions/RequestActionDialog.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/offerings/images/OfferingImagesList.tsx
+#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
+#: src/marketplace/offerings/update/options/OptionForm.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/marketplace/offerings/update/plans/PlanForm.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
+#: src/marketplace/resources/usage/utils.ts
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/notifications/NotificationList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+#: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
+#: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/project/ProjectDetails.tsx
+#: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/details/CallDescriptionCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
+#: src/rancher/ClusterProjectList.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
+#: src/rancher/template/CatalogTemplateList.tsx
+#: src/rancher/template/ClusterTemplateList.tsx
+#: src/resource/actions/base.ts
+#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/slurm/RequestLimitsChangeDialog.tsx
+#: src/user/support/UserEditForm.tsx
+msgid "Description"
+msgstr "Beschrijving"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/user/hooks/HooksList.tsx
+msgid "Destination"
+msgstr "Reisdoel"
+
+#: src/administration/providers/ProviderCard.tsx
+#: src/invoices/list/MonthOverview.tsx
+#: src/marketplace/details/plan/PlanDescriptionButton.tsx
+#: src/marketplace/orders/details/DetailsSection.tsx
+#: src/marketplace/referral/ReferralDetailsButton.tsx
+#: src/project/ProjectDetailsButton.tsx
+#: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
+#: src/resource/summary/ResourceSummaryButton.tsx
+#: src/resource/summary/ResourceSummaryModal.tsx
+#: src/user/UserDetailsButton.tsx
+#: src/user/UserPopover.tsx
+#: src/user/support/UserDetailsButton.tsx
+#: src/user/support/UserDetailsView.tsx
+#: src/vmware/tabs.ts
+msgid "Details"
+msgstr "Bijzonderheden"
+
+#: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
+msgid "Device"
+msgstr "Apparaat"
+
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+msgid "Disable"
+msgstr "Uitschakelen"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/user/hooks/HooksList.tsx
+#: src/user/support/UserFilter.tsx
+msgid "Disabled"
+msgstr "Invalide"
+
+#: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/user/support/UserEditForm.tsx
+msgid "Discard"
+msgstr "Afdanken"
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
+#: src/marketplace/service-providers/ProviderCampaignTypeFilter.tsx
+msgid "Discount"
+msgstr "Korting"
+
+#: src/marketplace/offerings/DisplayNameField.tsx
+msgid "Display name"
+msgstr "Weergavenaam"
+
+#: src/navigation/header/DocsLink.tsx
+msgid "Documentation"
+msgstr "Documentatie"
+
+#: src/proposals/details/CallDocumentsCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/documents/CallDocumentsSection.tsx
+msgid "Documents"
+msgstr " Documenten"
+
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/openstack/OpenStackForm.tsx
+#: src/openstack/marketplace.ts
+msgid "Domain name"
+msgstr "Domeinnaam"
+
+#: src/marketplace/details/plan/PlanDetailsDialog.tsx
+#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/OrderStateFilter.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/details/ResourceComponentsDialog.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/navigation/BackendHealthStatusDialog.tsx
+#: src/proposals/details/CallRoundsDialog.tsx
+#: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
+#: src/user/support/UserDetailsDialog.tsx
+msgid "Done"
+msgstr "KLAAR"
+
+#: src/invitations/actions/create/BulkUpload.tsx
+msgid "Download"
+msgstr "Download"
+
+#: src/marketplace-flows/RequestStateFilter.tsx
+#: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/paypal/InvoicesFilter.tsx
+msgid "Draft"
+msgstr "Concept"
+
+#: src/proposals/update/rounds/WizardFormFirstPage.tsx
+msgid "Duration"
+msgstr "Duur"
+
+#: src/administration/agreements/UserAgreementsEditButton.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/broadcasts/BroadcastTemplateUpdateButton.tsx
+#: src/customer/list/OrganizationEditButton.tsx
+#: src/customer/payment-profiles/PaymentProfileEditButton.tsx
+#: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/UserEditButton.tsx
+#: src/issues/comments/IssueCommentItem.tsx
+#: src/marketplace-flows/FlowEditAction.tsx
+#: src/marketplace/category/admin/CategoryEditButton.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/GroupEditButton.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/marketplace/deploy/DeployPage.tsx
+#: src/marketplace/offerings/details/OfferingDetails.tsx
+#: src/marketplace/offerings/list/EditOfferingButton.tsx
+#: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
+#: src/marketplace/offerings/update/attributes/EditAttributeButton.tsx
+#: src/marketplace/offerings/update/components/EditComponentButton.tsx
+#: src/marketplace/offerings/update/integration/EditScriptButton.tsx
+#: src/marketplace/offerings/update/options/EditOptionButton.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedButton.tsx
+#: src/marketplace/offerings/update/overview/EditOverviewButton.tsx
+#: src/marketplace/offerings/update/overview/OfferingLocationButton.tsx
+#: src/marketplace/offerings/update/overview/OfferingLogoButton.tsx
+#: src/marketplace/offerings/update/overview/SetAccessPolicyButton.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx
+#: src/marketplace/resources/actions/EditAction.tsx
+#: src/marketplace/robot-accounts/RobotAccountEditButton.tsx
+#: src/marketplace/service-providers/ProviderCampaignUpdateButton.tsx
+#: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
+#: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton.tsx
+#: src/notifications/NotificationUpdateButton.tsx
+#: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
+#: src/openstack/openstack-backup/actions/EditAction.tsx
+#: src/openstack/openstack-instance/actions/EditAction.tsx
+#: src/openstack/openstack-network/actions/EditNetworkAction.tsx
+#: src/openstack/openstack-security-groups/EditAction.tsx
+#: src/openstack/openstack-snapshot-schedule/actions/EditAction.tsx
+#: src/openstack/openstack-snapshot/EditAction.tsx
+#: src/openstack/openstack-subnet/EditSubnetAction.tsx
+#: src/openstack/openstack-tenant/actions/EditAction.tsx
+#: src/openstack/openstack-volume/actions/EditAction.tsx
+#: src/project/team/AddMemberButton.tsx
+#: src/proposals/call-management/CallEditButton.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/documents/EditDocumentsButton.tsx
+#: src/proposals/update/general/EditGeneralInfoButton.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
+#: src/proposals/update/review/EditReviewInfoButton.tsx
+#: src/proposals/update/reviewers/EditReviewersButton.tsx
+#: src/rancher/cluster/hpas/HPAUpdateButton.tsx
+#: src/slurm/EditAction.tsx
+#: src/user/support/IdentityProviderIndicator.tsx
+#: src/vmware/actions/EditAction.tsx
+msgid "Edit"
+msgstr "Bewerk"
+
+#: src/invoices/details/InvoiceItemUpdate.tsx
+msgid "Edit item"
+msgstr "Item bewerken"
+
+#: src/user/dashboard/UserWelcome.tsx
+msgid "Edit profile"
+msgstr "Profiel bewerken"
+
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
+msgid "Edit {title}"
+msgstr "Bewerken {title}"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/providers/ProviderUsersDialog.tsx
+#: src/administration/service-desk/AtlassianSettings.tsx
+#: src/broadcasts/RecipientsList.tsx
+#: src/customer/list/ExportAsEmailDialog.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/team/CustomerUsersList.tsx
+#: src/invitations/InvitationsList.tsx
+#: src/invitations/actions/create/EmailsListGroup.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/project/team/ProjectUsersList.tsx
+#: src/project/team/UserGroup.tsx
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/hooks/HookTypeField.tsx
+#: src/user/support/EmailField.tsx
+#: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserList.tsx
+msgid "Email"
+msgstr "E-mail"
+
+#: src/marketplace-flows/CustomerCreateExpandableRow.tsx
+#: src/user/hooks/HookForm.tsx
+msgid "Email address"
+msgstr "E-mailadres"
+
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
+msgid "Enable"
+msgstr "Inschakelen"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/administration/providers/ProviderForm.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/user/hooks/HookForm.tsx
+#: src/user/hooks/HooksList.tsx
+msgid "Enabled"
+msgstr "INGESCHAKELD"
+
+#: src/proposals/PublicCallsPage.tsx
+msgid "End"
+msgstr "Beëindig"
+
+#: src/booking/deploy/CustomRangeDatePicker.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectDetails.tsx
+#: src/project/ProjectUpdateForm.tsx
+#: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
+msgid "End date"
+msgstr "eind datum"
+
+#: src/booking/deploy/CustomRangeDatePicker.tsx
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "End time"
+msgstr "Eindtijd"
+
+#: src/administration/dashboard/AdministrationProfile.tsx
+#: src/marketplace/deploy/steps/FormCloudStep.tsx
+#: src/marketplace/resources/details/InfiniteList.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
+msgid "Error"
+msgstr "Error"
+
+#: src/events/ExpandableEventDetailsTable.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/resource/summary/ErrorMessageField.tsx
+msgid "Error message"
+msgstr "Foutmelding"
+
+#: src/marketplace/details/plan/UsageComponentRow.tsx
+msgid "Estimate"
+msgstr "Schatten"
+
+#: src/customer/list/CustomerList.tsx
+#: src/dashboard/api.ts
+#: src/invoices/list/EstimatedCost.tsx
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
+msgid "Estimated cost"
+msgstr "Geschatte kosten"
+
+#: src/issues/feedback/SupportFeedback.tsx
+#: src/issues/feedback/SupportFeedbackList.tsx
+#: src/issues/feedback/SupportFeedbackListFilter.tsx
+msgid "Evaluation"
+msgstr "Evaluatie"
+
+#: src/support/EventGroupFilter.tsx
+msgid "Event group"
+msgstr "Evenementengroep"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/offerings/expandable/OfferingEventsList.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/user/hooks/HooksList.tsx
+msgid "Events"
+msgstr "Gebeurtenissen"
+
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/OrderStateFilter.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+msgid "Executing"
+msgstr "Uitvoeren"
+
+#: src/invitations/InvitationsFilter.tsx
+msgid "Expired"
+msgstr "Vervallen"
+
+#: src/table/ExportDialog.tsx
+#: src/table/TableButtons.tsx
+#: src/table/TableExportButton.tsx
+msgid "Export"
+msgstr "Exporteren"
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
+msgid "FAQ"
+msgstr "FAQ"
+
+#: src/marketplace/offerings/details/PublicOfferingFacility.tsx
+msgid "Facility"
+msgstr "Faciliteit"
+
+#: src/navigation/header/FavoritePagesDropdown.tsx
+msgid "Favourites"
+msgstr "Favorieten"
+
+#: src/administration/FeaturesList.tsx
+#: src/administration/routes.ts
+#: src/marketplace/details/OfferingTabs.tsx
+msgid "Features"
+msgstr "Functies"
+
+#: src/issues/feedback/SupportFeedback.tsx
+#: src/issues/routes.ts
+msgid "Feedback"
+msgstr "Terugkoppeling"
+
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+msgid "Field"
+msgstr "Veld"
+
+#: src/issues/attachments/utils.ts
+msgid "File"
+msgstr "Bestand"
+
+#: src/marketplace/offerings/create/OverviewStep.tsx
+msgid "Filename"
+msgstr "Bestandsnaam"
+
+#: src/issues/attachments/utils.ts
+msgid "Files"
+msgstr "archief"
+
+#: src/marketplace/category/filters/FilterDropdownHeader.tsx
+#: src/table/Table.tsx
+msgid "Filter"
+msgstr "filter"
+
+#: src/marketplace/category/filters/FilteredBy.tsx
+msgid "Filtered by"
+msgstr "Gefilterd op"
+
+#: src/issues/workspace/IssueNavigationService.ts
+msgid "Financial"
+msgstr "Financieel"
+
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+msgid "First"
+msgstr "Eerste"
+
+#: src/administration/TokensList.tsx
+#: src/user/support/UserEditForm.tsx
+msgid "First name"
+msgstr "Voornaam"
+
+#: src/digitalocean/DropletResizeDialog.tsx
+msgid "Flexible"
+msgstr "Buigzaam"
+
+#: src/vmware/deploy/FormAdvancedOptionsStep.tsx
+msgid "Folder"
+msgstr "Map"
+
+#: src/table/ExportDialog.tsx
+msgid "Format"
+msgstr "Formatteren"
+
+#: src/quotas/QuotasTable.tsx
+msgid "Free"
+msgstr "Vrij"
+
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "From"
+msgstr "Uit"
+
+#: src/booking/deploy/CustomRangeDatePicker.tsx
+msgid "From date"
+msgstr "vanaf datum"
+
+#: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
+#: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
+#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
+#: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
+#: src/rancher/cluster/create/VolumeSizeGroup.tsx
+#: src/vmware/deploy/FormMemoryStep.tsx
+msgid "GB"
+msgstr "GB"
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
+msgid "General"
+msgstr "Algemeen"
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingGettingStarted.tsx
+#: src/marketplace/resources/details/GettingStartedCard.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+msgid "Getting started"
+msgstr "Slag"
+
+#: src/invitations/actions/create/FormButtons.tsx
+#: src/marketplace/category/list/HeroSection.tsx
+msgid "Go back"
+msgstr "Terug"
+
+#: src/navigation/cookies/CookiesConsent.tsx
+msgid "Got it!"
+msgstr "Snap het! "
+
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "Group"
+msgstr "Groep"
+
+#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorToggle.tsx
+msgid "Guest"
+msgstr "Gast"
+
+#: src/notifications/ManageCommonFooterDialog.tsx
+msgid "HTML content"
+msgstr "HTML-inhoud"
+
+#: src/navigation/header/UserDropdown.tsx
+msgid "Hello"
+msgstr "Hallo"
+
+#: src/form/SecretField.tsx
+msgid "Hide"
+msgstr "Verbergen"
+
+#: src/customer/list/OrganizationUpdate.tsx
+msgid "Homepage"
+msgstr "Homepage"
+
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "Hours"
+msgstr "uren"
+
+#: src/marketplace/orders/list/ResourceOrders.tsx
+msgid "ID"
+msgstr "legitimatiebewijs"
+
+#: src/navigation/cookies/CookiesConsent.tsx
+msgid "I agree"
+msgstr "Ik ben het ermee eens"
+
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/rancher/template/CatalogTemplateList.tsx
+msgid "Icon"
+msgstr "Icoon"
+
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/resources/details/openstack-instance/ResourceImageField.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/FormImageStep.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
+msgid "Image"
+msgstr "Beeld"
+
+#: src/marketplace/resources/import/ImportButton.tsx
+msgid "Import"
+msgstr "Importeren"
+
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/update/integration/IntegrationSection.tsx
+#: src/marketplace/offerings/update/integration/ScriptIntegrationSummary.tsx
+msgid "Integration"
+msgstr "integratie"
+
+#: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/customer/payments/PaymentsList.tsx
+#: src/invoices/details/BillingDetails.tsx
+#: src/invoices/routes.ts
+msgid "Invoice"
+msgstr "Factuur"
+
+#: src/invoices/list/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+msgid "Invoice number"
+msgstr "Factuurnummer"
+
+#: src/issues/feedback/SupportFeedbackList.tsx
+#: src/marketplace/orders/details/DetailsSection.tsx
+msgid "Issue"
+msgstr "Uitgiftedatum"
+
+#: src/customer/dashboard/CustomerActions.tsx
+#: src/customer/routes.ts
+#: src/issues/list/IssuesList.tsx
+#: src/issues/routes.ts
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/navigation/IssuesLink.tsx
+#: src/navigation/header/QuickIssueDrawerToggle.tsx
+#: src/project/ProjectActions.tsx
+#: src/project/routes.ts
+#: src/user/UserActions.tsx
+#: src/user/routes.ts
+msgid "Issues"
+msgstr "Kwesties"
+
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceDetails.tsx
+#: src/marketplace/cart/ShoppingCart.tsx
+msgid "Item"
+msgstr "Item "
+
+#: src/slurm/details/AllocationJobsTable.tsx
+#: src/slurm/details/AllocationMainComponent.tsx
+msgid "Jobs"
+msgstr "Banen"
+
+#: src/issues/list/IssuesList.tsx
+#: src/marketplace/offerings/update/integration/EnvironmentVariablePanel.tsx
+#: src/marketplace/resources/KeyValueTable.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+msgid "Key"
+msgstr "sleutel"
+
+#: src/administration/providers/ProviderForm.tsx
+msgid "Label"
+msgstr "Label"
+
+#: src/rancher/node/RancherNodeSummary.tsx
+msgid "Labels"
+msgstr "Etiketten"
+
+#: src/navigation/header/LanguageSelectorDropdown.tsx
+msgid "Language"
+msgstr "Taal"
+
+#: src/administration/TokensList.tsx
+#: src/user/support/UserEditForm.tsx
+msgid "Last name"
+msgstr "Achternaam"
+
+#: src/UserAgreementComponent.tsx
+msgid "Last update"
+msgstr "Laatste update"
+
+#: src/auth/HeroButton.tsx
+#: src/navigation/cookies/CookiesConsent.tsx
+msgid "Learn more"
+msgstr "Meer informatie"
+
+#: src/dashboard/chart.ts
+#: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/orders/details/LimitsSection.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+msgid "Limit"
+msgstr "Limiet"
+
+#: src/issues/IssueSummary.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+msgid "Link"
+msgstr "Verbinden"
+
+#: src/marketplace/deploy/steps/FormCloudStep.tsx
+#: src/marketplace/resources/details/InfiniteList.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
+msgid "Load more"
+msgstr "Meer laden"
+
+#: src/azure/AzureResourceSummary.tsx
+#: src/azure/sql/AzureSQLServerForm.tsx
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+msgid "Location"
+msgstr "Plaats"
+
+#: src/navigation/AnonymousHeader.tsx
+msgid "Log in"
+msgstr "Inloggen"
+
+#: src/navigation/header/UserDropdown.tsx
+msgid "Log out"
+msgstr "Uitloggen"
+
+#: src/administration/service-desk/SmaxSettings.tsx
+#: src/auth/SigninForm.tsx
+#: src/auth/saml2/AuthSaml2Dialog.tsx
+#: src/navigation/sidebar/UnifiedSidebar.tsx
+msgid "Login"
+msgstr "Inloggen"
+
+#: src/customer/create/WizardFormFirstPage.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+msgid "Logo"
+msgstr "Logo"
+
+#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+msgid "Manage users"
+msgstr "Gebruikers beheren"
+
+#: src/marketplace/offerings/update/integration/OfferingAttributes.tsx
+msgid "Management"
+msgstr "Beheer"
+
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
+msgid "Manager"
+msgstr "Manager"
+
+#: src/customer/team/CustomerUsersList.tsx
+#: src/navigation/workspace/context-selector/OrganizationSummary.tsx
+#: src/project/team/ProjectUsersList.tsx
+msgid "Member"
+msgstr "Lid"
+
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/navigation/workspace/context-selector/OrganizationSummary.tsx
+msgid "Members"
+msgstr "leden"
+
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
+#: src/events/BaseEventsList.tsx
+#: src/invitations/InvitationExpandableRow.tsx
+#: src/user/api-key/AuthenticationEvents.tsx
+msgid "Message"
+msgstr "Bericht"
+
+#: src/resource/summary/ResourceSummaryBase.tsx
+msgid "Metadata"
+msgstr "Metagegevens"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/user/hooks/HooksList.tsx
+msgid "Method"
+msgstr "Methode"
+
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+msgid "Mixed"
+msgstr "Gemengd"
+
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+msgid "Modified"
+msgstr "Gemodificeerd"
+
+#: src/marketplace/resources/details/InstanceMainComponent.tsx
+#: src/marketplace/resources/details/MonitoringCharts.tsx
+msgid "Monitoring"
+msgstr "Monitoring"
+
+#: src/providers/support/FlowMapFilter.tsx
+msgid "Month"
+msgstr "Maand"
+
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "Monthly"
+msgstr "Maandelijks"
+
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "Months"
+msgstr "Maanden"
+
+#: src/marketplace/category/list/CategoriesBar.tsx
+msgid "More"
+msgstr "Meer"
+
+#: src/table/TableMoreActions.tsx
+msgid "More actions"
+msgstr "Meer acties"
+
+#: src/invoices/events/InvoiceEventItem.tsx
+msgid "More info"
+msgstr "Meer info"
+
+#: src/marketplace/resources/actions/MoveResourceAction.tsx
+#: src/marketplace/resources/mass-actions/MultiMoveAction.tsx
+msgid "Move"
+msgstr "Bewegen"
+
+#: src/marketplace/routes.ts
+msgid "My orders"
+msgstr "Mijn bestellingen"
+
+#: src/marketplace-checklist/AnswersTable.tsx
+msgid "N/A"
+msgstr "N.V.T"
+
+#: src/administration/roles/RoleForm.tsx
+#: src/administration/roles/RolesList.tsx
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/booking/BookingsList.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
+#: src/broadcasts/BroadcastTemplateList.tsx
+#: src/customer/create/WizardFormFirstPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/list/SupportCustomerList.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileDetails.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/invoices/details/InvoiceItemCompensationDialog.tsx
+#: src/invoices/details/ResourceRow.tsx
+#: src/marketplace-flows/CustomerCreateExpandableRow.tsx
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
+#: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/details/plan/PlanSection.tsx
+#: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/details/OfferingUsersTable.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/offerings/images/OfferingImagesList.tsx
+#: src/marketplace/offerings/import/SelectCategoryTab.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/marketplace/offerings/update/plans/PlanForm.tsx
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
+#: src/marketplace/orders/details/LimitsSection.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/marketplace/resources/change-plan/utils.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-instance/actions/EditDialog.tsx
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+#: src/openstack/openstack-server-groups/ServerGroupsList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
+#: src/openstack/openstack-tenant/TenantFlavorsList.tsx
+#: src/openstack/openstack-tenant/TenantImagesList.tsx
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
+#: src/openstack/openstack-tenant/TenantRoutersList.tsx
+#: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
+#: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/project/ProjectDetails.tsx
+#: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
+#: src/rancher/ClusterProjectList.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
+#: src/rancher/template/CatalogTemplateList.tsx
+#: src/rancher/template/ClusterTemplateList.tsx
+#: src/resource/actions/base.ts
+#: src/resource/support/SharedProviderResources.tsx
+#: src/slurm/details/AllocationJobsTable.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/resources/ResourcesList.tsx
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
+msgid "Name"
+msgstr "Naam"
+
+#: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
+#: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
+#: src/quotas/constants.ts
+#: src/rancher/cluster/create/FormNetworkStep.tsx
+#: src/rancher/cluster/create/steps.ts
+#: src/vmware/PortsList.tsx
+#: src/vmware/VMwarePortSummary.tsx
+#: src/vmware/actions/CreatePortDialog.tsx
+msgid "Network"
+msgstr "Netwerk"
+
+#: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
+#: src/openstack/openstack-tenant/tabs.ts
+msgid "Networks"
+msgstr "Netwerken"
+
+#: src/user/support/EmailChangeForm.tsx
+msgid "New email address"
+msgstr "Nieuw e-mailadres"
+
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+msgid "New price"
+msgstr "Nieuwe prijs"
+
+#: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
+msgid "New project"
+msgstr "Nieuw project"
+
+#: src/customer/create/CustomerCreateForm.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
+#: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
+msgid "Next"
+msgstr "Volgend"
+
+#: src/administration/FeaturesList.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/ServiceProviderFilter.tsx
+#: src/marketplace-checklist/AnswerGroup.tsx
+#: src/marketplace-checklist/AnswersTable.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/category/filters/FilteredBy.tsx
+#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
+#: src/marketplace/offerings/update/attributes/utils.tsx
+#: src/modal/ConfirmationDialog.tsx
+#: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
+#: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/resource/summary/ScheduleSummary.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
+msgid "No"
+msgstr "NEE"
+
+#: src/administration/roles/PermissionField.tsx
+msgid "No access"
+msgstr "Geen toegang"
+
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+msgid "No end date"
+msgstr "Geen eind datum"
+
+#: src/navigation/header/project-selector/ProjectsList.tsx
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
+msgid "No resource"
+msgstr "Geen bron"
+
+#: src/openstack/openstack-security-groups/rule-editor/RemoteGroupField.tsx
+msgid "None"
+msgstr "Geen"
+
+#: src/administration/providers/ProviderCard.tsx
+msgid "Not configured"
+msgstr "niet geconfigureerd"
+
+#: src/navigation/header/UserDropdown.tsx
+msgid "Not signed in"
+msgstr "Niet aangemeld"
+
+#: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+#: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
+msgid "Nothing to see here"
+msgstr "Niets te zien hier"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/routes.ts
+#: src/user/hooks/HooksList.tsx
+#: src/user/routes.ts
+msgid "Notifications"
+msgstr "Meldingen"
+
+#: src/administration/providers/ProviderDetailsDialog.tsx
+#: src/administration/providers/ProviderUsersDialog.tsx
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
+msgid "OK"
+msgstr "OK"
+
+#: src/auth/LocalLogin.tsx
+msgid "OR"
+msgstr "of"
+
+#: src/events/TypeListDialog.tsx
+#: src/marketplace/details/plan/PlanDescription.tsx
+#: src/marketplace/offerings/actions/RequestActionDialog.tsx
+#: src/marketplace/orders/TermsOfServiceDialog.tsx
+#: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/marketplace/resources/report/ShowReportDialog.tsx
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/slurm/RequestLimitsChangeDialog.tsx
+msgid "Ok"
+msgstr "OK"
+
+#: src/marketplace/offerings/update/components/ComponentAccountingTypeField.tsx
+msgid "One-time"
+msgstr "Eenmalige"
+
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "One time"
+msgstr "Eenmaal"
+
+#: src/events/ExpandableEventDetailsTable.tsx
+#: src/issues/list/IssuesFilter.tsx
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/proposals/utils.ts
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+msgid "Open"
+msgstr "Openen"
+
+#: src/rancher/cluster/create/FormOptionalServicesStep.tsx
+#: src/rancher/cluster/create/steps.ts
+msgid "Optional"
+msgstr "Facultatief"
+
+#: src/administration/roles/PermissionOptions.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
+msgid "Order"
+msgstr "Bestelling"
+
+#: src/marketplace/cart/ShoppingCartSidebar.tsx
+msgid "Order Summary"
+msgstr "Overzicht van de bestelling"
+
+#: src/marketplace/resources/details/ResourceOrdersLink.tsx
+msgid "Order history"
+msgstr "Bestelgeschiedenis"
+
+#: src/marketplace/cart/ShoppingCartItemUpdate.tsx
+#: src/marketplace/details/OfferingDetails.tsx
+msgid "Order summary"
+msgstr "Overzicht van de bestelling"
+
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/routes.ts
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
+msgid "Orders"
+msgstr "Bestellingen"
+
+#: src/booking/BookingsList.tsx
+#: src/customer/list/CustomerList.tsx
+#: src/customer/list/SupportCustomerList.tsx
+#: src/customer/routes.ts
+#: src/events/ExpandableEventDetailsTable.tsx
+#: src/invitations/actions/UserDetailsGroup.tsx
+#: src/issues/IssueSummary.tsx
+#: src/issues/create/IssueHeader.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/marketplace-checklist/ChecklistOverview.tsx
+#: src/marketplace-flows/FlowExpandableRow.tsx
+#: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace/details/CustomerCreateGroup.tsx
+#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
+#: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/marketplace/offerings/import/tabs.ts
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/orders/list/OrdersFilter.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
+#: src/navigation/sidebar/ManagementMenu.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/proposals/PublicCallsPage.tsx
+#: src/resource/support/SharedProviderCustomers.tsx
+#: src/resource/support/SharedProviderResources.tsx
+#: src/user/UserPermissionRequestsList.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/affiliations/ProjectsListFilter.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
+#: src/user/resources/ResourcesFilter.tsx
+#: src/user/resources/ResourcesList.tsx
+#: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserFilter.tsx
+#: src/user/support/UserList.tsx
+msgid "Organization"
+msgstr "Organisatie"
+
+#: src/customer/details/CustomerDetailsPanel.tsx
+msgid "Organization details"
+msgstr "Details van de organisatie"
+
+#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
+#: src/broadcasts/BroadcastExpandableRow.tsx
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/RecipientsList.tsx
+#: src/customer/list/CustomerList.tsx
+#: src/customer/list/SupportCustomerList.tsx
+#: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/marketplace/routes.ts
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/resource/support/SharedProviderTabs.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
+#: src/user/routes.ts
+#: src/user/support/UserDetailsView.tsx
+msgid "Organizations"
+msgstr "Organisaties"
+
+#: src/invoices/growth/utils.ts
+msgid "Others"
+msgstr "Anderen"
+
+#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/create/OverviewSummary.tsx
+#: src/marketplace/offerings/details/PageOverview.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+msgid "Overview"
+msgstr "overzicht"
+
+#: src/customer/team/CustomerUsersList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
+msgid "Owner"
+msgstr "Owner"
+
+#: src/table/TableExportButton.tsx
+msgid "PDF"
+msgstr "PDF"
+
+#: src/invoices/growth/utils.ts
+#: src/invoices/list/InvoicesFilter.tsx
+#: src/paypal/InvoicesFilter.tsx
+msgid "Paid"
+msgstr "uitgekeerd"
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+#: src/administration/service-desk/SmaxSettings.tsx
+#: src/auth/SigninForm.tsx
+#: src/azure/sql/AzureSQLServerSummary.tsx
+#: src/openstack/OpenStackForm.tsx
+#: src/openstack/OpenStackTenantForm.tsx
+#: src/openstack/marketplace.ts
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/vmware/VMwareForm.tsx
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: src/marketplace/offerings/actions/OfferingStateActions.tsx
+msgid "Pause"
+msgstr "PAUZEREN"
+
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
+msgid "Paused"
+msgstr "Gepauzeerd"
+
+#: src/customer/routes.ts
+msgid "Payments"
+msgstr "Betalingen"
+
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+#: src/invitations/InvitationsFilter.tsx
+#: src/invoices/list/InvoicesFilter.tsx
+#: src/marketplace-flows/RequestStateFilter.tsx
+#: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
+#: src/user/UserPermissionRequestsStateFilter.tsx
+msgid "Pending"
+msgstr "In behandeling"
+
+#: src/booking/BookingCheckoutSummary.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
+msgid "Period"
+msgstr "Periode"
+
+#: src/digitalocean/DropletResizeDialog.tsx
+msgid "Permanent"
+msgstr "Bestendig"
+
+#: src/administration/roles/RoleForm.tsx
+msgid "Permissions"
+msgstr "Machtigingen"
+
+#: src/administration/notifications/HooksList.tsx
+msgid "Person"
+msgstr "Persoon"
+
+#: src/invoices/details/CustomerDetails.tsx
+msgid "Phone"
+msgstr "Telefoon"
+
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+#: src/marketplace-flows/CustomerCreateExpandableRow.tsx
+#: src/user/support/UserEditForm.tsx
+#: src/user/support/UserList.tsx
+msgid "Phone number"
+msgstr "Telefoonnummer"
+
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PlanUsageList.tsx
+msgid "Plans"
+msgstr "Plannen"
+
+#: src/openstack/openstack-server-groups/ServerGroupsList.tsx
+#: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
+#: src/project/utils.ts
+msgid "Policy"
+msgstr "Beleid"
+
+#: src/customer/create/WizardFormSecondPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/marketplace-flows/CustomerCreateExpandableRow.tsx
+msgid "Postal code"
+msgstr "Postcode"
+
+#: src/form/MarkdownField.tsx
+#: src/marketplace/offerings/list/PreviewButton.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
+#: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
+msgid "Preview"
+msgstr "Voorbeeld"
+
+#: src/customer/create/WizardForm.tsx
+#: src/form/WizardForm.tsx
+#: src/marketplace/offerings/service-providers/shared/grid/PrevPage.tsx
+msgid "Previous"
+msgstr "Vorig"
+
+#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/details/ResourceRow.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/marketplace/offerings/PriceList.tsx
+#: src/marketplace/offerings/update/plans/PlanComponents.tsx
+#: src/marketplace/resources/change-plan/utils.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+msgid "Price"
+msgstr "Prijs"
+
+#: src/marketplace/common/BillingPeriod.tsx
+#: src/marketplace/common/utils.ts
+msgid "Price per hour"
+msgstr "Prijs per uur"
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Pricing"
+msgstr "Prijzen"
+
+#: src/issues/IssueSummary.tsx
+msgid "Priority"
+msgstr "Voorrang"
+
+#: src/about.tsx
+msgid "Privacy Policy"
+msgstr "Privacy voorwaarden"
+
+#: src/about.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
+#: src/navigation/FooterLinks.tsx
+msgid "Privacy policy"
+msgstr "Privacy voorwaarden"
+
+#: src/user/support/AvatarField.tsx
+msgid "Profile picture"
+msgstr "Profielfoto"
+
+#: src/user/support/UserEditFormContainer.tsx
+msgid "Profile settings"
+msgstr "Profielinstellingen"
+
+#: src/marketplace/deploy/DeployPageSidebar.tsx
+msgid "Progress"
+msgstr "Vooruitgang"
+
+#: src/administration/roles/PermissionOptions.tsx
+#: src/administration/roles/RoleForm.tsx
+#: src/booking/BookingsList.tsx
+#: src/booking/BookingsListExpandableRow.tsx
+#: src/booking/deploy/steps.ts
+#: src/customer/cost-policies/CostPoliciesList.tsx
+#: src/customer/team/OrganizationProjectSelectField.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
+#: src/invitations/actions/ProjectGroup.tsx
+#: src/issues/IssueSummary.tsx
+#: src/issues/create/IssueHeader.tsx
+#: src/issues/create/IssueQuickCreate.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/marketplace-checklist/CustomerChecklistOverview.tsx
+#: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/deploy/steps/FormProjectStep.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/details/ProjectCreateGroup.tsx
+#: src/marketplace/details/ProjectField.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
+#: src/navigation/sidebar/ManagementMenu.tsx
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
+#: src/openstack/deploy/steps.ts
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/steps.ts
+#: src/project/routes.ts
+#: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/create/steps.ts
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
+#: src/slurm/deploy/steps.ts
+#: src/support/deploy-steps.ts
+#: src/user/UserPermissionRequestsList.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
+#: src/user/resources/ResourcesFilter.tsx
+#: src/user/resources/ResourcesList.tsx
+#: src/vmware/deploy/steps.ts
+msgid "Project"
+msgstr "Project"
+
+#: src/booking/BookingsListExpandableRow.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectUpdateForm.tsx
+msgid "Project description"
+msgstr "Beschrijving van het project"
+
+#: src/project/ProjectDetailsDialog.tsx
+msgid "Project details"
+msgstr "Details van het project"
+
+#: src/customer/team/ProjectsListGroup.tsx
+#: src/marketplace-flows/ProjectCreateExpandableRow.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/project/ProjectNameField.tsx
+msgid "Project name"
+msgstr "Naam van het project"
+
+#: src/project/ProjectManage.tsx
+msgid "Project settings"
+msgstr "Projectinstellingen"
+
+#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
+#: src/customer/routes.ts
+#: src/marketplace/routes.ts
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
+#: src/project/ProjectsList.tsx
+#: src/rancher/cluster/tabs.ts
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
+#: src/user/routes.ts
+#: src/user/support/UserDetailsView.tsx
+msgid "Projects"
+msgstr "Projecten"
+
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceItemUpdateDialog.tsx
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+#: src/invoices/details/ResourceRow.tsx
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+msgid "Quantity"
+msgstr "Hoeveelheid"
+
+#: src/marketplace-checklist/AnswersTable.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+msgid "Question"
+msgstr "Vraag"
+
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+msgid "Rating"
+msgstr "Rating"
+
+#: src/customer/details/CustomerRemovePanel.tsx
+#: src/user/support/actions.ts
+msgid "Reason"
+msgstr "Reden"
+
+#: src/broadcasts/RecipientsList.tsx
+msgid "Recipient"
+msgstr "Ontvanger"
+
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+msgid "Recommended"
+msgstr "Aanbevolen"
+
+#: src/proposals/details/CallDetailsCard.tsx
+msgid "Reference"
+msgstr "Referentie"
+
+#: src/marketplace/orders/actions/OrderRefreshButton.tsx
+#: src/marketplace/resources/details/RefreshButton.tsx
+#: src/navigation/BackendHealthStatusDialog.tsx
+msgid "Refresh"
+msgstr "Verversen"
+
+#: src/digitalocean/DigitalOceanDropletSummary.tsx
+#: src/digitalocean/digitalocean-droplet-config.ts
+msgid "Region"
+msgstr "Regio"
+
+#: src/booking/CancelAction.tsx
+#: src/invitations/UserPermissionRequestRejectButton.tsx
+#: src/marketplace-flows/ReviewRejectAction.tsx
+#: src/marketplace/orders/actions/RejectByConsumerButton.tsx
+#: src/marketplace/orders/actions/RejectByProviderButton.tsx
+msgid "Reject"
+msgstr "Afkeuren"
+
+#: src/booking/BookingStateField.tsx
+#: src/booking/utils.ts
+#: src/invitations/InvitationsFilter.tsx
+#: src/marketplace-flows/RequestStateFilter.tsx
+#: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/user/UserPermissionRequestsStateFilter.tsx
+msgid "Rejected"
+msgstr "Afgekeurd"
+
+#: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+msgid "Remaining"
+msgstr "Overig"
+
+#: src/administration/TokenDeleteButton.tsx
+#: src/administration/notifications/HookRemoveButton.tsx
+#: src/administration/roles/RoleDeleteButton.tsx
+#: src/broadcasts/BroadcastTemplateDeleteButton.tsx
+#: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/team/UserRemoveButton.tsx
+#: src/form/DateField.tsx
+#: src/invoices/details/InvoiceItemDelete.tsx
+#: src/marketplace/cart/ShoppingCartItem.tsx
+#: src/marketplace/category/admin/CategoryDeleteButton.tsx
+#: src/marketplace/category/admin/GroupDeleteButton.tsx
+#: src/marketplace/offerings/RemoveButton.tsx
+#: src/marketplace/offerings/update/ImageUploadField.tsx
+#: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+#: src/openstack/openstack-tenant/IpAddressList.tsx
+#: src/openstack/openstack-tenant/StaticRoutesTable.tsx
+#: src/project/team/UserRemoveButton.tsx
+#: src/user/hooks/HookRemoveButton.tsx
+#: src/user/keys/KeyRemoveButton.tsx
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: src/marketplace/resources/report/SubmitReportDialog.tsx
+msgid "Report"
+msgstr "Rapport"
+
+#: src/navigation/sidebar/ReportingMenu.tsx
+#: src/reporting/routes.ts
+msgid "Reporting"
+msgstr "Berichtgeving"
+
+#: src/i18n/constants.ts
+#: src/marketplace/cart/ForwardButton.tsx
+msgid "Request"
+msgstr "Aanvragen"
+
+#: src/user/support/EmailField.tsx
+msgid "Request change"
+msgstr "Wijziging aanvragen"
+
+#: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
+#: src/support/SupportDetailsContainer.tsx
+msgid "Request details"
+msgstr "Details aanvragen"
+
+#: src/invitations/InvitationsFilter.tsx
+msgid "Requested"
+msgstr "Aangevraagd"
+
+#: src/marketplace-flows/utils.tsx
+msgid "Requested at"
+msgstr "Aangevraagd bij"
+
+#: src/marketplace-flows/utils.tsx
+msgid "Requested by"
+msgstr "Aangevraagd door"
+
+#: src/customer/routes.ts
+msgid "Requests"
+msgstr "Verzoeken"
+
+#: src/marketplace/offerings/update/options/OptionForm.tsx
+msgid "Required"
+msgstr "Vereist"
+
+#: src/invitations/actions/InvitationSendButton.tsx
+msgid "Resend"
+msgstr "Verzenden"
+
+#: src/notifications/NotificationForm.tsx
+#: src/vmware/actions/ResetAction.tsx
+msgid "Reset"
+msgstr "Terugstellen"
+
+#: src/issues/list/IssuesFilter.tsx
+msgid "Resolved"
+msgstr "Vastbesloten"
+
+#: src/administration/roles/PermissionOptions.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
+#: src/issues/create/IssueHeader.tsx
+#: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/resources/details/ResourceDetailsView.tsx
+#: src/marketplace/resources/lexis/LexisLinkList.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
+#: src/navigation/header/project-selector/ProjectsList.tsx
+#: src/navigation/workspace/context-selector/ProjectsPanel.tsx
+msgid "Resource"
+msgstr "Hulpbron"
+
+#: src/azure/vm/actions/RestartAction.tsx
+#: src/openstack/openstack-instance/actions/RestartAction.tsx
+msgid "Restart"
+msgstr "Herstarten"
+
+#: src/openstack/openstack-backup/actions/RestoreAction.tsx
+#: src/openstack/openstack-snapshot/RestoreSnapshotAction.tsx
+msgid "Restore"
+msgstr "Terugzetten"
+
+#: src/auth/PermissionLayout.tsx
+msgid "Restricted"
+msgstr "Beperkt"
+
+#: src/LoadingScreen.tsx
+#: src/navigation/SearchResultsDropdown.tsx
+msgid "Retry"
+msgstr "Opnieuw"
+
+#: src/customer/routes.ts
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingReviews.tsx
+msgid "Reviews"
+msgstr "Beoordelingen"
+
+#: src/customer/team/ProjectsListGroup.tsx
+#: src/invitations/GroupInvitationsList.tsx
+#: src/invitations/InvitationsList.tsx
+#: src/invitations/actions/RoleGroup.tsx
+#: src/invitations/actions/create/EmailsListGroup.tsx
+#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/rancher/cluster/create/NodeRoleGroup.tsx
+#: src/user/UserPermissionRequestsList.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/PermissionDetails.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
+#: src/user/support/UserFilter.tsx
+msgid "Role"
+msgstr "Rol"
+
+#: src/rancher/node/ClusterNodesList.tsx
+#: src/rancher/node/RancherNodeSummary.tsx
+msgid "Roles"
+msgstr "Rollen"
+
+#: src/openstack/openstack-security-groups/tabs.ts
+msgid "Rules"
+msgstr "Reglement"
+
+#: src/administration/FeaturesList.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
+#: src/administration/agreements/UserAgreementsForm.tsx
+#: src/administration/providers/UpdateProviderDialog.tsx
+#: src/administration/roles/RoleForm.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
+#: src/customer/organization-groups/utils.ts
+#: src/customer/team/CustomerUserAddDialog.tsx
+#: src/customer/team/EditTeamMemberDialog.tsx
+#: src/invoices/growth/utils.ts
+#: src/map/SetLocationDialog.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
+#: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
+#: src/marketplace/offerings/expandable/utils.ts
+#: src/marketplace/offerings/update/attributes/EditAttributeDialog.tsx
+#: src/marketplace/offerings/update/attributes/EditCategoryDialog.tsx
+#: src/marketplace/offerings/update/components/EditComponentDialog.tsx
+#: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
+#: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
+#: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
+#: src/marketplace/offerings/update/options/EditOptionDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx
+#: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
+#: src/marketplace/resources/actions/MoveResourceDialog.tsx
+#: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
+#: src/marketplace/resources/usage/utils.ts
+#: src/notifications/ManageCommonFooterDialog.tsx
+#: src/notifications/NotificationForm.tsx
+#: src/project/MoveProjectDialog.tsx
+#: src/project/team/AddProjectMemberDialog.tsx
+msgid "Save"
+msgstr "Sla op"
+
+#: src/broadcasts/BroadcastFooter.tsx
+msgid "Save as a template"
+msgstr "Opslaan als sjabloon"
+
+#: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/user/api-key/UserEditTokenContainer.tsx
+#: src/user/support/UserEditForm.tsx
+msgid "Save changes"
+msgstr "Wijzigingen opslaan"
+
+#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
+msgid "Saved"
+msgstr "Opgeslagen"
+
+#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
+msgid "Saving"
+msgstr "Besparing"
+
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
+msgid "Scale"
+msgstr "Schub"
+
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup-schedule/actions/fields.ts
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/resource/summary/ScheduleSummary.tsx
+msgid "Schedule"
+msgstr "Rooster"
+
+#: src/proposals/utils.ts
+msgid "Scheduled"
+msgstr "Gepland"
+
+#: src/marketplace-checklist/StatsTable.tsx
+msgid "Score"
+msgstr "Partituur"
+
+#: src/navigation/header/SearchFilters.tsx
+#: src/navigation/header/SearchToggle.tsx
+#: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
+#: src/table/TableQuery.tsx
+msgid "Search"
+msgstr "Zoeken"
+
+#: src/navigation/header/SearchToggle.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
+msgid "Search..."
+msgstr "Zoeken..."
+
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+msgid "Second"
+msgstr "seconde"
+
+#: src/marketplace/offerings/update/attributes/EditAttributeDialog.tsx
+msgid "Section"
+msgstr "Afdeling"
+
+#: src/marketplace/resources/details/ActivityCard.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
+msgid "See all"
+msgstr "Alles weergeven"
+
+#: src/booking/offering/BookingResourceListItem.tsx
+msgid "See more"
+msgstr "Meer weergeven"
+
+#: src/form/themed-select.tsx
+#: src/marketplace/resources/import/OfferingsList.tsx
+#: src/marketplace/resources/import/ResourceRow.tsx
+#: src/user/affiliations/OrganizationHoverableRow.tsx
+#: src/user/affiliations/ProjectHoverableRow.tsx
+msgid "Select"
+msgstr "Selecteren"
+
+#: src/booking/offering/BookingResourcesCalendar.tsx
+msgid "Select a date"
+msgstr "Selecteer een datum"
+
+#: src/user/support/UserFilter.tsx
+msgid "Select status"
+msgstr "Selecteer Status"
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
+msgid "Select type"
+msgstr "Selecteer type"
+
+#: src/marketplace/resources/import/OfferingsList.tsx
+#: src/marketplace/resources/import/ResourceRow.tsx
+#: src/user/affiliations/OrganizationHoverableRow.tsx
+#: src/user/affiliations/ProjectHoverableRow.tsx
+msgid "Selected"
+msgstr "Uitverkoren"
+
+#: src/broadcasts/BroadcastSendButton.tsx
+#: src/customer/list/FinancialReportSendButton.tsx
+msgid "Send"
+msgstr "Verzenden"
+
+#: src/invitations/actions/create/FormButtons.tsx
+msgid "Send invitation"
+msgstr "Uitnodiging verzenden"
+
+#: src/paypal/InvoicesFilter.tsx
+msgid "Sent"
+msgstr "Verstuurd"
+
+#: src/rancher/cluster/tabs.ts
+msgid "Services"
+msgstr "Services"
+
+#: src/administration/routes.ts
+#: src/customer/routes.ts
+#: src/project/routes.ts
+#: src/user/UserManage.tsx
+#: src/user/routes.ts
+msgid "Settings"
+msgstr "Instellingen"
+
+#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
+#: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
+msgid "Shared"
+msgstr "Gedeeld"
+
+#: src/form/SecretField.tsx
+#: src/marketplace/details/plan/PlanDetailsLink.tsx
+#: src/resource/summary/ResourceMetadataLink.tsx
+msgid "Show"
+msgstr "Tonen"
+
+#: src/marketplace/resources/KeyValueButton.tsx
+msgid "Show details"
+msgstr "Toon details"
+
+#: src/navigation/sidebar/ResourcesMenu.tsx
+msgid "Show less"
+msgstr "Toon minder"
+
+#: src/marketplace/resources/details/ResourceShowMoreComponents.tsx
+msgid "Show more"
+msgstr "toon meer"
+
+#: src/auth/valimo/AuthValimoDialog.tsx
+#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
+msgid "Sign in"
+msgstr "Aanmelden"
+
+#: src/administration/branding/BrandingForm.tsx
+msgid "Site description"
+msgstr "Site beschrijving"
+
+#: src/administration/branding/BrandingForm.tsx
+msgid "Site name"
+msgstr "Naam van de site"
+
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/openstack/openstack-instance/OpenStackInstanceVolumeBadge.tsx
+#: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/vmware/DisksList.tsx
+#: src/vmware/VMwareDiskSummary.tsx
+#: src/vmware/actions/CreateDiskDialog.tsx
+#: src/vmware/actions/ExtendDiskDialog.tsx
+msgid "Size"
+msgstr "Grootte"
+
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Something went wrong"
+msgstr "Er is iets misgegaan"
+
+#: src/azure/vm/actions/StartAction.tsx
+#: src/openstack/openstack-instance/actions/StartAction.tsx
+#: src/proposals/PublicCallsPage.tsx
+#: src/vmware/actions/StartAction.tsx
+msgid "Start"
+msgstr "Beginnen"
+
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/proposals/update/rounds/WizardFormFirstPage.tsx
+msgid "Start date"
+msgstr "start datum"
+
+#: src/booking/deploy/CustomRangeDatePicker.tsx
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "Start time"
+msgstr "aanvangstijd"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/booking/BookingsList.tsx
+#: src/broadcasts/BroadcastList.tsx
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+#: src/invitations/InvitationsFilter.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
+#: src/invoices/list/BillingRecordsList.tsx
+#: src/invoices/list/InvoicesFilter.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/marketplace-flows/FlowListFilter.tsx
+#: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-flows/utils.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/details/OfferingResourcesFilter.tsx
+#: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
+#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/list/OfferingsFilter.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/OrdersFilter.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/orders/list/ResourceOrders.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/lexis/LexisLinkList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesFilter.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignFilter.tsx
+#: src/marketplace/service-providers/ProviderOfferingsFilter.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+#: src/openstack/openstack-server-groups/ServerGroupsList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
+#: src/openstack/openstack-tenant/TenantRoutersList.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+#: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/rancher/ClusterProjectList.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/node/ClusterNodesList.tsx
+#: src/rancher/template/ClusterTemplateList.tsx
+#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/support/SharedProviderResources.tsx
+#: src/slurm/details/AllocationJobsTable.tsx
+#: src/user/UserPermissionRequestsList.tsx
+#: src/user/UserPermissionRequestsStateFilter.tsx
+#: src/user/hooks/HooksList.tsx
+#: src/user/resources/ResourcesFilter.tsx
+#: src/user/resources/ResourcesList.tsx
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
+msgid "State"
+msgstr "Staat"
+
+#: src/administration/providers/ProviderUsersDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/invitations/InvitationsList.tsx
+#: src/invitations/actions/create/SendingStatus.tsx
+#: src/issues/IssueSummary.tsx
+#: src/issues/list/IssuesFilter.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/navigation/BackendHealthStatusDialog.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/proposals/details/CallDetailsCard.tsx
+#: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserFilter.tsx
+#: src/user/support/UserList.tsx
+msgid "Status"
+msgstr "Status"
+
+#: src/azure/vm/actions/StopAction.tsx
+#: src/openstack/openstack-instance/actions/StopAction.tsx
+#: src/vmware/actions/StopAction.tsx
+msgid "Stop"
+msgstr "Stoppen"
+
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/BroadcastList.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
+#: src/broadcasts/BroadcastTemplateList.tsx
+msgid "Subject"
+msgstr "Onderwerp"
+
+#: src/administration/agreements/UserAgreementDeleteDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/invitations/GroupinvitationButtons.tsx
+#: src/invitations/PermissionRequestActionDialog.tsx
+#: src/invitations/actions/GroupInvitationCreateDialog.tsx
+#: src/invoices/list/MarkAsPaidDialog.tsx
+#: src/issues/feedback/SupportFeedback.tsx
+#: src/marketplace-checklist/UserChecklist.tsx
+#: src/marketplace-flows/FlowSubmitAction.tsx
+#: src/marketplace-flows/ReviewDialog.tsx
+#: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
+#: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
+#: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
+#: src/marketplace/resources/change-plan/ChangePlanBody.tsx
+#: src/marketplace/resources/lexis/CreateLexisLinkDialog.tsx
+#: src/marketplace/resources/terminate/TerminateDialog.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/rancher/catalog/CatalogDeleteDialog.tsx
+#: src/rancher/cluster/ImportYAMLDialog.tsx
+#: src/rancher/cluster/ViewYAMLDialog.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+#: src/resource/actions/AsyncActionDialog.tsx
+#: src/resource/actions/ResourceActionDialog.tsx
+#: src/user/support/UserEmailChangeDialog.tsx
+msgid "Submit"
+msgstr "Opslaan"
+
+#: src/marketplace/resources/report/SubmitReportAction.tsx
+#: src/marketplace/resources/report/SubmitReportDialog.tsx
+msgid "Submit report"
+msgstr "Rapport indienen"
+
+#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/list/MonthOverview.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
+msgid "Subtotal"
+msgstr "Subtotaal"
+
+#: src/invitations/actions/create/FinishStepWrapper.tsx
+msgid "Success"
+msgstr "Succes"
+
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/customer/payments/PaymentsList.tsx
+msgid "Sum"
+msgstr "Som"
+
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/issues/IssueDetails.tsx
+#: src/marketplace-flows/FlowEditForm.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/rancher/template/TemplateDetail.tsx
+#: src/resource/summary/VirtualMachineSummary.tsx
+#: src/vmware/VMwareVirtualMachineSummary.tsx
+msgid "Summary"
+msgstr "Samenvatting"
+
+#: src/administration/dashboard/AdministrationProfile.tsx
+#: src/issues/routes.ts
+#: src/navigation/FooterLinks.tsx
+#: src/navigation/sidebar/SupportMenu.tsx
+#: src/user/support/UserList.tsx
+#: src/user/support/utils.ts
+msgid "Support"
+msgstr "Steunen"
+
+#: src/marketplace/offerings/details/OfferingKeyFiguresSection.tsx
+msgid "Support tickets"
+msgstr "Support tickets"
+
+#: src/marketplace/offerings/update/integration/SyncButton.tsx
+msgid "Synchronize"
+msgstr "Synchroniseren"
+
+#: src/configs/default.ts
+msgid "System administrator"
+msgstr "Systeembeheerder"
+
+#: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
+msgid "System volume"
+msgstr "Systeemvolume"
+
+#: src/invoices/details/InvoiceDetails.tsx
+msgid "TAX"
+msgstr "Belasting"
+
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceDetails.tsx
+msgid "TOTAL"
+msgstr "Totaal"
+
+#: src/rancher/cluster/ClusterServicesList.tsx
+msgid "Target"
+msgstr "DOEL"
+
+#: src/invoices/details/ResourceRow.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+msgid "Tax"
+msgstr "Belasting"
+
+#: src/administration/roles/PermissionOptions.tsx
+#: src/customer/team/CustomerUsersList.tsx
+#: src/project/team/ProjectUsersList.tsx
+msgid "Team members"
+msgstr "Teamleden"
+
+#: src/broadcasts/BroadcastForm.tsx
+#: src/issues/create/IssueCreateForm.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/create/FormNodesStep.tsx
+#: src/vmware/VMwareVirtualMachineSummary.tsx
+#: src/vmware/deploy/FormTemplateStep.tsx
+#: src/vmware/deploy/steps.ts
+msgid "Template"
+msgstr "Sjabloon"
+
+#: src/rancher/cluster/create/FormTenantStep.tsx
+#: src/rancher/cluster/create/steps.ts
+msgid "Tenant"
+msgstr "Huurder"
+
+#: src/administration/service-desk/SmaxSettings.tsx
+#: src/azure/provider/AzureForm.tsx
+#: src/openstack/OpenStackTenantForm.tsx
+msgid "Tenant ID"
+msgstr "Tenant-ID"
+
+#: src/marketplace/offerings/details/PublicOfferingDescriptionContainer.tsx
+msgid "Terms Of Service"
+msgstr "Service voorwaarden"
+
+#: src/about.tsx
+#: src/marketplace/details/OfferingTabs.tsx
+#: src/marketplace/orders/TermsOfService.tsx
+#: src/marketplace/orders/TermsOfServiceDialog.tsx
+msgid "Terms of Service"
+msgstr "Service voorwaarden"
+
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/navigation/FooterLinks.tsx
+msgid "Terms of service"
+msgstr "Service voorwaarden"
+
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
+msgid "Then"
+msgstr "dan"
+
+#: src/core/validators.ts
+#: src/marketplace/cart/ShoppingCartItemUpdateForm.tsx
+#: src/marketplace/details/OfferingConfigurator.tsx
+msgid "This field is required."
+msgstr "Dit veld is verplicht."
+
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
+msgid "Tickets"
+msgstr "Tickets"
+
+#: src/user/api-key/AuthenticationEvents.tsx
+msgid "Time"
+msgstr "Tijd"
+
+#: src/events/BaseEventsList.tsx
+msgid "Timestamp"
+msgstr "Tijdstempel"
+
+#: src/issues/create/IssueCreateDialog.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryGroupsList.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/marketplace/referral/ReferralsList.tsx
+#: src/user/keys/KeysList.tsx
+msgid "Title"
+msgstr "Titel"
+
+#: src/booking/deploy/FormPeriodsStep.tsx
+#: src/marketplace/offerings/update/integration/OfferingScheduler.tsx
+msgid "To"
+msgstr "Naar"
+
+#: src/booking/components/modal/DateAndTimeSelect.tsx
+msgid "Today"
+msgstr "Heden"
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+#: src/administration/service-desk/ZammadSettings.tsx
+#: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
+#: src/marketplace-remote/marketplace.ts
+#: src/navigation/header/UserToken.tsx
+msgid "Token"
+msgstr "token"
+
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+#: src/invoices/growth/utils.ts
+#: src/invoices/list/BillingRecordsList.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/invoices/list/MonthOverview.tsx
+#: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/details/plan/OrderSummaryPlanRows.tsx
+#: src/marketplace/details/plan/PlanDetailsList.tsx
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+msgid "Total"
+msgstr "Totaal"
+
+#: src/invoices/details/BillingRecordDetails.tsx
+msgid "Total price"
+msgstr "Totale prijs"
+
+#: src/user/UserPopover.tsx
+msgid "Try again"
+msgstr "Opnieuw proberen"
+
+#: src/administration/agreements/UserAgreementsList.tsx
+#: src/administration/roles/RoleForm.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileDetails.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/customer/workspace/CustomerEventsFilter.tsx
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/offerings/update/options/OptionForm.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/OrdersFilter.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/orders/list/ResourceOrders.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/marketplace/robot-accounts/RobotAccountList.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
+#: src/openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx
+#: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
+#: src/project/ProjectEventsFilter.tsx
+#: src/resource/support/SharedProviderResources.tsx
+#: src/user/keys/KeysList.tsx
+#: src/vmware/deploy/FormNetworkStep.tsx
+msgid "Type"
+msgstr "Type"
+
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
+#: src/rancher/catalog/ClusterCatalogList.tsx
+msgid "URL"
+msgstr "Url"
+
+#: src/booking/BookingStateField.tsx
+#: src/booking/utils.ts
+msgid "Unconfirmed"
+msgstr "Onbevestigd"
+
+#: src/marketplace-checklist/PieChart.tsx
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: src/auth/SigninForm.tsx
+#: src/auth/callbacks/OauthLoginCompleted.tsx
+msgid "Unknown error"
+msgstr "Onbekende fout"
+
+#: src/administration/TokensList.tsx
+msgid "Unlimited"
+msgstr "Onbegrensd"
+
+#: src/resource/actions/UnlinkActionItem.tsx
+msgid "Unlink"
+msgstr "Ontkoppelen"
+
+#: src/administration/notifications/HookUpdateButton.tsx
+#: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
+#: src/broadcasts/BroadcastUpdateButton.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/marketplace/cart/ShoppingCartUpdateButton.tsx
+#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
+#: src/marketplace/offerings/update/integration/EditSchedulesDialog.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
+#: src/marketplace/offerings/update/overview/EditOverviewDialog.tsx
+#: src/marketplace/orders/list/OrderTypeCell.tsx
+#: src/marketplace/orders/list/OrderTypeFilter.tsx
+#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+#: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+#: src/user/hooks/HookDetailsDialog.tsx
+#: src/user/hooks/HookUpdateButton.tsx
+msgid "Update"
+msgstr "Update"
+
+#: src/issues/list/IssuesShortList.tsx
+msgid "Updated"
+msgstr "Bijgewerkt"
+
+#: src/dashboard/chart.ts
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/slurm/details/utils.ts
+msgid "Usage"
+msgstr "Gebruik"
+
+#: src/quotas/QuotasTable.tsx
+msgid "Used"
+msgstr "gebruikt"
+
+#: src/customer/team/CustomerUserAddDialog.tsx
+#: src/customer/team/UserGroup.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
+#: src/issues/feedback/SupportFeedbackList.tsx
+#: src/issues/feedback/SupportFeedbackListFilter.tsx
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+#: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
+#: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
+#: src/marketplace/service-providers/OfferingPermissionsList.tsx
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/UserGroup.tsx
+#: src/slurm/details/AllocationJobsTable.tsx
+msgid "User"
+msgstr "Gebruiker"
+
+#: src/administration/routes.ts
+msgid "User agreements"
+msgstr "Gebruikersovereenkomsten"
+
+#: src/rancher/cluster/users/UserDetailsDialog.tsx
+msgid "User details"
+msgstr "Gegevens van de gebruiker"
+
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
+msgid "User input"
+msgstr "Gebruikersinvoer"
+
+#: src/user/UserDropdownMenu.tsx
+msgid "User profile"
+msgstr "Gebruikersprofiel"
+
+#: src/administration/routes.ts
+msgid "User roles"
+msgstr "Gebruikersrollen"
+
+#: src/administration/TokensList.tsx
+#: src/administration/service-desk/AtlassianSettings.tsx
+#: src/auth/SigninForm.tsx
+#: src/freeipa/FreeIPAAccountEdit.tsx
+#: src/freeipa/UsernameGroup.tsx
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/marketplace/robot-accounts/RobotAccountList.tsx
+#: src/openstack/OpenStackForm.tsx
+#: src/openstack/OpenStackTenantForm.tsx
+#: src/openstack/marketplace.ts
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/project/team/UserGroup.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/slurm/SlurmForm.tsx
+#: src/slurm/details/AllocationUsersTable.tsx
+#: src/slurm/marketplace.ts
+#: src/user/UserOfferingList.tsx
+#: src/user/support/UserDetailsTable.tsx
+#: src/vmware/VMwareForm.tsx
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/administration/routes.ts
+#: src/customer/routes.ts
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/OfferingUsersTable.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
+#: src/marketplace/routes.ts
+#: src/project/routes.ts
+#: src/rancher/cluster/tabs.ts
+msgid "Users"
+msgstr "Gebruikers"
+
+#: src/invoices/details/CustomerDetails.tsx
+#: src/invoices/list/MonthOverview.tsx
+msgid "VAT"
+msgstr "BTW"
+
+#: src/customer/details/CustomerDetailsPanel.tsx
+msgid "VAT rate"
+msgstr "Btw-tarief"
+
+#: src/marketplace/offerings/update/integration/EnvironmentVariablePanel.tsx
+#: src/marketplace/resources/KeyValueTable.tsx
+#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/marketplace/resources/usage/utils.ts
+#: src/proposals/update/review/CallReviewSection.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+msgid "Value"
+msgstr "Waarde"
+
+#: src/marketplace/offerings/OfferingEditButton.tsx
+msgid "View"
+msgstr "Bekijken"
+
+#: src/administration/dashboard/StatisticsCards.tsx
+#: src/marketplace/category/list/CategoryGroupsList.tsx
+#: src/support/dashboard/StatisticsCards.tsx
+msgid "View all"
+msgstr "Alles weergeven"
+
+#: src/proposals/call-management/CallManagementPage.tsx
+msgid "Visit"
+msgstr "Bezoeken"
+
+#: src/openstack/openstack-instance/actions/AttachVolumeDialog.tsx
+#: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
+#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
+#: src/openstack/openstack-volume/deploy/steps.ts
+msgid "Volume"
+msgstr "VOLUME"
+
+#: src/marketplace/landing/HeroSection.tsx
+msgid "Welcome to"
+msgstr "WELKOM BIJ"
+
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
+msgid "When"
+msgstr "Wanneer"
+
+#: src/marketplace/common/ReviewButton.tsx
+msgid "Write review"
+msgstr "Schrijf een beoordeling"
+
+#: src/administration/FeaturesList.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/ServiceProviderFilter.tsx
+#: src/marketplace-checklist/AnswerGroup.tsx
+#: src/marketplace-checklist/AnswersTable.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/category/filters/FilteredBy.tsx
+#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
+#: src/marketplace/offerings/update/attributes/utils.tsx
+#: src/modal/ConfirmationDialog.tsx
+#: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
+#: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
+#: src/project/ProjectRemoveDialog.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/resource/summary/ScheduleSummary.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
+#: src/user/hooks/HookRemoveDialog.tsx
+#: src/user/keys/KeyRemoveDialog.tsx
+msgid "Yes"
+msgstr "Ja"
+
+#: src/user/dashboard/UserProfile.tsx
+msgid "and"
+msgstr " en "
+
+#: src/rancher/cluster/apps/ApplicationDeleteButton.tsx
+msgid "application"
+msgstr "Applicatie"
+
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+msgid "applications"
+msgstr "Applications"
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "approval"
+msgstr "Goedkeuring"
+
+#: src/issues/attachments/IssueAttachmentsContainer.tsx
+msgid "browse"
+msgstr "Bladeren"
+
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+msgid "campaigns"
+msgstr "Campagnes"
+
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopupTitle.tsx
+msgid "change"
+msgstr "Wijzig"
+
+#: src/form/CronField.tsx
+msgid "day"
+msgstr "Dag"
+
+#: src/events/BaseEventsList.tsx
+msgid "events"
+msgstr "Gebeurtenissen"
+
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
+msgid "failed"
+msgstr "mislukt"
+
+#: src/i18n/constants.ts
+msgid "guest"
+msgstr "Gast"
+
+#: src/form/CronField.tsx
+msgid "hour"
+msgstr "uur"
+
+#: src/providers/support/MapInfoPanel.tsx
+msgid "hours"
+msgstr "uren"
+
+#: src/invoices/list/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+msgid "invoices"
+msgstr "Facturen"
+
+#: src/slurm/details/AllocationJobsTable.tsx
+msgid "jobs"
+msgstr "Banen"
+
+#: src/i18n/constants.ts
+msgid "member"
+msgstr "Lid"
+
+#: src/form/CronField.tsx
+msgid "minute"
+msgstr "minuut"
+
+#: src/form/CronField.tsx
+msgid "month"
+msgstr "Maand"
+
+#: src/openstack/openstack-network/actions/EditNetworkDialog.tsx
+msgid "network"
+msgstr "Netwerk"
+
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+msgid "networks"
+msgstr "Netwerken"
+
+#: src/notifications/NotificationList.tsx
+msgid "notifications"
+msgstr "Meldingen"
+
+#: src/form/CronField.tsx
+msgid "of"
+msgstr "van"
+
+#: src/form/CronField.tsx
+msgid "on"
+msgstr "OP"
+
+#: src/marketplace/orders/list/ResourceOrders.tsx
+msgid "orders"
+msgstr "Bestellingen"
+
+#: src/invitations/formatInvitation.ts
+msgid "organization"
+msgstr "Organisatie"
+
+#: src/resource/support/SharedProviderCustomers.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
+msgid "organizations"
+msgstr "Organisaties"
+
+#: src/marketplace/resources/ResourceDetailsHeader.tsx
+msgid "overview"
+msgstr "overzicht"
+
+#: src/invitations/RoleField.tsx
+msgid "owner"
+msgstr "Owner"
+
+#: src/customer/payments/PaymentsList.tsx
+msgid "payments"
+msgstr "Betalingen"
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "pending"
+msgstr "In behandeling"
+
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+msgid "plans"
+msgstr "Plannen"
+
+#: src/invitations/formatInvitation.ts
+msgid "project"
+msgstr "Project"
+
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/rancher/ClusterProjectList.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
+msgid "projects"
+msgstr "Projecten"
+
+#: src/invoices/list/BillingRecordsList.tsx
+msgid "records"
+msgstr "Archief"
+
+#: src/navigation/header/favorite-pages/FavoritePageItem.tsx
+msgid "remove"
+msgstr "Verwijderen"
+
+#: src/marketplace-flows/CustomerCreateRequestsList.tsx
+#: src/marketplace-flows/ProjectCreateRequestsList.tsx
+#: src/marketplace-flows/ResourceCreateRequestsList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
+msgid "requests"
+msgstr "Verzoeken"
+
+#: src/marketplace/resources/actions/EditDialog.tsx
+msgid "resource"
+msgstr "Hulpbron"
+
+#: src/issues/CustomerSupportRating.tsx
+msgid "reviews"
+msgstr "Beoordelingen"
+
+#: src/administration/roles/RolesList.tsx
+msgid "roles"
+msgstr "Rollen"
+
+#: src/rancher/cluster/ClusterServicesList.tsx
+msgid "services"
+msgstr "Services"
+
+#: src/user/support/UserRemovalMessageDialog.tsx
+msgid "support"
+msgstr "Steunen"
+
+#: src/customer/team/CustomerUsersList.tsx
+msgid "team members"
+msgstr "Teamleden"
+
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
+msgid "this month"
+msgstr "Deze maand"
+
+#: src/administration/TokensList.tsx
+msgid "tokens"
+msgstr "Tokens"
+
+#: src/administration/agreements/UserAgreementsList.tsx
+msgid "user agreements"
+msgstr "Gebruikersovereenkomsten"
+
+#: src/administration/providers/ProviderUsersDialog.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/user/support/UserList.tsx
+msgid "users"
+msgstr "Gebruikers"
+
+#: src/form/CronField.tsx
+msgid "week"
+msgstr "Week"
+
+#: src/form/CronField.tsx
+msgid "year"
+msgstr "Jaar"
+
+#: src/user/api-key/TokenLifetimeField.tsx
+msgid "{count} hour"
+msgstr "{count} uur"
+
+#: src/user/api-key/TokenLifetimeField.tsx
+msgid "{count} hours"
+msgstr "{count} uur"
+
+#: src/navigation/sidebar/marketplace-popup/CategoriesPanel.tsx
+msgid "{count} items"
+msgstr "{count} artikelen"
+
+#: src/user/api-key/TokenLifetimeField.tsx
+msgid "{count} minutes"
+msgstr "{count} minuten"
+
+#: src/marketplace/service-providers/ProjectsCountColumn.tsx
+msgid "{count} projects"
+msgstr "{count} projecten"
+
+#: src/resource/utils.tsx
+msgid "{number} days"
+msgstr "{number} dagen"
+
+#: src/marketplace/service-providers/ProviderUsersList.tsx
+msgid "{projects_count} projects"
+msgstr "{projects_count} projecten"

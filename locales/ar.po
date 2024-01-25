@@ -8,15 +8,433 @@ msgstr ""
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=(n==0) ? 0 : (n==1) ? 1 : (n==2) ? 2 : (n%100>=3 && n%100<=10) ? 3 : (n%100>=11 && n%100<=99) ? 4 : 5;\n"
 
+#: src/user/routes.ts
+msgid "API key"
+msgstr "مفتاح واجهة برمجة التطبيقات"
+
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/list/SupportCustomerList.tsx
+#: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
+#: src/marketplace/service-providers/ProviderDetailsBody.tsx
+#: src/resource/support/SharedProviderCustomers.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+msgid "Abbreviation"
+msgstr "اختصار"
+
+#: src/about.tsx
+msgid "About"
+msgstr "عن"
+
+#: src/booking/AcceptAction.tsx
+#: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+msgid "Accept"
+msgstr "تقبل"
+
+#: src/invitations/InvitationButtons.tsx
+msgid "Accept invitation"
+msgstr "قبول الدعوة"
+
+#: src/booking/BookingStateField.tsx
+#: src/booking/utils.ts
+#: src/invitations/InvitationsFilter.tsx
+msgid "Accepted"
+msgstr "قبلت"
+
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+msgid "Access"
+msgstr "ولوج"
+
+#: src/customer/cost-policies/CostPoliciesList.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
+#: src/resource/actions/AsyncActionItem.tsx
+msgid "Action"
+msgstr "فعل"
+
+#: src/booking/BookingsList.tsx
+#: src/customer/payments/PaymentsList.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
+#: src/invoices/details/InvoiceItemActions.tsx
+#: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-flows/ProjectCreateRequestsList.tsx
+#: src/marketplace/cart/ShoppingCart.tsx
+#: src/marketplace/offerings/actions/ActionsDropdown.tsx
+#: src/marketplace/offerings/list/OfferingActions.tsx
+#: src/marketplace/offerings/update/plans/PlanActions.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourceActions.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/marketplace/robot-accounts/RobotAccountList.tsx
+#: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-instance/InternalIpsList.tsx
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+#: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
+#: src/openstack/openstack-server-groups/ServerGroupsList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
+#: src/openstack/openstack-tenant/IpAddressList.tsx
+#: src/openstack/openstack-tenant/StaticRoutesTable.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/paypal/InvoiceActions.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+#: src/project/ProjectsListActions.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/resource/actions/ResourceActionComponent.tsx
+#: src/user/keys/KeysList.tsx
+#: src/user/support/UserTableDropDownActions.tsx
+msgid "Actions"
+msgstr "الاجراءات"
+
+#: src/marketplace/offerings/actions/OfferingStateActions.tsx
+#: src/openstack/openstack-backup-schedule/actions/ActivateAction.tsx
+#: src/openstack/openstack-snapshot-schedule/actions/ActivateSnapshotScheduleAction.tsx
+#: src/user/support/UserActivateButton.tsx
+msgid "Activate"
+msgstr "تنشيط"
+
+#: src/invitations/GroupInvitationsList.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
+#: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/user/support/UserFilter.tsx
+msgid "Active"
+msgstr "نشط"
+
+#: src/marketplace/resources/details/ActivityCard.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+msgid "Activity"
+msgstr "نشاط"
+
+#: src/administration/providers/CreateProviderDialog.tsx
+#: src/issues/comments/IssueCommentsForm.tsx
+#: src/marketplace/deploy/DeployPage.tsx
+#: src/openstack/openstack-backup/actions/NetworksList.tsx
+#: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
+#: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
+#: src/project/team/AddProjectMemberDialog.tsx
+#: src/project/team/AddProjectUserDialog.tsx
+#: src/rancher/cluster/create/FormNodesStep.tsx
+msgid "Add"
+msgstr "جمع"
+
+#: src/openstack/openstack-tenant/IpAddressList.tsx
+msgid "Add address"
+msgstr "إضافة عنوان"
+
+#: src/marketplace/category/admin/CategoryCreateButton.tsx
+msgid "Add category"
+msgstr "إضافة فئة"
+
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Add email"
+msgstr "إضافة بريد إلكتروني"
+
+#: src/marketplace/offerings/images/CreateImageButton.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+msgid "Add image"
+msgstr "إضافة صورة"
+
+#: src/marketplace/compare/ComparisonItemPlaceholder.tsx
+msgid "Add item"
+msgstr "إضافة عنصر"
+
+#: src/customer/team/ProjectMemberAddButton.tsx
+#: src/project/team/AddMemberButton.tsx
+msgid "Add member"
+msgstr "إضافة عضو"
+
+#: src/navigation/workspace/CreateOrganizationButton.tsx
+msgid "Add new"
+msgstr "إضافة جديد"
+
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/customer/payments/PaymentsList.tsx
+msgid "Add payment"
+msgstr "إضافة دفعة"
+
+#: src/dashboard/marketplace.ts
+#: src/marketplace-flows/FlowCreateButton.tsx
+#: src/marketplace/details/DetailsPage.tsx
+#: src/marketplace/resources/actions/AddResourceButton.tsx
+#: src/marketplace/resources/list/CreateResourceButton.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
+#: src/user/resources/ResourcesList.tsx
+msgid "Add resource"
+msgstr "إضافة مورد"
+
+#: src/marketplace/cart/ShoppingCartButton.tsx
+msgid "Add to cart"
+msgstr "إضافة إلى العربة"
+
+#: src/marketplace/offerings/details/permissions/OfferingPermissionCreateButton.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
+#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/AddUserButton.tsx
+#: src/user/support/AddRemoteUserDialog.tsx
+#: src/user/support/UserTableActions.tsx
+msgid "Add user"
+msgstr "إضافة مستخدم"
+
+#: src/customer/create/WizardFormSecondPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
+msgid "Address"
+msgstr "عنوان"
+
+#: src/administration/routes.ts
+#: src/navigation/sidebar/AdminMenu.tsx
+msgid "Administration"
+msgstr "إدارة"
+
+#: src/navigation/header/SearchToggle.tsx
+msgid "Advanced Search"
+msgstr "بحث متقدم"
+
+#: src/user/dashboard/UserProfile.tsx
+msgid "Affiliation"
+msgstr "الانتماء"
+
+#: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
+msgid "Alert"
+msgstr "تنبيه"
+
+#: src/customer/list/AccountingRunningField.tsx
+#: src/customer/list/ServiceProviderFilter.tsx
+#: src/marketplace/offerings/update/attributes/utils.tsx
+#: src/rancher/node/NodeRoleField.tsx
+msgid "All"
+msgstr "كل"
+
+#: src/marketplace/category/list/AllCategoriesPage.tsx
+msgid "All categories"
+msgstr "جميع الفئات"
+
+#: src/booking/components/modal/BookingModal.tsx
+msgid "All day"
+msgstr "طوال اليوم"
+
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+msgid "Allocated"
+msgstr "تخصيص"
+
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
+msgid "Allocation"
+msgstr "تخصيص"
+
+#: src/auth/SigninButton.tsx
+msgid "Already have an account?"
+msgstr "هل لديك حساب بالفعل؟"
+
+#: src/marketplace/offerings/PriceList.tsx
+#: src/marketplace/offerings/update/plans/PlanComponents.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
+msgid "Amount"
+msgstr "مبلغ"
+
+#: src/ErrorMessage.tsx
+msgid "An error has occurred."
+msgstr "حدث خطأ."
+
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "Annual"
+msgstr "سنوي"
+
+#: src/marketplace-checklist/AnswersTable.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+msgid "Answer"
+msgstr "جواب"
+
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+msgid "Answers"
+msgstr "اجابات"
+
+#: src/openstack/openstack-security-groups/rule-editor/ProtocolField.tsx
+#: src/openstack/openstack-security-groups/utils.ts
+#: src/user/support/UserFilter.tsx
+msgid "Any"
+msgstr "أي"
+
+#: src/marketplace/category/filters/AttributeFilterListDialog.tsx
+msgid "Apply"
+msgstr "طبق"
+
+#: src/invitations/UserPermissionRequestApproveButton.tsx
+#: src/marketplace-flows/ReviewApproveAction.tsx
+#: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/marketplace/orders/actions/ApproveByConsumerButton.tsx
+#: src/marketplace/orders/actions/ApproveByProviderButton.tsx
+msgid "Approve"
+msgstr "صدق"
+
+#: src/paypal/PaymentApprove.tsx
+msgid "Approve payment"
+msgstr "الموافقة على الدفع"
+
+#: src/marketplace-flows/RequestStateFilter.tsx
+#: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/user/UserPermissionRequestsStateFilter.tsx
+msgid "Approved"
+msgstr "مصدق"
+
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+msgid "Approved by"
+msgstr "تمت الموافقة عليه من قبل"
+
+#: src/openstack/openstack-instance/deploy/FormImageStep.tsx
+#: src/rancher/cluster/tabs.ts
+#: src/vmware/deploy/FormTemplateStep.tsx
+msgid "Apps"
+msgstr "تطبيقات"
+
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
+msgid "Archived"
+msgstr "المؤرشفه"
+
+#: src/issues/IssueSummary.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
+msgid "Assigned to"
+msgstr "تم تعيينه إلى"
+
+#: src/issues/attachments/IssueAttachmentsContainer.tsx
+#: src/issues/create/IssueCreateForm.tsx
+msgid "Attachments"
+msgstr "المرفقات"
+
+#: src/marketplace/offerings/update/attributes/EditAttributeDialog.tsx
+msgid "Attribute"
+msgstr "صفة"
+
+#: src/marketplace/offerings/details/PublicOfferingAttributesCard.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/list/ExpandableResourceSummary.tsx
+#: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
+msgid "Attributes"
+msgstr "سمات"
+
+#: src/broadcasts/BroadcastList.tsx
+msgid "Author"
+msgstr "كاتب"
+
+#: src/marketplace/offerings/update/integration/OfferingScheduler.tsx
+msgid "Availability"
+msgstr "توافر"
+
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+msgid "Available"
+msgstr "متوفر"
+
+#: src/broadcasts/BroadcastFooter.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+#: src/error/InvalidObjectPage.tsx
+#: src/error/InvalidRoutePage.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
+msgid "Back"
+msgstr "ظهر"
+
+#: src/auth/callbacks/AuthLoginFailed.tsx
+#: src/auth/callbacks/OauthLoginCompleted.tsx
+msgid "Back to login"
+msgstr "العودة إلى تسجيل الدخول"
+
+#: src/customer/create/WizardFormSecondPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
+msgid "Bank account"
+msgstr "الحساب المصرفي"
+
+#: src/marketplace-flows/CustomerCreateExpandableRow.tsx
+msgid "Bank account number"
+msgstr "رقم الحساب البنكي"
+
+#: src/customer/create/WizardFormSecondPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
+msgid "Bank name"
+msgstr "اسم البنك"
+
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Billed monthly"
+msgstr "يتم إصدار الفاتورة شهريا"
+
+#: src/invoices/routes.ts
+msgid "Billing"
+msgstr "الفواتير"
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsHeader.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
+msgid "Book"
+msgstr "كتاب"
+
+#: src/booking/BookingsList.tsx
+#: src/booking/offering/OfferingBookingResourcesCalendarContainer.tsx
+#: src/marketplace/resources/details/BookingMainComponent.tsx
+msgid "Bookings"
+msgstr "الحجوزات"
+
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+msgid "Branch"
+msgstr "فرع"
+
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/invoices/list/MarkAsPaidDialog.tsx
+#: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
+#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
+msgid "Browse"
+msgstr "تصفح"
+
+#: src/marketplace/offerings/details/GoogleCalendarLink.tsx
+msgid "Calendar"
+msgstr "تقويم"
+
+#: src/proposals/details/PublicCallDetailsHero.tsx
+#: src/proposals/update/CallUpdateHero.tsx
+msgid "Call"
+msgstr "دعا"
+
+#: src/marketplace/utils.ts
+#: src/proposals/PublicCallsPage.tsx
+msgid "Calls"
+msgstr "المكالمات"
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
+msgid "Campaign name"
+msgstr "اسم الحملة"
+
+#: src/administration/roles/RoleForm.tsx
 #: src/booking/CancelAction.tsx
-#: src/form/ListDialog.tsx
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invitations/GroupinvitationButtons.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace-flows/FlowCancelAction.tsx
-#: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
-#: src/marketplace/orders/item/list/OrderItemCancelButton.tsx
+#: src/marketplace/orders/actions/CancelTerminationOrderButton.tsx
+#: src/marketplace/orders/details/CancelOrderButton.tsx
 #: src/modal/CloseDialogButton.tsx
 #: src/navigation/header/SearchToggle.tsx
 #: src/project/ProjectCreateForm.tsx
@@ -24,19 +442,1883 @@ msgstr ""
 msgid "Cancel"
 msgstr "إلغاء"
 
+#: src/booking/CancelAction.tsx
+msgid "Cancel booking"
+msgstr "إلغاء الحجز"
+
+#: src/invitations/InvitationButtons.tsx
+msgid "Cancel invitation"
+msgstr "إلغاء الدعوة"
+
+#: src/administration/roles/PermissionOptions.tsx
+#: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+msgid "Cancel order"
+msgstr "إلغاء الطلب"
+
+#: src/user/support/RequestedEmail.tsx
+msgid "Cancel request"
+msgstr "إلغاء الطلب"
+
+#: src/invitations/InvitationsFilter.tsx
+#: src/invoices/list/InvoicesFilter.tsx
+#: src/marketplace-flows/RequestStateFilter.tsx
+#: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Canceled"
+msgstr "ملغي"
+
+#: src/paypal/InvoicesFilter.tsx
+msgid "Cancelled"
+msgstr "الغاء"
+
+#: src/marketplace/routes.ts
+#: src/reporting/dashboard/ReportingWidgets.tsx
+msgid "Capacity"
+msgstr "سعة"
+
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/template/ClusterTemplateList.tsx
+msgid "Catalog"
+msgstr "كتالوج"
+
+#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/list/AllCategoriesPage.tsx
+#: src/marketplace/category/utils.ts
+#: src/marketplace/offerings/service-providers/ServiceProviderPageBar.tsx
+msgid "Categories"
+msgstr "فئات"
+
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/offerings/import/tabs.ts
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/update/attributes/AttributesSection.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/PublicResourcesFilter.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/user/resources/ResourcesFilter.tsx
+#: src/user/resources/ResourcesList.tsx
+msgid "Category"
+msgstr "باب"
+
+#: src/invoices/list/InvoicesStatsList.tsx
+msgid "Category name"
+msgstr "اسم الفئة"
+
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Change"
+msgstr "تغيير"
+
+#: src/user/support/EmailField.tsx
+msgid "Change email"
+msgstr "تغيير البريد الإلكتروني"
+
+#: src/marketplace/resources/change-plan/ChangePlanAction.tsx
+msgid "Change plan"
+msgstr "تغيير الخطة"
+
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/user/UserPopover.tsx
+msgid "Checklists"
+msgstr "قوائم"
+
+#: src/marketplace/cart/CheckoutPage.tsx
+msgid "Checkout"
+msgstr "الخروج"
+
+#: src/marketplace/category/filters/CategorySectionsFilterForm.tsx
+msgid "Clear all"
+msgstr "مسح الكل"
+
+#: src/administration/providers/ProviderForm.tsx
+#: src/azure/provider/AzureForm.tsx
+msgid "Client ID"
+msgstr "معرف العميل"
+
+#: src/administration/providers/ProviderForm.tsx
+#: src/azure/provider/AzureForm.tsx
+msgid "Client secret"
+msgstr "سر العميل"
+
+#: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+#: src/broadcasts/RecipientsListDialog.tsx
+#: src/invitations/actions/create/FormButtons.tsx
+#: src/marketplace/details/plan/EstimateUsageComponentDialog.tsx
+#: src/marketplace/offerings/images/ImageDetailsDialog.tsx
+#: src/marketplace/referral/OfferingReferralsDialog.tsx
+#: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesDialog.tsx
+#: src/resource/summary/ResourceMetadataDialog.tsx
+#: src/resource/summary/ResourceSummaryModal.tsx
+#: src/user/UserPopover.tsx
+#: src/user/support/UserRemovalMessageDialog.tsx
+msgid "Close"
+msgstr "غلق"
+
+#: src/issues/list/IssuesFilter.tsx
+msgid "Closed"
+msgstr "مغلق"
+
+#: src/marketplace/deploy/steps/FormCloudStep.tsx
+msgid "Cloud"
+msgstr "سحابة"
+
+#: src/customer/details/CustomerAccordion.tsx
+msgid "Collapse"
+msgstr "تقوض"
+
+#: src/invitations/PermissionRequestActionDialog.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
+#: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
+#: src/issues/comments/IssueCommentsFormMainContainer.tsx
+#: src/issues/feedback/SupportFeedback.tsx
+#: src/issues/feedback/SupportFeedbackListExpandableRow.tsx
+#: src/marketplace-flows/ReviewDialog.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
+#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/user/UserPermissionRequestsList.tsx
+msgid "Comment"
+msgstr "التعليق"
+
+#: src/issues/comments/IssueCommentsContainer.tsx
+msgid "Comments"
+msgstr "التعليقات"
+
+#: src/invitations/actions/create/SendingStatus.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Completed"
+msgstr "اكمال"
+
+#: src/invoices/details/ResourceRow.tsx
+#: src/marketplace/details/plan/LimitlessComponentsTable.tsx
+#: src/marketplace/details/plan/PlanDetailsList.tsx
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
+msgid "Component name"
+msgstr "اسم المكون"
+
+#: src/marketplace/offerings/details/PublicOfferingComponents.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/orders/details/DetailsSection.tsx
+#: src/marketplace/resources/details/ResourceComponentsDialog.tsx
+msgid "Components"
+msgstr "مكونات"
+
+#: src/openstack/openstack-tenant/tabs.ts
+#: src/quotas/constants.ts
+msgid "Compute"
+msgstr "حسب"
+
+#: src/administration/TokenDeleteButton.tsx
+#: src/administration/roles/RoleDeleteButton.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/broadcasts/BroadcastTemplateDeleteButton.tsx
+#: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/details/CustomerCallManagerPanel.tsx
+#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
+#: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/UserRemoveButton.tsx
+#: src/invitations/GroupInvitationCancelButton.tsx
+#: src/invoices/details/InvoiceItemDelete.tsx
+#: src/marketplace/cart/ShoppingCartButtonContainer.tsx
+#: src/marketplace/category/admin/CategoryDeleteButton.tsx
+#: src/marketplace/category/admin/GroupDeleteButton.tsx
+#: src/marketplace/offerings/images/DeleteImageButton.tsx
+#: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
+#: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
+#: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
+#: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
+#: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
+#: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
+#: src/project/team/UserRemoveButton.tsx
+#: src/rancher/cluster/create/FormNodesStep.tsx
+#: src/resource/actions/AsyncActionItem.tsx
+#: src/resource/actions/ResourceDeleteButton.tsx
+msgid "Confirmation"
+msgstr "تأكيد"
+
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
+msgid "Contact"
+msgstr "الاتصال"
+
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+#: src/marketplace-flows/CustomerCreateExpandableRow.tsx
+msgid "Contact details"
+msgstr "تفاصيل الاتصال"
+
+#: src/customer/create/WizardFormFirstPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/SupportCustomerList.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
+msgid "Contact email"
+msgstr "البريد الإلكتروني للاتصال"
+
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
+#: src/notifications/NotificationForm.tsx
+msgid "Content"
+msgstr "محتوى"
+
+#: src/invitations/actions/create/FormButtons.tsx
+#: src/marketplace/service-providers/CampaignFooter.tsx
+msgid "Continue"
+msgstr "استمر"
+
+#: src/navigation/header/UserToken.tsx
+msgid "Copy"
+msgstr "نسخ"
+
+#: src/core/CopyToClipboard.tsx
+#: src/core/CopyToClipboardButton.tsx
+#: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
+#: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
+#: src/table/ExportDialog.tsx
+#: src/table/TableButtons.tsx
+#: src/table/TableExportButton.tsx
+msgid "Copy to clipboard"
+msgstr "نسخ إلى الحافظة"
+
+#: src/customer/list/CustomerList.tsx
+#: src/invoices/list/InvoicesStatsList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/offerings/expandable/utils.ts
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+msgid "Cost"
+msgstr "كلف"
+
+#: src/customer/create/CountryGroup.tsx
+#: src/customer/list/OrganizationDetails.tsx
+msgid "Country"
+msgstr "بلد"
+
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+msgid "Coupon"
+msgstr "كوبون"
+
+#: src/administration/agreements/UserAgreementCreateButton.tsx
+#: src/broadcasts/BroadcastCreateButton.tsx
+#: src/broadcasts/BroadcastTemplateCreateButton.tsx
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
+#: src/freeipa/FreeIPAAccountCreate.tsx
+#: src/issues/create/IssueCreateDialog.tsx
+#: src/issues/list/IssueCreateButton.tsx
+#: src/marketplace/cart/ShoppingCartButton.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
+#: src/marketplace/offerings/update/components/AddComponentDialog.tsx
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
+#: src/marketplace/offerings/update/options/AddOptionDialog.tsx
+#: src/marketplace/offerings/update/plans/AddPlanDialog.tsx
+#: src/marketplace/orders/list/OrderTypeCell.tsx
+#: src/marketplace/orders/list/OrderTypeFilter.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
+#: src/marketplace/service-providers/CampaignCreateButton.tsx
+#: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
+#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
+#: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
+#: src/openstack/openstack-tenant/actions/CreateNetworkAction.tsx
+#: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.tsx
+#: src/openstack/openstack-tenant/actions/CreateServerGroupAction.tsx
+#: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
+#: src/rancher/catalog/CatalogCreateButton.tsx
+#: src/rancher/cluster/hpas/HPACreateButton.tsx
+#: src/user/hooks/HookDetailsDialog.tsx
+msgid "Create"
+msgstr "خلق"
+
+#: src/administration/TokensList.tsx
+#: src/administration/notifications/HooksList.tsx
+#: src/booking/BookingsListExpandableRow.tsx
+#: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+#: src/invoices/list/InvoicesFilter.tsx
+#: src/issues/IssueSummary.tsx
+#: src/issues/feedback/SupportFeedbackList.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
+#: src/marketplace/offerings/images/OfferingImagesList.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/support/SharedProviderCustomers.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
+msgid "Created"
+msgstr "انشاء"
+
+#: src/administration/agreements/UserAgreementsList.tsx
+#: src/broadcasts/BroadcastList.tsx
+#: src/invitations/GroupInvitationsList.tsx
+#: src/invitations/InvitationsList.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
+#: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/offerings/details/OfferingUsersTable.tsx
+#: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
+#: src/marketplace/orders/details/DetailsSection.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/ResourceOrders.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/service-providers/OfferingPermissionsList.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
+#: src/notifications/NotificationList.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/resource/support/SharedProviderResources.tsx
+#: src/user/UserOfferingList.tsx
+#: src/user/UserPermissionRequestsList.tsx
+#: src/user/resources/ResourcesList.tsx
+msgid "Created at"
+msgstr "تم إنشاؤه في"
+
+#: src/booking/BookingsList.tsx
+#: src/invitations/GroupInvitationsList.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
+msgid "Created by"
+msgstr "تم الإنشاء بواسطة"
+
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
+msgid "Current plan"
+msgstr "الخطة الحالية"
+
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+msgid "Current price"
+msgstr "السعر الحالي"
+
+#: src/administration/roles/RoleForm.tsx
+msgid "Customer"
+msgstr "زبون"
+
+#: src/customer/team/utils.ts
+msgid "Customer support"
+msgstr "دعم العملاء"
+
+#: src/marketplace/routes.ts
+msgid "Customers"
+msgstr "الزبائن"
+
 #: src/administration/routes.ts
 #: src/customer/routes.ts
+#: src/issues/routes.ts
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
+#: src/marketplace/utils.ts
 #: src/project/routes.ts
 #: src/reporting/routes.ts
 #: src/user/routes.ts
 msgid "Dashboard"
 msgstr "لوحة القيادة"
 
-#: src/administration/dashboard/StatisticsCards.tsx
-#: src/customer/routes.ts
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/customer/payments/PaymentsList.tsx
+#: src/dashboard/chart.ts
+#: src/invitations/actions/create/SendingStatus.tsx
+#: src/invoices/list/MarkAsPaidDialog.tsx
+#: src/issues/feedback/SupportFeedbackListFilter.tsx
+#: src/marketplace/resources/usage/utils.ts
+msgid "Date"
+msgstr "تاريخ"
+
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "Days"
+msgstr "أيام"
+
+#: src/openstack/openstack-backup-schedule/actions/DeactivateAction.tsx
+#: src/openstack/openstack-snapshot-schedule/actions/DeactivateSnapshotScheduleAction.tsx
+#: src/user/support/UserActivateButton.tsx
+msgid "Deactivate"
+msgstr "الغاء تنشيط"
+
+#: src/user/support/utils.ts
+msgid "Default"
+msgstr "افتراضي"
+
+#: src/marketplace/offerings/update/options/OptionForm.tsx
+msgid "Default value"
+msgstr "القيمة الافتراضية"
+
+#: src/administration/agreements/UserAgreementDeleteButton.tsx
+#: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
+#: src/customer/payments/PaymentActions.tsx
+#: src/issues/comments/IssueCommentDeleteDialog.tsx
+#: src/issues/comments/IssueCommentItem.tsx
+#: src/marketplace/offerings/images/DeleteImageButton.tsx
+#: src/marketplace/offerings/list/DeleteOfferingButton.tsx
+#: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
+#: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
+#: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
+#: src/notifications/ManageCommonFooterDialog.tsx
+#: src/openstack/openstack-backup/actions/NetworksList.tsx
+#: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
+#: src/openstack/openstack-security-groups/rule-editor/ActionsField.tsx
+#: src/project/DeleteAction.tsx
+#: src/rancher/catalog/CatalogDeleteButton.tsx
+#: src/rancher/cluster/IngressActions.tsx
+#: src/rancher/cluster/ServiceActions.tsx
+#: src/rancher/cluster/WorkloadActions.tsx
+#: src/resource/actions/ResourceDeleteButton.tsx
+msgid "Delete"
+msgstr "حذف"
+
+#: src/user/support/UserDeleteAccount.tsx
+msgid "Delete account"
+msgstr "حذف الحساب"
+
+#: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+msgid "Deny"
+msgstr "أنكر"
+
+#: src/administration/roles/RolesList.tsx
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
+#: src/marketplace-flows/ProjectCreateExpandableRow.tsx
+#: src/marketplace-flows/ResourceCreateExpandableRow.tsx
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryGroupsList.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
+#: src/marketplace/details/OfferingTabs.tsx
+#: src/marketplace/details/plan/PlanSection.tsx
+#: src/marketplace/offerings/actions/RequestActionDialog.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingInfo.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/offerings/images/OfferingImagesList.tsx
+#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
+#: src/marketplace/offerings/update/options/OptionForm.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/marketplace/offerings/update/plans/PlanForm.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
+#: src/marketplace/resources/usage/utils.ts
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/notifications/NotificationList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+#: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
+#: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/project/ProjectDetails.tsx
+#: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/details/CallDescriptionCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
+#: src/rancher/ClusterProjectList.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
+#: src/rancher/template/CatalogTemplateList.tsx
+#: src/rancher/template/ClusterTemplateList.tsx
+#: src/resource/actions/base.ts
+#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/slurm/RequestLimitsChangeDialog.tsx
+#: src/user/support/UserEditForm.tsx
+msgid "Description"
+msgstr "وصف"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/user/hooks/HooksList.tsx
+msgid "Destination"
+msgstr "مقصد"
+
+#: src/administration/providers/ProviderCard.tsx
+#: src/invoices/list/MonthOverview.tsx
+#: src/marketplace/details/plan/PlanDescriptionButton.tsx
+#: src/marketplace/orders/details/DetailsSection.tsx
+#: src/marketplace/referral/ReferralDetailsButton.tsx
+#: src/project/ProjectDetailsButton.tsx
+#: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
+#: src/resource/summary/ResourceSummaryButton.tsx
+#: src/resource/summary/ResourceSummaryModal.tsx
+#: src/user/UserDetailsButton.tsx
+#: src/user/UserPopover.tsx
+#: src/user/support/UserDetailsButton.tsx
+#: src/user/support/UserDetailsView.tsx
+#: src/vmware/tabs.ts
+msgid "Details"
+msgstr "التفاصيل"
+
+#: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
+msgid "Device"
+msgstr "جهاز"
+
+#: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
+#: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
+msgid "Direction"
+msgstr "اتجاه"
+
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+msgid "Disable"
+msgstr "تعطيل"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/user/hooks/HooksList.tsx
+#: src/user/support/UserFilter.tsx
+msgid "Disabled"
+msgstr "ذوي الاحتياجات الخاصه"
+
+#: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/user/support/UserEditForm.tsx
+msgid "Discard"
+msgstr "اطرح"
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
+#: src/marketplace/service-providers/ProviderCampaignTypeFilter.tsx
+msgid "Discount"
+msgstr "خصم"
+
+#: src/marketplace/offerings/DisplayNameField.tsx
+msgid "Display name"
+msgstr "عرض الاسم"
+
+#: src/navigation/header/DocsLink.tsx
+msgid "Documentation"
+msgstr "توثيق"
+
+#: src/proposals/details/CallDocumentsCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/documents/CallDocumentsSection.tsx
+msgid "Documents"
+msgstr "الوثائق"
+
+#: src/customer/list/OrganizationDetails.tsx
+#: src/openstack/OpenStackTenantForm.tsx
+msgid "Domain"
+msgstr "المجال"
+
+#: src/marketplace/details/plan/PlanDetailsDialog.tsx
+#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/OrderStateFilter.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/details/ResourceComponentsDialog.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/navigation/BackendHealthStatusDialog.tsx
+#: src/proposals/details/CallRoundsDialog.tsx
+#: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
+#: src/user/support/UserDetailsDialog.tsx
+msgid "Done"
+msgstr "منجز"
+
+#: src/invitations/actions/create/BulkUpload.tsx
+msgid "Download"
+msgstr "تحميل"
+
+#: src/paypal/InvoiceActions.tsx
+msgid "Download invoice"
+msgstr "تنزيل الفاتورة"
+
+#: src/marketplace-flows/RequestStateFilter.tsx
+#: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/paypal/InvoicesFilter.tsx
+msgid "Draft"
+msgstr "مسودة"
+
+#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+msgid "Due date"
+msgstr "تاريخ الاستحقاق"
+
+#: src/proposals/update/rounds/WizardFormFirstPage.tsx
+msgid "Duration"
+msgstr "مدة"
+
+#: src/administration/agreements/UserAgreementsEditButton.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/broadcasts/BroadcastTemplateUpdateButton.tsx
+#: src/customer/list/OrganizationEditButton.tsx
+#: src/customer/payment-profiles/PaymentProfileEditButton.tsx
+#: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/UserEditButton.tsx
+#: src/issues/comments/IssueCommentItem.tsx
+#: src/marketplace-flows/FlowEditAction.tsx
+#: src/marketplace/category/admin/CategoryEditButton.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/GroupEditButton.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/marketplace/deploy/DeployPage.tsx
+#: src/marketplace/offerings/details/OfferingDetails.tsx
+#: src/marketplace/offerings/list/EditOfferingButton.tsx
+#: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
+#: src/marketplace/offerings/update/attributes/EditAttributeButton.tsx
+#: src/marketplace/offerings/update/components/EditComponentButton.tsx
+#: src/marketplace/offerings/update/integration/EditScriptButton.tsx
+#: src/marketplace/offerings/update/options/EditOptionButton.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedButton.tsx
+#: src/marketplace/offerings/update/overview/EditOverviewButton.tsx
+#: src/marketplace/offerings/update/overview/OfferingLocationButton.tsx
+#: src/marketplace/offerings/update/overview/OfferingLogoButton.tsx
+#: src/marketplace/offerings/update/overview/SetAccessPolicyButton.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx
+#: src/marketplace/resources/actions/EditAction.tsx
+#: src/marketplace/robot-accounts/RobotAccountEditButton.tsx
+#: src/marketplace/service-providers/ProviderCampaignUpdateButton.tsx
+#: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
+#: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton.tsx
+#: src/notifications/NotificationUpdateButton.tsx
+#: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
+#: src/openstack/openstack-backup/actions/EditAction.tsx
+#: src/openstack/openstack-instance/actions/EditAction.tsx
+#: src/openstack/openstack-network/actions/EditNetworkAction.tsx
+#: src/openstack/openstack-security-groups/EditAction.tsx
+#: src/openstack/openstack-snapshot-schedule/actions/EditAction.tsx
+#: src/openstack/openstack-snapshot/EditAction.tsx
+#: src/openstack/openstack-subnet/EditSubnetAction.tsx
+#: src/openstack/openstack-tenant/actions/EditAction.tsx
+#: src/openstack/openstack-volume/actions/EditAction.tsx
+#: src/project/team/AddMemberButton.tsx
+#: src/proposals/call-management/CallEditButton.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/documents/EditDocumentsButton.tsx
+#: src/proposals/update/general/EditGeneralInfoButton.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
+#: src/proposals/update/review/EditReviewInfoButton.tsx
+#: src/proposals/update/reviewers/EditReviewersButton.tsx
+#: src/rancher/cluster/hpas/HPAUpdateButton.tsx
+#: src/slurm/EditAction.tsx
+#: src/user/support/IdentityProviderIndicator.tsx
+#: src/vmware/actions/EditAction.tsx
+msgid "Edit"
+msgstr "حرر"
+
+#: src/customer/team/PendingReviewDialog.tsx
+msgid "Edit permissions"
+msgstr "تحرير الأذونات"
+
+#: src/user/dashboard/UserWelcome.tsx
+msgid "Edit profile"
+msgstr "تحرير ملف التعريف"
+
+#: src/administration/roles/RoleEditButton.tsx
+#: src/administration/roles/RoleEditDialog.tsx
+msgid "Edit role"
+msgstr "تحرير الدور"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/providers/ProviderUsersDialog.tsx
+#: src/administration/service-desk/AtlassianSettings.tsx
+#: src/broadcasts/RecipientsList.tsx
+#: src/customer/list/ExportAsEmailDialog.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/team/CustomerUsersList.tsx
+#: src/invitations/InvitationsList.tsx
+#: src/invitations/actions/create/EmailsListGroup.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/project/team/ProjectUsersList.tsx
+#: src/project/team/UserGroup.tsx
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/hooks/HookTypeField.tsx
+#: src/user/support/EmailField.tsx
+#: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserList.tsx
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: src/marketplace-flows/CustomerCreateExpandableRow.tsx
+#: src/user/hooks/HookForm.tsx
+msgid "Email address"
+msgstr "عنوان البريد الإلكتروني"
+
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Emails"
+msgstr "رسائل البريد الإلكتروني"
+
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
+msgid "Enable"
+msgstr "تمكين"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/administration/providers/ProviderForm.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/user/hooks/HookForm.tsx
+#: src/user/hooks/HooksList.tsx
+msgid "Enabled"
+msgstr "تمكين"
+
+#: src/proposals/PublicCallsPage.tsx
+msgid "End"
+msgstr "انتهاء"
+
+#: src/booking/deploy/CustomRangeDatePicker.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectDetails.tsx
+#: src/project/ProjectUpdateForm.tsx
+#: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
+msgid "End date"
+msgstr "تاريخ الانتهاء"
+
+#: src/booking/deploy/CustomRangeDatePicker.tsx
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "End time"
+msgstr "وقت الانتهاء"
+
+#: src/proposals/utils.ts
+msgid "Ended"
+msgstr "انتهت"
+
+#: src/administration/dashboard/AdministrationProfile.tsx
+#: src/marketplace/deploy/steps/FormCloudStep.tsx
+#: src/marketplace/resources/details/InfiniteList.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
+msgid "Error"
+msgstr "خطأ"
+
+#: src/marketplace/details/plan/UsageComponentRow.tsx
+msgid "Estimate"
+msgstr "تقدير"
+
+#: src/marketplace/offerings/details/OfferingDetailsStatistics.tsx
+#: src/providers/dashboard/api.ts
+msgid "Estimated revenue"
+msgstr "الإيرادات المقدرة"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/offerings/expandable/OfferingEventsList.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/user/hooks/HooksList.tsx
+msgid "Events"
+msgstr "احداث"
+
+#: src/form/CronField.tsx
+msgid "Every"
+msgstr "كل"
+
+#: src/resource/crontab.ts
+msgid "Every month"
+msgstr "كل شهر"
+
+#: src/customer/details/CustomerAccordion.tsx
+msgid "Expand"
+msgstr "ستوسع"
+
+#: src/invitations/InvitationsFilter.tsx
+msgid "Expired"
+msgstr "انتهت"
+
+#: src/invitations/actions/create/SendingStatus.tsx
+msgid "Expires"
+msgstr "تنتهي"
+
+#: src/table/ExportDialog.tsx
+#: src/table/TableButtons.tsx
+#: src/table/TableExportButton.tsx
+msgid "Export"
+msgstr "تصدير"
+
+#: src/openstack/openstack-volume/actions/ExtendAction.tsx
+#: src/vmware/actions/ExtendDiskAction.tsx
+msgid "Extend"
+msgstr "بسط"
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
+msgid "FAQ"
+msgstr "الأسئلة المتداولة"
+
+#: src/navigation/header/FavoritePagesDropdown.tsx
+msgid "Favourites"
+msgstr "المفضلات"
+
+#: src/administration/FeaturesList.tsx
+#: src/administration/routes.ts
+#: src/marketplace/details/OfferingTabs.tsx
+msgid "Features"
+msgstr "ملامح"
+
+#: src/issues/feedback/SupportFeedback.tsx
 #: src/issues/routes.ts
+msgid "Feedback"
+msgstr "ردود الفعل"
+
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+msgid "Field"
+msgstr "ميدان"
+
+#: src/issues/attachments/utils.ts
+msgid "File"
+msgstr "ملف"
+
+#: src/issues/attachments/utils.ts
+msgid "Files"
+msgstr "الملفات"
+
+#: src/marketplace/category/filters/FilterDropdownHeader.tsx
+#: src/table/Table.tsx
+msgid "Filter"
+msgstr "راووق"
+
+#: src/issues/workspace/IssueNavigationService.ts
+msgid "Financial"
+msgstr "مالي"
+
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+msgid "First"
+msgstr "أولا"
+
+#: src/administration/TokensList.tsx
+#: src/user/support/UserEditForm.tsx
+msgid "First name"
+msgstr "الاسم الأول"
+
+#: src/marketplace/offerings/update/components/ComponentAccountingTypeField.tsx
+msgid "Fixed price"
+msgstr "السعر الثابت"
+
+#: src/digitalocean/DropletResizeDialog.tsx
+msgid "Flexible"
+msgstr "مرن"
+
+#: src/vmware/deploy/FormAdvancedOptionsStep.tsx
+msgid "Folder"
+msgstr "مجلد"
+
+#: src/invoices/details/BillingRecordDetails.tsx
+msgid "For"
+msgstr "من أجل"
+
+#: src/table/ExportDialog.tsx
+msgid "Format"
+msgstr "تنسيق"
+
+#: src/quotas/QuotasTable.tsx
+msgid "Free"
+msgstr "خال"
+
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "From"
+msgstr "من"
+
+#: src/booking/deploy/CustomRangeDatePicker.tsx
+msgid "From date"
+msgstr "من التاريخ"
+
+#: src/administration/providers/ProviderUsersDialog.tsx
+#: src/invitations/actions/UserDetailsGroup.tsx
+#: src/marketplace/UserPluginOptionsForm.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserList.tsx
+msgid "Full name"
+msgstr "الاسم الكامل"
+
+#: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
+#: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
+#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
+#: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
+#: src/rancher/cluster/create/VolumeSizeGroup.tsx
+#: src/vmware/deploy/FormMemoryStep.tsx
+msgid "GB"
+msgstr "غيغابايت"
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
+msgid "General"
+msgstr "عام"
+
+#: src/customer/create/CustomerCreateForm.tsx
+msgid "General information"
+msgstr "معلومات عامة"
+
+#: src/marketplace/offerings/details/PublicOfferingGetHelp.tsx
+msgid "Get help"
+msgstr "الحصول على المساعدة"
+
+#: src/invitations/actions/create/FormButtons.tsx
+#: src/marketplace/category/list/HeroSection.tsx
+msgid "Go back"
+msgstr "الرجوع للخلف"
+
+#: src/auth/PermissionLayout.tsx
+#: src/invitations/GroupInvitationErrorMessage.tsx
+#: src/invitations/InvitationErrorMessage.tsx
+msgid "Go to profile"
+msgstr "الانتقال إلى الملف الشخصي"
+
+#: src/navigation/cookies/CookiesConsent.tsx
+msgid "Got it!"
+msgstr "فهمت ذلك!"
+
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "Group"
+msgstr "مجموعة"
+
+#: src/customer/routes.ts
+msgid "Group invitations"
+msgstr "دعوات جماعية"
+
+#: src/invoices/routes.ts
+#: src/reporting/dashboard/ReportingWidgets.tsx
+msgid "Growth"
+msgstr "نمو"
+
+#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorToggle.tsx
+msgid "Guest"
+msgstr "ضيف"
+
+#: src/navigation/header/UserDropdown.tsx
+msgid "Hello"
+msgstr "مرحبًا"
+
+#: src/issues/workspace/IssueNavigationService.ts
+msgid "Helpdesk"
+msgstr "مكتب المساعدة"
+
+#: src/form/SecretField.tsx
+msgid "Hide"
+msgstr "أخفى"
+
+#: src/customer/list/OrganizationUpdate.tsx
+msgid "Homepage"
+msgstr "الصفحة الرئيسية"
+
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "Hours"
+msgstr "الساعات"
+
+#: src/marketplace/orders/list/ResourceOrders.tsx
+msgid "ID"
+msgstr "معرف"
+
+#: src/events/ExpandableEventDetailsTable.tsx
+#: src/openstack/openstack-instance/FloatingIpsList.tsx
+#: src/openstack/openstack-instance/InternalIpsList.tsx
+#: src/openstack/openstack-tenant/IpAddressList.tsx
+#: src/openstack/openstack-tenant/TenantPortsList.tsx
+#: src/user/api-key/AuthenticationEvents.tsx
+msgid "IP address"
+msgstr "عنوان IP"
+
+#: src/navigation/cookies/CookiesConsent.tsx
+msgid "I agree"
+msgstr "أوافق"
+
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/resources/details/openstack-instance/ResourceImageField.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/FormImageStep.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
+msgid "Image"
+msgstr "صورة"
+
+#: src/marketplace/resources/import/ImportButton.tsx
+msgid "Import"
+msgstr "استورد"
+
+#: src/issues/comments/IssueCommentItem.tsx
+msgid "Internal"
+msgstr "داخلي"
+
+#: src/customer/routes.ts
+#: src/invitations/InvitationsList.tsx
+#: src/project/routes.ts
+msgid "Invitations"
+msgstr "الدعوات"
+
+#: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/customer/payments/PaymentsList.tsx
+#: src/invoices/details/BillingDetails.tsx
+#: src/invoices/routes.ts
+msgid "Invoice"
+msgstr "فاتورة"
+
+#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+msgid "Invoice date"
+msgstr "تاريخ الفاتورة"
+
+#: src/invoices/list/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+msgid "Invoice number"
+msgstr "رقم الفاتورة"
+
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/resource/summary/ScheduleSummary.tsx
+msgid "Is active"
+msgstr "نشط"
+
+#: src/issues/feedback/SupportFeedbackList.tsx
+#: src/marketplace/orders/details/DetailsSection.tsx
+msgid "Issue"
+msgstr "أصدر"
+
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceDetails.tsx
+#: src/marketplace/cart/ShoppingCart.tsx
+msgid "Item"
+msgstr "بند"
+
+#: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserEditForm.tsx
+msgid "Job position"
+msgstr "الوظيفة"
+
+#: src/invitations/actions/UserDetailsGroup.tsx
+msgid "Job title"
+msgstr "المسمى الوظيفي"
+
+#: src/slurm/details/AllocationJobsTable.tsx
+#: src/slurm/details/AllocationMainComponent.tsx
+msgid "Jobs"
+msgstr "وظائف"
+
+#: src/issues/list/IssuesList.tsx
+#: src/marketplace/offerings/update/integration/EnvironmentVariablePanel.tsx
+#: src/marketplace/resources/KeyValueTable.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+msgid "Key"
+msgstr "مفتاح"
+
+#: src/administration/providers/ProviderForm.tsx
+msgid "Label"
+msgstr "تسميه"
+
+#: src/navigation/header/LanguageSelectorDropdown.tsx
+msgid "Language"
+msgstr "اللغة"
+
+#: src/administration/TokensList.tsx
+#: src/user/support/UserEditForm.tsx
+msgid "Last name"
+msgstr "اسم العائلة"
+
+#: src/auth/HeroButton.tsx
+#: src/navigation/cookies/CookiesConsent.tsx
+msgid "Learn more"
+msgstr "التعرف على المزيد"
+
+#: src/dashboard/chart.ts
+#: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/orders/details/LimitsSection.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+msgid "Limit"
+msgstr "حد"
+
+#: src/issues/IssueSummary.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+msgid "Link"
+msgstr "رابط"
+
+#: src/marketplace/deploy/steps/FormCloudStep.tsx
+#: src/marketplace/resources/details/InfiniteList.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
+msgid "Load more"
+msgstr " تحميل المزيد"
+
+#: src/customer/list/TotalCostComponent.tsx
+#: src/marketplace/deploy/steps/FormCloudStep.tsx
+#: src/marketplace/resources/details/InfiniteList.tsx
+#: src/openstack/openstack-instance/deploy/FormImageStep.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
+#: src/project/ProjectEventsTimeline.tsx
+#: src/providers/dashboard/ProviderActionLogs.tsx
+#: src/vmware/deploy/FormTemplateStep.tsx
+msgid "Loading"
+msgstr "تحميل"
+
+#: src/azure/AzureResourceSummary.tsx
+#: src/azure/sql/AzureSQLServerForm.tsx
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+msgid "Location"
+msgstr "مكان"
+
+#: src/navigation/AnonymousHeader.tsx
+msgid "Log in"
+msgstr "تسجيل الدخول"
+
+#: src/navigation/header/UserDropdown.tsx
+msgid "Log out"
+msgstr "تسجيل الخروج"
+
+#: src/administration/service-desk/SmaxSettings.tsx
+#: src/auth/SigninForm.tsx
+#: src/auth/saml2/AuthSaml2Dialog.tsx
+#: src/navigation/sidebar/UnifiedSidebar.tsx
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: src/auth/callbacks/AuthLoginFailed.tsx
+#: src/auth/callbacks/OauthLoginCompleted.tsx
+msgid "Login failed"
+msgstr "فشل تسجيل الدخول"
+
+#: src/customer/create/WizardFormFirstPage.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+msgid "Logo"
+msgstr "شعار"
+
+#: src/customer/dashboard/CustomerActions.tsx
+#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
+#: src/project/ProjectActions.tsx
+#: src/user/UserActions.tsx
+#: src/user/support/UserDetailsView.tsx
+msgid "Manage"
+msgstr "أدار"
+
+#: src/marketplace/offerings/update/integration/OfferingAttributes.tsx
+msgid "Management"
+msgstr "إدارة"
+
+#: src/proposals/call-management/ProposalCallFormDialog.tsx
+msgid "Manager"
+msgstr "مدير"
+
+#: src/invoices/list/MarkAsPaidButton.tsx
+msgid "Mark as paid"
+msgstr "وضع علامة \"كمدفوع\""
+
+#: src/administration/routes.ts
+#: src/marketplace/landing/LandingPage.tsx
+#: src/marketplace/routes.ts
+#: src/proposals/PublicCallsPage.tsx
+msgid "Marketplace"
+msgstr "السوق"
+
+#: src/customer/team/CustomerUsersList.tsx
+#: src/navigation/workspace/context-selector/OrganizationSummary.tsx
+#: src/project/team/ProjectUsersList.tsx
+msgid "Member"
+msgstr "عضو"
+
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/navigation/workspace/context-selector/OrganizationSummary.tsx
+msgid "Members"
+msgstr "اعضاء"
+
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
+#: src/events/BaseEventsList.tsx
+#: src/invitations/InvitationExpandableRow.tsx
+#: src/user/api-key/AuthenticationEvents.tsx
+msgid "Message"
+msgstr "رسالة"
+
+#: src/marketplace/offerings/create/OfferingLimitsTable.tsx
+msgid "Min amount"
+msgstr "الحد الأدنى للمبلغ"
+
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+msgid "Modified"
+msgstr "تعديل"
+
+#: src/providers/support/FlowMapFilter.tsx
+msgid "Month"
+msgstr "شهر"
+
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+msgid "Monthly"
+msgstr "شهري"
+
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "Months"
+msgstr "أشهر"
+
+#: src/marketplace/category/list/CategoriesBar.tsx
+msgid "More"
+msgstr "أكثر"
+
+#: src/invoices/events/InvoiceEventItem.tsx
+msgid "More info"
+msgstr "مزيد من المعلومات"
+
+#: src/marketplace/resources/actions/MoveResourceAction.tsx
+#: src/marketplace/resources/mass-actions/MultiMoveAction.tsx
+msgid "Move"
+msgstr "حرك"
+
+#: src/marketplace/routes.ts
+msgid "My orders"
+msgstr "أوامري"
+
+#: src/marketplace-checklist/AnswersTable.tsx
+msgid "N/A"
+msgstr "N/A"
+
+#: src/administration/roles/RoleForm.tsx
+#: src/administration/roles/RolesList.tsx
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/booking/BookingsList.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
+#: src/broadcasts/BroadcastTemplateList.tsx
+#: src/customer/create/WizardFormFirstPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/list/SupportCustomerList.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileDetails.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/invoices/details/InvoiceItemCompensationDialog.tsx
+#: src/invoices/details/ResourceRow.tsx
+#: src/marketplace-flows/CustomerCreateExpandableRow.tsx
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
+#: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/details/plan/PlanSection.tsx
+#: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/details/OfferingUsersTable.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/offerings/images/OfferingImagesList.tsx
+#: src/marketplace/offerings/import/SelectCategoryTab.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/marketplace/offerings/update/plans/PlanForm.tsx
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
+#: src/marketplace/orders/details/LimitsSection.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/marketplace/resources/change-plan/utils.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/marketplace/service-providers/ProviderOrganizationsList.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-instance/actions/EditDialog.tsx
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+#: src/openstack/openstack-server-groups/ServerGroupsList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
+#: src/openstack/openstack-tenant/TenantFlavorsList.tsx
+#: src/openstack/openstack-tenant/TenantImagesList.tsx
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
+#: src/openstack/openstack-tenant/TenantRoutersList.tsx
+#: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
+#: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/project/ProjectDetails.tsx
+#: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
+#: src/rancher/ClusterProjectList.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
+#: src/rancher/template/CatalogTemplateList.tsx
+#: src/rancher/template/ClusterTemplateList.tsx
+#: src/resource/actions/base.ts
+#: src/resource/support/SharedProviderResources.tsx
+#: src/slurm/details/AllocationJobsTable.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/resources/ResourcesList.tsx
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
+msgid "Name"
+msgstr "اسم"
+
+#: src/marketplace-checklist/PieChart.tsx
+msgid "Negative"
+msgstr "سالب"
+
+#: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
+#: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
+#: src/quotas/constants.ts
+#: src/rancher/cluster/create/FormNetworkStep.tsx
+#: src/rancher/cluster/create/steps.ts
+#: src/vmware/PortsList.tsx
+#: src/vmware/VMwarePortSummary.tsx
+#: src/vmware/actions/CreatePortDialog.tsx
+msgid "Network"
+msgstr "شبكة"
+
+#: src/administration/roles/RoleCreateButton.tsx
+#: src/administration/roles/RoleCreateDialog.tsx
+msgid "New role"
+msgstr "دور جديد"
+
+#: src/customer/create/CustomerCreateForm.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
+#: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
+msgid "Next"
+msgstr "مقبل"
+
+#: src/administration/FeaturesList.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/ServiceProviderFilter.tsx
+#: src/marketplace-checklist/AnswerGroup.tsx
+#: src/marketplace-checklist/AnswersTable.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/category/filters/FilteredBy.tsx
+#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
+#: src/marketplace/offerings/update/attributes/utils.tsx
+#: src/modal/ConfirmationDialog.tsx
+#: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
+#: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/resource/summary/ScheduleSummary.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
+msgid "No"
+msgstr "لا"
+
+#: src/marketplace/resources/resource-selector/ResourcesList.tsx
+#: src/navigation/header/SearchToggle.tsx
+msgid "No result found"
+msgstr "لم يتم العثور على نتيجة"
+
+#: src/auth/saml2/AuthSaml2Dialog.tsx
+#: src/form/AsyncSelectField.tsx
+msgid "No results found"
+msgstr "لم يتم العثور على نتائج"
+
+#: src/openstack/openstack-security-groups/rule-editor/RemoteGroupField.tsx
+msgid "None"
+msgstr "اي"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/routes.ts
+#: src/user/hooks/HooksList.tsx
+#: src/user/routes.ts
+msgid "Notifications"
+msgstr "الاخطارات"
+
+#: src/administration/providers/ProviderDetailsDialog.tsx
+#: src/administration/providers/ProviderUsersDialog.tsx
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
+msgid "OK"
+msgstr "موافق"
+
+#: src/auth/LocalLogin.tsx
+msgid "OR"
+msgstr "أو"
+
+#: src/events/TypeListDialog.tsx
+#: src/marketplace/details/plan/PlanDescription.tsx
+#: src/marketplace/offerings/actions/RequestActionDialog.tsx
+#: src/marketplace/orders/TermsOfServiceDialog.tsx
+#: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/marketplace/resources/report/ShowReportDialog.tsx
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/slurm/RequestLimitsChangeDialog.tsx
+msgid "Ok"
+msgstr "موافق"
+
+#: src/events/ExpandableEventDetailsTable.tsx
+#: src/issues/list/IssuesFilter.tsx
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/proposals/utils.ts
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+msgid "Open"
+msgstr "مفتوح"
+
+#: src/rancher/cluster/create/FormOptionalServicesStep.tsx
+#: src/rancher/cluster/create/steps.ts
+msgid "Optional"
+msgstr "اختياري"
+
+#: src/administration/roles/PermissionOptions.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
+msgid "Order"
+msgstr "ترتيب"
+
+#: src/marketplace/cart/ShoppingCartSidebar.tsx
+msgid "Order Summary"
+msgstr "ملخص الطلب"
+
+#: src/marketplace/orders/details/OrderDetails.tsx
+msgid "Order details"
+msgstr "تفاصيل الطلب"
+
+#: src/marketplace/resources/details/ResourceOrdersLink.tsx
+msgid "Order history"
+msgstr "تاريخ الطلب"
+
+#: src/marketplace/cart/ShoppingCartItemUpdate.tsx
+#: src/marketplace/details/OfferingDetails.tsx
+msgid "Order summary"
+msgstr "ملخص الطلب"
+
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/routes.ts
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
+msgid "Orders"
+msgstr "اوامر"
+
+#: src/booking/BookingsList.tsx
+#: src/customer/list/CustomerList.tsx
+#: src/customer/list/SupportCustomerList.tsx
+#: src/customer/routes.ts
+#: src/events/ExpandableEventDetailsTable.tsx
+#: src/invitations/actions/UserDetailsGroup.tsx
+#: src/issues/IssueSummary.tsx
+#: src/issues/create/IssueHeader.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/marketplace-checklist/ChecklistOverview.tsx
+#: src/marketplace-flows/FlowExpandableRow.tsx
+#: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace/details/CustomerCreateGroup.tsx
+#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
+#: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/marketplace/offerings/import/tabs.ts
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/orders/list/OrdersFilter.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
+#: src/navigation/sidebar/ManagementMenu.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/proposals/PublicCallsPage.tsx
+#: src/resource/support/SharedProviderCustomers.tsx
+#: src/resource/support/SharedProviderResources.tsx
+#: src/user/UserPermissionRequestsList.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/affiliations/ProjectsListFilter.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
+#: src/user/resources/ResourcesFilter.tsx
+#: src/user/resources/ResourcesList.tsx
+#: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserFilter.tsx
+#: src/user/support/UserList.tsx
+msgid "Organization"
+msgstr "منظمة"
+
+#: src/user/dashboard/CustomerPermissions.tsx
+#: src/user/support/UserEditForm.tsx
+msgid "Organization name"
+msgstr "اسم المؤسسة"
+
+#: src/invoices/growth/utils.ts
+msgid "Others"
+msgstr "الاخرين"
+
+#: src/marketplace/orders/details/DetailsSection.tsx
+msgid "Output"
+msgstr "الناتج"
+
+#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/create/OverviewSummary.tsx
+#: src/marketplace/offerings/details/PageOverview.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
+msgid "Overview"
+msgstr "نظره عامه"
+
+#: src/customer/team/CustomerUsersList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
+msgid "Owner"
+msgstr "مالك"
+
+#: src/invoices/growth/utils.ts
+#: src/invoices/list/InvoicesFilter.tsx
+#: src/paypal/InvoicesFilter.tsx
+msgid "Paid"
+msgstr "مدفوع"
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+#: src/administration/service-desk/SmaxSettings.tsx
+#: src/auth/SigninForm.tsx
+#: src/azure/sql/AzureSQLServerSummary.tsx
+#: src/openstack/OpenStackForm.tsx
+#: src/openstack/OpenStackTenantForm.tsx
+#: src/openstack/marketplace.ts
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/vmware/VMwareForm.tsx
+msgid "Password"
+msgstr "شعار"
+
+#: src/marketplace/offerings/actions/OfferingStateActions.tsx
+msgid "Pause"
+msgstr "تورع"
+
+#: src/invoices/details/InvoicePayButton.tsx
+msgid "Pay"
+msgstr "دفع"
+
+#: src/customer/routes.ts
+msgid "Payments"
+msgstr "الدفعات"
+
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+#: src/invitations/InvitationsFilter.tsx
+#: src/invoices/list/InvoicesFilter.tsx
+#: src/marketplace-flows/RequestStateFilter.tsx
+#: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
+#: src/user/UserPermissionRequestsStateFilter.tsx
+msgid "Pending"
+msgstr "المعلقه"
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Pending approval"
+msgstr "في انتظار الموافقة"
+
+#: src/booking/BookingCheckoutSummary.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
+msgid "Period"
+msgstr "مرحلة زمنية"
+
+#: src/booking/BookingCheckoutSummary.tsx
+#: src/booking/deploy/FormPeriodsStep.tsx
+#: src/booking/deploy/steps.ts
+msgid "Periods"
+msgstr "الفترات"
+
+#: src/digitalocean/DropletResizeDialog.tsx
+msgid "Permanent"
+msgstr "دائم"
+
+#: src/administration/notifications/HooksList.tsx
+msgid "Person"
+msgstr "شخص"
+
+#: src/invoices/details/CustomerDetails.tsx
+msgid "Phone"
+msgstr "الهاتف"
+
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+#: src/marketplace-flows/CustomerCreateExpandableRow.tsx
+#: src/user/support/UserEditForm.tsx
+#: src/user/support/UserList.tsx
+msgid "Phone number"
+msgstr "رقم الهاتف"
+
+#: src/user/support/UserDetailsTable.tsx
+msgid "Phone numbers"
+msgstr "أرقام الهواتف"
+
+#: src/booking/deploy/steps.ts
+#: src/marketplace/deploy/steps/FormPlanStep.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/details/plan/PlanSection.tsx
+#: src/marketplace/offerings/PriceList.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/resources/details/PlanDetailsField.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
+#: src/marketplace/resources/list/ExpandableResourceSummary.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
+#: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
+#: src/openstack/deploy/steps.ts
+#: src/rancher/cluster/create/steps.ts
+#: src/slurm/deploy/steps.ts
+#: src/support/deploy-steps.ts
+msgid "Plan"
+msgstr "خطة"
+
+#: src/marketplace/details/plan/PlanDetailsDialog.tsx
+#: src/marketplace/resources/list/ExpandableResourceSummary.tsx
+msgid "Plan details"
+msgstr "تفاصيل الخطة"
+
+#: src/slurm/SlurmForm.tsx
+#: src/slurm/marketplace.ts
+msgid "Port"
+msgstr "ميناء"
+
+#: src/marketplace-checklist/PieChart.tsx
+msgid "Positive"
+msgstr "موجب"
+
+#: src/customer/create/WizardFormSecondPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/marketplace-flows/CustomerCreateExpandableRow.tsx
+msgid "Postal code"
+msgstr "الرمز البريدي"
+
+#: src/auth/PoweredBy.tsx
+msgid "Powered by"
+msgstr "يعمل بواسطة"
+
+#: src/form/MarkdownField.tsx
+#: src/marketplace/offerings/list/PreviewButton.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
+#: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
+msgid "Preview"
+msgstr "معاينه"
+
+#: src/customer/create/WizardForm.tsx
+#: src/form/WizardForm.tsx
+#: src/marketplace/offerings/service-providers/shared/grid/PrevPage.tsx
+msgid "Previous"
+msgstr "سابق"
+
+#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/details/ResourceRow.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/marketplace/offerings/PriceList.tsx
+#: src/marketplace/offerings/update/plans/PlanComponents.tsx
+#: src/marketplace/resources/change-plan/utils.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+msgid "Price"
+msgstr "ثمن"
+
+#: src/marketplace/common/BillingPeriod.tsx
+#: src/marketplace/details/plan/LimitlessComponentsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
+msgid "Price per unit"
+msgstr "السعر لكل وحدة"
+
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingPricing.tsx
+msgid "Pricing"
+msgstr "التسعير"
+
+#: src/invoices/details/PrintInvoiceButton.tsx
+msgid "Print invoice"
+msgstr "طباعة الفاتورة"
+
+#: src/issues/IssueSummary.tsx
+msgid "Priority"
+msgstr "أولوية"
+
+#: src/about.tsx
+msgid "Privacy Policy"
+msgstr "سياسة الخصوصية"
+
+#: src/about.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
+#: src/navigation/FooterLinks.tsx
+msgid "Privacy policy"
+msgstr "سياسة الخصوصية"
+
+#: src/user/support/AvatarField.tsx
+msgid "Profile picture"
+msgstr "صورة الملف الشخصي"
+
+#: src/user/support/UserEditFormContainer.tsx
+msgid "Profile settings"
+msgstr "إعدادات الملف الشخصي"
+
+#: src/marketplace/deploy/DeployPageSidebar.tsx
+msgid "Progress"
+msgstr "ترقى"
+
+#: src/administration/roles/PermissionOptions.tsx
+#: src/administration/roles/RoleForm.tsx
+#: src/booking/BookingsList.tsx
+#: src/booking/BookingsListExpandableRow.tsx
+#: src/booking/deploy/steps.ts
+#: src/customer/cost-policies/CostPoliciesList.tsx
+#: src/customer/team/OrganizationProjectSelectField.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
+#: src/invitations/actions/ProjectGroup.tsx
+#: src/issues/IssueSummary.tsx
+#: src/issues/create/IssueHeader.tsx
+#: src/issues/create/IssueQuickCreate.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/marketplace-checklist/CustomerChecklistOverview.tsx
+#: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/deploy/steps/FormProjectStep.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/details/ProjectCreateGroup.tsx
+#: src/marketplace/details/ProjectField.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
+#: src/navigation/sidebar/ManagementMenu.tsx
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
+#: src/openstack/deploy/steps.ts
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/steps.ts
+#: src/project/routes.ts
+#: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/create/steps.ts
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
+#: src/slurm/deploy/steps.ts
+#: src/support/deploy-steps.ts
+#: src/user/UserPermissionRequestsList.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
+#: src/user/resources/ResourcesFilter.tsx
+#: src/user/resources/ResourcesList.tsx
+#: src/vmware/deploy/steps.ts
+msgid "Project"
+msgstr "مشروع"
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+msgid "Project ID"
+msgstr "معرف المشروع"
+
+#: src/configs/default.ts
+msgid "Project manager"
+msgstr "مدير المشروع"
+
+#: src/project/ProjectManage.tsx
+msgid "Project settings"
+msgstr "إعدادات المشروع"
+
+#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
+#: src/customer/routes.ts
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
@@ -46,19 +2328,205 @@ msgstr "لوحة القيادة"
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
-#: src/user/dashboard/UserDashboard.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Projects"
 msgstr "مشاريع"
 
+#: src/events/ExpandableEventDetailsTable.tsx
+#: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/navigation/sidebar/ProviderMenu.tsx
+#: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
+#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/support/SharedProviderFilter.tsx
+msgid "Provider"
+msgstr "كاسب"
+
+#: src/providers/ProviderNameField.tsx
+msgid "Provider name"
+msgstr "اسم المزود"
+
+#: src/proposals/details/CallDetailsCard.tsx
+msgid "Publication date"
+msgstr "تاريخ النشر"
+
+#: src/marketplace/referral/ReferralsList.tsx
+msgid "Published"
+msgstr "نشر"
+
+#: src/marketplace/referral/ReferralsList.tsx
+msgid "Publisher"
+msgstr "ناشر"
+
+#: src/marketplace/cart/ForwardButton.tsx
+msgid "Purchase"
+msgstr "ابتاع"
+
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceItemUpdateDialog.tsx
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+#: src/invoices/details/ResourceRow.tsx
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+msgid "Quantity"
+msgstr "كم"
+
+#: src/marketplace-checklist/AnswersTable.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+msgid "Question"
+msgstr "سؤال"
+
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+msgid "Rating"
+msgstr "تقييم الموقع"
+
+#: src/customer/details/CustomerRemovePanel.tsx
+#: src/user/support/actions.ts
+msgid "Reason"
+msgstr "سبب"
+
+#: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
+msgid "Recommended"
+msgstr "اوصت"
+
+#: src/proposals/details/CallDetailsCard.tsx
+msgid "Reference"
+msgstr "مرجع"
+
+#: src/marketplace/orders/actions/OrderRefreshButton.tsx
+#: src/marketplace/resources/details/RefreshButton.tsx
+#: src/navigation/BackendHealthStatusDialog.tsx
+msgid "Refresh"
+msgstr "تحديث"
+
+#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+#: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
+msgid "Regenerate"
+msgstr "تجديد"
+
+#: src/digitalocean/DigitalOceanDropletSummary.tsx
+#: src/digitalocean/digitalocean-droplet-config.ts
+msgid "Region"
+msgstr "قطر"
+
+#: src/booking/CancelAction.tsx
+#: src/invitations/UserPermissionRequestRejectButton.tsx
+#: src/marketplace-flows/ReviewRejectAction.tsx
+#: src/marketplace/orders/actions/RejectByConsumerButton.tsx
+#: src/marketplace/orders/actions/RejectByProviderButton.tsx
+msgid "Reject"
+msgstr "رفض"
+
+#: src/booking/BookingStateField.tsx
+#: src/booking/utils.ts
+#: src/invitations/InvitationsFilter.tsx
+#: src/marketplace-flows/RequestStateFilter.tsx
+#: src/marketplace-flows/RequestStateIndicator.tsx
+#: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/user/UserPermissionRequestsStateFilter.tsx
+msgid "Rejected"
+msgstr "نبيذ"
+
+#: src/ErrorMessage.tsx
+#: src/core/LoadingErred.tsx
+#: src/dashboard/CategoryResourcesList.tsx
+msgid "Reload"
+msgstr "تحديث"
+
+#: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+msgid "Remaining"
+msgstr "باق"
+
+#: src/administration/TokenDeleteButton.tsx
+#: src/administration/notifications/HookRemoveButton.tsx
+#: src/administration/roles/RoleDeleteButton.tsx
+#: src/broadcasts/BroadcastTemplateDeleteButton.tsx
+#: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/team/UserRemoveButton.tsx
+#: src/form/DateField.tsx
+#: src/invoices/details/InvoiceItemDelete.tsx
+#: src/marketplace/cart/ShoppingCartItem.tsx
+#: src/marketplace/category/admin/CategoryDeleteButton.tsx
+#: src/marketplace/category/admin/GroupDeleteButton.tsx
+#: src/marketplace/offerings/RemoveButton.tsx
+#: src/marketplace/offerings/update/ImageUploadField.tsx
+#: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+#: src/openstack/openstack-tenant/IpAddressList.tsx
+#: src/openstack/openstack-tenant/StaticRoutesTable.tsx
+#: src/project/team/UserRemoveButton.tsx
+#: src/user/hooks/HookRemoveButton.tsx
+#: src/user/keys/KeyRemoveButton.tsx
+msgid "Remove"
+msgstr "أبعد"
+
+#: src/customer/details/CustomerLogoUpdate.tsx
+msgid "Remove logo"
+msgstr "إزالة الشعار"
+
+#: src/marketplace/resources/report/SubmitReportDialog.tsx
+msgid "Report"
+msgstr "تقرير"
+
+#: src/dashboard/ReportIssueAction.tsx
+msgid "Report an issue"
+msgstr "الإبلاغ عن مشكلة"
+
+#: src/issues/IssueSummary.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
+msgid "Reporter"
+msgstr "مراسل"
+
+#: src/navigation/sidebar/ReportingMenu.tsx
+#: src/reporting/routes.ts
+msgid "Reporting"
+msgstr "تقريري"
+
+#: src/i18n/constants.ts
+#: src/marketplace/cart/ForwardButton.tsx
+msgid "Request"
+msgstr "طلب"
+
+#: src/invitations/InvitationsFilter.tsx
+msgid "Requested"
+msgstr "طلب"
+
+#: src/customer/routes.ts
+msgid "Requests"
+msgstr "الطلبات"
+
+#: src/marketplace/offerings/update/options/OptionForm.tsx
+msgid "Required"
+msgstr "مطلوب"
+
+#: src/invitations/actions/InvitationSendButton.tsx
+msgid "Resend"
+msgstr "ارسال"
+
+#: src/notifications/NotificationForm.tsx
+#: src/vmware/actions/ResetAction.tsx
+msgid "Reset"
+msgstr "اعاده تعيين"
+
 #: src/administration/dashboard/StatisticsCards.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/project-selector/ProjectsList.tsx
@@ -72,15 +2540,72 @@ msgstr "مشاريع"
 msgid "Resources"
 msgstr "موارد"
 
-#: src/booking/components/modal/BookingModal.tsx
+#: src/auth/PermissionLayout.tsx
+msgid "Restricted"
+msgstr "مقيد"
+
+#: src/LoadingScreen.tsx
+#: src/navigation/SearchResultsDropdown.tsx
+msgid "Retry"
+msgstr "اعاده المحاوله"
+
+#: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/review/CallReviewSection.tsx
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
+msgid "Review"
+msgstr "استعراض"
+
+#: src/proposals/update/ProposalCallQuotas.tsx
+msgid "Reviewed"
+msgstr "استعراض"
+
+#: src/customer/routes.ts
+#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingReviews.tsx
+msgid "Reviews"
+msgstr "ملاحظات"
+
+#: src/customer/team/ProjectsListGroup.tsx
+#: src/invitations/GroupInvitationsList.tsx
+#: src/invitations/InvitationsList.tsx
+#: src/invitations/actions/RoleGroup.tsx
+#: src/invitations/actions/create/EmailsListGroup.tsx
+#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/rancher/cluster/create/NodeRoleGroup.tsx
+#: src/user/UserPermissionRequestsList.tsx
+#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/PermissionDetails.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
+#: src/user/support/UserFilter.tsx
+msgid "Role"
+msgstr "دور"
+
+#: src/rancher/node/ClusterNodesList.tsx
+#: src/rancher/node/RancherNodeSummary.tsx
+msgid "Roles"
+msgstr "ادوار"
+
+#: src/openstack/openstack-security-groups/tabs.ts
+msgid "Rules"
+msgstr "القواعد"
+
+#: src/administration/FeaturesList.tsx
+#: src/administration/agreements/CreateUserAgreementsForm.tsx
+#: src/administration/agreements/UserAgreementsForm.tsx
+#: src/administration/providers/UpdateProviderDialog.tsx
+#: src/administration/roles/RoleForm.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/customer/organization-groups/utils.ts
 #: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
-#: src/issues/FeaturesList.tsx
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/offerings/actions/EditConfirmationMessageForm.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 #: src/marketplace/offerings/expandable/utils.ts
@@ -91,23 +2616,760 @@ msgstr "موارد"
 #: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
 #: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
 #: src/marketplace/offerings/update/options/EditOptionDialog.tsx
-#: src/marketplace/offerings/update/plans/EditPlanDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanPricesDialog.tsx
+#: src/marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
+#: src/notifications/ManageCommonFooterDialog.tsx
+#: src/notifications/NotificationForm.tsx
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
 msgid "Save"
 msgstr "حفظ"
 
+#: src/broadcasts/BroadcastFooter.tsx
+msgid "Save as a template"
+msgstr "حفظ كقالب"
+
+#: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/user/api-key/UserEditTokenContainer.tsx
+#: src/user/support/UserEditForm.tsx
+msgid "Save changes"
+msgstr "حفظ التغييرات"
+
+#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
+msgid "Saved"
+msgstr "حفظ"
+
+#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
+msgid "Saving"
+msgstr "حفظ"
+
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup-schedule/actions/fields.ts
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/resource/summary/ScheduleSummary.tsx
+msgid "Schedule"
+msgstr "جدول"
+
+#: src/proposals/utils.ts
+msgid "Scheduled"
+msgstr "المقرر"
+
+#: src/marketplace-checklist/StatsTable.tsx
+msgid "Score"
+msgstr "نقاط"
+
+#: src/navigation/header/SearchFilters.tsx
+#: src/navigation/header/SearchToggle.tsx
+#: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
+#: src/table/TableQuery.tsx
+msgid "Search"
+msgstr "بحث"
+
+#: src/navigation/header/SearchToggle.tsx
+#: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
+msgid "Search..."
+msgstr "بحث..."
+
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+msgid "Second"
+msgstr "ثان"
+
+#: src/marketplace/offerings/update/attributes/EditAttributeDialog.tsx
+msgid "Section"
+msgstr "الفرع"
+
+#: src/marketplace/resources/details/ActivityCard.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
+msgid "See all"
+msgstr "شاهد الكل"
+
+#: src/booking/offering/BookingResourceListItem.tsx
+msgid "See more"
+msgstr "شاهد المزيد"
+
+#: src/form/themed-select.tsx
+#: src/marketplace/resources/import/OfferingsList.tsx
+#: src/marketplace/resources/import/ResourceRow.tsx
+#: src/user/affiliations/OrganizationHoverableRow.tsx
+#: src/user/affiliations/ProjectHoverableRow.tsx
+msgid "Select"
+msgstr "اختار"
+
+#: src/support/OfferingConfigurationForm.tsx
+msgid "Select dates"
+msgstr "تحديد التواريخ"
+
+#: src/navigation/workspace/context-selector/ContextSelectorToggle.tsx
+msgid "Select organization"
+msgstr "اختر المؤسسة"
+
+#: src/user/support/UserFilter.tsx
+msgid "Select status"
+msgstr "اختر الحالة"
+
+#: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
+msgid "Select type"
+msgstr "اختر النوع"
+
+#: src/marketplace/resources/import/OfferingsList.tsx
+#: src/marketplace/resources/import/ResourceRow.tsx
+#: src/user/affiliations/OrganizationHoverableRow.tsx
+#: src/user/affiliations/ProjectHoverableRow.tsx
+msgid "Selected"
+msgstr "المحدد"
+
+#: src/broadcasts/BroadcastSendButton.tsx
+#: src/customer/list/FinancialReportSendButton.tsx
+msgid "Send"
+msgstr "ارسل"
+
+#: src/invitations/actions/create/FormButtons.tsx
+msgid "Send invitation"
+msgstr "إرسال دعوة"
+
+#: src/paypal/InvoicesFilter.tsx
+msgid "Sent"
+msgstr "ارسال"
+
+#: src/azure/sql/AzureSQLDatabaseSummary.tsx
+msgid "Server"
+msgstr "ملقم"
+
 #: src/rancher/cluster/tabs.ts
 msgid "Services"
 msgstr "الخدمات"
 
-#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
 #: src/customer/routes.ts
+#: src/project/routes.ts
+#: src/user/UserManage.tsx
+#: src/user/routes.ts
+msgid "Settings"
+msgstr "اعدادات"
+
+#: src/form/SecretField.tsx
+#: src/marketplace/details/plan/PlanDetailsLink.tsx
+#: src/resource/summary/ResourceMetadataLink.tsx
+msgid "Show"
+msgstr "عرض"
+
+#: src/marketplace/orders/PendingOrderIndicator.tsx
+msgid "Show all"
+msgstr "اظهار الكل"
+
+#: src/marketplace/resources/KeyValueButton.tsx
+msgid "Show details"
+msgstr "إظهار التفاصيل"
+
+#: src/navigation/sidebar/ResourcesMenu.tsx
+msgid "Show less"
+msgstr "عرض أقل"
+
+#: src/marketplace/resources/details/ResourceShowMoreComponents.tsx
+msgid "Show more"
+msgstr "أظهر المزيد"
+
+#: src/marketplace/resources/report/ShowReportAction.tsx
+#: src/marketplace/resources/report/ShowReportButton.tsx
+msgid "Show report"
+msgstr "عرض التقرير"
+
+#: src/auth/valimo/AuthValimoDialog.tsx
+#: src/navigation/header/UserDropdown.tsx
+#: src/navigation/workspace/context-selector/GuestDropdown.tsx
+msgid "Sign in"
+msgstr "تسجيل الدخول"
+
+#: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/openstack/openstack-instance/OpenStackInstanceVolumeBadge.tsx
+#: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/vmware/DisksList.tsx
+#: src/vmware/VMwareDiskSummary.tsx
+#: src/vmware/actions/CreateDiskDialog.tsx
+#: src/vmware/actions/ExtendDiskDialog.tsx
+msgid "Size"
+msgstr "حجم"
+
+#: src/customer/list/ExportAsEmailDialog.tsx
+msgid "Something went wrong"
+msgstr "حدث خطأ ما"
+
+#: src/administration/dashboard/AdministrationProfile.tsx
+#: src/user/support/UserList.tsx
+#: src/user/support/utils.ts
+msgid "Staff"
+msgstr "طاقم"
+
+#: src/azure/vm/actions/StartAction.tsx
+#: src/openstack/openstack-instance/actions/StartAction.tsx
+#: src/proposals/PublicCallsPage.tsx
+#: src/vmware/actions/StartAction.tsx
+msgid "Start"
+msgstr "بدء"
+
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/proposals/update/rounds/WizardFormFirstPage.tsx
+msgid "Start date"
+msgstr "تاريخ البدء"
+
+#: src/booking/deploy/CustomRangeDatePicker.tsx
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+msgid "Start time"
+msgstr "وقت البدء"
+
+#: src/administration/notifications/HooksList.tsx
+#: src/booking/BookingsList.tsx
+#: src/broadcasts/BroadcastList.tsx
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+#: src/invitations/InvitationsFilter.tsx
+#: src/invitations/UserPermissionRequestsList.tsx
+#: src/invoices/list/BillingRecordsList.tsx
+#: src/invoices/list/InvoicesFilter.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/marketplace-flows/FlowListFilter.tsx
+#: src/marketplace-flows/FlowsList.tsx
+#: src/marketplace-flows/utils.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/details/OfferingResourcesFilter.tsx
+#: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
+#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/list/OfferingsFilter.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/OrdersFilter.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/orders/list/ResourceOrders.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/lexis/LexisLinkList.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/PublicResourcesFilter.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignFilter.tsx
+#: src/marketplace/service-providers/ProviderOfferingsFilter.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+#: src/openstack/openstack-server-groups/ServerGroupsList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
+#: src/openstack/openstack-subnet/TenantSubnetsList.tsx
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
+#: src/openstack/openstack-tenant/TenantRoutersList.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+#: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
+#: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/rancher/ClusterProjectList.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/node/ClusterNodesList.tsx
+#: src/rancher/template/ClusterTemplateList.tsx
+#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/support/SharedProviderResources.tsx
+#: src/slurm/details/AllocationJobsTable.tsx
+#: src/user/UserPermissionRequestsList.tsx
+#: src/user/UserPermissionRequestsStateFilter.tsx
+#: src/user/hooks/HooksList.tsx
+#: src/user/resources/ResourcesFilter.tsx
+#: src/user/resources/ResourcesList.tsx
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
+msgid "State"
+msgstr "حالة"
+
+#: src/administration/providers/ProviderUsersDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/invitations/InvitationsList.tsx
+#: src/invitations/actions/create/SendingStatus.tsx
+#: src/issues/IssueSummary.tsx
+#: src/issues/list/IssuesFilter.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/navigation/BackendHealthStatusDialog.tsx
+#: src/project/team/InvitationsList.tsx
+#: src/proposals/details/CallDetailsCard.tsx
+#: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserFilter.tsx
+#: src/user/support/UserList.tsx
+msgid "Status"
+msgstr "حالة"
+
+#: src/azure/vm/actions/StopAction.tsx
+#: src/openstack/openstack-instance/actions/StopAction.tsx
+#: src/vmware/actions/StopAction.tsx
+msgid "Stop"
+msgstr "وقف"
+
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/BroadcastList.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
+#: src/broadcasts/BroadcastTemplateList.tsx
+msgid "Subject"
+msgstr "موضوع"
+
+#: src/administration/agreements/UserAgreementDeleteDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/invitations/GroupinvitationButtons.tsx
+#: src/invitations/PermissionRequestActionDialog.tsx
+#: src/invitations/actions/GroupInvitationCreateDialog.tsx
+#: src/invoices/list/MarkAsPaidDialog.tsx
+#: src/issues/feedback/SupportFeedback.tsx
+#: src/marketplace-checklist/UserChecklist.tsx
+#: src/marketplace-flows/FlowSubmitAction.tsx
+#: src/marketplace-flows/ReviewDialog.tsx
+#: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
+#: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
+#: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
+#: src/marketplace/resources/change-plan/ChangePlanBody.tsx
+#: src/marketplace/resources/lexis/CreateLexisLinkDialog.tsx
+#: src/marketplace/resources/terminate/TerminateDialog.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/rancher/catalog/CatalogDeleteDialog.tsx
+#: src/rancher/cluster/ImportYAMLDialog.tsx
+#: src/rancher/cluster/ViewYAMLDialog.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+#: src/resource/actions/AsyncActionDialog.tsx
+#: src/resource/actions/ResourceActionDialog.tsx
+#: src/user/support/UserEmailChangeDialog.tsx
+msgid "Submit"
+msgstr "إرسال"
+
+#: src/marketplace/resources/report/SubmitReportAction.tsx
+#: src/marketplace/resources/report/SubmitReportDialog.tsx
+msgid "Submit report"
+msgstr "إرسال تقرير"
+
+#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/list/MonthOverview.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
+msgid "Subtotal"
+msgstr "المجموع الفرعي"
+
+#: src/invitations/actions/create/FinishStepWrapper.tsx
+msgid "Success"
+msgstr "نجاح"
+
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/customer/payments/PaymentsList.tsx
+msgid "Sum"
+msgstr "مجموع"
+
+#: src/azure/vm/AzureVirtualMachineSummary.tsx
+#: src/issues/IssueDetails.tsx
+#: src/marketplace-flows/FlowEditForm.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/openstack/openstack-tenant/TenantInstancesList.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/rancher/template/TemplateDetail.tsx
+#: src/resource/summary/VirtualMachineSummary.tsx
+#: src/vmware/VMwareVirtualMachineSummary.tsx
+msgid "Summary"
+msgstr "ملخص"
+
+#: src/administration/dashboard/AdministrationProfile.tsx
 #: src/issues/routes.ts
+#: src/navigation/FooterLinks.tsx
+#: src/navigation/sidebar/SupportMenu.tsx
+#: src/user/support/UserList.tsx
+#: src/user/support/utils.ts
+msgid "Support"
+msgstr "دعم"
+
+#: src/vmware/actions/SuspendAction.tsx
+msgid "Suspend"
+msgstr "تعليق"
+
+#: src/marketplace/resources/actions/SyncResourceAction.tsx
+#: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.tsx
+#: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.tsx
+#: src/openstack/openstack-tenant/actions/PullServerGroupsAction.tsx
+#: src/resource/actions/PullActionItem.tsx
+msgid "Synchronise"
+msgstr "مزامنه"
+
+#: src/marketplace/offerings/update/integration/SyncButton.tsx
+msgid "Synchronize"
+msgstr "مزامنه"
+
+#: src/invoices/details/InvoiceDetails.tsx
+msgid "TAX"
+msgstr "ضريبة"
+
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceDetails.tsx
+msgid "TOTAL"
+msgstr "مجموع"
+
+#: src/rancher/cluster/ClusterServicesList.tsx
+msgid "Target"
+msgstr "هدف"
+
+#: src/invoices/details/ResourceRow.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+msgid "Tax"
+msgstr "ضريبة"
+
+#: src/invitations/actions/TaxNumberGroup.tsx
+#: src/invitations/actions/create/EmailsListGroup.tsx
+msgid "Tax number"
+msgstr "الرقم الضريبي"
+
+#: src/customer/routes.ts
+#: src/project/ProjectUsersBadge.tsx
+#: src/project/routes.ts
+msgid "Team"
+msgstr "فريق"
+
+#: src/administration/roles/PermissionOptions.tsx
+#: src/customer/team/CustomerUsersList.tsx
+#: src/project/team/ProjectUsersList.tsx
+msgid "Team members"
+msgstr "أعضاء الفريق"
+
+#: src/broadcasts/BroadcastForm.tsx
+#: src/issues/create/IssueCreateForm.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/create/FormNodesStep.tsx
+#: src/vmware/VMwareVirtualMachineSummary.tsx
+#: src/vmware/deploy/FormTemplateStep.tsx
+#: src/vmware/deploy/steps.ts
+msgid "Template"
+msgstr "قالب"
+
+#: src/rancher/template/TemplateDetail.tsx
+msgid "Template details"
+msgstr "تفاصيل القالب"
+
+#: src/marketplace/orders/list/OrderStateFilter.tsx
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+msgid "Terminated"
+msgstr "انهاء"
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "Termination"
+msgstr "انهاء"
+
+#: src/project/ProjectDashboardCostPolicies.tsx
+msgid "Threshold"
+msgstr "عتبة"
+
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/ResourceIssuesCard.tsx
+msgid "Tickets"
+msgstr "تذاكر"
+
+#: src/user/api-key/AuthenticationEvents.tsx
+msgid "Time"
+msgstr "الوقت"
+
+#: src/events/BaseEventsList.tsx
+msgid "Timestamp"
+msgstr "الطابع الزمني"
+
+#: src/issues/create/IssueCreateDialog.tsx
+#: src/issues/list/IssuesList.tsx
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryGroupsList.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/marketplace/referral/ReferralsList.tsx
+#: src/user/keys/KeysList.tsx
+msgid "Title"
+msgstr "عنوان"
+
+#: src/booking/deploy/FormPeriodsStep.tsx
+#: src/marketplace/offerings/update/integration/OfferingScheduler.tsx
+msgid "To"
+msgstr "ل"
+
+#: src/booking/components/modal/DateAndTimeSelect.tsx
+msgid "Today"
+msgstr "اليوم"
+
+#: src/administration/service-desk/AtlassianSettings.tsx
+#: src/administration/service-desk/ZammadSettings.tsx
+#: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
+#: src/marketplace-remote/marketplace.ts
+#: src/navigation/header/UserToken.tsx
+msgid "Token"
+msgstr "رمز مميز"
+
+#: src/invoices/details/ResourceLimitPeriodsTable.tsx
+#: src/invoices/growth/utils.ts
+#: src/invoices/list/BillingRecordsList.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/invoices/list/MonthOverview.tsx
+#: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/details/plan/OrderSummaryPlanRows.tsx
+#: src/marketplace/details/plan/PlanDetailsList.tsx
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsList.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+msgid "Total"
+msgstr "مجموع"
+
+#: src/customer/list/TotalCostField.tsx
+msgid "Total cost:"
+msgstr "التكلفة الإجمالية:"
+
+#: src/invoices/details/BillingRecordDetails.tsx
+msgid "Total price"
+msgstr "السعر الإجمالي"
+
+#: src/user/UserPopover.tsx
+msgid "Try again"
+msgstr "حاول مرة أخرى"
+
+#: src/administration/agreements/UserAgreementsList.tsx
+#: src/administration/roles/RoleForm.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
+#: src/customer/payment-profiles/PaymentProfileDetails.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/customer/workspace/CustomerEventsFilter.tsx
+#: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/offerings/update/options/OptionForm.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/OrdersFilter.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/orders/list/ResourceOrders.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/marketplace/robot-accounts/RobotAccountList.tsx
+#: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
+#: src/openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx
+#: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/TenantVolumesList.tsx
+#: src/project/ProjectEventsFilter.tsx
+#: src/resource/support/SharedProviderResources.tsx
+#: src/user/keys/KeysList.tsx
+#: src/vmware/deploy/FormNetworkStep.tsx
+msgid "Type"
+msgstr "نوع"
+
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
+#: src/rancher/catalog/ClusterCatalogList.tsx
+msgid "URL"
+msgstr "عنوان URL"
+
+#: src/booking/BookingStateField.tsx
+#: src/booking/utils.ts
+msgid "Unconfirmed"
+msgstr "غير مؤكده"
+
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/ResourceRow.tsx
+#: src/marketplace/details/plan/LimitlessComponentsTable.tsx
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/details/plan/TotalLimitComponentsTable.tsx
+#: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
+msgid "Unit"
+msgstr "وحدة"
+
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/ResourceRow.tsx
+msgid "Unit price"
+msgstr "سعر الوحدة"
+
+#: src/marketplace/offerings/update/plans/PlanComponents.tsx
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
+msgid "Units"
+msgstr "الوحدات"
+
+#: src/marketplace-checklist/PieChart.tsx
+msgid "Unknown"
+msgstr "مجهول"
+
+#: src/auth/SigninForm.tsx
+#: src/auth/callbacks/OauthLoginCompleted.tsx
+msgid "Unknown error"
+msgstr "خطأ غير معروف"
+
+#: src/administration/TokensList.tsx
+msgid "Unlimited"
+msgstr "مطلق"
+
+#: src/resource/actions/UnlinkActionItem.tsx
+msgid "Unlink"
+msgstr "فك ارتباط"
+
+#: src/paypal/InvoicesFilter.tsx
+msgid "Unpaid"
+msgstr "غير المسدده"
+
+#: src/administration/notifications/HookUpdateButton.tsx
+#: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
+#: src/broadcasts/BroadcastUpdateButton.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/marketplace/cart/ShoppingCartUpdateButton.tsx
+#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
+#: src/marketplace/offerings/update/integration/EditSchedulesDialog.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
+#: src/marketplace/offerings/update/overview/EditOverviewDialog.tsx
+#: src/marketplace/orders/list/OrderTypeCell.tsx
+#: src/marketplace/orders/list/OrderTypeFilter.tsx
+#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+#: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+#: src/user/hooks/HookDetailsDialog.tsx
+#: src/user/hooks/HookUpdateButton.tsx
+msgid "Update"
+msgstr "تحديث"
+
+#: src/user/support/UserEditForm.tsx
+msgid "Update profile"
+msgstr "تحديث الملف الشخصي"
+
+#: src/issues/list/IssuesShortList.tsx
+msgid "Updated"
+msgstr "تحديث"
+
+#: src/marketplace/resources/list/ResourceStateFilter.tsx
+#: src/resource/state/constants.ts
+msgid "Updating"
+msgstr "تحديث"
+
+#: src/dashboard/chart.ts
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/slurm/details/utils.ts
+msgid "Usage"
+msgstr "استخدام"
+
+#: src/quotas/QuotasTable.tsx
+msgid "Used"
+msgstr "مستعمل"
+
+#: src/customer/team/CustomerUserAddDialog.tsx
+#: src/customer/team/UserGroup.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
+#: src/issues/feedback/SupportFeedbackList.tsx
+#: src/issues/feedback/SupportFeedbackListFilter.tsx
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+#: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
+#: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
+#: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
+#: src/marketplace/service-providers/OfferingPermissionsList.tsx
+#: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/UserGroup.tsx
+#: src/slurm/details/AllocationJobsTable.tsx
+msgid "User"
+msgstr "مستخدم"
+
+#: src/user/UserDropdownMenu.tsx
+msgid "User profile"
+msgstr "ملف تعريف المستخدم"
+
+#: src/administration/TokensList.tsx
+#: src/administration/service-desk/AtlassianSettings.tsx
+#: src/auth/SigninForm.tsx
+#: src/freeipa/FreeIPAAccountEdit.tsx
+#: src/freeipa/UsernameGroup.tsx
+#: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
+#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
+#: src/marketplace/robot-accounts/RobotAccountList.tsx
+#: src/openstack/OpenStackForm.tsx
+#: src/openstack/OpenStackTenantForm.tsx
+#: src/openstack/marketplace.ts
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/project/team/UserGroup.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/slurm/SlurmForm.tsx
+#: src/slurm/details/AllocationUsersTable.tsx
+#: src/slurm/marketplace.ts
+#: src/user/UserOfferingList.tsx
+#: src/user/support/UserDetailsTable.tsx
+#: src/vmware/VMwareForm.tsx
+msgid "Username"
+msgstr "اسم المستخدم"
+
+#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/administration/routes.ts
+#: src/customer/routes.ts
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
@@ -116,3 +3378,272 @@ msgstr "الخدمات"
 #: src/rancher/cluster/tabs.ts
 msgid "Users"
 msgstr "المستخدمين"
+
+#: src/invoices/details/CustomerDetails.tsx
+#: src/invoices/list/MonthOverview.tsx
+msgid "VAT"
+msgstr "ضريبه القيمه المضافه"
+
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+msgid "VAT code"
+msgstr "رمز ضريبة القيمة المضافة"
+
+#: src/marketplace/offerings/update/integration/EnvironmentVariablePanel.tsx
+#: src/marketplace/resources/KeyValueTable.tsx
+#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/marketplace/resources/usage/utils.ts
+#: src/proposals/update/review/CallReviewSection.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+msgid "Value"
+msgstr "قيمة"
+
+#: src/user/support/EmailChangeForm.tsx
+msgid "Verify email"
+msgstr "التحقق من البريد الإلكتروني"
+
+#: src/administration/dashboard/AdministrationProfile.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/navigation/AppFooter.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
+msgid "Version"
+msgstr "الإصدار"
+
+#: src/marketplace/offerings/OfferingEditButton.tsx
+msgid "View"
+msgstr "منظر"
+
+#: src/administration/dashboard/StatisticsCards.tsx
+#: src/marketplace/category/list/CategoryGroupsList.tsx
+#: src/support/dashboard/StatisticsCards.tsx
+msgid "View all"
+msgstr "عرض الكل"
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "View order"
+msgstr "عرض الأمر"
+
+#: src/openstack/openstack-instance/actions/AttachVolumeDialog.tsx
+#: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
+#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
+#: src/openstack/openstack-volume/deploy/steps.ts
+msgid "Volume"
+msgstr "حجم"
+
+#: src/marketplace/landing/HeroSection.tsx
+msgid "Welcome to"
+msgstr "مرحبا بكم في"
+
+#: src/administration/FeaturesList.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/ServiceProviderFilter.tsx
+#: src/marketplace-checklist/AnswerGroup.tsx
+#: src/marketplace-checklist/AnswersTable.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/category/filters/FilteredBy.tsx
+#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
+#: src/marketplace/offerings/update/attributes/utils.tsx
+#: src/modal/ConfirmationDialog.tsx
+#: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
+#: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
+#: src/project/ProjectRemoveDialog.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/resource/summary/ScheduleSummary.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
+#: src/user/hooks/HookRemoveDialog.tsx
+#: src/user/keys/KeyRemoveDialog.tsx
+msgid "Yes"
+msgstr "نعم"
+
+#: src/user/dashboard/UserProfile.tsx
+msgid "and"
+msgstr "و"
+
+#: src/rancher/cluster/apps/ApplicationDeleteButton.tsx
+msgid "application"
+msgstr "تطبيق"
+
+#: src/form/CronField.tsx
+msgid "at"
+msgstr "في"
+
+#: src/issues/attachments/IssueAttachmentsContainer.tsx
+msgid "browse"
+msgstr "تصفح"
+
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopupTitle.tsx
+msgid "change"
+msgstr "تغيير"
+
+#: src/marketplace/offerings/PriceList.tsx
+msgid "components"
+msgstr "مكونات"
+
+#: src/form/CronField.tsx
+msgid "day"
+msgstr "يوم"
+
+#: src/events/BaseEventsList.tsx
+msgid "events"
+msgstr "احداث"
+
+#: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
+msgid "failed"
+msgstr "فشل"
+
+#: src/invitations/GroupInvitationsList.tsx
+msgid "group invitations"
+msgstr "دعوات جماعية"
+
+#: src/i18n/constants.ts
+msgid "guest"
+msgstr "ضيف"
+
+#: src/form/CronField.tsx
+msgid "hour"
+msgstr "ساعة"
+
+#: src/providers/support/MapInfoPanel.tsx
+msgid "hours"
+msgstr "الساعات"
+
+#: src/invoices/list/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
+msgid "invoices"
+msgstr "الفواتير"
+
+#: src/table/utils.tsx
+msgid "items"
+msgstr "العناصر"
+
+#: src/slurm/details/AllocationJobsTable.tsx
+msgid "jobs"
+msgstr "وظائف"
+
+#: src/i18n/constants.ts
+msgid "member"
+msgstr "عضو"
+
+#: src/form/CronField.tsx
+msgid "minute"
+msgstr "دقيقة"
+
+#: src/form/CronField.tsx
+msgid "month"
+msgstr "شهر"
+
+#: src/openstack/openstack-network/actions/EditNetworkDialog.tsx
+msgid "network"
+msgstr "شبكة"
+
+#: src/notifications/NotificationList.tsx
+msgid "notifications"
+msgstr "الاخطارات"
+
+#: src/form/CronField.tsx
+msgid "of"
+msgstr "من"
+
+#: src/form/CronField.tsx
+msgid "on"
+msgstr "على"
+
+#: src/marketplace/orders/list/ResourceOrders.tsx
+msgid "orders"
+msgstr "اوامر"
+
+#: src/invitations/formatInvitation.ts
+msgid "organization"
+msgstr "منظمة"
+
+#: src/marketplace/resources/ResourceDetailsHeader.tsx
+msgid "overview"
+msgstr "نظره عامه"
+
+#: src/invitations/RoleField.tsx
+msgid "owner"
+msgstr "مالك"
+
+#: src/customer/payments/PaymentsList.tsx
+msgid "payments"
+msgstr "الدفعات"
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "pending"
+msgstr "المعلقه"
+
+#: src/invitations/formatInvitation.ts
+msgid "project"
+msgstr "مشروع"
+
+#: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/project/ProjectsList.tsx
+#: src/project/SupportProjectsList.tsx
+#: src/rancher/ClusterProjectList.tsx
+#: src/user/affiliations/ProjectsList.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
+msgid "projects"
+msgstr "المشاريع"
+
+#: src/marketplace/referral/ReferralsList.tsx
+msgid "referrals"
+msgstr "الاحالات"
+
+#: src/navigation/header/favorite-pages/FavoritePageItem.tsx
+msgid "remove"
+msgstr "أبعد"
+
+#: src/marketplace-flows/CustomerCreateRequestsList.tsx
+#: src/marketplace-flows/ProjectCreateRequestsList.tsx
+#: src/marketplace-flows/ResourceCreateRequestsList.tsx
+#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/ProjectUpdateRequestsList.tsx
+msgid "requests"
+msgstr "الطلبات"
+
+#: src/resource/support/SharedProviderResources.tsx
+msgid "resources"
+msgstr "موارد"
+
+#: src/issues/CustomerSupportRating.tsx
+msgid "reviews"
+msgstr "ملاحظات"
+
+#: src/administration/roles/RolesList.tsx
+msgid "roles"
+msgstr "ادوار"
+
+#: src/rancher/cluster/ClusterServicesList.tsx
+msgid "services"
+msgstr "خدمات"
+
+#: src/user/support/UserRemovalMessageDialog.tsx
+msgid "support"
+msgstr "دعم"
+
+#: src/customer/team/CustomerUsersList.tsx
+msgid "team members"
+msgstr "أعضاء الفريق"
+
+#: src/administration/providers/ProviderUsersDialog.tsx
+#: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/user/support/UserList.tsx
+msgid "users"
+msgstr "المستعملون"
+
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "view order"
+msgstr "عرض الأمر"
+
+#: src/form/CronField.tsx
+msgid "week"
+msgstr "أسبوع"
+
+#: src/form/CronField.tsx
+msgid "year"
+msgstr "سنة"

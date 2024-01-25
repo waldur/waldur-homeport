@@ -29,8 +29,8 @@ msgstr "پروفایل ایجاد شده است."
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -38,18 +38,17 @@ msgid "Abbreviation"
 msgstr "اختصار"
 
 #: src/booking/AcceptAction.tsx
+#: src/booking/components/modal/BookingResourceDetailsDialog.tsx
 msgid "Accept"
 msgstr "پذیرفتن"
 
 #: src/booking/BookingStateField.tsx
-#: src/booking/BookingStateFilter.tsx
+#: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
 msgid "Accepted"
 msgstr "پذیرفته شده"
 
-#: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/resource/ResourceAccessButton.tsx
 msgid "Access"
 msgstr "دسترسی"
 
@@ -74,6 +73,7 @@ msgstr "حسابداری"
 msgid "Accounting period"
 msgstr "دوره حسابداری"
 
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/plans/PlansSection.tsx
 msgid "Accounting plans"
 msgstr "برنامه های حسابداری"
@@ -105,13 +105,16 @@ msgstr "نوع حسابداری"
 #: src/marketplace-flows/ProjectCreateRequestsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/offerings/list/OfferingActions.tsx
+#: src/marketplace/offerings/update/plans/PlanActions.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourceActions.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/marketplace/robot-accounts/RobotAccountList.tsx
+#: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/InternalIpsList.tsx
@@ -132,10 +135,11 @@ msgstr "نوع حسابداری"
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/user/keys/KeysList.tsx
+#: src/user/support/UserTableDropDownActions.tsx
 msgid "Actions"
 msgstr "عمل"
 
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingStateActions.tsx
 #: src/openstack/openstack-backup-schedule/actions/ActivateAction.tsx
 #: src/openstack/openstack-snapshot-schedule/actions/ActivateSnapshotScheduleAction.tsx
 #: src/user/support/UserActivateButton.tsx
@@ -147,9 +151,10 @@ msgid "Activating"
 msgstr "فعال کردن"
 
 #: src/invitations/GroupInvitationsList.tsx
-#: src/marketplace/offerings/OfferingStateCell.tsx
-#: src/marketplace/offerings/OfferingStateFilter.tsx
-#: src/marketplace/offerings/update/plans/PlansSection.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
+#: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Active"
 msgstr "فعال"
@@ -159,7 +164,7 @@ msgstr "فعال"
 msgid "Active count"
 msgstr "حساب فعال"
 
-#: src/marketplace/offerings/steps/AccountingSummary.tsx
+#: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Active plans"
 msgstr "برنامه های فعال"
 
@@ -171,12 +176,15 @@ msgstr "کاربر فعال قادر خواهد بود به پرتال وارد 
 msgid "Activity stream"
 msgstr "جریان فعالیت"
 
+#: src/administration/providers/CreateProviderDialog.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
+#: src/marketplace/deploy/DeployPage.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
+#: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
 #: src/project/team/AddProjectUserDialog.tsx
+#: src/rancher/cluster/create/FormNodesStep.tsx
 msgid "Add"
 msgstr "اضافه کردن"
 
@@ -194,8 +202,8 @@ msgstr "اضافه کردن نظر"
 msgid "Add component"
 msgstr "افزودن اجزا"
 
-#: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/rancher/cluster/create/DataVolumeAddButton.tsx
+#: src/rancher/cluster/create/FormDataStorageStep.tsx
 msgid "Add data volume"
 msgstr "افزودن حجم داده"
 
@@ -220,7 +228,7 @@ msgstr "اضافه کردن عضو"
 msgid "Add new"
 msgstr "جدید اضافه کنید"
 
-#: src/marketplace/offerings/CreateOfferingButton.tsx
+#: src/marketplace/offerings/list/CreateOfferingButton.tsx
 msgid "Add new offering"
 msgstr "پیشنهاد جدید اضافه کنید"
 
@@ -267,6 +275,7 @@ msgstr "عضو پروژه را اضافه کنید"
 
 #: src/dashboard/marketplace.ts
 #: src/marketplace-flows/FlowCreateButton.tsx
+#: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/resources/actions/AddResourceButton.tsx
 #: src/marketplace/resources/list/CreateResourceButton.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
@@ -381,7 +390,7 @@ msgstr "تمام منابع وارد شده اند."
 msgid "Allocation description"
 msgstr "شرح تخصیص"
 
-#: src/slurm/AllocationForm.tsx
+#: src/slurm/deploy/steps.ts
 msgid "Allocation name"
 msgstr "نام تخصیص"
 
@@ -399,6 +408,7 @@ msgstr "در حال حاضر حساب کاربری دارید؟"
 
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/update/plans/PlanComponents.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Amount"
 msgstr "مقدار"
@@ -463,10 +473,8 @@ msgstr "درخواست دادن"
 #: src/invitations/UserPermissionRequestApproveButton.tsx
 #: src/marketplace-flows/ReviewApproveAction.tsx
 #: src/marketplace/cart/ShoppingCartSteps.tsx
-#: src/marketplace/orders/OrderSteps.tsx
-#: src/marketplace/orders/actions/ApproveButton.tsx
-#: src/marketplace/orders/item/list/OrderItemApproveButton.tsx
-#: src/marketplace/orders/item/list/SupportOrderItemApproveButton.tsx
+#: src/marketplace/orders/actions/ApproveByConsumerButton.tsx
+#: src/marketplace/orders/actions/ApproveByProviderButton.tsx
 msgid "Approve"
 msgstr "تایید"
 
@@ -474,29 +482,29 @@ msgstr "تایید"
 msgid "Approve payment"
 msgstr "تایید هزینه"
 
-#: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
 msgid "Approved at"
 msgstr "تایید شده در"
 
-#: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
 msgid "Approved by"
 msgstr "تایید شده توسط"
 
-#: src/marketplace/offerings/actions/OfferingItemActions.tsx
+#: src/marketplace/offerings/actions/OfferingStateActions.tsx
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
 msgid "Archive"
 msgstr "بایگانی"
 
-#: src/marketplace/offerings/OfferingStateCell.tsx
-#: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
-#: src/marketplace/offerings/update/plans/PlansSection.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
+#: src/marketplace/offerings/update/plans/PlansTable.tsx
 msgid "Archived"
 msgstr "بایگانی شده"
 
-#: src/marketplace/offerings/steps/AccountingSummary.tsx
+#: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Archived plans"
 msgstr "برنامه های بایگانی شده"
 
@@ -544,6 +552,7 @@ msgstr "حداقل یک برنامه باید وارد شود"
 msgid "Attach"
 msgstr "پیوستن"
 
+#: src/openstack/openstack-instance/OpenStackInstanceVolumeBadge.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
@@ -562,11 +571,11 @@ msgstr "ضمیمه"
 #: src/marketplace/offerings/details/PublicOfferingAttributesCard.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
+#: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 msgid "Attributes"
 msgstr "ویژگی ها"
 
-#: src/marketplace/offerings/steps/DescriptionSummary.tsx
+#: src/marketplace/offerings/create/DescriptionSummary.tsx
 msgid "Attributes are invalid."
 msgstr "صفات نا معتبر است."
 
@@ -607,8 +616,8 @@ msgid "Authorized personnel"
 msgstr "پرسنل مجاز"
 
 #: src/openstack/openstack-backup/actions/utils.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/utils.tsx
+#: src/openstack/openstack-instance/utils.ts
 msgid "Auto-assign floating IP"
 msgstr "اختصاص دادن خودکار IP شناور"
 
@@ -624,11 +633,9 @@ msgstr "دسترسی"
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
-#: src/openstack/openstack-instance/AvailabilityZoneGroup.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
 msgid "Availability zone"
 msgstr "دسترسی zone"
@@ -653,10 +660,11 @@ msgstr "ماشین مجازی Azure"
 msgid "Azure provider"
 msgstr "ارائه دهنده Azure"
 
+#: src/broadcasts/BroadcastFooter.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/error/InvalidObjectPage.tsx
 #: src/error/InvalidRoutePage.tsx
-#: src/marketplace/offerings/actions/WizardButtons.tsx
-#: src/notifications/NotificationFooter.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
 msgid "Back"
 msgstr "بازگشت"
 
@@ -714,7 +722,6 @@ msgid "Become a customer of our portal. Provision IT services from the Marketpla
 msgstr "مشتری پرتال ما شوید.خدمات IT را از Marketplace ارائه دهید و تیم خود را از یک جا مدیریت کنید."
 
 #: src/invoices/routes.ts
-#: src/project/ProjectDashboard.tsx
 msgid "Billing"
 msgstr "صورتحساب"
 
@@ -733,14 +740,18 @@ msgid "Billing period"
 msgstr "دوره صورتحساب"
 
 #: src/booking/marketplace.ts
+#: src/marketplace/resources/details/BookingMainComponent.tsx
 msgid "Booking"
 msgstr "رزرو"
 
 #: src/booking/AcceptAction.tsx
+#: src/booking/components/modal/BookingResourceDetailsDialog.tsx
 msgid "Booking has been accepted."
 msgstr "رزرو تایید شده است."
 
 #: src/booking/BookingsList.tsx
+#: src/booking/offering/OfferingBookingResourcesCalendarContainer.tsx
+#: src/marketplace/resources/details/BookingMainComponent.tsx
 msgid "Bookings"
 msgstr "رزرو"
 
@@ -775,15 +786,16 @@ msgstr "استفاده CPU"
 msgid "Caller"
 msgstr "تماس گیرنده"
 
+#: src/administration/roles/RoleForm.tsx
 #: src/booking/CancelAction.tsx
-#: src/form/ListDialog.tsx
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invitations/GroupinvitationButtons.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace-flows/FlowCancelAction.tsx
-#: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
-#: src/marketplace/orders/item/list/OrderItemCancelButton.tsx
+#: src/marketplace/orders/actions/CancelTerminationOrderButton.tsx
+#: src/marketplace/orders/details/CancelOrderButton.tsx
 #: src/modal/CloseDialogButton.tsx
 #: src/navigation/header/SearchToggle.tsx
 #: src/project/ProjectCreateForm.tsx
@@ -808,6 +820,9 @@ msgstr "لغو درخواست"
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Canceled"
 msgstr "لغو شده"
 
@@ -842,18 +857,21 @@ msgid "Catalogues"
 msgstr "کاتالوگ ها"
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/list/AllCategoriesPage.tsx
 #: src/marketplace/category/utils.ts
 #: src/marketplace/offerings/service-providers/ServiceProviderPageBar.tsx
-#: src/marketplace/routes.ts
 msgid "Categories"
 msgstr "دسته بندی ها"
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
-#: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/offerings/import/tabs.ts
+#: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/attributes/AttributesSection.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
@@ -861,13 +879,14 @@ msgstr "دسته بندی ها"
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 msgid "Category"
 msgstr "دسته بندی"
 
-#: src/marketplace/offerings/steps/DescriptionSummary.tsx
+#: src/marketplace/offerings/create/DescriptionSummary.tsx
 msgid "Category is invalid."
 msgstr "دسته بندی نامعتبر است."
 
@@ -924,12 +943,13 @@ msgstr "تغییر دادن رمز"
 msgid "Choices as comma-separated list"
 msgstr "گزینه هایی به عنوان کاما -لیست جدا"
 
+#: src/administration/providers/ProviderForm.tsx
 #: src/azure/provider/AzureForm.tsx
 msgid "Client ID"
 msgstr "شناسه Client"
 
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -947,12 +967,15 @@ msgstr "سازماندهی Client"
 msgid "Client project"
 msgstr "پروژه Client"
 
+#: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+#: src/broadcasts/RecipientsListDialog.tsx
 #: src/invitations/actions/create/FormButtons.tsx
+#: src/marketplace/details/plan/EstimateUsageComponentDialog.tsx
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx
 #: src/marketplace/referral/OfferingReferralsDialog.tsx
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesDialog.tsx
-#: src/notifications/RecipientsListDialog.tsx
+#: src/resource/summary/ResourceMetadataDialog.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
 #: src/user/UserPopover.tsx
 #: src/user/support/UserRemovalMessageDialog.tsx
@@ -976,7 +999,7 @@ msgstr "ابر vCPU"
 msgid "Cluster description"
 msgstr "توضیحات Cluster"
 
-#: src/rancher/cluster/create/RancherClusterForm.tsx
+#: src/rancher/cluster/create/steps.ts
 msgid "Cluster name"
 msgstr "نام Cluster"
 
@@ -1025,7 +1048,7 @@ msgstr "صلاحیت"
 msgid "Compliance"
 msgstr "انطباق"
 
-#: src/marketplace/offerings/steps/ComponentsList.tsx
+#: src/marketplace/offerings/create/ComponentsList.tsx
 msgid "Component #{index}"
 msgstr "مولفه {فهرست}"
 
@@ -1038,7 +1061,7 @@ msgstr "مولفه {فهرست}"
 msgid "Component name"
 msgstr "اسم مولفه"
 
-#: src/marketplace/offerings/steps/AccountingSummary.tsx
+#: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Components are invalid."
 msgstr "در دسترس نبودن Components"
 
@@ -1054,8 +1077,8 @@ msgstr "پیکربندی"
 msgid "Configuration options"
 msgstr "گزینه های پیکر بندی"
 
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/marketplace/cart/ShoppingCartSteps.tsx
-#: src/marketplace/orders/OrderSteps.tsx
 #: src/openstack/openstack-instance/actions/update-internal-ips/UpdateInternalIpsSetAction.tsx
 msgid "Configure"
 msgstr "پیکر بندی کنید"
@@ -1064,17 +1087,30 @@ msgstr "پیکر بندی کنید"
 msgid "Confirm deletion?"
 msgstr "حذف را تایید میکنید؟"
 
+#: src/administration/TokenDeleteButton.tsx
+#: src/administration/roles/RoleDeleteButton.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/broadcasts/BroadcastTemplateDeleteButton.tsx
+#: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/details/CustomerCallManagerPanel.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
+#: src/marketplace/cart/ShoppingCartButtonContainer.tsx
+#: src/marketplace/category/admin/CategoryDeleteButton.tsx
+#: src/marketplace/category/admin/GroupDeleteButton.tsx
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
+#: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
+#: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
-#: src/rancher/cluster/create/TenantGroup.tsx
+#: src/project/team/UserRemoveButton.tsx
+#: src/rancher/cluster/create/FormNodesStep.tsx
+#: src/resource/actions/AsyncActionItem.tsx
 #: src/resource/actions/ResourceDeleteButton.tsx
 msgid "Confirmation"
 msgstr "تاییدیه"
@@ -1090,17 +1126,18 @@ msgstr "جزئیات اتصال"
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact email"
 msgstr "تماس با ایمیل"
 
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact phone"
 msgstr "شماره تماس"
 
+#: src/rancher/cluster/create/FormNodesStep.tsx
 #: src/rancher/cluster/create/NodeRoleField.tsx
 msgid "Control plane"
 msgstr "کنترل برنامه"
@@ -1109,6 +1146,7 @@ msgstr "کنترل برنامه"
 #: src/core/CopyToClipboardButton.tsx
 #: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
+#: src/table/ExportDialog.tsx
 #: src/table/TableButtons.tsx
 #: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
@@ -1116,9 +1154,9 @@ msgstr "در clipboard کپی کنید"
 
 #: src/customer/list/CustomerList.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/offerings/expandable/utils.ts
-#: src/marketplace/orders/OrdersList.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
 msgid "Cost"
 msgstr "هزینه"
 
@@ -1131,18 +1169,26 @@ msgstr "سازماندهی نشد"
 msgid "Country"
 msgstr "کشور"
 
+#: src/administration/agreements/UserAgreementCreateButton.tsx
+#: src/broadcasts/BroadcastCreateButton.tsx
+#: src/broadcasts/BroadcastTemplateCreateButton.tsx
+#: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
+#: src/marketplace/cart/ShoppingCartButton.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
 #: src/marketplace/offerings/update/components/AddComponentDialog.tsx
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 #: src/marketplace/offerings/update/options/AddOptionDialog.tsx
 #: src/marketplace/offerings/update/plans/AddPlanDialog.tsx
-#: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
-#: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+#: src/marketplace/orders/list/OrderTypeCell.tsx
+#: src/marketplace/orders/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
-#: src/notifications/NotificationCreateButton.tsx
+#: src/marketplace/service-providers/CampaignCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -1151,6 +1197,8 @@ msgstr "کشور"
 #: src/openstack/openstack-tenant/actions/CreateServerGroupAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateButton.tsx
 #: src/rancher/cluster/hpas/HPACreateButton.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
@@ -1205,6 +1253,7 @@ msgstr "ایجاد اعلان"
 msgid "Create organization"
 msgstr "ایجاد سازمان"
 
+#: src/administration/roles/PermissionOptions.tsx
 #: src/project/ProjectCreateContainer.tsx
 #: src/project/ProjectCreateDialog.tsx
 msgid "Create project"
@@ -1231,8 +1280,9 @@ msgstr "ایجاد subnet"
 msgid "Create your first project"
 msgstr "اولین پروژه را ایجاد کنید"
 
+#: src/administration/TokensList.tsx
+#: src/administration/notifications/HooksList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
-#: src/booking/components/utils.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
@@ -1243,14 +1293,16 @@ msgstr "اولین پروژه را ایجاد کنید"
 #: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -1269,28 +1321,29 @@ msgstr "ایجاد شده"
 msgid "Created a new payment for {customer_link}."
 msgstr "ایجاد پرداخت جدید برای {customer_link}"
 
+#: src/administration/agreements/UserAgreementsList.tsx
+#: src/broadcasts/BroadcastList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace/details/OfferingOrderItemsList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
-#: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
-#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/ResourceOrderItems.tsx
-#: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/marketplace/orders/details/DetailsSection.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/ResourceOrders.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
+#: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/notifications/NotificationList.tsx
-#: src/project/ProjectOrderItemsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
@@ -1300,12 +1353,11 @@ msgid "Created at"
 msgstr "ایجاد شده در"
 
 #: src/booking/BookingsList.tsx
-#: src/booking/components/utils.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
-#: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 msgid "Created by"
 msgstr "ایجاد شده به وسیله"
 
@@ -1372,8 +1424,10 @@ msgstr "محدوده زمان رزرو روزانه موجود"
 
 #: src/administration/routes.ts
 #: src/customer/routes.ts
+#: src/issues/routes.ts
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
+#: src/marketplace/utils.ts
 #: src/project/routes.ts
 #: src/reporting/routes.ts
 #: src/user/routes.ts
@@ -1392,8 +1446,8 @@ msgstr "حجم داده باید حداقل{سایز}GB باشد."
 msgid "Data volume size:"
 msgstr "سایز Data volume:"
 
-#: src/openstack/openstack-instance/DataVolumeTypeGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
+#: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
 msgid "Data volume type"
 msgstr "نوع Data volume"
 
@@ -1430,7 +1484,7 @@ msgstr "غیرفعال"
 msgid "Deactivating"
 msgstr "غیرفعال کردن"
 
-#: src/marketplace/offerings/option/OfferingOptionsScriptEditor.tsx
+#: src/user/support/utils.ts
 msgid "Default"
 msgstr "پیش فرض"
 
@@ -1456,16 +1510,18 @@ msgstr "لیبل cluster پیش فرض"
 msgid "Default value"
 msgstr "مقدار پیش فرض"
 
-#: src/booking/components/modal/BookingModal.tsx
+#: src/administration/agreements/UserAgreementDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
+#: src/marketplace/offerings/list/DeleteOfferingButton.tsx
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
+#: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
+#: src/notifications/ManageCommonFooterDialog.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
 #: src/openstack/openstack-security-groups/rule-editor/ActionsField.tsx
 #: src/project/DeleteAction.tsx
@@ -1489,14 +1545,20 @@ msgstr "حذف volumes"
 msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
 msgstr "حذف کردن سرور PostgreSQLباعث خواهدشد تمام پایگاه داده ای که توسط سرور ایجاد شده است حذف شود."
 
+#: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryGroupsList.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/details/OfferingTabs.tsx
-#: src/marketplace/details/plan/PlanDetails.tsx
+#: src/marketplace/details/plan/PlanSection.tsx
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
@@ -1505,26 +1567,30 @@ msgstr "حذف کردن سرور PostgreSQLباعث خواهدشد تمام پا
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/options/OptionForm.tsx
-#: src/marketplace/offerings/update/overview/OverviewDialog.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/marketplace/offerings/update/plans/PlanForm.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/notifications/NotificationList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/details/CallDescriptionCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -1536,12 +1602,11 @@ msgstr "حذف کردن سرور PostgreSQLباعث خواهدشد تمام پا
 #: src/resource/actions/base.ts
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/RequestLimitsChangeDialog.tsx
-#: src/support/OfferingConfigurationForm.tsx
 #: src/user/support/UserEditForm.tsx
-#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Description"
 msgstr "توضیحات"
 
+#: src/administration/notifications/HooksList.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Destination"
 msgstr "مقصد"
@@ -1568,17 +1633,18 @@ msgstr "جدا"
 msgid "Detaching"
 msgstr "جدا کردن"
 
-#: src/customer/team/UserDetailsButton.tsx
+#: src/administration/providers/ProviderCard.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/details/DetailsSection.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/project/ProjectDetailsButton.tsx
-#: src/project/team/UserDetailsButton.tsx
+#: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
+#: src/user/UserDetailsButton.tsx
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -1602,6 +1668,9 @@ msgstr "غیر فعال کردن data volume"
 msgid "Disable gateway IP advertising via DHCP"
 msgstr "غیر فعال کردن تبلیغات gateway IP از طریق DHCP"
 
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/hooks/HooksList.tsx
 #: src/user/support/UserFilter.tsx
@@ -1632,7 +1701,10 @@ msgstr "نسخه Docker"
 msgid "Documentation"
 msgstr "مستندات"
 
-#: src/marketplace/offerings/steps/OverviewStep.tsx
+#: src/proposals/details/CallDocumentsCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/documents/CallDocumentsSection.tsx
 msgid "Documents"
 msgstr "اسناد"
 
@@ -1648,10 +1720,13 @@ msgstr "اگر نام Domain تعریف نشده باشد،از Domain پیش ف
 
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
-#: src/marketplace/orders/item/list/OrderItemStateCell.tsx
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
-#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/OrderStateFilter.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/details/ResourceComponentsDialog.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
+#: src/proposals/details/CallRoundsDialog.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/user/support/UserDetailsDialog.tsx
 msgid "Done"
@@ -1667,9 +1742,10 @@ msgstr "سفارش بارگیری فایل PDF"
 
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
-#: src/marketplace/offerings/OfferingStateCell.tsx
-#: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+#: src/marketplace/offerings/list/OfferingStateCell.tsx
+#: src/marketplace/offerings/list/OfferingStateFilter.tsx
+#: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
 msgstr "پیش نویس"
@@ -1705,26 +1781,39 @@ msgstr "هر mount point باید حداکثر یکبار استفاده شود.
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr "برای اطمینان از محاسبه صحیح داده های حسابداری، هر گزارش باید به برنامه صورتحساب متصل باشد."
 
+#: src/administration/agreements/UserAgreementsEditButton.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/broadcasts/BroadcastTemplateUpdateButton.tsx
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
-#: src/marketplace/offerings/OfferingEditButton.tsx
+#: src/marketplace/category/admin/CategoryEditButton.tsx
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/GroupEditButton.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
+#: src/marketplace/deploy/DeployPage.tsx
+#: src/marketplace/offerings/details/OfferingDetails.tsx
+#: src/marketplace/offerings/list/EditOfferingButton.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
 #: src/marketplace/offerings/update/attributes/EditAttributeButton.tsx
 #: src/marketplace/offerings/update/components/EditComponentButton.tsx
-#: src/marketplace/offerings/update/integration/EditIntegrationButton.tsx
 #: src/marketplace/offerings/update/integration/EditScriptButton.tsx
 #: src/marketplace/offerings/update/options/EditOptionButton.tsx
-#: src/marketplace/offerings/update/overview/OverviewButton.tsx
-#: src/marketplace/offerings/update/plans/EditPlanButton.tsx
-#: src/marketplace/orders/item/details/OrderItem.tsx
+#: src/marketplace/offerings/update/overview/EditGettingStartedButton.tsx
+#: src/marketplace/offerings/update/overview/EditOverviewButton.tsx
+#: src/marketplace/offerings/update/overview/OfferingLocationButton.tsx
+#: src/marketplace/offerings/update/overview/OfferingLogoButton.tsx
+#: src/marketplace/offerings/update/overview/SetAccessPolicyButton.tsx
+#: src/marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
 #: src/marketplace/robot-accounts/RobotAccountEditButton.tsx
+#: src/marketplace/service-providers/ProviderCampaignUpdateButton.tsx
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton.tsx
+#: src/notifications/NotificationUpdateButton.tsx
 #: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
 #: src/openstack/openstack-backup/actions/EditAction.tsx
 #: src/openstack/openstack-instance/actions/EditAction.tsx
@@ -1736,6 +1825,13 @@ msgstr "برای اطمینان از محاسبه صحیح داده های حس�
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
 #: src/project/team/AddMemberButton.tsx
+#: src/proposals/call-management/CallEditButton.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/documents/EditDocumentsButton.tsx
+#: src/proposals/update/general/EditGeneralInfoButton.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
+#: src/proposals/update/review/EditReviewInfoButton.tsx
+#: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -1759,16 +1855,20 @@ msgstr "ویرایش اعضا پروژه"
 msgid "Edit team member"
 msgstr "ویرایش اعضا گروه"
 
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/providers/ProviderUsersDialog.tsx
+#: src/administration/service-desk/AtlassianSettings.tsx
+#: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
-#: src/notifications/RecipientsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserGroup.tsx
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
@@ -1789,6 +1889,7 @@ msgstr "ایمیل بروز رسانی شده است."
 msgid "Email verification has been sent. Please check your inbox."
 msgstr "تایید ایمیل ارسال شده است.لطفا صندوق ورودی خودرا چک کنید."
 
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
 msgid "Enable"
 msgstr "فعال کردن"
@@ -1797,6 +1898,10 @@ msgstr "فعال کردن"
 msgid "Enable DHCP"
 msgstr "فعال کردن DHCP"
 
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/providers/ProviderCard.tsx
+#: src/administration/providers/ProviderForm.tsx
+#: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/hooks/HookForm.tsx
@@ -1813,11 +1918,11 @@ msgstr "فعال کردن پیش فرض gateway"
 msgid "Encountered an empty component"
 msgstr "مواجه شدن با یک component خالی"
 
-#: src/booking/components/modal/BookingModal.tsx
-#: src/booking/components/utils.tsx
+#: src/proposals/PublicCallsPage.tsx
 msgid "End"
 msgstr "پایان"
 
+#: src/booking/deploy/CustomRangeDatePicker.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
@@ -1832,6 +1937,7 @@ msgstr "پایان"
 msgid "End date"
 msgstr "تاریخ پایان"
 
+#: src/booking/deploy/CustomRangeDatePicker.tsx
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "End time"
 msgstr "زمان پایان"
@@ -1844,15 +1950,16 @@ msgstr "IPv4 CID خصوصی وارد کنید."
 msgid "Environment variables"
 msgstr "متغیرهای محیطی"
 
-#: src/marketplace/orders/item/list/OrderItemStateCell.tsx
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
-#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/OrderStateFilter.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Erred"
 msgstr "خراب"
 
 #: src/events/ExpandableEventDetailsTable.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/details/SummarySection.tsx
 #: src/resource/summary/ErrorMessageField.tsx
 msgid "Error message"
 msgstr "پیغام خطا"
@@ -1862,6 +1969,7 @@ msgid "Esimated price per month"
 msgstr "قیمت تخمین زده شده برای هر ماه"
 
 #: src/customer/list/CustomerList.tsx
+#: src/dashboard/api.ts
 #: src/invoices/list/EstimatedCost.tsx
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
@@ -1869,7 +1977,6 @@ msgstr "قیمت تخمین زده شده برای هر ماه"
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
-#: src/project/utils.ts
 msgid "Estimated cost"
 msgstr "هزینه تخمین زده شده"
 
@@ -1881,7 +1988,7 @@ msgstr "هزینه تخمین زده شده برای این ماه:{هزینه}"
 msgid "Estimated monthly cost"
 msgstr "هزینه تخمین زده شده ماهانه"
 
-#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+#: src/marketplace/orders/details/OrderSummaryMessage.tsx
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr "هزینه تخمین زده شده ماهانه از {تخمینی قدیم} به {تخمینی جدید} تغییر خواهد کرد.مالیات بر ارزش افزوده را شامل نمیشود"
 
@@ -1898,6 +2005,9 @@ msgstr "نوع رویداد"
 msgid "Event types"
 msgstr "انواع رویداد"
 
+#: src/administration/notifications/HooksList.tsx
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
@@ -1959,9 +2069,9 @@ msgstr "مثال[{\"header\": \"Database instance info\", \"body\": \"data\"}]"
 msgid "Excel"
 msgstr "اکسل"
 
-#: src/marketplace/orders/item/list/OrderItemStateCell.tsx
-#: src/marketplace/orders/item/list/OrderStateFilter.tsx
-#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
+#: src/marketplace/orders/list/OrderStateCell.tsx
+#: src/marketplace/orders/list/OrderStateFilter.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 msgid "Executing"
 msgstr "اجرای"
 
@@ -1992,7 +2102,7 @@ msgstr "انقضا"
 msgid "Expires at"
 msgstr "منقضی میشود"
 
-#: src/table/TableExportButton.tsx
+#: src/table/ExportDialog.tsx
 msgid "Export as"
 msgstr "صادرات به عنوان"
 
@@ -2029,8 +2139,8 @@ msgstr "network ID خارجی"
 msgid "Failed to operate with backend."
 msgstr "عملکرد با backend انجام نشد."
 
-#: src/issues/FeaturesList.tsx
-#: src/issues/routes.ts
+#: src/administration/FeaturesList.tsx
+#: src/administration/routes.ts
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Features"
 msgstr "امکانات"
@@ -2056,7 +2166,7 @@ msgstr "پرونده کپی شده است"
 msgid "File has been downloaded."
 msgstr "پرونده دانلود شده است."
 
-#: src/marketplace/offerings/steps/OverviewStep.tsx
+#: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Filename"
 msgstr "نام پرونده"
 
@@ -2086,7 +2196,7 @@ msgid "Find solution"
 msgstr "پیدا کردن راه حل"
 
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
-#: src/openstack/openstack-instance/PublicKeyGroup.tsx
+#: src/openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Fingerprint"
 msgstr "اثر انگشت"
@@ -2104,7 +2214,6 @@ msgid "Fixed — use common storage quota"
 msgstr "ثابت- از حافظه مشترک quota استفاده کنید"
 
 #: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/openstack-instance/FlavorGroup.tsx
 msgid "Flavor name"
 msgstr "نام Flavor"
 
@@ -2120,6 +2229,7 @@ msgstr "لیست Flavors"
 msgid "Flexible"
 msgstr "منعطف"
 
+#: src/marketplace/resources/details/openstack-instance/ResourceFloatingIpField.tsx
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 msgid "Floating IP"
 msgstr "IP شناور"
@@ -2128,14 +2238,12 @@ msgstr "IP شناور"
 msgid "Floating IP count"
 msgstr "تعداد IP شناور"
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Floating IPs"
 msgstr "IPs شناور"
 
-#: src/vmware/VMwareVirtualMachineForm.tsx
+#: src/vmware/deploy/FormAdvancedOptionsStep.tsx
 msgid "Folder"
 msgstr "پوشه"
 
@@ -2156,18 +2264,18 @@ msgstr "حساب FreeIPA"
 msgid "FreeIPA account needs to be set up."
 msgstr "حساب FreeIPA باید تنظیم شود."
 
-#: src/invoices/details/InvoiceDetails.tsx
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
 msgid "From"
 msgstr "از"
 
-#: src/marketplace/offerings/update/overview/OverviewDialog.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 msgid "Full description"
 msgstr "توضیحات کامل"
 
+#: src/administration/providers/ProviderUsersDialog.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
+#: src/marketplace/UserPluginOptionsForm.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
-#: src/slurm/SLURMPluginOptionsForm.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserList.tsx
 msgid "Full name"
@@ -2178,7 +2286,10 @@ msgid "Gateway IP of this subnet"
 msgstr "Gateway IP برای این subnet"
 
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
 msgid "General"
 msgstr "عمومی"
 
@@ -2194,7 +2305,7 @@ msgstr "فایل Kubeconfig را تولید کنید"
 msgid "Generate password"
 msgstr "رمز تولید کنید"
 
-#: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
+#: src/marketplace/orders/list/OrderTablePlaceholder.tsx
 #: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Go to marketplace"
 msgstr "به marketplace بروید"
@@ -2220,6 +2331,7 @@ msgstr "تضمین نگه داری زمان عکس فوری. اگر خالی ب�
 msgid "Helpdesk dashboard"
 msgstr "داشبورد Helpdesk"
 
+#: src/administration/notifications/HookRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 msgid "Hook has been removed."
 msgstr "Hook، حذف شده است."
@@ -2246,20 +2358,23 @@ msgstr "نحوه دریافت مدارک معتبر برای تهیه کننده
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr "نحوه دریافت مدارک معتبر برای تهیه کننده DigitalOcean"
 
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 msgid "Icon"
 msgstr "آیکون"
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
-#: src/openstack/openstack-instance/ImageGroup.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/marketplace/resources/details/openstack-instance/ResourceImageField.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/FormImageStep.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
 msgid "Image"
 msgstr "تصویر"
 
 #: src/openstack/analytics/ImagesList.tsx
-#: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Image name"
 msgstr "نام تصویر"
 
@@ -2267,9 +2382,11 @@ msgstr "نام تصویر"
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
+#: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Images"
 msgstr "تصویرها"
 
@@ -2327,12 +2444,10 @@ msgid "Informational - client’s request to get or provide additional informati
 msgstr "client’sبرای گرفتن یا تهیه اطلاعات اضافی مرتبط به سرویس درخواست میدهد."
 
 #: src/openstack/OpenStackPackageDetails.tsx
-#: src/openstack/OpenStackPackageForm.tsx
 msgid "Initial admin password"
 msgstr "رمز اولیه ادمین"
 
 #: src/openstack/OpenStackPackageDetails.tsx
-#: src/openstack/OpenStackPackageForm.tsx
 msgid "Initial admin username"
 msgstr "نام کاربری اولیه ادمین"
 
@@ -2378,7 +2493,7 @@ msgstr "داخلی"
 msgid "Internal IP"
 msgstr "IP داخلی"
 
-#: src/marketplace/resources/details/openstack-instance/InstanceDetails.tsx
+#: src/marketplace/resources/details/openstack-instance/ResourceInternalIpsField.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
 msgid "Internal IPs"
@@ -2392,13 +2507,13 @@ msgstr "نام داخلی"
 msgid "Internal network ID"
 msgstr "network ID داخلی"
 
-#: src/openstack/OpenStackPackageForm.tsx
+#: src/openstack/deploy/FormInternalNetworkStep.tsx
 #: src/openstack/openstack-network/InternalNetworkAllocationPool.tsx
 msgid "Internal network allocation pool"
 msgstr "اختصاص شبکه داخلی"
 
 #: src/openstack/OpenStackPackageDetails.tsx
-#: src/openstack/OpenStackPackageForm.tsx
+#: src/openstack/deploy/FormInternalNetworkStep.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
 msgid "Internal network mask (CIDR)"
@@ -2523,9 +2638,8 @@ msgid "Invoice number"
 msgstr "شماره فاکتور"
 
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
-#: src/marketplace/details/OrderSummary.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 msgid "Invoiced to"
 msgstr "صورتحساب به"
 
@@ -2557,7 +2671,6 @@ msgstr "به صورت خودکار برای اختصاص به IPشناور در 
 #: src/invoices/details/BillingRecordDetails.tsx
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
-#: src/marketplace/orders/Order.tsx
 msgid "Item"
 msgstr "مورد"
 
@@ -2578,8 +2691,6 @@ msgstr "موقعیت شغلی"
 msgid "Job title"
 msgstr "عنوان شغلی"
 
-#: src/marketplace/resources/details/openstack-instance/SnapshotsSection.tsx
-#: src/marketplace/resources/details/openstack-volume/SnapshotsSection.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/resource/utils.tsx
 msgid "Keep forever"
@@ -2635,7 +2746,7 @@ msgstr "پس از ذخیره فرم، طول عمر بروزرسانی و تنظ
 
 #: src/dashboard/chart.ts
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/orders/item/details/OrderItemLimits.tsx
+#: src/marketplace/orders/details/LimitsSection.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "Limit"
 msgstr "محدود"
@@ -2648,15 +2759,13 @@ msgstr "مقدار محدود"
 msgid "Limit period"
 msgstr "دوره محدود"
 
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/orders/details/LimitsSection.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 msgid "Limits"
 msgstr "محدودیت ها"
 
-#: src/marketplace/offerings/steps/AccountingSummary.tsx
+#: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Limits are invalid."
 msgstr "محدودیت نا معتبر است."
 
@@ -2671,10 +2780,13 @@ msgid "Link OpenStack Instance"
 msgstr "لینک  OpenStack Instance"
 
 #: src/customer/list/TotalCostComponent.tsx
+#: src/marketplace/deploy/steps/FormCloudStep.tsx
 #: src/marketplace/resources/details/InfiniteList.tsx
-#: src/marketplace/resources/details/ResourcesList.tsx
+#: src/openstack/openstack-instance/deploy/FormImageStep.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
 #: src/project/ProjectEventsTimeline.tsx
 #: src/providers/dashboard/ProviderActionLogs.tsx
+#: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Loading"
 msgstr "بارگذاری"
 
@@ -2685,6 +2797,7 @@ msgstr "اعمال بارگیری"
 #: src/azure/AzureResourceSummary.tsx
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
 msgid "Location"
 msgstr "مکان"
 
@@ -2697,6 +2810,7 @@ msgstr "خروج"
 msgid "Logging user in"
 msgstr "ورود کاربر"
 
+#: src/administration/service-desk/SmaxSettings.tsx
 #: src/auth/SigninForm.tsx
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/navigation/sidebar/UnifiedSidebar.tsx
@@ -2709,6 +2823,7 @@ msgid "Login failed"
 msgstr "ورود ناموفق"
 
 #: src/customer/create/WizardFormFirstPage.tsx
+#: src/marketplace/offerings/update/overview/OverviewSection.tsx
 msgid "Logo"
 msgstr "آرم"
 
@@ -2733,6 +2848,7 @@ msgid "MAC address"
 msgstr "آدرس MAC"
 
 #: src/customer/dashboard/CustomerActions.tsx
+#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
 #: src/project/ProjectActions.tsx
 #: src/user/UserActions.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -2755,7 +2871,7 @@ msgstr "مدیریت security groups"
 msgid "Managed projects"
 msgstr "پروژه های مدیریت شده"
 
-#: src/marketplace/offerings/update/integration/IntegrationSection.tsx
+#: src/marketplace/offerings/update/integration/OfferingAttributes.tsx
 msgid "Management"
 msgstr "مدیریت"
 
@@ -2771,7 +2887,7 @@ msgstr "حداکثر # از VM snapshots"
 msgid "Max # of snapshots"
 msgstr "حداکثر # از عکس فوری"
 
-#: src/marketplace/offerings/steps/OfferingLimitsTable.tsx
+#: src/marketplace/offerings/create/OfferingLimitsTable.tsx
 msgid "Max amount"
 msgstr "حداکثر مقدار"
 
@@ -2822,12 +2938,11 @@ msgstr "حداکثر vCPU برای هر"
 
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/update/components/ComponentMeasuredUnitField.tsx
-#: src/marketplace/orders/item/details/OrderItemLimits.tsx
+#: src/marketplace/orders/details/LimitsSection.tsx
 msgid "Measured unit"
 msgstr "واحد اندازه گیری"
 
 #: src/customer/team/CustomerUsersList.tsx
-#: src/i18n/constants.ts
 #: src/navigation/workspace/context-selector/OrganizationSummary.tsx
 #: src/project/team/ProjectUsersList.tsx
 msgid "Member"
@@ -2837,17 +2952,19 @@ msgstr "عضو"
 msgid "Memory per vCore"
 msgstr "حافظه برای هر vCore"
 
-#: src/vmware/VMwareVirtualMachineForm.tsx
+#: src/vmware/deploy/FormMemoryStep.tsx
 msgid "Memory size in GiB"
 msgstr "اندازه حافظه در GiB"
 
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr "پیغام"
 
+#: src/administration/notifications/HooksList.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Method"
 msgstr "روش"
@@ -2856,7 +2973,7 @@ msgstr "روش"
 msgid "Min RAM"
 msgstr "حداقل RAM"
 
-#: src/marketplace/offerings/steps/OfferingLimitsTable.tsx
+#: src/marketplace/offerings/create/OfferingLimitsTable.tsx
 msgid "Min amount"
 msgstr "مقدار حداقل"
 
@@ -2884,6 +3001,8 @@ msgstr "شماره تلفن همراه"
 msgid "Month"
 msgstr "ماه"
 
+#: src/marketplace/details/plan/OrderSummaryPlanRows.tsx
+#: src/marketplace/details/plan/PlanDetailsTable2.tsx
 #: src/quotas/constants.ts
 msgid "Monthly cost"
 msgstr "هزینه ماهانه"
@@ -2891,6 +3010,10 @@ msgstr "هزینه ماهانه"
 #: src/customer/payment-profiles/utils.ts
 msgid "Monthly invoices"
 msgstr "صورتحساب ماهانه"
+
+#: src/marketplace/category/list/CategoriesBar.tsx
+msgid "More"
+msgstr "بیشتر"
 
 #: src/invoices/events/InvoiceEventItem.tsx
 msgid "More info"
@@ -2904,7 +3027,6 @@ msgstr "باید با کشور prefix شروع شود مثل EE34501234215"
 msgid "My offerings"
 msgstr "پیشنهادات من"
 
-#: src/marketplace/orders/item/list/MyOrderItemsContainer.tsx
 #: src/marketplace/routes.ts
 msgid "My orders"
 msgstr "دستورات من"
@@ -2920,9 +3042,13 @@ msgstr "منابع من"
 msgid "My services"
 msgstr "سرویس های من"
 
+#: src/administration/roles/RoleForm.tsx
+#: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/booking/BookingsList.tsx
-#: src/booking/components/utils.tsx
+#: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
+#: src/broadcasts/BroadcastTemplateForm.tsx
+#: src/broadcasts/BroadcastTemplateList.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -2936,23 +3062,26 @@ msgstr "سرویس های من"
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/details/plan/PlanDetails.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/details/plan/PlanSection.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
-#: src/marketplace/offerings/actions/SelectCategoryTab.tsx
-#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
-#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
-#: src/marketplace/offerings/update/overview/OverviewDialog.tsx
+#: src/marketplace/offerings/import/SelectCategoryTab.tsx
+#: src/marketplace/offerings/import/SelectOfferingTab.tsx
+#: src/marketplace/offerings/import/SelectOrganizationTab.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/marketplace/offerings/update/plans/PlanForm.tsx
-#: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/item/details/OrderItemLimits.tsx
-#: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/marketplace/offerings/update/plans/PricesTable.tsx
+#: src/marketplace/offerings/update/plans/QuotasTable.tsx
+#: src/marketplace/orders/details/LimitsSection.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
@@ -2961,13 +3090,13 @@ msgstr "سرویس های من"
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
-#: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/openstack/openstack-instance/actions/EditDialog.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
@@ -2984,9 +3113,15 @@ msgstr "سرویس های من"
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/update/general/CallGeneralSection.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -3003,12 +3138,10 @@ msgstr "سرویس های من"
 #: src/resource/actions/base.ts
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
-#: src/support/OfferingConfigurationForm.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
-#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Name"
 msgstr "نام"
 
@@ -3016,7 +3149,7 @@ msgstr "نام"
 msgid "Name is duplicated. Choose other name."
 msgstr "نام تکراری است .اسم دیگری انتخاب کنید."
 
-#: src/marketplace/offerings/steps/OverviewSummary.tsx
+#: src/marketplace/offerings/create/OverviewSummary.tsx
 msgid "Name is not valid."
 msgstr "نام معتبر نیست."
 
@@ -3063,20 +3196,22 @@ msgstr "اسم بومی"
 msgid "Negative"
 msgstr "منفی"
 
+#: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
+#: src/openstack/openstack-instance/deploy/steps.ts
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-subnet/TenantSubnetsList.tsx
+#: src/quotas/constants.ts
+#: src/rancher/cluster/create/FormNetworkStep.tsx
+#: src/rancher/cluster/create/steps.ts
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
 #: src/vmware/actions/CreatePortDialog.tsx
 msgid "Network"
 msgstr "شبکه"
 
-#: src/marketplace/resources/details/openstack-tenant/TenantDetails.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
-#: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
 msgstr "شبکه ها"
 
@@ -3092,10 +3227,9 @@ msgstr "flavor جدید"
 msgid "New limit"
 msgstr "محدودیت جدید"
 
-#: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/details/plan/PlanSection.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
-#: src/navigation/header/confirmation-drawer/OrderItemExpandableRow.tsx
+#: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 msgid "New plan"
 msgstr "برنامه جدید"
 
@@ -3104,14 +3238,15 @@ msgid "New size"
 msgstr "اندازه جدید"
 
 #: src/customer/create/CustomerCreateForm.tsx
-#: src/marketplace/offerings/actions/WizardButtons.tsx
+#: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
+#: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Next"
 msgstr "بعدی"
 
+#: src/administration/FeaturesList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/issues/FeaturesList.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -3122,6 +3257,7 @@ msgstr "بعدی"
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
+#: src/project/ProjectDashboardCostPolicies.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
@@ -3174,7 +3310,9 @@ msgstr "توجه داشته باشید که این  ماشین مجازی به �
 msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "توجه داشته باشید این volume به صورت جداگانه برای { سازمان } شارژ نخواهد شد."
 
-#: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
+#: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+#: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "Nothing to see here"
 msgstr "اینجا چیزی جهت مشاهده نیست"
 
@@ -3186,6 +3324,7 @@ msgstr "اینجا چیزی جهت نمایش نیست"
 msgid "Notification has been created."
 msgstr "اعلان ایجاد شده است."
 
+#: src/notifications/NotificationUpdateDialog.tsx
 #: src/user/hooks/utils.ts
 msgid "Notification has been updated."
 msgstr "اعلان به روز شده است."
@@ -3194,6 +3333,8 @@ msgstr "اعلان به روز شده است."
 msgid "Notification method"
 msgstr "روش اطلاع رسانی"
 
+#: src/administration/notifications/HooksList.tsx
+#: src/administration/routes.ts
 #: src/user/hooks/HooksList.tsx
 #: src/user/routes.ts
 msgid "Notifications"
@@ -3203,11 +3344,11 @@ msgstr "اعلان ها"
 msgid "Notifications allow to be informed when a certain event has occurred."
 msgstr "زمانی که رویداد مشخصی رخ دهد اعلان ها مجاز به اطلاع رسانی هستند."
 
-#: src/vmware/VMwareVirtualMachineForm.tsx
+#: src/vmware/deploy/FormProcessorStep.tsx
 msgid "Number of CPU cores per socket"
 msgstr "تعدادی از هسته های CPU برای هر socket"
 
-#: src/vmware/VMwareVirtualMachineForm.tsx
+#: src/vmware/deploy/FormProcessorStep.tsx
 msgid "Number of cores in a VM"
 msgstr "تعدادی از هسته ها در VM"
 
@@ -3221,6 +3362,8 @@ msgstr "تعدادی از instance های ایجاد شده"
 msgid "Number of running instances"
 msgstr "تعدادی از instance های دز حال اجرا"
 
+#: src/administration/providers/ProviderDetailsDialog.tsx
+#: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "OK"
 msgstr "باشه"
@@ -3229,18 +3372,18 @@ msgstr "باشه"
 msgid "Object is not found."
 msgstr "شیء یافت نشد."
 
+#: src/administration/roles/PermissionOptions.tsx
+#: src/administration/roles/RoleForm.tsx
 #: src/booking/BookingsList.tsx
-#: src/booking/components/utils.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace-flows/FlowsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
-#: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/PriceList.tsx
-#: src/marketplace/offerings/actions/tabs.ts
-#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/SupportOrderItemsTable.tsx
+#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
+#: src/marketplace/offerings/import/tabs.ts
+#: src/marketplace/orders/list/OrdersFilter.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
@@ -3253,25 +3396,24 @@ msgstr "شیء یافت نشد."
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
+#: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/project/ProjectOrderItemsList.tsx
+#: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
+#: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 msgid "Offering"
 msgstr "پیشنهاد"
 
-#: src/marketplace/offerings/steps/OfferingLimitsTable.tsx
+#: src/marketplace/offerings/create/OfferingLimitsTable.tsx
 msgid "Offering components"
 msgstr "ارائه components"
 
-#: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/details/OverviewTab.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsButton.tsx
@@ -3286,19 +3428,27 @@ msgid "Offering has been created."
 msgstr "پیشنهاد ایجاد شده است."
 
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
+#: src/marketplace/offerings/details/PageAccounting.tsx
+#: src/marketplace/offerings/details/PageConfirmationMessage.tsx
+#: src/marketplace/offerings/details/PageDescription.tsx
+#: src/marketplace/offerings/details/PageHeroImage.tsx
+#: src/marketplace/offerings/details/PageLocation.tsx
+#: src/marketplace/offerings/details/PageManagement.tsx
+#: src/marketplace/offerings/details/PageOverview.tsx
+#: src/marketplace/offerings/details/PagePolicies.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering has been updated."
 msgstr "پیشنهاد بروز رسانی شده است."
 
-#: src/marketplace/offerings/steps/ReviewStep.tsx
+#: src/marketplace/offerings/create/ReviewStep.tsx
 msgid "Offering is not configured yet."
 msgstr "پیشنهاد هنوز پیکر بندی نشده است."
 
-#: src/marketplace/offerings/steps/OverviewStep.tsx
+#: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Offering logo"
 msgstr "آرم پیشنهادی"
 
-#: src/marketplace/offerings/store/effects.ts
+#: src/marketplace/offerings/actions/OfferingStateActions.tsx
 msgid "Offering state has been updated."
 msgstr "حالت پیشنهادی بروز رسانی شده است."
 
@@ -3308,13 +3458,19 @@ msgid "Offering type"
 msgstr "نوع پیشنهاد"
 
 #: src/administration/dashboard/StatisticsCards.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
+#: src/broadcasts/BroadcastExpandableRow.tsx
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/RecipientsList.tsx
+#: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/routes.ts
+#: src/marketplace/service-providers/CampaignForm.tsx
+#: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
-#: src/notifications/RecipientsList.tsx
+#: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/providers/dashboard/ProviderDashboard.tsx
 msgid "Offerings"
 msgstr "پیشنهادات"
@@ -3348,7 +3504,9 @@ msgid "Only staff can remove organization."
 msgstr "فقط کارمندان میتوانند سازمان را حذف کنند."
 
 #: src/events/ExpandableEventDetailsTable.tsx
+#: src/issues/list/IssuesFilter.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/proposals/utils.ts
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Open"
 msgstr "باز"
@@ -3365,7 +3523,7 @@ msgstr "console را باز کنید"
 msgid "Open support portal"
 msgstr "پشیتبانی پرتال را بازکنید"
 
-#: src/marketplace/offerings/steps/ManagementSummary.tsx
+#: src/marketplace/offerings/create/ManagementSummary.tsx
 msgid "Options are invalid."
 msgstr "گزینه ها نا معتبر است."
 
@@ -3373,15 +3531,17 @@ msgstr "گزینه ها نا معتبر است."
 msgid "Order Summary"
 msgstr "خلاصه سفارش"
 
-#: src/marketplace/orders/OrderDetails.tsx
+#: src/marketplace/orders/details/OrderDetails.tsx
 msgid "Order details"
 msgstr "جزییات سفارش"
 
-#: src/marketplace/orders/actions/ApproveButton.tsx
+#: src/marketplace/orders/actions/ApproveByConsumerButton.tsx
+#: src/marketplace/orders/actions/ApproveByProviderButton.tsx
 msgid "Order has been approved."
 msgstr "سفارش تایید شده است."
 
-#: src/marketplace/orders/actions/RejectButton.tsx
+#: src/marketplace/orders/actions/RejectByConsumerButton.tsx
+#: src/marketplace/orders/actions/RejectByProviderButton.tsx
 msgid "Order has been rejected."
 msgstr "سفارش رد شده است."
 
@@ -3389,11 +3549,11 @@ msgstr "سفارش رد شده است."
 msgid "Order has been submitted."
 msgstr "سفارش ارسال شده است."
 
-#: src/marketplace/details/OfferingOrderItemsList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
-#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
+#: src/marketplace/resources/ResourceTabs.tsx
+#: src/resource/tabs/constants.ts
+#: src/support/SupportTabs.tsx
 msgid "Order items"
 msgstr "سفارش مورد"
 
@@ -3402,14 +3562,18 @@ msgstr "سفارش مورد"
 msgid "Order summary"
 msgstr "خلاصه سفارش"
 
-#: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersList.tsx
+#: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/routes.ts
+#: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
+#: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 msgid "Orders"
 msgstr "سفارش ها"
 
 #: src/booking/BookingsList.tsx
-#: src/booking/components/utils.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/routes.ts
@@ -3424,13 +3588,13 @@ msgstr "سفارش ها"
 #: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/details/CustomerCreateGroup.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
-#: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
-#: src/marketplace/orders/item/list/OrderItemsFilter.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/orders/item/list/SupportOrdersListFilter.tsx
+#: src/marketplace/offerings/import/tabs.ts
+#: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/orders/list/OrdersFilter.tsx
+#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
@@ -3440,6 +3604,7 @@ msgstr "سفارش ها"
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/navigation/workspace/context-selector/GuestDropdown.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/PublicCallsPage.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -3540,20 +3705,19 @@ msgid "Organization {customer_name} has been deleted."
 msgstr "سازمان {customer_name} حذف شده است."
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/routes.ts
+#: src/broadcasts/BroadcastExpandableRow.tsx
+#: src/broadcasts/BroadcastForm.tsx
+#: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/issues/routes.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
-#: src/notifications/NotificationExpandableRow.tsx
-#: src/notifications/NotificationForm.tsx
-#: src/notifications/RecipientsList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
-#: src/user/dashboard/UserDashboard.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Organizations"
@@ -3563,7 +3727,10 @@ msgstr "سازمان ها"
 msgid "Organizations ({count})"
 msgstr "سازمان ها(مقدار)"
 
-#: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/create/OverviewSummary.tsx
+#: src/marketplace/offerings/details/PageOverview.tsx
+#: src/marketplace/offerings/details/PublicOfferingEditor.tsx
 msgid "Overview"
 msgstr "بررسی اجمالی"
 
@@ -3580,6 +3747,7 @@ msgid "Owned organizations"
 msgstr "سازمان های متعلق به"
 
 #: src/customer/team/CustomerUsersList.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
 msgid "Owner"
 msgstr "صاحب"
 
