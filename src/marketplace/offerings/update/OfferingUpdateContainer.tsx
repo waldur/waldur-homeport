@@ -137,7 +137,7 @@ export const OfferingUpdateContainer = () => {
           type="options"
           title={
             <>
-              {translate('User input variables')}{' '}
+              {translate('User input')}{' '}
               <Tip
                 id="form-field-tooltip"
                 label={translate(
@@ -156,7 +156,20 @@ export const OfferingUpdateContainer = () => {
 
         <OfferingOptionsSection
           type="resource_options"
-          title={translate('Resource options variables')}
+          title={
+            <>
+              {translate('Resource options')}{' '}
+              <Tip
+                id="form-field-tooltip"
+                label={translate(
+                  'If you want user to be able to modify resource options after creation, please configure options for user below',
+                )}
+                className="mx-2"
+              >
+                <i className="fa fa-question-circle" />
+              </Tip>
+            </>
+          }
           offering={data.offering}
           refetch={refetch}
           loading={isRefetching}
