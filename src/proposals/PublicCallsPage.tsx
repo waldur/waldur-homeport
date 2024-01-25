@@ -15,9 +15,9 @@ import { HeroSection } from './HeroSection';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
 import { PublicCallsTablePlaceholder } from './PublicCallsTablePlaceholder';
 
-import './ProposalPublicCallsPage.scss';
+import './PublicCallsPage.scss';
 
-export const ProposalPublicCallsPage: FunctionComponent = () => {
+export const PublicCallsPage: FunctionComponent = () => {
   useFullPage();
   useTitle(translate('Marketplace'));
 
@@ -60,26 +60,23 @@ export const ProposalPublicCallsPage: FunctionComponent = () => {
             },
             {
               title: translate('Start'),
-              orderField: 'start_time',
               render: ({ row }) => (
                 <>{renderFieldOrDash(formatDateTime(row.start_time))}</>
               ),
             },
             {
               title: translate('End'),
-              orderField: 'end_time',
               render: ({ row }) => (
                 <>{renderFieldOrDash(formatDateTime(row.end_time))}</>
               ),
             },
             {
               title: translate('State'),
-              orderField: 'state',
               render: ({ row }) => <>{row.state}</>,
             },
           ]}
           verboseName={translate('Public calls')}
-          initialSorting={{ field: 'end_time', mode: 'desc' }}
+          initialSorting={{ field: 'name', mode: 'desc' }}
           hasQuery={true}
           placeholderComponent={<PublicCallsTablePlaceholder />}
           expandableRow={PublicCallExpandableRow}

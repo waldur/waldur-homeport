@@ -9,16 +9,16 @@ import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { CallCreateButton } from './CallCreateButton';
+import { CallEditButton } from './CallEditButton';
 import { CallExpandableRow } from './CallExpandableRow';
 import { CallManagementTablePlaceholder } from './CallManagementTablePlaceholder';
-import { ProposalCallCreateButton } from './ProposalCallCreateButton';
-import { ProposalCallEditButton } from './ProposalCallEditButton';
 
 export const CallManagementPage: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   const filter = useMemo(() => ({ customer_uuid: customer.uuid }), [customer]);
   const tableProps = useTable({
-    table: 'CallMamagementList',
+    table: 'CallManagementList',
     fetchData: createFetcher('proposal-protected-calls'),
     queryField: 'name',
     filter,
@@ -52,9 +52,9 @@ export const CallManagementPage: FunctionComponent = () => {
       ]}
       verboseName={translate('Call management')}
       initialSorting={{ field: 'name', mode: 'desc' }}
-      hoverableRow={({ row }) => <ProposalCallEditButton row={row} />}
+      hoverableRow={({ row }) => <CallEditButton row={row} />}
       hasQuery={true}
-      actions={<ProposalCallCreateButton refetch={tableProps.fetch} />}
+      actions={<CallCreateButton refetch={tableProps.fetch} />}
       placeholderComponent={<CallManagementTablePlaceholder />}
       expandableRow={CallExpandableRow}
     />

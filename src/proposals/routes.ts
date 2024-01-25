@@ -8,9 +8,9 @@ const CallManagementPage = lazyComponent(
   'CallManagementPage',
 );
 
-const ProposalPublicCallsPage = lazyComponent(
-  () => import('./ProposalPublicCallsPage'),
-  'ProposalPublicCallsPage',
+const PublicCallsPage = lazyComponent(
+  () => import('./PublicCallsPage'),
+  'PublicCallsPage',
 );
 
 const PublicCallDetailsContainer = lazyComponent(
@@ -42,7 +42,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'public-calls-user',
     url: 'calls/',
-    component: ProposalPublicCallsPage,
+    component: PublicCallsPage,
     parent: 'profile',
     data: {
       hideProjectSelector: true,
@@ -51,7 +51,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'public.public-calls',
     url: '/calls/',
-    component: ProposalPublicCallsPage,
+    component: PublicCallsPage,
     data: {
       hideProjectSelector: true,
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,

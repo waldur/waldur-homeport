@@ -29,15 +29,13 @@ interface FormData {
   description: string;
 }
 
-export const ProposalCallFormDialog = connect<
-  {},
-  {},
-  { resolve: { call?; refetch } }
->((_, ownProps) => ({
-  initialValues: ownProps.resolve?.call
-    ? getProposalCallInitialValues(ownProps.resolve.call)
-    : undefined,
-}))(
+export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
+  (_, ownProps) => ({
+    initialValues: ownProps.resolve?.call
+      ? getProposalCallInitialValues(ownProps.resolve.call)
+      : undefined,
+  }),
+)(
   reduxForm<FormData, { resolve: { call?; refetch } }>({
     form: 'ProposalCallForm',
   })((props) => {

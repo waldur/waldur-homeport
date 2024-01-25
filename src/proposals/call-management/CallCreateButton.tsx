@@ -6,18 +6,18 @@ import { translate } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-const ProposalCallCreateDialog = lazyComponent(
-  () => import('./ProposalCallFormDialog'),
-  'ProposalCallFormDialog',
+const CallCreateDialog = lazyComponent(
+  () => import('./CallFormDialog'),
+  'CallFormDialog',
 );
 
 const callCreateDialog = (refetch) =>
-  openModalDialog(ProposalCallCreateDialog, {
+  openModalDialog(CallCreateDialog, {
     resolve: { refetch },
     size: 'md',
   });
 
-export const ProposalCallCreateButton = ({ refetch }) => {
+export const CallCreateButton = ({ refetch }) => {
   const dispatch = useDispatch();
   const openFormDialog = useCallback(
     () => dispatch(callCreateDialog(refetch)),
