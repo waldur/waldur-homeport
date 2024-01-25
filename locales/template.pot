@@ -4567,6 +4567,10 @@ msgid "If defined, will be set as a password for all offering users"
 msgstr ""
 
 #: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
+msgid "If you want user to be able to modify resource options after creation, please configure options for user below"
+msgstr ""
+
+#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
 msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
 msgstr ""
 
@@ -9121,7 +9125,7 @@ msgstr ""
 
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
-msgid "Resource options variables"
+msgid "Resource options"
 msgstr ""
 
 #: src/marketplace/orders/list/ResourceOrders.tsx
@@ -13411,7 +13415,7 @@ msgstr ""
 
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
-msgid "User input variables"
+msgid "User input"
 msgstr ""
 
 #: src/administration/TokensList.tsx
