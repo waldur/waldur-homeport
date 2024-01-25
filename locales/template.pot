@@ -14368,8 +14368,7 @@ msgstr ""
 msgid "orders"
 msgstr ""
 
-#: src/invitations/GroupInvitationMessage.tsx
-#: src/invitations/InvitationMessage.tsx
+#: src/invitations/formatInvitation.ts
 msgid "organization"
 msgstr ""
 
@@ -14408,8 +14407,7 @@ msgstr ""
 msgid "ports"
 msgstr ""
 
-#: src/invitations/GroupInvitationMessage.tsx
-#: src/invitations/InvitationMessage.tsx
+#: src/invitations/formatInvitation.ts
 msgid "project"
 msgstr ""
 
@@ -14814,8 +14812,7 @@ msgstr ""
 msgid "{role} role expires on"
 msgstr ""
 
-#: src/invitations/GroupInvitationMessage.tsx
-#: src/invitations/InvitationMessage.tsx
+#: src/invitations/formatInvitation.ts
 msgid "{sender} has invited you to join {name} {type} in {role} role."
 msgstr ""
 
