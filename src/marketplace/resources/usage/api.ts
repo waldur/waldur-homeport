@@ -62,16 +62,16 @@ const getUsageBasedOfferingComponents = (offering) => {
 export const getComponentsAndUsages = async (
   offering_uuid: string,
   resource_uuid: string,
+  months: number,
 ) => {
   if (!offering_uuid || !resource_uuid) {
     return { components: null, usages: null };
   }
   const offering = await getPublicOffering(offering_uuid);
   const components = await getUsageBasedOfferingComponents(offering);
-  const date_after = DateTime.now()
-    .startOf('month')
-    .minus({ months: 12 })
-    .toFormat('yyyy-MM-dd');
+  const date_after = months
+    ? DateTime.now().startOf('month').minus({ months }).toFormat('yyyy-MM-dd')
+    : undefined;
   let usages = await getComponentUsages(resource_uuid, date_after);
   if (offering.type === SLURM_PLUGIN) {
     usages = usages.map(parseSlurmUsage);

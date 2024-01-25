@@ -17,16 +17,22 @@ interface ResourceUsageTabsContainerProps {
     project_name?: string;
     backend_id?: string;
   };
+  months?: number;
   hideHeader?: boolean;
 }
 
 export const ResourceUsageTabsContainer: FunctionComponent<ResourceUsageTabsContainerProps> =
-  ({ resource, hideHeader }) => {
+  ({ resource, months, hideHeader }) => {
     const { loading, error, value } = useAsync(
       () =>
-        getComponentsAndUsages(resource.offering_uuid, resource.resource_uuid),
-      [resource],
+        getComponentsAndUsages(
+          resource.offering_uuid,
+          resource.resource_uuid,
+          months,
+        ),
+      [resource, months],
     );
+
     return loading ? (
       <LoadingSpinner />
     ) : error ? (
@@ -39,6 +45,7 @@ export const ResourceUsageTabsContainer: FunctionComponent<ResourceUsageTabsCont
         <ResourceUsageTabs
           components={value.components}
           usages={value.usages}
+          months={months}
           colors={generateColors(value.components.length, {
             colorStart: 0.25,
             colorEnd: 0.65,

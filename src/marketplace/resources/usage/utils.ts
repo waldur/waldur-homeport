@@ -78,9 +78,9 @@ const formatChart = (
   ],
 });
 
-const getLastTwelveMonths = (): DateTime[] => {
+const getMonthsPeriods = (months): DateTime[] => {
   const periods = [];
-  for (let i = 11; i >= 0; i--) {
+  for (let i = months - 1; i >= 0; i--) {
     periods.push(DateTime.now().minus({ months: i }));
   }
   return periods;
@@ -117,9 +117,22 @@ const getUsages = (
 export const getEChartOptions = (
   component: OfferingComponent,
   usages: ComponentUsage[],
+  months: number,
   color: string,
 ) => {
-  const periods = getLastTwelveMonths();
+  let numberOfMonths = months;
+  if (!numberOfMonths) {
+    // Calculate number of months from usages, if months param is not given
+    const startDateUnix = Math.min(
+      ...usages.map((usage) => new Date(usage.date).getTime()),
+    );
+    const _months = parseDate(startDateUnix)
+      .startOf('month')
+      .diffNow()
+      .as('months');
+    numberOfMonths = Math.ceil(Math.abs(_months));
+  }
+  const periods = getMonthsPeriods(numberOfMonths);
   const labels = periods.map((date) => `${date.month} - ${date.year}`);
   const formattedUsages = getUsages(
     periods,
@@ -127,6 +140,12 @@ export const getEChartOptions = (
   );
   return formatChart(component.measured_unit, color, labels, formattedUsages);
 };
+
+export const getUsageHistoryPeriodOptions = () => [
+  { value: 6, label: translate('Last {month} month', { month: 6 }) },
+  { value: 12, label: translate('Last {month} month', { month: 12 }) },
+  { value: null, label: translate('From creation') },
+];
 
 export const getBillingTypeLabel = (value) =>
   getAccountingTypeOptions().find((option) => option.value === value)?.label ||

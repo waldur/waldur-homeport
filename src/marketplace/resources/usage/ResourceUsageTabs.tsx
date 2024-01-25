@@ -11,6 +11,7 @@ import { getBillingTypeLabel } from './utils';
 interface ResourceUsageTabsProps {
   components: OfferingComponent[];
   usages: ComponentUsage[];
+  months?: number;
   colors: string[];
 }
 
@@ -44,6 +45,7 @@ export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
             <ResourceUsageChart
               offeringComponent={component}
               usages={props.usages}
+              months={props.months}
               chartColor={props.colors[index]}
             />
           </div>

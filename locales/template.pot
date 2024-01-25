@@ -4175,6 +4175,10 @@ msgstr ""
 msgid "From"
 msgstr ""
 
+#: src/marketplace/resources/usage/utils.ts
+msgid "From creation"
+msgstr ""
+
 #: src/booking/deploy/CustomRangeDatePicker.tsx
 msgid "From date"
 msgstr ""
@@ -5197,6 +5201,10 @@ msgstr ""
 
 #: src/UserAgreementComponent.tsx
 msgid "Last update"
+msgstr ""
+
+#: src/marketplace/resources/usage/utils.ts
+msgid "Last {month} month"
 msgstr ""
 
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
