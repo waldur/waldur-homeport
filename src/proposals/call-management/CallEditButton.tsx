@@ -1,7 +1,7 @@
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n/translate';
 
-export const ProposalCallEditButton = ({ row }) => {
+export const CallEditButton = ({ row }) => {
   return (
     <Link
       state="protected-call-update"

@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { useExtraTabs } from '@waldur/navigation/context';
 import { Tab } from '@waldur/navigation/Tab';
-import { useProposalCallsLink } from '@waldur/proposals/ProposalsLink';
+import { usePublicCallsLink } from '@waldur/proposals/PublicCallsLink';
 import { RootState } from '@waldur/store/reducers';
 
 import { getCategoryItems } from './category/utils';
@@ -43,7 +43,7 @@ export const useMarketplacePublicTabs = () => {
 
   const { state: landingState, stateParams: landingStateParams } =
     useMarketplaceLandingLink();
-  const callsState = useProposalCallsLink();
+  const callsState = usePublicCallsLink();
   const { state: categoryState } = useCategoryLink();
 
   const tabs = useMemo(() => {
