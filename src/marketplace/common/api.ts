@@ -132,6 +132,26 @@ export const getOfferingPlansUsage = (offeringUuid: string) =>
     params: { offering_uuid: offeringUuid },
   });
 
+export const getOfferingRoles = (offeringUuid: string) =>
+  getAll<Plan>('/marketplace-offering-user-roles/', {
+    params: { offering_uuid: offeringUuid },
+  });
+
+export const createOfferingRole = (offering, name) =>
+  post(`/marketplace-offering-user-roles/`, {
+    offering,
+    name,
+  });
+
+export const deleteOfferingRole = (roleId) =>
+  deleteById(`/marketplace-offering-user-roles/`, roleId);
+
+export const createResourceUser = (payload) =>
+  post('/marketplace-resource-users/', payload);
+
+export const deleteResourceUser = (userId) =>
+  deleteById('/marketplace-resource-users/', userId);
+
 export const getProviderOffering = (id: string, options?: AxiosRequestConfig) =>
   getById<Offering>('/marketplace-provider-offerings/', id, options);
 
