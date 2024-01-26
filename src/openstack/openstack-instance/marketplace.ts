@@ -144,6 +144,9 @@ const formValidator = (props) => {
       );
     }
   }
+  if (attributes.networks.length === 0) {
+    errors.networks = translate('Please select network.');
+  }
   return { attributes: errors };
 };
 
