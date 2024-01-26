@@ -105,6 +105,7 @@ export const OfferingUpdateBar: FunctionComponent<OwnProps> = ({
         visible: true,
       },
       { key: 'images', title: translate('Images'), visible: true },
+      { key: 'roles', title: translate('Roles'), visible: true },
     ].filter((tab) => tab.visible);
   }, [
     isCustomScript,

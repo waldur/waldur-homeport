@@ -24,6 +24,7 @@ import { ResourceStateField } from '../list/ResourceStateField';
 import { ShowReportAction } from '../report/ShowReportAction';
 import { OrderInProgressView } from '../resource-pending/OrderInProgressView';
 import { ResourceActions } from '../ResourceActions';
+import { ResourceUsersCard } from '../users/ResourceUsersCard';
 
 import { ActionButton } from './ActionButton';
 import { ActivityCard } from './ActivityCard';
@@ -209,6 +210,7 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
 
             <ActivityCard state={state} resource={resource} />
             <ResourceIssuesCard resource={resource} state={state} />
+            <ResourceUsersCard resource={resource} offering={offering} />
           </div>
         </PageBarProvider>
       )}

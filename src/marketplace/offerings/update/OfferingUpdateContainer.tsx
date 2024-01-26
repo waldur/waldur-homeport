@@ -27,6 +27,7 @@ import { OfferingUpdateBar } from './OfferingUpdateBar';
 import { OfferingOptionsSection } from './options/OfferingOptionsSection';
 import { OverviewSection } from './overview/OverviewSection';
 import { PlansSection } from './plans/PlansSection';
+import { RolesSection } from './roles/RolesSection';
 
 const getOfferingData = async (offering_uuid) => {
   const offering = await getProviderOffering(offering_uuid);
@@ -196,6 +197,12 @@ export const OfferingUpdateContainer = () => {
         />
 
         <OfferingImagesList offering={data.offering} />
+
+        <RolesSection
+          offering={data.offering}
+          refetch={refetch}
+          loading={isRefetching}
+        />
       </div>
     </div>
   );
