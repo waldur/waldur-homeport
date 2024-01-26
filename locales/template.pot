@@ -6483,6 +6483,7 @@ msgstr ""
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 #: src/marketplace/offerings/import/tabs.ts
+#: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
@@ -7164,6 +7165,10 @@ msgstr ""
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Paid"
+msgstr ""
+
+#: src/marketplace/orders/details/SummarySection.tsx
+msgid "Parent offering"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx

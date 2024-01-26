@@ -82,6 +82,12 @@ export const SummarySection = ({
           {formatDate(order.provider_reviewed_at)}
         </DetailsField>
       )}
+      <DetailsField label={translate('Offering')}>{offering.name}</DetailsField>
+      {offering.parent_name && (
+        <DetailsField label={translate('Parent offering')}>
+          {offering.parent_name}
+        </DetailsField>
+      )}
     </Accordion.Body>
   </Accordion.Item>
 );
