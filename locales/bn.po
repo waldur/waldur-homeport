@@ -2379,7 +2379,9 @@ msgstr "মুছে ফেলা নিশ্চিত করুন?"
 #: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
+#: src/marketplace/offerings/update/roles/DeleteRoleButton.tsx
 #: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
+#: src/marketplace/resources/users/DeleteUserButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
@@ -2559,9 +2561,11 @@ msgstr "কুপন"
 #: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 #: src/marketplace/offerings/update/options/AddOptionDialog.tsx
 #: src/marketplace/offerings/update/plans/AddPlanDialog.tsx
+#: src/marketplace/offerings/update/roles/AddRoleDialog.tsx
 #: src/marketplace/orders/list/OrderTypeCell.tsx
 #: src/marketplace/orders/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
+#: src/marketplace/resources/users/AddUserDialog.tsx
 #: src/marketplace/service-providers/CampaignCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
@@ -3258,6 +3262,8 @@ msgstr "ডিফল্ট মান"
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
 #: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
+#: src/marketplace/offerings/update/roles/DeleteRoleButton.tsx
+#: src/marketplace/resources/users/DeleteUserButton.tsx
 #: src/notifications/ManageCommonFooterDialog.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
@@ -6715,6 +6721,7 @@ msgstr "N/A"
 #: src/marketplace/offerings/update/plans/PlanForm.tsx
 #: src/marketplace/offerings/update/plans/PricesTable.tsx
 #: src/marketplace/offerings/update/plans/QuotasTable.tsx
+#: src/marketplace/offerings/update/roles/AddRoleDialog.tsx
 #: src/marketplace/orders/details/LimitsSection.tsx
 #: src/marketplace/orders/list/CustomerOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
@@ -7422,6 +7429,7 @@ msgstr "অবজেক্ট পাওয়া যায় না।"
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 #: src/marketplace/offerings/import/tabs.ts
+#: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
@@ -10907,6 +10915,8 @@ msgstr "রোবট অ্যাকাউন্ট সিঙ্ক্রোন�
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
+#: src/marketplace/resources/users/AddUserDialog.tsx
+#: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
@@ -10933,6 +10943,9 @@ msgstr "প্রকল্পে ভূমিকা"
 msgid "Role management events"
 msgstr "ভূমিকা ব্যবস্থাপনা ইভেন্ট"
 
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/update/roles/RolesSection.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Roles"
@@ -15447,6 +15460,8 @@ msgstr "আমলে ব্যবহৃত হয়{period} দ্বারা:
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
+#: src/marketplace/resources/users/AddUserDialog.tsx
+#: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
@@ -16950,6 +16965,7 @@ msgid "robot accounts"
 msgstr "রোবট অ্যাকাউন্ট"
 
 #: src/administration/roles/RolesList.tsx
+#: src/marketplace/resources/users/ResourceUsersList.tsx
 msgid "roles"
 msgstr "ভূমিকা"
 

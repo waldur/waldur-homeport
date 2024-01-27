@@ -1770,7 +1770,9 @@ msgstr "Verwijdering bevestigen?"
 #: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
+#: src/marketplace/offerings/update/roles/DeleteRoleButton.tsx
 #: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
+#: src/marketplace/resources/users/DeleteUserButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
@@ -1910,9 +1912,11 @@ msgstr "Coupon"
 #: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 #: src/marketplace/offerings/update/options/AddOptionDialog.tsx
 #: src/marketplace/offerings/update/plans/AddPlanDialog.tsx
+#: src/marketplace/offerings/update/roles/AddRoleDialog.tsx
 #: src/marketplace/orders/list/OrderTypeCell.tsx
 #: src/marketplace/orders/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
+#: src/marketplace/resources/users/AddUserDialog.tsx
 #: src/marketplace/service-providers/CampaignCreateButton.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
@@ -2401,6 +2405,8 @@ msgstr "Standaardwaarde"
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
 #: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
+#: src/marketplace/offerings/update/roles/DeleteRoleButton.tsx
+#: src/marketplace/resources/users/DeleteUserButton.tsx
 #: src/notifications/ManageCommonFooterDialog.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
@@ -4220,6 +4226,7 @@ msgstr "N.V.T"
 #: src/marketplace/offerings/update/plans/PlanForm.tsx
 #: src/marketplace/offerings/update/plans/PricesTable.tsx
 #: src/marketplace/offerings/update/plans/QuotasTable.tsx
+#: src/marketplace/offerings/update/roles/AddRoleDialog.tsx
 #: src/marketplace/orders/details/LimitsSection.tsx
 #: src/marketplace/orders/list/CustomerOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
@@ -4994,6 +5001,8 @@ msgstr "Beoordelingen"
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
+#: src/marketplace/resources/users/AddUserDialog.tsx
+#: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
@@ -5007,6 +5016,9 @@ msgstr "Beoordelingen"
 msgid "Role"
 msgstr "Rol"
 
+#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/update/roles/RolesSection.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Roles"
@@ -5715,6 +5727,8 @@ msgstr "gebruikt"
 #: src/marketplace/offerings/details/CreateOfferingUserDialog.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
+#: src/marketplace/resources/users/AddUserDialog.tsx
+#: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
@@ -6025,6 +6039,7 @@ msgid "reviews"
 msgstr "Beoordelingen"
 
 #: src/administration/roles/RolesList.tsx
+#: src/marketplace/resources/users/ResourceUsersList.tsx
 msgid "roles"
 msgstr "Rollen"
 
