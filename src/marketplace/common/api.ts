@@ -63,9 +63,10 @@ export const getCategoryUsages = (options?: {}) =>
 export const getComponentUsages = (
   resource_uuid: string,
   date_after?: string,
+  params?: {},
 ) =>
   getAll<ComponentUsage>('/marketplace-component-usages/', {
-    params: { resource_uuid, date_after },
+    params: { resource_uuid, date_after, ...(params || {}) },
   });
 
 export const getCategory = (id: string, options?: AxiosRequestConfig) =>

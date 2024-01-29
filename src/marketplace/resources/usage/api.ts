@@ -72,7 +72,9 @@ export const getComponentsAndUsages = async (
   const date_after = months
     ? DateTime.now().startOf('month').minus({ months }).toFormat('yyyy-MM-dd')
     : undefined;
-  let usages = await getComponentUsages(resource_uuid, date_after);
+  let usages = await getComponentUsages(resource_uuid, date_after, {
+    fields: ['type', 'usage', 'date'],
+  });
   if (offering.type === SLURM_PLUGIN) {
     usages = usages.map(parseSlurmUsage);
   }
