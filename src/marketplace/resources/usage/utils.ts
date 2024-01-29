@@ -141,11 +141,24 @@ export const getEChartOptions = (
   return formatChart(component.measured_unit, color, labels, formattedUsages);
 };
 
-export const getUsageHistoryPeriodOptions = () => [
-  { value: 6, label: translate('Last {month} month', { month: 6 }) },
-  { value: 12, label: translate('Last {month} month', { month: 12 }) },
-  { value: null, label: translate('From creation') },
-];
+export const getUsageHistoryPeriodOptions = (startDate = null) => {
+  const diff = Math.abs(parseDate(startDate).diffNow().as('months'));
+  const options = [];
+  if (diff > 6) {
+    options.push({
+      value: 6,
+      label: translate('Last {month} month', { month: 6 }),
+    });
+  }
+  if (diff > 12) {
+    options.push({
+      value: 12,
+      label: translate('Last {month} month', { month: 12 }),
+    });
+  }
+  options.push({ value: Math.ceil(diff), label: translate('From creation') });
+  return options;
+};
 
 export const getBillingTypeLabel = (value) =>
   getAccountingTypeOptions().find((option) => option.value === value)?.label ||

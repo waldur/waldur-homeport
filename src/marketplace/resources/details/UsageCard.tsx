@@ -15,9 +15,14 @@ export const UsageCard = ({ resource }) => {
     }),
     [resource],
   );
-  const periodOptions = useMemo(() => getUsageHistoryPeriodOptions(), []);
+  const periodOptions = useMemo(
+    () => getUsageHistoryPeriodOptions(resource.created),
+    [resource],
+  );
   const [period, setPeriod] = useState(
-    periodOptions.find((op) => op.value === 12),
+    periodOptions.length > 1
+      ? periodOptions[periodOptions.length - 2]
+      : periodOptions[0],
   );
 
   return resource.is_usage_based || resource.is_limit_based ? (
@@ -26,14 +31,16 @@ export const UsageCard = ({ resource }) => {
         <Card.Title>
           <h3>{translate('Usage history')}</h3>
         </Card.Title>
-        <div className="card-toolbar">
-          <SelectControl
-            options={periodOptions}
-            value={period}
-            onChange={setPeriod}
-            className="w-150px"
-          />
-        </div>
+        {periodOptions.length > 1 && (
+          <div className="card-toolbar">
+            <SelectControl
+              options={periodOptions}
+              value={period}
+              onChange={setPeriod}
+              className="w-150px"
+            />
+          </div>
+        )}
       </Card.Header>
       <Card.Body>
         <ResourceUsageTabsContainer
