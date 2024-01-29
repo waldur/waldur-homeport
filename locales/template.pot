@@ -7715,6 +7715,10 @@ msgstr ""
 msgid "Please select a username that you will use for login into the Linux systems."
 msgstr ""
 
+#: src/openstack/openstack-instance/marketplace.ts
+msgid "Please select network."
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/RestartAction.tsx
 msgid "Please start instance first."
 msgstr ""
@@ -9475,6 +9479,7 @@ msgstr ""
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/roles/RolesSection.tsx
 #: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Roles"

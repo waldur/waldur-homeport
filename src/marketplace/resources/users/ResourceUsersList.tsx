@@ -18,6 +18,7 @@ export const ResourceUsersList = ({ resource, offering }) => {
   return (
     <Table
       {...tableProps}
+      title={translate('Roles')}
       columns={[
         {
           title: translate('User'),
