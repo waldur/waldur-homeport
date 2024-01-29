@@ -22,7 +22,7 @@ export const ProjectDashboardCostLimits = ({
 
   return (
     <Panel
-      className="h-100"
+      className="mb-6"
       title={translate('Project cost')}
       actions={
         isOwnerOrStaff && (

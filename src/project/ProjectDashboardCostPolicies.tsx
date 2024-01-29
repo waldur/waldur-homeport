@@ -76,7 +76,7 @@ const InfiniteListTable: FC<InfiniteListTableProps> = ({
     <p>{translate('Error')}</p>
   ) : (
     <>
-      <div className="h-125px overflow-auto">
+      <div className="mh-125px overflow-auto">
         {data.pages.length > 0 && data.pages[0].data.length > 0 && (
           <table className="table table-sm">
             <thead className="position-sticky top-0 bg-body z-index-1">

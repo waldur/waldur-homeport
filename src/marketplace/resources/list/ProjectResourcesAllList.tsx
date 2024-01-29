@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
@@ -9,6 +10,7 @@ import { LandingLink } from '@waldur/marketplace/links/LandingLink';
 import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Table, createFetcher } from '@waldur/table';
+import { TableProps } from '@waldur/table/Table';
 import { useTable } from '@waldur/table/utils';
 import { getProject } from '@waldur/workspace/selectors';
 
@@ -56,7 +58,7 @@ const mapPropsToFilter = createSelector(
   },
 );
 
-export const ProjectResourcesAllList = () => {
+export const ProjectResourcesAllList: FC<Partial<TableProps>> = (props) => {
   const filter = useSelector(mapPropsToFilter);
   const project = useSelector(getProject);
   const tableProps = useTable({
@@ -103,6 +105,7 @@ export const ProjectResourcesAllList = () => {
           render: ({ row }) => <ResourceStateField resource={row} />,
         },
       ]}
+      title={translate('Resources')}
       verboseName={translate('Resources')}
       placeholderComponent={<EmptyResourcesListPlaceholder />}
       initialSorting={{ field: 'created', mode: 'desc' }}
@@ -115,6 +118,7 @@ export const ProjectResourcesAllList = () => {
       enableMultiSelect={true}
       multiSelectActions={ResourceMultiSelectAction}
       actions={tableActions}
+      {...props}
     />
   );
 };
