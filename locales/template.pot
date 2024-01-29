@@ -1110,8 +1110,6 @@ msgstr ""
 msgid "Attributes"
 msgstr ""
 
-#: src/project/ProjectEventsTimeline.tsx
-#: src/providers/dashboard/ProviderActionLogs.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr ""
@@ -1119,7 +1117,9 @@ msgstr ""
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
 #: src/project/ProjectActions.tsx
+#: src/project/ProjectEventsList.tsx
 #: src/project/routes.ts
+#: src/providers/dashboard/ProviderEventsTable.tsx
 #: src/user/UserActions.tsx
 #: src/user/routes.ts
 msgid "Audit logs"
@@ -5318,8 +5318,6 @@ msgstr ""
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
-#: src/project/ProjectEventsTimeline.tsx
-#: src/providers/dashboard/ProviderActionLogs.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Loading"
 msgstr ""
@@ -11495,10 +11493,6 @@ msgstr ""
 msgid "There are no plans"
 msgstr ""
 
-#: src/project/ProjectEventsTimeline.tsx
-msgid "There are no project events."
-msgstr ""
-
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 msgid "There are no projects yet for this organization."
@@ -11514,16 +11508,8 @@ msgstr ""
 msgid "There are no proposal calls yet."
 msgstr ""
 
-#: src/providers/dashboard/ProviderActionLogs.tsx
-msgid "There are no provider events."
-msgstr ""
-
 #: src/user/UserOfferingListPlaceholder.tsx
 msgid "There are no remote accounts yet."
-msgstr ""
-
-#: src/marketplace/resources/details/ResourceTimeline.tsx
-msgid "There are no resource events."
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceIssues.tsx

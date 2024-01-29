@@ -1,26 +1,27 @@
-import { UISref } from '@uirouter/react';
-import { Card } from 'react-bootstrap';
-
+import { Link } from '@waldur/core/Link';
+import { EventTypesButton } from '@waldur/events/EventTypesButton';
 import { translate } from '@waldur/i18n';
-
-import { ResourceTimeline } from './ResourceTimeline';
+import { ResourceEvents } from '@waldur/resource/tabs/ResourceEvents';
 
 export const ActivityCard = ({ state, resource }) => {
   return (
-    <Card className="mb-10" id="activity">
-      <Card.Header>
-        <Card.Title>
-          <h3>{translate('Activity')}</h3>
-        </Card.Title>
-        <div className="card-toolbar">
-          <UISref to={state.name} params={{ tab: 'events' }}>
-            <a className="btn btn-link">{translate('See all')}</a>
-          </UISref>
-        </div>
-      </Card.Header>
-      <Card.Body>
-        <ResourceTimeline resource={resource} />
-      </Card.Body>
-    </Card>
+    <ResourceEvents
+      title={translate('Activity')}
+      className="mb-10"
+      id="activity"
+      initialPageSize={5}
+      marketplaceResource={resource}
+      actions={
+        <>
+          <Link
+            state={state.name}
+            params={{ tab: 'events' }}
+            label={translate('See all')}
+            className="btn btn-light"
+          />
+          <EventTypesButton />
+        </>
+      }
+    />
   );
 };
