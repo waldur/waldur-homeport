@@ -100,7 +100,7 @@ export const ProjectResourcesAllList = () => {
         },
         {
           title: translate('State'),
-          render: ResourceStateField,
+          render: ({ row }) => <ResourceStateField resource={row} />,
         },
       ]}
       verboseName={translate('Resources')}

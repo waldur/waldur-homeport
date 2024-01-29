@@ -10,12 +10,13 @@ import {
   TABLE_OFFERING_RESOURCE,
 } from '@waldur/marketplace/details/constants';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
-import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 import { ResourceState } from '@waldur/marketplace/resources/types';
 import { PublicResourceActions } from '@waldur/marketplace/resources/usage/PublicResourceActions';
 import { Offering } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
+
+import { ResourceStateField } from '../resources/list/ResourceStateField';
 
 interface OfferingResourceFilter {
   state?: ResourceState;
@@ -55,7 +56,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('State'),
-      render: ResourceStateField,
+      render: ({ row }) => <ResourceStateField resource={row} />,
     },
   ];
 

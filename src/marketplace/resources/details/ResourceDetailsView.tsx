@@ -114,7 +114,7 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
             logoAlt={resource.category_title}
             logoBottomLabel={translate('Resource')}
             logoBottomClass="bg-secondary"
-            logoTopLabel={<ResourceStateField row={resource} roundless />}
+            logoTopLabel={<ResourceStateField resource={resource} roundless />}
             backgroundImage={offering.image}
             asHero
             title={<ResourceDetailsHeaderTitle resource={resource} />}

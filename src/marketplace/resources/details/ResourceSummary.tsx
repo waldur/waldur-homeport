@@ -8,7 +8,7 @@ import { Field } from '@waldur/resource/summary';
 import { CreatedField } from '@waldur/resource/summary/CreatedField';
 
 import { KeyValueButton } from '../KeyValueButton';
-import { MarketplaceResourceStateField } from '../list/MarketplaceResourceStateField';
+import { ResourceStateField } from '../list/ResourceStateField';
 import { Resource } from '../types';
 
 export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
@@ -44,7 +44,7 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
     <Field label={translate('Plugin ID')} value={resource.resource_uuid} />
     <Field
       label={translate('State')}
-      value={<MarketplaceResourceStateField resource={resource} />}
+      value={<ResourceStateField resource={resource} />}
     />
     {resource.attributes ? (
       <Field

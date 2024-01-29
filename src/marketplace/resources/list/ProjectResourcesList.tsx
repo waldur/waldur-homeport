@@ -62,7 +62,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   columns.push(
     {
       title: translate('State'),
-      render: ResourceStateField,
+      render: ({ row }) => <ResourceStateField resource={row} />,
     },
     {
       title: translate('Created at'),

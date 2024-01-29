@@ -33,7 +33,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('State'),
-          render: ResourceStateField,
+          render: ({ row }) => <ResourceStateField resource={row} />,
         },
       ]}
       verboseName={translate('Resources')}
