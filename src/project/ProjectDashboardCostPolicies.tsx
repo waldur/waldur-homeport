@@ -68,6 +68,7 @@ const InfiniteListTable: FC<InfiniteListTableProps> = ({
     status,
   } = useInfiniteQuery<any, any, DataPage>([queryKey], loadData, {
     getNextPageParam: (lastPage: DataPage) => lastPage.nextPage,
+    refetchOnWindowFocus: false,
   });
 
   return status === 'loading' ? (
