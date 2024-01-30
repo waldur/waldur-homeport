@@ -759,8 +759,6 @@ msgstr "Gli attributi non sono validi."
 msgid "Attributes filter"
 msgstr "Filtro attributi"
 
-#: src/project/ProjectEventsTimeline.tsx
-#: src/providers/dashboard/ProviderActionLogs.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr "Registro di controllo"
@@ -768,7 +766,9 @@ msgstr "Registro di controllo"
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
 #: src/project/ProjectActions.tsx
+#: src/project/ProjectEventsList.tsx
 #: src/project/routes.ts
+#: src/providers/dashboard/ProviderEventsTable.tsx
 #: src/user/UserActions.tsx
 #: src/user/routes.ts
 msgid "Audit logs"
@@ -3737,8 +3737,6 @@ msgstr "Collega fattura"
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
-#: src/project/ProjectEventsTimeline.tsx
-#: src/providers/dashboard/ProviderActionLogs.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Loading"
 msgstr "Caricamento"
@@ -6803,6 +6801,7 @@ msgstr "Eventi di gestione dei ruoli"
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/roles/RolesSection.tsx
 #: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Roles"

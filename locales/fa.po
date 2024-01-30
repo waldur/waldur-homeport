@@ -583,8 +583,6 @@ msgstr "صفات نا معتبر است."
 msgid "Attributes filter"
 msgstr "ویژگی های فیلتر"
 
-#: src/project/ProjectEventsTimeline.tsx
-#: src/providers/dashboard/ProviderActionLogs.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr "گزارش حسابرسی"
@@ -592,7 +590,9 @@ msgstr "گزارش حسابرسی"
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
 #: src/project/ProjectActions.tsx
+#: src/project/ProjectEventsList.tsx
 #: src/project/routes.ts
+#: src/providers/dashboard/ProviderEventsTable.tsx
 #: src/user/UserActions.tsx
 #: src/user/routes.ts
 msgid "Audit logs"
@@ -2790,8 +2790,6 @@ msgstr "لینک  OpenStack Instance"
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
-#: src/project/ProjectEventsTimeline.tsx
-#: src/providers/dashboard/ProviderActionLogs.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Loading"
 msgstr "بارگذاری"

@@ -309,8 +309,6 @@ msgstr "Əlavə olunur"
 msgid "Attachments"
 msgstr "Qoşmalar"
 
-#: src/project/ProjectEventsTimeline.tsx
-#: src/providers/dashboard/ProviderActionLogs.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr "Audit jurnalı"
@@ -318,7 +316,9 @@ msgstr "Audit jurnalı"
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
 #: src/project/ProjectActions.tsx
+#: src/project/ProjectEventsList.tsx
 #: src/project/routes.ts
+#: src/providers/dashboard/ProviderEventsTable.tsx
 #: src/user/UserActions.tsx
 #: src/user/routes.ts
 msgid "Audit logs"

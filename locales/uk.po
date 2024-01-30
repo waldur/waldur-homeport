@@ -1334,8 +1334,6 @@ msgstr "Атрибути недійсні."
 msgid "Attributes filter"
 msgstr "Фільтр атрибутів"
 
-#: src/project/ProjectEventsTimeline.tsx
-#: src/providers/dashboard/ProviderActionLogs.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr "Ревізійний журнал"
@@ -1343,7 +1341,9 @@ msgstr "Ревізійний журнал"
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
 #: src/project/ProjectActions.tsx
+#: src/project/ProjectEventsList.tsx
 #: src/project/routes.ts
+#: src/providers/dashboard/ProviderEventsTable.tsx
 #: src/user/UserActions.tsx
 #: src/user/routes.ts
 msgid "Audit logs"
@@ -6065,8 +6065,6 @@ msgstr "Завантажити ще"
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
-#: src/project/ProjectEventsTimeline.tsx
-#: src/providers/dashboard/ProviderActionLogs.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Loading"
 msgstr "Завантаження"
@@ -10980,6 +10978,7 @@ msgstr "Події управління ролями"
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/roles/RolesSection.tsx
 #: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Roles"
