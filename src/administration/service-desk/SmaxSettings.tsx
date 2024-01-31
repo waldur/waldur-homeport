@@ -20,5 +20,20 @@ export const SmaxSettings = () => (
       maxLength={150}
       floating={false}
     />
+    <StringField
+      name="SMAX_ORGANISATION_FIELD"
+      label={translate('Organization field')}
+      maxLength={150}
+    />
+    <StringField
+      name="SMAX_PROJECT_FIELD"
+      label={translate('Project field')}
+      maxLength={150}
+    />
+    <StringField
+      name="SMAX_AFFECTED_RESOURCE_FIELD"
+      label={translate('Affected resource field')}
+      maxLength={150}
+    />
   </FormContainer>
 );
