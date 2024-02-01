@@ -6,19 +6,14 @@ import { SubmissionError, reduxForm } from 'redux-form';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
-import { SelectField, SubmitButton } from '@waldur/form';
+import { SubmitButton } from '@waldur/form';
 import { FormContainer } from '@waldur/form/FormContainer';
 import { MarkdownField } from '@waldur/form/MarkdownField';
 import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import {
-  getCallAllocationStrategyOptions,
-  getCallReviewStrategyOptions,
-  getCallRoundStrategyOptions,
-  getProposalCallInitialValues,
-} from '@waldur/proposals/utils';
+import { getProposalCallInitialValues } from '@waldur/proposals/utils';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -140,36 +135,6 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
                 name="description"
                 required={false}
                 verticalLayout
-              />
-            )}
-            {!isEdit && (
-              <SelectField
-                name="round_strategy"
-                label={translate('Round strategy')}
-                simpleValue={true}
-                options={getCallRoundStrategyOptions()}
-                required={true}
-                isClearable={false}
-              />
-            )}
-            {!isEdit && (
-              <SelectField
-                name="review_strategy"
-                label={translate('Review strategy')}
-                simpleValue={true}
-                options={getCallReviewStrategyOptions()}
-                required={true}
-                isClearable={false}
-              />
-            )}
-            {!isEdit && (
-              <SelectField
-                name="allocation_strategy"
-                label={translate('Allocation strategy')}
-                simpleValue={true}
-                options={getCallAllocationStrategyOptions()}
-                required={true}
-                isClearable={false}
               />
             )}
           </FormContainer>
