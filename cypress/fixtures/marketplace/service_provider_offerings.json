@@ -3,6 +3,7 @@
         "uuid": "31384bb20db94b3ca113c9d15caeba1a",
         "name": "basic offering",
         "category_title": "AKKI",
+        "category_uuid": "4588ff519260461893ab371b8fe83363",
         "type": "Marketplace.Basic",
         "state": "Active",
         "resources_count": 2,
@@ -302,7 +303,8 @@
                 }
             }
         },
-        "secret_options": {}
+        "secret_options": {},
+        "screenshots": []
     },
     {
         "uuid": "60ab04ee998e48129bbf1cfb1030fa16",

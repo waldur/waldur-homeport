@@ -22,9 +22,30 @@ describe('Offerings list actions in Provider dashboard page', () => {
         .intercept('GET', '/api/marketplace-service-providers/**/offerings/**', {
             fixture: 'marketplace/service_provider_offerings.json',
         })
-        .intercept('GET', '/api/marketplace-service-providers/**/revenue/**', [])
+        cy.fixture('marketplace/service_provider_offerings.json').then(
+          (offerings) => {
+            const offering = offerings.find(
+              (item) => item.uuid === '31384bb20db94b3ca113c9d15caeba1a',
+            );
+            cy.intercept(
+              'GET',
+              '/api/marketplace-public-offerings/31384bb20db94b3ca113c9d15caeba1a/',
+              offering,
+            );
+          },
+        );
+        cy.intercept('GET', '/api/marketplace-service-providers/**/revenue/**', [])
+        .intercept('GET', '/api/marketplace-categories/', {
+            fixture: 'marketplace/categories.json',
+        })
+        .intercept('GET', '/api/marketplace-categories/4588ff519260461893ab371b8fe83363', {
+            fixture: 'offerings/offeringCategory.json',
+        })
+        .intercept('GET', '/api/marketplace-plugins/', {
+            fixture: 'marketplace/plugins.json',
+        })
         .visit('/providers/6983ac22f2bb469189311ab21e493359/dashboard/')
-        .waitForSpinner()
+        .waitForPage()
     }
     );
 
@@ -79,9 +100,11 @@ describe('Offerings list actions in Provider dashboard page', () => {
         .click({ force: true })
         .get('.dropdown-item')
         .contains('Open public page')
-        .click({ force: true });
+        .click({ force: true })
+        .waitForPage();
 
         cy.url().should('include', '/marketplace-public-offering/');
+        cy.get("h3").contains("basic offering");
     });
 
 });
