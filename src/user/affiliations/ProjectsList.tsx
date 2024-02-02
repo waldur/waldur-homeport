@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
+import { usePermissionView } from '@waldur/auth/PermissionLayout';
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -11,7 +12,11 @@ import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { TableOptionsType } from '@waldur/table/types';
-import { getProject, getUser } from '@waldur/workspace/selectors';
+import {
+  getProject,
+  getUser,
+  isStaffOrSupport as isStaffOrSupportSelector,
+} from '@waldur/workspace/selectors';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 import { ProjectHoverableRow } from './ProjectHoverableRow';
@@ -20,6 +25,20 @@ import { RoleField } from './RoleField';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns } = props;
+
+  usePermissionView(() => {
+    if (props.isStaffOrSupport) {
+      return {
+        permission: 'limited',
+        banner: {
+          title: '',
+          message: translate('Your role allows to see all projects'),
+        },
+      };
+    } else {
+      return null;
+    }
+  }, [props.isStaffOrSupport]);
 
   const columns = filterColumns([
     {
@@ -121,6 +140,7 @@ const mapStateToProps = (state: RootState) => ({
   stateFilter: getFormValues('affiliationProjectsListFilter')(state),
   currentProject: getProject(state),
   user: getUser(state),
+  isStaffOrSupport: isStaffOrSupportSelector(state),
 });
 
 const Projects = connect(mapStateToProps)(PureProjects);
