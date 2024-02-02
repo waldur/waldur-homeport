@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
+import { usePermissionView } from '@waldur/auth/PermissionLayout';
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -12,6 +13,7 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 import {
   getCustomer as getCustomerSelector,
   getUser,
+  isStaffOrSupport as isStaffOrSupportSelector,
 } from '@waldur/workspace/selectors';
 
 import { OrganizationExpandableRow } from './OrganizationExpandableRow';
@@ -20,6 +22,20 @@ import { RoleField } from './RoleField';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns } = props;
+
+  usePermissionView(() => {
+    if (props.isStaffOrSupport) {
+      return {
+        permission: 'limited',
+        banner: {
+          title: '',
+          message: translate('Your role allows to see all organizations'),
+        },
+      };
+    } else {
+      return null;
+    }
+  }, [props.isStaffOrSupport]);
 
   const columns = filterColumns([
     {
@@ -127,4 +143,5 @@ const PureOrganizations = getUserOrganizationsList();
 export const OrganizationsList = connect((state: RootState) => ({
   currentOrganization: getCustomerSelector(state),
   user: getUser(state),
+  isStaffOrSupport: isStaffOrSupportSelector(state),
 }))(PureOrganizations);

@@ -14208,6 +14208,14 @@ msgstr ""
 msgid "Your role allows to see all existing resources"
 msgstr ""
 
+#: src/user/affiliations/OrganizationsList.tsx
+msgid "Your role allows to see all organizations"
+msgstr ""
+
+#: src/user/affiliations/ProjectsList.tsx
+msgid "Your role allows to see all projects"
+msgstr ""
+
 #: src/navigation/workspace/context-selector/OrganizationSummary.tsx
 msgid "Your role:"
 msgstr ""
