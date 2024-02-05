@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { Badge } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/types';
@@ -27,7 +28,10 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = (props) =>
     props.tooltip,
     <Badge
       bg={props.variant}
-      className={'fs-8 fw-bolder' + (props.roundless ? ' rounded-0' : '')}
+      className={classNames('fs-8 fw-bolder', [
+        props.roundless && 'rounded-0',
+        'badge-' + props.variant,
+      ])}
     >
       {props.label.toUpperCase()}
     </Badge>,
