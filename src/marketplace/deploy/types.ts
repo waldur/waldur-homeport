@@ -19,6 +19,7 @@ export interface FormStepProps {
   observed?: boolean;
   disabled?: boolean;
   change?(field: string, value: any): void;
+  required?: boolean;
   params?: OfferingConfigurationFormStep['params'];
 }
 

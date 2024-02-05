@@ -15,6 +15,7 @@ interface StepCardProps {
   loading?: boolean;
   className?: string;
   disabled?: boolean;
+  required?: boolean;
 }
 
 export const StepCard: FC<StepCardProps> = (props) => {
@@ -33,7 +34,7 @@ export const StepCard: FC<StepCardProps> = (props) => {
               readOnly
             />
           </FormCheck>
-          <h6 className="mb-0">
+          <h6 className={'mb-0' + (props.required ? ' required' : '')}>
             {props.step ? `${props.step}. ${props.title}` : props.title}
           </h6>
           {props.helpText && (

@@ -269,6 +269,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
               observed={completedSteps[i]}
               change={props.change}
               params={step.params}
+              required={Boolean(step.requiredFields?.length)}
               disabled={step.id !== 'step-project' && isProjectInactive}
             />
           </div>

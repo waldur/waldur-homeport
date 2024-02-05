@@ -176,6 +176,7 @@ export const FormPeriodsStep = (props: FormStepProps) => {
       completed={props.observed}
       loading={isLoading}
       disabled={props.disabled}
+      required={props.required}
     >
       <FieldArray
         name="attributes.schedules"

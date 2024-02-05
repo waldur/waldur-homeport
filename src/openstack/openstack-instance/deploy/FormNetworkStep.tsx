@@ -150,6 +150,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
       completed={props.observed}
       loading={isLoading}
       disabled={props.disabled}
+      required={props.required}
       actions={
         showExperimentalUiComponents ? (
           <div className="d-flex justify-content-end flex-grow-1">

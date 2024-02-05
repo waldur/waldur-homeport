@@ -47,6 +47,7 @@ export const FormRancherSecurityGroupsStep = (props: FormStepProps) => {
       id={props.id}
       completed={props.observed}
       disabled={props.disabled}
+      required={props.required}
     >
       <StepCardPlaceholder>
         {translate('Please select a tenant first')}

@@ -42,6 +42,7 @@ export const FormSystemVolumeStep = (props: FormStepProps) => {
       id={props.id}
       completed={props.observed}
       disabled={props.disabled}
+      required={props.required}
       helpText={translate('Non-detachable and non-resizable boot disk')}
       actions={
         <div className="d-flex justify-content-end flex-grow-1">
@@ -59,6 +60,7 @@ export const FormSystemVolumeStep = (props: FormStepProps) => {
           component={FormGroup}
           validate={[required]}
           label={translate('System volume type')}
+          required
         >
           <SelectField options={data.volumeTypeChoices} required={true} />
         </Field>
@@ -70,6 +72,7 @@ export const FormSystemVolumeStep = (props: FormStepProps) => {
         label={translate('Volume size')}
         format={(v) => (v ? v / 1024 : '')}
         normalize={(v) => Number(v) * 1024}
+        required
       >
         <SliderNumberField
           unit={translate('GB')}

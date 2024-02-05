@@ -25,6 +25,7 @@ export const FormPlanStep = (props: FormStepProps) => {
       id={props.id}
       completed={props.observed}
       disabled={props.disabled}
+      required={props.required}
     >
       <div className="d-flex gap-6 pb-6 border-bottom mb-7">
         <div className="flex-grow-1">

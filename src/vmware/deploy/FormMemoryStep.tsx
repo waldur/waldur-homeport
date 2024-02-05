@@ -33,6 +33,7 @@ export const FormMemoryStep = (props: FormStepProps) => {
       helpText={translate('Memory size in GiB')}
       loading={isLoading}
       disabled={props.disabled}
+      required={props.required}
     >
       <Field
         name="limits.ram"

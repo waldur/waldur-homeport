@@ -43,12 +43,11 @@ export const FormTenantStep = (props: FormStepProps) => {
       completed={props.observed}
       loading={isLoading}
       disabled={props.disabled}
+      required={props.required}
     >
       <Field
         name="attributes.tenant_settings"
         component={FormGroup}
-        required={true}
-        label={translate('Tenant')}
         validate={required}
       >
         <SelectField

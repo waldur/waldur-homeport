@@ -147,6 +147,10 @@
     &:active {
       border-color: $gray-400;
     }
+
+    &.is-invalid {
+      border-color: #f1416c;
+    }
   }
 }
 .form-floating {

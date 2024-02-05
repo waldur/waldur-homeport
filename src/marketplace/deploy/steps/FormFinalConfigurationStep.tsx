@@ -16,22 +16,28 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
       id={props.id}
       completed={props.observed}
       disabled={props.disabled}
+      required={props.required}
     >
       <Field
         name="attributes.name"
         component={FormGroup}
-        placeholder={props.params?.nameLabel || translate('Name')}
+        label={props.params?.nameLabel || translate('Name')}
         description={translate('This name will be visible in accounting data.')}
         validate={props.params?.nameValidate || getNameFieldValidators()}
+        required
+        floating
       >
         <StringField />
       </Field>
       <Field
         name="attributes.description"
-        component={TextField}
+        component={FormGroup}
         maxLength={1000}
-        placeholder={translate('Description')}
-      />
+        label={translate('Description')}
+        floating
+      >
+        <TextField />
+      </Field>
     </StepCard>
   );
 };
