@@ -82,7 +82,7 @@ describe('Offerings list actions in Provider dashboard page', () => {
         cy.get('.modal-body').within(() => {
             cy.get('form').should('be.visible');
             cy.get('form').within(() => {
-                cy.get('label').should('contain', 'Project');
+                cy.get('h6').should('contain', 'Project');
             });
         });
 

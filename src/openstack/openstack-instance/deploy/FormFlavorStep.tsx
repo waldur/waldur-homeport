@@ -70,6 +70,7 @@ export const FormFlavorStep = (props: FormStepProps) => {
       id={props.id}
       completed={props.observed}
       disabled={props.disabled}
+      required={props.required}
       actions={
         <div className="d-flex justify-content-between flex-grow-1 align-items-center">
           <div>

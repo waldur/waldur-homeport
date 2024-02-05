@@ -112,6 +112,7 @@ export const FormDataStorageStep = (props: FormStepProps) => {
       completed={props.observed}
       loading={isLoading}
       disabled={props.disabled}
+      required={props.required}
       className="step-data-storage"
     >
       {nodes?.length ? (

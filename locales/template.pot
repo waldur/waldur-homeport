@@ -530,10 +530,6 @@ msgstr ""
 msgid "Affected resource"
 msgstr ""
 
-#: src/administration/service-desk/SmaxSettings.tsx
-msgid "Affected resource field"
-msgstr ""
-
 #: src/administration/service-desk/AtlassianSettings.tsx
 msgid "Affected resource field name"
 msgstr ""
@@ -7050,10 +7046,6 @@ msgstr ""
 msgid "Organization events"
 msgstr ""
 
-#: src/administration/service-desk/SmaxSettings.tsx
-msgid "Organization field"
-msgstr ""
-
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
@@ -8120,10 +8112,6 @@ msgstr ""
 #: src/project/ProjectEventsFilter.tsx
 #: src/project/events.ts
 msgid "Project events"
-msgstr ""
-
-#: src/administration/service-desk/SmaxSettings.tsx
-msgid "Project field"
 msgstr ""
 
 #: src/administration/service-desk/AtlassianSettings.tsx

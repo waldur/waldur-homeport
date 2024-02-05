@@ -18,6 +18,7 @@ export const FormStartupScriptStep = (props: FormStepProps) => {
       id={props.id}
       completed={props.observed}
       disabled={props.disabled}
+      required={props.required}
       actions={
         <AwesomeCheckbox value={scriptEnabled} onChange={setScriptEnabled} />
       }

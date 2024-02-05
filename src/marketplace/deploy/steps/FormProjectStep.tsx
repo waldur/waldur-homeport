@@ -13,8 +13,9 @@ export const FormProjectStep = (props: FormStepProps) => {
       id={props.id}
       completed={props.observed}
       disabled={props.disabled}
+      required={props.required}
     >
-      <ProjectField />
+      <ProjectField hideLabel />
     </StepCard>
   );
 };

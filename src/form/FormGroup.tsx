@@ -44,6 +44,7 @@ export class FormGroup extends PureComponent<FormGroupProps> {
           this.props.input.onBlur(event);
         }
       },
+      isInvalid: touched && !!error,
     };
     const labelNode = !hideLabel && (
       <Form.Label className={classNames({ required })}>

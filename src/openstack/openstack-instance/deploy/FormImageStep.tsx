@@ -63,6 +63,7 @@ export const FormImageStep = (props: FormStepProps) => {
       id={props.id}
       completed={props.observed}
       disabled={props.disabled}
+      required={props.required}
       actions={
         showExperimentalUiComponents ? (
           <StepCardTabs tabs={tabs} tab={tab} setTab={setTab} />

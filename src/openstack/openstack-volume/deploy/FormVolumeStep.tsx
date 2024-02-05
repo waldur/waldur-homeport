@@ -46,6 +46,7 @@ export const FormVolumeStep = (props: FormStepProps) => {
       id={props.id}
       completed={props.observed}
       disabled={props.disabled}
+      required={props.required}
       actions={
         <div className="d-flex justify-content-end flex-grow-1">
           <QuotaUsageBarChart
@@ -62,6 +63,7 @@ export const FormVolumeStep = (props: FormStepProps) => {
           component={FormGroup}
           label={translate('Volume type')}
           validate={[required]}
+          required
         >
           <SelectField options={data.volumeTypeChoices} />
         </Field>
@@ -73,6 +75,7 @@ export const FormVolumeStep = (props: FormStepProps) => {
         validate={[required, exceeds]}
         format={(v) => (v ? v / 1024 : '')}
         normalize={(v) => Number(v) * 1024}
+        required
       >
         <SliderNumberField unit={translate('GB')} min={1} max={1 * 10240} />
       </Field>

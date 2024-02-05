@@ -12,12 +12,21 @@ import { CustomerCreateGroup } from './CustomerCreateGroup';
 import { ProjectCreateGroup } from './ProjectCreateGroup';
 import { ProjectSelectField } from './ProjectSelectField';
 
-export const ProjectField: FC<{ previewMode?: boolean }> = ({
+interface ProjectFieldProps {
+  previewMode?: boolean;
+  hideLabel?: boolean;
+}
+
+export const ProjectField: FC<ProjectFieldProps> = ({
   previewMode,
+  hideLabel,
 }) => {
   const customer = useSelector(getCustomer);
   return customer?.projects ? (
-    <FormGroup label={translate('Project')} required={true}>
+    <FormGroup
+      label={hideLabel ? undefined : translate('Project')}
+      required={true}
+    >
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         {customer.projects.length > 0 && (
           <div style={{ flexGrow: 1, marginRight: 10 }}>
