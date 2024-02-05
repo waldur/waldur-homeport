@@ -49,3 +49,17 @@ export const checkRoundDate = (round: ProposalCallRound) => {
     else return { label: translate('Open'), code: 0 };
   }
 };
+
+export const callOfferingStateAliases = (state: string): string => {
+  switch (state) {
+    case 'Requested': {
+      return translate('Requested');
+    }
+    case 'Accepted': {
+      return translate('Accepted');
+    }
+    default: {
+      return state;
+    }
+  }
+};

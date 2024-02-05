@@ -103,6 +103,7 @@ msgstr ""
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/utils.ts
 msgid "Accepted"
 msgstr ""
 
@@ -373,6 +374,10 @@ msgstr ""
 
 #: src/user/hooks/HookCreateButton.tsx
 msgid "Add notification"
+msgstr ""
+
+#: src/proposals/update/offerings/AddOfferingButton.tsx
+msgid "Add offering"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
@@ -648,7 +653,6 @@ msgid "Allocation pools"
 msgstr ""
 
 #: src/proposals/PublicCallExpandableRow.tsx
-#: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
 msgid "Allocation strategy"
@@ -6389,6 +6393,7 @@ msgid "Not used"
 msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "Nothing to see here"
@@ -8964,6 +8969,7 @@ msgid "Request-based item (without Service Desk)"
 msgstr ""
 
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/utils.ts
 msgid "Requested"
 msgstr ""
 
@@ -9349,7 +9355,6 @@ msgstr ""
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
@@ -9489,7 +9494,6 @@ msgstr ""
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 msgid "Round strategy"
 msgstr ""
