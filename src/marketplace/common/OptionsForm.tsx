@@ -58,7 +58,10 @@ export const OptionsForm = ({ options }) => {
 
             case 'boolean':
               OptionField = AwesomeCheckboxField;
-              params = { hideLabel: true };
+              params = {
+                hideLabel: true,
+                tooltip: option.help_text,
+              };
               break;
 
             case 'integer':
