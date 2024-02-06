@@ -4,27 +4,10 @@ import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer'
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
 import { LexisLinkDeleteButton } from '@waldur/marketplace/resources/lexis/LexisLinkDeleteButton';
-import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { connectTable, createFetcher, Table } from '@waldur/table';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
-    {
-      title: translate('Resource'),
-      render: ({ row }) => (
-        <PublicResourceLink
-          row={
-            props.resource || {
-              uuid: row.resource_uuid,
-              backend_id: row.backend_id,
-              end_date: row.end_date,
-              name: row.resource_name,
-            }
-          }
-          customer={props.customer}
-        />
-      ),
-    },
     {
       title: translate('Robot account'),
       render: ({ row }) =>
@@ -60,10 +43,11 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       {...props}
       columns={columns}
       verboseName={translate('LEXIS links')}
-      hasActionBar={false}
       hoverableRow={({ row }) => (
         <LexisLinkDeleteButton row={row} refetch={props.fetch} />
       )}
+      title={translate('LEXIS links')}
+      hasQuery={true}
     />
   );
 };
@@ -76,6 +60,7 @@ export const TableOptions = {
   table: 'lexis-links',
   fetchData: createFetcher('lexis-links'),
   mapPropsToFilter,
+  queryField: 'query',
 };
 
 const enhance = connectTable(TableOptions);
