@@ -1,3 +1,4 @@
+import { Role } from '@waldur/permissions/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
 export interface UserDetails {
@@ -18,17 +19,14 @@ export interface InvitationContext {
   project?: Project;
 }
 
-export interface EmailInviteUser {
+export interface GroupInviteRow {
   email: string;
-  role_project: {
-    role: string;
-    project?: Project;
-  };
+  role_project: { role: Role; project?: Project };
   civil_number?: string;
   tax_number?: string;
 }
 
 export interface GroupInvitationFormData {
-  users: EmailInviteUser[];
+  rows: GroupInviteRow[];
   extra_invitation_text: string;
 }

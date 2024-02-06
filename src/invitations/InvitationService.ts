@@ -2,12 +2,17 @@ import { get, post } from '@waldur/core/api';
 
 import { Invitation } from './types';
 
+export interface CreateGroupInvitationPayload {
+  scope: string;
+  role: string;
+}
+
 class InvitationServiceClass {
   createInvitation(payload) {
     return post('/user-invitations/', payload);
   }
 
-  createGroupInvitation(payload) {
+  createGroupInvitation(payload: CreateGroupInvitationPayload) {
     return post('/user-group-invitations/', payload);
   }
 

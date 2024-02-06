@@ -17,7 +17,7 @@ export const EmailsListGroupWrapper = ({
     <>
       <h2 className="mb-10">{translate('Invite by email')}</h2>
       <FieldArray
-        name="users"
+        name="rows"
         roles={roles}
         customer={customer}
         project={project}

@@ -2,35 +2,30 @@ import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
+import { required } from '@waldur/core/validators';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { Role } from '@waldur/permissions/types';
 
-export const RoleGroup: FunctionComponent<{ roles }> = ({ roles }) => (
+export const RoleGroup: FunctionComponent<{ roles: Role[] }> = ({ roles }) => (
   <Form.Group className="mb-5">
-    <Form.Label>{translate('Role')}</Form.Label>
+    <Form.Label>
+      {translate('Role')} <span className="text-danger">*</span>
+    </Form.Label>
 
-    {roles.map((role, index) => (
-      <>
-        <div className="d-flex fv-row" key={index}>
-          <div className="form-check form-check-custom form-check-solid">
-            <Field
-              component="input"
-              name="role"
-              type="radio"
-              className="form-check-input me-3"
-              value={role.value}
-              id={role.value}
-            />
-            <label className="form-check-label" htmlFor={role.value}>
-              <div className="fw-bold text-gray-800">
-                {translate(role.title)}
-              </div>
-            </label>
-          </div>
-        </div>
-        {index != roles.length - 1 ? (
-          <div className="separator separator-dashed my-5" />
-        ) : null}
-      </>
-    ))}
+    <Field
+      name="role"
+      component={(fieldProps) => (
+        <Select
+          placeholder={translate('Select role...')}
+          options={roles}
+          validate={[required]}
+          value={fieldProps.input.value}
+          onChange={(item) => fieldProps.input.onChange(item)}
+          getOptionLabel={(item) => item.description}
+          getOptionValue={(item) => item.uuid}
+        />
+      )}
+    />
   </Form.Group>
 );

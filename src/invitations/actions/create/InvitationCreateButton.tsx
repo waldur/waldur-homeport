@@ -5,13 +5,10 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
-import {
-  getCustomer,
-  getUser,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-  isProjectManagerSelector,
-} from '@waldur/workspace/selectors';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
+
+import { InvitationPolicyService } from '../InvitationPolicyService';
 
 const InvitationCreateDialog = lazyComponent(
   () => import('./InvitationCreateDialog'),
@@ -24,9 +21,6 @@ export const InvitationCreateButton: FunctionComponent<{
 }> = ({ refetch, project }) => {
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-  const isProjectManager = isProjectManagerSelector(user, project);
-  const isAllowed = isOwnerOrStaff || isProjectManager;
   const dispatch = useDispatch();
   const callback = () =>
     dispatch(
@@ -42,6 +36,11 @@ export const InvitationCreateButton: FunctionComponent<{
         },
       }),
     );
+  const isAllowed = InvitationPolicyService.canAccessInvitations({
+    customer,
+    user,
+    project,
+  });
   return (
     <ActionButton
       action={callback}

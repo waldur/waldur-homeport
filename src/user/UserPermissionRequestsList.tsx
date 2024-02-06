@@ -23,11 +23,11 @@ const TableComponent = (props: any) => {
     },
     {
       title: translate('Organization'),
-      render: ({ row }) => row.customer_name || 'N/A',
+      render: ({ row }) => row.customer_name,
     },
     {
       title: translate('Project'),
-      render: ({ row }) => row.project_name || 'N/A',
+      render: ({ row }) => row.scope_name,
     },
     {
       title: translate('Role'),

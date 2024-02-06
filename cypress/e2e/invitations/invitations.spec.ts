@@ -9,19 +9,20 @@ const invitationRequestBodies = {
   'owner@test.com': {
     email: 'owner@test.com',
     extra_invitation_text: 'Testing invite users',
-    customer_role: 'owner',
+    role: "511cfcf0357f43ff835bfe243569658d",
+    scope: "/api/customers/bf6d515c9e6e445f9c339021b30fc96b",
   },
   'manager@test.com': {
     email: 'manager@test.com',
     extra_invitation_text: 'Testing invite users',
-    project_role: 'manager',
-    project: '/api/projects/6f3ae6f43d284ca196afeb467880b3b9/',
+    role: "f98af5dc4ae14d30b905e9670f44c835",
+    scope: "/api/projects/6f3ae6f43d284ca196afeb467880b3b9/",
   },
   'administrator@test.com': {
     email: 'administrator@test.com',
     extra_invitation_text: 'Testing invite users',
-    project_role: 'admin',
-    project: '/api/projects/df4193e2bee24a4c8e339474d74c5f8c/',
+    role: "94e3061f698c49a68b3aad97db393bd1",
+    scope: "/api/projects/df4193e2bee24a4c8e339474d74c5f8c/",
   },
 };
 
@@ -32,11 +33,11 @@ const fillUserRowFields = ({
   role,
 }: UserRowFields) => {
   cy.get('#emails-list-group table td')
-    .find(`input[name="users[${index}].email"]`)
+    .find(`input[name="rows[${index}].email"]`)
     .type(email, { delay: 0, force: true })
 
     .get('#emails-list-group table td')
-    .find(`input[name="users[${index}].civil_number"]`)
+    .find(`input[name="rows[${index}].civil_number"]`)
     .type(civilNumber, { delay: 0, force: true })
 
     .get('#emails-list-group table td .role-project-select')
@@ -266,12 +267,12 @@ describe('Invitations', () => {
       .should('not.exist');
   });
 
-  it(`Can select all the toggle buttons in Invitations component`, () => {
+  it('Can select all the toggle buttons in Invitations component', () => {
     //select rejection toggle button
     cy.selectTableFilter('State', 'Rejected').wait('@pendingRejected');
   });
 
-  it(`Resend invitation`, () => {
+  it('Resend invitation', () => {
     cy.get('tr')
       .get('button')
       .contains('Resend')
@@ -280,7 +281,7 @@ describe('Invitations', () => {
       .contains('Invitation has been sent again.');
   });
 
-  it(`Cancel invitation`, () => {
+  it('Cancel invitation', () => {
     cy.get('tr')
       .get('button')
       .contains('Cancel')

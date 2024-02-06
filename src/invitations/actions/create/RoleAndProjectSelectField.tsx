@@ -8,20 +8,18 @@ import React, {
 import { FormControl } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { PROJECT_ROLES } from '@waldur/core/constants';
 import { required } from '@waldur/core/validators';
 import { FormField } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { Role } from '@waldur/permissions/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
-const isProjectRole = (role) => PROJECT_ROLES.includes(role?.value);
-
 interface RoleAndProjectSelectPopupProps {
-  roles;
+  roles: Role[];
   customer: Customer;
   currentProject: Project;
-  selectedRole;
+  selectedRole: Role;
   selectedProject;
   select;
 }
@@ -37,8 +35,8 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
   const refSearch = useRef<HTMLInputElement>();
 
   const onClickRole = useCallback(
-    (role) => {
-      if (role.value !== selectedRole?.value) {
+    (role: Role) => {
+      if (role.uuid !== selectedRole?.uuid) {
         select(
           role,
           selectedProject || currentProject || customer.projects?.[0],
@@ -48,7 +46,7 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
           MenuComponent.hideDropdowns(null);
         }
       }
-      if (!isProjectRole(role)) {
+      if (role.content_type !== 'project') {
         select(role, null);
         MenuComponent.hideDropdowns(null);
       } else {
@@ -76,7 +74,7 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
     );
   }, [customer, query]);
 
-  const showProjects = selectedRole && isProjectRole(selectedRole);
+  const showProjects = selectedRole?.content_type === 'project';
   const hasProject = Boolean(customer.projects?.length);
 
   return (
@@ -87,33 +85,33 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
       <div className="d-flex">
         <div className="mw-250px">
           {roles.map((role) =>
-            hasProject || !isProjectRole(role) ? (
+            hasProject || !showProjects ? (
               <div
-                key={role.value}
+                key={role.uuid}
                 className="menu-item px-3"
                 data-kt-menu-trigger
               >
                 <a
                   className={
                     'menu-link px-3' +
-                    (selectedRole?.value === role.value ? ' active' : '')
+                    (selectedRole?.uuid === role.uuid ? ' active' : '')
                   }
                   onClick={() => onClickRole(role)}
                 >
-                  <span className="menu-title">{role.title}</span>
-                  {isProjectRole(role) && !currentProject && (
+                  <span className="menu-title">{role.description}</span>
+                  {showProjects && !currentProject && (
                     <span className="menu-arrow"></span>
                   )}
                 </a>
               </div>
             ) : (
               <div
-                key={role.value}
+                key={role.uuid}
                 className="menu-item px-3"
                 data-kt-menu-trigger
               >
                 <a className="menu-link disabled px-3">
-                  <span className="menu-title">{role.title}</span>
+                  <span className="menu-title">{role.description}</span>
                   <span className="menu-arrow"></span>
                 </a>
               </div>
@@ -163,7 +161,7 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
 
 interface RoleAndProjectSelectFieldProps {
   name: string;
-  roles: { value; title }[];
+  roles: Role[];
   customer: Customer;
   currentProject: Project;
   placeholder?: string;
@@ -178,10 +176,7 @@ export const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (
 ) => {
   const { roles, customer, currentProject, placeholder } = props;
 
-  const selectedRole = useMemo(
-    () => roles.find((r) => r.value === props.input.value?.role),
-    [roles, props.input.value],
-  );
+  const selectedRole = props.input.value?.role;
   const selectedProject = props.input.value?.project;
 
   useEffect(() => {
@@ -193,7 +188,7 @@ export const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (
       <FormControl
         className="form-control-solid"
         type="text"
-        value={[selectedRole?.title, selectedProject?.name]
+        value={[selectedRole?.description, selectedProject?.name]
           .filter(Boolean)
           .join(' - ')}
         placeholder={placeholder}
@@ -209,10 +204,10 @@ export const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (
           currentProject={currentProject}
           selectedRole={selectedRole}
           selectedProject={selectedProject}
-          select={(role, project) => {
+          select={(role: Role, project) => {
             props.input.onChange({
-              role: role?.value,
-              project: project,
+              role,
+              project,
             });
           }}
         />

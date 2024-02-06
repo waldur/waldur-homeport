@@ -1,8 +1,11 @@
+type RoleType = 'customer' | 'project' | 'offering';
+
 export interface Role {
+  uuid: string;
   is_active: boolean;
   name: string;
   description: string;
-  content_type: string;
+  content_type: RoleType;
   permissions: string[];
 }
 
