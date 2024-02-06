@@ -60,6 +60,16 @@ export const ExpandableEventDetailsTable: FunctionComponent<ExpandableEventDetai
         params={{ uuid: event.context.project_uuid }}
       />
       <ExpandableEventField
+        label={translate('Project name')}
+        value={event.context.project_name}
+      />
+      {event.context.project_end_date !== 'None' && (
+        <ExpandableEventField
+          label={translate('Project end date')}
+          value={event.context.project_end_date}
+        />
+      )}
+      <ExpandableEventField
         label={translate('Provider')}
         value={event.context.service_name}
       />
