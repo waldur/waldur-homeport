@@ -112,8 +112,8 @@ $utilities: map-merge(
 
 .end-button {
   position: absolute;
-  right: 5px;
-  top: 12px;
+  right: 8px;
+  top: 8px;
 
   & span i {
     margin-left: 1px !important;
@@ -132,15 +132,4 @@ $utilities: map-merge(
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-.end-button {
-  position: absolute;
-  right: 5px;
-  top: 12px;
-
-  & span i {
-    margin-left: 1px !important;
-    margin-bottom: 1px !important;
-  }
 }
