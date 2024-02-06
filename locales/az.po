@@ -41,6 +41,7 @@ msgstr "Qəbul edin"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/utils.ts
 msgid "Accepted"
 msgstr "Qəbul edildi"
 

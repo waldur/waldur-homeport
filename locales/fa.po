@@ -45,6 +45,7 @@ msgstr "پذیرفتن"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/utils.ts
 msgid "Accepted"
 msgstr "پذیرفته شده"
 
@@ -244,8 +245,7 @@ msgstr "پروژه جدید ایجاد کنید"
 msgid "Add notification"
 msgstr "اعلان را اضافه کنید"
 
-#: src/marketplace/offerings/actions/OfferingCreateButton.tsx
-#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/proposals/update/offerings/AddOfferingButton.tsx
 msgid "Add offering"
 msgstr "پیشنهاد را اضافه کنید"
 
@@ -3316,6 +3316,7 @@ msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "توجه داشته باشید این volume به صورت جداگانه برای { سازمان } شارژ نخواهد شد."
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "Nothing to see here"

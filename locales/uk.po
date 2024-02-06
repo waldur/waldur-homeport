@@ -119,6 +119,7 @@ msgstr "Прийняти запрошення"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/utils.ts
 msgid "Accepted"
 msgstr "Прийнято"
 
@@ -463,8 +464,7 @@ msgstr "Додати новий проект"
 msgid "Add notification"
 msgstr "Додати сповіщення"
 
-#: src/marketplace/offerings/actions/OfferingCreateButton.tsx
-#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/proposals/update/offerings/AddOfferingButton.tsx
 msgid "Add offering"
 msgstr "Додати пропозицію"
 
@@ -822,7 +822,6 @@ msgid "Allocation pools"
 msgstr "Пули алокації"
 
 #: src/proposals/PublicCallExpandableRow.tsx
-#: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
 msgid "Allocation strategy"
@@ -7307,6 +7306,7 @@ msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "Зауважте, що за цей обсяг не стягуватиметься окрема плата{organization} ."
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "Nothing to see here"
@@ -10411,6 +10411,7 @@ msgid "Request {requestId} has been created."
 msgstr "запит{requestId} було створено."
 
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/utils.ts
 msgid "Requested"
 msgstr "Просив"
 
@@ -10850,7 +10851,6 @@ msgstr "Запит на перегляд"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
@@ -10990,7 +10990,6 @@ msgstr "Кругла назва"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 msgid "Round strategy"
 msgstr "Раундова стратегія"

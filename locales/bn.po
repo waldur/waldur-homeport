@@ -119,6 +119,7 @@ msgstr "আমন্ত্রণ গ্রহণ"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/utils.ts
 msgid "Accepted"
 msgstr "গৃহীত"
 
@@ -463,8 +464,7 @@ msgstr "নতুন প্রকল্প যোগ করুন"
 msgid "Add notification"
 msgstr "বিজ্ঞপ্তি যোগ করুন"
 
-#: src/marketplace/offerings/actions/OfferingCreateButton.tsx
-#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/proposals/update/offerings/AddOfferingButton.tsx
 msgid "Add offering"
 msgstr "অফার যোগ করুন"
 
@@ -817,7 +817,6 @@ msgid "Allocation pools"
 msgstr "বরাদ্দ পুল"
 
 #: src/proposals/PublicCallExpandableRow.tsx
-#: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
 msgid "Allocation strategy"
@@ -7289,6 +7288,7 @@ msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "মনে রাখবেন যে এই ভলিউমের জন্য আলাদাভাবে চার্জ করা হবে না{organization} ."
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "Nothing to see here"
@@ -10385,6 +10385,7 @@ msgid "Request {requestId} has been created."
 msgstr "অনুরোধ{requestId} তৈরি করা হয়েছে."
 
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/utils.ts
 msgid "Requested"
 msgstr "অনুরোধ"
 
@@ -10824,7 +10825,6 @@ msgstr "রিভিউ অনুরোধ"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
@@ -10956,7 +10956,6 @@ msgstr "গোলাকার নাম"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 msgid "Round strategy"
 msgstr "বৃত্তাকার কৌশল"

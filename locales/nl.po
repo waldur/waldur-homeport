@@ -85,6 +85,7 @@ msgstr "Uitnodiging accepteren"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/utils.ts
 msgid "Accepted"
 msgstr "Geaccepteerd"
 
@@ -315,8 +316,7 @@ msgstr "Nieuw project toevoegen"
 msgid "Add notification"
 msgstr "Melding toevoegen"
 
-#: src/marketplace/offerings/actions/OfferingCreateButton.tsx
-#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/proposals/update/offerings/AddOfferingButton.tsx
 msgid "Add offering"
 msgstr "Aanbod toevoegen"
 
@@ -4517,6 +4517,7 @@ msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "Merk op dat dit volume niet afzonderlijk in rekening zal worden gebracht voor {organization}."
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "Nothing to see here"
@@ -6482,6 +6483,7 @@ msgid "Request {requestId} has been created."
 msgstr "Verzoek {requestId} is aangemaakt."
 
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/utils.ts
 msgid "Requested"
 msgstr "Aangevraagd"
 
